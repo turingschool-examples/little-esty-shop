@@ -36,28 +36,30 @@ This project requires Ruby 2.5.3.
 * Run your development server with `rails s` to see the app in action.
 
 
-App setup
+## App setup
 
 Setup Board Automation
 Deploy your application to Heroku
 Setup Database tables and relationships based on csv data
 Create a rake task to seed the database with the csv data
 
-Welcome Page
-Welcome Page
+## Welcome Page
+
+### Welcome Page
 As a visitor, when I visit the welcome page (“/”), I see a greeting welcoming me to the site along with two buttons one for merchants and one for admins. 
 The merchant button takes me to the merchant index page (‘/merchants)
 The Admin button takes me to the admin dashboard (‘/admin/dashboard)
 
-Navigation Bar
-Navigation links
+###  Navigation Bar
+###  Navigation links
 As a visitor, When I am on any page, I see a navigation bar that includes links for the following:
 - a link to return to the welcome / home page of the application ("/") 
 - a link to the merchant index page ("/merchants")
 - a link to the admin dashboard (“/admin/dashboard”)
 
-Merchant Index Page
-List of Merchants
+###  Merchant Index Page
+
+###  List of Merchants
 As a visitor when I visit the merchants index page I see a list of all the merchants' names. When I click on a name, I am taken to that merchant’s dashboard page (`/merchant/:merchant_id/dashboard`)
 Merchant Dashboard
 Merchant Dashboard Links
@@ -69,18 +71,26 @@ Each transaction links to the transaction show page
 Each transaction show page displays the information about the customer that made the transaction.
 A section to display business intelligence information
 
-MERCHANT ITEMS
+###  MERCHANT ITEMS
+
+```
 Merchant Items Index Page
+
 As a merchant, When I visit the merchant items index page ("merchant/merchant_id/items")
 I see a list of all items that belong to that merchant that includes:
+```
+```
 Item name
+
 Merchant Items Show Page
 As a merchant, When I click on the name of an item from the items index page, I am taken to that item's show page (/merchant/merchant_id/items/item_id) where I can see all of the items attributes including: 
 Name
 Description
 Unit_price
+```
 
-Merchant Item Update 
+### Merchant Item Update 
+
 As a merchant, When I visit the show page of an item, I see a link to update the item information. When I click the link I am taken to the items edit form (/merchant/merchant_id/items/item_id/edit)
 I see a form filled in with the existing item attribute information. When I update the information in the form I click ‘submit’ and am redirected back to the item show page where I see the updated information and a flash message stating that the information has been successfully updated. 
 
@@ -156,7 +166,8 @@ Github API
 Add user stories for API consumption
 
 
-OPEN ENDED FEATURE
+## OPEN ENDED FEATURE
+
 Merchant Item Discounts
 As a merchant, I want to create bulk discounts on specific items so that customers are incentivised to purchase more from me.
 *Add more information from the old bulk discounts final project.
