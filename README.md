@@ -49,17 +49,15 @@ Create a rake task to seed the database with the csv data
 * Diagram Schema
 * Create a rake task to seed your development database with the included CSV files
 
-### Welcome Page
+# User Stories
+
+## Navigation
 
 ```
 As a visitor, when I visit the welcome page (“/”), I see a greeting welcoming me to the site along with two buttons one for merchants and one for admins. 
 The merchant button takes me to the merchant index page (‘/merchants)
 The Admin button takes me to the admin dashboard (‘/admin/dashboard)
 ```
-
-###  Navigation Bar
-
-###  Navigation links
 
 ```
 As a visitor, When I am on any page, I see a navigation bar that includes links for the following:
@@ -68,13 +66,7 @@ As a visitor, When I am on any page, I see a navigation bar that includes links 
 - a link to the admin dashboard (“/admin/dashboard”)
 ```
 
-
-# Merchants
-
-### Merchant Dashboard
-
-
-###  Merchant Index Page
+## Merchants
 
 ```
 List of Merchants
@@ -95,7 +87,7 @@ Each transaction show page displays the information about the customer that made
 A section to display business intelligence information
 ```
 
-###  MERCHANT ITEMS
+###  Merchant Items
 
 ```
 Merchant Items Index Page
@@ -113,8 +105,6 @@ Name
 Description
 Unit_price
 ```
-
-### Merchant Item Update 
 
 ```
 As a merchant, When I visit the show page of an item, I see a link to update the item information. When I click the link I am taken to the items edit form (/merchant/merchant_id/items/item_id/edit)
@@ -138,7 +128,7 @@ Enabled/disabled
 Sorting in items alphabetical order
 ```
 
-### MERCHANT INVOICES
+### Merchant Invoices
 
 ```
  Merchant Invoices Index Page
@@ -183,7 +173,7 @@ shipped
 After selecting the new status, I click submit and see the page refresh. I should now see the new status reflected at the top of that invoices show page. 
 ```
 
-### MERCHANT ITEM STATISTICS
+### Merchant Item Statistics
 
 ```
  Merchant Items Index Page Statistics - 5 most popular items
@@ -210,7 +200,7 @@ When I visit the merchant dashboard for a specific merchant (/merchant/:merchant
 # Admins
 
 
-### ADMIN DASHBOARD
+### Admin Dashboard
 
 ```
  Admin Dashboard Merchant Index
