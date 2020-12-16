@@ -43,7 +43,11 @@ Deploy your application to Heroku
 Setup Database tables and relationships based on csv data
 Create a rake task to seed the database with the csv data
 
-## Welcome Page
+
+# DB Setup
+
+* Diagram Schema
+* Create a rake task to seed your development database with the included CSV files
 
 ### Welcome Page
 
@@ -64,6 +68,12 @@ As a visitor, When I am on any page, I see a navigation bar that includes links 
 - a link to the admin dashboard (“/admin/dashboard”)
 ```
 
+
+# Merchants
+
+### Merchant Dashboard
+
+
 ###  Merchant Index Page
 
 ```
@@ -72,7 +82,6 @@ List of Merchants
 As a visitor when I visit the merchants index page I see a list of all the merchants' names. When I click on a name, I am taken to that merchant’s dashboard page (`/merchant/:merchant_id/dashboard`)
 ```
 
-### Merchant Dashboard
 
 ```
 Merchant Dashboard Links
@@ -197,6 +206,8 @@ When I visit the merchant dashboard for each specific merchant (/merchant/:merch
 Merchant Dashboard Statistics - Favorite Customer
 When I visit the merchant dashboard for a specific merchant (/merchant/:merchant_id/dashboard) I see the top 5 customers who have conducted the largest number of successful transactions. 
 ```
+
+# Admins
 
 
 ### ADMIN DASHBOARD
