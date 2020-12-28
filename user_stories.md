@@ -1,45 +1,33 @@
 # User Stories
 
-## Navigation
-
-```
-As a visitor
-When I visit the welcome page (“/”)
-Then I see a greeting welcoming me to the site along with two buttons one for merchants and one for admins.
-The merchant button takes me to the merchant index page (‘/merchants)
-The Admin button takes me to the admin dashboard (‘/admin/dashboard)
-```
-
-```
-As a visitor, When I am on any page, I see a navigation bar that includes links for the following:
-- a link to return to the welcome / home page of the application ("/")
-- a link to the merchant index page ("/merchants")
-- a link to the admin dashboard (“/admin/dashboard”)
-```
-
 ## Merchants
 
-```
-List of Merchants
+### Merchant Dashboard
 
-As a visitor when I visit the merchants index page I see a list of all the merchants' names. When I click on a name, I am taken to that merchant’s dashboard page (`/merchant/:merchant_id/dashboard`)
+```
+Merchant Dashboard
+
+As a merchant,
+When I visit my merchant dashboard (/merchant/:merchant_id/dashboard)
+Then I see the name of my merchant
 ```
 
 ```
 Merchant Dashboard Links
 
-For each specific merchant I see a link to the items index page that lists all of the items that that merchant sells (/merchant/:merchant_id/items)
-A link to see all of the invoices for that merchant (/merchant/:merchant_id/invoices)
-Each invoice number links to the invoice show page
-A link to see all of the transactions for that merchant (/merchant/:merchant_id/transactions)
-Each transaction links to the transaction show page
-Each transaction show page displays the information about the customer that made the transaction.
-A section to display business intelligence information
+As a merchant,
+When I visit my merchant dashboard
+Then I see link to my merchant items index (/merchant/:merchant_id/items)
+And I see a link to my merchant invoices index (/merchant/:merchant_id/invoices)
 ```
 
 ```
 Merchant Dashboard Statistics - Favorite Customer
-When I visit the merchant dashboard for a specific merchant (/merchant/:merchant_id/dashboard) I see the top 5 customers who have conducted the largest number of successful transactions.
+
+As a merchant,
+When I visit my merchant dashboard
+Then I see the names of the top 5 customers
+who have conducted the largest number of successful transactions with my merchant
 ```
 
 ```
@@ -231,6 +219,11 @@ And I see that my Item's status has now been updated
 ```
 As an admin,
 When I visit the admin dashboard (/admin)
+Then I see a header indicating that I am on the admin dashboard
+```
+
+```
+Admin Dashboard Links
 Then I see the following links:
 - A link to the admin merchants index (/admin/merchants)
 - A link to the admin invoices index (/admin/invoices)
