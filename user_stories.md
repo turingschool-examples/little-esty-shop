@@ -482,3 +482,35 @@ Then I see a section for "Unpaid Invoices"
 In that section, I see the ids of all invoices
 That do not have a successful transaction
 ```
+
+## Github API Consumption
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the name of the github repo somewhere on the site
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the github logo near the repo name
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the github usernames of myself and my teammates somewhere on the site
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the number of commits next to each github username
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the number of merged PRs across all team members
+```
