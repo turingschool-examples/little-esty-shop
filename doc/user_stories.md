@@ -152,11 +152,6 @@ And I see a label “Top selling date for <item name> was <date with most sales>
 Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
 ```
 
-Possible extensions:
-filtering items index page
-Enabled/disabled
-Sorting in items alphabetical order
-
 ### Merchant Invoices
 
 When a customer purchases something from the shop, a new invoice will be created in the system. A Merchant needs to be able to fulfill orders for their items on invoices.
@@ -228,7 +223,7 @@ I am taken back to the merchant invoice show page
 And I see that my Item's status has now been updated
 ```
 
-# Admins
+## Admins
 
 ### Admin Dashboard
 
@@ -452,33 +447,4 @@ And next to the select field I see a button to "Update Invoice Status"
 When I click this button
 I am taken back to the admin invoice show page
 And I see that my Invoice's status has now been updated
-```
-
-
-## OPEN ENDED FEATURE
-
-Merchant Item Discounts
-As a merchant, I want to create bulk discounts on specific items so that customers are incentivised to purchase more from me.
-* Add more information from the old bulk discounts final project.
-This feature should include full CRUD functionality for discounts.
-Discounts are specific to each merchant
-Students are responsible for defining additional database tables, models and relationships. Use of a database diagram is highly encouraged.
-Students are responsible for determining where the discount CRUD functionality lives in the app. Use of wireframes is highly encouraged.
-Students do not need to add functionality to apply the discounts to invoices, only CRUD discounts for individual merchants.
-
-
-```
-Merchant Dashboard Statistics
-Merchant Dashboard Statistics - customer count
-When I visit the merchant dashboard for each specific merchant (/merchant/merchant_id/dashboard) I see the total number of customers that merchant has.
-```
-
-```
-Admin Dashboard Unpaid Invoices
-
-As an admin
-When I visit the admin dashboard
-Then I see a section for "Unpaid Invoices"
-In that section, I see the ids of all invoices
-That do not have a successful transaction
 ```
