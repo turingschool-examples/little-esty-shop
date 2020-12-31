@@ -32,9 +32,9 @@ This project requires Ruby 2.5.3.
 ## Phases
 
 1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories)
-1. [Extensions](./doc/extensions)
+1. [User Stories](./doc/user_stories.md)
+1. [Extensions](./doc/extensions.md)
 
 ## Evaluation
 
-At the end of the project, you will be assessed based on [this Rubric](./doc/rubric)
+At the end of the project, you will be assessed based on [this Rubric](./doc/rubric.md)
