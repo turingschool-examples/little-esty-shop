@@ -31,7 +31,7 @@ This project requires Ruby 2.5.3.
 
 ## Phases
 
-1. [Database Setup](./doc/db_setup)
+1. [Database Setup](./doc/db_setup.md)
 1. [User Stories](./doc/user_stories)
 1. [Extensions](./doc/extensions)
 
