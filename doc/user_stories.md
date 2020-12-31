@@ -448,3 +448,41 @@ When I click this button
 I am taken back to the admin invoice show page
 And I see that my Invoice's status has now been updated
 ```
+
+## Github API Consumption
+
+For each of these stories, you will need to hit an endpoint provided by the GitHub API in order to serve the date required on your site.
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the name of the Github repo somewhere on the site
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the Github logo near the repo name
+The most up to date logo is always displayed
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the Github usernames of myself and my teammates somewhere on the site
+The most up to date usernames are always displayed
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the number of commits next to each Github username
+This number is updated as each member of the team contributes more commits
+```
+
+```
+As a visitor or an admin user
+When I visit any page on the site
+I see the number of merged PRs across all team members
+This number is updated as each member of the team merges more PRs
+```
