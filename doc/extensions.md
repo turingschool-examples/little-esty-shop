@@ -33,14 +33,14 @@ Greater than, less than, and equal to options for created at and updated at
 ### Tier 3- Most Difficult
 
 #### OPEN ENDED FEATURE - Merchant Item Discounts
-As a merchant, I want to create bulk discounts on specific items so that customers are incentivized to purchase more from me.
-This feature should include full CRUD functionality for discounts.
-Discounts are specific to each merchant
-Students are responsible for defining additional database tables, models and relationships. Use of a database diagram is highly encouraged.
-Students are responsible for determining where the discount CRUD functionality lives in the app. Use of wireframes is highly encouraged.
-Students do not need to add functionality to apply the discounts to invoices, only CRUD discounts for individual merchants.
+- As a merchant, I want to create bulk discounts on specific items so that customers are incentivized to purchase more from me.
+- This feature should include full CRUD functionality for discounts.
+- Discounts are specific to each merchant.
+- Students are responsible for defining additional database tables, models and relationships. Use of a database diagram is highly encouraged.
+- Students are responsible for determining where the discount CRUD functionality lives in the app. Use of wireframes is highly encouraged.
+- Students do not need to add functionality to apply the discounts to invoices, only CRUD discounts for individual merchants.
 
-#### Research ActionCable and implement chat functionality on the site.
+#### Research Action Cable and implement chat functionality on the site.
 
 [Action Cable](https://guides.rubyonrails.org/action_cable_overview.html)
 
