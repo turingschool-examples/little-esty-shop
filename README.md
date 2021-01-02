@@ -1,6 +1,8 @@
+# Little Esty Shop
+
 ## Background and Description
 
-"Little Etsy Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants, and admins can manage inventory, and fulfill customer invoices.
+"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants, and admins can manage inventory, and fulfill customer invoices.
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
