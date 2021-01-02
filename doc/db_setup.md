@@ -2,7 +2,7 @@
 
 This repo contains a directory `/db/data` that includes six csv files. You will write a Rake task that will seed your database with the data in those files.
 
-Rake tasks give you the ability to execute tasks within Rails. You may have seen this before with commands like `rake db:create` and `rake db:seed`. In more recent versions of Rails, these commands are usually executed as `rails db:create`, `rails db:seed`, etc. but they are still utilizing Rake to execute them under the hood even though they don't include the `rake` command.
+Rake tasks give you the ability to execute tasks within Rails. You may have seen this before with commands like `rake db:create` and `rake db:seed`. In more recent versions of Rails, these commands are usually executed as `rails db:create`, `rails db:seed`, etc. but they are still utilizing Rake to execute them under the hood even though they don't include the `rake` executable in the command.
 
 Your project will include a Rake task for each of the six csv files. For example, from the command line you should be able to run something like:
 
