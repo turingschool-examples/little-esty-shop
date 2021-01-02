@@ -1,5 +1,18 @@
 # User Stories
 
+These user stories will require you to build many pages. This repo includes wireframes for the following pages:
+
+* [Merchant Dashboard](./wireframes/Merchant_Dashboard.png)
+* [Merchant Items Index](./wireframes/Merchant_Items.png)
+* [Merchant Items Show](./wireframes/Merchant_Item_Show.png)
+* [Merchant Invoices Index](./wireframes/Merchant_Invoices.png)
+* [Merchant Invoices Show](./wireframes/Merchant_Invoice_Show.png)
+* [Admin Dashboard](./wireframes/Admin_Dashboard.png)
+* [Admin Merchants Index](./wireframes/Admin_Merchants.png)
+* [Admin Merchants Show](./wireframes/Admin_Merchant_Show.png)
+* [Admin Invoices Index](./wireframes/Admin_Invoices.png)
+* [Admin Invoices Show](./wireframes/Admin_Invoices_Show.png)
+
 ## Merchants
 
 ### Merchant Dashboard
