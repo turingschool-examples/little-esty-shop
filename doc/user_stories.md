@@ -11,7 +11,7 @@ These user stories will require you to build many pages. This repo includes wire
 * [Admin Merchants Index](./wireframes/Admin_Merchants.png)
 * [Admin Merchants Show](./wireframes/Admin_Merchant_Show.png)
 * [Admin Invoices Index](./wireframes/Admin_Invoices.png)
-* [Admin Invoices Show](./wireframes/Admin_Invoices_Show.png)
+* [Admin Invoices Show](./wireframes/Admin_Invoice_Show.png)
 
 ## Merchants
 
