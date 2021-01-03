@@ -463,13 +463,6 @@ I see the name of the Github repo somewhere on the site
 ```
 As a visitor or an admin user
 When I visit any page on the site
-I see the Github logo near the repo name
-The most up to date logo is always displayed
-```
-
-```
-As a visitor or an admin user
-When I visit any page on the site
 I see the Github usernames of myself and my teammates somewhere on the site
 The most up to date usernames are always displayed
 ```
