@@ -455,12 +455,16 @@ And I see that my Invoice's status has now been updated
 For each of these stories, you will need to hit an endpoint provided by the GitHub API in order to serve the date required on your site.
 
 ```
+GitHub API: Repo Name
+
 As a visitor or an admin user
 When I visit any page on the site
 I see the name of the Github repo somewhere on the site
 ```
 
 ```
+GitHub API: User Names
+
 As a visitor or an admin user
 When I visit any page on the site
 I see the Github usernames of myself and my teammates somewhere on the site
@@ -468,6 +472,8 @@ The most up to date usernames are always displayed
 ```
 
 ```
+GitHub API: Commits
+
 As a visitor or an admin user
 When I visit any page on the site
 I see the number of commits next to each Github username
@@ -475,6 +481,8 @@ This number is updated as each member of the team contributes more commits
 ```
 
 ```
+GitHub API: PRs
+
 As a visitor or an admin user
 When I visit any page on the site
 I see the number of merged PRs across all team members
