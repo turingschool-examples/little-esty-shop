@@ -23,7 +23,7 @@ Additionally, your project should contain a Rake Task that will execute the othe
 rails csv_load:all
 ```
 
-Reference [this documentation](https://guides.rubyonrails.org/v5.2/command_line.html) for additional information about running task from the command line.
+Reference [this documentation](https://guides.rubyonrails.org/v5.2/command_line.html) for additional information about running tasks from the command line.
 
 ## Schema Notes
 
