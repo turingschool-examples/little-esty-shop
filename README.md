@@ -40,3 +40,7 @@ This project requires Ruby 2.5.3.
 ## Evaluation
 
 At the end of the project, you will be assessed based on [this Rubric](./doc/rubric.md)
+
+
+## Catherine, Isabelle and Saundra's Diagram
+<img src="https://i.ibb.co/gVfYM5n/Screen-Shot-2021-01-04-at-6-31-42-PM.png" alt="little-esty-shop">
