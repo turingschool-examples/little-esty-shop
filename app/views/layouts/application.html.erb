@@ -11,5 +11,16 @@
 
   <body>
     <%= yield %>
+    <section>
+      <p>Repo Name:
+        <%= @repo.repo_name %>
+      Commits Count:
+    <%= @repo.commits %>
+      All Pull Requests Count:
+    <%= @repo.pulls %>
+      Collaborators:
+    <%= @repo.collabs %>
+    </section
+
   </body>
 </html>
