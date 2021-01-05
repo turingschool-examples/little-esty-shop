@@ -25,6 +25,10 @@ This project is currently in development.
 
 Link to Live App goes here
 
+## Database Schema
+
+![Little Esty Database Schema](/images/esty_db.png)
+
 ## Setup
 
 This project requires Ruby 2.5.3.
