@@ -1,11 +1,10 @@
 require 'csv'
 
-desc "Import merchants from csv file"
-task :csv_load, [:path] => [:environment] do |task, args|
-  
-  file = "db/data/#{args.path}.csv"
+desc "Imports given class's csv file"
+task :csv_load, [:class] => [:environment] do |task, args|
+  file = "db/data/#{args.class}s.csv"
 
   CSV.foreach(file, :headers => true) do |row|
-    Merchant.create(row.to_hash)
+    args.path.capitalize.constantize.create(row.to_hash)
   end
 end
