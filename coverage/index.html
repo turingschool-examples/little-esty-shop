@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-01-05T13:50:51-07:00">2021-01-05T13:50:51-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-01-05T14:03:59-07:00">2021-01-05T14:03:59-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -93,9 +93,9 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#ebb849b98ef07adae153d29d3ec639871f0558df" class="src_link" title="app/models/invoice.rb">app/models/invoice.rb</a></td>
+            <td class="strong t-file__name"><a href="#8abaf240a121def3209e4f55f4f63e1019becf4a" class="src_link" title="app/models/customer.rb">app/models/customer.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">4</td>
             <td class="cell--number">2</td>
             <td class="cell--number">2</td>
             <td class="cell--number">0</td>
@@ -391,9 +391,9 @@
 </div>
 
       
-        <div class="source_table" id="ebb849b98ef07adae153d29d3ec639871f0558df">
+        <div class="source_table" id="8abaf240a121def3209e4f55f4f63e1019becf4a">
   <div class="header">
-    <h3>app/models/invoice.rb</h3>
+    <h3>app/models/customer.rb</h3>
     <h4>
       <span class="green">
   100.0%
@@ -424,7 +424,7 @@
 
             
 
-            <code class="ruby">class Invoice &lt; ApplicationRecord</code>
+            <code class="ruby">class Customer &lt; ApplicationRecord</code>
           </li>
         </div>
       
@@ -435,12 +435,23 @@
 
             
 
-            <code class="ruby">  validates_presence_of :status, :merchant_id, :customer_id</code>
+            <code class="ruby">  validates_presence_of :first_name,</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby">                        :last_name</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
             
             
 

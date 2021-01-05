@@ -251,10 +251,11 @@
           null
         ]
       },
-      "/Users/saundra/turing/2module/projects/little-esty-shop/app/models/invoice.rb": {
+      "/Users/saundra/turing/2module/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
           1,
+          null,
           null
         ]
       },
@@ -266,6 +267,6 @@
         ]
       }
     },
-    "timestamp": 1609879851
+    "timestamp": 1609880639
   }
 }
