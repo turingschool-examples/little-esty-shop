@@ -251,9 +251,11 @@
           null
         ]
       },
-      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/models/item.rb": {
+      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
+          1,
+          null,
           1,
           null
         ]
@@ -265,7 +267,7 @@
           null
         ]
       },
-      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/models/merchant.rb": {
+      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
           1,
@@ -273,6 +275,6 @@
         ]
       }
     },
-    "timestamp": 1609902903
+    "timestamp": 1609903092
   }
 }
