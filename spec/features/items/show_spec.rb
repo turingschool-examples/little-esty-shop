@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchants items index page', type: :feature do
+RSpec.describe 'merchants items show page', type: :feature do
   describe 'as a merchant' do
     before(:each) do
       Merchant.destroy_all
@@ -64,14 +64,14 @@ RSpec.describe 'merchants items index page', type: :feature do
       end
     end
 
-    it 'can list all item names for specific merchant' do
-      visit merchant_items_path(@merchant)
-      expected = Item.where(merchant: @merchant).pluck(:name)
-      
-      expect(page).to have_content("#{expected[0]}")
-      expect(page).to have_content("#{expected[1]}")
-      expect(page).to have_content("#{expected[2]}")
-      expect(page).to have_link("#{expected[0]}")
+    it 'can show an an items name, description, current selling price.' do
+      visit merchant_item_path(@merchant.id, @merchant.items.first.id)
+
+      expect(page).to have_content("#{@merchant.items.first.name}")
+      expect(page).to have_content("#{@merchant.items.first.description}")
+      expect(page).to have_content("#{@merchant.items.first.unit_price}")
+
     end
+
   end
 end
