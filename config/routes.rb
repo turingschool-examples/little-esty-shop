@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     member do
       get 'dashboard'
     end
+    resources :items, only: [:index]
   end
 end

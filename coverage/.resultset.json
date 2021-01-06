@@ -242,7 +242,7 @@
         "lines": [
           1,
           1,
-          2,
+          3,
           null,
           null
         ]
@@ -255,6 +255,7 @@
           1,
           1,
           null,
+          1,
           null,
           null
         ]
@@ -284,7 +285,7 @@
         "lines": [
           1,
           1,
-          1,
+          2,
           null,
           null
         ]
@@ -294,8 +295,26 @@
           1,
           null
         ]
+      },
+      "/Users/magicmax/turing/mod2/little-esty-shop/app/controllers/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/magicmax/turing/mod2/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1609895661
+    "timestamp": 1609896633
   }
 }
