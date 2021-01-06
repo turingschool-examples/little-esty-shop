@@ -13,7 +13,6 @@ RSpec.describe 'Admin Merchants Index' do
   describe 'List of Merchants' do
     it 'can show a list of each merchant in the system' do
       visit admin_merchants_path
-      save_and_open_page
       within('#merchants') do
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_2.name)
@@ -22,6 +21,14 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to have_content(@merchant_5.name)
         expect(page).to have_content(@merchant_6.name)
         expect(page).to have_content(@merchant_7.name)
+      end
+    end
+    it 'can have show page links' do
+      visit admin_merchants_path
+      within('#merchants') do
+        click_on @merchant_1.name
+
+        expect(current_path).to eq(admin_merchant_path(@merchant_1))
       end
     end
   end
