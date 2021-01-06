@@ -242,6 +242,10 @@
         "lines": [
           1,
           null,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -267,14 +271,22 @@
           null
         ]
       },
-      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/models/item.rb": {
+      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/controllers/dashboard_controller.rb": {
         "lines": [
           1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/mikefoy/turing/2module/projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
           1,
           null
         ]
       }
     },
-    "timestamp": 1609903092
+    "timestamp": 1609905251
   }
 }
