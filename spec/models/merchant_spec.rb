@@ -66,7 +66,7 @@ RSpec.describe Merchant, type: :model do
     it '#top_5_customers' do
       expect(@merchant.customers.count).to eq(10)
       top = [@customer_4.first_name, @customer_2.first_name, @customer_5.first_name, @customer_1.first_name, @customer_6.first_name]
-      actual = @merchant.top_5.map {|x| x[:first_name]}
+      actual = @merchant.top_5.map { | x | x[:first_name]}
       expect(actual).to eq(top)
     end
 
