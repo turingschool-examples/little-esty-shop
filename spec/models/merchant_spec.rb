@@ -46,14 +46,32 @@ RSpec.describe Merchant, type: :model do
     @invoice_9 = create(:invoice, merchant: @merchant, customer: @customer_6)
     @invoice_10 = create(:invoice, merchant: @merchant, customer: @customer_6)
     create(:transaction, result: 1, invoice: @invoice_9)
+
+    create_list(:item, 3, merchant: @merchant)
+
+    5.times do
+      create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2)
+    end
+
+    5.times do
+      create(:invoice_item, item: Item.second, invoice: Invoice.all.sample, status: 1)
+    end
+
+    5.times do
+      create(:invoice_item, item: Item.third, invoice: Invoice.all.sample, status: 0)
+    end
   end
 
   describe 'instance methods' do
-    it '#top_5_customers' do
+    xit '#top_5_customers' do
       expect(@merchant.customers.count).to eq(10)
       top_5 = [@customer_4, @customer_2, @customer_5, @customer_1, @customer_6]
-      require 'pry'; binding.pry
       expect(@merchant.customers.top_5).to eq(top_5)
+    end
+
+    it '#ready_to_ship' do
+      expected = @merchant.ready_to_ship
+      expect(expected.length).to eq(10)
     end
   end
 end

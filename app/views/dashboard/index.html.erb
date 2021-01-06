@@ -3,3 +3,13 @@
 <%= link_to 'Merchant Items', merchant_items_path(@merchant) %>
 
 <%= link_to 'Merchant Invoices', merchant_invoices_path(@merchant) %>
+
+<section>
+  <h3>Ready to Ship</h3>
+  <ol>
+    <% @merchant.ready_to_ship.each do |item| %>
+      <li><%= item.item_name %> ---
+      <p id="invoice#{item.invoice_id}">invoice id:<%= link_to item.invoice_id, merchant_invoice_path(@merchant.id, item.invoice_id) %></p></li>
+    <% end %>
+  </ol>
+</section>
