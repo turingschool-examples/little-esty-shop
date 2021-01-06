@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Merchant Dashboard" do
-  let(:merchant1) do 
+  let(:merchant1) do
     create(:merchant)
   end
 
