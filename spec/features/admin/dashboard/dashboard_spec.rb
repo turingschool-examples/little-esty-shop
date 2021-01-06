@@ -63,10 +63,16 @@ describe 'As an Admin' do
 
       within("#incomplete-invoices") do
         expect(page).to have_content("Incomplete Invoices")
+        
         expect(all('.invoice')[0].text).to eq("#{@invoice_1.id} - #{@invoice_1.date}") 
         expect(all('.invoice')[1].text).to eq("#{@invoice_2.id} - #{@invoice_2.date}")  
         expect(all('.invoice')[2].text).to eq("#{@invoice_3.id} - #{@invoice_3.date}")   
         expect(all('.invoice')[3].text).to eq("#{@invoice_4.id} - #{@invoice_4.date}")  
+        
+        expect(page).to have_link("#{@invoice_1.id} - #{@invoice_1.date}")
+        expect(page).to have_link("#{@invoice_2.id} - #{@invoice_2.date}")
+        expect(page).to have_link("#{@invoice_3.id} - #{@invoice_3.date}")
+        expect(page).to have_link("#{@invoice_4.id} - #{@invoice_4.date}")
       end
     end
   end
