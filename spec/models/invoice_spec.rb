@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Invoice, type: :model do
   describe "validations" do
-    it {should define_enum_for(:status).with ['in progress', 'completed', 'cancelled'] }
+    it {should define_enum_for(:status).with_values ['in progress', 'completed', 'cancelled'] }
   end
 
   describe "relations" do

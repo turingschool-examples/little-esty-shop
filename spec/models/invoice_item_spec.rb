@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe InvoiceItem, type: :model do
   describe "validations" do
-    it {should define_enum_for(:status).with ["pending", "packaged", "shipped"] }
+    it {should define_enum_for(:status).with_values ["pending", "packaged", "shipped"] }
   end
 
   describe "relations" do
