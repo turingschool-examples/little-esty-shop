@@ -33,15 +33,15 @@ describe 'As an Admin' do
 
     it 'I can see the top customers' do
       visit admin_index_path
-
+      
       expect(page).to have_content("Top 5 Customers")
-      # add admin dashboard stats to page - add number of purchases!
+
       within('#top-customers') do
-        expect(all('.customer')[0].text).to eq("#{@customer_6.first_name}")
-        expect(all('.customer')[1].text).to eq(@customer_5.first_name)
-        expect(all('.customer')[2].text).to eq(@customer_4.first_name)
-        expect(all('.customer')[3].text).to eq(@customer_3.first_name)
-        expect(all('.customer')[4].text).to eq(@customer_2.first_name)
+        expect(all('.customer')[0].text).to eq("#{@customer_6.first_name} - #{@customer_6.successful_purchases} Purchases")
+        expect(all('.customer')[1].text).to eq("#{@customer_5.first_name} - #{@customer_5.successful_purchases} Purchases")
+        expect(all('.customer')[2].text).to eq("#{@customer_4.first_name} - #{@customer_4.successful_purchases} Purchases")
+        expect(all('.customer')[3].text).to eq("#{@customer_3.first_name} - #{@customer_3.successful_purchases} Purchases")
+        expect(all('.customer')[4].text).to eq("#{@customer_2.first_name} - #{@customer_2.successful_purchases} Purchases")
       end
 
     end
