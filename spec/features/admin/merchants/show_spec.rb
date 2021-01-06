@@ -11,5 +11,11 @@ RSpec.describe 'Admin Merchants Show' do
 
       expect(page).to have_content(@merchant_1.name)
     end
+    it 'can have an update link to change merchant information' do
+      visit admin_merchant_path(@merchant_1)
+      click_on "Edit Merchant's Info"
+      
+      expect(current_path).to eq(edit_admin_merchant_path(@merchant_1))
+    end
   end
 end
