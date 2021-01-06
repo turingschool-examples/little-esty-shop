@@ -1,4 +1,5 @@
 require 'csv'
+require 'rake'
 namespace :csv_load do
 
     desc "load customers"
@@ -29,25 +30,21 @@ namespace :csv_load do
         end
     end
 
-  desc "load invoice_items"
-  task :invoice_items => :environment do
-    CSV.foreach("db/data/invoice_items.csv", headers: true) do |row|
-        InvoiceItem.create!(row.to_hash)
+    desc "load invoice_items"
+     task :invoice_items => :environment do
+        CSV.foreach("db/data/invoice_items.csv", headers: true) do |row|
+            InvoiceItem.create!(row.to_hash)
+        end
     end
-  end
 
-  desc "load transactions"
-  task :transactions => :environment do
-    CSV.foreach("db/data/transactions.csv", headers: true) do |row|
-        Transaction.create!(row.to_hash)
+    desc "load transactions"
+    task :transactions => :environment do
+        CSV.foreach("db/data/transactions.csv", headers: true) do |row|
+            Transaction.create!(row.to_hash)
+        end
     end
-  end
 
-desc "load all"
-task all: [ :customers, :merchants, :items, :invoices, :invoice_items, :transactions] do
-    Rake::Task["all"].invoke
-end
+    desc "load all"
+    task all: [ :customers, :merchants, :items, :invoices, :invoice_items, :transactions]    
 
 end
-
-	
