@@ -251,12 +251,10 @@
           null
         ]
       },
-      "/Users/v/mod_2/little-esty-shop/app/models/merchant.rb": {
+      "/Users/v/mod_2/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
           1,
-          1,
-          null,
           1,
           null
         ]
@@ -265,6 +263,50 @@
         "lines": [
           1,
           1,
+          null
+        ]
+      },
+      "/Users/v/mod_2/little-esty-shop/spec/models/invoice_item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/v/mod_2/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/v/mod_2/little-esty-shop/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          1,
+          2,
+          null,
           null
         ]
       },
@@ -282,6 +324,22 @@
           null
         ]
       },
+      "/Users/v/mod_2/little-esty-shop/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
       "/Users/v/mod_2/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
@@ -292,8 +350,59 @@
           1,
           null
         ]
+      },
+      "/Users/v/mod_2/little-esty-shop/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/v/mod_2/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/v/mod_2/little-esty-shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/v/mod_2/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1609894817
+    "timestamp": 1609895033
   }
 }
