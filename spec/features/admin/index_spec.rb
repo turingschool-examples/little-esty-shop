@@ -27,7 +27,31 @@ RSpec.describe "Admin Dashboard" do
 
   describe "dashboard top customers" do 
     it "can see the names of top 5 customers" do 
+      customers = []
+      10.times { customers << create(:customer) }
+      customers.each do |customer|
+        create(:invoice, customer_id:customer.id)
+      end
+      first_customer = customers[0].invoices.ids
+      second_customer = customers[1].invoices.ids
+      third_customer = customers[2].invoices.ids
+      fourth_customer = customers[3].invoices.ids
+      fifth_customer = customers[4].invoices.ids
+      sixth_customer = customers[5].invoices.ids
+      seventh_customer = customers[6].invoices.ids
+      
+      10.times { create(:transaction, invoice_id:first_customer, result: "success")}
+      9.times { create(:transaction, invoice_id:second_customer, result: "success")}
+      8.times { create(:transaction, invoice_id:third_customer, result: "success")}
+      7.times { create(:transaction, invoice_id:fourth_customer, result: "success")}
+      6.times { create(:transaction, invoice_id:fifth_customer, result: "success")}
+      5.times { create(:transaction, invoice_id:sixth_customer, result: "success")}
+      13.times { create(:transaction, invoice_id:seventh_customer, result: "failed")}
+      
+      binding.pry
       visit "/admin"
+
+
     end
   end
 
