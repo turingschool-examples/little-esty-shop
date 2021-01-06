@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'merchant dashboard index', type: :feature do
   describe 'as a merchant' do
     before(:each) do
-      @merchant = Merchant.create!(name: 'Merchy Merchant')
+      @merchant = create(:merchant)
     end
 
     it 'When I visit my merchant dashboard then I see the name of my merchant' do
