@@ -5,12 +5,16 @@ class Customer < ApplicationRecord
   has_many :invoice_items, through: :invoices
   has_many :items, through: :invoice_items
 
-  def self.top_5
-    joins(:transactions)
-    .select('customers.*, count(transactions.result) as transaction_count')
-    .where(transactions: {result: 1})
-    .group(:id)
-    .order('transaction_count DESC')
-    .limit(5)
+  def self.top_five_customers
+   joins(:transactions)
+   .select("customers.*, count('transactions.result') AS transaction_count")
+   .group(:id)
+   .where('transactions.result = ?', 1)
+   .order('transaction_count desc')
+   .limit(5)
+  end
+
+  def successful_purchases
+    transactions.where('result = ?', 1).count
   end
 end
