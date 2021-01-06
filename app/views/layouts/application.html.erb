@@ -11,6 +11,11 @@
     .navbar {
       margin-bottom: 30px;
     }
+    .navbar-text {
+      margin-top: 1px;
+      margin-bottom: 1px;
+      font-weight: bold;
+    }
     .col-sm-5 {
       background-color:lavender;
       font-weight: bold;
@@ -26,16 +31,9 @@
   </head>
 
   <body>
-  <div class="container">
-    <h1 style="text-align:center; background-color:#EBEFF3;">Little Esty Shop</h1>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <p class="navbar-text"></p>
-          <ul class="nav navbar-nav">
-            <li><a href="#">Link</a><a href="#">Link</a></li>
-        </ul>
-      </div>
-    </nav>
+    <div class="top-container">
+      <h1 style="text-align:center; background-color:#EBEFF3;">Little Esty Shop</h1>
+      
       <%= yield %>
       
     </div>
