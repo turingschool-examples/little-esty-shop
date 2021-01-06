@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LittleEtsyShop</title>
+    <title>Little Etsy Shop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    .navbar {
+      margin-bottom: 30px;
+    }
+    .col-sm-5 {
+      background-color:lavender;
+      font-weight: bold;
+      text-align:center;
+      margin-right: 80px
+    }
+    .col-sm-6 {
+      background-color:lavenderblush;
+      font-weight: bold;
+      text-align:center;
+    }
+    </style>
   </head>
 
   <body>
-    <%= yield %>
+  <div class="container">
+    <h1 style="text-align:center; background-color:#EBEFF3;">Little Esty Shop</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <p class="navbar-text"></p>
+          <ul class="nav navbar-nav">
+            <li><a href="#">Link</a><a href="#">Link</a></li>
+        </ul>
+      </div>
+    </nav>
+      <%= yield %>
+      
+    </div>
   </body>
 </html>
