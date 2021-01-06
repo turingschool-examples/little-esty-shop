@@ -15,7 +15,7 @@
   <h3>Incomplete Invoices</h3>
   <ol>
     <% @incomplete_invoices.each do |invoice| %>
-      <li class='invoice'><%= invoice.id %> - <%= invoice.date %></li>
+      <li class='invoice'><%= link_to "#{invoice.id} - #{invoice.date}", admin_invoices_path(invoice) %></li>
     <% end %>
   </ol>
 </section>
