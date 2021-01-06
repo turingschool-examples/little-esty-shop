@@ -1,0 +1,9 @@
+<h1>Admin Merchants Index</h1>
+
+<section id="merchants">
+  <ul>
+    <% @merchants.each do |merchant| %>
+      <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+    <% end %>
+  </ul>
+</section>
