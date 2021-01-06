@@ -52,8 +52,11 @@ RSpec.describe 'merchant dashboard index', type: :feature do
         create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2)
       end
 
-      5.times do
+      2.times do
         create(:invoice_item, item: Item.second, invoice: @invoice_9, status: 1)
+      end
+      3.times do
+        create(:invoice_item, item: Item.second, invoice: @invoice_7, status: 1)
       end
 
       5.times do
@@ -78,6 +81,12 @@ RSpec.describe 'merchant dashboard index', type: :feature do
       expect(page).to have_content(Item.second.name)
 
       expect(page).to have_link("#{@invoice_9.id}")
+    end
+
+    it 'can show date and is in order' do
+      visit merchant_dashboard_index_path(@merchant)
+      save_and_open_page
+
     end
   end
 end

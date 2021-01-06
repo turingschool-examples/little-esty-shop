@@ -8,8 +8,9 @@ class Merchant < ApplicationRecord
   def ready_to_ship
     first =  invoice_items
                      .joins(:item)
-                     .select('items.id, items.name as item_name, invoices.id as invoice_id ')
+                     .select('items.id, items.name as item_name, invoices.id as invoice_id, invoices.created_at AS invoice_date')
                      .where.not('invoice_items.status = ?', 2)
+                     .order('invoice_date')
   end
 
   def potential_user_story_3
