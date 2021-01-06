@@ -1,6 +1,6 @@
 <h3>Favorite Customers:</h3>
 <ol>
   <% @merchant.favorite_customers.each do |customer| %>
-    <li><%= customer.name %></li>
+    <li><%= customer.name %> - <%= customer.count %> purchases</li>
   <% end %>
 </ol>
