@@ -28,4 +28,5 @@ FactoryBot.create_list(:merchant, 10)
 
 FactoryBot.create_list(:invoice_item, 10)
   InvoiceItem.all.each do |ii|
+    FactoryBot.create(:invoice)
   end 
