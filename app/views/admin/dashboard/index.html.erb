@@ -6,7 +6,16 @@
   <h3>Top 5 Customers</h3>
   <ol>
     <% @top_five_customers.each do |customer| %>
-      <li class='customer'><%= customer.first_name %></li>
+      <li class='customer'><%= customer.first_name %> - <%= customer.successful_purchases %> Purchases</li>
+    <% end %>
+  </ol>
+</section>
+
+<section id="incomplete-invoices">
+  <h3>Incomplete Invoices</h3>
+  <ol>
+    <% @incomplete_invoices.each do |invoice| %>
+      <li class='invoice'><%= link_to "#{invoice.id} - #{invoice.date}", admin_invoices_path(invoice) %></li>
     <% end %>
   </ol>
 </section>

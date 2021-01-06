@@ -10,8 +10,12 @@ class Customer < ApplicationRecord
    .select("customers.*, count('transactions.result') AS transaction_count")
    .group(:id)
    .where('transactions.result = ?', 1)
-   .order(transaction_count: :desc)
+   .order('transaction_count desc')
    .limit(5)
+  end
+
+  def successful_purchases
+    transactions.where('result = ?', 1).count
   end
   
 end

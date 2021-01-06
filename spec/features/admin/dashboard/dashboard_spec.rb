@@ -34,16 +34,46 @@ describe 'As an Admin' do
     it 'I can see the top customers' do
       visit admin_index_path
 
-      expect(page).to have_content("Top 5 Customers")
-      # add admin dashboard stats to page - add number of purchases!
+      
       within('#top-customers') do
-        expect(all('.customer')[0].text).to eq("#{@customer_6.first_name}")
-        expect(all('.customer')[1].text).to eq(@customer_5.first_name)
-        expect(all('.customer')[2].text).to eq(@customer_4.first_name)
-        expect(all('.customer')[3].text).to eq(@customer_3.first_name)
-        expect(all('.customer')[4].text).to eq(@customer_2.first_name)
+        expect(page).to have_content("Top 5 Customers")
+        expect(all('.customer')[0].text).to eq("#{@customer_6.first_name} - #{@customer_6.successful_purchases} Purchases")
+        expect(all('.customer')[1].text).to eq("#{@customer_5.first_name} - #{@customer_5.successful_purchases} Purchases")
+        expect(all('.customer')[2].text).to eq("#{@customer_4.first_name} - #{@customer_4.successful_purchases} Purchases")
+        expect(all('.customer')[3].text).to eq("#{@customer_3.first_name} - #{@customer_3.successful_purchases} Purchases")
+        expect(all('.customer')[4].text).to eq("#{@customer_2.first_name} - #{@customer_2.successful_purchases} Purchases")
       end
+    end
 
+    it 'I see all incomplete invoices sorted by least recent' do
+      @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2006-01-25 09:54:09")
+      @invoice_2 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 1, created_at: "2007-02-25 09:54:09")
+      @invoice_3 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2008-03-25 09:54:09")
+      @invoice_4 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2009-04-25 09:54:09")
+
+      @item_1 = create(:item, merchant: @merchant)
+      @item_2 = create(:item, merchant: @merchant)
+
+      @invoice_item_1 = create(:invoice_item, status: 0, item: @item_1, invoice: @invoice_1)
+      @invoice_item_2 = create(:invoice_item, status: 0, item: @item_2, invoice: @invoice_2)
+      @invoice_item_3 = create(:invoice_item, status: 1, item: @item_2, invoice: @invoice_3)
+      @invoice_item_4 = create(:invoice_item, status: 1, item: @item_1, invoice: @invoice_4)
+
+      visit admin_index_path
+
+      within("#incomplete-invoices") do
+        expect(page).to have_content("Incomplete Invoices")
+        
+        expect(all('.invoice')[0].text).to eq("#{@invoice_1.id} - #{@invoice_1.date}") 
+        expect(all('.invoice')[1].text).to eq("#{@invoice_2.id} - #{@invoice_2.date}")  
+        expect(all('.invoice')[2].text).to eq("#{@invoice_3.id} - #{@invoice_3.date}")   
+        expect(all('.invoice')[3].text).to eq("#{@invoice_4.id} - #{@invoice_4.date}")  
+        
+        expect(page).to have_link("#{@invoice_1.id} - #{@invoice_1.date}")
+        expect(page).to have_link("#{@invoice_2.id} - #{@invoice_2.date}")
+        expect(page).to have_link("#{@invoice_3.id} - #{@invoice_3.date}")
+        expect(page).to have_link("#{@invoice_4.id} - #{@invoice_4.date}")
+      end
     end
   end
 end
