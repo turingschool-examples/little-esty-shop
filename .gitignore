@@ -12,7 +12,9 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+coverage/
+coverage/.resultset.json
+coverage/index.html
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
