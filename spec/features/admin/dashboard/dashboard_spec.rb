@@ -33,7 +33,7 @@ describe 'As an Admin' do
 
     it 'I can see the top customers' do
       visit admin_index_path
-      
+
       expect(page).to have_content("Top 5 Customers")
 
       within('#top-customers') do
@@ -43,7 +43,18 @@ describe 'As an Admin' do
         expect(all('.customer')[3].text).to eq("#{@customer_3.first_name} - #{@customer_3.successful_purchases} Purchases")
         expect(all('.customer')[4].text).to eq("#{@customer_2.first_name} - #{@customer_2.successful_purchases} Purchases")
       end
+    end
 
+    it 'I see all incomplete invoices' do
+      visit admin_index_path
+
+      expect(page).to have_content("Incomplete Invoices")
+
+      within("#incomplete-invoices") do
+        expect(all('.')[0].text).to eq() 
+        expect(all('.')[1].text).to eq() 
+        expect(all('.')[2].text).to eq() 
+      end
     end
   end
 end

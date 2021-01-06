@@ -10,3 +10,12 @@
     <% end %>
   </ol>
 </section>
+
+<section id="-incomplete-invoices">
+  <h3>Incomplete Invoices</h3>
+  <ol>
+    <% @incomplete_invoices.each do |invoice| %>
+      <li class='invoice'><%= invoice %></li>
+    <% end %>
+  </ol>
+</section>
