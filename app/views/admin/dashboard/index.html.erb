@@ -11,11 +11,11 @@
   </ol>
 </section>
 
-<section id="-incomplete-invoices">
+<section id="incomplete-invoices">
   <h3>Incomplete Invoices</h3>
   <ol>
     <% @incomplete_invoices.each do |invoice| %>
-      <li class='invoice'><%= invoice %></li>
+      <li class='invoice'><%= invoice.id %> - <%= invoice.date %></li>
     <% end %>
   </ol>
 </section>
