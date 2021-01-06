@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant dashboard index', type: :feature do
+RSpec.describe 'merchants items index page', type: :feature do
   describe 'as a merchant' do
     before(:each) do
       Merchant.destroy_all
@@ -64,44 +64,14 @@ RSpec.describe 'merchant dashboard index', type: :feature do
       end
     end
 
-    it 'When I visit my merchant dashboard then I see the name of my merchant' do
-      visit merchant_dashboard_index_path(@merchant)
-      expect(page).to have_content(@merchant.name)
+    it 'can list all item names for specific merchant' do
+      visit merchant_items_path(@merchant)
+      expected = Item.where(merchant: @merchant).pluck(:name)
+      expect(page).to have_content("#{expected[0]}")
+      expect(page).to have_content("#{expected[1]}")
+      expect(page).to have_content("#{expected[2]}")
+
     end
 
-    it 'When I visit my merchant dashboard Then I see link to my merchant items index (/merchant/merchant_id/items) And I see a link to my merchant invoices index (/merchant/merchant_id/invoices)' do
-      visit merchant_dashboard_index_path(@merchant)
-      expect(page).to have_link('Merchant Items', href: merchant_items_path(@merchant))
-      expect(page).to have_link('Merchant Invoices', href: merchant_invoices_path(@merchant))
-    end
-
-    it 'can show top 5 customers of the merchant' do
-      visit merchant_dashboard_index_path(@merchant)
-
-      expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name} - Successful Transactions: #{@merchant.top_5[0].total_success}")
-      expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name} - Successful Transactions: #{@merchant.top_5[1].total_success}")
-      expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name} - Successful Transactions: #{@merchant.top_5[2].total_success}")
-      expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name} - Successful Transactions: #{@merchant.top_5[3].total_success}")
-      expect(page).to have_content("#{@customer_6.first_name} #{@customer_6.last_name} - Successful Transactions: #{@merchant.top_5[4].total_success}")
-
-      expect(@customer_4.first_name).to appear_before(@customer_2.first_name)
-      expect(@customer_1.first_name).to appear_before(@customer_6.first_name)
-    end
-
-    it 'can show all items not yet shipped, and show items invoice id as a link.' do
-      visit merchant_dashboard_index_path(@merchant)
-
-      expect(page).to have_content(Item.second.name)
-
-      expect(page).to have_link("#{@invoice_9.id}")
-    end
-
-    it 'can show date and is in desc order' do
-      visit merchant_dashboard_index_path(@merchant)
-      
-      expect(page).to have_content(Item.first.created_at.strftime('%A, %b %d %Y'))
-      # expect(@invoice_9.id).to appear_before(@invoice_10.id)
-      # expect(@invoice_10.id).to appear_before(@invoice_8.id)
-    end
   end
 end
