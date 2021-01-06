@@ -2,3 +2,9 @@
 
 <%= link_to 'merchants', admin_merchants_path %>
 <%= link_to 'invoices', admin_invoices_path %>
+
+<section id="top customers">
+  <% @customers.each do |customer| %>
+    <p id="customer-<%= customer.id %>"><%= customer.first_name + " " + customer.last_name %></p>
+  <% end %>
+</section>

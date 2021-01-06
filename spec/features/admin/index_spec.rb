@@ -32,13 +32,13 @@ RSpec.describe "Admin Dashboard" do
       customers.each do |customer|
         create(:invoice, customer_id:customer.id)
       end
-      first_customer = customers[0].invoices.ids
-      second_customer = customers[1].invoices.ids
-      third_customer = customers[2].invoices.ids
-      fourth_customer = customers[3].invoices.ids
-      fifth_customer = customers[4].invoices.ids
-      sixth_customer = customers[5].invoices.ids
-      seventh_customer = customers[6].invoices.ids
+      first_customer = customers[0].invoices[0].id
+      second_customer = customers[1].invoices[0].id
+      third_customer = customers[2].invoices[0].id
+      fourth_customer = customers[3].invoices[0].id
+      fifth_customer = customers[4].invoices[0].id
+      sixth_customer = customers[5].invoices[0].id
+      seventh_customer = customers[6].invoices[0].id
       
       10.times { create(:transaction, invoice_id:first_customer, result: "success")}
       9.times { create(:transaction, invoice_id:second_customer, result: "success")}
@@ -48,21 +48,21 @@ RSpec.describe "Admin Dashboard" do
       5.times { create(:transaction, invoice_id:sixth_customer, result: "success")}
       13.times { create(:transaction, invoice_id:seventh_customer, result: "failed")}
       
-      binding.pry
       visit "/admin"
+      
+      customer1 = page.find("#customer-#{customers[0].id}")
+      customer2 = page.find("#customer-#{customers[1].id}")
+      customer3 = page.find("#customer-#{customers[2].id}")
+      customer4 = page.find("#customer-#{customers[3].id}")
+      customer5 = page.find("#customer-#{customers[4].id}")
 
-
+      expect(customer1).to appear_before(customer2)
+      expect(customer2).to appear_before(customer3)
+      expect(customer3).to appear_before(customer4)
+      expect(customer4).to appear_before(customer5)
+      expect(page).to_not have_css("#customer-#{customers[5].id}")
+      expect(page).to_not have_css("#customer-#{customers[6].id}")
     end
   end
 
 end
-
-
-# Admin Dashboard Statistics - Top Customers
-
-# As an admin,
-# When I visit the admin dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
