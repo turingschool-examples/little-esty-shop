@@ -8,6 +8,6 @@ class Invoice < ApplicationRecord
   enum status: ['in progress', 'completed', 'cancelled']
 
   def self.incomplete_invoices
-    Invoice.where(status: "in progress")
+    Invoice.where(status: "in progress").order(created_at: :asc)
   end
 end
