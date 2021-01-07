@@ -112,5 +112,18 @@ RSpec.describe "Admin Dashboard" do
         expect(current_path).to eq("/admin/invoices/#{@invoice2.id}")
       end
     end
+
+    it "can see that the invoices are ordered by creation date from oldest to newest" do
+      require "date"
+      invoice5 = create(:invoice,status: "in progress", created_at: DateTime.yesterday)
+      visit "/admin"
+      within(@incomplete_invoice_section) do
+        i5 = page.find("#invoice-#{invoice5.id}")
+        i1 = page.find("#invoice-#{@invoice1.id}")
+        i2 = page.find("#invoice-#{@invoice2.id}")
+        expect(i5).to appear_before(i1)
+        expect(i1).to appear_before(i2)
+      end
+    end
   end
 end
