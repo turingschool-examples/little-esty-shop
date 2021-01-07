@@ -18,4 +18,14 @@ describe "Admin Merchants Index Page" do
     end
   end
 
+  it "has a link for each merchant that redirects to that merchant's show page" do
+    within(page.find("#all-merchants")) do
+      click_on @merchants[0].name
+      expect(current_path).to eq(admin_merchant_path(@merchants[0].id))
+      visit "/admin/merchants"
+      click_on @merchants[1].name 
+      expect(current_path).to eq(admin_merchant_path(@merchants[1].id))
+    end
+  end
+
 end
