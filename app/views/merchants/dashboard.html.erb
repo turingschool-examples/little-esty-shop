@@ -1,0 +1,10 @@
+<h1><%= @merchant.name %></h1>
+<%= link_to "My Items", merchant_items_path(params[:id]) %>
+<%= link_to "My Invoices", merchant_invoices_path(params[:id]) %>
+<section id="favorite_customers">
+  <%= render "customers" %>
+</section>
+
+<section id="items_to_ship">
+  <%= render "items" %>
+</section>

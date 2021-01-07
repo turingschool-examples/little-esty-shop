@@ -1,5 +1,5 @@
-FactoryBot.define do 
-  factory :merchant, class: Merchant do 
-    name { Faker::Name.name }
+FactoryBot.define do
+  factory :merchant do
+    name {Faker::Name.unique.name}
   end
 end
