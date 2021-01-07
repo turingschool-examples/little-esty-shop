@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/environment.rb": {
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/application.rb": {
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -47,7 +47,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/boot.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/boot.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
           null,
@@ -55,7 +59,11 @@
           1
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/environments/test.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/environments/test.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
           null,
@@ -105,7 +113,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -117,7 +129,7 @@
           null
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/assets.rb": {
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -135,7 +147,7 @@
           null
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -146,7 +158,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/content_security_policy.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -175,7 +191,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/cookies_serializer.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -184,7 +204,11 @@
           1
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -192,7 +216,11 @@
           1
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/inflections.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/inflections.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -212,7 +240,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/mime_types.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/mime_types.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -220,7 +252,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/initializers/wrap_parameters.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           null,
           null,
@@ -238,7 +274,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/config/routes.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/config/routes.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
           null,
@@ -264,12 +304,17 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/helpers/application_helper.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/app/helpers/application_helper.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/features/api/find_number_of_commits_spec.rb": {
         "lines": [
 
@@ -433,39 +478,41 @@
         ]
       },
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/merchant_spec.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/app/models/merchant.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
-          null,
           1,
           1,
-          2,
-          2,
           null,
           1,
-          2,
-          null,
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/merchant.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/app/models/application_record.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
-          1,
-          1,
-          null,
           1,
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/transaction_spec.rb": {
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/app/controllers/merchant/dashboard_controller.rb": {
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
         "lines": [
           1,
           null,
           1,
-          1,
-          2,
           null,
           1,
+<<<<<<< HEAD
           2,
           2,
           2,
@@ -477,12 +524,13 @@
         "lines": [
           1,
           1,
+=======
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
           null,
-          1,
-          1,
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/controllers/admin/dashboard_controller.rb": {
         "lines": [
           1,
@@ -524,22 +572,41 @@
           1,
           1,
           null,
+=======
+      "/Users/megancampbell/turing/2module/little_esty_shop/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
+          null,
+          null,
+<<<<<<< HEAD
           null,
           1,
           1,
           1,
+=======
           1,
+          0,
+          0,
+          0,
           null,
           null,
-          1,
-          1,
-          1,
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
           1,
           null,
           null
         ]
       }
     },
+<<<<<<< HEAD
     "timestamp": 1610043553
+=======
+    "timestamp": 1610043162
+>>>>>>> b13b0940aadda969aaae8ff8d4d8cbf8c6512038
   }
 }
