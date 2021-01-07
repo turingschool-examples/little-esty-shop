@@ -89,5 +89,12 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       expect(page).to have_content("#{invoice_item.status}")
     end
 
+    it 'can show total revenue for that invoice' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+      invoice_item = @invoice_9.invoice_items.first
+
+      expect(page).to have_content("#{invoice_item.total_revenue}")
+    end
+
   end
 end
