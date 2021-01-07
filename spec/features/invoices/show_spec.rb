@@ -86,14 +86,21 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       expect(page).to have_content("#{invoice_item.item.name}")
       expect(page).to have_content("#{invoice_item.quantity}")
       expect(page).to have_content("#{invoice_item.unit_price}")
-      expect(page).to have_content("#{invoice_item.status}")
     end
 
     it 'can show total revenue for that invoice' do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
-      invoice_item = @invoice_9.invoice_items.first
 
-      expect(page).to have_content("#{invoice_item.total_revenue}")
+      expect(page).to have_content("Total Revenue: #{@invoice_9.total_revenue}")
+    end
+
+    xit 'can enable/disable status of item' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+      save_and_open_page
+      expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")
+
+      click_on 'Submit'
+      expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")
     end
 
   end
