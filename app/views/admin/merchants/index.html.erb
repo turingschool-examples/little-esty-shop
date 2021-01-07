@@ -1,1 +1,7 @@
 <h1>Merchants Index</h1>
+<h2>All Merchants</h2>
+<ul id="all-merchants">
+<% @merchants.each do |merchant| %>
+  <li id="merchant-<%= merchant.id %>"><%= merchant.name %><li>
+<% end %>
+</ul>
