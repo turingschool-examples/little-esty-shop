@@ -1,6 +1,10 @@
 <div class="nav-container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <p class="navbar-text">Admin Dashboard</p>
-
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Dashboard', admin_dashboard_index_path, class: 'link_1', style: 'pull-right' %>
+      <%= link_to 'Merchants', admin_merchants_path, class: 'link_1', style: 'pull-right' %>
+      <%= link_to 'Invoices', admin_invoices_path, class: 'link_1', style: 'pull-right' %></li>
+    </ul>
   </nav>
 </div>
