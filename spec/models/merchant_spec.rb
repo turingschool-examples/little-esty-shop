@@ -75,4 +75,17 @@ RSpec.describe Merchant, type: :model do
       expect(expected.length).to eq(10)
     end
   end
+  describe 'class methods' do
+    before :each do
+      @merchant1 = create(:merchant, status: 0)
+      @merchant2 = create(:merchant, status: 0)
+      @merchant3 = create(:merchant, status: 1)
+    end
+    it '::enabled' do
+      expect(Merchant.enabled).to eq([@merchant3])
+    end
+    it '::disabled' do
+      expect(Merchant.disabled).to eq([@merchant, @merchant1, @merchant2])
+    end
+  end
 end
