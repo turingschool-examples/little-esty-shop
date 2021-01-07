@@ -270,108 +270,6 @@
           null
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/features/api/find_number_of_commits_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/features/api/find_number_of_merged_pull_requests_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/features/api/find_repo_name_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/features/api/find_user_names_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/customer_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/customer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/invoice_item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/invoice_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
           1,
@@ -383,48 +281,26 @@
           1,
           null,
           1,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/item_spec.rb": {
-        "lines": [
-          1,
           null,
           1,
           1,
-          2,
           null,
-          1,
-          2,
-          2,
-          2,
           null,
           null
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/item.rb": {
+      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/application_record.rb": {
         "lines": [
           1,
-          1,
-          1,
-          1,
-          null,
           1,
           null
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/merchant_spec.rb": {
+      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
-          null,
           1,
           1,
-          2,
-          2,
-          null,
-          1,
-          2,
-          null,
           null
         ]
       },
@@ -438,89 +314,18 @@
           null
         ]
       },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/spec/models/transaction_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/transaction.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/controllers/admin/dashboard_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/controllers/api/github_api_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/apis/github_api.rb": {
+      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
           1,
           1,
-          null,
-          1,
-          1,
-          1,
-          1,
           1,
           null,
-          null,
           1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
           null
         ]
       }
     },
-    "timestamp": 1610041712
+    "timestamp": 1610043336
   }
 }
