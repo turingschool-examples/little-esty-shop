@@ -1,0 +1,7 @@
+<h3>Items Ready to Ship:</h3>
+<ul>
+  <% @merchant.items_to_ship.each_with_index do |item, index| %>
+    <li id='item-<%= index %>'>
+      <%= item.name %> - <%= link_to "Invoice ##{item.invoice_id}", merchant_invoice_path(params[:id], item.invoice_id) %></li>
+  <% end %>
+</ul>
