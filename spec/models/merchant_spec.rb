@@ -48,11 +48,12 @@ RSpec.describe Merchant, type: :model do
     it {should have_many :items}
     it {should have_many :invoices}
     it {should have_many(:customers).through(:invoices)}
+    it {should have_many(:transactions).through(:invoices)}
   end
 
-  describe 'instance methods' do
-    it "a merchant can identify its top 5 customer names" do
-      expect(@amazon.top_five_customers).to eq([@sally.name, @joel.name, @john.name, @travolta.name, @sal.name])
-    end
-  end
+  # describe 'instance methods' do
+  #   it "a merchant can identify its top 5 customer names" do
+  #     expect(@amazon.top_five_customers).to eq([@sally.name, @joel.name, @john.name, @travolta.name, @sal.name])
+  #   end
+  # end
 end
