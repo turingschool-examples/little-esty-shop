@@ -1,1 +1,22 @@
-<%= @invoice.status %>
+<section>
+  <h3>Invoice: </h3>
+  <%= @invoice.id %>
+  <%= @invoice.status %>
+  <%= @invoice.created_at.strftime('%A, %b %d %Y') %>
+</section>
+
+<section>
+<h3>Customer: <%= @invoice.customer.last_name %>, <%= @invoice.customer.first_name %></h3>
+<h4>Address: 123 Drury Ln
+              Nowhere, ID 10001</h4>
+</section>
+
+<section>
+  <ul>
+    <% @invoice.invoice_items.each do |invitem| %>
+      <li><%= invitem.item.name %>
+          <%= invitem.quantity %>
+          <%= invitem.unit_price %>
+          <%= invitem.status %></li>
+    <% end %>        
+<section>
