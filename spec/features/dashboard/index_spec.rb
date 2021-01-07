@@ -98,7 +98,7 @@ RSpec.describe 'merchant dashboard index', type: :feature do
 
     it 'can show date and is in desc order' do
       visit merchant_dashboard_index_path(@merchant)
-      save_and_open_page
+
       expect(page).to have_content(Item.first.created_at.strftime('%A, %b %d %Y'))
       # expect(@invoice_9.id).to appear_before(@invoice_10.id)
       # expect(@invoice_10.id).to appear_before(@invoice_8.id)

@@ -31,10 +31,13 @@ RSpec.describe 'Admin Merchants Index' do
       visit admin_merchants_path
 
       within('#merchants-enabled') do
+        expect(page).to have_content("Enabled Merchants")
         expect(page).to have_content(@merchant_1.name)
         click_on 'Disable'
       end
+
       within('#merchants-disabled') do
+        expect(page).to have_content("Disabled Merchants")
         expect(page).to have_content(@merchant_1.name)
         
         first('.merchant').click_on('Enable')
