@@ -19,6 +19,17 @@ RSpec.describe 'Merchant Dashboard' do
         expect(page).to have_link('Items', href: "/merchants/#{@max.id}/items")
         expect(page).to have_link('Invoices', href: "/merchants/#{@max.id}/invoices")
       end
+
+      it "merchant dashboard displays top 5 customers with most succesful transactions" do
+        # As a merchant,
+        # When I visit my merchant dashboard
+        # Then I see the names of the top 5 customers
+
+        # who have conducted the largest number of successful transactions with my merchant
+        # And next to each customer name I see the number of successful transactions they have
+        # conducted with my merchant
+      end
+
     end
   end
 end
