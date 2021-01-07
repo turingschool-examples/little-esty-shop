@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-01-07T10:19:22-07:00">2021-01-07T10:19:22-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-01-07T12:21:40-07:00">2021-01-07T12:21:40-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -39,12 +39,12 @@
   <a name="AllFiles"></a>
 
   <div>
-    <b>36</b> files in total.
+    <b>38</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>160</b> relevant lines,
-    <span class="green"><b>160</b> lines covered</span> and
+    <b>182</b> relevant lines,
+    <span class="green"><b>182</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed. </span>
     (<span class="green">
   100.0%
@@ -85,10 +85,10 @@
             <td class="strong t-file__name"><a href="#922f532e810c4c1f6628f3729bd3494671af7555" class="src_link" title="app/controllers/admin/dashboard_controller.rb">app/controllers/admin/dashboard_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">6</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">2</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">3</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.00</td>
+            <td class="cell--number">1.33</td>
             
           </tr>
         
@@ -109,6 +109,17 @@
             <td class="cell--number">3</td>
             <td class="cell--number">1</td>
             <td class="cell--number">1</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#15d0138e1914a7975d311a7f93741972ea6a5531" class="src_link" title="app/controllers/merchant/dashboard_controller.rb">app/controllers/merchant/dashboard_controller.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">7</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">3</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -150,11 +161,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#17040b152ef504d2939580139f3213a9c8b03b25" class="src_link" title="app/models/invoice.rb">app/models/invoice.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">10</td>
-            <td class="cell--number">7</td>
-            <td class="cell--number">7</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">9</td>
+            <td class="cell--number">9</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.00</td>
+            <td class="cell--number">1.22</td>
             
           </tr>
         
@@ -401,6 +412,17 @@
           </tr>
         
           <tr class="t-file">
+            <td class="strong t-file__name"><a href="#a577e98d7e446a5d8d409ea561603e95bbe3f734" class="src_link" title="spec/features/merchants/dashboard_spec.rb">spec/features/merchants/dashboard_spec.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
             <td class="strong t-file__name"><a href="#5e1ff71c39bbfcd26c1796a65ba988ccea575ef4" class="src_link" title="spec/models/customer_spec.rb">spec/models/customer_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">11</td>
@@ -425,11 +447,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#cd5d35fea4d6cfac78c95c3653883b834490c69f" class="src_link" title="spec/models/invoice_spec.rb">spec/models/invoice_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">11</td>
-            <td class="cell--number">7</td>
-            <td class="cell--number">7</td>
+            <td class="cell--number">26</td>
+            <td class="cell--number">15</td>
+            <td class="cell--number">15</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.43</td>
+            <td class="cell--number">1.20</td>
             
           </tr>
         
@@ -814,8 +836,8 @@
     
 
     <div class="t-line-summary">
-      <b>2</b> relevant lines.
-      <span class="green"><b>2</b> lines covered</span> and
+      <b>3</b> relevant lines.
+      <span class="green"><b>3</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -860,13 +882,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="4">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="4">
+            <span class="hits">2</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">    @incomplete_invoices = Invoice.incomplete_invoices</code>
           </li>
         </div>
       
@@ -1102,6 +1124,114 @@
 </div>
 
       
+        <div class="source_table" id="15d0138e1914a7975d311a7f93741972ea6a5531">
+  <div class="header">
+    <h3>app/controllers/merchant/dashboard_controller.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>3</b> relevant lines.
+      <span class="green"><b>3</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class Merchant::DashboardController &lt; ApplicationController</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def index</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
+            
+            
+
+            
+
+            <code class="ruby">    # require &#39;pry&#39;; binding.pry</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    @merchant = Merchant.find(params[:merchant_id])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
         <div class="source_table" id="250468e752b74eb419e68a0f0312fac406d37e97">
   <div class="header">
     <h3>app/helpers/application_helper.rb</h3>
@@ -1308,8 +1438,8 @@
     
 
     <div class="t-line-summary">
-      <b>7</b> relevant lines.
-      <span class="green"><b>7</b> lines covered</span> and
+      <b>9</b> relevant lines.
+      <span class="green"><b>9</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -1421,6 +1551,50 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="10">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="11">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def self.incomplete_invoices</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="12">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">    where(status: 0).pluck(:id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
             
             
 
@@ -4349,7 +4523,7 @@
 
             
 
-            <code class="ruby">namespace :api do</code>
+            <code class="ruby">  namespace :api do</code>
           </li>
         </div>
       
@@ -4360,7 +4534,7 @@
 
             
 
-            <code class="ruby">  get &quot;/github_api&quot;, to: &quot;github_api#index&quot;, as: &#39;github_index&#39;</code>
+            <code class="ruby">    get &quot;/github_api&quot;, to: &quot;github_api#index&quot;, as: &#39;github_index&#39;</code>
           </li>
         </div>
       
@@ -4371,7 +4545,7 @@
 
             
 
-            <code class="ruby">end</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -4382,7 +4556,7 @@
 
             
 
-            <code class="ruby">resources :merchants do</code>
+            <code class="ruby">  resources :merchants do</code>
           </li>
         </div>
       
@@ -4393,7 +4567,7 @@
 
             
 
-            <code class="ruby">  resources :items</code>
+            <code class="ruby">    resources :items</code>
           </li>
         </div>
       
@@ -4404,7 +4578,7 @@
 
             
 
-            <code class="ruby">  resources :invoices</code>
+            <code class="ruby">    resources :invoices</code>
           </li>
         </div>
       
@@ -4415,7 +4589,7 @@
 
             
 
-            <code class="ruby">  resources :dashboard, only: [:index]</code>
+            <code class="ruby">    resources :dashboard, controller: &#39;merchant/dashboard&#39;, only: [:index]</code>
           </li>
         </div>
       
@@ -4426,7 +4600,7 @@
 
             
 
-            <code class="ruby">end</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -4437,7 +4611,7 @@
 
             
 
-            <code class="ruby">  # resources :merchants, only: [:index, :show]</code>
+            <code class="ruby">    # resources :merchants, only: [:index, :show]</code>
           </li>
         </div>
       
@@ -4448,7 +4622,7 @@
 
             
 
-            <code class="ruby">  # resources :items, only: [:index, :show]</code>
+            <code class="ruby">    # resources :items, only: [:index, :show]</code>
           </li>
         </div>
       
@@ -4459,7 +4633,7 @@
 
             
 
-            <code class="ruby">  # resources :customers, only: [:index, :show]</code>
+            <code class="ruby">    # resources :customers, only: [:index, :show]</code>
           </li>
         </div>
       
@@ -4470,7 +4644,7 @@
 
             
 
-            <code class="ruby">  # resources :invoices, only: [:index, :show]</code>
+            <code class="ruby">    # resources :invoices, only: [:index, :show]</code>
           </li>
         </div>
       
@@ -4481,7 +4655,7 @@
 
             
 
-            <code class="ruby">  # resources :transactions, only: [:index, :show]</code>
+            <code class="ruby">    # resources :transactions, only: [:index, :show]</code>
           </li>
         </div>
       
@@ -4503,7 +4677,7 @@
 
             
 
-            <code class="ruby">  namespace :admin do</code>
+            <code class="ruby">    namespace :admin do</code>
           </li>
         </div>
       
@@ -4514,7 +4688,7 @@
 
             
 
-            <code class="ruby">    resources :merchants</code>
+            <code class="ruby">      resources :merchants</code>
           </li>
         </div>
       
@@ -4525,7 +4699,7 @@
 
             
 
-            <code class="ruby">    resources :invoices</code>
+            <code class="ruby">      resources :invoices</code>
           </li>
         </div>
       
@@ -4536,7 +4710,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -4547,7 +4721,7 @@
 
             
 
-            <code class="ruby">  resources :admin, controller: &#39;admin/dashboard&#39;, only: [:index]</code>
+            <code class="ruby">    resources :admin, controller: &#39;admin/dashboard&#39;, only: [:index]</code>
           </li>
         </div>
       
@@ -4784,6 +4958,191 @@
 
   <pre>
     <ol>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="a577e98d7e446a5d8d409ea561603e95bbe3f734">
+  <div class="header">
+    <h3>spec/features/merchants/dashboard_spec.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>8</b> relevant lines.
+      <span class="green"><b>8</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require &#39;rails_helper&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">RSpec.describe &quot;as a merchant&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  describe &quot;when I visit the merchant dashboard&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    before(:each) do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="6">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      @merchant = Merchant.create!(name: &quot;Buy more stuff&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;Then I see the name of my merchant&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      visit merchant_dashboard_index_path(@merchant.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="10">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="11">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(page).to have_content(&quot;#{@merchant.name}&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
       
     </ol>
   </pre>
@@ -5130,8 +5489,8 @@
     
 
     <div class="t-line-summary">
-      <b>7</b> relevant lines.
-      <span class="green"><b>7</b> lines covered</span> and
+      <b>15</b> relevant lines.
+      <span class="green"><b>15</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -5220,7 +5579,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
+          <li class="never" data-hits="" data-linenumber="8">
+            
+            
+
+            
+
+            <code class="ruby">  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
             <span class="hits">1</span>
             
 
@@ -5231,7 +5601,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="9">
+          <li class="covered" data-hits="2" data-linenumber="10">
             <span class="hits">2</span>
             
 
@@ -5242,7 +5612,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="never" data-hits="" data-linenumber="11">
             
             
 
@@ -5253,7 +5623,161 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="11">
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="13">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  describe &#39;class methods&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;shows incomplete invoices&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="15">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    @merchant = Merchant.create!(name: &#39;House of thingys&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="17">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    @customer_1 = Customer.create!(first_name: &#39;John&#39;, last_name: &#39;Doe&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="19">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, merchant_id: @merchant.id, status: 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="20">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    @invoice_2 = Invoice.create!(customer_id: @customer_1.id, merchant_id: @merchant.id, status: 1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="21">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    @invoice_3 = Invoice.create!(customer_id: @customer_1.id, merchant_id: @merchant.id, status: 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="22">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    expect(Invoice.incomplete_invoices).to eq([@invoice_1.id])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="24">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="25">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="26">
             
             
 
