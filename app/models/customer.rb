@@ -4,10 +4,16 @@ class Customer < ApplicationRecord
 
   def self.top_customers(number)
     Customer.joins(:transactions)
-    .where("result = '0'")
+    .where("result = ?", "0")
     .group(:id)
     .select("customers.*, count(transactions) as number_of_transactions")
     .order("number_of_transactions" => :desc)
     .limit(number)
+  end
+
+  def number_of_successful_transactions
+    transactions
+    .where("result = ?", "0")
+    .count
   end
 end

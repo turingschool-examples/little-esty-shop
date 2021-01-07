@@ -3,8 +3,12 @@
 <%= link_to 'merchants', admin_merchants_path %>
 <%= link_to 'invoices', admin_invoices_path %>
 
-<section id="top customers">
+
+<h2>Top 5 Customers</h2>
   <% @customers.each do |customer| %>
-    <p id="customer-<%= customer.id %>"><%= customer.first_name + " " + customer.last_name %></p>
+    <section id="customer-<%= customer.id %>">
+    <ul>
+      <li><%= customer.first_name + " " + customer.last_name + " :#{customer.number_of_successful_transactions}" %></li>
+    </ul>
   <% end %>
 </section>
