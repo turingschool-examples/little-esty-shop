@@ -63,7 +63,8 @@ RSpec.describe "Merchant Dashboard" do
       it 'items ready to ship' do
         items = create_list(:item, 6, merchant: merchant1)
         items.first(4).each do |item|
-          create(:invoice_item, item: item, status: 1)
+          invoice = create(:invoice, merchant: merchant1, id: item.id)
+          create(:invoice_item, item: item, invoice: invoice, status: 1)
         end
 
         visit dashboard_merchant_path(merchant1)
@@ -72,8 +73,11 @@ RSpec.describe "Merchant Dashboard" do
         within "#items_to_ship" do
           ready = items.first(4)
           not_ready = items.last(2)
-          ready.each do |item|
-            expect(page).to have_content(item.name)
+          ready.each_with_index do |item, index|
+            within "#item-#{index}" do
+              expect(page).to have_content(item.name)
+              expect(page).to have_link("Invoice ##{item.id}", href: merchant_invoice_path(merchant1.id, item.id))
+            end
           end
           not_ready.each do |item|
             expect(page).not_to have_content(item.name)
