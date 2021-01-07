@@ -30,5 +30,14 @@ describe Merchant, type: :model do
 
       expect(merchant1.favorite_customers.to_set).to eq(Customer.offset(5).limit(5).to_set)
     end
+
+    it 'items_to_ship;' do
+      items = create_list(:item, 6, merchant: merchant1)
+      items.first(4).each do |item|
+        create(:invoice_item, item: item, status: 1)
+      end
+
+      expect(merchant1.items_to_ship.to_set).to eq(items.first(4).to_set)
+    end
   end
 end
