@@ -2,6 +2,8 @@ require 'faraday'
 require 'json'
 require 'pry'
 require 'repo'
+require './app/models/repo'
+
 
 module RepoSearch
 
@@ -17,8 +19,8 @@ module RepoSearch
         # response = Faraday.get("https://api.github.com#{url}"
         response = Faraday.get("https://api.github.com/repos/aetzion1/little-esty-shop")
         parsed = JSON.parse(response.body, symbolize_names: true)
-        binding.pry
-        Repo.new(parsed)
+        # Repo.new(parsed)
+        # parsed
     end
 end
 
