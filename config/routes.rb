@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index, :show] do
     resources :items, only: [:index]
     resources :invoices, only: [:index]
-    resources :dashboard, only: [:index]
+    resources :dashboard, only: [:index], path: '/dashboard'
   end
 end
