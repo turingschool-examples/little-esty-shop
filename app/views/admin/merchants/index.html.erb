@@ -4,7 +4,7 @@
   <h3>Enabled Merchants</h3>
   <ul>
     <% @merchants_enabled.each do |merchant| %>
-      <li><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Disable', admin_merchant_path(merchant, {merchant: {status: "disabled"}}), method: :patch %></li>
+      <li class='merchant-<%= merchant.id %>'><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Disable', admin_merchant_path(merchant, {merchant: {status: "disabled"}}), method: :patch %></li>
     <% end %>
   </ul>
 </section>
@@ -13,7 +13,7 @@
   <h3>Disabled Merchants</h3>
   <ul>
     <% @merchants_disabled.each do |merchant| %>
-      <li class='merchant'><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Enable', admin_merchant_path(merchant, {merchant: {status: "enabled"}}), method: :patch %></li>
+      <li class='merchant-<%= merchant.id %>'><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Enable', admin_merchant_path(merchant, {merchant: {status: "enabled"}}), method: :patch %></li>
     <% end %>
   </ul>
 </section>
@@ -22,7 +22,8 @@
   <h3>Top 5 Merchants by Revenue</h3>
   <ol>
     <% @top_5_merchants.each do |merchant| %>
-      <li class="merchant"><%= merchant.name %>: <%= number_to_currency(merchant.calc) %></li>
+      <li class="merchant"><%= merchant.name %>: <%= number_to_currency(merchant.total_revenue) %></li>
+        <p class="best-day">Top selling day was: <%= merchant.best_day %></p>
     <% end %>
   </ol>
 </section>

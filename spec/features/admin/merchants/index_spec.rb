@@ -1,5 +1,4 @@
 require 'rails_helper'
-include ActionView::Helpers::NumberHelper
 
 RSpec.describe 'Admin Merchants Index' do
   before :each do
@@ -41,7 +40,7 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to have_content("Disabled Merchants")
         expect(page).to have_content(@merchant_1.name)
         
-        first('.merchant').click_on('Enable')
+        first(".merchant-#{@merchant_2.id}").click_on('Enable')
         expect(page).not_to have_content(@merchant_2.name)
       end
       within('#merchants-enabled') do
@@ -85,14 +84,18 @@ RSpec.describe 'Admin Merchants Index' do
       invoice_item8 = create(:invoice_item, item: item7, invoice: invoice7, quantity: 1, unit_price: 110) # 110 rev
 
       visit admin_merchants_path
-      save_and_open_page
-
       within '#merchants-revenue' do
         expect(all('.merchant')[0].text).to eq("#{@merchant_1.name}: $300.00")
         expect(all('.merchant')[1].text).to eq("#{@merchant_4.name}: $200.00")
         expect(all('.merchant')[2].text).to eq("#{@merchant_6.name}: $120.00")
         expect(all('.merchant')[3].text).to eq("#{@merchant_5.name}: $100.00")
         expect(all('.merchant')[4].text).to eq("#{@merchant_3.name}: $80.00")
+
+        expect(all('.best-day')[0].text).to eq("Top selling day was: #{@merchant_1.best_day}")
+        expect(all('.best-day')[1].text).to eq("Top selling day was: #{@merchant_4.best_day}")
+        expect(all('.best-day')[2].text).to eq("Top selling day was: #{@merchant_6.best_day}")
+        expect(all('.best-day')[3].text).to eq("Top selling day was: #{@merchant_5.best_day}")
+        expect(all('.best-day')[4].text).to eq("Top selling day was: #{@merchant_3.best_day}")
       end
     end
   end
