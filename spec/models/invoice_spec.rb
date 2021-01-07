@@ -15,6 +15,19 @@ RSpec.describe Invoice, type: :model do
 
       expect(@invoice_1.date).to eq("Wednesday, Jan 25, 2012")
     end
+
+    it '#total_revenue' do
+      @merchant = create(:merchant)
+      @customer_1 = create(:customer)
+      @item = create(:item, merchant: @merchant)
+      @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
+      2.times do
+        create(:invoice_item, item: @item, unit_price: 25, invoice: @invoice_1, status: 1)
+      end
+
+
+      expect(@invoice_1.total_revenue).to eq(50)
+    end
   end
 
   describe 'class methods' do
@@ -47,7 +60,7 @@ RSpec.describe Invoice, type: :model do
       @invoice_item_6 = create(:invoice_item, status: 2, item: @item_1, invoice: @invoice_4)
 
       expect(Invoice.incomplete_invoices).to eq([@invoice_1, @invoice_2, @invoice_5])
-    end 
+    end
   end
-  
+
 end

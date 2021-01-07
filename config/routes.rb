@@ -3,10 +3,11 @@ Rails.application.routes.draw do
     resources :merchants
     resources :invoices
   end
-  
+
   resources :merchants do
     resources :items
     resources :invoices
+    resources :invoice_items, only: [:update]
     resources :dashboard, only: [:index]
   end
 
