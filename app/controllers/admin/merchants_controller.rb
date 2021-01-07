@@ -14,7 +14,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant.update(merchant_params)
-    if params[:merchant][:status]
+    if merchant_params[:status]
       redirect_to admin_merchants_path
     else
       flash.notice = "Merchant #{@merchant.name} was updated successfully!"
