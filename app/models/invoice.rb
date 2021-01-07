@@ -1,5 +1,7 @@
 class Invoice < ApplicationRecord
-  validates_presence_of :status, :customer_id, :merchant_id
+  validates_presence_of :customer_id, :merchant_id
+
+  enum status: ['cancelled', 'completed', 'in progress']
   
   belongs_to :customer
   belongs_to :merchant
