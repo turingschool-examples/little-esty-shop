@@ -17,3 +17,12 @@
     <% end %>
   </ul>
 </section>
+
+<section id="merchants-revenue">
+  <h3>Top 5 Merchants by Revenue</h3>
+  <ol>
+    <% @top_5_merchants.each do |merchant| %>
+      <li class="merchant"><%= merchant.name %>: <%= number_to_currency(merchant.calc) %></li>
+    <% end %>
+  </ol>
+</section>
