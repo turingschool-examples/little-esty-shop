@@ -5,10 +5,20 @@
 
 
 <h2>Top 5 Customers</h2>
-  <% @customers.each do |customer| %>
-    <section id="customer-<%= customer.id %>">
-    <ul>
-      <li><%= customer.first_name + " " + customer.last_name + " :#{customer.number_of_successful_transactions}" %></li>
-    </ul>
-  <% end %>
+<section id="top-customers">
+  <ul>
+    <% @customers.each do |customer| %>
+        <li id="customer-<%= customer.id %>"><%= customer.first_name + " " + customer.last_name + " :#{customer.number_of_successful_transactions}" %></li>
+    <% end %>
+  </ul>
+</section>
+
+
+<h2>Incomplete Invoices</h2>
+<section id="Incomplete Invoices">
+  <ul>
+    <% @incomplete_invoices.each do |invoice| %>
+      <li><%= invoice.id %></li>
+    <% end %>
+  </ul>
 </section>
