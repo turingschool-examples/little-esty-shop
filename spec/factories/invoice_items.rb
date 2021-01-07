@@ -6,4 +6,4 @@ FactoryBot.define do
     unit_price { Faker::Number.between(from: 1, to: 100) }
     status {["pending", "packaged", "shipped"].sample}
   end
-end 
+end
