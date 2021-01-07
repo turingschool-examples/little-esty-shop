@@ -27,8 +27,8 @@
       <td><%= invitem.item.name %></td>
       <td><%= invitem.quantity %></td>
       <td><%= invitem.unit_price %></td>
-      <td><%= form_with model: invitem.item, method: :patch, url: update_merchant_item_path(invitem.item_id, params: {invoice_id: @invoice.id, merchant_id: @invoice.merchant_id}), local: true do |f| %>
-          <%= f.select :status, enum_collection_for_select(Item.statuses), selected: invitem.item.status  %>
+      <td><%= form_with model: invitem, method: :patch, url: merchant_invoice_item_path(@invoice.merchant_id, invitem.id), local: true do |f| %>
+          <%= f.select :status, enum_collection_for_select(InvoiceItem.statuses), selected: invitem.status  %>
           <%= button_tag 'Submit' %>
           <% end %></td>
     </tr>
