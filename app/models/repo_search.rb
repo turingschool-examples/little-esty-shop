@@ -1,3 +1,8 @@
+require 'faraday'
+require 'json'
+require 'pry'
+require 'repo'
+
 module RepoSearch
 
     def repo
@@ -8,12 +13,15 @@ module RepoSearch
         get url("/repos/aetzion1/little-esty-shop/collaborators")
     end
     
-    def repo_info(url)
+    def repo_info#(url)
         # response = Faraday.get("https://api.github.com#{url}"
-        response = Faraday.get("https://api.github.com/repos/aetzion1/little-esty-shop"
+        response = Faraday.get("https://api.github.com/repos/aetzion1/little-esty-shop")
         parsed = JSON.parse(response.body, symbolize_names: true)
+        binding.pry
         parsed.map do |data|
             Repo.new(data)
+            # if data[0] == :name
+            # end
         end
     end
 end
