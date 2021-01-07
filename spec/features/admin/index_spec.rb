@@ -125,5 +125,11 @@ RSpec.describe "Admin Dashboard" do
         expect(i1).to appear_before(i2)
       end
     end
+    it "can see a corresponding date for each invoice" do
+      within(@incomplete_invoice_section) do
+        expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+        expect(page).to have_content(@invoice2.created_at.strftime("%A, %B %d, %Y"))
+      end
+    end
   end
 end
