@@ -76,7 +76,9 @@ RSpec.describe "Merchant Dashboard" do
           ready.each_with_index do |item, index|
             within "#item-#{index}" do
               expect(page).to have_content(item.name)
-              expect(page).to have_link("Invoice ##{item.id}", href: merchant_invoice_path(merchant1.id, item.id))
+              invoice = Invoice.find(item.id)
+              expect(page).to have_link("Invoice ##{invoice.id}", href: merchant_invoice_path(merchant1.id, invoice.id))
+              expect(page).to have_content(invoice.created_at.strftime("%A, %B %-d, %Y"))
             end
           end
           not_ready.each do |item|

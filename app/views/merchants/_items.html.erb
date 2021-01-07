@@ -2,6 +2,6 @@
 <ul>
   <% @merchant.items_to_ship.each_with_index do |item, index| %>
     <li id='item-<%= index %>'>
-      <%= item.name %> - <%= link_to "Invoice ##{item.invoice_id}", merchant_invoice_path(params[:id], item.invoice_id) %></li>
+      <%= item.name %> - <%= link_to "Invoice ##{item.invoice_id}", merchant_invoice_path(params[:id], item.invoice_id) %> - <%= format_date(item.invoice_created) %></li>
   <% end %>
 </ul>
