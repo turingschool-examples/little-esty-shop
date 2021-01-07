@@ -5,4 +5,8 @@ Rails.application.routes.draw do
     resources :items, only: [:index]
     resources :invoices, only: [:index]
   end
+
+  namespace :admin do 
+    resources :dashboard, only: [:index]
+  end
 end
