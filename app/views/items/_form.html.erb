@@ -1,4 +1,4 @@
-<%= form_with model: @item, method: method, url: merchant_item_path(@item.merchant_id, @item.id), action: "/merchants/#{@item.merchant_id}/items", local: true do |form| %>
+<%= form_with model: @item, method: method, url: path, action: "/merchants/#{@merchant.id}/items", local: true do |form| %>
   <%= form.label 'name:' %>
   <%= form.text_field :name %>
   <%= form.label 'unit price:' %>
