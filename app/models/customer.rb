@@ -3,4 +3,6 @@ class Customer < ApplicationRecord
                         :last_name
 
   has_many :invoices 
+  has_many :transactions, through: :invoices
+
 end
