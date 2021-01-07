@@ -7,19 +7,16 @@ class Admin::MerchantsController < ApplicationController
   end
   
   def show
-    
   end
 
   def edit
-    
   end
 
   def update
-    if params[:status]
-      @merchant.update(merchant_status_params)
+    @merchant.update(merchant_params)
+    if params[:merchant][:status]
       redirect_to admin_merchants_path
     else
-      @merchant.update(merchant_params)
       flash.notice = "Merchant #{@merchant.name} was updated successfully!"
       redirect_to admin_merchant_path(@merchant)
     end
@@ -35,9 +32,4 @@ class Admin::MerchantsController < ApplicationController
     params.require(:merchant).permit(:name, :status)
   end
   
-  def merchant_status_params
-    params.permit(:status)
-    #{ status: x[:status].to_i }
-  end
-
 end
