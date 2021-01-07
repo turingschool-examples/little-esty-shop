@@ -1,0 +1,24 @@
+<h1>This is the admin dashboard</h1>
+
+<%= link_to 'merchants', admin_merchants_path %>
+<%= link_to 'invoices', admin_invoices_path %>
+
+
+<h2>Top 5 Customers</h2>
+<section id="top-customers">
+  <ul>
+    <% @customers.each do |customer| %>
+        <li id="customer-<%= customer.id %>"><%= customer.first_name + " " + customer.last_name + " :#{customer.number_of_successful_transactions}" %></li>
+    <% end %>
+  </ul>
+</section>
+
+
+<h2>Incomplete Invoices</h2>
+<section id="incomplete-invoices">
+  <ul>
+    <% @incomplete_invoices.each do |invoice| %>
+      <li id="invoice-<%= invoice.id %>"><%= link_to invoice.id, admin_invoice_path(invoice.id) %> <%= invoice.created_at.strftime("%A, %B %d, %Y") %></li>
+    <% end %>
+  </ul>
+</section>
