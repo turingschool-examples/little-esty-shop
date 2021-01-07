@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index]
     resources :dashboard, only: [:index], path: '/dashboard'
   end
+
+  resources :items
+
+  resources :invoices
 end
