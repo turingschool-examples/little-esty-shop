@@ -443,16 +443,50 @@
         "lines": [
           1,
           null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/apis/github_api.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
           null
         ]
       },
       "/Users/alexosborne/turing/mod_2/projects/little-esty-shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1609982061
+    "timestamp": 1609983724
   }
 }

@@ -4,6 +4,6 @@ RSpec.describe 'As a user' do
   it "find the repo name" do
     visit "/api/github_api"
 
-    expect(response).to be_successful
+    expect(page).to have_content("aidenmendez/little-esty-shop")
   end
 end
