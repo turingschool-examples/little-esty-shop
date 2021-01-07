@@ -17,9 +17,9 @@ RSpec.describe "Merchant Items Index" do
 
       visit "merchant/#{@merchant1.id}/items"
 
-      expect(page).to have_content(@item1.name)
-      expect(page).to have_content(@item2.name)
-      expect(page).to have_content(@item3.name)
+      expect(page).to have_link(@item1.name)
+      expect(page).to have_link(@item2.name)
+      expect(page).to have_link(@item3.name)
       expect(page).not_to have_content(@item4.name)
     end
   end
