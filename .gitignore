@@ -27,6 +27,6 @@
 /config/master.key
 
 # Ignore Simplecov reports
-/coverage
+coverage
 
 .DS_Store
