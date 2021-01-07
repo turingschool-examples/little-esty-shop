@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LittleEtsyShop: <%= @page_title || "Admin Dashboard" %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+    <body>
+
+    <header>
+    <div class="header">
+        <h1>Little Esty Shop</h1>
+    </div>
+    </header>
+
+    <div class="topnav">
+        <h1>Admin Dashboard</h1>
+        <div class="topnav-right">
+            <a class="active" href="#dashboard">Dashboard</a>
+            <a href="#merchants">Merchants</a>
+            <a href="#invoices">Invoices</a>
+        </div>
+    </div>
+
+    <!-- before yield -->
+    <%= yield %>
+    <!-- after yield -->
+
+    </body>
+</html>
