@@ -9,11 +9,13 @@ describe "Admin Merchants Index Page" do
   end
 
   it "has a list of the name of each merchant in the system" do
-    expect(page).to have_content(@merchants[0].name)
-    expect(page).to have_content(@merchants[1].name)
-    expect(page).to have_content(@merchants[2].name)
-    expect(page).to have_content(@merchants[3].name)
-    expect(page).to have_content(@merchants[4].name)
+    within(page.find("all-merchants")) do
+      expect(page).to have_content(@merchants[0].name)
+      expect(page).to have_content(@merchants[1].name)
+      expect(page).to have_content(@merchants[2].name)
+      expect(page).to have_content(@merchants[3].name)
+      expect(page).to have_content(@merchants[4].name)
+    end
   end
 
 end
