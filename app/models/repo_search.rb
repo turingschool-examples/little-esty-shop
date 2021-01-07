@@ -18,11 +18,7 @@ module RepoSearch
         response = Faraday.get("https://api.github.com/repos/aetzion1/little-esty-shop")
         parsed = JSON.parse(response.body, symbolize_names: true)
         binding.pry
-        parsed.map do |data|
-            Repo.new(data)
-            # if data[0] == :name
-            # end
-        end
+        Repo.new(parsed)
     end
 end
 
