@@ -5,14 +5,6 @@ describe Customer, type: :model do
     it { should have_many :invoices }
   end
 
-  describe "The instance method:" do
-    it "name; concats first and last names" do
-      customer = create(:customer)
-
-      expect(customer.name).to eq("#{customer.first_name} #{customer.last_name}")
-    end
-  end
-
   describe 'class methods' do
     it ".favorite_customers" do
       create_list(:customer, 10)

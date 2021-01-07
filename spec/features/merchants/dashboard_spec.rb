@@ -51,11 +51,11 @@ RSpec.describe "Merchant Dashboard" do
           best_customers = Customer.last(5)
           not_best_customers = Customer.first(5)
           best_customers.each_with_index do |customer, index|
-            expect(page).to have_content(customer.name)
+            expect(page).to have_content("#{customer.first_name} #{customer.last_name}")
             expect(page).to have_content("#{index + 6} purchases")
           end
           not_best_customers.each do |customer|
-            expect(page).to_not have_content(customer.name)
+            expect(page).to_not have_content("#{customer.first_name} #{customer.last_name}")
           end
         end
       end
