@@ -59,6 +59,27 @@ RSpec.describe "Merchant Dashboard" do
           end
         end
       end
+
+      it 'items ready to ship' do
+        items = create_list(:item, 6, merchant: merchant1)
+        items.first(4).each do |item|
+          create(:invoice_item, item: item, status: 1)
+        end
+
+        visit dashboard_merchant_path(merchant1)
+
+        expect(page).to have_content("Items Ready to Ship")
+        within "#items_to_ship" do
+          ready = items.first(4)
+          not_ready = items.last(2)
+          ready.each do |item|
+            expect(page).to have_content(item.name)
+          end
+          not_ready.each do |item|
+            expect(page).not_to have_content(item.name)
+          end
+        end
+      end
     end
   end
 end
