@@ -3,7 +3,7 @@
 <section id="merchants-enabled">
   <ul>
     <% @merchants_enabled.each do |merchant| %>
-      <li><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Disable', admin_merchant_path(merchant, status: 0), method: :patch %></li>
+      <li><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Disable', admin_merchant_path(merchant, status: 'disabled'), method: :patch %></li>
     <% end %>
   </ul>
 </section>
@@ -11,7 +11,7 @@
 <section id="merchants-disabled">
   <ul>
     <% @merchants_disabled.each do |merchant| %>
-      <li class='merchant'><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Enable', admin_merchant_path(merchant, status: 1), method: :patch %></li>
+      <li class='merchant'><%= link_to merchant.name, admin_merchant_path(merchant) %> <%= button_to 'Enable', admin_merchant_path(merchant, status: 'enabled'), method: :patch %></li>
     <% end %>
   </ul>
 </section>

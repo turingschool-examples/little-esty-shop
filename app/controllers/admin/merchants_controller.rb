@@ -16,7 +16,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     if params[:status]
-      @merchant.update(status: params[:status].to_i)
+      @merchant.update(merchant_status_params)
       redirect_to admin_merchants_path
     else
       @merchant.update(merchant_params)
@@ -37,5 +37,7 @@ class Admin::MerchantsController < ApplicationController
   
   def merchant_status_params
     params.permit(:status)
+    #{ status: x[:status].to_i }
   end
+
 end
