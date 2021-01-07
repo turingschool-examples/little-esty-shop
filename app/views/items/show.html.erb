@@ -1,0 +1,11 @@
+<ul class="navbar">
+  <li><%= link_to 'Edit Item', edit_merchant_item_path(@item.merchant_id, @item.id) %></li>
+</ul>
+<section>
+  <ul>
+    <li><h3>Item Show Page </h3></li>
+    <li><%= @item.name %>
+      <%= @item.unit_price %></li>
+    <li><%= @item.description %></li>
+  </ul>
+</section>
