@@ -7,9 +7,12 @@ describe Invoice, type: :model do
 
   describe "class methods" do
     it "incomplete_invoices" do
-      complete_invoices = create(:invoice, status:"completed")
-      cancelled_invoices = create(:invoice, status:"cancelled")
-      in_progress_invoices = create(:invoice, status:"in progress")
+      complete_invoices = []
+      2.times { complete_invoices << create(:invoice, status:"completed") }
+      cancelled_invoices = []
+      2.times { cancelled_invoices << create(:invoice, status:"cancelled") }
+      in_progress_invoices = []
+      2.times { in_progress_invoices << create(:invoice, status:"in progress") }
       expect(Invoice.incomplete_invoices.to_a).to eq(in_progress_invoices)
     end
   end
