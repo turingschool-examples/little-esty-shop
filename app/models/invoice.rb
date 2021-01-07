@@ -6,4 +6,8 @@ class Invoice < ApplicationRecord
   belongs_to :customer
   belongs_to :merchant
   enum status: ['in progress', 'completed', 'cancelled']
+
+  def self.incomplete_invoices
+    Invoice.where(status: "in progress")
+  end
 end
