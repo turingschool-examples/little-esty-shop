@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :merchants
     resources :invoices
+    resources :invoice_items, only: [:update]
   end
 
   resources :merchants do
