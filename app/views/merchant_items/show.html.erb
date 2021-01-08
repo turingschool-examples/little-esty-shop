@@ -1,3 +1,5 @@
 <h1><%= @item.name %><h1>
 <h2><%= @item.unit_price %></h2>
 <h3><%= @item.description %></h3>
+
+<%= link_to "Update This Item", "/merchant/#{@item.merchant_id}/items/#{@item.id}/edit" %>
