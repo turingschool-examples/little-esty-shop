@@ -2,3 +2,9 @@
 
 <%= link_to('Items', "/merchants/#{@merchant.id}/items") %>
 <%= link_to('Invoices', "/merchants/#{@merchant.id}/invoices") %>
+
+<ul class='merchant-top-5-customers-list'>
+  <% @merchant.top_five_customers.each do |customer| %>
+    <li><%= customer.first_name %>: <%= customer.succesful_transactions %></li>
+  <% end %>
+</ul>
