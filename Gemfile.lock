@@ -45,6 +45,9 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
+    bacon (1.2.0)
+    bacon-bits (0.1.0)
+      bacon (>= 1.1.0)
     bindex (0.8.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
@@ -74,6 +77,7 @@ GEM
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hirb (0.7.3)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
@@ -96,6 +100,9 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.2)
+    mocha (1.12.0)
+    mocha-on-bacon (0.2.3)
+      mocha (>= 0.13.0)
     msgpack (1.3.3)
     nio4r (2.5.4)
     nokogiri (1.10.10)
@@ -211,12 +218,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bacon (~> 1.2)
+  bacon-bits (~> 0.1.0)
   bootsnap (>= 1.1.0)
   capybara
   coffee-rails (~> 4.2)
+  hirb (~> 0.7.3)
   jbuilder (~> 2.5)
   launchy
   listen (>= 3.0.5, < 3.2)
+  mocha (~> 1.12)
+  mocha-on-bacon (~> 0.2.3)
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)
