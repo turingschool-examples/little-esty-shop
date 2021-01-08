@@ -4,7 +4,6 @@ RSpec.describe 'Admin Merchants Show' do
   describe 'Admin Merchant Edit Page' do
     it 'can fill in the new form' do
       visit new_admin_merchant_path
-      save_and_open_page
       fill_in 'Name', with: 'Test'
       click_on 'Create Merchant'
 
