@@ -6,6 +6,7 @@ class AdminController < ApplicationController
     layout 'admin'
 
     def index
-        @repo_name = repo_info.name
+        @repo_name = repo_info[:name]
+        # @collaborators = collaborator_info
     end
 end
