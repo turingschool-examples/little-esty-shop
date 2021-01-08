@@ -14,9 +14,9 @@ describe "Admin Merchants Edit Page" do
     added_text = "32yq8fgqadj"
     fill_in "name", with: added_text
     click_on "Submit"
-    
+
     expect(current_path).to eq(admin_merchant_path(@merchant.id))
-    expect(page).to have_content("Successfully Updated Info")
+    expect(page.find("#flash-notice")).to have_content("Successfully Updated Info")
     expect(page).to have_content(added_text)
   end
 end
