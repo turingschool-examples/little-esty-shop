@@ -69,7 +69,7 @@ RSpec.describe 'merchants invoices index page', type: :feature do
 
       expect(page).to have_content(@invoice_9.id)
       expect(page).to have_content(@invoice_9.status)
-      expect(page).to have_content(@invoice_9.created_at.strftime('%A, %b %d %Y'))
+      expect(page).to have_content(@invoice_9.date)
     end
 
     it 'can show customer info for invoice' do
