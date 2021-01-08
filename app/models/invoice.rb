@@ -23,3 +23,4 @@ class Invoice < ApplicationRecord
     .distinct
   end
 end
+
