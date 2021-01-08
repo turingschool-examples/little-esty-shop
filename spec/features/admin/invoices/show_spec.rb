@@ -12,8 +12,10 @@ describe 'As an visitor' do
       @invoice_3 = create(:invoice, customer: @customer_1, merchant: @merchant)
       
       @item = create(:item, merchant: @merchant)
-
-      @invoice_item = create(:invoice_item, item: @item, invoice: @invoice_1)
+      @item2 = create(:item, merchant: @merchant)
+      
+      @invoice_item = create(:invoice_item, item: @item, invoice: @invoice_1, status: 0)
+      @invoice_item2 = create(:invoice_item, item: @item2, invoice: @invoice_1, status: 0)
     end
 
     it 'I see the invoices attributes' do
@@ -38,14 +40,30 @@ describe 'As an visitor' do
       end
     end
 
-    xit 'I can update the invoice & see its information' do
+    it 'I can update the invoice & see its information' do
       visit admin_invoice_path(@invoice_1)
 
+      expect(@invoice_item.status).to eq("pending")
+
       within("#item-info") do
-        select("packaged", :from => :status)
-        save_and_open_page
-        click_on "Submit"
+        within("#form-#{@invoice_item.id}") do 
+          select("Shipped", :from => "invoice_item[status]")
+          click_button "Submit"
+        end
       end
+
+      expect(@invoice_item.reload.status).to eq("shipped")
+      expect(@invoice_item2.reload.status).to eq("pending")
+
+      within("#item-info") do   
+        within("#form-#{@invoice_item2.id}") do 
+          select("Packaged", :from => "invoice_item[status]")
+          click_button "Submit"
+        end
+      end
+
+      expect(@invoice_item.reload.status).to eq("shipped")
+      expect(@invoice_item2.reload.status).to eq("packaged")
     end
   end
 end
