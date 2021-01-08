@@ -23,4 +23,10 @@ RSpec.describe Invoice, type: :model do
     expect(Invoice.incomplete_invoices).to eq([@invoice_1.id])
     end
   end
+  describe "instance methods" do
+    it "formats datetime"
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, merchant_id: @merchant.id, status: 0, created_at: 2012-03-25 09:54:09)
+
+    expect(@invoice_1.datetime).to eq("March 25, 2019")
+  end
 end
