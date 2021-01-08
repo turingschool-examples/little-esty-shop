@@ -5,7 +5,7 @@ RSpec.describe 'as an admin', type: :feature do
     before(:each) do
       @merchant = Merchant.create!(name: 'House of thingys')
       @customer = Customer.create!(first_name: 'Hooman', last_name:"Mcbuythings")
-      @invoice_1 = Invoice.create!(customer_id: @customer.id, merchant_id: @merchant.id, status: 0)
+      @invoice_1 = Invoice.create!(customer_id: @customer.id, merchant_id: @merchant.id, status: 0, created_at: 2012-03-25)
       @invoice_2 = Invoice.create!(customer_id: @customer.id, merchant_id: @merchant.id, status: 0)
       @invoice_3 = Invoice.create!(customer_id: @customer.id, merchant_id: @merchant.id, status: 1)
     end
@@ -15,6 +15,8 @@ RSpec.describe 'as an admin', type: :feature do
 
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_1.status)
+      expect(page).to have_content(@invoice_1.status)
+      expect(page).to have_content("Friday, January 08, 2021")
     end
   end
 end
