@@ -22,13 +22,5 @@ class Invoice < ApplicationRecord
     .where.not("invoice_items.status = ?", 2)
     .distinct
   end
-
-  def self.best_day
-    joins(:invoice_items)
-    .select('invoices.created_at AS created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
-    .group('invoices.created_at')
-    .max
-    .date
-  end
 end
 
