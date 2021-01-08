@@ -18,5 +18,13 @@ describe 'As an visitor' do
       expect(page).to have_content(@invoice_1.status)
       expect(page).to have_content(@invoice_1.date)
     end
+
+    it 'I see the customer info pertaining to the invoice' do
+      visit admin_invoice_path(@invoice_1)
+
+      expect(page).to have_content("Customer: #{@invoice_1.customer_name}")
+      expect(page).to have_content("Address: 123 Drury Ln")
+      expect(page).to have_content("Nowhere, ID 10001")
+    end
   end
 end
