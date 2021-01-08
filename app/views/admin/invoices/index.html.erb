@@ -1,5 +1,8 @@
 <h1>Admin Invoices Index</h1>
 
-<% @invoices.each do |invoice| %>
-  <%= invoice.id %>
-<% end %>
+
+<section id="all-invoices">
+  <% @invoices.each do |invoice| %>
+    <p id="invoice-<%= invoice.id %>"><%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %></p>
+  <% end %>
+</section>
