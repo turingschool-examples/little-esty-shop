@@ -69,13 +69,13 @@ RSpec.describe 'merchants invoices index page', type: :feature do
 
       expect(page).to have_content(@invoice_9.id)
       expect(page).to have_content(@invoice_9.status)
-      expect(page).to have_content(@invoice_9.created_at.strftime('%A, %b %d %Y'))
+      expect(page).to have_content(@invoice_9.date)
     end
 
     it 'can show customer info for invoice' do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
 
-      expect(page).to have_content("Customer: #{@invoice_9.customer.last_name}, #{@invoice_9.customer.first_name}")
+      expect(page).to have_content("Customer: #{@invoice_9.customer_name}")
       expect(page).to have_content("Address: 123 Drury Ln")
       expect(page).to have_content("Nowhere, ID 10001")
     end

@@ -7,10 +7,6 @@ class Invoice < ApplicationRecord
 
   enum status: [ :cancelled, :in_progress, :completed ]
 
-  def date
-    created_at.strftime("%A, %b %d, %Y")
-  end
-
   def total_revenue
     invoice_items.sum(:unit_price)
   end
@@ -21,6 +17,10 @@ class Invoice < ApplicationRecord
     .where.not(status: 2)
     .where.not("invoice_items.status = ?", 2)
     .distinct
+  end
+
+  def customer_name
+    customer.name
   end
 end
 
