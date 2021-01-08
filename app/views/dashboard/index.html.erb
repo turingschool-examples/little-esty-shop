@@ -18,6 +18,7 @@
 <section id = "items_ready_to_ship" >
   <p><% @merchant.items_to_ship.each do |item| %>
         <%= item.name %> - Invoice #<%= link_to "#{item.invoice_ids}", "/merchant/#{@merchant.id}/invoices/#{item.id}" %><br>
+        <%= item.created_at.strftime("%A, %B %-d, %Y") %> 
      <% end %>
   </p>
 </section>
