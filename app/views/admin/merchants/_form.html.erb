@@ -1,0 +1,3 @@
+<%= form_tag(admin_merchant_path(@merchant.id), method: edit ? "patch" : :post") %>
+Name:
+<%= text_field_tag :name, value: edit ? @merchant.name : nil %>
