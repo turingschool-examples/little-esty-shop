@@ -7,4 +7,12 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: [:"in progress", :completed, :cancelled]
+
+  # def self.successful_transactions
+    
+  # end
+
+  # def self.happy_customers
+  #   where(status: 1).pluck(:customer_id).uniq
+  # end
 end

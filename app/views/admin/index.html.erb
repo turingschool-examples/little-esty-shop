@@ -1,1 +1,10 @@
 <p> my page </p>
+
+<section id="top-customers">
+    <h3>Top Customers</h3>
+    <ol>
+        <% @top_five.each do |customer| %>
+            <li class='customer'> <%= customer.first_name %> <%= customer.last_name %> - <%= customer.successful_count %> purchases</li>
+        <% end %>
+    </ol>
+</section>
