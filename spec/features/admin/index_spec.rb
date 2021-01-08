@@ -1,26 +1,27 @@
 require 'rails_helper'
+require 'factory_bot'
 
 RSpec.describe "the Admin Dashboard" do
     # before { visit '/admin' }
     # page.should render_template("layouts/admin")
     before :each do
-        @merchant = create(:merchant)
+        @merchant = FactoryBot.create(:merchant)
   
-        @customer_1 = create(:customer)
-        @customer_2 = create(:customer)
-        @customer_3 = create(:customer)
-        @customer_4 = create(:customer)
-        @customer_5 = create(:customer)
-        @customer_6 = create(:customer)
+        @customer_1 = FactoryBot.create(:customer)
+        @customer_2 = FactoryBot.create(:customer)
+        @customer_3 = FactoryBot.create(:customer)
+        @customer_4 = FactoryBot.create(:customer)
+        @customer_5 = FactoryBot.create(:customer)
+        @customer_6 = FactoryBot.create(:customer)
         
         Customer.all.each do |customer|
-          create_list(:invoice, 1, customer: customer, merchant: @merchant)
+            FactoryBot.create_list(:invoice, 1, customer: customer, merchant: @merchant)
         end
   
         customers = [@customer_1, @customer_2, @customer_3, @customer_4, @customer_5, @customer_6]
   
         customers.size.times do |i|
-          create_list(:transaction, (i+1), invoice: customers[i].invoices.first, result: 1)
+            FactoryBot.create_list(:transaction, (i+1), invoice: customers[i].invoices.first, result: 1)
         end
     end
 
