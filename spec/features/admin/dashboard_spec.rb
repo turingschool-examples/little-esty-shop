@@ -75,6 +75,7 @@ RSpec.describe 'Admin Dashboard' do
 
       expect(current_path).to eq(admin_invoice_path(@invoice1.id))
     end
+    
     it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
       visit admin_root_path
 
