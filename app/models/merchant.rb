@@ -8,4 +8,9 @@ class Merchant < ApplicationRecord
   # def favorite_customers
   #
   # end
+
+  def items_to_ship
+    item_ids = InvoiceItem.where(status: 0).pluck(:item_id)
+    Item.find(item_ids)
+  end
 end

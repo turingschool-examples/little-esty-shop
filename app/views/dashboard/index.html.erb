@@ -8,3 +8,10 @@
     </ul>
   </nav>
 </div>
+
+<p><section id = "items_ready_to_ship" >
+  <% @merchant.items_to_ship.each do |item| %>
+    <%= item.name %>
+    <%= item.invoice_ids %>
+  <% end %>
+</section></p>
