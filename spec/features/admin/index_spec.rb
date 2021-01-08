@@ -23,4 +23,13 @@ RSpec.describe "the Admin Dashboard" do
         end
     end
 
+    it "I see the names of the top 5 customers (no. transactions) names and number" do
+        visit '/admin'
+
+        expect(page).to have_content("Top Customers")
+        expect(page).to have_content("Top Customers")
+
+    end
+
+
 end
