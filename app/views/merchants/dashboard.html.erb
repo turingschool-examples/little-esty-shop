@@ -5,6 +5,6 @@
 
 <ul class='merchant-top-5-customers-list'>
   <% @merchant.top_five_customers.each do |customer| %>
-    <li><%= customer.first_name %>: <%= customer.succesful_transactions %></li>
+    <li><%= customer.first_name %>: <%= customer.successful_transactions %></li>
   <% end %>
 </ul>

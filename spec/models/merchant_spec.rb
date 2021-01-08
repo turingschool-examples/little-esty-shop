@@ -60,7 +60,7 @@ RSpec.describe Merchant, type: :model do
       end
 
       actual_successful_transaction_counts = amazon.top_five_customers.map do |customer|
-        customer.succesful_transactions
+        customer.successful_transactions
       end
 
       expect(actual_names).to eq(expected_names)
