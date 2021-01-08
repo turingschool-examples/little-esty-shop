@@ -29,7 +29,7 @@ describe 'As an Admin' do
     it 'I see a section for Incomplete Invoices' do
 
     visit admin_index_path
-    
+
 
     expect(page).to have_content(@invoice_1.id)
     expect(page).to have_content(@invoice_4.id)
