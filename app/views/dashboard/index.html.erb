@@ -9,9 +9,15 @@
   </nav>
 </div>
 
-<p><section id = "items_ready_to_ship" >
-  <% @merchant.items_to_ship.each do |item| %>
-    <%= item.name %>
-    <%= item.invoice_ids %>
-  <% end %>
-</section></p>
+<body>
+  <div class="row">
+    <p class='mr-auto col-sm-5'>Incomplete Invoices</p>
+  </div>
+</body>
+
+<section id = "items_ready_to_ship" >
+  <p><% @merchant.items_to_ship.each do |item| %>
+        <%= item.name %> - Invoice #<%= item.invoice_ids %><br>
+     <% end %>
+  </p>
+</section>
