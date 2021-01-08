@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchants items index page', type: :feature do
+RSpec.describe 'merchants invoices index page', type: :feature do
   describe 'as a merchant' do
     before(:each) do
       Merchant.destroy_all
@@ -64,44 +64,44 @@ RSpec.describe 'merchants items index page', type: :feature do
       end
     end
 
-    it 'can list all item names for specific merchant' do
-      visit merchant_items_path(@merchant)
-      expected = Item.where(merchant: @merchant).pluck(:name)
-      
-      expect(page).to have_content("#{expected[0]}")
-      expect(page).to have_content("#{expected[1]}")
-      expect(page).to have_content("#{expected[2]}")
-      expect(page).to have_link("#{expected[0]}")
+    it 'can show all that merchants invoice attributes' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+
+      expect(page).to have_content(@invoice_9.id)
+      expect(page).to have_content(@invoice_9.status)
+      expect(page).to have_content(@invoice_9.created_at.strftime('%A, %b %d %Y'))
     end
 
-    it 'my page has sections for enabled and disabled items and each item has a button that changes its status' do
-      item = Item.first
+    it 'can show customer info for invoice' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
 
-      visit merchant_items_path(@merchant)
-
-      within('#items-disabled') do
-        expect(page).to have_content(item.name)
-        click_on(id: "btn-enable-#{item.id}")
-        expect(current_path).to eq(merchant_items_path(@merchant))
-      end
-
-      within('#items-enabled') do
-        expect(page).to have_content(item.name)
-      end
+      expect(page).to have_content("Customer: #{@invoice_9.customer.last_name}, #{@invoice_9.customer.first_name}")
+      expect(page).to have_content("Address: 123 Drury Ln")
+      expect(page).to have_content("Nowhere, ID 10001")
     end
 
-    it 'has a link to create new item and when a new item is created it is shown on the page' do
-      visit merchant_items_path(@merchant)
-
-      click_link('New Item')
-      expect(current_path).to eq(new_merchant_item_path(@merchant))
-      fill_in 'item_name', with: 'New Item'
-      fill_in 'item_unit_price', with: 120
-      fill_in 'item_description', with: 'This item is very new and special and cool'
-      click_button 'Create Item'
-
-      expect(current_path).to eq(merchant_items_path(@merchant))
-      expect(page).to have_content('New Item')
+    it 'can show my items on the invoice' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+      invoice_item = @invoice_9.invoice_items.first
+      expect(page).to have_content("#{invoice_item.item.name}")
+      expect(page).to have_content("#{invoice_item.quantity}")
+      expect(page).to have_content("#{invoice_item.unit_price}")
     end
+
+    it 'can show total revenue for that invoice' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+
+      expect(page).to have_content("Total Revenue: #{@invoice_9.total_revenue}")
+    end
+
+    xit 'can enable/disable status of item' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+      save_and_open_page
+      expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")
+
+      click_on 'Submit'
+      expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")
+    end
+
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchants items index page', type: :feature do
+RSpec.describe 'merchants invoices index page', type: :feature do
   describe 'as a merchant' do
     before(:each) do
       Merchant.destroy_all
@@ -64,44 +64,12 @@ RSpec.describe 'merchants items index page', type: :feature do
       end
     end
 
-    it 'can list all item names for specific merchant' do
-      visit merchant_items_path(@merchant)
-      expected = Item.where(merchant: @merchant).pluck(:name)
-      
-      expect(page).to have_content("#{expected[0]}")
-      expect(page).to have_content("#{expected[1]}")
-      expect(page).to have_content("#{expected[2]}")
-      expect(page).to have_link("#{expected[0]}")
+    it 'can show all that merchants invoices, with a link to merchants invoice show page' do
+      visit merchant_invoices_path(@merchant)
+
+      expect(page).to have_content(@invoice_9.id)
+      expect(page).to have_link("#{@invoice_9.id}")
     end
 
-    it 'my page has sections for enabled and disabled items and each item has a button that changes its status' do
-      item = Item.first
-
-      visit merchant_items_path(@merchant)
-
-      within('#items-disabled') do
-        expect(page).to have_content(item.name)
-        click_on(id: "btn-enable-#{item.id}")
-        expect(current_path).to eq(merchant_items_path(@merchant))
-      end
-
-      within('#items-enabled') do
-        expect(page).to have_content(item.name)
-      end
-    end
-
-    it 'has a link to create new item and when a new item is created it is shown on the page' do
-      visit merchant_items_path(@merchant)
-
-      click_link('New Item')
-      expect(current_path).to eq(new_merchant_item_path(@merchant))
-      fill_in 'item_name', with: 'New Item'
-      fill_in 'item_unit_price', with: 120
-      fill_in 'item_description', with: 'This item is very new and special and cool'
-      click_button 'Create Item'
-
-      expect(current_path).to eq(merchant_items_path(@merchant))
-      expect(page).to have_content('New Item')
-    end
   end
 end
