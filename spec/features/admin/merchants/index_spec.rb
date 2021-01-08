@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Admin Merchants Index Page" do
-
   before :each do
     @merchants = []
     5.times {@merchants << create(:merchant) }
@@ -23,7 +22,7 @@ describe "Admin Merchants Index Page" do
       click_on @merchants[0].name
       expect(current_path).to eq(admin_merchant_path(@merchants[0].id))
       visit "/admin/merchants"
-      click_on @merchants[1].name 
+      click_on @merchants[1].name
       expect(current_path).to eq(admin_merchant_path(@merchants[1].id))
     end
   end
