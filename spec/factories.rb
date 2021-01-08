@@ -9,14 +9,14 @@ FactoryBot.define do
     end
 
     factory :invoice do
-        status { Faker::Number.between(from: 0, to: 2) }
+        status { [0, 1, 2].sample }
     end
 
     factory :transaction do
-        credit_card_number { Faker::Number.number(digits: 16) }
-        credit_card_expiration_date { Faker::Date.between(from: Date.today, to: 1.year.from_now) }
-        result { Faker::Number.between(from: 0, to: 1) }
         invoice
+        credit_card_number { Faker::Number.number(digits: 16).to_s }
+        credit_card_expiration_date { Faker::Date.between(from: Date.today, to: 1.year.from_now) }
+        result { [0, 1].sample }
     end    
     
 end
