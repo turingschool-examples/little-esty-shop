@@ -12,7 +12,7 @@ RSpec.describe "Items Index" do
       visit merchant_items_path(merchant1)
 
       merchant1.items.each do |item|
-        expect(page).to have_content(item.name)
+        expect(page).to have_link(item.name, href: merchant_item_path(merchant1, item))
       end
       merchant2.items.each do |item|
         expect(page).not_to have_content(item.name)
