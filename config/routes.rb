@@ -5,14 +5,14 @@ Rails.application.routes.draw do
       get 'dashboard'
     end
     scope module: "merchants" do
-      resources :items, only: [:index]
+      resources :items, only: [:index, :show]
       resources :invoices, only: [:index, :show]
     end
   end
 
-  get '/admin', to: 'admins#dashboard' 
-  shallow do 
-    namespace :admin do 
+  get '/admin', to: 'admins#dashboard'
+  shallow do
+    namespace :admin do
       resources :merchants, :invoices
 
     end

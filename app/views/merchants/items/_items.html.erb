@@ -1,0 +1,3 @@
+<ul><% @items.each do |item| %>
+  <li><%= link_to item.name, merchant_item_path(params[:merchant_id], item) %></li>
+<% end %></ul>
