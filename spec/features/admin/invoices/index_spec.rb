@@ -19,7 +19,11 @@ RSpec.describe 'As an admin', type: :feature do
     end
 
     it 'each ID links to the admin invoice show page' do
-      
+      visit admin_invoices_path
+
+      click_on @invoice_1.id
+
+      expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
     end
   end
 end
