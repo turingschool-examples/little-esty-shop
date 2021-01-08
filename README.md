@@ -1,5 +1,10 @@
 # Little Esty Shop
 
+## Getting Started
+### Database Design
+
+![database design](/lib/assets/db_design.jpeg)
+
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
