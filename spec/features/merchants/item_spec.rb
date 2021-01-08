@@ -6,11 +6,20 @@ RSpec.describe "Items Index" do
       merchant1 = create(:merchant)
       item = create(:item, merchant: merchant1)
 
-      visit merchant_item_path(merchant1, item)
+      visit item_path(item)
 
       expect(page).to have_content(item.name)
       expect(page).to have_content("Description: #{item.description}")
       expect(page).to have_content("Price: #{item.unit_price}")
+    end
+
+    it "an update button" do
+      merchant1 = create(:merchant)
+      item = create(:item, merchant: merchant1)
+
+      visit item_path(item)
+
+      expect(page).to have_link("Update", href: edit_item_path(item))
     end
   end
 end
