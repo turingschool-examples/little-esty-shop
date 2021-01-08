@@ -27,6 +27,11 @@ RSpec.describe 'Admin Merchants Index' do
 
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
     end
+    it 'can have a link to a create page' do
+      visit admin_merchants_path
+      
+      expect(page).to have_link("Create New Merchant")
+    end
     it 'can disable and enable merchants' do
       visit admin_merchants_path
 
