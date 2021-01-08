@@ -1,4 +1,9 @@
 <h1> You are on Admin Dashboard</h1>
+<h3><%= link_to "Merchants", '/admin/merchants' %></h3>
+<h3><%= link_to "Invoices", '/admin/invoices'  %></h3>
 
-<h6><%= link_to "Merchants", '/admin/merchants' %></h6>
-<h6><%= link_to "Invoices", '/admin/invoices'  %></h6>
+
+<h3> Incomplete Invoices</h3>
+<% @invoices.each do |invoice| %>
+  <li><%= link_to "#{invoice.invoice_id}", admin_invoice_path(invoice.invoice_id) %></li>
+<% end %>

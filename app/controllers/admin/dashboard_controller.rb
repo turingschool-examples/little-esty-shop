@@ -1,8 +1,5 @@
 class Admin::DashboardController < ApplicationController
-  # def dashboard
-    
-  # end
   def index
-    
+    @invoices = Invoice.not_shipped
   end
 end

@@ -2,24 +2,50 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard' do
   describe 'As an admin user' do
-    #  before(:each) do
-    #   @app_1 = create(:application, status: 'Pending')
-    #   @pet_1 = create(:pet, name: 'Bruiser')
-    #   @pet_2 = create(:pet, name: 'Blanche')
-    #   @pet_3 = create(:pet, name: 'Bowwow')
-    # end
+   before(:each) do
+      # Customers:
+      @sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
+      @joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
+      @billy    = Customer.create!(first_name: 'Billy', last_name: 'Joel')
+      @steve    = Customer.create!(first_name: 'Steve', last_name: 'Carrell')
+      @frank    = Customer.create!(first_name: 'Frank', last_name: 'Sinatra')
+      @Jon      = Customer.create!(first_name: 'Jon', last_name: 'Travolta')
+      # Merchants:
+      @amazon   = Merchant.create!(name: 'Amazon')
+      @alibaba  = Merchant.create!(name: 'Alibaba')
+      # Invoices:
+      @invoice1 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @amazon.id)
+      @invoice2 = Invoice.create!(status: 0, customer_id: @joel.id, merchant_id: @alibaba.id)
+      @invoice3 = Invoice.create!(status: 0, customer_id: @billy.id, merchant_id: @alibaba.id)
+      @invoice4 = Invoice.create!(status: 0, customer_id: @steve.id, merchant_id: @amazon.id)
+      @invoice5 = Invoice.create!(status: 0, customer_id: @frank.id, merchant_id: @alibaba.id)
+      @invoice6 = Invoice.create!(status: 0, customer_id: @joel.id, merchant_id: @alibaba.id)
+      @invoice7 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @alibaba.id)
+      # Transactions:
+      @tx1      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 0, invoice_id: @invoice2.id,)
+      @tx2      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 1, invoice_id: @invoice1.id,)
+      @tx3      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 0, invoice_id: @invoice3.id,)
+      @tx4      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 0, invoice_id: @invoice4.id,)
+      @tx5      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 0, invoice_id: @invoice5.id,)
+      @tx6      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 0, invoice_id: @invoice5.id,)
+      @tx7      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 1, invoice_id: @invoice6.id,)
+      @tx8      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 0, invoice_id: @invoice7.id,)
+      # Items:
+      @candle   = Item.create!(name: 'Lavender Candle', description: '8oz Soy Candle', unit_price: 7.0, merchant_id: @amazon.id)
+      @backpack = Item.create!(name: 'Camo Backpack', description: 'Double Zip Backpack', unit_price: 15.5, merchant_id: @alibaba.id)
+      # InvoiceItems:
+      @invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: @invoice1.id, item_id: @candle.id)
+      @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @backpack.id)
+    end
 
     it "when I visit the admin dashboard I see a header" do 
-
-      # visit "/admin"
       visit admin_root_path
 
       expect(page).to have_content("Admin Dashboard")
     end
   
     it 'I see a link to the admin merchants and invoices index' do
-      # visit admin_path
-       visit admin_root_path
+      visit admin_root_path
 
       expect(page).to have_link('Merchants')
       expect(page).to have_link('Invoices')
@@ -28,29 +54,25 @@ RSpec.describe 'Admin Dashboard' do
 
       expect(current_path).to eq(admin_merchants_path)
 
-      # visit admin_path
-       visit admin_root_path
+      visit admin_root_path
 
       click_link 'Invoices'
 
       expect(current_path).to eq(admin_invoices_path)
     end
-    # it "can see the names of top 5 customers with number of succesful transactions " do 
 
+    it 'I see a list of all the ids of the invoices whose items have not been shipped and the invoices link to their admin page' do
+      visit admin_root_path
 
+      expect(page).to have_content('Incomplete Invoices')
+      expect(page).to have_content(@invoice1.id)
+      expect(page).to_not have_content(@invoice2.id)
+      
+      expect(page).to have_link(@invoice1.id)
+      
+      click_link(@invoice1.id)
 
-    #   # visit admin_path 
-    #    visit admin_root_path
-
-
-    #   expect(page).to 
-
-    # end
-
-# When I visit the admin dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
+      expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+    end
   end 
 end 
