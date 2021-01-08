@@ -13,8 +13,4 @@ class Invoice < ApplicationRecord
   def self.not_shipped
     Invoice.joins(:invoice_items).where.not('invoice_items.status = 2').distinct(:id).order(created_at: :asc)
   end
-
-  def method_name
-    
-  end
 end
