@@ -6,7 +6,7 @@
   <h3>Top 5 Customers</h3>
   <ol>
     <% @top_five_customers.each do |customer| %>
-      <li class='customer'><%= customer.first_name %> - <%= customer.successful_purchases %> Purchases</li>
+      <li class='customer'><%= customer.name %> - <%= customer.successful_purchases %> Purchases</li>
     <% end %>
   </ol>
 </section>
