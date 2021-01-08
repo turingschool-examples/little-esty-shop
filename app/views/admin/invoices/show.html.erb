@@ -27,7 +27,7 @@
       <td><%= invitem.item.name %></td>
       <td><%= invitem.quantity %></td>
       <td><%= invitem.unit_price %></td>
-      <td>
+      <td id="form-<%= invitem.id %>">
         <%= form_with(model: [:admin, invitem], method: :patch, url: admin_invoice_item_path(invitem), local: true) do |f| %>
         <%= f.select(:status, enum_collection_for_select(InvoiceItem.statuses), selected: invitem.status) %>
         <%= button_tag 'Submit' %>
