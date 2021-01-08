@@ -15,6 +15,7 @@ namespace :load_csv do
   end
 
   task :merchants => :environment do
+    Merchant.destroy_all
     CSV.foreach('db/data/merchants.csv',:headers => true) do |row|
       Merchant.create!({id: row[0],
                        name: row[1],
@@ -26,6 +27,7 @@ namespace :load_csv do
 
 
   task :items => :environment do
+    Item.destroy_all
     CSV.foreach('db/data/items.csv',:headers => true) do |row|
       Item.create!({id: row[0],
                     name: row[1],
@@ -39,6 +41,7 @@ namespace :load_csv do
   end
 
   task :invoices => :environment do
+    Invoice.destroy_all
     CSV.foreach('db/data/invoices.csv',:headers => true) do |row|
       if row.to_hash['status'] == "cancelled"
         status = 0
@@ -57,6 +60,7 @@ namespace :load_csv do
   end
 
   task :invoice_items => :environment do
+    InvoiceItem.destroy_all
     CSV.foreach('db/data/invoice_items.csv',:headers => true) do |row|
       if row.to_hash['status'] == "pending"
         status = 0
@@ -77,6 +81,7 @@ namespace :load_csv do
   end
 
   task :transactions => :environment do
+    Transaction.destroy_all
     CSV.foreach('db/data/transactions.csv',:headers => true) do |row|
       if row.to_hash['result'] == "failed"
         result = 0

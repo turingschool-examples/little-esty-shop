@@ -1,0 +1,14 @@
+<%= form_with(model: merchant, method: method, url: path, local: true) do |f| %>
+  <ul>
+  <% merchant.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, value: merchant.name %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
