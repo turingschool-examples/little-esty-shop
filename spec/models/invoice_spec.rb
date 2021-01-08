@@ -50,7 +50,7 @@ RSpec.describe Invoice, type: :model do
 
   describe 'model methods' do
     it 'Can find ids of invoices whose items are not shipped' do
-      expect(Invoice.not_shipped.first.invoice_id).to eq(@invoice1.id)
+      expect(Invoice.not_shipped.first.id).to eq(@invoice1.id)
     end
   end
 end

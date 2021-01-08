@@ -11,6 +11,6 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   def self.not_shipped
-    InvoiceItem.joins(:invoice).where.not(status: 2).select('invoice_id').distinct.order(:invoice_id)
+    Invoice.joins(:invoice_items).where.not('invoice_items.status = 2').distinct(:id).order(created_at: :asc)
   end
 end
