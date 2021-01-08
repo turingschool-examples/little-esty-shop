@@ -7,13 +7,13 @@ describe 'As an visitor' do
 
       @customer_1 = create(:customer)
 
-      @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant)
-      @invoice_2 = create(:invoice, customer: @customer_1, merchant: @merchant)
-      @invoice_3 = create(:invoice, customer: @customer_1, merchant: @merchant)
+      @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0)
       
       @item = create(:item, merchant: @merchant)
-
-      @invoice_item = create(:invoice_item, item: @item, invoice: @invoice_1)
+      @item2 = create(:item, merchant: @merchant)
+      
+      @invoice_item = create(:invoice_item, item: @item, invoice: @invoice_1, status: 0)
+      @invoice_item2 = create(:invoice_item, item: @item2, invoice: @invoice_1, status: 0)
     end
 
     it 'I see the invoices attributes' do
@@ -38,13 +38,20 @@ describe 'As an visitor' do
       end
     end
 
-    xit 'I can update the invoice & see its information' do
+    it 'I can update the invoices status' do
       visit admin_invoice_path(@invoice_1)
 
-      within("#item-info") do
-        select("packaged", :from => :status)
-        save_and_open_page
-        click_on "Submit"
+      within("#invoice-info") do
+        expect(page).to have_content("STATUS: cancelled")
+      end
+
+      within("#update-status") do
+        select("Completed", :from => "invoice[status]")
+        click_button "Submit"
+      end
+      
+      within("#invoice-info") do
+        expect(page).to have_content("STATUS: completed")
       end
     end
   end
