@@ -7,9 +7,7 @@ describe 'As an visitor' do
 
       @customer_1 = create(:customer)
 
-      @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant)
-      @invoice_2 = create(:invoice, customer: @customer_1, merchant: @merchant)
-      @invoice_3 = create(:invoice, customer: @customer_1, merchant: @merchant)
+      @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0)
       
       @item = create(:item, merchant: @merchant)
       @item2 = create(:item, merchant: @merchant)
@@ -40,30 +38,21 @@ describe 'As an visitor' do
       end
     end
 
-    it 'I can update the invoice & see its information' do
+    it 'I can update the invoices status' do
       visit admin_invoice_path(@invoice_1)
 
-      expect(@invoice_item.status).to eq("pending")
-
-      within("#item-info") do
-        within("#form-#{@invoice_item.id}") do 
-          select("Shipped", :from => "invoice_item[status]")
-          click_button "Submit"
-        end
+      within("#invoice-info") do
+        expect(page).to have_content("STATUS: cancelled")
       end
 
-      expect(@invoice_item.reload.status).to eq("shipped")
-      expect(@invoice_item2.reload.status).to eq("pending")
-
-      within("#item-info") do   
-        within("#form-#{@invoice_item2.id}") do 
-          select("Packaged", :from => "invoice_item[status]")
-          click_button "Submit"
-        end
+      within("#update-status") do
+        select("Completed", :from => "invoice[status]")
+        click_button "Submit"
       end
-
-      expect(@invoice_item.reload.status).to eq("shipped")
-      expect(@invoice_item2.reload.status).to eq("packaged")
+      
+      within("#invoice-info") do
+        expect(page).to have_content("STATUS: completed")
+      end
     end
   end
 end
