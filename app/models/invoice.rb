@@ -22,5 +22,9 @@ class Invoice < ApplicationRecord
     .where.not("invoice_items.status = ?", 2)
     .distinct
   end
+
+  def customer_name
+    customer.name
+  end
 end
 
