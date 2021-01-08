@@ -27,7 +27,6 @@ RSpec.describe "the Admin Dashboard" do
         visit '/admin'
 
         expect(page).to have_content("Top Customers")
-        expect(page).to have_content("Top Customers")
 
     end
 

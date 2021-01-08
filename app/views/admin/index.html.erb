@@ -1,1 +1,7 @@
 <p> my page </p>
+
+<h3>Top Customers</h3>
+
+    <% @top_five.each do |customer| %>
+      <li class='customer'> <%= customer.first_name %> <%= customer.last_name %> - <%= customer.successful_count %> purchases</li>
+    <% end %>
