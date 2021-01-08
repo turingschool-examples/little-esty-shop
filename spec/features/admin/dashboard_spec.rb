@@ -14,7 +14,7 @@ RSpec.describe 'Admin Dashboard' do
       @amazon   = Merchant.create!(name: 'Amazon')
       @alibaba  = Merchant.create!(name: 'Alibaba')
       # Invoices:
-      @invoice1 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @amazon.id)
+      @invoice1 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @amazon.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
       @invoice2 = Invoice.create!(status: 0, customer_id: @joel.id, merchant_id: @alibaba.id)
       @invoice3 = Invoice.create!(status: 0, customer_id: @billy.id, merchant_id: @alibaba.id)
       @invoice4 = Invoice.create!(status: 0, customer_id: @steve.id, merchant_id: @amazon.id)
@@ -33,9 +33,11 @@ RSpec.describe 'Admin Dashboard' do
       # Items:
       @candle   = Item.create!(name: 'Lavender Candle', description: '8oz Soy Candle', unit_price: 7.0, merchant_id: @amazon.id)
       @backpack = Item.create!(name: 'Camo Backpack', description: 'Double Zip Backpack', unit_price: 15.5, merchant_id: @alibaba.id)
+      @radio    = Item.create!(name: 'Retro Radio', description: 'Twist and Turn to your fav jams', unit_price: 9.75, merchant_id: @amazon.id)
       # InvoiceItems:
       @invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: @invoice1.id, item_id: @candle.id)
       @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @backpack.id)
+      @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @backpack.id)
     end
 
     it "when I visit the admin dashboard I see a header" do 
@@ -67,12 +69,24 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content('Incomplete Invoices')
       expect(page).to have_content(@invoice1.id)
       expect(page).to_not have_content(@invoice2.id)
-      
       expect(page).to have_link(@invoice1.id)
       
       click_link(@invoice1.id)
 
       expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+    end
+    it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
+      visit admin_root_path
+
+      date_inv1 = "#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}"
+      date_inv3 = "#{@invoice3.created_at.strftime("Created: %A, %B %d, %Y")}"
+
+      expect(page).to have_link(@invoice1.id)
+      expect(page).to have_content(date_inv1)
+      expect(page).to have_link(@invoice3.id)
+      expect(page).to have_content(date_inv3)
+      expect(date_inv1).to appear_before(date_inv3)
+      expect(date_inv3).to_not appear_before(date_inv1)
     end
   end 
 end 
