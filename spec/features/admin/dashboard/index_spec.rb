@@ -62,6 +62,6 @@ describe 'Admin Dashboard Index Page' do
   end
 
   it 'should display a number of successful transactions each top customer has with a merchant' do
-
+    expect(page).to have_content(@c1.number_of_transactions)
   end
 end
