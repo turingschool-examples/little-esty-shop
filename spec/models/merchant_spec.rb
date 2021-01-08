@@ -7,6 +7,10 @@ describe Merchant, type: :model do
     it {should have_many(:customers).through(:invoices)}
   end
 
+  describe "validations" do
+    it {should validate_presence_of :name}
+  end
+
   describe "The instance method:" do
     let(:merchant1) do
       create(:merchant)
