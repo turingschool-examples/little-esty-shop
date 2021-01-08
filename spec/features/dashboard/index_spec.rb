@@ -102,4 +102,9 @@ RSpec.describe 'merchant dashboard' do
     click_link("#{@item_1.invoice_ids}", match: :first)
     expect(current_path).to eq("/merchant/#{@merchant1.id}/invoices/#{@item_1.id}")
   end
+
+  it "shows the date that the invoice was created as Monday, July 18, 2019" do
+    expect(page).to have_content("Friday, January 8, 2021")
+
+  end
 end
