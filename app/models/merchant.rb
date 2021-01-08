@@ -7,9 +7,15 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def top_five_customers
-    require "pry"; binding.pry
-    Transaction.joins(invoices: :customers).where('transactions.result == ?', "success").where('transactions.merchant_id == self.id')
-    # self.transactions.joins(invoices: :customers).where('transactions.result == ?', "success").group('customer.id')
+    # require "pry"; binding.pry
+    # Transaction.joins(invoices: :customers).where('transactions.result == ?', "success").where('transactions.merchant_id == self.id')
+    self.transactions.joins(invoice: :customer)
+    .where('transactions.result = ?', "success")
+    .select('customers.first_name, count(transactions) as succesful_transactions')
+    .group('customers.id')
+    .order('succesful_transactions desc') 
+    .limit(5)
+
 # - from merchant, joins to invoices,transactions, customers
 # - only complete invoice records
 # -

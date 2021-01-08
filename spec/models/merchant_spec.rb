@@ -75,23 +75,27 @@ RSpec.describe Merchant, type: :model do
       invoice11 = Invoice.create!(status: 1, customer_id: tim.id, merchant_id: amazon.id)
       invoice13 = Invoice.create!(status: 0, customer_id: sally.id, merchant_id: amazon.id)
       invoice14 = Invoice.create!(status: 0, customer_id: sally.id, merchant_id: alibaba.id)
-      tx1      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, invoice_id: invoice2.id,)
-      tx2      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, invoice_id: invoice1.id,)
-      tx3      = Transaction.create!(credit_card_number: 010001005551, credit_card_expiration_date: 20220101, invoice_id: invoice3.id,)
-      tx4      = Transaction.create!(credit_card_number: 010001005552, credit_card_expiration_date: 20220101, invoice_id: invoice4.id,)
-      tx5      = Transaction.create!(credit_card_number: 010001005553, credit_card_expiration_date: 20220101, invoice_id: invoice5.id,)
-      tx6      = Transaction.create!(credit_card_number: 010001005554, credit_card_expiration_date: 20220101, invoice_id: invoice6.id,)
-      tx7      = Transaction.create!(credit_card_number: 010001005550, credit_card_expiration_date: 20220101, invoice_id: invoice7.id,)
-      tx8      = Transaction.create!(credit_card_number: 010001005556, credit_card_expiration_date: 20220101, invoice_id: invoice8.id,)
-      tx9      = Transaction.create!(credit_card_number: 010001005557, credit_card_expiration_date: 20220101, invoice_id: invoice9.id,)
-      tx10     = Transaction.create!(credit_card_number: 010001005523, credit_card_expiration_date: 20220101, invoice_id: invoice10.id,)
-      tx11     = Transaction.create!(credit_card_number: 0100010055, credit_card_expiration_date: 20220101, invoice_id: invoice11.id,)
-      tx12     = Transaction.create!(credit_card_number: 0100010055, credit_card_expiration_date: 20220101, invoice_id: invoice14.id,)
+      tx1      = Transaction.create!(result: "success", credit_card_number: 010001001022, credit_card_expiration_date: 20251001, invoice_id: invoice2.id,)
+      tx2      = Transaction.create!(result: "success", credit_card_number: 010001005555, credit_card_expiration_date: 20220101, invoice_id: invoice1.id,)
+      tx3      = Transaction.create!(result: "success", credit_card_number: 010001005551, credit_card_expiration_date: 20220101, invoice_id: invoice3.id,)
+      tx4      = Transaction.create!(result: "success", credit_card_number: 010001005552, credit_card_expiration_date: 20220101, invoice_id: invoice4.id,)
+      tx5      = Transaction.create!(result: "success", credit_card_number: 010001005553, credit_card_expiration_date: 20220101, invoice_id: invoice5.id,)
+      tx6      = Transaction.create!(result: "success", credit_card_number: 010001005554, credit_card_expiration_date: 20220101, invoice_id: invoice6.id,)
+      tx7      = Transaction.create!(result: "success", credit_card_number: 010001005550, credit_card_expiration_date: 20220101, invoice_id: invoice7.id,)
+      tx8      = Transaction.create!(result: "success", credit_card_number: 010001005556, credit_card_expiration_date: 20220101, invoice_id: invoice8.id,)
+      tx9      = Transaction.create!(result: "success", credit_card_number: 010001005557, credit_card_expiration_date: 20220101, invoice_id: invoice9.id,)
+      tx10     = Transaction.create!(result: "success", credit_card_number: 010001005523, credit_card_expiration_date: 20220101, invoice_id: invoice10.id,)
+      tx11     = Transaction.create!(result: "success", credit_card_number: 0100010055, credit_card_expiration_date: 20220101, invoice_id: invoice11.id,)
+      tx12     = Transaction.create!(result: "failure", credit_card_number: 0100010055, credit_card_expiration_date: 20220101, invoice_id: invoice14.id,)
       candle   = Item.create!(name: 'Lavender Candle', description: '8oz Soy Candle', unit_price: 7.0, merchant_id: amazon.id)
       backpack = Item.create!(name: 'Camo Backpack', description: 'Double Zip Backpack', unit_price: 15.5, merchant_id: alibaba.id)
       invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: invoice1.id, item_id: candle.id)
       invitm2  = InvoiceItem.create!(status: 0, quantity: 10, unit_price: 15.5, invoice_id: invoice2.id, item_id: backpack.id)
-      expect(amazon.top_five_customers).to eq([sally.first_name, joel.first_name, john.first_name, travolta.first_name, sal.first_name])
+      # require "pry"; binding.pry
+      actual = amazon.top_five_customers.map do |customer|
+        customer.first_name
+      end
+      expect(actual).to eq([sally.first_name, joel.first_name, john.first_name, travolta.first_name, sal.first_name])
     end
   end
 end
