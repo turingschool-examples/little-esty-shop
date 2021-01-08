@@ -28,3 +28,4 @@ RSpec.describe 'as an admin', type: :feature do
     end
   end
 end
+
