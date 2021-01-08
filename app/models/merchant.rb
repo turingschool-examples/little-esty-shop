@@ -10,7 +10,7 @@ class Merchant < ApplicationRecord
   # end
 
   def items_to_ship
-    item_ids = InvoiceItem.where(status: 0).pluck(:item_id)
+    item_ids = InvoiceItem.where("status = 0 OR status = 1").pluck(:item_id)
     Item.find(item_ids)
   end
 end
