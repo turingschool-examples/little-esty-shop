@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'As an Admin', type: :feature do
-  describe 'When I visit the merchant index' do
+  describe 'When I visit the admin merchant index' do
     before(:each) do
       @merchant_1 = Merchant.create!(name: 'House of thingys')
       @merchant_2 = Merchant.create!(name: 'House of mirros')
