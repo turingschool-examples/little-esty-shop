@@ -28,6 +28,11 @@ RSpec.describe Invoice, type: :model do
 
       expect(@invoice_1.total_revenue).to eq(50)
     end
+
+    it '#customer_name' do
+      @bob = create(:customer, invoice: @invoice_1, first_name: "Cob", last_name: "Cornwall")
+      expect(@invoice_1.customer_name).to eq("Cob Cornwall")
+    end
   end
 
   describe 'class methods' do
