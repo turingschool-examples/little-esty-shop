@@ -16,5 +16,14 @@ RSpec.describe 'As an Admin', type: :feature do
       expect(page).to have_content(@merchant_2.name)
       expect(page).to have_content(@merchant_3.name)
     end
+
+    it 'I click on the name of a merchant and am taken to thier show page' do
+
+      visit admin_merchants_path
+
+      click_on @merchant_1.name
+
+      expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+    end
   end
 end
