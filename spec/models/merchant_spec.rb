@@ -39,7 +39,7 @@ RSpec.describe Merchant, type: :model do
       @ii_4 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 1, unit_price: 5, status: 2)
     end
     it "can list items ready to ship" do
-      expect(@merchant1.items_to_ship).to eq([@item_1, @item_2])
+      expect(@merchant1.ordered_items_to_ship).to eq([@item_2, @item_1])
     end
   end
 end
