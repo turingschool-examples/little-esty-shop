@@ -11,15 +11,17 @@
 
 <body>
   <div class="row">
-    <p class='mr-auto col-sm-5'>Incomplete Invoices</p>
-      <ul class='mr-auto col-sm-4'>
-        <% @invoices.each do |i| %>
-          <li>Invoice #<%= i.id %> - 
     <p class='ml-auto col-sm-5'>Top 5 Customers</p>
+    <p class='mr-auto col-sm-5'>Incomplete Invoices</p>
       <ul class='ml-auto col-sm-4'>
         <% @customers.each do |c| %>
           <li><%= c.first_name + ' ' + c.last_name %> - 
           <%= c.number_of_transactions %> Purchases
+        <% end %>
+      </ul>
+      <ul class='mr-auto col-sm-4'>
+        <% @invoices.each do |i| %>
+          <li><%= link_to "Invoice # #{i.id}", admin_invoice_path(i.id) %></a> - <%= i.created_at.strftime("%A, %B %d, %Y") %>
         <% end %>
       </ul>
   </div>
