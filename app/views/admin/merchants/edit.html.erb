@@ -1,16 +1,3 @@
 <h1>Edit <%= @merchant.name %>'s Info</h1>
 
-<%= form_with(model: [:admin, @merchant], local: true) do |f| %>
-  <ul>
-  <% @merchant.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-  </ul>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name, value: @merchant.name %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<%= render partial: 'form', locals: { path: admin_merchant_path, merchant: @merchant, method: :patch } %>
