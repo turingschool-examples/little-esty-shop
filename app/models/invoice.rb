@@ -7,10 +7,6 @@ class Invoice < ApplicationRecord
 
   enum status: [ :cancelled, :in_progress, :completed ]
 
-  def date
-    created_at.strftime("%A, %b %d, %Y")
-  end
-
   def total_revenue
     invoice_items.sum(:unit_price)
   end
