@@ -1,0 +1,17 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <p class="navbar-text">Admin Dashboard</p>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Dashboard', admin_dashboard_index_path, style: 'pull-right' %>
+      <%= link_to 'Merchants', admin_merchants_path, style: 'pull-right' %>
+      <%= link_to 'Invoices', admin_invoices_path, style: 'pull-right' %></li>
+    </ul>
+  </nav>
+</div>
+
+<body>
+  <div class="row">
+    <p class='col-12'><%= @merchant.name %></p>
+  </div>
+  <%= link_to 'Update Merchant', edit_admin_merchant_path(@merchant) %>
+</body>
