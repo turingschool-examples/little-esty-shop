@@ -1,0 +1,4 @@
+<h1> Invoices </h1>
+<% @invoices.each do |invoice|%>
+Invoice: <%=link_to invoice.id, admin_invoice_path(invoice.id) %><br>
+<% end %>

@@ -12,4 +12,8 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     where(status: 0).pluck(:id)
   end
+
+  def date_time
+    created_at.strftime("%A, %B %d, %Y")
+  end
 end

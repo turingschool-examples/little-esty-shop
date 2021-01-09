@@ -1,0 +1,19 @@
+<h1>Invoice:<%= @invoice.id %></h1>
+<p>Status: <%= @invoice.status %></p>
+<p>Created: <%= @invoice.date_time %>
+
+<h3>Customer Information</h3>
+<%= @invoice.customer.first_name%><br>
+<%= @invoice.customer.last_name%><br>
+<%= @invoice.customer.shipping_address%><br>
+
+<h3> Invoice Items</h3>
+<% @invoice.items.each do |item|%>
+  <p>Item: <%= item.name%><p><br>
+  <% item.invoice_items.each do |item| %>
+    Quantity: <%= item.quantity%><br>
+    Unit price: $ <%= item.unit_price%><br>
+    Status: <%= item.status%><br>
+  <% end %>
+<% end %>
+
