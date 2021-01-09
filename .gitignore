@@ -15,6 +15,7 @@
 coverage/
 coverage/.resultset.json
 coverage/index.html
+coverage/.last_run.json
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
