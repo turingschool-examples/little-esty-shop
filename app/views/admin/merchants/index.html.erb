@@ -15,7 +15,7 @@
     <p class='mr-auto col-sm-5'>Merchants</p>
     <ul class='ml-auto col-sm-4'>
       <% @merchants.each do |m| %>
-        <li><%= m.name %>
+        <li><%= link_to "#{m.name}", admin_merchant_path(m.id) %>
       <% end %>
     </ul>
   </div>
