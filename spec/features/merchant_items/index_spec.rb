@@ -41,12 +41,12 @@ RSpec.describe "Merchant Items Index" do
       end
     end
 
-    it 'can enable disabled items' do
+    it 'can disable enabled items' do
       visit "merchant/#{@merchant1.id}/items"
 
       within("#item-#{@item3.id}") do
         click_on 'Enable'
-
+        save_and_open_page
         expect(page).to have_button('Disable')
       end
     end

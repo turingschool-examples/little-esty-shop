@@ -5,9 +5,11 @@
     <%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %>
   </h2>
   <% if item.enabled %>
-    <%= button_to 'Disable', "/merchant/#{@merchant.id}/items", method: :patch %>
+    <h3>Item currently enabled</h3>
+    <%= button_to 'Disable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id} %>
   <% else %>
-      <%= button_to 'Enable', "/merchant/#{@merchant.id}/items", method: :patch %>
+    <h3>Item currently disabled</h3>
+    <%= button_to 'Enable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id } %>
   <% end %>
   </section>
 <% end %>
