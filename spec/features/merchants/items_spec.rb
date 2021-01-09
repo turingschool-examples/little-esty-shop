@@ -31,7 +31,6 @@ RSpec.describe "Items Index" do
     it " items" do
       merchant1 = create(:merchant)
       item = create(:item, merchant: merchant1)
-      # false_item = create(:item, merchant: merchant1, enabled: false)
       visit merchant_items_path(merchant1)
 
       2.times do
