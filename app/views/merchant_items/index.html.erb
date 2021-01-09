@@ -12,4 +12,11 @@
     <%= button_to 'Enable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id } %>
   <% end %>
   </section>
+  <section id="enabled">
+    <h1>Enabled Items</h1>
+  </section>
+
+  <section id="disabled">
+    <h1>Disabled Items</h1>
+  </section>
 <% end %>
