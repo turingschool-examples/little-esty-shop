@@ -40,18 +40,18 @@ RSpec.describe 'Admin Dashboard' do
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @backpack.id)
     end
 
-    it "when I visit the admin dashboard I see a header" do 
+    it "when I visit the admin dashboard I see a header" do
       visit admin_root_path
 
       expect(page).to have_content("Admin Dashboard")
     end
-  
+
     it 'I see a link to the admin merchants and invoices index' do
       visit admin_root_path
 
       expect(page).to have_link('Merchants')
       expect(page).to have_link('Invoices')
-      
+
       click_link 'Merchants'
 
       expect(current_path).to eq(admin_merchants_path)
@@ -69,13 +69,14 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content('Incomplete Invoices')
       expect(page).to have_content(@invoice1.id)
       expect(page).to_not have_content(@invoice2.id)
-      expect(page).to have_link(@invoice1.id)
-      
-      click_link(@invoice1.id)
+      expect(page).to have_link(@invoice1.id.to_s)
+
+      click_link(@invoice1.id.to_s)
 
       expect(current_path).to eq(admin_invoice_path(@invoice1.id))
     end
-    
+  end
+end
     it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
       visit admin_root_path
 
@@ -91,3 +92,4 @@ RSpec.describe 'Admin Dashboard' do
     end
   end 
 end 
+
