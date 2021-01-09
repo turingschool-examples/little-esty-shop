@@ -38,6 +38,8 @@ class Admin::MerchantsController < ApplicationController
         redirect_to admin_merchant_path(@merchant)
       end
     else
+      flash[:error] = @merchant.errors.full_messages
+      @merchant = Merchant.find(params[:id])
       render :edit 
     end
   end
