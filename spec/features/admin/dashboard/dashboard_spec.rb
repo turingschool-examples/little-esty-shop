@@ -35,7 +35,7 @@ describe 'As an Admin' do
     expect(page).to_not have_content(@invoice_2.id)
     expect(page).to_not have_content(@invoice_3.id)
     end
-    it "Shows top 5 customers" do
+    it "Shows top 5 customers and the number of transactions for each one" do
       merchant = Merchant.create!(name: 'House of thingys')
 
       customer_1 = Customer.create!(first_name: 'John', last_name: 'Doe')
@@ -66,6 +66,12 @@ describe 'As an Admin' do
       expect(page).to have_content("#{customer_4.first_name} #{customer_4.last_name}")
       expect(page).to have_content("#{customer_5.first_name} #{customer_5.last_name}")
       expect(page).to_not have_content("#{customer_6.first_name} #{customer_6.last_name}")
+      expect(page).to have_content(customer_1.sucessful_transactions_count)
+      expect(page).to have_content(customer_2.sucessful_transactions_count)
+      expect(page).to have_content(customer_3.sucessful_transactions_count)
+      expect(page).to have_content(customer_4.sucessful_transactions_count)
+      expect(page).to have_content(customer_5.sucessful_transactions_count)
+
     end
   end
 end
