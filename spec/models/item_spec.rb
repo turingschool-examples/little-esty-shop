@@ -7,7 +7,7 @@ describe Item, type: :model do
     it {should belong_to :merchant}
   end
 
-  describe 'class methods' do
+  describe 'class methods:' do
     it 'items_to_ship;' do
       merchant1 = create(:merchant)
       items = create_list(:item, 6, merchant: merchant1)
@@ -16,6 +16,20 @@ describe Item, type: :model do
       end
 
       expect(Item.items_to_ship.to_set).to eq(items.first(4).to_set)
+    end
+    it 'popular_items' do
+      merchant1 = create(:merchant)
+      item = create(:item, merchant: merchant1)
+      items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
+      
+      items.each_with_index do |item, index|
+        (1 + index).times do
+          invoice = create(:invoice, items: [item])
+          create(:transaction, invoice_id: invoice.id, result: 0)
+        end
+      end
+
+      expect(Item.popular_items.to_set).to eq(items.to_set)
     end
   end
 end

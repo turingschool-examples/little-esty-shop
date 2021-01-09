@@ -2,6 +2,32 @@ require 'rails_helper'
 
 RSpec.describe "Items Index" do
   describe 'displays' do
+    it "the five most popular items, and their revenue, in order" do
+      merchant1 = create(:merchant)
+      item = create(:item, merchant: merchant1)
+      items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
+      
+      items.each_with_index do |item, index|
+        (1 + index).times do
+          invoice = create(:invoice)
+          create(:invoice_item, item_id: item.id, invoice_id: invoice.id, quantity: 1, unit_price: item.unit_price)
+          create(:transaction, invoice_id: invoice.id, result: 0)
+        end
+      end
+
+      visit merchant_items_path(merchant1)
+
+      within '#top_items' do
+        expect(page).not_to have_content(item.name)
+        items.reverse.each_with_index do |item, index|
+          within "#top-#{index + 1}" do
+            expect(page).to have_link(item.name, href: item_path(item))
+            expect(page).to have_content("$ #{merchant1.items.popular_items[index].total_revenue}")
+          end
+        end
+      end
+    end
+
     it "merchant's items" do
       merchant1 = create(:merchant)
       merchant2 = create(:merchant)

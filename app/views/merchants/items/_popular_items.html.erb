@@ -1,0 +1,11 @@
+<section id="top_items">
+  <h2>Top Items</h2>
+  <ol>
+    <% items.each_with_index do |item, index| %>
+      <li id="top-<%= index + 1 %>">
+      <%= link_to item.name, item_path(item)%> sales: $
+      <%= item.total_revenue %>
+      </li>
+    <% end %>
+  </ol>
+</section>
