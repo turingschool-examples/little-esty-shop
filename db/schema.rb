@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_234527) do
+ActiveRecord::Schema.define(version: 2021_01_09_220057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_234527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "unit_price"
+    t.boolean "enabled", default: false, null: false
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
