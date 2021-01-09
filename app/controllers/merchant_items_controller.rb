@@ -2,8 +2,6 @@ class MerchantItemsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:merchant_id])
-    @items = @merchant.items
-    #Eliminate the @items--use everything from the merchant.
   end
 
   def show
