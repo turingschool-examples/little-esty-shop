@@ -2,4 +2,9 @@
 <p><%= link_to 'Admin Merchants', admin_merchants_path %></p>
 <p><%= link_to 'Admin Invoices', admin_invoices_path %></p>
 
-<%=  @incomplete_invoices%>
+<%= @incomplete_invoices%>
+
+<h2>Top 5 Customers</h2>
+<% @customers.each do |customer| %>
+<p> <%=  "#{customer.first_name} #{customer.last_name}: #{customer.sucessful_transactions_count}"%></p>
+<% end %>

@@ -1,6 +1,6 @@
 require 'csv'
 namespace :csv_load do
-    
+
   task :customers => :environment do
       csv_text = File.read('db/data/customers.csv')
       csv = CSV.parse(csv_text, :headers => true)
@@ -57,4 +57,7 @@ namespace :csv_load do
     Rake::Task['csv_load:transactions'].execute
     Rake::Task['csv_load:invoice_items'].execute
     end
+    ActiveRecord::Base.connection.tables.each do |table_name|
+  ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
+end
 end
