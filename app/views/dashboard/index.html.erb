@@ -12,6 +12,13 @@
 <body>
   <div class="row">
     <p class='mr-auto col-sm-5'>Incomplete Invoices</p>
+    <% @merchant.favorite_customers.each do |customer| %>
+      <section id="customer-<%= customer.id %>">
+          <%= customer.first_name %>
+          <%= customer.last_name %>
+          <%= customer.top_result %>
+      </section>
+    <% end %>
   </div>
 </body>
 
