@@ -33,11 +33,21 @@ RSpec.describe "Merchant Items Index" do
       @item3 = Item.create!(name: "fantastic fountain pen", description: "small", unit_price: 55.00, merchant_id: @merchant1.id)
     end
 
-    it 'has an enabled button for disabled items' do
+    it 'has an enable button for disabled items' do
       visit "merchant/#{@merchant1.id}/items"
-      
+
       within("#item-#{@item3.id}") do
         expect(page).to have_button('Enable')
+      end
+    end
+
+    it 'can enable disabled items' do
+      visit "merchant/#{@merchant1.id}/items"
+
+      within("#item-#{@item3.id}") do
+        click_on 'Enable'
+
+        expect(page).to have_button('Disable')
       end
     end
 
@@ -50,6 +60,22 @@ RSpec.describe "Merchant Items Index" do
 
       within("#item-#{@item2.id}") do
         expect(page).to have_button('Disable')
+      end
+    end
+
+    it 'can enable disabled items' do
+      visit "merchant/#{@merchant1.id}/items"
+
+      within("#item-#{@item1.id}") do
+        click_on 'Disable'
+
+        expect(page).to have_button('Enable')
+      end
+
+      within("#item-#{@item2.id}") do
+        click_on 'Disable'
+
+        expect(page).to have_button('Enable')
       end
     end
   end
