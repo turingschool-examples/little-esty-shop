@@ -5,26 +5,29 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-    @merchant = Merchant.find(params[:merchant_id])
+    find_item_and_merchant
   end
 
   def edit
-    @item = Item.find(params[:id])
-    @merchant = Merchant.find(params[:merchant_id])
+    find_item_and_merchant
   end
 
   def update
-    @item = Item.find(params[:id])
-    @merchant = Merchant.find(params[:merchant_id])
+    find_item_and_merchant
     @item.update(item_params)
     flash.notice = "Succesfully Updated Item Info!"
     redirect_to merchant_item_path(@merchant, @item)
   end
 
+
   private
 
   def item_params
     params.permit(:name, :description, :unit_price)
+  end
+
+  def find_item_and_merchant
+    @item = Item.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 end
