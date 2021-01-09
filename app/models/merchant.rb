@@ -4,17 +4,16 @@ class Merchant < ApplicationRecord
   has_many :invoices
   has_many :items
   has_many :customers, through: :invoices
+  has_many :transactions, through: :invoices
 
-  def self.favorite_customers
-    joins(:transactions)
+  def favorite_customers
+    transactions
+    .joins(invoice: :customer)
     .where('result = ?', 1)
     .select("customers.*, count('transactions.result') as top_result")
+    .group("customers.id")
     .order(top_result: :desc)
     .limit(5)
-  end
-
-  def number_of_transactions(customer)
-    customer.transactions.where('result = ?', 1).count
   end
 
   def ordered_items_to_ship
