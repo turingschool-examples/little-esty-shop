@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_231824) do
+ActiveRecord::Schema.define(version: 2021_01_08_234527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2021_01_05_231824) do
   create_table "items", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "unit_price"
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "unit_price"
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 

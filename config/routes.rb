@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'merchant/:merchant_id/items', to: 'merchant_items#index'
   get '/merchant/:merchant_id/items/:item_id', to: 'merchant_items#show'
+  get '/merchant/:merchant_id/items/:item_id/edit', to: 'merchant_items#edit'
+  patch '/merchant/:merchant_id/items/:item_id', to: 'merchant_items#update'
 
   resources :merchants, only: [:index, :show] do
     resources :items, only: [:index]

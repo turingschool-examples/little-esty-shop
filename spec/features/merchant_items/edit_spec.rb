@@ -28,9 +28,9 @@ RSpec.describe 'Merchant Item Edit page' do
     it 'autofills the form with the information in the database' do
       visit "/merchant/#{@merchant1.id}/items/#{@item1.id}/edit"
 
-      expect(page).to have_field("name", :value => "magic pen")
-      expect(page).to have_field("description", :value => "special")
-      expect(page).to have_field("unit_price", :value => 9.10)
+      expect(page).to have_field("name", :with => "magic pen")
+      expect(page).to have_field("description", :with => "special")
+      expect(page).to have_field("unit_price", :with => 9.10)
     end
 
     it 'allows the user to make changes to the items' do
