@@ -1,0 +1,9 @@
+<%= form_with model: @item, method: method, url: path, action: "/merchants/#{@merchant.id}/items", local: true do |form| %>
+  <%= form.label 'name:' %>
+  <%= form.text_field :name %>
+  <%= form.label 'unit price:' %>
+  <%= form.text_field :unit_price %>
+  <%= form.label 'description:' %>
+  <%= form.text_field :description %>
+  <%= form.submit button_text %>
+<% end %>

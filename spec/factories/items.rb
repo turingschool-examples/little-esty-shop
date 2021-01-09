@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    name { "MyString" }
-    description { "MyString" }
-    unit_price { 1 }
+    name { Faker::Beer.name }
+    description { Faker::Beer.style }
+    unit_price { Faker::Number.number(digits: 3) }
   end
 end

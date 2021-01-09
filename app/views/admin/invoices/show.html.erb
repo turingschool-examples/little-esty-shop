@@ -1,0 +1,22 @@
+<section id="invoice-info">
+  <h3>Invoice: </h3>
+  <p>ID: <%= @invoice.id %></p>
+  <p>STATUS: <%= @invoice.status %></p>
+  <p>DATE ADDED: <%= @invoice.date %></p>
+  <p>Total Revenue: <%= @invoice.total_revenue %></p>
+</section>
+
+<section id="customer-info">
+  <h3>Customer: <%= @invoice.customer_name %> </h3>
+  <ul>
+    <li>Address: 123 Drury Ln</li>
+    <li>Nowhere, ID 10001</li>
+  </ul>
+</section>
+
+<section id="update-status">
+  <%= form_with(model: [:admin, @invoice], method: :patch, url: admin_invoice_path(@invoice), local: true) do |f| %>
+    <%= f.select(:status, enum_collection_for_select(Invoice.statuses), selected: @invoice.status) %>
+    <%= button_tag 'Submit' %>
+  <% end %>
+</section>

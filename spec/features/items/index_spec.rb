@@ -67,11 +67,48 @@ RSpec.describe 'merchants items index page', type: :feature do
     it 'can list all item names for specific merchant' do
       visit merchant_items_path(@merchant)
       expected = Item.where(merchant: @merchant).pluck(:name)
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> f27acbc9cb8bb655190c3c77fcf71bbe3333a014
       expect(page).to have_content("#{expected[0]}")
       expect(page).to have_content("#{expected[1]}")
       expect(page).to have_content("#{expected[2]}")
       expect(page).to have_link("#{expected[0]}")
     end
+<<<<<<< HEAD
+=======
+
+    it 'my page has sections for enabled and disabled items and each item has a button that changes its status' do
+      item = Item.first
+
+      visit merchant_items_path(@merchant)
+
+      within('#items-disabled') do
+        expect(page).to have_content(item.name)
+        click_on(id: "btn-enable-#{item.id}")
+        expect(current_path).to eq(merchant_items_path(@merchant))
+      end
+
+      within('#items-enabled') do
+        expect(page).to have_content(item.name)
+      end
+    end
+
+    it 'has a link to create new item and when a new item is created it is shown on the page' do
+      visit merchant_items_path(@merchant)
+
+      click_link('New Item')
+      expect(current_path).to eq(new_merchant_item_path(@merchant))
+      fill_in 'item_name', with: 'New Item'
+      fill_in 'item_unit_price', with: 120
+      fill_in 'item_description', with: 'This item is very new and special and cool'
+      click_button 'Create Item'
+
+      expect(current_path).to eq(merchant_items_path(@merchant))
+      expect(page).to have_content('New Item')
+    end
+>>>>>>> f27acbc9cb8bb655190c3c77fcf71bbe3333a014
   end
 end
