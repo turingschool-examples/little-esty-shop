@@ -1,3 +1,5 @@
+require 'github_api'
+
 class Api::GithubApiController < ApplicationController
 
   def index
