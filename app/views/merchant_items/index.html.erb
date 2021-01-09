@@ -1,6 +1,13 @@
 <h1><%= @merchant.name %>'s Items </h1>
 <% @merchant.items.each do |item| %>
   <section id="item-<%=item.id%>">
-  <h2><%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %></h2>
+  <h2>
+    <%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %>
+  </h2>
+  <% if item.enabled %>
+    <%= button_to 'Disable', "/merchant/#{@merchant.id}/items", method: :patch %>
+  <% else %>
+      <%= button_to 'Enable', "/merchant/#{@merchant.id}/items", method: :patch %>
+  <% end %>
   </section>
 <% end %>
