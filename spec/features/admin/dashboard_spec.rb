@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard' do
   describe 'As an admin user' do
-   before(:each) do
+    before(:each) do
       # Customers:
       @sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
       @joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
@@ -75,21 +75,19 @@ RSpec.describe 'Admin Dashboard' do
 
       expect(current_path).to eq(admin_invoice_path(@invoice1.id))
     end
-  end
-end
+
     it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
       visit admin_root_path
 
       date_inv1 = "#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}"
       date_inv3 = "#{@invoice3.created_at.strftime("Created: %A, %B %d, %Y")}"
 
-      expect(page).to have_link(@invoice1.id)
+      expect(page).to have_link(@invoice1.id.to_s)
       expect(page).to have_content(date_inv1)
-      expect(page).to have_link(@invoice3.id)
+      expect(page).to have_link(@invoice3.id.to_s)
       expect(page).to have_content(date_inv3)
       expect(date_inv1).to appear_before(date_inv3)
       expect(date_inv3).to_not appear_before(date_inv1)
     end
-  end 
-end 
-
+  end
+end
