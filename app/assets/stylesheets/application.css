@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+<<<<<<< HEAD
+
+ #footer {
+   font-size: 10px;
+=======
  table, th, td {
    border: 1px solid black;
    text-align: left;
@@ -20,4 +25,5 @@
  }
  th {
    font-weight: 900;
+>>>>>>> f27acbc9cb8bb655190c3c77fcf71bbe3333a014
  }

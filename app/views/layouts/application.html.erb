@@ -14,5 +14,18 @@
     <%= flash.notice %>
   </p>
     <%= yield %>
+    <footer id="footer">
+      <p>Repo Name:
+        <%= @repo.responses("")[:name] %>
+      Commits Count:
+    <%= @repo.responses("/commits").count %>
+      All Pull Requests Count:
+    <%= @repo.responses("/pulls?state=all").count %>
+      Collaborators:
+    <% @repo.responses("/collaborators").map do |collaborator| %>
+      <%= collaborator[:login] %>
+    <% end %>
+    </footer>
+
   </body>
 </html>

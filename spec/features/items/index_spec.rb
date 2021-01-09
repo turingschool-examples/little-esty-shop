@@ -67,12 +67,18 @@ RSpec.describe 'merchants items index page', type: :feature do
     it 'can list all item names for specific merchant' do
       visit merchant_items_path(@merchant)
       expected = Item.where(merchant: @merchant).pluck(:name)
+<<<<<<< HEAD
+
+=======
       
+>>>>>>> f27acbc9cb8bb655190c3c77fcf71bbe3333a014
       expect(page).to have_content("#{expected[0]}")
       expect(page).to have_content("#{expected[1]}")
       expect(page).to have_content("#{expected[2]}")
       expect(page).to have_link("#{expected[0]}")
     end
+<<<<<<< HEAD
+=======
 
     it 'my page has sections for enabled and disabled items and each item has a button that changes its status' do
       item = Item.first
@@ -103,5 +109,6 @@ RSpec.describe 'merchants items index page', type: :feature do
       expect(current_path).to eq(merchant_items_path(@merchant))
       expect(page).to have_content('New Item')
     end
+>>>>>>> f27acbc9cb8bb655190c3c77fcf71bbe3333a014
   end
 end
