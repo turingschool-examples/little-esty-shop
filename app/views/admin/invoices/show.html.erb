@@ -1,3 +1,9 @@
 <h1>Invoice:<%= @invoice.id %></h1>
 <p>Status: <%= @invoice.status %></p>
 <p>Created: <%= @invoice.date_time %>
+
+<h3>Customer Information</h3>
+
+<%= @invoice.customer.first_name%><br>
+<%= @invoice.customer.last_name%>
+<%= @invoice.customer.shipping_address%>
