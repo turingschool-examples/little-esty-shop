@@ -11,6 +11,16 @@ class Merchants::ItemsController < ApplicationController
     redirect_to params[:previously] || params[:item][:previously]
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.new
+  end
+
+  def create
+    Item.create(item_params.merge(enabled: false, merchant_id: params[:merchant_id]))
+    redirect_to merchant_items_path(params[:merchant_id])
+  end
+
   private
   def get_item
     @item = Item.find(params[:id])
