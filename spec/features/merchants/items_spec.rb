@@ -18,9 +18,17 @@ RSpec.describe "Items Index" do
         expect(page).not_to have_content(item.name)
       end
     end
+    it "items in the right order" do
+      merchant1 = create(:merchant)
+      enabled_item = create(:item, merchant: merchant1)
+      disabled_item = create(:item, merchant: merchant1, enabled: false)
+      visit merchant_items_path(merchant1)
+
+      expect(enabled_item.name).to appear_before(disabled_item.name)
+    end
   end
   describe 'can disable/enable' do
-    it "items" do
+    it " items" do
       merchant1 = create(:merchant)
       item = create(:item, merchant: merchant1)
       # false_item = create(:item, merchant: merchant1, enabled: false)
