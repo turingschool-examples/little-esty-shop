@@ -10,4 +10,5 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     Invoice.where(status: "in progress").order(created_at: :asc)
   end
+  
 end
