@@ -64,6 +64,16 @@ RSpec.describe 'Merchant Item Edit page' do
       expect(page).to have_button('Submit')
     end
 
+    it 'does not allow the user to input a string for unit price' do
+      visit "/merchant/#{@merchant1.id}/items/#{@item1.id}/edit"
+
+      fill_in :unit_price, with: 'twelve dollars'
+      click_on 'Submit'
+
+      expect(page).to have_content("Unit price is not a number")
+      expect(page).to have_button('Submit')
+    end
+
     it 'shows a flash message stating that the update was successful' do
       visit "/merchant/#{@merchant1.id}/items/#{@item1.id}/edit"
 
