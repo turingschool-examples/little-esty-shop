@@ -6,5 +6,5 @@
 
 <h2>Top 5 Customers</h2>
 <% @customers.each do |customer| %>
-<p> <%=  "#{customer.first_name} #{customer.last_name}"%></p>
+<p> <%=  "#{customer.first_name} #{customer.last_name}: #{customer.sucessful_transactions_count}"%></p>
 <% end %>
