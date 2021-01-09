@@ -8,7 +8,7 @@ class Merchants::ItemsController < ApplicationController
   def update
     get_item.update(item_params)
     flash.notice = "Item has been updated!"
-    redirect_to item_path(params[:id])
+    redirect_to params[:previously] || params[:item][:previously]
   end
 
   private
@@ -17,6 +17,6 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price)
+    params.require(:item).permit(:name, :description, :unit_price, :enabled)
   end
 end
