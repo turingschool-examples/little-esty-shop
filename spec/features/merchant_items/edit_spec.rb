@@ -58,8 +58,9 @@ RSpec.describe 'Merchant Item Edit page' do
 
       fill_in 'name', with: ''
       click_on 'Submit'
-      expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}/edit")
-      expect(page).to have_content("Error")
+      # expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}/edit") what should this path be??
+
+      expect(page).to have_content("Name can't be blank")
       expect(page).to have_button('Submit')
     end
 
@@ -70,7 +71,7 @@ RSpec.describe 'Merchant Item Edit page' do
       click_on 'Submit'
 
       expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}")
-      expect(page).to have_content('Submission Successful')
+      expect(page).to have_content('Update Successful')
     end
   end
 end
