@@ -79,4 +79,35 @@ RSpec.describe "Merchant Items Index" do
       end
     end
   end
+
+  describe 'there should be enabled and disabled sections' do
+    before :each do
+      @merchant1 = Merchant.create!(name: "Robert Heath")
+
+      @item1 = Item.create!(name: "magic pen", description: "special", unit_price: 9.10, enabled: true, merchant_id: @merchant1.id)
+      @item2 = Item.create!(name: "preposterous pencil", description: "big", unit_price: 8.50, enabled: true, merchant_id: @merchant1.id)
+      @item3 = Item.create!(name: "fantastic fountain pen", description: "small", unit_price: 55.00, merchant_id: @merchant1.id)
+    end
+
+    it 'has the sections' do
+      visit "merchant/#{@merchant1.id}/items"
+
+      expect(page).to have_content('Enabled Items')
+      expect(page).to have_content('Disabled Items')
+    end
+
+    it 'lists the items in the correct section' do
+
+      visit "merchant/#{@merchant1.id}/items"
+
+      within("#enabled") do
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@item2.name)
+      end
+
+      within("#disabled") do
+        expect(page).to have_content(@item3.name)
+      end
+    end
+  end
 end
