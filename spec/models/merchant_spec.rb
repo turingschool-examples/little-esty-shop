@@ -30,6 +30,7 @@ RSpec.describe Merchant, type: :model do
       @invoice_7 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_6.id, status: 1)
 
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id)
+      sleep(1)
       @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
       @item_3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: @merchant1.id)
 
@@ -37,9 +38,22 @@ RSpec.describe Merchant, type: :model do
       @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 8, status: 1)
       @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 1, unit_price: 5, status: 2)
       @ii_4 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 1, unit_price: 5, status: 2)
+
+      @transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
+      @transaction2 = Transaction.create!(credit_card_number: 230948, result: 1, invoice_id: @invoice_3.id)
+      @transaction3 = Transaction.create!(credit_card_number: 234092, result: 1, invoice_id: @invoice_4.id)
+      @transaction4 = Transaction.create!(credit_card_number: 230429, result: 1, invoice_id: @invoice_5.id)
+      @transaction5 = Transaction.create!(credit_card_number: 102938, result: 1, invoice_id: @invoice_6.id)
+      @transaction6 = Transaction.create!(credit_card_number: 102938, result: 0, invoice_id: @invoice_1.id)
     end
     it "can list items ready to ship" do
-      expect(@merchant1.ordered_items_to_ship).to eq([@item_2, @item_1])
+      expect(@merchant1.ordered_items_to_ship).to eq([@item_1, @item_2])
+    end
+    it "shows a list of favorite customers" do
+      expected = @merchant1.favorite_customers.map do |customer|
+        customer[:first_name]
+      end
+      expect(expected).to eq([@customer_1.first_name, @customer_2.first_name, @customer_3.first_name, @customer_4.first_name, @customer_5.first_name])
     end
   end
 end
