@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "admin invoices show page" do
   before :each do 
-    @invoice = FactoryBot.create(:invoice )
+    @invoice = FactoryBot.create(:invoice)
     FactoryBot.create_list(:invoice_item, 4, invoice_id: @invoice.id )
     visit admin_invoice_path(@invoice.id)
   end
@@ -31,6 +31,13 @@ RSpec.describe "admin invoices show page" do
         expect(page).to have_content(ii.unit_price)
         expect(page).to have_content(ii.status)
       end
+    end
+  end
+
+  it "displays total revenue of the current invoice" do 
+    # skip
+    within("#invoice-information") do 
+      expect(page).to have_content(@invoice.invoice_items.invoice_amount)
     end
   end
 end
