@@ -1,0 +1,29 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <p class="navbar-text">Admin Dashboard</p>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Dashboard', admin_dashboard_index_path, style: 'pull-right' %>
+      <%= link_to 'Merchants', admin_merchants_path, style: 'pull-right' %>
+      <%= link_to 'Invoices', admin_invoices_path, style: 'pull-right' %></li>
+    </ul>
+  </nav>
+</div>
+
+<body>
+  <div class="row">
+    <p class='ml-auto col-sm-5'>Top 5 Customers</p>
+    <p class='mr-auto col-sm-5'>Incomplete Invoices</p>
+      <ul class='ml-auto col-sm-4'>
+        <% @customers.each do |c| %>
+          <li><%= c.first_name + ' ' + c.last_name %> - 
+          <%= c.number_of_transactions %> Purchases
+        <% end %>
+      </ul>
+      <ul class='mr-auto col-sm-4'>
+        <% @invoices.each do |i| %>
+          <li><%= link_to "Invoice # #{i.id}", admin_invoice_path(i.id) %></a> - <%= i.created_at.strftime("%A, %B %d, %Y") %>
+        <% end %>
+      </ul>
+  </div>
+</body>
+    
