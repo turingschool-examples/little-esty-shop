@@ -1,10 +1,10 @@
 <h1>Edit Your Item Below!</h1>
-<%= form_tag merchant_item_path(@merchant, @item) do %>
+<%= form_tag merchant_item_path(@merchant, @item), method: :patch do %>
     <%= label_tag :name %>
     <%= text_field_tag :name, @item.name %></br></br>
     <%= label_tag :description %>
     <%= text_field_tag :description, @item.description %></br></br>
     <%= label_tag :unit_price %>
     <%= text_field_tag :unit_price, @item.unit_price  %></br></br>
-    <%= submit_tag 'Update Item'%>
+    <%= submit_tag 'Submit'%>
 <% end %>
