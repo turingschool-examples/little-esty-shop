@@ -1,3 +1,5 @@
-<ul><% @items.each do |item| %>
-  <li><%= link_to item.name, item_path(item) %></li>
+<h2><%= current_status.capitalize%> Items</h2>
+<ul><% items.each_with_index do |item, index| %>
+  <li id="<%= current_status %>-item-<%= (index + 1)%>"><%= link_to item.name, item_path(item) %>
+  <%= button_to button_will, item_path(item), {method: :patch, params: {:item => {enabled: !item.enabled}, previously: request.path}} %></li>
 <% end %></ul>

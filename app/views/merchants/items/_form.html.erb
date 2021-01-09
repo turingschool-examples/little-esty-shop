@@ -1,4 +1,5 @@
 <%= form_with model: @item, local: true do |f| %>
+  <%= f.hidden_field :previously, value: request.referer %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.label :description %>
