@@ -12,4 +12,8 @@ class Customer < ApplicationRecord
     .order(sales: :desc)
     .limit(5)
   end
+
+  def sucessful_transactions_count
+    transactions.where("result = ?", 1).count
+  end
 end
