@@ -29,12 +29,16 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    @merchant.update(merchant_params)
-    if merchant_params[:status]
-      redirect_to admin_merchants_path
+    if @merchant.update(merchant_params)
+      if merchant_params[:status]
+        flash.notice = "Merchant #{@merchant.name} status was updated successfully!"
+        redirect_to admin_merchants_path
+      else
+        flash.notice = "Merchant #{@merchant.name} was updated successfully!"
+        redirect_to admin_merchant_path(@merchant)
+      end
     else
-      flash.notice = "Merchant #{@merchant.name} was updated successfully!"
-      redirect_to admin_merchant_path(@merchant)
+      render :edit 
     end
   end
 

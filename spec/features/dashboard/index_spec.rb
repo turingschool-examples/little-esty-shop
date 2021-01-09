@@ -84,8 +84,8 @@ RSpec.describe 'merchant dashboard index', type: :feature do
       expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name} - Successful Transactions: #{@merchant.top_5[3].total_success}")
       expect(page).to have_content("#{@customer_6.first_name} #{@customer_6.last_name} - Successful Transactions: #{@merchant.top_5[4].total_success}")
 
-      expect(@customer_4.first_name).to appear_before(@customer_2.first_name)
-      expect(@customer_1.first_name).to appear_before(@customer_6.first_name)
+      expect(@customer_4.name).to appear_before(@customer_2.name)
+      expect(@customer_1.name).to appear_before(@customer_6.name)
     end
 
     it 'can show all items not yet shipped, and show items invoice id as a link.' do
