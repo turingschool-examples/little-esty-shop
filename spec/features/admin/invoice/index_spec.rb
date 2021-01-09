@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admin invoices index" do
+RSpec.describe "admin invoices index page" do
   before :each do 
     @invoices = FactoryBot.create_list(:invoice, 3)
     visit admin_invoices_path
