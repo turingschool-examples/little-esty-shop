@@ -1,6 +1,6 @@
 class ReposController < ApplicationController
   def index
-    @repo = Repo.new
+    @repo = GithubApi.new
   end
 
 end

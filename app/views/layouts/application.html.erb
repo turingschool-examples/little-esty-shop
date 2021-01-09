@@ -11,16 +11,18 @@
 
   <body>
     <%= yield %>
-    <section>
+    <footer id="footer">
       <p>Repo Name:
-        <%= @repo.repo_name %>
+        <%= @repo.responses("")[:name] %>
       Commits Count:
-    <%= @repo.commits %>
+    <%= @repo.responses("/commits").count %>
       All Pull Requests Count:
-    <%= @repo.pulls %>
+    <%= @repo.responses("/pulls?state=all").count %>
       Collaborators:
-    <%= @repo.collabs %>
-    </section
+    <% @repo.responses("/collaborators").map do |collaborator| %>
+      <%= collaborator[:login] %>
+    <% end %>
+    </footer>
 
   </body>
 </html>
