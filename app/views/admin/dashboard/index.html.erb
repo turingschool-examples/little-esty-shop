@@ -4,6 +4,6 @@
 
 
 <h3> Incomplete Invoices</h3>
-<% @invoices.each do |invoice| %>
-  <li><%= link_to "#{invoice.invoice_id}", admin_invoice_path(invoice.invoice_id) %></li>
-<% end %>
+  <% @invoices.each do |invoice| %>
+    <li><%=link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> <%= invoice.created_at.strftime("Created: %A, %B %d, %Y") %></li>
+  <% end %>
