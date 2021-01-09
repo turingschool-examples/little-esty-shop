@@ -12,7 +12,7 @@
   <body>
   <p class="flash">
     <% flash.each do |type, message| %>
-      <p><%= message %></p>
+      <p><%= message.join('\n') %></p>
     <% end %>
   </p>
     <%= yield %>
