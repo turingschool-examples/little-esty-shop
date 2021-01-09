@@ -1,2 +1,3 @@
 <%= render partial: "items", locals: {:current_status => "enabled", button_will: "Disable", items: @items.enabled }%>
 <%= render partial: "items", locals: {:current_status => "disabled", button_will: "Enable", items: @items.disabled }%>
+<%= link_to "New Item", new_merchant_item_path(params[:merchant_id])%>

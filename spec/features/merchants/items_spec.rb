@@ -18,6 +18,12 @@ RSpec.describe "Items Index" do
         expect(page).not_to have_content(item.name)
       end
     end
+    it "link to create new item" do
+      merchant1 = create(:merchant)
+      visit merchant_items_path(merchant1)
+
+      expect(page).to have_link("New Item", href: new_merchant_item_path(merchant1))
+    end
     it "items in the right order" do
       merchant1 = create(:merchant)
       enabled_item = create(:item, merchant: merchant1)
