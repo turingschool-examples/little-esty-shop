@@ -4,5 +4,4 @@ class ApplicationRecord < ActiveRecord::Base
   def date
     created_at.strftime("%A, %b %d, %Y")
   end
-  
 end
