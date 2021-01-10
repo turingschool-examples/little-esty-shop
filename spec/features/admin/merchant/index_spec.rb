@@ -43,12 +43,32 @@ RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
       visit admin_merchants_path
 
       within "#merchant-#{@amazon.id}" do 
-      expect(page).to have_content(@amazon.name)
+        expect(page).to have_content(@amazon.name)
       end 
   
       within "#merchant-#{@alibaba.id}" do 
-      expect(page).to have_content(@alibaba.name)
-    end 
+        expect(page).to have_content(@alibaba.name)
+      end 
+    end
+
+    it "Next to each merchant name I see a button to disable or enable that merchant" do 
+      visit admin_merchants_path
+
+      within "#merchant-#{@alibaba.id}" do 
+        expect(page).to have_content('Status: Enabled')
+        expect(page).to have_button('Disable')
+        expect(page).to have_button('Enable')
+        click_button('Disable')
+      end 
+      
+      expect(current_path).to eq(admin_merchants_path)
+      
+      within "#merchant-#{@alibaba.id}" do 
+        expect(page).to have_content('Status: Disabled')
+        expect(page).to have_button('Disable')
+        expect(page).to have_button('Enable')
+        save_and_open_page
+      end 
     end
   end 
 end 
