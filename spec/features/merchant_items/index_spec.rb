@@ -114,71 +114,30 @@ RSpec.describe "Merchant Items Index" do
       it 'shows a link to create an item' do
         visit "merchant/#{@merchant1.id}/items"
 
-        expect(page).to have_link('Create Item')
+        expect(page).to have_link('New Item')
       end
 
       it 'then takes me to a form to add item information' do
         visit "merchant/#{@merchant1.id}/items"
 
-        click_on 'Create Item'
+        click_on 'New Item'
 
         expect(current_path).to eq("/merchant/#{@merchant1.id}/items/new")
-        expect(page).to have_field('Name')
-        expect(page).to have_field('Description')
-        expect(page).to have_field(:merchant_id)
-        expect(page).to have_field('unit price')
       end
 
-      it 'takes me back to the items index after filling form and submission' do
+      it 'shows the newly created item on the index page default to disabled' do
         visit "merchant/#{@merchant1.id}/items"
 
-        click_on 'Create Item'
-
-        expect(page).to have_field("merchant id", :with => "#{@merchant1.id}")
+        click_on 'New Item'
 
         fill_in 'name', with: 'Mysterious writer'
         fill_in 'description', with: 'it writes for you'
-        fill_in 'unit price', with: 10.35
-
-        click_on 'Submit'
-
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/items")
-      end
-
-      it 'does not allow the user to leave a field blank' do
-        visit "merchant/#{@merchant1.id}/items"
+        fill_in 'unit_price', with: 10.35
 
         click_on 'Create Item'
-
-        expect(page).to have_field("merchant id", :with => "#{@merchant1.id}")
-
-        fill_in 'name', with: ''
-        fill_in 'description', with: ''
-        fill_in 'unit price', with: 10.35
-
-        click_on 'Submit'
-
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/items/new")
-        expect(page).to have_error("Name is blank")
-        expect(page).to have_error("Description is blank")
-      end
-
-
-      it 'shows the newly created item on the index page' do
-        visit "merchant/#{@merchant1.id}/items"
-
-        click_on 'Create Item'
-
-        expect(page).to have_field("merchant id", :with => "#{@merchant1.id}")
-
-        fill_in 'name', with: 'Mysterious writer'
-        fill_in 'description', with: 'it writes for you'
-        fill_in 'unit price', with: 10.35
-
-        click_on 'Submit'
 
         within("#disabled") do
-          expect(current_page).to have_content("Mysterious writer")
+          expect(page).to have_content("Mysterious writer")
         end
       end
     end

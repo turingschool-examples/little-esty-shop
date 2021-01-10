@@ -1,4 +1,5 @@
 <h1><%= @merchant.name %>'s Items </h1>
+<h2><%= link_to 'New Item', "/merchant/#{@merchant.id}/items/new" %></h2>
 <section id="enabled">
   <h1>Enabled Items</h1>
     <% @merchant.enabled_items.each do |item| %>
