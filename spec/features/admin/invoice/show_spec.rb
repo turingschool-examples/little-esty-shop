@@ -35,9 +35,26 @@ RSpec.describe "admin invoices show page" do
   end
 
   it "displays total revenue of the current invoice" do 
-    # skip
     within("#invoice-information") do 
       expect(page).to have_content(@invoice.invoice_items.invoice_amount)
     end
   end
+
+  describe "admin invoice status link" do 
+    it "has a select field for status with the current status selected" do 
+      within("#invoice-information") do 
+        expect(page).to have_selector(:id, 'status', text: @invoice.status)
+      end
+    end
+    it "can select a new status and update the status" do 
+      within("#invoice-information") do 
+        expect(page).to have_select('status', selected: @invoice.status, options: ['in progress', 'completed', 'cancelled'])
+        page.select('completed', from: 'status')
+        click_on 'Save'
+        expect(current_path).to eq(admin_invoice_path(@invoice.id))
+        expect(page).to have_content('completed')
+      end
+    end
+  end
+
 end
