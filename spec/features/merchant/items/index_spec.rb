@@ -24,5 +24,16 @@ describe 'As a merchant' do
         expect(page).to_not have_content(@item_3.name)
       end
     end
+
+    describe 'When I click on the name of an item' do
+      it "Then I am taken to that merchant's item's show page (/merchant/merchant_id/items/item_id)" do
+        expect(page).to have_link(@item_1.name, href: "/merchants/#{@max.id}/items/#{@item_1.id}")
+        expect(page).to have_link(@item_2.name, href: "/merchants/#{@max.id}/items/#{@item_2.id}")
+
+        click_link(@item_1.name)
+
+        expect(current_path).to eq("/merchants/#{@max.id}/items/#{@item_1.id}")
+      end
+    end
   end
 end
