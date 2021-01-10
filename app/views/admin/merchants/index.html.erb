@@ -2,6 +2,8 @@
 <h2>All Merchants</h2>
 <ul id="all-merchants">
 <% @merchants.each do |merchant| %>
-  <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id) %><li>
+  <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id)%>:
+    <%= merchant.enabled ? "Enabled" : "Disabled" %>
+    <%= button_to (merchant.enabled ? "Disable" : "Enable"), "/admin/merchants/#{merchant.id}?enabled=#{!merchant.enabled}", id: "toggle-status", method: :patch %></li>
 <% end %>
 </ul>
