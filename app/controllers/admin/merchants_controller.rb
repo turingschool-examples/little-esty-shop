@@ -9,6 +9,13 @@ class Admin::MerchantsController < ApplicationController
   def show
   end
   
+  def create
+    @merchant = Merchant.new(m_params)
+    @merchant.save
+
+    redirect_to admin_merchants_path
+  end
+
   def edit
   end
 
@@ -25,5 +32,9 @@ class Admin::MerchantsController < ApplicationController
 
   def merchant_params
     params.require(:merchant).permit(:name)
+  end
+
+  def m_params
+    params.permit(:name)
   end
 end
