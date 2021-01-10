@@ -19,4 +19,13 @@ describe "Admin Merchants Edit Page" do
     expect(page.find("#flash-notice")).to have_content("Successfully Updated Info")
     expect(page).to have_content(added_text)
   end
+
+  it "properly handles an empty name" do
+    added_text = ""
+    fill_in "name", with: added_text
+    click_on "Submit"
+
+    #expect(current_path).to eq(edit_admin_merchant_path(@merchant.id))
+    expect(page.find("#flash-error")).to have_content("Name can't be blank")
+  end
 end
