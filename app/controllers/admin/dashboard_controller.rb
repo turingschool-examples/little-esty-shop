@@ -1,5 +1,6 @@
 class Admin::DashboardController < ApplicationController
   def index
-    @invoices = Invoice.not_shipped
+    @invoices = Invoice.all
+    @customers = Customer.all
   end
 end

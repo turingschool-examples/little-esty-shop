@@ -39,6 +39,7 @@ RSpec.describe "Visit admin merhcnats show page '/admin/merchants/:id'" do
       @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @backpack.id)
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
+    
     it "I see a link of the merchants name that goes to their show page" do 
     visit admin_merchants_path
 
@@ -49,7 +50,8 @@ RSpec.describe "Visit admin merhcnats show page '/admin/merchants/:id'" do
     expect(current_path).to eq(admin_merchant_path(@amazon.id))
     expect(page).to have_content(@amazon.name)
     end 
-    it "can see and click link to update merchant and page refreshes with info" do 
+
+    it "I can see and click link to update merchant and page refreshes with info" do 
     visit admin_merchant_path(@amazon.id)
 
     expect(page).to have_link("Update")
