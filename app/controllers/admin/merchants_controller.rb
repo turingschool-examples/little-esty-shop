@@ -32,6 +32,17 @@ class Admin::MerchantsController < ApplicationController
   def new
   end
 
+  def create
+    merchant = Merchant.new(merchant_params.merge(enabled: false))
+    if merchant.save
+      flash.notice = "Successfully Added Merchant"
+      redirect_to admin_merchants_path
+    else
+      flash.alert = merchant.errors.full_messages
+      render "new"
+    end
+  end
+
   private
 
   def merchant_params
