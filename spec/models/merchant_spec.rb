@@ -10,6 +10,7 @@ RSpec.describe Merchant, type: :model do
     it {should have_many :invoices}
     it {should have_many(:customers).through(:invoices)}
     it {should have_many(:transactions).through(:invoices)}
+    it {should have_many(:invoice_items).through(:items)}
   end
 
   describe 'instance methods' do
@@ -65,6 +66,28 @@ RSpec.describe Merchant, type: :model do
 
       expect(actual_names).to eq(expected_names)
       expect(actual_successful_transaction_counts).to eq(expected_successful_transaction_counts)
+    end
+
+    describe 'items_ready_to_ship' do
+      it 'returns an array of all the names of my items that have been ordered and have not yet been shipped' do
+        max = Merchant.create!(name: 'Merch Max')
+        item_1 = max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
+        item_2 = max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
+        item_3 = max.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
+
+        sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
+        invoice1 = Invoice.create!(status: 1, customer_id: sally.id, merchant_id: max.id)
+
+        InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_1.id, quantity: 1, unit_price: 5, status: 0)
+        InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_2.id, quantity: 1, unit_price: 10, status: 1)
+        InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_3.id, quantity: 1, unit_price: 15, status: 2)
+
+        actual_items = max.items_ready_to_ship
+
+        expected_items = [item_1, item_2]
+
+        expect(actual_items).to eq(expected_items)
+      end
     end
   end
 end
