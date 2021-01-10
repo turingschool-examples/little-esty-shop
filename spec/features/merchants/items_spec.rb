@@ -81,7 +81,7 @@ RSpec.describe "Items Index" do
         visit merchant_items_path(merchant1)
 
         items.each do |item|
-          top_day = "Top day for #{item.name} was #{(Date.strftime("%m/%d/%y")}"
+          top_day = "Top day for #{item.name} was #{Date.today.strftime("%m/%d/%y")}"
           expect(page).to have_content(top_day)
         end
       end

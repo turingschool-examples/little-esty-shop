@@ -7,6 +7,24 @@ describe Item, type: :model do
     it {should belong_to :merchant}
   end
 
+  describe "scopes" do
+    it 'enabled' do
+      enabled_item = create(:item, enabled: true)
+      disabled_item = create(:item, enabled: false)
+
+      expect(Item.enabled).to include(enabled_item)
+      expect(Item.enabled).not_to include(disabled_item)
+    end
+
+    it 'enabled' do
+      enabled_item = create(:item, enabled: true)
+      disabled_item = create(:item, enabled: false)
+
+      expect(Item.disabled).to include(disabled_item)
+      expect(Item.disabled).not_to include(enabled_item)
+    end
+  end
+
   describe 'class methods:' do
     it 'items_to_ship;' do
       merchant1 = create(:merchant)
