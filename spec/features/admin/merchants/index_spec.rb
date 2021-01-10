@@ -59,6 +59,6 @@ describe "Admin Merchants Index Page" do
 
   it "has a link to create a new merchant" do
     click_on "New Merchant"
-    expect(current_path).to eq(new_admin_merchant)
+    expect(current_path).to eq(new_admin_merchant_path)
   end
 end
