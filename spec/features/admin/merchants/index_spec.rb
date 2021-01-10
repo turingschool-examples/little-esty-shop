@@ -37,4 +37,16 @@ describe 'Admin Merchant Index' do
   it 'should group by enabled/disabled' do 
     expect(@m1.name).to appear_before(@m3.name)
   end
+
+  it 'should have a link to create a new merchant' do
+    expect(page).to have_link('Create Merchant')
+    click_link 'Create Merchant'
+
+    expect(current_path).to eq(new_admin_merchant_path)
+    fill_in :name, with: 'Dingley Doo'
+    click_button
+
+    expect(current_path).to eq(admin_merchants_path)
+    expect(page).to have_content('Dingley Doo')
+  end
 end
