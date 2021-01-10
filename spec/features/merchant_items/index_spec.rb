@@ -91,7 +91,7 @@ RSpec.describe "Merchant Items Index" do
 
     it 'has the sections' do
       visit "merchant/#{@merchant1.id}/items"
-      save_and_open_page
+
       expect(page).to have_content('Enabled Items')
       expect(page).to have_content('Disabled Items')
     end
