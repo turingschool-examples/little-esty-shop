@@ -17,19 +17,45 @@ describe Item, type: :model do
 
       expect(Item.items_to_ship.to_set).to eq(items.first(4).to_set)
     end
-    it 'popular_items' do
-      merchant1 = create(:merchant)
-      item = create(:item, merchant: merchant1)
-      items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
-      
-      items.each_with_index do |item, index|
-        (1 + index).times do
-          invoice = create(:invoice, items: [item])
-          create(:transaction, invoice_id: invoice.id, result: 0)
+
+    describe 'popular_items' do
+      before(:each) do
+        @merchant1 = create(:merchant)
+        @items = create_list(:item, 5, merchant: @merchant1, unit_price: 1)
+
+        @items.each_with_index do |item, index|
+          (5 - index).times do
+            invoice = create(:invoice, items: [item])
+            create(:invoice_item, item_id: item.id, invoice_id: invoice.id, quantity: 1, unit_price: index + 10)
+            create(:transaction, invoice_id: invoice.id, result: 0)
+          end
         end
+
+        no_transaction = create(:item, merchant: @merchant1)
       end
 
-      expect(Item.popular_items.to_set).to eq(items.to_set)
+      it "selects the most popular items" do
+        expect(Item.popular_items.to_set).to eq(@items.to_set)
+      end
+
+      it "only includes invoices with successful transactions" do
+        unsuccessful = create(:item, merchant: @merchant1, unit_price: 1)
+        6.times do
+          invoice = create(:invoice, items: [unsuccessful])
+          create(:transaction, invoice_id: invoice.id, result: 1)
+        end
+
+        expect(Item.popular_items).not_to include(unsuccessful)
+      end
+
+      it "considers the invoice_item's unit price rather than the item's" do
+        popular_items = Item.popular_items
+        expect(popular_items[0].total_revenue).to eq(50)
+        expect(popular_items[1].total_revenue).to eq(44)
+        expect(popular_items[2].total_revenue).to eq(36)
+        expect(popular_items[3].total_revenue).to eq(26)
+        expect(popular_items[4].total_revenue).to eq(14)
+      end
     end
   end
 end
