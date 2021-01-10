@@ -13,5 +13,20 @@ class ApiInfo
     repo_name = body[:name]
   end
 
+  def contributors
+    response = @conn.get("/repos/cunninghamge/little-esty-shop/contributors")
+    body = JSON.parse(response.body, symbolize_names: true)
+    body.map do |contributor|
+      [contributor[:login], contributor[:contributions]]
+    end
+  end
+
+  def merged_pull_request
+    response = @conn.get("/repos/cunninghamge/little-esty-shop/pulls?state=closed")
+    body = JSON.parse(response.body, symbolize_names: true)
+    body.count do |pull|
+      pull[:merged_at]
+    end 
+  end
 
 end
