@@ -1,0 +1,14 @@
+<h1><%="Invoice #{@invoice.id} Details"%></h1>
+
+<h3>Customer Details</h3>
+<li>First Name:       <%= @invoice.customer.first_name %></li>
+<li>Last Name:        <%= @invoice.customer.last_name %></li>
+
+<% @invoice.items.each do |item| %>
+  <section id="item-<%=item.id%>">
+    <h4>        <%= item.name %></h4>
+    <li>Qty:    <%= item.quantity_ordered(item.id, @invoice.id).to_sentence %></li>
+    <li>Price: $<%= item.total_price(item.id, @invoice.id) %></li>
+    <li>Status: <%= item.status(item.id, @invoice.id).to_sentence.capitalize %></li><br>
+  </section>
+<% end %>

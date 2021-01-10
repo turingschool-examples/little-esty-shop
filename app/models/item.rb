@@ -5,4 +5,16 @@ class Item < ApplicationRecord
 
   has_many :invoice_items 
   has_many :invoices, through: :invoice_items
+
+  def quantity_ordered(itm_id, invc_id)
+    invoice_items.where(item_id: itm_id, invoice_id: invc_id).pluck(:quantity)
+  end
+
+  def total_price(itm_id, invc_id)
+    invoice_items.where(item_id: itm_id, invoice_id: invc_id).sum('unit_price * quantity')
+  end
+
+  def status(itm_id, invc_id)
+    invoice_items.where(item_id: itm_id, invoice_id: invc_id).pluck(:status)
+  end
 end

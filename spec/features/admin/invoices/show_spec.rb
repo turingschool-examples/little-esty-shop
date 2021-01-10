@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Dashboard' do
+RSpec.describe 'Admin Invoice Show Page' do
   describe 'As an admin user' do
     before(:each) do
       # Customers:
@@ -37,62 +37,23 @@ RSpec.describe 'Admin Dashboard' do
       # InvoiceItems:
       @invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: @invoice1.id, item_id: @candle.id)
       @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @backpack.id)
-      @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @backpack.id)
+      @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
 
-    it "when I visit the admin dashboard I see a header" do
-      visit admin_root_path
-
-      expect(page).to have_content("Admin Dashboard")
+    it 'I see all of the customer information related to that invoice' do
+      visit admin_invoice_path(@invoice2.id)
+      expect(page).to have_content(@joel.first_name)
+      expect(page).to have_content(@joel.last_name)
     end
 
-    it 'I see a link to the admin merchants and invoices index' do
-      visit admin_root_path
+    it 'I see all of the items on the invoice' do
+      visit admin_invoice_path(@invoice3.id)
 
-      expect(page).to have_link('Merchants')
-      expect(page).to have_link('Invoices')
-
-      click_link 'Merchants'
-
-      expect(current_path).to eq(admin_merchants_path)
-
-      visit admin_root_path
-
-      click_link 'Invoices'
-
-      expect(current_path).to eq(admin_invoices_path)
+      expect(page).to have_content(@radio.name)
+      expect(page).to have_content('Qty: 100')
+      expect(page).to have_content('Price: $900')
+      expect(page).to have_content('Status: Pending')
     end
-
-    it 'I see a list of all the ids of the invoices whose items have not been shipped and the invoices link to their admin page' do
-      visit admin_root_path
-
-      expect(page).to have_content('Incomplete Invoices')
-      expect(page).to have_content(@invoice1.id)
-      expect(page).to_not have_content(@invoice2.id)
-      expect(page).to have_link(@invoice1.id.to_s)
-
-      click_link(@invoice1.id.to_s)
-
-      expect(current_path).to eq(admin_invoice_path(@invoice1.id))
-    end
-
-    it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
-      visit admin_root_path
-
-      date_inv1 = "#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}"
-      date_inv3 = "#{@invoice3.created_at.strftime("Created: %A, %B %d, %Y")}"
-
-      expect(page).to have_link(@invoice1.id.to_s)
-      expect(page).to have_content(date_inv1)
-      expect(page).to have_link(@invoice3.id.to_s)
-      expect(page).to have_content(date_inv3)
-      expect(date_inv1).to appear_before(date_inv3)
-      expect(date_inv3).to_not appear_before(date_inv1)
-    end
-
   end 
 end 
-
-
-
 

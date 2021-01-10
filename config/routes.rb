@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
   # '/merchants/:id/items', to: 'merchant'
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
+  get '/github', to: 'github_api#show'
 end
