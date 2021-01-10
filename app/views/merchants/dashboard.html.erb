@@ -12,6 +12,10 @@
 <ul class='items-rdy-to-ship'>
   <h2>Items Ready to Ship</h2>
   <% @merchant.items_ready_to_ship.each do |item| %>
-    <li><%= item.name %> <%= link_to item.id, merchant_item_path(@merchant.id, item.id) %></li>
+    <li>
+      <% binding.pry %>
+      <%= item.name %>
+      <%= link_to item.id, merchant_item_path(@merchant.id, item.id) %>
+    </li>
   <% end %>
 </ul>

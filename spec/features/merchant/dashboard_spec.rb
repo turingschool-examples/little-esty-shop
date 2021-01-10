@@ -100,10 +100,29 @@ RSpec.describe 'Merchant Dashboard' do
 
           expect(current_path).to eq("/merchants/#{@max.id}/items/#{item_2.id}")
         end
+
+        it "I see the associated invoices created at date ordered from oldest to newest" do
+          item_1 = @max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
+          item_2 = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
+          item_3 = @max.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
+
+          sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
+          lisa    = Customer.create!(first_name: 'Lisa', last_name: 'John')
+          invoice1 = Invoice.create!(status: 1, customer_id: sally.id, merchant_id: @max.id, created_at: '2010-02-21 09:54:09 UTC')
+          invoice2 = Invoice.create!(status: 1, customer_id: lisa.id, merchant_id: @max.id, created_at: '2012-03-25 09:54:09 UTC')
+
+          InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_1.id, quantity: 1, unit_price: 5, status: 0)
+          InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_2.id, quantity: 1, unit_price: 10, status: 1)
+          InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_3.id, quantity: 1, unit_price: 15, status: 2)
+# require "pry"; binding.pry
+          visit "/merchants/#{@max.id}/dashboard"
+
+          within('.items-rdy-to-ship') do
+            expect(invoice1.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice2.created_at.strftime("%A, %B %d, %Y"))
+            expect(invoice1.created_at.strftime("%A, %B %d, %Y")).to_not appear_before(invoice2.created_at.strftime("%A, %B %d, %Y"))
+          end
+        end
       end
     end
   end
 end
-
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page

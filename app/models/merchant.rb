@@ -19,4 +19,9 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     items.joins(:invoice_items).where.not('invoice_items.status = ?', 2)
   end
+
+  def order_by_invoice_created_date
+    invoices.order(:created_at)
+  end
+
 end
