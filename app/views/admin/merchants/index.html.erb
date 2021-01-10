@@ -1,9 +1,19 @@
 <h1>Merchants Index</h1>
 <h2>All Merchants</h2>
-<ul id="all-merchants">
-<% @merchants.each do |merchant| %>
-  <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id)%>:
-    <%= merchant.enabled ? "Enabled" : "Disabled" %>
-    <%= button_to (merchant.enabled ? "Disable" : "Enable"), "/admin/merchants/#{merchant.id}?enabled=#{!merchant.enabled}", id: "toggle-status", method: :patch %></li>
-<% end %>
-</ul>
+<section id="all-merchants">
+  <ul id="enabled-merchants">
+    <% @enabled_merchants.each do |merchant| %>
+      <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id)%>: Enabled
+        <%= button_to "Disable", "/admin/merchants/#{merchant.id}?enabled=#{!merchant.enabled}", id: "toggle-status", method: :patch %>
+      </li>
+    <% end %>
+  </ul>
+
+  <ul id="disabled-merchants">
+    <% @disabled_merchants.each do |merchant| %>
+      <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id)%>: Disabled
+        <%= button_to "Enable", "/admin/merchants/#{merchant.id}?enabled=#{!merchant.enabled}", id: "toggle-status", method: :patch %>
+      </li>
+    <% end %>
+  </ul>
+</section>
