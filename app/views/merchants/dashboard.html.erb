@@ -11,11 +11,11 @@
 
 <ul class='items-rdy-to-ship'>
   <h2>Items Ready to Ship</h2>
-  <% @merchant.items_ready_to_ship.each do |item| %>
+  <% @merchant.order_merchant_items_by_invoice_created_date(@merchant.items_ready_to_ship).each do |item| %>
     <li>
-      <% binding.pry %>
       <%= item.name %>
       <%= link_to item.id, merchant_item_path(@merchant.id, item.id) %>
+      <%= item.invoices.first.created_at.strftime("%A, %B %d, %Y") %>
     </li>
   <% end %>
 </ul>

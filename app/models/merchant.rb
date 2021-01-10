@@ -20,8 +20,7 @@ class Merchant < ApplicationRecord
     items.joins(:invoice_items).where.not('invoice_items.status = ?', 2)
   end
 
-  def order_by_invoice_created_date
-    invoices.order(:created_at)
+  def order_merchant_items_by_invoice_created_date(items)
+    items.joins(:invoices).where('invoices.merchant_id = ?', self.id).order('invoices.created_at DESC')
   end
-
 end

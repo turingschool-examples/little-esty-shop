@@ -95,6 +95,7 @@ RSpec.describe Merchant, type: :model do
         item_1 = max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
         item_2 = max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
         item_3 = max.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
+        item_4 = max.items.create!(name: 'Item 4', description: 'Item 4 Description...', unit_price: 20)
 
         sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
         lisa    = Customer.create!(first_name: 'Lisa', last_name: 'John')
@@ -104,10 +105,11 @@ RSpec.describe Merchant, type: :model do
         InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_1.id, quantity: 1, unit_price: 5, status: 0)
         InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_2.id, quantity: 1, unit_price: 10, status: 1)
         InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_3.id, quantity: 1, unit_price: 15, status: 2)
+        InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_4.id, quantity: 1, unit_price: 20, status: 1)
 
-        actual = max.order_by_invoice_created_date
+        actual = max.order_merchant_items_by_invoice_created_date(max.items)
 
-        expected = [invoice1, invoice2]
+        expected = [item_1, item_2, item_3, item_4]
 
         expect(actual).to eq(expected)
       end
