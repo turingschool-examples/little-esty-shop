@@ -1,4 +1,4 @@
-require "CSV"
+require "csv"
 
 namespace :csv_load do
 
