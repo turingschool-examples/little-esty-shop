@@ -51,10 +51,14 @@ describe "Admin Merchants Index Page" do
     end
 
     within("#disabled-merchants") do
-      @disabled_merchants.each do |merchant| 
+      @disabled_merchants.each do |merchant|
         expect(page).to have_css("#merchant-#{merchant.id}")
       end
     end
+  end
 
+  it "has a link to create a new merchant" do
+    click_on "New Merchant"
+    expect(current_path).to eq(new_admin_merchant)
   end
 end
