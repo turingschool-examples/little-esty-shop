@@ -67,7 +67,6 @@ RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
         expect(page).to have_content('Status: Disabled')
         expect(page).to have_button('Disable')
         expect(page).to have_button('Enable')
-        save_and_open_page
       end 
     end
   end 
