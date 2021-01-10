@@ -1,0 +1,5 @@
+<h1>hello</h1>
+
+<% @github_results.each do |result| %>
+  <li>Contributor: <%= result.username%> - Total Commits: <%= result.total_commits%>
+<% end %>

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show]
   end
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
+  get '/github', to: 'github_api#show'
 end
