@@ -1,0 +1,3 @@
+class ApiInfo
+  
+end
