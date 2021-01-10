@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard' do
   describe 'As an admin user' do
-   before(:each) do
+    before(:each) do
       # Customers:
       @sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
       @joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
@@ -89,7 +89,10 @@ RSpec.describe 'Admin Dashboard' do
       expect(date_inv1).to appear_before(date_inv3)
       expect(date_inv3).to_not appear_before(date_inv1)
     end
+
   end 
 end 
+
+
 
 
