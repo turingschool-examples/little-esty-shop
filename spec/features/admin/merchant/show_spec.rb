@@ -49,5 +49,21 @@ RSpec.describe "Visit admin merhcnats show page '/admin/merchants/:id'" do
     expect(current_path).to eq(admin_merchant_path(@amazon.id))
     expect(page).to have_content(@amazon.name)
     end 
+    it "can see and click link to update merchant and page refreshes with info" do 
+    visit admin_merchant_path(@amazon.id)
+
+    expect(page).to have_link("Update")
+
+    click_link("Update")
+
+    expect(current_path).to eq(edit_admin_merchant_path(@amazon.id))
+    
+    fill_in "Name", with: "Amazon.inc"
+    
+    click_button "Submit"
+
+    expect(current_path).to eq(admin_merchant_path(@amazon.id))
+    expect(page).to have_content("Information has been updated")
+    end
   end 
 end 
