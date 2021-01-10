@@ -4,7 +4,7 @@ describe 'Admin Merchant Index' do
   before :each do
     @m1 = Merchant.create!(name: 'Merchant 1')
     @m2 = Merchant.create!(name: 'Merchant 2')
-    @m3 = Merchant.create!(name: 'Merchant 3')
+    @m3 = Merchant.create!(name: 'Merchant 3', status: 1)
     visit admin_merchants_path
   end
 
@@ -33,4 +33,8 @@ describe 'Admin Merchant Index' do
 #       expect(@m1.status).to eq('disabled')
 #     end
 #   end
+
+  it 'should group by enabled/disabled' do 
+    expect(@m1.name).to appear_before(@m3.name)
+  end
 end
