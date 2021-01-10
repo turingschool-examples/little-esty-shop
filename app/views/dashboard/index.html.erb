@@ -8,3 +8,24 @@
     </ul>
   </nav>
 </div>
+
+<body>
+  <div class="row">
+    <p class='mr-auto col-sm-5'>Incomplete Invoices</p>
+    <% @merchant.favorite_customers.each do |customer| %>
+      <section id="customer-<%= customer.id %>">
+          <%= customer.first_name %>
+          <%= customer.last_name %>
+          <%= customer.top_result %>
+      </section>
+    <% end %>
+  </div>
+</body>
+
+<section id = "items_ready_to_ship" >
+  <p><% @merchant.ordered_items_to_ship.each do |item| %>
+        <%= item.name %> - Invoice #<%= link_to "#{item.invoice_ids}", "/merchant/#{@merchant.id}/invoices/#{item.invoice_ids[0]}" %>
+        <%= item.created_at.strftime("%A, %B %-d, %Y") %><br>
+     <% end %>
+  </p>
+</section>
