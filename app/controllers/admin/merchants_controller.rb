@@ -1,18 +1,27 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    # require 'pry'; binding.pry
-    @merchants = Merchant.all
-  end 
+    @merchants_enabled = Merchant.enabled_merchants
+    @merchants_disabled = Merchant.disabled_merchants
+  end
 
-  def show 
+  def new
+  end
+
+  def create
+    merchant = Merchant.create!(merchant_params)
+    merchant.save
+    redirect_to admin_merchants_path
+  end
+
+  def show
     @merchant = Merchant.find(params[:id])
   end
 
-  def edit 
+  def edit
     @merchant = Merchant.find(params[:id])
   end
 
-  def update 
+  def update
     merchant = Merchant.find(params[:id])
     if params[:update_to] == 'Disabled'
       merchant.update(status: 1)
@@ -22,17 +31,16 @@ class Admin::MerchantsController < ApplicationController
       merchant.update(status: 0)
       merchant.save
       redirect_to admin_merchants_path
-    else  
-      merchant.update(merchant_params) 
-      merchant.save 
+    else
+      merchant.update(merchant_params)
+      merchant.save
       redirect_to admin_merchant_path(merchant.id)
       flash[:notice] = "Information has been updated"
     end
   end
 
-  private 
+  private
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 end
-
