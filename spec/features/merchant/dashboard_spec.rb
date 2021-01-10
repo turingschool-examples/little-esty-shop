@@ -56,7 +56,7 @@ RSpec.describe 'Merchant Dashboard' do
         tx12     = Transaction.create!(result: "failure", credit_card_number: 0100010055, credit_card_expiration_date: 20220101, invoice_id: invoice14.id,)
 
         visit "/merchants/#{amazon.id}/dashboard"
-        
+
         within('.merchant-top-5-customers-list') do
           expect(page).to have_content("#{sally.first_name}: 2")
           expect(page).to have_content("#{joel.first_name}: 2")
@@ -66,6 +66,44 @@ RSpec.describe 'Merchant Dashboard' do
           expect(page).to_not have_content("#{tim.first_name}: 2")
         end
       end
+
+      describe "Then I see a section for 'Items Ready to Ship'" do
+        it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
+          item_1 = @max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
+          item_2 = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
+          item_3 = @max.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
+
+          sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
+          invoice1 = Invoice.create!(status: 1, customer_id: sally.id, merchant_id: @max.id)
+
+          InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_1.id, quantity: 1, unit_price: 5, status: 0)
+          InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_2.id, quantity: 1, unit_price: 10, status: 1)
+          InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_3.id, quantity: 1, unit_price: 15, status: 2)
+
+          visit "/merchants/#{@max.id}/dashboard"
+
+          within('.items-rdy-to-ship') do
+            expect(page).to have_content('Items Ready to Ship')
+            expect(page).to have_content(item_1.name)
+            expect(page).to have_content(item_2.name)
+            expect(page).to have_link("#{item_1.id}")
+            expect(page).to have_link("#{item_2.id}")
+          end
+
+          click_on "#{item_1.id}"
+
+          expect(current_path).to eq("/merchants/#{@max.id}/items/#{item_1.id}")
+
+          visit "/merchants/#{@max.id}/dashboard"
+
+          click_on "#{item_2.id}"
+
+          expect(current_path).to eq("/merchants/#{@max.id}/items/#{item_2.id}")
+        end
+      end
     end
   end
 end
+
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
