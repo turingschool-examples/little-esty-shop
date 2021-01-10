@@ -11,8 +11,8 @@ RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
       @frank    = Customer.create!(first_name: 'Frank', last_name: 'Sinatra')
       @Jon      = Customer.create!(first_name: 'Jon', last_name: 'Travolta')
       # Merchants:
-      @amazon   = Merchant.create!(name: 'Amazon')
-      @alibaba  = Merchant.create!(name: 'Alibaba')
+      @amazon   = Merchant.create!(name: 'Amazon', status: 0)
+      @alibaba  = Merchant.create!(name: 'Alibaba', status: 1)
       # Invoices:
       @invoice1 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @amazon.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
       @invoice2 = Invoice.create!(status: 0, customer_id: @joel.id, merchant_id: @alibaba.id)
@@ -39,35 +39,50 @@ RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
       @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @backpack.id)
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
-    it "can see the name of each merchants in the system" do 
+    it "can see the name of each merchants in the system" do
       visit admin_merchants_path
 
-      within "#merchant-#{@amazon.id}" do 
+      within "#merchant-#{@amazon.id}" do
         expect(page).to have_content(@amazon.name)
-      end 
-  
-      within "#merchant-#{@alibaba.id}" do 
+      end
+
+      within "#merchant-#{@alibaba.id}" do
         expect(page).to have_content(@alibaba.name)
-      end 
+      end
     end
 
-    it "Next to each merchant name I see a button to disable or enable that merchant" do 
+    it "Next to each merchant name I see a button to disable or enable that merchant" do
       visit admin_merchants_path
 
-      within "#merchant-#{@alibaba.id}" do 
+      within "#merchant-#{@alibaba.id}" do
         expect(page).to have_content('Status: Enabled')
         expect(page).to have_button('Disable')
         expect(page).to have_button('Enable')
         click_button('Disable')
-      end 
-      
+      end
+
       expect(current_path).to eq(admin_merchants_path)
-      
-      within "#merchant-#{@alibaba.id}" do 
+
+      within "#merchant-#{@alibaba.id}" do
         expect(page).to have_content('Status: Disabled')
         expect(page).to have_button('Disable')
         expect(page).to have_button('Enable')
-      end 
+      end
     end
-  end 
-end 
+
+    it "I see Admin Merchants Grouped by Status" do
+      visit admin_merchants_path
+      
+      expect(page).to have_content("Enabled Merchants:")
+      expect(page).to have_content("Disabled Merchants:")
+
+      within ".merchant-enabled" do
+        expect(page).to have_content(@amazon.name)
+      end
+
+      within ".merchant-disabled" do
+        expect(page).to have_content(@alibaba.name)
+      end
+    end
+  end
+end
