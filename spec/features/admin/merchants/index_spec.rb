@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "Admin Merchants Index Page" do
   before :each do
-    @merchants = []
-    5.times {@merchants << create(:merchant) }
+    @merchants = create_list(:merchant,5)
+    @disabled_merchants = create_list(:merchant,5,enabled: false)
     visit "/admin/merchants"
   end
 
@@ -41,5 +41,20 @@ describe "Admin Merchants Index Page" do
     within("#merchant-#{@merchants[0].id}") do
       expect(page).to have_content("Enabled")
     end
+  end
+
+  it "has a section for enabled and disabled merchants" do
+    within("#enabled-merchants") do
+      @merchants.each do |merchant|
+        expect(page).to have_css("#merchant-#{merchant.id}")
+      end
+    end
+
+    within("#disabled-merchants") do
+      @disabled_merchants.each do |merchant| 
+        expect(page).to have_css("#merchant-#{merchant.id}")
+      end
+    end
+
   end
 end
