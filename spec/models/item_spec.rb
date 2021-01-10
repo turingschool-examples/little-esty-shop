@@ -36,5 +36,16 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'instance methods' do
+    it 'Can return the quantity of items ordered' do
+      expect(@candle.quantity_ordered(@candle.id, @invoice1.id)[0]).to eq(25)
+    end
+
+    it 'Can calculate the total price' do
+      expect(@candle.total_price(@candle.id, @invoice1.id)).to eq(175)
+    end
+
+    it 'Can return the status of items ordered' do
+      expect(@candle.status(@candle.id, @invoice1.id)[0]).to eq("packaged")
+    end
   end
 end
