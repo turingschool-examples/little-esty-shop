@@ -65,6 +65,26 @@ RSpec.describe "Items Index" do
           expect(page).to have_content(top_day)
         end
       end
+
+      it "showing the most recent day if multiple days have the top sales" do
+        merchant1 = create(:merchant)
+        items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
+
+        5.times do |n|
+          invoice = create(:invoice, created_at: Date.today - n)
+          items[n..-1].each do |item|
+            create(:invoice_item, item: item, invoice: invoice, quantity: 5, unit_price: 1)
+          end
+          create(:transaction, invoice: invoice, result: 0)
+        end
+
+        visit merchant_items_path(merchant1)
+
+        items.each do |item|
+          top_day = "Top day for #{item.name} was #{(Date.strftime("%m/%d/%y")}"
+          expect(page).to have_content(top_day)
+        end
+      end
     end
 
     it "link to create new item" do
