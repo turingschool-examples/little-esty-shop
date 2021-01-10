@@ -7,6 +7,12 @@
     <li>invoice creation date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></li>
     <li>invoice total: <%= @invoice.invoice_items.invoice_amount %></li>
   </ul>
+
+  <%= form_with invoice: @invoice, method: :patch do |f| %>
+    <%= f.select :status, ["in progress","completed", "cancelled"], selected: "#{@invoice.status}" %>
+    <%= f.label :status %>
+    <%= f.submit %>
+  <% end %>
 </section>
 
 <section id="customer-information">
