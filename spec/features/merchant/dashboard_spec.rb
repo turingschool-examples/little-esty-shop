@@ -116,9 +116,9 @@ RSpec.describe 'Merchant Dashboard' do
           InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_2.id, quantity: 1, unit_price: 10, status: 1)
           InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_3.id, quantity: 1, unit_price: 15, status: 2)
           InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_4.id, quantity: 1, unit_price: 20, status: 1)
-# require "pry"; binding.pry
-          visit "/merchants/#{@max.id}/dashboard"
           
+          visit "/merchants/#{@max.id}/dashboard"
+
           within('.items-rdy-to-ship') do
             expect(page).to have_content(invoice1.created_at.strftime("%A, %B %d, %Y"))
             expect(page).to have_content(invoice2.created_at.strftime("%A, %B %d, %Y"))
