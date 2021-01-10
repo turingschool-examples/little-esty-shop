@@ -1,0 +1,8 @@
+<h2> Add a Merchant </h2>
+
+<%= form_tag admin_merchants_path, method: :post do %>
+  <%= label_tag :name, 'Name:' %>
+  <%= text_field_tag :name,  '', :required => true%><br>
+  <%= hidden_field_tag :status, 'Disabled' %><br>
+  <%= submit_tag 'Submit' %>
+<% end %>

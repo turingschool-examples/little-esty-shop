@@ -1,4 +1,6 @@
 <h1> List of all Merchants </h1>
+<%= link_to 'New Merchant', new_admin_merchant_path %><br>
+
 Enabled Merchants:
 <section class="merchant-enabled">
 <% @merchants_enabled.each do |merchant| %>
@@ -7,9 +9,10 @@ Enabled Merchants:
     Status: <%= merchant.status %>
     <%= button_to "Disable", admin_merchant_path(merchant.id, update_to: 'Disabled'), method: :patch %>
     <%= button_to "Enable", admin_merchant_path(merchant.id, update_to: 'Enabled'), method: :patch %>
-</section>
+  </section>
 <% end %>
 </section>
+
 Disabled Merchants:
 <section class="merchant-disabled">
 <% @merchants_disabled.each do |merchant| %>
@@ -18,6 +21,6 @@ Disabled Merchants:
     Status: <%= merchant.status %>
     <%= button_to "Disable", admin_merchant_path(merchant.id, update_to: 'Disabled'), method: :patch %>
     <%= button_to "Enable", admin_merchant_path(merchant.id, update_to: 'Enabled'), method: :patch %>
-</section>
+  </section>
 <% end %>
 </section>
