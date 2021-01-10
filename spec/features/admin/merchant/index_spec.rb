@@ -55,16 +55,16 @@ RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
       visit admin_merchants_path
 
       within "#merchant-#{@alibaba.id}" do
-        expect(page).to have_content('Status: Enabled')
+        expect(page).to have_content('Status: Disabled')
         expect(page).to have_button('Disable')
         expect(page).to have_button('Enable')
-        click_button('Disable')
+        click_button('Enable')
       end
 
       expect(current_path).to eq(admin_merchants_path)
 
       within "#merchant-#{@alibaba.id}" do
-        expect(page).to have_content('Status: Disabled')
+        expect(page).to have_content('Status: Enabled')
         expect(page).to have_button('Disable')
         expect(page).to have_button('Enable')
       end
@@ -83,6 +83,21 @@ RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
       within ".merchant-disabled" do
         expect(page).to have_content(@alibaba.name)
       end
+    end
+
+    it "I see and click a link to create a new merchant" do
+      visit admin_merchants_path
+      
+      expect(page).to have_link("New Merchant")
+
+      click_link('New Merchant')
+      expect(current_path).to eq(new_admin_merchant_path)
+      
+      fill_in 'Name:', with: 'All Birds'
+      click_on 'Submit'
+
+      expect(current_path).to eq(admin_merchants_path)
+      expect(page).to have_content('All Birds')
     end
   end
 end
