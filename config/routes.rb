@@ -5,11 +5,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root :to => 'dashboard#index'
-    resources :merchants 
+    resources :merchants
     resources :invoices, only: [:index, :show]
   end
   resources :merchants do
-    resources :items, only: [:show], controller: :merchant_items
+    resources :items, only: [:index, :show], controller: :merchant_items
   end
   # '/merchants/:id/items', to: 'merchant'
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
