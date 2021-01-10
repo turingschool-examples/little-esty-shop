@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   shallow do 
     namespace :admin do 
       resources :merchants
-      resources :invoices, only: [:index, :show]
+      resources :invoices, only: [:index, :show, :update]
     end
   end
 end
