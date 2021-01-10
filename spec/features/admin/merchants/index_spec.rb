@@ -27,4 +27,19 @@ describe "Admin Merchants Index Page" do
     end
   end
 
+  it "has buttons for enabling and disabling merchants" do
+    within("#merchant-#{@merchants[0].id}") do
+      expect(page).to have_content("Enabled")
+      click_on "#toggle-status"
+    end
+
+    within("#merchant-#{@merchants[0].id}") do
+      expect(page).to have_content("Disabled")
+      click_on "#toggle-status"
+    end
+
+    within("#merchant-#{@merchants[0].id}") do
+      expect(page).to have_content("Enabled")
+    end
+  end
 end
