@@ -4,7 +4,7 @@ class Merchant < ApplicationRecord
   enum status: ['Enabled', 'Disabled']
 
   has_many :items, dependent: :destroy
-  has_many :invoices, dependent: :destroy
+    has_many :invoices, dependent: :destroy
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :items
@@ -24,5 +24,13 @@ class Merchant < ApplicationRecord
 
   def order_merchant_items_by_invoice_created_date(items)
     items.joins(:invoices).where('invoices.merchant_id = ?', self.id).order('invoices.created_at ASC')
+  end
+
+  def self.enabled_merchants
+    where('status = ?', 0)
+  end
+
+  def self.disabled_merchants
+    where('status = ?', 1)
   end
 end
