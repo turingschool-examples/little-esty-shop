@@ -51,7 +51,7 @@ RSpec.describe 'Admin Invoice Show Page' do
 
       expect(page).to have_content(@radio.name)
       expect(page).to have_content('Qty: 100')
-      expect(page).to have_content('Price: $900')
+      expect(page).to have_content('Price: $975')
       expect(page).to have_content('Status: Pending')
     end
   end 
