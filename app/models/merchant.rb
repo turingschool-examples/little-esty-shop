@@ -23,6 +23,6 @@ class Merchant < ApplicationRecord
   end
 
   def order_merchant_items_by_invoice_created_date(items)
-    items.joins(:invoices).where('invoices.merchant_id = ?', self.id).order('invoices.created_at DESC')
+    items.joins(:invoices).where('invoices.merchant_id = ?', self.id).order('invoices.created_at ASC')
   end
 end
