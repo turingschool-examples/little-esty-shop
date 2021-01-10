@@ -11,6 +11,11 @@
 
   <body>
     <p id="flash-notice"><%= flash[:notice] %></p>
+    <ul id="flash-error">
+      <% flash.each do |type, text| %>
+        <li><%= text if type == "alert" %></li>
+      <% end %>
+    </ul>
     <%= yield %>
   </body>
 </html>
