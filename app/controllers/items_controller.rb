@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
   before_action :find_item_and_merchant, only: [:show, :edit, :update]
-  before_action :find_merchant, only: [:new, :create]
-  
+  before_action :find_merchant, only: [:new, :create, :index]
+
   def index
-    @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = @merchant.items.where(status: 1)
     @disabled_items = @merchant.items.where(status: 0)
   end
