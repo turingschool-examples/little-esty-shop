@@ -37,13 +37,15 @@ describe "merchant items index" do
     expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item_1.id}")
   end
 
-  xit "can make a button to disable items" do
+  it "can make a button to disable items" do
     within("#item-#{@item_1.id}") do
       expect(page).to have_button("Enable")
       expect(page).to have_button("Disable")
 
       click_button "Disable"
-      expect(@item_1.status).to eq("disabled")
+
+      item = Item.find(@item_1.id)
+      expect(item.status).to eq("disabled")
     end
     within("#item-#{@item_2.id}") do
       expect(page).to have_button("Enable")
