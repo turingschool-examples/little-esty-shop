@@ -74,7 +74,7 @@ describe "Admin Merchants Index Page" do
     visit admin_merchants_path
     expected_top = Merchant.top_merchants(5)
     expected_top.each do |merchant|
-      within("#top_merchants") do
+      within("#top-merchants") do
         expect(page).to have_content(merchant.name)
       end
     end
