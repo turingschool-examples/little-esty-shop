@@ -1,3 +1,4 @@
 <h1>INVOICE <%= @invoice.id %></h1>
 <p><%= format_date(@invoice.created_at) %></p>
 <p><%= @invoice.status %></p>
+<%= render @invoice.customer %>
