@@ -3,7 +3,12 @@
 <h3><%= link_to "Invoices", '/admin/invoices'  %></h3>
 
 
+<h3> Top 5 Customers</h3>
+  <% @customers.top_customers.each do |customer| %>
+    <li><%= "#{customer.full_name}: #{customer.successful_transactions}"%></li>
+  <% end %>
+
 <h3> Incomplete Invoices</h3>
-  <% @invoices.each do |invoice| %>
+  <% @invoices.not_shipped.each do |invoice| %>
     <li><%=link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> <%= invoice.created_at.strftime("Created: %A, %B %d, %Y") %></li>
   <% end %>
