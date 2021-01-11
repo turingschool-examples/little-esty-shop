@@ -61,19 +61,34 @@ describe "merchant items index" do
     end
   end
 
-  it "has a section for enabled items" do
-    within("#enabled") do
-      expect(page).to have_content(@item_2.name)
+  it "has a section for disabled items" do
+    within("#disabled") do
       expect(page).to have_content(@item_3.name)
+      expect(page).to have_content(@item_2.name)
       expect(page).to_not have_content(@item_1.name)
     end
   end
 
-  it "has a section for disabled items" do
-    within("#disabled") do
+  it "has a section for enabled items" do
+    within("#enabled") do
       expect(page).to_not have_content(@item_2.name)
       expect(page).to_not have_content(@item_3.name)
       expect(page).to have_content(@item_1.name)
+    end
+  end
+
+  it "has a link to create a new item" do
+    click_link "Create New Item"
+    expect(current_path).to eq(new_merchant_item_path(@merchant1))
+    fill_in "Name", with: "Bar Shampoo"
+    fill_in "Description", with: "Eco friendly shampoo"
+    fill_in "Unit price", with: "15"
+    click_button "Submit"
+
+    expect(current_path).to eq(merchant_items_path(@merchant1))
+
+    within("#disabled") do
+      expect(page).to have_content("Bar Shampoo")
     end
   end
 end
