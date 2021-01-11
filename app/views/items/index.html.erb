@@ -12,7 +12,7 @@
 </section>
 
 <h2>Disabled</h2>
-<section id="disabled"
+<section id="disabled">
   <% @disabled_items.each do |item| %>
     <section id="item-<%= item.id %>">
       <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %></p>
@@ -21,3 +21,5 @@
     </section>
   <% end %>
 </section>
+
+<p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
