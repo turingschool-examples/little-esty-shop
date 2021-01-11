@@ -18,3 +18,9 @@
     <% end %>
   </ul>
 </section>
+
+<ol id="top-merchants">
+  <% @top_merchants.each do |merchant| %>
+    <li><%= merchant.name %></li>
+  <% end %>
+</ol>
