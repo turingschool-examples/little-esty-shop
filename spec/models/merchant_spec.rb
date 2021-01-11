@@ -32,7 +32,7 @@ describe Merchant, type: :model do
       @transaction3 = create(:transaction, invoice_id: @invoice3.id, result: 0)
 
       expect(Merchant.top_merchants(1)).to eq([@merchant3])
-      expect(Merchant.top_merchants(1)).to eq([@merchant3, @merchant2])
+      expect(Merchant.top_merchants(2)).to eq([@merchant3, @merchant2])
     end
   end
 
