@@ -11,6 +11,31 @@ describe Merchant, type: :model do
     it {should validate_presence_of :name}
   end
 
+  describe "The class method:" do
+    it "top_merchants" do
+      @merchant1 = create(:merchant, name: "1")
+      @invoice1 = create(:invoice, merchant_id: @merchant1.id)
+      @item1 = create(:item, merchant_id: @merchant1.id)
+      @invoice_item1 = create(:invoice_item, quantity: 1, unit_price: 100, invoice_id: @invoice1.id, item_id: @item1.id)
+      @transaction1 = create(:transaction, invoice_id: @invoice1.id, result: 0)
+
+      @merchant2 = create(:merchant, name: "2")
+      @invoice2 = create(:invoice, merchant_id: @merchant2.id)
+      @item2 = create(:item, merchant_id: @merchant2.id)
+      @invoice_item2 = create(:invoice_item, quantity: 1, unit_price: 200, invoice_id: @invoice2.id, item_id: @item2.id)
+      @transaction2 = create(:transaction, invoice_id: @invoice2.id, result: 0)
+
+      @merchant3 = create(:merchant, name: "3")
+      @invoice3 = create(:invoice, merchant_id: @merchant3.id)
+      @item3 = create(:item, merchant_id: @merchant3.id)
+      @invoice_item3 = create(:invoice_item, quantity: 1, unit_price: 300, invoice_id: @invoice3.id, item_id: @item3.id)
+      @transaction3 = create(:transaction, invoice_id: @invoice3.id, result: 0)
+
+      expect(Merchant.top_merchants(1)).to eq([@merchant3])
+      expect(Merchant.top_merchants(1)).to eq([@merchant3, @merchant2])
+    end
+  end
+
   describe "The instance method:" do
     let(:merchant1) do
       create(:merchant)
