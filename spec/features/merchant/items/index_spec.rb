@@ -13,16 +13,12 @@ describe 'As a merchant' do
     end
 
     it 'I see a list of the names of all of my items' do
-      within '.merchant-items' do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_2.name)
-      end
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_2.name)
     end
 
     it 'I do not see items for any other merchant' do
-      within '.merchant-items' do
-        expect(page).to_not have_content(@item_3.name)
-      end
+      expect(page).to_not have_content(@item_3.name)
     end
 
     describe 'When I click on the name of an item' do
@@ -62,6 +58,30 @@ describe 'As a merchant' do
           expect(page).to have_content("Status: Enabled")
           expect(page).to have_button("Disable")
         end
+      end
+    end
+
+    it "Then I see two sections, one for 'Enabled Items' and one for 'Disabled Items'" do
+      expect(page).to have_selector("section[id='enabled-merchant-items']")
+      expect(page).to have_content("Enabled Merchant Items")
+      expect(page).to have_selector("section[id='disabled-merchant-items']")
+      expect(page).to have_content("Disabled Merchant Items")
+    end
+
+    it 'Then I see that each Item is listed in the appropriate section based on status' do
+      item_4 = @max.items.create!(name: 'Item 4', description: 'Item 4 Description...', unit_price: 20, status: 1)
+      item_5 = @max.items.create!(name: 'Item 5', description: 'Item 5 Description...', unit_price: 30, status: 1)
+
+      visit merchant_items_path(@max.id)
+
+      within '#enabled-merchant-items' do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+      end
+
+      within '#disabled-merchant-items' do
+        expect(page).to have_content(item_4.name)
+        expect(page).to have_content(item_5.name)
       end
     end
   end

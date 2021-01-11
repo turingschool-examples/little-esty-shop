@@ -1,15 +1,11 @@
 <h1>Merchant Items Index</h1>
 
-<ul class='merchant-items'>
-  <% @merchant_items.each do |item| %>
-    <li class="merchant-item-<%= item.id %>" >
-      <%= link_to item.name, "/merchants/#{item.merchant.id}/items/#{item.id}" %>
-      <p>Status: <%= item[:status] %></p>
-      <% if item[:status] == 'Enabled' %>
-        <%= button_to "Disable", merchant_item_path(item.merchant.id, item.id, update_to: 'Disabled'), id: "disable-merchant-item-#{item.id}-btn", method: :patch %>
-      <% else %>
-        <%= button_to "Enable", merchant_item_path(item.merchant.id, item.id, update_to: 'Enabled'), id: "enable-merchant-item-#{item.id}-btn", method: :patch %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<h2>Enabled Merchant Items</h2>
+<section id='enabled-merchant-items'>
+  <%= render partial: 'merchant_items', locals: {merchant_items: @merchant.enabled_items} %>
+</section>
+
+<h2>Disabled Merchant Items</h2>
+<section id='disabled-merchant-items'>
+  <%= render partial: 'merchant_items', locals: {merchant_items: @merchant.disabled_items} %>
+</section>
