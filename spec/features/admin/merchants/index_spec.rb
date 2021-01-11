@@ -61,4 +61,27 @@ describe "Admin Merchants Index Page" do
     click_on "New Merchant"
     expect(current_path).to eq(new_admin_merchant_path)
   end
+
+  it "has the top 5 merchants by revenue" do
+    merchants = []
+    7.times do |i|
+      merchants[i] = create(:merchant)
+      invoice1 = create(:invoice, merchant_id: merchants[i].id)
+      item1 = create(:item, merchant_id: merchants[i].id)
+      invoice_item1 = create(:invoice_item, quantity: 1, unit_price: 100000-100*i, invoice_id: invoice1.id, item_id: item1.id)
+      transaction1 = create(:transaction, invoice_id: invoice1.id, result: 0)
+    end
+    visit admin_merchants_path
+    expected_top = Merchant.top_merchants(5)
+    expected_top.each do |merchant|
+      within("#top_merchants") do
+        expect(page).to have_content(merchant.name)
+      end
+    end
+    4.times do |i|
+      within("#top_merchants") do
+        expect(merchants[i].name).to appear_before(merchants[i+1].name)
+      end
+    end
+  end
 end
