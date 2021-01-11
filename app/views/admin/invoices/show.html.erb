@@ -9,7 +9,7 @@
   </ul>
 
   <%= form_with invoice: @invoice, method: :patch do |f| %>
-    <%= f.select :status, ["in progress","completed", "cancelled"], selected: "#{@invoice.status}" %>
+    <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
     <%= f.label :status %>
     <%= f.submit %>
   <% end %>
