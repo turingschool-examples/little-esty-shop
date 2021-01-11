@@ -54,6 +54,14 @@ RSpec.describe 'Admin Invoice Show Page' do
       expect(page).to have_content('Price: $975')
       expect(page).to have_content('Status: Pending')
     end
+
+    it 'I see information related to that invoice' do
+      visit admin_invoice_path(@invoice1.id)
+
+      expect(page).to have_content(@invoice1.status)
+      expect(page).to have_content(@invoice1.id)
+      expect(page).to have_content("#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}")
+    end
   end 
 end 
 
