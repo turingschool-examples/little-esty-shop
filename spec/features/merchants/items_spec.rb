@@ -50,19 +50,21 @@ RSpec.describe "Items Index" do
         merchant1 = create(:merchant)
         items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
 
-        5.times do |n|
-          invoice = create(:invoice, created_at: Date.today - n)
-          items[0..n].each do |item|
-            create(:invoice_item, item: item, invoice: invoice, quantity: (5 - n), unit_price: 1)
+        5.times do |index|
+          invoice = create(:invoice, created_at: Date.today - index)
+          items[0..index].each do |item|
+            create(:invoice_item, item: item, invoice: invoice, quantity: (5 - index), unit_price: 1)
           end
           create(:transaction, invoice: invoice, result: 0)
         end
 
         visit merchant_items_path(merchant1)
 
-        items.each_with_index do |item, index|
-          top_day = "Top selling date for #{item.name} was #{(Date.today-index).strftime("%A, %B %-d, %Y")}"
-          expect(page).to have_content(top_day)
+        within("#top_items") do
+          items.each_with_index do |item, index|
+            top_day = "Top selling date for #{item.name} was #{(Date.today-index).strftime("%A, %B %-d, %Y")}"
+            expect(page).to have_content(top_day)
+          end
         end
       end
 
@@ -70,9 +72,9 @@ RSpec.describe "Items Index" do
         merchant1 = create(:merchant)
         items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
 
-        5.times do |n|
-          invoice = create(:invoice, created_at: Date.today - n)
-          items[n..-1].each do |item|
+        5.times do |index|
+          invoice = create(:invoice, created_at: Date.today - index)
+          items[index..-1].each do |item|
             create(:invoice_item, item: item, invoice: invoice, quantity: 5, unit_price: 1)
           end
           create(:transaction, invoice: invoice, result: 0)
@@ -80,9 +82,11 @@ RSpec.describe "Items Index" do
 
         visit merchant_items_path(merchant1)
 
-        items.each do |item|
-          top_day = "Top selling date for #{item.name} was #{Date.today.strftime("%A, %B %-d, %Y")}"
-          expect(page).to have_content(top_day)
+        within("#top_items") do
+          items.each do |item|
+            top_day = "Top selling date for #{item.name} was #{Date.today.strftime("%A, %B %-d, %Y")}"
+            expect(page).to have_content(top_day)
+          end
         end
       end
     end

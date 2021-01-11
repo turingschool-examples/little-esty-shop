@@ -6,12 +6,12 @@ describe Customer, type: :model do
     it { should have_many :transactions}
   end
 
-  describe "class methods" do 
-    it "top_customers" do 
+  describe "class methods" do
+    it "top_customers" do
       customers = []
       10.times { customers << create(:customer) }
       customers.each do |customer|
-        create(:invoice, customer_id:customer.id)
+        create(:invoice, customer_id: customer.id)
       end
       first_customer = customers[0].invoices[0].id
       second_customer = customers[1].invoices[0].id
@@ -20,7 +20,7 @@ describe Customer, type: :model do
       fifth_customer = customers[4].invoices[0].id
       sixth_customer = customers[5].invoices[0].id
       seventh_customer = customers[6].invoices[0].id
-      
+
       10.times { create(:transaction, invoice_id:first_customer, result: "success")}
       9.times { create(:transaction, invoice_id:second_customer, result: "success")}
       8.times { create(:transaction, invoice_id:third_customer, result: "success")}
@@ -33,8 +33,8 @@ describe Customer, type: :model do
     end
   end
 
-  describe "instance methods" do 
-    it "number_of_successful_transactions" do 
+  describe "instance methods" do
+    it "number_of_successful_transactions" do
       customers = []
       10.times { customers << create(:customer) }
       customers.each do |customer|
@@ -47,7 +47,7 @@ describe Customer, type: :model do
       fifth_customer = customers[4].invoices[0].id
       sixth_customer = customers[5].invoices[0].id
       seventh_customer = customers[6].invoices[0].id
-      
+
       10.times { create(:transaction, invoice_id:first_customer, result: "success")}
       9.times { create(:transaction, invoice_id:second_customer, result: "success")}
       8.times { create(:transaction, invoice_id:third_customer, result: "success")}
