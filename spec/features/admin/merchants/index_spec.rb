@@ -79,7 +79,7 @@ describe "Admin Merchants Index Page" do
       end
     end
     4.times do |i|
-      within("#top_merchants") do
+      within("#top-merchants") do
         expect(merchants[i].name).to appear_before(merchants[i+1].name)
       end
     end
