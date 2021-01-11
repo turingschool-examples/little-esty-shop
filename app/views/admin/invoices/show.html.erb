@@ -1,9 +1,18 @@
 <h1><%="Invoice #{@invoice.id} Details"%></h1>
-
-<h3>Customer Details</h3>
+==============================
+Customer Details
+===============================
 <li>First Name:       <%= @invoice.customer.first_name %></li>
-<li>Last Name:        <%= @invoice.customer.last_name %></li>
-
+<li>Last Name:        <%= @invoice.customer.last_name %></li><br>
+================================
+Invoice Details
+===============================
+<li>ID:     <%= @invoice.id %></li>
+<li>Status: <%= @invoice.status %></li>
+<li><%= @invoice.created_at.strftime("Created: %A, %B %d, %Y") %></li><br>
+=================================
+Item Details
+================================
 <% @invoice.items.each do |item| %>
   <section id="item-<%=item.id%>">
     <h4>        <%= item.name %></h4>

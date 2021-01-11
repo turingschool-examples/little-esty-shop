@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Invoice Show Page' do
+RSpec.describe "Visit admin invoices index page" do
   describe 'As an admin user' do
     before(:each) do
       # Customers:
@@ -40,28 +40,22 @@ RSpec.describe 'Admin Invoice Show Page' do
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
 
-    it 'I see all of the customer information related to that invoice' do
-      visit admin_invoice_path(@invoice2.id)
-      expect(page).to have_content(@joel.first_name)
-      expect(page).to have_content(@joel.last_name)
+    it "I see a list of all Invoice ids in the system" do
+    visit admin_invoices_path
+
+    expect(page).to have_link(@invoice1.id.to_s)
+    expect(page).to have_link(@invoice2.id.to_s)
+    expect(page).to have_link(@invoice3.id.to_s)
+    expect(page).to have_link(@invoice4.id.to_s)
+    expect(page).to have_link(@invoice5.id.to_s)
+    expect(page).to have_link(@invoice6.id.to_s)
+    expect(page).to have_link(@invoice7.id.to_s)
+
+    click_on @invoice1.id.to_s
+    expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+
     end
 
-    it 'I see all of the items on the invoice' do
-      visit admin_invoice_path(@invoice3.id)
 
-      expect(page).to have_content(@radio.name)
-      expect(page).to have_content('Qty: 100')
-      expect(page).to have_content('Price: $975')
-      expect(page).to have_content('Status: Pending')
-    end
-
-    it 'I see information related to that invoice' do
-      visit admin_invoice_path(@invoice1.id)
-
-      expect(page).to have_content(@invoice1.status)
-      expect(page).to have_content(@invoice1.id)
-      expect(page).to have_content("#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}")
-    end
-  end 
-end 
-
+  end
+end
