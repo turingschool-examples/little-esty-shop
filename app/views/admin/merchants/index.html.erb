@@ -9,11 +9,20 @@
   </nav>
 </div>
 
+
 <body>
-<%= link_to 'Create Merchant', new_admin_merchant_path %>
+  <%= link_to 'Create Merchant', new_admin_merchant_path %>
+  <div class="row">
+    <p class='mr-auto col-sm-5'>Top Merchants</p>
+    <p class='ml-auto col-sm-5'>Enabled Merchants</p>
+  </div>
+  <ul class='mr-auto col-sm-4'>
+    <% @merchants.top_merchants.each do |m| %>
+      <li><%= link_to "#{m.name}", admin_merchant_path(m) %> - $<%= m.total_revenue %> in sales</li>
+    <% end %>
+  </ul>
 
   <ul class='ml-auto col-sm-4'>
-    <h4>Enabled Merchants</h4>
     <% @enabled_merchants.each do |m| %>
       <section id="merchant-<%= m.id %>">
         <li><%= link_to "#{m.name}", admin_merchant_path(m) %>
@@ -22,8 +31,10 @@
     <% end %>
   </ul>
 
+  <div class="row">
+    <p class='ml-auto col-sm-5'>Disabled Merchants</p>
+  </div>
   <ul class='ml-auto col-sm-4'>
-    <h4>Disabled Merchants</h4>
       <% @disabled_merchants.each do |m| %>
       <section id="merchant-<%= m.id %>">
         <li><%= link_to "#{m.name}", admin_merchant_path(m) %>
