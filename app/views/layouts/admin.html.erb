@@ -11,17 +11,19 @@
     <body>
 
     <header>
-    <div class="header">
-        <h1>Little Esty Shop</h1>
+    <div id="admin-header">
+        <h1><%= @repo_name %></h1>
+        <%# <h1>Little Esty Shop</h1> %>
     </div>
     </header>
 
-    <div class="topnav">
+    <div id="topnav">
         <h1>Admin Dashboard</h1>
         <div class="topnav-right">
             <a class="active" href="">Dashboard</a>
             <a href="/admin/merchants">Merchants</a>
             <a href="/admin/invoices">Invoices</a>
+            <!-- #USE LINK_TO -->
         </div>
     </div>
 

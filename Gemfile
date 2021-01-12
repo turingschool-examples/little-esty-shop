@@ -40,6 +40,8 @@ gem 'hirb', '~> 0.7.3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'faraday'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
@@ -48,6 +50,8 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 4.0'
+  gem "factory_bot_rails"
+  gem 'faker'
 end
 
 group :development do
