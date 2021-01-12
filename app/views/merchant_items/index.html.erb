@@ -1,4 +1,24 @@
 <h1><%= @merchant.name %>'s Items </h1>
-<% @items.each do |item| %>
-  <h2><%= item.name %></h2>
-<% end %>
+<h2><%= link_to 'New Item', "/merchant/#{@merchant.id}/items/new" %></h2>
+<section id="enabled">
+  <h1>Enabled Items</h1>
+    <% @merchant.enabled_items.each do |item| %>
+      <section id="item-<%=item.id%>">
+      <h2>
+        <%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %>
+      </h2>
+        <%= button_to 'Disable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id} %>
+      </section>
+      <% end %>
+</section>
+
+<section id="disabled">
+  <h1>Disabled Items</h1>
+    <% @merchant.disabled_items.each do |item| %>
+        <section id="item-<%=item.id%>">
+        <h2>
+          <%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %>
+        </h2>
+        <%= button_to 'Enable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id } %>
+    <% end %>
+</section>
