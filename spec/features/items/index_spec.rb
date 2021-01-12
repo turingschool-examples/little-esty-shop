@@ -66,9 +66,11 @@ describe "merchant items index" do
     expect(page).to have_link(@item_3.name)
     expect(page).to have_link(@item_4.name)
 
-    click_link "#{@item_1.name}"
+    within("#enabled") do
+      click_link "#{@item_1.name}"
 
-    expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item_1.id}")
+      expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item_1.id}")
+    end
   end
 
   it "can make a button to disable items" do
@@ -139,23 +141,26 @@ describe "merchant items index" do
     end
   end
 
-  xit "links the top 5 to the item show page" do
-    expect(page).to have_link(@item_1.name)
-    expect(page).to have_link(@item_2.name)
-    expect(page).to have_link(@item_3.name)
-    expect(page).to have_link(@item_4.name)
-    expect(page).to have_link(@item_8.name)
+  it "links the top 5 to the item show page" do
+    within("#top_5") do
+      expect(page).to have_link(@item_1.name)
+      expect(page).to have_link(@item_2.name)
+      expect(page).to have_link(@item_3.name)
+      expect(page).to have_link(@item_4.name)
+      expect(page).to have_link(@item_8.name)
 
-    click_link "#{@item_1.name}"
-    expect(current_path).to eq(merchant_item_path(@merchant1, @item_1))
+      click_link "#{@item_1.name}"
+      expect(current_path).to eq(merchant_item_path(@merchant1, @item_1))
+    end
   end
 
-  xit "shows the total revenue next to the item" do
-    expect(page).to have_content(@item_1.total_revenue)
-    expect(page).to have_content(@item_2.total_revenue)
-    expect(page).to have_content(@item_3.total_revenue)
-    expect(page).to have_content(@item_4.total_revenue)
-    expect(page).to have_content(@item_8.total_revenue)
-    expect(page).to have_no_content(@item_7.total_revenue)
+  it "shows the total revenue next to the item" do
+    within("#top_5") do
+      expect(page).to have_content("#{@merchant1.top_5_items[0].total_revenue}")
+      expect(page).to have_content("#{@merchant1.top_5_items[1].total_revenue}")
+      expect(page).to have_content("#{@merchant1.top_5_items[2].total_revenue}")
+      expect(page).to have_content("#{@merchant1.top_5_items[3].total_revenue}")
+      expect(page).to have_content("#{@merchant1.top_5_items[4].total_revenue}")
+    end
   end
 end
