@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2021_01_11_023359) do
 
   # These are extensions that must be enabled in order to support this database
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_023359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "merchant_id"
+    t.integer "status", default: 0
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
