@@ -8,9 +8,16 @@ class Invoice < ApplicationRecord
 
   enum status: [:"in progress", :completed, :cancelled]
 
-  # def self.successful_transactions
-    
-  # end
+  def self.incomplete
+    joins(:invoice_items)
+    .where('invoices.status = ? AND invoice_items.status != ?', 0, 2)
+    .select("invoices.*, COUNT('invoice_items.status') AS item_count")
+    .group(:id)
+  end
+
+  def clean_date
+    created_at.strftime("%A, %B %m, %Y")
+  end
 
   # def self.happy_customers
   #   where(status: 1).pluck(:customer_id).uniq
