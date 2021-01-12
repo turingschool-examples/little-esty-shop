@@ -9,19 +9,41 @@
   </nav>
 </div>
 
+
 <body>
+  <%= link_to 'Create Merchant', new_admin_merchant_path %>
   <div class="row">
-    <p class='ml-auto col-sm-5'>Top Merchants</p>
-    <p class='mr-auto col-sm-5'>Merchants</p>
-    <ul class='ml-auto col-sm-4'>
-      <% @merchants.each do |m| %>
-        <section id="merchant-<%= m.id %>">
-          <li><%= link_to "#{m.name}", admin_merchant_path(m) %>
-          <%= button_to 'Enable', admin_merchant_status_path(m), method: :patch, params: {status: 'enabled'} %>
-          <%= button_to 'Disable', admin_merchant_status_path(m), method: :patch, params: {status: 'disabled'} %></li>
-        </section>
-      <% end %>
-    </ul>
+    <p class='mr-auto col-sm-5'>Top Merchants</p>
+    <p class='ml-auto col-sm-5'>Enabled Merchants</p>
   </div>
+  <ul class='mr-auto col-sm-4'>
+    <% @merchants.top_merchants.each do |m| %>
+        <li><%= link_to "#{m.name}", admin_merchant_path(m) %> - $<%= m.total_revenue %> in sales</li>
+      <section id="top-<%= m.id %>">
+        <p>Top Selling Date for <%= m.name %> was on <%= m.best_day.strftime("%_m/%d/%Y") %></p>
+      </section>
+    <% end %>
+  </ul>
+
+  <ul class='ml-auto col-sm-4'>
+    <% @enabled_merchants.each do |m| %>
+      <section id="merchant-<%= m.id %>">
+        <li><%= link_to "#{m.name}", admin_merchant_path(m) %>
+        <%= button_to 'Disable', admin_merchant_status_path(m), method: :patch, params: {status: 'disabled'} %></li>
+      </section>
+    <% end %>
+  </ul>
+
+  <div class="row">
+    <p class='ml-auto col-sm-5'>Disabled Merchants</p>
+  </div>
+  <ul class='ml-auto col-sm-4'>
+      <% @disabled_merchants.each do |m| %>
+      <section id="merchant-<%= m.id %>">
+        <li><%= link_to "#{m.name}", admin_merchant_path(m) %>
+        <%= button_to 'Enable', admin_merchant_status_path(m), method: :patch, params: {status: 'enabled'} %>
+      </section>
+    <% end %>
+  </ul>
 </body>
 
