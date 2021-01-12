@@ -1,10 +1,9 @@
 <h2>Update Merchant:</h2>
 
-<%= form_with model: @merchant, url: admin_merchant_path(@merchant.id) do |f| %>
-  <%= f.label :name, "Name:" %>
-  <%= f.text_field :name %><br>
-  <%= f.submit "Submit" %>
-<% end %>
+<%= render partial: 'admin_merchant_form', locals: {
+                                              model: @merchant, 
+                                              url: admin_merchant_path(@merchant.id) 
+                                              } %>
 
 
 

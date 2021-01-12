@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Visit admin merhcnats show page '/admin/merchants/:id'" do
-  describe 'As an admin user' do
+RSpec.describe 'As an admin user' do
+  describe 'When I visit the admin merchants show page' do
     before(:each) do
       # Customers:
       @sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
@@ -40,32 +40,17 @@ RSpec.describe "Visit admin merhcnats show page '/admin/merchants/:id'" do
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
     
-    it "I see a link of the merchants name that goes to their show page" do 
-    visit admin_merchants_path
-
-    expect(page).to have_link(@amazon.name)
-
-    click_link(@amazon.name)
-
-    expect(current_path).to eq(admin_merchant_path(@amazon.id))
-    expect(page).to have_content(@amazon.name)
-    end 
-
-    it "I can see and click link to update merchant and page refreshes with info" do 
-    visit admin_merchant_path(@amazon.id)
-
-    expect(page).to have_link("Update")
-
-    click_link("Update")
-
-    expect(current_path).to eq(edit_admin_merchant_path(@amazon.id))
-    
-    fill_in "Name", with: "Amazon.inc"
-    
-    click_button "Submit"
-
-    expect(current_path).to eq(admin_merchant_path(@amazon.id))
-    expect(page).to have_content("Information has been updated")
+    describe 'Admin Merchant Show' do
+      it "I see a link of the merchants name that goes to their show page" do 
+      visit admin_merchants_path
+  
+      expect(page).to have_link(@amazon.name)
+  
+      click_link(@amazon.name)
+  
+      expect(current_path).to eq(admin_merchant_path(@amazon.id))
+      expect(page).to have_content(@amazon.name)
+      end 
     end
   end 
 end 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'As an admin user' do
-  describe 'When I visit an Admin Invoice Show Page' do
+  describe 'When I visit the admin merchants create page' do
     before(:each) do
       # Customers:
       @sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
@@ -40,54 +40,21 @@ RSpec.describe 'As an admin user' do
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
 
-    describe 'Admin Invoice Show Page' do
-      it 'I see information related to that invoice' do
-        visit admin_invoice_path(@invoice1.id)
+    describe 'Admin Merchant Create' do
+      it "I see and click a link to create a new merchant" do
+        visit admin_merchants_path
+        
+        expect(page).to have_link("New Merchant")
   
-        expect(page).to have_content(@invoice1.status.capitalize)
-        expect(page).to have_content(@invoice1.id)
-        expect(page).to have_content("#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}")
+        click_link('New Merchant')
+        expect(current_path).to eq(new_admin_merchant_path)
+        
+        fill_in 'Name:', with: 'All Birds'
+        click_on 'Submit'
+  
+        expect(current_path).to eq(admin_merchants_path)
+        expect(page).to have_content('All Birds')
       end
     end
-
-    describe 'Admin Invoice Show Page: Customer Information' do
-      it 'I see all of the customer information related to that invoice' do
-        visit admin_invoice_path(@invoice2.id)
-        expect(page).to have_content(@joel.first_name)
-        expect(page).to have_content(@joel.last_name)
-      end
-    end
-
-    describe 'Admin Invoice Show Page: Invoice Item Information' do
-      it 'I see all of the items on the invoice' do
-        visit admin_invoice_path(@invoice3.id)
-  
-        expect(page).to have_content(@radio.name)
-        expect(page).to have_content('Qty: 100')
-        expect(page).to have_content('Price: $975')
-        expect(page).to have_content('Status: Pending')
-      end
-    end
-
-    describe 'Admin Invoice Show Page: Total Revenue' do
-      it 'I see the total revenue that will be generated from this invoice' do
-        visit admin_invoice_path(@invoice1.id)
-  
-        expect(page).to have_content('Total Revenue: $175.0')
-      end
-    end
-
-    # describe 'Admin Invoice Show Page: Update Invoice Status' do
-    #   it 'I see the invoice status is a select field' do
-    #     visit admin_invoice_path(@invoice1.id)
-  
-    #     expect(page).to have_content("Current Invoice Status: #{@invoice.status.capitalize}")
-    #     within('#status') do
-    #       click('In Progress')
-    #     end
-    #     click_button('Update_')
-    #   end
-    # end
-  end 
-end 
-
+  end
+end

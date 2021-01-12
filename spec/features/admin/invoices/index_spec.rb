@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Visit admin invoices index page" do
-  describe 'As an admin user' do
+RSpec.describe "As a admin user" do
+  describe 'When I visit an admin invoices index page' do
     before(:each) do
       # Customers:
       @sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
@@ -40,20 +40,22 @@ RSpec.describe "Visit admin invoices index page" do
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
     end
 
-    it "I see a list of all Invoice ids in the system" do
-      visit admin_invoices_path
-
-      expect(page).to have_link(@invoice1.id.to_s)
-      expect(page).to have_link(@invoice2.id.to_s)
-      expect(page).to have_link(@invoice3.id.to_s)
-      expect(page).to have_link(@invoice4.id.to_s)
-      expect(page).to have_link(@invoice5.id.to_s)
-      expect(page).to have_link(@invoice6.id.to_s)
-      expect(page).to have_link(@invoice7.id.to_s)
-
-      click_on @invoice1.id.to_s
-      
-      expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+    describe 'Admin Invoices Index Page' do
+      it "I see a list of all Invoice ids in the system" do
+        visit admin_invoices_path
+  
+        expect(page).to have_link(@invoice1.id.to_s)
+        expect(page).to have_link(@invoice2.id.to_s)
+        expect(page).to have_link(@invoice3.id.to_s)
+        expect(page).to have_link(@invoice4.id.to_s)
+        expect(page).to have_link(@invoice5.id.to_s)
+        expect(page).to have_link(@invoice6.id.to_s)
+        expect(page).to have_link(@invoice7.id.to_s)
+  
+        click_on @invoice1.id.to_s
+        
+        expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+      end
     end
   end
 end
