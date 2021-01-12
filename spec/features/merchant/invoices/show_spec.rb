@@ -30,6 +30,8 @@ describe 'As a merchant' do
       expect(page).to have_content(@invoice1.id)
       expect(page).to have_content(@invoice1.status)
       expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+    end
+
     end 
     
     it "Then I see all of my items on the invoice including: name, quantity, price, status" do 
