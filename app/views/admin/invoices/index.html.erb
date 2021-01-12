@@ -1,0 +1,19 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <p class="navbar-text">Admin Dashboard</p>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Dashboard', admin_dashboard_index_path, style: 'pull-right' %>
+      <%= link_to 'Merchants', admin_merchants_path, style: 'pull-right' %>
+      <%= link_to 'Invoices', admin_invoices_path, style: 'pull-right' %></li>
+    </ul>
+  </nav>
+</div>
+
+<body>
+  <div class="row">
+    <p class='col-12'>Invoices</p>
+  </div>
+  <% @invoices.each do |i| %>
+    <li><%= link_to "Invoice ##{i.id}", admin_invoice_path(i) %></li>
+  <% end %>
+</body>
