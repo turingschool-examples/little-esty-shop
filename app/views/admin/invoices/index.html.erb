@@ -1,3 +1,4 @@
+<h1>All Invoices</h1>
 <% @invoices.each do |invoice| %>
-  <li><%=link_to invoice.id, admin_invoice_path(invoice.id) %></li>
+  <li>Invoice ID:<%=link_to invoice.id, admin_invoice_path(invoice.id) %></li>
 <% end %>
