@@ -32,11 +32,6 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
-
-  def total_revenue
-    invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
-  end
-
   def best_day
     invoices
     .where("invoices.status = 2")
