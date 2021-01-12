@@ -8,11 +8,11 @@ class Invoice < ApplicationRecord
 
   enum status: [:"in progress", :completed, :cancelled]
 
-  # def self.successful_transactions
-    
-  # end
+  def find_customer_name_for_merchant
+    self.first_name + " " + self.last_name
+  end
 
-  # def self.happy_customers
-  #   where(status: 1).pluck(:customer_id).uniq
-  # end
+  def total_success
+    self.most_success
+  end
 end
