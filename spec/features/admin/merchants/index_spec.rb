@@ -75,7 +75,10 @@ describe "Admin Merchants Index Page" do
     expected_top = Merchant.top_merchants(5)
     expected_top.each do |merchant|
       within("#top-merchants") do
-        expect(page).to have_content(merchant.name)
+        within("#merchant-#{merchant.id}") do
+          expect(page).to have_content(merchant.name)
+          expect(page).to have_content(merchant.total_revenue/100)
+        end
       end
     end
     4.times do |i|

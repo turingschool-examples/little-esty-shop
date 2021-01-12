@@ -41,6 +41,28 @@ describe Merchant, type: :model do
       create(:merchant)
     end
 
+    it "best_day" do
+      @merchant1 = create(:merchant, name: "1")
+      @invoice1 = create(:invoice, merchant_id: @merchant1.id, created_at: DateTime.new(2001,2,3,4,0,0))
+      @invoice2 = create(:invoice, merchant_id: @merchant1.id, created_at: DateTime.new(2001,2,3,16,0,0))
+      @invoice3 = create(:invoice, merchant_id: @merchant1.id, created_at: DateTime.new(2001,2,4,16,0,0))
+
+      @transaction1 = create(:transaction, invoice_id: @invoice1.id, result: 0)
+      @transaction2 = create(:transaction, invoice_id: @invoice2.id, result: 0)
+      @transaction3 = create(:transaction, invoice_id: @invoice3.id, result: 0)
+
+
+      @item1 = create(:item, merchant_id: @merchant1.id)
+      @item2 = create(:item, merchant_id: @merchant1.id)
+      @item3 = create(:item, merchant_id: @merchant1.id)
+
+      @invoice_item1 = create(:invoice_item, quantity: 1, unit_price: 100, invoice_id: @invoice1.id, item_id: @item1.id)
+      @invoice_item2 = create(:invoice_item, quantity: 1, unit_price: 150, invoice_id: @invoice2.id, item_id: @item2.id)
+      @invoice_item3 = create(:invoice_item, quantity: 1, unit_price: 200, invoice_id: @invoice3.id, item_id: @item3.id)
+
+      expect(@merchant1.best_day).to eq(Date.new(2001,2,3))
+    end
+
     it "total_revenue" do
       @merchant1 = create(:merchant, name: "1")
       @invoice1 = create(:invoice, merchant_id: @merchant1.id)
