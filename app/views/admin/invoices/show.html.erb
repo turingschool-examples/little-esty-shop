@@ -17,7 +17,6 @@
   <strong>Status: </strong>
     <%= form_with model: @invoice, url: admin_invoice_path(@invoice), method: :patch do |f| %>
       <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
-      <% f.label :status %>
       <%= f.submit 'Update Invoice' %>
     <% end %>
   <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>

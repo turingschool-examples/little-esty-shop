@@ -37,10 +37,25 @@ describe 'Admin Invoices Index Page' do
     expect(page).to have_content(@ii_1.quantity)
     expect(page).to have_content(@ii_2.quantity)
 
-    expect(page).to have_content(@ii_1.unit_price)
-    expect(page).to have_content(@ii_2.unit_price)
+    expect(page).to have_content("$#{@ii_1.unit_price}")
+    expect(page).to have_content("$#{@ii_2.unit_price}")
 
     expect(page).to have_content(@ii_1.status)
     expect(page).to have_content(@ii_2.status)
   end
+
+  it 'should display the total revenue the invoice will generate' do
+    expect(page).to have_content("Total Revenue: $#{@i1.total_revenue}")
+  end
+
+  # it 'should have status as a select field that updates the invoices status' do
+  #   # expect(page).to have_selector('status', selected: @invoice.status, options: ['in progress', 'completed', 'cancelled'])
+  #   page.select('completed', from: 'status')
+  #   expect(page).to have_button("Update Invoice")
+  #   click_button "Update Invoice"
+
+  #   expect(current_path).to eq(admin_invoice_path(@i1))
+  #   expect(@i1.status).to eq('completed')
+  # end
 end
+
