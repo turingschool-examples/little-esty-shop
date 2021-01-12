@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :merchants, except: [:destroy]
     resources :merchant_status, only: [:update]
-    resources :invoices, only: [:index, :show]
+    resources :invoices, except: [:new, :destroy]
   end
 end
