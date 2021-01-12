@@ -4,6 +4,18 @@ class Merchant < ApplicationRecord
     has_many :items
 
     def best_customers
-      self.invoices.group(:customer_id).where(status: 1).count.sort_by{|k, v| v}.reverse.first(5)
+      Invoice.where(merchant_id: self.id)
+             .joins(:transactions, :customer)
+             .select('customers.*, count(transactions) as most_success')
+             .where('transactions.result = ?', 0)
+             .group('customers.id')
+             .order('most_success desc')
+             .limit(5)
     end
 end
+
+
+
+
+
+#Transaction.joins(invoice: :customer).select('customers.*, count(transactions) as total_success').where('transactions.result = ?', 1).group('customers.id').order('total_success DESC').limit(5)

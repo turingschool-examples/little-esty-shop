@@ -3,10 +3,11 @@
 <h3><%= link_to "My Invoices", "/invoices/index" %></h3>
 <h3><%= @merchant.name %></h3>
 <h3><% @merchant.best_customers.each do |cust| %>
-  <% if cust.last > 1 %>
-    <%= Customer.find_name_for_merchant(cust.first) +": #{cust.last} successful transactions" %><br>
+  <% binding.pry %>
+  <% if cust.total_success > 1 %>
+    <%= cust.first_name +": #{cust.total_success} successful transactions" %><br>
   <% else %>
-    <%= Customer.find_name_for_merchant(cust.first) +": #{cust.last} successful transaction" %><br>
+    <%= cust.first_name +": #{cust.total_success} successful transaction" %><br>
   <% end %>
 <% end %>
 </h3>
