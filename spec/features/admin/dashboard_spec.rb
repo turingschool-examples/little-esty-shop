@@ -40,65 +40,75 @@ RSpec.describe 'Admin Dashboard' do
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @backpack.id)
     end
 
-    it "when I visit the admin dashboard I see a header" do
-      visit admin_root_path
+    describe 'Admin Dashboard' do
+      it "I see a header indicating that I am on the admin dashboard" do
+        visit admin_root_path
 
-      expect(page).to have_content("Admin Dashboard")
+        expect(page).to have_content("Admin Dashboard")
+      end
     end
 
-    it 'I see a link to the admin merchants and invoices index' do
-      visit admin_root_path
+    describe 'Admin Dashboard Links' do
+      it 'I see a link to the admin merchants and invoices index' do
+        visit admin_root_path
 
-      expect(page).to have_link('Merchants')
-      expect(page).to have_link('Invoices')
+        expect(page).to have_link('Merchants')
+        expect(page).to have_link('Invoices')
 
-      click_link 'Merchants'
+        click_link 'Merchants'
 
-      expect(current_path).to eq(admin_merchants_path)
+        expect(current_path).to eq(admin_merchants_path)
 
-      visit admin_root_path
+        visit admin_root_path
 
-      click_link 'Invoices'
+        click_link 'Invoices'
 
-      expect(current_path).to eq(admin_invoices_path)
+        expect(current_path).to eq(admin_invoices_path)
+      end
     end
 
-    it 'I see a list of all the ids of the invoices whose items have not been shipped and the invoices link to their admin page' do
-      visit admin_root_path
-
-      expect(page).to have_content('Incomplete Invoices')
-      expect(page).to have_content(@invoice1.id)
-      expect(page).to_not have_content(@invoice2.id)
-      expect(page).to have_link(@invoice1.id.to_s)
-
-      click_link(@invoice1.id.to_s)
-
-      expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+    describe 'Admin Dashboard Incomplete Invoices' do
+      it 'I see a list of all the ids of the invoices whose items have not been shipped and the invoices link to their admin page' do
+        visit admin_root_path
+  
+        expect(page).to have_content('Incomplete Invoices')
+        expect(page).to have_content(@invoice1.id)
+        expect(page).to_not have_content(@invoice2.id)
+        expect(page).to have_link(@invoice1.id.to_s)
+  
+        click_link(@invoice1.id.to_s)
+  
+        expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+      end
     end
 
-    it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
-      visit admin_root_path
-
-      date_inv1 = "#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}"
-      date_inv3 = "#{@invoice3.created_at.strftime("Created: %A, %B %d, %Y")}"
-
-      expect(page).to have_link(@invoice1.id.to_s)
-      expect(page).to have_content(date_inv1)
-      expect(page).to have_link(@invoice3.id.to_s)
-      expect(page).to have_content(date_inv3)
-      expect(date_inv1).to appear_before(date_inv3)
-      expect(date_inv3).to_not appear_before(date_inv1)
+    describe 'Admin Dashboard Invoices sorted by least recent' do
+      it 'Next to each invoice id I see the date it was created and the list is ordered from oldest to newest' do
+        visit admin_root_path
+  
+        date_inv1 = "#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}"
+        date_inv3 = "#{@invoice3.created_at.strftime("Created: %A, %B %d, %Y")}"
+  
+        expect(page).to have_link(@invoice1.id.to_s)
+        expect(page).to have_content(date_inv1)
+        expect(page).to have_link(@invoice3.id.to_s)
+        expect(page).to have_content(date_inv3)
+        expect(date_inv1).to appear_before(date_inv3)
+        expect(date_inv3).to_not appear_before(date_inv1)
+      end
     end
  
-    it 'I see the names of the top 5 customers and their number of sucessful transactions' do
-      visit admin_root_path
-
-      expect(page).to have_content('Top 5 Customers')
-      expect(page).to have_content("#{@frank.first_name} #{@frank.last_name}: 2")
-      expect(page).to have_content("#{@sally.first_name} #{@sally.last_name}: 1")
-      expect(page).to have_content("#{@joel.first_name} #{@joel.last_name}: 1")
-      expect(page).to have_content("#{@billy.first_name} #{@billy.last_name}: 1")
-      expect(page).to have_content("#{@steve.first_name} #{@steve.last_name}: 1")
+    describe 'desAdmin Dashboard Statistics - Top Customers' do
+      it 'I see the names of the top 5 customers and their number of sucessful transactions' do
+        visit admin_root_path
+  
+        expect(page).to have_content('Top 5 Customers')
+        expect(page).to have_content("#{@frank.first_name} #{@frank.last_name}: 2")
+        expect(page).to have_content("#{@sally.first_name} #{@sally.last_name}: 1")
+        expect(page).to have_content("#{@joel.first_name} #{@joel.last_name}: 1")
+        expect(page).to have_content("#{@billy.first_name} #{@billy.last_name}: 1")
+        expect(page).to have_content("#{@steve.first_name} #{@steve.last_name}: 1")
+      end
     end
   end 
 end 
