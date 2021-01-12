@@ -16,4 +16,9 @@
 
   <strong>Status: </strong><%= @invoice.status %>
   <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
+
+  <h4>Customer:</h4>
+    <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><br>
+    <%= @invoice.customer.address %><br>
+    <%= @invoice.customer.city %>, <%= @invoice.customer.state %> <%= @invoice.customer.zip %>
 </body>
