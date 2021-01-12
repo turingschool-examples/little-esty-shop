@@ -26,10 +26,12 @@ RSpec.describe "admin invoices show page" do
   it "displays items' information related to invoice" do 
     within("#invoice-items-information") do 
       @invoice.invoice_items.each do |ii|
-        expect(page).to have_content(ii.item.name)
-        expect(page).to have_content(ii.quantity)
-        expect(page).to have_content(ii.unit_price)
-        expect(page).to have_content(ii.status)
+        within("#invoice-item-#{ii.id}") do 
+          expect(page).to have_content(ii.item.name)
+          expect(page).to have_content(ii.quantity)
+          expect(page).to have_content(ii.unit_price)
+          expect(page).to have_content(ii.status)
+        end
       end
     end
   end

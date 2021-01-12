@@ -9,7 +9,9 @@ RSpec.describe "admin invoices index page" do
   it "displays a list of all invoice ids in the system" do 
     within("#all-invoices") do 
       @invoices.each do |invoice|
-        expect(page).to have_content(invoice.id)
+        within("#invoice-#{invoice.id}") do 
+          expect(page).to have_content(invoice.id)
+        end
       end
     end
   end
