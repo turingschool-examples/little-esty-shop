@@ -41,6 +41,18 @@ describe Merchant, type: :model do
       create(:merchant)
     end
 
+    it "total_revenue" do
+      @merchant1 = create(:merchant, name: "1")
+      @invoice1 = create(:invoice, merchant_id: @merchant1.id)
+      @invoice2 = create(:invoice, merchant_id: @merchant1.id)
+      @item1 = create(:item, merchant_id: @merchant1.id)
+      @invoice_item1 = create(:invoice_item, quantity: 1, unit_price: 100, invoice_id: @invoice1.id, item_id: @item1.id)
+      @invoice_item2 = create(:invoice_item, quantity: 1, unit_price: 100000000, invoice_id: @invoice2.id, item_id: @item1.id)
+      @invoice_item3 = create(:invoice_item, quantity: 1, unit_price: 100000000)
+      @transaction1 = create(:transaction, invoice_id: @invoice1.id, result: 0)
+      expect(@merchant1.total_revenue).to eq(100)
+    end
+
     it "favorite_customers;" do
       create_list(:customer, 10)
       Customer.all.each_with_index do |customer, index|
