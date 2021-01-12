@@ -21,6 +21,6 @@
 
 <ol id="top-merchants">
   <% @top_merchants.each do |merchant| %>
-    <li><%= merchant.name %></li>
+    <li id="merchant-<%= merchant.id %>"><%= merchant.name %>($<%= merchant.total_revenue/100 %>)</li>
   <% end %>
 </ol>
