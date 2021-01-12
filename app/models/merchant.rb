@@ -17,6 +17,16 @@ class Merchant < ApplicationRecord
     .sum("quantity * unit_price")
   end
 
+  def best_day
+    invoices.joins(:transactions, :invoice_items)
+    .where("result = 0")
+    .select("CAST (invoices.created_at AS DATE) as created_date, sum(quantity * unit_price) as revenue")
+    .group("created_date")
+    .order("revenue" => :desc)
+    .limit(1)
+    .first.created_date #return the date specifically
+  end
+
   def self.top_merchants(number)
     Merchant.joins(invoices: [:transactions, :invoice_items])
     .where("result = 0")
