@@ -1,6 +1,5 @@
 <section id="status-<%= object.id%>">
-  <%= form_with model: object, method: :patch, local: true do |f| %>
-    <%= f.hidden_field :previously, value: request.path %>
+  <%= form_with model: [@merchant, object], method: :patch, local: true do |f| %>
     <%= f.select :status, options, selected: object.status%>
     <%= f.submit text %>
   <% end %>
