@@ -8,6 +8,13 @@ describe 'Admin Invoices Index Page' do
     @c2 = Customer.create!(first_name: 'Hey', last_name: 'Heyz')
 
     @i1 = Invoice.create!(merchant_id: @m1.id, customer_id: @c1.id, status: 2, created_at: '2012-03-25 09:54:09')
+
+    @item_1 = Item.create!(name: 'test', description: 'lalala', unit_price: 6, merchant_id: @m1.id)
+    @item_2 = Item.create!(name: 'rest', description: 'dont test me', unit_price: 12, merchant_id: @m1.id)
+   
+    @ii_1 = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_1.id, quantity: 12, unit_price: 2, status: 0)
+    @ii_2 = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_2.id, quantity: 6, unit_price: 1, status: 1)
+
     visit admin_invoice_path(@i1)
   end
 
@@ -22,5 +29,18 @@ describe 'Admin Invoices Index Page' do
     expect(page).to have_content(@c1.address)
     expect(page).to have_content("#{@c1.city}, #{@c1.state} #{@c1.zip}")
   end
-end
 
+  it 'should display all the items on the invoice' do
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
+
+    expect(page).to have_content(@ii_1.quantity)
+    expect(page).to have_content(@ii_2.quantity)
+
+    expect(page).to have_content(@ii_1.unit_price)
+    expect(page).to have_content(@ii_2.unit_price)
+
+    expect(page).to have_content(@ii_1.status)
+    expect(page).to have_content(@ii_2.status)
+  end
+end

@@ -20,5 +20,30 @@
   <h4>Customer:</h4>
     <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><br>
     <%= @invoice.customer.address %><br>
-    <%= @invoice.customer.city %>, <%= @invoice.customer.state %> <%= @invoice.customer.zip %>
+    <%= @invoice.customer.city %>, <%= @invoice.customer.state %> <%= @invoice.customer.zip %><br>
+  <br>
+  <br>
+  <h4>Items on this Invoice:</h4>
+  <table class="table">
+    <thead>
+      <tr class="tr">
+        <th class="th1">Item Name</th>
+        <th class="th1">Quantity</th>
+        <th class="th1">Unit Price</th>
+        <th class="th1">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @invoice.invoice_items.each do |i| %>
+        <tr class="tr">
+          <td><%= i.item.name %></td>
+          <td><%= i.quantity %></td>
+          <td><%= i.unit_price %></td>
+          <td><%= i.status%></td><br/>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </body>
