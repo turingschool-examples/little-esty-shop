@@ -18,7 +18,7 @@ class ApiSearch
   end
 
   def merged_pull_request
-    @git_data[:merged_pull_request].count do |pull|
+    @git_data[:pulls].count do |pull|
       pull[:merged_at]
     end 
   end
