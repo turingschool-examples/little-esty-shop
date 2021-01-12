@@ -1,0 +1,6 @@
+<h1>New Merchant Item</h1>
+
+<%= render partial: 'merchant_form', locals: {
+                                              model: @item, 
+                                              url: merchant_items_path(@merchant.id) 
+                                              } %>

@@ -3,6 +3,11 @@ class MerchantItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.new
+  end
+
   def show
     merchant = Merchant.find(params[:merchant_id])
     @item = merchant.items.find(params[:id])
@@ -27,6 +32,14 @@ class MerchantItemsController < ApplicationController
       flash[:success] = 'Item Updated Successfully'
       render :show
     end
+  end
+
+  def create 
+    merchant = Merchant.find(params[:merchant_id])
+    @item = merchant.items.new(item_params)
+    @item.save
+    redirect_to merchant_items_path(merchant.id)
+    # require 'pry'; binding.pry
   end
 
   private
