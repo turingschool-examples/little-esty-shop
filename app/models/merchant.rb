@@ -10,6 +10,13 @@ class Merchant < ApplicationRecord
   delegate :favorite_customers, to: :customers
   delegate :items_to_ship, to: :items
 
+  def total_revenue
+    invoices.joins(:transactions, :invoice_items)
+    .where("result = 0")
+    .select('quantity, unit_price')
+    .sum("quantity * unit_price")
+  end
+
   def self.top_merchants(number)
     Merchant.joins(invoices: [:transactions, :invoice_items])
     .where("result = 0")
