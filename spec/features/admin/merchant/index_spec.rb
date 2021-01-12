@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Visit admin merhcnats index '/admin/merchants'" do
+RSpec.describe "Visit admin merchants index '/admin/merchants'" do
   describe 'As an admin user' do
     before(:each) do
       # Customers:
