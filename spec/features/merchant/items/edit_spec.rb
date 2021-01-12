@@ -10,11 +10,9 @@ describe 'As a merchant' do
     end
 
     it 'I see a form filled in with the existing item attribute information' do
-      within('#edit-merchant-item-form') do
-        expect(page).to have_selector("input[id='item_name'][value='#{@item_1.name}']")
-        expect(page).to have_selector("input[id='item_description'][value='#{@item_1.description}']")
-        expect(page).to have_selector("input[id='item_unit_price'][value='#{@item_1.unit_price}']")
-      end
+      expect(page).to have_selector("input[id='item_name'][value='#{@item_1.name}']")
+      expect(page).to have_selector("input[id='item_description'][value='#{@item_1.description}']")
+      expect(page).to have_selector("input[id='item_unit_price'][value='#{@item_1.unit_price}']")
     end
 
     describe "When I update the information in the form and I click 'Submit'" do

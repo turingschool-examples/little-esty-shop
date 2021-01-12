@@ -1,0 +1,10 @@
+
+<%= form_with model: model, url: url do |form| %>
+  <%= form.label :name, 'Name:' %>
+  <%= form.text_field :name %>
+  <%= form.label :description, 'Description:' %>
+  <%= form.text_field :description %>
+  <%= form.label :unit_price, 'Unit Price:' %>
+  <%= form.number_field :unit_price %>
+  <%= form.submit 'Submit' %>
+<% end %>

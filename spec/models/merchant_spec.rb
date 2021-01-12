@@ -145,8 +145,8 @@ RSpec.describe Merchant, type: :model do
     describe 'enabled_items' do
       it "returns merchant items with a status of 'Enabled'" do
         merch_1 = Merchant.create!(name: 'Merch Max', status: 0)
-        item_1 = merch_1.items.create!(name: 'Item 1', description: '1 description...', unit_price: 7)
-        item_2 = merch_1.items.create!(name: 'Item 2', description: '2 description...', unit_price: 5)
+        item_1 = merch_1.items.create!(name: 'Item 1', description: '1 description...', unit_price: 7, status: 0)
+        item_2 = merch_1.items.create!(name: 'Item 2', description: '2 description...', unit_price: 5, status: 0)
         item_3 = merch_1.items.create!(name: 'Item 3', description: '3 description...', unit_price: 5, status: 1)
 
         expected = [item_1, item_2]
@@ -160,8 +160,8 @@ RSpec.describe Merchant, type: :model do
     describe 'disabled_items' do
       it "returns merchant items with a status of 'Disabled'" do
         merch_1 = Merchant.create!(name: 'Merch Max', status: 0)
-        item_1 = merch_1.items.create!(name: 'Item 1', description: '1 description...', unit_price: 7)
-        item_2 = merch_1.items.create!(name: 'Item 2', description: '2 description...', unit_price: 5)
+        item_1 = merch_1.items.create!(name: 'Item 1', description: '1 description...', unit_price: 7, status: 0)
+        item_2 = merch_1.items.create!(name: 'Item 2', description: '2 description...', unit_price: 5, status: 0)
         item_3 = merch_1.items.create!(name: 'Item 3', description: '3 description...', unit_price: 5, status: 1)
 
         expected = [item_3]

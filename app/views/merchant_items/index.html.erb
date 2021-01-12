@@ -9,3 +9,5 @@
 <section id='disabled-merchant-items'>
   <%= render partial: 'merchant_items', locals: {merchant_items: @merchant.disabled_items} %>
 </section>
+
+<h2> <%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></h2>
