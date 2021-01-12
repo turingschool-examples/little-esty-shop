@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     scope module: "merchants" do
       resources :items, except: [:destroy], shallow: true
       resources :invoices, only: [:index, :show]
+      resources :invoice_items, only: [:update], shallow: true
     end
   end
 
