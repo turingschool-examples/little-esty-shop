@@ -1,7 +1,17 @@
 <h1> List of all Merchants </h1>
 <%= link_to 'New Merchant', new_admin_merchant_path %><br>
 
-Enabled Merchants:
+<h3>Top 5 Merchants by Revenue:</h3>
+<section class="merchant-top5">
+<% @merchants_top_five_merchants.each do |merchant| %>
+  <section id="merchant-<%=merchant.id%>">
+    Merchant Name: <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+    <%= merchant.total_revenue %>
+  </section>
+<% end %>
+</section>
+
+<h3>Enabled Merchants:</h3>
 <section class="merchant-enabled">
 <% @merchants_enabled.each do |merchant| %>
   <section id="merchant-<%=merchant.id%>">
@@ -13,7 +23,7 @@ Enabled Merchants:
 <% end %>
 </section>
 
-Disabled Merchants:
+<h3>Disabled Merchants:</h3>
 <section class="merchant-disabled">
 <% @merchants_disabled.each do |merchant| %>
   <section id="merchant-<%=merchant.id%>">
