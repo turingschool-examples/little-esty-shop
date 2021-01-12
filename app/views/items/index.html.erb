@@ -23,3 +23,11 @@
 </section>
 
 <p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
+
+<h2>Top 5 Items</h2>
+<section id="top_5">
+  <% @merchant.top_5_items.each do |item| %>
+    <%= item.name %>,
+    <%= item.total_revenue %><br>
+  <% end %>
+</section>
