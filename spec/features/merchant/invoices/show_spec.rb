@@ -31,8 +31,8 @@ describe 'As a merchant' do
       expect(page).to have_content(@invoice1.status)
       expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
     end
-    
-    it "Then I see all of my items on the invoice including: name, quantity, price, status" do 
+
+    it "Then I see all of my items on the invoice including: name, quantity, price, status" do
       visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
 
       expect(page).to have_content(@item_1.name)
@@ -40,10 +40,10 @@ describe 'As a merchant' do
       expect(page).to have_content(@invitm1.quantity)
       expect(page).to have_content(@invitm1.status)
     end
-    
+
     it 'Then I see all of the customer information related to that invoice including: first_name, last_name, shipping address' do
       visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
-
+      
       within '.customer-information' do
         expect(page).to have_content('Customer Information')
         expect(page).to have_content("First Name: #{@sally.first_name}")
@@ -53,4 +53,3 @@ describe 'As a merchant' do
     end
   end
 end
-
