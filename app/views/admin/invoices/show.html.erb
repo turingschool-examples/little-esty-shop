@@ -24,11 +24,13 @@
 
 <section id="invoice-items-information">
   <ul>
-    <% @invoice.invoice_items.each do |i| %>
-      <li>item name: <%= i.item.name %></li>
-      <li>quantity: <%= i.quantity %></li>
-      <li>unit price: <%= i.unit_price %></li>
-      <li>shipping status: <%= i.status%></li>
+    <% @invoice.invoice_items.each do |ii| %>
+      <li id="invoice-item-<%= ii.id %>">
+        <p>item name: <%= ii.item.name %></p>
+        <p>quantity: <%= ii.quantity %></p>
+        <p>unit price: <%= ii.unit_price %></p>
+        <p>shipping status: <%= ii.status%></p>
+      </li>
     <% end %>
   </ul>
 </section>
