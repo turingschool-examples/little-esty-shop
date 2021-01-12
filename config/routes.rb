@@ -11,14 +11,16 @@ Rails.application.routes.draw do
 
   resources :merchants do
     resources :items, only: [:index, :show, :edit, :update], controller: :merchant_items
+    resources :invoices, only: [:index], controller: :merchant_invoices
   end 
 
-  # namespace :merchants do 
-  #   resources :invoices, only: [:index]
-  # end
+  namespace :merchants do 
+    resources :invoices, only: [:index]
+  end
 
   # '/merchants/:id/items', to: 'merchant'
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
+  get '/merchants/:id/invoices/:invoice_id', to: 'merchant_invoices#show'
   get '/github', to: 'github_api#show'
 end
