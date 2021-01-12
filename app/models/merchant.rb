@@ -1,9 +1,9 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
   has_many :invoices
+  has_many :items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
-  has_many :items
   has_many :invoice_items, through: :items
 
   enum status: [:enabled, :disabled]
@@ -13,7 +13,7 @@ class Merchant < ApplicationRecord
     .joins(invoice: :customer)
     .where('result = ?', 1)
     .select("customers.*, count('transactions.result') as top_result")
-    .group("customers.id")
+    .group('customers.id')
     .order(top_result: :desc)
     .limit(5)
   end
@@ -25,6 +25,7 @@ class Merchant < ApplicationRecord
     end
   end
 
+
   def top_5_items
      items
      .joins(invoices: :transactions)
@@ -33,5 +34,24 @@ class Merchant < ApplicationRecord
      .group(:id)
      .order('total_revenue desc')
      .limit(5)
+
+  def self.top_merchants
+    joins([invoices: :transactions], :invoice_items)
+    .where('result = ?', 1)
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    .group('merchants.id')
+    .order('total_revenue DESC')
+    .limit(5)
+  end
+
+  def best_day
+    invoices
+    .where("invoices.status = 2")
+    .joins(:invoice_items)
+    .select('invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity)')
+    .group("invoices.created_at")
+    .max
+    .created_at
+
   end
 end

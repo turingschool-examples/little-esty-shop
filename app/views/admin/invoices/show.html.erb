@@ -1,0 +1,54 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <p class="navbar-text">Admin Dashboard</p>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Dashboard', admin_dashboard_index_path, style: 'pull-right' %>
+      <%= link_to 'Merchants', admin_merchants_path, style: 'pull-right' %>
+      <%= link_to 'Invoices', admin_invoices_path, style: 'pull-right' %></li>
+    </ul>
+  </nav>
+</div>
+
+<body>
+  <div class="row">
+    <p class='col-12'>Invoice #<%= @invoice.id %></p>
+  </div>
+
+  <strong>Status: </strong>
+    <%= form_with model: @invoice, url: admin_invoice_path(@invoice), method: :patch do |f| %>
+      <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
+      <%= f.submit 'Update Invoice' %>
+    <% end %>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
+  <p>Total Revenue: $<%= @invoice.total_revenue %>
+
+  <h4>Customer:</h4>
+    <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><br>
+    <%= @invoice.customer.address %><br>
+    <%= @invoice.customer.city %>, <%= @invoice.customer.state %> <%= @invoice.customer.zip %><br>
+  <br>
+  <br>
+  <h4>Items on this Invoice:</h4>
+  <table class="table">
+    <thead>
+      <tr class="tr">
+        <th class="th1">Item Name</th>
+        <th class="th1">Quantity</th>
+        <th class="th1">Unit Price</th>
+        <th class="th1">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @invoice.invoice_items.each do |i| %>
+        <tr class="tr">
+          <td><%= i.item.name %></td>
+          <td><%= i.quantity %></td>
+          <td>$<%= i.unit_price %></td>
+          <td><%= i.status%></td><br/>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</body>
