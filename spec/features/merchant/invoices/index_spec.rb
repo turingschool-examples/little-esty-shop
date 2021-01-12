@@ -28,18 +28,18 @@ describe 'As a merchant' do
       visit "merchants/#{@max.id}/invoices"
 
       within ".merchant-#{@invoice1.id}-invoice" do 
-        expect(page).to have_link(@invoice1.id)
+        expect(page).to have_link(@invoice1.id.to_s)
       end 
 
       within ".merchant-#{@invoice2.id}-invoice" do 
-        expect(page).to have_link(@invoice2.id)
+        expect(page).to have_link(@invoice2.id.to_s)
       end 
 
       within ".merchant-#{@invoice3.id}-invoice" do 
-        expect(page).to have_link(@invoice3.id)
+        expect(page).to have_link(@invoice3.id.to_s)
       end 
 
-      expect(page).to_not have_content(@invoice4.id)
+      expect(page).to_not have_content(@invoice4.id.to_s)
     end
   end
 end

@@ -5,9 +5,9 @@ describe 'As a merchant' do
     before :each do
       @max = Merchant.create!(name: 'Merch Max')
       @bob = Merchant.create!(name: 'Bob')
-      @item_1 = @max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
-      @item_2 = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
-      @item_3 = @bob.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
+      @item_1 = @max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5, status: 0)
+      @item_2 = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10, status: 0)
+      @item_3 = @bob.items.create!(name: 'Item 3', description: 'Test', unit_price: 15, status: 0)
 
       visit "merchants/#{@max.id}/items"
     end
@@ -83,6 +83,13 @@ describe 'As a merchant' do
         expect(page).to have_content(item_4.name)
         expect(page).to have_content(item_5.name)
       end
+    end
+    it "can see a link to create a new item" do 
+      visit merchant_items_path(@max.id)
+
+      click_link "Create New Item"
+
+      expect(current_path).to eq("/merchants/#{@max.id}/items/new")
     end
   end
 end
