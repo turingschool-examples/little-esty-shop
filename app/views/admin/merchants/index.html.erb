@@ -1,0 +1,4 @@
+Merchants
+<% @merchants.each do |merchant| %>
+    <li> <%= link_to("#{merchant.name}", admin_merchant_path(merchant.id)) %> </li>
+<% end %>

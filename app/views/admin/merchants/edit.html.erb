@@ -1,0 +1,9 @@
+<%# <%= form_with model: @merchant.update, local: true do |f| %>
+<%#  <%= f.label :name %>
+<%#  <%= f.text_field :name, @merchant.name %>
+
+<%#  <%= f.submit %> 
+<%# <% end %> 
+
+<%= form_with(model: @merchant, url: admin_merchant_path(@merchant.id), method: "patch") %>
+form_with model: [:admin, @merchant]
