@@ -12,6 +12,14 @@ class Merchant < ApplicationRecord
              .order('most_success desc')
              .limit(5)
     end
+
+    def items_ready_to_ship
+              where(id: self.id)
+             .joins(invoices: :items)
+             .select('items.name')
+             .where('invoice_items.status < ?', 2)
+             .group('items.name, merchants.id')
+    end
 end
 
 
