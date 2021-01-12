@@ -10,4 +10,8 @@ class Merchant < ApplicationRecord
   def disabled_items
     Item.all_disabled_items.where(merchant_id: self.id)
   end
+
+  def all_invoices
+    binding.pry
+  end
 end
