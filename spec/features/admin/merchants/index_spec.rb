@@ -78,6 +78,7 @@ describe "Admin Merchants Index Page" do
         within("#merchant-#{merchant.id}") do
           expect(page).to have_content(merchant.name)
           expect(page).to have_content(merchant.total_revenue/100)
+          expect(page).to have_content("Top selling date for #{merchant.name} was #{merchant.best_day}")
         end
       end
     end
