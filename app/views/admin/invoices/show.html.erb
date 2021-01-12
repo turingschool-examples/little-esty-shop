@@ -14,8 +14,14 @@
     <p class='col-12'>Invoice #<%= @invoice.id %></p>
   </div>
 
-  <strong>Status: </strong><%= @invoice.status %>
+  <strong>Status: </strong>
+    <%= form_with model: @invoice, url: admin_invoice_path(@invoice), method: :patch do |f| %>
+      <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
+      <% f.label :status %>
+      <%= f.submit 'Update Invoice' %>
+    <% end %>
   <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
+  <p>Total Revenue: $<%= @invoice.total_revenue %>
 
   <h4>Customer:</h4>
     <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><br>
@@ -39,7 +45,7 @@
         <tr class="tr">
           <td><%= i.item.name %></td>
           <td><%= i.quantity %></td>
-          <td><%= i.unit_price %></td>
+          <td>$<%= i.unit_price %></td>
           <td><%= i.status%></td><br/>
         </tr>
       <% end %>
