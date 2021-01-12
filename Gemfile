@@ -26,7 +26,11 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'bacon', '~> 1.2'
+gem 'bacon-bits', '~> 0.1.0'
+gem 'mocha', '~> 1.12'
+gem 'mocha-on-bacon', '~> 0.2.3'
+gem 'hirb', '~> 0.7.3'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -38,6 +42,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'faraday'
 
+gem 'bacon'
+gem 'bacon-bits'
+gem 'mocha'
+gem 'mocha-on-bacon'
+gem 'hirb'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
@@ -46,6 +56,8 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 4.0'
+  gem "factory_bot_rails"
+  gem 'faker'
 end
 
 group :development do

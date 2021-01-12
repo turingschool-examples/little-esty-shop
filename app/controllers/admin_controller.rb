@@ -7,6 +7,8 @@ class AdminController < ApplicationController
 
     def index
         @repo_name = repo_info[:name]
+        @top_five = Customer.top_five
+        @incomplete_invoices = Invoice.incomplete
         # @collaborators = collaborator_info
     end
 end
