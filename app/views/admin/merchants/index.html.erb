@@ -1,7 +1,7 @@
 <h1> List of all Merchants </h1>
 <%= link_to 'New Merchant', new_admin_merchant_path %><br>
 
-<h3>Top 5 Merchants by Revenue:</h3>
+<h3>Top Merchants:</h3>
 <section class="merchant-top5">
 <% @merchants_top_five_merchants.each do |merchant| %>
   <section id="merchant-<%=merchant.id%>">
@@ -25,8 +25,7 @@
 <section class="merchant-disabled">
 <% @merchants_disabled.each do |merchant| %>
   <section id="merchant-<%=merchant.id%>">
-    <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %>
-    Status: <%= merchant.status %>
+    <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %> Status: <%= merchant.status %>
     <%= button_to "Enable", admin_merchant_path(merchant.id, update_to: 'Enabled'), method: :patch %>
   </section>
 <% end %>

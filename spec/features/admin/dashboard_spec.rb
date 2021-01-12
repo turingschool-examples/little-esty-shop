@@ -98,7 +98,7 @@ RSpec.describe 'Admin Dashboard' do
       end
     end
  
-    describe 'desAdmin Dashboard Statistics - Top Customers' do
+    describe 'Admin Dashboard Statistics - Top Customers' do
       it 'I see the names of the top 5 customers and their number of sucessful transactions' do
         visit admin_root_path
   
