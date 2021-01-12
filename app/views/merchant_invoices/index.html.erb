@@ -1,0 +1,9 @@
+<h1> Invoices for: <%= @merchant.name %> </h1>
+
+  <section class="merchant-<%=@merchant.id%>invoices">
+<% @invoices.each do |invoice| %>
+  <section class="merchant-<%=invoice.id%>-invoice">
+    <h4> Invoice ID: <%= link_to invoice.id, "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></h4>
+  </section>
+<% end %>
+  </section>

@@ -1,7 +1,11 @@
 <h1>Merchant Items Index</h1>
 
-<ul class='merchant-items'>
-  <% @merchant_items.each do |item| %>
-    <li><%= link_to item.name, "/merchants/#{item.merchant.id}/items/#{item.id}" %></li>
-  <% end %>
-</ul>
+<h2>Enabled Merchant Items</h2>
+<section id='enabled-merchant-items'>
+  <%= render partial: 'merchant_items', locals: {merchant_items: @merchant.enabled_items} %>
+</section>
+
+<h2>Disabled Merchant Items</h2>
+<section id='disabled-merchant-items'>
+  <%= render partial: 'merchant_items', locals: {merchant_items: @merchant.disabled_items} %>
+</section>
