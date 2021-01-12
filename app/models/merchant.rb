@@ -27,11 +27,11 @@ class Merchant < ApplicationRecord
   end
 
   def self.enabled_merchants
-    where('status = ?', 0)
+    where('status = ?', 0).order(:name)
   end
 
   def self.disabled_merchants
-    where('status = ?', 1)
+    where('status = ?', 1).order(:name)
   end
 
   def self.top_five_merchants

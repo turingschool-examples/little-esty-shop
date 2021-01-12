@@ -53,4 +53,8 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.not_shipped.first.id).to eq(@invoice1.id)
     end
   end
+
+  it 'Can calculate the total revenue that will be generated from this invoice' do
+    expect(@invoice1.total_revenue).to eq(175.0)
+  end
 end

@@ -41,21 +41,19 @@ RSpec.describe "Visit admin invoices index page" do
     end
 
     it "I see a list of all Invoice ids in the system" do
-    visit admin_invoices_path
+      visit admin_invoices_path
 
-    expect(page).to have_link(@invoice1.id.to_s)
-    expect(page).to have_link(@invoice2.id.to_s)
-    expect(page).to have_link(@invoice3.id.to_s)
-    expect(page).to have_link(@invoice4.id.to_s)
-    expect(page).to have_link(@invoice5.id.to_s)
-    expect(page).to have_link(@invoice6.id.to_s)
-    expect(page).to have_link(@invoice7.id.to_s)
+      expect(page).to have_link(@invoice1.id.to_s)
+      expect(page).to have_link(@invoice2.id.to_s)
+      expect(page).to have_link(@invoice3.id.to_s)
+      expect(page).to have_link(@invoice4.id.to_s)
+      expect(page).to have_link(@invoice5.id.to_s)
+      expect(page).to have_link(@invoice6.id.to_s)
+      expect(page).to have_link(@invoice7.id.to_s)
 
-    click_on @invoice1.id.to_s
-    expect(current_path).to eq(admin_invoice_path(@invoice1.id))
-
+      click_on @invoice1.id.to_s
+      
+      expect(current_path).to eq(admin_invoice_path(@invoice1.id))
     end
-
-
   end
 end
