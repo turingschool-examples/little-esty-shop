@@ -60,5 +60,22 @@ RSpec.describe "Merchant Invoices show" do
         end
       end
     end
+    it "total revenue" do
+      merchant1 = create(:merchant)
+      items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
+
+      customer = create(:customer, first_name: "Linda", last_name: "Mayhew")
+
+      invoice = create(:invoice, merchant: merchant1, customer: customer)
+
+      items.each do |item|
+        create(:invoice_item, item: item, invoice: invoice, quantity: 5, unit_price: 1)
+      end
+      # create(:transaction, invoice: invoice, result: 0)
+
+      visit merchant_invoice_path(merchant1, invoice)
+
+      expect(page).to have_content("Total Revenue: $#{invoice.total_revenue}")
+    end
   end
 end
