@@ -1,9 +1,6 @@
 <h2> Add a Merchant </h2>
 
-<%= form_with model: @merchant, url: admin_merchants_path do |f|%>
-  <%= f.label :name, 'Name:' %>
-  <%= f.text_field :name %>
-  <%= f.submit 'Submit' %>
-<% end %>
-
-
+<%= render partial: 'admin_merchant_new_form', locals: {
+                                              model: @merchant, 
+                                              url: admin_merchants_path 
+                                              } %>
