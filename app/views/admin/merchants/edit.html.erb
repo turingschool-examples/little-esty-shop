@@ -1,7 +1,10 @@
-<%= form_tag admin_merchant_path(@merchant.id), method: :patch do %>
-  <h2>Update Merchant:</h2>
-  <%= link_to "#{@merchant.name}", admin_merchant_path(@merchant.id) %></br>
-  <%= label_tag :name %>
-  <%= text_field_tag :name, @merchant.name %><br>
-  <%= submit_tag "Submit" %>
+<h2>Update Merchant:</h2>
+
+<%= form_with model: @merchant, url: admin_merchant_path(@merchant.id) do |f| %>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_field :name %><br>
+  <%= f.submit "Submit" %>
 <% end %>
+
+
+
