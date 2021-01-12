@@ -4,7 +4,7 @@ class Merchant < ApplicationRecord
   enum status: ['Enabled', 'Disabled']
 
   has_many :items, dependent: :destroy
-    has_many :invoices, dependent: :destroy
+  has_many :invoices, dependent: :destroy
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :items
@@ -32,6 +32,15 @@ class Merchant < ApplicationRecord
 
   def self.disabled_merchants
     where('status = ?', 1)
+  end
+
+  def self.top_five_merchants
+    self.joins([invoices: :transactions], :invoice_items)
+    .where('transactions.result = ?', "success")
+    .select("merchants.id, merchants.name, SUM(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+    .group('merchants.id')
+    .order('total_revenue desc')
+    .limit(5)
   end
 
   def enabled_items

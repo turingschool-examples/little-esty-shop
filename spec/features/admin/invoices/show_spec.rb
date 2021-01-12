@@ -58,10 +58,26 @@ RSpec.describe 'Admin Invoice Show Page' do
     it 'I see information related to that invoice' do
       visit admin_invoice_path(@invoice1.id)
 
-      expect(page).to have_content(@invoice1.status)
+      expect(page).to have_content(@invoice1.status.capitalize)
       expect(page).to have_content(@invoice1.id)
       expect(page).to have_content("#{@invoice1.created_at.strftime("Created: %A, %B %d, %Y")}")
     end
+
+    it 'I see the total revenue that will be generated from this invoice' do
+      visit admin_invoice_path(@invoice1.id)
+
+      expect(page).to have_content('Total Revenue: $175.0')
+    end
+
+    # it 'I see the invoice status is a select field' do
+    #   visit admin_invoice_path(@invoice1.id)
+
+    #   expect(page).to have_content("Current Invoice Status: #{@invoice.status.capitalize}")
+    #   within('#status') do
+    #    click('In Progress')
+    #   end
+    #   click_button('Update_')
+    # end
   end 
 end 
 
