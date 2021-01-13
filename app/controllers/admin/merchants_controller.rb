@@ -12,7 +12,7 @@ class Admin::MerchantsController < ApplicationController
   def create
     @merchant = Merchant.new(m_params)
     @merchant.save
-
+    flash.notice = 'Merchant Has Been Created!'
     redirect_to admin_merchants_path
   end
 

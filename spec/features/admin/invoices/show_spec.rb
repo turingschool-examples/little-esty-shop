@@ -20,7 +20,6 @@ describe 'Admin Invoices Index Page' do
 
   it 'should display the id, status and created_at' do
     expect(page).to have_content("Invoice ##{@i1.id}")
-    expect(page).to have_content("Status: #{@i1.status}")
     expect(page).to have_content("Created on: #{@i1.created_at.strftime("%A, %B %d, %Y")}")
   end
 
@@ -48,14 +47,15 @@ describe 'Admin Invoices Index Page' do
     expect(page).to have_content("Total Revenue: $#{@i1.total_revenue}")
   end
 
-  # it 'should have status as a select field that updates the invoices status' do
-  #   # expect(page).to have_selector('status', selected: @invoice.status, options: ['in progress', 'completed', 'cancelled'])
-  #   page.select('completed', from: 'status')
-  #   expect(page).to have_button("Update Invoice")
-  #   click_button "Update Invoice"
+  it 'should have status as a select field that updates the invoices status' do
+    within("#status-update-#{@i1.id}") do
+      select('cancelled', :from => 'invoice[status]')
+      expect(page).to have_button('Update Invoice')
+      click_button 'Update Invoice'
 
-  #   expect(current_path).to eq(admin_invoice_path(@i1))
-  #   expect(@i1.status).to eq('completed')
-  # end
+      expect(current_path).to eq(admin_invoice_path(@i1))
+      expect(@i1.status).to eq('complete')
+    end
+  end
 end
 

@@ -56,9 +56,10 @@ describe 'Admin Merchant Index' do
   end
 
   it 'should have rerouting links on all merchants names to their admin show page' do
-    expect(page).to have_link(@m1.name)
-    click_link "#{@m1.name}"
-    expect(current_path).to eq(admin_merchant_path(@m1))
+    within("#toppy-#{@m1.id}") do
+      click_link "#{@m1.name}"
+      expect(current_path).to eq(admin_merchant_path(@m1))
+    end
   end
 
   it 'should have set merchants to disabled by default' do
@@ -88,11 +89,6 @@ describe 'Admin Merchant Index' do
 
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content('Dingley Doo')
-  end
-
-  it 'should list merchant total revenue next to name' do
-    expect(page).to have_content(@m1.total_revenue)
-    expect(@m1.total_revenue).to eq(120)
   end
 
   it 'should display the best day for each top 5 merchant' do
