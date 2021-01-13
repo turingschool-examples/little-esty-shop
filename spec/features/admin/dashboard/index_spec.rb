@@ -72,6 +72,10 @@ describe 'Admin Dashboard Index Page' do
 
   it 'should display a number of successful transactions each top customer has with a merchant' do
     expect(page).to have_content(@c1.number_of_transactions)
+    expect(page).to have_content(@c2.number_of_transactions)
+    expect(page).to have_content(@c3.number_of_transactions)
+    expect(page).to have_content(@c4.number_of_transactions)
+    expect(page).to have_content(@c5.number_of_transactions)
   end
 
   it 'should display a list of Invoice IDs and Items that have not been shipped' do
