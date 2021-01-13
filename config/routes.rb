@@ -21,9 +21,6 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index]
   end
 
-  # '/merchants/:id/items', to: 'merchant'
-  # get '/merchants/:id/items/new', to: 'merchant_items#new'
-
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
   get '/merchants/:id/invoices/:invoice_id', to: 'merchant_invoices#show'
