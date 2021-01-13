@@ -8,7 +8,7 @@ class Admin::MerchantsController < ApplicationController
 
   def show
   end
-  
+
   def create
     @merchant = Merchant.new(m_params)
     @merchant.save
@@ -20,11 +20,15 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    @merchant.update(merchant_params)
-    flash.notice = 'Merchant Has Been Updated!'
-    redirect_to admin_merchant_path(@merchant)
+    if @merchant.update(merchant_params)
+      flash.notice = "Merchant Has Been Updated!"
+      redirect_to admin_merchant_path(@merchant)
+    else
+      flash.notice = "All fields must be completed, get your act together."
+      redirect_to edit_admin_merchant_path(@merchant)
+    end
   end
-  
+
   private
   def set_merchant
     @merchant = Merchant.find(params[:id])

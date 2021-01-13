@@ -34,4 +34,15 @@ describe "merchant items edit page" do
     expect(page).to have_no_content("This washes your hair")
     expect(page).to have_content("Succesfully Updated Item Info!")
   end
+  it "shows a flash message if not all sections are filled in" do
+    visit edit_merchant_item_path(@merchant1, @item_1)
+
+    fill_in "Name", with: ""
+    fill_in "Description", with: "Eco friendly shampoo"
+    fill_in "Unit price", with: "15"
+
+    click_button "Submit"
+    expect(current_path).to eq(edit_merchant_item_path(@merchant1, @item_1))
+    expect(page).to have_content("All fields must be completed, get your act together.")
+  end
 end
