@@ -166,7 +166,6 @@ describe "merchant items index" do
 
   it "shows the best day next to the item" do
     within("#top_5") do
-      save_and_open_page
       expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.best_day}")
       expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.best_day}")
       expect(page).to have_content("Top selling date for #{@item_3.name} was #{@item_3.best_day}")
