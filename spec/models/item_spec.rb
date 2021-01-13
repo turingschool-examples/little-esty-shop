@@ -140,9 +140,11 @@ RSpec.describe Item, type: :model do
       invitm4  = InvoiceItem.create!(status: 1, quantity: 50, unit_price: 9.75, invoice_id: invoice4.id, item_id: radio2.id)
       invitm5  = InvoiceItem.create!(status: 1, quantity: 65, unit_price: 9.75, invoice_id: invoice5.id, item_id: radio3.id)
       invitm6  = InvoiceItem.create!(status: 1, quantity: 30, unit_price: 9.75, invoice_id: invoice6.id, item_id: radio4.id)
-       
-
-      expect(radio1.best_sales_day).to eq(radio1.created_at.strftime("%A, %B %d, %Y")) 
+      
+      date = radio1.invoices.best_day.created_at
+      expected = date.strftime('%m/%d/%y')
+      
+      expect(expected).to eq('01/13/21') 
     end
   end
 end
