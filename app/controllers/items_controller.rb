@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params)
+    @item.update(item_params_sec)
     flash.notice = "Succesfully Updated Item Info!"
     redirect_to merchant_item_path(@merchant, @item)
   end
@@ -32,8 +32,12 @@ class ItemsController < ApplicationController
 
 
   private
-  def item_params
+  def item_params_sec
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
+  end
+
+  def item_params
+    params.permit(:name, :description, :unit_price, :merchant_id)
   end
 
   def find_item_and_merchant
