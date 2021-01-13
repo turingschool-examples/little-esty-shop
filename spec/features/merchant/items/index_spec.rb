@@ -153,7 +153,7 @@ describe 'As a merchant' do
         expect(page).to have_content("Item:Retro $487.5")
         expect(page).to have_content("Item:I Heart Radio $292.5")
         expect(page).to have_content("Item:Camo Backpack $155.0")
-save_and_open_page
+
         expect(page).to have_content("Top selling date for #{radio3.name} was #{radio3.created_at.strftime("%A, %B %d, %Y")}")
         expect(page).to have_content("Top selling date for #{radio1.name} was #{radio1.created_at.strftime("%A, %B %d, %Y")}")
         expect(page).to have_content("Top selling date for #{radio2.name} was #{radio2.created_at.strftime("%A, %B %d, %Y")}")
