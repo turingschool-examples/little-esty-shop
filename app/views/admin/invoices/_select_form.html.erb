@@ -1,0 +1,5 @@
+<%= form_with model: model, url: url, local: true do |f|%>
+  <%= f.label :status, 'Change Status:' %>
+  <%= f.select :status, ['cancelled', 'completed', 'in progress'] %>
+  <%= f.submit button_text %>
+<% end %>
