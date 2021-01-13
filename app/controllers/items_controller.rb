@@ -1,15 +1,18 @@
 class ItemsController < ApplicationController
   before_action :find_item_and_merchant, only: [:show, :edit, :update]
-  before_action :set_merchant, only: [:index, :new, :create]
+  before_action :find_merchant, only: [:new, :create, :index]
+
   def index
     @enabled_items = @merchant.items.where(status: 1)
     @disabled_items = @merchant.items.where(status: 0)
   end
 
   def show
+
   end
 
   def edit
+
   end
 
   def update
@@ -19,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def new
+    
   end
 
   def create
@@ -32,12 +36,12 @@ class ItemsController < ApplicationController
     params.permit(:name, :description, :unit_price, :merchant_id)
   end
 
-  def set_merchant
+  def find_item_and_merchant
+    @item = Item.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
   end
 
-  def find_item_and_merchant
-    @item = Item.find(params[:id])
+  def find_merchant
     @merchant = Merchant.find(params[:merchant_id])
   end
 end
