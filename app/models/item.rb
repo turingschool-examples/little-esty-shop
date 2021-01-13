@@ -7,6 +7,7 @@ class Item < ApplicationRecord
 
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices 
 
   def quantity_ordered(itm_id, invc_id)
     invoice_items.where(item_id: itm_id, invoice_id: invc_id).pluck(:quantity)
@@ -18,5 +19,9 @@ class Item < ApplicationRecord
 
   def status(itm_id, invc_id)
     invoice_items.where(item_id: itm_id, invoice_id: invc_id).pluck(:status)
+  end
+
+  def self.most_expensive
+    order(unit_price: :desc).limit(5)
   end
 end

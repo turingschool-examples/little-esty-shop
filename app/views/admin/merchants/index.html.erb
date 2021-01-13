@@ -6,7 +6,7 @@
 <% @merchants_top_five_merchants.each do |merchant| %>
   <section id="merchant-<%=merchant.id%>">
     <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %><%= " - $#{merchant.total_revenue} in sales" %>
-    <p><%= "Top selling date for #{merchant.name} was #{merchant.invoices.max {|invoice| invoice.total_revenue}.created_at.strftime('%m/%d/%y')}" %>
+    <p><%= "Top selling date for #{merchant.name} was #{merchant.invoices.best_day.created_at.strftime('%m/%d/%y')}" %>
   </section>
 <% end %>
 </section>

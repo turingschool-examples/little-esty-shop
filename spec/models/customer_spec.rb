@@ -49,11 +49,11 @@ RSpec.describe Customer, type: :model do
     it {should have_many(:merchants).through(:invoices)}
   end
 
-  # describe 'Names of the top 5 customers who have conducted the largest number of successful transactions' do
-  #   it 'Can list the name of the top 5 customers' do
-
-  #     expect(Customer.top_customers).to eq()
-  #   end
-  # end
+  describe 'Names of the top 5 customers who have conducted the largest number of successful transactions' do
+    it 'Can list the name of the top 5 customers' do
+ 
+      expect(Customer.top_customers.first.full_name).to eq('Frank Sinatra')
+    end
+  end
 end
 
