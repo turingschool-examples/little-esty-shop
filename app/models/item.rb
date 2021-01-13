@@ -29,8 +29,4 @@ class Item < ApplicationRecord
     .order('highest_in_revenue desc')
     .limit(5)
   end 
-
-  def best_sales_day
-    self.invoices.max {|invoice| invoice.total_revenue}.created_at.strftime("%A, %B %d, %Y")
-  end 
 end
