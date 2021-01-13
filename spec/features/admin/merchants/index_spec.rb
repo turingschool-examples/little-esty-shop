@@ -56,9 +56,10 @@ describe 'Admin Merchant Index' do
   end
 
   it 'should have rerouting links on all merchants names to their admin show page' do
-    expect(page).to have_link(@m1.name)
-    click_link "#{@m1.name}"
-    expect(current_path).to eq(admin_merchant_path(@m1))
+    within("#toppy-#{@m1.id}") do
+      click_link "#{@m1.name}"
+      expect(current_path).to eq(admin_merchant_path(@m1))
+    end
   end
 
   it 'should have set merchants to disabled by default' do
