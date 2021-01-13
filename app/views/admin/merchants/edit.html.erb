@@ -1,9 +1,10 @@
-<%# <%= form_with model: @merchant.update, local: true do |f| %>
-<%#  <%= f.label :name %>
-<%#  <%= f.text_field :name, @merchant.name %>
+<%# form_with model: [:admin, @merchant] do |f| %>
+<%# form_with(model: [:admin, @merchant], url: admin_merchant_path, method: "patch") do |f| %>
+<%= form_with(model: @merchant, url: admin_merchant_path(@merchant), local: true, method: "patch") do |f| %>
+    <%=  f.label :name %>
+    <%=  f.text_field :name, value: @merchant.name %>
+    <%=  f.submit %> 
+<% end %> 
 
-<%#  <%= f.submit %> 
-<%# <% end %> 
+<%# <%= render partial: 'form', locals: { path: admin_merchant_path, merchant: @merchant, method: :patch } %>
 
-<%= form_with(model: @merchant, url: admin_merchant_path(@merchant.id), method: "patch") %>
-form_with model: [:admin, @merchant]
