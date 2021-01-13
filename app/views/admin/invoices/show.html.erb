@@ -1,0 +1,36 @@
+<h1> admin invoice show </h1>
+
+<section id="invoice-information">
+  <ul>
+    <li>invoice id: <%= @invoice.id %></li>
+    <li>invoice status: <%= @invoice.status %></li>
+    <li>invoice creation date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></li>
+    <li>invoice total: <%= @invoice.invoice_items.invoice_amount %></li>
+  </ul>
+
+  <%= form_with invoice: @invoice, method: :patch do |f| %>
+    <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
+    <%= f.label :status %>
+    <%= f.submit %>
+  <% end %>
+</section>
+
+<section id="customer-information">
+  <ul>
+    <li>customer name: <%= @invoice.customer.name %></li>
+    <li>customer address: <%= @invoice.customer.address%></li>
+  </ul>
+</section>
+
+<section id="invoice-items-information">
+  <ul>
+    <% @invoice.invoice_items.each do |ii| %>
+      <li id="invoice-item-<%= ii.id %>">
+        <p>item name: <%= ii.item.name %></p>
+        <p>quantity: <%= ii.quantity %></p>
+        <p>unit price: <%= ii.unit_price %></p>
+        <p>shipping status: <%= ii.status%></p>
+      </li>
+    <% end %>
+  </ul>
+</section>

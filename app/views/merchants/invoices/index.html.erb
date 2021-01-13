@@ -1,0 +1,5 @@
+<% @invoices.each_with_index do |invoice, index|%>
+  <li id="invoice-<%= index + 1%>">
+    Invoice #<%= link_to invoice.id, merchant_invoice_path(invoice.merchant_id, invoice.id) %>
+  </li>
+<% end %>

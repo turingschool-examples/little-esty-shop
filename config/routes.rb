@@ -5,16 +5,16 @@ Rails.application.routes.draw do
       get 'dashboard'
     end
     scope module: "merchants" do
-      resources :items, only: [:index]
+      resources :items, only: :update
+      resources :items, except: [:destroy], shallow: true
       resources :invoices, only: [:index, :show]
+      resources :invoice_items, only: [:update]
     end
   end
 
   get '/admin', to: 'admins#dashboard' 
-  shallow do 
-    namespace :admin do 
-      resources :merchants, :invoices
-
-    end
+  namespace :admin, shallow: true do 
+    resources :merchants
+    resources :invoices, only: [:index, :show, :update]
   end
 end

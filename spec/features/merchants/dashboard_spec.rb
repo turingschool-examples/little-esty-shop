@@ -30,7 +30,7 @@ RSpec.describe "Merchant Dashboard" do
 
     describe "the statistics, including:" do
       it "the top 5 customers" do
-        FactoryBot.create_list(:customer, 10)
+        create_list(:customer, 10)
         Customer.all.each_with_index do |customer, index|
           (index + 1).times do
             invoice = create(:invoice, merchant: merchant1, customer: customer)

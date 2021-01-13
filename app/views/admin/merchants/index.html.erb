@@ -1,1 +1,29 @@
 <h1>Merchants Index</h1>
+<h2>All Merchants</h2>
+<%= link_to "New Merchant", new_admin_merchant_path %>
+<section id="all-merchants">
+  <ul id="enabled-merchants">
+    <% @enabled_merchants.each do |merchant| %>
+      <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id)%>: Enabled
+        <%= button_to "Disable", "/admin/merchants/#{merchant.id}?enabled=#{!merchant.enabled}", id: "toggle-status", method: :patch %>
+      </li>
+    <% end %>
+  </ul>
+
+  <ul id="disabled-merchants">
+    <% @disabled_merchants.each do |merchant| %>
+      <li id="merchant-<%= merchant.id %>"><%= link_to merchant.name, admin_merchant_path(merchant.id)%>: Disabled
+        <%= button_to "Enable", "/admin/merchants/#{merchant.id}?enabled=#{!merchant.enabled}", id: "toggle-status", method: :patch %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<ol id="top-merchants">
+  <% @top_merchants.each do |merchant| %>
+    <li id="merchant-<%= merchant.id %>">
+      <p><%= merchant.name %>($<%= merchant.total_revenue/100 %>)</p>
+      <p>Top selling date for <%= merchant.name %> was <%= merchant.best_day %></p>
+    </li>
+  <% end %>
+</ol>
