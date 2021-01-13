@@ -25,7 +25,6 @@ class Merchant < ApplicationRecord
     end
   end
 
-
   def top_5_items
      items
      .joins(invoices: :transactions)

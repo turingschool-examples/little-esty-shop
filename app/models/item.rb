@@ -21,5 +21,4 @@ class Item < ApplicationRecord
     .created_at
     .to_date
   end
-
 end

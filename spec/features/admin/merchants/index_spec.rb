@@ -24,7 +24,7 @@ describe 'Admin Merchant Index' do
     @i10 = Invoice.create!(merchant_id: @m4.id, customer_id: @c2.id, status: 2)
     @i11 = Invoice.create!(merchant_id: @m4.id, customer_id: @c2.id, status: 2)
     @i12 = Invoice.create!(merchant_id: @m5.id, customer_id: @c2.id, status: 2)
-    
+
     @item_1 = Item.create!(name: 'Shampoo', description: 'This washes your hair', unit_price: 10, merchant_id: @m1.id)
     @item_2 = Item.create!(name: 'Conditioner', description: 'This makes your hair shiny', unit_price: 8, merchant_id: @m2.id)
     @item_3 = Item.create!(name: 'Brush', description: 'This takes out tangles', unit_price: 5, merchant_id: @m3.id)
@@ -69,13 +69,13 @@ describe 'Admin Merchant Index' do
   it 'should have button to disable merchants' do
     within("#merchant-#{@m1.id}") do
       click_button 'Enable'
-      
+
       @merchant = Merchant.find(@m1.id)
       expect(@merchant.status).to eq('enabled')
     end
   end
 
-  it 'should group by enabled/disabled' do 
+  it 'should group by enabled/disabled' do
     expect(@m1.name).to appear_before(@m3.name)
   end
 
@@ -96,5 +96,4 @@ describe 'Admin Merchant Index' do
       expect(page).to have_content("Top Selling Date for #{@m1.name} was on#{@m1.best_day.strftime("%_m/%d/%Y")}")
     end
   end
-
 end
