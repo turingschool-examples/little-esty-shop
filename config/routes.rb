@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # get "/admin", to: "admin/dashboard#index"
   # get "/admin/merchants", to: "admin/merchants#index"
 
+  get '/', to: 'welcome#index', as: :root
+  
   namespace :admin do
     root :to => 'dashboard#index'
     resources :merchants, except: [:destroy]

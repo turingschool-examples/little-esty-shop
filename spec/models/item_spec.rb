@@ -103,7 +103,6 @@ RSpec.describe Item, type: :model do
 
       expect(Item.top_5_popular_items).to eq(actual)
     end
-
     it "Can return the date with most sales for each item" do 
       all_birds = Merchant.create!(name: 'All Birds', status: 0)
       walmart   = Merchant.create!(name: 'Walmart', status: 0)
