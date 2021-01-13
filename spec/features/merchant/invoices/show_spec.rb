@@ -77,6 +77,7 @@ describe 'As a merchant' do
           expect(page).to have_select('Status:', :selected => 'pending')
         end
       end
+    end
 
     it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
       expected_revenue = @invitm1.quantity * @invitm1.unit_price + @invitm5.quantity * @invitm5.unit_price
