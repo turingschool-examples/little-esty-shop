@@ -43,4 +43,4 @@ At the end of the project, you will be assessed based on [this Rubric](./doc/rub
 
 
 ## Catherine, Isabelle and Saundra's Diagram
-<img src="https://i.ibb.co/gVfYM5n/Screen-Shot-2021-01-04-at-6-31-42-PM.png" alt="little-esty-shop">
+<img src="https://i.ibb.co/Kq0PyCj/Screen-Shot-2021-01-12-at-6-52-19-PM.png" alt="little-esty-shop">
