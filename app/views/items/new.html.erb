@@ -1,0 +1,11 @@
+<%= form_tag "/merchant/#{@merchant.id}/items" do %>
+<h1>Create a New Item</h1>
+<%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+  <%= label_tag :description %>
+  <%= text_field_tag :description %><br>
+  <%= label_tag :unit_price%>
+  <%= text_field_tag :unit_price %><br>
+  <% hidden_field_tag :merchant_id, @merchant.id %>
+  <%= submit_tag 'Create Item' %>
+<% end %>
