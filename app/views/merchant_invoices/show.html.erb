@@ -11,7 +11,11 @@
   <h3> Item Name: <%= item.name %></h3>
   <p> Item Price: <%= item.unit_price %></p>
     <p>Quantity: <%= invoiceitem.quantity %></p>
-    <p>Status: <%= invoiceitem.status %></p>
+    <%= form_with model: @invoice, url: merchant_invoice_path(@invoice.merchant.id, @invoice.id) do |f| %>
+      <%= f.label :status, 'Status:' %>
+      <%= f.select :status, ['cancelled', 'completed', 'in progress'] %>
+      <%= f.submit 'Update Item Status' %>
+    <% end %>
  <br><% end %>
 <% end %>
 
