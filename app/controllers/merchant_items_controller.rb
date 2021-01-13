@@ -39,7 +39,6 @@ class MerchantItemsController < ApplicationController
     @item = merchant.items.new(item_params)
     @item.save
     redirect_to merchant_items_path(merchant.id)
-    # require 'pry'; binding.pry
   end
 
   private

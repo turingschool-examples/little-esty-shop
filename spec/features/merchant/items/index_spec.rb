@@ -9,7 +9,7 @@ describe 'As a merchant' do
       @item_2 = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10, status: 0)
       @item_3 = @bob.items.create!(name: 'Item 3', description: 'Test', unit_price: 15, status: 0)
      
-      visit "merchants/#{@max.id}/items"
+      visit merchant_items_path(@max.id)
     end
 
     it 'I see a list of the names of all of my items' do
@@ -43,7 +43,7 @@ describe 'As a merchant' do
           click_on 'Disable'
         end
       end
-
+  
       it 'Then I am redirected back to the items index' do
         expect(current_path).to eq(merchant_items_path(@max.id))
       end
@@ -84,6 +84,7 @@ describe 'As a merchant' do
         expect(page).to have_content(item_5.name)
       end
     end
+
     it "can see a link to create a new item" do 
       visit merchant_items_path(@max.id)
 
@@ -91,6 +92,7 @@ describe 'As a merchant' do
 
       expect(current_path).to eq("/merchants/#{@max.id}/items/new")
     end
+
     it "can see the top 5 most popular items ranked by total revenue and top items best day" do
       sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
       joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
@@ -113,13 +115,13 @@ describe 'As a merchant' do
       invoice5 = Invoice.create!(status: 0, customer_id: frank.id, merchant_id: all_birds.id)
       invoice6 = Invoice.create!(status: 0, customer_id: joel.id, merchant_id: all_birds.id)
       # Transactions:
-      tx1      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 'success', invoice_id: invoice2.id,)
-      tx2      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'failed', invoice_id: invoice1.id,)
-      tx3      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 'success', invoice_id: invoice3.id,)
-      tx4      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 'success', invoice_id: invoice4.id,)
-      tx5      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'success', invoice_id: invoice5.id,)
-      tx6      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'success', invoice_id: invoice5.id,)
-      tx7      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'success', invoice_id: invoice6.id,)
+      tx1      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 'success', invoice_id: invoice2.id)
+      tx2      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'failed', invoice_id: invoice1.id)
+      tx3      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 'success', invoice_id: invoice3.id)
+      tx4      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 'success', invoice_id: invoice4.id)
+      tx5      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'success', invoice_id: invoice5.id)
+      tx6      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'success', invoice_id: invoice5.id)
+      tx7      = Transaction.create!(credit_card_number: 010001005555, credit_card_expiration_date: 20220101, result: 'success', invoice_id: invoice6.id)
       # Items:
       candle   = Item.create!(name: 'Lavender Candle', description: '8oz Soy Candle', unit_price: 7.0, merchant_id: all_birds.id)
       backpack = Item.create!(name: 'Camo Backpack', description: 'Double Zip Backpack', unit_price: 15.5, merchant_id: all_birds.id)
