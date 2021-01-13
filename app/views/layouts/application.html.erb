@@ -15,4 +15,12 @@
     <% end %>
     <%= yield %>
   </body>
+  <footer>
+    GitHub User Information:<br>
+    <% GithubFacade.get_users.each do |user| %>
+        Username:  <%= user.username %><br>
+        Commits:  <%= user.total_commits %><br>
+    <% end %>
+    Repo name: <%= GithubFacade.repo_name[:name] %>
+  </footer>
 </html>

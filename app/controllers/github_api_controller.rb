@@ -6,6 +6,7 @@ class GithubApiController < ApplicationController
     # @github_results = results.map do |user_data|
     #   GithubResults.new(user_data)
     # end
+    # require "pry"; binding.pry
     @github_results = GithubFacade.get_users
   end
 end
