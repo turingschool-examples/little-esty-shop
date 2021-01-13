@@ -3,6 +3,9 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :items
 
+  enum status: [:disabled, :enabled]
+
+
   def enabled_items
     Item.all_enabled_items.where(merchant_id: self.id)
   end
