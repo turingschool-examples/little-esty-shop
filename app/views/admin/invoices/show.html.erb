@@ -3,32 +3,28 @@
 ==============================
 Invoice Details
 ===============================
+<section class="invoice_details">
+<%= render partial: 'select_form', locals: {
+                                              model: @invoice, 
+                                              url: admin_invoice_path(@invoice.id), 
+                                              button_text: 'Update Invoice Status'
+                                              } %><br>
 
-<br><label for="status">Current Status:</label>
-<select name="status" id="status">
-  <option value="current status"><%="#{@invoice.status.capitalize}"%></option>
-  <option value="cancelled">Cancelled</option>
-  <option value="completed">Completed</option>
-  <option value="in progress">In Progress</option>
-</select>
-<%= button_to "Update Invoice Status", admin_invoice_path(@invoice.id, value: ''), method: :patch %><br>
-
+<li>Status:        <%= @invoice.status.capitalize %></li>
 <li>ID:            <%= @invoice.id %></li>
 <li>Total Revenue: $<%= @invoice.total_revenue %></li>
-<li>Status:        <%= @invoice.status.capitalize %></li>
 <li><%= @invoice.created_at.strftime("Created: %A, %B %d, %Y") %></li><br>
-
+</section>
 =============================
 Customer Details
 ===============================
-
+<section class="customer_details">
 <li>First Name:       <%= @invoice.customer.first_name %></li>
 <li>Last Name:        <%= @invoice.customer.last_name %></li><br>
-
+</section>
 ===============================
 Item Details
 ================================
-
 <% @invoice.items.each do |item| %>
   <section id="item-<%=item.id%>">
     <h4>        <%= item.name %></h4>

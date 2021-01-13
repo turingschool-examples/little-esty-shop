@@ -57,18 +57,15 @@ RSpec.describe "As a admin user" do
     describe 'Admin Merchant Enable/Disable' do
       it "Next to each merchant name I see a button to disable or enable that merchant" do
         visit admin_merchants_path
-  
-        within ".merchant-disabled" do
+
+        within "#merchant-disabled-#{@alibaba.id}" do
           expect(page).to have_content(@alibaba.name)
           expect(page).to have_button('Enable')
-        end
-  
-        within ".merchant-enabled" do
-          expect(page).to have_content(@amazon.name)
-          expect(page).to have_button('Disable')
+          click_button('Enable')
+          expect(current_path).to eq(admin_merchants_path)
         end
 
-        within ".merchant-enabled" do
+        within "#merchant-enabled-#{@amazon.id}" do
           expect(page).to have_content(@amazon.name)
           expect(page).to have_button('Disable')
           click_button('Disable')

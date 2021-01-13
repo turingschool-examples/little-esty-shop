@@ -21,10 +21,6 @@ class Item < ApplicationRecord
     invoice_items.where(item_id: itm_id, invoice_id: invc_id).pluck(:status)
   end
 
-  def self.most_expensive
-    order(unit_price: :desc).limit(5)
-  end
-
   def self.top_5_popular_items
     Item.joins(:transactions)
     .where("transactions.result = 'success'")
