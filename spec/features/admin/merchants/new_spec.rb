@@ -8,5 +8,6 @@ describe 'Admin Merchant New' do
 
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content('Dingley Doo')
+    expect(page).to have_content('Merchant Has Been Created!')
   end
 end
