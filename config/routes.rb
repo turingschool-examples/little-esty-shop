@@ -12,9 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/admin', to: 'admins#dashboard'
-  namespace :admin do
-    resources :merchants, :invoices
-
+  get '/admin', to: 'admins#dashboard' 
+  namespace :admin, shallow: true do 
+    resources :merchants
+    resources :invoices, only: [:index, :show, :update]
   end
 end
