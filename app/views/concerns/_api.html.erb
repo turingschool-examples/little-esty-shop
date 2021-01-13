@@ -1,0 +1,9 @@
+<section id="api-block">
+  <%= @api_info.repo_name %>
+  <ul>
+    <% @api_info.contributors.each do |c| %>
+      <li><%= c[0] %> (<%= c[1] %> commits)</li>
+    <% end %>
+  </ul>
+  <p id="pull-requests">merged pull requests: <%= @api_info.merged_pull_request %></p>
+</section>
