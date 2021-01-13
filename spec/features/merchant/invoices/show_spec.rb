@@ -54,14 +54,14 @@ describe 'As a merchant' do
     it "Then I see that each invoice item status is a select field and the item's current status is selected" do
       visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
 
-      expect(page).to have_select('Status:', :options => ['cancelled', 'completed', 'in progress'], :selected => 'completed')
+      expect(page).to have_select('Status:', :options => ['packaged', 'pending', 'shipped'], :selected => 'packaged')
     end
 
     describe 'When I click this select field' do
       before :each do
         visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
 
-        select 'cancelled', from: 'Status:'
+        select 'pending', from: 'Status:'
       end
 
       it 'Then I can select a new status for the Item' do
@@ -73,7 +73,7 @@ describe 'As a merchant' do
           click_button('Update Item Status')
 
           expect(current_path).to eq("/merchants/#{@max.id}/invoices/#{@invoice1.id}")
-          expect(page).to have_select('Status:', :selected => 'cancelled')
+          expect(page).to have_select('Status:', :selected => 'pending')
         end
       end
     end

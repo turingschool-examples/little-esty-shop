@@ -7,13 +7,13 @@
 
 
 <% @invoice.items.each do |item| %>
-  <% @invoice.invoice_items.each do |invoiceitem| %>
   <h3> Item Name: <%= item.name %></h3>
   <p> Item Price: <%= item.unit_price %></p>
-    <p>Quantity: <%= invoiceitem.quantity %></p>
-    <%= form_with model: @invoice, url: merchant_invoice_path(@invoice.merchant.id, @invoice.id) do |f| %>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <%= form_with model: invoice_item, url: merchant_invoice_item_path(@invoice.merchant.id, invoice_item.id) do |f| %>
       <%= f.label :status, 'Status:' %>
-      <%= f.select :status, ['cancelled', 'completed', 'in progress'] %>
+      <%= f.select :status, ['packaged', 'pending', 'shipped'] %>
       <%= f.submit 'Update Item Status' %>
     <% end %>
  <br><% end %>
