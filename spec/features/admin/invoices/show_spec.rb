@@ -33,8 +33,6 @@ describe 'Admin Invoices Index Page' do
     expect(page).to have_content("#{@c1.city}, #{@c1.state} #{@c1.zip}")
 
     expect(page).to_not have_content("#{@c2.first_name} #{@c2.last_name}")
-    expect(page).to have_content(@c2.address)
-    expect(page).to have_content("#{@c2.city}, #{@c2.state} #{@c2.zip}")
   end
 
   it 'should display all the items on the invoice' do
