@@ -1,21 +1,56 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <p class="navbar-text"><%= @merchant.name %></p>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Dashboard', merchant_dashboard_index_path, style: 'pull-right' %>
+      <%= link_to 'My Items', merchant_items_path(@merchant), style: 'pull-right' %>
+      <%= link_to 'My Invoices', merchant_invoices_path(@merchant), style: 'pull-right' %></li>
+    </ul>
+  </nav>
+</div>
+
+<body>
+  <div class="row">
+    <p class='col-12'>Invoice #<%= @invoice.id %></p>
+  </div>
+
+  <strong>Status: </strong><%= @invoice.status %><br/>
+  <br>
+
+  <p> Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
+  <p>Total Revenue: <%= @invoice.total_revenue %></p>
 
 
-<%= @invoice.id %>
-<%= @invoice.status %>
-<%= @invoice.created_at.strftime("%A, %B %-d, %Y") %>
+  <h4>Customer:</h4>
+    <%= @customer.first_name %> <%= @customer.last_name %><br>
+  <br>
+  <br>
+  <h4>Items on this Invoice:</h4>
+  <table class="table">
+    <thead>
+      <tr class="tr">
+        <th class="th1">Item Name</th>
+        <th class="th1">Quantity</th>
+        <th class="th1">Unit Price</th>
+        <th class="th1">Status</th>
+      </tr>
+    </thead>
 
-<h3>Customer Information</h3>
-<%= @customer.first_name %>
-<%= @customer.last_name %>
+    <tbody>
+      <% @invoice.invoice_items.each do |i| %>
+        <section id="the-status-<%= i.id %>">
+          <tr class="tr">
+            <td style="text-align:center"><%= i.item.name %></td>
+            <td style="text-align:center"><%= i.quantity %></td>
+            <td style="text-align:center">$<%= i.unit_price %></td>
+            <td style="text-align:center"><%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch do |f| %>
+                                            <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
+                                            <%= f.submit 'Update Invoice' %>
+                                          <% end %></td><br/>
+          </tr>
+        </section>
+      <% end %>
+    </tbody>
+  </table>
 
-<h3>Item Information</h3>
-<%= @invoice_item.item.name %>
-<%= @invoice_item.quantity %>
-<%= @invoice_item.unit_price %>
-<%= @invoice_item.status %>
-<%= @invoice.total_revenue %>
-
-<%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch do |f| %>
-  <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
-  <%= f.submit 'Update Invoice' %>
-<% end %>
+</body>
