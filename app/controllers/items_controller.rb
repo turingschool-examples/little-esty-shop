@@ -34,7 +34,6 @@ class ItemsController < ApplicationController
     redirect_to merchant_items_path(@merchant)
   end
 
-
   private
   def item_params_sec
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
