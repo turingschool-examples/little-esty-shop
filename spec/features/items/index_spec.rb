@@ -75,27 +75,22 @@ describe "merchant items index" do
 
   it "can make a button to disable items" do
     within("#item-#{@item_1.id}") do
-      expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
-
       click_button "Disable"
 
       item = Item.find(@item_1.id)
       expect(item.status).to eq("disabled")
     end
     within("#item-#{@item_2.id}") do
-      expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
+      click_button "Enable"
 
-      click_button "Disable"
-      expect(@item_2.status).to eq("disabled")
+      item = Item.find(@item_2.id)
+      expect(item.status).to eq("enabled")
     end
     within("#item-#{@item_3.id}") do
-      expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
+      click_button "Enable"
 
-      click_button "Disable"
-      expect(@item_3.status).to eq("disabled")
+      item = Item.find(@item_3.id)
+      expect(item.status).to eq("enabled")
     end
   end
 
