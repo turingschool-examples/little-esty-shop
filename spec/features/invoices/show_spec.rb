@@ -83,8 +83,18 @@ RSpec.describe 'invoices show' do
   it "shows the total revenue for this invoice" do
     visit merchant_invoice_path(@merchant1, @invoice_1)
 
-    expect(page).to have_content("162.0")
+    expect(page).to have_content(@invoice_1.total_revenue)
   end
 
+  it "shows a select field to update the invoice status" do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+    save_and_open_page
+    page.select("cancelled")
+    click_button "Update Invoice"
+    save_and_open_page
+    expect(page).to have_content("cancelled")
+    expect(page).to_not have_content("in progress")
+
+  end
 
 end
