@@ -22,13 +22,13 @@ describe "merchant items index" do
     @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
     @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Coon')
 
-    @invoice_1 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2)
-    @invoice_2 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2)
+    @invoice_1 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
+    @invoice_2 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_1.id, status: 2, created_at: "2012-03-28 14:54:09")
     @invoice_3 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_2.id, status: 2)
     @invoice_4 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_3.id, status: 2)
     @invoice_5 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_4.id, status: 2)
     @invoice_6 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_5.id, status: 2)
-    @invoice_7 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_6.id, status: 1)
+    @invoice_7 = Invoice.create!(merchant_id: @merchant1.id, customer_id: @customer_6.id, status: 2)
 
     @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0)
     @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0)
@@ -161,6 +161,17 @@ describe "merchant items index" do
       expect(page).to have_content("#{@merchant1.top_5_items[2].total_revenue}")
       expect(page).to have_content("#{@merchant1.top_5_items[3].total_revenue}")
       expect(page).to have_content("#{@merchant1.top_5_items[4].total_revenue}")
+    end
+  end
+
+  it "shows the best day next to the item" do
+    within("#top_5") do
+      save_and_open_page
+      expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.best_day}")
+      expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.best_day}")
+      expect(page).to have_content("Top selling date for #{@item_3.name} was #{@item_3.best_day}")
+      expect(page).to have_content("Top selling date for #{@item_4.name} was #{@item_4.best_day}")
+      expect(page).to have_content("Top selling date for #{@item_8.name} was #{@item_8.best_day}")
     end
   end
 end
