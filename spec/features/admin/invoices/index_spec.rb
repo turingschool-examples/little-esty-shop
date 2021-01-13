@@ -60,7 +60,6 @@ RSpec.describe "As a admin user" do
     end
     describe 'Admin Invoices API Information' do
       it "should display all github users usernames and commit count" do
-        save_and_open_page
         expect(page).to have_content("Username: cowens87")
         expect(page).to have_content("Username: foymikek")
         expect(page).to have_content("Username: RyanDBarnett")
