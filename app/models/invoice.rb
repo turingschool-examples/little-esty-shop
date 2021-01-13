@@ -15,4 +15,8 @@ class Invoice < ApplicationRecord
   def self.top_sales_day
     joins(:transactions).where(transactions: {result: 0}).select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price)").group(:created_at).order(sum: :desc, created_at: :desc).first.created_at
   end
+
+  def total_revenue
+    invoice_items.sum("quantity * unit_price")
+  end
 end

@@ -7,8 +7,12 @@ class Merchants::ItemsController < ApplicationController
 
   def update
     get_item.update(item_params)
-    flash.notice = "Item has been updated!"
-    redirect_to params[:previously] || params[:item][:previously]
+    if params[:item][:enabled]
+      redirect_to merchant_items_path(params[:merchant_id])
+    else
+      flash.notice = "Item has been updated!"
+      redirect_to item_path(@item)
+    end
   end
 
   def new

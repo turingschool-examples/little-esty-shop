@@ -42,4 +42,22 @@ describe Invoice, type: :model do
     it {should have_many :invoice_items}
     it {should have_many :items}
   end
+
+  describe "model methods" do
+    it "total_revenue" do
+      merchant1 = create(:merchant)
+      items = create_list(:item, 5, merchant: merchant1, unit_price: 1)
+
+      customer = create(:customer, first_name: "Linda", last_name: "Mayhew")
+
+      invoice = create(:invoice, merchant: merchant1, customer: customer)
+
+      items.each do |item|
+        create(:invoice_item, item: item, invoice: invoice, quantity: 5, unit_price: 1)
+      end
+      # create(:transaction, invoice: invoice, result: 0)
+
+      expect(invoice.total_revenue).to eq(25)
+    end
+  end
 end

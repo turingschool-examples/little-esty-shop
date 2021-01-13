@@ -6,9 +6,8 @@ RSpec.describe "Edit Item" do
       merchant1 = create(:merchant)
       item = create(:item, merchant: merchant1)
 
-      visit item_path(item)
-      click_link "Update"
-      # visit edit_item_path(item)
+      visit edit_item_path(item)
+      
       fill_in("item[name]", with: "New name")
       fill_in("item[description]", with: "New description")
       fill_in("item[unit_price]", with: 100)
