@@ -1,6 +1,6 @@
 class Admin::InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all.order(:id)
+    @invoices = Invoice.order(:id)
   end
 
   def show
@@ -9,12 +9,12 @@ class Admin::InvoicesController < ApplicationController
 
   def update
     invoice = Invoice.find(params[:id])
-    invoice.update(invoice_items_params)
+    invoice.update(invoice_params)
     redirect_to admin_invoice_path(invoice)
   end
 
   private
-  def invoice_items_params
+  def invoice_params
     params.permit(:status)
   end
 end
