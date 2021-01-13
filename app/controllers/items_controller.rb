@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    
+
   end
 
   def create
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.permit(:name, :description, :unit_price, :merchant_id)
+    params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
   end
 
   def find_item_and_merchant
