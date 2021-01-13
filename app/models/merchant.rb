@@ -20,6 +20,14 @@ class Merchant < ApplicationRecord
              .where('invoice_items.status < ?', 2)
              .group('items.name, merchants.id')
     end
+
+    def items_ready_to_ship_id(m_id, name)
+      Invoice.where(merchant_id: m_id)
+             .joins(:items)
+             .select(:id)
+             .where('items.name = ?', name)
+             .ids
+    end
 end
 
 

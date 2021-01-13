@@ -10,7 +10,9 @@
   <% end %>
 <% end %><br>
 <ul><% Merchant.items_ready_to_ship(@merchant.id).each do |item| %>
-  <% binding.pry %>
-  <li><%= item.name %></li>
+  <li><%= item.name + " - Invoice ID's: "%>
+  <% @merchant.items_ready_to_ship_id(@merchant.id, item.name).each do |id| %>
+    <%= link_to "#{id}", "invoices/#{id}" %>
+  <% end %></li>
 </ul><% end %>
 </h3>

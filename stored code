@@ -1,0 +1,11 @@
+Invoice.where(merchant_id: 100).joins(:transactions, :invoice_items, :items).select('items.*, sum(invoice_items.quantity)')
+.where('invoice_items.status = ?', 2).group('items.id, invoice_items.quantity').order('items.id desc, sum desc')
+
+m = Merchant.where(id: 1).joins(invoices: :items).select('items.*').where('invoice_items.status < ?', 2).group('items.id, merchants.id')
+m.each do |mm|
+Invoice.joins(:items).select(:id).where('items.name = ?', mm.name)
+end
+
+best customers Invoice.where(merchant_id: self.id).joins(:transactions, :customer).select('customers.*, count(transactions) as most_success').where('transactions.result = ?', 0).group('customers.id').order('most_success desc').limit(5)
+
+items rdy to ship Invoice.where(merchant_id: 100).joins(:merchants, :items).select('items.name').where('invoice_items.status < ?', 2).group('items.name, merchants.id')
