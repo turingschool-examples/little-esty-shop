@@ -38,11 +38,12 @@ RSpec.describe "As a admin user" do
       @invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: @invoice1.id, item_id: @candle.id)
       @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @backpack.id)
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @radio.id)
+
+      visit admin_invoices_path
     end
 
     describe 'Admin Invoices Index Page' do
       it "I see a list of all Invoice ids in the system" do
-        visit admin_invoices_path
   
         expect(page).to have_link(@invoice1.id.to_s)
         expect(page).to have_link(@invoice2.id.to_s)

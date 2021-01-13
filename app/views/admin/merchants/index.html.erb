@@ -6,7 +6,7 @@
 <% @merchants_top_five_merchants.each do |merchant| %>
   <section id="merchant-<%=merchant.id%>">
     <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %><%= " - $#{merchant.total_revenue} in sales" %>
-    <p><%= "Top selling date for #{merchant.name} was #{merchant.invoices.max {|invoice| invoice.total_revenue}.created_at.strftime('%m/%d/%y')}" %>
+    <p><%= "Top selling date for #{merchant.name} was #{merchant.invoices.best_day.created_at.strftime('%m/%d/%y')}" %>
   </section>
 <% end %>
 </section>
@@ -14,7 +14,7 @@
 <h3>Enabled Merchants:</h3>
 <section class="merchant-enabled">
 <% @merchants_enabled.each do |merchant| %>
-  <section id="merchant-<%=merchant.id%>">
+  <section id="merchant-enabled-<%=merchant.id%>">
     <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %> Status: <%= merchant.status %>
     <%= button_to "Disable", admin_merchant_path(merchant.id, update_to: 'Disabled'), method: :patch %>
   </section>
@@ -24,7 +24,7 @@
 <h3>Disabled Merchants:</h3>
 <section class="merchant-disabled">
 <% @merchants_disabled.each do |merchant| %>
-  <section id="merchant-<%=merchant.id%>">
+  <section id="merchant-disabled-<%=merchant.id%>">
     <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %> Status: <%= merchant.status %>
     <%= button_to "Enable", admin_merchant_path(merchant.id, update_to: 'Enabled'), method: :patch %>
   </section>

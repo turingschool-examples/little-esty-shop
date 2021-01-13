@@ -17,4 +17,12 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
   end
+
+  def self.best_day
+    self.joins(:invoice_items)
+        .select('invoices.created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS best_day')
+        .group(:id)
+        .order('best_day desc')
+        .first
+  end
 end

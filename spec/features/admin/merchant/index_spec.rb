@@ -57,18 +57,15 @@ RSpec.describe "As a admin user" do
     describe 'Admin Merchant Enable/Disable' do
       it "Next to each merchant name I see a button to disable or enable that merchant" do
         visit admin_merchants_path
-  
-        within ".merchant-disabled" do
+
+        within "#merchant-disabled-#{@alibaba.id}" do
           expect(page).to have_content(@alibaba.name)
           expect(page).to have_button('Enable')
-        end
-  
-        within ".merchant-enabled" do
-          expect(page).to have_content(@amazon.name)
-          expect(page).to have_button('Disable')
+          click_button('Enable')
+          expect(current_path).to eq(admin_merchants_path)
         end
 
-        within ".merchant-enabled" do
+        within "#merchant-enabled-#{@amazon.id}" do
           expect(page).to have_content(@amazon.name)
           expect(page).to have_button('Disable')
           click_button('Disable')
@@ -198,13 +195,13 @@ RSpec.describe "As a admin user" do
         invitm6  = InvoiceItem.create!(status: 1, quantity: 30, unit_price: 9.75, invoice_id: invoice6.id, item_id: radio4.id)
        
         visit admin_merchants_path
- 
+        
         within(".merchant-top5") do
-          expect(page).to have_content("Top selling date for #{alibaba.name} was 01/12/21")
-          expect(page).to have_content("Top selling date for #{all_birds.name} was 01/12/21")
-          expect(page).to have_content("Top selling date for #{walmart.name} was 01/12/21") 
-          expect(page).to have_content("Top selling date for #{big_lots.name} was 01/12/21")
-          expect(page).to have_content("Top selling date for #{amazon.name} was 12/08/20")
+          expect(page).to have_content("Top selling date for Big Lots was 01/13/21")
+          expect(page).to have_content("Top selling date for Amazon was 12/08/20")
+          expect(page).to have_content("Top selling date for All Birds was 01/13/21") 
+          expect(page).to have_content("Top selling date for Alibaba was 01/13/21")
+          expect(page).to have_content("Top selling date for Walmart was 01/13/21")
         end
       end
     end

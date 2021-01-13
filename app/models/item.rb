@@ -28,5 +28,5 @@ class Item < ApplicationRecord
     .group(:id)
     .order('highest_in_revenue desc')
     .limit(5)
-  end 
+  end
 end

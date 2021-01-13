@@ -19,7 +19,7 @@ RSpec.describe 'As an admin user' do
       @invoice3 = Invoice.create!(status: 0, customer_id: @billy.id, merchant_id: @alibaba.id)
       @invoice4 = Invoice.create!(status: 0, customer_id: @steve.id, merchant_id: @amazon.id)
       @invoice5 = Invoice.create!(status: 0, customer_id: @frank.id, merchant_id: @alibaba.id)
-      @invoice6 = Invoice.create!(status: 0, customer_id: @joel.id, merchant_id: @alibaba.id)
+      @invoice6 = Invoice.create!(status: 1, customer_id: @joel.id, merchant_id: @alibaba.id)
       @invoice7 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @alibaba.id)
       # Transactions:
       @tx1      = Transaction.create!(credit_card_number: 010001001022, credit_card_expiration_date: 20251001, result: 0, invoice_id: @invoice2.id,)
@@ -77,17 +77,48 @@ RSpec.describe 'As an admin user' do
       end
     end
 
-    # describe 'Admin Invoice Show Page: Update Invoice Status' do
-    #   it 'I see the invoice status is a select field' do
-    #     visit admin_invoice_path(@invoice1.id)
-  
-    #     expect(page).to have_content("Current Invoice Status: #{@invoice.status.capitalize}")
-    #     within('#status') do
-    #       click('In Progress')
-    #     end
-    #     click_button('Update_')
-    #   end
-    # end
+    describe 'Admin Invoice Show Page: Update Invoice Status' do
+      it 'I see the invoice status is a select field' do
+        visit admin_invoice_path(@invoice1.id)
+        
+        within('.invoice_details') do
+          expect(page).to have_content("Status: Cancelled")
+        end
+
+        within('.invoice_details') do
+          select('in progress', :from => 'invoice[status]')
+          click_button('Update Invoice Status')
+        end
+
+        within('.invoice_details') do
+          expect(page).to have_content("Status: In progress")
+        end
+
+        within('.invoice_details') do
+          select('completed', :from => 'invoice[status]')
+          click_button('Update Invoice Status')
+        end
+
+        within('.invoice_details') do
+          expect(page).to have_content("Status: Completed")
+        end
+
+        visit admin_invoice_path(@invoice6.id)
+
+        within('.invoice_details') do
+          expect(page).to have_content("Status: Completed")
+        end
+
+        within('.invoice_details') do
+          select('cancelled', :from => 'invoice[status]')
+          click_button('Update Invoice Status')
+        end
+
+        within('.invoice_details') do
+          expect(page).to have_content("Status: Cancelled")
+        end
+      end
+    end
   end 
 end 
 
