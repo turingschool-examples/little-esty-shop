@@ -5,6 +5,7 @@
 <p>Invoice Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p>Invoice Status: <%= @invoice.status %></p><br>
 
+<p>Total Revenue: <%= @invoice.total_revenue %></p
 
 <% @invoice.items.each do |item| %>
   <h3> Item Name: <%= item.name %></h3>

@@ -22,6 +22,7 @@ describe 'As a merchant' do
       @invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @item_2.id)
       @invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice3.id, item_id: @item_3.id)
       @invitm4  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id: @invoice4.id, item_id: @item_4.id)
+      @invitm5  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 10, invoice_id: @invoice1.id, item_id: @item_2.id)
     end
 
     it "Then I can see information related to that invoice including id, status, created at" do
@@ -76,6 +77,13 @@ describe 'As a merchant' do
           expect(page).to have_select('Status:', :selected => 'pending')
         end
       end
+
+    it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
+      expected_revenue = @invitm1.quantity * @invitm1.unit_price + @invitm5.quantity * @invitm5.unit_price
+      
+      visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content("Total Revenue: #{(expected_revenue)}")
     end
   end
 end
