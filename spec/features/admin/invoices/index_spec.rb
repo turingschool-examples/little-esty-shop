@@ -44,7 +44,7 @@ RSpec.describe "As a admin user" do
 
     describe 'Admin Invoices Index Page' do
       it "I see a list of all Invoice ids in the system" do
-  
+
         expect(page).to have_link(@invoice1.id.to_s)
         expect(page).to have_link(@invoice2.id.to_s)
         expect(page).to have_link(@invoice3.id.to_s)
@@ -52,10 +52,19 @@ RSpec.describe "As a admin user" do
         expect(page).to have_link(@invoice5.id.to_s)
         expect(page).to have_link(@invoice6.id.to_s)
         expect(page).to have_link(@invoice7.id.to_s)
-  
+
         click_on @invoice1.id.to_s
-        
+
         expect(current_path).to eq(admin_invoice_path(@invoice1.id))
+      end
+    end
+    describe 'Admin Invoices API Information' do
+      it "should display all github users usernames and commit count" do
+        save_and_open_page
+        expect(page).to have_content("Username: cowens87")
+        expect(page).to have_content("Username: foymikek")
+        expect(page).to have_content("Username: RyanDBarnett")
+        expect(page).to have_content("Username: Yesi-MC")
       end
     end
   end
