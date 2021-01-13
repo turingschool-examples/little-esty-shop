@@ -1,0 +1,5 @@
+<h1><%= @merchant.name %>'s Invoices</h1>
+
+<% @invoices.each do |invoice| %>
+  <p>Invoice #<%= invoice.id %></p>
+<% end %>
