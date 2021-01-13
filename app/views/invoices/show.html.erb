@@ -7,3 +7,9 @@
 <h3>Customer Information</h3>
 <%= @customer.first_name %>
 <%= @customer.last_name %>
+
+<h3>Item Information</h3>
+<%= @invoice_item.item.name %>
+<%= @invoice_item.quantity %>
+<%= @invoice_item.unit_price %>
+<%= @invoice_item.status %>
