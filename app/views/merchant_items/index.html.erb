@@ -11,3 +11,10 @@
 </section>
 
 <h2> <%= link_to "Create New Item", new_merchant_item_path(@merchant.id) %></h2>
+
+<section class="item-top5">
+<h1>Five Most Popular Items</h1>
+<% @merchant.items.top_5_popular_items.each do |item| %>
+  <li>Item:<%=link_to item.name, merchant_items_path(@merchant.id) %> $<%= item.highest_in_revenue  %> </li> 
+<% end %>
+</section>
