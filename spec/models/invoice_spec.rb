@@ -20,6 +20,18 @@ describe Invoice, type: :model do
       2.times { in_progress_invoices << create(:invoice, status:"in progress", created_at: tommorow) }
       expect(Invoice.incomplete_invoices.to_a).to eq(in_progress_invoices)
     end
+
+    it 'top_sales_day' do
+      item = create(:item)
+
+      5.times do |index|
+        invoice = create(:invoice, created_at: Date.today - index)
+        create(:invoice_item, item: item, invoice: invoice, quantity: (5 - index), unit_price: item.unit_price)
+        create(:transaction, invoice: invoice, result: 0)
+      end
+
+      expect(Invoice.joins(:invoice_items).top_sales_day).to eq(Date.today)
+    end
   end
 
   describe "relations" do
