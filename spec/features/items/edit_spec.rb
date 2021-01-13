@@ -28,7 +28,6 @@ describe "merchant items edit page" do
     click_button "Submit"
 
     expect(current_path).to eq(merchant_item_path(@merchant1, @item_1))
-
     expect(page).to have_content("Bar Shampoo")
     expect(page).to have_content("Eco friendly shampoo")
     expect(page).to have_content("15")
