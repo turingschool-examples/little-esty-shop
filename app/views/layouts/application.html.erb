@@ -21,5 +21,6 @@
         Username:  <%= user.username %><br>
         Commits:  <%= user.total_commits %><br>
     <% end %>
+    Repo name: <%= GithubFacade.repo_name[:name] %>
   </footer>
 </html>

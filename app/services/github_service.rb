@@ -7,9 +7,9 @@ class GithubService
   def self.parse_data(data)
     JSON.parse(data.body, symbolize_names: true)
   end
-  
-  def self.call_github
-    response   = connection.get('/repos/foymikek/little-esty-shop/stats/contributors')
+
+  def self.call_github(path)
+    response = connection.get(path)
     parse_data(response)
   end
 end
