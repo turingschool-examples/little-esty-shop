@@ -20,4 +20,11 @@ describe InvoiceItem, type: :model do
       expect(invoice.invoice_items.invoice_amount).to eq(15+20+25)
     end
   end
+
+  describe "delegates" do
+    it "fine" do
+      create(:invoice_item)
+      expect(InvoiceItem.first.item.name).to eq(InvoiceItem.first.item_name)
+    end
+  end
 end

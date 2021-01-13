@@ -1,0 +1,8 @@
+<h1>INVOICE <%= @invoice.id %></h1>
+<h3>Total Revenue: $<%= @invoice.total_revenue%></h3>
+<p><%= format_date(@invoice.created_at) %></p>
+<p><%= @invoice.status %></p>
+<%= render @invoice.customer %>
+<section id="item-information">
+  <%= render @invoice_items %>
+</section>

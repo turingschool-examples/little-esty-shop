@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_025609) do
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: true
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_025609) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: true
   end
 
   create_table "transactions", force: :cascade do |t|
