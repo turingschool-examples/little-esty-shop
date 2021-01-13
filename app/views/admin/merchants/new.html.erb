@@ -1,0 +1,8 @@
+New Merchant
+
+<%= form_with model: [ :admin, Merchant.new ], local: true do |f| %>
+    <%=  f.label :name %>
+    <%=  f.text_field :name %>
+    <%=  f.hidden_field :id, value: "#{@next_id}" %>
+    <%=  f.submit %> 
+<% end %>

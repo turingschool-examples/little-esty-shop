@@ -3,6 +3,10 @@ Merchants
     <%# <li> <%= link_to("#{merchant.name}", admin_merchant_path(merchant.id)) </li> %>
 <%# end %>
 
+<section id="new-merchant">
+  <%= link_to("New Merchant", new_admin_merchant_path) %>
+</section>
+
 <section id="enabled-merchants">
   <h1>Enabled Merchants</h1>
     <% Merchant.enabled.each do |merchant| %>
