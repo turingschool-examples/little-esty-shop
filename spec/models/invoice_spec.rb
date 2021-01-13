@@ -57,4 +57,10 @@ RSpec.describe Invoice, type: :model do
   it 'Can calculate the total revenue that will be generated from this invoice' do
     expect(@invoice1.total_revenue).to eq(175.0)
   end
+  
+  it 'Can display the invoice creation date of its 5 most popular items' do
+    date = Invoice.best_day.created_at
+    expected = date.strftime("%A, %B %d, %Y")
+    expect(expected).to eq("Wednesday, January 13, 2021")
+  end
 end

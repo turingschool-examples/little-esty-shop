@@ -1,6 +1,5 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    # require 'pry'; binding.pry
     @merchants_top_five_merchants = Merchant.top_five_merchants
     @merchants_enabled = Merchant.enabled_merchants
     @merchants_disabled = Merchant.disabled_merchants
