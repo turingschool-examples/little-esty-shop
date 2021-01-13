@@ -91,7 +91,7 @@ describe 'As a merchant' do
 
       expect(current_path).to eq("/merchants/#{@max.id}/items/new")
     end
-    it "can see the top 5 most popular items ranked by total revenue" do
+    it "can see the top 5 most popular items ranked by total revenue and top items best day" do
       sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
       joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
       billy    = Customer.create!(first_name: 'Billy', last_name: 'Joel')
@@ -136,6 +136,7 @@ describe 'As a merchant' do
       invitm6  = InvoiceItem.create!(status: 1, quantity: 30, unit_price: 9.75, invoice_id: invoice6.id, item_id: radio4.id)
       
       visit merchant_items_path(all_birds.id)
+  
       within(".item-top5") do
         expect(page).to have_link(radio3.name)
         expect(page).to have_link(radio1.name)
@@ -152,6 +153,12 @@ describe 'As a merchant' do
         expect(page).to have_content("Item:Retro $487.5")
         expect(page).to have_content("Item:I Heart Radio $292.5")
         expect(page).to have_content("Item:Camo Backpack $155.0")
+save_and_open_page
+        expect(page).to have_content("Top selling date for #{radio3.name} was #{radio3.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Top selling date for #{radio1.name} was #{radio1.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Top selling date for #{radio2.name} was #{radio2.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Top selling date for #{radio4.name} was #{radio4.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Top selling date for #{backpack.name} was #{backpack.created_at.strftime("%A, %B %d, %Y")}")
       end 
     end 
   end
