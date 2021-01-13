@@ -3,3 +3,7 @@
 <%= @invoice.id %>
 <%= @invoice.status %>
 <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %>
+
+<h3>Customer Information</h3>
+<%= @customer.first_name %>
+<%= @customer.last_name %>

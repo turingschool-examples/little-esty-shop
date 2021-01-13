@@ -60,6 +60,12 @@ RSpec.describe 'invoices show' do
     expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %-d, %Y"))
   end
 
+  it "shows the customer information" do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+
+    expect(page).to have_content(@customer_1.first_name)
+    expect(page).to have_content(@customer_1.last_name)
+  end
 
 
 end
