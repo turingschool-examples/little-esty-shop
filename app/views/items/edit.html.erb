@@ -8,4 +8,4 @@
   </nav>
 </div>
 
-<%= render partial: 'form', locals: { method: :patch, url: merchant_item_path(@merchant, @item), class: 'merchant_item_form', local: true} %>
+<%= render partial: 'form', locals: { method: :patch, url: merchant_item_path(@merchant, @item), class: 'merchant_item_form', local: true, model: @item} %>
