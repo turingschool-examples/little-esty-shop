@@ -43,7 +43,6 @@ gem 'mocha', '~> 1.12'
 gem 'mocha-on-bacon', '~> 0.2.3'
 gem 'hirb', '~> 0.7.3'
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'

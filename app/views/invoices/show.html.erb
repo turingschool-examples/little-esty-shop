@@ -1,0 +1,7 @@
+<h1><%= "#{@merchant.name}: Invoice-#{@invoice.id}" %></h1>
+<h3>
+<%= "ID: #{@invoice.id}" %><br>
+<%= "Status: #{@invoice.status}" %><br>
+<%= "Created on #{@invoice.created_at.strftime('%A, %B %d, %Y')}" %><br>
+<%= "Customer: #{@invoice.find_customer_on_invoice}" %><br>
+</h3>
