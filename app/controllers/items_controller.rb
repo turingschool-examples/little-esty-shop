@@ -30,7 +30,10 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create!(item_params)
+    Item.create!(name: params[:name],
+                description: params[:description],
+                unit_price: params[:unit_price],
+                id: find_new_id, merchant: @merchant)
     redirect_to merchant_items_path(@merchant)
   end
 
@@ -50,5 +53,9 @@ class ItemsController < ApplicationController
 
   def find_merchant
     @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def find_new_id
+    Item.last.id + 1
   end
 end
