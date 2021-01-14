@@ -65,12 +65,12 @@ describe 'As a merchant' do
         select 'pending', from: 'Status:'
       end
 
-      it 'Then I can select a new status for the Item' do
+      skip 'Then I can select a new status for the Item' do
         expect(page).to have_button('Update Item Status')
       end
 
       describe 'When I click this button' do
-        it "Then I am taken back to the merchant invoice show page and Item's status has now been updated" do
+        skip "Then I am taken back to the merchant invoice show page and Item's status has now been updated" do
           click_button('Update Item Status')
 
           expect(current_path).to eq("/merchants/#{@max.id}/invoices/#{@invoice1.id}")
@@ -81,7 +81,7 @@ describe 'As a merchant' do
 
     it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
       expected_revenue = @invitm1.quantity * @invitm1.unit_price + @invitm5.quantity * @invitm5.unit_price
-      
+
       visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
 
       expect(page).to have_content("Total Revenue: #{(expected_revenue)}")
