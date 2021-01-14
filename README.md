@@ -37,7 +37,8 @@ This project requires Ruby 2.5.3.
 * Clone your fork
 * From the command line, install gems and set up your DB:
     * `bundle`
-    * `rails db:create`
+    * `rails db:{create, migrate}` 
+* Run rake csv_load:all
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 

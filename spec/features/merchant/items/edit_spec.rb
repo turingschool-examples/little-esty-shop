@@ -51,7 +51,7 @@ describe 'As a merchant' do
       end
 
       it "Then I am redirected back to the merchant's item's edit page" do
-        save_and_open_page
+        
         expect(current_path).to eq(edit_merchant_item_path(@max.id, @item_1.id))
       end
     end
