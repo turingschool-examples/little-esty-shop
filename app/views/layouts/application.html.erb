@@ -18,8 +18,17 @@
 
   <footer>
       <div id="footer">
-        <h1><%= @repo_name %></h1>
-        <%# <h1>Little Esty Shop</h1> %>
+        <% response = Faraday.get("https://api.github.com/repos/aetzion1/little-esty-shop/commits") %>
+        <% api = JSON.parse(response.body, symbolize_names: true) %>
+        <% pr_count = 0 %>
+        <% api.each do |commit| %>
+          <% if commit[:commit][:committer][:name] == "GitHub" %>
+            <% pr_count += 1 %>
+          <% end %>
+        <% end %>
+
+        <h3>Little Esty Shop</h3><br>
+        <h3><%= "Number of Pull Requests: #{pr_count}" %></h3>
     </div>
 
   </footer>
