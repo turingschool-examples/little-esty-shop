@@ -27,4 +27,9 @@ class Invoice < ApplicationRecord
   def total_success
     self.most_success
   end
+
+  def find_customer_on_invoice
+    customer = Customer.joins(:invoices).where('invoices.id = ?', self.id).select(:first_name, :last_name).first
+    "#{customer.first_name} #{customer.last_name}"
+  end
 end
