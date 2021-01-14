@@ -32,4 +32,12 @@ class Invoice < ApplicationRecord
     customer = Customer.joins(:invoices).where('invoices.id = ?', self.id).select(:first_name, :last_name).first
     "#{customer.first_name} #{customer.last_name}"
   end
+
+  def find_items_on_invoice
+    Item.joins(:invoices).where('invoices.id = ?', self.id).select('items.*')
+  end
+
+  def find_invoice_item_data_for_item(item)
+    InvoiceItem.where(item_id: item.id).where(invoice_id: self.id).first
+  end
 end
