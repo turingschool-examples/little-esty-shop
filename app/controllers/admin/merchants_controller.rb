@@ -10,8 +10,8 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.new(m_params)
-    @merchant.save
+    Merchant.create!(name: params[:name],
+                     id: find_new_id)
     flash.notice = 'Merchant Has Been Created!'
     redirect_to admin_merchants_path
   end
@@ -40,5 +40,9 @@ class Admin::MerchantsController < ApplicationController
 
   def m_params
     params.permit(:name)
+  end
+
+  def find_new_id
+    Merchant.last.id + 1
   end
 end
