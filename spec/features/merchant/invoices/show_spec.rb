@@ -59,22 +59,29 @@ describe 'As a merchant' do
     end
 
     describe 'When I click this select field' do
-      before :each do
+      it 'Then I can select a new status for the Item' do
         visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
 
-        select 'pending', from: 'Status:'
-      end
-
-      skip 'Then I can select a new status for the Item' do
-        expect(page).to have_button('Update Item Status')
+        within "#invoice-item-#{@invitm1.id}" do
+          select 'pending', from: 'Status:'
+          expect(page).to have_button('Update Item Status')
+        end
       end
 
       describe 'When I click this button' do
-        skip "Then I am taken back to the merchant invoice show page and Item's status has now been updated" do
-          click_button('Update Item Status')
+        it "Then I am taken back to the merchant invoice show page and Item's status has now been updated" do
+          visit "merchants/#{@max.id}/invoices/#{@invoice1.id}"
+
+          within "#invoice-item-#{@invitm1.id}" do
+            select 'pending', from: 'Status:'
+            click_button('Update Item Status')
+          end
 
           expect(current_path).to eq("/merchants/#{@max.id}/invoices/#{@invoice1.id}")
-          expect(page).to have_select('Status:', :selected => 'pending')
+
+          within "#invoice-item-#{@invitm1.id}" do
+            expect(page).to have_select('Status:', :selected => 'pending')
+          end
         end
       end
     end
