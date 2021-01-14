@@ -29,7 +29,7 @@ class Invoice < ApplicationRecord
   end
 
   def find_customer_on_invoice
-    customer = Customer.joins(:invoices).where('invoices.id = ?', 1).select(:first_name, :last_name).first
+    customer = Customer.joins(:invoices).where('invoices.id = ?', self.id).select(:first_name, :last_name).first
     "#{customer.first_name} #{customer.last_name}"
   end
 end
