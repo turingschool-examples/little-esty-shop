@@ -8,6 +8,19 @@ class Invoice < ApplicationRecord
 
   enum status: [:"in progress", :completed, :cancelled]
 
+  def initialize
+    @total_revenue = 0
+  end
+
+  def total_revenue
+    @total_revenue
+  end
+
+  def add_to_total_revenue(amount)
+    @total_revenue += amount
+  end
+
+
   def self.incomplete
     joins(:invoice_items)
     .where('invoices.status = ? AND invoice_items.status != ?', 0, 2)
@@ -28,6 +41,7 @@ class Invoice < ApplicationRecord
   end
 
   def find_customer_on_invoice
+    @total_revenue = 0
     customer = Customer.joins(:invoices).where('invoices.id = ?', self.id).select(:first_name, :last_name).first
     "#{customer.first_name} #{customer.last_name}"
   end
