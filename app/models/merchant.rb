@@ -8,6 +8,7 @@ class Merchant < ApplicationRecord
 
   enum status: [:disabled, :enabled]
 
+  # RECOMMEND WE REFACTOR THIS ONE WIHTIN CUSTOMER OR INVOICE MODEL (ADAM)
   def best_customers
     Invoice.where(merchant_id: self.id)
            .joins(:transactions, :customer)
@@ -25,7 +26,7 @@ class Merchant < ApplicationRecord
            .where('invoice_items.status < ?', 2)
            .group('items.name, merchants.id')
   end
-
+  # RECOMMEND WE REFACTOR
   def invoices_for_items_rdy_to_ship(m_id, name)
     Invoice.where(merchant_id: m_id)
            .joins(:items)
@@ -40,16 +41,6 @@ class Merchant < ApplicationRecord
 
   def disabled_items
     Item.all_disabled_items.where(merchant_id: self.id)
-  end
-
-  def best_customers
-    Invoice.where(merchant_id: self.id)
-           .joins(:transactions, :customer)
-           .select('customers.*, count(transactions) as most_success')
-           .where('transactions.result = ?', 0)
-           .group('customers.id')
-           .order('most_success desc')
-           .limit(5)
   end
 
   def self.top_five
