@@ -11,8 +11,8 @@
 <% end %><br>
 <ul><% Merchant.items_ready_to_ship(@merchant.id).each do |item| %>
   <li><%= item.name + " - Invoice ID's: "%>
-  <% @merchant.items_ready_to_ship_id(@merchant.id, item.name).each do |id| %>
-    <%= link_to "#{id}", "invoices/#{id}" %>
+  <% @merchant.invoices_for_items_rdy_to_ship(@merchant.id, item.name).each do |invoice| %>
+    <%= link_to "#{invoice.id}", "invoices/#{invoice.id}" %><%= " " + invoice.created_at.strftime('%A, %B %d, %Y') + "; " %>
   <% end %></li>
 </ul><% end %>
 </h3>

@@ -22,12 +22,12 @@ class Merchant < ApplicationRecord
            .group('items.name, merchants.id')
   end
 
-  def items_ready_to_ship_id(m_id, name)
+  def invoices_for_items_rdy_to_ship(m_id, name)
     Invoice.where(merchant_id: m_id)
            .joins(:items)
-           .select(:id)
+           .select(:id, :created_at)
            .where('items.name = ?', name)
-           .ids
+           .order('created_at asc')
   end
 
   def enabled_items

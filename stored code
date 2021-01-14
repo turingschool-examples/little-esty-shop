@@ -9,3 +9,5 @@ end
 best customers Invoice.where(merchant_id: self.id).joins(:transactions, :customer).select('customers.*, count(transactions) as most_success').where('transactions.result = ?', 0).group('customers.id').order('most_success desc').limit(5)
 
 items rdy to ship Invoice.where(merchant_id: 100).joins(:merchants, :items).select('items.name').where('invoice_items.status < ?', 2).group('items.name, merchants.id')
+
+DATE = .created_at.strftime('%A, %B %d, %Y')
