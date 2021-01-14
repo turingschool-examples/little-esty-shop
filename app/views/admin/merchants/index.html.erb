@@ -30,3 +30,9 @@ Merchants
       </section>
       <% end %>
 </section>
+
+Top 5 Merchants
+<% @top_five.each do |merchant| %>
+  <h2> <%= merchant.name %> - $<%= merchant.total_revenue %> </h2>
+  <p> “Top selling date for <%= merchant.name %> was <%= merchant.best_day %>"
+<% end %>
