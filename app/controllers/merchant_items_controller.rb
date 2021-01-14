@@ -30,7 +30,7 @@ class MerchantItemsController < ApplicationController
     else
       if @item.update(item_params)
         flash[:success] = 'Item Updated Successfully'
-        render :show
+        redirect_to merchant_item_path(@item.merchant.id, @item.id)
       else
         flash[:error] = 'Item Update Failed'
         redirect_to edit_merchant_item_path(@item.merchant.id, @item.id)
