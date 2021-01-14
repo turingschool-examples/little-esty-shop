@@ -11,9 +11,13 @@ class Invoice < ApplicationRecord
   def initialize
     @total_revenue = 0
   end
-  
+
   def total_revenue
     @total_revenue
+  end
+
+  def add_to_total_revenue(amount)
+    @total_revenue += amount
   end
 
   def self.incomplete
@@ -39,5 +43,13 @@ class Invoice < ApplicationRecord
     @total_revenue = 0
     customer = Customer.joins(:invoices).where('invoices.id = ?', self.id).select(:first_name, :last_name).first
     "#{customer.first_name} #{customer.last_name}"
+  end
+
+  def find_items_on_invoice
+    Item.joins(:invoices).where('invoices.id = ?', self.id).select('items.*')
+  end
+
+  def find_invoice_item_data_for_item(item)
+    InvoiceItem.where(item_id: item.id).where(invoice_id: self.id).first
   end
 end

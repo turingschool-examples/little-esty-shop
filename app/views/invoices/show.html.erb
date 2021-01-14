@@ -1,15 +1,21 @@
 <h1><%= "#{@merchant.name}: Invoice-#{@invoice.id}" %></h1>
-<h3>
-<%= "ID: #{@invoice.id}" %><br>
+
+<h3><%= "ID: #{@invoice.id}" %><br>
+
 <%= "Status: #{@invoice.status}" %><br>
+
 <%= "Created on #{@invoice.created_at.strftime('%A, %B %d, %Y')}" %><br>
+
 <%= "Customer: #{@invoice.find_customer_on_invoice}" %><br><br>
+
 <h4>Items Purchased</h4>
+
 <% @invoice.find_items_on_invoice.each do |item| %>
-<%= item.name %><br>
-<%= "Amount Sold: #{@invoice.find_invoice_item_data_for_item(item).quantity}" %><br>
-<%= "Unit Price: #{@invoice.find_invoice_item_data_for_item(item).unit_price}" %><br>
-<%= "Status: #{@invoice.find_invoice_item_data_for_item(item).status}" %><br><br>
-<% @total_revenue += @invoice.find_invoice_item_data_for_item(item).quantity %>
+  <%= item.name %><br>
+  <%= "Amount Sold: #{@invoice.find_invoice_item_data_for_item(item).quantity}" %><br>
+  <%= "Unit Price: #{@invoice.find_invoice_item_data_for_item(item).unit_price}" %><br>
+  <%= "Status: #{@invoice.find_invoice_item_data_for_item(item).status}" %><br><br>
+  <% @invoice.add_to_total_revenue(@invoice.find_invoice_item_data_for_item(item).unit_price) %>
 <% end %>
-</h3>
+
+<h4>Total Revenue: <%= @invoice.total_revenue %></h4></h3>
