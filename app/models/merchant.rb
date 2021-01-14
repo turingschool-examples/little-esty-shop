@@ -8,6 +8,10 @@ class Merchant < ApplicationRecord
 
   enum status: [:disabled, :enabled]
 
+  def top_five_items
+    Item.where(merchant_id: self.id).top_five_by_revenue
+  end
+
   # RECOMMEND WE REFACTOR THIS ONE WIHTIN CUSTOMER OR INVOICE MODEL (ADAM)
   def best_customers
     Invoice.where(merchant_id: self.id)
@@ -60,4 +64,5 @@ class Merchant < ApplicationRecord
     .max
     .clean_date
   end
+
 end

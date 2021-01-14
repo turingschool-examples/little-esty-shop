@@ -229,7 +229,17 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  bacon-unknown
+  coffee-unknown
+  mocha-unknown
+  rspec-unknown
   ruby
+  sass-unknown
+  shoulda-unknown
+  spring-unknown
+  tzinfo-unknown
+  unknown
+  web-unknown
 
 DEPENDENCIES
   bacon (~> 1.2)

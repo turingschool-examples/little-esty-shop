@@ -36,7 +36,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'faraday'
-
 gem 'bacon', '~> 1.2'
 gem 'bacon-bits', '~> 0.1.0'
 gem 'mocha', '~> 1.12'
