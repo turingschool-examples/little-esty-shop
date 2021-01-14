@@ -26,7 +26,7 @@ This project is currently in development.
 
 ## Database Schema
 
-![Little Esty Database Schema](/images/esty_db.png)
+![little-esty-shop-schema](https://user-images.githubusercontent.com/15859827/104620557-5b0cc980-564c-11eb-9d8d-a3e15547956f.png)
 
 ## Setup
 
