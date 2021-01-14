@@ -2,17 +2,18 @@
 <h3><%= link_to "My Items", "/items/index" %></h3>
 <h3><%= link_to "My Invoices", "/invoices/index" %></h3>
 <h3><%= @merchant.name %></h3>
-<h3><% @merchant.best_customers.each do |cust| %>
+<h3>
+<% @merchant.best_customers.each do |cust| %>
   <% if cust.total_success > 1 %>
     <%= cust.find_customer_name_for_merchant + ": #{cust.total_success} successful transactions" %><br>
   <% else %>
     <%= cust.find_customer_name_for_merchant + ": #{cust.total_success} successful transaction" %><br>
   <% end %>
 <% end %><br>
-<ul><% Merchant.items_ready_to_ship(@merchant.id).each do |item| %>
-  <li><%= item.name + " - Invoice ID's: "%>
+<ul  margin-bottom: 0; ><% Merchant.items_ready_to_ship(@merchant.id).each do |item| %>
+  <li><%= item.name + " - Invoice ID's: "%><br>
   <% @merchant.invoices_for_items_rdy_to_ship(@merchant.id, item.name).each do |invoice| %>
-    <%= link_to "#{invoice.id}", "invoices/#{invoice.id}" %><%= " " + invoice.created_at.strftime('%A, %B %d, %Y') + "; " %>
-  <% end %></li>
+    <%= link_to "#{invoice.id}", "invoices/#{invoice.id}" %><%= " " + invoice.created_at.strftime('%A, %B %d, %Y') + "; " %><br>
+  <% end %></li><br>
 </ul><% end %>
 </h3>
