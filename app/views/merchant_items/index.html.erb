@@ -1,12 +1,20 @@
 <h1><%= @merchant.name %>'s Items </h1>
-<h2><%= link_to 'New Item', "/merchant/#{@merchant.id}/items/new" %></h2>
+
+<h2>Top Five</h2>
+
+<% @merchant.top_five_items.each do |item| %>
+  <h3><%= link_to "#{item.name}",  "/merchant/#{@merchant.id}/items/#{item.id}" %>  All-Time Best Day: <%= item.best_sales_day %></h3>
+  <h4>Revenue Generated: <%= item.total_revenue %></h4>
+<% end %>
+
+<h1><%= link_to 'New Item', "/merchant/#{@merchant.id}/items/new" %></h1>
 <section id="enabled">
   <h1>Enabled Items</h1>
     <% @merchant.enabled_items.each do |item| %>
       <section id="item-<%=item.id%>">
-      <h2>
+      <h3>
         <%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %>
-      </h2>
+      </h3>
         <%= button_to 'Disable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id} %>
       </section>
       <% end %>
@@ -16,9 +24,9 @@
   <h1>Disabled Items</h1>
     <% @merchant.disabled_items.each do |item| %>
         <section id="item-<%=item.id%>">
-        <h2>
+        <h3>
           <%= link_to("#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}") %>
-        </h2>
+        </h3>
         <%= button_to 'Enable', "/merchant/#{@merchant.id}/items", method: :patch, params: { item_id: item.id } %>
     <% end %>
 </section>

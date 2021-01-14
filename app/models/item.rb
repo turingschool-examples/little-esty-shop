@@ -16,4 +16,21 @@ class Item < ApplicationRecord
     where(enabled: false)
   end
 
+  def self.top_five_by_revenue
+    joins(invoices: :transactions)
+    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    .where('transactions.result = ?', 0)
+    .group(:id)
+    .order('total_revenue desc')
+    .limit(5)
+  end
+
+  def best_sales_day
+    invoices
+    .joins(:invoice_items)
+    .select('invoices.created_at as created_at, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    .group('invoices.created_at')
+    .max
+    .clean_date
+  end
 end
