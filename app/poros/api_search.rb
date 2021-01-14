@@ -2,6 +2,7 @@ require 'singleton'
 
 class ApiSearch
   include Singleton
+  @@duration = 1 #indicates how often to clear cache.  Time in hours.
 
   def git_data
     if !@data or data_expired?
@@ -32,7 +33,7 @@ class ApiSearch
 
   def data_expired?
     @retrieved_time ||= DateTime.now
-    (DateTime.now - @retrieved_time).to_f*60 > 1
+    (DateTime.now - @retrieved_time).to_f*60 > @@duration
   end
 
 end
