@@ -36,5 +36,24 @@ describe 'As a merchant' do
         expect(page).to have_content('Item Updated Successfully')
       end
     end
+
+    describe "When I DO NOT enter the information in the form and I click 'Submit'" do
+      before :each do
+        fill_in 'Name:', with: ''
+        fill_in 'Description:', with: 'This should error'
+        fill_in 'Unit Price:', with: '10'
+
+        click_button 'Submit'
+      end
+
+      it 'Then I see a flash message stating that the item did not update' do
+        expect(page).to have_content('Item Update Failed')
+      end
+
+      it "Then I am redirected back to the merchant's item's edit page" do
+        save_and_open_page
+        expect(current_path).to eq(edit_merchant_item_path(@max.id, @item_1.id))
+      end
+    end
   end
 end
