@@ -10,7 +10,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.create!(merchant_params)
+    merchant = Merchant.create!(name: params[:name], status: 1)
     merchant.save
     redirect_to admin_merchants_path
   end
@@ -33,7 +33,7 @@ class Admin::MerchantsController < ApplicationController
       merchant.save
       redirect_to admin_merchants_path
     else
-      merchant.update(merchant_params)
+      merchant.update(name: params[:merchant][:name])
       redirect_to admin_merchant_path(merchant.id)
       flash[:notice] = "Information has been updated"
     end
