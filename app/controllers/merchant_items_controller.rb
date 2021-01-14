@@ -30,7 +30,7 @@ class MerchantItemsController < ApplicationController
     else
       @item.update!(item_params)
       flash[:success] = 'Item Updated Successfully'
-      render :show
+      redirect_to merchant_item_path(@item.merchant.id, @item.id)
     end
   end
 
