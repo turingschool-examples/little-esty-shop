@@ -1,5 +1,5 @@
 require './app/models/repo_search'
-require './app/models/repo'
+# require './app/models/repo'
 
 class AdminController < ApplicationController
     include RepoSearch
