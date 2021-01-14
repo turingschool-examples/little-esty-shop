@@ -38,9 +38,4 @@ class Admin::MerchantsController < ApplicationController
       flash[:notice] = "Information has been updated"
     end
   end
-
-  private
-  def merchant_params
-    params.permit(:name)
-  end
 end
