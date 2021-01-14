@@ -26,6 +26,20 @@
             <% pr_count += 1 %>
           <% end %>
         <% end %>
+        <% adam_count = 0 %>
+        <% liam_count = 0 %>
+        <% robert_count = 0 %>
+        <% api.each do |commit| %>
+          <% if commit[:commit][:committer][:name].include?("Adam") %>
+            <% adam_count += 1 %>
+          <% elsif commit[:commit][:committer][:name].include?("Liam") %>
+            <% liam_count += 1 %>
+          <% else %>
+            <% robert_count += 1 %>
+            <% end %>
+            <h5>Adam's Commits: <%= adam_count %>
+            Liam's Commits: <%= liam_count %>
+            Robert's Commits: <%= robert_count %></h5>
 
         <h3>Little Esty Shop</h3><br>
         <h3><%= "Number of Pull Requests: #{pr_count}" %></h3>
