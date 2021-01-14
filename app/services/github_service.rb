@@ -4,12 +4,14 @@ class GithubService
     Faraday.new('https://api.github.com')
   end
 
-  def self.parse_data(data)
-    JSON.parse(data.body, symbolize_names: true)
+  def self.call_github(path)
+    response = connection.get(path) do |req|
+      req.params(github_api_key)
+    end
+    parse_data(response)
   end
 
-  def self.call_github(path)
-    response = connection.get(path)
-    parse_data(response)
+  def self.parse_data(data)
+    JSON.parse(data.body, symbolize_names: true)
   end
 end

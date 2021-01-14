@@ -8,7 +8,5 @@ class GithubFacade
 
   def self.repo_name
     parsed_repo_info = GithubService.call_github('/repos/foymikek/little-esty-shop')
-    # require "pry"; binding.pry
   end
-
 end
