@@ -33,14 +33,14 @@ class Admin::MerchantsController < ApplicationController
       merchant.save
       redirect_to admin_merchants_path
     else
-      merchant.update(merchant_params)
+      merchant.update(name: params[:merchant][:name])
       redirect_to admin_merchant_path(merchant.id)
       flash[:notice] = "Information has been updated"
     end
   end
 
-  private
-  def merchant_params
-    params.permit(:name)
-  end
+  # private
+  # def merchant_params
+  #   params.permit(:name)
+  # end
 end
