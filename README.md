@@ -22,8 +22,7 @@
 This project is currently in development.
 
 ## Live App
-
-Link to Live App goes here
+[Link to live app. deployment](https://blooming-ridge-25668.herokuapp.com/)
 
 ## Database Schema
 
