@@ -20,6 +20,7 @@ class Invoice < ApplicationRecord
     @total_revenue += amount
   end
 
+
   def self.incomplete
     joins(:invoice_items)
     .where('invoices.status = ? AND invoice_items.status != ?', 0, 2)

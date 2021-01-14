@@ -30,6 +30,9 @@ RSpec.describe Item, type: :model do
     it 'can find all items that are disabled' do
       expect(Item.all_disabled_items).to eq([@item3])
     end
-  end
 
+    it 'can find the top 5 items by revenue' do
+      expect(Item.top_5_items).to eq([@item1, @item2, @item3, @item4, @item5])
+    end
+  end
 end
