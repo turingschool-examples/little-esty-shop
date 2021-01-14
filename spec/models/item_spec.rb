@@ -18,7 +18,7 @@ RSpec.describe Item, type: :model do
     @big_lots  = Merchant.create!(name: 'Big Lots', status: 0)
     @amazon    = Merchant.create!(name: 'Amazon', status: 0)
     @alibaba   = Merchant.create!(name: 'Alibaba', status: 1)
-    #Invoices 
+    #Invoices
     @invoice1 = Invoice.create!(status: 0, customer_id: @sally.id, merchant_id: @amazon.id,)
     @invoice2 = Invoice.create!(status: 0, customer_id: @joel.id, merchant_id: @alibaba.id,)
     # Transactions:
@@ -62,7 +62,7 @@ RSpec.describe Item, type: :model do
       expect(@candle.status(@candle.id, @invoice1.id)[0]).to eq("packaged")
     end
 
-    it "can return the top five most popular items by revenue" do 
+    it "can return the top five most popular items by revenue" do
       all_birds = Merchant.create!(name: 'All Birds', status: 0)
       walmart   = Merchant.create!(name: 'Walmart', status: 0)
       overstock = Merchant.create!(name: 'Overstock', status: 0)
@@ -98,12 +98,12 @@ RSpec.describe Item, type: :model do
       invitm4  = InvoiceItem.create!(status: 1, quantity: 50, unit_price: 9.75, invoice_id: invoice4.id, item_id: radio2.id)
       invitm5  = InvoiceItem.create!(status: 1, quantity: 65, unit_price: 9.75, invoice_id: invoice5.id, item_id: radio3.id)
       invitm6  = InvoiceItem.create!(status: 1, quantity: 30, unit_price: 9.75, invoice_id: invoice6.id, item_id: radio4.id)
-       
+
       actual = [radio3, radio1, radio2, radio4, backpack]
 
       expect(Item.top_5_popular_items).to eq(actual)
     end
-    it "Can return the date with most sales for each item" do 
+    it "Can return the date with most sales for each item" do
       all_birds = Merchant.create!(name: 'All Birds', status: 0)
       walmart   = Merchant.create!(name: 'Walmart', status: 0)
       overstock = Merchant.create!(name: 'Overstock', status: 0)
@@ -139,11 +139,11 @@ RSpec.describe Item, type: :model do
       invitm4  = InvoiceItem.create!(status: 1, quantity: 50, unit_price: 9.75, invoice_id: invoice4.id, item_id: radio2.id)
       invitm5  = InvoiceItem.create!(status: 1, quantity: 65, unit_price: 9.75, invoice_id: invoice5.id, item_id: radio3.id)
       invitm6  = InvoiceItem.create!(status: 1, quantity: 30, unit_price: 9.75, invoice_id: invoice6.id, item_id: radio4.id)
-      
+
       date = radio1.invoices.best_day.created_at
       expected = date.strftime('%m/%d/%y')
-      
-      expect(expected).to eq('01/13/21') 
+
+      expect(expected).to eq('01/14/21') 
     end
   end
 end

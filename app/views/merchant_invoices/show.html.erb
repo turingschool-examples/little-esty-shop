@@ -7,18 +7,20 @@
 
 <p>Total Revenue: <%= @invoice.total_revenue %></p
 
-<% @invoice.items.each do |item| %>
-  <h3> Item Name: <%= item.name %></h3>
-  <p> Item Price: <%= item.unit_price %></p>
+<ul>
   <% @invoice.invoice_items.each do |invoice_item| %>
-    <p>Quantity: <%= invoice_item.quantity %></p>
-    <%= form_with model: invoice_item, url: merchant_invoice_item_path(@invoice.merchant.id, invoice_item.id) do |f| %>
-      <%= f.label :status, 'Status:' %>
-      <%= f.select :status, ['packaged', 'pending', 'shipped'] %>
-      <%= f.submit 'Update Item Status' %>
-    <% end %>
- <br><% end %>
-<% end %>
+    <li id="invoice-item-<%= invoice_item.id %>">
+      <h3>Item Name: <%= invoice_item.item.name %></h3>
+      <p>Item Price: <%= invoice_item.item.unit_price %></p>
+      <p>Quantity: <%= invoice_item.quantity %></p>
+      <%= form_with model: invoice_item, url: merchant_invoice_item_path(@invoice.merchant.id, invoice_item.id) do |f| %>
+        <%= f.label :status, 'Status:' %>
+        <%= f.select :status, ['packaged', 'pending', 'shipped'] %>
+        <%= f.submit 'Update Item Status' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
 <section class="customer-information">
   <h2>Customer Information</h2>

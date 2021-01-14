@@ -28,13 +28,17 @@ class MerchantItemsController < ApplicationController
       flash[:success] = "Item #{@item.name} Enabled"
       redirect_to merchant_items_path(@item.merchant.id)
     else
-      @item.update!(item_params)
-      flash[:success] = 'Item Updated Successfully'
-      redirect_to merchant_item_path(@item.merchant.id, @item.id)
+      if @item.update(item_params)
+        flash[:success] = 'Item Updated Successfully'
+        redirect_to merchant_item_path(@item.merchant.id, @item.id)
+      else
+        flash[:error] = 'Item Update Failed'
+        redirect_to edit_merchant_item_path(@item.merchant.id, @item.id)
+      end
     end
   end
 
-  def create 
+  def create
     merchant = Merchant.find(params[:merchant_id])
     @item = merchant.items.new(item_params)
     @item.save

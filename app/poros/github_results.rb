@@ -5,5 +5,4 @@ class GithubResults
     @username = data[:author][:login]
     @total_commits = data[:total]
   end
-    
 end
