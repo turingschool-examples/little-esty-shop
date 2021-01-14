@@ -38,10 +38,6 @@ class Admin::MerchantsController < ApplicationController
     params.require(:merchant).permit(:name)
   end
 
-  def m_params
-    params.permit(:name)
-  end
-
   def find_new_id
     Merchant.last.id + 1
   end
