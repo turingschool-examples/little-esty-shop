@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:index, :show] do
     resources :items, only: [:index]
-    resources :invoices, only: [:index]
+    resources :invoices, controller: "invoices", only: [:index, :show]
     resources :dashboard, only: [:index], path: '/dashboard'
   end
 
