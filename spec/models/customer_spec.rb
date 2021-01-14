@@ -11,14 +11,14 @@ RSpec.describe Customer, type: :model do
 
   before :each do
     @merchant = FactoryBot.create(:merchant)
-  
+
     @customer1 = FactoryBot.create(:customer)
     @customer2 = FactoryBot.create(:customer)
     @customer3 = FactoryBot.create(:customer)
     @customer4 = FactoryBot.create(:customer)
     @customer5 = FactoryBot.create(:customer)
     @customer6 = FactoryBot.create(:customer)
-    
+
     Customer.all.each do |customer|
         FactoryBot.create_list(:invoice, 1, customer: customer, merchant: @merchant)
     end

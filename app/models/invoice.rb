@@ -8,15 +8,6 @@ class Invoice < ApplicationRecord
 
   enum status: [:"in progress", :completed, :cancelled]
 
-  def all_successful_transactions
-    Transaction.all_successful_transactions.where("invoice_id = ?", self.id)
-  end
-
-  def self.with_more_than_one_successful_transaction
-    binding.pry
-    where()
-
-
   def self.incomplete
     joins(:invoice_items)
     .where('invoices.status = ? AND invoice_items.status != ?', 0, 2)

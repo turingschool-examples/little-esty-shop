@@ -10,4 +10,8 @@ class Merchant < ApplicationRecord
   def disabled_items
     Item.all_disabled_items.where(merchant_id: self.id)
   end
+
+  def top_five_items
+    Item.where(merchant_id: self.id).top_five_by_revenue
+  end
 end
