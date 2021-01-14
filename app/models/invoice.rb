@@ -8,7 +8,6 @@ class Invoice < ApplicationRecord
 
   enum status: [:"in progress", :completed, :cancelled]
 
-
   def self.incomplete
     joins(:invoice_items)
     .where('invoices.status = ? AND invoice_items.status != ?', 0, 2)
