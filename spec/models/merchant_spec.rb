@@ -8,6 +8,7 @@ RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it {should have_many :items}
     it {should have_many :invoices}
+    it {should have_many :discounts}
     it {should have_many(:customers).through(:invoices)}
     it {should have_many(:transactions).through(:invoices)}
     it {should have_many(:invoice_items).through(:items)}
@@ -174,7 +175,7 @@ RSpec.describe Merchant, type: :model do
 
     describe 'Disabled Merchants' do
       it "returns merchant with a status of 'Disabled'" do
-      
+
       # Customers:
         sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
         joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
@@ -210,16 +211,16 @@ RSpec.describe Merchant, type: :model do
         invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id:  invoice1.id, item_id:  candle.id)
         invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id:   invoice2.id, item_id:   backpack.id)
         invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id:  invoice3.id, item_id:  backpack.id)
-        
+
         expected = [alibaba]
 
         expect(Merchant.disabled_merchants).to eq(expected)
       end
     end
-    
+
     describe 'Enabled Merchants' do
       it "returns merchant with a status of 'Enabled'" do
-      
+
       # Customers:
         sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
         joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
@@ -255,7 +256,7 @@ RSpec.describe Merchant, type: :model do
         invitm1  = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id:  invoice1.id, item_id:  candle.id)
         invitm2  = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id:   invoice2.id, item_id:   backpack.id)
         invitm3  = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 9.75, invoice_id:  invoice3.id, item_id:  backpack.id)
-        
+
         expected = [amazon]
 
         expect(Merchant.enabled_merchants).to eq(expected)

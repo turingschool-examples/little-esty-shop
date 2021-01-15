@@ -8,6 +8,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :items
+  has_many :discounts
 
   def top_five_customers
     self.transactions.joins(invoice: :customer)
