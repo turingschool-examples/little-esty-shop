@@ -1,0 +1,9 @@
+
+<%= link_to "Create New Discount", new_merchant_discount_path(@merchant.id) %><br>
+<% @discounts.each do |discount| %>
+<section class="ind-discount-#{discount.id}">
+    Quantity Threshold: <%= discount.quantity_threshold %><br>
+    Discount Percentage: <%= discount.discount_percentage %><br>
+    <%= link_to "Discount #{discount.id}", merchant_discount_path(discount.merchant_id, discount.id) %>
+  </section>
+<% end %>

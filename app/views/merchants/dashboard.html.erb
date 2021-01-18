@@ -1,21 +1,21 @@
-<%= @merchant.name %>
-
+<%= @merchant.name %><br>
 <%= link_to('Items', "/merchants/#{@merchant.id}/items") %>
 <%= link_to('Invoices', "/merchants/#{@merchant.id}/invoices") %>
+<%= link_to 'View All Discounts', merchant_discounts_path(@merchant) %>
 
-<ul class='merchant-top-5-customers-list'>
-  <% @merchant.top_five_customers.each do |customer| %>
-    <li><%= customer.first_name %>: <%= customer.successful_transactions %></li>
-  <% end %>
-</ul>
+ <ul class='merchant-top-5-customers-list'>
+   <% @merchant.top_five_customers.each do |customer| %>
+     <li><%= customer.first_name %>: <%= customer.successful_transactions %></li>
+   <% end %>
+ </ul>
 
-<ul class='items-rdy-to-ship'>
-  <h2>Items Ready to Ship</h2>
-  <% @merchant.order_merchant_items_by_invoice_created_date(@merchant.items_ready_to_ship).each do |item| %>
-    <li>
-      <%= item.name %>
-      <%= link_to item.id, merchant_item_path(@merchant.id, item.id) %>
-      <%= item.invoices.first.created_at.strftime("%A, %B %d, %Y") %>
-    </li>
-  <% end %>
-</ul>
+ <ul class='items-rdy-to-ship'>
+   <h2>Items Ready to Ship</h2>
+   <% @merchant.order_merchant_items_by_invoice_created_date(@merchant.items_ready_to_ship).each do |item| %>
+     <li>
+       <%= item.name %>
+       <%= link_to item.id, merchant_item_path(@merchant.id, item.id) %>
+       <%= item.invoices.first.created_at.strftime("%A, %B %d, %Y") %>
+     </li>
+   <% end %>
+ </ul>
