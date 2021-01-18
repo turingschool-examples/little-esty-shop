@@ -56,7 +56,14 @@ RSpec.describe 'As a merchant', type: :feature do
       fill_in :quantity_threshold, with: 75
       click_on :submit
       # And I see my new bulk discount listed
+      new_discount = @alibaba.discounts.last
+      new_discount.merchant_id = @alibaba.id
+      
       expect(current_path).to eq(merchant_discounts_path(@alibaba))
+
+      expect(page).to have_content("Discount Percentage: #{new_discount.discount_percentage}")
+      expect(page).to have_content("Quantity Threshold: #{new_discount.quantity_threshold}")
+      expect(page).to have_link("Discount #{new_discount.id}")
     end
   end
 end
