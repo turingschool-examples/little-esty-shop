@@ -58,25 +58,36 @@ RSpec.describe 'As a merchant', type: :feature do
       # And I see my new bulk discount listed
       new_discount = @alibaba.discounts.last
       new_discount.merchant_id = @alibaba.id
-      
+
       expect(current_path).to eq(merchant_discounts_path(@alibaba))
 
       expect(page).to have_content("Discount Percentage: #{new_discount.discount_percentage}")
       expect(page).to have_content("Quantity Threshold: #{new_discount.quantity_threshold}")
       expect(page).to have_link("Discount #{new_discount.id}")
     end
+    it "Next to each bulk discount I see a link to delete it, when I click this link it is deleted" do
+      # As a merchant
+      # When I visit my bulk discounts index
+      visit merchant_discounts_path(@amazon)
+# Then next to each bulk discount I see a link to delete it
+# When I click this link
+      # within(".ind-discount-#{@discount_1.id}") do
+        expect(page).to have_button("Delete Discount ID: #{@discount_1.id}")
+        # end
+
+        # within("#ind-discount-#{@discount_2.id}") do
+        expect(page).to have_button("Delete Discount ID: #{@discount_2.id}")
+        # end
+
+        # within("#discount-info-#{@discount_3.id}") do
+        expect(page).to have_button("Delete Discount ID: #{@discount_3.id}")
+        click_on "Delete Discount ID: #{@discount_3.id}"
+        expect(current_path).to eq(merchant_discounts_path(@amazon))
+        # end
+
+        expect(page).to_not have_content("Delete Discount ID: #{@discount_3.id}")
+# Then I am redirected back to the bulk discounts index page
+# And I no longer see the discount listed
+    end
   end
 end
-# visit merchant_discounts_path(all_birds.id)
-#
-#
-
-#
-#
-# new_merchant_discount = all_birds.discounts.last
-#
-# expect(new_merchant_discount.merchant_id).to eq(all_birds.id)
-#
-# expect(current_path).to eq(merchant_discounts_path(all_birds.id))
-# expect(page).to have_content("Discount Percentage 15")
-# expect(page).to have_content("Discount Percentage 20")
