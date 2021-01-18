@@ -1,7 +1,7 @@
 <%= form_with url: path, model: @discount, method: method, class: "discount_form", local: true do |f| %>
   <%= f.label :discount_percentage %>
-  <%= f.text_field :discount_percentage, id: "percentage" %>
+  <%= f.text_field :discount_percentage, id: "discount_percentage" %>
   <%= f.label :quantity_threshold %>
-  <%= f.text_field :quantity_threshold, id: "quantity" %>
+  <%= f.text_field :quantity_threshold, id: "quantity_threshold" %>
 <%= submit_tag button_text %>
 <% end %>

@@ -49,5 +49,32 @@ RSpec.describe 'As a merchant', type: :feature do
       expect(page).to have_content("Quantity Threshold: #{@discount_1.quantity_threshold}")
       expect(page).to have_content("Discount Percentage: #{@discount_1.discount_percentage}")
     end
+    it "Then I see a link to edit the bulk discount" do
+# As a merchant
+# When I visit my bulk discount show page
+      visit merchant_discount_path(@amazon, @discount_1)
+      expect(page).to have_content("Quantity Threshold: 10")
+      expect(page).to have_content("Discount Percentage: 5")
+# Then I see a link to edit the bulk discount
+# When I click this link
+      click_link "Edit #{@discount_1.id}"
+      # save_and_open_page
+      expect(current_path).to eq(edit_merchant_discount_path(@amazon, @discount_1))
+# Then I am taken to a new page with a form to edit the discount
+# And I see that the discounts current attributes are prepoluated in the form
+      expect(find_field(:discount_percentage).value).to eq(@discount_1.discount_percentage.to_s)
+      expect(find_field(:quantity_threshold).value).to eq(@discount_1.quantity_threshold.to_s)
+
+      fill_in :discount_percentage, with: 30
+      fill_in :quantity_threshold, with: 75
+      click_on :submit
+
+      expect(current_path).to eq(merchant_discount_path(@amazon, @discount_1))
+# When I change any/all of the information and click submit
+# Then I am redirected to the bulk discount's show page
+# And I see that the discount's attributes have been updated
+      expect(page).to have_content("Quantity Threshold: 75")
+      expect(page).to have_content("Discount Percentage: 30")
+    end
   end
 end
