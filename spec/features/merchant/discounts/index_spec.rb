@@ -41,34 +41,35 @@ RSpec.describe 'As a merchant', type: :feature do
         @discount_2 = Discount.create!(discount_percentage: 10, quantity_threshold: 15, merchant_id: @amazon.id)
         @discount_3 = Discount.create!(discount_percentage: 25, quantity_threshold: 20, merchant_id: @amazon.id)
     end
-    # it "I see a link to create a new discount " do
-    #   all_birds   = Merchant.create!(name: 'All Birds')
-    #   discount_1  = Discount.create!(discount_percentage: 15, quantity_threshold: 15, merchant_id: all_birds.id)
-    #
-    #   visit merchant_discounts_path(all_birds.id)
-    #
-    #   expect(page).to have_link("Create New Discount")
-    #   click_link "Create New Discount"
-    #
-    #   expect(current_path).to eq(new_merchant_discount_path(all_birds.id))
-    #
-    #   fill_in "Discount Percentage", with: 15
-    #   fill_in "Quantity Threshold", with: 20
-    #   click_on "Submit"
-    #
-    #   new_merchant_discount = all_birds.discounts.last
-    #
-    #   expect(new_merchant_discount.merchant_id).to eq(all_birds.id)
-    #
-    #   expect(current_path).to eq(merchant_discounts_path(all_birds.id))
-    #   expect(page).to have_content("Discount Percentage 15")
-    #   expect(page).to have_content("Discount Percentage 20")
-    # end
-# Then I see a link to create a new discount
-# When I click this link
-# Then I am taken to a new page where I see a form to add a new bulk discount
-# When I fill in the form with valid data
-# Then I am redirected back to the bulk discount index
-# And I see my new bulk discount listed
+    it "I see a link to create a new discount " do
+      visit merchant_discounts_path(@alibaba)
+      # Then I see a link to create a new discount
+      # When I click this link
+      expect(page).to have_link("Create New Discount")
+      click_link "Create New Discount"
+
+      expect(current_path).to eq(new_merchant_discount_path(@alibaba))
+      # Then I am taken to a new page where I see a form to add a new bulk discount
+      # When I fill in the form with valid data
+      # Then I am redirected back to the bulk discount index
+      fill_in :discount_percentage, with: 30
+      fill_in :quantity_threshold, with: 75
+      click_on :submit
+      # And I see my new bulk discount listed
+      expect(current_path).to eq(merchant_discounts_path(@alibaba))
+    end
   end
 end
+# visit merchant_discounts_path(all_birds.id)
+#
+#
+
+#
+#
+# new_merchant_discount = all_birds.discounts.last
+#
+# expect(new_merchant_discount.merchant_id).to eq(all_birds.id)
+#
+# expect(current_path).to eq(merchant_discounts_path(all_birds.id))
+# expect(page).to have_content("Discount Percentage 15")
+# expect(page).to have_content("Discount Percentage 20")
