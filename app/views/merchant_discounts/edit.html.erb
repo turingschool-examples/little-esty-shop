@@ -1,0 +1,6 @@
+<%= render partial: 'form', locals: {
+  discount: @discount,
+  path: merchant_discount_path(@merchant, @discount),
+  method: :patch,
+  button_text: :submit,
+} %>
