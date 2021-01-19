@@ -5,6 +5,7 @@ class MerchantInvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:invoice_id])
+    # require "pry"; binding.pry
+    @invoice = Invoice.find(params[:id])
   end
 end

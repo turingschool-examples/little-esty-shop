@@ -63,4 +63,6 @@ RSpec.describe Invoice, type: :model do
     expected = date.strftime("%A, %B %d, %Y")
     expect(expected).to eq("Thursday, January 14, 2021")
   end
+
+  
 end
