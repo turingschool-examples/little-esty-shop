@@ -52,5 +52,11 @@ class Merchant < ApplicationRecord
     items.where(status: 'Disabled')
   end
 
+  def total_discount_revenue(invoice_item_arg)
+    # require "pry"; binding.pry
+    discount = (discounts.where('quantity_threshold <= ?', invoice_item_arg.quantity)).pluck(:discount_percentage).first
+    discount_percentage = 100 - discount
+    invoice_item_arg.item.total_price(invoice_item_arg.item.id, invoice_item_arg.invoice_id) * (discount_percentage / 100)
+  end
 
 end

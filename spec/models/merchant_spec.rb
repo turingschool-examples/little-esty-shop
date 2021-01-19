@@ -267,10 +267,11 @@ RSpec.describe Merchant, type: :model do
         all_birds = Merchant.create!(name: 'Al Birds')
         invoice6  = Invoice.create!(status: 2, customer_id: sally.id, merchant_id: all_birds.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
         shoes     = all_birds.items.create!(name: 'Pink Shoes', description: 'Light and warm booties!', unit_price: 120.0)
-        InvoiceItem.create!(status: 1, quantity: 10, unit_price: 120.0, invoice_id: invoice6.id, item_id: shoes.id)
+        invoice_item_1 = InvoiceItem.create!(status: 1, quantity: 10, unit_price: 120.0, invoice_id: invoice6.id, item_id: shoes.id)
         Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: all_birds.id)
+        Discount.create!(discount_percentage: 10, quantity_threshold: 15, merchant_id: all_birds.id)
 # Then I see that the total revenue for my merchant includes bulk discounts in the calculation
-        expect(all_birds.total_discount_revenue).to eq(1140.0)
+        expect(all_birds.total_discount_revenue(invoice_item_1)).to eq(1140.0)
       end
     end
   end
