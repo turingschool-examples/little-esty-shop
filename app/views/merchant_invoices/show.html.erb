@@ -6,6 +6,7 @@
 <p>Invoice Status: <%= @invoice.status %></p><br>
 
 <p>Total Revenue: $<%= @invoice.total_revenue %></p
+<p>Total Discount Revenue: $<%= @invoice.merchant.total_discount_revenue(@invoice.invoice_items) %></p
 
 <ul>
   <% @invoice.invoice_items.each do |invoice_item| %>

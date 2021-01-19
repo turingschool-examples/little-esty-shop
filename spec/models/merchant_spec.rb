@@ -1,6 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
+  before :each do
+    # Customers:
+    @salim     = Customer.create!(first_name: 'Salim', last_name: 'Imwera', address: 'Up The Hill, Kwale, Kenya')
+    @sally     = Customer.create!(first_name: 'Sally', last_name: 'Smith', address: 'Test Address')
+    # Merchants:
+    @amazon    = Merchant.create!(name: 'Amazon')
+    @max       = Merchant.create!(name: 'Merch Max')
+    @all_birds = Merchant.create!(name: 'Al Birds')
+    # Invoices:
+    @invoice1  = Invoice.create!(status: 1, customer_id: @sally.id, merchant_id: @max.id)
+    @invoice2  = Invoice.create!(status: 1, customer_id: @sally.id, merchant_id: @max.id)
+    @invoice5  = Invoice.create!(status: 2, customer_id: @salim.id, merchant_id: @amazon.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
+    @invoice6  = Invoice.create!(status: 2, customer_id: @sally.id, merchant_id: @all_birds.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
+    # Items:
+    @item_1    = @max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
+    @item_2    = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
+    @item_3    = @max.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
+    @backpack  = @amazon.items.create!(name: 'Camo Backpack', description: 'Double Zip Backpack', unit_price: 5.0)
+    @radio     = @amazon.items.create!(name: 'Retro Radio', description: 'Twist and Turn to your fav jams', unit_price: 10.0)
+    @shoes     = @all_birds.items.create!(name: 'Pink Shoes', description: 'Light and warm booties!', unit_price: 120.0)
+    # InvoiceItems:
+    @invitm1   = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: @invoice1.id, item_id: @item_1.id)
+    @invitm2   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @item_2.id)
+    @invitm3   = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 10, invoice_id: @invoice1.id, item_id: @item_2.id)
+    @invitm4   = InvoiceItem.create!(status: 2, quantity: 50, unit_price: 5.0, invoice_id: @invoice5.id, item_id: @backpack.id)
+    @invitm5   = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 10.0, invoice_id: @invoice5.id, item_id: @radio.id)
+    @invitm6   = InvoiceItem.create!(status: 1, quantity: 5, unit_price: 10.0, invoice_id: @invoice5.id, item_id: @item_3.id)
+    @invitm7   = InvoiceItem.create!(status: 1, quantity: 10, unit_price: 120.0, invoice_id: @invoice6.id, item_id: @shoes.id)
+    # Discounts:
+    @discount_1 = Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: @all_birds.id)
+    @discount_2 = Discount.create!(discount_percentage: 15, quantity_threshold: 15, merchant_id: @amazon.id)
+    @discount_3 = Discount.create!(discount_percentage: 20, quantity_threshold: 10, merchant_id: @amazon.id)
+    @discount_4 = Discount.create!(discount_percentage: 20, quantity_threshold: 15, merchant_id: @max.id)
+    @discount_5 = Discount.create!(discount_percentage: 30, quantity_threshold: 15, merchant_id: @max.id)
+  end
   describe 'validations' do
     it { should validate_presence_of :name}
   end
@@ -263,15 +298,7 @@ RSpec.describe Merchant, type: :model do
     end
     describe 'discount methods' do
       it "returns total revenue including applied discount" do
-        sally     = Customer.create!(first_name: 'Sally', last_name: 'Smith', address: 'Test Address')
-        all_birds = Merchant.create!(name: 'Al Birds')
-        invoice6  = Invoice.create!(status: 2, customer_id: sally.id, merchant_id: all_birds.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
-        shoes     = all_birds.items.create!(name: 'Pink Shoes', description: 'Light and warm booties!', unit_price: 120.0)
-        invoice_item_1 = InvoiceItem.create!(status: 1, quantity: 10, unit_price: 120.0, invoice_id: invoice6.id, item_id: shoes.id)
-        Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: all_birds.id)
-        Discount.create!(discount_percentage: 10, quantity_threshold: 15, merchant_id: all_birds.id)
-# Then I see that the total revenue for my merchant includes bulk discounts in the calculation
-        expect(all_birds.total_discount_revenue(invoice_item_1)).to eq(1140.0)
+        expect(@all_birds.total_discount_revenue(@invoice6.invoice_items)).to eq(1140.0)
       end
     end
   end

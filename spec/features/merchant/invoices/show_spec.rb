@@ -97,7 +97,7 @@ describe 'As a merchant' do
         visit merchant_invoice_path(@all_birds, @invoice6)
       # require "pry"; binding.pry
 # Then I see that the total revenue for my merchant includes bulk discounts in the calculation
-        expect(page).to have_content("Total Discount Revenue: $ 1140.0")
+        expect(page).to have_content("Total Discount Revenue: $1140.0")
     end
   end
 end

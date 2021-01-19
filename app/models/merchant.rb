@@ -53,10 +53,19 @@ class Merchant < ApplicationRecord
   end
 
   def total_discount_revenue(invoice_item_arg)
-    # require "pry"; binding.pry
-    discount = (discounts.where('quantity_threshold <= ?', invoice_item_arg.quantity)).pluck(:discount_percentage).first
-    discount_percentage = 100 - discount
-    invoice_item_arg.item.total_price(invoice_item_arg.item.id, invoice_item_arg.invoice_id) * (discount_percentage / 100)
+    final_percentage = 0
+    invoice_item_arg.each do |invoice_item|
+      discount = (discounts.where('quantity_threshold <= ?', invoice_item.quantity)).pluck(:discount_percentage).first
+      discount_percentage = 100 - discount
+      final_percentage = invoice_item.item.total_price(invoice_item.item.id, invoice_item.invoice_id) * (discount_percentage / 100)
+    end
+    final_percentage
   end
+  # discounts.joins(items: :invoice_items).where('discounts.merchant_id = items.merchant_id').where('discounts.quantity_threshold <= invoice_items.quantity').order(discount_percentage: :desc).pluck(:discount_percentage).first
+# discounts.joins(items: :invoice_items).select('discounts.discount_percentage, discounts.quantity_threshold, invoice_items.quantity')
+  # def find_invoice_item(invoice_arg)
+  #   require "pry"; binding.pry
+  #   # self.joins(:invoice_items).where(invoice_id: self.id)
+  # end
 
 end
