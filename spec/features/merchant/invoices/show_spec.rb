@@ -8,25 +8,29 @@ describe 'As a merchant' do
       # Merchants:
       @amazon    = Merchant.create!(name: 'Amazon')
       @max       = Merchant.create!(name: 'Merch Max')
+      @all_birds = Merchant.create!(name: 'Al Birds')
       # Invoices:
       @invoice1  = Invoice.create!(status: 1, customer_id: @sally.id, merchant_id: @max.id)
       @invoice2  = Invoice.create!(status: 1, customer_id: @sally.id, merchant_id: @max.id)
-      @invoice7  = Invoice.create!(status: 2, customer_id: @salim.id, merchant_id: @amazon.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
+      @invoice5  = Invoice.create!(status: 2, customer_id: @salim.id, merchant_id: @amazon.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
+      @invoice6  = Invoice.create!(status: 2, customer_id: @sally.id, merchant_id: @all_birds.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
       # Items:
       @item_1    = @max.items.create!(name: 'Beans', description: 'Tasty', unit_price: 5)
       @item_2    = @max.items.create!(name: 'Item 2', description: 'Blah', unit_price: 10)
       @item_3    = @max.items.create!(name: 'Item 3', description: 'Test', unit_price: 15)
       @backpack  = @amazon.items.create!(name: 'Camo Backpack', description: 'Double Zip Backpack', unit_price: 5.0)
       @radio     = @amazon.items.create!(name: 'Retro Radio', description: 'Twist and Turn to your fav jams', unit_price: 10.0)
+      @shoes     = @all_birds.items.create!(name: 'Pink Shoes', description: 'Light and warm booties!', unit_price: 120.0)
       # InvoiceItems:
       @invitm1   = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 7.0, invoice_id: @invoice1.id, item_id: @item_1.id)
       @invitm2   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 15.5, invoice_id: @invoice2.id, item_id: @item_2.id)
       @invitm3   = InvoiceItem.create!(status: 0, quantity: 25, unit_price: 10, invoice_id: @invoice1.id, item_id: @item_2.id)
-      @invitm4   = InvoiceItem.create!(status: 2, quantity: 50, unit_price: 5.0, invoice_id: @invoice7.id, item_id: @backpack.id)
-      @invitm5   = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 10.0, invoice_id: @invoice7.id, item_id: @radio.id)
-      @invitm6   = InvoiceItem.create!(status: 1, quantity: 5, unit_price: 10.0, invoice_id: @invoice7.id, item_id: @item_3.id)
+      @invitm4   = InvoiceItem.create!(status: 2, quantity: 50, unit_price: 5.0, invoice_id: @invoice5.id, item_id: @backpack.id)
+      @invitm5   = InvoiceItem.create!(status: 1, quantity: 100, unit_price: 10.0, invoice_id: @invoice5.id, item_id: @radio.id)
+      @invitm6   = InvoiceItem.create!(status: 1, quantity: 5, unit_price: 10.0, invoice_id: @invoice5.id, item_id: @item_3.id)
+      @invitm7   = InvoiceItem.create!(status: 1, quantity: 10, unit_price: 120.0, invoice_id: @invoice6.id, item_id: @shoes.id)
       # Discounts:
-      @discount_1 = Discount.create!(discount_percentage: 10, quantity_threshold: 60, merchant_id: @amazon.id)
+      @discount_1 = Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: @all_birds.id)
       @discount_2 = Discount.create!(discount_percentage: 15, quantity_threshold: 15, merchant_id: @amazon.id)
       @discount_3 = Discount.create!(discount_percentage: 20, quantity_threshold: 10, merchant_id: @amazon.id)
       @discount_4 = Discount.create!(discount_percentage: 20, quantity_threshold: 15, merchant_id: @max.id)
@@ -84,17 +88,16 @@ describe 'As a merchant' do
           visit merchant_invoice_path(@max, @invoice1)
           expect(page).to have_content("Total Revenue: $#{(expected_revenue)}")
         end
-#     describe 'Discount stories' do
-#       it "when I visit the merhcant invoice show page, I see see that the total revenue for my merchant includes the discounts in the calculation" do
-# # Merchant Invoice Show Page: Total Revenue includes discounts
-# # As a merchant
-# # When I visit my merchant invoice show page
-#     # require "pry"; binding.pry
-#       visit merchant_invoice_path(@amazon, @invoice5)
-# # Then I see that the total revenue for my merchant includes bulk discounts in the calculation
-#       require "pry"; binding.pry
-#       expect(page).to have_content("Total Discount Revenue: $")
-#       end
-#     end
+# bulk discount user stories
+      it "when I visit the merhcant invoice show page, I see see that the total revenue for my merchant includes the discounts in the calculation" do
+# Merchant Invoice Show Page: Total Revenue includes discounts
+# As a merchant
+# When I visit my merchant invoice show page
+    # require "pry"; binding.pry
+      visit merchant_invoice_path(@all_birds, @invoice6)
+      # require "pry"; binding.pry
+# Then I see that the total revenue for my merchant includes bulk discounts in the calculation
+      expect(page).to have_content("Total Discount Revenue: $ 1140.0")
+    end
   end
 end
