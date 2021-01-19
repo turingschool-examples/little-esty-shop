@@ -89,15 +89,15 @@ describe 'As a merchant' do
           expect(page).to have_content("Total Revenue: $#{(expected_revenue)}")
         end
 # bulk discount user stories
-      it "when I visit the merhcant invoice show page, I see see that the total revenue for my merchant includes the discounts in the calculation" do
+        it "when I visit the merhcant invoice show page, I see see that the total revenue for my merchant includes the discounts in the calculation" do
 # Merchant Invoice Show Page: Total Revenue includes discounts
 # As a merchant
 # When I visit my merchant invoice show page
     # require "pry"; binding.pry
-      visit merchant_invoice_path(@all_birds, @invoice6)
+        visit merchant_invoice_path(@all_birds, @invoice6)
       # require "pry"; binding.pry
 # Then I see that the total revenue for my merchant includes bulk discounts in the calculation
-      expect(page).to have_content("Total Discount Revenue: $ 1140.0")
+        expect(page).to have_content("Total Discount Revenue: $ 1140.0")
     end
   end
 end

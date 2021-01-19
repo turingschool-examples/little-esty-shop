@@ -175,7 +175,6 @@ RSpec.describe Merchant, type: :model do
 
     describe 'Disabled Merchants' do
       it "returns merchant with a status of 'Disabled'" do
-
       # Customers:
         sally    = Customer.create!(first_name: 'Sally', last_name: 'Smith')
         joel     = Customer.create!(first_name: 'Joel', last_name: 'Hansen')
@@ -260,6 +259,18 @@ RSpec.describe Merchant, type: :model do
         expected = [amazon]
 
         expect(Merchant.enabled_merchants).to eq(expected)
+      end
+    end
+    describe 'discount methods' do
+      it "returns total revenue including applied discount" do
+        sally     = Customer.create!(first_name: 'Sally', last_name: 'Smith', address: 'Test Address')
+        all_birds = Merchant.create!(name: 'Al Birds')
+        invoice6  = Invoice.create!(status: 2, customer_id: sally.id, merchant_id: all_birds.id, created_at: 'Fri, 08 Dec 2020 14:42:18 UTC +00:00')
+        shoes     = all_birds.items.create!(name: 'Pink Shoes', description: 'Light and warm booties!', unit_price: 120.0)
+        InvoiceItem.create!(status: 1, quantity: 10, unit_price: 120.0, invoice_id: invoice6.id, item_id: shoes.id)
+        Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: all_birds.id)
+# Then I see that the total revenue for my merchant includes bulk discounts in the calculation
+        expect(all_birds.total_discount_revenue).to eq(1140.0)
       end
     end
   end
