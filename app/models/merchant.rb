@@ -61,11 +61,4 @@ class Merchant < ApplicationRecord
     end
     final_percentage
   end
-  # discounts.joins(items: :invoice_items).where('discounts.merchant_id = items.merchant_id').where('discounts.quantity_threshold <= invoice_items.quantity').order(discount_percentage: :desc).pluck(:discount_percentage).first
-# discounts.joins(items: :invoice_items).select('discounts.discount_percentage, discounts.quantity_threshold, invoice_items.quantity')
-  # def find_invoice_item(invoice_arg)
-  #   require "pry"; binding.pry
-  #   # self.joins(:invoice_items).where(invoice_id: self.id)
-  # end
-
 end

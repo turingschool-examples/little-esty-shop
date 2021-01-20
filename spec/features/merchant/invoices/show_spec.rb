@@ -83,21 +83,26 @@ describe 'As a merchant' do
           end
         end
         it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
-          # require "pry"; binding.pry
           expected_revenue = @invitm1.quantity * @invitm1.unit_price + @invitm3.quantity * @invitm3.unit_price
+
           visit merchant_invoice_path(@max, @invoice1)
+
           expect(page).to have_content("Total Revenue: $#{(expected_revenue)}")
         end
-# bulk discount user stories
-        it "when I visit the merhcant invoice show page, I see see that the total revenue for my merchant includes the discounts in the calculation" do
-# Merchant Invoice Show Page: Total Revenue includes discounts
+      describe 'When I visit the merchant invoice show page'do
+          it "I see that the total revenue for my merchant includes the discounts in the calculation" do
+
+            visit merchant_invoice_path(@all_birds, @invoice6)
+
+            expect(page).to have_content("Total Discount Revenue: $1140.0")
+        end
+        it "Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)" do
+# Merchant Invoice Show Page: Link to applied discounts
 # As a merchant
 # When I visit my merchant invoice show page
-    # require "pry"; binding.pry
-        visit merchant_invoice_path(@all_birds, @invoice6)
-      # require "pry"; binding.pry
-# Then I see that the total revenue for my merchant includes bulk discounts in the calculation
-        expect(page).to have_content("Total Discount Revenue: $1140.0")
+            visit merchant_invoice_path(@all_birds, @invoice6)
+# Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
+        end
     end
   end
 end

@@ -5,14 +5,15 @@ Invoice Details
 ===============================
 <section class="invoice_details">
 <%= render partial: 'select_form', locals: {
-                                              model: @invoice, 
-                                              url: admin_invoice_path(@invoice.id), 
+                                              model: @invoice,
+                                              url: admin_invoice_path(@invoice.id),
                                               button_text: 'Update Invoice Status'
                                               } %><br>
 
 <li>Status:        <%= @invoice.status.capitalize %></li>
 <li>ID:            <%= @invoice.id %></li>
 <li>Total Revenue: $<%= @invoice.total_revenue %></li>
+<p>Total Discount Revenue: $<%= @invoice.merchant.total_discount_revenue(@invoice.invoice_items) %></p
 <li><%= @invoice.created_at.strftime("Created: %A, %B %d, %Y") %></li><br>
 </section>
 =============================
