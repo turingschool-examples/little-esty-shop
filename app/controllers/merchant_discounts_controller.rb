@@ -21,7 +21,7 @@ class MerchantDiscountsController < ApplicationController
    #    flash.notice = "Discount Information Incorrect, please try again."
    #    redirect_to merchant_discounts_path(@discount.merchant)
    #  end
-  end
+  # end
 
   def destroy
     Discount.destroy(params[:id])

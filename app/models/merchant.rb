@@ -63,4 +63,8 @@ class Merchant < ApplicationRecord
     end
     final_percentage
   end
+
+  def discount_used(invoice_item_arg)
+      (discounts.where('quantity_threshold <= ?', invoice_item_arg.quantity)).order(discount_percentage: :desc).first
+  end
 end
