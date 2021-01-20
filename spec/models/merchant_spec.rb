@@ -307,11 +307,8 @@ RSpec.describe Merchant, type: :model do
         expect(@all_birds.total_discount_revenue(@invoice6.invoice_items)).to eq(1140.0)
         expect(@happy_cones.total_discount_revenue(@invoice7.invoice_items)).to eq(0)
       end
-
-      it "can determine if the invoice is permitted for a discount" do
-        require "pry"; binding.pry
-        expect(@happy_cones.discount_permitted?(@invoice7.invoice_items)).to eq(false)
-        expect(@all_birds.discount_permitted?(@invoice6.invoice_items)).to be(true)
+      it "returns discount applied" do
+        expect(@all_birds.discount_used).to eq(@discount_1)
       end
     end
   end

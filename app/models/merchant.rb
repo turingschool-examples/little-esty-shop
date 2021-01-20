@@ -53,22 +53,14 @@ class Merchant < ApplicationRecord
   end
 
   def total_discount_revenue(invoice_item_arg)
-    # require "pry"; binding.pry
     final_percentage = 0
     invoice_item_arg.each do |invoice_item|
-      discount = (discounts.where('quantity_threshold <= ?', invoice_item.quantity)).pluck(:discount_percentage).first
+      discount = (discounts.where('quantity_threshold <= ?', invoice_item.quantity)).order(discount_percentage: :desc).pluck(:discount_percentage).first
       if !discount.nil?
       discount_percentage = 100 - discount
       final_percentage = invoice_item.item.total_price(invoice_item.item.id, invoice_item.invoice_id) * (discount_percentage / 100)
       end
     end
-    # require "pry"; binding.pry
     final_percentage
-  end
-
-  def discount_permitted?(invoice_item_arg)
-      invoice_item_arg.each do |invoice_item|
-        discounts.where('quantity_threshold <= ?', invoice_item.quantity)
-      end
   end
 end
