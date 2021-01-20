@@ -100,11 +100,11 @@ describe 'As a merchant' do
             visit merchant_invoice_path(@all_birds, @invoice6)
 
             expect(page).to have_content("Total Discount Revenue: $1140.0")
-
-            visit merchant_invoice_path(@happy_cones, @invoice7)
-# save_and_open_page
-            expect(page).to have_content("Total Discount Revenue: $0")
-
+        end
+        it "shows $0 if invoice does not meet discount conditions" do
+          visit merchant_invoice_path(@happy_cones, @invoice7)
+          
+          expect(page).to have_content("Total Discount Revenue: $0")
         end
         it "Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)" do
 # Merchant Invoice Show Page: Link to applied discounts
