@@ -107,14 +107,10 @@ describe 'As a merchant' do
           expect(page).to have_content("Total Discount Revenue: $0")
         end
         it "Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)" do
-# Merchant Invoice Show Page: Link to applied discounts
-# As a merchant
-# When I visit my merchant invoice show page
             visit merchant_invoice_path(@all_birds, @invoice6)
-            save_and_open_page
-            # require "pry"; binding.pry
+
             expect(page).to have_content("Discount ID Used: 2456")
-# Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
+
         end
     end
   end
