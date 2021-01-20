@@ -87,6 +87,7 @@ RSpec.describe 'As an admin user' do
       it 'I see the invoice status is a select field' do
         visit admin_invoice_path(@invoice1.id)
 
+
         within('.invoice_details') do
           expect(page).to have_content("Status: Cancelled")
         end
@@ -127,8 +128,7 @@ RSpec.describe 'As an admin user' do
       describe 'When I visit the admin invoice show page'do
           it "I see that the total revenue for my merchant includes the discounts in the calculation" do
 
-            visit merchant_invoice_path(@all_birds, @invoice8)
-            # require "pry"; binding.pry
+            visit admin_invoice_path(@invoice8)
 
             expect(page).to have_content("Total Discount Revenue: $1140.0")
         end
