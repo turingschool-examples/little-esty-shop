@@ -166,13 +166,9 @@ RSpec.describe Merchant, type: :model do
 
     describe 'order by merchant status' do
       it "it can order by merhcant status enabled" do
-        merch_1 = Merchant.create!(name: 'Merch Max', status: 0)
-        merch_2 = Merchant.create!(name: 'Merch Max', status: 0)
-        Merchant.create!(name: 'Merch Max', status: 1)
-        Merchant.create!(name: 'Merch Max', status: 1)
 
         actual = Merchant.enabled_merchants
-        expected = [merch_1, merch_2]
+        expected = [@all_birds, @amazon, @happy_cones, @happy_drink, @max]
         expect(actual).to eq(expected)
       end
 

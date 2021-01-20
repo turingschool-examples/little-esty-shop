@@ -43,9 +43,7 @@ RSpec.describe 'As a merchant', type: :feature do
     end
     it "Then I see the bulk discount's quantity threshold and percentage discount" do
       visit merchant_discount_path(@amazon, @discount_1)
-      # As a merchant
-      # When I visit my bulk discount show page
-      # Then I see the bulk discount's quantity threshold and percentage discount
+      
       expect(page).to have_content("Quantity Threshold: #{@discount_1.quantity_threshold}")
       expect(page).to have_content("Discount Percentage: #{@discount_1.discount_percentage}")
     end
@@ -68,7 +66,7 @@ RSpec.describe 'As a merchant', type: :feature do
       click_on :submit
 
       expect(current_path).to eq(merchant_discount_path(@amazon, @discount_1))
-      save_and_open_page
+
       expect(page).to have_content("Quantity Threshold: 75")
       expect(page).to have_content("Discount Percentage: 30")
     end

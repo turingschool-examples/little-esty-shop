@@ -197,11 +197,11 @@ RSpec.describe "As a admin user" do
         visit admin_merchants_path
 
         within(".merchant-top5") do
-          expect(page).to have_content("Top selling date for Big Lots was 01/14/21")
+          expect(page).to have_content("Top selling date for Big Lots was 01/20/21")
           expect(page).to have_content("Top selling date for Amazon was 12/08/20")
-          expect(page).to have_content("Top selling date for All Birds was 01/15/21")
-          expect(page).to have_content("Top selling date for Alibaba was 01/14/21")
-          expect(page).to have_content("Top selling date for Walmart was 01/14/21")
+          expect(page).to have_content("Top selling date for All Birds was 01/20/21")
+          expect(page).to have_content("Top selling date for Alibaba was 01/20/21")
+          expect(page).to have_content("Top selling date for Walmart was 01/20/21")
         end
       end
     end

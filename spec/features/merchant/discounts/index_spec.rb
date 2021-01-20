@@ -64,7 +64,6 @@ RSpec.describe 'As a merchant', type: :feature do
     end
     xit "When I dont enter the correct information, I am promted to try again to complete the discount creation." do
       new_merchant_discount_path(@alibaba)
-      save_and_open_page
 
       fill_in :discount_percentage, with: thirty
       fill_in :quantity_threshold, with: seventy_five
@@ -96,53 +95,3 @@ RSpec.describe 'As a merchant', type: :feature do
     end
   end
 end
-# class MerchantDiscountsController < ApplicationController
-#   def index
-#     @merchant = Merchant.find(params[:merchant_id])
-#     @discounts = @merchant.discounts
-#   end
-#
-#   def new
-#     @merchant = Merchant.find(params[:merchant_id])
-#   end
-#
-#   def create
-#     @discount = Merchant.find(params[:merchant_id]).discounts.new(discount_params)
-#     if discount.save
-#       redirect_to merchant_discounts_path(@discount.merchant)
-#     else
-#       flash.notice = "Discount information incorrect, please try again."
-#       redirect_to merchant_discounts_path(merchant.id)
-#     end
-#   end
-#
-#   def destroy
-#     Discount.destroy(params[:id])
-#     redirect_to merchant_discounts_path(Merchant.find(params[:merchant_id]))
-#   end
-#
-#   def show
-#     @discount = Merchant.find(params[:merchant_id]).discounts.find(params[:id])
-#   end
-#
-#   def edit
-#     @discount = Discount.find(params[:id])
-#     @merchant = Merchant.find(params[:merchant_id])
-#   end
-#
-#   def update
-#     discount = Discount.find(params[:id])
-#     discount.update(
-#       discount_params
-#     )
-#     redirect_to merchant_discount_path(discount.merchant, discount)
-#   end
-#
-#   private
-#
-#   def discount_params
-#     require "pry"; binding.pry
-#     params.require(:discount).permit(:discount_percentage, :quantity_threshold)
-#   end
-#
-# end

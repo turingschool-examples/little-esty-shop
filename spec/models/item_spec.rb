@@ -143,7 +143,7 @@ RSpec.describe Item, type: :model do
       date = radio1.invoices.best_day.created_at
       expected = date.strftime('%m/%d/%y')
 
-      expect(expected).to eq('01/14/21') 
+      expect(expected).to eq("01/20/21") 
     end
   end
 end
