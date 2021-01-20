@@ -40,7 +40,8 @@ class MerchantDiscountsController < ApplicationController
   def update
     discount = Discount.find(params[:id])
     discount.update(
-      discount_params
+      discount_percentage: params[:discount][:discount_percentage],
+      quantity_threshold: params[:discount][:quantity_threshold]
     )
     redirect_to merchant_discount_path(discount.merchant, discount)
   end
