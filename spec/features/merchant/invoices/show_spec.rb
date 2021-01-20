@@ -39,7 +39,7 @@ describe 'As a merchant' do
       @discount_3 = Discount.create!(discount_percentage: 20, quantity_threshold: 10, merchant_id: @amazon.id)
       @discount_4 = Discount.create!(discount_percentage: 20, quantity_threshold: 15, merchant_id: @max.id)
       @discount_5 = Discount.create!(discount_percentage: 30, quantity_threshold: 15, merchant_id: @max.id)
-      @discount_1 = Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: @happy_cones.id)
+      @discount_6 = Discount.create!(discount_percentage: 5, quantity_threshold: 10, merchant_id: @happy_cones.id)
     end
     it "Then I can see information related to that invoice including id, status, created at" do
           visit merchant_invoice_path(@max, @invoice1)
@@ -108,8 +108,12 @@ describe 'As a merchant' do
         end
         it "Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)" do
             visit merchant_invoice_path(@all_birds, @invoice6)
-
-            expect(page).to have_content("Discount ID Used: 2456")
+            # save_and_open_page
+            within "#invoice-item-#{@invitm7.id}" do
+              expect(page).to have_link('Discount Used')
+              click_link('Discount Used')
+              expect(current_path).to eq(merchant_discount_path(@all_birds, @discount_1))
+            end
 
         end
     end

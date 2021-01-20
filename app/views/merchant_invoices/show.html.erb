@@ -14,7 +14,7 @@
       <% if @invoice.merchant.discount_used(invoice_item).nil? %>
       <p> There is no discount for this item! </p>
       <% else %>
-        <p>Discount ID Used: <%= link_to @invoice.merchant.discount_used(invoice_item).id, merchant_discount_path(@invoice.merchant.id, @invoice.merchant.discount_used(invoice_item).id) %></p>
+        <%= link_to "Discount Used", merchant_discount_path(@invoice.merchant.id, @invoice.merchant.discount_used(invoice_item).id) %>
       <% end %>
       <h3>Item Name: <%= invoice_item.item.name %></h3>
       <p>Item Price: <%= invoice_item.item.unit_price %></p>
