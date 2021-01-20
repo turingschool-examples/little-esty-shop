@@ -1,6 +1,5 @@
 class MerchantDiscountsController < ApplicationController
   def index
-    # binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @discounts = @merchant.discounts
   end
@@ -10,12 +9,19 @@ class MerchantDiscountsController < ApplicationController
   end
 
   def create
-  #.new is required for a conditional, to give a flash message
     @discount = Merchant.find(params[:merchant_id]).discounts.create(
       discount_params
     )
      redirect_to merchant_discounts_path(@discount.merchant)
   end
+   # @discount = Merchant.find(params[:merchant_id]).discounts.new(discount_params)
+   #  if @discount.save
+   #    redirect_to merchant_discounts_path(@discount.merchant)
+   #  else
+   #    flash.notice = "Discount Information Incorrect, please try again."
+   #    redirect_to merchant_discounts_path(@discount.merchant)
+   #  end
+  # end
 
   def destroy
     Discount.destroy(params[:id])
@@ -23,7 +29,7 @@ class MerchantDiscountsController < ApplicationController
   end
 
   def show
-  @discount = Merchant.find(params[:merchant_id]).discounts.find(params[:id])
+    @discount = Merchant.find(params[:merchant_id]).discounts.find(params[:id])
   end
 
   def edit
@@ -42,7 +48,8 @@ class MerchantDiscountsController < ApplicationController
   private
 
   def discount_params
-    params.require(:discount).permit(:discount_percentage, :quantity_threshold)
+    params.permit(:discount_percentage, :quantity_threshold)
+    # params.require(:discount).permit(:item_requirement, :percentage_discount)
   end
 
 end

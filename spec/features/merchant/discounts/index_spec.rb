@@ -43,19 +43,16 @@ RSpec.describe 'As a merchant', type: :feature do
     end
     it "I see a link to create a new discount " do
       visit merchant_discounts_path(@alibaba)
-      # Then I see a link to create a new discount
-      # When I click this link
+
       expect(page).to have_link("Create New Discount")
       click_link "Create New Discount"
 
       expect(current_path).to eq(new_merchant_discount_path(@alibaba))
-      # Then I am taken to a new page where I see a form to add a new bulk discount
-      # When I fill in the form with valid data
-      # Then I am redirected back to the bulk discount index
+
       fill_in :discount_percentage, with: 30
       fill_in :quantity_threshold, with: 75
       click_on :submit
-      # And I see my new bulk discount listed
+
       new_discount = @alibaba.discounts.last
       new_discount.merchant_id = @alibaba.id
 
@@ -65,29 +62,87 @@ RSpec.describe 'As a merchant', type: :feature do
       expect(page).to have_content("Quantity Threshold: #{new_discount.quantity_threshold}")
       expect(page).to have_link("Discount #{new_discount.id}")
     end
+    xit "When I dont enter the correct information, I am promted to try again to complete the discount creation." do
+      new_merchant_discount_path(@alibaba)
+      save_and_open_page
+
+      fill_in :discount_percentage, with: thirty
+      fill_in :quantity_threshold, with: seventy_five
+      click_on :submit
+
+      expect(page).to have_content("Discount Information Incorrect, please try again.")
+      expect(current_path).to eq(new_merchant_discount_path(@alibaba))
+    end
     it "Next to each bulk discount I see a link to delete it, when I click this link it is deleted" do
-      # As a merchant
-      # When I visit my bulk discounts index
       visit merchant_discounts_path(@amazon)
-# Then next to each bulk discount I see a link to delete it
-# When I click this link
-      # within(".ind-discount-#{@discount_1.id}") do
-        expect(page).to have_button("Delete Discount ID: #{@discount_1.id}")
-        # end
 
-        # within("#ind-discount-#{@discount_2.id}") do
-        expect(page).to have_button("Delete Discount ID: #{@discount_2.id}")
-        # end
+      expect(page).to have_button("Delete Discount", count: 3)
 
-        # within("#discount-info-#{@discount_3.id}") do
-        expect(page).to have_button("Delete Discount ID: #{@discount_3.id}")
-        click_on "Delete Discount ID: #{@discount_3.id}"
-        expect(current_path).to eq(merchant_discounts_path(@amazon))
+        # within(".ind-discount-#{@discount_1.id}") do
+          expect(page).to have_button("Delete Discount ID: #{@discount_1.id}")
         # end
-
+        #
+        # # within(".ind-discount-#{@discount_2.id}") do
+          expect(page).to have_button("Delete Discount ID: #{@discount_2.id}")
+        # # end
+        #
+        # # within(".discount-info-#{@discount_3.id}") do
+          expect(page).to have_button("Delete Discount ID: #{@discount_3.id}")
+          click_on "Delete Discount ID: #{@discount_3.id}"
+          expect(current_path).to eq(merchant_discounts_path(@amazon))
+        # # end
+        #
         expect(page).to_not have_content("Delete Discount ID: #{@discount_3.id}")
-# Then I am redirected back to the bulk discounts index page
-# And I no longer see the discount listed
     end
   end
 end
+# class MerchantDiscountsController < ApplicationController
+#   def index
+#     @merchant = Merchant.find(params[:merchant_id])
+#     @discounts = @merchant.discounts
+#   end
+#
+#   def new
+#     @merchant = Merchant.find(params[:merchant_id])
+#   end
+#
+#   def create
+#     @discount = Merchant.find(params[:merchant_id]).discounts.new(discount_params)
+#     if discount.save
+#       redirect_to merchant_discounts_path(@discount.merchant)
+#     else
+#       flash.notice = "Discount information incorrect, please try again."
+#       redirect_to merchant_discounts_path(merchant.id)
+#     end
+#   end
+#
+#   def destroy
+#     Discount.destroy(params[:id])
+#     redirect_to merchant_discounts_path(Merchant.find(params[:merchant_id]))
+#   end
+#
+#   def show
+#     @discount = Merchant.find(params[:merchant_id]).discounts.find(params[:id])
+#   end
+#
+#   def edit
+#     @discount = Discount.find(params[:id])
+#     @merchant = Merchant.find(params[:merchant_id])
+#   end
+#
+#   def update
+#     discount = Discount.find(params[:id])
+#     discount.update(
+#       discount_params
+#     )
+#     redirect_to merchant_discount_path(discount.merchant, discount)
+#   end
+#
+#   private
+#
+#   def discount_params
+#     require "pry"; binding.pry
+#     params.require(:discount).permit(:discount_percentage, :quantity_threshold)
+#   end
+#
+# end

@@ -43,9 +43,15 @@ namespace :csv_load do
     importCSV(file_path, 'InvoiceItem')
   end
 
+  desc "Imports discounts csv file into database"
+  task :discounts => [:environment] do
+    file_path = "db/data/discounts.csv"
+    importCSV(file_path, 'Discount')
+  end
+
   desc "Imports all csv files into database"
   task :all do
-    tables = ['merchants', 'customers', 'invoices', 'transactions', 'items', 'invoice_items']
+    tables = ['merchants', 'customers', 'invoices', 'transactions', 'items', 'invoice_items', 'discounts']
     tables.each do |table|
       Rake::Task["csv_load:#{table}"].invoke
     end
