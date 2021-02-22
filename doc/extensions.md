@@ -2,8 +2,6 @@
 
 ### Tier 1 - Least Difficult
 
-1.
-
 ```
 As an admin     
 When I visit an admin invoices index page
@@ -13,8 +11,6 @@ I can change multiple statuses via a dropdown list or checkboxes.
 When I click the update button, I see the changes reflected on the index page for each invoice I updated.
 ```
 
-2.
-
 ```
 As an admin, merchant, or visitor
 On all pages that list all merchants, invoices, or items
@@ -22,7 +18,7 @@ I see a button to sort the list alphabetically, and I see a button to sort by mo
 When I click these buttons, the list is updated accordingly.
 ```
 
-3.
+#### Styling
 
 Implement a consistent look and feel throughout your site with reusable styles.
 
