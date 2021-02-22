@@ -46,7 +46,7 @@ Greater than, less than, and equal to options for created at and updated at
 
 [Authentication Lesson Plan](https://backend.turing.io/module2/lessons/authentication)
 
-[Authorization Lesson Plan](https://backend.turing.io/module2/lessons/authorization]
+[Authorization Lesson Plan](https://backend.turing.io/module2/lessons/authorization)
 
 [Sessions](https://guides.rubyonrails.org/v5.2/action_controller_overview.html#session)
 
