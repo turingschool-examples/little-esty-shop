@@ -28,24 +28,25 @@
 
  header {
    padding: 10px;
-   background-color: lightblue;
+   /* background-color: lightblue; */
    color: white;
    font-family: Arial;
    line-height: 2em;
    text-align: center;
  }
 
-
-.nav-bar {
-  font-family: Arial;
-  background-color: lightblue;
-  color: black;
-  text-align: left;
-  font-size: 25px;
-  padding: 0px;
-  position: sticky;
-  left:auto;
-  bottom:300px;
-  top:300px;
-  right:0;
-}
+ .links{
+ font-size: 20px;
+ width: auto;
+ height: auto;
+ padding: 5px;
+ margin: 5px;
+ position: absolute;
+ left:auto;
+ bottom:auto;
+ top:100px;
+ right:0;
+ }
+ .button4 {
+  border-radius: 12px;
+ }
