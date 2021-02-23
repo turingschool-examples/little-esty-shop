@@ -4,6 +4,8 @@ class CreateInvoiceItems < ActiveRecord::Migration[5.2]
       t.integer :quantity
       t.integer :unit_price
       t.integer :status
+
+      t.timestamps
     end
   end
 end
