@@ -1,7 +1,5 @@
 class Transaction < ApplicationRecord
   belongs_to :invoice
-  validates :credit_card_number, numericality: {
-            greater_than_or_equal_to: 0
-          }
+  validates_presence_of :credit_card_number
   enum result: [:success, :failed]
 end

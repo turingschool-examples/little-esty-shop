@@ -5,7 +5,7 @@ RSpec.describe Transaction, type: :model do
     it { should belong_to :invoice }
   end
   describe 'validations' do
-    it { should validate_numericality_of(:credit_card_number).is_greater_than_or_equal_to(0)}
+    it { should validate_presence_of :credit_card_number}
 
     it 'result can be nil by default' do
       transaction = create(:transaction, result: nil)
