@@ -17,5 +17,28 @@ namespace :csv_load do
   	end
   end
 
+  task invoice_items: :environment do
+
+  	csv_text = File.read(Rails.root.join("db","data","invoice_items.csv"))
+  	csv = CSV.parse(csv_text, :headers => true)
+  	csv.each do |row|
+  		ii = InvoiceItem.new
+  		ii[:quantity] = row["quantity"]
+  		ii[:unit_price] = row["unit_price"]
+  		ii[:status] = row["status"]
+  		ii.save
+  	end
+  end
+
+  task invoices: :environment do
+
+  	csv_text = File.read(Rails.root.join("db","data","invoices.csv"))
+  	csv = CSV.parse(csv_text, :headers => true)
+  	csv.each do |row|
+  		invoice = Invoice.new
+  		invoice[:status] = row["status"]
+  		invoice.save
+  	end
+  end
 
 end
