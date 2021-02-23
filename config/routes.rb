@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   resources :merchants do
-    resources :invoices, :items
+    resources :invoices, :items, :dashboard
   end
 
   resources :customers, :invoice_items, :transactions
