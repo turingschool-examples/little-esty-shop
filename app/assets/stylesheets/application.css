@@ -43,5 +43,9 @@
   text-align: left;
   font-size: 25px;
   padding: 0px;
-
+  position: sticky;
+  left:auto;
+  bottom:300px;
+  top:300px;
+  right:0;
 }
