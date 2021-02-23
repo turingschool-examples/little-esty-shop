@@ -7,20 +7,35 @@
     * Since there are three of us, one person will work on own and have group of 2. Then we can rotate.
   * From CSV and creating rake task is something we should tackle together, once complete then we can split up.
     * We believe this is just seeding the file using the CSVs.
-
+  * Spread things out accordingly for soft deadlines so that we are not loading too much on at once.
+    * In the event we can't hit a date just communication with each other early and often
 
 #### What does each group member hope to get out of this project?
 
+  * Would like to finish the project but the learning is more critical for the journey.
+  * Solidify the learning goals from upcoming classes that relate to the project.
+  * ReSTful routes and resource routes, solidifying which is the right way to go when we are going from a view in one controller to another controller.
+  * How to consume APIs
+  * Perhaps incorporate another API if we have time or additional extensions
+  * Exploring things that are outside of what in the user stories or in class that we can incorporate into the project.
 
 ### Goals and expectations:
 
   * __Goals__
     * 2/22 - DB/model setup
-    * 2/23 - Setup rake task to load CSV files (seeding)
-    * 2/2
+    * 2/23 - Setup rake task to load CSV files (seeding), up to heroku and seeded as well
+    * 2/24 - EOD Merchant and Admin Dashboards
+    * 2/26 - EOD Split Off - Complete individually Merchant Items, Merchant Invoices, Admin Merchants
+      * Friday evening game plan who is working on what so we can tackle on our own time
+    * 2/27 - Admin Invoices (perhaps just copying from Merchant Invoices)
+    * SUNDAY - OFF (tentative based on if we've completed our above soft deadlines)
+    * Monday - API together from 6-8pm, along with 3-4 class scheduled work time.
 
 ### Team strengths:
-
+  * ALL - Good foundation of knowledge to bring to table
+  * Jenny - debugging guru!
+  * Khoa - top notch tenacity and work ethic!
+  * Genevieve - detail oriented, breaking things down and organization
 
 ### How to overcome obstacles:
   * Ask for help - no longer than one Pom, if we are struggling for more than one its a good indicator to reach out for help.
@@ -48,7 +63,7 @@
 
 ### Workload Expectations (What features do we each want to work on?):
 
-  * 
+  * work when it works for us all
 
 ### Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests):
 
