@@ -45,10 +45,10 @@ namespace :csv_load do
   end
 
   task all: :environment do
-    Item.destroy_all
-    Transaction.destroy_all
-    Invoice.destroy_all
     InvoiceItem.destroy_all
+    Transaction.destroy_all
+    Item.destroy_all
+    Invoice.destroy_all
     Customer.destroy_all
     Merchant.destroy_all
 
@@ -127,7 +127,7 @@ namespace :csv_load do
       ii[:status] = row["status"]
       ii[:created_at] = row["created_at"].to_datetime
       ii[:updated_at] = row["updated_at"].to_datetime
-      ii.save
+      ii.save!
     end
   end
 
