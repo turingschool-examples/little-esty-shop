@@ -57,5 +57,5 @@ namespace :csv_load do
     end
   end
   desc "import all databases"
-  task :all => [:merchants, :customers, :items, :transactions, :invoices, :invoice_items]
+  task :all => [:merchants, :customers, :items, :invoices, :transactions, :invoice_items]
 end
