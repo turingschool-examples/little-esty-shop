@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+ @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+
+
+ body {
+   background-color: DodgerBlue;
+    color: #065e09;
+    font-family: Arial;
+    font-size: 35px;
+    line-height: 1.5em;
+    margin: 0em;
+    text-align: center;
+ }
+
+ header {
+   padding: 10px;
+   background-color: lightblue;
+   color: white;
+   font-family: Arial;
+   line-height: 2em;
+   text-align: center;
+ }
+
+
+.nav-bar {
+  font-family: Arial;
+  background-color: lightblue;
+  color: black;
+  text-align: left;
+  font-size: 25px;
+  padding: 0px;
+
+}

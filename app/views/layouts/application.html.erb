@@ -7,9 +7,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <div class="nav-bar">
+      <ul>
+      <button><%= link_to "Admin Index", "/admin" %></button>
+      <button><%= link_to "Admin Merchants Index", "/admin/merchants" %></button>
+      <button><%= link_to "Admin Invoices Index", "/admin/invoices" %></button>
+        <%# <%= link_to "#{@merchant.name} Items Index", "/merchants/#{@merchant.id}/items" %> %>
+        <%# <%= link_to "#{@merchant.name} Dashboard", "/merchants/#{@merchant.id}/dashboard" %> %>
+        <%# <%= link_to "#{@merchant.name} Invoices Index", "/merchants/#{@merchant.id}/invoices" %> %>
+      </ul>
+    </div>
   </head>
 
-  <body>
+  <body
+  <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
