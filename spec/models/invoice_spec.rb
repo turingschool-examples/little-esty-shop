@@ -9,6 +9,6 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe "validations" do
-    it { validates_presence_of :status }
+    it { should validate_presence_of :status }
   end
 end

@@ -7,8 +7,8 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe "validations" do
-    it { validates_presence_of :quantity }
-    it { validates_presence_of :unit_price }
-    it { validates_presence_of :status }
+    it { should validate_presence_of :quantity }
+    it { should validate_presence_of :unit_price }
+    it { should validate_presence_of :status }
   end
 end
