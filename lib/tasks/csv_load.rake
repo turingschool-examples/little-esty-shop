@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require 'rake'
 # Dir["./app/models/*.rb"].each {|file| require file }
 
