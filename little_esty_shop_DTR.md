@@ -48,7 +48,7 @@
 
 ### Workload Expectations (What features do we each want to work on?):
 
-  *
+  * 
 
 ### Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests):
 
