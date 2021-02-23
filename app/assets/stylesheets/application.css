@@ -17,7 +17,7 @@
 
 
  body {
-   background-color: DodgerBlue;
+   background-color: lightgrey;
     color: #065e09;
     font-family: Arial;
     font-size: 35px;
@@ -29,7 +29,7 @@
  header {
    padding: 10px;
    /* background-color: lightblue; */
-   color: white;
+   color: black;
    font-family: Arial;
    line-height: 2em;
    text-align: center;
