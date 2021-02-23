@@ -20,11 +20,13 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice1.status).to_not eq("cancelled")
       expect(@invoice1.status).to_not eq("completed")
     end
+
     it 'can display completed' do
       expect(@invoice2.status).to eq("completed")
       expect(@invoice2.status).to_not eq("cancelled")
       expect(@invoice2.status).to_not eq("in progress")
     end
+
     it 'can display cancelled' do
       expect(@invoice3.status).to eq("cancelled")
       expect(@invoice3.status).to_not eq("completed")
