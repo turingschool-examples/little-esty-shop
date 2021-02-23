@@ -251,9 +251,8 @@
           null
         ]
       },
-      "/Users/jeremiahmichlitsch/Turing/Mod_2/Projects/little-esty-shop/app/models/invoice.rb": {
+      "/Users/jeremiahmichlitsch/Turing/Mod_2/Projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
-          1,
           1,
           1,
           null
@@ -266,14 +265,15 @@
           null
         ]
       },
-      "/Users/jeremiahmichlitsch/Turing/Mod_2/Projects/little-esty-shop/app/models/customer.rb": {
+      "/Users/jeremiahmichlitsch/Turing/Mod_2/Projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
+          1,
           1,
           1,
           null
         ]
       }
     },
-    "timestamp": 1614118297
+    "timestamp": 1614119571
   }
 }
