@@ -1,3 +1,9 @@
-<h1>Admin Dashboard</h1><br>
-<%= link_to "Merchant Index", admin_merchants_path %>
-<%= link_to "Invoice Index", admin_invoices_path %>
+<h1>Admin Dashboard</h1>
+<%= link_to "Merchant Index", admin_merchants_path %><br>
+<%= link_to "Invoice Index", admin_invoices_path %><br>
+<h3>Top Five Customer With Most Transactions:</h3>
+<% @customers.top_five_customers.each do |customer|%>
+<%= customer.first_name %>
+<%= customer.last_name %>,
+Successful Transactions: <%= customer.successful_transactions_count%><br>
+<% end %>
