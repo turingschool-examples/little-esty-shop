@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
- get "/merchants/:id/items", to: "merchant_items#index"
- get "/merchants/:merchant_id/items/:item_id", to: "merchant_items#show"
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :merchants do
+    get "/dashboard", to: "merchants#dashboard"
+    scope module: :merchant do
+      resources :items
+      resources :invoices
+    end
+  end
 end
