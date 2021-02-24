@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # get  "/merchant/:merchant_id/dashboard", to: "merchants#dashboard"
   scope :merchant do
     get "/:merchant_id/dashboard", to: "merchants#dashboard"
-    get "/:merchant_id/items", to: "items#index", as: "merchant_items"
+    get "/:merchant_id/items", to: "merchant_items#index", as: "merchant_items"
     get "/:merchant_id/invoices", to: "invoices#index", as: "merchant_invoices"
   end
 
