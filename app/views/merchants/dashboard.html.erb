@@ -1,0 +1,17 @@
+<header>
+  <h1><%= @merchant.name %></h1>
+  <div class="navbar">  
+    <%= link_to "Items", "items" %>
+    <%= link_to "Invoices", "invoices" %>
+  </div>
+</header> <hr>
+<section class="card text-white bg-danger mb-3" style="max-width: 30rem;">
+  <h3 class="card-title">Unshipped Items</h3>
+  <% @merchant.unshipped.each do |item| %>
+  <div class="card-text" id="unshipped-<%= item.name %>">
+    <b><%= item.name %></b>, <br> 
+    Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <i><%= item.invoice_created.strftime('%A, %b %d, %Y') %></i> 
+    <hr>
+  </div>
+  <% end %>
+</section>

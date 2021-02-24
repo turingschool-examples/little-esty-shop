@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 require 'rake'
 
 namespace :csv_load do
