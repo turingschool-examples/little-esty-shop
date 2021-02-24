@@ -3,7 +3,6 @@ require "rails_helper"
 RSpec.describe 'Merchant Dashboard' do
   before :each do
     @mer_1 = create(:merchant)
-    @mer_2 = create(:merchant, name: "Target" )
   end
 
   it "shows merchant names on the dashboard" do
@@ -17,5 +16,12 @@ RSpec.describe 'Merchant Dashboard' do
 
     expect(page).to have_link(merchant_items_path(@mer_1))
     expect(page).to have_link(merchant_invoices_path(@mer_1))
+  end
+
+  it "show favorite customers and next to each customer name, I see the number of
+      successful transactions they have" do
+
+
+    
   end
 end
