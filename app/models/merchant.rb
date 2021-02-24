@@ -8,6 +8,6 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def find_top_customers
-    # require "pry"; binding.pry
+    require "pry"; binding.pry
   end
 end
