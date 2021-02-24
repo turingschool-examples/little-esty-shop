@@ -1,6 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe "admin dashboard" do
+  before :each do
+    @customer1 = Customer.create!(first_name: "First1", last_name: "Last1")
+    @customer2 = Customer.create!(first_name: "First2", last_name: "Last2")
+    @customer3 = Customer.create!(first_name: "First3", last_name: "Last3")
+    @customer4 = Customer.create!(first_name: "First4", last_name: "Last4")
+    @customer5 = Customer.create!(first_name: "First4", last_name: "Last4")
+    @customer6 = Customer.create!(first_name: "First4", last_name: "Last4")
+
+    @invoice1 = @customer2.invoices.create!(status: 1)
+    @transaction1 = @invoice1.transactions.create!(result: 0)
+    @invoice2 = @customer2.invoices.create!(status: 1)
+    @transaction2 = @invoice2.transactions.create!(result: 0)
+    @invoice3 = @customer3.invoices.create!(status: 1)
+    @transaction3 = @invoice3.transactions.create!(result: 0)
+    @invoice4 = @customer4.invoices.create!(status: 2)
+    @transaction4 = @invoice4.transactions.create!(result: 0)
+    @invoice5 = @customer4.invoices.create!(status: 1)
+    @transaction5 = @invoice5.transactions.create!(result: 0)
+    @invoice6 = @customer5.invoices.create!(status: 0)
+    @transaction6 = @invoice6.transactions.create!(result: 0)
+    @invoice7 = @customer5.invoices.create!(status: 1)
+    @transaction7 = @invoice7.transactions.create!(result: 0)
+    @invoice8 = @customer5.invoices.create!(status: 1)
+    @transaction8 = @invoice8.transactions.create!(result: 0)
+    @invoice9 = @customer5.invoices.create!(status: 2)
+    @transaction9 = @invoice9.transactions.create!(result: 0)
+    @invoice10 = @customer6.invoices.create!(status: 1)
+    @transaction10 = @invoice10.transactions.create!(result: 0)
+    @invoice11 = @customer6.invoices.create!(status: 0)
+    @transaction11 = @invoice11.transactions.create!(result: 0)
+    @invoice12 = @customer6.invoices.create!(status: 0)
+    @transaction12 = @invoice12.transactions.create!(result: 0)
+
+
+  end
   describe "when I visit the admin dashboard" do
     it "shows a header indicating that I am on the admin dashboard" do
       visit '/admin'
@@ -16,6 +51,28 @@ RSpec.describe "admin dashboard" do
       within(".header") do
         expect(page).to have_link("Merchants")
         expect(page).to have_link("Invoices")
+      end
+    end
+
+    it "shows the top 5 customers, and the number of transactions they have completed" do
+      visit "/admin"
+
+      within(".top_customers") do
+        expect(@customer5.name).to appear_before(@customer6.name)
+        expect(@customer6.name).to appear_before(@customer4.name)
+        expect(@customer4.name).to appear_before(@customer3.name)
+        expect(@customer3.name).to appear_before(@customer2.name)
+
+        expect(page).to have_content(@customer5.name)
+        expect(page).to have_content(@customer5.sucsessful_transaction_count)
+        expect(page).to have_content(@customer6.name)
+        expect(page).to have_content(@customer6.sucsessful_transaction_count)
+        expect(page).to have_content(@customer4.name)
+        expect(page).to have_content(@customer4.sucsessful_transaction_count)
+        expect(page).to have_content(@customer3.name)
+        expect(page).to have_content(@customer3.sucsessful_transaction_count)
+        expect(page).to have_content(@customer2.name)
+        expect(page).to have_content(@customer2.sucsessful_transaction_count)
       end
     end
   end
