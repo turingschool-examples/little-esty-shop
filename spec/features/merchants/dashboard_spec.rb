@@ -22,7 +22,7 @@ RSpec.describe "When I visit a Merchant's dashboard", type: :feature do
   scenario "I see a link to the merchants item and invoice indexs" do
     visit "/merchants/#{@joe.id}/dashboard"
     
-    within(".links") do
+    within(".navbar") do
       expect(page).to have_link("Items")
       expect(page).to have_link("Invoices")
     end
