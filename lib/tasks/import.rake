@@ -2,47 +2,64 @@ require 'csv'
 # require 'pry'
 #these need to be created in such a n order with dependencies?
 
-
-
-desc "Import teams from csv file"
-task :import => [:environment] do
-  InvoiceItem.destroy_all
-  Transaction.destroy_all
-  Invoice.destroy_all
-  Item.destroy_all
-  Customer.destroy_all
-  Merchant.destroy_all
-
-  file_5 = "db/data/merchants.csv"
-  CSV.foreach(file_5, :headers => true, header_converters: :symbol) do |row|
-    Merchant.create(row.to_hash)
+namespace :csv_load do
+  desc "Import teams from csv file"
+  task :merchants => [:environment] do
+    Merchant.destroy_all
+    file_5 = "db/data/merchants.csv"
+    CSV.foreach(file_5, :headers => true, header_converters: :symbol) do |row|
+      Merchant.create(row.to_hash)
+    end
   end
-
-  file_4 = "db/data/items.csv"
-  CSV.foreach(file_4, :headers => true) do |row|
-    Item.create(row.to_hash)
+  task :items => [:environment] do
+    Item.destroy_all
+    file_4 = "db/data/items.csv"
+    CSV.foreach(file_4, :headers => true, header_converters: :symbol) do |row|
+      Item.create(row.to_hash)
+    end
   end
-
-
-  file = "db/data/customers.csv"
-  CSV.foreach(file, :headers => true) do |row|
-    Customer.create(row.to_hash)
+  task :customers => [:environment] do
+    Customer.destroy_all
+    file = "db/data/customers.csv"
+    CSV.foreach(file, :headers => true, header_converters: :symbol) do |row|
+      Customer.create(row.to_hash)
+    end
   end
-
-  file_2 = "db/data/invoices.csv"
-  CSV.foreach(file_2, :headers => true) do |row|
-    Invoice.create(row.to_hash)
+  task :invoices => [:environment] do
+    Invoice.destroy_all
+    file_2 = "db/data/invoices.csv"
+    CSV.foreach(file_2, :headers => true, header_converters: :symbol) do |row|
+      if row[2] == "in progress"
+        row[2] = 0
+      elsif row[2] == "completed"
+        row[2] = 1
+      else
+        row[2] = 2
+      end
+      Invoice.create(row.to_hash)
+    end
   end
-
-  file_6 = "db/data/transactions.csv"
-  CSV.foreach(file_6, :headers => true) do |row|
-    Transaction.create(row.to_hash)
+  task :transactions => [:environment] do
+    Transaction.destroy_all
+    file_6 = "db/data/transactions.csv"
+    CSV.foreach(file_6, :headers => true, header_converters: :symbol) do |row|
+      Transaction.create(row.to_hash)
+    end
   end
-
-  file_3 = "db/data/invoice_items.csv"
-  CSV.foreach(file_3, :headers => true) do |row|
-    InvoiceItem.create(row.to_hash)
+  task :invoice_items => [:environment] do
+    InvoiceItem.destroy_all
+    file_3 = "db/data/invoice_items.csv"
+    CSV.foreach(file_3, :headers => true, header_converters: :symbol) do |row|
+      if row[5] == "packaged"
+        row[5] = 0
+      elsif row[5] == "pending"
+        row[5] = 1
+      else
+        row[5] = 2
+      end
+      InvoiceItem.create(row.to_hash)
+    end
+  end
+  task :all => [:merchants, :items, :customers, :invoices, :transactions, :invoice_items] do
   end
 end
-
-#task :import_all => [:merchants, :]
