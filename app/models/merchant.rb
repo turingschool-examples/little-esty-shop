@@ -1,5 +1,5 @@
 class Merchant < ApplicationRecord
-  has_many :items
+  has_many :items, dependent: :destroy
 
   def top_five_customers
     binding.pry
@@ -18,4 +18,4 @@ class Merchant < ApplicationRecord
     # needs customer name instead of id, filtered for top 5 already
     # merch.items.joins(invoices: :transactions).where(transactions: {result: "success"}).joins(invoices: :customer).group("customer_id").count.sort_by{|k, v| -v}[0..4]
   end
-end
+endg
