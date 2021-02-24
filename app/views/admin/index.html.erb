@@ -1,2 +1,12 @@
 <a href="/admin/merchants">Merchants</a>
 <a href="/admin/invoices">Invoices</a>
+
+
+
+
+<section>Incomplete Invoices</section>
+<% @invoices.incomplete.each do |incomplete| %>
+  <ul>
+    <a href="admin/invoices/<%= incomplete.id %>"><li>Invoice: <%= incomplete.id %></li></a>
+  </ul>
+<% end  %>
