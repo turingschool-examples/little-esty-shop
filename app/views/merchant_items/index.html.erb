@@ -1,8 +1,8 @@
-<%= @merchant.name %>
+<p>Merchant: <%= @merchant.name %></p>
 
 <h4>Items</h4>
 <section class="items">
   <% @merchant.items.each do |item| %>
-    <li><%= item.name %></li>
+    <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></li>
   <% end %>
 </section>
