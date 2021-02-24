@@ -8,5 +8,12 @@ RSpec.describe Merchant, type: :model do
 
   describe "relationships" do
     it { should have_many :items}
-  end 
+  end
+
+  describe "instance methods " do
+    it "can find top five customers" do
+      merchant = 
+      expect(merchant)
+    end
+  end
 end
