@@ -1,3 +1,7 @@
 class Customer < ApplicationRecord
   has_many :invoices
-end 
+
+  def self.top_customers
+    joins(invoices: :transactions)
+  end
+end
