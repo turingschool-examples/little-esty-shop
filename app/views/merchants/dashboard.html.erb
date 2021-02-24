@@ -1,0 +1,12 @@
+<h1><%= @merchant.name %></h1>
+
+<header class="links">
+  <%= link_to "Items", "items" %>
+  <%= link_to "Invoices", "invoices" %>
+</header> <hr>
+<h3>Unshipped Items</h3>
+  <% @merchant.unshipped.each do |item| %>
+    <div id="unshipped-<%= item.name %>">
+      <b><%= item.name %></b>, Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <%= item.invoice_created %>
+    </div>
+  <% end %>
