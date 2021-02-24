@@ -3,4 +3,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/admins', to: 'admins#index'
+  # get '/admins', to: 'admins/merchants#index'
+  # get '/admins', to: 'admins#index'
+  resources :admins do
+    resources :merchants
+  end
 end
