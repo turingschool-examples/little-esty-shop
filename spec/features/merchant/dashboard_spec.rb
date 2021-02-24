@@ -31,9 +31,6 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
     @customer4 = @invoice_item4.invoice.customer
     @customer5 = @invoice_item5.invoice.customer
     @customer6 = @invoice_item6.invoice.customer
-
-    require "pry"; binding.pry
-    @customer = @invoice_item.invoice.customer.create({first_name: "Shopper1", last_name: "Sweet Name"})
   end
 
   it "Shows the name of my merchant" do
@@ -51,14 +48,35 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
   end
 
   it "Shows top 5 customers by successful transactions" do
+
     visit merchant_dashboard_path(@merchant1)
 
+    within("#top-customers") do
+      expect(page).to have_content(@customer.name)
+      expect(page).to have_content(@customer2.name)
+      expect(page).to have_content(@customer3.name)
+      expect(page).to have_content(@customer4.name)
+      expect(page).to have_content(@customer5.name)
+      expect(page).not_to have_content(@customer6.name)
 
+      expect(@customer5.name).to appear_before(@customer4.name)
+      expect(@customer4.name).to appear_before(@customer3.name)
+      expect(@customer3.name).to appear_before(@customer2.name)
+      expect(@customer2.name).to appear_before(@customer.name)
+    end
+
+    within("#customer-#{@customer5.id}") do
+      expect(page).to have_content("Successful Transactions: 10")
+    end
   end
 end
 
 
+# Merchant Dashboard Statistics - Favorite Customers
+#
 # As a merchant,
 # When I visit my merchant dashboard
-# Then I see link to my merchant items index (/merchant/merchant_id/items)
-# And I see a link to my merchant invoices index (/merchant/merchant_id/invoices)
+# Then I see the names of the top 5 customers
+# who have conducted the largest number of successful transactions with my merchant
+# And next to each customer name I see the number of successful transactions they have
+# conducted with my merchant
