@@ -16,7 +16,7 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_link("Invoices")
       click_link("Invoices")
       expect(current_path).to eq("/admin/invoices")
-
+    end
   describe 'As an Admin' do
     it 'I see a header indicating that I am on the admin dashboard' do
 
@@ -24,6 +24,7 @@ RSpec.describe 'Admin Dashboard' do
 
       expect(page).to have_content('Admin Dashboard')
     end
+  end
 
     xit 'I see names of top 5 customers with largest number of successful transactions' do
       c_1 = Customer.create!(first_name: "Alessandra", last_name: "Ward")
