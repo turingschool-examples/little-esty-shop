@@ -15,6 +15,10 @@ RSpec.describe"As an admin" do
 			expect(page).to have_link "Admin Invoices Index"
 		end
 
+		it"shows the top 5 customers and their number of transactions"do
+			visit "/admin"
+		end
+
 	end
 	describe"when I click on the index links"do
 
