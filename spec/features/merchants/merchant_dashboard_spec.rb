@@ -11,9 +11,11 @@ RSpec.describe 'Merchant Dashboard' do
 
     expect(page).to have_content("#{@mer_1.name}")
   end
+
+  it "shows links to the merchant's items and invoices index" do
+    visit merchant_dashboard_index_path(@mer_1)
+
+    expect(page).to have_link(merchant_items_path(@mer_1))
+    expect(page).to have_link(merchant_invoices_path(@mer_1))
+  end
 end
-
-
-# As a merchant,
-# When I visit my merchant dashboard (/merchant/merchant_id/dashboard)
-# Then I see the name of my merchant
