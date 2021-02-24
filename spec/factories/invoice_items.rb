@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :invoice_item do
-    item { nil }
-    invoice { nil }
+    item 
+    invoice 
     quantity { 1 }
     unit_price { 1 }
-    status { "MyString" }
+    status { 0 }
   end
 end
