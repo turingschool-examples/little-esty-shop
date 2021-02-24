@@ -3,4 +3,5 @@ class Transaction < ApplicationRecord
                         :result
 
   belongs_to :invoice
+  # has_many :customers, through: 
 end
