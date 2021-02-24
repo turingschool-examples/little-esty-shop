@@ -1,7 +1,7 @@
 require "csv"
 
 namespace :csv_load do
-  desc "Seed data.csv from db/csv_seeds to database table"
+  desc "Seed data.csv from db/data to database table"
   task merchants: :environment do
     CSV.foreach('db/data/merchants.csv', headers: true) do |row|
       Merchant.create!({
