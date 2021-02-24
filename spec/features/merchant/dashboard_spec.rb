@@ -2,26 +2,12 @@ require "rails_helper"
 
 RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
   before :each do
-    @merchant = create(:merchant, id: 3000)
-    @customer = create(:customer, id: 1000)
-    @invoice = create(:invoice, id: 2000, customer_id: 1000)
-    @transaction = create(:transaction, invoice_id: 2000)
-    @item = create(:item, id: 4000, merchant_id: 3000)
-    @invoice_item = create(:invoice_item, item_id: 4000, invoice_id: 2000)
-
-    # @customer2 = create(:customer, id: 1001)
-    # @customer3 = create(:customer, id: 1002)
-    # @customer4 = create(:customer, id: 1003)
-    # @customer5 = create(:customer, id: 1004)
-    # @customer6 = create(:customer, id: 1005)
-    # @invoices1 = create_list(:invoice, 10, customer_id: 1000)
-    # @invoices2 = create_list(:invoice, 10, customer_id: 1000)
-    # @transactions = create_list(:transaction, 10)
-
+    @invoice_item = create(:invoice_item_with_invoices, invoice_count: 10)
+    @invoice_item2 = create(:invoice_item_with_items, invoice_count: 10)
+    require "pry"; binding.pry
   end
 
   it "Shows the name of my merchant" do
-    binding.pry
     visit merchant_dashboard_index_path(@merchant1)
 
     expect(page).to have_content(@merchant1.name)
