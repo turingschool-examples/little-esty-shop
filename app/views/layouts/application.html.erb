@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <% if params["controller"]=="admins" %>
+    <% if params["controller"].include? "admin/" %>
       <h1 id="admin-header">Admin Dashboard</h1>
     <% end %>
     <%= yield %>
