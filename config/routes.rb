@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :admin
+  resources :admin_merchants
+  resources :admin_invoices
 end
+
