@@ -15,16 +15,14 @@ RSpec.describe "Merchant Items Index Page" do
                                     unit_price: 150.00)
 
 
-        visit "/merchant/#{merchant.id}/items"
+      visit "/merchant/#{merchant.id}/items"
 
-        within("#merchant-items") do
-          expect(page).to have_content(item1.name)
-          expect(page).to have_content(item2.name)
-          expect(page).to have_content(item3.name)
-          expect(page).to_not have_content(item4.name)
-        end
+      within("#merchant-items") do
+        expect(page).to have_content(item1.name)
+        expect(page).to have_content(item2.name)
+        expect(page).to have_content(item3.name)
+        expect(page).to_not have_content(item4.name)
       end
     end
+  end
 end
-
-# And I do not see items for any other merchant
