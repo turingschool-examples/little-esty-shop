@@ -1,12 +1,15 @@
-<h1><%= @merchant.name %></h1>
-
-<header class="links">
-  <%= link_to "Items", "items" %>
-  <%= link_to "Invoices", "invoices" %>
+<header>
+  <h1><%= @merchant.name %></h1>
+  <div class="links">  
+    <%= link_to "Items", "items" %>
+    <%= link_to "Invoices", "invoices" %>
+  </div>
 </header> <hr>
 <h3>Unshipped Items</h3>
   <% @merchant.unshipped.each do |item| %>
     <div id="unshipped-<%= item.name %>">
-      <b><%= item.name %></b>, Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <%= item.invoice_created %>
+      <b><%= item.name %></b>, <br> 
+      Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <i><%= item.invoice_created.strftime('%A, %b %d, %Y') %></i> 
+      <hr>
     </div>
   <% end %>

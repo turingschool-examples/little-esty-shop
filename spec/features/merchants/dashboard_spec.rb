@@ -31,21 +31,20 @@ RSpec.describe "When I visit a Merchant's dashboard", type: :feature do
 # In that section I see a list of the names of all of my items that
 # have been ordered and have not yet been shipped,
   scenario "I see items ready to ship with the corresponding 8" do
+    expected_time = @inv1.created_at.strftime('%A, %b %d, %Y')
     visit "/merchants/#{@joe.id}/dashboard"
 
     within("#unshipped-#{@item1.name}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@inv1.id)
-      expect(page).to have_content(@inv1.created_at)
+      expect(page).to have_content(expected_time)
     end
     within("#unshipped-#{@item2.name}") do
       expect(page).to have_content(@item2.name)
       expect(page).to have_content(@inv1.id)
-      expect(page).to have_content(@inv1.created_at)
+      expect(page).to have_content(expected_time)
     end
 
     expect(page).to_not have_css("#unshipped-#{@item3.id}")
   end
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
 end

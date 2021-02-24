@@ -6,5 +6,6 @@ class Merchant < ApplicationRecord
     .select('invoices.id as invoice_id, invoices.created_at as invoice_created, name')
     .where.not('invoice_items.status = ?', 2)
     .distinct
+    .order('invoices.created_at DESC')
   end
 end
