@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources:merchant do
+# get '/merchant', to: 'merchants#dashboard'
+  resources:merchants, module: :merchant do
     resources:dashboard, only: [:index]
+    resources:items
+    resources:invoices
   end
 end
