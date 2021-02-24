@@ -1,6 +1,5 @@
 require 'csv'
 require 'rake'
-# Dir["./app/models/*.rb"].each {|file| require file }
 
 namespace :csv_load do
   desc "load merchant database"

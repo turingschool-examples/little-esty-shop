@@ -1,0 +1,12 @@
+<header>
+  <h1>Admin Dashboard</h1>
+  <p><%= link_to :Merchants, "/admin/merchants" %> | <%= link_to :Invoices, "/admin/invoices" %></p>
+</header>
+<section class="top_customers"><h2> Top 5 Customers</h2>
+  <% @top_five_customers.each do |customer| %>
+    <div id="customer_id_<%= customer.id %>">
+      <p>Name: <%= "#{customer.first_name} #{customer.last_name}" %><br>
+      Number of successful transactions: <%= customer.transaction_count %></p>
+    </div>
+  <%end%>
+</section>
