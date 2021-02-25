@@ -4,7 +4,6 @@ RSpec.describe 'Admin Dashboard' do
   describe 'When I visit the admin dashboard (/admin)' do
     it 'Then I see a link to the admin merchants index (/admin/merchants)' do
       visit "/admin"
-      save_and_open_page
       expect(page).to have_link("Merchants")
       click_link("Merchants")
       expect(current_path).to eq("/admin/merchants")
@@ -16,31 +15,32 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_link("Invoices")
       click_link("Invoices")
       expect(current_path).to eq("/admin/invoices")
+    end
 
-  describe 'As an Admin' do
     it 'I see a header indicating that I am on the admin dashboard' do
 
-      visit admin_index_path
+      visit "/admin"
 
       expect(page).to have_content('Admin Dashboard')
     end
 
-    xit 'I see names of top 5 customers with largest number of successful transactions' do
-      c_1 = Customer.create!(first_name: "Alessandra", last_name: "Ward")
-      c_2 = Customer.create!(first_name: "Tremayne", last_name: "Zieme")
-      c_3 = Customer.create!(first_name: "Sylvester", last_name: "Nader")
-      c_4 = Customer.create!(first_name: "Demarcus", last_name: "King")
-      c_5 = Customer.create!(first_name: "Dejon", last_name: "Fadel")
-      c_6 = Customer.create!(first_name: "Dell", last_name: "Ernser")
+    it 'I see names of top 5 customers with largest number of successful transactions' do
+      c_1 = create(:customer)
+      c_2 = create(:customer)
+      c_3 = create(:customer)
+      c_4 = create(:customer)
+      c_5 = create(:customer)
+      c_6 = create(:customer)
 
-      inv_1 = Invoice.create!(status: 3, customer_id: c_1.id)
-      inv_2 = Invoice.create!(status: 3, customer_id: c_2.id)
-      inv_3 = Invoice.create!(status: 3, customer_id: c_3.id)
-      inv_4 = Invoice.create!(status: 3, customer_id: c_4.id)
-      inv_5 = Invoice.create!(status: 3, customer_id: c_5.id)
-      inv_6 = Invoice.create!(status: 3, customer_id: c_6.id)
+      inv_1 = create(:invoice, status: 'completed')
+      inv_2 = create(:invoice, status: 'completed')
+      inv_3 = create(:invoice, status: 'completed')
+      inv_4 = create(:invoice, status: 'completed')
+      inv_5 = create(:invoice, status: 'completed')
+      inv_6 = create(:invoice, status: 'completed')
 
       t_1 = Transanction.create!(invoice_id: inv_1.id, result: successful)
+      binding.pry
       t_2 = Transanction.create!(invoice_id: inv_1.id, result: successful)
       t_3 = Transanction.create!(invoice_id: inv_3.id, result: successful)
       t_4 = Transanction.create!(invoice_id: inv_3.id, result: successful)
