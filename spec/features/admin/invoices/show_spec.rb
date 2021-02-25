@@ -1,9 +1,6 @@
 require 'rails_helper'
 
-describe 'When I visit the admin merchants (/admin/merchants)' do
-    #i need to creat items
-    #i need to merchants
-    #i need to create Itemmerchants
+describe 'When I visit the admin invoices (/admin/invoices)' do
     before (:each) do
       @invoice_1 = create(:invoice)
       @invoice_2 = create(:invoice)
@@ -32,12 +29,3 @@ describe 'When I visit the admin merchants (/admin/merchants)' do
     expect(page).to have_content("#{@invoice_1.id}")
   end
 end
-
-
-
-
-
-# As an admin,
-# When I visit the admin Invoices index ("/admin/invoices")
-# Then I see a list of all Invoice ids in the system
-# Each id links to the admin invoice show page
