@@ -9,20 +9,20 @@ RSpec.describe "admin dashboard" do
     @customer5 = Customer.create!(first_name: "First5", last_name: "Last5")
     @customer6 = Customer.create!(first_name: "First6", last_name: "Last6")
 
-    @invoice1 = @customer2.invoices.create!(status: 1)
-    @transaction1 = @invoice1.transactions.create!(result: 0)
     @invoice2 = @customer2.invoices.create!(status: 1)
     @transaction2 = @invoice2.transactions.create!(result: 0)
     @invoice3 = @customer3.invoices.create!(status: 1)
     @transaction3 = @invoice3.transactions.create!(result: 0)
-    @invoice4 = @customer4.invoices.create!(status: 2)
-    @transaction4 = @invoice4.transactions.create!(result: 0)
+    @invoice1 = @customer2.invoices.create!(status: 1)
+    @transaction1 = @invoice1.transactions.create!(result: 0)
+    @invoice7 = @customer5.invoices.create!(status: 1)
+    @transaction7 = @invoice7.transactions.create!(result: 0)
     @invoice5 = @customer4.invoices.create!(status: 1)
     @transaction5 = @invoice5.transactions.create!(result: 0)
     @invoice6 = @customer5.invoices.create!(status: 0)
     @transaction6 = @invoice6.transactions.create!(result: 0)
-    @invoice7 = @customer5.invoices.create!(status: 1)
-    @transaction7 = @invoice7.transactions.create!(result: 0)
+    @invoice4 = @customer4.invoices.create!(status: 2)
+    @transaction4 = @invoice4.transactions.create!(result: 0)
     @invoice8 = @customer5.invoices.create!(status: 1)
     @transaction8 = @invoice8.transactions.create!(result: 0)
     @invoice9 = @customer5.invoices.create!(status: 2)
@@ -90,36 +90,36 @@ RSpec.describe "admin dashboard" do
       end
     end
 
-    it "shows a list of all the incomplete invoices" do
+    it "shows a list of all the incomplete invoices in order of creation" do
       visit "/admin"
 
       within ".incomplete_invioces" do
-        expexct(@invoice1.id).to appear_before(@invoice2.id)
-        expexct(@invoice2.id).to appear_before(@invoice3.id)
-        expexct(@invoice3.id).to appear_before(@invoice4.id)
-        expexct(@invoice4.id).to appear_before(@invoice5.id)
-        expexct(@invoice5.id).to appear_before(@invoice6.id)
-        expexct(@invoice6.id).to appear_before(@invoice7.id)
+        expect("Invoice: #{@invoice2.id}").to appear_before("Invoice: #{@invoice3.id}")
+        expect("Invoice: #{@invoice3.id}").to appear_before("Invoice: #{@invoice1.id}")
+        expect("Invoice: #{@invoice1.id}").to appear_before("Invoice: #{@invoice7.id}")
+        expect("Invoice: #{@invoice7.id}").to appear_before("Invoice: #{@invoice5.id}")
+        expect("Invoice: #{@invoice5.id}").to appear_before("Invoice: #{@invoice6.id}")
+        expect("Invoice: #{@invoice6.id}").to appear_before("Invoice: #{@invoice8.id}")
       end
     end
 
     it "shows each invice id as a link and has the date next to it" do
       visit "/admin"
-
+save_and_open_page
       within ".incomplete_invioces" do
-        withing("invoice_id_#{@invoice1.id}") do
+        within("#invoice_id_#{@invoice1.id}") do
           expect(page).to have_link("#{@invoice1.id}")
-          expect(page).to have_content("Created at:#{@invoice1.created_at}")
+          expect(page).to have_content("Created at: #{@invoice1.created_at.strftime('%A, %b %d, %Y')}")
         end
 
-        withing("invoice_id_#{@invoice2.id}") do
+        within("#invoice_id_#{@invoice2.id}") do
           expect(page).to have_link("#{@invoice2.id}")
-          expect(page).to have_content("Created at:#{@invoice2.created_at}")
+          expect(page).to have_content("Created at: #{@invoice2.created_at.strftime('%A, %b %d, %Y')}")
         end
 
-        withing("invoice_id_#{@invoice3.id}") do
+        within("#invoice_id_#{@invoice3.id}") do
           expect(page).to have_link("#{@invoice3.id}")
-          expect(page).to have_content("Created at:#{@invoice3.created_at}")
+          expect(page).to have_content("Created at: #{@invoice3.created_at.strftime('%A, %b %d, %Y')}")
         end
       end
     end

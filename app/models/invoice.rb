@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
   def self.incomplete
     where.not(status: 2)
   end
+
+  def self.ordered_by_dated
+    order(:created_at)
+  end
 end
