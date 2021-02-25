@@ -19,23 +19,18 @@ describe 'Admin Merchant index page' do
   it 'should have update active button' do
     visit '/admin/merchants'
     within("div#merchant-#{@merchants[0].id}") do
-      click_button "Deactivate"
+      click_button "Enable"
     end
 
     expect(current_path).to eq(admin_merchants_path)
-    expect(page).to have_content("#{@merchants[0].name} is Inactive")
+    expect(page).to have_content("#{@merchants[0].name} is Enabled")
   end
 
-  # it 'Sees link to create new merchant' do
-  #   visit '/admin/merchants'
+  it 'Sees link to create new merchant' do
+    visit '/admin/merchants'
     
-  #   click_link 'Create New Merchant'
+    click_link 'Create New Merchant'
 
-  #   expect(current_path).to eq("/admin/merchants/new")
-
-  #   fill_in 'Name', with: "Cameras"
-
-  #   click_on 'Submit'
-
-  # end
+    expect(current_path).to eq("/admin/merchants/new")
+  end
 end
