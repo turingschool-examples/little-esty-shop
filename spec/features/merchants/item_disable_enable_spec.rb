@@ -17,27 +17,24 @@ RSpec.describe "Merchant Item Disable/Enable" do
 
       within("#merchant-items") do
         expect(page).to have_content("Enabled Items")
+        expect(page).to have_content("Disabled Items")
         expect(page).to have_link(item1.name)
         expect(page).to have_link(item2.name)
         expect(page).to have_link(item3.name)
+        expect(page).to have_link(item4.name)
         expect(page).to have_button("Disable")
       end
-      within("#item-#{item1.id}") do
+
+      within("#item-#{item1.id}", match: :first) do
         click_button("Disable")
 
         expect(current_path).to eq("/merchant/#{merchant.id}/items")
-        expect(page).to have_content("Disabled Items")
-        expect(page).to have_content("")
       end
-      save_and_open_page
 
+      expect(page).to have_content("Disabled Items")
       expect(item2.name).to appear_before(item1.name)
       expect(item3.name).to appear_before(item1.name)
       expect(item1.name).to_not appear_before(item4.name)
     end
   end
 end
-
-# When I click this button
-# Then I am redirected back to the items index
-# And I see that the items status has changed
