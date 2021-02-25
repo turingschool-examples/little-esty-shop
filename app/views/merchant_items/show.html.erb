@@ -7,3 +7,6 @@
     Current Price: $<%= @item.unit_price %>
   </p>
 </section>
+<section id="update-link">
+  <%= link_to "Update Item", merchant_item_edit_path(@merchant, @item), method: :get %>  
+</section>
