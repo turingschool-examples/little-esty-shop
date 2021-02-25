@@ -1,7 +1,9 @@
 class MerchantItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
-    @items = @merchant.items
+    # @items = @merchant.items
+    @inactive_items = @merchant.items.inactive_items
+    @active_items = @merchant.items.active_items
   end
 
   def show
@@ -21,12 +23,16 @@ class MerchantItemsController < ApplicationController
     if item.save
       flash[:success] = "Item Successfully Updated"
 
-      redirect_to "/merchant/#{merchant.id}/items/#{item.id}"
+      redirect_to "/merchant/#{merchant.id}/items"
     end
   end
 
   private
   def item_params
-    params[:item].permit(:name, :description, :unit_price)
+    if params[:item]
+      params[:item].permit(:name, :description, :unit_price)
+    else
+      params.permit(:status)
+    end
   end
 end
