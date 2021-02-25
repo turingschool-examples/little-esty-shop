@@ -188,16 +188,7 @@ Then I see information related to that invoice including:
 - Invoice id
 - Invoice status
 - Invoice created_at date in the format "Monday, July 18, 2019"
-```
-
-```
-Merchant Invoice Show Page: Customer Information
-
-As a merchant
-When I visit my merchant invoice show page
-Then I see all of the customer information related to that invoice including:
-- Customer First and last name
-- Shipping Address
+- Customer first and last name
 ```
 
 ```
@@ -403,16 +394,7 @@ Then I see information related to that invoice including:
 - Invoice id
 - Invoice status
 - Invoice created_at date in the format "Monday, July 18, 2019"
-```
-
-```
-Admin Invoice Show Page: Customer Information
-
-As an admin
-When I visit an admin invoice show page
-Then I see all of the customer information related to that invoice including:
-- Customer First and last name
-- Shipping Address
+- Customer first and last name
 ```
 
 ```
