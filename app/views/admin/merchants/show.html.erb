@@ -1,0 +1,6 @@
+<h1>Merchant Info</h1>
+
+  <h2>Name: <%= @merchant.name %></h2>
+
+
+  <h2><%= button_to "Update Merchant", "/admin/merchants/#{@merchant.id}/edit", method: :get, local: true %></h2>
