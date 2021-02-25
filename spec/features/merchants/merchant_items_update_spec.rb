@@ -35,8 +35,9 @@ RSpec.describe "Merchant Item Update" do
         fill_in("item[name]", with: "Diamond Ring")
         fill_in("item[description]", with: "Shine like diamonds")
         fill_in("item[unit_price]", with: 5000.00)
+
+        click_button("Update")
       end
-      click_button("Update")
 
       expect(current_path).to eq("/merchant/#{merchant.id}/items/#{item1.id}")
       expect(page).to have_content("Item Successfully Updated")

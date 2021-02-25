@@ -16,7 +16,7 @@ RSpec.describe "Merchant Items Show Page" do
 
       visit "/merchant/#{merchant.id}/items"
 
-      click_link("Gold Ring")
+      click_link("Gold Ring", match: :first)
 
       expect(current_path).to eq("/merchant/#{merchant.id}/items/#{item1.id}")
 
