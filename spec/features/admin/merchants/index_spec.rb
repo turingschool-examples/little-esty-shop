@@ -25,4 +25,17 @@ describe 'Admin Merchant index page' do
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content("#{@merchants[0].name} is Inactive")
   end
+
+  # it 'Sees link to create new merchant' do
+  #   visit '/admin/merchants'
+    
+  #   click_link 'Create New Merchant'
+
+  #   expect(current_path).to eq("/admin/merchants/new")
+
+  #   fill_in 'Name', with: "Cameras"
+
+  #   click_on 'Submit'
+
+  # end
 end
