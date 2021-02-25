@@ -1,0 +1,10 @@
+<h2>Items Ready to Ship</h2>
+
+<section class="items-ready">
+  <% merchant.items_not_shipped.each do |item| %>
+    <div id="item-<%= item.id %>">
+      <h4><%= item.name %></h4>
+      <%= link_to "#{item.invoice_id}", "/merchants/#{merchant.id}/invoices/#{item.invoice_id}" %>
+    </div>
+  <% end %>
+</section>

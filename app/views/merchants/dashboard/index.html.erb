@@ -1,4 +1,5 @@
 <h1><%= @merchant.name %></h1>
 <%= link_to "#{@merchant.name}'s Items Index", merchant_items_path(@merchant) %>
 <%= link_to "#{@merchant.name}'s Invoices Index", merchant_invoices_path(@merchant) %>
-<%= render partial: 'customers', locals: { merchant: @merchant, items: @merchant.items } %>
+<%= render partial: 'customers', locals: { merchant: @merchant } %>
+<%= render partial: 'items_ready', locals: { merchant: @merchant } %>
