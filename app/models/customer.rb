@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
 
-  def self.top_customers
+  def self.five_top_customers_by_transactions
     Customer.joins(invoices: :transactions)
     .where('result = ?', "success")
     .select("customers.*, count('transactions.result') AS successful_transactions")

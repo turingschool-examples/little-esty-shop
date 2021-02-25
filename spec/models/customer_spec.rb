@@ -6,7 +6,7 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'class methods' do
-    describe '::top_customers' do
+    describe '::five_top_customers_by_transactions' do
       it 'returns the top 5 customers with largest number of successful transactions' do
         # Diana needs to review this test, make sure it still covers what it needs. D.
         inv_1 = create(:invoice, status: 'completed')
@@ -33,7 +33,7 @@ RSpec.describe Customer, type: :model do
         t_15 = Transaction.create!(invoice_id: inv_4.id, result: 'success')
         t_15 = Transaction.create!(invoice_id: inv_4.id, result: 'failed')
 
-        top5 = Customer.top_customers
+        top5 = Customer.five_top_customers_by_transactions
 
         expect(top5.length).to eq(5)
       end

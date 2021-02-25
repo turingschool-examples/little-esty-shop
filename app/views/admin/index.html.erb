@@ -1,7 +1,7 @@
 <h2>Admin Dashboard</h2>
 
 <a href="/admin/merchants">Merchants</a>
-<a href="/admin/invoices">Invoices</a> 
+<a href="/admin/invoices">Invoices</a>
 
 <section>Incomplete Invoices</section>
 <% @invoices.incomplete.each do |incomplete| %>
@@ -12,10 +12,10 @@
 
 <section>Top Customers</section>
 
-<% @customers.top_customers.each do |top_customer| %>
+<% @customers.five_top_customers_by_transactions.each do |five_top_customers_by_transactions| %>
   <ul>
-    <li><%= top_customer.first_name %> <%= top_customer.last_name %>
+    <li><%= five_top_customers_by_transactions.first_name %> <%= five_top_customers_by_transactions.last_name %>
 
-       successful transactions: <%= top_customer.successful_transactions %></li>
+       successful transactions: <%= five_top_customers_by_transactions.successful_transactions %></li>
   </ul>
 <% end %>
