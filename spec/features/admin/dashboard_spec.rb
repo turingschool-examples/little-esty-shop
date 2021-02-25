@@ -23,47 +23,5 @@ RSpec.describe 'Admin Dashboard' do
 
       expect(page).to have_content('Admin Dashboard')
     end
-
-    it 'I see names of top 5 customers with largest number of successful transactions' do
-      c_1 = create(:customer)
-      c_2 = create(:customer)
-      c_3 = create(:customer)
-      c_4 = create(:customer)
-      c_5 = create(:customer)
-      c_6 = create(:customer)
-
-      inv_1 = create(:invoice, status: 'completed')
-      inv_2 = create(:invoice, status: 'completed')
-      inv_3 = create(:invoice, status: 'completed')
-      inv_4 = create(:invoice, status: 'completed')
-      inv_5 = create(:invoice, status: 'completed')
-      inv_6 = create(:invoice, status: 'completed')
-
-      t_1 = Transanction.create!(invoice_id: inv_1.id, result: successful)
-      binding.pry
-      t_2 = Transanction.create!(invoice_id: inv_1.id, result: successful)
-      t_3 = Transanction.create!(invoice_id: inv_3.id, result: successful)
-      t_4 = Transanction.create!(invoice_id: inv_3.id, result: successful)
-      t_5 = Transanction.create!(invoice_id: inv_3.id, result: successful)
-      t_6 = Transanction.create!(invoice_id: inv_3.id, result: successful)
-      t_7 = Transanction.create!(invoice_id: inv_2.id, result: successful)
-      t_8 = Transanction.create!(invoice_id: inv_4.id, result: successful)
-      t_9 = Transanction.create!(invoice_id: inv_4.id, result: successful)
-      t_10 = Transanction.create!(invoice_id: inv_5.id, result: successful)
-      t_11 = Transanction.create!(invoice_id: inv_5.id, result: successful)
-      t_12 = Transanction.create!(invoice_id: inv_5.id, result: successful)
-      t_13 = Transanction.create!(invoice_id: inv_4.id, result: successful)
-      t_14 = Transanction.create!(invoice_id: inv_4.id, result: successful)
-      t_15 = Transanction.create!(invoice_id: inv_4.id, result: successful)
-
-      visit admin_index_path
-
-      expect(page).to have_content('Top Customers')
-      expect("Demarcus King").to appear_before("Sylvester Nader")
-      expect("Sylvester Nader").to appear_before("Dejon Fadel")
-      expect("Dejon Fadel").to appear_before("Alessandra Ward")
-      expect("Alessandra Ward").to appear_before("Tremayne Zieme")
-      expect(page).to_not have_content("Dell Ernser")
-    end
   end
 end
