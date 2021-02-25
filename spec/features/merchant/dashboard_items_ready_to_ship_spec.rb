@@ -50,11 +50,3 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
     end
   end
 end
-
-#   As a merchant
-# When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
