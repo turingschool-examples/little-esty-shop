@@ -14,4 +14,10 @@ class Merchant < ApplicationRecord
       .select('customers.*, count(*) AS transaction_count')
       .order('transaction_count DESC').limit(5)
   end
+
+  def items_not_shipped
+    items.joins(:invoice_items)
+    .where('status != ?', 2)
+    .select('items.*, invoice_items.invoice_id AS invoice_id')
+  end
 end
