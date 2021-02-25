@@ -16,7 +16,8 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_link("Invoices")
       click_link("Invoices")
       expect(current_path).to eq("/admin/invoices")
-
+    end
+  end
   describe 'As an Admin' do
     it 'I see a header indicating that I am on the admin dashboard' do
 
