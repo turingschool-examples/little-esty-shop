@@ -71,6 +71,22 @@ RSpec.describe "Merchant Dashboard" do
       
    end
 
+   xit "shows all items ready to ship" do 
+    visit "/merchant/#{@merchant.id}/dashboard"
+    # @item2 = create(:item, merchant: @merchant)
+    # @item3 = create(:item, merchant: @merchant)
+    # @item4 = create(:item, merchant: @merchant)
+    # @item5 = create(:item, merchant: @merchant)
+
+    # binding.pry
+    # Invoice.joins(:items)
+            #  .where('merchant_id = ?', 5)
+            #  .where.not('invoice_items.status = ?', 2)
+            #  .select("items.name, invoices.id, invoices.created_at")
+    
+    
+   end
+
     xit "and I click on the My Items link it takes me to that merchants items page" do 
       visit "/merchant/#{@merchant.id}/dashboard"
 
