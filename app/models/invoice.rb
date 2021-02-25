@@ -5,4 +5,8 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: [ :cancelled, :'in progress', :completed ]
+
+  def self.incomplete
+    where.not(status: 2)
+  end
 end
