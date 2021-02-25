@@ -1,0 +1,10 @@
+<h1><%= @item.name %></h1>
+
+<body>
+  <section id="item-details">
+    <p>
+      Description: <%= @item.description %></p><br>
+      Current Price: $<%=sprintf("%.2f",(@item.unit_price)) %>
+    </p>
+  </section>
+</body>

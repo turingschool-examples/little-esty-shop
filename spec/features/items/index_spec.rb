@@ -4,7 +4,6 @@ RSpec.describe "Merchant Item Index Page" do
   before(:each) do
     @merchant = create(:merchant)
     @merchant2 = create(:merchant)
-    @test_item = create(:item)
     
     create_list(:item, 5, merchant:  @merchant)
     create_list(:item, 5, :merchant => @merchant2)
