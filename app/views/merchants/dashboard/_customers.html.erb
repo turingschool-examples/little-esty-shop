@@ -1,3 +1,9 @@
 <section id="top-customers">
-  <% merchant.find_top_customers %>
+  <% merchant.find_top_customers.each do |customer| %>
+    <div id="customer-<%= customer.id %>">
+    <h3><%= customer.first_name %>
+    <%= customer.last_name %></h3>
+    <h5>Successful Transactions: <%= customer.transaction_count %></h5><br>
+    </div>
+  <% end %>
 </section>

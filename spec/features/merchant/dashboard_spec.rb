@@ -47,37 +47,27 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
     expect(page).to have_link("#{@merchant1.name}'s Invoices Index")
   end
 
-  # it "Shows top 5 customers by successful transactions" do
-  #
-  #   visit merchant_dashboard_path(@merchant1)
-  #
-  #   within("#top-customers") do
-  #     expect(page).to have_content(@customer.name)
-  #     expect(page).to have_content(@customer2.name)
-  #     expect(page).to have_content(@customer3.name)
-  #     expect(page).to have_content(@customer4.name)
-  #     expect(page).to have_content(@customer5.name)
-  #     expect(page).not_to have_content(@customer6.name)
-  #
-  #     expect(@customer5.name).to appear_before(@customer4.name)
-  #     expect(@customer4.name).to appear_before(@customer3.name)
-  #     expect(@customer3.name).to appear_before(@customer2.name)
-  #     expect(@customer2.name).to appear_before(@customer.name)
-  #   end
-  #
-  #   within("#customer-#{@customer5.id}") do
-  #     expect(page).to have_content("Successful Transactions: 10")
-  #   end
-  # end
+  it "Shows top 5 customers by successful transactions" do
+
+    visit merchant_dashboard_path(@merchant1)
+    save_and_open_page
+
+    within("#top-customers") do
+      expect(page).to have_content(@customer.first_name)
+      expect(page).to have_content(@customer2.first_name)
+      expect(page).to have_content(@customer3.first_name)
+      expect(page).to have_content(@customer4.first_name)
+      expect(page).to have_content(@customer5.first_name)
+      expect(page).not_to have_content(@customer6.first_name)
+
+      expect(@customer5.first_name).to appear_before(@customer4.first_name)
+      expect(@customer4.first_name).to appear_before(@customer3.first_name)
+      expect(@customer3.first_name).to appear_before(@customer2.first_name)
+      expect(@customer2.first_name).to appear_before(@customer.first_name)
+    end
+
+    within("#customer-#{@customer5.id}") do
+      expect(page).to have_content("Successful Transactions: 10")
+    end
+  end
 end
-
-# Merchant Dashboard Statistics - Favorite Customers
-#
-# As a merchant,
-# When I visit my merchant dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions with my merchant
-
-
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant

@@ -8,6 +8,10 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def find_top_customers
-    # require "pry"; binding.pry
+    customers.joins(:invoices, :transactions)
+      .where('transactions.result = ?', "success")
+      .group('customers.id')
+      .select('customers.*, count(*) AS transaction_count')
+      .order('transaction_count DESC').limit(5)
   end
 end
