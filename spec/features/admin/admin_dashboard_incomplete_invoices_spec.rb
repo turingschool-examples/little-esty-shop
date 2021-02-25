@@ -5,13 +5,13 @@ describe 'When I visit the admin dashboard (/admin)' do
     #i need to invoices
     #i need to create ItemInvoices
     before (:each) do
-      @invoice_1 = create(:invoice, status: 'in progress')
-      @invoice_2 = create(:invoice, status: 'in progress')
-      @invoice_3 = create(:invoice, status: 'cancelled')
-      @invoice_4 = create(:invoice, status: 'completed')
-      @invoice_5 = create(:invoice, status: 'completed')
-      @invoice_6 = create(:invoice, status: 'completed')
-      @invoice_7 = create(:invoice, status: 'cancelled')
+      @invoice_1 = create(:invoice, status: 0)
+      @invoice_2 = create(:invoice, status: 0)
+      @invoice_3 = create(:invoice, status: 2)
+      @invoice_4 = create(:invoice, status: 1)
+      @invoice_5 = create(:invoice, status: 1)
+      @invoice_6 = create(:invoice, status: 1)
+      @invoice_7 = create(:invoice, status: 2)
     end
 
   it 'Then I see a section for "Incomplete Invoices"' do

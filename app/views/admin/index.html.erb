@@ -1,7 +1,7 @@
 <h2>Admin Dashboard</h2>
 
 <a href="/admin/merchants">Merchants</a>
-<a href="/admin/invoices">Invoices</a>
+<a href="/admin/invoices">Invoices</a> 
 
 <section>Incomplete Invoices</section>
 <% @invoices.incomplete.each do |incomplete| %>
@@ -11,3 +11,11 @@
 <% end  %>
 
 <section>Top Customers</section>
+
+<% @customers.top_customers.each do |top_customer| %>
+  <ul>
+    <li><%= top_customer.first_name %> <%= top_customer.last_name %>
+
+       successful transactions: <%= top_customer.successful_transactions %></li>
+  </ul>
+<% end %>

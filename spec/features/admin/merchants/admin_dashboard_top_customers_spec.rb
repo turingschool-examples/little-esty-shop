@@ -3,21 +3,20 @@ require 'rails_helper'
 RSpec.describe 'Admin Dashboard' do
   describe 'When I visit the admin dashboard (/admin)' do
     it 'I see names of top 5 customers with largest number of successful transactions' do
-      # looks like creating the invoice created customers, confirm and change test accordingly.
 
-      c_1 = create(:customer)
-      c_2 = create(:customer)
-      c_3 = create(:customer)
-      c_4 = create(:customer)
-      c_5 = create(:customer)
-      c_6 = create(:customer)
+      c_1 = create(:customer, first_name: "Minnie")
+      c_2 = create(:customer, first_name: "Lloyd")
+      c_3 = create(:customer, first_name: "Hector")
+      c_4 = create(:customer, first_name: "Andrea")
+      c_5 = create(:customer, first_name: "Fred")
+      c_6 = create(:customer, first_name: "Payton")
 
-      inv_1 = create(:invoice, status: 'completed')
-      inv_2 = create(:invoice, status: 'completed')
-      inv_3 = create(:invoice, status: 'completed')
-      inv_4 = create(:invoice, status: 'completed')
-      inv_5 = create(:invoice, status: 'completed')
-      inv_6 = create(:invoice, status: 'completed')
+      inv_1 = create(:invoice, status: 'completed', customer_id: c_1.id)
+      inv_2 = create(:invoice, status: 'completed', customer_id: c_2.id)
+      inv_3 = create(:invoice, status: 'completed', customer_id: c_3.id)
+      inv_4 = create(:invoice, status: 'completed', customer_id: c_4.id)
+      inv_5 = create(:invoice, status: 'completed', customer_id: c_5.id)
+      inv_6 = create(:invoice, status: 'completed', customer_id: c_6.id)
 
       t_1 = Transaction.create!(invoice_id: inv_1.id, result: 'success')
       t_2 = Transaction.create!(invoice_id: inv_1.id, result: 'success')
@@ -34,6 +33,11 @@ RSpec.describe 'Admin Dashboard' do
       t_13 = Transaction.create!(invoice_id: inv_4.id, result: 'success')
       t_14 = Transaction.create!(invoice_id: inv_4.id, result: 'success')
       t_15 = Transaction.create!(invoice_id: inv_4.id, result: 'success')
+      t_16 = Transaction.create!(invoice_id: inv_4.id, result: 'failed')
+      t_17 = Transaction.create!(invoice_id: inv_4.id, result: 'failed')
+      t_18 = Transaction.create!(invoice_id: inv_4.id, result: 'success')
+      t_19 = Transaction.create!(invoice_id: inv_6.id, result: 'success')
+      t_20 = Transaction.create!(invoice_id: inv_6.id, result: 'success')
 
       visit "/admin"
 
