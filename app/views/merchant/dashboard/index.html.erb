@@ -1,3 +1,7 @@
 <%= @merchant.name %>
 <%= link_to merchant_items_path(@merchant.id) %>
 <%= link_to merchant_invoices_path(@merchant.id) %>
+<br>
+<% @merchant.top_five_customers.each do |customer| %>
+  <%= "Name: #{customer.first_name} #{customer.last_name}, Successful Transactions:#{customer.count_of_success}" %><br>
+<% end  %>
