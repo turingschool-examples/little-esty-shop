@@ -1,0 +1,5 @@
+<%= form_with url: admin_merchant_path(@merchant), method: :patch do |f| %>
+  <%= f.label :name, "Name: "%>
+  <%= f.text_field :name %>
+  <%= f.submit "Submit" %>
+<% end %>

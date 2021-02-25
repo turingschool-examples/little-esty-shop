@@ -12,4 +12,11 @@ describe 'Admin Merchant Show Page' do
 
     expect(page).to have_content(@merchant.name)
   end
+
+  it 'has link to update merchant' do
+    visit "/admin/merchants/#{@merchant.id}"
+
+    click_link "Update"
+    expect(current_path).to eq("/admin/mechants/#{@merchant.id}/edit")
+  end
 end

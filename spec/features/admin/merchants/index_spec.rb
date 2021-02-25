@@ -15,4 +15,14 @@ describe 'Admin Merchant index page' do
     expect(page).to have_content(@merchants[4].name)
     expect(page).to have_content(@merchants[5].name)
   end
+
+  it 'should have update active button' do
+    visit '/admin/merchants'
+    within("div#merchant-#{@merchants[0].id}") do
+      click_button "Deactivate"
+    end
+
+    expect(current_path).to eq(admin_merchants_path)
+    expect(page).to have_content("#{@merchants[0].name} is Inactive")
+  end
 end

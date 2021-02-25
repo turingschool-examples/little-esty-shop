@@ -1,3 +1,6 @@
 <% @merchants.each do |merchant| %>
-  <%=link_to merchant.name, admin_merchant_path(merchant) %>
+  <div id=<%="merchant-#{merchant.id}"%> >
+    <%=link_to merchant.name, admin_merchant_path(merchant) %> is <%= merchant.status%><br>
+    <%=button_to "Deactivate", admin_merchant_path(merchant), method: :patch, params: {status: "Inactive"} %>
+  </div>
 <% end %>
