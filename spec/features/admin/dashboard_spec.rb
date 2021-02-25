@@ -56,7 +56,7 @@ RSpec.describe "admin dashboard" do
 
     it "shows the top 5 customers, and the number of transactions they have completed" do
       visit "/admin"
-      save_and_open_page
+
       within(".top_customers") do
         expect(@customer5.first_name).to appear_before(@customer6.first_name)
         expect(@customer6.first_name).to appear_before(@customer2.first_name)
@@ -86,6 +86,40 @@ RSpec.describe "admin dashboard" do
         within("#customer_id_#{@customer6.id}") do
           expect(page).to have_content("#{@customer6.first_name} #{@customer6.last_name}")
           expect(page).to have_content(3)
+        end
+      end
+    end
+
+    it "shows a list of all the incomplete invoices" do
+      visit "/admin"
+
+      within ".incomplete_invioces" do
+        expexct(@invoice1.id).to appear_before(@invoice2.id)
+        expexct(@invoice2.id).to appear_before(@invoice3.id)
+        expexct(@invoice3.id).to appear_before(@invoice4.id)
+        expexct(@invoice4.id).to appear_before(@invoice5.id)
+        expexct(@invoice5.id).to appear_before(@invoice6.id)
+        expexct(@invoice6.id).to appear_before(@invoice7.id)
+      end
+    end
+
+    it "shows each invice id as a link and has the date next to it" do
+      visit "/admin"
+
+      within ".incomplete_invioces" do
+        withing("invoice_id_#{@invoice1.id}") do
+          expect(page).to have_link("#{@invoice1.id}")
+          expect(page).to have_content("Created at:#{@invoice1.created_at}")
+        end
+
+        withing("invoice_id_#{@invoice2.id}") do
+          expect(page).to have_link("#{@invoice2.id}")
+          expect(page).to have_content("Created at:#{@invoice2.created_at}")
+        end
+
+        withing("invoice_id_#{@invoice3.id}") do
+          expect(page).to have_link("#{@invoice3.id}")
+          expect(page).to have_content("Created at:#{@invoice3.created_at}")
         end
       end
     end

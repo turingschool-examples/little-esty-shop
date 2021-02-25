@@ -16,7 +16,7 @@ RSpec.describe Invoice, type: :model do
       @invoice3 = @customer.invoices.create!(status: 2)
       @invoice4 = @customer.invoices.create!(status: 1)
 
-      expect(@customer.invoices.incomplete).to eq([@invoice1, @invoice2, @invoice4])
+      expect(Invoice.incomplete).to eq([@invoice1, @invoice2, @invoice4])
     end
   end
 end
