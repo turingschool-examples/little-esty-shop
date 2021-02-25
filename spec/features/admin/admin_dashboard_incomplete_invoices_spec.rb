@@ -14,7 +14,7 @@ describe 'When I visit the admin dashboard (/admin)' do
       @invoice_7 = create(:invoice, status: 2)
     end
 
-  it 'Then I see a section for "Incomplete Invoices"' do
+  it 'Then I see a section for "Incomplete Invoices"' do 
     visit "/admin"
 
     expect(page).to have_content("Incomplete Invoices")

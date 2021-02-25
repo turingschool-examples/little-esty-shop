@@ -1,0 +1,12 @@
+<h1><%= @merchant.name %>'s Items</h1>
+
+<body>
+  <section id="merchant-items-list">
+    <% @merchant.items.each do |item| %>
+      <div id="item-<%= item.id %>">
+        <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %></p>
+    <% end %>
+      </div>
+  </section>
+
+</body>

@@ -4,3 +4,15 @@
   <p><%= link_to "My Items", merchant_items_path(@merchant) %></p>
   <p><%= link_to "My Invoices", merchant_invoices_path(@merchant) %></p>
 </section>
+
+<section id="topFive">
+  <h2>Favorite Customers</h2>
+  <ol>
+    <% @top_five_cust.each do |cust| %>
+  
+    <li><%= "#{cust.first_name} #{cust.last_name} -" %>
+    <%= cust.successful_transactions %></li><br>
+  
+    <% end %> 
+  </ol>
+</section>
