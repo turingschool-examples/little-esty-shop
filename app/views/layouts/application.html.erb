@@ -14,6 +14,11 @@
     <% if params["controller"].include? "admin/" %>
       <h1 id="admin-header">Admin Dashboard</h1>
     <% end %>
+
+    <% flash.each do |type, message| %>
+      <p> <%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
