@@ -8,4 +8,15 @@ class Merchant < ApplicationRecord
     .distinct
     .order('invoices.created_at DESC')
   end
+
+  def customers
+    Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
+  end
+
+  def top_five_customers
+    customers.joins(invoices: :transactions).where('transactions.result = ?', 0)
+            .select('customers.*, count(invoices) as successful')
+            .group(:id).order(successful: :desc)
+            .limit(5)
+  end
 end
