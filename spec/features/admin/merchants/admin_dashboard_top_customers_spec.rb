@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Admin Dashboard' do
   describe 'When I visit the admin dashboard (/admin)' do
     it 'I see names of top 5 customers with largest number of successful transactions' do
+      # looks like creating the invoice created customers, confirm and change test accordingly.
+
       c_1 = create(:customer)
       c_2 = create(:customer)
       c_3 = create(:customer)
