@@ -1,6 +1,7 @@
 <h1>Invoices</h1>
 
 <% @invoices.each do |invoice| %>
-  <h2><%= invoice.customer_id %></h2>
-  <h2><%= invoice.status %></h2>
+<ul>
+  <a href="/admin/invoices/<%= invoice.id %>"><li>Invoice ID: <%= invoice.id %></li>
+</ul>
 <% end  %>

@@ -1,0 +1,6 @@
+
+<%= form_tag "/admin/merchants/#{@merchant.id}", method: :patch, local: true do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, @merchant.name %><br>
+  <%= submit_tag "Update Merchant" %>
+<% end %>
