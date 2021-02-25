@@ -5,13 +5,23 @@
     <%= link_to "Invoices", "invoices" %>
   </div>
 </header> <hr>
-<section class="card text-white bg-danger mb-3" style="max-width: 30rem;">
-  <h3 class="card-title">Unshipped Items</h3>
-  <% @merchant.unshipped.each do |item| %>
-  <div class="card-text" id="unshipped-<%= item.name %>">
-    <b><%= item.name %></b>, <br> 
-    Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <i><%= item.invoice_created.strftime('%A, %b %d, %Y') %></i> 
-    <hr>
+<body>
+  <div class="card text-white bg-danger mb-3" style="max-width: 30rem;">
+    <h3 class="card-title">Unshipped Items</h3>
+    <% @merchant.unshipped.each do |item| %>
+    <div class="card-text" id="unshipped-<%= item.name %>">
+      <b><%= item.name %></b>, <br> 
+      Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <i><%= item.invoice_created.strftime('%A, %b %d, %Y') %></i> 
+      <hr>
+    </div>
+    <% end %>
   </div>
-  <% end %>
-</section>
+  <div class="card text-white bg-info mb-3" id="top-five" style="max-width: 30rem; align">
+    <h3 class="card-title">Top Five Customers</h3><hr>
+    <% @merchant.top_five_customers.each do |c| %>
+      <div class="card-text" id="customer-<%= c.id %>">
+        <%= c.first_name %> <%= c.last_name %>, <%= c.successful %> Transactions
+      </div>
+    <% end %>
+  </div>
+  </body>
