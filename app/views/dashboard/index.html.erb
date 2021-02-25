@@ -7,6 +7,12 @@
 
 <section id="topFive">
   <h2>Favorite Customers</h2>
-  <% @top_five_cust.each do |cust| %>
-  <% end %> 
+  <ol>
+    <% @top_five_cust.each do |cust| %>
+  
+    <li><%= "#{cust.first_name} #{cust.last_name} -" %>
+    <%= cust.successful_transactions %></li><br>
+  
+    <% end %> 
+  </ol>
 </section>
