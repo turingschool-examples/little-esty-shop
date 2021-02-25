@@ -49,7 +49,9 @@ RSpec.describe Merchant, type: :model do
       it "Should return top 5 based on successful transactions" do
         expect(@merchant1.find_top_customers).to eq([@customer5, @customer4, @customer3, @customer2, @customer])
       end
-      it "Shows the number of successful transactions"
+      it "Shows the number of successful transactions" do
+        expect(@merchant1.find_top_customers.first.transaction_count).to eq(10)
+      end
     end
   end
 end

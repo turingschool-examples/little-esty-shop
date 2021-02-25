@@ -50,7 +50,6 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
   it "Shows top 5 customers by successful transactions" do
 
     visit merchant_dashboard_path(@merchant1)
-    save_and_open_page
 
     within("#top-customers") do
       expect(page).to have_content(@customer.first_name)
