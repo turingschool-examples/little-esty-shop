@@ -15,7 +15,8 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.update(merchant_params)
+    @merchant = Merchant.find(params[:id])
+    @merchant.update(merchant_params)
     if params[:status]
       redirect_to admin_merchants_path
     else
