@@ -5,6 +5,7 @@
     Created at: <%= @invoice.created_at.strftime('%A, %b %d, %Y') %>
   </p>
 </div>
+
 <div class="customer_info">
   <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
 </div>
@@ -19,4 +20,10 @@
     </p>
   </div>
   <% end %>
+</div>
+
+<div class="total_revenue">
+    <p>
+      Total: $<%= "#{@invoice.total_revenue}".ljust(4, '0') %>
+    </p>
 </div>
