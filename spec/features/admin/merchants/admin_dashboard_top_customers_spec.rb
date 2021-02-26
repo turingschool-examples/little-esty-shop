@@ -40,7 +40,7 @@ RSpec.describe 'Admin Dashboard' do
       t_20 = Transaction.create!(invoice_id: inv_6.id, result: 'success')
 
       visit "/admin"
-# save_and_open_page
+
       expect(page).to have_content('Top Customers')
       expect("#{c_4.first_name} #{c_4.last_name}").to appear_before("#{c_3.first_name} #{c_3.last_name}")
       expect("#{c_3.first_name} #{c_3.last_name}").to appear_before("#{c_5.first_name} #{c_5.last_name}")
