@@ -10,4 +10,10 @@ RSpec.describe "When I visit an Admin Merchants Show Page" do
 
     expect(page).to have_content(@joe.name)
   end
+
+  scenario "I see a link to update that merchants information" do
+    visit "/admin/merchants/#{@joe.id}"
+
+    expect(page).to have_link('Update Merchant', href: "/admin/merchants/#{@joe.id}/edit")
+  end
 end
