@@ -5,6 +5,19 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+  def new
+  end
+
+  def create
+    @merchant = Merchant.new(merchant_params)
+    if @merchant.save
+      flash[:notice] = "New merchant has been created!"
+      redirect_to "/admin/merchants"
+    else
+      flash[:notice] = "Unable to create merchant!"
+      render 'new'
+    end
+  end
 
   def show
   end

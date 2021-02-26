@@ -70,12 +70,11 @@ RSpec.describe 'Admin/merchant index' do
         expect(page).to have_content("enabled")
       end
     end
+
+    it 'I see a link to create a new merchant' do
+      visit "/admin/merchants"
+
+      expect(page).to have_link("New Merchant")
+    end
   end
 end
-
-# As an admin,
-# When I visit the admin merchants index
-# Then next to each merchant name I see a button to disable or enable that merchant.
-# When I click this button
-# Then I am redirected back to the admin merchants index
-# And I see that the merchant's status has changed
