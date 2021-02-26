@@ -9,7 +9,14 @@ class Merchant < ApplicationRecord
 
   def top_five_customers
     transactions.joins(invoice: :customer).select("customers.*, COUNT(transactions) AS count_of_success, customers.id AS customer_id").where("transactions.result = ?", 'success').group("customers.id").order("count_of_success DESC").limit(5)
+  end
 
+  def self.enabled_merchants
+    where("status = 'enabled'")
+  end 
+
+  def self.disabled_merchants
+    where("status = 'disabled'")
   end
 
 end
