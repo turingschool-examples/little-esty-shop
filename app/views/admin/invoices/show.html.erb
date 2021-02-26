@@ -1,10 +1,11 @@
 Invoice ID: <%= @invoice.id %><br>
 Inovoice Status: <%= @invoice.status %><br>
 Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
-Customer Name: <%= @customer.first_name %> <%= @customer.last_name%>
-<%= @invoice.invoice_items.each do |a| %>
-<%= a.item.name %>
-<%= a.quantity %>
-<%= a.unit_price %>
-<%= a.status %>
-<% end %>
+Customer Name: <%= @customer.first_name %> <%= @customer.last_name%><br>
+<% @invoice.invoice_items.each do |invoice_item| %>
+Item Name: <%= invoice_item.item.name %><br>
+Quantity: <%= invoice_item.quantity %><br>
+Unit Price: <%= invoice_item.unit_price %><br>
+Status: <%= invoice_item.status %><br>
+<% end %><br>
+Total Revenue: <%= @invoice.total_revenue %>

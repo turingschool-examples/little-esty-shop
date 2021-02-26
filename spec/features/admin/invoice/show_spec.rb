@@ -33,4 +33,10 @@ describe 'Admin Invoice Show Page' do
     expect(page).to have_content(@invoice_item1.unit_price)
     expect(page).to have_content(@invoice_item1.status)
   end
+
+  it "Sees an Invoice's Total Revenue" do
+    visit admin_invoice_path(@invoice)
+    save_and_open_page
+    expect(page).to have_content(@invoice.total_revenue)
+  end
 end
