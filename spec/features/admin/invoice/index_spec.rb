@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admin invoice show page" do
+RSpec.describe "admin invoice index page" do
   before :each do
     @customer = Customer.create!(first_name: "First1", last_name: "Last1")
 
@@ -17,9 +17,9 @@ RSpec.describe "admin invoice show page" do
       visit "/admin/invoices"
 
       expect(page).to have_link("Invoice #{@invoice1.id}")
-      expect(page).to have_link("Invoice #{@invoice1.id}")
-      expect(page).to have_link("Invoice #{@invoice1.id}")
-      expect(page).to have_link("Invoice #{@invoice1.id}")
+      expect(page).to have_link("Invoice #{@invoice2.id}")
+      expect(page).to have_link("Invoice #{@invoice3.id}")
+      expect(page).to have_link("Invoice #{@invoice4.id}")
     end
   end
 end
