@@ -1,6 +1,41 @@
 require "rails_helper"
 
 RSpec.describe"As an admin" do
+		before :each do
+		@mer_1 = create(:merchant)
+
+		@customers = []
+		@customers << create(:customer, first_name: "A", last_name: "1")
+		@customers << create(:customer, first_name: "B", last_name: "1")
+		@customers << create(:customer, first_name: "C", last_name: "1")
+		@customers << create(:customer, first_name: "D", last_name: "1")
+		@customers << create(:customer, first_name: "E", last_name: "1")
+		@customers << create(:customer, first_name: "A", last_name: "2")
+		@customers << create(:customer, first_name: "B", last_name: "2")
+		@customers << create(:customer, first_name: "C", last_name: "2")
+		@customers << create(:customer, first_name: "D", last_name: "2")
+		@customers << create(:customer, first_name: "E", last_name: "2")
+
+
+		#@customers = create_list(:customer, 10)
+		@items = create_list(:item, 20, merchant_id: @mer_1.id )
+
+		invoices = @customers.map do |customer|
+			create(:invoice,status: 2,customer_id: customer.id)
+		end
+
+		invoice_items = invoices.map do |invoice|
+			@items.map do |item|
+				create(:invoice_item, item_id: item.id, invoice_id: invoice.id)
+			end
+		end
+
+		results = ["success", "failed"]
+		transactions = invoices.map do |invoice|
+			create(:transaction, result: "success", invoice_id: invoice.id)
+		end
+	end
+
 	describe "when I visit the admin dashboard" do
 		it "renders an admin header" do
 			visit "/admin"
@@ -17,6 +52,26 @@ RSpec.describe"As an admin" do
 
 		it"shows the top 5 customers and their number of transactions"do
 			visit "/admin"
+			expect(page).to have_content("Name: A 1 -- Total Transactions: 1")
+			expect(page).to have_content("Name: B 1 -- Total Transactions: 1")
+			expect(page).to have_content("Name: C 1 -- Total Transactions: 1")
+			expect(page).to have_content("Name: D 1 -- Total Transactions: 1")
+			expect(page).to have_content("Name: E 1 -- Total Transactions: 1")
+		end
+
+		it "displays a section for incomplete invoices" do
+			visit "/admin"
+
+			invoices = @customers.map do |customer|
+				create(:invoice,status: 0,customer_id: customer.id)
+			end
+			invoice_items = invoices.flat_map do |invoice|
+				@items.map do |item|
+					create(:invoice_item,status: 0 ,item_id: item.id, invoice_id: invoice.id)
+				end
+			end
+			
+
 		end
 
 	end
@@ -35,4 +90,6 @@ RSpec.describe"As an admin" do
 		end
 
 	end
+
+
 end
