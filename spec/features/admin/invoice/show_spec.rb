@@ -12,4 +12,11 @@ describe 'Admin Invoice Show Page' do
     expect(page).to have_content(@invoice.status)
     expect(page).to have_content(@invoice.created_at)
   end
+
+  it "Sees Customer Information" do
+    visit admin_invoice_path(@invoice)
+
+    expect(page).to have_content(@customer.first_name)
+    expect(page).to have_content(@customer.last_name)
+  end
 end
