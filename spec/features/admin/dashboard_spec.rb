@@ -9,20 +9,20 @@ RSpec.describe "admin dashboard" do
     @customer5 = Customer.create!(first_name: "First5", last_name: "Last5")
     @customer6 = Customer.create!(first_name: "First6", last_name: "Last6")
 
-    @invoice1 = @customer2.invoices.create!(status: 1)
-    @transaction1 = @invoice1.transactions.create!(result: 0)
     @invoice2 = @customer2.invoices.create!(status: 1)
     @transaction2 = @invoice2.transactions.create!(result: 0)
     @invoice3 = @customer3.invoices.create!(status: 1)
     @transaction3 = @invoice3.transactions.create!(result: 0)
-    @invoice4 = @customer4.invoices.create!(status: 2)
-    @transaction4 = @invoice4.transactions.create!(result: 0)
+    @invoice1 = @customer2.invoices.create!(status: 1)
+    @transaction1 = @invoice1.transactions.create!(result: 0)
+    @invoice7 = @customer5.invoices.create!(status: 1)
+    @transaction7 = @invoice7.transactions.create!(result: 0)
     @invoice5 = @customer4.invoices.create!(status: 1)
     @transaction5 = @invoice5.transactions.create!(result: 0)
     @invoice6 = @customer5.invoices.create!(status: 0)
     @transaction6 = @invoice6.transactions.create!(result: 0)
-    @invoice7 = @customer5.invoices.create!(status: 1)
-    @transaction7 = @invoice7.transactions.create!(result: 0)
+    @invoice4 = @customer4.invoices.create!(status: 2)
+    @transaction4 = @invoice4.transactions.create!(result: 0)
     @invoice8 = @customer5.invoices.create!(status: 1)
     @transaction8 = @invoice8.transactions.create!(result: 0)
     @invoice9 = @customer5.invoices.create!(status: 2)
@@ -56,7 +56,7 @@ RSpec.describe "admin dashboard" do
 
     it "shows the top 5 customers, and the number of transactions they have completed" do
       visit "/admin"
-      
+
       within(".top_customers") do
         expect(@customer5.first_name).to appear_before(@customer6.first_name)
         expect(@customer6.first_name).to appear_before(@customer2.first_name)
@@ -65,27 +65,61 @@ RSpec.describe "admin dashboard" do
 
         within("#customer_id_#{@customer2.id}") do
           expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name}")
-          expect(page).to have_content(2)
+          expect(page).to have_content("Number of successful transactions: 2")
         end
 
         within("#customer_id_#{@customer3.id}") do
           expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name}")
-          expect(page).to have_content(1)
+          expect(page).to have_content("Number of successful transactions: 1")
         end
 
         within("#customer_id_#{@customer4.id}") do
           expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}")
-          expect(page).to have_content(2)
+          expect(page).to have_content("Number of successful transactions: 2")
         end
 
         within("#customer_id_#{@customer5.id}") do
           expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
-          expect(page).to have_content(4)
+          expect(page).to have_content("Number of successful transactions: 4")
         end
 
         within("#customer_id_#{@customer6.id}") do
           expect(page).to have_content("#{@customer6.first_name} #{@customer6.last_name}")
-          expect(page).to have_content(3)
+          expect(page).to have_content("Number of successful transactions: 3")
+        end
+      end
+    end
+
+    it "shows a list of all the incomplete invoices in order of creation" do
+      visit "/admin"
+
+      within ".incomplete_invioces" do
+        expect("#{@invoice2.id}").to appear_before("#{@invoice3.id}")
+        expect("#{@invoice3.id}").to appear_before("#{@invoice1.id}")
+        expect("#{@invoice1.id}").to appear_before("#{@invoice7.id}")
+        expect("#{@invoice7.id}").to appear_before("#{@invoice5.id}")
+        expect("#{@invoice5.id}").to appear_before("#{@invoice6.id}")
+        expect("#{@invoice6.id}").to appear_before("#{@invoice8.id}")
+      end
+    end
+
+    it "shows each invice id as a link and has the date next to it" do
+      visit "/admin"
+
+      within ".incomplete_invioces" do
+        within("#invoice_id_#{@invoice1.id}") do
+          expect(page).to have_link("#{@invoice1.id}")
+          expect(page).to have_content("Created at: #{@invoice1.created_at.strftime('%A, %b %d, %Y')}")
+        end
+
+        within("#invoice_id_#{@invoice2.id}") do
+          expect(page).to have_link("#{@invoice2.id}")
+          expect(page).to have_content("Created at: #{@invoice2.created_at.strftime('%A, %b %d, %Y')}")
+        end
+
+        within("#invoice_id_#{@invoice3.id}") do
+          expect(page).to have_link("#{@invoice3.id}")
+          expect(page).to have_content("Created at: #{@invoice3.created_at.strftime('%A, %b %d, %Y')}")
         end
       end
     end
