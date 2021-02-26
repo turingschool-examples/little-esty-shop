@@ -13,6 +13,16 @@ class Merchant < ApplicationRecord
             .limit(5)
   end
 
+  def items_not_shipped
+    Invoice.joins(:items)
+             .where('merchant_id = ?', self.id)
+             .joins(:invoice_items)
+             .where('invoice_items.status != ?', 2)
+             .select("items.name, invoices.id, invoices.created_at")
+             .order("invoices.created_at")
+    end
+  end
+
   def enabled?
     status == 'enabled'
   end
