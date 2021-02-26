@@ -1,4 +1,8 @@
 <h2>Merchants</h2>
 <%@merchants.each do |merchant|%>
-  <a href = "merchants/<%=merchant.id%>"><%=merchant.name%><br>
+  <p><a href = 'merchants/<%=merchant.id%>'><%=merchant.name%></p>
+  <%= form_with url: "/admin/merchants/merchant.id", method: :patch, local: true do |form| %>
+  <%= form.hidden_field :status, value: 'enabled' %>
+  <%= form.submit('Enable') %><br>
+  <% end %>
 <%end%>
