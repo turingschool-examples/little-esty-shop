@@ -8,5 +8,5 @@
 <% end  %>
 <h3> Items Ready to be shipped: </h3>
 <% @merchant.items_ready_to_ship.each do |item|  %>
-<%= "#{item.name} - Invoice# #{item.invoice_id}" %> <%= link_to "Invoice Item #{item.invoice_id}", merchant_invoice_path(@merchant.id, item.invoice_id) %> <br> 
+<%= "#{item.name} - Invoice# #{item.invoice_id} - #{item.ica.strftime("%A,%B,%d,%Y")}" %> <%= link_to "Invoice Item #{item.invoice_id}", merchant_invoice_path(@merchant.id, item.invoice_id) %> <br> 
 <% end  %>

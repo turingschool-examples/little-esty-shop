@@ -13,7 +13,7 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-      invoice_items.joins(:item).select("items.name, invoice_items.invoice_id, invoice_items.status").where.not("invoice_items.status = ?",  '2')
+      items.joins(:invoice_items).joins(:invoices).select("items.name, invoice_items.invoice_id, invoice_items.status, invoices.created_at AS ICA").where.not("invoice_items.status = ?",  '2').order("ICA ASC")
   end
 
 end
