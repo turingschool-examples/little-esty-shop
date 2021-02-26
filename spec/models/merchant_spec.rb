@@ -24,12 +24,17 @@ RSpec.describe Merchant, type: :model do
       @item5 = create(:item, merchant_id: @merchant1.id)
       @item6 = create(:item, merchant_id: @merchant1.id)
 
-      @invoice_item = create(:invoice_item_with_invoices, item_id: @item.id)
-      @invoice_item2 = create(:invoice_item_with_invoices, item_id: @item2.id)
-      @invoice_item3 = create(:invoice_item_with_invoices, item_id: @item3.id)
-      @invoice_item4 = create(:invoice_item_with_invoices, item_id: @item4.id)
-      @invoice_item5 = create(:invoice_item_with_invoices, item_id: @item5.id)
-      @invoice_item6 = create(:invoice_item_with_invoices, item_id: @item6.id)
+      @invoice = create(:invoice, created_at: "2013-03-25 09:54:09 UTC")
+      @invoice2 = create(:invoice, created_at: "2012-03-17 09:54:09 UTC")
+      @invoice3 = create(:invoice, created_at: "2011-03-01 09:54:09 UTC")
+      @invoice4 = create(:invoice, created_at: "2020-03-25 09:54:09 UTC")
+
+      @invoice_item = create(:invoice_item, invoice_id: @invoice.id, item_id: @item.id, status: 0)
+      @invoice_item2 = create(:invoice_item, invoice_id: @invoice2.id, item_id: @item2.id, status: 1)
+      @invoice_item3 = create(:invoice_item, invoice_id: @invoice3.id, item_id: @item3.id, status: 1)
+      @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item4.id, status: 0)
+      @invoice_item5 = create(:invoice_item_with_invoices, item_id: @item5.id, status: 2)
+      @invoice_item6 = create(:invoice_item_with_invoices, item_id: @item6.id, status: 2)
 
       @transactions = create_list(:transaction, 6, invoice_id: @invoice_item.invoice.id, result: "success")
       @transactions2 = create_list(:transaction, 7, invoice_id: @invoice_item2.invoice.id, result: "success")
@@ -45,12 +50,31 @@ RSpec.describe Merchant, type: :model do
       @customer5 = @invoice_item5.invoice.customer
       @customer6 = @invoice_item6.invoice.customer
     end
+
     describe "#find_top_customers" do
       it "Should return top 5 based on successful transactions" do
         expect(@merchant1.find_top_customers).to eq([@customer5, @customer4, @customer3, @customer2, @customer])
       end
       it "Shows the number of successful transactions" do
         expect(@merchant1.find_top_customers.first.transaction_count).to eq(10)
+      end
+    end
+    describe "#items_not_shipped" do
+      it "Should return items not shipped" do
+        expect(@merchant1.items_not_shipped).to eq([@item3, @item2, @item, @item4])
+      end
+      it 'should return item invoice ids' do
+        expect(@merchant1.items_not_shipped.first.invoice_id).to eq(@invoice_item3.invoice.id)
+      end
+      it 'should return invoice created at date' do
+        expect(@merchant1.items_not_shipped.first.invoice_created_at).to eq(@invoice3.created_at)
+      end
+      it "should display invoice date ~Monday, July 18, 2019~" do
+        expect(@merchant1.items_not_shipped[2].convert_date).to eq("Monday, March 25, 2013")
+      end
+      it "should order by date oldest first" do
+        expect(@merchant1.items_not_shipped.first).to eq(@item3)
+        expect(@merchant1.items_not_shipped.last).to eq(@item4)
       end
     end
   end
