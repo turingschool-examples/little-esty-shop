@@ -27,7 +27,7 @@ describe 'When I visit a merchants admin show page' do
     visit "/admin/merchants/#{@merchant_1.id}"
 
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
-    save_and_open_page
+    
     click_button("Update Merchant")
     expect(page).to have_field('name')
     fill_in "name", :with => "New Merchant Name"

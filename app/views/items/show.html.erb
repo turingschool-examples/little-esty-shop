@@ -5,6 +5,7 @@
     <p>
       Description: <%= @item.description %></p><br>
       Current Price: $<%=sprintf("%.2f",(@item.unit_price)) %>
+      <%= link_to "Update Item", edit_merchant_item_path(@merchant, @item) %>
     </p>
   </section>
 </body>

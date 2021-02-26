@@ -1,0 +1,9 @@
+<h1>Update Item</h1>
+
+<%= render partial: 'form', locals: { method: :patch,
+                                      url: merchant_item_path(@merchant, @item),
+                                      local: true,
+                                      name: @item.name,
+                                      description: @item.description,
+                                      unit_price: @item.unit_price,
+                                      submit: "Update Item" }%>

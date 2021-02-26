@@ -1,0 +1,9 @@
+<%= form_with method: method, url: url, local: true do |f| %>  
+    <%= f.label :name, "Item Name:" %><br>
+    <%=  f.text_field :name, value: name %><br>
+    <%= f.label :description, "Description of Item:" %><br>
+    <%=  f.text_field :description, value: description %><br>
+    <%= f.label :unit_price, "Price per unit in USD:" %><br>
+    <%=  f.text_field :unit_price, value: unit_price %><br>
+    <%= f.submit submit %>
+<% end %>

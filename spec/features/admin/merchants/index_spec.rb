@@ -18,7 +18,7 @@ RSpec.describe 'Admin/merchant index' do
     end
     it 'Then I see the name of each merchant in the system' do
       visit "/admin/merchants"
-      save_and_open_page
+      
       expect(current_path).to eq("/admin/merchants")
       expect(page).to have_content("#{@merchant_1.name}")
       expect(page).to have_content("#{@merchant_2.name}")

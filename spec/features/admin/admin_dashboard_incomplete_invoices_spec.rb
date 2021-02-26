@@ -36,7 +36,7 @@ describe 'When I visit the admin dashboard (/admin)' do
 
     expect(page).to have_link("#{@invoice_1.id}")
     click_link("#{@invoice_1.id}")
-    save_and_open_page
+    
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
   end
 end
