@@ -2,6 +2,11 @@
 <%= link_to merchant_items_path(@merchant.id) %>
 <%= link_to merchant_invoices_path(@merchant.id) %>
 <br>
+<h2> Favorite Customers: </h2>
 <% @merchant.top_five_customers.each do |customer| %>
   <%= "Name: #{customer.first_name} #{customer.last_name}, Successful Transactions:#{customer.count_of_success}" %><br>
+<% end  %>
+<h3> Items Ready to be shipped: </h3>
+<% @merchant.items_ready_to_ship.each do |item|  %>
+<%= "#{item.name} - Invoice# #{item.invoice_id}" %> <%= link_to "Invoice Item #{item.invoice_id}", merchant_invoice_path(@merchant.id, item.invoice_id) %> <br> 
 <% end  %>
