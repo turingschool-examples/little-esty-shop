@@ -8,3 +8,15 @@
 <div class="customer_info">
   <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
 </div>
+<div class="item_info">
+  <% @invoice.items.each do |item| %>
+  <div id="item_id_<%=item.id%>">
+    <p>
+      Item: <%= item.name %>
+      Quantity ordered: <%= item.matching_invoice_item(@invoice.id).quantity %><br>
+      Price: <%= item.matching_invoice_item(@invoice.id).unit_price %><br>
+      Item status: <%= item.matching_invoice_item(@invoice.id).status %>
+    </p>
+  </div>
+  <% end %>
+</div>

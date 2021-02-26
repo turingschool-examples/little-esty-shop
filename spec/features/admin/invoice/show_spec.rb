@@ -35,14 +35,14 @@ RSpec.describe "admin invoice show page" do
       within(".item_info") do
         within("#item_id_#{@item1.id}") do
           expect(page).to have_content("Item: #{@item1.name}")
-          expect(page).to have_content("Quanity ordered:  #{@invoice_item1.quanity}")
+          expect(page).to have_content("Quantity ordered: #{@invoice_item1.quantity}")
           expect(page).to have_content("Price: #{@invoice_item1.unit_price}")
           expect(page).to have_content("Item status: #{@invoice_item1.status}")
         end
 
         within("#item_id_#{@item2.id}") do
           expect(page).to have_content("Item: #{@item2.name}")
-          expect(page).to have_content("Quanity ordered:  #{@invoice_item2.quanity}")
+          expect(page).to have_content("Quantity ordered: #{@invoice_item2.quantity}")
           expect(page).to have_content("Price: #{@invoice_item2.unit_price}")
           expect(page).to have_content("Item status: #{@invoice_item2.status}")
         end
