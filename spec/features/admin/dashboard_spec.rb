@@ -65,27 +65,27 @@ RSpec.describe "admin dashboard" do
 
         within("#customer_id_#{@customer2.id}") do
           expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name}")
-          expect(page).to have_content(2)
+          expect(page).to have_content("Number of successful transactions: 2")
         end
 
         within("#customer_id_#{@customer3.id}") do
           expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name}")
-          expect(page).to have_content(1)
+          expect(page).to have_content("Number of successful transactions: 1")
         end
 
         within("#customer_id_#{@customer4.id}") do
           expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}")
-          expect(page).to have_content(2)
+          expect(page).to have_content("Number of successful transactions: 2")
         end
 
         within("#customer_id_#{@customer5.id}") do
           expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
-          expect(page).to have_content(4)
+          expect(page).to have_content("Number of successful transactions: 4")
         end
 
         within("#customer_id_#{@customer6.id}") do
           expect(page).to have_content("#{@customer6.first_name} #{@customer6.last_name}")
-          expect(page).to have_content(3)
+          expect(page).to have_content("Number of successful transactions: 3")
         end
       end
     end
@@ -94,18 +94,18 @@ RSpec.describe "admin dashboard" do
       visit "/admin"
 
       within ".incomplete_invioces" do
-        expect("Invoice: #{@invoice2.id}").to appear_before("Invoice: #{@invoice3.id}")
-        expect("Invoice: #{@invoice3.id}").to appear_before("Invoice: #{@invoice1.id}")
-        expect("Invoice: #{@invoice1.id}").to appear_before("Invoice: #{@invoice7.id}")
-        expect("Invoice: #{@invoice7.id}").to appear_before("Invoice: #{@invoice5.id}")
-        expect("Invoice: #{@invoice5.id}").to appear_before("Invoice: #{@invoice6.id}")
-        expect("Invoice: #{@invoice6.id}").to appear_before("Invoice: #{@invoice8.id}")
+        expect("#{@invoice2.id}").to appear_before("#{@invoice3.id}")
+        expect("#{@invoice3.id}").to appear_before("#{@invoice1.id}")
+        expect("#{@invoice1.id}").to appear_before("#{@invoice7.id}")
+        expect("#{@invoice7.id}").to appear_before("#{@invoice5.id}")
+        expect("#{@invoice5.id}").to appear_before("#{@invoice6.id}")
+        expect("#{@invoice6.id}").to appear_before("#{@invoice8.id}")
       end
     end
 
     it "shows each invice id as a link and has the date next to it" do
       visit "/admin"
-save_and_open_page
+
       within ".incomplete_invioces" do
         within("#invoice_id_#{@invoice1.id}") do
           expect(page).to have_link("#{@invoice1.id}")
