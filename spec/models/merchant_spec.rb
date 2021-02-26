@@ -73,19 +73,19 @@ RSpec.describe Merchant, type: :model do
       cust_9 = create(:customer)
       cust_10 = create(:customer)
       item_1 = create(:item, name: "item 1", merchant_id: @mer_1.id)
-      item_2 = create(:item, merchant_id: @mer_1.id)
-      item_3 = create(:item, name: "item 2", merchant_id: @mer_1.id)
-      item_4 = create(:item, merchant_id: @mer_1.id)
-      item_5 = create(:item, name: "item 3", merchant_id: @mer_1.id)
-      item_6 = create(:item, merchant_id: @mer_1.id)
-      item_7 = create(:item, name: "item 4", merchant_id: @mer_1.id)
-      invoice1 = create(:invoice, customer_id: cust_1.id)
+      item_2 = create(:item,  name: "item 2", merchant_id:@mer_1.id)
+      item_3 = create(:item, name: "item 3", merchant_id: @mer_1.id)
+      item_4 = create(:item, name: "item 4", merchant_id: @mer_1.id)
+      item_5 = create(:item, name: "item 5", merchant_id: @mer_1.id)
+      item_6 = create(:item, name: "item 6", merchant_id: @mer_1.id)
+      item_7 = create(:item, name: "item 7", merchant_id: @mer_1.id)
+      invoice1 = create(:invoice, customer_id: cust_1.id, created_at: "2012-03-25 09:54:09 UTC")
       invoice2 = create(:invoice, customer_id: cust_2.id)
-      invoice3 = create(:invoice, customer_id: cust_3.id)
+      invoice3 = create(:invoice, customer_id: cust_3.id, created_at: "2012-03-10 10:54:10 UTC")
       invoice4 = create(:invoice, customer_id: cust_4.id)
       invoice5 = create(:invoice, customer_id: cust_5.id)
-      invoice6 = create(:invoice, customer_id: cust_6.id)
-      invoice7 = create(:invoice, customer_id: cust_7.id)
+      invoice6 = create(:invoice, customer_id: cust_6.id, created_at: "2012-03-15 14:54:10 UTC")
+      invoice7 = create(:invoice, customer_id: cust_7.id, created_at: "2012-03-13 07:54:10 UTC")
       invoice_item1 = create(:invoice_item, item_id:item_1.id, invoice_id:invoice1.id,  status: "pending")
       invoice_item2 = create(:invoice_item, item_id:item_2.id, invoice_id:invoice2.id)
       invoice_item3 = create(:invoice_item, item_id:item_3.id, invoice_id:invoice3.id, status: "packaged")
@@ -96,7 +96,11 @@ RSpec.describe Merchant, type: :model do
       expected = @mer_1.items_ready_to_ship.map do |item|
         item.name
       end
-      expect(expected).to eq([item_1.name, item_3.name, item_5.name, item_6.name ])
+      expected2 = @mer_1.items_ready_to_ship.map do |item|
+        item.ica
+      end
+      expect(expected).to eq([item_3.name, item_6.name, item_5.name, item_1.name ])
+      expect(expected2).to eq([invoice3.created_at, invoice7.created_at, invoice6.created_at, invoice1.created_at])
     end
   end
 

@@ -1,5 +1,5 @@
 require "rails_helper"
-
+require 'time'
 RSpec.describe 'Merchant Dashboard' do
   before :each do
     @mer_1 = create(:merchant)
@@ -85,19 +85,19 @@ RSpec.describe 'Merchant Dashboard' do
     cust_9 = create(:customer)
     cust_10 = create(:customer)
     item_1 = create(:item, name: "item 1", merchant_id: @mer_1.id)
-    item_2 = create(:item, merchant_id: @mer_1.id)
-    item_3 = create(:item, name: "item 2", merchant_id: @mer_1.id)
-    item_4 = create(:item, merchant_id: @mer_1.id)
-    item_5 = create(:item, name: "item 3", merchant_id: @mer_1.id)
-    item_6 = create(:item, merchant_id: @mer_1.id)
-    item_7 = create(:item, name: "item 4", merchant_id: @mer_1.id)
-    invoice1 = create(:invoice, customer_id: cust_1.id)
+    item_2 = create(:item,  name: "item 2", merchant_id:@mer_1.id)
+    item_3 = create(:item, name: "item 3", merchant_id: @mer_1.id)
+    item_4 = create(:item, name: "item 4", merchant_id: @mer_1.id)
+    item_5 = create(:item, name: "item 5", merchant_id: @mer_1.id)
+    item_6 = create(:item, name: "item 6", merchant_id: @mer_1.id)
+    item_7 = create(:item, name: "item 7", merchant_id: @mer_1.id)
+    invoice1 = create(:invoice, customer_id: cust_1.id, created_at: "2012-03-25 09:54:09 UTC")
     invoice2 = create(:invoice, customer_id: cust_2.id)
-    invoice3 = create(:invoice, customer_id: cust_3.id)
+    invoice3 = create(:invoice, customer_id: cust_3.id, created_at: "2012-03-10 10:54:10 UTC")
     invoice4 = create(:invoice, customer_id: cust_4.id)
     invoice5 = create(:invoice, customer_id: cust_5.id)
-    invoice6 = create(:invoice, customer_id: cust_6.id)
-    invoice7 = create(:invoice, customer_id: cust_7.id)
+    invoice6 = create(:invoice, customer_id: cust_6.id, created_at: "2012-03-15 14:54:10 UTC")
+    invoice7 = create(:invoice, customer_id: cust_7.id, created_at: "2012-03-13 07:54:10 UTC")
     invoice_item1 = create(:invoice_item, item_id:item_1.id, invoice_id:invoice1.id,  status: "pending")
     invoice_item2 = create(:invoice_item, item_id:item_2.id, invoice_id:invoice2.id)
     invoice_item3 = create(:invoice_item, item_id:item_3.id, invoice_id:invoice3.id, status: "packaged")
@@ -115,5 +115,9 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content(invoice3.id)
       expect(page).to have_content(invoice7.id)
       expect(page).to have_content(invoice6.id)
+      expect(invoice3.created_at.strftime("%A,%B,%d,%Y")).to appear_before(invoice7.created_at.strftime("%A,%B,%d,%Y"))
+      expect(invoice7.created_at.strftime("%A,%B,%d,%Y")).to appear_before(invoice6.created_at.strftime("%A,%B,%d,%Y"))
+      expect(invoice6.created_at.strftime("%A,%B,%d,%Y")).to appear_before(invoice1.created_at.strftime("%A,%B,%d,%Y"))
+
   end
 end
