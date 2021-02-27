@@ -18,6 +18,13 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
       visit merchant_items_path(@merchant1)
 
       within("#item-#{@item.id}") do
+        expect(page).to have_button("Enable Item")
+        click_button "Enable Item"
+      end
+
+      expect(page).to have_content("#{@item.name} Enabled")
+
+      within("#item-#{@item.id}") do
         expect(page).to have_button("Disable Item")
         click_button "Disable Item"
       end
@@ -27,13 +34,6 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
 
       within("#item-#{@item.id}") do
         expect(page).to have_button("Enable Item")
-        click_button "Enable Item"
-      end
-
-      expect(page).to have_content("#{@item.name} Enabled")
-
-      within("#item-#{@item.id}") do
-        expect(page).to have_button("Disable Item")
       end
     end
   end

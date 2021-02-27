@@ -4,12 +4,12 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
   before :each do
     @merchant1 = create(:merchant)
 
-    @item1 = create(:item, merchant_id: @merchant1.id)
-    @item2 = create(:item, merchant_id: @merchant1.id, status: false)
-    @item3 = create(:item, merchant_id: @merchant1.id)
-    @item4 = create(:item, merchant_id: @merchant1.id, status: false)
-    @item5 = create(:item, merchant_id: @merchant1.id)
-    @item6 = create(:item, merchant_id: @merchant1.id, status: false)
+    @item1 = create(:item, merchant_id: @merchant1.id, status: true)
+    @item2 = create(:item, merchant_id: @merchant1.id)
+    @item3 = create(:item, merchant_id: @merchant1.id, status: true)
+    @item4 = create(:item, merchant_id: @merchant1.id)
+    @item5 = create(:item, merchant_id: @merchant1.id, status: true)
+    @item6 = create(:item, merchant_id: @merchant1.id)
   end
   describe 'it displays items sorted by status' do
     it 'shows enabled and disabled items' do

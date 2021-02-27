@@ -17,12 +17,12 @@ RSpec.describe Merchant, type: :model do
     before :each do
       @merchant1 = create(:merchant)
 
-      @item = create(:item, merchant_id: @merchant1.id)
-      @item2 = create(:item, merchant_id: @merchant1.id)
-      @item3 = create(:item, merchant_id: @merchant1.id)
-      @item4 = create(:item, merchant_id: @merchant1.id, status: false)
-      @item5 = create(:item, merchant_id: @merchant1.id, status: false)
-      @item6 = create(:item, merchant_id: @merchant1.id, status: false)
+      @item = create(:item, merchant_id: @merchant1.id, status: true)
+      @item2 = create(:item, merchant_id: @merchant1.id, status: true)
+      @item3 = create(:item, merchant_id: @merchant1.id, status: true)
+      @item4 = create(:item, merchant_id: @merchant1.id)
+      @item5 = create(:item, merchant_id: @merchant1.id)
+      @item6 = create(:item, merchant_id: @merchant1.id)
 
       @invoice = create(:invoice, created_at: "2013-03-25 09:54:09 UTC")
       @invoice2 = create(:invoice, created_at: "2012-03-17 09:54:09 UTC")

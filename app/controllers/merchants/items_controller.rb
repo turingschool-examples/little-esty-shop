@@ -1,6 +1,6 @@
 class Merchants::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
-  before_action :set_merchant, only: [:index, :new]
+  before_action :set_merchant, only: [:index, :new, :create]
 
   def index
   end
@@ -9,8 +9,14 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
-    require "pry"; binding.pry
+    @item = @merchant.items.new(item_params)
+    if @item.save
+      flash[:notice] = "#{@item.name} Created"
+      redirect_to merchant_items_path(@merchant)
+    else
+      flash[:notice] = "Required Information Missing"
+      render :new
+    end
   end
 
   def show

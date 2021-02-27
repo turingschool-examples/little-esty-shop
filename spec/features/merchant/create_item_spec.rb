@@ -29,9 +29,23 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
     click_button "Create Item"
     expect(current_path).to eq(merchant_items_path(@merchant1))
 
+    expect(page).to have_content("New Item Created")
+
     within(".disabled_items") do
       expect(page).to have_content("New Item")
     end
+  end
+
+  it "Does not create item without a name" do
+    visit new_merchant_item_path(@merchant1)
+
+    fill_in 'name', with: " "
+    fill_in 'description', with: "Some description"
+    fill_in 'unit_price', with: 5.5
+    click_button "Create Item"
+    expect(current_path).to eq(merchant_items_path(@merchant1))
+
+    expect(page).to have_content("Required Information Missing")
   end
 end
 # When I visit my items index page
