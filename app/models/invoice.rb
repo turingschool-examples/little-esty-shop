@@ -10,7 +10,12 @@ class Invoice < ApplicationRecord
   end
 
   def self.not_shipped
-    joins(:invoice_items).where("invoice_items.status = 0 OR invoice_items.status = 1").distinct
+    joins(:invoice_items).where("invoice_items.status = 0 OR invoice_items.status = 1").distinct.order(created_at: :asc)
+  end
+
+  def least_recent
+
+  end
 
   def date_format
     created_at.strftime("%A, %B %d, %Y")
