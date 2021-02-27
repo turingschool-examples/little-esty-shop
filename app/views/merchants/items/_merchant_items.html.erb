@@ -6,7 +6,8 @@
             <%= button_to  "Disable Item", merchant_item_path(merchant.id, item.id, {status: :disable}), method: :patch %>
           <% elsif item.status == false %>
             <%= button_to "Enable Item", merchant_item_path(merchant.id, item.id, {status: :enable}), method: :patch %>
-          <% end %></li>
+          <% end %>
+      </li>
     </div>
   <% end %>
 </ul>

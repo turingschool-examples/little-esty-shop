@@ -18,9 +18,13 @@ class Merchants::ItemsController < ApplicationController
     elsif !@item.update(item_params)
       flash[:notice] = "Required Information Missing"
       redirect_to edit_merchant_item_path(@item.merchant, @item)
-    elsif params[:status] = "disable"
+    elsif params[:status] == "disable"
       @item.disable_item
-      flash[:notice] = "Item Disabled"
+      flash[:notice] = "#{@item.name} Disabled"
+      redirect_to merchant_items_path(@item.merchant)
+    elsif params[:status] == "enable"
+      @item.enable_item
+      flash[:notice] = "#{@item.name} Enabled"
       redirect_to merchant_items_path(@item.merchant)
     end
   end
