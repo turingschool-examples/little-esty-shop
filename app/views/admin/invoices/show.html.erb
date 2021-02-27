@@ -6,3 +6,4 @@
 <%@items.each do |item| %>
 <p> Item name: <%= item.name %>, Quantity ordered: <%= item.quantity %>, Sold for: <%= number_to_currency(item.unit_price.to_f/100) %> per unit, Status: <%= item.status %></p>
 <%end %>
+<h3>Invoice Total: <%= number_to_currency(@revenue.to_f/100) %></h3>
