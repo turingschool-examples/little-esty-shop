@@ -55,4 +55,10 @@ RSpec.describe InvoiceItem, type: :model do
       expect(@invoice_item2.status).to_not eq("pending")
     end
   end
+
+  # describe "Class Methods" do
+  #   it 'finds incomplete items' do
+  #     expect(@invoice1.invoice_items.not_shipped).to eq()
+  #   end
+  # end
 end

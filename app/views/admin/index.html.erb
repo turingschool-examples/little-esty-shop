@@ -7,3 +7,9 @@
 <%= customer.last_name %>,
 Successful Transactions: <%= customer.successful_transactions_count%><br>
 <% end %>
+<section id='incomplete'>
+  <h1>Incomplete Invoices</h1>
+  <% @incomplete_invoices.each do |invoice| %>
+  <%= link_to invoice.id, admin_invoice_path(invoice) %><br>
+  <% end %>
+</section>

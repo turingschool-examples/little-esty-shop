@@ -9,6 +9,9 @@ class Invoice < ApplicationRecord
     invoice_items.sum("unit_price * quantity")
   end
 
+  def self.not_shipped
+    joins(:invoice_items).where("invoice_items.status = 0 OR invoice_items.status = 1").distinct
+
   def date_format
     created_at.strftime("%A, %B %d, %Y")
   end
