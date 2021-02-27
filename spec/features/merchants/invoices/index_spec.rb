@@ -22,16 +22,6 @@ RSpec.describe "Merchant Invoice Index" do
     @invoice6 = create(:invoice, customer: @cust6)
     @invoice7 = create(:invoice, customer: @cust7)
     @invoice8 = create(:invoice, customer: @cust8)
-    
-
-    create_list(:transaction, 1, result: "success", invoice: @invoice1) 
-    create_list(:transaction, 1, result: "success", invoice: @invoice2)
-    create_list(:transaction, 2, result: "success", invoice: @invoice3)
-    create_list(:transaction, 1, result: "success", invoice: @invoice4)
-    create_list(:transaction, 1, result: "success", invoice: @invoice5)
-    create_list(:transaction, 2, result: "success", invoice: @invoice6)
-    create_list(:transaction, 2, result: "success", invoice: @invoice7)
-    create_list(:transaction, 1, result: "success", invoice: @invoice8)
 
     @item1 = create(:item, merchant: @merchant1)
     @item2 = create(:item, merchant: @merchant2)
@@ -54,10 +44,8 @@ RSpec.describe "Merchant Invoice Index" do
 
       within "#invoice-#{@invoice1.id}" do
         expect(page).to have_content("Invoice # #{@invoice1.id}")
-        # click_link("#{@invoice1.id}")
-        # expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
       end
-        
+
       within "#invoice-#{@invoice2.id}" do
         expect(page).to have_content("Invoice # #{@invoice2.id}")
       end
@@ -68,6 +56,8 @@ RSpec.describe "Merchant Invoice Index" do
         
       within "#invoice-#{@invoice4.id}" do
         expect(page).to have_content("Invoice # #{@invoice4.id}")
+        click_link("#{@invoice4.id}")
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice4.id}")
       end
         
     end
