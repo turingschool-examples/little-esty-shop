@@ -11,3 +11,4 @@
     <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", params: {item_status: true}, method: :patch %>
   <% end %>
 </section>
+<%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
