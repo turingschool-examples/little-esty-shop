@@ -12,4 +12,8 @@ class Invoice < ApplicationRecord
   def date_format
     created_at.strftime("%A, %B %d, %Y")
   end
+
+  def status_format
+    status.titleize
+  end
 end
