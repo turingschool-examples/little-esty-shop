@@ -11,5 +11,12 @@ class Invoice < ApplicationRecord
 
   def self.not_shipped
     joins(:invoice_items).where("invoice_items.status = 0 OR invoice_items.status = 1").distinct
+
+  def date_format
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def status_format
+    status.titleize
   end
 end

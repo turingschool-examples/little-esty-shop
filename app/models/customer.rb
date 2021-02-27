@@ -22,4 +22,8 @@ class Customer < ApplicationRecord
     transactions.where('result = ?', 0)
     .count
   end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
