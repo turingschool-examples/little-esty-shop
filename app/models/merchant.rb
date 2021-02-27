@@ -8,4 +8,12 @@ class Merchant < ApplicationRecord
     .distinct
     .order('invoices.created_at DESC')
   end
+
+  def items_by_status_true
+    items.where(status: true)
+  end
+
+  def items_by_status_false
+    items.where(status: false)
+  end
 end
