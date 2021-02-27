@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
+
+  def self.not_shipped
+    joins(:invoice_items).where("invoice_items.status = 0 OR invoice_items.status = 1").distinct
+  end
 end
