@@ -20,7 +20,6 @@ class Merchant < ApplicationRecord
              .where('invoice_items.status != ?', 2)
              .select("items.name, invoices.id, invoices.created_at")
              .order("invoices.created_at")
-    end
   end
 
   def enabled?
