@@ -15,5 +15,6 @@
   <section id="topitems-">
     <% @top_items.each do |item| %>
       <%= "#{item.name} - Revenue Generated - #{item.revenue}"  %>
+      <%= "Top day for #{item.name} was #{item.best_day.strftime("%m/%d/%Y")}" %>
       <% end %>
   </section>
