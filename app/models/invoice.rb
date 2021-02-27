@@ -8,4 +8,9 @@ class Invoice < ApplicationRecord
   def self.incomplete
     where(status: 0).or(where(status: 2))
   end
+
+  def self.merchants_invoices(merch_id)
+    joins(:items).where('merchant_id = ?', merch_id).select("invoices.*").distinct 
+    # Invoice.joins(:items).where('merchant_id = ?', params[:merchant_id]).select("invoices.*")
+  end
 end

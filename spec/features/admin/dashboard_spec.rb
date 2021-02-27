@@ -24,7 +24,7 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content('Admin Dashboard')
     end
 
-    it 'I see names of top 5 customers with largest number of successful transactions' do
+    xit 'I see names of top 5 customers with largest number of successful transactions' do
       c_1 = Customer.create!(first_name: "Alessandra", last_name: "Ward")
       c_2 = Customer.create!(first_name: "Tremayne", last_name: "Zieme")
       c_3 = Customer.create!(first_name: "Sylvester", last_name: "Nader")
