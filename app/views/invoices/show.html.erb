@@ -1,2 +1,7 @@
 <h1><%="#{@merchant.name} - Invoice # #{@invoice.id}" %></h1>
 
+<section id="invoice-info">
+  <h3>Invoice Info:</h3>
+  <p><%= "Status: #{@invoice.status}" %></p>
+  <p><%= "Created At: #{@invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
+</section>

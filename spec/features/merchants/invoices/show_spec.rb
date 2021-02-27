@@ -15,11 +15,11 @@ RSpec.describe "Merchant Invoice Show Page" do
 
       expect(page).to have_content("#{@merchant1.name} - Invoice # #{@invoice1.id}")
 
-      within"#invoice-info" do 
-        expect(page).to have_content(@invoice1.status)
-        expect(page).to have_content(@invoice11.created_at.strftime("%A, %B %d, %Y"))
+      within "#invoice-info" do 
+        expect(page).to have_content("Status: #{@invoice1.status}")
+        expect(page).to have_content("Created At: #{@invoice1.created_at.strftime('%A, %B %d, %Y')}")
       end
-    end
 
+    end
   end
 end
