@@ -5,6 +5,8 @@
   <p>Name: <%= customer.first_name %> <%= customer.last_name %> -- Total Transactions: <%= customer.count_of_success %></p>
 <% end %>
 <h3> Incomplete Invoices </h3>
-<%@incomplete_invoices.each do |invoice| %>
-  <p> Invoice Id: <a href = "/admin/invoices/<%=invoice.id%>"><%=invoice.id%></a> -- created on: <%= invoice.created_at.strftime("%A") %>, <%= invoice.created_at.strftime("%B") %> <%= invoice.created_at.strftime("%d") %>, <%= invoice.created_at.strftime("%Y") %><br></p>
-  <%end %>
+<% @incomplete_invoices.each do |invoice| %>
+	<section id="incomplete-<%= invoice.id %>">
+		<p> Invoice Id: <a href = "/admin/invoices/<%=invoice.id%>"><%=invoice.id%></a> -- created on: <%= invoice.created_at.strftime("%A") %>, <%= invoice.created_at.strftime("%B") %> <%= invoice.created_at.strftime("%d") %>, <%= invoice.created_at.strftime("%Y") %><br></p>
+	</section>
+ <%end %>
