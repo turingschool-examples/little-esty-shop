@@ -1,0 +1,5 @@
+<ul>
+  <% merchant.items.each do |item| %>
+    <li><%= link_to "#{item.name}", merchant_item_path(merchant.id, item.id) %></li>
+  <% end %>
+</ul>
