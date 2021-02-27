@@ -22,4 +22,12 @@ class Merchant < ApplicationRecord
     .select('items.*, invoice_items.invoice_id AS invoice_id, invoices.created_at AS invoice_created_at')
     .order('invoice_created_at')
   end
+
+  def enabled_items
+    items.where(status: true)
+  end
+
+  def disabled_items
+    items.where(status: false)
+  end
 end

@@ -20,9 +20,9 @@ RSpec.describe Merchant, type: :model do
       @item = create(:item, merchant_id: @merchant1.id)
       @item2 = create(:item, merchant_id: @merchant1.id)
       @item3 = create(:item, merchant_id: @merchant1.id)
-      @item4 = create(:item, merchant_id: @merchant1.id)
-      @item5 = create(:item, merchant_id: @merchant1.id)
-      @item6 = create(:item, merchant_id: @merchant1.id)
+      @item4 = create(:item, merchant_id: @merchant1.id, status: false)
+      @item5 = create(:item, merchant_id: @merchant1.id, status: false)
+      @item6 = create(:item, merchant_id: @merchant1.id, status: false)
 
       @invoice = create(:invoice, created_at: "2013-03-25 09:54:09 UTC")
       @invoice2 = create(:invoice, created_at: "2012-03-17 09:54:09 UTC")
@@ -75,6 +75,13 @@ RSpec.describe Merchant, type: :model do
       it "should order by date oldest first" do
         expect(@merchant1.items_not_shipped.first).to eq(@item3)
         expect(@merchant1.items_not_shipped.last).to eq(@item4)
+      end
+
+      it "#enabled_items" do
+        expect(@merchant1.enabled_items).to eq([@item, @item2, @item3])
+      end
+      it "#disabled_items" do
+        expect(@merchant1.disabled_items).to eq([@item4, @item5, @item6])
       end
     end
   end
