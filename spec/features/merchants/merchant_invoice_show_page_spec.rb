@@ -8,6 +8,7 @@ RSpec.describe "Merchant Invoice Show Page" do
     @item2 = @merchant.items.create(name: "Pearl Necklace", description: "Beautiful White Pearls",
                                   unit_price: 250.00)
     @customer = Customer.create!(first_name: "Bob", last_name: "Jones")
+    @not_customer = Customer.create!(first_name: "Mike", last_name: "Jones")
     @invoice1 = @customer.invoices.create(status: 0)
     @invoice2 = @customer.invoices.create(status: 1)
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id,
@@ -29,5 +30,18 @@ RSpec.describe "Merchant Invoice Show Page" do
           expect(page).to have_content(@invoice1.date_format)
         end
     end
+    it "I see all of the customer information related to that invoice " do
+      visit "/merchant/#{@merchant.id}/invoices/#{@invoice1.id}"
+        within "#invoice-customer-info" do
+          expect(page).to have_content(@customer.name)
+          expect(page).to_not have_content(@not_customer.name)
+        end
+    end
   end
 end
+
+# As a merchant
+# When I visit my merchant invoice show page
+# Then I see all of the customer information related to that invoice including:
+# - Customer First and last name
+# - Shipping Address
