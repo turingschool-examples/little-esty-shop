@@ -11,3 +11,9 @@
     <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", params: {item_status: true}, method: :patch %>
   <% end %>
 </section>
+<h1> Top Five Items by Revenue: </h1>
+  <section id="topitems-">
+    <% @top_items.each do |item| %>
+      <%= "#{item.name} - Revenue Generated - #{item.revenue}"  %>
+      <% end %>
+  </section>
