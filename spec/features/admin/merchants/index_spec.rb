@@ -28,9 +28,11 @@ describe 'Admin Merchant index page' do
 
   it 'Sees link to create new merchant' do
     visit '/admin/merchants'
-    
+
     click_link 'Create New Merchant'
 
     expect(current_path).to eq("/admin/merchants/new")
   end
+
+  #Need to write test for disable and enabled sections
 end
