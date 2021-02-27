@@ -18,7 +18,7 @@ RSpec.describe 'Admin/invoice index' do
     end
     it 'Then I see the ID of each invoice in the system' do
       visit "/admin/invoices"
-      # save_and_open_page
+
       expect(current_path).to eq("/admin/invoices")
       expect(page).to have_content("#{@invoice_1.id}")
       expect(page).to have_content("#{@invoice_2.id}")

@@ -19,8 +19,6 @@ describe 'When I visit the admin merchants (/admin/merchants)' do
     expect(page).to have_link("#{@merchant_2.name}")
     expect(page).to have_content("#{@merchant_3.name}")
     expect(page).to have_link("#{@merchant_3.name}")
-    # save_and_open_page
-
   end
 
   it 'Then I am taken to that merchants admin show page (/admin/merchants/merchant_id)' do
