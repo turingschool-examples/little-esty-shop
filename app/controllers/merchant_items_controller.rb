@@ -5,6 +5,25 @@ class MerchantItemsController < ApplicationController
     @active_items = @merchant.items.active
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.new
+  end
+
+  def create
+    merchant = Merchant.find(params[:merchant_id])
+    item = merchant.items.new(item_params)
+    if item.save
+      item.update(status: "Inactive")
+      
+      redirect_to "/merchant/#{merchant.id}/items"
+    else
+      flash[:notice] = "Fields Missing: Fill in all fields"
+
+      redirect_to "/merchant/#{merchant.id}/items/new"
+    end
+  end
+
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:item_id])
@@ -27,6 +46,7 @@ class MerchantItemsController < ApplicationController
       redirect_to "/merchant/#{merchant.id}/items"
     end
   end
+
 
   private
   def item_params

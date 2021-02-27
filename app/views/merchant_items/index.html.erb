@@ -1,4 +1,8 @@
 <h1>My Items</h1>
+<section id="new-item">
+  <%= link_to "New Item", new_merchant_item_path(@merchant) %>
+</section>
+
 <section id="merchant-items">
     <h3>Enabled Items</h3>
       <% @active_items.each do |item| %>
