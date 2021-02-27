@@ -1,0 +1,10 @@
+<h1> Edit Item: </h1>
+<%= form_with(model: @item, url: "/merchants/#{@merchant.id}/items/#{@item.id}", method: "patch" ,local: true) do |form| %>
+      <%= form.label "Change Name" %></h4>
+    <p><%= form.text_field :name, :placeholder => "#{@item.name}" %></p><br>
+    <%= form.label "Change Item Description" %>
+    <p><%= form.text_area :description, :placeholder => "#{@item.description}" %></p><br>
+    <%= form.label "Change Item Unit Price" %>
+    <p><%= form.text_field :unit_price, :placeholder => "#{@item.unit_price}" %></p><br>
+    <%= form.submit "Edit Item" %>
+<% end  %>

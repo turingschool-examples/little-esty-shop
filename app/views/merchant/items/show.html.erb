@@ -1,0 +1,5 @@
+<h1> Item Page: </h1>
+<%=  @item.name %> <br>
+<%= @item.description %> <br>
+<%= @item.unit_price %>
+<%= link_to "Update this Item", edit_merchant_item_path(@merchant, @item) %>
