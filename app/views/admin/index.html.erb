@@ -1,13 +1,11 @@
-<h2>Admin Dashboard</h2>
-
 <h1>Admin Dashboard</h1>
 <a href="/admin/merchants">Merchants</a>
-<a href="/admin/invoices">Invoices</a>
+<a href="/admin/invoices">Invoices</a><br><br>
 
 <section>Incomplete Invoices</section>
-<% @invoices.incomplete.each do |incomplete| %>
+<% @invoices.incomplete.oldest_to_newest.each do |incomplete| %>
   <ul>
-    <a href="admin/invoices/<%= incomplete.id %>"><li>Invoice: <%= incomplete.id %></li></a>
+    <a href="admin/invoices/<%= incomplete.id %>"><li>Invoice: <%= incomplete.id %> - <%= incomplete.date_created %> </li></a>
   </ul>
 <% end  %>
 
