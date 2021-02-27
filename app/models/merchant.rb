@@ -7,6 +7,16 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+  def most_popular_items
+    items
+    .joins(:invoice_items, :invoices, :transactions)
+    .where('transactions.result = ?', "success")
+    .group('items.id')
+    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    .order('revenue DESC')
+    .limit(5)
+  end
+
   def find_top_customers
     customers.joins(:invoices, :transactions)
       .where('transactions.result = ?', "success")
