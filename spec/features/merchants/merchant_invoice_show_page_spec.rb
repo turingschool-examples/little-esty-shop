@@ -39,9 +39,3 @@ RSpec.describe "Merchant Invoice Show Page" do
     end
   end
 end
-
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see all of the customer information related to that invoice including:
-# - Customer First and last name
-# - Shipping Address
