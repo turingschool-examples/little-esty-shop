@@ -8,4 +8,12 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
+
+  def date_format
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def status_format
+    status.titleize
+  end
 end

@@ -6,5 +6,6 @@ class InvoicesController < ApplicationController
 
   def show
     @merchant_invoice = Invoice.find(params[:id])
+    @status_format = @merchant_invoice.status_format
   end
 end
