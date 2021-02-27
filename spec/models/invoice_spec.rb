@@ -43,5 +43,12 @@ RSpec.describe Invoice, type: :model do
         expect(invoice.date_format).to eq("Thursday, July 18, 2019")
       end
     end
+    describe "#status_format" do
+      it "returns the status with each first letter capitalized for every word" do
+        expect(@invoice1.status_format).to eq("In Progress")
+        expect(@invoice2.status_format).to eq("Completed")
+        expect(@invoice3.status_format).to eq("Cancelled")
+      end
+    end
   end
 end
