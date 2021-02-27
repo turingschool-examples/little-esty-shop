@@ -71,6 +71,42 @@ RSpec.describe "Merchant Dashboard" do
       
    end
 
+   it "shows all items ready to ship" do 
+
+    @item2 = create(:item, merchant: @merchant)
+    @item3 = create(:item, merchant: @merchant)
+
+    @invoice9 = create(:invoice, customer: @cust8)
+    @invoice10 = create(:invoice, customer: @cust3)
+    @invoice11 = create(:invoice, customer: @cust7)
+
+    @invoice_item9 = create(:invoice_item, invoice: @invoice9, item: @item2)
+    @invoice_item10 = create(:invoice_item, invoice: @invoice10, item: @item3)
+    @invoice_item11 = create(:invoice_item, invoice: @invoice11, item: @item3)
+
+    @invoice_item1.update(status: 2)
+    @invoice_item2.update(status: 2)
+    @invoice_item3.update(status: 2)
+    @invoice_item4.update(status: 2)
+    @invoice_item5.update(status: 2)
+    @invoice_item6.update(status: 2)
+    @invoice_item7.update(status: 2)
+    @invoice_item8.update(status: 2)
+    
+    
+
+    visit "/merchant/#{@merchant.id}/dashboard"
+
+    expect(page).to have_content(@item2.name)
+    expect(page).to have_content(@invoice9.id)
+    expect(page).to have_content(@invoice9.created_at)
+    expect(page).to have_content(@item3.name)
+    expect(page).to have_content(@invoice10.id)
+    expect(page).to have_content(@invoice10.created_at)
+    expect(page).to have_content(@invoice11.id)
+    expect(page).to have_content(@invoice11.created_at)
+   end
+
     xit "and I click on the My Items link it takes me to that merchants items page" do 
       visit "/merchant/#{@merchant.id}/dashboard"
 

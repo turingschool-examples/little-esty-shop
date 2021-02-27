@@ -36,14 +36,6 @@ describe 'When I visit the admin dashboard (/admin)' do
 
     expect(page).to have_link("#{@invoice_1.id}")
     click_link("#{@invoice_1.id}")
-    
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
   end
 end
-
-# As an admin,
-# When I visit the admin dashboard
-# Then I see a section for "Incomplete Invoices"
-# In that section I see a list of the ids of all invoices
-# That have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
