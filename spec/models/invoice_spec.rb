@@ -7,6 +7,12 @@ RSpec.describe Invoice, type: :model do
     @invoice1 = @customer1.invoices.create(status: 0)
     @invoice2 = @customer1.invoices.create(status: 1)
     @invoice3 = @customer1.invoices.create(status: 2)
+    @merchant = Merchant.create(name: "John's Jewelry")
+    @item1 = @merchant.items.create(name: "Gold Ring", description: "14K Wedding Band",
+                                    unit_price: 599.95)
+    @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id,
+                                         item_id: @item1.id, quantity: 500,
+                                         unit_price: 599.95, status: 0)
 
   end
 
@@ -48,6 +54,11 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice1.status_format).to eq("In Progress")
         expect(@invoice2.status_format).to eq("Completed")
         expect(@invoice3.status_format).to eq("Cancelled")
+      end
+    end
+    describe "#total_revenue" do
+      it "returns total sum of the invoice_item quanity * invoice_item unit_price " do
+        expect(@invoice1.total_revenue.round(2)).to eq(299975.00)
       end
     end
   end

@@ -59,5 +59,11 @@ RSpec.describe "Merchant Invoice Show Page" do
           expect(page).to have_content(@invoice_item2.status)
         end
     end
+    it "I see the total revenue that will be generated from all of my items on the invoice" do
+      visit "/merchant/#{@merchant.id}/invoices/#{@invoice1.id}"
+        within "#invoice-total-revenue" do
+          expect(page).to have_content(@invoice1.total_revenue)
+        end
+    end
   end
 end

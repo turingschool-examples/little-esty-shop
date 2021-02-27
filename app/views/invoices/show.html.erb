@@ -4,6 +4,9 @@
   <p>Status: <%= @status_format %></p>
   <p>Created on: <%= @merchant_invoice.date_format %></p>
 </section>
+<section id="invoice-total-revenue">
+  <p>Total Revenue: $<%= @merchant_invoice.total_revenue %></p>
+</section>
 <section id="invoice-customer-info">
   <h2>Customer:</h2>
   <p><%= @merchant_invoice.customer.name %></p>
