@@ -8,6 +8,8 @@ class Admin::InvoicesController < ApplicationController
 		@customer = Customer.find(@invoice.customer_id)
 		invoice_id = @invoice.id
 		@items = InvoiceItem.items_by_invoice(invoice_id)
+
+
 	end
 
 end
