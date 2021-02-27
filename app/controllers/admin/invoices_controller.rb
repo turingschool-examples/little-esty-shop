@@ -5,5 +5,6 @@ class Admin::InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
+    @customer = Customer.find_by(id: @invoice.customer_id)
   end
 end
