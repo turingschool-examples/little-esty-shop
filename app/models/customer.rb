@@ -2,6 +2,9 @@ class Customer < ApplicationRecord
   has_many :invoices
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :invoices
+  has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
+
 
 
   # Can we use ruby for this method?
@@ -24,4 +27,5 @@ class Customer < ApplicationRecord
     # ActiveRecord get number of successful transactions associated with customer
     # Maybe call top_five_customers to access transaction count on invoice
   end
+
 end
