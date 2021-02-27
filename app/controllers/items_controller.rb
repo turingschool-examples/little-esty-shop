@@ -1,4 +1,4 @@
-class MerchantItemsController < ApplicationController
+class ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @inactive_items = @merchant.items.inactive
@@ -15,7 +15,7 @@ class MerchantItemsController < ApplicationController
     item = merchant.items.new(item_params)
     if item.save
       item.update(status: "Inactive")
-      
+
       redirect_to "/merchant/#{merchant.id}/items"
     else
       flash[:notice] = "Fields Missing: Fill in all fields"
@@ -26,17 +26,17 @@ class MerchantItemsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def edit
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def update
     merchant = Merchant.find(params[:merchant_id])
-    item = Item.find(params[:item_id])
+    item = Item.find(params[:id])
     item.update(item_params)
     if item.save && params[:item]
       flash[:success] = "Item Successfully Updated"
