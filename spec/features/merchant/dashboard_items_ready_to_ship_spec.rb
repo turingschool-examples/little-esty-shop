@@ -27,7 +27,7 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
   describe "I see a section for ~Items Ready to Ship~" do
     it "See names of items that have been ordered and not shipped" do
 
-      visit merchant_dashboard_path(@merchant1)
+      visit merchant_dashboard_index_path(@merchant1)
 
       within('.items-ready') do
         expect(page).to have_content(@item.name)
@@ -43,7 +43,7 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
     describe "Next to each item" do
       it "displays invoice id as a link to merchants invoice show page" do
 
-        visit merchant_dashboard_path(@merchant1)
+        visit merchant_dashboard_index_path(@merchant1)
 
         within("#item-#{@item.id}") do
           expect(page).to have_link("#{@invoice_item.invoice.id}")
@@ -54,14 +54,14 @@ RSpec.describe "When I visit '/merchant/merchant_id/dashboard'" do
       end
     end
     it "has the invoice created at date displayed as Day of Week, Month, Day, Year" do
-      visit merchant_dashboard_path(@merchant1)
+      visit merchant_dashboard_index_path(@merchant1)
 
       within("#item-#{@item.id}") do
         expect(page).to have_content("Monday, March 25, 2013")
       end
     end
     it 'displays the invoice created_at date in oldest to newest' do
-      visit merchant_dashboard_path(@merchant1)
+      visit merchant_dashboard_index_path(@merchant1)
 
       expect(@item3.name).to appear_before(@item2.name)
       expect(@item2.name).to appear_before(@item.name)
