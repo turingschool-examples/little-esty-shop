@@ -29,7 +29,6 @@ RSpec.describe "Merchant Invoices Index Page" do
         expect(page).to have_content(invoice2.id)
         expect(page).to have_link("#{invoice1.id}")
         expect(page).to have_link("#{invoice2.id}")
-        save_and_open_page
       end
     end
   end
