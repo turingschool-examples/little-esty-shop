@@ -23,4 +23,8 @@ class Merchant < ApplicationRecord
       items.joins(:invoice_items).joins(:invoices).select("items.name, invoice_items.invoice_id, invoice_items.status, invoices.created_at AS ICA").where.not("invoice_items.status = ?",  '2').order("ICA ASC")
   end
 
+  def top_five_items
+    items.joins(:invoice_items).joins(invoices: :transactions).select('items.*, Sum(invoice_items.quantity * invoice_items.unit_price) AS Revenue').where("transactions.result = ?", 'success').group("items.id").order("Revenue DESC").limit(5)
+  end
+
 end
