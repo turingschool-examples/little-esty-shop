@@ -1,5 +1,11 @@
 Invoice ID: <%= @invoice.id %><br>
 Inovoice Status: <%= @invoice.status %><br>
+                       <div id='status'>
+Update Invoice Status: <%= form_with url: admin_invoice_path(@invoice), method: :patch, local: true do |f| %>
+                        <%= f.select :status, ['completed', 'cancelled', 'in progress'], selected: "#{@invoice.status}" %><br>
+                        <%= f.submit 'Submit' %>
+                        <% end %>
+                       </div>
 Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
 Customer Name: <%= @customer.first_name %> <%= @customer.last_name%><br>
 <% @invoice.invoice_items.each do |invoice_item| %>
