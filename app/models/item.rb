@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   def disable_item
     update(status: false)
   end
-  
+
   def enable_item
     update(status: true)
   end

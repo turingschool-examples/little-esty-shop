@@ -1,8 +1,16 @@
 class Merchants::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_merchant, only: [:index, :new]
 
   def index
-    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def new
+  end
+
+  def create
+    @item = Item.new(item_params)
+    require "pry"; binding.pry
   end
 
   def show
@@ -37,5 +45,9 @@ class Merchants::ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def set_merchant
+    @merchant = Merchant.find(params[:merchant_id])
   end
 end
