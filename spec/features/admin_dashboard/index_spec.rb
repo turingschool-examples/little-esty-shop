@@ -54,7 +54,7 @@ RSpec.describe 'Admin Dashboard' do
 
   it 'I see the names of the top 5 customers' do
     visit admin_dashboard_index_path
-    save_and_open_page
+
     expect(page).to have_content(@customer1.first_name)
     expect(page).to have_content(@customer2.first_name)
     expect(page).to have_content(@customer3.first_name)
@@ -63,8 +63,15 @@ RSpec.describe 'Admin Dashboard' do
     expect(page).to_not have_content(@customer6.first_name)
     expect(page).to_not have_content(@customer7.first_name)
   end
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
+
+  it 'next to each customer name I see the number of
+    successful transactions they have conducted with my merchant' do
+
+    visit admin_dashboard_index_path
+save_and_open_page
+    within("#top_customers-#{@customer1.id}") do
+      expect(page).to have_content(@customer1.first_name)
+      expect(page).to have_content(6)
+    end
+  end
 end
