@@ -5,3 +5,9 @@
   <p><%= "Status: #{@invoice.status}" %></p>
   <p><%= "Created At: #{@invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
 </section>
+
+<section id="customer-info">
+  <h3>Customer Info:</h3>
+  <p><%= "First name: #{@invoice.customer.first_name}" %> </p>
+  <p><%= "Last name: #{@invoice.customer.last_name}" %> </p>
+</section>
