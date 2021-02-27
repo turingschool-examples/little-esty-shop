@@ -27,7 +27,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     if params[:status]
-      if @merchant.update(update_status)
+      if @merchant.update(merchant_params)
         redirect_to "/admin/merchants"
         flash[:notice] = "#{@merchant.name}'s status changed to #{@merchant.status}"
       end
@@ -43,7 +43,7 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 
   def find_merchant
