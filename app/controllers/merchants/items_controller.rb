@@ -12,7 +12,12 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+
+    if params[:status] = "disable"
+      @item.disable_item
+      flash[:notice] = "Item Disabled"
+      redirect_to merchant_items_path(@item.merchant)
+    elsif @item.update(item_params)
       flash[:notice] = "Item Succesfully Updated"
       redirect_to merchant_item_path(@item.merchant, @item)
     else

@@ -1,8 +1,4 @@
 class Item < ApplicationRecord
-  # validates_presence_of :name,
-  #                       :description,
-  #                       :unit_price
-
   validates :name, allow_blank: false, presence: true
   validates :description, allow_blank: false, presence: true
   validates :unit_price, allow_blank: false, presence: true
@@ -15,5 +11,13 @@ class Item < ApplicationRecord
   def convert_date
     expected = invoices.first.created_at
     expected.strftime("%A, %B %d, %Y")
+  end
+
+  def disable_item
+    update(status: false)
+  end
+  
+  def enable_item
+    update(status: true)
   end
 end
