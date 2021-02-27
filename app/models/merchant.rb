@@ -12,11 +12,11 @@ class Merchant < ApplicationRecord
   end
 
   def self.enabled_merchants
-    where("status = 'enabled'")
-  end 
+    where("status = 'enabled'").order(name: :asc)
+  end
 
   def self.disabled_merchants
-    where("status = 'disabled'")
+    where("status = 'disabled'").order(name: :asc)
   end
 
 end
