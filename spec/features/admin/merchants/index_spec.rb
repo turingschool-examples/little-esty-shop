@@ -70,5 +70,11 @@ RSpec.describe 'Admin/merchant index' do
         expect(page).to have_content("enabled")
       end
     end
+
+    it 'I see a link to create a new merchant' do
+      visit "/admin/merchants"
+
+      expect(page).to have_link("New Merchant")
+    end
   end
 end

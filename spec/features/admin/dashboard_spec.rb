@@ -24,46 +24,5 @@ RSpec.describe 'Admin Dashboard' do
 
       expect(page).to have_content('Admin Dashboard')
     end
-
-    it 'I see names of top 5 customers with largest number of successful transactions' do
-      c_1 = Customer.create!(first_name: "Alessandra", last_name: "Ward")
-      c_2 = Customer.create!(first_name: "Tremayne", last_name: "Zieme")
-      c_3 = Customer.create!(first_name: "Sylvester", last_name: "Nader")
-      c_4 = Customer.create!(first_name: "Demarcus", last_name: "King")
-      c_5 = Customer.create!(first_name: "Dejon", last_name: "Fadel")
-      c_6 = Customer.create!(first_name: "Dell", last_name: "Ernser")
-
-      inv_1 = Invoice.create!(status: 2, customer_id: c_1.id)
-      inv_2 = Invoice.create!(status: 2, customer_id: c_2.id)
-      inv_3 = Invoice.create!(status: 2, customer_id: c_3.id)
-      inv_4 = Invoice.create!(status: 2, customer_id: c_4.id)
-      inv_5 = Invoice.create!(status: 2, customer_id: c_5.id)
-      inv_6 = Invoice.create!(status: 2, customer_id: c_6.id)
-
-      t_1 = Transaction.create!(invoice_id: inv_1.id, result: "successful")
-      t_2 = Transaction.create!(invoice_id: inv_1.id, result: "successful")
-      t_3 = Transaction.create!(invoice_id: inv_3.id, result: "successful")
-      t_4 = Transaction.create!(invoice_id: inv_3.id, result: "successful")
-      t_5 = Transaction.create!(invoice_id: inv_3.id, result: "successful")
-      t_6 = Transaction.create!(invoice_id: inv_3.id, result: "successful")
-      t_7 = Transaction.create!(invoice_id: inv_2.id, result: "successful")
-      t_8 = Transaction.create!(invoice_id: inv_4.id, result: "successful")
-      t_9 = Transaction.create!(invoice_id: inv_4.id, result: "successful")
-      t_10 = Transaction.create!(invoice_id: inv_5.id, result: "successful")
-      t_11 = Transaction.create!(invoice_id: inv_5.id, result: "successful")
-      t_12 = Transaction.create!(invoice_id: inv_5.id, result: "successful")
-      t_13 = Transaction.create!(invoice_id: inv_4.id, result: "successful")
-      t_14 = Transaction.create!(invoice_id: inv_4.id, result: "successful")
-      t_15 = Transaction.create!(invoice_id: inv_4.id, result: "successful")
-
-      visit admin_index_path
-
-      expect(page).to have_content('Top Customers')
-      expect("Demarcus King").to appear_before("Sylvester Nader")
-      expect("Sylvester Nader").to appear_before("Dejon Fadel")
-      expect("Dejon Fadel").to appear_before("Alessandra Ward")
-      expect("Alessandra Ward").to appear_before("Tremayne Zieme")
-      expect(page).to_not have_content("Dell Ernser")
-    end
   end
 end
