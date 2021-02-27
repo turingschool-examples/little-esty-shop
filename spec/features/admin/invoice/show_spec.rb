@@ -36,7 +36,18 @@ describe 'Admin Invoice Show Page' do
 
   it "Sees an Invoice's Total Revenue" do
     visit admin_invoice_path(@invoice)
-    save_and_open_page
+
     expect(page).to have_content(@invoice.total_revenue)
+  end
+
+  it 'sees select feild for invoice status' do
+    visit admin_invoice_path(@invoice)
+
+    select("completed", from: 'status')
+    expect(page).to have_button("Submit")
+    click_on('Submit')
+    expect(current_path).to eq(admin_invoice_path(@invoice))
+    expect(@invoice.status).to eq('completed')
+    expect(page).to have_content(@invoice.name)
   end
 end
