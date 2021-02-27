@@ -1,0 +1,3 @@
+<%@invoices.each do |invoice|%>
+  <%= link_to "#{invoice.id}", admin_invoice_path(invoice), method: :get %><br>
+<%end%>
