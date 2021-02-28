@@ -4,9 +4,17 @@
   <section id="merchant-items-list">
     <% @merchant.items.each do |item| %>
       <div id="item-<%= item.id %>">
-        <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %></p>
-    <% end %>
+        <p>
+          <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <br>
+          Status: <%= item.status %>
+          <% if item.status == "disabled" %>
+            <%= button_to "Enable", merchant_item_path(@merchant, item), :params => {:status_change => "enabled"}, method: :patch %>
+          <% else %>
+            <%= button_to "Disable", merchant_item_path(@merchant, item), :params => {:status_change => "disabled"}, method: :patch  %>
+          <% end %>
+        </p>
       </div>
+    <% end %>
   </section>
 
 </body>
