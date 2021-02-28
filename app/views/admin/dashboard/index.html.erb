@@ -5,5 +5,13 @@
 
 <h3>Top Customers</h3>
 <% @top_five_customers.each do |customer| %>
-  <%= customer.name %><br>
+  <section id="top_customers-<%=customer.id%>">
+  <div><%= customer.name %>: Successful Transactions: <%= customer.successful_count %></div><br>
+  </section>
+<% end %>
+
+<h4>Incomplete Invoices</h4>
+<ul id="incomplete_invoices">
+<% @invoice_items.incomplete_invoices.each do |invoice| %>
+  <%= link_to "#{invoice}", 'admin_invoice_path(invoice)' %>
 <% end %>
