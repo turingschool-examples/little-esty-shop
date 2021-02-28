@@ -56,5 +56,23 @@ RSpec.describe "admin invoice show page" do
         expect(page).to have_content("Total: $5.00")
       end
     end
+
+    it "has a select field to update the invoice status" do
+      visit "admin/invoices/#{@invoice.id}"
+
+      expect(page).to have_field(:status)
+    end
+  end
+
+  describe "when the update button is clicked" do
+    it "redierects you to the same show page where the status has been updated" do
+      visit "admin/invoices/#{@invoice.id}"
+
+      select(:completed, from: :status)
+      click_button(:Submit)
+
+      expect(current_path).to eq("/admin/invoices/#{@invoice.id}")
+      expect(page).to have_content("Invoice status: completed")
+    end
   end
 end
