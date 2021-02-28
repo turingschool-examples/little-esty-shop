@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def most_popular_items
-    invoice_items.joins(:item, :transactions)
+    items.joins(:invoice_items, :transactions)
       .where('transactions.result = ?', "success")
       .group('items.id')
       .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
