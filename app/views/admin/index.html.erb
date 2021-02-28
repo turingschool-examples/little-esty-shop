@@ -10,3 +10,11 @@
     </div>
   <%end%>
 </section>
+<section class="incomplete_invioces">
+  <% @incomplete_invoices.each do |invoice| %>
+    <div id="invoice_id_<%= invoice.id%>">
+      <p>Invoice: <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %><br>
+      Created at: <%= invoice.created_at.strftime('%A, %b %d, %Y') %></p>
+    </div>
+  <%end%>
+</section>
