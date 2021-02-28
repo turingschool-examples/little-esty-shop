@@ -36,4 +36,8 @@ class Merchant < ApplicationRecord
   def top_five_customers
     customers.top_five_customers
   end
+
+  def items_ready_to_ship
+    invoices.not_shipped
+  end
 end

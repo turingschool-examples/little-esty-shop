@@ -26,7 +26,7 @@ RSpec.describe Merchant, type: :model do
     1.times {create(:transaction, invoice_id: @invoice_5.id, result: 0)}
     1.times {create(:transaction, invoice_id: @invoice_6.id, result: 1)}
     10.times {create(:transaction, invoice_id: @invoice_7.id, result: 1)}
-    
+
     @invoice_item_1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice_1.id, status: 0)
     @invoice_item_2 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice_2.id, status: 0)
     @invoice_item_3 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice_3.id, status: 1)
@@ -50,6 +50,15 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant1.top_five_customers[2].name).to eq(@customers.third.name)
         expect(@merchant1.top_five_customers[3].name).to eq(@customers.fourth.name)
         expect(@merchant1.top_five_customers[4].name).to eq(@customers.fifth.name)
+      end
+    end
+
+    describe "#items_ready_to_ship" do
+      it "returns a list of the all the items that have been ordered and are ready to ship" do
+        expect(@merchant1.items_ready_to_ship.length).to eq(4)
+        items = @merchant1.items_ready_to_ship
+        expect(items.first.invoice_items.first.item.name).to eq(@item1.name)
+        expect(items.third.invoice_items.first.item.name).to eq(@item2.name)
       end
     end
   end

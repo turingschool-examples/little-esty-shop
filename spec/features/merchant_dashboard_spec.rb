@@ -59,5 +59,18 @@ RSpec.describe "Merchant Dashboard" do
         expect(@customers.fourth.name).to appear_before(@customers.fifth.name)
       end
     end
+    it "I see a section for 'Items Ready to Ship'" do
+      visit "/merchant/#{@merchant1.id}/dashboard"
+      within "#items-ready-to-ship" do
+        expect(page).to have_content("Items Ready to Ship")
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@item2.name)
+        expect(page).to have_content(@invoice_1.id)
+        expect(page).to have_content(@invoice_2.id)
+        expect(page).to have_content(@invoice_3.id)
+        expect(page).to have_content(@invoice_5.id)
+        expect(page).to_not have_content(@invoice_4.id)
+      end
+    end
   end
 end
