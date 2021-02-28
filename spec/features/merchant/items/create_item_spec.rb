@@ -27,8 +27,8 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
     fill_in 'description', with: "Some description"
     fill_in 'unit_price', with: 5.5
     click_button "Create Item"
-    expect(current_path).to eq(merchant_items_path(@merchant1))
 
+    expect(current_path).to eq(merchant_items_path(@merchant1))
     expect(page).to have_content("New Item Created")
 
     within(".disabled_items") do
@@ -43,8 +43,8 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
     fill_in 'description', with: "Some description"
     fill_in 'unit_price', with: 5.5
     click_button "Create Item"
-    expect(current_path).to eq(merchant_items_path(@merchant1))
 
+    expect(current_path).to eq(merchant_items_path(@merchant1))
     expect(page).to have_content("Required Information Missing")
   end
 end
