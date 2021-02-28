@@ -29,7 +29,3 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
     end
   end
 end
-  # As a merchant,
-  # When I visit my merchant items index page
-  # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
-  # And I see that each Item is listed in the appropriate section

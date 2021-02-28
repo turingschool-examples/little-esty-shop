@@ -60,7 +60,7 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
 
     it "I see total revenue generated next to each item name" do
       visit merchant_items_path(@merchant1)
-      # save_and_open_page
+      
       within(".most_popular_items") do
         expect(page).to have_content("Total Revenue Generated: $1200.00")
       end

@@ -27,7 +27,6 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
 
   it "routes to merchant's item show page when item name is clicked" do
     visit merchant_items_path(@merchant1)
-    # save_and_open_page
 
     click_link(@item.name)
 
