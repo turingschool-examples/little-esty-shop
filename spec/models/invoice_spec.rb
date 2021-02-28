@@ -1,6 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Admin Dashboard' do
+RSpec.describe Invoice, type: :model do
+  describe "relationships" do
+    it { should belong_to :customer }
+    it { should have_many(:invoice_items)}
+    it { should have_many(:items).through(:invoice_items)}
+    it { should have_many(:transactions)}
+  end
+
   before :each do
     @customer1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer2 = Customer.create!(first_name: "Steve", last_name: "Smith")
@@ -50,53 +57,5 @@ RSpec.describe 'Admin Dashboard' do
     @transaction20 = Transaction.create!(invoice_id: @invoice5.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction21 = Transaction.create!(invoice_id: @invoice6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction22 = Transaction.create!(invoice_id: @invoice7.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
-  end
-
-  it 'When I visit admin dashboard I see a header
-   indicating that I am on the admin dashboard' do
-
-    visit admin_dashboard_index_path
-
-    expect(page).to have_content("Admin Dashboard")
-    expect(page).to have_link("Admin Merchants Index")
-    expect(page).to have_link("Admin Invoices Index")
-  end
-
-  it 'I see the names of the top 5 customers' do
-    visit admin_dashboard_index_path
-
-    expect(page).to have_content(@customer1.first_name)
-    expect(page).to have_content(@customer2.first_name)
-    expect(page).to have_content(@customer3.first_name)
-    expect(page).to have_content(@customer4.first_name)
-    expect(page).to have_content(@customer5.first_name)
-    expect(page).to_not have_content(@customer6.first_name)
-    expect(page).to_not have_content(@customer7.first_name)
-  end
-
-  it 'next to each customer name I see the number of
-    successful transactions they have conducted with my merchant' do
-
-    visit admin_dashboard_index_path
-
-    within("#top_customers-#{@customer1.id}") do
-      expect(page).to have_content(@customer1.first_name)
-      expect(page).to have_content(6)
-    end
-  end
-  # I see a section for "Incomplete Invoices"
-  it 'I see a section for Incomplete Invoices,
-    that section I see a list of the ids of all invoices
-    That have items that have not yet been shipped,
-    And each invoice id links to that invoices admin show page' do
-
-    visit admin_dashboard_index_path
-
-    expect(page).to have_content("Incomplete Invoices")
-
-    within("#incomplete_invoices") do
-      expect(page).to have_link(@invoice1.id)
-      expect(page).to have_link(@invoice3.id)
-    end
   end
 end
