@@ -11,4 +11,10 @@ Rails.application.routes.draw do
     resources :merchants
     resources :customers
   end
+
+  resources :merchants do
+    resources :dashboard, only: [:index]
+    resources :items
+    resources :invoices
+  end
 end
