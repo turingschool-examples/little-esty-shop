@@ -7,8 +7,8 @@ RSpec.describe "Merchant Invoice Show Page" do
     @invoice1 = create(:invoice, customer: @cust1)
     @item1 = create(:item, merchant: @merchant1)
     @item2 = create(:item, merchant: @merchant1)
-    @invoice_item1 = create(:invoice_item, invoice: @invoice1, item: @item1)
-    @invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @item2)
+    @invoice_item1 = create(:invoice_item, invoice: @invoice1, item: @item1, quantity: 2, unit_price: 3)
+    @invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @item2, quantity: 3, unit_price: 3)
   end
 
   describe "When I visit the merchant invoice show page do" do 
@@ -36,15 +36,23 @@ RSpec.describe "Merchant Invoice Show Page" do
       visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
 
       within "#invoice_item-info" do 
-        expect(page).to have_content("Item name: #{@item1.name}")
-        expect(page).to have_content("Item name: #{@invoice_item1.quantity}")
-        expect(page).to have_content("Item name: #{@invoice_item1.unit_price}")
-        expect(page).to have_content("Item name: #{@invoice_item1.status}")
+        expect(page).to have_content("Invoice item name: #{@item1.name}")
+        expect(page).to have_content("Invoice item quantity: #{@invoice_item1.quantity}")
+        expect(page).to have_content("Invoice item price: #{@invoice_item1.unit_price}")
+        expect(page).to have_content("Invoice item status: #{@invoice_item1.status}")
 
-        expect(page).to have_content("Item name: #{@item2.name}")
-        expect(page).to have_content("Item name: #{@invoice_item2.quantity}")
-        expect(page).to have_content("Item name: #{@invoice_item2.unit_price}")
-        expect(page).to have_content("Item name: #{@invoice_item2.status}")
+        expect(page).to have_content("Invoice item name: #{@item2.name}")
+        expect(page).to have_content("Invoice item quantity: #{@invoice_item2.quantity}")
+        expect(page).to have_content("Invoice item price: #{@invoice_item2.unit_price}")
+        expect(page).to have_content("Invoice item status: #{@invoice_item2.status}")
+      end
+    end
+
+    it "displays the total revenue from all items on the invoice" do 
+      visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+
+      within "#total-revenue" do 
+        expect(page).to have_content("Total revenue from invoice: 15")
       end
     end
   end

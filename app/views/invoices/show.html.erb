@@ -12,7 +12,18 @@
   <p><%= "Last name: #{@invoice.customer.last_name}" %> </p>
 </section>
  
-<section>
+<section id="invoice_item-info">
   <h3>Invoice Item Info:</h3>
-  
+  <% @invoice.invoice_items.each do |inv_item| %>
+  <ul>
+    <li><%= "Invoice item name: #{inv_item.item.name}" %></li>
+    <li><%= "Invoice item quantity: #{inv_item.quantity}" %></li>
+    <li><%= "Invoice item price: #{inv_item.unit_price}" %></li>
+    <li><%= "Invoice item status: #{inv_item.status}" %></li>
+</ul>
+  <% end %>
+</section>
+
+<section id="total-revenue">
+  <h3><%= "Total revenue from invoice: #{@invoice.total_revenue}" %></h3>
 </section>
