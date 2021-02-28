@@ -1,10 +1,14 @@
 <h1> Merchant Names </h1>
 <%= @merchant.name %>
 
-
-
 <h3>Top Customers</h3>
 <% @merchant.top_five_customers.each do |customer| %>
+  <section id="customer-<%= customer.first_name %>">
   <%= customer.first_name %>
+  <%= customer.last_name %>
   <%= customer.purchases %><br>
+  </section>
 <% end %>
+
+<%= link_to 'Merchant Items Index', merchant_items_path(@merchant) %>
+<%= link_to 'Merchant Invoices Index', merchant_invoices_path(@merchant) %>
