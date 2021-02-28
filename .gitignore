@@ -28,3 +28,4 @@
 
 # Ignore SimpleCov Coverage file
 /coverage
+/.DS_Store
