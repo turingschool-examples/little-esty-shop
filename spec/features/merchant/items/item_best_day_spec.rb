@@ -48,7 +48,6 @@ RSpec.describe "When I visit '/merchant/merchant_id/items'" do
   describe "Next to each of the 5 most popular items there is a date with the most sales for item" do
     it "Has a label ~Top selling date for <item> was: ~" do
       visit merchant_items_path(@merchant1)
-      save_and_open_page
       within(".most_popular_items") do
         expect(page).to have_content("Top selling date for #{@item1.name} was: #{@item1.top_selling_date}")
       end
