@@ -54,7 +54,7 @@ RSpec.describe 'Admin Dashboard' do
 
   it 'I see the names of the top 5 customers' do
     visit admin_dashboard_index_path
-    save_and_open_page
+    # save_and_open_page
     expect(page).to have_content(@customer1.first_name)
     expect(page).to have_content(@customer2.first_name)
     expect(page).to have_content(@customer3.first_name)
