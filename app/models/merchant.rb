@@ -2,6 +2,8 @@ class Merchant < ApplicationRecord
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
+  has_many :customers, through: :invoices
 
   def self.group_by_status(status)
     where(status: status)
@@ -29,5 +31,9 @@ class Merchant < ApplicationRecord
     .first
     .created_at
     .strftime("%A, %B %d, %Y")
+  end
+
+  def top_five_customers
+    customers.top_five_customers
   end
 end
