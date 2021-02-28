@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "When I visit the Admin Merchants index page", type: :feature do
   before :each do
     @joe = Merchant.create!(name: "Joe Rogan")
-    @gary = Merchant.create!(name: "Gary Bettman")
+    @gary = Merchant.create!(name: "Gary Bettman", status: "enabled")
     @roger = Merchant.create!(name: "Roger Goodell") 
   end
 
@@ -57,6 +57,22 @@ RSpec.describe "When I visit the Admin Merchants index page", type: :feature do
     within("#merchant-#{@joe.id}") do
       expect(page).to have_content("enabled")
       expect(page).to have_button("disable")
+    end
+  end
+
+  scenario "Merchants are separated by their status" do
+    visit "/admin/merchants"
+
+    within("#enabled") do
+      expect(page).to have_content(@gary.name)
+      expect(page).to_not have_content(@joe.name)
+      expect(page).to_not have_content(@roger.name)
+    end
+
+    within("#disabled") do
+      expect(page).to_not have_content(@gary.name)
+      expect(page).to have_content(@joe.name)
+      expect(page).to have_content(@roger.name)
     end
   end
 end
