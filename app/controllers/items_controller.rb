@@ -18,7 +18,10 @@ class ItemsController < ApplicationController
 
 
   def update
-    if @item.update(item_params)
+    if params[:status_change]
+      @item.update(status: params[:status_change])
+      redirect_to merchant_items_path(@merchant)
+    elsif @item.update(item_params)
       flash[:notice] = "Your item has been successfully updated"
       redirect_to merchant_item_path(@merchant, @item)
     else
