@@ -22,12 +22,15 @@
       <th>Status</th>
     </tr>
     <% @merchant_invoice.invoice_items.each do |invoice_item| %>
-      <tr id="invoice-items-<%= invoice_item.id %>-info">
-        <td><%= invoice_item.item.name %></td>
-        <td><%= invoice_item.quantity %></td>
-        <td><%= invoice_item.unit_price %></td>
-        <td><%= invoice_item.status %></td>
-      </tr>
+        <tr id="invoice-items-<%= invoice_item.id %>-info">
+          <td><%= invoice_item.item.name %></td>
+          <td><%= invoice_item.quantity %></td>
+          <td><%= invoice_item.unit_price %></td>
+          <td><%= form_with url: "/merchant/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch do |form|  %>
+            <%= form.select :status, ["Pending", "Packaged", "Shipped"], selected: "#{invoice_item.status.titleize}" %>
+            <%= form.button "Update Item Status" %>
+          <% end %></td>
+        </tr>
     <% end %>
   </table>
 </section>

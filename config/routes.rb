@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :items
     resources :invoices
+    resources :invoice_items, only: [:update]
   end
 
   resources :admin, only: [:index]
