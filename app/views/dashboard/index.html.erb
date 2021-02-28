@@ -4,3 +4,14 @@
   <%= link_to "My Items", merchant_items_path(@merchant), method: :get %>
   <%= link_to "My Invoices", merchant_invoices_path(@merchant), method: :get %>
 </section>
+
+<section id="top-five-customers">
+  <h2>Favorite Customers</h2>
+  <ol>
+    <% @merchant_top_five_customers.each do |customer| %>
+      <li>
+        <%= customer.name %> - <%= customer.top_five %> purchases
+      </li>
+    <% end %>
+  </ol>
+</section>
