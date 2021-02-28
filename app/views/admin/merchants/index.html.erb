@@ -1,14 +1,23 @@
 <header>
   <h1 style="text-align: center;">Merchants</h1>
+  <nav class="navbar">
+    <%= link_to "Create Merchant", new_admin_merchant_path %>
+  </nav>
 </header>
 <body>
-  <section class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+  <section class="card text-white bg-primary mb-3" style="width: 30rem;">
     <div class="card-body">
       <h3 class="card-header">Index</h3><br>
         <% @merchants.each do |m| %>
           <div class="card-text" id="merchant-<%= m.id %>">
-            <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>
-          </div>
+            <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>, <i>Status: <%= m.status %></i> <%= form_with url: admin_merchant_path(m), method: :patch, local: :true do |f| %>
+              <% if m.status == "enabled" %>
+                <%= f.button "disable", name: :status, value: "disabled" %>
+              <% else %>
+                <%= f.button "enable", name: :status, value: "enabled" %>
+              <% end %>
+            <% end %>
+          </div><hr>
         <% end %>
     </div>
   </section>

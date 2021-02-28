@@ -27,4 +27,18 @@ RSpec.describe "When I visit the Admin Merchants index page", type: :feature do
       expect(page).to have_link("#{@roger.name}", href: "/admin/merchants/#{@roger.id}")
     end
   end
+
+  scenario "I see a link to create a new merchant" do
+    visit "/admin/merchants"
+
+    expect(page).to have_link("Create Merchant", href: "/admin/merchants/new")
+  end
+
+  scenario "When I click on the 'Create Merchant' link, I'm taken to the new admin merchants page" do
+    visit "/admin/merchants"
+
+    click_link "Create Merchant"
+
+    expect(current_path).to eq("/admin/merchants/new")
+  end
 end

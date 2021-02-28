@@ -7,7 +7,7 @@ namespace :csv_load do
     Merchant.destroy_all
     file = CSV.readlines('./db/data/merchants.csv', headers: true, header_converters: :symbol)
     file.each do |row|
-      Merchant.create!(row.to_h)
+      Merchant.create!(name: row[:name], created_at: row[:created_at], updated_at: row[:updated_at])
     end
   end
 
@@ -43,7 +43,12 @@ namespace :csv_load do
     Item.destroy_all
     file = CSV.readlines('./db/data/items.csv', headers: true, header_converters: :symbol)
     file.each do |row|
-      Item.create!(row.to_h)
+      Item.create!(name: row[:name], 
+                  unit_price: row[:unit_price], 
+                  description: row[:description], 
+                  merchant_id: row[:merchant_id], 
+                  created_at: row[:created_at], 
+                  updated_at: row[:updated_at])
     end
   end
 
