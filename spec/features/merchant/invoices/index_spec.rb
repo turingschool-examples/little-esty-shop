@@ -39,22 +39,22 @@ RSpec.describe "Merchant invoice index page" do
       within(".invoices") do
         within("#invoice_id_#{@invoice1.id}") do
           expect(page).to have_link("Invoice #{@invoice1.id}")
-          # expect(page).to have_content("Status: #{@invoice1.status}")
+          expect(page).to have_content("Status: #{@invoice1.status}")
         end
 
         within("#invoice_id_#{@invoice2.id}") do
           expect(page).to have_link("Invoice #{@invoice2.id}")
-          # expect(page).to have_content("Status: #{@invoice2.status}")
+          expect(page).to have_content("Status: #{@invoice2.status}")
         end
 
         within("#invoice_id_#{@invoice3.id}") do
           expect(page).to have_link("Invoice #{@invoice3.id}")
-          # expect(page).to have_content("Status: #{@invoice3.status}")
+          expect(page).to have_content("Status: #{@invoice3.status}")
         end
 
         within("#invoice_id_#{@invoice5.id}") do
           expect(page).to have_link("Invoice #{@invoice5.id}")
-          # expect(page).to have_content("Status: #{@invoice5.status}")
+          expect(page).to have_content("Status: #{@invoice5.status}")
         end
       end
     end
@@ -63,7 +63,7 @@ RSpec.describe "Merchant invoice index page" do
       visit "/merchants/#{@merchant1.id}/invoices"
 
       expect(page).to_not have_link("Invoice #{@invoice4.id}")
-      # expect(page).to have_content("Status: #{@invoice4.status}")
+      expect(page).to have_content("Status: #{@invoice4.status}")
     end
   end
 end

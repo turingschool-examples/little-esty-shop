@@ -57,8 +57,8 @@ RSpec.describe Merchant, type: :model do
       expect(@joe.top_five_customers).to_not eq([@customer1, @customer4, @customer3, @customer2, @customer5])
     end
 
-    it "#invoice_ids" do
-      expect(@joe.invoice_ids).to eq([@inv1.id, @inv2.id, @inv3.id, @inv4.id, @inv5.id, @inv7.id])
+    it "#invoices" do
+      expect(@joe.invoices).to eq([@inv1, @inv2, @inv3, @inv4, @inv5, @inv7])
     end
   end
 end
