@@ -15,7 +15,6 @@ RSpec.describe Merchant, type: :model do
     @customer_5 = Customer.create!(first_name: "Sally", last_name: "May")
     @customer_6 = Customer.create!(first_name: "Jo", last_name: "Shmoe")
 
-
     @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "completed")
     @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: "completed")
     @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: "completed")
@@ -28,9 +27,7 @@ RSpec.describe Merchant, type: :model do
     @invoice_items_3 = InvoiceItem.create!(item: @item_1, invoice: @invoice_3)
     @invoice_items_4 = InvoiceItem.create!(item: @item_1, invoice: @invoice_4)
     @invoice_items_5 = InvoiceItem.create!(item: @item_1, invoice: @invoice_5)
-    @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_1)
-    @invoice_items_7 = InvoiceItem.create!(item: @item_2, invoice: @invoice_1)
-    @invoice_items_7 = InvoiceItem.create!(item: @item_2, invoice: @invoice_2)
+    @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6)
 
     @transaction_01 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000000000, cc_expiration_date: '2000-01-01 00:00:00 -0500', result: true)
     @transaction_02 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000001111, cc_expiration_date: '2001-01-01 00:00:00 -0500', result: true)
@@ -53,7 +50,8 @@ RSpec.describe Merchant, type: :model do
     @transaction_19 = Transaction.create!(invoice_id: @invoice_3.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction_20 = Transaction.create!(invoice_id: @invoice_4.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction_21 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
-    @transaction_22 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
+    @transaction_22 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
+
   end
 
   describe "relationships" do
@@ -66,8 +64,16 @@ RSpec.describe Merchant, type: :model do
 
   describe "instance methods" do
     it "#top_five_customer" do
-      expect(@merchant_1.top_five_customers[0].first_name).to eq("Bob")
+      expect(@merchant_1.top_five_customers[0].first_name).to eq("Jo")
+      expect(@merchant_1.top_five_customers[0].purchases).to eq(6)
+
       expect(@merchant_1.top_five_customers[1].first_name).to eq("Steve")
+      expect(@merchant_1.top_five_customers[1].purchases).to eq(5)
+
+      expect(@merchant_1.top_five_customers[4].first_name).to eq("Adriana")
+      expect(@merchant_1.top_five_customers[4].purchases).to eq(2)
+
+      expect(@merchant_1.top_five_customers[5].nil?).to eq(true)
     end
   end
 end
