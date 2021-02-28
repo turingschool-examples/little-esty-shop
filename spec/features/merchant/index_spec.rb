@@ -106,32 +106,35 @@ RSpec.describe 'As a Merchant', type: :feature do
     end
 
     describe "it has a section with a list of all my non-shipped items" do
-      it "next to each Item I see the id of the invoice that ordered my item" do
+      it "next to each Item I see the id of the invoice linking to the merchant invoice page" do
         visit merchant_dashboard_index_path(@merchant_1)
 
         expect(page).to have_content("Items Ready to Ship")
 
           within "#items-ready-to-ship" do
             expect(page).to have_content(@item_1.name)
-            expect(page).to have_content(@invoice_items_3.invoice_id)
-            expect(page).to have_content(@invoice_items_6.invoice_id)
-
             expect(page).to have_content(@item_2.name)
-            expect(page).to have_content(@invoice_2.invoice_id)
-
             expect(page).to have_content(@item_3.name)
-            expect(page).to have_content(@@invoice_4.invoice_id)
 
             expect(page).to have_no_content(@item_4.name)
+
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_6.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_1.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_4.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_3.invoice_id))
           end
-          # @invoice_items_1 = InvoiceItem.create!(item: @item_2, invoice: @invoice_1, status: "packaged")
-          # @invoice_items_3 = InvoiceItem.create!(item: @item_1, invoice: @invoice_3, status: "packaged")
-          # @invoice_items_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_4, status: "packaged")
-          # @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6, status: "packaged")
         end
 
-      it "each invoice id is a link to my merchant's invoice show page" do
+      it "and they are ordered by the date invoices were created with oldest appearing first" do
+        visit merchant_dashboard_index_path(@merchant_1)
 
+        within "#items-ready-to-ship" do
+          expect(page.all('.items')[0]).to have_content("Saturday, March 23, 1991")
+          expect(page.all('.items')[1]).to have_content("Thursday, January 28, 1993")
+          expect(page.all('.items')[2]).to have_content("Friday, January 28, 1994")
+          expect(page.all('.items')[3]).to have_content("Thursday, January 28, 2021")
+          expect(page.all('.items')[4]).to have_content("")
+        end
       end
     end
   end
