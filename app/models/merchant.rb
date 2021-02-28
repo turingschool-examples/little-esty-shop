@@ -8,13 +8,12 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def most_popular_items
-    items
-    .joins(:invoice_items, :invoices, :transactions)
-    .where('transactions.result = ?', "success")
-    .group('items.id')
-    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
-    .order('revenue DESC')
-    .limit(5)
+    invoice_items.joins(:item, :transactions)
+      .where('transactions.result = ?', "success")
+      .group('items.id')
+      .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+      .order('revenue DESC')
+      .limit(5)
   end
 
   def find_top_customers
@@ -22,7 +21,8 @@ class Merchant < ApplicationRecord
       .where('transactions.result = ?', "success")
       .group('customers.id')
       .select('customers.*, count(*) AS transaction_count')
-      .order('transaction_count DESC').limit(5)
+      .order('transaction_count DESC')
+      .limit(5)
   end
 
   def items_not_shipped
