@@ -8,4 +8,12 @@ class Invoice < ApplicationRecord
   def self.incomplete
     where(status: 0).or(where(status: 2))
   end
+
+  def self.oldest_to_newest
+    order(:created_at)
+  end
+
+  def date_created
+    self.created_at.strftime("%A, %B %e, %Y")
+  end
 end
