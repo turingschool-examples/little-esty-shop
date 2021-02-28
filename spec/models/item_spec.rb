@@ -14,4 +14,22 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of :description }
     it { should validate_presence_of :unit_price }
   end
+
+  describe "instance methods" do
+    it "#disable_item" do
+      @merchant1 = create(:merchant)
+
+      @item = create(:item, merchant_id: @merchant1.id)
+      @item.disable_item
+      expect(@item.status).to be false
+    end
+
+    it "#enable_item" do
+      @merchant1 = create(:merchant)
+
+      @item = create(:item, merchant_id: @merchant1.id, status: false)
+      @item.enable_item
+      expect(@item.status).to be true
+    end
+  end
 end

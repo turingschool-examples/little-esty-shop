@@ -1,0 +1,4 @@
+<h1><%= @merchant.name %>'s Items</h1>
+<%= link_to "Create a New Item", new_merchant_item_path(@merchant) %>
+<%= render partial: "merchant_items", locals: { merchant: @merchant } %>
+<%= render partial: "most_popular_items", locals: { merchant: @merchant } %>

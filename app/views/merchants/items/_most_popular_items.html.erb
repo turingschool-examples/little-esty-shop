@@ -1,0 +1,9 @@
+<section class="most_popular_items">
+  <h3>Most Popular Items</h3>
+  <ol>
+    <% merchant.most_popular_items.each do |item| %>
+      <li><%= item.name %></li>
+      <li>Total Revenue Generated: $<%= '%.2f' % item.revenue %></li>
+    <% end %>
+  </ol>
+</section>
