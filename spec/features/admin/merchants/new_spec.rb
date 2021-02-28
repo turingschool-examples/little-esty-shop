@@ -18,7 +18,6 @@ RSpec.describe 'Admin/merchant new' do
 
       expect(current_path).to eq("/admin/merchants")
       expect(page).to have_content("New Merchant")
-save_and_open_page
       expect(page).to have_content("disable")
     end
   end

@@ -76,5 +76,33 @@ RSpec.describe 'Admin/merchant index' do
 
       expect(page).to have_link("New Merchant")
     end
+
+    it "Displays two sections for 'Enabled Merchants' and 'Disabled Merchants'" do
+      visit "/admin/merchants"
+
+      expect(page).to have_content("Enabled Merchants")
+      expect(page).to have_content("Disabled Merchants")
+    end
+
+    it 'And I see that each Merchant is listed in the appropriate section' do
+      Merchant.destroy_all
+      merchant_1 = create(:merchant, status: 0)
+      merchant_2 = create(:merchant, status: 1)
+      merchant_3 = create(:merchant, status: 1)
+      merchant_4 = create(:merchant, status: 1)
+      merchant_5 = create(:merchant, status: 0)
+      visit "/admin/merchants"
+
+      within("#enabled-merchants") do
+        expect(page).to have_content("#{merchant_1.name}")
+        expect(page).to have_content("#{merchant_5.name}")
+      end
+
+      within("#disabled-merchants") do
+        expect(page).to have_content("#{merchant_2.name}")
+        expect(page).to have_content("#{merchant_3.name}")
+        expect(page).to have_content("#{merchant_4.name}")
+      end
+    end
   end
 end
