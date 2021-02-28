@@ -1,0 +1,10 @@
+<header>
+  <h1 style="text-align: center;">Update <%= @merchant.name %></h1>
+</header><br><br>
+<div class="form-group" style="text-align: center; font-size: larger;">
+  <%= form_with url: admin_merchant_path, method: :patch, local: :true do |f| %>
+    <%= f.label "Name" %>
+    <%= f.text_field "name", value: "#{@merchant.name}" %>
+    <%= f.button "Update" %>
+  <% end %>
+</div>
