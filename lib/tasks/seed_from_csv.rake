@@ -43,7 +43,7 @@ namespace :csv_load do
     CSV.foreach('db/data/invoices.csv', headers: true) do |row|
       Invoice.create!(
         customer_id: row[1],
-        status: row[52],
+        status: row[2],
         created_at: row[3],
         updated_at: row[4]
       )
