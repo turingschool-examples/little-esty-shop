@@ -40,13 +40,7 @@ RSpec.describe Item, type: :model do
       @invoice2 = create(:invoice, created_at: "2019-05-12 09:54:09 UTC")
       @invoice3 = create(:invoice, created_at: "2019-05-12 09:54:09 UTC")
       @invoice4 = create(:invoice, created_at: "2011-12-10 09:54:09 UTC")
-      @invoice5 = create(:invoice, created_at: "2018-06-04 09:54:09 UTC")
-
-      # @invoice1 = create(:invoice, created_at: "2013-03-25 09:54:09 UTC")
-      # @invoice2 = create(:invoice, created_at: "2012-03-17 09:54:09 UTC")
-      # @invoice3 = create(:invoice, created_at: "2011-03-01 09:54:09 UTC")
-      # @invoice4 = create(:invoice, created_at: "2020-02-20 09:54:09 UTC")
-      # @invoice5 = create(:invoice, created_at: "2019-05-12 09:54:09 UTC")
+      @invoice5 = create(:invoice, created_at: "2018-06-04 09:54:09 UTC")      # @invoice1 = create(:invoice, created_at: "2013-03-25 09:54:09 UTC")      # @invoice2 = create(:invoice, created_at: "2012-03-17 09:54:09 UTC")      # @invoice3 = create(:invoice, created_at: "2011-03-01 09:54:09 UTC")      # @invoice4 = create(:invoice, created_at: "2020-02-20 09:54:09 UTC")      # @invoice5 = create(:invoice, created_at: "2019-05-12 09:54:09 UTC")
 
       @invoice_item1 = create(:invoice_item, invoice_id: @invoice1.id, item_id: @item1.id, status: 2, quantity: 6, unit_price: 100)
       @invoice_item2 = create(:invoice_item, invoice_id: @invoice2.id, item_id: @item1.id, status: 2, quantity: 5, unit_price: 100)
