@@ -8,6 +8,13 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  def top_selling_date
+    sales_by_day = invoices.joins(:invoice_items)
+    .group("date_trunc('day', invoices.created_at)")
+    .sum('invoice_items.quantity')
+    sales_by_day.key(sales_by_day.values.max).strftime("%A, %B %d, %Y")
+  end
+
   def convert_date
     expected = invoices.first.created_at
     expected.strftime("%A, %B %d, %Y")
