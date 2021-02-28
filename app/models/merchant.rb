@@ -19,4 +19,15 @@ class Merchant < ApplicationRecord
   def total_revenue
     invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
   end
+
+  def highest_revenue_date
+    invoices
+    .joins(:invoice_items)
+    .select("invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+    .group("invoices.created_at")
+    .order(total_revenue: :desc)
+    .first
+    .created_at
+    .strftime("%A, %B %d, %Y")
+  end
 end
