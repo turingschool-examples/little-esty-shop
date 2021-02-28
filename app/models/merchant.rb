@@ -9,9 +9,9 @@ class Merchant < ApplicationRecord
     transactions
     .joins(invoice: :customer)
     .where('result = ?', true)
-    .select("customers.*, count('transactions.result') as top_result")
+    .select("customers.*, count('transactions.result') as purchases")
     .group('customers.id')
-    .order(top_result: :desc)
+    .order(purchases: :desc)
     .limit(5)
   end
 end
