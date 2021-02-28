@@ -2,6 +2,7 @@
 <%= link_to "Create New Merchant", new_admin_merchant_path(), method: :get %>
 <h3>Top Five Merchants</h3>
 <% @top_five_merchants.each do |merchant| %>
+<% require "pry"; binding.pry %>
 <p><%= merchant.name %>, Total revenue: <%= number_to_currency(merchant.revenue.to_f/100) %></p>
 <% end %>
 

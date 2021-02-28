@@ -23,8 +23,14 @@ class Merchant < ApplicationRecord
       items.joins(:invoice_items).joins(:invoices).select("items.name, invoice_items.invoice_id, invoice_items.status, invoices.created_at AS ICA").where.not("invoice_items.status = ?",  '2').order("ICA ASC")
   end
 
+  # def self.top_five_merchants
+  #   InvoiceItem.joins("JOIN invoices ON invoice_items.invoice_id = invoices.id JOIN items ON invoice_items.item_id = items.id JOIN transactions ON transactions.invoice_id = invoices.id JOIN merchants ON merchants.id = items.merchant_id").where("transactions.result = 'success' AND invoices.status != 0").group("merchants.id").select("merchants.id, merchants.name , SUM (invoice_items.quantity * invoice_items.unit_price) AS revenue").order("revenue DESC").limit(5)
+  # end
+
   def self.top_five_merchants
     InvoiceItem.joins("JOIN invoices ON invoice_items.invoice_id = invoices.id JOIN items ON invoice_items.item_id = items.id JOIN transactions ON transactions.invoice_id = invoices.id JOIN merchants ON merchants.id = items.merchant_id").where("transactions.result = 'success' AND invoices.status != 0").group("merchants.id").select("merchants.id, merchants.name , SUM (invoice_items.quantity * invoice_items.unit_price) AS revenue").order("revenue DESC").limit(5)
   end
+
+
 
 end
