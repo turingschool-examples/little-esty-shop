@@ -3,6 +3,19 @@
 <h4>Items</h4>
 <section class="items">
   <% @merchant.items.each do |item| %>
-    <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></li>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></a>
+        <% if item.status %>
+          <div class="btn btn-outline-danger">
+            <%= button_to "disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+          </div>
+        <% else %>
+          <div class="btn btn-outline-success">
+            <%= button_to "enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+          </div>
+        <% end %>
+
+      </nav>
+
   <% end %>
 </section>

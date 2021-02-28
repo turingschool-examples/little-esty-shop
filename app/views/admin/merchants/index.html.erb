@@ -1,0 +1,15 @@
+<header>
+  <h1 style="text-align: center;">Merchants</h1>
+</header>
+<body>
+  <section class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+    <div class="card-body">
+      <h3 class="card-header">Index</h3><br>
+        <% @merchants.each do |m| %>
+          <div class="card-text" id="merchant-<%= m.id %>">
+            <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>
+          </div>
+        <% end %>
+    </div>
+  </section>
+</body>
