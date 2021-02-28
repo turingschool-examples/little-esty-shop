@@ -12,9 +12,9 @@
           <div class="card-text" id="merchant-<%= m.id %>">
             <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>, <i>Status: <%= m.status %></i> <%= form_with url: admin_merchant_path(m), method: :patch, local: :true do |f| %>
               <% if m.status == "enabled" %>
-                <%= f.button "disable", name: :status, value: "disabled" %>
+                <%= f.button "disable", name: :status, value: "disabled", class: "btn btn-danger" %>
               <% else %>
-                <%= f.button "enable", name: :status, value: "enabled" %>
+                <%= f.button "enable", name: :status, value: "enabled", class: "btn btn-success" %>
               <% end %>
             <% end %>
           </div><hr>
