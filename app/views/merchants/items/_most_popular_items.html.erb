@@ -2,8 +2,10 @@
   <h3>Most Popular Items</h3>
   <ol>
     <% merchant.most_popular_items.each do |item| %>
-      <li><%= item.name %></li>
-      <li>Total Revenue Generated: $<%= '%.2f' % item.revenue %></li>
+      <li><%= item.name %>
+      Total Revenue Generated: $<%= '%.2f' % item.revenue %></li>
+      <li>Top selling date for <%= "#{item.name}" %> was: <%= item.top_selling_date %>
+      </li>
     <% end %>
   </ol>
 </section>
