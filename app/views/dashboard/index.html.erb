@@ -15,3 +15,13 @@
     <% end %>
   </ol>
 </section>
+<section id="items-ready-to-ship">
+  <h2>Items Ready to Ship</h2>
+  <ul>
+    <% @items_ready_to_ship.each do |invoice| %>
+      <% invoice.invoice_items.each do |invoice_item| %>
+        <li><%= invoice_item.item.name %> - Invoice#<%= link_to "#{invoice_item.invoice.id}", merchant_invoice_path(@merchant, invoice_item.invoice), method: :get %> </li>
+      <% end %>
+    <% end %>
+  </ul>
+</section>
