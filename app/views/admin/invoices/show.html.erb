@@ -5,6 +5,13 @@
     Created at: <%= @invoice.created_at.strftime('%A, %b %d, %Y') %>
   </p>
 </div>
+<div class="update_status">
+  <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+    <%= form.label "Update status:" %>
+    <%= form.select :status, [:cancelled, :'in progress', :completed], selected: @invoice.status %>
+    <%= form.submit :Submit %>
+  <%end%>
+</div>
 
 <div class="customer_info">
   <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
