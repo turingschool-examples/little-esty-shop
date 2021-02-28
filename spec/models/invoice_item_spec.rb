@@ -56,6 +56,18 @@ RSpec.describe InvoiceItem, type: :model do
     end
   end
 
+  describe "instance methods" do
+    describe "#change_status" do
+      it "updates the status of an invoice item" do
+        expect(@invoice_item2.status).to eq("shipped")
+        @invoice_item2.change_status('pending')
+        expect(@invoice_item2.status).to eq("pending")
+        expect(@invoice_item2.status).to_not eq("shipped")
+      end
+    end
+  end
+
+
   # describe "Class Methods" do
   #   it 'finds incomplete items' do
   #     expect(@invoice1.invoice_items.not_shipped).to eq()
