@@ -40,8 +40,6 @@ namespace :csv_load do
   		invoice = Invoice.new
       invoice[:customer_id] = row["customer_id"]
   		invoice[:status] = row["status"]
-      require "pry"; binding.pry
-      invoice[:formatted_created_at] = row["created_at"].to_datetime.
   		invoice.save
   	end
   end
