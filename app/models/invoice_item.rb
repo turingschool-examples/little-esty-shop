@@ -9,4 +9,8 @@ class InvoiceItem < ApplicationRecord
   has_many :transactions, through: :invoice
 
   enum status: [ "pending", "packaged", "shipped" ]
+
+  def self.total_revenue
+     sum("invoice_items.quantity * invoice_items.unit_price").to_i
+  end
 end

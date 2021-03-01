@@ -1,0 +1,6 @@
+<%= form_with model: invoice_item, local: true do |f| %>
+  <%= f.label :status %>
+  <%= f.select :status, [ "pending", "packaged", "shipped" ] %>
+
+  <%= f.submit "Update Item Status" %>
+<% end %>
