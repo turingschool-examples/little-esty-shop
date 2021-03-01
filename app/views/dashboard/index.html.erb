@@ -16,7 +16,7 @@
   <section class="items">
     <%= invoice_item.item.name %>
     <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_url(@merchant, invoice_item.invoice_id)  %>
-    <%= invoice_item.invoice.date_created %><br>
+    <%= invoice_item.invoice.format_time %><br>
   </section>
   <% end %>
 </section>
