@@ -6,13 +6,13 @@ Rails.application.routes.draw do
   get "/admin", to: "admin#index"
 
   namespace :admin do
-    resources :merchants, only: [:index, :show, :edit, :update]
-    resources :invoices, only: [:index, :show]
+    resources :merchants
+    resources :invoices, only: [:index, :show, :update]
   end
 
   resources :merchants do
     get "/dashboard", to: "merchants#dashboard"
-    scope module: :merchant do
+    scope module: 'merchant' do
       resources :items
       resources :invoices
     end
