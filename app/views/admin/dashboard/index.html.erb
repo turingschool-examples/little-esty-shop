@@ -10,8 +10,12 @@
   </section>
 <% end %>
 
-<h4>Incomplete Invoices</h4>
+<h3>Incomplete Invoices</h3>
 <ul id="incomplete_invoices">
-<% @invoice_items.incomplete_invoices.each do |invoice| %>
-  <%= link_to "#{invoice}", 'admin_invoice_path(invoice)' %>
+<% @invoice_items.incomplete_invoices.each do |invoice_item| %>
+  <section id="created_at_incomplete_invoice_items-<%=invoice_item.invoice_id%>">
+  <li><%= link_to "#{invoice_item.invoice_id}", 'admin_invoice_path(invoice_item)' %></li>
+  <h4>Created at: <%= invoice_item.invoice.format_time %></h4>
+  </section>
 <% end %>
+</ul>
