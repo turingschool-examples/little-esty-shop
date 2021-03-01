@@ -61,5 +61,11 @@ RSpec.describe Merchant, type: :model do
         expect(items.third.invoice_items.first.item.name).to eq(@item2.name)
       end
     end
+
+    describe "#five-most-popular-items" do
+      it "displays the names of the top five items by total revenue generated" do
+        expect(@merchant1.top_five_items).to eq(
+      end
+    end
   end
 end
