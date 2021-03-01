@@ -1,38 +1,35 @@
 <div class="invoice_info">
   <h1>Invoice ID: <%= @invoice.id %></h1>
+  <div class="customer_info">
+    <h5><br>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br></h5>
+  </div>
   <p>
-    Invoice status: <%= @invoice.status %><br>
-    Created at: <%= @invoice.created_at.strftime('%A, %b %d, %Y') %>
+    Created at: <%= @invoice.created_at.strftime('%A, %b %d, %Y') %><br>
+    Invoice status: <%= @invoice.status %>
   </p>
 </div>
 
-<div class="update_status">
-  <%= form_with url: url, method: :patch, local: true do |form| %>
-    <%= form.label "Update status:" %>
-    <%= form.select :status, [:cancelled, :'in progress', :completed], selected: @invoice.status %>
-    <%= form.submit :Submit %>
-  <%end%>
-</div>
-
-<div class="customer_info">
-  <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
-</div>
+<%= form_with url: url, method: :patch, local: true, class: "update_status" do |form| %>
+  <%= form.label "Update status:" %>
+  <%= form.select :status, [:cancelled, :'in progress', :completed], selected: @invoice.status %>
+  <%= form.submit :Submit %>
+<%end%>
 
 <div class="item_info">
   <% @invoice.invoice_items.each do |invoice_item| %>
-  <div id="item_id_<%=invoice_item.item.id%>">
-    <p>
-      Item: <%= invoice_item.item.name %>
+  <div class="card border-primary mb-3" style="width: 20rem; display: inline-block;" id="item_id_<%=invoice_item.item.id%>">
+    <div class="card-header">Item: <%= invoice_item.item.name %></div>
+    <div class="card-body">
       Quantity ordered: <%= invoice_item.quantity %><br>
       Price: <%= invoice_item.unit_price %><br>
       Item status: <%= invoice_item.status %>
-    </p>
+    </div>
   </div>
   <% end %>
 </div>
 
 <div class="total_revenue">
-    <p>
+    <h2>
       Total: $<%= "#{@invoice.total_revenue}".ljust(4, '0') %>
-    </p>
+    </h2>
 </div>
