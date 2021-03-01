@@ -16,8 +16,6 @@ describe 'When I visit the admin invoices (/admin/invoices)' do
     expect(page).to have_link("#{@invoice_2.id}")
     expect(page).to have_content("#{@invoice_3.id}")
     expect(page).to have_link("#{@invoice_3.id}")
-    # save_and_open_page
-
   end
 
   it 'Then I am taken to that invoices admin show page (/admin/invoices/invoice_id)' do

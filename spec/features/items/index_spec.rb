@@ -5,19 +5,31 @@ RSpec.describe "Merchant Item Index Page" do
     @merchant = create(:merchant)
     @merchant2 = create(:merchant)
     
-    create_list(:item, 5, merchant:  @merchant)
+    @item1 = @merchant.items.create(name: "item 1", description: "it is item 1", unit_price: 5 )
+    @item2 = @merchant.items.create(name: "item 2", description: "it is item 2", unit_price: 5 )
+    @item3 = @merchant.items.create(name: "item 3", description: "it is item 3", unit_price: 5 )
+
+    # create_list(:item, 5, merchant:  @merchant)
     create_list(:item, 5, :merchant => @merchant2)
   end
   describe "As a merchant" do
     it "shows the names of all the items" do
       visit merchant_items_path(@merchant)
       
-      expect(page).to have_content(@merchant.items.first.name)
-      expect(page).to have_content(@merchant.items.second.name)
-      expect(page).to have_content(@merchant.items.third.name)
-      expect(page).to have_content(@merchant.items.fourth.name)
-      expect(page).to have_content(@merchant.items.fifth.name)
-      
+      within("#item-#{@item1.id}") do
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@item1.status)
+      end
+
+      within("#item-#{@item2.id}") do
+        expect(page).to have_content(@item2.name)
+        expect(page).to have_content(@item2.status)
+      end
+
+      within("#item-#{@item2.id}") do
+        expect(page).to have_content(@item2.name)
+        expect(page).to have_content(@item2.status)
+      end
     end
     
     it "doesn't show any other merchants items" do
@@ -26,5 +38,38 @@ RSpec.describe "Merchant Item Index Page" do
       expect(page).to_not have_content(@merchant2.items.first.name)
       expect(page).to_not have_content(@merchant2.items.second.name)
     end
+
+    it "has next to each item name a button to disable or enable that item" do
+      visit merchant_items_path(@merchant)
+      
+      within("#item-#{@item1.id}") do
+        expect(page).to have_button("Enable")
+      end
+    end
+    
+    describe "When I click this button" do
+      it "takes me back to the items index showing the changed status of the item" do
+        visit merchant_items_path(@merchant)
+
+        within("#item-#{@item1.id}") do
+          click_on "Enable"
+          expect(current_path).to eq(merchant_items_path(@merchant))
+        end
+      end
+
+      it "can also disable an item" do
+        visit merchant_items_path(@merchant)
+
+        within("#item-#{@item1.id}") do
+          click_on "Enable"
+          expect(current_path).to eq(merchant_items_path(@merchant))
+          expect(page).to have_content("enabled")
+          expect(page).to have_button("Disable")
+          click_on "Disable"
+          expect(page).to have_content("disabled")
+        end
+      end
+    end
+    
   end
 end

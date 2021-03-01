@@ -15,5 +15,12 @@ class Invoice < ApplicationRecord
 
   def total_revenue 
     invoice_items.sum('unit_price * quantity')
+
+  def self.oldest_to_newest
+    order(:created_at)
+  end
+
+  def date_created
+    self.created_at.strftime("%A, %B %e, %Y")
   end
 end
