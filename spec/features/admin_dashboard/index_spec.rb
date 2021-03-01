@@ -16,9 +16,9 @@ RSpec.describe 'Admin Dashboard' do
     @item1 = Item.create!(name: "spatula", description: "fold them eggs", unit_price: 14.00, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: "bowling ball", description: "roll em if you got em", unit_price: 68.00, merchant_id: @merchant2.id)
 
-    @invoice1 = Invoice.create!(customer_id: @customer1.id, status: "cancelled")
+    @invoice1 = Invoice.create!(customer_id: @customer1.id, status: "cancelled", created_at: "1990-03-23 21:40:46")
     @invoice2 = Invoice.create!(customer_id: @customer2.id, status: "in progress")
-    @invoice3 = Invoice.create!(customer_id: @customer3.id, status: "completed")
+    @invoice3 = Invoice.create!(customer_id: @customer3.id, status: "completed", created_at: "1991-03-23 21:40:46")
     @invoice4 = Invoice.create!(customer_id: @customer4.id, status: "cancelled")
     @invoice5 = Invoice.create!(customer_id: @customer5.id, status: "completed")
     @invoice6 = Invoice.create!(customer_id: @customer6.id, status: "completed")
@@ -84,7 +84,7 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content(6)
     end
   end
-  # I see a section for "Incomplete Invoices"
+
   it 'I see a section for Incomplete Invoices,
     that section I see a list of the ids of all invoices
     That have items that have not yet been shipped,
@@ -97,6 +97,24 @@ RSpec.describe 'Admin Dashboard' do
     within("#incomplete_invoices") do
       expect(page).to have_link(@invoice1.id)
       expect(page).to have_link(@invoice3.id)
+    end
+  end
+
+  it 'In the section for "Incomplete Invoices", Next to each
+    invoice id I see the date that the invoice was created
+    And I see the date formatted like "Monday, July 18, 2019"
+    And I see that the list is ordered from oldest to newest' do
+
+    visit admin_dashboard_index_path
+    within("#created_at_incomplete_invoice_items-#{@invoice1.id}") do
+      expect(page).to have_content(@invoice_item1.invoice.format_time)
+    end
+    save_and_open_page
+
+    within("#incomplete_invoices") do
+      # expect(@invoice1.id).to appear_before(@invoice3.id)
+      # expect(@invoice3.id).to_not appear_before(@invoice1.id)
+      expect(@invoice_item1.invoice.format_time).to appear_before(@invoice_item3.invoice.format_time)
     end
   end
 end
