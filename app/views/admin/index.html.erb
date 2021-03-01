@@ -2,11 +2,21 @@
   <h1>Admin Dashboard</h1>
   <p><%= link_to :Merchants, "/admin/merchants" %> | <%= link_to :Invoices, "/admin/invoices" %></p>
 </header>
-<section class="top_customers"><h2> Top 5 Customers</h2>
+<section class="top_customers">
+  <h2> Top 5 Customers</h2>
   <% @top_five_customers.each do |customer| %>
     <div id="customer_id_<%= customer.id %>">
       <p>Name: <%= "#{customer.first_name} #{customer.last_name}" %><br>
       Number of successful transactions: <%= customer.transaction_count %></p>
+    </div>
+  <%end%>
+</section>
+<section class="incomplete_invioces">
+  <h2>Incomplete invioces</h2>
+  <% @incomplete_invoices.each do |invoice| %>
+    <div id="invoice_id_<%= invoice.id%>">
+      <p>Invoice: <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %><br>
+      Created at: <%= invoice.created_at.strftime('%A, %b %d, %Y') %></p>
     </div>
   <%end%>
 </section>
