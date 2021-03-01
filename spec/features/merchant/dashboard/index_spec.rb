@@ -118,10 +118,10 @@ RSpec.describe 'As a Merchant', type: :feature do
 
             expect(page).to have_no_content(@item_4.name)
 
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_6.invoice_id))
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_1.invoice_id))
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_4.invoice_id))
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_3.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_6.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_1.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_4.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_3.invoice_id))
           end
         end
 
