@@ -28,7 +28,7 @@ RSpec.describe 'the merchant invoice index page' do
 
   it 'displays all invoice ids as links' do
     visit merchant_invoices_path(@merchant1)
-    save_and_open_page
+
     expect(page).to have_link(@invoice1.id)
     expect(page).to have_link(@invoice2.id)
     expect(page).to have_link(@invoice3.id)
