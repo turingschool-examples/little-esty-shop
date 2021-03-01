@@ -58,6 +58,7 @@ RSpec.describe Invoice, type: :model do
     @transaction21 = Transaction.create!(invoice_id: @invoice6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction22 = Transaction.create!(invoice_id: @invoice7.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
   end
+
   describe "instance methods" do
     describe "Format time" do
       it "Formats timestamp for created at with day, month date, year" do

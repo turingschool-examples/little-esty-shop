@@ -84,6 +84,7 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_content(6)
     end
   end
+
   it 'I see a section for Incomplete Invoices,
     that section I see a list of the ids of all invoices
     That have items that have not yet been shipped,
@@ -98,6 +99,7 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to have_link(@invoice3.id)
     end
   end
+
   it 'In the section for "Incomplete Invoices", Next to each
     invoice id I see the date that the invoice was created
     And I see the date formatted like "Monday, July 18, 2019"
@@ -115,5 +117,4 @@ RSpec.describe 'Admin Dashboard' do
       expect(@invoice_item1.invoice.format_time).to appear_before(@invoice_item3.invoice.format_time)
     end
   end
-
 end

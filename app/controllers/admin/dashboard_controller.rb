@@ -6,6 +6,7 @@ class Admin::DashboardController < ApplicationController
     # require "pry";binding.pry
     @invoices = Invoice.all
     # @formatted_created_at = Invoice.find(params[:id]).format_time
+
   end
 
   # def show
