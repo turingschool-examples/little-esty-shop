@@ -1,21 +1,21 @@
-<p>Merchant: <%= @merchant.name %></p>
+<h1>Merchant: <%= @merchant.name %></h1>
 
-<h4>Items</h4>
-<section class="items">
-  <% @merchant.items.each do |item| %>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></a>
-        <% if item.status %>
-          <div class="btn btn-outline-danger">
-            <%= button_to "disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
-          </div>
-        <% else %>
-          <div class="btn btn-outline-success">
-            <%= button_to "enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
-          </div>
-        <% end %>
+<section id="enabled-items">
+  <h3>Enabled Items</h3>
+  <% @merchant.items_by_status_true.each do |item| %>
+    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <div class="btn btn-outline-danger">
+      <%= button_to "disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+    </div></br>
+  <% end %>
+</section>
 
-      </nav>
-
+<section id="disabled-items">
+  <h3>Disabled Items</h3>
+  <% @merchant.items_by_status_false.each do |item| %>
+    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <div class="btn btn-outline-success">
+      <%= button_to "enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+    </div></br>
   <% end %>
 </section>

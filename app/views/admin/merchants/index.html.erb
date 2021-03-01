@@ -5,7 +5,8 @@
   </nav>
 </header>
 <body>
-  <section class="card text-white bg-primary mb-3" style="width: 30rem;">
+
+  <section class="card text-white bg-primary mb-3" style="width: 30rem; float:left; text-align: center;">
     <div class="card-body">
       <h3 class="card-header">Index</h3><br>
         <% @merchants.each do |m| %>
@@ -19,6 +20,30 @@
             <% end %>
           </div><hr>
         <% end %>
+    </div>
+  </section>
+  <section class="card text-white bg-success mb3" style="width: 30rem; float: right; text-align: center;" id="enabled">
+    <div class="card-body">
+      <h3 class="card-header">Enabled Merchants</h3><br>
+      <% @enabled_merchants.each do |em| %>
+        <div class="card-text" id="disabled-merchant-<%= em.id %>">
+          <a href="/admin/merchants/<%=em.id %>" style="color:white; font-size: larger;"><%= em.name %></a><%= form_with url: admin_merchant_path(em), method: :patch, local: :true do |f| %>
+            <%= f.button "disable", name: :status, value: "disabled", class: "btn btn-danger" %>
+          <% end %>
+        </div><hr>
+      <% end %>
+    </div>
+  </section>
+  <section class="card text-white bg-danger mb3" style="width: 30rem; float: right; text-align: center;" id="disabled">
+    <div class="card-body">
+      <h3 class="card-header">Disabled Merchants</h3><br>
+      <% @disabled_merchants.each do |dm| %>
+        <div class="card-text" id="disabled-merchant-<%= dm.id %>">
+          <a href="/admin/merchants/<%=dm.id %>" style="color:white; font-size: larger;"><%= dm.name %></a><%= form_with url: admin_merchant_path(dm), method: :patch, local: :true do |f| %>
+            <%= f.button "enable", name: :status, value: "enabled", class: "btn btn-success" %>
+          <% end %>
+        </div><hr>
+      <% end %>
     </div>
   </section>
 </body>
