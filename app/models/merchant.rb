@@ -15,11 +15,11 @@ class Merchant < ApplicationRecord
 
   def items_not_shipped
     Invoice.joins(:items)
-             .where('merchant_id = ?', self.id)
-             .joins(:invoice_items)
-             .where('invoice_items.status != ?', 2)
-             .select("items.name, invoices.id, invoices.created_at")
-             .order("invoices.created_at")
+           .where('merchant_id = ?', self.id)
+           .joins(:invoice_items)
+           .where('invoice_items.status != ?', 2)
+           .select("items.name, invoices.id, invoices.created_at")
+           .order("invoices.created_at")
   end
 
   def enabled?
@@ -28,5 +28,13 @@ class Merchant < ApplicationRecord
 
   def disabled?
     status == 'disabled'
+  end
+
+  def self.display_enabled
+    where(status: 0)
+  end
+
+  def self.display_disabled
+    where(status: 1)
   end
 end
