@@ -20,7 +20,9 @@
   <ul>
     <% @items_ready_to_ship.each do |invoice| %>
       <% invoice.invoice_items.each do |invoice_item| %>
-        <li><%= invoice_item.item.name %> - Invoice#<%= link_to "#{invoice_item.invoice.id}", merchant_invoice_path(@merchant, invoice_item.invoice), method: :get %> </li>
+        <li><%= invoice_item.item.name %> - Invoice#<%= link_to "#{invoice_item.invoice.id}", merchant_invoice_path(@merchant, invoice_item.invoice), method: :get %>
+             <%= invoice_item.invoice.date_format %>
+        </li>
       <% end %>
     <% end %>
   </ul>
