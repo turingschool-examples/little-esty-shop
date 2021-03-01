@@ -6,7 +6,7 @@ class Invoice < ApplicationRecord
   enum status: {"in progress" => 0, completed: 1, cancelled: 2}
 
   def total_revenue
-    invoice_items.sum("unit_price * quantity")
+    invoice_items.calculate_revenue
   end
 
   def self.not_shipped
