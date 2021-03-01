@@ -66,7 +66,6 @@ RSpec.describe "New Item Page" do
             expect(page).to have_content('disabled')
             expect(page).to have_button('Enable')
           end
-          save_and_open_page
         end
       end
     end
