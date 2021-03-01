@@ -27,4 +27,13 @@ class Merchant < ApplicationRecord
             .group(:id).order(successful: :desc)
             .limit(5)
   end
+
+  def invoices
+    invoice_ids = items.joins(:invoices)
+         .select('invoices.id as id, invoices.status as status')
+         .distinct('invoices.id')
+         .pluck('invoices.id')
+
+    Invoice.where(id: invoice_ids)
+  end
 end
