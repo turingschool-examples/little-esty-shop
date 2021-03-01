@@ -19,6 +19,7 @@ RSpec.describe "Merchant Dashboard" do
     @invoice_5 = @customers.fifth.invoices.first
     @invoice_6 = @customers[5].invoices.first
     @invoice_7 = @customers[6].invoices.first
+
     9.times {create(:transaction, invoice_id: @invoice_1.id, result: 0)}
     8.times {create(:transaction, invoice_id: @invoice_2.id, result: 0)}
     7.times {create(:transaction, invoice_id: @invoice_3.id, result: 0)}
@@ -70,6 +71,16 @@ RSpec.describe "Merchant Dashboard" do
         expect(page).to have_content(@invoice_3.id)
         expect(page).to have_content(@invoice_5.id)
         expect(page).to_not have_content(@invoice_4.id)
+      end
+    end
+
+    it "can display the invoices with the date created at" do
+      visit "/merchant/#{@merchant1.id}/dashboard"
+
+      within "#items-ready-to-ship" do
+        expected = @invoice_1.created_at.strftime('%A, %B %d, %Y')
+
+        expect(page).to have_content(expected)
       end
     end
   end
