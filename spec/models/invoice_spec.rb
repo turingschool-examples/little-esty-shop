@@ -23,9 +23,9 @@ RSpec.describe Invoice, type: :model do
     @item1 = Item.create!(name: "spatula", description: "fold them eggs", unit_price: 14.00, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: "bowling ball", description: "roll em if you got em", unit_price: 68.00, merchant_id: @merchant2.id)
 
-    @invoice1 = Invoice.create!(customer_id: @customer1.id, status: "cancelled")
+    @invoice1 = Invoice.create!(customer_id: @customer1.id, status: "cancelled", created_at: "1990-03-23 21:40:46")
     @invoice2 = Invoice.create!(customer_id: @customer2.id, status: "in progress")
-    @invoice3 = Invoice.create!(customer_id: @customer3.id, status: "completed")
+    @invoice3 = Invoice.create!(customer_id: @customer3.id, status: "completed", created_at: "1991-03-23 21:40:46")
     @invoice4 = Invoice.create!(customer_id: @customer4.id, status: "cancelled")
     @invoice5 = Invoice.create!(customer_id: @customer5.id, status: "completed")
     @invoice6 = Invoice.create!(customer_id: @customer6.id, status: "completed")
@@ -57,5 +57,13 @@ RSpec.describe Invoice, type: :model do
     @transaction20 = Transaction.create!(invoice_id: @invoice5.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction21 = Transaction.create!(invoice_id: @invoice6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction22 = Transaction.create!(invoice_id: @invoice7.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
+  end
+  describe "instance methods" do
+    describe "Format time" do
+      it "Formats timestamp for created at with day, month date, year" do
+        # may need to change this expected later
+        expect(@invoice_item1.invoice.format_time).to_not eq(@invoice_item1.invoice.created_at)
+      end
+    end
   end
 end

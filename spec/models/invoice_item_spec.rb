@@ -83,12 +83,5 @@ RSpec.describe InvoiceItem, type: :model do
       end
     end
   end
-  describe "instance methods" do
-    describe "Format time" do
-      it "Formats timestamp for created at with day, month date, year" do
-        # may need to change this expected later
-        expect(@invoice_item1.format_time).to_not eq(@invoice_item1.created_at)
-      end
-    end
-  end
+
 end
