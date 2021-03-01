@@ -10,5 +10,16 @@
   </section>
 <% end %>
 
+<section id="items-ready-to-ship">
+  <h3>Items Ready to Ship</h3>
+  <% @merchant.items_not_shipped.each do |invoice_item| %>
+  <section class="items">
+    <%= invoice_item.item.name %>
+    <%= link_to "#{invoice_item.invoice_id}", merchant_invoice_url(@merchant, invoice_item.invoice_id)  %>
+    <%= invoice_item.invoice.format_time %><br>
+  </section>
+  <% end %>
+</section>
+
 <%= link_to 'Merchant Items Index', merchant_items_path(@merchant) %>
 <%= link_to 'Merchant Invoices Index', merchant_invoices_path(@merchant) %>

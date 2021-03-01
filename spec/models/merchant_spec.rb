@@ -15,19 +15,19 @@ RSpec.describe Merchant, type: :model do
     @customer_5 = Customer.create!(first_name: "Sally", last_name: "May")
     @customer_6 = Customer.create!(first_name: "Jo", last_name: "Shmoe")
 
-    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "completed")
-    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: "completed")
-    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: "completed")
-    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: "completed")
-    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: "completed")
-    @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: "completed")
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "completed", created_at: "1991-03-23 21:40:46")
+    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: "completed", created_at: "1992-01-28 21:40:46")
+    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: "completed", created_at: "1993-01-28 21:40:46")
+    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: "completed", created_at: "1994-01-28 21:40:46")
+    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: "completed", created_at: "1995-01-28 21:40:46")
+    @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: "completed", created_at: "2021-01-28 21:40:46")
 
-    @invoice_items_1 = InvoiceItem.create!(item: @item_1, invoice: @invoice_1)
-    @invoice_items_2 = InvoiceItem.create!(item: @item_1, invoice: @invoice_2)
-    @invoice_items_3 = InvoiceItem.create!(item: @item_1, invoice: @invoice_3)
-    @invoice_items_4 = InvoiceItem.create!(item: @item_1, invoice: @invoice_4)
-    @invoice_items_5 = InvoiceItem.create!(item: @item_1, invoice: @invoice_5)
-    @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6)
+    @invoice_items_1 = InvoiceItem.create!(item: @item_2, invoice: @invoice_1, status: "packaged")
+    @invoice_items_2 = InvoiceItem.create!(item: @item_1, invoice: @invoice_2, status: "shipped")
+    @invoice_items_3 = InvoiceItem.create!(item: @item_1, invoice: @invoice_3, status: "packaged")
+    @invoice_items_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_4, status: "packaged")
+    @invoice_items_5 = InvoiceItem.create!(item: @item_1, invoice: @invoice_5, status: "shipped")
+    @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6, status: "packaged")
 
     @transaction_01 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000000000, cc_expiration_date: '2000-01-01 00:00:00 -0500', result: true)
     @transaction_02 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000001111, cc_expiration_date: '2001-01-01 00:00:00 -0500', result: true)
@@ -74,6 +74,15 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant_1.top_five_customers[4].purchases).to eq(2)
 
       expect(@merchant_1.top_five_customers[5].nil?).to eq(true)
+    end
+
+    it "#items_not_shipped" do
+      #Expecting to return four because of the six invoices, two have shipped
+      expect(@merchant_1.items_not_shipped.count).to eq(4)
+
+      #Expecting the invoice with the earliest created at attribute to be displayed first
+      expect(@merchant_1.items_not_shipped.first.invoice.created_at).to eq("1991-03-23 21:40:46")
+      expect(@merchant_1.items_not_shipped.last.invoice.created_at).to eq("2021-01-28 21:40:46")
     end
   end
 end

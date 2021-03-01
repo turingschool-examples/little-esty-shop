@@ -21,6 +21,7 @@ RSpec.describe 'As a Merchant', type: :feature do
     @item_1 = @merchant_1.items.create!(name: 'worker pain', unit_price: 1)
     @item_2 = @merchant_1.items.create!(name: 'union busting', unit_price: 3)
     @item_3 = @merchant_1.items.create!(name: 'climate desctruction', unit_price: 2)
+    @item_4 = @merchant_1.items.create!(name: 'something you can only find here', unit_price: 2)
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer_2 = Customer.create!(first_name: "Steve", last_name: "Smith")
@@ -29,19 +30,19 @@ RSpec.describe 'As a Merchant', type: :feature do
     @customer_5 = Customer.create!(first_name: "Sally", last_name: "May")
     @customer_6 = Customer.create!(first_name: "Jo", last_name: "Shmoe")
 
-    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "completed")
-    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: "completed")
-    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: "completed")
-    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: "completed")
-    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: "completed")
-    @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: "completed")
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "completed", created_at: "1991-03-23 21:40:46")
+    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: "completed", created_at: "1992-01-28 21:40:46")
+    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: "completed", created_at: "1993-01-28 21:40:46")
+    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: "completed", created_at: "1994-01-28 21:40:46")
+    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: "completed", created_at: "1995-01-28 21:40:46")
+    @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: "completed", created_at: "2021-01-28 21:40:46")
 
-    @invoice_items_1 = InvoiceItem.create!(item: @item_1, invoice: @invoice_1)
-    @invoice_items_2 = InvoiceItem.create!(item: @item_1, invoice: @invoice_2)
-    @invoice_items_3 = InvoiceItem.create!(item: @item_1, invoice: @invoice_3)
-    @invoice_items_4 = InvoiceItem.create!(item: @item_1, invoice: @invoice_4)
-    @invoice_items_5 = InvoiceItem.create!(item: @item_1, invoice: @invoice_5)
-    @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6)
+    @invoice_items_1 = InvoiceItem.create!(item: @item_2, invoice: @invoice_1, status: "packaged")
+    @invoice_items_2 = InvoiceItem.create!(item: @item_1, invoice: @invoice_2, status: "shipped")
+    @invoice_items_3 = InvoiceItem.create!(item: @item_1, invoice: @invoice_3, status: "packaged")
+    @invoice_items_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_4, status: "packaged")
+    @invoice_items_5 = InvoiceItem.create!(item: @item_1, invoice: @invoice_5, status: "shipped")
+    @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6, status: "packaged")
 
     @transaction_01 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000000000, cc_expiration_date: '2000-01-01 00:00:00 -0500', result: true)
     @transaction_02 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000001111, cc_expiration_date: '2001-01-01 00:00:00 -0500', result: true)
@@ -115,6 +116,39 @@ RSpec.describe 'As a Merchant', type: :feature do
         expect(page).to have_content(@customer_6.first_name)
         expect(page).to have_content(@customer_6.last_name)
         expect(page).to have_content(@customer_6.transactions.count)
+      end
+    end
+
+    describe "it has a section with a list of all my non-shipped items" do
+      it "next to each Item I see the id of the invoice linking to the merchant invoice page" do
+        visit merchant_dashboard_index_path(@merchant_1)
+
+        expect(page).to have_content("Items Ready to Ship")
+
+          within "#items-ready-to-ship" do
+            expect(page).to have_content(@item_1.name)
+            expect(page).to have_content(@item_2.name)
+            expect(page).to have_content(@item_3.name)
+
+            expect(page).to have_no_content(@item_4.name)
+
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_6.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_1.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_4.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_3.invoice_id))
+          end
+        end
+
+      it "and they are ordered by the date invoices were created with oldest appearing first" do
+        visit merchant_dashboard_index_path(@merchant_1)
+
+        within "#items-ready-to-ship" do
+          expect(page.all('.items')[0]).to have_content("Saturday, March 23, 1991")
+          expect(page.all('.items')[1]).to have_content("Thursday, January 28, 1993")
+          expect(page.all('.items')[2]).to have_content("Friday, January 28, 1994")
+          expect(page.all('.items')[3]).to have_content("Thursday, January 28, 2021")
+          expect(page.all('.items')[4]).to have_content("")
+        end
       end
     end
   end

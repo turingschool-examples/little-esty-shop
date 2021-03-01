@@ -14,4 +14,11 @@ class Merchant < ApplicationRecord
     .order(purchases: :desc)
     .limit(5)
   end
+
+  def items_not_shipped
+    invoice_items
+    .where.not("invoice_items.status = ?", "shipped")
+    .joins(:invoice)
+    .order("invoices.created_at")
+  end
 end
