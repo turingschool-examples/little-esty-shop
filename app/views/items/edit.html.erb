@@ -1,0 +1,3 @@
+<h1>Edit Merchant Item</h1>
+
+<%= render partial: 'form', locals: {path: merchant_item_path(@item.merchant_id, @item.id), method: :patch, button_text: "Submit"} %>

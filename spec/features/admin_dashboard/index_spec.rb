@@ -109,7 +109,7 @@ RSpec.describe 'Admin Dashboard' do
     within("#created_at_incomplete_invoice_items-#{@invoice1.id}") do
       expect(page).to have_content(@invoice_item1.invoice.format_time)
     end
-    save_and_open_page
+    # save_and_open_page
 
     within("#incomplete_invoices") do
       # expect(@invoice1.id).to appear_before(@invoice3.id)

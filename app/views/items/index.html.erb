@@ -1,7 +1,38 @@
-<h1>Merchant Items Index</h1>
+<h2><%= @merchant.name %></h3>
 
-<ul class='merchant-items'>
-  <% @merchant_items.each do |item| %>
-    <li><%= link_to item.name, "/merchants/#{item.merchant.id}/items/#{item.id}" %></li>
+<>
+<h3>My Items</h3>
+
+<%= link_to 'New Item', new_merchant_item_path(@merchant) %>
+
+<section id="items-enabled">
+  <h3>Enabled Items</h3>
+  <ul>
+  <% @merchant.items.enabled.each do |item| %>
+    <li>
+      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
+      <%= button_to 'Disable', merchant_item_path(@merchant.id, item.id, {item: {status: "disabled"}}), method: :patch %>
+    </li>
   <% end %>
-</ul>
+  </ul>
+</section>
+
+<section id="items-disabled">
+  <h3>Disabled Items</h3>
+  <ul>
+  <% @merchant.items.disabled.each do |item| %>
+    <li>
+      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
+      <%= button_to 'Enable', merchant_item_path(@merchant.id, item.id, {item: {status: "enabled"}}), method: :patch, id: "btn-enable-#{item.id}" %>
+    </li>
+  <% end %>
+  </ul>
+</section>
+
+<section id="top_five_items">
+  <h3>Top Five Items </h3>
+  <% @merchant.top_five_items.each do |item| %>
+    <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item)  %> -
+      $<%= item.total_revenue %> in sales</li>
+  <% end %>
+</section>

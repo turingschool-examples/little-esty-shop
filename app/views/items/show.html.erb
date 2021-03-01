@@ -1,5 +1,7 @@
-<h1>Merchant Item Show Page</h1>
-
+<h1>Merchant Item Show Page</h1><br>
 <h2><%= @item.name %></h2>
 <p>Description: <%= @item.description %></p>
 <p>Price: <%= @item.unit_price %></p>
+
+
+<%= link_to 'Edit Item Information', edit_merchant_item_path(@item.merchant.id, @item.id) %>
