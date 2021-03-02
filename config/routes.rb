@@ -13,6 +13,6 @@ get "/", to:"admin/dashboard#index"
 	get "/admin", to:"admin/dashboard#index"
 	namespace :admin do
 		resources :merchants, only: [:index, :show, :edit, :new, :create, :update, :destroy]
-		resources :invoices, only: [:index, :show, :destroy]
+		resources :invoices, only: [:index, :show, :update, :destroy]
 	end
 end

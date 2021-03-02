@@ -1,5 +1,6 @@
 <%= link_to "Admin Merchants Index", admin_merchants_path  %><br>
 <%= link_to "Admin Invoices Index", admin_invoices_path  %><br>
+<h4>Commits</h4>
 <h3> Top Customers </h3>
 <%@top_customers.each do |customer|%>
   <p>Name: <%= customer.first_name %> <%= customer.last_name %> -- Total Transactions: <%= customer.count_of_success %></p>
