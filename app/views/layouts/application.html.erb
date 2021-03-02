@@ -10,10 +10,14 @@
   </head>
 
   <body>
+    Github Repo Name: <%= @repo_names %><br>
+    Contributors: <% @repo_contributers.each do |data| %>
+    <%= data  %><br>
+    <% end   %>
     <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
-    
+
     <%= yield %>
   </body>
 </html>
