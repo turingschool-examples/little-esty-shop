@@ -67,7 +67,6 @@ RSpec.describe 'Admin Merchant Show' do
     click_on("Update #{@merchant1.name}")
 
     expect(current_path).to eq(edit_admin_merchant_path(@merchant1))
-    # save_and_open_page
 
     expect(page).to have_xpath("//input[@value='Jimbo']")
   end
@@ -86,6 +85,3 @@ RSpec.describe 'Admin Merchant Show' do
     # save_and_open_page
   end
 end
-
-#
-#
