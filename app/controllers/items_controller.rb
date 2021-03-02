@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
   
   def index
     @merchant
+    @enabled_items = @merchant.items.enabled_items
+    @disabled_items = @merchant.items.disabled_items
   end
   
   def show
