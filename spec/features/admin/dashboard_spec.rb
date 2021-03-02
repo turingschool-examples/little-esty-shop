@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe"As an admin" do
-		before :each do
+	before :each do
 		@mer_1 = create(:merchant)
 		@cust_1 = create(:customer, first_name: "A", last_name: "1")
 		@cust_2 = create(:customer, first_name: "B", last_name: "1")
