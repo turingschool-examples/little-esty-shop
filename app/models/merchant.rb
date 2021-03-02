@@ -19,7 +19,7 @@ class Merchant < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
+    invoice_items.calculate_revenue
   end
 
   def highest_revenue_date
@@ -41,5 +41,12 @@ class Merchant < ApplicationRecord
     invoices.not_shipped
   end
 
-  
+  def top_five_items
+    items.joins(invoices: [:transactions, :invoice_items])
+    .where("transactions.result = 0")
+    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+    .group(:id)
+    .order(total_revenue: :desc)
+    .limit(5)
+  end
 end

@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @inactive_items = @merchant.items.inactive
     @active_items = @merchant.items.active
+    @top_five_items = @merchant.top_five_items
   end
 
   def new
