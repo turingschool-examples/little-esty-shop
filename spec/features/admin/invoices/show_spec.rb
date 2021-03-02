@@ -27,21 +27,42 @@ RSpec.describe 'Admin Invoices Show page' do
       expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
       expect(page).to have_content("#{@invoice_1.id}")
     end
-  end
 
-  describe 'Then I see all of the customer information related to that invoice including:' do
-    it 'displays customer first name and last name' do
+    it 'displays customer first name and last name for that invoice' do
 
       customer = create(:customer, first_name: "Minnie")
-
       invoice = create(:invoice, customer_id: customer.id)
-
 
       visit "/admin/invoices/#{invoice.id}"
 
       within (".customer") do
         expect(page).to have_content(customer.first_name)
         expect(page).to have_content(customer.last_name)
+      end
+    end
+
+    it 'I see all of the items on the invoice with their: name, quantity, price sold, invoice item status' do
+      customer = create(:customer, first_name: "Minnie")
+      invoice = create(:invoice, customer: customer)
+      item_1 = create(:item, name: "Fancy Chair")
+      item_2 = create(:item, name: "Mineral Water")
+      invoice_item_1 = create(:invoice_item, invoice_id: invoice.id, item_id: item_1.id, quantity: 7, unit_price: 5)
+      invoice_item_2 = create(:invoice_item, invoice_id: invoice.id, item_id: item_2.id, quantity: 9, unit_price: 5.49)
+
+      visit "/admin/invoices/#{invoice.id}"
+
+      expect(page).to have_content("Items on this Invoice:")
+      within ("#item-#{item_1.id}") do
+        expect(page).to have_content(item_1.name)
+        expect(page).to have_content(invoice.find_invoice_item(item_1.id).quantity)
+        expect(page).to have_content(invoice.find_invoice_item(item_1.id).unit_price)
+        expect(page).to have_content(invoice.find_invoice_item(item_1.id).status)
+      end
+      within ("#item-#{item_2.id}") do
+        expect(page).to have_content(item_2.name)
+        expect(page).to have_content(invoice.find_invoice_item(item_2.id).quantity)
+        expect(page).to have_content(invoice.find_invoice_item(item_2.id).unit_price)
+        expect(page).to have_content(invoice.find_invoice_item(item_2.id).status)
       end
     end
   end

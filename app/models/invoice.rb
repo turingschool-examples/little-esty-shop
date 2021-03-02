@@ -24,4 +24,8 @@ class Invoice < ApplicationRecord
   def date_created
     self.created_at.strftime("%A, %B %e, %Y")
   end
+
+  def find_invoice_item(item_id)
+    InvoiceItem.find_by(invoice_id: self.id, item_id: item_id)
+  end
 end

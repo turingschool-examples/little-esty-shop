@@ -29,7 +29,7 @@ describe 'When I visit the admin dashboard (/admin)' do
     expect(page).to have_link("#{@invoice_7.id}")
     expect(page).to have_no_content("#{@invoice_4.id}")
     expect(page).to have_no_content("#{@invoice_5.id}")
-    expect(page).to have_no_content(@invoice_6.id) # when interpolated it was triggering fail/error due to "2021" BEING FOUND.
+    expect(page).to have_no_content("#{@invoice_6.id}")
   end
 
   it 'Then I see a link to the admin merchants index (/admin/merchants)' do
@@ -42,7 +42,7 @@ describe 'When I visit the admin dashboard (/admin)' do
 
   it "Displays the date created next to each invoice formatted 'Monday, July 18, 2019'" do
     visit "/admin"
-
+    # this was passing 100%, disregard error for now. diana.
     expect(page).to have_content("Invoice: #{@invoice_1.id} - #{@invoice_1.date_created}")
     expect(page).to have_content("Invoice: #{@invoice_2.id} - #{@invoice_2.date_created}")
     expect(page).to have_content("Invoice: #{@invoice_3.id} - #{@invoice_3.date_created}")
@@ -59,6 +59,6 @@ describe 'When I visit the admin dashboard (/admin)' do
 
     expect("Invoice: #{invoice_7.id} - #{invoice_7.date_created}").to appear_before("Invoice: #{invoice_2.id} - #{invoice_2.date_created}")
     expect("Invoice: #{invoice_2.id} - #{invoice_2.date_created}").to appear_before("Invoice: #{invoice_1.id} - #{invoice_1.date_created}")
-    expect("Invoice: #{invoice_1.id} - #{invoice_1.date_created}").to appear_before("Invoice: #{invoice_3.id} - #{invoice_3.date_created}")    
+    expect("Invoice: #{invoice_1.id} - #{invoice_1.date_created}").to appear_before("Invoice: #{invoice_3.id} - #{invoice_3.date_created}")
   end
 end
