@@ -23,8 +23,20 @@ RSpec.describe "Merchant Item's Show Page" do
 
       within(".item_attributes") do
         expect(page).to have_content("one a day keeps the doctor away!")
-        expect(page).to have_content("22.09")
+        expect(page).to have_content("Price: 22.09")
       end
+    end
+  end
+
+  describe "When I click the name of an item from the merchant items index page I see a link to update an item" do
+    it "takes me a a page to edit this item" do
+      visit "/merchants/#{@merchant.id}/items/#{@item_1.id}"
+
+      within(".update-link") do
+        expect(page).to have_link('Update Item')
+        click_link('Update Item')
+      end
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}/edit")
     end
   end
 end

@@ -48,5 +48,16 @@ RSpec.describe "Merchant Item Index Page" do
         expect(page).not_to have_link(@item_1.name)
       end
     end
+
+    it "Displays a new item link that takes you to a form to create a new item" do
+      visit "/merchants/#{@merchant.id}/items"
+
+      within "#new-item" do
+        expect(page).to have_link("New Item")
+        click_on("New Item")
+
+        expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+      end
+    end
   end
 end

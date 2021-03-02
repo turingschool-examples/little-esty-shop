@@ -4,7 +4,9 @@ class Merchant < ApplicationRecord
   has_many :invoices, -> { distinct }, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, -> { distinct }, through: :invoices
+  
   enum status: [ :disabled, :enabled ]
+
 
   def unshipped
     items.joins(invoice_items: :invoice)
@@ -20,6 +22,18 @@ class Merchant < ApplicationRecord
 
   def items_by_status_false
     items.where(status: false)
+  end
+
+  def top_5_items_by_revenue
+    items.joins(invoices: :transactions)
+    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue")
+    .where("transactions.result = ?", 0)
+    .group("items.id")
+    .order(revenue: :desc).limit(5)
+  end
+
+  def customers
+    Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
   end
 
   def top_five_customers
