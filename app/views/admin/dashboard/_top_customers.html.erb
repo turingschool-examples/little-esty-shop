@@ -1,0 +1,12 @@
+<section id="top-customers">
+  <h2>Top Customers: </h2>
+    <ul>
+      <% Customer.top_customers.each do |customer| %>
+      <div id="customer-<%= customer.id %>">
+        <li><%= customer.first_name %>
+        <%= customer.last_name %>
+        <h5>Successful Transactions: <%= customer.transaction_count %></h5></li>
+      </div>
+      <% end %>
+    </ul>
+</section>

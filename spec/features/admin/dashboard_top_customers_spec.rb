@@ -1,20 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Customer, type: :model do
-  describe "relationships" do
-    it { should have_many :invoices }
-    it { should have_many(:transactions).through(:invoices) }
-    it { should have_many(:invoice_items).through(:invoices) }
-    it { should have_many(:items).through(:invoice_items) }
-    it { should have_many(:merchants).through(:items) }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of :first_name }
-    it { should validate_presence_of :last_name }
-  end
-
-  it "returns top customers" do
+RSpec.describe "When I visit '/admin'" do
+  before :each do
     @merchant1 = create(:merchant)
 
     @item = create(:item, merchant_id: @merchant1.id)
@@ -44,9 +31,35 @@ RSpec.describe Customer, type: :model do
     @customer4 = @invoice_item4.invoice.customer
     @customer5 = @invoice_item5.invoice.customer
     @customer6 = @invoice_item6.invoice.customer
+  end
 
-    expected = [@customer5, @customer4, @customer3, @customer2, @customer]
+  it "Shows top 5 customers by successful transactions" do
 
-    expect(Customer.top_customers).to eq(expected)
+    visit admin_index_path
+
+    within("#top-customers") do
+      expect(page).to have_content(@customer.first_name)
+      expect(page).to have_content(@customer2.first_name)
+      expect(page).to have_content(@customer3.first_name)
+      expect(page).to have_content(@customer4.first_name)
+      expect(page).to have_content(@customer5.first_name)
+      expect(page).not_to have_content(@customer6.first_name)
+
+      expect(@customer5.first_name).to appear_before(@customer4.first_name)
+      expect(@customer4.first_name).to appear_before(@customer3.first_name)
+      expect(@customer3.first_name).to appear_before(@customer2.first_name)
+      expect(@customer2.first_name).to appear_before(@customer.first_name)
+    end
+
+    within("#customer-#{@customer5.id}") do
+      expect(page).to have_content("Successful Transactions: 10")
+    end
   end
 end
+
+# As an admin,
+# When I visit the admin dashboard
+# Then I see the names of the top 5 customers
+# who have conducted the largest number of successful transactions
+# And next to each customer name I see the number of successful transactions they have
+# conducted with my merchant
