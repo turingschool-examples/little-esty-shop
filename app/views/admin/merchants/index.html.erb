@@ -2,7 +2,7 @@
 <%= link_to "Create New Merchant", new_admin_merchant_path(), method: :get %>
 <h3>Top Five Merchants</h3>
 <% @top_five_merchants.each do |merchant| %>
-<p><%= merchant.name %>, Total revenue: <%= number_to_currency(merchant.revenue.to_f/100) %></p>
+<p><%= merchant.name %>, Total revenue: <%= number_to_currency(merchant.revenue.to_f/100) %>. Top selling date for <%= merchant.name %> was <%=merchant.merchants_best_day(merchant.id).first.date.strftime("%A")%>, <%=merchant.merchants_best_day(merchant.id).first.date.strftime("%B")%> <%=merchant.merchants_best_day(merchant.id).first.date.strftime("%d")%>, <%=merchant.merchants_best_day(merchant.id).first.date.strftime("%Y")%>.</p>
 <% end %>
 
 <h3>Enabled Merchants</h3>

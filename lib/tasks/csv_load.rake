@@ -40,6 +40,8 @@ namespace :csv_load do
   		invoice = Invoice.new
       invoice[:customer_id] = row["customer_id"]
   		invoice[:status] = row["status"]
+      invoice[:created_at] = row["created_at"]
+      invoice[:updated_at] = row["updated_at"]
   		invoice.save
   	end
   end
