@@ -1,9 +1,9 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
-  has_many :invoice_items, through: :items
-  has_many :invoices, -> { distinct }, through: :invoice_items
+  # has_many :invoice_items, through: :items
+  has_many :invoices, -> { distinct }, through: :items
   has_many :transactions, through: :invoices
-  has_many :customers, -> { distinct }, through: :invoices
+  has_many :customers, through: :invoices
   
   enum status: [ :disabled, :enabled ]
 
@@ -32,8 +32,8 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc).limit(5)
   end
 
-  def customers
-    Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
+  def distinct_customers
+    customers.distinct
   end
 
   def top_five_customers
