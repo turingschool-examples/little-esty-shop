@@ -23,7 +23,7 @@ RSpec.describe "Merchant Item's Show Page" do
 
       within(".item_attributes") do
         expect(page).to have_content("one a day keeps the doctor away!")
-        expect(page).to have_content("22.09")
+        expect(page).to have_content("Price: 22.09")
       end
     end
   end

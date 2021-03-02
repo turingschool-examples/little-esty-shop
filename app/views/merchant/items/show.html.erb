@@ -5,7 +5,7 @@
   <%= link_to "Update Item", "/merchants/#{params[:merchant_id]}/items/#{params[:id]}/edit" %>
 </section>
 
-<section class="item_attributes">
+<section class="item_attributes" style="font-size:15px">
   <p>Description: <%= @item.description %></p>
-  <p>Price: $<%= @item.unit_price %></p>
+  <p>Price: <%= number_to_currency(@item.unit_price) %></p>
 </section>
