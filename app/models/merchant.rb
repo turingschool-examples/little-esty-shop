@@ -1,9 +1,10 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
-  has_many :invoices, through: :invoice_items
+  has_many :invoices, -> { distinct }, through: :invoice_items
   has_many :transactions, through: :invoices
-  has_many :customers, through: :invoices
+  has_many :customers, -> { distinct }, through: :invoices
+  
   enum status: [ :disabled, :enabled ]
 
 
@@ -42,12 +43,12 @@ class Merchant < ApplicationRecord
             .limit(5)
   end
 
-  def invoices
-    invoice_ids = items.joins(:invoices)
-         .select('invoices.id as id, invoices.status as status')
-         .distinct('invoices.id')
-         .pluck('invoices.id')
-
-    Invoice.where(id: invoice_ids)
+  def self.top_five_by_revenue
+    joins(invoices: :transactions)
+    .where('transactions.result = ?', 0)
+    .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .group(:id)
+    .order(total_revenue: :desc)
+    .limit(5)  
   end
 end

@@ -53,6 +53,7 @@ namespace :csv_load do
     file = CSV.readlines('./db/data/items.csv', headers: true, header_converters: :symbol)
     file.each do |row|
       row.delete(:id)
+      row[:unit_price] = row[:unit_price].to_i * 0.01
       Item.create!(row.to_h)
     end
   end
@@ -64,6 +65,7 @@ namespace :csv_load do
     file = CSV.readlines('./db/data/invoice_items.csv', headers: true, header_converters: :symbol)
     file.each do |row|
       row.delete(:id)
+      row[:unit_price] = row[:unit_price].to_i * 0.01
       InvoiceItem.create!(row.to_h)
     end
   end
