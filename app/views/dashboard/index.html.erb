@@ -16,3 +16,16 @@
     <% end %> 
   </ol>
 </section>
+
+<section id="notShipped">
+  <h2>Items Not Shipped</h2>
+  <ul>
+    <% @not_shipped_items.each do |item| %>
+    <li><%= " #{item.name} -  Invoice  "%>
+        <%= link_to "#{item.id}", merchant_invoice_path(@merchant, item) %>
+        <%= "#{item.created_at.strftime("%A, %B %d, %Y")}" %>  
+    </li>
+    <% end %>
+  </ul>
+
+</section>
