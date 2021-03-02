@@ -47,5 +47,20 @@ RSpec.describe Invoice, type: :model do
         expect(invoice_1.date_created).to eq(invoice_1.created_at.strftime("%A, %B %e, %Y"))
       end
     end
+
+    describe '#find_invoice_item' do
+      it 'finds the invoice item given an item id' do
+        customer = create(:customer, first_name: "Minnie")
+        invoice = create(:invoice, customer: customer)
+        item_1 = create(:item, name: "Fancy Chair")
+        invoice_item_1 = create(:invoice_item, id: 100, invoice_id: invoice.id, item_id: item_1.id, quantity: 7, unit_price: 5)
+
+        expect(invoice.find_invoice_item(item_1.id).id).to eq(invoice_item_1.id)
+        expect(invoice.find_invoice_item(item_1.id).class).to eq(InvoiceItem)
+        expect(invoice.find_invoice_item(item_1.id).quantity).to eq(invoice_item_1.quantity)
+        expect(invoice.find_invoice_item(item_1.id).unit_price).to eq(invoice_item_1.unit_price)
+        expect(invoice.find_invoice_item(item_1.id).status).to eq(invoice_item_1.status)
+      end
+    end
   end
 end

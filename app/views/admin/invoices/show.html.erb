@@ -10,3 +10,15 @@
   <p><%= @invoice.customer.first_name %></p>
   <p><%= @invoice.customer.last_name %></p>
 </section>
+
+<section>
+  <h2>Items on this Invoice:</h2>
+  <% @invoice.items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <p>Name: <%= item.name %></p>
+    <p>Quantity: <%= @invoice.find_invoice_item(item.id).quantity %></p>
+    <p>Unit Price: <%= @invoice.find_invoice_item(item.id).unit_price %></p>
+    <p>Status: <%= @invoice.find_invoice_item(item.id).status %></p>
+  </div><hr>
+  <% end %>
+</section>
