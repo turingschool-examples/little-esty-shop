@@ -40,4 +40,6 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     invoices.not_shipped
   end
+
+  
 end

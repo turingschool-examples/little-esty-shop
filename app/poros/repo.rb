@@ -3,7 +3,7 @@ class Repo
               :contributors
 
   def initialize(repo_data)
-    binding.pry
-    @name = repo_data[:name]
+    # binding.pry
+    # @name = repo_data[:name]
   end
 end
