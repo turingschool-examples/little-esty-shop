@@ -3,6 +3,5 @@ class Github
 
   def initialize(data)
     @name = data[:name]
-    require "pry";binding.pry
   end
 end

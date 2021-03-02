@@ -3,5 +3,10 @@
 <% @admin_merchants.each do |merchant| %>
   <section id="admin_merchants-<%=merchant.id%>">
     <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+    <% if merchant.status == true %>
+      <%= button_to "Disable", admin_merchant_path(merchant), params: { status: :disable }, method: :patch, local: true %>
+    <% else %>
+      <%= button_to "Enable", admin_merchant_path(merchant), params: { status: :enable }, method: :patch, local: true %>
+    <% end %>
   </section>
 <% end %>

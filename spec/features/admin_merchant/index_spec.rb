@@ -72,4 +72,26 @@ RSpec.describe 'Admin Merchant Index' do
     expect(current_path).to eq(admin_merchant_path(@merchant1))
     expect(page).to have_content(@merchant1.name)
   end
+  it 'When I visit the admin merchants index
+    Then next to each merchant name I see a button to disable or enable that merchant.' do
+    visit admin_merchants_path
+
+    within("#admin_merchants-#{@merchant1.id}") do
+      expect(page).to have_button("Disable")
+    end
+  end
+  it 'When I click this button Then I am redirected back to the admin merchants index
+    And I see that the merchants status has changed' do
+    visit admin_merchants_path
+
+    within("#admin_merchants-#{@merchant1.id}") do
+      click_on("Disable")
+    end
+
+    expect(current_path).to eq(admin_merchants_path)
+
+    within("#admin_merchants-#{@merchant1.id}") do
+      expect(page).to have_button("Enable")
+    end
+  end
 end
