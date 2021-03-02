@@ -23,14 +23,14 @@ RSpec.describe "Merchant Item Edit Page" do
     describe "Item Edit Page" do
       it "has a form with the data from the item" do
         visit edit_merchant_item_path(@merchant, @item)
-
-        expect(page).to have_field(:name)
-        expect(page).to have_field(:description)
-        expect(page).to have_field(:unit_price)
         
-        expect(find_field(:name).value).to eq(@item.name)
-        expect(find_field(:description).value).to eq(@item.description)
-        expect(find_field(:unit_price).value).to eq("#{@item.unit_price}")
+        expect(page).to have_field('item[name]')
+        expect(page).to have_field('item[description]')
+        expect(page).to have_field('item[unit_price]')
+        
+        expect(find_field('item[name]').value).to eq(@item.name)
+        expect(find_field('item[description]').value).to eq(@item.description)
+        expect(find_field('item[unit_price]').value).to eq("#{@item.unit_price}")
       end
       
     end
@@ -39,9 +39,9 @@ RSpec.describe "Merchant Item Edit Page" do
       it "takes me back to the Item's show page" do
         visit edit_merchant_item_path(@merchant, @item)
 
-        fill_in :name, with: "New Item Name"
-        fill_in :description, with: "A fancy new Item"
-        fill_in :unit_price, with: 5
+        fill_in 'item[name]', with: "New Item Name"
+        fill_in 'item[description]', with: "A fancy new Item"
+        fill_in 'item[unit_price]', with: 5
 
         click_button "Update Item"
         expect(current_path).to eq(merchant_item_path(@merchant, @item))
@@ -54,9 +54,9 @@ RSpec.describe "Merchant Item Edit Page" do
       it "shows a flash message stating the information has been updated" do
         visit edit_merchant_item_path(@merchant, @item)
 
-        fill_in :name, with: "New Item Name"
-        fill_in :description, with: "A fancy new Item"
-        fill_in :unit_price, with: 5
+        fill_in 'item[name]', with: "New Item Name"
+        fill_in 'item[description]', with: "A fancy new Item"
+        fill_in 'item[unit_price]', with: 5
 
         click_button "Update Item"
 
@@ -66,9 +66,9 @@ RSpec.describe "Merchant Item Edit Page" do
       it "shows an error message if the information is not filled in" do
         visit edit_merchant_item_path(@merchant, @item)
 
-        fill_in :name, with: "New Item Name"
-        fill_in :description, with: ""
-        fill_in :unit_price, with: 5
+        fill_in 'item[name]', with: "New Item Name"
+        fill_in 'item[description]', with: ""
+        fill_in 'item[unit_price]', with: 5
 
         click_button "Update Item"
 

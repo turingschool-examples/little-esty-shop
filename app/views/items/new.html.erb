@@ -1,0 +1,5 @@
+<h1>A new Item for <%= @merchant.name %></h1>
+
+<%= render partial: 'form', locals: { model: [@merchant, Item.new],
+                                    local: true
+                                    }%>
