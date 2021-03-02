@@ -59,7 +59,7 @@ RSpec.describe "Merchant Item Index Page" do
 
       it "can also disable an item" do
         visit merchant_items_path(@merchant)
-
+        
         within("#item-#{@item1.id}") do
           click_on "Enable"
           expect(current_path).to eq(merchant_items_path(@merchant))
@@ -70,6 +70,29 @@ RSpec.describe "Merchant Item Index Page" do
         end
       end
     end
-    
+
+    it "has two sections, one for 'Enabled Items' and one for 'Disabled Items'
+    And I see that each Item is listed in the appropriate section" do
+      enabled_item = create(:item, merchant: @merchant, status: "enabled")
+      visit merchant_items_path(@merchant)
+      
+      within("#merchant-enabled-items") do
+        expect(page).to have_content(enabled_item.name)
+      end
+
+      within("#item-#{enabled_item.id}") do
+        expect(page).to have_button("Disable")
+      end
+      
+      within("#merchant-disabled-items") do
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@item2.name)
+        expect(page).to have_content(@item3.name)
+      end
+      
+      within("#item-#{@item1.id}") do
+        expect(page).to have_button("Enable")
+      end
+    end
   end
 end

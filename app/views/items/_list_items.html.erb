@@ -1,0 +1,9 @@
+<% list.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <p>
+      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <br>
+      Status: <%= item.status %>
+      <%= button_to button, merchant_item_path(@merchant, item), :params => {:status_change => status}, method: :patch %>
+    </p>
+  </div>
+<% end %>

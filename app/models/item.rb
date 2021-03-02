@@ -9,4 +9,12 @@ class Item < ApplicationRecord
 
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
+
+  def self.enabled_items
+    where(status: 1)
+  end
+
+  def self.disabled_items
+    where(status: 0)
+  end
 end
