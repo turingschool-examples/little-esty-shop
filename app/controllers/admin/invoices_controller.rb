@@ -11,4 +11,10 @@ class Admin::InvoicesController < ApplicationController
 		@revenue = @items.sum('invoice_items.quantity * invoice_items.unit_price')
 	end
 
+	def update
+		@invoice = Invoice.find(params[:id])
+		@invoice.update(status: params[:status])
+		redirect_to "/admin/invoices/#{@invoice.id}"
+	end
+
 end
