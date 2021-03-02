@@ -8,4 +8,8 @@
 <%=  "Quantity Sold-#{@invoice_item.quantity}"%> <br>
 <%=  "Unit Price-#{@invoice_item.unit_price}"%> <br>
 <%=  "Current Status-#{@invoice_item.status}"%> <br>
-<%=  "Total Revenue from Invoice: #{Invoice.total_revenue(@invoice.id)}" %>
+<%=  "Total Revenue from Invoice: #{Invoice.total_revenue(@invoice.id)}"%>
+<%= form_with(model: @invoice_item, url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: "patch", local: true) do |form|%>
+  <%= form.select(:invoice_item_status, ["pending", "packaged", "shipped"], value: @invoice_item.status) %>
+  <%= form.submit "Update Item Status"%>
+<% end %>
