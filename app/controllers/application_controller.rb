@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :contributors, :names
+  before_action :names, :contributors
 
   def names
     json = GithubService.new.repos
@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
 
   def contributors
     json = GithubService.new.contributors
-    # @repo_contributers = Repo.new(json).login
+    @repo_contributers = User.new(json).contributors
   end
 end
