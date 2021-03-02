@@ -4,7 +4,6 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
-
   enum status: [ :disabled, :enabled ]
 
 
@@ -32,9 +31,6 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc).limit(5)
   end
 
-  def top_days_by_item
-  end
-  
   def customers
     Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
   end
