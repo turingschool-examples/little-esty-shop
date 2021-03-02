@@ -10,6 +10,7 @@ class GithubService
 
   def get_data(endpoint)
     response = Faraday.get(endpoint)
+    require "pry";binding.pry
     parsed = JSON.parse(response.body, symbolize_names: true)
   end
 end
