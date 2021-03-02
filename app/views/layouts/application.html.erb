@@ -10,6 +10,10 @@
   </head>
 
   <body>
+     <% info = GithubService.new.github_information %>
+     <%= @github.name %>
+     <%= @github.contributors %>
+     <%= info[:name] %>
     <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
