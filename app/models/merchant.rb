@@ -39,6 +39,7 @@ class Merchant < ApplicationRecord
  def self.merchant_invoices(merchant_id)
   find(merchant_id)
   .invoices
+  .distinct
  end
 
 end
