@@ -3,4 +3,10 @@
 
 <h3>Invoice ID: <%= @invoice.id %></h3>
 <h4>Status: <%= @invoice.status %></h4>
-<h4>Ccreated at: <%= @invoice.created_at %></h4>
+<h4>Created at: <%= @invoice.created_at %></h4>
+
+<section class="customer">
+  <h2>Customer Info</h2>
+  <p><%= @invoice.customer.first_name %></p>
+  <p><%= @invoice.customer.last_name %></p>
+</section>

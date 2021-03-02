@@ -5,6 +5,20 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+  def new
+  end
+
+  def create
+    @merchant = Merchant.new(merchant_params)
+    if @merchant.save
+      flash[:notice] = "New merchant has been created!"
+      redirect_to "/admin/merchants"
+    else
+      flash[:notice] = "Unable to create merchant!"
+      render 'new'
+    end
+  end
+
   def show
   end
 
@@ -12,7 +26,12 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    if @merchant.update(merchant_params)
+    if params[:status]
+      if @merchant.update(merchant_params)
+        redirect_to "/admin/merchants"
+        flash[:notice] = "#{@merchant.name}'s status changed to #{@merchant.status}"
+      end
+    elsif @merchant.update(merchant_params)
       flash[:notice] = "Information successfully updated!"
       redirect_to "/admin/merchants/#{@merchant.id}"
     else
@@ -24,10 +43,14 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 
   def find_merchant
     @merchant = Merchant.find(params[:id])
+  end
+
+  def update_status
+    params.permit(:status)
   end
 end
