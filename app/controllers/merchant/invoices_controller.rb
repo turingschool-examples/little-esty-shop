@@ -12,8 +12,4 @@ class Merchant::InvoicesController < ApplicationController
     @item_name = Item.find(@invoice_item.item_id).name
   end
 
-  def update
-    invoice_item = InvoiceItem.find(params[:id])
-    invoice_item.update(status: params[:invoice_item][:invoice_item_status])
-  end
 end
