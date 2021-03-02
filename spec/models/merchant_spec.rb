@@ -3,10 +3,14 @@ require "rails_helper"
 RSpec.describe Merchant, type: :model do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Amazon')
+    @merchant_2 = Merchant.create!(name: 'Mom and pop')
+    @merchant_3 = Merchant.create!(name: 'Scammers R Us')
 
     @item_1 = @merchant_1.items.create!(name: 'worker pain', unit_price: 1)
     @item_2 = @merchant_1.items.create!(name: 'union busting', unit_price: 3)
     @item_3 = @merchant_1.items.create!(name: 'climate desctruction', unit_price: 2)
+    @item_4 = @merchant_1.items.create!(name: 'something you can only find here', unit_price: 2)
+    @item_5 = @merchant_2.items.create!(name: 'Garfield things', unit_price: 20)
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer_2 = Customer.create!(first_name: "Steve", last_name: "Smith")
@@ -21,6 +25,7 @@ RSpec.describe Merchant, type: :model do
     @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: "completed", created_at: "1994-01-28 21:40:46")
     @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: "completed", created_at: "1995-01-28 21:40:46")
     @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: "completed", created_at: "2021-01-28 21:40:46")
+    @invoice_7 = Invoice.create!(customer_id: @customer_6.id, status: "completed", created_at: "2021-01-28 21:40:46")
 
     @invoice_items_1 = InvoiceItem.create!(item: @item_2, invoice: @invoice_1, status: "packaged")
     @invoice_items_2 = InvoiceItem.create!(item: @item_1, invoice: @invoice_2, status: "shipped")
@@ -28,6 +33,7 @@ RSpec.describe Merchant, type: :model do
     @invoice_items_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_4, status: "packaged")
     @invoice_items_5 = InvoiceItem.create!(item: @item_1, invoice: @invoice_5, status: "shipped")
     @invoice_items_6 = InvoiceItem.create!(item: @item_1, invoice: @invoice_6, status: "packaged")
+    @invoice_items_7 = InvoiceItem.create!(item: @item_5, invoice: @invoice_7, status: "packaged")
 
     @transaction_01 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000000000, cc_expiration_date: '2000-01-01 00:00:00 -0500', result: true)
     @transaction_02 = Transaction.create!(invoice_id: @invoice_1.id, cc_number: 0000000000001111, cc_expiration_date: '2001-01-01 00:00:00 -0500', result: true)
@@ -51,7 +57,6 @@ RSpec.describe Merchant, type: :model do
     @transaction_20 = Transaction.create!(invoice_id: @invoice_4.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction_21 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction_22 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
-
   end
 
   describe "relationships" do
@@ -83,6 +88,14 @@ RSpec.describe Merchant, type: :model do
       #Expecting the invoice with the earliest created at attribute to be displayed first
       expect(@merchant_1.items_not_shipped.first.invoice.created_at).to eq("1991-03-23 21:40:46")
       expect(@merchant_1.items_not_shipped.last.invoice.created_at).to eq("2021-01-28 21:40:46")
+    end
+  end
+
+  describe 'class methods' do
+    it '.merchant_invoices' do
+      expect(Merchant.merchant_invoices(@merchant_1.id).count).to eq(6)
+      expect(Merchant.merchant_invoices(@merchant_2.id).count).to eq(1)
+      expect(Merchant.merchant_invoices(@merchant_3.id).count).to eq(0)
     end
   end
 end

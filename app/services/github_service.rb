@@ -7,11 +7,11 @@ class GithubService
     endpoint = 'https://api.github.com/repos/jordanfbeck0528/little-esty-shop'
     get_data(endpoint)
   end
-
-  def diff_endpoint
-    endpoint = 'jhdgjzdgnxdfg'
-    get_data(endpoint)
-  end
+  
+  #def diff_endpoint
+  #  endpoint = 'jhdgjzdgnxdfg'
+  #  get_data(endpoint)
+  #end
 
   def get_data(endpoint)
     response = Faraday.get(endpoint)

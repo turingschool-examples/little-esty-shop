@@ -103,7 +103,7 @@ describe 'As a merchant' do
         fill_in 'item_description', with: 'New item description yay!'
 
         click_button 'Submit'
-        # save_and_open_page
+        save_and_open_page
 
         expect(current_path).to eq(merchant_items_path(@merchant_1))
         expect(page).to have_content("Disabled Items")
