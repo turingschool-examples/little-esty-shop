@@ -1,6 +1,10 @@
 <h4><%= @item.name %></h4>
 <hr class="my-4">
 
+<section class="update-link">
+  <%= link_to "Update Item", "/merchants/#{params[:merchant_id]}/items/#{params[:id]}/edit" %>
+</section>
+
 <section class="item_attributes">
   <p>Description: <%= @item.description %></p>
   <p>Price: $<%= @item.unit_price %></p>

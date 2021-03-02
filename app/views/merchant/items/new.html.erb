@@ -1,0 +1,14 @@
+<h3 class="header">Create a New Item</h3>
+
+  <%= form_with(url: "/merchants/#{params[:merchant_id]}/items", method: "post", class: "form") do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %></br>
+
+    <%= label_tag :description %>
+    <%= text_field_tag :description %></br>
+
+    <%= label_tag :unit_price %>
+    <%= text_field_tag :unit_price %></br>
+
+    <%= submit_tag 'Add Item' %>
+  <% end %>
