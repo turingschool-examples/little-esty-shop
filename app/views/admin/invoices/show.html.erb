@@ -5,6 +5,10 @@
 <h4>Status: <%= @invoice.status %></h4>
 <h4>Created at: <%= @invoice.created_at %></h4>
 
+<section class="total-revenue">
+  <h3>Total Revenue: <%= @invoice.total_revenue %> </h3>
+</section>
+
 <section class="customer">
   <h2>Customer Info</h2>
   <p><%= @invoice.customer.first_name %></p>
