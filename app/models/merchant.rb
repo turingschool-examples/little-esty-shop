@@ -31,6 +31,13 @@ class Merchant < ApplicationRecord
     InvoiceItem.joins("JOIN invoices ON invoice_items.invoice_id = invoices.id JOIN items ON invoice_items.item_id = items.id JOIN transactions ON transactions.invoice_id = invoices.id JOIN merchants ON merchants.id = items.merchant_id").where("transactions.result = 'success' AND invoices.status != 0").group("merchants.id").select("merchants.id, merchants.name , SUM (invoice_items.quantity * invoice_items.unit_price) AS revenue").order("revenue DESC").limit(5)
   end
 
+  # def
+  #   InvoiceItem.joins("JOIN invoices ON invoice_items.invoice_id = invoices.id JOIN items ON invoice_items.item_id = items.id JOIN transactions ON transactions.invoice_id = invoices.id JOIN merchants ON merchants.id = items.merchant_id").where("transactions.result = 'success' AND invoices.status != 0 AND merchants.id = 1").group("invoices.formatted_created_at").select("merchants.id, merchants.name , SUM (invoice_items.quantity * invoice_items.unit_price) AS revenue").order("revenue DESC")
+  # end
+
+  # def merchants_best_day(merchant_in_question)
+  #   InvoiceItem.joins("JOIN invoices ON invoice_items.invoice_id = invoices.id JOIN items ON invoice_items.item_id = items.id JOIN transactions ON transactions.invoice_id = invoices.id JOIN merchants ON merchants.id = items.merchant_id").where("transactions.result = 'success' AND invoices.status != 0 AND merchants.id = #{merchant_in_question}").group("merchants.id, DATE_TRUNC('day',invoices.created_at)").select("merchants.id, DATE_TRUNC('day',invoices.created_at) AS date, merchants.name , SUM (invoice_items.quantity * invoice_items.unit_price) AS revenue").order("revenue DESC, date DESC").limit(1)
+  # end
 
 
 end

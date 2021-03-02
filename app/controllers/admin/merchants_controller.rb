@@ -19,7 +19,6 @@ class Admin::MerchantsController < ApplicationController
 
 	def create
 		@merchant = Merchant.new(name: params[:name])
-		require "pry"; binding.pry
 		@merchant.save
 		redirect_to "/admin/merchants"
 	end
