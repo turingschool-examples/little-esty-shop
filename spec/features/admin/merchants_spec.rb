@@ -16,7 +16,7 @@ RSpec.describe "As an admin" do
 			expect(page).to have_link("Update Merchant")
 		end
 
-		it "updates a merchant by clicking on the link" do
+		it "updates a merchant by clicking its name" do
 			visit "/admin/merchants/#{@mer_1.id}"
 			click_on("Update Merchant")
 			expect(current_path).to eq("/admin/merchants/#{@mer_1.id}/edit")
@@ -27,15 +27,18 @@ RSpec.describe "As an admin" do
 			expect(page).not_to have_content("#{@mer_1.name}")
 		end
 
-	describe "and I click on the name of a merchant" do
-	
-		it "takes me to the merchant show page" do
-			visit "/admin/merchants"
-			expect(page).to have_link("#{@mer_1.name}")
-			click_link("#{@mer_1.name}")
-			expect(current_path).to eq("/admin/merchants/#{@mer_1.id}")
-			expect(page).to have_content("#{@mer_1.name}")
+		describe "When I click create merchant " do
+			it "takes me to a form to fill out info" do
+				visit "/admin/merchants"
+				expect(page).to have_link("Create New Merchant")
+				click_on "Create New Merchant"
+				expect(current_path).to eq("/admin/merchants/new")
+				fill_in "name", with: "merchant 1"
+				click_on ("Submit")
+				expect(current_path).to eq("/admin/merchants")
+				expect(page).to have_content("merchant 1")
+				expect(page).to have_button("Enable")
+			end
 		end
-	end
 	end
 end	
