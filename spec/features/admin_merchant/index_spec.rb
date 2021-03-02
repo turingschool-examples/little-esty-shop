@@ -52,12 +52,25 @@ RSpec.describe 'Admin Merchant Index' do
     @transaction22 = Transaction.create!(invoice_id: @invoice7.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
   end
   it 'When I visit the admin merchants index (/admin/merchants)
-      Then I see the name of each merchant in the system' do
+    Then I see the name of each merchant in the system' do
 
     visit admin_merchants_path
 
     expect(page).to have_content("Admin Merchants Index")
+    expect(page).to have_link("#{@merchant1.name}")
+    expect(page).to have_link("#{@merchant2.name}")
+  end
+  it 'When I click on the name of a merchant from the admin merchants index page,
+    Then I am taken to that merchants admin show page (/admin/merchants/merchant_id)
+    And I see the name of that merchant' do
+    visit admin_merchants_path
+    # save_and_open_page
+
+    within("#admin_merchants-#{@merchant1.id}") do
+      click_on("#{@merchant1.name}")
+    end
+
+    expect(current_path).to eq(admin_merchant_path(@merchant1))
     expect(page).to have_content(@merchant1.name)
-    expect(page).to have_content(@merchant2.name)
   end
 end

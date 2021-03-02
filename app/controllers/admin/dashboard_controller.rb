@@ -8,8 +8,4 @@ class Admin::DashboardController < ApplicationController
     # @formatted_created_at = Invoice.find(params[:id]).format_time
 
   end
-
-  # def show
-  #
-  # end
 end
