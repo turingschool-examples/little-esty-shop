@@ -16,4 +16,12 @@ class GithubService < ApiService
 			key[:login]
 		end.uniq[0..3]
 	end
+
+
+
+	def self.repo
+		endpoint = "https://api.github.com/repos/domo2192/little-esty-shop"
+		json = get_data(endpoint)
+		json[:name]
+	end
 end
