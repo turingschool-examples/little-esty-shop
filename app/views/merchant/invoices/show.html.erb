@@ -7,4 +7,5 @@
 <%=  "Item Name-#{@item_name}"%> <br>
 <%=  "Quantity Sold-#{@invoice_item.quantity}"%> <br>
 <%=  "Unit Price-#{@invoice_item.unit_price}"%> <br>
-<%=  "Current Status-#{@invoice_item.status}" %> <br>
+<%=  "Current Status-#{@invoice_item.status}"%> <br>
+<%=  "Total Revenue from Invoice: #{Invoice.total_revenue(@invoice.id)}" %>

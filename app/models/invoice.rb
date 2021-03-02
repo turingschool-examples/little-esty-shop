@@ -10,4 +10,7 @@ class Invoice < ApplicationRecord
     joins(:invoice_items).select('invoices.id', 'invoices.created_at').where('invoice_items.status != ?', 2).distinct.order(created_at: :asc)
   end
 
+  def self.total_revenue(invoice_id)
+    Invoice.joins(:transactions, :invoice_items).where("invoices.id = ? AND transactions.result = ?", invoice_id, "success").sum("invoice_items.quantity * invoice_items.unit_price")
+  end
 end

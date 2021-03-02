@@ -14,8 +14,8 @@ RSpec.describe 'Merchant Dashboard' do
   it "shows links to the merchant's items and invoices index" do
     visit merchant_dashboard_index_path(@mer_1)
 
-    expect(page).to have_link(merchant_items_path(@mer_1))
-    expect(page).to have_link(merchant_invoices_path(@mer_1))
+    expect(page).to have_link("Merchant Items")
+    expect(page).to have_link("Merchant Invoices")
   end
 
   it "show favorite customers and next to each customer name, I see the number of
