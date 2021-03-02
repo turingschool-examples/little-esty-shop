@@ -56,10 +56,3 @@ RSpec.describe "When I visit '/admin'" do
     end
   end
 end
-
-# As an admin,
-# When I visit the admin dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
