@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   def self.incomplete
     where(status: 0).or(where(status: 2))
   end
+
+  def format_day
+    created_at.strftime("%A %B %d, %Y")
+  end
 end

@@ -22,8 +22,11 @@
     <div id="merchant-top-items">
       <h2>Your Top Selling Items:</h2>
       <% @merchant.top_five_items.each do |item| %>
-        <%= item.name %>
-        <%= item.total_revenue%>
+        <div id="top-item-<%= item.id %>">
+        <h3><%= item.name %></h3>
+        <p>Total revenue: <%= item.total_revenue%></p>
+        <p>Top selling date was: <%= item.best_day.format_day%></p>
+        </div>
       <% end %>
     </div>
    
