@@ -6,5 +6,4 @@ class Github
 	def commit
 		binding.pry
 	end
-	
 end

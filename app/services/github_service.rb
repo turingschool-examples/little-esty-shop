@@ -8,4 +8,12 @@ class GithubService < ApiService
 		end
 	end
 
+	def self.users
+		endpoint = "https://api.github.com/repos/domo2192/little-esty-shop/contributors"
+		json = get_data(endpoint)
+
+		json.map do |key, value|
+			key[:login]
+		end.uniq[0..3]
+	end
 end
