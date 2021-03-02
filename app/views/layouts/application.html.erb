@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= @repo_names %>
+    <%= @repo_contributers %>
     <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
@@ -17,3 +19,4 @@
     <%= yield %>
   </body>
 </html>
+
