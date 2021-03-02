@@ -5,4 +5,16 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: [ :cancelled, :'in progress', :completed ]
+
+  def self.incomplete
+    where.not(status: 2)
+  end
+
+  def self.ordered_by_dated
+    order(:created_at)
+  end
+
+  def total_revenue
+    invoice_items.sum('quantity * unit_price')
+  end
 end

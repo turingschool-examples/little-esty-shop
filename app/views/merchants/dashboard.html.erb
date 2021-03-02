@@ -1,17 +1,27 @@
 <header>
-  <h1><%= @merchant.name %></h1>
+  <h1 style="text-align: center;"><%= @merchant.name %></h1>
   <div class="navbar">  
     <%= link_to "Items", "items" %>
     <%= link_to "Invoices", "invoices" %>
   </div>
-</header> <hr>
-<section class="card text-white bg-danger mb-3" style="max-width: 30rem;">
-  <h3 class="card-title">Unshipped Items</h3>
-  <% @merchant.unshipped.each do |item| %>
-  <div class="card-text" id="unshipped-<%= item.name %>">
-    <b><%= item.name %></b>, <br> 
-    Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <i><%= item.invoice_created.strftime('%A, %b %d, %Y') %></i> 
-    <hr>
+</header>
+<body style="padding-top: 0;">
+  <div class="card text-white bg-info mb-3" id="top-five" style="width: 30rem; float:left;text-align: center;">
+    <h3 class="card-title">Top Five Customers</h3><br>
+    <% @merchant.top_five_customers.each do |c| %>
+      <div class="card-text" id="customer-<%= c.id %>">
+        <p style="font-size: larger;"><%= c.first_name %> <%= c.last_name %>: <i style="font-size: small; color: black;"><%= c.successful %> Transactions</i></p>
+      </div>
+    <% end %>
   </div>
-  <% end %>
-</section>
+  <div class="card text-white bg-danger mb-3" style="width: 30rem; margin-left: 35rem; text-align: center;">
+    <h3 class="card-title">Unshipped Items</h3><br>
+    <% @merchant.unshipped.each do |item| %>
+    <div class="card-text" id="unshipped-<%= item.name %>">
+      <b style="font-size: large;"><%= item.name %></b>, <br> 
+      Invoice: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.invoice_id %>"><%= item.invoice_id %></a>, <i style="color: lightblue;"><%= item.invoice_created.strftime('%A, %b %d, %Y') %></i> <br><br>
+    </div>
+    <% end %>
+  </div>
+
+  </body>

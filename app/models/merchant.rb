@@ -5,6 +5,9 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+  enum status: [ :disabled, :enabled ]
+
+
   def unshipped
     items.joins(invoice_items: :invoice)
     .select('invoices.id as invoice_id, invoices.created_at as invoice_created, name')
@@ -30,6 +33,25 @@ class Merchant < ApplicationRecord
   end
 
   def top_days_by_item
-    
+  end
+  
+  def customers
+    Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
+  end
+
+  def top_five_customers
+    customers.joins(invoices: :transactions).where('transactions.result = ?', 0)
+            .select('customers.*, count(invoices) as successful')
+            .group(:id).order(successful: :desc)
+            .limit(5)
+  end
+
+  def invoices
+    invoice_ids = items.joins(:invoices)
+         .select('invoices.id as id, invoices.status as status')
+         .distinct('invoices.id')
+         .pluck('invoices.id')
+
+    Invoice.where(id: invoice_ids)
   end
 end
