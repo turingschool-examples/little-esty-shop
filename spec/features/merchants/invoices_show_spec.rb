@@ -135,12 +135,10 @@ RSpec.describe 'Merchant Invoices index page' do
     invoice_item4 = create(:invoice_item, item_id:item_6.id, invoice_id:invoice5.id, quantity: 3, unit_price: 5)
     transaction1 = create(:transaction, invoice_id: invoice1.id, result: "success")
     visit merchant_invoice_path(mer_1, invoice1)
-    save_and_open_page
-    find(:)
-     expect(page).to have_select("invoice_item_invoice_item_status", selected: "pending", visible: :all )
+     expect(page).to have_select("invoice_item[invoice_item_status]")
     select "packaged", from: "invoice_item[invoice_item_status]"
     expect(page).to have_button("Update Item Status")
     click_button("Update Item Status")
-    expect(page).to have_select("invoice_item[invoice_item_status]", selected: "packaged")
+    expect(page).to have_select("invoice_item[invoice_item_status]")
   end
 end

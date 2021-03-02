@@ -112,13 +112,11 @@ GEM
     method_source (1.0.0)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
     nio4r (2.5.5)
-    nokogiri (1.11.1)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.11.1-x86_64-darwin)
       racc (~> 1.4)
     orderly (0.1.1)
       capybara (>= 1.1)
@@ -237,7 +235,7 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-19
 
 DEPENDENCIES
   appraisal (~> 2.3)
@@ -272,4 +270,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   2.2.8
+   2.2.9
