@@ -21,7 +21,7 @@ class Merchant < ApplicationRecord
     .joins(:invoice)
     .order("invoices.created_at")
   end
-  
+
   def top_five_items
    items
    .joins(invoices: :transactions)
@@ -34,6 +34,11 @@ class Merchant < ApplicationRecord
 
  def total_revenue
    invoice_items.sum(:unit_price)
+ end
+
+ def self.merchant_invoices(merchant_id)
+  find(merchant_id)
+  .invoices
  end
 
 end
