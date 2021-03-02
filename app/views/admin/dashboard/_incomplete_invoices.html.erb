@@ -1,0 +1,8 @@
+<section id="incomplete-invoices">
+  <ul>
+    <h2>Incomplete Invoices: </h2>
+    <% Invoice.incomplete_invoices.each do |invoice| %>
+      <li><%= link_to "#{invoice.id}", admin_invoice_path(invoice) %></li>
+    <% end %>
+  </ul>
+</section>
