@@ -7,9 +7,4 @@ class Merchant::InvoiceItemsController < ApplicationController
     invoice_item.update(status: params[:invoice_item][:invoice_item_status])
     redirect_to merchant_invoice_path(merchant,invoice)
   end
-
-  private
-  def invoice_item_params
-    params.require(:invoice_item).permit(:invoice_item_status)
-  end
 end
