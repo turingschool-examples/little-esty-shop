@@ -16,9 +16,7 @@ class Admin::MerchantsController < ApplicationController
     @admin_merchant.update(admin_merchant_params)
     @admin_merchant.save
     flash[:notice] = "The information has been successfully updated."
-    # Why isn't this working??
-    # redirect_to "admin_merchant_path(#{@admin_merchant})"
-    redirect_to "/admin/merchants/#{@admin_merchant.id}"
+    redirect_to admin_merchant_path(@admin_merchant)
   end
 
   private
