@@ -1,21 +1,42 @@
 <h1>Merchant: <%= @merchant.name %></h1>
 
-<section id="enabled-items">
-  <h3>Enabled Items</h3>
-  <% @merchant.items_by_status_true.each do |item| %>
-    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
-    <div class="btn btn-outline-danger">
-      <%= button_to "disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
-    </div></br>
-  <% end %>
-</section>
+<div id="new-item">
+  <%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
+</div>
 
-<section id="disabled-items">
-  <h3>Disabled Items</h3>
-  <% @merchant.items_by_status_false.each do |item| %>
-    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
-    <div class="btn btn-outline-success">
-      <%= button_to "enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
-    </div></br>
-  <% end %>
-</section>
+<div class="" style="max-width: 1000px">
+  <div class="" style="display: inline-block; float: left">
+    <section id="enabled-items">
+      <h3>Enabled Items</h3>
+      <% @merchant.items_by_status_true.each do |item| %>
+        <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+        <div class="btn btn-outline-danger">
+          <%= button_to "disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+        </div></br>
+      <% end %>
+    </section>
+
+    <section id="disabled-items">
+      <h3>Disabled Items</h3>
+      <% @merchant.items_by_status_false.each do |item| %>
+        <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+        <div class="btn btn-outline-success">
+          <%= button_to "enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+        </div></br>
+      <% end %>
+    </section>
+  </div>
+
+  <div style="display: inline-block; float: left;">
+    <h3>Top Items</h3>
+
+    <ol>
+      <% @merchant.top_5_items_by_revenue.each do |item| %>
+        <li style="font-size:20px">
+          <%= item.name %> - <%= number_to_currency(item.revenue) %> in sales
+        </li>
+      <% end %>
+    </ol>
+
+  </div>
+</div>

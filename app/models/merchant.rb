@@ -1,6 +1,12 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :invoice_items, through: :items
+  has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
+  has_many :customers, through: :invoices
+
   enum status: [ :disabled, :enabled ]
+
 
   def unshipped
     items.joins(invoice_items: :invoice)
@@ -18,6 +24,17 @@ class Merchant < ApplicationRecord
     items.where(status: false)
   end
 
+  def top_5_items_by_revenue
+    items.joins(invoices: :transactions)
+    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue")
+    .where("transactions.result = ?", 0)
+    .group("items.id")
+    .order(revenue: :desc).limit(5)
+  end
+
+  def top_days_by_item
+  end
+  
   def customers
     Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
   end
