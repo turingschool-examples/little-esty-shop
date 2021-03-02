@@ -1,17 +1,3 @@
-
-# require 'rails_helper'
-#
-# RSpec.describe 'As a Merchant', type: :feature do
-#   describe 'When i visit merchant dashboard' do
-#     it 'list the name of my merchant' do
-#       @merchant = Merchant.create!(name: "Lizzy")
-#
-#       visit merchant_dashboard_index_path(@merchant)
-#       expect(page).to have_content(@merchant.name)
-#     end
-#   end
-# end
-
 require 'rails_helper'
 
 RSpec.describe 'As a Merchant', type: :feature do
@@ -132,10 +118,10 @@ RSpec.describe 'As a Merchant', type: :feature do
 
             expect(page).to have_no_content(@item_4.name)
 
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_6.invoice_id))
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_1.invoice_id))
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_4.invoice_id))
-            expect(page).to have_link(href: merchant_invoice_url(@merchant_1, @invoice_items_3.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_6.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_1.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_4.invoice_id))
+            expect(page).to have_link(href: merchant_invoice_path(@merchant_1, @invoice_items_3.invoice_id))
           end
         end
 
