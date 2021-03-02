@@ -1,0 +1,10 @@
+<h1> Merchant Invoice Show: </h1>
+<%= "Invoice-#{@invoice.id}" %> <br>
+<%= "Invoice Status-#{@invoice.status}"%> <br>
+<%=  "Invoice date-#{@invoice.created_at.strftime("%A, %b %d, %Y")}"%> <br>
+<%=  "Customer First Name-#{@customer.first_name}" %> <br>
+<%=  "Customer Last Name-#{@customer.last_name}"%> <br>
+<%=  "Item Name-#{@item_name}"%> <br>
+<%=  "Quantity Sold-#{@invoice_item.quantity}"%> <br>
+<%=  "Unit Price-#{@invoice_item.unit_price}"%> <br>
+<%=  "Current Status-#{@invoice_item.status}" %> <br>
