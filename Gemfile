@@ -48,6 +48,8 @@ group :development, :test do
   gem 'orderly'
   gem 'faker'
   gem 'hirb'
+  gem 'faraday'
+  gem 'json'
 end
 
 group :development do
