@@ -1,13 +1,13 @@
 <h3 class="header">Update Item Information</h3>
 <%= form_with(url: "/merchants/#{params[:merchant_id]}/items/#{params[:id]}", method: "patch", class: "form") do %>
   <%= label_tag :name %>
-  <%= text_field_tag :name %></br>
+  <%= text_field_tag :name, @item.name %></br>
 
   <%= label_tag :description %>
-  <%= text_field_tag :description %></br>
+  <%= text_field_tag :description, @item.description %></br>
 
   <%= label_tag :unit_price %>
-  <%= text_field_tag :unit_price %></br>
+  <%= text_field_tag :unit_price, @item.unit_price %></br>
   <%= hidden_field_tag(:true_update, true) %>
 
   <%= submit_tag 'Update Item' %>
