@@ -1,4 +1,6 @@
 class Merchant < ApplicationRecord
+  validates_presence_of :name
+
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
@@ -27,19 +29,15 @@ class Merchant < ApplicationRecord
    .joins(invoices: :transactions)
    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue")
    .where('transactions.result = true')
-   .group(:id)
+   .group('items.id')
    .order('total_revenue desc')
    .limit(5)
- end
+  end
 
- def total_revenue
-   invoice_items.sum(:unit_price)
- end
-
- def self.merchant_invoices(merchant_id)
+  def self.merchant_invoices(merchant_id)
   find(merchant_id)
   .invoices
   .distinct
- end
+  end
 
 end
