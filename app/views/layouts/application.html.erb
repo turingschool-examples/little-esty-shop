@@ -9,12 +9,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+    <%= @repo.name %> </br>
+
   <body style="padding: 25px">
     <% flash.each do |type, message| %>
       <div class="alert alert-dismissible alert-success" style="text-align: center;">
         <p><%= message %></p>
       </div>
     <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -49,6 +49,9 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false, group: :test
   gem 'orderly'
+  gem 'hirb'
+  gem 'faraday'
+
 end
 
 group :development do
