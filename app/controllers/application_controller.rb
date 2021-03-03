@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
 
   def contributors
     json = GithubService.new.contributors
-    @repo_contributers = User.new(json).contributors
+    @repo_contributors = User.new(json).contributors
   end
 end
