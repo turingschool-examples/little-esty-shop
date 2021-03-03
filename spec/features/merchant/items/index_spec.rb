@@ -14,7 +14,6 @@ RSpec.describe "Merchant Item Index Page" do
 
   describe "when I visit the merchant index page" do
     it "Displays the merchant's name" do
-
       visit "/merchants/#{@merchant.id}/items"
       expect(page).to have_content("Harrison")
     end
@@ -57,6 +56,19 @@ RSpec.describe "Merchant Item Index Page" do
         click_on("New Item")
 
         expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+      end
+    end
+
+    it "Displays a section that has the top 5 items by revenue" do
+      
+      @merchant.stub(:top_5_items_by_revenue).and_return([@item_2, @item_1])
+      visit "/merchants/#{@merchant.id}/items"
+
+      save_and_open_page
+
+      within('#top-items') do
+        expect(page).to have_content("Top Items")
+        expect(@item_2.name).to appear_before(@item_1.name)
       end
     end
   end

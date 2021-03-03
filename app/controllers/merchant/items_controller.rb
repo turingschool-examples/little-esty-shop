@@ -45,7 +45,5 @@ class Merchant::ItemsController < ApplicationController
 
     redirect_to ("/merchants/#{params[:merchant_id]}/items")
     end
-
-
   end
 end
