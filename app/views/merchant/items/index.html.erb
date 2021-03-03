@@ -2,20 +2,20 @@
 
 <section id="enabled-items">
   <h3>Enabled Items</h3>
-  <% @merchant.items_by_status_true.each do |item| %>
+  <% @merchant.items.enabled.each do |item| %>
     <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
     <div class="btn btn-outline-danger">
       <%= button_to "disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
-    </div></br>
+    </div><br>
   <% end %>
 </section>
 
 <section id="disabled-items">
   <h3>Disabled Items</h3>
-  <% @merchant.items_by_status_false.each do |item| %>
+  <% @merchant.items.disabled.each do |item| %>
     <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
     <div class="btn btn-outline-success">
       <%= button_to "enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
-    </div></br>
+    </div><br>
   <% end %>
 </section>

@@ -10,14 +10,6 @@ class Merchant < ApplicationRecord
     .order('invoices.created_at DESC')
   end
 
-  def items_by_status_true
-    items.where(status: true)
-  end
-
-  def items_by_status_false
-    items.where(status: false)
-  end
-
   def customers
     Customer.joins(invoices: :items).where('items.merchant_id = ?', self.id).distinct
   end
