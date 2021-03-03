@@ -5,6 +5,7 @@ RSpec.describe Merchant, type: :model do
     it { should have_many :items }
   end
 
+
   describe "Instance Methods" do
     describe "#top_five_items" do
       it "lists the top 5 items by revenue" do
@@ -39,6 +40,36 @@ RSpec.describe Merchant, type: :model do
         expected = [item5, item3, item4, item6, item2]
         
         expect(merchant.top_five_items).to eq(expected)
+      end
+    end
+
+  describe "class methods" do
+    describe '::display_enabled' do
+      it 'displays merchants that have an enabled status' do
+        merchant_1 = create(:merchant, status: 0)
+        merchant_2 = create(:merchant, status: 0)
+        merchant_3 = create(:merchant, status: 1)
+        merchant_4 = create(:merchant, status: 1)
+        merchant_5 = create(:merchant, status: 0)
+        merchant_6 = create(:merchant, status: 0)
+        merchant_7 = create(:merchant, status: 1)
+
+        expect((Merchant.display_enabled).count).to eq(4)
+      end
+    end
+
+    describe '::display_disabled' do
+      it 'displays merchants that have a disabled status' do
+        merchant_1 = create(:merchant, status: 0)
+        merchant_2 = create(:merchant, status: 0)
+        merchant_3 = create(:merchant, status: 1)
+        merchant_4 = create(:merchant, status: 1)
+        merchant_5 = create(:merchant, status: 0)
+        merchant_6 = create(:merchant, status: 0)
+        merchant_7 = create(:merchant, status: 1)
+
+        expect((Merchant.display_disabled).count).to eq(3)
+
       end
     end
   end
