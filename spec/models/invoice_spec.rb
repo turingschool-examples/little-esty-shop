@@ -66,5 +66,11 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice_item1.invoice.format_time).to_not eq(@invoice_item1.invoice.created_at)
       end
     end
+
+    describe "Customer name" do
+      it "returns customer name" do
+        expect(@invoice1.customer_name).to eq("Bob Gu")
+      end
+    end
   end
 end
