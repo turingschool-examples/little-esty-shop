@@ -5,7 +5,8 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
-  # create two methods, one for enable one for disabled(where status = true/false)
+  enum status: [ :enabled, :disabled ]
+
   def top_five_customers
     transactions
     .joins(invoice: :customer)

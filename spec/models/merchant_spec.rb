@@ -4,7 +4,7 @@ RSpec.describe Merchant, type: :model do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Amazon')
     @merchant_2 = Merchant.create!(name: 'Mom and pop')
-    @merchant_3 = Merchant.create!(name: 'Scammers R Us')
+    @merchant_3 = Merchant.create!(name: 'Scammers R Us', status: 1)
 
     @item_1 = @merchant_1.items.create!(name: 'worker pain', unit_price: 1)
     @item_2 = @merchant_1.items.create!(name: 'union busting', unit_price: 3)
@@ -65,6 +65,20 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices) }
+  end
+
+  describe "validations" do
+    it 'Merchant can be enabled' do
+      expect(@merchant_1.status).to eq("enabled")
+      expect(@merchant_1.enabled?).to eq(true)
+      expect(@merchant_1.disabled?).to eq(false)
+    end
+
+    it 'Merchant can be disabled' do
+      expect(@merchant_3.status).to eq("disabled")
+      expect(@merchant_3.enabled?).to eq(false)
+      expect(@merchant_3.disabled?).to eq(true)
+    end
   end
 
   describe "instance methods" do
