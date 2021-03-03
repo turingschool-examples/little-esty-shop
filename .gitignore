@@ -29,3 +29,7 @@
 /coverage/
 cryptic-thicket-16023
 .DS_Store
+/config/local_env.yml
+
+# Ignore application configuration
+/config/application.yml

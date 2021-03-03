@@ -23,7 +23,7 @@ describe 'Admin Merchant index page' do
     end
 
     expect(current_path).to eq(admin_merchants_path)
-    expect(page).to have_content("#{@merchants[0].name} is Enabled")
+    expect(page).to have_content("#{@merchants[0].name} is Active")
   end
 
   it 'Sees link to create new merchant' do
