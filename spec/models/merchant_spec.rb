@@ -9,8 +9,8 @@ RSpec.describe Merchant, type: :model do
     @item_1 = @merchant_1.items.create!(name: 'Item 1', description: 'One description', unit_price: 10)
     @item_2 = @merchant_1.items.create!(name: 'Item 2', description: 'Two Description', unit_price: 20)
     @item_3 = @merchant_2.items.create!(name: 'Item 3', description: 'Three Description', unit_price: 30)
-    @item_4 = @merchant_1.items.create!(name: 'Item 4', description: 'Four Description', unit_price: 20, status: 1)
-    @item_5 = @merchant_1.items.create!(name: 'Item 5', description: 'Five Description', unit_price: 30, status: 1)
+    @item_4 = @merchant_1.items.create!(name: 'Item 4', description: 'Four Description', unit_price: 20)
+    @item_5 = @merchant_1.items.create!(name: 'Item 5', description: 'Five Description', unit_price: 30)
     @item_6 = @merchant_1.items.create!(name: 'Item 6', description: 'Six Description', unit_price: 20)
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Gu")
@@ -59,7 +59,7 @@ RSpec.describe Merchant, type: :model do
     @transaction_21 = Transaction.create!(invoice_id: @invoice_5.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction_22 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
   end
-  
+
   describe 'validations' do
     it { should validate_presence_of :name }
   end
