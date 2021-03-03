@@ -62,5 +62,26 @@ RSpec.describe Invoice, type: :model do
         expect(invoice.find_invoice_item(item_1.id).status).to eq(invoice_item_1.status)
       end
     end
+
+    describe '#total_revenue' do
+      it 'finds the revenue for all invoice items in a single invoice' do
+        customer = create(:customer, first_name: "Minnie")
+        invoice = create(:invoice, customer: customer)
+
+        item_1 = create(:item, name: "Fancy Chair")
+        item_2 = create(:item, name: "Mineral Water")
+        item_3 = create(:item, name: "Gold")
+        item_4 = create(:item, name: "Mint Soap")
+        item_5 = create(:item, name: "Mineral Water")
+
+        invoice_item_1 = create(:invoice_item, invoice_id: invoice.id, item_id: item_1.id, quantity: 10, unit_price: 30)
+        invoice_item_2 = create(:invoice_item, invoice_id: invoice.id, item_id: item_2.id, quantity: 5, unit_price: 50)
+        invoice_item_3 = create(:invoice_item, invoice_id: invoice.id, item_id: item_3.id, quantity: 15, unit_price: 60)
+        invoice_item_4 = create(:invoice_item, invoice_id: invoice.id, item_id: item_4.id, quantity: 8, unit_price: 70)
+        invoice_item_5 = create(:invoice_item, invoice_id: invoice.id, item_id: item_5.id, quantity: 20, unit_price: 72)
+
+        expect(invoice.total_revenue). to eq(3450)
+      end
+    end
   end
 end
