@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  describe 'validations' do
+  describe 'relationships' do
     it { should have_many(:items) }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices) }
+    it { should have_many(:customers).through(:invoices) }
   end
 
   before :each do
@@ -25,6 +29,13 @@ RSpec.describe Merchant, type: :model do
     @inv5 = @customer5.invoices.create!(status: "completed")
     @inv6 = @customer5.invoices.create!(status: "completed")
     @inv7 = @customer5.invoices.create!(status: "completed")
+    @inv1.transactions.create!(result: "success")
+    @inv2.transactions.create!(result: "success")
+    @inv3.transactions.create!(result: "success")
+    @inv4.transactions.create!(result: "success")
+    @inv5.transactions.create!(result: "success")
+    @inv6.transactions.create!(result: "success")
+    @inv7.transactions.create!(result: "success")
     InvoiceItem.create!(invoice: @inv1, item: @item1, unit_price: 20, status: "packaged")
     InvoiceItem.create!(invoice: @inv2, item: @item2, unit_price: 10, status: "packaged")
     InvoiceItem.create!(invoice: @inv3, item: @item3, unit_price: 2, status: "shipped")
@@ -70,6 +81,40 @@ RSpec.describe Merchant, type: :model do
 
     it "#invoices" do
       expect(@joe.invoices).to eq([@inv1, @inv2, @inv3, @inv4, @inv5, @inv7])
+    end
+
+    it "can find the top five merchants by revenue" do
+      merchant3 = Merchant.create!(name: "merchant 3")
+      im3 = merchant3.items.create!(name: "not Basketball", description: "Bouncy", unit_price: 40)
+      invmerch3 = @customer3.invoices.create!(status: "completed")
+      t3 = invmerch3.transactions.create!(result: "success")
+      InvoiceItem.create!(invoice: invmerch3, item: im3, unit_price: 50, quantity: 2, status: "packaged")
+      merchant4 = Merchant.create!(name: "merchant 4")
+      im4 = merchant4.items.create!(name: "not Basketball 2", description: "Bouncy", unit_price: 40)
+      invmerch4 = @customer3.invoices.create!(status: "completed")
+      t4 = invmerch4.transactions.create!(result: "success")
+      InvoiceItem.create!(invoice: invmerch4, item: im4, unit_price: 75, quantity: 3, status: "packaged")
+      merchant5 = Merchant.create!(name: "merchant 5")
+      im5 = merchant5.items.create!(name: "not Basketball 2", description: "Bouncy", unit_price: 50)
+      invmerch5 = @customer3.invoices.create!(status: "completed")
+      t5 = invmerch5.transactions.create!(result: "success")
+      InvoiceItem.create!(invoice: invmerch5, item: im5, unit_price: 75, quantity: 16, status: "packaged")
+      
+      expected = [@joe, @not_joe, merchant5, merchant4, merchant3]
+
+      expect(Merchant.top_five_by_revenue).to eq(expected)
+    end
+  end
+
+  describe "##top_5_items" do
+    it "returns the top 5 items by revenue generated" do
+      joe = Merchant.create!(name: "Joe Rogan")
+      item1 = joe.items.create!(name: "Basketball", description: "Bouncy", unit_price: 20)
+      item2 = joe.items.create!(name: "Baseball", description: "Not Bouncy", unit_price: 10, status: false)
+      item3 = joe.items.create!(name: "Hockey Puck", description: "Not Bouncy", unit_price: 2)
+      item4 = joe.items.create!(name: "Apple", description: "Red Delicious", unit_price: 1.70)
+      item5 = joe.items.create!(name: "Orange", description: "Spicy!", unit_price: 10, status: false)
+      item6 = joe.items.create!(name: "Video Game", description: "Don't waste you're life on these", unit_price: 69.99)
     end
   end
 end

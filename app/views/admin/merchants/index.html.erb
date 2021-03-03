@@ -22,6 +22,16 @@
         <% end %>
     </div>
   </section>
+  <section class="card text-white bg-secondary mb-3" style="width: 30rem; float:left; text-align: center;">
+    <div class="card-body">
+      <h3 class="card-header">Top Five Merchants</h3><br>
+        <% @top_five.each do |m| %>
+          <div class="card-text" id="merchant-<%= m.id %>">
+            <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>, Total Revenue: <%= number_to_currency(m.total_revenue) %>
+          </div><hr>
+        <% end %>
+    </div>
+  </section>
   <section class="card text-white bg-success mb3" style="width: 30rem; float: right; text-align: center;" id="enabled">
     <div class="card-body">
       <h3 class="card-header">Enabled Merchants</h3><br>
