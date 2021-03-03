@@ -1,1 +1,1 @@
-Figaro.require_keys(github_token)
+# Figaro.require_keys("pusher_key")
