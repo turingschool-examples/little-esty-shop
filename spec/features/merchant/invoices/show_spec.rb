@@ -59,9 +59,14 @@ RSpec.describe 'As a Merchant', type: :feature do
   end
 
   describe "When I visit my invoices show page" do
-    it "shows invoices that include at least one of my merchant's items and has a link to that invoice show page" do
+    it "show the id, status and a formatted created at date " do
 
       visit merchant_invoice_path(@merchant_1.id, @invoice_6.id)
+
+      expect(page).to have_content(@invoice_6.id)
+      expect(page).to have_content(@invoice_6.status)
+      expect(page).to have_content(@invoice_6.format_time)
+      expect(page).to have_content(@customer_6.name)
 
     end
   end
