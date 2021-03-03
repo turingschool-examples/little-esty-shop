@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def names
     json = GithubService.new.repos
-    @repo_names = Repo.new(json).name
+    @repo_names = json[:name]
   end
 
   def contributors

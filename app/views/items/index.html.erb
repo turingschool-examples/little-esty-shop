@@ -3,6 +3,16 @@
   <%= link_to "New Item", new_merchant_item_path(@merchant) %>
 </section>
 
+<section id="top-five-items">
+  <h3>Top Items</h3>
+  <ol>
+    <% @top_five_items.each do |item| %>
+        <li><%= item.name %> - $<%= item.total_revenue.round(2) %> in sales
+          <br>Top day for <%= item.name %> was <%= item.top_sales_date %></li>
+    <% end %>
+  </ol>
+</section>
+
 <section id="merchant-items">
     <h3>Enabled Items</h3>
       <% @active_items.each do |item| %>

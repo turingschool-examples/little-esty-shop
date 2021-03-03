@@ -12,4 +12,14 @@ class Item < ApplicationRecord
   def self.active
     where('status = ?', 'Active')
   end
+
+  def top_sales_date
+    invoices
+    .select("date_trunc('day', invoices.created_at) as day, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+    .group('day')
+    .order(total_revenue: :desc)
+    .first
+    .day
+    .strftime("%m/%d/%Y")
+  end
 end

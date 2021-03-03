@@ -60,5 +60,22 @@ RSpec.describe "Merchant Items Index Page" do
         expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}")
       end
     end
+
+    it "displays name of top five most popular items ranked by total revenue generated" do
+      visit "/merchant/#{@merchant1.id}/items"
+
+      within("#top-five-items") do
+        expect(page).to have_content("Top Items")
+      end
+    end
+
+    it "displays the date with the most sales for the top five items" do
+      visit "/merchant/#{@merchant1.id}/items"
+
+      within("#top-five-items") do
+        expect(page).to have_content("Top Items")
+        expect(page).to have_content("Top day for #{@item1.name} was #{@invoice_item_1.created_at.strftime('%m/%d/%Y')}")
+      end
+    end
   end
 end

@@ -7,4 +7,8 @@ class InvoiceItem < ApplicationRecord
   def change_status(status)
     self.update(status: status.downcase)
   end
+
+  def self.calculate_revenue
+    sum("invoice_items.unit_price * invoice_items.quantity")
+  end
 end

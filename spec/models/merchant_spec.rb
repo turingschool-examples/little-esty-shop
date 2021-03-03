@@ -11,12 +11,14 @@ RSpec.describe Merchant, type: :model do
 
     @item1 = create(:item, merchant_id: @merchant1.id)
     @item2 = create(:item, merchant_id: @merchant1.id)
+
     @item3 = create(:item, merchant_id: @merchant2.id)
     @item4 = create(:item, merchant_id: @merchant3.id)
     @item5 = create(:item, merchant_id: @merchant4.id)
     @item6 = create(:item, merchant_id: @merchant5.id)
     @item7 = create(:item, merchant_id: @merchant6.id)
     @item8 = create(:item, merchant_id: @merchant1.id)
+
 
     @customers = []
     10.times {@customers << create(:customer)}
@@ -47,6 +49,7 @@ RSpec.describe Merchant, type: :model do
     5.times {create(:transaction, invoice_id: @invoice_7.id, result: 1)}
     5.times {create(:transaction, invoice_id: @invoice_11.id, result: 1)}
 
+
     @invoice_item_1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice_1.id, status: 0, quantity: 5, unit_price: 50.0)
     @invoice_item_2 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice_2.id, status: 0, quantity: 12, unit_price: 60.54)
     @invoice_item_3 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice_3.id, status: 1, quantity: 45, unit_price: 70.54)
@@ -57,6 +60,16 @@ RSpec.describe Merchant, type: :model do
     @invoice_item_8 = create(:invoice_item, item_id: @item6.id, invoice_id: @invoice_8.id, status: 0, quantity: 100, unit_price: 90.7)
     @invoice_item_9 = create(:invoice_item, item_id: @item7.id, invoice_id: @invoice_9.id, status: 0, quantity: 100, unit_price: 90.7)
     @invoice_item_10 = create(:invoice_item, item_id: @item8.id, invoice_id: @invoice_11.id, status: 0, quantity: 1, unit_price: 90.7)
+
+#     @invoice_item_1 = create(:invoice_item, unit_price: 51.72, quantity: 8, item_id: @item1.id, invoice_id: @invoice_1.id, status: 0)
+#     @invoice_item_2 = create(:invoice_item, unit_price: 38.49, quantity: 5, item_id: @item1.id, invoice_id: @invoice_2.id, status: 0)
+#     @invoice_item_3 = create(:invoice_item, unit_price: 28.46, quantity: 6, item_id: @item2.id, invoice_id: @invoice_3.id, status: 1)
+#     @invoice_item_4 = create(:invoice_item, unit_price: 65.18, quantity: 7, item_id: @item2.id, invoice_id: @invoice_4.id, status: 2)
+#     @invoice_item_5 = create(:invoice_item, unit_price: 60.49, quantity: 4, item_id: @item1.id, invoice_id: @invoice_5.id, status: 0)
+#     @invoice_item_6 = create(:invoice_item, unit_price: 30.87, quantity: 1, item_id: @item3.id, invoice_id: @invoice_5.id, status: 0)
+#     @invoice_item_7 = create(:invoice_item, unit_price: 76.06, quantity: 3, item_id: @item4.id, invoice_id: @invoice_6.id, status: 1)
+#     @invoice_item_8 = create(:invoice_item, unit_price: 17.95, quantity: 8, item_id: @item5.id, invoice_id: @invoice_7.id, status: 2)
+
   end
 
   describe "relationships" do
@@ -80,12 +93,13 @@ RSpec.describe Merchant, type: :model do
 
     describe "#items_ready_to_ship" do
       it "returns a list of the all the items that have been ordered and are ready to ship" do
-        expect(@merchant1.items_ready_to_ship.length).to eq(4)
+        expect(@merchant1.items_ready_to_ship.length).to eq(5)
         items = @merchant1.items_ready_to_ship
         expect(items.first.invoice_items.first.item.name).to eq(@item1.name)
         expect(items.third.invoice_items.first.item.name).to eq(@item2.name)
       end
     end
+
 
     
     describe "#five-most-popular-items" do
@@ -116,6 +130,24 @@ RSpec.describe Merchant, type: :model do
     describe ':: Top_five_revenue' do
       it 'finds 5 merchants with highest revenue' do
         expect(Merchant.top_five_revenue).to eq([@merchant3, @merchant4, @merchant6, @merchant2, @merchant5])
+
+    describe "#top-five-items" do
+      it "displays the names of the top five items by total revenue generated" do
+        expect(@merchant1.top_five_items.first.name).to eq(@item1.name)
+      end
+    end
+
+    describe "#total_revenue" do
+      it "can return the total revenue for invoice items for a merchant" do
+        sum = ((@invoice_item_1.unit_price * @invoice_item_1.quantity) +
+               (@invoice_item_2.unit_price * @invoice_item_2.quantity) +
+               (@invoice_item_3.unit_price * @invoice_item_3.quantity) +
+               (@invoice_item_4.unit_price * @invoice_item_4.quantity) +
+               (@invoice_item_5.unit_price * @invoice_item_5.quantity) +
+               (@invoice_item_6.unit_price * @invoice_item_6.quantity) +
+               (@invoice_item_7.unit_price * @invoice_item_7.quantity) +
+               (@invoice_item_8.unit_price * @invoice_item_8.quantity))
+        expect(@merchant1.total_revenue).to eq(sum)
       end
     end
   end

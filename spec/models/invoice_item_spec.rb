@@ -44,11 +44,13 @@ RSpec.describe InvoiceItem, type: :model do
       expect(@invoice_item1.status).to_not eq("packaged")
       expect(@invoice_item1.status).to_not eq("shipped")
     end
+
     it 'can display packaged' do
       expect(@invoice_item3.status).to eq("packaged")
       expect(@invoice_item3.status).to_not eq("pending")
       expect(@invoice_item3.status).to_not eq("shipped")
     end
+
     it 'can display shipped' do
       expect(@invoice_item2.status).to eq("shipped")
       expect(@invoice_item2.status).to_not eq("packaged")
@@ -67,10 +69,15 @@ RSpec.describe InvoiceItem, type: :model do
     end
   end
 
+  describe "class methods" do
+    describe "::calculate_revenue" do
+      it "can return the total revenue for invoice items" do
+        sum = ((@invoice_item1.unit_price * @invoice_item1.quantity) +
+               (@invoice_item2.unit_price * @invoice_item2.quantity) +
+               (@invoice_item3.unit_price * @invoice_item3.quantity))
 
-  # describe "Class Methods" do
-  #   it 'finds incomplete items' do
-  #     expect(@invoice1.invoice_items.not_shipped).to eq()
-  #   end
-  # end
+        expect(InvoiceItem.calculate_revenue).to eq(sum)
+      end
+    end
+  end
 end
