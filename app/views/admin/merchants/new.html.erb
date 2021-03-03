@@ -1,0 +1,10 @@
+<header style="text-align: center;">
+  <h1>New Merchant</h1>
+</header><br><br>
+<div class="form-group" style="text-align: center; font-size: larger;">
+  <%= form_with url: admin_merchants_path, local: :true do |f| %>
+    <%= f.label "Name" %>
+    <%= f.text_field "name" %>
+    <%= f.button "create" %>
+  <% end %>
+</div>
