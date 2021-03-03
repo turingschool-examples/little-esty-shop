@@ -27,7 +27,7 @@
       <h3 class="card-header">Top Five Merchants</h3><br>
         <% @top_five.each do |m| %>
           <div class="card-text" id="top-five-<%= m.id %>">
-            <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>, Total Revenue: <%= number_to_currency(m.total_revenue) %>
+            <a href="/admin/merchants/<%=m.id %>" style="color:white; font-size: larger;"><%= m.name %></a>, Total Revenue: <%= number_to_currency(m.total_revenue) %>, Best Day: <%= m.best_day.strftime('%A, %b %d, %Y') %>
           </div><hr>
         <% end %>
     </div>

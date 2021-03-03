@@ -32,10 +32,6 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc).limit(5)
   end
 
-  def distinct_customers
-    customers.distinct
-  end
-
   def top_five_customers
     customers.joins(invoices: :transactions).where('transactions.result = ?', 0)
             .select('customers.*, count(invoices) as successful')

@@ -81,6 +81,11 @@ RSpec.describe "When I visit the Admin Merchants index page", type: :feature do
     rod = Merchant.create!(name: "Rod Brindamour")
     paul = Merchant.create!(name: "Paul Statsny")
     Merchant.stub(:top_five_by_revenue).and_return([@gary, sakic, rod, @joe, paul])
+    sakic.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    rod.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    paul.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    @joe.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    @gary.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
 
     visit "/admin/merchants"
 
@@ -98,6 +103,11 @@ RSpec.describe "When I visit the Admin Merchants index page", type: :feature do
     rod = Merchant.create!(name: "Rod Brindamour")
     paul = Merchant.create!(name: "Paul Statsny")
     Merchant.stub(:top_five_by_revenue).and_return([@gary, sakic, rod, @joe, paul])
+    sakic.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    rod.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    paul.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    @joe.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    @gary.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
 
     visit "/admin/merchants"
 
@@ -115,6 +125,37 @@ RSpec.describe "When I visit the Admin Merchants index page", type: :feature do
     end
     within("#top-five-#{paul.id}") do
       expect(page).to have_content(paul.total_revenue)
+    end
+  end
+
+  scenario "I see the best day of revenue with each of the top 5 merchants" do
+    sakic = Merchant.create!(name: "Joe Sakic")
+    rod = Merchant.create!(name: "Rod Brindamour")
+    paul = Merchant.create!(name: "Paul Statsny")
+    Merchant.stub(:top_five_by_revenue).and_return([@gary, sakic, rod, @joe, paul])
+    
+    sakic.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    rod.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    paul.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    @joe.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+    @gary.stub(:best_day).and_return(DateTime.new(2001, 1, 1))
+
+    visit "/admin/merchants"
+
+    within("#top-five-#{sakic.id}") do
+      expect(page).to have_content("Monday, Jan 01, 2001")
+    end
+    within("#top-five-#{@gary.id}") do
+      expect(page).to have_content("Monday, Jan 01, 2001")
+    end
+    within("#top-five-#{rod.id}") do
+      expect(page).to have_content("Monday, Jan 01, 2001")
+    end
+    within("#top-five-#{@joe.id}") do
+      expect(page).to have_content("Monday, Jan 01, 2001")
+    end
+    within("#top-five-#{paul.id}") do
+      expect(page).to have_content("Monday, Jan 01, 2001")
     end
   end
 end
