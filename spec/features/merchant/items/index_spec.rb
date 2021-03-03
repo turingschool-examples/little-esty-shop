@@ -13,7 +13,6 @@ describe 'As a merchant' do
       @item_5 = @merchant_1.items.create!(name: 'Item 5', description: 'Five Description', unit_price: 30, status: 1)
       @item_6 = @merchant_1.items.create!(name: 'Item 6', description: 'Six Description', unit_price: 20)
 
-
       @customer_1 = Customer.create!(first_name: "Bob", last_name: "Gu")
       @customer_2 = Customer.create!(first_name: "Steve", last_name: "Smith")
       @customer_3 = Customer.create!(first_name: "Jill", last_name: "Biden")
@@ -57,22 +56,42 @@ describe 'As a merchant' do
       @transaction_20 = Transaction.create!(invoice_id: @invoice_4.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
       @transaction_21 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
       @transaction_22 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
+
+      visit merchant_items_path(@merchant_1)
+
     end
 
+    it 'I see a list of the names of all of my items' do
+
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_2.name)
+    end
+
+    it 'I do not see items for any other merchant' do
+
+      expect(page).to_not have_content(@item_3.name)
+    end
+
+
     describe 'When I click on the name of an item' do
-      it "Then I am taken to that merchant's item's show page (/merchant/merchant_id/items/item_id)" do
-        visit merchant_items_path(@merchant_1)
+      it "When I click on the name of an item from the merchant items index page" do
+       visit merchant_items_path(@merchant_1)
 
-      # within('#items-enabled') do
-        expect(page).to have_link(@item_2.name)
-        expect(page).to have_link(@item_4.name)
-      # end
-
-      within('#items-enabled') do
-        click_link (@item_4.name)
-
-        expect(current_path).to eq(merchant_item_path(@merchant_1.id, @item_4.id))
+       within('#items-enabled') do
+          expect(page).to have_link(@item_4.name)
+          expect(page).to have_link(@item_5.name)
         end
+
+        within('#items-disabled') do
+          expect(page).to have_link(@item_1.name)
+          expect(page).to have_link(@item_2.name)
+        end
+
+        within('#items-disabled') do
+          click_link (@item_6.name)
+        end
+
+        expect(current_path).to eq(merchant_item_path(@merchant_1.id, @item_6.id))
       end
 
       it 'my page has sections for enabled and disabled items and each item has a button that changes its status' do
@@ -81,13 +100,13 @@ describe 'As a merchant' do
         visit merchant_items_path(@merchant_1)
 
         within('#items-disabled') do
-          expect(page).to have_content(item.name)
-          click_on(id: "btn-enable-#{item.id}")
+          expect(page).to have_content(@item_1.name)
+          click_on(id: "btn-enable-#{@item_1.id}")
           expect(current_path).to eq(merchant_items_path(@merchant_1))
         end
 
         within('#items-enabled') do
-          expect(page).to have_content(item.name)
+          expect(page).to have_content(@item_1.name)
         end
       end
 
@@ -103,25 +122,31 @@ describe 'As a merchant' do
         fill_in 'item_description', with: 'New item description yay!'
 
         click_button 'Submit'
-        save_and_open_page
+        # save_and_open_page
 
         expect(current_path).to eq(merchant_items_path(@merchant_1))
         expect(page).to have_content("Disabled Items")
         expect(page).to have_content('New Item')
       end
 
-      it "shows the top 5 most popular items by total revenue" do
-        visit merchant_items_path(@merchant_1.id)
+    it "shows the top 5 most popular items by total revenue" do
+      visit merchant_items_path(@merchant_1.id)
 
-          within("#top_five_items") do
-          expect(@item_1.name).to appear_before(@item_2.name)
-          expect(@item_2.name).to appear_before(@item_4.name)
-          expect(@item_4.name).to appear_before(@item_5.name)
-          expect(@item_5.name).to appear_before(@item_6.name)
+        within("#top_five_items") do
+        expect(@item_1.name).to appear_before(@item_2.name)
+        expect(@item_2.name).to appear_before(@item_4.name)
+        expect(@item_4.name).to appear_before(@item_5.name)
+        expect(@item_5.name).to appear_before(@item_6.name)
 
-          expect(page).to have_no_content(@item_3.name)
-        end
+        expect(page).to have_no_content(@item_3.name)
+
+        expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.best_day.created_at.strftime('%m/%d/%y')}")
+        expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.best_day.created_at.strftime('%m/%d/%y')}")
+        expect(page).to have_content("Top selling date for #{@item_4.name} was #{@item_4.best_day.created_at.strftime('%m/%d/%y')}")
+        expect(page).to have_content("Top selling date for #{@item_5.name} was #{@item_5.best_day.created_at.strftime('%m/%d/%y')}")
+        expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.best_day.created_at.strftime('%m/%d/%y')}")
       end
     end
   end
+end
 end
