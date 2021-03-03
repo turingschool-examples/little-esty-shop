@@ -1,41 +1,81 @@
+
 # Little Esty Shop
+> Marketplace app allowing the selling of items.
 
-## Background and Description
+Little Esty Shop offers a platform for Merchants to sell their wares without the fear of violating a naming copyright. The app allows for administrative access to manage the merchants and their invoices.
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+The app utilizes several Relationships which laid out looks like:
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+![image](https://user-images.githubusercontent.com/62969459/109731902-5eff9700-7b79-11eb-961f-fa6647176629.png)
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
 
-## Setup
+## Installation
 
-This project requires Ruby 2.5.3.
+This steps will guide you through the installation process for the app:
 
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
+# Set up
 
-## Phases
+First, make sure the gems that are required are installed:
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
+```
+bundle
+```
+Next you will need to set up your local database:
 
-## Evaluation
+```
+rails db:setup
+```
+This creates a development and testing database. As well as migrating the migrations.
 
-At the end of the project, you will be assessed based on [this Rubric](./doc/rubric.md)
+# Database seeding
+
+If you require data for development there are included `csv` files that allow you to use dummy data.
+
+Just run:
+
+```
+rails csv_load:all
+```
+
+This will run the rake import task and seed your database.
+
+# Starting the app
+
+First, you must start a local server:
+
+```
+rails server
+```
+or
+```
+rails s
+```
+With the local server running you can use the browser of your choice to visit http://localhost:3000
+
+
+## Testing Environment
+
+Rspec was used in testing the app. To run the test suite, simply type:
+
+```
+bundle exec rspec
+```
+
+## Release History
+
+* 0.0.1
+    * Work in progress
+
+## Contributors
+
+Diana20920 <br>
+MGonzales26 <br>
+kylejschulz <br>
+javolpe <br>
+
+### Base Repo
+
+BrianZanti <br>
+timomitchel <br>
+scottalexandra
+
