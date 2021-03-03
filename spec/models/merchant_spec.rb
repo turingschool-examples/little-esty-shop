@@ -59,6 +59,10 @@ RSpec.describe Merchant, type: :model do
     @transaction_21 = Transaction.create!(invoice_id: @invoice_5.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction_22 = Transaction.create!(invoice_id: @invoice_6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
   end
+  
+  describe 'validations' do
+    it { should validate_presence_of :name }
+  end
 
   describe "relationships" do
     it { should have_many :items }
