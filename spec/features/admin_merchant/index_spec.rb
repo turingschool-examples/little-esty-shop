@@ -57,7 +57,7 @@ RSpec.describe 'Admin Merchant Index' do
     visit admin_merchants_path
 
     expect(page).to have_content("Admin Merchants Index")
-    
+
     expect(page).to have_link("#{@merchant1.name}")
     expect(page).to have_link("#{@merchant2.name}")
   end
@@ -132,6 +132,33 @@ RSpec.describe 'Admin Merchant Index' do
 
     within("#disabled_merchants") do
       expect(page).to_not have_content(@merchant1.name)
+    end
+  end
+
+  it 'I see a link to create a new merchant.' do
+    visit admin_merchants_path
+
+    expect(page).to have_link("Create New Merchant")
+  end
+
+  it 'When I click on the link, I am taken to a form that allows me
+    to add merchant information. When I fill out the form I click ‘Submit’. Then I am taken
+    back to the admin merchants index page. And I see the merchant I just created displayed.
+    And I see my merchant was created with a default status of enabled.' do
+    visit admin_merchants_path
+
+    click_on("Create New Merchant")
+
+    expect(current_path).to eq(new_admin_merchant_path)
+
+    fill_in "name", with: "Sweet baby Jake"
+
+    click_on "Submit"
+
+    expect(current_path).to eq(admin_merchants_path)
+
+    within("#enabled_merchants") do
+      expect(page).to have_content("Sweet baby Jake")
     end
   end
 end
