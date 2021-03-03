@@ -159,6 +159,38 @@ RSpec.describe Merchant, type: :model do
         expect(merchant4.total_revenue.to_f).to eq(expected_m4.to_f)
         expect(merchant3.total_revenue.to_f).to eq(expected_m3.to_f)
       end
+
+      describe "##best_day" do
+        it "can find the merchants best day of revenue" do
+          merchant3 = Merchant.create!(name: "merchant 3")
+          im3 = merchant3.items.create!(name: "not Basketball", description: "Bouncy", unit_price: 40)
+          invmerch3 = @customer3.invoices.create!(status: "completed", created_at: DateTime.new(2001, 1, 1))
+          invmerch7 = @customer3.invoices.create!(status: "completed", created_at: DateTime.new(2020, 2, 2))
+          t3 = invmerch3.transactions.create!(result: "success")
+          t7 = invmerch7.transactions.create!(result: "success")
+          InvoiceItem.create!(invoice: invmerch3, item: im3, unit_price: 75, quantity: 3, status: "packaged")
+          InvoiceItem.create!(invoice: invmerch7, item: im3, unit_price: 75, quantity: 6, status: "packaged")
+          merchant4 = Merchant.create!(name: "merchant 4")
+          im4 = merchant4.items.create!(name: "not Basketball 2", description: "Bouncy", unit_price: 40)
+          invmerch4 = @customer5.invoices.create!(status: "completed", created_at: DateTime.new(2001, 1, 1))
+          invmerch6 = @customer5.invoices.create!(status: "completed", created_at: DateTime.new(2020, 2, 2))
+          t4 = invmerch4.transactions.create!(result: "success")
+          t6 = invmerch6.transactions.create!(result: "success")
+          InvoiceItem.create!(invoice: invmerch4, item: im4, unit_price: 75, quantity: 3, status: "packaged")
+          InvoiceItem.create!(invoice: invmerch6, item: im4, unit_price: 75, quantity: 3, status: "packaged")
+          merchant5 = Merchant.create!(name: "merchant 5")
+          im5 = merchant5.items.create!(name: "not Basketball 2", description: "Bouncy", unit_price: 50)
+          invmerch5 = @customer3.invoices.create!(status: "completed")
+          t5 = invmerch5.transactions.create!(result: "success")
+          InvoiceItem.create!(invoice: invmerch5, item: im5, unit_price: 75, quantity: 16, status: "packaged")
+
+          expect(merchant3.best_day).to eq(invmerch7.created_at)
+          expect(merchant3.best_day).to_not eq(invmerch3.created_at)
+          expect(merchant4.best_day).to eq(invmerch6.created_at)
+          expect(merchant4.best_day).to_not eq(invmerch4.created_at)
+          
+        end
+      end
     end
   end
 end
