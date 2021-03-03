@@ -7,7 +7,8 @@
   <h3>Top Items</h3>
   <ol>
     <% @top_five_items.each do |item| %>
-    <li><%= item.name %> - $<%= item.total_revenue.round(2) %> in sales</li>
+        <li><%= item.name %> - $<%= item.total_revenue.round(2) %> in sales
+          <br>Top day for <%= item.name %> was <%= item.top_sales_date %></li>
     <% end %>
   </ol>
 </section>

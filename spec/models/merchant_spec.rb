@@ -73,5 +73,19 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant1.top_five_items.first.name).to eq(@item1.name)
       end
     end
+
+    describe "#total_revenue" do
+      it "can return the total revenue for invoice items for a merchant" do
+        sum = ((@invoice_item_1.unit_price * @invoice_item_1.quantity) +
+               (@invoice_item_2.unit_price * @invoice_item_2.quantity) +
+               (@invoice_item_3.unit_price * @invoice_item_3.quantity) +
+               (@invoice_item_4.unit_price * @invoice_item_4.quantity) +
+               (@invoice_item_5.unit_price * @invoice_item_5.quantity) +
+               (@invoice_item_6.unit_price * @invoice_item_6.quantity) +
+               (@invoice_item_7.unit_price * @invoice_item_7.quantity) +
+               (@invoice_item_8.unit_price * @invoice_item_8.quantity))
+        expect(@merchant1.total_revenue).to eq(sum)
+      end
+    end
   end
 end
