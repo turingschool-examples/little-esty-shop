@@ -27,14 +27,14 @@
     </section>
   </div>
 
-  <div style="display: inline-block; float: left;">
+  <div style="display: inline-block; float: right;">
     <h3>Top Items</h3>
-
     <ol>
       <% @merchant.top_5_items_by_revenue.each do |item| %>
         <li style="font-size:20px">
-          <%= item.name %> - <%= number_to_currency(item.revenue) %> in sales
-        </li>
+          <%= item.name %> - <%= number_to_currency(item.revenue) %> in sales </br>
+          Top day for <%= item.name %> was <%= item.item_top_day.strftime("%F") %>
+        </li></br>
       <% end %>
     </ol>
 

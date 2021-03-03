@@ -28,8 +28,4 @@ class Merchant < ApplicationRecord
     .group("items.id")
     .order(revenue: :desc).limit(5)
   end
-
-  def top_days_by_item
-    
-  end
 end
