@@ -8,6 +8,18 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items ).through(:invoice_items)}
   end
 
+
+  describe "Instance methods" do
+    describe "#format_day" do
+      it "takes an invoice and formats the day to present cleanly" do
+        customer = create(:customer)
+        invoice = create(:invoice, customer: customer)
+
+        expect(invoice.format_day).to eq(invoice.created_at.strftime("%A %B %d, %Y"))
+      end
+    end
+  end
+  
   describe 'class methods' do
     describe '::incomplete' do
       it 'displays invoices with status of cancelled or in progress' do
@@ -81,6 +93,7 @@ RSpec.describe Invoice, type: :model do
         invoice_item_5 = create(:invoice_item, invoice_id: invoice.id, item_id: item_5.id, quantity: 20, unit_price: 72)
 
         expect(invoice.total_revenue). to eq(3450)
+
       end
     end
   end

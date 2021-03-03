@@ -34,6 +34,7 @@ RSpec.describe "Merchant Item Index Page" do
     # create_list(:item, 5, merchant:  @merchant)
     create_list(:item, 5, :merchant => @merchant2)
   end
+
   describe "As a merchant" do
     it "shows the names of all the items" do
       visit merchant_items_path(@merchant)
@@ -133,5 +134,14 @@ RSpec.describe "Merchant Item Index Page" do
     end
   end
   
+  it "lists the best day for an item with a label 'Top selling date was' for the top five items" do
+    visit merchant_items_path(@merchant)
+
+    expect(page).to have_content("Top selling date was:")
+
+    within("#top-item-#{@item5.id}") do
+      expect(page).to have_content(@item5.best_day.format_day)
+    end
+  end
 end
 end

@@ -9,6 +9,11 @@ class Invoice < ApplicationRecord
     where(status: 0).or(where(status: 2))
   end
 
+
+  def format_day
+    created_at.strftime("%A %B %d, %Y")
+  end
+  
   def self.merchants_invoices(merch_id)
     joins(:items).where('merchant_id = ?', merch_id).select("invoices.*").distinct
   end

@@ -40,4 +40,30 @@ RSpec.describe Item, type: :model do
       end
     end
   end
+
+  describe "Instance Methods" do
+    describe "#best_day" do
+      it "shows the best sales day for an item" do
+        merchant = create(:merchant)
+        
+        item1 = merchant.items.create(name: "item 1", description: "it is item 1", unit_price: 5 )
+        
+        customer = create(:customer)
+        
+        invoice1 = create(:invoice, customer: customer, created_at: '2012-03-27 14:54:09')
+        invoice2 = create(:invoice, customer: customer, created_at: '2021-03-02 14:54:09')
+        
+        
+        invoice_item1 = create(:invoice_item, invoice: invoice1, item: item1, unit_price: 1, quantity: 1, status: 2)
+        invoice_item2 = create(:invoice_item, invoice: invoice1, item: item1, unit_price: 1, quantity: 2, status: 2)
+        invoice_item3 = create(:invoice_item, invoice: invoice1, item: item1, unit_price: 1, quantity: 5, status: 2)
+        invoice_item4 = create(:invoice_item, invoice: invoice2, item: item1, unit_price: 1, quantity: 4, status: 2)
+        invoice_item5 = create(:invoice_item, invoice: invoice2, item: item1, unit_price: 1, quantity: 7, status: 2)
+        invoice_item6 = create(:invoice_item, invoice: invoice2, item: item1, unit_price: 1, quantity: 3, status: 2)
+        invoice_item7 = create(:invoice_item, invoice: invoice2, item: item1, unit_price: 1, quantity: 1, status: 2)
+        
+        expect(item1.best_day.created_at).to eq(invoice2.created_at)
+      end
+    end
+  end
 end
