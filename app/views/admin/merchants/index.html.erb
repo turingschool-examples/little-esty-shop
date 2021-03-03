@@ -1,12 +1,19 @@
 <h2>Admin Merchants Index</h2><br>
 
+
 <% @admin_merchants.each do |merchant| %>
-  <section id="admin_merchants-<%=merchant.id%>">
+  <div id="admin_merchants-<%=merchant.id%>">
     <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
     <% if merchant.status == true %>
-      <%= button_to "Disable", admin_merchant_path(merchant), params: { status: :disable }, method: :patch, local: true %>
+      <section id="enabled_merchants">
+        <%= button_to "Disable", admin_merchant_path(merchant),
+        params: { status: :disable }, method: :patch, local: true %>
+      </section>
     <% else %>
-      <%= button_to "Enable", admin_merchant_path(merchant), params: { status: :enable }, method: :patch, local: true %>
+      <section id="disabled_merchants">
+        <%= button_to "Enable", admin_merchant_path(merchant),
+        params: { status: :enable }, method: :patch, local: true %>
+      </section>
     <% end %>
-  </section>
+  </div>
 <% end %>

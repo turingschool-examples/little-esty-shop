@@ -94,4 +94,84 @@ RSpec.describe 'Admin Merchant Index' do
       expect(page).to have_button("Enable")
     end
   end
+  it 'I see two sections, one for "Enabled Merchants" and one for "Disabled Merchants"
+    And I see that each Merchant is listed in the appropriate section' do
+    visit admin_merchants_path
+
+    # within("#enabled_merchants") do
+      expect(page).to have_content(@merchant1.name)
+      expect(page).to have_content(@merchant2.name)
+    # end
+    # within("#disabled_merchants") do
+      # expect(page).to_not have_content(@merchant1.name)
+      # expect(page).to_not have_content(@merchant2.name)
+    # end
+
+    within("#admin_merchants-#{@merchant1.id}") do
+      click_on("Disable")
+    end
+    expect(current_path).to eq(admin_merchants_path)
+
+    # within("#enabled_merchants") do
+      expect(page).to have_button("Enable")
+      # require "pry";binding.pry
+      # expect(page).to_not have_content(@merchant1.name)
+      # expect(page).to have_content(@merchant2.name)
+    # end
+    within("#admin_merchants-#{@merchant1.id}") do
+      click_on("Enable")
+    end
+
+    expect(current_path).to eq(admin_merchants_path)
+
+    expect(page).to_not have_button("Enable")
+
+    # within("#disabled_merchants") do
+      # expect(page).to have_content(@merchant1.name)
+      # expect(page).to_not have_content(@merchant2.name)
+    # end
+  end
 end
+# within("#enabled_merchants-#{@merchant1.id}") do
+#   expect(page).to have_content(@merchant1.name)
+#   # expect(page).to have_content(@merchant2.name)
+# end
+#
+# within("#enabled_merchants-#{@merchant2.id}") do
+#   # expect(page).to have_content(@merchant1.name)
+#   expect(page).to have_content(@merchant2.name)
+# end
+#
+# within("#disabled_merchants-#{@merchant1.id}") do
+#   expect(page).to_not have_content(@merchant1.name)
+#   # expect(page).to_not have_content(@merchant2.name)
+# end
+#
+# within("#disabled_merchants-#{@merchant2.id}") do
+#   # expect(page).to_not have_content(@merchant1.name)
+#   expect(page).to_not have_content(@merchant2.name)
+# end
+#
+# within("#admin_merchants-#{@merchant1.id}") do
+#   click_on("Disable")
+# end
+#
+# within("#enabled_merchants-#{@merchant1.id}") do
+#   expect(page).to_not have_content(@merchant1.name)
+#   # expect(page).to have_content(@merchant2.name)
+# end
+#
+# within("#enabled_merchants-#{@merchant2.id}") do
+#   # expect(page).to_not have_content(@merchant1.name)
+#   expect(page).to have_content(@merchant2.name)
+# end
+#
+# within("#disabled_merchants-#{@merchant1.id}") do
+#   expect(page).to have_content(@merchant1.name)
+#   # expect(page).to_not have_content(@merchant2.name)
+# end
+#
+# within("#disabled_merchants-#{@merchant2.id}") do
+#   # expect(page).to have_content(@merchant1.name)
+#   expect(page).to_not have_content(@merchant2.name)
+# end
