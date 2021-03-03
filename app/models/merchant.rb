@@ -41,5 +41,4 @@ class Merchant < ApplicationRecord
   .invoices
   .distinct
  end
-
 end
