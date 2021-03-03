@@ -16,7 +16,7 @@ Please choose a single user story to present from start to finish. Include the f
 
 ### Part 2: Q&A
 
-Students should be prepared to answer questions from the instructor surrounding the implementation of the user story focusing on the subject areas listed in the project rubric. 
+Students should be prepared to answer questions from the instructor surrounding the implementation of the user story focusing on the subject areas listed in the project rubric below. 
 
 ## Rubric
 
