@@ -42,6 +42,7 @@ RSpec.describe Merchant, type: :model do
         expect(merchant.top_five_items).to eq(expected)
       end
     end
+  end
 
   describe "class methods" do
     describe '::display_enabled' do

@@ -1,6 +1,19 @@
 <a href="/admin/merchants/new">New Merchant</a>
 <h1>Merchants</h1>
 
+<section id="top-five">
+  <h2>Top five Merchants by revenue</h2>
+  <% @top_five.each do |top| %>
+    <ul>
+      <a href="admin/merchants/<%= top.id %>"><li>Merchant name: <%= top.name %> </li></a>
+      <li>revenue: <%= top.revenue %></li>
+    </ul>
+  <% end  %>
+</section>
+<br>
+<hr>
+<br>
+
 <section id="enabled-merchants">
 <h2>Enabled Merchants</h2>
 <% @merchants.display_enabled.each do |merchant| %>
