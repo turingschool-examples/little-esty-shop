@@ -6,6 +6,13 @@ describe 'Admin Dashboard' do
     @customers.each do |customer|
       create(:invoice, customer_id: customer.id)
     end
+    @merchant1 = create(:merchant)
+    @merchant2 = create(:merchant)
+
+    @item1 = create(:item, merchant_id: @merchant1.id)
+    @item2 = create(:item, merchant_id: @merchant1.id)
+    @item3 = create(:item, merchant_id: @merchant2.id)
+
     @invoice_1 = @customers.first.invoices.first
     @invoice_2 = @customers.second.invoices.first
     @invoice_3 = @customers.third.invoices.first
@@ -13,6 +20,7 @@ describe 'Admin Dashboard' do
     @invoice_5 = @customers.fifth.invoices.first
     @invoice_6 = @customers[5].invoices.first
     @invoice_7 = @customers[6].invoices.first
+
     9.times {create(:transaction, invoice_id: @invoice_1.id, result: 0)}
     7.times {create(:transaction, invoice_id: @invoice_2.id, result: 0)}
     7.times {create(:transaction, invoice_id: @invoice_3.id, result: 0)}
@@ -20,9 +28,9 @@ describe 'Admin Dashboard' do
     1.times {create(:transaction, invoice_id: @invoice_5.id, result: 0)}
     1.times {create(:transaction, invoice_id: @invoice_6.id, result: 1)}
     10.times {create(:transaction, invoice_id: @invoice_7.id, result: 1)}
-    @invoice_item_1 = InvoiceItem.create(invoice_id: @invoice_1.id, status: 0)
-    @invoice_item_2 = InvoiceItem.create(invoice_id: @invoice_2.id, status: 0)
-    @invoice_item_3 = InvoiceItem.create(invoice_id: @invoice_3.id, status: 1)
+    @invoice_item_1 = InvoiceItem.create(invoice_id: @invoice_1.id, item_id: @item1.id, status: 0)
+    @invoice_item_2 = InvoiceItem.create(invoice_id: @invoice_2.id, item_id: @item2.id, status: 0)
+    @invoice_item_3 = InvoiceItem.create(invoice_id: @invoice_3.id, item_id: @item3.id, status: 1)
     @invoice_item_4 = InvoiceItem.create(invoice_id: @invoice_4.id, status: 2)
   end
 
@@ -34,7 +42,7 @@ describe 'Admin Dashboard' do
 
   it 'Shows links to merchant and invoice index pages' do
     visit admin_index_path
-    
+
     expect(page).to have_link("Merchant Index")
     expect(page).to have_link("Invoice Index")
   end
@@ -52,16 +60,14 @@ describe 'Admin Dashboard' do
     expect(page).to_not have_content(@customers[6].last_name)
   end
 
-  #test not working/not populating incomplete invoices but they show on local:3000
+  it 'shows incomplete invoices and thier attributes' do
+    visit admin_index_path
 
-  # it 'shows incomplete invoices and thier attributes' do
-  #   visit admin_index_path
-
-  #   expect(page).to have_content(@invoice_1.id)
-  #   expect(page).to have_link(@invoice_3.id)
-  #   expect(page).to have_link(@invoice_2.id)
-  #   expect(page).to_not have_content(@invoice_4.id)
-  #   # click_link "Invoice - #{@invoice_1.id}"
-  #   expect(current_path).to eq(admin_invoice_path(@invoice_1))
-  # end
+    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_link(@invoice_3.id)
+    expect(page).to have_link(@invoice_2.id)
+    expect(page).to_not have_content(@invoice_4.id)
+    click_link(@invoice_1.id)
+    expect(current_path).to eq(admin_invoice_path(@invoice_1))
+  end
 end
