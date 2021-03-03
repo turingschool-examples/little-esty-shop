@@ -129,24 +129,24 @@ describe 'As a merchant' do
         expect(page).to have_content('New Item')
       end
 
-    it "shows the top 5 most popular items by total revenue" do
-      visit merchant_items_path(@merchant_1.id)
+      it "shows the top 5 most popular items by total revenue" do
+        visit merchant_items_path(@merchant_1.id)
 
-        within("#top_five_items") do
-        expect(@item_1.name).to appear_before(@item_2.name)
-        expect(@item_2.name).to appear_before(@item_4.name)
-        expect(@item_4.name).to appear_before(@item_5.name)
-        expect(@item_5.name).to appear_before(@item_6.name)
+          within("#top_five_items") do
+          expect(@item_1.name).to appear_before(@item_2.name)
+          expect(@item_2.name).to appear_before(@item_4.name)
+          expect(@item_4.name).to appear_before(@item_5.name)
+          expect(@item_5.name).to appear_before(@item_6.name)
 
-        expect(page).to have_no_content(@item_3.name)
+          expect(page).to have_no_content(@item_3.name)
 
-        expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.best_day.created_at.strftime('%m/%d/%y')}")
-        expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.best_day.created_at.strftime('%m/%d/%y')}")
-        expect(page).to have_content("Top selling date for #{@item_4.name} was #{@item_4.best_day.created_at.strftime('%m/%d/%y')}")
-        expect(page).to have_content("Top selling date for #{@item_5.name} was #{@item_5.best_day.created_at.strftime('%m/%d/%y')}")
-        expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.best_day.created_at.strftime('%m/%d/%y')}")
+          expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.best_day.created_at.strftime('%m/%d/%y')}")
+          expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.best_day.created_at.strftime('%m/%d/%y')}")
+          expect(page).to have_content("Top selling date for #{@item_4.name} was #{@item_4.best_day.created_at.strftime('%m/%d/%y')}")
+          expect(page).to have_content("Top selling date for #{@item_5.name} was #{@item_5.best_day.created_at.strftime('%m/%d/%y')}")
+          expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.best_day.created_at.strftime('%m/%d/%y')}")
+        end
       end
     end
   end
-end
 end
