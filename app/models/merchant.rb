@@ -16,14 +16,6 @@ class Merchant < ApplicationRecord
     .order('invoices.created_at DESC')
   end
 
-  def items_by_status_true
-    items.where(status: true)
-  end
-
-  def items_by_status_false
-    items.where(status: false)
-  end
-
   def top_5_items_by_revenue
     items.joins(invoices: :transactions)
     .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue")

@@ -106,31 +106,15 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe "instance methods" do
-    describe "##items_by_status_true" do
-      it "returns all merchant items with status that is true" do
-        joe = Merchant.create!(name: "Joe Rogan")
-        item1 = joe.items.create!(name: "Basketball", description: "Bouncy", unit_price: 20)
-        item2 = joe.items.create!(name: "Baseball", description: "Not Bouncy", unit_price: 10, status: false)
-        item3 = joe.items.create!(name: "Hockey Puck", description: "Not Bouncy", unit_price: 2)
-
-        expect(joe.items_by_status_true.count).to eq(2)
-        expect(joe.items_by_status_false.count).to eq(1)
-      end
-    end
-
-    describe "##top_5_items" do
-      it "returns the top 5 items by revenue generated" do
-        joe = Merchant.create!(name: "Joe Rogan")
-        item1 = joe.items.create!(name: "Basketball", description: "Bouncy", unit_price: 20)
-        item2 = joe.items.create!(name: "Baseball", description: "Not Bouncy", unit_price: 10, status: false)
-        item3 = joe.items.create!(name: "Hockey Puck", description: "Not Bouncy", unit_price: 2)
-        item4 = joe.items.create!(name: "Apple", description: "Red Delicious", unit_price: 1.70)
-        item5 = joe.items.create!(name: "Orange", description: "Spicy!", unit_price: 10, status: false)
-        item6 = joe.items.create!(name: "Video Game", description: "Don't waste you're life on these", unit_price: 69.99)
-
-
-      end
+  describe "##top_5_items" do
+    it "returns the top 5 items by revenue generated" do
+      joe = Merchant.create!(name: "Joe Rogan")
+      item1 = joe.items.create!(name: "Basketball", description: "Bouncy", unit_price: 20)
+      item2 = joe.items.create!(name: "Baseball", description: "Not Bouncy", unit_price: 10, status: false)
+      item3 = joe.items.create!(name: "Hockey Puck", description: "Not Bouncy", unit_price: 2)
+      item4 = joe.items.create!(name: "Apple", description: "Red Delicious", unit_price: 1.70)
+      item5 = joe.items.create!(name: "Orange", description: "Spicy!", unit_price: 10, status: false)
+      item6 = joe.items.create!(name: "Video Game", description: "Don't waste you're life on these", unit_price: 69.99)
     end
     describe "##total_revenue" do
       it "returns the merchants total revenue" do

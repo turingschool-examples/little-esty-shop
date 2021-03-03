@@ -9,7 +9,7 @@ RSpec.describe "Merchant Item Index Page" do
     @item_2 = @merchant.items.create!(name: "orange",
                                       description: "same name as the color wow!",
                                       unit_price: 2.09,
-                                      status: false)
+                                      status: 1)
   end
 
   describe "when I visit the merchant index page" do
