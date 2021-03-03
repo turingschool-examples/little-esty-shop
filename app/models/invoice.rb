@@ -7,4 +7,5 @@ class Invoice < ApplicationRecord
   def format_time
     created_at.strftime("%A, %B %d, %Y")
   end
+
 end
