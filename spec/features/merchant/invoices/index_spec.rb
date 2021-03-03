@@ -59,13 +59,22 @@ RSpec.describe 'As a Merchant', type: :feature do
   end
 
   describe "When I visit my invoices index" do
-    it "shows invoices that include at least one of my merchant's items" do
+    it "shows invoices that include at least one of my merchant's items and has a link to that invoice show page" do
 
       visit merchant_invoices_path(@merchant_1)
+
+      expect(page).to have_link(href: merchant_invoice_path(@merchant_1.id, @invoice_6.id))
+      expect(page).to have_link(href: merchant_invoice_path(@merchant_1.id, @invoice_1.id))
+      expect(page).to have_link(href: merchant_invoice_path(@merchant_1.id, @invoice_2.id))
+      expect(page).to have_link(href: merchant_invoice_path(@merchant_1.id, @invoice_3.id))
     end
-    it "invoices that appear have links to their show page" do
+
+    it "when I click a link it takes me to the invoice show page" do
+
+      visit merchant_invoices_path(@merchant_1)
+
+      click_link(href: merchant_invoice_path(@merchant_1.id, @invoice_6.id))
 
     end
-
   end
 end
