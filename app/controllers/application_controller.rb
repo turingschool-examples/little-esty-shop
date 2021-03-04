@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_action :names, :contributors
+  before_action :names, :contributors, :pulls
 
   def names
     json = GithubService.new.repos
-    @repo_names = json[:name]
+    @repo_names = Repo.new(json).name
   end
 
   def contributors
@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     @repo_contributors = User.new(json).contributors
   end
 
-  # def commits
-  #   json = GithubService.new.commits
-  #   @repo_commits = Commit.new(json)
-  # end
+  def pulls
+    json = GithubService.new.pulls
+    @repo_pull_count = PullRequest.new(json).pull_requests
+  end
 end

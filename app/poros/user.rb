@@ -2,8 +2,14 @@ class User
   attr_reader :contributors
 
   def initialize(contributor_data)
-    @contributors = contributor_data.map do |contributor|
-                      contributor[:login]
-                    end
+    @contributors = get_contributors(contributor_data)
+  end
+
+  def get_contributors(data)
+    contributors = {}
+    data.each do |contributor|
+      contributors[contributor[:login]] = contributor[:contributions]
+    end
+    contributors
   end
 end

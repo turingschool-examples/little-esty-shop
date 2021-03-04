@@ -1,2 +1,0 @@
-class ReposController < ApplicationController
-end
