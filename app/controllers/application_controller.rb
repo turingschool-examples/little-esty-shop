@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   def api
     @service = GithubService.new
     @repo = RepoName.new(@service.repo_name)
-
-    # @contributors = @service.create_contributors
+    @contributors = ContributorNames.new(@service.contributors)
   end
 end
