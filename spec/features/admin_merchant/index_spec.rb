@@ -12,6 +12,10 @@ RSpec.describe 'Admin Merchant Index' do
 
     @merchant1 = Merchant.create!(name: "Jimbo")
     @merchant2 = Merchant.create!(name: "Linda")
+    @merchant3 = Merchant.create!(name: "Johnny")
+    @merchant4 = Merchant.create!(name: "Miranda")
+    @merchant5 = Merchant.create!(name: "Charlie")
+    @merchant6 = Merchant.create!(name: "Kim")
 
     @item1 = Item.create!(name: "spatula", description: "fold them eggs", unit_price: 14.00, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: "bowling ball", description: "roll em if you got em", unit_price: 68.00, merchant_id: @merchant2.id)
@@ -161,4 +165,38 @@ RSpec.describe 'Admin Merchant Index' do
       expect(page).to have_content("Sweet baby Jake")
     end
   end
+  it 'I see the names of the top 5 merchants by total revenue generated And I see the
+    total revenue generated next to each merchant name' do
+    visit admin_merchants_path
+
+    within(".top_five_merchants") do
+      save_and_open_page
+      expect(page).to have_link(@merchant1.name)
+      # expect(page).to have_link(@merchant2.name)
+      # expect(page).to have_link(@merchant3.name)
+      # expect(page).to have_link(@merchant4.name)
+      # expect(page).to have_link(@merchant5.name)
+      # expect(page).to_not have_link(@merchant6.name)
+    end
+
+    within("#top_five_merchants-#{@merchant1.id}") do
+      expect(page).to have_content("Revenue: $948")
+    end
+  end
+
+  it "When I click on merchant name link, I am taken to the admin merchant show page
+    for that merchant " do
+    visit admin_merchants_path
+
+    within("#top_five_merchants-#{@merchant1.id}") do
+      click_on(@merchant1.name)
+    end
+
+    expect(current_path).to eq(admin_merchant_path(@merchant1))
+  end
 end
+
+# Notes on Revenue Calculation:
+# - Only invoices with at least one successful transaction should count towards revenue
+# - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+# - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
