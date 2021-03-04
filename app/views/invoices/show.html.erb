@@ -1,4 +1,16 @@
-<%= @invoice.id %>
-<%= @invoice.status %>
-<%= @invoice.format_time %>
-<%= @invoice.customer_name %>
+<h2><%= @invoice.id %></h2>
+  <p>Invoice Status: <%= @invoice.status %></p>
+  <p>Invoice Creation Time: <%= @invoice.format_time %></p>
+  <p>Customer: <%= @invoice.customer_name %></p>
+
+<h3>Items Sold</h3>
+<%  @invoice.invoice_items.each do |item| %>
+  <p>Item name: <%= item.item_name %><br>
+  Invoice Item Status: <%= item.status %>
+  Quantity sold: <%= item.quantity %>
+  Unit Price: <%= item.unit_price %></p>
+<% end %>
+
+
+<h3>Revenue potential</h3>
+<%=@invoice.invoice_items[0].total_revenue(@invoice.id) %>
