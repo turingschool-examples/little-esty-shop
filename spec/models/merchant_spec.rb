@@ -80,7 +80,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "#invoices" do
-      expect(@joe.invoices).to eq([@inv1, @inv2, @inv3, @inv4, @inv5, @inv7])
+      expect(@joe.invoices.sort).to eq([@inv1, @inv2, @inv3, @inv4, @inv5, @inv7])
     end
 
     it "can find the top five merchants by revenue" do
@@ -205,8 +205,10 @@ RSpec.describe Merchant, type: :model do
           expected_m4 = (75 * 3) + (20 * 3)
           expected_m3 = (75 * 3)
 
-          expect(merchant4.total_revenue.to_f).to eq(expected_m4.to_f)
-          expect(merchant3.total_revenue.to_f).to eq(expected_m3.to_f)
+          expect(merchant3.best_day).to eq(invmerch7.created_at)
+          expect(merchant3.best_day).to_not eq(invmerch3.created_at)
+          expect(merchant4.best_day).to eq(invmerch6.created_at)
+          expect(merchant4.best_day).to_not eq(invmerch4.created_at)
         end
       end
     end
