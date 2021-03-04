@@ -35,9 +35,8 @@ class Merchant < ApplicationRecord
   end
 
   def self.merchant_invoices(merchant_id)
-  find(merchant_id)
-  .invoices
-  .distinct
+    find(merchant_id)
+    .invoices
+    .distinct
   end
-
 end
