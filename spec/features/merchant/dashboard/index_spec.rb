@@ -4,10 +4,12 @@ RSpec.describe 'As a Merchant', type: :feature do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Amazon')
 
-    @item_1 = @merchant_1.items.create!(name: 'worker pain', unit_price: 1)
-    @item_2 = @merchant_1.items.create!(name: 'union busting', unit_price: 3)
-    @item_3 = @merchant_1.items.create!(name: 'climate desctruction', unit_price: 2)
-    @item_4 = @merchant_1.items.create!(name: 'something you can only find here', unit_price: 2)
+    @item_1 = @merchant_1.items.create!(name: 'Item 1', description: 'One description', unit_price: 101)
+    @item_2 = @merchant_1.items.create!(name: 'Item 2', description: 'Two Description', unit_price: 220)
+    @item_3 = @merchant_1.items.create!(name: 'Item 3', description: 'Three Description', unit_price: 30)
+    @item_4 = @merchant_1.items.create!(name: 'Item 4', description: 'Four Description', unit_price: 20, status: 1)
+    @item_5 = @merchant_1.items.create!(name: 'Item 5', description: 'Five Description', unit_price: 7, status: 1)
+    @item_6 = @merchant_1.items.create!(name: 'Item 6', description: 'Six Description', unit_price: 47)
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer_2 = Customer.create!(first_name: "Steve", last_name: "Smith")
