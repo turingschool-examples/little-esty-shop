@@ -24,7 +24,8 @@ class Merchant::ItemsController < ApplicationController
     if item.save
       redirect_to "/merchants/#{@merchant.id}/items"
     else
-      render 'new'
+      flash[:notice] = "Required information missing"
+      redirect_to "/merchants/#{@merchant.id}/items/new"
     end
   end
 
@@ -37,12 +38,11 @@ class Merchant::ItemsController < ApplicationController
 
     redirect_to ("/merchants/#{params[:merchant_id]}/items/#{item.id}")
     else
-      if item.status
-        item.update(status: false)
+      if item.status == "enabled"
+        item.update(status: "disabled")
       else
-        item.update(status: true)
+        item.update(status: "enabled")
       end
-
     redirect_to ("/merchants/#{params[:merchant_id]}/items")
     end
   end
