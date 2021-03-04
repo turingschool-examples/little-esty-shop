@@ -51,8 +51,6 @@ group :development, :test do
   gem 'simplecov', require: false, group: :test
   gem 'orderly'
   gem 'hirb'
-
-
 end
 
 group :development do

@@ -37,5 +37,18 @@ RSpec.describe "Merchant Item Index Page" do
       end
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
     end
+
+    it "flashes a message when the required information is missing" do
+      visit "/merchants/#{@merchant.id}/items/new"
+
+      within(".form") do
+        fill_in :name, with: ""
+        fill_in :description, with: "These are the best fucking apples I've ever tasted"
+        fill_in :unit_price, with: 1.50
+        click_on 'Add Item'
+      end
+      expect(page).to have_content("Required information missing")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+    end
   end
 end
