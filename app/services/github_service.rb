@@ -13,8 +13,46 @@ class GithubService
     end
   end
 
+  def raw_commits
+    page1 = get_url("https://api.github.com/repos/Trevorsuter/little-esty-shop/commits?per_page=100&page=1")
+    page2 = get_url("https://api.github.com/repos/Trevorsuter/little-esty-shop/commits?per_page=100&page=2")
+    page3 = get_url("https://api.github.com/repos/Trevorsuter/little-esty-shop/commits?per_page=100&page=3")
+    raw = page1 + page2 + page3
+    raw.map do |r|
+      r[:commit]
+    end
+  end
+
+  def create_commits
+    raw_commits.map do |data|
+      Commit.new(data)
+    end
+  end
+
+  def commits
+    create_commits.find_all do |c|
+      c.committer_name != "GitHub"
+    end
+  end
+
+  def trev_commits
+    commits.count{ |c| c.author_email == "Trevorsuter@icloud.com"}
+  end
+
+  def doug_commits
+    commits.count{ |c| c.author_email == "doug.welchons@gmail.com"}
+  end
+
+  def harrison_commits
+    commits.count{ |c| c.author_email == "harrison.r.blake.gmail.com"}
+  end
+
   def get_url(url)
-    response = Faraday.get(url)
+    new = Faraday.new(url) do |conn|
+      conn.authorization :Token, '8ac056ed53d9dcaa354729f21283bd3c1296ceb4'
+      conn.adapter Faraday.default_adapter
+    end
+    response = new.get
     json = JSON.parse(response.body, symbolize_names: true)
   end
 end
