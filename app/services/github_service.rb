@@ -7,6 +7,10 @@ class GithubService
     data = get_url("https://api.github.com/repos/Trevorsuter/little-esty-shop/contributors")
   end
 
+  def pull_request
+    get_url("https://api.github.com/repos/Trevorsuter/little-esty-shop/pulls?state=closed")
+  end
+
   def create_contributors
     contributors.map do |data|
       Contributor.new(data)

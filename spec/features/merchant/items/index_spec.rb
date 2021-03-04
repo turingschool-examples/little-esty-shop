@@ -60,11 +60,9 @@ RSpec.describe "Merchant Item Index Page" do
     end
 
     it "Displays a section that has the top 5 items by revenue" do
-      
+
       @merchant.stub(:top_5_items_by_revenue).and_return([@item_2, @item_1])
       visit "/merchants/#{@merchant.id}/items"
-
-      save_and_open_page
 
       within('#top-items') do
         expect(page).to have_content("Top Items")
