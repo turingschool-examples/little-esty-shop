@@ -1,7 +1,7 @@
 <section id="top_five_items">
   <h3>Top Five Items </h3>
   <% @merchant.top_five_items.each do |item| %>
-    <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item)  %> -  <%= number_to_currency(item.total_revenue)%> in sales</li><br>
+    <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item)  %> -  $<%= item.total_revenue%> in sales</li><br>
     <p><%= "Top selling date for #{item.name} was #{item.best_day.created_at.strftime('%m/%d/%y')}" %></p>
 
 
