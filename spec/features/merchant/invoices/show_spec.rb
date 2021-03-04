@@ -5,11 +5,11 @@ RSpec.describe 'As a Merchant', type: :feature do
     @merchant_1 = Merchant.create!(name: 'Amazon')
     @merchant_2 = Merchant.create!(name: 'Mom and pop')
 
-    @item_1 = @merchant_1.items.create!(name: 'worker pain', unit_price: 1)
-    @item_2 = @merchant_1.items.create!(name: 'union busting', unit_price: 3)
-    @item_3 = @merchant_1.items.create!(name: 'climate desctruction', unit_price: 2)
-    @item_4 = @merchant_1.items.create!(name: 'something you can only find here', unit_price: 2)
-    @item_5 = @merchant_2.items.create!(name: 'Garfield things', unit_price: 20)
+    @item_1 = @merchant_1.items.create!(name: 'worker pain', unit_price: 1, description: "Stuff 1")
+    @item_2 = @merchant_1.items.create!(name: 'union busting', unit_price: 3, description: "Stuff 2")
+    @item_3 = @merchant_1.items.create!(name: 'climate desctruction', unit_price: 2, description: "Stuff 3")
+    @item_4 = @merchant_1.items.create!(name: 'something you can only find here', unit_price: 2, description: "Stuff 4")
+    @item_5 = @merchant_2.items.create!(name: 'Garfield things', unit_price: 20, description: "Stuff 5")
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer_2 = Customer.create!(first_name: "Steve", last_name: "Smith")

@@ -127,7 +127,6 @@ RSpec.describe Merchant, type: :model do
   end
   describe 'instance methods' do
     it '#top_day' do
-      # expect(@merchant_1.top_day).to eq("1991-03-23 21:40:46.000000000 +0000")
       expect(@merchant_1.top_day).to eq(@invoice_1.created_at)
     end
   end
