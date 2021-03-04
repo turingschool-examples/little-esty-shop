@@ -52,4 +52,14 @@ class Merchant < ApplicationRecord
     .order(merchant_revenue: :desc)
     .limit(5)
   end
+
+  def top_day
+    invoices.joins(:transactions)
+    .where("transactions.result = true")
+    .select("invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) as merchant_revenue")
+    .group(:id)
+    .order(merchant_revenue: :desc)
+    .first
+    .created_at
+  end
 end

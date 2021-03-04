@@ -111,5 +111,15 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.merchant_invoices(@merchant_2.id).count).to eq(1)
       expect(Merchant.merchant_invoices(@merchant_3.id).count).to eq(0)
     end
+
+    it '.top_five_merchants' do
+      expect(Merchant.top_five_merchants.first).to eq(@merchant_1)
+    end
+  end
+  describe 'instance methods' do
+    it '#top_day' do
+      # expect(@merchant_1.top_day).to eq("1991-03-23 21:40:46.000000000 +0000")
+      expect(@merchant_1.top_day).to eq(@invoice_1.created_at)
+    end
   end
 end

@@ -170,7 +170,7 @@ RSpec.describe 'Admin Merchant Index' do
     visit admin_merchants_path
 
     within(".top_five_merchants") do
-      save_and_open_page
+
       expect(page).to have_link(@merchant1.name)
       # expect(page).to have_link(@merchant2.name)
       # expect(page).to have_link(@merchant3.name)
@@ -194,9 +194,14 @@ RSpec.describe 'Admin Merchant Index' do
 
     expect(current_path).to eq(admin_merchant_path(@merchant1))
   end
-end
 
-# Notes on Revenue Calculation:
-# - Only invoices with at least one successful transaction should count towards revenue
-# - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+  it "Then next to each of the 5 merchants by revenue I see the date with the most revenue for
+    each merchant. And I see a label “Top selling date for <merchant name> was <date with most
+    sales>" do
+    visit admin_merchants_path
+
+    within("#top_five_merchants-#{@merchant1.id}") do
+      expect(page).to have_content("Top selling date for #{@merchant1.name} was #{@merchant1.top_day}")
+    end
+  end
+end
