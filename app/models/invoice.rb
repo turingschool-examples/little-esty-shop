@@ -8,4 +8,7 @@ class Invoice < ApplicationRecord
     created_at.strftime("%A, %B %d, %Y")
   end
 
+  def customer_name
+    customer.name
+  end
 end

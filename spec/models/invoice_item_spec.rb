@@ -82,5 +82,12 @@ RSpec.describe InvoiceItem, type: :model do
         expect(InvoiceItem.incomplete_invoices.count).to eq(2)
       end
     end
+
+    describe "total revenue" do
+      it "Lists all the revenue for an invoice" do
+        item = InvoiceItem.first
+        expect(item.total_revenue(item.invoice_id)).to eq("$56.00")
+      end
+    end
   end
 end

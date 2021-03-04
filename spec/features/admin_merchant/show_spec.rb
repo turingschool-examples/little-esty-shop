@@ -1,13 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe Invoice, type: :model do
-  describe "relationships" do
-    it { should belong_to :customer }
-    it { should have_many(:invoice_items)}
-    it { should have_many(:items).through(:invoice_items)}
-    it { should have_many(:transactions)}
-  end
-
+RSpec.describe 'Admin Merchant Show' do
   before :each do
     @customer1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer2 = Customer.create!(first_name: "Steve", last_name: "Smith")
@@ -58,19 +51,37 @@ RSpec.describe Invoice, type: :model do
     @transaction21 = Transaction.create!(invoice_id: @invoice6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction22 = Transaction.create!(invoice_id: @invoice7.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
   end
+  it 'When I visit a merchants admin show page
+    Then I see a link to update the merchants information.' do
 
-  describe "instance methods" do
-    describe "Format time" do
-      it "Formats timestamp for created at with day, month date, year" do
-        # may need to change this expected later
-        expect(@invoice_item1.invoice.format_time).to_not eq(@invoice_item1.invoice.created_at)
-      end
-    end
+    visit admin_merchant_path(@merchant1)
 
-    describe "Customer name" do
-      it "returns customer name" do
-        expect(@invoice1.customer_name).to eq("Bob Gu")
-      end
-    end
+    expect(page).to have_link("Update #{@merchant1.name}")
+  end
+  it 'When I click the link
+    Then I am taken to a page to edit this merchant
+    And I see a form filled in with the existing merchant attribute information' do
+
+    visit admin_merchant_path(@merchant1)
+
+    click_on("Update #{@merchant1.name}")
+
+    expect(current_path).to eq(edit_admin_merchant_path(@merchant1))
+
+    expect(page).to have_xpath("//input[@value='Jimbo']")
+  end
+  it 'When I update the information in the form and I click ‘submit’
+    Then I am redirected back to the merchants admin show page where I see the updated information And I see a flash message stating that the information has been successfully updated.' do
+
+    visit edit_admin_merchant_path(@merchant1)
+
+    fill_in "name", with: "Gym Jim"
+
+    click_on "Submit"
+
+    expect(current_path).to eq(admin_merchant_path(@merchant1))
+    expect(page).to have_content("The information has been successfully updated.")
+    expect(page).to have_content("Gym Jim")
+    # save_and_open_page
   end
 end

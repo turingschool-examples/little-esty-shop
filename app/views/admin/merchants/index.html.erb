@@ -1,0 +1,33 @@
+<h2>Admin Merchants Index</h2><br>
+<%= link_to "Create New Merchant", new_admin_merchant_path %>
+
+<section id="enabled_merchants">
+  <h4>Enabled Merchants</h4>
+    <% @admin_merchants.enabled.each do |merchant| %>
+        <div id="admin_merchants-<%=merchant.id%>">
+          <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+          <%= button_to "Disable", admin_merchant_path(merchant.id), params: {status: "disabled"}, method: :patch, local: true %>
+        </div>
+    <% end  %>
+</section>
+
+<section id="disabled_merchants">
+  <h4>Disabled Merchants</h4>
+    <% @admin_merchants.disabled.each do |merchant| %>
+        <div id="admin_merchants-<%=merchant.id%>">
+          <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+          <%= button_to "Enable", admin_merchant_path(merchant.id), params: {status: "enabled"}, method: :patch, local: true %>
+        </div>
+    <% end %>
+</section><br><hr>
+
+<section class="top_five_merchants">
+    <h4>Top Five Merchants</h4>
+  <% @admin_merchants.top_five_merchants.each do |merchant| %>
+    <div id="top_five_merchants-<%=merchant.id%>">
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+      <p>Revenue: $<%= merchant.merchant_revenue %></p>
+      <p>Top selling date for <%=merchant.name%> was <%=merchant.top_day%></p>
+    </div>
+  <% end %>
+</section>
