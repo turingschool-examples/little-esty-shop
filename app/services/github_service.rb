@@ -1,19 +1,22 @@
+require 'faraday'
+require 'json'
+require './app/poros/github'
+
 class GithubService
-  def self.connection
-    Faraday.new('https://api.github.com')
+  def github_information
+    endpoint = 'https://api.github.com/repos/jordanfbeck0528/little-esty-shop'
+    get_data(endpoint)
   end
 
-  def self.end_point_data(data)
-    JSON.parse(data.body, symbolize_names: true)
-  end 
+  #def diff_endpoint
+  #  endpoint = 'jhdgjzdgnxdfg'
+  #  get_data(endpoint)
+  #end
 
   def get_data(endpoint)
     response = Faraday.get(endpoint)
     parsed = JSON.parse(response.body, symbolize_names: true)
   end
-
-  def self.call_github(endpoint)
-    response = connection.get(endpoint)
-    end_point_data(response)
-  end
 end
+
+info = GithubService.new.github_information
