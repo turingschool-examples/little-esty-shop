@@ -9,7 +9,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-    <%= @repo.name %> </br>
+  <% @contributors.names.each do |name| %>
+    <%= name %>
+  <% end %>
 
   <body style="padding: 25px">
     <% flash.each do |type, message| %>
