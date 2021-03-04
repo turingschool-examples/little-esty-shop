@@ -1,19 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe Customer, type: :model do
-  describe 'validations' do
-    it { should validate_presence_of :first_name}
-    it { should validate_presence_of :last_name}
-  end
-  
-  describe "relationships" do
-    it { should have_many :invoices }
-    it { should have_many(:transactions).through(:invoices) }
-    it { should have_many(:invoice_items).through(:invoices) }
-    it { should have_many(:items).through(:invoice_items) }
-    it { should have_many(:merchants).through(:items) }
-  end
-
+RSpec.describe 'Admin Merchant Index' do
   before :each do
     @customer1 = Customer.create!(first_name: "Bob", last_name: "Gu")
     @customer2 = Customer.create!(first_name: "Steve", last_name: "Smith")
@@ -23,13 +10,23 @@ RSpec.describe Customer, type: :model do
     @customer6 = Customer.create!(first_name: "Jo", last_name: "Shmoe")
     @customer7 = Customer.create!(first_name: "Molly", last_name: "Rae")
 
-    @invoice1 = Invoice.create!(customer_id: @customer1.id, status: "cancelled")
+    @merchant1 = Merchant.create!(name: "Jimbo")
+    @merchant2 = Merchant.create!(name: "Linda")
+
+    @item1 = Item.create!(name: "spatula", description: "fold them eggs", unit_price: 14.00, merchant_id: @merchant1.id)
+    @item2 = Item.create!(name: "bowling ball", description: "roll em if you got em", unit_price: 68.00, merchant_id: @merchant2.id)
+
+    @invoice1 = Invoice.create!(customer_id: @customer1.id, status: "cancelled", created_at: "1990-03-23 21:40:46")
     @invoice2 = Invoice.create!(customer_id: @customer2.id, status: "in progress")
-    @invoice3 = Invoice.create!(customer_id: @customer3.id, status: "completed")
+    @invoice3 = Invoice.create!(customer_id: @customer3.id, status: "completed", created_at: "1991-03-23 21:40:46")
     @invoice4 = Invoice.create!(customer_id: @customer4.id, status: "cancelled")
     @invoice5 = Invoice.create!(customer_id: @customer5.id, status: "completed")
     @invoice6 = Invoice.create!(customer_id: @customer6.id, status: "completed")
     @invoice7 = Invoice.create!(customer_id: @customer7.id, status: "completed")
+
+    @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 28.00, status: "pending" )
+    @invoice_item2 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice2.id, quantity: 1, unit_price: 68.00, status: "shipped" )
+    @invoice_item3 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice3.id, quantity: 1, unit_price: 68.00, status: "packaged" )
 
     @transaction1 = Transaction.create!(invoice_id: @invoice1.id, cc_number: 0000000000000000, cc_expiration_date: '2000-01-01 00:00:00 -0500', result: true)
     @transaction2 = Transaction.create!(invoice_id: @invoice1.id, cc_number: 0000000000001111, cc_expiration_date: '2001-01-01 00:00:00 -0500', result: true)
@@ -54,28 +51,25 @@ RSpec.describe Customer, type: :model do
     @transaction21 = Transaction.create!(invoice_id: @invoice6.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: true)
     @transaction22 = Transaction.create!(invoice_id: @invoice7.id, cc_number: 0000000000003333, cc_expiration_date: '2003-01-01 00:00:00 -0500', result: false)
   end
-  describe "class methods" do
-    describe "top_five_customers" do
-      it "Lists top five customers in desc" do
+  it 'When I visit the admin merchants index (/admin/merchants)
+    Then I see the name of each merchant in the system' do
 
-        expected = [@customer1, @customer2, @customer3, @customer4, @customer5]
+    visit admin_merchants_path
 
-        expect(Customer.top_five_customers).to eq(expected)
-      end
-    end
+    expect(page).to have_content("Admin Merchants Index")
+    expect(page).to have_link("#{@merchant1.name}")
+    expect(page).to have_link("#{@merchant2.name}")
   end
-  describe "instance methods" do
-     describe "name" do
-      it "prints first and last name as one name" do
+  it 'When I click on the name of a merchant from the admin merchants index page,
+    Then I am taken to that merchants admin show page (/admin/merchants/merchant_id)
+    And I see the name of that merchant' do
+    visit admin_merchants_path
 
-        expect(@customer1.name).to eq("Bob Gu")
-      end
+    within("#admin_merchants-#{@merchant1.id}") do
+      click_on("#{@merchant1.name}")
     end
-    describe "successful_count" do
-      it "prints count of all successful transactions by unique customer" do
 
-        expect(@customer1.successful_count).to eq(6)
-      end
-    end
+    expect(current_path).to eq(admin_merchant_path(@merchant1))
+    expect(page).to have_content(@merchant1.name)
   end
 end
