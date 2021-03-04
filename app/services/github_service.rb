@@ -52,11 +52,10 @@ class GithubService
   end
 
   def get_url(url)
-    new = Faraday.new(url) do |conn|
-      conn.authorization :Token, '8ac056ed53d9dcaa354729f21283bd3c1296ceb4'
-      conn.adapter Faraday.default_adapter
+    response = Faraday.get(url) do |req|
+      req.headers['Authorization'] = "token #{ENV['GITHUB_TOKEN']}"
     end
-    response = new.get
-    json = JSON.parse(response.body, symbolize_names: true)
+    data = response.body
+    json = JSON.parse(data, symbolize_names: true)
   end
 end

@@ -29,5 +29,4 @@
 coverage
 
 yarn.lock
-
 /config/local_env.yml
