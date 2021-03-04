@@ -19,7 +19,8 @@
         <p><%= message %></p>
       </div>
     <% end %>
-
+    <%= @repo.name %>
     <%= yield %>
+    <%= "Total Project Pull requests: #{@repo_pr.pull_request.count}" %>
   </body>
 </html>

@@ -95,6 +95,11 @@ RSpec.describe "Merchant Item Index Page" do
       end
     end
 
+    it "Displays a section that has the top 5 items by revenue" do
+
+      @merchant.stub(:top_5_items_by_revenue).and_return([@item_2, @item_1])
+      visit "/merchants/#{@merchant.id}/items"
+
     it "Displays a section that has the top 5 items by revenue and best day" do
       visit "/merchants/#{@joe.id}/items"
 
