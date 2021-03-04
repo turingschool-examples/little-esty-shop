@@ -1,7 +1,9 @@
 class Github
-  attr_reader :name
+  attr_reader :username,
+              :total_commits
 
   def initialize(data)
-    @name = data[:name]
+    @username = data[:author][:login]
+    @total_commits = data[:total]
   end
 end

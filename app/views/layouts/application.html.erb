@@ -10,11 +10,18 @@
   </head>
 
   <body>
-     <% info = GithubService.new.github_information %>
-     <%= info[:name] %>
+    <%= GithubFacade.repo_name[:name] %>
+
     <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
     <%= yield %>
   </body>
+
+  <footer>
+    GitHub User Information:<br>
+    <% GithubFacade.get_users.each do |user| %>
+        <%= user.username %> : <%= user.total_commits %><br>
+    <% end %>
+  </footer>
 </html>
