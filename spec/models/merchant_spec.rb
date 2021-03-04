@@ -4,7 +4,7 @@ RSpec.describe Merchant, type: :model do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Amazon')
     @merchant_2 = Merchant.create!(name: 'Mom and pop')
-    @merchant_3 = Merchant.create!(name: 'Scammers R Us')
+    @merchant_3 = Merchant.create!(name: 'Scammers R Us', status: 1)
 
     @item_1 = @merchant_1.items.create!(name: 'Item 1', description: 'One description', unit_price: 10)
     @item_2 = @merchant_1.items.create!(name: 'Item 2', description: 'Two Description', unit_price: 20)
@@ -72,6 +72,20 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:customers).through(:invoices) }
   end
 
+  describe "validations" do
+    it 'Merchant can be enabled' do
+      expect(@merchant_1.status).to eq("enabled")
+      expect(@merchant_1.enabled?).to eq(true)
+      expect(@merchant_1.disabled?).to eq(false)
+    end
+
+    it 'Merchant can be disabled' do
+      expect(@merchant_3.status).to eq("disabled")
+      expect(@merchant_3.enabled?).to eq(false)
+      expect(@merchant_3.disabled?).to eq(true)
+    end
+  end
+
   describe "instance methods" do
     it "#top_five_customer" do
       expect(@merchant_1.top_five_customers[0].first_name).to eq("Bob")
@@ -105,6 +119,16 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.merchant_invoices(@merchant_2.id).count).to eq(1)
         expect(Merchant.merchant_invoices(@merchant_3.id).count).to eq(0)
       end
+    end
+
+    it '.top_five_merchants' do
+      expect(Merchant.top_five_merchants.first).to eq(@merchant_1)
+    end
+  end
+  describe 'instance methods' do
+    it '#top_day' do
+      # expect(@merchant_1.top_day).to eq("1991-03-23 21:40:46.000000000 +0000")
+      expect(@merchant_1.top_day).to eq(@invoice_1.created_at)
     end
   end
 end
