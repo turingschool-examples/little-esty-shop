@@ -10,9 +10,10 @@
   </head>
 
   <body>
-    <%= @repo_names %>
+    Repo Name: <%= @repo_names %><br>
+    Repo Pull Request Count: <%= @repo_pull_count %><br>
     <% @repo_contributors.each do |contributor| %>
-      <%= contributor %>
+      <%= "Contributor #{contributor[0]} has #{contributor[1]} commits" %><br>
     <% end %>
     <% flash.each do |type, message| %>
       <p><%= message %></p>
