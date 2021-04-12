@@ -1,8 +1,29 @@
-# Little Esty Shop
+![Little Esty Shop](https://i.imgur.com/1lVAR44.png)
+
+
 
 ## Background and Description
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+
+## Technology and Implementation
+
+Little Esty Shop was built using the following technologies:
+* Ruby on Rails
+* Ruby
+* Heroku
+
+## Setup
+
+This project requires Ruby 2.5.3.
+
+* Fork this repository
+* Clone your fork
+* From the command line, install gems and set up your DB:
+    * `bundle`
+    * `rails db:create`
+* Run the test suite with `bundle exec rspec`.
+* Run your development server with `rails s` to see the app in action.
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
@@ -17,18 +38,6 @@
 - must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
 - must include a thorough README to describe the project
 - must deploy completed code to Heroku
-
-## Setup
-
-This project requires Ruby 2.5.3.
-
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
 
 ## Phases
 
