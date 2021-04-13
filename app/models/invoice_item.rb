@@ -3,6 +3,7 @@ class InvoiceItem < ApplicationRecord
   validates :unit_price, presence: true, numericality: true
   validates :status, presence: true  #is string, but should be integer status?
 
-  belongs_to :item, :invoice
+  belongs_to :item
+  belongs_to :invoice
 
 end
