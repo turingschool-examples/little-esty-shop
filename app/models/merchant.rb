@@ -3,4 +3,26 @@ class Merchant < ApplicationRecord
 
   has_many :items, dependent: :destroy
 
+####### dashboard methods #########
+
+
+
+
+
+
+
+
+
+###### item methods ##########
+
+
+
+
+
+
+
+
+
+###### invoice methods ##########
+
 end
