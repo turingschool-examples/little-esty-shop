@@ -4,8 +4,7 @@ namespace :csv_load do
 
 desc "Import customers from CSV"
 task customers: :environment do
-  filename = (Rails.root.join('db', 'data', 'customers.csv'))
-  CSV.foreach(filename, { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
+  CSV.foreach("db/data/customers.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
     Customer.create(row.to_hash)
     end
   end
