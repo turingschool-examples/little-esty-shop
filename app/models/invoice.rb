@@ -1,5 +1,6 @@
 class Invoice < ApplicationRecord
-  validates :status, presence: true  #is string, but should be integer status?
+  validates :status, presence: true
+  enum status: [ 'in progress', 'cancelled', 'completed' ]
 
   belongs_to :customer
 
