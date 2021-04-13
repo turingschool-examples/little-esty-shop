@@ -5,5 +5,5 @@ class InvoiceItem < ApplicationRecord
   enum status: [:packaged, :pending, :shipped]
 
   validates_presence_of :quantity, :unit_price
-  validates :status, inclusion: { in: [:packaged, :pending, :shipped] }
+  validates :status, presence: true, inclusion: { in: [:packaged, :pending, :shipped] }
 end
