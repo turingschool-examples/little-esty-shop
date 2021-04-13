@@ -1,2 +1,3 @@
 class InvoiceItem < ApplicationRecord
-end 
+  enum status: [ 'packaged', 'pending', 'shipped' ]
+end

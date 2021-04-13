@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(version: 2021_04_13_020637) do
     t.integer "invoice_id"
     t.integer "quantity"
     t.integer "unit_price"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "invoices", force: :cascade do |t|
     t.integer "customer_id"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_020637) do
     t.integer "invoice_id"
     t.string "credit_card_number"
     t.datetime "credit_card_expiration_date"
-    t.string "result"
+    t.integer "result"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
