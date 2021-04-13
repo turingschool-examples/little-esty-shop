@@ -1,6 +1,8 @@
 require 'csv'
 
 namespace :csv_load do
+  desc "Seed db with all csv files"
+  task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
 
   desc "Seed db with csv customers"
   task customers: :environment do
