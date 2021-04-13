@@ -13,7 +13,9 @@ RSpec.describe 'admin index page', type: :feature do
   it 'has a link to the admin merchants index' do
     visit '/admin'
     within ("#links") do
-      expect(page).to have_link("Merchants")  
+      expect(page).to have_link("Merchants")
+      click_link("Merchants")
+      expect(current_path).to eq("/admin/merchants")
     end
   end
   
@@ -21,6 +23,8 @@ RSpec.describe 'admin index page', type: :feature do
     visit '/admin'
     within ("#links") do
       expect(page).to have_link("Invoices")  
+      click_link("Invoices")
+      expect(current_path).to eq("/admin/invoices")
     end
   end
 end
