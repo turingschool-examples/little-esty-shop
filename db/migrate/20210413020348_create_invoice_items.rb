@@ -5,7 +5,7 @@ class CreateInvoiceItems < ActiveRecord::Migration[5.2]
       t.integer :invoice_id
       t.integer :quantity
       t.integer :unit_price
-      t.string :status
+      t.integer :status
       t.datetime :created_at
       t.datetime :updated_at
     end
