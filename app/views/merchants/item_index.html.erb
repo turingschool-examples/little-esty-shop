@@ -1,0 +1,11 @@
+<%= render partial: "partials/merch_header" %>
+
+<h2>Merchant: _ <%=  @merchant.name %></h2>
+
+<% @items.each do |item| %>
+  <h3><%= item.name %></h3>
+  <p>Age: <%= item.age %></p>
+
+  <%= link_to "Edit #{item.name}", "/items/#{item.id}/edit" %>
+  <%= link_to "Delete #{item.name}", "/items/#{item.id}", method: :delete %>
+<% end %>
