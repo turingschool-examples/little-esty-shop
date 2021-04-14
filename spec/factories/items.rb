@@ -1,4 +1,3 @@
-
 FactoryBot.define do
 factory :item, class: Item do
   name { Faker::Coffee.name }
