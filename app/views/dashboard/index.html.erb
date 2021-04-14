@@ -2,3 +2,12 @@
 <%= link_to "My Invoices", "/merchant/#{@merchant.id}/invoices" %>
 
 <p><%= @merchant.name %></p>
+
+<section>
+  <p>Items Ready to Ship</p>
+  <% @items.ordered_items_no_ship.each do |item| %>
+    <p id="item-<%= item.id %>">
+      <%= item.name %>
+    </p>
+  <% end %>
+</section>
