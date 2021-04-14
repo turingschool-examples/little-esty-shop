@@ -16,13 +16,6 @@ namespace :csv_load do
     puts("Customers imported")
   end
 
-  task invoices: :environment do
-    CSV.foreach('db/data/invoices.csv', headers: true) do |row|
-      Invoice.create(row.to_h)
-    end
-    puts("Invoice imported")
-  end
-
   task invoice_items: :environment do
     CSV.foreach('db/data/invoice_items.csv', headers: true) do |row|
       InvoiceItem.create(row.to_h)
@@ -30,6 +23,12 @@ namespace :csv_load do
     puts("Invoice Items imported")
   end
 
+  task invoices: :environment do
+    CSV.foreach('db/data/invoices.csv', headers: true) do |row|
+      Invoice.create(row.to_h)
+    end
+    puts("Invoice imported")
+  end
 
   task items: :environment do
     CSV.foreach('db/data/items.csv', headers: true) do |row|
