@@ -30,12 +30,9 @@ RSpec.describe 'admin index page', type: :feature do
 
   describe 'it has an incomplete invoices section' do
     it 'lists all incomplete invoices' do
-      customer1 = Customer.create!(first_name: "Hal", last_name: "Pal")
-      invoice1 = customer1.invoices.create!(status: 0)
-      invoice2 = customer1.invoices.create!(status: 0)
       visit '/admin'
       within("#incomplete_invoices") do
-        expect(page).to have_content(invoice1.id)
+        expect(page).to have_content("Incomplete Invoices")
       end
     end
     it 'each imcomplete invoice is a link to that invoices show page'
