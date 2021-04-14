@@ -69,6 +69,27 @@ RSpec.describe 'admin index page', type: :feature do
         end
       end
     end
-    it 'each incomplete invoice is a link to that invoices show page'
+    it 'each incomplete invoice is a link to that invoices show page' do
+      customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+      invoice1 = customer.invoices.create!(status: 0)
+      invoice2 = customer.invoices.create!(status: 1)
+      invoice3 = customer.invoices.create!(status: 2)
+      invoice4 = customer.invoices.create!(status: 0)
+      invoice5 = customer.invoices.create!(status: 0)
+
+      visit '/admin'
+
+      within("#incomplete_invoice-#{invoice1.id}") do
+        expect(page).to have_link(invoice1.id)
+        click_link(invoice1.id)
+        expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
+      end
+      
+      within("#incomplete_invoice-#{invoice5.id}") do
+        expect(page).to have_link(invoice5.id)
+        click_link(invoice5.id)
+        expect(current_path).to eq("/admin/invoices/#{invoice5.id}")
+      end
+    end
   end
 end
