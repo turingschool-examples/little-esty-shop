@@ -21,11 +21,11 @@ RSpec.describe 'Merchant Invoice Index' do
     it 'it shows me the attributes: id, status, created_at, and customer full name' do
       visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
 
-      binding.pry
+      save_and_open_page
 
       expect(page).to have_content(@invoice1.id)
       expect(page).to have_content(@invoice1.status)
-      expect(page).to have_content(@invoice1.created_at)
+      expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
       expect(page).to have_content(@customer1.first_name)
       expect(page).to have_content(@customer1.last_name)
     end

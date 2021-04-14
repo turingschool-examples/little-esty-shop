@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-14T17:46:48-04:00">2021-04-14T17:46:48-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-14T19:18:47-04:00">2021-04-14T19:18:47-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  96.81%
+  100.0%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.31
+         1.35
        </span>
     </span> hits/line
     )
@@ -44,10 +44,10 @@
 
   <div class="t-line-summary">
     <b>188</b> relevant lines,
-    <span class="green"><b>182</b> lines covered</span> and
-    <span class="red"><b>6</b> lines missed. </span>
+    <span class="green"><b>188</b> lines covered</span> and
+    <span class="red"><b>0</b> lines missed. </span>
     (<span class="green">
-  96.81%
+  100.0%
 </span>
 )
   </div>
@@ -128,7 +128,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#ef1dc0952f6c1c58aed4166cee3cbb597e6fd675" class="src_link" title="app/models/application_record.rb">app/models/application_record.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">7</td>
             <td class="cell--number">2</td>
             <td class="cell--number">2</td>
             <td class="cell--number">0</td>
@@ -435,12 +435,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#aeabd6433f09efeac9ad6b1c06edbd04c5c32753" class="src_link" title="spec/features/merchants/merchant_invoices_show_spec.rb">spec/features/merchants/merchant_invoices_show_spec.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">70.00 %</td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">33</td>
             <td class="cell--number">20</td>
-            <td class="cell--number">14</td>
-            <td class="cell--number">6</td>
-            <td class="cell--number">0.70</td>
+            <td class="cell--number">20</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
             
           </tr>
         
@@ -985,6 +985,50 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
+            
+            
+
+            
+
+            <code class="ruby">  # def self.created_at_format</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+            
+
+            
+
+            <code class="ruby">  #   strftime(&quot;%A, %B %d, %Y&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+            
+
+            
+
+            <code class="ruby">  # end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
             
             
 
@@ -5052,8 +5096,8 @@
   <div class="header">
     <h3>spec/features/merchants/merchant_invoices_show_spec.rb</h3>
     <h4>
-      <span class="red">
-  70.0%
+      <span class="green">
+  100.0%
 </span>
 
       lines covered
@@ -5063,8 +5107,8 @@
 
     <div class="t-line-summary">
       <b>20</b> relevant lines.
-      <span class="green"><b>14</b> lines covered</span> and
-      <span class="red"><b>6</b> lines missed.</span>
+      <span class="green"><b>20</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
 
     
@@ -5328,13 +5372,13 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="24">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      binding.pry</code>
+            
+
+            <code class="ruby">      save_and_open_page</code>
           </li>
         </div>
       
@@ -5350,8 +5394,8 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="26">
-            
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
             
 
             
@@ -5361,8 +5405,8 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="27">
-            
+          <li class="covered" data-hits="1" data-linenumber="27">
+            <span class="hits">1</span>
             
 
             
@@ -5372,19 +5416,19 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="28">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="28">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      expect(page).to have_content(@invoice1.created_at)</code>
+            
+
+            <code class="ruby">      expect(page).to have_content(@invoice1.created_at.strftime(&quot;%A, %B %d, %Y&quot;))</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="29">
-            
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
             
 
             
@@ -5394,8 +5438,8 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
-            
+          <li class="covered" data-hits="1" data-linenumber="30">
+            <span class="hits">1</span>
             
 
             
