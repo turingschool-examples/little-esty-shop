@@ -1,6 +1,6 @@
 FactoryBot.define do
    factory :invoice, class: Invoice do
-      status { ["cancelled", "in progress", "completed"].sample }
+      status { [0, 1, 2].sample }
       association :customer, factory: :customer
    end
  end

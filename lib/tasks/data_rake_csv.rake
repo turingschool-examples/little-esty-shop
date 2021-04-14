@@ -30,6 +30,7 @@ namespace :csv_load do
     puts("Invoice Items imported")
   end
 
+
   task items: :environment do
     CSV.foreach('db/data/items.csv', headers: true) do |row|
       Item.create(row.to_h)
