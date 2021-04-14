@@ -5,15 +5,14 @@ RSpec.describe 'when I visit the admin dashboard' do
     visit '/admin'
     expect(page).to have_content("Admin Dashboard")
   end
+
+  it 'shows a link to the admin merchants index' do
+    visit '/admin'
+    expect(page).to have_link('Admin Merchants Index', href: admin_merchants_path)
+  end
+
+  it 'shows a link to the admin invoices index' do
+    visit '/admin'
+    expect(page).to have_link('Admin Invoices Index', href: admin_invoices_path)
+  end
 end
-
-
-
-
-
-
-
-
-# As an admin,
-# When I visit the admin dashboard (/admin)
-# Then I see a header indicating that I am on the admin dashboard

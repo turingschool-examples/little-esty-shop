@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     controller :admin do
       get '/', action: :index
     end
-    resources :merchant, only: [:index]
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
   end
 end
