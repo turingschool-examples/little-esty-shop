@@ -51,15 +51,22 @@ RSpec.describe 'admin index page', type: :feature do
       invoice2 = customer.invoices.create!(status: 1)
       invoice3 = customer.invoices.create!(status: 2)
       invoice4 = customer.invoices.create!(status: 0)
+      invoice5 = customer.invoices.create!(status: 0)
 
       visit '/admin'
       
       within("#incomplete_invoices") do
         expect(page).to have_content("Incomplete Invoices")
-        expect(page).to have_content(invoice1.id)
-        expect(page).to have_content(invoice1.created_at)
-        expect(page).to have_content(invoice4.id)
-        expect(page).to have_content(invoice4.created_at)
+        
+        within("#incomplete_invoice-#{invoice1.id}") do
+          expect(page).to have_content(invoice1.id)
+          expect(page).to have_content("Wednesday, April 14, 2021")
+        end
+    
+        within("#incomplete_invoice-#{invoice5.id}") do
+          expect(page).to have_content(invoice5.id)
+          expect(page).to have_content("Wednesday, April 14, 2021")
+        end
       end
     end
     it 'each incomplete invoice is a link to that invoices show page'

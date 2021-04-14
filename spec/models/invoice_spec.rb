@@ -9,7 +9,7 @@ RSpec.describe Invoice do
 
   describe "class methods" do
     describe "#all_incomplete_invoices" do
-      it "returns all invoices with a status of 'in progress'" do
+      it "returns all invoices with a status of 'in progress' in order from old to new" do
         customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
         invoice1 = customer.invoices.create!(status: 0)
         invoice2 = customer.invoices.create!(status: 1)

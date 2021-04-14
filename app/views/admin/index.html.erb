@@ -9,6 +9,7 @@
   <% @incomplete_invoices.each do |invoice| %>
     <p id="incomplete_invoice-<%= invoice.id %>">
       Invoice#<%= invoice.id %>
+      <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
     </p>
   <% end %>
 </section>
