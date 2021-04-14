@@ -11,4 +11,6 @@ class Invoice < ApplicationRecord
   def self.all_incomplete_invoices
     self.where(status: "in progress")
   end
+  # InvoiceItem.select(:invoice_id).where.not(status: :shipped)
+  # InvoiceItem.select(:invoice_id).distinct.where.not(status: :shipped).pluck(:invoice_id)
 end
