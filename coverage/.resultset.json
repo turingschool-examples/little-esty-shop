@@ -242,8 +242,8 @@
         "lines": [
           1,
           1,
-          3,
-          3,
+          5,
+          5,
           null,
           null
         ]
@@ -264,6 +264,10 @@
         "lines": [
           1,
           1,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -271,7 +275,7 @@
         "lines": [
           1,
           1,
-          3,
+          5,
           1,
           null,
           null
@@ -291,9 +295,9 @@
         "lines": [
           1,
           1,
-          3,
-          3,
-          3,
+          5,
+          5,
+          5,
           null,
           null
         ]
@@ -310,9 +314,9 @@
         "lines": [
           1,
           1,
-          3,
-          3,
-          3,
+          5,
+          5,
+          5,
           1,
           null,
           null
@@ -331,7 +335,7 @@
         "lines": [
           1,
           1,
-          5,
+          6,
           null,
           null
         ]
@@ -410,7 +414,43 @@
           1,
           1,
           1,
+          null,
+          null
+        ]
+      },
+      "/Users/konham/turing/mod2/little-esty-shop/spec/features/merchants/merchant_invoices_show_spec.rb": {
+        "lines": [
           1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
           null,
           null
         ]
@@ -527,10 +567,15 @@
           1,
           2,
           null,
+          null,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1618434344
+    "timestamp": 1618442327
   }
 }
