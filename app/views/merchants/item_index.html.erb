@@ -8,10 +8,7 @@
 
 <% @items.each do |item| %>
   <% if item.status == "Enable" %>
-    <h4><%= link_to "#{item.name}", "/merchants/#{merchant.id}/items/#{item.id}" %>
-    <%= button_to("Disable", "/merchants/#{merchant.id}/items, :params => {status: "disable"}, method: :patch) %></h4>
-  <% elsif item.status == "Disable" %>
-    <h4><%= link_to "#{item.name}", "/merchants/#{merchant.id}/items/#{item.id}" %>
-    <%= button_to("Enable", "/merchants/#{merchant.id}/items, :params => {status: "disable"}, method: :patch) %></h4>
+    <h4><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {status: "disable"}, method: :patch) %></h4>
   <% end %>
 <% end %>
