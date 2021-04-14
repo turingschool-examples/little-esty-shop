@@ -10,11 +10,11 @@ Rails.application.routes.draw do
 
 
 
-
-
-
-  get '/admin', to: 'application#admin'
-  # namespace :admin do 
-  # resources :admin, only: [:index, :home]
-  # end
+  namespace :admin do
+    controller :admin do
+      get '/', action: :index
+    end
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
+  end
 end
