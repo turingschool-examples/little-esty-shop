@@ -7,9 +7,9 @@
 <section id="incomplete_invoices">
   <h2>Incomplete Invoices</h2>
   <% @incomplete_invoices.each do |invoice| %>
-    <p id="incomplete_invoice-<%= invoice.id %>">
+    <div id="incomplete_invoice-<%= invoice.id %>">
       Invoice#<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
       <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
-    </p>
+    </div>
   <% end %>
 </section>
