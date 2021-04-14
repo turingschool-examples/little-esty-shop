@@ -7,4 +7,8 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :invoice_items
   has_many :items, through: :invoice_items
+
+  def self.all_incomplete_invoices
+    self.where(status: "in progress")
+  end
 end
