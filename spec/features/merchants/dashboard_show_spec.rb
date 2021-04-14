@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Dashboard' do
+RSpec.describe 'Merchant DashBoard Index' do
   before :each do
     @merchant1 = create(:merchant)
 
@@ -23,7 +23,7 @@ RSpec.describe 'Dashboard' do
         end
       end
 
-      it 'Shows a link to my invoice index' do
+    it 'Shows a link to my invoice index' do
         within(".navbar") do
           expect(page).to have_link('My Invoices')
           click_link('My Invoices')
