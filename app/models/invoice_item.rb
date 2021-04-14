@@ -10,5 +10,4 @@ class InvoiceItem < ApplicationRecord
   def self.find_all_invoices_not_shipped
     self.select(:id).where.not(status: 'shipped').distinct.pluck(:invoice_id)
   end
-
 end
