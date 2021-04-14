@@ -8,4 +8,6 @@ class InvoiceItem < ApplicationRecord
                         :status,
                         :item_id,
                         :invoice_id
+
+  enum status: [:pending, :packaged, :shipped]
 end
