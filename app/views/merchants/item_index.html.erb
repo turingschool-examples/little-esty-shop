@@ -1,11 +1,17 @@
-<%= render partial: "partials/merch_header" %>
+<%= render partial: "partials/merch_header", locals: {dash_path: "/merchants/#{@merchant.id}/dashboard", items_path: "/merchants/#{@merchant.id}/items", inv_path: "/merchants/#{@merchant.id}/invoices"} %>
 
-<h2>Merchant: _ <%=  @merchant.name %></h2>
+<h2>Merchant:  &nbsp; <%=  @merchant.name %></h2><br/>
+<h3 align="center">My Items</h3><br/>
+
+<h2>New Item</h2>
+<h2 align="right">Top Items</h2>
 
 <% @items.each do |item| %>
-  <h3><%= item.name %></h3>
-  <p>Age: <%= item.age %></p>
-
-  <%= link_to "Edit #{item.name}", "/items/#{item.id}/edit" %>
-  <%= link_to "Delete #{item.name}", "/items/#{item.id}", method: :delete %>
+  <% if item.status == "Enable" %>
+    <h4><%= link_to "#{item.name}", "/merchants/#{merchant.id}/items/#{item.id}" %>
+    <%= button_to("Disable", "/merchants/#{merchant.id}/items, :params => {status: "disable"}, method: :patch) %></h4>
+  <% elsif item.status == "Disable" %>
+    <h4><%= link_to "#{item.name}", "/merchants/#{merchant.id}/items/#{item.id}" %>
+    <%= button_to("Enable", "/merchants/#{merchant.id}/items, :params => {status: "disable"}, method: :patch) %></h4>
+  <% end %>
 <% end %>

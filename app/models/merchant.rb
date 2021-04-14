@@ -13,7 +13,7 @@ class Merchant < ApplicationRecord
 
 
 
-###### item methods ##########
+####### item methods ##############
 
 
 
@@ -23,6 +23,6 @@ class Merchant < ApplicationRecord
 
 
 
-###### invoice methods ##########
+###### invoice methods ###########
 
 end
