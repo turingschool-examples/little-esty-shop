@@ -1,6 +1,6 @@
 FactoryBot.define do
    factory :item, class: Item do
-      name { Faker::Vehicle.make }
+      name { Faker::Vehicle.unique.make }
       description { Faker::GreekPhilosophers.quote }
       unit_price { Faker::Number.between(from: 3000, to: 100000) }
       association :merchant, factory: :merchant
