@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/merchants/:id/invoices", to: 'merchants#invoice_index'
 
   get "/merchants/:merchant_id/items/:item_id", to: 'merchants#item_show'
-  get "/merchants/:merchant_id/invoces/:invoice_id", to: 'merchants#invoice_show'
+  get "/merchants/:merchant_id/invoices/:invoice_id", to: 'merchants#invoice_show'
 
 ########## Admin routes below ############
 
