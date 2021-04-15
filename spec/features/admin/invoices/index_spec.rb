@@ -13,7 +13,7 @@ RSpec.describe "As an admin" do
       expect(page).to have_content(invoice1.id)
       expect(page).to have_content(invoice2.id)
       expect(page).to have_link("Link to this invoice")
-      save_and_open_page
+      # save_and_open_page
     end
   end
 end

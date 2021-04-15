@@ -5,15 +5,9 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
- #  def invoice_items_ready_to_ship
- #    invoice_items.where.not(status: :shipped)
- #   .joins(:invoice)
- # invoice status = :completed
- # end
-
-
-
-
-
-
+  def invoice_items_ready_to_ship
+    invoice_items.where.not(status: :shipped)
+   .joins(:invoice)
+   .where('invoices.status = ?', Invoice.statuses[:completed])
+  end
 end

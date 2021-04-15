@@ -57,5 +57,18 @@ RSpec.describe 'Merchant DashBoard Index' do
         end
       end
     end
+
+    it 'I see a section for "Items Ready to Ship"' do
+      within '.items-to-ship' do
+        expect(page).to have_content("Items Ready to Ship")
+      end
+    end
+
+    # it 'And i see a list of the link names of all of my items ordered, that have not been shipped, that route to merchant show page' do
+    #   within '.items' do
+    #     expect(page).to have_link("Invoice ##{@invoice1.id}")
+    #     expect(page).to_not have_link("Invoice ##{@invoice2.id}")
+    #   end
+    # end
   end
 end
