@@ -35,13 +35,12 @@ RSpec.describe "Admin Dashboard" do
 
     visit "/admin"
   end
-  it "shows header for admin dashboard" do
 
+  it "shows header for admin dashboard" do
     expect(page).to have_content("Admin Dashboard")
   end
 
   it "see links to admin merchants index and admin invoices index" do
-
     expect(page).to have_link("Merchants")
     expect(page).to have_link("Invoices")
   end
@@ -56,7 +55,11 @@ RSpec.describe "Admin Dashboard" do
 
 
   it "shows incomplete invoices" do
-    visit "/admin"
     expect(page).to have_content("Incomplete Invoices")
+    expect(page).to have_link("Invoice #{@invoice1.id}")
+
+    within("#invoice-#{@invoice1.id}") do
+    expect(page).to have_content("Invoice #{@invoice1.id} - Thursday, April 15, 2021")
+    end
   end
 end

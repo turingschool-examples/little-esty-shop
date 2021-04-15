@@ -1,0 +1,5 @@
+<h1>Admin Dashboard</h1>
+
+<% @merchants.each do |merchant|%>
+  <%= link_to "#{merchant.name}", "/admin/merchant/#{merchant.id}"%><br>
+  <%end%>
