@@ -1,38 +1,50 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/features/merchants/dashboard_spec.rb": {
+      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/features/invoices/index_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          null,
-          3,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
           null,
           null,
           1,
           1,
           1,
           1,
+          null,
+          null,
           1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null
@@ -308,6 +320,7 @@
           1,
           1,
           1,
+          1,
           null,
           null
         ]
@@ -318,24 +331,12 @@
           null
         ]
       },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/models/customer_spec.rb": {
+      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
-          null,
           1,
           1,
-          2,
-          null,
-          null,
           1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/customer.rb": {
-        "lines": [
           1,
           1,
           null,
@@ -350,111 +351,6 @@
           null
         ]
       },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/models/invoice_items_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/invoice_item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/models/invoices_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/models/items_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
       "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
@@ -465,28 +361,15 @@
           1,
           null,
           1,
-          4,
+          0,
           null,
           null
         ]
       },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/models/merchants_spec.rb": {
+      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
-          null,
           1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/merchant.rb": {
-        "lines": [
           1,
           1,
           null,
@@ -494,20 +377,35 @@
           null
         ]
       },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/spec/models/transactions_spec.rb": {
+      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
           1,
-          null,
           1,
           1,
-          2,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
           null,
           null,
           1,
-          2,
-          2,
-          2,
-          null,
           null
         ]
       },
@@ -520,12 +418,12 @@
           null
         ]
       },
-      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/controllers/dashboard_controller.rb": {
+      "/Users/gjc/turing/2_mod/projects/little-esty-shop/app/controllers/invoices_controller.rb": {
         "lines": [
           1,
           1,
-          3,
-          3,
+          2,
+          2,
           null,
           null
         ]
@@ -537,6 +435,6 @@
         ]
       }
     },
-    "timestamp": 1618372433
+    "timestamp": 1618447321
   }
 }
