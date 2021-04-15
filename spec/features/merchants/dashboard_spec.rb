@@ -4,13 +4,14 @@ RSpec.describe 'As a visitor' do
   before(:each) do
     @merchant_1 = create(:merchant)
     # require "pry"; binding.pry
-    @item_1 = create(:item)
-    @item_2 = create(:item)
-    @item_3 = create(:item)
-    @item_4 = create(:item)
-    @item_5 = create(:item)
+    @item_1 = create(:item, merchant: @merchant_1)
+    @item_2 = create(:item, merchant: @merchant_1)
+    @item_3 = create(:item, merchant: @merchant_1)
+    @item_4 = create(:item, merchant: @merchant_1)
+    @item_5 = create(:item, merchant: @merchant_1)
+    @item_6 = create(:item, merchant: @merchant_1)
 
-    @merchant_1.items << [@item_1, @item_2, @item_3, @item_4, @item_5]
+    # require "pry"; binding.pry
 
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
@@ -30,7 +31,6 @@ RSpec.describe 'As a visitor' do
     @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3)
     @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_4)
     @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_5)
-
 
     @transaction_1 = create(:transaction)
     @transaction_2 = create(:transaction)

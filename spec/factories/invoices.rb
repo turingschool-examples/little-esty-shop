@@ -1,15 +1,10 @@
 FactoryBot.define do
-  factory :invoice, class: Invoice do
+  factory :invoice do
     status { rand(0..2) }
+    customer
 
-    association :customer, factory: :customer
+    factory :completed_invoice do
+      status { "shipped" }
+    end
   end
 end
-
-# Alternative syntax for association?
-# FactoryBot.define do
-#   factory :invoice do
-#     customer
-#     status { 0 }
-#   end
-# end
