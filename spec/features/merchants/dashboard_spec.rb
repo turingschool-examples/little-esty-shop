@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'As a visitor' do
   before(:each) do
     @merchant_1 = FactoryBot.create(:merchant)
-    require "pry"; binding.pry
+    
     @item_1 = FactoryBot.create(:item)
     @item_2 = FactoryBot.create(:item)
     @item_3 = FactoryBot.create(:item)
