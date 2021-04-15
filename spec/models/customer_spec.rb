@@ -14,7 +14,7 @@ RSpec.describe Customer do
     describe '#top_five' do
       it 'returns the top five customers with the most successful transactions' do
         
-        customer5 = Customer.create!(first_name: "Eff", last_name: "Erk")
+        customer5 = Customer.create!(first_name: "Eyy", last_name: "Erk")
         invoice5 = customer5.invoices.create!(status: 1)
         transaction11 = invoice5.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
 

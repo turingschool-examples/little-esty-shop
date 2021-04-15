@@ -61,12 +61,12 @@ RSpec.describe 'admin index page', type: :feature do
         
         within("#incomplete_invoice-#{invoice1.id}") do
           expect(page).to have_content(invoice1.id)
-          expect(page).to have_content("Wednesday, April 14, 2021")
+          expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y")}")
         end
     
         within("#incomplete_invoice-#{invoice5.id}") do
           expect(page).to have_content(invoice5.id)
-          expect(page).to have_content("Wednesday, April 14, 2021")
+          expect(page).to have_content("#{invoice5.created_at.strftime("%A, %B %d, %Y")}")
         end
       end
     end
