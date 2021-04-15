@@ -57,12 +57,11 @@ before(:each) do
   @invoice_5.transactions << [@transaction_15]
 end
 
-describe 'class methods' do
-  describe '::top_5_by_transaction_count' do
-    it 'returns the top 5 customers by the count of transactions' do
+  describe 'class methods' do
+    describe '::top_5_by_transaction_count' do
+      it 'returns the top 5 customers by the count of transactions' do
 
-      require "pry"; binding.pry
-      expect(Customer.top_5_by_transaction_count).to eq(@customer_1, @customer_2, @customer_3, @customer_4, @customer_5)
+        expect(Customer.top_5_by_transaction_count).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       end
     end
   end
