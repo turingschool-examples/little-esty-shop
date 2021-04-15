@@ -4,10 +4,17 @@
 <p><%= @merchant.name %></p>
 
 <section>
-  <p>Items Ready to Ship</p>
+  <h3>Items Ready to Ship</h3>
   <% @items.ordered_items_no_ship.each do |item| %>
     <p id="item-<%= item.id %>">
       <%= item.name %>
     </p>
+  <% end %>
+</section>
+
+<section>
+  <h3>Top 5 Customers</h3>
+  <% @customers.top_five_customers.each do |customer| %>
+    <p id="customer-<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %>, <%= customer.transactions.count %> purchase(s)</p>
   <% end %>
 </section>
