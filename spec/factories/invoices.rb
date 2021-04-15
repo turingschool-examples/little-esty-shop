@@ -5,3 +5,11 @@ FactoryBot.define do
     association :customer, factory: :customer
   end
 end
+
+# Alternative syntax for association?
+# FactoryBot.define do
+#   factory :invoice do
+#     customer
+#     status { 0 }
+#   end
+# end

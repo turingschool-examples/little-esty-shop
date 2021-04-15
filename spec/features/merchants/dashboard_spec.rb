@@ -2,43 +2,47 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
   before(:each) do
-    @merchant_1 = FactoryBot.create(:merchant)
-    require "pry"; binding.pry
-    @item_1 = FactoryBot.create(:item)
-    @item_2 = FactoryBot.create(:item)
-    @item_3 = FactoryBot.create(:item)
-    @item_4 = FactoryBot.create(:item)
-    @item_5 = FactoryBot.create(:item)
+    @merchant_1 = create(:merchant)
+    # require "pry"; binding.pry
+    @item_1 = create(:item)
+    @item_2 = create(:item)
+    @item_3 = create(:item)
+    @item_4 = create(:item)
+    @item_5 = create(:item)
 
     @merchant_1.items << [@item_1, @item_2, @item_3, @item_4, @item_5]
 
-    @customer_1 = FactoryBot.create(:customer)
-    @customer_2 = FactoryBot.create(:customer)
-    @customer_3 = FactoryBot.create(:customer)
-    @customer_4 = FactoryBot.create(:customer)
-    @customer_5 = FactoryBot.create(:customer)
-    @customer_6 = FactoryBot.create(:customer)
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+    @customer_3 = create(:customer)
+    @customer_4 = create(:customer)
+    @customer_5 = create(:customer)
+    @customer_6 = create(:customer)
 
-    @invoice_1 = FactoryBot.create(:invoice)
+    @invoice_1 = create(:invoice)
+    @invoice_2 = create(:invoice)
+    @invoice_3 = create(:invoice)
+    @invoice_4 = create(:invoice)
+    @invoice_5 = create(:invoice)
 
-    @invoice_item_1 = FactoryBot.create(:invoice_item, item: @item_1, invoice: @invoice_1)
-    @invoice_item_2 = FactoryBot.create(:invoice_item, item: @item_2, invoice: @invoice_2)
-    @invoice_item_3 = FactoryBot.create(:invoice_item, item: @item_3, invoice: @invoice_3)
-    @invoice_item_4 = FactoryBot.create(:invoice_item, item: @item_4, invoice: @invoice_4)
-    @invoice_item_5 = FactoryBot.create(:invoice_item, item: @item_5, invoice: @invoice_5)
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
+    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3)
+    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_4)
+    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_5)
 
 
-    @transaction_1 = FactoryBot.create(:transaction)
-    @transaction_2 = FactoryBot.create(:transaction)
-    @transaction_3 = FactoryBot.create(:transaction)
-    @transaction_4 = FactoryBot.create(:transaction)
-    @transaction_5 = FactoryBot.create(:transaction)
+    @transaction_1 = create(:transaction)
+    @transaction_2 = create(:transaction)
+    @transaction_3 = create(:transaction)
+    @transaction_4 = create(:transaction)
+    @transaction_5 = create(:transaction)
     @invoice_1.transactions << [@transaction_1, @transaction_2, @transaction_3, @transaction_4, @transaction_5]
 
-    @transaction_6 = FactoryBot.create(:transaction)
-    @transaction_7 = FactoryBot.create(:transaction)
-    @transaction_8 = FactoryBot.create(:transaction)
-    @transaction_9 = FactoryBot.create(:transaction)
+    @transaction_6 = create(:transaction)
+    @transaction_7 = create(:transaction)
+    @transaction_8 = create(:transaction)
+    @transaction_9 = create(:transaction)
     @invoice_2.transactions << [@transaction_6, @transaction_7, @transaction_8, @transaction_9]
 
     @transaction_10 = FactoryBot.create(:transaction)
