@@ -1,0 +1,15 @@
+<h2><%= @merchant.name %></h2>
+<nav class="navbar">
+  <%= link_to 'My Items', merchant_items_path(@merchant) %>
+  <%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
+</nav>
+
+<section class="items-to-ship">
+<h2>Items Ready to Ship</h2>
+<section class="items">
+<% @items_ready_to_ship.each do |invoice_item| %>
+  <%= invoice_item.item.name %> -
+  <%= link_to "Invoice ##{invoice_item.invoice_id}", merchant_invoice_path(@merchant, invoice_item.invoice) %> -
+</section>
+<% end %>
+</section>
