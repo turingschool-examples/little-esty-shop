@@ -5,12 +5,10 @@ class Customer < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
-  def self.top_customers
-    joins(:transactions)
-    .where({transactions:{result: "success"} })
-    .group(:id)
-    .select("customers.*, count('transactions.results') as top_result")
-    .order(top_result: :desc)
-    .limit(5)
+
+  def self.top_five_customers
+    joins(:transactions).where({ transactions: { result: "success" } }).
+    group(:id).select("customers.*, count('transaction.result') as top_five").
+    order(top_five: :desc).limit(5)
   end
 end
