@@ -15,9 +15,10 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    controller :admin do
-      get '/', action: :index
-    end
+    # controller :dashboard do
+    #   get '/', action: :index
+    # end
+    get '/', to: "dashboard#index"
     resources :merchants, only: [:index]
     resources :invoices, only: [:index]
   end

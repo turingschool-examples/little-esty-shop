@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
   before(:each) do
+
     @merchant_1 = create(:merchant)
     # require "pry"; binding.pry
     @item_1 = create(:item, merchant: @merchant_1)
