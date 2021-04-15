@@ -12,7 +12,7 @@ RSpec.describe 'the merchant item index' do
   end
 
   it 'has a link to merchants dashboard' do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
     within ("#links") do
       expect(page).to have_link("Dashboard")
       click_link("Dashboard")
@@ -21,16 +21,16 @@ RSpec.describe 'the merchant item index' do
   end
 
   it 'has a link to merchant items' do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
     within ("#links") do
       expect(page).to have_link("My Items")
       click_link("My Items")
-      expect(current_path).to eq('/merchants/#{@jerde.id}/items')
+      expect(current_path).to eq("/merchants/#{@jerde.id}/items")
     end
   end
 
   it 'has a link to merchant invoices' do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
     within ("#links") do
       expect(page).to have_link("My Invoices")
       click_link("My Invoices")
@@ -39,7 +39,7 @@ RSpec.describe 'the merchant item index' do
   end
 
   it 'lists of the names of all of merchant items' do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content(@qui.name)
     expect(page).to have_content(@autem.name)
@@ -48,7 +48,7 @@ RSpec.describe 'the merchant item index' do
   end     #merchant items us#1
 
   it 'has Disable/Enable button by each item' do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content(@qui.name)
     expect(page).to have_button("Enable")
@@ -62,7 +62,7 @@ RSpec.describe 'the merchant item index' do
   end     #merchant items us#4 (#2,3 show page)
 
   it 'shows two sections, "Enabled Items" & "Disabled Items"' do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content("Enabled Items")
     expect(page).to have_content(@qui.name)
@@ -76,20 +76,20 @@ RSpec.describe 'the merchant item index' do
   end     #merchant items us#5
 
   it "has a link to 'Create New Item'" do
-    visit '/merchants/#{@jerde.id}/items'
+    visit "/merchants/#{@jerde.id}/items"
       click_on "Create New Item"
-    expect(current_path).to eq('/merchants/#{@jerde.id}/items/new')
+    expect(current_path).to eq("/merchants/#{@jerde.id}/items/new")
   end     #merchant items us#6-1
 
   it "has form to create new item" do
-      visit '/merchants/#{@jerde.id}/items/new'
+      visit "/merchants/#{@jerde.id}/items/new"
     expect(page).to have_content('New Item')
     expect(find('form')).to have_content('Name')
     expect(find('form')).to have_content('Description')
     expect(find('form')).to have_content('Unit Price')
     expect(page).to have_button("Submit")
       click_on "Submit"
-    expect(current_path).to eq('/merchants/#{@jerde.id}/items')
+    expect(current_path).to eq("/merchants/#{@jerde.id}/items")
   end     #merchant items us#6-2
   # redirect back to the items index page
   # And I see the item I just created displayed in the list of items. New item was created w/ a default status of disabled.
