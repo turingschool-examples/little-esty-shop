@@ -18,4 +18,36 @@ RSpec.describe "Merchant item index page" do
     expect(page).to have_link(@item_1.name)
     expect(page).to have_link(@item_2.name)
   end
+
+  it 'shows a button next to each item to enable or disable that item' do
+    within("#item-#{@item_1.id}") do
+      expect(page).to have_button("Enable")
+      expect(page).to have_button("Disable")
+    end
+
+    within("#item-#{@item_2.id}") do
+      expect(page).to have_button("Enable")
+      expect(page).to have_button("Disable")
+    end
+  end
+
+  it 'can click on enable and it updates item status to enable' do
+    within("#item-#{@item_1.id}") do
+      click_button "Enable"
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
+    expect(@item_1.status).to eq("enabled")
+  end
+
+  it 'can click on disable and it updates item status to disabled' do
+    @item_1.update(status: 1)
+
+    within("#item-#{@item_1.id}") do
+      click_button "Disable"
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
+    expect(@item_1.status).to eq("disabled")
+  end
 end
