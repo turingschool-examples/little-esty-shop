@@ -13,3 +13,13 @@
     </div>
   <% end %>
 </section>
+
+<section id="top_five_customers">
+  <h2>Top Five Customers</h2>
+  <% @top_five_customers.each do |customer| %>
+    <div id="customer-<%= customer.id %>">
+      <%= customer.first_name %> 
+      <%= customer.last_name %>
+    </div>
+  <% end %>
+</section>

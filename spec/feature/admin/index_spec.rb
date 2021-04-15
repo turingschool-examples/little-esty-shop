@@ -61,7 +61,7 @@ RSpec.describe 'admin index page', type: :feature do
         
         within("#incomplete_invoice-#{invoice1.id}") do
           expect(page).to have_content(invoice1.id)
-          expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y")}")
+          expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y")}") #"Monday, July 18, 2019"
         end
     
         within("#incomplete_invoice-#{invoice5.id}") do
@@ -129,11 +129,12 @@ RSpec.describe 'admin index page', type: :feature do
     transaction12 = invoice6.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
     transaction13 = invoice6.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
 
+    visit '/admin'
+
     expect(customer2.first_name).to appear_before(customer3.first_name)
     expect(customer3.first_name).to appear_before(customer4.first_name)
     expect(customer4.first_name).to appear_before(customer5.first_name)
-    expect(customer5.first_name).to appear_before(customer1.first_name)
-    expect(customer6.first_name).to appear_before(customer1.first_name)
+    expect(page).to_not have_content(customer1.first_name)
   end
   it 'displays the number of successful transactions next to each customer'
 end
