@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description, :unit_price, :merchant_id
 
+  enum status: [:disabled, :enabled]
+
   def self.ordered_items_no_ship
     joins(:invoice_items).where('status != ?', 2)
   end
