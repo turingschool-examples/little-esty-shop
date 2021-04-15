@@ -28,4 +28,8 @@ RSpec.describe "Merchanct Invoices Index" do
     expect(page).to have_content(@invoice_item_1.unit_price)
     expect(page).to have_content(@invoice_item_1.status)
   end
+
+  it 'can see total revenue from all items on invoice' do
+    expect(page).to have_content(@invoice_1.invoice_items.total_revenue)
+  end
 end
