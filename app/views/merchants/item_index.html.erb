@@ -1,14 +1,13 @@
-<p align="right"><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &nbsp;</p>
+<h3 style="text-align:left;font-weight:bold;">
+    Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;">
+  <%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &nbsp;</span>
+</h3>
 
-<%= render partial: "partials/merch_header", locals: {dash_path: "/merchants/#{@merchant.id}/dashboard", items_path: "/merchants/#{@merchant.id}/items", inv_path: "/merchants/#{@merchant.id}/invoices"} %>
-
-<h2>Merchant:  &nbsp; <%=  @merchant.name %></h2><br/>
-<h3 align="center">My Items</h3><br/>
-
-<h2>New Item</h2>
-<h2 align="right">Top Items</h2>
+<h2 align="center">My Items</h2><br/>
+<h3 style="text-align:left;">New Item<span style="float:right;">Top Items</span></h3>
 
 <% @items.each do |item| %>
-  <h4><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-  <%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {description: "disable"}, method: :patch) %></h4>
+
+  <h4><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>  <%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {description: "disable"}, method: :patch) %></h4>
+
 <% end %>
