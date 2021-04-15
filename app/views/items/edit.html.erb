@@ -1,6 +1,6 @@
-<!-- model: @item, in the form_with line -->
+<!-- #find a way to refactor out the url  -->
 <h1>Edit <%= @item.name.capitalize %></h1>
-<%= form_with url: "/merchant/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true do |f| %>
+<%= form_with url: "/merchant/#{@merchant.id}/items/#{@item.id}", model: @item, method: :put, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
 
