@@ -120,7 +120,7 @@ RSpec.describe 'admin index page', type: :feature do
     transaction9 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction10 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     
-    customer5 = Customer.create!(first_name: "Eff", last_name: "Erk")
+    customer5 = Customer.create!(first_name: "Eyy", last_name: "Erk")
     invoice5 = customer5.invoices.create!(status: 1)
     transaction11 = invoice5.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     
@@ -130,11 +130,52 @@ RSpec.describe 'admin index page', type: :feature do
     transaction13 = invoice6.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
 
     visit '/admin'
-
+    
     expect(customer2.first_name).to appear_before(customer3.first_name)
     expect(customer3.first_name).to appear_before(customer4.first_name)
     expect(customer4.first_name).to appear_before(customer5.first_name)
     expect(page).to_not have_content(customer1.first_name)
   end
-  it 'displays the number of successful transactions next to each customer'
+  it 'displays the number of successful transactions next to each customer' do
+    customer1 = Customer.create!(first_name: "Ayy", last_name: "All")
+    invoice1 = customer1.invoices.create!(status: 0)
+    transaction1 = invoice1.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
+    
+    customer2 = Customer.create!(first_name: "Bee", last_name: "Bold")
+    invoice2 = customer2.invoices.create!(status: 1)
+    transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction3 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction4 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction5 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    
+    customer3 = Customer.create!(first_name: "Cee", last_name: "Cold")
+    invoice3 = customer3.invoices.create!(status: 2)
+    transaction6 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction7 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction8 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    
+    customer4 = Customer.create!(first_name: "Dee", last_name: "Droll")
+    invoice4 = customer4.invoices.create!(status: 0)
+    transaction9 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction10 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    
+    customer5 = Customer.create!(first_name: "Eyy", last_name: "Erk")
+    invoice5 = customer5.invoices.create!(status: 1)
+    transaction11 = invoice5.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    
+    customer6 = Customer.create!(first_name: "Gee", last_name: "Golly")
+    invoice6 = customer6.invoices.create!(status: 2)
+    transaction12 = invoice6.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
+    transaction13 = invoice6.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+
+    visit '/admin'
+    
+    within("#customer-#{customer2.id}") do
+      expect(page).to have_content(4)
+    end
+
+    within("#customer-#{customer3.id}") do
+      expect(page).to have_content(3)
+    end
+  end
 end

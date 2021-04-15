@@ -19,7 +19,8 @@
   <% @top_five_customers.each do |customer| %>
     <div id="customer-<%= customer.id %>">
       <%= customer.first_name %> 
-      <%= customer.last_name %>
+      <%= customer.last_name %> -
+      <%= customer.num_transactions %>
     </div>
   <% end %>
 </section>
