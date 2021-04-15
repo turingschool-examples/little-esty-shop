@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the merchant item show page' do
+RSpec.describe 'the merchant item show page', type: :feature do
 #
 #   Merchant Items Show Page, As a merchant,
 #   When I click on the name of an item from the merchant items index page,

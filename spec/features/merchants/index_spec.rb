@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the merchant index' do
+RSpec.describe 'the merchant index', type: :feature do
   before(:each) do
     @jerde = Merchant.create!(name: 'Schroeder-Jerde')
     @willms = Merchant.create!(name: 'Willms and Sons')

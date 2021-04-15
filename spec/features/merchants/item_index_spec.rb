@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the merchant item index' do
+RSpec.describe 'the merchant item index', type: :feature do
   before(:each) do
     @jerde = Merchant.create!(name: 'Schroeder-Jerde')
     @willms = Merchant.create!(name: 'Willms and Sons')
@@ -13,29 +13,29 @@ RSpec.describe 'the merchant item index' do
 
   it 'has a link to merchants dashboard' do
     visit "/merchants/#{@jerde.id}/items"
-    within ("#links") do
+    # within ("#links") do
       expect(page).to have_link("Dashboard")
       click_link("Dashboard")
       expect(current_path).to eq("/merchants/#{@jerde.id}/dashboard")
-    end
+    # end
   end
 
   it 'has a link to merchant items' do
     visit "/merchants/#{@jerde.id}/items"
-    within ("#links") do
+    # within ("#links") do
       expect(page).to have_link("My Items")
       click_link("My Items")
       expect(current_path).to eq("/merchants/#{@jerde.id}/items")
-    end
+    # end
   end
 
   it 'has a link to merchant invoices' do
     visit "/merchants/#{@jerde.id}/items"
-    within ("#links") do
+    # within ("#links") do
       expect(page).to have_link("My Invoices")
       click_link("My Invoices")
       expect(current_path).to eq("/merchants/#{@jerde.id}/invoices")
-    end
+    # end
   end
 
   it 'lists of the names of all of merchant items' do
