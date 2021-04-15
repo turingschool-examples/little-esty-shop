@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Merchant Dashboard" do
   before(:each) do
-    @merchant = Merchant.create!(name: 'Ice Cream Parlour')
-    @item_1 = @merchant.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
-    @item_2 = @merchant.items.create!(name: 'Ice Cream Cone', description: 'holds ice cream', unit_price: 3)
+    # @merchant = Merchant.create!(name: 'Ice Cream Parlour')
+    @merchant = create(:merchant)
+    # @item_1 = @merchant.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
+    # @item_2 = @merchant.items.create!(name: 'Ice Cream Cone', description: 'holds ice cream', unit_price: 3)
+    @item_1, @item_2 = create_list(:item, 2, merchant: @merchant)
+    # @item_2 = create(:item, merchant: @merchant)
     @customer = Customer.create!(first_name: 'Stuart', last_name: 'Little')
     @customer_1 = Customer.create!(first_name: 'Little', last_name: 'Stauart')
     @customer_2 = Customer.create!(first_name: 'Racoon', last_name: 'Stauart')
