@@ -4,4 +4,6 @@ Rails.application.routes.draw do
     resources :items
     resources :invoices
   end
+
+  resources :admin
 end
