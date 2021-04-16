@@ -94,7 +94,6 @@ RSpec.describe 'when I visit the admin dashboard' do
         expect(page).to have_content(@customer_5.first_name)
         expect(page).to have_content(@customer_5.last_name)
         expect(page).to have_content(1)
-        save_and_open_page
       end
     end
   end

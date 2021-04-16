@@ -1,14 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Customer, type: :model do
-  describe 'relationships' do
-    it { should have_many :invoices }
-  end
-
-  describe 'validations' do
-    it { should validate_presence_of :first_name }
-    it { should validate_presence_of :last_name }
-  end
+RSpec.describe 'when I visit the admin merchant index page' do
 
 before(:each) do
   @customer_1 = FactoryBot.create(:customer)
@@ -57,12 +49,20 @@ before(:each) do
   @invoice_5.transactions << [@transaction_15]
 end
 
-  describe 'class methods' do
-    describe '::top_5_by_transaction_count' do
-      it 'returns the top 5 customers by the count of transactions' do
+  it 'shows the name of each merchant in the system' do
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
+    @merchant_3 = create(:merchant)
+    @merchant_4 = create(:merchant)
+    @merchant_5 = create(:merchant)
 
-        expect(Customer.top_5_by_transaction_count).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
-      end
-    end
+    visit '/admin/merchants'
+
+    expect(page).to have_content(@merchant_1.name)
+    expect(page).to have_content(@merchant_2.name)
+    expect(page).to have_content(@merchant_3.name)
+    expect(page).to have_content(@merchant_4.name)
+    expect(page).to have_content(@merchant_5.name)
+    save_and_open_page
   end
 end
