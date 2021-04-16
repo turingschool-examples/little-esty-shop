@@ -96,6 +96,8 @@ GEM
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    nokogiri (1.11.3-x86_64-linux)
+      racc (~> 1.4)
     orderly (0.1.1)
       capybara (>= 1.1)
       rspec (>= 2.14)
@@ -207,6 +209,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
