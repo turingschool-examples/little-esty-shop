@@ -7,14 +7,13 @@ class Customer < ApplicationRecord
   has_many :invoice_items, through: :invoices
   has_many :items, through: :invoice_items
 
-  def self.top_5_by_transaction_count
-    joins(:invoices)
-#     .where(transactions: {result: 1})
-#     .group(:id)
-#     .select("customers.*, count(transactions.id) as successful_transaction_count")
-#     .order(successful_transaction_count: :desc)
-#     .limit(5)
 
-  def transaction_count
+  def self.top_5_by_transaction_count
+    joins(invoices: :transactions)
+    .where(transactions: {result: 1})
+    .group(:id)
+    .select("customers.*, count(transactions.id) as successful_transaction_count")
+    .order(successful_transaction_count: :desc)
+    .limit(5)
   end
 end
