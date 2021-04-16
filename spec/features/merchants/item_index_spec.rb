@@ -13,29 +13,29 @@ RSpec.describe 'the merchant item index', type: :feature do
 
   it 'has a link to merchants dashboard' do
     visit "/merchants/#{@jerde.id}/items"
-    # within ("#links") do
+    within ("#links") do
       expect(page).to have_link("Dashboard")
       click_link("Dashboard")
       expect(current_path).to eq("/merchants/#{@jerde.id}/dashboard")
-    # end
+    end
   end
 
   it 'has a link to merchant items' do
     visit "/merchants/#{@jerde.id}/items"
-    # within ("#links") do
+    within ("#links") do
       expect(page).to have_link("My Items")
       click_link("My Items")
       expect(current_path).to eq("/merchants/#{@jerde.id}/items")
-    # end
+    end
   end
 
   it 'has a link to merchant invoices' do
     visit "/merchants/#{@jerde.id}/items"
-    # within ("#links") do
+    within ("#links") do
       expect(page).to have_link("My Invoices")
       click_link("My Invoices")
       expect(current_path).to eq("/merchants/#{@jerde.id}/invoices")
-    # end
+    end
   end
 
   it 'lists of the names of all of merchant items' do
@@ -47,17 +47,18 @@ RSpec.describe 'the merchant item index', type: :feature do
     expect(page).not_to have_content(@nemo.name)
   end     #merchant items us#1
 
-  it 'has Disable/Enable button by each item' do
+  it 'has Enable button by each item' do
     visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content(@qui.name)
     expect(page).to have_button("Enable")
-    click_on "Enable"
+  end
+
+  it 'has Disable button by each item' do
+    visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content(@autem.name)
     expect(page).to have_button("Disable")
-    click_on "Disable"
-
     # check redirects to updated index page?
   end     #merchant items us#4 (#2,3 show page)
 
