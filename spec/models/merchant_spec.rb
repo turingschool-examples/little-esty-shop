@@ -5,6 +5,17 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:items) }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
+
+  before(:each) do
+  end
+
+  describe 'class methods' do
+  end
+
+
   describe 'top_five_customers' do
     it "returns the  5 customers with the most sucessful transactions, along with their first and last names" do
       merchant = Merchant.create(name: 'Bob Cella')
