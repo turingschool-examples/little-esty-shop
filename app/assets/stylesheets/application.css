@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+/* .items { */
+  /* display: inline-block; */
+  /* width: 100px;
+  height: 100px;
+  padding: 5px; */
+  /* white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+} */
+
+
+  /* #items {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    white-space: nowrap;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline;
+   } */
