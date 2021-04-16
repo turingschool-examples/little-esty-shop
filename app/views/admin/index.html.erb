@@ -7,8 +7,20 @@
 <section id="incomplete_invoices">
   <h2>Incomplete Invoices</h2>
   <% @incomplete_invoices.each do |invoice| %>
-    <p id="incomplete_invoice-<%= invoice.id %>">
-      Invoice#<%= invoice.id %>
-    </p>
+    <div id="incomplete_invoice-<%= invoice.id %>">
+      Invoice#<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+      <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
+    </div>
+  <% end %>
+</section>
+
+<section id="top_five_customers">
+  <h2>Top Five Customers</h2>
+  <% @top_five_customers.each do |customer| %>
+    <div id="customer-<%= customer.id %>">
+      <%= customer.first_name %> 
+      <%= customer.last_name %> 
+      <%= customer.num_transactions %>
+    </div>
   <% end %>
 </section>

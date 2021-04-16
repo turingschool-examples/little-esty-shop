@@ -8,9 +8,10 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
-  def self.all_incomplete_invoices
-    self.where.not(status: "completed")
+  def self.find_all_invoices_not_shipped
+    joins(:invoice_items)
+    .where.not("invoice_items.status = ?", 2)
+    .order(created_at: :desc)
+    .distinct
   end
-  # InvoiceItem.select(:invoice_id).where.not(status: :shipped)
-  # InvoiceItem.select(:invoice_id).distinct.where.not(status: :shipped).pluck(:invoice_id)
 end
