@@ -16,16 +16,14 @@ class Merchant::ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-
-    if item.update(item_params)
+    item.update(item_params)
+    if item.save
+      flash[:success] = "You updated the item!"
       redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
     else
-      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}/edit"
+      render :edit
     end
-
-    # flash message
   end
-
 
   private
 
