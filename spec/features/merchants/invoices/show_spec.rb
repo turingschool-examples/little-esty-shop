@@ -23,7 +23,17 @@ RSpec.describe 'Merchant Invoice Index' do
 
     it 'shows me the total revenue for each invoice show page' do
       visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+
       expect(page).to have_content("150800")
+    end
+
+    it 'can show me a list of all items on that invoice, including name, quantity, price, status' do
+      visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item1.invoice_items.first.quantity)
+      expect(page).to have_content(@item1.invoice_items.first.status)
+      expect(page).to have_content(@item1.unit_price)
     end
   end
 end
