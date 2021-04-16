@@ -29,24 +29,29 @@ RSpec.describe "Merchant item index page" do
     end
   end
 
-  # it 'can click on enable and it updates item status to enable' do
-  #   within("#disabled-item-#{@item_1.id}") do
-  #     click_button "Enable"
-  #   end
-  #   expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
-  #   expect(@item_1.status).to eq("enabled")
-  # end
-  #
-  # it 'can click on disable and it updates item status to disabled' do
-  #   @item_1.update!(status: 1)
-  #
-  #   within("#enabled-item-#{@item_1.id}") do
-  #     click_button "Disable"
-  #   end
-  #
-  #   expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
-  #   expect(@item_1.status).to eq("disabled")
-  # end
+  it 'can click on enable and it updates item status to enable' do
+    within("#disabled-item-#{@item_1.id}") do
+      click_button "Enable"
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
+
+    within("#enabled-item-#{@item_1.id}") do
+      expect(page).to have_button("Disable")
+    end
+  end
+
+  it 'can click on disable and it updates item status to disabled' do
+    within("#enabled-item-#{@item_2.id}") do
+      click_button "Disable"
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
+
+    within("#disabled-item-#{@item_2.id}") do
+      expect(page).to have_button("Enable")
+    end
+  end
 
   it 'shows a link to create a new item that I can click on' do
     expect(page).to have_link("Create New Item")
@@ -65,5 +70,12 @@ RSpec.describe "Merchant item index page" do
     click_button "Submit"
 
     expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
+  end
+
+  it 'shows a section for my top five items by revenue' do
+    expect(page).to have_content("Top Items")
+    #update to include revenue and names, need to add
+    #invoice_items and transactions to the before each
+    #want to use factory bot for the sake of time 
   end
 end
