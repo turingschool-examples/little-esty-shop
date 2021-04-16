@@ -6,10 +6,9 @@
 
 <section class="items-to-ship">
 <h2>Items Ready to Ship</h2>
-<section class="items">
 <% @items_ready_to_ship.each do |invoice_item| %>
   <%= invoice_item.item.name %> -
   <%= link_to "Invoice ##{invoice_item.invoice_id}", merchant_invoice_path(@merchant, invoice_item.invoice) %> -
+  <%= invoice_item.invoice.format_time %><br>
 </section>
 <% end %>
-</section>
