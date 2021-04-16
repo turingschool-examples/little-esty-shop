@@ -6,7 +6,7 @@ RSpec.describe 'merchant items show page' do
     merchant2 = create(:merchant)
     item1 = create(:item, merchant_id: merchant1.id)
     item2 = create(:item, merchant_id: merchant1.id)
-    item2 = create(:item, merchant_id: merchant2.id)
+    item3 = create(:item, merchant_id: merchant2.id)
 
     visit "/merchants/#{merchant1.id}/items"
 
@@ -18,6 +18,6 @@ RSpec.describe 'merchant items show page' do
     expect(page).to have_content(item1.description)
     expect(page).to have_content(item1.unit_price)
     expect(page).not_to have_content(item2.name)
-    expect(page).not_to have_content(item2.description)
+    expect(page).not_to have_content(item3.description)
   end
 end
