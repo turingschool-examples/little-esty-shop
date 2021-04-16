@@ -9,6 +9,6 @@ class Merchant < ApplicationRecord
     invoice_items.where.not(status: :shipped)
    .joins(:invoice)
    .where('invoices.status = ?', Invoice.statuses[:completed])
-   .order('invoices.created_at desc')
+   .order('invoices.created_at')
   end
 end
