@@ -5,7 +5,9 @@ RSpec.describe 'admin merchants index page', type: :feature do
     merchant1 = Merchant.create!(name: "Abe")
     merchant2 = Merchant.create!(name: "Bel")
     merchant3 = Merchant.create!(name: "Cat")
-
+    
+    visit '/admin/merchants'
+    save_and_open_page
     within "#merchant-#{merchant1.id}" do
       expect(page).to have_content(merchant1.name)
     end
