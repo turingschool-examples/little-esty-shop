@@ -1,1 +1,5 @@
 <h1>Admin - Merchant <%= @merchant.name %></h1>
+
+<div>
+  <%= link_to "Update #{@merchant.name}", "/admin/merchants/#{@merchant.id}/edit" %>
+</div>
