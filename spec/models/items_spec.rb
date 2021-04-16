@@ -24,6 +24,8 @@ RSpec.describe Item, type: :model do
       @customer = Customer.create!(first_name: 'Stuart', last_name: 'Little')
       @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer.id}")
       @invoice_2 = Invoice.create!(status: 0, customer_id: "#{@customer.id}")
+      @transaction_1 = @invoice_1.transactions.create!(credit_card_number: "123", credit_card_expiration_date: 0, result: "success")
+      @transaction_2 = @invoice_2.transactions.create!(credit_card_number: "123", credit_card_expiration_date: 1, result: "failed")
       InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 40, status: 0)
       InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 10, unit_price: 20, status: 2)
     end
@@ -45,6 +47,14 @@ RSpec.describe Item, type: :model do
       it 'finds rows where items are enabled' do
         expect(Item.enabled_items).to eq([@item_2, @item_3])
         expect(Item.enabled_items).to_not eq([@item_1, @item_4])
+      end
+    end
+
+    describe '::most_popular_items' do
+      it 'finds the top five items by revenue for a merchant' do
+        expect(Item.most_popular_items).to eq([@item_1])
+        expect(Item.most_popular_items).to_not eq([@item_2])
+        #Return to add four more items when factory bot is set-up
       end
     end
   end
