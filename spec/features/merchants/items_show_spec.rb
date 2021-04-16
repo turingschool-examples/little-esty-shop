@@ -28,9 +28,9 @@ RSpec.describe "Merchant item index page" do
     expect(page).to have_content("Description")
     expect(page).to have_content("Unit price")
 
-    fill_in "name", with: "Cookies"
-    fill_in "description", with: "Enjoy some chocolate chip cookies"
-    fill_in "unit_price", with: 5
+    fill_in "Name", with: "Cookies"
+    fill_in "Description", with: "Enjoy some chocolate chip cookies"
+    fill_in "Unit price", with: 5
     click_button "Submit"
 
     expect(current_path).to eq("/merchant/#{@merchant_1.id}/items/#{@item_1.id}")
@@ -38,8 +38,25 @@ RSpec.describe "Merchant item index page" do
     expect(page).to have_content("Enjoy some chocolate chip cookies")
     expect(page).to have_content(5)
     expect(page).to have_content("Item successfully updated")
-    #How do I not hard-code these contents on an update?
-    #I need an expect for expecting that the fields on form are
-    #filled in with existing attributes for the item
   end
+
+  # it 'can not edit a form completley and get a flash' do
+  #   click_link "Update Item"
+  #
+  #   expect(current_path).to eq("/merchant/#{@merchant_1.id}/items/#{@item_1.id}/edit")
+  #   expect(page).to have_content("Name")
+  #   expect(page).to have_content("Description")
+  #   expect(page).to have_content("Unit price")
+  #
+  #   fill_in "Name", with: "Cookies"
+  #   fill_in "Description", with: false
+  #   fill_in "Unit price", with: false
+  #   click_button "Submit"
+  #
+  #   expect(page).to have_content("Please fill in all fields.")
+  #   expect(current_path).to eq("/merchant/#{@merchant_1.id}/items/#{@item_1.id}/edit")
+  #   expect(page).to have_content("Name")
+  #   expect(page).to have_content("Description")
+  #   expect(page).to have_content("Unit price")
+  # end
 end
