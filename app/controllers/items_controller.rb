@@ -16,17 +16,20 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
+
     if item.update(item_params)
       redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
     else
       redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}/edit"
     end
+
+    # flash message
   end
 
 
   private
 
   def item_params
-    params.permit(:name, :description, :unit_price)
+    params.require(:item).permit(:name, :description, :unit_price)
   end
 end

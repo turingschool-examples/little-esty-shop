@@ -18,6 +18,7 @@ RSpec.describe 'Merchant Invoice Index' do
   end
 
   it 'shows all the attributes of the invoices and provides links to each invoice show page' do
+
     visit "/merchants/#{@merchant1.id}/invoices"
 
     expect(page).to have_content(@invoice1.id)

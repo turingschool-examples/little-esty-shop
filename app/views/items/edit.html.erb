@@ -1,6 +1,6 @@
 <h1>Edit Item</h1>
 
-<%= form_with(model: @item, url: "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch) do |form| %>
+<%= form_with(model: @item, url: "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true) do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name, value: @item.name %>
 
