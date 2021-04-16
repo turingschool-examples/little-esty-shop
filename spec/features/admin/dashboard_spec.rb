@@ -59,7 +59,7 @@ RSpec.describe "Admin Dashboard" do
     expect(page).to have_link("Invoice #{@invoice1.id}")
 
     within("#invoice-#{@invoice1.id}") do
-    expect(page).to have_content("Invoice #{@invoice1.id} - Thursday, April 15, 2021")
+    expect(page).to have_content("Invoice #{@invoice1.id} - #{@invoice1.created_at.strftime("%A, %B %d, %Y")}")
     end
   end
 end
