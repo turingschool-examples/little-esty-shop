@@ -92,7 +92,7 @@ RSpec.describe 'As a visitor' do
 
   describe 'merchant dashboard' do
     it "displays names of top 5 customers by number of succussful transactions" do
-      expect(page).to have_content("Top 5 Customers")
+      expect(page).to have_content("Top Customers")
       # expect(page).to have_content(@merchant_1.item.invoice_item.invoices.customer)
     end
   end
