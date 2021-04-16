@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Admin Invoice Show' do
   before :each do
     @merchant1 = create(:merchant)
