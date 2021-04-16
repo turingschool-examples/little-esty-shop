@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_014703) do
+ActiveRecord::Schema.define(version: 2021_04_16_015809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_014703) do
     t.bigint "item_id"
     t.integer "quantity"
     t.integer "unit_price"
-    t.integer "status", default: 0
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_014703) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.integer "status", default: 0
+    t.string "status"
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_014703) do
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enable", default: true
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_014703) do
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "invoice_id"
-    t.integer "result"
+    t.string "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "credit_card_number"
