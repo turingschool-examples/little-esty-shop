@@ -4,15 +4,13 @@ RSpec.describe 'As a visitor' do
   before(:each) do
 
     @merchant_1 = create(:merchant)
-    # require "pry"; binding.pry
+
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_1)
     @item_3 = create(:item, merchant: @merchant_1)
     @item_4 = create(:item, merchant: @merchant_1)
     @item_5 = create(:item, merchant: @merchant_1)
     @item_6 = create(:item, merchant: @merchant_1)
-
-    # require "pry"; binding.pry
 
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
@@ -46,22 +44,22 @@ RSpec.describe 'As a visitor' do
     @transaction_9 = create(:transaction)
     @invoice_2.transactions << [@transaction_6, @transaction_7, @transaction_8, @transaction_9]
 
-    @transaction_10 = FactoryBot.create(:transaction)
-    @transaction_11 = FactoryBot.create(:transaction)
-    @transaction_12 = FactoryBot.create(:transaction)
+    @transaction_10 = create(:transaction)
+    @transaction_11 = create(:transaction)
+    @transaction_12 = create(:transaction)
     @invoice_3.transactions << [@transaction_10, @transaction_11, @transaction_12]
 
-    @transaction_13 = FactoryBot.create(:transaction)
-    @transaction_14 = FactoryBot.create(:transaction)
+    @transaction_13 = create(:transaction)
+    @transaction_14 = create(:transaction)
     @invoice_4.transactions << [@transaction_13, @transaction_14]
 
-    @transaction_15 = FactoryBot.create(:transaction)
+    @transaction_15 = create(:transaction)
     @invoice_5.transactions << [@transaction_15]
 
-    @invoice_item_1 = FactoryBot.create(:invoice_item)
-    @invoice_item_2 = FactoryBot.create(:invoice_item)
+    @invoice_item_1 = create(:invoice_item)
+    @invoice_item_2 = create(:invoice_item)
 
-
+    require "pry"; binding.pry
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
 
@@ -92,8 +90,8 @@ RSpec.describe 'As a visitor' do
 
   describe 'merchant dashboard' do
     it "displays names of top 5 customers by number of succussful transactions" do
-      expect(page).to have_content("Top Customers")
-      # expect(page).to have_content(@merchant_1.item.invoice_item.invoices.customer)
+      expect(page).to have_content("Top 5 Customers")
+      # expect(page).to have_content(@merchant_1.name)
     end
   end
 end
