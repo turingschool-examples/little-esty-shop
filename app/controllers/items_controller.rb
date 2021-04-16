@@ -21,17 +21,12 @@ class ItemsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    binding.pry
-    @merchant.items.create!(item_params)
-    # item = @merchant.items.create!({
-    #   name: params[:name],
-    #   description: params[:description],
-    #   unit_price: params[:unit_price],
-    #   status: 0
-    # })
+    item = @merchant.items.create(item_params)
+
     if item.save
-      redirect_to "/merchants/#{@merchant.id}/items"
+      redirect_to "/merchant/#{@merchant.id}/items"
     else
+      flash[:error] = "Please fill in all fields. #{error_message(item.errors)}."
       redirect_to "/merchant/#{@merchant.id}/items/new"
     end
   end
