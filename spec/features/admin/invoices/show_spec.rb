@@ -13,6 +13,20 @@ RSpec.describe 'Admin Invoice Show' do
   end
 
   describe "when I visit my admin invoices show page" do
+    it 'shows me the item name, quantity, unit price, and status' do
+      visit "/admin/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item1.invoice_items.first.quantity)
+      expect(page).to have_content(@item1.invoice_items.first.status)
+      expect(page).to have_content(@item1.unit_price)
+
+      expect(page).to have_content(@item2.name)
+      expect(page).to have_content(@item2.invoice_items.first.quantity)
+      expect(page).to have_content(@item2.invoice_items.first.status)
+      expect(page).to have_content(@item2.unit_price)
+    end
+
     it 'shows me the total revenue for each invoice show page' do
       visit "/admin/invoices/#{@invoice1.id}"
       expect(page).to have_content("150800")
