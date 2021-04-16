@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant items show page' do
-  it 'all of the items attributes' do
+  it 'shows all of the items attributes' do
     merchant1 = create(:merchant)
     merchant2 = create(:merchant)
     item1 = create(:item, merchant_id: merchant1.id)
