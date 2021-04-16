@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :merchant do
     resources :dashboard, only: [:index]
     resources :invoices, only: [:index, :show]
+     patch '/invoices/:invoice_id/invoice_items/:invoice_item_id', to: 'invoice_items#update'
+
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
+
   end
 end
