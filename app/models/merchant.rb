@@ -13,7 +13,7 @@ class Merchant < ApplicationRecord
     select("merchants.name, max(unit_price) as max_unit_price").
     group(:id)
     #I need to add a limit of 5 somewhere
-
+  end
   enum status: [:disabled, :enabled]
 
   def self.disabled_merchants
