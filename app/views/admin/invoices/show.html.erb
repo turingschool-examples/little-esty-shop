@@ -1,3 +1,9 @@
+<p>Invoice ID: <%= @invoice.id %></p>
+<p>Status: <%= @invoice.status %></p>
+<p>Date of Creation: <%= @invoice.format_time %></p>
+<p>Customer First Name: <%= @customer.first_name %>
+<p> Customer Last Name: <%= @customer.last_name %>
+
 <% @invoice.items.each do |item| %>
   <p>Item name: <%= item.name %><br></p>
   <p>Item quantity: <%= item.invoice_items.first.quantity %><br></p>
