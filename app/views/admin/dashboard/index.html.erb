@@ -4,7 +4,7 @@
 <%= link_to "Admin Invoices Index", admin_invoices_path %>
 </section>
 
-<h2> Top Customers </h2>
+<h2> Top 5 Customers </h2>
 <% @top_customers.each do |customer| %>
   <p id="customer-<%= customer.id %>">
     <%= customer.first_name %>
