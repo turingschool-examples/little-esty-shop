@@ -30,67 +30,95 @@ RSpec.describe 'admin index page', type: :feature do
 
   describe 'it has an incomplete invoices section' do
     it 'lists all incomplete invoices' do
+      merchant = Merchant.create!(name: "mel")
       customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+      item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+      invoice2 = customer.invoices.create!(status: 0)
       invoice1 = customer.invoices.create!(status: 0)
-      invoice2 = customer.invoices.create!(status: 1)
-      invoice3 = customer.invoices.create!(status: 2)
-      invoice4 = customer.invoices.create!(status: 0)
+      invoice3 = customer.invoices.create!(status: 0)
+
+      invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 2)
+      invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 0)
+      invoice_item3 = InvoiceItem.create!(item: item1, invoice: invoice2, quantity: 2, unit_price: 5, status: 1)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice2, quantity: 2, unit_price: 5, status: 2)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
 
       visit '/admin'
-      
+
       within("#incomplete_invoices") do
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content(invoice1.id)
-        expect(page).to have_content(invoice4.id)
+        expect(page).to have_content(invoice2.id)
       end
     end
 
     it 'orders the invoices from oldest to newest
         and displays the date the invoice was created "Monday, July 18,2019"' do
+      merchant = Merchant.create!(name: "mel")
       customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+      item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+      invoice2 = customer.invoices.create!(status: 0)
       invoice1 = customer.invoices.create!(status: 0)
-      invoice2 = customer.invoices.create!(status: 1)
-      invoice3 = customer.invoices.create!(status: 2)
-      invoice4 = customer.invoices.create!(status: 0)
-      invoice5 = customer.invoices.create!(status: 0)
+      invoice3 = customer.invoices.create!(status: 0)
+
+      invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 2)
+      invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 0)
+      invoice_item3 = InvoiceItem.create!(item: item1, invoice: invoice2, quantity: 2, unit_price: 5, status: 1)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice2, quantity: 2, unit_price: 5, status: 2)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
 
       visit '/admin'
-      
+
       within("#incomplete_invoices") do
         expect(page).to have_content("Incomplete Invoices")
+
+        expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
         
         within("#incomplete_invoice-#{invoice1.id}") do
           expect(page).to have_content(invoice1.id)
           expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y")}") #"Monday, July 18, 2019"
         end
     
-        within("#incomplete_invoice-#{invoice5.id}") do
-          expect(page).to have_content(invoice5.id)
-          expect(page).to have_content("#{invoice5.created_at.strftime("%A, %B %d, %Y")}")
+        within("#incomplete_invoice-#{invoice2.id}") do
+          expect(page).to have_content(invoice2.id)
+          expect(page).to have_content("#{invoice2.created_at.strftime("%A, %B %d, %Y")}")
         end
       end
     end
 
     it 'each incomplete invoice is a link to that invoices show page' do
+      merchant = Merchant.create!(name: "mel")
       customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+      item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+      invoice2 = customer.invoices.create!(status: 0)
       invoice1 = customer.invoices.create!(status: 0)
-      invoice2 = customer.invoices.create!(status: 1)
-      invoice3 = customer.invoices.create!(status: 2)
-      invoice4 = customer.invoices.create!(status: 0)
-      invoice5 = customer.invoices.create!(status: 0)
+      invoice3 = customer.invoices.create!(status: 0)
+
+      invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 2)
+      invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 0)
+      invoice_item3 = InvoiceItem.create!(item: item1, invoice: invoice2, quantity: 2, unit_price: 5, status: 1)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice2, quantity: 2, unit_price: 5, status: 2)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
+      invoice_item4 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
 
       visit '/admin'
-      save_and_open_page
+
       within("#incomplete_invoice-#{invoice1.id}") do
         expect(page).to have_link("#{invoice1.id}")
         click_link("#{invoice1.id}")
         expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
       end
+
       visit '/admin'
-      within("#incomplete_invoice-#{invoice5.id}") do
-        expect(page).to have_link("#{invoice5.id}")
-        click_link("#{invoice5.id}")
-        expect(current_path).to eq("/admin/invoices/#{invoice5.id}")
+      within("#incomplete_invoice-#{invoice2.id}") do
+        expect(page).to have_link("#{invoice2.id}")
+        click_link("#{invoice2.id}")
+        expect(current_path).to eq("/admin/invoices/#{invoice2.id}")
       end
     end
   end
@@ -104,10 +132,12 @@ RSpec.describe 'admin index page', type: :feature do
     
     customer2 = Customer.create!(first_name: "Bee", last_name: "Bold")
     invoice2 = customer2.invoices.create!(status: 1)
+    invoice7 = customer2.invoices.create!(status: 1)
     transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction3 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction4 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction5 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction14 = invoice7.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     
     customer3 = Customer.create!(first_name: "Cee", last_name: "Cold")
     invoice3 = customer3.invoices.create!(status: 2)
@@ -136,6 +166,7 @@ RSpec.describe 'admin index page', type: :feature do
     expect(customer4.first_name).to appear_before(customer5.first_name)
     expect(page).to_not have_content(customer1.first_name)
   end
+
   it 'displays the number of successful transactions next to each customer' do
     customer1 = Customer.create!(first_name: "Ayy", last_name: "All")
     invoice1 = customer1.invoices.create!(status: 0)
@@ -143,10 +174,12 @@ RSpec.describe 'admin index page', type: :feature do
     
     customer2 = Customer.create!(first_name: "Bee", last_name: "Bold")
     invoice2 = customer2.invoices.create!(status: 1)
+    invoice7 = customer2.invoices.create!(status: 1)
     transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction3 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction4 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     transaction5 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+    transaction14 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
     
     customer3 = Customer.create!(first_name: "Cee", last_name: "Cold")
     invoice3 = customer3.invoices.create!(status: 2)
@@ -171,7 +204,7 @@ RSpec.describe 'admin index page', type: :feature do
     visit '/admin'
     
     within("#customer-#{customer2.id}") do
-      expect(page).to have_content(4)
+      expect(page).to have_content(5)
     end
 
     within("#customer-#{customer3.id}") do

@@ -44,7 +44,7 @@ RSpec.describe Customer do
         invoice4 = customer4.invoices.create!(status: 0)
         transaction9 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
         transaction10 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
-
+        
         expect(Customer.top_five).to eq([customer2, customer3, customer4, customer5, customer6])
       end
     end

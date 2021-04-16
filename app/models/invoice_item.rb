@@ -6,8 +6,4 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item
   belongs_to :invoice
-
-  def self.find_all_invoices_not_shipped
-    self.select(:id).where.not(status: 'shipped').distinct.pluck(:invoice_id)
-  end
 end
