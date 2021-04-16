@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
 ########## Admin routes below ############
 
-
-
+  resources :admin, only: [:index]
+  namespace :admin do
+    resources :invoices, :merchants, only: [:index]
+  end
 end
