@@ -1,0 +1,8 @@
+<h1>Edit <%=@merchant.name%></h1>
+
+<%= form_with(model: @merchant, url: "/admin/merchant/#{@merchant.id}", method: :patch, local: true) do |form| %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.submit %>
+<% end %>
