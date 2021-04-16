@@ -34,26 +34,15 @@ RSpec.describe "Merchant Invoices Index" do
   end
 
   it 'can update item status on invoice' do
-    # expect(page).to have_button('Update Item Status')
-
     within("#invoice_item-#{@invoice_item_1.id}") do
       select('packaged')
       click_on('Update Item Status')
     end
-    expect(@invoice_item_1.status).to eq("packaged")
+
     expect(current_path).to eq("/merchant/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      expect(page.find("option[selected = selected]").text).to eq('packaged')
+    end
   end
 end
-
-# Merchant Invoice Show Page: Update Item Status
-#
-# As a merchant
-# When I visit my merchant invoice show page
-# I see that each invoice item status is a select field
-# And I see that the invoice item's current status is selected
-# When I click this select field,
-# Then I can select a new status for the Item,
-# And next to the select field I see a button to "Update Item Status"
-# When I click this button
-# I am taken back to the merchant invoice show page
-# And I see that my Item's status has now been updated
