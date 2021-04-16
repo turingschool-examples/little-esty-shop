@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchants index page', type: :feature do
-  it 'displays the names of each merchant' do 
+  it 'displays the names of each merchant as a link' do 
     merchant1 = Merchant.create!(name: "Abe")
     merchant2 = Merchant.create!(name: "Bel")
     merchant3 = Merchant.create!(name: "Cat")
     
     visit '/admin/merchants'
-    save_and_open_page
+
     within "#merchant-#{merchant1.id}" do
-      expect(page).to have_content(merchant1.name)
+      expect(page).to have_link(merchant1.name)
     end
     within "#merchant-#{merchant2.id}" do
-      expect(page).to have_content(merchant2.name)
+      expect(page).to have_link(merchant2.name)
     end
     within "#merchant-#{merchant3.id}" do
-      expect(page).to have_content(merchant3.name)
+      expect(page).to have_link(merchant3.name)
     end
   end
 end
