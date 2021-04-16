@@ -15,5 +15,17 @@ RSpec.describe "As an admin" do
       expect(page).to have_content(merchant3.name)
       expect(page).to have_content(merchant4.name)
     end
+
+    it "has links to take me to a merchant's show page" do
+      merchant1 = create(:merchant)
+
+      visit '/admin/merchants'
+
+      expect(page).to have_link("Link to this merchant")
+
+      click_on("Link to this merchant")
+
+      expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+    end
   end
 end
