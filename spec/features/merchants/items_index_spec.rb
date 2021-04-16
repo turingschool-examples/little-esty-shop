@@ -47,4 +47,23 @@ RSpec.describe "Merchant item index page" do
   #   expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
   #   expect(@item_1.status).to eq("disabled")
   # end
+
+  it 'shows a link to create a new item that I can click on' do
+    expect(page).to have_link("Create New Item")
+
+    click_link "Create New Item"
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/items/new")
+  end
+
+  it 'can submit a form to create a new item' do
+    click_link "Create New Item"
+
+    fill_in "Name", with: "Broom"
+    fill_in "Description", with: "Sweep very well"
+    fill_in "Unit price", with: 34
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/items")
+  end
 end
