@@ -8,6 +8,25 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :customers
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   def self.top_five_by_successful_transaction_count
     # joins(:transactions)
     # .where(transactions: {result: 1})
