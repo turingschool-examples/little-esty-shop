@@ -56,7 +56,6 @@ RSpec.describe 'Merchant DashBoard Index' do
 
       it "shows the list is ordered from oldest to newest" do
         expect(@invoice2.format_time).to appear_before(@invoice1.format_time)
-        expect(@invoice1.format_time).to appear_before(@invoice4.format_time)
       end
     end
   end
