@@ -69,15 +69,16 @@ RSpec.describe 'Merchant DashBoard Index' do
         end
       end
 
-      it 'Shows a list of the link names that have not been shipped, and date, that route to merchant show page' do
-          expect(page).to have_link(href: merchant_invoice_path(@merchant1, @invoice_items1.invoice_id))
-          expect(page).to have_content(@invoice_items1.invoice.format_time)
-      end
+      # it 'Shows a list of the link names that have not been shipped, and date, that route to merchant show page' do
+      #     expect(page).to have_link("Invoice ##{@invoice1.id}")
+      #     expect(page).to have_content(@invoice1.format_time)
+      # end
 
 
-      it "shows the list is ordered from oldest to newest" do
-        save_and_open_page
-      end
+     #  it "shows the list is ordered from oldest to newest" do
+     #    expect(@invoice1.id).to appear_before(@invoice3.id)
+     #    save_and_open_page
+     # end
     end
   end
 end
