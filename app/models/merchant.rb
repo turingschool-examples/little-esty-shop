@@ -28,4 +28,13 @@ class Merchant < ApplicationRecord
 
 ###### invoice methods ##########
 
+########### admin #############
+
+  def self.enabled?
+    enabled
+  end
+
+  def self.disabled?
+    disabled
+  end
 end

@@ -66,4 +66,22 @@ RSpec.describe 'admin merchants index page', type: :feature do
     expect(merchant2.status).to eq("disabled")
     expect(merchant3.status).to eq("enabled")
   end
+
+  it 'has a section for enabled merchants and a section for disabled merchants' do
+    merchant1 = Merchant.create!(name: "Abe")
+    merchant2 = Merchant.create!(name: "Bel", status: :enabled)
+    merchant3 = Merchant.create!(name: "Cat", status: :disabled)
+
+    expect(page).to have_content("Enabled Merchants")
+    expect(page).to have_content("Disabled Merchants")
+
+    within("#enabled_merchants") do
+      expect(page).to have_content(merchant1.name)
+      expect(page).to have_content(merchant2.name)
+    end
+
+    within("#disabled_merchants") do
+      expect(page).to have_content(merchant3.name)
+    end
+  end
 end
