@@ -17,7 +17,8 @@ RSpec.describe Invoice, type: :model do
 
     it "::full_name" do
     end 
-
+  end
+  
   describe 'class methods' do   
 
     it '::incomplete_invoices' do
