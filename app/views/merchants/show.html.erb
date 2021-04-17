@@ -1,3 +1,11 @@
+
+<h3 id="links"; style="text-align:left;font-weight:bold;">
+    Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;">
+  <%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &nbsp;</span>
+</h3>
+
+
+
 <%= @merchant.name %>
 
 </br>
@@ -24,8 +32,12 @@
 
 <div>
   </br>
-  <%= @ship_ready %> </br>
-  </br>
+  <%= "Items Ready to Ship" %> </br>
+  <% @ship_ready.each do |item| %>
+    <p><%= item[0] %>
+    <%= link_to "#{item[1]}", "/merchants/#{@merchant.id}/invoices/#{item[1]}", method: :get %>
+    <%= item[2] %> <p>
+  <% end %>
 </div>
 
 
