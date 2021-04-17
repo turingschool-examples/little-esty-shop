@@ -8,4 +8,17 @@ class Admin::MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
   end
+
+  def update
+    merchant = Merchant.find(params[:id])
+    if params[:merchant_status]
+      merchant.update(merchant_params)
+      redirect_to admin_merchants_path
+    end
+  end
 end
+
+private
+  def merchant_params
+    params.permit(:name, :merchant_status)
+  end

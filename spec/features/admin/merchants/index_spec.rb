@@ -92,15 +92,11 @@ RSpec.describe 'when I visit the admin merchant index page' do
     end
 
     xit 'updates merchant status when button pushed' do
-      visit '/admin/merchants'
+    visit '/admin/merchants'
+      expect(@merchant_1.merchant_status).to eq('enabled')
 
-      within"#merchant-#{@merchant_1.id}" do
-        expect(@merchant_1.merchant_status).to eq('enabled')
-
-        click_on "Disable"
-        expect(current_path).to eq('/admin/merchants')
-        expect(@merchant_1.merchant_status).to eq('enabled')
-      end
+      click_on "Disable"
+      expect(@merchant_1.merchant_status).to eq('enabled')
     end
   end
 end
