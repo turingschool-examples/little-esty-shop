@@ -32,4 +32,43 @@ RSpec.describe "Admin Merchant index page" do
       expect(page).to have_button("Disable")
     end
   end
+
+  it 'can click on enable and it updates item status to enable' do
+    within("#disabled-merchant-#{@parlour.id}") do
+      click_button "Enable"
+    end
+
+    expect(current_path).to eq("/admin/merchant")
+
+    within("#enabled-merchant-#{@parlour.id}") do
+      expect(page).to have_button("Disable")
+    end
+  end
+
+  it 'can click on disable and it updates item status to disabled' do
+    within("#enabled-merchant-#{@tattoo.id}") do
+      click_button "Disable"
+    end
+
+    expect(current_path).to eq("/admin/merchant")
+
+    within("#disabled-merchant-#{@tattoo.id}") do
+      expect(page).to have_button("Enable")
+    end
+  end
+
+  it 'shows section for top 5 merchants by total revenue' do
+    expect(page).to have_content("Top Merchants")
+    #update to include revenue and names, need to add
+    #invoice_items and transactions to the before each
+    #want to use factory bot for the sake of time
+  end
+
+# 
+# Notes on Revenue Calculation:
+#
+# Only invoices with at least one successful transaction should count towards revenue
+# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+
 end
