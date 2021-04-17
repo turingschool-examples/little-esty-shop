@@ -9,6 +9,15 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def create
+    merchant = Merchant.new(merchant_params)
+    merchant.save
+    redirect_to admin_merchants_path
+  end
+
+  def new
+  end
+
   def update
     merchant = Merchant.find(params[:id])
     if params[:status]

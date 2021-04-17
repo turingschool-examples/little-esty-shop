@@ -28,27 +28,9 @@ Rails.application.routes.draw do
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  get '/admin', to: 'admin/dashboard#index', as: 'admin'
-  get '/admin/merchants', to: 'admin/merchants#index', as: 'admin_merchants'
-  get '/admin/invoices', to: 'admin/invoices#index', as: 'admin_invoices'
-
   namespace :admin do
     get '/', to: "dashboard#index"
-    resources :merchants, only: [:index, :show, :update]
+    resources :merchants, only: [:index, :new, :create, :show, :update]
     resources :invoices, only: [:index]
   end
 end
