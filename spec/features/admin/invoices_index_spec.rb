@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe "Merchanct Invoices Index" do
   before(:each) do
     @merchant = create(:merchant)
