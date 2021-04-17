@@ -47,11 +47,11 @@ RSpec.describe 'when I visit the admin merchant index page' do
     @transaction_15 = FactoryBot.create(:transaction, result: 1)
     @invoice_5.transactions << [@transaction_15]
 
-    @merchant_1 = create(:merchant, status: 'Enabled')
-    @merchant_2 = create(:merchant, status: 'Disabled')
-    @merchant_3 = create(:merchant, status: 'Enabled')
-    @merchant_4 = create(:merchant, status: 'Enabled')
-    @merchant_5 = create(:merchant, status: 'Disabled')
+    @merchant_1 = create(:merchant, merchant_status: 'Enabled')
+    @merchant_2 = create(:merchant, merchant_status: 'Disabled')
+    @merchant_3 = create(:merchant, merchant_status: 'Enabled')
+    @merchant_4 = create(:merchant, merchant_status: 'Enabled')
+    @merchant_5 = create(:merchant, merchant_status: 'Disabled')
   end
 
   it 'shows the name of each merchant in the system' do
