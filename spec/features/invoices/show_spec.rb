@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Invoices Index" do
+RSpec.describe "Merchant Invoices Show" do
   before(:each) do
     @merchant = Merchant.create!(name: 'Ice Cream Parlour')
     @item_1 = @merchant.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
