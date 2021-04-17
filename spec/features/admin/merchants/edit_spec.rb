@@ -10,7 +10,7 @@ RSpec.describe 'admin merchant edit page', type: :feature do
     expect(find('form')).to have_button('Update Merchant')
   end
   
-  it 'updates and redirects to admin merchant show page' do
+  it 'updates and redirects to admin merchant show page, displays flash' do
     merchant1 = Merchant.create!(name: "Abe")
   
     visit "/admin/merchants/#{merchant1.id}/edit"
