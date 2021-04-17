@@ -72,6 +72,8 @@ RSpec.describe 'admin merchants index page', type: :feature do
     merchant2 = Merchant.create!(name: "Bel", status: :enabled)
     merchant3 = Merchant.create!(name: "Cat", status: :disabled)
 
+    visit '/admin/merchants'
+    
     expect(page).to have_content("Enabled Merchants")
     expect(page).to have_content("Disabled Merchants")
 
