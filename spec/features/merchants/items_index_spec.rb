@@ -76,6 +76,12 @@ RSpec.describe "Merchant item index page" do
     expect(page).to have_content("Top Items")
     #update to include revenue and names, need to add
     #invoice_items and transactions to the before each
-    #want to use factory bot for the sake of time 
+    #want to use factory bot for the sake of time
+  end
+
+  it 'shows the top sell day for the top five items' do
+    #update to include revenue and names, need to add
+    #invoice_items and transactions to the before each
+    #want to use factory bot for the sake of time
   end
 end
