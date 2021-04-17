@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Admin Merchant Show page" do
   before(:each) do
-    @parlour = Merchant.create!(name: 'Ice Cream Parlour')
-    @tattoo = Merchant.create!(name: 'Tattoo Shop')
+    @parlour = Merchant.create!(name: 'Ice Cream Parlour', status: 0)
+    @tattoo = Merchant.create!(name: 'Tattoo Shop', status: 0)
     visit "/admin/merchant/#{@parlour.id}"
   end
 

@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Admin Dashboard" do
   before(:each) do
-    @parlour = Merchant.create!(name: 'Ice Cream Parlour')
-    @tattoo = Merchant.create!(name: 'Tattoo Shop')
+    @parlour = Merchant.create!(name: 'Ice Cream Parlour',status: 0)
+    @tattoo = Merchant.create!(name: 'Tattoo Shop', status: 0)
     @scoop = @parlour.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
     @cone = @parlour.items.create!(name: 'Ice Cream Cone', description: 'holds ice cream', unit_price: 3)
     @ink = @tattoo.items.create!(name: 'Dark Matter', description: 'black ink for tattoos', unit_price: 6)

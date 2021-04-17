@@ -1,6 +1,6 @@
 <h1>My Items</h1>
 <%= link_to "Create New Item", "/merchant/#{@merchant.id}/items/new", method: :get, params: { merchant_id: @merchant.id} %>
-<h3>Disabled Items</h3>
+<h3><u>Disabled Items</u></h3>
 <ul>
   <% @items.disabled_items.each do |item| %>
     <li class="items" id="disabled-item-<%= item.id %>">
@@ -10,7 +10,7 @@
   <% end %>
 </ul><br>
 
-<h3>Enabled Items</h3>
+<h3><u>Enabled Items</u></h3>
 <ul>
   <% @items.enabled_items.each do |item| %>
     <li class="items" id="enabled-item-<%= item.id %>">
@@ -20,11 +20,12 @@
   <% end %>
 </ul>
 
-<h3>Top Items</h3>
+<h3><u>Top Items</u></h3>
 <ol>
   <% @items.most_popular_items.each do |item| %>
     <li id="top-item-<%= item.id %>">
-      <%= link_to "#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue) %>
+      <%= link_to "#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue) %><br>
+      <p>Top sale date for <%= item.name %> was <%= item.invoice_items.best_item_sale_day.strftime("%A, %B %d, %Y") %></p>
     </li>
   <% end %>
 </ol>
