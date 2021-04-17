@@ -1,6 +1,15 @@
 <h1><%= @merchant.name %>'s Dashboard </h1>
-<h3>Top 5 Customers </h3>
 <section>
 <%= link_to "Merchant Items Index", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
+</section>
+<section id="ready_to_ship">
+  <h3>Top 5 Customers</h3>
+  <h3>Items Ready Ship</h3>
+<% @merchant.invoices.each do |invoice| %>
+  <section id="invoice-<% invoice.id %>">
+    <h3>Invoice #<%= link_to "#{invoice.id}", merchant_invoice_path(@merchant.id, invoice.id) %></h3>
+  </section>
+<% end %>
+
 </section>
