@@ -16,9 +16,11 @@ RSpec.describe Invoice, type: :model do
     end
 
     it "::full_name" do
-    end
+    end 
   end
-  describe 'class methods' do
+  
+  describe 'class methods' do   
+
 
     it '::incomplete_invoices' do
       @invoice_1 = FactoryBot.create(:invoice)
