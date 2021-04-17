@@ -47,11 +47,11 @@ RSpec.describe 'when I visit the admin merchant index page' do
     @transaction_15 = FactoryBot.create(:transaction, result: 1)
     @invoice_5.transactions << [@transaction_15]
 
-    @merchant_1 = create(:merchant, status: 0)
-    @merchant_2 = create(:merchant)
-    @merchant_3 = create(:merchant)
-    @merchant_4 = create(:merchant)
-    @merchant_5 = create(:merchant)
+    @merchant_1 = create(:merchant, status: 'Enabled')
+    @merchant_2 = create(:merchant, status: 'Disabled')
+    @merchant_3 = create(:merchant, status: 'Enabled')
+    @merchant_4 = create(:merchant, status: 'Enabled')
+    @merchant_5 = create(:merchant, status: 'Disabled')
   end
 
   it 'shows the name of each merchant in the system' do
@@ -72,32 +72,27 @@ RSpec.describe 'when I visit the admin merchant index page' do
   end
 
   describe "Admin Merchant Enable/Disable" do
-    it 'has a button next to each merchant to disable it' do
+    it 'has a button next to each merchant to disable/enable it it' do
       visit '/admin/merchants'
 
       within"#enabled-merchants" do
+        expect(page).to have_content("Enabled Merchants")
         expect(page).to have_content(@merchant_1.name)
-        expect(page).to have_content(@merchant_3.name)
-        expect(page).to have_content(@merchant_5.name)
-        button_to "Disable"
-        expect(current_path).to eq ('/admin/merchants')
-    end
+        expect(page).to_not have_content(@merchant_2.name)
+        expect(page).to_not have_content(@merchant_5.name)
 
-    it 'has a button next to each merchant to enable it' do
-      visit '/admin/merchants'
+        click_on "Disable"
+        expect(current_path).to eq('/admin/merchants')
+        expect(@merchant_1.status).to eq('disabled')
+
       within"#disabled-merchants"
+        expect(page).to have_content("Disabled Merchants")
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_3.name)
         expect(page).to have_content(@merchant_5.name)
-        button_to "Enable"
+        expect(page).to have_content("Enable")
         expect(current_path).to eq ('/admin/merchants')
+      end
     end
-#
-# As an admin,
-# When I visit the admin merchants index
-# Then next to each merchant name I see a button to disable or enable that merchant.
-# When I click this button
-# Then I am redirected back to the admin merchants index
-# And I see that the merchant's status has changed
-end
+  end
 end
