@@ -15,7 +15,8 @@ class Invoice < ApplicationRecord
     created_at.strftime("%A, %B %d, %Y")
   end
 
-  def full_name
-    customer.first_name + " " + customer.last_name
-  end 
+  # def full_name
+  #   require "pry";binding.pry
+  #   customer.first_name + " " + customer.last_name
+  # end
 end

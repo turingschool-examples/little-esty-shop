@@ -16,4 +16,8 @@ class Customer < ApplicationRecord
     .order(successful_transaction_count: :desc)
     .limit(5)
   end
+
+  def full_name
+    first_name + " " + last_name
+  end
 end
