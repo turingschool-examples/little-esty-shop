@@ -24,9 +24,3 @@ RSpec.describe 'admin invoices index' do
   end
 end
 
-# As an admin,
-# When I visit the admin Invoices index ("/admin/invoices")
-# Then I see a list of all Invoice ids in the system
-# Each id links to the admin invoice show page
-
-
