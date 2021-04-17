@@ -1,8 +1,9 @@
 <h1><%= @merchant.name %>'s Items </h1>
 
 <% @items.each do |item| %>
-  <section id="item-<%= item.id %>">
-    <h3><%= item.name %></h3>
+  <section id="item-<% item.id %>">
+
+    <h3><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %></h3>
     <%# <%= link_to "Edit #{item.name}", "/merchants/#{merchant.id}/#{item.id}", method: :patch %>
     <%# <%= link_to "Delete #{vet.name}", "/merchants/#{merchant.id}/#{item.id}", method: :delete %>
   </section>

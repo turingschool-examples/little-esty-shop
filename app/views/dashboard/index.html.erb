@@ -1,5 +1,5 @@
 <h1><%= @merchant.name %>'s Dashboard </h1>
 <section>
-<%= link_to "Merchant Items Index", merchant_items_path %>
-<%= link_to "Merchant Invoices Index", merchant_invoices_path %>
+<%= link_to "Merchant Items Index", "/merchants/#{@merchant.id}/items" %>
+<%= link_to "Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
 </section>
