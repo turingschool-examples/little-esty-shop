@@ -59,7 +59,6 @@ RSpec.describe 'As a visitor' do
     @invoice_item_1 = create(:invoice_item)
     @invoice_item_2 = create(:invoice_item)
 
-    # require "pry"; binding.pry
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
 
