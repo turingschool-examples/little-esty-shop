@@ -11,8 +11,15 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:status) }
   end
 
-  describe 'class methods' do
-    
+  describe 'instance methods' do
+    it "::formatted_date" do
+    end
+
+    it "::full_name" do
+    end 
+
+  describe 'class methods' do   
+
     it '::incomplete_invoices' do
       @invoice_1 = FactoryBot.create(:invoice)
       @invoice_2 = FactoryBot.create(:invoice)
