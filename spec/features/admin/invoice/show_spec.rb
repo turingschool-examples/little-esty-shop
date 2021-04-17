@@ -54,10 +54,13 @@ RSpec.describe 'when I visit the admin merchant index page' do
     @merchant_5 = create(:disabled_merchant)
   end
 
-  it 'displays invoice number customer and status' do
-    visit '/admin/  '
-    expect(page).to have_content(@merchant_1.name)
-
+ it 'can see invoice id, status, created_at date, customer first and last name' do
+  visit "/admin/invoices/#{@invoice_1.id}"
+    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content(@invoice_1.status)
+    expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+    expect(page).to have_content(@customer_1.first_name)
+    expect(page).to have_content(@customer_1.last_name)
   end
 
 end
