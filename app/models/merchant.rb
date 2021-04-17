@@ -7,6 +7,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  enum status: [ :enabled, :disabled ]
+
   def self.top_five_by_successful_transaction_count
     joins(:transactions, :customers)
     .where(transactions: {result: "success"})
