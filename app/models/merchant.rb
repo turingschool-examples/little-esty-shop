@@ -3,6 +3,8 @@ class Merchant < ApplicationRecord
 
   has_many :items, dependent: :destroy
 
+  enum status: [ 'Enabled', 'Disabled' ]
+
 ####### dashboard methods #########
 
 
