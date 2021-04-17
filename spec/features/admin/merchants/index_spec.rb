@@ -39,21 +39,26 @@ RSpec.describe 'admin merchants index page', type: :feature do
 
   it 'has a button to disable the merchant if it is enabled, vise versa' do
     merchant1 = Merchant.create!(name: "Abe")
-    merchant2 = Merchant.create!(name: "Bel")
+    merchant2 = Merchant.create!(name: "Bel", status: 0)
     merchant3 = Merchant.create!(name: "Cat", status: 1)
     
     visit '/admin/merchants'
     
     within "#merchant-#{merchant1.id}" do
       expect(page).to have_button("Disable")
+      click_button "Disable"
+      expect(current_path).to eq('/admin/merchants')
+      expect(merchant1.status).to eq("Disabled")
     end
-
+    
     within "#merchant-#{merchant2.id}" do
       expect(page).to have_button("Disable")
+      expect(current_path).to eq('/admin/merchants')
     end
     
     within "#merchant-#{merchant3.id}" do
       expect(page).to have_button("Enable")
+      expect(current_path).to eq('/admin/merchants')
     end
   end
 end
