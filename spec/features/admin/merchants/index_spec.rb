@@ -97,7 +97,8 @@ RSpec.describe 'when I visit the admin merchant index page' do
       expect(@merchant_1.status).to eq('enabled')
 
       click_on "Disable"
-      expect(@merchant_1.status).to eq('enabled')
+
+      expect(@merchant_1.status).to eq('disabled')
     end
   end
 end
