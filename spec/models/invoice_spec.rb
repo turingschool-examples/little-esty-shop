@@ -11,6 +11,11 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:status) }
   end
 
-  # before(:each) do
-  # end
+  describe 'instance methods' do
+    it "::formatted_date" do
+    end
+
+    it "::full_name" do
+    end
+  end
 end
