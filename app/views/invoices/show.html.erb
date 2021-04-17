@@ -8,8 +8,15 @@
 
 <h2>Items on this Invoice:</h2>
 <% @invoice_items.each do |invoice_item| %>
-  <h3>Item Name: <%= invoice_item.item.name %></h3>
-  <p>Quantity: <%= invoice_item.quantity %></p>
-  <p>Unit Price: <%= invoice_item.unit_price %></p>
-  <p>Status: <%= invoice_item.status %></p>
+  <div id="invoice_item-<%= invoice_item.id %>">
+    <h3>Item Name: <%= invoice_item.item.name %></h3>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Unit Price: <%= invoice_item.unit_price %></p>
+
+    <%= form_with url: "/merchant/#{@merchant.id}/invoices/#{@invoice.id}/invoice_items/#{invoice_item.id}", method: :patch do |form| %>
+      <%= form.label :status, "Status: " %>
+      <%= form.select :status, options_for_select(["pending", "packaged", "shipped"], selected: "#{invoice_item.status}") %>
+      <%= form.submit "Update Item Status" %>
+    <% end %>
+  </div>
 <% end %>

@@ -7,6 +7,7 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name
 
+  enum status: [:disabled, :enabled]
 
   def most_popular_items
     joins(:items).
@@ -14,7 +15,7 @@ class Merchant < ApplicationRecord
     group(:id)
     #I need to add a limit of 5 somewhere
   end
-  enum status: [:disabled, :enabled]
+
 
   def self.disabled_merchants
     where(status: "disabled")

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchanct Invoices Index" do
+RSpec.describe "Merchant Invoices Show" do
   before(:each) do
     @merchant = Merchant.create!(name: 'Ice Cream Parlour')
     @item_1 = @merchant.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
@@ -31,5 +31,18 @@ RSpec.describe "Merchanct Invoices Index" do
 
   it 'can see total revenue from all items on invoice' do
     expect(page).to have_content(@invoice_1.invoice_items.total_revenue)
+  end
+
+  it 'can update item status on invoice' do
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      select('packaged')
+      click_on('Update Item Status')
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      expect(page.find("option[selected = selected]").text).to eq('packaged')
+    end
   end
 end
