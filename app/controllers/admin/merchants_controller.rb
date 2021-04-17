@@ -1,6 +1,6 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    @enabled_merchants = Merchant.enabled
+    @enabled_merchants = Merchant.enabled #TODO: better here or in view?
     @disabled_merchants = Merchant.disabled
   end
 
@@ -20,6 +20,10 @@ class Admin::MerchantsController < ApplicationController
     else
       redirect_to "/admin/merchants/#{merchant.id}", notice: "Merchant Successfully Updated"
     end
+  end
+
+  def new
+    
   end
 
   private
