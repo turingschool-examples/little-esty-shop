@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :merchant
+    resources :invoices, only: [:index, :show]
     get '', to: 'dashboard#index', as: '/'
   end
 
