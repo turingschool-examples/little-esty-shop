@@ -23,7 +23,16 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
-    
+  end
+
+  def create
+    merchant = Merchant.new(merchant_params)
+    if merchant.save
+      redirect_to '/admin/merchants', notice: "Merchant Successfully Created"
+    else
+      redirect_to "/admin/merchants/new"
+      flash[:alert] = "Error: #{error_message(merchant.errors)}"
+    end
   end
 
   private
@@ -31,7 +40,7 @@ class Admin::MerchantsController < ApplicationController
     if params[:status].present?
       params.permit(:status)
     else
-      params.require(:merchant).permit(:name)
+      params.require(:merchant).permit(:name, :status)
     end
   end
 end
