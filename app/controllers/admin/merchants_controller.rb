@@ -9,6 +9,9 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def new
+  end
+
   def update
     merchant = Merchant.find(params[:id])
     if params[:status]
