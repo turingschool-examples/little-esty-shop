@@ -19,3 +19,12 @@
     </li>
   <% end %>
 </ul>
+
+<h3>Top Items</h3>
+<ol>
+  <% @items.most_popular_items.each do |item| %>
+    <li id="top-item-<%= item.id %>">
+      <%= link_to "#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue) %>
+    </li>
+  <% end %>
+</ol>

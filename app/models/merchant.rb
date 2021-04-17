@@ -17,6 +17,9 @@ class Merchant < ApplicationRecord
   end 
 
 
+  enum status: [:disabled, :enabled]
+
+
   def self.disabled_merchants
     where(status: "disabled")
   end
