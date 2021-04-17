@@ -3,3 +3,19 @@
 <% @merchants.each do |merchant|%>
   <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%><br>
 <%end%>
+
+<section id="enabled-merchants"><h2> Enabled Merchants </h2>
+<% @enabled_merchants.each do |merchant|%>
+<p id="merchant-<%=merchant.id %>"><%= merchant.name %>
+<%= button_to "Disable", value: 'disabled' %>
+<%end%>
+</p>
+</section>
+
+<section id="disabled-merchants"><h2> Disabled Merchants </h2>
+<% @disabled_merchants.each do |merchant|%>
+  <p><%= merchant.name %>
+    <%= button_to "Enable", value: 'enabled' %>
+  </p>
+<%end%>
+</section>
