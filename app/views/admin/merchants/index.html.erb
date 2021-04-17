@@ -6,9 +6,9 @@
       <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
       <%= merchant.status %>
       <% if merchant.status == "Disabled" %>
-        <%= button_to "Enable", "/admin/merchants/#{merchant.id}", params: {status: "Enabled"}, method: :patch %>
+        <%= button_to "Enable", "/admin/merchants/#{merchant.id}", params: {status: :enabled}, method: :patch %>
       <% else %>
-        <%= button_to "Disable", "/admin/merchants/#{merchant.id}", params: {status: "Disabled"}, method: :patch %>
+        <%= button_to "Disable", "/admin/merchants/#{merchant.id}", params: {status: :disabled}, method: :patch %>
       <% end %>
     </section>
   <% end %>
