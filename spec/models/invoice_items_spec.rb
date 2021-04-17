@@ -16,19 +16,29 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe 'class methods' do
+    before(:each) do
+      @merchant = Merchant.create!(name: 'Ice Cream Parlour')
+      @item_1 = @merchant.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
+      @item_2 = @merchant.items.create!(name: 'Ice Cream Cones', description: 'holds the ice cream', unit_price: 10)
+      @item_3 = @merchant.items.create!(name: 'Sprinkles', description: 'makes ice cream pretty', unit_price: 3)
+      @customer = Customer.create!(first_name: 'Stuart', last_name: 'Little')
+      @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer.id}")
+      @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 13, status: 0)
+      @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 10, status: 0)
+      @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 3, status: 0)
+    end
+
     describe '::total_revenue' do
       it 'can calculate total revenue for all invoice_items' do
-        @merchant = Merchant.create!(name: 'Ice Cream Parlour')
-        @item_1 = @merchant.items.create!(name: 'Ice Cream Scoop', description: 'scoops ice cream', unit_price: 13)
-        @item_2 = @merchant.items.create!(name: 'Ice Cream Cones', description: 'holds the ice cream', unit_price: 10)
-        @item_3 = @merchant.items.create!(name: 'Sprinkles', description: 'makes ice cream pretty', unit_price: 3)
-        @customer = Customer.create!(first_name: 'Stuart', last_name: 'Little')
-        @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer.id}")
-        @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 13, status: 0)
-        @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 10, status: 0)
-        @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: 3, status: 0)
-
         expect(InvoiceItem.total_revenue).to eq("78.00")
+      end
+    end
+
+    describe '::best_item_sale_day' do
+      it 'displays the best sale day of the items' do
+        #update to include revenue and names, need to add
+        #invoice_items and transactions to the before each
+        #want to use factory bot for the sake of time
       end
     end
   end
