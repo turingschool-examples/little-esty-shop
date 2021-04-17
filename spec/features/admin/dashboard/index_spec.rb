@@ -6,6 +6,7 @@ RSpec.describe 'when I visit the admin dashboard' do
     expect(page).to have_content("Admin Dashboard")
   end
 
+
   it 'shows a link to the admin merchants index' do
     visit '/admin'
     expect(page).to have_link('Admin Merchants Index', href: admin_merchants_path)
@@ -94,6 +95,16 @@ RSpec.describe 'when I visit the admin dashboard' do
         expect(page).to have_content(@customer_5.first_name)
         expect(page).to have_content(@customer_5.last_name)
         expect(page).to have_content(1)
+      end
+    end
+
+    it "shows incomplete invoices" do
+      visit '/admin'
+      expect(page).to have_content("Incomplete Invoices")
+      expect(page).to have_link("Invoice #{@invoice_1.id}")
+
+      within("#invoice-#{@invoice_1.id}") do
+       expect(page).to have_content("Invoice #{@invoice_1.id} - #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
       end
     end
   end
