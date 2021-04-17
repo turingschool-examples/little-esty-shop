@@ -53,12 +53,16 @@ RSpec.describe 'admin merchants index page', type: :feature do
     
     within "#merchant-#{merchant2.id}" do
       expect(page).to have_button("Disable")
+      click_button "Disable"
       expect(current_path).to eq('/admin/merchants')
+      expect(merchant1.status).to eq("Disabled")
     end
     
     within "#merchant-#{merchant3.id}" do
       expect(page).to have_button("Enable")
+      click_button "Disable"
       expect(current_path).to eq('/admin/merchants')
+      expect(merchant1.status).to eq("Disabled")
     end
   end
 end
