@@ -15,4 +15,23 @@ class Merchant < ApplicationRecord
   def self.enabled_merchants
     where(status: "enabled")
   end
+
+  def self.top_merchants_revenue
+    select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue")
+    .joins(:invoice_items, :transactions)
+    .where(transactions: {result: "success"})
+    .group(:id)
+    .order(total_revenue: :desc)
+    .limit(5)
+  end
+  # 
+  # def top_five_customers
+  #    invoices
+  #    joins(:customers, :transactions)
+  #   .select("cutomser.*, count(transactions.id) as total_transactions")
+  #   .group("customers.id")
+  #   .where(transactions: {result: :success})
+  #   .order("total_transactions desc, customers.first_name")
+  #   .limit(5)
+  # end
 end
