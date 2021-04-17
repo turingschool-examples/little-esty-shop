@@ -30,10 +30,18 @@ RSpec.describe "Admin Invoices Show Page" do
   it 'can see total revenue from all items on invoice' do
     expect(page).to have_content(@invoice.invoice_items.total_revenue)
   end
-end
 
-# Admin Invoice Show Page: Total Revenue
-#
-# As an admin
-# When I visit an admin invoice show page
-# Then I see the total revenue that will be generated from this invoice
+  it 'can update item status on invoice' do
+    within("#invoice-#{@invoice.id}") do
+      select('completed')
+      click_on('Update Invoice Status')
+    end
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice.id}")
+
+    within("#invoice-#{@invoice.id}") do
+      expect(page.find("option[selected = selected]").text).to eq('completed')
+      expect(page.find("option[selected = selected]").text).not_to eq('in progress')
+    end
+  end
+end
