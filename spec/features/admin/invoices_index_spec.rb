@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchanct Invoices Index" do
+RSpec.describe "Admin Invoices Index Page" do
   before(:each) do
     @merchant = create(:merchant)
     @item_1 = create(:item, merchant: @merchant)
