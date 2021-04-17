@@ -2,6 +2,14 @@ FactoryBot.define do
   status = [ 0, 1 ]
   factory :merchant do
     name { Faker::Company.name }
-    merchant_status { status.sample }
+    status { status.sample }
+
+    factory :enabled_merchant do
+      status { "enabled" }
+
+    factory :disabled_merchant do
+      status { "disabled" }
+      end
+    end
   end
 end

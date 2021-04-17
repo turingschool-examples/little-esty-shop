@@ -47,11 +47,11 @@ RSpec.describe 'when I visit the admin merchant index page' do
     @transaction_15 = FactoryBot.create(:transaction, result: 1)
     @invoice_5.transactions << [@transaction_15]
 
-    @merchant_1 = create(:merchant, merchant_status: 'enabled')
-    @merchant_2 = create(:merchant, merchant_status: 'disabled')
-    @merchant_3 = create(:merchant, merchant_status: 'enabled')
-    @merchant_4 = create(:merchant, merchant_status: 'enabled')
-    @merchant_5 = create(:merchant, merchant_status: 'disabled')
+    @merchant_1 = create(:enabled_merchant)
+    @merchant_2 = create(:disabled_merchant)
+    @merchant_3 = create(:enabled_merchant)
+    @merchant_4 = create(:enabled_merchant)
+    @merchant_5 = create(:disabled_merchant)
   end
 
   it 'shows the name of each merchant in the system' do
@@ -91,12 +91,13 @@ RSpec.describe 'when I visit the admin merchant index page' do
       end
     end
 
+    # need to find a way to test this but not mapping to id in p tag
     xit 'updates merchant status when button pushed' do
     visit '/admin/merchants'
-      expect(@merchant_1.merchant_status).to eq('enabled')
+      expect(@merchant_1.status).to eq('enabled')
 
       click_on "Disable"
-      expect(@merchant_1.merchant_status).to eq('enabled')
+      expect(@merchant_1.status).to eq('enabled')
     end
   end
 end
