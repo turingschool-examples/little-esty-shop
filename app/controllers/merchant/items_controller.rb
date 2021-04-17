@@ -17,17 +17,26 @@ class Merchant::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     item.update(item_params)
-    if item.save
-      flash[:success] = "You updated the item!"
-      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+
+    if params.include?(:enabled)
+        if item.enabled == true
+          item.update(enabled: false)
+          redirect_to "/merchants/#{item.merchant_id}/items"
+        else item.enabled == false
+          item.update(enabled: true)
+          redirect_to "/merchants/#{item.merchant_id}/items"
+        end
     else
-      render :edit
+       item.save
+        flash[:success] = "You updated the item!"
+        redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
     end
   end
+
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price)
+      params.fetch(:item, {}).permit(:name, :description, :unit_price, :enabled)
   end
 end

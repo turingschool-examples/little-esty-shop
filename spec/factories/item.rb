@@ -5,6 +5,8 @@ FactoryBot.define do
      end
      description { Faker::GreekPhilosophers.quote }
      unit_price { Faker::Number.between(from: 3000, to: 100000) }
-     association :merchant, factory: :merchant
+     enabled { Faker::Boolean.boolean }
+
+     merchant
    end
  end
