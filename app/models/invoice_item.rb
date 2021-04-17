@@ -13,7 +13,7 @@ class InvoiceItem < ApplicationRecord
   enum status: [:pending, :packaged, :shipped]
 
   def self.total_revenue
-    sprintf("%.2f", sum("quantity * unit_price"))
+    sum("quantity * unit_price")
   end
 
   def self.best_item_sale_day
