@@ -9,13 +9,15 @@ RSpec.describe 'admin invoices index' do
     @invoice3 = Invoice.create!(status: 0, customer_id: "#{@customer2.id}")
   end
 
-  it 'shows a list of all Invoice ids in the system'
+  it 'shows a list of all Invoice ids in the system' do
+    visit '/admin/invoices'
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice2.id)
     expect(page).to have_content(@invoice3.id)
   end
 
   it 'id is a link to the invoice show page' do
+    visit '/admin/invoices'
     expect(page).to have_link("#{@invoice1.id}")
     expect(page).to have_link("#{@invoice2.id}")
     expect(page).to have_link("#{@invoice3.id}")
