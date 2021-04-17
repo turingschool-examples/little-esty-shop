@@ -8,5 +8,8 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
+  def self.ready_to_ship
+    joins(:invoice_items).where(invoice_items: {status: "ready to ship"})
+  end
 
 end
