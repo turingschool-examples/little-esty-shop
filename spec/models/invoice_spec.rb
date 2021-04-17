@@ -21,6 +21,7 @@ RSpec.describe Invoice, type: :model do
   
   describe 'class methods' do   
 
+
     it '::incomplete_invoices' do
       @invoice_1 = FactoryBot.create(:invoice)
       @invoice_2 = FactoryBot.create(:invoice)

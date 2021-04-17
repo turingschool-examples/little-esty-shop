@@ -4,7 +4,7 @@
 
 <% @invoices.each do |invoice| %>
   <section id="invoice-<% invoice.id %>">
-    <h3>Invoice #<%= link_to "#{invoice.id}", merchant_invoice_path(@merchant.id, invoice.id) %></h3>
+    <h3><%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant.id, invoice.id) %></h3>
     <%# <%= link_to "Edit #{item.name}", "/merchants/#{merchant.id}/#{item.id}", method: :patch %>
     <%# <%= link_to "Delete #{vet.name}", "/merchants/#{merchant.id}/#{item.id}", method: :delete %>
   </section>
