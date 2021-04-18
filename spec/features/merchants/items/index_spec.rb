@@ -47,4 +47,22 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_button('Disable')
     end
   end
+
+  it 'has a form to create a new item' do
+    visit "/merchants/#{@merchant1.id}/items"
+
+    expect(page).to have_link("Create a New Item")
+
+    click_on "Create a New Item"
+
+    fill_in "Name", with: "Bob's Burgers"
+    fill_in "Description", with: "Cheap Chinese Knock-off"
+    fill_in "Unit price", with: "1023"
+
+    click_on "Create Item"
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+
+    expect(page).to have_content("Bob's Burgers")
+  end
 end
