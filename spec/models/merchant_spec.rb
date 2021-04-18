@@ -73,6 +73,7 @@ RSpec.describe Merchant, type: :model do
     end
 
 
+
     describe 'instance methods' do
       before :each do
         @merchant1 = create(:merchant)
@@ -86,9 +87,13 @@ RSpec.describe Merchant, type: :model do
         @invoice3 = create(:invoice, customer_id: @customer1.id, status: 2, created_at: "2018-08-01 09:54:09 UTC")
         @invoice4 = create(:invoice, customer_id: @customer1.id, status: 0, created_at: "2020-07-01 09:54:09 UTC")
 
-        @invoice_items1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, status: 1)
-        @invoice_items2 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice2.id, status: 1)
-        @invoice_items4 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice4.id, status: 0)
+        @invoice_items1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, status: 1, quantity: 5, unit_price: 100)
+        @invoice_items2 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice2.id, status: 1, quantity: 7, unit_price: 100)
+        @invoice_items4 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice4.id, status: 0, quantity: 2, unit_price: 100)
+
+        @transactions = create_list(:transaction, 1, invoice_id: @invoice_item1.invoice.id, result: 0)
+        @transactions2 = create_list(:transaction, 2, invoice_id: @invoice_item2.invoice.id, result: 0)
+        @transactions3 = create_list(:transaction, 3, invoice_id: @invoice_item4.invoice.id, result: 0)
       end
 
       describe '#invoice_items_ready_to_ship' do
@@ -101,6 +106,12 @@ RSpec.describe Merchant, type: :model do
         it 'returns items from oldest to newest' do
           expect(@merchant1.invoice_items_ready_to_ship.first.invoice.format_time).to eq(@invoice2.format_time)
           expect(@merchant1.invoice_items_ready_to_ship.last.invoice.format_time).to eq(@invoice1.format_time)
+        end
+      end
+
+      describe '#highest_revenue_date' do
+        it 'finds the date of highest revenue' do
+          expect(@merchant1.best_day).to eq(@invoice2.format_time)
         end
       end
     end
