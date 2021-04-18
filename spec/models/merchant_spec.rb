@@ -85,12 +85,5 @@ RSpec.describe Merchant, type: :model do
   describe 'class methods' do
     it '::top_five_by_successful_transaction_count' do
     end
-
-    describe '::top_five_by_merchant_revenue' do
-      it 'returns top five merchants by total revenue' do
-        require 'pry';binding.pry
-        expect(Merchant.top_five_by_merchant_revenue).to eq([@merchant_5, @merchant_4, @merchant_2, @merchant_3, @merchant_1])
-      end
-    end
   end
 end
