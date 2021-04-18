@@ -134,4 +134,60 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.top_five_customers).to eq(expected_result)
     end
   end
+
+  describe 'ship_ready' do
+    it 'returns info of all orders that a merchant has not shiped in order of date made' do
+      merchant = Merchant.create(name: 'Bob Cella')
+
+      item_a = merchant.items.create!(name: "thing", description: "item of a thing", unit_price: 100)
+      item_b = merchant.items.create!(name: "stuff", description: "bla bla bla", unit_price: 50)
+      item_c = merchant.items.create!(name: "doo-hicky", description: "stuffy stuff", unit_price: 200)
+
+      customer_a = Customer.create!(first_name: "albert", last_name: "anderston")
+      customer_b = Customer.create!(first_name: "billy", last_name: "baxter")
+      customer_c = Customer.create!(first_name: "charlot", last_name: "carlston")
+
+      invoice_1a = customer_a.invoices.create!(status: 0)
+      invoice_2a = customer_a.invoices.create!(status: 1)
+      invoice_3a = customer_a.invoices.create!(status: 2)
+
+      invoice_1b = customer_b.invoices.create!(status: 0)
+      invoice_2b = customer_b.invoices.create!(status: 1)
+      invoice_3b = customer_b.invoices.create!(status: 2)
+
+      invoice_1c = customer_c.invoices.create!(status: 0)
+      invoice_2c = customer_c.invoices.create!(status: 1)
+      invoice_3c = customer_c.invoices.create!(status: 2)
+
+      invoice_item_1a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_1a.id, item_id: item_a.id)
+      invoice_item_2a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2a.id, item_id: item_b.id)
+      invoice_item_3a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_3a.id, item_id: item_c.id)
+
+      invoice_item_1b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1b.id, item_id: item_a.id)
+      invoice_item_2b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_2b.id, item_id: item_b.id)
+      invoice_item_3b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_3b.id, item_id: item_c.id)
+
+      invoice_item_1c = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1c.id, item_id: item_a.id)
+      invoice_item_2c = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2c.id, item_id: item_b.id)
+      invoice_item_3c = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_3c.id, item_id: item_c.id)
+
+
+      expect(merchant.ship_ready[0][0]).to eq(item_c.name)
+      expect(merchant.ship_ready[0][1]).to eq(invoice_3a.id)
+      expect(merchant.ship_ready[0][2]).to eq(invoice_3a.created_at)
+
+      expect(merchant.ship_ready[1][0]).to eq(item_a.name)
+      expect(merchant.ship_ready[1][1]).to eq(invoice_1b.id)
+      expect(merchant.ship_ready[1][2]).to eq(invoice_1b.created_at)
+
+      expect(merchant.ship_ready[2][0]).to eq(item_c.name)
+      expect(merchant.ship_ready[2][1]).to eq(invoice_3b.id)
+      expect(merchant.ship_ready[2][2]).to eq(invoice_3b.created_at)
+
+      expect(merchant.ship_ready[3][0]).to eq(item_a.name)
+      expect(merchant.ship_ready[3][1]).to eq(invoice_1c.id)
+      expect(merchant.ship_ready[3][2]).to eq(invoice_1c.created_at)
+    end
+  end
+
 end

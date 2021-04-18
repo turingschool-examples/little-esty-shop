@@ -10,6 +10,36 @@ RSpec.describe 'the merchant show page', type: :feature do
     expect(page).to have_content(merchant.name)
   end
 
+  describe ' there are sight links' do
+    it 'has a link to merchants dashboard' do
+      visit "/merchants/#{@jerde.id}/items"
+      within ("#links") do
+        expect(page).to have_link("Dashboard")
+        click_link("Dashboard")
+        expect(current_path).to eq("/merchants/#{@jerde.id}/dashboard")
+      end
+    end
+
+    it 'has a link to merchant items' do
+      visit "/merchants/#{@jerde.id}/items"
+      within ("#links") do
+        expect(page).to have_link("My Items")
+        click_link("My Items")
+        expect(current_path).to eq("/merchants/#{@jerde.id}/items")
+      end
+    end
+
+    it 'has a link to merchant invoices' do
+      visit "/merchants/#{@jerde.id}/items"
+      within ("#links") do
+        expect(page).to have_link("My Invoices")
+        click_link("My Invoices")
+        expect(current_path).to eq("/merchants/#{@jerde.id}/invoices")
+      end
+    end
+
+  end
+
   describe "the merchant's top 5 customers" do
     it "shows top 5 customers" do
 
@@ -294,27 +324,44 @@ RSpec.describe 'the merchant show page', type: :feature do
       expect(page).to have_no_content("#{item_d.name}")
     end
 
-    it " items listed in order" do
-      # visit "/shelters"
-      #
-      # oldest = find("#shelter-#{@shelter_1.id}")
-      # mid = find("#shelter-#{@shelter_2.id}")
-      # newest = find("#shelter-#{@shelter_3.id}")
-      #
-      # expect(newest).to appear_before(mid)
-      # expect(mid).to appear_before(oldest)
-      #
-      # within "#shelter-#{@shelter_1.id}" do
-      #   expect(page).to have_content("Created at: #{@shelter_1.created_at}")
-      # end
-      #
-      # within "#shelter-#{@shelter_2.id}" do
-      #   expect(page).to have_content("Created at: #{@shelter_2.created_at}")
-      # end
-      #
-      # within "#shelter-#{@shelter_3.id}" do
-      #   expect(page).to have_content("Created at: #{@shelter_3.created_at}")
-      # end
+    it " items are listed in order of invoice creation" do
+
+      merchant = Merchant.create(name: 'Bob Cella')
+
+      item_a = merchant.items.create!(name: "thing", description: "item of a thing", unit_price: 100)
+      item_b = merchant.items.create!(name: "stuff", description: "bla bla bla", unit_price: 50)
+      item_c = merchant.items.create!(name: "doo-hicky", description: "stuffy stuff", unit_price: 200)
+      item_d = merchant.items.create!(name: "cool toy", description: "zappow", unit_price: 200)
+
+      customer_a = Customer.create!(first_name: "albert", last_name: "anderston")
+      customer_b = Customer.create!(first_name: "billy", last_name: "baxter")
+      customer_c = Customer.create!(first_name: "charlot", last_name: "carlston")
+      customer_d = Customer.create!(first_name: "dany", last_name: "devino")
+
+      invoice_1a = customer_a.invoices.create!(status: 0)
+      invoice_2a = customer_a.invoices.create!(status: 2)
+
+      invoice_1b = customer_b.invoices.create!(status: 0)
+      invoice_2b = customer_b.invoices.create!(status: 2)
+
+      invoice_item_1a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1a.id, item_id: item_a.id)
+      invoice_item_3a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2a.id, item_id: item_c.id)
+
+      invoice_item_1b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1b.id, item_id: item_a.id)
+      invoice_item_2b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2b.id, item_id: item_b.id)
+
+
+      visit "merchants/#{merchant.id}/dashboard"
+
+      first = find("#item-#{invoice_1a.id}-#{item_a.name}")
+      second = find("#item-#{invoice_2a.id}-#{item_c.name}")
+
+      third = find("#item-#{invoice_1b.id}-#{item_a.name}")
+      fourth = find("#item-#{invoice_2b.id}-#{item_b.name}")
+
+      expect(first).to appear_before(second)
+      expect(second).to appear_before(third)
+      expect(third).to appear_before(fourth)
     end
 
     it ' has invoice id number as a link' do
@@ -331,8 +378,41 @@ RSpec.describe 'the merchant show page', type: :feature do
 
       expect(page).to have_current_path("/merchants/#{merchant.id}/invoices/#{invoice_1a.id}")
     end
+
+    it ' has date of invoices' do
+
+      merchant = Merchant.create(name: 'Bob Cella')
+
+      item_a = merchant.items.create!(name: "thing", description: "item of a thing", unit_price: 100)
+      item_b = merchant.items.create!(name: "stuff", description: "bla bla bla", unit_price: 50)
+      item_c = merchant.items.create!(name: "doo-hicky", description: "stuffy stuff", unit_price: 200)
+      item_d = merchant.items.create!(name: "cool toy", description: "zappow", unit_price: 200)
+
+      customer_a = Customer.create!(first_name: "albert", last_name: "anderston")
+      customer_b = Customer.create!(first_name: "billy", last_name: "baxter")
+
+      invoice_1a = customer_a.invoices.create!(status: 0)
+      invoice_2a = customer_a.invoices.create!(status: 2)
+
+      invoice_1b = customer_b.invoices.create!(status: 0)
+      invoice_2b = customer_b.invoices.create!(status: 2)
+
+      invoice_item_1a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1a.id, item_id: item_a.id)
+      invoice_item_3a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2a.id, item_id: item_c.id)
+
+      invoice_item_1b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1b.id, item_id: item_a.id)
+      invoice_item_2b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2b.id, item_id: item_b.id)
+
+
+      visit "/merchants/#{merchant.id}/dashboard"
+
+      expect(page).to have_content(invoice_1a.created_at.strftime("%A, %B %d, %Y"))
+      expect(page).to have_content(invoice_2a.created_at.strftime("%A, %B %d, %Y"))
+      expect(page).to have_content(invoice_1b.created_at.strftime("%A, %B %d, %Y"))
+      expect(page).to have_content(invoice_2b.created_at.strftime("%A, %B %d, %Y"))
+
+
+    end
+
   end
-
-
-
 end

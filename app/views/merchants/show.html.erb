@@ -17,11 +17,12 @@
   </br>
   <%= "top five customers" %> </br>
   <% @top_five.each do |key, value| %>
+    <p>
     <%= key[1] %>
     <%= " " %>
     <%= key[2] %>
     <%= "'s sucessful transations:  " %>
-    <%= value %>
+    <%= value %> </p>
     </br>
   <% end %>
 </div>
@@ -30,15 +31,19 @@
 </br>
 </br>
 
-<div>
+  <div>
   </br>
   <%= "Items Ready to Ship" %> </br>
   <% @ship_ready.each do |item| %>
-    <p><%= item[0] %>
+    <p id= <%="item-#{item[1]}-#{item[0]}"%> >
+    <%= item[0] %>
     <%= link_to "#{item[1]}", "/merchants/#{@merchant.id}/invoices/#{item[1]}", method: :get %>
-    <%= item[2] %> <p>
+    <%= item[2].strftime("%A, %B %d, %Y") %>
+    </p>
   <% end %>
-</div>
+  </div>
+
+
 
 
 </br>
