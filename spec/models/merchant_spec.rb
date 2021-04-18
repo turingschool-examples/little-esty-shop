@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
+  describe 'relationships' do
+    it { should have_many :items }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:customers).through(:invoices) }
+    it { should have_many(:transactions).through(:invoices) }
+  end
+  
   before :each do
     @merchant1 = create(:merchant)
 
@@ -16,14 +24,6 @@ RSpec.describe Merchant, type: :model do
     @invoice_items1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, status: 1)
     @invoice_items2 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice2.id, status: 1)
     @invoice_items4 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice4.id, status: 0)
-  end
-
-  describe 'relationships' do
-    it { should have_many :items }
-    it { should have_many(:invoice_items).through(:items) }
-    it { should have_many(:invoices).through(:invoice_items) }
-    it { should have_many(:customers).through(:invoices) }
-    it { should have_many(:transactions).through(:invoices) }
   end
 
   describe 'class methods' do
