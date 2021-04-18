@@ -19,4 +19,8 @@ class Invoice < ApplicationRecord
   #   require "pry";binding.pry
   #   customer.first_name + " " + customer.last_name
   # end
+
+  def self.distinct_invoices
+    distinct
+  end
 end

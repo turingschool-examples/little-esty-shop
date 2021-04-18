@@ -17,10 +17,10 @@ RSpec.describe Item, type: :model do
     @invoice_3 = create(:invoice, customer_id: @customer_2.id)
     @invoice_4 = create(:invoice, customer_id: @customer_2.id)
 
-    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: :packaged, quantity: 1, unit_price: 30)
-    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: :pending, quantity: 5, unit_price: 20)
-    @invoice_item_3 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, status: :pending, quantity: 10, unit_price: 10)
-    @invoice_item_4 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_2.id, status: :packaged, quantity: 20, unit_price: 5)
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: "packaged", quantity: 1, unit_price: 30)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: "pending", quantity: 5, unit_price: 20)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, status: "pending", quantity: 10, unit_price: 10)
+    @invoice_item_4 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_2.id, status: "packaged", quantity: 20, unit_price: 5)
 
     @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
     @transaction_2 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
@@ -44,8 +44,7 @@ RSpec.describe Item, type: :model do
   describe 'class methods' do
     describe '::ready_to_ship' do
       it 'returns the items that are ready to ship' do
-
-        expect(Item.ready_to_ship).to eq([@item_1, @item_3])
+        expect(@merchant_1.items.ready_to_ship).to eq([@item_1])
       end
     end
   end

@@ -16,12 +16,10 @@ RSpec.describe Invoice, type: :model do
     end
 
     it "::full_name" do
-    end 
+    end
   end
-  
-  describe 'class methods' do   
 
-
+  describe 'class methods' do
     it '::incomplete_invoices' do
       @invoice_1 = FactoryBot.create(:invoice)
       @invoice_2 = FactoryBot.create(:invoice)
@@ -31,6 +29,17 @@ RSpec.describe Invoice, type: :model do
       @invoice_6 = FactoryBot.create(:invoice)
 
       expect(Invoice.incomplete_invoices.map(&:status).uniq).to match_array(["in progress", "cancelled"])
+    end
+
+    it '::distinct_invoices' do
+      @invoice_1 = FactoryBot.create(:invoice)
+      @invoice_2 = FactoryBot.create(:invoice)
+      @invoice_3 = FactoryBot.create(:invoice)
+      @invoice_4 = FactoryBot.create(:invoice)
+      @invoice_5 = FactoryBot.create(:invoice)
+      @invoice_6 = FactoryBot.create(:invoice)
+
+      expected = [@invoice_1, @invoice_2, @invoice_3, @invoice_4, @invoice_5, @invoice_1]
     end
   end
 end
