@@ -24,3 +24,11 @@
   </p>
   <%end%>
 </section>
+
+
+
+<h2>Top 5 Merchants by Total Revenue</h2>
+<%  @top_five_merchants.each do |merchant| %>
+  <%= link_to "#{merchant.name}", "/admin/merchant/#{merchant.id}" %> generated: <%= number_to_currency(merchant.total_rev) %> in total revenue!
+<%end%>
+
