@@ -1,4 +1,4 @@
-<h2>Invoice #<%= @invoice.id %></h2>
+<h1>Invoice #<%= @invoice.id %></h1>
 
 <div id="invoice-<%= @invoice.id %>">
   <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |form| %>
