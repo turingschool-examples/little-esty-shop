@@ -11,4 +11,8 @@ class InvoiceItem < ApplicationRecord
   def self.ready_to_ship
     where(status: "packaged")
   end
+
+  def item_name
+    item.name
+  end 
 end
