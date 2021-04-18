@@ -1,3 +1,7 @@
+<h2>Merchants Index Page</h2>
+<%= link_to "Create New Merchant", new_admin_merchant_path, method: :get %>
+
+
 <section id="enabled_merchants">
   <h4>Enabled Merchants</h4>
     <% @merchants.enable.each do |merchant| %>
