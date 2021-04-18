@@ -16,7 +16,6 @@ class Merchant < ApplicationRecord
     .select("customers.*, count(transactions.id) as successful_transaction_count")
     .order(successful_transaction_count: :desc)
     .limit(5)
-
-    # Merchant.joins(:transactions, :customers).where(transactions: {result: "success"}).group("customer.id").select("customers.*, count(transactions.id) as successful_transaction_count").order(successful_transaction_count: :desc).limit(5)
   end
+    # Merchant.joins(:transactions, :customers).where(transactions: {result: "success"}).group("customer.id").select("customers.*, count(transactions.id) as successful_transaction_count").order(successful_transaction_count: :desc).limit(5)
 end
