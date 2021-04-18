@@ -20,7 +20,7 @@ RSpec.describe 'when I visit the admin invoices show page' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content('in progress')
-    select('completed', from: :status)
+    select('completed', from: 'status')
     click_button('Update Invoice Status')
     expect(page). to have_content('completed')
   end
