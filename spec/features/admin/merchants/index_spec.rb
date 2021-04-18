@@ -92,5 +92,16 @@ RSpec.describe "As an admin" do
         expect(@merchant1.name).to appear_before(@merchant5.name)
       end
     end
+
+
+    it "shows label and the date with the most revenue for top 5 merchant." do      
+      within("#top_five_merchants-#{@merchant1.id}") do
+        expect(page).to have_content("Top selling date for #{@merchant1.name} was #{@merchant1.best_day}")
+      end
+
+      within("#top_five_merchants-#{@merchant2.id}") do
+        expect(page).to have_content("Top selling date for #{@merchant2.name} was #{@merchant2.best_day}")
+      end
+    end
   end
 end
