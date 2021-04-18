@@ -1,0 +1,33 @@
+<%= @merchant.name %>
+
+</br>
+</br>
+
+
+<div>
+  </br>
+  </br>
+  <%= "top five customers" %> </br>
+  <% @top_five.each do |key, value| %>
+    <%= key[1] %>
+    <%= " " %>
+    <%= key[2] %>
+    <%= "'s sucessful transations:  " %>
+    <%= value %>
+    </br>
+  <% end %>
+</div>
+
+
+</br>
+</br>
+
+<div>
+  </br>
+  <%= @ship_ready %> </br>
+  </br>
+</div>
+
+
+</br>
+</br>
