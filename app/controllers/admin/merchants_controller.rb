@@ -1,24 +1,29 @@
 class Admin::MerchantsController < ApplicationController
+  before_action(:set_merchant, only: [:show, :edit, :update])
+
+  def set_merchant
+    @merchant = Merchant.find(params[:id])
+  end
+
   def index
     @enabled_merchants = Merchant.enabled #TODO: better here or in view?
     @disabled_merchants = Merchant.disabled
   end
 
   def show
-    @merchant = Merchant.find(params[:id])
+    @merchant
   end
 
   def edit
-    @merchant = Merchant.find(params[:id])
+    @merchant
   end
 
   def update
-    merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
+    @merchant.update(merchant_params)
     if params[:status].present?
       redirect_to "/admin/merchants", notice: "Merchant Successfully Updated"
     else
-      redirect_to "/admin/merchants/#{merchant.id}", notice: "Merchant Successfully Updated"
+      redirect_to "/admin/merchants/#{@merchant.id}", notice: "Merchant Successfully Updated"
     end
   end
 
