@@ -25,4 +25,15 @@ class InvoiceItem < ApplicationRecord
     last.
     created_at
   end
+
+  def self.items_not_shipped
+    joins(:item, :invoice).
+    select('invoices.created_at', 'items.name', 'invoices.id').
+    order('invoices.created_at').
+    where.not(status: 2)
+    #should status be pending or packaged(not 2) or just packaged(1)?
+    # joins(:item, :invoice).select('items.name', 'invoices.id').where(status: 1)
+    #
+    #Need feature test for this. Delete old method from Item model.
+  end
 end

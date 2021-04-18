@@ -17,10 +17,6 @@ class Item < ApplicationRecord
     group(:id)
   end
 
-  def self.ordered_items_no_ship
-    joins(:invoice_items).where('status != ?', 2)
-  end
-
   def self.disabled_items
     where(status: "disabled")
   end

@@ -30,12 +30,6 @@ RSpec.describe Item, type: :model do
       InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 10, unit_price: 20, status: 2)
     end
 
-    describe '::ordered_items_no_ship' do
-      it "finds items that have been ordered but not shipped" do
-        expect(Item.ordered_items_no_ship).to eq([@item_1])
-      end
-    end
-
     describe '::disabled_items' do
       it 'finds rows where items are disabled' do
         expect(Item.disabled_items).to eq([@item_1, @item_4])
