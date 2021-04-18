@@ -1,5 +1,5 @@
-<h2>Edit Admin Merchant Info </h2>
+<h1>Create Merchant</h1>
 <section id='form'>
-  <%= render partial: 'form', locals: {merchant: @merchant,
+  <%= render partial: 'form', locals: {merchant: Merchant.new,
                                         button_text: 'Submit'} %>
 </section>
