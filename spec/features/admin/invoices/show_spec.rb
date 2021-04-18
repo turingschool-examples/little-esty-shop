@@ -24,4 +24,12 @@ RSpec.describe 'when I visit the admin invoices show page' do
     click_button('Update Invoice Status')
     expect(page). to have_content('completed')
   end
+
+  it 'shows total revenue for invoice' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page). to have_content("Total Revenue: #{@invoice_1.total_rev}")
+  end
+
+# Then I see the total revenue that will be generated from this invoice
 end
