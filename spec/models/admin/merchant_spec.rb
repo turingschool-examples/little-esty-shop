@@ -8,12 +8,12 @@ RSpec.describe Merchant, type: :model do
   @merchant_4 = create(:merchant, name: "M4")
   @merchant_5 = create(:merchant, name: "M5")
 
-  @customer_1 = FactoryBot.create(:customer)
-  @customer_2 = FactoryBot.create(:customer)
-  @customer_3 = FactoryBot.create(:customer)
-  @customer_4 = FactoryBot.create(:customer)
-  @customer_5 = FactoryBot.create(:customer)
-  @customer_6 = FactoryBot.create(:customer)
+  @invoice_1 = FactoryBot.create(:invoice)
+  @invoice_2 = FactoryBot.create(:invoice)
+  @invoice_3 = FactoryBot.create(:invoice)
+  @invoice_4 = FactoryBot.create(:invoice)
+  @invoice_5 = FactoryBot.create(:invoice)
+  @invoice_6 = FactoryBot.create(:invoice)
 
   @item_1 = create(:item, merchant: @merchant_1)
   @item_2 = create(:item, merchant: @merchant_2)
@@ -21,12 +21,18 @@ RSpec.describe Merchant, type: :model do
   @item_4 = create(:item, merchant: @merchant_4)
   @item_5 = create(:item, merchant: @merchant_5)
 
-  @invoice_1 = FactoryBot.create(:invoice)
-  @invoice_2 = FactoryBot.create(:invoice)
-  @invoice_3 = FactoryBot.create(:invoice)
-  @invoice_4 = FactoryBot.create(:invoice)
-  @invoice_5 = FactoryBot.create(:invoice)
-  @invoice_6 = FactoryBot.create(:invoice)
+  @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: "packaged", quantity: 1, unit_price: 30)
+  @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: "pending", quantity: 100, unit_price: 3)
+  @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_3.id, status: "pending", quantity: 100, unit_price: 2)
+  @invoice_item_4 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id, status: "packaged", quantity: 100, unit_price: 4)
+  @invoice_item_5 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: "packaged", quantity: 100, unit_price: 5)
+
+  @customer_1 = FactoryBot.create(:customer)
+  @customer_2 = FactoryBot.create(:customer)
+  @customer_3 = FactoryBot.create(:customer)
+  @customer_4 = FactoryBot.create(:customer)
+  @customer_5 = FactoryBot.create(:customer)
+  @customer_6 = FactoryBot.create(:customer)
 
   @customer_1.invoices << [@invoice_1]
   @customer_2.invoices << [@invoice_2]
@@ -35,11 +41,53 @@ RSpec.describe Merchant, type: :model do
   @customer_5.invoices << [@invoice_5]
   @customer_6.invoices << [@invoice_6]
 
-  @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: "packaged", quantity: 1, unit_price: 30)
-  @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_2.id, status: "pending", quantity: 5, unit_price: 20)
-  @invoice_item_3 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, status: "pending", quantity: 10, unit_price: 10)
-  @invoice_item_4 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_2.id, status: "packaged", quantity: 20, unit_price: 5)
-  @invoice_item_5 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_3.id, status: "packaged", quantity: 40, unit_price: 5)
-  @invoice_item_6 = create(:invoice_item, item_id: @item_4.id, invoice_id: @invoice_4.id, status: "packaged", quantity: 60, unit_price: 5)
-  @invoice_item_7 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_5.id, status: "packaged", quantity: 80, unit_price: 5)
-  @invoice_item_8 = create(:invoice_item, item_id: @item_5.id, invoice_id: @invoice_6.id, status: "packaged", quantity: 100, unit_price: 5)
+  @transaction_1 = FactoryBot.create(:transaction, result: 1)
+  @transaction_2 = FactoryBot.create(:transaction, result: 1)
+  @transaction_3 = FactoryBot.create(:transaction, result: 1)
+  @transaction_4 = FactoryBot.create(:transaction, result: 1)
+  @transaction_5 = FactoryBot.create(:transaction, result: 1)
+  @invoice_1.transactions << [@transaction_1, @transaction_2, @transaction_3, @transaction_4, @transaction_5]
+
+  @transaction_6 = FactoryBot.create(:transaction, result: 1)
+  @transaction_7 = FactoryBot.create(:transaction, result: 1)
+  @transaction_8 = FactoryBot.create(:transaction, result: 1)
+  @transaction_9 = FactoryBot.create(:transaction, result: 1)
+  @invoice_2.transactions << [@transaction_6, @transaction_7, @transaction_8, @transaction_9]
+
+  @transaction_10 = FactoryBot.create(:transaction, result: 1)
+  @transaction_11 = FactoryBot.create(:transaction, result: 1)
+  @transaction_12 = FactoryBot.create(:transaction, result: 1)
+  @invoice_3.transactions << [@transaction_10, @transaction_11, @transaction_12]
+
+  @transaction_13 = FactoryBot.create(:transaction, result: 1)
+  @transaction_14 = FactoryBot.create(:transaction, result: 1)
+  @invoice_4.transactions << [@transaction_13, @transaction_14]
+
+  @transaction_15 = FactoryBot.create(:transaction, result: 1)
+  @invoice_5.transactions << [@transaction_15]
+  end
+
+  describe 'relationships' do
+    it { should have_many(:items) }
+    it { should have_many(:invoice_items).through :items }
+    it { should have_many(:invoices).through :invoice_items }
+    it { should have_many(:customers).through :invoices }
+    it { should have_many(:transactions).through :invoices }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
+
+  describe 'class methods' do
+    it '::top_five_by_successful_transaction_count' do
+    end
+
+    describe '::top_five_by_merchant_revenue' do
+      it 'returns top five merchants by total revenue' do
+        require 'pry';binding.pry
+        expect(Merchant.top_five_by_merchant_revenue).to eq([@merchant_5, @merchant_4, @merchant_2, @merchant_3, @merchant_1])
+      end
+    end
+  end
+end
