@@ -5,11 +5,10 @@
 </section>
 <section id="ready_to_ship">
   <h3>Top 5 Customers</h3>
-  <h3>Items Ready Ship</h3>
-<% @merchant.invoices.each do |invoice| %>
-  <section id="invoice-<% invoice.id %>">
-    <h3><%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant.id, invoice.id) %></h3>
-  </section>
-<% end %>
+  <h3>Items Ready To Ship</h3>
+<% @invoice_items.ready_to_ship.each do |invoice_item| %>
+    <h3><%= invoice_item.item.name %>
+      <%= link_to "Invoice ##{invoice_item.invoice.id}", merchant_invoice_path(@merchant.id, invoice_item.invoice.id) %></h3>
+  <% end %>
 
-</section>
+  </section>

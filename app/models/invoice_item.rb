@@ -7,4 +7,8 @@ class InvoiceItem < ApplicationRecord
   has_one :merchant, through: :item
 
   enum status: [ 'pending', 'packaged', 'shipped' ]
+
+  def self.ready_to_ship
+    where(status: "packaged")
+  end
 end
