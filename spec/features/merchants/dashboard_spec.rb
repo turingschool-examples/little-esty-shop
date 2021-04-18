@@ -2,15 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
   before(:each) do
-
     @merchant_1 = create(:merchant)
 
     @item_1 = create(:item, merchant: @merchant_1)
-    @item_2 = create(:item, merchant: @merchant_1)
-    @item_3 = create(:item, merchant: @merchant_1)
-    @item_4 = create(:item, merchant: @merchant_1)
-    @item_5 = create(:item, merchant: @merchant_1)
-    @item_6 = create(:item, merchant: @merchant_1)
 
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
@@ -19,45 +13,114 @@ RSpec.describe 'As a visitor' do
     @customer_5 = create(:customer)
     @customer_6 = create(:customer)
 
-    @invoice_1 = create(:invoice)
-    @invoice_2 = create(:invoice)
-    @invoice_3 = create(:invoice)
-    @invoice_4 = create(:invoice)
-    @invoice_5 = create(:invoice)
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+    @invoice_2 = create(:invoice, customer_id: @customer_2.id)
+    @invoice_3 = create(:invoice, customer_id: @customer_3.id)
+    @invoice_4 = create(:invoice, customer_id: @customer_4.id)
+    @invoice_5 = create(:invoice, customer_id: @customer_5.id)
+    @invoice_6 = create(:invoice, customer_id: @customer_6.id)
 
-    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, status: 1)
-    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, status: 1)
-    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3, status: 2)
-    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_4, status: 1)
-    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_5, status: 0)
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_2.id)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_3.id)
+    @invoice_item_4 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_6.id)
 
-    @transaction_1 = create(:transaction)
-    @transaction_2 = create(:transaction)
-    @transaction_3 = create(:transaction)
-    @transaction_4 = create(:transaction)
-    @transaction_5 = create(:transaction)
-    @invoice_1.transactions << [@transaction_1, @transaction_2, @transaction_3, @transaction_4, @transaction_5]
+    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id, result: 0)
+    @transaction_2 = create(:transaction, invoice_id: @invoice_1.id, result: 0)
+    @transaction_3 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_4 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_5 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_6 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_7 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_8 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_9 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
+    @transaction_10 = create(:transaction, invoice_id: @invoice_1.id, result: 1)
 
-    @transaction_6 = create(:transaction)
-    @transaction_7 = create(:transaction)
-    @transaction_8 = create(:transaction)
-    @transaction_9 = create(:transaction)
-    @invoice_2.transactions << [@transaction_6, @transaction_7, @transaction_8, @transaction_9]
+    @transaction_11 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_12 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_13 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_14 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_15 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_16 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_17 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_18 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
+    @transaction_19 = create(:transaction, invoice_id: @invoice_2.id, result: 1)
 
-    @transaction_10 = create(:transaction)
-    @transaction_11 = create(:transaction)
-    @transaction_12 = create(:transaction)
-    @invoice_3.transactions << [@transaction_10, @transaction_11, @transaction_12]
+    @transaction_20 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_21 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_22 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_23 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_24 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_25 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_26 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
+    @transaction_27 = create(:transaction, invoice_id: @invoice_3.id, result: 1)
 
-    @transaction_13 = create(:transaction)
-    @transaction_14 = create(:transaction)
-    @invoice_4.transactions << [@transaction_13, @transaction_14]
+    @transaction_28 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
+    @transaction_29 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
+    @transaction_30 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
+    @transaction_31 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
+    @transaction_32 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
+    @transaction_33 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
 
-    @transaction_15 = create(:transaction)
-    @invoice_5.transactions << [@transaction_15]
+    @transaction_34 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
+    @transaction_35 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
+    @transaction_36 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
+    @transaction_37 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
+    @transaction_38 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
 
-    @invoice_item_1 = create(:invoice_item)
-    @invoice_item_2 = create(:invoice_item)
+
+    @merchant_2 = create(:merchant)
+
+    @item_2 = create(:item, merchant: @merchant_2)
+    @item_3 = create(:item, merchant: @merchant_2)
+    @item_4 = create(:item, merchant: @merchant_2)
+    @item_5 = create(:item, merchant: @merchant_2)
+    @item_6 = create(:item, merchant: @merchant_2)
+    @item_7 = create(:item, merchant: @merchant_2)
+
+    @customer_7 = create(:customer)
+    @customer_8 = create(:customer)
+    @customer_9 = create(:customer)
+    @customer_10 = create(:customer)
+    @customer_11 = create(:customer)
+    @customer_12 = create(:customer)
+
+    @invoice_7 = create(:invoice)
+    @invoice_8 = create(:invoice)
+    @invoice_9 = create(:invoice)
+    @invoice_10 = create(:invoice)
+    @invoice_11 = create(:invoice)
+
+    @invoice_item_5 = create(:invoice_item, item: @item_2, invoice: @invoice_7, status: 1)
+    @invoice_item_6 = create(:invoice_item, item: @item_3, invoice: @invoice_7, status: 1)
+    @invoice_item_7 = create(:invoice_item, item: @item_4, invoice: @invoice_8, status: 2)
+    @invoice_item_8 = create(:invoice_item, item: @item_5, invoice: @invoice_9, status: 1)
+    @invoice_item_9 = create(:invoice_item, item: @item_6, invoice: @invoice_10, status: 0)
+
+    @transaction_39 = create(:transaction)
+    @transaction_40 = create(:transaction)
+    @transaction_41 = create(:transaction)
+    @transaction_42 = create(:transaction)
+    @transaction_43 = create(:transaction)
+    @invoice_7.transactions << [@transaction_39, @transaction_40, @transaction_41, @transaction_42, @transaction_43]
+
+    @transaction_44 = create(:transaction)
+    @transaction_45 = create(:transaction)
+    @transaction_46 = create(:transaction)
+    @transaction_47 = create(:transaction)
+    @invoice_8.transactions << [@transaction_44, @transaction_45, @transaction_46, @transaction_47]
+
+    @transaction_48 = create(:transaction)
+    @transaction_49 = create(:transaction)
+    @transaction_50 = create(:transaction)
+    @invoice_9.transactions << [@transaction_48, @transaction_49, @transaction_50]
+
+    @transaction_51 = create(:transaction)
+    @transaction_52 = create(:transaction)
+    @invoice_10.transactions << [@transaction_51, @transaction_52]
+
+    @transaction_53 = create(:transaction)
+    @invoice_11.transactions << [@transaction_53]
 
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
@@ -88,19 +151,25 @@ RSpec.describe 'As a visitor' do
   end
 
   describe 'merchant dashboard' do
-    it "displays names of top 5 customers by number of succussful transactions" do
-      expect(page).to have_content("Top 5 Customers")
-      # expect(page).to have_content(@merchant_1.name)
+    it "displays names of top 5 customers by number of successful transactions" do
+      within "#top_five" do
+        expect(page).to have_content("Top 5 Customers")
+        expect(page).to have_content(@customer_2.full_name)
+        expect(page).to have_content(@customer_1.full_name)
+        expect(page).to have_content(@customer_3.full_name)
+        expect(page).to_not have_content(@customer_4.full_name)
+      end
     end
-  end
 
-  describe 'merchant dashboard' do
     it "displays items and their invoices that are ready to ship" do
-      expect(page).to have_content("Items Ready To Ship")
-      expect(page).to have_content(@invoice_1.id)
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to have_content(@item_4.name)
+      within "#ready_to_ship" do
+        visit "/merchants/#{@merchant_2.id}/dashboard"
+        expect(page).to have_content("Items Ready To Ship")
+        expect(page).to have_content(@invoice_7.id)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_3.name)
+        expect(page).to_not have_content(@item_4.name)
+      end
     end
   end
 end
