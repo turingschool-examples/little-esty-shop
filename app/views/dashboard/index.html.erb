@@ -3,14 +3,12 @@
 
 <p><%= @merchant.name %></p>
 
-<section>
-  <h3>Items Ready to Ship</h3>
-  <% @items.ordered_items_no_ship.each do |item| %>
-    <p id="item-<%= item.id %>">
-      <%= item.name %>
-    </p>
+<h3>Items Ready to Ship</h3>
+  <section class="inv_items_not_shipped">
+  <% @invoice_items.items_not_shipped.each do |inv_item| %>
+    <p><%= inv_item.name %> <%= link_to "#{inv_item.id}", "/merchant/#{@merchant.id}/invoices/#{inv_item.id}" %> <%= inv_item.created_at.strftime("%A, %B %d, %Y") %></p>
+  </section>
   <% end %>
-</section>
 
 <section>
   <h3>Top 5 Customers</h3>
