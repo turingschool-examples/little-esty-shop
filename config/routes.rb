@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # delete '/merchants/:id', to: 'merchants#destroy'
 
 
-
+ 
 
 
 
