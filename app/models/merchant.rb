@@ -30,6 +30,5 @@ class Merchant < ApplicationRecord
 
 ########### admin ############
   def self.top_five_by_revenue
-    binding.pry
   end
 end

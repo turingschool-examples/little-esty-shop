@@ -44,6 +44,5 @@ RSpec.describe 'admin index page', type: :feature do
         expect(page).to have_content(invoice4.id)
       end
     end
-    # it 'each incomplete invoice is a link to that invoices show page'
   end
 end
