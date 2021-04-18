@@ -17,5 +17,13 @@ class Merchant < ApplicationRecord
     .order(successful_transaction_count: :desc)
     .limit(5)
   end
-    # Merchant.joins(:transactions, :customers).where(transactions: {result: "success"}).group("customer.id").select("customers.*, count(transactions.id) as successful_transaction_count").order(successful_transaction_count: :desc).limit(5)
+
+  def self.top_five_by_merchant_revenue
+    select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_rev")
+    .joins(:invoice_items, :transactions)
+    .where(transactions: {result: :success})
+    .group(:id)
+    .order(total_rev: :desc)
+    .limit(5)
+  end
 end
