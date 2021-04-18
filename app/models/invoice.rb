@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
   def format_time
     created_at.strftime("%A, %B %d, %Y")
   end
+
+  def self.incomplete_invoices
+    joins(:invoice_items).where(invoice_items: {status: [0,1]}).distinct
+  end
 end
