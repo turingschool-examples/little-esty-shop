@@ -9,13 +9,12 @@ class Merchant < ApplicationRecord
 
   enum status: [ :disabled, :enabled ]
 
-  def self.top_five_by_successful_transaction_count
-    joins(:transactions, :customers)
+  def top_five_customers_by_successful_transaction_count
+    customers.joins(:transactions)
     .where(transactions: {result: "success"})
-    .group("customer.id")
+    .group(:id)
     .select("customers.*, count(transactions.id) as successful_transaction_count")
     .order(successful_transaction_count: :desc)
     .limit(5)
   end
-    # Merchant.joins(:transactions, :customers).where(transactions: {result: "success"}).group("customer.id").select("customers.*, count(transactions.id) as successful_transaction_count").order(successful_transaction_count: :desc).limit(5)
 end
