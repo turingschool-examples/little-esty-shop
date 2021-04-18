@@ -48,7 +48,7 @@ RSpec.describe Merchant, type: :model do
   @transaction_5 = FactoryBot.create(:transaction, result: 1)
 
   @invoice_1.transactions << @transaction_1
-  @invoice_2.transactions << @transaction_2 
+  @invoice_2.transactions << @transaction_2
   @invoice_3.transactions << @transaction_3
   @invoice_4.transactions << @transaction_4
   @invoice_5.transactions << @transaction_5
@@ -72,7 +72,6 @@ RSpec.describe Merchant, type: :model do
 
     describe '::top_five_by_merchant_revenue' do
       it 'returns top five merchants by total revenue' do
-        # require 'pry';binding.pry
         expect(Merchant.top_five_by_merchant_revenue).to eq([@merchant_5, @merchant_4, @merchant_2, @merchant_3, @merchant_1])
       end
     end

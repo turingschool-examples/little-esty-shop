@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   before(:each) do
-    
-# FROM 38merchantfavcustomers BRANCH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @merchant_1 = create(:merchant)
 
     @item_1 = create(:item, merchant: @merchant_1)
@@ -72,10 +70,10 @@ RSpec.describe Merchant, type: :model do
     @transaction_36 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
     @transaction_37 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
     @transaction_38 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
-    
+
 # BRANCH 38 END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    
+
 #   @merchant_1 = create(:merchant, name: "M1")
 #   @merchant_2 = create(:merchant, name: "M2")
 #   @merchant_3 = create(:merchant, name: "M3")

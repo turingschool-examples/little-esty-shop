@@ -5,8 +5,11 @@
 <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
 <h3>Status:</h3>
-
-<p><%= @invoice.status %></p>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+  <%= f.label :status %>
+  <%= f.select :status, ['in progress', 'cancelled', 'completed'], selected: @invoice.status %>
+  <%= f.submit 'Update Invoice Status' %>
+<% end %>
 
 <h3>Created at: </h3>
 
