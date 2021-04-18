@@ -1,1 +1,8 @@
-<h2><%=@merchant.name%></h2>
+<h2>Merchant Information</h2>
+
+<%= link_to "Update #{@merchant.id}'s Information", "/admin/merchants/#{@merchant.id}/edit" %>
+
+<p>
+  <li>Name: <%=@merchant.name%></li>
+  <li>Status: <%=@merchant.status%></li>
+</p>

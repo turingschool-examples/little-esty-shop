@@ -57,7 +57,7 @@ RSpec.describe 'when I visit the admin merchant show page' do
   it 'has a link to edit a merchants information' do
     visit "admin/merchants/#{@merchant_1.id}"
 
-    click_on("Update Merchant")
-    expect(page).to have_current_path("admin/merchants/#{@merchant_1.id}/edit")
+    click_link("Update #{@merchant_1.id}'s Information")
+    expect(page).to have_current_path("/admin/merchants/#{@merchant_1.id}/edit")
   end
 end
