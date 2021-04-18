@@ -1,50 +1,42 @@
+<style>
+.column {
+  float: left;
+  width: 50%;
+}
+</style>
+
 
 <h3 id="links"; style="text-align:left;font-weight:bold;">
     Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;">
   <%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &nbsp;</span>
 </h3>
 
-
-
-<%= @merchant.name %>
+<% @merchant.name %>
 
 </br>
-</br>
 
 
-<div>
-  </br>
-  </br>
-  <%= "top five customers" %> </br>
-  <% @top_five.each do |key, value| %>
-    <p>
-    <%= key[1] %>
-    <%= " " %>
-    <%= key[2] %>
-    <%= "'s sucessful transations:  " %>
-    <%= value %> </p>
-    </br>
-  <% end %>
-</div>
-
-
-</br>
-</br>
-
-  <div>
-  </br>
-  <%= "Items Ready to Ship" %> </br>
-  <% @ship_ready.each do |item| %>
-    <p id= <%="item-#{item[1]}-#{item[0]}"%> >
-    <%= item[0] %>
-    <%= link_to "#{item[1]}", "/merchants/#{@merchant.id}/invoices/#{item[1]}", method: :get %>
-    <%= item[2].strftime("%A, %B %d, %Y") %>
-    </p>
-  <% end %>
+<div class="row">
+  <div class="column">
+    <h4><%= "Top Five Customers" %></h4>
+    <% @top_five.each do |key, value| %>
+      <p>
+      <%= key[1] %>
+      <%= " " %>
+      <%= key[2] %>
+      <%= "'s sucessful transations:  " %>
+      <%= value %> </p>
+    <% end %>
   </div>
 
-
-
-
-</br>
-</br>
+  <div class="column">
+    <h4><%= "Items Ready to Ship" %> </h4>
+    <% @ship_ready.each do |item| %>
+      <p id= <%="item-#{item[1]}-#{item[0]}"%> >
+      <%= item[0] %>
+      <%= link_to "#{item[1]}", "/merchants/#{@merchant.id}/invoices/#{item[1]}", method: :get %>
+      <%= item[2].strftime("%A, %B %d, %Y") %>
+      </p>
+    <% end %>
+  </div>
+</div>
