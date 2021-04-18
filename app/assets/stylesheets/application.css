@@ -14,25 +14,49 @@
  *= require_self
  */
 
-/* .items { */
-  /* display: inline-block; */
-  /* width: 100px;
-  height: 100px;
-  padding: 5px; */
-  /* white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-} */
+li.disabled_items{
+  color: crimson;
+  list-style-type: circle;
+}
+
+li.enabled_items{
+  color: green;
+  list-style-type: circle;
+}
+
+body {
+ font-family: 'Trebuchet MS', sans-serif;}
+
+h1 {
+  color: SteelBlue;
+  width: 500px;
+  margin: 10px auto 10px auto;
+  padding: 5px;
+  text-align: center;
+  background-color: whitesmoke;  }
+
+h3 {
+ color: DimGray;}
+
+a:link {
+color: darkgoldenrod;
+text-decoration: none;
+cursor: pointer}
+
+a:visited {
+  color: darkgoldenrod;}
+
+a:hover {
+  color: crimson;
+  text-decoration: underline;}
+
+input {
+  padding: 6px 12px 6px 12px;
+  border: 1px solid #665544;
+  color: green;}
 
 
-  /* #items {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    padding: 5px;
-    white-space: nowrap;
-    text-align: center;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: inline;
-   } */
+/* .enabled_items:input{
+  padding: 6px 12px 6px 12px;
+  border: 1px solid #665544;
+  color: red;} */

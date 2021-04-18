@@ -1,4 +1,4 @@
-<h3>My Invoices</h3>
+<h1>My Invoices</h1>
 <% @invoices.uniq.each do |invoice| %>
   <p>Invoice #<%= link_to "#{invoice.id}", "/merchant/#{@merchant.id}/invoices/#{invoice.id}" %></p>
 <% end %>

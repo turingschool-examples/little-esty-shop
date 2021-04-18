@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+
   namespace :admin do
     resources :merchant
     resources :invoices, only: [:index, :show, :update]
