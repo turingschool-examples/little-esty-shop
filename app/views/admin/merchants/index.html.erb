@@ -6,8 +6,11 @@
 <h3>Top Merchants By Revenue: </h3>
   <ol>
     <% Merchant.top_merchants.each do |merchant| %>
+    <div id="top_five_merchants-<%=merchant.id%>">
       <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
       Total Revenue: $<%= merchant.total_revenue %>
+      Top selling date for <%= merchant.name %> was <%= merchant.best_day %></li>
+    </div>
     <% end %>
   </ol>
 </section>
