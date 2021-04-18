@@ -10,31 +10,36 @@ RSpec.describe 'the merchant show page', type: :feature do
     expect(page).to have_content(merchant.name)
   end
 
-  describe ' there are sight links' do
+  describe ': there are sight links: and it' do
     it 'has a link to merchants dashboard' do
-      visit "/merchants/#{@jerde.id}/items"
+      merchant = Merchant.create(name: 'Bob Cella')
+      visit "/merchants/#{merchant.id}/items"
       within ("#links") do
         expect(page).to have_link("Dashboard")
         click_link("Dashboard")
-        expect(current_path).to eq("/merchants/#{@jerde.id}/dashboard")
+        expect(current_path).to eq("/merchants/#{merchant.id}/dashboard")
       end
     end
 
     it 'has a link to merchant items' do
-      visit "/merchants/#{@jerde.id}/items"
+      merchant = Merchant.create(name: 'Bob Cella')
+
+      visit "/merchants/#{merchant.id}/items"
       within ("#links") do
         expect(page).to have_link("My Items")
         click_link("My Items")
-        expect(current_path).to eq("/merchants/#{@jerde.id}/items")
+        expect(current_path).to eq("/merchants/#{merchant.id}/items")
       end
     end
 
     it 'has a link to merchant invoices' do
-      visit "/merchants/#{@jerde.id}/items"
+      merchant = Merchant.create(name: 'Bob Cella')
+
+      visit "/merchants/#{merchant.id}/items"
       within ("#links") do
         expect(page).to have_link("My Invoices")
         click_link("My Invoices")
-        expect(current_path).to eq("/merchants/#{@jerde.id}/invoices")
+        expect(current_path).to eq("/merchants/#{merchant.id}/invoices")
       end
     end
 
