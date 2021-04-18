@@ -44,7 +44,7 @@ RSpec.describe Item, type: :model do
   describe 'class methods' do
     describe '::ready_to_ship' do
       it 'returns the items that are ready to ship' do
-        expect(@merchant_1.items.ready_to_ship).to eq([@item_1])
+        expect(@merchant_1.invoice_items.ready_to_ship).to eq([@invoice_item_1])
       end
     end
   end

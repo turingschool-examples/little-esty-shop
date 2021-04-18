@@ -25,11 +25,11 @@ RSpec.describe 'As a visitor' do
     @invoice_4 = create(:invoice)
     @invoice_5 = create(:invoice)
 
-    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
-    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
-    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3)
-    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_4)
-    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_5)
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, status: 1)
+    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, status: 1)
+    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3, status: 2)
+    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_4, status: 1)
+    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_5, status: 0)
 
     @transaction_1 = create(:transaction)
     @transaction_2 = create(:transaction)
@@ -91,6 +91,16 @@ RSpec.describe 'As a visitor' do
     it "displays names of top 5 customers by number of succussful transactions" do
       expect(page).to have_content("Top 5 Customers")
       # expect(page).to have_content(@merchant_1.name)
+    end
+  end
+
+  describe 'merchant dashboard' do
+    it "displays items and their invoices that are ready to ship" do
+      expect(page).to have_content("Items Ready To Ship")
+      expect(page).to have_content(@invoice_1.id)
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_2.name)
+      expect(page).to have_content(@item_4.name)
     end
   end
 end

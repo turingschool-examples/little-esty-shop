@@ -15,11 +15,6 @@ class Invoice < ApplicationRecord
     created_at.strftime("%A, %B %d, %Y")
   end
 
-  # def full_name
-  #   require "pry";binding.pry
-  #   customer.first_name + " " + customer.last_name
-  # end
-
   def self.distinct_invoices
     distinct
   end
