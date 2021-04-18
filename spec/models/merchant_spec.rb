@@ -159,5 +159,6 @@ RSpec.describe Merchant, type: :model do
   describe 'instance methods' do
     it '#top_five_customers_by_successful_transaction_count' do
       expect(@merchant_1.top_five_customers_by_successful_transaction_count.to_a).to eq([@customer_2, @customer_1, @customer_3, @customer_4, @customer_5])
+    end
   end
 end
