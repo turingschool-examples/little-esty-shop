@@ -1,0 +1,13 @@
+<h3 id="links"; style="text-align:left;font-weight:bold;">
+    Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;">
+  <%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &nbsp;</span>
+</h3>
+
+<h2 align="center">My Items</h2><br/>
+<h3 style="text-align:left;">New Item<span style="float:right;">Top Items</span></h3>
+
+
+<% @items.each do |item| %>
+  <h4><div style="display:inline-block;"><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>&nbsp;<%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {description: "disable"}, method: :patch) %></div></h4>
+
+<% end %>
