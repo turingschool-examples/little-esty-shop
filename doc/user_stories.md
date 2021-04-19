@@ -434,7 +434,7 @@ And I see that my Invoice's status has now been updated
 
 ## Github API Consumption
 
-For each of these stories, you will need to hit an endpoint provided by the GitHub API in order to serve the date required on your site.
+For each of these stories, you will need to hit an endpoint provided by the GitHub API in order to serve the data required on your site.
 
 ```
 GitHub API: Repo Name
