@@ -29,4 +29,5 @@ Reference [this documentation](https://guides.rubyonrails.org/v5.2/command_line.
 
 * items have a `unit_price`. This is the price that the item is **currently** selling at.
 * invoice_items also have a `unit_price`. This is the price the item sold at.
+* Both `unit_price` columns in the CSV files are stored as cents, for example the value 1300 for a unit price is 1,300 cents, or 13.00 dollars. When storing the unit prices in your database, you should also store them as integers (integers are more accurate than floats). When displaying prices or doing calculations, you made need to do some conversion into dollars.
 * In the CSV files, both invoice and invoice_item status are stored as strings. In your database, you should not store strings, and instead store integers that represent the different statuses. In your models, you should include an [enum](https://api.rubyonrails.org/v5.2.4.4/classes/ActiveRecord/Enum.html) for these statuses
