@@ -1,13 +1,21 @@
 <h3 id="links"; style="text-align:left;font-weight:bold;">
     Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;">
-  <%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &nbsp;</span>
+  <%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&nbsp;&nbsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&nbsp;&nbsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>&nbsp;  &emsp;</span>
 </h3>
 
 <h2 align="center">My Items</h2><br/>
-<h3 style="text-align:left;">New Item<span style="float:right;">Top Items</span></h3>
+<h4><%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
+
+<h3 align="right">Top Items  &emsp;  &emsp;</h3>
+<h3>Enabled Items</h3>
 
 
 <% @items.each do |item| %>
-  <h4><div style="display:inline-block;"><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>&nbsp;<%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {description: "disable"}, method: :patch) %></div></h4>
+  <h4>&emsp;  &emsp;<%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
+  <% if item.able == "Disable" %>
+    <%= button_to("Enable", "/merchants/#{@merchant.id}/items", :params => {able: "Enable"}, method: :patch) %>
+  <% elsif item.able == "Enable" %>
+    <%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {able: "Disable"}, method: :patch) %>
+  <% end %>
 
 <% end %>
