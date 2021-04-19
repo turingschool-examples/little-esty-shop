@@ -1,8 +1,6 @@
 <h1>Invoice #<%= @invoice.id %></h1>
-
-<h2>Customer:</h2>
-
-<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+<h3>Created at: </h3>
+<p> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 
 <h3>Status:</h3>
 <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
@@ -11,6 +9,8 @@
   <%= f.submit 'Update Invoice Status' %>
 <% end %>
 
-<h3>Created at: </h3>
+<h3>Total Revenue: <%= @invoice.total_revenue %></h3>
 
-<p> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<h2>Customer:</h2>
+
+<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
