@@ -31,7 +31,7 @@
       <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
       <%= number_to_currency(merchant.total_revenue) %> in sales<br>
       Top day for <%= merchant.name %> was
-      <%= merchant.best_day.strftime("%m/%d/%y") %>
+      <%= merchant.best_day.strftime("%m/%d/%y") %><br><br>
     </section>
   <% end %>
 </section>
