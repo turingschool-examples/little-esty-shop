@@ -14,7 +14,7 @@
 <section id="ready_to_ship">
   <h3>Items Ready to Ship</h3>
     <% @invoice_items.ready_to_ship.each do |invoice_item| %>
-      <p><%= invoice_item.item.name %>
+      <p><%= invoice_item.item.name %><%= invoice_item.invoice.formatted_date %>
       <%= link_to "Invoice ##{invoice_item.invoice.id}", merchant_invoice_path(@merchant.id, invoice_item.invoice.id) %></p>
     <% end %>
 </section>

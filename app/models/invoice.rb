@@ -19,6 +19,13 @@ class Invoice < ApplicationRecord
     distinct
   end
 
+  def self.ordered_by_date
+    joins(:invoice_items, :items)
+    .order(:created_at)
+    .group(:id)
+    .select("created_at")
+  end
+  
   def total_revenue
     invoice_items.sum('quantity * unit_price')
   end
