@@ -27,4 +27,7 @@ class MerchantsController < ApplicationController
   def invoice_show
   end
 
+
+#heroku test
+
 end
