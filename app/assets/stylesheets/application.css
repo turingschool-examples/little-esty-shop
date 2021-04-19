@@ -28,12 +28,14 @@ body {
  font-family: 'Trebuchet MS', sans-serif;}
 
 header {
-  color: red;
+  color: crimson;
   width: 500px;
   margin: 10px auto 10px auto;
   text-align: center;
   padding: 5px;
-  background-color: whitesmoke;  }
+  background-color: whitesmoke;
+  border-style: dashed;
+  border-color: darkgoldenrod SteelBlue darkgoldenrod SteelBlue;}
 }
 
 h1 {
