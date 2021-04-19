@@ -42,4 +42,14 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc)
     .limit(5)
   end
+
+  def best_day
+    binding.pry
+    self.items.joins(invoice_items: :invoice).order("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue").pluck("invoices.created_at").first
+    # self.items
+    # .joins(invoice_items: :invoice)
+    # .order("invoices.created_at")
+    # .pluck("invoices.created_at")
+    # .first
+  end
 end

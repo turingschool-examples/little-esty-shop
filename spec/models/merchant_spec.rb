@@ -13,6 +13,28 @@ RSpec.describe Merchant, type: :model do
   before(:each) do
   end
 
+  describe 'instance methods' do
+    describe 'best_day' do
+      it 'returns the most profitable date for the merchant' do
+        customer = Customer.create!(first_name: "Very", last_name: "Rich")
+        merchant = Merchant.create!(name: "CCC")
+        item = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice1 = customer.invoices.create!(status: 0, created_at: "2012-03-07 12:54:10 UTC")
+        invoice2 = customer.invoices.create!(status: 0, created_at: "2012-03-25 09:54:09 UTC")
+        invoice3 = customer.invoices.create!(status: 0, created_at: "2011-03-25 09:54:09 UTC")
+        invoice_item1 = InvoiceItem.create!(item: item, invoice: invoice2, quantity: 3, unit_price: 5, status: 2)
+        invoice_item2 = InvoiceItem.create!(item: item, invoice: invoice2, quantity: 3, unit_price: 5, status: 2)
+        invoice_item3 = InvoiceItem.create!(item: item, invoice: invoice1, quantity: 3, unit_price: 5, status: 2)
+        invoice_item4 = InvoiceItem.create!(item: item, invoice: invoice3, quantity: 3, unit_price: 50, status: 2)
+        transaction1 = invoice1.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        transaction3 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
+        
+        expect(merchant.best_day).to eq("2012-03-25 09:54:09 UTC")
+      end
+    end
+  end
+
   describe 'class methods' do
     describe 'top_five_by_revenue' do
       it 'returns the top five merchants' do
@@ -253,5 +275,4 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.ship_ready[3][2]).to eq(invoice_1c.created_at)
     end
   end
-
 end
