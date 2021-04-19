@@ -7,5 +7,12 @@
 <h2>Incomplete Invoices</h2>
 <% Invoice.incomplete_invoices.each do |invoice| %>
 
-<%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
+<%= link_to "#{invoice.id}, #{invoice.created_at}", admin_invoice_path(invoice) %>
+<% end %>
+<br><br>
+<br>
+
+<h1> Top 5 Items </h1>
+<% Item.top_5_items.each do |item| %>
+<%= item.name %><br>
 <% end %>

@@ -53,14 +53,6 @@ class Merchant::ItemsController < ApplicationController
     params.fetch(:item, {}).permit(:name, :description, :unit_price, :enabled)
   end
 
-  # def set_item
-  #   @item = Item.find(params[:id])
-  # end
-  #
-  # def set_merchant
-  #   @merchant = Merchant.find(params[:merchant_id])
-  # end
-
   def find_new_id
     Item.last.id + 1
   end
