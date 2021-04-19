@@ -12,10 +12,9 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'instance methods' do
-    it "::formatted_date" do
-    end
-
-    it "::full_name" do
+    it "#formatted_date" do
+      @invoice_1 = create(:invoice, created_at: 'Mon, 19 Apr 2021 13:50:05 UTC +00:00')
+      expect(@invoice_1.formatted_date).to eq('Monday, April 19, 2021')
     end
   end
 

@@ -5,14 +5,14 @@
 </section>
 
 <section id="top_five">
-  <h3>Top 5 Customers</h3>
+  <h3>Top Five Customers</h3>
   <% @merchant.top_five_customers_by_successful_transaction_count.each do |customer| %>
   <p> <%= customer.full_name %></p>
   <% end %>
 </section>
 
 <section id="ready_to_ship">
-  <h3>Items Ready To Ship</h3>
+  <h3>Items Ready to Ship</h3>
     <% @invoice_items.ready_to_ship.each do |invoice_item| %>
       <p><%= invoice_item.item.name %><%= invoice_item.invoice.formatted_date %>
       <%= link_to "Invoice ##{invoice_item.invoice.id}", merchant_invoice_path(@merchant.id, invoice_item.invoice.id) %></p>

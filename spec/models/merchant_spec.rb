@@ -71,7 +71,6 @@ RSpec.describe Merchant, type: :model do
     @transaction_36 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
     @transaction_37 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
     @transaction_38 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
-
   end
 
   describe 'relationships' do

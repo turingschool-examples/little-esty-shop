@@ -1,6 +1,14 @@
-<h2><%= @merchant.name %>'s Invoice:</h2>
+<h3><%= @merchant.name %>'s Invoice:</h3>
 
-<h3>Invoice #<%= @invoice.id %> </h3>
+<h2>Invoice #<%= @invoice.id %> </h2>
   <p>Status: <%= @invoice.status%></p>
-  <p>Created at: <%= @invoice.formatted_date %></p>
+  <p>Created on: <%= @invoice.formatted_date %></p>
   <p>Customer: <%= @invoice.customer.full_name %></p>
+
+<section id="items-purchased">
+  <h4>Items on Invoice:</h4>
+    <% @invoice.invoice_items.each do |invoice_item| %>
+      <p>Item Name: <%= invoice_item.item_name %> Qty: <%= invoice_item.quantity %></p>
+      <p>Sold For: $<%= invoice_item.formatted_unit_price %></p>
+    <% end  %>
+</section>
