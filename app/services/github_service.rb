@@ -1,8 +1,16 @@
 class GithubService
   def self.get_name
     response = conn.get('/repos/ochar721/little-esty-shop')
-    parse = JSON.parse(response.body, symbolize_names: true)
-    # GithubService.get_name[:name]
+    JSON.parse(response.body, symbolize_names: true)
+    #GithubService.get_name.each do |name_hash|
+      #puts name_hash[:name]
+    #end
+  end
+
+  def self.get_user_names
+    response = conn.get('/repos/ochar721/little-esty-shop')
+    JSON.parse(response.body, symbolize_names: true)
+
   end
 
   def self.conn
