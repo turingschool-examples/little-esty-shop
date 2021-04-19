@@ -153,7 +153,7 @@ RSpec.describe 'As a visitor' do
   describe 'merchant dashboard' do
     it "displays names of top 5 customers by number of successful transactions" do
       within "#top_five" do
-        expect(page).to have_content("Top 5 Customers")
+        expect(page).to have_content("Top Five Customers")
         expect(page).to have_content(@customer_2.full_name)
         expect(page).to have_content(@customer_1.full_name)
         expect(page).to have_content(@customer_3.full_name)
@@ -164,7 +164,7 @@ RSpec.describe 'As a visitor' do
     it "displays items and their invoices that are ready to ship" do
       within "#ready_to_ship" do
         visit "/merchants/#{@merchant_2.id}/dashboard"
-        expect(page).to have_content("Items Ready To Ship")
+        expect(page).to have_content("Items Ready to Ship")
         expect(page).to have_content(@invoice_7.id)
         expect(page).to have_content(@item_2.name)
         expect(page).to have_content(@item_3.name)
