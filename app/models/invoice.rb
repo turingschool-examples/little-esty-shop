@@ -18,4 +18,11 @@ class Invoice < ApplicationRecord
   def self.distinct_invoices
     distinct
   end
+
+  def self.ordered_by_date
+    joins(:invoice_items, :items)
+    .order(:created_at)
+    .group(:id)
+    .select("created_at")
+  end
 end

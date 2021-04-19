@@ -127,12 +127,12 @@ RSpec.describe Merchant, type: :model do
     # transaction_8 = create(:transaction, invoice_id: invoice_12.id, result: 1)
     # transaction_9 = create(:transaction, invoice_id: invoice_11.id, result: 1)
     # transaction_10 = create(:transaction, invoice_id: invoice_10.id, result: 1)
-    expect(merchant_2.invoices.not_shipped_by_date[0].formatted_date).to eq(invoice_8.formatted_date)
-    expect(merchant_2.invoices.not_shipped_by_date[1].formatted_date).to eq(invoice_10.formatted_date)
-    expect(merchant_2.invoices.not_shipped_by_date[2].formatted_date).to eq(invoice_9.formatted_date)
-    expect(merchant_2.invoices.not_shipped_by_date[3].formatted_date).to eq(invoice_11.formatted_date)
-    expect(merchant_2.invoices.not_shipped_by_date[4].formatted_date).to eq(invoice_7.formatted_date)
-    expect(merchant_2.invoices.not_shipped_by_date[5].formatted_date).to eq(invoice_12.formatted_date)
+    expect(merchant_2.invoices.ordered_by_date[0].formatted_date).to eq(invoice_8.formatted_date)
+    expect(merchant_2.invoices.ordered_by_date[1].formatted_date).to eq(invoice_10.formatted_date)
+    expect(merchant_2.invoices.ordered_by_date[2].formatted_date).to eq(invoice_9.formatted_date)
+    expect(merchant_2.invoices.ordered_by_date[3].formatted_date).to eq(invoice_11.formatted_date)
+    expect(merchant_2.invoices.ordered_by_date[4].formatted_date).to eq(invoice_7.formatted_date)
+    expect(merchant_2.invoices.ordered_by_date[5].formatted_date).to eq(invoice_12.formatted_date)
 
     end
   end
