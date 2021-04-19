@@ -29,19 +29,12 @@ class MerchantsController < ApplicationController
     @enabled_items = (@merchant.items.all).enabled
     @disabled_items = (@merchant.items.all).disabled
   end
-  # <% @items.each do |item| %>
-  #   <h4>&emsp;  &emsp;<%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
-  #   <% if item.disabled %>
-  #     <%= button_to("Enable", "/merchants/#{@merchant.id}/items", :params => {able: "Enable"}, method: :patch) %>
-  #   <% elsif item.able == "Enable" %>
-  #     <%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {able: "Disable"}, method: :patch) %>
-  #   <% end %>
-
 
   def item_create
     @merchant = Merchant.find(params[:id])
-    # item = @merchant.items.new
+    # item = @merchant.items.new()
     item = Item.new({name: params[:name], description: params[:description], unit_price: params[:unit_price], able: params[:able], merchant_id: @merchant.id})
+    binding.pry
     item.save
     redirect_to "/merchants/#{@merchant.id}/items"
   end
@@ -56,18 +49,19 @@ class MerchantsController < ApplicationController
   end
 
   def item_update
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
     # item = @merchant.items.find(params[:item_id])
-    item = Item.find(params[:id])
+    item = Item.find(params[:item_id])
     item.update({
       name: params[:name],
       description: params[:description],
       unit_price: params[:unit_price],
       able: params[:able]
       })
+    #if 
     item.save
     redirect_to "/merchants/#{@merchant.id}/items"
-    flash[:alert] = "Item was successfully updated." 
+    flash[:alert] = "Item was successfully updated."
   end
 
 
