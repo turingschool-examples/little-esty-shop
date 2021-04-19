@@ -91,11 +91,11 @@ RSpec.describe 'As a visitor' do
     @invoice_10 = create(:invoice)
     @invoice_11 = create(:invoice)
 
-    @invoice_item_5 = create(:invoice_item, item: @item_2, invoice: @invoice_7, status: 1)
-    @invoice_item_6 = create(:invoice_item, item: @item_3, invoice: @invoice_7, status: 1)
-    @invoice_item_7 = create(:invoice_item, item: @item_4, invoice: @invoice_8, status: 2)
-    @invoice_item_8 = create(:invoice_item, item: @item_5, invoice: @invoice_9, status: 1)
-    @invoice_item_9 = create(:invoice_item, item: @item_6, invoice: @invoice_10, status: 0)
+    @invoice_item_5 = create(:invoice_item, item: @item_2, invoice: @invoice_7, status: 1, created_at: "Sun, 18 Apr 2021 21:37:10 UTC +00:00")
+    @invoice_item_6 = create(:invoice_item, item: @item_3, invoice: @invoice_7, status: 1, created_at: "Sun, 4 Apr 2021 21:37:10 UTC +00:00")
+    @invoice_item_7 = create(:invoice_item, item: @item_4, invoice: @invoice_8, status: 1, created_at: "Sun, 11 Apr 2021 21:37:10 UTC +00:00")
+    @invoice_item_8 = create(:invoice_item, item: @item_5, invoice: @invoice_8, status: 1, created_at: "Mon, 5 Apr 2021 21:37:10 UTC +00:00")
+    @invoice_item_9 = create(:invoice_item, item: @item_6, invoice: @invoice_8, status: 0, created_at: "Mon, 12 Apr 2021 21:37:10 UTC +00:00")
 
     @transaction_39 = create(:transaction)
     @transaction_40 = create(:transaction)
@@ -168,7 +168,54 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_content(@invoice_7.id)
         expect(page).to have_content(@item_2.name)
         expect(page).to have_content(@item_3.name)
-        expect(page).to_not have_content(@item_4.name)
+
+        expect(page).to have_content(@invoice_8.id)
+        expect(page).to have_content(@item_4.name)
+        expect(page).to have_content(@item_5.name)
+        expect(page).to_not have_content(@item_6.name)
+
+      end
+    end
+
+    it "displays date invoice was created next to each item ordered oldest to newest" do
+      within "#ready_to_ship" do
+        visit "/merchants/#{@merchant_2.id}/dashboard"
+        merchant_2 = create(:merchant)
+
+        item_2 = create(:item, merchant: merchant_2)
+        item_3 = create(:item, merchant: merchant_2)
+        item_4 = create(:item, merchant: merchant_2)
+        item_5 = create(:item, merchant: merchant_2)
+        item_6 = create(:item, merchant: merchant_2)
+        item_7 = create(:item, merchant: merchant_2)
+
+        customer_7 = create(:customer)
+
+        invoice_7 = create(:invoice, customer_id: customer_7.id, created_at: "Sun, 18 Apr 2021 21:37:10 UTC +00:00")
+        invoice_8 = create(:invoice, customer_id: customer_7.id, created_at: "Sun, 4 Apr 2021 21:37:10 UTC +00:00")
+        invoice_9 = create(:invoice, customer_id: customer_7.id, created_at: "Sun, 11 Apr 2021 21:37:10 UTC +00:00")
+        invoice_10 = create(:invoice, customer_id: customer_7.id, created_at: "Mon, 5 Apr 2021 21:37:10 UTC +00:00")
+        invoice_11 = create(:invoice, customer_id: customer_7.id, created_at: "Mon, 12 Apr 2021 21:37:10 UTC +00:00")
+        invoice_12 = create(:invoice, customer_id: customer_7.id, created_at: "Mon, 19 Apr 2021 21:37:10 UTC +00:00")
+
+        invoice_item_7 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_7.id, status: 0)
+        invoice_item_8 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_8.id, status: 0)
+        invoice_item_9 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_9.id, status: 0)
+        invoice_item_10 = create(:invoice_item, item_id: item_5.id, invoice_id: invoice_10.id, status: 0)
+        invoice_item_11 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_11.id, status: 0)
+        invoice_item_12 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_12.id, status: 0)
+
+        expect(item_3.name).to appear_before(item_5.name)
+        expect(item_5.name).to appear_before(item_4.name)
+        expect(item_4.name).to appear_before(item_6.name)
+        expect(item_6.name).to appear_before(item_2.name)
+        expect(item_2.name).to appear_before(item_7.name)
+
+        expect(item_3.formatted_date).to appear_before(item_5.formatted_date)
+        expect(item_5.formatted_date).to appear_before(item_4.formatted_date)
+        expect(item_4.formatted_date).to appear_before(item_6.formatted_date)
+        expect(item_6.formatted_date).to appear_before(item_2.formatted_date)
+        expect(item_2.formatted_date).to appear_before(item_7.formatted_date)
       end
     end
   end
