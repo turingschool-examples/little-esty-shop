@@ -1,9 +1,9 @@
-<h1>Admin Dashboard</h1>
+<h2>Admin Dashboard</h2>
   <%= link_to "Create Merchant", "/admin/merchant/new", method: :get %>
 
 <section>
 
-<h2>Top 5 Merchants </h2>
+<h3>Top 5 Merchants </h3>
   <%  @top_merchants.each do |merchant| %>
   <%= link_to "#{merchant.name}", "/admin/merchant/#{merchant.id}" %>: <%= number_to_currency(merchant.total_revenue) %><br>
   <%end%>

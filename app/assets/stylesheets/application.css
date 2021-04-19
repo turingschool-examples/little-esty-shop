@@ -27,6 +27,15 @@ li.enabled_items{
 body {
  font-family: 'Trebuchet MS', sans-serif;}
 
+header {
+  color: red;
+  width: 500px;
+  margin: 10px auto 10px auto;
+  text-align: center;
+  padding: 5px;
+  background-color: whitesmoke;  }
+}
+
 h1 {
   color: SteelBlue;
   width: 500px;
@@ -34,6 +43,15 @@ h1 {
   padding: 5px;
   text-align: center;
   background-color: whitesmoke;  }
+
+h2 {
+  color: SteelBlue;
+  width: 700px;
+  margin: 10px auto 10px auto;
+  padding: 5px;
+  text-align: center;
+  background-color: whitesmoke;  }
+
 
 h3 {
  color: DimGray;}
