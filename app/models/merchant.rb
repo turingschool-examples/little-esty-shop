@@ -33,14 +33,4 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc)
     .limit(5)
   end
-  # 
-  # def top_five_customers
-  #    invoices
-  #    joins(:customers, :transactions)
-  #   .select("cutomser.*, count(transactions.id) as total_transactions")
-  #   .group("customers.id")
-  #   .where(transactions: {result: :success})
-  #   .order("total_transactions desc, customers.first_name")
-  #   .limit(5)
-  # end
 end
