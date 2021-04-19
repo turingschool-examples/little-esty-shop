@@ -28,3 +28,9 @@
 /coverage/
 
 /coverage.data
+/coverage/
+coverage/
+.coverage
+.coverage.*
+.rspec
+/spec/tmp
