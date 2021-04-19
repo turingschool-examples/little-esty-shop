@@ -25,12 +25,23 @@ class MerchantsController < ApplicationController
 
   def item_index
     @merchant = Merchant.find(params[:id])
-    @items = @merchant.items.all
+    # @items = @merchant.items.all
+    @enabled_items = (@merchant.items.all).enabled
+    @disabled_items = (@merchant.items.all).disabled
   end
+  # <% @items.each do |item| %>
+  #   <h4>&emsp;  &emsp;<%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
+  #   <% if item.disabled %>
+  #     <%= button_to("Enable", "/merchants/#{@merchant.id}/items", :params => {able: "Enable"}, method: :patch) %>
+  #   <% elsif item.able == "Enable" %>
+  #     <%= button_to("Disable", "/merchants/#{@merchant.id}/items", :params => {able: "Disable"}, method: :patch) %>
+  #   <% end %>
+
 
   def item_create
     @merchant = Merchant.find(params[:id])
-    item = @merchant.items.new({name: params[:name], description: params[:description], unit_price: params[:unit_price], able: params[:able]})
+    # item = @merchant.items.new
+    item = Item.new({name: params[:name], description: params[:description], unit_price: params[:unit_price], able: params[:able], merchant_id: @merchant.id})
     item.save
     redirect_to "/merchants/#{@merchant.id}/items"
   end
@@ -56,6 +67,7 @@ class MerchantsController < ApplicationController
       })
     item.save
     redirect_to "/merchants/#{@merchant.id}/items"
+    flash[:alert] = "Item was successfully updated." 
   end
 
 

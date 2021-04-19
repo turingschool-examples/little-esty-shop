@@ -1,1 +1,1 @@
-<p align="right"><%= link_to "Dashboard", dash_path %>&nbsp;&nbsp;<%= link_to "My Items", items_path %>&nbsp;&nbsp;<%= link_to "My Invoices", inv_path %>&nbsp;  &nbsp;</p>
+<%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %>&emsp;<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>&emsp;<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
