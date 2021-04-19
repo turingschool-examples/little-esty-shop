@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'when I visit the admin invoices show page' do
   before(:each) do
+    @merchant_1 = create(:merchant, name: "M1")
+    @item_1 = create(:item, merchant: @merchant_1)
     @customer_1 = create(:customer)
     @invoice_1 = create(:invoice, status: 'in progress')
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, status: "packaged", quantity: 1, unit_price: 30)
     @customer_1.invoices << [@invoice_1]
+
   end
 
  it 'can see invoice id, status, created_at date, customer first and last name' do
@@ -28,8 +32,6 @@ RSpec.describe 'when I visit the admin invoices show page' do
   it 'shows total revenue for invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
-    expect(page). to have_content("Total Revenue: #{@invoice_1.total_rev}")
+    expect(page). to have_content("Total Revenue: #{@invoice_1.total_revenue}")
   end
-
-# Then I see the total revenue that will be generated from this invoice
 end
