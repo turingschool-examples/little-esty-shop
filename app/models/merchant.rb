@@ -23,4 +23,24 @@ class Merchant < ApplicationRecord
    .where('invoices.status = ?', Invoice.statuses[:completed])
    .order('invoices.created_at')
   end
+
+  def self.top_merchants
+    joins(:transactions)
+    .where('transactions.result = ?', 0)
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    .group('merchants.id')
+    .order(total_revenue: :desc)
+    .limit(5)
+  end
+
+  def best_day
+    invoices
+    .joins(:invoice_items)
+    .group('invoices.created_at')
+    .select('invoices.created_at AS created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    .order(total_revenue: :desc)
+    .first
+    .format_time
+
+  end
 end
