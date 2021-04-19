@@ -39,6 +39,26 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def item_edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = @merchant.items.find(params[:item_id])
+  end
+
+  def item_update
+    @merchant = Merchant.find(params[:id])
+    # item = @merchant.items.find(params[:item_id])
+    item = Item.find(params[:id])
+    item.update({
+      name: params[:name],
+      description: params[:description],
+      unit_price: params[:unit_price],
+      able: params[:able]
+      })
+    item.save
+    redirect_to "/merchants/#{@merchant.id}/items"
+  end
+
+
   def item_show
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:item_id])
