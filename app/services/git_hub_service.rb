@@ -3,11 +3,14 @@ class GitHubService
   def conn
     conn = Faraday.new(
       url: 'https://api.github.com',
-      headers: {'Accept' => 'application/vnd.github.v3+json'}
+      headers: {
+        'Authorization' => "ENV['GITHUB_KEY']",
+        'Accept' => 'application/vnd.github.v3+json'}
     )
   end
   
   def repo_name
+    binding.pry
     resp = conn.get('/repos/A-McGuire/little-esty-shop')
     json = JSON.parse(resp.body, symbolize_names: true)
     json[:name]
