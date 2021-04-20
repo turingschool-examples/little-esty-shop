@@ -1,4 +1,4 @@
-<h1>Invoice #<%= @invoice.id %></h1>
+<h2>Invoice #<%= @invoice.id %></h2>
 
 <div id="invoice-<%= @invoice.id %>">
   <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |form| %>
@@ -11,13 +11,13 @@
 <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p>Total Revenue: <%= number_to_currency(@invoice_items.total_revenue, unit: "$", separator: ".", delimiter: "") %></p>
 
-<h2>Customer:</h2>
+<h3>Customer:</h3>
 <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
 
-<h2>Items on this Invoice:</h2>
+<h3>Items on this Invoice:</h3>
 <% @invoice_items.each do |invoice_item| %>
-  <h3>Item Name: <%= invoice_item.item.name %></h3>
+  <p>Item Name: <%= invoice_item.item.name %></p>
   <p>Quantity: <%= invoice_item.quantity %></p>
   <p>Unit Price: <%= number_to_currency(invoice_item.unit_price, unit: "$", separator: ".", delimiter: "") %></p>
   <p>Item Status: <%= invoice_item.status %></p>

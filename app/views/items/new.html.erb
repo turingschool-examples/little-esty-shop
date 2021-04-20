@@ -1,4 +1,4 @@
-<h1>New Item for <%= @merchant.name %></h1>
+<h2>New Item for <%= @merchant.name %></h2>
 <%= form_with model: [@merchant, @item], local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
