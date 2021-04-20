@@ -14,4 +14,8 @@ class Invoice < ApplicationRecord
     .order(created_at: :desc)
     .distinct
   end
+
+  def item_sell_info
+    self.items.includes(:invoice_items).select("items.*, invoice_items.*")
+  end
 end

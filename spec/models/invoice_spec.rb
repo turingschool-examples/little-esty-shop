@@ -8,18 +8,6 @@ RSpec.describe Invoice do
   end
 
   describe "class methods" do
-    # describe "#all_incomplete_invoices" do
-    #   it "returns all invoices with a status of 'in progress' in order from old to new" do
-    #     customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
-    #     invoice2 = customer.invoices.create!(status: 1)
-    #     invoice3 = customer.invoices.create!(status: 2)
-    #     invoice1 = customer.invoices.create!(status: 0)
-    #     invoice4 = customer.invoices.create!(status: 0)
-
-    #     expect(Invoice.all_incomplete_invoices).to eq([invoice2, invoice1, invoice4])
-    #   end
-    # end
-
     describe "#find_all_invoices_not_shipped" do
       it "returns all records that do not have a status of 'shipped'" do
         merchant = Merchant.create!(name: "mel")
@@ -44,6 +32,42 @@ RSpec.describe Invoice do
         invoice_item10 = InvoiceItem.create!(item: item1, invoice: invoice3, quantity: 2, unit_price: 5, status: 2)
 
         expect(Invoice.find_all_invoices_not_shipped).to eq([invoice1, invoice2])
+      end
+    end
+  end
+
+  describe 'instance methods' do
+    describe 'item_sell_info' do
+      it 'returns all items associated with invoice, as well as selling info' do
+        customer = Customer.create!(first_name: "A", last_name: "AA")
+        merchant = Merchant.create!(name: "merchant")
+        invoice1 = customer.invoices.create!(status: 'in progress')
+        item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 1)
+        item2 = merchant.items.create!(name: "stuff", description: "stuffy", unit_price: 2)
+        item3 = merchant.items.create!(name: "it", description: "itty", unit_price: 3)
+        item4 = merchant.items.create!(name: "fake", description: "fakey", unit_price: 4)
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity:10, unit_price: 11, status: 0)
+        invoice_item2 = InvoiceItem.create!(item: item2, invoice: invoice1, quantity:20, unit_price: 22, status: 1)
+        invoice_item2 = InvoiceItem.create!(item: item3, invoice: invoice1, quantity:30, unit_price: 33, status: 2)
+
+        actual = invoice1.item_sell_info
+        actual_name = actual.map do |item|
+          item.name
+        end
+        actual_quantity = actual.map do |item|
+          item.quantity
+        end
+        actual_price = actual.map do |item|
+          item.unit_price
+        end
+        actual_status = actual.map do |item|
+          item.status
+        end
+
+        expect(actual_name).to eq(['thing', 'stuff', 'it'])
+        expect(actual_quantity).to eq([10, 20, 30])
+        expect(actual_price).to eq([11, 22, 33])
+        expect(actual_status).to eq([0, 1, 2])
       end
     end
   end
