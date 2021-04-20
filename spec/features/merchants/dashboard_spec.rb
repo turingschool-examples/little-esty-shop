@@ -95,7 +95,7 @@ RSpec.describe 'As a visitor' do
     @invoice_item_6 = create(:invoice_item, item: @item_3, invoice: @invoice_7, status: 1, created_at: "Sun, 4 Apr 2021 21:37:10 UTC +00:00")
     @invoice_item_7 = create(:invoice_item, item: @item_4, invoice: @invoice_8, status: 1, created_at: "Sun, 11 Apr 2021 21:37:10 UTC +00:00")
     @invoice_item_8 = create(:invoice_item, item: @item_5, invoice: @invoice_8, status: 1, created_at: "Mon, 5 Apr 2021 21:37:10 UTC +00:00")
-    @invoice_item_9 = create(:invoice_item, item: @item_6, invoice: @invoice_8, status: 0, created_at: "Mon, 12 Apr 2021 21:37:10 UTC +00:00")
+    @invoice_item_9 = create(:invoice_item, item: @item_6, invoice: @invoice_8, status: 2, created_at: "Mon, 12 Apr 2021 21:37:10 UTC +00:00")
 
     @transaction_39 = create(:transaction)
     @transaction_40 = create(:transaction)
@@ -168,7 +168,7 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_content(@invoice_7.id)
         expect(page).to have_content(@item_2.name)
         expect(page).to have_content(@item_3.name)
-
+save_and_open_page
         expect(page).to have_content(@invoice_8.id)
         expect(page).to have_content(@item_4.name)
         expect(page).to have_content(@item_5.name)

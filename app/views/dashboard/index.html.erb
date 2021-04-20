@@ -13,8 +13,10 @@
 
 <section id="ready_to_ship">
   <h3>Items Ready to Ship</h3>
-    <% @invoice_items.ready_to_ship.each do |invoice_item| %>
-      <p><%= invoice_item.item.name %><%= invoice_item.invoice.formatted_date %>
-      <%= link_to "Invoice ##{invoice_item.invoice.id}", merchant_invoice_path(@merchant.id, invoice_item.invoice.id) %></p>
+    <% @merchant.invoice_items_not_shipped_by_invoice_date.each do |invoice| %>
+      <% invoice.items.each do |item| %>
+        <p><%= item.name %> - <%= invoice.formatted_date %>
+          <%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant.id, invoice.id) %></p>
+      <% end %>
     <% end %>
 </section>

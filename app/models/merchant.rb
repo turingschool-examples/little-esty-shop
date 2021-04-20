@@ -27,11 +27,10 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
-  # def not_shipped_by_date
-  #   require "pry";binding.pry
-  #   joins(:invoice_items, :items, :invoices)
-  #   .select('invoices.created_at', 'items.name', 'invoices.id')
-  #   .order(':invoices.created_at')
-  #   .where(status: "created_at")
-  # end
+  def invoice_items_not_shipped_by_invoice_date
+      invoices
+      .where.not('invoice_items.status = ?', 2)
+      .order('invoices.created_at asc')
+      # .select('items.*', 'invoices.created_at')
+  end
 end
