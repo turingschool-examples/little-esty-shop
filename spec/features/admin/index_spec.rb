@@ -24,16 +24,16 @@ RSpec.describe 'as an Admin' do
     @customer6 = create(:customer)
     @customer7 = create(:customer)
 
-    @invoice1 = create(:invoice, customer_id: @customer1)
-    @invoice2 = create(:invoice, customer_id: @customer2)
-    @invoice3 = create(:invoice, customer_id: @customer3)
-    @invoice4 = create(:invoice, customer_id: @customer4)
-    @invoice5 = create(:invoice, customer_id: @customer5)
-    @invoice6 = create(:invoice, customer_id: @customer5)
-    @invoice7 = create(:invoice, customer_id: @customer6)
-    @invoice8 = create(:invoice, customer_id: @customer6)
-    @invoice9 = create(:invoice, customer_id: @customer7)
-    @invoice10 = create(:invoice, customer_id: @customer8)
+    @invoice1 = create(:invoice, customer_id: @customer1.id)
+    @invoice2 = create(:invoice, customer_id: @customer2.id)
+    @invoice3 = create(:invoice, customer_id: @customer3.id)
+    @invoice4 = create(:invoice, customer_id: @customer4.id)
+    @invoice5 = create(:invoice, customer_id: @customer5.id)
+    @invoice6 = create(:invoice, customer_id: @customer5.id)
+    @invoice7 = create(:invoice, customer_id: @customer6.id)
+    @invoice8 = create(:invoice, customer_id: @customer6.id)
+    @invoice9 = create(:invoice, customer_id: @customer6.id)
+    @invoice10 = create(:invoice, customer_id: @customer7.id)
 
     @invoice_item1 = create(:invoice_item, invoice_id: @invoice1.id, item_id: @item1.id, status: 1, quantity: 5, unit_price: 100)
     @invoice_item2 = create(:invoice_item, invoice_id: @invoice2.id, item_id: @item2.id, status: 1, quantity: 15, unit_price: 100)
@@ -41,7 +41,7 @@ RSpec.describe 'as an Admin' do
     @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item4.id, status: 2, quantity: 10, unit_price: 100)
     @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item5.id, status: 0, quantity: 2, unit_price: 100)
     @invoice_item6 = create(:invoice_item, invoice_id: @invoice6.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
-    @invoice_item7 = create(:invoice_item, invoice_id: @invoice7.id, item_id: @item.id, status: 2, quantity: 11, unit_price: 100)
+    @invoice_item7 = create(:invoice_item, invoice_id: @invoice7.id, item_id: @item5.id, status: 2, quantity: 11, unit_price: 100)
     @invoice_item8 = create(:invoice_item, invoice_id: @invoice8.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
     @invoice_item9 = create(:invoice_item, invoice_id: @invoice9.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
     @invoice_item10 = create(:invoice_item, invoice_id: @invoice10.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
@@ -74,22 +74,11 @@ RSpec.describe 'as an Admin' do
   end
 
   it 'shows a section for Incomplete Invoices with ids of invoices with non-shipped items as links' do
-    @invoice1 = create(:invoice)
-    @invoice2 = create(:invoice)
-    @invoice3 = create(:invoice)
-
-    @item1 = create(:item)
-    @item2 = create(:item)
-
-    @invoice_item1 = create(:invoice_item, invoice: invoice1, item: item1, status: 0)
-    @invoice_item2 = create(:invoice_item, invoice: invoice2, item: item1, status: 1)
-    @invoice_item3 = create(:invoice_item, invoice: invoice3, item: item2, status: 2)
-
     visit '/admin'
 
-    expect(page).to have_content(invoice1.id)
-    expect(page).to have_content(invoice2.id)
-    expect(page).not_to have_content(invoice3.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice2.id)
+    expect(page).not_to have_content(@invoice3.id)
   end
 
   it 'shows me the name of the top 5 customers that have conducted the largest number of successful transactions' do

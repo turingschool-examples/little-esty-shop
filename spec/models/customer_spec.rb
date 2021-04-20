@@ -24,26 +24,26 @@ RSpec.describe Customer, type: :model do
     @customer6 = create(:customer)
     @customer7 = create(:customer)
 
-    @invoice1 = create(:invoice, customer_id: @customer1)
-    @invoice2 = create(:invoice, customer_id: @customer2)
-    @invoice3 = create(:invoice, customer_id: @customer3)
-    @invoice4 = create(:invoice, customer_id: @customer4)
-    @invoice5 = create(:invoice, customer_id: @customer5)
-    @invoice6 = create(:invoice, customer_id: @customer5)
-    @invoice7 = create(:invoice, customer_id: @customer6)
-    @invoice8 = create(:invoice, customer_id: @customer6)
-    @invoice9 = create(:invoice, customer_id: @customer7)
-    @invoice10 = create(:invoice, customer_id: @customer8)
+    @invoice1 = create(:invoice, customer_id: @customer1.id)
+    @invoice2 = create(:invoice, customer_id: @customer2.id)
+    @invoice3 = create(:invoice, customer_id: @customer3.id)
+    @invoice4 = create(:invoice, customer_id: @customer4.id)
+    @invoice5 = create(:invoice, customer_id: @customer5.id)
+    @invoice6 = create(:invoice, customer_id: @customer5.id)
+    @invoice7 = create(:invoice, customer_id: @customer6.id)
+    @invoice8 = create(:invoice, customer_id: @customer6.id)
+    @invoice9 = create(:invoice, customer_id: @customer6.id)
+    @invoice10 = create(:invoice, customer_id: @customer7.id)
 
     @invoice_item1 = create(:invoice_item, invoice_id: @invoice1.id, item_id: @item1.id, status: 1, quantity: 5, unit_price: 100)
-    @invoice_item2 = create(:invoice_item, invoice_id: @invoice2.id, item_id: @item2.id, status: 1, quantity: 15, unit_price: 100)
-    @invoice_item3 = create(:invoice_item, invoice_id: @invoice3.id, item_id: @item3.id, status: 0, quantity: 9, unit_price: 100)
-    @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item4.id, status: 2, quantity: 10, unit_price: 100)
-    @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item5.id, status: 0, quantity: 2, unit_price: 100)
-    @invoice_item6 = create(:invoice_item, invoice_id: @invoice6.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
-    @invoice_item7 = create(:invoice_item, invoice_id: @invoice7.id, item_id: @item.id, status: 2, quantity: 11, unit_price: 100)
-    @invoice_item8 = create(:invoice_item, invoice_id: @invoice8.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
-    @invoice_item9 = create(:invoice_item, invoice_id: @invoice9.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
+    @invoice_item2 = create(:invoice_item, invoice_id: @invoice2.id, item_id: @item1.id, status: 1, quantity: 15, unit_price: 100)
+    @invoice_item3 = create(:invoice_item, invoice_id: @invoice3.id, item_id: @item2.id, status: 0, quantity: 9, unit_price: 100)
+    @invoice_item4 = create(:invoice_item, invoice_id: @invoice4.id, item_id: @item3.id, status: 2, quantity: 10, unit_price: 100)
+    @invoice_item5 = create(:invoice_item, invoice_id: @invoice5.id, item_id: @item3.id, status: 0, quantity: 2, unit_price: 100)
+    @invoice_item6 = create(:invoice_item, invoice_id: @invoice6.id, item_id: @item4.id, status: 2, quantity: 11, unit_price: 100)
+    @invoice_item7 = create(:invoice_item, invoice_id: @invoice7.id, item_id: @item5.id, status: 2, quantity: 11, unit_price: 100)
+    @invoice_item8 = create(:invoice_item, invoice_id: @invoice8.id, item_id: @item5.id, status: 2, quantity: 11, unit_price: 100)
+    @invoice_item9 = create(:invoice_item, invoice_id: @invoice9.id, item_id: @item5.id, status: 2, quantity: 11, unit_price: 100)
     @invoice_item10 = create(:invoice_item, invoice_id: @invoice10.id, item_id: @item6.id, status: 2, quantity: 11, unit_price: 100)
 
     @transactions = create_list(:transaction, 6, invoice_id: @invoice_item1.invoice.id, result: 0)
@@ -57,7 +57,7 @@ RSpec.describe Customer, type: :model do
     @transactions9 = create_list(:transaction, 11, invoice_id: @invoice_item9.invoice.id, result: 0)
     @transactions10 = create_list(:transaction, 11, invoice_id: @invoice_item10.invoice.id, result: 0)
   end
-  
+
   describe 'relationships' do
     it { should have_many :invoices }
     it { should have_many(:invoice_items).through(:invoices) }
