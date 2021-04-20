@@ -10,7 +10,7 @@ class GitHubService
   def repo_name
     resp = conn.get('/repos/A-McGuire/little-esty-shop')
     json = JSON.parse(resp.body, symbolize_names: true)
-    json[:name] #repo name
+    json[:name]
   end
   
   def repo_contributors
