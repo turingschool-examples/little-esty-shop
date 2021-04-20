@@ -7,7 +7,7 @@ RSpec.describe 'as a merchant, when I visit the merchant items index' do
 
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_1)
-    @item_3 = create(:item, merchant: @merchant_1)
+    @item_3 = create(:item, merchant: @merchant_1, status: 1)
     @item_4 = create(:item, merchant: @merchant_2)
     @item_5 = create(:item, merchant: @merchant_2)
     @item_6 = create(:item, merchant: @merchant_2)
@@ -36,6 +36,43 @@ RSpec.describe 'as a merchant, when I visit the merchant items index' do
     expect(page).to_not have_content(@item_6.name)
   end
 
-  it "" do
+  describe "I see two sections, one for 'Enabled Items' and one for 'Disabled Items'" do
+    it 'has a button next to each merchant to disable/enable it it' do
+
+      within"#enabled-items" do
+        expect(page).to have_content("Enabled Items")
+        expect(page).to have_content(@item_3.name)
+
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to_not have_content(@item_2.name)
+      end
+
+      within"#disabled-items" do
+        expect(page).to have_content("Disabled Items")
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+
+        expect(page).to_not have_content(@item_3.name)
+      end
+    end
+
+    # need to find a way to test this but not mapping to id in p tag
+    it 'updates merchant status when button pushed' do
+      within "#enabled-items"  do
+        expect(page).to have_content(@item_3.name)
+
+        click_button("Disable #{@item_3.name}")
+
+        expect(page).to_not have_content(@item_3.name)
+      end
+
+      within "#disabled-items"  do
+        expect(page).to have_content(@item_1.name)
+
+        click_button("Enable #{@item_1.name}")
+
+        expect(page).to_not have_content(@item_1.name)
+      end
+    end
   end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get '/merchants/:merchant_id/items', to: 'items#index', as: 'merchant_items'
   get '/merchants/:merchant_id/items/:id', to: 'items#show', as: 'merchant_item'
+  patch '/merchants/:id/items', to: 'items#update', as: 'item_update'
   get '/merchants/:merchant_id/invoices', to: 'invoices#index', as: 'merchant_invoices'
   get '/merchants/:merchant_id/invoices/:id', to: 'invoices#show', as: 'merchant_invoice'
   get  '/merchants/:merchant_id/dashboard', to: 'dashboard#index', as: 'merchant_dashboard_index'
@@ -18,12 +19,11 @@ Rails.application.routes.draw do
   # get  '/merchants/new', to: 'merchants#new', as: 'new_merchant'
   # get  '/merchants/:id/edit', to: 'merchants#edit', as: 'edit_merchant'
   # get  '/merchants/:id', to: 'merchants#show', as: 'merchant'
-  # patch '/merchants/:id', to: 'merchants#update'
   # put   '/merchants/:id', to: 'merchants#update'
   # delete '/merchants/:id', to: 'merchants#destroy'
 
 
- 
+
 
 
 

@@ -8,9 +8,17 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
+  enum status: [ :disabled, :enabled ]
+
   def self.ready_to_ship
     where(invoice_items: {status: "packaged"})
   end
 
+  def self.disabled_items 
+    where(status: 0)
+  end
 
+  def self.enabled_items
+    where(status: 1)
+  end
 end
