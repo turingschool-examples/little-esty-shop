@@ -6,20 +6,40 @@ class Merchant < ApplicationRecord
 
 ####### dashboard methods #########
 
+  def ship_ready
+    Merchant.joins(items: {invoice_items: :invoice})
+      .where("merchants.id = ?", self.id).where("invoices.status != ?", 1).where("invoice_items.status != ?", 2)
+      .order("invoices.created_at").pluck("items.name", "invoices.id", "invoices.created_at")
+  end
+
   def top_five_customers
-    test = Merchant.joins(items: {invoice_items: {invoice: {transactions: {invoice: :customer}}}})
+    Merchant.joins(items: {invoice_items: {invoice: {transactions: {invoice: :customer}}}})
         .where("merchants.id = ?", self.id).where("result = ?", 1).limit(5)
         .group('customers.id', 'customers.first_name', 'customers.last_name').order(count: :desc).count
   end
 
-
-
 ####### item methods ##############
-  # def ship_ready
-  #   Merchant.joins(items: {invoice_items: :invoice})
-  #     .where("merchants.id = ?", self.id).where("invoices.status != ?", 1).where("invoice_items.status != ?", 2)
-  #     .order("invoices.created_at").pluck("items.name", "invoices.id", "invoices.created_at")
-  # end   ##Merchant
+
+  def top_five_items
+    require "pry", binding.pry
+    items.joins(invoice_items: {invoices: :transactions})
+         .where(transactions: {result: :success})
+         .group('item_id').limit(5)
+         .order(revenue: :desc)
+         .select('item.*, sum(invoice_items.quantity * invoice_items.unit_price)'' as revenue')
+  end
+
+  # def top_merchant
+  #   # invoices.joins(:transactions, invoice_items: {item: :merchant})
+  #   invoices.joins(:transactions, :merchant)
+  #           .where(transactions: {result: : success})
+  #           .order(revenue: :desc).limit(5)
+  #           .group('merchant_id')
+  #           .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' as revenue')
+  #           .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' as revenue')
+  #           # .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' desc')
+  # end
+
 
   # def self.top_five
   #   joins(invoices: :transactions)
@@ -58,9 +78,8 @@ class Merchant < ApplicationRecord
   # end   ##ADMIN
 
 
-
-
-
 ###### invoice methods ###########
+
+
 
 end

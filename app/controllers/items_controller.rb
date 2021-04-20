@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:id])
-    # item = @merchant.items.new()
     item = Item.new({name: params[:name], description: params[:description], unit_price: params[:unit_price], able: params[:able], merchant_id: @merchant.id})
     item.save
     redirect_to "/merchants/#{@merchant.id}/items"
@@ -29,9 +28,7 @@ class ItemsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:merchant_id])
-    # item = @merchant.items.find(params[:item_id])
     item = Item.find(params[:item_id])
-    binding.pry
     if params[:name]
       item.update({
         name: params[:name],

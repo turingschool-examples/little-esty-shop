@@ -16,11 +16,10 @@ class Item < ApplicationRecord
     where(able: "Enabled")
   end
 
-  def self.top_five_revenue
-
-  end
-
-  def revenue_generated
-    # self.unit_price * quantity
-  end
+  # def self.top_five_revenue
+  # end
+  #
+  # def revenue_generated
+  # end
+  
 end
