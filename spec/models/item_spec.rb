@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_1)
-    @item_3 = create(:item, merchant: @merchant_2)
+    @item_3 = create(:item, merchant: @merchant_2, status: 1)
 
     @customer_1 = create(:customer)
     @customer_2 = create(:customer)
@@ -46,6 +46,14 @@ RSpec.describe Item, type: :model do
       it 'returns the items that are ready to ship' do
         expect(@merchant_1.invoice_items.ready_to_ship).to eq([@invoice_item_1])
       end
+    end
+
+    it '::disabled_items' do
+      expect(@merchant_1.items.disabled_items).to eq([@item_1, @item_2])
+    end
+
+    it '::enabled_items' do
+      expect(@merchant_2.items.enabled_items).to eq([@item_3])
     end
   end
 end

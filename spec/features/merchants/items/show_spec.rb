@@ -8,7 +8,7 @@ RSpec.describe 'as a merchant, when I click on the name of an item' do
     @item_2 = create(:item, merchant: @merchant_1)
     @item_3 = create(:item, merchant: @merchant_1)
 
-    visit "merchants/#{@merchant_1.id}/items/"
+    visit "/merchants/#{@merchant_1.id}/items/"
 
     click_on("#{@item_1.name}")
     expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
