@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag 'favicon.ico' %>
     <title>LittleEtsyShop</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +12,9 @@
       <%= stylesheet_link_tag    'application', media: 'all' %>
       <%= javascript_include_tag 'application' %>
   </head>
+
   <body>
-    <%= binding.pry %>
+    <img src="<%= asset_path('animation-lil-e-shoppe.gif') %>" width="50" height="50">
     <small>
       From Github repo: <%= GithubService.get_name[:name] %>
     </small>
