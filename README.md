@@ -4,35 +4,36 @@
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+## Database Design Schema
+![database schema](https://user-images.githubusercontent.com/57960885/115322048-cb931d00-a14a-11eb-9699-eeabcfc0f76a.png)
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
+---
 
-## Setup
+## Setup & Getting Started
 
-This project requires Ruby 2.5.3.
+This project requires Ruby 2.5.3 & Rails 5.2.5.
 
 * Fork this repository
 * Clone your fork
 * From the command line, install gems and set up your DB:
+    * `gem install rails --version 5.2.5`
     * `bundle`
     * `rails db:create`
 * Run the test suite with `bundle exec rspec`.
+* To seed development database:
+    * `rails csv_load:all` to load all CSV files. Or,
+    * `rails csv_load:<table_name>` to load a single CSV file.
+    * Run `rails csv_load:correction_seq_id` to reset primary keys.
+    * Lastly, run `rails db:seed`
 * Run your development server with `rails s` to see the app in action.
 
-## Phases
+---
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+## Contributions
+
+To add more content to this open source project, fork the repository, clone your fork, create a feature branch, push branch to GitHub and create a pull request for review. Any and all pull request will be considered by other collaborators.
+
+Current collaborators:
+  * @ochar721
+  * @klaudiastewart
+  * @gaelyn
