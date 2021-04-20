@@ -1,1 +1,16 @@
 <h1>Admin - Invoice Show</h1>
+
+<section>
+  ID: <%= @invoice.id %>
+  Status: <%= @invoice.status %>
+</section>
+
+<section>
+  Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
+</section>
+
+<section>
+  Customer: <%= @invoice.customer.first_name%>
+            <%= @invoice.customer.last_name%>
+</section>
+
