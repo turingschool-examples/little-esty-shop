@@ -10,7 +10,6 @@ class GitHubService
   end
   
   def repo_name
-    binding.pry
     resp = conn.get('/repos/A-McGuire/little-esty-shop')
     json = JSON.parse(resp.body, symbolize_names: true)
     json[:name]

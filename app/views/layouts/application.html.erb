@@ -25,11 +25,12 @@
     <%= yield %>
 
     <h4>Git Hub Repository: 
-      <%= GitHubService.new.repo_name %>
+      <% service = GitHubService.new %>
+      <%= service.repo_name %>
     </h4>
     
     <h4>Contributors: 
-      <%= GitHubService.new.repo_contributors.join(", ") %>
+      <%= service.repo_contributors.join(", ") %>
     </h4>
   </body>
 </html>
