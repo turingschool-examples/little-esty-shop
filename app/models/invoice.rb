@@ -16,6 +16,6 @@ class Invoice < ApplicationRecord
   end
 
   def item_sell_info
-    self.items.includes(:invoice_items).select("items.*, invoice_items.*")
+    self.invoice_items.includes(:item)
   end
 end

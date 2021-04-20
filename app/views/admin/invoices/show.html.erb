@@ -14,3 +14,15 @@
             <%= @invoice.customer.last_name%>
 </section>
 
+<section id="items">
+  <h3>Items</h3>
+  <% @invoice.item_sell_info.each do |invoice_item| %>
+    <section id="item-<%= invoice_item.item.id %>">
+      <%= invoice_item.item.name %><br>
+      Quantity: <%= invoice_item.quantity %><br>
+      Sell Price: <%= invoice_item.unit_price %><br>
+      Invoice Item Status: <%= invoice_item.status %>
+    </section><br>
+  <% end %>
+</section>
+

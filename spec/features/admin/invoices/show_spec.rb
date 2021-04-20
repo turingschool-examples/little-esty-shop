@@ -31,7 +31,7 @@ RSpec.describe 'admin invoice show page', type: :feature do
     item4 = merchant.items.create!(name: "fake", description: "fakey", unit_price: 4)
     invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity:10, unit_price: 11, status: 0)
     invoice_item2 = InvoiceItem.create!(item: item2, invoice: invoice1, quantity:20, unit_price: 22, status: 1)
-    invoice_item2 = InvoiceItem.create!(item: item3, invoice: invoice1, quantity:30, unit_price: 33, status: 2)
+    invoice_item3 = InvoiceItem.create!(item: item3, invoice: invoice1, quantity:30, unit_price: 33, status: 2)
     
     visit "/admin/invoices/#{invoice1.id}"
     
@@ -58,6 +58,4 @@ RSpec.describe 'admin invoice show page', type: :feature do
       end
     end
   end
-
-  it 'shows the item: name, quantity, price sold for, invoice_item status'
 end

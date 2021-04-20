@@ -51,23 +51,23 @@ RSpec.describe Invoice do
         invoice_item2 = InvoiceItem.create!(item: item3, invoice: invoice1, quantity:30, unit_price: 33, status: 2)
 
         actual = invoice1.item_sell_info
-        actual_name = actual.map do |item|
-          item.name
+        actual_name = actual.map do |invoice_item|
+          invoice_item.item.name
         end
-        actual_quantity = actual.map do |item|
-          item.quantity
+        actual_quantity = actual.map do |invoice_item|
+          invoice_item.quantity
         end
-        actual_price = actual.map do |item|
-          item.unit_price
+        actual_price = actual.map do |invoice_item|
+          invoice_item.unit_price
         end
-        actual_status = actual.map do |item|
-          item.status
+        actual_status = actual.map do |invoice_item|
+          invoice_item.status
         end
 
         expect(actual_name).to eq(['thing', 'stuff', 'it'])
         expect(actual_quantity).to eq([10, 20, 30])
         expect(actual_price).to eq([11, 22, 33])
-        expect(actual_status).to eq([0, 1, 2])
+        expect(actual_status).to eq(['packaged', 'pending', 'shipped'])
       end
     end
   end
