@@ -11,24 +11,20 @@
 
 <section id="enabled-merchants"><h2> Enabled Merchants </h2>
 <% @enabled_merchants.each do |merchant|%>
-  <p id="merchant-<%=merchant.id %>"><%= merchant.name %>
-  <%= button_to "Disable", admin_merchant_path(merchant), params: {status: :disabled}, method: :patch, local: true %>
-</p>
-<%end%>
+  <%= merchant.name %>
+  <%= button_to "Disable #{merchant.name}", admin_merchant_path(merchant), params: {status: :disabled}, method: :patch, local: true %>
+  <%end%>
 </section>
 
 <section id="disabled-merchants"><h2> Disabled Merchants </h2>
 <% @disabled_merchants.each do |merchant|%>
   <p><%= merchant.name %>
-    <%= button_to "Enable", admin_merchant_path(merchant), params: {status: :enabled}, method: :patch, local: true %>
+    <%= button_to "Enable #{merchant.name}", admin_merchant_path(merchant), params: {status: :enabled}, method: :patch, local: true %>
   </p>
   <%end%>
 </section>
-
-
 
 <h2>Top 5 Merchants by Total Revenue</h2>
 <%  @top_five_merchants.each do |merchant| %>
   <%= link_to "#{merchant.name}", "/admin/merchant/#{merchant.id}" %> generated: <%= number_to_currency(merchant.total_rev) %> in total revenue!
 <%end%>
-

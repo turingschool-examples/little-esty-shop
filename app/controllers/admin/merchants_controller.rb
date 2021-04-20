@@ -4,7 +4,6 @@ class Admin::MerchantsController < ApplicationController
     @enabled_merchants = Merchant.enabled
     @disabled_merchants = Merchant.disabled
     @top_five_merchants = Merchant.top_five_by_merchant_revenue
-
   end
 
   def new
@@ -26,6 +25,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
+    require "pry"; binding.pry
     if params[:status]
       @merchant.update(merchant_params)
       redirect_to admin_merchants_path
