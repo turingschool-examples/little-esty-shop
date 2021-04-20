@@ -45,7 +45,9 @@ RSpec.describe Customer, type: :model do
 
     describe "::top_five_customers" do
       it 'lists the top five customers for a merchant' do
+
         expect(Customer.top_five_customers.to_a).to eq([@customer, @customer_1, @customer_2, @customer_3, @customer_4])
+        binding.pry
         expect(Customer.top_five_customers.to_a).to_not eq([@customer_5])
       end
     end

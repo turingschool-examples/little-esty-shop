@@ -1,7 +1,9 @@
+
 class GithubService
   # def initialize(token)
-  #   @token = token
+  #   @token = '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'
   # end
+
 
   def self.get_name
     response = conn.get('/repos/ochar721/little-esty-shop')
@@ -22,7 +24,8 @@ class GithubService
     Faraday.new(
       url: "https://api.github.com",
       headers: {
-        'Accept' => 'application/vnd.github.v3+json'
+        'Accept' => 'application/vnd.github.v3+json',
+        'Authorization' => "token #{ENV['GITHUB_TOKEN']}"
       }
     )
   end
