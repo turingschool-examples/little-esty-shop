@@ -101,13 +101,16 @@ RSpec.describe 'when I visit the admin merchant index page' do
     end
 
     # need to find a way to test this but not mapping to id in p tag
-    xit 'updates merchant status when button pushed' do
+    it 'updates merchant status when button pushed' do
     visit '/admin/merchants'
-      expect(@merchant_1.status).to eq('enabled')
 
-      click_on "Disable"
+      within "#enabled-merchants"  do
+        expect(page).to have_content(@merchant_1.name)
 
-      expect(@merchant_1.status).to eq('disabled')
+        click_button("Disable #{@merchant_1.name}")
+
+        expect(page).to_not have_content(@merchant_1.name)
+      end
     end
   end
 end
