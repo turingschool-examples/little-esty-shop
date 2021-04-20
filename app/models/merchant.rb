@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   validates :name, presence: true
+  validates :able, presence: true
 
   has_many :items, dependent: :destroy
 

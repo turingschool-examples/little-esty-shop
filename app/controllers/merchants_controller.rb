@@ -34,7 +34,6 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
     # item = @merchant.items.new()
     item = Item.new({name: params[:name], description: params[:description], unit_price: params[:unit_price], able: params[:able], merchant_id: @merchant.id})
-    binding.pry
     item.save
     redirect_to "/merchants/#{@merchant.id}/items"
   end
@@ -52,16 +51,20 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     # item = @merchant.items.find(params[:item_id])
     item = Item.find(params[:item_id])
-    item.update({
-      name: params[:name],
-      description: params[:description],
-      unit_price: params[:unit_price],
-      able: params[:able]
-      })
-    #if 
+    binding.pry
+    if params[:name]
+      item.update({
+        name: params[:name],
+        description: params[:description],
+        unit_price: params[:unit_price],
+        able: params[:able]
+        })
+    else
+      item.update({able: params[:able]})
+    end
     item.save
-    redirect_to "/merchants/#{@merchant.id}/items"
     flash[:alert] = "Item was successfully updated."
+    redirect_to "/merchants/#{@merchant.id}/items"
   end
 
 
