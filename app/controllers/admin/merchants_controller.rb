@@ -25,7 +25,6 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
-    require "pry"; binding.pry
     if params[:status]
       @merchant.update(merchant_params)
       redirect_to admin_merchants_path
