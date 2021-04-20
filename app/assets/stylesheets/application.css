@@ -14,66 +14,61 @@
  *= require_self
  */
 
-li.disabled_items{
-  color: crimson;
-  list-style-type: circle;
+img{
+  margin-right: 100%;
 }
 
-li.enabled_items{
-  color: green;
-  list-style-type: circle;
-}
+ul {
+   color: #3C403D;
+   list-style-type: circle;
+ }
+
+ol {
+   color: #3C403D;
+ }
 
 body {
- font-family: 'Trebuchet MS', sans-serif;}
+ font-family: 'Trebuchet MS', sans-serif;
+ margin: 15px;
+ color: #3C403D;
+ }
 
 header {
-  color: crimson;
-  width: 500px;
-  margin: 10px auto 10px auto;
+  color: #3C403D;
+  width: 100%;
   text-align: center;
-  padding: 5px;
-  background-color: whitesmoke;
-  border-style: dashed;
-  border-color: darkgoldenrod SteelBlue darkgoldenrod SteelBlue;}
-}
-
-h1 {
-  color: SteelBlue;
-  width: 500px;
-  margin: 10px auto 10px auto;
-  padding: 5px;
-  text-align: center;
-  background-color: whitesmoke;  }
+  background-color: #DADED4;
+  border: 2px solid #A3BCB6;
+  padding: 10px 0;}
 
 h2 {
-  color: SteelBlue;
+  color: #3C403D;
   width: 700px;
   margin: 10px auto 10px auto;
   padding: 5px;
   text-align: center;
-  background-color: whitesmoke;  }
+  background-color: #DADED4;  }
 
 
 h3 {
- color: DimGray;}
+ color: #3C403D;}
 
 a:link {
-color: darkgoldenrod;
-text-decoration: none;
-cursor: pointer}
+  color: #39603D;
+  text-decoration: none;
+  cursor: pointer}
 
 a:visited {
-  color: darkgoldenrod;}
+  color: #39603D;}
 
 a:hover {
-  color: crimson;
+  color: #A3BCB6;
   text-decoration: underline;}
 
 input {
   padding: 6px 12px 6px 12px;
-  border: 1px solid #665544;
-  color: green;}
+  border: 2px solid #DADED4;
+  color: #3C403D;}
 
 
 /* .enabled_items:input{
