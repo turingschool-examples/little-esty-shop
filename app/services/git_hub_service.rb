@@ -4,7 +4,7 @@ class GitHubService
     conn = Faraday.new(
       url: 'https://api.github.com',
       headers: {
-        'Authorization' => "ENV['GITHUB_KEY']",
+        'Authorization' => "token #{ENV['GITHUB_KEY']}",
         'Accept' => 'application/vnd.github.v3+json'}
     )
   end
