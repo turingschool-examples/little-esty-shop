@@ -20,10 +20,9 @@ class GithubService
       url: "https://api.github.com",
       headers: {
         'Accept' => 'application/vnd.github.v3+json',
-        'Authorization' => "token #{ENV['GITHUB_TOKEN']}"
       }
     )
   end
 end
 
-  # 'Authorization' => "token #{@token}",
+      # 'Authorization' => "token #{ENV['GITHUB_TOKEN']}"
