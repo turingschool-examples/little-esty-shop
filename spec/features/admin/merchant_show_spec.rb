@@ -7,6 +7,11 @@ RSpec.describe "Admin Merchant Show page" do
     visit "/admin/merchant/#{@parlour.id}"
   end
 
+  it "Merchants show page" do
+    expect(page).to have_content("Ice Cream Parlour")
+    expect(page).to_not have_content("Tattoo")
+  end
+
     it "Shows that merchants name and a link to update" do
       expect(page).to have_content(@parlour.name)
       expect(page).to have_link("Update")
