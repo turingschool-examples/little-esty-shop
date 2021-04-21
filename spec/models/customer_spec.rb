@@ -65,4 +65,12 @@ RSpec.describe Customer, type: :model do
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:merchants).through(:items) }
   end
+
+  describe 'model tests' do
+    it 'can return a list of the top 5 customers that have the most successful transactions' do
+      expect(Customer.top_five_customers).to eq(
+        [@customer6, @customer5, @customer7, @customer4, @customer3]
+      )
+    end
+  end
 end

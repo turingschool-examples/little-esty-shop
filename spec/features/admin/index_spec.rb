@@ -78,15 +78,20 @@ RSpec.describe 'as an Admin' do
 
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice2.id)
-    expect(page).not_to have_content(@invoice3.id)
+    expect(page).not_to have_content(@invoice4.id)
   end
 
-  it 'shows me the name of the top 5 customers that have conducted the largest number of successful transactions' do
-    # consider writing loops for each of the instance variables.
-    # utilizing active record queries in order to
+  it 'has a section for the top 5 customers' do
+    visit '/admin'
+    expect(page).to have_content("Top 5 Customers")
   end
 
   it 'next to each of the top 5 customers I see the number of successful tranasctions they have conducted with my merchant' do
-
+    visit '/admin'
+    expect(page).to have_content(@customer6.successful_transactions)
+    expect(page).to have_content(@customer5.successful_transactions)
+    expect(page).to have_content(@customer7.successful_transactions)
+    expect(page).to have_content(@customer3.successful_transactions)
+    expect(page).to have_content(@customer4.successful_transactions)
   end
 end
