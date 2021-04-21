@@ -1,5 +1,5 @@
-<%= @item.name %><br>
-<%= @item.description %><br>
-<%= @item.unit_price %><br>
+<h3><%= @item.name %><br></h3>
+Description: <%= @item.description %><br>
+Unit Price: <%= @item.unit_price %><br>
 
 <%= link_to 'Update Item', "/merchants/#{@merchant.id}/items/#{@item.id}/edit", class: "btn btn-info" %>
