@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin merchants new spec' do
+RSpec.describe 'Admin Merchants New Spec' do
   before :each do
     @m1 = Merchant.create!(name: 'Merchant 1')
   end
-  describe 'as an admin' do
+  
+  describe 'As an Admin' do
     it 'loads with a form to create a new merchant' do
       visit new_admin_merchant_path
 

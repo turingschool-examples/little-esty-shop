@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Admin Merchants Edit Page' do
   before :each do
     @merchant = create(:merchant)
-
-    # visit edit_admin_merchant_path(@merchant)
   end
 
   describe 'as an admin' do

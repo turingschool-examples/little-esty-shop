@@ -110,8 +110,7 @@ RSpec.describe "As an admin" do
     it "When I click on the link, I am taken to a form that allows me to add merchant information." do
       click_on 'Create New Merchant'
 
-      expect(current_path).to eq(new_admin_merchant_path) do
-      end
+      expect(current_path).to eq(new_admin_merchant_path)
     end
   end
 end

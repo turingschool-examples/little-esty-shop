@@ -54,5 +54,4 @@ class Admin::MerchantsController < ApplicationController
    def find_new_id
     Merchant.last.id + 1
   end
-
 end
