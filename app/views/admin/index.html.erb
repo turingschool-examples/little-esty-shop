@@ -16,3 +16,8 @@
 <% Item.top_5_items.each do |item| %>
 <%= item.name %><br>
 <% end %>
+
+<h1> Top 5 Customers </h1>
+<% Customer.top_five_customers.each do |customer| %>
+<%= customer.first_name %> - <%= customer.successful_transactions %><br>
+<% end %>
