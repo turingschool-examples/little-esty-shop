@@ -47,7 +47,7 @@ RSpec.describe 'the merchant item index', type: :feature do
     expect(page).not_to have_content(@nemo.name)
   end     #merchant items us#1
 
-  it 'has Enable button by each item' do
+  skip 'has Enable button by each item' do
     visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content(@qui.name)
@@ -62,7 +62,7 @@ RSpec.describe 'the merchant item index', type: :feature do
     # check redirects to updated index page?
   end     #merchant items us#4 (#2,3 show page)
 
-  it 'shows two sections, "Enabled Items" & "Disabled Items"' do
+  skip 'shows two sections, "Enabled Items" & "Disabled Items"' do
     visit "/merchants/#{@jerde.id}/items"
 
     expect(page).to have_content("Enabled Items")
@@ -76,13 +76,13 @@ RSpec.describe 'the merchant item index', type: :feature do
     expect(page).to have_button("Disable")
   end     #merchant items us#5
 
-  it "has a link to 'Create New Item'" do
+  skip "has a link to 'Create New Item'" do
     visit "/merchants/#{@jerde.id}/items"
       click_on "Create New Item"
     expect(current_path).to eq("/merchants/#{@jerde.id}/items/new")
   end     #merchant items us#6-1
 
-  it "has form to create new item" do
+  skip "has form to create new item" do
       visit "/merchants/#{@jerde.id}/items/new"
     expect(page).to have_content('New Item')
     expect(find('form')).to have_content('Name')

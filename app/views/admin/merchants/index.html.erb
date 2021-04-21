@@ -1,1 +1,37 @@
 <h1>Admin - Merchants</h1>
+
+<section id="disabled_merchants">
+  <h3>Disabled Merchants</h3>
+  <% @disabled_merchants.each do |merchant|%>
+    <section id="merchant-<%= merchant.id %>">
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+      <%= button_to "Enable", "/admin/merchants/#{merchant.id}", params: {status: :enabled}, method: :patch %>
+    </section>
+  <% end %>
+</section>
+
+<section id="enabled_merchants">
+  <h3>Enabled Merchants</h3>
+  <% @enabled_merchants.each do |merchant|%>
+    <section id="merchant-<%= merchant.id %>">
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+      <%= button_to "Disable", "/admin/merchants/#{merchant.id}", params: {status: :disabled}, method: :patch %>
+    </section>
+  <% end %>
+</section>
+
+<section>
+  <%= link_to "Create New Merchant", "/admin/merchants/new" %>
+</section>
+
+<section id="top_five_by_revenue">
+  <h3>Top Five Merchants by Revenue</h3>
+  <% @top_five_by_revenue.each do |merchant| %>
+    <section id="top_merchant-<%= merchant.id %>">
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+      <%= number_to_currency(merchant.total_revenue) %> in sales<br>
+      Top day for <%= merchant.name %> was
+      <%= merchant.best_day.strftime("%m/%d/%y") %><br><br>
+    </section>
+  <% end %>
+</section>

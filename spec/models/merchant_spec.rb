@@ -5,14 +5,100 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:items) }
   end
 
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
+  describe "validations" do
+    it {should validate_presence_of :name}
+    it {should validate_presence_of :status}
   end
 
   before(:each) do
   end
 
+  describe 'instance methods' do
+    describe 'best_day' do
+      it 'returns the most profitable date for the merchant' do
+        customer = Customer.create!(first_name: "Very", last_name: "Rich")
+        merchant = Merchant.create!(name: "CCC")
+        item = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice1 = customer.invoices.create!(status: 0, created_at: "2012-03-07 12:54:10 UTC")
+        invoice2 = customer.invoices.create!(status: 0, created_at: "2012-03-25 09:54:09 UTC")
+        invoice3 = customer.invoices.create!(status: 0, created_at: "2011-03-25 09:54:09 UTC")
+        invoice_item1 = InvoiceItem.create!(item: item, invoice: invoice2, quantity: 3, unit_price: 5, status: 2)
+        invoice_item2 = InvoiceItem.create!(item: item, invoice: invoice2, quantity: 3, unit_price: 5, status: 2)
+        invoice_item3 = InvoiceItem.create!(item: item, invoice: invoice1, quantity: 3, unit_price: 5, status: 2)
+        invoice_item4 = InvoiceItem.create!(item: item, invoice: invoice3, quantity: 3, unit_price: 50, status: 2)
+        transaction1 = invoice1.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        transaction3 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
+        
+        expect(merchant.best_day).to eq("2012-03-25 09:54:09 UTC")
+      end
+    end
+  end
+
   describe 'class methods' do
+    describe 'top_five_by_revenue' do
+      it 'returns the top five merchants' do
+        customer = Customer.create!(first_name: "Very", last_name: "Rich")
+        
+        merchant3 = Merchant.create!(name: "CCC")
+        item3 = merchant3.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice3 = customer.invoices.create!(status: 0)
+        transaction3 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        invoice_item7 = InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 3, unit_price: 5, status: 2)
+        invoice_item8 = InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 3, unit_price: 5, status: 2)
+        invoice_item9 = InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 3, unit_price: 5, status: 2)
+        
+        merchant5 = Merchant.create!(name: "EEE")
+        item5 = merchant5.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice5 = customer.invoices.create!(status: 0)
+        transaction5 = invoice5.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        invoice_item13 = InvoiceItem.create!(item: item5, invoice: invoice5, quantity: 5, unit_price: 5, status: 2)
+        invoice_item14 = InvoiceItem.create!(item: item5, invoice: invoice5, quantity: 5, unit_price: 5, status: 2)
+        invoice_item15 = InvoiceItem.create!(item: item5, invoice: invoice5, quantity: 5, unit_price: 5, status: 2)
+        
+        merchant1 = Merchant.create!(name: "AAA")
+        item1 = merchant1.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice1 = customer.invoices.create!(status: 0)
+        transaction1 = invoice1.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 1, unit_price: 5, status: 2)
+        invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 1, unit_price: 5, status: 0)
+        invoice_item3 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 1, unit_price: 5, status: 1)
+        
+        merchant6 = Merchant.create!(name: "FFF")
+        item6 = merchant6.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice6 = customer.invoices.create!(status: 0)
+        transaction6 = invoice6.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
+        invoice_item16 = InvoiceItem.create!(item: item6, invoice: invoice6, quantity: 6, unit_price: 5, status: 2)
+        invoice_item17 = InvoiceItem.create!(item: item6, invoice: invoice6, quantity: 6, unit_price: 5, status: 2)
+        invoice_item18 = InvoiceItem.create!(item: item6, invoice: invoice6, quantity: 6, unit_price: 5, status: 2)
+        
+        merchant7 = Merchant.create!(name: "GGG")
+        item7 = merchant7.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice7 = customer.invoices.create!(status: 0)
+        transaction7 = invoice7.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        invoice_item19 = InvoiceItem.create!(item: item7, invoice: invoice7, quantity: 7, unit_price: 5, status: 2)
+        invoice_item20 = InvoiceItem.create!(item: item7, invoice: invoice7, quantity: 7, unit_price: 5, status: 2)
+        invoice_item21 = InvoiceItem.create!(item: item7, invoice: invoice7, quantity: 7, unit_price: 5, status: 2)
+        
+        merchant4 = Merchant.create!(name: "DDD")
+        item4 = merchant4.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice4 = customer.invoices.create!(status: 0)
+        transaction4 = invoice4.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        invoice_item10 = InvoiceItem.create!(item: item4, invoice: invoice4, quantity: 4, unit_price: 5, status: 2)
+        invoice_item11 = InvoiceItem.create!(item: item4, invoice: invoice4, quantity: 4, unit_price: 5, status: 2)
+        invoice_item12 = InvoiceItem.create!(item: item4, invoice: invoice4, quantity: 4, unit_price: 5, status: 2)
+        
+        merchant2 = Merchant.create!(name: "BBB")
+        item2 = merchant2.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        invoice2 = customer.invoices.create!(status: 0)
+        transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
+        invoice_item4 = InvoiceItem.create!(item: item2, invoice: invoice2, quantity: 2, unit_price: 5, status: 2)
+        invoice_item5 = InvoiceItem.create!(item: item2, invoice: invoice2, quantity: 2, unit_price: 5, status: 2)
+        invoice_item6 = InvoiceItem.create!(item: item2, invoice: invoice2, quantity: 2, unit_price: 5, status: 2)
+
+        expect(Merchant.top_five_by_revenue).to eq([merchant7, merchant5, merchant4, merchant3, merchant2])
+      end
+    end
   end
 
 
@@ -132,6 +218,61 @@ RSpec.describe Merchant, type: :model do
                         }
 
       expect(merchant.top_five_customers).to eq(expected_result)
+    end
+  end
+
+  describe 'ship_ready' do
+    it 'returns info of all orders that a merchant has not shiped in order of date made' do
+      merchant = Merchant.create(name: 'Bob Cella')
+
+      item_a = merchant.items.create!(name: "thing", description: "item of a thing", unit_price: 100)
+      item_b = merchant.items.create!(name: "stuff", description: "bla bla bla", unit_price: 50)
+      item_c = merchant.items.create!(name: "doo-hicky", description: "stuffy stuff", unit_price: 200)
+
+      customer_a = Customer.create!(first_name: "albert", last_name: "anderston")
+      customer_b = Customer.create!(first_name: "billy", last_name: "baxter")
+      customer_c = Customer.create!(first_name: "charlot", last_name: "carlston")
+
+      invoice_1a = customer_a.invoices.create!(status: 0)
+      invoice_2a = customer_a.invoices.create!(status: 1)
+      invoice_3a = customer_a.invoices.create!(status: 2)
+
+      invoice_1b = customer_b.invoices.create!(status: 0)
+      invoice_2b = customer_b.invoices.create!(status: 1)
+      invoice_3b = customer_b.invoices.create!(status: 2)
+
+      invoice_1c = customer_c.invoices.create!(status: 0)
+      invoice_2c = customer_c.invoices.create!(status: 1)
+      invoice_3c = customer_c.invoices.create!(status: 2)
+
+      invoice_item_1a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_1a.id, item_id: item_a.id)
+      invoice_item_2a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2a.id, item_id: item_b.id)
+      invoice_item_3a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_3a.id, item_id: item_c.id)
+
+      invoice_item_1b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1b.id, item_id: item_a.id)
+      invoice_item_2b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_2b.id, item_id: item_b.id)
+      invoice_item_3b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_3b.id, item_id: item_c.id)
+
+      invoice_item_1c = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1c.id, item_id: item_a.id)
+      invoice_item_2c = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2c.id, item_id: item_b.id)
+      invoice_item_3c = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_3c.id, item_id: item_c.id)
+
+
+      expect(merchant.ship_ready[0][0]).to eq(item_c.name)
+      expect(merchant.ship_ready[0][1]).to eq(invoice_3a.id)
+      expect(merchant.ship_ready[0][2]).to eq(invoice_3a.created_at)
+
+      expect(merchant.ship_ready[1][0]).to eq(item_a.name)
+      expect(merchant.ship_ready[1][1]).to eq(invoice_1b.id)
+      expect(merchant.ship_ready[1][2]).to eq(invoice_1b.created_at)
+
+      expect(merchant.ship_ready[2][0]).to eq(item_c.name)
+      expect(merchant.ship_ready[2][1]).to eq(invoice_3b.id)
+      expect(merchant.ship_ready[2][2]).to eq(invoice_3b.created_at)
+
+      expect(merchant.ship_ready[3][0]).to eq(item_a.name)
+      expect(merchant.ship_ready[3][1]).to eq(invoice_1c.id)
+      expect(merchant.ship_ready[3][2]).to eq(invoice_1c.created_at)
     end
   end
 end
