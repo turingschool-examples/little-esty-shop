@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: true
+  validates :able, presence: true
 
   belongs_to :merchant
 
@@ -30,18 +31,8 @@ class Item < ApplicationRecord
         .where('transactions.result = ?', 1)
         .where('items.id = ?', self.id)
         .group('invoices.created_at')
-        .select('invoices.created_at as best_day, sum(invoice_items.quantity) as total')
+        .select('invoices.created_at as items_day, sum(invoice_items.quantity) as total')
         .order(total: :desc)
-        .order(best_day: :desc).limit(1)
+        .order(items_day: :desc).limit(1)
   end
-
-  # def top_five_items  #MERCHANT by revenue
-  #   items.joins(invoice_items: {invoices: :transactions})
-  #        .where("transactions.result = ?", 1)
-  #        .group('item_id').limit(5)
-  #        .order(revenue: :desc)
-  #        .select('item.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-  # end
-
-
 end

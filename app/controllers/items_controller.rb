@@ -6,7 +6,6 @@ class ItemsController < ApplicationController
     @disabled_items = Item.all.disabled
     @top_items = Item.top_five_items(@merchant.id)
     @top_days = @top_items.map {|item| item.item_best_day.first}
-    # binding.pry
   end
 
   def show
