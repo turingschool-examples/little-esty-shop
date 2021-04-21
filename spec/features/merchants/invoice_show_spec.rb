@@ -233,4 +233,29 @@ RSpec.describe 'the merchant invoice show page: ', type: :feature do
       expect(page).to have_content("1500")
     end
   end
+
+  # describe "name pending: " do
+  #   it ' updates invoice status ' do
+  #     merchant = Merchant.create(name: 'Bob Cella')
+  #
+  #     item_a = merchant.items.create!(name: "thing", description: "item of a thing", unit_price: 100)
+  #     item_b = merchant.items.create!(name: "stuff", description: "bla bla bla", unit_price: 50)
+  #     item_c = merchant.items.create!(name: "cool cat glasses", description: "stuffy stuff", unit_price: 200)
+  #
+  #     customer_a = Customer.create!(first_name: "albert", last_name: "anderston")
+  #
+  #     invoice = customer_a.invoices.create!(status: 0)
+  #
+  #     invoice_item_1a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 0, invoice_id: invoice.id, item_id: item_a.id)
+  #     invoice_item_2a = InvoiceItem.create!(quantity: 10, unit_price: 50, status: 1, invoice_id: invoice.id, item_id: item_b.id)
+  #     invoice_item_3a = InvoiceItem.create!(quantity: 1, unit_price: 500, status: 2, invoice_id: invoice.id, item_id: item_c.id)
+  #
+  #     visit "merchants/#{merchant.id}/invoices/#{invoice.id}"
+  #
+  
+  #     # expect(item.status).to eq()
+  #   end
+  end
+
+
 end

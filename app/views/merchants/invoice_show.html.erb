@@ -1,4 +1,16 @@
 <%= @invoice.id %> </br>
+
+
+<section id="status_select_field">
+  <%= form_with model: [:admin, @invoice], local: true do |f| %>
+    <%= f.label :status %>
+    <%= f.select :status, ['in progress', 'cancelled', 'completed']%>
+
+    <%= f.submit "Update Invoice Status" %>
+  <% end %>
+</section>
+
+
 <%= @invoice.status %> </br>
 <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </br>
 <%= @customer.first_name %> </br>
