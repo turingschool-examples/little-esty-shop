@@ -33,4 +33,15 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc)
     .limit(5)
   end
+
+  def top_five_customers
+    self.customers.
+    joins(:transactions).
+    where("'transactions.result != ?', 'failed' as result").
+    select("customers.*, count('result') as top_five").
+    group(:id).
+    order(top_five: :desc).
+    limit(5)
+  end
+
 end
