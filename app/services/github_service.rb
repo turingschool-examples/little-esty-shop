@@ -1,10 +1,5 @@
 
 class GithubService
-  # def initialize(token)
-  #   @token = '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'
-  # end
-
-
   def self.get_name
     response = conn.get('/repos/ochar721/little-esty-shop')
     JSON.parse(response.body, symbolize_names: true)

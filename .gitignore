@@ -27,5 +27,3 @@
 /config/master.key
 
 .coverage/*
-
-application.yml
