@@ -22,4 +22,14 @@ class Item < ApplicationRecord
     .order(total_revenue: :desc)
     .limit(5)
   end
+
+  def best_day
+    invoices
+    .joins(:invoice_items)
+    .group('invoices.created_at')
+    .select('invoices.created_at AS created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    .order(total_revenue: :desc)
+    .first
+    .format_time
+  end
 end
