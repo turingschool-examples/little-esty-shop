@@ -93,8 +93,7 @@ RSpec.describe "As an admin" do
       end
     end
 
-
-    it "shows label and the date with the most revenue for top 5 merchant." do      
+    it "shows label and the date with the most revenue for top 5 merchant." do
       within("#top_five_merchants-#{@merchant1.id}") do
         expect(page).to have_content("Top selling date for #{@merchant1.name} was #{@merchant1.best_day}")
       end
@@ -102,6 +101,16 @@ RSpec.describe "As an admin" do
       within("#top_five_merchants-#{@merchant2.id}") do
         expect(page).to have_content("Top selling date for #{@merchant2.name} was #{@merchant2.best_day}")
       end
+    end
+
+    it "It has a  link to create a new merchant." do
+      expect(page).to have_link("Create New Merchant")
+    end
+
+    it "When I click on the link, I am taken to a form that allows me to add merchant information." do
+      click_on 'Create New Merchant'
+
+      expect(current_path).to eq(new_admin_merchant_path)
     end
   end
 end

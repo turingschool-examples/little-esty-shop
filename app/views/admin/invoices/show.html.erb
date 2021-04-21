@@ -1,14 +1,26 @@
-<p>Invoice ID: <%= @invoice.id %></p>
+<h2><p>Invoice ID: <%= @invoice.id %></p></h2>
 <p>Status: <%= @invoice.status %></p>
 <p>Date of Creation: <%= @invoice.format_time %></p>
 <p>Customer First Name: <%= @customer.first_name %>
 <p> Customer Last Name: <%= @customer.last_name %>
-
-<% @invoice.items.each do |item| %>
-  <p>Item name: <%= item.name %><br></p>
-  <p>Item quantity: <%= item.invoice_items.first.quantity %><br></p>
-  <p>Item unit price: <%= item.unit_price %><br></p>
-  <p>Item status: <%= item.invoice_items.first.status %><br></p>
-<% end %><br><br>
-
 <p>Total Revenue: <%= @invoice.invoice_items.total_revenue %></p>
+
+<h3>Status Update:</h3>
+
+<section class='invoice_status_update'>
+<%= form_with model: [:admin, @invoice], local: true do |form| %>
+  <%= form.label :status %>
+  <%= form.select :status, [ "in progress", "cancelled", "completed" ] %>
+  <%= form.submit %>
+<% end %>
+</section>
+
+<h2>Items on this Invoice:</h2>
+<% @invoice.items.each do |item| %>
+<section id="invoice-item-status-<%= item.id %>">
+  <h2><p><%= item.name %></h2></p>
+  <p>Quantity: <%= item.invoice_items.first.quantity %><br></p>
+  <p>Unit Price: <%= item.unit_price %><br></p>
+  <p>Status: <%= item.invoice_items.first.status %><br></p>
+</section>
+<% end %><br><br>
