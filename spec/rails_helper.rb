@@ -63,6 +63,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.before :each do
+    mock_repo_name = "Fake Repo Name"
+    mock_repo_contributors = ["fakename1", "fakename2", "fakename3"]
+    allow_any_instance_of(GitHubService).to receive(:repo_name).and_return(mock_repo_name)
+    allow_any_instance_of(GitHubService).to receive(:repo_contributors).and_return(mock_repo_contributors)
+  end
 end
 
 
