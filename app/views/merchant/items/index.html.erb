@@ -20,3 +20,12 @@
 <% end %>
 
 <%= link_to 'Create a New Item', new_merchant_item_path %>
+
+<h3>Top 5 Items</h3>
+<% @items.top_5_items.each do |item| %>
+Top selling date for <%= item.name %> was
+<%= item.best_day %>: 
+<%= "$#{item.total_revenue}" %>
+
+<br>
+<% end %>
