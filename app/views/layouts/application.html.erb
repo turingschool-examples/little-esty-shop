@@ -16,14 +16,14 @@
   <body>
     <img src="<%= asset_path('animation-lil-e-shoppe.gif') %>" width="50" height="50">
     <header><h1>Lil-e-Shoppe</h1></header>
-    
+
     <%= yield %>
-    
+
     <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
+      <div class ="alert"<%= content_tag :div, msg, class: name %></div>
     <% end -%>
 
-    <small>
+    <small class="foot">
       From Github Repo: <%= GithubService.get_name[:name] %> |
       Total Pull Requests: <%= GithubService.get_pull_requests.first[:number]%> |
       Github contributors: <% GithubService.get_user_names.map do |user_name|%>
