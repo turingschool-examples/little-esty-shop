@@ -25,9 +25,12 @@ class MerchantsController < ApplicationController
   end
 
   def invoice_show
+    # @merchant = Merchant.find(params[:merchant_id])
+    @invoice = Invoice.find(params[:invoice_id])
+    @customer = Customer.find(@invoice.customer_id)
+    @items = @invoice.invoice_items
+    @total_revenue = @invoice.expected_revenue
   end
 
-
-#heroku test
 
 end

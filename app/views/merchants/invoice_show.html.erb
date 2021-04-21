@@ -1,0 +1,19 @@
+<%= @invoice.id %> </br>
+<%= @invoice.status %> </br>
+<%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </br>
+<%= @customer.first_name %> </br>
+<%= @customer.last_name %> </br>
+
+</br></br>
+<% @items.each do |item| %>
+  <%=  item.name  %> </br>
+  <%=  item.status  %> </br>
+  <%=  item.quantity  %> </br>
+  <%=  item.unit_price  %> </br>
+  </br>
+<%  end  %>
+
+</br></br>
+
+
+<%=  @total_revenue[@invoice.id]  %></br>
