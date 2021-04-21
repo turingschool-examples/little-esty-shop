@@ -16,9 +16,9 @@
   <body>
     <img src="<%= asset_path('animation-lil-e-shoppe.gif') %>" width="50" height="50">
     <header><h1>Lil-e-Shoppe</h1></header>
-    
+
     <%= yield %>
-    
+
     <% flash.each do |name, msg| -%>
       <%= content_tag :div, msg, class: name %>
     <% end -%>

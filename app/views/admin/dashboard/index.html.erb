@@ -6,9 +6,11 @@
 
 
     <h3>Top Customers</h3>
-    <% @customers.top_five_customers.each do |customer| %>
-      <p id="customer-<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %>, <%= customer.top_five %> purchase(s)</p>
-  <%end%>
+
+    <% @customers.each do |customer| %>
+      <p id="customer-<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %>, <%= customer.transactions.count %> purchase(s)</p>
+    <%end%>
+
 
   <section>
     <h3>Incomplete Invoices</h3>
