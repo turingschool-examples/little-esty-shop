@@ -1,26 +1,39 @@
-<h3 id="links"; style="text-align:left;font-weight:bold;">
+<h3 id="links"; style="text-align:left;">
     Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;"><%= render partial: 'partials/merch_header' %>&emsp;</span>
 </h3>
 
 <h2 align="center">My Items</h2><br/>
-<h4><%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
+<h4>&emsp;<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
 
-<h3 align="right">Top Items  &emsp;  &emsp;</h3>
-<% @top_items.each_with_index do |item, index| %>
-    <h4>&nbsp;  &emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
-    <p>$<%= item.revenue %></p>
-    <p><%= "Top selling date for #{item.name}  was #{@top_days[index].best_day} with most sales" %></p>
-<% end %>
+<style>
+.column {
+  float: left;
+  width: 40%;
+  padding: 50px;
+}
+</style>
 
-<h3>Enabled Items</h3>
-<% @enabled_items.each do |item| %>
-    <h4>&nbsp;  &emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
-    <%= button_to("Disabled", "/items/#{item.id}", :params => {able: "Disabled"}, method: :patch) %>
-<% end %>
+<div class="row">
+  <div class="column">
+    <h3>Enabled Items</h3>
+    <% @enabled_items.each do |item| %>
+        <h4>&emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
+        <%= button_to("Disabled", "/items/#{item.id}", :params => {able: "Disabled"}, method: :patch) %>
+    <% end %></br>
 
+    <h3>Disabled Items</h3>
+    <% @disabled_items.each do |item| %>
+        <h4>&emsp;  <%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
+        <%= button_to("Enabled", "/items/#{item.id}", :params => {able: "Enabled"}, method: :patch) %>
+    <% end %>
+  </div>
 
-<h3>Disabled Items</h3>
-<% @disabled_items.each do |item| %>
-    <h4>&emsp;  <%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
-    <%= button_to("Enabled", "/items/#{item.id}", :params => {able: "Enabled"}, method: :patch) %>
-<% end %>
+  <div class="column">
+    <h3><%= "5 Most Poplular Items" %></h3>
+    <% @top_items.each_with_index do |item, index| %>
+        <h4><%= index+1 %>.&emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %> -  $<%= item.revenue %></h4>
+        <p><%= "Top sales date for '#{item.name}'  was #{@top_days[index].total} with most sales" %></p>
+    <% end %>
+  </div>
+
+</div>
