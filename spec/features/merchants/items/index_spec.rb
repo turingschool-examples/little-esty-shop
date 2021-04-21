@@ -56,8 +56,7 @@ RSpec.describe 'as a merchant, when I visit the merchant items index' do
       end
     end
 
-    # need to find a way to test this but not mapping to id in p tag
-    it 'updates merchant status when button pushed' do
+    it 'updates item status when button pushed' do
       within "#enabled-items"  do
         expect(page).to have_content(@item_3.name)
 
@@ -73,6 +72,12 @@ RSpec.describe 'as a merchant, when I visit the merchant items index' do
 
         expect(page).to_not have_content(@item_1.name)
       end
+    end
+  end
+
+  describe "I see a link to create a new item" do
+    it "has a create new item link" do
+      expect(page).to have_link("Create New Item")
     end
   end
 end

@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
 
   get '/merchants/:merchant_id/items', to: 'items#index', as: 'merchant_items'
+  get '/merchants/:merchant_id/items/new', to: 'items#new', as: 'item_create'
   get '/merchants/:merchant_id/items/:id', to: 'items#show', as: 'merchant_item'
+  post '/merchants/:merchant_id/items', to: 'items#create'
   patch '/merchants/:id/items', to: 'items#update', as: 'item_update'
+
   get '/merchants/:merchant_id/invoices', to: 'invoices#index', as: 'merchant_invoices'
   get '/merchants/:merchant_id/invoices/:id', to: 'invoices#show', as: 'merchant_invoice'
   get  '/merchants/:merchant_id/dashboard', to: 'dashboard#index', as: 'merchant_dashboard_index'

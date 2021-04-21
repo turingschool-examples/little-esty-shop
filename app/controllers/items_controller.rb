@@ -11,6 +11,22 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:merchant_id])
+    item = @merchant.items.new(item_params)
+
+    if item.save
+      redirect_to merchant_items_path(@merchant)
+    else
+      flash[:notice] = "Error: Invalid Input. Complete all forms."
+      redirect_to item_create_path(@merchant)
+    end
+  end
+
   def update
     @item = Item.find(params[:id])
     merchant_id = @item.merchant_id
@@ -22,6 +38,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:name, :status)
+    params.permit(:name, :description, :unit_price, :status)
   end
 end
