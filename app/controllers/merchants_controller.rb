@@ -22,6 +22,8 @@ class MerchantsController < ApplicationController
   end
 
   def invoice_index
+    @merchant = Merchant.find(params[:id])
+    @invoices = Invoice.joins(items: :merchant).where('merchants.id = ?', @merchant.id).group(:id)
   end
 
   def invoice_show

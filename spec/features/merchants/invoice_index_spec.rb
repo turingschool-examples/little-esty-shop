@@ -30,8 +30,8 @@ RSpec.describe 'the merchant invoice index', type: :feature do
 
     visit "merchants/#{merchant.id}/invoices"
 
-    expect(page).to have_content(invoice_1)
-    expect(page).to have_content(invoice_2)
+    expect(page).to have_content(invoice_1.id)
+    expect(page).to have_content(invoice_2.id)
   end
 
   it 'it displays links to invoice show page: '  do
@@ -60,7 +60,7 @@ RSpec.describe 'the merchant invoice index', type: :feature do
 
     invoice_item_3d = InvoiceItem.create!(quantity: 1, unit_price: 500, status: 2, invoice_id: invoice_3.id, item_id: item_d.id)
 
-    visit "/merchants/#{merchant.id}/invoices/"
+    visit "/merchants/#{merchant.id}/invoices"
 
     expect(page).to have_link(invoice_1.id)
     expect(page).to have_link(invoice_2.id)
