@@ -16,13 +16,6 @@ class GithubService
   end
 
   def self.conn
-    Faraday.new(
-      url: "https://api.github.com",
-      headers: {
-        'Accept' => 'application/vnd.github.v3+json',
-      }
-    )
+    Faraday.new("https://api.github.com", params:{token: ENV['GITHUB_TOKEN']})
   end
 end
-
-      # 'Authorization' => "token #{ENV['GITHUB_TOKEN']}"
