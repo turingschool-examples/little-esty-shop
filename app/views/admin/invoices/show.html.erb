@@ -1,8 +1,16 @@
 <h1>Admin - Invoice Show</h1>
 
 <section>
-  ID: <%= @invoice.id %>
-  Status: <%= @invoice.status %>
+  ID: <%= @invoice.id %><br>
+</section>
+
+<section id="status_select_field">
+  <%= form_with model: [:admin, @invoice], local: true do |f| %>
+    <%= f.label :status %>
+    <%= f.select :status, ['in progress', 'cancelled', 'completed']%>
+
+    <%= f.submit "Update Invoice Status" %>
+  <% end %>
 </section>
 
 <section id="invoice_revenue">
