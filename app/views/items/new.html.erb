@@ -1,7 +1,8 @@
 <h1>New Item</h1>
 <%= render partial: 'form',
           locals: {
-                    path: "/merchants/#{@merchant.id}/items",
+                    path: merchant_items_path(@merchant),
                     method: :post,
+                    item: @item,
                     button_text: 'Submit'
           } %>
