@@ -6,6 +6,7 @@
 <h3>Top 5 Merchants </h3>
   <%  @top_merchants.each do |merchant| %>
   <%= link_to "#{merchant.name}", "/admin/merchant/#{merchant.id}" %>: <%= number_to_currency(merchant.total_revenue) %><br>
+  <p>Top selling date for <%= merchant.name %> was <%= merchant.invoice_items.best_item_sale_day.strftime("%A, %B %d, %Y") %></p>
   <%end%>
 </section>
 
