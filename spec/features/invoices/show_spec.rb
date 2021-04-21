@@ -44,5 +44,27 @@ RSpec.describe "Merchant Invoices Show" do
     within("#invoice_item-#{@invoice_item_1.id}") do
       expect(page.find("option[selected = selected]").text).to eq('packaged')
     end
+
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      select('shipped')
+      click_on('Update Item Status')
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      expect(page.find("option[selected = selected]").text).to eq('shipped')
+    end
+
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      select('pending')
+      click_on('Update Item Status')
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+    within("#invoice_item-#{@invoice_item_1.id}") do
+      expect(page.find("option[selected = selected]").text).to eq('pending')
+    end
   end
 end

@@ -113,6 +113,18 @@ RSpec.describe "Merchant item index page" do
     expect(current_path).to eq("/merchant/#{@merchant.id}/items")
   end
 
+  it 'can show flash message if all fields are not filled in' do
+    click_link "Create New Item"
+
+    fill_in "Name", with: ""
+    fill_in "Description", with: "Sweep very well"
+    fill_in "Unit price", with: 34
+    click_button "Submit"
+
+    expect(page).to have_content("Please fill in all fields.")
+    expect(current_path).to eq("/merchant/#{@merchant.id}/items/new")
+  end
+
   it 'shows a section for my top five items by revenue' do
     expect(page).to have_content("Top Items")
 
