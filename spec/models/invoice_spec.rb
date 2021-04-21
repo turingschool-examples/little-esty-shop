@@ -70,5 +70,20 @@ RSpec.describe Invoice do
         expect(actual_status).to eq(['packaged', 'pending', 'shipped'])
       end
     end
+
+    it 'returns the total revenue for an invoice' do
+      customer = Customer.create!(first_name: "A", last_name: "AA")
+      merchant = Merchant.create!(name: "merchant")
+      invoice1 = customer.invoices.create!(status: 'in progress')
+      item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 1)
+      item2 = merchant.items.create!(name: "stuff", description: "stuffy", unit_price: 2)
+      item3 = merchant.items.create!(name: "it", description: "itty", unit_price: 3)
+      item4 = merchant.items.create!(name: "fake", description: "fakey", unit_price: 4)
+      invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity:1, unit_price: 1, status: 0) #1
+      invoice_item2 = InvoiceItem.create!(item: item2, invoice: invoice1, quantity:2, unit_price: 2, status: 1) #4
+      invoice_item3 = InvoiceItem.create!(item: item3, invoice: invoice1, quantity:5, unit_price: 10, status: 2) #50
+
+      expect(invoice1.revenue).to eq(55)
+    end
   end
 end

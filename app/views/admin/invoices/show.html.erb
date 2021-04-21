@@ -5,6 +5,10 @@
   Status: <%= @invoice.status %>
 </section>
 
+<section id="invoice_revenue">
+  Total Revenue: $<%= @invoice.revenue %>
+</section>
+
 <section>
   Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
 </section>

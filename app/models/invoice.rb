@@ -18,4 +18,8 @@ class Invoice < ApplicationRecord
   def item_sell_info
     self.invoice_items.includes(:item)
   end
+
+  def revenue
+    invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
+  end
 end
