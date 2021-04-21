@@ -20,16 +20,7 @@ class Merchant < ApplicationRecord
         .group('customers.id', 'customers.first_name', 'customers.last_name').order(count: :desc).count
   end
 
-<<<<<<< HEAD
-=======
-  def ship_ready
-    Merchant.joins(items: {invoice_items: :invoice})
-      .where("merchants.id = ?", self.id).where("invoices.status != ?", 1).where("invoice_items.status != ?", 2)
-      .order("invoices.created_at").pluck("items.name", "invoices.id", "invoices.created_at")
-  end
 
-
->>>>>>> main
 ####### item methods ##############
 
   def top_five_items  #by revenue
@@ -49,10 +40,10 @@ class Merchant < ApplicationRecord
 #             .where(transactions: {result: :success})
 #             .order(revenue: :desc).limit(5)
 #             .group('merchant_id')
-#             .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' as revenue')
+#             .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
 #   end
 #
-# # .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' desc')
+# # .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price) desc')
 
 
 
@@ -95,13 +86,6 @@ class Merchant < ApplicationRecord
 
 ###### invoice methods ###########
 
-
-
-<<<<<<< HEAD
-=======
-
-###### invoice methods ###########
-
 ########### admin ############
   def self.top_five_by_revenue
     Merchant.joins(items: {invoice_items: {invoice: :transactions}})
@@ -122,5 +106,5 @@ class Merchant < ApplicationRecord
     .first
     .created_at
   end
->>>>>>> main
+
 end

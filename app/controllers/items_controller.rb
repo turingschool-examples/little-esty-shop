@@ -4,11 +4,10 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = Item.all.enabled
     @disabled_items = Item.all.disabled
-    @top_items = @merchant.top_five_items
+    @top_items = Item.top_five_items(@merchant.id)
+    @top_days = @top_items.map {|item| item.best_day.first}
+    # binding.pry
   end
-  # <% @top_items.each do |item| %>
-  #     <h4>&emsp;  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
-  # <% end %>
 
   def show
     @item = Item.find(params[:id])

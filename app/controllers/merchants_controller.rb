@@ -3,6 +3,10 @@ class MerchantsController < ApplicationController
   def welcome
   end
 
+  def index
+    @merchants = Merchant.all
+  end
+
   def show
     @merchant = Merchant.find(params[:id])
     @top_five = @merchant.top_five_customers
@@ -18,7 +22,4 @@ class MerchantsController < ApplicationController
     #   .group(:customer_id).count
   end
 
-  def index
-    @merchants = Merchant.all
-  end
 end
