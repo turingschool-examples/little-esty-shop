@@ -46,7 +46,6 @@ RSpec.describe 'Merchant Invoice Index' do
 
     it 'I can select a new status for the Invoice and it updates on the Merchant Invoice Show Page' do
       visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
-      save_and_open_page
 
       within "#invoice-item-#{@item1.id}" do
         expect(page).to have_button("Update Item Status")

@@ -73,6 +73,14 @@ RSpec.describe "As an admin" do
       within("#admin_merchants-#{@merchant1.id}") do
        click_button("Disable")
       end
+
+      expect(current_path).to eq(admin_merchants_path)
+
+      within("#admin_merchants-#{@merchant4.id}") do
+       expect(page).to have_button("Enable")
+       click_button("Enable")
+     end
+
       expect(current_path).to eq(admin_merchants_path)
 
       within("#disabled_merchants") do

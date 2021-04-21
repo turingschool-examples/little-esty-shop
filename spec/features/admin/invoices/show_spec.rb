@@ -51,7 +51,6 @@ RSpec.describe 'Admin Invoice Show' do
 
     it 'I can select a new status for the Invoice and it updates on the Merchant Invoice Show Page' do
       visit "/admin/invoices/#{@invoice1.id}"
-      # save_and_open_page
 
       within ".invoice_status_update" do
         select 'cancelled', from: 'Status'
