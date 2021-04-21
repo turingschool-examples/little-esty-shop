@@ -13,7 +13,24 @@ RSpec.describe Transaction, type: :model do
 
   describe 'class methods' do
     describe '::success_count' do
-      
+      it 'can count number of successful transactions' do
+        @customer = create(:customer)
+
+        @invoice = Invoice.create!(status: 0, customer_id: @customer.id)
+
+        @transaction_1 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "success", invoice_id: @invoice.id)
+        @transaction_2 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "failed", invoice_id: @invoice.id)
+        @transaction_3 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "failed", invoice_id: @invoice.id)
+        @transaction_4 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "success", invoice_id: @invoice.id)
+        @transaction_5 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "failed", invoice_id: @invoice.id)
+        @transaction_6 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "success", invoice_id: @invoice.id)
+
+        expect(Transaction.success_count).to eq(3)
+
+        @transaction_7 = Transaction.create!(credit_card_number: "123456789", credit_card_expiration_date: 1021, result: "success", invoice_id: @invoice.id)
+
+        expect(Transaction.success_count).to eq(4)
+      end
     end
   end
 end
