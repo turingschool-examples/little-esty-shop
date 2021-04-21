@@ -30,6 +30,3 @@ class GithubServices
     JSON.parse(data, symbolize_names: true)
   end
 end
-
-
-require "pry"; binding.pry

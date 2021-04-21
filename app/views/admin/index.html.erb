@@ -1,4 +1,5 @@
 <h1>Admin Dashboard</h1>
+<h3><%= GithubServices.new.get_repo_name %></h3>
 
 <%= link_to 'Admin Merchants Index', admin_merchants_path %>
 <%= link_to 'Admin Invoices Index', admin_invoices_path %>
@@ -21,4 +22,9 @@
 <h1> Top 5 Customers </h1>
 <% Customer.top_five_customers.each do |customer| %>
 <%= customer.first_name %> - <%= customer.successful_transactions %><br>
+<% end %><br>
+
+<h3>Github Contributors</h3>
+<% GithubServices.new.get_usernames.each do |username| %>
+  <%= username[:login] %><br>
 <% end %>
