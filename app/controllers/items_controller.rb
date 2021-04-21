@@ -4,8 +4,7 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = Item.all.enabled
     @disabled_items = Item.all.disabled
-    # @top_items = @merchant.top_five_items
-    # binding.pry
+    @top_items = @merchant.top_five_items
   end
   # <% @top_items.each do |item| %>
   #     <h4>&emsp;  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
@@ -49,6 +48,4 @@ class ItemsController < ApplicationController
     flash[:alert] = "Item was successfully updated."
     redirect_to "/merchants/#{@merchant.id}/items"
   end
-
-
 end
