@@ -12,17 +12,18 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
-    item = Item.new(item_params)
+    @merchant = Merchant.find(params[:merchant_id])
+    item = @merchant.items.new(item_params)
 
     if item.save
-      redirect_to "/merchants/#{item_params[:shelter_id]}/items"
+      redirect_to merchant_items_path(@merchant)
     else
-      redirect_to "/merchants/#{item_params[:shelter_id]}/items/new"
-      flash[:alert] = "Error: #{error_message(item.errors)}"
+      flash[:notice] = "Error: Invalid Input. Complete all forms."
+      redirect_to item_create_path(@merchant)
     end
   end
 
