@@ -6,15 +6,17 @@
 <h4><%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
 
 <h3 align="right">Top Items  &emsp;  &emsp;</h3>
+
+
 <h3>Enabled Items</h3>
 <% @enabled_items.each do |item| %>
-    <h4>&nbsp;  &emsp;<%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
-    <%= button_to("Disable", "/merchants/#{@merchant.id}/items/#{item.id}", :params => {able: "Disabled"}, method: :patch) %>
+    <h4>&nbsp;  &emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
+    <%= button_to("Disabled", "/items/#{item.id}", :params => {able: "Disabled"}, method: :patch) %>
 <% end %>
 
 
 <h3>Disabled Items</h3>
 <% @disabled_items.each do |item| %>
-    <h4>&emsp;  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h4>
-    <%= button_to("Enable", "/merchants/#{@merchant.id}/items/#{item.id}", :params => {able: "Enabled"}, method: :patch) %>
+    <h4>&emsp;  <%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
+    <%= button_to("Enabled", "/items/#{item.id}", :params => {able: "Enabled"}, method: :patch) %>
 <% end %>

@@ -20,25 +20,28 @@ class Merchant < ApplicationRecord
 
 ####### item methods ##############
 
-  def top_five_items
-    require "pry", binding.pry
+  def top_five_items  #by revenue
     items.joins(invoice_items: {invoices: :transactions})
          .where(transactions: {result: :success})
          .group('item_id').limit(5)
          .order(revenue: :desc)
-         .select('item.*, sum(invoice_items.quantity * invoice_items.unit_price)'' as revenue')
+         .select('item.*, (invoice_items.quantity * invoice_items.unit_price)'' as revenue')
   end
 
-  # def top_merchant
-  #   # invoices.joins(:transactions, invoice_items: {item: :merchant})
-  #   invoices.joins(:transactions, :merchant)
-  #           .where(transactions: {result: : success})
-  #           .order(revenue: :desc).limit(5)
-  #           .group('merchant_id')
-  #           .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' as revenue')
-  #           .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' as revenue')
-  #           # .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' desc')
-  # end
+
+  # binding.pry
+
+#   def top_merchant
+#     # invoices.joins(:transactions, :merchant)
+#     invoices.joins(:transactions, invoice_items: {item: :merchant})
+#             .where(transactions: {result: :success})
+#             .order(revenue: :desc).limit(5)
+#             .group('merchant_id')
+#             .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' as revenue')
+#   end
+#
+# # .select('merchant.*, sum(invoice_items.quantity * invoice_items.unit_price)' desc')
+
 
 
   # def self.top_five
