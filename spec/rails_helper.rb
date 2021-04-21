@@ -66,7 +66,6 @@ RSpec.configure do |config|
   config.before :each do
     mock_repo_name = "Fake Repo Name"
     mock_repo_contributors = ["fakename1", "fakename2", "fakename3"]
-    # mock_repo_contributors = [{author: {login: 'fakename'}, total: 5}, {author: {login: 'fakename'}, total: 6}]
     allow_any_instance_of(GitHubService).to receive(:repo_name).and_return(mock_repo_name)
     allow_any_instance_of(GitHubService).to receive(:repo_contributors).and_return(mock_repo_contributors)
   end
