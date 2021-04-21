@@ -13,6 +13,6 @@
 <section>
   <h3>Top 5 Customers</h3>
   <% @customers.top_five_customers.each do |customer| %>
-    <p id="customer-<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %>, <%= customer.transactions.count %> purchase(s)</p>
+    <p id="customer-<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %>, <%= customer.transactions.success_count %> purchase(s)</p>
   <% end %>
 </section>
