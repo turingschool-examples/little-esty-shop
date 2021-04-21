@@ -5,6 +5,7 @@
   <p>Created on: <%= @invoice.formatted_date %></p>
   <p>Customer: <%= @invoice.customer.full_name %></p>
 
+<h4>Total Invoice Revenue: $<%= (@invoice.total_revenue.to_f / 100).round(2) %></h4>
 <section id="items-purchased">
   <h4>Items on Invoice:</h4>
     <% @invoice.invoice_items.each do |invoice_item| %>

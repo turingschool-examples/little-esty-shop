@@ -70,4 +70,11 @@ RSpec.describe 'as a merchant, when I click on the id of an invoice' do
     expect(page).to_not have_content("Qty: #{@invoice_item_3.quantity}")
     expect(page).to_not have_content(@invoice_item_3.formatted_unit_price)
   end
+
+
+  it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Total Invoice Revenue: $#{(@invoice_1.total_revenue.to_f / 100).round(2)}")
+  end
 end
