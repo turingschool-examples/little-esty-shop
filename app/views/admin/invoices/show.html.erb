@@ -16,8 +16,8 @@
 <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 
 <% @invoice.items.each do |item| %>
-  <p>Item name: <%= item.name %></p>
-  <p>Item quantity: <%= item.invoice_items.first.quantity %></p>
-  <p>Item unit price: <%= item.unit_price %></p>
-  <p>Item status: <%= item.invoice_items.first.status %></p>
+  <p>Item Name: <%= item.name %></p>
+  <p>Item Quantity: <%= item.invoice_items.first.quantity %></p>
+  <p>Item Unit price: <%= item.unit_price %></p>
+  <p>Invoice Status: <%= item.invoice_items.first.status %></p>
 <% end %>
