@@ -18,7 +18,7 @@ class GitHubService
   def repo_contributors
     resp = conn.get('/repos/A-McGuire/little-esty-shop/contributors')
     json = JSON.parse(resp.body, symbolize_names: true)
-    json.map do |user|
+    var = json.map do |user|
       user[:login]
     end
   end
