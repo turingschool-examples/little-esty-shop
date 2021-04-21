@@ -92,6 +92,7 @@ RSpec.describe 'the merchant item index', type: :feature do
       click_on "Submit"
     expect(current_path).to eq("/merchants/#{@jerde.id}/items")
   end     #merchant items us#6-2
+
   # redirect back to the items index page
   # And I see the item I just created displayed in the list of items. New item was created w/ a default status of disabled.
 

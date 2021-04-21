@@ -25,7 +25,7 @@ class Item < ApplicationRecord
         .order(revenue: :desc).limit(5)
   end
 
-  def best_day
+  def item_best_day
     Item.joins(invoices: :transactions)
         .where('transactions.result = ?', 1)
         .where('items.id = ?', self.id)

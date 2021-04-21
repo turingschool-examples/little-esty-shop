@@ -63,28 +63,31 @@ class Merchant < ApplicationRecord
   #   .distinct
   # end   ##Invoice
 
-  #   def self.top_five_by_revenue
-  #   Merchant.joins(items: {invoice_items: {invoice: :transactions}})
-  #   .where("transactions.result = ?", 1)
-  #   .group(:id)
-  #   .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue")
-  #   .order(total_revenue: :desc)
-  #   .limit(5)
-  # end   ##ADMIN
-  #
-  # def best_day
-  #   self.items
-  #   .joins(invoice_items: {invoice: :transactions})
-  #   .where("transactions.result = ?", 1)
-  #   .group("invoices.id")
-  #   .select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue")
-  #   .order(total_revenue: :desc)
-  #   .first
-  #   .created_at
-  # end   ##ADMIN
+    def self.top_five_by_revenue
+    Merchant.joins(items: {invoice_items: {invoice: :transactions}})
+    .where("transactions.result = ?", 1)
+    .group(:id)
+    .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue")
+    .order(total_revenue: :desc)
+    .limit(5)
+  end   ##ADMIN
+
+  def best_day
+    self.items
+    .joins(invoice_items: {invoice: :transactions})
+    .where("transactions.result = ?", 1)
+    .group("invoices.id")
+    .select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue")
+    .order(total_revenue: :desc)
+    .first
+    .created_at
+  end   ##ADMIN
 
 
 ###### invoice methods ###########
+
+
+
 
 ########### admin ############
   def self.top_five_by_revenue

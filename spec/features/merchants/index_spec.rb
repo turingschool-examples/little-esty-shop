@@ -20,5 +20,5 @@ RSpec.describe 'the merchant index', type: :feature do
     expect(page).to have_link(@jerde.name)
     expect(page).to have_link(@willms.name)
     expect(page).to have_link(@thiel.name)
-  end     # not in a u.s.
-end
+  end
+end     # not in a user story

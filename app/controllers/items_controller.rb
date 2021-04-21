@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     @enabled_items = Item.all.enabled
     @disabled_items = Item.all.disabled
     @top_items = Item.top_five_items(@merchant.id)
-    @top_days = @top_items.map {|item| item.best_day.first}
+    @top_days = @top_items.map {|item| item.item_best_day.first}
     # binding.pry
   end
 
@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
     end
     if item.save
       flash[:notice] = "Item was successfully updated."
-      redirect_to "/merchants/#{@merchant.id}/items"
+      redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
     else
       flash[:alert] = "ERROR: Item not updated."
       redirect_to "/items/#{item.id}/edit"
