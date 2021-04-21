@@ -26,5 +26,11 @@ class Invoice < ApplicationRecord
   def expected_revenue(merchant_id)
     InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).group(:invoice_id).where('merchants.id = ?', merchant_id)
         .sum("invoice_items.quantity * invoice_items.unit_price")
+  def item_sell_info
+    self.invoice_items.includes(:item)
+  end
+
+  def revenue
+    invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
   end
 end
