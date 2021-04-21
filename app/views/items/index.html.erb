@@ -1,9 +1,9 @@
-<h3 id="links"; style="text-align:left;">
-    Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;"><%= render partial: 'partials/merch_header' %>&emsp;</span>
+<h3 id="links"; style="text-align:left;">&emsp;
+    Merchant: &emsp;<%=  @merchant.name %><span style="float:right;"><%= render partial: 'partials/merch_header' %>&emsp;</span>
 </h3>
 
 <h2 align="center">My Items</h2><br/>
-<h4>&emsp;<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
+<h4>&emsp;<%= link_to "*Create New Item*", "/merchants/#{@merchant.id}/items/new" %>
 
 <style>
 .column {
@@ -29,7 +29,7 @@
   </div>
 
   <div class="column">
-    <h3><%= "5 Most Poplular Items" %></h3>
+    <h3>.&emsp;<%= "5 Most Poplular Items" %></h3>
     <% @top_items.each_with_index do |item, index| %>
         <h4><%= index+1 %>.&emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %> -  $<%= item.revenue %></h4>
         <p><%= "Top sales date for '#{item.name}'  was #{@top_days[index].total} with most sales" %></p>
