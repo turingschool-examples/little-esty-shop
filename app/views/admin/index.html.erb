@@ -25,6 +25,6 @@
 <% end %><br>
 
 <h3>Github Contributors</h3>
-<% GithubServices.new.get_usernames.each do |username| %>
-  <%= username[:login] %><br>
+<% GithubServices.new.get_commits.each do |username| %>
+  <%= username[:login] %> - <%= username[:contributions] %> commits<br>
 <% end %>

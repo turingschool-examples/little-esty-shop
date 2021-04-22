@@ -11,12 +11,11 @@ class GithubServices
   end
 
   def get_commits
-    get_url("https://api.github.com/repos/ignored-comment/little-esty-shop/commits?")
-  end
+    contributor = get_url("https://api.github.com/repos/ignored-comment/little-esty-shop/contributors")
 
-  def get_usernames
-    get_collaborators.each do |collaborator|
-      collaborator[:login]
+    contributor.each do |contributor|
+      contributor[:login]
+      contributor[:contributions]
     end
   end
 
