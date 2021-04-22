@@ -35,9 +35,8 @@ class Admin::MerchantsController < ApplicationController
     if merchant_params[:status] == 'enabled' || merchant_params[:status] == 'disabled'
       merchant = Merchant.new(merchant_params)
     else
-      redirect_to '/admin/merchants/new', notice: "#{merchant_params[:status]} is not a valid status"
+      redirect_to '/admin/merchants/new', notice: "Invalid Status"
       return
-      # flash[:alert] = "#{merchant_params[:status]} is not a valid status"
     end
 
     if merchant.save
