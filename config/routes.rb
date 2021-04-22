@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # get "/merchants/:merchant_id/items/:item_id", to: 'merchants#item_show'
 
   root 'merchants#welcome'
+  get "/merchants/:id/dashboard", to: 'merchants#show'
+  get "/merchants/:id/invoices", to: 'merchants#invoices'
 
   resources :merchants, only: [:index, :show] do
     resources :items, shallow: true

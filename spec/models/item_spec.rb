@@ -19,11 +19,11 @@ RSpec.describe Item, type: :model do
 
   before(:each) do
     @merchant1 = Merchant.create!(name: "CCC")
-    @item1 = @merchant1.items.create!(name: "it1", description: "thing", unit_price: 10, status: "Disabled")
-    @item2 = @merchant1.items.create!(name: "it2", description: "thing", unit_price: 20, status: "Enabled")
-    @item3 = @merchant1.items.create!(name: "it3", description: "thing", unit_price: 30, status: "Enabled")
-    @item4 = @merchant1.items.create!(name: "it4", description: "thing", unit_price: 40, status: "Disabled")
-    @item5 = @merchant1.items.create!(name: "it5", description: "thing", unit_price: 50, status: "Disabled")
+    @item1 = @merchant1.items.create!(name: "it1", description: "thing", unit_price: 10, able: "Disabled")
+    @item2 = @merchant1.items.create!(name: "it2", description: "thing", unit_price: 20, able: "Enabled")
+    @item3 = @merchant1.items.create!(name: "it3", description: "thing", unit_price: 30, able: "Enabled")
+    @item4 = @merchant1.items.create!(name: "it4", description: "thing", unit_price: 40, able: "Disabled")
+    @item5 = @merchant1.items.create!(name: "it5", description: "thing", unit_price: 50, able: "Disabled")
 
 
     customer = Customer.create!(first_name: "Pat", last_name: "Jones")
@@ -89,18 +89,15 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'class methods' do
-    describe 'disabled' do
-      it 'shows only items with disabled status' do
-
-
-      end
-    end
-
-    describe 'enabled' do
-      it 'shows only items with enabled status' do
-
-      end
-    end
+    # describe 'disabled' do
+    #   it 'shows only items with disabled status' do
+    #   end
+    # end
+    #
+    # describe 'enabled' do
+    #   it 'shows only items with enabled status' do
+    #   end
+    # end
 
     describe 'top_five_items' do
       it 'shows the top 5 items by revenue' do

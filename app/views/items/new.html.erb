@@ -12,7 +12,7 @@
   <%= form.number_field :unit_price %><br/><br/>
 
   <%= form.label 'Status' %>
-  <%= form.text_field :able, value: "Disabled" %><br/><br/>
+  <%= form.select :able, ["Disabled", "Enabled"], value: "Disabled" %><br/><br/>
 
   <%= form.submit 'Submit New Item' %>
 <% end %>
