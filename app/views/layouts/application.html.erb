@@ -14,5 +14,9 @@
      <p class='flash-message'><%= message %></p>
    <% end %>
     <%= yield %>
+    <h3>Github Contributors</h3>
+    <% GithubServices.new.get_commits.each do |username| %>
+      <%= username[:login] %> - <%= username[:contributions] %> commits<br>
+    <% end %>
   </body>
 </html>

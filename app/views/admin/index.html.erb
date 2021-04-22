@@ -23,8 +23,3 @@
 <% Customer.top_five_customers.each do |customer| %>
 <%= customer.first_name %> - <%= customer.successful_transactions %><br>
 <% end %><br>
-
-<h3>Github Contributors</h3>
-<% GithubServices.new.get_commits.each do |username| %>
-  <%= username[:login] %> - <%= username[:contributions] %> commits<br>
-<% end %>
