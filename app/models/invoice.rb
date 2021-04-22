@@ -14,4 +14,25 @@ class Invoice < ApplicationRecord
     .order(created_at: :desc)
     .distinct
   end
+
+  def invoice_items_info(merchant_id)
+    #  self.items.select("items.name, invoice_items.*")
+    # why does above version .status give a number, andthe one bleow not?
+    InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).where('merchants.id = ?', merchant_id)
+      .select("invoice_items.*, items.name")
+
+  end
+
+  def expected_revenue(merchant_id)
+    InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).group(:invoice_id).where('merchants.id = ?', merchant_id)
+        .sum("invoice_items.quantity * invoice_items.unit_price")
+  end
+
+  def item_sell_info
+    self.invoice_items.includes(:item)
+  end
+
+  def revenue
+    invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
+  end
 end

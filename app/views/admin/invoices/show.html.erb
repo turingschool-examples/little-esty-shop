@@ -1,1 +1,44 @@
 <h1>Admin - Invoice Show</h1>
+
+<section id="links">
+  <%= render 'partials/admin_links' %>
+</section>
+
+<section>
+  ID: <%= @invoice.id %><br>
+</section>
+
+<section id="status_select_field">
+  <%= form_with model: [:admin, @invoice], local: true do |f| %>
+    <%= f.label :status %>
+    <%= f.select :status, ['in progress', 'cancelled', 'completed']%>
+
+    <%= f.submit "Update Invoice Status" %>
+  <% end %>
+</section>
+
+<section id="invoice_revenue">
+  Total Revenue: $<%= @invoice.revenue %>
+</section>
+
+<section>
+  Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
+</section>
+
+<section>
+  Customer: <%= @invoice.customer.first_name%>
+            <%= @invoice.customer.last_name%>
+</section>
+
+<section id="items">
+  <h3>Items</h3>
+  <% @invoice.item_sell_info.each do |invoice_item| %>
+    <section id="item-<%= invoice_item.item.id %>">
+      <%= invoice_item.item.name %><br>
+      Quantity: <%= invoice_item.quantity %><br>
+      Sell Price: <%= invoice_item.unit_price %><br>
+      Invoice Item Status: <%= invoice_item.status %>
+    </section><br>
+  <% end %>
+</section>
+

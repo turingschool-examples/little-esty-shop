@@ -10,16 +10,29 @@ class MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
     @top_five = @merchant.top_five_customers
+  end 
 
-  #  @top_five = Merchant.joins(items: :invoice_items).joins(:invoices)#.joins(:customers).joins(:transaction)
-  #  @top_five_1 = Merchant.joins(:items).joins(:invoice_items).joins(:invoices).joins(:customers).joins(:transaction).where("id = ?", @merchant)
-  #  @top_five_1 = Merchant.joins(:items).joins(:invoice_items)
-
-  #    @ship_ready = Merchant.joins(items: {invoice_items: :invoice}).where("merchants.id = ?", @merchant.id).where("invoice.status != ?", "cancelled").where("invoice_item.status != ?", "shiped").select(:name)
-
-    # @customers = Customer.joins(invoices: {invoice_item: {item: :merchant}})
-    #   .where("merchants.id = ?", @merchant.id).limit(5)
-    #   .group(:customer_id).count
+  def invoice_index
+    @merchant = Merchant.find(params[:id])
+    @invoices = @merchant.unique_invoices
   end
 
+  def invoice_show
+    @merchant = Merchant.find(params[:merchant_id])
+    @invoice = Invoice.find(params[:invoice_id])
+    @customer = Customer.find(@invoice.customer_id)
+    @items = @invoice.invoice_items_info(@merchant.id)
+    @total_revenue = @invoice.expected_revenue(@merchant.id)
+  end
+
+  def update
+    merchant = Merchant.find(params[:merchant_id])
+    invoice = Invoice.find(params[:invoice_id])
+    invoice.update(invoice_params)
+    redirect_to "/merchants/#{merchant.id}/invoices/#{invoice.id}"
+  end
+
+  def invoice_params
+    params.permit(:id, :status, :customer_id)
+  end
 end

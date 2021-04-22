@@ -21,14 +21,32 @@ RSpec.describe 'admin new merchant page', type: :feature do
         expect(page).to have_content("Very Good Building Co")
       end
     end
+  end
+  
+  describe 'sad path' do
+    it 'does not allow user to create a merchant with no name' do
+      visit "/admin/merchants/new"
+      click_button "Create Merchant"
+      expect(current_path).to eq("/admin/merchants/new")
+      expect(page).to have_content("Name can't be blank")
+    end
     
-    describe 'sad path' do
-      it 'does not allow user to create a merchant with no name' do
-        visit "/admin/merchants/new"
-        click_button "Create Merchant"
-        expect(current_path).to eq("/admin/merchants/new")
-        expect(page).to have_content("Name can't be blank")
-      end
+    it 'does not allow a user to create a merchant with an invalid status' do
+      visit "/admin/merchants/new"
+      fill_in "Name", with: "Very Good Building Co"
+      fill_in "Status", with: "pending"
+      click_button "Create Merchant"
+      expect(current_path).to eq("/admin/merchants/new")
+      expect(page).to have_content('Invalid Status')
+    end
+    
+    it 'does not allow a user to create a merchant with a blank status' do
+      visit "/admin/merchants/new"
+      fill_in "Name", with: "Very Good Building Co"
+      fill_in "Status", with: ""
+      click_button "Create Merchant"
+      expect(current_path).to eq("/admin/merchants/new")
+      expect(page).to have_content('Invalid Status')
     end
   end
 end

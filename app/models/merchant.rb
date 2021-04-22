@@ -6,8 +6,6 @@ class Merchant < ApplicationRecord
 
   enum status: [ :enabled, :disabled ]
 
-####### dashboard methods #########
-
   def ship_ready
     Merchant.joins(items: {invoice_items: :invoice})
       .where("merchants.id = ?", self.id).where("invoices.status != ?", 1).where("invoice_items.status != ?", 2)
@@ -20,18 +18,6 @@ class Merchant < ApplicationRecord
         .group('customers.id', 'customers.first_name', 'customers.last_name').order(count: :desc).count
   end
 
-
-####### item methods ##############
-
-
-
-
-###### invoice methods ###########
-
-
-
-
-########### admin ############
   def self.top_five_by_revenue
     Merchant.joins(items: {invoice_items: {invoice: :transactions}})
     .where("transactions.result = ?", 1)
@@ -52,4 +38,7 @@ class Merchant < ApplicationRecord
     .created_at
   end
 
+  def unique_invoices
+    Invoice.joins(items: :merchant).where('merchants.id = ?', self.id).group(:id)
+  end
 end

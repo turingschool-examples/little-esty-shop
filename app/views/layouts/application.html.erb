@@ -10,14 +10,27 @@
   </head>
 
   <body>
+    <% require './app/services/git_hub_service' %>
     <h1 align="center">Little Esty Shop</h1><br/>
+
+
+
 
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
       </div>
     <% end %>
-    
+
     <%= yield %>
+
+    <h4>Git Hub Repository:
+      <% service = GitHubService.new %>
+      <%= service.repo_name %>
+    </h4>
+
+    <h4>Contributors:
+      <%= service.repo_contributors.join(", ") %>
+    </h4>
   </body>
 </html>

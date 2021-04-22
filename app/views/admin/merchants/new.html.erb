@@ -1,4 +1,10 @@
 <h1>Admin - New Merchant</h1>
+
+<section id="links">
+  <%= render 'partials/admin_links' %>
+</section>
+
+
 <%= form_with model: [:admin, Merchant.new], local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
