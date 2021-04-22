@@ -1,3 +1,8 @@
+<%= link_to "Home Page", "/" %> |
+<%=link_to "Merchants", "/admin/merchant"%> |
+<%=link_to "Invoices", "/admin/invoices"%> |
+<%=link_to "Dashboard", "/admin"%>
+
 <h2><%=@merchant.name%></h2>
 
 <p><%= link_to "Update", "/admin/merchant/#{@merchant.id}/edit"%></p>

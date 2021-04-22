@@ -1,3 +1,8 @@
+<%= link_to "Home Page", "/" %> |
+<%=link_to "Merchants", "/admin/merchant"%> |
+<%=link_to "Invoices", "/admin/invoices"%> |
+<%=link_to "Dashboard", "/admin"%>
+
 <h2>Invoices</h2>
 <% @invoices.each do |invoice| %>
   <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %></p>

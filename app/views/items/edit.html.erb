@@ -1,3 +1,7 @@
+<%= link_to "Home Page", "/" %> |
+<%= link_to "My Items", "/merchant/#{@merchant.id}/items" %> |
+<%= link_to "My Invoices", "/merchant/#{@merchant.id}/invoices" %>
+
 <h2>Edit <%= @item.name.capitalize %></h2>
 <%= form_with model: [@merchant, @item], local: true do |f| %>
   <%= f.label :name %>

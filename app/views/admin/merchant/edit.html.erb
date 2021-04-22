@@ -1,8 +1,11 @@
-<h1>Edit <%=@merchant.name%></h1>
+<%= link_to "Home Page", "/" %> |
+<%=link_to "Return to #{@merchant.name}", "/admin/merchant/#{@merchant.id}"%>
+
+<h2>Edit <%=@merchant.name%></h2>
 
 <%= form_with(model: @merchant, url: "/admin/merchant/#{@merchant.id}", method: :patch, local: true) do |form| %>
 
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.label :name, required: true %>
+  <%= form.text_field :name, required: true %>
   <%= form.submit %>
 <% end %>

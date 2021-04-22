@@ -1,5 +1,7 @@
-<h2>My Items</h2>
+<%= link_to "Home Page", "/" %> |
 <%= link_to "Create New Item", "/merchant/#{@merchant.id}/items/new", method: :get, params: { merchant_id: @merchant.id} %>
+
+<h2>My Items</h2>
 <h3><u>Disabled Items</u></h3>
 <ul>
   <% @items.disabled_items.each do |item| %>

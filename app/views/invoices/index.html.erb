@@ -1,3 +1,7 @@
+<%= link_to "Home Page", "/" %> |
+<%= link_to "My Items", "/merchant/#{@merchant.id}/items" %> |
+<%= link_to "My Invoices", "/merchant/#{@merchant.id}/invoices" %>
+
 <h2>My Invoices</h2>
 <% @invoices.uniq.each do |invoice| %>
   <p>Invoice #<%= link_to "#{invoice.id}", "/merchant/#{@merchant.id}/invoices/#{invoice.id}" %></p>

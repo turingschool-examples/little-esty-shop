@@ -1,12 +1,13 @@
-<%= link_to "My Items", "/merchant/#{@merchant.id}/items" %>
+<%= link_to "Home Page", "/" %> |
+<%= link_to "My Items", "/merchant/#{@merchant.id}/items" %> |
 <%= link_to "My Invoices", "/merchant/#{@merchant.id}/invoices" %>
 
-<p><%= @merchant.name %></p>
+<h2><%= @merchant.name %></h2>
 
 <h3>Items Ready to Ship</h3>
   <section id="inv_items_not_shipped">
     <% @invoice_items.items_not_shipped.each do |inv_item| %>
-      <p><%= inv_item.name %> <%= link_to "#{inv_item.id}", "/merchant/#{@merchant.id}/invoices/#{inv_item.id}" %> <%= inv_item.created_at.strftime("%A, %B %d, %Y") %></p>
+      <p><%= inv_item.name %>, Invoice number: <%= link_to "#{inv_item.id}", "/merchant/#{@merchant.id}/invoices/#{inv_item.id}" %>, Invoice created on: <%= inv_item.created_at.strftime("%A, %B %d, %Y") %></p>
     <% end %>
  </section>
 

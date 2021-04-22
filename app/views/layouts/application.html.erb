@@ -24,7 +24,7 @@
     <% end -%>
 
     <small class="foot">
-      From Github Repo: <%= GithubService.get_name[:name] %> |
+      From Github Repo: <%= link_to "#{GithubService.get_name[:name]}", "https://github.com/ochar721/little-esty-shop" %> |
       Total Pull Requests: <%= GithubService.get_pull_requests.first[:number]%> |
       Github contributors: <% GithubService.get_user_names.map do |user_name|%>
         <%= user_name[:login] %>:<%= user_name[:contributions]%>|
