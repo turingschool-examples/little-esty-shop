@@ -1,9 +1,12 @@
-<h1>Admin - Merchants</h1>
+<h2>Admin - Merchants</h2>
 
 <section id="links">
   <%= render 'partials/admin_links' %>
 </section>
 
+<section>
+  <%= link_to "Create New Merchant", "/admin/merchants/new" %>
+</section><br>
 
 <section id="disabled_merchants">
   <h3>Disabled Merchants</h3>
@@ -25,9 +28,6 @@
   <% end %>
 </section>
 
-<section>
-  <%= link_to "Create New Merchant", "/admin/merchants/new" %>
-</section>
 
 <section id="top_five_by_revenue">
   <h3>Top Five Merchants by Revenue</h3>
