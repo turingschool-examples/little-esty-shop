@@ -53,4 +53,8 @@ class Merchant < ApplicationRecord
     .first
     .created_at
   end
+
+  def unique_invoices
+    Invoice.joins(items: :merchant).where('merchants.id = ?', self.id).group(:id)
+  end
 end
