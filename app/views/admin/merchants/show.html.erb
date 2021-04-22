@@ -1,5 +1,9 @@
 <h1>Admin - Merchant <%= @merchant.name %></h1>
 
+<section id="links">
+  <%= render 'partials/admin_links' %>
+</section>
+
 <div>
   <%= link_to "Update #{@merchant.name}", "/admin/merchants/#{@merchant.id}/edit" %>
 </div>
