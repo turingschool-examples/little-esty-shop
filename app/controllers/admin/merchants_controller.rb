@@ -32,7 +32,14 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.new(merchant_params)
+    if merchant_params[:status] == 'enabled' || merchant_params[:status] == 'disabled'
+      merchant = Merchant.new(merchant_params)
+    else
+      redirect_to '/admin/merchants/new', notice: "#{merchant_params[:status]} is not a valid status"
+      return
+      # flash[:alert] = "#{merchant_params[:status]} is not a valid status"
+    end
+
     if merchant.save
       redirect_to '/admin/merchants', notice: "Merchant Successfully Created"
     else
