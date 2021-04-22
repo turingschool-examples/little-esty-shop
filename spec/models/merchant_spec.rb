@@ -29,7 +29,7 @@ RSpec.describe Merchant, type: :model do
         transaction1 = invoice1.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
         transaction2 = invoice2.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 1)
         transaction3 = invoice3.transactions.create!(credit_card_number: 1111222233334444, credit_card_expiration_date: '', result: 0)
-        
+
         expect(merchant.best_day).to eq("2012-03-25 09:54:09 UTC")
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe Merchant, type: :model do
     describe 'top_five_by_revenue' do
       it 'returns the top five merchants' do
         customer = Customer.create!(first_name: "Very", last_name: "Rich")
-        
+
         merchant3 = Merchant.create!(name: "CCC")
         item3 = merchant3.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice3 = customer.invoices.create!(status: 0)
@@ -47,7 +47,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item7 = InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 3, unit_price: 5, status: 2)
         invoice_item8 = InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 3, unit_price: 5, status: 2)
         invoice_item9 = InvoiceItem.create!(item: item3, invoice: invoice3, quantity: 3, unit_price: 5, status: 2)
-        
+
         merchant5 = Merchant.create!(name: "EEE")
         item5 = merchant5.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice5 = customer.invoices.create!(status: 0)
@@ -55,7 +55,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item13 = InvoiceItem.create!(item: item5, invoice: invoice5, quantity: 5, unit_price: 5, status: 2)
         invoice_item14 = InvoiceItem.create!(item: item5, invoice: invoice5, quantity: 5, unit_price: 5, status: 2)
         invoice_item15 = InvoiceItem.create!(item: item5, invoice: invoice5, quantity: 5, unit_price: 5, status: 2)
-        
+
         merchant1 = Merchant.create!(name: "AAA")
         item1 = merchant1.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice1 = customer.invoices.create!(status: 0)
@@ -63,7 +63,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 1, unit_price: 5, status: 2)
         invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 1, unit_price: 5, status: 0)
         invoice_item3 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 1, unit_price: 5, status: 1)
-        
+
         merchant6 = Merchant.create!(name: "FFF")
         item6 = merchant6.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice6 = customer.invoices.create!(status: 0)
@@ -71,7 +71,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item16 = InvoiceItem.create!(item: item6, invoice: invoice6, quantity: 6, unit_price: 5, status: 2)
         invoice_item17 = InvoiceItem.create!(item: item6, invoice: invoice6, quantity: 6, unit_price: 5, status: 2)
         invoice_item18 = InvoiceItem.create!(item: item6, invoice: invoice6, quantity: 6, unit_price: 5, status: 2)
-        
+
         merchant7 = Merchant.create!(name: "GGG")
         item7 = merchant7.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice7 = customer.invoices.create!(status: 0)
@@ -79,7 +79,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item19 = InvoiceItem.create!(item: item7, invoice: invoice7, quantity: 7, unit_price: 5, status: 2)
         invoice_item20 = InvoiceItem.create!(item: item7, invoice: invoice7, quantity: 7, unit_price: 5, status: 2)
         invoice_item21 = InvoiceItem.create!(item: item7, invoice: invoice7, quantity: 7, unit_price: 5, status: 2)
-        
+
         merchant4 = Merchant.create!(name: "DDD")
         item4 = merchant4.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice4 = customer.invoices.create!(status: 0)
@@ -87,7 +87,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item10 = InvoiceItem.create!(item: item4, invoice: invoice4, quantity: 4, unit_price: 5, status: 2)
         invoice_item11 = InvoiceItem.create!(item: item4, invoice: invoice4, quantity: 4, unit_price: 5, status: 2)
         invoice_item12 = InvoiceItem.create!(item: item4, invoice: invoice4, quantity: 4, unit_price: 5, status: 2)
-        
+
         merchant2 = Merchant.create!(name: "BBB")
         item2 = merchant2.items.create!(name: "thing", description: "thingy", unit_price: 10)
         invoice2 = customer.invoices.create!(status: 0)
@@ -275,4 +275,40 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.ship_ready[3][2]).to eq(invoice_1c.created_at)
     end
   end
+
+  describe 'unique_invoices' do
+    it " returns all invoices once" do
+      merchant = Merchant.create(name: 'Bob Cella')
+      merchant_2 = Merchant.create(name: 'cella bob')
+
+      item_a = merchant.items.create!(name: "thing", description: "item of a thing", unit_price: 100)
+      item_b = merchant.items.create!(name: "stuff", description: "bla bla bla", unit_price: 50)
+      item_c = merchant_2.items.create!(name: "doo-hicky", description: "stuffy stuff", unit_price: 200)
+
+      customer_a = Customer.create!(first_name: "albert", last_name: "anderston")
+      customer_b = Customer.create!(first_name: "billy", last_name: "baxter")
+
+      invoice_1a = customer_a.invoices.create!(status: 0)
+      invoice_2a = customer_a.invoices.create!(status: 1)
+
+      invoice_1b = customer_b.invoices.create!(status: 0)
+      invoice_2b = customer_b.invoices.create!(status: 1)
+
+
+      invoice_item_1a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_1a.id, item_id: item_a.id)
+      invoice_item_2a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2a.id, item_id: item_b.id)
+      invoice_item_3a = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2a.id, item_id: item_c.id)
+
+      invoice_item_1b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_1b.id, item_id: item_a.id)
+      invoice_item_2b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, invoice_id: invoice_1b.id, item_id: item_b.id)
+      invoice_item_3b = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 1, invoice_id: invoice_2b.id, item_id: item_c.id)
+
+
+
+      expect(merchant.unique_invoices).to eq([invoice_1a, invoice_2a, invoice_1b])
+
+    end
+  end
+
+
 end

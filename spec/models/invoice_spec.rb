@@ -36,7 +36,6 @@ RSpec.describe Invoice do
     end
   end
 
-<<<<<<< HEAD
   describe "instance methods" do
     describe "#invoice_items" do
       it " returns info on all items in an invoice" do
@@ -71,8 +70,6 @@ RSpec.describe Invoice do
     end
   end
 
-end
-=======
   describe 'instance methods' do
     describe 'item_sell_info' do
       it 'returns all items associated with invoice, as well as selling info' do
@@ -124,4 +121,3 @@ end
     end
   end
 end
->>>>>>> 124b1a9a9406642c5c1f9600ba5070156487e980
