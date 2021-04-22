@@ -4,10 +4,10 @@ RSpec.describe 'Merchant Invoice Index' do
     @item1 = create(:item, merchant_id: @merchant1.id)
     @customer1 = create(:customer)
     @invoice1 = create(:invoice, customer_id: @customer1.id, status: 0)
-    @invoice_items1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, quantity: 4, unit_price: 1200)
+    @invoice_items1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, quantity: 4, unit_price: 1200, status: 1)
     @item2 = create(:item, merchant_id: @merchant1.id)
     @invoice2 = create(:invoice, customer_id: @customer1.id, status: 0)
-    @invoice_items2 = create(:invoice_item, item_id: @item2.id,invoice_id: @invoice1.id, quantity: 2, unit_price: 73000)
+    @invoice_items2 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 73000)
   end
 
   describe "when I visit my merchant's invoices show page" do
@@ -33,7 +33,6 @@ RSpec.describe 'Merchant Invoice Index' do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item1.invoice_items.first.quantity)
       expect(page).to have_content(@item1.invoice_items.first.status)
-      # expect(page).to have_content(@item1.unit_price)
     end
   end
 
@@ -46,12 +45,14 @@ RSpec.describe 'Merchant Invoice Index' do
 
     it 'I can select a new status for the Invoice and it updates on the Merchant Invoice Show Page' do
       visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
-
       within "#invoice-item-#{@item1.id}" do
+        expect(page).to have_content("packaged")
         expect(page).to have_button("Update Item Status")
 
-        select("packaged", from: "status")
+        select("pending", from: "status")
         click_on "Update Item Status"
+
+        expect(page).to have_content("pending")
       end
 
       expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1))
