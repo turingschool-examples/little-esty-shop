@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+
+ body {
+    background-image: url(https://swall.teahub.io/photos/small/21-210706_high-resolution-grey-light-background-hd.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height: 100%;
+  }
+
+  body, html {
+    height: 100%;
+  }
