@@ -48,9 +48,10 @@ RSpec.describe Invoice do
         invoice_item1 = InvoiceItem.create!(item: item_1, invoice: invoice, quantity: 3, unit_price: 5, status: 0)
         invoice_item2 = InvoiceItem.create!(item: item_2, invoice: invoice, quantity: 3, unit_price: 5, status: 0)
 
-        tested = invoice.invoice_items.map { |item| item.name}
 
-        expect(tested).to eq(["thing", "stuff"])
+        tested = invoice.invoice_items.map { |item| item.item_id}
+
+        expect(tested).to eq([item_1.id, item_2.id])
       end
     end
 
@@ -65,7 +66,7 @@ RSpec.describe Invoice do
         invoice_item1 = InvoiceItem.create!(item: item_1, invoice: invoice, quantity: 3, unit_price: 5, status: 0)
         invoice_item2 = InvoiceItem.create!(item: item_2, invoice: invoice, quantity: 3, unit_price: 5, status: 0)
 
-        expect(invoice.expected_revenue[invoice.id]).to eq(30)
+        expect(invoice.expected_revenue(merchant.id)[invoice.id]).to eq(30)
       end
     end
   end
