@@ -40,5 +40,4 @@ RSpec.describe 'the merchant item new page', type: :feature do
       end
     end
   end
-
 end
