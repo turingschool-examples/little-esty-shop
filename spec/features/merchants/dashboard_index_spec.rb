@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Merchant DashBoard Index' do
   before :each do
     @merchant1 = create(:merchant)
+    @discount1 = @merchant1.bulk_discounts.create!(discount_percentage: 20.0, quantity: 10)
+    @discount2 = @merchant1.bulk_discounts.create!(discount_percentage: 50.0, quantity: 65)
 
     @item1 = create(:item, merchant_id: @merchant1.id)
     @item2 = create(:item, merchant_id: @merchant1.id)
@@ -65,6 +67,13 @@ RSpec.describe 'Merchant DashBoard Index' do
       it 'and when I click this link, I am taken to my bulk discounts index page' do
         click_link "My Discounts"
         expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+      end
+
+      it 'shows me a list of all discounts, with each discount showing me percentage and quantity' do
+        expect(page).to have_content(@discount1.discount_percentage)
+        expect(page).to have_content(@discount1.quantity)
+        expect(page).to have_content(@discount2.discount_percentage)
+        expect(page).to have_content(@discount2.quantity)
       end
     end
   end

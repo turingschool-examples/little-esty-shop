@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 2021_04_26_144339) do
 
   create_table "bulk_discounts", force: :cascade do |t|
     t.bigint "merchant_id"
-    t.integer "discount_percentage"
+    t.float "discount_percentage"
     t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["merchant_id"], name: "index_bulk_discounts_on_merchant_id"
   end
 
