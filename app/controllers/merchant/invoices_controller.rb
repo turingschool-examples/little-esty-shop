@@ -8,7 +8,4 @@ class Merchant::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @customer = Customer.find(@invoice.customer_id)
   end
-  #
-  # def update
-  # end
 end

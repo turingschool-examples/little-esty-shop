@@ -57,6 +57,15 @@ RSpec.describe 'Merchant DashBoard Index' do
       it "shows the list is ordered from oldest to newest" do
         expect(@invoice2.format_time).to appear_before(@invoice1.format_time)
       end
+
+      it "has a link to view all my discounts" do
+        expect(page).to have_link("My Discounts")
+      end
+
+      it 'and when I click this link, I am taken to my bulk discounts index page' do
+        click_link "My Discounts"
+        expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+      end
     end
   end
 end
