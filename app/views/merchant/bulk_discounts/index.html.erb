@@ -5,3 +5,8 @@
   <p>Discount Percentage: <%= discount.discount_percentage %>% -
   Discount Quantity Threshold: <%= discount.quantity %></p>
 <% end %>
+
+<h1>Upcoming Holidays</h1>
+<% UpcomingHolidaysServices.new.holidays.each do |holiday| %>
+  <p><%= holiday[:date] %> - <%= holiday[:name] %>
+<% end %>

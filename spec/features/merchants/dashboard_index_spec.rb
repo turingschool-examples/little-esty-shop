@@ -75,6 +75,10 @@ RSpec.describe 'Merchant DashBoard Index' do
         expect(page).to have_content(@discount2.discount_percentage)
         expect(page).to have_content(@discount2.quantity)
       end
+
+      it 'shows me a section with a header of Upcoming Holidays' do
+        expect(page).to have_content("Upcoming Holidays")
+      end
     end
   end
 end
