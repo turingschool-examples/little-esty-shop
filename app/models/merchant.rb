@@ -4,6 +4,7 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
+  has_many :bulk_discounts
 
   scope :enable, -> { where(status: true) }
   scope :disable, -> { where(status: false) }
@@ -41,6 +42,5 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc)
     .first
     .format_time
-
   end
 end
