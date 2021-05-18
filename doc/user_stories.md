@@ -21,7 +21,7 @@ These user stories will require you to build many pages. This repo includes wire
 Merchant Dashboard
 
 As a merchant,
-When I visit my merchant dashboard (/merchant/merchant_id/dashboard)
+When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
 Then I see the name of my merchant
 ```
 
@@ -30,8 +30,8 @@ Merchant Dashboard Links
 
 As a merchant,
 When I visit my merchant dashboard
-Then I see link to my merchant items index (/merchant/merchant_id/items)
-And I see a link to my merchant invoices index (/merchant/merchant_id/invoices)
+Then I see link to my merchant items index (/merchants/merchant_id/items)
+And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
 ```
 
 ```
