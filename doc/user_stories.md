@@ -74,7 +74,7 @@ And I see that the list is ordered from oldest to newest
 Merchant Items Index Page
 
 As a merchant,
-When I visit my merchant items index page ("merchant/merchant_id/items")
+When I visit my merchant items index page ("merchants/merchant_id/items")
 I see a list of the names of all of my items
 And I do not see items for any other merchant
 ```
@@ -84,7 +84,7 @@ Merchant Items Show Page
 
 As a merchant,
 When I click on the name of an item from the merchant items index page,
-Then I am taken to that merchant's item's show page (/merchant/merchant_id/items/item_id)
+Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
 And I see all of the item's attributes including:
 
 - Name
