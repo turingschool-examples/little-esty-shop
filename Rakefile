@@ -7,9 +7,10 @@ Rails.application.load_tasks
 
 namespace :csv_load do
   desc "load customer csv"
-  task :customers do
+  task customers: :environment do
     csv_path = 'db/data/customers.csv'
     csv = CSV.open(csv_path, headers: true)
+    require "pry"; binding.pry
     csv.each do |row|
       Customer.create!(
         first_name: row['first_name'],
@@ -18,23 +19,23 @@ namespace :csv_load do
     end
   end
   desc "load invoice_items csv"
-  task :invoice_items do
+  task invoice_items: :environment do
     puts 'invoice_items'
   end
   desc "load invoices csv"
-  task :invoices do
+  task invoices: :environment do
     puts 'invoices'
   end
   desc "load items csv"
-  task :items do
+  task items: :environment do
     puts 'items'
   end
   desc "load merchants csv"
-  task :merchants do
+  task merchants: :environment do
     puts 'merchants'
   end
   desc "load transactions csv"
-  task :transactions do
+  task transactions: :environment do
     puts 'transactions'
   end
   desc 'run all csv files'
