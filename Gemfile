@@ -40,6 +40,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov'
+  gem 'orderly'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -54,3 +59,10 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'activerecord-postgres_enum'
+# gem 'autoprefixer-rails'
+gem 'factory_bot_rails'
+gem 'faker'
+gem 'foundation-rails'
+gem 'jquery-rails'
