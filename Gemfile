@@ -33,6 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-rails'
+
+gem 'bootstrap', '~> 4.0.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -40,6 +44,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'simplecov'
+  gem 'faker'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
+  gem 'orderly'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+
 end
 
 group :development do
