@@ -1,6 +1,6 @@
 class InvoiceItem < ApplicationRecord
-  belongs_to :item, foreign_key: true
-  belongs_to :invoice, foreign_key: true
+  belongs_to :item
+  belongs_to :invoice
 
-  enum status: {pending: 'Pending', packaged: 'Packaged', shipped: 'Shipped'}
+  enum status: { pending: 'Pending', packaged: 'Packaged', shipped: 'Shipped' }
 end
