@@ -16,7 +16,9 @@ RSpec.describe 'The index page for an merchants items,' do
         within "#item-#{item.id}" do
           expect(page).to have_content(item.name)
           expect(page).to have_content(item.unit_price)
-          expect(page).to have_content(item.quanity)
+        end
+        within "#item-#{item.id}-description" do
+          expect(page).to have_content(item.description)
         end
       end
 
