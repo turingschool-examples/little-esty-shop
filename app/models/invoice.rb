@@ -6,11 +6,11 @@ class Invoice < ApplicationRecord
 
   enum status: {'in progress': 0, cancelled: 1, completed: 2}
 
-  def incomplete_invoices
+  def self.incomplete_invoices
     joins(:invoice_items)
       .where('invoice_items.status != 2')
       .where(status: 0)
-      .order(created_at: :desc)
+      .order(:created_at)
       .distinct
   end
 end

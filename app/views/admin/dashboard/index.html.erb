@@ -10,3 +10,10 @@
     <p><%= "#{c.first_name} #{c.last_name} Transactions: #{c.transaction_count}" %></p>
   <% end %>
 </div>
+
+<div id="incomplete_invoices">
+  <h1>Incomplete Invoices</h1>
+  <% @incomp_invoices.each do |i| %>
+    <p class="incomp" id="invoice-<%= i.id %>"><a href=""><%= i.id%></a> <%= i.created_at.strftime('%A, %B %d, %Y') %></p>
+  <% end %>
+</div>
