@@ -3,14 +3,15 @@
     <tr>
       <th>Item Name</th>
       <th>Unit Price</th>
-      <th>Quantity</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= @item.name %></td>
       <td><%= @item.unit_price %></td>
-      <td><%= @item.quantity %></td>
+    </tr>
+    <tr>
+      <td colspan='2'><%= @item.description %></td>
     </tr>
   </tbody>
 </table>
