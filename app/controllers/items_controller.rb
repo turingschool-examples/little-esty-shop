@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit update]
 
   def index
-    @items = Item.all
+    @items = Merchant.find(params[:merchant_id]).items
   end
 
   def show
