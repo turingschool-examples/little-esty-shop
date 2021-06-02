@@ -8,24 +8,20 @@ RSpec.describe 'The index page for an merchants items,' do
       item_1 = FactoryBot.create(:item, merchant: merchant_1)
       item_2 = FactoryBot.create(:item, merchant: merchant_1)
       item_3 = FactoryBot.create(:item, merchant: merchant_1)
-      item_4 = FactoryBot.create(:item, merchant: merchant_2)
+      item_4 = FactoryBot.create(:item, merchant: merchant_2, name: 'Impossible Name To Be Random')
 
       visit merchant_items_path(merchant_1)
 
-      within "#item-#{item_1.id}" do
-        expect(page).to have_content(item_1.name)
-        expect(page).to have_content(item_1.unit_price)
-        expect(page).to have_content(item_1.quanity)
+      merchant_1.items.each do |item|
+        within "#item-#{item.id}" do
+          expect(page).to have_content(item.name)
+          expect(page).to have_content(item.unit_price)
+          expect(page).to have_content(item.quanity)
+        end
       end
-      within "#item-#{item_2.id}" do
-        expect(page).to have_content(item_2.name)
-        expect(page).to have_content(item_2.unit_price)
-        expect(page).to have_content(item_2.quanity)
-      end
-      within "#item-#{item_3.id}" do
-        expect(page).to have_content(item_3.name)
-        expect(page).to have_content(item_3.unit_price)
-        expect(page).to have_content(item_3.quanity)
+
+      within '#item-list' do
+        expect(page).to_not have_content(item_4.name)
       end
     end
   end
