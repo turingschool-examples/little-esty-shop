@@ -1,10 +1,34 @@
-desc "destroy existing records" 
-task :clear_data do
+
+desc "destroy and reload all seed data"
+task :load_csv do
+  Rake::Task["initialize"].invoke
+  Rake::Task["clear_data"].invoke
+  Rake::Task["load_customers"].invoke
+  Rake::Task["load_invoices"].invoke
+  Rake::Task["load_merchants"].invoke
+  Rake::Task["load_items"].invoke
+  Rake::Task["load_invoice_items"].invoke
+  Rake::Task["load_transactions"].invoke
+end
+
+task initialize: :environment do
+  require './app/models/application_record.rb'
+  require './app/models/customer.rb'
+  require './app/models/invoice.rb'
+  require './app/models/merchant.rb'
+  require './app/models/item.rb'
+  require './app/models/invoice_item.rb'
+  require './app/models/transaction.rb'
+end
+
+desc "destroy existing records"
+task clear_data: :environment do
+
   Customer.destroy_all
   Merchant.destroy_all
   Item.destroy_all
   Invoice.destroy_all
-  ItemInvoice.destroy_all
+  InvoiceItem.destroy_all
   Transaction.destroy_all
 end
 
@@ -13,7 +37,6 @@ task load_customers: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/customer.rb'
-  Customer.connection
   CSV.foreach('./db/data/customers.csv', :headers => true,  header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Customer.new
     t.first_name = row[:first_name]
@@ -26,11 +49,10 @@ task load_invoice_items: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/invoice_item.rb'
-  InvoiceItem.connection
   CSV.foreach('./db/data/invoice_items.csv', :headers => true,  header_converters: :symbol, converters: :all, :encoding => 'UTF-8') do |row|
     t = InvoiceItem.new
-    t.quantity = row[:quantity]
-    t.unit_price = row[:unit_price]
+    t.quantity = row[:quantity].to_i
+    t.unit_price = row[:unit_price].to_i
     t.status = row[:status]
     t.item_id = row[:item_id]
     t.invoice_id = row[:invoice_id]
@@ -42,7 +64,6 @@ task load_items: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/item.rb'
-  Item.connection
   CSV.foreach('./db/data/items.csv', :headers => true, header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Item.new
     t.name = row[:name]
@@ -58,7 +79,6 @@ task load_merchants: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/merchant.rb'
-  Merchant.connection
   CSV.foreach('./db/data/merchants.csv', :headers => true, header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Merchant.new
     t.name = row[:name]
@@ -70,7 +90,6 @@ task load_transactions: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/transaction.rb'
-  Transaction.connection
   CSV.foreach('./db/data/transactions.csv', :headers => true, header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Transaction.new
     t.invoice_id = row[:invoice_id]
@@ -85,7 +104,6 @@ task load_invoices: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/invoice.rb'
-  Invoice.connection
   CSV.foreach('./db/data/invoices.csv', :headers => true, header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Invoice.new
     t.status = row[:status]
