@@ -5,6 +5,9 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+  def show
+  end
+
   private
   def find_merchant
     @merchant = Merchant.find(params[:id])
