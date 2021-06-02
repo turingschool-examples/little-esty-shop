@@ -10,6 +10,7 @@ namespace :csv_load do
   task customers: :environment do
     csv_path = 'db/data/customers.csv'
     csv = CSV.open(csv_path, headers: true)
+    require "pry"; binding.pry
     csv.each do |row|
       Customer.create!(
         first_name: row['first_name'],
