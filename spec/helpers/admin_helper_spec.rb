@@ -11,5 +11,10 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe AdminHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  xit 'returns the date formated like Monday, March 20, 1991' do
+    # active record timestamps are of type ActiveSupport::TimeWithZone
+    # using Time.zone.now to simulate this
+    time = Time.zone.now
+    string = AdminHelper.format_date time
+  end
 end
