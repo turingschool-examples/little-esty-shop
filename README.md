@@ -36,3 +36,8 @@ This project requires Ruby 2.5.3.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+## Visual Schema
+
+![Little Esty Shop](https://user-images.githubusercontent.com/74436194/120427830-e18e2300-c32f-11eb-907c-723750913e80.png)
+
