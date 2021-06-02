@@ -3,7 +3,7 @@ FactoryBot.define do
     quanity { 1 }
     unit_price { "" }
     status { 1 }
-    item { nil }
-    invoice { nil }
+    # item { nil }
+    # invoice { nil }
   end
 end
