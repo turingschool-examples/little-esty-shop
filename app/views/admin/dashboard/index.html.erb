@@ -4,3 +4,9 @@
   <li><%= link_to 'Admin Merchants', admin_merchants_path %></li>
   <li><%= link_to 'Admin Invoices', admin_invoices_path %></li>
 </ul>
+
+<div id="top-5">
+  <% @top5.each do |c| %>
+    <p><%= "#{c.first_name} #{c.last_name} Transactions: #{c.transaction_count}" %></p>
+  <% end %>
+</div>
