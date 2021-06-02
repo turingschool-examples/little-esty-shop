@@ -1,4 +1,6 @@
 <h1><%= @merchant.name %></h1>
 
-<%= link_to 'Merchant Items Index', "/merchants/#{@merchant.id}/items" %>
-<%= link_to 'Merchant Invoices Index', "/merchants/#{@merchant.id}/invoices" %>
+<br>
+
+<%= link_to 'Merchant Items Index', merchant_items_path(@merchant) %>
+<%= link_to 'Merchant Invoices Index', merchant_invoices_path(@merchant) %>

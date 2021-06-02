@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe "dashboard" do
   before(:each) do
-    @merchant_1 = Merchant.create!(name:'Gypsy Rose')
+    @merchant_1 = FactoryBot.create(:merchant)
 
-    visit "merchants/#{@merchant_1.id}/dashboard"
+    visit "/merchants/#{@merchant_1.id}/dashboard"
   end
 
   it 'has merchant name' do
@@ -14,14 +14,14 @@ RSpec.describe "dashboard" do
   it 'has link to merchant items index' do
 
     expect(page).to have_link('Merchant Items Index')
-    click_on 'Merchant Items Index'
-    expect(path).to eq("merchants/#{@merchant_1.id}/items")
+    click_on('Merchant Items Index')
+    expect(current_path).to eq(merchant_items_path(@merchant_1))
   end
 
     it 'has link to merchant items index' do
 
     expect(page).to have_link('Merchant Invoices Index')
-    click_on 'Merchant Invoices Index'
-    expect(path).to eq("merchants/#{@merchant_1.id}/invoices")
+    click_on('Merchant Invoices Index')
+    expect(current_path).to eq(merchant_invoices_path(@merchant_1))
   end
 end
