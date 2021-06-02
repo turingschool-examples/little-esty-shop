@@ -48,6 +48,8 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
+    autoprefixer-rails (10.2.5.1)
+      execjs (> 0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -55,6 +57,10 @@ GEM
     bindex (0.8.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
+    bootstrap (5.0.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 2.9.2, < 3)
+      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     capybara (3.35.3)
       addressable
@@ -73,6 +79,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.8)
+    connection_pool (2.2.5)
     crass (1.0.6)
     diff-lcs (1.4.4)
     docile (1.4.0)
@@ -86,10 +93,6 @@ GEM
     faker (2.17.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.1)
-    foundation-rails (6.6.2.0)
-      railties (>= 3.1.0)
-      sass (>= 3.3.0)
-      sprockets-es6 (>= 0.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.10)
@@ -125,6 +128,7 @@ GEM
       capybara (>= 1.1)
       rspec (>= 2.14)
     pg (1.2.3)
+    popper_js (2.9.2)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -132,6 +136,8 @@ GEM
     puma (3.12.6)
     racc (1.5.2)
     rack (2.2.3)
+    rack-proxy (0.7.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -162,6 +168,12 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    react-rails (2.6.1)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     regexp_parser (2.1.1)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -196,6 +208,15 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
+    semantic_range (3.0.0)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
     simplecov (0.21.2)
@@ -211,10 +232,6 @@ GEM
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-es6 (0.9.2)
-      babel-source (>= 5.8.11)
-      babel-transpiler
-      sprockets (>= 3.0.0)
     sprockets-rails (3.2.2)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
@@ -234,6 +251,11 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webpacker (5.4.0)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -246,11 +268,11 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres_enum
   bootsnap (>= 1.1.0)
+  bootstrap (~> 5.0.1)
   capybara
   coffee-rails (~> 4.2)
   factory_bot_rails
   faker
-  foundation-rails
   jbuilder (~> 2.5)
   jquery-rails
   launchy
@@ -260,6 +282,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 5.2.5)
+  react-rails
   rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)
   shoulda-matchers
@@ -270,6 +293,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webpacker
 
 RUBY VERSION
    ruby 2.7.2p137
