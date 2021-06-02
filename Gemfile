@@ -32,15 +32,28 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'bootstrap'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'launchy'
+  gem 'orderly'
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
 end
+
+# Gem for API use
+gem "faraday"
+gem "json"
+gem "figaro"
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
