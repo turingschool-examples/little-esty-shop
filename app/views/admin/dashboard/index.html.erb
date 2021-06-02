@@ -14,6 +14,6 @@
 <div id="incomplete_invoices">
   <h1>Incomplete Invoices</h1>
   <% @incomp_invoices.each do |i| %>
-    <p class="incomp" id="invoice-<%= i.id %>"><a href=""><%= i.id%></a> <%= i.created_at.strftime('%A, %B %d, %Y') %></p>
+    <p class="incomp" id="invoice-<%= i.id %>"><%= link_to i.id, admin_invoice_path(i.id) %> <%= i.created_at.strftime('%A, %B %d, %Y') %></p>
   <% end %>
 </div>
