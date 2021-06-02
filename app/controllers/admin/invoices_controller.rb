@@ -1,6 +1,6 @@
 # app/controllers/invoice_controller.rb
 
-class InvoicesController < ApplicationController
+class Admin::InvoicesController < ApplicationController
 
   def create
     Invoice.create(invoice_params)

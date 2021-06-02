@@ -1,6 +1,6 @@
 # app/controllers/merchant_controller.rb
 
-class MerchantsController < ApplicationController
+class Admin::MerchantsController < ApplicationController
 
   def create
     Merchant.create(merchant_params)

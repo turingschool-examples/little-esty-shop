@@ -1,6 +1,6 @@
 # app/controllers/customer_controller.rb
 
-class CustomersController < ApplicationController
+class Admin::CustomersController < ApplicationController
 
   def create
     Customer.create(customer_params)

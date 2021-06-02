@@ -1,6 +1,6 @@
 # app/controllers/item_controller.rb
 
-class ItemsController < ApplicationController
+class Admin::ItemsController < ApplicationController
 
   def create
     Item.create(item_params)

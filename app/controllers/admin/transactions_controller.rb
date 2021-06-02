@@ -1,6 +1,6 @@
 # app/controllers/transaction_controller.rb
 
-class TransactionsController < ApplicationController
+class Admin::TransactionsController < ApplicationController
 
   def create
     Transaction.create(transaction_params)
