@@ -17,7 +17,6 @@ RSpec.describe 'The show page for an item,' do
       within '#item-table' do
         expect(page).to have_content('Item Name')
         expect(page).to have_content('Unit Price')
-        expect(page).to have_content('Description')
       end
     end
 
