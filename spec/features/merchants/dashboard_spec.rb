@@ -11,4 +11,14 @@ describe 'Merchant Dashboard Page' do
     visit "/merchants/#{@merch.id}/dashboard"
     expect(page).to have_content(@merch.name)
   end
+
+  #   As a merchant,
+  # When I visit my merchant dashboard
+  # Then I see link to my merchant items index (/merchants/merchant_id/items)
+  # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
+  it 'has 2 links, to merchant items, and merchant invoices' do
+    visit "/merchants/#{@merch.id}/dashboard"
+    expect(page).to have_content("Items")
+    expect(page).to have_content("Invoices")
+  end
 end

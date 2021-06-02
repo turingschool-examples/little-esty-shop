@@ -5,4 +5,10 @@ class MerchantController < ApplicationController
   def dashboard
     @merchant = Merchant.find(params[:id])
   end
+  def items
+    
+  end
+  def invoices
+    
+  end
 end
