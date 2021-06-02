@@ -14,12 +14,6 @@ task load_customers: :environment do
   require './app/models/application_record.rb'
   require './app/models/customer.rb'
   Customer.connection
-  # CSV.foreach('./db/data/customers.csv', headers: true, header_converters: :symbol) do |row|
-  #   Customer.new(row)
-  # end
-  # csv_text = File.read(Rails.root.join('db', 'data', 'customers.csv'))
-  # csv = CSV.foreach(csv_text, :headers => true,  header_converters: :symbol, :encoding => 'UTF-8')
-  # csv.foreach do |row|
   CSV.foreach('./db/data/customers.csv', :headers => true,  header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Customer.new
     t.first_name = row[:first_name]
@@ -79,11 +73,23 @@ task load_transactions: :environment do
   Transaction.connection
   CSV.foreach('./db/data/transactions.csv', :headers => true, header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = Transaction.new
-    t.name = row[:name]
+    t.invoice_id = row[:invoice_id]
+    t.credit_card_number = row[:credit_card_number]
+    t.credit_card_expiration_date = row[:credit_card_expiration_date]
+    t.result = row[:result]
     t.save
   end
 end
 
-task
-  
+task load_invoices: :environment do
+  require 'csv'
+  require './app/models/application_record.rb'
+  require './app/models/invoice.rb'
+  Invoice.connection
+  CSV.foreach('./db/data/invoices.csv', :headers => true, header_converters: :symbol, :encoding => 'UTF-8') do |row|
+    t = Invoice.new
+    t.status = row[:status]
+    t.customer_id = row[:customer_id]
+    t.save
+  end
 end
