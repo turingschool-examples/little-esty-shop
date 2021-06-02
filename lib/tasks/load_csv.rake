@@ -2,7 +2,6 @@
 desc "destroy and reload all seed data"
 task :load_csv do
   Rake::Task["initialize"].invoke
-  Rake::Task["clear_data"].invoke
   Rake::Task["load_customers"].invoke
   Rake::Task["load_invoices"].invoke
   Rake::Task["load_merchants"].invoke
@@ -12,6 +11,9 @@ task :load_csv do
 end
 
 task initialize: :environment do
+  Rake::Task["db:drop"].invoke
+  Rake::Task["db:create"].invoke
+  Rake::Task["db:migrate"].invoke
   require './app/models/application_record.rb'
   require './app/models/customer.rb'
   require './app/models/invoice.rb'
@@ -19,17 +21,6 @@ task initialize: :environment do
   require './app/models/item.rb'
   require './app/models/invoice_item.rb'
   require './app/models/transaction.rb'
-end
-
-desc "destroy existing records"
-task clear_data: :environment do
-
-  Customer.destroy_all
-  Merchant.destroy_all
-  Item.destroy_all
-  Invoice.destroy_all
-  InvoiceItem.destroy_all
-  Transaction.destroy_all
 end
 
 desc "load customers"
@@ -42,7 +33,11 @@ task load_customers: :environment do
     t.first_name = row[:first_name]
     t.last_name = row[:last_name]
     t.save
+    if t.save == false
+      puts "Failed to add Customer ##{row[:id]} to database"
+    end
   end
+  puts "Customer CSV Database Upload Complete"
 end
 
 task load_invoice_items: :environment do
@@ -57,7 +52,11 @@ task load_invoice_items: :environment do
     t.item_id = row[:item_id]
     t.invoice_id = row[:invoice_id]
     t.save
+    if t.save == false
+      puts "Failed to add InvoiceItem ##{row[:id]} to database"
+    end
   end
+  puts "InvoiceItem CSV Database Upload Complete"
 end
 
 task load_items: :environment do
@@ -72,7 +71,11 @@ task load_items: :environment do
     t.enabled = row[:enabled]
     t.merchant_id = row[:merchant_id]
     t.save
+    if t.save == false
+      puts "Failed to add Item ##{row[:id]} to database"
+    end
   end
+  puts "Item CSV Database Upload Complete"
 end
 
 task load_merchants: :environment do
@@ -83,7 +86,11 @@ task load_merchants: :environment do
     t = Merchant.new
     t.name = row[:name]
     t.save
+    if t.save == false
+      puts "Failed to add Merchant ##{row[:id]} to database"
+    end
   end
+  puts "Merchant CSV Database Upload Complete"
 end
 
 task load_transactions: :environment do
@@ -97,7 +104,11 @@ task load_transactions: :environment do
     t.credit_card_expiration_date = row[:credit_card_expiration_date]
     t.result = row[:result]
     t.save
+    if t.save == false
+      puts "Failed to add Transaction ##{row[:id]} to database"
+    end
   end
+  puts "Transaction CSV Database Upload Complete"
 end
 
 task load_invoices: :environment do
@@ -109,5 +120,9 @@ task load_invoices: :environment do
     t.status = row[:status]
     t.customer_id = row[:customer_id]
     t.save
+    if t.save == false
+      puts "Failed to add Invoices ##{row[:id]} to database"
+    end
   end
+  puts "Invoice CSV Database Upload Complete"
 end
