@@ -4,7 +4,6 @@
       <tr>
         <th>Item Name</th>
         <th>Price</th>
-        <th>Quanity</th>
       </tr>
     </thead>>
     <tbody>
@@ -12,7 +11,9 @@
         <tr id="item-<%=item.id%>">
           <td><%=item.name%></td>
           <td><%=item.unit_price%></td>
-          <td><%=item.quanity%></td>
+        </tr>
+        <tr id='item-<%=item.id%>-description'>
+          <td colspan='2'><%= item.description %></td>
         </tr>
       <% end %>
     </tbody>
