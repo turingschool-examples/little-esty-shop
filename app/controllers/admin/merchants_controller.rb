@@ -1,8 +1,10 @@
 class Admin::MerchantsController < ApplicationController
-  before_action :find_merchant, only: [:show, :edit, :update]
+  before_action :find_merchant, only: [:show, :edit, :update, :update_status]
 
   def index
     @merchants = Merchant.all
+    @enabled_merchants = Merchant.enabled
+    @disabled_merchants = Merchant.disabled
   end
 
   def show
@@ -22,6 +24,16 @@ class Admin::MerchantsController < ApplicationController
     #           ORRRRRRRR
     #   flash[:notice] = "Error: #{error_message(@merchant.errors)}"
     #   render :edit
+    end
+  end
+
+  def update_status
+    if params[:status] == 'enable'
+      @merchant.update!(status: 1)
+      redirect_to admin_merchants_path
+    elsif params[:status] == 'disable'
+      @merchant.update!(status: 0)
+      redirect_to admin_merchants_path
     end
   end
 
