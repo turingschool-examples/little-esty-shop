@@ -9,37 +9,83 @@ namespace :csv_load do
   desc "load customer csv"
   task customers: :environment do
     csv_path = 'db/data/customers.csv'
-    csv = CSV.open(csv_path, headers: true)
-    require "pry"; binding.pry
-    csv.each do |row|
-      Customer.create!(
-        first_name: row['first_name'],
-        last_name: row['first_name']
-      )
+    i = 1
+    CSV.foreach(csv_path, headers: true) do |row|
+      if Customer.create! row.to_h
+        print "#{i} Customer Records Done\r"
+        i = i + 1
+      end
     end
+    print "\n"
   end
-  desc "load invoice_items csv"
-  task invoice_items: :environment do
-    puts 'invoice_items'
-  end
+
   desc "load invoices csv"
   task invoices: :environment do
-    puts 'invoices'
+    csv_path = 'db/data/invoices.csv'
+    i = 1
+    CSV.foreach(csv_path, headers: true) do |row|
+      if Invoice.create! row.to_h
+        print "#{i} Invoice Records Done\r"
+        i = i + 1
+      end
+    end
+    print "\n"
   end
+
   desc "load items csv"
   task items: :environment do
-    puts 'items'
+    csv_path = 'db/data/items.csv'
+    i = 1
+    CSV.foreach(csv_path, headers: true) do |row|
+      if Item.create! row.to_h
+        print "#{i} Item Records Done\r"
+        i = i + 1
+      end
+    end
+  print "\n"
   end
+
+  desc "load invoice_items csv"
+  task invoice_items: :environment do
+    csv_path = 'db/data/invoice_items.csv'
+    i = 1
+    CSV.foreach(csv_path, headers: true) do |row|
+      if InvoiceItem.create! row.to_h
+        print "#{i} InvoiceItem Records Done\r"
+        i = i + 1
+      end
+    end
+    print "\n"
+  end
+
   desc "load merchants csv"
   task merchants: :environment do
-    puts 'merchants'
+    csv_path = 'db/data/merchants.csv'
+    i = 1
+    CSV.foreach(csv_path, headers: true) do |row|
+      if Merchant.create! row.to_h
+        print "#{i} Merchant Records Done\r"
+        i = i + 1
+      end
+    end
+    print "\n"
   end
+
   desc "load transactions csv"
   task transactions: :environment do
-    puts 'transactions'
+    csv_path = 'db/data/transactions.csv'
+    i = 1
+    CSV.foreach(csv_path, headers: true) do |row|
+      if Transaction.create! row.to_h
+        print "#{i} Transaction Records Done\r"
+        i = i + 1
+      end
+    end
+    print "\n"
   end
+
   desc 'run all csv files'
-  task all: %W(customers invoice_items invoices items merchants transactions) do
-    puts 'all'
+  task all: %W(customers merchants invoices items invoice_items merchants transactions) do
+    print "All CSV files loaded. \n"
   end
 end
