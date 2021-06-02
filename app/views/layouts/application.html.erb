@@ -10,6 +10,29 @@
   </head>
 
   <body>
-    <%= yield %>
+   <nav class="navbar navbar-expand navbar-light bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="/">Little Esty Shop</a>
+      <div class="navbar-nav">
+        <a class="nav-link text-light" <%= link_to "Placeholder", "#" %></a>
+        <a class="nav-link text-light" <%= link_to "Placeholder", "#" %></a>
+        <a class="nav-link text-light" <%= link_to "Placeholder", "#" %></a>
+      </div>
+    </div>
+   </nav> 
+
+   <!-- This container envelops everything within a page and applies padding -->
+   <div class="container-fluid p-4">
+     <% flash.each do |type, msg| %>
+       <div><%= msg %></div>
+     <% end %>
+     <%= yield %>
+   </div>
+
+   <div class="d-flex justify-content-around bg-dark">
+     <h6 class="p-3 text-light">Created by Jermaine B, Netia I, Suzie K & Jamison G</h6>
+     <p class="p-3 text-light">©2021</p>
+   </div>
+
   </body>
 </html>
