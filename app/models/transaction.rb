@@ -3,7 +3,7 @@ class Transaction < ApplicationRecord
   # validates :credit_card_expiration_date  ##BLANK
   validates :result, presence: true
   
-  enum result: {failed: 'Failed', success: 'Success'}
+  enum result: {failed: 'failed', success: 'success'}
 
   belongs_to :invoice
 end

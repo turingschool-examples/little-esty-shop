@@ -3,7 +3,7 @@ class CreateInvoiceItems < ActiveRecord::Migration[5.2]
     create_enum :item_status, %w[pending packaged shipped]
 
     create_table :invoice_items do |t|
-      t.enum :status, enum_name: :item_status
+      t.enum :status, enum_name: :item_status, default: 'pending', null: false
       t.integer :quanity
       t.integer :unit_price
       t.references :item, foreign_key: true

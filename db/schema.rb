@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_001026) do
   end
 
   create_table "invoice_items", force: :cascade do |t|
-    t.enum "status", enum_name: "item_status"
+    t.enum "status", default: "pending", null: false, enum_name: "item_status"
     t.integer "quanity"
     t.integer "unit_price"
     t.bigint "item_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_001026) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.enum "status", enum_name: "invoice_status"
+    t.enum "status", default: "in_progress", null: false, enum_name: "invoice_status"
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
