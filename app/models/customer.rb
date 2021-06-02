@@ -1,4 +1,4 @@
-# app/models/customer_controller.rb
+# app/models/customer
 
 class Customer < ApplicationRecord
 
