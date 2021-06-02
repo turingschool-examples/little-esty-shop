@@ -4,7 +4,7 @@ RSpec.describe "dashboard" do
   before(:each) do
     @merchant_1 = FactoryBot.create(:merchant)
 
-    visit "/merchants/#{@merchant_1.id}/dashboard"
+    visit dashboard_merchant_path(@merchant_1)
   end
 
   it 'has merchant name' do
