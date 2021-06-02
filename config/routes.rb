@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
 #-------Admin----------------------
   namespace :admin do
-    resources :merchants
+    resources :merchants do
+      member do
+        post :update_status
+      end
+    end
   end
 end
