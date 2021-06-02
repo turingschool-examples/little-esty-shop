@@ -33,6 +33,9 @@ GEM
       activemodel (= 5.2.6)
       activesupport (= 5.2.6)
       arel (>= 9.0)
+    activerecord-postgres_enum (1.6.0)
+      activerecord (>= 5, < 6.2)
+      pg
     activestorage (5.2.6)
       actionpack (= 5.2.6)
       activerecord (= 5.2.6)
@@ -238,6 +241,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgres_enum
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.0.0)
   capybara
