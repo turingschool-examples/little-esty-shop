@@ -1,0 +1,23 @@
+<h1><%= @merchant.name %></h1>
+
+<p> Disabled Items </p>
+<% @items.each do |item| %>
+  <% if item.status == "disable" %>
+      <%= item.name %>
+      <%= button_to "Enable #{item.name}",
+        "/merchants/#{@merchant.id}/items",
+        method: :get, params: {change_to_enable: item},
+        form: {style: 'display:inline-block;'} %><br>
+    <% end %>
+<% end %>
+
+<p> Enabled Items </p>
+<% @items.each do |item| %>
+  <% if item.status == "enable" %>
+    <%= item.name %>
+    <%= button_to "Disable #{item.name}",
+      "/merchants/#{@merchant.id}/items",
+      method: :get, params: {change_to_disable: item},
+      form: {style: 'display:inline-block;'} %><br>
+  <% end %>
+<% end %>
