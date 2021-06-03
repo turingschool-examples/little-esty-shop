@@ -28,6 +28,15 @@ RSpec.describe 'admin index page', type: :feature do
 
       expect(current_path).to eq('/admin/invoices')
     end
+    it 'contains a table showing the top 5 customers by successful transactions' do
+      visit '/admin'
+
+      expect(page).to have_content('Alessandra Ward')
+      expect(page).to have_content('Ben Turner')
+      expect(page).to have_content('Estel Hermiston')
+      expect(page).to have_content('Helmer Baumbach')
+      expect(page).to have_content('Isaac Zulauf')
+    end
   end
 
   describe 'page functionality' do
