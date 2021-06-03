@@ -1,0 +1,17 @@
+  <h1>Welcome to the Merchant Admin Portal</h2>>
+  <tr>
+    <th>Merchant ID</th>
+    <th>Merchant Name</th>
+    <th>Status</th>
+    <th>Change Status</th>
+  </tr>
+  <% @b3facilities.each do |facility| %>
+    <tr>
+      <td><%= facility.id %></td>
+      <td><%= facility.full_address %></td>
+      <td><%= link_to "See Info", "/facilities/#{facility.id}" %> / <%= link_to "Edit Info", "/facilities/#{facility.id}/edit" %></td>
+      <td><%= link_to "See Licenses", "/facilities/#{facility.id}/licenses" %></td>
+      <td><%= link_to "Delete Facility", "/facilities/#{facility.id}", method: :delete %>
+    </tr>
+  <% end %>
+</table>
