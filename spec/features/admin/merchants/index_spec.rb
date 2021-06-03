@@ -69,4 +69,8 @@ RSpec.describe 'Admin Merchants Index Page' do
       expect(page).to have_button('Disable')
     end
   end
+
+  it "I see a link to create a new merchant." do
+    expect(page).to have_link('Create New Merchant', href: new_admin_merchant_path)
+  end
 end
