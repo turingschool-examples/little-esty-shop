@@ -40,12 +40,24 @@ RSpec.describe 'Merchants dashboard show page' do
 
     it 'lists names of all items that are ready to ship' do
       visit "merchants/#{@merchant.id}/dashboard"
+
+      expect(page).to have_content("Qui Essie")
+      expect(page).to have_content("Essie")
+      expect(page).to_not have_content("Glowfish")
+    end
+
+    it 'lists corresponding invoice id' do
+      visit "merchants/#{@merchant.id}/dashboard"
       save_and_open_page
-      within('.shipment-table') do
-        expect(page).to have_content("Qui Essie")
-        expect(page).to have_content("Essie")
-        expect(page).to_not have_content("Glowfish")
-      end
+      expect(page).to have_content("##{@invoice.id}")
+    end
+
+    xit 'links to corresponding merchant invoice show spec' do
+      visit "merchants/#{@merchant.id}/dashboard"
+
+      first(:link, "#{@invoice.id}").click
+
+      expect(current_path).to eq("merchants/#{@merchant.id}/invoices")
     end
   end
 end
