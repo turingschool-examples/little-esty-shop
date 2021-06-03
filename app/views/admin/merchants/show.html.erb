@@ -1,3 +1,4 @@
+ <br>
  <div class="d-flex flex-column justify-content-start">
   <h1><%= "Merchant Details For #{@merchant.name}" %></h1><br>
     <div class="col-md-50 col-md-offset-2"></div>
@@ -16,3 +17,5 @@
         </tr>
     </table><br>
   </div>
+
+  <button><%= link_to "Edit", "#{request.url}/edit", method: :get %></button>

@@ -1,0 +1,16 @@
+<div class="container" style="width: 30%">
+<div class="col-sm", style='padding-left: 25px'>
+      <h1><%= "Edit #{@merchant.name}" %></h1><br>
+      <%= bootstrap_form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f| %>
+        <%= f.text_field :name, value: @merchant.name %><br>
+        <% if @merchant.enabled == true %>
+          <%= radio_button_tag(:enabled, true, checked = true) %> Enable<br>
+          <%= radio_button_tag(:enabled, false, checked = false) %> Disable
+        <% else %>
+          <%= radio_button_tag(:enabled, true, checked = false) %> Enable<br>
+          <%= radio_button_tag(:enabled, false, checked = true) %> Disable
+        <% end %><br><br>
+        <%= f.submit value: 'Submit Edits' %>
+      <% end %>
+     </div>
+  </div>

@@ -30,15 +30,15 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant)
+    merchant.update(merchant_params)
     merchant.save
-
+    flash[:notice] = "You have successfully updated this merchant!"
     redirect_to action: 'show', id: params[:id]
   end
 
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :enabled)
   end
 end
