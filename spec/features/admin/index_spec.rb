@@ -9,5 +9,15 @@ RSpec.describe 'Admin Dashboard' do
     end
   end
 
-  describe 'links to indices'
+  describe 'links to indices' do
+    it 'displays link and links to admin merchants index page' do
+      visit '/admin'
+      expect(page).to have_link('Merchants')
+    end
+
+    it 'displays link and links to admin invoices index page' do
+      visit '/admin'
+      expect(page).to have_link('Invoices')
+    end
+  end
 end
