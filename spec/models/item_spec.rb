@@ -21,7 +21,7 @@ end
   describe 'class methods' do
     it '::not_yet_shipped' do
 
-      expect(Item.not_yet_shipped).to eq([@item, @item_2, @item_3])
+      expect(Item.not_yet_shipped).to eq([@item, @item_2])
     end
   end
 
