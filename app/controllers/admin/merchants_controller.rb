@@ -4,7 +4,7 @@ class Admin::MerchantsController < ApplicationController
 
   def create
     Merchant.create(merchant_params)
-    redirect_to '/merchants'
+    redirect_to '/admin/merchants'
   end
 
   def destroy

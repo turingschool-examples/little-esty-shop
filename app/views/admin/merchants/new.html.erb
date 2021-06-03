@@ -1,0 +1,10 @@
+<div class="container" style="width: 30%">
+<div class="col-sm", style='padding-left: 25px'>
+      <h1><%= "Add a New Merchant" %></h1><br>
+      <%= bootstrap_form_with url: "/admin/merchants/", method: :post, local: true do |f| %>
+        <%= f.text_field :name %><br>
+          <%= radio_button_tag(:enabled, true, checked = true, style: "display: none;") %><br>
+        <%= f.submit value: 'Create New Merchant' %>
+      <% end %>
+     </div>
+  </div>
