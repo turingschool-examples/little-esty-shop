@@ -12,20 +12,22 @@ class MerchantItemsController < ApplicationController
       @item.update(status: "disable")
       redirect_to "/merchants/#{@merchant.id}/items"
     end
+
+    def new
+      @merchant = Merchant.find(params[:merchant_id])
+    end
+
+    def create
+      @merchant = Merchant.find(params[:merchant_id])
+      item = Item.create!(item_params)
+      redirect_to "/merchants/#{merchant.id}/items"
+    end
+
+  # private
+    def item_params
+      params.permit(:name, :description, :unit_price, :merchant_id, :status, :created_at, :updated_at)
+    end
   end
 
-  # def enable
-  #   @merchant = Merchant.find(params[:merchant_id])
-  #   @item = Item.find(params[:item_id])
-  #   @item.update(status: 1)
-  #   redirect_to "merchants/merchant_id/items"
-  # end
-  #
-  # def disable
-  #   @merchant = Merchant.find(params[:merchant_id])
-  #   @item = Item.find(params[:item_id])
-  #   item.update(status: 0)
-  #   redirect_to "merchants/merchant_id/items"
-  # end
 
 end

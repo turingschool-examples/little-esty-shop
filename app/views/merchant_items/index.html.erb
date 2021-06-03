@@ -1,5 +1,7 @@
 <h1><%= @merchant.name %></h1>
 
+<%= button_to "Add a New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+
 <p> Disabled Items </p>
 <% @items.each do |item| %>
   <% if item.status == "disable" %>
