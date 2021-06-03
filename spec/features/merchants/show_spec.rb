@@ -48,7 +48,7 @@ RSpec.describe 'Merchants dashboard show page' do
 
     it 'lists corresponding invoice id of each item' do
       visit "merchants/#{@merchant.id}/dashboard"
-    
+      save_and_open_page
       expect(page).to have_content("##{@invoice.id}")
     end
 
