@@ -40,7 +40,7 @@ RSpec.describe 'invoice index page' do
     expect(page).to have_no_content("#{@invoice_4}")
   end
 
-  it 'has a link on each invoice id to the invoice show page' do
+  xit 'has a link on each invoice id to the invoice show page' do
     visit "/merchants/#{@merchant.id}/invoices"
 
     expect(page).to have_link("#{@invoice_1.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
