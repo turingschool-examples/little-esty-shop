@@ -1,1 +1,7 @@
 <h1>Admin Merchant Index</h1>
+
+<ul class="merchants">
+  <% @merchants.each do |m| %>
+    <li id="merchant-<%= m.id %>"><%= m.name %></li>
+  <% end %>
+</ul>
