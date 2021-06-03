@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
-enum status: [:disable, :enable]
+  enum status: { disable: 0, enable: 1 }
 
   def self.enabled
     where(status: 1)
@@ -23,7 +23,7 @@ enum status: [:disable, :enable]
   def self.top_rev_merchants
     joins(invoies: :invoice_items)
 
-    
+
     # use where method on invoices.status = completed
   end
 end
