@@ -15,4 +15,8 @@ enum status: [:disable, :enable]
   def self.disabled
     where(status: 0)
   end
+
+  def self.new_mechant_id
+    all.last.id + 1
+  end
 end

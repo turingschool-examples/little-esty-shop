@@ -34,6 +34,13 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.disabled).to_not eq([@merchant1, @merchant2])
       end
     end
+
+    describe '.new_mechant_id' do
+      it "returns merchants with an disable status" do
+        expect(Merchant.new_mechant_id).to eq(Merchant.all.last.id + 1)
+        expect(Merchant.new_mechant_id).to_not eq(Merchant.all.last)
+      end
+    end
   end
 
   # describe 'instance methods' do
