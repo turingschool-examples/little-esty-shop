@@ -27,6 +27,19 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def new
+  end
+
+  def create
+    merchant = Merchant.new
+    merchant.id = Merchant.new_mechant_id
+    merchant.name = params[:name]
+    merchant.status = "disable"
+    merchant.save!
+    
+    redirect_to admin_merchants_path
+  end
+
   def update_status
     if params[:status] == 'enable'
       @merchant.update!(status: 1)
