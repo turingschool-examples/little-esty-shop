@@ -36,15 +36,18 @@
         </table>
 
         <tbody class="shipment-table">
+        <% @shippable_items.each do |item| %>
           <tr>
-          <% @shippable_items.each do |item| %>
-            <th scope="row">
-                <p><%= "#{item.name}" %></p>
+            <th scope="row"><p><%= item.name %></p>
             </th>
-            <td>#<%= link_to "#{item.invoice_items.find_invoice_id(item.id)}", "/merchants/#{@merchant.id}/invoice/#{item.invoice_items.find_invoice_id(item.id)}" %></td>
-          <% end %>
-            <td></td>
+            <td>
+              #<%= link_to "#{item.invoice_items.find_invoice_id(item.id)}", "/merchants/#{@merchant.id}/invoice/#{item.invoice_items.find_invoice_id(item.id)}" %>
+            </td>
+            <td>
+              <%= item.invoice_items.find_invoice_created_at(item.id).strftime("%A, %B %d, %Y")%>
+            </td>
           </tr>
+        <% end %>
         </tbody>
       <div>
     </section>

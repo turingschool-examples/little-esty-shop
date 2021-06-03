@@ -18,7 +18,7 @@ RSpec.describe 'Merchants dashboard show page' do
 
     it 'shows name of merchant' do
       visit "merchants/#{@merchant.id}/dashboard"
-     
+      
       expect(page).to have_content('Sally Handmade')
     end
 
@@ -46,13 +46,18 @@ RSpec.describe 'Merchants dashboard show page' do
       expect(page).to_not have_content("Glowfish")
     end
 
+    xit 'lists items by oldest invoice created date' do
+      visit "merchants/#{@merchant.id}/dashboard"
+
+    end
+
     it 'lists corresponding invoice id of each item' do
       visit "merchants/#{@merchant.id}/dashboard"
-      save_and_open_page
+      
       expect(page).to have_content("##{@invoice.id}")
     end
 
-    xit 'links to corresponding merchant invoice show spec' do
+    xit 'links to corresponding merchant invoice show page' do
       visit "merchants/#{@merchant.id}/dashboard"
 
       first(:link, "#{@invoice.id}").click
