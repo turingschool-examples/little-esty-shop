@@ -43,17 +43,19 @@ RSpec.describe 'admin index page', type: :feature do
       expect(page).to have_content('Incomplete Invoices')
 
       within "#incomplete-invoices > tr:nth-child(2)" do
-        expect(page).to have_link('1')
-        click_link('1')
-        expect(current_path).to eq('/admin/invoices/1')
+        expect(page).to have_link('112')
+        expect(page).to have_content('03/06/2012')
+        click_on('112')
+        expect(current_path).to eq('/admin/invoices/112')
       end
 
       visit '/admin'
 
-      within "#incomplete-invoices > tr:nth-child(13)" do
-        expect(page).to have_link('12')
-        click_link('1')
-        expect(current_path).to eq('/admin/invoices/12')
+      within "#incomplete-invoices > tr:nth-child(19)" do
+        expect(page).to have_link('291')
+        expect(page).to have_content('03/07/2012')
+        click_on('291')
+        expect(current_path).to eq('/admin/invoices/291')
       end
     end
   end
