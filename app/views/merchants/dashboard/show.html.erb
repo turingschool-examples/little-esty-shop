@@ -41,10 +41,10 @@
             <th scope="row"><p><%= item.name %></p>
             </th>
             <td>
-              #<%= link_to "#{item.invoice_items.find_invoice_id(item.id)}", "/merchants/#{@merchant.id}/invoice/#{item.invoice_items.find_invoice_id(item.id)}" %>
+              #<%= link_to "#{item.invoice_items.find_invoice_id(item.id)}", "/merchants/#{@merchant.id}/invoice/#{item.invoices.find_invoice_id(item.id)}" %>
             </td>
             <td>
-              <%= item.invoice_items.find_invoice_created_at(item.id).strftime("%A, %B %d, %Y")%>
+              <%= item.invoice_items.find_invoice_created_at(item.id)%>
             </td>
           </tr>
         <% end %>

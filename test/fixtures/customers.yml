@@ -1,0 +1,14 @@
+# Used to populate test db with sample data
+# See https://guides.rubyonrails.org/testing.html#the-test-database
+
+david: 
+  first_name: 'David'
+  last_name: 'Hausman'
+
+simon: 
+  first_name: 'Simon'
+  last_name: 'Grey'
+
+bill: 
+  first_name: 'Bill'
+  last_name: 'Montgomery'
