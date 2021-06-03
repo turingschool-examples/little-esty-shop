@@ -45,6 +45,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'orderly'
   gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -62,9 +64,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'activerecord-postgres_enum'
 # gem 'autoprefixer-rails'
-gem 'factory_bot_rails'
-gem 'faker'
-# gem 'foundation-rails'
 gem 'jquery-rails'
 gem 'webpacker'
 gem 'react-rails'
