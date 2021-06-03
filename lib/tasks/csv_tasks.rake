@@ -19,6 +19,13 @@ namespace :csv do
   task load_invoice_items: :environment do
 
     CSV.foreach(Rails.root.join('db/data/invoice_items.csv'), headers: true) do |row|
+      if row[5] == 'packaged'
+        status = 0
+      elsif row[5] == 'pending'
+        status = 1
+      elsif row[5] == 'shipped'   
+        status = 2
+      end
 
       InvoiceItem.create({
                       id: row[0],
@@ -26,7 +33,7 @@ namespace :csv do
                       invoice_id: row[2],
                       quantity: row[3],
                       unit_price: row[4],
-                      status: row[5],
+                      status: status,
                       created_at: row[6],
                       updated_at: row[7]
                       })
@@ -36,11 +43,18 @@ namespace :csv do
   task load_invoices: :environment do
 
     CSV.foreach(Rails.root.join('db/data/invoices.csv'), headers: true) do |row|
+      if row[2] == 'cancelled'
+        status = 0
+      elsif row[2] == 'in progress'
+        status = 1
+      elsif row[2] == 'completed'   
+        status = 2
+      end
 
       Invoice.create({
                       id: row[0],
                       customer_id: row[1],
-                      status: row[2],
+                      status: status,
                       created_at: row[3],
                       updated_at: row[4]
                       })
@@ -50,6 +64,7 @@ namespace :csv do
   task load_items: :environment do
 
     CSV.foreach(Rails.root.join('db/data/items.csv'), headers: true) do |row|
+      
 
       Item.create({
                       id: row[0],
@@ -79,13 +94,18 @@ namespace :csv do
   task load_transactions: :environment do
 
     CSV.foreach(Rails.root.join('db/data/transactions.csv'), headers: true) do |row|
+       if row[2] == 'success'
+        result = 0
+      elsif row[2] == 'failed'
+        result = 1
+      end
 
       Transaction.create({
                       id: row[0],
                       invoice_id: row[1],
                       credit_card_number: row[2],
                       credit_card_expiration_date: row[3],
-                      result: row[4],
+                      result: result,
                       created_at: row[5],
                       updated_at: row[6]
                       })
