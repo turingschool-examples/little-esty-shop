@@ -1,19 +1,35 @@
-<h1>Admin Dashboard</h1>
+<div class="container">
+  <div class="row">
+    <div class="col"><h1>Admin Dashboard</h1></div>
 
-<ul>
-  <li><%= link_to 'Admin Merchants', admin_merchants_path %></li>
-  <li><%= link_to 'Admin Invoices', admin_invoices_path %></li>
-</ul>
+    <div class="col">
+      <ul>
+        <li><%= link_to 'Admin Merchants', admin_merchants_path %></li>
+        <li><%= link_to 'Admin Invoices', admin_invoices_path %></li>
+      </ul>
+    </div>
 
-<div id="top-5">
-  <% @top5.each do |c| %>
-    <p><%= "#{c.first_name} #{c.last_name} Transactions: #{c.transaction_count}" %></p>
-  <% end %>
-</div>
+  </div>
 
-<div id="incomplete_invoices">
-  <h1>Incomplete Invoices</h1>
-  <% @incomp_invoices.each do |i| %>
-    <p class="incomp" id="invoice-<%= i.id %>"><%= link_to i.id, admin_invoice_path(i.id) %> <%= i.created_at.strftime('%A, %B %d, %Y') %></p>
-  <% end %>
+  <div class="row">
+    <div class="col">
+      <div id="top-5">
+        <h3>Top 5 Customers</h3>
+        <% @top5.each do |c| %>
+          <p><%= "#{c.first_name} #{c.last_name} Transactions: #{c.transaction_count}" %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col">
+      <h1>Incomplete Invoices</h1>
+      <div id="incomplete_invoices" class="overflow-auto">
+
+        <% @incomp_invoices.each do |i| %>
+          <p class="incomp" id="invoice-<%= i.id %>"><%= link_to i.id, admin_invoice_path(i.id) %> <%= i.created_at.strftime('%A, %B %d, %Y') %></p>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
