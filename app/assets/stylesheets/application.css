@@ -18,3 +18,11 @@
   height: 300px;
   width: 100%;
 }
+table, th {
+  text-align: left;
+  vertical-align: text-top;
+  border: 1px solid black;
+}
+td {
+  border: 1px dotted black;
+}
