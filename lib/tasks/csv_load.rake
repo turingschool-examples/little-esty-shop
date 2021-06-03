@@ -3,6 +3,7 @@ require 'csv'
 namespace :csv_load do
   desc "Seed all csv files"
   task all: :environment do
+
     Customer.destroy_all
     Invoice.destroy_all
     Merchant.destroy_all
