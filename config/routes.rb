@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index]
     resources :invoices, only: [:index, :show]
   end
-  
-  namespace :merchants do
+
+  namespace :merchant do
     get '/:id/dashboard', to: 'dashboard#index'
     get '/:id/items', to: 'items#index'
     get '/:id/invoices', to: 'invoices#index'
-  end 
+  end
 end
