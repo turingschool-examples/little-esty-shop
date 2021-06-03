@@ -44,7 +44,7 @@ task load_invoice_items: :environment do
   require 'csv'
   require './app/models/application_record.rb'
   require './app/models/invoice_item.rb'
-  CSV.foreach('./db/data/invoice_items.csv', :headers => true,  header_converters: :symbol, converters: :all, :encoding => 'UTF-8') do |row|
+  CSV.foreach('./db/data/invoice_items.csv', :headers => true,  header_converters: :symbol, :encoding => 'UTF-8') do |row|
     t = InvoiceItem.new
     t.quantity = row[:quantity].to_i
     t.unit_price = row[:unit_price].to_i
