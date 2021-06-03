@@ -1,0 +1,20 @@
+# See customers.yml for intro to using fixture data in the test database
+# Another resource: https://bigbinary.com/blog/tricks-and-tips-for-using-fixtures-in-rails
+
+<% 3.times do |n| %>
+ invoice_<%= n %>:
+   status: 'Pending'
+   customer: bill
+<% end %>
+
+<% 3.times do |n| %>
+ invoice_<%= n + 3 %>:
+   status: 'Complete'
+   customer: david
+<% end %>
+
+<% 3.times do |n| %>
+ invoice_<%= n + 6 %>:
+   status: 'Unpaid'
+   customer: simon
+<% end %>

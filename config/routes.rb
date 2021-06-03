@@ -5,4 +5,10 @@ Rails.application.routes.draw do
     resources :items
     resources :invoices
   end
+
+  get '/admin', to: 'admin#index' # handrolled this route for admin dashboard
+  namespace :admin do
+    resources :invoices, only: [:index, :show, :update]
+    resources :merchants, except: [:destroy]
+  end
 end
