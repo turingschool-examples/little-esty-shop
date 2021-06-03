@@ -37,6 +37,25 @@ RSpec.describe 'admin index page', type: :feature do
       expect(page).to have_content('Helmer Baumbach')
       expect(page).to have_content('Isaac Zulauf')
     end
+    it 'contains a table showing all incomplete invoices with links to their show pages' do
+      visit '/admin'
+
+      expect(page).to have_content('Incomplete Invoices')
+
+      within "#incomplete-invoices > tr:nth-child(2)" do
+        expect(page).to have_link('1')
+        click_link('1')
+        expect(current_path).to eq('/admin/invoices/1')
+      end
+
+      visit '/admin'
+
+      within "#incomplete-invoices > tr:nth-child(13)" do
+        expect(page).to have_link('12')
+        click_link('1')
+        expect(current_path).to eq('/admin/invoices/12')
+      end
+    end
   end
 
   describe 'page functionality' do

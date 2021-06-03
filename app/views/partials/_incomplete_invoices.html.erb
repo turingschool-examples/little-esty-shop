@@ -1,0 +1,12 @@
+<h4>Incomplete Invoices</h4><br>
+<table style='width: 100%; border-color: white;' id='incomplete-invoices'>
+  <tr>
+    <th>Invoice ID</th>
+  </tr>
+    <% @incomplete_invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to "#{invoice}", "/admin/invoices/#{invoice}", method: :get %></td>
+      </tr>
+    <% end %>
+</table><br>
+
