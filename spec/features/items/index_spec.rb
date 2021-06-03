@@ -30,15 +30,18 @@ RSpec.describe 'merchant items index' do
   it 'displays the name of the Merchant and no others' do
     visit "/merchants/#{@merchant_1.id}/items"
 
+
     expect(page).to have_content(@merchant_1.name)
     expect(page).to_not have_content(@merchant_2.name)
   end
 
-  xit 'lists all of the items names' do
-    visit "/flower_shops/#{@mikes_flowers.id}/flowers"
+  it 'lists all of the items names' do
+    visit "/merchants/#{@merchant_1.id}/items"
 
-    click_on "Rose"
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
+    expect(page).to have_content(@item_3.name)
 
-    expect(current_path).to eq("/flowers/#{@flower2.id}")
+    expect(page).to_not have_content(@item_4.name)
   end
 end
