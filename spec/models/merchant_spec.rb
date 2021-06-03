@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  # describe 'relationships' do
-  #   it { should belong_to(:) }
-  #   it { should have_many(:) }
-  #   it { should have_many(:).through(:) }
-  # end
-  #
-  # describe 'validations' do
-  #   it { should validate_presence_of(:) }
-  # end
+  describe 'relationships' do
+    # it { should belong_to(:) }
+    it { should have_many(:items) }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
 
   before :each do
     # enabled
