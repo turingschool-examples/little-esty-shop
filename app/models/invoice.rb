@@ -1,3 +1,7 @@
 class Invoice < ApplicationRecord
-  enum status: [:cancelled, :in_progress, :completed]    
+  enum status: [:cancelled, :in_progress, :completed]
+  belongs_to :customer
+  has_many :transactions
+  has_many :invoice_items
+  has_many :items, through: :invoice_items 
 end
