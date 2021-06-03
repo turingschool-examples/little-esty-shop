@@ -20,7 +20,7 @@ class MerchantItemsController < ApplicationController
     def create
       @merchant = Merchant.find(params[:merchant_id])
       item = Item.create!(item_params)
-      redirect_to "/merchants/#{merchant.id}/items"
+      redirect_to "/merchants/#{@merchant.id}/items"
     end
 
   # private

@@ -76,7 +76,16 @@ RSpec.describe 'Merchant Items Index' do
 
     expect(page).to have_button("Add a New Item")
     click_button("Add a New Item")
+
     expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+    fill_in( 'Name', with: "New Item Name")
+    fill_in( 'Description', with: "Made from 100% cotton.")
+    fill_in( 'Unit price', with: 75608)
+    click_on("Submit")
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+    expect(page).to have_content("New Item Name")
+    save_and_open_page
   end
 
 end

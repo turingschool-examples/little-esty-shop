@@ -9,5 +9,11 @@
    <%= form.label :unit_price %><br/>
    <%= form.text_field :unit_price %><br/>
 
+   <%= form.label :merchant_id, style: "display:none;"  %><br/>
+   <%= form.text_field :merchant_id, value: "#{@merchant.id}", style: "display:none;" %><br/>
+
+   <%= form.label :status, style: "display:none;"  %><br/>
+   <%= form.text_field :status, value: "disable", style: "display:none;" %><br/>
+
    <%= form.submit "Submit"%>
 <% end %>
