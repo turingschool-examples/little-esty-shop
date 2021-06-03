@@ -1,5 +1,5 @@
 <%= @merchant.name %>
 
 <% @merchant.items.each do |item| %>
-      <p><%= item.name %></p>
+      <p><a href="/merchants/<%= @merchant.id %>/items/<%= item.id %>"><%= item.name %></a></p>
   <% end %>
