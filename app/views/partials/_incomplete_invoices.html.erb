@@ -1,0 +1,14 @@
+<h4>Incomplete Invoices</h4><br>
+<table style='width: 100%; border-color: white;' id='incomplete-invoices'>
+  <tr>
+    <th>Invoice ID</th>
+    <th>Date Created</th>
+  </tr>
+    <% @incomplete_invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}", method: :get %></td>
+        <td><%= "#{invoice.created_at.strftime("%m/%d/%Y")} " %></td>
+      </tr>
+    <% end %>
+</table><br>
+

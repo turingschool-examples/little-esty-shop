@@ -1,0 +1,14 @@
+<h4>Top 5 Customers</h4><br>
+<table style='width: 100%; border-color: white;'>
+  <tr>
+    <th>Customer</th>
+    <th>Transactions</th>
+  </tr>
+    <% @top_five_customers.each do |customer| %>
+      <tr>
+        <td><%= "#{customer.name}" %></td>
+        <td><%= "#{customer.transactions}" %></td>
+      </tr>
+    <% end %>
+</table><br>
+
