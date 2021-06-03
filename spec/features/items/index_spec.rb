@@ -27,5 +27,5 @@ RSpec.describe 'The index page for an merchants items,' do
       end
     end
   end
-  
+
 end
