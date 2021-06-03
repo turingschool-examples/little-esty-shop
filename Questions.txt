@@ -1,3 +1,5 @@
 customers model - look at top_customers method
 
 for admin incomplete invoices, should we be weeding out cancelled invoices?
+
+path helpers to show pages - how (admin dashboard/merchants index)

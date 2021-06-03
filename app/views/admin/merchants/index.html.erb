@@ -1,17 +1,27 @@
-  <h1>Welcome to the Merchant Admin Portal</h2>>
-  <tr>
-    <th>Merchant ID</th>
-    <th>Merchant Name</th>
-    <th>Status</th>
-    <th>Change Status</th>
-  </tr>
-  <% @b3facilities.each do |facility| %>
+  <h1>Welcome to the Merchant Admin Portal</h2>
+  <table style="width: 100%">
     <tr>
-      <td><%= facility.id %></td>
-      <td><%= facility.full_address %></td>
-      <td><%= link_to "See Info", "/facilities/#{facility.id}" %> / <%= link_to "Edit Info", "/facilities/#{facility.id}/edit" %></td>
-      <td><%= link_to "See Licenses", "/facilities/#{facility.id}/licenses" %></td>
-      <td><%= link_to "Delete Facility", "/facilities/#{facility.id}", method: :delete %>
+      <th>Merchant ID</th>
+      <th>Merchant Name</th>
+      <th>Status</th>
+      <th>Change Status</th>
     </tr>
-  <% end %>
+    <% @merchants.each do |merchant| %>
+      <tr>
+        <td><%= merchant.id %></td>
+        <td><%= link_to "#{merchant.name}", "#{request.url}/#{merchant.id}", method: :get %></td>
+        <td><% if merchant.enabled == true %>
+              <p> Enabled </p>
+            <% else %>
+              <p> Disabled </p>
+            <% end %>
+        </td>
+        <td>
+          <% if merchant.enabled == true %>
+            <button><%= link_to "Disable", "#{request.url}/#{merchant.id}", method: :post %>
+          <% else %>
+            <button><%= link_to "Enable", "#{request.url}/#{merchant.id}", method: :post %>
+          <% end %>
+      </tr>
+    <% end %>
 </table>
