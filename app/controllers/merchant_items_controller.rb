@@ -4,15 +4,15 @@ class MerchantItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.where('merchant_id = ? AND id = ?', params[:merchant_id], params[:item_id]).first
   end
 
   def update
-    item = Item.where('merchant_id = ? AND id = ?', params[:merchant_id], params[:item_id]).first
+    @item = Item.where('merchant_id = ? AND id = ?', params[:merchant_id], params[:item_id]).first
 
-    item.update(item_params)
+    @item.update(item_params)
 
     redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}"
-    binding.pry 
     flash[:notice] = "Successfully updated"
   end
 
