@@ -100,12 +100,37 @@ RSpec.describe 'Merchant Items Index' do
   # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
   # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
   it 'shows top 5 times for merchant' do
-    @merchant = Merchant.create!(name: 'Schroeder-Jerde')
-    @item_1 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7510, status: "enable")
-    visit "/merchants/#{@merchant.id}/items"
-
-    expect(current_path).to eq("/merchants/#{@merchant.id}/items")
-
+    # @merchant = Merchant.create!(name: 'Schroeder-Jerde')
+    # @item_1 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7510, status: "enable")
+    # @item_2 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 46728, status: "enable")
+    # @item_3 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7364872, status: "enable")
+    # @item_4 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 234823, status: "enable")
+    # @item_5 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 348233, status: "enable")
+    # @item_6 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 751023, status: "enable")
+    # visit "/merchants/#{@merchant.id}/items"
+    #
+    # expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+    # expect(@merchant.top_5).to eq([@item_1])
+  end
+  #   Merchant Items Index: Top Item's Best Day
+  #
+  # When I visit the items index page
+  # Then next to each of the 5 most popular items I see the date with the most sales for each item.
+  # And I see a label “Top selling date for <item name> was <date with most sales>"
+  #
+  # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+  it 'shows top day for merchant' do
+    # @merchant = Merchant.create!(name: 'Schroeder-Jerde')
+    # @item_1 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7510, status: "enable")
+    # @item_2 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 46728, status: "enable")
+    # @item_3 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7364872, status: "enable")
+    # @item_4 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 234823, status: "enable")
+    # @item_5 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 348233, status: "enable")
+    # @item_6 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 751023, status: "enable")
+    # visit "/merchants/#{@merchant.id}/items"
+    #
+    # expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+    # expect(@merchant.top_5).to eq([@item_1])
   end
 
 end

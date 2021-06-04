@@ -27,5 +27,5 @@
 <p> Top Items </p>
 <% @top_items.each do |item| %>
   <%= item.name %>
-  <%= item.price%><br/>
+  <%= (item.revenue.to_f) /100%><br/>
 <% end %>
