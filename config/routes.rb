@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'merchant#index'
   namespace :admin do
     get '/', to: 'dashboard#index'
-    resources :merchants, only: [:index]
+    resources :merchants, only: [:index, :show]
     resources :invoices, only: [:index, :show]
   end
   

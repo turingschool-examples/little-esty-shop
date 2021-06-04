@@ -1,9 +1,6 @@
 FactoryBot.define do
   factory :invoice_item do
-    quanity { 1 }
-    unit_price { "" }
-    status { 1 }
-    # item { nil }
-    # invoice { nil }
+    quanity { rand(0..100) }
+    unit_price { rand(100..1000) }
   end
 end

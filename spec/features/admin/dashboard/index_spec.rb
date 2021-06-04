@@ -20,17 +20,18 @@ RSpec.describe 'Admin Dashboard' do
     end
   end
 
+# TODO make less static with the data
   it 'shows incomplete invoices by created' do
     visit '/admin'
+    expect(page).to have_content('Incomplete Invoices')
     within '#incomplete_invoices' do
-      expect(page).to have_content('Incomplete Invoices')
-      expect(page).to have_selector('.incomp', count: 288)
-      expect(page).to have_content('158 Tuesday, March 06, 2012')
-      expect(page).to have_content('282 Tuesday, March 06, 2012')
-      expect(page).to have_content('240 Tuesday, March 06, 2012')
-      first = page.find('#invoice-158')
-      second = page.find('#invoice-282')
-      third = page.find('#invoice-240')
+      expect(page).to have_selector('.incomp', count: 27)
+      expect(page).to have_content('6 Friday, June 04, 2021')
+      expect(page).to have_content('8 Friday, June 04, 2021')
+      expect(page).to have_content('10 Friday, June 04, 2021')
+      first = page.find('#invoice-6')
+      second = page.find('#invoice-8')
+      third = page.find('#invoice-10')
       expect(first).to appear_before(second)
       expect(second).to appear_before(third)
     end

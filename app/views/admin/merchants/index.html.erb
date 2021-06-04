@@ -1,7 +1,17 @@
-<h1>Admin Merchant Index</h1>
+<div class="container">
+  <%= render 'partials/header' %>
+  <div class="row">
+    <h1>Admin Merchant Index</h1>
+  </div>
 
-<ul class="merchants">
-  <% @merchants.each do |m| %>
-    <li id="merchant-<%= m.id %>"><%= m.name %></li>
-  <% end %>
-</ul>
+  <div class="row">
+    <ul class="overflow-auto" id="merchants">
+      <% @merchants.each do |m| %>
+        <li><%= link_to m.name, admin_merchant_path(m.id), id: "merchant-#{m.id}" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+

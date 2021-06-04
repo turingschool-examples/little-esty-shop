@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :item do
-    name { "MyString" }
-    description { "MyText" }
-    unit_price { "" }
-    merchant { nil }
+    name { Faker::Lorem.word }
+    description { Faker::Lorem.paragraph }
+    unit_price { rand(100..1000) }
   end
 end
