@@ -21,9 +21,12 @@ RSpec.describe Invoice, type: :model do
   #   describe '.' do
   #   end
   # end
-  #
+  
   # describe 'instance methods' do
-  #   describe '#' do
+  #   describe '#making a date in readable fashion' do
+  #     it '' do
+        
+  #     end
   #   end
   # end
 end

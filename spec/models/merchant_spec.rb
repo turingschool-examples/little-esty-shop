@@ -55,7 +55,6 @@ RSpec.describe Merchant, type: :model do
     describe '.enabled' do
       it "returns merchants with an enable status" do
         expect(Merchant.enabled).to eq([@merchant1, @merchant2, @merchant3])
-
         expect(Merchant.enabled).to_not eq([@merchant4, @merchant5, @merchant6])
       end
     end
@@ -63,7 +62,6 @@ RSpec.describe Merchant, type: :model do
     describe '.disabled' do
       it "returns merchants with an disable status" do
         expect(Merchant.disabled).to eq([@merchant4, @merchant5, @merchant6])
-
         expect(Merchant.disabled).to_not eq([@merchant1, @merchant2, @merchant3])
       end
     end
