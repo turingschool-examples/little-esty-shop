@@ -7,7 +7,8 @@
 <% @top_merchants_by_revenue.each do |merchant| %>
   <section id="top-rev-merchants-<%= merchant.id %>">
     <ol>
-      <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> - <%= "#{number_to_currency(merchant.total_revenue)} in sales" %>
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> - <%= "#{number_to_currency(merchant.total_revenue)} in sales" %><br>
+      <%= "Top selling date for #{merchant.name} was #{merchant.merchant_best_day}" %>
     </ol>
   </section>
 <% end %>
