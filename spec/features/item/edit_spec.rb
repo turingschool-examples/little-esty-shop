@@ -29,10 +29,28 @@ RSpec.describe 'items show page'do
 
       expect(page).to_not have_content("#{@item_1.name}")
     end
+
+    it 'can update the items attributes and redirect to the show page' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
+
+      fill_in "Name", with: "The Best Thing"
+      fill_in "Description", with: "It is so amazing, really."
+      fill_in "Unit price", with: 150.5
+      click_button "Submit Item Update"
+
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}")
+    end
+
+    it 'gives an error message if all fields are not filled out' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
+
+      fill_in "Name", with: "The Best Thing"
+      fill_in "Description", with: nil
+      fill_in "Unit price", with: 150.5
+      click_button "Submit Item Update"
+
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit")
+      expect(page).to have_content("Error: #{@item_5.errors.full_messages.to_sentence}")
+    end
   end
 end
-
-# And I see a form filled in with the existing item attribute information
-# When I update the information in the form and I click ‘submit’
-# Then I am redirected back to the item show page where I see the updated information
-# And I see a flash message stating that the information has been successfully updated.
