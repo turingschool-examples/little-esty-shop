@@ -5,6 +5,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
     @enabled_merchants = Merchant.enabled
     @disabled_merchants = Merchant.disabled
+    @top_merchants_by_revenue = Merchant.top_merchants_by_revenue
   end
 
   def show
@@ -36,7 +37,7 @@ class Admin::MerchantsController < ApplicationController
     merchant.name = params[:name]
     merchant.status = "disable"
     merchant.save!
-    
+
     redirect_to admin_merchants_path
   end
 
