@@ -5,3 +5,5 @@
     <li> <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> </li>
   </ul>
 <% end %>
+
+<p> <%= button_to "Create New Item", new_merchant_item_path, method: :get %> </p>
