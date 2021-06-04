@@ -55,6 +55,7 @@ RSpec.describe Merchant, type: :model do
     describe '.enabled' do
       it "returns merchants with an enable status" do
         expect(Merchant.enabled).to eq([@merchant1, @merchant2, @merchant3])
+
         expect(Merchant.enabled).to_not eq([@merchant4, @merchant5, @merchant6])
       end
     end
@@ -62,6 +63,7 @@ RSpec.describe Merchant, type: :model do
     describe '.disabled' do
       it "returns merchants with an disable status" do
         expect(Merchant.disabled).to eq([@merchant4, @merchant5, @merchant6])
+
         expect(Merchant.disabled).to_not eq([@merchant1, @merchant2, @merchant3])
       end
     end
@@ -69,6 +71,7 @@ RSpec.describe Merchant, type: :model do
     describe '.new_mechant_id' do
       it "returns merchants with an disable status" do
         expect(Merchant.new_mechant_id).to eq(Merchant.all.last.id + 1)
+
         expect(Merchant.new_mechant_id).to_not eq(Merchant.all.last)
       end
     end
@@ -82,8 +85,14 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
+  describe 'instance methods' do
+    describe '#merchant_best_day' do
+      it "shows top merchants best day" do
+        expect(@merchant6.merchant_best_day).to eq("06/04/2021")
+
+        expect(@merchant6.merchant_best_day).to_not eq("06/03/2021")
+        expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
+      end
+    end
+  end
 end
