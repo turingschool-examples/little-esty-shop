@@ -6,7 +6,8 @@
   </tr>
     <% @top_five_customers.each do |customer| %>
       <tr>
-        <td><%= "#{customer.name}" %></td>
+        <%# <td><%= "#{customer.first_name} #{customer.last_name}" %>
+        <td><%= "#{customer.name}"%></td>
         <td><%= "#{customer.transactions}" %></td>
       </tr>
     <% end %>
