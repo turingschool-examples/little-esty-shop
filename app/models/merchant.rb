@@ -1,8 +1,9 @@
 class Merchant < ApplicationRecord
 
-  has_many :items
+  has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
 
   validates :name, presence: true
 
@@ -20,21 +21,12 @@ class Merchant < ApplicationRecord
     all.last.id + 1
   end
 
-  def self.top_rev_merchants
-    joins(invoies: :invoice_items)
-
-
-    # use where method on invoices.status = completed
+  def self.top_merchants_by_revenue
+    joins(invoices: [:invoice_items, :transactions])
+    .where('result >= ?', 1)
+    .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .group(:id)
+    .order('total_revenue desc')
+    .limit(5)
   end
 end
-
-# Notes on Revenue Calculation:
-# - Only invoices with at least one successful transaction should count towards revenue
-# - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-
-
-# Then I see the names of the top 5 merchants by total revenue generated
-# And I see that each merchant name links to the admin merchant show page for that merchant
-# And I see the total revenue generated next to each merchant name
-#

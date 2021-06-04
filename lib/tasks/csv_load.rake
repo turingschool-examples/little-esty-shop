@@ -15,11 +15,11 @@ namespace :csv_load do
     task invoice_items: :environment do
       InvoiceItem.destroy_all
       CSV.foreach("db/data/invoice_items.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
-        if row.to_hash['status'] == 'pending'
+        if row.to_hash[:status] == 'pending'
           status = 0
-        elsif row.to_hash['status'] == 'packaged'
+        elsif row.to_hash[:status] == 'packaged'
           status = 1
-        elsif row.to_hash['status'] == 'shipped'
+        elsif row.to_hash[:status] == 'shipped'
           status = 2
         end
         InvoiceItem.create!({ id:          row[0],
@@ -39,11 +39,11 @@ namespace :csv_load do
     task invoices: :environment do
       Invoice.destroy_all
       CSV.foreach("db/data/invoices.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
-        if row.to_hash['status'] == 'cancelled'
+        if row.to_hash[:status] == 'cancelled'
           status = 0
-        elsif row.to_hash['status'] == 'in progress'
+        elsif row.to_hash[:status] == 'in progress'
           status = 1
-        elsif row.to_hash['status'] == 'completed'
+        elsif row.to_hash[:status] == 'completed'
           status = 2
         end
         Invoice.create!({ id:          row[0],
@@ -78,9 +78,9 @@ namespace :csv_load do
     task transactions: :environment do
       Transaction.destroy_all
       CSV.foreach("db/data/transactions.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
-        if row.to_hash['result'] == 'failed'
+        if row.to_hash[:result] == 'failed'
           result = 0
-        elsif row.to_hash['result'] == 'success'
+        elsif row.to_hash[:result] == 'success'
           result = 1
         end
         Transaction.create!({ id:                          row[0],
@@ -97,12 +97,12 @@ namespace :csv_load do
 
   desc 'importing all of the csv files'
     task all: :environment do
+      Merchant.destroy_all
       Customer.destroy_all
-      InvoiceItem.destroy_all
       Invoice.destroy_all
       Item.destroy_all
-      Merchant.destroy_all
       Transaction.destroy_all
+      InvoiceItem.destroy_all
 
       CSV.foreach("db/data/merchants.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
         Merchant.create!(row.to_hash)
@@ -113,11 +113,11 @@ namespace :csv_load do
       end
 
       CSV.foreach("db/data/invoices.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
-        if row.to_hash['status'] == 'cancelled'
+        if row.to_hash[:status] == 'cancelled'
           status = 0
-        elsif row.to_hash['status'] == 'in progress'
+        elsif row.to_hash[:status] == 'in progress'
           status = 1
-        elsif row.to_hash['status'] == 'completed'
+        elsif row.to_hash[:status] == 'completed'
           status = 2
         end
         Invoice.create!({ id:          row[0],
@@ -133,9 +133,9 @@ namespace :csv_load do
       end
 
       CSV.foreach("db/data/transactions.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
-        if row.to_hash['result'] == 'failed'
+        if row.to_hash[:result] == 'failed'
           result = 0
-        elsif row.to_hash['result'] == 'success'
+        elsif row.to_hash[:result] == 'success'
           result = 1
         end
         Transaction.create!({ id:                          row[0],
@@ -149,11 +149,11 @@ namespace :csv_load do
       end
 
       CSV.foreach("db/data/invoice_items.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
-        if row.to_hash['status'] == 'pending'
+        if row.to_hash[:status] == 'pending'
           status = 0
-        elsif row.to_hash['status'] == 'packaged'
+        elsif row.to_hash[:status] == 'packaged'
           status = 1
-        elsif row.to_hash['status'] == 'shipped'
+        elsif row.to_hash[:status] == 'shipped'
           status = 2
         end
         InvoiceItem.create!({ id:          row[0],
