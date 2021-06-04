@@ -37,5 +37,23 @@ RSpec.describe 'items show page'do
 
       expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit")
     end
+
+    it 'can show the updated information from the edit page' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
+
+      fill_in "Name", with: "The Best Thing"
+      fill_in "Description", with: "It is so amazing, really."
+      fill_in "Unit price", with: 150.5
+      click_button "Submit Item Update"
+
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}")
+      expect(page).to have_content("The Best Thing")
+      expect(page).to have_content("It is so amazing, really.")
+      expect(page).to have_content(150.50)
+
+      expect(page).to_not have_content("Thing 5")
+      expect(page).to_not have_content("This is the fifth thing.")
+      expect(page).to_not have_content(15.30)
+    end
   end
 end
