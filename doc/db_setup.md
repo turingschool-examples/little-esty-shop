@@ -25,6 +25,10 @@ rails csv_load:all
 
 Reference [this documentation](https://guides.rubyonrails.org/v5.2/command_line.html) for additional information about running tasks from the command line.
 
+## Primary Key Sequence
+
+Normally, when creating records with ActiveRecord we do not want to manually set the primary key attribute, for example `Artist.create(id: 1)`. Instead, we want to rely on ActiveRecord and the Database to automatically assign the ids based on a primary key sequence. However, each CSV file includes an `id` column that you should include when creating each record to maintain data integrity. Manually assigning the `id` attribute will invalidate the primary key sequence, so you should include code in your rake tasks that resets the primary key sequence for each table after the data is seeded.
+
 ## Schema Notes
 
 * items have a `unit_price`. This is the price that the item is **currently** selling at.
