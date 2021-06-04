@@ -11,7 +11,7 @@ class Customer < ApplicationRecord
     # What do you want to see here - a joins table or two AR calls to effectuate the one SQL statement below
     # Customer.joins(invoices: [:transactions]).select("customers.*, count(transactions.*) as num_trans").where("transactions.result = 'success'").distinct.group(:id).order("num_trans desc").limit(5).order(:first_name)
 
-    find_by_sql("select distinct concat(a.first_name, ' ', a.last_name) as \"name\", count(c.result) as \"transactions\"
+    find_by_sql("select distinct concat(a.first_name, ' ', a.last_name) as \"name\", count(c.result) as \"num_trans\"
 
     From
     customers a,
@@ -24,7 +24,7 @@ class Customer < ApplicationRecord
 
     group by a.id
 
-    order by transactions desc, name
+    order by num_trans desc, name
 
     limit 5")
   end

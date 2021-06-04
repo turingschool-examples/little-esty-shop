@@ -24,6 +24,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
+    @merchant = Merchant.new
   end
 
   def show
@@ -45,7 +46,6 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    # params.require(:merchant).permit(:name, :enabled)
-    params.permit(:name, :enabled)
+    params.require(:merchant).permit(:name, :enabled)
   end
 end
