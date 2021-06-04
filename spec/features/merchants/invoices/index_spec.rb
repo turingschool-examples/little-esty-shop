@@ -2,12 +2,8 @@
 
 require 'rails_helper'
 
-# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
-# Then I see all of the invoices that include at least one of my merchant's items
-# And for each invoice I see its id
-# And each id links to the merchant invoice show page
 
-RSpec.describe 'Invoice index page' do
+RSpec.describe 'Merchant invoices index page' do
   before :each do 
     @merchant = Merchant.create!(name: 'Sally Handmade')
     @merchant_2 = Merchant.create!(name: 'Billy Mandmade')
@@ -22,10 +18,14 @@ RSpec.describe 'Invoice index page' do
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
   end
 
-  it 'lists all invoices that has at least on  ' do
-    visit "merchants/#{@merchant.id}/invoices"
-    
-    expect(page).to have_content("#{@invoice.id}")
-    expect(page).to_not have_content("#{@invoice_2.id}")
+  describe 'display' do
+    it 'lists all invoices that has at least one item bought from this merchant' do
+      visit "merchants/#{@merchant.id}/invoices"
+      
+      expect(page).to have_content("#{@invoice.id}")
+      expect(page).to_not have_content("#{@invoice_2.id}")
+    end
+
+    it 'links to each merchant invoice show page'
   end
 end
