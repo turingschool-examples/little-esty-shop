@@ -3,11 +3,20 @@
 <h3>Admin Dashboard</h3>
 <%= link_to 'Create New Merchant', new_admin_merchant_path %><br><br>
 
+<h3>Top Merchants</h3>
+<% @top_merchants_by_revenue.each do |merchant| %>
+  <section id="top-rev-merchants-<%= merchant.id %>">
+    <ol>
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> - <%= "#{number_to_currency(merchant.total_revenue)} in sales" %>
+    </ol>
+  </section>
+<% end %>
+
 <h3>Enabled Merchants</h3>
 <% @enabled_merchants.each do |merchant| %>
   <section id="enabled-merchant-<%= merchant.id %>">
     <ul>
-      <p><%= link_to "#{merchant.name}" , admin_merchant_path(merchant) %><%= button_to 'Disable', {action: :update_status, id: merchant.id, status: 'disable'} %></p>
+      <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %><%= button_to 'Disable', {action: :update_status, id: merchant.id, status: 'disable'} %></p>
     </ul>
   </section>
 <% end %><br><br>
@@ -20,7 +29,7 @@
   <% @disabled_merchants.each do |merchant| %>
     <section id="disabled-merchant-<%= merchant.id %>">
       <ul>
-        <p><%= link_to "#{merchant.name}" , admin_merchant_path(merchant) %><%= button_to 'Enable', {action: :update_status, id: merchant.id, status: 'enable'} %></p>
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %><%= button_to 'Enable', {action: :update_status, id: merchant.id, status: 'enable'} %></p>
       </ul>
     </section>
   <% end %>
