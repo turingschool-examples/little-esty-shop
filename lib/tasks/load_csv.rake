@@ -41,6 +41,7 @@ task load_customers: :environment do
 end
 
 task load_invoice_items: :environment do
+
   CSV.foreach('./db/data/invoice_items.csv', :headers => true,  header_converters: :symbol, converters: :all, :encoding => 'UTF-8') do |row|
     t = InvoiceItem.new
     t.quantity = row[:quantity].to_i
