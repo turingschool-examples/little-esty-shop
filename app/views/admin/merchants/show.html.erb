@@ -1,0 +1,21 @@
+ <br>
+ <div class="d-flex flex-column justify-content-start">
+  <h1><%= "Merchant Details For #{@merchant.name}" %></h1><br>
+    <div class="col-md-50 col-md-offset-2"></div>
+    <table style="width: 30%">
+        <tr>
+          <td>Name</td>
+          <td><%= "#{@merchant.name}" %></td>
+        </tr>
+        <tr>
+          <td>Status</td>
+           <td><% if @merchant.enabled == true %>
+              <p>Enabled</p>
+            <% else %>
+              <p>Disabled</p>
+            <% end %></td>
+        </tr>
+    </table><br>
+  </div>
+
+  <button><%= link_to "Edit", "#{request.url}/edit", method: :get %></button>

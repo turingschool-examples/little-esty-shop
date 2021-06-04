@@ -4,7 +4,6 @@
     <title>LittleEtsyShop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -24,7 +23,7 @@
    <!-- This container envelops everything within a page and applies padding -->
    <div class="container-fluid p-4">
      <% flash.each do |type, msg| %>
-       <div><%= msg %></div>
+       <div class="success" style="position: relative; top: -50%"><%= msg %></div>
      <% end %>
      <%= yield %>
    </div>
