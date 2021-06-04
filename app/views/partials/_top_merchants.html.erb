@@ -1,0 +1,15 @@
+<h5 style="text-align: center;">Top 5 Merchants</h5><br>
+<table style='width: 100%; border-color: white;'>
+  <tr>
+    <th>Merchant</th>
+    <th>Total Revenue</th>
+    <th>Top Revenue Day</th>
+  </tr>
+    <% @top_five_merchants.each do |merchant| %>
+      <tr>
+        <td><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.merchant_id}", method: :get %></td>
+        <td><%= "$#{merchant.total_revenue}0" %></td>
+        <td><%= "#{merchant.top_revenue_day[0, 10]}" %></td>
+      </tr>
+    <% end %>
+</table><br>
