@@ -5,50 +5,15 @@
     <h2><%= link_to 'All Invoices', "/merchants/#{@merchant.id}/invoices" %> </h2>
     </section>
 
-    <section>
-      <div>
-        <h1>Top 5 Customers</h1>
-        <table>
-          <tr> 
-            <th scope="col">Customer</th>
-            <th scope="col">Successful Transactions Total</th>
-          </tr>
-        </table>
-
-        <tbody>
-          <tr>
-            <th scope="row"></th>
-            <td></td>
-          </tr>
-        </tbody>
+    <div class="row">
+      <div class="column" style="width: 50%">
+          <%= render partial: 'partials/top_customers' %>
       </div>
-    </section>
+    </div> 
 
     <section>
-      <div>
-        <h1> Items Ready to Ship </h1>
-        <table>
-          <tr> 
-            <th scope="col">Item</th>
-            <th scope="col">Invoice ID </th>
-            <th scope="col">Created On</th>
-          </tr>
-        </table>
-
-        <tbody class="shipment-table">
-        <% @shippable_items.each do |item| %>
-          <tr>
-            <th scope="row"><p><%= item.name %></p>
-            </th>
-            <td>
-              #<%= link_to "#{item.invoice_items.find_invoice_id(item.id)}", "/merchants/#{@merchant.id}/invoice/#{item.invoices.find_invoice_id(item.id)}" %>
-            </td>
-            <td>
-              <%= item.invoice_items.find_invoice_created_at(item.id)%>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      <div>
+      <div class="column" style="width: 50%">
+          <%= render partial: 'partials/shippable_items' %>
+      </div>
     </section>
 </div>
