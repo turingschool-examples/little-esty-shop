@@ -19,7 +19,7 @@ RSpec.describe 'Merchant invoice show page' do
  
   describe 'display' do
     it 'shows invoice and its attributes' do
-      visit "visit merchants/#{@merchant.id}/invoices/#{@invoice.id}"
+      visit "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
 
       created_at = @invoice.id.str 
       expect(page).to have_content("Invoice # #{@invoice.id}")

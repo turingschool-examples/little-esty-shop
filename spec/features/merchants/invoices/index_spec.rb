@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-
 RSpec.describe 'Merchant invoices index page' do
   before :each do 
     @merchant = Merchant.create!(name: 'Sally Handmade')
@@ -20,7 +19,7 @@ RSpec.describe 'Merchant invoices index page' do
 
   describe 'display' do
     it 'lists all invoices that has at least one item bought from this merchant' do
-      visit "merchants/#{@merchant.id}/invoices"
+      visit "/merchants/#{@merchant.id}/invoices"
       
       expect(page).to have_content("#{@invoice.id}")
       expect(page).to_not have_content("#{@invoice_2.id}")
