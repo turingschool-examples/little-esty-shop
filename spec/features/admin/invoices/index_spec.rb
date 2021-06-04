@@ -10,6 +10,7 @@ RSpec.describe 'Admin Invoices Index Page' do
   
   it 'can visit the admin invoices page and display all invoice ids' do
 
+    expect(current_path).to eq("/admin/invoices")
     expect(page).to have_content(@invoice1.id)
   end
 
