@@ -23,3 +23,9 @@
       form: {style: 'display:inline-block;'} %><br>
   <% end %>
 <% end %>
+
+<p> Top Items </p>
+<% @top_items.each do |item| %>
+  <%= item.name %>
+  <%= item.price%><br/>
+<% end %>
