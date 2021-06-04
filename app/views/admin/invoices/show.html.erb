@@ -2,3 +2,21 @@
 <h3> Invoice I.D.:  <%= @invoice.id %> </h3>
 <p> Status: <%= @invoice.status %> </p>
 <p> Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+<br>
+<h2> Items assocaited </h2>
+
+<% @invoice_item.each do |item| %>
+<p> Item Name: <%= item.name %> </p>
+<% end %>
+
+<% @invoice_items.each do |invoice_item|%>
+<p> Item Quantity: <%= invoice_item.quantity %> </p>
+<% end %>
+
+<% @invoice_item.each do |item| %>
+<p> Item Unit Price: <%= item.unit_price %> </p>
+<% end %>
+
+<% @invoice_items.each do |invoice_item| %>
+<p> Status of the item: <%= invoice_item.status %> </p>
+<% end %>
