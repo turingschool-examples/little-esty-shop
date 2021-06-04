@@ -16,5 +16,10 @@ class Merchant::InvoicesController < ApplicationController
       InvoiceItem.where('merchant_id = ? AND invoice_id = ?', params[:merchant_id], params[:invoice_id]).first.update(status: 'Shipped')
       redirect_to "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
     end
+
+  def index
+    @merchant = Merchant.find(params[:id])
+    @items = @merchant.items
+    @invoices = Invoice.joins(:invoice_items).where("item.id = ?", @items)
   end
 end
