@@ -1,19 +1,13 @@
 Rails.application.routes.draw do
 
-#-------Merchant-------------------
+  #-------Merchant-------------------
   resources :merchants do
     resources :invoices
     resources :items
   end
-#-------Admin----------------------
+  #-------Admin----------------------
   namespace :admin do
-    resources :merchants do
-      member do
-        post :update_status
-      end
-    end
-    resources :invoices do
-      
-    end
+    resources :invoices
+    resources :merchants
   end
 end
