@@ -17,52 +17,62 @@ RSpec.describe 'Merchants dashboard show page' do
     end
 
     it 'shows name of merchant' do
-      visit "merchants/#{@merchant.id}/dashboard"
+      visit "/merchants/#{@merchant.id}/dashboard"
       
       expect(page).to have_content('Sally Handmade')
     end
 
-    xit 'links to merchant items index' do
-      visit "merchants/#{@merchant.id}/dashboard"
+    it 'links to merchant items index' do
+      visit "/merchants/#{@merchant.id}/dashboard"
 
       click_on 'All Items'
 
-      expect(current_path).to eq("merchants/#{@merchant.id}/items")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
     end
 
-    xit 'links to merchant invoices index' do
-      visit "merchants/#{@merchant.id}/dashboard"
+    it 'links to merchant invoices index' do
+      visit "/merchants/#{@merchant.id}/dashboard"
 
       click_on 'All Invoices'
 
-      expect(current_path).to eq("merchants/#{@merchant.id}/invoices")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
     end
 
     it 'lists names of all items that are ready to ship' do
-      visit "merchants/#{@merchant.id}/dashboard"
+      visit "/merchants/#{@merchant.id}/dashboard"
 
       expect(page).to have_content("Qui Essie")
       expect(page).to have_content("Essie")
       expect(page).to_not have_content("Glowfish")
     end
 
-    xit 'lists items by oldest invoice created date' do
-      visit "merchants/#{@merchant.id}/dashboard"
+    it 'lists items by oldest invoice created date' do
+      visit "/merchants/#{@merchant.id}/dashboard"
 
     end
 
     it 'lists corresponding invoice id of each item' do
-      visit "merchants/#{@merchant.id}/dashboard"
+      visit "/merchants/#{@merchant.id}/dashboard"
       
       expect(page).to have_content("##{@invoice.id}")
     end
 
-    xit 'links to corresponding merchant invoice show page' do
-      visit "merchants/#{@merchant.id}/dashboard"
+    it 'links to corresponding merchant invoice show page' do
+      visit "/merchants/#{@merchant.id}/dashboard"
 
       first(:link, "#{@invoice.id}").click
 
-      expect(current_path).to eq("merchants/#{@merchant.id}/invoices")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
+    end
+
+    it 'contains a table showing the top 5 customers by successful transactions' do
+      visit "/merchants/#{@merchant.id}/dashboard"
+      
+      expect(page).to have_content('Alessandra Ward')
+      expect(page).to have_content('Ben Turner')
+      expect(page).to have_content('Estel Hermiston')
+      expect(page).to have_content('Helmer Baumbach')
+      expect(page).to have_content('Isaac Zulauf')
     end
   end
 end

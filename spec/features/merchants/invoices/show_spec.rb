@@ -1,7 +1,9 @@
+# spec/features/merchants/invoices/show_spec
+
 require 'rails_helper'
 
-RSpec.describe Invoice do
-  before(:each) do
+RSpec.describe 'Merchant invoice show page' do
+  before :each do 
     @merchant = Merchant.create!(name: 'Sally Handmade')
     @merchant_2 = Merchant.create!(name: 'Billy Mandmade')
     @item =  @merchant.items.create!(name: 'Qui Essie', description: 'Lorem ipsim', unit_price: 75107)
@@ -14,24 +16,22 @@ RSpec.describe Invoice do
     InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
   end
+ 
+  describe 'display' do
+    it 'shows invoice and its attributes' do
+      visit "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
 
-  describe 'relationships' do
-    it {should belong_to :customer}
-    it {should have_many :invoice_items}
-    it {should have_many :transactions}
-    it {should have_many(:items).through(:invoice_items)}
-  end
-
-  describe 'class methods' do
-    describe '#filter_by_unshipped_order_by_age' do
-      it 'returns all invoices with unshipped items sorted by creation date' do
-        expect(Invoice.filter_by_unshipped_order_by_age.count("distinct invoices.id")).to eq(843)
-        expect(Invoice.filter_by_unshipped_order_by_age.first.id).to eq(112)
-        expect(Invoice.filter_by_unshipped_order_by_age.last.id).to eq(390)
-      end
+      created_at = @invoice.id.str 
+      expect(page).to have_content("Invoice # #{@invoice.id}")
+      expect(page).to_not have_content("Invoice # #{@invoice_2.id}")
+      expect(page).to have_content("Status: #{invoice.status}")
+      expect(page).to have_content("Created At: #{created_at}")
     end
-  end
 
-  describe 'instance methods' do
+    it 'lists all items and item attributes on the invoice'
+
+    it 'lists total revenue of all items on invoice' 
+
+    it 'can update items status' 
   end
 end

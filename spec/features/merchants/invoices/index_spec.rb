@@ -1,7 +1,9 @@
+# spec/features/merchants/invoices/index_spec
+
 require 'rails_helper'
 
-RSpec.describe Invoice do
-  before(:each) do
+RSpec.describe 'Merchant invoices index page' do
+  before :each do 
     @merchant = Merchant.create!(name: 'Sally Handmade')
     @merchant_2 = Merchant.create!(name: 'Billy Mandmade')
     @item =  @merchant.items.create!(name: 'Qui Essie', description: 'Lorem ipsim', unit_price: 75107)
@@ -15,23 +17,14 @@ RSpec.describe Invoice do
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
   end
 
-  describe 'relationships' do
-    it {should belong_to :customer}
-    it {should have_many :invoice_items}
-    it {should have_many :transactions}
-    it {should have_many(:items).through(:invoice_items)}
-  end
-
-  describe 'class methods' do
-    describe '#filter_by_unshipped_order_by_age' do
-      it 'returns all invoices with unshipped items sorted by creation date' do
-        expect(Invoice.filter_by_unshipped_order_by_age.count("distinct invoices.id")).to eq(843)
-        expect(Invoice.filter_by_unshipped_order_by_age.first.id).to eq(112)
-        expect(Invoice.filter_by_unshipped_order_by_age.last.id).to eq(390)
-      end
+  describe 'display' do
+    it 'lists all invoices that has at least one item bought from this merchant' do
+      visit "/merchants/#{@merchant.id}/invoices"
+      
+      expect(page).to have_content("#{@invoice.id}")
+      expect(page).to_not have_content("#{@invoice_2.id}")
     end
-  end
 
-  describe 'instance methods' do
+    it 'links to each merchant invoice show page'
   end
 end

@@ -12,7 +12,7 @@ RSpec.describe Customer do
     describe 'top_customers' do
       it 'returns the top 5 customer by number of successful transactions' do
         top_customers = Customer.top_five
-
+ 
         expect(top_customers[0].name).to eq("Alessandra Ward")
         expect(top_customers[1].name).to eq("Ben Turner")
         expect(top_customers[2].name).to eq("Estel Hermiston")
