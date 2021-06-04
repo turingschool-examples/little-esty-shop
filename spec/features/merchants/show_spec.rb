@@ -64,5 +64,15 @@ RSpec.describe 'Merchants dashboard show page' do
 
       expect(current_path).to eq("merchants/#{@merchant.id}/invoices")
     end
+
+    it 'contains a table showing the top 5 customers by successful transactions' do
+      visit "merchants/#{@merchant.id}/dashboard"
+      
+      expect(page).to have_content('Alessandra Ward')
+      expect(page).to have_content('Ben Turner')
+      expect(page).to have_content('Estel Hermiston')
+      expect(page).to have_content('Helmer Baumbach')
+      expect(page).to have_content('Isaac Zulauf')
+    end
   end
 end
