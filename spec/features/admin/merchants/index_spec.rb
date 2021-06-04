@@ -162,4 +162,27 @@ RSpec.describe 'Admin Merchants Index Page' do
       expect(page).to have_content('$180.00 in sales')
     end
   end
+
+  it "I see the date with the most revenue for each merchant and it looks like 'Top selling date for <merchant name> was <date with most sales>'." do
+
+    within "#top-rev-merchants-#{@merchant6.id}" do
+      expect(page).to have_content("Top selling date for #{@merchant6.name} was #{@merchant6.merchant_best_day}")
+    end
+
+    within "#top-rev-merchants-#{@merchant2.id}" do
+      expect(page).to have_content("Top selling date for #{@merchant2.name} was #{@merchant2.merchant_best_day}")
+    end
+
+    within "#top-rev-merchants-#{@merchant3.id}" do
+      expect(page).to have_content("Top selling date for #{@merchant3.name} was #{@merchant3.merchant_best_day}")
+    end
+
+    within "#top-rev-merchants-#{@merchant5.id}" do
+      expect(page).to have_content("Top selling date for #{@merchant5.name} was #{@merchant5.merchant_best_day}")
+    end
+
+    within "#top-rev-merchants-#{@merchant4.id}" do
+      expect(page).to have_content("Top selling date for #{@merchant4.name} was #{@merchant4.merchant_best_day}")
+    end
+  end
 end
