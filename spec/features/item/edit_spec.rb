@@ -13,32 +13,24 @@ RSpec.describe 'items show page'do
     @item_6 = Item.create!(name: 'Thing 6', description: 'This is the sixth thing.', unit_price: 10.4, merchant_id: @merchant_2.id)
   end
 
-  describe 'item attributes' do
-    it 'can display only that items attributes' do
-      visit "/merchants/#{@merchant_2.id}/items/#{@item_4.id}"
+  describe 'edit form' do
+    it 'shows a form with the existing attribute information filled in' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
 
-      expect(page).to have_content("#{@item_4.name}")
-      expect(page).to have_content("#{@item_4.description}")
-      expect(page).to have_content("#{@item_4.unit_price}")
-
-      expect(page).to_not have_content("#{@item_5.name}")
-      expect(page).to_not have_content("#{@item_5.description}")
-      expect(page).to_not have_content("#{@item_5.unit_price}")
-    end
-  end
-
-  describe 'update link' do
-    it 'has a link to update the item' do
-      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}"
-
-      expect(page).to have_button('Update')
-
-      click_button('Update')
-
-      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit")
+      expect(page).to have_content("#{@item_5.name}")
+      expect(find('form')).to have_content("Name")
+      expect(find('form')).to have_content("Description")
+      expect(find('form')).to have_content("Unit price")
+      expect(page).to have_button("Submit Item Update")
     end
 
-    it 'can show the updated information from the edit page' do
+    it 'only shows one items attribute information filled in' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
+
+      expect(page).to_not have_content("#{@item_1.name}")
+    end
+
+    it 'can update the items attributes and redirect to the show page' do
       visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
 
       fill_in "Name", with: "The Best Thing"
@@ -47,13 +39,18 @@ RSpec.describe 'items show page'do
       click_button "Submit Item Update"
 
       expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}")
-      expect(page).to have_content("The Best Thing")
-      expect(page).to have_content("It is so amazing, really.")
-      expect(page).to have_content(150.50)
+    end
 
-      expect(page).to_not have_content("Thing 5")
-      expect(page).to_not have_content("This is the fifth thing.")
-      expect(page).to_not have_content(15.30)
+    it 'gives an error message if all fields are not filled out' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
+
+      fill_in "Name", with: "The Best Thing"
+      fill_in "Description", with: nil
+      fill_in "Unit price", with: 150.5
+      click_button "Submit Item Update"
+
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit")
+      expect(page).to have_content("Error: #{@item_5.errors.full_messages.to_sentence}")
     end
   end
 end
