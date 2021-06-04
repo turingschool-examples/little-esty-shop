@@ -26,4 +26,16 @@ RSpec.describe 'items show page'do
       expect(page).to_not have_content("#{@item_5.unit_price}")
     end
   end
+
+  describe 'update link' do
+    it 'has a link to update the item' do
+      visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}"
+
+      expect(page).to have_button('Update')
+
+      click_button('Update')
+
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit")
+    end
+  end
 end
