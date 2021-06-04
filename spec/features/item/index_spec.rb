@@ -36,4 +36,20 @@ RSpec.describe 'items index page' do
       expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_4.id}")
     end
   end
+
+  describe 'create' do
+    it 'has a link to create a new item' do
+      visit "/merchants/#{@merchant_1.id}/items"
+
+      expect(page).to have_button("Create New Item")
+    end
+
+    it 'takes the user to the new page' do
+      visit "/merchants/#{@merchant_2.id}/items"
+
+      click_button "Create New Item"
+
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/new")
+    end
+  end
 end
