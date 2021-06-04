@@ -1,0 +1,5 @@
+  <%= bootstrap_form_with(model: @merchant, local: true) do |f| %>
+        <%= f.text_field :name %><br>
+          <%= radio_button_tag(:enabled, true, checked = true, style: "display: none;") %><br>
+        <%= f.submit %>
+      <% end %>
