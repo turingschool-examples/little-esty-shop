@@ -8,24 +8,6 @@ class Customer < ApplicationRecord
   has_many :merchants, through: :items
 
   def self.top_five
-    # What do you want to see here - a joins table or two AR calls to effectuate the one SQL statement below
-    # Customer.joins(invoices: [:transactions]).select("customers.*, count(transactions.*) as num_trans").where("transactions.result = 'success'").distinct.group(:id).order("num_trans desc").limit(5).order(:first_name)
-
-    find_by_sql("select distinct concat(a.first_name, ' ', a.last_name) as \"name\", count(c.result) as \"num_trans\"
-
-    From
-    customers a,
-    invoices b,
-    transactions c
-
-    Where a.id = b.customer_id
-    and b.id = c.invoice_id
-    and c.result = 'success'
-
-    group by a.id
-
-    order by num_trans desc, name
-
-    limit 5")
+    joins(:transactions).select("customers.*, CONCAT(customers.first_name, ' ', customers.last_name) as name, count(transactions.*) as num_trans").where("transactions.result = 'success'").group(:id).order("num_trans desc").limit(5).order(:first_name)
   end
 end

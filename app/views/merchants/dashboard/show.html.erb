@@ -1,0 +1,19 @@
+<div> 
+    <section>
+    <h1><%= @merchant.name %></h1>
+    <h2><%= link_to 'All Items', "/merchants/#{@merchant.id}/items" %> </h2>
+    <h2><%= link_to 'All Invoices', "/merchants/#{@merchant.id}/invoices" %> </h2>
+    </section>
+
+    <div class="row">
+      <div class="column" style="width: 50%">
+          <%= render partial: 'partials/top_customers' %>
+      </div>
+    </div> 
+
+    <section>
+      <div class="column" style="width: 50%">
+          <%= render partial: 'partials/shippable_items' %>
+      </div>
+    </section>
+</div>
