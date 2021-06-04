@@ -18,11 +18,13 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def index
-    @merchants = Merchant.all
+    @merchants_enabled = Merchant.filter_by_enabled
+    @merchants_disabled = Merchant.filter_by_disabled
     @top_five_merchants = Merchant.top_five
   end
 
   def new
+    @merchant = Merchant.new
   end
 
   def show
@@ -33,13 +35,17 @@ class Admin::MerchantsController < ApplicationController
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
     merchant.save
-    flash[:notice] = "You have successfully updated this merchant!"
-    redirect_to action: 'show', id: params[:id]
+    if params.include? :index_redirect
+      redirect_to action: 'index'
+    else
+      flash[:notice] = "You have successfully updated this merchant!"
+      redirect_to action: 'show', id: params[:id]
+    end
   end
 
   private
 
   def merchant_params
-    params.permit(:name, :enabled)
+    params.require(:merchant).permit(:name, :enabled)
   end
 end

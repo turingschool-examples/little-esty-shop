@@ -1,43 +1,16 @@
-  <h1>Welcome to the Merchant Admin Portal</h2><br>
+<h1>Welcome to the Merchant Admin Portal</h2><br>
 
-  <%= button_to "Add a New Merchant", "/admin/merchants/new", method: :get %><br>
-
+<%= button_to "Add a New Merchant", "/admin/merchants/new", method: :get %><br>
 <div class="row">
   <div class="column" style="width: 50%">
-    <h3 style="text-align: center;">Browse All Merchants</h3>
-    <table style="width: 100%">
-      <tr>
-        <th>Merchant ID</th>
-        <th>Merchant Name</th>
-        <th>Status</th>
-        <th>Change Status</th>
-      </tr>
-      <% @merchants.each do |merchant| %>
-        <tr>
-          <td><%= merchant.id %></td>
-          <td><%= link_to "#{merchant.name}", "#{request.url}/#{merchant.id}", method: :get %></td>
-          <td><% if merchant.enabled == true %>
-                <p> Enabled </p>
-              <% else %>
-                <p> Disabled </p>
-              <% end %>
-          </td>
-          <td>
-              <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch, local: true do |form| %>
-              <% if merchant.enabled == true %>
-                <%= form.hidden_field :enabled, value: false%>
-                <%= form.submit 'Disable' %><br><br>
-              <% else %>
-                <%= form.hidden_field :enabled, value: true %>
-                <%= form.submit 'Enable' %>
-              <% end %>
-            <% end %></td>
-        </tr>
-      <% end %>
-    </table>
+    <h3 style="text-align: center;">Browse Merchants</h3><br>
+    <h5 style="text-align: center;">Enabled Merchants</h5><br>
+      <%= render partial: 'partials/admin_merchants_index', locals: { data_set: @merchants_enabled } %><br>
+    <h5 style="text-align: center;">Disabled Merchants</h5><br>
+      <%= render partial: 'partials/admin_merchants_index', locals: { data_set: @merchants_disabled } %>
   </div>
-   <div class="column" style="width: 50%">
-      <h3 style="text-align: center;">View Merchant Statistics</h3><br>
-        <%= render partial: 'partials/top_merchants' %>
+  <div class="column" style="width: 50%">
+    <h3 style="text-align: center;">View Merchant Statistics</h3><br>
+    <%= render partial: 'partials/top_merchants' %>
   </div>
 </div>
