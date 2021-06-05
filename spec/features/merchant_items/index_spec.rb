@@ -32,6 +32,7 @@ RSpec.describe 'Merchant Items Index' do
     # binding.pry
     find_button("Disable").click
 
+
     expect(current_path).to eq("/merchants/#{@merchant.id}/items")
     expect(page).to have_button("Enable")
 
