@@ -1,0 +1,19 @@
+<div>
+  <h1> All Invoice Items</h1>
+  <table style='width: 100%; border-color: white;'>
+  <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Status</th>
+  </tr>
+    <% @invoice_items.each do |ii| %>
+      <tr>
+        <td><%= ii.item.name %></td>
+        <td><%= ii.quantity %></td>
+        <td><%= ii.unit_price %></td>
+        <td><%= ii.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
