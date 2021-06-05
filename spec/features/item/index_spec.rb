@@ -11,6 +11,10 @@ RSpec.describe 'items index page' do
     @item_4 = Item.create!(name: 'Thing 4', description: 'This is the fourth thing.', unit_price: 12.2, merchant_id: @merchant_2.id, status: 0)
     @item_5 = Item.create!(name: 'Thing 5', description: 'This is the fifth thing.', unit_price: 15.3, merchant_id: @merchant_2.id, status: 0)
     @item_6 = Item.create!(name: 'Thing 6', description: 'This is the sixth thing.', unit_price: 10.4, merchant_id: @merchant_2.id, status: 0)
+    @item_7 = Item.create!(name: 'Thing 7', description: 'This is the seventh thing.', unit_price: 116, merchant_id: @merchant_2.id, status: 0)
+    @item_8 = Item.create!(name: 'Thing 8', description: 'This is the eighth thing.', unit_price: 18.2, merchant_id: @merchant_2.id, status: 0)
+    @item_9 = Item.create!(name: 'Thing 9', description: 'This is the ninth thing.', unit_price: 17.7, merchant_id: @merchant_2.id, status: 0)
+    @item_10 = Item.create!(name: 'Thing 10', description: 'This is the tenth thing.', unit_price: 21.9, merchant_id: @merchant_2.id, status: 0)
   end
 
   describe 'item names' do
@@ -96,4 +100,24 @@ RSpec.describe 'items index page' do
       end
     end
   end
+
+  describe 'top 5 most popular items' do
+    it 'can list the top 5 most popluar items' do
+      visit "/merchants/#{@merchant_2.id}/items"
+
+      expect(page).to have_content("Top Items")
+    end
+  end
 end
+
+# As a merchant
+# When I visit my items index page
+# Then I see the names of the top 5 most popular items ranked by total revenue generated
+# And I see that each item name links to my merchant item show page for that item
+# And I see the total revenue generated next to each item name
+#
+# Notes on Revenue Calculation:
+#
+# Only invoices with at least one successful transaction should count towards revenue
+# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
