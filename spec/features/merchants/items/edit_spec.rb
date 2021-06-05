@@ -18,6 +18,5 @@ RSpec.describe 'updates item' do
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
     expect(page).to have_content('Sneakers')
-    #expect flash message
   end
 end

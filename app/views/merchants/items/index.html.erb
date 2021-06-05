@@ -3,3 +3,5 @@
 <% @merchant.items.each do |item| %>
       <p><a href="/merchants/<%= @merchant.id %>/items/<%= item.id %>"><%= item.name %></a></p>
   <% end %>
+
+<%= button_to 'New Item',  "/merchants/#{@merchant.id}/items/new", method: :get %>

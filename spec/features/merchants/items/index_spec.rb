@@ -30,4 +30,12 @@ RSpec.describe 'merchant items index' do
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
   end
+
+  it 'has a button to create a new item' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    click_button 'New Item'
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+  end
 end

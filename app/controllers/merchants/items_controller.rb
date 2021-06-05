@@ -21,6 +21,10 @@ class Merchants::ItemsController < ApplicationController
     flash[:notice] = "Item information successfully updated!"
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
   private
   def item_params
     params.permit(:name, :description, :unit_price)
