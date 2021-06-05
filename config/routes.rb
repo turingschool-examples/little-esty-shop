@@ -5,10 +5,9 @@ Rails.application.routes.draw do
   get "/merchants/:id/items", to: "merchant/items#index"
   get "/merchants/:id/invoices",  to: "merchant/invoices#index"
 
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   get '/admin', to: 'admin#index'
+  get '/admin/merchants', to: 'admin/merchants#index'
+  get '/admin/merchants/:merchant_id', to: 'admin/merchants#show'
 
   get '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#show'
   get '/merchants/:merchant_id/items/:item_id/edit', to: 'merchant_items#edit'
