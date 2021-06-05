@@ -28,4 +28,16 @@
 <% @top_items.each do |item| %>
   <%= item.name %>
   <%= (item.revenue.to_f) /100%><br/>
+    <% @top_days_for_items.find do |item_with_date| %>
+      <% item_with_date.name == item.name %>
+      <%= item_with_date.name  %>
+      <%= item_with_date.updated_at %>
+    <% end %>  
+<% end %>
+
+<p> Top Days </p>
+<% @top_days_for_items.each do |item| %>
+  <%= item.name %>
+  <%= (item.revenue.to_f) /100%><br/>
+  <%= item.updated_at %><br/>
 <% end %>
