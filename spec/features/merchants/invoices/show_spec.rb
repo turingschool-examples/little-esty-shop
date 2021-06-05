@@ -13,7 +13,7 @@ RSpec.describe 'Merchant invoice show page' do
     @invoice = Invoice.create!(customer_id: @customer.id, status: 'completed')
     @invoice_2 = Invoice.create!(customer_id: @customer.id, status: 'completed')
     InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
-    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
+    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice.id, quantity: 10000, unit_price: 122311, status: 'packaged')
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
   end
  
@@ -24,11 +24,19 @@ RSpec.describe 'Merchant invoice show page' do
  
       expect(page).to have_content("INVOICE # #{@invoice.id}")
       expect(page).to_not have_content("INVOICE # #{@invoice_2.id}")
-      expect(page).to have_content("Status: #{@invoice.status}")
-      expect(page).to have_content("Created At: #{created_at}")
+      expect(page).to have_content("#{@invoice.status}")
+      expect(page).to have_content("#{created_at}")
     end
 
-    it 'lists all items and item attributes on the invoice'
+    it 'lists all items and item attributes on the invoice' do
+      visit "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
+
+      expect(page).to have_content("Qui Essie")
+      expect(page).to have_content("Essie")
+      expect(page).to_not have_content("Glowfish Markdown")
+      expect(page).to have_content("539")
+      expect(page).to have_content("122311")
+    end
 
     it 'lists total revenue of all items on invoice' 
 
