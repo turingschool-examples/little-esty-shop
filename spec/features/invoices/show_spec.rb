@@ -14,7 +14,7 @@ RSpec.describe 'invoice show page' do
     @invoice_item_3 = InvoiceItem.create!(quantity: 4, unit_price: 19.4, status: 1, invoice_id: @invoice_1.id, item_id: @item_3.id)
   end
 
-  xit 'displays the invoice id, status, created at, and customer name' do
+  it 'displays the invoice id, status, created at, and customer name' do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("#{@invoice_1.id}")
