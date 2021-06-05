@@ -58,4 +58,12 @@ class Merchant < ApplicationRecord
 
        x = ActiveRecord::Base.connection.execute(sql)[0].values[0]
   end
+
+  def self.filter_by_enabled
+    Merchant.where(enabled: true)
+  end
+
+  def self.filter_by_disabled
+    Merchant.where(enabled: false)
+  end
 end

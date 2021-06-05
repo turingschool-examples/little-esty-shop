@@ -1,0 +1,32 @@
+    <table style="width: 100%">
+      <tr>
+        <th>Merchant ID</th>
+        <th>Merchant Name</th>
+        <th>Status</th>
+        <th>Change Status</th>
+      </tr>
+      <% data_set.each do |merchant| %>
+        <tr>
+          <td><%= merchant.id %></td>
+          <td><%= link_to "#{merchant.name}", "#{request.url}/#{merchant.id}", method: :get %></td>
+          <td><% if merchant.enabled == true %>
+                <p> Enabled </p>
+              <% else %>
+                <p> Disabled </p>
+              <% end %>
+          </td>
+          <td>
+              <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch, local: true do |form| %>
+              <% if merchant.enabled == true %>
+                <%= form.hidden_field :enabled, value: false %>
+                <%= form.hidden_field :index_redirect, :value => params[:index_redirect] %>
+                <%= form.submit 'Disable' %><br><br>
+              <% else %>
+                <%= form.hidden_field :enabled, value: true %>
+                <%= form.hidden_field :index_redirect, value: true %>
+                <%= form.submit 'Enable' %>
+              <% end %>
+            <% end %></td>
+        </tr>
+      <% end %>
+    </table>
