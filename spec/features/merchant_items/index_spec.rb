@@ -30,6 +30,7 @@ RSpec.describe 'Merchant Items Index' do
     @item_1 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7510, status: "enable")
     visit "/merchants/#{@merchant.id}/items"
     # binding.pry
+    # save_and_open_page
     find_button("Disable #{@item_1.name}").click
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items")

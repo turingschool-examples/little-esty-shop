@@ -11,13 +11,15 @@ RSpec.describe 'Admin Invoices Index' do
       @invoice_5 = @customer_1.invoices.create!(status: 0)
 
       @merchant_1 = Merchant.create!(name: 'Roald')
-      @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 100)
+      @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 39434)
+      @item_2 = @merchant_1.items.create!(name: 'Lays', description: 'Deliciouio', unit_price: 8356)
+      @item_3 = @merchant_1.items.create!(name: 'Cadlee', description: 'Perfecto', unit_price: 9064)
 
-      InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0)
-      InvoiceItem.create!(invoice: @invoice_2, item: @item_1, status: 1)
-      InvoiceItem.create!(invoice: @invoice_3, item: @item_1, status: 1)
-      InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2)
-      InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1)
+      InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0, quantity: 200, unit_price: 39434)
+      InvoiceItem.create!(invoice: @invoice_1, item: @item_2, status: 1, quantity: 295, unit_price: 8356)
+      InvoiceItem.create!(invoice: @invoice_1, item: @item_3, status: 2, quantity: 382, unit_price: 9064)
+      InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2, quantity: 130, unit_price: 39434)
+      InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1, quantity: 97, unit_price: 39434)
     end
 
     it 'displays all invoice ids and links to admin invoice show page' do
