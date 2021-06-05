@@ -22,9 +22,14 @@ RSpec.describe 'items show page'do
       fill_in "Name", with: "T-Rex Floatie"
       fill_in "Description", with: "Floats for hours!"
       fill_in "Unit price", with: 125.25
+      select "disable"
       click_button "Create Item"
 
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+
+      expect(page).to have_content("T-Rex Floatie")
+      # expect(page).to have_button("Enable")
+      expect(page).to_not have_content("BreadNButter")
     end
   end
 end
