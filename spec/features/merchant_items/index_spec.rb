@@ -8,7 +8,7 @@ RSpec.describe 'Merchant Items Index' do
   # When I visit my merchant items index page ("merchants/merchant_id/items")
   # I see a list of the names of all of my items
   # And I do not see items for any other merchant
-  it 'Can can visist a merchant index page' do
+  it 'Can visit a merchant index page' do
     merchant = Merchant.create!(name: 'Schroeder-Jerde')
     merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7510)
     visit "/merchants/#{merchant.id}/items"
@@ -30,11 +30,11 @@ RSpec.describe 'Merchant Items Index' do
     @item_1 = @merchant.items.create!(name: 'Item Qui Esse', description: 'description', unit_price: 7510, status: "enable")
     visit "/merchants/#{@merchant.id}/items"
     # binding.pry
-    # save_and_open_page
-    find_button("Disable #{@item_1.name}").click
+    find_button("Disable").click
+
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items")
-    expect(page).to have_button("Enable #{@item_1.name}")
+    expect(page).to have_button("Enable")
 
     @item_1 = Item.find(@item_1.id)
 
