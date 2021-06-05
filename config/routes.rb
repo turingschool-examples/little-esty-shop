@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :invoices
     resources :items do
       member do
-        :update_item_status
+        patch 'update_item_status', as: 'status_update'
       end
     end
   end
