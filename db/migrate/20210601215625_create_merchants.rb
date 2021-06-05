@@ -5,5 +5,6 @@ class CreateMerchants < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    execute("ALTER SEQUENCE merchants_id_seq START with 1000 RESTART;")
   end
 end

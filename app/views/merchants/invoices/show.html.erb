@@ -1,3 +1,20 @@
-<div>
-  <h1> Invoice #<%= @invoice.id %></h1>
+<div class="col-md-50 col-md-offset-2" >
+  <h1> INVOICE # <%= @invoice.id %></h1><br>
+  <table style="width: 50%">
+      <tr>
+        <td>Status</td>
+        <td><%= @invoice.status %></td>
+      </tr>
+      <tr>
+        <td>Created At</td>
+        <td> <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></td>
+      </tr>
+      <tr>
+        <td>Customer</td>
+        <td> <%= @invoice.customer.full_name  %></td>
+      </tr>
+  </table><br><br>
+  <div>
+    <%= render partial: 'partials/invoice_items'%>
+  </div>
 </div>
