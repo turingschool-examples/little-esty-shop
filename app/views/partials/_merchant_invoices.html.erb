@@ -1,4 +1,5 @@
+  <tr>
   <% @invoices.each do |invoice| %>
-    <p><%= link_to "INVOICE ##{invoice.id}", "/merchants/#{@merchant_id}/invoices/#{invoice.id}", method: :get %></p>
+    <td><%= link_to "INVOICE ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></td>
   <% end %>
-
+  </tr>
