@@ -21,15 +21,6 @@ RSpec.describe InvoiceItem do
 
   describe 'class methods' do
 
-    it "::find_invoice_id" do
-      
-      expect(InvoiceItem.find_invoice_id(@item_2.id)).to eq (@invoice.id)
-    end
-
-    it "::find_invoice_created_at" do
-  
-      expect(InvoiceItem.find_invoice_created_at(@item_2.id)).to eq (@invoice.created_at)
-    end
   end
 
   describe 'instance methods' do
