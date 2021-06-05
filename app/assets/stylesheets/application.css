@@ -13,3 +13,34 @@
  *= require_tree .
  *= require_self
  */
+.fifty_fifty{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.title_wrapper{
+  text-align: center;
+  background: lightgrey;
+  font-size: 30px;
+}
+
+.little_esty_shop{
+  font-size: 50px;
+  text-align: center;
+  background: lightgrey;
+  margin-top: 0px;
+}
+
+.nav_bar_wrapper{
+  display: flex;
+}
+
+.nav_bar_links{
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+}
+
+.nav_bar_links_inline{
+  padding-right: 10px;
+}
