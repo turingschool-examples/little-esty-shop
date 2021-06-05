@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :invoice_item do
-    quantity { 1 }
-    unit_price { 1 }
-    status { "MyString" }
+    quantity { rand(1..1000) }
+    unit_price { Faker::Number.number(digits: 7) }
+    status { ['pending', 'packaged', 'shipped'].sample }
     invoice { nil }
     item { nil }
   end
