@@ -1,5 +1,7 @@
 class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
+  validates_presence_of :first_name, :last_name
+
 
   def self.top_five_by_transaction_success
     joins(invoices: :transactions)

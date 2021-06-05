@@ -19,8 +19,6 @@ RSpec.describe 'Merchant Items Show Page' do
     expect(page).to_not have_content(@item_2.name)
   end
 
-# I see a flash message stating that the information has been successfully updated.
-
   it 'has a link to update item information' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
     expect(page).to have_link('Update Doritos')
