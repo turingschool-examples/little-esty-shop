@@ -49,10 +49,14 @@ class ItemsController < ApplicationController
   end
 
   def update_item_status
-    require "pry";binding.pry
-    if params[:status]
-      require "pry";binding.pry
-      @item.status = params[:status]
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
+    @item.status = params[:status]
+    if @item.save!
+      redirect_to "/merchants/#{@merchant.id}/items"
+    else
+      flash[:alert] = "Error: #{@item.errors.full_messages.to_sentence}"
+      redirect_to "/merchants/#{@merchant.id}/items"
     end
   end
 

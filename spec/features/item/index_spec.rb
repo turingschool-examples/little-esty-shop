@@ -17,30 +17,21 @@ RSpec.describe 'items index page' do
     it 'can list the names of all the items for that merchant' do
       visit "/merchants/#{@merchant_1.id}/items"
 
-      within "#merchant-items-#{@item_1.id}" do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to_not have_content(@item_4.name)
-      end
+      expect(page).to have_link(@item_2.name)
+      expect(page).to have_link(@item_3.name)
 
-      within "#merchant-items-#{@item_2.id}" do
-        expect(page).to have_content(@item_2.name)
-        expect(page).to_not have_content(@item_5.name)
-      end
-
-      within "#merchant-items-#{@item_3.id}" do
-        expect(page).to have_content(@item_3.name)
-        expect(page).to_not have_content(@item_6.name)
-      end
+      expect(page).to_not have_link(@item_5.name)
+      expect(page).to_not have_link(@item_6.name)
     end
 
     it 'has the item names listed as links' do
       visit "/merchants/#{@merchant_2.id}/items"
 
-      expect(page).to have_link(@item_4.name)
-
-      click_link "#{@item_4.name}"
-
-      expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_4.id}")
+      within "#disabled-items-#{@item_4.id}" do
+        expect(page).to have_link(@item_4.name)
+        click_link "#{@item_4.name}"
+        expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_4.id}")
+      end
     end
   end
 
@@ -70,17 +61,39 @@ RSpec.describe 'items index page' do
         click_button "Enable"
       end
 
-      # within "#disabled-items-#{@item_5.id}" do
-      #   expect(page).to have_content(@item_5.name)
-      #   expect(page).to have_button("Enable")
-      #   click_button "Enable"
-      # end
-      #
-      # within "#disabled-items-#{@item_6.id}" do
-      #   expect(page).to have_content(@item_6.name)
-      #   expect(page).to have_button("Enable")
-      #   click_button "Enable"
-      # end
+      within "#disabled-items-#{@item_5.id}" do
+        expect(page).to have_content(@item_5.name)
+        expect(page).to have_button("Enable")
+        click_button "Enable"
+      end
+
+      within "#disabled-items-#{@item_6.id}" do
+        expect(page).to have_content(@item_6.name)
+        expect(page).to have_button("Enable")
+        click_button "Enable"
+      end
+    end
+
+    it 'has a button to disable an item' do
+      visit "/merchants/#{@merchant_1.id}/items"
+
+      within "#enabled-items-#{@item_1.id}" do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      end
+
+      within "#enabled-items-#{@item_2.id}" do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      end
+
+      within "#enabled-items-#{@item_3.id}" do
+        expect(page).to have_content(@item_3.name)
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      end
     end
   end
 end
