@@ -12,7 +12,7 @@ class MerchantItemsController < ApplicationController
     item.update(item_params)
 
     redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}"
-    binding.pry 
+    # binding.pry 
     flash[:notice] = "Successfully updated"
   end
 
