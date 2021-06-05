@@ -9,5 +9,8 @@
   <%= form.label :unit_price %>
   <%= form.number_field :unit_price %><br/><br/>
 
+  <%= form.label :status %>
+  <%= form.select :status, ['disable', 'enable'], select: 'disable' %><br/><br/>
+
   <%= form.submit 'Create Item' %>
 <% end %>
