@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant invoice show page' do
-  before :each do 
+  before :each do
+    # @item = Item.find(id)
+    # @merchant = Merchant.find(id)
     @merchant = Merchant.create!(name: 'Sally Handmade')
     @merchant_2 = Merchant.create!(name: 'Billy Mandmade')
     @item =  @merchant.items.create!(name: 'Qui Essie', description: 'Lorem ipsim', unit_price: 1200)
