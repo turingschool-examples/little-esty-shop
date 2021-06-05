@@ -1,0 +1,10 @@
+<h1>Invoice #<%= @invoice.id %>:</h1>
+
+<h2>Status:</h2>
+<p><%= @invoice.status %></p>
+
+<h2>Date of Creation:</h2>
+<p><%= @invoice.convert_create_date %></p>
+
+<h2>Customer Name:</h2>
+<p><%= @customer.first_name %> <%= @customer.last_name %></p>

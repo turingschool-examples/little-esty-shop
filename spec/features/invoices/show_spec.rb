@@ -19,7 +19,7 @@ RSpec.describe 'invoice show page' do
 
     expect(page).to have_content("#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.status}")
-    expect(page).to have_content("#{@invoice_1.created_at}") #need to parse it to read day of week, month day, year
+    expect(page).to have_content("#{@invoice_1.convert_create_date}")
     expect(page).to have_content("#{@customer.first_name}")
     expect(page).to have_content("#{@customer.last_name}")
   end
