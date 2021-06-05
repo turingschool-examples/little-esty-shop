@@ -1,14 +1,14 @@
 <h1> <%= @merchant.name %> </h1>
 
-<% @items.each do |item| %>
-  <section id="merchant-items-<%= item.id %>">
-  <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+<% @disabled_items.each do |item| %>
+  <section id="disabled-items-<%= item.id %>">
+    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> <br> <%= button_to "Enable", status_update_merchant_item_path(@merchant.id, item.id, status: "enable"), {method: :patch, action: :update_item_status} %>
   </section>
 <% end %>
 
-<% @disabled_items.each do |item| %>
-  <section id="disabled-items-<%= item.id %>">
-    <%= item.name %> <%= button_to "Enable", merchant_items_path, {action: :update_item_status, item: item.id, status: "enable"} %>
+<% @enabled_items.each do |item| %>
+  <section id="enabled-items-<%= item.id %>">
+    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> <br> <%= button_to "Disable", status_update_merchant_item_path(@merchant.id, item.id, status: "disable"), {method: :patch, action: :update_item_status} %>
   </section>
 <% end %>
 
