@@ -72,4 +72,58 @@ RSpec.describe 'Admin Dashboard' do
       expect(page).to_not have_content(@customer_4.first_name)
     end
   end
+
+  describe 'incomplete invoices' do
+    it 'displays a list of ids of all invoices that have not yet been shipped' do
+      @customer_1  = Customer.create!(first_name: 'Tanya', last_name: 'Tiger')
+      @invoice_1 = @customer_1.invoices.create!(status: 0)
+      @invoice_2 = @customer_1.invoices.create!(status: 1)
+      @invoice_3 = @customer_1.invoices.create!(status: 1)
+      @invoice_4 = @customer_1.invoices.create!(status: 2)
+      @invoice_5 = @customer_1.invoices.create!(status: 0)
+
+      @merchant_1 = Merchant.create!(name: 'Roald')
+      @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 100)
+
+      InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0)
+      InvoiceItem.create!(invoice: @invoice_2, item: @item_1, status: 1)
+      InvoiceItem.create!(invoice: @invoice_3, item: @item_1, status: 1)
+      InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2)
+      InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1)
+
+      visit('/admin')
+
+      expect(page).to have_content("Invoice-#{@invoice_1.id}")
+      expect(page).to have_content("Invoice-#{@invoice_2.id}")
+      expect(page).to have_content("Invoice-#{@invoice_3.id}")
+      expect(page).to_not have_content("Invoice-#{@invoice_4.id}")
+      expect(page).to have_content("Invoice-#{@invoice_5.id}")
+    end
+
+    it 'displays a list of ids of all invoices from descending order from created_at date' do
+      @customer_1  = Customer.create!(first_name: 'Tanya', last_name: 'Tiger')
+      @invoice_1 = @customer_1.invoices.create!(status: 0)
+      @invoice_2 = @customer_1.invoices.create!(status: 1)
+      @invoice_3 = @customer_1.invoices.create!(status: 1)
+      @invoice_4 = @customer_1.invoices.create!(status: 2)
+      @invoice_5 = @customer_1.invoices.create!(status: 0)
+
+      @merchant_1 = Merchant.create!(name: 'Roald')
+      @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 100)
+
+      InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0)
+      InvoiceItem.create!(invoice: @invoice_2, item: @item_1, status: 1)
+      InvoiceItem.create!(invoice: @invoice_3, item: @item_1, status: 1)
+      InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2)
+      InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1)
+
+      visit('/admin')
+
+      expect("Invoice-#{@invoice_5.id}").to appear_before("Invoice-#{@invoice_3.id}")
+      expect("Invoice-#{@invoice_5.id}").to appear_before("Invoice-#{@invoice_2.id}")
+      expect("Invoice-#{@invoice_5.id}").to appear_before("Invoice-#{@invoice_1.id}")
+      expect("Invoice-#{@invoice_3.id}").to appear_before("Invoice-#{@invoice_2.id}")
+      expect("Invoice-#{@invoice_3.id}").to appear_before("Invoice-#{@invoice_1.id}")
+    end
+  end
 end
