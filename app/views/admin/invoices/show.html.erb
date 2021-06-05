@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin Invoice Show Page</title>
+    <h1>Admin Invoice Show Page</h1>
+  </head>
+  <body>
+    <h2>Invoice #<%= @invoice.id %></h2><br>
+    <section>
+      <div>
+        <h4>Status: <%= @invoice.status %></h4><br>
+        <h4>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></h4>
+      </div><br>
+      <div>
+        <h4>Customer Info:</h4><br>
+        <h4><%= @customer.first_name %> <%= @customer.last_name %></h4>
+      </div>
+    </section><br>
+    <section>
+      <table>
+        <tr>
+          <th>Item Name:</th>
+          <th>Quantity:</th>
+          <th>Item Price:</th>
+          <th>Status:</th>
+        </tr>
+          <% @invoice_items.each do |invoice_item| %>
+        <tr id="id-<%= invoice_item.id %>">
+            <td><%= invoice_item.name %></td>
+            <td><%= invoice_item.quantity %></td>
+            <td>$<%= invoice_item.convert_to_dollar %></td>
+            <td><%= invoice_item.status %></td>
+          <% end %>
+        </tr>
+      </table>
+    </section>
+  </body>
+</html>
