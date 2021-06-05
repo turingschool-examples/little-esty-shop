@@ -4,7 +4,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
 
-  def self.item_details
-    joins(:items).select("invoice_items.*, items.name as name, invoice_items.unit_price as price, invoice_items.status as status")
+  def self.total_revenue 
+    sum("invoice_items.unit_price * invoice_items.quantity")
   end
 end
