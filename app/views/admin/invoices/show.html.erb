@@ -6,6 +6,16 @@
     <h1>Admin Invoice Show Page</h1>
   </head>
   <body>
-    
+    <h2>Invoice #<%= @invoice.id %></h2><br>
+    <section>
+      <div>
+        <h4>Status: <%= @invoice.status %></h4><br>
+        <h4>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></h4><br>
+      </div>
+      <div>
+        <h4>Customer Info:</h4><br>
+        <h4><%= @customer.first_name %> <%= @customer.last_name %></h4><br>
+      </div>
+    </section>
   </body>
 </html>
