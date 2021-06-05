@@ -5,18 +5,19 @@
 <br>
 <h2> Items assocaited </h2>
 
-<% @invoice_item.each do |item| %>
-<p> Item Name: <%= item.name %> </p>
+<% @items.each do |item| %>
+  <section id="invoices-items-<%= item.id %>">  
+    <p> Item Name: <%= item.name %> </p>
+    <p> Item Unit Price: <%= item.unit_price %> </p>
+  </section>
 <% end %>
 
 <% @invoice_items.each do |invoice_item|%>
-<p> Item Quantity: <%= invoice_item.quantity %> </p>
+  <section id="invoices-invoice-items-<%= invoice_item.id %>">
+    <p> Item Quantity: <%= invoice_item.quantity %> </p>
+    <p> Status of the item: <%= invoice_item.status %> </p>
+  </section>
 <% end %>
 
-<% @invoice_item.each do |item| %>
-<p> Item Unit Price: <%= item.unit_price %> </p>
-<% end %>
-
-<% @invoice_items.each do |invoice_item| %>
-<p> Status of the item: <%= invoice_item.status %> </p>
-<% end %>
+<h2> Total Revenue from Invoice </h2>
+<p> <%= number_to_currency(@invoice.total_revenue) %> </p>
