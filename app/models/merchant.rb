@@ -1,5 +1,5 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
   #status?
-  has_many :items
+  has_many :items, dependent: :destroy
 end
