@@ -20,6 +20,14 @@ RSpec.describe Customer do
         expect(top_customers[4].name).to eq("Isaac Zulauf")
       end
     end
+
+    describe 'top_customers_by_merchant' do
+      it 'returns the top 5 customer by number of successful transactions' do
+        top_customers = Customer.top_five_by_merchant(1)
+        
+        expect(top_customers[0].name).to eq("Parker Daughtry")
+      end
+    end
   end
 
   describe 'instance methods' do
