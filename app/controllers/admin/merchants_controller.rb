@@ -29,6 +29,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
+    @merchant = Merchnat.new
   end
 
   def create
