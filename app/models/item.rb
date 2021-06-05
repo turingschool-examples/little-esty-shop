@@ -8,4 +8,12 @@ class Item < ApplicationRecord
 
   enum status: { disable: 0, enable: 1 }
 
+  ###TEST###
+  def self.enable_items
+    where(status: 1)
+  end
+
+  def self.disable_items
+    where(status: 0)
+  end
 end

@@ -33,11 +33,3 @@ RSpec.describe 'items show page'do
     end
   end
 end
-
-####Check work done here to ensure that it is correct, then move on to the
-####to the index page showing the newly created item.
-# I am taken to a form that allows me to add item information.
-# When I fill out the form I click ‘Submit’
-# Then I am taken back to the items index page
-# And I see the item I just created displayed in the list of items.
-# And I see my item was created with a default status of disabled.
