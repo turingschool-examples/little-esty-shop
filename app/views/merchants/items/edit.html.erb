@@ -1,3 +1,4 @@
 <h1><%= @item.name %></h1>
 
-<%= render partial: 'form', locals: { path: "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true} %>
+<%= render partial: 'form', locals: {  item: [@merchant, @item]
+                                      } %>
