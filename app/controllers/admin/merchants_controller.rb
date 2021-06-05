@@ -10,4 +10,13 @@ class Admin::MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
   end
+
+  def new
+  end
+
+  def create
+    Merchant.create!(name: params[:name], status: 'disable')
+
+    redirect_to '/admin/merchants'
+  end
 end
