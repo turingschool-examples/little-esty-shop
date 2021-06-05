@@ -10,12 +10,14 @@
     <section>
       <h4>Top Customers</h4>
       <table>
+        <tr>
+          <th>Name</th>
+          <th>Number of Transactions</th>
+        </tr>
         <% @top_five_customers.each do |customer| %>
         <tr>
-          <th><%= customer.first_name %> <%= customer.last_name %></th>
-        </tr>
-        <tr>
-          <td><%= customer.number_of_transactions %></td>
+          <td><%= customer.first_name %> <%= customer.last_name %></td>
+          <td style="text-align: center"><%= customer.number_of_transactions %></td>
         </tr>
         <% end %>
       </table>
