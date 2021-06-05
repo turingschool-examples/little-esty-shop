@@ -1,24 +1,19 @@
 <div>
   <h4> Items Ready to Ship </h4>
-    <table>
-      <tr> 
-        <th scope="col">Item</th>
-        <th scope="col">Invoice ID </th>
-        <th scope="col">Created On</th>
-      </tr>
-    </table>
-
-  <tbody class="shipment-table">
+  <table style='width: 100%; border-color: white;'>
+  <tr>
+    <th>Item</th>
+    <th>Invoice ID</th>
+    <th>Created On</th>
+  </tr>
     <% @shippable_items.each do |item| %>
       <tr>
-        <td scope="row"><p><%= item.name %></p></td>
+        <td><%= "#{item.name}"%></td>
         <td>
           #<%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>
         </td>
-        <td>
-          <%= item.invoice_date.strftime('%A, %B %d, %Y') %>
-        </td>
+        <td><%= item.invoice_date.strftime('%A, %B %d, %Y') %></td>
       </tr>
     <% end %>
-  </tbody>
+  </table>
 <div>
