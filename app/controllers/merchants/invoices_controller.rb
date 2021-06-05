@@ -1,4 +1,4 @@
-class InvoicesController < ApplicationController
+class Merchants::InvoicesController < ApplicationController
 
   def index
   end
