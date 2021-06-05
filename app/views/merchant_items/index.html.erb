@@ -1,0 +1,31 @@
+<h1><%= @merchant.name %></h1>
+
+<%= button_to "Add a New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+
+<p> Disabled Items </p>
+<% @items.each do |item| %>
+  <% if item.status == "disable" %>
+      <%= item.name %>
+      <%= button_to "Enable #{item.name}",
+        "/merchants/#{@merchant.id}/items",
+        method: :get, params: {change_to_enable: item},
+        form: {style: 'display:inline-block;'} %><br>
+    <% end %>
+<% end %>
+
+<p> Enabled Items </p>
+<% @items.each do |item| %>
+  <% if item.status == "enable" %>
+    <%= item.name %>
+    <%= button_to "Disable #{item.name}",
+      "/merchants/#{@merchant.id}/items",
+      method: :get, params: {change_to_disable: item},
+      form: {style: 'display:inline-block;'} %><br>
+  <% end %>
+<% end %>
+
+<p> Top Items </p>
+<% @top_items.each do |item| %>
+  <%= item.name %>
+  <%= (item.revenue.to_f) /100%><br/>
+<% end %>
