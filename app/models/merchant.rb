@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
   #status?
-  has_many :items
+  has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -45,9 +45,9 @@ class Merchant < ApplicationRecord
     end
   end
 
-  def date
-    Date.parse(updated_at).strftime("%m/%d/%Y")
-  end
+  # def date
+  #   Date.parse(updated_at).strftime("%m/%d/%Y")
+  # end
 end
 #
 # Item.joins(:transactions).select('items.id', 'sum(invoice_items.quantity * invoice_items.unit_price) as revenue', 'transactions.result').where("transactions.result = 'success'").group('items.id').group('transactions.result').where(:merchant_id => 1).order('revenue DESC').limit(5)
