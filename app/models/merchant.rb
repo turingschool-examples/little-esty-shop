@@ -1,4 +1,4 @@
-# app/models/merchant 
+# app/models/merchant
 
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
@@ -65,5 +65,13 @@ class Merchant < ApplicationRecord
 
   def self.filter_by_disabled
     Merchant.where(enabled: false)
+  end
+
+  def disabled_items
+    items.where(enabled: "disabled")
+  end
+
+  def enabled_items
+    items.where(enabled: "enabled")
   end
 end
