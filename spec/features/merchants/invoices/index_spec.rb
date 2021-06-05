@@ -25,6 +25,12 @@ RSpec.describe 'Merchant invoices index page' do
       expect(page).to_not have_content("#{@invoice_2.id}")
     end
 
-    it 'links to each merchant invoice show page'
+    it 'links to each merchant invoice show page' do
+      visit "/merchants/#{@merchant.id}/invoices"
+
+      click_on("INVOICE ##{@invoice.id}")
+  
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice.id}")
+    end
   end
 end

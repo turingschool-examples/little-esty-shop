@@ -8,9 +8,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def self.top_five
-
     select('merchants.name, merchants.id as merchant_id, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue').joins(:transactions).where("transactions.result = 'success'").group('merchants.id').order('total_revenue desc').limit(5)
-
   end
 
   def top_revenue_day

@@ -10,6 +10,6 @@ class CreateItems < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    execute("ALTER SEQUENCE items_id_seq START with 1000 RESTART;")
+    execute("ALTER SEQUENCE items_id_seq START with 2500 RESTART;")
   end
 end
