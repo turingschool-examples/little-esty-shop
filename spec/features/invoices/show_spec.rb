@@ -24,7 +24,7 @@ RSpec.describe 'invoice show page' do
     expect(page).to have_content("#{@customer.last_name}")
   end
 
-  xit 'shows all items on the invoice with their names, quantities, unit prices, and status of the invoice item' do
+  it 'shows all items on the invoice with their names, quantities, unit prices, and status of the invoice item' do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Items:")

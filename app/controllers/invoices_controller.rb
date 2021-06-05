@@ -7,5 +7,6 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
     @customer = @invoice.customer
+    @invoice_items = @invoice.invoice_items
   end
 end
