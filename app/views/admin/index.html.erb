@@ -8,6 +8,7 @@
   </head>
   <body>
     <section>
+      <h4>Top Customers</h4>
       <table>
         <% @top_five_customers.each do |customer| %>
         <tr>
@@ -18,6 +19,13 @@
         </tr>
         <% end %>
       </table>
+    </section><br>
+
+    <section>
+      <h4>Incomplete Invoices</h4>
+      <% @incomplete_invoices.each do |invoice| %>
+        <%= "Invoice-#{invoice.id}" %>: <%= invoice.created_at.strftime('%A, %B %d, %Y') %><br>
+      <% end %>
     </section>
   </body>
 </html>
