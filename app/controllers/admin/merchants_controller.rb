@@ -1,5 +1,5 @@
 class Admin::MerchantsController < ApplicationController
-  before_action :find_merchant, only: [:show, :edit, :update, :update_status]
+  before_action :find_merchant, only: [:show, :edit, :update]
 
   def index
     @merchants = Merchant.all
@@ -15,46 +15,37 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    if @merchant.update!(merchant_params)
-      flash[:notice] = "Merchant was successfully update!"
-
-      redirect_to admin_merchant_path(@merchant)
-    # *** Waiting on validations to be completed ***
-    # else
-    #   flash[:notice] = "Error: #{@merchant.errors.full_message.to_senetence}"
-    #           ORRRRRRRR
-    #   flash[:notice] = "Error: #{error_message(@merchant.errors)}"
-    #   render :edit
+    if !@merchant.update(merchant_params)
+      flash.now[:alert] = "Error: #{@merchant.errors.full_messages.to_sentence}"
+      render :edit
+    elsif @merchant.update!(merchant_params)
+     flash[:notice] = "Merchant was successfully update!"
+     redirect_to admin_merchant_path(@merchant)
     end
   end
 
   def new
-    @merchant = Merchnat.new
+    @merchant = Merchant.new
   end
 
   def create
-    merchant = Merchant.new
-    merchant.id = Merchant.new_mechant_id
-    merchant.name = params[:name]
-    merchant.status = "disable"
-    merchant.save!
+    if params[:status]
+      @merchant = Merchant.find(params[:merchant])
+      @merchant.status = params[:status]
+    else
+      merchant = Merchant.new
+      merchant.id = Merchant.new_mechant_id
+      merchant.name = params[:merchant][:name]
+      merchant.status = params[:merchant][:status]
+      merchant.save!
 
-    redirect_to admin_merchants_path
-  end
-
-  def update_status
-    if params[:status] == 'enable'
-      @merchant.update!(status: 1)
-      redirect_to admin_merchants_path
-    elsif params[:status] == 'disable'
-      @merchant.update!(status: 0)
       redirect_to admin_merchants_path
     end
   end
 
   private
   def merchant_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:name, :status)
   end
 
   def find_merchant
