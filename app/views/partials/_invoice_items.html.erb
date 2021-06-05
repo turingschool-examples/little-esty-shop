@@ -1,6 +1,7 @@
 <div>
-  <h1> All Invoice Items</h1>
-  <table style='width: 100%; border-color: white;'>
+  <h1> All Invoice Items</h1><br>
+  <h3>Expected Total Revenue: <%= %></h3> <br>
+  <table class="invoice-items"style='width: 80%; border-color: white;'>
   <tr>
     <th>Item</th>
     <th>Quantity</th>
@@ -12,7 +13,11 @@
         <td><%= ii.item.name %></td>
         <td><%= ii.quantity %></td>
         <td><%= ii.unit_price %></td>
-        <td><%= ii.status %></td>
+        <td class="status-update"><%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+            <%= form.hidden_field :ii_id, :value => ii.id %>
+            <%= form.select :status, ["pending", "packaged", "shipped"], prompt: "#{ii.status}" %>
+            <%= form.submit 'Update Item Status' %></p>
+        <% end %></td>
       </tr>
     <% end %>
   </table>
