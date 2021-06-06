@@ -26,8 +26,8 @@ RSpec.describe Merchant, type: :feature do
       click_link("#{@merchant_1.name} Items Index")
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
-      # visit "/merchants/#{@merchant_1.id}/dashboard"
-      # expect(page).to have_link("#{@merchant_1.name} Invoices Index")
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+      expect(page).to have_link("#{@merchant_1.name} Invoices Index")
       # click_link("#{@merchant_1.name} Invoices Index")
       # expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     end
