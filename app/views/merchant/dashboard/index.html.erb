@@ -14,6 +14,10 @@
 <div class="fifty_fifty">
   <div>
     <h3 class="small_title_wrapper">Items Ready to Ship</h3>
+    <% @ready_to_ship_items.each do |item| %>
+      <p><%= item.name %></p>
+      <p><%= link_to @invoice_to_ship, "/merchants/#{@merchant.id}/invoices/#{@invoice_to_ship}" %></p>
+    <% end %>
   </div>
 
   <div>

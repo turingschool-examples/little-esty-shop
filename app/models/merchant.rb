@@ -1,6 +1,5 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
-  #status?
 
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
@@ -9,13 +8,13 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :tems
 
   def self.top_five_by_successful_transaction
-    joins(:invoices, :transactions, :invoice_items).group(:id).select('merchants.*,sum(invoice_items.quantity*invoice_items.unit_price) as total_revenue').where('transactions.result
-  = ?', 0).order(total_revenue: :desc).limit(5)
+    joins(:invoices, :transactions, :invoice_items)
+    .group(:id)
+    .select('merchants.*,sum(invoice_items.quantity*invoice_items.unit_price) as total_revenue')
+    .where('transactions.result = ?', 0)
+    .order(total_revenue: :desc)
+    .limit(5)
   end
-
-  # def top_5
-  #   items.order('unit_price DESC').limit(5)
-  # end
 
   def top_5
     items.joins(:transactions)
@@ -54,10 +53,6 @@ class Merchant < ApplicationRecord
       .order(count: :desc)
       .limit(5)
   end
-
-  # def date
-  #   Date.parse(updated_at).strftime("%m/%d/%Y")
-  # end
 
 end
 #
