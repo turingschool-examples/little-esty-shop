@@ -10,5 +10,8 @@ class Invoice < ApplicationRecord
 
   def self.unshipped
     joins(:invoice_items).group(:id).where.not(invoice_items: {status: 2}).order(:id)
+
+  def convert_create_date
+    self.created_at.strftime("%A, %B %d, %Y")
   end
 end
