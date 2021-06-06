@@ -26,18 +26,18 @@ RSpec.describe 'merchant dashboard' do
     @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id)
     @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id)
 
-    @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 1, invoice_id: @invoice_1.id, item_id: @item_1.id)
+    @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 2, invoice_id: @invoice_1.id, item_id: @item_1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id)
-    @invoice_item_3 = InvoiceItem.create!(quantity: 4, unit_price: 19.4, status: 1, invoice_id: @invoice_2.id, item_id: @item_3.id)
-    @invoice_item_4 = InvoiceItem.create!(quantity: 1, unit_price: 12.2, status: 1, invoice_id: @invoice_2.id, item_id: @item_4.id)
-    @invoice_item_5 = InvoiceItem.create!(quantity: 2, unit_price: 10.4, status: 1, invoice_id: @invoice_2.id, item_id: @item_2.id)
+    @invoice_item_3 = InvoiceItem.create!(quantity: 4, unit_price: 19.4, status: 2, invoice_id: @invoice_2.id, item_id: @item_3.id)
+    @invoice_item_4 = InvoiceItem.create!(quantity: 1, unit_price: 12.2, status: 2, invoice_id: @invoice_2.id, item_id: @item_4.id)
+    @invoice_item_5 = InvoiceItem.create!(quantity: 2, unit_price: 10.4, status: 2, invoice_id: @invoice_2.id, item_id: @item_2.id)
     @invoice_item_6 = InvoiceItem.create!(quantity: 7, unit_price: 15.3, status: 1, invoice_id: @invoice_3.id, item_id: @item_5.id)
-    @invoice_item_7 = InvoiceItem.create!(quantity: 6, unit_price: 10.4, status: 1, invoice_id: @invoice_3.id, item_id: @item_3.id)
+    @invoice_item_7 = InvoiceItem.create!(quantity: 6, unit_price: 10.4, status: 2, invoice_id: @invoice_3.id, item_id: @item_3.id)
     @invoice_item_8 = InvoiceItem.create!(quantity: 3, unit_price: 19.4, status: 1, invoice_id: @invoice_4.id, item_id: @item_3.id)
     @invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_5.id)
-    @invoice_item_10 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_6.id, item_id: @item_6.id)
+    @invoice_item_10 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_6.id, item_id: @item_6.id)
     @invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_1.id)
-    @invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_2.id)
+    @invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_4.id, item_id: @item_2.id)
   end
 
   it 'shows the name of the merchant in question' do
@@ -96,5 +96,30 @@ RSpec.describe 'merchant dashboard' do
     end
 
     expect(page).to have_no_content("#{@customer_6.num_transactions_by_merchant}")
+  end
+
+  it 'has a section to display all items that have been packaged but not yet shipped' do
+    visit "/merchants/#{@merchant.id}/dashboard"
+
+    expect(page).to have_content("Items Ready to Ship:")
+    expect(page).to have_content("#{@invoice_item_2.item_name}")
+    expect(page).to have_content("#{@invoice_item_8.item_name}")
+    expect(page).to have_content("#{@invoice_item_9.item_name}")
+    expect(page).to have_content("#{@invoice_item_11.item_name}")
+
+  end
+
+  it 'does not show items that have been shipped' do
+    visit "/merchants/#{@merchant.id}/dashboard"
+
+    expect(page).to have_no_content("#{@invoice_item_4.item_name}")
+    expect(page).to have_no_content("#{@invoice_item_6.item_name}")
+  end
+
+  it 'has the invoice id of the item listed and it is a link to the invoice show page' do
+    visit "/merchants/#{@merchant.id}/dashboard"
+
+    expect(page).to have_link("#{@invoice_1.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
+    expect(page).to have_no_link("#{@invoice_6.id}")
   end
 end
