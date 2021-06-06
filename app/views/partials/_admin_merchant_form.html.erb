@@ -1,13 +1,9 @@
   <%= bootstrap_form_with(model: [:admin, @merchant], local: true) do |f| %>
         <%= f.text_field :name %><br>
-          <% if @merchant.id.nil? %>
-            <%= f.radio_button(:enabled, true, checked = true, style: "display: none;") %><br>
-          <% else %>
             <% if @merchant.enabled == true %>
               <%= f.select :enabled, options_for_select([['Yes', true], ['No', false]]) %>
             <% else %>
               <%= f.select :enabled, options_for_select([['No', false], ['Yes', true]]) %>
             <% end %><br><br>
-          <% end %>
         <%= submit_tag %>
       <% end %>
