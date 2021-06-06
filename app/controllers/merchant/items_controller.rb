@@ -18,7 +18,7 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def new
-    # @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:id])
   end
 
   def create
@@ -27,11 +27,32 @@ class Merchant::ItemsController < ApplicationController
     redirect_to "/merchants/#{@merchant.id}/items"
   end
 
-  private
-  def item_params
-    params.permit(:name, :description, :unit_price, :status)
+  def show
+    @item = Item.where(
+      'merchant_id = ? AND id = ?',
+      params[:merchant_id], params[:item_id]
+    ).first
   end
 
+  def edit
+  end
 
+  def update
+    item = Item.where(
+      'merchant_id = ? AND id = ?',
+      params[:merchant_id],
+      params[:item_id]
+    ).first
 
+    item.update(item_params)
+
+    redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}"
+    # binding.pry 
+    flash[:notice] = "Successfully updated"
+  end
+
+  private
+  def item_params
+    params.permit(:name, :description, :unit_price, :merchant_id, :status)
+  end
 end
