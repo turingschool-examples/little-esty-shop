@@ -14,9 +14,9 @@ RSpec.describe 'Merchant invoice show page' do
     @customer = Customer.create!(first_name: 'Joey', last_name: 'Ondricka') 
     @invoice = Invoice.create!(customer_id: @customer.id, status: 'completed')
     @invoice_2 = Invoice.create!(customer_id: @customer.id, status: 'completed')
-    InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 3, unit_price: 1200, status: 'packaged')
-    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice.id, quantity: 10, unit_price: 1000, status: 'packaged')
-    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_2.id, quantity: 12, unit_price: 200, status: 'packaged')
+    InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 3, unit_price: 1200, status: 1)
+    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice.id, quantity: 10, unit_price: 1000, status: 1)
+    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_2.id, quantity: 12, unit_price: 200, status: 1)
   end
  
   describe 'display' do

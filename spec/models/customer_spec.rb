@@ -42,12 +42,12 @@ RSpec.describe Customer do
         @invoice_6 = Invoice.create!(customer_id: @customer_5.id, status: 'completed')
         @invoice_7 = Invoice.create!(customer_id: @customer_6.id, status: 'completed')
 
-        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 'packaged')
-        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_2.id, quantity: 539, unit_price: 13635, status: 'packaged')
-        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_3.id, quantity: 539, unit_price: 13635, status: 'packaged')
-        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_4.id, quantity: 539, unit_price: 13635, status: 'packaged')
-        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_5.id, quantity: 539, unit_price: 13635, status: 'packaged')
-        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_6.id, quantity: 539, unit_price: 13635, status: 'packaged')
+        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 539, unit_price: 13635, status: 1)
+        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_2.id, quantity: 539, unit_price: 13635, status: 1)
+        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_3.id, quantity: 539, unit_price: 13635, status: 1)
+        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_4.id, quantity: 539, unit_price: 13635, status: 1)
+        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_5.id, quantity: 539, unit_price: 13635, status: 1)
+        InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice_6.id, quantity: 539, unit_price: 13635, status: 1)
         
         @invoice.transactions.create!(credit_card_number: 1322556767, credit_card_expiration_date: nil,result: 'success')
         @invoice.transactions.create!(credit_card_number: 1322556768, credit_card_expiration_date: nil,result: 'success')
