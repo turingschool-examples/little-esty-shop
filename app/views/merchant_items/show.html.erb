@@ -1,4 +1,0 @@
-<h1><%= @item.name %></h1>
-<h3>Description: <%= @item.description %></h3>
-<h3>Current Selling Price: <%= @item.unit_price %></h3>
-<%= link_to "Update #{@item.name}", "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}/edit?name=#{@item.name}&&description=#{@item.description}&&unit_price=#{@item.unit_price}", method: :get, local: true %>
