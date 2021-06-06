@@ -15,10 +15,10 @@
 <% end %><br>
 
 <h3>Incomplete Invoices</h3>
-<% @invoices.each do |invoice| %>
+<% @unshipped_invoices.each do |invoice| %>
   <section id="incomplete-invoices-<%= invoice.id %>">
     <ol>
-      <p><%= link_to "#{invoice.unshipped}", admin_invoice_path(:admin, invoice) %></p>
+      <p><%= link_to "#{invoice.id}", admin_invoice_path(:admin, invoice) %></p>
     </ol>
   </section>
 <% end %>
