@@ -19,7 +19,7 @@
       <p>Quantity:<%= invoice_item.quantity %></p>
       <p>Unit Price:<%= invoice_item.unit_price %></p>
       <p>Status:<%= invoice_item.status %></p>
-      <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch do |form| %>
+      <%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch do |form| %>
         <%= form.select :status, [["Pending", 0], ["Packaged", 1], ["Shipped"], 2], selected: invoice_item.status_for_view %>
         <%= form.submit 'Update Item Status' %>
       <% end %>

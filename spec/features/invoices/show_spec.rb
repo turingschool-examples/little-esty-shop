@@ -56,7 +56,7 @@ RSpec.describe 'invoice show page' do
       click_button('Update Item Status')
     end
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
-    within('Status:') do
+    within("##{@invoice_item_1.id}") do
       expect(page).to have_content('Shipped')
     end
   end
