@@ -52,4 +52,36 @@ RSpec.describe 'Admin Merchants Show Page' do
 
     expect(page).to have_content(@merchant_1.name)
   end
+
+  it 'has a link to update the merchant' do
+    visit "/admin/merchants/#{@merchant_1.id}"
+
+    expect(page).to have_link("Update #{@merchant_1.name}")
+  end
+
+  it 'takes you to a form to update the merchant' do
+    visit "/admin/merchants/#{@merchant_1.id}"
+
+    click_on "Update #{@merchant_1.name}"
+
+    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
+  end
+
+  it 'has a form' do
+    visit "/admin/merchants/#{@merchant_1.id}/edit"
+
+    expect(page).to have_content('Name')
+  end
+
+  it 'updates the merchant' do
+    visit "/admin/merchants/#{@merchant_1.id}/edit"
+
+    fill_in :name, with: 'Huey'
+
+    click_on 'Update Merchant'
+
+    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+    expect(page).to have_content('Huey')
+    expect(page).to have_content('Successfully Updated')
+  end
 end
