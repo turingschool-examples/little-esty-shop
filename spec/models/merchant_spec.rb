@@ -87,7 +87,7 @@ RSpec.describe Merchant, type: :model do
   describe 'instance methods' do
     describe '#merchant_best_day' do
       it "shows top merchants best day" do
-        expect(@merchant6.merchant_best_day).to eq("06/04/2021")
+        expect(@merchant6.merchant_best_day).to eq("06/06/2021")
 
         expect(@merchant6.merchant_best_day).to_not eq("06/03/2021")
         expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
