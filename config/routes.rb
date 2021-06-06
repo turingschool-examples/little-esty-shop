@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   get "/merchants/:id/items", to: "merchant/items#index"
   get "/merchants/:id/invoices",  to: "merchant/invoices#index"
 
-  get '/merchants/:merchant_id/items', to: 'merchant/items#index'
-  get '/merchants/:merchant_id/items/new', to: 'merchant_items#new'
-  post '/merchants/:merchant_id/items', to: 'merchant/items#create'
+  # get '/merchants/:id/items', to: 'merchant/items#index'
+  get '/merchants/:id/items/new', to: 'merchant/items#new'
+  post '/merchants/:id/items', to: 'merchant/items#create'
 
   get '/admin', to: 'admin#index'
 
@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   get '/admin/invoices/:invoice_id', to: 'admin/invoices#show'
 
 
-  get '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#show'
-  get '/merchants/:merchant_id/items/:item_id/edit', to: 'merchant_items#edit'
-  patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update', as: 'item'
+  get '/merchants/:merchant_id/items/:item_id', to: 'merchant/items#show'
+  get '/merchants/:merchant_id/items/:item_id/edit', to: 'merchant/items#edit'
+  patch '/merchants/:merchant_id/items/:item_id', to: 'merchant/items#update', as: 'item'
   get '/merchants/:merchant_id/invoices/:invoice_id', to: 'merchant/invoices#show'
   patch '/merchants/:merchant_id/invoices/:invoice_id', to: 'merchant/invoices#show'
-  patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
+  patch '/merchants/:merchant_id/items/:item_id', to: 'merchant/items#update'
 end
