@@ -45,8 +45,6 @@ class Merchant < ApplicationRecord
   end
 
 end
-
-Merchant.joins(:invoices, :transactions, :invoice_items).group('invoice_items.invoice_id').select('merchants.*, invoice.*, sum(invoice_items.quantity*invoice_items.unit_price) as total_revenue').where('transactions.result = ?', 0).order(total_revenue: :desc).limit(5)
 #
 # Item.joins(:transactions).select('items.id', 'sum(invoice_items.quantity * invoice_items.unit_price) as revenue', 'transactions.result').where("transactions.result = 'success'").group('items.id').group('transactions.result').where(:merchant_id => 1).order('revenue DESC').limit(5)
 
