@@ -15,7 +15,7 @@
         <td><%= number_to_currency(ii.unit_price) %></td>
         <td class="status-update"><%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
             <%= form.hidden_field :ii_id, :value => ii.id %>
-            <%= form.select :status, ["pending", "packaged", "shipped"], prompt: "#{ii.status}" %>
+            <%= form.select :status, ["pending", "packaged", "shipped"], value: "#{ii.status}" %>
             <%= form.submit 'Update Item Status' %></p>
         <% end %></td>
       </tr>
