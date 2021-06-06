@@ -1,4 +1,59 @@
-<h2><%= "#{@merchant.name}'s Items" %></h2>
-<% @items.each do |item| %>
-<%= item.name %>
-<% end %>
+<div class="">
+  <h1 class="little_esty_shop">Little Esty Shop</h1>
+</div>
+
+<div class="nav_bar_wrapper">
+  <h1 class="title_name"><%= @merchant.name %></h1>
+  <div class="nav_bar_links">
+    <p class="nav_bar_links_inline"><%= button_to "Dashboard", "/merchants/#{@merchant.id}/dashboard", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Items", "/merchants/#{@merchant.id}/items", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %></p>
+  </div>
+</div>
+
+
+
+<h2 class="title_wrapper">My Items</h2>
+<%= button_to "Add a New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+<div class="fifty_fifty">
+  <div>
+    <h3> Disabled Items </h3>
+    <% @items.each do |item| %>
+      <% if item.status == "disable" %>
+          <%= item.name %>
+          <%= button_to "Enable",
+            "/merchants/#{@merchant.id}/items",
+            method: :get, params: {change_to_enable: item},
+            form: {style: 'display:inline-block;'} %><br><br>
+        <% end %>
+    <% end %>
+
+    <h3> Enabled Items </h3>
+    <% @items.each do |item| %>
+      <% if item.status == "enable" %>
+        <%= item.name %>
+        <%= button_to "Disable",
+          "/merchants/#{@merchant.id}/items",
+          method: :get, params: {change_to_disable: item},
+          form: {style: 'display:inline-block;'} %><br><br>
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <div>
+    <h3 style="text-align: center"> Top Items </h3>
+    <% counter = 1 %>
+    <% @top_items.each do |item| %><br/><br/>
+      <% @top_days_per_merchant.each do |item_day| %>
+        <% if item.name == item_day.name %>
+          <%= counter %>. <%= item.name %>
+          <%= (item.revenue.to_f) /100%><br/>
+          <p style= "margin: 0">Top selling date for <%= item_day.name %> was <%= Date.parse(item_day.updated_at.to_s).strftime("%m/%d/%Y")%></p><br/>
+        <% end %>
+      <% end %>
+      <% counter += 1 %>
+    <% end %>
+  </div>
+
+</div>
