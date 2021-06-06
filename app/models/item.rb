@@ -19,11 +19,18 @@ class Item < ApplicationRecord
     where(status: 0)
   end
 
-  def self.top_popular_items
-    joins(:invoice_items, :transactions)
-    .where('result = 1')
-    .group(:id)
-    .order("sum(invoice_items.quantity * invoice_items.unit_price)" 'desc')
-    .limit(5)
-  end
+  # def self.top_popular_items
+  #   joins(invoices: [:invoice_items, :transactions])
+  #   .where('transactions.result = ?', 1)
+  #   .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue_generated")
+  #   .group(:id)
+  #   .order('total_revenue_generated desc')
+  #   .limit(5)
+  # end
+  #
+  #   # joins(:invoice_items, :transactions)
+  #   # .where('result = 1')
+  #   # .group(:id)
+  #   # .order("sum(invoice_items.quantity * invoice_items.unit_price)" 'desc')
+  #   # .limit(5)
 end
