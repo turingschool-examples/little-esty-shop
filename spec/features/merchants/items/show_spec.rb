@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "items show page" do
   before :each do
-    @merchant_1 = Merchant.find(1)
-    @item_1 = Item.find(1)
+    @merchant_1 = Merchant.first
+    @item_1 = Item.first
   end
 
   it "displays the item and its attributes" do

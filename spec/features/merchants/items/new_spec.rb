@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'create item' do
   before :each do
-    @merchant_1 = Merchant.find(1)
+    @merchant_1 = Merchant.first
   end
 
   it 'creates a new item' do
