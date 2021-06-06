@@ -28,16 +28,18 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def show
-  @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:id])
   end
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
-    merchant.save
     if params.include? :index_redirect
+      merchant.toggle(:enabled)
+      merchant.save
       redirect_to action: 'index'
     else
+      merchant.update(merchant_params)
+      merchant.save
       flash[:notice] = "You have successfully updated this merchant!"
       redirect_to action: 'show', id: params[:id]
     end
