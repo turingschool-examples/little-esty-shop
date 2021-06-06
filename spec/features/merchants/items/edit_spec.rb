@@ -2,13 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'updates item' do
   before :each do
-    @merchant_1 = Merchant.create!( name:"Clothing")
-
-    @item_1       = @merchant_1.items.create!( name:"Boots",
-                                        description: "Leather",
-                                        unit_price: 50,
-                                        enabled: true
-                                      )
+    @merchant_1 = Merchant.first
+    @item_1 = Item.first
   end
 
   it 'can update just the name of the item' do
@@ -23,6 +18,5 @@ RSpec.describe 'updates item' do
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
     expect(page).to have_content('Sneakers')
-    #expect flash message
   end
 end

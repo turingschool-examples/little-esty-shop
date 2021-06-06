@@ -35,10 +35,10 @@ task load_test_customers: :environment do
     t.updated_at = row[:updated_at]
     t.save
     if t.save == false
-      puts "Failed to add Customer ##{row[:id]} to database"
+      print "Failed to add Customer ##{row[:id]} to database"
     end
   end
-  puts "Customer CSV Database Upload Complete"
+  puts "Customer CSV Database Upload Complete\n"
 end
 
 task load_test_invoice_items: :environment do
@@ -55,10 +55,10 @@ task load_test_invoice_items: :environment do
     t.updated_at = row[:updated_at]
     t.save
     if t.save == false
-      puts "Failed to add InvoiceItem ##{row[:id]} to database"
+      print "Failed to add InvoiceItem ##{row[:id]} to database"
     end
   end
-  puts "InvoiceItem CSV Database Upload Complete"
+  puts "InvoiceItem CSV Database Upload Complete\n"
 end
 
 task load_test_items: :environment do
@@ -68,16 +68,15 @@ task load_test_items: :environment do
     t.name = row[:name]
     t.description = row[:description]
     t.unit_price = row[:unit_price].to_i
-    t.enabled = row[:enabled]
     t.merchant_id = row[:merchant_id]
     t.created_at = row[:created_at]
     t.updated_at = row[:updated_at]
     t.save
     if t.save == false
-      puts "Failed to add Item ##{row[:id]} to database"
+      print "Failed to add Item ##{row[:id]} to database"
     end
   end
-  puts "Item CSV Database Upload Complete"
+  puts "Item CSV Database Upload Complete\n"
 end
 
 task load_test_merchants: :environment do
@@ -89,10 +88,10 @@ task load_test_merchants: :environment do
     t.updated_at = row[:updated_at]
     t.save
     if t.save == false
-      puts "Failed to add Merchant ##{row[:id]} to database"
+      print "Failed to add Merchant ##{row[:id]} to database"
     end
   end
-  puts "Merchant CSV Database Upload Complete"
+  puts "Merchant CSV Database Upload Complete\r"
 end
 
 task load_test_transactions: :environment do
@@ -107,10 +106,10 @@ task load_test_transactions: :environment do
     t.updated_at = row[:updated_at]
     t.save
     if t.save == false
-      puts "Failed to add Transaction ##{row[:id]} to database"
+      print "Failed to add Transaction ##{row[:id]} to database"
     end
   end
-  puts "Transaction CSV Database Upload Complete"
+  puts "Transaction CSV Database Upload Complete\n"
 end
 
 task load_test_invoices: :environment do
@@ -123,8 +122,8 @@ task load_test_invoices: :environment do
     t.updated_at = row[:updated_at]
     t.save
     if t.save == false
-      puts "Failed to add Invoices ##{row[:id]} to database"
+      print "Failed to add Invoices ##{row[:id]} to database"
     end
   end
-  puts "Invoice CSV Database Upload Complete"
+  puts "Invoice CSV Database Upload Complete\n"
 end

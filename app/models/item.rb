@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
   belongs_to :merchant
+  enum enabled: [:enabled, :disabled]
 
   def self.not_yet_shipped
     joins(:invoices).select("items.name, invoices.id as invoice_id, invoices.created_at as invoice_date").where("invoice_items.status = 1 ").order("invoice_date")

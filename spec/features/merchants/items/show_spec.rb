@@ -2,12 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "items show page" do
   before :each do
-    @merchant_1 = Merchant.create!( name:"Clothing")
-    @item_1       = @merchant_1.items.create!( name:"Boots",
-                                        description: "Leather",
-                                        unit_price: 50,
-                                        enabled: true
-                                      )
+    @merchant_1 = Merchant.first
+    @item_1 = Item.first
   end
 
   it "displays the item and its attributes" do
