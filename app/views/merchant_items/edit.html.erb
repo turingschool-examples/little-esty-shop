@@ -1,9 +1,0 @@
-<%= form_with url: "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}", method: :patch, local: true do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name, value: params[:name] %>
-<%= f.label :description %>
-<%= f.text_field :description, value: params[:description] %>
-<%= f.label :unit_price, 'Current Selling Price' %>
-<%= f.number_field :unit_price, value: params[:unit_price].to_i %>
-<%= f.submit 'Submit' %>
-<% end %>
