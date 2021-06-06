@@ -29,5 +29,21 @@ RSpec.describe Merchant, type: :feature do
       click_link("#{@merchant_1.name} Invoices Index")
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     end
+
+    #     Merchant Dashboard Statistics - Favorite Customers
+    #
+    # As a merchant,
+    # When I visit my merchant dashboard
+    # Then I see the names of the top 5 customers
+    # who have conducted the largest number of successful transactions with my merchant
+    # And next to each customer name I see the number of successful transactions they have
+    # conducted with my merchant
+
+    it "should contain links to merchant items index and merchant invoices index" do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+      expect(page).to have_content("Top 5 Customer")
+
+    end
+
   end
 end
