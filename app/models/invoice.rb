@@ -14,4 +14,13 @@ class Invoice < ApplicationRecord
       .order(created_at: :desc)
       .distinct
   end
+
+  def self.expected_invoice_revenue(params)
+    joins(:invoice_items)
+      .group(:id)
+      .select('sum(invoice_items.quantity*invoice_items.unit_price) as invoice_revenue')
+      .where('invoice_items.invoice_id = ?', params)
+  end
 end
+
+# Invoice.joins(:invoice_items).group(:id).select('invoices.*,sum(invoice_items.quantity*invoice_items.unit_price) as invoice_revenue').where('invoice_items.invoice_id = ?', params)
