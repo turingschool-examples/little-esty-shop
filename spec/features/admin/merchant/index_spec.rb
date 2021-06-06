@@ -103,4 +103,9 @@ RSpec.describe 'Admin Merchant Index Page' do
       expect(page).to have_button("Enable #{@merchant_2.name}")
     end
   end
+  it 'shows each merchant of the top fives best day' do
+    within('#top_five') do
+      expect(page).to have_content(Date.today)
+    end
+  end
 end

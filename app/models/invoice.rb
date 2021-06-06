@@ -4,6 +4,7 @@ class Invoice < ApplicationRecord
   belongs_to :customer
   has_many :invoice_items, dependent: :destroy
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
   has_many :transactions, dependent: :destroy
 
   enum status: ['in progress', 'completed', 'cancelled']
@@ -21,6 +22,16 @@ class Invoice < ApplicationRecord
       .select('sum(invoice_items.quantity*invoice_items.unit_price) as invoice_revenue')
       .where('invoice_items.invoice_id = ?', params)
   end
-end
 
+  def self.top_five_best_day(merchant_id)
+    joins(:invoice_items, :merchants, :transactions)
+      .group('invoices.id, merchants.id')
+      .select('invoices.*, merchants.*, sum(invoice_items.quantity*invoice_items.unit_price) as total_revenue')
+      .where('transactions.result = ?', 0)
+      .order(total_revenue: :desc)
+      .where('merchants.id = ?', merchant_id)
+      .first
+      .created_at
+  end
+end
 # Invoice.joins(:invoice_items).group(:id).select('invoices.*,sum(invoice_items.quantity*invoice_items.unit_price) as invoice_revenue').where('invoice_items.invoice_id = ?', params)
