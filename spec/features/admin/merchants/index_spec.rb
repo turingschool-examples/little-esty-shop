@@ -20,11 +20,44 @@ RSpec.describe 'merchants index page', type: :feature do\
       expect(page).to have_content('Enabled Merchants')
       expect(page).to have_content('Disabled Merchants')
 
-      within all(".admin-merchant-index").last
+      within all(".admin-merchant-index").last do
         expect(page).to have_content("Big Bird")
+      end
 
-      within all(".admin-merchant-index").first
-      expect(page).to have_content("Fahey-Stiedemann")
+      within all(".admin-merchant-index").first do
+        expect(page).to have_content("Fahey-Stiedemann")
+      end
+    end
+    it 'tells you the top five merchants, their revenue, and best day' do
+      visit '/admin/merchants'
+
+      expect(page).to have_content('Top 5 Merchants')
+
+      within "#top-five-merchants > tr:nth-child(2)" do
+        expect(page).to have_content('Terry-Moore')
+        expect(page).to have_content('$31156160')
+        expect(page).to have_content('2012-03-26')
+      end
+      within "#top-five-merchants > tr:nth-child(3)" do
+        expect(page).to have_content('Marvin Group')
+        expect(page).to have_content('$30536630')
+        expect(page).to have_content('2012-03-27')
+      end
+      within "#top-five-merchants > tr:nth-child(4)" do
+        expect(page).to have_content('Pacocha-Mayer')
+        expect(page).to have_content('$29776220')
+        expect(page).to have_content('2012-03-15')
+      end
+      within "#top-five-merchants > tr:nth-child(5)" do
+        expect(page).to have_content('Crona LLC')
+        expect(page).to have_content('$28878790')
+        expect(page).to have_content('2012-03-07')
+      end
+      within "#top-five-merchants > tr:nth-child(6)" do
+        expect(page).to have_content('Reynolds Inc')
+        expect(page).to have_content('$28499290')
+        expect(page).to have_content('2012-03-23')
+      end
     end
   end
 
