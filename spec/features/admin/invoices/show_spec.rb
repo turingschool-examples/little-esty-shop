@@ -53,5 +53,12 @@ RSpec.describe 'Admin Invoice Show' do
         expect(page).to have_content(@check_second_invoice_item.status)
       end
     end
+
+    it 'displays total revenue of a specific invoce' do
+      visit "/admin/invoices/#{@invoice_1.id}"
+      expected = Invoice.expected_invoice_revenue(@invoice_1)[0].invoice_revenue.to_f / 100
+
+      expect(page).to have_content(expected)
+    end
   end
 end
