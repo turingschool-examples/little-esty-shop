@@ -2,11 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'invoice index page' do
   before(:each) do
-    # Customer.destroy_all
-    # Merchant.destroy_all
-    # Item.destroy_all
-    # Invoice.destroy_all
-    # InvoiceItem.destroy_all
     @merchant = Merchant.create!(name: 'AnnaSellsStuff')
     @antimerchant = Merchant.create!(name: 'TheOtherOne')
     @customer = Customer.create!(first_name: 'John', last_name: 'Smith')
@@ -31,21 +26,30 @@ RSpec.describe 'invoice index page' do
     @invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_5.id)
   end
 
-  it 'shows all of the invoices that include at least one of the merchants items' do
+  it 'shows all of the invoices that include at least one of the merchants items and has a link on each invoice id to the invoice show page' do
     visit "/merchants/#{@merchant.id}/invoices"
 
-    expect(page).to have_content("#{@invoice_1}")
-    expect(page).to have_content("#{@invoice_2}")
-    expect(page).to have_content("#{@invoice_3}")
-    expect(page).to have_no_content("#{@invoice_4}")
-  end
-
-  xit 'has a link on each invoice id to the invoice show page' do
-    visit "/merchants/#{@merchant.id}/invoices"
+    expect(page).to have_content("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_2.id}")
+    expect(page).to have_content("#{@invoice_3.id}")
 
     expect(page).to have_link("#{@invoice_1.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
     expect(page).to have_link("#{@invoice_2.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_2.id}")
     expect(page).to have_link("#{@invoice_3.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_3.id}")
     expect(page).to have_no_link("#{@invoice_4.id}")
+  end
+
+  it 'does not show invoices that only have items that belong to other merchants' do
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    expect(page).to have_no_content("#{@invoice_4.id}")
+  end
+
+  it 'redirects the user to the invoice show page when they click the id of the invoice' do
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    click_link("#{@invoice_1.id}")
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
   end
 end
