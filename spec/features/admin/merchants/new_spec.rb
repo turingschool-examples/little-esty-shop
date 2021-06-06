@@ -12,18 +12,21 @@ RSpec.describe 'Admin Merchants New Page' do
   end
 
   it 'I can create a new merchant' do
+    @merchant = Merchant.new(name: 'The pope', status: 1)
+
     expect(current_path).to eq(new_admin_merchant_path)
     expect(page).to have_field('Name')
     expect(page).to_not have_link('The pope')
 
     fill_in 'Name', with: 'The pope'
-    click_button 'Submit'
+    select "#{@merchant.status}"
+    click_button 'Create Merchant'
 
     expect(current_path).to eq(admin_merchants_path)
 
-    within ".disbaled-merchants" do
+    within ".enabled-merchants" do
       expect(page).to have_link('The pope')
-      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
     end
   end
 end

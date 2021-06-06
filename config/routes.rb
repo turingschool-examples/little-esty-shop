@@ -14,4 +14,8 @@ Rails.application.routes.draw do
     resources :invoices
     resources :merchants
   end
+
+  scope module: 'admin' do
+    resources :dashboard, path: 'admin'
+  end
 end
