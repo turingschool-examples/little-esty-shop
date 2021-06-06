@@ -12,6 +12,8 @@ RSpec.describe 'invoice show page' do
     @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 1, invoice_id: @invoice_1.id, item_id: @item_1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id)
     @invoice_item_3 = InvoiceItem.create!(quantity: 4, unit_price: 19.4, status: 1, invoice_id: @invoice_1.id, item_id: @item_3.id)
+    @transaction_1 = Transaction.create!(credit_card_number: 1234432198766789, result: 1, invoice_id: @invoice_1.id)
+
   end
 
   it 'displays the invoice id, status, created at, and customer name' do
@@ -45,7 +47,8 @@ RSpec.describe 'invoice show page' do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Total Revenue from this Invoice:")
-    expect(page).to have_content("#{Invoice.total_revenue_by_merchant(@merchant.id)}")
+    expect(page).to have_content("#{Invoice.total_revenue_by_merchant(merchant_id)}")
+    save_and_open_page
   end
 
   it 'can select a new status for the invoice item, submit the change, and show the new status when submitted' do
@@ -55,6 +58,7 @@ RSpec.describe 'invoice show page' do
       page.select('Shipped', from: 'status')
       click_button('Update Item Status')
     end
+
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
     within("##{@invoice_item_1.id}") do
       expect(page).to have_content('Shipped')
