@@ -23,8 +23,8 @@
     <% @customers.each do |customer| %>
         <% if top_customer.customer_id == customer.id %>
           <%= counter %>. <%= customer.first_name %>
-          <%= customer.last_name %></br>
-          <p> Successful Transactions <%= top_customer.count %></p></br>
+          <%= customer.last_name %><br/>
+          <p> Successful Transactions <%= top_customer.count %></p><br/>
           <% counter += 1 %>
         <% end %>
       <% end %>
