@@ -1,12 +1,37 @@
+<div class="">
+  <h1 class="little_esty_shop">Little Esty Shop</h1>
+</div>
 
-<h2><%= "#{@merchant.name}"%></h2>
-<p><%= link_to "#{@merchant.name} Items Index", "/merchants/#{@merchant.id}/items" %></p>
-<p><%= link_to "#{@merchant.name} Invoices Index", "/merchants/#{@merchant.id}/invoices" %></p>
-<br>
-<h4>Items Ready to Ship</h4>
-<br>
-  <% @ready_to_ship_items.each do |item| %>
-  <p><%= item.name %></p>
-  <p><%= link_to @invoice_to_ship, "/merchants/#{@merchant.id}/invoices/#{@invoice_to_ship}" %></p>
-  <% end %>
-</ul>
+<div class="nav_bar_wrapper">
+  <h1 class="title_name"><%= @merchant.name %></h1>
+  <div class="nav_bar_links">
+    <p class="nav_bar_links_inline"><%= button_to "Dashboard", "/merchants/#{@merchant.id}/dashboard", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Items", "/merchants/#{@merchant.id}/items", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %></p>
+  </div>
+</div>
+
+<div class="fifty_fifty">
+  <div>
+    <h3 class="small_title_wrapper">Items Ready to Ship</h3>
+    <% @ready_to_ship_items.each do |item| %>
+      <p><%= item.name %></p>
+      <p><%= link_to @invoice_to_ship, "/merchants/#{@merchant.id}/invoices/#{@invoice_to_ship}" %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <h3 class="small_title_wrapper">Top 5 Customers </h3>
+    <% counter = 1 %>
+    <% @top_5_customers_array.each do |top_customer| %>
+    <% @customers.each do |customer| %>
+        <% if top_customer.customer_id == customer.id %>
+          <%= counter %>. <%= customer.first_name %>
+          <%= customer.last_name %><br/>
+          <p> Successful Transactions <%= top_customer.count %></p><br/>
+          <% counter += 1 %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
