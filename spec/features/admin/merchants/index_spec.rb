@@ -12,6 +12,20 @@ RSpec.describe 'merchants index page', type: :feature do\
         expect(page).to have_content(merchant.name)
       end
     end
+    it 'groups the merchants into an enables and disabled section' do
+      new_merchant = Merchant.create(name: 'Big Bird', enabled: false)
+
+      visit '/admin/merchants'
+
+      expect(page).to have_content('Enabled Merchants')
+      expect(page).to have_content('Disabled Merchants')
+
+      within all(".admin-merchant-index").last
+        expect(page).to have_content("Big Bird")
+
+      within all(".admin-merchant-index").first
+      expect(page).to have_content("Fahey-Stiedemann")
+    end
   end
 
   describe 'page functionality' do
@@ -36,6 +50,18 @@ RSpec.describe 'merchants index page', type: :feature do\
 
       visit '/admin/merchants'
       click_on 'Enable', match: :first
+
+      click_on 'Schroeder-Jerde'
+      expect(page).to have_content('Enabled')
+    end
+    it 'has a button that allows me to create a new merchant' do
+      visit '/admin/merchants'
+
+      expect(page).to have_button('Add a New Merchant')
+
+      click_button 'Add a New Merchant'
+
+      expect(current_path).to eq('/admin/merchants/new')
     end
   end
 end
