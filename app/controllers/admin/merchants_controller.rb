@@ -29,23 +29,27 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    if params[:status]
-      @merchant = Merchant.find(params[:merchant])
-      @merchant.status = params[:status]
-    else
       merchant = Merchant.new
       merchant.id = Merchant.new_mechant_id
       merchant.name = params[:merchant][:name]
       merchant.status = params[:merchant][:status]
-      merchant.save!
 
+      if merchant.save!
+        redirect_to admin_merchants_path
+    end
+  end
+
+  def update_merchant_status
+    @merchant = Merchant.find(params[:id])
+    @merchant.status = params[:status]
+    if @merchant.save!
       redirect_to admin_merchants_path
     end
   end
 
   private
   def merchant_params
-    params.require(:merchant).permit(:name, :status)
+    params.require(:merchant).permit(:name)
   end
 
   def find_merchant
