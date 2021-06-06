@@ -24,9 +24,7 @@ RSpec.describe 'Admin Merchants New Page' do
 
     expect(current_path).to eq(admin_merchants_path)
 
-    within ".enabled-merchants" do
-      expect(page).to have_link('The pope')
-      expect(page).to have_button('Disable')
-    end
+    expect(page).to have_link('The pope')
+    expect(page).to have_button('Disable')
   end
 end
