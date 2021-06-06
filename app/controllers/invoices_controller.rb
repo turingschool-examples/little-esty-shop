@@ -10,4 +10,8 @@ class InvoicesController < ApplicationController
     @customer = @invoice.customer
     @invoice_items = @invoice.invoice_items
   end
+
+  def update
+    binding.pry 
+  end
 end

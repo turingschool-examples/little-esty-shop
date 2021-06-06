@@ -10,4 +10,9 @@ class InvoiceItem < ApplicationRecord
   def item_name
     self.item.name
   end
+
+  def status_for_view
+    rev_statuses = {0 => 'Pending', 1 => 'Packaged', 2 => 'Shipped'}
+    rev_statuses[self.status]
+  end
 end

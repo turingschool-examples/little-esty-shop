@@ -10,4 +10,9 @@ class Invoice < ApplicationRecord
   def convert_create_date
     self.created_at.strftime("%A, %B %d, %Y")
   end
+
+  def status_for_view
+    rev_statuses = {0 => 'cancelled', 1 => 'in_progress', 2 => 'completed'}
+    rev_statuses[self.status]
+  end
 end

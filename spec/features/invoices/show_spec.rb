@@ -18,7 +18,7 @@ RSpec.describe 'invoice show page' do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("#{@invoice_1.id}")
-    expect(page).to have_content("#{@invoice_1.status}")
+    expect(page).to have_content("#{@invoice_1.status_for_view}")
     expect(page).to have_content("#{@invoice_1.convert_create_date}")
     expect(page).to have_content("#{@customer.first_name}")
     expect(page).to have_content("#{@customer.last_name}")
@@ -31,12 +31,12 @@ RSpec.describe 'invoice show page' do
     expect(page).to have_content("#{@item_1.name}")
     expect(page).to have_content("#{@invoice_item_1.quantity}")
     expect(page).to have_content("#{@invoice_item_1.unit_price}")
-    expect(page).to have_content("#{@invoice_item_1.status}")
+    expect(page).to have_content("#{@invoice_item_1.status_for_view}")
 
     expect(page).to have_content("#{@item_2.name}")
     expect(page).to have_content("#{@invoice_item_2.quantity}")
     expect(page).to have_content("#{@invoice_item_2.unit_price}")
-    expect(page).to have_content("#{@invoice_item_2.status}")
+    expect(page).to have_content("#{@invoice_item_2.status_for_view}")
 
     expect(page).to have_no_content("#{@item_3.name}")
   end
@@ -48,15 +48,16 @@ RSpec.describe 'invoice show page' do
     expect(page).to have_content("#{Invoice.total_revenue_by_merchant(@merchant.id)}")
   end
 
-  xit 'can select a new status for the invoice item, submit the change, and show the new status when submitted' do
+  it 'can select a new status for the invoice item, submit the change, and show the new status when submitted' do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
-    page.select('2', from: 'status')
-    click_button('Update Item Status')
-
+    within("##{@invoice_item_1.id}") do
+      page.select('Shipped', from: 'status')
+      click_button('Update Item Status')
+    end
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
     within('Status:') do
-      expect(page).to have_content('2')
+      expect(page).to have_content('Shipped')
     end
   end
 end
