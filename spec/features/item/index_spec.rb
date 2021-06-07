@@ -130,17 +130,11 @@ RSpec.describe 'items index page' do
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@item_5.name)
     end
+
+    it 'can list the most popluar day for each item' do
+      visit "/merchants/#{@merchant_2.id}/items"
+
+      expect(page).to have_content("#{@item_4.created_at.strftime("%m/%d/%Y")}")
+    end
   end
 end
-
-# As a merchant
-# When I visit my items index page
-# Then I see the names of the top 5 most popular items ranked by total revenue generated
-# And I see that each item name links to my merchant item show page for that item
-# And I see the total revenue generated next to each item name
-#
-# Notes on Revenue Calculation:
-#
-# Only invoices with at least one successful transation should count towards revenue
-# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
