@@ -8,8 +8,8 @@ RSpec.describe Merchant, type: :feature do
       @merchant_3 = Merchant.create!(name: "Caleb's California Catapults")
       @item_1 = @merchant_1.items.create!(name: "Twinkies", description: "Yummy", unit_price: 400)
       @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "in progress")
-      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: "pending")
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "In Progress")
+      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: "Pending")
     end
 
     it "should display name of merchant" do
