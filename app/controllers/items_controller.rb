@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
     @items = @merchant.items
     @disabled_items = @items.disable_items
     @enabled_items = @items.enable_items
+    @top_items = @items.top_popular_items
   end
 
   def show
@@ -38,8 +39,8 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
 
-    if @item.update!(item_params)
-      @item.save
+    @item.update!(item_params)
+    if @item.save
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
       flash[:notice] = "Item information has been successfully updated!"
     else
