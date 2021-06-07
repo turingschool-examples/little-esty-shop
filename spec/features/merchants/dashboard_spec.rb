@@ -10,6 +10,9 @@ RSpec.describe Merchant, type: :feature do
       @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
       
       @item_1 = @merchant_1.items.create!(name: "Twinkies", description: "Yummy", unit_price: 400)
+
+      @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
+      
       @item_2 = @merchant_1.items.create!(name: "Applesauce", description: "Yummy", unit_price: 400)
       @item_3 = @merchant_1.items.create!(name: "Milk", description: "Yummy", unit_price: 400)
       @item_4 = @merchant_1.items.create!(name: "Bread", description: "Yummy", unit_price: 400)
@@ -30,7 +33,7 @@ RSpec.describe Merchant, type: :feature do
       @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
       @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: 1)
 
-      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: "Pending")
+      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: 1)
       InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: 1500, status: 0)
       InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, quantity: 1, unit_price: 1500, status: 0)
       InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: 1500, status: 0)
@@ -65,6 +68,20 @@ RSpec.describe Merchant, type: :feature do
       expect(page).to have_button("My Invoices")
       click_button("My Invoices")
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
+    end
+
+    describe "should contain section for Items Ready to Ship" do
+      describe "and I see names of items ordered but not yet shipped" do
+        it "and invoice id next to each item is a link to merchant invoice show page" do
+          visit "/merchants/#{@merchant_1.id}/dashboard"
+          expect(page).to have_content("Items Ready to Ship")
+          #how to use within
+          expect(page).to have_content("#{@item_1.name}")
+          expect(page).to_not have_content("#{@item_2.name}")
+          # click_link("#{@invoice_1.id}")
+          # expect(page).to have_current_path("/merchants/#{@merchant_1.merchant_id}/invoices/#{@invoice_1.id}")
+        end
+      end
     end
 
     #     Merchant Dashboard Statistics - Favorite Customers
