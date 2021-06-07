@@ -9,9 +9,9 @@ RSpec.describe Invoice, type: :feature do
       @item_1 = @merchant_1.items.create!(name: "Zesty Zucchini", description: "Yummy", unit_price: 400)
       @item_2 = @merchant_1.items.create!(name: "Gnarly Garly", description: "Yum Yum Spicy", unit_price: 100)
       @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "in progress")
-      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 400, status: "packaged")
-      InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 200, status: "shipped")
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "In Progress")
+      InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 400, status: "Packaged")
+      InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 200, status: "Shipped")
     end
 
     describe "should display all invoices that include one or more of my merchant's items" do
