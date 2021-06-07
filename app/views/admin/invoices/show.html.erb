@@ -9,9 +9,15 @@
     <h2>Invoice #<%= @invoice.id %></h2><br>
     <section>
       <div>
-        <h4>Status: <%= @invoice.status %></h4><br>
+        <div style='display:flex;' name="Current Status">Status:
+          <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+            <%= f.select :status, ["In Progress", "Completed", "Cancelled"], value: @invoice.status %>
+            <%= f.submit "Update Invoice Status" %>
+          <% end %>
+        </div><br>
+        <div>Current Status: <%= @invoice.status %></div>
         <h4>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></h4>
-        <h4>Expected Invoice Revenue: <%= @invoice_revenue %></h4>
+        <h4>Expected Invoice Revenue: $<%= number_with_precision(@invoice_revenue, precision: 2, delimiter: ',') %></h4>
       </div><br>
       <div>
         <h4>Customer Info:</h4><br>
@@ -30,7 +36,7 @@
         <tr id="id-<%= invoice_item.id %>">
             <td><%= invoice_item.name %></td>
             <td><%= invoice_item.quantity %></td>
-            <td>$<%= invoice_item.convert_to_dollar %></td>
+            <td>$<%= number_with_precision(invoice_item.convert_to_dollar, precision: 2, delimiter: ',') %></td>
             <td><%= invoice_item.status %></td>
           <% end %>
         </tr>
