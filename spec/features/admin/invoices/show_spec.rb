@@ -12,10 +12,10 @@ RSpec.describe 'Admin Invoice Show' do
 
       @merchant_1 = Merchant.create!(name: 'Roald')
       @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 39434)
-      @item_2 = @merchant_1.items.create!(name: 'Lays', description: 'Deliciouio', unit_price: 8356)
+      @item_2 = @merchant_1.items.create!(name: 'Lays', description: 'Deliciousio', unit_price: 8356)
       @item_3 = @merchant_1.items.create!(name: 'Cadlee', description: 'Perfecto', unit_price: 9064)
 
-      InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0, quantity: 200, unit_price: 39434)
+      InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 1, quantity: 200, unit_price: 39434)
       InvoiceItem.create!(invoice: @invoice_1, item: @item_2, status: 1, quantity: 295, unit_price: 8356)
       InvoiceItem.create!(invoice: @invoice_1, item: @item_3, status: 2, quantity: 382, unit_price: 9064)
       InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2, quantity: 130, unit_price: 39434)
@@ -36,12 +36,13 @@ RSpec.describe 'Admin Invoice Show' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
       @check_first_invoice_item = InvoiceItem.find_invoice_items(@invoice_1).first
-
+# binding.pry
       within("#id-#{@check_first_invoice_item.id}") do
         expect(page).to have_content(@check_first_invoice_item.name)
         expect(page).to have_content(@check_first_invoice_item.quantity)
         expect(page).to have_content(@check_first_invoice_item.convert_to_dollar)
         expect(page).to have_content(@check_first_invoice_item.status)
+        # binding.pry
       end
 
       @check_second_invoice_item = InvoiceItem.find_invoice_items(@invoice_1)[0]
@@ -54,11 +55,30 @@ RSpec.describe 'Admin Invoice Show' do
       end
     end
 
-    it 'displays total revenue of a specific invoce' do
+    it 'displays total revenue of a specific invoice' do
       visit "/admin/invoices/#{@invoice_1.id}"
-      expected = Invoice.expected_invoice_revenue(@invoice_1)[0].invoice_revenue.to_f / 100
+      expected = (Invoice.expected_invoice_revenue(@invoice_1)[0].invoice_revenue.to_f / 100).to_s
 
-      expect(page).to have_content(expected)
+      expect(page).to have_content(expected.gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,"))
+    end
+
+    it 'displays a select field' do
+      visit "/admin/invoices/#{@invoice_1.id}"
+
+      page.has_select?('Update Invoice Status', options: [0, 1, 2])
+      expect(@invoice_1.status).to eq('In Progress')
+    end
+
+    it 'updates status after selection' do
+      visit "/admin/invoices/#{@invoice_1.id}"
+
+      expect(page).to have_content('In Progress')
+      page.select('Completed', from: :status)
+      click_button('Update Invoice Status')
+      expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+      expect(page).to have_content('Completed')
+      @invoice_1.reload
+      expect(@invoice_1.status).to eq('Completed')
     end
   end
 end
