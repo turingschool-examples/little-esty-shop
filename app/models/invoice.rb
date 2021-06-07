@@ -7,11 +7,11 @@ class Invoice < ApplicationRecord
   has_many :merchants, through: :items
   has_many :transactions, dependent: :destroy
 
-  enum status: ['in progress', 'completed', 'cancelled']
+  enum status: ['In Progress', 'Completed', 'Cancelled']
 
   def self.ordered_invoices_not_shipped
     joins(:invoice_items)
-      .where.not('invoice_items.status = ?', 2)
+      .where('invoice_items.status <> ?', 2)
       .order(created_at: :desc)
       .distinct
   end
@@ -35,3 +35,4 @@ class Invoice < ApplicationRecord
   end
 end
 # Invoice.joins(:invoice_items).group(:id).select('invoices.*,sum(invoice_items.quantity*invoice_items.unit_price) as invoice_revenue').where('invoice_items.invoice_id = ?', params)
+# Invoice.joins(:invoice_items).where('invoice_items.status <> ?', 2).order(created_at: :desc).distinct

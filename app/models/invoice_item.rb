@@ -7,11 +7,11 @@ class InvoiceItem < ApplicationRecord
 
   has_many :transactions, through: :invoice
 
-  enum status: ['pending', 'packaged', 'shipped']
+  enum status: ['Pending', 'Packaged', 'Shipped']
 
   def self.find_invoice_items(params)
     joins(:item)
-      .select('invoice_items.*, items.*')
+      .select('items.*, invoice_items.*')
       .where('invoice_id = ?', params)
   end
 
