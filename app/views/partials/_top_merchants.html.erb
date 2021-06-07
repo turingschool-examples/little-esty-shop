@@ -8,7 +8,7 @@
     <% @top_five_merchants.each do |merchant| %>
       <tr>
         <td><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", method: :get %></td>
-        <td><%= "$#{merchant.total_revenue}0" %></td>
+        <td><%= "#{number_to_currency(merchant.total_revenue)}" %></td>
         <td><%= "#{merchant.top_revenue_day[0, 10]}" %></td>
       </tr>
     <% end %>

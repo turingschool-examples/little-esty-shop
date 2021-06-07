@@ -35,27 +35,27 @@ RSpec.describe 'merchants index page', type: :feature do\
 
       within "#top-five-merchants > tr:nth-child(2)" do
         expect(page).to have_content('Terry-Moore')
-        expect(page).to have_content('$31156160')
+        expect(page).to have_content('$3,115,616.00')
         expect(page).to have_content('2012-03-26')
       end
       within "#top-five-merchants > tr:nth-child(3)" do
         expect(page).to have_content('Marvin Group')
-        expect(page).to have_content('$30536630')
+        expect(page).to have_content('$3,053,663.00')
         expect(page).to have_content('2012-03-27')
       end
       within "#top-five-merchants > tr:nth-child(4)" do
         expect(page).to have_content('Pacocha-Mayer')
-        expect(page).to have_content('$29776220')
+        expect(page).to have_content('$2,977,622.00')
         expect(page).to have_content('2012-03-15')
       end
       within "#top-five-merchants > tr:nth-child(5)" do
         expect(page).to have_content('Crona LLC')
-        expect(page).to have_content('$28878790')
+        expect(page).to have_content('$2,887,879.00')
         expect(page).to have_content('2012-03-07')
       end
       within "#top-five-merchants > tr:nth-child(6)" do
         expect(page).to have_content('Reynolds Inc')
-        expect(page).to have_content('$28499290')
+        expect(page).to have_content('$2,849,929.00')
         expect(page).to have_content('2012-03-23')
       end
     end
