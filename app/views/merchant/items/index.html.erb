@@ -17,7 +17,7 @@
 <%= button_to "Add a New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
 <div class="fifty_fifty">
   <div>
-    <h3> Disabled Items </h3>
+    <h3 class="small_title_wrapper"> Disabled Items </h3>
     <% @items.each do |item| %>
       <% if item.status == "disable" %>
           <%= item.name %>
@@ -28,7 +28,7 @@
         <% end %>
     <% end %>
 
-    <h3> Enabled Items </h3>
+    <h3 class="small_title_wrapper"> Enabled Items </h3>
     <% @items.each do |item| %>
       <% if item.status == "enable" %>
         <%= item.name %>
@@ -42,7 +42,7 @@
 
 
   <div>
-    <h3 style="text-align: center"> Top Items </h3>
+    <h3 class="small_title_wrapper"> Top Items </h3>
     <% counter = 1 %>
     <% @top_items.each do |item| %><br/><br/>
       <% @top_days_per_merchant.each do |item_day| %>

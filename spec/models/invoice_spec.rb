@@ -21,13 +21,13 @@ RSpec.describe Invoice, type: :model do
     @invoice_5 = @customer_1.invoices.create!(status: 0)
 
     @merchant_1 = Merchant.create!(name: 'Roald')
-    @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 100)
+    @item_1 = @merchant_1.items.create!(name: 'Doritos', description: 'Delicious', unit_price: 39434)
 
-    InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0)
-    InvoiceItem.create!(invoice: @invoice_2, item: @item_1, status: 1)
-    InvoiceItem.create!(invoice: @invoice_3, item: @item_1, status: 1)
-    InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2)
-    InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1)
+    InvoiceItem.create!(invoice: @invoice_1, item: @item_1, status: 0, quantity: 200, unit_price: 39434)
+    InvoiceItem.create!(invoice: @invoice_2, item: @item_1, status: 1, quantity: 923, unit_price: 39434)
+    InvoiceItem.create!(invoice: @invoice_3, item: @item_1, status: 1, quantity: 847, unit_price: 39434)
+    InvoiceItem.create!(invoice: @invoice_4, item: @item_1, status: 2, quantity: 304, unit_price: 39434)
+    InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1, quantity: 503, unit_price: 39434)
   end
 
   describe '::ordered_invoices_not_shipped' do
