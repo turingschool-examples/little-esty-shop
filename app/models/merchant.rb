@@ -17,49 +17,59 @@ class Merchant < ApplicationRecord
   end
 
   def top_revenue_day
-    sql = ("select z.created_at
+    invoices
+    .joins(:transactions)
+    .where("transactions.result = 'success'")
+    .select("invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity)")
+    .group(:created_at)
+    .order("sum(invoice_items.unit_price * invoice_items.quantity) desc, created_at desc")
+    .first
+    .created_at
+    .to_date
 
-        from
+    # sql = ("select z.created_at
 
-        (select distinct max(x.total_day_revenue) over (partition by x.merchant_id) as \"max_day_revenue\", x.merchant_id
+    #     from
 
-        from
+    #     (select distinct max(x.total_day_revenue) over (partition by x.merchant_id) as \"max_day_revenue\", x.merchant_id
 
-        (select distinct a.id as \"merchant_id\", d.created_at, sum((c.quantity * c.unit_price) / 100) over (partition by d.created_at) as \"total_day_revenue\"
+    #     from
 
-        from merchants a,
-        items b,
-        invoice_items c,
-        invoices d,
-        transactions e
+    #     (select distinct a.id as \"merchant_id\", d.created_at, sum((c.quantity * c.unit_price) / 100) over (partition by d.created_at) as \"total_day_revenue\"
 
-        where a.id = b.merchant_id
-        and b.id = c.item_id
-        and c.invoice_id = d.id
-        and d.id = e.invoice_id
-        and e.result = 'success') x) y,
+    #     from merchants a,
+    #     items b,
+    #     invoice_items c,
+    #     invoices d,
+    #     transactions e
 
-        (select distinct a.id as \"merchant_id\", d.created_at, sum((c.quantity * c.unit_price) / 100) over (partition by d.created_at) as \"total_day_revenue\"
+    #     where a.id = b.merchant_id
+    #     and b.id = c.item_id
+    #     and c.invoice_id = d.id
+    #     and d.id = e.invoice_id
+    #     and e.result = 'success') x) y,
 
-        from merchants a,
-        items b,
-        invoice_items c,
-        invoices d,
-        transactions e
+    #     (select distinct a.id as \"merchant_id\", d.created_at, sum((c.quantity * c.unit_price) / 100) over (partition by d.created_at) as \"total_day_revenue\"
 
-        where a.id = b.merchant_id
-        and b.id = c.item_id
-        and c.invoice_id = d.id
-        and d.id = e.invoice_id
-        and e.result = 'success') z
+    #     from merchants a,
+    #     items b,
+    #     invoice_items c,
+    #     invoices d,
+    #     transactions e
 
-        where y.max_day_revenue = z.total_day_revenue
-        and y.merchant_id = z.merchant_id
-        and z.merchant_id = #{self.id}
+    #     where a.id = b.merchant_id
+    #     and b.id = c.item_id
+    #     and c.invoice_id = d.id
+    #     and d.id = e.invoice_id
+    #     and e.result = 'success') z
 
-        order by z.created_at limit 1")
+    #     where y.max_day_revenue = z.total_day_revenue
+    #     and y.merchant_id = z.merchant_id
+    #     and z.merchant_id = #{self.id}
 
-       x = ActiveRecord::Base.connection.execute(sql)[0].values[0]
+    #     order by z.created_at limit 1")
+
+    #    x = ActiveRecord::Base.connection.execute(sql)[0].values[0]
   end
 
   def self.filter_by_enabled

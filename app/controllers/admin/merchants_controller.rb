@@ -21,6 +21,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants_enabled = Merchant.filter_by_enabled
     @merchants_disabled = Merchant.filter_by_disabled
     @top_five_merchants = Merchant.top_five
+    # require 'pry'; binding.pry
   end
 
   def new
