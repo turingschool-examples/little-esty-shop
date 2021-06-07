@@ -19,12 +19,12 @@ RSpec.describe 'merchant dashboard' do
     @item_5 = Item.create!(name: 'Thing 5', description: 'This is the fifth thing.', unit_price: 15.3, merchant_id: @merchant.id)
     @item_6 = Item.create!(name: 'Thing 6', description: 'This is the sixth thing.', unit_price: 10.4, merchant_id: @antimerchant.id)
 
-    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id)
-    @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id)
-    @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id)
+    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: "2021-06-05 20:11:38.553871")
+    @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id, created_at: "2021-06-07 20:11:38.553871")
+    @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id, created_at: "2021-06-06 20:11:38.553871")
+    @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id, created_at: "2021-06-01 20:11:38.553871")
+    @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id, created_at: "2021-06-02 20:11:38.553871")
+    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id, created_at: "2021-06-03 20:11:38.553871")
 
     @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 2, invoice_id: @invoice_1.id, item_id: @item_1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id)
@@ -121,5 +121,25 @@ RSpec.describe 'merchant dashboard' do
 
     expect(page).to have_link("#{@invoice_1.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
     expect(page).to have_no_link("#{@invoice_6.id}")
+  end
+
+  it 'has the creation date listed by each invoice in oldest to newest order' do
+    visit "/merchants/#{@merchant.id}/dashboard"
+
+    within("##{@invoice_1.id}") do
+      expect(page).to have_content("Saturday, June 05, 2021")
+    end
+
+    within("##{@invoice_2.id}") do
+      expect(page).to have_content("Monday, June 07, 2021")
+    end
+
+    expect(page).to have_no_content("Thursday, June 03, 2021")
+
+    #may need to change the ids to the dates associated with the invoices, in case of loose number messing up the tests
+    expect("#{@invoice_4.id}").to appear_before("#{@invoice_5.id}")
+    expect("#{@invoice_5.id}").to appear_before("#{@invoice_1.id}")
+    expect("#{@invoice_1.id}").to appear_before("#{@invoice_3.id}")
+    expect("#{@invoice_3.id}").to appear_before("#{@invoice_2.id}")
   end
 end
