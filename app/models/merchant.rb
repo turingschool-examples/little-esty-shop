@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def self.top_five
-    select('merchants.name, merchants.id as merchant_id, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    select('merchants.name, merchants.id as id, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
     .joins(:transactions)
     .where("transactions.result = 'success'")
     .group('merchants.id')
@@ -55,7 +55,7 @@ class Merchant < ApplicationRecord
 
         where y.max_day_revenue = z.total_day_revenue
         and y.merchant_id = z.merchant_id
-        and z.merchant_id = #{self.merchant_id}
+        and z.merchant_id = #{self.id}
 
         order by z.created_at limit 1")
 
