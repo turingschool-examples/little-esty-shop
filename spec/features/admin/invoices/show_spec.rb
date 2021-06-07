@@ -62,10 +62,10 @@ RSpec.describe 'Admin Invoice Show' do
       expect(page).to have_content(expected.gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,"))
     end
 
-    it 'displays a select field' do
+    it 'displays a select field or button' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
-      page.has_select?('Update Invoice Status', options: [0, 1, 2])
+      expect(page).to have_button('Update Invoice Status')
       expect(@invoice_1.status).to eq('In Progress')
     end
 
