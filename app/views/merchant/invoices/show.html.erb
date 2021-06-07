@@ -7,8 +7,8 @@
 <p>Name: <%= Item.where('id = ?', item.item_id).first.name %></p>
 <p>Quantity Ordered: <%= item.quantity %></p>
 <p>Price Sold For: <%= item.unit_price %></p>
-<%= form_with url: "/merchants/#{@merchant.id}/invoices/#{item.id}", method: :patch, local: true do |f| %>
-<p>Status: <%= select_tag(:status, options_for_select([['Pending', 1], ['Packaged', 2], ['Shipped', 3]]), selected: item.status)  %></p>
+<%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?item_id=#{item.id}", method: :patch, local: true do |f| %>
+<p>Status: <%= f.select :status, ['Pending','Packaged', 'Shipped'], value: item.status  %></p>
 <%= f.submit 'Update Status' %>
 <% end %>
 <% end %>

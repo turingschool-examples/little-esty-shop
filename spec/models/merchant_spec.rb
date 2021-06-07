@@ -20,14 +20,14 @@ RSpec.describe Merchant, type: :model do
     @customer_5 = Customer.create!(first_name: "Richard", last_name: "Last Name")
     @customer_6 = Customer.create!(first_name: "Zach", last_name: "Last Name")
 
-    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "in progress")
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 0)
     @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
     @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: 1)
     @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1)
     @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
     @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: 1)
 
-    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: "pending")
+    InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 4, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, quantity: 3, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id, quantity: 2, unit_price: 1500, status: 0)
