@@ -18,10 +18,10 @@
         <div>Current Status: <%= @invoice.status %></div>
         <h4>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></h4>
         <h4>Expected Invoice Revenue: $<%= number_with_precision(@invoice_revenue, precision: 2, delimiter: ',') %></h4>
+
       </div><br>
       <div>
-        <h4>Customer Info:</h4><br>
-        <h4><%= @customer.first_name %> <%= @customer.last_name %></h4>
+        <h4>Customer Info: <%= @customer.first_name %> <%= @customer.last_name %></h4>
       </div>
     </section><br>
     <section>

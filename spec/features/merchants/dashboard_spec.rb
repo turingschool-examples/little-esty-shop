@@ -7,6 +7,8 @@ RSpec.describe Merchant, type: :feature do
       @merchant_2 = Merchant.create!(name: "Mark's Money Makin' Markers")
       @merchant_3 = Merchant.create!(name: "Caleb's California Catapults")
 
+      @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
+      
       @item_1 = @merchant_1.items.create!(name: "Twinkies", description: "Yummy", unit_price: 400)
 
       @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
@@ -30,7 +32,6 @@ RSpec.describe Merchant, type: :feature do
       @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1)
       @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
       @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: 1)
-
 
       InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: 1)
       InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: 1500, status: 0)
