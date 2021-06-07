@@ -1,12 +1,10 @@
 class ItemsController < ApplicationController
   def index
-    # @transation = Transaction.find(params[:id])
-    # @transation_items = @transation.items
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
     @disabled_items = @items.disable_items
     @enabled_items = @items.enable_items
-    # @top_items = Item.top_popular_items
+    @top_items = @items.top_popular_items
   end
 
   def show
