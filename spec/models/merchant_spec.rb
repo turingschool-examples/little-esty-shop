@@ -28,13 +28,16 @@ RSpec.describe Merchant, type: :model do
     @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: 1)
 
     InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: "pending")
-    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: 1500, status: 0)
-    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, quantity: 1, unit_price: 1500, status: 0)
-    InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: 1500, status: 0)
+    InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 4, unit_price: 1500, status: 0)
+    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, quantity: 3, unit_price: 1500, status: 0)
+    InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id, quantity: 2, unit_price: 1500, status: 0)
+    InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id, quantity: 2, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: 1500, status: 0)
+    InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 1500, status: 0)
+    InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 1500, status: 0)
 
     Transaction.create!(invoice_id: @invoice_2.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
@@ -57,9 +60,17 @@ RSpec.describe Merchant, type: :model do
     it 'can find top 5 customers' do
       expect(@merchant_1.top_5_customers[0].customer_id).to eq(@customer_6.id)
       expect(@merchant_1.top_5_customers[1].customer_id).to eq(@customer_5.id)
-      expect(@merchant_1.top_5_customers[2].customer_id).to eq(@customer_2.id)
-      expect(@merchant_1.top_5_customers[3].customer_id).to eq(@customer_3.id)
-      expect(@merchant_1.top_5_customers[4].customer_id).to eq(@customer_4.id)
+      expect(@merchant_1.top_5_customers[2].customer_id).to eq(@customer_4.id)
+      expect(@merchant_1.top_5_customers[3].customer_id).to eq(@customer_2.id)
+      expect(@merchant_1.top_5_customers[4].customer_id).to eq(@customer_3.id)
+    end
+
+    it 'can list top days' do
+      expect(@merchant_1.top_days.length).to eq(9)
+    end
+
+    it 'can list top 5 items' do
+      expect(@merchant_1.top_5).to eq([@item_2, @item_3, @item_4, @item_6, @item_1])
     end
   end
 end
