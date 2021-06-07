@@ -30,16 +30,6 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
-  def top_popular_items
-    require "pry";binding.pry
-    items.joins(invoices: [:invoice_items, :transactions])
-    .where('transactions.result = ?', 1)
-    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue_generated")
-    .group(:id)
-    .order('total_revenue_generated desc')
-    .limit(5)
-  end
-
   def merchant_best_day
     invoices
     .joins(:invoice_items)
