@@ -78,9 +78,13 @@ RSpec.describe Item, type: :model do
       end
     end
   end
-#
-#   describe 'instance methods' do
-#     describe '#' do
-#     end
-#   end
+
+  describe 'instance methods' do
+    describe '#total revenue top date' do
+      it 'can give the date with the most sales for each of the most popluar items' do
+        expect(@item_4.items_top_selling_days).to eq("#{@item_4.created_at.strftime("%m/%d/%Y")}")
+        expect(@item_4.items_top_selling_days).to_not eq("#{@item_4.created_at}")
+      end
+    end
+  end
 end
