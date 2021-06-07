@@ -27,6 +27,7 @@ RSpec.describe Merchant, type: :model do
     @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
     @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: 1)
 
+
     InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 4, unit_price: 1500, status: 0)
     InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, quantity: 3, unit_price: 1500, status: 0)
