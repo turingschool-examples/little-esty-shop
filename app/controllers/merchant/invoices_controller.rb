@@ -29,4 +29,14 @@ class Merchant::InvoicesController < ApplicationController
     # @invoices = Invoice.joins(:invoice_items).where("invoice_items.item_id = ?", @item_ids)
     @invoices = @merchant.invoices.uniq
   end
+
+  def update_status
+    merchant = Merchant.find(params[:merchant_id])
+    invoice = Invoice.find(params[:invoice_id])
+    item = InvoiceItem.find(params[:item_id])
+
+    item.update(status: params[:status])
+
+    redirect_to "/merchants/#{merchant.id}/invoices/#{invoice.id}"
+  end
 end
