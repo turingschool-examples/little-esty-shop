@@ -1,4 +1,8 @@
 class Merchant::InvoicesController < ApplicationController
+  # def show
+  #   @merchant = Merchant.find(params[:id])
+  #   @invoice = @merchant.invoices.find(params[:id])
+  # end
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:invoice_id])
@@ -22,11 +26,7 @@ class Merchant::InvoicesController < ApplicationController
     @merchant = Merchant.find(params[:id])
     @items = @merchant.items
     @item_ids = Merchant.find(params[:id]).items.pluck(:id)
-    @invoices = Invoice.joins(:invoice_items).where("item.id = ?", @item_ids)
-  end
-
-  def show
-    @merchant = Merchant.find(params[:id])
-    @invoice = @merchant.invoices.find(params[:id])
+    # @invoices = Invoice.joins(:invoice_items).where("invoice_items.item_id = ?", @item_ids)
+    @invoices = @merchant.invoices.uniq
   end
 end
