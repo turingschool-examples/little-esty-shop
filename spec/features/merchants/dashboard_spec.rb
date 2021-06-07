@@ -8,6 +8,9 @@ RSpec.describe Merchant, type: :feature do
       @merchant_3 = Merchant.create!(name: "Caleb's California Catapults")
 
       @item_1 = @merchant_1.items.create!(name: "Twinkies", description: "Yummy", unit_price: 400)
+
+      @customer_1 = Customer.create!(first_name: "Me", last_name: "Last Name")
+      
       @item_2 = @merchant_1.items.create!(name: "Applesauce", description: "Yummy", unit_price: 400)
       @item_3 = @merchant_1.items.create!(name: "Milk", description: "Yummy", unit_price: 400)
       @item_4 = @merchant_1.items.create!(name: "Bread", description: "Yummy", unit_price: 400)
@@ -21,12 +24,13 @@ RSpec.describe Merchant, type: :feature do
       @customer_5 = Customer.create!(first_name: "Richard", last_name: "Last Name")
       @customer_6 = Customer.create!(first_name: "Zach", last_name: "Last Name")
 
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "in progress")
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "In Progress")
       @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
       @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: 1)
       @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1)
       @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
       @invoice_6 = Invoice.create!(customer_id: @customer_6.id, status: 1)
+
 
       InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: 1500, status: 1)
       InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: 1500, status: 0)
