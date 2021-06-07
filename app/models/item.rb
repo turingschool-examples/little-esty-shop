@@ -27,4 +27,13 @@ class Item < ApplicationRecord
     .order('total_revenue_generated desc')
     .limit(5)
   end
+
+  def self.items_top_selling_days
+    joins(invoices: [:invoice_items, :transactions])
+    .where('transactions.result = ?', 1)
+    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue_generated")
+    .group(:id)
+    .order('total_revenue_generated desc')
+    .limit(5)
+  end
 end
