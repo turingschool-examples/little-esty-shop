@@ -1,21 +1,21 @@
 <h1>Enabled Merchants:</h1>
 <section id='enabled_merchants'>
 <% @enable.each do |merchant| %>
-<h3><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3>
+<h3><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}/status?disable=true", method: :patch %></h3>
 <% end %>
 </section>
 
 <h1>Disabled Merchants:</h1>
 <section id='disabled_merchants'>
 <% @disable.each do |merchant| %>
-<h3><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3>
+<h3><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}/status?enable=true", method: :patch %></h3>
 <% end %>
 </section>
 
 <h1>Top Five By Revenue Generated:</h1>
 <section id='top_five'>
   <% @top_five.each do |merchant| %>
-  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
+  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> <%= "Top selling date for #{merchant.name} was: #{Invoice.top_five_best_day(merchant.id)}" %></p>
   <%= merchant.total_revenue %>
   <% end %>
 </section>
