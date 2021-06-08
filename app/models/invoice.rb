@@ -12,7 +12,7 @@ class Invoice < ApplicationRecord
   def self.ordered_invoices_not_shipped
     joins(:invoice_items)
       .where('invoice_items.status <> ?', 2)
-      .order(created_at: :desc)
+      .order(created_at: :asc)
       .distinct
   end
 

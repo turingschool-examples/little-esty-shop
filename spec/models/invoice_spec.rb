@@ -18,9 +18,9 @@ RSpec.describe Invoice, type: :model do
 
     @invoice_1 = Invoice.create!(status: 0, customer_id: @customer_1.id)
     @invoice_2 = Invoice.create!(status: 0, customer_id: @customer_1.id)
+    @invoice_5 = Invoice.create!(status: 0, customer_id: @customer_1.id)
     @invoice_3 = Invoice.create!(status: 0, customer_id: @customer_1.id)
     @invoice_4 = Invoice.create!(status: 0, customer_id: @customer_1.id)
-    @invoice_5 = Invoice.create!(status: 0, customer_id: @customer_1.id)
 
     @merchant_1 = Merchant.create!(name: 'Roald', status: 'enable')
     @merchant_2 = Merchant.create!(name: 'Marshall', status: 'disable')
@@ -51,10 +51,10 @@ RSpec.describe Invoice, type: :model do
 
   describe '.ordered_invoices_not_shipped' do
     it 'orders from oldest to newest a list of invoices that are not shipped' do
-      expect(Invoice.ordered_invoices_not_shipped.first).to eq(@invoice_5)
-      expect(Invoice.ordered_invoices_not_shipped[1]).to eq(@invoice_3)
-      expect(Invoice.ordered_invoices_not_shipped[2]).to eq(@invoice_2)
-      expect(Invoice.ordered_invoices_not_shipped.last).to eq(@invoice_1)
+      expect(Invoice.ordered_invoices_not_shipped.first).to eq(@invoice_1)
+      expect(Invoice.ordered_invoices_not_shipped[1]).to eq(@invoice_2)
+      expect(Invoice.ordered_invoices_not_shipped[2]).to eq(@invoice_5)
+      expect(Invoice.ordered_invoices_not_shipped.last).to eq(@invoice_3)
     end
   end
 
