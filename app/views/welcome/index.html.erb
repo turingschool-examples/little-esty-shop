@@ -1,0 +1,6 @@
+Contributors and Total Commits:
+<% @names_and_commits.each do |name, commit| %>
+<%= "#{name}:#{commit}" %>
+<% end %>
+
+<p>Total Merged Pull Requests: <%= @merged_pulls %></p>
