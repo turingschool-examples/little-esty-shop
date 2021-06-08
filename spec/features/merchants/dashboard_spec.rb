@@ -136,8 +136,6 @@ RSpec.describe Merchant, type: :feature do
       visit "/merchants/#{@merchant_2.id}/dashboard"
       expect(page).to have_content("Items Ready to Ship")
       expect('50 pack Markers').to appear_before('100 pack Pens')
-      save_and_open_page
-      binding.pry
     end
 
   end
