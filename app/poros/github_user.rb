@@ -7,7 +7,7 @@ class GithubUser
     github_data = GithubAPI.user_info(username, repo_name)
     @contributors = GithubAPI.contributors(username, repo_name)
     @pull_requests = GithubAPI.pull_requests(username, repo_name)
-    binding.pry
+    # binding.pry
   end
 
   def names_and_commits
