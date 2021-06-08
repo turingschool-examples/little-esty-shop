@@ -1,3 +1,18 @@
+<div class="">
+  <h1 class="little_esty_shop">Little Esty Shop</h1>
+</div>
+
+<div class="nav_bar_wrapper">
+  <h1 class="title_name"><%= @merchant.name %></h1>
+  <div class="nav_bar_links">
+    <p class="nav_bar_links_inline"><%= button_to "Dashboard", "/merchants/#{@merchant.id}/dashboard", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Items", "/merchants/#{@merchant.id}/items", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %></p>
+  </div>
+</div>
+
+<h2 class="title_wrapper">Invoice #<%= @invoice.id %></h2>
+
 <h1>Invoice ID: <%= @invoice.id %></h1>
 <h3>Invoice Status: <%= @invoice.status %></h3>
 <h4>Customer Last, First: <%= @customer.last_name %>, <%= @customer.first_name %></h4>
