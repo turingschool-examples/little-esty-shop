@@ -1,15 +1,16 @@
 class Item < ApplicationRecord
+  belongs_to :merchant
+
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
-  belongs_to :merchant
+
   validates :name, presence: true
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: true
 
   enum status: { disable: 0, enable: 1 }
 
-  ###TEST###
   def self.enable_items
     where(status: 1)
   end
@@ -20,5 +21,26 @@ class Item < ApplicationRecord
 
   def total_revenue
     Item.joins(:invoice_items, :transactions).where('transactions.result = ?', 1).select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').group(:id)
+  end 
+  
+  def self.top_popular_items
+    joins(invoices: [:invoice_items, :transactions])
+    .where('transactions.result = ?', 1)
+    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue_generated")
+    .group(:id)
+    .order('total_revenue_generated desc')
+    .limit(5)
+  end
+
+  def items_top_selling_days
+    invoices
+    .joins(:invoice_items, :transactions)
+    .where('transactions.result = ?', 1)
+    .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue_generated")
+    .group(:created_at)
+    .order('total_revenue_generated', 'created_at desc')
+    .first
+    .created_at
+    .strftime("%m/%d/%Y")
   end
 end
