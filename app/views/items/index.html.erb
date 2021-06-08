@@ -17,6 +17,7 @@
 <h2>Top Items</h2>
 <% @top_items.each do |item| %>
   <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= "#{number_to_currency(item.total_revenue_generated)} in sales" %><br>
+  <%= "Top day for #{item.name} was #{item.items_top_selling_days}" %><br><br>
 <% end %>
 
-<p> <%= button_to "Create New Item", new_merchant_item_path, method: :get %> </p>
+<p><%= button_to "Create New Item", new_merchant_item_path, method: :get %></p>
