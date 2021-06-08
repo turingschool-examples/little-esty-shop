@@ -135,7 +135,7 @@ RSpec.describe Merchant, type: :feature do
     it 'can find pending shipments' do
       visit "/merchants/#{@merchant_2.id}/dashboard"
       expect(page).to have_content("Items Ready to Ship")
-      expect('50 pack Markers').to appear_before('100 pack Pens')
+      expect('100 pack Pens').to appear_before('50 pack Markers')
     end
 
   end

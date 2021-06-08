@@ -59,7 +59,7 @@ class Merchant < ApplicationRecord
           .select('items.name', 'invoices.created_at', 'invoice_items.status', 'invoices.id')
           .where('invoice_items.status = 1')
           .group('items.name', 'invoices.created_at', 'invoice_items.status', 'invoices.id')
-          .order('invoices.created_at DESC')
+          .order('invoices.created_at')
   end
 
 end
