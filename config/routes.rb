@@ -12,6 +12,14 @@ Rails.application.routes.draw do
   #-------Admin----------------------
   namespace :admin do
     resources :invoices
-    resources :merchants
+    resources :merchants do
+      member do
+        patch :update_merchant_status, as: 'status_update'
+      end
+    end
+  end
+
+  scope module: 'admin' do
+    resources :dashboard, path: 'admin'
   end
 end

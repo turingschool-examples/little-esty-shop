@@ -7,31 +7,26 @@
 <% @top_merchants_by_revenue.each do |merchant| %>
   <section id="top-rev-merchants-<%= merchant.id %>">
     <ol>
-      <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> - <%= "#{number_to_currency(merchant.total_revenue)} in sales" %><br>
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> - <%= "#{number_to_currency(merchant.total_revenue)} in sales" %><br>
       <%= "Top selling date for #{merchant.name} was #{merchant.merchant_best_day}" %>
     </ol>
   </section>
 <% end %>
 
-<h3>Enabled Merchants</h3>
-<% @enabled_merchants.each do |merchant| %>
-  <section id="enabled-merchant-<%= merchant.id %>">
-    <ul>
-      <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %><%= button_to 'Disable', {action: :update_status, id: merchant.id, status: 'disable'} %></p>
-    </ul>
-  </section>
-<% end %><br><br>
+  <h3>Enabled Merchants</h3>
+  <% @enabled_merchants.each do |merchant| %>
+    <section id="enabled-merchant-<%= merchant.id %>">
+      <ul>
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(:admin, merchant) %><%= button_to 'Disable', status_update_admin_merchant_path(merchant.id, status: "disable"), {method: :patch, action: :update_merchant_status } %></p>
+      </ul>
+    </section>
+  <% end %><br><br>
 
-
-
-
-<div class="disbaled-merchants">
 <h3>Disabled Merchants</h3>
   <% @disabled_merchants.each do |merchant| %>
     <section id="disabled-merchant-<%= merchant.id %>">
       <ul>
-        <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %><%= button_to 'Enable', {action: :update_status, id: merchant.id, status: 'enable'} %></p>
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(:admin, merchant) %><%= button_to 'Enable', status_update_admin_merchant_path(merchant.id, status: "enable"), {method: :patch, action: :update_merchant_status } %></p>
       </ul>
     </section>
   <% end %>
-</div>

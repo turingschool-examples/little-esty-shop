@@ -1,0 +1,24 @@
+<h3>Admin Dashboard</h3>
+
+<%= link_to 'Admin Merchant Index Page', admin_merchants_path %>
+<%= link_to 'Admin Invoice Index Page', admin_invoices_path %>
+
+
+
+<h3>Top 5 Customers</h3>
+<% @top_5_customers.each do |customer| %>
+  <section id="top-customer-<%= customer.id %>">
+    <ol>
+      <p><%= customer.first_name %><%= customer.last_name %> - <%= customer.number_of_successful_transactions %></p>
+    </ol>
+  </section>
+<% end %><br>
+
+<h3>Incomplete Invoices</h3>
+<% @unshipped_invoices.each do |invoice| %>
+  <section id="incomplete-invoices-<%= invoice.id %>">
+    <ol>
+      <%= link_to "Invoice #{invoice.id}", admin_invoice_path(:admin, invoice.id) %>
+    </ol>
+  </section>
+<% end %>
