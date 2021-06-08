@@ -11,4 +11,8 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("quantity * unit_price")
   end
+
+  def number_status
+    status_before_type_cast
+  end
 end

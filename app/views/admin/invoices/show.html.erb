@@ -19,5 +19,11 @@
   </section>
 <% end %>
 
+<h2> Status of the Invoice </h2>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |form| %>
+        <%= form.select :status, [["Cancelled", 0], ["In Progress", 1], ["Completed", 2]], selected: @invoice.number_status %>
+        <%= form.submit 'Update Invoice Status' %>
+<% end %>
+
 <h2> Total Revenue from Invoice </h2>
 <p> <%= number_to_currency(@invoice.total_revenue) %> </p>
