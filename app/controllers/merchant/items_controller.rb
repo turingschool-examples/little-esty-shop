@@ -28,6 +28,7 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.where(
       'merchant_id = ? AND id = ?',
       params[:merchant_id], params[:item_id]
@@ -47,7 +48,7 @@ class Merchant::ItemsController < ApplicationController
     item.update(item_params)
 
     redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}"
-    # binding.pry 
+    # binding.pry
     flash[:notice] = "Successfully updated"
   end
 
