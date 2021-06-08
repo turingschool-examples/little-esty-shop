@@ -1,15 +1,23 @@
 <h1> <%= @merchant.name %> </h1>
 
+<h2>Enabled Items</h2>
+<% @enabled_items.each do |item| %>
+<section id="enabled-items-<%= item.id %>">
+  <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> <%= button_to "Disable", status_update_merchant_item_path(@merchant.id, item.id, status: "disable"), {method: :patch, action: :update_item_status} %>
+</section>
+<% end %>
+
+<h2>Disabled Items</h2>
 <% @disabled_items.each do |item| %>
   <section id="disabled-items-<%= item.id %>">
-    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> <br> <%= button_to "Enable", status_update_merchant_item_path(@merchant.id, item.id, status: "enable"), {method: :patch, action: :update_item_status} %>
+    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> <%= button_to "Enable", status_update_merchant_item_path(@merchant.id, item.id, status: "enable"), {method: :patch, action: :update_item_status} %>
   </section>
 <% end %>
 
-<% @enabled_items.each do |item| %>
-  <section id="enabled-items-<%= item.id %>">
-    <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> <br> <%= button_to "Disable", status_update_merchant_item_path(@merchant.id, item.id, status: "disable"), {method: :patch, action: :update_item_status} %>
-  </section>
+<h2>Top Items</h2>
+<% @top_items.each do |item| %>
+  <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= "#{number_to_currency(item.total_revenue_generated)} in sales" %><br>
+  <%= "Top day for #{item.name} was #{item.items_top_selling_days}" %><br><br>
 <% end %>
 
-<p> <%= button_to "Create New Item", new_merchant_item_path, method: :get %> </p>
+<p><%= button_to "Create New Item", new_merchant_item_path, method: :get %></p>

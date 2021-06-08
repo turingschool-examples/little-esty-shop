@@ -14,11 +14,10 @@ RSpec.describe Invoice, type: :model do
   # end
 
   before :each do
-    # enabled
+    # Below set up is for Admin side
     @merchant1 = Merchant.create!(name: "Tyler", status: 1)
     @merchant2 = Merchant.create!(name: "Jill", status: 1)
     @merchant3 = Merchant.create!(name: "Bob", status: 1)
-    # disabled
     @merchant4 = Merchant.create!(name: "Johnny", status: 0)
     @merchant5 = Merchant.create!(name: "Carrot Top", status: 0)
     @merchant6 = Merchant.create!(name: "lil boosie", status: 0)
@@ -51,6 +50,22 @@ RSpec.describe Invoice, type: :model do
     @invoice_item4 = @item4.invoice_items.create!(quantity: 5, unit_price: 18.0, status: 0, invoice: @invoice2)
     @invoice_item5 = @item5.invoice_items.create!(quantity: 1, unit_price: 67.0, status: 2, invoice: @invoice3)
     @invoice_item6 = @item6.invoice_items.create!(quantity: 2, unit_price: 250.0, status: 2, invoice: @invoice3)
+
+    # Below set up is for Merchant side
+    @merchant = Merchant.create!(name: 'AnnaSellsStuff')
+    @customer = Customer.create!(first_name: 'John', last_name: 'Smith')
+    @item_1 = Item.create!(name: 'Thing 1', description: 'This is the first thing.', unit_price: 14.9, merchant_id: @merchant.id)
+    @item_2 = Item.create!(name: 'Thing 2', description: 'This is the second thing.', unit_price: 16.3, merchant_id: @merchant.id)
+    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer.id, created_at: "2021-06-05 20:11:38.553871" )
+    @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 1, invoice_id: @invoice_1.id, item_id: @item_1.id)
+    @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id)
+    
+    # Gunnar's Tests
+    @customer1 = Customer.create!(first_name: "Bobby", last_name: "Mendez")
+    @invoice1 = Invoice.create!(status: 1, customer_id: @customer1.id)
+    @merchant1 = Merchant.create!(name: "Nike")
+    @item1 = Item.create!(name: "Kobe zoom 5's", description: "Best shoe in basketball hands down!", unit_price: 12500, merchant_id: @merchant1.id)
+    @invoice_item1 = InvoiceItem.create!(quantity: 2, unit_price: 25000, status: 0, invoice_id: @invoice1.id, item_id: @item1.id)
   end
 
   describe 'instance methods' do
@@ -61,10 +76,18 @@ RSpec.describe Invoice, type: :model do
         expect(Invoice.unshipped).to eq(expected)
       end
     end
-  end
 
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
+    describe '#convert_create_date' do
+      it 'making a date in readable fashion' do
+        expect(@invoice_1.convert_create_date).to eq("Saturday, June 05, 2021")
+      end
+    end
+ 
+    describe '#total_revenue' do
+      it 'total revenue for an invoice' do
+        
+        expect(@invoice1.total_revenue).to eq(50000)
+      end
+    end
+  end
 end
