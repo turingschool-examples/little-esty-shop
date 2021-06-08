@@ -78,7 +78,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'can list top days' do
-      expect(@merchant_1.top_days.length).to eq(9)
+      expect(@merchant_1.top_days.length).to eq(8)
     end
 
     it 'can list top 5 items' do

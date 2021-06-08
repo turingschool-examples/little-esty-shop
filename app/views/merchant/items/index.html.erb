@@ -51,7 +51,7 @@
         <% if item.name == item_day.name %>
           <%= counter %>. <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
           <%= (item.revenue.to_f) /100%><br/>
-          <p style= "margin: 0">Top selling date for <%= item_day.name %> was <%= Date.parse(item_day.updated_at.to_s).strftime("%m/%d/%Y")%></p><br/>
+          <p style= "margin: 0">Top selling date for <%= item_day.name %> was <%= Date.parse(item_day.created_at.to_s).strftime("%m/%d/%Y")%></p><br/>
         <% end %>
       <% end %>
       <% counter += 1 %>

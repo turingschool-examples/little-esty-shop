@@ -24,12 +24,21 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+  # def top_days
+  #   items.joins(:transactions)
+  #     .select('items.*', 'sum(invoice_items.quantity * invoice_items.unit_price) as revenue', 'transactions.result', 'invoice_items.updated_at')
+  #     .where("transactions.result = 0")
+  #     .group('items.id', 'transactions.result', 'invoice_items.updated_at')
+  #     .order('revenue DESC')
+  #     .limit(9)
+  # end
+
   def top_days
-    items.joins(:transactions)
-      .select('items.*', 'sum(invoice_items.quantity * invoice_items.unit_price) as revenue', 'transactions.result', 'invoice_items.updated_at')
+    items.joins(:transactions, :invoices)
+      .select('items.*', 'sum(invoice_items.quantity * invoice_items.unit_price) as revenue', 'transactions.result', 'invoices.created_at')
       .where("transactions.result = 0")
-      .group('items.id', 'transactions.result', 'invoice_items.updated_at')
-      .order('revenue DESC')
+      .group('items.id', 'transactions.result', 'invoices.created_at')
+      .order('revenue DESC', 'invoices.created_at DESC')
       .limit(9)
   end
 
@@ -38,7 +47,7 @@ class Merchant < ApplicationRecord
       top_days.find do |day|
         if day.name == item.name
           day.name
-          day.updated_at
+          day.created_at
         end
       end
     end
