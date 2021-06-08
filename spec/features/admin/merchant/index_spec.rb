@@ -105,7 +105,7 @@ RSpec.describe 'Admin Merchant Index Page' do
   end
   it 'shows each merchant of the top fives best day' do
     within('#top_five') do
-      expect(page).to have_content(Date.today)
+      expect(page).to have_content(Date.today.strftime('%m/%d/%Y'))
     end
   end
 end

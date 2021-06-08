@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
+  describe 'validations' do
+    it { should validate_presence_of :name }
+  end
+
+  describe 'relationships' do
+    it { should have_many :items }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices) }
+  end
+
   before :each do
     @merchant_1 = Merchant.create!(name: "Regina's Ragin' Ragdolls")
     @merchant_2 = Merchant.create!(name: "Mark's Money Makin' Markers")
@@ -100,8 +111,8 @@ RSpec.describe Merchant, type: :model do
       Transaction.create!(invoice_id: @invoice_9.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
       Transaction.create!(invoice_id: @invoice_10.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
       Transaction.create!(invoice_id: @invoice_11.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
-      
-      expect(@merchant_2.ready_top_ship.length).to eq(7)
+
+      expect(@merchant_2.ready_to_ship.length).to eq(7)
     end
   end
 end
