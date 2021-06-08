@@ -19,6 +19,10 @@ class Item < ApplicationRecord
     where(status: 0)
   end
 
+  def total_revenue
+    Item.joins(:invoice_items, :transactions).where('transactions.result = ?', 1).select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').group(:id)
+  end 
+  
   def self.top_popular_items
     joins(invoices: [:invoice_items, :transactions])
     .where('transactions.result = ?', 1)

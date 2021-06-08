@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   #-------Merchant-------------------
   resources :merchants do
+    resources :invoice_items
     resources :invoices
     resources :items do
       member do

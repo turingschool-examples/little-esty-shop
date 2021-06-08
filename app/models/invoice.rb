@@ -22,4 +22,13 @@ class Invoice < ApplicationRecord
   def convert_create_date
     self.created_at.strftime("%A, %B %d, %Y")
   end
+
+  def status_for_view
+    rev_statuses = {0 => 'cancelled', 1 => 'in_progress', 2 => 'completed'}
+    rev_statuses[self.status]
+  end
+
+  def merchant_total_revenue(merchant_id)
+    Invoice.joins(:items, :invoice_items).where('items.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).distinct.sum('invoice_items.unit_price * invoice_items.quantity')
+  end
 end
