@@ -41,7 +41,7 @@ RSpec.describe 'Merchant Items Show Page' do
 
     click_on 'Update Doritos'
 
-    expect(page).to have_content('Doritos')
+    expect(page).to have_text('Doritos')
     expect(page).to have_content('Delicious')
     expect(page).to have_content(100)
   end

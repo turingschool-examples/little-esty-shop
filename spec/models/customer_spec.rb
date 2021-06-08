@@ -8,6 +8,7 @@ RSpec.describe Customer, type: :model do
 
   describe "relationships" do
     it {should have_many :invoices}
+    it {should have_many(:transactions).through(:invoices)}
   end
 
   before(:each) do

@@ -12,6 +12,7 @@ RSpec.describe InvoiceItem, type: :model do
   describe "relationships" do
     it {should belong_to :invoice}
     it {should belong_to :item}
+    it {should have_many(:transactions).through(:invoice)}
   end
 
   before(:each) do
@@ -34,7 +35,7 @@ RSpec.describe InvoiceItem, type: :model do
     InvoiceItem.create!(invoice: @invoice_5, item: @item_1, status: 1, quantity: 97, unit_price: 39434)
   end
 
-  describe '::find_invoice_items' do
+  describe '.find_invoice_items' do
     it 'finds invoice items based on invoice id' do
       expect(InvoiceItem.find_invoice_items(@invoice_1)[0].invoice_id).to eq(@invoice_1.id)
       expect(InvoiceItem.find_invoice_items(@invoice_1)).to_not include(@invoice_4.id)

@@ -23,9 +23,9 @@ class Merchant::InvoicesController < ApplicationController
   end
 
   def index
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
-    @item_ids = Merchant.find(params[:id]).items.pluck(:id)
+    @item_ids = Merchant.find(params[:merchant_id]).items.pluck(:id)
     # @invoices = Invoice.joins(:invoice_items).where("invoice_items.item_id = ?", @item_ids)
     @invoices = @merchant.invoices.uniq
   end

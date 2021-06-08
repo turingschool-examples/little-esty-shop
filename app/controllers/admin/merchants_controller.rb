@@ -8,18 +8,18 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(params[:id])
   end
 
   def new
   end
 
   def edit
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(params[:id])
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(params[:id])
 
     @merchant.update(merchant_params)
 
@@ -29,13 +29,13 @@ class Admin::MerchantsController < ApplicationController
 
   def update_status
     if params.include?('enable')
-      merchant = Merchant.find(params[:merchant_id])
+      merchant = Merchant.find(params[:id])
 
       merchant.update(status: 'enable')
 
       redirect_to "/admin/merchants"
     elsif params.include?('disable')
-      merchant = Merchant.find(params[:merchant_id])
+      merchant = Merchant.find(params[:id])
 
       merchant.update(status: 'disable')
 

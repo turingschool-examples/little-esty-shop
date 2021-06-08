@@ -27,7 +27,7 @@ class Admin::InvoicesController < ApplicationController
   private
 
   def load_data
-    @invoice = Invoice.find(params[:invoice_id])
+    @invoice = Invoice.find(params[:id])
     @customer = Customer.find(@invoice.customer_id)
     @invoice_items = InvoiceItem.find_invoice_items(@invoice.id)
     @invoice_revenue = Invoice.expected_invoice_revenue(@invoice)[0].invoice_revenue.to_f / 100
