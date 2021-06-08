@@ -40,26 +40,26 @@ RSpec.describe 'merchant dashboard' do
     @invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_4.id, item_id: @item_2.id)
   end
 
-  it 'shows the name of the merchant in question' do
+  xit 'shows the name of the merchant in question' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_content("#{@merchant.name}")
     expect(page).to have_no_content("#{@antimerchant.name}")
   end
 
-  it 'has a link to my merchant items index' do
+  xit 'has a link to my merchant items index' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_link("Merchant Items Index", href: "/merchants/#{@merchant.id}/items")
   end
 
-  it 'has a link to my merchant invoices index' do
+  xit 'has a link to my merchant invoices index' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_link("Merchants Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
   end
 
-  it 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
+  xit 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_content("Top 5 Customers:")
@@ -98,7 +98,7 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_no_content("#{@customer_6.num_transactions_by_merchant}")
   end
 
-  it 'has a section to display all items that have been packaged but not yet shipped' do
+  xit 'has a section to display all items that have been packaged but not yet shipped' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_content("Items Ready to Ship:")
@@ -109,21 +109,21 @@ RSpec.describe 'merchant dashboard' do
 
   end
 
-  it 'does not show items that have been shipped' do
+  xit 'does not show items that have been shipped' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_no_content("#{@invoice_item_4.item_name}")
     expect(page).to have_no_content("#{@invoice_item_6.item_name}")
   end
 
-  it 'has the invoice id of the item listed and it is a link to the invoice show page' do
+  xit 'has the invoice id of the item listed and it is a link to the invoice show page' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_link("#{@invoice_1.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
     expect(page).to have_no_link("#{@invoice_6.id}")
   end
 
-  it 'has the creation date listed by each invoice in oldest to newest order' do
+  xit 'has the creation date listed by each invoice in oldest to newest order' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     within("##{@invoice_1.id}") do
