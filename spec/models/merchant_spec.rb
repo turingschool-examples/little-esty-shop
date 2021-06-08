@@ -51,7 +51,7 @@ RSpec.describe Merchant, type: :model do
     @invoice_item5 = @item5.invoice_items.create!(quantity: 1, unit_price: 67.0, status: 2, invoice: @invoice3) # 67
     @invoice_item6 = @item6.invoice_items.create!(quantity: 2, unit_price: 250.0, status: 2, invoice: @invoice3) # 500
   end
-783 * 18
+
   describe 'class methods' do
     describe '.enabled' do
       it "returns merchants with an enable status" do
@@ -87,7 +87,7 @@ RSpec.describe Merchant, type: :model do
   describe 'instance methods' do
     describe '#merchant_best_day' do
       it "shows top merchants best day" do
-        expect(@merchant6.merchant_best_day).to eq("06/06/2021")
+        expect(@merchant6.merchant_best_day).to eq(Date.today.strftime("%m/%d/%Y"))
 
         expect(@merchant6.merchant_best_day).to_not eq("06/03/2021")
         expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
