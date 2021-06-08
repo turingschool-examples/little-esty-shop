@@ -9,8 +9,5 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @customer = @invoice.customer
     @invoice_items = @invoice.invoice_items
-    @merchant_items = @merchant.items
-    @items = @merchant_items.joins(:invoices, :transactions).where('result = ?', 1).select('merchant_items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').group(:id)
-    binding.pry
   end
 end

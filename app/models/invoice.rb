@@ -15,4 +15,8 @@ class Invoice < ApplicationRecord
     rev_statuses = {0 => 'cancelled', 1 => 'in_progress', 2 => 'completed'}
     rev_statuses[self.status]
   end
+
+  def merchant_total_revenue(merchant_id)
+    Invoice.joins(:items, :invoice_items).where('items.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).select('sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+  end
 end

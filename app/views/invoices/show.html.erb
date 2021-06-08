@@ -1,6 +1,7 @@
 <h1>Invoice #<%= @invoice.id %>:</h1>
 
 <h2>Total Revenue from this Invoice:</h2>
+<p><%= @invoice.merchant_total_revenue(@merchant.id) %></p>
 
 <h2>Status:</h2>
 <p><%= @invoice.status_for_view %></p>
