@@ -1,4 +1,4 @@
 <h1> Invoice I.D.'s </h1>
 <% @invoices.each do |invoice|%>
- <p> <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> </p>
+ <p><%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> </p>
 <% end %>

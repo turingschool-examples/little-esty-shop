@@ -59,6 +59,13 @@ RSpec.describe Invoice, type: :model do
     @invoice_1 = Invoice.create!(status: 1, customer_id: @customer.id, created_at: "2021-06-05 20:11:38.553871" )
     @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 1, invoice_id: @invoice_1.id, item_id: @item_1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id)
+    
+    # Gunnar's Tests
+    @customer1 = Customer.create!(first_name: "Bobby", last_name: "Mendez")
+    @invoice1 = Invoice.create!(status: 1, customer_id: @customer1.id)
+    @merchant1 = Merchant.create!(name: "Nike")
+    @item1 = Item.create!(name: "Kobe zoom 5's", description: "Best shoe in basketball hands down!", unit_price: 12500, merchant_id: @merchant1.id)
+    @invoice_item1 = InvoiceItem.create!(quantity: 2, unit_price: 25000, status: 0, invoice_id: @invoice1.id, item_id: @item1.id)
   end
 
   describe 'instance methods' do
@@ -75,10 +82,12 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice_1.convert_create_date).to eq("Saturday, June 05, 2021")
       end
     end
-
-
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
+ 
+    describe '#total_revenue' do
+      it 'total revenue for an invoice' do
+        
+        expect(@invoice1.total_revenue).to eq(50000)
+      end
+    end
+  end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Admin Invoices Index Page' do
   before :each do
     @customer1 = Customer.create!(first_name: "Bobby", last_name: "Mendez")
-    @invoice1 = Invoice.create!(status: "in progess", customer_id: @customer1.id)
+    @invoice1 = Invoice.create!(status: 1, customer_id: @customer1.id)
 
     visit "/admin/invoices"
   end
