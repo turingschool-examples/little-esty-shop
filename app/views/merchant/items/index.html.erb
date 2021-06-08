@@ -18,7 +18,9 @@
     <h3 class="small_title_wrapper"> Disabled Items </h3>
     <% @items.each do |item| %>
       <% if item.status == "disable" %>
-          <%= item.name %>
+
+        <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+
           <%= button_to "Enable",
             "/merchants/#{@merchant.id}/items",
             method: :get, params: {change_to_enable: item},
@@ -29,7 +31,9 @@
     <h3 class="small_title_wrapper"> Enabled Items </h3>
     <% @items.each do |item| %>
       <% if item.status == "enable" %>
-        <%= item.name %>
+
+        <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+
         <%= button_to "Disable",
           "/merchants/#{@merchant.id}/items",
           method: :get, params: {change_to_disable: item},
@@ -45,9 +49,9 @@
     <% @top_items.each do |item| %><br/><br/>
       <% @top_days_per_merchant.each do |item_day| %>
         <% if item.name == item_day.name %>
-          <%= counter %>. <%= item.name %>
+          <%= counter %>. <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
           <%= (item.revenue.to_f) /100%><br/>
-          <p style= "margin: 0">Top selling date for <%= item_day.name %> was <%= Date.parse(item_day.updated_at.to_s).strftime("%m/%d/%Y")%></p><br/>
+          <p style= "margin: 0">Top selling date for <%= item_day.name %> was <%= Date.parse(item_day.created_at.to_s).strftime("%m/%d/%Y")%></p><br/>
         <% end %>
       <% end %>
       <% counter += 1 %>
