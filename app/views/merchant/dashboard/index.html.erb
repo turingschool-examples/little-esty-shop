@@ -15,8 +15,9 @@
   <div>
     <h3 class="small_title_wrapper">Items Ready to Ship</h3>
     <% @ready_to_ship_items.each do |item| %>
-      <p><%= item.name %></p>
-      <p><%= link_to @invoice_to_ship, "/merchants/#{@merchant.id}/invoices/#{@invoice_to_ship}" %></p>
+      <%= item.name %>
+      <%= Date.parse(item.created_at.to_s).strftime("%m/%d/%Y")%>
+      <%= link_to "Invoice-##{item.id}", "/merchants/#{@merchant.id}/invoices/#{item.id}", style: 'display:inline-block;'%><br/>
     <% end %>
   </div>
 

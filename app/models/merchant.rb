@@ -54,6 +54,14 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+  def ready_top_ship
+    items.joins(:invoice_items, :invoices)
+          .select('items.name', 'invoices.created_at', 'invoice_items.status', 'invoices.id')
+          .where('invoice_items.status = 1')
+          .group('items.name', 'invoices.created_at', 'invoice_items.status', 'invoices.id')
+          .order('invoices.created_at DESC')
+  end
+
 end
 #
 # Item.joins(:transactions).select('items.id', 'sum(invoice_items.quantity * invoice_items.unit_price) as revenue', 'transactions.result').where("transactions.result = 'success'").group('items.id').group('transactions.result').where(:merchant_id => 1).order('revenue DESC').limit(5)
