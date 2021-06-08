@@ -1,37 +1,47 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Admin Dashboard</title>
-    <div class="nav_bar_links">
-      <p class="nav_bar_links_inline"><%= button_to "Dashboard", "/admin", method: :get %></p>
-      <p class="nav_bar_links_inline"><%= button_to "Merchants", "/admin/merchants", method: :get %></p>
-      <p class="nav_bar_links_inline"><%= button_to "Invoices", "/admin/invoices", method: :get %></p>
-    </div>
-    <h1>Admin Dashboard</h1>
-  </head>
-  <body>
-    <section>
-      <h4>Top Customers</h4>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Number of Transactions</th>
-        </tr>
-        <% @top_five_customers.each do |customer| %>
-        <tr>
-          <td><%= customer.first_name %> <%= customer.last_name %></td>
-          <td style="text-align: center"><%= customer.number_of_transactions %></td>
-        </tr>
-        <% end %>
-      </table>
-    </section><br>
 
-    <section>
-      <h4>Incomplete Invoices</h4>
-      <% @incomplete_invoices.each do |invoice| %>
-        <%= link_to "Invoice-#{invoice.id}", "/admin/invoices/#{invoice.id}" %>: <%= invoice.created_at.strftime('%A, %B %d, %Y') %><br>
+
+
+<div class="">
+  <h1 class="little_esty_shop">Little Esty Shop</h1>
+</div>
+
+<div class="nav_bar_wrapper">
+  <h1 class="title_name">Admin Dashboard</h1>
+  <div class="nav_bar_links">
+    <p class="nav_bar_links_inline"><%= button_to "Dashboard", "/admin", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "Merchants", "/admin/merchants", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "Invoices", "/admin/invoices", method: :get %></p>
+  </div>
+</div>
+
+<h2 class="title_wrapper"></h2>
+
+
+
+<div class="fifty_fifty">
+
+  <div>
+    <h4 class="small_title_wrapper">Incomplete Invoices</h4>
+    <% @incomplete_invoices.each do |invoice| %>
+      <%= link_to "Invoice-#{invoice.id}", "/admin/invoices/#{invoice.id}" %>: <%= invoice.created_at.strftime('%A, %B %d, %Y') %><br>
+    <% end %>
+  </div>
+
+  <div>
+    <h4 class="small_title_wrapper">Top Customers</h4>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Number of Transactions</th>
+      </tr>
+      <% @top_five_customers.each do |customer| %>
+      <tr>
+        <td><%= customer.first_name %> <%= customer.last_name %></td>
+        <td style="text-align: center"><%= customer.number_of_transactions %></td>
+      </tr>
       <% end %>
-    </section>
-  </body>
-</html>
+    </table>
+
+  </div>
+
+</div>

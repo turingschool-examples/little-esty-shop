@@ -1,4 +1,19 @@
-<h1><%= @item.name %></h1>
+<div class="">
+  <h1 class="little_esty_shop">Little Esty Shop</h1>
+</div>
+
+<div class="nav_bar_wrapper">
+  <h1 class="title_name"><%= @merchant.name %></h1>
+  <div class="nav_bar_links">
+    <p class="nav_bar_links_inline"><%= button_to "Dashboard", "/merchants/#{@merchant.id}/dashboard", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Items", "/merchants/#{@merchant.id}/items", method: :get %></p>
+    <p class="nav_bar_links_inline"><%= button_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %></p>
+  </div>
+</div>
+
+<h2 class="title_wrapper"><%= @item.name %></h2>
+
+<%= @item.name %>
 <h3>Description: <%= @item.description %></h3>
 <h3>Current Selling Price: <%= @item.unit_price %></h3>
 <%= link_to "Update #{@item.name}", "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}/edit?name=#{@item.name}&&description=#{@item.description}&&unit_price=#{@item.unit_price}", method: :get, local: true %>
