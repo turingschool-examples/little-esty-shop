@@ -33,6 +33,10 @@ RSpec.describe Invoice, type: :model do
       it 'making a date in readable fashion' do
         expect(@invoice_1.convert_create_date).to eq("Saturday, June 05, 2021")
       end
+    describe '#merchant_total_revenue'
+    it 'can give the total revenue for a merchants items on specific invoice' do
+      expect(@invoice_1.merchant_total_revenue(@merchant.id)).to eq(111.3)
+    end
     end
   end
 end

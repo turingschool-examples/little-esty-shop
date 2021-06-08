@@ -17,6 +17,6 @@ class Invoice < ApplicationRecord
   end
 
   def merchant_total_revenue(merchant_id)
-    Invoice.joins(:items, :invoice_items).where('items.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).select('sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    Invoice.joins(:items, :invoice_items).where('items.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).distinct.sum('invoice_items.unit_price * invoice_items.quantity')
   end
 end
