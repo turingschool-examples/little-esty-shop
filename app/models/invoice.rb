@@ -16,7 +16,7 @@ class Invoice < ApplicationRecord
   end
 
   def self.unshipped
-    joins(:invoice_items).group(:id).where.not(invoice_items: {status: 2}).order(:id)
+    joins(:invoice_items).group(:id).where.not(invoice_items: {status: 2}).order(created_at: :desc)
   end
 
   def convert_create_date
