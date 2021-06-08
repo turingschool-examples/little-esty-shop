@@ -73,5 +73,35 @@ RSpec.describe Merchant, type: :model do
     it 'can list top 5 items' do
       expect(@merchant_1.top_5).to eq([@item_2, @item_3, @item_4, @item_6, @item_1])
     end
+
+    it 'can list ready to ship items' do
+      @item_7 = @merchant_2.items.create!(name: "Desk", description: "Yummy", unit_price: 400)
+      @item_8 = @merchant_2.items.create!(name: "Desk Chair", description: "Yummy", unit_price: 400)
+      @item_9 = @merchant_2.items.create!(name: "100 pack Pens", description: "Yummy", unit_price: 400)
+      @item_10 = @merchant_2.items.create!(name: "Printer Paper", description: "Yummy", unit_price: 400)
+      @item_11 = @merchant_2.items.create!(name: "50 pack Markers", description: "Yummy", unit_price: 400)
+
+      @invoice_7 = Invoice.create!(customer_id: @customer_2.id, status: 0)
+      @invoice_8 = Invoice.create!(customer_id: @customer_3.id, status: 0)
+      @invoice_9 = Invoice.create!(customer_id: @customer_4.id, status: 0)
+      @invoice_10 = Invoice.create!(customer_id: @customer_5.id, status: 0)
+      @invoice_11 = Invoice.create!(customer_id: @customer_6.id, status: 0)
+
+      InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_7.id, quantity: 1, unit_price: 1500, status: 1)
+      InvoiceItem.create!(item_id: @item_8.id, invoice_id: @invoice_8.id, quantity: 1, unit_price: 1500, status: 1)
+      InvoiceItem.create!(item_id: @item_9.id, invoice_id: @invoice_9.id, quantity: 1, unit_price: 1500, status: 0)
+      InvoiceItem.create!(item_id: @item_10.id, invoice_id: @invoice_10.id, quantity: 1, unit_price: 1500, status: 1)
+      InvoiceItem.create!(item_id: @item_11.id, invoice_id: @invoice_11.id, quantity: 1, unit_price: 1500, status: 1)
+      InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_11.id, quantity: 1, unit_price: 1500, status: 1)
+      InvoiceItem.create!(item_id: @item_9.id, invoice_id: @invoice_8.id, quantity: 1, unit_price: 1500, status: 1)
+
+      Transaction.create!(invoice_id: @invoice_7.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
+      Transaction.create!(invoice_id: @invoice_8.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
+      Transaction.create!(invoice_id: @invoice_9.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
+      Transaction.create!(invoice_id: @invoice_10.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
+      Transaction.create!(invoice_id: @invoice_11.id, result: 0, credit_card_number: '12345', credit_card_expiration_date: '12345')
+      
+      expect(@merchant_2.ready_top_ship.length).to eq(7)
+    end
   end
 end
