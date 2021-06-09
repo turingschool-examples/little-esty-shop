@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
+    it { should have_many(:merchants_customers) }
     it { should have_many(:items) }
     it { should have_many(:invoice_items).through(:items) }
     it { should have_many(:invoices).through(:invoice_items) }
@@ -50,6 +51,21 @@ RSpec.describe Merchant, type: :model do
     @invoice_item4 = @item4.invoice_items.create!(quantity: 5, unit_price: 18.0, status: 2, invoice: @invoice2) # 90
     @invoice_item5 = @item5.invoice_items.create!(quantity: 1, unit_price: 67.0, status: 2, invoice: @invoice3) # 67
     @invoice_item6 = @item6.invoice_items.create!(quantity: 2, unit_price: 250.0, status: 2, invoice: @invoice3) # 500
+
+    #For Leighs test
+    @pepper = Customer.create!(first_name: "Dr.", last_name: "Pepper")
+    @boosie = Customer.create!(first_name: "Lil", last_name: "Boosie")
+    @dizzy = Customer.create!(first_name: "Snoop", last_name: "Dizzy")
+    @jordan = Customer.create!(first_name: "Michael", last_name: "Jordan")
+    @james = Customer.create!(first_name: "Lebron", last_name: "James")
+    @vick = Customer.create!(first_name: "Mike", last_name: "Vick")
+
+    @merchcust1 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @pepper.id)
+    @merchcust2 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @boosie.id)
+    @merchcust3 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @dizzy.id)
+    @merchcust4 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @jordan.id)
+    @merchcust5 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @james.id)
+    @merchcust6 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @vick.id)
   end
 
   describe 'class methods' do
@@ -91,6 +107,12 @@ RSpec.describe Merchant, type: :model do
 
         expect(@merchant6.merchant_best_day).to_not eq("06/03/2021")
         expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
+      end
+    end
+
+    describe 'leighs test' do
+      it 'can show the top five customers' do
+        expect(@merchant1.top_customers).to eq([@pepper, @boosie, @dizzy, @jordan, @vick])
       end
     end
   end

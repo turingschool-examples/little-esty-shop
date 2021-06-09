@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
 
+  has_many :merchants_customers
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
@@ -41,5 +42,9 @@ class Merchant < ApplicationRecord
     .created_at
     .to_date
     .strftime("%m/%d/%Y")
+  end
+
+  def top_customers
+    Customer.top_5_customers
   end
 end
