@@ -40,7 +40,7 @@ RSpec.describe 'merchant dashboard' do
     @invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_4.id, item_id: @item_2.id)
   end
 
-  xit 'shows the name of the merchant in question' do
+  it 'shows the name of the merchant in question' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_content("#{@merchant.name}")
