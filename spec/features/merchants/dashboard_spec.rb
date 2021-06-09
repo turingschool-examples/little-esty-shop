@@ -47,7 +47,7 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_no_content("#{@antimerchant.name}")
   end
 
-  xit 'has a link to my merchant items index' do
+  it 'has a link to my merchant items index' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_link("Merchant Items Index", href: "/merchants/#{@merchant.id}/items")
