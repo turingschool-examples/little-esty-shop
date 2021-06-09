@@ -52,7 +52,6 @@ RSpec.describe Merchant, type: :model do
     @invoice_item5 = @item5.invoice_items.create!(quantity: 1, unit_price: 67.0, status: 2, invoice: @invoice3) # 67
     @invoice_item6 = @item6.invoice_items.create!(quantity: 2, unit_price: 250.0, status: 2, invoice: @invoice3) # 500
 
-    #For Leighs test
     @pepper = Customer.create!(first_name: "Dr.", last_name: "Pepper")
     @boosie = Customer.create!(first_name: "Lil", last_name: "Boosie")
     @dizzy = Customer.create!(first_name: "Snoop", last_name: "Dizzy")
@@ -107,12 +106,6 @@ RSpec.describe Merchant, type: :model do
 
         expect(@merchant6.merchant_best_day).to_not eq("06/03/2021")
         expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
-      end
-    end
-
-    describe 'leighs test' do
-      it 'can show the top five customers' do
-        expect(@merchant1.top_customers).to eq([@pepper, @boosie, @dizzy, @jordan, @vick])
       end
     end
   end

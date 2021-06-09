@@ -13,6 +13,8 @@ RSpec.describe Customer, type: :model do
   end
 
   before :each do
+    @merchant1 = Merchant.create!(name: "Tyler", status: 1)
+
     @customer1 = Customer.create!(first_name: "Dr.", last_name: "Pepper")
     @customer2 = Customer.create!(first_name: "Lil", last_name: "Boosie")
     @customer3 = Customer.create!(first_name: "Snoop", last_name: "Dizzy")
@@ -25,6 +27,13 @@ RSpec.describe Customer, type: :model do
     @invoice4 = @customer4.invoices.create!(status: 2)
     @invoice5 = @customer5.invoices.create!(status: 2)
     @invoice6 = @customer6.invoices.create!(status: 2)
+
+    @merchcust1 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @customer1.id)
+    @merchcust2 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @customer2.id)
+    @merchcust3 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @customer3.id)
+    @merchcust4 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @customer4.id)
+    @merchcust5 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @customer5.id)
+    @merchcust6 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @customer6.id)
 
     # customer 1 - third
     @transaction1 = @invoice1.transactions.create!(result: 1, credit_card_number: 4654405418249632)
@@ -68,6 +77,12 @@ RSpec.describe Customer, type: :model do
         expect(@customer4.number_of_successful_transactions).to eq(0)
 
         expect(@customer2.number_of_successful_transactions).to_not eq(2)
+      end
+    end
+
+    describe 'leighs test' do
+      it 'can show the top five customers' do
+        expect(Customer.top_customers(@merchant1.id)).to eq([@customer6, @customer2, @customer1, @customer5, @customer3])
       end
     end
   end
