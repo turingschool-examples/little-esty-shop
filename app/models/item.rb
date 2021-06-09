@@ -21,8 +21,8 @@ class Item < ApplicationRecord
 
   def total_revenue
     Item.joins(:invoice_items, :transactions).where('transactions.result = ?', 1).select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').group(:id)
-  end 
-  
+  end
+
   def self.top_popular_items
     joins(invoices: [:invoice_items, :transactions])
     .where('transactions.result = ?', 1)
@@ -43,4 +43,9 @@ class Item < ApplicationRecord
     .created_at
     .strftime("%m/%d/%Y")
   end
+
+  def self.not_shipped(merchant_id)
+    joins(:invoice_items).where('items.merchant_id = ?', merchant_id).where('invoice_items.status = ?', 1)
+  end
+
 end

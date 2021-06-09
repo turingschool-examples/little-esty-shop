@@ -1,0 +1,11 @@
+
+
+
+
+<section id="ready_to_ship">
+<h1>Items Ready To Ship:</h1>
+  <% @items.each do |item| %>
+    <p><%= item.name %></p>
+    <%= link_to "#{InvoiceItem.invoice_id(item)}", "/merchants/#{@merchant.id}/invoices/#{InvoiceItem.invoice_id(item)}" %></p>
+  <% end %>
+</section>

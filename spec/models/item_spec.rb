@@ -77,6 +77,28 @@ RSpec.describe Item, type: :model do
         expect(Item.top_popular_items.first.name).to_not eq(@item_7.name)
       end
     end
+
+    describe '#not_shipped' do
+      it 'can list items ready for shipping by merchant' do
+        @invoice_item_99 = @item_1.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
+        @invoice_item_100 = @item_2.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
+        @invoice_item_101 = @item_2.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
+
+        expect(Item.not_shipped(@merchant_1.id)).to eq([@item_1, @item_2, @item_2])
+      end
+    end
+
+    describe '#invoice_id' do
+      it 'can find individual items invoice id' do
+        @invoice_item_99 = @item_1.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
+        @invoice_item_100 = @item_2.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
+        @invoice_item_101 = @item_2.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
+
+        expect(InvoiceItem.invoice_id(Item.not_shipped(@merchant_1.id).first)).to eq(@invoice_2.id)
+        expect(InvoiceItem.invoice_id(Item.not_shipped(@merchant_1.id).second)).to eq(@invoice_2.id)
+        expect(InvoiceItem.invoice_id(Item.not_shipped(@merchant_1.id).third)).to eq(@invoice_2.id)
+      end
+    end
   end
 
   describe 'instance methods' do
