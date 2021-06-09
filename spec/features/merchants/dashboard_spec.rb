@@ -32,7 +32,7 @@ RSpec.describe Merchant, type: :feature do
       @customer_5 = Customer.create!(first_name: "Richard", last_name: "Last Name")
       @customer_6 = Customer.create!(first_name: "Zach", last_name: "Last Name")
 
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "In Progress")
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: "in progress")
       @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
       @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: 1)
       @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1)

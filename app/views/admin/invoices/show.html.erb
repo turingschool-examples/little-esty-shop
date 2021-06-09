@@ -27,7 +27,7 @@
       <div>
         <div style='display:flex;' name="Current Status">Status:
           <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
-            <%= f.select :status, ["In Progress", "Completed", "Cancelled"], selected: @invoice.status %>
+            <%= f.select :status, ["in progress", "completed", "cancelled"], selected: @invoice.status %>
             <%= f.submit "Update Invoice Status" %>
           <% end %>
         </div>

@@ -55,11 +55,11 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
   it 'shows the status' do
     visit "/merchants/#{@merchant_2.id}/invoices/#{@invoice_2.id}"
-    expect(page).to have_content('Pending')
-    page.select('Shipped', from: :status)
+    expect(page).to have_content('pending')
+    page.select('shipped', from: :status)
     click_button('Update Status')
     expect(current_path).to eq("/merchants/#{@merchant_2.id}/invoices/#{@invoice_2.id}")
-    expect(page).to have_content('Shipped')
+    expect(page).to have_content('shipped')
   end
 
   it 'shows total revenue' do

@@ -23,7 +23,7 @@
 <p>Quantity Ordered: <%= item.quantity %></p>
 <p>Price Sold For: <%= item.unit_price %></p>
 <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?item_id=#{item.id}", method: :patch, local: true do |f| %>
-<p>Status: <%= f.select :status, ['Pending','Packaged', 'Shipped'], selected: item.status  %></p>
+<p>Status: <%= f.select :status, ['pending','packaged', 'shipped'], selected: item.status  %></p>
 <%= f.submit 'Update Status' %>
 <% end %>
 <% end %>

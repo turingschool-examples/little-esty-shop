@@ -29,13 +29,13 @@ class Admin::MerchantsController < ApplicationController
 
   def update_status
     if params.include?('enable')
-      merchant = Merchant.find(params[:id])
+      merchant = Merchant.find(params[:merchant_id])
 
       merchant.update(status: 'enable')
 
       redirect_to "/admin/merchants"
     elsif params.include?('disable')
-      merchant = Merchant.find(params[:id])
+      merchant = Merchant.find(params[:merchant_id])
 
       merchant.update(status: 'disable')
 

@@ -36,13 +36,11 @@ RSpec.describe 'Admin Invoice Show' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
       @check_first_invoice_item = InvoiceItem.find_invoice_items(@invoice_1).first
-# binding.pry
       within("#id-#{@check_first_invoice_item.id}") do
         expect(page).to have_content(@check_first_invoice_item.name)
         expect(page).to have_content(@check_first_invoice_item.quantity)
         expect(page).to have_content(@check_first_invoice_item.convert_to_dollar)
         expect(page).to have_content(@check_first_invoice_item.status)
-        # binding.pry
       end
 
       @check_second_invoice_item = InvoiceItem.find_invoice_items(@invoice_1)[0]
@@ -66,19 +64,19 @@ RSpec.describe 'Admin Invoice Show' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
       expect(page).to have_button('Update Invoice Status')
-      expect(@invoice_1.status).to eq('In Progress')
+      expect(@invoice_1.status).to eq('in progress')
     end
 
     it 'updates status after selection' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
-      expect(page).to have_content('In Progress')
-      page.select('Completed', from: :status)
+      expect(page).to have_content('in progress')
+      page.select('completed', from: :status)
       click_button('Update Invoice Status')
       expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
-      expect(page).to have_content('Completed')
+      expect(page).to have_content('completed')
       @invoice_1.reload
-      expect(@invoice_1.status).to eq('Completed')
+      expect(@invoice_1.status).to eq('completed')
     end
   end
 end

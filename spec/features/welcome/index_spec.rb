@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Welcome Page' do
-  it 'contains all contributors, their total commits, and the total pull requests' do
+  xit 'contains all contributors, their total commits, and the total pull requests' do
     new = GithubUser.new('JBrabson', 'little-esty-shop')
 
     visit '/'

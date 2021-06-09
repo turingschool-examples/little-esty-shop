@@ -7,7 +7,7 @@ class Invoice < ApplicationRecord
   has_many :merchants, through: :items
   has_many :transactions, dependent: :destroy
 
-  enum status: ['In Progress', 'Completed', 'Cancelled']
+  enum status: ['in progress', 'completed', 'cancelled']
 
   def self.ordered_invoices_not_shipped
     joins(:invoice_items)
