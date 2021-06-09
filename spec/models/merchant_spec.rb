@@ -31,9 +31,9 @@ RSpec.describe Merchant, type: :model do
 
     @customer1 = Customer.create!(first_name: "Dr.", last_name: "Pepper")
 
-    @invoice1 = @customer1.invoices.create!(status: 2)
-    @invoice2 = @customer1.invoices.create!(status: 2)
-    @invoice3 = @customer1.invoices.create!(status: 2)
+    @invoice1 = @customer1.invoices.create!(status: 2, created_at: "2012-03-21 09:54:09")
+    @invoice2 = @customer1.invoices.create!(status: 2, created_at: "2012-04-21 09:54:09")
+    @invoice3 = @customer1.invoices.create!(status: 2, created_at: "2012-05-21 09:54:09")
 
     @transaction1 = @invoice1.transactions.create!(result: 1, credit_card_number: 4654405418249632)
     @transaction2 = @invoice1.transactions.create!(result: 1, credit_card_number: 4580251236515201)
@@ -87,9 +87,10 @@ RSpec.describe Merchant, type: :model do
   describe 'instance methods' do
     describe '#merchant_best_day' do
       it "shows top merchants best day" do
-        expect(@merchant6.merchant_best_day).to eq(Date.today.strftime("%m/%d/%Y"))
+        expect(@merchant6.merchant_best_day).to eq("05/21/2012")
 
-        expect(@merchant6.merchant_best_day).to_not eq("06/03/2021")
+        expect(@merchant6.merchant_best_day).to_not eq("04/21/2012")
+        expect(@merchant6.merchant_best_day).to_not eq("03/21/2012")
         expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
       end
     end
