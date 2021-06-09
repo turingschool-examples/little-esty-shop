@@ -26,6 +26,17 @@ class Customer < ApplicationRecord
     .limit(5)
   end
 
+  def top_successful_transactions(merchant_id)
+    Customer.joins(:merchants_customers, :transactions, :merchants)
+    .where('transactions.result = ?', 1)
+    .where('merchants_customers.merchant_id = ?', merchant_id)
+    .where('customers.id = ?', self.id)
+    .select('transactions.*')
+    .order('transactions.id')
+    .distinct
+    .count
+  end
+
   def number_of_successful_transactions
     transactions.where(result: 1).count
   end

@@ -80,9 +80,14 @@ RSpec.describe Customer, type: :model do
       end
     end
 
-    describe 'leighs test' do
+    describe 'merchants top customers' do
       it 'can show the top five customers' do
         expect(Customer.top_customers(@merchant1.id)).to eq([@customer6, @customer2, @customer1, @customer5, @customer3])
+      end
+
+      it 'can give the amount of successful transactions each customer had with their merchant' do
+        expect(@customer1.top_successful_transactions(@merchant1.id)).to eq(3)
+        expect(@customer4.top_successful_transactions(@merchant1.id)).to eq(0)
       end
     end
   end
