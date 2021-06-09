@@ -53,10 +53,10 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_link("Merchant Items Index", href: "/merchants/#{@merchant.id}/items")
   end
 
-  xit 'has a link to my merchant invoices index' do
+  it 'has a link to my merchant invoices index' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
-    expect(page).to have_link("Merchants Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
+    expect(page).to have_link("Merchant Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
   end
 
   xit 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
