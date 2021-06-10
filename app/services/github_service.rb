@@ -8,25 +8,26 @@ class GithubService
     @commits_and_names ||= repo_commits_and_names
     @pulls ||= repo_pull_requests
   end
-
-  def conn
-    repsponse = Faraday.get 'https://api.github.com'
-    body = repsponse.body
-    JSON.parse(body, symbolize_names: true)
-  end
-
+  
   def repo_name
-
+    response = Faraday.get 'https://api.github.com/repos/jrwhitmer/little-esty-shop'
+    parsed = JSON.parse(response.body, symbolize_names: true)
+    parsed[:name]
   end
 
   def repo_commits_and_names
+    response = Faraday.get 'https://api.github.com/repos/jrwhitmer/little-esty-shop/stats/contributors'
+    parsed = JSON.parse(response.body, symbolize_names: true)
 
+    parsed.each_with_object({}) do |login, total|
+      total[login[:author][:login]] = login[:total]
+    end
   end
 
   def repo_pull_requests
-
+    response = Faraday.get 'https://api.github.com/repos/jrwhitmer/little-esty-shop/pulls?state=all'
+    JSON.parse(response.body, symbolize_names: true).count
   end
-
 end
 
 # GitHub API: Repo Name

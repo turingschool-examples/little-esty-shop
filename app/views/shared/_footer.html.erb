@@ -1,0 +1,7 @@
+<% @github_service = GithubService.new %>
+<p>Repo Name: <%= @github_service.name %></p>
+<p>User Name: joeray100 Commits: <%= @github_service.commits_and_names['joeray100'] %></p>
+<p>>User Name: lcpulzone Commits: <%= @github_service.commits_and_names['lcpulzone'] %></p>
+<p>>User Name: jrwhitmer Commits: <%= @github_service.commits_and_names['jrwhitmer'] %></p>
+<p>>User Name: gunnarrunner Commits: <%= @github_service.commits_and_names['gunnarrunner'] %></p>
+<p>Pull Request: <%= @github_service.pulls %></p>
