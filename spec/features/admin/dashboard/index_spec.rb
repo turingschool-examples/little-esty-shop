@@ -136,10 +136,10 @@ RSpec.describe 'Admin Dashboard Index Page' do
 
   it "each invoice id links to that invoice's admin show page" do
     expect(current_path).to eq(dashboard_index_path)
-    expect(page).to have_link("Invoice #{@invoice1.id}", href: admin_invoice_path(:admin, @invoice1.id) )
-    expect(page).to have_link("Invoice #{@invoice2.id}", href: admin_invoice_path(:admin, @invoice2.id) )
-    expect(page).to have_link("Invoice #{@invoice4.id}", href: admin_invoice_path(:admin, @invoice4.id) )
+    expect(page).to have_link("Invoice #{@invoice1.id}", href: admin_invoice_path(@invoice1.id) )
+    expect(page).to have_link("Invoice #{@invoice2.id}", href: admin_invoice_path(@invoice2.id) )
+    expect(page).to have_link("Invoice #{@invoice4.id}", href: admin_invoice_path(@invoice4.id) )
 
-    expect(page).to_not have_link("Invoice #{@invoice3.id}", href: admin_invoice_path(:admin, @invoice3.id) )
+    expect(page).to_not have_link("Invoice #{@invoice3.id}", href: admin_invoice_path(@invoice3.id) )
   end
 end
