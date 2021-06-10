@@ -31,4 +31,8 @@ class Invoice < ApplicationRecord
   def merchant_total_revenue(merchant_id)
     Invoice.joins(:items, :invoice_items).where('items.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).distinct.sum('invoice_items.unit_price * invoice_items.quantity')
   end
+
+  def self.invoice_creation(item)
+    joins(:merchants, :items, :invoice_items).where('invoice_items.item_id = ?', item.id).where('merchants.id = ?', item.merchant_id).where('invoice_items.status = ?', 1).select('invoices.created_at').pluck(:created_at).first.strftime("%A, %B %d, %Y")
+  end
 end
