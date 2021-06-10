@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
   has_many :merchants_customers
-  has_many :merchants, through: :merchants_customers #TEST
+  has_many :merchants, through: :merchants_customers
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
 
@@ -14,6 +14,10 @@ class Customer < ApplicationRecord
     .group(:id)
     .order('transactions.count desc')
     .limit(5)
+  end
+
+  def number_of_successful_transactions
+    transactions.where(result: 1).count
   end
 
   def self.top_customers(merchant_id)
@@ -35,9 +39,5 @@ class Customer < ApplicationRecord
     .order('transactions.id')
     .distinct
     .count
-  end
-
-  def number_of_successful_transactions
-    transactions.where(result: 1).count
   end
 end

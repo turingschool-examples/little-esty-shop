@@ -14,6 +14,10 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:unit_price) }
   end
 
+  describe 'enum' do
+    it { define_enum_for(:status) }
+  end
+
   before :each do
     @frank = Customer.create!(first_name: 'Frank', last_name: 'Enstein')
 
@@ -55,11 +59,21 @@ RSpec.describe Item, type: :model do
 
   describe 'class methods' do
     describe '.enable/disable items' do
+      it 'can give the correct enabled status' do
+        expect(Item.enable_items[0].status).to eq(@item_1.status)
+        expect(Item.enable_items[0].status).to_not eq(@item_4.status)
+      end
+
       it 'can group enabled items' do
         expect(Item.enable_items.first.name).to eq(@item_1.name)
         expect(Item.enable_items.second.name).to eq(@item_2.name)
         expect(Item.enable_items.third.name).to eq(@item_3.name)
         expect(Item.enable_items.last.name).to_not eq(@item_1.name)
+      end
+
+      it 'can give correct disabled status' do
+        expect(Item.disable_items[0].status).to eq(@item_4.status)
+        expect(Item.disable_items[0].status).to_not eq(@item_2.status)
       end
 
       it 'can group disabled items' do
@@ -87,7 +101,6 @@ RSpec.describe Item, type: :model do
         expect(Item.not_shipped(@merchant_1.id).first).to eq(@item_1)
         expect(Item.not_shipped(@merchant_1.id).second).to eq(@item_2)
         expect(Item.not_shipped(@merchant_1.id).third).to eq(@item_2)
-
       end
     end
 
@@ -103,6 +116,8 @@ RSpec.describe Item, type: :model do
       end
     end
   end
+
+  describe ''
 
   describe 'instance methods' do
     describe '#total revenue top date' do

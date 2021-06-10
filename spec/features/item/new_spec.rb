@@ -28,7 +28,6 @@ RSpec.describe 'items show page'do
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
       expect(page).to have_content("T-Rex Floatie")
-      # expect(page).to have_button("Enable")
       expect(page).to_not have_content("BreadNButter")
     end
   end
