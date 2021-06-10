@@ -15,6 +15,10 @@ RSpec.describe Merchant, type: :model do
     it { should validate_presence_of(:status) }
   end
 
+  describe 'enum' do
+    it { should define_enum_for(:status) }
+  end
+
   before :each do
     # enabled
     @merchant1 = Merchant.create!(name: "Tyler", status: 1)
@@ -87,7 +91,6 @@ RSpec.describe Merchant, type: :model do
     describe '.new_mechant_id' do
       it "returns merchants with an disable status" do
         expect(Merchant.new_mechant_id).to eq(Merchant.all.last.id + 1)
-
         expect(Merchant.new_mechant_id).to_not eq(Merchant.all.last)
       end
     end
@@ -95,7 +98,6 @@ RSpec.describe Merchant, type: :model do
     describe '.top_merchants_by_revenue' do
       it "returns merchants with an disable status" do
         expect(Merchant.top_merchants_by_revenue).to eq([@merchant6, @merchant2, @merchant3, @merchant5, @merchant4])
-
         expect(Merchant.top_merchants_by_revenue).to_not eq([@merchant1, @merchant2, @merchant3, @merchant5, @merchant4])
       end
     end
