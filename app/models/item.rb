@@ -47,5 +47,4 @@ class Item < ApplicationRecord
   def self.not_shipped(merchant_id)
     joins(:invoice_items, :invoices).where('items.merchant_id = ?', merchant_id).where('invoice_items.status = ?', 1)
   end
-
 end
