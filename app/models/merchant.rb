@@ -1,5 +1,4 @@
 class Merchant < ApplicationRecord
-
   has_many :merchants_customers
   has_many :customers, through: :merchants_customers
   has_many :items, dependent: :destroy
