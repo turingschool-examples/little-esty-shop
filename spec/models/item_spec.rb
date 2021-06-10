@@ -84,7 +84,10 @@ RSpec.describe Item, type: :model do
         @invoice_item_100 = @item_2.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
         @invoice_item_101 = @item_2.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 1, invoice: @invoice_2)
 
-        expect(Item.not_shipped(@merchant_1.id)).to eq([@item_1, @item_2, @item_2])
+        expect(Item.not_shipped(@merchant_1.id).first).to eq(@item_1)
+        expect(Item.not_shipped(@merchant_1.id).second).to eq(@item_2)
+        expect(Item.not_shipped(@merchant_1.id).third).to eq(@item_2)
+
       end
     end
 

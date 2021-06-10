@@ -27,16 +27,16 @@ RSpec.describe 'merchant dashboard' do
     @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id, created_at: "2021-06-03 20:11:38.553871")
 
     @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 2, invoice_id: @invoice_1.id, item_id: @item_1.id)
-    @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id)
+    @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 1, invoice_id: @invoice_1.id, item_id: @item_2.id, created_at: "2021-06-05 20:11:38.553871")
     @invoice_item_3 = InvoiceItem.create!(quantity: 4, unit_price: 19.4, status: 2, invoice_id: @invoice_2.id, item_id: @item_3.id)
     @invoice_item_4 = InvoiceItem.create!(quantity: 1, unit_price: 12.2, status: 2, invoice_id: @invoice_2.id, item_id: @item_4.id)
     @invoice_item_5 = InvoiceItem.create!(quantity: 2, unit_price: 10.4, status: 2, invoice_id: @invoice_2.id, item_id: @item_2.id)
-    @invoice_item_6 = InvoiceItem.create!(quantity: 7, unit_price: 15.3, status: 1, invoice_id: @invoice_3.id, item_id: @item_5.id)
+    @invoice_item_6 = InvoiceItem.create!(quantity: 7, unit_price: 15.3, status: 1, invoice_id: @invoice_3.id, item_id: @item_5.id, created_at: "2021-06-06 20:11:38.553871")
     @invoice_item_7 = InvoiceItem.create!(quantity: 6, unit_price: 10.4, status: 2, invoice_id: @invoice_3.id, item_id: @item_3.id)
-    @invoice_item_8 = InvoiceItem.create!(quantity: 3, unit_price: 19.4, status: 1, invoice_id: @invoice_4.id, item_id: @item_3.id)
-    @invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_5.id)
+    @invoice_item_8 = InvoiceItem.create!(quantity: 3, unit_price: 19.4, status: 1, invoice_id: @invoice_4.id, item_id: @item_3.id, created_at: "2021-06-01 20:11:38.553871")
+    @invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_5.id, created_at: "2021-06-01 20:11:38.553871")
     @invoice_item_10 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_6.id, item_id: @item_6.id)
-    @invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_1.id)
+    @invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 1, invoice_id: @invoice_4.id, item_id: @item_1.id, created_at: "2021-06-01 20:11:38.553871")
     @invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_4.id, item_id: @item_2.id)
   end
 
@@ -124,23 +124,20 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_no_link("#{@invoice_6.id}")
   end
 
-  xit 'has the creation date listed by each invoice in oldest to newest order' do
+  it 'has the creation date listed by each invoice in oldest to newest order' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
-    within("##{@invoice_1.id}") do
       expect(page).to have_content("Saturday, June 05, 2021")
-    end
 
-    within("##{@invoice_2.id}") do
-      expect(page).to have_content("Monday, June 07, 2021")
-    end
+      expect(page).to have_content("Sunday, June 06, 2021")
 
-    expect(page).to have_no_content("Thursday, June 03, 2021")
+      expect(page).to have_content("Tuesday, June 01, 2021")
 
-    #may need to change the ids to the dates associated with the invoices, in case of loose number messing up the tests
-    expect("#{@invoice_4.id}").to appear_before("#{@invoice_5.id}")
-    expect("#{@invoice_5.id}").to appear_before("#{@invoice_1.id}")
-    expect("#{@invoice_1.id}").to appear_before("#{@invoice_3.id}")
-    expect("#{@invoice_3.id}").to appear_before("#{@invoice_2.id}")
+      expect(page).to have_no_content("Thursday, June 03, 2021")
+
+    #   save_and_open_page
+    #
+    # expect("#{@invoice_4.convert_create_date}").to appear_before("#{@invoice_1.convert_create_date}")
+    # expect("#{@invoice_1.convert_create_date}").to appear_before("#{@invoice_3.convert_create_date}")
   end
 end

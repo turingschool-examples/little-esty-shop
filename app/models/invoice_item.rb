@@ -19,4 +19,5 @@ class InvoiceItem < ApplicationRecord
   def self.invoice_id(item)
     joins(:merchants, :item, :invoice).where('invoice_items.item_id = ?', item.id).where('merchants.id = ?', item.merchant_id).where('invoice_items.status = ?', 1).select('invoice_items.invoice_id').pluck(:invoice_id).first
   end
+
 end
