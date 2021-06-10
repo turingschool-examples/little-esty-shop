@@ -12,6 +12,13 @@ RSpec.describe 'merchant dashboard' do
     @customer_5 = Customer.create!(first_name: 'Josephina', last_name: 'Cortez')
     @customer_6 = Customer.create!(first_name: 'Jemma', last_name: 'Henry')
 
+    @merchcust1 = MerchantsCustomer.create!(merchant_id: @merchant.id, customer_id: @customer_1.id)
+    @merchcust2 = MerchantsCustomer.create!(merchant_id: @merchant.id, customer_id: @customer_2.id)
+    @merchcust3 = MerchantsCustomer.create!(merchant_id: @merchant.id, customer_id: @customer_3.id)
+    @merchcust4 = MerchantsCustomer.create!(merchant_id: @merchant.id, customer_id: @customer_4.id)
+    @merchcust5 = MerchantsCustomer.create!(merchant_id: @merchant.id, customer_id: @customer_5.id)
+    @merchcust6 = MerchantsCustomer.create!(merchant_id: @merchant.id, customer_id: @customer_6.id)
+
     @item_1 = Item.create!(name: 'Thing 1', description: 'This is the first thing.', unit_price: 14.9, merchant_id: @merchant.id)
     @item_2 = Item.create!(name: 'Thing 2', description: 'This is the second thing.', unit_price: 16.3, merchant_id: @merchant.id)
     @item_3 = Item.create!(name: 'Thing 3', description: 'This is the third thing.', unit_price: 19.4, merchant_id: @merchant.id)
@@ -40,62 +47,57 @@ RSpec.describe 'merchant dashboard' do
     @invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 15.3, status: 2, invoice_id: @invoice_4.id, item_id: @item_2.id)
   end
 
-  xit 'shows the name of the merchant in question' do
+  it 'shows the name of the merchant in question' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_content("#{@merchant.name}")
     expect(page).to have_no_content("#{@antimerchant.name}")
   end
 
-  xit 'has a link to my merchant items index' do
+  it 'has a link to my merchant items index' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
     expect(page).to have_link("Merchant Items Index", href: "/merchants/#{@merchant.id}/items")
   end
 
-  xit 'has a link to my merchant invoices index' do
+  it 'has a link to my merchant invoices index' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
-    expect(page).to have_link("Merchants Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
+    expect(page).to have_link("Merchant Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
   end
 
   xit 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
     visit "/merchants/#{@merchant.id}/dashboard"
 
-    expect(page).to have_content("Top 5 Customers:")
-    expect(page).to have_content("#{@customer_1.name}")
-    expect(page).to have_content("#{@customer_2.name}")
-    expect(page).to have_content("#{@customer_3.name}")
-    expect(page).to have_content("#{@customer_4.name}")
-    expect(page).to have_content("#{@customer_5.name}")
-    expect(page).to have_no_content("#{@customer_6.name}")
+    expect(page).to have_content("Favorite Customers:")
+    expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
+    expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
+    expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")
+    expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
+    expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name}")
+    expect(page).to have_no_content("#{@customer_6.first_name} #{@customer_6.last_name}")
 
     within("##{@customer_1.id}") do
-      expect(page).to have_content("Number of Transactions Conducted:")
-      expect(page).to have_content("#{@customer_1.num_transactions_by_merchant}")
+      expect(page).to have_content("#{@customer_1.top_successful_transactions("#{@merchant.id}")}")
     end
 
     within("##{@customer_2.id}") do
-      expect(page).to have_content("Number of Transactions Conducted:")
-      expect(page).to have_content("#{@customer_2.num_transactions_by_merchant}")
+      expect(page).to have_content("#{@customer_2.top_successful_transactions("#{@merchant.id}")}")
     end
 
     within("##{@customer_3.id}") do
-      expect(page).to have_content("Number of Transactions Conducted:")
-      expect(page).to have_content("#{@customer_3.num_transactions_by_merchant}")
+      expect(page).to have_content("#{@customer_3.top_successful_transactions("#{@merchant.id}")}")
     end
 
     within("##{@customer_4.id}") do
-      expect(page).to have_content("Number of Transactions Conducted:")
-      expect(page).to have_content("#{@customer_4.num_transactions_by_merchant}")
+      expect(page).to have_content("#{@customer_4.top_successful_transactions("#{@merchant.id}")}")
     end
 
     within("##{@customer_5.id}") do
-      expect(page).to have_content("Number of Transactions Conducted:")
-      expect(page).to have_content("#{@customer_5.num_transactions_by_merchant}")
+      expect(page).to have_content("#{@customer_5.top_successful_transactions("#{@merchant.id}")}")
     end
 
-    expect(page).to have_no_content("#{@customer_6.num_transactions_by_merchant}")
+    expect(page).to have_no_content("#{@customer_6.top_successful_transactions("#{@merchant.id}")}")
   end
 
   xit 'has a section to display all items that have been packaged but not yet shipped' do

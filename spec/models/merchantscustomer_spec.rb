@@ -1,18 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
-  describe 'relationships' do
-    it { should have_many(:merchants_customers) }
-    it { should have_many(:items) }
-    it { should have_many(:invoice_items).through(:items) }
-    it { should have_many(:invoices).through(:invoice_items) }
-  end
-
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:status) }
-  end
-
+RSpec.describe MerchantsCustomer, type: :model do
   before :each do
     # enabled
     @merchant1 = Merchant.create!(name: "Tyler", status: 1)
@@ -32,9 +20,9 @@ RSpec.describe Merchant, type: :model do
 
     @customer1 = Customer.create!(first_name: "Dr.", last_name: "Pepper")
 
-    @invoice1 = @customer1.invoices.create!(status: 2, created_at: "2012-03-21 09:54:09")
-    @invoice2 = @customer1.invoices.create!(status: 2, created_at: "2012-04-21 09:54:09")
-    @invoice3 = @customer1.invoices.create!(status: 2, created_at: "2012-05-21 09:54:09")
+    @invoice1 = @customer1.invoices.create!(status: 2)
+    @invoice2 = @customer1.invoices.create!(status: 2)
+    @invoice3 = @customer1.invoices.create!(status: 2)
 
     @transaction1 = @invoice1.transactions.create!(result: 1, credit_card_number: 4654405418249632)
     @transaction2 = @invoice1.transactions.create!(result: 1, credit_card_number: 4580251236515201)
@@ -67,47 +55,8 @@ RSpec.describe Merchant, type: :model do
     @merchcust6 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @vick.id)
   end
 
-  describe 'class methods' do
-    describe '.enabled' do
-      it "returns merchants with an enable status" do
-        expect(Merchant.enabled).to eq([@merchant1, @merchant2, @merchant3])
-        expect(Merchant.enabled).to_not eq([@merchant4, @merchant5, @merchant6])
-      end
-    end
-
-    describe '.disabled' do
-      it "returns merchants with an disable status" do
-        expect(Merchant.disabled).to eq([@merchant4, @merchant5, @merchant6])
-        expect(Merchant.disabled).to_not eq([@merchant1, @merchant2, @merchant3])
-      end
-    end
-
-    describe '.new_mechant_id' do
-      it "returns merchants with an disable status" do
-        expect(Merchant.new_mechant_id).to eq(Merchant.all.last.id + 1)
-
-        expect(Merchant.new_mechant_id).to_not eq(Merchant.all.last)
-      end
-    end
-
-    describe '.top_merchants_by_revenue' do
-      it "returns merchants with an disable status" do
-        expect(Merchant.top_merchants_by_revenue).to eq([@merchant6, @merchant2, @merchant3, @merchant5, @merchant4])
-
-        expect(Merchant.top_merchants_by_revenue).to_not eq([@merchant1, @merchant2, @merchant3, @merchant5, @merchant4])
-      end
-    end
-  end
-
-  describe 'instance methods' do
-    describe '#merchant_best_day' do
-      it "shows top merchants best day" do
-        expect(@merchant6.merchant_best_day).to eq("05/21/2012")
-
-        expect(@merchant6.merchant_best_day).to_not eq("04/21/2012")
-        expect(@merchant6.merchant_best_day).to_not eq("03/21/2012")
-        expect(@merchant6.merchant_best_day).to_not eq(@merchant6.created_at)
-      end
-    end
+  describe 'relationships' do
+    it { should belong_to(:customer) }
+    it { should belong_to(:merchant) }
   end
 end
