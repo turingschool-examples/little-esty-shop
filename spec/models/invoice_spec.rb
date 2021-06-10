@@ -9,9 +9,9 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:merchants).through(:items) }
   end
 
-  # describe 'validations' do
-  #   it { should validate_presence_of(:status) }
-  # end
+  describe 'validations' do
+    it { should define_enum_for(:status) }
+  end
 
   before :each do
     # Below set up is for Admin side
@@ -83,15 +83,15 @@ RSpec.describe Invoice, type: :model do
       it 'making a date in readable fashion' do
         expect(@invoice_1.convert_create_date).to eq("Saturday, June 05, 2021")
       end
+
     describe '#merchant_total_revenue'
-    it 'can give the total revenue for a merchants items on specific invoice' do
-      expect(@invoice_1.merchant_total_revenue(@merchant.id)).to eq(111.3)
-    end
+      it 'can give the total revenue for a merchants items on specific invoice' do
+        expect(@invoice_1.merchant_total_revenue(@merchant.id)).to eq(111.3)
+      end
     end
 
     describe '#total_revenue' do
       it 'total revenue for an invoice' do
-
         expect(@invoice9.total_revenue).to eq(50000)
       end
     end
