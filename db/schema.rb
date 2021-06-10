@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_025956) do
     t.string "name"
     t.string "description"
     t.float "unit_price"
-    t.integer "status", default: 1
+    t.integer "status", default: 0
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
