@@ -87,7 +87,6 @@ RSpec.describe Item, type: :model do
         expect(Item.not_shipped(@merchant_1.id).first).to eq(@item_1)
         expect(Item.not_shipped(@merchant_1.id).second).to eq(@item_2)
         expect(Item.not_shipped(@merchant_1.id).third).to eq(@item_2)
-
       end
     end
 
