@@ -16,6 +16,10 @@ class Customer < ApplicationRecord
     .limit(5)
   end
 
+  def number_of_successful_transactions
+    transactions.where(result: 1).count
+  end
+
   def self.top_customers(merchant_id)
     joins(:merchants_customers, :transactions, :merchants)
     .where('transactions.result = ?', 1)
@@ -35,9 +39,5 @@ class Customer < ApplicationRecord
     .order('transactions.id')
     .distinct
     .count
-  end
-
-  def number_of_successful_transactions
-    transactions.where(result: 1).count
   end
 end
