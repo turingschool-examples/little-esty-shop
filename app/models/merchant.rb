@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
 
   has_many :merchants_customers
-  has_many :customers, through: :merchants_customers #create a test
+  has_many :customers, through: :merchants_customers
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
