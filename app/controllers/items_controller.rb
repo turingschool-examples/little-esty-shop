@@ -23,10 +23,9 @@ class ItemsController < ApplicationController
       unit_price: params[:unit_price]
       })
 
-    if @item.save!
+    if @item.save
       redirect_to "/merchants/#{@merchant.id}/items"
     else
-      flash[:alert] = "Error: #{@item.errors.full_messages.to_sentence}"
       render :new
     end
   end
@@ -46,7 +45,6 @@ class ItemsController < ApplicationController
       flash[:notice] = "Item information has been successfully updated!"
     else
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
-      flash[:alert] = "Error: #{@item.errors.full_messages.to_sentence}"
     end
   end
 
@@ -56,9 +54,6 @@ class ItemsController < ApplicationController
     @item.status = params[:status]
 
     if @item.save
-      redirect_to "/merchants/#{@merchant.id}/items"
-    else
-      flash[:alert] = "Error: #{@item.errors.full_messages.to_sentence}"
       redirect_to "/merchants/#{@merchant.id}/items"
     end
   end
