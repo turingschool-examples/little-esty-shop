@@ -8,7 +8,7 @@
   <section id="top-rev-merchants-<%= merchant.id %>">
     <ol>
       <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> - <%= "#{number_to_currency(merchant.total_revenue)} in sales" %><br>
-      <%= "Top selling date for #{merchant.name} was #{merchant.merchant_best_day}" %>
+      <%= "Top selling date for #{merchant.name} was #{merchant.merchant_best_day.to_date.strftime("%m/%d/%Y")}" %>
     </ol>
   </section>
 <% end %>
