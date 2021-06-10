@@ -3,5 +3,4 @@ class MerchantsCustomer < ApplicationRecord
   belongs_to :merchant
   has_many :invoices, through: :customer
   has_many :transactions, through: :invoices
-
 end
