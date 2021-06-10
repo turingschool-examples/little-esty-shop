@@ -65,7 +65,6 @@ RSpec.describe Customer, type: :model do
     describe '.top_5_customers' do
       it "show the top 5 customers by successful transactions" do
         expect(Customer.top_5_customers).to eq([@customer6, @customer2, @customer1, @customer5, @customer3])
-
         expect(Customer.top_5_customers).to_not eq([@customer6, @customer2, @customer1, @customer5, @customer4])
       end
     end
@@ -76,13 +75,12 @@ RSpec.describe Customer, type: :model do
       it "shows number of successful transactions for each customer" do
         expect(@customer6.number_of_successful_transactions).to eq(5)
         expect(@customer4.number_of_successful_transactions).to eq(0)
-
         expect(@customer2.number_of_successful_transactions).to_not eq(2)
       end
     end
 
     describe 'merchants top customers' do
-      it 'can show the top five customers' do
+      it 'can show the top five customers for a merchant' do
         expect(Customer.top_customers(@merchant1.id)).to eq([@customer6, @customer2, @customer1, @customer5, @customer3])
       end
 
