@@ -41,7 +41,7 @@ RSpec.describe 'items show page'do
       expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@item_5.id}")
     end
 
-    xit 'gives an error message if all fields are not filled out' do
+    it 'gives an error message if all fields are not filled out' do
       visit "/merchants/#{@merchant_2.id}/items/#{@item_5.id}/edit"
 
       fill_in "Name", with: "The Best Thing"

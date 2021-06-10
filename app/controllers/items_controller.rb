@@ -39,9 +39,9 @@ class ItemsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
-    @item.update!(item_params)
+    @item.update(item_params)
 
-    if @item.save!
+    if @item.save
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
       flash[:notice] = "Item information has been successfully updated!"
     else
@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.status = params[:status]
 
-    if @item.save!
+    if @item.save
       redirect_to "/merchants/#{@merchant.id}/items"
     else
       flash[:alert] = "Error: #{@item.errors.full_messages.to_sentence}"
