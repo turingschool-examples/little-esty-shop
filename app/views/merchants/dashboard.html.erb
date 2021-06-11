@@ -13,8 +13,7 @@
 <h1>Items Ready To Ship:</h1>
   <% @items.each do |item| %>
     <p><%= item.name %></p>
-    <%= link_to "#{InvoiceItem.invoice_id(item)}", "/merchants/#{@merchant.id}/invoices/#{InvoiceItem.invoice_id(item)}" %></p>
-    <p>Created on:<%= Invoice.invoice_creation(item) %></p>
+    <p><%= link_to "#{item.id}", "/merchants/#{@merchant.id}/invoices/#{item.id}" %></p>
+    <p>Created on:<%= item.created_at.strftime("%A, %B %d, %Y") %></p>
   <% end %>
 </section>
-

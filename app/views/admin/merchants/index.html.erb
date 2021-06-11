@@ -17,7 +17,7 @@
   <% @enabled_merchants.each do |merchant| %>
     <section id="enabled-merchant-<%= merchant.id %>">
       <ul>
-        <p><%= link_to "#{merchant.name}", admin_merchant_path(:admin, merchant) %><%= button_to 'Disable', status_update_admin_merchant_path(merchant.id, status: "disable"), {method: :patch, action: :update_merchant_status } %></p>
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %><%= button_to 'Disable', status_update_admin_merchant_path(merchant.id, status: "disable"), {method: :patch, action: :update_merchant_status } %></p>
       </ul>
     </section>
   <% end %><br><br>
@@ -26,7 +26,7 @@
   <% @disabled_merchants.each do |merchant| %>
     <section id="disabled-merchant-<%= merchant.id %>">
       <ul>
-        <p><%= link_to "#{merchant.name}", admin_merchant_path(:admin, merchant) %><%= button_to 'Enable', status_update_admin_merchant_path(merchant.id, status: "enable"), {method: :patch, action: :update_merchant_status } %></p>
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %><%= button_to 'Enable', status_update_admin_merchant_path(merchant.id, status: "enable"), {method: :patch, action: :update_merchant_status } %></p>
       </ul>
     </section>
   <% end %>

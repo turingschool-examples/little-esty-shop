@@ -66,58 +66,58 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_link("Merchant Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
   end
 
-  xit 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-    expect(page).to have_content("Favorite Customers:")
-    expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
-    expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
-    expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")
-    expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
-    expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name}")
-    expect(page).to have_no_content("#{@customer_6.first_name} #{@customer_6.last_name}")
-
-    within("##{@customer_1.id}") do
-      expect(page).to have_content("#{@customer_1.top_successful_transactions("#{@merchant.id}")}")
-    end
-
-    within("##{@customer_2.id}") do
-      expect(page).to have_content("#{@customer_2.top_successful_transactions("#{@merchant.id}")}")
-    end
-
-    within("##{@customer_3.id}") do
-      expect(page).to have_content("#{@customer_3.top_successful_transactions("#{@merchant.id}")}")
-    end
-
-    within("##{@customer_4.id}") do
-      expect(page).to have_content("#{@customer_4.top_successful_transactions("#{@merchant.id}")}")
-    end
-
-    within("##{@customer_5.id}") do
-      expect(page).to have_content("#{@customer_5.top_successful_transactions("#{@merchant.id}")}")
-    end
-
-    expect(page).to have_no_content("#{@customer_6.top_successful_transactions("#{@merchant.id}")}")
-  end
-
-  it 'has a section to display all items that have been packaged but not yet shipped' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-    expect(page).to have_content("Items Ready To Ship:")
-    expect(page).to have_content("#{@invoice_item_2.item_name}")
-    expect(page).to have_content("#{@invoice_item_6.item_name}")
-    expect(page).to have_content("#{@invoice_item_8.item_name}")
-    expect(page).to have_content("#{@invoice_item_9.item_name}")
-    expect(page).to have_content("#{@invoice_item_11.item_name}")
-
-  end
-
-  it 'does not show items that have been shipped' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-    expect(page).to have_no_content("#{@invoice_item_4.item_name}")
-
-  end
+  # it 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
+  #   visit "/merchants/#{@merchant.id}/dashboard"
+  #
+  #   expect(page).to have_content("Favorite Customers:")
+  #   expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
+  #   expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
+  #   expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")
+  #   expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
+  #   expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name}")
+  #   expect(page).to have_no_content("#{@customer_6.first_name} #{@customer_6.last_name}")
+  #
+  #   within("##{@customer_1.id}") do
+  #     expect(page).to have_content("#{@customer_1.top_successful_transactions("#{@merchant.id}")}")
+  #   end
+  #
+  #   within("##{@customer_2.id}") do
+  #     expect(page).to have_content("#{@customer_2.top_successful_transactions("#{@merchant.id}")}")
+  #   end
+  #
+  #   within("##{@customer_3.id}") do
+  #     expect(page).to have_content("#{@customer_3.top_successful_transactions("#{@merchant.id}")}")
+  #   end
+  #
+  #   within("##{@customer_4.id}") do
+  #     expect(page).to have_content("#{@customer_4.top_successful_transactions("#{@merchant.id}")}")
+  #   end
+  #
+  #   within("##{@customer_5.id}") do
+  #     expect(page).to have_content("#{@customer_5.top_successful_transactions("#{@merchant.id}")}")
+  #   end
+  #
+  #   expect(page).to have_no_content("#{@customer_6.top_successful_transactions("#{@merchant.id}")}")
+  # end
+  #
+  # it 'has a section to display all items that have been packaged but not yet shipped' do
+  #   visit "/merchants/#{@merchant.id}/dashboard"
+  #
+  #   expect(page).to have_content("Items Ready To Ship:")
+  #   expect(page).to have_content("#{@invoice_item_2.item_name}")
+  #   expect(page).to have_content("#{@invoice_item_6.item_name}")
+  #   expect(page).to have_content("#{@invoice_item_8.item_name}")
+  #   expect(page).to have_content("#{@invoice_item_9.item_name}")
+  #   expect(page).to have_content("#{@invoice_item_11.item_name}")
+  #
+  # end
+  #
+  # it 'does not show items that have been shipped' do
+  #   visit "/merchants/#{@merchant.id}/dashboard"
+  #
+  #   expect(page).to have_no_content("#{@invoice_item_4.item_name}")
+  #
+  # end
 
   it 'has the invoice id of the item listed and it is a link to the invoice show page' do
     visit "/merchants/#{@merchant.id}/dashboard"
@@ -137,9 +137,7 @@ RSpec.describe 'merchant dashboard' do
 
       expect(page).to have_no_content("Thursday, June 03, 2021")
 
-    #   save_and_open_page
-    #
-    # expect("#{@invoice_4.convert_create_date}").to appear_before("#{@invoice_1.convert_create_date}")
-    # expect("#{@invoice_1.convert_create_date}").to appear_before("#{@invoice_3.convert_create_date}")
+    expect("#{@invoice_4.convert_create_date}").to appear_before("#{@invoice_1.convert_create_date}")
+    expect("#{@invoice_1.convert_create_date}").to appear_before("#{@invoice_3.convert_create_date}")
   end
 end

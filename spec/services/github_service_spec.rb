@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe GithubService, type: :model do
-  it "returns the users data" do
-    require "pry"; binding.pry
-    @github_service = GithubService.new
-    @github_service.repo_commits_and_names
+  # it "returns the users data" do
+  #   @github_service = GithubService.new
+  #   @github_service.repo_commits_and_names
     # mock_response1 = '{}'
 
     # allow(GithubService).to receive().and_return(mock_response)
@@ -20,4 +19,3 @@ RSpec.describe GithubService, type: :model do
     # expect(json).to have_key(:commits)
     # expect(json).to have_key(:pull_requests)
   end
-end
