@@ -52,7 +52,6 @@ group :development, :test do
 end
 
 # Gem for API use
-gem "faraday"
 gem "json"
 gem "figaro"
 
