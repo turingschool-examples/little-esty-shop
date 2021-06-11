@@ -137,8 +137,6 @@ RSpec.describe 'merchant dashboard' do
 
       expect(page).to have_no_content("Thursday, June 03, 2021")
 
-    #   save_and_open_page
-    #
     expect("#{@invoice_4.convert_create_date}").to appear_before("#{@invoice_1.convert_create_date}")
     expect("#{@invoice_1.convert_create_date}").to appear_before("#{@invoice_3.convert_create_date}")
   end

@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
-    it { should have_many(:merchants_customers) }
-    it { should have_many(:customers).through(:merchants_customers) }
     it { should have_many(:items) }
     it { should have_many(:invoice_items).through(:items) }
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
+    it { should have_many(:customers).through(:invoices) }
   end
 
   describe 'validations' do
@@ -64,13 +63,6 @@ RSpec.describe Merchant, type: :model do
     @jordan = Customer.create!(first_name: "Michael", last_name: "Jordan")
     @james = Customer.create!(first_name: "Lebron", last_name: "James")
     @vick = Customer.create!(first_name: "Mike", last_name: "Vick")
-
-    @merchcust1 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @pepper.id)
-    @merchcust2 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @boosie.id)
-    @merchcust3 = MerchantsCustomer.create!(merchant_id: @merchant1.id, customer_id: @dizzy.id)
-    @merchcust4 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @jordan.id)
-    @merchcust5 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @james.id)
-    @merchcust6 = MerchantsCustomer.create!(merchant_id: @merchant2.id, customer_id: @vick.id)
   end
 
   describe 'class methods' do

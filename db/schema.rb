@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_025956) do
     t.string "name"
     t.string "description"
     t.float "unit_price"
-    t.integer "status", default: 0
+    t.integer "status", default: 1
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,15 +58,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_025956) do
     t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "merchants_customers", force: :cascade do |t|
-    t.bigint "merchant_id"
-    t.bigint "customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_merchants_customers_on_customer_id"
-    t.index ["merchant_id"], name: "index_merchants_customers_on_merchant_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -83,7 +74,5 @@ ActiveRecord::Schema.define(version: 2021_06_09_025956) do
   add_foreign_key "invoice_items", "items"
   add_foreign_key "invoices", "customers"
   add_foreign_key "items", "merchants"
-  add_foreign_key "merchants_customers", "customers"
-  add_foreign_key "merchants_customers", "merchants"
   add_foreign_key "transactions", "invoices"
 end
