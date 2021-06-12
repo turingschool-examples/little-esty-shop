@@ -1,6 +1,5 @@
 class BulkDiscount < ApplicationRecord
-  # validates :
-  # belongs_to :
-  # has_many :
-  # has_many :, through: :
+  belongs_to :merchant
+
+  has_many :items, through: :merchant
 end
