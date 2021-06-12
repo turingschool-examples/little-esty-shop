@@ -154,4 +154,16 @@ RSpec.describe 'merchant dashboard' do
     expect("#{@invoice4.convert_create_date}").to appear_before("#{@invoice1.convert_create_date}")
     expect("#{@invoice1.convert_create_date}").to appear_before("#{@invoice3.convert_create_date}")
   end
+
+  describe 'bulk discounts' do
+    it 'has a link to view all discounts for merchant' do
+      visit "/merchants/#{@merchant.id}/dashboard"
+
+      expect(page).to have_link("Discounts")
+
+      click_link "Discounts"
+
+      expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
+    end
+  end
 end
