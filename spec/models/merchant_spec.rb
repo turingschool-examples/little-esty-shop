@@ -81,14 +81,14 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '.new_mechant_id' do
-      it "returns merchants with an disable status" do
+      it "can give a new merchant id" do
         expect(Merchant.new_mechant_id).to eq(Merchant.all.last.id + 1)
         expect(Merchant.new_mechant_id).to_not eq(Merchant.all.last)
       end
     end
 
     describe '.top_merchants_by_revenue' do
-      it "returns merchants with an disable status" do
+      it "returns merchants by top revenue" do
         expect(Merchant.top_merchants_by_revenue).to eq([@merchant6, @merchant2, @merchant3, @merchant5, @merchant4])
         expect(Merchant.top_merchants_by_revenue).to_not eq([@merchant1, @merchant2, @merchant3, @merchant5, @merchant4])
       end
