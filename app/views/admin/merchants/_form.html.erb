@@ -1,9 +1,0 @@
-<%= form_with model: [:admin, @merchant], local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, value: value %><br/>
-
-  <%= f.label :status %>
-  <%= f.select :status, ["disable", "enable"], select: select %><br/><br/>
-
-  <%= f.submit  %>
-<% end %>
