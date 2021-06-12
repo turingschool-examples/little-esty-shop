@@ -2,6 +2,6 @@
 
 <ul>
   <% @discounts.each do |discount| %>
-    <li><%= discount.percentage %>% off <%= discount.quantity_threshold %> or more!</li>
+    <li><%= link_to "#{discount.percentage}", merchant_bulk_discount_path(@merchant.id, discount.id) %>% off <%= "#{discount.quantity_threshold}" %> or more!</li>
   <% end %>
 </ul>
