@@ -1,0 +1,29 @@
+<h1> Customer's Name: <%= @invoice_customer.first_name %> <%= @invoice_customer.last_name %> </h1>
+<h3> Invoice I.D.:  <%= @invoice.id %> </h3>
+<p> Status: <%= @invoice.status %> </p>
+<p> Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+<br>
+<h2> Items assocaited </h2>
+
+<% @items.each do |item| %>
+  <section id="invoices-items-<%= item.id %>">  
+    <p> Item Name: <%= item.name %> </p>
+    <p> Item Unit Price: <%= item.unit_price %> </p>
+  </section>
+<% end %>
+
+<% @invoice_items.each do |invoice_item|%>
+  <section id="invoices-invoice-items-<%= invoice_item.id %>">
+    <p> Item Quantity: <%= invoice_item.quantity %> </p>
+    <p> Status of the item: <%= invoice_item.status %> </p>
+  </section>
+<% end %>
+
+<h2> Status of the Invoice </h2>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |form| %>
+        <%= form.select :status, [["Cancelled", 0], ["In Progress", 1], ["Completed", 2]], selected: @invoice.number_status %>
+        <%= form.submit 'Update Invoice Status' %>
+<% end %>
+
+<h2> Total Revenue from Invoice </h2>
+<p> <%= number_to_currency(@invoice.total_revenue) %> </p>
