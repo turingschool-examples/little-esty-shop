@@ -28,20 +28,20 @@ RSpec.describe Customer, type: :model do
     @invoice5 = @customer5.invoices.create!(status: 2)
     @invoice6 = @customer6.invoices.create!(status: 2)
 
-    @item_4 = @merchant1.items.create!(name: 'Thing 4', description: 'This is the fourth thing.', unit_price: 12.0, status: 0)
-    @item_5 = @merchant1.items.create!(name: 'Thing 5', description: 'This is the fifth thing.', unit_price: 15.5, status: 0)
-    @item_6 = @merchant1.items.create!(name: 'Thing 6', description: 'This is the sixth thing.', unit_price: 10.0, status: 0)
-    @item_7 = @merchant1.items.create!(name: 'Thing 7', description: 'This is the seventh thing.', unit_price: 11.5, status: 0)
-    @item_8 = @merchant1.items.create!(name: 'Thing 8', description: 'This is the eighth thing.', unit_price: 18.0, status: 0)
-    @item_9 = @merchant1.items.create!(name: 'Thing 9', description: 'This is the ninth thing.', unit_price: 17.0, status: 0)
-    @item_10 = @merchant1.items.create!(name: 'Thing 10', description: 'This is the tenth thing.', unit_price: 21.0, status: 0)
+    @item4 = @merchant1.items.create!(name: 'Thing 4', description: 'This is the fourth thing.', unit_price: 12.0, status: 0)
+    @item5 = @merchant1.items.create!(name: 'Thing 5', description: 'This is the fifth thing.', unit_price: 15.5, status: 0)
+    @item6 = @merchant1.items.create!(name: 'Thing 6', description: 'This is the sixth thing.', unit_price: 10.0, status: 0)
+    @item7 = @merchant1.items.create!(name: 'Thing 7', description: 'This is the seventh thing.', unit_price: 11.5, status: 0)
+    @item8 = @merchant1.items.create!(name: 'Thing 8', description: 'This is the eighth thing.', unit_price: 18.0, status: 0)
+    @item9 = @merchant1.items.create!(name: 'Thing 9', description: 'This is the ninth thing.', unit_price: 17.0, status: 0)
+    @item_0 = @merchant1.items.create!(name: 'Thing 10', description: 'This is the tenth thing.', unit_price: 21.0, status: 0)
 
-    @invoice_item_0 = @item_4.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 2, invoice: @invoice1) #96.0  1
-    @invoice_item_6 = @item_9.invoice_items.create!(quantity: 5, unit_price: 17.0, status: 2, invoice: @invoice3) #85.0  1
-    @invoice_item_3 = @item_6.invoice_items.create!(quantity: 7, unit_price: 10.0, status: 2, invoice: @invoice2) #70.0  2
-    @invoice_item_1 = @item_4.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 2, invoice: @invoice6) #48.5  3
-    @invoice_item_2 = @item_5.invoice_items.create!(quantity: 3, unit_price: 15.5, status: 2, invoice: @invoice5) #46.5  4
-    @invoice_item_4 = @item_7.invoice_items.create!(quantity: 4, unit_price: 11.5, status: 2, invoice: @invoice4)
+    @invoice_item0 = @item4.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 2, invoice: @invoice1) #96.0  1
+    @invoice_item6 = @item9.invoice_items.create!(quantity: 5, unit_price: 17.0, status: 2, invoice: @invoice3) #85.0  1
+    @invoice_item3 = @item6.invoice_items.create!(quantity: 7, unit_price: 10.0, status: 2, invoice: @invoice2) #70.0  2
+    @invoice_item1 = @item4.invoice_items.create!(quantity: 4, unit_price: 12.0, status: 2, invoice: @invoice6) #48.5  3
+    @invoice_item2 = @item5.invoice_items.create!(quantity: 3, unit_price: 15.5, status: 2, invoice: @invoice5) #46.5  4
+    @invoice_item4 = @item7.invoice_items.create!(quantity: 4, unit_price: 11.5, status: 2, invoice: @invoice4)
 
     # customer 1 - third
     @transaction1 = @invoice1.transactions.create!(result: 1, credit_card_number: 4654405418249632)
