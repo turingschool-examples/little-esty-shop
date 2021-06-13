@@ -32,4 +32,28 @@ RSpec.describe 'bulk discount index page' do
 
     expect(page).to have_link("Create New Bulk Discount", href: "merchants/#{@merchant.id}/bulk_discounts/new")
   end
+
+  it 'has a button to delete each discount' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts"
+
+    within("#discount#{@bulk_discount_1.id}") do
+      expect(page).to have_button("Delete Discount")
+    end
+    within("#discount#{@bulk_discount_2.id}") do
+      expect(page).to have_button("Delete Discount")
+    end
+    within("#discount#{@bulk_discount_3.id}") do
+      expect(page).to have_button("Delete Discount")
+    end
+  end
+
+  it 'deletes the discount from the index when delete button is pressed' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts"
+
+    within("#discount#{@bulk_discount_1}") do
+      click_button("Delete Discount")
+      expect(page).to have_no_content(@bulk_discount_1.quantity_threshold)
+      expect(page).to have_no_content(@bulk_discount_1.percentage)
+    end
+  end
 end
