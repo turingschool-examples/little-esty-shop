@@ -9,11 +9,7 @@ RSpec.describe 'bulk discount index page' do
   end
   it 'has all bulk discounts listed with their attributes' do
     visit "merchants/#{@merchant.id}/bulk_discounts"
-
-    expect(page).to have_content(@bulk_discount_1)
-    expect(page).to have_content(@bulk_discount_2)
-    expect(page).to have_content(@bulk_discount_3)
-
+    
     expect(page).to have_content(@bulk_discount_1.quantity_threshold)
     expect(page).to have_content(@bulk_discount_2.quantity_threshold)
     expect(page).to have_content(@bulk_discount_3.quantity_threshold)
