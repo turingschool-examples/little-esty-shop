@@ -24,9 +24,9 @@ class BulkDiscountsController < ApplicationController
       quantity_threshold: params[:quantity_threshold]
       })
 
-      if @discount.save
-        redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
-      end
+    if @discount.save
+      redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
+    end
   end
 
   def edit
