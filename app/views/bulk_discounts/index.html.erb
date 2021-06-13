@@ -2,6 +2,10 @@
 
 <ul>
   <% @discounts.each do |discount| %>
+  <section id="discounts-<%= discount.id %>">
     <li><%= link_to "#{discount.percentage}", merchant_bulk_discount_path(@merchant.id, discount.id) %>% off <%= "#{discount.quantity_threshold}" %> or more!</li>
+  </section>
   <% end %>
 </ul>
+
+<h2>Upcoming Holidays</h2>

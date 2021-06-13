@@ -73,30 +73,35 @@ RSpec.describe 'bulk discounts index page' do
     # visit merchant_bulk_discounts_path(@merchant___.id)
   end
 
-  describe 'bulk discounts by merchant' do
+  describe 'by merchant' do
     it 'can show all discounts for this merchant' do
-      visit "/merchants/#{@merchant.id}/bulk_discounts"
+      visit merchant_bulk_discounts_path(@merchant.id)
 
       expect(page).to have_content(@merchant.name)
-
-      expect(page).to have_link("#{@discount1.percentage}")
-      expect(page).to have_link("#{@discount2.percentage}")
-      expect(page).to have_link("#{@discount3.percentage}")
-
       expect(page).to_not have_content(@antimerchant.name)
-      expect(page).to_not have_link("#{@discount5.percentage}")
-    end
 
-    it 'has a link to the discount show page' do
-      visit "/merchants/#{@merchant.id}/bulk_discounts"
+      within("#discounts-#{@discount1.id}") do
+        expect(page).to have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount1.id}")
+        expect(page).to_not have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount4.id}")
+      end
 
-      expect(page).to have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount1.id}")
-      expect(page).to have_link("#{@discount2.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
-      expect(page).to have_link("#{@discount3.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount3.id}")
+      within("#discounts-#{@discount2.id}") do
+        expect(page).to have_link("#{@discount2.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
+        expect(page).to_not have_link("#{@discount4.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount4.id}")
+      end
 
-      expect(page).to_not have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
-      expect(page).to_not have_link("#{@discount4.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount4.id}")
+      within("#discounts-#{@discount3.id}") do
+        expect(page).to have_link("#{@discount3.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount3.id}")
+        expect(page).to_not have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
+      end
     end
   end
 
+  describe 'holidays' do
+    it 'has a section with the header Upcoming Holidays' do
+      visit merchant_bulk_discounts_path(@merchant.id)
+
+      expect(page).to have_content("Upcoming Holidays")
+    end
+  end
 end

@@ -70,13 +70,13 @@ RSpec.describe 'bulk discounts show page' do
     @transaction16 = @invoice6.transactions.create!(result: 0, credit_card_number: 4540842003561938)
     @transaction17 = @invoice6.transactions.create!(result: 0, credit_card_number: 4540842003561938)
 
-    # visit "/merchants/#{@merchant___.id}/bulk_discounts/#{@bulkdiscount___.id}"
-    # visit merchant_bulk_discount_path(@merchant___.id, @bulkdiscount___.id)
+    # visit "/merchants/#{@merchant___.id}/bulk_discounts/#{@discount___.id}"
+    # visit merchant_bulk_discount_path(@merchant___.id, @discount___.id)
   end
 
   it 'can list the discount and quantity threshold' do
     visit "/merchants/#{@merchant.id}/bulk_discounts/#{@discount1.id}"
-save_and_open_page
+
     expect(page).to have_content(@discount1.percentage)
     expect(page).to have_content(@discount1.quantity_threshold)
 
