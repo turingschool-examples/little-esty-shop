@@ -90,7 +90,12 @@ RSpec.describe 'bulk discounts index page' do
     it 'has a link to the discount show page' do
       visit "/merchants/#{@merchant.id}/bulk_discounts"
 
+      expect(page).to have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount1.id}")
+      expect(page).to have_link("#{@discount2.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
       expect(page).to have_link("#{@discount3.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount3.id}")
+
+      expect(page).to_not have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
+      expect(page).to_not have_link("#{@discount4.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount4.id}")
     end
   end
 
