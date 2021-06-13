@@ -92,7 +92,7 @@ RSpec.describe Customer, type: :model do
       end
 
       it 'can give the amount of successful transactions each customer had with their merchant' do
-        expect(@customer1.top_successful_transactions(@merchant1.id)).to eq(3)
+        expect(@customer1.top_successful_transactions).to eq(3)
       end
     end
   end

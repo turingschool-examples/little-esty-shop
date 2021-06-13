@@ -24,20 +24,12 @@ class Customer < ApplicationRecord
     .where('transactions.result = ?', 1)
     .where('merchants.id = ?', merchant_id)
     .select('customers.*')
-    # .select("customers.*, count('transaction.result') as top_five")
     .group('customers.id')
     .order('transactions.count desc')
-    # .order(top_five: :desc)
     .limit(5)
   end
 
-  def top_successful_transactions(merchant_id)
+  def top_successful_transactions
     transactions.where(result: 1).order(:desc).count
-    # merchants.joins(:transactions)
-    # .where('transactions.result = ?', 1)
-    # .where('merchants.id = ?', merchant_id)
-    # .select('transactions.*')
-    # .order('transactions.id')
-    # .count
   end
 end

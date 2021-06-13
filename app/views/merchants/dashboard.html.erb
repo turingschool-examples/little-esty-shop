@@ -3,12 +3,11 @@
 
 <h2>Favorite Customers:</h2>
   <% @top_customers.each do |top| %>
-  <p> <%= top.first_name %> <%= top.last_name %> - <%= top.top_successful_transactions(@merchant.id) %> purchases </p>
+  <p> <%= top.first_name %> <%= top.last_name %> - <%= top.top_successful_transactions %> purchases </p>
   <% end %>
 
 <h3> <%= link_to 'Merchant Items Index', merchant_items_path(@merchant.id) %> </h3>
 <h3> <%= link_to 'Merchant Invoice Index', merchant_invoices_path(@merchant.id) %> </h3>
-<h3> <%= link_to 'Discounts', merchant_bulk_discounts_path(@merchant.id) %> </h3>
 
 <section id="ready_to_ship">
 <h1>Items Ready To Ship:</h1>
