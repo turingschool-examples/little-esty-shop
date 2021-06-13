@@ -3,9 +3,9 @@ class BulkDiscountsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @discounts = @merchant.bulk_discounts
 
-    response = Faraday.get 'https://date.nager.at/api/v1/Get/US/2021'
+    response = Faraday.get 'https://date.nager.at/api/v2/NextPublicHolidays/us'
     parsed = JSON.parse(response.body, symbolize_names: true)
-    [:name][:date]
+    @holidays = parsed[0..2]
   end
 
   def show

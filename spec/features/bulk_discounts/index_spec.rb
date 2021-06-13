@@ -1,4 +1,5 @@
 require 'rails_helper'
+# require 'webmock/rspec'
 
 RSpec.describe 'bulk discounts index page' do
   before(:each) do
@@ -102,6 +103,27 @@ RSpec.describe 'bulk discounts index page' do
       visit merchant_bulk_discounts_path(@merchant.id)
 
       expect(page).to have_content("Upcoming Holidays")
+    end
+
+    xit 'can request name and date of upcoming holidays from Nager.Date API' do
+      visit merchant_bulk_discounts_path(@merchant.id)
+      response = Faraday.get 'https://date.nager.at/api/v2/NextPublicHolidays/us'
+      parsed = JSON.parse(response.body, symbolize_names: true)
+      @holidays = parsed
+      mock_response = {
+        :date=>"2021-07-05",
+        :localName=>"Independence Day",
+        :name=>"Independence Day",
+        :countryCode=>"US",
+        :fixed=>false,
+        :global=>true,
+        :counties=>"null",
+        :launchYear=>"null",
+        :type=>"Public"
+      }
+
+      allow_any_instance_of(Faraday::Response).to receive(:body).and_return(mock_response)
+      expect(@holidays[:name]).to eq("Independence Day")
     end
   end
 end
