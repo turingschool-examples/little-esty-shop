@@ -93,11 +93,11 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
     expect(page).to have_no_content("#{@customer6.first_name} #{@customer6.last_name}")
 
-    expect(page).to have_content(@customer1.top_successful_transactions(@merchant.id))
-    expect(page).to have_content(@customer2.top_successful_transactions(@merchant.id))
-    expect(page).to have_content(@customer3.top_successful_transactions(@merchant.id))
-    expect(page).to have_content(@customer4.top_successful_transactions(@merchant.id))
-    expect(page).to have_content(@customer5.top_successful_transactions(@merchant.id))
+    expect(page).to have_content(@customer1.top_successful_transactions)
+    expect(page).to have_content(@customer2.top_successful_transactions)
+    expect(page).to have_content(@customer3.top_successful_transactions)
+    expect(page).to have_content(@customer4.top_successful_transactions)
+    expect(page).to have_content(@customer5.top_successful_transactions)
   end
 
   it 'has a section to display all items that have been packaged but not yet shipped' do
@@ -139,5 +139,11 @@ RSpec.describe 'merchant dashboard' do
 
     expect("#{@invoice4.convert_create_date}").to appear_before("#{@invoice1.convert_create_date}")
     expect("#{@invoice1.convert_create_date}").to appear_before("#{@invoice3.convert_create_date}")
+  end
+
+  it 'has a link to the bulk discount index page' do
+    visit "/merchants/#{@merchant.id}/dashboard"
+
+    expect(page).to have_link("My Bulk Discounts", href: "/merchants/#{@merchant.id}/bulk_discounts")
   end
 end
