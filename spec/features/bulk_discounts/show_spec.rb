@@ -16,4 +16,10 @@ RSpec.describe 'bulk discount show page' do
     expect(page).to have_content("Quantity Threshold:")
     expect(page).to have_content("Percentage:")
   end
+
+  it 'has a link to the edit page' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount_1.id}"
+
+    expect(page).to have_link("Edit This Discount", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+  end
 end
