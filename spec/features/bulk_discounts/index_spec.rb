@@ -1,9 +1,18 @@
 require 'rails_helper'
+# require 'webmock/rspec'
 
-RSpec.describe 'merchant dashboard' do
+RSpec.describe 'bulk discounts index page' do
   before(:each) do
     @merchant = Merchant.create!(name: 'AnnaSellsStuff')
     @antimerchant = Merchant.create!(name: 'TheOtherOne')
+
+    @discount1 = BulkDiscount.create!(percentage: 10, quantity_threshold: 1, merchant_id: @merchant.id)
+    @discount2 = BulkDiscount.create!(percentage: 20, quantity_threshold: 2, merchant_id: @merchant.id)
+    @discount3 = BulkDiscount.create!(percentage: 30, quantity_threshold: 3, merchant_id: @merchant.id)
+
+    @discount4 = BulkDiscount.create!(percentage: 40, quantity_threshold: 4, merchant_id: @antimerchant.id)
+    @discount5 = BulkDiscount.create!(percentage: 50, quantity_threshold: 5, merchant_id: @antimerchant.id)
+    @discount6 = BulkDiscount.create!(percentage: 60, quantity_threshold: 6, merchant_id: @antimerchant.id)
 
     @customer1 = Customer.create!(first_name: 'John', last_name: 'Smith')
     @customer2 = Customer.create!(first_name: 'Julie', last_name: 'Baker')
@@ -61,109 +70,87 @@ RSpec.describe 'merchant dashboard' do
     @transaction15 = @invoice6.transactions.create!(result: 0, credit_card_number: 4540842003561938)
     @transaction16 = @invoice6.transactions.create!(result: 0, credit_card_number: 4540842003561938)
     @transaction17 = @invoice6.transactions.create!(result: 0, credit_card_number: 4540842003561938)
+    # visit "/merchants/#{@merchant___.id}/bulk_discounts"
+    # visit merchant_bulk_discounts_path(@merchant___.id)
   end
 
-  it 'shows the name of the merchant in question' do
-    visit "/merchants/#{@merchant.id}/dashboard"
+  describe 'by merchant' do
+    it 'can show all discounts for this merchant' do
+      visit merchant_bulk_discounts_path(@merchant.id)
 
-    expect(page).to have_content("#{@merchant.name}")
-    expect(page).to have_no_content("#{@antimerchant.name}")
+      expect(page).to have_content(@merchant.name)
+      expect(page).to_not have_content(@antimerchant.name)
+
+      within("#discounts-#{@discount1.id}") do
+        expect(page).to have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount1.id}")
+        expect(page).to_not have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount4.id}")
+      end
+
+      within("#discounts-#{@discount2.id}") do
+        expect(page).to have_link("#{@discount2.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
+        expect(page).to_not have_link("#{@discount4.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount4.id}")
+      end
+
+      within("#discounts-#{@discount3.id}") do
+        expect(page).to have_link("#{@discount3.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount3.id}")
+        expect(page).to_not have_link("#{@discount1.percentage}", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount2.id}")
+      end
+    end
   end
 
-  it 'has a link to my merchant items index' do
-    visit "/merchants/#{@merchant.id}/dashboard"
+  describe 'holidays' do
+    it 'has a section with the header Upcoming Holidays' do
+      visit merchant_bulk_discounts_path(@merchant.id)
 
-    expect(page).to have_link("Merchant Items Index", href: "/merchants/#{@merchant.id}/items")
+      expect(page).to have_content("Upcoming Holidays")
+    end
+
+    xit 'can request name and date of upcoming holidays from Nager.Date API' do
+      visit merchant_bulk_discounts_path(@merchant.id)
+
+      response = Faraday.get 'https://date.nager.at/api/v2/NextPublicHolidays/us'
+      parsed = JSON.parse(response.body, symbolize_names: true)
+      @holidays = parsed
+      mock_response = {
+        :date=>"2021-07-05",
+        :localName=>"Independence Day",
+        :name=>"Independence Day",
+        :countryCode=>"US",
+        :fixed=>false,
+        :global=>true,
+        :counties=>"null",
+        :launchYear=>"null",
+        :type=>"Public"
+      }
+
+      allow_any_instance_of(Faraday::Response).to receive(:body).and_return(mock_response)
+      expect(@holidays[:name]).to eq("Independence Day")
+    end
   end
 
-  it 'has a link to my merchant invoices index' do
-    visit "/merchants/#{@merchant.id}/dashboard"
+  describe 'create new discount' do
+    it 'has a link to create a new discount' do
+      visit merchant_bulk_discounts_path(@merchant.id)
 
-    expect(page).to have_link("Merchant Invoice Index", href: "/merchants/#{@merchant.id}/invoices")
+      expect(page).to have_link("Create New Discount", href: "/merchants/#{@merchant.id}/bulk_discounts/new")
+    end
   end
 
-  it 'has the top 5 customers names and how many transactions they have conducted with the merchant in question' do
-    visit "/merchants/#{@merchant.id}/dashboard"
+  describe 'delete discount' do
+    it 'has a link to delete a discount' do
+      visit merchant_bulk_discounts_path(@merchant.id)
 
-    expect(page).to have_content("Favorite Customers:")
-    expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
-    expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name}")
-    expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name}")
-    expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}")
-    expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
-    expect(page).to have_no_content("#{@customer6.first_name} #{@customer6.last_name}")
+      within("#discounts-#{@discount1.id}") do
+        expect(page).to have_link("Delete Discount", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount1.id}")
+        click_link("Delete Discount")
+      end
+        expect(page).to_not have_link("#{@discount1.percentage}")
 
-    # within("##{@customer1.id}") do
-      expect(page).to have_content(@customer1.top_successful_transactions(@merchant.id))
-    # end
-
-    # within("##{@customer2.id}") do
-      expect(page).to have_content(@customer2.top_successful_transactions(@merchant.id))
-    # end
-
-    # within("##{@customer3.id}") do
-      expect(page).to have_content(@customer3.top_successful_transactions(@merchant.id))
-    # end
-
-    # within("##{@customer4.id}") do
-      expect(page).to have_content(@customer4.top_successful_transactions(@merchant.id))
-    # end
-
-    # within("##{@customer5.id}") do
-      expect(page).to have_content(@customer5.top_successful_transactions(@merchant.id))
-    # end
-  end
-
-  it 'has a section to display all items that have been packaged but not yet shipped' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-    expect(page).to have_content("Items Ready To Ship:")
-    expect(page).to have_content("#{@invoice_item2.item_name}")
-    expect(page).to have_content("#{@invoice_item6.item_name}")
-    expect(page).to have_content("#{@invoice_item8.item_name}")
-    expect(page).to have_content("#{@invoice_item9.item_name}")
-    expect(page).to have_content("#{@invoice_item11.item_name}")
-
-  end
-
-  it 'does not show items that have been shipped' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-    expect(page).to have_no_content("#{@invoice_item4.item_name}")
-
-  end
-
-  it 'has the invoice id of the item listed and it is a link to the invoice show page' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-    expect(page).to have_link("#{@invoice1.id}", href: "/merchants/#{@merchant.id}/invoices/#{@invoice1.id}")
-    expect(page).to have_no_link("#{@invoice6.id}")
-  end
-
-  it 'has the creation date listed by each invoice in oldest to newest order' do
-    visit "/merchants/#{@merchant.id}/dashboard"
-
-      expect(page).to have_content("Saturday, June 05, 2021")
-
-      expect(page).to have_content("Sunday, June 06, 2021")
-
-      expect(page).to have_content("Tuesday, June 01, 2021")
-
-      expect(page).to have_no_content("Thursday, June 03, 2021")
-
-    expect("#{@invoice4.convert_create_date}").to appear_before("#{@invoice1.convert_create_date}")
-    expect("#{@invoice1.convert_create_date}").to appear_before("#{@invoice3.convert_create_date}")
-  end
-
-  describe 'bulk discounts' do
-    it 'has a link to view all discounts for merchant' do
-      visit "/merchants/#{@merchant.id}/dashboard"
-
-      expect(page).to have_link("Discounts")
-
-      click_link "Discounts"
-
-      expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
+      within("#discounts-#{@discount3.id}") do
+        expect(page).to have_link("Delete Discount", href: "/merchants/#{@merchant.id}/bulk_discounts/#{@discount3.id}")
+        click_link("Delete Discount")
+      end
+        expect(page).to_not have_link("#{@discount3.percentage}")
     end
   end
 end
