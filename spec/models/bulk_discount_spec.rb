@@ -1,11 +1,10 @@
-# require 'rails_helper'
-#
-# RSpec.describe BulkDiscount, type: :model do
-  # describe 'relationships' do
-  #   it { should belong_to(:) }
-  #   it { should have_many(:) }
-  #   it { should have_many(:).through(:) }
-  # end
+require 'rails_helper'
+
+RSpec.describe BulkDiscount, type: :model do
+  describe 'relationships' do
+    it { should belong_to(:merchant) }
+    it { should have_many(:items).through(:merchant) }
+  end
   #
   # describe 'validations' do
   #   it { should validate_presence_of(:) }
@@ -24,4 +23,4 @@
   #   describe '#' do
   #   end
   # end
-# end
+end
