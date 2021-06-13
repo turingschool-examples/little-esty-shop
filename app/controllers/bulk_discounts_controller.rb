@@ -14,11 +14,19 @@ class BulkDiscountsController < ApplicationController
   end
 
   def new
-
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = @merchant.bulk_discounts.new({
+      percentage: params[:percentage],
+      quantity_threshold: params[:quantity_threshold]
+      })
 
+      if @discount.save
+        redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
+      end
   end
 
   def edit

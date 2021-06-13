@@ -80,4 +80,16 @@ RSpec.describe 'bulk discounts new page' do
     expect(find('form')).to have_content("Quantity threshold")
     expect(page).to have_button("Create Discount")
   end
+
+  it 'can create a new discount' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts/new"
+
+    fill_in "Percentage", with: 40
+    fill_in "Quantity threshold", with: 4
+    click_button "Create Discount"
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
+
+    expect(page).to have_content("40%")
+  end
 end
