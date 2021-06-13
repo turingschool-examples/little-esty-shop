@@ -50,10 +50,10 @@ RSpec.describe 'bulk discount index page' do
   it 'deletes the discount from the index when delete button is pressed' do
     visit "/merchants/#{@merchant.id}/bulk_discounts"
 
-    within("#discount#{@bulk_discount_1}") do
+    within("#discount#{@bulk_discount_1.id}") do
       click_button("Delete Discount")
-      expect(page).to have_no_content(@bulk_discount_1.quantity_threshold)
-      expect(page).to have_no_content(@bulk_discount_1.percentage)
     end
+    expect(page).to have_no_content("10")
+    expect(page).to have_no_content("15")
   end
 end

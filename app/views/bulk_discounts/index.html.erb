@@ -6,6 +6,7 @@
     <p><%= discount.quantity_threshold %></p>
     <p><%= discount.percentage %></p>
     <%= link_to "Discount Show Page", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}" %>
+    <%= button_to "Delete Discount", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}", method: :delete %>
   </section>
 <% end %>
 
