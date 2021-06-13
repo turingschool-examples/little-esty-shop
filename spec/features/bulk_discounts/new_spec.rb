@@ -90,7 +90,7 @@ RSpec.describe 'bulk discounts new page' do
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
 
-    expect(page).to have_content("40%")
+    expect(page).to have_link("40")
   end
 
   it 'sad path' do
