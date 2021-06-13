@@ -39,6 +39,14 @@ class BulkDiscountsController < ApplicationController
       flash[:notice] = "Please fill in valid information."
     end
   end
+  def destroy
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.find(params[:id])
+
+    @bulk_discount.destroy
+
+    redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
+  end
 
   private
   def discount_params
