@@ -6,3 +6,5 @@
   <p><%= discount.percentage %></p>
   <%= link_to "Discount Show Page", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}" %>
 <% end %>
+
+<%= link_to "Create New Bulk Discount", "merchants/#{@merchant.id}/bulk_discounts/new" %>
