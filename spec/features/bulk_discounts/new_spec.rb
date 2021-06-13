@@ -92,4 +92,15 @@ RSpec.describe 'bulk discounts new page' do
 
     expect(page).to have_content("40%")
   end
+
+  it 'sad path' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts/new"
+
+    fill_in "Percentage", with: 40
+    fill_in "Quantity threshold", with: nil
+    click_button "Create Discount"
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts/new")
+    expect(page).to have_content("Error: Quantity threshold can't be blank, Quantity threshold is not a number")
+  end
 end
