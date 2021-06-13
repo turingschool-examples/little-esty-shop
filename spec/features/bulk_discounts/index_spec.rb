@@ -107,6 +107,7 @@ RSpec.describe 'bulk discounts index page' do
 
     xit 'can request name and date of upcoming holidays from Nager.Date API' do
       visit merchant_bulk_discounts_path(@merchant.id)
+
       response = Faraday.get 'https://date.nager.at/api/v2/NextPublicHolidays/us'
       parsed = JSON.parse(response.body, symbolize_names: true)
       @holidays = parsed
@@ -124,6 +125,14 @@ RSpec.describe 'bulk discounts index page' do
 
       allow_any_instance_of(Faraday::Response).to receive(:body).and_return(mock_response)
       expect(@holidays[:name]).to eq("Independence Day")
+    end
+  end
+
+  describe 'create new discount' do
+    it 'has a link to create a new discount' do
+      visit merchant_bulk_discounts_path(@merchant.id)
+
+      expect(page).to have_link("Create New Discount", href: "/merchants/#{@merchant.id}/bulk_discounts/new")
     end
   end
 end
