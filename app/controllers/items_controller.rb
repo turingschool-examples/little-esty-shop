@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to "/merchants/#{@merchant.id}/items"
     else
-      render :new
+      redirect_to "/merchants/#{@merchant.id}/items/new"
     end
   end
 
