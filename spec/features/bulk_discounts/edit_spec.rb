@@ -31,4 +31,14 @@ RSpec.describe 'bulk discount edit page' do
     expect(page).to have_content("12")
     expect(page).to have_content("16")
   end
+
+  it 'redirects the user to the edit page again if invalid information is entered' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount_1.id}/edit"
+
+    fill_in("percentage", with: "hooplah")
+    click_on("Update This Discount")
+    
+    expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+    expect(page).to have_content("Please fill in valid information.")
+  end
 end

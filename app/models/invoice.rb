@@ -4,6 +4,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items, dependent: :destroy
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
+  has_many :bulk_discounts, through: :merchants #test
 
   enum status: { cancelled: 0, in_progress: 1, completed: 2}, _prefix: :status
 
