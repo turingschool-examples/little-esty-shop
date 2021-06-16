@@ -30,7 +30,10 @@ RSpec.describe 'bulk discount index page' do
   it 'has a link to the bulk discount new page' do
     visit "merchants/#{@merchant.id}/bulk_discounts"
 
-    expect(page).to have_link("Create New Bulk Discount", href: "merchants/#{@merchant.id}/bulk_discounts/new")
+    expect(page).to have_link("Create New Bulk Discount")
+
+    click_on("Create New Bulk Discount")
+    expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts/new")
   end
 
   it 'has a button to delete each discount' do

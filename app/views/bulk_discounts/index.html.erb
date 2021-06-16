@@ -10,7 +10,7 @@
   </section>
 <% end %>
 
-<%= link_to "Create New Bulk Discount", "merchants/#{@merchant.id}/bulk_discounts/new" %>
+<%= link_to "Create New Bulk Discount", new_merchant_bulk_discount_path(@merchant.id) %>
 
 <h2>Upcoming Holidays: </h2>
 
