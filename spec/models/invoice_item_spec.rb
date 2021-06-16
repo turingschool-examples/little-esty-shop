@@ -40,9 +40,9 @@ RSpec.describe InvoiceItem, type: :model do
     end
     describe '#total_rev' do
       it 'can find the highest discount available for the invoice item' do
-        expect(@invoice_item1.highest_discount).to eq(0.10)
-        expect(@invoice_item2.highest_discount).to eq(0.20)
-        expect(@invoice_item3.highest_discount).to eq(0)
+        expect(@invoice_item1.highest_discount_percent).to eq(0.10)
+        expect(@invoice_item2.highest_discount_percent).to eq(0.20)
+        expect(@invoice_item3.highest_discount_percent).to eq(0)
       end
 
       it 'can find the total revenue of the invoice item applying the best discount when possible' do
