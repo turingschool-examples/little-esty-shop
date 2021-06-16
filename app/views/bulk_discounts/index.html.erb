@@ -11,3 +11,9 @@
 <% end %>
 
 <%= link_to "Create New Bulk Discount", "merchants/#{@merchant.id}/bulk_discounts/new" %>
+
+<h2>Upcoming Holidays: </h2>
+
+  <p><%= @holidays[:holiday_1][0] %> <%= @holidays[:holiday_1][1] %></p>
+  <p><%= @holidays[:holiday_2][0] %> <%= @holidays[:holiday_2][1] %></p>
+  <p><%= @holidays[:holiday_3][0] %> <%= @holidays[:holiday_3][1] %></p>

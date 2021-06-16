@@ -1,11 +1,13 @@
 class NagerDateService
 
   attr_reader :names,
-              :dates
+              :dates,
+              :holidays
 
   def initialize
-    @names ||= holiday_name
-    @dates ||= holiday_date
+    @names ||= holiday_names
+    @dates ||= holiday_dates
+    @holidays ||= holidays
   end
 
   def holiday_names
@@ -20,4 +22,11 @@ class NagerDateService
     names = [parsed[0][:date], parsed[1][:date], parsed[2][:date]]
   end
 
+  def holidays
+    holidays = {
+      holiday_1: [@names[0], @dates[0]],
+      holiday_2: [@names[1], @dates[1]],
+      holiday_3: [@names[2], @dates[2]]
+    }
+  end
 end
