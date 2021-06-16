@@ -55,4 +55,21 @@ RSpec.describe 'bulk discount index page' do
     end
     expect(page).to have_no_content(@bulk_discount_1.id)
   end
+
+  it 'has the next 3 holidays in the USA listed with their name and date' do
+    visit "/merchants/#{@merchant.id}/bulk_discounts"
+
+    expect(page).to have_content("Independence Day")
+    expect(page).to have_content("Labour Day")
+    expect(page).to have_content("Columbus Day")
+    expect(page).to have_content("2021-07-05")
+    expect(page).to have_content("2021-09-06")
+    expect(page).to have_content("2021-10-11")
+
+    expect("Independence Day").to appear_before("Labour Day")
+    expect("Labour Day").to appear_before("Columbus Day")
+
+    expect("2021-07-05").to appear_before("2021-09-06")
+    expect("2021-09-06").to appear_before("2021-10-11")
+  end
 end

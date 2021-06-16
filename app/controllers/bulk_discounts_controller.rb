@@ -2,14 +2,19 @@ class BulkDiscountsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discounts = @merchant.bulk_discounts
+    @date_service = NagerDateService.new
+    @holidays = @date_service.holidays
   end
+
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.find(params[:id])
   end
+
   def new
     @merchant = Merchant.find(params[:merchant_id])
   end
+
   def create
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.new({
@@ -24,10 +29,12 @@ class BulkDiscountsController < ApplicationController
       flash[:notice] = "Please fill in valid information."
     end
   end
+
   def edit
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.find(params[:id])
   end
+
   def update
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.find(params[:id])
@@ -39,6 +46,7 @@ class BulkDiscountsController < ApplicationController
       flash[:notice] = "Please fill in valid information."
     end
   end
+
   def destroy
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.find(params[:id])
