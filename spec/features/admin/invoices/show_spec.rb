@@ -42,10 +42,11 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   it 'can see the total revenue of a invoice' do
 
-    expect(page).to have_content("$50,000")
+    expect(page).to have_content(@invoice1.total_revenue)
   end
 
   it 'can show the total discounted revenue of an invoice' do
+    
     expect(page).to have_content(@invoice1.total_disc_rev)
   end
 

@@ -6,7 +6,7 @@
 <h2> Items assocaited </h2>
 
 <% @items.each do |item| %>
-  <section id="invoices-items-<%= item.id %>">  
+  <section id="invoices-items-<%= item.id %>">
     <p> Item Name: <%= item.name %> </p>
     <p> Item Unit Price: <%= item.unit_price %> </p>
   </section>
@@ -26,4 +26,7 @@
 <% end %>
 
 <h2> Total Revenue from Invoice </h2>
-<p> <%= number_to_currency(@invoice.total_revenue) %> </p>
+<p> <%= @invoice.total_revenue %> </p>
+
+<h2> Total Discounted Revenue from Invoice </h2>
+<p> <%= @invoice.total_disc_rev %> </p>
