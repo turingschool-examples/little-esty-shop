@@ -5,6 +5,8 @@ RSpec.describe 'Admin Invoice Show Page' do
     @customer1 = Customer.create!(first_name: "Bobby", last_name: "Mendez")
     @invoice1 = Invoice.create!(status: 1, customer_id: @customer1.id)
     @merchant1 = Merchant.create!(name: "Nike")
+    @bulk_discount1 = BulkDiscount.create!(percentage: 10, quantity_threshold: 40, merchant_id: @merchant1.id)
+    @bulk_discount2 = BulkDiscount.create!(percentage: 20, quantity_threshold: 75, merchant_id: @merchant1.id)
     @item1 = Item.create!(name: "Kobe zoom 5's", description: "Best shoe in basketball hands down!", unit_price: 12500, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: "Kobe zoom 7's", description: "Second best shoe in basketball hands down!", unit_price: 11500, merchant_id: @merchant1.id)
     @invoice_item1 = InvoiceItem.create!(quantity: 2, unit_price: 25000, status: 0, invoice_id: @invoice1.id, item_id: @item1.id)
@@ -40,7 +42,12 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   it 'can see the total revenue of a invoice' do
 
-    expect(page).to have_content("$50,000")
+    expect(page).to have_content(@invoice1.total_revenue)
+  end
+
+  it 'can show the total discounted revenue of an invoice' do
+    
+    expect(page).to have_content(@invoice1.total_disc_rev)
   end
 
   it 'can click on and change the status with a select field' do
