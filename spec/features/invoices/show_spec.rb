@@ -72,4 +72,14 @@ RSpec.describe 'invoice show page' do
       expect(page).to have_content('Shipped')
     end
   end
+
+  it 'has the bulk discount show page link next to each invoice item if applicable' do
+    within("##{@invoice_item2.id}") do
+      expect(page).to have_link("Bulk Discount Used", href: "merchants/#{@merchant.id}/bulk_discounts/#{@invoice_item2.highest_discount.id)}")
+    end
+
+    within("##{@invoice_item1.id}") do
+      expect(page).to have_no_link("Bulk Discount Used")
+    end
+  end
 end
