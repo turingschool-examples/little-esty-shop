@@ -86,6 +86,7 @@ RSpec.describe Invoice, type: :model do
 
     describe '#merchant_total_revenue'
       it 'can give the total revenue for a merchants items on specific invoice' do
+        bulk_discount_1 = BulkDiscount.create!(percentage: 10, quantity_threshold: 100, merchant_id: @merchant.id)
         expect(@invoice_1.merchant_total_revenue(@merchant.id)).to eq(111.3)
       end
     end
@@ -108,9 +109,9 @@ RSpec.describe Invoice, type: :model do
         @item_b4 = Item.create!(name: "Item 4", description: "Item 4 Description", unit_price: 500, merchant_id: @antimerchant.id)
 
         @invoice_item_b1 = InvoiceItem.create!(quantity: 5, unit_price: 50, status: 2, invoice_id: @invoice_b.id, item_id: @item_b1.id)
-        @invoice_item_b1 = InvoiceItem.create!(quantity: 50, unit_price: 100, status: 2, invoice_id: @invoice_b.id, item_id: @item_b2.id)
-        @invoice_item_b1 = InvoiceItem.create!(quantity: 100, unit_price: 200, status: 2, invoice_id: @invoice_b.id, item_id: @item_b3.id)
-        @invoice_item_b1 = InvoiceItem.create!(quantity: 75, unit_price: 500, status: 2, invoice_id: @invoice_b.id, item_id: @item_b4.id)
+        @invoice_item_b2 = InvoiceItem.create!(quantity: 80, unit_price: 100, status: 2, invoice_id: @invoice_b.id, item_id: @item_b2.id)
+        @invoice_item_b3 = InvoiceItem.create!(quantity: 100, unit_price: 200, status: 2, invoice_id: @invoice_b.id, item_id: @item_b3.id)
+        @invoice_item_b4 = InvoiceItem.create!(quantity: 75, unit_price: 500, status: 2, invoice_id: @invoice_b.id, item_id: @item_b4.id)
 
         expect(@invoice_b.merchant_total_revenue(@merchant_b.id)).to eq(250)
         expect(@invoice_b.merchant_discounted_revenue(@merchant_b.id)).to eq(20500)

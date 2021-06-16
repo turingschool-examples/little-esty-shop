@@ -70,10 +70,10 @@ RSpec.configure do |config|
     end
   end
 
-  config.before(:each) do
-    allow_any_instance_of(NagerDateService).to receive(names).and_return(["Independence Day", "Labor Day", "Columbus Day"])
-    allow_any_instance_of(NagerDateService).to receive(dates).and_return(["2021-07-05", "2021-09-06", "2021-10-11"])
-  end
+  # config.before(:each) do
+  #   allow_any_instance_of(NagerDateService).to receive(names).and_return(["Independence Day", "Labor Day", "Columbus Day"])
+  #   allow_any_instance_of(NagerDateService).to receive(dates).and_return(["2021-07-05", "2021-09-06", "2021-10-11"])
+  # end
  #  [{:date=>"2021-07-05",
  #  :localName=>"Independence Day",
  #  :name=>"Independence Day",
