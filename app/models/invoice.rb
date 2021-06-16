@@ -9,7 +9,13 @@ class Invoice < ApplicationRecord
   enum status: { cancelled: 0, in_progress: 1, completed: 2}, _prefix: :status
 
   def total_revenue
-    invoice_items.sum("quantity * unit_price")
+    self.invoice_items.sum do |invoice_item|
+      if invoice_item.discount? == false
+        invoice_item.total_rev
+      else
+        0
+      end
+    end
   end
 
   def number_status
@@ -52,4 +58,15 @@ class Invoice < ApplicationRecord
       end
     end
   end
+
+  def total_disc_rev
+    self.invoice_items.sum do |invoice_item|
+      if invoice_item.discount?
+        invoice_item.total_rev
+      else
+        0
+      end
+    end
+  end
+
 end
