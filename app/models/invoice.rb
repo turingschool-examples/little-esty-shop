@@ -30,10 +30,26 @@ class Invoice < ApplicationRecord
   end
 
   def merchant_total_revenue(merchant_id)
-    Invoice.joins(:items, :invoice_items, :bulk_discounts).where('items.merchant_id = ?', merchant_id).where('bulk_discounts.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).where("invoice_items.quantity < bulk_discounts.quantity_threshold ").distinct.sum('invoice_items.unit_price * invoice_items.quantity')
+    # Invoice.joins(:items, :invoice_items, :bulk_discounts).where('items.merchant_id = ?', merchant_id).where('bulk_discounts.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).where("invoice_items.quantity < bulk_discounts.quantity_threshold ").distinct.sum('invoice_items.unit_price * invoice_items.quantity')
+    invoice_items = self.invoice_items.joins(:item, :bulk_discounts).where('items.merchant_id = ?', merchant_id).where('bulk_discounts.merchant_id = ?', merchant_id).distinct
+
+    invoice_items.sum do |invoice_item|
+      if invoice_item.discount? == false
+        invoice_item.total_rev
+      else
+        0
+      end
+    end
   end
 
   def merchant_discounted_revenue(merchant_id)
-    Invoice.joins(:items, :invoice_items, :bulk_discounts).where('items.merchant_id = ?', merchant_id).where('bulk_discounts.merchant_id = ?', merchant_id).where('invoices.id = ?', self.id).where("invoice_items.quantity > bulk_discounts.quantity_threshold ").distinct.sum('invoice_items.unit_price * invoice_items.quantity * bulk_discounts.percentage / 100)')
+    invoice_items = self.invoice_items.joins(:item, :bulk_discounts).where('items.merchant_id = ?', merchant_id).where('bulk_discounts.merchant_id = ?', merchant_id).distinct
+    invoice_items.sum do |invoice_item|
+      if invoice_item.discount?
+        invoice_item.total_rev
+      else
+        0
+      end
+    end
   end
 end
