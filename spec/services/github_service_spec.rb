@@ -1,6 +1,6 @@
-require 'rails_helper'
-
-RSpec.describe GithubService, type: :model do
+# require 'rails_helper'
+#
+# RSpec.describe GithubService, type: :model do
   # it "returns the users data" do
   #   @github_service = GithubService.new
   #   @github_service.repo_commits_and_names
@@ -18,4 +18,4 @@ RSpec.describe GithubService, type: :model do
     # expect(json).to have_key(:user_name_4)
     # expect(json).to have_key(:commits)
     # expect(json).to have_key(:pull_requests)
-  end
+  # end

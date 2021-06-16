@@ -25,7 +25,7 @@
       <p>Unit Price:<%= invoice_item.unit_price %></p>
       <p>Status:<%= invoice_item.status %></p>
       <% if invoice_item.discount? %>
-        <%= link_to "Bulk Discount Used", "merchants/#{@merchant.id}/bulk_discounts/#{invoice_item.highest_discount.id}" %>
+        <%= link_to "Bulk Discount Used", merchant_bulk_discount_path(@merchant.id, invoice_item.highest_discount.id) %>
       <% end %>
       <%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch do |form| %>
         <%= form.select :status, [["Pending", 0], ["Packaged", 1], ["Shipped"], 2], selected: invoice_item.status_for_view %>
