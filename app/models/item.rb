@@ -20,10 +20,6 @@ class Item < ApplicationRecord
     where(status: 0)
   end
 
-  def total_revenue
-    Item.joins(:invoice_items, :transactions).where('transactions.result = ?', 1).select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').group(:id)
-  end
-
   def self.not_shipped(merchant_id)
     joins(:invoice_items, :invoices).where('items.merchant_id = ?', merchant_id).where('invoice_items.status = ?', 1).select('invoices.created_at, items.name, invoices.id').order('invoices.created_at')
   end

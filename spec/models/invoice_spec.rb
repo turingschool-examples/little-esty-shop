@@ -56,9 +56,11 @@ RSpec.describe Invoice, type: :model do
     @customer = Customer.create!(first_name: 'John', last_name: 'Smith')
     @item_1 = Item.create!(name: 'Thing 1', description: 'This is the first thing.', unit_price: 14.9, merchant_id: @merchant.id)
     @item_2 = Item.create!(name: 'Thing 2', description: 'This is the second thing.', unit_price: 16.3, merchant_id: @merchant.id)
-    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer.id, created_at: "2021-06-05 20:11:38.553871" )
+    @invoice_1 = Invoice.create!(status: 2, customer_id: @customer.id, created_at: "2021-06-05 20:11:38.553871" )
     @invoice_item_1 = InvoiceItem.create!(quantity: 2, unit_price: 14.9, status: 2, invoice_id: @invoice_1.id, item_id: @item_1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 16.3, status: 2, invoice_id: @invoice_1.id, item_id: @item_2.id)
+    @bulk_discount1 = BulkDiscount.create!(percentage: 10, quantity_threshold: 40, merchant_id: @merchant.id)
+    @bulk_discount2 = BulkDiscount.create!(percentage: 20, quantity_threshold: 75, merchant_id: @merchant.id)
 
     # Gunnar's Tests
     @customer9 = Customer.create!(first_name: "Bobby", last_name: "Mendez")
@@ -79,21 +81,49 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
-    describe '#convert_create_date' do
-      it 'making a date in readable fashion' do
-        expect(@invoice_1.convert_create_date).to eq("Saturday, June 05, 2021")
-      end
-
-    describe '#merchant_total_revenue'
-      it 'can give the total revenue for a merchants items on specific invoice' do
-        expect(@invoice_1.merchant_total_revenue(@merchant.id)).to eq(111.3)
-      end
+  describe '#convert_create_date' do
+    it 'making a date in readable fashion' do
+      expect(@invoice_1.convert_create_date).to eq("Saturday, June 05, 2021")
     end
+  end
 
-    describe '#total_revenue' do
-      it 'total revenue for an invoice' do
-        expect(@invoice9.total_revenue).to eq(50000)
-      end
+  describe '#merchant_total_revenue'
+    it 'can give the total revenue for a merchants items on specific invoice' do
+      bulk_discount_1 = BulkDiscount.create!(percentage: 10, quantity_threshold: 100, merchant_id: @merchant.id)
+      expect(@invoice_1.merchant_total_revenue(@merchant.id)).to eq(111.3)
+    end
+  end
+
+  describe '#merchant_discounted_revenue' do
+    it 'can give the total discounted revenue for a merchants items on a specific invoice' do
+      @merchant_b = Merchant.create!(name: "Bulk Merchant")
+      @antimerchant = Merchant.create!(name: "The other bulk")
+
+      @bulk_discount_1 = BulkDiscount.create!(percentage: 10, quantity_threshold: 40, merchant_id: @merchant_b.id)
+      @bulk_discount_2 = BulkDiscount.create!(percentage: 20, quantity_threshold: 75, merchant_id: @merchant_b.id)
+
+      @customer_b = Customer.create!(first_name: "Customer", last_name: "Bulk")
+
+      @invoice_b = Invoice.create!(status: 1, customer_id: @customer_b.id)
+
+      @item_b1 = Item.create!(name: "Item 1", description: "Item 1 Description", unit_price: 50, merchant_id: @merchant_b.id)
+      @item_b2 = Item.create!(name: "Item 2", description: "Item 2 Description", unit_price: 100, merchant_id: @merchant_b.id)
+      @item_b3 = Item.create!(name: "Item 3", description: "Item 3 Description", unit_price: 200, merchant_id: @merchant_b.id)
+      @item_b4 = Item.create!(name: "Item 4", description: "Item 4 Description", unit_price: 500, merchant_id: @antimerchant.id)
+
+      @invoice_item_b1 = InvoiceItem.create!(quantity: 5, unit_price: 50, status: 2, invoice_id: @invoice_b.id, item_id: @item_b1.id)
+      @invoice_item_b2 = InvoiceItem.create!(quantity: 50, unit_price: 100, status: 2, invoice_id: @invoice_b.id, item_id: @item_b2.id)
+      @invoice_item_b3 = InvoiceItem.create!(quantity: 100, unit_price: 200, status: 2, invoice_id: @invoice_b.id, item_id: @item_b3.id)
+      @invoice_item_b4 = InvoiceItem.create!(quantity: 75, unit_price: 500, status: 2, invoice_id: @invoice_b.id, item_id: @item_b4.id)
+
+      expect(@invoice_b.merchant_total_revenue(@merchant_b.id)).to eq(250)
+      expect(@invoice_b.merchant_discounted_revenue(@merchant_b.id)).to eq(20500)
+    end
+  end
+
+  describe '#total_revenue' do
+    it 'total revenue for an invoice' do
+      expect(@invoice9.total_revenue).to eq(50000)
     end
   end
 end

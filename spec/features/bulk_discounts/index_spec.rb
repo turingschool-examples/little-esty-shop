@@ -53,7 +53,6 @@ RSpec.describe 'bulk discount index page' do
     within("#discount#{@bulk_discount_1.id}") do
       click_button("Delete Discount")
     end
-    expect(page).to have_no_content("10")
-    expect(page).to have_no_content("15")
+    expect(page).to have_no_content(@bulk_discount_1.id)
   end
 end

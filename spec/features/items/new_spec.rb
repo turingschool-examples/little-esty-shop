@@ -30,5 +30,12 @@ RSpec.describe 'items show page'do
       expect(page).to have_content("T-Rex Floatie")
       expect(page).to_not have_content("BreadNButter")
     end
+
+    it 'redirects the user back to the form if done incorrectly' do
+      visit "/merchants/#{@merchant1.id}/items/new"
+
+      click_button("Create Item")
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+    end
   end
 end

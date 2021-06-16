@@ -2,6 +2,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
   has_many :merchants, through: :item
+  has_many :bulk_discounts, through: :merchants
 
   validates :quantity, presence: true, numericality: true
   validates :unit_price, presence: true, numericality: true
@@ -17,7 +18,23 @@ class InvoiceItem < ApplicationRecord
     rev_statuses[self.status]
   end
 
-  def self.invoice_id(item)
-    joins(:merchants, :item, :invoice).where('invoice_items.item_id = ?', item.id).where('merchants.id = ?', item.merchant_id).where('invoice_items.status = ?', 1).select('invoice_items.invoice_id').pluck(:invoice_id).first
+  def highest_discount
+    discount_record = bulk_discounts.where('quantity_threshold <= ?', self.quantity).order(percentage: :desc).first
+  end
+
+  def highest_discount_percent
+    if !self.highest_discount.blank?
+      highest_discount_percent = (self.highest_discount.percentage.to_f / 100.00)
+    else
+      highest_discount_percent = 0
+    end
+  end
+
+  def discount?
+    self.highest_discount_percent != 0
+  end
+
+  def total_rev
+    (quantity * unit_price) - ((quantity * unit_price) * self.highest_discount_percent)
   end
 end

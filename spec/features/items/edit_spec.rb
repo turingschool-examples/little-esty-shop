@@ -41,5 +41,14 @@ RSpec.describe 'items show page'do
       expect(current_path).to eq("/merchants/#{@merchant2.id}/items/#{@item5.id}")
       expect(page).to have_content("Item information has been successfully updated!")
     end
+
+    it 'redirects the user to the edit page if the wrong information is entered' do
+      visit "/merchants/#{@merchant2.id}/items/#{@item5.id}/edit"
+
+      fill_in "Unit price", with: "Blah"
+      click_button("Submit Item Update")
+
+      expect(current_path).to eq("/merchants/#{@merchant2.id}/items/#{@item5.id}/edit")
+    end
   end
 end
