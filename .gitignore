@@ -21,7 +21,23 @@
 /yarn-error.log
 
 /public/assets
+/public/packs/*
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+coverage
+
+/public/packs-test
+yarn-debug.log*
+.yarn-integrity
+.database.yml
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+.idea
