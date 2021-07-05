@@ -94,6 +94,18 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.top_merchants_by_revenue).to_not eq([@merchant1, @merchant2, @merchant3, @merchant5, @merchant4])
       end
     end
+
+    describe '.alphabetically' do
+      it "returns all merchants alphabetically by name case insensitive" do
+
+        expect(Merchant.alphabetically.first.name).to eq(@merchant3.name)
+        expect(Merchant.alphabetically.second.name).to eq(@merchant5.name)
+        expect(Merchant.alphabetically.third.name).to eq(@merchant2.name)
+        expect(Merchant.alphabetically.fourth.name).to eq(@merchant4.name)
+        expect(Merchant.alphabetically.fifth.name).to eq(@merchant6.name)
+        expect(Merchant.alphabetically[5].name).to eq(@merchant1.name)
+      end
+    end
   end
 
   describe 'instance methods' do

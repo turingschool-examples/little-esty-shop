@@ -5,4 +5,8 @@ class MerchantsController < ApplicationController
     @items = Item.not_shipped(@merchant.id)
     @top_customers = Customer.top_customers(@merchant.id)
   end
+
+  def index
+    @merchants = Merchant.alphabetically
+  end
 end

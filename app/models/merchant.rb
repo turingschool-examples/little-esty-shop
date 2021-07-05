@@ -40,4 +40,8 @@ class Merchant < ApplicationRecord
     .first
     .created_at
   end
+
+  def self.alphabetically
+    order('lower(name)')
+  end
 end

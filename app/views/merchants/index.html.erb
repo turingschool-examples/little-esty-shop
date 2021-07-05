@@ -1,0 +1,8 @@
+<h1>Merchant Index</h1>
+
+<% @merchants.each do |merchant| %>
+  <section id="merchant-<%= merchant.id %>">
+    <h3><%= merchant.name %></h3>
+    <%= button_to "Go To Dashboard", "/merchants/#{merchant.id}/dashboard", method: :get %>
+  </section>
+<% end %>
