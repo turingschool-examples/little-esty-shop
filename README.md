@@ -146,3 +146,52 @@ This project requires Ruby 2.7.2.
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
 
+
+
+#### Project Configurations
+
+* Ruby version
+    ```bash
+    $ ruby -v
+    ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [x86_64-darwin20]
+    ```
+
+* [System dependencies](https://github.com/bfl3tch/little-esty-shop/blob/main/Gemfile)
+    ```bash
+    $ rails -v
+    Rails 5.2.6
+    ```
+
+* Database creation
+    ```bash
+    $ rails db:{drop,create,migrate,seed}
+    Created database 'little_etsy_shop_development'
+    Created database 'little_etsy_shop_test'
+    ```
+
+* Database initialization
+    ```bash
+    $ rake csv_load:all
+    ```
+
+* How to run the test suite
+    ```bash
+    $ bundle exec rspec
+    ```
+
+* [Local Deployment](http://localhost:3000), for testing:
+    ```bash
+    $ rails s
+    => Booting Puma
+    => Rails 5.2.6 application starting in development
+    => Run `rails server -h` for more startup options
+    Puma starting in single mode...
+    * Version 3.12.6 (ruby 2.7.2-p137), codename: Llamas in Pajamas
+    * Min threads: 5, max threads: 5
+    * Environment: development
+    * Listening on tcp://localhost:3000
+    Use Ctrl-C to stop
+
+    ```
+
+* Heroku Deployment, for production (link pending)
