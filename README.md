@@ -4,7 +4,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-# Welcome to Relational Rails - A database driven web application
+# Welcome to Little Estry - A database driven web application
 <p align="center">
   <img src="https://user-images.githubusercontent.com/58891447/127079509-57ae82d1-8793-41fa-a8a9-4bfe25f86b6a.png" alt="little_etsy_shop_db_schema"/>
 </p>
