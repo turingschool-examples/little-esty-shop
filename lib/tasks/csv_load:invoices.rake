@@ -5,7 +5,7 @@ namespace :csv_load do
   task :invoices => :environment do
       file = './db/data/invoices.csv'
       CSV.foreach(file, :headers => true) do |row|
-        Invoices.create!({
+        Invoice.create!({
                           :customer_id => row[1],
                           :status => row[2],
                           :created_at => row[3],
