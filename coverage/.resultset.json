@@ -5,6 +5,8 @@
         "lines": [
           1,
           1,
+          1,
+          1,
           null
         ]
       },
@@ -24,12 +26,28 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
           null
         ]
       },
       "/Users/bfl3tch/Turing/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
         "lines": [
           1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           null
@@ -45,11 +63,21 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          null,
           null
         ]
       },
       "/Users/bfl3tch/Turing/2mod/projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
+          1,
+          1,
+          null,
           1,
           1,
           1,
@@ -68,12 +96,23 @@
           2,
           2,
           null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
           null
         ]
       },
       "/Users/bfl3tch/Turing/2mod/projects/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           1,
@@ -88,12 +127,18 @@
           1,
           2,
           null,
+          null,
+          1,
+          2,
+          null,
           null
         ]
       },
       "/Users/bfl3tch/Turing/2mod/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
+          1,
+          null,
           1,
           null
         ]
@@ -106,6 +151,15 @@
           1,
           2,
           null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          2,
+          2,
+          null,
           null
         ]
       },
@@ -113,10 +167,17 @@
         "lines": [
           1,
           1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1627337172
+    "timestamp": 1627347566
   }
 }
