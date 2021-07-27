@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :csv_load do
   desc 'all'
-  task all: [:destroy_all, :create_customers, :create_merchants, :create_items, :create_invoices, :create_transactions, :create_invoice_items]
+  task all: [:destroy_all, :create_customers, :create_merchants, :create_items, :create_invoices, :create_transactions, :create_invoice_items, :reset_all_pks]
 
   desc 'Destroy all'
   task destroy_all: :environment do
@@ -53,6 +53,13 @@ namespace :csv_load do
   task create_invoice_items: :environment do
     CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
       InvoiceItem.create!(row.to_hash)
+    end
+  end
+
+  desc 'Reset all primary key autoincrement sequences'
+  task reset_all_pks: :environment do
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
     end
   end
 end
