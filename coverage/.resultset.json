@@ -286,7 +286,7 @@
           null
         ]
       },
-      "/Users/marla/turing/2module/little-esty-shop/app/models/merchant.rb": {
+      "/Users/marla/turing/2module/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
           1,
@@ -300,7 +300,7 @@
           null
         ]
       },
-      "/Users/marla/turing/2module/little-esty-shop/app/models/item.rb": {
+      "/Users/marla/turing/2module/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -308,6 +308,6 @@
         ]
       }
     },
-    "timestamp": 1627425676
+    "timestamp": 1627425783
   }
 }
