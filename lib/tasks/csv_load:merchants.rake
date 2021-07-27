@@ -1,7 +1,7 @@
 require 'csv'
 
 namespace :csv_load do
-  desc "Imports a Customer CSV file into an ActiveRecord table"
+  desc "Imports Merchant CSV file into an ActiveRecord table"
   task :merchants => :environment do
       file = './db/data/merchants.csv'
       CSV.foreach(file, :headers => true) do |row|
