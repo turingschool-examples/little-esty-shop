@@ -19,4 +19,4 @@ class Merchant::ItemsController < ApplicationController
 
   def update
   end
-
+end
