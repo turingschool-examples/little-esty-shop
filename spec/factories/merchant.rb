@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :merchant do
-    status { Faker::Company.name }
+    name { Faker::Company.name }
   end
 end
