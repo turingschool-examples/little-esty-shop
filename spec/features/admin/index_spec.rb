@@ -46,14 +46,45 @@ RSpec.describe 'Admin Index' do
 
   describe 'Admin Dashboard Statistics' do
     it 'displays the names of the top 5 customers and num of successful transcations' do
+      
+      within('#top_customers') do
+        expect(page).to have_content('Top 5 Customers')
+      end
 
-      expect(page).to have_content('Top 5 Customers')
+      within("#customer-#{@customer1.id}") do
+        expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}: 3")
+      end
 
-      expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}: 3")
-      expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name}: 2")
-      expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name}: 2")
-      expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}: 2")
-      expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}: 2")
+      within("#customer-#{@customer2.id}") do
+        expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name}: 2")
+      end
+
+      within("#customer-#{@customer3.id}") do
+        expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name}: 2")
+      end
+
+      within("#customer-#{@customer4.id}") do
+        expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}: 2")
+      end
+
+      within("#customer-#{@customer5.id}") do
+        expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}: 2")
+      end
+    end
+  end
+
+  describe 'Admin Dasboard Incomplete Invoices' do
+    #     Admin Dashboard Incomplete Invoices
+
+    # As an admin,
+    # When I visit the admin dashboard
+    # Then I see a section for "Incomplete Invoices"
+    # In that section I see a list of the ids of all invoices
+    # That have items that have not yet been shipped
+    # And each invoice id links to that invoice's admin show page
+    xit 'displays a list of ids of invocies not shipped ' do
+
+      expect(page).to have_content('imcomplete Invoices')
     end
   end
 end

@@ -7,6 +7,8 @@
 <section id=top_customers>
   <h1>Top 5 Customers</h1>
   <% @customers.each do |customer|%>
-    <p><%= customer.first_name%> <%= customer.last_name%>: <%= customer.successful_transactions %> </p>
+    <div id="customer-<%= customer.id%>">
+      <p><%= customer.first_name%> <%= customer.last_name%>: <%= customer.successful_transactions %> </p>
+    </div>
   <%end%>
 </section>
