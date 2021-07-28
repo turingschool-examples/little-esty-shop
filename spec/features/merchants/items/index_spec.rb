@@ -15,8 +15,6 @@ RSpec.describe 'Merchants Items Index page' do
     expect(page).to have_content(Item.first.name)
     expect(page).to have_content(Item.second.name)
     expect(page).to have_content(Item.third.name)
-    
-    expect(page).to_not have_content(Item.fifth.name)
   end
 
   it "Does not have items from other merchants" do
