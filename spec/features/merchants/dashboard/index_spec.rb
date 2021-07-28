@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Merchants dashboard show page' do
   describe "dashboard" do
+
     before(:each) do
       @merchant_1 = create(:merchant)
       visit "/merchants/#{@merchant_1.id}/dashboard"
@@ -14,6 +15,56 @@ RSpec.describe 'Merchants dashboard show page' do
     it 'displays links to items and invoices index' do
       expect(page).to have_link('My Items')
       expect(page).to have_link('My Invoices')
+    end
+
+    describe 'items ready to ship section' do
+      before(:each) do
+
+        @customers = []
+        @invoices = []
+        @items = []
+        @transactions = []
+        @invoice_items = []
+
+        2.times do
+          @customers << create(:customer)
+          @invoices << create(:invoice, customer_id: @customers.last.id)
+          @items << create(:item, merchant_id: @merchant_1.id)
+          @transactions << create(:transaction, invoice_id: @invoices.last.id)
+          @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 1)
+        end
+        3.times do
+          @customers << create(:customer)
+          @invoices << create(:invoice, customer_id: @customers.last.id)
+          @items << create(:item, merchant_id: @merchant_1.id)
+          @transactions << create(:transaction, invoice_id: @invoices.last.id)
+          @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 2)
+        end
+        visit "/merchants/#{@merchant_1.id}/dashboard"
+      end
+
+      it 'see a list of all items that have been ordered and not yet shipped' do
+        expect(page).to have_content("Items Ready to Ship")
+
+        save_and_open_page
+        expect(page).to have_content(@items[1].name)
+        expect(page).to have_content(@invoices[1].id)
+        expect(page).to have_content(@invoices[1].created_at)
+
+        expect(page).to have_content(@items[0].name)
+        expect(page).to have_content(@invoices[0].id)
+        expect(page).to have_content(@invoices[0].created_at)
+
+        expect(page).to_not have_content(@items[3].name)
+        expect(page).to_not have_content(@invoices[3].id)
+        expect(page).to_not have_content(@invoices[3].created_at)
+      end
+
+      it "invoice id has link to this merchants show page" do
+        click link "#{@invoices[1].id}"
+
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoices[1].id}")
+      end
     end
   end
 end
