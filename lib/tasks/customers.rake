@@ -8,7 +8,7 @@ namespace :csv_load do
     csv_path = 'db/data/customers.csv'
     csv = CSV.open(csv_path, headers: true)
     csv.each do |row|
-      Customer.create(first_name: row['first_name'], last_name: row['last_name'])
+      Customer.create!(first_name: row['first_name'], last_name: row['last_name'])
     end
   end
 end
