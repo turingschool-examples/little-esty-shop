@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Admin Invoices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to 'Show', admin_invoices_path %></td>
+        <td><%= link_to 'Edit', edit_admin_invoice_path(invoice.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin Invoice', new_admin_invoice_path %>
