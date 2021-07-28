@@ -20,5 +20,4 @@ class Admin::InvoicesController < ApplicationController
 
   def update
   end
-
 end
