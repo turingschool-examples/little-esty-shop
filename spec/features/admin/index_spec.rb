@@ -4,7 +4,7 @@ RSpec.describe 'Admin Index' do
   before(:each) do
     @customers = create_list(:customer, 10)
 
-    visit admin_index_path  
+    visit admin_index_path
   end
 
   describe 'Admin Dashboard' do
@@ -24,7 +24,7 @@ RSpec.describe 'Admin Index' do
 
   describe 'Admin Dashboard Statistics' do
     it 'displays the names of the top 5 customers' do
-        
+
     end
   end
 end
