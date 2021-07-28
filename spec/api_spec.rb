@@ -30,7 +30,7 @@ RSpec.describe API do
       'https://api.github.com/repos/bfl3tch/little-esty-shop/commits'
     )
     expect(expected[:pulls]).to eq(
-      'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls'
+      'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls?state=closed'
     )
   end
 
@@ -51,7 +51,7 @@ RSpec.describe API do
     }
 
     allow(API).to receive(:commits_by_author).and_return(mock_response)
-    expected = API.aggregate_metrics_by_author(:commits)
+    expected = API.aggregate_by_author(:commits)
 
     expect(expected.class).to eq(Hash)
     expect(expected.keys.length).to eq(3)
@@ -59,6 +59,28 @@ RSpec.describe API do
     expect(expected['Elliot O']).to eq(4)
     expect(expected['Brian Fletcher']).to eq(2)
     expect(expected['TaylorV']).to eq(3)
+  end
+
+  it 'can aggregate total pull requests by contributor' do
+    mock_response = [
+      {"state" => "closed", "title" => "PR #1",
+        "user" => {"login" => "ElliotOlbright"}
+      },
+      {"state" => "closed", "title" => "PR #2",
+        "user" => {"login" => "bfl3tch"}
+      },
+      {"state" => "closed", "title" => "PR #3",
+        "user" => {"login" => "ElliotOlbright"}
+      }
+    ]
+    allow(API).to receive(:render_request).and_return(mock_response)
+    expected = API.aggregate_by_author(:pulls)
+
+    expect(expected.class).to eq(Hash)
+    expect(expected.keys.length).to eq(2)
+    expect(expected.values.length).to eq(2)
+    expect(expected['ElliotOlbright']).to eq(2)
+    expect(expected['bfl3tch']).to eq(1)
   end
 
 end
