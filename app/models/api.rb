@@ -23,10 +23,7 @@ class API
   end
 
   def self.repo_name
-    raw_string = contributions[:commits].split('/')[-2]
-    raw_string.split('-').map do |section|
-      section.capitalize + ' '
-    end.join[0..-2]
+    APIS::RepoName.new(contributions).format
   end
 
   def self.make_request(endpoint)
