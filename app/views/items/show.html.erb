@@ -1,4 +1,5 @@
 <h1> <%= @merchant.name %>'s product: <%= @item.name %> </h1>
+<%=flash[:success] %> <%=flash[:alert] %>
 
 <p><b>About the <%= @item.name %>: <%= @item.description %> </b></p>
 <p><b>Currently being sold for: $<%= @item.unit_price %> </b></p>
