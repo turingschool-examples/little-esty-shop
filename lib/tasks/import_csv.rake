@@ -17,20 +17,13 @@ namespace :csv_load do
     InvoiceItem.destroy_all
     file_path = "db/data/invoice_items.csv"
     CSV.foreach(file_path, {headers: true, header_converters: :symbol}) do |row|
-      if row[:status] == 'pending'
-        status = 0
-      elsif row[:status] == 'packaged'
-        status = 1
-      elsif row[:status] == 'shipped'
-        status = 2
-      end
       InvoiceItem.create!(
         id: row[:id],
         item_id: row[:item_id],
         invoice_id: row[:invoice_id],
         quantity: row[:quantity],
         unit_price: row[:unit_price],
-        status: status,
+        status: row[:status],
         created_at: row[:created_at],
         updated_at: row[:updated_at]
       )
@@ -43,17 +36,10 @@ namespace :csv_load do
     Invoice.destroy_all
     file_path = "db/data/invoices.csv"
     CSV.foreach(file_path, {headers: true, header_converters: :symbol}) do |row|
-      if row[:status] == 'in progress'
-        status = 0
-      elsif row[:status] == 'completed'
-        status = 1
-      elsif row[:status] == 'cancelled'
-        status = 2
-      end
       Invoice.create!(
         id: row[:id],
         customer_id: row[:customer_id],
-        status: status,
+        status: row[:status].sub(' ','_'),
         created_at: row[:created_at],
         updated_at: row[:updated_at]
       )
@@ -107,6 +93,12 @@ namespace :csv_load do
 
   desc 'Import all CSV files at once'
   task all: :environment do
+    Transaction.destroy_all
+    InvoiceItem.destroy_all
+    Invoice.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+    Customer.destroy_all
     Rake::Task["csv_load:customers"].invoke
     Rake::Task["csv_load:merchants"].invoke
     Rake::Task["csv_load:items"].invoke
