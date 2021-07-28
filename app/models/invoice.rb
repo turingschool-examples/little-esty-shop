@@ -4,7 +4,11 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :transactions
 
-  def incomplete_invocies
-      
+  def self.incomplete_invoices
+    joins(:invoice_items)
+    .where.not('invoice_items.status = 2')
+    .select('invoices.id, invoices.created_at')
+    .order(:created_at)
+    .distinct
   end
 end

@@ -12,12 +12,12 @@ RSpec.describe Invoice do
     @customer1 = create(:customer)
     @customer2 = create(:customer)
 
-    invoice1 = create(:invoice, customer_id: @customer1.id)
-    invoice2 = create(:invoice, customer_id: @customer1.id)
-    invoice3 = create(:invoice, customer_id: @customer1.id)
-    invoice4 = create(:invoice, customer_id: @customer2.id)
-    invoice5 = create(:invoice, customer_id: @customer2.id)
-    invoice6 = create(:invoice, customer_id: @customer2.id)
+    @invoice1 = create(:invoice, customer_id: @customer1.id)
+    @invoice2 = create(:invoice, customer_id: @customer1.id)
+    @invoice3 = create(:invoice, customer_id: @customer1.id)
+    @invoice4 = create(:invoice, customer_id: @customer2.id)
+    @invoice5 = create(:invoice, customer_id: @customer2.id)
+    @invoice6 = create(:invoice, customer_id: @customer2.id)
     
     @merchant = create(:merchant)
 
@@ -36,7 +36,7 @@ RSpec.describe Invoice do
   describe 'class methods' do
     it '#incomplete_invoices' do
       
-      expect(Invoice.incomplete_invoices).to eq([])
+      expect(Invoice.incomplete_invoices).to eq([@invoice1, @invoice2, @invoice3, @invoice4, @invoice6])
     end
   end
 end
