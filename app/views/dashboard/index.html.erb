@@ -1,1 +1,4 @@
 <h1><%= @merchant.name %></h1>
+
+<p><%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %></p>
+<p><%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices"  %></p>
