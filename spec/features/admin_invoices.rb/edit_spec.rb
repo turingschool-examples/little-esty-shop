@@ -10,6 +10,6 @@ RSpec.describe 'Admin Invoice Edit Page' do
 
   it 'is on the correct page' do 
     expect(current_path).to eq("/admin/invoices/#{@i.id}/edit")
-    expect(page).to have_content('Editing Admin Invoice')
+    expect(page).to have_content('Editing Admin Invoice')  
   end
 end 
