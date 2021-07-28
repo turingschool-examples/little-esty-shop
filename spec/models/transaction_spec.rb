@@ -10,6 +10,7 @@ RSpec.describe Transaction do
     # it { should validate_presence_of :credit_card_expiration_date}
     # validate on update? what about creating new transactions? existing records
     # have no CC expiry date
+      # just a 'nice to have', circle back for 'back-fill' validation logic if time
     it { should validate_presence_of :result }
     it { should define_enum_for(:result).with_values([:success, :failed]) }
   end

@@ -6,10 +6,6 @@ class API
   def initialize
   end
 
-  def self.repo_name
-    'little-etsy-shop'
-  end
-
   def self.contributors
     {
       taylor: 'https://api.github.com/users/tvaroglu',
@@ -26,13 +22,21 @@ class API
     }
   end
 
+  def self.repo_name
+    raw_string = contributions[:commits].split('/')[-2]
+    raw_string.split('-').map do |section|
+      section.capitalize + ' '
+    end.join[0..-2]
+  end
+
   def self.make_request(endpoint)
-    Faraday.get(endpoint).body
+    # require "pry"; binding.pry
+    Faraday.get(endpoint)
   end
 
   def self.render_request(endpoint)
     request = make_request(endpoint)
-    JSON.parse(request)
+    request.class == String ? JSON.parse(request) : JSON.parse(request.body)
   end
 
   def self.commits_by_author

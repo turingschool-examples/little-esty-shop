@@ -5,6 +5,7 @@ class Transaction < ApplicationRecord
 
   validates :credit_card_number, presence: true
   # validates :credit_card_expiration_date, presence: true
+    # just a 'nice to have', circle back for 'back-fill' validation logic if time
   validates :result, presence: true, inclusion: { in: Transaction.results.keys }
 
 end
