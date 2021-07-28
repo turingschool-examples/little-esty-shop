@@ -22,45 +22,23 @@ class API
     }
   end
 
+  def self.make_request(endpoint)
+    Faraday.get(endpoint)
+  end
+
   def self.repo_name
     APIS::RepoName.new(contributions).format
   end
 
-  def self.make_request(endpoint)
-    # require "pry"; binding.pry
-    Faraday.get(endpoint)
-  end
-
   def self.render_request(endpoint)
-    request = make_request(endpoint)
-    request.class == String ? JSON.parse(request) : JSON.parse(request.body)
-  end
-
-  def self.commits_by_author
-    grouping = Hash.new(0)
-    current_commits = render_request(contributions[:commits])
-    grouping['commits'] = current_commits.group_by {|author| author['commit']['author']['name']}
-  end
-
-  def self.pull_requests_by_author
-    grouping = Hash.new(0)
-    closed_prs = render_request(contributions[:pulls])
-    closed_prs.each do |pr, hash|
-      author = pr['user']['login']
-      grouping[author] += 1
-    end
-    grouping
+    APIS::RenderRequest.new(endpoint).parse
   end
 
   def self.aggregate_by_author(metric)
-    totals = Hash.new(0)
     if metric == :commits
-      commits_by_author.each do |author, commits|
-        totals[author] = commits.length if author != 'Brian Zanti' && author != 'Jamison Ordway'
-      end
-      totals
+      APIS::Commits.new(render_request(contributions[:commits])).total_count_by_author
     elsif metric == :pulls
-      pull_requests_by_author
+      APIS::Pulls.new(render_request(contributions[:pulls])).total_count_by_author
     end
   end
 
