@@ -5,15 +5,14 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show
-    require "pry"; binding.pry
-    @invoices = Invoice.find(params[:id])
-   
+    @invoice = Invoice.find(params[:id])
   end
 
   def new
   end
 
   def edit
+    @invoice = Invoice.find(params[:id])
   end
 
   def create
