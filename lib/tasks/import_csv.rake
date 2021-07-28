@@ -86,7 +86,21 @@ namespace :csv_load do
     Transaction.destroy_all
     file_path = "db/data/transactions.csv"
     CSV.foreach(file_path, {headers: true, header_converters: :symbol}) do |row|
-      Transaction.create!(row.to_hash)
+      if row[:result] == 'success'
+        result = true
+      elsif row[:result] == 'failed'
+        result = false
+      end
+
+      Transaction.create!(
+        id: row[:id],
+        invoice_id: row[:invoice_id],
+        credit_card_number: row[:credit_card_number],
+        credit_card_expiration_date: row[:credit_card_expiration_date],
+        result: result,
+        created_at: row[:created_at],
+        updated_at: row[:updated_at]
+      )
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
@@ -94,10 +108,10 @@ namespace :csv_load do
   desc 'Import all CSV files at once'
   task all: :environment do
     Rake::Task["csv_load:customers"].invoke
-    Rake::Task["csv_load:invoice_items"].invoke
-    Rake::Task["csv_load:invoices"].invoke
-    Rake::Task["csv_load:items"].invoke
     Rake::Task["csv_load:merchants"].invoke
+    Rake::Task["csv_load:items"].invoke
+    Rake::Task["csv_load:invoices"].invoke
+    Rake::Task["csv_load:invoice_items"].invoke
     Rake::Task["csv_load:transactions"].invoke
   end
 end
