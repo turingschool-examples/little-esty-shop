@@ -15,5 +15,7 @@
 
 <section id=incomplete>
   <h1>Incomplete Invoices</h1>
-
+  <% @invoices.each do |invoice|%>
+    <p><%= invoice.id%></p>
+  <%end%>
 </section>
