@@ -10,6 +10,6 @@ RSpec.describe 'Merchants Item Index Page' do
 
   it 'is on the correct page' do 
     expect(current_path).to eq(merchant_items_path(@merchant1.id))
-    expect(page).to have_content("Merchant Id:#{@merchant1.id} Items")
+    expect(page).to have_content("Merchant Items")
   end
 end 
