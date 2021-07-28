@@ -14,7 +14,23 @@ namespace :csv_load do
     InvoiceItem.destroy_all
     file_path = "db/data/invoice_items.csv"
     CSV.foreach(file_path, {headers: true, header_converters: :symbol}) do |row|
-      InvoiceItem.create!(row.to_hash)
+      if row[:status] == 'pending'
+        status = 0
+      elsif row[:status] == 'packaged'
+        status = 1
+      elsif row[:status] == 'shipped'
+        status = 2
+      end
+      InvoiceItem.create!(
+        id: row[:id],
+        item_id: row[:item_id],
+        invoice_id: row[:invoice_id],
+        quantity: row[:quantity],
+        unit_price: row[:unit_price]
+        status: status,
+        created_at: row[:created_at],
+        updated_at: row[:updated_at]
+      )
     end
   end
 
