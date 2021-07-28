@@ -4,11 +4,11 @@ RSpec.describe 'Merchants Dashboard Page' do
   before :each do 
     @merchant = Merchant.create!(name: 'Tom Holland')
 
-    visit "/merchants/#{@merchant.id}/dashboard"
-  end
+    visit merchant_dashboard_index_path(@merchant.id)
+  end 
 
   it 'is on the correct page' do 
-    expect(current_path).to eq("/merchants/#{@merchant.id}/dashboard")
+    expect(current_path).to eq(merchant_dashboard_index_path(@merchant.id))
     expect(page).to have_content("#{@merchant.name}")
   end
 

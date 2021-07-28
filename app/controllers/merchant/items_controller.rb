@@ -1,7 +1,6 @@
 class Merchant::ItemsController < ApplicationController
   def index
-    @merchant = Merchant.find(params[:id])
-    #helper method for item specific to merchant
+    @merchant_items = Item.all    #helper method for item specific to merchant
   end
 
   def show

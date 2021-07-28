@@ -1,7 +1,7 @@
 class Merchant::InvoicesController < ApplicationController
 
   def index
-    @merchant = Merchant.find(params[:id])
+    @merchant_invoices = Invoice.all
     #helper method for invoices specific to merchant
   end
 
