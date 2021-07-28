@@ -9,20 +9,33 @@ RSpec.describe 'Admin Index' do
     @customer5 = create(:customer)
     @customer6 = create(:customer)
     
-    invoice1 = create(:invoice, customer_id: @customer1.id)
-    invoice2 = create(:invoice, customer_id: @customer2.id)
-    invoice3 = create(:invoice, customer_id: @customer3.id)
-    invoice4 = create(:invoice, customer_id: @customer4.id)
-    invoice5 = create(:invoice, customer_id: @customer5.id)
-    invoice6 = create(:invoice, customer_id: @customer6.id)
+    @invoice1 = create(:invoice, customer_id: @customer1.id)
+    @invoice2 = create(:invoice, customer_id: @customer2.id)
+    @invoice3 = create(:invoice, customer_id: @customer3.id)
+    @invoice4 = create(:invoice, customer_id: @customer4.id)
+    @invoice5 = create(:invoice, customer_id: @customer5.id)
+    @invoice6 = create(:invoice, customer_id: @customer6.id)
 
-    transaction1 = create(:transaction, invoice_id: invoice1.id)
-    transaction2 = create(:transaction, invoice_id: invoice1.id)
-    transaction3 = create(:transaction, invoice_id: invoice2.id)
-    transaction4 = create(:transaction, invoice_id: invoice3.id)
-    transaction5 = create(:transaction, invoice_id: invoice4.id)
-    transaction6 = create(:transaction, invoice_id: invoice5.id)
-    transaction7 = create(:transaction, invoice_id: invoice6.id)
+    @merchant = create(:merchant)
+
+    @item1 = create(:item, merchant_id: @merchant.id)
+    @item2 = create(:item, merchant_id: @merchant.id)
+
+    @invoice_item1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, status: 0)
+    @invoice_item2 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice2.id, status: 0)
+    @invoice_item3 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice3.id, status: 1)
+    @invoice_item4 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice4.id, status: 1)
+    @invoice_item5 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice5.id, status: 2)
+    @invoice_item6 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice6.id, status: 0)
+
+
+    @transaction1 = create(:transaction, invoice_id: @invoice1.id)
+    @transaction2 = create(:transaction, invoice_id: @invoice1.id)
+    @transaction3 = create(:transaction, invoice_id: @invoice2.id)
+    @transaction4 = create(:transaction, invoice_id: @invoice3.id)
+    @transaction5 = create(:transaction, invoice_id: @invoice4.id)
+    @transaction6 = create(:transaction, invoice_id: @invoice5.id)
+    @transaction7 = create(:transaction, invoice_id: @invoice6.id)
 
     Transaction.last(1).map { |t| t.update!(result: 1) }
 
@@ -74,17 +87,16 @@ RSpec.describe 'Admin Index' do
   end
 
   describe 'Admin Dasboard Incomplete Invoices' do
-    #     Admin Dashboard Incomplete Invoices
-
-    # As an admin,
-    # When I visit the admin dashboard
-    # Then I see a section for "Incomplete Invoices"
-    # In that section I see a list of the ids of all invoices
-    # That have items that have not yet been shipped
-    # And each invoice id links to that invoice's admin show page
     it 'displays a list of ids of invocies not shipped ' do
 
-      expect(page).to have_content('Incomplete Invoices')
+      within('#incomplete') do
+        expect(page).to have_content('Incomplete Invoices')
+      end
+      
+      within("#invoice-#{@invoice1.id}") do
+        expect(page).to have_content(@invoice1.id)
+        expect(page).to have_link("#{@invoice1.id}")
+      end
     end
   end
 end

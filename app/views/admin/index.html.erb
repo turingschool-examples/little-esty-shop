@@ -16,6 +16,8 @@
 <section id=incomplete>
   <h1>Incomplete Invoices</h1>
   <% @invoices.each do |invoice|%>
-    <p><%= invoice.id%></p>
+    <div id="invoice-<%= invoice.id%>">
+      <p><a href=<%="/admin/invoices/#{invoice.id}"%>><%= invoice.id%></p>
+    </div>
   <%end%>
 </section>
