@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Merchant Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<%# fix me %>
+  <tbody>
+    <% @merchant_items.each do |merchant_item| %>
+      <tr>
+        <td><%= link_to 'Show', merchant_item %></td>
+        <td><%= link_to 'Edit', edit_merchant_item_path(merchant_item) %></td>
+        <td><%= link_to 'Destroy', merchant_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Merchant Item', new_merchant_item_path %>
