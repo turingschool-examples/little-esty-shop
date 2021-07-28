@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-      resources :merchants
+    resources :merchants
     resources :invoices
   end
 
