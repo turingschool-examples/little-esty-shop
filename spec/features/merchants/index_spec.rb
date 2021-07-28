@@ -23,6 +23,6 @@ RSpec.describe 'Merchants Index Page' do
   it 'can take user to merchant show page' do 
     click_link "#{@merchant1.name}"
 
-    expect(current_path).to eq("/merchants/#{@merchant1.id}")
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/dashboard")
   end
 end 

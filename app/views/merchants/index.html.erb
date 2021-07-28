@@ -7,7 +7,7 @@
       <h5 class="card-title"><%= merchant.name %></h5>
       <h6 class="card-subtitle mb-2 text-muted">Created at: <%= merchant.created_at %></h6>
       <p class="card-text">This is <%= merchant.name %>'s information</p>
-        <%= link_to merchant.name, merchant_path(merchant.id), class:"btn btn-outline-dark btn-primary"%>
+        <%= link_to merchant.name, merchant_dashboard_index_path(merchant.id), class:"btn btn-outline-dark btn-primary"%>
 
 
     </div>
