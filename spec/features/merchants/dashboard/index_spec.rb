@@ -10,5 +10,10 @@ RSpec.describe 'Merchants dashboard show page' do
     it 'can display merchant name' do
       expect(page).to have_content(@merchant_1.name)
     end
+
+    it 'displays links to items and invoices index' do
+      expect(page).to have_link('My Items')
+      expect(page).to have_link('My Invoices')
+    end
   end
 end
