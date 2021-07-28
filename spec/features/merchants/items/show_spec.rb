@@ -34,5 +34,7 @@ RSpec.describe 'Merchants Items Show page' do
     expect(page).to have_content("Pixel 2 XL")
     expect(page).to have_content("When I left you, I was but the learner.")
     expect(page).to have_content(199)
+
+    expect(page).to have_content("Success: Pixel 2 XL has been updated!")
   end
 end
