@@ -10,4 +10,9 @@ class Customer < ApplicationRecord
     .group(:id)
     .limit(5)
   end
+
+  def successful_transactions
+    transactions.where('result = ?', 0)  
+    .count(:result)
+  end
 end

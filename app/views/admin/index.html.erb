@@ -2,3 +2,11 @@
 
 <a href="/admin/invoices">Admin Invoices</a>
 <a href="/admin/merchants">Admin Merchants</a> 
+
+
+<section id=top_customers>
+  <h1>Top 5 Customers</h1>
+  <% @customers.each do |customer|%>
+    <p><%= customer.first_name%> <%= customer.last_name%>: <%= customer.successful_transactions %> </p>
+  <%end%>
+</section>
