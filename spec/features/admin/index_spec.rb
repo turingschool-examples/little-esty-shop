@@ -82,9 +82,9 @@ RSpec.describe 'Admin Index' do
     # In that section I see a list of the ids of all invoices
     # That have items that have not yet been shipped
     # And each invoice id links to that invoice's admin show page
-    xit 'displays a list of ids of invocies not shipped ' do
+    it 'displays a list of ids of invocies not shipped ' do
 
-      expect(page).to have_content('imcomplete Invoices')
+      expect(page).to have_content('Incomplete Invoices')
     end
   end
 end
