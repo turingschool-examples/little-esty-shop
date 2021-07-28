@@ -9,4 +9,22 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    item = Item.find(params[:id])
+    if item.update(item_params)
+      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+    else
+      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}/edit"
+      flash[:alert] = "Error: #{error_message(item.errors)}"
+    end
+  end
+
+  private
+  def item_params
+    params.permit(:id, :name, :description, :unit_price, :merchant_id)
+  end
 end
