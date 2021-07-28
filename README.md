@@ -7,6 +7,7 @@
 # Welcome to Little Estry - A database driven web application
 <p align="center">
   <img src="https://user-images.githubusercontent.com/58891447/127079509-57ae82d1-8793-41fa-a8a9-4bfe25f86b6a.png" alt="little_etsy_shop_db_schema"/>
+  [![Screen-Shot-2021-07-27-at-3-06-26-PM.png](https://i.postimg.cc/wTgJcM1T/Screen-Shot-2021-07-27-at-3-06-26-PM.png)](https://postimg.cc/nMSCnHK6)
 </p>
 
 <!-- ![Relational Rails Welcome Screen](https://user-images.githubusercontent.com/74567704/124805908-1e01ff80-df2a-11eb-92bc-3a1536aa9c84.png) -->
