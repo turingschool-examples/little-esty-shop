@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do
-    sequence(:name) { |n| "Item #{n}"}
-    sequence(:description) { |n| "Description for item #{n}"}
-    sequence(:unit_price) { |n| n + 150 }
+    name { Faker::GreekPhilosophers.name }
+    description { Faker::ChuckNorris.fact }
+    unit_price { Faker::Number.within(range: 1..10000) }
     merchant
   end
 end

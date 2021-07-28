@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :merchant do
-    sequence(:name) { |n| "Merchant #{n}"}
+    status { Faker::Company.name }
   end
 end
