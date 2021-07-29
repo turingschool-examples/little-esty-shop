@@ -17,11 +17,17 @@
 
   <body>
     <%= render 'welcome/header' %>
+
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-info">
+        <%= msg %>
+      </div>
+    <% end %>
+
     <div class='container'>
       <br/>
     <%= yield %>
       </div>
-
 
   </body>
 </html>
