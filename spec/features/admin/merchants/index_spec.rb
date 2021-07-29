@@ -54,17 +54,11 @@ RSpec.describe 'Admin::Merchants' do
     it 'page shows 2 sections enabled merchants and diabled merchants' do
 
       within('#green') do
-      expect(page).to have_content("Enabled Merchants")
-    end
+        expect(page).to have_content("Enabled Merchants")
+      end
 
-    within('#red')
+      within('#red')
       expect(page).to have_content("Disabled Merchants")
     end
-#       Admin Merchants Grouped by Status
-#
-# As an admin,
-# When I visit the admin merchants index
-# Then I see two sections, one for "Enabled Merchants" and one for "Disabled Merchants"
-# And I see that each Merchant is listed in the appropriate section
-    end
   end
+end
