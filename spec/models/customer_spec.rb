@@ -76,14 +76,12 @@ RSpec.describe Customer do
 
     end
 
-    it 'can return top 5 customers for a given merchant' do
+    it 'can return for a given merchant the 5 #top_customers_for_merchant' do
       expected = Customer.top_customers_for_merchant(@merchant.id)
 
       expect(expected).to eq(
         [@customer_5, @customer_2, @customer_3, @customer_1, @customer_4]
       )
-      items = Item.items_ready_to_ship(@merchant.id)
-      # require "pry"; binding.pry
     end
   end
 
