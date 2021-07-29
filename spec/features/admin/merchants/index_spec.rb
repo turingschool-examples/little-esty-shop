@@ -80,7 +80,7 @@ RSpec.describe 'Admin::Merchants' do
 
       click_link 'Create Merchant'
 
-      expect(current_path).to eq(new_admin_merchant)
+      expect(current_path).to eq(new_admin_merchant_path)
 
       fill_in 'Name', with: "Darry 'Big J' Johnson" 
       click_on 'Submit'
