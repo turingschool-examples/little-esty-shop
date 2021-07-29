@@ -47,14 +47,24 @@ RSpec.describe 'Admin::Merchants' do
 
       expect(current_path).to eq(admin_merchants_path)
       expect(page).to have_button("Disable #{@merchant5.name}")
-#       Admin Merchant Enable/Disable
+    end
+  end
+
+  describe 'group by status' do
+    it 'page shows 2 sections enabled merchants and diabled merchants' do
+
+      within('#green') do
+      expect(page).to have_content("Enabled Merchants")
+    end
+
+    within('#red')
+      expect(page).to have_content("Disabled Merchants")
+    end
+#       Admin Merchants Grouped by Status
 #
 # As an admin,
 # When I visit the admin merchants index
-# Then next to each merchant name I see a button to disable or enable that merchant.
-# When I click this button
-# Then I am redirected back to the admin merchants index
-# And I see that the merchant's status has changed
+# Then I see two sections, one for "Enabled Merchants" and one for "Disabled Merchants"
+# And I see that each Merchant is listed in the appropriate section
     end
   end
-end
