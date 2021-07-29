@@ -13,6 +13,18 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
-    require "pry"; binding.pry
+    if @merchant.update(merchant_params)
+      redirect_to admin_merchant_path(@merchant.id)
+      flash[:alert] = "Update Successful"
+    else
+      redirect_to edit_admin_merchant_path(@merchant.id)
+      flash[:alert] = "Unable to Update Merchant"
+    end
+  end
+
+  private
+
+  def merchant_params
+    params.permit(:name)
   end
 end
