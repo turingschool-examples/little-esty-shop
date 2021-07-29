@@ -22,9 +22,21 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def enable
+  
+    @merchant = Merchant.find(params[:id])
+    if params[:enabled] == "true"
+      @merchant.update(enabled: true)
+      redirect_to admin_merchants_path
+    else
+      @merchant.update(enabled: false)
+      redirect_to admin_merchants_path
+    end
+  end
+
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :enabled)
   end
 end

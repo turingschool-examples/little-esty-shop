@@ -7,7 +7,7 @@ RSpec.describe 'Admin::Merchants' do
     @merchant2 = create(:merchant)
     @merchant3 = create(:merchant)
     @merchant4 = create(:merchant)
-    @merchant5 = create(:merchant)
+    @merchant5 = create(:merchant, enabled: false)
 
     visit '/admin/merchants'
   end
@@ -35,6 +35,26 @@ RSpec.describe 'Admin::Merchants' do
       click_on @merchant1.name
 
       expect(current_path).to eq(admin_merchant_path(@merchant1.id))
+    end
+  end
+
+  describe 'Merchant Enable Button' do
+    it 'has a button to disable/enable each merchant' do
+      expect(page).to have_button("Disable #{@merchant1.name}")
+      expect(page).to have_button("Enable #{@merchant5.name}")
+
+      click_on "Enable #{@merchant5.name}"
+
+      expect(current_path).to eq(admin_merchants_path)
+      expect(page).to have_button("Disable #{@merchant5.name}")
+#       Admin Merchant Enable/Disable
+#
+# As an admin,
+# When I visit the admin merchants index
+# Then next to each merchant name I see a button to disable or enable that merchant.
+# When I click this button
+# Then I am redirected back to the admin merchants index
+# And I see that the merchant's status has changed
     end
   end
 end

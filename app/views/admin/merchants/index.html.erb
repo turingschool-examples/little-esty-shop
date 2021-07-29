@@ -1,5 +1,11 @@
 <h1>Admin Merchant Index</h1>
 
 <%= @merchants.each do |merchant|%>
-  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %></p>
+<% if merchant.enabled == true %>
+    <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %></p>
+    <%= button_to "Disable #{merchant.name}", enabled_path, params: { :action => 'enable', :enabled => false, :id => merchant.id }, method: :patch  %>
+<% else  %>
+    <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %></p>
+    <%= button_to "Enable #{merchant.name}", enabled_path, params: { :action => 'enable', :enabled => true, :id => merchant.id }, method: :patch %>
+    <% end  %>
 <%end%>
