@@ -58,7 +58,39 @@ RSpec.describe 'Admin::Merchants' do
       end
 
       within('#red')
-      expect(page).to have_content("Disabled Merchants")
+        expect(page).to have_content("Disabled Merchants")
+      end
+  end
+
+  describe 'Admin Merchant Create' do
+    #     Admin Merchant Create
+
+    # As an admin,
+    # When I visit the admin merchants index
+    # I see a link to create a new merchant.
+    # When I click on the link,
+    # I am taken to a form that allows me to add merchant information.
+    # When I fill out the form I click ‘Submit’
+    # Then I am taken back to the admin merchants index page
+    # And I see the merchant I just created displayed
+    # And I see my merchant was created with a default status of disabled.
+    it 'has a link to create a new Merchant' do
+
+      expect(page).to have_link('Create Merchant')
+
+      click_link 'Create Merchant'
+
+      expect(current_path).to eq(new_admin_merchant)
+
+      fill_in 'Name', with: "Darry 'Big J' Johnson" 
+      click_on 'Submit'
+
+      expect(current_path).to eq(admin_merchants_path)
+
+      expect(page).to have_content("Darry 'Big J' Johnson")
+      
+      within('#red')
+        expect(page).to have_content("Disable Darry 'Big J' Johnson")
+      end
     end
   end
-end
