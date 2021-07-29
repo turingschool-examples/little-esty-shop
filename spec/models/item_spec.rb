@@ -9,6 +9,10 @@ RSpec.describe Item do
     it {should have_many(:customers).through(:invoices)}
   end
 
+  describe 'validations' do
+    it { should define_enum_for(:enabled).with([:enabled, :disabled]) }
+  end
+
   describe 'class method' do
     before(:each) do
       @merchant_1 = create(:merchant)
