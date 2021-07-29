@@ -23,4 +23,18 @@ RSpec.describe 'Merchants Items Index page' do
 
     expect(page).to_not have_content(Item.fifth.name)
   end
+
+  it 'displays button to enable/disable item' do
+    merchant_2 = create(:merchant)
+    items = create(:item, name: "Please Not This", merchant_id: merchant_2.id)
+
+    visit "/merchants/#{merchant_2.id}/items"
+
+    expect(page).to have_button("Disable")
+    click_on "Disable"
+    #use within block?
+    expect(current_path).to eq("/merchants/#{merchant_2.id}/items")
+    # expect(items.enabled).to eq("disabled")  #Controller doesnt update :enabled on database
+    expect(page).to have_button("Enable")
+  end
 end
