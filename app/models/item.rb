@@ -6,6 +6,9 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
 
   def self.not_yet_shipped
-    Item.joins(:invoices).select("items.name, invoices.id as invoice_id, invoices.created_at as invoice_date").where.not(invoice_items: {status: "shipped"}).order("invoice_date desc").as_json(:except => :id)
+    Item.joins(:invoices).select("items.name, invoices.id as invoice_id, invoices.created_at as invoice_date")
+    .where.not(invoice_items: {status: "shipped"})
+    .order("invoice_date asc")
+    .as_json(:except => :id)
   end
 end
