@@ -14,8 +14,8 @@
     <% @invoices.each do |invoice| %>
       <tr id="invoices-<%= invoice.id %>">
         <td><%= "Invoice: #{invoice.id}" %></td>
-        <td><%= link_to 'Show', merchant_invoice_path(:merchant_id, invoice.id) %></td>
-        <td><%= link_to 'Edit', edit_merchant_invoice_path(:merchant_id, invoice.id) %></td>
+        <td><%= link_to 'Show', merchant_invoice_path((params[:merchant_id]), invoice.id) %></td>
+        <td><%= link_to 'Edit', edit_merchant_invoice_path((params[:merchant_id]), invoice.id) %></td>
       </tr>
     <% end %>
   </tbody>

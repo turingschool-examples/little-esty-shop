@@ -4,6 +4,11 @@ class Merchant::InvoicesController < ApplicationController
     @invoices = Merchant.merchant_invoices(params[:merchant_id])
   end
 
+  def show 
+    @merchant = Merchant.find(params[:merchant_id])
+    @invoice = Invoice.find(params[:id])
+  end 
+
   def new
   end
 
