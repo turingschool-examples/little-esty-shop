@@ -7,6 +7,20 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def new
+  end
+
+  def create
+    merchant = Merchant.new(name: params[:name], enabled: false)
+    if merchant.save
+      redirect_to admin_merchants_path
+      flash[:alert] = "New Merchant Added"
+    else
+      redirect_to edit_admin_merchants_path
+      flash[:alert] = "Unable to Create Merchant"
+    end  
+  end
+
   def edit
     @merchant = Merchant.find(params[:id])
   end
