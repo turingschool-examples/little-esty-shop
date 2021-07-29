@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
-    resources :merchants 
+    resources :merchants
   end
 end
