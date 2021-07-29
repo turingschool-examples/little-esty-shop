@@ -57,7 +57,7 @@ RSpec.describe 'Merchants dashboard index page' do
       end
 
       it "invoice id has link to this merchants show page" do
-        click_link "#{@invoice[1].id}"
+        click_link "#{@invoices[1].id}"
 
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoices[1].id}")
       end
