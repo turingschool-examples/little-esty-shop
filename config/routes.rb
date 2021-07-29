@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :dashboard, shallow: true
     resources :items
     resources :invoices
+  end
+  
   resources :admin, only: [:index]
 
   patch '/admin/merchants', to: 'admin/merchants#enable', as: 'enabled'
