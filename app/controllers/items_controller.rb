@@ -14,8 +14,14 @@ class ItemsController < ApplicationController
   end
 
   def update
+    merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
-    if item.update(item_params)
+    if params[:status].present?
+      item.update!(enabled: "disabled")
+      redirect_to "/merchants/#{merchant.id}/items"
+      flash[:success] = "Success: #{item.name} has been updated!"
+    elsif
+      item.update(item_params)
       redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
       flash[:success] = "Success: #{item.name} has been updated!"
     else
@@ -26,6 +32,6 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.permit(:id, :name, :description, :unit_price, :merchant_id)
+    params.permit(:id, :name, :description, :unit_price, :merchant_id, :enabled)
   end
 end
