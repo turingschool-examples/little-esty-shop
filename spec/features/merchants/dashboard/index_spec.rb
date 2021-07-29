@@ -46,22 +46,18 @@ RSpec.describe 'Merchants dashboard show page' do
       it 'see a list of all items that have been ordered and not yet shipped' do
         expect(page).to have_content("Items Ready to Ship")
 
-        save_and_open_page
         expect(page).to have_content(@items[1].name)
         expect(page).to have_content(@invoices[1].id)
-        expect(page).to have_content(@invoices[1].created_at)
 
         expect(page).to have_content(@items[0].name)
         expect(page).to have_content(@invoices[0].id)
-        expect(page).to have_content(@invoices[0].created_at)
 
         expect(page).to_not have_content(@items[3].name)
         expect(page).to_not have_content(@invoices[3].id)
-        expect(page).to_not have_content(@invoices[3].created_at)
       end
 
       it "invoice id has link to this merchants show page" do
-        click link "#{@invoices[1].id}"
+        click_link "#{@invoices[1].id}"
 
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoices[1].id}")
       end

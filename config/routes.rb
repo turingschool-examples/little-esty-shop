@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     # get '/dashboard', to: 'dashboard#show', as: 'merchant_dashboard'
     resources :dashboard, shallow: true
     resources :items
+    resources :invoices
   end
 end
