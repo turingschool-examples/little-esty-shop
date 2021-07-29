@@ -82,6 +82,8 @@ RSpec.describe Customer do
       expect(expected).to eq(
         [@customer_5, @customer_2, @customer_3, @customer_1, @customer_4]
       )
+      items = Item.items_ready_to_ship(@merchant.id)
+      # require "pry"; binding.pry
     end
   end
 
