@@ -6,6 +6,7 @@ RSpec.describe Customer do
     it {should have_many(:transactions).through(:invoices)}
   end
 
+describe 'merchants' do
   describe 'class methods' do
     describe '#top_five' do
       it 'returns the top 5 customers name with revenue' do
@@ -59,6 +60,50 @@ RSpec.describe Customer do
 
         expect(best_customers[0].full_name).to eq('Sammy Smith')
       end
+    end
+  end
+end
+
+describe 'admin' do
+  before(:each) do
+    @customer1 = create(:customer)
+    @customer2 = create(:customer)
+    @customer3 = create(:customer)
+    @customer4 = create(:customer)
+    @customer5 = create(:customer)
+    @customer6 = create(:customer)
+    
+    invoice1 = create(:invoice, customer_id: @customer1.id)
+    invoice2 = create(:invoice, customer_id: @customer2.id)
+    invoice3 = create(:invoice, customer_id: @customer3.id)
+    invoice4 = create(:invoice, customer_id: @customer4.id)
+    invoice5 = create(:invoice, customer_id: @customer5.id)
+    invoice6 = create(:invoice, customer_id: @customer6.id)
+
+    transaction1 = create(:transaction, invoice_id: invoice1.id)
+    transaction2 = create(:transaction, invoice_id: invoice1.id)
+    transaction3 = create(:transaction, invoice_id: invoice2.id)
+    transaction4 = create(:transaction, invoice_id: invoice3.id)
+    transaction5 = create(:transaction, invoice_id: invoice4.id)
+    transaction6 = create(:transaction, invoice_id: invoice5.id)
+    transaction7 = create(:transaction, invoice_id: invoice6.id)
+
+    Transaction.last(1).map { |t| t.update!(result: 1) }
+end
+
+  describe 'class methods' do
+    describe '#top_customers' do
+      it 'finds the top 5 customers' do
+        expected = Customer.first(5)
+        # require 'pry'; binding.pry
+        expect(Customer.top_customers.sort).to eq(expected.sort)
+      end
+    end
+  end
+
+  describe 'instance methods' do
+    it '::successful_transactions' do
+      expect(@customer1.successful_transactions).to eq(3)  
     end
   end
 end
