@@ -1,0 +1,23 @@
+<h1>Admin Dashboard</h1>
+
+<a href="/admin/invoices">Admin Invoices</a>
+<a href="/admin/merchants">Admin Merchants</a> 
+
+
+<section id=top_customers>
+  <h1>Top 5 Customers</h1>
+  <% @customers.each do |customer|%>
+    <div id="customer-<%= customer.id%>">
+      <p><%= customer.first_name%> <%= customer.last_name%>: <%= customer.successful_transactions %> </p>
+    </div>
+  <%end%>
+</section>
+
+<section id=incomplete>
+  <h1>Incomplete Invoices</h1>
+  <% @invoices.each do |invoice|%>
+    <div id="invoice-<%= invoice.id%>">
+      <p><a href=<%="/admin/invoices/#{invoice.id}"%>><%= invoice.id%>: <%= invoice.created_at.strftime("%A, %B, %d, %Y") %> </p>
+    </div>
+  <%end%>
+</section>

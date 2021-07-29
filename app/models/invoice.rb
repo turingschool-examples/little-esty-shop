@@ -5,4 +5,12 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :merchants, through: :items
   enum status: { cancelled: 0,  "in progress"  => 1, completed: 2 }
+
+  def self.incomplete_invoices
+    joins(:invoice_items)
+    .where.not('invoice_items.status = 2')
+    .select('invoices.id, invoices.created_at')
+    .order(:created_at)
+    .distinct
+  end
 end

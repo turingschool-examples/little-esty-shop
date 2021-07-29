@@ -1,0 +1,11 @@
+<h1>Admin Merchant Edit Page</h1>
+
+<%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f| %>
+<p><%= f.label :name %></p>
+<p><%= f.text_field :name %></p>
+<br>
+<p><%= f.label :enabled %></p>
+<p><%= f.text_field :enabled %></p>
+<br>
+<%= f.submit 'Submit' %>
+<% end %>
