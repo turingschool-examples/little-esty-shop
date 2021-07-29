@@ -60,8 +60,8 @@ RSpec.describe 'Admin::Merchants' do
       within('#red')
         expect(page).to have_content("Disabled Merchants")
       end
-  end
-
+    end
+   
   describe 'Admin Merchant Create' do
     it 'has a link to create a new Merchant' do
 
@@ -82,5 +82,5 @@ RSpec.describe 'Admin::Merchants' do
         save_and_open_page
         expect(page).to have_button("Enable Darry 'Big J' Johnson")
       end
-    end
+    end  
   end
