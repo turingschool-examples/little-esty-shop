@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchants dashboard show page' do
+RSpec.describe 'Merchants dashboard index page' do
   describe "dashboard" do
 
     before(:each) do
@@ -57,9 +57,34 @@ RSpec.describe 'Merchants dashboard show page' do
       end
 
       it "invoice id has link to this merchants show page" do
-        click_link "#{@invoices[1].id}"
+        click_link "#{@invoice[1].id}"
 
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoices[1].id}")
+      end
+
+      it "has date formated correctly" do
+        @customers << create(:customer)
+        @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+        @items << create(:item, merchant_id: @merchant_1.id)
+        @transactions << create(:transaction, invoice_id: @invoices.last.id)
+        @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 1)
+
+        visit "/merchants/#{@merchant_1.id}/dashboard"
+
+        expect(page).to have_content("Monday February 3, 2020")
+      end
+
+      it "has items in order from oldest to newest" do
+        @customers << create(:customer)
+        @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+        @items << create(:item, merchant_id: @merchant_1.id)
+        @transactions << create(:transaction, invoice_id: @invoices.last.id)
+        @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 1)
+
+        visit "/merchants/#{@merchant_1.id}/dashboard"
+
+        expect(@items[5].name).to appear_before(@items[0].name) # 5 is manually set to be oldest
+        expect(@items[0].name).to appear_before(@items[1].name)
       end
     end
   end
