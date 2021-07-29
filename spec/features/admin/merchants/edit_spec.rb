@@ -14,6 +14,7 @@ RSpec.describe 'merchant end page' do
 
       expect(current_path).to eq(admin_merchant_path(@merchant.id))
       expect(page).to have_content('Apple')
+      expect(page).to have_content("Update Successful")
     end
   end
 end
