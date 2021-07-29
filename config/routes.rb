@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :admin, only: [:index]
 
+  patch '/admin/merchants', to: 'admin/merchants#enable', as: 'enabled'
+
   namespace :admin do
     resources :merchants
   end
