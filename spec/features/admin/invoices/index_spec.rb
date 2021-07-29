@@ -41,19 +41,24 @@ RSpec.describe 'Admin::Invoice Index' do
   end
 
   describe 'Admin Invoices Index Page' do
-
-    #     As an admin,
-    # When I visit the admin Invoices index ("/admin/invoices")
-    # Then I see a list of all Invoice ids in the system
-    # Each id links to the admin invoice show page
     it 'has a list of all invoice ids' do
 
-      expect(page).to have_content(@invoices1.id)
-      expect(page).to have_content(@invoices2.id)
-      expect(page).to have_content(@invoices3.id)
-      expect(page).to have_content(@invoices4.id)
-      expect(page).to have_content(@invoices5.id)
-      expect(page).to have_content(@invoices6.id)
+      expect(page).to have_content(@invoice1.id)
+      expect(page).to have_content(@invoice2.id)
+      expect(page).to have_content(@invoice3.id)
+      expect(page).to have_content(@invoice4.id)
+      expect(page).to have_content(@invoice5.id)
+      expect(page).to have_content(@invoice6.id)
+    end
+
+    it 'has a link for every invoice' do
+
+      expect(page).to have_link(@invoice1.id)
+      expect(page).to have_link(@invoice2.id)
+      expect(page).to have_link(@invoice3.id)
+      expect(page).to have_link(@invoice4.id)
+      expect(page).to have_link(@invoice5.id)
+      expect(page).to have_link(@invoice6.id)
     end
   end
 end
