@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   # Admin routes
   namespace :admin do
     resources :merchants
+
+    # "I broke your route! Ha!"
+
     resources :invoices
   end
 end
