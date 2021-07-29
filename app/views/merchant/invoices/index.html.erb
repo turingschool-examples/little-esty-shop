@@ -8,13 +8,14 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-<%# fix this bishhhh %>
+
+  
   <tbody>
-    <% @merchant_invoices.each do |merchant_invoice| %>
-      <tr>
-        <td><%= link_to 'Show', merchant_invoice %></td>
-        <td><%= link_to 'Edit', edit_merchant_invoice_path(merchant_invoice) %></td>
-        <td><%= link_to 'Destroy', merchant_invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% @invoices.each do |invoice| %>
+      <tr id="invoices-<%= invoice.id %>">
+        <td><%= "Invoice: #{invoice.id}" %></td>
+        <td><%= link_to 'Show', merchant_invoice_path(:merchant_id, invoice.id) %></td>
+        <td><%= link_to 'Edit', edit_merchant_invoice_path(:merchant_id, invoice.id) %></td>
       </tr>
     <% end %>
   </tbody>

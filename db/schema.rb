@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_07_26_214114) do
 
-  # These are extensions that must be enabled in order to support this database
+
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|

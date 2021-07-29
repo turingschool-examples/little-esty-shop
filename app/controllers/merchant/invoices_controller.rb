@@ -1,12 +1,7 @@
 class Merchant::InvoicesController < ApplicationController
 
   def index
-    @merchant_invoices = Invoice.all
-    #helper method for invoices specific to merchant
-  end
-
-  def show
-    #merchant specific invoice
+    @invoices = Merchant.merchant_invoices(params[:merchant_id])
   end
 
   def new
