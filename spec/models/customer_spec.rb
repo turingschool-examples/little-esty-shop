@@ -54,7 +54,6 @@ RSpec.describe Customer, type: :model do
   end
 
   it 'can display top 5 customers' do
-require "pry"; binding.pry
-    expect(Customer.top_customers(@merchant1.id)).to eq()
+    expect(Customer.top_customers(@merchant1.id)).to eq([@customer5, @customer6, @customer2, @customer4, @customer1])
   end
 end
