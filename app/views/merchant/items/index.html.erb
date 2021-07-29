@@ -9,12 +9,14 @@
     </tr>
   </thead>
 <%# fix me %>
- <tbody>
+  <h3>Merchants Items</h3>
+ <tbody>   
     <% @merchant_items.each do |merchant_item| %>
       <tr>
-        <td><%= link_to 'Show', merchant_item %></td>
-        <td><%= link_to 'Edit', edit_merchant_item_path(merchant_item) %></td>
-        <td><%= link_to 'Destroy', merchant_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= merchant_item.name %></td>
+        <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id) %></td>
+        <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id) %></td>
+        <td><%#= link_to 'Destroy', merchant_item , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
