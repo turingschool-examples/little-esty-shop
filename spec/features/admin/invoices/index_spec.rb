@@ -37,7 +37,7 @@ RSpec.describe 'Admin::Invoice Index' do
     @transaction6 = create(:transaction, invoice_id: @invoice5.id)
     @transaction7 = create(:transaction, invoice_id: @invoice6.id)
 
-    visit '/admin/invoices'
+    visit admin_invoices_path
   end
 
   describe 'Admin Invoices Index Page' do
@@ -54,7 +54,6 @@ RSpec.describe 'Admin::Invoice Index' do
       expect(page).to have_content(@invoices4.id)
       expect(page).to have_content(@invoices5.id)
       expect(page).to have_content(@invoices6.id)
-     
     end
   end
 end
