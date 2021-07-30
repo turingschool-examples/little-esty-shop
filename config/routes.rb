@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/', to: 'welcome#index'
+  root 'welcome#index'
 
-  resources :merchants, module: :merchant, only: [:show, :index] do
+  resources :merchants, only: [:show, :index], module: :merchant do
       resources :items
       resources :invoices
       resources :dashboard, only: [:index]
@@ -14,3 +14,15 @@ Rails.application.routes.draw do
     resources :invoices
   end
 end
+
+# resources :merchants, module: :merchants do
+#   get '/dashboard', to: 'dashboard#show', as: 'merchant_dashboard'
+#   resources :items, except: :destroy
+#   resources :invoices
+# end
+#
+# namespace :admin do
+#     get '/', to: 'dashboard#index'
+#     resources :invoices, only: [:index, :show, :update]
+#     resources :merchants, except: [:destroy]
+#   end
