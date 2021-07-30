@@ -1,4 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_merchant_invoice_path(@merchant_invoice) %> |
+ <p>Invoice ID: <%= @invoice.id %></p>
+ <p>Status: <%= @invoice.status %></p>
+ <p>Date: <%= @invoice.format_date(@invoice.created_at) %></p>
+ <%= @invoice.customer.first_name %>
+ <%= @invoice.customer.last_name %>
+
+
+
+<%= link_to 'Edit', edit_merchant_invoice_path(@merchant.id, @invoice.id) %> |
 <%= link_to 'Back', merchant_invoices_path %>
