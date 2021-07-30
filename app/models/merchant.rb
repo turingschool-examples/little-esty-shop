@@ -1,6 +1,4 @@
 class Merchant < ApplicationRecord
-  # validates :
-  # belongs_to :
   has_many :items
-  # has_many :, through: :
+  has_many :invoices, through: :items
 end
