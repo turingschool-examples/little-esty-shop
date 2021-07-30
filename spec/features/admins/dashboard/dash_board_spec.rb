@@ -5,10 +5,46 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     @merchant_1 = Merchant.create!(name: 'Tillman Group')
     @merchant_2 = Merchant.create!(name: 'Kozy Group')
 
-    @customer = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
+    @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
+    @customer_2 = Customer.create!(first_name: 'Cecilia', last_name: 'Osinski')
+    @customer_3 = Customer.create!(first_name: 'Mariah', last_name: 'Toy')
+    @customer_4 = Customer.create!(first_name: 'Leanne', last_name: 'Braun')
+    @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
+    @customer_6 = Customer.create!(first_name: 'Heber', last_name: 'Kuhn')
+    @customer_7 = Customer.create!(first_name: 'Parker', last_name: 'Daugherty')
 
-    @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer.id}")
-    @invoice_2 = Invoice.create!(status: 1, customer_id: "#{@customer.id}")
+    @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
+    @invoice_2 = Invoice.create!(status: 1, customer_id: "#{@customer_1.id}")
+    @invoice_3 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
+    @invoice_4 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
+    @invoice_5 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
+    @invoice_6 = Invoice.create!(status: 0, customer: @customer_1)
+    @invoice_7 = Invoice.create!(status: 0, customer: @customer_2)
+    @invoice_8 = Invoice.create!(status: 0, customer: @customer_2)
+    @invoice_9 = Invoice.create!(status: 0, customer: @customer_2)
+    @invoice_10 = Invoice.create!(status: 0, customer: @customer_2)
+    @invoice_11 = Invoice.create!(status: 0, customer: @customer_3)
+    @invoice_12 = Invoice.create!(status: 0, customer: @customer_3)
+    @invoice_13 = Invoice.create!(status: 0, customer: @customer_3)
+    @invoice_14 = Invoice.create!(status: 0, customer: @customer_4)
+    @invoice_15 = Invoice.create!(status: 0, customer: @customer_4)
+    @invoice_16 = Invoice.create!(status: 0, customer: @customer_5)
+
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_3.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_4.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_5.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_6.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_7.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_8.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_9.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_10.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_11.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_12.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_13.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_14.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_15.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
+    @invoice_16.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
 
     visit "/admin"
   end
@@ -35,9 +71,33 @@ RSpec.describe 'Admin Dashboard', type: :feature do
 
   it 'the link directs the user to the invoice index' do
     click_on "Invoices"
-    save_and_open_page
+
     expect(current_path).to eq("/admin/invoices")
     expect(page).to have_content(Invoice.first.id)
     expect(page).to have_content(Invoice.last.id)
+  end
+
+  it 'displays the top five customers' do
+    save_and_open_page
+    expect(page).to have_content('Top Customers')
+    expect(page).to have_content(@customer_1.first_name)
+    expect(page).to have_content(@customer_1.last_name)
+    expect(page).to have_content(@customer_2.first_name)
+    expect(page).to have_content(@customer_2.last_name)
+    expect(page).to have_content(@customer_3.first_name)
+    expect(page).to have_content(@customer_3.last_name)
+    expect(page).to have_content(@customer_4.first_name)
+    expect(page).to have_content(@customer_4.last_name)
+    expect(page).to have_content(@customer_5.first_name)
+    expect(page).to have_content(@customer_5.last_name)
+    expect(page).to_not have_content(@customer_6.first_name)
+  end
+
+  it 'displays the top 5 customers in order of most transactions' do
+
+    expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
+    expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
+    expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
+    expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
   end
 end
