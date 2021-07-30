@@ -13,11 +13,11 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     @customer_6 = Customer.create!(first_name: 'Heber', last_name: 'Kuhn')
     @customer_7 = Customer.create!(first_name: 'Parker', last_name: 'Daugherty')
 
-    @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
+    @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: "2012-03-24 09:54:09 UTC")
     @invoice_2 = Invoice.create!(status: 1, customer_id: "#{@customer_1.id}")
-    @invoice_3 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
-    @invoice_4 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
-    @invoice_5 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}")
+    @invoice_3 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-25 09:54:09 UTC')
+    @invoice_4 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-23 09:54:09 UTC')
+    @invoice_5 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-22 09:54:09 UTC')
     @invoice_6 = Invoice.create!(status: 0, customer: @customer_1)
     @invoice_7 = Invoice.create!(status: 0, customer: @customer_2)
     @invoice_8 = Invoice.create!(status: 0, customer: @customer_2)
@@ -115,12 +115,17 @@ RSpec.describe 'Admin Dashboard', type: :feature do
   end
 
   it 'displays the invoice ids with items that have not been shipped' do
-    
+
     expect(page).to have_content('Incomplete Invoices')
     expect(page).to have_content(@invoice_1.id)
     expect(page).to have_content(@invoice_3.id)
     expect(page).to have_content(@invoice_4.id)
     expect(page).to have_content(@invoice_5.id)
     expect(page).to_not have_content(@invoice_6.id)
+  end
+
+  it 'displays the incomplete invoices in order by least recent creation date' do
+    save_and_open_page
+    expect("Thursday, March 22, 2012").to appear_before("Friday, March 23, 2012")
   end
 end

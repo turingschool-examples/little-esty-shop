@@ -10,6 +10,7 @@ class Invoice < ApplicationRecord
     Invoice.select('invoices.*, invoice_items.invoice_id as number')
     .joins(:invoice_items)
     .where('invoice_items.status != 2')
+    .order(:created_at)
     .uniq
   end
 end
