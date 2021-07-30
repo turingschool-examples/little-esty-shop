@@ -5,7 +5,7 @@ RSpec.describe 'Admin Invoices Index Page' do
   # When I visit the admin Invoices index ("/admin/invoices")
   # Then I see a list of all Invoice ids in the system
   # Each id links to the admin invoice show page
-  it 'lists all invoice ids in the system' do
+  xit 'lists all invoice ids in the system' do
     antonio = Customer.create!(first_name: 'Antonio', last_name: 'King')
     maria = Customer.create!(first_name: 'Maria', last_name: 'Marks')
     inv_1 = Invoice.create!(status: 0, customer_id: antonio.id)
