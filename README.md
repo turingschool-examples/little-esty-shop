@@ -1,9 +1,9 @@
 ## Little Esty Shop
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Forks][forks-shield]][forks-url]
 # Welcome to Little Esty - A database driven web application
 <p align="center">
   <img src="https://user-images.githubusercontent.com/58891447/127079509-57ae82d1-8793-41fa-a8a9-4bfe25f86b6a.png" alt="little_etsy_shop_db_schema"/>
@@ -29,7 +29,7 @@ Find the [project spec here](https://github.com/turingschool-examples/little-est
 
 [Little Esty Shop](https://github.com/bfl3tch/little-esty-shop) is a 10-day, 4 person project, during Mod 2 of 4 for Turing School's Back End Engineering Program.
 
-Our challenge was to build a functioning web app consisting of multiple relational databases to mock the popular e-commerce web site *Etsy*.
+Our challenge was to build a functioning web app consisting of multiple relational databases to model the popular e-commerce web site *Etsy*.
 
 Learning goals and areas of focus consisted of:
 
@@ -82,13 +82,13 @@ Learning goals and areas of focus consisted of:
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/deebot10/relational_rails_1.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/bfl3tch/little-esty-shop.svg?style=flat-square
 [contributors-url]: https://github.com/bfl3tch/little-esty-shop/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/deebot10/relational_rails_1.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/bfl3tch/little-esty-shop.svg?style=flat-square
 [forks-url]: https://github.com/bfl3tch/little-esty-shop/network/members
-[stars-shield]: https://img.shields.io/github/stars/deebot10/relational_rails_1.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/bfl3tch/little-esty-shop.svg?style=flat-square
 [stars-url]: https://github.com/bfl3tch/little-esty-shop/stargazers
-[issues-shield]: https://img.shields.io/github/issues/deebot10/relational_rails_1.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/bfl3tch/little-esty-shop.svg?style=flat-square
 [issues-url]: https://github.com/bfl3tch/little-esty-shop/issues
 <!--
 
