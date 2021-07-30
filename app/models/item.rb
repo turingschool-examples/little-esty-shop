@@ -13,7 +13,6 @@ class Item < ApplicationRecord
       .joins(:invoice_items)
       .where("invoice_items.status <> 2")
       .where("items.merchant_id = ?", merchant_id)
-      .distinct
       .order("ordered_date ASC")
   end
 
