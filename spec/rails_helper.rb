@@ -33,6 +33,110 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.before(:each) do
+    Transaction.destroy_all
+    Customer.destroy_all
+    Invoice.destroy_all
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+
+    #Merchants
+    @merchant1 = Merchant.create!(name: 'Costco')
+    @merchant2 = Merchant.create!(name: 'Target')
+    @merchant3 = Merchant.create!(name: 'Walmart')
+    @merchant4 = Merchant.create!(name: 'Kroger')
+    @merchant5 = Merchant.create!(name: 'Amazon')
+    @merchant6 = Merchant.create!(name: 'Ebay')
+    @merchant7 = Merchant.create!(name: 'HomeDepot')
+
+    #Customers
+    @customer1 = Customer.create!(first_name: 'Gunner', last_name: 'Runkle')
+    @customer2 = Customer.create!(first_name: 'Antonio', last_name: 'King')
+    @customer3 = Customer.create!(first_name: 'Jacob', last_name: 'Martinez')
+    @customer4 = Customer.create!(first_name: 'Lee', last_name: 'Hopper')
+
+    #Merchant1 Items
+    @item1 = @merchant1.items.create!(name: 'Milk', description: 'A large quantity of whole milk', unit_price: 500)
+    @item2 = @merchant1.items.create!(name: 'Potato Chips', description: 'A large quantity of potato chips', unit_price: 700)
+    @item3 = @merchant1.items.create!(name: 'Hot Dog', description: 'Best hot dog deal around', unit_price: 150)
+    @item4 = @merchant1.items.create!(name: 'Steaks', description: 'A four pack of ribeyes', unit_price: 3500)
+
+    #Merchant2 Items
+    @item5 = @merchant2.items.create!(name: 'Playstation', description: 'Sony playstation, 4th generation', unit_price: 25000)
+    @item6 = @merchant2.items.create!(name: 'Sheets', description: 'White bed linens', unit_price: 2000)
+
+    #Merchant3 Items
+    @item7 = @merchant3.items.create!(name: 'Apple', description: 'Red Delicious', unit_price: 100)
+    @item8 = @merchant3.items.create!(name: 'Fishing Lure', description: 'Rooster Tail', unit_price: 199)
+
+    #Merchant4 Items
+    @item9 = @merchant2.items.create!(name: 'Frying Pan', description: 'High quality durable nonstick pan', unit_price: 2400)
+    @item10 = @merchant2.items.create!(name: 'Paper towels', description: '20 pack of standard towels', unit_price: 1000)
+
+    #Merchant5 Items
+    @item11 = @merchant3.items.create!(name: 'Greeting Card', description: 'Hallmark happy birthday card', unit_price: 199)
+    @item12 = @merchant3.items.create!(name: 'Frozen pizza', description: 'Pepperoni pizza', unit_price: 499)
+
+    #Customer1 Invoices
+    @invoice1 = @customer1.invoices.create!(status: 'completed')
+    @invoice2 = @customer1.invoices.create!(status: 'completed')
+    @invoice3 = @customer1.invoices.create!(status: 'in_progress')
+    @invoice4 = @customer1.invoices.create!(status: 'in_progress')
+    @invoice5 = @customer1.invoices.create!(status: 'cancelled')
+    @invoice6 = @customer1.invoices.create!(status: 'cancelled')
+
+    #Customer2 Invoices
+    @invoice7 = @customer2.invoices.create!(status: 'completed')
+    @invoice8 = @customer2.invoices.create!(status: 'in_progress')
+    @invoice9 = @customer2.invoices.create!(status: 'cancelled')
+
+    #Customer3 Invoices
+    @invoice10 = @customer3.invoices.create!(status: 'completed')
+    @invoice11 = @customer3.invoices.create!(status: 'in_progress')
+    @invoice12 = @customer3.invoices.create!(status: 'cancelled')
+
+    #Customer4 Invoices
+    @invoice13 = @customer4.invoices.create!(status: 'completed')
+    @invoice14 = @customer4.invoices.create!(status: 'in_progress')
+    @invoice15 = @customer4.invoices.create!(status: 'cancelled')
+
+    #InvoiceItems for all items once
+    @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 100, unit_price: @item1.unit_price, status: 'shipped')
+    @invoice_item2 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item2.id, quantity: 100, unit_price: @item2.unit_price, status: 'packaged')
+    @invoice_item3 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item3.id, quantity: 100, unit_price: @item3.unit_price, status: 'pending')
+    @invoice_item4 = InvoiceItem.create!(invoice_id: @invoice4.id, item_id: @item4.id, quantity: 100, unit_price: @item4.unit_price, status: 'shipped')
+    @invoice_item5 = InvoiceItem.create!(invoice_id: @invoice5.id, item_id: @item5.id, quantity: 100, unit_price: @item5.unit_price, status: 'packaged')
+    @invoice_item6 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item6.id, quantity: 100, unit_price: @item6.unit_price, status: 'pending')
+    @invoice_item7 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item7.id, quantity: 100, unit_price: @item7.unit_price, status: 'shipped')
+    @invoice_item8 = InvoiceItem.create!(invoice_id: @invoice8.id, item_id: @item8.id, quantity: 100, unit_price: @item8.unit_price, status: 'packaged')
+    @invoice_item9 = InvoiceItem.create!(invoice_id: @invoice9.id, item_id: @item9.id, quantity: 100, unit_price: @item9.unit_price, status: 'pending')
+    @invoice_item10 = InvoiceItem.create!(invoice_id: @invoice10.id, item_id: @item10.id, quantity: 100, unit_price: @item10.unit_price, status: 'shipped')
+    invoice_item11 = InvoiceItem.create!(invoice_id: @invoice11.id, item_id: @item11.id, quantity: 100, unit_price: @item11.unit_price, status: 'packaged')
+    invoice_item12 = InvoiceItem.create!(invoice_id: @invoice12.id, item_id: @item12.id, quantity: 100, unit_price: @item12.unit_price, status: 'pending')
+
+    # InvoiceItems with repeat items
+    invoice_item13 = InvoiceItem.create!(invoice_id: @invoice13.id, item_id: @item1.id, quantity: 100, unit_price: @item1.unit_price, status: 'shipped')
+    invoice_item14 = InvoiceItem.create!(invoice_id: @invoice14.id, item_id: @item2.id, quantity: 100, unit_price: @item2.unit_price, status: 'packaged')
+
+
+    # Transactions
+    @transaction1 = @invoice1.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction2 = @invoice2.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction3 = @invoice3.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction4 = @invoice4.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction5 = @invoice5.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction6 = @invoice6.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction7 = @invoice7.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction8 = @invoice8.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction9 = @invoice9.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction10 = @invoice10.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction11 = @invoice11.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction12 = @invoice12.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction13 = @invoice13.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction14 = @invoice14.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

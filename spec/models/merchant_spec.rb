@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
-    # it { should belong_to(:) }
     it { should have_many(:items) }
-    # it { should have_many(:).through(:) }
+    it { should have_many(:invoices).through(:items) }
   end
 
   # describe 'validations' do
@@ -12,7 +11,7 @@ RSpec.describe Merchant, type: :model do
   # end
 
   # before :each do
-    
+
   # end
 
   # describe 'class methods' do

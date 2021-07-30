@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
-  # validates :
   belongs_to :merchant
   has_many :invoice_items
-  # has_many :, through: :
+  has_many :invoices, through: :invoice_items
 end
