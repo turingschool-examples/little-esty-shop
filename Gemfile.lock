@@ -236,7 +236,7 @@ DEPENDENCIES
   orderly
   pg (>= 0.18, < 2.0)
   pry
-  puma (~> 3.11)
+  puma (~> 3.4)
   rails (~> 5.2.5)
   rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)

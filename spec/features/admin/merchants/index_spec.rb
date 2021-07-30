@@ -61,7 +61,7 @@ RSpec.describe 'Admin::Merchants' do
         expect(page).to have_content("Disabled Merchants")
       end
     end
-   
+
   describe 'Admin Merchant Create' do
     it 'has a link to create a new Merchant' do
 
@@ -71,7 +71,7 @@ RSpec.describe 'Admin::Merchants' do
 
       expect(current_path).to eq(new_admin_merchant_path)
 
-      fill_in 'Name', with: "Darry 'Big J' Johnson" 
+      fill_in 'Name', with: "Darry 'Big J' Johnson"
       click_on 'Submit'
 
       expect(current_path).to eq(admin_merchants_path)
@@ -79,8 +79,7 @@ RSpec.describe 'Admin::Merchants' do
       expect(page).to have_content("Darry 'Big J' Johnson")
       
       within('#red')
-        save_and_open_page
         expect(page).to have_button("Enable Darry 'Big J' Johnson")
       end
-    end  
+    end
   end
