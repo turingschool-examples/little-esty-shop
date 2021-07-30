@@ -1,4 +1,5 @@
 {
+  "start": "node server.js"
   "name": "little-etsy-shop",
   "private": true,
   "dependencies": {},
