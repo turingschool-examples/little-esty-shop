@@ -13,9 +13,9 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     @customer_6 = Customer.create!(first_name: 'Heber', last_name: 'Kuhn')
     @customer_7 = Customer.create!(first_name: 'Parker', last_name: 'Daugherty')
 
-    @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: "2012-03-24 09:54:09 UTC")
+    @invoice_1 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: "2012-03-25 09:54:09 UTC")
     @invoice_2 = Invoice.create!(status: 1, customer_id: "#{@customer_1.id}")
-    @invoice_3 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-25 09:54:09 UTC')
+    @invoice_3 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-24 09:54:09 UTC')
     @invoice_4 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-23 09:54:09 UTC')
     @invoice_5 = Invoice.create!(status: 0, customer_id: "#{@customer_1.id}", created_at: '2012-03-22 09:54:09 UTC')
     @invoice_6 = Invoice.create!(status: 0, customer: @customer_1)
@@ -125,7 +125,10 @@ RSpec.describe 'Admin Dashboard', type: :feature do
   end
 
   it 'displays the incomplete invoices in order by least recent creation date' do
-    save_and_open_page
-    expect("Thursday, March 22, 2012").to appear_before("Friday, March 23, 2012")
+
+    expect(@invoice_5.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_4.created_at.strftime("%A, %B %d, %Y"))
+    expect(@invoice_4.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_3.created_at.strftime("%A, %B %d, %Y"))
+    expect(@invoice_3.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+
   end
 end
