@@ -43,7 +43,6 @@ RSpec.describe 'Merchants invoices show page' do
       @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices[0].id, status: 1, quantity: 10, unit_price: @items.last.unit_price)
 
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoices[0].id}"
-      save_and_open_page
       expect(page).to have_content("Total Revenue: $161.80")
 
     end
