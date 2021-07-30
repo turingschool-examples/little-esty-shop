@@ -30,6 +30,20 @@ class ItemsController < ApplicationController
     end
   end
 
+  def new
+  end
+
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to "/merchants/#{params[:merchant_id]}/items/"
+      flash[:success] = "Success: #{@item.name} has been created!"
+    else
+      redirect_to "/merchants/#{params[:merchant_id]}/items/new"
+      flash[:alert] = "Error: #{error_message(item.errors)}"
+    end
+  end
+
   private
   def item_params
     params.permit(:id, :name, :description, :unit_price, :merchant_id, :enabled)
