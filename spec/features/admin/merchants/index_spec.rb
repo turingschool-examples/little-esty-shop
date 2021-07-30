@@ -124,7 +124,9 @@ RSpec.describe 'Admin::Merchants' do
       transaction6 = create(:transaction, invoice_id: invoice5.id, result: 1)
       transaction7 = create(:transaction, invoice_id: invoice6.id, result: 1)
 
-      within 
+      within do
+        
+      end
     end
   end  
   end
