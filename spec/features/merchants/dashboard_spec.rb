@@ -23,7 +23,7 @@ RSpec.describe 'merchant dashboard page' do
     @invoice4 = @customer4.invoices.create!(status: 2)
     @invoice5 = @customer5.invoices.create!(status: 2)
     @invoice6 = @customer6.invoices.create!(status: 2)
-    @invoice7 = @customer1.invoices.create!(status: 1)
+    @invoice7 = @customer5.invoices.create!(status: 1)
 
     @transaction1 = @invoice5.transactions.create!(credit_card_number: "0123456789", credit_card_expiration_date: '12/31', result: 0)
     @transaction2 = @invoice5.transactions.create!(credit_card_number: "9876543210", credit_card_expiration_date: '01/01', result: 0)
@@ -145,7 +145,7 @@ RSpec.describe 'merchant dashboard page' do
       expect(current_path).to eq("/merchants/#{@merchant1.id}/dashboard/invoices/#{@invoice7.id}")
     end
 
-    it 'sorts by item created at' do
+    it 'sorts by item created at and formats properly' do
       ii1 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item3.id, status: 1, created_at: "2012-03-25 09:54:09 UTC")
       ii2 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item4.id, status: 1, created_at: "2012-03-24 09:54:09 UTC")
       ii3 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item1.id, status: 2)
@@ -153,9 +153,9 @@ RSpec.describe 'merchant dashboard page' do
 
       visit "/merchants/#{@merchant1.id}/dashboard"
 
-      expect(ii4.created_at).to appear_before(ii2.created_at)
-      expect(ii2.created_at).to appear_before(ii1.created_at)
-      expect(page).to_not have_content(ii3.created_at)
+      expect(ii4.created_at.strftime("%A, %B %d, %Y")).to appear_before(ii2.created_at.strftime("%A, %B %d, %Y"))
+      expect(ii2.created_at.strftime("%A, %B %d, %Y")).to appear_before(ii1.created_at.strftime("%A, %B %d, %Y"))
+      expect(page).to_not have_content(ii3.created_at.strftime("%A, %B %d, %Y"))
     end
   end
 end
