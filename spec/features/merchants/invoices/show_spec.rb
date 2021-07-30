@@ -90,14 +90,17 @@ RSpec.describe "The Merchant Invoice show page" do
 
   it 'actually changes the invoice item status' do
     expect(page).to have_content(@item1.name)
+    expect(page).to have_content(@invoice_item1.quantity)
+    expect(page).to have_content("$25,000")
     expect(page).to have_content("packaged")
 
     within("div#id-#{@invoice_item1.id}") do
       select "shipped", :from => "status"
       click_button("Update Item Status")
+      @invoice_item1.reload
       expect(page).to have_content("shipped")
-      expect(@invoice_item1.status).to eq("shipped")
     end
+    expect(@invoice_item1.status).to eq("shipped")
 
 
   end

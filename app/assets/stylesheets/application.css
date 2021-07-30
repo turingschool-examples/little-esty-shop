@@ -16,3 +16,7 @@
 .center{
   justify-content: center;
 }
+
+#secret{
+  display: none;
+}

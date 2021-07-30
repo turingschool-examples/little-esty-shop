@@ -13,11 +13,11 @@
   <p>Quantity: <%= ii.quantity %></p>
   <p>Unit Price: <%= number_to_currency(ii.unit_price) %></p>
 
-  <div id=<%="id-#{ii.id}" %>
+  <div id=<%="id-#{ii.id}" %>>
 
-  <%= form_with model: ii, method: :patch, url: merchant_invoice_item_path(@merchant.id, ii.id), local: true do |form| %>
+<%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |form| %>
     <%= form.hidden_field :ii_id, value: ii.id %>
-    <%= form.select :status, options_for_select([:pending, :packaged, :shipped ], ii.status) %>
+    <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
   <%= form.submit "Update Item Status" %>
   <% end %>
 

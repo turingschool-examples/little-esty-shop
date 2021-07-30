@@ -19,7 +19,6 @@ class Merchant::InvoicesController < ApplicationController
   end
 
   def update
-    require "pry"; binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:id])
     @invoice_item = InvoiceItem.find(params[:ii_id])
