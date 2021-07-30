@@ -46,6 +46,19 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     @invoice_15.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
     @invoice_16.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: "", result: 'success')
 
+    @item_1 = @merchant_1.items.create!(name: 'item 1', description: 'item', unit_price: 1000)
+    @item_2 = @merchant_1.items.create!(name: 'item 1', description: 'item', unit_price: 1000)
+    @item_3 = @merchant_1.items.create!(name: 'item 1', description: 'item', unit_price: 1000)
+    @item_4 = @merchant_1.items.create!(name: 'item 1', description: 'item', unit_price: 1000)
+    @item_5 = @merchant_1.items.create!(name: 'item 1', description: 'item', unit_price: 1000)
+    @item_6 = @merchant_1.items.create!(name: 'item 1', description: 'item', unit_price: 1000)
+
+    InvoiceItem.create!(invoice: @invoice_1, item: @item_1, quantity: 0, unit_price: 1000, status: 0)
+    InvoiceItem.create!(invoice: @invoice_3, item: @item_3, quantity: 0, unit_price: 1000, status: 0)
+    InvoiceItem.create!(invoice: @invoice_4, item: @item_4, quantity: 0, unit_price: 1000, status: 1)
+    InvoiceItem.create!(invoice: @invoice_5, item: @item_5, quantity: 0, unit_price: 1000, status: 0)
+    InvoiceItem.create!(invoice: @invoice_6, item: @item_6, quantity: 0, unit_price: 1000, status: 2)
+
     visit "/admin"
   end
 
@@ -78,7 +91,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
   end
 
   it 'displays the top five customers' do
-    save_and_open_page
+
     expect(page).to have_content('Top Customers')
     expect(page).to have_content(@customer_1.first_name)
     expect(page).to have_content(@customer_1.last_name)
@@ -99,5 +112,15 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
     expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
     expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
+  end
+
+  it 'displays the invoice ids with items that have not been shipped' do
+    
+    expect(page).to have_content('Incomplete Invoices')
+    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content(@invoice_3.id)
+    expect(page).to have_content(@invoice_4.id)
+    expect(page).to have_content(@invoice_5.id)
+    expect(page).to_not have_content(@invoice_6.id)
   end
 end

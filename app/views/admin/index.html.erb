@@ -8,3 +8,9 @@
     <li><%= "#{customer.first_name} " "#{customer.last_name} " "#{customer.transaction_count}"%></li>
   <% end %>
 </ol>
+
+<h3>Incomplete Invoices</h3>
+<% Invoice.admin_incomplete_invoices.each do |invoice| %>
+  <%= link_to "Invoice # #{invoice.number}", "/admin/invoices/:id" %>
+  <%= invoice.created_at.strftime("%A, %B %d, %Y") %><br>
+<% end.uniq %>
