@@ -1,10 +1,10 @@
-## Relational Rails
+## Little Esty Shop
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-# Welcome to Little Estry - A database driven web application
+# Welcome to Little Esty - A database driven web application
 <p align="center">
   <img src="https://user-images.githubusercontent.com/58891447/127079509-57ae82d1-8793-41fa-a8a9-4bfe25f86b6a.png" alt="little_etsy_shop_db_schema"/>
 </p>
@@ -15,7 +15,7 @@
 
 <!-- ![Relational Rails Welcome Screen](https://user-images.githubusercontent.com/74567704/124805908-1e01ff80-df2a-11eb-92bc-3a1536aa9c84.png) -->
 
-Find the [project spec here](https://backend.turing.edu/module2/projects/relational_rails).
+Find the [project spec here](https://github.com/turingschool-examples/little-esty-shop).
 ## Table of Contents
 
 - [Overview](#overview)
@@ -27,9 +27,9 @@ Find the [project spec here](https://backend.turing.edu/module2/projects/relatio
 
 ### <ins>Overview</ins>
 
-[Relational Rails](https://github.com/deebot10/relational_rails_1) is a 10-day, 2 person project, during Mod 2 of 4 for Turing School's Back End Engineering Program.
+[Little Esty Shop](https://github.com/bfl3tch/little-esty-shop) is a 10-day, 4 person project, during Mod 2 of 4 for Turing School's Back End Engineering Program.
 
-Our challenge was to build a functioning web app consisting of multiple relational databases.
+Our challenge was to build a functioning web app consisting of multiple relational databases to mock the popular e-commerce web site *Etsy*.
 
 Learning goals and areas of focus consisted of:
 
@@ -40,7 +40,7 @@ Learning goals and areas of focus consisted of:
 - Create instance and class methods on a Rails model that use ActiveRecord methods and helpers
 - Write model and feature tests that fully cover data logic and potential user behavior
 
-[Technical Requirements](https://backend.turing.edu/module2/projects/relational_rails)
+[Technical Requirements](https://github.com/turingschool-examples/little-esty-shop/blob/main/doc/user_stories.md)
 
 ### <ins>Tools Used</ins>
 - Ruby 2.7.2
@@ -83,14 +83,14 @@ Learning goals and areas of focus consisted of:
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/deebot10/relational_rails_1.svg?style=flat-square
-[contributors-url]: https://github.com/deebot10/relational_rails_1/graphs/contributors
+[contributors-url]: https://github.com/bfl3tch/little-esty-shop/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/deebot10/relational_rails_1.svg?style=flat-square
-[forks-url]: https://github.com/deebot10/relational_rails_1/network/members
+[forks-url]: https://github.com/bfl3tch/little-esty-shop/network/members
 [stars-shield]: https://img.shields.io/github/stars/deebot10/relational_rails_1.svg?style=flat-square
-[stars-url]: https://github.com/deebot10/relational_rails_1/stargazers
+[stars-url]: https://github.com/bfl3tch/little-esty-shop/stargazers
 [issues-shield]: https://img.shields.io/github/issues/deebot10/relational_rails_1.svg?style=flat-square
-[issues-url]: https://github.com/deebot10/relational_rails_1/issues
-<!-- 
+[issues-url]: https://github.com/bfl3tch/little-esty-shop/issues
+<!--
 
 
 # README
@@ -206,4 +206,4 @@ This project requires Ruby 2.7.2.
 
     ```
 
-* Heroku Deployment, for production (link pending)
+* [Heroku Deployment](https://agile-ravine-84109.herokuapp.com/), for production
