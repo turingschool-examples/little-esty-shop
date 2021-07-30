@@ -13,3 +13,5 @@
   <b><%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enabled: "enabled"}  %></b>
   <br><br>
 <% end %>
+
+<%= link_to "Create Item", "/merchants/#{@merchant.id}/items/new" %>
