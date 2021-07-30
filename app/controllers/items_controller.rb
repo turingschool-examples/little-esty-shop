@@ -18,14 +18,14 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id])
     if params[:status].present?
       item.update!(enabled: "disabled")
-      redirect_to "/merchants/#{merchant.id}/items"
+      redirect_to merchant_items_path
       flash[:success] = "Success: #{item.name} has been updated!"
     elsif
       item.update(item_params)
-      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+      redirect_to merchant_item_path
       flash[:success] = "Success: #{item.name} has been updated!"
     else
-      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}/edit"
+      redirect_to edit_merchant_item_path
       flash[:alert] = "Error: #{error_message(item.errors)}"
     end
   end
@@ -36,10 +36,10 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to "/merchants/#{params[:merchant_id]}/items/"
+      redirect_to merchant_items_path
       flash[:success] = "Success: #{@item.name} has been created!"
     else
-      redirect_to "/merchants/#{params[:merchant_id]}/items/new"
+      redirect_to new_merchant_item_path
       flash[:alert] = "Error: #{error_message(item.errors)}"
     end
   end

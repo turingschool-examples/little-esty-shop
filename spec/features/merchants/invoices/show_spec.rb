@@ -23,7 +23,6 @@ RSpec.describe 'Merchants invoices show page' do
     end
 
     it "has path to page" do
-      save_and_open_page
       expect(page).to have_content("Invoice ##{@invoices[0].id}")
     end
 

@@ -55,7 +55,7 @@ RSpec.describe 'Merchants Items Index page' do
     it "Allows you to fill out the form" do
       click_button "Submit"
 
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
       expect(page).to have_content("Mamba")
     end
 
