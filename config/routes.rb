@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     # get '/dashboard', to: 'dashboard#show', as: 'merchant_dashboard'
     resources :dashboard, only: [:index]
     resources :items
-    resources :invoices, only: [:index, :show]
+    resources :invoices
   end
 
   resources :admin, only: [:index]
