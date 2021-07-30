@@ -1,6 +1,6 @@
 require 'csv'
 require './app/helpers/csv_load_helper'
-include CSVLoadHelper
+include CsvLoadHelper
 
 namespace :csv_load do
 
