@@ -35,7 +35,7 @@ RSpec.describe 'Merchants Items Index page' do
     expect(page).to have_button("Disable #{items_2.name}")
     click_on "Disable #{items.name}"
     #use within block?
-    save_and_open_page
+
     expect(current_path).to eq("/merchants/#{merchant_2.id}/items")
     # expect(items.enabled).to eq("disabled")  #Controller doesnt update :enabled on database
     expect(page).to have_button("Enable #{items.name}")
