@@ -35,7 +35,7 @@ RSpec.describe Item do
       @customer_2.invoices.create!(status: 1)
       InvoiceItem.create!(invoice: @customer_2.invoices[1], item: @item_2, quantity: 4, unit_price: @item_2.unit_price, status: 2)
       @customer_2.invoices[1].transactions.create!(credit_card_number: '9012', credit_card_expiration_date: '', result: 0)
-      @customer_2.invoices.create!(status: 2)
+      @customer_2.invoices.create!(status: 0)
       InvoiceItem.create!(invoice: @customer_2.invoices[2], item: @item_3, quantity: 1, unit_price: @item_3.unit_price, status: 1)
       @customer_2.invoices[2].transactions.create!(credit_card_number: '9012', credit_card_expiration_date: '', result: 0)
     end

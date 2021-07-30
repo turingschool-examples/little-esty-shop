@@ -203,28 +203,28 @@ RSpec.describe 'Merchants Dashboard Page' do
       expect(page).to have_content("Item")
       expect(page).to have_content("Name")
       expect(page).to have_content("Invoice#")
-      expect(page).to have_content("Invoice Date")
+      expect(page).to have_content("Transaction Date")
     end
 
     within "#item-#{expected[0].id}_#{expected[0].invoice_id}" do
       expect(page).to have_content("1")
       expect(page).to have_content("#{expected[0].name}")
       expect(page).to have_link("#{expected[0].invoice_id}")
-      expect(page).to have_content("#{expected[0].format_date(expected[0].ordered_date)}")
+      expect(page).to have_content("#{expected[0].format_date(expected[0].invoiced_date)}")
     end
 
     within "#item-#{expected[1].id}_#{expected[1].invoice_id}" do
       expect(page).to have_content("2")
       expect(page).to have_content("#{expected[1].name}")
       expect(page).to have_link("#{expected[1].invoice_id}")
-      expect(page).to have_content("#{expected[1].format_date(expected[1].ordered_date)}")
+      expect(page).to have_content("#{expected[1].format_date(expected[1].invoiced_date)}")
     end
 
     within "#item-#{expected[2].id}_#{expected[2].invoice_id}" do
       expect(page).to have_content("3")
       expect(page).to have_content("#{expected[2].name}")
       expect(page).to have_link("#{expected[2].invoice_id}")
-      expect(page).to have_content("#{expected[2].format_date(expected[1].ordered_date)}")
+      expect(page).to have_content("#{expected[2].format_date(expected[1].invoiced_date)}")
     end
   end
 
