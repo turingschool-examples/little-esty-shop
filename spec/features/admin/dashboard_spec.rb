@@ -18,5 +18,7 @@ RSpec.describe 'Admin Dashboard page' do
   end  
 
   it 'can take the user to the admin invoices page' do 
+    click_link 'Invoices Index'
+    expect(current_path).to eq ('/admin/invoices')
   end 
 end 
