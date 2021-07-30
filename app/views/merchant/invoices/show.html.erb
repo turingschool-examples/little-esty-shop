@@ -3,10 +3,28 @@
  <p>Invoice ID: <%= @invoice.id %></p>
  <p>Status: <%= @invoice.status %></p>
  <p>Date: <%= @invoice.format_date(@invoice.created_at) %></p>
- <%= @invoice.customer.first_name %>
- <%= @invoice.customer.last_name %>
+ <p>Customer: <%= @invoice.customer.first_name %>
+    <%= @invoice.customer.last_name %> </p>
+    <br/>
+ <h2>Items on this invoice:</h2><br/>
+<% @invoice.invoice_items.each do |ii| %>
 
+  <p>Item: <%= ii.item.name %></p>
+  <p>Quantity: <%= ii.quantity %></p>
+  <p>Unit Price: <%= number_to_currency(ii.unit_price) %></p>
 
+  <div id=<%="id-#{ii.id}" %>
 
+  <%= form_with model: ii, method: :patch, url: merchant_invoice_item_path(@merchant.id, ii.id), local: true do |form| %>
+    <%= form.hidden_field :ii_id, value: ii.id %>
+    <%= form.select :status, options_for_select([:pending, :packaged, :shipped ], ii.status) %>
+  <%= form.submit "Update Item Status" %>
+  <% end %>
+
+  </div>
+  <br/><br/>
+<% end %>
+
+<br/>
 <%= link_to 'Edit', edit_merchant_invoice_path(@merchant.id, @invoice.id) %> |
 <%= link_to 'Back', merchant_invoices_path %>

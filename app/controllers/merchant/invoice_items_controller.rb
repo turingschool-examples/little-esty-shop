@@ -1,22 +1,5 @@
-class Merchant::InvoicesController < ApplicationController
+class Merchant::InvoiceItemsController < ApplicationController
 
-  def index
-    @invoices = Merchant.merchant_invoices(params[:merchant_id])
-  end
-
-  def show
-    @merchant = Merchant.find(params[:merchant_id])
-    @invoice = Invoice.find(params[:id])
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
-  def create
-  end
 
   def update
     require "pry"; binding.pry
@@ -29,5 +12,4 @@ class Merchant::InvoicesController < ApplicationController
     redirect_to "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
     flash[:notice] = "Item status successfully updated!"
   end
-
 end
