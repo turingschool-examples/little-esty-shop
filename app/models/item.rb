@@ -9,11 +9,15 @@ class Item < ApplicationRecord
 
 
   def self.items_ready_to_ship_by_ordered_date(merchant_id)
-    select("items.id, items.name, invoice_items.invoice_id AS invoice_id, invoice_items.created_at AS ordered_date")
+    select("items.id, items.name, invoice_items.invoice_id AS invoice_id, invoices.status,
+      invoice_items.created_at AS ordered_date")
       .joins(:invoice_items)
+      .joins(:invoices)
       .where("invoice_items.status <> 2")
+      .where("invoices.status = 1")
       .where("items.merchant_id = ?", merchant_id)
       .order("ordered_date ASC")
+      .distinct
   end
 
 end

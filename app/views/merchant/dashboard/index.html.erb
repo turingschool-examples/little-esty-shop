@@ -1,8 +1,13 @@
 <%= link_to 'Return to Index', merchants_path %>
 <br>
+<%= link_to 'Items', merchant_items_path(@merchant.id), method: :get %>
+<%= link_to 'Invoices', merchant_invoices_path(@merchant.id), method: :get %>
 <br>
+<br>
+
 <h1>Welcome <%= @merchant.name %>!</h1>
 <br>
+
 <h3><em>Dashboard</em></h3>
 <br>
 <h5>Top Customers:</h5>
@@ -13,7 +18,7 @@
     </tr>
   </thead>
   <tbody id="top-customers">
-    <tr id="headers">
+    <tr id="customer-table-headers">
       <th>Rank</th>
       <th>Name</th>
       <th>Total Purchases</th>
@@ -27,8 +32,32 @@
     <% end %>
   </tbody>
 </table>
+<br>
+
+<h5>Ordered Items Ready for Shipment:</h5>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody id="items-pending-shipment">
+    <tr id="item-table-headers">
+      <th>Item</th>
+      <th>Name</th>
+      <th>Invoice#</th>
+      <th>Invoice Date</th>
+    </tr>
+    <% @pending_items.each_with_index do |item, idx| %>
+      <tr id="item-<%= "#{item.id}_#{item.invoice_id}" %>">
+        <td><%= "#{idx + 1}" %></td>
+        <td><%= "#{item.name}" %></td>
+        <td><%= link_to "#{item.invoice_id}", merchant_invoice_path(@merchant.id, item.invoice_id) %></td>
+        <td><%= "#{item.format_date(item.ordered_date)}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Items', merchant_items_path(@merchant.id), method: :get %>
-<%= link_to 'Invoices', merchant_invoices_path(@merchant.id), method: :get %>
