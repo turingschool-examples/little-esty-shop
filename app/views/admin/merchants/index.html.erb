@@ -1,0 +1,8 @@
+<h1> All Merchants </h1>
+</br>
+
+<% @merchants.each do |merchant| %>
+  <section id="all-admin-merchants-<%= merchant.id %>">
+  <h3> <%= merchant.name %> <h3>
+  </section>
+<% end %>
