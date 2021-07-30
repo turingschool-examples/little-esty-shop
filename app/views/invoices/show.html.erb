@@ -15,7 +15,6 @@ Date: <%= @invoice.created_at.strftime('%A %B %e, %Y') %>
     <th>Unit Price</th>
     <th>Status</th>
   </tr>
-  <%# <% require "pry"; binding.pry %> %>
     <% @invoice_items.each do |invoice_item| %>
       <tr>
       <td><%= invoice_item.item.name %></td>
