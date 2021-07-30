@@ -6,16 +6,23 @@
 <h3><em>Dashboard</em></h3>
 <br>
 <h5>Top Customers:</h5>
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th colspan="3"></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="top-customers">
+    <tr id="headers">
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Total Purchases</th>
+    </tr>
     <% @top_customers.each_with_index do |customer, idx| %>
       <tr id="customer-<%= customer.id %>">
-        <td><%= "#{idx + 1}: #{customer.first_name} #{customer.last_name}" %></td>
+        <td><%= "#{idx + 1}" %></td>
+        <td><%= "#{customer.first_name} #{customer.last_name}" %></td>
+        <td><%= "#{customer.transaction_count}" %></td>
       </tr>
     <% end %>
   </tbody>
