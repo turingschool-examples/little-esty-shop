@@ -67,9 +67,17 @@ Learning goals and areas of focus consisted of:
 - Github: [Brian Fletcher](https://github.com/bfl3tch)
 - LinkedIn: [Brian Fletcher](https://www.linkedin.com/in/bfl3tch)
 
-👤  **Dee Hill**
-- Github: [Dee Hill](https://github.com/deebot10)
-- LinkedIn: [Dee Hill](https://www.linkedin.com/in/dee-hill-82b18220b/)
+👤  **Elliot Olbright**
+- Github: [Elliot Olbright](https://github.com/ElliotOlbright)
+- LinkedIn: [Elliot Olbright](https://www.linkedin.com/in/elliotolbright/)
+
+👤  **Taylor Varoglu**
+- Github: [Taylor Varoglu](https://github.com/tvaroglu)
+- LinkedIn: [Taylor Varoglu](https://www.linkedin.com/in/taylorvaroglu/)
+
+👤  **Michael Abbott**
+- Github: [Michael Abbott](https://github.com/AbbottMichael)
+- LinkedIn: [Michael Abbott](https://www.linkedin.com/in/mjabbottdesign/)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
