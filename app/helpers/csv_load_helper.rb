@@ -1,4 +1,4 @@
-module CSVLoadHelper
+module CsvLoadHelper
   def csv_import(model_name, row)
     if model_name == Invoice
       row[:status] = row[:status].sub(' ','_')
