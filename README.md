@@ -177,8 +177,8 @@ This project requires Ruby 2.7.2.
 * Database creation
     ```bash
     $ rails db:{drop,create,migrate,seed}
-    Created database 'little_etsy_shop_development'
-    Created database 'little_etsy_shop_test'
+    Created database 'little_esty_shop_development'
+    Created database 'little_esty_shop_test'
     ```
 
 * Database initialization
