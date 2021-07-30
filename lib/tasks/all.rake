@@ -1,7 +1,7 @@
 require 'csv'
 
 namespace :csv_load do
-  desc 'Runs all CSV load tasks, including destruction of seed records and reset of pks for each table'
+  desc 'Run all CSV load tasks, including destruction of seed records and reset of pks for each table'
   task all: [:destroy_all, :create_customers, :create_merchants, :create_items, :create_invoices, :create_transactions, :create_invoice_items, :reset_all_pks]
 
   desc 'Destroy all - ordered by most to least dependent'
@@ -12,48 +12,55 @@ namespace :csv_load do
     Item.destroy_all
     Merchant.destroy_all
     Customer.destroy_all
+    puts "All Seeds destroyed"
   end
 
-  desc 'Creates all customers - NOTE, should run the "all" task to destroy dependents and reset pks'
+  desc 'Create all Customers - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
   task create_customers: :environment do
     CSV.foreach('./db/data/customers.csv', headers: true) do |row|
       Customer.create!(row.to_hash)
     end
+    puts "All Customers successfully seeded"
   end
 
-  desc 'Creates all merchants - NOTE, should run the "all" task to destroy dependents and reset pks'
+  desc 'Create all Merchants - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
   task create_merchants: :environment do
     CSV.foreach('./db/data/merchants.csv', headers: true) do |row|
       Merchant.create!(row.to_hash)
     end
+    puts "All Merchants successfully seeded"
   end
 
-  desc 'Creates all items - NOTE, should run the "all" task to destroy dependents and reset pks'
+  desc 'Create all Items - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
   task create_items: :environment do
     CSV.foreach('./db/data/items.csv', headers: true) do |row|
       Item.create!(row.to_hash)
     end
+    puts "All Items successfully seeded"
   end
 
-  desc 'Creates all invoices - NOTE, should run the "all" task to destroy dependents and reset pks'
+  desc 'Create all Invoices - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
   task create_invoices: :environment do
     CSV.foreach('./db/data/invoices.csv', headers: true) do |row|
       Invoice.create!(row.to_hash)
     end
+    puts "All Invoices successfully seeded"
   end
 
-  desc 'Creates all transactions - NOTE, should run the "all" task to destroy dependents and reset pks'
+  desc 'Create all Transactions - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
   task create_transactions: :environment do
     CSV.foreach('./db/data/transactions.csv', headers: true) do |row|
       Transaction.create!(row.to_hash)
     end
+    puts "All Transactions successfully seeded"
   end
 
-  desc 'Creates all invoice items - NOTE, should run the "all" task to destroy dependents and reset pks'
+  desc 'Create all Invoice Items - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
   task create_invoice_items: :environment do
     CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
       InvoiceItem.create!(row.to_hash)
     end
+    puts "All Invoice Items successfully seeded"
   end
 
   desc 'Reset all primary key autoincrement sequences'
@@ -62,4 +69,5 @@ namespace :csv_load do
       ActiveRecord::Base.connection.reset_pk_sequence!(t)
     end
   end
+  puts "All Table primary keys successfully reset"
 end
