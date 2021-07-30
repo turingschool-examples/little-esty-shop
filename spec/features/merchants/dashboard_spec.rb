@@ -1,28 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant dashboard page' do
-  let(:first) {"Annie"}
-  let(:second) {"Goran"}
-  let(:third) {"Victoria"}
-  let(:fourth) {"Scarlett"}
-  let(:fifth) {"Petey"}
   before :each do
     @merchant1 = Merchant.create!(name: 'Sparkys Shop')
     @merchant2 = Merchant.create!(name: 'BBs Petstore')
+
     @customer1 = Customer.create!(first_name: 'Petey', last_name: 'Wimbley')
     @customer2 = Customer.create!(first_name: 'Victoria', last_name: 'Jenkins')
     @customer3 = Customer.create!(first_name: 'Pedro', last_name: 'Oscar')
     @customer4 = Customer.create!(first_name: 'Scarlett', last_name: 'Redsley')
     @customer5 = Customer.create!(first_name: 'Annie', last_name: 'Snip')
     @customer6 = Customer.create!(first_name: 'Goran', last_name: 'Babalia')
+
     @item1 = @merchant1.items.create!(name: 'Teddy Bear', description: 'So fuzzy', unit_price: 2000)
     @item2 = @merchant1.items.create!(name: 'Toy Car', description: 'So fast', unit_price: 30000)
+    @item3 = @merchant1.items.create!(name: 'Bouncy Ball', description: 'So bouncy', unit_price: 5000)
+    @item4 = @merchant1.items.create!(name: 'Dog Bone', description: 'So chewy', unit_price: 8000)
+
     @invoice1 = @customer1.invoices.create!(status: 2)
     @invoice2 = @customer2.invoices.create!(status: 2)
     @invoice3 = @customer3.invoices.create!(status: 2)
     @invoice4 = @customer4.invoices.create!(status: 2)
     @invoice5 = @customer5.invoices.create!(status: 2)
     @invoice6 = @customer6.invoices.create!(status: 2)
+    @invoice7 = @customer1.invoices.create!(status: 1)
+
     @transaction1 = @invoice5.transactions.create!(credit_card_number: "0123456789", credit_card_expiration_date: '12/31', result: 0)
     @transaction2 = @invoice5.transactions.create!(credit_card_number: "9876543210", credit_card_expiration_date: '01/01', result: 0)
     @transaction3 = @invoice5.transactions.create!(credit_card_number: "4444444444", credit_card_expiration_date: '06/07', result: 0)
@@ -41,6 +43,7 @@ RSpec.describe 'merchant dashboard page' do
     @transaction16 = @invoice1.transactions.create!(credit_card_number: "7894739999", credit_card_expiration_date: '04/20', result: 1)
     @transaction17 = @invoice3.transactions.create!(credit_card_number: "7894739999", credit_card_expiration_date: '04/20', result: 1)
     @transaction18 = @invoice3.transactions.create!(credit_card_number: "7894739999", credit_card_expiration_date: '04/20', result: 1)
+
     @invoice1.items << [@item1, @item2]
     @invoice2.items << [@item1, @item2]
     @invoice3.items << [@item1, @item2]
@@ -97,11 +100,62 @@ RSpec.describe 'merchant dashboard page' do
     it 'displays top 5 customers' do
       visit "/merchants/#{@merchant1.id}/dashboard"
 
-      expect(:first).to appear_before(:second)
-      expect(:second).to appear_before(:third)
-      expect(:third).to appear_before(:fourth)
-      expect(:fourth).to appear_before(:fifth)
-      expect(page).to_not have_content("Pedro")
+      expect(@customer5.first_name).to appear_before(@customer6.first_name)
+      expect(@customer6.first_name).to appear_before(@customer2.first_name)
+      expect(@customer2.first_name).to appear_before(@customer4.first_name)
+      expect(@customer4.first_name).to appear_before(@customer1.first_name)
+      expect(page).to_not have_content(@customer3.first_name)
+    end
+
+    it 'displays number of successful transactions next to customer' do
+      visit "/merchants/#{@merchant1.id}/dashboard"
+
+      expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}: #{@customer5.total_transactions}")
+      expect(page).to have_content("#{@customer6.first_name} #{@customer6.last_name}: #{@customer6.total_transactions}")
+      expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name}: #{@customer2.total_transactions}")
+      expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}: #{@customer4.total_transactions}")
+      expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}: #{@customer1.total_transactions}")
+
+      expect(page).to_not have_content("#{@customer3.first_name} #{@customer3.last_name}: #{@customer3.total_transactions}")
+    end
+
+    it 'displays items and their invoice id ready to ship' do
+      InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item3.id, status: 1)
+      InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item4.id, status: 1)
+      InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item1.id, status: 2)
+      InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item2.id, status: 0)
+
+      visit "/merchants/#{@merchant1.id}/dashboard"
+
+      expect(page).to have_content('Items Ready to Ship')
+
+      expect(page).to have_content("#{@item3.name} invoice id: #{@invoice7.id}")
+      expect(page).to have_content("#{@item4.name} invoice id: #{@invoice7.id}")
+      expect(page).to_not have_content("#{@item1.name} invoice id: #{@invoice7.id}")
+      expect(page).to_not have_content("#{@item2.name} invoice id: #{@invoice7.id}")
+    end
+
+    it 'links to each items invoice' do
+      visit "/merchants/#{@merchant1.id}/dashboard"
+
+      within(:css, "##{@item3.id}") do
+        click_on(@invoice7.id)
+      end
+
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/dashboard/invoices/#{@invoice7.id}")
+    end
+
+    it 'sorts by item created at' do
+      ii1 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item3.id, status: 1, created_at: "2012-03-25 09:54:09 UTC")
+      ii2 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item4.id, status: 1, created_at: "2012-03-24 09:54:09 UTC")
+      ii3 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item1.id, status: 2)
+      ii4 = InvoiceItem.create!(invoice_id: @invoice7.id, item_id: @item2.id, status: 1, created_at: "2012-03-23 09:54:09 UTC")
+
+      visit "/merchants/#{@merchant1.id}/dashboard"
+
+      expect(ii4.created_at).to appear_before(ii2.created_at)
+      expect(ii2.created_at).to appear_before(ii1.created_at)
+      expect(page).to_not have_content(ii3.created_at)
     end
   end
 end
