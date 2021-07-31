@@ -30,7 +30,7 @@ RSpec.describe 'Item show page' do
 
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item1.description)
-      expect(page).to have_content(@item1.price_to_dollars)
+      expect(page).to have_content("$#{@item1.price_to_dollars}")
     end
   end
 end

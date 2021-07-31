@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/merchants/:id/dashboard/invoices/:invoice_id', to: 'merchant_invoices#show' #merchant/merchant_invoices#show'
   get '/merchants/:id/items', to: 'merchant_items#index' #merchant/merchant_items#index'
   get '/merchants/:id/invoices', to: 'merchant_invoices#index' #merchant/merchant_invoices#index'
+  get '/merchants/:id/items/:item_id', to: 'merchant_items#show'
 
   #namespace merchants do
 
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   # get '/admin/invoices', to: 'admins#invoice_index'
 
   namespace :admin do #resources :admin, module: :admin do (namespace gives: scope, module and rake routes)
-    resources only: [:index] 
+    resources only: [:index]
     resources :merchants
     resources :invoices
   end
