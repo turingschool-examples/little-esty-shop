@@ -21,12 +21,13 @@ class Merchant::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     item.update(item_params)
+    return redirect_back(fallback_location: merchant_items_path(item.merchant_id)) if params[:direct] == 'enable'
     redirect_to merchant_item_path(item.merchant_id, item.id), notice: "Item successfully updated."
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price)
+    params.require(:item).permit(:name, :description, :unit_price, :enable)
   end
 end
