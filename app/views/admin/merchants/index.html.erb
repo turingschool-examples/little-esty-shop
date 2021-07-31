@@ -1,5 +1,20 @@
 <h1>Merchants</h1>
 <% @merchants.each do |merchant| %>
   <%= merchant.name %>
-  <br>
+  <% if merchant.status.nil? %>
+    <%= form_with url: "/admin/merchants/#{merchant.id}?status=true", method: :patch, local: true do |f| %>
+      <%= f.submit "Enable" %>
+    <% end %>
+    <%= form_with url: "/admin/merchants/#{merchant.id}?status=false", method: :patch, local: true do |f| %>
+      <%= f.submit "Disable" %>
+    <% end %>
+  <% elsif merchant.status == true %>
+    <%= form_with url: update_status_path, method: :patch, local: true do |f| %>
+      <%= f.submit "Disable" %>
+    <% end %>
+  <% elsif merchant.status == false %>
+    <%= form_with url: "/admin/merchants/#{merchant.id}?status=true", method: :patch, local: true do |f| %>
+      <%= f.submit "Enable" %>
+    <% end %>
+  <% end %>
 <% end %>

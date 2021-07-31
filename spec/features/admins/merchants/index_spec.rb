@@ -12,4 +12,8 @@ RSpec.describe 'Merchant Index', type: :feature do
     expect(page).to have_content(@merchant_1.name)
     expect(page).to have_content(@merchant_2.name)
   end
+
+  it 'each merchant has an enabled/disabled button to modify status' do
+    expect(page).to have_content("Disable")
+  end
 end

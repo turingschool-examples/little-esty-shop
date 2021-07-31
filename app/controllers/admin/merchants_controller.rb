@@ -19,8 +19,20 @@ class Admin:: MerchantsController < ApplicationController
     flash[:alert] = "YOUR MERCHANT HAS BEEN UPDATED."
   end
 
+  def update_status
+    merchant = Merchant.find(params[:id])
+    if params[:status] == true
+      merchant.disable
+    elsif params[:status] == false
+      merchant.enable
+    elsif params[:status] == nil
+      merchant.update(status: params[:status])
+    end
+    redirect_to "/admin/merchants"
+  end
+
   private
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 end
