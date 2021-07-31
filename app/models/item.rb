@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   enum status: [:enabled, :disabled]
 
   def self.ready_to_ship(merchant_id)
-    select('items.id as item_id, name, invoices.id as invoice_id, invoices.created_at')
+    select('items.id, name, invoices.id as invoice_id, invoices.created_at')
     .joins(:invoices)
     .where('items.merchant_id = ?', merchant_id)
     .where('invoice_items.status = 1')
@@ -15,5 +15,13 @@ class Item < ApplicationRecord
 
   def price_to_dollars
     (unit_price / 100.00).round(2)
+  end
+
+  def self.enabled
+    where('status = ?', 0)
+  end
+
+  def self.disabled
+    where('status = ?', 1)
   end
 end

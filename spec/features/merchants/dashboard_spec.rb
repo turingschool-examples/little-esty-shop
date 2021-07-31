@@ -160,7 +160,7 @@ RSpec.describe 'merchant dashboard page' do
       ii4 = InvoiceItem.create!(invoice_id: invoice10.id, item_id: @item2.id, status: 1)
 
       visit "/merchants/#{@merchant1.id}/dashboard"
-      save_and_open_page
+
       expect(invoice8.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice10.created_at.strftime("%A, %B %d, %Y"))
       expect(invoice10.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice9.created_at.strftime("%A, %B %d, %Y"))
       expect(page).to_not have_content(invoice11.created_at.strftime("%A, %B %d, %Y"))
