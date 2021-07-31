@@ -22,4 +22,26 @@ RSpec.describe 'Update an existing merchant by clicking a link on its show page'
     expect(page).to have_content("Kostco")
     expect(page).to_not have_content("Costco")
   end
+
+  it 'gives a flash message when you successfully update a merchant' do
+    expect(page).to_not have_content("Merchant Successfully updated!")
+    click_link("update #{@merchant1.name}")
+
+    fill_in("Name", with: "Kostco")
+
+    click_button("Update #{@merchant1.name}")
+
+    expect(page).to have_content("Merchant Successfully updated!")
+  end
+
+  it 'gives a flash message when you do not successfully update a merchant' do
+    expect(page).to_not have_content("Error: Name can't be blank")
+    click_link("update #{@merchant1.name}")
+
+    fill_in("Name", with: "")
+
+    click_button("Update #{@merchant1.name}")
+
+    expect(page).to have_content("Error: Name can't be blank")
+  end
 end
