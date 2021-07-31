@@ -120,4 +120,30 @@ RSpec.describe Merchant do
       expect(data[4].revenue).to eq(20)
     end
   end
+
+  describe 'enable disable methods' do
+    it 'returns only merchants with enabled status' do
+      merchant1 = create(:merchant, enabled: true)
+      merchant2 = create(:merchant, enabled: true)
+      merchant3 = create(:merchant, enabled: true)
+      merchant4 = create(:merchant, enabled: false)
+      merchant5 = create(:merchant, enabled: false)
+
+      expected = [merchant1, merchant2, merchant3]
+
+      expect(Merchant.enabled_merchants).to eq(expected)
+    end
+
+    it 'returns only merchants with disabled status' do
+      merchant1 = create(:merchant, enabled: true)
+      merchant2 = create(:merchant, enabled: true)
+      merchant3 = create(:merchant, enabled: true)
+      merchant4 = create(:merchant, enabled: false)
+      merchant5 = create(:merchant, enabled: false)
+
+      expected = [merchant4, merchant5]
+
+      expect(Merchant.disabled_merchants).to eq(expected)
+    end
+  end
 end
