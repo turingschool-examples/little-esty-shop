@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
+  enum status: [:enabled, :disabled]
+
   def self.ready_to_ship(merchant_id)
     select('items.id as item_id, name, invoices.id as invoice_id, invoices.created_at')
     .joins(:invoices)

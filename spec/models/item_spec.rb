@@ -7,6 +7,10 @@ RSpec.describe Item, type: :model do
     it {should have_many(:invoices).through(:invoice_items)}
   end
 
+  describe 'validations' do
+    it {should define_enum_for(:status).with_values([:enabled, :disabled])}
+  end
+
   describe 'instance methods' do
     it 'can transform unit price to dollars' do
       merchant1 = Merchant.create!(name: 'Sparkys Shop')

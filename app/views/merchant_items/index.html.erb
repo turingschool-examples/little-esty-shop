@@ -1,5 +1,27 @@
 <h1>My Items</h1>
 
 <% @merchant.items.each do |item| %>
+<div id= <%= "#{item.id}" %>>
   <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+  <p>Status: <%= item.status %></p>
+  <% if item.status.nil? %>
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=0", method: :patch, local: true do |f| %>
+      <%= f.submit "Enable" %>
+    <% end %>
+
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=1", method: :patch, local: true do |f| %>
+      <%= f.submit "Disable" %>
+    <% end %>
+
+  <% elsif item.status == 'enabled' %>
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=1", method: :patch, local: true do |f| %>
+      <%= f.submit "Disable" %>
+    <% end %>
+
+  <% elsif item.status == 'disabled' %>
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=0", method: :patch, local: true do |f| %>
+      <%= f.submit "Enable" %>
+    <% end %>
+  <% end %>
+</div>
 <% end %>

@@ -69,5 +69,28 @@ RSpec.describe 'Merchant Items show page' do
 
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
     end
+
+    it 'can enable and disable items' do
+      @item1.update!(status: nil)
+      visit "merchants/#{@merchant1.id}/items"
+
+      within(:css, "##{@item1.id}") do
+        expect(page).to have_content('Status:')
+        click_on('Disable')
+      end
+
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+
+      within(:css, "##{@item1.id}") do
+        expect(page).to have_content('Status: disabled')
+        click_on('Enable')
+      end
+
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+
+      within(:css, "##{@item1.id}") do
+        expect(page).to have_content('Status: enabled')
+      end
+    end
   end
 end
