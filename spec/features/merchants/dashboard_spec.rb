@@ -20,13 +20,13 @@ RSpec.describe 'Merchants Dashboard Page' do
   end
 
   it 'can take user to merchant items index page' do
-    click_link 'Items'
+    click_link 'All Items'
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items")
   end
 
   it 'can take user to merchant invoice index page' do
-    click_link 'Invoices'
+    click_link 'All Invoices'
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
   end
