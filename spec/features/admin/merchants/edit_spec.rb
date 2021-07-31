@@ -11,12 +11,15 @@ RSpec.describe 'Update an existing merchant by clicking a link on its show page'
   end
 
   it 'can fill out a form to update a form for a specific merchant' do
-    click_link("update #{merchant1.name}")
+    expect(page).to have_content("Costco")
+    click_link("update #{@merchant1.name}")
 
     fill_in("Name", with: "Kostco")
 
     click_button("Update #{@merchant1.name}")
 
-    
+    expect(current_path).to eq("/admin/merchants/#{@merchant1.id}")
+    expect(page).to have_content("Kostco")
+    expect(page).to_not have_content("Costco")
   end
 end

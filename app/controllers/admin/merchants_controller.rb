@@ -19,16 +19,18 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
   
-  # def update
-    
-  # end
+  def update
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchants_params)
+    redirect_to "/admin/merchants/#{merchant.id}"
+  end
   
   # def destroy
     
   # end
 
 private
-  def _params
+  def merchants_params
     params.require(:merchant).permit(:name)
   end
 end
