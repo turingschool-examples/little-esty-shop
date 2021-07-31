@@ -22,4 +22,12 @@ class Merchant < ApplicationRecord
           GROUP BY invoices.id
       ORDER BY item_count DESC LIMIT 10")
   end
+
+  def self.order_by_enabled
+    where("status = 0")
+  end
+
+  def self.order_by_disabled
+    where("status = 1")
+  end
 end
