@@ -36,22 +36,22 @@ RSpec.describe 'Admin Invoice Show Page' do
 
     visit admin_invoice_path("#{@invoice1.id}")
 
-    within("div#invoice_item1") do
-      expect(page).to have_content("#{@item1.name}")
+    within("#invoice_item-#{@invoice_item1.id}") do
+      # expect(page).to have_content("#{@item1.name}")
       expect(page).to have_content("#{@invoice_item1.quantity}")
       expect(page).to have_content("#{@invoice_item1.unit_price}")
       expect(page).to have_content("#{@invoice_item1.status}")
     end
 
-    within("div#invoice_item2") do
-      expect(page).to have_content("#{@item2.name}")
+    within("#invoice_item-#{invoice_item2.id}") do
+      # expect(page).to have_content("#{@item2.name}")
       expect(page).to have_content("#{invoice_item2.quantity}")
       expect(page).to have_content("#{invoice_item2.unit_price}")
       expect(page).to have_content("#{invoice_item2.status}")
     end
 
-    within("div#invoice_item3") do
-      expect(page).to have_content("#{@item3.name}")
+    within("#invoice_item-#{invoice_item3.id}") do
+      # expect(page).to have_content("#{@item3.name}")
       expect(page).to have_content("#{invoice_item3.quantity}")
       expect(page).to have_content("#{invoice_item3.unit_price}")
       expect(page).to have_content("#{invoice_item3.status}")
