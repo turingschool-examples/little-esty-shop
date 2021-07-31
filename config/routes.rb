@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get '/admin', to: 'admins#show'
   # get '/admin/merchants', to: 'admins#merchant_index'
   # get '/admin/invoices', to: 'admins#invoice_index'
-  patch '/admin/merchants', to: 'admin/merchants#update_status', as: 'update_status'
+  patch '/admin/merchants/update/:id', to: 'admin/merchants#update_status', as: 'update_status'
 
   namespace :admin do #resources :admin, module: :admin do (namespace gives: scope, module and rake routes)
     resources only: [:index]
