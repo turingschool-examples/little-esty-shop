@@ -5,35 +5,47 @@ RSpec.describe 'Admin Invoices Index Page' do
   # When I visit the admin Invoices index ("/admin/invoices")
   # Then I see a list of all Invoice ids in the system
   # Each id links to the admin invoice show page
-  xit 'lists all invoice ids in the system' do
-    antonio = Customer.create!(first_name: 'Antonio', last_name: 'King')
-    maria = Customer.create!(first_name: 'Maria', last_name: 'Marks')
-    inv_1 = Invoice.create!(status: 0, customer_id: antonio.id)
-    inv_2 = Invoice.create!(status: 1, customer_id: antonio.id)
-    inv_3 = Invoice.create!(status: 2, customer_id: maria.id)
-
+  it 'lists all invoice ids in the system' do
     visit '/admin/invoices'
 
-    expect(page).to have_content(inv_1.id)
-    expect(page).to have_content(inv_2.id)
-    expect(page).to have_content(inv_3.id)
+    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_content(@invoice2.id)
+    expect(page).to have_content(@invoice3.id)
+    expect(page).to have_content(@invoice4.id)
+    expect(page).to have_content(@invoice5.id)
+    expect(page).to have_content(@invoice6.id)
+    expect(page).to have_content(@invoice7.id)
+    expect(page).to have_content(@invoice11.id)
+    expect(page).to have_content(@invoice15.id)
   end
 
-  xit 'has links for each invoice id that link to respective show pages' do
-    antonio = Customer.create!(first_name: 'Antonio', last_name: 'King')
-    maria = Customer.create!(first_name: 'Maria', last_name: 'Marks')
-    inv_1 = Invoice.create!(status: 'in progress', customer_id: antonio.id)
-    inv_2 = Invoice.create!(status: 'completed', customer_id: antonio.id)
-    inv_3 = Invoice.create!(status: 'cancelled', customer_id: maria.id)
+  it 'has links for each invoice id that link to respective show pages' do
+    visit '/admin/invoices'
+
+    expect(page).to have_link("#{@invoice1.id}")
+    expect(page).to have_link("#{@invoice2.id}")
+    expect(page).to have_link("#{@invoice3.id}")
+    expect(page).to have_link("#{@invoice4.id}")
+    expect(page).to have_link("#{@invoice5.id}")
+    expect(page).to have_link("#{@invoice6.id}")
+    expect(page).to have_link("#{@invoice7.id}")
+    expect(page).to have_link("#{@invoice11.id}")
+    expect(page).to have_link("#{@invoice15.id}")
+
+    click_on("#{@invoice1.id}")
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
 
     visit '/admin/invoices'
 
-    expect(page).to have_link(inv_1.id)
-    expect(page).to have_link(inv_2.id)
-    expect(page).to have_link(inv_3.id)
+    click_on("#{@invoice6.id}")
 
-    click_on(inv_1.id)
+    expect(current_path).to eq("/admin/invoices/#{@invoice6.id}")
 
-    expect(current_path).to eq("/admin/invoices/#{inv_1.id}")
+    visit '/admin/invoices'
+
+    click_on("#{@invoice14.id}")
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice14.id}")
   end
 end
