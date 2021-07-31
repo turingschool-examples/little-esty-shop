@@ -8,7 +8,7 @@
 <h3>Invoice Items:</h3>
 <% @invoice.invoice_items.each do |invoice_item| %>
   <div id="invoice_item-<%= invoice_item.id %>">
-  <p><b>Item Name:</b> </p>
+  <p><b>Item Name:</b> <% %></p>
   <p><b>Quantity:</b> <%= invoice_item.quantity %></p>
   <p><b>Unit Price:</b> $<%= invoice_item.unit_price %></p>
   <p><b>Status:</b> <%= invoice_item.status %></p>
