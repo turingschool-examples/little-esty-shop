@@ -22,6 +22,8 @@ RSpec.describe Item do
         expect(@item1.enable).to eq('enable')
         expect(@item1.enable_opposite).to eq('disable')
       end
+    end
+  end
 
   describe 'class methods' do
     before :each do
