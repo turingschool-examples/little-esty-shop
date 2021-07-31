@@ -1,0 +1,9 @@
+<div id='header'>
+<h1>My Invoices</h1>
+</div>
+
+<% @merchant.invoices.each do |invoice| %>
+  <div id="invoice-<%= invoice.id %>">
+    <p>Invoice #<%= invoice.id %></p>
+  </div>
+<% end %>
