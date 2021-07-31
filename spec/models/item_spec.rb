@@ -42,14 +42,14 @@ RSpec.describe Item do
     it "creates a list of all items that have not been shipped" do
       expect(Item.not_yet_shipped).to eq([
                                           {
-                                            "name" => @items[1].name,
-                                            "invoice_id" => @invoices[1].id,
-                                            "invoice_date" => @invoices[1].created_at
-                                          },
-                                          {
                                             "name" => @items[0].name,
                                             "invoice_id" => @invoices[0].id,
                                             "invoice_date" => @invoices[0].created_at
+                                          },
+                                          {
+                                            "name" => @items[1].name,
+                                            "invoice_id" => @invoices[1].id,
+                                            "invoice_date" => @invoices[1].created_at
                                           }
                                           ])
     end

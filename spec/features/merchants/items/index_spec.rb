@@ -37,4 +37,33 @@ RSpec.describe 'Merchants Items Index page' do
     # expect(items.enabled).to eq("disabled")  #Controller doesnt update :enabled on database
     expect(page).to have_button("Enable")
   end
+
+  it 'has link to create a new item' do
+    click_link "Create Item"
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+  end
+
+  describe "creates new item" do
+    before(:each) do
+      click_link "Create Item"
+
+      fill_in "name", with: "Mamba"
+      fill_in "description", with: "some random Yoda quote"
+      fill_in "unit_price", with: 199
+    end
+    it "Allows you to fill out the form" do
+      click_button "Submit"
+
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+      expect(page).to have_content("Mamba")
+    end
+
+    it "see the new item in list of items with default value of disbaled" do
+      click_button "Submit"
+
+      # require "pry"; binding.pry
+      expect(Item.last.enabled).to eq("disabled")
+    end
+  end
 end
