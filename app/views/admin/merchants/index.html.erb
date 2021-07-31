@@ -23,4 +23,45 @@
   </tbody>
 </table>
 
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <div id="enabled">
+  <tbody>
+    <h2>Enabled Merchants</h2>
+    <% @enabled_merchants.each do |en| %>
+      <tr id="enabled_merchant-<%= en.id %>">
+        <td><%= en.name %></td>
+        <td><%= link_to 'Show', admin_merchant_path(en.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_merchant_path(en.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </div>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <div id="disabled">
+  <tbody>
+    <h2>Disabled Merchants</h2>
+    <% @disabled_merchants.each do |dis| %>
+      <tr id="disabled_merchant-<%= dis.id %>">
+        <td><%= dis.name %></td>
+        <td><%= link_to 'Show', admin_merchant_path(dis.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_merchant_path(dis.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </div>
+</table>
 <br>
