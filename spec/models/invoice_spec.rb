@@ -47,7 +47,7 @@ RSpec.describe Invoice, type: :model do
     @invoice3.items << [@item3, @item4]
     @invoice4.items << [@item4]
     @invoice5.items << [@item4]
-    @invoice6.items << [@item1, @item2]
+    @invoice6.items << [@item1, @item2, @item4]
   end
 
   describe 'class methods' do
@@ -55,6 +55,14 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.merchant_invoices(@merchant1.id).first.id).to eq(@invoice1.id)
       expect(Invoice.merchant_invoices(@merchant1.id).last.id).to eq(@invoice6.id)
       expect(Invoice.merchant_invoices(@merchant1.id).length).to eq(4)
+    end
+  end
+
+  describe 'instance methods' do
+    it 'can retrieve items tied to merchant' do
+      expect(@invoice6.merchant_items(@merchant1.id).first.name).to eq(@item1.name)
+      expect(@invoice6.merchant_items(@merchant1.id).last.name).to eq(@item2.name)
+      expect(@invoice6.merchant_items(@merchant1.id).length).to eq(2)
     end
   end
 end

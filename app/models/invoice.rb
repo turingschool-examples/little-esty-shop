@@ -19,4 +19,8 @@ class Invoice < ApplicationRecord
     .select('invoices.*')
     .where('merchant_id = ?', id).distinct
   end
+
+  def merchant_items(id)
+    items.where('merchant_id = ?', id).select('items.name, items.unit_price, invoice_items.quantity, invoice_items.status as order_status')
+  end
 end
