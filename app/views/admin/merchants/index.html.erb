@@ -1,22 +1,52 @@
+
+<%= link_to 'Return to Dashboard', "/admin" %>
+<br>
+
+<h1>Welcome Admin!</h1>
+<br>
+<h3><em>Merchants Dashboard</em></h3>
+
 <h1>Admin Merchants</h1>
 
-<table>
+
+<table class="table table-light">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
-  <div id="create">
-  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
-  </div>
   <tbody>
-    <% @merchants.each do |merchant| %>
+    <% @merchants.each_with_index do |merchant, idx| %>
       <tr id="merchant-<%= merchant.id %>">
-        <td><%= merchant.name %></td>
-        <td><%= link_to 'Show', admin_merchant_path(merchant.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_merchant_path(merchant.id) %></td>
+        <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></th>
+        <th><%= link_to 'Edit Merchant', edit_admin_merchant_path(merchant.id) %></th>
       </tr>
+      <tr>
+        <th><em>Top Customers</em></th>
+        <th></th>
+      </tr>
+        <tr>
+          <td colspan="3">
+            <table class="table mb-0 table-striped">
+              <tr id="customer-table-headers-<%= merchant.id %>">
+                <th class="table-info">Customer Rank:</th>
+                <th class="table-info">Customer Name:</th>
+                <th class="table-info">Total Purchases:</th>
+              </tr>
+              <tr id="merchant-top-customers-<%= merchant.id %>">
+                <% Customer.top_customers_for_merchant(merchant.id).each_with_index do |customer, idx| %>
+                  <tr id="customer-<%= customer.id %>">
+                    <td><%= "#{idx + 1}" %></td>
+                    <td><%= "#{customer.first_name} #{customer.last_name}" %></td>
+                    <td><%= "#{customer.transaction_count}" %></td>
+                  </tr>
+                <% end %>
+              </tr>
+             </table>
+             <br>
+           </td>
+        </tr>
     <% end %>
   </tbody>
 </table>
@@ -42,24 +72,7 @@
   </div>
 </table>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <div id="disabled">
-  <tbody>
-    <h2>Disabled Merchants</h2>
-    <% @disabled_merchants.each do |dis| %>
-      <tr id="disabled_merchant-<%= dis.id %>">
-        <td><%= dis.name %></td>
-        <td><%= link_to 'Show', admin_merchant_path(dis.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_merchant_path(dis.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  </div>
-</table>
-<br>
+<%= link_to 'New Admin Merchant', new_admin_merchant_path %>
+
+<p id="notice"><%= notice %></p>

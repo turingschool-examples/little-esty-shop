@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Invoice Show Page' do
   before :each do
+    @customer = Customer.create(first_name: 'Tom', last_name: 'Holland')
+    @i = Invoice.create!(status: 2, customer_id: @customer.id)
     @merchant1 = Merchant.create!(name: 'Korbanth')
     @merchant2 = Merchant.create!(name: 'asdf')
+
 
     @item1 = @merchant1.items.create!(
       name: 'SK2',
@@ -59,6 +62,13 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   it 'is on the correct page' do
+    expect(current_path).to eq("/admin/invoices/#{@i.id}")
+    expect(page).to have_content("Invoice Id: #{@i.id}")
+  end
+
+  it 'can take user to invoice edit page' do
+    click_link "Edit"
+
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
     expect(page).to have_content("Invoice ID: #{@invoice1.id}")
   end
