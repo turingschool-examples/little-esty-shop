@@ -13,9 +13,9 @@ RSpec.describe 'merchant dashboard page' do
     @customer6 = Customer.create!(first_name: 'Goran', last_name: 'Babalia')
 
     @item1 = @merchant1.items.create!(name: 'Teddy Bear', description: 'So fuzzy', unit_price: 2000)
-    @item2 = @merchant1.items.create!(name: 'Toy Car', description: 'So fast', unit_price: 30000)
-    @item3 = @merchant1.items.create!(name: 'Bouncy Ball', description: 'So bouncy', unit_price: 5000)
-    @item4 = @merchant1.items.create!(name: 'Dog Bone', description: 'So chewy', unit_price: 8000)
+    @item2 = @merchant1.items.create!(name: 'Toy Car', description: 'So fast', unit_price: 3000)
+    @item3 = @merchant1.items.create!(name: 'Bouncy Ball', description: 'So bouncy', unit_price: 500)
+    @item4 = @merchant1.items.create!(name: 'Dog Bone', description: 'So chewy', unit_price: 800)
 
     @invoice1 = @customer1.invoices.create!(status: 2)
     @invoice2 = @customer2.invoices.create!(status: 2)

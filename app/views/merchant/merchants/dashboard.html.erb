@@ -6,7 +6,7 @@
 <% end %>
 <h2>Items Ready to Ship</h2>
 <% Item.ready_to_ship(@merchant.id).each do |item| %>
-    <div id= <%= "#{item.item_id}" %>>
+    <div id= <%= "#{item.id}" %>>
       <p><%= item.name %></p>
       <p>Invoice ID: <%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>, Created at: <%= item.created_at.strftime("%A, %B %d, %Y") %></p>
     </div>
