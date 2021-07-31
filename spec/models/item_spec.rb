@@ -14,7 +14,7 @@ RSpec.describe Item do
   end
 
   describe 'class method' do
-    before(:each) do
+    it "creates a list of all items that have not been shipped" do
       @merchant_1 = create(:merchant)
 
       @customers = []
@@ -37,9 +37,7 @@ RSpec.describe Item do
         @transactions << create(:transaction, invoice_id: @invoices.last.id)
         @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 2)
       end
-    end
 
-    it "creates a list of all items that have not been shipped" do
       expect(Item.not_yet_shipped).to eq([
                                           {
                                             "name" => @items[0].name,
@@ -52,6 +50,37 @@ RSpec.describe Item do
                                             "invoice_date" => @invoices[1].created_at
                                           }
                                           ])
+    end
+
+    it " does thing " do
+      @customers2 = []
+      @items2 = []
+      @invoice2 = []
+      @transactions2 = []
+      @invoiceitems = []
+
+      @merchant_2 = create(:merchant)
+      @increment = 100
+      2.times do
+        @customers2 << create(:customer)
+        2.times do
+          @invoice2 << create(:invoice, customer_id: @customers2.last.id)
+          @transactions2 << create(:transaction, invoice_id: @invoice2.last.id)
+          2.times do
+            @items2 << create(:item, merchant_id: @merchant_2.id, unit_price: (100 + @increment))
+            @invoiceitems << create(:invoice_item, item_id: @items2.last.id, invoice_id: @invoice2.last.id, status: 2, quantity: 1, unit_price: @items2.last.unit_price)
+            @increment += 100
+          end
+        end
+      end
+
+      expect(Item.most_popular_items).to eq([
+                                            @items2[7],
+                                            @items2[6],
+                                            @items2[5],
+                                            @items2[4],
+                                            @items2[3]
+                                            ])
     end
   end
 end
