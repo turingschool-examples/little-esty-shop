@@ -1,6 +1,6 @@
-require 'rails_helper' 
+require 'rails_helper'
 
-RSpec.describe 'Admin Invoice Show Page' do 
+RSpec.describe 'Admin Invoice Show Page' do
   before :each do
     @merchant1 = Merchant.create!(name: 'Korbanth')
     @merchant2 = Merchant.create!(name: 'asdf')
@@ -53,12 +53,12 @@ RSpec.describe 'Admin Invoice Show Page' do
       invoice: @invoice2,
       quantity: 1,
       unit_price: 60_000,
-      status: 1) 
+      status: 1)
 
     visit "/admin/invoices/#{@invoice1.id}"
   end
 
-  it 'is on the correct page' do 
+  it 'is on the correct page' do
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
     expect(page).to have_content("Invoice ID: #{@invoice1.id}")
   end
@@ -69,4 +69,8 @@ RSpec.describe 'Admin Invoice Show Page' do
     expect(page).to have_content(@item3.name)
     expect(page).to_not have_content(@item4.name)
   end
-end 
+
+  it 'displays the total revenue generated from all the items on this invoice' do
+    expect(page).to have_content("Total Invoice Revenue Potential: $86,500.00")
+  end
+end

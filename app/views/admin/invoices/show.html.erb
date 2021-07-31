@@ -3,7 +3,8 @@
 <p>Date: <%= @invoice.format_date(@invoice.created_at) %></p>
 <p>Customer: <%= @invoice.customer.first_name %>
 <br>
-
+Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue}") %>
+<br/><br/>
 <h2>Items On This Invoice:</h2>
 <br>
 
@@ -15,5 +16,3 @@
 
 
 <% end %>
-
-
