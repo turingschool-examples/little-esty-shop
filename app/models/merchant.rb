@@ -11,15 +11,21 @@ class Merchant < ApplicationRecord
   end
 
   def self.merchant_invoices(merchant_id)
-    result = Invoice.find_by_sql("SELECT invoices.*, COUNT(merchants.*) AS
-       merchant_count,
-       COUNT(items.*) AS item_count
-       FROM invoices
-       INNER JOIN invoice_items ON invoices.id = invoice_items.invoice_id
-       INNER JOIN items ON invoice_items.item_id = items.id
-       INNER JOIN merchants ON items.merchant_id = merchants.id
-       WHERE merchants.id = #{merchant_id}
-          GROUP BY invoices.id
-      ORDER BY item_count DESC LIMIT 10")
+    Invoice.select("invoices.*, COUNT(merchants.*) AS merchant_count,
+       COUNT(items.*) AS item_count")
+       .joins("INNER JOIN invoice_items ON invoices.id = invoice_items.invoice_id")
+       .joins("INNER JOIN items ON invoice_items.item_id = items.id")
+       .joins("INNER JOIN merchants ON items.merchant_id = merchants.id")
+       .where("merchants.id = ?", merchant_id)
+       .group(:id)
+       .order(Arel.sql("item_count DESC LIMIT 10"))
+  end
+
+  def self.order_by_enabled
+    where("status = 0")
+  end
+
+  def self.order_by_disabled
+    where("status = 1")
   end
 end

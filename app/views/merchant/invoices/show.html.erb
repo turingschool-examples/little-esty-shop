@@ -1,11 +1,10 @@
-<p id="notice"><%= notice %></p>
-
  <p>Invoice ID: <%= @invoice.id %></p>
  <p>Status: <%= @invoice.status %></p>
  <p>Date: <%= @invoice.format_date(@invoice.created_at) %></p>
  <p>Customer: <%= @invoice.customer.first_name %>
     <%= @invoice.customer.last_name %> </p>
-    <br/>
+  Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue}") %>
+      <br/><br/>
  <h2>Items on this invoice:</h2><br/>
 <% @invoice.invoice_items.each do |ii| %>
 
@@ -24,6 +23,8 @@
   </div>
   <br/><br/>
 <% end %>
+
+
 
 <br/>
 <%= link_to 'Edit', edit_merchant_invoice_path(@merchant.id, @invoice.id) %> |
