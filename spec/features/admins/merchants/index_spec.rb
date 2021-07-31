@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Index', type: :feature do
   before :each do
-    @merchant_1 = Merchant.create!(name: 'Tillman Group')
-    @merchant_2 = Merchant.create!(name: 'Kozy Group')
+    @merchant_1 = Merchant.create!(name: 'Tillman Group', status: false)
+    @merchant_2 = Merchant.create!(name: 'Kozy Group', status:true)
 
     visit admin_merchants_path
   end
@@ -16,17 +16,22 @@ RSpec.describe 'Merchant Index', type: :feature do
   it 'has an enable button for each merchant to modify status to enabled' do
     within(:css, "##{@merchant_1.id}") do
 
-      expect(page).to have_content("Enable")
+      expect(page).to have_button("Enable")
     end
   end
 
-  it 'has an disable button for each merchant to modify status to disabled' do
-    expect(page).to have_content("Disable")
+  it 'has an disable button for each merchant to modify status to disabled' do #within block still finding duplicate buttons if status is the same 
+    within(:css, "##{@merchant_1.id}") do
+
+      click_button 'Enable'
+
+      expect(page).to have_button("Disable")
+    end
   end
 
-  it 'has an enable and disable button if a merchants status is nil' do
-    expect(page).to have_content("Enable")
-    expect(page).to have_content("Disable")
-  end
+  it 'can group merchants by status' do
 
+    expect(@merchant_1.name).to_not appear_before('Disabled Merchants')
+    expect(@merchant_2.name).to appear_before('Disabled Merchants')
+  end
 end

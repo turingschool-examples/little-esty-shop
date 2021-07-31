@@ -25,9 +25,10 @@ class Admin:: MerchantsController < ApplicationController
       merchant.disable
     elsif params[:status] == false
       merchant.enable
-    else 
+    else
       merchant.update(status: params[:status])
     end
+
     redirect_to "/admin/merchants"
   end
 

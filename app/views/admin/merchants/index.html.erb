@@ -1,20 +1,15 @@
 <h1>Merchants</h1>
-<% @merchants.each do |merchant| %>
+
+<h2> Enabled Merchants</h2><% @merchants.group_by_enabled.each do |merchant| %>
   <div id=<%= "#{merchant.id}"%>> <%= merchant.name %>
-  <% if merchant.status.nil? %>
-    <%= form_with url: "/admin/merchants/update/#{merchant.id}?status=true", method: :patch, local: true do |f| %>
-      <%= f.submit "Enable" %>
-    <% end %>
     <%= form_with url: "/admin/merchants/update/#{merchant.id}?status=false", method: :patch, local: true do |f| %>
       <%= f.submit "Disable" %>
     <% end %>
-  <% elsif merchant.status == true %>
-    <%= form_with url: "/admin/merchants/update/#{merchant.id}?status=false", method: :patch, local: true do |f| %>
-      <%= f.submit "Disable" %>
-    <% end %>
-  <% elsif merchant.status == false %>
+  <% end %></div>
+
+<h2>Disabled Merchants</h2><% @merchants.group_by_disabled.each do |merchant| %>
+  <div id=<%= "#{merchant.id}"%>> <%= merchant.name %>
     <%= form_with url: "/admin/merchants/update/#{merchant.id}?status=true", method: :patch, local: true do |f| %>
       <%= f.submit "Enable" %>
     <% end %>
   <% end %></div>
-<% end %>
