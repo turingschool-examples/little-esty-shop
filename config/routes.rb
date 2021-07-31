@@ -9,4 +9,11 @@ Rails.application.routes.draw do
 
   resources :items, only: [:edit, :update, :new, :create]
 
+  patch '/admin/merchants/update/:id', to: 'admin/merchants#update_status', as: 'update_status'
+
+  namespace :admin do #resources :admin, module: :admin do (namespace gives: scope, module and rake routes)
+    resources only: [:index]
+    resources :merchants
+    resources :invoices
+  end
 end

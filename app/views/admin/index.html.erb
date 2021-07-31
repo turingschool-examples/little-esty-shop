@@ -1,0 +1,17 @@
+<h2>Admin Dashboard</h2>
+<%= link_to "Dashboard", admin__index_path %>
+<%= link_to "Merchants", admin_merchants_path %>
+<%= link_to "Invoices", admin_invoices_path %>
+
+<h3>Top Customers</h3>
+<ol>
+  <% Customer.admin_top_five_customers.each do |customer| %>
+    <li><%= "#{customer.first_name} " "#{customer.last_name} " "#{customer.transaction_count}"%></li>
+  <% end %>
+</ol>
+
+<h3>Incomplete Invoices</h3>
+<% Invoice.admin_incomplete_invoices.each do |invoice| %>
+  <%= link_to "Invoice # #{invoice.number}", "/admin/invoices/:id" %>
+  <%= invoice.created_at.strftime("%A, %B %d, %Y") %><br>
+<% end.uniq %>
