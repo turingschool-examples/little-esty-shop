@@ -75,10 +75,10 @@ RSpec.describe 'Admin Invoice Show Page' do
 
       within('#status') do
         expect(page).to have_content('Invoice Status: cancelled')
-        expect(page).to have_content('Cancelled')
+        expect(page).to have_content('cancelled')
       end
 
-      page.select 'Completed', from: "invoice[status]" 
+      page.select 'completed', from: "invoice[status]" 
 
       click_on "Submit"
       # expect(page).to have_content('Completed')
