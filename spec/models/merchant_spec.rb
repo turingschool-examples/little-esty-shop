@@ -4,14 +4,14 @@ RSpec.describe Merchant do
   describe 'Factory bot data' do
     before(:each) do
       @merchant_1 = create(:merchant)
-      
+
       @customers = []
       @invoices = []
       @items = []
       @items_2 = []
       @transactions = []
       @invoice_items = []
-      
+
       2.times do
         @customers << create(:customer)
         @invoices << create(:invoice, customer_id: @customers.last.id)
@@ -27,7 +27,7 @@ RSpec.describe Merchant do
         @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 2)
       end
     end
-    
+
     describe 'relationships' do
       it {should have_many(:items)}
       it {should have_many(:invoice_items).through(:items)}
@@ -35,16 +35,16 @@ RSpec.describe Merchant do
       it {should have_many(:transactions).through(:invoices)}
       it {should have_many(:customers).through(:invoices)}
     end
-    
+
     describe 'instance methods' do
       it 'collects enabled items' do
         expect(@merchant_1.enabled_items).to eq(@items)
       end
-      
+
       it 'collects disabled items' do
         expect(@merchant_1.disabled_items).to eq(@items_2)
       end
-    end 
+    end
   end
 
   describe 'class methods' do
@@ -68,7 +68,7 @@ RSpec.describe Merchant do
       customer4 = create(:customer)
       customer5 = create(:customer)
       customer6 = create(:customer)
-      
+
       invoice1 = create(:invoice, customer_id: customer1.id)
       invoice2 = create(:invoice, customer_id: customer2.id)
       invoice3 = create(:invoice, customer_id: customer3.id)
@@ -101,7 +101,7 @@ RSpec.describe Merchant do
       invoice_item8 = create(:invoice_item, quantity: 1, unit_price: 4, item_id: item8.id, invoice_id: invoice8.id, status: 0)
       invoice_item9 = create(:invoice_item, quantity: 1, unit_price: 8, item_id: item9.id, invoice_id: invoice9.id, status: 0)
       invoice_item10 = create(:invoice_item, quantity: 1, unit_price: 7, item_id: item10.id, invoice_id: invoice10.id, status: 0)
-      
+
       transaction1 = create(:transaction, invoice_id: invoice1.id, result: 0)
       transaction2 = create(:transaction, invoice_id: invoice2.id, result: 0)
       transaction3 = create(:transaction, invoice_id: invoice3.id, result: 0)
@@ -112,8 +112,8 @@ RSpec.describe Merchant do
       transaction8 = create(:transaction, invoice_id: invoice8.id, result: 0)
       transaction9 = create(:transaction, invoice_id: invoice9.id, result: 0)
       transaction10 = create(:transaction, invoice_id: invoice10.id, result: 0)
-      
-      data = Merchant.top_merchants 
+
+      data = Merchant.top_merchants
       # require 'pry'; binding.pry
       expect(data).to eq([merchant5, merchant4, merchant3, merchant2, merchant1])
       expect(data[0].revenue).to eq(40)
