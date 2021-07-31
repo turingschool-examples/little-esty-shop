@@ -1,6 +1,8 @@
 class Merchant < ApplicationRecord
   enum status: {enabled: 0, disabled: 1}
   validates :name, presence: true
+  validates :status, presence: true
+
 
   has_many :items
 
