@@ -8,9 +8,9 @@ class Customer < ApplicationRecord
     .where(Arel.sql('transactions.result = 0'))
     .where('items.merchant_id = ?', merchant_id)
     .group(:id).order(Arel.sql('total_transactions desc'))
-  end 
-  
-  def self.admin_top_five_customers #still needs to be tested in the Customer model
+  end
+
+  def self.admin_top_five_customers 
     Customer.select("customers.*, count(transactions.invoice_id) as transaction_count")
     .joins(invoices: :transactions)
     .where('transactions.result = 0')

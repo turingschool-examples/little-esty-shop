@@ -6,7 +6,7 @@ class Invoice < ApplicationRecord
 
   enum status: [:cancelled, 'in progress', :completed]
 
-  def self.admin_incomplete_invoices #still needs to be tested in the Invoice model test
+  def self.admin_incomplete_invoices 
     Invoice.select('invoices.*, invoice_items.invoice_id as number')
     .joins(:invoice_items)
     .where('invoice_items.status != 2')

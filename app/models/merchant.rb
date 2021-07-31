@@ -2,12 +2,10 @@ class Merchant < ApplicationRecord
   has_many :items
 
   def enable
-    merchant = Merchant.find(params[:id])
-    merchant.status = true
+    self.status = true
   end
 
   def disable
-    merchant = Merchant.find(params[:id])
-    merchant.status = false
+    self.status = false
   end
 end
