@@ -13,4 +13,10 @@ class Invoice < ApplicationRecord
     .order(:created_at)
     .uniq
   end
+
+  def self.merchant_invoices(id)
+    joins(:items)
+    .select('invoices.*')
+    .where('merchant_id = ?', id).distinct
+  end
 end
