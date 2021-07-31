@@ -17,3 +17,10 @@
   </div>
     <% end  %>
 <% end %>
+
+
+<div id="top-merchants">
+  <% @merchants.top_merchants.each do |merchant| %>
+  <p><%= @merchants.top_merchants.index(merchant) + 1 %><%= merchant.name %> - <%= number_to_currency(merchant.revenue) %> in sales</p>
+  <% end %>
+</div>
