@@ -9,7 +9,9 @@
     </tr>
   </thead>
 
-<%# fix this %>
+  <div id="create">
+  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
+  </div>
   <tbody>
     <% @merchants.each do |merchant| %>
       <tr id="merchant-<%= merchant.id %>">
@@ -22,5 +24,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Admin Merchant', new_admin_merchant_path %>
