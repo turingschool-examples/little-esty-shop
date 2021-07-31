@@ -62,13 +62,6 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   it 'is on the correct page' do
-    expect(current_path).to eq("/admin/invoices/#{@i.id}")
-    expect(page).to have_content("Invoice Id: #{@i.id}")
-  end
-
-  it 'can take user to invoice edit page' do
-    click_link "Edit"
-
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
     expect(page).to have_content("Invoice ID: #{@invoice1.id}")
   end

@@ -169,24 +169,25 @@ RSpec.describe 'Admin Merchants Index Page' do
 
     expect(page).to_not have_content("#{@customer_6.first_name}")
     expect(page).to_not have_content("#{@customer_7.first_name}")
-  
-  it 'can take the user to create a new merchant' do 
-    within "#create" do 
+  end
+
+  it 'can take the user to create a new merchant' do
+    within "#create" do
       click_link 'Create A New Merchant'
       expect(current_path).to eq(new_admin_merchant_path)
     end
-  end 
+  end
 
-  it 'can display enabled merchants section' do 
-    within "#enabled" do 
+  it 'can display enabled merchants section' do
+    within "#enabled" do
       expect(page).to have_content(@merchant1.name)
       expect(page).to have_content(@merchant3.name)
       expect(page).to have_content(@merchant5.name)
     end
   end
 
-  it 'can display disabled merchants section' do 
-    within "#disabled" do 
+  it 'can display disabled merchants section' do
+    within "#disabled" do
       expect(page).to have_content(@merchant2.name)
       expect(page).to have_content(@merchant4.name)
       expect(page).to have_content(@merchant6.name)
