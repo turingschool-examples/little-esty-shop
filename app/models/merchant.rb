@@ -5,6 +5,14 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+  def self.enabled_merchants
+    where(enabled: true)
+  end
+
+  def self.disabled_merchants
+    where(enabled: false)
+  end
+
   def enabled_items
     items.where(enabled: 0)
   end
@@ -23,3 +31,5 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 end
+
+Merchant.joins(invoices: :transactions).joins(:invoice_items).select('merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue').where('invoices.status = ?', 2).where('transactions.result = ?', 0).group('merchants.name, invoices.id').order(revenue: :desc).limit(5)
