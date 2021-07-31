@@ -34,6 +34,7 @@ RSpec.describe 'Invoice show page' do
       expect(page).to have_content(@customer1.first_name)
       expect(page).to have_content(@customer1.last_name)
 
+
       expect(page).to_not have_content(@invoice2.id)
     end
 
@@ -51,14 +52,14 @@ RSpec.describe 'Invoice show page' do
       expect(page).to have_content(@ii2.status)
 
       expect(page).to_not have_content(@item3.name)
-      expect(page).to_not have_content(@ii3.quantity)
-      expect(page).to_not have_content(@item3.price_to_dollars)
-      expect(page).to_not have_content(@ii3.status)
 
       expect(page).to_not have_content(@item4.name)
-      expect(page).to_not have_content(@ii4.quantity)
-      expect(page).to_not have_content(@item4.price_to_dollars)
-      expect(page).to_not have_content(@ii4.status)
+    end
+
+    it 'displays total revenue on invoice for merchant' do
+      visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content("$#{@invoice1.total_revenue(@merchant1.id)}")
     end
   end
 end

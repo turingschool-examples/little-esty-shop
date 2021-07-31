@@ -47,7 +47,10 @@ RSpec.describe Invoice, type: :model do
     @invoice3.items << [@item3, @item4]
     @invoice4.items << [@item4]
     @invoice5.items << [@item4]
-    @invoice6.items << [@item1, @item2, @item4]
+
+    @ii1 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item1.id, quantity: 2, status: 0)
+    @ii2 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item2.id, quantity: 1, status: 0)
+    @ii3 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item4.id, quantity: 1, status: 0)
   end
 
   describe 'class methods' do
@@ -63,6 +66,10 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice6.merchant_items(@merchant1.id).first.name).to eq(@item1.name)
       expect(@invoice6.merchant_items(@merchant1.id).last.name).to eq(@item2.name)
       expect(@invoice6.merchant_items(@merchant1.id).length).to eq(2)
+    end
+
+    it 'can calculate total revenue for merchant' do
+      expect(@invoice6.total_revenue(@merchant1.id)).to eq(70.00)
     end
   end
 end

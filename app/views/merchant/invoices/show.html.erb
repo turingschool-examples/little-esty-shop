@@ -17,3 +17,5 @@
     <p>Status: shipped</p>
   <% end %>
 <% end %>
+
+<p>Total Revenue: $<%= @invoice.total_revenue(params[:merchant_id]) %> </p>
