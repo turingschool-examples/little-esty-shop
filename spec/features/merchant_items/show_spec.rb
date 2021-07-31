@@ -13,7 +13,9 @@ RSpec.describe 'the merchant items show' do
       expect(page).to have_content('A large quantity of whole milk')
       expect(page).to have_content('500')
     end
+  end
 
+  describe 'interactable elements' do
     it 'has an update link' do
       visit merchant_item_path(@merchant1, @item1)
 
