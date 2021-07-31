@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Admin::Merchants' do
   describe 'index page' do
     before(:each) do
-      @merchant1 = create(:merchant)
-      @merchant2 = create(:merchant)
-      @merchant3 = create(:merchant)
-      @merchant4 = create(:merchant)
-      @merchant5 = create(:merchant, enabled: false)
+      @merchant1 = create(:merchant, enabled: true)
+      @merchant2 = create(:merchant, enabled: true)
+      @merchant3 = create(:merchant, enabled: true)
+      @merchant4 = create(:merchant, enabled: false)
+      @merchant5 = create(:merchant, enabled: nil)
+      @merchant6 = create(:merchant, enabled: nil)
 
       visit '/admin/merchants'
     end
@@ -38,6 +39,27 @@ RSpec.describe 'Admin::Merchants' do
       end
     end
 
+    describe 'group by status' do
+      it 'has merchants grouped by status on page' do
+        within('#green') do
+          expect(page).to have_content("Enabled Merchants")
+          expect(page).to have_content(@merchant1.name)
+          expect(page).to have_content(@merchant2.name)
+          expect(page).to have_content(@merchant3.name)
+        end
+
+        within('#red') do
+          expect(page).to have_content("Disabled Merchants")
+          expect(page).to have_content(@merchant4.name)
+        end
+
+        within('#no-status') do
+          expect(page).to have_content(@merchant5.name)
+          expect(page).to have_content(@merchant6.name)
+        end
+      end
+    end
+
     describe 'Merchant Enable Button' do
       it 'has a button to disable/enable each merchant' do
         expect(page).to have_button("Disable #{@merchant1.name}")
@@ -47,18 +69,10 @@ RSpec.describe 'Admin::Merchants' do
 
         expect(current_path).to eq(admin_merchants_path)
         expect(page).to have_button("Disable #{@merchant5.name}")
-      end
-    end
 
-    describe 'group by status' do
-      it 'page shows 2 sections enabled merchants and diabled merchants' do
+        click_on "Disable #{@merchant1.name}"
 
-        within('#green') do
-          expect(page).to have_content("Enabled Merchants")
-        end
-
-        within('#red')
-        expect(page).to have_content("Disabled Merchants")
+        expect(page).to have_button("Enable #{@merchant1.name}")
       end
     end
 
