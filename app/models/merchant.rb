@@ -22,14 +22,29 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_merchants
-    joins(invoices: :invoice_items)
-    .joins(:transactions)
-    .select('merchants.name, merchants.id, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    # joins(items: :invoice_items)
+    # .joins(:transactions)
+    select('merchants.name, merchants.id, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    .joins(items: {invoice_items: {invoice: :transactions}})
     .where('transactions.result = ?', 0)
-    .group('merchants.id, invoice_items.quantity, invoice_items.unit_price')
+    .group('merchants.id')
     .order(revenue: :desc)
     .limit(5)
+
+    # joins(invoices: :transactions).
+    # joins(:invoice_items).
+    # select('merchants.name, merchants.id, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    # .where('invoices.status = ?', 2)
+    # .where('transactions.result = ?', 0)
+    # .group('merchants.id, merchants.name, invoices.id')
+    # .order(revenue: :desc)
+    # .limit(5).distinct
   end
 end
 
-Merchant.joins(invoices: :transactions).joins(:invoice_items).select('merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue').where('invoices.status = ?', 2).where('transactions.result = ?', 0).group('merchants.name, invoices.id').order(revenue: :desc).limit(5)
+Merchant.joins(invoices: :transactions).
+joins(:invoice_items).select('merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue').where('invoices.status = ?', 2)
+.where('transactions.result = ?', 0)
+.group('merchants.name, invoices.id')
+.order(revenue: :desc)
+.limit(5)
