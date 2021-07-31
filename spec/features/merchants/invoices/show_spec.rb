@@ -97,11 +97,15 @@ RSpec.describe "The Merchant Invoice show page" do
     within("div#id-#{@invoice_item1.id}") do
       select "shipped", :from => "status"
       click_button("Update Item Status")
+
       @invoice_item1.reload
+
       expect(page).to have_content("shipped")
     end
     expect(@invoice_item1.status).to eq("shipped")
+  end
 
-
+  it 'displays the total revenue generated from all the items on this invoice' do
+    expect(page).to have_content("Total Invoice Revenue Potential: $26,500.00")
   end
 end
