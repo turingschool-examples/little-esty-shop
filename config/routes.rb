@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resources :invoices, controller: "merchant_invoices"
   end
 
+  patch '/merchants/:merchant_id/items/:id/status', to: 'merchant_items#update_status', as: 'merchant_item_status'
+
 end
