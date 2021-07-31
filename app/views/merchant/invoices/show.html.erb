@@ -1,1 +1,5 @@
-<h1>Merchant Invoice Show Page</h1>
+<h1>Invoice #<%= @invoice.id %></h1>
+
+<p>Status: <%= @invoice.status %></p>
+<p>Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer: <%= Customer.find(@invoice.customer_id).first_name %> <%= Customer.find(@invoice.customer_id).last_name %></p>
