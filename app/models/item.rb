@@ -12,4 +12,13 @@ class Item < ApplicationRecord
     .order("invoice_date asc")
     .as_json(:except => :id)
   end
+  
+  def self.most_popular_items
+    joins(invoices: :transactions)
+    .where("transactions.result = ?", 0)
+    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+    .group(:id)
+    .order('revenue')
+    .limit(5)
+  end
 end
