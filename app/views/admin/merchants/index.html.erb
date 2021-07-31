@@ -2,25 +2,34 @@
 
 <a href=<%= new_admin_merchant_path %>>Create Merchant</a>
 
+<div id="no-status">
+<% @merchants.each do |merchant| %>
+  <% if merchant.enabled.nil? %>
+  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %></p>
+    <%= button_to "Enable #{merchant.name}", enabled_path, params: { :action => 'enable', :enabled => true, :id => merchant.id }, method: :patch %>
+    <%= button_to "Disable #{merchant.name}", enabled_path, params: { :action => 'enable', :enabled => false, :id => merchant.id }, method: :patch  %>
+    <% end %>
+<% end %>
+  </div>
+
 <div id="green">
-<% @merchants.each do |merchant|%>
+<% @merchants.enabled_merchants.each do |merchant| %>
 <p>Enabled Merchants</p>
-<% if merchant.enabled == true %>
     <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %></p>
     <%= button_to "Disable #{merchant.name}", enabled_path, params: { :action => 'enable', :enabled => false, :id => merchant.id }, method: :patch  %>
+  <% end  %>
   </div>
-<% else  %>
+
 <div id="red">
+<% @merchants.disabled_merchants.each do |merchant| %>
   <p>Disabled Merchants</p>
     <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %></p>
     <%= button_to "Enable #{merchant.name}", enabled_path, params: { :action => 'enable', :enabled => true, :id => merchant.id }, method: :patch %>
-  </div>
-    <% end  %>
 <% end %>
-
+  </div>
 
 <div id="top-merchants">
-  <% @merchants.top_merchants.each do |merchant| %>
-  <p><%= @merchants.top_merchants.index(merchant) + 1 %><%= merchant.name %> - <%= number_to_currency(merchant.revenue) %> in sales</p>
+  <% @top_merchants.each do |merchant| %>
+  <p><%= @top_merchants.index(merchant) + 1 %>. <%= merchant.name %> - <%= number_to_currency(merchant.revenue) %> in sales</p>
   <% end %>
 </div>
