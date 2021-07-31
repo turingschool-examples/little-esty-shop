@@ -10,4 +10,8 @@ class Item < ApplicationRecord
     .where('invoice_items.status = 1')
     .order('invoices.created_at')
   end
+
+  def price_to_dollars
+    (unit_price / 100.00).round(2)
+  end
 end
