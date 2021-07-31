@@ -1,5 +1,8 @@
 class Merchant < ApplicationRecord
+  enum status: {enabled: 0, disabled: 1}
   validates :name, presence: true
+  validates :status, presence: true
+
 
   has_many :items
 
@@ -18,5 +21,13 @@ class Merchant < ApplicationRecord
        WHERE merchants.id = #{merchant_id}
           GROUP BY invoices.id
       ORDER BY item_count DESC LIMIT 10")
+  end
+
+  def self.order_by_enabled
+    where("status = 0")
+  end
+
+  def self.order_by_disabled
+    where("status = 1")
   end
 end

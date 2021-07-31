@@ -1,7 +1,4 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Merchant Items</h1>
-
 <table>
   <thead>
     <tr>
@@ -9,11 +6,14 @@
     </tr>
   </thead>
 <%# fix me %>
-  <h3>Merchants Items</h3>
- <tbody>   
+<h3>Merchants Items</h3>
+  <tbody>
     <% @merchant_items.each do |merchant_item| %>
-      <tr>
+      <tr id= "merchant_item-<%= merchant_item.id %>">
         <td><%= merchant_item.name %></td>
+        <td>:<%= merchant_item.enable %>d&nbsp</td>
+        <td><%= button_to merchant_item.enable_opposite, "/merchants/#{merchant_item.merchant_id}/items/#{merchant_item.id}", method: :patch,
+                  params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
         <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id) %></td>
         <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id) %></td>
         <td><%#= link_to 'Destroy', merchant_item , method: :delete, data: { confirm: 'Are you sure?' } %></td>

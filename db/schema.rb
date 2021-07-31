@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_214114) do
 
+ActiveRecord::Schema.define(version: 2021_07_31_184338) do
 
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_07_26_214114) do
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "enable", default: 0
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_07_26_214114) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
   end
 
   create_table "transactions", force: :cascade do |t|

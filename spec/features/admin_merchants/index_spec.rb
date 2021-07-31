@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index Page' do
   before :each do
-    @merchant1 = Merchant.create!(name: 'Tom Holland')
+    @merchant1 = Merchant.create!(name: 'Tom Holland', status: 0)
+    @merchant2 = Merchant.create!(name: 'Beta', status: 1)
+    @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
+    @merchant4 = Merchant.create!(name: 'Delta', status: 1)
+    @merchant5 = Merchant.create!(name: 'Exodus', status: 0)
+    @merchant6 = Merchant.create!(name: 'Fenta', status: 1)
 
     visit '/admin/merchants'
   end
@@ -164,6 +169,29 @@ RSpec.describe 'Admin Merchants Index Page' do
 
     expect(page).to_not have_content("#{@customer_6.first_name}")
     expect(page).to_not have_content("#{@customer_7.first_name}")
+  
+  it 'can take the user to create a new merchant' do 
+    within "#create" do 
+      click_link 'Create A New Merchant'
+      expect(current_path).to eq(new_admin_merchant_path)
+    end
+  end 
+
+  it 'can display enabled merchants section' do 
+    within "#enabled" do 
+      expect(page).to have_content(@merchant1.name)
+      expect(page).to have_content(@merchant3.name)
+      expect(page).to have_content(@merchant5.name)
+    end
+  end
+
+  it 'can display disabled merchants section' do 
+    within "#disabled" do 
+      expect(page).to have_content(@merchant2.name)
+      expect(page).to have_content(@merchant4.name)
+      expect(page).to have_content(@merchant6.name)
+    end
+
   end
 
 end

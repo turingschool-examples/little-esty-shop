@@ -7,11 +7,13 @@ RSpec.describe Merchant do
 
   describe 'validations' do
     it { should validate_presence_of :name }
+    it { should validate_presence_of :status }
+
   end
 
   describe 'Methods' do 
     before :each do 
-      @merchant = Merchant.create!(name: 'Tom Holland')
+      @merchant = Merchant.create!(name: 'Tom Holland', status: 0)
 
       @customer1 = Customer.create!(first_name: 'Green', last_name: 'Goblin')
 
@@ -24,7 +26,7 @@ RSpec.describe Merchant do
       @inv_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 1)
     end 
 
-    describe '::merchant_items' do 
+    describe '#merchant_items' do 
       it 'returns all of the merchants items' do 
         expect(@merchant.merchant_items).to eq([@item1, @item2, @item3])
       end 
@@ -54,5 +56,31 @@ RSpec.describe Merchant do
         expect(Merchant.merchant_invoices(@merchant.id)).to eq([@invoice1, @invoice2])
       end
     end 
+
+    describe '::order_by_enabled' do 
+      it 'selects all merchatn with enabled status' do 
+        @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
+        @merchant2 = Merchant.create!(name: 'Beta', status: 1)
+        @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
+        @merchant4 = Merchant.create!(name: 'Delta', status: 1)
+        @merchant5 = Merchant.create!(name: 'Exodus', status: 0)
+        @merchant6 = Merchant.create!(name: 'Fenta', status: 1)
+
+        expect(Merchant.order_by_enabled).to eq([@merchant, @merchant1, @merchant3, @merchant5])
+      end
+    end
+
+    describe '::order_by_disabled' do 
+      it 'selects all merchant with enabled status' do 
+        @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
+        @merchant2 = Merchant.create!(name: 'Beta', status: 1)
+        @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
+        @merchant4 = Merchant.create!(name: 'Delta', status: 1)
+        @merchant5 = Merchant.create!(name: 'Exodus', status: 0)
+        @merchant6 = Merchant.create!(name: 'Fenta', status: 1)
+
+        expect(Merchant.order_by_disabled).to eq([@merchant2, @merchant4, @merchant6])
+      end
+    end
   end 
 end
