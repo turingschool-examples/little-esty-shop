@@ -31,7 +31,7 @@ RSpec.describe 'Merchants Item Index Page' do
 
       visit merchant_items_path(@merchant1.id)
     end
-    
+
     it "displays a button to disable or enable each item" do
       within "#merchant_item-#{@item1.id}" do
         expect(@item1.enable).to eq('enable')
@@ -57,6 +57,27 @@ RSpec.describe 'Merchants Item Index Page' do
         expect(page).to have_current_path(merchant_items_path(@merchant1.id))
         expect(@item1.enable).to eq('disable')
       end
+    end
+  end
+
+  describe "create a new Item" do
+    # As a merchant
+    # When I visit my items index page
+    # I see a link to create a new item.
+    # When I click on the link,
+    # I am taken to a form that allows me to add item information.
+    # When I fill out the form I click ‘Submit’
+    # Then I am taken back to the items index page
+    # And I see the item I just created displayed in the list of items.
+    # And I see my item was created with a default status of disabled.
+    it "displays a link to 'Create a new item'" do
+      expect(page).to have_link('Create a new item')
+    end
+
+    it "'Create a new item' links to the page to create a new Merchant Item" do
+      click_link('Create a new item')
+
+      expect(current_path).to eq(new_merchant_item_path(@merchant1.id))
     end
   end
 end

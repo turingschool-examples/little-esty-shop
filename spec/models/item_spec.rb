@@ -22,8 +22,8 @@ RSpec.describe Item do
         expect(@item1.enable).to eq('enable')
         expect(@item1.enable_opposite).to eq('disable')
       end
-    end 
-  end 
+    end
+  end
 
   describe 'class methods' do
     before :each do
@@ -98,7 +98,5 @@ RSpec.describe Item do
         expect(expected[5].invoice_id).to eq(@customer_2.invoices[3].id)
       end
     end
-
   end
-
 end
