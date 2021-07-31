@@ -44,7 +44,6 @@ RSpec.describe Item do
       @item_5 = Item.create!(name: '100 Gallon Drum', description: 'for storage', unit_price: 250, merchant_id: @merchant_2.id)
       @item_6 = Item.create!(name: 'Fork Lift', description: 'for transportation', unit_price: 1000, merchant_id: @merchant_2.id)
 
-      # @customer_1 = Customer.create!(first_name: 'Tuco', last_name: 'Salamanca')
       @customer_1.invoices.create!(status: 1)
       InvoiceItem.create!(invoice: @customer_1.invoices[2], item: @item_4, quantity: 1, unit_price: @item_4.unit_price, status: 1)
       @customer_1.invoices[2].transactions.create!(credit_card_number: '1234', credit_card_expiration_date: '', result: 0)
@@ -52,7 +51,6 @@ RSpec.describe Item do
       InvoiceItem.create!(invoice: @customer_1.invoices[3], item: @item_5, quantity: 1, unit_price: @item_5.unit_price, status: 1)
       @customer_1.invoices[3].transactions.create!(credit_card_number: '1234', credit_card_expiration_date: '', result: 0)
 
-      # @customer_2 = Customer.create!(first_name: 'Gustavo', last_name: 'Fring')
       @customer_2.invoices.create!(status: 1)
       InvoiceItem.create!(invoice: @customer_2.invoices[3], item: @item_4, quantity: 2, unit_price: @item_4.unit_price, status: 1)
       @customer_2.invoices[3].transactions.create!(credit_card_number: '9012', credit_card_expiration_date: '', result: 0)

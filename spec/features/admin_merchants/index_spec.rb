@@ -13,6 +13,11 @@ RSpec.describe 'Admin Merchants Index Page' do
     expect(page).to have_content('Merchants Dashboard')
   end
 
+  it 'can take the user back to the dashboard' do
+    click_on 'Return to Dashboard'
+    expect(current_path).to eq('/admin')
+  end
+
   it 'can display all merchants' do
     merchant2 =  Merchant.create!(name: 'Hol Tommand')
 

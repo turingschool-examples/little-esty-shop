@@ -1,21 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Return to Dashboard', "/admin" %>
+<br>
 
-<h1>Admin Invoices</h1>
+<h1>Welcome Admin!</h1>
+<br>
+<h3><em>Invoices Dashboard</em></h3>
+<br>
 
-<table>
+<h5>Incomplete Invoices:</h5>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
-
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <tr id="invoice-<%= invoice.id %>">
-        <td><%= invoice.id %></td>
-        <td><%= invoice.status %></td>
-        <td><%= link_to 'Show', admin_invoice_path(invoice.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_invoice_path(invoice.id) %></td>
+  <tbody id="items-pending-shipment">
+    <tr id="item-table-headers">
+      <th>Item</th>
+      <th>Name</th>
+      <th>Invoice#</th>
+      <th>Invoice Date</th>
+    </tr>
+    <% @pending_items.each_with_index do |item, idx| %>
+      <tr id="item-<%= "#{item.id}_#{item.invoice_id}" %>">
+        <td><%= "#{idx + 1}" %></td>
+        <td><%= "#{item.name}" %></td>
+        <td><%= link_to "#{item.invoice_id}", admin_invoice_path(item.invoice_id) %></td>
+        <td><%= "#{item.format_date(item.invoiced_date)}" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,3 +34,5 @@
 <br>
 
 <%= link_to 'New Admin Invoice', new_admin_invoice_path %>
+
+<p id="notice"><%= notice %></p>
