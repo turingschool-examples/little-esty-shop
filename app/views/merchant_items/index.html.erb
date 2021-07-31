@@ -2,4 +2,16 @@
 
 <% @merchant.items.each do |item| %>
   <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
+  <p>Status: <%= item.status %>
+  <% if item.status == 'Disabled' %>
+    <%= form_with model: [@merchant, item], url: merchant_item_status_path(@merchant, item), method: :patch, local: true do |f| %>
+      <%= f.hidden_field :status, value: 'Enabled' %>
+      <%= f.submit "Enable #{item.name}" %>
+    <% end %>
+  <% elsif item.status == 'Enabled' %>
+    <%= form_with model: [@merchant, item], url: merchant_item_status_path(@merchant, item), method: :patch, local: true do |f| %>
+      <%= f.hidden_field :status, value: 'Disabled' %>
+      <%= f.submit "Disable #{item.name}" %>
+    <% end %>
+  <% end %>
 <% end %>
