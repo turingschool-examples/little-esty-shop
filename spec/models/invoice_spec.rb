@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+
   describe 'relationships' do
     it {should belong_to :customer}
     it {should have_many :transactions}
@@ -59,6 +60,11 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.merchant_invoices(@merchant1.id).last.id).to eq(@invoice6.id)
       expect(Invoice.merchant_invoices(@merchant1.id).length).to eq(4)
     end
+    
+    describe '::admin_incomplete_invoices' do
+      it 'can find all the incomplete invoices listed by least recent created at date' do
+       # expect(Invoice.admin_incomplete_invoices).to eq([@invoice_5, @invoice_4, @invoice_3, @invoice_1])
+     end
   end
 
   describe 'instance methods' do

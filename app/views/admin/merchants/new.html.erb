@@ -1,0 +1,16 @@
+<h1>Create A New Merchant</h1>
+
+<%=  form_with url: admin_merchants_path, method: :post, local: true do |f| %>
+<%= f.label :name, 'Name' %>
+<%= f.text_field :name %>
+<%= f.hidden_field :status, :value => false %>
+<%= f.submit "Create Merchant" %>
+<% end %>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
+<%# Possibly relocate to applications layout html? Duplications %>

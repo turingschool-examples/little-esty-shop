@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_07_31_002516) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "status"
+    t.boolean "status", default: false
   end
 
   create_table "transactions", force: :cascade do |t|

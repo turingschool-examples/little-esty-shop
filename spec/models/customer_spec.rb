@@ -56,4 +56,8 @@ RSpec.describe Customer, type: :model do
   it 'can display top 5 customers' do
     expect(Customer.top_customers(@merchant1.id)).to eq([@customer5, @customer6, @customer2, @customer4, @customer1])
   end
+
+  it 'can calculate the top five customers' do #change above test to customers by merchant_id? Possibly add more items to before :each to change data between the two tests
+    expect(Customer.admin_top_five_customers).to eq([@customer5, @customer6, @customer2, @customer4, @customer1])
+  end
 end
