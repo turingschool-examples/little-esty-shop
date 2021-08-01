@@ -43,7 +43,7 @@ RSpec.describe 'Invoice Show page' do
 
   it 'can display the attributes of each item on the invoice' do
 
-    with(:css "##{@item_1.id}") do
+    within(:css, "##{@item_1.id}") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@ii1.quantity)
       expect(page).to have_content(@ii1.unit_price)
