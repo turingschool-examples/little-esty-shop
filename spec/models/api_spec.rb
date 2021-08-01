@@ -20,6 +20,18 @@ RSpec.describe API do
     expect(expected[:brian].split('=')[-1]).to eq('bfl3tch')
   end
 
+  it 'can retrieve contributor user names from contributor endpoints' do
+    expected = API.user_names
+
+    expect(expected.class).to eq(Hash)
+    expect(expected.keys.length).to eq(4)
+    expect(expected.values.length).to eq(4)
+    expect(expected[:taylor]).to eq('tvaroglu')
+    expect(expected[:michael]).to eq('AbbottMichael')
+    expect(expected[:elliot]).to eq('ElliotOlbright')
+    expect(expected[:brian]).to eq('bfl3tch')
+  end
+
   it 'can retrieve contribution endpoints' do
     expected = API.contributions
 

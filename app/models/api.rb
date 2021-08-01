@@ -29,6 +29,10 @@ class API
   def self.repo_name
     APIS::RepoName.new(contributions[:pulls]).format
   end
+  
+  def self.user_names
+    APIS::UserNames.new(contributors).format
+  end
 
   def self.render_request(endpoint)
     APIS::RenderRequest.new(endpoint).parse
