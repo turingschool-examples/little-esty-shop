@@ -1,27 +1,29 @@
 <div id='header'>
   <h1><%= @merchant.name %></h1>
-  <h3>Invoice #<%= @invoice.id %></h3>
+  <h2>Invoice #<%= @invoice.id %></h2>
 </div>
 
 <div id='invoice_info'>
   <p>Status: <%= @invoice.status %></p>
   <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-</div>
+  <p>Total Revenue: <%= number_to_currency(@invoice.invoice_items.total_revenue / 100) %>
+</div><br>
 
 <div id='customer'>
-  <h4>Customer:</h4>
+  <h3>Customer:</h3>
   <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
-</div>
+</div><br>
 
 <div id='items'>
-  <h4>Items on this Invoice:</h4>
+  <h2>Items on this Invoice:</h2>
   <% @invoice.items.each do |item| %>
     <div id="item-<%= item.id %>">
       <% invoice_item = InvoiceItem.locate(@invoice.id, item.id) %>
-      <p>Item Name: <%= item.name %></p>
-      <p>Quantity: <%= invoice_item.quantity %></p>
-      <p>Unit Price: <%= invoice_item.unit_price %></p>
-      <p>Status: <%= invoice_item.status %></p>
+      <p><b>Item Name:</b> <%= item.name %></p>
+      <p><b>Quantity:</b> <%= invoice_item.quantity %></p>
+      <p><b>Unit Price:</b> <%= invoice_item.unit_price %></p>
+      <p><b>Status:</b> <%= invoice_item.status %></p>
+      <br>
     </div>
   <% end %>
 </div>

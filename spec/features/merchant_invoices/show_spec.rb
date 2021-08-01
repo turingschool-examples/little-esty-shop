@@ -18,6 +18,7 @@ RSpec.describe 'the merchant invoice show' do
       within('#invoice_info') do
         expect(page).to have_content("Status: #{@invoice1.status}")
         expect(page).to have_content("Created on: #{@invoice1.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Total Revenue: $1,200.00")
       end
     end
 
@@ -66,6 +67,6 @@ RSpec.describe 'the merchant invoice show' do
       expect(page).to_not have_content(@item5.name)
       expect(page).to_not have_content(@item8.name)
       expect(page).to_not have_content(@item10.name)
-    end 
+    end
   end
 end

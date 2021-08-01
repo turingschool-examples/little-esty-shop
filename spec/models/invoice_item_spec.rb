@@ -28,6 +28,14 @@ RSpec.describe InvoiceItem, type: :model do
        expect(expected).to eq(@invoice_item1)
      end
     end
+
+    describe '.total_revenue' do
+      it 'calculates total revenue of a collection of invoice items' do
+        expected = @invoice1.invoice_items.total_revenue
+        
+        expect(expected).to eq(120000)
+      end
+    end
   end
 
   # describe 'instance methods' do
