@@ -74,6 +74,6 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   it 'displays the total revenue generated from all the items on this invoice' do
-    expect(page).to have_content("Total Invoice Revenue Potential: $86,500.00")
+    expect(page).to have_content("Total Invoice Revenue Potential: $865.00")
   end
 end
