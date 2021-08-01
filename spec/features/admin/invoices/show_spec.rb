@@ -57,4 +57,17 @@ RSpec.describe 'Admin Invoice Show Page' do
       expect(page).to have_content("#{invoice_item3.status}")
     end
   end
+
+  # As an admin
+  # When I visit an admin invoice show page
+  # Then I see the total revenue that will be generated from this invoice
+  it 'shows the total revenue for the invoice' do
+    invoice_item2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 50, unit_price: @item2.unit_price, status: 'shipped')
+    invoice_item3 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 25, unit_price: @item3.unit_price, status: 'shipped')
+
+    visit admin_invoice_path("#{@invoice1.id}")
+
+    expect(page).to have_content("Total Revenue: $#{@invoice1.total_revenue}")
+    # expect(page).to have_content("Total Revenue: #{@invoice1.total_revenue.number_to_currency(price, unit: "$")}")
+  end
 end

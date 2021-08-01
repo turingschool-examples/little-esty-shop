@@ -12,6 +12,14 @@ RSpec.describe InvoiceItem, type: :model do
     it { should define_enum_for(:status).with_values([:pending, :packaged, :shipped]) }
   end
 
+  # describe 'validations' do
+  #   it { should validate_presence_of(:) }
+  # end
+
+  # before :each do
+
+  # end
+
   describe 'class methods' do
    describe '.locate' do
      it 'locates invoice item with invoice and item ids' do
