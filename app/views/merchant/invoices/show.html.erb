@@ -1,1 +1,21 @@
-<h1>Merchant Invoice Show Page</h1>
+<h1>Invoice #<%= @invoice.id %></h1>
+
+<p>Status: <%= @invoice.status %></p>
+<p>Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer: <%= Customer.find(@invoice.customer_id).first_name %> <%= Customer.find(@invoice.customer_id).last_name %></p>
+
+<h3>Items:</h3>
+<% @invoice.merchant_items(params[:merchant_id]).each do |item| %>
+  <h4><%= item.name %></h4>
+  <p>Quantity: <%= item.quantity %></p>
+  <p>Unit Price: $<%= item.price_to_dollars %></p>
+  <% if item.order_status == 0 %>
+    <p>Status: pending</p>
+  <% elsif item.order_status == 1 %>
+    <p>Status: packaged</p>
+  <% elsif item.order_status == 2 %>
+    <p>Status: shipped</p>
+  <% end %>
+<% end %>
+
+<p>Total Revenue: $<%= @invoice.total_revenue(params[:merchant_id]) %> </p>
