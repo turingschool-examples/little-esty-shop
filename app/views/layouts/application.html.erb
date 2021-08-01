@@ -16,14 +16,12 @@
   </head>
 
   <body>
-    <%= render 'welcome/header' %>
-
+    <%= render partial: 'welcome/header', locals: {commits: @commits, pulls: @pulls} %>
     <% flash.each do |type, msg| %>
       <div class="alert alert-info">
         <%= msg %>
       </div>
     <% end %>
-
     <div class='container'>
       <br/>
     <%= yield %>

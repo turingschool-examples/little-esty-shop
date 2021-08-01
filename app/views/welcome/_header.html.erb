@@ -24,14 +24,22 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Github
+            Github Stats
           </a>
           <ul id="dropdownmenu-github" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="https://github.com/bfl3tch/little-esty-shop" target="_blank"><%= API.repo_name %></a></li>
-            <li><a class="dropdown-item" href="#">Contributors</a></li>
-            <li><a class="dropdown-item" href="#">Commits</a></li>
-            <li><a class="dropdown-item" href="#">Pull Requests</a></li>
-
+            <li><hr class="dropdown-divider"></li>
+            <li><p class="dropdown-item" href="#">Total Commits:</p></li>
+              <!-- <ul><%= "#{API.contributors.keys[0].to_s.capitalize}: #{API.aggregate_by_author(:commits)["tvaroglu"]}"%></ul>
+              <ul><%= "#{API.contributors.keys[1].to_s.capitalize}: #{API.aggregate_by_author(:commits)["AbbottMichael"]}"%></ul>
+              <ul><%= "#{API.contributors.keys[2].to_s.capitalize}: #{API.aggregate_by_author(:commits)["bfl3tch"]}"%></ul>
+              <ul><%= "#{API.contributors.keys[3].to_s.capitalize}: #{API.aggregate_by_author(:commits)["ElliotOlbright"]}"%></ul> -->
+            <li><hr class="dropdown-divider"></li>
+            <li><p class="dropdown-item" href="#">Pull Requests:</p></li>
+              <ul><%= API.contributors.keys[0].to_s.capitalize %></ul>
+              <ul><%= API.contributors.keys[1].to_s.capitalize %></ul>
+              <ul><%= API.contributors.keys[2].to_s.capitalize %></ul>
+              <ul><%= API.contributors.keys[3].to_s.capitalize %></ul>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/refresh">Refresh Stats 🔄</a></li>
           </ul>

@@ -16,7 +16,7 @@ RSpec.describe API do
     expect(expected.values.length).to eq(4)
     expect(expected[:taylor].split('=')[-1]).to eq('tvaroglu')
     expect(expected[:michael].split('=')[-1]).to eq('AbbottMichael')
-    expect(expected[:elliot].split('=')[-1]).to eq('elliotolbright')
+    expect(expected[:elliot].split('=')[-1]).to eq('ElliotOlbright')
     expect(expected[:brian].split('=')[-1]).to eq('bfl3tch')
   end
 

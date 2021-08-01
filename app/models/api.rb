@@ -10,7 +10,7 @@ class API
     {
       taylor: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=tvaroglu',
       michael: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=AbbottMichael',
-      elliot: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=elliotolbright',
+      elliot: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=ElliotOlbright',
       brian: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=bfl3tch'
     }
   end
