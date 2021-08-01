@@ -36,6 +36,12 @@ RSpec.describe 'the merchant items index' do
 
       expect(page).to have_button('Disable Milk')
     end
+
+    it 'has a button to make a new merchant item' do
+      visit merchant_items_path(@merchant1)
+
+      expect(page).to have_button('Create a New Item')
+    end
   end
 
   describe 'interactable elements' do
@@ -58,7 +64,14 @@ RSpec.describe 'the merchant items index' do
       expect(current_path).to eq(merchant_items_path(@merchant1))
       expect('Enabled Items').to appear_before('Milk')
       expect('Milk').to appear_before('Disabled Items')
-      save_and_open_page
+    end
+
+    it "can click on 'Create a New Item' button and be taken to the new page " do
+      visit merchant_items_path(@merchant1)
+
+      click_button('Create a New Item')
+
+      expect(current_path).to eq(new_merchant_item_path(@merchant1))
     end
   end
 end
