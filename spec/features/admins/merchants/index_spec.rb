@@ -20,7 +20,7 @@ RSpec.describe 'Merchant Index', type: :feature do
     end
   end
 
-  it 'has an disable button for each merchant to modify status to disabled' do #within block still finding duplicate buttons if status is the same 
+  it 'has an disable button for each merchant to modify status to disabled' do #within block still finding duplicate buttons if status is the same
     within(:css, "##{@merchant_1.id}") do
 
       click_button 'Enable'
@@ -29,7 +29,7 @@ RSpec.describe 'Merchant Index', type: :feature do
     end
   end
 
-  it 'can group merchants by status' do
+  it 'can group merchants by status' do #wrap both each blocks in a div to be able to test which merchants are appearing in each seciton
 
     expect(@merchant_1.name).to_not appear_before('Disabled Merchants')
     expect(@merchant_2.name).to appear_before('Disabled Merchants')
