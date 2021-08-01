@@ -113,12 +113,16 @@ RSpec.configure do |config|
     @invoice_item8 = InvoiceItem.create!(invoice_id: @invoice8.id, item_id: @item8.id, quantity: 100, unit_price: @item8.unit_price, status: 'packaged')
     @invoice_item9 = InvoiceItem.create!(invoice_id: @invoice9.id, item_id: @item9.id, quantity: 100, unit_price: @item9.unit_price, status: 'pending')
     @invoice_item10 = InvoiceItem.create!(invoice_id: @invoice10.id, item_id: @item10.id, quantity: 100, unit_price: @item10.unit_price, status: 'shipped')
-    invoice_item11 = InvoiceItem.create!(invoice_id: @invoice11.id, item_id: @item11.id, quantity: 100, unit_price: @item11.unit_price, status: 'packaged')
-    invoice_item12 = InvoiceItem.create!(invoice_id: @invoice12.id, item_id: @item12.id, quantity: 100, unit_price: @item12.unit_price, status: 'pending')
+    @invoice_item11 = InvoiceItem.create!(invoice_id: @invoice11.id, item_id: @item11.id, quantity: 100, unit_price: @item11.unit_price, status: 'packaged')
+    @invoice_item12 = InvoiceItem.create!(invoice_id: @invoice12.id, item_id: @item12.id, quantity: 100, unit_price: @item12.unit_price, status: 'pending')
 
     # InvoiceItems with repeat items
-    invoice_item13 = InvoiceItem.create!(invoice_id: @invoice13.id, item_id: @item1.id, quantity: 100, unit_price: @item1.unit_price, status: 'shipped')
-    invoice_item14 = InvoiceItem.create!(invoice_id: @invoice14.id, item_id: @item2.id, quantity: 100, unit_price: @item2.unit_price, status: 'packaged')
+    @invoice_item13 = InvoiceItem.create!(invoice_id: @invoice13.id, item_id: @item1.id, quantity: 100, unit_price: @item1.unit_price, status: 'shipped')
+    @invoice_item14 = InvoiceItem.create!(invoice_id: @invoice14.id, item_id: @item2.id, quantity: 100, unit_price: @item2.unit_price, status: 'packaged')
+
+    # InvoiceItems for invoice 1 to have more items
+    @invoice_item15 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 25, unit_price: @item2.unit_price, status: 'packaged')
+    @invoice_item16 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 75, unit_price: @item2.unit_price, status: 'pending')
 
 
     # Transactions

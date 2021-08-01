@@ -4,3 +4,17 @@
 <p><b>Status:</b> <%= @invoice.status %></p>
 <p><b>Created At:</b> <%= @invoice.created_at.strftime('%A, %b %d, %Y') %></p>
 <p><b>Customer:</b> <%= @customer.first_name %> <%= @customer.last_name %></p>
+<br>
+
+<h3>Invoice Items:</h3>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="invoice_item-<%= invoice_item.id %>">
+    <p><b>Item Name:</b> <% @invoice.items.each do |item| %>
+                           <%= item.name if item.id == invoice_item.item_id %>
+                         <% end %></p>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Unit Price: $<%= (invoice_item.unit_price/100).to_f.round(2) %></p>
+    <p>Status: <%= invoice_item.status %></p>
+    <br>
+  </div>
+<% end %>
