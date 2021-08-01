@@ -129,8 +129,12 @@ RSpec.describe Merchant do
         @invoice_item19 = InvoiceItem.create!(item: @item19, invoice: @invoice1, quantity: 8, unit_price: @item19.unit_price, status: 0)
         @invoice_item20 = InvoiceItem.create!(item: @item20, invoice: @invoice1, quantity: 7, unit_price: @item20.unit_price, status: 0)
 
+        @customer1.invoices.first.transactions.create!(credit_card_number: '1234', credit_card_expiration_date: '', result: 0)
+
+
+        expected = [@item1, @item20, @item4, @item13, @item15]
         expect(@merchant1.top_five_items.length).to eq(5)
-        expect(@merchant1.top_five_items.length).to eq([])
+        expect(@merchant1.top_five_items).to eq(expected)
       end
     end
   end
