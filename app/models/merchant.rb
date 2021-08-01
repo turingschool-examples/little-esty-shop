@@ -24,4 +24,8 @@ class Merchant < ApplicationRecord
   def self.order_by_disabled
     where("status = 1")
   end
+
+  def status_opposite
+    status == 'enabled' ? 'disabled' : 'enabled'
+  end
 end
