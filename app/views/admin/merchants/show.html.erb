@@ -1,0 +1,8 @@
+<h1> <%= @merchant.name%>'s show page </h1>
+</br>
+
+<h3>Name: <%= @merchant.name %> </h3>
+</br>
+
+<h3> Click this link to <%= link_to "update #{@merchant.name}", edit_admin_merchant_path(@merchant.id) %>
+</br>
