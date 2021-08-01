@@ -11,13 +11,13 @@ RSpec.describe InvoiceItem, type: :model do
   describe 'enum status' do
     it { should define_enum_for(:status).with_values([:pending, :packaged, :shipped]) }
   end
-  
+
   # describe 'validations' do
   #   it { should validate_presence_of(:) }
   # end
 
   # before :each do
-    
+
   # end
 
   # describe 'class methods' do
@@ -25,8 +25,11 @@ RSpec.describe InvoiceItem, type: :model do
   #   end
   # end
 
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
+  describe 'instance methods' do
+    describe '#total' do
+      it 'calculates total for an invoice item' do
+        expect(@invoice_item1.total).to eq(50000)
+      end
+    end
+  end
 end
