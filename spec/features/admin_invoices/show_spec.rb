@@ -76,4 +76,14 @@ RSpec.describe 'Admin Invoice Show Page' do
   it 'displays the total revenue generated from all the items on this invoice' do
     expect(page).to have_content("Total Invoice Revenue Potential: $865.00")
   end
+
+  it 'can update invoice status: happy path' do 
+    expect(page).to have_field(:status)
+
+    select "completed", :from => "status"
+    click_button("Update Invoice Status")
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+    expect(page).to have_content("Invoice status successfully updated!")
+  end 
 end
