@@ -12,3 +12,16 @@
   <h4>Customer:</h4>
   <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </div>
+
+<div id='items'>
+  <h4>Items on this Invoice:</h4>
+  <% @invoice.items.each do |item| %>
+    <div id="item-<%= item.id %>">
+      <% invoice_item = InvoiceItem.locate(@invoice.id, item.id) %>
+      <p>Item Name: <%= item.name %></p>
+      <p>Quantity: <%= invoice_item.quantity %></p>
+      <p>Unit Price: <%= invoice_item.unit_price %></p>
+      <p>Status: <%= invoice_item.status %></p>
+    </div>
+  <% end %>
+</div>
