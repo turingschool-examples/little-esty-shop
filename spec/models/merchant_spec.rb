@@ -76,5 +76,12 @@ RSpec.describe Merchant do
         expect(Merchant.order_by_disabled).to eq([@merchant2, @merchant4, @merchant6])
       end
     end
+
+    describe '#enable_opposite' do
+      it "returns the opposite of the item's enabled/disabled status; " do
+        expect(@merchant.status).to eq('enabled')
+        expect(@merchant.status_opposite).to eq('disabled')
+      end
+    end
   end
 end
