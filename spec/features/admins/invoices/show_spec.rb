@@ -50,4 +50,14 @@ RSpec.describe 'Invoice Show page' do
       expect(page).to have_content(@ii1.status)
     end
   end
+
+  it 'can update an invoice status' do
+    select('in progress', :from => 'status').select_option
+
+    click_on "Update Invoice Status"
+
+    @invoice_1.reload
+
+    expect(@invoice_1.status).to eq('in progress')
+  end
 end

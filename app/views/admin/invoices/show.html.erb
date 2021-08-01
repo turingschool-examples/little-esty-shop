@@ -11,10 +11,22 @@
 <h3>Invoice Items</h3>
 <% @invoice.items.each do |item| %>
   <h4><%= item.name %></h4>
-  <% item.invoice_items.each do |ii| %>
-    <p>Quantity: <%= ii.quantity %></p>
-    <p>Unit Price: <%= ii.unit_price %></p>
-    <p>Status: <%= ii.status %></p>
-    <%= ii.item_id %>
-  <% end %>
+  <%# <% item.invoice_items.each do |ii| %>
+    <%# <!-- <p>Quantity: <%= ii.quantity %>
+    <%# <!-- <p>Unit Price: <%= ii.unit_price %>
+    <%# <!-- <p>Status: <%= ii.status %>
+    <%# <%= ii.item_id %>
+  <%# <% end %>
+<% end %>
+
+
+<div id="status"><%= form_with url: admin_invoice_path(@invoice.id), method: :patch, local: true do |f| %>
+<%= f.select :status, [:cancelled, 'in progress', :completed], :value => @invoice.status %>
+<%= f.submit "Update Invoice Status" %>
+<% end %></div>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
 <% end %>

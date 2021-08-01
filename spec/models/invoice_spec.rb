@@ -62,8 +62,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe '::admin_incomplete_invoices' do
-      it 'can find all the incomplete invoices listed by least recent created at date' do
-       # expect(Invoice.admin_incomplete_invoices).to eq([@invoice_5, @invoice_4, @invoice_3, @invoice_1])
+      it 'can find all the incomplete invoices listed by least recent created at date' do #returns only one 'completed' invoice (invoice6)
+       # expect(Invoice.admin_incomplete_invoices).to eq([@invoice1, @invoice2, @invoice4, @invoice5])
      end
   end
 
@@ -79,4 +79,4 @@ RSpec.describe Invoice, type: :model do
     end
   end
 end
-end 
+end
