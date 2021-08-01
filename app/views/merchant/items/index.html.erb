@@ -22,3 +22,39 @@
     <% end %>
   </tbody>
 </table>
+
+<table id='top-item-table' class="table table-light">
+  <thead>
+    <tr>
+      <th style="text-align:center">Top 5 Items</th>
+    </tr>
+  </thead>
+  <!-- Then I see the names of the top 5 most popular items ranked by total revenue generated
+  And I see that each item name links to my merchant item show page for that item
+  And I see the total revenue generated next to each item name -->
+  <tbody>
+
+        <tr>
+          <td colspan="3">
+            <table class="table mb-0 table-striped table-hover">
+              <tr id="item-table-headers">
+                <th class="table-info">Item Rank:</th>
+                <th class="table-info">Item Name:</th>
+                <th class="table-info">Total Revenue Generated:</th>
+              </tr>
+              <tr id="merchant-top-items">
+                <% @merchant.top_five_items.each_with_index do |item, idx| %>
+                  <tr id="item-<%= item.id %>">
+                    <td><%= "#{idx + 1}" %></td>
+                    <td><a class="btn btn-secondary btn-sm" href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %>><%= "#{item.name}" %></td>
+                    <td><%= number_to_currency(("#{item.total_item_price}".to_i)/100.00) %></td>
+                  </tr>
+                <% end %>
+              </tr>
+             </table>
+             <br>
+           </td>
+        </tr>
+
+  </tbody>
+</table>
