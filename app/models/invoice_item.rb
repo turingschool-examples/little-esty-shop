@@ -8,8 +8,8 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
 
-  def change_status(status)
-    update(status: status.downcase)
-  end
+  # def change_status(status)
+  #   update(status: status.downcase)
+  # end
 
 end

@@ -16,10 +16,10 @@
   <div id=<%="id-#{ii.id}" %>>
 
 <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |form| %>
-    <%= form.hidden_field :ii_id, value: ii.id %>
-    <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
+  <%= form.hidden_field :ii_id, value: ii.id %>
+  <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
   <%= form.submit "Update Item Status" %>
-  <% end %>
+<% end %>
 
   </div>
   <br/><br/>
