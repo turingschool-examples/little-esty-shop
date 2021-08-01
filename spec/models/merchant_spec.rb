@@ -114,7 +114,6 @@ RSpec.describe Merchant do
       transaction10 = create(:transaction, invoice_id: invoice10.id, result: 0)
 
       data = Merchant.top_merchants
-      # require 'pry'; binding.pry
       expect(data).to eq([merchant5, merchant4, merchant3, merchant2, merchant1])
       expect(data[0].revenue).to eq(40)
       expect(data[4].revenue).to eq(20)
