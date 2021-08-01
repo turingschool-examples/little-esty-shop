@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Merchants Item Index Page' do
   before :each do
     @merchant2 = Merchant.create!(name: 'Mary Jane')
-    @item3 = Item.create!(name: 'upside down kiss', description: 'That Mary jane Swag', unit_price: 15000, merchant_id: @merchant2.id)
+    @wrongitem = Item.create!(name: 'upside down kiss', description: 'That Mary jane Swag', unit_price: 15000, merchant_id: @merchant2.id)
 
     @customer1 = Customer.create!(first_name: 'Ben', last_name: 'Franklin')
     @invoice1 = @customer1.invoices.create!(status: 0)
@@ -31,26 +31,29 @@ RSpec.describe 'Merchants Item Index Page' do
     @item19 = Item.create!(name: 'bnbv', description: '19', unit_price: 3675, merchant_id: @merchant1.id)
     @item20 = Item.create!(name: 'poiu', description: '20', unit_price: 9764, merchant_id: @merchant1.id)
 
-    @invoice_item1 = InvoiceItem.create!(item: @item1, invoice: @invoice1, quantity: 1, unit_price: @item1.unit_price, status: 0)
-    @invoice_item2 = InvoiceItem.create!(item: @item2, invoice: @invoice1, quantity: 1, unit_price: @item2.unit_price, status: 0)
+    @invoice_item1 = InvoiceItem.create!(item: @item1, invoice: @invoice1, quantity: 10, unit_price: @item1.unit_price, status: 0)
+    @invoice_item2 = InvoiceItem.create!(item: @item2, invoice: @invoice1, quantity: 3, unit_price: @item2.unit_price, status: 0)
     @invoice_item3 = InvoiceItem.create!(item: @item3, invoice: @invoice1, quantity: 1, unit_price: @item3.unit_price, status: 0)
-    @invoice_item4 = InvoiceItem.create!(item: @item4, invoice: @invoice1, quantity: 1, unit_price: @item4.unit_price, status: 0)
+    @invoice_item4 = InvoiceItem.create!(item: @item4, invoice: @invoice1, quantity: 7, unit_price: @item4.unit_price, status: 0)
     @invoice_item5 = InvoiceItem.create!(item: @item5, invoice: @invoice1, quantity: 1, unit_price: @item5.unit_price, status: 0)
-    @invoice_item6 = InvoiceItem.create!(item: @item6, invoice: @invoice1, quantity: 1, unit_price: @item6.unit_price, status: 0)
-    @invoice_item7 = InvoiceItem.create!(item: @item7, invoice: @invoice1, quantity: 1, unit_price: @item7.unit_price, status: 0)
-    @invoice_item8 = InvoiceItem.create!(item: @item8, invoice: @invoice1, quantity: 1, unit_price: @item8.unit_price, status: 0)
-    @invoice_item9 = InvoiceItem.create!(item: @item9, invoice: @invoice1, quantity: 1, unit_price: @item9.unit_price, status: 0)
-    @invoice_item10 = InvoiceItem.create!(item: @item10, invoice: @invoice1, quantity: 1, unit_price: @item10.unit_price, status: 0)
-    @invoice_item11 = InvoiceItem.create!(item: @item11, invoice: @invoice1, quantity: 1, unit_price: @item11.unit_price, status: 0)
-    @invoice_item12 = InvoiceItem.create!(item: @item12, invoice: @invoice1, quantity: 1, unit_price: @item12.unit_price, status: 0)
-    @invoice_item13 = InvoiceItem.create!(item: @item13, invoice: @invoice1, quantity: 1, unit_price: @item13.unit_price, status: 0)
+    @invoice_item6 = InvoiceItem.create!(item: @item6, invoice: @invoice1, quantity: 6, unit_price: @item6.unit_price, status: 0)
+    @invoice_item7 = InvoiceItem.create!(item: @item7, invoice: @invoice1, quantity: 5, unit_price: @item7.unit_price, status: 0)
+    @invoice_item8 = InvoiceItem.create!(item: @item8, invoice: @invoice1, quantity: 4, unit_price: @item8.unit_price, status: 0)
+    @invoice_item9 = InvoiceItem.create!(item: @item9, invoice: @invoice1, quantity: 2, unit_price: @item9.unit_price, status: 0)
+    @invoice_item10 = InvoiceItem.create!(item: @item10, invoice: @invoice1, quantity: 11, unit_price: @item10.unit_price, status: 0)
+    @invoice_item11 = InvoiceItem.create!(item: @item11, invoice: @invoice1, quantity: 4, unit_price: @item11.unit_price, status: 0)
+    @invoice_item12 = InvoiceItem.create!(item: @item12, invoice: @invoice1, quantity: 5, unit_price: @item12.unit_price, status: 0)
+    @invoice_item13 = InvoiceItem.create!(item: @item13, invoice: @invoice1, quantity: 3, unit_price: @item13.unit_price, status: 0)
     @invoice_item14 = InvoiceItem.create!(item: @item14, invoice: @invoice1, quantity: 1, unit_price: @item14.unit_price, status: 0)
-    @invoice_item15 = InvoiceItem.create!(item: @item15, invoice: @invoice1, quantity: 1, unit_price: @item15.unit_price, status: 0)
-    @invoice_item16 = InvoiceItem.create!(item: @item16, invoice: @invoice1, quantity: 1, unit_price: @item16.unit_price, status: 0)
-    @invoice_item17 = InvoiceItem.create!(item: @item17, invoice: @invoice1, quantity: 1, unit_price: @item17.unit_price, status: 0)
-    @invoice_item18 = InvoiceItem.create!(item: @item18, invoice: @invoice1, quantity: 1, unit_price: @item18.unit_price, status: 0)
-    @invoice_item19 = InvoiceItem.create!(item: @item19, invoice: @invoice1, quantity: 1, unit_price: @item19.unit_price, status: 0)
-    @invoice_item20 = InvoiceItem.create!(item: @item20, invoice: @invoice1, quantity: 1, unit_price: @item20.unit_price, status: 0)
+    @invoice_item15 = InvoiceItem.create!(item: @item15, invoice: @invoice1, quantity: 9, unit_price: @item15.unit_price, status: 0)
+    @invoice_item16 = InvoiceItem.create!(item: @item16, invoice: @invoice1, quantity: 4, unit_price: @item16.unit_price, status: 0)
+    @invoice_item17 = InvoiceItem.create!(item: @item17, invoice: @invoice1, quantity: 12, unit_price: @item17.unit_price, status: 0)
+    @invoice_item18 = InvoiceItem.create!(item: @item18, invoice: @invoice1, quantity: 13, unit_price: @item18.unit_price, status: 0)
+    @invoice_item19 = InvoiceItem.create!(item: @item19, invoice: @invoice1, quantity: 8, unit_price: @item19.unit_price, status: 0)
+    @invoice_item20 = InvoiceItem.create!(item: @item20, invoice: @invoice1, quantity: 7, unit_price: @item20.unit_price, status: 0)
+
+    @customer1.invoices.first.transactions.create!(credit_card_number: '1234', credit_card_expiration_date: '', result: 0)
+
 
     visit merchant_items_path(@merchant1.id)
   end
@@ -65,7 +68,7 @@ RSpec.describe 'Merchants Item Index Page' do
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item2.name)
-    expect(page).to_not have_content(@item3.name)
+    expect(page).to_not have_content(@wrongitem.name)
   end
 
   describe "item disable/enable" do
@@ -124,19 +127,62 @@ RSpec.describe 'Merchants Item Index Page' do
     end
   end
 
-  #
-  #   As a merchant
-  # When I visit my items index page
-  # Then I see the names of the top 5 most popular items ranked by total revenue generated
-  # And I see that each item name links to my merchant item show page for that item
-  # And I see the total revenue generated next to each item name
-  #
-  # Notes on Revenue Calculation:
-  #
-  # Only invoices with at least one successful transaction should count towards revenue
-  # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-  # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-    it 'shows the names of the top 5 most popular items ranked by total revenue generated'
-    it 'has item names that link to their merchant item show pages'
-    it 'displays the total revenue generated next to each item name'
+  describe 'the top five items table for this merchant' do
+
+    it 'shows the names of the top 5 most popular items' do
+      within('table#top-item-table') do
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@item20.name)
+        expect(page).to have_content(@item4.name)
+        expect(page).to have_content(@item13.name)
+        expect(page).to have_content(@item15.name)
+      end
+    end
+
+    it 'orders those top 5 items by revenue generated' do
+      within('table#top-item-table') do
+        expect(@item1.name).to appear_before(@item20.name)
+        expect(@item20.name).to appear_before(@item4.name)
+        expect(@item4.name).to appear_before(@item13.name)
+        expect(@item13.name).to appear_before(@item15.name)
+      end
+    end
+
+    it 'has the top 5 item names as links to their merchant item show pages' do
+      within('table#top-item-table') do
+        expect(page).to have_link(@item1.name)
+        expect(page).to have_link(@item20.name)
+        expect(page).to have_link(@item4.name)
+        expect(page).to have_link(@item13.name)
+        expect(page).to have_link(@item15.name)
+      end
+    end
+
+    it 'redirects to the merchant item show pages after you click the name links' do
+      within('table#top-item-table') do
+        click_on "#{@item1.name}"
+
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+      end
+    end
+
+    it 'displays the total revenue generated next to each item name' do
+      within("tr#item-#{@item1.id}") do
+        expect(page).to have_content("$20,000.00")
+      end
+      within("tr#item-#{@item20.id}") do
+        expect(page).to have_content("$13,669.60")
+      end
+      within("tr#item-#{@item4.id}") do
+        expect(page).to have_content("$11,900.00")
+      end
+      within("tr#item-#{@item13.id}") do
+        expect(page).to have_content("$9,000.00")
+      end
+      within("tr#item-#{@item15.id}") do
+        expect(page).to have_content("$7,560.00")
+      end
+
+    end
+  end
 end
