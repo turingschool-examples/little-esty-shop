@@ -32,20 +32,25 @@
           <% user_names = API.user_names %>
           <!-- <%# total_commits = API.aggregate_by_author(:commits) %> -->
           <!-- <%# total_pulls = API.aggregate_by_author(:pulls) %> -->
+          <!-- Placeholder, proxy for edge case when API rate limit is hit, to keep method calls consistent within navbar items: -->
+          <% dummy_hash = {'tvaroglu' => 0, 'AbbottMichael' => 0, 'ElliotOlbright' => 0, 'bfl3tch' => 0} %>
+          <!-- Comment the following two lines out (and uncomment the real method calls 4 lines above) to hit the actual endpoints: -->
+          <% total_commits = dummy_hash %>
+          <% total_pulls = dummy_hash %>
           <ul id="dropdownmenu-github" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="https://github.com/bfl3tch/little-esty-shop" target="_blank"><%= repo_name %></a></li>
             <li><hr class="dropdown-divider"></li>
             <li class="dropdown-item"><strong>Total Commits:</strong></li>
-              <ul><%= "#{user_names[:taylor]}: " %></ul>
-              <ul><%= "#{user_names[:michael]}: " %></ul>
-              <ul><%= "#{user_names[:elliot]}: " %></ul>
-              <ul><%= "#{user_names[:brian]}: " %></ul>
+              <ul><%= "#{user_names[:taylor]}: " "#{total_commits['tvaroglu']}"%></ul>
+              <ul><%= "#{user_names[:michael]}: " "#{total_commits['AbbottMichael']}"%></ul>
+              <ul><%= "#{user_names[:elliot]}: " "#{total_commits['ElliotOlbright']}"%></ul>
+              <ul><%= "#{user_names[:brian]}: " "#{total_commits['bfl3tch']}"%></ul>
             <li><hr class="dropdown-divider"></li>
             <li class="dropdown-item"><strong>Pull Requests:</strong></li>
-              <ul><%= "#{user_names[:taylor]}: " %></ul>
-              <ul><%= "#{user_names[:michael]}: " %></ul>
-              <ul><%= "#{user_names[:elliot]}: " %></ul>
-              <ul><%= "#{user_names[:brian]}: " %></ul>
+              <ul><%= "#{user_names[:taylor]}: " "#{total_pulls['tvaroglu']}"%></ul>
+              <ul><%= "#{user_names[:michael]}: " "#{total_pulls['AbbottMichael']}" %></ul>
+              <ul><%= "#{user_names[:elliot]}: " "#{total_pulls['ElliotOlbright']}" %></ul>
+              <ul><%= "#{user_names[:brian]}: " "#{total_pulls['bfl3tch']}" %></ul>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/refresh">Refresh Stats 🔄</a></li>
           </ul>
