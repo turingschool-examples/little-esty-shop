@@ -6,11 +6,14 @@ class Invoice < ApplicationRecord
 
   enum status: [:cancelled, 'in progress', :completed]
 
-  def self.admin_incomplete_invoices 
+  def self.admin_incomplete_invoices
     Invoice.select('invoices.*, invoice_items.invoice_id as number')
     .joins(:invoice_items)
     .where('invoice_items.status != 2')
     .order(:created_at)
     .uniq
   end
+
+  
+  #Merchant.select('merchants.*', 'transactions.result', 'invoices.*').joins(:transactions) -- method to get top 5 revenue merchants
 end

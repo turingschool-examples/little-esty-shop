@@ -1,0 +1,20 @@
+<%= link_to "Dashboard", admin__index_path %>
+<%= link_to "Merchants", admin_merchants_path %>
+<%= link_to "Invoices", admin_invoices_path %></br></br>
+
+<h2>Invoice #<%= @invoice.id %></h2>
+<p>Status: <%= @invoice.status %></p>
+<p>Created At: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<%# <%= @invoice.customer_id.first_name %>
+<%# <%= @invoice.customer_id.last_name %>
+
+<h3>Invoice Items</h3>
+<% @invoice.items.each do |item| %>
+  <h4><%= item.name %></h4>
+  <% item.invoice_items.each do |ii| %>
+    <p>Quantity: <%= ii.quantity %></p>
+    <p>Unit Price: <%= ii.unit_price %></p>
+    <p>Status: <%= ii.status %></p>
+    <%= ii.item_id %>
+  <% end %>
+<% end %>
