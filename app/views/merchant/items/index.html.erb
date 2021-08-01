@@ -9,7 +9,7 @@
 <%# fix me %>
 <h3>Merchants Items</h3>
   <tbody>
-    <% @merchant_items.each do |merchant_item| %>
+    <% @merchant.items.each do |merchant_item| %>
       <tr id= "merchant_item-<%= merchant_item.id %>">
         <td><%= merchant_item.name %></td>
         <td>:<%= merchant_item.enable %>d&nbsp</td>

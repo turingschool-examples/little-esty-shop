@@ -6,10 +6,6 @@ class Merchant < ApplicationRecord
 
   has_many :items
 
-  def merchant_items
-    items.all
-  end
-
   def self.merchant_invoices(merchant_id)
     Invoice.select("invoices.*, COUNT(merchants.*) AS merchant_count,
        COUNT(items.*) AS item_count")

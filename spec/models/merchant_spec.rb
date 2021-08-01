@@ -11,8 +11,8 @@ RSpec.describe Merchant do
 
   end
 
-  describe 'Methods' do 
-    before :each do 
+  describe 'Methods' do
+    before :each do
       @merchant = Merchant.create!(name: 'Tom Holland', status: 0)
 
       @customer1 = Customer.create!(first_name: 'Green', last_name: 'Goblin')
@@ -24,16 +24,10 @@ RSpec.describe Merchant do
       @item3 = Item.create!(name: 'upside down kiss', description: 'That Mary jane Swag', unit_price: '15000', merchant_id: @merchant.id)
 
       @inv_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 1)
-    end 
-
-    describe '#merchant_items' do 
-      it 'returns all of the merchants items' do 
-        expect(@merchant.merchant_items).to eq([@item1, @item2, @item3])
-      end 
     end
-    
-    describe '::merchant_invoice' do 
-      it 'returns all invoices with that merchants items' do 
+
+    describe '::merchant_invoice' do
+      it 'returns all invoices with that merchants items' do
         @merchant = Merchant.create!(name: 'Tom Holland')
         @merchant2 = Merchant.create!(name: 'Tom Holland')
 
@@ -55,10 +49,10 @@ RSpec.describe Merchant do
 
         expect(Merchant.merchant_invoices(@merchant.id)).to eq([@invoice1, @invoice2])
       end
-    end 
+    end
 
-    describe '::order_by_enabled' do 
-      it 'selects all merchatn with enabled status' do 
+    describe '::order_by_enabled' do
+      it 'selects all merchatn with enabled status' do
         @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
         @merchant2 = Merchant.create!(name: 'Beta', status: 1)
         @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
@@ -70,8 +64,8 @@ RSpec.describe Merchant do
       end
     end
 
-    describe '::order_by_disabled' do 
-      it 'selects all merchant with enabled status' do 
+    describe '::order_by_disabled' do
+      it 'selects all merchant with enabled status' do
         @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
         @merchant2 = Merchant.create!(name: 'Beta', status: 1)
         @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
@@ -82,5 +76,5 @@ RSpec.describe Merchant do
         expect(Merchant.order_by_disabled).to eq([@merchant2, @merchant4, @merchant6])
       end
     end
-  end 
+  end
 end
