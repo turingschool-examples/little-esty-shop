@@ -71,8 +71,8 @@ RSpec.describe "The Merchant Invoice show page" do
   end
 
   it 'displays the price that the item sold for' do
-    expect(page).to have_content("$1,500.00")
-    expect(page).to have_content("$25,000.00")
+    expect(page).to have_content("$15.00")
+    expect(page).to have_content("$250.00")
   end
 
   it 'displays the invoice item status' do
@@ -91,7 +91,8 @@ RSpec.describe "The Merchant Invoice show page" do
   it 'actually changes the invoice item status' do
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@invoice_item1.quantity)
-    expect(page).to have_content("$25,000")
+
+    expect(page).to have_content("$250.00")
     expect(page).to have_content("packaged")
 
     within("div#id-#{@invoice_item1.id}") do
@@ -106,6 +107,6 @@ RSpec.describe "The Merchant Invoice show page" do
   end
 
   it 'displays the total revenue generated from all the items on this invoice' do
-    expect(page).to have_content("Total Invoice Revenue Potential: $26,500.00")
+    expect(page).to have_content("Total Invoice Revenue Potential: $265.00")
   end
 end
