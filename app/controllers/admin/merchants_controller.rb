@@ -30,6 +30,7 @@ class Admin::MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_model_params)
+    return redirect_back(fallback_location: admin_merchants_path) if params[:direct] == 'status change'
     redirect_to admin_merchant_path(merchant.id), notice: "Item successfully updated."
   end
 
@@ -40,7 +41,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def merchant_model_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:name, :status)
   end
 end
 
