@@ -26,17 +26,17 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Github Stats
           </a>
-          <!-- all data from Github API calls are stored below via PORO method calls (return values for user contribs are all hashes). -->
-            <!-- These variables are then rendered individually within the navbar header drop-downs for each statistic -->
+        <!-- all data from Github API calls are stored below via PORO method calls (return values for user contribs are all hashes). -->
+          <!-- These variables are then rendered individually within the navbar header drop-downs for each statistic -->
           <% repo_name = API.repo_name %>
           <% user_names = API.user_names %>
-          <!-- <%# total_commits = API.aggregate_by_author(:commits) %> -->
-          <!-- <%# total_pulls = API.aggregate_by_author(:pulls) %> -->
-          <!-- Placeholder, proxy for edge case when API rate limit is hit, to keep method calls consistent within navbar items: -->
-          <% dummy_hash = {'tvaroglu' => 0, 'AbbottMichael' => 0, 'ElliotOlbright' => 0, 'bfl3tch' => 0} %>
-          <!-- Comment the following two lines out (and uncomment the real method calls 4 lines above) to hit the actual endpoints: -->
-          <% total_commits = dummy_hash %>
-          <% total_pulls = dummy_hash %>
+          <% total_commits = API.aggregate_by_author(:commits) %>
+          <% total_pulls = API.aggregate_by_author(:pulls) %>
+        <!-- Placeholder, proxy for edge case when API rate limit is hit, to keep method calls consistent within navbar items: -->
+          <%# dummy_hash = {'tvaroglu' => 5, 'AbbottMichael' => 10, 'ElliotOlbright' => 15, 'bfl3tch' => 0} %>
+        <!-- Comment the following two lines out (and uncomment the real method calls 4 lines above) to hit the actual endpoints: -->
+          <!-- <%# total_commits = dummy_hash %> -->
+          <!-- <%# total_pulls = dummy_hash %> -->
           <ul id="dropdownmenu-github" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="https://github.com/bfl3tch/little-esty-shop" target="_blank"><%= repo_name %></a></li>
             <li><hr class="dropdown-divider"></li>

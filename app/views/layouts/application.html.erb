@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <%= render partial: 'welcome/header', locals: {commits: @commits, pulls: @pulls} %>
+    <%= render 'welcome/header' %>
     <% flash.each do |type, msg| %>
       <div class="alert alert-info">
         <%= msg %>
@@ -24,6 +24,7 @@
     <% end %>
     <div class='container'>
       <br/>
+      <!-- <p><%#= "#{@something}" %></p> -->
     <%= yield %>
       </div>
 

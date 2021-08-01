@@ -1,5 +1,9 @@
 class WelcomeController < ApplicationController
 
+  # def index
+  #   @something = 'hello'
+  # end
+
   def refresh
   #   @commits = API.aggregate_by_author(:commits)
   #   @pulls = API.aggregate_by_author(:pulls)
