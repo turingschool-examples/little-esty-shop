@@ -145,4 +145,29 @@ RSpec.describe Merchant do
       expect(Merchant.disabled_merchants).to eq(expected)
     end
   end
+
+  describe 'instance methods' do
+    it '::best_day' do
+      merchant = create(:merchant)
+
+      customer = create(:customer)
+
+      item1 = create(:item, unit_price: 10, merchant_id: merchant.id)
+      item2 = create(:item, unit_price: 14, merchant_id: merchant.id)
+      
+      invoice1 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 7, 30, 5,5,5))
+      invoice2 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 7, 30, 5,5,5))
+      invoice3 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 7, 30, 5,5,5))
+      invoice4 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 6, 25, 5,5,5))
+      invoice5 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 6, 25, 5,5,5))
+      
+      invoice_item1 = create(:invoice_item, quantity: 2, unit_price: 10, item_id: item1.id, invoice_id: invoice1.id, status: 0)
+      invoice_item2 = create(:invoice_item, quantity: 2, unit_price: 14, item_id: item1.id, invoice_id: invoice2.id, status: 0)
+      invoice_item3 = create(:invoice_item, quantity: 2, unit_price: 16, item_id: item2.id, invoice_id: invoice3.id, status: 0)
+      invoice_item4 = create(:invoice_item, quantity: 2, unit_price: 18, item_id: item1.id, invoice_id: invoice4.id, status: 0)
+      invoice_item5 = create(:invoice_item, quantity: 2, unit_price: 20, item_id: item2.id, invoice_id: invoice5.id, status: 0)
+
+      expect(merchant.best_day).to eq(invoice1.created_at)
+    end
+  end
 end

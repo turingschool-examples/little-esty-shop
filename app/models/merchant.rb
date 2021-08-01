@@ -25,4 +25,8 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
+
+  def best_day
+    joins(:invoice)
+  end
 end

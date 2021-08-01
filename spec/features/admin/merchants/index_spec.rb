@@ -184,5 +184,11 @@ RSpec.describe 'Admin::Merchants' do
         expect(page).to have_content(data[4].revenue)
       end
     end
+
+    it 'Admin Merchants: Top Merchants Best Day' do
+      within '#top-merchants' do
+        expect(page).to have_content(@merchant5.created_at)  
+      end
+    end
   end
 end
