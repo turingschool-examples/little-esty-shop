@@ -20,6 +20,10 @@
         <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></th>
         <th><%= link_to 'Edit Merchant', edit_admin_merchant_path(merchant.id) %></th>
       </tr>
+      <tr id="merchant-<%= merchant.id %>-2">
+        <th>current status: <%= merchant.status %></th>
+        <th><%= button_to merchant.status_opposite.chop, admin_merchant_path(merchant.id), method: :patch, params: { direct: 'status change', merchant: { status: merchant.status_opposite }} %></th>
+      </tr>
       <tr>
         <th><em>Top Customers</em></th>
         <th></th>
