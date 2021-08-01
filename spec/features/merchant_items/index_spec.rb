@@ -26,12 +26,21 @@ RSpec.describe 'the merchant items index' do
     it 'has an enable button for items that are disabled' do
       visit merchant_items_path(@merchant1)
 
-      expect(page).to have_content('Status: Disabled')
       expect(page).to have_button('Enable')
     end
 
-    xit 'has a disable link for items that are enabled' do
+    it 'has a disable link for items that are enabled' do
+      visit merchant_items_path(@merchant1)
+      expect(page).to_not have_button('Disable Milk')
+      click_button('Enable Milk')
 
+      expect(page).to have_button('Disable Milk')
+    end
+
+    it 'has a button to make a new merchant item' do
+      visit merchant_items_path(@merchant1)
+
+      expect(page).to have_button('Create a New Item')
     end
   end
 
@@ -49,13 +58,20 @@ RSpec.describe 'the merchant items index' do
 
     it 'can click on enable button and enable disabled item' do
       visit merchant_items_path(@merchant1)
-      expect(page).to_not have_content('Status: Enabled')
 
       click_button('Enable Milk')
 
       expect(current_path).to eq(merchant_items_path(@merchant1))
-      expect(page).to have_content('Status: Enabled')
-      save_and_open_page
+      expect('Enabled Items').to appear_before('Milk')
+      expect('Milk').to appear_before('Disabled Items')
+    end
+
+    it "can click on 'Create a New Item' button and be taken to the new page " do
+      visit merchant_items_path(@merchant1)
+
+      click_button('Create a New Item')
+
+      expect(current_path).to eq(new_merchant_item_path(@merchant1))
     end
   end
 end
