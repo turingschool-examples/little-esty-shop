@@ -32,16 +32,19 @@ RSpec.describe API do
     expect(expected[:brian]).to eq('bfl3tch')
   end
 
-  it 'can retrieve contribution endpoints' do
+  it 'can retrieve contribution endpoints and default return values' do
     expected = API.contributions
 
     expect(expected.class).to eq(Hash)
-    expect(expected.keys.length).to eq(2)
-    expect(expected.values.length).to eq(2)
+    expect(expected.keys.length).to eq(3)
+    expect(expected.values.length).to eq(3)
     expect(expected[:commits]).to eq(API.contributors)
     expect(expected[:pulls]).to eq(
-      'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls?state=closed'
-    )
+      'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls?state=closed')
+    expect(expected[:defaults][:commits]).to eq(
+      {'tvaroglu' => 33, 'AbbottMichael' => 19, 'ElliotOlbright' => 33, 'bfl3tch' => 29})
+    expect(expected[:defaults][:pulls]).to eq(
+      {'tvaroglu' => 4, 'AbbottMichael' => 5, 'ElliotOlbright' => 12, 'bfl3tch' => 5})
   end
 
   it 'can initialize contributor endpoints to parse requests' do

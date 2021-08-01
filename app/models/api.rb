@@ -18,7 +18,11 @@ class API
   def self.contributions
     {
       commits: contributors,
-      pulls: 'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls?state=closed'
+      pulls: 'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls?state=closed',
+      defaults: {
+       commits: {'tvaroglu' => 33, 'AbbottMichael' => 19, 'ElliotOlbright' => 33, 'bfl3tch' => 29},
+       pulls: {'tvaroglu' => 4, 'AbbottMichael' => 5, 'ElliotOlbright' => 12, 'bfl3tch' => 5}
+     }
     }
   end
 
@@ -29,7 +33,7 @@ class API
   def self.repo_name
     APIS::RepoName.new(contributions[:pulls]).format
   end
-  
+
   def self.user_names
     APIS::UserNames.new(contributors).format
   end

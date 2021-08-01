@@ -15,16 +15,9 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-dummy_hash = {
-  'tvaroglu' => 20,
-  'AbbottMichael' => 30,
-  'ElliotOlbright' => 25,
-  'bfl3tch' => 20
-}
-
 RSpec.configure do |c|
   c.before(:each, :type => :feature) do
-    allow(API).to receive(:aggregate_by_author).and_return(dummy_hash)
+    allow(API).to receive(:aggregate_by_author).and_return(API.contributions[:defaults][:commits])
   end
 end
 # Add additional requires below this line. Rails is not loaded until this point!
