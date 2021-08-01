@@ -41,23 +41,23 @@ RSpec.describe 'Merchant Invoices Index Page' do
 
   describe 'merchant' do
     it 'displays all invoices with at least one merchant item' do
-      visit "/merchants/#{@merchant1}/invoices"
+      visit "/merchants/#{@merchant1.id}/invoices"
 
-      expect(page).to have_content(@invoice1.id)
-      expect(page).to have_content(@invoice2.id)
-      expect(page).to have_content(@invoice3.id)
-      expect(page).to have_content(@invoice6.id)
+      expect(page).to have_content(@invoice1.id.to_s)
+      expect(page).to have_content(@invoice2.id.to_s)
+      expect(page).to have_content(@invoice3.id.to_s)
+      expect(page).to have_content(@invoice6.id.to_s)
 
-      expect(page).to_not have_content(@invoice4.id)
-      expect(page).to_not have_content(@invoice5.id)
+      expect(page).to_not have_content(@invoice4.id.to_s)
+      expect(page).to_not have_content(@invoice5.id.to_s)
     end
 
     it 'can link an invoice to its show page' do
-      visit "/merchants/#{@merchant1}/invoices"
+      visit "/merchants/#{@merchant1.id}/invoices"
 
-      click_on(@invoice1.id)
+      click_on(@invoice1.id.to_s)
 
-      expect(current_path).to eq("/merchants/#{@merchant1}/invoices/#{@invoice1.id}")
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
     end
   end
 end
