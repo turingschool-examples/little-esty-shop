@@ -20,10 +20,15 @@ RSpec.describe InvoiceItem, type: :model do
 
   # end
 
-  # describe 'class methods' do
-  #  describe '.' do
-  #   end
-  # end
+  describe 'class methods' do
+   describe '.locate' do
+     it 'locates invoice item with invoice and item ids' do
+       expected = InvoiceItem.locate(@invoice1.id, @item1.id)
+
+       expect(expected).to eq(@invoice_item1)
+     end
+    end
+  end
 
   # describe 'instance methods' do
   #   describe '#' do
