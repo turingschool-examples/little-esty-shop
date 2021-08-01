@@ -5,11 +5,16 @@ module APIS
       @response_body = response_body
     end
 
+    # work to refactor based on COOL syntax (conditional assignment operator)
+    # unencrypted_file = ARGV[0]
+    # unencrypted_file ||= './message.txt'
     def total_count_by_author
       grouping = Hash.new(0)
       @response_body.each do |pr, hash|
-        author = pr['user']['login']
-        grouping[author] += 1
+        if !pr['user'].nil?
+          author = pr['user']['login']
+          grouping[author] += 1
+        end
       end
       grouping
     end

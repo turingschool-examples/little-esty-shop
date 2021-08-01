@@ -1,8 +1,8 @@
 module APIS
   class RepoName
 
-    def initialize(endpoints)
-      @endpoint_name = endpoints[:commits]
+    def initialize(endpoint_name)
+      @endpoint_name = endpoint_name
     end
 
     def format
