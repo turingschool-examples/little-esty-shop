@@ -192,7 +192,36 @@ RSpec.describe 'Admin Merchants Index Page' do
       expect(page).to have_content(@merchant4.name)
       expect(page).to have_content(@merchant6.name)
     end
+  end
 
+  describe "Enable/Disable Merchant" do
+    it "displays a button to disable or enable each Merchant" do
+      within "#merchant-#{@merchant1.id}-2" do
+        expect(@merchant1.status).to eq('enabled')
+        expect(page).to have_button('disable')
+      end
+      within "#merchant-#{@merchant2.id}-2" do
+        expect(@merchant2.status).to eq('disabled')
+        expect(page).to have_button('enable')
+      end
+      within "#merchant-#{@merchant3.id}-2" do
+        expect(@merchant3.status).to eq('enabled')
+        expect(page).to have_button('disable')
+      end
+    end
+
+    it "clicking enable/disable button redirects back to the index page and the updated status is displayed" do
+      within "#merchant-#{@merchant1.id}-2" do
+        expect(@merchant1.status).to eq('enabled')
+
+        click_button('disable')
+        @merchant1.reload
+
+        expect(page).to have_current_path('/admin/merchants')
+        expect(@merchant1.status).to eq('disabled')
+        expect(page).to have_button('enable', visible: :visible)
+      end
+    end
   end
 
 end

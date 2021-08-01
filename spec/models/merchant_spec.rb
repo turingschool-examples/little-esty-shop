@@ -8,7 +8,6 @@ RSpec.describe Merchant do
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :status }
-
   end
 
   describe 'Methods' do
@@ -77,6 +76,13 @@ RSpec.describe Merchant do
       end
     end
 
+    describe '#enable_opposite' do
+      it "returns the opposite of the item's enabled/disabled status; " do
+        expect(@merchant.status).to eq('enabled')
+        expect(@merchant.status_opposite).to eq('disabled')
+      end
+    end
+
     describe '#top_five_items' do
       it 'determines the top 5 most popular items ranked by total revenue generated' do
         @merchant2 = Merchant.create!(name: 'Mary Jane')
@@ -131,7 +137,6 @@ RSpec.describe Merchant do
 
         @customer1.invoices.first.transactions.create!(credit_card_number: '1234', credit_card_expiration_date: '', result: 0)
   
-
         expected = [@item1, @item20, @item4, @item13, @item15]
         expect(@merchant1.top_five_items.length).to eq(5)
         expect(@merchant1.top_five_items).to eq(expected)
