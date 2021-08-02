@@ -15,16 +15,23 @@ class Customer < ApplicationRecord
   end
 
   def self.top_customers
-    select('customers.*, COUNT(transactions.result) AS transaction_count')
-    .joins(:invoices, :transactions)
+    # joins(invoices: :transactions)
+    # .group('invoices.id')
+    # .where('transactions.result = ?', 0)
+    # .select('customers.*, COUNT(transactions.result) AS transaction_count')
+    # .order('transaction_count DESC, first_name')
+    # .limit(5)
+
+    joins(invoices: :transactions)
+    .group('customers.id')
     .where('transactions.result = ?', 0)
+    .select('customers.*, COUNT(transactions.result) AS transaction_count')
     .order('transaction_count DESC, first_name')
-    .group(:id)
     .limit(5)
   end
 
   def successful_transactions
-    transactions.where('result = ?', 0)  
+    transactions.where('result = ?', 0)
     .count(:result)
   end
 end
