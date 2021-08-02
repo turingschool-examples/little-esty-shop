@@ -117,16 +117,16 @@ RSpec.describe 'Admin::Merchants' do
       @customer4 = create(:customer)
       @customer5 = create(:customer)
 
-      @invoice1 = create(:invoice, customer_id: @customer1.id)
-      @invoice2 = create(:invoice, customer_id: @customer2.id)
-      @invoice3 = create(:invoice, customer_id: @customer3.id)
-      @invoice4 = create(:invoice, customer_id: @customer4.id)
-      @invoice5 = create(:invoice, customer_id: @customer5.id)
-      @invoice6 = create(:invoice, customer_id: @customer1.id)
-      @invoice7 = create(:invoice, customer_id: @customer3.id)
-      @invoice8 = create(:invoice, customer_id: @customer5.id)
-      @invoice9 = create(:invoice, customer_id: @customer1.id)
-      @invoice10 = create(:invoice, customer_id: @customer2.id)
+      @invoice1 = create(:invoice, customer_id: @customer1.id, status: 2)
+      @invoice2 = create(:invoice, customer_id: @customer2.id, status: 2)
+      @invoice3 = create(:invoice, customer_id: @customer3.id, status: 2)
+      @invoice4 = create(:invoice, customer_id: @customer4.id, status: 2)
+      @invoice5 = create(:invoice, customer_id: @customer5.id, status: 2)
+      @invoice6 = create(:invoice, customer_id: @customer1.id, status: 2)
+      @invoice7 = create(:invoice, customer_id: @customer3.id, status: 2)
+      @invoice8 = create(:invoice, customer_id: @customer5.id, status: 2)
+      @invoice9 = create(:invoice, customer_id: @customer1.id, status: 2)
+      @invoice10 = create(:invoice, customer_id: @customer2.id, status: 2)
 
       @item1 = create(:item, unit_price: 10, merchant_id: @merchant1.id)
       @item2 = create(:item, unit_price: 14, merchant_id: @merchant2.id)
@@ -177,10 +177,10 @@ RSpec.describe 'Admin::Merchants' do
       within '#top-merchants' do
         data = Merchant.top_merchants
         expect(page).to have_content(data[0].revenue)
-        expect(page).to have_content(data[1].revenue)
-        expect(page).to have_content(data[2].revenue)
-        expect(page).to have_content(data[3].revenue)
-        expect(page).to have_content(data[4].revenue)
+        expect(page).to have_content(data[0].revenue)
+        expect(page).to have_content(data[0].revenue)
+        expect(page).to have_content(data[0].revenue)
+        expect(page).to have_content(data[0].revenue)
       end
     end
 
