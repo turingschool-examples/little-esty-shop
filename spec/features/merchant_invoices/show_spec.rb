@@ -41,21 +41,21 @@ RSpec.describe 'the merchant invoice show' do
           expect(page).to have_content("Item Name: #{@item1.name}")
           expect(page).to have_content("Quantity: #{@invoice_item1.quantity}")
           expect(page).to have_content("Unit Price: #{@invoice_item1.unit_price}")
-          expect(page).to have_content("Status: #{@invoice_item1.status}")
+          expect(page).to have_select('invoice_item[status]', selected: @invoice_item1.status)
         end
 
         within("#item-#{@item2.id}") do
           expect(page).to have_content("Item Name: #{@item2.name}")
           expect(page).to have_content("Quantity: #{@invoice_item15.quantity}")
           expect(page).to have_content("Unit Price: #{@invoice_item15.unit_price}")
-          expect(page).to have_content("Status: #{@invoice_item15.status}")
+          expect(page).to have_select('invoice_item[status]', selected: @invoice_item15.status)
         end
 
         within("#item-#{@item3.id}") do
           expect(page).to have_content("Item Name: #{@item3.name}")
           expect(page).to have_content("Quantity: #{@invoice_item16.quantity}")
           expect(page).to have_content("Unit Price: #{@invoice_item16.unit_price}")
-          expect(page).to have_content("Status: #{@invoice_item16.status}")
+          expect(page).to have_select('invoice_item[status]', selected: @invoice_item16.status)
         end
       end
     end
