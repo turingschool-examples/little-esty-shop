@@ -22,7 +22,10 @@
       <p><b>Item Name:</b> <%= item.name %></p>
       <p><b>Quantity:</b> <%= invoice_item.quantity %></p>
       <p><b>Unit Price:</b> <%= invoice_item.unit_price %></p>
-      <p><b>Status:</b> <%= invoice_item.status %></p>
+      <%= form_with model: invoice_item do |f| %>
+        <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
+        <%= f.submit "Update Item Status" %>
+      <% end %>
       <br>
     </div>
   <% end %>
