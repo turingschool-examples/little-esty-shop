@@ -7,18 +7,11 @@ class ApplicationController < ActionController::Base
   @@class_pulls = API.aggregate_by_author(:pulls)
 
   def self.commits
-    @@class_commits
+    @@class_commits == {} ? API.contributions[:defaults][:commits] : @@class_commits
   end
 
   def self.pulls
-    @@class_pulls
-  end
-
-  def self.default_stats
-    {
-      commits: API.contributions[:defaults][:commits],
-      pulls: API.contributions[:defaults][:pulls]
-    }
+    @@class_pulls == {} ? API.contributions[:defaults][:pulls] : @@class_pulls
   end
 
   def self.reset_commits

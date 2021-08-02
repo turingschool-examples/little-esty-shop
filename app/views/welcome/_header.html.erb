@@ -30,16 +30,8 @@
           <!-- These variables are then rendered individually within the navbar header drop-downs for each statistic -->
           <% repo_name = API.repo_name %>
           <% user_names = API.user_names %>
-          <% if ApplicationController.commits != {} %>
-            <% total_commits = ApplicationController.commits %>
-          <% else %>
-            <% total_commits = ApplicationController.default_stats[:commits] %>
-          <% end %>
-          <% if ApplicationController.pulls != {} %>
-            <% total_pulls = ApplicationController.pulls %>
-          <% else %>
-            <% total_pulls = ApplicationController.default_stats[:pulls] %>
-          <% end %>
+          <% total_commits = ApplicationController.commits %>
+          <% total_pulls = ApplicationController.pulls %>
           <ul id="dropdownmenu-github" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="https://github.com/bfl3tch/little-esty-shop" target="_blank"><%= repo_name %></a></li>
             <li><hr class="dropdown-divider"></li>
