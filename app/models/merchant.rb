@@ -6,10 +6,6 @@ class Merchant < ApplicationRecord
 
   has_many :items
 
-  def merchant_items
-    items.all
-  end
-
   def self.top_merchants_by_revenue
     select("merchants.id, merchants.name AS merchant_name,
       COUNT(transactions.*) AS transaction_count,
