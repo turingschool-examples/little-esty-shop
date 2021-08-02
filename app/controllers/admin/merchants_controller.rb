@@ -38,7 +38,6 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def enable
-
     @merchant = Merchant.find(params[:id])
     if params[:enabled] == "true"
       @merchant.update(enabled: true)

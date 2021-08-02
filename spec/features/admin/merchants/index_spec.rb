@@ -116,7 +116,6 @@ RSpec.describe 'Admin::Merchants' do
       @customer3 = create(:customer)
       @customer4 = create(:customer)
       @customer5 = create(:customer)
-      @customer6 = create(:customer)
 
       @invoice1 = create(:invoice, customer_id: @customer1.id)
       @invoice2 = create(:invoice, customer_id: @customer2.id)
@@ -140,16 +139,16 @@ RSpec.describe 'Admin::Merchants' do
       @item9 = create(:item, unit_price: 8, merchant_id: @merchant9.id)
       @item10 = create(:item, unit_price: 7, merchant_id: @merchant10.id)
 
-      @invoice_item1 = create(:invoice_item, quantity: 2, unit_price: 10, item_id: @item1.id, invoice_id: @invoice1.id, status: 0)
-      @invoice_item2 = create(:invoice_item, quantity: 2, unit_price: 14, item_id: @item2.id, invoice_id: @invoice2.id, status: 0)
-      @invoice_item3 = create(:invoice_item, quantity: 2, unit_price: 16, item_id: @item3.id, invoice_id: @invoice3.id, status: 0)
-      @invoice_item4 = create(:invoice_item, quantity: 2, unit_price: 18, item_id: @item4.id, invoice_id: @invoice4.id, status: 0)
-      @invoice_item5 = create(:invoice_item, quantity: 2, unit_price: 20, item_id: @item5.id, invoice_id: @invoice5.id, status: 0)
-      @invoice_item6 = create(:invoice_item, quantity: 1, unit_price: 7, item_id: @item6.id, invoice_id: @invoice6.id, status: 0)
-      @invoice_item7 = create(:invoice_item, quantity: 1, unit_price: 4, item_id: @item7.id, invoice_id: @invoice7.id, status: 0)
-      @invoice_item8 = create(:invoice_item, quantity: 1, unit_price: 4, item_id: @item8.id, invoice_id: @invoice8.id, status: 0)
-      @invoice_item9 = create(:invoice_item, quantity: 1, unit_price: 8, item_id: @item9.id, invoice_id: @invoice9.id, status: 0)
-      @invoice_item10 = create(:invoice_item, quantity: 1, unit_price: 7, item_id: @item10.id, invoice_id: @invoice10.id, status: 0)
+      @invoice_item1 = create(:invoice_item, quantity: 2, unit_price: 10, item_id: @item1.id, invoice_id: @invoice1.id, status: 2)
+      @invoice_item2 = create(:invoice_item, quantity: 2, unit_price: 14, item_id: @item2.id, invoice_id: @invoice2.id, status: 2)
+      @invoice_item3 = create(:invoice_item, quantity: 2, unit_price: 16, item_id: @item3.id, invoice_id: @invoice3.id, status: 2)
+      @invoice_item4 = create(:invoice_item, quantity: 2, unit_price: 18, item_id: @item4.id, invoice_id: @invoice4.id, status: 2)
+      @invoice_item5 = create(:invoice_item, quantity: 2, unit_price: 20, item_id: @item5.id, invoice_id: @invoice5.id, status: 2)
+      @invoice_item6 = create(:invoice_item, quantity: 1, unit_price: 7, item_id: @item6.id, invoice_id: @invoice6.id, status: 2)
+      @invoice_item7 = create(:invoice_item, quantity: 1, unit_price: 4, item_id: @item7.id, invoice_id: @invoice7.id, status: 2)
+      @invoice_item8 = create(:invoice_item, quantity: 1, unit_price: 4, item_id: @item8.id, invoice_id: @invoice8.id, status: 2)
+      @invoice_item9 = create(:invoice_item, quantity: 1, unit_price: 8, item_id: @item9.id, invoice_id: @invoice9.id, status: 2)
+      @invoice_item10 = create(:invoice_item, quantity: 1, unit_price: 7, item_id: @item10.id, invoice_id: @invoice10.id, status: 2)
 
       @transaction1 = create(:transaction, invoice_id: @invoice1.id, result: 0)
       @transaction2 = create(:transaction, invoice_id: @invoice2.id, result: 0)
@@ -184,10 +183,45 @@ RSpec.describe 'Admin::Merchants' do
         expect(page).to have_content(data[4].revenue)
       end
     end
-
-    it 'Admin Merchants: Top Merchants Best Day' do
-      within '#top-merchants' do
-        expect(page).to have_content(@merchant5.created_at)  
+    
+    describe 'Admin Merchants: Top Merchants Best Day' do
+      before(:each) do
+        
+        @merchant6 = create(:merchant)
+        
+        @customer = create(:customer)
+        
+        @item1 = create(:item, unit_price: 10, merchant_id: @merchant6.id)
+        @item2 = create(:item, unit_price: 14, merchant_id: @merchant6.id)
+        
+        @invoice11 = create(:invoice, customer_id: @customer.id, status: 2, created_at: DateTime.new(2021, 7, 30, 5,5,5))
+        @invoice12 = create(:invoice, customer_id: @customer.id, status: 2, created_at: DateTime.new(2021, 7, 30, 5,5,5))
+        @invoice13 = create(:invoice, customer_id: @customer.id, status: 2, created_at: DateTime.new(2021, 7, 30, 5,5,5))
+        @invoice14 = create(:invoice, customer_id: @customer.id, status: 2, created_at: DateTime.new(2021, 6, 25, 5,5,5))
+        @invoice15 = create(:invoice, customer_id: @customer.id, status: 2, created_at: DateTime.new(2021, 6, 25, 5,5,5))
+        
+        @invoice_item1 = create(:invoice_item, quantity: 2, unit_price: 10, item_id: @item1.id, invoice_id: @invoice11.id, status: 2)
+        @invoice_item2 = create(:invoice_item, quantity: 2, unit_price: 14, item_id: @item1.id, invoice_id: @invoice12.id, status: 2)
+        @invoice_item3 = create(:invoice_item, quantity: 2, unit_price: 16, item_id: @item2.id, invoice_id: @invoice13.id, status: 2)
+        @invoice_item4 = create(:invoice_item, quantity: 2, unit_price: 18, item_id: @item1.id, invoice_id: @invoice14.id, status: 2)
+        @invoice_item5 = create(:invoice_item, quantity: 2, unit_price: 20, item_id: @item2.id, invoice_id: @invoice15.id, status: 2) 
+        
+        @transaction1 = create(:transaction, invoice_id: @invoice11.id, result: 0)
+        @transaction2 = create(:transaction, invoice_id: @invoice12.id, result: 0)
+        @transaction3 = create(:transaction, invoice_id: @invoice13.id, result: 0)
+        @transaction4 = create(:transaction, invoice_id: @invoice14.id, result: 0)
+        @transaction5 = create(:transaction, invoice_id: @invoice15.id, result: 0)
+        
+        visit '/admin/merchants'
+      end
+      
+      it 'dispals the best day for a Merchant' do
+        within '#top-merchants' do
+          # save_and_open_page
+          # expect(merchant.best_day).to eq(invoice1.created_at)
+          require 'pry'; binding.pry
+          expect(page).to have_content(merchant.best_day)  
+        end
       end
     end
   end

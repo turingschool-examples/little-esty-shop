@@ -161,13 +161,20 @@ RSpec.describe Merchant do
       invoice4 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 6, 25, 5,5,5))
       invoice5 = create(:invoice, customer_id: customer.id, status: 2, created_at: DateTime.new(2021, 6, 25, 5,5,5))
       
-      invoice_item1 = create(:invoice_item, quantity: 2, unit_price: 10, item_id: item1.id, invoice_id: invoice1.id, status: 0)
-      invoice_item2 = create(:invoice_item, quantity: 2, unit_price: 14, item_id: item1.id, invoice_id: invoice2.id, status: 0)
-      invoice_item3 = create(:invoice_item, quantity: 2, unit_price: 16, item_id: item2.id, invoice_id: invoice3.id, status: 0)
-      invoice_item4 = create(:invoice_item, quantity: 2, unit_price: 18, item_id: item1.id, invoice_id: invoice4.id, status: 0)
-      invoice_item5 = create(:invoice_item, quantity: 2, unit_price: 20, item_id: item2.id, invoice_id: invoice5.id, status: 0)
+      invoice_item1 = create(:invoice_item, quantity: 2, unit_price: 10, item_id: item1.id, invoice_id: invoice1.id, status: 2)
+      invoice_item2 = create(:invoice_item, quantity: 2, unit_price: 14, item_id: item1.id, invoice_id: invoice2.id, status: 2)
+      invoice_item3 = create(:invoice_item, quantity: 2, unit_price: 16, item_id: item2.id, invoice_id: invoice3.id, status: 2)
+      invoice_item4 = create(:invoice_item, quantity: 2, unit_price: 18, item_id: item1.id, invoice_id: invoice4.id, status: 2)
+      invoice_item5 = create(:invoice_item, quantity: 2, unit_price: 20, item_id: item2.id, invoice_id: invoice5.id, status: 2) 
+
+      transaction1 = create(:transaction, invoice_id: invoice1.id, result: 0)
+      transaction2 = create(:transaction, invoice_id: invoice2.id, result: 0)
+      transaction3 = create(:transaction, invoice_id: invoice3.id, result: 0)
+      transaction4 = create(:transaction, invoice_id: invoice4.id, result: 0)
+      transaction5 = create(:transaction, invoice_id: invoice5.id, result: 0)
 
       expect(merchant.best_day).to eq(invoice1.created_at)
+      # require 'pry'; binding.pry
     end
   end
 end
