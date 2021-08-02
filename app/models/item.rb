@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   validates :unit_price, presence: true, numericality: { only_integer: true }
 
   def enable_opposite
-    enable == 'enable' ? 'disable' : 'enable' 
+    enable == 'enable' ? 'disable' : 'enable'
   end
 
   def self.items_ready_to_ship_by_ordered_date(merchant_id = nil)
@@ -23,5 +23,13 @@ class Item < ApplicationRecord
       .order("invoiced_date ASC")
       .distinct
     merchant_id == nil ? query : query.where("items.merchant_id = ?", merchant_id)
+  end
+
+  def self.enabled_items
+    where(enable: 0)
+  end
+
+  def self.disabled_items
+    where(enable: 1)
   end
 end

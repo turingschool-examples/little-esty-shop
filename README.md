@@ -60,7 +60,6 @@ Learning goals and areas of focus consisted of:
 - Atom
 - VS Code
 
-
 ### <ins>Contributors</ins>
 
 👤  **Brian Fletcher**

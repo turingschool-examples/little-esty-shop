@@ -74,6 +74,23 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   it 'displays the total revenue generated from all the items on this invoice' do
-    expect(page).to have_content("Total Invoice Revenue Potential: $86,500.00")
+    expect(page).to have_content("Total Invoice Revenue Potential: $865.00")
+  end
+
+  it 'can update invoice status: happy path' do
+    expect(page).to have_field(:status)
+
+    select "completed", :from => "status"
+    click_button("Update Invoice Status")
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+    expect(page).to have_content("Invoice status successfully updated!")
+  end
+
+  it 'can format the date' do
+    expected = 'Sunday, August 01, 2021'
+    # allow(@item4).to receive(:created_at).and_return('2021-08-01 14:54:04')
+
+    expect(@item4.format_date(@item4.created_at)).to eq(expected)
   end
 end

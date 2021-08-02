@@ -5,7 +5,12 @@
 <h1>Welcome Admin!</h1>
 <br>
 <h3><em>Merchants Dashboard</em></h3>
+<br>
 
+<div id="create">
+  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
+</div>
+<br>
 
 <table class="table table-light">
   <thead>
@@ -19,6 +24,10 @@
       <tr id="merchant-<%= merchant.id %>">
         <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></th>
         <th><%= link_to 'Edit Merchant', edit_admin_merchant_path(merchant.id) %></th>
+      </tr>
+      <tr id="merchant-<%= merchant.id %>-2">
+        <th>current status: <%= merchant.status %></th>
+        <th><%= button_to merchant.status_opposite.chop, admin_merchant_path(merchant.id), method: :patch, params: { direct: 'status change', merchant: { status: merchant.status_opposite }} %></th>
       </tr>
       <tr>
         <th><em>Top Customers</em></th>
@@ -89,9 +98,3 @@
   </tbody>
   </div>
 </table>
-
-<div id="create">
-  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
-</div>
-
-<p id="notice"><%= notice %></p>

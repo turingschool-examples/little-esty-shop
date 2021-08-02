@@ -1,15 +1,14 @@
-<h1>Merchant Items</h1>
-<%= link_to 'Create a new item', new_merchant_item_path %><br>
+<h1><%= @merchant.name %>'s Items</h1>
+<%= link_to 'Create a new item', new_merchant_item_path %><br><br>
 <table>
   <thead>
     <tr>
       <th colspan="3"></th>
     </tr>
   </thead>
-<%# fix me %>
-<h3>Merchants Items</h3>
+<h3>All Items</h3>
   <tbody>
-    <% @merchant_items.each do |merchant_item| %>
+    <% @merchant.items.each do |merchant_item| %>
       <tr id= "merchant_item-<%= merchant_item.id %>">
         <td><%= merchant_item.name %></td>
         <td>:<%= merchant_item.enable %>d&nbsp</td>
@@ -21,4 +20,78 @@
       </tr>
     <% end %>
   </tbody>
+</table>
+
+<table id='top-item-table' class="table table-light" style="text-align:center">
+  <thead>
+    <tr>
+      <th style="text-align:center">Top 5 Items</th>
+    </tr>
+  </thead>
+  <!-- Then I see the names of the top 5 most popular items ranked by total revenue generated
+  And I see that each item name links to my merchant item show page for that item
+  And I see the total revenue generated next to each item name -->
+  <tbody>
+    <tr>
+      <td colspan="3">
+        <table class="table mb-0 table-striped table-hover">
+          <tr id="item-table-headers">
+            <th class="table-info">Item Rank:</th>
+            <th class="table-info">Item Name:</th>
+            <th class="table-info">Total Revenue Generated:</th>
+          </tr>
+          <tr id="merchant-top-items">
+            <% @merchant.top_five_items.each_with_index do |item, idx| %>
+              <tr id="item-<%= item.id %>">
+                <td><%= "#{idx + 1}" %></td>
+                <td><a class="btn btn-secondary btn-sm" href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %>><%= "#{item.name}" %></td>
+                <td><%= number_to_currency(("#{item.total_item_price}".to_i)/100.00) %></td>
+              </tr>
+            <% end %>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <div id="enabled">
+    <tbody>
+      <h2>Enabled Items</h2>
+      <% @enabled_items.each do |item| %>
+        <tr id="enabled_item-<%= item.id %>">
+          <td><%= item.name %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<br>
+  <div id="disabled">
+    <tbody>
+      <h2>Disabled Items</h2>
+      <% @disabled_items.each do |item| %>
+        <tr id="disabled_item-<%= item.id %>">
+          <td><%= item.name %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
 </table>

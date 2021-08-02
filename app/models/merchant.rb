@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   enum status: {enabled: 0, disabled: 1}
+
   validates :name, presence: true
   validates :status, presence: true
 
@@ -42,5 +43,19 @@ class Merchant < ApplicationRecord
 
   def self.order_by_disabled
     where("status = 1")
+  end
+
+  def status_opposite
+    status == 'enabled' ? 'disabled' : 'enabled'
+  end
+
+  def top_five_items
+    items.joins(invoices: :invoice_items)
+    .joins("INNER JOIN transactions ON invoices.id = transactions.invoice_id")
+    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_price")
+    .group(:id)
+    .where("transactions.result = ?", 0)
+    .order("total_item_price DESC")
+    .limit(5)
   end
 end
