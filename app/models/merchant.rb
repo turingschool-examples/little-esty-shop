@@ -3,8 +3,8 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
   validates :status, presence: true
 
-
   has_many :items
+
 
   def merchant_items
     items.all
@@ -21,7 +21,7 @@ class Merchant < ApplicationRecord
       .joins("INNER JOIN customers ON invoices.customer_id = customers.id")
       .where("transactions.result = 0")
       .group(:id)
-      .order("total_revenue DESC")
+      .order(total_revenue: :desc)
       .limit(5)
   end
 
@@ -33,8 +33,8 @@ class Merchant < ApplicationRecord
        .joins("INNER JOIN merchants ON items.merchant_id = merchants.id")
        .where("merchants.id = ?", merchant_id)
        .group(:id)
-       .order("item_count DESC")
-       .limit(5)
+       .order(item_count: :desc)
+       # .limit(5)
   end
 
   def self.order_by_enabled
