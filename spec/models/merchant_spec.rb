@@ -23,21 +23,22 @@ RSpec.describe Merchant do
       @item3 = Item.create!(name: 'upside down kiss', description: 'That Mary jane Swag', unit_price: '15000', merchant_id: @merchant.id)
 
       @inv_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 1)
+
+      #test data for to_merchants_by_revenue
+
+
     end
 
     describe '::merchant_invoice' do
       it 'returns all invoices with that merchants items' do
-        @merchant = Merchant.create!(name: 'Tom Holland')
+        @merchant = Merchant.create!(name: 'Tom Bolland')
         @merchant2 = Merchant.create!(name: 'Tom Holland')
-
 
         @customer1 = Customer.create!(first_name: 'Green', last_name: 'Goblin')
         @customer2 = Customer.create!(first_name: 'Green', last_name: 'Goblin')
 
-
         @invoice1 =Invoice.create!(status: 2, customer_id: @customer1.id)
         @invoice2 =Invoice.create!(status: 2, customer_id: @customer1.id)
-
 
         @item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: '10000', merchant_id: @merchant.id)
         @item2 = Item.create!(name: 'web shooter', description: 'shoots webs', unit_price: '5000', merchant_id: @merchant.id)
@@ -142,5 +143,54 @@ RSpec.describe Merchant do
         expect(@merchant1.top_five_items).to eq(expected)
       end
     end
+
+    describe '::top_merchants_by_revenue' do 
+      it 'displays top 5 merchants by revenue' do 
+        merchant1 = Merchant.create!(name:'Hishiro', status: 0)
+        merchant2 = Merchant.create!(name:'Hishiro1', status: 0)
+        merchant3 = Merchant.create!(name:'Hishiro2', status: 0)
+        merchant4 = Merchant.create!(name:'Hishiro3', status: 0)
+        merchant5 = Merchant.create!(name:'Hishiro4', status: 0)
+        merchant6 = Merchant.create!(name:'Hishiro4', status: 0)
+
+        item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+        item2 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+        item3 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+        item4 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+        item5 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+        item6 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+        item7 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+        item8 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+        item9 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id) 
+        item10 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+
+        customer = Customer.create!(first_name: 'Green', last_name: 'Goblin')
+
+        invoice = Invoice.create!(status: 1, customer_id: customer.id)
+
+        transaction1 = Transaction.create!(invoice_id: invoice.id, credit_card_number: '1234123412341234', credit_card_expiration_date:'', result: 0)
+
+        ii1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice.id, quantity: 1, unit_price: 10_000, status: 1)
+        ii2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice.id, quantity: 2, unit_price: 10_000, status: 1)
+        ii3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice.id, quantity: 3, unit_price: 10_000, status: 1)
+        ii4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice.id, quantity: 4, unit_price: 10_000, status: 1)
+        ii5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice.id, quantity: 5, unit_price: 10_000, status: 1)
+        ii6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice.id, quantity: 6, unit_price: 10_000, status: 1)
+        ii7 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice.id, quantity: 7, unit_price: 10_000, status: 1)
+        ii8 = InvoiceItem.create!(item_id: item8.id, invoice_id: invoice.id, quantity: 8, unit_price: 10_000, status: 1)
+        ii9 = InvoiceItem.create!(item_id: item9.id, invoice_id: invoice.id, quantity: 9, unit_price: 10_000, status: 1)
+        ii10 = InvoiceItem.create!(item_id: item10.id, invoice_id: invoice.id, quantity: 10, unit_price: 10_000, status: 1)
+
+        expected = Merchant.top_merchants_by_revenue
+
+        expect(expected).to eq([merchant5, merchant4, merchant3, merchant2, merchant1])
+
+        expect(expected[0].total_revenue).to eq(190000)
+        expect(expected[1].total_revenue).to eq(150000)
+        expect(expected[2].total_revenue).to eq(110000)
+        expect(expected[3].total_revenue).to eq(70000)
+        expect(expected[4].total_revenue).to eq(30000)
+      end 
+    end 
   end
 end
