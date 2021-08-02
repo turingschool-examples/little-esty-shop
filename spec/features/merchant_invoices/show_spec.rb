@@ -69,4 +69,27 @@ RSpec.describe 'the merchant invoice show' do
       expect(page).to_not have_content(@item10.name)
     end
   end
+
+  describe 'forms' do
+    it 'can select a new status, submit form, and see the updated status' do
+      visit merchant_invoice_path(@merchant1.id, @invoice1.id)
+
+      within("#item-#{@item1.id}") do
+        expect(@invoice_item1.status).to_not eq('pending')
+
+        page.select 'pending', from: 'invoice_item[status]'
+        click_button 'Update Item Status'
+      end
+
+      expect(current_path).to eq(merchant_invoice_path(@merchant1.id, @invoice1.id))
+
+      within("#item-#{@item1.id}") do
+        updated_invoice_item = InvoiceItem.find(@invoice_item1.id)
+
+        expect(updated_invoice_item.status).to eq('pending')
+
+        expect(page).to have_select('invoice_item[status]', selected: 'pending')
+      end
+    end
+  end
 end
