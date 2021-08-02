@@ -5,7 +5,12 @@
 <h1>Welcome Admin!</h1>
 <br>
 <h3><em>Merchants Dashboard</em></h3>
+<br>
 
+<div id="create">
+  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
+</div>
+<br>
 
 <table class="table table-light">
   <thead>
@@ -93,9 +98,3 @@
   </tbody>
   </div>
 </table>
-
-<div id="create">
-  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
-</div>
-
-<p id="notice"><%= notice %></p>

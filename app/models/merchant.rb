@@ -1,8 +1,8 @@
 class Merchant < ApplicationRecord
   enum status: {enabled: 0, disabled: 1}
+
   validates :name, presence: true
   validates :status, presence: true
-
 
   has_many :items
 
@@ -24,7 +24,6 @@ class Merchant < ApplicationRecord
   def self.order_by_disabled
     where("status = 1")
   end
-
 
   def status_opposite
     status == 'enabled' ? 'disabled' : 'enabled'
