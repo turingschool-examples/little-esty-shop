@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many(:items) }
-    it { should have_many(:invoices).through(:items) }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
   end
 
@@ -21,6 +22,12 @@ RSpec.describe Merchant, type: :model do
     describe '.disabled_merchants' do
       it 'can get all the merchants that are disabled' do
         expect(Merchant.disabled_merchants).to eq([@merchant1, @merchant2, @merchant3, @merchant4, @merchant7])  
+      end
+    end
+
+    describe '.top_5_merchants_revenue' do
+      it 'can get the top 5 merchants by their revenue based off of successful transactions' do
+        expect(Merchant.top_5_merchants_revenue).to eq([])  
       end
     end
   end
