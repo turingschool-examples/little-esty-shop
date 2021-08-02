@@ -20,3 +20,9 @@
     <% end %>
   </div>
 <% end %>
+
+<div id="top_five">
+<h2>Top Five Merchants By Revenue<% @merchants.top_five_by_revenue.each do |merchant| %></h2>
+<%= merchant.name %>
+<%= merchant.total_revenue %></br>
+<% end %></div>
