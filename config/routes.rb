@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :invoices, controller: 'merchant_invoices'
   end
 
+  resources :invoice_items, only: :update
+
   # -------Admin routes-------
   namespace :admin do
     resources :merchants
