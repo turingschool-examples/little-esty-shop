@@ -5,6 +5,9 @@ class Customer < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
   def self.merchant_top_five(merchant_id)
     joins(:transactions, :merchants)
     .select("customers.*, CONCAT(customers.first_name, ' ', customers.last_name) as full_name, count(transactions.*) as num_of_transactions")

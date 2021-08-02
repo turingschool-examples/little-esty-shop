@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+  validates :name, presence: true
+
   scope :enabled_merchants, -> {where(enabled: true)}
 
   scope :disabled_merchants, -> {where(enabled: false)}
