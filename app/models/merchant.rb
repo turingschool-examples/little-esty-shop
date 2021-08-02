@@ -5,7 +5,6 @@ class Merchant < ApplicationRecord
 
   has_many :items
 
-
   def merchant_items
     items.all
   end
