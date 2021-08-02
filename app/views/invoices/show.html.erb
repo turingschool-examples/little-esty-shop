@@ -20,6 +20,11 @@ Date: <%= @invoice.created_at.strftime('%A %B %e, %Y') %>
       <td><%= invoice_item.item.name %></td>
       <td><%= invoice_item.quantity %></td>
       <td><%= number_to_currency(invoice_item.unit_price.to_f/100) %></td>
-      <td><%= invoice_item.status %></td>
-            </tr>
+      <td><%= form_with url: merchant_invoice_item_path(invoice_item.id), model: @invoice_item, method: :patch, local: true do |f| %>
+        <%= f.select :status, ['pending', 'packaged', 'shipped'], :selected => invoice_item.status %>
+        <%= f.hidden_field :id_for_merchant, :value => @merchant.id %>
+        <%= f.submit 'Update Item Status' %>
+      <% end %>
+      </td>
+      </tr>
   <% end %>

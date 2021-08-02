@@ -11,5 +11,4 @@ class InvoicesController < ApplicationController
     @customer = Customer.find(@invoice.customer_id)
     @invoice_items = @invoice.invoice_items
   end
-
 end
