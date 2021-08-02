@@ -8,10 +8,10 @@ class API
 
   def self.contributors
     {
-      taylor: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=tvaroglu',
-      michael: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=AbbottMichael',
-      elliot: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=ElliotOlbright',
-      brian: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=bfl3tch'
+      taylor: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=tvaroglu&per_page=100',
+      michael: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=AbbottMichael&per_page=100',
+      elliot: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=ElliotOlbright&per_page=100',
+      brian: 'https://api.github.com/repos/bfl3tch/little-esty-shop/commits?author=bfl3tch&per_page=100'
     }
   end
 
