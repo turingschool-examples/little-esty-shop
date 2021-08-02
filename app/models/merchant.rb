@@ -40,7 +40,7 @@ class Merchant < ApplicationRecord
     .joins(:invoices)
     .joins(:transactions)
     .group('invoices.id, items.id')
-    .select('invoices.created_at')
+    .select('invoices.created_at, SUM(invoice_items.quantity * invoice_items.unit_price) desc')
     .where('invoices.status = ?', 2)
     .where('transactions.result = ?', 0)
     .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price) desc'))
