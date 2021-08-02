@@ -6,6 +6,20 @@ class Merchant < ApplicationRecord
 
   has_many :items
 
+  def top_merchant_day(arg)
+    Merchant.select("SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue,
+      invoices.created_at AS invoice_date")
+		.joins("INNER JOIN items ON merchants.id = items.merchant_id")
+		.joins("INNER JOIN invoice_items ON items.id = invoice_items.item_id")
+		.joins("INNER JOIN invoices ON invoice_items.invoice_id = invoices.id")
+		.joins("INNER JOIN transactions ON invoices.id = transactions.invoice_id")
+		.where("transactions.result = 0")
+    .where("merchants.id = ?", arg)
+		.group("invoice_date")
+		.order(total_revenue: :desc)
+		.limit(1)
+  end
+
   def self.top_merchants_by_revenue
     select("merchants.id, merchants.name AS merchant_name,
       COUNT(transactions.*) AS transaction_count,
