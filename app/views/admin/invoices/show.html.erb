@@ -21,7 +21,7 @@
 <section id='status'>
   <p>Invoice Status: <%= @invoice.status %></p>
   <%= form_with url: admin_invoice_path(@invoice.id), model: @invoice, method: :patch, local: true do |f| %>
-    <%= f.select :status, ['cancelled', 'in progress', 'completed']%>
+    <%= f.select :status, ['cancelled', 'in progress', 'completed'], :status => @invoice.status %>
     <%= f.submit 'Submit' %>
-  <%end%>  
+  <%end%>
 </section>
