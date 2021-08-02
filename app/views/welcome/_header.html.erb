@@ -30,12 +30,16 @@
           <!-- These variables are then rendered individually within the navbar header drop-downs for each statistic -->
           <% repo_name = API.repo_name %>
           <% user_names = API.user_names %>
-          <!-- <%# total_commits = API.aggregate_by_author(:commits) %> -->
-          <!-- <%# total_pulls = API.aggregate_by_author(:pulls) %> -->
-        <!-- Placeholder, proxy for edge case when API rate limit is hit, to keep method calls consistent within navbar items: -->
-          <!-- Comment the following two lines out (and uncomment the real method calls 3 lines above) to hit the actual endpoints: -->
-          <% total_commits = API.contributions[:defaults][:commits] %>
-          <% total_pulls = API.contributions[:defaults][:pulls] %>
+          <% if ApplicationController.commits != {} %>
+            <% total_commits = ApplicationController.commits %>
+          <% else %>
+            <% total_commits = ApplicationController.default_stats[:commits] %>
+          <% end %>
+          <% if ApplicationController.pulls != {} %>
+            <% total_pulls = ApplicationController.pulls %>
+          <% else %>
+            <% total_pulls = ApplicationController.default_stats[:pulls] %>
+          <% end %>
           <ul id="dropdownmenu-github" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="https://github.com/bfl3tch/little-esty-shop" target="_blank"><%= repo_name %></a></li>
             <li><hr class="dropdown-divider"></li>
