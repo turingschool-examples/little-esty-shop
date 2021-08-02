@@ -31,6 +31,6 @@
 <div id="top-merchants">
   <% @top_merchants.each do |merchant| %>
     <p><%= @top_merchants.index(merchant) + 1 %>. <%= merchant.name %> - <%= number_to_currency(merchant.revenue) %> in sales</p>
-    <p>Top selling date: <%= merchant.best_day%></p>
+    <p>Top selling date: <%= merchant.best_day.strftime("%A, %B, %d, %Y") %></p>
   <% end %>
 </div>
