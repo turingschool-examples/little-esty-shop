@@ -15,7 +15,7 @@ class Invoice < ApplicationRecord
   end
 
 
-  
+
   #Merchant.select('merchants.*', 'transactions.result', 'invoices.*').joins(:transactions) -- method to get top 5 revenue merchants
 
   def self.merchant_invoices(id)

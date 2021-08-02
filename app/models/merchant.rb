@@ -30,4 +30,7 @@ class Merchant < ApplicationRecord
     .order('total_revenue desc')
     .limit(5)
   end
+
+  def top_sale_date_for_merchant
+  end
 end

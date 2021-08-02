@@ -24,9 +24,3 @@
 <%= f.select :status, [:cancelled, 'in progress', :completed], :value => @invoice.status %>
 <%= f.submit "Update Invoice Status" %>
 <% end %></div>
-
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
