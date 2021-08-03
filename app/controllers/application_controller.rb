@@ -6,5 +6,6 @@ class ApplicationController < ActionController::Base
     @contributors = service.contributors
     @commits = service.commits
     @pull_requests = service.pull_requests
+    @repo_name = service.repo_name
   end
 end
