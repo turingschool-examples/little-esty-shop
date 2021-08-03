@@ -234,8 +234,8 @@ RSpec.describe Merchant do
 
 
         expected = merchant1.best_day_for_merchant(merchant1.id)
-        expect(expected.first.invoice_date).to eq(invoice2.created_at)
-        expect(merchant1.format_date(expected.first.invoice_date)).to eq(invoice2.format_date(invoice2.created_at))
+        expect(expected.invoice_date).to eq(invoice2.created_at)
+        expect(merchant1.format_date(expected.invoice_date)).to eq(invoice2.format_date(invoice2.created_at))
       end
     end
   end

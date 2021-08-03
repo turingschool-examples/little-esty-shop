@@ -57,6 +57,7 @@ class Merchant < ApplicationRecord
       .group(:invoice_date)
       .order(total_revenue: :desc, invoice_date: :desc)
       .limit(1)
+      .first
   end
 
   def top_five_items
