@@ -71,17 +71,16 @@ RSpec.describe Merchant, type: :model do
         transaction30 = invoice21.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
         transaction31 = invoice21.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
 
-
         customer9 = Customer.create!(first_name: 'FName9', last_name: 'LName9')
 
         invoice22 = customer9.invoices.create!(status: 'completed')
 
         invoice_item24 = InvoiceItem.create!(invoice_id: invoice22.id, item_id: @item3.id, quantity: 100, unit_price: @item3.unit_price, status: 'packaged')
 
-        transaction32 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+        transaction32 = invoice22.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
 
-        actual = @merchant1.top_customers.map do |customer|
-          customer.first_name
+        actual = @merchant1.top_customers.map do |invoice|
+          invoice.first_name
         end
 
         expected = [customer8, customer5, customer6, customer7, @customer1].map do |customer|

@@ -5,22 +5,14 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def top_customers
-        test = invoices.joins(:customer, :transactions)
-                      .where(transactions: {result: true})
-                      .select("customers.*, transactions.count as total_count")
-                      .group("customers.id")
-                      .order(total_count: :desc)
-                      .limit(5)
-        binding.pry
-
-
-    # test = items.joins(invoices: :transactions, invoices: :customer)
-    #             .where(transactions: {result: true})
-    #             .select("customers.*, transactions.count as total_count")
-    #             .group("customers.id")
-    #             .order(total_count: :desc)
-    #             .limit(5)
-    #
-    # binding.pry
+    test = invoices.joins(:customer, :transactions)
+                     .where(transactions: {result: true})
+                     .select("customers.*, count(transactions.id) as total_count")
+                     .group("customers.id, invoice_items.id")
+                     .distinct
+                     .order(total_count: :desc)
+                     .limit(5)
+                     binding.pry
+    test
   end
 end
