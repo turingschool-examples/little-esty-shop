@@ -15,3 +15,11 @@
 <% end %>
 
 <%= link_to "Create Item", "/merchants/#{@merchant.id}/items/new" %>
+
+<h2>Top 5 Most Popular Items</h2>
+<div id="Top">
+  <% @merchant.items.most_popular_items.each do |item| %>
+    <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <%= number_to_currency(item.revenue.to_f/100) %> in sales <br>
+  <% end %>
+</div>
