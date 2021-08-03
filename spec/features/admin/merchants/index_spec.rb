@@ -102,10 +102,10 @@ RSpec.describe 'it shows the merchant index page' do
     expect(@merchant1.name).to appear_before(@merchant3.name)
   end
 
-  it 'can label the date for the merchants best day for revenue' do
+  xit 'can label the date for the merchants best day for revenue' do
 
     within "#top-5-merchants-#{@merchant2.id}" do
-      expect(page).to have_content("Top selling date for #{@merchant2.name} was #{@merchant.}")
+      expect(page).to have_content("Top selling date for #{@merchant2.name} was #{}")
     end
     
   end
