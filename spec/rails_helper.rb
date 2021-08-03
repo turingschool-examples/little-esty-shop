@@ -30,9 +30,9 @@ mock_api_response = [
 
 RSpec.configure do |c|
   c.before(:each, :type => :feature) do
+    allow(Faraday).to receive(:get).and_return(mock_api_response.to_json)
     # allow(API).to receive(:aggregate_by_author).with(:commits).and_return(API.contributions[:defaults][:commits])
     # allow(API).to receive(:aggregate_by_author).with(:pulls).and_return(API.contributions[:defaults][:pulls])
-    allow(Faraday).to receive(:get).and_return(mock_api_response.to_json)
     ApplicationController.class_variable_set(:@@class_commits, API.contributions[:defaults][:commits])
     ApplicationController.class_variable_set(:@@class_pulls, API.contributions[:defaults][:pulls])
   end
