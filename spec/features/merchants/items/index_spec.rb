@@ -182,7 +182,18 @@ RSpec.describe 'Merchants Item Index Page' do
       within("tr#item-#{@item15.id}") do
         expect(page).to have_content("$7,560.00")
       end
+    end
+    # When I visit the items index page
+    # Then next to each of the 5 most popular items I see the date with the most sales for each item.
+    # And I see a label “Top selling date for was "
+    #
+    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+    it 'displays the top selling date for each item next to the item' do
+      expected = @item1.created_at.to_date
 
+      within("tr#item-#{@item1.id}") do
+        expect(page).to have_content(expected)
+      end
     end
   end
 end

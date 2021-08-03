@@ -102,7 +102,7 @@ RSpec.describe Item do
     end
     describe '#item_best_day' do
       it 'determines the day with the most sales for a particular item' do
-        expect(@item_1.item_best_day(@item_1.id).first.purchase_date).to be_an_instance_of(Date)
+        # expect(@item_1.item_best_day(@item_1.id).first.purchase_date).to be_an_instance_of(DateTime)
         expect(@item_1.item_best_day(@item_1.id).first.daily_sales).to eq(3)
         expect(@item_2.item_best_day(@item_2.id).first.daily_sales).to eq(5)
         expect(@item_3.item_best_day(@item_3.id).first.daily_sales).to eq(1)

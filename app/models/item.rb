@@ -26,7 +26,7 @@ class Item < ApplicationRecord
   end
 
   def item_best_day(item_id)
-    Item.select("items.id, CAST(invoices.created_at AS DATE) AS purchase_date, sum(invoice_items.quantity) AS daily_sales")
+    Item.select("items.*, CAST(invoices.created_at AS DATE) AS purchase_date, sum(invoice_items.quantity) AS daily_sales")
             .joins(invoice_items: { invoice: :transactions } )
             # .joins("INNER JOIN invoice_items on items.id = invoice_items.item_id")
             # .joins(:invoice_items)
