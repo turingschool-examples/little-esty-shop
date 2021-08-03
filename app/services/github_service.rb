@@ -44,4 +44,8 @@ class GithubService
       get_repo["message"]
     end
   end
+
+  def repo_name
+
+  end
 end
