@@ -21,7 +21,9 @@
 
   def pull_requests
     response = Faraday.get 'https://api.github.com/repos/JasonPKnoll/little-esty-shop/pulls?state=closed'
+
     request = JSON.parase(response.body)
+    
     request.count
   end
 end
