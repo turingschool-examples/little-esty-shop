@@ -1,6 +1,9 @@
 class Admin::MerchantsController < ApplicationController
   def index
+    
     @merchants = Merchant.all
+    @top_merchants = Merchant.top_merchants
+    
   end
 
   def show
@@ -18,7 +21,7 @@ class Admin::MerchantsController < ApplicationController
     else
       redirect_to edit_admin_merchants_path
       flash[:alert] = "Unable to Create Merchant"
-    end  
+    end
   end
 
   def edit
@@ -37,7 +40,6 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def enable
-  
     @merchant = Merchant.find(params[:id])
     if params[:enabled] == "true"
       @merchant.update(enabled: true)

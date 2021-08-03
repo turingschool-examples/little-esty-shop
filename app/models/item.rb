@@ -6,6 +6,9 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
   enum enabled: {enabled: 0, disabled: 1}
 
+  validates :name, presence: true
+  validates :unit_price, presence: true
+
   def self.not_yet_shipped
     Item.joins(:invoices).select("items.name, invoices.id as invoice_id, invoices.created_at as invoice_date")
     .where.not(invoice_items: {status: "shipped"})

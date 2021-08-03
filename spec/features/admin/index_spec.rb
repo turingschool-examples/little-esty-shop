@@ -8,7 +8,7 @@ RSpec.describe 'Admin Index' do
     @customer4 = create(:customer)
     @customer5 = create(:customer)
     @customer6 = create(:customer)
-    
+
     @invoice1 = create(:invoice, customer_id: @customer1.id)
     @invoice2 = create(:invoice, customer_id: @customer2.id)
     @invoice3 = create(:invoice, customer_id: @customer3.id)
@@ -59,7 +59,7 @@ RSpec.describe 'Admin Index' do
 
   describe 'Admin Dashboard Statistics' do
     it 'displays the names of the top 5 customers and num of successful transcations' do
-      
+
       within('#top_customers') do
         expect(page).to have_content('Top 5 Customers')
       end
@@ -92,7 +92,7 @@ RSpec.describe 'Admin Index' do
       within('#incomplete') do
         expect(page).to have_content('Incomplete Invoices')
       end
-      
+
       within("#invoice-#{@invoice1.id}") do
         expect(page).to have_content(@invoice1.id)
         expect(page).to have_link("#{@invoice1.id}")
@@ -137,7 +137,7 @@ RSpec.describe 'Admin Index' do
       within("#invoice-#{@invoice1.id}") do
         expect(page).to have_content("#{@invoice1.id}: #{@invoice1.created_at.strftime("%A, %B, %d, %Y")}")
       end
-      
+
        within("#invoice-#{@invoice2.id}") do
         expect(page).to have_content("#{@invoice2.id}: #{@invoice2.created_at.strftime("%A, %B, %d, %Y")}")
       end
@@ -153,7 +153,7 @@ RSpec.describe 'Admin Index' do
        within("#invoice-#{@invoice6.id}") do
         expect(page).to have_content("#{@invoice6.id}: #{@invoice6.created_at.strftime("%A, %B, %d, %Y")}")
       end
-    
+
 
     end
 
