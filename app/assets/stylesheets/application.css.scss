@@ -26,7 +26,7 @@
 }
 
 .navbar-custom {
-	background-color: #ffffff80;
+	background-color: #ffffff75;
 }
 
 .blacktext {
@@ -50,5 +50,12 @@
 }
 
 h1, h2, h3 {
-  font-family: 'Quicksand'
+  font-family: 'Quicksand';
+	text-align: center;
 }
+
+a:hover {
+  text-decoration: none;
+  color: rgba(255, 254, 254, 0.705);
+}
+
