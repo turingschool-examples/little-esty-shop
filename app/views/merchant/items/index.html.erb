@@ -6,7 +6,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-<%# fix me %>
+
 <h3>Merchants Items</h3>
   <tbody>
     <% @merchant.items.each do |merchant_item| %>
@@ -17,7 +17,7 @@
                   params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
         <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id) %></td>
         <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id) %></td>
-        <td><%#= link_to 'Destroy', merchant_item , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
       </tr>
     <% end %>
   </tbody>
@@ -29,9 +29,7 @@
       <th style="text-align:center">Top 5 Items</th>
     </tr>
   </thead>
-  <!-- Then I see the names of the top 5 most popular items ranked by total revenue generated
-  And I see that each item name links to my merchant item show page for that item
-  And I see the total revenue generated next to each item name -->
+
   <tbody>
 
   <tr>
