@@ -21,7 +21,7 @@
       <tr id="top_merchant-<%= top.id %>">
         <td><%= "#{idx + 1}" %></td>
         <td><%= link_to "#{top.merchant_name}", admin_merchant_path(top.id) %></td>
-        <td><%= "#{number_to_currency(top.total_revenue.to_f / 100)}" %></td>
+        <td><%= "#{number_to_currency(top.total_revenue / 100.00)}" %></td>
         <td><%= "#{top.format_date(top.best_day_for_merchant(top.id).invoice_date)}" %></td>
       </tr>
     <% end %>

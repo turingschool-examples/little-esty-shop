@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index Page' do
+  include ActionView::Helpers
   before :each do
     @merchant1 = Merchant.create!(name: 'Tom Holland', status: 0)
     @merchant2 = Merchant.create!(name: 'Beta', status: 1)
@@ -239,58 +240,99 @@ RSpec.describe 'Admin Merchants Index Page' do
     end
   end
 
-  # As an admin,
-    # When I visit the admin merchants index
-    # Then I see the names of the top 5 merchants by total revenue generated
-    # And I see that each merchant name links to the admin merchant show page for that merchant
-    # And I see the total revenue generated next to each merchant name
-    # Notes on Revenue Calculation:
-      # Only invoices with at least one successful transaction should count towards revenue
-      # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-      # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-  # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
-  # And I see a label “Top selling date for was "
-    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
-  xit 'can display top five merchants in system' do
-    merchant1 = Merchant.create!(name:'Hishiro1', status: 0)
-    merchant2 = Merchant.create!(name:'Hishiro2', status: 0)
-    merchant3 = Merchant.create!(name:'Hishiro3', status: 0)
-    merchant4 = Merchant.create!(name:'Hishiro4', status: 0)
-    merchant5 = Merchant.create!(name:'Hishiro5', status: 0)
-    merchant6 = Merchant.create!(name:'Hishiro6', status: 0)
+  describe 'top merchants' do
+    # include ActionView::Helpers
+    # As an admin,
+      # When I visit the admin merchants index
+      # Then I see the names of the top 5 merchants by total revenue generated
+      # And I see that each merchant name links to the admin merchant show page for that merchant
+      # And I see the total revenue generated next to each merchant name
+      # Notes on Revenue Calculation:
+        # Only invoices with at least one successful transaction should count towards revenue
+        # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+        # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+    # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
+    # And I see a label “Top selling date for was "
+      # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+    it 'can display top five merchants in system' do
+      merchant1 = Merchant.create!(name:'Hishiro1', status: 0)
+      merchant2 = Merchant.create!(name:'Hishiro2', status: 0)
+      merchant3 = Merchant.create!(name:'Hishiro3', status: 0)
+      merchant4 = Merchant.create!(name:'Hishiro4', status: 0)
+      merchant5 = Merchant.create!(name:'Hishiro5', status: 0)
+      merchant6 = Merchant.create!(name:'Hishiro6', status: 0)
 
-    item1 = Item.create!(name: 'spider suit1', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
-    item2 = Item.create!(name: 'spider suit2', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
-    item3 = Item.create!(name: 'spider suit3', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
-    item4 = Item.create!(name: 'spider suit4', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
-    item5 = Item.create!(name: 'spider suit5', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
-    item6 = Item.create!(name: 'spider suit6', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
-    item7 = Item.create!(name: 'spider suit7', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
-    item8 = Item.create!(name: 'spider suit8', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
-    item9 = Item.create!(name: 'spider suit9', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
-    item10 = Item.create!(name: 'spider suit0', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+      item1 = Item.create!(name: 'spider suit1', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+      item2 = Item.create!(name: 'spider suit2', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+      item3 = Item.create!(name: 'spider suit3', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+      item4 = Item.create!(name: 'spider suit4', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+      item5 = Item.create!(name: 'spider suit5', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+      item6 = Item.create!(name: 'spider suit6', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+      item7 = Item.create!(name: 'spider suit7', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+      item8 = Item.create!(name: 'spider suit8', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+      item9 = Item.create!(name: 'spider suit9', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+      item10 = Item.create!(name: 'spider suit0', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
 
-    customer = Customer.create!(first_name: 'Green', last_name: 'Goblin')
+      customer = Customer.create!(first_name: 'Green', last_name: 'Goblin')
 
-    invoice = Invoice.create!(status: 1, customer_id: customer.id)
-    invoice2 = Invoice.create!(status: 2, customer_id: customer.id, created_at: '2021-05-02 22:50:10.189284')
+      invoice = Invoice.create!(status: 1, customer_id: customer.id)
+      invoice2 = Invoice.create!(status: 2, customer_id: customer.id, created_at: '2021-05-02 22:50:10.189284')
 
-    transaction1 = Transaction.create!(invoice_id: invoice.id, credit_card_number: '1234123412341234', credit_card_expiration_date:'', result: 0)
-    transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: '1234123412341234', credit_card_expiration_date:'', result: 0)
+      transaction1 = Transaction.create!(invoice_id: invoice.id, credit_card_number: '1234123412341234', credit_card_expiration_date:'', result: 0)
+      transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: '1234123412341234', credit_card_expiration_date:'', result: 0)
 
-    ii1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice.id, quantity: 1, unit_price: 10_000, status: 1)
-    ii2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 2, unit_price: 10_000, status: 1)
-    ii3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice.id, quantity: 3, unit_price: 10_000, status: 1)
-    ii4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice.id, quantity: 4, unit_price: 10_000, status: 1)
-    ii5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice.id, quantity: 5, unit_price: 10_000, status: 1)
-    ii6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice.id, quantity: 6, unit_price: 10_000, status: 1)
-    ii7 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice.id, quantity: 7, unit_price: 10_000, status: 1)
-    ii8 = InvoiceItem.create!(item_id: item8.id, invoice_id: invoice.id, quantity: 8, unit_price: 10_000, status: 1)
-    ii9 = InvoiceItem.create!(item_id: item9.id, invoice_id: invoice.id, quantity: 9, unit_price: 10_000, status: 1)
-    ii10 = InvoiceItem.create!(item_id: item10.id, invoice_id: invoice.id, quantity: 10, unit_price: 10_000, status: 1)
+      ii1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice.id, quantity: 1, unit_price: 10_000, status: 1)
+      ii2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 2, unit_price: 10_000, status: 1)
+      ii3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice.id, quantity: 3, unit_price: 10_000, status: 1)
+      ii4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice.id, quantity: 4, unit_price: 10_000, status: 1)
+      ii5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice.id, quantity: 5, unit_price: 10_000, status: 1)
+      ii6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice.id, quantity: 6, unit_price: 10_000, status: 1)
+      ii7 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice.id, quantity: 7, unit_price: 10_000, status: 1)
+      ii8 = InvoiceItem.create!(item_id: item8.id, invoice_id: invoice.id, quantity: 8, unit_price: 10_000, status: 1)
+      ii9 = InvoiceItem.create!(item_id: item9.id, invoice_id: invoice.id, quantity: 9, unit_price: 10_000, status: 1)
+      ii10 = InvoiceItem.create!(item_id: item10.id, invoice_id: invoice.id, quantity: 10, unit_price: 10_000, status: 1)
 
-    # save_and_open_page
-    expect(page).to have_content([merchant5.name, merchant4.name, merchant3.name, merchant2.name, merchant1.name])
+      visit '/admin/merchants'
+      # save_and_open_page
+      expected = Merchant.top_merchants_by_revenue
+      # expect(expected).to eq([merchant5, merchant4, merchant3, merchant2, merchant1])
+
+      within "#top_merchant-#{merchant5.id}" do
+        expect(page).to have_content("1")
+        expect(page).to have_link(merchant5.name)
+        expect(page).to have_content(number_to_currency(expected[0].total_revenue / 100.0 ))
+        expect(page).to have_content(expected[0].format_date(expected[0].best_day_for_merchant(expected[0].id).invoice_date))
+      end
+
+      within "#top_merchant-#{merchant4.id}" do
+        expect(page).to have_content("2")
+        expect(page).to have_link(merchant4.name)
+        expect(page).to have_content(number_to_currency(expected[1].total_revenue / 100.0 ))
+        expect(page).to have_content(expected[0].format_date(expected[1].best_day_for_merchant(expected[1].id).invoice_date))
+      end
+
+      within "#top_merchant-#{merchant3.id}" do
+        expect(page).to have_content("3")
+        expect(page).to have_link(merchant3.name)
+        expect(page).to have_content(number_to_currency(expected[2].total_revenue / 100.0 ))
+        expect(page).to have_content(expected[0].format_date(expected[2].best_day_for_merchant(expected[2].id).invoice_date))
+      end
+
+      within "#top_merchant-#{merchant2.id}" do
+        expect(page).to have_content("4")
+        expect(page).to have_link(merchant2.name)
+        expect(page).to have_content(number_to_currency(expected[3].total_revenue / 100.0 ))
+        expect(page).to have_content(expected[0].format_date(expected[3].best_day_for_merchant(expected[3].id).invoice_date))
+      end
+
+      within "#top_merchant-#{merchant1.id}" do
+        expect(page).to have_content("5")
+        expect(page).to have_link(merchant1.name)
+        expect(page).to have_content(number_to_currency(expected[4].total_revenue / 100.0 ))
+        expect(page).to have_content(expected[4].format_date(expected[4].best_day_for_merchant(expected[4].id).invoice_date))
+      end
+    end
+
   end
 
 end
