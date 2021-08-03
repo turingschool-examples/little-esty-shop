@@ -18,7 +18,7 @@ RSpec.describe 'the merchant invoice show' do
       within('#invoice_info') do
         expect(page).to have_content("Status: #{@invoice1.status}")
         expect(page).to have_content("Created on: #{@invoice1.created_at.strftime("%A, %B %d, %Y")}")
-        expect(page).to have_content("Total Revenue: $1,200.00")
+        expect(page).to have_content("Total Revenue: $787.00")
       end
     end
 
