@@ -173,7 +173,7 @@ RSpec.describe 'Admin Merchants Index Page' do
 
   it 'can take the user to create a new merchant' do
     within "#create" do
-      click_link 'Create New Merchant'
+      click_on 'Create New Merchant'
       expect(current_path).to eq(new_admin_merchant_path)
     end
   end
@@ -251,7 +251,7 @@ RSpec.describe 'Admin Merchants Index Page' do
   # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
   # And I see a label “Top selling date for was "
     # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
-  it 'can display top five merchants in system' do
+  xit 'can display top five merchants in system' do
     merchant1 = Merchant.create!(name:'Hishiro1', status: 0)
     merchant2 = Merchant.create!(name:'Hishiro2', status: 0)
     merchant3 = Merchant.create!(name:'Hishiro3', status: 0)

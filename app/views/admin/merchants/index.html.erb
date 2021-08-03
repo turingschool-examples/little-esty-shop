@@ -1,13 +1,8 @@
 <%= link_to 'Return to Dashboard', "/admin" %>
 <br>
-<div id="create">
-  <%= link_to 'Create New Merchant', new_admin_merchant_path %>
-  <br>
-</div>
 <br>
 <h1>Welcome Admin!</h1>
 <br>
-
 <h3><em>Top Merchants:</em></h3>
 <table class="table table-striped">
   <thead>
@@ -18,7 +13,7 @@
   <tbody id="top-merchants">
     <tr id="top-merchants-table-headers">
       <th class="table-info">Rank:</th>
-      <th class="table-info">Merchant Name:</th>
+      <th class="table-info">Name:</th>
       <th class="table-info">Total Revenue:</th>
       <th class="table-info">Top Selling Date:</th>
     </tr>
@@ -26,15 +21,18 @@
       <tr id="top_merchant-<%= top.id %>">
         <td><%= "#{idx + 1}" %></td>
         <td><%= link_to "#{top.merchant_name}", admin_merchant_path(top.id) %></td>
-        <td><%= "#{top.total_revenue}" %></td>
+        <td><%= "#{number_to_currency(top.total_revenue.to_f / 100)}" %></td>
         <td><%= "#{top.format_date(top.best_day_for_merchant(top.id).invoice_date)}" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
+<div id="create">
+  <%= button_to 'Create New Merchant', new_admin_merchant_path, method: :get %>
+  <br>
+</div>
 <br>
-
 <h3><em>Enabled Merchants:</em></h3>
 <table class="table table-light">
   <thead>
