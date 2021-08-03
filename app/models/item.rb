@@ -24,21 +24,16 @@ class Item < ApplicationRecord
       .distinct
     merchant_id == nil ? query : query.where("items.merchant_id = ?", merchant_id)
   end
-  # When I visit the items index page
-  # Then next to each of the 5 most popular items I see the date with the most sales for each item.
-  # And I see a label “Top selling date for was "
-  #
-  # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+
   def item_best_day(item_id)
     Item.select("items.id, CAST(invoices.created_at AS DATE) AS purchase_date, sum(invoice_items.quantity) AS daily_sales")
-            # .joins(:invoice_items, invoices: :transactions)
-            # WHY DIDNT THIS ^ WORK
-            .joins("INNER JOIN invoice_items on items.id = invoice_items.item_id")
+            .joins(invoice_items: { invoice: :transactions } )
+            # .joins("INNER JOIN invoice_items on items.id = invoice_items.item_id")
             # .joins(:invoice_items)
             # .joins(invoices: :transactions)
             # .joins(:invoices)
-            .joins("INNER JOIN invoices on invoice_items.invoice_id = invoices.id")
-            .joins("INNER JOIN transactions on transactions.invoice_id = invoices.id")
+            # .joins("INNER JOIN invoices on invoice_items.invoice_id = invoices.id")
+            # .joins("INNER JOIN transactions on transactions.invoice_id = invoices.id")
             .where("transactions.result = ?", 0)
             .where(id: item_id)
             .group(:id, :purchase_date)
