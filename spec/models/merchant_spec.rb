@@ -81,7 +81,7 @@ RSpec.describe Merchant do
       @invoice_items << create(:invoice_item, item_id: @items[3].id, invoice_id: @invoices[3].id, status: 2, quantity: 4, unit_price: 10)
       @invoice_items << create(:invoice_item, item_id: @items[4].id, invoice_id: @invoices[4].id, status: 2, quantity: 1, unit_price: 10)
 
-      expect(Merchant.best_revenue_day).to eq(@invoices[0].created_at)
+      expect(@merchant_2.best_revenue_day).to eq(@invoices[0].created_at)
     end
   end
 
