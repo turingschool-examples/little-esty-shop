@@ -13,8 +13,8 @@ class Merchant < ApplicationRecord
     items.where(enabled: 1)
   end
 
-  def self.best_revenue_day
-    joins(:transactions)
+  def best_revenue_day
+    items.joins(:transactions)
     .where("transactions.result = ?", 0)
     .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
     .group("invoices.created_at")
