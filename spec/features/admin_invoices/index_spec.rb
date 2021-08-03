@@ -130,5 +130,4 @@ RSpec.describe 'Admin Invoice Index Page' do
       expect(page).to have_content("#{expected[5].format_date(expected[5].invoiced_date)}")
     end
   end
-
 end
