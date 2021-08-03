@@ -1,6 +1,25 @@
 <h1> Invoice #<%= @invoice.id %> </h1>
+<h3>Total Revenue: <%= number_to_currency(@invoice_items.total_revenue.to_f/100) %></h3>
+
 <b>For Customer: </b>
 <h2><%= @customer.first_name %> <%= @customer.last_name %></h2>
 <br><br>
 Status: <%= @invoice.status %><br>
-Date: <%= @invoice.created_at %>
+Date: <%= @invoice.created_at.strftime('%A %B %e, %Y') %>
+
+<h3>Items on this Invoice: </h3>
+<table class="invoice-itens"style='width: 80%; vorder-color: white;'>
+  <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+    <% @invoice_items.each do |invoice_item| %>
+      <tr>
+      <td><%= invoice_item.item.name %></td>
+      <td><%= invoice_item.quantity %></td>
+      <td><%= number_to_currency(invoice_item.unit_price.to_f/100) %></td>
+      <td><%= invoice_item.status %></td>
+            </tr>
+  <% end %>

@@ -1,13 +1,14 @@
 {
+  "start": "node server.js",
   "name": "little-etsy-shop",
   "private": true,
   "dependencies": {},
   "version": "1.0.0",
   "engines": {
-  "node": "12.11.1"
+    "node": "12.11.1"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
   }
-}
-
-"scripts": {
-   "start": "node index.js"
 }
