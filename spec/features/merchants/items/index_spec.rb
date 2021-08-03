@@ -12,10 +12,10 @@ RSpec.describe 'Merchants Items Index page' do
     @merchant_1 = create(:merchant)
     5.times do
       @customers << create(:customer)
-      @invoices << create(:invoice, customer_id: @customers.last.id)
-      @items << create(:item, merchant_id: @merchant_1.id)
-      @transactions << create(:transaction, invoice_id: @invoices.last.id)
-      @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 1)
+      @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+      @items << create(:item, merchant_id: @merchant_1.id, created_at: DateTime.new(2020,2,3,4,5,6))
+      @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+      @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 1, created_at: DateTime.new(2020,2,3,4,5,6))
     end
 
     visit "/merchants/#{@merchant_1.id}/items"
@@ -89,6 +89,13 @@ RSpec.describe 'Merchants Items Index page' do
     end
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@items.last.id}")
+  end
+
+  it "displays correct date format" do
+    visit "/merchants/#{@merchant_1.id}/items"
+    within("#Top") do
+      expect(page).to have_content("02/03/20")
+    end
   end
 
   it 'has link to create a new item' do
