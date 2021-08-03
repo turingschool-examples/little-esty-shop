@@ -62,6 +62,7 @@ RSpec.describe 'the merchant items index' do
       click_button('Enable Milk')
 
       expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(page).to have_content('Status: Enabled')
       expect('Enabled Items').to appear_before('Milk')
       expect('Milk').to appear_before('Disabled Items')
     end

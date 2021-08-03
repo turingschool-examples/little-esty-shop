@@ -43,13 +43,13 @@ RSpec.configure do |config|
     Merchant.destroy_all
 
     #Merchants
-    @merchant1 = Merchant.create!(name: 'Costco')
-    @merchant2 = Merchant.create!(name: 'Target')
-    @merchant3 = Merchant.create!(name: 'Walmart')
-    @merchant4 = Merchant.create!(name: 'Kroger')
-    @merchant5 = Merchant.create!(name: 'Amazon')
-    @merchant6 = Merchant.create!(name: 'Ebay')
-    @merchant7 = Merchant.create!(name: 'HomeDepot')
+    @merchant1 = Merchant.create!(name: 'Costco', status: "disabled")
+    @merchant2 = Merchant.create!(name: 'Target', status: "disabled")
+    @merchant3 = Merchant.create!(name: 'Walmart', status: "disabled")
+    @merchant4 = Merchant.create!(name: 'Kroger', status: "disabled")
+    @merchant5 = Merchant.create!(name: 'Amazon', status: "enabled")
+    @merchant6 = Merchant.create!(name: 'Ebay', status: "enabled")
+    @merchant7 = Merchant.create!(name: 'HomeDepot', status: "disabled")
 
     #Customers
     @customer1 = Customer.create!(first_name: 'Gunner', last_name: 'Runkle')
