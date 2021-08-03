@@ -5,7 +5,7 @@
 <h3>
 <%= form_with model: @admin_invoice, method: :patch do |f| %>
   <%= f.label :status, "Status:" %>
-  <%= f.select :status, [:in_progress, :completed, :cancelled], selected: @invoice.status %>
+  <%= f.select :status, ['in_progress', 'completed', 'cancelled'], selected: @invoice.status %>
   <%= f.submit "Update Invoice Status" %>
 <% end %>
 </h3>
