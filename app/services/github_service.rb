@@ -46,6 +46,14 @@ class GithubService
   end
 
   def repo_name
+    if get_repo.is_a?(Array)
+      response = Faraday.get 'https://api.github.com/repos/JasonPKnoll/little-esty-shop'
 
+      request = JSON.parse(response.body)
+
+      request['name']
+    elsif get_repo.is_a?(Hash)
+      get_repo["message"]
+    end
   end
 end
