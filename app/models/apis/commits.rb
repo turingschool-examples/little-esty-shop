@@ -7,7 +7,7 @@ module APIS
 
     def aggregate
       grouping = Hash.new(0)
-      if @response_body.class == Array && @response_body.first['message'].nil?
+      if @response_body.class == Array && @response_body.first['author'] != nil
         # grouping['commits'] = @response_body.group_by {|author| author['committer']['login']}
         grouping['commits'] = @response_body.group_by {|author| author['author']['login']}
       else

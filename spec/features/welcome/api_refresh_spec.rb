@@ -34,20 +34,51 @@ RSpec.describe 'Github API Statistics' do
   end
 
   it 'can refresh API statistics with a redirect back to the current page' do
+    mock_response = [
+      {"state" => "closed", "title" => "PR #1",
+        "user" => {"login" => "tvaroglu"}
+      },
+      {"state" => "closed", "title" => "PR #2",
+        "user" => {"login" => "AbbottMichael"}
+      },
+      {"state" => "closed", "title" => "PR #3",
+        "user" => {"login" => "ElliotOlbright"}
+      },
+      {"state" => "closed", "title" => "PR #4",
+        "user" => {"login" => "bfl3tch"}
+      }
+    ]
+    allow(Faraday).to receive(:get).and_return(mock_response.to_json)
+
     click_on('Github Stats')
+    within "#dropdownmenu-github" do
+      expect(page).to have_link(@repo_name)
+      expect(page).to have_content("Total Commits:")
+      expect(page).to have_content("Pull Requests:")
+      @user_names.values.each do |user_name|
+        expect(page).to have_content("#{user_name}: #{@commits[user_name]}")
+        expect(page).to have_content("#{user_name}: #{@pulls[user_name]}")
+      end
+    end
+
     click_on('Refresh Stats 🔄')
-
-    # save_and_open_page
-
     expect(current_path).to eq('/')
+
+    click_on('Github Stats')
+    within "#dropdownmenu-github" do
+      @user_names.values.each do |user_name|
+        expect(page).to have_content("#{user_name}: 1")
+      end
+    end
   end
 
   it 'can display default statistics with a redirect back to the current page if the API rate limit is hit' do
-    allow(ApplicationController).to receive(:commits).and_return(@commits)
-    allow(ApplicationController).to receive(:pulls).and_return(@pulls)
+    mock_response = {"message" => "API rate limit exceeded"}
+    allow(Faraday).to receive(:get).and_return(mock_response.to_json)
 
     click_on('Github Stats')
     click_on('Refresh Stats 🔄')
+    expect(current_path).to eq('/')
 
     click_on('Github Stats')
     within "#dropdownmenu-github" do
