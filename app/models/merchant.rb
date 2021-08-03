@@ -22,16 +22,18 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
-  
+
   def best_day
     # require "pry"; binding.pry
   end
 
   def top_five_items
     items.joins(invoices: :transactions)
-         .where(transactions: {result: true})
-         .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
-         .group("items.id")
-         .order(revenue: :desc)
+    .where(transactions: {result: true})
+    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .group("items.id")
+    .order(revenue: :desc)
+    .limit(5)
   end
+
 end

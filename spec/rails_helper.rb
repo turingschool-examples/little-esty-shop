@@ -67,7 +67,7 @@ RSpec.configure do |config|
     @item13 = @merchant1.items.create!(name: 'Spinach', description: 'A 2lb bag of spinach', unit_price: 400)
     @item14 = @merchant1.items.create!(name: 'Red Bull', description: 'A pack 0f 24 can 8oz Red Bulls', unit_price: 3200)
     @item15 = @merchant1.items.create!(name: 'Hot Cheetos', description: 'A 2lb bag of Hot Cheetos', unit_price: 500)
-    @item16 = @merchant1.items.create!(name: 'Toilet Paper', description: 'A pack of 24 rolls of toilet paper', unit_price: 1000)
+    @item16 = @merchant1.items.create!(name: 'Toilet Paper', description: 'A pack of 24 rolls of toilet paper', unit_price: 2500)
     @item17 = @merchant1.items.create!(name: 'Hand Sanitizer', description: '32oz bottle of hand sanitizer', unit_price: 1000)
 
     #Merchant2 Items
