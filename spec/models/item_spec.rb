@@ -23,6 +23,8 @@ RSpec.describe Item do
         expect(@item1.enable_opposite).to eq('disable')
       end
     end
+
+
   end
 
   describe 'class methods' do
@@ -96,6 +98,14 @@ RSpec.describe Item do
         expect(expected[3].invoice_id).to eq(@customer_1.invoices[2].id)
         expect(expected[4].invoice_id).to eq(@customer_1.invoices[3].id)
         expect(expected[5].invoice_id).to eq(@customer_2.invoices[3].id)
+      end
+    end
+
+    describe '#item_best_day' do
+      it 'determines the day with the most sales for a particular item' do
+        expect(@item_1.item_best_day(@item_1.id).first.daily_sales).to eq(3)
+        expect(@item_2.item_best_day(@item_2.id).first.daily_sales).to eq(5)
+        expect(@item_3.item_best_day(@item_3.id).first.daily_sales).to eq(1)
       end
     end
 

@@ -107,15 +107,7 @@ RSpec.describe 'Merchants Item Index Page' do
   end
 
   describe "create a new Item" do
-    # As a merchant
-    # When I visit my items index page
-    # I see a link to create a new item.
-    # When I click on the link,
-    # I am taken to a form that allows me to add item information.
-    # When I fill out the form I click ‘Submit’
-    # Then I am taken back to the items index page
-    # And I see the item I just created displayed in the list of items.
-    # And I see my item was created with a default status of disabled.
+
     it "displays a link to 'Create a new item'" do
       expect(page).to have_link('Create a new item')
     end
@@ -182,7 +174,15 @@ RSpec.describe 'Merchants Item Index Page' do
         expect(page).to have_content("$7,560.00")
       end
     end
-  end
+
+
+    it 'displays the top selling date for each item next to the item' do
+      expected = @item1.created_at.to_date
+
+      within("tr#item-#{@item1.id}") do
+        expect(page).to have_content(expected)
+      end
+    end
 
   describe "enabled and disabled sections" do
     it 'displays all of the enabled items' do

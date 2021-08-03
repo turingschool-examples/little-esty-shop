@@ -88,8 +88,9 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   it 'can format the date' do
+
+    @item4.created_at = '2021-08-01 14:54:04'
     expected = @item4.format_date(@item4.created_at)
-    # allow(@item4).to receive(:created_at).and_return('2021-08-01 14:54:04')
 
     expect(@item4.format_date(@item4.created_at)).to eq(expected)
   end
