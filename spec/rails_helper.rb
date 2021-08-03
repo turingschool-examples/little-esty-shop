@@ -63,6 +63,13 @@ RSpec.configure do |config|
     @item3 = @merchant1.items.create!(name: 'Hot Dog', description: 'Best hot dog deal around', unit_price: 150)
     @item4 = @merchant1.items.create!(name: 'Steaks', description: 'A four pack of ribeyes', unit_price: 3500)
 
+    #Added to test merchant top_five_items method
+    @item13 = @merchant1.items.create!(name: 'Spinach', description: 'A 2lb bag of spinach', unit_price: 400)
+    @item14 = @merchant1.items.create!(name: 'Red Bull', description: 'A pack 0f 24 can 8oz Red Bulls', unit_price: 3200)
+    @item15 = @merchant1.items.create!(name: 'Hot Cheetos', description: 'A 2lb bag of Hot Cheetos', unit_price: 500)
+    @item16 = @merchant1.items.create!(name: 'Toilet Paper', description: 'A pack of 24 rolls of toilet paper', unit_price: 1000)
+    @item17 = @merchant1.items.create!(name: 'Hand Sanitizer', description: '32oz bottle of hand sanitizer', unit_price: 1000)
+
     #Merchant2 Items
     @item5 = @merchant2.items.create!(name: 'Playstation', description: 'Sony playstation, 4th generation', unit_price: 25000)
     @item6 = @merchant2.items.create!(name: 'Sheets', description: 'White bed linens', unit_price: 2000)
@@ -86,6 +93,13 @@ RSpec.configure do |config|
     @invoice4 = @customer1.invoices.create!(status: 'in_progress')
     @invoice5 = @customer1.invoices.create!(status: 'cancelled')
     @invoice6 = @customer1.invoices.create!(status: 'cancelled')
+
+    #Added to test merchant top_five_items method
+    @invoice16 = @customer1.invoices.create!(status: 'completed')
+    @invoice17 = @customer1.invoices.create!(status: 'completed')
+    @invoice18 = @customer1.invoices.create!(status: 'completed')
+    @invoice19 = @customer1.invoices.create!(status: 'completed')
+    @invoice20 = @customer1.invoices.create!(status: 'completed')
 
     #Customer2 Invoices
     @invoice7 = @customer2.invoices.create!(status: 'completed')
@@ -116,13 +130,20 @@ RSpec.configure do |config|
     @invoice_item11 = InvoiceItem.create!(invoice_id: @invoice11.id, item_id: @item11.id, quantity: 100, unit_price: @item11.unit_price, status: 'packaged')
     @invoice_item12 = InvoiceItem.create!(invoice_id: @invoice12.id, item_id: @item12.id, quantity: 100, unit_price: @item12.unit_price, status: 'pending')
 
+    #Added to test merchant top_five_items method
+    @invoice_item17 = InvoiceItem.create!(invoice_id: @invoice16.id, item_id: @item13.id, quantity: 100, unit_price: @item13.unit_price, status: 'shipped')
+    @invoice_item18 = InvoiceItem.create!(invoice_id: @invoice17.id, item_id: @item14.id, quantity: 100, unit_price: @item14.unit_price, status: 'shipped')
+    @invoice_item19 = InvoiceItem.create!(invoice_id: @invoice18.id, item_id: @item15.id, quantity: 100, unit_price: @item15.unit_price, status: 'shipped')
+    @invoice_item20 = InvoiceItem.create!(invoice_id: @invoice19.id, item_id: @item16.id, quantity: 100, unit_price: @item16.unit_price, status: 'shipped')
+    @invoice_item21 = InvoiceItem.create!(invoice_id: @invoice20.id, item_id: @item17.id, quantity: 100, unit_price: @item17.unit_price, status: 'shipped')
+
     # InvoiceItems with repeat items
     @invoice_item13 = InvoiceItem.create!(invoice_id: @invoice13.id, item_id: @item1.id, quantity: 100, unit_price: @item1.unit_price, status: 'shipped')
     @invoice_item14 = InvoiceItem.create!(invoice_id: @invoice14.id, item_id: @item2.id, quantity: 100, unit_price: @item2.unit_price, status: 'packaged')
 
     # InvoiceItems for invoice 1 to have more items
     @invoice_item15 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 25, unit_price: @item2.unit_price, status: 'packaged')
-    @invoice_item16 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 75, unit_price: @item2.unit_price, status: 'pending')
+    @invoice_item16 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 75, unit_price: @item3.unit_price, status: 'pending')
 
 
     # Transactions
@@ -140,6 +161,13 @@ RSpec.configure do |config|
     @transaction12 = @invoice12.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction13 = @invoice13.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
     @transaction14 = @invoice14.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+
+    #Added to test merchant top_five_items method
+    @transaction15 = @invoice16.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction16 = @invoice17.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction17 = @invoice18.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction18 = @invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction19 = @invoice20.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
