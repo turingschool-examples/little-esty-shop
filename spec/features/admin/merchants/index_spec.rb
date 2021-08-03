@@ -90,7 +90,7 @@ RSpec.describe 'it shows the merchant index page' do
 
     within "#top-5-merchants-#{@merchant1.id}" do
       expect(page).to have_content(@merchant1.name)
-      expect(page).to have_content("$185,000.00")
+      expect(page).to have_content("$653,750.00")
     end
 
     within "#top-5-merchants-#{@merchant3.id}" do
@@ -107,6 +107,6 @@ RSpec.describe 'it shows the merchant index page' do
     within "#top-5-merchants-#{@merchant2.id}" do
       expect(page).to have_content("Top selling date for #{@merchant2.name} was #{}")
     end
-    
+
   end
 end

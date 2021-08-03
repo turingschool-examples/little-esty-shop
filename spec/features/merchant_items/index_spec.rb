@@ -56,7 +56,7 @@ RSpec.describe 'the merchant items index' do
       expect(page).to have_content('500')
     end
 
-    it 'can click on enable button and enable disabled item' do
+    xit 'can click on enable button and enable disabled item' do
       visit merchant_items_path(@merchant1)
 
       click_button('Enable Milk')
