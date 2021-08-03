@@ -15,9 +15,26 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+
+mock_api_response = [
+  {"sha"=>"12345",
+    "committer"=> {"name"=>"GitHub", "email"=>"noreply@github.com"},
+    "author"=> {"login"=>"tvaroglu", "id"=>12345}},
+  {"sha"=>"67891",
+    "committer"=> {"name"=>"GitHub", "email"=>"noreply@github.com"},
+    "author"=> {"login"=>"bfl3tch", "id"=>67891}},
+  {"sha"=>"23456",
+    "committer"=> {"name"=>"GitHub", "email"=>"noreply@github.com"},
+    "author"=> {"login"=>"tvaroglu", "id"=>23456}},
+]
+
 RSpec.configure do |c|
   c.before(:each, :type => :feature) do
-    allow(API).to receive(:aggregate_by_author).and_return(API.contributions[:defaults][:commits])
+    # allow(API).to receive(:aggregate_by_author).with(:commits).and_return(API.contributions[:defaults][:commits])
+    # allow(API).to receive(:aggregate_by_author).with(:pulls).and_return(API.contributions[:defaults][:pulls])
+    allow(Faraday).to receive(:get).and_return(mock_api_response.to_json)
+    ApplicationController.class_variable_set(:@@class_commits, API.contributions[:defaults][:commits])
+    ApplicationController.class_variable_set(:@@class_pulls, API.contributions[:defaults][:pulls])
   end
 end
 # Add additional requires below this line. Rails is not loaded until this point!
