@@ -13,10 +13,42 @@
  *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
+ html, body {
+	background-image: image-url('/assets/wordpressrippp.jpg'); 
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.navbar-custom {
+	background-color: #ffffff80;
+}
+
+.blacktext {
+	color: black;
+}
+
+// html { 
+//   background: image-url('/assets/wordpressrippp.jpg') no-repeat center center fixed; 
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
+
 .center{
   justify-content: center;
 }
 
 #secret{
   display: none;
+}
+
+h1, h2, h3 {
+  font-family: 'Quicksand'
 }
