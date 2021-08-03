@@ -25,23 +25,32 @@ class Item < ApplicationRecord
     merchant_id == nil ? query : query.where("items.merchant_id = ?", merchant_id)
   end
 
+
   def item_best_day(item_id)
     Item.select("items.*, CAST(invoices.created_at AS DATE) AS purchase_date, sum(invoice_items.quantity) AS daily_sales")
-            .joins(invoice_items: { invoice: :transactions } )
-            # .joins("INNER JOIN invoice_items on items.id = invoice_items.item_id")
-            # .joins(:invoice_items)
-            # .joins(invoices: :transactions)
-            # .joins(:invoices)
-            # .joins("INNER JOIN invoices on invoice_items.invoice_id = invoices.id")
-            # .joins("INNER JOIN transactions on transactions.invoice_id = invoices.id")
-            .where("transactions.result = ?", 0)
-            .where(id: item_id)
-            .group(:id, :purchase_date)
-            .order(daily_sales: :desc, purchase_date: :desc)
-            .limit(1)
-            #
-            #
-            # Item.find_by_sql("SELECT CAST(invoices.created_at AS date) AS purchase_date, sum(invoice_items.quantity) AS daily_sales, items.id as item_id FROM items INNER JOIN invoice_items ON items.id = invoice_items.item_id INNER JOIN invoices on invoice_items.invoice_id = invoices.id INNER JOIN transactions ON transactions.invoice_id = invoices.id WHERE transactions.result = 0 AND items.id = #{item_id} GROUP BY items.id, purchase_date ORDER BY daily_sales DESC, purchase_date DESC limit 1")
-
+        .joins(invoice_items: { invoice: :transactions } )
+        # .joins("INNER JOIN invoice_items on items.id = invoice_items.item_id")
+        # .joins(:invoice_items)
+        # .joins(invoices: :transactions)
+        # .joins(:invoices)
+        # .joins("INNER JOIN invoices on invoice_items.invoice_id = invoices.id")
+        # .joins("INNER JOIN transactions on transactions.invoice_id = invoices.id")
+        .where("transactions.result = ?", 0)
+        .where(id: item_id)
+        .group(:id, :purchase_date)
+        .order(daily_sales: :desc, purchase_date: :desc)
+        .limit(1)
+        #
+        #
+        # Item.find_by_sql("SELECT CAST(invoices.created_at AS date) AS purchase_date, sum(invoice_items.quantity) AS daily_sales, items.id as item_id FROM items INNER JOIN invoice_items ON items.id = invoice_items.item_id INNER JOIN invoices on invoice_items.invoice_id = invoices.id INNER JOIN transactions ON transactions.invoice_id = invoices.id WHERE transactions.result = 0 AND items.id = #{item_id} GROUP BY items.id, purchase_date ORDER BY daily_sales DESC, purchase_date DESC limit 1")
   end
+  
+  def self.enabled_items
+    where(enable: 0)
+  end
+
+  def self.disabled_items
+    where(enable: 1)
+  end
+    
 end

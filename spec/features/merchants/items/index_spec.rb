@@ -60,11 +60,11 @@ RSpec.describe 'Merchants Item Index Page' do
 
   it 'is on the correct page' do
     expect(current_path).to eq(merchant_items_path(@merchant1.id))
-    expect(page).to have_content("Merchant Items")
+    expect(page).to have_content("#{@merchant1.name}'s Items")
   end
 
   it 'can display all of the merchants items' do
-    expect(page).to have_content('Merchants Items')
+    expect(page).to have_content('All Items')
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item2.name)
@@ -120,7 +120,6 @@ RSpec.describe 'Merchants Item Index Page' do
   end
 
   describe 'the top five items table for this merchant' do
-
     it 'shows the names of the top 5 most popular items' do
       within('table#top-item-table') do
         expect(page).to have_content(@item1.name)
@@ -176,11 +175,51 @@ RSpec.describe 'Merchants Item Index Page' do
       end
     end
 
+
     it 'displays the top selling date for each item next to the item' do
       expected = @item1.created_at.to_date
 
       within("tr#item-#{@item1.id}") do
         expect(page).to have_content(expected)
+      end
+    end
+
+  describe "enabled and disabled sections" do
+    it 'displays all of the enabled items' do
+      merchant1 = Merchant.create!(name: 'Tom Holland')
+      item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+      item2 = Item.create!(name: 'web shooter', description: 'shoots webs', unit_price: 5000, merchant_id: merchant1.id, enable: 'disable')
+      item3 = Item.create!(name: 'asdf', description: '3', unit_price: 7500, merchant_id: merchant1.id)
+      item4 = Item.create!(name: 'ghjk', description: '4', unit_price: 8500, merchant_id: merchant1.id, enable: 'disable')
+      item5 = Item.create!(name: 'qwer', description: '5', unit_price: 9764, merchant_id: merchant1.id)
+
+      visit merchant_items_path(merchant1.id)
+
+      within "#enabled" do
+        expect(page).to have_content(item1.name)
+        expect(page).to have_content(item3.name)
+        expect(page).to have_content(item5.name)
+        expect(page).to_not have_content(item2.name)
+        expect(page).to_not have_content(item4.name)
+      end
+    end
+
+    it 'displays all of the disabled items' do
+      merchant1 = Merchant.create!(name: 'Tom Holland')
+      item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+      item2 = Item.create!(name: 'web shooter', description: 'shoots webs', unit_price: 5000, merchant_id: merchant1.id, enable: 'disable')
+      item3 = Item.create!(name: 'asdf', description: '3', unit_price: 7500, merchant_id: merchant1.id)
+      item4 = Item.create!(name: 'ghjk', description: '4', unit_price: 8500, merchant_id: merchant1.id, enable: 'disable')
+      item5 = Item.create!(name: 'qwer', description: '5', unit_price: 9764, merchant_id: merchant1.id)
+
+      visit merchant_items_path(merchant1.id)
+
+      within "#disabled" do
+        expect(page).to have_content(item2.name)
+        expect(page).to have_content(item4.name)
+        expect(page).to_not have_content(item1.name)
+        expect(page).to_not have_content(item3.name)
+        expect(page).to_not have_content(item5.name)
       end
     end
   end

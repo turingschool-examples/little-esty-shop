@@ -1,5 +1,5 @@
-<h1>Merchant Items</h1>
-<%= link_to 'Create a new item', new_merchant_item_path %><br>
+<h1><%= @merchant.name %>'s Items</h1>
+<%= link_to 'Create a new item', new_merchant_item_path %><br><br>
 <table>
   <thead>
     <tr>
@@ -8,6 +8,7 @@
   </thead>
 
 <h3>Merchants Items</h3>
+
   <tbody>
     <% @merchant.items.each do |merchant_item| %>
       <tr id= "merchant_item-<%= merchant_item.id %>">
@@ -29,9 +30,7 @@
       <th style="text-align:center">Top 5 Items</th>
     </tr>
   </thead>
-
   <tbody>
-
   <tr>
     <td colspan="3">
       <table class="table mb-0 table-striped table-hover">
@@ -53,4 +52,46 @@
         </tr>
       <br>
   </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <div id="enabled">
+    <tbody>
+      <h2>Enabled Items</h2>
+      <% @enabled_items.each do |item| %>
+        <tr id="enabled_item-<%= item.id %>">
+          <td><%= item.name %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<br>
+  <div id="disabled">
+    <tbody>
+      <h2>Disabled Items</h2>
+      <% @disabled_items.each do |item| %>
+        <tr id="disabled_item-<%= item.id %>">
+          <td><%= item.name %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
 </table>

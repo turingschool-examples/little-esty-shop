@@ -76,7 +76,7 @@ RSpec.describe Item do
       @customer_2.invoices[5].transactions.create!(credit_card_number: '9012', credit_card_expiration_date: '', result: 0)
     end
 
-    describe '#items_ready_to_ship_by_ordered_date' do
+    describe '::items_ready_to_ship_by_ordered_date' do
       it 'for a given merchant' do
         expected = Item.items_ready_to_ship_by_ordered_date(@merchant_1.id)
 
@@ -100,6 +100,7 @@ RSpec.describe Item do
         expect(expected[5].invoice_id).to eq(@customer_2.invoices[3].id)
       end
     end
+
     describe '#item_best_day' do
       it 'determines the day with the most sales for a particular item' do
         expect(@item_1.item_best_day(@item_1.id).first.daily_sales).to eq(3)
@@ -108,5 +109,20 @@ RSpec.describe Item do
       end
     end
 
+    describe '::enabled_items' do
+      it "selects all merchant's items with enabled status" do
+        @item_4 = Item.create!(name: 'Hammer', description: 'pound stuff', unit_price: 10_000, merchant_id: @merchant_1.id, enable: 'disable')
+
+        expect(@merchant_1.items.enabled_items).to eq([@item_1, @item_2, @item_3])
+      end
+    end
+
+    describe '::disabled_items' do
+      it "selects all merchant's items with enabled status" do
+        @item_4 = Item.create!(name: 'Hammer', description: 'pound stuff', unit_price: 10_000, merchant_id: @merchant_1.id, enable: 'disable')
+
+        expect(@merchant_1.items.disabled_items).to eq([@item_4])
+      end
+    end
   end
 end
