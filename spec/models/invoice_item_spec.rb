@@ -21,19 +21,19 @@ RSpec.describe InvoiceItem, type: :model do
   # end
 
   describe 'class methods' do
-   describe '.locate' do
-     it 'locates invoice item with invoice and item ids' do
-       expected = InvoiceItem.locate(@invoice1.id, @item1.id)
+    describe '.locate' do
+      it 'locates invoice item with invoice and item ids' do
+        expected = InvoiceItem.locate(@invoice1.id, @item1.id)
 
-       expect(expected).to eq(@invoice_item1)
-     end
+        expect(expected).to eq(@invoice_item1)
+      end
     end
 
     describe '.total_revenue' do
       it 'calculates total revenue of a collection of invoice items' do
         expected = @invoice1.invoice_items.total_revenue
-        
-        expect(expected).to eq(120000)
+
+        expect(expected).to eq(78750)
       end
     end
   end

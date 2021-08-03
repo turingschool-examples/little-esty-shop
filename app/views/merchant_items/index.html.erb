@@ -1,5 +1,7 @@
 <h2><%= @merchant.name %></h2>
 
+<%= button_to 'Create a New Item', new_merchant_item_path(@merchant), method: :get %>
+
 <h3>Enabled Items</h3>
   <% @merchant.items.each do |item| %>
     <% if item.status == 'Enabled' %>
@@ -22,4 +24,7 @@
     <% end %>
   <% end %>
 
-<%= button_to 'Create a New Item', new_merchant_item_path(@merchant), method: :get %>
+<h3>Top Items</h3>
+  <% @merchant.top_five_items.each do |item| %>
+    <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> - <%= number_to_currency((item.revenue / 100)) %> in sales</p>
+  <% end %>
