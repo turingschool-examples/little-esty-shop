@@ -1,0 +1,5 @@
+<div id='header'>
+  <h1><%= @merchant.name %></h1>
+  <p><b><%= link_to "My Invoices", merchant_invoices_path(@merchant.id) %></b></p>
+  <p><b><%= link_to "My Items", merchant_items_path(@merchant.id) %></b></p>
+</div>

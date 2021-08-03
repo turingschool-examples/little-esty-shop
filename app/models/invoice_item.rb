@@ -7,4 +7,8 @@ class InvoiceItem < ApplicationRecord
   def self.locate(invoice_id, item_id)
     where('invoice_id = ?', invoice_id).where('item_id = ?', item_id).first
   end
+
+  def self.total_revenue
+    sum("quantity * unit_price")
+  end
 end

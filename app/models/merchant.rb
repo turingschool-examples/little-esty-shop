@@ -26,4 +26,12 @@ class Merchant < ApplicationRecord
   def best_day
     require "pry"; binding.pry
   end
+
+  def top_five_items
+    items.joins(invoices: :transactions)
+         .where(transactions: {result: true})
+         .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+         .group("items.id")
+         .order(revenue: :desc)
+  end
 end

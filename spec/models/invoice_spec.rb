@@ -14,4 +14,9 @@ RSpec.describe Invoice do
       it { should define_enum_for(:status).with_values([:in_progress, :completed, :cancelled]) }
     end
   end
+
+  it 'calculates invoice total revenue' do
+    expect(@invoice1.invoice_items.count).to eq(3)
+    expect(@invoice1.total_revenue).to eq(120000)
+  end
 end
