@@ -93,8 +93,32 @@ RSpec.describe 'Merchants Items Index page' do
 
   it "displays correct date format" do
     visit "/merchants/#{@merchant_1.id}/items"
+
     within("#Top") do
       expect(page).to have_content("02/03/20")
+    end
+  end
+
+  it "displays the most recent date on equal top selling dates" do
+    @customers << create(:customer)
+
+    @items << create(:item, merchant_id: @merchant_1.id, unit_price: 99999, name: "Big Chungus", created_at: DateTime.new(2020,2,3,4,5,6))
+    @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2021,2,3,4,5,6))
+    @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2021,2,3,4,5,6))
+    @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id,
+      status: 1, quantity: 1000, unit_price: @items.last.unit_price, created_at: DateTime.new(2021,2,3,4,5,6))
+
+    @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+    @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+    @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id,
+      status: 1, quantity: 1000, unit_price: @items.last.unit_price, created_at: DateTime.new(2020,2,3,4,5,6))
+      # require "pry"; binding.pry
+
+    visit "/merchants/#{@merchant_1.id}/items"
+    save_and_open_page
+
+    within("#Top") do
+      expect(page).to have_content("02/03/21")
     end
   end
 
