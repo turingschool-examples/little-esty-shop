@@ -118,4 +118,53 @@ RSpec.describe 'Merchants Items Index page' do
       expect(Item.last.enabled).to eq("disabled")
     end
   end
+  # describe '#best_revenue_day' do
+  #   it 'displays #best_revenue_day for each item' do
+  #     InvoiceItem.destroy_all
+  #     Item.destroy_all
+  #     Transaction.destroy_all
+  #     Invoice.destroy_all
+  #     Customer.destroy_all
+  #     Merchant.destroy_all
+  #     customers2 = []
+  #     invoices2 = []
+  #     items2 = []
+  #     transactions2 = []
+  #     invoice_items2 = []
+  #
+  #     merchant_2 = create(:merchant)
+  #
+  #     customers2 << create(:customer)
+  #     customers2 << create(:customer)
+  #     customers2 << create(:customer)
+  #     customers2 << create(:customer)
+  #     customers2 << create(:customer)
+  #
+  #     items2 << create(:item, merchant_id: merchant_2.id, enabled: 0)
+  #     items2 << create(:item, merchant_id: merchant_2.id, enabled: 0)
+  #     items2 << create(:item, merchant_id: merchant_2.id, enabled: 0)
+  #     items2 << create(:item, merchant_id: merchant_2.id, enabled: 0)
+  #     items2 << create(:item, merchant_id: merchant_2.id, enabled: 0)
+  #     invoices2 << create(:invoice, customer_id: customers2[0].id, status: 2, created_at: DateTime.new(2020,1,3,4,5,6))
+  #     invoices2 << create(:invoice, customer_id: customers2[1].id, status: 2, created_at: DateTime.new(2019,2,3,4,5,6))
+  #     invoices2 << create(:invoice, customer_id: customers2[2].id, status: 2, created_at: DateTime.new(2018,3,3,4,5,6))
+  #     invoices2 << create(:invoice, customer_id: customers2[3].id, status: 2, created_at: DateTime.new(2017,4,3,4,5,6))
+  #     invoices2 << create(:invoice, customer_id: customers2[4].id, status: 2, created_at: DateTime.new(2016,5,3,4,5,6))
+  #
+  #     transactions2 << create(:transaction, invoice_id: invoices2[0].id)
+  #     transactions2 << create(:transaction, invoice_id: invoices2[1].id)
+  #     transactions2 << create(:transaction, invoice_id: invoices2[2].id)
+  #     transactions2 << create(:transaction, invoice_id: invoices2[3].id)
+  #     transactions2 << create(:transaction, invoice_id: invoices2[4].id)
+  #     invoice_items2 << create(:invoice_item, item_id: items2[0].id, invoice_id: invoices2[0].id, status: 2, quantity: 4, unit_price: 10)
+  #     invoice_items2 << create(:invoice_item, item_id: items2[1].id, invoice_id: invoices2[1].id, status: 2, quantity: 2, unit_price: 10)
+  #     invoice_items2 << create(:invoice_item, item_id: items2[2].id, invoice_id: invoices2[2].id, status: 2, quantity: 3, unit_price: 10)
+  #     invoice_items2 << create(:invoice_item, item_id: items2[3].id, invoice_id: invoices2[3].id, status: 2, quantity: 4, unit_price: 10)
+  #     invoice_items2 << create(:invoice_item, item_id: items2[4].id, invoice_id: invoices2[4].id, status: 2, quantity: 1, unit_price: 10)
+  #     @invoices = []
+  #     within("#Top") do
+  #       expect(page).to have_content(invoices2[0].created_at)
+  #     end
+  #   end
+  # end
 end
