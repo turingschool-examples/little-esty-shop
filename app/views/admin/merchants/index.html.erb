@@ -3,6 +3,13 @@
 
 <h3> Click this link to <%= link_to "create a new merchant", new_admin_merchant_path %> </h3>
 
+<h2> Top 5 Merchants by Revenue </h2>
+<% @merchants.top_5_merchants_revenue.each do |merchant| %>
+  <section id="top-5-merchants-<%= merchant.id %>">
+  <p> <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>, Revenue Generated: <%= number_to_currency(merchant.revenue) %> </p>
+  </section>
+<% end %>
+
 <h2> Enabled Merchants </h2>
 <% @merchants.enabled_merchants.each do |merchant| %>
   <section id="enabled-admin-merchants-<%= merchant.id %>">

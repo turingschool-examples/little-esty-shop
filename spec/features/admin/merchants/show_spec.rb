@@ -6,7 +6,9 @@ RSpec.describe 'it shows the attributes of a certain merchant' do
   it 'can click the link on the index page of a certain merchant and be taken to its show page' do
     visit "/admin/merchants"
 
-    click_link("#{@merchant1.name}")
+    within "#disabled-admin-merchants-#{@merchant1.id}" do
+      click_link("#{@merchant1.name}")
+    end
 
     expect(current_path).to eq("/admin/merchants/#{@merchant1.id}")
   end

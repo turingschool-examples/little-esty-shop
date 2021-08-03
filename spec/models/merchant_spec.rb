@@ -27,13 +27,16 @@ RSpec.describe Merchant, type: :model do
 
     describe '.top_5_merchants_revenue' do
       it 'can get the top 5 merchants by their revenue based off of successful transactions' do
-        expect(Merchant.top_5_merchants_revenue).to eq([])  
+        expect(Merchant.top_5_merchants_revenue).to eq([@merchant2, @merchant1, @merchant3])  
       end
     end
   end
 
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
+  describe 'instance methods' do
+    describe '#best_day' do
+      it 'can get the best day for revenue for the top 5 merchants by revenue' do
+        expect(@merchant1.best_day)
+      end
+    end
+  end
 end

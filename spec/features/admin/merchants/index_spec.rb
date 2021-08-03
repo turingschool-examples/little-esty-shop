@@ -81,4 +81,32 @@ RSpec.describe 'it shows the merchant index page' do
       expect(page).to have_content(@merchant5.name)
     end
   end
+
+  it 'displays the top 5 merchants by revenue on the show page' do
+    within "#top-5-merchants-#{@merchant2.id}" do
+      expect(page).to have_content(@merchant2.name)
+      expect(page).to have_content("$2,740,000.00")
+    end
+
+    within "#top-5-merchants-#{@merchant1.id}" do
+      expect(page).to have_content(@merchant1.name)
+      expect(page).to have_content("$185,000.00")
+    end
+
+    within "#top-5-merchants-#{@merchant3.id}" do
+      expect(page).to have_content(@merchant3.name)
+      expect(page).to have_content("$29,900.00")
+    end
+
+    expect(@merchant2.name).to appear_before(@merchant1.name)
+    expect(@merchant1.name).to appear_before(@merchant3.name)
+  end
+
+  it 'can label the date for the merchants best day for revenue' do
+
+    within "#top-5-merchants-#{@merchant2.id}" do
+      expect(page).to have_content("Top selling date for #{@merchant2.name} was #{@merchant.}")
+    end
+    
+  end
 end

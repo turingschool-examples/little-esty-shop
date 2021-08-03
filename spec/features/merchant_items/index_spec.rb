@@ -55,7 +55,6 @@ RSpec.describe 'the merchant items index' do
 
       expect(current_path).to eq(merchant_items_path(@merchant1))
       expect(page).to have_content('Status: Enabled')
-      save_and_open_page
     end
   end
 end
