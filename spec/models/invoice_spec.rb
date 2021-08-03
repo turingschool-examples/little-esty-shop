@@ -19,7 +19,7 @@ RSpec.describe Invoice do
     invoice_item2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 50, unit_price: @item2.unit_price, status: 'shipped')
     invoice_item3 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 25, unit_price: @item3.unit_price, status: 'shipped')
 
-    expect(@invoice1.invoice_items.count).to eq(3)
-    expect(@invoice1.total_revenue).to eq(88750)
+    expect(@invoice1.invoice_items.count).to eq(5)
+    expect(@invoice1.total_revenue).to eq(117500)
   end
 end
