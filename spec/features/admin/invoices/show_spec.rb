@@ -18,7 +18,6 @@ RSpec.describe 'Admin Invoice Show Page' do
     expect(page).to have_content("#{@customer1.last_name}")
 
     expect(page).to_not have_content("#{@invoice8.id}")
-    expect(page).to_not have_content("#{@invoice8.status}")
     expect(page).to_not have_content("#{@customer2.first_name}")
     expect(page).to_not have_content("#{@customer2.last_name}")
   end
@@ -84,18 +83,18 @@ RSpec.describe 'Admin Invoice Show Page' do
   # it 'has a select field for invoice status with current status selected' do
   it 'can select a new status, submit form, and see the updated status' do
     visit admin_invoice_path("#{@invoice1.id}")
+    
+    expect(page).to have_select(:status, selected: :completed)
+    expect(@invoice1.status).to_not eq(:in_progress)
 
-    expect(page).to have_select('invoice[status]', selected: 'completed')
-    expect(@invoice1.status).to_not eq('in progress')
-
-    page.select 'in progress', from: 'invoice[status]'
+    page.select :in_progress, from: :status
     click_button 'Update Invoice Status'
 
     expect(current_path).to eq(admin_invoice_path(@invoice1.id))
 
     updated_invoice = Invoice.find(@invoice1.id)
 
-    expect(updated_invoice.status).to eq('in progress')
-    expect(page).to have_select('invoice[status]', selected: 'in progress')
+    expect(updated_invoice.status).to eq(:in_progress)
+    expect(page).to have_select(:status, selected: :in_progress)
   end
 end
