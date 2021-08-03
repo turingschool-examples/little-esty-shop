@@ -14,4 +14,11 @@ RSpec.describe Customer do
       it { should validate_presence_of(:first_name) }
     end
   end
+
+  it 'returns top 5 customers with most number of successful transactions' do
+    expected = [@customer5, @customer7, @customer10, @customer9, @customer6]
+    
+    expect(Customer.top_5_customers.count).to eq(5)
+    expect(Customer.top_5_customers).to eq(expected)
+  end
 end
