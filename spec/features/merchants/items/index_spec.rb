@@ -22,16 +22,16 @@ RSpec.describe 'Merchants Items Index page' do
   end
 
   it "lists the names of all this merchants items" do
-    expect(page).to have_content(Item.first.name)
-    expect(page).to have_content(Item.second.name)
-    expect(page).to have_content(Item.third.name)
+    expect(page).to have_content(@items.first.name)
+    expect(page).to have_content(@items.second.name)
+    expect(page).to have_content(@items.third.name)
   end
 
   it "does not have items from other merchants" do
     merchant_2 = create(:merchant)
-    items = create(:item, name: "Please Not This", merchant_id: merchant_2.id)
+    @items << create(:item, name: "Please Not This", merchant_id: merchant_2.id)
 
-    expect(page).to_not have_content(Item.last.name)
+    expect(page).to_not have_content(@items.last.name)
   end
 
   it 'displays button to enable/disable item and sorts into the correct section' do
@@ -103,19 +103,17 @@ RSpec.describe 'Merchants Items Index page' do
     @customers << create(:customer)
 
     @items << create(:item, merchant_id: @merchant_1.id, unit_price: 99999, name: "Big Chungus", created_at: DateTime.new(2020,2,3,4,5,6))
+    @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+    @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+    @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id,
+      status: 1, quantity: 1000, unit_price: @items.last.unit_price, created_at: DateTime.new(2020,2,3,4,5,6))
+
     @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2021,2,3,4,5,6))
     @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2021,2,3,4,5,6))
     @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id,
       status: 1, quantity: 1000, unit_price: @items.last.unit_price, created_at: DateTime.new(2021,2,3,4,5,6))
 
-    @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
-    @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
-    @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id,
-      status: 1, quantity: 1000, unit_price: @items.last.unit_price, created_at: DateTime.new(2020,2,3,4,5,6))
-      # require "pry"; binding.pry
-
     visit "/merchants/#{@merchant_1.id}/items"
-    save_and_open_page
 
     within("#Top") do
       expect(page).to have_content("02/03/21")

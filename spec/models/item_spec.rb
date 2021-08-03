@@ -82,5 +82,35 @@ RSpec.describe Item do
                                             @items2[3]
                                             ])
     end
+
+    it "returns the newest date of the highest value" do
+      @merchant_1 = create(:merchant)
+      @item = create(:item, merchant_id: @merchant_1.id, unit_price: 1)
+
+      @customers = []
+      @invoices = []
+      @transactions = []
+      @invoice_items = []
+
+      @customers << create(:customer)
+
+      Transaction.destroy_all
+      Invoice.destroy_all
+
+
+      @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2019,2,3,4,5,6))
+      @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2019,2,3,4,5,6))
+      @invoice_items << create(:invoice_item, item_id: @item.id, invoice_id: @invoices.last.id, status: 1, created_at: DateTime.new(2019,2,3,4,5,6), unit_price: @item.unit_price, quantity: 1000)
+
+      @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+      @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2020,2,3,4,5,6))
+      @invoice_items << create(:invoice_item, item_id: @item.id, invoice_id: @invoices.last.id, status: 1, created_at: DateTime.new(2020,2,3,4,5,6), unit_price: @item.unit_price, quantity: 500)
+
+      @invoices << create(:invoice, customer_id: @customers.last.id, created_at: DateTime.new(2018,2,3,4,5,6))
+      @transactions << create(:transaction, invoice_id: @invoices.last.id, created_at: DateTime.new(2018,2,3,4,5,6))
+      @invoice_items << create(:invoice_item, item_id: @item.id, invoice_id: @invoices.last.id, status: 1, created_at: DateTime.new(2018,2,3,4,5,6), unit_price: @item.unit_price, quantity: 1000)
+
+      expect(Item.best_revenue_day(@item.id).strftime("%m/%d/%y")).to eq("02/03/19")
+    end
   end
 end
