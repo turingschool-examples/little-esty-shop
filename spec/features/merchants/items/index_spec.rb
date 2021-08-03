@@ -64,7 +64,7 @@ RSpec.describe 'Merchants Item Index Page' do
   end
 
   it 'can display all of the merchants items' do
-    expect(page).to have_content('All Items')
+    expect(page).to have_content('Merchants Items')
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item2.name)
@@ -183,6 +183,7 @@ RSpec.describe 'Merchants Item Index Page' do
         expect(page).to have_content(expected)
       end
     end
+  end
 
   describe "enabled and disabled sections" do
     it 'displays all of the enabled items' do
