@@ -52,7 +52,7 @@ RSpec.describe Item do
                                           ])
     end
 
-    it " does thing " do
+    it "returns top 5 most popular items" do
       @customers2 = []
       @items2 = []
       @invoice2 = []
