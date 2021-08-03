@@ -23,14 +23,10 @@ RSpec.describe Merchant do
       @item3 = Item.create!(name: 'upside down kiss', description: 'That Mary jane Swag', unit_price: '15000', merchant_id: @merchant.id)
 
       @inv_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 1)
-
-      #test data for to_merchants_by_revenue
-
-
     end
 
     describe '::merchant_invoice' do
-      it 'returns all invoices with that merchants items' do
+      it "returns all invoices with a merchant's items" do
         @merchant = Merchant.create!(name: 'Tom Bolland')
         @merchant2 = Merchant.create!(name: 'Tom Holland')
 
@@ -52,7 +48,7 @@ RSpec.describe Merchant do
     end
 
     describe '::order_by_enabled' do
-      it 'selects all merchatn with enabled status' do
+      it 'selects all merchants with an enabled status' do
         @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
         @merchant2 = Merchant.create!(name: 'Beta', status: 1)
         @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
@@ -65,7 +61,7 @@ RSpec.describe Merchant do
     end
 
     describe '::order_by_disabled' do
-      it 'selects all merchant with enabled status' do
+      it 'selects all merchants with a disabled status' do
         @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
         @merchant2 = Merchant.create!(name: 'Beta', status: 1)
         @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
@@ -78,7 +74,7 @@ RSpec.describe Merchant do
     end
 
     describe '#enable_opposite' do
-      it "returns the opposite of the item's enabled/disabled status; " do
+      it "returns the opposite of the merchant's enabled/disabled status" do
         expect(@merchant.status).to eq('enabled')
         expect(@merchant.status_opposite).to eq('disabled')
       end
@@ -87,7 +83,7 @@ RSpec.describe Merchant do
     describe '#top_five_items' do
       it 'determines the top 5 most popular items ranked by total revenue generated' do
         @merchant2 = Merchant.create!(name: 'Mary Jane')
-        @item3 = Item.create!(name: 'upside down kiss', description: 'That Mary jane Swag', unit_price: 15000, merchant_id: @merchant2.id)
+        @item3 = Item.create!(name: 'upside down kiss', description: 'That Mary Jane Swag', unit_price: 15000, merchant_id: @merchant2.id)
 
         @customer1 = Customer.create!(first_name: 'Ben', last_name: 'Franklin')
         @invoice1 = @customer1.invoices.create!(status: 0)
@@ -96,24 +92,24 @@ RSpec.describe Merchant do
 
         @item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: @merchant1.id)
         @item2 = Item.create!(name: 'web shooter', description: 'shoots webs', unit_price: 5000, merchant_id: @merchant1.id)
-        @item3 = Item.create!(name: 'asdf', description: '3', unit_price: 7500, merchant_id: @merchant1.id)
-        @item4 = Item.create!(name: 'ghjk', description: '4', unit_price: 8500, merchant_id: @merchant1.id)
-        @item5 = Item.create!(name: 'qwer', description: '5', unit_price: 9764, merchant_id: @merchant1.id)
-        @item6 = Item.create!(name: 'erty', description: '6', unit_price: 4257, merchant_id: @merchant1.id)
-        @item7 = Item.create!(name: 'yuio', description: '7', unit_price: 4521, merchant_id: @merchant1.id)
-        @item8 = Item.create!(name: 'hjkl', description: '8', unit_price: 8854, merchant_id: @merchant1.id)
-        @item9 = Item.create!(name: 'tyiu', description: '9', unit_price: 4212, merchant_id: @merchant1.id)
-        @item10 = Item.create!(name: 'vbnm', description: '10', unit_price: 2001, merchant_id: @merchant1.id)
-        @item11 = Item.create!(name: 'cvbn', description: '11', unit_price: 4556, merchant_id: @merchant1.id)
-        @item12 = Item.create!(name: 'xcvb', description: '12', unit_price: 7510, merchant_id: @merchant1.id)
-        @item13 = Item.create!(name: 'zxcv', description: '13', unit_price: 15_000, merchant_id: @merchant1.id)
-        @item14 = Item.create!(name: 'sdfg', description: '14', unit_price: 6900, merchant_id: @merchant1.id)
-        @item15 = Item.create!(name: 'dfgh', description: '15', unit_price: 4200, merchant_id: @merchant1.id)
-        @item16 = Item.create!(name: 'fghj', description: '16', unit_price: 8352, merchant_id: @merchant1.id)
-        @item17 = Item.create!(name: 'ytee', description: '17', unit_price: 2540, merchant_id: @merchant1.id)
-        @item18 = Item.create!(name: 'rewq', description: '18', unit_price: 1976, merchant_id: @merchant1.id)
-        @item19 = Item.create!(name: 'bnbv', description: '19', unit_price: 3675, merchant_id: @merchant1.id)
-        @item20 = Item.create!(name: 'poiu', description: '20', unit_price: 9764, merchant_id: @merchant1.id)
+        @item3 = Item.create!(name: 'item3', description: '3', unit_price: 7500, merchant_id: @merchant1.id)
+        @item4 = Item.create!(name: 'item4', description: '4', unit_price: 8500, merchant_id: @merchant1.id)
+        @item5 = Item.create!(name: 'item5', description: '5', unit_price: 9764, merchant_id: @merchant1.id)
+        @item6 = Item.create!(name: 'item6', description: '6', unit_price: 4257, merchant_id: @merchant1.id)
+        @item7 = Item.create!(name: 'item7', description: '7', unit_price: 4521, merchant_id: @merchant1.id)
+        @item8 = Item.create!(name: 'item8', description: '8', unit_price: 8854, merchant_id: @merchant1.id)
+        @item9 = Item.create!(name: 'item9', description: '9', unit_price: 4212, merchant_id: @merchant1.id)
+        @item10 = Item.create!(name: 'item10', description: '10', unit_price: 2001, merchant_id: @merchant1.id)
+        @item11 = Item.create!(name: 'item11', description: '11', unit_price: 4556, merchant_id: @merchant1.id)
+        @item12 = Item.create!(name: 'item12', description: '12', unit_price: 7510, merchant_id: @merchant1.id)
+        @item13 = Item.create!(name: 'item13', description: '13', unit_price: 15_000, merchant_id: @merchant1.id)
+        @item14 = Item.create!(name: 'item14', description: '14', unit_price: 6900, merchant_id: @merchant1.id)
+        @item15 = Item.create!(name: 'item15', description: '15', unit_price: 4200, merchant_id: @merchant1.id)
+        @item16 = Item.create!(name: 'item16', description: '16', unit_price: 8352, merchant_id: @merchant1.id)
+        @item17 = Item.create!(name: 'item17', description: '17', unit_price: 2540, merchant_id: @merchant1.id)
+        @item18 = Item.create!(name: 'item18', description: '18', unit_price: 1976, merchant_id: @merchant1.id)
+        @item19 = Item.create!(name: 'item19', description: '19', unit_price: 3675, merchant_id: @merchant1.id)
+        @item20 = Item.create!(name: 'item20', description: '20', unit_price: 9764, merchant_id: @merchant1.id)
 
         @invoice_item1 = InvoiceItem.create!(item: @item1, invoice: @invoice1, quantity: 10, unit_price: @item1.unit_price, status: 0)
         @invoice_item2 = InvoiceItem.create!(item: @item2, invoice: @invoice1, quantity: 3, unit_price: @item2.unit_price, status: 0)
@@ -137,32 +133,32 @@ RSpec.describe Merchant do
         @invoice_item20 = InvoiceItem.create!(item: @item20, invoice: @invoice1, quantity: 7, unit_price: @item20.unit_price, status: 0)
 
         @customer1.invoices.first.transactions.create!(credit_card_number: '1234', credit_card_expiration_date: '', result: 0)
-  
+
         expected = [@item1, @item20, @item4, @item13, @item15]
         expect(@merchant1.top_five_items.length).to eq(5)
         expect(@merchant1.top_five_items).to eq(expected)
       end
     end
 
-    describe '::top_merchants_by_revenue' do 
-      it 'displays top 5 merchants by revenue' do 
-        merchant1 = Merchant.create!(name:'Hishiro', status: 0)
-        merchant2 = Merchant.create!(name:'Hishiro1', status: 0)
-        merchant3 = Merchant.create!(name:'Hishiro2', status: 0)
-        merchant4 = Merchant.create!(name:'Hishiro3', status: 0)
-        merchant5 = Merchant.create!(name:'Hishiro4', status: 0)
-        merchant6 = Merchant.create!(name:'Hishiro4', status: 0)
+    describe '::top_merchants_by_revenue' do
+      it 'displays top 5 merchants by revenue' do
+        merchant1 = Merchant.create!(name:'Hishiro1', status: 0)
+        merchant2 = Merchant.create!(name:'Hishiro2', status: 0)
+        merchant3 = Merchant.create!(name:'Hishiro3', status: 0)
+        merchant4 = Merchant.create!(name:'Hishiro4', status: 0)
+        merchant5 = Merchant.create!(name:'Hishiro5', status: 0)
+        merchant6 = Merchant.create!(name:'Hishiro6', status: 0)
 
-        item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
-        item2 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
-        item3 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
-        item4 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
-        item5 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
-        item6 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
-        item7 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
-        item8 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
-        item9 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id) 
-        item10 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+        item1 = Item.create!(name: 'spider suit1', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+        item2 = Item.create!(name: 'spider suit2', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+        item3 = Item.create!(name: 'spider suit3', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+        item4 = Item.create!(name: 'spider suit4', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+        item5 = Item.create!(name: 'spider suit5', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+        item6 = Item.create!(name: 'spider suit6', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+        item7 = Item.create!(name: 'spider suit7', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+        item8 = Item.create!(name: 'spider suit8', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+        item9 = Item.create!(name: 'spider suit9', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+        item10 = Item.create!(name: 'spider suit10', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
 
         customer = Customer.create!(first_name: 'Green', last_name: 'Goblin')
 
@@ -193,28 +189,28 @@ RSpec.describe Merchant do
         expect(expected[2].total_revenue).to eq(110000)
         expect(expected[3].total_revenue).to eq(70000)
         expect(expected[4].total_revenue).to eq(30000)
-      end 
-    end 
+      end
+    end
 
-    describe '#top_merchant_day' do 
-      it 'finds the best day for a merchant' do 
-        merchant1 = Merchant.create!(name:'Hishiro', status: 0)
-        merchant2 = Merchant.create!(name:'Hishiro1', status: 0)
-        merchant3 = Merchant.create!(name:'Hishiro2', status: 0)
-        merchant4 = Merchant.create!(name:'Hishiro3', status: 0)
-        merchant5 = Merchant.create!(name:'Hishiro4', status: 0)
-        merchant6 = Merchant.create!(name:'Hishiro4', status: 0)
+    describe '#best_day_for_merchant' do
+      it 'finds the best day for a merchant' do
+        merchant1 = Merchant.create!(name:'Hishiro1', status: 0)
+        merchant2 = Merchant.create!(name:'Hishiro2', status: 0)
+        merchant3 = Merchant.create!(name:'Hishiro3', status: 0)
+        merchant4 = Merchant.create!(name:'Hishiro4', status: 0)
+        merchant5 = Merchant.create!(name:'Hishiro5', status: 0)
+        merchant6 = Merchant.create!(name:'Hishiro6', status: 0)
 
-        item1 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
-        item2 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
-        item3 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
-        item4 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
-        item5 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
-        item6 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
-        item7 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
-        item8 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
-        item9 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id) 
-        item10 = Item.create!(name: 'spider suit', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+        item1 = Item.create!(name: 'spider suit1', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+        item2 = Item.create!(name: 'spider suit2', description: 'saves lives', unit_price: 10_000, merchant_id: merchant1.id)
+        item3 = Item.create!(name: 'spider suit3', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+        item4 = Item.create!(name: 'spider suit4', description: 'saves lives', unit_price: 10_000, merchant_id: merchant2.id)
+        item5 = Item.create!(name: 'spider suit5', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+        item6 = Item.create!(name: 'spider suit6', description: 'saves lives', unit_price: 10_000, merchant_id: merchant3.id)
+        item7 = Item.create!(name: 'spider suit7', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+        item8 = Item.create!(name: 'spider suit8', description: 'saves lives', unit_price: 10_000, merchant_id: merchant4.id)
+        item9 = Item.create!(name: 'spider suit9', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
+        item10 = Item.create!(name: 'spider suit10', description: 'saves lives', unit_price: 10_000, merchant_id: merchant5.id)
 
         customer = Customer.create!(first_name: 'Green', last_name: 'Goblin')
 
@@ -236,10 +232,12 @@ RSpec.describe Merchant do
         ii9 = InvoiceItem.create!(item_id: item9.id, invoice_id: invoice.id, quantity: 9, unit_price: 10_000, status: 1)
         ii10 = InvoiceItem.create!(item_id: item10.id, invoice_id: invoice.id, quantity: 10, unit_price: 10_000, status: 1)
 
-        best_day = merchant1.top_merchant_day(merchant1.id)
 
-        expect(best_day.first.invoice_date).to eq(invoice2.created_at)
+        expected = merchant1.best_day_for_merchant(merchant1.id)
+        expect(expected.first.invoice_date).to eq(invoice2.created_at)
+        expect(merchant1.format_date(expected.first.invoice_date)).to eq(invoice2.format_date(invoice2.created_at))
       end
-    end 
+    end
   end
+
 end

@@ -1,17 +1,13 @@
-
 <%= link_to 'Return to Dashboard', "/admin" %>
 <br>
-
-<h1>Welcome Admin!</h1>
-<br>
-<h3><em>Merchants Dashboard</em></h3>
-<br>
-
 <div id="create">
-  <%= link_to 'Create A New Merchant', new_admin_merchant_path %>
+  <%= link_to 'Create New Merchant', new_admin_merchant_path %>
+  <br>
 </div>
 <br>
-
+<h1>Welcome Admin!</h1>
+<br>
+<h3><em>Enabled Merchants:</em></h3>
 <table class="table table-light">
   <thead>
     <tr>
@@ -19,22 +15,15 @@
     </tr>
   </thead>
 
-<table class="table table-light">
-  <thead>
-    <tr>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @merchants.each_with_index do |merchant, idx| %>
-      <tr id="merchant-<%= merchant.id %>">
+  <tbody id="enabled">
+    <% @enabled_merchants.each_with_index do |merchant, idx| %>
+      <tr id="enabled_merchant-<%= merchant.id %>">
         <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></th>
-        <th><%= link_to 'Edit Merchant', edit_admin_merchant_path(merchant.id) %></th>
+        <th><%= button_to 'Edit Merchant', edit_admin_merchant_path(merchant.id), method: :get %></th>
       </tr>
-      <tr id="merchant-<%= merchant.id %>-2">
-        <th>current status: <%= merchant.status %></th>
-        <th><%= button_to merchant.status_opposite.chop, admin_merchant_path(merchant.id), method: :patch, params: { direct: 'status change', merchant: { status: merchant.status_opposite }} %></th>
+      <tr id="enabled_merchant_status-<%= merchant.id %>">
+        <th>Current Status: <%= "#{merchant.status.to_s.capitalize}" %></th>
+        <th><%= button_to "#{merchant.status_opposite.chop.capitalize} Merchant", admin_merchant_path(merchant.id), method: :patch, params: { direct: 'status change', merchant: { status: merchant.status_opposite }} %></th>
       </tr>
       <tr>
         <th><em>Top Customers</em></th>
@@ -43,12 +32,12 @@
         <tr>
           <td colspan="3">
             <table class="table mb-0 table-striped">
-              <tr id="customer-table-headers-<%= merchant.id %>">
+              <tr id="customer_table_headers-<%= merchant.id %>">
                 <th class="table-info">Customer Rank:</th>
                 <th class="table-info">Customer Name:</th>
                 <th class="table-info">Total Purchases:</th>
               </tr>
-              <tr id="merchant-top-customers-<%= merchant.id %>">
+              <tr id="merchant_top_customers-<%= merchant.id %>">
                 <% Customer.top_customers_for_merchant(merchant.id).each_with_index do |customer, idx| %>
                   <tr id="customer-<%= customer.id %>">
                     <td><%= "#{idx + 1}" %></td>
@@ -65,43 +54,29 @@
   </tbody>
 </table>
 
-<table>
+<br>
+<h3><em>Disabled Merchants:</em></h3>
+<table class="table table-light">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
-
-  <div id="enabled">
-  <tbody>
-    <h2>Enabled Merchants</h2>
-    <% @enabled_merchants.each do |en| %>
-      <tr id="enabled_merchant-<%= en.id %>">
-        <td><%= en.name %></td>
-        <td><%= link_to 'Show', admin_merchant_path(en.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_merchant_path(en.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  </div>
-</table>
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
+  <tbody id="disabled">
+    <tr id="disabled-merchants-table-headers">
+      <th class="table-info">Merchant Name:</th>
+      <th class="table-info">Current Status:</th>
+      <th class="table-info"></th>
+      <th class="table-info"></th>
     </tr>
-  </thead>
-
-  <div id="disabled">
-  <tbody>
-    <h2>Disabled Merchants</h2>
     <% @disabled_merchants.each do |dis| %>
       <tr id="disabled_merchant-<%= dis.id %>">
-        <td><%= dis.name %></td>
-        <td><%= link_to 'Show', admin_merchant_path(dis.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_merchant_path(dis.id) %></td>
+        <td><%= link_to "#{dis.name}", admin_merchant_path(dis.id) %></td>
+        <td><%= "#{dis.status.to_s.capitalize}"%></td>
+        <td><%= button_to 'Edit Merchant', edit_admin_merchant_path(dis.id), method: :get %></td>
+        <td><%= button_to "#{dis.status_opposite.chop.capitalize} Merchant", admin_merchant_path(dis.id), method: :patch, params: { direct: 'status change', merchant: { status: dis.status_opposite }} %></td>
       </tr>
     <% end %>
   </tbody>
-  </div>
 </table>
+<br>
