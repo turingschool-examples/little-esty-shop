@@ -107,15 +107,7 @@ RSpec.describe 'Merchants Item Index Page' do
   end
 
   describe "create a new Item" do
-    # As a merchant
-    # When I visit my items index page
-    # I see a link to create a new item.
-    # When I click on the link,
-    # I am taken to a form that allows me to add item information.
-    # When I fill out the form I click ‘Submit’
-    # Then I am taken back to the items index page
-    # And I see the item I just created displayed in the list of items.
-    # And I see my item was created with a default status of disabled.
+
     it "displays a link to 'Create a new item'" do
       expect(page).to have_link('Create a new item')
     end
@@ -183,11 +175,7 @@ RSpec.describe 'Merchants Item Index Page' do
         expect(page).to have_content("$7,560.00")
       end
     end
-    # When I visit the items index page
-    # Then next to each of the 5 most popular items I see the date with the most sales for each item.
-    # And I see a label “Top selling date for was "
-    #
-    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+
     it 'displays the top selling date for each item next to the item' do
       expected = @item1.created_at.to_date
 
