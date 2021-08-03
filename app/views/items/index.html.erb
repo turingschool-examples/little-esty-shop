@@ -21,6 +21,6 @@
   <% @merchant.items.most_popular_items.each do |item| %>
     <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
     <%= number_to_currency(item.revenue.to_f/100) %> in sales <br>
-    Top day for <%= item.name %> was: <%= item.merchant.best_revenue_day.strftime("%m/%d/%y") %> <br>
+    Top day for <%= item.name %> was: <%= Item.best_revenue_day(item.id).strftime("%m/%d/%y") %> <br>
   <% end %>
 </div>

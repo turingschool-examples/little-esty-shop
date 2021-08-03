@@ -21,4 +21,15 @@ class Item < ApplicationRecord
     .order('revenue desc')
     .limit(5)
   end
+
+  def self.best_revenue_day(id)
+    joins(invoice_items: {invoice: :transactions})
+    .select("sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .where("transactions.result =?", 0)
+    .where("items.id =?", id)
+    .order(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) desc, invoices.created_at desc"))
+    .group("invoices.id")
+    .pluck("invoices.created_at")
+    .first
+  end
 end
