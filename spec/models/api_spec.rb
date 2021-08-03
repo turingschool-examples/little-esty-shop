@@ -31,10 +31,10 @@ RSpec.describe API do
       'https://api.github.com/repos/bfl3tch/little-esty-shop/pulls?state=closed')
     expect(expected[:defaults][:commits]).to eq(
       {'tvaroglu' => 0, 'AbbottMichael' => 1, 'ElliotOlbright' => 0, 'bfl3tch' => 1})
-      # {'tvaroglu' => 33, 'AbbottMichael' => 19, 'ElliotOlbright' => 33, 'bfl3tch' => 29})
+      # {'tvaroglu' => 38, 'AbbottMichael' => 25, 'ElliotOlbright' => 38, 'bfl3tch' => 27})
     expect(expected[:defaults][:pulls]).to eq(
       {'tvaroglu' => 1, 'AbbottMichael' => 0, 'ElliotOlbright' => 1, 'bfl3tch' => 0})
-      # {'tvaroglu' => 4, 'AbbottMichael' => 5, 'ElliotOlbright' => 12, 'bfl3tch' => 5})
+      # {'tvaroglu' => 5, 'AbbottMichael' => 6, 'ElliotOlbright' => 12, 'bfl3tch' => 6})
   end
 
   it 'can initialize contributor endpoints to parse requests' do
@@ -63,13 +63,14 @@ RSpec.describe API do
       {"sha"=>"12345",
         "committer"=> {"name"=>"GitHub", "email"=>"noreply@github.com"},
         "author"=> {"login"=>"tvaroglu", "id"=>12345}},
-      {"sha"=>"12345",
+      {"sha"=>"67891",
         "committer"=> {"name"=>"GitHub", "email"=>"noreply@github.com"},
         "author"=> {"login"=>"bfl3tch", "id"=>67891}},
-      {"sha"=>"12345",
+      {"sha"=>"23456",
         "committer"=> {"name"=>"GitHub", "email"=>"noreply@github.com"},
         "author"=> {"login"=>"tvaroglu", "id"=>23456}},
       ]
+
     allow(API).to receive(:render_request).and_return(mock_response)
     expected = API.aggregate_by_author(:commits)
 

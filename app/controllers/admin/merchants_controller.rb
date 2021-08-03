@@ -1,9 +1,9 @@
 class Admin::MerchantsController < ApplicationController
 
   def index
-    @merchants = Merchant.all
     @enabled_merchants = Merchant.order_by_enabled
     @disabled_merchants = Merchant.order_by_disabled
+    @top_merchants = Merchant.top_merchants_by_revenue
   end
 
   def show
@@ -34,6 +34,7 @@ class Admin::MerchantsController < ApplicationController
     redirect_to admin_merchant_path(merchant.id), notice: "Item successfully updated."
   end
 
+
   private
 
   def merchant_params
@@ -46,7 +47,6 @@ class Admin::MerchantsController < ApplicationController
 end
 
 # hidden field conditional
-
   # def merchant_params
   #   if params[:url] == 'present'
   #     params.permit(:name)
