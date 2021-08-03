@@ -48,7 +48,7 @@ RSpec.describe 'the merchant items index' do
     it 'can click on item link and be taken to its show page' do
       visit merchant_items_path(@merchant1)
 
-      click_link('Milk')
+      first(:link, 'Milk').click
 
       expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
       expect(page).to have_content('Milk')
