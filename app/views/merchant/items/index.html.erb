@@ -1,38 +1,15 @@
 <h1><%= @merchant.name %>'s Items</h1>
-<%= link_to 'Create a new item', new_merchant_item_path %><br><br>
-<table>
+
+<%= link_to 'Create a new item', new_merchant_item_path %>
+<br><br>
+
+<table id="top-item-table" class="table table-light" style="text-align:center">
   <thead>
     <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-<h3>Merchants Items</h3>
-
-  <tbody>
-    <% @merchant.items.each do |merchant_item| %>
-      <tr id= "merchant_item-<%= merchant_item.id %>">
-        <td><%= merchant_item.name %></td>
-        <td>:<%= merchant_item.enable %>d&nbsp</td>
-        <td><%= button_to merchant_item.enable_opposite, "/merchants/#{merchant_item.merchant_id}/items/#{merchant_item.id}", method: :patch,
-                  params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
-        <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id) %></td>
-        <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id) %></td>
-
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<table id='top-item-table' class="table table-light" style="text-align:center">
-  <thead>
-    <tr>
-      <th style="text-align:center">Top 5 Items</th>
+      <th style="text-align:center"><h4>Top 5 Items</h4></th>
     </tr>
   </thead>
   <tbody>
-  <tr>
-    <td colspan="3">
       <table class="table mb-0 table-striped table-hover">
         <tr id="item-table-headers">
           <th class="table-info">Item Rank:</th>
@@ -40,58 +17,77 @@
           <th class="table-info">Top Selling Date:</th>
           <th class="table-info">Total Revenue Generated:</th>
         </tr>
-        <tr id="merchant-top-items">
           <% @merchant.top_five_items.each_with_index do |item, idx| %>
             <tr id="item-<%= item.id %>">
               <td><%= "#{idx + 1}" %></td>
-              <td><a class="btn btn-secondary btn-sm" href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %>><%= "#{item.name}" %></td>
+              <td><a class="btn btn-secondary btn-sm" href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %>><%= "#{item.name}" %></a></td>
               <td><%= "#{item.item_best_day(item.id).first.purchase_date}" %></td>
               <td><%= number_to_currency(("#{item.total_item_price}".to_i)/100.00) %></td>
             </tr>
           <% end %>
-        </tr>
-      <br>
+    </table>
   </tbody>
 </table>
+<br><br>
 
-<table>
+<table id='all-item-table' class="table table-light" style="text-align:center">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th style="text-align:center"><h4>Merchants Items</h4></th>
     </tr>
   </thead>
+  <tbody>
+    <table class="table mb-0 table-striped table-hover">
+      <tr id="item-table-headers">
+        <th class="table-info">Item Name:</th>
+        <th class="table-info">Item Status:</th>
+        <th class="table-info">Enable/Disable:</th>
+        <th class="table-info">Show Page:</th>
+        <th class="table-info">Edit Page:</th>
+      </tr>
+        <% @merchant.items.each do |merchant_item| %>
+          <tr id= "merchant_item-<%= merchant_item.id %>">
+            <td><%= merchant_item.name %></td>
+            <td>:<%= merchant_item.enable %>d&nbsp</td>
+            <td><%= button_to merchant_item.enable_opposite, "/merchants/#{merchant_item.merchant_id}/items/#{merchant_item.id}", method: :patch,
+                      params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
+            <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id) %></td>
+            <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id) %></td>
+          </tr>
+        <% end %>
+    </table
+  </tbody>
+</table>
+<br><br>
 
-  <div id="enabled">
+<div style="margin: auto; width: 100%; padding: 0 100px 0;">
+<div id="enabled" style="display:inline-block; width:500px; background:rgb(250,250,250); padding:20px; margin:0 4em 2em 0;">
+<table class="table mb-0 table-striped table-hover">
     <tbody>
-      <h2>Enabled Items</h2>
+      <h4>Enabled Items</h4>
       <% @enabled_items.each do |item| %>
         <tr id="enabled_item-<%= item.id %>">
-          <td><%= item.name %></td>
-          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
-          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+          <td><a href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %> class="link-dark"><%= "#{item.name}" %></a></td>
+          <td><%= button_to item.enable_opposite, "/merchants/#{item.merchant_id}/items/#{item.id}", method: :patch,
+                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
         </tr>
       <% end %>
     </tbody>
-  </div>
 </table>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-<br>
-  <div id="disabled">
+<div id="disabled" style="display: inline-block; width:500px; background:rgb(250,250,250); padding:20px;">
+<table class="table mb-0 table-striped table-hover">
     <tbody>
-      <h2>Disabled Items</h2>
+      <h4>Disabled Items</h4>
       <% @disabled_items.each do |item| %>
         <tr id="disabled_item-<%= item.id %>">
-          <td><%= item.name %></td>
-          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
-          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+          <td><a href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %> class="link-dark"><%= "#{item.name}" %></a></td>
+          <td><%= button_to item.enable_opposite, "/merchants/#{item.merchant_id}/items/#{item.id}", method: :patch,
+                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
         </tr>
       <% end %>
     </tbody>
-  </div>
 </table>
+</div>
+</div>
