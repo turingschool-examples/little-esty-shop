@@ -1,5 +1,5 @@
 <h1><%= @merchant.name %>'s Items</h1>
-<%= link_to 'Create a new item', new_merchant_item_path %><br><br>
+<%= link_to 'Create a new item', new_merchant_item_path, class:"btn btn-outline-dark navbar-custom" %><br><br>
 <table>
   <thead>
     <tr>
@@ -16,8 +16,8 @@
         <td>:<%= merchant_item.enable %>d&nbsp</td>
         <td><%= button_to merchant_item.enable_opposite, "/merchants/#{merchant_item.merchant_id}/items/#{merchant_item.id}", method: :patch,
                   params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
-        <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id) %></td>
-        <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id) %></td>
+        <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+        <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id), class:"btn btn-outline-dark navbar-custom" %></td>
 
       </tr>
     <% end %>
@@ -67,8 +67,8 @@
       <% @enabled_items.each do |item| %>
         <tr id="enabled_item-<%= item.id %>">
           <td><%= item.name %></td>
-          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
-          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -88,8 +88,8 @@
       <% @disabled_items.each do |item| %>
         <tr id="disabled_item-<%= item.id %>">
           <td><%= item.name %></td>
-          <td><%= link_to 'Show', admin_merchant_path(item.id) %></td>
-          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id) %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
         </tr>
       <% end %>
     </tbody>

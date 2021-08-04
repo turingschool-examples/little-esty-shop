@@ -1,10 +1,27 @@
-<h2>Invoice Show Page</h2><p>Invoice ID: <%= @invoice.id %></p>
-<p>Status: <%= @invoice.status %></p>
-<p>Date: <%= @invoice.format_date(@invoice.created_at) %></p>
-<p>Customer: <%= @invoice.customer.first_name %>
-<br>
-Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %>
-<br/><br/>
+
+<table class="table table-striped table-hover custom">
+  <thead text-align="center" align="center" class="customblack" style="color: white;">
+    <tr>
+      <th colspan="4" text-align="center" align="center">Invoice <%= @invoice.id %></th>
+    </tr>
+  </thead>
+  <tbody id="items-pending-shipment">
+    <tr id="item-table-headers">
+      <th>Status</th>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>Total Invoice Revenue Potential</th>
+    </tr>
+      <tr>
+        <td><%= @invoice.status %></td>
+        <td> <%= @invoice.format_date(@invoice.created_at) %></td>
+        <td><%= @invoice.customer.first_name %></td>
+        <td><%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %></td>
+      </tr>
+  </tbody>
+</table>
+
+
 <%= form_with url: admin_invoice_path( @invoice), method: :patch, local: true do |form| %>
     <%= form.hidden_field :invoice_id, value: @invoice.id %>
     <%= form.select :status, options_for_select([:cancelled, 'in progress', :completed], @invoice.status) %>
@@ -14,13 +31,26 @@ Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_reve
 <h2>Items On This Invoice:</h2>
 <br>
 
-
-
-<% @invoice.invoice_items.each do |ii| %>
-  <p>Item: <%= ii.item.name %></p>
-  <p>Quantity: <%= ii.quantity %></p>
-  <p>Unit Price: <%= number_to_currency(ii.unit_price/100.00, precision: 2) %></p>
-  <p>Status: <%= ii.status %></p>
-
-
-<% end %>
+<table class="table table-striped table-hover navbar-custom">
+  <thead text-align="center" align="center" class="customblack" style="color: white;">
+    <tr>
+      <th colspan="4" text-align="center" align="center">Items On This Invoice</th>
+    </tr>
+  </thead>
+  <tbody id="items-pending-shipment">
+    <tr id="item-table-headers">
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Status</th>
+    </tr>
+    <% @invoice.invoice_items.each do |ii| %>
+      <tr>
+        <td><%= ii.item.name %></td>
+        <td><%= ii.quantity %></td>
+        <td><%= number_to_currency(ii.unit_price/100.00, precision: 2) %></td>
+        <td><%= ii.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
