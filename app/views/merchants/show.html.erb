@@ -3,3 +3,10 @@
   <p><b><%= link_to "My Invoices", merchant_invoices_path(@merchant.id) %></b></p>
   <p><b><%= link_to "My Items", merchant_items_path(@merchant.id) %></b></p>
 </div>
+
+<div id='favorite_customers'>
+  <h2>Favorite Customers</h2>
+  <% @merchant.top_customers.each.with_index do |customer, index| %>
+    <p><%= index + 1 %>. <%= customer.first_name %> <%= customer.last_name %> - <%= customer.total_count %> purchases</p>
+  <% end %>
+</div>
