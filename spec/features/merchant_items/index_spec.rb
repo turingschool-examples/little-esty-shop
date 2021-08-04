@@ -56,13 +56,12 @@ RSpec.describe 'the merchant items index' do
       expect(page).to have_content('500')
     end
 
-    xit 'can click on enable button and enable disabled item' do
+    it 'can click on enable button and enable disabled item' do
       visit merchant_items_path(@merchant1)
 
       click_button('Enable Milk')
 
       expect(current_path).to eq(merchant_items_path(@merchant1))
-      expect(page).to have_content('Status: Enabled')
       expect('Enabled Items').to appear_before('Milk')
       expect('Milk').to appear_before('Disabled Items')
     end

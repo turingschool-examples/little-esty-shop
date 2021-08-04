@@ -8,8 +8,8 @@ def error_message(errors)
 end
 
 def api
-  json = GithubService.new
-
+  json = GithubService.new.repos
+  require "pry"; binding.pry
   @repos = json.map do |repo|
     Repo.new(repo)
   end
