@@ -35,10 +35,12 @@ class Merchant < ApplicationRecord
 
   def self.order_by_enabled
     where(status: 0)
+    .order(:name)
   end
 
   def self.order_by_disabled
     where(status: 1)
+    .order(:name)
   end
 
   def status_opposite

@@ -48,7 +48,7 @@ RSpec.describe Merchant do
     end
 
     describe '::order_by_enabled' do
-      it 'selects all merchants with an enabled status' do
+      it 'orders all merchants with an enabled status alphabetically' do
         @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
         @merchant2 = Merchant.create!(name: 'Beta', status: 1)
         @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
@@ -56,12 +56,12 @@ RSpec.describe Merchant do
         @merchant5 = Merchant.create!(name: 'Exodus', status: 0)
         @merchant6 = Merchant.create!(name: 'Fenta', status: 1)
 
-        expect(Merchant.order_by_enabled).to eq([@merchant, @merchant1, @merchant3, @merchant5])
+        expect(Merchant.order_by_enabled).to eq([@merchant1, @merchant3, @merchant5, @merchant])
       end
     end
 
     describe '::order_by_disabled' do
-      it 'selects all merchants with a disabled status' do
+      it 'orders all merchants with a disabled status alphabetically' do
         @merchant1 = Merchant.create!(name: 'Alpha', status: 0)
         @merchant2 = Merchant.create!(name: 'Beta', status: 1)
         @merchant3 = Merchant.create!(name: 'Charlie', status: 0)
