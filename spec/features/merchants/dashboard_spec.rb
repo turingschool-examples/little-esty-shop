@@ -16,12 +16,12 @@ RSpec.describe 'the merchant dashboard' do
       visit merchant_path(@merchant1.id)
 
       within('#ready_to_ship') do
-        save_and_open_page
         expect(page).to have_content('Items Ready to Ship')
         expect(page).to have_content('Potato Chips')
         expect(page).to have_content('Spinach')
         expect(page).to have_content('Red Bull')
         expect(page).to have_content('Hot Cheetos')
+        expect(page).to have_content('Hot Dog')
       end
     end
   end
