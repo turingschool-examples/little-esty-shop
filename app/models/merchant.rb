@@ -6,6 +6,16 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
+  def top_customers
+    invoices.joins(:customer, :transactions)
+            .where(transactions: {result: true})
+            .select("customers.*, count(transactions.id) as total_count")
+            .group("customers.id, invoice_items.id")
+            .distinct
+            .order(total_count: :desc)
+            .limit(5)
+  end
+
   def self.enabled_merchants
     where("status = ?", "enabled")
   end
@@ -22,9 +32,15 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
-
-  def best_day
-    # require "pry"; binding.pry
+  
+  def merchant_best_day
+    invoices.joins(:transactions)
+            .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+            .group('invoices.id')
+            .where(transactions: { result: :success})
+            .order('revenue desc', 'invoices.created_at desc')
+            .first
+            .created_at
   end
 
   def top_five_items
