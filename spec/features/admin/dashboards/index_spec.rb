@@ -33,7 +33,7 @@ RSpec.describe 'it can display the dashboards index page' do
   # conducted
   it 'lists the top 5 customers by name with most successful transactions' do
     visit "/admin"
-    
+
     expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
     expect(page).to have_content("#{@customer7.first_name} #{@customer7.last_name}")
@@ -83,5 +83,34 @@ RSpec.describe 'it can display the dashboards index page' do
       expect(page).to have_content("#{@customer1.last_name}")
       expect(page).to have_content("#{@customer1.num_success_trans}")
     end
+  end
+
+  # As an admin,
+  # When I visit the admin dashboard
+  # Then I see a section for "Incomplete Invoices"
+  # In that section I see a list of the ids of all invoices
+  # That have items that have not yet been shipped
+  # And each invoice id links to that invoice's admin show page
+  it 'shows list of incomplete invoices by id' do
+    visit "/admin"
+
+    expect(page).to have_content("Incomplete Invoices")
+
+    within("#Incomplete Invoices") do
+      expect(page).to have_content("#{invoice1.id}")
+      expect(page).to have_content("#{invoice2.id}")
+      expect(page).to have_content("#{invoice14.id}")
+      expect(page).to_not have_content("#{invoice4.id}")
+      expect(page).to_not have_content("#{invoice7.id}")
+      # expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y"}")
+    end
+  end
+
+  xit 'links incomplete invoice ids to admin show page' do
+    visit "/admin"
+
+    click_on("#{@invoice1.id}")
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice.id}")
   end
 end
