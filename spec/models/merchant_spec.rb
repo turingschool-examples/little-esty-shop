@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Merchant do
+  describe 'relationships' do
+    it {should have_many(:items)}
+    it {should have_many(:invoice_items).through(:items)}
+    it {should have_many(:invoices).through(:invoice_items)}
+    it {should have_many(:transactions).through(:invoices)}
+    it {should have_many(:customers).through(:invoices)}
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
 
   before(:each) do
     @merchant_1 = create(:merchant)
@@ -25,10 +36,9 @@ RSpec.describe Merchant do
       @items_2 << create(:item, merchant_id: @merchant_1.id, enabled: 1)
       @transactions << create(:transaction, invoice_id: @invoices.last.id)
       @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 2)
-
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
+    end
   end
+
 
   describe 'Factory bot data' do
     before(:each) do
@@ -55,14 +65,6 @@ RSpec.describe Merchant do
         @transactions << create(:transaction, invoice_id: @invoices.last.id)
         @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices.last.id, status: 2)
       end
-    end
-
-    describe 'relationships' do
-      it {should have_many(:items)}
-      it {should have_many(:invoice_items).through(:items)}
-      it {should have_many(:invoices).through(:invoice_items)}
-      it {should have_many(:transactions).through(:invoices)}
-      it {should have_many(:customers).through(:invoices)}
     end
 
     describe 'instance methods' do
@@ -204,6 +206,8 @@ RSpec.describe Merchant do
   describe 'instance methods' do
     it 'collects enabled items' do
       expect(@merchant_1.enabled_items).to eq(@items)
+    end
+  end
 
   describe 'enable disable methods' do
     it 'returns only merchants with enabled status' do
