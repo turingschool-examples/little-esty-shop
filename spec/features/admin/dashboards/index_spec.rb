@@ -100,7 +100,7 @@ RSpec.describe 'it can display the dashboards index page' do
   # And I see that the list is ordered from oldest to newest
   it 'shows list of incomplete invoices by id is ascending order' do
     visit "/admin"
-    save_and_open_page
+    
     expect(page).to have_content("Incomplete Invoices")
 
     within("#Incomplete_Invoices") do
