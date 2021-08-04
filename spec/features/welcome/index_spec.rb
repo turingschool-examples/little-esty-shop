@@ -7,7 +7,6 @@ RSpec.describe 'Welcome Page' do
 
   it 'is on the correct paage' do
     expect(current_path).to eq('/')
-    expect(page).to have_content('Welcome to our project!')
   end
 
   it 'can take user to merchants index page' do

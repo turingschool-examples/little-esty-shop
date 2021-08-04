@@ -1,15 +1,15 @@
-<%= link_to 'Return to Dashboard', "/admin" %>
+<%= link_to 'Return to Dashboard', "/admin", class:"btn btn-outline-dark navbar-custom" %>
 <br>
 <br>
 <h1>Welcome Admin!</h1>
 <br>
-<h3><em>Top Merchants:</em></h3>
-<table class="table table-striped">
-  <thead>
+
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
     <tr>
-      <th colspan="4"></th>
+      <th  colspan="4" style="font-family: Quicksand;">Top Merchants</th>
     </tr>
-  </thead>
+  </thead >
   <tbody id="top-merchants">
     <tr id="top-merchants-table-headers">
       <th class="table-info">Rank:</th>
@@ -20,7 +20,7 @@
     <% @top_merchants.each_with_index do |top, idx| %>
       <tr id="top_merchant-<%= top.id %>">
         <td><%= "#{idx + 1}" %></td>
-        <td><%= link_to "#{top.merchant_name}", admin_merchant_path(top.id) %></td>
+        <td><%= link_to "#{top.merchant_name}", admin_merchant_path(top.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></td>
         <td><%= "#{number_to_currency(top.total_revenue / 100.00)}" %></td>
         <td><%= "#{top.format_date(top.best_day_for_merchant(top.id).invoice_date)}" %></td>
       </tr>
@@ -33,18 +33,18 @@
   <br>
 </div>
 <br>
-<h3><em>Enabled Merchants:</em></h3>
-<table class="table table-light">
-  <thead>
+
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
     <tr>
-      <th colspan="2"></th>
+      <th colspan="2" style="font-family: Quicksand;">Enabled Merchants</th>
     </tr>
-  </thead>
+</thead >
 
   <tbody id="enabled">
     <% @enabled_merchants.each_with_index do |merchant, idx| %>
-      <tr id="enabled_merchant-<%= merchant.id %>">
-        <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></th>
+      <tr  class="customblack" id="enabled_merchant-<%= merchant.id %>">
+        <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></th>
         <th><%= button_to 'Edit Merchant', edit_admin_merchant_path(merchant.id), method: :get %></th>
       </tr>
       <tr id="enabled_merchant_status-<%= merchant.id %>">
@@ -57,7 +57,7 @@
       </tr>
         <tr>
           <td colspan="3">
-            <table class="table mb-0 table-striped">
+            <table class="table mb-0 table-striped navbar-custom">
               <tr id="customer_table_headers-<%= merchant.id %>">
                 <th class="table-info">Customer Rank:</th>
                 <th class="table-info">Customer Name:</th>
@@ -81,13 +81,14 @@
 </table>
 
 <br>
-<h3><em>Disabled Merchants:</em></h3>
-<table class="table table-light">
-  <thead>
+<br>
+
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
     <tr>
-      <th colspan="4"></th>
+      <th colspan="2" style="font-family: Quicksand;">Disabled Merchants</th>
     </tr>
-  </thead>
+</thead >
   <tbody id="disabled">
     <tr id="disabled-merchants-table-headers">
       <th class="table-info">Merchant Name:</th>
@@ -97,7 +98,7 @@
     </tr>
     <% @disabled_merchants.each do |dis| %>
       <tr id="disabled_merchant-<%= dis.id %>">
-        <td><%= link_to "#{dis.name}", admin_merchant_path(dis.id) %></td>
+        <td><%= link_to "#{dis.name}", admin_merchant_path(dis.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></td>
         <td><%= "#{dis.status.to_s.capitalize}"%></td>
         <td><%= button_to 'Edit Merchant', edit_admin_merchant_path(dis.id), method: :get %></td>
         <td><%= button_to "#{dis.status_opposite.chop.capitalize} Merchant", admin_merchant_path(dis.id), method: :patch, params: { direct: 'status change', merchant: { status: dis.status_opposite }} %></td>

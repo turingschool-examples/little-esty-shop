@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
+ html, body {
+	background-image: image-url('/assets/wordpressrippp.jpg'); 
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.navbar-nav.navbar-center {
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+} 
+
+.navbar-custom {
+	background-color: #ffffff75;
+}
+
+.custom {
+	background-color: #ffffffa1;
+}
+
+.customblack {
+	background-color: #000000a1;
+}
+
+.blacktext {
+	color: black;
+}
+
+// html { 
+//   background: image-url('/assets/wordpressrippp.jpg') no-repeat center center fixed; 
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
+
+.center{
+  justify-content: center;
+}
+
+#secret{
+  display: none;
+}
+
+h1, h2, h3 {
+  font-family: 'Quicksand';
+	text-align: center;
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgba(255, 254, 254, 0.705);
+}
+

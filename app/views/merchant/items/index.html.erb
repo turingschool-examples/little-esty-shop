@@ -1,7 +1,30 @@
 <h1><%= @merchant.name %>'s Items</h1>
 
-<%= link_to 'Create a new item', new_merchant_item_path %>
 <br><br>
+
+<%= link_to 'Create a new item', new_merchant_item_path, class:"btn btn-outline-dark navbar-custom" %><br><br>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<h3>Merchants Items</h3>
+
+  <tbody>
+    <% @merchant.items.each do |merchant_item| %>
+      <tr id= "merchant_item-<%= merchant_item.id %>">
+        <td><%= merchant_item.name %></td>
+        <td>:<%= merchant_item.enable %>d&nbsp</td>
+        <td><%= button_to merchant_item.enable_opposite, "/merchants/#{merchant_item.merchant_id}/items/#{merchant_item.id}", method: :patch,
+                  params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
+        <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+        <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <table id="top-item-table" class="table table-light" style="text-align:center">
   <thead>
@@ -74,8 +97,8 @@
       <h4>Enabled Items</h4>
       <% @enabled_items.each do |item| %>
         <tr id="enabled_item-<%= item.id %>">
-          <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: "link-dark" %></td>
-          <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch,
+          <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+          <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch, class:"btn btn-outline-dark navbar-custom",
                     params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
         </tr>
       <% end %>
@@ -89,8 +112,8 @@
       <h4>Disabled Items</h4>
       <% @disabled_items.each do |item| %>
         <tr id="disabled_item-<%= item.id %>">
-          <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: "link-dark" %></td>
-          <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch,
+          <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+          <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch, class:"btn btn-outline-dark navbar-custom", 
                     params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
         </tr>
       <% end %>
