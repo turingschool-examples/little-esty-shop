@@ -1,13 +1,6 @@
 class Merchant::ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
-    if params[:sort] == 'name'
-      @items = @merchant.items.order_by_name(:name)
-    elsif params[:sort] == 'date'
-      @items = @merchant.items.order_by_date(:updated_at, :desc)
-    else
-      @items = @merchant.items
-    end
     @enabled_items = @merchant.items.enabled_items
     @disabled_items = @merchant.items.disabled_items
   end
