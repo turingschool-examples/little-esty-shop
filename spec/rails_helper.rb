@@ -269,9 +269,9 @@ RSpec.configure do |config|
     @invoice_item12 = InvoiceItem.create!(invoice_id: @invoice12.id, item_id: @item12.id, quantity: 100, unit_price: @item12.unit_price, status: 'pending')
 
     #Added to test merchant top_five_items method
-    @invoice_item17 = InvoiceItem.create!(invoice_id: @invoice16.id, item_id: @item13.id, quantity: 100, unit_price: @item13.unit_price, status: 'shipped')
-    @invoice_item18 = InvoiceItem.create!(invoice_id: @invoice17.id, item_id: @item14.id, quantity: 100, unit_price: @item14.unit_price, status: 'shipped')
-    @invoice_item19 = InvoiceItem.create!(invoice_id: @invoice18.id, item_id: @item15.id, quantity: 100, unit_price: @item15.unit_price, status: 'shipped')
+    @invoice_item17 = InvoiceItem.create!(invoice_id: @invoice16.id, item_id: @item13.id, quantity: 100, unit_price: @item13.unit_price, status: 'packaged')
+    @invoice_item18 = InvoiceItem.create!(invoice_id: @invoice17.id, item_id: @item14.id, quantity: 100, unit_price: @item14.unit_price, status: 'packaged')
+    @invoice_item19 = InvoiceItem.create!(invoice_id: @invoice18.id, item_id: @item15.id, quantity: 100, unit_price: @item15.unit_price, status: 'packaged')
     @invoice_item20 = InvoiceItem.create!(invoice_id: @invoice19.id, item_id: @item16.id, quantity: 100, unit_price: @item16.unit_price, status: 'shipped')
     @invoice_item21 = InvoiceItem.create!(invoice_id: @invoice20.id, item_id: @item17.id, quantity: 100, unit_price: @item17.unit_price, status: 'shipped')
 
