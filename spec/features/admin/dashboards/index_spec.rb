@@ -33,7 +33,7 @@ RSpec.describe 'it can display the dashboards index page' do
   # conducted
   it 'lists the top 5 customers by name with most successful transactions' do
     visit "/admin"
-
+    
     expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
     expect(page).to have_content("#{@customer7.first_name} #{@customer7.last_name}")
@@ -42,7 +42,7 @@ RSpec.describe 'it can display the dashboards index page' do
     expect("#{@customer5.first_name} #{@customer5.last_name}").to appear_before("#{@customer7.first_name} #{@customer7.last_name}")
     expect("#{@customer7.first_name} #{@customer7.last_name}").to appear_before("#{@customer10.first_name} #{@customer10.last_name}")
     expect("#{@customer10.first_name} #{@customer10.last_name}").to appear_before("#{@customer1.first_name} #{@customer1.last_name}")
-    expect("#{@customer1.first_name} #{@customer1.last_name}").to appear_before("#{@customer9.first_name} #{@customer9.last_name}")
+    expect("#{@customer9.first_name} #{@customer9.last_name}").to appear_before("#{@customer1.first_name} #{@customer1.last_name}")
 
     expect(page).to_not have_content("#{@customer8.first_name} #{@customer8.last_name}")
     expect(page).to_not have_content("#{@customer6.first_name} #{@customer6.last_name}")
@@ -53,7 +53,7 @@ RSpec.describe 'it can display the dashboards index page' do
 
   it 'shows the number of successful transactions next to each customer' do
     visit "/admin"
-    save_and_open_page
+
     within("##{@customer5.id}") do
       expect(page).to have_content("#{@customer5.first_name}")
       expect(page).to have_content("#{@customer5.last_name}")
