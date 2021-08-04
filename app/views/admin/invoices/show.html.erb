@@ -1,0 +1,27 @@
+<h1>Admin Invoice Show</h1>
+
+
+<p><%= @invoice.id %></p>
+<p><%= @invoice.status %></p>
+<p><%= @invoice.created_at.strftime("%A, %B, %d, %Y") %><p>
+
+<p><%= @invoice.customer.first_name%> <%= @invoice.customer.last_name%></p>
+
+<% @invoice.items.each do |item| %></p>
+  <p>Item Name: <%=item.name%>
+  <p>Unit Price: <%= item.unit_price %></p>
+  <p>Quantity: <%= InvoiceItem.find_by(invoice_id: @invoice.id, item_id: item.id).quantity %></p>
+  <p>Status: <%= InvoiceItem.find_by(invoice_id: @invoice.id, item_id: item.id).status %></p>
+<%end%>
+
+<section id='totalrev'>
+  <h1>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></h1>
+</section>
+
+<section id='status'>
+  <p>Invoice Status: <%= @invoice.status %></p>
+  <%= form_with url: admin_invoice_path(@invoice.id), model: @invoice, method: :patch, local: true do |f| %>
+    <%= f.select :status, ['cancelled', 'in progress', 'completed'], :status => @invoice.status %>
+    <%= f.submit 'Submit' %>
+  <%end%>
+</section>

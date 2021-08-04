@@ -9,6 +9,8 @@ namespace :csv do
 
   task :import_invoice_items => :environment do
     CSV.foreach("db/data/invoice_items.csv", :headers => true) do |row|
+      # row = row.to_hash
+      # row[:unit_price] = row[:unit_price].to_f / 100
       InvoiceItem.create!(row.to_hash)
     end
   end
@@ -21,6 +23,8 @@ namespace :csv do
 
   task :import_items => :environment do
     CSV.foreach("db/data/items.csv", :headers => true) do |row|
+      # row = row.to_hash
+      # row[:unit_price] = row[:unit_price].to_f / 100
       Item.create!(row.to_hash)
     end
   end

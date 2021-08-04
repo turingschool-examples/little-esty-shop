@@ -8,5 +8,6 @@ RSpec.describe Transaction do
 
   describe 'validations' do
     it { should define_enum_for(:result).with([:success, :failed]) }
+    it {should validate_presence_of(:credit_card_number) }
   end
 end

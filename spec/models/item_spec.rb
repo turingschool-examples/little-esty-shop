@@ -11,6 +11,8 @@ RSpec.describe Item do
 
   describe 'validations' do
     it { should define_enum_for(:enabled).with([:enabled, :disabled]) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:unit_price) }
   end
 
   describe 'class method' do
