@@ -41,7 +41,7 @@ class Merchant < ApplicationRecord
     .where(status: ['packaged', 'pending'])
     .select('items.name as item_name, invoice_items.*, invoices.created_at as invoice_date')
     .group('items.id, invoice_items.id, invoices.id')
-    .order(:created_at)
+    .order(:invoice_date)
   end
 
 end
