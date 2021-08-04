@@ -144,6 +144,7 @@ RSpec.describe Merchant do
       transaction9 = create(:transaction, invoice_id: invoice9.id, result: 0)
       transaction10 = create(:transaction, invoice_id: invoice10.id, result: 0)
 
+      #test failed
       data = Merchant.top_merchants
       expect(data).to eq([merchant5, merchant4, merchant3, merchant2, merchant1])
       expect(data[0].revenue).to eq(40)
@@ -219,6 +220,7 @@ RSpec.describe Merchant do
 
       expected = [merchant1, merchant2, merchant3]
 
+      #test failed
       expect(Merchant.enabled_merchants).to eq(expected)
     end
 

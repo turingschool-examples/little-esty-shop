@@ -1,9 +1,9 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    
+
     @merchants = Merchant.all
     @top_merchants = Merchant.top_merchants
-    
+
   end
 
   def show
@@ -18,9 +18,6 @@ class Admin::MerchantsController < ApplicationController
     if merchant.save
       redirect_to admin_merchants_path
       flash[:alert] = "New Merchant Added"
-    else
-      redirect_to edit_admin_merchants_path
-      flash[:alert] = "Unable to Create Merchant"
     end
   end
 
@@ -33,9 +30,6 @@ class Admin::MerchantsController < ApplicationController
     if @merchant.update(merchant_params)
       redirect_to admin_merchant_path(@merchant.id)
       flash[:alert] = "Update Successful"
-    else
-      redirect_to edit_admin_merchant_path(@merchant.id)
-      flash[:alert] = "Unable to Update Merchant"
     end
   end
 
