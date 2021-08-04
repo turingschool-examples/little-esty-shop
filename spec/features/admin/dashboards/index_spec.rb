@@ -96,21 +96,21 @@ RSpec.describe 'it can display the dashboards index page' do
 
     expect(page).to have_content("Incomplete Invoices")
 
-    within("#Incomplete Invoices") do
-      expect(page).to have_content("#{invoice1.id}")
-      expect(page).to have_content("#{invoice2.id}")
-      expect(page).to have_content("#{invoice14.id}")
-      expect(page).to_not have_content("#{invoice4.id}")
-      expect(page).to_not have_content("#{invoice7.id}")
+    within("#Incomplete_Invoices") do
+      expect(page).to have_content("#{@invoice1.id}")
+      expect(page).to have_content("#{@invoice2.id}")
+      expect(page).to have_content("#{@invoice14.id}")
+      expect(page).to_not have_content("#{@invoice4.id}")
+      expect(page).to_not have_content("#{@invoice7.id}")
       # expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y"}")
     end
   end
 
-  xit 'links incomplete invoice ids to admin show page' do
+  it 'links incomplete invoice ids to admin show page' do
     visit "/admin"
 
     click_on("#{@invoice1.id}")
 
-    expect(current_path).to eq("/admin/invoices/#{@invoice.id}")
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
   end
 end
