@@ -16,6 +16,6 @@ class Invoice < ApplicationRecord
     .where.not(invoice_items: {status: :shipped})
     .select('invoices.*')
     .group(:id)
-    .order(created_at: :desc)
+    .order(:created_at)
   end
 end

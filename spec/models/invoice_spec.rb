@@ -20,7 +20,7 @@ RSpec.describe Invoice do
     expect(@invoice1.total_revenue).to eq(78750)
   end
 
-  it 'returns list of invoices with invoice_items that have not been shipped' do
+  it 'returns list of invoices from old to new with invoice_items that have not been shipped' do
     expect(Invoice.incomplete_invoices_by_date.length).to eq(10)
   end
 end

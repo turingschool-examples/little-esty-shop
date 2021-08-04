@@ -42,7 +42,7 @@ RSpec.describe 'it can display the dashboards index page' do
     expect("#{@customer5.first_name} #{@customer5.last_name}").to appear_before("#{@customer7.first_name} #{@customer7.last_name}")
     expect("#{@customer7.first_name} #{@customer7.last_name}").to appear_before("#{@customer10.first_name} #{@customer10.last_name}")
     expect("#{@customer10.first_name} #{@customer10.last_name}").to appear_before("#{@customer1.first_name} #{@customer1.last_name}")
-    expect("#{@customer9.first_name} #{@customer9.last_name}").to appear_before("#{@customer1.first_name} #{@customer1.last_name}")
+    expect("#{@customer1.first_name} #{@customer1.last_name}").to appear_before("#{@customer9.first_name} #{@customer9.last_name}")
 
     expect(page).to_not have_content("#{@customer8.first_name} #{@customer8.last_name}")
     expect(page).to_not have_content("#{@customer6.first_name} #{@customer6.last_name}")
@@ -91,18 +91,31 @@ RSpec.describe 'it can display the dashboards index page' do
   # In that section I see a list of the ids of all invoices
   # That have items that have not yet been shipped
   # And each invoice id links to that invoice's admin show page
-  it 'shows list of incomplete invoices by id' do
-    visit "/admin"
 
+  # As an admin,
+  # When I visit the admin dashboard
+  # In the section for "Incomplete Invoices",
+  # Next to each invoice id I see the date that the invoice was created
+  # And I see the date formatted like "Monday, July 18, 2019"
+  # And I see that the list is ordered from oldest to newest
+  it 'shows list of incomplete invoices by id is ascending order' do
+    visit "/admin"
+    save_and_open_page
     expect(page).to have_content("Incomplete Invoices")
 
     within("#Incomplete_Invoices") do
       expect(page).to have_content("#{@invoice1.id}")
       expect(page).to have_content("#{@invoice2.id}")
       expect(page).to have_content("#{@invoice14.id}")
+      expect(page).to have_content("#{@invoice1.created_at.strftime("%A, %B %d, %Y")}")
+      expect(page).to have_content("#{@invoice2.created_at.strftime("%A, %B %d, %Y")}")
+      expect(page).to have_content("#{@invoice14.created_at.strftime("%A, %B %d, %Y")}")
+
       expect(page).to_not have_content("#{@invoice4.id}")
       expect(page).to_not have_content("#{@invoice7.id}")
-      # expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B %d, %Y"}")
+
+      expect("#{@invoice1.id}").to appear_before("#{@invoice2.id}")
+      expect("#{@invoice2.id}").to appear_before("#{@invoice14.id}")
     end
   end
 

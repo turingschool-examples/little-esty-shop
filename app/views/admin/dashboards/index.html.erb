@@ -15,5 +15,6 @@
   <div id="Incomplete_Invoices">
     <% @invoices.incomplete_invoices_by_date.each do |invoice| %>
       <p><%= link_to "##{invoice.id}", admin_invoice_path(invoice.id) %></p>
+      <p>Created At: <%= invoice.created_at.strftime("%A, %B %d, %Y") %></p>
     <% end %>
   </div>
