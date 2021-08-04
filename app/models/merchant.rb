@@ -36,4 +36,12 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def ready_to_ship
+    invoice_items.where(status: 'packaged')
+    # .or('invoice_items = pending')
+    .select('items.name as item_name, invoice_items.*')
+    .group('items.id, invoice_items.id')
+    .order(:created_at)
+  end
+
 end
