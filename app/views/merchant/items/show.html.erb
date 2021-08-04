@@ -4,4 +4,4 @@
 <p>Description: <%= @item.description %></p>
 <p>Current Price: <%= number_to_currency(@item.unit_price/100.00, precision: 2) %></p>
 
-<%= link_to 'Update item information', edit_merchant_item_path(@item.merchant_id, @item.id) %>
+<%= link_to 'Update item information', edit_merchant_item_path(@item.merchant_id, @item.id), class:"btn btn-outline-dark navbar-custom" %>

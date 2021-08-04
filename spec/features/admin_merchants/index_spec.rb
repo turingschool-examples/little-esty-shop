@@ -16,7 +16,7 @@ RSpec.describe 'Admin Merchants Index Page' do
   it 'is on the correct page' do
     expect(current_path).to eq('/admin/merchants')
     expect(page).to have_content('Welcome Admin!')
-    expect(page).to have_content('Enabled Merchants:')
+    expect(page).to have_content('Enabled Merchants')
   end
 
   it 'can take the user back to the dashboard' do

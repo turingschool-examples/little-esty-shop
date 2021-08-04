@@ -25,8 +25,22 @@
 	background-attachment: fixed;
 }
 
+.navbar-nav.navbar-center {
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+} 
+
 .navbar-custom {
 	background-color: #ffffff75;
+}
+
+.custom {
+	background-color: #ffffffa1;
+}
+
+.customblack {
+	background-color: #000000a1;
 }
 
 .blacktext {

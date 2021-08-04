@@ -75,7 +75,7 @@ RSpec.describe 'Admin Invoice Index Page' do
     expected = Item.items_ready_to_ship_by_ordered_date
     # save_and_open_page
 
-    expect(page).to have_content("Incomplete Invoices:")
+    expect(page).to have_content("Incomplete Invoices")
     expect("#{expected[0].invoice_id}").to appear_before("#{expected[1].invoice_id}")
     expect("#{expected[1].invoice_id}").to appear_before("#{expected[2].invoice_id}")
     expect("#{expected[3].invoice_id}").to appear_before("#{expected[4].invoice_id}")
