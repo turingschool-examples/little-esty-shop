@@ -54,22 +54,18 @@ RSpec.describe Merchant, type: :model do
         customer8 = Customer.create!(first_name: 'FName8', last_name: 'LName8')
 
         invoice19 = customer8.invoices.create!(status: 'completed')
-        invoice20 = customer8.invoices.create!(status: 'completed')
-        invoice21 = customer8.invoices.create!(status: 'completed')
 
         invoice_item22 = InvoiceItem.create!(invoice_id: invoice19.id, item_id: @item2.id, quantity: 100, unit_price: @item2.unit_price, status: 'packaged')
-        invoice_item23 = InvoiceItem.create!(invoice_id: invoice20.id, item_id: @item3.id, quantity: 100, unit_price: @item3.unit_price, status: 'packaged')
-        invoice_item23 = InvoiceItem.create!(invoice_id: invoice21.id, item_id: @item3.id, quantity: 100, unit_price: @item3.unit_price, status: 'packaged')
 
         transaction26 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
         transaction27 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
         transaction28 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-        transaction29 = invoice20.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-        transaction30 = invoice20.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-        transaction31 = invoice20.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-        transaction29 = invoice21.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-        transaction30 = invoice21.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-        transaction31 = invoice21.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+        transaction29 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+        transaction30 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+        transaction31 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+        transaction29 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+        transaction30 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+        transaction31 = invoice19.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
 
         customer9 = Customer.create!(first_name: 'FName9', last_name: 'LName9')
 
