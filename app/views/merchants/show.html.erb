@@ -8,6 +8,7 @@
   <h2>Items Ready to Ship</h2>
   <% @merchant.ready_to_ship.each do |item| %>
     <p><%= item.item_name %> - <%= link_to "Invoice ##{item.invoice_id}", merchant_invoice_path(@merchant.id, item.invoice_id) %> - <%= item.invoice_date.strftime("%A, %B %-d, %Y") %></p>
+  <% end %>
 
 <div id='favorite_customers'>
   <h2>Favorite Customers</h2>
