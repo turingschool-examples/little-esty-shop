@@ -46,5 +46,15 @@ RSpec.describe 'Merchants invoices show page' do
       expect(page).to have_content("Total Revenue: $161.80")
 
     end
+
+    it "allows merchant to select invoice status" do
+      expect(@invoice_items[0].status).to eq("packaged")
+
+      page.select "shipped", from: 'status'
+      click_button "Update Item Status"
+
+      expect(page).to have_content("shipped")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoices[0].id}")
+    end
   end
 end

@@ -19,6 +19,17 @@ class Merchant < ApplicationRecord
     items.where(enabled: 1)
   end
 
+
+  def best_revenue_day
+    items.joins(:transactions)
+    .where("transactions.result = ?", 0)
+    .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .group("invoices.created_at")
+    .order("revenue desc, invoices.created_at desc")
+    .first
+    .created_at
+  end
+
   def self.top_merchants
     joins(items: {invoice_items: {invoice: :transactions}})
     .group('id')
@@ -30,14 +41,6 @@ class Merchant < ApplicationRecord
   end
 
   def best_day
-    # items.joins(invoice_items: {invoice: :transactions})
-    # .group('invoices.id, invoices.created_at')
-    # .select('invoices.created_at')
-    # .where('transactions.result = ?', 0)
-    # .where('merchants.id = ?', id)
-    # .order('SUM(invoice_items.quantity * invoice_items.unit_price) desc')
-    # .limit(1)
-
     self.items.joins(:invoice_items)
     .joins(:invoices)
     .joins(:transactions)
@@ -49,10 +52,5 @@ class Merchant < ApplicationRecord
     .pluck(Arel.sql('invoices.created_at'))
     .first
   end
-
 end
-# items.joins(:invoice_items)
-# .joins(:invoices)
-# .group('invoices.id, items.id')
-# .select('invoices.created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
-# .first.created_at
+
