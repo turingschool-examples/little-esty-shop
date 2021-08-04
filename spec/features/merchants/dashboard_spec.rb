@@ -11,6 +11,19 @@ RSpec.describe 'the merchant dashboard' do
         expect(page).to have_selector(:link_or_button, "My Items")
       end
     end
+
+    it 'show the items that are ready to ship with their invoice and date' do
+      visit merchant_path(@merchant1.id)
+
+      within('#ready_to_ship') do
+        save_and_open_page
+        expect(page).to have_content('Items Ready to Ship')
+        expect(page).to have_content('Potato Chips')
+        expect(page).to have_content('Spinach')
+        expect(page).to have_content('Red Bull')
+        expect(page).to have_content('Hot Cheetos')
+      end
+    end
   end
 
   describe 'hyperlinks' do
