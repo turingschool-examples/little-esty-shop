@@ -34,54 +34,54 @@ RSpec.describe 'it can display the dashboards index page' do
   it 'lists the top 5 customers by name with most successful transactions' do
     visit "/admin"
 
-    expect(page).to have_content(@customer5)
-    expect(page).to have_content(@customer6)
-    expect(page).to have_content(@customer7)
-    expect(page).to have_content(@customer9)
-    expect(page).to have_content(@customer10)
-    expect(@customer5).to appear_before(@customer7)
-    expect(@customer7).to appear_before(@customer10)
-    expect(@customer10).to appear_before(@customer9)
-    expect(@customer9).to appear_before(@customer6)
+    expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
+    expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
+    expect(page).to have_content("#{@customer7.first_name} #{@customer7.last_name}")
+    expect(page).to have_content("#{@customer9.first_name} #{@customer9.last_name}")
+    expect(page).to have_content("#{@customer10.first_name} #{@customer10.last_name}")
+    expect("#{@customer5.first_name} #{@customer5.last_name}").to appear_before("#{@customer7.first_name} #{@customer7.last_name}")
+    expect("#{@customer7.first_name} #{@customer7.last_name}").to appear_before("#{@customer10.first_name} #{@customer10.last_name}")
+    expect("#{@customer10.first_name} #{@customer10.last_name}").to appear_before("#{@customer1.first_name} #{@customer1.last_name}")
+    expect("#{@customer1.first_name} #{@customer1.last_name}").to appear_before("#{@customer9.first_name} #{@customer9.last_name}")
 
-    expect(page).to_not have_content(@customer8)
-    expect(page).to_not have_content(@customer1)
-    expect(page).to_not have_content(@customer2)
-    expect(page).to_not have_content(@customer3)
-    expect(page).to_not have_content(@customer4)
+    expect(page).to_not have_content("#{@customer8.first_name} #{@customer8.last_name}")
+    expect(page).to_not have_content("#{@customer6.first_name} #{@customer6.last_name}")
+    expect(page).to_not have_content("#{@customer2.first_name} #{@customer2.last_name}")
+    expect(page).to_not have_content("#{@customer3.first_name} #{@customer3.last_name}")
+    expect(page).to_not have_content("#{@customer4.first_name} #{@customer4.last_name}")
   end
 
-  xit 'shows the number of successful transactions next to each customer' do
+  it 'shows the number of successful transactions next to each customer' do
     visit "/admin"
-
-    within("#first") do
+    save_and_open_page
+    within("##{@customer5.id}") do
       expect(page).to have_content("#{@customer5.first_name}")
       expect(page).to have_content("#{@customer5.last_name}")
-      expect(page).to have_content("#{@customer5.successful_transactions}")
+      expect(page).to have_content("#{@customer5.num_success_trans}")
     end
 
-    within("#second") do
+    within("##{@customer7.id}") do
       expect(page).to have_content("#{@customer7.first_name}")
       expect(page).to have_content("#{@customer7.last_name}")
-      expect(page).to have_content("#{@customer7.successful_transactions}")
+      expect(page).to have_content("#{@customer7.num_success_trans}")
     end
 
-    within("#third") do
+    within("##{@customer10.id}") do
       expect(page).to have_content("#{@customer10.first_name}")
       expect(page).to have_content("#{@customer10.last_name}")
-      expect(page).to have_content("#{@customer10.successful_transactions}")
+      expect(page).to have_content("#{@customer10.num_success_trans}")
     end
 
-    within("#fourth") do
+    within("##{@customer9.id}") do
       expect(page).to have_content("#{@customer9.first_name}")
       expect(page).to have_content("#{@customer9.last_name}")
-      expect(page).to have_content("#{@customer9.successful_transactions}")
+      expect(page).to have_content("#{@customer9.num_success_trans}")
     end
 
-    within("#fifth") do
-      expect(page).to have_content("#{@customer6.first_name}")
-      expect(page).to have_content("#{@customer6.last_name}")
-      expect(page).to have_content("#{@customer6.successful_transactions}")
+    within("##{@customer1.id}") do
+      expect(page).to have_content("#{@customer1.first_name}")
+      expect(page).to have_content("#{@customer1.last_name}")
+      expect(page).to have_content("#{@customer1.num_success_trans}")
     end
   end
 end
