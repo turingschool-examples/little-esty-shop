@@ -7,6 +7,7 @@
 <% @merchants.top_5_merchants_revenue.each do |merchant| %>
   <section id="top-5-merchants-<%= merchant.id %>">
   <p> <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>, Revenue Generated: <%= number_to_currency(merchant.revenue) %> </p>
+  <p> Top selling date for <%= merchant.name %> was <%= merchant.merchant_best_day.strftime("%A, %B %d, %Y") %> </p>
   </section>
 <% end %>
 
