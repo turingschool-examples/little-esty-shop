@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   # -------Admin routes-------
   namespace :admin do
+    controller :dashboards do
+      get '/', action: :index
+    end
     resources :merchants
     resources :invoices
   end
