@@ -19,6 +19,10 @@ RSpec.describe Customer do
     expected = [@customer5, @customer7, @customer10, @customer1, @customer9]
 
     expect(Customer.top_5_customers).to eq(expected)
-    # expect(Customer.top_5_customers.count).to eq(5)
+  end
+
+  it 'returns number of successful transactions' do
+    expect(@customer5.num_success_trans).to eq(10)
+    expect(@customer7.num_success_trans).to eq(9)
   end
 end
