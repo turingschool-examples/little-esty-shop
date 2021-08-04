@@ -1,7 +1,4 @@
 <h1><%= @merchant.name %>'s Items</h1>
-
-<br><br>
-
 <%= link_to 'Create a new item', new_merchant_item_path, class:"btn btn-outline-dark navbar-custom" %><br><br>
 <table>
   <thead>
@@ -21,18 +18,21 @@
                   params: { direct: :enable, item: { id: merchant_item.id, enable: merchant_item.enable_opposite }} %></td>
         <td><%= link_to 'Show', merchant_item_path(@merchant.id, merchant_item.id), class:"btn btn-outline-dark navbar-custom" %></td>
         <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, merchant_item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<table id="top-item-table" class="table table-light" style="text-align:center">
+<table id='top-item-table' class="table table-light" style="text-align:center">
   <thead>
     <tr>
-      <th style="text-align:center"><h4>Top 5 Items</h4></th>
+      <th style="text-align:center">Top 5 Items</th>
     </tr>
   </thead>
   <tbody>
+  <tr>
+    <td colspan="3">
       <table class="table mb-0 table-striped table-hover">
         <tr id="item-table-headers">
           <th class="table-info">Item Rank:</th>
@@ -40,84 +40,58 @@
           <th class="table-info">Top Selling Date:</th>
           <th class="table-info">Total Revenue Generated:</th>
         </tr>
+        <tr id="merchant-top-items">
           <% @merchant.top_five_items.each_with_index do |item, idx| %>
             <tr id="item-<%= item.id %>">
               <td><%= "#{idx + 1}" %></td>
-              <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: "btn btn-secondary btn-sm" %></td>
+              <td><a class="btn btn-secondary btn-sm" href=<%="/merchants/#{@merchant.id}/items/#{item.id}" %>><%= "#{item.name}" %></td>
               <td><%= "#{item.item_best_day(item.id).first.purchase_date}" %></td>
               <td><%= number_to_currency(("#{item.total_item_price}".to_i)/100.00) %></td>
             </tr>
           <% end %>
-    </table>
+        </tr>
+      <br>
   </tbody>
 </table>
-<br><br>
 
-<table id='all-item-table' class="table table-light" style="text-align:center">
+<table>
   <thead>
     <tr>
-      <th style="text-align:center"><h4>Merchants Items</h4></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
-  <tbody>
-    <table class="table mb-0 table-striped table-hover">
-      <tr id="item-table-headers">
-        <th class="table-info">Item Name:</th>
-        <th class="table-info">Item Status:</th>
-        <th class="table-info">Enable/Disable:</th>
-        <th class="table-info">Show Page:</th>
-        <th class="table-info">Edit Page:</th>
-      </tr>
-      <tr id="sort-buttons">
-        <th class="table-info"><%= button_to "Sort Alphabetically", merchant_items_path(@merchant.id), method: :get, params: { sort: 'name' }  %></th>
-        <th class="table-info"><%= button_to "Sort by Updated Date", merchant_items_path(@merchant.id), method: :get, params: { sort: 'date' }  %></th>
-        <th class="table-info"></th>
-        <th class="table-info"></th>
-        <th class="table-info"></th>
-      </tr>
-        <% @items.each do |item| %>
-          <tr id= "merchant_item-<%= item.id %>">
-            <td><%= item.name %></td>
-            <td><%= item.enable_opposite.capitalize %>d</td>
-            <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch,
-                      params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
-            <td><%= link_to 'Show', merchant_item_path(@merchant.id, item.id) %></td>
-            <td><%= link_to 'Edit', edit_merchant_item_path(@merchant.id, item.id) %></td>
-          </tr>
-        <% end %>
-    </table
-  </tbody>
-</table>
-<br><br>
 
-<div style="margin: auto; width: 100%; padding: 0 100px 0;">
-<div id="enabled" style="display:inline-block; width:500px; background:rgb(250,250,250); padding:20px; margin:0 4em 2em 0;">
-<table class="table mb-0 table-striped table-hover">
+  <div id="enabled">
     <tbody>
-      <h4>Enabled Items</h4>
+      <h2>Enabled Items</h2>
       <% @enabled_items.each do |item| %>
         <tr id="enabled_item-<%= item.id %>">
-          <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class:"btn btn-outline-dark navbar-custom" %></td>
-          <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch, class:"btn btn-outline-dark navbar-custom",
-                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
+          <td><%= item.name %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
         </tr>
       <% end %>
     </tbody>
+  </div>
 </table>
-</div>
 
-<div id="disabled" style="display: inline-block; width:500px; background:rgb(250,250,250); padding:20px;">
-<table class="table mb-0 table-striped table-hover">
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<br>
+  <div id="disabled">
     <tbody>
-      <h4>Disabled Items</h4>
+      <h2>Disabled Items</h2>
       <% @disabled_items.each do |item| %>
         <tr id="disabled_item-<%= item.id %>">
-          <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class:"btn btn-outline-dark navbar-custom" %></td>
-          <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch, class:"btn btn-outline-dark navbar-custom", 
-                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
+          <td><%= item.name %></td>
+          <td><%= link_to 'Show', admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
+          <td><%= link_to 'Edit', edit_admin_merchant_path(item.id), class:"btn btn-outline-dark navbar-custom" %></td>
         </tr>
       <% end %>
     </tbody>
+  </div>
 </table>
-</div>
-</div>
