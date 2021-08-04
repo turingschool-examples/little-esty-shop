@@ -173,7 +173,7 @@ RSpec.describe GithubService do
           "site_admin": false,
           "contributions": 1
           }]'
-          #
+          
           allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
           allow_any_instance_of(Faraday::Response).to receive(:body).and_return(@response)
         end
@@ -225,6 +225,37 @@ RSpec.describe GithubService do
             expect(@service.commits).to eq(@expected)
             expect(@service.contributors_commits).to eq(@expected)
             expect(@service.pull_requests).to eq(@expected)
+          end
+        end
+
+        describe 'pull requests' do
+          it 'can show the number pull requests' do 
+            service = GithubService.new
+            pulls = '["pull_requests_1", "pull_requests_2", "pull_requests_3"]'
+
+            allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
+            allow_any_instance_of(Faraday::Response).to receive(:body).and_return(pulls)
+            expect(service.pull_requests).to eq(3)
+          end
+        end
+
+        describe 'repo name' do
+          it 'can show the repo_name' do
+            service = GithubService.new
+
+            allow_any_instance_of(GithubService).to receive(:get_repo).and_return([1, 2, 3])
+
+            repo = '{
+            "id": 389769786,
+            "node_id": "MDEwOlJlcG9zaXRvcnkzODk3Njk3ODY=",
+            "name": "little-esty-shop",
+            "full_name": "JasonPKnoll/little-esty-shop",
+            "private": false }'
+
+            allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
+            allow_any_instance_of(Faraday::Response).to receive(:body).and_return(repo)
+          
+            expect(service.repo_name).to eq('little-esty-shop')
           end
         end
       end
