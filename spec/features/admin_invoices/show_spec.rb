@@ -63,7 +63,7 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   it 'is on the correct page' do
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
-    expect(page).to have_content("Invoice ID: #{@invoice1.id}")
+    expect(page).to have_content("Invoice #{@invoice1.id}")
   end
 
   it 'displays all of the items on the invoice and only those items' do
