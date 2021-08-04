@@ -240,4 +240,22 @@ RSpec.describe Merchant do
     end
   end
 
+  describe '::order_by' do
+    it 'can order by name with or without optional arg' do
+      merchant_1 = Merchant.create!(name: 'Mark Zuckerberg', status: 0)
+      merchant_2 = Merchant.create!(name: 'Bill Gates', status: 0)
+
+      expect(Merchant.order_by_name(:name)).to eq([merchant_2, merchant_1])
+      expect(Merchant.order_by_name(:name, :desc)).to eq([merchant_1, merchant_2])
+    end
+
+    it 'can order by date with or without optional arg' do
+      merchant_1 = Merchant.create!(name: 'Mark Zuckerberg', status: 0)
+      merchant_2 = Merchant.create!(name: 'Bill Gates', status: 0)
+
+      expect(Merchant.order_by_date(:created_at)).to eq([merchant_1, merchant_2])
+      expect(Merchant.order_by_date(:created_at, :desc)).to eq([merchant_2, merchant_1])
+    end
+  end
+
 end
