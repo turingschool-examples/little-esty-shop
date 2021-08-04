@@ -6,6 +6,16 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
+  def top_customers
+    invoices.joins(:customer, :transactions)
+            .where(transactions: {result: true})
+            .select("customers.*, count(transactions.id) as total_count")
+            .group("customers.id, invoice_items.id")
+            .distinct
+            .order(total_count: :desc)
+            .limit(5)
+  end
+
   def self.enabled_merchants
     where("status = ?", "enabled")
   end
@@ -40,6 +50,14 @@ class Merchant < ApplicationRecord
     .group("items.id")
     .order(revenue: :desc)
     .limit(5)
+  end
+
+  def ready_to_ship
+    invoice_items.joins(:invoice)
+    .where(status: ['packaged', 'pending'])
+    .select('items.name as item_name, invoice_items.*, invoices.created_at as invoice_date')
+    .group('items.id, invoice_items.id, invoices.id')
+    .order(:invoice_date)
   end
 
 end

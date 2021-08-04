@@ -93,8 +93,8 @@ RSpec.configure do |config|
     @item12 = @merchant3.items.create!(name: 'Frozen pizza', description: 'Pepperoni pizza', unit_price: 499)
 
     #Customer1 Invoices
-    @invoice1 = @customer1.invoices.create!(status: 'completed')
-    @invoice2 = @customer1.invoices.create!(status: 'completed')
+    @invoice1 = @customer1.invoices.create!(status: 'completed', created_at: "Sun, 25 Mar 2012 09:54:09 UTC +00:00")
+    @invoice2 = @customer1.invoices.create!(status: 'completed', created_at: "Mon, 26 Mar 2012 09:54:09 UTC +00:00")
     @invoice3 = @customer1.invoices.create!(status: 'in_progress')
     @invoice4 = @customer1.invoices.create!(status: 'in_progress')
     @invoice5 = @customer1.invoices.create!(status: 'cancelled')
@@ -119,7 +119,7 @@ RSpec.configure do |config|
 
     #Customer4 Invoices
     @invoice13 = @customer4.invoices.create!(status: 'completed')
-    @invoice14 = @customer4.invoices.create!(status: 'in_progress')
+    @invoice14 = @customer4.invoices.create!(status: 'in_progress', created_at: "Tue, 27 Mar 2012 09:54:09 UTC +00:00")
     @invoice15 = @customer4.invoices.create!(status: 'cancelled')
 
     #Customer5
@@ -159,8 +159,8 @@ RSpec.configure do |config|
     @transaction91 = @invoice91.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
     @transaction92 = @invoice92.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
     @transaction93 = @invoice93.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-    @transaction94 = @invoice94.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-    @transaction95 = @invoice95.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction94 = @invoice94.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
+    @transaction95 = @invoice95.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction96 = @invoice96.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction97 = @invoice97.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction98 = @invoice98.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
@@ -227,7 +227,7 @@ RSpec.configure do |config|
     @transaction63 = @invoice63.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
     @transaction64 = @invoice64.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
     @transaction65 = @invoice65.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
-    @transaction66 = @invoice66.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: true)
+    @transaction66 = @invoice66.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction67 = @invoice67.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction68 = @invoice68.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
     @transaction69 = @invoice69.transactions.create!(credit_card_number: '1234234534564567', credit_card_expiration_date: nil, result: false)
@@ -269,9 +269,9 @@ RSpec.configure do |config|
     @invoice_item12 = InvoiceItem.create!(invoice_id: @invoice12.id, item_id: @item12.id, quantity: 100, unit_price: @item12.unit_price, status: 'pending')
 
     #Added to test merchant top_five_items method
-    @invoice_item17 = InvoiceItem.create!(invoice_id: @invoice16.id, item_id: @item13.id, quantity: 100, unit_price: @item13.unit_price, status: 'shipped')
-    @invoice_item18 = InvoiceItem.create!(invoice_id: @invoice17.id, item_id: @item14.id, quantity: 100, unit_price: @item14.unit_price, status: 'shipped')
-    @invoice_item19 = InvoiceItem.create!(invoice_id: @invoice18.id, item_id: @item15.id, quantity: 100, unit_price: @item15.unit_price, status: 'shipped')
+    @invoice_item17 = InvoiceItem.create!(invoice_id: @invoice16.id, item_id: @item13.id, quantity: 100, unit_price: @item13.unit_price, status: 'packaged')
+    @invoice_item18 = InvoiceItem.create!(invoice_id: @invoice17.id, item_id: @item14.id, quantity: 100, unit_price: @item14.unit_price, status: 'packaged')
+    @invoice_item19 = InvoiceItem.create!(invoice_id: @invoice18.id, item_id: @item15.id, quantity: 100, unit_price: @item15.unit_price, status: 'packaged')
     @invoice_item20 = InvoiceItem.create!(invoice_id: @invoice19.id, item_id: @item16.id, quantity: 100, unit_price: @item16.unit_price, status: 'shipped')
     @invoice_item21 = InvoiceItem.create!(invoice_id: @invoice20.id, item_id: @item17.id, quantity: 100, unit_price: @item17.unit_price, status: 'shipped')
 
