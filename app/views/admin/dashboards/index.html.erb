@@ -2,3 +2,11 @@
 
 <h3> Admin <%= link_to "Merchants: Index page", admin_merchants_path %> </h3>
 <h3> Admin <%= link_to "Invoices: Index page", admin_invoices_path %> </h3>
+
+<h2>Top 5 Customers:</h2>
+<% @customers.top_5_customers.each do |customer| %>
+  <div id="<%= customer.id %>">
+    <p><b>Customer Name:</b> <%= customer.first_name %> <%= customer.last_name %><br>
+       <b># Transactions:</b> <%= customer.num_successful %></p>
+  </div>
+  <% end %>
