@@ -33,9 +33,9 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'instance methods' do
-    describe '#best_day' do
-      xit 'can get the best day for revenue for the top 5 merchants by revenue' do
-        expect(@merchant1.best_day)
+    describe '#merchant_best_day' do
+      it 'can get the best day for revenue for the top 5 merchants by revenue' do
+        expect(@merchant1.merchant_best_day).to eq(@invoice17.created_at)
       end
     end
     describe '#top_five_items' do
