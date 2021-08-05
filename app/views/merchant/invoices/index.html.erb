@@ -1,23 +1,16 @@
 <h1>Merchant Invoices</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <tr id="invoices-<%= invoice.id %>">
-        <td><%= "Invoice: #{invoice.id}" %></td>
-        <td><%= link_to 'Show', merchant_invoice_path((params[:merchant_id]), invoice.id) %></td>
-        <td><%= link_to 'Edit', edit_merchant_invoice_path((params[:merchant_id]), invoice.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
 
+<div align="center">
+<h1>All Invoices</h1>
+<% @invoices.each do |i| %>
+  <div id="invoices-<%= i.id %>" class="card navbar-custom"  style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Invoice: <%= i.id %></h5>
+        <td><%= link_to 'Show', merchant_invoice_path((params[:merchant_id]), i.id), class:"btn btn-outline-dark navbar-custom" %></td>
+        <td><%= link_to 'Edit', edit_merchant_invoice_path((params[:merchant_id]), i.id), class:"btn btn-outline-dark navbar-custom" %></td>
+    </div>
+  </div>
+  <br/>
+<% end %>
