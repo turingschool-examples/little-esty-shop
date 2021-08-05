@@ -1,32 +1,40 @@
- <p>Invoice ID: <%= @invoice.id %></p>
- <p>Status: <%= @invoice.status %></p>
- <p>Date: <%= @invoice.format_date(@invoice.created_at) %></p>
- <p>Customer: <%= @invoice.customer.first_name %>
-    <%= @invoice.customer.last_name %> </p>
-  Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %>
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
+    <tr>
+      <th  colspan="3" style="font-family: Quicksand;">Invoice ID:<strong> <%= @invoice.id %></strong><br> Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %></th>
+    </tr>
+  </thead >
+  <tbody id="top-merchants">
+    <tr id="top-merchants-table-headers">
+      <th class="table-info">Status:</th>
+      <th class="table-info">Date:</th>
+      <th class="table-info">Customer:</th>
+    </tr>
+      <tr>
+        <td><%= @invoice.status %></td>
+        <td><%= @invoice.format_date(@invoice.created_at) %></td>
+        <td><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></td>
+      </tr>
+  </tbody>
+</table>
 
-      <br/><br/>
+
+<br/><br/>
  <h2>Items on this invoice:</h2><br/>
+
+<div align="center">
 <% @invoice.invoice_items.each do |ii| %>
-
-  <p>Item: <%= ii.item.name %></p>
-  <p>Quantity: <%= ii.quantity %></p>
-  <p>Unit Price: <%= number_to_currency(ii.unit_price/100.00, precision: 2) %></p>
-
-  <div id=<%="id-#{ii.id}" %>>
-
-<%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |form| %>
-  <%= form.hidden_field :ii_id, value: ii.id %>
-  <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
-  <%= form.submit "Update Item Status" %>
-<% end %>
-
+  <div id="id-<%=ii.id%>" class="card navbar-custom"  style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><p>Item: <%= ii.item.name %></p></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Quantity: <%= ii.quantity %></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Unit Price: <%= number_to_currency(ii.unit_price/100.00, precision: 2) %></h6>
+      <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |form| %>
+        <%= form.hidden_field :ii_id, value: ii.id %>
+        <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
+        <%= form.submit "Update Item Status" %>
+      <% end %>
+    </div>
   </div>
-  <br/><br/>
+  <br/>
 <% end %>
-
-
-
-<br/>
-<%= link_to 'Edit', edit_merchant_invoice_path(@merchant.id, @invoice.id) %> |
-<%= link_to 'Back', merchant_invoices_path %>
