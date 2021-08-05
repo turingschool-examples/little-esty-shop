@@ -184,6 +184,9 @@ RSpec.describe 'Admin Merchants Index Page' do
       expect(page).to have_content(@merchant1.name)
       expect(page).to have_content(@merchant3.name)
       expect(page).to have_content(@merchant5.name)
+      expect(page).to_not have_content(@merchant2.name)
+      expect(page).to_not have_content(@merchant4.name)
+      expect(page).to_not have_content(@merchant6.name)
     end
   end
 
@@ -192,6 +195,9 @@ RSpec.describe 'Admin Merchants Index Page' do
       expect(page).to have_content(@merchant2.name)
       expect(page).to have_content(@merchant4.name)
       expect(page).to have_content(@merchant6.name)
+      expect(page).to_not have_content(@merchant1.name)
+      expect(page).to_not have_content(@merchant3.name)
+      expect(page).to_not have_content(@merchant5.name)
     end
   end
 

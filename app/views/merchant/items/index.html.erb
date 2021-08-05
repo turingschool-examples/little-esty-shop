@@ -75,7 +75,7 @@
         <tr id="enabled_item-<%= item.id %>">
           <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: "link-dark" %></td>
           <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch,
-                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
+                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }}, class: "btn btn-secondary btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -89,7 +89,7 @@
         <tr id="disabled_item-<%= item.id %>">
           <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: "link-dark" %></td>
           <td><%= button_to "#{item.enable_opposite.capitalize} Item", merchant_item_path(@merchant.id, item.id), method: :patch,
-                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }} %></td>
+                    params: { direct: :enable, item: { id: item.id, enable: item.enable_opposite }}, class: "btn btn-secondary btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>

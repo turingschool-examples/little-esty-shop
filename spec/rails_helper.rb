@@ -35,6 +35,7 @@ RSpec.configure do |c|
     # allow(API).to receive(:aggregate_by_author).with(:pulls).and_return(API.contributions[:defaults][:pulls])
     ApplicationController.class_variable_set(:@@class_commits, API.contributions[:defaults][:commits])
     ApplicationController.class_variable_set(:@@class_pulls, API.contributions[:defaults][:pulls])
+    # Look into "allow any instance of x" syntax, could add more flexibility in a future project
   end
 end
 # Add additional requires below this line. Rails is not loaded until this point!

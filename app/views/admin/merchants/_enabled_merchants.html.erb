@@ -6,8 +6,8 @@
 </thead >
 
   <tbody id="enabled">
-    <% @enabled_merchants.each_with_index do |merchant, idx| %>
-      <tr  class="customblack" id="enabled_merchant-<%= merchant.id %>">
+    <% @enabled_merchants.each do |merchant| %>
+      <tr class="customblack" id="enabled_merchant-<%= merchant.id %>">
         <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></th>
         <th><%= button_to 'Edit Merchant', edit_admin_merchant_path(merchant.id), method: :get, class:"btn btn-outline-dark navbar-custom" %></th>
       </tr>

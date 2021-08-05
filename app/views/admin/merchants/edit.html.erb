@@ -1,10 +1,11 @@
-<h1>Editing Merchant <%= @merchant.name %></h1>
+<h1>Editing Merchant: <%= @merchant.name %></h1>
 
-<%= form_with(model: @merchant, url: admin_merchant_path(@merchant), method: :patch,local: true, :html => { :class => 'navbar-custom', :style => 'width: auto;' }) do |f| %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
-
-  <%= f.submit %>
-
+<%= form_with(model: @merchant, url: admin_merchant_path(@merchant), method: :patch, local: true, :html => { :class => 'card navbar-custom card-body', :style => 'width: 18rem;' }) do |f| %>
+<div align="center">
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <div style="padding-top:10px;">
+      <%= f.submit %>
+    </div>
+</div>
 <% end %>
