@@ -124,5 +124,18 @@ RSpec.describe Item do
         expect(@merchant_1.items.disabled_items).to eq([@item_4])
       end
     end
+
+    describe '::order_by_date' do
+      it 'orders the selection by date' do
+        expect(@merchant_1.items.order_by_date(:updated_at, :desc)).to eq([@item_3, @item_2, @item_1])
+      end
+    end
+
+    describe '::order_by_name' do
+      it 'orders the selection by name' do
+        expect(@merchant_1.items.order_by_name(:name)).to eq([@item_2, @item_3, @item_1])
+      end
+    end
+
   end
 end
