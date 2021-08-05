@@ -199,7 +199,7 @@ RSpec.describe 'Merchants Dashboard Page' do
     visit "/merchants/#{@merchant.id}/dashboard"
     # save_and_open_page
 
-    expect(page).to have_content("Ordered Items Ready for Shipment:")
+    expect(page).to have_content("Ordered Items Ready for Shipment")
     expect("#{expected[0].invoice_id}").to appear_before("#{expected[1].invoice_id}")
     expect("#{expected[1].invoice_id}").to appear_before("#{expected[2].invoice_id}")
 

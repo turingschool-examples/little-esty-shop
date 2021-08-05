@@ -63,7 +63,7 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   it 'is on the correct page' do
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
-    expect(page).to have_content("Invoice ID: #{@invoice1.id}")
+    expect(page).to have_content("Invoice #{@invoice1.id}")
   end
 
   it 'displays all of the items on the invoice and only those items' do
@@ -74,7 +74,9 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   it 'displays the total revenue generated from all the items on this invoice' do
-    expect(page).to have_content("Total Invoice Revenue Potential: $865.00")
+    expect(page).to have_content("Total Invoice Revenue Potential")
+    expect(page).to have_content("$865.00")
+
   end
 
   it 'can update invoice status: happy path' do
