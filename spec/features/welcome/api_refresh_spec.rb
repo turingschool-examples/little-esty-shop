@@ -63,6 +63,7 @@ RSpec.describe 'Github API Statistics' do
 
     click_on('Refresh Stats 🔄')
     expect(current_path).to eq('/')
+    expect(page).to have_content("Github API Statistics Successfully Refreshed")
 
     click_on('Github Stats')
     within "#dropdownmenu-github" do
@@ -79,6 +80,7 @@ RSpec.describe 'Github API Statistics' do
     click_on('Github Stats')
     click_on('Refresh Stats 🔄')
     expect(current_path).to eq('/')
+    expect(page).to have_content("Github API Rate Limit Hit, Default Stats Temporarily Rendered")
 
     click_on('Github Stats')
     within "#dropdownmenu-github" do

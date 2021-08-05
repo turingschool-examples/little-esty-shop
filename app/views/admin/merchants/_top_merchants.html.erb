@@ -1,0 +1,23 @@
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
+    <tr>
+      <th  colspan="4" style="font-family: Quicksand;">Top Merchants</th>
+    </tr>
+  </thead >
+  <tbody id="top-merchants">
+    <tr id="top-merchants-table-headers">
+      <th class="table-info">Rank:</th>
+      <th class="table-info">Name:</th>
+      <th class="table-info">Total Revenue:</th>
+      <th class="table-info">Top Selling Date:</th>
+    </tr>
+    <% @top_merchants.each_with_index do |top, idx| %>
+      <tr id="top_merchant-<%= top.id %>">
+        <td><%= "#{idx + 1}" %></td>
+        <td><%= link_to "#{top.merchant_name}", admin_merchant_path(top.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></td>
+        <td><%= "#{number_to_currency(top.total_revenue / 100.00)}" %></td>
+        <td><%= "#{top.format_date(top.best_day_for_merchant(top.id).invoice_date)}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

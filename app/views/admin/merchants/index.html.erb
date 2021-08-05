@@ -4,29 +4,8 @@
 <h1>Welcome Admin!</h1>
 <br>
 
-<table class="table table-striped navbar-custom">
-  <thead class="custom" text-align="center" align="center">
-    <tr>
-      <th  colspan="4" style="font-family: Quicksand;">Top Merchants</th>
-    </tr>
-  </thead >
-  <tbody id="top-merchants">
-    <tr id="top-merchants-table-headers">
-      <th class="table-info">Rank:</th>
-      <th class="table-info">Name:</th>
-      <th class="table-info">Total Revenue:</th>
-      <th class="table-info">Top Selling Date:</th>
-    </tr>
-    <% @top_merchants.each_with_index do |top, idx| %>
-      <tr id="top_merchant-<%= top.id %>">
-        <td><%= "#{idx + 1}" %></td>
-        <td><%= link_to "#{top.merchant_name}", admin_merchant_path(top.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></td>
-        <td><%= "#{number_to_currency(top.total_revenue / 100.00)}" %></td>
-        <td><%= "#{top.format_date(top.best_day_for_merchant(top.id).invoice_date)}" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'top_merchants', locals: { placeholder: ''} %>
+
 <br>
 <div id="create">
   <%= button_to 'Create New Merchant', new_admin_merchant_path, class:"btn btn-outline-dark navbar-custom", method: :get %>
@@ -34,76 +13,11 @@
 </div>
 <br>
 
-<table class="table table-striped navbar-custom">
-  <thead class="custom" text-align="center" align="center">
-    <tr>
-      <th colspan="2" style="font-family: Quicksand;">Enabled Merchants</th>
-    </tr>
-</thead >
-
-  <tbody id="enabled">
-    <% @enabled_merchants.each_with_index do |merchant, idx| %>
-      <tr  class="customblack" id="enabled_merchant-<%= merchant.id %>">
-        <th><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></th>
-        <th><%= button_to 'Edit Merchant', edit_admin_merchant_path(merchant.id), method: :get, class:"btn btn-outline-dark navbar-custom" %></th>
-      </tr>
-      <tr id="enabled_merchant_status-<%= merchant.id %>">
-        <th>Current Status: <%= "#{merchant.status.to_s.capitalize}" %></th>
-        <th><%= button_to "#{merchant.status_opposite.chop.capitalize} Merchant", admin_merchant_path(merchant.id), method: :patch, class:"btn btn-outline-dark navbar-custom", params: { direct: 'status change', merchant: { status: merchant.status_opposite }} %></th>
-      </tr>
-      <tr>
-        <th><em>Top Customers</em></th>
-        <th></th>
-      </tr>
-        <tr>
-          <td colspan="3">
-            <table class="table mb-0 table-striped navbar-custom">
-              <tr id="customer_table_headers-<%= merchant.id %>">
-                <th class="table-info">Customer Rank:</th>
-                <th class="table-info">Customer Name:</th>
-                <th class="table-info">Total Purchases:</th>
-              </tr>
-              <tr id="merchant_top_customers-<%= merchant.id %>">
-                <% Customer.top_customers_for_merchant(merchant.id).each_with_index do |customer, idx| %>
-                  <tr id="customer-<%= customer.id %>">
-                    <td><%= "#{idx + 1}" %></td>
-                    <td><%= "#{customer.first_name} #{customer.last_name}" %></td>
-                    <td><%= "#{customer.transaction_count}" %></td>
-                  </tr>
-                <% end %>
-              </tr>
-             </table>
-             <br>
-           </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'enabled_merchants', locals: { placeholder: ''} %>
 
 <br>
 <br>
 
-<table class="table table-striped navbar-custom">
-  <thead class="custom" text-align="center" align="center">
-    <tr>
-      <th colspan="2" style="font-family: Quicksand;">Disabled Merchants</th>
-    </tr>
-</thead >
-  <tbody id="disabled">
-    <tr id="disabled-merchants-table-headers">
-      <th class="table-info">Merchant Name:</th>
-      <th class="table-info">Current Status:</th>
-      <th class="table-info"></th>
-      <th class="table-info"></th>
-    </tr>
-    <% @disabled_merchants.each do |dis| %>
-      <tr id="disabled_merchant-<%= dis.id %>">
-        <td><%= link_to "#{dis.name}", admin_merchant_path(dis.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></td>
-        <td><%= "#{dis.status.to_s.capitalize}"%></td>
-        <td><%= button_to 'Edit Merchant', edit_admin_merchant_path(dis.id), method: :get, class:"btn btn-outline-dark navbar-custom" %></td>
-        <td><%= button_to "#{dis.status_opposite.chop.capitalize} Merchant", admin_merchant_path(dis.id), method: :patch, class:"btn btn-outline-dark navbar-custom", params: { direct: 'status change', merchant: { status: dis.status_opposite }} %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'disabled_merchants', locals: { placeholder: ''} %>
+
 <br>
