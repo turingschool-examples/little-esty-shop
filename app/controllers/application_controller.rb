@@ -7,10 +7,21 @@ def error_message(errors)
   errors.full_messages.join(', ')
 end
 
-def api
+def api_repo
   json = GithubService.new.repos
-  require "pry"; binding.pry
-  @repos = json.map do |repo|
-    Repo.new(repo)
+  Repo.new(json)
+end
+
+def api_contributors
+  json = GithubService.new.contributors
+  json.map do |user|
+    Contributor.new(user)
   end
+end
+
+def api_merges
+  json = GithubService.new.merges
+  closed_pulls = json.map do |user|
+    user
+  end.size
 end

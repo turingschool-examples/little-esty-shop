@@ -9,6 +9,14 @@
   </head>
 
   <body>
+    
+    <h4> Github Repo Name: <%= api_repo.name %> </h4>
+    <h4> Total Number of Closed Pull Requests: <%= api_merges %> </h4>
+    </br>
+    <% api_contributors.each do |contributor|%>
+      <p> Name: <%= contributor.login %>, Number of Commits: <%= contributor.contributions %> </p>
+    <% end %>
+
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
