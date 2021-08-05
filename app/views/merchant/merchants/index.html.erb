@@ -1,5 +1,14 @@
+<!-- For some reason, params only pass via button... and not via link -->
+<div style="float:left; padding-right: 20px;">
+<%= button_to "Sort Alphabetically", merchants_path, method: :get, params: { sort: 'name' }  %>
+</div>
+<%= button_to "Sort by Updated Date", merchants_path, method: :get, params: { sort: 'date' }  %>
+<br>
+<br>
+
+
 <div align="center">
-<h1>Merchants</h1>
+<h1>All Merchants</h1>
 <% @merchants.each do |merchant| %>
   <div class="card navbar-custom"  style="width: 18rem;">
     <div class="card-body">
