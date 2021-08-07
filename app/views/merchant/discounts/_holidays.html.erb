@@ -1,0 +1,21 @@
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
+    <tr>
+      <th colspan="3" style="font-family: Quicksand;">Upcoming Holidays</th>
+    </tr>
+  </thead>
+
+  <tbody id="upcoming-holidays">
+    <% next_three_holidays = API.next_three_holidays %>
+      <tr id="holiday-headers">
+        <th>First up:</th>
+        <th>Then:</th>
+        <th>Finally:</th>
+      </tr>
+      <tr id="holiday-names">
+        <td><%= next_three_holidays.first %></td>
+        <td><%= next_three_holidays.second %></td>
+        <td><%= next_three_holidays.third %></td>
+      </tr>
+  </tbody>
+</table>
