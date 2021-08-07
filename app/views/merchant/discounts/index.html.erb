@@ -1,33 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Discounts</h1>
+<h1>Bulk Discounts for <%= @merchant.name  %></h1>
 
-<table>
-  <thead>
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
     <tr>
-      <th>Name</th>
-      <th>Threshold</th>
-      <th>Percentage</th>
-      <th>Merchant</th>
-      <th colspan="3"></th>
+      <th colspan="4" style="font-family: Quicksand;">Merchant discounts</th>
     </tr>
   </thead>
 
-  <tbody>
-    <% @discounts.each do |discount| %>
-      <tr>
+  <tbody id="all-discounts">
+    <% @merchant.discounts.each do |discount| %>
+      <tr id="customer-table-headers">
+        <th>Name</th>
+        <th>Quantity Threshold</th>
+        <th>Percentage Discount</th>
+      </tr>
+      <tr id="customer-<%= discount.id %>">
         <td><%= discount.name %></td>
         <td><%= discount.threshold %></td>
         <td><%= discount.percentage %></td>
-        <td><%= discount.merchant %></td>
-        <td><%= link_to 'Show', discount %></td>
-        <td><%= link_to 'Edit', edit_discount_path(discount) %></td>
-        <td><%= link_to 'Destroy', discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Visit #{discount.name}", merchant_discount_path(@merchant, discount) %></td>
+        <td><%= link_to 'Edit', edit_merchant_discount_path(@merchant, discount) %></td>
+        <td><%= link_to 'Destroy', merchant_discount_path(@merchant, discount), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Discount', new_discount_path %>
