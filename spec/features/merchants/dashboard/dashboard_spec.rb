@@ -29,4 +29,12 @@ RSpec.describe 'Merchants Dashboard Page' do
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
   end
+
+  it 'displays a link that takes you to the merchants discount index page' do
+    expect(page).to have_link("Bulk Discounts for #{@merchant.name}")
+
+    click_on "Bulk Discounts for #{@merchant.name}"
+
+    expect(current_path).to eq(merchant_discounts_path(@merchant))
+  end
 end
