@@ -62,19 +62,8 @@ RSpec.describe 'Admin Invoice Index Page' do
     expect(current_path).to eq('/admin')
   end
 
-  # As an admin,
-    # When I visit the admin dashboard
-    # Then I see a section for "Incomplete Invoices"
-    # In that section I see a list of the ids of all invoices
-    # That have items that have not yet been shipped
-    # And each invoice id links to that invoice's admin show page
-  # Next to each invoice id I see the date that the invoice was created
-  # And I see the date formatted like "Monday, July 18, 2019"
-  # And I see that the list is ordered from oldest to newest
   it 'can display a section for incomplete invoices ordered oldest to newest' do
     expected = Item.items_ready_to_ship_by_ordered_date
-    # save_and_open_page
-
     expect(page).to have_content("Incomplete Invoices")
     expect("#{expected[0].invoice_id}").to appear_before("#{expected[1].invoice_id}")
     expect("#{expected[1].invoice_id}").to appear_before("#{expected[2].invoice_id}")

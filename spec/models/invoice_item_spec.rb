@@ -4,6 +4,8 @@ RSpec.describe InvoiceItem do
   describe 'associations' do
     it {should belong_to :invoice}
     it {should belong_to :item}
+    it {should have_many(:merchants).through(:item) }
+    it {should have_many(:discounts).through(:merchants) }
   end
 
   describe 'validations' do

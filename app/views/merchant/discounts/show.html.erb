@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @discount.name %>
+</p>
+
+<p>
+  <strong>Threshold:</strong>
+  <%= @discount.threshold %>
+</p>
+
+<p>
+  <strong>Percentage:</strong>
+  <%= @discount.percentage %>
+</p>
+
+<p>
+  <strong>Merchant:</strong>
+  <%= @discount.merchant %>
+</p>
+
+<%= link_to 'Edit', edit_merchant_discount_path(@merchant, @discount) %> |
+<%= link_to 'Back', merchant_discounts_path(@merchant, @discount) %>

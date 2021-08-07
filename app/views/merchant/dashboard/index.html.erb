@@ -3,6 +3,7 @@
 <div text-align="center" align="center">
   <%= link_to 'All Items', merchant_items_path(@merchant.id), method: :get, class:"btn btn-outline-dark navbar-custom" %>
   <%= link_to 'All Invoices', merchant_invoices_path(@merchant.id), method: :get, class:"btn btn-outline-dark navbar-custom" %>
+  <%= link_to "Bulk Discounts for #{@merchant.name}", merchant_discounts_path(@merchant), method: :get, class:"btn btn-outline-dark navbar-custom" %>
 </div>
 <br>
 <br>

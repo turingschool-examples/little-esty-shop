@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
+
   root 'welcome#index'
   get '/refresh', to: 'welcome#refresh'
 
   resources :merchants, only: [:show, :index], module: :merchant do
-      resources :items
-      resources :invoices
-      resources :dashboard, only: [:index]
+    resources :discounts
+    resources :items
+    resources :invoices
+    resources :dashboard, only: [:index]
   end
 
   namespace :admin do

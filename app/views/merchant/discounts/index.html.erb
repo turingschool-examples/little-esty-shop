@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bulk Discounts for <%= @merchant.name  %></h1>
+
+<table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
+    <tr>
+      <th colspan="4" style="font-family: Quicksand;">Merchant discounts</th>
+    </tr>
+  </thead>
+
+  <tbody id="all-discounts">
+    <% @merchant.discounts.each do |discount| %>
+      <tr id="customer-table-headers">
+        <th>Name</th>
+        <th>Quantity Threshold</th>
+        <th>Percentage Discount</th>
+      </tr>
+      <tr id="customer-<%= discount.id %>">
+        <td><%= discount.name %></td>
+        <td><%= discount.threshold %></td>
+        <td><%= discount.percentage %></td>
+        <td><%= link_to "Visit #{discount.name}", merchant_discount_path(@merchant, discount) %></td>
+        <td><%= link_to 'Edit', edit_merchant_discount_path(@merchant, discount) %></td>
+        <td><%= link_to 'Destroy', merchant_discount_path(@merchant, discount), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
