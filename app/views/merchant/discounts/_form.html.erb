@@ -1,4 +1,5 @@
-<%= form_with(model: discount, local: true) do |form| %>
+<div align="center">
+<%= form_with(model: [@merchant, discount], local: true, :html => { :class => 'card navbar-custom card-body', :style => 'width: 18rem;' }) do |form| %>
   <% if discount.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(discount.errors.count, "error") %> prohibited this discount from being saved:</h2>
