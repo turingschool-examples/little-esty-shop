@@ -59,4 +59,13 @@ RSpec.describe 'The merchant discounts index page' do
 
     expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
   end
+
+  it 'has a section titled Upcoming Holidays' do
+    expect(page).to have_content("Upcoming Holidays")
+  end
+
+  it 'has the next 3 upcoming US holidays listed in that section' do
+    expect(page).to have_content()
+  end
+
 end
