@@ -1,6 +1,7 @@
-<h1>Editing Discount</h1>
+<div align="center">
+<h1>Editing <%= link_to "#{@discount.name}", merchant_discount_path(@merchant, @discount), method: :get, class:"btn btn-outline-dark navbar-custom btn-lg" %> Discount</h1>
+<br/><br/>
 
 <%= render 'form', discount: @discount %>
 
-<%= link_to 'Show', @discount %> |
-<%= link_to 'Back', discounts_path %>
+<%= link_to 'Back', merchant_discounts_path, class:"btn btn-outline-dark navbar-custom btn-sm" %>
