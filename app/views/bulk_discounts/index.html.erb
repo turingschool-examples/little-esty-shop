@@ -1,0 +1,13 @@
+<h1> Bulk Discounts for <%= @merchant.name %> </h1>
+</br>
+
+<h2> Bulk Discounts associated with <%= @merchant.name %>  with the threshold needed to achieve this discount: </h2>
+<section id= "associated-bulk-discounts-<%= @merchant.id %>"> 
+<% @merchant.bulk_discounts.each do |bulk_discount| %>
+  <section id= "associated-bulk-discount-<%= bulk_discount.id %>"> 
+  <p><%= link_to "Link to this Bulk Discount #{bulk_discount.id} Show page", merchant_bulk_discount_path(merchant_id: @merchant.id, id: bulk_discount.id) %> </p>
+  <p> Percentage Discount <%= number_to_percentage(bulk_discount.percentage_discount * 100, precision: 1) %>, to apply this discount needs to achieve a threshold of <%= bulk_discount.quantity_threshold %> units. </p>
+  </section>
+<% end %>
+</section>
+</br>

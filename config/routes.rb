@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :items, controller: 'merchant_items'
     resources :invoices, controller: 'merchant_invoices'
+    resources :bulk_discounts
   end
 
   resources :invoice_items, only: :update

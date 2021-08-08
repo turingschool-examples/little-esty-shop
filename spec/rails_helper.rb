@@ -51,6 +51,14 @@ RSpec.configure do |config|
     @merchant6 = Merchant.create!(name: 'Ebay', status: "enabled")
     @merchant7 = Merchant.create!(name: 'HomeDepot', status: "disabled")
 
+    #Bulk Discounts
+    @bulk_discount1 = BulkDiscount.create!(percentage_discount: 0.2, quantity_threshold: 20, merchant_id: @merchant1.id)
+    @bulk_discount2 = BulkDiscount.create!(percentage_discount: 0.3, quantity_threshold: 30, merchant_id: @merchant1.id)
+    @bulk_discount3 = BulkDiscount.create!(percentage_discount: 0.2, quantity_threshold: 20, merchant_id: @merchant3.id)
+    @bulk_discount4 = BulkDiscount.create!(percentage_discount: 0.35, quantity_threshold: 40, merchant_id: @merchant1.id)
+    @bulk_discount5 = BulkDiscount.create!(percentage_discount: 0.25, quantity_threshold: 25, merchant_id: @merchant2.id)
+    @bulk_discount6 = BulkDiscount.create!(percentage_discount: 0.1, quantity_threshold: 10, merchant_id: @merchant1.id)
+
     #Customers
     @customer1 = Customer.create!(first_name: 'Gunner', last_name: 'Runkle')
     @customer2 = Customer.create!(first_name: 'Antonio', last_name: 'King')

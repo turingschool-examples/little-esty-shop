@@ -2,6 +2,7 @@
   <h1><%= @merchant.name %></h1>
   <p><b><%= link_to "My Invoices", merchant_invoices_path(@merchant.id) %></b></p>
   <p><b><%= link_to "My Items", merchant_items_path(@merchant.id) %></b></p>
+  <p><b><%= link_to "My Bulk Discounts ", merchant_bulk_discounts_path(@merchant.id) %></b></p>
 </div>
 
 <div id='ready_to_ship'>
