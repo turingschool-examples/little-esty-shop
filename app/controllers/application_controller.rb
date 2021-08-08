@@ -25,3 +25,8 @@ def api_merges
     user
   end.size
 end
+
+def holidays
+  json = SwaggerService.new.holidays
+  Holiday.new(json)
+end

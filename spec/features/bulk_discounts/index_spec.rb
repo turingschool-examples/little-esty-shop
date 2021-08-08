@@ -59,4 +59,13 @@ RSpec.describe 'it can describe a bulk discounts index page' do
         expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}")
     end
   end
+
+  it 'displays the next three dates on the index page' do
+    expect(page).to have_content("#{holidays.name1}")
+    expect(page).to have_content("#{holidays.date1}")
+    expect(page).to have_content("#{holidays.name2}")
+    expect(page).to have_content("#{holidays.date2}")
+    expect(page).to have_content("#{holidays.name3}")
+    expect(page).to have_content("#{holidays.date3}")
+  end 
 end
