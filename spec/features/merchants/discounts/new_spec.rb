@@ -21,7 +21,6 @@ RSpec.describe 'The merchant discounts new discount page' do
 
     expect(current_path).to eq(new_merchant_discount_path(@merchant1))
     expect(page).to have_content("Discount was not created")
-    save_and_open_page
   end
 
   it 'will not let you submit an incomplete form' do
