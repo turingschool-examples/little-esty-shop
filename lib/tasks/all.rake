@@ -10,7 +10,7 @@ namespace :csv_load do
     Transaction.destroy_all
     Invoice.destroy_all
     Item.destroy_all
-    # Discount.destroy_all
+    Discount.destroy_all
     Merchant.destroy_all
     Customer.destroy_all
     puts "All Seeds destroyed"
