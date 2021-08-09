@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :csv_load do
   desc 'Run all CSV load tasks, including destruction of seed records and reset of pks for each table'
-  task all: [:destroy_all, :create_customers, :create_merchants, :create_items, :create_invoices, :create_transactions, :create_invoice_items, :reset_all_pks]
+  task all: [:destroy_all, :create_customers, :create_merchants, :create_items, :create_discounts, :create_invoices, :create_transactions, :create_invoice_items, :reset_all_pks]
 
   desc 'Destroy all - ordered by most to least dependent'
   task destroy_all: :environment do
@@ -10,6 +10,7 @@ namespace :csv_load do
     Transaction.destroy_all
     Invoice.destroy_all
     Item.destroy_all
+    Discount.destroy_all
     Merchant.destroy_all
     Customer.destroy_all
     puts "All Seeds destroyed"
@@ -37,6 +38,14 @@ namespace :csv_load do
       Item.create!(row.to_hash)
     end
     puts "All Items successfully seeded"
+  end
+
+  desc 'Create all Discounts - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
+  task create_discounts: :environment do
+    CSV.foreach('./db/data/discounts.csv', headers: true) do |row|
+      Discount.create!(row.to_hash)
+    end
+    puts "All Discounts successfully seeded"
   end
 
   desc 'Create all Invoices - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
