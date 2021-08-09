@@ -5,11 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-@merchant1 = Merchant.create!(name: 'Tom Holland')
-@merchant2 = Merchant.create!(name: 'Hom Tolland')
-@discount1 = @merchant1.discounts.create(name: 'Threeteen', threshold: 3, percentage: 15)
-@discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 4, percentage: 20)
-@discount3 = @merchant1.discounts.create(name: 'Ninetwentynine', threshold: 9, percentage: 29)
-@discount4 = @merchant1.discounts.create(name: 'Twentyfifty', threshold: 20, percentage: 50)
-@discount5 = @merchant1.discounts.create(name: 'Hundredseventyfive', threshold: 100, percentage: 75)
-@discount6 = @merchant2.discounts.create(name: 'Two', threshold: 2, percentage: 2)
+
+
+@discount1 = Discount.create(name: 'Threeteen', threshold: 3, percentage: 13, merchant_id: 1)
+@discount2 = Discount.create(name: 'Fourscore', threshold: 4, percentage: 20, merchant_id: 1)
+@discount3 = Discount.create(name: 'Ninetwentynine', threshold: 9, percentage: 29, merchant_id: 1)
+@discount4 = Discount.create(name: 'Twentyfifty', threshold: 20, percentage: 50, merchant_id: 1)
+@discount5 = Discount.create(name: 'Hundredseventyfive', threshold: 100, percentage: 75, merchant_id: 1)
+@discount6 = Discount.create(name: 'Two', threshold: 2, percentage: 2, merchant_id: 1)
+
+@discount1 = Discount.create(name: 'Twoten', threshold: 2, percentage: 10, merchant_id: 2)
+@discount2 = Discount.create(name: 'Fourscore', threshold: 4, percentage: 20, merchant_id: 2)
+@discount3 = Discount.create(name: 'Ninetwentynine', threshold: 9, percentage: 29, merchant_id: 2)
+@discount4 = Discount.create(name: 'Twentyfifty', threshold: 20, percentage: 50, merchant_id: 2)
+@discount5 = Discount.create(name: 'Hundredseventyfive', threshold: 100, percentage: 75, merchant_id: 2)
+@discount6 = Discount.create(name: 'Two', threshold: 2, percentage: 2, merchant_id: 2)

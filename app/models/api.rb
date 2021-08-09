@@ -26,6 +26,12 @@ class API
     }
   end
 
+  def self.holidays
+    {
+      upcoming_year: "https://date.nager.at/api/v3/NextPublicHolidays/US"
+    }
+  end
+
   def self.make_request(endpoint)
     Faraday.get(endpoint)
   end
@@ -48,6 +54,12 @@ class API
     elsif metric == :pulls
       APIS::Pulls.new(render_request(contributions[:pulls])).total_count_by_author
     end
+  end
+
+  def self.next_three_holidays
+    # require "pry"; binding.pry
+    APIS::Holidays.new(render_request(holidays[:upcoming_year])).all_holidays
+    # require "pry"; binding.pry
   end
 
 

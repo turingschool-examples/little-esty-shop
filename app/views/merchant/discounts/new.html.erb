@@ -1,5 +1,5 @@
-<h1>New Discount</h1>
+<h1>New Discount for <%= @merchant.name  %></h1>
 
-<%= render 'form', discount: @discount %>
+<%= render 'form', mechant: @merchant %>
 
-<%= link_to 'Back', discounts_path %>
+<%= link_to 'Back', merchant_discounts_path(@merchant), class:"btn btn-outline-dark navbar-custom" %>
