@@ -109,4 +109,14 @@ RSpec.describe "The Merchant Invoice show page" do
   it 'displays the total revenue generated from all the items on this invoice' do
     expect(page).to have_content("Total Invoice Revenue Potential: $265.00")
   end
+#
+#   As a merchant
+# When I visit my merchant invoice show page
+# Then I see the total revenue for my merchant from this invoice (not including discounts)
+# And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
+
+  it 'displays the total revenue for my merchant from this invoice not including discounts' do
+  end
+
+  it 'displays the total discounted revenue for the merchant from this invoice including discounts in calculation'
 end
