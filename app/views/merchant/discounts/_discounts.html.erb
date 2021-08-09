@@ -6,7 +6,7 @@
   </thead>
 
   <tbody id="all-discounts">
-    <% @merchant.discounts.each do |discount| %>
+    <% @merchant.discounts.all.each do |discount| %>
       <tr id="discount-table-headers">
         <th>Name</th>
         <th>Quantity Threshold</th>

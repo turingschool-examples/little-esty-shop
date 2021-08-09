@@ -2,43 +2,33 @@ class Merchant::DiscountsController < ApplicationController
   before_action :set_merchant, only: [ :index, :show, :edit, :update ]
   before_action :set_discount, only: [ :show, :edit, :update, :destroy ]
 
-  # GET /discounts or /discounts.json
+
   def index
     # @merchant = Merchant.find(params[:merchant_id])
     # @discounts = @merchant.discounts.all
   end
 
-  # # GET /discounts/1 or /discounts/1.json
-  # def show
-  # end
-  #
-  # # GET /discounts/new
+  def show
+  end
+
   def new
     @merchant = Merchant.find(params[:merchant_id])
     @discount = Discount.new
   end
-  #
-  # # GET /discounts/1/edit
+
   def edit
     @merchant = Merchant.find(params[:merchant_id])
     @discount = Discount.find(params[:id])
   end
-  #
-  # # POST /discounts or /discounts.json
+
   def create
     @merchant = Merchant.find(params[:merchant_id])
     @discount = @merchant.discounts.create(discount_params)
-  #
-  #   respond_to do |format|
-      if @discount.save
-        redirect_to merchant_discounts_path(@merchant), flash: {notice: "Discount was successfully created." }
-  #       format.json { render :show, status: :created, location: @discount }
-      else
-        redirect_to new_merchant_discount_path(@merchant), flash: {notice: "Discount was not created." }
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @discount.errors, status: :unprocessable_entity }
-      end
-  #   end
+    if @discount.save
+      redirect_to merchant_discounts_path(@merchant), flash: {notice: "Discount was successfully created." }
+    else
+      redirect_to new_merchant_discount_path(@merchant), flash: {notice: "Discount was not created." }
+    end
   end
 
   # PATCH/PUT /discounts/1 or /discounts/1.json

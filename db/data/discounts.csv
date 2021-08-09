@@ -1,0 +1,8 @@
+id,name,threshold,percentage,merchant_id,created_at,updated_at
+1,Threeteen,3,13,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+2,Fourscore,4,20,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+3,Ninetwentynine,9,29,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+4,Twentyfifty,20,50,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+5,Hundredseventyfive,100,75,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+6,Twotwo,2,2,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+7,Threethree,3,3,2,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC

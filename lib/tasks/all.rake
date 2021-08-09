@@ -10,6 +10,7 @@ namespace :csv_load do
     Transaction.destroy_all
     Invoice.destroy_all
     Item.destroy_all
+    Discount.destroy_all
     Merchant.destroy_all
     Customer.destroy_all
     puts "All Seeds destroyed"
@@ -37,6 +38,14 @@ namespace :csv_load do
       Item.create!(row.to_hash)
     end
     puts "All Items successfully seeded"
+  end
+
+  desc 'Create all Discounts - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
+  task create_items: :environment do
+    CSV.foreach('./db/data/discounts.csv', headers: true) do |row|
+      Discount.create!(row.to_hash)
+    end
+    puts "All Discounts successfully seeded"
   end
 
   desc 'Create all Invoices - NOTE, please run the ":all" task to destroy_all dependents and reset pks'
