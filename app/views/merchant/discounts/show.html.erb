@@ -17,8 +17,8 @@
 
 <p>
   <strong>Merchant:</strong>
-  <%= @discount.merchant %>
+  <%= @merchant.name %>
 </p>
 
-<%= link_to 'Edit', edit_merchant_discount_path(@merchant, @discount) %> |
-<%= link_to 'Back', merchant_discounts_path(@merchant, @discount) %>
+<%= link_to "Edit #{@discount.name}", edit_merchant_discount_path(@merchant, @discount), class:"btn btn-outline-dark navbar-custom" %> |
+<%= link_to 'Back', merchant_discounts_path(@merchant), class:"btn btn-outline-dark navbar-custom" %>
