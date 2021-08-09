@@ -7,14 +7,12 @@ module APIS
 
     def all_holidays
       grouping = Hash.new(0)
-      all_holidays = []
-      @response_body.each do |holiday, hash|
+      @response_body.each do |holiday|
         if !holiday['name'].nil?
-            all_holidays << holiday['name']
-            grouping[holiday] += 1
+          grouping[holiday['name']] = holiday['date']
         end
       end
-      all_holidays
+      grouping
     end
 
   end
