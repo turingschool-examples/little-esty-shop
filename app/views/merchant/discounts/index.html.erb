@@ -1,7 +1,9 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Bulk Discounts for <%= @merchant.name  %></h1>
 
+<div align="center">
+  <%= link_to 'Create Discount', new_merchant_discount_path(@merchant), class:"btn btn-outline-dark navbar-custom" %>
+</div>
+<br/>
 <%= render 'discounts' %>
 
 <%= render 'holidays' %>
