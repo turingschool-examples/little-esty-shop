@@ -48,13 +48,13 @@ RSpec.describe Invoice do
       @invoice_item1 = InvoiceItem.create!(
         item: @item1,
         invoice: @invoice1,
-        quantity: 1,
+        quantity: 3,
         unit_price: 1_500,
-        status: 0)
+        status: 1)
       @invoice_item2 = InvoiceItem.create!(
         item: @item2,
         invoice: @invoice1,
-        quantity: 1,
+        quantity: 2,
         unit_price: 25_000,
         status: 1)
       @invoice_item3 = InvoiceItem.create!(
@@ -69,11 +69,25 @@ RSpec.describe Invoice do
         quantity: 1,
         unit_price: 60_000,
         status: 1)
+
+      @discount1 = @merchant1.discounts.create(name: 'Threeteen', threshold: 3, percentage: 10)
+      @discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 4, percentage: 20)
+      @discount3 = @merchant1.discounts.create(name: 'Ninetwentynine', threshold: 9, percentage: 29)
+      @discount4 = @merchant1.discounts.create(name: 'Twentyfifty', threshold: 20, percentage: 50)
+      @discount5 = @merchant1.discounts.create(name: 'Hundredseventyfive', threshold: 100, percentage: 75)
+      @discount6 = @merchant2.discounts.create(name: 'Two', threshold: 2, percentage: 2)
     end
 
     describe '#invoice_revenue' do
       it 'calculates the total revenue potential of the invoice' do
-        expect(@invoice1.invoice_revenue).to eq(26_500)
+        expect(@invoice1.invoice_revenue).to eq(29_500)
+      end
+    end
+
+    describe '#total_invoice_discount' do
+      it 'calcualtes the total discount for the invoice' do
+        # require "pry"; binding.pry
+        expect(@invoice1.total_invoice_discount).to eq(150)
       end
     end
   end
