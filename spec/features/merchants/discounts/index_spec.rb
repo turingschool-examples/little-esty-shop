@@ -12,6 +12,8 @@ RSpec.describe 'The merchant discounts index page' do
     @discount5 = @merchant1.discounts.create(name: 'Hundredseventyfive', threshold: 100, percentage: 75)
     @discount6 = @merchant2.discounts.create(name: 'Two', threshold: 2, percentage: 2)
 
+    allow(API).to receive(:next_three_holidays).and_return({"Labour Day" => "2021-09-06", "Columbus Day" => "2021-10-11", "Veterans Day" => '2021-11-11'})
+
     @holidays = API.next_three_holidays
 
     visit merchant_discounts_path(@merchant1.id)
@@ -48,15 +50,15 @@ RSpec.describe 'The merchant discounts index page' do
   end
 
   it 'displays a link to the individual discount show pages' do
-    expect(page).to have_link("Visit #{@discount1.name}")
-    expect(page).to have_link("Visit #{@discount2.name}")
-    expect(page).to have_link("Visit #{@discount3.name}")
-    expect(page).to have_link("Visit #{@discount4.name}")
-    expect(page).to have_link("Visit #{@discount5.name}")
+    expect(page).to have_link("#{@discount1.name}")
+    expect(page).to have_link("#{@discount2.name}")
+    expect(page).to have_link("#{@discount3.name}")
+    expect(page).to have_link("#{@discount4.name}")
+    expect(page).to have_link("#{@discount5.name}")
   end
 
   it 'has a show link that actually redirects you to that show page' do
-    click_on "Visit #{@discount1.name}"
+    click_on "#{@discount1.name}"
 
     expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
   end
@@ -65,14 +67,28 @@ RSpec.describe 'The merchant discounts index page' do
     expect(page).to have_content("Upcoming Holidays")
   end
 
-  xit 'has the next 3 upcoming US holidays listed in that section' do
-    # allow_any_instance_of(APIS::Holidays).to receive(:all_holidays).and_return(["Labour Day", "Columbus Day", "Veterans Day"])
-    allow(API).to receive(:next_three_holidays).and_return(["Labour Day", "Columbus Day", "Veterans Day"])
-    next_three_holidays = API.next_three_holidays
+  it 'has the next 3 upcoming US holidays listed in that section' do
+    expect(page).to have_content(@holidays.keys.first)
+    expect(page).to have_content(@holidays.keys.second)
+    expect(page).to have_content(@holidays.keys.third)
+    expect(page).to have_content(@holidays.values.first)
+    expect(page).to have_content(@holidays.values.second)
+    expect(page).to have_content(@holidays.values.third)
+  end
 
-    expect(page).to have_content("Labour Day")
-    expect(page).to have_content("Columbus Day")
-    expect(page).to have_content("Veterans Day")
+  it 'has a button to delete each discount' do
+    within("#discount-#{@discount1.id}") do
+      expect(page).to have_link("Destroy")
+    end
+  end
+
+  it 'actually deletes the discount' do
+    expect(page).to have_content('Twentyfifty')
+    within("#discount-#{@discount4.id}") do
+      click_on "Destroy"
+    end
+    expect(current_path).to eq(merchant_discounts_path(@merchant1))
+    expect(page).to_not have_content('Twentyfifty')
   end
 
 end
