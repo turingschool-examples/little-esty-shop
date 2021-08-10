@@ -1,7 +1,8 @@
 <table class="table table-striped navbar-custom">
   <thead class="custom" text-align="center" align="center">
     <tr>
-      <th  colspan="3" style="font-family: Quicksand;">Invoice ID:<strong> <%= @invoice.id %></strong><br> Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %></th>
+      <th colspan="3" style="font-family: Quicksand;">Invoice ID:<strong> <%= @invoice.id %></strong><br> Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %>
+      <br> Total Revenue After Discounts: <%= number_to_currency("#{@invoice.invoice_revenue_minus_discount}") %></th>
     </tr>
   </thead >
   <tbody id="top-merchants">
