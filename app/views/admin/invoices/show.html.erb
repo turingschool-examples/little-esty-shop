@@ -2,7 +2,7 @@
 <table class="table table-striped table-hover custom">
   <thead text-align="center" align="center" class="customblack" style="color: white;">
     <tr>
-      <th colspan="4" text-align="center" align="center">Invoice <%= @invoice.id %></th>
+      <th colspan="5" text-align="center" align="center">Invoice <%= @invoice.id %></th>
     </tr>
   </thead>
   <tbody id="items-pending-shipment">
@@ -11,6 +11,7 @@
       <th>Date</th>
       <th>Customer</th>
       <th>Total Invoice Revenue Potential</th>
+      <th>Total Revenue Potential After Discounts</th>
     </tr>
       <tr>
         <td><%= @invoice.status %></td>
@@ -27,7 +28,7 @@
     <%= form.select :status, options_for_select([:cancelled, 'in progress', :completed], @invoice.status) %>
   <%= form.submit "Update Invoice Status" %>
 <% end %>
-<br> 
+<br>
 <h2>Items On This Invoice:</h2>
 <br>
 
