@@ -17,7 +17,7 @@
         <td><%= @invoice.status %></td>
         <td> <%= @invoice.format_date(@invoice.created_at) %></td>
         <td><%= @invoice.customer.first_name %></td>
-        <td><%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %></td>
+        <td><%= number_to_currency("#{@invoice.invoice_revenue}") %></td>
         <td><%= number_to_currency("#{@invoice.invoice_revenue_minus_discount}") %></td>
       </tr>
   </tbody>
