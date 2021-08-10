@@ -116,6 +116,7 @@ RSpec.describe "The Merchant Invoice show page" do
 # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 
   it 'displays the total revenue for my merchant from this invoice not including discounts' do
+    expect(page).to have_content("Total before discounts: ")
   end
 
   it 'displays the total discounted revenue for the merchant from this invoice including discounts in calculation'
