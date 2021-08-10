@@ -16,7 +16,7 @@ class Invoice < ApplicationRecord
 
   def invoice_revenue_minus_discount
     invoice_items.sum do |ii|
-      ii.invoice_revenue_minus_discount
+      ii.revenue_after_discount
     end
   end
 

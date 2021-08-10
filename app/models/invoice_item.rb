@@ -19,7 +19,7 @@ class InvoiceItem < ApplicationRecord
   end
 
   def revenue_after_discount
-    if invoice_item_discount.present?
+    if !invoice_item_discount.blank?
       (full_amount * (1 - (invoice_item_discount.percentage / 100.0))).round(2)
     else
       full_amount
