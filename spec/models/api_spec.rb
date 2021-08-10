@@ -109,4 +109,23 @@ RSpec.describe API do
     expect(API.aggregate_by_author(:commits)).to eq({})
   end
 
+  it 'can return an empty hash if the API rate limit is hit' do
+    # mock_response = {"message" => "API rate limit exceeded"}
+    # allow(API).to receive(:all_holidays).and_return('hello')
+
+    expect(API.next_three_holidays).to eq({
+      "Christmas Day" => "2021-12-24",
+      "Columbus Day" => "2021-10-11",
+      "Good Friday" => "2022-04-15",
+      "Independence Day" => "2022-07-04",
+      "Juneteenth" => "2022-06-20",
+      "Labour Day" => "2021-09-06",
+      "Martin Luther King, Jr. Day" => "2022-01-17",
+      "Memorial Day" => "2022-05-30",
+      "New Year's Day" => "2021-12-31",
+      "Thanksgiving Day" => "2021-11-25",
+      "Veterans Day" => "2021-11-11",
+      "Washington's Birthday" => "2022-02-21"})
+  end
+
 end
