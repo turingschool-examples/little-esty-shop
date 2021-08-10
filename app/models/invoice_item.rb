@@ -11,7 +11,7 @@ class InvoiceItem < ApplicationRecord
   has_many :discounts, through: :merchants
 
   def full_amount
-    (unit_price * quantity).div(100.0)
+    (unit_price * quantity)/100.00
   end
 
   def invoice_item_discount
@@ -20,7 +20,7 @@ class InvoiceItem < ApplicationRecord
 
   def revenue_after_discount
     if !invoice_item_discount.blank?
-      (full_amount * (1 - (invoice_item_discount.percentage / 100.0))).round(2)
+      (full_amount * (1 - (invoice_item_discount.percentage / 100.00)))
     else
       full_amount
     end

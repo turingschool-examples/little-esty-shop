@@ -27,25 +27,25 @@ class Invoice < ApplicationRecord
   #   .where('invoice_items.quantity > ?', discounts.threshold)
   # end
   #
-  def invoice_item_totals
-    invoice_items.select('invoice_items.id, invoice_items.item_id, invoice_items.unit_price, invoice_items.quantity, SUM(invoice_items.unit_price * invoice_items.quantity) as potential_rev' )
-    .group('invoice_items.id')
-  end
+  # def invoice_item_totals
+  #   invoice_items.select('invoice_items.id, invoice_items.item_id, invoice_items.unit_price, invoice_items.quantity, SUM(invoice_items.unit_price * invoice_items.quantity) as potential_rev' )
+  #   .group('invoice_items.id')
+  # end
   #
-  def find_best_applicable_discounts
-    collector = []
-    invoice_item_totals.each do |ii|
-      ii.item.merchant.discounts.each do |disc|
-        if disc.threshold <= ii.quantity
-          collector << [disc.percentage, ii.id]
-        end
-      end
-    end
-    hash = collector.group_by {|array| array.last}
-    x = hash.values.map { |element| element.map(&:first).max }
-    y = hash.values.map { |element| element.map(&:last).max }
-    result = Hash[y.zip(x)]
-  end
+  # def find_best_applicable_discounts
+  #   collector = []
+  #   invoice_item_totals.each do |ii|
+  #     ii.item.merchant.discounts.each do |disc|
+  #       if disc.threshold <= ii.quantity
+  #         collector << [disc.percentage, ii.id]
+  #       end
+  #     end
+  #   end
+  #   hash = collector.group_by {|array| array.last}
+  #   x = hash.values.map { |element| element.map(&:first).max }
+  #   y = hash.values.map { |element| element.map(&:last).max }
+  #   result = Hash[y.zip(x)]
+  # end
   #
   #
   # need to match the invoice_items id with the hashes invoice_item id and apply the percent to the invoice_items potential_rev

@@ -38,7 +38,7 @@ RSpec.describe "The Merchant Invoice show page" do
     @invoice_item2 = InvoiceItem.create!(
       item: @item2,
       invoice: @invoice1,
-      quantity: 1,
+      quantity: 3,
       unit_price: 25_000,
       status: 1)
     @invoice_item3 = InvoiceItem.create!(
@@ -53,6 +53,13 @@ RSpec.describe "The Merchant Invoice show page" do
       quantity: 1,
       unit_price: 60_000,
       status: 1)
+
+
+    @discount1 = @merchant1.discounts.create(name: 'Twoten', threshold: 2, percentage: 10)
+    @discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 3, percentage: 20)
+    @discount3 = @merchant1.discounts.create(name: 'Ninetwentynine', threshold: 9, percentage: 29)
+    @discount4 = @merchant1.discounts.create(name: 'Twentyfifty', threshold: 20, percentage: 50)
+
 
     visit merchant_invoice_path(@merchant1.id, @invoice1.id)
   end
@@ -106,8 +113,8 @@ RSpec.describe "The Merchant Invoice show page" do
     expect(@invoice_item1.status).to eq("shipped")
   end
 
-  it 'displays the total revenue generated from all the items on this invoice' do
-    expect(page).to have_content("Total Invoice Revenue Potential: $265.00")
+  it 'displays the total revenue potential generated from all the items on this invoice' do
+    expect(page).to have_content("Total Invoice Revenue Potential: $765.00")
   end
 #
 #   As a merchant
@@ -115,8 +122,13 @@ RSpec.describe "The Merchant Invoice show page" do
 # Then I see the total revenue for my merchant from this invoice (not including discounts)
 # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 
-  it 'displays the total revenue for my merchant from this invoice not including discounts' do
+
+  it 'displays the total discounted revenue for the merchant from this invoice including discounts in calculation' do
+    expect(page).to have_content("Total Revenue After Discounts: $615.00")
   end
 
-  it 'displays the total discounted revenue for the merchant from this invoice including discounts in calculation'
+  it 'has a link to the bulk discount if one was applied' do
+    expect(page).to have_content("Discount Applied: ")
+    expect(page).to have_link("#{@discount2.name}")
+  end
 end
