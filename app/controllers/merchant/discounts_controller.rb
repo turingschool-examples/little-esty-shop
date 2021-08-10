@@ -1,5 +1,5 @@
 class Merchant::DiscountsController < ApplicationController
-  before_action :set_merchant, only: [ :index, :show, :edit, :update ]
+  before_action :set_merchant, only: [ :index, :show, :new, :edit, :create, :update, :destroy ]
   before_action :set_discount, only: [ :show, :edit, :update, :destroy ]
 
 
@@ -14,17 +14,14 @@ class Merchant::DiscountsController < ApplicationController
   end
 
   def new
-    @merchant = Merchant.find(params[:merchant_id])
     @discount = Discount.new
   end
 
   def edit
-    @merchant = Merchant.find(params[:merchant_id])
-    @discount = Discount.find(params[:id])
+
   end
 
   def create
-    @merchant = Merchant.find(params[:merchant_id])
     @discount = @merchant.discounts.create(discount_params)
     if @discount.save
       redirect_to merchant_discounts_path(@merchant), flash: {notice: "Discount was successfully created." }
@@ -43,13 +40,11 @@ class Merchant::DiscountsController < ApplicationController
   end
 
   def destroy
-    @merchant = Merchant.find(params[:merchant_id])
-    @discount = Discount.find(params[:id]).destroy
+    @discount.destroy
     redirect_to merchant_discounts_path(@merchant), flash: {notice: "Discount successfully destroyed"}
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_discount
       @discount = Discount.find(params[:id])
     end
