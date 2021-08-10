@@ -1,4 +1,5 @@
 class Admin::MerchantsController < ApplicationController
+  before_action :set_merchant, only: [ :show, :edit, :update ]
 
   def index
     @enabled_merchants = Merchant.order_by_enabled
@@ -7,14 +8,12 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find(params[:id])
   end
 
   def new
   end
 
   def edit
-    @merchant = Merchant.find(params[:id])
   end
 
   def create
@@ -28,14 +27,17 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    merchant = Merchant.find(params[:id])
-    merchant.update(merchant_model_params)
+    @merchant.update(merchant_model_params)
     return redirect_back(fallback_location: admin_merchants_path) if params[:direct] == 'status change'
-    redirect_to admin_merchant_path(merchant.id), notice: "Item successfully updated."
+    redirect_to admin_merchant_path(@merchant.id), notice: "Item successfully updated."
   end
 
 
   private
+
+  def set_merchant
+    @merchant = Merchant.find(params[:id])
+  end
 
   def merchant_params
     params.permit(:name)
