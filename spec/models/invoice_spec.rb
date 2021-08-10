@@ -48,13 +48,13 @@ RSpec.describe Invoice do
       @invoice_item1 = InvoiceItem.create!(
         item: @item1,
         invoice: @invoice1,
-        quantity: 1,
+        quantity: 3,
         unit_price: 1_500,
-        status: 0)
+        status: 1)
       @invoice_item2 = InvoiceItem.create!(
         item: @item2,
         invoice: @invoice1,
-        quantity: 1,
+        quantity: 2,
         unit_price: 25_000,
         status: 1)
       @invoice_item3 = InvoiceItem.create!(
@@ -69,13 +69,52 @@ RSpec.describe Invoice do
         quantity: 1,
         unit_price: 60_000,
         status: 1)
+
+      @discount1 = @merchant1.discounts.create(name: 'Twoten', threshold: 2, percentage: 10)
+      @discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 3, percentage: 20)
+      @discount3 = @merchant1.discounts.create(name: 'Ninetwentynine', threshold: 9, percentage: 29)
+      @discount4 = @merchant1.discounts.create(name: 'Twentyfifty', threshold: 20, percentage: 50)
+
+      @discount6 = @merchant2.discounts.create(name: 'Two', threshold: 2, percentage: 2)
     end
 
     describe '#invoice_revenue' do
       it 'calculates the total revenue potential of the invoice' do
-        expect(@invoice1.invoice_revenue).to eq(26_500)
+        expect(@invoice1.invoice_revenue).to eq(54_500)
       end
     end
+
+    describe '#invoice_item_totals' do
+      it 'returns invoice_items that match the invoice' do
+        expect(@invoice1.invoice_item_totals).to eq([@invoice_item1, @invoice_item2])
+      end
+    end
+
+    describe '#find_best_applicable_discounts' do
+      it 'finds all discounts that the invoice item is eligible for' do
+        expected = {
+          @invoice_item1.id => @discount2.percentage,
+          @invoice_item2.id => @discount1.percentage
+        }
+        expect(@invoice1.find_best_applicable_discounts).to eq(expected)
+      end
+    end
+
+    # describe '#total_discount`' do
+    #   it 'calculates the discounted amount' do
+    #     require "pry"; binding.pry
+    #     expect(@invoice1.total_discount).to eq(4)
+    #   end
+    # end
+
+    # describe '#apply_discounts' do
+    #   it 'applies the discounted amount to the invoice' do
+    #     expect(@invoice1.amount_off).to eq(50)
+    #   end
+    # end
+
+
+
   end
 
 end
