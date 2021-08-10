@@ -70,24 +70,40 @@ RSpec.describe Invoice do
         unit_price: 60_000,
         status: 1)
 
-      @discount1 = @merchant1.discounts.create(name: 'Threeteen', threshold: 3, percentage: 10)
-      @discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 4, percentage: 20)
+      @discount1 = @merchant1.discounts.create(name: 'Twoten', threshold: 2, percentage: 10)
+      @discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 3, percentage: 20)
       @discount3 = @merchant1.discounts.create(name: 'Ninetwentynine', threshold: 9, percentage: 29)
       @discount4 = @merchant1.discounts.create(name: 'Twentyfifty', threshold: 20, percentage: 50)
-      @discount5 = @merchant1.discounts.create(name: 'Hundredseventyfive', threshold: 100, percentage: 75)
+
       @discount6 = @merchant2.discounts.create(name: 'Two', threshold: 2, percentage: 2)
     end
 
     describe '#invoice_revenue' do
       it 'calculates the total revenue potential of the invoice' do
-        expect(@invoice1.invoice_revenue).to eq(29_500)
+        expect(@invoice1.invoice_revenue).to eq(54_500)
       end
     end
 
-    describe '#total_invoice_discount' do
-      it 'calcualtes the total discount for the invoice' do
-        # require "pry"; binding.pry
-        expect(@invoice1.total_invoice_discount).to eq(150)
+    # describe '#total_invoice_discount' do
+    #   it 'calcualtes the total discount for the invoice' do
+    #     # require "pry"; binding.pry
+    #     expect(@invoice1.apply_discount).to eq(150)
+    #   end
+    # end
+
+    describe '#invoice_item_totals' do
+      it 'returns invoice_items that match the invoice' do
+        expect(@invoice1.invoice_item_totals).to eq([@invoice_item1, @invoice_item2])
+      end
+    end
+
+    describe '#find_best_applicable_discounts' do
+      it 'finds all discounts that the invoice item is eligible for' do
+        expected = {
+          @invoice_item1.id => @discount2.percentage,
+          @invoice_item2.id => @discount1.percentage
+        }
+        expect(@invoice1.find_best_applicable_discounts).to eq(expected)
       end
     end
   end
