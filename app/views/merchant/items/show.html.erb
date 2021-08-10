@@ -1,6 +1,5 @@
 <div align="center">
-<h1>Merchant Item</h1>
-
+  <h1>Merchant Item</h1>
   <div class="card navbar-custom"  style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Name: <%= @item.name %></h5>
@@ -13,9 +12,6 @@
         </strong>
       </h6>
         <%= link_to 'Update item information', edit_merchant_item_path(@item.merchant_id, @item.id), class:"btn btn-outline-dark navbar-custom" %>
-
-
     </div>
   </div>
-</div>
-  <br/>
+</div><br/>
