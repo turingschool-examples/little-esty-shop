@@ -84,13 +84,6 @@ RSpec.describe Invoice do
       end
     end
 
-    # describe '#total_invoice_discount' do
-    #   it 'calcualtes the total discount for the invoice' do
-    #     # require "pry"; binding.pry
-    #     expect(@invoice1.apply_discount).to eq(150)
-    #   end
-    # end
-
     describe '#invoice_item_totals' do
       it 'returns invoice_items that match the invoice' do
         expect(@invoice1.invoice_item_totals).to eq([@invoice_item1, @invoice_item2])
@@ -106,6 +99,22 @@ RSpec.describe Invoice do
         expect(@invoice1.find_best_applicable_discounts).to eq(expected)
       end
     end
+
+    # describe '#total_discount`' do
+    #   it 'calculates the discounted amount' do
+    #     require "pry"; binding.pry
+    #     expect(@invoice1.total_discount).to eq(4)
+    #   end
+    # end
+
+    # describe '#apply_discounts' do
+    #   it 'applies the discounted amount to the invoice' do
+    #     expect(@invoice1.amount_off).to eq(50)
+    #   end
+    # end
+
+
+
   end
 
 end
