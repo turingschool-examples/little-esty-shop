@@ -57,9 +57,7 @@ class API
   end
 
   def self.next_three_holidays
-    # require "pry"; binding.pry
     APIS::Holidays.new(render_request(holidays[:upcoming_year])).all_holidays
-    # require "pry"; binding.pry
   end
 
 
