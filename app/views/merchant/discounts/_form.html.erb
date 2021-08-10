@@ -14,17 +14,17 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, value: params[:discount] %>
   </div>
 
   <div class="field">
     <%= form.label :threshold %>
-    <%= form.number_field :threshold, min: 1 %>
+    <%= form.number_field :threshold, min: 1, value: params[:threshold] %>
   </div>
 
   <div class="field">
     <%= form.label :percentage %>
-    <%= form.number_field :percentage, min: 1, max: 100 %>
+    <%= form.number_field :percentage, min: 1, max: 100, value: params[:percentage] %>
   </div>
 
   <div class="actions">
