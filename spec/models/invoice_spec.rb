@@ -79,14 +79,14 @@ RSpec.describe Invoice do
     end
 
     describe '#invoice_revenue' do
-      it 'calculates the total revenue potential of the invoice' do
-        expect(@invoice1.invoice_revenue).to eq(54_500)
+      it 'calculates the total revenue potential of the invoice in dollars' do
+        expect(@invoice1.invoice_revenue).to eq(545.00)
       end
     end
 
     describe '#invoice_revenue_minus_discount' do
       it 'calculates the total revenue minus the applicable discounts' do
-        expect(@invoice1.invoice_revenue_minus_discount).to eq(486.0)
+        expect(@invoice1.invoice_revenue_minus_discount).to eq(486.00)
       end
     end
 
