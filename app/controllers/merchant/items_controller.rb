@@ -1,4 +1,6 @@
 class Merchant::ItemsController < ApplicationController
+  before_action :set_item, only: [ :show, :edit, :update ]
+
   def index
     @merchant = Merchant.find(params[:merchant_id])
     if params[:sort] == 'name'
@@ -13,14 +15,12 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def new
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def create
@@ -35,13 +35,16 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    item.update(item_model_params)
-    return redirect_back(fallback_location: merchant_items_path(item.merchant_id)) if params[:direct] == 'enable'
-    redirect_to merchant_item_path(item.merchant_id, item.id), notice: "Item successfully updated."
+    @item.update(item_model_params)
+    return redirect_back(fallback_location: merchant_items_path(@item.merchant_id)) if params[:direct] == 'enable'
+    redirect_to merchant_item_path(@item.merchant_id, @item.id), notice: "Item successfully updated."
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.permit(:name, :description, :unit_price, :enable, :merchant_id)
