@@ -6,16 +6,42 @@
   </thead>
 
   <tbody id="upcoming-holidays">
-    <% next_three_holidays = API.next_three_holidays %>
       <tr id="holiday-headers">
         <th>First up:</th>
         <th>Then:</th>
         <th>Finally:</th>
       </tr>
+
       <tr id="holiday-names">
-        <td><%= next_three_holidays.keys.first %> on <%= next_three_holidays.values.first %></td>
-        <td><%= next_three_holidays.keys.second %> on <%= next_three_holidays.values.second %></td>
-        <td><%= next_three_holidays.keys.third %> on <%= next_three_holidays.values.third %></td>
+        <td><%= @next_three_holidays.keys.first %> on <%= @next_three_holidays.values.first %><br/>
+
+          <% if @merchant.discounts.map(&:name).include?("#{@next_three_holidays.keys.first}") %>
+            <%= link_to "#{@next_three_holidays.keys.first} Discount", merchant_discount_path(@merchant, @the_discount1), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+
+          <% else %>
+            <%= link_to "Create discount for #{@next_three_holidays.keys.first}", new_merchant_discount_path(@merchant, params: {discount: "#{@next_three_holidays.keys.first}",threshold: '2', percentage: '30' }), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+          <% end %>
+        </td>
+
+        <td><%= @next_three_holidays.keys.second %> on <%= @next_three_holidays.values.second %><br/>
+
+          <% if @merchant.discounts.map(&:name).include?("#{@next_three_holidays.keys.second}") %>
+            <%= link_to "#{@next_three_holidays.keys.second} Discount", merchant_discount_path(@merchant, @the_discount2), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+
+          <% else %>
+            <%= link_to "Create discount for #{@next_three_holidays.keys.second}", new_merchant_discount_path(@merchant, params: {discount: "#{@next_three_holidays.keys.second}",threshold: '2', percentage: '30' }), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+          <% end %>
+        </td>
+
+        <td><%= @next_three_holidays.keys.third %> on <%= @next_three_holidays.values.third %><br/>
+
+          <% if @merchant.discounts.map(&:name).include?("#{@next_three_holidays.keys.third}") %>
+            <%= link_to "#{@next_three_holidays.keys.third} Discount", merchant_discount_path(@merchant, @the_discount3), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+
+          <% else %>
+            <%= link_to "Create discount for #{@next_three_holidays.keys.third}", new_merchant_discount_path(@merchant, params: {discount: "#{@next_three_holidays.keys.third}",threshold: '2', percentage: '30' }), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+          <% end %>
+        </td>
       </tr>
   </tbody>
 </table>
