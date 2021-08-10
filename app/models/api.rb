@@ -27,9 +27,7 @@ class API
   end
 
   def self.holidays
-    {
-      upcoming_year: "https://date.nager.at/api/v3/NextPublicHolidays/US"
-    }
+    {upcoming_year: "https://date.nager.at/api/v3/NextPublicHolidays/US"}
   end
 
   def self.make_request(endpoint)
