@@ -1,8 +1,14 @@
 <table class="table table-striped navbar-custom">
   <thead class="custom" text-align="center" align="center">
     <tr>
-      <th colspan="3" style="font-family: Quicksand;">Invoice ID:<strong> <%= @invoice.id %></strong><br> Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %>
-      <br> Total Revenue After Discounts: <%= number_to_currency("#{@invoice.invoice_revenue_minus_discount}") %></th>
+      <th colspan="3" style="font-family: Quicksand;">Invoice ID:
+        <strong> <%= @invoice.id %></strong><br> Total Invoice Revenue Potential: <%= number_to_currency("#{@invoice.invoice_revenue/100.00}") %>
+      <br> Total Revenue After Discounts:
+        <%= number_to_currency("#{@invoice.invoice_revenue_minus_discount}") %>
+      <% if (@invoice.invoice_revenue/100.00) != (@invoice.invoice_revenue_minus_discount) %>
+      <% end %>
+
+      </th>
     </tr>
   </thead >
   <tbody id="top-merchants">
@@ -27,7 +33,11 @@
 <% @invoice.invoice_items.each do |ii| %>
   <div id="id-<%=ii.id%>" class="card navbar-custom"  style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title"><p>Item: <%= ii.item.name %></p></h5>
+      <h5 class="card-title"><p>Item: <%= link_to "#{ii.item.name}", merchant_item_path(@merchant, ii.item.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></p></h5>
+      <% if ii.invoice_item_discount.present? %>
+        <h6 class="card-subtitle">
+          <p>Discount Applied: <%= link_to "#{ii.invoice_item_discount.name}", merchant_discount_path(@merchant, ii.invoice_item_discount.id), class:"btn btn-outline-dark navbar-custom btn-sm" %></p></h6>
+      <% end %>
       <h6 class="card-subtitle mb-2 text-muted">Quantity: <%= ii.quantity %></h6>
       <h6 class="card-subtitle mb-2 text-muted">Unit Price: <%= number_to_currency(ii.unit_price/100.00, precision: 2) %></h6>
       <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |form| %>
