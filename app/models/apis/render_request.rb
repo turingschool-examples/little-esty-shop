@@ -3,7 +3,6 @@ module APIS
     attr_reader :endpoint, :endpoint_arr
 
     def initialize(endpoint)
-      # require "pry"; binding.pry
       if endpoint.class == String
         @endpoint = endpoint
       else
