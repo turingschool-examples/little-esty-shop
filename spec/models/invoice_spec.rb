@@ -84,21 +84,27 @@ RSpec.describe Invoice do
       end
     end
 
-    describe '#invoice_item_totals' do
-      it 'returns invoice_items that match the invoice' do
-        expect(@invoice1.invoice_item_totals).to eq([@invoice_item1, @invoice_item2])
+    describe '#invoice_revenue_minus_discount' do
+      it 'calculates the total revenue minus the applicable discounts' do
+        expect(@invoice1.invoice_revenue_minus_discount).to eq(486.0)
       end
     end
 
-    describe '#find_best_applicable_discounts' do
-      it 'finds all discounts that the invoice item is eligible for' do
-        expected = {
-          @invoice_item1.id => @discount2.percentage,
-          @invoice_item2.id => @discount1.percentage
-        }
-        expect(@invoice1.find_best_applicable_discounts).to eq(expected)
-      end
-    end
+    # describe '#invoice_item_totals' do
+    #   it 'returns invoice_items that match the invoice' do
+    #     expect(@invoice1.invoice_item_totals).to eq([@invoice_item1, @invoice_item2])
+    #   end
+    # end
+    #
+    # describe '#find_best_applicable_discounts' do
+    #   it 'finds all discounts that the invoice item is eligible for' do
+    #     expected = {
+    #       @invoice_item1.id => @discount2.percentage,
+    #       @invoice_item2.id => @discount1.percentage
+    #     }
+    #     expect(@invoice1.find_best_applicable_discounts).to eq(expected)
+    #   end
+    # end
 
     # describe '#total_discount`' do
     #   it 'calculates the discounted amount' do
