@@ -91,4 +91,15 @@ RSpec.describe 'The merchant discounts index page' do
     expect(page).to_not have_content('Twentyfifty')
   end
 
+  it 'has links to create new discounts for the three listed holidays' do
+    expect(page).to have_link("Create discount for #{@holidays.keys.first}")
+    expect(page).to have_link("Create discount for #{@holidays.keys.second}")
+    expect(page).to have_link("Create discount for #{@holidays.keys.third}")
+  end
+
+  it 'directs to to a discount creation new page when clicking those links' do
+    click_on "Create discount for #{@holidays.keys.first}"
+    expect(current_path).to eq(new_merchant_discount_path(@merchant1))
+  end
+
 end
