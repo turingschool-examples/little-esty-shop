@@ -4,6 +4,10 @@ class Merchant::DiscountsController < ApplicationController
 
 
   def index
+    @next_three_holidays = API.next_three_holidays
+    @the_discount1 = @merchant.discounts.find_by(name: "#{@next_three_holidays.keys.first}")
+    @the_discount2 = @merchant.discounts.find_by(name: "#{@next_three_holidays.keys.second}")
+    @the_discount3 = @merchant.discounts.find_by(name: "#{@next_three_holidays.keys.third}")
   end
 
   def show
