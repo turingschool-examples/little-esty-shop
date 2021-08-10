@@ -1,12 +1,14 @@
 <h1>Merchant: <%= @merchant.name %></h1>
-<div class="card navbar-custom"  style="width: 18rem;">
-  <div align="center">
-    <div class="card-body">
+<div align="center">
+  <div class="card navbar-custom"  style="width: 18rem;">
+    <div align="center">
+      <div class="card-body">
 
-    <h5 class="card-title"><%= @merchant.name %></h5>
-    <br>
-    <%= link_to 'Edit', edit_admin_merchant_path(@merchant), class:"btn btn-outline-dark navbar-custom" %>
+      <h5 class="card-title"><%= @merchant.name %></h5>
+      <br>
+      <%= link_to 'Edit', edit_admin_merchant_path(@merchant), class:"btn btn-outline-dark navbar-custom" %>
 
+      </div>
     </div>
   </div>
 </div>
