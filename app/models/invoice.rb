@@ -14,17 +14,24 @@ class Invoice < ApplicationRecord
     invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
   end
 
+  def invoice_revenue_minus_discount
+    invoice_items.sum do |ii|
+      ii.invoice_revenue_minus_discount
+    end
+  end
+
+
   # def find_best_applicable_discounts
   #   invoice_items.select('discounts.id')
   #   .joins(:discounts)
   #   .where('invoice_items.quantity > ?', discounts.threshold)
   # end
-
+  #
   def invoice_item_totals
-    invoice_items.select('invoice_items.id, invoice_items.item_id, invoice_items.quantity, SUM(invoice_items.unit_price * invoice_items.quantity) as potential_rev' )
+    invoice_items.select('invoice_items.id, invoice_items.item_id, invoice_items.unit_price, invoice_items.quantity, SUM(invoice_items.unit_price * invoice_items.quantity) as potential_rev' )
     .group('invoice_items.id')
   end
-
+  #
   def find_best_applicable_discounts
     collector = []
     invoice_item_totals.each do |ii|
@@ -39,6 +46,22 @@ class Invoice < ApplicationRecord
     y = hash.values.map { |element| element.map(&:last).max }
     result = Hash[y.zip(x)]
   end
+  #
+  #
+  # need to match the invoice_items id with the hashes invoice_item id and apply the percent to the invoice_items potential_rev
+
+  # def apply_discount
+  #   find_best_applicable_discounts.keys.each do |ii_id|
+  #     invoice_items.find_by(id: ii_id)
+#
+#   def total_discount
+#   invoice_items.joins(:discounts)
+#                 .select("invoice_items.id, max(invoice_items.unit_price * invoice_items.quantity * (discounts.percentage / 1.0)) as total_discount")
+#                 .where("invoice_items.quantity >= discounts.threshold")
+#                 .group("invoice_items.id")
+#                 .order(total_discount: :desc)
+#                 .sum(&:total_discount)
+# end
 
 
   # def apply_discount
