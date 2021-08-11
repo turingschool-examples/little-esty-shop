@@ -1,6 +1,7 @@
 <div align="center">
-  <%= button_to "  Sort Alphabetically  ", merchants_path, method: :get, class:"btn btn-outline-dark navbar-custom", params: { sort: 'name' }  %>
-  <%= button_to "Sort by Updated Date", merchants_path, method: :get, class:"btn btn-outline-dark navbar-custom", params: { sort: 'date' }  %>
+  <%= button_to "Original Sorting", merchants_path, method: :get, class:"btn btn-outline-dark navbar-custom btn-sm"  %>
+  <%= button_to "Sort Alphabetically", merchants_path, method: :get, class:"btn btn-outline-dark navbar-custom btn-sm", params: { sort: 'name' } %>
+  <%= button_to "Sort by Updated Date", merchants_path, method: :get, class:"btn btn-outline-dark navbar-custom btn-sm", params: { sort: 'date' } %>
 </div><br/><br/>
 
 
