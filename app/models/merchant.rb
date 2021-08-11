@@ -77,4 +77,8 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def discount_names
+    discounts.map(&:name)
+  end
+
 end
