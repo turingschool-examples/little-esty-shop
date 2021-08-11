@@ -1,8 +1,8 @@
 <div align="center">
-  <h1>Editing
+  <h2>Editing
     <%= link_to "#{@discount.name}", merchant_discount_path(@merchant, @discount), method: :get, class:"btn btn-outline-dark navbar-custom btn-lg" %>
      Discount
-   </h1>
+   </h2>
   <br/><br/>
 </div>
 
@@ -40,6 +40,6 @@
     </div>
 
   <% end %>
+  <br/>
+  <%= link_to 'Back', merchant_discounts_path(@merchant), class:"btn btn-outline-dark navbar-custom btn-sm" %>
 </div>
-
-<%= link_to 'Back', merchant_discounts_path(@merchant), class:"btn btn-outline-dark navbar-custom btn-sm" %>
