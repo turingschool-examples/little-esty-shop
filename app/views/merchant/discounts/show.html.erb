@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div align="center">
   <div class="card navbar-custom"  style="width: 18rem;">
     <div class="card-body">
@@ -7,7 +5,9 @@
       <h6 class="card-subtitle mb-2 text-muted">Quantity Threshold:<h6 class="card-subtitle mb-2"> <%= @discount.threshold %> items</h6>
       <h6 class="card-subtitle mb-2 text-muted">Discount Percentage:<h6 class="card-subtitle mb-2"> <%= @discount.percentage %>%</h6>
       <h6 class="card-subtitle mb-2 text-muted">
-        <%= link_to "#{@merchant.name}", merchant_dashboard_index_path(@merchant.id), class:"btn btn-outline-dark navbar-custom btn-sm"%><br/><br/><%= link_to "Edit #{@discount.name}", edit_merchant_discount_path(@merchant, @discount), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+        <%= link_to "#{@merchant.name}", merchant_dashboard_index_path(@merchant.id), class:"btn btn-outline-dark navbar-custom btn-sm"%>
+        <br/><br/>
+        <%= link_to "Edit #{@discount.name}", edit_merchant_discount_path(@merchant, @discount), class:"btn btn-outline-dark navbar-custom btn-sm" %>
         <%= link_to 'Back', merchant_discounts_path(@merchant), class:"btn btn-outline-dark navbar-custom btn-sm" %></h6>
 
 
