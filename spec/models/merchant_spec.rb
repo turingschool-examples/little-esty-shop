@@ -237,8 +237,8 @@ RSpec.describe Merchant do
         ii9 = InvoiceItem.create!(item_id: item9.id, invoice_id: invoice.id, quantity: 9, unit_price: 10_000, status: 1)
         ii10 = InvoiceItem.create!(item_id: item10.id, invoice_id: invoice.id, quantity: 10, unit_price: 10_000, status: 1)
 
-
         expected = merchant1.best_day_for_merchant(merchant1.id)
+        
         expect(expected.invoice_date).to eq(invoice2.created_at)
         expect(merchant1.format_date(expected.invoice_date)).to eq(invoice2.format_date(invoice2.created_at))
       end
@@ -263,4 +263,17 @@ RSpec.describe Merchant do
     end
   end
 
+  describe '#discount_names' do
+    it 'can determine all of the names of the associated discounts' do
+      @merchant1 = Merchant.create!(name: 'Mark Zuckerberg', status: 0)
+      @discount1 = @merchant1.discounts.create(name: 'Twoten', threshold: 2, percentage: 10)
+      @discount2 = @merchant1.discounts.create(name: 'Fourscore', threshold: 3, percentage: 20)
+      @discount3 = @merchant1.discounts.create(name: 'Ninetwentynine', threshold: 9, percentage: 29)
+      @discount4 = @merchant1.discounts.create(name: 'Twentyfifty', threshold: 20, percentage: 50)
+
+      expected = ["Twoten", "Fourscore", "Ninetwentynine", "Twentyfifty"]
+
+      expect(@merchant1.discount_names).to eq(expected)
+    end
+  end
 end
