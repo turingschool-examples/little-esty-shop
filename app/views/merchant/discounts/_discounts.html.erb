@@ -11,15 +11,15 @@
         <th>Name</th>
         <th>Quantity Threshold</th>
         <th>Percentage Discount</th>
-        <th>Links</th>
+        <th></th>
       </tr>
       <tr id="discount-<%= discount.id %>">
         <td><%= link_to "#{discount.name}", merchant_discount_path(@merchant, discount), method: :get, class:"btn btn-outline-dark navbar-custom" %></td>
         <td><%= discount.threshold %></td>
         <td><%= discount.percentage %></td>
-
-        <td><%= link_to "Edit #{discount.name}", edit_merchant_discount_path(@merchant, discount), class:"btn btn-outline-dark navbar-custom btn-sm" %>
-        <%= link_to 'Destroy', merchant_discount_path(@merchant, discount), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-dark navbar-custom btn-sm" %>
+        <td>
+          <%= link_to "Edit #{discount.name}", edit_merchant_discount_path(@merchant, discount), class:"btn btn-outline-dark navbar-custom btn-sm" %>
+          <%= link_to 'Destroy', merchant_discount_path(@merchant, discount), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-dark navbar-custom btn-sm" %>
         </td>
       </tr>
     <% end %>
