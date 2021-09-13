@@ -6,7 +6,7 @@ class Invoice < ApplicationRecord
 
   enum status: {
     'in progress': 0,
-    'cancelled': 1,
-    'completed': 2,
+    cancelled: 1,
+    completed: 2,
   }
 end
