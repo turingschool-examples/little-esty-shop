@@ -17,7 +17,13 @@ namespace :csv_load do
   end
 
   task merchants: :environment do
-    puts "merchants"
+    path = "./db/data/merchants.csv"
+    file_data = File.read(path)
+    csv = CSV.parse(file_data, :headers => true)
+
+    csv.each do |row|
+      Merchant.create!(row.to_hash)
+    end
   end
 
   task transactions: :environment do
