@@ -43,6 +43,8 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
