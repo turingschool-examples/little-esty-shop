@@ -6,7 +6,7 @@ RSpec.describe 'merchants items index page' do
     @merchant_2 = Merchant.create!(name: "Kevin")
     @item_1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5)
     @item_2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10)
-    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
+    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50, enable: 1)
     @item_4 = @merchant_2.items.create!(name: "Table", description: "Eat on it", unit_price: 100)
   end
 
@@ -57,5 +57,29 @@ RSpec.describe 'merchants items index page' do
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items/")
     expect(@item_2.enable).to eq("disabled")
+  end
+
+  it 'has an enabled only section' do
+    visit "/merchants/#{@merchant.id}/items"
+
+    within("#enabled") do
+      within("#item-#{@item_2.id}") do
+        expect(@item_2.enable).to eq("enabled")
+        expect(page).to have_content("#{@item_2.name}")
+        click_on "Disable"
+      end
+    end
+  end
+
+  it 'has an disabled only section' do
+    visit "/merchants/#{@merchant.id}/items"
+
+    within("#disabled") do
+      within("#item-#{@item_3.id}") do
+        expect(@item_3.enable).to eq("disabled")
+        expect(page).to have_content("#{@item_3.name}")
+      end
+    end
+    save_and_open_page
   end
 end
