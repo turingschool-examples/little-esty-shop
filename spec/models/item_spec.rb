@@ -1,5 +1,8 @@
 require 'rails_helper'
-
+# rspec spec/models/item_spec.rb
 RSpec.describe Item, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+    let(:item) { create :item }
+    it { should belong_to(:merchant) }
+  end
 end
