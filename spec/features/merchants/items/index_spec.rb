@@ -80,6 +80,5 @@ RSpec.describe 'merchants items index page' do
         expect(page).to have_content("#{@item_3.name}")
       end
     end
-    save_and_open_page
   end
 end
