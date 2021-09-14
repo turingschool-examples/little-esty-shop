@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_14_020148) do
+ActiveRecord::Schema.define(version: 2021_09_14_054930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_09_14_020148) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "credit_card_number"
+    t.bigint "credit_card_number"
     t.integer "credit_card_expiration_date"
     t.string "result"
     t.bigint "invoice_id"
