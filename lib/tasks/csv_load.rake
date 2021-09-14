@@ -11,7 +11,13 @@ namespace :csv_load do
   end
 
   task invoice_items: :environment do
+    path = "./db/data/invoice_items.csv"
+    file_data = File.read(path)
+    csv = CSV.parse(file_data, :headers => true)
 
+    csv.each do |row|
+      InvoiceItem.create!(row.to_hash)
+    end
   end
 
   task invoices: :environment do
