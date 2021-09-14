@@ -8,5 +8,10 @@ class Merchant < ApplicationRecord
          .group('customers.id')
          .order(purchases: :desc)
          .limit(5)
+
+    # Customer
+    #   .select("customers.*, COUNT(transactions.result) as purchases")
+    #   .joins(invoices: [:items, :transactions])
+    #   .group(:id)
   end
 end
