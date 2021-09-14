@@ -1,6 +1,6 @@
 <h1>All Merchants</h1>
 <%@merchants.each do |merchant| %>
 <ul>
-  <li>Name: <%=merchant.name %></li>
+  <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
   <% end %>
 </ul>
