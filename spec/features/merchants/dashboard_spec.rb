@@ -31,8 +31,11 @@ describe 'merchant dashboard page' do
     create(:transaction, invoice: @invoice_3, result: 'success')
     create(:transaction, invoice: @invoice_4, result: 'success')
     create(:transaction, invoice: @invoice_4, result: 'success')
+    create(:transaction, invoice: @invoice_4, result: 'success')
     create(:transaction, invoice: @invoice_5, result: 'success')
     create(:transaction, invoice: @invoice_5, result: 'success')
+    create(:transaction, invoice: @invoice_6, result: 'success')
+    create(:transaction, invoice: @invoice_6, result: 'success')
     create(:transaction, invoice: @invoice_6, result: 'success')
     create(:transaction, invoice: @invoice_6, result: 'success')
     visit "/merchants/#{@merch_1.id}/dashboard"
@@ -54,11 +57,33 @@ describe 'merchant dashboard page' do
     expect(current_path).to eq("/merchants/#{@merch_1.id}/invoices")
   end
 
-  it 'shows names of top 5 customers' do
-    expect(page).to have_content(@cust_2.first_name)
-    expect(page).to have_content(@cust_3.first_name)
-    expect(page).to have_content(@cust_4.first_name)
-    expect(page).to have_content(@cust_5.first_name)
-    expect(page).to have_content(@cust_6.first_name)
+  it 'shows names of top 5 customers and their successful transactions' do
+    save_and_open_page
+    expect(page).to_not have_content(@cust_1.first_name)
+
+    within("#customer-#{@cust_2.id}") do
+      expect(page).to have_content(@cust_2.first_name)
+      expect(page).to have_content(2)
+    end
+
+    within("#customer-#{@cust_3.id}") do
+      expect(page).to have_content(@cust_3.first_name)
+      expect(page).to have_content(2)
+    end
+
+    within("#customer-#{@cust_4.id}") do
+      expect(page).to have_content(@cust_4.first_name)
+      expect(page).to have_content(3)
+    end
+
+    within("#customer-#{@cust_5.id}") do
+      expect(page).to have_content(@cust_5.first_name)
+      expect(page).to have_content(2)
+    end
+
+    within("#customer-#{@cust_6.id}") do
+      expect(page).to have_content(@cust_6.first_name)
+      expect(page).to have_content(4)
+    end
   end
 end
