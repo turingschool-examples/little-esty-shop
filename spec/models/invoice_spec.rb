@@ -7,8 +7,12 @@ RSpec.describe Invoice, type: :model do
 
     it { should belong_to(:customer) }
     it { should have_many(:invoice_items) }
+
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:transactions) }
+
+    it { should have_many(:merchant_invoices) }
+    it { should have_many(:merchants).through(:merchant_invoices) }
 
     it 'responds to relationships' do
       expect(invoice).to respond_to(:invoice_items)
