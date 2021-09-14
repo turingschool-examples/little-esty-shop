@@ -1,0 +1,20 @@
+<h1><%="Add New Item to #{@merchant.name}" %></h1>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
+<%= form_with url: merchant_items_path(id: @merchant.id), method: :post, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %><br>
+
+  <%= f.label :unit_price %>
+  <%= f.number_field :unit_price %><br>
+
+  <%= f.submit "Submit" %>
+<% end %>
