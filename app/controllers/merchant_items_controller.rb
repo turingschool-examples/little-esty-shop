@@ -16,7 +16,9 @@ class MerchantItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.update(item_params)
 
-    if @item.save
+    if params[:enable]
+      redirect_to "/merchants/#{@merchant.id}/items/"
+    elsif
       flash[:notice] = "Item has been updated succesfully"
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
     end
@@ -25,6 +27,6 @@ class MerchantItemsController < ApplicationController
 
   private
   def item_params
-    params.permit(:name, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :enable)
   end
 end

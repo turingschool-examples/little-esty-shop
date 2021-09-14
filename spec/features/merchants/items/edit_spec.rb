@@ -29,7 +29,7 @@ RSpec.describe 'merchants items edit page' do
     fill_in('Description', with: 'RGB')
     fill_in('Unit price', with: 4000)
     click_on "Submit"
-    save_and_open_page
+
     expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
     expect(page).to have_content("Keyboard")
     expect(page).to have_content("RGB")
