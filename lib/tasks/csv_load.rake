@@ -1,15 +1,27 @@
 namespace :csv_load do
   desc "TODO"
   task customers: :environment do
-    puts "customers"
+    path = "./db/data/customers.csv"
+    file_data = File.read(path)
+    csv = CSV.parse(file_data, :headers => true)
+
+    csv.each do |row|
+      Customer.create!(row.to_hash)
+    end
   end
 
   task invoice_items: :environment do
-    puts "invoice items"
+
   end
 
   task invoices: :environment do
-    puts "invoices"
+    path = "./db/data/invoices.csv"
+    file_data = File.read(path)
+    csv = CSV.parse(file_data, :headers => true)
+
+    csv.each do |row|
+      Invoice.create!(row.to_hash)
+    end
   end
 
   task items: :environment do
