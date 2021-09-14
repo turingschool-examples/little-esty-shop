@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Invoice do
   describe 'validations' do
-    it {validates_presence_of :status}
+    it {should validate_presence_of :status}
   end
 
   describe 'relationships' do
-    it {belongs_to :customer}
+    it {should belong_to :customer}
+    it {should have_many :transaction}
   end
 end
