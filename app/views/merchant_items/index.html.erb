@@ -3,6 +3,6 @@
 <h3>All Items:</h3>
 <ul>
 <% @merchant.items.each do |item| %>
-  <li><%= item.name %></li>
+  <li><%= link_to item.name, merchant_item_path(id: item.id) %></li>
 <% end %>
 </ul>
