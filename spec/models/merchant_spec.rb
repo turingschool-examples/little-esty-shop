@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+    let(:merchant) { create :merchant }
+
+    it 'should respond to items' do
+      expect(merchant).to respond_to(:items)
+    end
+  end
 end
