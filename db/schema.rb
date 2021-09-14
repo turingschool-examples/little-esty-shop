@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_14_011727) do
+ActiveRecord::Schema.define(version: 2021_09_14_211514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_09_14_011727) do
     t.bigint "merchant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "enable", default: 0
+    t.integer "enable", default: 1
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
