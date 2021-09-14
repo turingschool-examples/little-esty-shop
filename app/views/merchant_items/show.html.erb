@@ -1,6 +1,14 @@
 <h1> <%= @item.name %></h1>
 
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
 <ul>
   <li>Description: <%= @item.description %></li>
   <li>Item Price: <%= @item.unit_price %></li>
 </ul>
+
+<%= button_to "Update Item", edit_merchant_item_path(id: @item.id), method: :get %>
