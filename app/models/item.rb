@@ -7,4 +7,12 @@ class Item < ApplicationRecord
     enabled: 0,
     disabled: 1
   }
+
+  def self.enabled_items
+    where(enable: 0)
+  end
+
+  def self.disabled_items
+    where(enable: 1)
+  end
 end
