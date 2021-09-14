@@ -12,7 +12,7 @@ RSpec.describe 'merchants items index page' do
 
   it 'displays merchant item names' do
     visit "/merchants/#{@merchant.id}/items"
-    save_and_open_page
+
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_2.name)
     expect(page).to have_content(@item_3.name)
