@@ -6,6 +6,6 @@
 <h2>Favorite Customers</h2>
 <ul>
   <% @favorite_customers.each do |customer| %>
-    <li><%= customer.first_name %> <%= customer.last_name %></li>
+    <li><%= customer.first_name %> <%= customer.last_name %>: <%= customer.purchases %> purchases</li>
   <% end %>
 </ul>
