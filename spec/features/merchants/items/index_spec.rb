@@ -4,10 +4,10 @@ RSpec.describe 'merchants items index page' do
   before :each do
     @merchant = Merchant.create!(name: "Steve")
     @merchant_2 = Merchant.create!(name: "Kevin")
-    @item_1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5)
-    @item_2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10)
-    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50, enable: 1)
-    @item_4 = @merchant_2.items.create!(name: "Table", description: "Eat on it", unit_price: 100)
+    @item_1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5, enable: 0)
+    @item_2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10, enable: 0)
+    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
+    @item_4 = @merchant_2.items.create!(name: "Table", description: "Eat on it", unit_price: 100, enable: 0)
   end
 
   it 'displays merchant item names' do
@@ -81,4 +81,14 @@ RSpec.describe 'merchants items index page' do
       end
     end
   end
+
+  it 'has a link to create a new item' do
+    visit "/merchants/#{@merchant.id}/items"
+
+    expect(page).to have_link("Create new item")
+    click_link "Create new item"
+    expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+  end
+
+
 end
