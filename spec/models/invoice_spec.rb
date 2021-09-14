@@ -1,5 +1,19 @@
 require 'rails_helper'
-
+# rspec spec/models/invoice_spec.rb
 RSpec.describe Invoice, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+    let(:invoice) { create :invoice }
+    let(:status) { ['in progress', 'completed', 'cancelled'] }
+
+    it { should belong_to(:customer) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:items).through(:invoice_items) }
+    it { should have_many(:transactions) }
+
+    it 'responds to relationships' do
+      expect(invoice).to respond_to(:invoice_items)
+      expect(invoice).to respond_to(:items)
+      expect(invoice).to respond_to(:transactions)
+    end
+  end
 end
