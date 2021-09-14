@@ -5,5 +5,5 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   validates :status, :created_at, :updated_at, presence: true
 
-  enum status: [:cancelled, :in_progress, :complete]
+  enum status: [:cancelled, "in progress", :completed]
 end
