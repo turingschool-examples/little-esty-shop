@@ -1,0 +1,3 @@
+class MerchantInvoicesController < ApplicationController
+
+end
