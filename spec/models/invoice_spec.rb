@@ -10,14 +10,22 @@ RSpec.describe Invoice, type: :model do
 
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:transactions) }
+  end
 
-    it { should have_many(:merchant_invoices) }
-    it { should have_many(:merchants).through(:merchant_invoices) }
+  describe 'class methods/scopes' do
+    let!(:merchant) { create :merchant }
+    let!(:customer) { create :customer }
+    let!(:item1) { create :item, { merchant_id: merchant.id } }
+    let!(:item2) { create :item, { merchant_id: merchant.id } }
+    let!(:item3) { create :item, { merchant_id: merchant.id } }
+    let!(:invoice1) { create :invoice, { customer_id: customer.id} }
+    let!(:invoice2) { create :invoice, { customer_id: customer.id} }
+    let!(:inv_item1) { create :invoice_item, { item_id: item1.id, invoice_id: invoice1.id } }
+    let!(:inv_item2) { create :invoice_item, { item_id: item2.id, invoice_id: invoice1.id } }
+    let!(:inv_item3) { create :invoice_item, { item_id: item3.id, invoice_id: invoice2.id } }
 
-    it 'responds to relationships' do
-      expect(invoice).to respond_to(:invoice_items)
-      expect(invoice).to respond_to(:items)
-      expect(invoice).to respond_to(:transactions)
+    it '#for_merchant' do
+      expect(Invoice.for_merchant(merchant)).to eq([invoice1, invoice2])
     end
   end
 end
