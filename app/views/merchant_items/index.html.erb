@@ -2,11 +2,14 @@
 
 
   <h3>Most Popular Items</h3>
-  <% @merchant.top_five_items.each do |item| %>
-  <div id="popular-<%= item.id %>">
-    <p><%= link_to item.name, merchant_item_path(id: item.id) %> Revenue: <%= item.revenue %></p>
-  </div>
-  <% end %>
+  <ol>
+    <% @merchant.top_five_items.each do |item| %>
+    <div id="popular-<%= item.id %>">
+          <li><%= link_to item.name, merchant_item_path(id: item.id) %> Revenue: <%= number_to_currency(item.revenue).to_f / 100 %></li>
+          <p>Top selling date for <%= item.name %> was <%= item.best_day %></p>
+    </div>
+    <% end %>
+  </ol>
 
 <h3>Enabled Items:</h3>
 <section id="enabled">
@@ -15,7 +18,6 @@
       <div id="item-<%= item.id %>">
         <li><%= link_to item.name, merchant_item_path(id: item.id) %></li>
           <%= item.enable %><br>
-          <%= button_to "Enable", merchant_item_path(id: item.id), method: :patch, params:{enable: "enabled"} %>
           <%= button_to "Disable", merchant_item_path(id: item.id), method: :patch, params:{enable: "disabled"} %>
       </div>
     <% end %>
@@ -30,7 +32,6 @@
         <li><%= link_to item.name, merchant_item_path(id: item.id) %></li>
           <%= item.enable %><br>
           <%= button_to "Enable", merchant_item_path(id: item.id), method: :patch, params:{enable: "enabled"} %>
-          <%= button_to "Disable", merchant_item_path(id: item.id), method: :patch, params:{enable: "disabled"} %>
       </div>
     <% end %>
   </ul>
