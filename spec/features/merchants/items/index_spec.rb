@@ -3,27 +3,27 @@ require 'rails_helper'
 RSpec.describe 'merchants items index page' do
   before :each do
     @merchant = Merchant.create!(name: "Steve")
-    @merchant_2 = Merchant.create!(name: "Kevin")
-    @item_1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5, enable: 0)
-    @item_2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10, enable: 0)
-    @item_3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
-    @item_4 = @merchant_2.items.create!(name: "Table", description: "Eat on it", unit_price: 100, enable: 0)
+    @merchant2 = Merchant.create!(name: "Kevin")
+    @item1 = @merchant.items.create!(name: "Lamp", description: "Sheds light", unit_price: 5, enable: 0)
+    @item2 = @merchant.items.create!(name: "Toy", description: "Played with", unit_price: 10, enable: 0)
+    @item3 = @merchant.items.create!(name: "Chair", description: "Sit on it", unit_price: 50)
+    @item4 = @merchant2.items.create!(name: "Table", description: "Eat on it", unit_price: 100, enable: 0)
   end
 
   it 'displays merchant item names' do
     visit "/merchants/#{@merchant.id}/items"
 
-    expect(page).to have_content(@item_1.name)
-    expect(page).to have_content(@item_2.name)
-    expect(page).to have_content(@item_3.name)
+    expect(page).to have_content(@item1.name)
+    expect(page).to have_content(@item2.name)
+    expect(page).to have_content(@item3.name)
   end
 
   it 'has a link to items show page' do
     visit "/merchants/#{@merchant.id}/items"
 
-    click_on "#{@item_1.name}"
+    click_on "#{@item1.name}"
 
-    expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
+    expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item1.id}")
   end
 
   it 'has a button for enable/disable item' do
@@ -36,36 +36,36 @@ RSpec.describe 'merchants items index page' do
   it 'allows you to click enable' do
     visit "/merchants/#{@merchant.id}/items"
 
-    @item_2.update(enable: 1)
+    @item2.update(enable: 1)
 
-    within("#item-#{@item_2.id}") do
+    within("#item-#{@item2.id}") do
       click_on "Enable"
     end
 
-    @item_2.reload
-    expect(@item_2.enable).to eq("enabled")
+    @item2.reload
+    expect(@item2.enable).to eq("enabled")
   end
 
   it 'allows you to click disable' do
     visit "/merchants/#{@merchant.id}/items"
 
-    within("#item-#{@item_2.id}") do
+    within("#item-#{@item2.id}") do
       click_on "Disable"
     end
 
-    @item_2.reload
+    @item2.reload
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items/")
-    expect(@item_2.enable).to eq("disabled")
+    expect(@item2.enable).to eq("disabled")
   end
 
   it 'has an enabled only section' do
     visit "/merchants/#{@merchant.id}/items"
 
     within("#enabled") do
-      within("#item-#{@item_2.id}") do
-        expect(@item_2.enable).to eq("enabled")
-        expect(page).to have_content("#{@item_2.name}")
+      within("#item-#{@item2.id}") do
+        expect(@item2.enable).to eq("enabled")
+        expect(page).to have_content("#{@item2.name}")
         click_on "Disable"
       end
     end
@@ -75,9 +75,9 @@ RSpec.describe 'merchants items index page' do
     visit "/merchants/#{@merchant.id}/items"
 
     within("#disabled") do
-      within("#item-#{@item_3.id}") do
-        expect(@item_3.enable).to eq("disabled")
-        expect(page).to have_content("#{@item_3.name}")
+      within("#item-#{@item3.id}") do
+        expect(@item3.enable).to eq("disabled")
+        expect(page).to have_content("#{@item3.name}")
       end
     end
   end
@@ -91,158 +91,159 @@ RSpec.describe 'merchants items index page' do
   end
 
   it 'shows the 5 most popular items on the page' do
-    @merch_1 = create(:merchant)
-    @cust_1 = create(:customer)
-    @cust_2 = create(:customer)
-    @cust_3 = create(:customer)
-    @cust_4 = create(:customer)
-    @cust_5 = create(:customer)
-    @cust_6 = create(:customer)
-    @item_1 = create(:item, merchant: @merch_1, unit_price: 100)
-    @item_2 = create(:item, merchant: @merch_1, unit_price: 200)
-    @item_3 = create(:item, merchant: @merch_1, unit_price: 500)
-    @item_4 = create(:item, merchant: @merch_1, unit_price: 600)
-    @item_5 = create(:item, merchant: @merch_1, unit_price: 1000)
-    @item_6 = create(:item, merchant: @merch_1, unit_price: 2000)
-    @item_7 = create(:item, merchant: @merch_1, unit_price: 5000)
-    @invoice_1 = create(:invoice, customer: @cust_1)
-    @invoice_2 = create(:invoice, customer: @cust_2)
-    @invoice_3 = create(:invoice, customer: @cust_3)
-    @invoice_4 = create(:invoice, customer: @cust_4)
-    @invoice_5 = create(:invoice, customer: @cust_5)
-    @invoice_6 = create(:invoice, customer: @cust_6)
-    @invoice_7 = create(:invoice, customer: @cust_6)
-    @invoice_8 = create(:invoice, customer: @cust_6)
-    @invoice_9 = create(:invoice, customer: @cust_6)
-    @invoice_10 = create(:invoice, customer: @cust_6)
-    @invoice_11 = create(:invoice, customer: @cust_6)
-    @invoice_12 = create(:invoice, customer: @cust_6)
-    @invoice_13 = create(:invoice, customer: @cust_6)
-    @invoice_14 = create(:invoice, customer: @cust_6)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_2, quantity: 2, unit_price: @item_1.unit_price)
-    InvoiceItem.create(item: @item_2, invoice: @invoice_4, quantity: 4, unit_price: @item_2.unit_price)
-    InvoiceItem.create(item: @item_2, invoice: @invoice_3, quantity: 3, unit_price: @item_2.unit_price)
-    InvoiceItem.create(item: @item_3, invoice: @invoice_5, quantity: 5, unit_price: @item_3.unit_price)
-    InvoiceItem.create(item: @item_3, invoice: @invoice_6, quantity: 6, unit_price: @item_3.unit_price)
-    InvoiceItem.create(item: @item_4, invoice: @invoice_7, quantity: 7, unit_price: @item_4.unit_price)
-    InvoiceItem.create(item: @item_4, invoice: @invoice_8, quantity: 8, unit_price: @item_4.unit_price)
-    InvoiceItem.create(item: @item_5, invoice: @invoice_9, quantity: 9, unit_price: @item_5.unit_price)
-    InvoiceItem.create(item: @item_5, invoice: @invoice_10, quantity: 10, unit_price: @item_5.unit_price)
-    InvoiceItem.create(item: @item_6, invoice: @invoice_11, quantity: 11, unit_price: @item_6.unit_price)
-    InvoiceItem.create(item: @item_6, invoice: @invoice_12, quantity: 12, unit_price: @item_6.unit_price)
-    InvoiceItem.create(item: @item_7, invoice: @invoice_13, quantity: 13, unit_price: @item_7.unit_price)
-    InvoiceItem.create(item: @item_7, invoice: @invoice_14, quantity: 14, unit_price: @item_7.unit_price)
-    create(:transaction, invoice: @invoice_1, result: 'success')
-    create(:transaction, invoice: @invoice_1, result: 'success')
-    create(:transaction, invoice: @invoice_1, result: 'success')
-    create(:transaction, invoice: @invoice_2, result: 'success')
-    create(:transaction, invoice: @invoice_2, result: 'success')
-    create(:transaction, invoice: @invoice_3, result: 'success')
-    create(:transaction, invoice: @invoice_3, result: 'success')
-    create(:transaction, invoice: @invoice_4, result: 'success')
-    create(:transaction, invoice: @invoice_4, result: 'success')
-    create(:transaction, invoice: @invoice_4, result: 'success')
-    create(:transaction, invoice: @invoice_5, result: 'success')
-    create(:transaction, invoice: @invoice_5, result: 'success')
-    create(:transaction, invoice: @invoice_6, result: 'success')
-    create(:transaction, invoice: @invoice_7, result: 'success')
-    create(:transaction, invoice: @invoice_8, result: 'success')
-    create(:transaction, invoice: @invoice_9, result: 'success')
-    create(:transaction, invoice: @invoice_10, result: 'success')
-    create(:transaction, invoice: @invoice_11, result: 'success')
-    create(:transaction, invoice: @invoice_12, result: 'success')
-    create(:transaction, invoice: @invoice_13, result: 'success')
-    create(:transaction, invoice: @invoice_14, result: 'success')
+    @merch1 = create(:merchant)
+    @cust1 = create(:customer)
+    @cust2 = create(:customer)
+    @cust3 = create(:customer)
+    @cust4 = create(:customer)
+    @cust5 = create(:customer)
+    @cust6 = create(:customer)
+    @item1 = create(:item, merchant: @merch1, unit_price: 100)
+    @item2 = create(:item, merchant: @merch1, unit_price: 200)
+    @item3 = create(:item, merchant: @merch1, unit_price: 500)
+    @item4 = create(:item, merchant: @merch1, unit_price: 600)
+    @item5 = create(:item, merchant: @merch1, unit_price: 1000)
+    @item6 = create(:item, merchant: @merch1, unit_price: 2000)
+    @item7 = create(:item, merchant: @merch1, unit_price: 5000)
+    @invoice1 = create(:invoice, customer: @cust1)
+    @invoice2 = create(:invoice, customer: @cust2)
+    @invoice3 = create(:invoice, customer: @cust3)
+    @invoice4 = create(:invoice, customer: @cust4)
+    @invoice5 = create(:invoice, customer: @cust5)
+    @invoice6 = create(:invoice, customer: @cust6)
+    @invoice7 = create(:invoice, customer: @cust6)
+    @invoice8 = create(:invoice, customer: @cust6)
+    @invoice9 = create(:invoice, customer: @cust6)
+    @invoice10 = create(:invoice, customer: @cust6)
+    @invoice11 = create(:invoice, customer: @cust6)
+    @invoice12 = create(:invoice, customer: @cust6)
+    @invoice13 = create(:invoice, customer: @cust6)
+    @invoice14 = create(:invoice, customer: @cust6)
+    InvoiceItem.create(item: @item1, invoice: @invoice1, quantity: 1, unit_price: @item1.unit_price)
+    InvoiceItem.create(item: @item1, invoice: @invoice2, quantity: 2, unit_price: @item1.unit_price)
+    InvoiceItem.create(item: @item2, invoice: @invoice4, quantity: 4, unit_price: @item2.unit_price)
+    InvoiceItem.create(item: @item2, invoice: @invoice3, quantity: 3, unit_price: @item2.unit_price)
+    InvoiceItem.create(item: @item3, invoice: @invoice5, quantity: 5, unit_price: @item3.unit_price)
+    InvoiceItem.create(item: @item3, invoice: @invoice6, quantity: 6, unit_price: @item3.unit_price)
+    InvoiceItem.create(item: @item4, invoice: @invoice7, quantity: 7, unit_price: @item4.unit_price)
+    InvoiceItem.create(item: @item4, invoice: @invoice8, quantity: 8, unit_price: @item4.unit_price)
+    InvoiceItem.create(item: @item5, invoice: @invoice9, quantity: 9, unit_price: @item5.unit_price)
+    InvoiceItem.create(item: @item5, invoice: @invoice10, quantity: 10, unit_price: @item5.unit_price)
+    InvoiceItem.create(item: @item6, invoice: @invoice11, quantity: 11, unit_price: @item6.unit_price)
+    InvoiceItem.create(item: @item6, invoice: @invoice12, quantity: 12, unit_price: @item6.unit_price)
+    InvoiceItem.create(item: @item7, invoice: @invoice13, quantity: 13, unit_price: @item7.unit_price)
+    InvoiceItem.create(item: @item7, invoice: @invoice14, quantity: 14, unit_price: @item7.unit_price)
+    create(:transaction, invoice: @invoice1, result: 'success')
+    create(:transaction, invoice: @invoice1, result: 'success')
+    create(:transaction, invoice: @invoice1, result: 'success')
+    create(:transaction, invoice: @invoice2, result: 'success')
+    create(:transaction, invoice: @invoice2, result: 'success')
+    create(:transaction, invoice: @invoice3, result: 'success')
+    create(:transaction, invoice: @invoice3, result: 'success')
+    create(:transaction, invoice: @invoice4, result: 'success')
+    create(:transaction, invoice: @invoice4, result: 'success')
+    create(:transaction, invoice: @invoice4, result: 'success')
+    create(:transaction, invoice: @invoice5, result: 'success')
+    create(:transaction, invoice: @invoice5, result: 'success')
+    create(:transaction, invoice: @invoice6, result: 'success')
+    create(:transaction, invoice: @invoice7, result: 'success')
+    create(:transaction, invoice: @invoice8, result: 'success')
+    create(:transaction, invoice: @invoice9, result: 'success')
+    create(:transaction, invoice: @invoice10, result: 'success')
+    create(:transaction, invoice: @invoice11, result: 'success')
+    create(:transaction, invoice: @invoice12, result: 'success')
+    create(:transaction, invoice: @invoice13, result: 'success')
+    create(:transaction, invoice: @invoice14, result: 'success')
 
-    visit "/merchants/#{@merch_1.id}/items"
+    visit "/merchants/#{@merch1.id}/items"
 
     expect(page).to have_content("Most Popular Items")
-    expect(page).to have_content(@item_7.name)
-    expect(page).to have_content(@item_6.name)
-    expect(page).to have_content(@item_5.name)
-    expect(page).to have_content(@item_4.name)
-    expect(page).to have_content(@item_3.name)
+    expect(page).to have_content(@item7.name)
+    expect(page).to have_content(@item6.name)
+    expect(page).to have_content(@item5.name)
+    expect(page).to have_content(@item4.name)
+    expect(page).to have_content(@item3.name)
   end
 
   it 'has links to all 5 popular items' do
-    @merch_1 = create(:merchant)
-    @cust_1 = create(:customer)
-    @cust_2 = create(:customer)
-    @cust_3 = create(:customer)
-    @cust_4 = create(:customer)
-    @cust_5 = create(:customer)
-    @cust_6 = create(:customer)
-    @item_1 = create(:item, merchant: @merch_1, unit_price: 100)
-    @item_2 = create(:item, merchant: @merch_1, unit_price: 200)
-    @item_3 = create(:item, merchant: @merch_1, unit_price: 500)
-    @item_4 = create(:item, merchant: @merch_1, unit_price: 600)
-    @item_5 = create(:item, merchant: @merch_1, unit_price: 1000)
-    @item_6 = create(:item, merchant: @merch_1, unit_price: 2000)
-    @item_7 = create(:item, merchant: @merch_1, unit_price: 5000)
-    @invoice_1 = create(:invoice, customer: @cust_1)
-    @invoice_2 = create(:invoice, customer: @cust_2)
-    @invoice_3 = create(:invoice, customer: @cust_3)
-    @invoice_4 = create(:invoice, customer: @cust_4)
-    @invoice_5 = create(:invoice, customer: @cust_5)
-    @invoice_6 = create(:invoice, customer: @cust_6)
-    @invoice_7 = create(:invoice, customer: @cust_6)
-    @invoice_8 = create(:invoice, customer: @cust_6)
-    @invoice_9 = create(:invoice, customer: @cust_6)
-    @invoice_10 = create(:invoice, customer: @cust_6)
-    @invoice_11 = create(:invoice, customer: @cust_6)
-    @invoice_12 = create(:invoice, customer: @cust_6)
-    @invoice_13 = create(:invoice, customer: @cust_6)
-    @invoice_14 = create(:invoice, customer: @cust_6)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: @item_1.unit_price)
-    InvoiceItem.create(item: @item_1, invoice: @invoice_2, quantity: 2, unit_price: @item_1.unit_price)
-    InvoiceItem.create(item: @item_2, invoice: @invoice_4, quantity: 4, unit_price: @item_2.unit_price)
-    InvoiceItem.create(item: @item_2, invoice: @invoice_3, quantity: 3, unit_price: @item_2.unit_price)
-    InvoiceItem.create(item: @item_3, invoice: @invoice_5, quantity: 5, unit_price: @item_3.unit_price)
-    InvoiceItem.create(item: @item_3, invoice: @invoice_6, quantity: 6, unit_price: @item_3.unit_price)
-    InvoiceItem.create(item: @item_4, invoice: @invoice_7, quantity: 7, unit_price: @item_4.unit_price)
-    InvoiceItem.create(item: @item_4, invoice: @invoice_8, quantity: 8, unit_price: @item_4.unit_price)
-    InvoiceItem.create(item: @item_5, invoice: @invoice_9, quantity: 9, unit_price: @item_5.unit_price)
-    InvoiceItem.create(item: @item_5, invoice: @invoice_10, quantity: 10, unit_price: @item_5.unit_price)
-    InvoiceItem.create(item: @item_6, invoice: @invoice_11, quantity: 11, unit_price: @item_6.unit_price)
-    InvoiceItem.create(item: @item_6, invoice: @invoice_12, quantity: 12, unit_price: @item_6.unit_price)
-    InvoiceItem.create(item: @item_7, invoice: @invoice_13, quantity: 13, unit_price: @item_7.unit_price)
-    InvoiceItem.create(item: @item_7, invoice: @invoice_14, quantity: 14, unit_price: @item_7.unit_price)
-    create(:transaction, invoice: @invoice_1, result: 'success')
-    create(:transaction, invoice: @invoice_1, result: 'success')
-    create(:transaction, invoice: @invoice_1, result: 'success')
-    create(:transaction, invoice: @invoice_2, result: 'success')
-    create(:transaction, invoice: @invoice_2, result: 'success')
-    create(:transaction, invoice: @invoice_3, result: 'success')
-    create(:transaction, invoice: @invoice_3, result: 'success')
-    create(:transaction, invoice: @invoice_4, result: 'success')
-    create(:transaction, invoice: @invoice_4, result: 'success')
-    create(:transaction, invoice: @invoice_4, result: 'success')
-    create(:transaction, invoice: @invoice_5, result: 'success')
-    create(:transaction, invoice: @invoice_5, result: 'success')
-    create(:transaction, invoice: @invoice_6, result: 'success')
-    create(:transaction, invoice: @invoice_7, result: 'success')
-    create(:transaction, invoice: @invoice_8, result: 'success')
-    create(:transaction, invoice: @invoice_9, result: 'success')
-    create(:transaction, invoice: @invoice_10, result: 'success')
-    create(:transaction, invoice: @invoice_11, result: 'success')
-    create(:transaction, invoice: @invoice_12, result: 'success')
-    create(:transaction, invoice: @invoice_13, result: 'success')
-    create(:transaction, invoice: @invoice_14, result: 'success')
+    @merch1 = create(:merchant)
+    @cust1 = create(:customer)
+    @cust2 = create(:customer)
+    @cust3 = create(:customer)
+    @cust4 = create(:customer)
+    @cust5 = create(:customer)
+    @cust6 = create(:customer)
+    @item1 = create(:item, merchant: @merch1, unit_price: 100)
+    @item2 = create(:item, merchant: @merch1, unit_price: 200)
+    @item3 = create(:item, merchant: @merch1, unit_price: 500)
+    @item4 = create(:item, merchant: @merch1, unit_price: 600)
+    @item5 = create(:item, merchant: @merch1, unit_price: 1000)
+    @item6 = create(:item, merchant: @merch1, unit_price: 2000)
+    @item7 = create(:item, merchant: @merch1, unit_price: 5000)
+    @invoice1 = create(:invoice, customer: @cust1)
+    @invoice2 = create(:invoice, customer: @cust2)
+    @invoice3 = create(:invoice, customer: @cust3)
+    @invoice4 = create(:invoice, customer: @cust4)
+    @invoice5 = create(:invoice, customer: @cust5)
+    @invoice6 = create(:invoice, customer: @cust6)
+    @invoice7 = create(:invoice, customer: @cust6)
+    @invoice8 = create(:invoice, customer: @cust6)
+    @invoice9 = create(:invoice, customer: @cust6)
+    @invoice10 = create(:invoice, customer: @cust6)
+    @invoice11 = create(:invoice, customer: @cust6)
+    @invoice12 = create(:invoice, customer: @cust6)
+    @invoice13 = create(:invoice, customer: @cust6)
+    @invoice14 = create(:invoice, customer: @cust6)
+    InvoiceItem.create(item: @item1, invoice: @invoice1, quantity: 1, unit_price: @item1.unit_price)
+    InvoiceItem.create(item: @item1, invoice: @invoice2, quantity: 2, unit_price: @item1.unit_price)
+    InvoiceItem.create(item: @item2, invoice: @invoice4, quantity: 4, unit_price: @item2.unit_price)
+    InvoiceItem.create(item: @item2, invoice: @invoice3, quantity: 3, unit_price: @item2.unit_price)
+    InvoiceItem.create(item: @item3, invoice: @invoice5, quantity: 5, unit_price: @item3.unit_price)
+    InvoiceItem.create(item: @item3, invoice: @invoice6, quantity: 6, unit_price: @item3.unit_price)
+    InvoiceItem.create(item: @item4, invoice: @invoice7, quantity: 7, unit_price: @item4.unit_price)
+    InvoiceItem.create(item: @item4, invoice: @invoice8, quantity: 8, unit_price: @item4.unit_price)
+    InvoiceItem.create(item: @item5, invoice: @invoice9, quantity: 9, unit_price: @item5.unit_price)
+    InvoiceItem.create(item: @item5, invoice: @invoice10, quantity: 10, unit_price: @item5.unit_price)
+    InvoiceItem.create(item: @item6, invoice: @invoice11, quantity: 11, unit_price: @item6.unit_price)
+    InvoiceItem.create(item: @item6, invoice: @invoice12, quantity: 12, unit_price: @item6.unit_price)
+    InvoiceItem.create(item: @item7, invoice: @invoice13, quantity: 13, unit_price: @item7.unit_price)
+    InvoiceItem.create(item: @item7, invoice: @invoice14, quantity: 14, unit_price: @item7.unit_price)
+    create(:transaction, invoice: @invoice1, result: 'success')
+    create(:transaction, invoice: @invoice1, result: 'success')
+    create(:transaction, invoice: @invoice1, result: 'success')
+    create(:transaction, invoice: @invoice2, result: 'success')
+    create(:transaction, invoice: @invoice2, result: 'success')
+    create(:transaction, invoice: @invoice3, result: 'success')
+    create(:transaction, invoice: @invoice3, result: 'success')
+    create(:transaction, invoice: @invoice4, result: 'success')
+    create(:transaction, invoice: @invoice4, result: 'success')
+    create(:transaction, invoice: @invoice4, result: 'success')
+    create(:transaction, invoice: @invoice5, result: 'success')
+    create(:transaction, invoice: @invoice5, result: 'success')
+    create(:transaction, invoice: @invoice6, result: 'success')
+    create(:transaction, invoice: @invoice7, result: 'success')
+    create(:transaction, invoice: @invoice8, result: 'success')
+    create(:transaction, invoice: @invoice9, result: 'success')
+    create(:transaction, invoice: @invoice10, result: 'success')
+    create(:transaction, invoice: @invoice11, result: 'success')
+    create(:transaction, invoice: @invoice12, result: 'success')
+    create(:transaction, invoice: @invoice13, result: 'success')
+    create(:transaction, invoice: @invoice14, result: 'success')
 
-    visit "/merchants/#{@merch_1.id}/items"
+    visit "/merchants/#{@merch1.id}/items"
 
-    expect(page).to have_link(@item_7.name)
-    expect(page).to have_link(@item_6.name)
-    expect(page).to have_link(@item_5.name)
-    expect(page).to have_link(@item_4.name)
-    expect(page).to have_link(@item_3.name)
 
-    within("#popular") do
-      click_link "#{@item_4.name}"
+    expect(page).to have_link(@item7.name)
+    expect(page).to have_link(@item6.name)
+    expect(page).to have_link(@item5.name)
+    expect(page).to have_link(@item4.name)
+    expect(page).to have_link(@item3.name)
+
+    within("#popular-#{@item4.id}") do
+      click_link "#{@item4.name}"
     end
 
-    expect(current_path).to eq("/merchants/#{@merch_1.id}/items/#{@item_4.id}")
+    expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item4.id}")
   end
 
 end
