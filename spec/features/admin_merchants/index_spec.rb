@@ -48,6 +48,6 @@ describe 'Admin Merchants Index' do
   it 'can enable or disable with botton click' do
     visit admin_merchants_path
 
-    expect(page).to 
+    expect(page).to
   end
 end
