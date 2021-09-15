@@ -19,6 +19,11 @@ class Item < ApplicationRecord
     where(enable: 1)
   end
 
+  # def all_merchants_invoices(merchant_id)
+  #   require "pry"; binding.pry
+  #   invoices.where("merchant_id = ?", merchant_id)
+  # end
+
   def ordered_invoices
     invoices.order(:created_at)
   end
