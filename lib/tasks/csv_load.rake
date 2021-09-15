@@ -61,7 +61,14 @@ namespace :csv_load do
     end
   end
 
+  desc "Reset all Primary Keys"
+  task reset_pks: :environment do
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
+    end
+  end
+
   desc 'Runs all other tasks'
-  task :all => ["csv_load:customers", "csv_load:invoices", "csv_load:merchants", "csv_load:items",  "csv_load:transactions", "csv_load:invoice_items"] do
+    task :all => ["csv_load:customers", "csv_load:invoices", "csv_load:merchants", "csv_load:items",  "csv_load:transactions", "csv_load:invoice_items"] do
   end
 end

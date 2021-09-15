@@ -5,6 +5,5 @@ class Transaction < ApplicationRecord
   validates_presence_of :id
   belongs_to :invoice
 
-  def create
-  end
+  
 end
