@@ -24,6 +24,7 @@ RSpec.describe 'Admin Merchant Index' do
       expect(page).to have_link('List of Invoices')
     end
 
+
     xit 'can display the names of the top 5 customers' do
       visit '/admin'
     end
