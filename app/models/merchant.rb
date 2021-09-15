@@ -2,16 +2,16 @@ class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
 
   def favorite_customers
-    items.select('customers.*, COUNT(transactions.result) as purchases')
-         .joins(invoices: [:customer, :transactions])
-         .where('transactions.result = ?', 0)
-         .group('customers.id')
-         .order(purchases: :desc)
-         .limit(5)
+    Customer.select("customers.*, COUNT(transactions.result) as purchases")
+      .joins(invoices: [:items, :transactions])
+      .merge(Transaction.purchase)
+      .group(:id)
+      .order(purchases: :desc)
+      .limit(5)
+  end
 
-    # Customer
-    #   .select("customers.*, COUNT(transactions.result) as purchases")
-    #   .joins(invoices: [:items, :transactions])
-    #   .group(:id)
+  def items_ready_to_ship
+    items.joins(:invoice_items)
+        .where.not('invoice_items.status = ?', 2)
   end
 end
