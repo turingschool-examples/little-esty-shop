@@ -13,4 +13,8 @@ class Invoice < ApplicationRecord
   def created_at_formatted
     created_at.strftime("%A, %B %d, %Y")
   end
+
+  def created_at_short_format
+    created_at.strftime("%x")
+  end
 end

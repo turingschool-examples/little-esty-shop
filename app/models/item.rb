@@ -22,4 +22,11 @@ class Item < ApplicationRecord
   def ordered_invoices
     invoices.order(:created_at)
   end
+
+  def best_day
+require 'pry'; binding.pry
+    invoices.group('DATE(created_at)').count
+    .sum()
+    .limit(1)
+  end
 end
