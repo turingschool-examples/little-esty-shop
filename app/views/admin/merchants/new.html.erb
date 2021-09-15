@@ -1,0 +1,11 @@
+<%= form_with url: "/admin/merchants", method: :post, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name  %>
+  <%= f.label :id %>
+  <%= f.number_field :id  %>
+  <%= f.label :created_at %>
+  <%= f.text_field :created_at  %>
+  <%= f.label :updated_at %>
+  <%= f.text_field :updated_at  %>
+  <%= f.submit "Submit" %>
+<%end %>

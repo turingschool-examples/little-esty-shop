@@ -22,4 +22,10 @@ RSpec.describe 'admin merchants index page' do
     click_on(@merchant_2.name)
     expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}")
   end
+
+  it 'has a link for new merchant' do
+    visit '/admin/merchants'
+    click_on("New Merchant")
+    expect(current_path).to eq("/admin/merchants/new")
+  end
 end
