@@ -6,7 +6,7 @@ describe 'Admin Merchants Show' do
     @merchant2 = Merchant.create!(name: 'The Rock', created_at: "2012-03-27 14:54:09", updated_at: "2012-03-27 14:54:09")
   end
 
-  it 'lists names of all Merchants' do
+  it 'links to AdminMerchant Show page w/Merchant name' do
     visit admin_merchants_path
 
     click_link 'Jason Momoa'
