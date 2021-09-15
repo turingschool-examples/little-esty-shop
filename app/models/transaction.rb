@@ -5,4 +5,6 @@ class Transaction < ApplicationRecord
     success: 0,
     failed: 1
   }
+
+  scope :purchase, -> { where(result: 0) }
 end

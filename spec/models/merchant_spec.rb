@@ -15,13 +15,17 @@ RSpec.describe Merchant, type: :model do
       @cust5 = create(:customer)
       @cust6 = create(:customer)
       @item1 = create(:item, merchant: @merch1)
+      @item2 = create(:item, merchant: @merch1)
+      @item3 = create(:item, merchant: @merch1)
       @invoice1 = create(:invoice, customer: @cust1)
       @invoice2 = create(:invoice, customer: @cust2)
       @invoice3 = create(:invoice, customer: @cust3)
       @invoice4 = create(:invoice, customer: @cust4)
       @invoice5 = create(:invoice, customer: @cust5)
       @invoice6 = create(:invoice, customer: @cust6)
-      InvoiceItem.create(item: @item1, invoice: @invoice1)
+      InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1)
+      InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
+      InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
       InvoiceItem.create(item: @item1, invoice: @invoice2)
       InvoiceItem.create(item: @item1, invoice: @invoice3)
       InvoiceItem.create(item: @item1, invoice: @invoice4)
@@ -46,10 +50,11 @@ RSpec.describe Merchant, type: :model do
     end
 
     it '#favorite_customers' do
-      expected = @merch1.favorite_customers.map do |customer|
-        customer.first_name
-      end
-      expect(expected).to eq([@cust6.first_name, @cust4.first_name, @cust2.first_name, @cust3.first_name, @cust5.first_name])
+      expect(@merch1.favorite_customers).to eq([@cust2, @cust6, @cust4, @cust3, @cust5])
+    end
+
+    it '#items_ready_to_ship' do
+      expect(@merch1.items_ready_to_ship).to eq([@item1, @item2, @item3])
     end
 
     it '#top_five_items' do

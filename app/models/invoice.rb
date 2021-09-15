@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
     cancelled: 1,
     completed: 2,
   }
+
+  def created_at_formatted
+    created_at.strftime("%A, %B %d, %Y")
+  end
 end
