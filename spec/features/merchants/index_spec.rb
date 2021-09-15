@@ -21,12 +21,12 @@ RSpec.describe 'Merchant Dashboard' do
 
         it 'can display link to merchants Items' do
             click_link "Items"
-            expect(current_path).to eq(merchant_item_path(@merchant))
+            expect(current_path).to eq(merchant_items_path(@merchant))
         end
 
         it 'can display link to merchants items' do
             click_link "Invoices"
-            expect(current_path).to eq("ty")
+            expect(current_path).to eq(merchant_invoices_path(@merchant))
         end
     end
 end
