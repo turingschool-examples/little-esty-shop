@@ -1,0 +1,9 @@
+<h1>Admin Merchants Edit</h1>
+
+<div class='container'>
+  <%= form_with model: [:admin, @merchant], method: :patch, local: true do |f| %>
+    <%= f.label :name %><br/>
+    <%= f.text_field :name %><br/>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
