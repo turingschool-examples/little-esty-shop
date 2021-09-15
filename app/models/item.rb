@@ -24,9 +24,15 @@ class Item < ApplicationRecord
   end
 
   def best_day
-require 'pry'; binding.pry
-    invoices.group('DATE(created_at)').count
-    .sum()
-    .limit(1)
+    invoices
+      .select("DATE_TRUNC('day', invoices.created_at) as created_at, SUM(invoice_items.quantity * invoice_items.unit_price) as sales")
+      .group(:created_at)
+      .order(sales: :desc, created_at: :desc)
+      .limit(1)
+      .first
+  end
+
+  def revenue
+    invoice_items.sum('quantity * unit_price')
   end
 end

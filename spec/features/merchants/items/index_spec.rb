@@ -237,8 +237,24 @@ RSpec.describe 'merchants items index page' do
     end
 # 7 6 5 4 3
     it 'top items best day' do
-      within("#popular-#{@item1.id}") do
-        save_and_open_page
+      save_and_open_page
+      within("#popular-#{@item7.id}") do
+        expect(page).to have_content("Top selling date for #{@item7.name} was #{@invoice14.created_at_short_format}")
+      end
+
+      within("#popular-#{@item6.id}") do
+        expect(page).to have_content("Top selling date for #{@item6.name} was #{@invoice12.created_at_short_format}")
+      end
+
+      within("#popular-#{@item5.id}") do
+        expect(page).to have_content("Top selling date for #{@item5.name} was #{@invoice14.created_at_short_format}")
+      end
+
+      within("#popular-#{@item4.id}") do
+        expect(page).to have_content("Top selling date for #{@item4.name} was #{@invoice8.created_at_short_format}")
+      end
+
+      within("#popular-#{@item3.id}") do
         expect(page).to have_content("Top selling date for #{@item3.name} was #{@invoice6.created_at_short_format}")
       end
     end

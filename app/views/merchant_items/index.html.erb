@@ -5,8 +5,8 @@
   <ol>
     <% @merchant.top_five_items.each do |item| %>
     <div id="popular-<%= item.id %>">
-          <li><%= link_to item.name, merchant_item_path(id: item.id) %> Revenue: <%= number_to_currency(item.revenue).to_f / 100 %></li>
-          <p>Top selling date for <%= item.name %> was <%= item.best_day %></p>
+          <li><%= link_to item.name, merchant_item_path(id: item.id) %> Revenue: <%= number_to_currency(item.revenue / 100) %></li>
+          <p>Top selling date for <%= item.name %> was <%= item.best_day.created_at_short_format %></p>
     </div>
     <% end %>
   </ol>
