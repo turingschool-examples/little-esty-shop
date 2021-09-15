@@ -62,7 +62,6 @@ describe 'merchant dashboard page' do
   end
 
   it 'shows names of top 5 customers and their successful transactions' do
-
     expect(page).to_not have_content(@cust1.first_name)
 
     within("#customer-#{@cust2.id}") do

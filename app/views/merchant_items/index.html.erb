@@ -1,6 +1,13 @@
 <h1><%= @merchant.name %></h1>
 
 
+  <h3>Most Popular Items</h3>
+  <% @merchant.top_five_items.each do |item| %>
+  <div id="popular-<%= item.id %>">
+    <p><%= link_to item.name, merchant_item_path(id: item.id) %> Revenue: <%= item.revenue %></p>
+  </div>
+  <% end %>
+
 <h3>Enabled Items:</h3>
 <section id="enabled">
   <ul>
