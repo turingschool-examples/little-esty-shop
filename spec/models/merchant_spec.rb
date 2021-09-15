@@ -30,7 +30,6 @@ RSpec.describe Merchant do
       transaction_3 = invoice_3.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_4 = invoice_4.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_5 = invoice_5.transactions.create!(credit_card_number: 123, result: 'success')
-
       #tests for failed/success
       transaction_6 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
       transaction_7 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
@@ -39,22 +38,14 @@ RSpec.describe Merchant do
 
       item = merchant.items.create!(name: 'coffee', description: 'iz cool', unit_price: 5000)
 
-      item.transactions << transaction_1
-      item.transactions << transaction_2
-      item.transactions << transaction_3
-      item.transactions << transaction_4
-      item.transactions << transaction_5
-      item.transactions << transaction_6
-      item.transactions << transaction_7
+      InvoiceItem.create!(item: item, invoice: invoice_1, quantity: 100, unit_price: 100, status: 2)
+      InvoiceItem.create!(item: item, invoice: invoice_2, quantity: 100, unit_price: 100, status: 2)
+      InvoiceItem.create!(item: item, invoice: invoice_3, quantity: 100, unit_price: 100, status: 2)
+      InvoiceItem.create!(item: item, invoice: invoice_4, quantity: 100, unit_price: 100, status: 2)
+      InvoiceItem.create!(item: item, invoice: invoice_5, quantity: 100, unit_price: 100, status: 2)
+      InvoiceItem.create!(item: item, invoice: invoice_6, quantity: 100, unit_price: 100, status: 2)
 
       expect(merchant.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
     end
   end
 end
-
-# As an admin,
-# When I visit the admin dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
