@@ -23,6 +23,10 @@ namespace :csv_load do
     data.each do |line|
       Customer.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE customers_id_seq RESTART WITH #{Customer.maximum(:id) + 1}"
+    )
   end
 
   desc "Load invoices data"
@@ -43,6 +47,10 @@ namespace :csv_load do
 
       Invoice.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE invoices_id_seq RESTART WITH #{Invoice.maximum(:id) + 1}"
+    )
   end
 
   desc "Load transaction data"
@@ -53,6 +61,10 @@ namespace :csv_load do
     data.each do |line|
       Transaction.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE transactions_id_seq RESTART WITH #{Transaction.maximum(:id) + 1}"
+    )
   end
 
   desc "Load merchants data"
@@ -63,6 +75,10 @@ namespace :csv_load do
     data.each do |line|
       Merchant.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE merchants_id_seq RESTART WITH #{Merchant.maximum(:id) + 1}"
+    )
   end
 
   desc "Load items data"
@@ -73,6 +89,10 @@ namespace :csv_load do
     data.each do |line|
       Item.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE items_id_seq RESTART WITH #{Item.maximum(:id) + 1}"
+    )
   end
 
   desc "Load invoice_items data"
@@ -94,5 +114,9 @@ namespace :csv_load do
 
       InvoiceItem.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE invoice_items_id_seq RESTART WITH #{InvoiceItem.maximum(:id) + 1}"
+    )
   end
 end
