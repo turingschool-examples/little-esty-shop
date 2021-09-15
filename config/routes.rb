@@ -5,5 +5,12 @@ Rails.application.routes.draw do
     resources :invoices, controller: :merchant_invoices
   end
 
+  namespace :admin do
+    resources :merchants
+    resources :invoices
+  end
+
+  get '/admin', to: 'admins#index'
+
   get "/merchants/:merchant_id/dashboard", to: "merchants#dashboard"
 end
