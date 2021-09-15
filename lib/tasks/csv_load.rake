@@ -1,6 +1,5 @@
 require 'csv'
 
-
 namespace :csv_load do
   desc "run all load tasks"
   task all: [:destroy_all, :customers, :invoices, :transactions, :merchants, :items, :invoice_items]
