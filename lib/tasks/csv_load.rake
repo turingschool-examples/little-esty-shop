@@ -3,7 +3,17 @@ require 'csv'
 
 namespace :csv_load do
   desc "run all load tasks"
-  task all: [:customers, :invoices, :transactions, :merchants, :items, :invoice_items]
+  task all: [:destroy_all, :customers, :invoices, :transactions, :merchants, :items, :invoice_items]
+
+  desc "destroy_all table items"
+  task destroy_all: :environment do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+    Transaction.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
+  end
 
   desc "Load customer data"
   task customers: :environment do
