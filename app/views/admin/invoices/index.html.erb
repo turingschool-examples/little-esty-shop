@@ -2,7 +2,7 @@
 
 <h3><% @invoices.each do |invoice| %>
   <div id="invoice_link-#<% invoice.id %>" >
-      <li><%= link_to invoice.id, "/admin/invoices/#{invoice.id}" %></li>
+      <li><%= link_to invoice.id, admin_invoice_path(invoice.id) %></li>
   <% end %>
   </div>
 </h3>
