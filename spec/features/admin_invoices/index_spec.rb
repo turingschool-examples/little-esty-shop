@@ -44,4 +44,5 @@ RSpec.describe "Admin Invoices Index Page" do
       end
     end
   end
+  
 end

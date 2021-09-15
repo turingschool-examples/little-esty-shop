@@ -55,10 +55,11 @@ RSpec.describe "Admin Invoices Show Page" do
     xit "displays the items's info on that invoice" do
       visit "/admin/invoices/#{@invoice_1.id}"
 
-      expect(page).to have_content(@invoice_1.items_1.name)
-      expect(page).to have_content(@invoice_1.status)
-      expect(page).to have_content(@invoice_1.created_at)
-      expect(page).to have_content(@invoice_1.updated_at)
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_content(@item_1.quantity)
+      expect(page).to have_content(@item_1.price_sold)
+      expect(page).to have_content(@invoice_item_1.status)
     end
   end
+  
 end

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get '/', to: 'application#welcome'
 
-  resources :merchant, only: [:show]
+  resources :merchants
   resources :admin
 
   namespace :merchants do
@@ -18,4 +18,18 @@ Rails.application.routes.draw do
   # end
   get "/admin/invoices", to: "admin_invoices#index"
   get "/admin/invoices/:id", to: "admin_invoices#show"
+
+  # resources :merchant, only: [:show] do
+  #   resources :dashboard, only: [:index]
+  #   resources :items, except: [:destroy]
+  #   resources :item_status, only: [:update]
+  #   resources :invoices, only: [:index, :show, :update]
+  # end
+  #
+  # namespace :admin do
+  #   resources :dashboard, only: [:index]
+  #   resources :merchants, except: [:destroy]
+  #   resources :merchant_status, only: [:update]
+  #   resources :invoices, except: [:new, :destroy]
+  # end
 end
