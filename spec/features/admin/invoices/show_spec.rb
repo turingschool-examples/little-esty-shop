@@ -8,6 +8,11 @@ before :each do
 
   it 'shows invoice information' do
     visit "/admin/invoices/#{@invoice_1.id}"
+    save_and_open_page
     expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content(@invoice_1.status)
+    expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+    expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
+
   end
 end
