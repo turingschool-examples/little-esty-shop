@@ -24,11 +24,11 @@ class Merchant < ApplicationRecord
          .limit(5)
   end
 
-  def all_invoices
-    require "pry"; binding.pry
-    items.joins(:invoices)
-         .select("invoices.id AS invoice_id, item_id")
-         .group(:invoice_id)
-
-  end
+  # def all_invoices
+  #   require "pry"; binding.pry
+  #   items.joins(:invoices)
+  #        .select("invoices.id AS invoice_id, item_id")
+  #        .group(:invoice_id)
+  #
+  # end
 end
