@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Merchant#dashboard' do
   describe 'dashboard' do
     before(:each) do
-      @merchant_1 = Merchant.create!(name: 'JJ')
+      @merchant_1 = create(:merchant)
+
     end
 #     As a merchant,
 # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
