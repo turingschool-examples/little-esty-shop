@@ -235,9 +235,8 @@ RSpec.describe 'merchants items index page' do
       create(:transaction, invoice: @invoice14, result: 'success')
       visit "/merchants/#{@merch1.id}/items"
     end
-# 7 6 5 4 3
+    
     it 'top items best day' do
-      save_and_open_page
       within("#popular-#{@item7.id}") do
         expect(page).to have_content("Top selling date for #{@item7.name} was #{@invoice14.created_at_short_format}")
       end
