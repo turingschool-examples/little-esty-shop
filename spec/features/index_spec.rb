@@ -11,13 +11,13 @@ RSpec.describe 'Admin Merchant Index' do
   end
 
   describe 'Admin Dashboard' do
-    it 'indicates the page is admin dashboard' do
+    xit 'indicates the page is admin dashboard' do
       visit '/admin'
 
       expect(page).to have_content("Admin Dashboard")
     end
 
-    it 'shows links to merchants index & invoices index' do
+    xit 'shows links to merchants index & invoices index' do
       visit '/admin'
 
       expect(page).to have_link('List of Merchants')
