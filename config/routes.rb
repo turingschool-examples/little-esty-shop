@@ -8,9 +8,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :merchants
     resources :invoices
+    get '/', to: 'dashboard#index'
   end
-
-  get '/admin', to: 'admins#index'
 
   get "/merchants/:merchant_id/dashboard", to: "merchants#dashboard"
 end
