@@ -38,6 +38,6 @@ class Admin::MerchantsController < ApplicationController
 
   private
   def merchant_params
-    params.permit(:name, :id, :created_at, :updated_at)
+    params.permit(:name)
   end
 end
