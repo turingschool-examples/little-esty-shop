@@ -18,4 +18,8 @@ class Item < ApplicationRecord
   def self.disabled_items
     where(enable: 1)
   end
+
+  def ordered_invoices
+    invoices.order(:created_at)
+  end
 end
