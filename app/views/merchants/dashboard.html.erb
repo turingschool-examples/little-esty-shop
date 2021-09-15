@@ -5,9 +5,23 @@
 
 <h2>Favorite Customers</h2>
 <ul>
-  <% @favorite_customers.each do |customer| %>
+  <% @merchant.favorite_customers.each do |customer| %>
     <section id="customer-<%= customer.id %>">
       <li><%= customer.first_name %> <%= customer.last_name %>: <%= customer.purchases %> purchases</li>
+    </section>
+  <% end %>
+</ul>
+
+<h2>Items Ready to Ship</h2>
+<ul>
+  <% @merchant.items_ready_to_ship.each do |item| %>
+    <section id="item-<%= item.id %>">
+      <li><%= item.name %></li>
+        <ul>
+          <% item.invoice_ids.each do |invoice_id| %>
+            <li><%= link_to invoice_id, merchant_invoices_path %></li>
+          <% end %>
+        </ul>
     </section>
   <% end %>
 </ul>
