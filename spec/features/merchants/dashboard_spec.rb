@@ -121,7 +121,7 @@ describe 'merchant dashboard page' do
 
   it 'shows created at date for invoices formatted' do
     within("#item-#{@item1.id}") do
-      expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+      expect(page).to have_content(@invoice1.created_at_formatted)
     end
   end
 end

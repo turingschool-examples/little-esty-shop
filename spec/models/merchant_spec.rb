@@ -14,6 +14,7 @@ RSpec.describe Merchant, type: :model do
       @cust4 = create(:customer)
       @cust5 = create(:customer)
       @cust6 = create(:customer)
+      @cust7 = create(:customer)
       @item1 = create(:item, merchant: @merch1)
       @item2 = create(:item, merchant: @merch1)
       @item3 = create(:item, merchant: @merch1)
@@ -23,6 +24,8 @@ RSpec.describe Merchant, type: :model do
       @invoice4 = create(:invoice, customer: @cust4)
       @invoice5 = create(:invoice, customer: @cust5)
       @invoice6 = create(:invoice, customer: @cust6)
+      @invoice7 = create(:invoice, customer: @cust7)
+      @invoice8 = create(:invoice, customer: @cust7)
       InvoiceItem.create(item: @item1, invoice: @invoice1, status: 1)
       InvoiceItem.create(item: @item2, invoice: @invoice2, status: 1)
       InvoiceItem.create(item: @item3, invoice: @invoice2, status: 1)
@@ -31,6 +34,8 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create(item: @item1, invoice: @invoice4)
       InvoiceItem.create(item: @item1, invoice: @invoice5)
       InvoiceItem.create(item: @item1, invoice: @invoice6)
+      InvoiceItem.create(item: @item2, invoice: @invoice7)
+      InvoiceItem.create(item: @item2, invoice: @invoice8)
       create(:transaction, invoice: @invoice1, result: 'success')
       create(:transaction, invoice: @invoice1, result: 'failed')
       create(:transaction, invoice: @invoice1, result: 'failed')
@@ -57,6 +62,16 @@ RSpec.describe Merchant, type: :model do
       expect(@merch1.items_ready_to_ship).to eq([@item1, @item2, @item3])
     end
 
+    it '#ordered_invoices' do
+      expect(@item2.ordered_invoices).to eq([@invoice2, @invoice7, @invoice8])
+    end
+
+    it '#created_at_formatted' do
+      expect(@invoice1.created_at_formatted).to eq(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+    end
+  end
+
+  describe 'top_five_items' do
     it '#top_five_items' do
       @merch1 = create(:merchant)
       @cust1 = create(:customer)
