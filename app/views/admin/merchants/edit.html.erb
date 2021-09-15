@@ -3,9 +3,5 @@
 <%= f.text_field :name, placeholder: "#{@merchant.name}" %>
 <%= f.label :id %>
 <%= f.number_field :id, placeholder: "#{@merchant.id}"  %>
-<%= f.label :created_at %>
-<%= f.text_field :created_at, placeholder: "#{@merchant.created_at}"  %>
-<%= f.label :updated_at %>
-<%= f.text_field :updated_at, placeholder: "#{@merchant.updated_at}"  %>
 <%= f.submit "Submit" %>
 <%end %>
