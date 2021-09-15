@@ -1,9 +1,18 @@
 require 'csv'
 
-
 namespace :csv_load do
   desc "run all load tasks"
-  task all: [:customers, :invoices, :transactions, :merchants, :items, :invoice_items]
+  task all: [:destroy_all, :customers, :invoices, :transactions, :merchants, :items, :invoice_items]
+
+  desc "destroy_all table items"
+  task destroy_all: :environment do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+    Transaction.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
+  end
 
   desc "Load customer data"
   task customers: :environment do
@@ -13,6 +22,10 @@ namespace :csv_load do
     data.each do |line|
       Customer.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE customers_id_seq RESTART WITH #{Customer.maximum(:id) + 1}"
+    )
   end
 
   desc "Load invoices data"
@@ -33,6 +46,10 @@ namespace :csv_load do
 
       Invoice.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE invoices_id_seq RESTART WITH #{Invoice.maximum(:id) + 1}"
+    )
   end
 
   desc "Load transaction data"
@@ -43,6 +60,10 @@ namespace :csv_load do
     data.each do |line|
       Transaction.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE transactions_id_seq RESTART WITH #{Transaction.maximum(:id) + 1}"
+    )
   end
 
   desc "Load merchants data"
@@ -53,6 +74,10 @@ namespace :csv_load do
     data.each do |line|
       Merchant.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE merchants_id_seq RESTART WITH #{Merchant.maximum(:id) + 1}"
+    )
   end
 
   desc "Load items data"
@@ -63,6 +88,10 @@ namespace :csv_load do
     data.each do |line|
       Item.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE items_id_seq RESTART WITH #{Item.maximum(:id) + 1}"
+    )
   end
 
   desc "Load invoice_items data"
@@ -84,5 +113,9 @@ namespace :csv_load do
 
       InvoiceItem.create!(line.to_hash)
     end
+
+    ActiveRecord::Base.connection.execute(
+      "ALTER SEQUENCE invoice_items_id_seq RESTART WITH #{InvoiceItem.maximum(:id) + 1}"
+    )
   end
 end
