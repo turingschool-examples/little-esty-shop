@@ -232,13 +232,15 @@ RSpec.describe 'merchants items index page' do
 
     visit "/merchants/#{@merch_1.id}/items"
 
+    save_and_open_page
+
     expect(page).to have_link(@item_7.name)
     expect(page).to have_link(@item_6.name)
     expect(page).to have_link(@item_5.name)
     expect(page).to have_link(@item_4.name)
     expect(page).to have_link(@item_3.name)
 
-    within("#popular") do
+    within("#popular-#{@item_4.id}") do
       click_link "#{@item_4.name}"
     end
 
