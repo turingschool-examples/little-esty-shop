@@ -104,6 +104,27 @@ describe 'merchant dashboard page' do
       expect(page).to have_content(@invoice2.id)
     end
   end
+
+  it 'links to invoices' do
+    within("#item-#{@item1.id}") do
+      click_link("#{@invoice1.id}")
+
+      expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+    end
+  end
+
+  it 'shows invoices sorted by created at date' do
+    within("#item-#{@item1.id}") do
+      expect("#{@invoice1.id}").to appear_before("#{@invoice2.id}")
+      expect("#{@invoice2.id}").to appear_before("#{@invoice3.id}")
+    end
+  end
+
+  it 'shows created at date for invoices formatted' do
+    within("#item-#{@item1.id}") do
+      expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+    end
+  end
 end
 
 # save_and_open_page
