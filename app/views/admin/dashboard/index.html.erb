@@ -1,0 +1,13 @@
+<h1>Admin Dashboard</h1>
+
+<ul>
+  <li><%= link_to "Admin Merchants Index", admin_merchants_path %></li>
+  <li><%= link_to "Admin Invoices Index", admin_invoices_path %></li>
+</ul>
+
+<h3>Top 5 Customers</h3>
+<ul>
+  <% @customers.top_five.each do |cust| %>
+    <li><%= cust.f_name %> <%= cust.l_name %> <%= cust.successful %></li><br>
+  <% end %>
+</ul>
