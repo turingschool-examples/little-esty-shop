@@ -1,18 +1,15 @@
 require 'rails_helper'
-# as a merchant,
-# When I visit my merchant items index page ("merchant/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
+
 RSpec.describe 'Merchant Items Index page' do
   context 'When I visit my merchant items index page' do
     before(:each) do
       @merchant_1 = create(:merchant)
-      @item_1 = create(:item, merchant: @merchant_1)
-      @item_2 = create(:item, merchant: @merchant_1)
-      @item_3 = create(:item, merchant: @merchant_1)
+      @item_1     = create(:item, merchant: @merchant_1) # cookies
+      @item_2     = create(:item, merchant: @merchant_1, name: "crackers")
+      @item_3     = create(:item, merchant: @merchant_1, name: "biscuits")
 
-      @merchant_2 = create(:merchant, id: 2)
-      @item_4 = create(:item, merchant: @merchant_2, name: "Watermelon")
+      @merchant_2 = create(:merchant)
+      @item_4     = create(:item, merchant: @merchant_2, name: "watermelon")
 
       visit "/merchants/#{@merchant_1.id}/items"
     end
@@ -26,5 +23,26 @@ RSpec.describe 'Merchant Items Index page' do
     it 'i do not see items for any other merchant' do
       expect(page).to_not have_content(@item_4.name)
     end
+
+    it 'links to the merchant items show page from each item name' do
+      click_link("#{@item_1.name}")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+
+      visit "/merchants/#{@merchant_1.id}/items"
+      click_link("#{@item_2.name}")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
+
+      visit "/merchants/#{@merchant_1.id}/items"
+      click_link("#{@item_3.name}")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_3.id}")
+    end
   end
 end
+
+# When I click on the name of an item from the merchant items index page,
+# Then I am taken to that merchant's item's show page (/merchant/merchant_id/items/item_id)
+
+# And I see all of the item's attributes including:
+# Name
+# Description
+# Current Selling Price
