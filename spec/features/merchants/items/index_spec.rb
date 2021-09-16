@@ -10,6 +10,10 @@ RSpec.describe 'Merchant Items Index page' do
       @item_1 = create(:item, merchant: @merchant_1)
       @item_2 = create(:item, merchant: @merchant_1)
       @item_3 = create(:item, merchant: @merchant_1)
+
+      @merchant_2 = create(:merchant, id: 2)
+      @item_4 = create(:item, merchant: @merchant_2, name: "Watermelon")
+
       visit "/merchants/#{@merchant_1.id}/items"
     end
 
@@ -19,8 +23,8 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to have_content(@item_3.name)
     end
 
-    xit 'i do not see items for any other merchant' do
-
+    it 'i do not see items for any other merchant' do
+      expect(page).to_not have_content(@item_4.name)
     end
   end
 end
