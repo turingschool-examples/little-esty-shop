@@ -17,6 +17,7 @@ RSpec.describe Merchant do
       customer_4 = Customer.create!(first_name: 'Harry', last_name: 'Langnif')
       customer_5 = Customer.create!(first_name: 'Bill', last_name: 'Barry')
       customer_6 = Customer.create!(first_name: 'Ted', last_name: 'Staros')
+      customer_7 = Customer.create!(first_name: 'JJ', last_name: 'I dont know her last name')
 
       invoice_1 = customer_1.invoices.create!(status: 2)
       invoice_2 = customer_2.invoices.create!(status: 2)
