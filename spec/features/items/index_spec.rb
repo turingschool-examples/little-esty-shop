@@ -20,8 +20,8 @@ RSpec.describe 'Merchant Items Index Page' do
     item_2 = merchant.items.create!(name: "Pants", description: "Black pants", unit_price: 50)
 
     visit (merchant_items_path(merchant))
-    click_on "Shirt"
+    click_on "#{item_1.name}"
 
-    expect(current_path).to eq(merchant_item_path(item_1))
+    expect(current_path).to eq(merchant_item_path(merchant, item_1))
   end
 end
