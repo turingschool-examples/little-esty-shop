@@ -38,11 +38,3 @@ RSpec.describe 'Merchant Items Index page' do
     end
   end
 end
-
-# When I click on the name of an item from the merchant items index page,
-# Then I am taken to that merchant's item's show page (/merchant/merchant_id/items/item_id)
-
-# And I see all of the item's attributes including:
-# Name
-# Description
-# Current Selling Price
