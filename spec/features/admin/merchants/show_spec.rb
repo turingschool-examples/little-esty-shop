@@ -24,6 +24,6 @@ RSpec.describe 'admin merchants show page' do
 
     click_link("Edit #{merchant.name}")
 
-    expect(current_path).to eq(admin_merchant_path(merchant))
+    expect(current_path).to eq(edit_admin_merchant_path(merchant))
   end
 end
