@@ -19,7 +19,7 @@ RSpec.describe "merchant items index page" do
     expect(page).to_not have_content(@item_4.name)
 
     visit merchant_items_path(@merchant_2)
-    save_and_open_page
+
     expect(page).to have_content(@item_3.name)
     expect(page).to have_content(@item_4.name)
     expect(page).to_not have_content(@item_1.name)
