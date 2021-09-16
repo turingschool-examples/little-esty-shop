@@ -3,4 +3,8 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
+
+  def five_best_customers
+    
+  end
 end
