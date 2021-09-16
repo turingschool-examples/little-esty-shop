@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Merchant#dashboard' do
   describe 'dashboard' do
     before(:each) do
-      @merchant_1 = Merchant.create!(name: 'JJ')
+      @merchant_1 = create(:merchant)
+
     end
 #     As a merchant,
 # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
@@ -12,6 +13,17 @@ RSpec.describe 'Merchant#dashboard' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
       expect(page).to have_content(@merchant_1.name)
+    end
+
+    it "lists an link to the items and invoices index" do
+      # visit "/merchants/#{@merchant_1.id}/dashboard"
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      click_link 'Items Index'
+
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+
+
     end
   end
 end
