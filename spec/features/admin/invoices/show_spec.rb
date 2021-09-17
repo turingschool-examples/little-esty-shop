@@ -3,19 +3,18 @@ require "rails_helper"
 RSpec.describe 'admin show page' do
   before(:each) do
     @customer = create(:customer)
-    @invoice_1 = create(:invoice, customer: @customer)
+    @invoice_1 = create(:invoice, customer: @customer, created_at: 'Monday, July 18, 2019')
   end
 
   it 'shows relevant invoice information' do
-    allow(@invoice_1).to receive(:created_at).and_return('Monday, July 18, 2019')
+    require "pry"; binding.pry
     visit admin_invoice_path(@invoice_1)
 
     within('#invoice-information') do
-      expect(page).to have_contet(@invoice_1.id)
-      expect(page).to have_contet(@invoice_1.status)
-      expect(page).to have_contet(@invoice_1.created_at)
-      expect(page).to have_contet(customer.first_name)
-      expect(page).to have_contet(customer.last_name)
+      expect(page).to have_content(@invoice_1.id)
+      expect(page).to have_content(@invoice_1.status)
+      expect(page).to have_content(@invoice_1.created_at)
+      expect(page).to have_content("#{customer.first_name} #{customer.last_name}")
     end
 
   end
