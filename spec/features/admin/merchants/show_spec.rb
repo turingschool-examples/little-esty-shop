@@ -18,9 +18,9 @@ RSpec.describe 'admin merchants show page', type: :feature do
   it 'has update link' do
     visit "/admin/merchants/#{@merchant_1.id}"
 
-    expect(page).to have_button("Edit #{@merchant_1.name}")
-    expect(page).to_not have_button("Edit #{@merchant_2.name}")
-    expect(page).to_not have_button("Edit #{@merchant_3.name}")
+    expect(page).to have_link("Edit #{@merchant_1.name}")
+    expect(page).to_not have_link("Edit #{@merchant_2.name}")
+    expect(page).to_not have_link("Edit #{@merchant_3.name}")
 
     click_on "Edit #{@merchant_1.name}"
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
