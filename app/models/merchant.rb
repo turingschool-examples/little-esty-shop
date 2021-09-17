@@ -5,6 +5,6 @@ class Merchant < ApplicationRecord
 
 
   def five_best_customers
-    
+
   end
 end

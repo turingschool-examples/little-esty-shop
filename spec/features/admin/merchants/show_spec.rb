@@ -14,4 +14,16 @@ RSpec.describe 'admin merchants show page' do
 
     expect(page).to have_content(merchant_1.name)
   end
+
+  it 'links to edit page' do
+    merchant = create(:merchant)
+
+    visit admin_merchant_path(merchant)
+
+    expect(page).to have_link("Edit #{merchant.name}")
+
+    click_link("Edit #{merchant.name}")
+
+    expect(current_path).to eq(edit_admin_merchant_path(merchant))
+  end
 end
