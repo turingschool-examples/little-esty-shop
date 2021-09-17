@@ -12,4 +12,7 @@ class Invoice < ApplicationRecord
   def customer_full_name
     "#{customer.full_name}"
   end
+  def total_revenue
+    items.sum('invoice_items.quantity * invoice_items.unit_price')
+  end
 end
