@@ -5,7 +5,7 @@ RSpec.describe 'admin dashboard page' do
     @customer = create(:customer)
     @invoice_1 = create(:invoice, customer: @customer)
     @invoice_2 = create(:invoice, customer: @customer)
-    @invoice_3 = create(:invoice, customer: @customer)
+    @invoice_3 = create(:invoice, customer: @customer, created_at: Date.yesterday)
     @merchant = create(:merchant)
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
@@ -39,13 +39,6 @@ RSpec.describe 'admin dashboard page' do
     expect(current_path).to eq('/admin/invoices')
   end
 
-#   As an admin,
-# When I visit the admin dashboard
-# Then I see a section for "Incomplete Invoices"
-# In that section I see a list of the ids of all invoices
-# That have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
-
   it "has a section for incomplete invoices and a list of the ids of the invoices that have not been shipped and links them to the admin show page" do
     visit '/admin/dashboard'
 
@@ -62,4 +55,18 @@ RSpec.describe 'admin dashboard page' do
     click_on "#{@invoice_2.id}"
     expect(current_path).to eq(admin_invoice_path(@invoice_2))
   end
+
+  it 'sorts incomplete invoices by oldest first' do
+    visit '/admin/dashboard'
+
+
+    expect("#{@invoice_3.id}").to appear_before("#{@invoice_2.id}")
+
+  end
+
+
+#   As an admin,
+# When I visit the admin dashboard
+# In the section for "Incomplete Invoices",
+# Next to each invoice id I see the date that the invoice was created
 end
