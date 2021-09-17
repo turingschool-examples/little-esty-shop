@@ -6,6 +6,9 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
+  def self.incomplete_invoices
+    require "pry"; binding.pry
+  end
 
   enum status: {
     "in progress": 0,
@@ -13,4 +16,5 @@ class Invoice < ApplicationRecord
     "completed": 2
   }
 
+Invoice.joins(:invoice_items).where("NOT invoice_items.status = 3")
 end

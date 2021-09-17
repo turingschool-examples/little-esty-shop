@@ -12,4 +12,7 @@ class InvoiceItem < ApplicationRecord
     shipped: 2
   }
 
+  def self.not_shipped
+    InvoiceItem.where(status: [0,1])
+  end
 end
