@@ -1,5 +1,12 @@
 <% @merchant.items.each do |item| %>
   <ul>
-    <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></li>
+    <li id='item-<%= item.id %>'>
+      <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <% if item.disabled? %>
+        <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", params: {enable: true}, method: :patch %>
+      <% else %>
+        <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", params: {disable: true}, method: :patch %>
+      <% end %>
+    </li>
   </ul>
 <% end %>

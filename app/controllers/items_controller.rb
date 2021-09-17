@@ -9,9 +9,14 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-    item.update(item_params)
-    flash[:success] = "#{item.name} has been successfully updated!"
-    redirect_to merchant_item_path
+    if params[:enable].nil? && params[:disable].nil?
+      item.update(item_params)
+      flash[:success] = "#{item.name} has been successfully updated!"
+      redirect_to merchant_item_path
+    else
+      item.update_status!(params[:enable], params[:disable])
+      redirect_to merchant_items_path
+    end
   end
 
   private

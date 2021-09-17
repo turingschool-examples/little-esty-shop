@@ -5,7 +5,7 @@ RSpec.describe 'Merchant Items Index page' do
     before(:each) do
       @merchant_1 = create(:merchant)
       @item_1     = create(:item, merchant: @merchant_1) # cookies
-      @item_2     = create(:item, merchant: @merchant_1, name: "crackers")
+      @item_2     = create(:item, merchant: @merchant_1, name: "crackers", status: "Enabled")
       @item_3     = create(:item, merchant: @merchant_1, name: "biscuits")
 
       @merchant_2 = create(:merchant)
@@ -36,5 +36,35 @@ RSpec.describe 'Merchant Items Index page' do
       click_link("#{@item_3.name}")
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_3.id}")
     end
+
+    it 'has a button for enable when item is disabled' do
+      within "#item-#{@item_1.id}" do
+        expect(page).to     have_button('Enable')
+        expect(page).to_not have_button('Disable')
+
+        click_button('Enable')
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+      end
+    end
+
+    it 'has a button for disable when item is enabled' do
+      within "#item-#{@item_2.id}" do
+        expect(page).to     have_button('Disable')
+        expect(page).to_not have_button('Enable')
+
+        click_button('Disable')
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+      end
+    end
   end
 end
+
+
+# Merchant Item Disable/Enable
+#
+# As a merchant
+# When I visit my items index page
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed
