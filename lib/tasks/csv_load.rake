@@ -68,18 +68,18 @@ namespace :csv_load do
     end
   end
 
-  desc "destroy all" do
-    task destroy_all: :environment do
-      Merchant.destroy_all
-      Customer.destroy_all
-      Transaction.destroy_all
-      Item.destroy_all
-      Invoice.destroy_all
-      InvoiceItem.destroy_all
-    end
-  end
+  # desc "destroy all" do
+  #   task destroy_all: :environment do
+  #     Merchant.destroy_all
+  #     Customer.destroy_all
+  #     Transaction.destroy_all
+  #     Item.destroy_all
+  #     Invoice.destroy_all
+  #     InvoiceItem.destroy_all
+  #   end
+  # end
 
   desc 'Runs all other tasks'
-    task :all => ["csv_load:destroy_all","csv_load:customers", "csv_load:invoices", "csv_load:merchants", "csv_load:items",  "csv_load:transactions", "csv_load:invoice_items", "csv_load:reset_pks"] do
+    task :all => ["csv_load:customers", "csv_load:invoices", "csv_load:merchants", "csv_load:items",  "csv_load:transactions", "csv_load:invoice_items", "csv_load:reset_pks"] do
   end
 end
