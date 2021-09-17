@@ -20,12 +20,8 @@ RSpec.describe 'admin merchants edit page' do
 
   it 'has a flash message for incomplete update form' do
     visit "/admin/merchants/#{@merchant_1.id}/edit"
-    fill_in :name, with: "Bob Johnson"
-    fill_in :id, with: "#{@merchant_1.id}"
-    fill_in :created_at, with: "#{@merchant_1.created_at}"
     click_on("Submit")
-    #will need to update error 
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
-    expect(page).to have_content("Error: Updated at can't be blank")
+    expect(page).to have_content("Error: Name can't be blank")
   end
 end
