@@ -9,9 +9,14 @@ RSpec.describe 'Merchant Item Show page' do
     end
 
     it 'displays the items Name, Description, Current Selling Price' do
-      expect(page).to have_content("Name: #{@item.name}")
+      expect(page).to have_content("#{@item.name}")
       expect(page).to have_content("Description: #{@item.description}")
       expect(page).to have_content("Current Selling Price: #{@item.unit_price}")
+    end
+
+    it 'links to the edit item page' do
+      click_link("Update Item")
+      expect(current_path).to eq("/merchants/#{@item.merchant.id}/items/#{@item.id}/edit")
     end
   end
 end
