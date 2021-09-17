@@ -16,6 +16,8 @@ class Invoice < ApplicationRecord
     "completed": 2
   }
 
-# Invoice.joins(:invoice_items).where("NOT invoice_items.status = 3")
+  def date
+    created_at.strftime("%A, %B %e, %Y")
+  end
 
 end
