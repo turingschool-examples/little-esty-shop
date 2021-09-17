@@ -3,8 +3,12 @@ class Item < ApplicationRecord
   has_many   :invoice_items, dependent: :destroy
   has_many   :invoices, through: :invoice_items
 
-  def disabled?
-    status == 'Disabled'
+  def self.enabled
+    where(status: "Enabled")
+  end
+
+  def self.disabled
+    where(status: "Disabled")
   end
 
   def update_status!(enable, disable)
@@ -15,3 +19,8 @@ class Item < ApplicationRecord
     end
   end
 end
+
+
+# def disabled?
+#   status == 'Disabled'
+# end
