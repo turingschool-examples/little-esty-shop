@@ -2,3 +2,9 @@
 
 <%= link_to 'Merchants', admin_merchants_path %>
 <%= link_to 'Invoices', admin_invoices_path %>
+
+<section id='incomplete-invoices'>
+  <% @incomplete_invoices.each do |invoice| %>
+    <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %> 
+  <% end %>
+</section>
