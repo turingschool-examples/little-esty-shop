@@ -4,6 +4,7 @@ namespace :csv_load do
     path = "./db/data/customers.csv"
     file_data = File.read(path)
     csv = CSV.parse(file_data, :headers => true)
+    Customer.destroy_all
 
     csv.each do |row|
       Customer.create!(row.to_hash)
@@ -14,6 +15,7 @@ namespace :csv_load do
     path = "./db/data/invoice_items.csv"
     file_data = File.read(path)
     csv = CSV.parse(file_data, :headers => true)
+    InvoiceItem.destroy_all
 
     csv.each do |row|
       InvoiceItem.create!(row.to_hash)
@@ -24,6 +26,7 @@ namespace :csv_load do
     path = "./db/data/invoices.csv"
     file_data = File.read(path)
     csv = CSV.parse(file_data, :headers => true)
+    Invoice.destroy_all
 
     csv.each do |row|
       Invoice.create!(row.to_hash)
@@ -35,6 +38,7 @@ namespace :csv_load do
     path = "./db/data/merchants.csv"
     file_data = File.read(path)
     csv = CSV.parse(file_data, :headers => true)
+    Merchant.destroy_all
 
     csv.each do |row|
       Merchant.create!(row.to_hash)
@@ -45,6 +49,7 @@ namespace :csv_load do
     path = "./db/data/items.csv"
     file_data = File.read(path)
     csv = CSV.parse(file_data, :headers => true)
+    Item.destroy_all
 
     csv.each do |row|
       Item.create!(row.to_hash)
@@ -55,6 +60,7 @@ namespace :csv_load do
     path = "./db/data/transactions.csv"
     file_data = File.read(path)
     csv = CSV.parse(file_data, :headers => true)
+    Transaction.destroy_all
 
     csv.each do |row|
       Transaction.create!(row.to_hash)
