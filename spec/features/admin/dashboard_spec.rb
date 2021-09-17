@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe 'admin dashboard page' do
+  before(:each) do
+    @customer = create(:customer)
+    @invoice_1 = create(:invoice, customer: @customer)
+    @invoice_2 = create(:invoice, customer: @customer)
+    @invoice_3 = create(:invoice, customer: @customer)
+    @merchant = create(:merchant)
+    @item_1 = create(:item, merchant: @merchant)
+    @item_2 = create(:item, merchant: @merchant)
+    @invoice_item_1 = create(:invoice_item, item: @item_1, status: 'shipped', invoice: @invoice_1)
+    @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2)
+    @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3)
+
+  end
 
   it "has a header" do
 
@@ -28,14 +41,25 @@ RSpec.describe 'admin dashboard page' do
 
 #   As an admin,
 # When I visit the admin dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
+# Then I see a section for "Incomplete Invoices"
+# In that section I see a list of the ids of all invoices
+# That have items that have not yet been shipped
+# And each invoice id links to that invoice's admin show page
 
-  it "shows the top 5 customers" do
+  it "has a section for incomplete invoices and a list of the ids of the invoices that have not been shipped and links them to the admin show page" do
     visit '/admin/dashboard'
 
+    expect(page).to have_content("Incomplete Invoices")
+    within("#incomplete-invoices") do
+      expect(page).to have_content(@invoice_2.id)
+      expect(page).to have_content(@invoice_3.id)
 
+      expect(page).to have_link("#{@invoice_2.id}")
+      expect(page).to have_link("#{@invoice_3.id}")
+      expect(page).not_to have_link("#{@invoice_1.id}")
+    end
+
+    click_on "#{@invoice_2.id}"
+    expect(current_path).to eq(admin_invoice_path(@invoice_2))
   end
 end

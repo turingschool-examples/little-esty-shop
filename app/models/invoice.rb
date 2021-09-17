@@ -6,6 +6,9 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
+  def self.incomplete_invoices
+    Invoice.joins(:invoice_items).where(invoice_items: {status: [0,1]})
+  end
 
   enum status: {
     "in progress": 0,
@@ -16,4 +19,5 @@ class Invoice < ApplicationRecord
   def date
     created_at.strftime("%A, %B %e, %Y")
   end
+
 end
