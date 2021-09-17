@@ -25,4 +25,18 @@ RSpec.describe "merchant items index page" do
     expect(page).to_not have_content(@item_1.name)
     expect(page).to_not have_content(@item_2.name)
   end
+
+#   As a merchant
+# When I visit my items index page
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed
+
+  it 'has an enable disable status button' do
+    visit merchant_items_path(@merchant_1)
+
+    click_button("Enable")
+
+  end
 end
