@@ -31,6 +31,7 @@ RSpec.describe Invoice do
     expect(@invoice_1.date).to eq("Friday, September 17, 2021")
   end
 
+
   before(:each) do
     @customer = create(:customer)
     @invoice_1 = create(:invoice, customer: @customer)
@@ -51,12 +52,10 @@ RSpec.describe Invoice do
   end
 
   describe 'instance methods' do
-    it 'formats date' do
-      expect(@invoice_3.date).to eq('Friday, September 17, 2021')
-    end
-
     it 'formats customer name' do
-      expect(@invoice_3.customer_name).to eq("#{@customer.first_name} #{@customer.last_name}")
+      require "pry"; binding.pry
+      expect(@invoice_1.customer_name).to eq("#{@customer.first_name} #{@customer.last_name}")
     end
   end
+
 end
