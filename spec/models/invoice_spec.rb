@@ -37,7 +37,7 @@ RSpec.describe Invoice do
     end
 
     it 'formats customer name' do
-      expect(@invoice_3.customer_name).to eq("#{customer.first_name} #{customer.last_name}")
+      expect(@invoice_3.customer_name).to eq("#{@customer.first_name} #{@customer.last_name}")
     end
   end
 end
