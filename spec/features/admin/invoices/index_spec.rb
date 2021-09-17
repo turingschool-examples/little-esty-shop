@@ -22,7 +22,7 @@ RSpec.describe 'admin invoice index page' do
 
     click_link @invoice_1.id
 
-    expect(current_path).to eq(admin_invoice_path(@invoic_1))
+    expect(current_path).to eq(admin_invoice_path(@invoice_1))
   end
 
 
