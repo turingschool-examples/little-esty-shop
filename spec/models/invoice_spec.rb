@@ -23,6 +23,7 @@ RSpec.describe Invoice do
     @invoice_item_1 = create(:invoice_item, item: @item_1, status: 'shipped', invoice: @invoice_1)
     @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2)
     @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3)
+    # require "pry"; binding.pry
 
   end
 

@@ -3,8 +3,10 @@
 <%= link_to 'Merchants', admin_merchants_path %>
 <%= link_to 'Invoices', admin_invoices_path %>
 
+
 <section id='incomplete-invoices'>
+  <h3>Incomplete Invoices</h3>
   <% @incomplete_invoices.each do |invoice| %>
-    <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %> 
+    <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
   <% end %>
 </section>

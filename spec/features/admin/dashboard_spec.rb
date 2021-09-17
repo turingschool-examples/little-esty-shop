@@ -49,7 +49,7 @@ RSpec.describe 'admin dashboard page' do
   it "has a section for incomplete invoices and a list of the ids of the invoices that have not been shipped and links them to the admin show page" do
     visit '/admin/dashboard'
 
-    expect(page).to have_content("Inconmplete Invoices")
+    expect(page).to have_content("Incomplete Invoices")
     within("#incomplete-invoices") do
       expect(page).to have_content(@invoice_2.id)
       expect(page).to have_content(@invoice_3.id)
