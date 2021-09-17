@@ -13,4 +13,7 @@ class Invoice < ApplicationRecord
     "completed": 2
   }
 
+  def date
+    created_at.strftime("%A, %B %e, %Y")
+  end
 end
