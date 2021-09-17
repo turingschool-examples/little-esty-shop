@@ -29,4 +29,14 @@ RSpec.describe 'Admin Invoice Show page' do
     visit "/admin/invoices/#{@invoice_1.id}"
     expect(page).to have_content(@invoice_1.total_revenue)
   end
+
+  it 'has a select field to update the status' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+    expect(page).to have_content(@invoice_1.status)
+    select 'completed', from: "Status"
+    click_on "Update Invoice Status"
+    expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+    expect(page).to have_content("Status has been updated")
+    expect(page).to have_content(@invoice_1.status)
+  end
 end

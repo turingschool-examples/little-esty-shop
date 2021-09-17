@@ -1,5 +1,9 @@
 <h1> Invoice ID: <%=@invoice.id %> </h1>
-<h3> Invoice status: <%=@invoice.status %> </h3>
+<%= form_with model: [:admin, @invoice], local: true do |f| %>
+<%= f.label :status %>
+<h3> Invoice status: <%=f.select(:status, ['in progress', 'completed', 'cancelled']) %> <%= f.submit "Update Invoice Status" %>
+</h3>
+<%end %>
 <h3> Invoice Created On: <%=@invoice.formatted_date %> </h3>
 <h3> Invoice Customer Name: <%="#{@invoice.customer_full_name}" %> </h3>
 <% @invoice.invoice_items.each do |invoice_item| %>
