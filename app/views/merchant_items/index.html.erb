@@ -1,6 +1,16 @@
 <h1><%= @merchant.name %>'s Items:</h1>
 
-<% @merchant.items.each do |item| %>
+<h3>My Items</h3>
+
+<h5>Enabled Items</h5>
+<% @merchant.enabled_items.each do |item| %>
+  <ul>
+    <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
+  </ul>
+<% end %>
+
+<h5>Disabled Items</h5>
+<% @merchant.disabled_items.each do |item| %>
   <ul>
     <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
   </ul>
