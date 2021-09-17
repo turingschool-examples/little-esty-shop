@@ -12,5 +12,6 @@ RSpec.describe 'Item edit page' do
 
     expect(current_path).to eq(merchant_item_path(merchant, item))
     expect(page).to have_content("Blue Shirt")
+    expect(page).to have_content("Item has been successfully updated")
   end
 end

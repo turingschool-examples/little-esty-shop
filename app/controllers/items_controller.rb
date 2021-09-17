@@ -15,11 +15,11 @@ class ItemsController < ApplicationController
     end
 
     def update
-      require "pry"; binding.pry
       merchant = Merchant.find(params[:merchant_id])
       item = Item.find_by(params[:item_id])
       item.update(item_params)
       redirect_to merchant_item_path(merchant, item)
+      flash[:alert] = "Item has been successfully updated"
     end
 
     private
