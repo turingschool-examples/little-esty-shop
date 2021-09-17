@@ -36,7 +36,7 @@ RSpec.describe Invoice do
     @customer = create(:customer)
     @invoice_1 = create(:invoice, customer: @customer)
     @invoice_2 = create(:invoice, customer: @customer)
-    @invoice_3 = create(:invoice, customer: @customer, created_at: Date.new(2021, 9, 17))
+    @invoice_3 = create(:invoice, customer: @customer, created_at: Date.new(2020, 9, 17))
     @merchant = create(:merchant)
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
@@ -49,11 +49,14 @@ RSpec.describe Invoice do
     it "gets all incomplete invoices" do
       expect(Invoice.incomplete_invoices).to eq([@invoice_2, @invoice_3])
     end
+
+   it 'sorts invoices from oldest to newest' do
+     expect(Invoice.order_by_oldest).to eq([@invoice_3, @invoice_2])
+    end
   end
 
   describe 'instance methods' do
     it 'formats customer name' do
-      require "pry"; binding.pry
       expect(@invoice_1.customer_name).to eq("#{@customer.first_name} #{@customer.last_name}")
     end
   end
