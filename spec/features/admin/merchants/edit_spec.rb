@@ -14,6 +14,9 @@ RSpec.describe 'admin merchant edit page' do
 
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
 
+    within("#flash-message") do
+      expect(page).to have_content("Fresh Thyme has been successfully updated!")
+    end
     expect(page).to have_content('Fresh Thyme')
   end
 end
