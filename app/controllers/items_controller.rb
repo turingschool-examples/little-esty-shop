@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
     end
 
     def show
-      @item = Item.find_by(params[:item_id])
+      # binding.pry
+      @item = Item.find(params[:id])
     end
 end
