@@ -1,0 +1,14 @@
+<h1>Edit this item</h1>
+
+<%= form_with model: [@merchant, @item], local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+
+  <%= form.label :unit_price %>
+  <%= form.text_field :unit_price %>
+
+  <%= form.submit "Submit" %>
+<% end %>
