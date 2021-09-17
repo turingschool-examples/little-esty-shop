@@ -2,3 +2,11 @@
 <h3> Invoice status: <%=@invoice.status %> </h3>
 <h3> Invoice Created On: <%=@invoice.formatted_date %> </h3>
 <h3> Invoice Customer Name: <%="#{@invoice.customer_full_name}" %> </h3>
+<% @invoice.invoice_items.each do |invoice_item| %>
+<ul>
+  <li> <%= invoice_item.item.name %> </li>
+  <li> <%= invoice_item.quantity %> </li>
+  <li> <%= invoice_item.unit_price %> </li>
+  <li> <%= invoice_item.status %> </li>
+</ul>
+<% end %>

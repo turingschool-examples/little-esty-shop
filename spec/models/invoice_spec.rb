@@ -13,9 +13,9 @@ RSpec.describe Invoice do
   describe 'instance methods' do
     it 'returns the date in words-ish' do
       customer_1 = Customer.create(id: 1, first_name: 'Bob', last_name: 'Johnson')
-      invoice_1 = Invoice.create(id: 1, customer_id: customer_1.id, status: 'cancelled')
+      invoice_1 = Invoice.create(id: 1, customer_id: customer_1.id, status: 'cancelled', created_at: "2012-03-25 09:54:09 UTC")
 
-      expect(invoice_1.formatted_date).to eq("Wednesday, September 15, 2021")
+      expect(invoice_1.formatted_date).to eq("Sunday, March 25, 2012")
     end
 
     it 'returns invoice customer full name' do

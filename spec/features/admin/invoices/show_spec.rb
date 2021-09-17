@@ -6,7 +6,7 @@ RSpec.describe 'Admin Invoice Show page' do
     @customer_1 = Customer.create!(first_name: 'Bob', last_name: 'Johnson')
     @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 'cancelled')
     @item_1 = Item.create!(name: "New shirt", description: "ugly shirt", unit_price: 1400, merchant_id: @merchant_1.id)
-    invoice_item = InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 5, unit_price: 1200, status: "packaged")
+    @invoice_item = InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 5, unit_price: 1200, status: "packaged")
   end
 
   it 'shows invoice information' do
