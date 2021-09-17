@@ -9,7 +9,6 @@ RSpec.describe 'admin invoice index page' do
     @invoice_4 = create(:invoice, customer: @customer)
   end
 
-
   it 'shows all invoices and links to respective show page' do
     visit admin_invoices_path
 
@@ -25,16 +24,4 @@ RSpec.describe 'admin invoice index page' do
     expect(current_path).to eq(admin_invoice_path(@invoice_1))
   end
 
-
 end
-
-
-
-
-
-
-
-# As an admin,
-# When I visit the admin Invoices index ("/admin/invoices")
-# Then I see a list of all Invoice ids in the system
-# Each id links to the admin invoice show page
