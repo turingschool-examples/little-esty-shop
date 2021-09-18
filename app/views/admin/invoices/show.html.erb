@@ -6,3 +6,13 @@
     <li>Customer Name: <%= "#{@invoice.customer_name}" %></li>
   </ul>
 </section>
+
+
+<h3>Invoice Items</h3>
+
+  <% @items.each do |item| %>
+    <%= item.name %>
+    <%= item.amount(@invoice.id) %>
+    <%= item.sold_price(@invoice.id) %>
+    <%= item.order_status(@invoice.id) %>
+  <% end %>
