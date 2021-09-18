@@ -22,7 +22,6 @@ RSpec.describe 'admin invoice show page' do
     end
   end
 
-
   it 'shows invoice item info' do
     visit(admin_invoice_path(@invoice_1))
 

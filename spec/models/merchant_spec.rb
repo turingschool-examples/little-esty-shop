@@ -66,7 +66,8 @@ RSpec.describe Merchant do
     it 'can get disabled items' do
       expect(@merchant_1.disabled).to eq([@item_1])
     end
-    
+  end
+
   describe 'class methods' do
     it 'can fetch enabled merchants' do
       merchant_1 = create(:merchant, status: true)
@@ -82,4 +83,5 @@ RSpec.describe Merchant do
       expect(Merchant.disabled_merchants).to eq([merchant_2])
     end
   end
+
 end
