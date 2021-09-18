@@ -14,6 +14,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete_invoices
-    
+    joins(:invoice_items).where.not("invoice_items.status = 'shipped'").pluck(:id)
   end
 end

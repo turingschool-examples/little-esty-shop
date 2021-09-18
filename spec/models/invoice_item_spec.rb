@@ -22,9 +22,6 @@ RSpec.describe InvoiceItem do
       @invoice_item_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_2, quantity: 3, unit_price: 1200, status: "shipped")
     end
 
-    it 'returns only invoice_items with unshipped items' do
-      expect(InvoiceItem.unshipped_items).to eq([@invoice_item_1, @invoice_item_2])
-    end
 
   end
 
