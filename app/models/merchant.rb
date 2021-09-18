@@ -7,6 +7,14 @@ class Merchant < ApplicationRecord
     disabled: 1
    }
 
+   def self.enabled_list
+     where(status: 0)
+   end
+
+   def self.disabled_list
+     where(status: 1)
+   end
+
   def top_5_customers
     joins(:items)
     .joins("RIGHT JOIN invoice_items ON items.id = invoice_items.item_id")
