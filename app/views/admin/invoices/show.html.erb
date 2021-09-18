@@ -1,0 +1,18 @@
+<section id=invoice-information>
+  <ul>
+    <li>Invoice id: <%= "#{@invoice.id}" %></li>
+    <li>Invoice Status: <%= "#{@invoice.status}" %></li>
+    <li>Created on: <%= "#{@invoice.date}" %></li>
+    <li>Customer Name: <%= "#{@invoice.customer_name}" %></li>
+  </ul>
+</section>
+
+
+<h3>Invoice Items</h3>
+
+  <% @items.each do |item| %>
+    <%= item.name %>
+    <%= item.amount(@invoice.id) %>
+    <%= item.sold_price(@invoice.id) %>
+    <%= item.order_status(@invoice.id) %>
+  <% end %>

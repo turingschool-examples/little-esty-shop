@@ -1,9 +1,25 @@
 <h1><%= @merchant.name %>'s Items:</h1>
 
-<% @merchant.items.each do |item| %>
-  <ul>
-    <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
-  </ul>
+<h3>My Items</h3>
+
+<h5>Enabled Items</h5>
+<% @merchant.enabled.each do |item| %>
+  <section id="enabled-<%= item.id %>">
+    <ul>
+      <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
+      <li><%= button_to "Disable", "#{merchant_item_path(@merchant, item)}?disable=t", method: :patch %></li>
+    </ul>
+  </section>
+<% end %>
+
+<h5>Disabled Items</h5> #refactor to partial
+<% @merchant.disabled.each do |item| %>
+  <section id="disabled-<%= item.id %>">
+    <ul>
+      <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
+      <li><%= button_to "Enable", "#{merchant_item_path(@merchant, item)}?enable=t", method: :patch %></li>
+    </ul>
+  </section>
 <% end %>
 
 <%= link_to 'Create New Item', new_merchant_item_path(@merchant) %>

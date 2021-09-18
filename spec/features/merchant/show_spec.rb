@@ -4,11 +4,8 @@ RSpec.describe 'Merchant#dashboard' do
   describe 'dashboard' do
     before(:each) do
       @merchant_1 = create(:merchant)
-
     end
-#     As a merchant,
-# When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
-# Then I see the name of my merchant
+
     it "has a merchant name" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
 

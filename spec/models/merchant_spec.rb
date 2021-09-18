@@ -10,7 +10,7 @@ RSpec.describe Merchant do
   end
 
   describe 'intance methods' do
-    it 'can find the five favorite customers' do
+    xit 'can find the five favorite customers' do
       customer_1 = Customer.create!(first_name: 'Weston', last_name: 'Ellis')
       customer_2 = Customer.create!(first_name: 'Larry', last_name: 'Davit')
       customer_3 = Customer.create!(first_name: 'Billy', last_name: 'Eylish')
@@ -49,4 +49,39 @@ RSpec.describe Merchant do
       expect(merchant.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
     end
   end
+
+  describe 'enable/disable item button' do
+    before :each do
+      @merchant_1 = create(:merchant)
+      @merchant_2 = create(:merchant)
+      @customer_1 = create(:customer)
+      @item_1 = create(:item, merchant: @merchant_1, status: 0)
+      @item_2 = create(:item, merchant: @merchant_1, status: 1)
+    end
+
+    it 'can get enabled items' do
+      expect(@merchant_1.enabled).to eq([@item_2])
+    end
+
+    it 'can get disabled items' do
+      expect(@merchant_1.disabled).to eq([@item_1])
+    end
+  end
+
+  describe 'class methods' do
+    it 'can fetch enabled merchants' do
+      merchant_1 = create(:merchant, status: true)
+      merchant_2 = create(:merchant, status: false)
+
+      expect(Merchant.enabled_merchants).to eq([merchant_1])
+    end
+
+    it 'can fetch disabled merchants' do
+      merchant_1 = create(:merchant, status: true)
+      merchant_2 = create(:merchant, status: false)
+
+      expect(Merchant.disabled_merchants).to eq([merchant_2])
+    end
+  end
+
 end

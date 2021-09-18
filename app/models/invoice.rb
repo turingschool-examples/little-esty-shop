@@ -10,6 +10,10 @@ class Invoice < ApplicationRecord
     Invoice.joins(:invoice_items).where(invoice_items: {status: [0,1]})
   end
 
+  def self.order_by_oldest
+    Invoice.incomplete_invoices.order(created_at: :desc)
+  end
+
   enum status: {
     "in progress": 0,
     "cancelled": 1,
@@ -17,7 +21,11 @@ class Invoice < ApplicationRecord
   }
 
   def date
-    created_at.strftime("%A, %B %e, %Y")
+    created_at.strftime("%A, %B %d, %Y")
   end
 
+  def customer_name
+    #move to customer and just call customer.name ?
+    "#{customer.first_name} #{customer.last_name}"
+  end
 end
