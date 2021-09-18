@@ -4,4 +4,8 @@ class InvoiceItem < ApplicationRecord
 
   def create
   end
+
+  def self.unshipped_items
+    where.not(status: "shipped")
+  end
 end
