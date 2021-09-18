@@ -9,6 +9,7 @@ RSpec.describe 'admin merchant edit page' do
     visit "/admin/merchants/#{@merchant_1.id}"
     click_on "Edit #{@merchant_1.name}"
 
+    expect(page).to have_field('merchant[name]', with: 'Sprouts')
     fill_in 'Name', with: 'Fresh Thyme'
     click_button 'Update Merchant'
 
