@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  validates :name, presence: true
 
   def enabled_items
     items.enabled
