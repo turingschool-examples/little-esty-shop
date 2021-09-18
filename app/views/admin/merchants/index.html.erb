@@ -1,4 +1,6 @@
 
+<%= link_to 'New Merchant', new_admin_merchant_path %><br>
+
 <section id='enabled-merchants'>
   <h3>Enabled Merchants</h3>
   <% @enabled_merchants.each do |merchant| %>
@@ -14,3 +16,4 @@
     <%= button_to "Enable: #{merchant.name}", "#{admin_merchant_path(merchant)}?enable=t", method: :patch %></p>
   <% end %>
 </section>
+
