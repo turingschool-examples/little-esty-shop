@@ -10,6 +10,10 @@ class Invoice < ApplicationRecord
     Invoice.joins(:invoice_items).where(invoice_items: {status: [0,1]})
   end
 
+  def self.order_by_oldest
+    Invoice.incomplete_invoices.order(created_at: :desc)
+  end
+
   enum status: {
     "in progress": 0,
     "cancelled": 1,
