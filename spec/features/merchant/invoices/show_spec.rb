@@ -13,8 +13,8 @@ RSpec.describe "merchant invoices show page" do
     @invoice_2 = create(:invoice, customer: @customer_1, created_at: "Thursday, September 16, 2021")
     @invoice_3 = create(:invoice, customer: @customer_1, created_at: "Wednesday, September 15, 2021")
     @invoice_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, status: "shipped")
-    @invoice_item_1 = create(:invoice_item, invoice: @invoice_2, item: @item_1, status: "shipped")
-    @invoice_item_1 = create(:invoice_item, invoice: @invoice_3, item: @item_1, status: "shipped")
+    @invoice_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, status: "shipped")
+    @invoice_item_3 = create(:invoice_item, invoice: @invoice_1, item: @item_3, status: "shipped")
 
   end
 
@@ -26,5 +26,29 @@ RSpec.describe "merchant invoices show page" do
     expect(page).to have_content(@invoice_1.date)
     expect(page).to have_content(@customer_1.first_name)
     expect(page).to have_content(@customer_1.last_name)
+  end
+#
+#   As a merchant
+# When I visit my merchant invoice show page
+# Then I see all of my items on the invoice including:
+#
+# Item name
+# The quantity of the item ordered
+# The price the Item sold for
+# The Invoice Item status
+# And I do not see any information related to Items for other merchants
+
+  it 'shows all items on the invoice' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+    
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
+    expect(page).to have_content(@item_3.name)
+    expect(page).to have_content(@invoice_item_1.quantity)
+    expect(page).to have_content(@invoice_item_2.quantity)
+    expect(page).to have_content(@invoice_item_3.quantity)
+    expect(page).to have_content(@invoice_item_1.unit_price)
+    expect(page).to have_content(@invoice_item_2.unit_price)
+    expect(page).to have_content(@invoice_item_3.unit_price)
   end
 end
