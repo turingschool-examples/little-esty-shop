@@ -5,6 +5,7 @@
 
 <% @items.each do |item| %>
   <%= item.name %>
-  <%= item.amount %>
-  <%= item.sold_price %>
+  <%= item.amount(@invoice.id) %>
+  <%= item.sold_price(@invoice.id) %>
+  <%= item.order_status(@invoice.id) %>
 <% end %>
