@@ -12,4 +12,15 @@ class MerchantItemsController < ApplicationController
   def edit
 
   end
+
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+    item = Item.new
+    item.save
+    redirect_to merchant_items_path(@merchant)
+  end
+
+  def create
+
+  end
 end
