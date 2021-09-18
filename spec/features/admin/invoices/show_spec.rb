@@ -29,9 +29,11 @@ RSpec.describe 'admin invoice show page' do
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@invoice_item_1.quantity)
     expect(page).to have_content(@invoice_item_1.unit_price)
+    expect(page).to have_content(@invoice_item_1.status)
 
     expect(page).to have_content(@item_2.name)
     expect(page).to have_content(@invoice_item_2.quantity)
     expect(page).to have_content(@invoice_item_2.unit_price)
+    expect(page).to have_content(@invoice_item_2.status)
   end
 end
