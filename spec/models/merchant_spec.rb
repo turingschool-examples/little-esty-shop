@@ -10,7 +10,7 @@ RSpec.describe Merchant do
   end
 
   describe 'intance methods' do
-    it 'can find the five favorite customers' do
+    xit 'can find the five favorite customers' do
       customer_1 = Customer.create!(first_name: 'Weston', last_name: 'Ellis')
       customer_2 = Customer.create!(first_name: 'Larry', last_name: 'Davit')
       customer_3 = Customer.create!(first_name: 'Billy', last_name: 'Eylish')
@@ -62,8 +62,24 @@ RSpec.describe Merchant do
     it 'can get enabled items' do
       expect(@merchant_1.enabled).to eq([@item_2])
     end
+
     it 'can get disabled items' do
       expect(@merchant_1.disabled).to eq([@item_1])
+    end
+    
+  describe 'class methods' do
+    it 'can fetch enabled merchants' do
+      merchant_1 = create(:merchant, status: true)
+      merchant_2 = create(:merchant, status: false)
+
+      expect(Merchant.enabled_merchants).to eq([merchant_1])
+    end
+
+    it 'can fetch disabled merchants' do
+      merchant_1 = create(:merchant, status: true)
+      merchant_2 = create(:merchant, status: false)
+
+      expect(Merchant.disabled_merchants).to eq([merchant_2])
     end
   end
 end
