@@ -13,6 +13,10 @@ class Merchant < ApplicationRecord
     update(status: new_status)
   end
 
+  def disabled?
+    status == 'Disabled'
+  end
+
   def self.enabled_merchants
     where status: 'Enabled'
   end
