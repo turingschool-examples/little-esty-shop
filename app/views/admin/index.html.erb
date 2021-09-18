@@ -1,4 +1,12 @@
-<h1>Admin Dashboard Page</h1>
-
 <%=link_to "Admin Merchants", "/admin/merchants"  %>
 <%=link_to "Admin Invoices", "/admin/invoices"  %>
+<h1>Admin Dashboard Page</h1>
+
+<section id ="incomplete_invoices">
+  <h2>Incomplete Invoices:</h2>
+    <% @invoices.incomplete_invoices_ids.each do |id| %>
+      <ul>
+      <li><%= link_to "#{id}", "/admin/invoices/#{id}" %></li>
+      </ul>
+    <% end %>
+</section>
