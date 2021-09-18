@@ -21,6 +21,13 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe 'disabled?' do
+      it 'returns true is disabled' do
+        expect(@merchant.disabled?).to eq(true)
+        expect(@merchant_2.disabled?).to eq(false)
+      end
+    end
+
     describe 'disabled items' do
       it 'returns the merchants disabled items' do
         expect(@merchant.disabled_items).to eq([@disabled_item_1, @disabled_item_2])
