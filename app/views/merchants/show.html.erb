@@ -1,3 +1,12 @@
 <h2><%= @merchant.name %></h2>
 <%= link_to 'My Items', merchant_items_path %>
 <%= link_to 'My Invoices', merchant_invoices_path %>
+
+<section id='favorite-customers'>
+  <h3>Favorite Customers</h3>
+  <ol>
+    <% @merchant.favorite_customers.each do |customer| %>
+      <li id="customer-<%= customer.id %>"><%= customer.full_name %> - <%= customer.t_count %> purchases</li>
+    <% end %>
+  </ol>
+</section>
