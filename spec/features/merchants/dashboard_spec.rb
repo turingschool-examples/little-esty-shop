@@ -5,7 +5,6 @@ RSpec.describe 'Merchant Dashboard page' do
     before(:each) do
       @sprouts = create(:merchant)
       visit "/merchants/#{@sprouts.id}/dashboard"
-      save_and_open_page
     end
 
     it 'shows the name of my merchant' do
