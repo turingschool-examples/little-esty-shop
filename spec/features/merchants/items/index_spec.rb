@@ -7,6 +7,7 @@ RSpec.describe 'Merchant Items Index page' do
       @item_1     = create(:item, merchant: @merchant_1) # cookies
       @item_2     = create(:item, merchant: @merchant_1, name: "crackers", status: "Enabled")
       @item_3     = create(:item, merchant: @merchant_1, name: "biscuits")
+      @item_5     = create(:item, merchant: @merchant_1, name: "wafers", status: "Enabled")
 
       @merchant_2 = create(:merchant)
       @item_4     = create(:item, merchant: @merchant_2, name: "watermelon")
@@ -54,6 +55,32 @@ RSpec.describe 'Merchant Items Index page' do
 
         click_button('Disable')
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+      end
+    end
+
+    it 'has sections for enabled and disabled' do
+      within '#enabled' do
+        expect(page).to     have_content('crackers')
+        expect(page).to     have_content('wafers')
+        expect(page).to_not have_content('cookies')
+      end
+
+      within '#disabled' do
+        expect(page).to     have_content('cookies')
+        expect(page).to     have_content('biscuits')
+        expect(page).to_not have_content('crackers')
+      end
+
+      within "#item-#{@item_1.id}" do
+        click_button('Enable')
+      end
+
+      within '#disabled' do
+        expect(page).to_not have_content('cookies')
+      end
+
+      within '#enabled' do
+        expect(page).to have_content('cookies')
       end
     end
   end
