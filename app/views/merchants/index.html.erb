@@ -1,3 +1,3 @@
 <% @merchants.each do |merchant| %>
-  <%= merchant.name %>
+  <%= link_to "#{merchant.name}", merchant_dashboard_path(merchant) %>
 <% end %>

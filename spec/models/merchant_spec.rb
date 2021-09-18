@@ -50,6 +50,23 @@ RSpec.describe Merchant do
     end
   end
 
+  describe 'enable/disable item button' do
+    before :each do
+      @merchant_1 = create(:merchant)
+      @merchant_2 = create(:merchant)
+      @customer_1 = create(:customer)
+      @item_1 = create(:item, merchant: @merchant_1, status: 0)
+      @item_2 = create(:item, merchant: @merchant_1, status: 1)
+    end
+
+    it 'can get enabled items' do
+      expect(@merchant_1.enabled).to eq([@item_2])
+    end
+
+    it 'can get disabled items' do
+      expect(@merchant_1.disabled).to eq([@item_1])
+    end
+    
   describe 'class methods' do
     it 'can fetch enabled merchants' do
       merchant_1 = create(:merchant, status: true)

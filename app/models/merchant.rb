@@ -7,6 +7,14 @@ class Merchant < ApplicationRecord
     Invoice.joins(:items).where("items.merchant_id = ?", id)
   end
 
+  def enabled
+    items.where(status: 1)
+  end
+
+  def disabled
+    items.where(status: 0)
+  end
+  
   def self.enabled_merchants
     Merchant.where(status: true)
   end
