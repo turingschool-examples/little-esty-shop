@@ -6,4 +6,11 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :unit_price, numericality: {only_integer: true}, presence: true
+  validates :status, presence: true
+
+  enum status: {
+    disabled: 0,
+    enabled: 1
+  }
+
 end
