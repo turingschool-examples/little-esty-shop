@@ -74,7 +74,7 @@ RSpec.describe 'Merchant Dashboard page' do
       @transaction_20 = create(:transaction, invoice_id: @invoice_5.id, result: 'success')
       @transaction_21 = create(:transaction, invoice_id: @invoice_5.id, result: 'success')
 
-      @customer_6    = create(:customer)
+      @customer_6    = create(:customer, first_name: 'Jill')
       @invoice_6     = create(:invoice, customer_id: @customer_6.id)
       @invoice_items = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_6.id)
       @transaction_1 = create(:transaction, invoice_id: @invoice_6.id, result: 'success')
