@@ -1,7 +1,12 @@
 <%= link_to "New Merchant", "/admin/merchants/new" %>
 <h1>All Merchants</h1>
 <%@merchants.each do |merchant| %>
+<section id="merchant-<%=merchant.id %>">
   <ul>
     <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
+    <li> <%=merchant.status  %> </li>
+    <%= button_to 'Disable Merchant', "/admin/merchants/#{merchant.id}", method: :patch, params:{status: 'disabled'} %>
+    <%= button_to 'Enable Merchant', "/admin/merchants/#{merchant.id}", method: :patch, params:{status: 'enabled'} %>
   </ul>
+</section>
 <% end %>
