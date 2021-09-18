@@ -15,21 +15,25 @@ RSpec.describe 'admin merchants index page' do
 
 
   it 'can enable and disable merchants' do
+    merchant_1 = Merchant.create!(name: 'Weston', status: true)
+    merchant_2 = Merchant.create!(name: 'Ted', status: true)
+
     visit admin_merchants_path
 
     within('#enabled-merchants') do
-      expect(page).to have_content("Disable: #{merchant_1.name}")
-      expect(page).to have_content("Disable: #{merchant_2.name}")
 
-      click_button "Disable: #{merchant_1.name}"
+      expect(page).to have_link("Disable: #{merchant_1.name}")
+      expect(page).to have_link("Disable: #{merchant_2.name}")
+
+      click_link "Disable: #{merchant_1.name}"
     end
 
     expect(current_path).to eq(admin_merchants_path)
 
-    within('#disbled-merchants') do
+    within('#disabled-merchants') do
       expect(page).to have_content("Enable: #{merchant_1.name}")
 
-      click_button "Enable: #{merchant_1.name}"
+      click_link "Enable: #{merchant_1.name}"
     end
 
     expect(current_path).to eq(admin_merchants_path)
