@@ -7,6 +7,7 @@ RSpec.describe Merchant do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:status)}
   end
 
   describe 'intance methods' do
@@ -62,7 +63,7 @@ RSpec.describe Merchant do
       merchant_1 = create(:merchant, status: true)
       merchant_2 = create(:merchant, status: false)
 
-      expect(Merchant.enabled_merchants).to eq([merchant_1])
+      expect(Merchant.disabled_merchants).to eq([merchant_2])
     end
   end
 end
