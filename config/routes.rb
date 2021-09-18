@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   resources :merchants, only: [] do
     get  '/dashboard', to: 'merchants#show'
 
-    get  '/items',    to: 'merchant_items#index'
-    post '/items',    to: 'merchant_items#create'
+    get  '/items',     to: 'merchant_items#index'
+    post '/items',     to: 'merchant_items#create'
     resources :items, only: [:new, :show, :edit, :update]
+
+    get  '/invoices',  to: 'merchant_invoices#index'
   end
 
   namespace :admin, only: [:index, :show, :edit, :update] do
