@@ -5,6 +5,10 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:items).dependent(:destroy) }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
+
   describe '#instance methods' do
     before(:each) do
       @merchant = create(:merchant)

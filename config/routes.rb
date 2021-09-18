@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get  '/invoices',  to: 'merchant_invoices#index'
   end
 
-  namespace :admin, only: [:index, :show, :edit, :update] do
+  namespace :admin, only: [:index, :show, :edit, :update, :new, :create] do
     resources :merchants
   end
 end
