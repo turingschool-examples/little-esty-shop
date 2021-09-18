@@ -3,10 +3,7 @@
   <h3>Enabled Merchants</h3>
   <% @enabled_merchants.each do |merchant| %>
     <p><%= link_to merchant.name, admin_merchant_path(merchant)%>
-    <%= link_to "Disable: #{merchant.name}", "#{admin_merchant_path(merchant)}?disable=t", method: :patch %>
-    <%= "#{merchant.name} is disabled" %></p>
-
-
+    <%= button_to "Disable: #{merchant.name}", "#{admin_merchant_path(merchant)}?disable=t", method: :patch %></p>
   <% end %>
 </section>
 
@@ -14,7 +11,6 @@
   <h3>Disabled Merchants</h3>
   <% @disabled_merchants.each do |merchant| %>
     <p><%= link_to merchant.name, admin_merchant_path(merchant)%>
-    <%= link_to "Enable: #{merchant.name}", "#{admin_merchant_path(merchant)}?enable=t", method: :patch %>
-    <%= "#{merchant.name} is disabled" %></p>
+    <%= button_to "Enable: #{merchant.name}", "#{admin_merchant_path(merchant)}?enable=t", method: :patch %></p>
   <% end %>
 </section>
