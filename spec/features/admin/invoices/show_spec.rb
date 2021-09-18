@@ -6,7 +6,7 @@ RSpec.describe 'Admin Invoice Show page' do
     @customer_1 = Customer.create!(first_name: 'Bob', last_name: 'Johnson')
     @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 'cancelled')
     @item_1 = Item.create!(name: "New shirt", description: "ugly shirt", unit_price: 1400, merchant_id: @merchant_1.id)
-    invoice_item = InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 5, unit_price: 1200, status: "packaged")
+    @invoice_item = InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 5, unit_price: 1200, status: "packaged")
   end
 
   it 'shows invoice information' do
@@ -23,5 +23,20 @@ RSpec.describe 'Admin Invoice Show page' do
     expect(page).to have_content(@invoice_item.quantity)
     expect(page).to have_content(@invoice_item.unit_price)
     expect(page).to have_content(@invoice_item.status)
+  end
+
+  it 'shows the total revenue generated from the invoice' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+    expect(page).to have_content(@invoice_1.total_revenue)
+  end
+
+  it 'has a select field to update the status' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+    expect(page).to have_content(@invoice_1.status)
+    select 'completed', from: "Status"
+    click_on "Update Invoice Status"
+    expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+    expect(page).to have_content("Status has been updated")
+    expect(page).to have_content(@invoice_1.status)
   end
 end
