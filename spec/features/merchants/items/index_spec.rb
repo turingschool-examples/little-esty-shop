@@ -87,13 +87,14 @@ RSpec.describe 'Merchant Items Index page' do
     it 'has a link to create a new item' do
       click_link('New Item')
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+
+      fill_in('item[name]',        with: 'cotton-candy')
+      fill_in('item[description]', with: "it's mostly sugar")
+      fill_in('item[unit_price]',  with: 11325)
+      click_button('Submit')
+
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+      expect(page).to have_content('cotton-candy')
     end
   end
 end
-
-# When I click on the link,
-# I am taken to a form that allows me to add item information.
-# When I fill out the form I click ‘Submit’
-# Then I am taken back to the items index page
-# And I see the item I just created displayed in the list of items.
-# And I see my item was created with a default status of disabled.

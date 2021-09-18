@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :merchants, only: [] do
-    get '/items', to: 'merchant_items#index'
+    get  '/items', to: 'merchant_items#index'
+    post '/items', to: 'merchant_items#create'
     resources :items, only: [:new, :show, :edit, :update]
   end
 
