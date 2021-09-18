@@ -13,7 +13,12 @@ class Invoice < ApplicationRecord
     "#{customer.first_name} #{customer.last_name}"
   end
 
-  def self.incomplete_invoices_ids
-    joins(:invoice_items).where.not("invoice_items.status = 'shipped'").distinct.pluck(:id)
+  # def self.incomplete_invoices_ids_ordered
+  #   joins(:invoice_items).where.not("invoice_items.status = 'shipped'").order(:created_at).pluck(:id)
+  # end
+
+  def self.incomplete_invoices_ids_ordered
+    joins(:invoice_items).where.not("invoice_items.status = 'shipped'").select(:id, :created_at).order(:created_at).distinct(:id)
   end
+
 end

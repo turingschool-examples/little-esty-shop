@@ -4,9 +4,9 @@
 
 <section id ="incomplete_invoices">
   <h2>Incomplete Invoices:</h2>
-    <% @invoices.incomplete_invoices_ids.each do |id| %>
+    <% @invoices.incomplete_invoices_ids_ordered.each do |invoice| %>
       <ul>
-      <li><%= link_to "#{id}", "/admin/invoices/#{id}" %></li>
+      <li><%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> <%= invoice.created_at %></li>
       </ul>
     <% end %>
 </section>

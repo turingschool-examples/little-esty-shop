@@ -31,9 +31,9 @@ RSpec.describe Invoice do
       @merchant_1 = Merchant.create!(name: "Cool Shirts")
       @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
       @customer_2 = Customer.create(first_name: 'Susie', last_name: 'Smith')
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 'cancelled')
-      @invoice_2 = Invoice.create(customer_id: @customer_1.id, status: 'in progress')
-      @invoice_3 = Invoice.create(customer_id: @customer_2.id, status: 'completed')
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 'cancelled', created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_2 = Invoice.create(customer_id: @customer_1.id, status: 'in progress', created_at: "2013-03-25 09:54:09 UTC")
+      @invoice_3 = Invoice.create(customer_id: @customer_2.id, status: 'completed', created_at: "2011-03-25 09:54:09 UTC")
       @item_1 = Item.create!(name: "New shirt", description: "ugly shirt", unit_price: 1400, merchant_id: @merchant_1.id)
       @item_2 = Item.create!(name: "Old shirt", description: "less ugly shirt", unit_price: 1000, merchant_id: @merchant_1.id)
       @item_3 = Item.create!(name: "cool shirt", description: "super cool shirt", unit_price: 1700, merchant_id: @merchant_1.id)
@@ -43,8 +43,20 @@ RSpec.describe Invoice do
       @invoice_item_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_2, quantity: 3, unit_price: 1200, status: "shipped")
     end
 
-    it 'returns incomplete invoices with unshipped items' do
-      expect(Invoice.incomplete_invoices).to eq([@invoice_1.id, @invoice_2.id])
+    it 'returns incomplete invoices in order by created at oldest to newest' do
+      one = Invoice.incomplete_invoices_ids_ordered.find do |invoice|
+        invoice.id == @invoice_1.id
+      end
+      expect(one).to_not eq(nil)
+      two = Invoice.incomplete_invoices_ids_ordered.find do |invoice|
+        invoice.id == @invoice_2.id
+      end
+      expect(two).to_not eq(nil)
+      three = Invoice.incomplete_invoices_ids_ordered.find do |invoice|
+        invoice.id == @invoice_3.id
+      end
+      expect(three).to eq(nil)
+      # expect(Invoice.incomplete_invoices_ids_ordered).to eq(1)
     end
   end
 end
