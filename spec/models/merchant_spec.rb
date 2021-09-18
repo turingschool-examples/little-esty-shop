@@ -83,4 +83,5 @@ RSpec.describe Merchant do
       expect(Merchant.disabled_merchants).to eq([merchant_2])
     end
   end
+
 end

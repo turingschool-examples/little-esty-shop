@@ -20,11 +20,11 @@ RSpec.describe 'admin show page' do
 end
 
 
-# As an admin,
+# As an admin
 # When I visit an admin invoice show page
-# Then I see information related to that invoice including:
+# Then I see all of the items on the invoice including:
 #
-# Invoice id
-# Invoice status
-# Invoice created_at date in the format "Monday, July 18, 2019"
-# Customer first and last name
+# Item name
+# The quantity of the item ordered
+# The price the Item sold for
+# The Invoice Item status
