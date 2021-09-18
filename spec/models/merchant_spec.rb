@@ -36,4 +36,14 @@ RSpec.describe Merchant, type: :model do
       end
     end
   end
+
+  describe '#class methods' do
+    it '#enabled_merchants' do
+      expect(Merchant.enabled_merchants).to eq([@merchant_2])
+    end
+
+    it '#disabled_merchants' do
+      expect(Merchant.disabled_merchants).to eq([@merchant])
+    end
+  end
 end
