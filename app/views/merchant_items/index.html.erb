@@ -5,3 +5,5 @@
     <li><%= link_to item.name, merchant_item_path(@merchant, item) %></li>
   </ul>
 <% end %>
+
+<%= link_to 'Create New Item', new_merchant_item_path(@merchant) %>
