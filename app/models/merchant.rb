@@ -2,6 +2,11 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
   has_many :items, dependent: :destroy
 
+  enum status: {
+    enabled: 0,
+    disabled: 1
+   }
+
   def top_5_customers
     joins(:items)
     .joins("RIGHT JOIN invoice_items ON items.id = invoice_items.item_id")
