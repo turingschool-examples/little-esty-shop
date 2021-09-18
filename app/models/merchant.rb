@@ -1,5 +1,11 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :invoices, through: :items
+
+  def favorite_customers
+    items.joins(invoices: :transactions).where(transactions: {result: 'success'}).select('invoices.customer_id, COUNT(transactions.*) as t_count').order('COUNT(transactions.*) DESC').group(:customer_id).limit(5)
+    binding.pry
+  end
 
   def enabled_items
     items.enabled
