@@ -21,6 +21,13 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe 'disabled?' do
+      it 'returns true is disabled' do
+        expect(@merchant.disabled?).to eq(true)
+        expect(@merchant_2.disabled?).to eq(false)
+      end
+    end
+
     describe 'disabled items' do
       it 'returns the merchants disabled items' do
         expect(@merchant.disabled_items).to eq([@disabled_item_1, @disabled_item_2])
@@ -34,6 +41,16 @@ RSpec.describe Merchant, type: :model do
         @merchant.update_status('Enabled')
         expect(@merchant.status).to eq('Enabled')
       end
+    end
+  end
+
+  describe '#class methods' do
+    it '#enabled_merchants' do
+      expect(Merchant.enabled_merchants).to eq([@merchant_2])
+    end
+
+    it '#disabled_merchants' do
+      expect(Merchant.disabled_merchants).to eq([@merchant])
     end
   end
 end

@@ -66,4 +66,17 @@ RSpec.describe 'admin merchants index page', type: :feature do
       expect(page).to have_button("Disable")
     end
   end
+
+  it 'groups merchants by status' do
+    within('#enabled') do
+      expect(page).to have_content(@merchant_2.name)
+      expect(page).to_not have_content(@merchant_1.name)
+      expect(page).to_not have_content(@merchant_3.name)
+    end
+    within('#disabled') do
+      expect(page).to_not have_content(@merchant_2.name)
+      expect(page).to have_content(@merchant_1.name)
+      expect(page).to have_content(@merchant_3.name)
+    end
+  end
 end
