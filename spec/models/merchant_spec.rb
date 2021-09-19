@@ -46,7 +46,7 @@ RSpec.describe Merchant do
       InvoiceItem.create!(item: item, invoice: invoice_5, quantity: 100, unit_price: 100, status: 2)
       InvoiceItem.create!(item: item, invoice: invoice_6, quantity: 100, unit_price: 100, status: 2)
 
-      expect(merchant.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
+      expect(Merchant.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
     end
   end
 

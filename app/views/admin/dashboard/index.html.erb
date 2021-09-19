@@ -10,3 +10,11 @@
     <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
   <% end %>
 </section>
+
+<section id='five_best_customers'>
+  <h3>Five Best Customers:</h3>
+  <% @five_best_customers.each do |customer| %>
+    <%= "#{customer.first_name}" %>
+    <%= "#{customer.last_name}" %> 
+  <% end %>
+</section>
