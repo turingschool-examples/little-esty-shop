@@ -25,5 +25,5 @@ class Merchant < ApplicationRecord
 
   def packaged_items
     items.joins(:invoice_items).where('invoice_items.status = ?', 0)
-  end
+  end 
 end
