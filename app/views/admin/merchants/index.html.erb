@@ -1,5 +1,18 @@
 <%= link_to "New Merchant", "/admin/merchants/new" %>
-<h1>All Merchants</h1>
+
+<h1>Little Esty Shop</h1>
+<h3>Top 5 Merchants by Revenue</h3>
+<section id="top_cinco">
+  <%@merchants.top_5_merchants.each do |merchant| %>
+    <ul>
+      <li><%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %> - <%= number_to_currency(merchant.revenue.fdiv(100)) %>
+        <ul>
+          <li> Top day for <%=merchant.name%> was <%=merchant.merchant_best_day_ever%> </li><%=  %>
+        </ul></li>
+    </ul>
+  <% end %>
+</section>
+
 
 <h3>Enabled</h3>
 <section id='enabled'>
@@ -26,3 +39,4 @@
   </ul>
 </section>
 <% end %>
+
