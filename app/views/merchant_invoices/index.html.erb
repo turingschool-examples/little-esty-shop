@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Merchant Invoices</title>
+  </head>
+
+  <body>
+    <% @merchant_invoices.each do |invoice| %>
+      <p>Invoice: <%= invoice.id %></p>
+    <% end %>
+  </body>
+</html>

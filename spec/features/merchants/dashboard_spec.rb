@@ -17,7 +17,7 @@ RSpec.describe 'Merchant Dashboard page' do
     end
 
     it 'has a link to my invoices index' do
-      click_link('My Invoices')
+      click_link('My Invoices') # needs a flash "there are no invoices" if there are none
       expect(current_path).to eq("/merchants/#{@sprouts.id}/invoices")
     end
   end
