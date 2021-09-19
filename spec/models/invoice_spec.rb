@@ -42,9 +42,11 @@ RSpec.describe Invoice do
       @merchant = create(:merchant)
       @item_1 = create(:item, merchant: @merchant)
       @item_2 = create(:item, merchant: @merchant)
-      @invoice_item_1 = create(:invoice_item, item: @item_1, status: 'shipped', invoice: @invoice_1)
-      @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2)
-      @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3)
+      @invoice_item_1 = create(:invoice_item, item: @item_1, status: 'shipped', invoice: @invoice_1, quantity: 10, unit_price: 10)
+      @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, unit_price: 5)
+      @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_3, quantity: 2, unit_price: 10)
+      @invoice_item_4 = create(:invoice_item, item: @item_1, status: 'shipped', invoice: @invoice_1, quantity: 10, unit_price: 10)
+
     end
 
     describe 'class methods' do
@@ -60,6 +62,10 @@ RSpec.describe Invoice do
     describe 'instance methods' do
       it 'formats customer name' do
         expect(@invoice_1.customer_name).to eq("#{@customer.first_name} #{@customer.last_name}")
+      end
+
+      it "can calculate revenue" do
+        expect(@invoice_1.revenue).to eq(200)
       end
     end
   end
