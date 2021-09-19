@@ -11,16 +11,18 @@ RSpec.describe "merchant item creation" do
     @item_4 = create(:item, merchant: @merchant_2)
   end
 
-  it "can create a new merchant item using a form" do
-    visit new_merchant_item_path(@merchant_1)
-save_and_open_page
-    fill_in(:name, with: 'Slinky')
-    fill_in(:description, with: 'Toy')
-    fill_in(:unit_price, with: 10)
+    it "can create a new merchant item using a form" do
+      visit new_merchant_item_path(@merchant_1)
 
-    click_button('Submit')
+      fill_in(:name, with: 'Slinky')
+      fill_in(:description, with: 'Toy')
+      fill_in(:unit_price, with: 10)
 
-    # expect(current_path).to eq
-    expect(page).to have_content("Slinky")
-  end
+      click_button('Submit')
+      save_and_open_page
+      # expect(current_path).to eq(merchant_items_path(@merchant_1))
+      expect(page).to have_content("Slinky")
+
+      #left off on new spec. getting error for line 24
+    end
   end
