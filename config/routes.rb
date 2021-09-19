@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :show, :edit, :update]
 
     get  '/invoices',  to: 'merchant_invoices#index'
+    get  '/invoices/:id', to: 'merchant_invoices#show', as: 'invoice'
   end
 
   namespace :admin, only: [:index, :show, :edit, :update, :new, :create] do
