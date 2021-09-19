@@ -46,7 +46,7 @@ RSpec.describe Merchant do
       InvoiceItem.create!(item: item, invoice: invoice_5, quantity: 100, unit_price: 100, status: 2)
       InvoiceItem.create!(item: item, invoice: invoice_6, quantity: 100, unit_price: 100, status: 2)
 
-      expect(merchant.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
+      expect(Merchant.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
     end
   end
 
@@ -84,4 +84,26 @@ RSpec.describe Merchant do
     end
   end
 
+  describe 'Merchant dashboard page' do
+    before(:each) do
+      @customer = create(:customer)
+      @invoice_1 = create(:invoice, customer: @customer, created_at: "Friday, September 17, 2021" )
+      @invoice_2 = create(:invoice, customer: @customer, created_at: "Thursday, September 16, 2021")
+      @invoice_3 = create(:invoice, customer: @customer, created_at: "Wednesday, September 15, 2021")
+      @invoice_4 = create(:invoice, customer: @customer, created_at: "Tuesday, September 14, 2021")
+      @merchant = create(:merchant)
+      @merchant_2 = create(:merchant)
+      @item_1 = create(:item, merchant: @merchant)
+      @item_2 = create(:item, merchant: @merchant)
+      @item_3 = create(:item, merchant: @merchant_2)
+      @invoice_item_1 = create(:invoice_item, item: @item_2, status: 2, invoice: @invoice_1)
+      @invoice_item_2 = create(:invoice_item, item: @item_2, status: 0,invoice: @invoice_2, created_at: "Thursday, September 16, 2021")
+      @invoice_item_3 = create(:invoice_item, item: @item_1, status: 0, invoice: @invoice_3, created_at: "Wednesday, September 15, 2021")
+      @invoice_item_3 = create(:invoice_item, item: @item_3, status: 0, invoice: @invoice_4, created_at: "Wednesday, September 15, 2021")
+    end
+
+    it 'gets only packaged items' do
+      expect(@merchant.packaged_items).to eq([@item_1, @item_2])
+    end
+  end
 end

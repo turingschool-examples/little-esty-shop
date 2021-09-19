@@ -17,8 +17,8 @@ RSpec.describe Item do
   describe 'invoice information' do
     before(:each) do
       @customer = create(:customer)
-      @invoice_1 = create(:invoice, customer: @customer, created_at: Date.new(2021, 9, 17))
-      @invoice_2 = create(:invoice, customer: @customer, created_at: Date.new(2021, 9, 17))
+      @invoice_1 = create(:invoice, customer: @customer, created_at: "Tuesday, September 14, 2021")
+      @invoice_2 = create(:invoice, customer: @customer, created_at: "Wednesday, September 15, 2021")
       @invoice_3 = create(:invoice, customer: @customer, created_at: Date.new(2021, 9, 17))
       @merchant = create(:merchant)
       @item_1 = create(:item, merchant: @merchant)
@@ -38,7 +38,10 @@ RSpec.describe Item do
 
     it 'can get sold price' do
       expect(@item_1.sold_price(@invoice_1.id)).to eq(@invoice_item_1.unit_price)
+    end
 
+    it 'orders invoices' do
+      expect(@item_1.ordered_invoices).to eq([@invoice_1, @invoice_2])
     end
   end
 end

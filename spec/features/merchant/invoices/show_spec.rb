@@ -16,7 +16,6 @@ RSpec.describe "merchant invoices show page" do
     @invoice_item_2 = create(:invoice_item, invoice: @invoice_2, item: @item_1, status: "shipped", unit_price: 10, quantity: 5)
     @invoice_item_3 = create(:invoice_item, invoice: @invoice_3, item: @item_1, status: "shipped", unit_price: 2, quantity: 3)
     @invoice_item_4 = create(:invoice_item, invoice: @invoice_1, item: @item_1, status: "shipped", unit_price: 5, quantity: 1)
-
   end
 
   it 'shows invoice information' do
@@ -36,5 +35,22 @@ RSpec.describe "merchant invoices show page" do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
 
     expect(page).to have_content(@invoice_1.revenue)
+
+  it 'shows all items on the invoice' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
+    expect(page).to have_content(@invoice_item_1.quantity)
+    expect(page).to have_content(@invoice_item_2.quantity)
+    expect(page).to have_content(@invoice_item_1.unit_price)
+    expect(page).to have_content(@invoice_item_2.unit_price)
+    expect(page).to have_content(@invoice_item_1.status)
+    expect(page).to have_content(@invoice_item_2.status)
+
+    expect(page).to_not have_content(@item_3.name)
+    expect(page).to_not have_content(@invoice_item_3.quantity)
+    expect(page).to_not have_content(@invoice_item_3.unit_price)
+    expect(page).to_not have_content(@invoice_item_3.status)
   end
 end
