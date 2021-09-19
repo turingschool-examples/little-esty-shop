@@ -8,6 +8,7 @@ RSpec.describe Merchant do
   describe 'relationships' do
     it {should have_many :items}
   end
+  
   before :each do
     @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
     @merchant_1 = Merchant.create!(name: "Cool Shirts")
@@ -57,5 +58,21 @@ RSpec.describe Merchant do
       expect(@merchant_1.merchant_best_day_ever).to eq(@invoice_7.created_at.strftime("%m/%d/%y"))
     end
 
+  describe 'class_methods' do
+    it 'returns a list of all enabled merchants' do
+      merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
+      merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
+      merchant_3= Merchant.create!(name: "Bill",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
+      merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
+      expect(Merchant.enabled_list).to eq([merchant_1,merchant_3 ])
+    end
+    
+    it 'returns a list of all enabled merchants' do
+      merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
+      merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
+      merchant_3= Merchant.create!(name: "Bill",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
+      merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
+      expect(Merchant.disabled_list).to eq([merchant_2, merchant_4])
+    end
   end
 end

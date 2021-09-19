@@ -10,7 +10,10 @@ class Invoice < ApplicationRecord
   end
 
   def customer_full_name
-    "#{customer.first_name} #{customer.last_name}"
+    "#{customer.full_name}"
+  end
+  def total_revenue
+    items.sum('invoice_items.quantity * invoice_items.unit_price')
   end
 
   # def self.incomplete_invoices_ids_ordered

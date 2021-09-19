@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Create a new merchant' do
   it ' has a form to create a new merchant' do
     visit "/admin/merchants/new"
-    fill_in :name, with: 'Buffalo Bill'
+    fill_in :Name, with: 'Buffalo Bill'
     click_on "Submit"
     expect(current_path).to eq("/admin/merchants")
     expect(page).to have_content('Buffalo Bill')
