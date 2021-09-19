@@ -28,4 +28,8 @@ class Invoice < ApplicationRecord
     #move to customer and just call customer.name ?
     "#{customer.first_name} #{customer.last_name}"
   end
+
+  def revenue
+    items.sum('quantity * invoice_items.unit_price')
+  end
 end
