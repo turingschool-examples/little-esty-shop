@@ -13,10 +13,6 @@ Rails.application.routes.draw do
   resources :items
   resources :invoices
 
-  # resources :merchants do
-  #   resources :invoices
-  #   resources :dashboard, only: [:index]
-  # end
 
   namespace :admin do
     resources :dashboard, only: [:index]
