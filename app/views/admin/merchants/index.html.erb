@@ -1,7 +1,19 @@
 <%= link_to "New Merchant", "/admin/merchants/new" %>
+
+<h1>Top 5 Merchants by Revenue</h1>
+<section id="top_cinco">
+  <%@merchants.top_5_merchants.each do |merchant| %>
+    <ul>
+      <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
+    </ul>
+  <% end %>
+</section>
+
 <h1>All Merchants</h1>
-<%@merchants.each do |merchant| %>
-  <ul>
-    <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
-  </ul>
-<% end %>
+<section id="all_merchants">
+  <%@merchants.each do |merchant| %>
+    <ul>
+      <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
+    </ul>
+  <% end %>
+</section>

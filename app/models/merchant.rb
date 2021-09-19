@@ -15,4 +15,13 @@ class Merchant < ApplicationRecord
     .select("DISTINCT customers.*, count(transactions.result = 'success') as transactions_per")
     .limit(5)
   end
+
+  def self.top_5_merchants
+    joins(items: {invoice_items: {invoice: :transactions}})
+    .select("merchants.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+    .where("transactions.result = ?", "success")
+    .group("merchants.id")
+    .order(revenue: :desc)
+    .limit(5)
+  end
 end

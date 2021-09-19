@@ -56,7 +56,8 @@ RSpec.describe Invoice do
         invoice.id == @invoice_3.id
       end
       expect(three).to eq(nil)
-      # expect(Invoice.incomplete_invoices_ids_ordered).to eq(1)
+      expect(Invoice.incomplete_invoices_ids_ordered.first.id).to eq(@invoice_1.id)
+      expect(Invoice.incomplete_invoices_ids_ordered.last.id).to eq(@invoice_2.id)
     end
   end
 end

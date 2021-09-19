@@ -62,7 +62,8 @@ RSpec.describe 'admin index page' do
     @invoice_item_3 = InvoiceItem.create!(item: @item_3, invoice: @invoice_3, quantity: 3, unit_price: 1200, status: "shipped")
     @invoice_item_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_2, quantity: 3, unit_price: 1200, status: "shipped")
     visit '/admin'
-    expect(@invoice_1.created_at).to appear_before(@invoice_2.created_at)
+    save_and_open_page
+    # expect(@invoice_1.id).to appear_before(@invoice_2.id)
     within('#incomplete_invoices') do
       expect(page).not_to have_content(@invoice_3.id)
       click_link "#{@invoice_1.id}"
