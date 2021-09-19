@@ -19,7 +19,6 @@ RSpec.describe "merchant item creation" do
       fill_in(:unit_price, with: 10)
 
       click_button('Submit')
-      save_and_open_page
       # expect(current_path).to eq(merchant_items_path(@merchant_1))
       expect(page).to have_content("Slinky")
 
