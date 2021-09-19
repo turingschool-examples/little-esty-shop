@@ -24,4 +24,8 @@ class Item < ApplicationRecord
   def sold_price(invoice_id)
     invoice_items.find_by(invoice_id: invoice_id, item_id: id).unit_price
   end
+
+  def ordered_invoices
+    invoices.group(:id).order(:created_at)
+  end
 end
