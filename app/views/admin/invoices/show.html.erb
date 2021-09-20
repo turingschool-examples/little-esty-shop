@@ -7,25 +7,26 @@
   </ul>
 </section>
 
+<h3>Invoice Status</h3>
+<section id='change-status'>
+  <%= form_with model: [:admin, @invoice], method: :patch, local: true do |form| %>
+  <%= form.select(:status, ['completed', 'in progress', 'cancelled'], selected: @invoice.status) %>
+  <%= form.submit "Update Invoice Status" %>
+  <% end %>
+</section><br>
 
 <h3>Invoice Items</h3>
 
   <% @items.each do |item| %>
-    <%= item.name %>
-    <%= item.amount(@invoice.id) %>
-    <%= item.sold_price(@invoice.id) %>
-    <%= item.order_status(@invoice.id) %>
+    <ul>
+      <li>Item name: <%= item.name %></li>
+      <li>Amount of Items: <%= item.amount(@invoice.id) %></li>
+      <li>Item Sold Price: <%= item.sold_price(@invoice.id) %></li>
+      <li>Order status: <%= item.order_status(@invoice.id) %></li>
+    </ul>
+
   <% end %>
 
 <h4>Total Revenue</h4>
-
+<%# turn into $dollars.cents format? %>
 <%= @invoice.revenue %>
-
-<section id='change-status'>
-  <%= form_with model: [:admin, @invoice], method: :patch, local: true do |form| %>
-
-    <%= form.select(:status, ['completed', 'in progress', 'cancelled'], selected: @invoice.status) %>
-    <%= form.submit "Update Invoice Status" %>
-
-  <% end %>
-</section>
