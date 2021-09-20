@@ -24,6 +24,6 @@ class Merchant < ApplicationRecord
   end
 
   def packaged_items
-    items.joins(:invoice_items).where('invoice_items.status = ?', 0)
+    items.joins(:invoice_items).where.not('invoice_items.status = ?', 2)
   end
 end
