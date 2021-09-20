@@ -71,3 +71,4 @@ RSpec.describe "merchant invoices show page" do
     expect(page).to have_content("packaged")
   end
 end
+end

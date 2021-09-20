@@ -7,6 +7,7 @@ RSpec.describe 'admin invoice show page' do
     @merchant = create(:merchant)
     @item_1 = create(:item, merchant: @merchant)
     @item_2 = create(:item, merchant: @merchant)
+    @item_3 = create(:item, merchant: @merchant)
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
     @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1)
   end
@@ -34,5 +35,11 @@ RSpec.describe 'admin invoice show page' do
     expect(page).to have_content(@invoice_item_2.quantity)
     expect(page).to have_content(@invoice_item_2.unit_price)
     expect(page).to have_content(@invoice_item_2.status)
+  end
+
+  it 'shows total revenue' do
+    visit(admin_invoice_path(@invoice_1))
+
+    expect(page).to have_content(@invoice_1.revenue)
   end
 end

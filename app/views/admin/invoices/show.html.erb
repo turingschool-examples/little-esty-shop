@@ -16,3 +16,7 @@
     <%= item.sold_price(@invoice.id) %>
     <%= item.order_status(@invoice.id) %>
   <% end %>
+
+<h4>Total Revenue</h4>
+
+<%= @invoice.revenue %>
