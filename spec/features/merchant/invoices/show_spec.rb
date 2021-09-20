@@ -54,3 +54,4 @@ RSpec.describe "merchant invoices show page" do
     expect(page).to_not have_content(@invoice_item_3.status)
   end
 end
+end
