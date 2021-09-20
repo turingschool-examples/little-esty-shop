@@ -2,3 +2,13 @@
 <%=link_to "Items Index", merchant_items_path(@merchant)%>
 <br>
 <%=link_to "Invoices Index", merchant_invoices_path(@merchant)%>
+
+<h2>Items Ready to Ship</h2>
+<% @merchant.packaged_items.each do |item| %>
+  <ul>
+    <li><%= item.name %></li>
+    <% item.ordered_invoices.each do |invoice| %>
+    <p>Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant, invoice.id) %> <%= invoice.date %> </p>
+  </ul>
+    <% end %>
+<% end %>
