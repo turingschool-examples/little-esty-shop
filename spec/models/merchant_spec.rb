@@ -93,17 +93,17 @@ RSpec.describe Merchant do
       @invoice_4 = create(:invoice, customer: @customer, created_at: "Tuesday, September 14, 2021")
       @merchant = create(:merchant)
       @merchant_2 = create(:merchant)
-      @item_1 = create(:item, merchant: @merchant)
-      @item_2 = create(:item, merchant: @merchant)
-      @item_3 = create(:item, merchant: @merchant_2)
-      @invoice_item_1 = create(:invoice_item, item: @item_2, status: 0, invoice: @invoice_1)
+      @item_1 = create(:item, merchant: @merchant, name: "a")
+      @item_2 = create(:item, merchant: @merchant, name: "b")
+      @item_3 = create(:item, merchant: @merchant_2, name: "c")
+      @invoice_item_1 = create(:invoice_item, item: @item_3, status: 0, invoice: @invoice_1)
       @invoice_item_2 = create(:invoice_item, item: @item_2, status: 0,invoice: @invoice_2, created_at: "Thursday, September 16, 2021")
       @invoice_item_3 = create(:invoice_item, item: @item_1, status: 1, invoice: @invoice_3, created_at: "Wednesday, September 15, 2021")
       @invoice_item_3 = create(:invoice_item, item: @item_3, status: 0, invoice: @invoice_4, created_at: "Wednesday, September 15, 2021")
     end
 
-    it 'gets only packaged items' do
-      expect(@merchant.packaged_items).to eq([@item_1, @item_2])
+    it 'gets only packaged/pending items' do
+      expect(@merchant.packaged_items).to eq([@item_2, @item_1])
     end
   end
 end
