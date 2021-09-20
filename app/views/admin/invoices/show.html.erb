@@ -20,3 +20,12 @@
 <h4>Total Revenue</h4>
 
 <%= @invoice.revenue %>
+
+<section id='change-status'>
+  <%= form_with model: [:admin, @invoice], method: :patch, local: true do |form| %>
+
+    <%= form.select(:status, ['completed', 'in progress', 'cancelled'], selected: @invoice.status) %>
+    <%= form.submit "Update Invoice Status" %>
+
+  <% end %>
+</section>
