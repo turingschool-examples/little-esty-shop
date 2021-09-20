@@ -36,6 +36,9 @@ RSpec.describe 'admin merchants index page' do
     Transaction.create!(invoice_id: @invoice_5.id, result: "success")
     Transaction.create!(invoice_id: @invoice_6.id, result: "success")
 
+
+    @merchant_7 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
+
   end
 
   it 'lists all merchants' do
@@ -64,7 +67,7 @@ RSpec.describe 'admin merchants index page' do
     click_on("New Merchant")
     expect(current_path).to eq("/admin/merchants/new")
   end
-
+  
   it 'lists top 5 merchants by revenue as links to their respective show pages' do
     visit '/admin/merchants'
     within("#top_cinco") do
@@ -85,6 +88,43 @@ RSpec.describe 'admin merchants index page' do
         within("#top_cinco") do
       expect(page).to have_content("03/11/11")
       expect(page).to_not have_content("03/25/12")
+      
+  it 'has a button to disable the merchant' do
+    visit '/admin/merchants'
+    expect(page).to have_button('Disable Merchant')
+    within "#merchant-#{@merchant_1.id}" do
+      click_button('Disable Merchant')
+      expect(current_path).to eq("/admin/merchants")
+    end
+  end
+
+  it 'has a button to enable the merchant' do
+    visit '/admin/merchants'
+    expect(page).to have_button('Disable Merchant')
+    within "#merchant-#{@merchant_7.id}" do
+      click_button('Enable Merchant')
+      expect(current_path).to eq("/admin/merchants")
+      expect(page).to have_content('enabled')
+    end
+  end
+
+  it 'has a section for enabled merchants' do
+    visit '/admin/merchants'
+    within '#enabled' do
+      expect(page).to have_content(@merchant_1.name)
+      expect(page).to have_content(@merchant_1.status)
+      expect(page).to_not have_content(@merchant_7.name)
+      expect(page).to_not have_content(@merchant_7.status)
+    end
+  end
+  
+  it 'has a section for enabled merchants' do
+    visit '/admin/merchants'
+    within '#disabled' do
+      expect(page).to have_content(@merchant_7.name)
+      expect(page).to have_content(@merchant_7.status)
+      expect(page).to_not have_content(@merchant_1.name)
+      expect(page).to_not have_content(@merchant_1.status)
     end
   end
 end
