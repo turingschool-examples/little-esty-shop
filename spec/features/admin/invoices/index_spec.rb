@@ -13,10 +13,10 @@ RSpec.describe 'admin invoice index page' do
     visit admin_invoices_path
 
     within('#invoice-ids') do
-      expect(page).to have_link(@invoice_1.id)
-      expect(page).to have_link(@invoice_2.id)
-      expect(page).to have_link(@invoice_3.id)
-      expect(page).to have_link(@invoice_4.id)
+      expect(page).to have_link("#{@invoice_1.id}")
+      expect(page).to have_link("#{@invoice_2.id}")
+      expect(page).to have_link("#{@invoice_3.id}")
+      expect(page).to have_link("#{@invoice_4.id}")
     end
 
     click_link "#{@invoice_1.id}"

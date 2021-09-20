@@ -1,8 +1,3 @@
-# I am taken to a form that allows me to add merchant information.
-# When I fill out the form I click ‘Submit’
-# Then I am taken back to the admin merchants index page
-# And I see the merchant I just created displayed
-# And I see my merchant was created with a default status of disabled.
 require 'rails_helper'
 
 RSpec.describe 'New Merchant' do
@@ -18,7 +13,7 @@ RSpec.describe 'New Merchant' do
     expect(page).to have_content("Ted")
 
     visit new_admin_merchant_path
-    
+
     fill_in "Name", with: nil
 
     click_button "Submit"
