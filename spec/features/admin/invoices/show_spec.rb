@@ -47,10 +47,10 @@ RSpec.describe 'admin invoice show page' do
     visit(admin_invoice_path(@invoice_1))
 
     within('#change-status') do
-      expect(page).to have_content(@invoice_item_1.status)
+      expect(page).to have_content(@invoice_1.status)
     end
 
-    select('completed', from: 'change status')
+    select('completed', from: 'invoice_status')
 
     within('#change-status') do
       click_button 'Update Invoice Status'
@@ -61,17 +61,5 @@ RSpec.describe 'admin invoice show page' do
     within('#change-status') do
       expect(page).to have_content('completed')
     end
-
   end
 end
-
-# As an admin
-# When I visit an admin invoice show page
-# I see the invoice status is a select field
-# And I see that the invoice's current status is selected
-# When I click this select field,
-# Then I can select a new status for the Invoice,
-# And next to the select field I see a button to "Update Invoice Status"
-# When I click this button
-# I am taken back to the admin invoice show page
-# And I see that my Invoice's status has now been updated
