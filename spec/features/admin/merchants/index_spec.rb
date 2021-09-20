@@ -82,8 +82,7 @@ RSpec.describe 'admin merchants index page' do
 
   it 'lists top 5 merchants best day ever' do
     visit '/admin/merchants'
-    save_and_open_page
-    within("#top_cinco") do
+        within("#top_cinco") do
       expect(page).to have_content("03/11/11")
       expect(page).to_not have_content("03/25/12")
     end
