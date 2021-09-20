@@ -48,20 +48,9 @@ RSpec.describe "merchant invoices show page" do
     expect(page).to_not have_content(@invoice_item_3.unit_price)
   end
 
-#   As a merchant
-# When I visit my merchant invoice show page
-# I see that each invoice item status is a select field
-# And I see that the invoice item's current status is selected
-# When I click this select field,
-# Then I can select a new status for the Item,
-# And next to the select field I see a button to "Update Item Status"
-# When I click this button
-# I am taken back to the merchant invoice show page
-# And I see that my Item's status has now been updated
-
   it 'shows a select field for each invoice item status' do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
-    save_and_open_page
+
     expect(page).to have_content(@item_1.name)
     within("#status-#{@invoice_item_1.id}") do
       select("pending", from: "invoice_item_status")
@@ -70,5 +59,4 @@ RSpec.describe "merchant invoices show page" do
     expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
     expect(page).to have_content("packaged")
   end
-end
 end
