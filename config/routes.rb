@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get "/dashboard", controller: :merchants, action: :show, as: "dashboard"
     resources :items, controller: :merchant_items
     resources :invoices, controller: :merchant_invoices
+    resources :invoice_items, only: :update
   end
 
   resources :items

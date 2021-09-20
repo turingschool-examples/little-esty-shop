@@ -7,9 +7,9 @@ class InvoiceItem < ApplicationRecord
   validates :status, presence: true
 
   enum status: {
-    packaged: 0,
-    pending: 1,
-    shipped: 2
+    "packaged": 0,
+    "pending": 1,
+    "shipped": 2
   }
 
   def self.not_shipped

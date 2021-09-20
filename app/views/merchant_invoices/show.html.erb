@@ -1,17 +1,24 @@
-<h1>Invoice# <%= @invoice.id %></h1>
+<h1>Invoice #<%= @invoice.id %></h1>
   <p>Status: <%= @invoice.status %></p>
-  <p>Created at:<%= @invoice.date %></p>
+  <p>Created at: <%= @invoice.date %></p>
+
+
 
 <br>
 
-<h3>Total Revenue Y'all</h3>
-<p><%=@invoice.revenue %></p>
+<h3>Total Revenue <%=@invoice.revenue %></h3>
 
+<h3>Customer name: <%= @invoice.customer_name %></h3><br>
 
-<% @items.each do |item| %>
-  <%= item.name %>
-  <%= item.amount(@invoice.id) %>
-  <%= item.sold_price(@invoice.id) %>
-  <%= item.order_status(@invoice.id) %>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <ul>
+    <li><%= invoice_item.item.name %></li>
+    <p>Quantity: <%= invoice_item.item.amount(@invoice.id) %></p>
+    <p>Price: <%= invoice_item.item.sold_price(@invoice.id) %></p>
+    <div id="status-<%= invoice_item.id %>">
+    <%= form_with model: [@merchant, invoice_item], method: :patch, local: true do |f|  %>
+    <p>Status: <%= f.select :status, ['shipped', 'packaged', 'pending'], selected: invoice_item.status %> <%= f.submit "Update Item Status" %></p>
+    <% end %>
+  </div>
+  </ul>
 <% end %>
-
