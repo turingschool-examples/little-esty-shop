@@ -98,7 +98,7 @@ RSpec.describe Merchant do
       @item_3 = create(:item, merchant: @merchant_2)
       @invoice_item_1 = create(:invoice_item, item: @item_2, status: 2, invoice: @invoice_1)
       @invoice_item_2 = create(:invoice_item, item: @item_2, status: 0,invoice: @invoice_2, created_at: "Thursday, September 16, 2021")
-      @invoice_item_3 = create(:invoice_item, item: @item_1, status: 0, invoice: @invoice_3, created_at: "Wednesday, September 15, 2021")
+      @invoice_item_3 = create(:invoice_item, item: @item_1, status: 1, invoice: @invoice_3, created_at: "Wednesday, September 15, 2021")
       @invoice_item_3 = create(:invoice_item, item: @item_3, status: 0, invoice: @invoice_4, created_at: "Wednesday, September 15, 2021")
     end
 

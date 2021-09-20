@@ -40,10 +40,10 @@ RSpec.describe 'Merchant#dashboard' do
 
     it 'shows items ready to ship section' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-save_and_open_page
+
       expect(page).to have_content("Items Ready to Ship")
       expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@invoice_1.id)
+      expect(page).to have_link(@invoice_1.id)
       expect(page).to have_content(@invoice_1.date)
       expect(@item_1.name).to appear_before(@item_2.name)
     end

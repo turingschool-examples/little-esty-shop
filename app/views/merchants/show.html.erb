@@ -8,7 +8,7 @@
   <ul>
     <li><%= item.name %></li>
     <% item.ordered_invoices.each do |invoice| %>
-    <p>Invoice #<%= invoice.id %> <%= invoice.date %> </p>
+    <p>Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant, invoice.id) %> <%= invoice.date %> </p>
   </ul>
     <% end %>
 <% end %>
