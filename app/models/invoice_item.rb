@@ -11,8 +11,4 @@ class InvoiceItem < ApplicationRecord
     "pending": 1,
     "shipped": 2
   }
-
-  def self.not_shipped
-    InvoiceItem.where(status: [0,1])
-  end
 end

@@ -5,6 +5,6 @@ class Customer < ApplicationRecord
   validates :last_name, presence: true
 
   def self.five_best_customers
-    Customer.joins(invoices: :transactions).group('customers.id').where('transactions.result = ?', 'success').select('customers.*, count(transactions.result) as transaction_count').order(transaction_count: :desc).limit(5)
+    joins(invoices: :transactions).group('customers.id').where('transactions.result = ?', 'success').select('customers.*, count(transactions.result) as transaction_count').order(transaction_count: :desc).limit(5)
   end
 end
