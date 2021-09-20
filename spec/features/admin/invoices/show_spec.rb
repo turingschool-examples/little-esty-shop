@@ -42,4 +42,24 @@ RSpec.describe 'admin invoice show page' do
 
     expect(page).to have_content(@invoice_1.revenue)
   end
+
+  it 'can see and update invoice status' do
+    visit(admin_invoice_path(@invoice_1))
+
+    within('#change-status') do
+      expect(page).to have_content(@invoice_1.status)
+    end
+
+    select('completed', from: 'invoice_status')
+
+    within('#change-status') do
+      click_button 'Update Invoice Status'
+    end
+
+    expect(current_path).to eq(admin_invoice_path(@invoice_1))
+
+    within('#change-status') do
+      expect(page).to have_content('completed')
+    end
+  end
 end

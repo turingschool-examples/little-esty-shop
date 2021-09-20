@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-
-
 RSpec.describe 'admin merchants show page' do
   it "has a link to the merchant and shows all items for a merchant" do
     merchant_1 = Merchant.create!(name: 'Weston')
