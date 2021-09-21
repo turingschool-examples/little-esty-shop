@@ -17,6 +17,29 @@ class Merchant < ApplicationRecord
      where(status: 1)
    end
 
+  def items_disabled_list 
+    Item.select("items.*")
+    .where(items: {status: 1})
+    .where("merchant_id = ?", self.id)
+  end
+
+  def items_enabled_list 
+    Item.select("items.*")
+    .where(items: {status: 0})
+    .where("merchant_id = ?", self.id)
+  end
+
+   # def self.top_admin_5_customers
+   #   Customer.select('customers.*, count(transactions.result) as revenue')
+   #   .joins(invoices: :transactions)
+   #   .group(:id)
+   #   .where('transactions.result = ?', 'success')
+   #   .order(revenue: :desc)
+   #   .limit(5)
+   #
+   # end
+ 
+
   def top_5_customers
     Merchant.joins(:items)
     .joins("RIGHT JOIN invoice_items ON items.id = invoice_items.item_id")
