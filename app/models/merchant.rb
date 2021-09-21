@@ -37,7 +37,7 @@ class Merchant < ApplicationRecord
              .order(count: :desc)
              .limit(5)
   end
-  
+
   def top_five_items
     items.joins(invoices: :transactions)
         .where(transactions: {result: :success})
@@ -45,5 +45,16 @@ class Merchant < ApplicationRecord
         .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
         .order(item_revenue: :desc)
         .limit(5)
+  end
+
+  def self.five_best_merchants
+    joins(invoices: :transactions)
+          .where(transactions: {result: :success})
+          .group('merchants.id')
+          .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
+          .order(item_revenue: :desc)
+          .limit(5)
+
+
   end
 end
