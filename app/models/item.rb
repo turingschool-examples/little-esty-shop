@@ -28,4 +28,10 @@ class Item < ApplicationRecord
   def ordered_invoices
     invoices.group(:id).order(:created_at)
   end
+
+  def item_best_day
+    invoices.where(invoice_items: {item_id: id})
+            .order(quantity: :desc)
+            .first.created_at
+  end
 end
