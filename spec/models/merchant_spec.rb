@@ -11,8 +11,9 @@ RSpec.describe Merchant do
     it {should have_many(:invoices).through(:invoice_items)}
   end
 
-  describe 'class methods' do
+  # Enum status tests
 
+  describe 'class methods' do
     it 'can return the items that have not shipped and has a link to the original invoice' do
       merchant = Merchant.create!({name: "Fucko"})
       item_1 = merchant.items.create!({name: "chicken burger", description: "eat the chicken", unit_price: 45000 })
@@ -26,8 +27,10 @@ RSpec.describe Merchant do
       customer_1 = Customer.create!({first_name: "Dog", last_name: "Man"})
       invoice_1 = customer_1.invoices.create!({status: "in progress"})
       pair_1 = invoice_1.invoice_items.create!({item_id: item_1.id, quantity: 2, unit_price: 13435, status: "packaged"})
+      
       invoice_2 = customer_1.invoices.create!({status: "in progress"})
       pair_2 = invoice_2.invoice_items.create!({item_id: item_2.id, quantity: 1, unit_price: 13435, status: "packaged"})
+
       invoice_3 = customer_1.invoices.create!({status: "in progress"})
       pair_3 = invoice_3.invoice_items.create!({item_id: item_3.id, quantity: 2, unit_price: 13435, status: "packaged"})
 
