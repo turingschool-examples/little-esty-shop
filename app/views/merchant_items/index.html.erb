@@ -23,3 +23,10 @@
 <% end %>
 
 <%= link_to 'Create New Item', new_merchant_item_path(@merchant) %>
+
+<h5>Top Items:</h5>
+<section id="top_five">
+<% @merchant.top_five_items.each do |item| %>
+  <%=item.name %>
+<% end %>
+</section>
