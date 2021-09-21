@@ -17,9 +17,9 @@ RSpec.describe Merchant do
     @customer_5 = Customer.create(first_name: 'Santa', last_name: 'Claus')
     @customer_6 = Customer.create(first_name: 'Barry', last_name: 'Jones')
     @merchant_1 = Merchant.create!(name: "Cool Shirts")
-    @merchant_2 = Merchant.create!(name: "Ugly Shirts")
+    @merchant_2 = Merchant.create!(name: "Ugly Shirts", status: 1)
     @merchant_3 = Merchant.create!(name: "Rad Shirts")
-    @merchant_4 = Merchant.create!(name: "Bad Shirts")
+    @merchant_4 = Merchant.create!(name: "Bad Shirts", status: 1)
     @merchant_5 = Merchant.create!(name: "Khoi's Shirts")
     @merchant_6 = Merchant.create!(name: "Kelsey's Shirts")
     @item_1 = Item.create!(name: "New shirt", description: "ugly shirt", unit_price: 1400, merchant_id: @merchant_1.id)
@@ -75,19 +75,11 @@ RSpec.describe Merchant do
       expect(Merchant.top_5_merchants).to eq([@merchant_3, @merchant_5, @merchant_1, @merchant_6, @merchant_2])
     end
     it 'returns a list of all enabled merchants' do
-      merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      merchant_3= Merchant.create!(name: "Bill",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      expect(Merchant.enabled_list).to eq([merchant_1,merchant_3 ])
+      expect(Merchant.enabled_list).to eq([@merchant_1,@merchant_3, @merchant_5, @merchant_6 ])
     end
 
     it 'returns a list of all enabled merchants' do
-      merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      merchant_3= Merchant.create!(name: "Bill",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      expect(Merchant.disabled_list).to eq([merchant_2, merchant_4])
+      expect(Merchant.disabled_list).to eq([@merchant_2, @merchant_4])
     end
   end
 
@@ -95,9 +87,5 @@ RSpec.describe Merchant do
     it 'returns the best day of revenue for a specific merchant' do
       expect(@merchant_1.merchant_best_day_ever).to eq(@invoice_7.created_at.strftime("%m/%d/%y"))
     end
-
-    # it 'returns the top 5 customers for a specific merchant'do
-    # expect(@merchant_1.top_admin_5_customers).to eq([@customer_1, @customer_3, @customer_5, @customer_2, @customer_4])
-    # end
   end
 end
