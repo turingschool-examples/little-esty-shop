@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Merchant do
   describe 'validations' do
     it {should validate_presence_of :name}
-    it {should validate_presence_of :id}
   end
 
   describe 'relationships' do
@@ -11,7 +10,7 @@ RSpec.describe Merchant do
     it {should have_many(:invoice_items).through(:items)}
     it {should have_many(:invoices).through(:invoice_items)}
   end
-  
+
   before :each do
     @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
     @merchant_1 = Merchant.create!(name: "Cool Shirts")
@@ -60,6 +59,7 @@ RSpec.describe Merchant do
     it 'returns the best day of revenue for a specific merchant' do
       expect(@merchant_1.merchant_best_day_ever).to eq(@invoice_7.created_at.strftime("%m/%d/%y"))
     end
+  end
 
   describe 'class_methods' do
     it 'returns a list of all enabled merchants' do
@@ -69,7 +69,7 @@ RSpec.describe Merchant do
       merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
       expect(Merchant.enabled_list).to eq([merchant_1,merchant_3 ])
     end
-    
+
     it 'returns a list of all enabled merchants' do
       merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
       merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
