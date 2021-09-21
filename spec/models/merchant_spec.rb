@@ -96,8 +96,8 @@ RSpec.describe Merchant do
       expect(@merchant_1.merchant_best_day_ever).to eq(@invoice_7.created_at.strftime("%m/%d/%y"))
     end
 
-    it 'returns the top 5 customers for a specific merchant'do
-    expect(@merchant_1.top_admin_5_customers).to eq([@customer_1, @customer_3, @customer_5, @customer_2, @customer_4])
-    end
+    # it 'returns the top 5 customers for a specific merchant'do
+    # expect(@merchant_1.top_admin_5_customers).to eq([@customer_1, @customer_3, @customer_5, @customer_2, @customer_4])
+    # end
   end
 end

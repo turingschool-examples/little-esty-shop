@@ -15,14 +15,15 @@ class Merchant < ApplicationRecord
      where(status: 1)
    end
 
-   def top_admin_5_customers
-     Customer.select('customers.*, count(transactions.result) as revenue')
-     .joins(invoices: :transactions)
-     .group(:id)
-     .where('transactions.result = ?', 'success')
-     .order(revenue: :desc)
-
-   end
+   # def self.top_admin_5_customers
+   #   Customer.select('customers.*, count(transactions.result) as revenue')
+   #   .joins(invoices: :transactions)
+   #   .group(:id)
+   #   .where('transactions.result = ?', 'success')
+   #   .order(revenue: :desc)
+   #   .limit(5)
+   #
+   # end
 
   def top_5_customers
     joins(:items)
