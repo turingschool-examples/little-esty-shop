@@ -67,7 +67,7 @@ RSpec.describe 'admin merchants index page' do
     click_on("New Merchant")
     expect(current_path).to eq("/admin/merchants/new")
   end
-  
+
   it 'lists top 5 merchants by revenue as links to their respective show pages' do
     visit '/admin/merchants'
     within("#top_cinco") do
@@ -88,7 +88,9 @@ RSpec.describe 'admin merchants index page' do
         within("#top_cinco") do
       expect(page).to have_content("03/11/11")
       expect(page).to_not have_content("03/25/12")
-      
+    end
+  end
+
   it 'has a button to disable the merchant' do
     visit '/admin/merchants'
     expect(page).to have_button('Disable Merchant')
@@ -117,7 +119,7 @@ RSpec.describe 'admin merchants index page' do
       expect(page).to_not have_content(@merchant_7.status)
     end
   end
-  
+
   it 'has a section for enabled merchants' do
     visit '/admin/merchants'
     within '#disabled' do

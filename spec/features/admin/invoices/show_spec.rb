@@ -29,9 +29,9 @@ RSpec.describe 'Admin Invoice Show page' do
   it 'lists all items on invoice with name, quantity, price, item status' do
     visit "/admin/invoices/#{@invoice_1.id}"
     expect(page).to have_content(@item_1.name)
-    expect(page).to have_content(@invoice_item.quantity)
-    expect(page).to have_content(@invoice_item.unit_price)
-    expect(page).to have_content(@invoice_item.status)
+    expect(page).to have_content(@invoice_item_1.quantity)
+    expect(page).to have_content(@invoice_item_1.unit_price)
+    expect(page).to have_content(@invoice_item_1.status)
   end
 
   it 'shows the total revenue generated from the invoice' do
