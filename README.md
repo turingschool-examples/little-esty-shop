@@ -9,7 +9,7 @@
 * [Contact](#contact)
 
 ## General Info
-"Little Esty Shop" is a four person, 9 day group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a 4 person, 9 day group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
@@ -19,7 +19,6 @@
 
 ## Database Schema
 ![Database Schema](https://user-images.githubusercontent.com/83885722/134253424-738ecddb-56c4-4aea-a568-f7834f276712.png)
-
 
 ## Technologies
 * Ruby version: 2.7.2
@@ -33,6 +32,7 @@
 * FactoryBot Gem
 * Faker Gem
 * SimpleCov Gem
+* Heroku
 
 ## Requirements
 - must use Rails 5.2.x
@@ -60,3 +60,4 @@ This project was hammered out by
 * [@Lmcourt](https://github.com/Lmcourt)
 * [@Tstaros23](https://github.com/Tstaros23)
 * [@WMudgeEllis](https://github.com/WMudgeEllis)
+
