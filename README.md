@@ -1,16 +1,36 @@
-TEST
+#💰 💵 Little Esty Shop 💵 💰
+## Table of contents
+* [General Info](#general-info)
+* [Learning Goals](#learning-goals)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Requirements](#requirements)
+* [Setup](#Setup)
+* [Contact](#contact)
 
-# Little Esty Shop
-
-## Background and Description
-
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+## General Info
+"Little Esty Shop" is a four person, 9 day group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
 - Utilize advanced routing techniques including namespacing to organize and group like functionality together.
 - Utilize advanced active record techniques to perform complex database queries
 - Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+
+## Screenshots
+
+## Technologies
+* Ruby version: 2.7.2
+* Rails 5.2.5
+* PostgreSQL
+* Capybara Gem
+* Orderly Gem
+* Shoulda Matchers Gem
+* Launchy Gem
+* Bootsnap Gem
+* FactoryBot Gem
+* Faker Gem
+* SimpleCov Gem
 
 ## Requirements
 - must use Rails 5.2.x
@@ -32,9 +52,9 @@ This project requires Ruby 2.7.2.
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 
-## Phases
-
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+## Contact
+This project was hammered out by
+* [@JeJones21](https://github.com/JeJones21)
+* [@Lmcourt](https://github.com/Lmcourt)
+* [@Tstaros23](https://github.com/Tstaros23)
+* [@WMudgeEllis](https://github.com/WMudgeEllis)
