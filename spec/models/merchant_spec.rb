@@ -7,8 +7,9 @@ RSpec.describe Merchant do
 
   describe 'relationships' do
     it {should have_many :items}
+    it {should have_many(:invoice_items).through(:items)}
+    it {should have_many(:invoices).through(:invoice_items)}
   end
-
 
   describe 'class methods' do
 
@@ -43,7 +44,7 @@ RSpec.describe Merchant do
       pair_5 = invoice_5.invoice_items.create!({item_id: item_5.id, quantity: 1, unit_price: 13435, status: "pending"})
 
       expect(merchant.items_ready_to_ship).to eq([item_1, item_2, item_3, item_4])
-
+    end
 
   before :each do
     @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
@@ -93,6 +94,7 @@ RSpec.describe Merchant do
     it 'returns the best day of revenue for a specific merchant' do
       expect(@merchant_1.merchant_best_day_ever).to eq(@invoice_7.created_at.strftime("%m/%d/%y"))
     end
+  end
 
   describe 'class_methods' do
     it 'returns a list of all enabled merchants' do

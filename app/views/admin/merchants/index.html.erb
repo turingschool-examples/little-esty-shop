@@ -13,30 +13,31 @@
   <% end %>
 </section>
 
+<section id="all_merchants">
+  <h3>Enabled</h3>
+  <section id='enabled'>
+  <%@merchants.enabled_list.each do |merchant| %>
+    <ul>
+      <div id="merchant-<%=merchant.id %>">
+      <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
+      <li> <%=merchant.status  %> </li>
+      <%= button_to 'Disable Merchant', "/admin/merchants/#{merchant.id}", method: :patch, params:{status: 'disabled'} %>
+    </div>
+    </ul>
+  </section>
+  <% end %>
 
-<h3>Enabled</h3>
-<section id='enabled'>
-<%@merchants.enabled_list.each do |merchant| %>
-  <ul>
-    <div id="merchant-<%=merchant.id %>">
-    <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
-    <li> <%=merchant.status  %> </li>
-    <%= button_to 'Disable Merchant', "/admin/merchants/#{merchant.id}", method: :patch, params:{status: 'disabled'} %>
-  </div>
-  </ul>
+  <h3>Disabled</h3>
+  <section id='disabled'>
+  <%@merchants.disabled_list.each do |merchant| %>
+    <ul>
+      <div id="merchant-<%=merchant.id %>">
+      <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
+      <li> <%=merchant.status  %> </li>
+      <%= button_to 'Enable Merchant', "/admin/merchants/#{merchant.id}", method: :patch, params:{status: 'enabled'} %>
+    </div>
+    </ul>
+  </section>
+  <% end %>
+
 </section>
-<% end %>
-
-<h3>Disabled</h3>
-<section id='disabled'>
-<%@merchants.disabled_list.each do |merchant| %>
-  <ul>
-    <div id="merchant-<%=merchant.id %>">
-    <li>Name: <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %></li>
-    <li> <%=merchant.status  %> </li>
-    <%= button_to 'Enable Merchant', "/admin/merchants/#{merchant.id}", method: :patch, params:{status: 'enabled'} %>
-  </div>
-  </ul>
-</section>
-<% end %>
-
