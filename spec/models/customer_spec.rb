@@ -48,4 +48,26 @@ RSpec.describe Customer do
 
     expect(Customer.five_best_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
   end
+
+  it 'can get number of successful transactions for a merchant' do
+    customer = create(:customer)
+
+    merchant_1 = create(:merchant)
+    merchant_2 = create(:merchant)
+
+    item_1 = create(:item, merchant: merchant_1)
+    item_2 = create(:item, merchant: merchant_2)
+
+    invoice = create(:invoice, customer: customer)
+
+    create(:invoice_item, item: item_1, invoice: invoice)
+
+    transaction_1 = create(:transaction, invoice: invoice, result: 'success')
+    transaction_2 = create(:transaction, invoice: invoice, result: 'success')
+    transaction_3 = create(:transaction, invoice: invoice, result: 'success')
+    transaction_4 = create(:transaction, invoice: invoice, result: 'failed')
+
+    expect(customer.number_successful_transactions(merchant_1.id)).to eq(3)
+    expect(customer.number_successful_transactions(merchant_2.id)).to eq(0)
+  end
 end

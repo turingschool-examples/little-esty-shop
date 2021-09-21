@@ -17,6 +17,6 @@
   <h3>Five Best Customers</h3>
   <% @five_best.each do |customer|%>
     <p><%= "#{customer.first_name} #{customer.last_name}" %>
-      Number of successful transactions: <%=  %>
+      Number of successful transactions: <%= customer.number_successful_transactions(@merchant.id) %>
   <% end %>
 </section>
