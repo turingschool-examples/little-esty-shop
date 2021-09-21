@@ -32,6 +32,6 @@ class Item < ApplicationRecord
   def item_best_day
     invoices.where(invoice_items: {item_id: id})
             .order(quantity: :desc)
-            .first.created_at
+            .first.created_at.strftime("%m/%d/%y")
   end
 end
