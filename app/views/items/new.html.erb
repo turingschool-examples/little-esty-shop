@@ -1,0 +1,16 @@
+<h1>New item</h1>
+
+<%= form_with model: [@merchant, @item], local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+
+  <%= form.label :unit_price %>
+  <%= form.number_field :unit_price %>
+
+  <%= form.hidden_field :status, value: 'disabled' %>
+
+  <%= form.submit "Submit" %>
+<% end %>
