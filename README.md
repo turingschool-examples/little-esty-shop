@@ -1,4 +1,5 @@
 # Little Esty Shop
+![image](https://user-images.githubusercontent.com/83930724/134262543-10ea9310-5d10-4c65-b735-0ed9eab75afc.png)
 
 ## Background and Description
 
