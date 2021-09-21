@@ -54,7 +54,13 @@ class Merchant < ApplicationRecord
           .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
           .order(item_revenue: :desc)
           .limit(5)
+  end
 
+  def total_revenue
+    wip = items.joins(invoices: :transactions)
+          .where(transactions: {result: :success})
+          .select('sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
 
+    require "pry"; binding.pry
   end
 end
