@@ -2,3 +2,17 @@
 
 <%= link_to "Items", merchant_items_path(@merchant) %>
 <%= link_to "Invoices", merchant_invoices_path(@merchant) %>
+
+<h3>Top 5 Customers<h3>
+<% @merchant.top_5_customers.each do |customer|%>
+    <p><%= customer.first_name %></p>
+    <p><%= customer.last_name %></p>
+    <p><%= customer.transactions_per %></p>
+<% end %>
+
+<h3>Items Ready To Ship</h3>
+<% @merchant.items_ready_to_ship.each do |item| %> 
+    <p><%= item.name %></p>
+    <p><%= item.invoice_created_at.strftime("%A, %B-%e, %Y") %></p>
+    <p><%= link_to "Invoice Num #{item.invoice_id}", merchant_invoice_path(@merchant, item) %></p>
+<% end %>
