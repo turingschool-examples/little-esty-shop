@@ -84,19 +84,24 @@ RSpec.describe Merchant do
       invoice_6 = customer_6.invoices.create!(status: 2)
 
       transaction_1 = invoice_1.transactions.create!(credit_card_number: 123, result: 'success')
+      transaction_1 = invoice_1.transactions.create!(credit_card_number: 123, result: 'success')
 
       transaction_2 = invoice_2.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_2 = invoice_2.transactions.create!(credit_card_number: 123, result: 'success')
+      transaction_2 = invoice_2.transactions.create!(credit_card_number: 123, result: 'success')
 
       transaction_3 = invoice_3.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_3 = invoice_3.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_3 = invoice_3.transactions.create!(credit_card_number: 123, result: 'success')
+      transaction_3 = invoice_3.transactions.create!(credit_card_number: 123, result: 'success')
 
       transaction_4 = invoice_4.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_4 = invoice_4.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_4 = invoice_4.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_4 = invoice_4.transactions.create!(credit_card_number: 123, result: 'success')
+      transaction_4 = invoice_4.transactions.create!(credit_card_number: 123, result: 'success')
 
+      transaction_5 = invoice_5.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_5 = invoice_5.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_5 = invoice_5.transactions.create!(credit_card_number: 123, result: 'success')
       transaction_5 = invoice_5.transactions.create!(credit_card_number: 123, result: 'success')
@@ -105,6 +110,8 @@ RSpec.describe Merchant do
       #tests for failed/success
       transaction_6 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
       transaction_7 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
+      #tests for limit
+      transaction_7 = invoice_6.transactions.create!(credit_card_number: 123, result: 'success')
 
       merchant =  Merchant.create!(name: "Bob's Best")
 
