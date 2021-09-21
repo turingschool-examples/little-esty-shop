@@ -97,13 +97,17 @@ RSpec.describe "merchant items index page" do
     invoice_item_7 = create(:invoice_item, item: item_7, status: 2, unit_price: 0, quantity: 0, invoice: invoice_7)
 
     visit merchant_items_path(merchant)
-    save_and_open_page
 
      within("#top_five") do
       expect(item_5.name).to appear_before(item_4.name)
       expect(item_4.name).to appear_before(item_3.name)
       expect(item_3.name).to appear_before(item_2.name)
       expect(item_2.name).to appear_before(item_1.name)
+
+      expect(page).to have_content("$10")
+      click_link item_5.name
+      expect(current_path).to eq(merchant_item_path(merchant, item_5))
+
     end
   end
 end
