@@ -1,5 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :invoices, through: :items
+  has_many :customers, through: :invoices
 
   validates :name, presence: true
 
@@ -27,8 +29,16 @@ class Merchant < ApplicationRecord
     items.joins(:invoice_items).where.not('invoice_items.status = ?', 2)
   end
 
+  def five_best_customers
+    customers.joins(invoices: :transactions)
+             .where(transactions: {result: :success})
+             .group('customers.id')
+             .select('customers.*')
+             .order(count: :desc)
+             .limit(5)
+  end
+  
   def top_five_items
-
     items.joins(invoices: :transactions)
         .where(transactions: {result: :success})
         .group('items.id')
