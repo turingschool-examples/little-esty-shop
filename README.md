@@ -18,6 +18,7 @@
 - Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
 
 ## Screenshots
+![Database Schema](https://user-images.githubusercontent.com/83885722/134253299-f4eedb12-3c64-4ce1-ae14-361c04996c1d.png)
 
 ## Technologies
 * Ruby version: 2.7.2
