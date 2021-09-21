@@ -84,14 +84,13 @@ RSpec.describe 'Merchant index page' do
     it 'can show number of successful transactions' do
       visit(merchant_dashboard_path)
 
-      within('#5-best-customers') do
+      within('#5-best-customers') do                              #change to method name after definition?
         expect(page).to have_content("Number of successful transactions: 1")
         expect(page).to have_content("Number of successful transactions: 2")
         expect(page).to have_content("Number of successful transactions: 3")
         expect(page).to have_content("Number of successful transactions: 4")
         expect(page).to have_content("Number of successful transactions: 5")
       end
-
     end
   end
 end
