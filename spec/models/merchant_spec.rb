@@ -64,7 +64,8 @@ RSpec.describe Merchant do
     end
 
     it 'gets only packaged/pending items' do
-      expect(@merchant.packaged_items).to eq([@item_2, @item_1])
+      #added .sort here because I assume order doesn't matter
+      expect(@merchant.packaged_items.sort).to eq([@item_2, @item_1].sort)
     end
   end
 
@@ -112,8 +113,9 @@ RSpec.describe Merchant do
       #tests for failed/success
       transaction_6 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
       transaction_7 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
+      transaction_8 = invoice_6.transactions.create!(credit_card_number: 123, result: 'failed')
       #tests for limit
-      transaction_7 = invoice_6.transactions.create!(credit_card_number: 123, result: 'success')
+      transaction_9 = invoice_6.transactions.create!(credit_card_number: 123, result: 'success')
 
       merchant =  Merchant.create!(name: "Bob's Best")
 
