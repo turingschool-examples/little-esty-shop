@@ -10,4 +10,5 @@ class InvoiceItem < ApplicationRecord
 
   def create
   end
+
 end
