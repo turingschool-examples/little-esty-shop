@@ -55,25 +55,25 @@ RSpec.describe 'Merchant Dashboard' do
         end
 
         it 'has a section with items ready to ship from that merchant' do
+            @item_1 = double('item')
+            # Virtual Attributes
+            allow(@item_1).to receive(:invoice_created_at).and_return(@invoice_1.created_at)
+            allow(@item_1).to receive(:invoice_id).and_return(@invoice_1.id)
+            # Object Attributes
+            allow(@item_1).to receive(:name).and_return('chicken burger')
+            allow(@item_1).to receive(:description).and_return('eat the chicken')
+            allow(@item_1).to receive(:unit_price).and_return(45000)
 
-            ## needs help with virtual attributes
             expect(page).to have_content("Items Ready To Ship")
             expect(page).to have_content(@item_1.name)
-            expect(page).to have_content(@item_1[:invoice_created_at])
-            expect(page).to have_content("Invoice Num #{@invoice_1.id}")
-            # expect(page).to have_content(@item_2.name)
-            # expect(page).to have_content(@item_2[:invoice_created_at])
-            # expect(page).to have_link("Invoice Num #{@invoice_2.id}")
-            # expect(page).to have_content(@item_3.name)
-            # expect(page).to have_content(@item_3[:invoice_created_at])
-            # expect(page).to have_link("Invoice Num #{@invoice_3.id}")
-            # expect(page).to have_content(@item_4.name)
-            # expect(page).to have_content(@item_4[:invoice_created_at])
-            # expect(page).to have_link("Invoice Num #{@invoice_4.id}")
+            expect(page).to have_content(@item_1.invoice_created_at.strftime("%A, %B-%e, %Y"))
+            expect(page).to have_link("Invoice # #{@invoice_1.id}")
         end
 
         it 'is ordered by oldest created invoice' do
             expect(@item_1.name).to appear_before(@item_2.name)
+            expect(@item_2.name).to appear_before(@item_3.name)
+            expect(@item_3.name).to appear_before(@item_4.name)
         end
     end
 end
