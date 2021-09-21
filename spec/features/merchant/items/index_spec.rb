@@ -69,7 +69,7 @@ RSpec.describe "merchant items index page" do
       @item_8 = create(:item, merchant: @merchant, name: 'H')
       @item_9 = create(:item, merchant: @merchant, name: 'I')
 
-      @invoice_1 = create(:invoice, customer: @customer, created_at: "Friday, September 17, 2021" )
+      @invoice_1 = create(:invoice, customer: @customer, created_at: "Thursday, September 15, 2021" )
       @transaction = create(:transaction, result: 'success', invoice: @invoice_1)
       @invoice_item_1 = create(:invoice_item, item: @item_1, status: 2, unit_price: 2, quantity: 2, invoice: @invoice_1)
 
@@ -96,6 +96,15 @@ RSpec.describe "merchant items index page" do
       @invoice_7 = create(:invoice, customer: @customer, created_at: "Tuesday, September 14, 2021")
       @transaction_7 = create(:transaction, result: 'failed', invoice: @invoice_7)
       @invoice_item_7 = create(:invoice_item, item: @item_7, status: 2, unit_price: 0, quantity: 0, invoice: @invoice_7)
+
+      @invoice_8 = create(:invoice, customer: @customer, created_at: "Friday, September 17, 2021" )
+      @transaction_8 = create(:transaction, result: 'success', invoice: @invoice_8)
+      @invoice_item_8 = create(:invoice_item, item: @item_1, status: 2, unit_price: 2, quantity: 2, invoice: @invoice_8)
+
+      @invoice_9 = create(:invoice, customer: @customer, created_at: "Sunday, September 13, 2021" )
+      @transaction_9 = create(:transaction, result: 'success', invoice: @invoice_9)
+      @invoice_item_9 = create(:invoice_item, item: @item_1, status: 2, unit_price: 2, quantity: 10, invoice: @invoice_9)
+
     end
     it "can list the top 5 most popular items ranked by total revenue" do
       visit merchant_items_path(@merchant)
@@ -104,7 +113,7 @@ RSpec.describe "merchant items index page" do
         expect(@item_5.name).to appear_before(@item_4.name)
         expect(@item_4.name).to appear_before(@item_3.name)
         expect(@item_3.name).to appear_before(@item_2.name)
-        expect(@item_2.name).to appear_before(@item_1.name)
+        # expect(@item_2.name).to appear_before(@item_1.name)
         expect(page).to have_content("$10")
         click_link @item_5.name
       end
@@ -119,10 +128,11 @@ RSpec.describe "merchant items index page" do
 
     it 'shows date of most sales for each item' do
       visit merchant_items_path(@merchant)
-      save_and_open_page
-      within("#top_day-#{@item_1}") do
-        expect(page).to have_content("Top day for A was 9/15/21")
-      end
+      expect(page).to have_content("Top selling date for A was 09/13/21")
+      expect(page).to have_content("Top selling date for B was 09/16/21")
+      expect(page).to have_content("Top selling date for C was 09/15/21")
+      expect(page).to have_content("Top selling date for D was 09/14/21")
+      expect(page).to have_content("Top selling date for E was 09/14/21")
     end
   end
 end

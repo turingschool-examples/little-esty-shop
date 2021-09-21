@@ -90,7 +90,7 @@ RSpec.describe Item do
     end
 
     it 'has a best selling date' do
-      expect(@item_1.item_best_day).to eq("Thursday, September 16, 2021")
+      expect(@item_1.item_best_day).to eq("09/16/21")
     end
   end
 end
