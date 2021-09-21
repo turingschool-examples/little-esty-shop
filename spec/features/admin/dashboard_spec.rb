@@ -163,6 +163,8 @@ RSpec.describe 'admin dashboard page' do
       transaction_7 = create(:transaction, result: 'failed', invoice: invoice_7)
       invoice_item_7 = create(:invoice_item, item: item_7, status: 2, unit_price: 50, quantity: 50, invoice: invoice_7)
 
+      visit admin_dashboard_index_path
+      
       within('#top-5-merchants') do
         expect(page).to have_content(merchant_6.name)
         expect(page).to have_content(merchant_5.name)
