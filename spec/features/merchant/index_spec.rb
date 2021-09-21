@@ -35,6 +35,7 @@ RSpec.describe 'Merchant index page' do
       @invoice_5 = @customer_5.invoices.create!(status: 2)
       @invoice_6 = @customer_6.invoices.create!(status: 2)
 
+      #refactor later to use factory bot stuffz
       @transaction_1 = @invoice_1.transactions.create!(credit_card_number: 123, result: 'success')
 
       @transaction_2 = @invoice_2.transactions.create!(credit_card_number: 123, result: 'success')
