@@ -46,4 +46,9 @@ class Merchant < ApplicationRecord
         .order(item_revenue: :desc)
         .limit(5)
   end
+
+  def item_best_day
+    wip = items.joins(:invoices)
+    require "pry"; binding.pry
+  end
 end
