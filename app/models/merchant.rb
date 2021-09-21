@@ -1,5 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :invoices, through: :items
+  has_many :customers, through: :invoices
 
   validates :name, presence: true
 
@@ -25,5 +27,14 @@ class Merchant < ApplicationRecord
 
   def packaged_items
     items.joins(:invoice_items).where.not('invoice_items.status = ?', 2)
+  end
+
+  def five_best_customers
+    wip = customers.joins(invoices: :transactions)
+                   .where(transactions: {result: :success})
+                   .select('customers.*')
+
+
+    require "pry"; binding.pry
   end
 end
