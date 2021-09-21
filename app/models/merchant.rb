@@ -30,11 +30,11 @@ class Merchant < ApplicationRecord
   end
 
   def five_best_customers
-    wip = customers.joins(invoices: :transactions)
-                   .where(transactions: {result: :success})
-                   .select('customers.*')
-
-
-    require "pry"; binding.pry
+    customers.joins(invoices: :transactions)
+             .where(transactions: {result: :success})
+             .group('customers.id')
+             .select('customers.*')
+             .order(count: :desc)
+             .limit(5)
   end
 end
