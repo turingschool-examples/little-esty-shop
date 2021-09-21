@@ -57,10 +57,15 @@ class Merchant < ApplicationRecord
   end
 
   def total_revenue
-    wip = items.joins(invoices: :transactions)
-          .where(transactions: {result: :success})
-          .select('sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+     total_revenue_table = invoices.joins(:transactions)
+                                   .where(transactions: {result: :success})
+                                   .group('invoices.id')
+                                   .select('sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
 
-    require "pry"; binding.pry
+    if total_revenue_table.first != nil
+      total_revenue_table.first.total_revenue
+    else
+      0
+    end
   end
 end
