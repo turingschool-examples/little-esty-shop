@@ -15,6 +15,16 @@
   <h3>Five Best Customers:</h3>
   <% @five_best_customers.each do |customer| %>
     <%= "#{customer.first_name}" %>
-    <%= "#{customer.last_name}" %> 
+    <%= "#{customer.last_name}" %>
   <% end %>
+</section>
+
+<section id='top-5-merchants'>
+  <h3>Five Best Merchants:</h3>
+  <ol>
+    <% @top_five_merchants.each do |merchant| %>
+        <li><%= merchant.name %>Total revenue: </li>
+    <% end %>
+  </ol>
+
 </section>
