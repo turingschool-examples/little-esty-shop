@@ -102,19 +102,24 @@ RSpec.describe 'Merchant#dashboard' do
       InvoiceItem.create!(item: @item, invoice: @invoice_6, quantity: 100, unit_price: 100, status: 2)
     end
     it 'can show five best customers' do
-      visit(merchant_dashboard_path)
+      visit(merchant_dashboard_path(@merchant))
 
       within('#5-best-customers') do
-        expect(page).to have_content(@customer_1.name)
-        expect(page).to have_content(@customer_2.name)
-        expect(page).to have_content(@customer_3.name)
-        expect(page).to have_content(@customer_4.name)
-        expect(page).to have_content(@customer_5.name)
+        expect(page).to have_content(@customer_1.first_name)
+        expect(page).to have_content(@customer_1.last_name)
+        expect(page).to have_content(@customer_2.first_name)
+        expect(page).to have_content(@customer_2.last_name)
+        expect(page).to have_content(@customer_3.first_name)
+        expect(page).to have_content(@customer_3.last_name)
+        expect(page).to have_content(@customer_4.first_name)
+        expect(page).to have_content(@customer_4.last_name)
+        expect(page).to have_content(@customer_5.first_name)
+        expect(page).to have_content(@customer_5.last_name)
       end
     end
 
     it 'can show number of successful transactions' do
-      visit(merchant_dashboard_path)
+      visit(merchant_dashboard_path(@merchant))
 
       within('#5-best-customers') do                              #change to method name after definition?
         expect(page).to have_content("Number of successful transactions: 1")

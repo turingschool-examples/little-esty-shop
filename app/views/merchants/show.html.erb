@@ -12,3 +12,11 @@
   </ul>
     <% end %>
 <% end %>
+
+<section id='5-best-customers'>
+  <h3>Five Best Customers</h3>
+  <% @five_best.each do |customer|%>
+    <p><%= "#{customer.first_name} #{customer.last_name}" %>
+      Number of successful transactions: <%=  %>
+  <% end %>
+</section>
