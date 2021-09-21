@@ -17,7 +17,7 @@
 - Utilize advanced active record techniques to perform complex database queries
 - Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
 
-## Screenshots
+## Database Schema
 ![Database Schema](https://user-images.githubusercontent.com/83885722/134253424-738ecddb-56c4-4aea-a568-f7834f276712.png)
 
 
