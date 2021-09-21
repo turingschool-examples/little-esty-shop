@@ -7,8 +7,12 @@ class Item < ApplicationRecord
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
 
+  enum status: {
+    enabled: 0,
+    disabled: 1
+   }
+
   def create
   end
-
 
 end

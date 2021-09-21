@@ -223,8 +223,6 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.2)
   csv
-  factory_bot_rails
-  faker
   jbuilder (~> 2.5)
   launchy
   listen (>= 3.0.5, < 3.2)
