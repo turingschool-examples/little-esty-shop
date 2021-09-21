@@ -14,9 +14,6 @@ RSpec.describe Merchant do
   # Enum status tests
 
   describe 'class methods' do
-
-
-
     it 'can return the items that have not shipped and has a link to the original invoice' do
       merchant = Merchant.create!({name: "Fucko"})
       item_1 = merchant.items.create!({name: "chicken burger", description: "eat the chicken", unit_price: 45000 })
@@ -50,10 +47,15 @@ RSpec.describe Merchant do
 
   before :each do
     @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
+    @customer_2 = Customer.create(first_name: 'Sally', last_name: 'Johnson')
+    @customer_3 = Customer.create(first_name: 'Bill', last_name: 'Smith')
+    @customer_4 = Customer.create(first_name: 'Sara', last_name: 'Smith')
+    @customer_5 = Customer.create(first_name: 'Santa', last_name: 'Claus')
+    @customer_6 = Customer.create(first_name: 'Barry', last_name: 'Jones')
     @merchant_1 = Merchant.create!(name: "Cool Shirts")
-    @merchant_2 = Merchant.create!(name: "Ugly Shirts")
+    @merchant_2 = Merchant.create!(name: "Ugly Shirts", status: 1)
     @merchant_3 = Merchant.create!(name: "Rad Shirts")
-    @merchant_4 = Merchant.create!(name: "Bad Shirts")
+    @merchant_4 = Merchant.create!(name: "Bad Shirts", status: 1)
     @merchant_5 = Merchant.create!(name: "Khoi's Shirts")
     @merchant_6 = Merchant.create!(name: "Kelsey's Shirts")
     @item_1 = Item.create!(name: "New shirt", description: "ugly shirt", unit_price: 1400, merchant_id: @merchant_1.id)
@@ -69,6 +71,12 @@ RSpec.describe Merchant do
     @invoice_5 = Invoice.create(customer_id: @customer_1.id, status: 'completed', created_at: "2009-03-12 09:50:09 UTC")
     @invoice_6 = Invoice.create(customer_id: @customer_1.id, status: 'completed', created_at: "2012-03-12 09:50:09 UTC")
     @invoice_7 = Invoice.create(customer_id: @customer_1.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
+    @invoice_8 = Invoice.create(customer_id: @customer_2.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
+    @invoice_9 = Invoice.create(customer_id: @customer_3.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
+    @invoice_10 = Invoice.create(customer_id: @customer_3.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
+    @invoice_12 = Invoice.create(customer_id: @customer_4.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
+    @invoice_11 = Invoice.create(customer_id: @customer_5.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
+    @invoice_13 = Invoice.create(customer_id: @customer_5.id, status: 'completed', created_at: "2011-03-11 09:50:09 UTC")
     @invoice_item_1 = InvoiceItem.create!(item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: 1400, status: "pending")
     @invoice_item_2 = InvoiceItem.create!(item: @item_2, invoice: @invoice_2, quantity: 1, unit_price: 1000, status: "packaged")
     @invoice_item_3 = InvoiceItem.create!(item: @item_3, invoice: @invoice_3, quantity: 1, unit_price: 1700, status: "shipped")
@@ -76,12 +84,24 @@ RSpec.describe Merchant do
     @invoice_item_5 = InvoiceItem.create!(item: @item_5, invoice: @invoice_5, quantity: 1, unit_price: 1600, status: "shipped")
     @invoice_item_6 = InvoiceItem.create!(item: @item_6, invoice: @invoice_6, quantity: 1, unit_price: 1300, status: "shipped")
     @invoice_item_7 = InvoiceItem.create!(item: @item_1, invoice: @invoice_7, quantity: 2, unit_price: 1400, status: "shipped")
+    @invoice_item_8 = InvoiceItem.create!(item: @item_1, invoice: @invoice_8, quantity: 2, unit_price: 1400, status: "shipped")
+    @invoice_item_9 = InvoiceItem.create!(item: @item_1, invoice: @invoice_9, quantity: 2, unit_price: 1400, status: "shipped")
+    @invoice_item_10 = InvoiceItem.create!(item: @item_1, invoice: @invoice_10, quantity: 2, unit_price: 1400, status: "shipped")
+    @invoice_item_11 = InvoiceItem.create!(item: @item_1, invoice: @invoice_11, quantity: 2, unit_price: 1400, status: "shipped")
+    @invoice_item_12 = InvoiceItem.create!(item: @item_1, invoice: @invoice_12, quantity: 2, unit_price: 1400, status: "shipped")
+    @invoice_item_13 = InvoiceItem.create!(item: @item_1, invoice: @invoice_13, quantity: 2, unit_price: 1400, status: "shipped")
     Transaction.create!(invoice_id: @invoice_1.id, result: "success")
     Transaction.create!(invoice_id: @invoice_2.id, result: "success")
     Transaction.create!(invoice_id: @invoice_3.id, result: "success")
     Transaction.create!(invoice_id: @invoice_4.id, result: "success")
     Transaction.create!(invoice_id: @invoice_5.id, result: "success")
     Transaction.create!(invoice_id: @invoice_6.id, result: "success")
+    Transaction.create!(invoice_id: @invoice_8.id, result: "success")
+    Transaction.create!(invoice_id: @invoice_10.id, result: "success")
+    Transaction.create!(invoice_id: @invoice_11.id, result: "success")
+    Transaction.create!(invoice_id: @invoice_12.id, result: "success")
+    Transaction.create!(invoice_id: @invoice_9.id, result: "success")
+    Transaction.create!(invoice_id: @invoice_13.id, result: "success")
 
   end
 
@@ -90,29 +110,18 @@ RSpec.describe Merchant do
 
       expect(Merchant.top_5_merchants).to eq([@merchant_3, @merchant_5, @merchant_1, @merchant_6, @merchant_2])
     end
+    it 'returns a list of all enabled merchants' do
+      expect(Merchant.enabled_list).to eq([@merchant_1,@merchant_3, @merchant_5, @merchant_6 ])
+    end
+
+    it 'returns a list of all enabled merchants' do
+      expect(Merchant.disabled_list).to eq([@merchant_2, @merchant_4])
+    end
   end
 
   describe 'instance methods' do
     it 'returns the best day of revenue for a specific merchant' do
       expect(@merchant_1.merchant_best_day_ever).to eq(@invoice_7.created_at.strftime("%m/%d/%y"))
-    end
-  end
-
-  describe 'class_methods' do
-    it 'returns a list of all enabled merchants' do
-      merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      merchant_3= Merchant.create!(name: "Bill",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      expect(Merchant.enabled_list).to eq([merchant_1,merchant_3 ])
-    end
-
-    it 'returns a list of all enabled merchants' do
-      merchant_1 = Merchant.create!(name: "Bob",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_2 = Merchant.create!(name: "Sara",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      merchant_3= Merchant.create!(name: "Bill",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC")
-      merchant_4 = Merchant.create!(name: "Sam",created_at:" 2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC", status: 'disabled')
-      expect(Merchant.disabled_list).to eq([merchant_2, merchant_4])ß
     end
   end
 end
