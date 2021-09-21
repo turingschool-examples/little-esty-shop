@@ -142,6 +142,5 @@ RSpec.describe 'admin index page' do
     expect(customer_3.full_name).to appear_before(customer_5.full_name)
     expect(customer_5.full_name).to appear_before(customer_2.full_name)
     expect(customer_2.full_name).to appear_before(customer_4.full_name)
-    save_and_open_page
   end
 end
