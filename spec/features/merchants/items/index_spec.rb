@@ -23,5 +23,8 @@ RSpec.describe 'Merchant Items Index Page' do
     click_on "#{item_1.name}"
 
     expect(current_path).to eq(merchant_item_path(merchant, item_1))
+    expect(page).to have_content(item_1.name)
+    expect(page).to have_content(item_1.description)
+    expect(page).to have_content(item_1.unit_price)
   end
 end

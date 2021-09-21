@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe InvoiceItem do
   it {should belong_to :invoice}
   it {should belong_to :item}
-  #still need to create joins table
+  it {should have_many(:merchants).through(:item)}
 
-  describe 'class methods' do
+ describe 'class methods' do
     before :each do
       @merchant_1 = Merchant.create!(name: "Cool Shirts")
       @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
@@ -21,9 +21,5 @@ RSpec.describe InvoiceItem do
       @invoice_item_3 = InvoiceItem.create!(item: @item_3, invoice: @invoice_3, quantity: 3, unit_price: 1200, status: "shipped")
       @invoice_item_4 = InvoiceItem.create!(item: @item_3, invoice: @invoice_2, quantity: 3, unit_price: 1200, status: "shipped")
     end
-
-
   end
-
-
 end
