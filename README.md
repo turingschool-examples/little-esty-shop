@@ -1,4 +1,4 @@
-#💰 💵 Little Esty Shop 💵 💰
+# 💰 💵 Little Esty Shop 💵 💰
 ## Table of contents
 * [General Info](#general-info)
 * [Learning Goals](#learning-goals)
