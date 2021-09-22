@@ -15,4 +15,8 @@ class Item < ApplicationRecord
   def create
   end
 
+  def revenue_formatted
+    '%.2f' % (revenue_per / 100)
+  end
+
 end

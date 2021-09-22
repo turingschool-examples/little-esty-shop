@@ -7,7 +7,7 @@ class Merchant < ApplicationRecord
   enum status: {
     enabled: 0,
     disabled: 1
-   }
+  }
 
    def self.enabled_list
      where(status: 0)
@@ -38,7 +38,16 @@ class Merchant < ApplicationRecord
    #   .limit(5)
    #
    # end
- 
+  
+
+  def top_5_items
+    items.joins( invoices: :transactions )
+      .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue_per')
+      .merge(Transaction.transaction_successful?)
+      .group("items.id")
+      .order('revenue_per DESC')
+      .limit(5)
+  end
 
   def top_5_customers
     Customer.select("DISTINCT customers.*, count(transactions) as transactions_per")
@@ -54,7 +63,6 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
-
   def items_ready_to_ship
     Item.joins(invoices: :invoice_items)
     .where("items.merchant_id = ?", self.id)
@@ -62,7 +70,6 @@ class Merchant < ApplicationRecord
     .select("items.*, invoices.id AS invoice_id, invoices.created_at as invoice_created_at")
     .order('invoice_created_at')
   end
-
 
   def self.top_5_merchants
     joins(items: {invoice_items: {invoice: :transactions}})

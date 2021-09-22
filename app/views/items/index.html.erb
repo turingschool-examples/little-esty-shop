@@ -1,5 +1,18 @@
 <h1>Items by <%= @merchant.name %></h1>
 
+
+<section id="Top_5_Items">
+  <h3>Top Items</h3>
+  <%= @merchant.top_5_items.each do |item| %>
+  <ol>
+    <div id="Top-Item-<%= item.id %>">
+      <li><%= item.name %></li>
+      <li>$<%= item.revenue_formatted.to_i %> In Sales</li>
+    </div>
+  </ol>
+  <% end %>
+</section>
+
 <section id="all_items">
   <h3>Enabled Items</h3>
   <section id='Enabled'>

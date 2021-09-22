@@ -8,5 +8,5 @@ class Transaction < ApplicationRecord
     failed: 1
   }
 
-  scope :transaction_successful?, -> { where(result: 'success') }
+  scope :transaction_successful?, -> { where(result: 0) }
 end
