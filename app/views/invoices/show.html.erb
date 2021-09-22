@@ -13,12 +13,10 @@
             <%= invoice_item.item.name %>
             <li><%= invoice_item.quantity %></li>
             <li><%= invoice_item.unit_price %></li>
-            <div id="#select-status-<%= invoice_item.id %>">
                 <%= form_with model: [@merchant, invoice_item] do |f| %>
                 <%= f.select :status, ['shipped', 'packaged', 'pending'], selected: invoice_item.status %>
                 <%= f.submit "Update Status" %>
                 <% end %>
-            </div>
         </div>
         </ul>
     <% end %>

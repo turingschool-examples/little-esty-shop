@@ -35,7 +35,11 @@ RSpec.describe 'Merchant Invoice show page' do
 
   it 'has a selector for changing the status of an invoice' do
     within("#Invoice-Item-#{@invoice_item_1.id}") do
-      expect(page).to have_select('status', selected: 'shipped')
+      expect(page).to have_select("invoice_item[status]", selected: 'shipped')
+      find("option[value='packaged']").click
+      click_on("Update Status")
+      expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice_1))
+      expect(page).to have_content("packaged")
     end
   end
 end
