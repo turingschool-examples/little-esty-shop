@@ -47,6 +47,7 @@ class Merchant < ApplicationRecord
         .limit(5)
   end
 
+
   def self.five_best_merchants
     joins(invoices: :transactions)
           .where(transactions: {result: :success})
@@ -67,5 +68,10 @@ class Merchant < ApplicationRecord
     else
       0
     end
+  end
+  
+  def item_best_day
+    wip = items.joins(:invoices)
+    require "pry"; binding.pry
   end
 end
