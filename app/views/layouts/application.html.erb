@@ -1,4 +1,5 @@
 <!doctype html>
+<% require './app/poro/github_service' %>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -16,6 +17,7 @@
   <body>
       <%= render "shared/navbar" %>
       <%= render "shared/flash" %>
+      <%= GithubService.new.repo_name %>
       <%= yield %>
     <!-- Optional JavaScript; choose one of the two! -->
 
