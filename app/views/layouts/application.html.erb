@@ -16,4 +16,12 @@
 
     <%= yield %>
   </body>
+
+  <footer align:"center">
+    <% @contributors.each do |contributor| %>
+      <p> <%= contributor.name %> -- <%= contributor.commits %> commits </p>
+    <% end %>
+    <p> GitHub Repo Name: <%= @repo.name %> </p>
+    <p> Total Pull Requests: <%= @repo.pr_count %> </p>
+  </footer>
 </html>
