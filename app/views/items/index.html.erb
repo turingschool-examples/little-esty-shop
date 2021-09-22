@@ -8,10 +8,11 @@
     <div id="Top-Item-<%= item.id %>">
       <li><%= item.name %></li>
       <li>$<%= item.revenue_formatted.to_i %> In Sales</li>
+      <li>Top selling date for <%= item.name %> was <%= item.item_best_day %></li>
     </div>
   </ol>
-  <% end %>
 </section>
+<% end %>
 
 <section id="all_items">
   <h3>Enabled Items</h3>

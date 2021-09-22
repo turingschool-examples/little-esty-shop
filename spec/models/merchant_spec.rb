@@ -127,11 +127,11 @@ RSpec.describe Merchant do
       # Item 5 produced 2000 revenue. The set is to demonstrate that if the trasaction failed for that invoice then it will not count towards the item revenue
       @item_5 = @merchant_1.items.create!(name: "gobble", description: "turkey shirt", unit_price: 1400)
       @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
-      @invoice_6 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_6 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-06-15 09:54:09 UTC")
       @invoice_item_6a = @invoice_6.invoice_items.create!(item: @item_5, quantity: 2, unit_price: 1000, status: "pending")
       @invoice_item_6b = @invoice_6.invoice_items.create!(item: @item_5, quantity: 2, unit_price: 1000, status: "packaged")
       @transaction_7 = @invoice_6.transactions.create!(result: "failed")
-      @invoice_7 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_7 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-05-25 09:54:09 UTC")
       @invoice_item_7a = @invoice_7.invoice_items.create!(item: @item_5, quantity: 1, unit_price: 1000, status: "pending")
       @invoice_item_7b = @invoice_7.invoice_items.create!(item: @item_5, quantity: 1, unit_price: 1000, status: "packaged")
       @transaction_8 = @invoice_7.transactions.create!(result: "success")

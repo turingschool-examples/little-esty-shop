@@ -135,6 +135,12 @@ RSpec.describe 'Merchant Items Index Page' do
         expect(page).to have_content("$60 In Sales")
       end
     end
+
+    it 'can display the best day for a top item' do
+      within("#Top-Item-#{@item_2.id}") do
+        expect(page).to have_content("Top selling date for #{@item_2.name} was #{@item_2.item_best_day}")
+      end
+    end
   end
 
 end
