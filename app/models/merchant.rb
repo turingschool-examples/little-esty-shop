@@ -71,7 +71,8 @@ class Merchant < ApplicationRecord
   end
   
   def item_best_day
-    wip = items.joins(:invoices)
-    require "pry"; binding.pry
+     invoices.where(invoice_items: {item_id: id})
+             .order(quantity: :desc)
+             .first.created_at.strftime("%m/%d/%y")
   end
 end
