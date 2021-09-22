@@ -41,16 +41,16 @@ class Merchant < ApplicationRecord
  
 
   def top_5_customers
-    Merchant.joins(:items)
-    .joins("RIGHT JOIN invoice_items ON items.id = invoice_items.item_id")
-    .joins("RIGHT JOIN invoices ON invoices.id = invoice_items.invoice_id")
-    .joins("RIGHT JOIN customers ON customers.id = invoices.customer_id")
-    .joins("LEFT JOIN transactions ON invoices.id = transactions.invoice_id")
-    .where(id: self.id)
-    .where("transactions.result = 'success'")
-    .group("transactions.result, customers.id")
+    Customer.select("DISTINCT customers.*, count(transactions) as transactions_per")
+    .joins(invoices: :transactions)
+    .where("invoices.id IN (?)", 
+    Invoice.joins(:items)
+    .where("items.merchant_id = ?", self.id)
+    .pluck("invoices.id").uniq
+  )
+    .merge(Transaction.transaction_successful?)
+    .group("customers.id")
     .order("transactions_per DESC")
-    .select("DISTINCT customers.*, count(transactions) as transactions_per")
     .limit(5)
   end
 
