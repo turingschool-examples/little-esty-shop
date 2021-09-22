@@ -3,16 +3,18 @@
 
 <section id="Top_5_Items">
   <h3>Top Items</h3>
+  <section id="Top Items">
   <%= @merchant.top_5_items.each do |item| %>
-  <ol>
-    <div id="Top-Item-<%= item.id %>">
-      <li><%= item.name %></li>
-      <li>$<%= item.revenue_formatted.to_i %> In Sales</li>
-      <li>Top selling date for <%= item.name %> was <%= item.item_best_day %></li>
-    </div>
-  </ol>
+    <ol>
+      <div id="Top-Item-<%= item.id %>">
+        <li><%= item.name %></li>
+        <p>$<%= item.revenue_formatted.to_i %> In Sales</p>
+        <p>Top selling date for <%= item.name %> was <%= item.item_best_day %></p>
+      </div>
+    </ol>
+  </section>
+  <% end %>
 </section>
-<% end %>
 
 <section id="all_items">
   <h3>Enabled Items</h3>
