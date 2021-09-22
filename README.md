@@ -33,6 +33,7 @@
 * Faker Gem
 * SimpleCov Gem
 * Heroku
+* Postico
 
 ## Requirements
 - must use Rails 5.2.x
