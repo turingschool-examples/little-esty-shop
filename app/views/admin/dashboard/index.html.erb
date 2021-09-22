@@ -26,7 +26,7 @@
   <h3>Five Best Merchants:</h3>
   <ol>
     <% @top_five_merchants.each do |merchant| %>
-        <li><%= merchant.name %>- Total revenue: <%= merchant.total_revenue %></li>
+        <li> <%= link_to merchant.name, admin_merchant_path(merchant) %>- Total revenue: <%= merchant.total_revenue %></li>
     <% end %>
   </ol>
 
