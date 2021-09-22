@@ -7,11 +7,11 @@ class Invoice < ApplicationRecord
   validates :status, presence: true
 
   def self.incomplete_invoices
-    Invoice.joins(:invoice_items).where(invoice_items: {status: [0,1]})
+    joins(:invoice_items).where(invoice_items: {status: [0,1]})
   end
 
   def self.order_by_oldest
-    Invoice.incomplete_invoices.order(created_at: :desc)
+    incomplete_invoices.order(created_at: :desc)
   end
 
   enum status: {
