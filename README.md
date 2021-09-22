@@ -52,7 +52,7 @@ This project requires Ruby 2.7.2.
 * From the command line, install gems and set up your DB:
     * `bundle`
     * `rails db:create`
-* Run rails csv_load:all
+* Run 'rails csv_load:all'
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 
