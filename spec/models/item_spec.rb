@@ -12,11 +12,35 @@ RSpec.describe Item do
     it {should belong_to :merchant}
   end
 
-  it 'can return a list of items enabled for a merchant' do
-    merchant_1 = Merchant.create!(name: "Cool Shirts")
-    item_1 = Item.create!(name: "New shirt", description: "ugly shirt", unit_price: 1400, merchant_id: merchant_1.id, status: 'enabled')
-    item_2 = Item.create!(name: "Old shirt", description: "moderately ugly shirt", unit_price: 1200, merchant_id: merchant_1.id, status: 'enabled')
+  it 'can create a formatted price for a given num' do
+    @merchant_1 = Merchant.create!(name: "Cool Shirts")
 
-    expect(merchant_1.items_enabled_list).to eq([item_1, item_2])
+    # Item 1 produced 2400 revenue
+    @item_1 = @merchant_1.items.create!(name: "Dog", description: "Dog shirt", unit_price: 1400)
+    @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
+    @invoice_1 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-03-25 09:54:09 UTC")
+    @invoice_item_1a = @invoice_1.invoice_items.create!(item: @item_1, quantity: 1, unit_price: 1400, status: "pending")
+    @invoice_item_1b = @invoice_1.invoice_items.create!(item: @item_1, quantity: 1, unit_price: 1000, status: "packaged")
+    @transaction_1 = @invoice_1.transactions.create!(result: "success")
+
+    collection = @merchant_1.top_5_items
+
+    expect(collection.first.revenue_formatted).to eq("24.00")
+  end
+
+  it 'can return the best day of an item' do
+    @merchant_1 = Merchant.create!(name: "Dog")
+    @item_4 = @merchant_1.items.create!(name: "suck", description: "suck shirt", unit_price: 1400)
+    @customer_1 = Customer.create(first_name: 'Bob', last_name: 'Johnson')
+    @invoice_4 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-04-27 09:54:09 UTC")
+    @invoice_item_4a = @invoice_4.invoice_items.create!(item: @item_4, quantity: 2, unit_price: 1000, status: "pending")
+    @invoice_item_4b = @invoice_4.invoice_items.create!(item: @item_4, quantity: 2, unit_price: 1000, status: "packaged")
+    @transaction_5 = @invoice_4.transactions.create!(result: "success")
+    @invoice_5 = @customer_1.invoices.create!(status: 'completed', created_at: "2012-03-25 09:54:09 UTC")
+    @invoice_item_5a = @invoice_5.invoice_items.create!(item: @item_4, quantity: 1, unit_price: 1000, status: "pending")
+    @invoice_item_5b = @invoice_5.invoice_items.create!(item: @item_4, quantity: 1, unit_price: 1000, status: "packaged")
+    @transaction_6 = @invoice_5.transactions.create!(result: "success")
+
+    expect(@item_4.item_best_day).to eq(@invoice_4.created_at.strftime("%m/%d/%y"))
   end
 end

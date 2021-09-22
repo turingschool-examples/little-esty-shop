@@ -13,12 +13,12 @@ class Invoice < ApplicationRecord
     "#{customer.full_name}"
   end
 
-  # def self.incomplete_invoices_ids_ordered
-  #   joins(:invoice_items).where.not("invoice_items.status = 'shipped'").order(:created_at).pluck(:id)
-  # end
+  def total_revenue
+    items.sum('invoice_items.quantity * invoice_items.unit_price')
+  end
 
   def self.incomplete_invoices_ids_ordered
-    joins(:invoice_items).where.not("invoice_items.status = 'shipped'").select(:id, :created_at).order(:created_at).distinct(:id)
+    joins(:invoice_items).where.not("invoice_items.status = ?", 2).select(:id, :created_at).order(:created_at).distinct(:id)
   end
 
   def total_revenue
