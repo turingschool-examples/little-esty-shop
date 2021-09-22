@@ -1,4 +1,4 @@
-class InvoiceItemController < ApplicationController
+class InvoiceItemsController < ApplicationController
     def update
         @invoice_item = InvoiceItem.find(params[:id])
         @invoice_item.update(status: params[:invoice_item][:status])

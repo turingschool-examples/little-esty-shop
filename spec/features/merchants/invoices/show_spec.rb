@@ -30,7 +30,12 @@ RSpec.describe 'Merchant Invoice show page' do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_item_1.quantity)
       expect(page).to have_content(@invoice_item_1.unit_price)
-      expect(page).to have_content(@invoice_item_1.status)
+    end
+  end
+
+  it 'has a selector for changing the status of an invoice' do
+    within("#Invoice-Item-#{@invoice_item_1.id}") do
+      expect(page).to have_select('status', selected: 'shipped')
     end
   end
 end
