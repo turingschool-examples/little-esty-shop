@@ -1,5 +1,8 @@
 <h1> <%= @merchant.name %> Invoices</h1>
 
-<% @merchant.invoices.uniq.each do |invoice| %>
-  <p>Invoice ID: <%= link_to invoice.id, merchant_invoice_path(@merchant, invoice) %></p>
-<% end %>
+<section id="all-invoices">
+  <% @merchant.invoices.each do |invoice| %>
+    <p>Invoice ID: <%= link_to "#{invoice.id}", merchant_invoice_path(@merchant, invoice), local: true %></p>
+  <% end %>
+</section>
+

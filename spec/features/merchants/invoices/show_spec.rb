@@ -7,9 +7,10 @@ RSpec.describe 'Merchant Invoice show page' do
     @item_2 = @merchant.items.create!(name: "Bird shirt", description: "bird shirt", unit_price: 4000)
 
     @customer_1 = Customer.create!(first_name: "Tony", last_name: "Gonzales")
-
     @invoice_1 = @customer_1.invoices.create!(status: 0)
-    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 3, status: 0, unit_price: 40 )
+    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 3, status: 2, unit_price: 40 )
+    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, quantity: 4, status: 1, unit_price: 40 )
+
 
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
   end
