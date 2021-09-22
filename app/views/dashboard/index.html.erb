@@ -1,7 +1,8 @@
-<%= @merchant.name %>
+<h1><%= @merchant.name %></h1>
 
 <%= link_to "Items", merchant_items_path(@merchant) %>
 <%= link_to "Invoices", merchant_invoices_path(@merchant) %>
+
 <section id="Top_5">
     <h3>Top 5 Customers<h3>
     <% @merchant.top_5_customers.each do |customer|%>

@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Merchant Dashboard' do
     describe 'Display' do
         before :each do
-
+            @merchant = Merchant.create!({name: "Doggy"})
+            visit(merchant_dashboard_index_path(@merchant))
         end
-
-        it 'can display merchant and attribute' do
-            merchant = Merchant.create!({name: "Fucko"})
-            expect(page).to have_content("Fucko")            
+        
+        it 'can display merchant as the title and has links to its items and invoices' do
+            expect(page).to have_content("Doggy") 
+            expect(page).to have_link("Items")
+            expect(page).to have_link("Invoices")           
         end
 
         it 'can display link to merchants Items' do
@@ -20,8 +22,6 @@ RSpec.describe 'Merchant Dashboard' do
             click_link "Invoices"
             expect(current_path).to eq(merchant_invoices_path(@merchant))
         end
-
-
     end
 
     describe 'top 5 customers' do
@@ -92,12 +92,17 @@ RSpec.describe 'Merchant Dashboard' do
         end
 
         it 'displays the Top 5 customers in order of number of sucessful transactions' do
-            save_and_open_page
             expect(@customer_4.full_name).to appear_before(@customer_1.full_name)
             expect(@customer_1.full_name).to appear_before(@customer_2.full_name)
             expect(@customer_2.full_name).to appear_before(@customer_3.full_name)
             expect(@customer_3.full_name).to appear_before(@customer_6.full_name)
         end
+
+        it 'displays the number of transactions per customer' do
+            within("#Customer-#{@customer_4.id}") do
+                expect(page).to have_content("3 Successful Transactions")
+            end
+        end 
     end
 
     describe 'items ready to be shipped' do
