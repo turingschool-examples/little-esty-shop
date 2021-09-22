@@ -1,8 +1,11 @@
 # Little Esty Shop
+![image](https://user-images.githubusercontent.com/83930724/134262543-10ea9310-5d10-4c65-b735-0ed9eab75afc.png)
 
-## Background and Description
+## Overview
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a 10 day group project where Turing Backend Engineering studtends are tasked with building a fully funcitonal e-commerce application using rails. This project requires students to work colaboratively on a project incorperating multiple database relationships in the process.
+
+Little Esty Shop allowed us to practice creating migrations to handle one to many, as well as many to many database relationships. We have used Ruby on rails to build our app with CRUD functionality. This rails app utilizes both class and variable methods in order to best work with the data provided. This Applicaiton has been developed using Test Driven Development which has allowed up to ensure we are testing all features, and models as they are being created allowing for high test coverage globally.
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
