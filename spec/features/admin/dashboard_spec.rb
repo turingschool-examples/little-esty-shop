@@ -164,19 +164,25 @@ RSpec.describe 'admin dashboard page' do
       invoice_item_7 = create(:invoice_item, item: item_7, status: 2, unit_price: 50, quantity: 50, invoice: invoice_7)
 
       visit admin_dashboard_index_path
-      
+
       within('#top-5-merchants') do
         expect(page).to have_content(merchant_6.name)
         expect(page).to have_content(merchant_5.name)
         expect(page).to have_content(merchant_4.name)
         expect(page).to have_content(merchant_3.name)
         expect(page).to have_content(merchant_2.name)
-        save_and_open_page
+
         expect(page).to have_content("Total revenue: 196")
         expect(page).to have_content("Total revenue: 144")
         expect(page).to have_content("Total revenue: 100")
         expect(page).to have_content("Total revenue: 64")
         expect(page).to have_content("Total revenue: 36")
+
+        expect(page).to have_link(merchant_6.name)
+
+        click_link merchant_6.link
+
+        expect(current_path).to eq(admin_merchant_path(merchant_6))
       end
     end
   end
