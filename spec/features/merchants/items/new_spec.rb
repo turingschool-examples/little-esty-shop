@@ -22,6 +22,5 @@ RSpec.describe 'new item page' do
     expect(current_path).to eq(merchant_items_path(@merchant))
     expect(page).to have_content("New item for #{@merchant.name} has been created.")
     expect(page).to have_content("Nugget")
-    save_and_open_page
   end
 end

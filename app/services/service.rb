@@ -1,10 +1,6 @@
-require 'faraday'
-require 'json'
-require 'pry'
 
-
-class RepoService
-  def repo_name
+class Service
+  def repo
     get_url("/repos/equinn125/little-esty-shop")
   end
 
@@ -13,11 +9,11 @@ class RepoService
   end
 
   def pull_requests
-    get_url("/repos/equinn125/little-esty-shop/pulls")
+    get_url("/search/issues?q=repo:equinn125/little-esty-shop%20is:pull-request")
   end
 
   def get_url(url)
-    response = Faraday.get(url)
+    response = Faraday.get("https://api.github.com#{url}")
     JSON.parse(response.body, symoblize_names: true)
   end
 end
