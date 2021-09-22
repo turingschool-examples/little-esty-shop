@@ -12,4 +12,7 @@ class InvoiceItem < ApplicationRecord
   def create
   end
 
+  def total_revenue
+    unit_price * quantity
+  end
 end

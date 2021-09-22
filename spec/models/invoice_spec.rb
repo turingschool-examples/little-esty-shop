@@ -70,5 +70,15 @@ RSpec.describe Invoice do
       expect(Invoice.incomplete_invoices_ids_ordered.first.id).to eq(@invoice_1.id)
       expect(Invoice.incomplete_invoices_ids_ordered.last.id).to eq(@invoice_2.id)
     end
+
+    it 'returns the total revenue' do
+      @merchant_1 = Merchant.create!(name: "John Sandman")
+      @item = @merchant_1.items.create!(name: "Shirt", description: "A shirt", unit_price: 40)
+      @customer = Customer.create!(first_name: "Tony", last_name: "Gonzales")
+      @invoice = @customer_1.invoices.create!(status: 0)
+      @invoice_item = InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 3, status: 0, unit_price: 40 )
+      expect(@invoice.total_revenue).to eq(120)
+    end
+
   end
 end
