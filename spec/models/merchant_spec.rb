@@ -147,7 +147,7 @@ RSpec.describe Merchant do
       @item_8 = create(:item, merchant: @merchant, name: 'H')
       @item_9 = create(:item, merchant: @merchant, name: 'I')
 
-      @invoice_1 = create(:invoice, customer: @customer, created_at: "Friday, September 17, 2021" )
+      @invoice_1 = create(:invoice, customer: @customer, created_at: "Thursday, September 15, 2021" )
       @transaction = create(:transaction, result: 'success', invoice: @invoice_1)
       @invoice_item_1 = create(:invoice_item, item: @item_1, status: 2, unit_price: 2, quantity: 2, invoice: @invoice_1)
 
@@ -174,11 +174,23 @@ RSpec.describe Merchant do
       @invoice_7 = create(:invoice, customer: @customer, created_at: "Tuesday, September 14, 2021")
       @transaction_7 = create(:transaction, result: 'failed', invoice: @invoice_7)
       @invoice_item_7 = create(:invoice_item, item: @item_7, status: 2, unit_price: 0, quantity: 0, invoice: @invoice_7)
+
+      @invoice_8 = create(:invoice, customer: @customer, created_at: "Friday, September 17, 2021" )
+      @transaction_8 = create(:transaction, result: 'success', invoice: @invoice_8)
+      @invoice_item_8 = create(:invoice_item, item: @item_1, status: 2, unit_price: 2, quantity: 2, invoice: @invoice_8)
+
+      @invoice_9 = create(:invoice, customer: @customer, created_at: "Sunday, September 13, 2021" )
+      @transaction_9 = create(:transaction, result: 'success', invoice: @invoice_9)
+      @invoice_item_9 = create(:invoice_item, item: @item_1, status: 2, unit_price: 2, quantity: 10, invoice: @invoice_9)
     end
 
       it "can list the 5 most popular items" do
 
-      expect(@merchant.top_five_items).to eq([@item_5, @item_4, @item_3, @item_2, @item_1])
+      expect(@merchant.top_five_items).to eq([@item_1, @item_5, @item_4, @item_3, @item_2])
+    end
+
+    it 'has a best selling date' do
+      expect(@item_1.item_best_day).to eq("09/13/21")
     end
   end
 end

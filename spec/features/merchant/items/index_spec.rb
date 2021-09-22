@@ -120,12 +120,6 @@ RSpec.describe "merchant items index page" do
       expect(current_path).to eq(merchant_item_path(@merchant, @item_5))
     end
 
-#     When I visit the items index page
-# Then next to each of the 5 most popular items I see the date with the most sales for each item.
-# And I see a label “Top selling date for was "
-#
-# Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
-
     it 'shows date of most sales for each item' do
       visit merchant_items_path(@merchant)
       expect(page).to have_content("Top selling date for A was 09/13/21")

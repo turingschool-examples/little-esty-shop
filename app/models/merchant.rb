@@ -37,7 +37,7 @@ class Merchant < ApplicationRecord
              .order(count: :desc)
              .limit(5)
   end
-  
+
   def top_five_items
     items.joins(invoices: :transactions)
         .where(transactions: {result: :success})
@@ -48,7 +48,10 @@ class Merchant < ApplicationRecord
   end
 
   def item_best_day
-    wip = items.joins(:invoices)
-    require "pry"; binding.pry
+    def item_best_day
+     invoices.where(invoice_items: {item_id: id})
+             .order(quantity: :desc)
+             .first.created_at.strftime("%m/%d/%y")
+   end
   end
 end
