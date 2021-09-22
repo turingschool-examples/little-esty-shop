@@ -180,7 +180,7 @@ RSpec.describe 'admin dashboard page' do
 
         expect(page).to have_link(merchant_6.name)
 
-        click_link merchant_6.link
+        click_link merchant_6.name
 
         expect(current_path).to eq(admin_merchant_path(merchant_6))
       end
