@@ -1,7 +1,7 @@
 # Little Esty Shop
 ![image](https://user-images.githubusercontent.com/83930724/134262543-10ea9310-5d10-4c65-b735-0ed9eab75afc.png)
 
-## Overviwe
+## Overview
 
 "Little Esty Shop" is a 10 day group project where Turing Backend Engineering studtends are tasked with building a fully funcitonal e-commerce application using rails. This project requires students to work colaboratively on a project incorperating multiple database relationships in the process.
 
