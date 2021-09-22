@@ -10,8 +10,6 @@ RSpec.describe 'Merchant Invoice show page' do
 
     @invoice_1 = @customer_1.invoices.create!(status: 0)
     @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 3, status: 0, unit_price: 40 )
-  end
-
 
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
   end
@@ -29,6 +27,7 @@ RSpec.describe 'Merchant Invoice show page' do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
     
     expect(page).to have_content(@invoice_1.total_revenue)
+  end 
 
   it 'displays all the items on the invoice' do
     expect(page).to have_content(@item_1.name)
