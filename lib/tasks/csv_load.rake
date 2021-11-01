@@ -59,4 +59,7 @@ namespace :csv_load do
     end
   ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
+
+  desc 'All'
+  task all: [:merchants, :customers, :invoices, :items, :invoice_items, :transactions]
 end
