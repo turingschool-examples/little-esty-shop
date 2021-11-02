@@ -1,0 +1,9 @@
+<h1><%= @merchant.name %></h1>
+
+<h2><a href="/merchants/<%= @merchant.id %>/items">My Items</a></h2>
+<h2><a href="/merchants/<%= @merchant.id %>/invoices">My Invoices</a></h2>
+
+<h2>Favorite Customers</h2>
+<% @merchant.top_customers.each do |customer| %>
+<%= customer.name %> <%= customer.successful_transactions(@merchant.id).count %>
+<% end %>
