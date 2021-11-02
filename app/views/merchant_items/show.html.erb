@@ -2,3 +2,5 @@
   <h3><%= @item.name %></h3><br>
 Description:  <%= @item.description %><br><br>
 Price:  <%= number_to_currency(@item.unit_price/100.0) %>
+
+<p id="update_link"><%= link_to "Update #{@item.name}", "/merchants/#{@item.merchant_id}/items/#{@item.id}/edit" %></p>
