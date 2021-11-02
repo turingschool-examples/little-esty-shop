@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   resources :merchants do
     get 'dashboard', on: :member
   end
+
+  resources :merchants do
+    resources :items, only: [:index]
+  end
+
 end
