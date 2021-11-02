@@ -14,6 +14,11 @@ task "csv_load:customers" => :environment do
     c.save
     puts "Customer #{c.id} saved!"
   end
+  table = "customers"
+  auto_inc_value = Customer.order(id: :desc).first.id + 1
+  ActiveRecord::Base.connection.execute(
+    "ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_inc_value};"
+  )
 
   puts "There are now #{Customer.count} rows in the customers table"
 end
