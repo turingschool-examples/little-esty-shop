@@ -74,8 +74,8 @@ RSpec.describe "merchant dashboard" do
   end
 
   it 'the items ready to ship list is sorted from oldest to newest' do
-    save_and_open_page
-    expect(@invoice4.id).to appear_before(@invoice3.id)
-    expect(@invoice2.id).to appear_before(@invoice1.id)
+    expect("(Invoice #{@invoice4.id})").to appear_before("(Invoice #{@invoice3.id})")
+    expect("(Invoice #{@invoice2.id})").to appear_before("(Invoice #{@invoice1.id})")
+    
   end
 end
