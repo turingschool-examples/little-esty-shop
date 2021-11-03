@@ -1,11 +1,14 @@
-# As a merchant,
-# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
-# Then I see all of the invoices that include at least one of my merchant's items
-# And for each invoice I see its id
-# And each id links to the merchant invoice show page
+# As a merchant
+# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+# Then I see information related to that invoice including:
+#
+# Invoice id
+# Invoice status
+# Invoice created_at date in the format "Monday, July 18, 2019"
+# Customer first and last name
 require 'rails_helper'
 
-RSpec.describe 'merchant invoices index page' do
+RSpec.describe 'merchant invoices show page' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Larry's Lucky Ladles")
     @merchant_2 = Merchant.create!(name: "Bob's Burgers")
@@ -29,25 +32,36 @@ RSpec.describe 'merchant invoices index page' do
     @ii_4 = InvoiceItem.create!(quantity: 1, unit_price: 30, status: 2, item_id: @item_4.id, invoice_id: @invoice_4.id)
   end
 
-  it 'shows invoices with my merchant items' do
-    visit merchant_invoices_path(@merchant_1)
+  it 'shows the inovice id' do
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-    expect(page).to have_content(@merchant_1.name)
+    # visit merchant_invoices_path(@merchant_1, @invoice_1)
+
     expect(page).to have_content(@invoice_1.id)
-    expect(page).to have_content(@invoice_2.id)
-    expect(page).to_not have_content(@merchant_2.name)
-    expect(page).to_not have_content(@invoice_3.id)
-    expect(page).to_not have_content(@invoice_4.id)
   end
 
-  it 'has link to merchant invoice show page' do
-    visit merchant_invoices_path(@merchant_2)
+  it 'shows the invoice status' do
+    visit "/merchants/#{@merchant_2.id}/invoices/#{@invoice_3.id}"
+    # visit merchant_invoices_path(@merchant_2, @invoice_3)
 
-    expect(page).to have_content(@merchant_2.name)
-    expect(page).to have_link(@invoice_3.id)
-    expect(page).to have_link(@invoice_4.id)
-    expect(page).to_not have_content(@merchant_1.name)
-    expect(page).to_not have_link(@invoice_1.id)
-    expect(page).to_not have_link(@invoice_2.id)
+    expect(page).to have_content(@invoice_3.status)
+    expect(page).to_not have_content(@invoice_1.status)
+  end
+
+  it 'shows created at date' do
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    # visit merchant_invoices_path(@merchant_1, @invoice_1)
+
+    expect(page).to have_content(@invoice_1.created_at.strftime('%A, %B %d, %Y'))
+  end
+
+  it 'shows customer first and last name' do
+    visit "/merchants/#{@merchant_2.id}/invoices/#{@invoice_4.id}"
+    # visit merchant_invoices_path(@merchant_2, @invoice_4)
+
+    expect(page).to have_content(@customer_2.first_name)
+    expect(page).to have_content(@customer_2.last_name)
+    expect(page).to_not have_content(@customer_1.first_name)
+    expect(page).to_not have_content(@customer_1.last_name)
   end
 end
