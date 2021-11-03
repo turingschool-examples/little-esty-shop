@@ -13,12 +13,12 @@ RSpec.describe "merchant dashboard" do
 
     @item = create :item, { merchant_id: @merchant.id }
 
-    @invoice1 = create :invoice, { customer_id: @customer1.id }
-    @invoice2 = create :invoice, { customer_id: @customer2.id }
-    @invoice3 = create :invoice, { customer_id: @customer3.id }
-    @invoice4 = create :invoice, { customer_id: @customer4.id }
-    @invoice5 = create :invoice, { customer_id: @customer5.id }
-    @invoice6 = create :invoice, { customer_id: @customer6.id }
+    @invoice1 = create :invoice, { customer_id: @customer1.id, status: 'in progress' }
+    @invoice2 = create :invoice, { customer_id: @customer2.id, status: 'in progress' }
+    @invoice3 = create :invoice, { customer_id: @customer3.id, status: 'in progress' }
+    @invoice4 = create :invoice, { customer_id: @customer4.id, status: 'in progress' }
+    @invoice5 = create :invoice, { customer_id: @customer5.id, status: 'completed' }
+    @invoice6 = create :invoice, { customer_id: @customer6.id, status: 'cancelled' }
 
     @transaction1 = create :transaction, { invoice_id: @invoice1.id, result: 'success' }
     @transaction2 = create :transaction, { invoice_id: @invoice2.id, result: 'success' }
@@ -49,5 +49,33 @@ RSpec.describe "merchant dashboard" do
   it 'can visit merchant invoices' do
     click_link("My Invoices")
     expect(current_path).to eq(merchant_invoices_path(@merchant))
+  end
+
+  it 'i see the names of the top 5 cust (>success trans) with success trans count' do
+    within("#top5") do
+      within("#cust-#{@customer1.id}") do
+        expect(page).to have_content(@customer1.full_name)
+        expect(page).to have_content(1)
+      end
+    end
+  end
+
+  it 'i see a section for items ready to ship, with a link to each invoice id, and the date it was created' do
+    within("#ready-to-ship") do
+      within("#invoice-#{@invoice1.id}") do
+        expect(page).to have_content(@item.name)
+        expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
+
+        click_link(@invoice1.id)
+
+        expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice1))
+      end
+    end
+  end
+
+  it 'the items ready to ship list is sorted from oldest to newest' do
+    save_and_open_page
+    expect(@invoice4.id).to appear_before(@invoice3.id)
+    expect(@invoice2.id).to appear_before(@invoice1.id)
   end
 end

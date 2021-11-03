@@ -39,7 +39,7 @@ RSpec.describe Merchant, type: :model do
       @inv_item5 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice5.id}
       @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id}
 
-      expect(@merchant.favorite_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+      expect(@merchant.favorite_customers).to include(@customer1.id, @customer2.id, @customer3.id, @customer4.id, @customer5.id)
     end
   end
 end
