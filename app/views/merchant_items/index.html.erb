@@ -1,9 +1,29 @@
 <h1>MerchantItemsIndex</h1>
+<%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %>
 
-<ul>
-  <% @merchant.items.each_with_index do |item, index| %>
+
+<h3>Enabled Items</h3>
+<ul id="enabled-items">
+  <% @merchant.items.enabled.each_with_index do |item, index| %>
     <li id="item-<%=index%>">
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"  %>
+        <%= form_with url: "/merchants/#{item.merchant_id}/items/#{item.id}", method: :patch, local: true do |f| %>
+          <%= f.submit "Disable" %>
+          <%= f.hidden_field :disable, value: 'true' %>
+        <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Disabled Items</h3>
+<ul id="disabled-items">
+  <% @merchant.items.disabled.each_with_index do |item, index| %>
+    <li id="item-<%=index%>">
+      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"  %>
+        <%= form_with url: "/merchants/#{item.merchant_id}/items/#{item.id}", method: :patch, local: true do |f| %>
+          <%= f.submit "Enable" %>
+          <%= f.hidden_field :enable, value: 'true' %>
+        <% end %>
     </li>
   <% end %>
 </ul>
