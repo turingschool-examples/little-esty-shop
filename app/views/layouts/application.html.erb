@@ -10,7 +10,15 @@
   </head>
 
   <body>
+
     <h1>Little Esty Shop</h1>
+
+    <% flash.each do |type, msg| %>
+          <div>
+            <%= msg %>
+          </div>
+        <% end %>
+
     <%= yield %>
   </body>
 </html>
