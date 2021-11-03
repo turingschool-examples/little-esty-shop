@@ -1,5 +1,5 @@
 <h1>MerchantItemsIndex</h1>
-
+<%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %>
 <ul>
   <% @merchant.items.each_with_index do |item, index| %>
     <li id="item-<%=index%>">

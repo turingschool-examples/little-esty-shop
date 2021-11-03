@@ -25,4 +25,20 @@ RSpec.describe 'Merchant Items Index' do
       expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
     end
   end
+
+  it 'can create a new item' do
+    visit "/merchants/#{@merchant.id}/items"
+
+    click_link('Create New Item')
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/items/new")
+
+    fill_in 'name', with: "bob the skull"
+    fill_in 'description', with: "a witty skull"
+    fill_in 'unit_price', with: "100"
+
+    click_button
+
+    expect(page).to have_content 'bob the skull'
+  end
 end
