@@ -19,9 +19,9 @@ RSpec.describe "merchant dashboard" do
     click_link("My Items")
     expect(current_path).to eq("/merchants/#{merchant.id}/items")
 
-    # visit "/merchants/#{merchant.id}/dashboard"
-    # click_link("My Invoices")
-    # expect(current_path).to eq("/merchants/#{merchant.id}/invoices")
+    visit "/merchants/#{merchant.id}/dashboard"
+    click_link("My Invoices")
+    expect(current_path).to eq("/merchants/#{merchant.id}/invoices")
 
   end
 end
