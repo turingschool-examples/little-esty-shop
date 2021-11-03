@@ -31,4 +31,10 @@ RSpec.describe 'merchant invoices index page' do
     @ii_3 = InvoiceItem.create!(quantity: 1, unit_price: 40, status: 0, item_id: @item_3.id, invoice_id: @invoice_3.id)
     @ii_4 = InvoiceItem.create!(quantity: 1, unit_price: 30, status: 2, item_id: @item_4.id, invoice_id: @invoice_4.id)
   end
+
+  it 'shows the inovice id' do
+    visit merchant_invoices_path(@merchant_1, @invoice_1)
+
+    expect(page).to have_content(@invoice_1.id)
+  end
 end
