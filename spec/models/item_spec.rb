@@ -29,7 +29,8 @@ RSpec.describe Item, type: :model do
 
     describe '#disabled' do
       it 'returns a collection of disabled items' do
-        expect(Item.disabled).to eq([@item_1, @item_2])
+        expect(Item.disabled).to include(@item_1)
+        expect(Item.disabled).to include(@item_2)
       end
     end
   end
