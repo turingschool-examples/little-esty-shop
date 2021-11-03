@@ -5,7 +5,7 @@ RSpec.describe 'Dashboard', type: :feature do
     it 'shows merchant name' do
       merchant = Merchant.create!(name: 'Willms and Sons')
       visit "/merchants/#{merchant.id}/dashboard"
-      save_and_open_page
+      # save_and_open_page
       expect(page).to have_content(merchant.name)
     end
   end
