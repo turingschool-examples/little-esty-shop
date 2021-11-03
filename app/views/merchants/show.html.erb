@@ -4,6 +4,7 @@
 <h2><a href="/merchants/<%= @merchant.id %>/invoices">My Invoices</a></h2>
 
 <h2>Favorite Customers</h2>
-<% @merchant.top_customers.each do |customer| %>
-<%= customer.name %> <%= customer.successful_transactions(@merchant.id).count %>
+
+<% @merchant.top_customers.each_with_index do |customer, index| %>
+ <p><%= "#{index + 1}. #{customer[0]}" %> - <%= customer[1] %> purchases</p>
 <% end %>
