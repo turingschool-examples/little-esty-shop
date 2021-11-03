@@ -50,4 +50,13 @@ RSpec.describe "merchant dashboard" do
     click_link("My Invoices")
     expect(current_path).to eq(merchant_invoices_path(@merchant))
   end
+
+  it 'i see the names of the top 5 cust (>success trans) with success trans count' do
+    within("#top5") do
+      within("#cust-#{@customer1.id}") do
+        expect(page).to have_content(@customer1.full_name)
+        expect(page).to have_content(1)
+      end
+    end
+  end
 end

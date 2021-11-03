@@ -9,7 +9,12 @@ class Merchant < ApplicationRecord
   end
 
   def favorite_customers
-    require "pry"; binding.pry
-    transactions
+    customers.joins(invoices: :transactions)
+             .where('transactions.result = ?', 'success')
+             .group('customers.id')
+             .select('customers.*')
+             .order(count: :desc)
+             .limit(5)
+             .count
   end
 end
