@@ -7,4 +7,8 @@ class InvoiceItem < ApplicationRecord
                  "shipped" => 2
                }
 
+  def invoice_item_revenue
+    unit_price * quantity
+  end
+
 end
