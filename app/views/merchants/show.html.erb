@@ -8,3 +8,9 @@
 <% @merchant.top_customers.each_with_index do |customer, index| %>
  <p><%= "#{index + 1}. #{customer[0]}" %> - <%= customer[1] %> purchases</p>
 <% end %>
+
+<h2>Items Ready to Ship</h2>
+
+<% @merchant.shippable_items.each do |invoice_item| %>
+ <p><%= invoice_item[0] %>- Invoice #<%= invoice_item[1] %> <%= DateTime.parse(invoice_item[2]).strftime("%A, %B %d, %Y") %></p>
+<% end %>
