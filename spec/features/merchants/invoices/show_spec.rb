@@ -1,8 +1,11 @@
-# As a merchant,
-# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
-# Then I see all of the invoices that include at least one of my merchant's items
-# And for each invoice I see its id
-# And each id links to the merchant invoice show page
+# As a merchant
+# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+# Then I see information related to that invoice including:
+#
+# Invoice id
+# Invoice status
+# Invoice created_at date in the format "Monday, July 18, 2019"
+# Customer first and last name
 require 'rails_helper'
 
 RSpec.describe 'merchant invoices index page' do
@@ -27,27 +30,5 @@ RSpec.describe 'merchant invoices index page' do
     @ii_2 = InvoiceItem.create!(quantity: 1, unit_price: 12, status: 2, item_id: @item_2.id, invoice_id: @invoice_2.id)
     @ii_3 = InvoiceItem.create!(quantity: 1, unit_price: 40, status: 0, item_id: @item_3.id, invoice_id: @invoice_3.id)
     @ii_4 = InvoiceItem.create!(quantity: 1, unit_price: 30, status: 2, item_id: @item_4.id, invoice_id: @invoice_4.id)
-  end
-
-  it 'shows invoices with my merchant items' do
-    visit merchant_invoices_path(@merchant_1)
-
-    expect(page).to have_content(@merchant_1.name)
-    expect(page).to have_content(@invoice_1.id)
-    expect(page).to have_content(@invoice_2.id)
-    expect(page).to_not have_content(@merchant_2.name)
-    expect(page).to_not have_content(@invoice_3.id)
-    expect(page).to_not have_content(@invoice_4.id)
-  end
-
-  it 'has link to merchant invoice show page' do
-    visit merchant_invoices_path(@merchant_2)
-
-    expect(page).to have_content(@merchant_2.name)
-    expect(page).to have_link(@invoice_3.id)
-    expect(page).to have_link(@invoice_4.id)
-    expect(page).to_not have_content(@merchant_1.name)
-    expect(page).to_not have_link(@invoice_1.id)
-    expect(page).to_not have_link(@invoice_2.id)
   end
 end
