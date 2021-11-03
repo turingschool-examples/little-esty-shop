@@ -227,6 +227,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  ruby
 
 DEPENDENCIES
   bootstrap (~> 4.0.0)
