@@ -10,10 +10,15 @@ RSpec.describe "Merchant's dashboard", type: :feature do
     it "see the name of my merchant" do
       expect(page).to have_content(@merchant.name)
     end
+
+    it "see link to merchant items index" do
+      click_link "Merchant's Items Index"
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+    end
+
+    it "see a link to merchant invoice index" do
+      click_link "Merchant's Invoices Index"
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
+    end
   end
 end
-
-
-# As a merchant,
-# When I visit my merchant dashboard (/merchant/merchant_id/dashboard)
-# Then I see the name of my merchant
