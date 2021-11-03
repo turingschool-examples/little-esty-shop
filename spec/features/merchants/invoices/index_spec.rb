@@ -32,10 +32,21 @@ RSpec.describe 'merchant invoices index page' do
     visit merchant_invoices_path(@merchant_1)
 
     expect(page).to have_content(@merchant_1.name)
-    expect(page).to have_link(@invoice_1.id)
-    expect(page).to have_link(@invoice_2.id)
+    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content(@invoice_2.id)
     expect(page).to_not have_content(@merchant_2.name)
-    expect(page).to_not have_link(@invoice_3.id)
-    expect(page).to_not have_link(@invoice_4.id)
+    expect(page).to_not have_content(@invoice_3.id)
+    expect(page).to_not have_content(@invoice_4.id)
+  end
+
+  it 'has link to merchant invoice show page' do
+    visit merchant_invoices_path(@merchant_2)
+
+    expect(page).to have_content(@merchant_2.name)
+    expect(page).to have_link(@invoice_3.id)
+    expect(page).to have_link(@invoice_4.id)
+    expect(page).to_not have_content(@merchant_1.name)
+    expect(page).to_not have_link(@invoice_1.id)
+    expect(page).to_not have_link(@invoice_2.id)
   end
 end
