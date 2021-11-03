@@ -8,7 +8,7 @@
 # Customer first and last name
 require 'rails_helper'
 
-RSpec.describe 'merchant invoices index page' do
+RSpec.describe 'merchant invoices show page' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Larry's Lucky Ladles")
     @merchant_2 = Merchant.create!(name: "Bob's Burgers")
@@ -33,14 +33,35 @@ RSpec.describe 'merchant invoices index page' do
   end
 
   it 'shows the inovice id' do
-    visit merchant_invoices_path(@merchant_1, @invoice_1)
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    # visit merchant_invoices_path(@merchant_1, @invoice_1)
 
     expect(page).to have_content(@invoice_1.id)
   end
 
   it 'shows the invoice status' do
-    visit merchant_invoices_path(@merchant_2, @invoice_3)
+    visit "/merchants/#{@merchant_2.id}/invoices/#{@invoice_3.id}"
+    # visit merchant_invoices_path(@merchant_2, @invoice_3)
 
-    expect(page).to have_content(@invoice_3.id)
+    expect(page).to have_content(@invoice_3.status)
+    expect(page).to_not have_content(@invoice_1.status)
+  end
+
+  it 'shows created at date' do
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    # visit merchant_invoices_path(@merchant_1, @invoice_1)
+
+    expect(page).to have_content(@invoice_1.created_at.strftime('%A, %B %d, %Y'))
+  end
+
+  it 'shows customer first and last name' do
+    visit "/merchants/#{@merchant_2.id}/invoices/#{@invoice_4.id}"
+    # visit merchant_invoices_path(@merchant_2, @invoice_4)
+
+    expect(page).to have_content(@customer_2.first_name)
+    expect(page).to have_content(@customer_2.last_name)
+    expect(page).to_not have_content(@customer_1.first_name)
+    expect(page).to_not have_content(@customer_1.last_name)
   end
 end
