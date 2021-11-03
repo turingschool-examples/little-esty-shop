@@ -14,10 +14,10 @@ RSpec.describe 'Admin Index' do
 
     expect(current_path).to eq('/admin/merchants')
   end
-  
+
   it 'has a link to the admin invoices page' do
     visit admin_index_path
-    
+
     click_link "Invoices"
 
     expect(current_path).to eq('/admin/invoices')
@@ -49,5 +49,16 @@ RSpec.describe 'Admin Index' do
     transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
+
+    visit admin_index_path
+
+    expect(page).to have_content("Top Customers")
+
+    second_customer = "2. #{customer2.first_name} #{customer2.last_name} - 2 purchase(s)"
+    first_customer = "1. #{customer1.first_name} #{customer1.last_name} - 3 purchase(s)"
+    third_customer = "3. #{customer3.first_name} #{customer3.last_name} - 1 purchase(s)"
+
+    expect(first_customer).to appear_before(second_customer)
+    expect(second_customer).to appear_before(third_customer)
   end
 end
