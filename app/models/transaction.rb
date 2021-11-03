@@ -1,4 +1,4 @@
 class Transaction < ApplicationRecord
-  enum status: [:cancelled, :completed, :in_progress]
-
+  belongs_to :invoice
+  enum result: [:success, :failed]
 end
