@@ -11,3 +11,13 @@
   </div>
   <% end %>
 </div>
+
+<div id="ready-to-ship">
+  Items Ready to Ship <% @merchant.items.each do |item| %>
+    <% item.invoices.in_progress.each do |invoice| %>
+      <div id="invoice-<%= invoice.id %>">
+        <%= item.name %> <%= link_to "(Invoice #{invoice.id})", merchant_invoice_path(@merchant, invoice) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
