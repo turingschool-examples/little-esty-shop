@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
                  "completed" => 1,
                  "in progress" => 2
                }
+
+  def customer
+    Customer.find(self.customer_id)
+  end
 end

@@ -28,4 +28,8 @@ class Merchant < ApplicationRecord
                           ORDER BY invoice_items.created_at"
                         ).rows
   end
+
+  def invoice_ids
+    items.joins(:invoices).distinct.pluck(:invoice_id)
+  end
 end
