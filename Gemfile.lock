@@ -48,6 +48,8 @@ GEM
     autoprefixer-rails (10.3.3.0)
       execjs (~> 2)
     bindex (0.8.1)
+    bootsnap (1.9.1)
+      msgpack (~> 1.0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
@@ -106,6 +108,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.14.4)
+    msgpack (1.4.2)
     nio4r (2.5.8)
     nokogiri (1.12.5-arm64-darwin)
       racc (~> 1.4)
@@ -230,6 +233,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootsnap (>= 1.9.1)
   bootstrap (~> 4.0.0)
   capybara
   coffee-rails (~> 4.2)
@@ -258,4 +262,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.27
+   2.2.30
