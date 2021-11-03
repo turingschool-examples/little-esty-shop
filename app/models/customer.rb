@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_many :invoices
+  attr_accessor :transaction_count
 
   def successful_transactions_count#(merchant_id)
     invoice_ids = self.invoices.pluck(:id)
