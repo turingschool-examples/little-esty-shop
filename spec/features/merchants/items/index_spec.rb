@@ -1,8 +1,3 @@
-# As a merchant,
-# When I visit my merchant items index page ("merchant/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
-
 require 'rails_helper'
 
 RSpec.describe 'merchant items index page' do
@@ -22,5 +17,16 @@ RSpec.describe 'merchant items index page' do
 
     expect(page).not_to have_content(item3.name)
     expect(page).not_to have_content(item4.name)
+  end
+
+  it "has item links that take the merchant to the item's show page" do
+    merchant = Merchant.create!(name: 'Ted')
+    item = Item.create!(name: 'Hammer', description: 'Hits stuff', unit_price: 24, merchant_id: merchant.id)
+
+    visit merchant_items_path(merchant)
+
+    click_on("#{item.name}")
+
+    expect(current_path).to eq(merchant_item_path(merchant,item))
   end
 end
