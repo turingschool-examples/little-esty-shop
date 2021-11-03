@@ -1,0 +1,4 @@
+<%= @merchant.name %>
+<% @invoices.each do |invoice| %>
+  <%= link_to "Invoice: #{invoice.id}, merchant_invoice_path(@merchant.id, invoice.id)" %>
+<% end %>
