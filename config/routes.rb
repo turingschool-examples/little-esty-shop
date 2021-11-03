@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
 
   get '/admin', to: 'admins#dashboard'
+
   get '/admin/merchants', to: 'admin_merchants#index'
+  get '/admin/merchants/:merchant_id', to: 'admin_merchants#show'
 
 
   resources :merchants, only: :index do
