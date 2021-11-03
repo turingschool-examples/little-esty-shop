@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
                  "completed" => 1,
                  "in progress" => 2
                }
+  def self.successful_invoices
+    joins(:transactions).where(transactions: {result: "success"})
+  end
+
 end
