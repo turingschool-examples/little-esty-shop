@@ -34,4 +34,20 @@ RSpec.describe 'Merchant Items Show' do
     expect(page).not_to have_content "Jade Rabbit"
   end
 
+  it 'can edit parts of the item without removing other attributes' do
+
+    visit "/merchants/#{@merchant.id}/items/#{@item_1.id}"
+
+    within('#update_link') do
+      click_link
+    end
+
+    fill_in 'Name', with: "Moazinite Rabbit"
+    fill_in 'Description', with: "25mmx25mm Moazinite Rabbit"
+
+    click_button
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item_1.id}")
+    expect(page).to have_content "$25.00"
+  end
 end
