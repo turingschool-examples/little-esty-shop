@@ -37,6 +37,5 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to_not have_content(@merchant_2.name)
     expect(page).to_not have_link(@invoice_3.id)
     expect(page).to_not have_link(@invoice_4.id)
-
   end
 end
