@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_154028) do
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
-  create_table "merchants", force: :cascade do |t|
+  create_table "merchants", id: :integer, default: nil, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
