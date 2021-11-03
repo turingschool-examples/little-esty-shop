@@ -35,7 +35,7 @@ gem 'faker'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.9.1', require: false
+# gem 'bootsnap', '>= 1.9.1', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,7 +46,7 @@ group :development, :test do
   gem 'launchy'
   gem 'orderly'
   gem 'simplecov'
-  gem 'bootstrap'
+  gem 'bootstrap', '~> 4.0.0'
 end
 
 group :development do
