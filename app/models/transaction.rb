@@ -10,5 +10,5 @@ class Transaction < ApplicationRecord
     # end
     #
     # vip.order()
-  end
+  # end
 end
