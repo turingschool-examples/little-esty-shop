@@ -8,8 +8,16 @@ RSpec.describe 'Admin Merchant Index' do
 
   it 'displays the name of all merchants' do
     visit '/admin/merchants'
-    
+
     expect(page).to have_content(@merchant_2.name)
     expect(page).to have_content(@merchant_1.name)
+  end
+
+  it 'links to each merchants show page' do
+    visit '/admin/merchants'
+
+    expect(page).to have_content(@merchant_2.name)
+    expect(page).to have_content(@merchant_1.name)
+    expect(page).to have_link(@merchant_1.name)
   end
 end
