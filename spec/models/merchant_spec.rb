@@ -25,4 +25,12 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant.shippable_items[0][2]).to be < @merchant.shippable_items[20][2]
     end
   end
+
+  describe '#invoices' do
+    it "returns all invoices related to that merchant's items" do
+      invoice = Invoice.find(29)
+
+      expect(@merchant.invoice_ids).to include(invoice.id)
+    end
+  end
 end
