@@ -5,7 +5,8 @@ class CreateCustomer < ActiveRecord::Migration[5.2]
       t.string :first_name
       t.string :last_name
 
-      t.timestamps 
+      t.timestamps
     end
+    execute 'ALTER TABLE customers ADD PRIMARY KEY (id);'
   end
 end

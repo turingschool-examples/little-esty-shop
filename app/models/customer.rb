@@ -1,3 +1,3 @@
 class Customer < ApplicationRecord
-  
-end 
+  has_many :invoices
+end
