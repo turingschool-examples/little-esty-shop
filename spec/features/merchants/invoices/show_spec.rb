@@ -37,4 +37,10 @@ RSpec.describe 'merchant invoices index page' do
 
     expect(page).to have_content(@invoice_1.id)
   end
+
+  it 'shows the invoice status' do
+    visit merchant_invoices_path(@merchant_2, @invoice_3)
+
+    expect(page).to have_content(@invoice_3.id)
+  end
 end
