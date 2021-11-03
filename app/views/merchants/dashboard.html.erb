@@ -1,3 +1,15 @@
 <h1>Merchant Dashboard</h1>
 
 <%= @merchant.name %>
+
+<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
+<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+
+<div id='fav-customers'>
+<h4>Favorite Customers</h4>
+<ol>
+<% @merchant.favorite_customers.each do |customer| %>
+  <li><%= customer.name %> - <%= customer.purchases(@merchant.id) %></li>
+<% end %>
+</ol>
+</div>>
