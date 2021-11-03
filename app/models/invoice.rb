@@ -7,4 +7,8 @@ class Invoice < ApplicationRecord
   def self.in_progress
     where(status: 'in progress')
   end
+
+  def self.order_from_oldest
+    order(created_at: :desc)
+  end
 end

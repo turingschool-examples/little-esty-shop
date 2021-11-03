@@ -60,15 +60,22 @@ RSpec.describe "merchant dashboard" do
     end
   end
 
-  it 'i see a section for items ready to ship, with a link to each invoice id' do
+  it 'i see a section for items ready to ship, with a link to each invoice id, and the date it was created' do
     within("#ready-to-ship") do
       within("#invoice-#{@invoice1.id}") do
         expect(page).to have_content(@item.name)
+        expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
 
         click_link(@invoice1.id)
 
         expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice1))
       end
     end
+  end
+
+  it 'the items ready to ship list is sorted from oldest to newest' do
+    save_and_open_page
+    expect(@invoice4.id).to appear_before(@invoice3.id)
+    expect(@invoice2.id).to appear_before(@invoice1.id)
   end
 end

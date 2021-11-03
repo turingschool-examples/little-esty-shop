@@ -14,9 +14,9 @@
 
 <div id="ready-to-ship">
   Items Ready to Ship <% @merchant.items.each do |item| %>
-    <% item.invoices.in_progress.each do |invoice| %>
+    <% item.invoices.in_progress.order_from_oldest.each do |invoice| %>
       <div id="invoice-<%= invoice.id %>">
-        <%= item.name %> <%= link_to "(Invoice #{invoice.id})", merchant_invoice_path(@merchant, invoice) %>
+        <%= item.name %> <%= link_to "(Invoice #{invoice.id})", merchant_invoice_path(@merchant, invoice) %>, created at <%= invoice.created_at.strftime('%A, %B %e, %Y') %>
       </div>
     <% end %>
   <% end %>
