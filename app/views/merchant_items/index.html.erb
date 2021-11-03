@@ -4,6 +4,18 @@
   <% @merchant.items.each_with_index do |item, index| %>
     <li id="item-<%=index%>">
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"  %>
+
+      <% if item.status == 'Enabled'%>
+        <%= form_with url: "/merchants/#{item.merchant_id}/items/#{item.id}", method: :patch, local: true do |f| %>
+          <%= f.submit "Disable" %>
+          <%= f.hidden_field :disable, value: 'true' %>
+        <% end %>
+      <% else %>
+        <%= form_with url: "/merchants/#{item.merchant_id}/items/#{item.id}", method: :patch, local: true do |f| %>
+          <%= f.submit "Enable" %>
+          <%= f.hidden_field :enable, value: 'true' %>
+        <% end %>
+      <% end %>
     </li>
   <% end %>
 </ul>

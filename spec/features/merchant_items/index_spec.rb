@@ -41,4 +41,20 @@ RSpec.describe 'Merchant Items Index' do
 
     expect(page).to have_content 'bob the skull'
   end
+
+  it 'can enable/disable an item' do
+    visit "/merchants/#{@merchant.id}/items"
+
+    within('#item-0') do
+      expect(page).to_not have_button('Disable')
+
+      click_on('Enable')
+
+      expect(page).to_not have_button('Enable')
+
+      click_on('Disable')
+
+      expect(page).to_not have_button('Disable')
+    end
+  end
 end
