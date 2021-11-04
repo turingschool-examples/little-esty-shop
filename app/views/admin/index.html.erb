@@ -4,3 +4,8 @@
 <%= link_to 'Invoices', '/admin/invoices' %>
 
 <h3> Top Customers </h3>
+<ol>
+<% @top_customers.each do |customer| %>
+  <li><%= customer[0] %> - <%= customer[1] %> purchase(s)</li>
+<% end %>
+</ol>

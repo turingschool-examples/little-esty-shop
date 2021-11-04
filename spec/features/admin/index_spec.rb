@@ -41,22 +41,23 @@ RSpec.describe 'Admin Index' do
     invoice4 = Invoice.create!(customer_id: customer2.id, status: 'completed')
     invoice5 = Invoice.create!(customer_id: customer2.id, status: 'completed')
     invoice6 = Invoice.create!(customer_id: customer3.id, status: 'completed')
-    invoice7 = Invoice.create!(customer_id: customer3.id, status: 'cancelled')
+    invoice7 = Invoice.create!(customer_id: customer3.id, status: 'completed')
     transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
     transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
-    transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
+    transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'failed')
+    transaction8 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
 
     visit admin_index_path
 
     expect(page).to have_content("Top Customers")
 
-    second_customer = "2. #{customer2.first_name} #{customer2.last_name} - 2 purchase(s)"
-    first_customer = "1. #{customer1.first_name} #{customer1.last_name} - 3 purchase(s)"
-    third_customer = "3. #{customer3.first_name} #{customer3.last_name} - 1 purchase(s)"
+    second_customer = "#{customer2.first_name} #{customer2.last_name} - 2 purchase(s)"
+    first_customer = "#{customer1.first_name} #{customer1.last_name} - 4 purchase(s)"
+    third_customer = "#{customer3.first_name} #{customer3.last_name} - 1 purchase(s)"
 
     expect(first_customer).to appear_before(second_customer)
     expect(second_customer).to appear_before(third_customer)
