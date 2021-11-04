@@ -3,8 +3,8 @@ class Transaction < ApplicationRecord
   enum result: [:success, :failed]
 
 
-  def result
-    Transaction.where("transactions.result = 'success'").group(:id)
+  def self.result
+    where(result: 0).group(:id)
   end
   # def top_5
   #   vip = Transaction.where(result: 0).joins(:invoice, :customers)
