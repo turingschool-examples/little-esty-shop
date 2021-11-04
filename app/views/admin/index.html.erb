@@ -9,3 +9,8 @@
   <li><%= customer[0] %> - <%= customer[1] %> purchase(s)</li>
 <% end %>
 </ol>
+
+<h3> Incomplete Invoices </h3>
+<% @pending_invoices.each do |invoice| %>
+  Invoice #<%= invoice.id %> - <%= invoice.created_at %>
+<% end %>
