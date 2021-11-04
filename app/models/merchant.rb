@@ -7,7 +7,7 @@ class Merchant < ApplicationRecord
     x = items
     .joins(invoices: :transactions)
     require "pry"; binding.pry
-    .where(transactions.result = 'success')
+    .where("transactions.result = 'success'")
 
     # .limit(5)
 
