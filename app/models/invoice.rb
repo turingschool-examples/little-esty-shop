@@ -13,7 +13,10 @@ class Invoice < ApplicationRecord
   end
 
   def invoice_revenue
-    invoice_items.sum { |invoice_item| invoice_item.invoice_item_revenue}
+    invoice_items.invoice_item_revenue
   end
 
+  def self.total_invoices_revenue
+    join(:invoice_items).sum("unit_price * quantity").limit(5)
+  end
 end
