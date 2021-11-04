@@ -48,4 +48,10 @@ RSpec.describe Item do
       expect(@item_1.revenue).to eq(50)
     end
   end
+
+  describe 'class methods' do
+    it 'returns the top five items by revenue' do
+      expect(Item.top_5_by_revenue).to eq([@item_6, @item_4, @item_3, @item_5, @item_2])
+    end
+  end
 end
