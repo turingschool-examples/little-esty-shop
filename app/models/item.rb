@@ -15,4 +15,5 @@ class Item < ApplicationRecord
   def self.disabled
     where(status: 0)
   end
+
 end

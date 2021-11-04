@@ -8,4 +8,12 @@ class Invoice < ApplicationRecord
                  "completed" => 1,
                  "in progress" => 2
                }
+  def self.successful_invoices
+    joins(:transactions).where(transactions: {result: "success"}).distinct
+  end
+
+  def invoice_revenue
+    invoice_items.sum { |invoice_item| invoice_item.invoice_item_revenue}
+  end
+
 end
