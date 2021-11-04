@@ -1,0 +1,5 @@
+<h1><%= @item.name %></h1>
+
+
+Description: <%= @item.description %><br>
+Price: <%= number_to_currency(@item.unit_price.fdiv(100)) %>

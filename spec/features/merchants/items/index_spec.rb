@@ -19,5 +19,11 @@ RSpec.describe "merchant's item index page" do
     expect(page).to have_content(@item2.name)
     expect(page).to have_content(@item3.name)
     expect(page).not_to have_content(@item4.name)
+  end
+  
+  it 'has names as links' do 
+    click_link @item1.name
+    
+    expect(current_path).to eq(merchant_item_path(@merchant, @item1))
   end 
 end 
