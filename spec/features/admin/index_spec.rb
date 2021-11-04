@@ -23,14 +23,6 @@ RSpec.describe 'Admin Index' do
     expect(current_path).to eq('/admin/invoices')
   end
 
-#   Admin Dashboard Statistics - Top Customers
-
-  # As an admin,
-  # When I visit the admin dashboard
-  # Then I see the names of the top 5 customers
-  # who have conducted the largest number of successful transactions
-  # And next to each customer name I see the number of successful transactions they have
-  # conducted
   it 'has statistics about the best customers' do
     customer1 = Customer.create!(first_name: "Bob", last_name: "Dylan")
     customer2 = Customer.create!(first_name: "Micha", last_name: "B")
@@ -61,5 +53,22 @@ RSpec.describe 'Admin Index' do
 
     expect(first_customer).to appear_before(second_customer)
     expect(second_customer).to appear_before(third_customer)
+  end
+
+#   As an admin,
+# When I visit the admin dashboard
+# Then I see a section for "Incomplete Invoices"
+# In that section I see a list of the ids of all invoices
+# That have items that have not yet been shipped
+# And each invoice id links to that invoice's admin show page
+  it 'has a section for incomplete invoices' do
+    customer1 = Customer.create!(first_name: "Bob", last_name: "Dylan")
+    invoice1 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
+    invoice2 = Invoice.create!(customer_id: customer1.id, status: 'completed')
+
+    visit admin_index_path
+
+    expect(page).to have_content('Incomplete Invoices')
+    expect(page).to have_content("Invoice ##{invoice1.id} - #{invoice1.created_at}")
   end
 end
