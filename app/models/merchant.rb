@@ -6,7 +6,6 @@ class Merchant < ApplicationRecord
   def top_5
     x = items
     .joins(invoices: :transactions)
-    require "pry"; binding.pry
     .where("transactions.result = 'success'")
 
     # .limit(5)
