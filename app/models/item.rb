@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   belongs_to :merchant
 
   def revenue
-    invoice_items.item_revenue
+    invoice_items.sum(&:item_revenue)
   end
 
   def self.top_5_by_revenue
