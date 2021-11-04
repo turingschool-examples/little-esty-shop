@@ -7,8 +7,9 @@ class Item < ApplicationRecord
     invoice_items.sum(&:item_revenue)
   end
 
-  def self.top_5_by_revenue
-  end
+  # def self.top_5_by_revenue
+  #   order('revenue desc').limit(5)
+  # end
 end
 
 

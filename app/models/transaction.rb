@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
 
 
   def result
-    Transaction.where('result: "success"').group(:id)
+    Transaction.where("transactions.result = 'success'").group(:id)
   end
   # def top_5
   #   vip = Transaction.where(result: 0).joins(:invoice, :customers)
