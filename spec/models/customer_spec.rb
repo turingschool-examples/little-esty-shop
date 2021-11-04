@@ -24,8 +24,9 @@ RSpec.describe Customer, type: :model do
       transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
       transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
       transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'failed')
-
-      expect(Transaction.total_transactions(customer1)).to eq([customer1, customer2, customer3])
+      transaction8 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
+      
+      expect(Customer.top_customers).to eq([customer1, customer2, customer3])
     end
   end
 end
