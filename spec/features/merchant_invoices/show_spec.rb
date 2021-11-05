@@ -25,4 +25,11 @@ RSpec.describe 'show page' do
     expect(page).to have_content(customer.first_name)
     expect(page).to have_content(customer.last_name)
   end
+
+  it 'shows invoice total revenue' do
+    customer = Customer.find(@invoice.)
+
+    expect(page).to have_content(customer.first_name)
+
+  end
 end
