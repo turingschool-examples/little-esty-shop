@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_213610) do
+ActiveRecord::Schema.define(version: 2021_11_05_013323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "customers", id: :integer, default: nil, force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "invoice_items", id: :integer, default: nil, force: :cascade do |t|
+  create_table "invoice_items", force: :cascade do |t|
     t.bigint "item_id"
     t.bigint "invoice_id"
     t.integer "quantity"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_213610) do
     t.index ["item_id"], name: "index_invoice_items_on_item_id"
   end
 
-  create_table "invoices", id: :integer, default: nil, force: :cascade do |t|
+  create_table "invoices", force: :cascade do |t|
     t.bigint "customer_id"
     t.string "status"
     t.datetime "created_at"
@@ -42,23 +42,24 @@ ActiveRecord::Schema.define(version: 2021_11_01_213610) do
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
   end
 
-  create_table "items", id: :integer, default: nil, force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "unit_price"
     t.bigint "merchant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "status", default: "disabled"
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
-  create_table "merchants", id: :integer, default: nil, force: :cascade do |t|
+  create_table "merchants", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transactions", id: :integer, default: nil, force: :cascade do |t|
+  create_table "transactions", force: :cascade do |t|
     t.bigint "invoice_id"
     t.string "credit_card_number"
     t.integer "credit_card_expiration_date"

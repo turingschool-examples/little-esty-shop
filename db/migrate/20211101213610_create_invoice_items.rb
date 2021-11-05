@@ -1,7 +1,6 @@
 class CreateInvoiceItems < ActiveRecord::Migration[5.2]
   def change
-    create_table :invoice_items, id: false do |t|
-      t.integer :id 
+    create_table :invoice_items do |t|
       t.references :item, foreign_key: true
       t.references :invoice, foreign_key: true
       t.integer :quantity
@@ -10,6 +9,5 @@ class CreateInvoiceItems < ActiveRecord::Migration[5.2]
       t.datetime :created_at
       t.datetime :updated_at
     end
-    execute 'ALTER TABLE invoice_items ADD PRIMARY KEY (id);'
   end
 end

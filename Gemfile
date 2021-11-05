@@ -46,7 +46,7 @@ group :development, :test do
   gem 'launchy'
   gem 'orderly'
   gem 'simplecov'
-  gem 'bootstrap'
+  gem 'bootstrap', '~> 4.0.0'
 end
 
 group :development do

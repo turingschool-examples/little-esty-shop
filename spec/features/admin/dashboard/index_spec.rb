@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "merchant dashboard" do
+RSpec.describe "admin dashboard" do
   before do
     @merchant = create(:merchant)
 
@@ -34,48 +34,10 @@ RSpec.describe "merchant dashboard" do
     @inv_item5 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice5.id}
     @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id}
 
-    visit dashboard_merchant_path(@merchant)
+    visit admin_dashboard_path
   end
 
-  it 'can show name of merchant' do
-    expect(page).to have_content(@merchant.name)
-  end
-
-  it 'can link to merchant items index' do
-    click_link("My Items")
-    expect(current_path).to eq(merchant_items_path(@merchant))
-  end
-
-  it 'can visit merchant invoices' do
-    click_link("My Invoices")
-    expect(current_path).to eq(merchant_invoices_path(@merchant))
-  end
-
-  it 'i see the names of the top 5 cust (>success trans) with success trans count' do
-    within("#top5") do
-      within("#cust-#{@customer1.id}") do
-        expect(page).to have_content(@customer1.full_name)
-        expect(page).to have_content(1)
-      end
-    end
-  end
-
-  it 'i see a section for items ready to ship, with a link to each invoice id, and the date it was created' do
-    within("#ready-to-ship") do
-      within("#invoice-#{@invoice1.id}") do
-        expect(page).to have_content(@item.name)
-        expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
-
-        click_link(@invoice1.id)
-
-        expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice1))
-      end
-    end
-  end
-
-  it 'the items ready to ship list is sorted from oldest to newest' do
-    expect("(Invoice #{@invoice4.id})").to appear_before("(Invoice #{@invoice3.id})")
-    expect("(Invoice #{@invoice2.id})").to appear_before("(Invoice #{@invoice1.id})")
-    
+  it 'shows that you are on the admin dashboard' do
+    expect(page).to have_content("Admin Dashboard")
   end
 end
