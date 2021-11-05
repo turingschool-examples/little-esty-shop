@@ -50,7 +50,7 @@ RSpec.describe 'Dashboard', type: :feature do
     end
 
     describe 'favorite customers' do
-      it 'i see names for top 5 customers' do
+      xit 'i see names for top 5 customers' do
         expect(page).to have_content("Top 5 Customers:" )
         expect(@customer1.name).to appear_before(@customer2.name)
         expect(@customer2.name).to appear_before(@customer3.name)
