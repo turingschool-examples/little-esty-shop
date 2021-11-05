@@ -19,4 +19,14 @@ class Invoice < ApplicationRecord
   def self.total_invoices_revenue
     join(:invoice_items).sum("unit_price * quantity").limit(5)
   end
+
+  def self.highest_date
+    select("invoices.created_at, count(invoices.*) as date_count")
+      .order(created_at: :desc)
+      .group(:created_at)
+      .order(date_count: :desc)
+      .first
+      .created_at
+  end
+
 end
