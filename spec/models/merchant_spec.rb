@@ -6,7 +6,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'model methods' do
-    it 'returns top 5 customers by successful transactions' do
+    before(:each) do 
       @merchant = create(:merchant)
 
       @customer1 = create :customer
@@ -38,8 +38,17 @@ RSpec.describe Merchant, type: :model do
       @inv_item4 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice4.id}
       @inv_item5 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice5.id}
       @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id}
+    end 
+    describe 'favorite customers' do 
+      it 'returns top 5 customers by successful transactions' do
+        expect(@merchant.favorite_customers).to include(@customer1.id, @customer2.id, @customer3.id, @customer4.id, @customer5.id)
+      end
+    end 
 
-      expect(@merchant.favorite_customers).to include(@customer1.id, @customer2.id, @customer3.id, @customer4.id, @customer5.id)
-    end
+    describe 'merchant_invoices' do 
+      it 'returns invoices for a the merchant' do 
+        expect(@merchant.merchant_invoices).to eq([@invoice1,@invoice2,@invoice3,@invoice4,@invoice5,@invoice6])
+      end 
+    end 
   end
 end
