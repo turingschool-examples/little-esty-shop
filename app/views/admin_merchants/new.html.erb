@@ -1,0 +1,8 @@
+<h1>Enter Merchant Information</h1>
+
+<%= form_with url:'/admin/merchants', method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.hidden_field :status, value: false %>
+  <%= form.submit "Create Merchant" %>
+<% end %>

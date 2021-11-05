@@ -1,5 +1,7 @@
 <h1>Admin Merchants Index</h1>
 
+<h4><%= link_to "Create New Merchant", "/admin/merchants/new" %></h4><br>
+
 <% @merchants.each do |merchant| %>
   <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
   <!-- <div class="#{merchant.id}-button"> -->
