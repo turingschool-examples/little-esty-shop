@@ -20,4 +20,8 @@ class Merchant < ApplicationRecord
          .where("invoice_items.status = '0'")
          .order('invoices.created_at')
   end
+
+  def invoice_ids
+    items.joins(:invoices).distinct.pluck(:invoice_id)
+  end
 end
