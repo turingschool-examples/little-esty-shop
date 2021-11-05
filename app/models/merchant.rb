@@ -2,7 +2,7 @@ class Merchant < ApplicationRecord
   has_many :items
 
   def top_customers
-    customers = Customer.select("customers.*, COUNT(transactions.*) AS transaction_count").joins(
+    Customer.select("customers.*, COUNT(transactions.*) AS transaction_count").joins(
                          "INNER JOIN invoices ON invoices.customer_id = customers.id
                           INNER JOIN transactions ON transactions.invoice_id = invoices.id
                           INNER JOIN invoice_items ON invoice_items.invoice_id = transactions.invoice_id
