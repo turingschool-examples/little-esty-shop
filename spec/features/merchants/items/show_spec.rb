@@ -15,4 +15,10 @@ RSpec.describe "merchant's item index page" do
     expect(page).to have_content(@item1.description) 
     expect(page).to have_content(@item1.unit_price/100) 
   end 
+
+  it 'has link to update item info' do 
+    click_link "Update"
+
+    expect(current_path).to eq(edit_merchant_item_path(@merchant, @item1))
+  end 
 end 

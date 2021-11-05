@@ -1,0 +1,11 @@
+<h1>Edit Item Info</h1>
+
+<%= form_with url: merchant_item_path(@merchant, @item), method: :patch, local: true do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name, value: @item.name, required: true %><br>
+    <%= form.label :description %>
+    <%= form.text_area :description, value: @item.description, required: true %><br>
+    <%= form.label :unit_price %>
+    <%= form.number_field :unit_price, value: @item.unit_price, required: true %><br>
+    <%= form.submit 'Submit' %>
+<% end %>

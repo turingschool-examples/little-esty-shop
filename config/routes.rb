@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :merchants do
     get 'dashboard', on: :member
-    resources :items, only: [:index, :show]
+    resources :items, only: [:index, :show, :edit, :update]
     resources :invoices, only: [:index, :show]
   end
 
