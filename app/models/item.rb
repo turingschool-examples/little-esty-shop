@@ -16,4 +16,16 @@ class Item < ApplicationRecord
     where(status: 0)
   end
 
+  def invoice_item_price(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).unit_price
+  end
+
+  def invoice_item_quantity(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).quantity
+  end
+
+  def invoice_item_status(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).status
+  end
+
 end

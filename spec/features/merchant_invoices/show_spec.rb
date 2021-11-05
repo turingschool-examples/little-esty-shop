@@ -26,10 +26,14 @@ RSpec.describe 'show page' do
     expect(page).to have_content(customer.last_name)
   end
 
+  it 'shows the item name, quantity ordered, price, invoice item status' do
+    expect(page).to have_content(@invoice.items.first.name)
+    expect(page).to have_content(@invoice.items.first.invoice_item_quantity(@invoice))
+    expect(page).to have_content("$751.07")
+    expect(page).to have_content(@invoice.items.first.invoice_item_status(@invoice))
+  end
+
   it 'shows invoice total revenue' do
-    customer = Customer.find(@invoice.)
-
-    expect(page).to have_content(customer.first_name)
-
+    expect(page).to have_content("$12,817.94")
   end
 end
