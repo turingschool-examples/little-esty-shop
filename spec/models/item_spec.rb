@@ -33,5 +33,15 @@ RSpec.describe Item, type: :model do
         expect(Item.disabled).to include(@item_2)
       end
     end
+
+    describe '#top_five_items' do
+      it 'returns the top five items by revenue' do
+        expect(Item.top_five_items).to eq [ Item.find(227),
+                                            Item.find(2174),
+                                            Item.find(1119),
+                                            Item.find(1103),
+                                            Item.find(1919)]
+      end
+    end
   end
 end
