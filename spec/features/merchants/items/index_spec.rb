@@ -6,7 +6,7 @@ RSpec.describe "merchant's item index page" do
     @merchant2 = create(:merchant)
     @item1 = create :item, { merchant_id: @merchant.id }
     @item2 = create :item, { merchant_id: @merchant.id }
-    @item3 = create :item, { merchant_id: @merchant.id }
+    @item3 = create :item, { merchant_id: @merchant.id, status: 'enabled' }
     @item4 = create :item, { merchant_id: @merchant2.id }
 
     visit merchant_items_path(@merchant)
@@ -33,4 +33,16 @@ RSpec.describe "merchant's item index page" do
       expect(page).to have_button('Disable')
     end
   end
+
+  it 'sections for enabled and disabled items' do 
+    within('#enabled') do 
+      expect(page).to have_content(@item3.name)
+    end 
+
+    within('#disabled') do 
+      save_and_open_page
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item2.name)
+    end 
+  end 
 end
