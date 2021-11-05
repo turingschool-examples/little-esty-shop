@@ -1,6 +1,12 @@
 <h1>MerchantItemsIndex</h1>
 <%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %>
 
+<h3>Top five most popular items</h3>
+<ol>
+  <% @merchant.items.top_five_items.each do |item| %>
+    <li><%= item.name %>; Total Revenue: <%= number_to_currency(item.total_revenue/100.0) %></li>
+  <% end %>
+</ol>
 
 <h3>Enabled Items</h3>
 <ul id="enabled-items">
