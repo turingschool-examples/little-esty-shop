@@ -55,20 +55,29 @@ RSpec.describe 'Admin Index' do
     expect(second_customer).to appear_before(third_customer)
   end
 
-#   As an admin,
-# When I visit the admin dashboard
-# Then I see a section for "Incomplete Invoices"
-# In that section I see a list of the ids of all invoices
-# That have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
   it 'has a section for incomplete invoices' do
     customer1 = Customer.create!(first_name: "Bob", last_name: "Dylan")
+    invoice3 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
     invoice1 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
     invoice2 = Invoice.create!(customer_id: customer1.id, status: 'completed')
 
     visit admin_index_path
 
+    first_invoice = "Invoice ##{invoice3.id} - #{invoice3.created_at.strftime("%A, %B %-d, %Y")}"
+    second_invoice = "Invoice ##{invoice1.id} - #{invoice1.created_at.strftime("%A, %B %-d, %Y")}"
+
     expect(page).to have_content('Incomplete Invoices')
-    expect(page).to have_content("Invoice ##{invoice1.id} - #{invoice1.created_at}")
+    
+    within "#id-#{invoice3.id}" do
+      expect(page).to have_content("Invoice ##{invoice3.id} - #{invoice3.created_at.strftime("%A, %B %-d, %Y")}")
+    end
+
+    within "#id-#{invoice1.id}" do
+      expect(page).to have_content("Invoice ##{invoice1.id} - #{invoice1.created_at.strftime("%A, %B %-d, %Y")}")
+    end
+
+    click_link "#{invoice3.id}"
+
+    expect(current_path).to eq("/admin/invoices/#{invoice3.id}")
   end
 end
