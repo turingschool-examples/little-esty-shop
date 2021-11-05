@@ -41,9 +41,9 @@ RSpec.describe Transaction, type: :model do
     it { should belong_to :invoice}
   end
 
-  describe 'instance methods' do
+  describe 'class methods' do
     it 'shows successful transactions' do
-      expect(Transaction.result).to eq([@transaction_1, @transaction_2, @transaction_3, @transaction_4, @transaction_5, @transaction_6])
+      expect(Transaction.success).to eq([@transaction_1, @transaction_2, @transaction_3, @transaction_4, @transaction_5, @transaction_6])
     end
   end
 end

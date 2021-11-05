@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   def self.top_5_by_revenue
     item_revenue.group(:item_id)
     # revenue.order.limit(5)
-    
+
   end
 end
 
