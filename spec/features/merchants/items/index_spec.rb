@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "merchant's item index page" do 
-  before(:each) do 
+RSpec.describe "merchant's item index page" do
+  before(:each) do
     @merchant = create(:merchant)
     @merchant2 = create(:merchant)
     @item1 = create :item, { merchant_id: @merchant.id }
@@ -12,7 +12,7 @@ RSpec.describe "merchant's item index page" do
     visit merchant_items_path(@merchant)
   end
 
-  it 'i see a list of names of all items' do 
+  it 'i see a list of names of all items' do
     expect(current_path).to eq(merchant_items_path(@merchant))
 
     expect(page).to have_content(@item1.name)
@@ -20,10 +20,17 @@ RSpec.describe "merchant's item index page" do
     expect(page).to have_content(@item3.name)
     expect(page).not_to have_content(@item4.name)
   end
-  
-  it 'has names as links' do 
+
+  it 'has names as links' do
     click_link @item1.name
-    
+
     expect(current_path).to eq(merchant_item_path(@merchant, @item1))
-  end 
-end 
+  end
+
+  it 'has a button next to item to enable/disable' do
+    within("#item-#{@item1.id}") do
+      click_button 'Enable'
+      expect(page).to have_button('Disable')
+    end
+  end
+end

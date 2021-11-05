@@ -19,7 +19,11 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id])
     if item.update(item_params)
       flash[:notice] = "Item has been successfully updated"
-      redirect_to merchant_item_path(merchant, item)
+      if params[:status]
+        redirect_to merchant_items_path(merchant, item)
+      else
+        redirect_to merchant_item_path(merchant, item)
+      end
     else
       flash[:alert] = "Please enter valid data"
       redirect_to edit_merchant_item_path(merchant, item)
@@ -28,6 +32,6 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.permit(:name, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :status)
   end
 end
