@@ -51,4 +51,19 @@ RSpec.describe "admin dashboard" do
     expect(current_path).to eq(admin_invoices_path)
   end
 
+  it 'i see the names of the top 5 cust (>success trans) with success trans count' do
+    within("#top5") do
+      within("#cust-#{@customer1.id}") do
+        expect(page).to have_content(@customer1.full_name)
+        expect(page).to have_content(1)
+      end
+    end
+  end
+
 end
+
+# When I visit the admin dashboard
+# Then I see the names of the top 5 customers
+# who have conducted the largest number of successful transactions
+# And next to each customer name I see the number of successful transactions they have
+# conducted

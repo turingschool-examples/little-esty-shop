@@ -1,9 +1,7 @@
-module Admin
+#module Admin
+class Admin::InvoicesController < ApplicationController
 
-  class InvoicesController < ApplicationController
+  def index
 
-    def index
-
-    end
   end
 end

@@ -3,3 +3,13 @@
 <%= link_to "My Merchants", admin_merchants_path %>
 
 <%= link_to "My Invoices", admin_invoices_path %>
+
+
+
+<div id="top5">
+  Favorite Customers<% @customers.admin_favorite_customers.each do |id, count| %>
+  <div id="cust-<%= id %>">
+    <%= @customers.find(id).full_name %> with <%= count %> successful transactions.
+  </div>
+  <% end %>
+</div>
