@@ -15,6 +15,14 @@ class Item < ApplicationRecord
   def self.disabled
     where(status: 0)
   end
+  
+ def self.top_five_items
+  joins(invoices: :transactions)
+    .where(transactions: {result: "success"})
+    .group(:id).select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+    .order("total_revenue" => :desc)
+    .limit(5)
+
 
   def invoice_item_price(invoice)
     InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).unit_price
