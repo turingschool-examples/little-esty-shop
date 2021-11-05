@@ -27,6 +27,7 @@ RSpec.describe 'show page' do
   end
 
   it 'shows the item name, quantity ordered, price, invoice item status' do
+    save_and_open_page
     expect(page).to have_content(@invoice.items.first.name)
     expect(page).to have_content(@invoice.items.first.invoice_item_quantity(@invoice))
     expect(page).to have_content("$751.07")

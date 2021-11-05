@@ -12,8 +12,8 @@
 <h2>Items on this Invoice:</h2>
 
 <% @invoice.items.each do |item| %>
-  <p><%= item.name %></p>
-  <p><%= item.invoice_item_quantity(@invoice) %></p>
-  <p><%= number_to_currency(item.invoice_item_price(@invoice)/100.0) %></p>
-  <p><%= item.invoice_item_status(@invoice) %></p>
+  <h4><%= item.name %></h4>
+  <p>Quantity: <%= item.invoice_item_quantity(@invoice) %></p>
+  <p>Price: <%= number_to_currency(item.invoice_item_price(@invoice)/100.0) %></p>
+  <p>Status: <%= item.invoice_item_status(@invoice) %></p>
 <% end %>
