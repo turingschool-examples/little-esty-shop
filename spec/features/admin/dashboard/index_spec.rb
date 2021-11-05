@@ -27,12 +27,12 @@ RSpec.describe "admin dashboard" do
     @transaction5 = create :transaction, { invoice_id: @invoice5.id, result: 'success' }
     @transaction6 = create :transaction, { invoice_id: @invoice6.id, result: 'failed' }
 
-    @inv_item1 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice1.id}
-    @inv_item2 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice2.id}
-    @inv_item3 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice3.id}
-    @inv_item4 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice4.id}
-    @inv_item5 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice5.id}
-    @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id}
+    @inv_item1 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice1.id, status: "pending"}
+    @inv_item2 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice2.id, status: "pending"}
+    @inv_item3 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice3.id, status: "pending"}
+    @inv_item4 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice4.id, status: "packaged"}
+    @inv_item5 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice5.id, status: "packaged"}
+    @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id, status: "shipped"}
 
     visit admin_dashboard_path
   end
@@ -60,4 +60,37 @@ RSpec.describe "admin dashboard" do
     end
   end
 
+  it 'I see a section for incomplete invoices, with a link to each invoice id, and the date it was created' do
+    within("#incomplete_invoices") do
+      within("#invoice-#{@invoice1.id}") do
+        expect(page).to have_content(@invoice1.id)
+        expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
+        click_link(@invoice1.id)
+        expect(current_path).to eq(admin_invoice_path(@invoice1))
+      end
+    end
+  end
+
+  it 'the incomplete invoices list is sorted from oldest to newest' do
+    expect("(Invoice #{@invoice4.id})").to appear_before("(Invoice #{@invoice3.id})")
+    expect("(Invoice #{@invoice2.id})").to appear_before("(Invoice #{@invoice1.id})")
+  end
+
 end
+
+# Admin Dashboard Incomplete Invoices
+#
+# As an admin,
+# When I visit the admin dashboard
+# Then I see a section for "Incomplete Invoices"
+# In that section I see a list of the ids of all invoices
+# That have items that have not yet been shipped
+# And each invoice id links to that invoice's admin show page
+# Admin Dashboard Invoices sorted by least recent
+#
+# As an admin,
+# When I visit the admin dashboard
+# In the section for "Incomplete Invoices",
+# Next to each invoice id I see the date that the invoice was created
+# And I see the date formatted like "Monday, July 18, 2019"
+# And I see that the list is ordered from oldest to newest
