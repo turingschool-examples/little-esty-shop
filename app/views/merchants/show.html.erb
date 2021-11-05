@@ -5,8 +5,8 @@
 
 <h2>Favorite Customers</h2>
 <ol>
-<% @merchant.top_customers.each_with_index do |customer, index| %>
- <li><%= " #{customer[0]}" %> - <%= customer[1] %> purchases</li>
+<% @merchant.top_customers.each do |customer| %>
+ <li><%= " #{customer.first_name} #{customer.last_name}" %> - <%= customer.attributes["transaction_count"] %> purchases</li>
 <% end %>
 </ol
 <h2>Items Ready to Ship</h2>
