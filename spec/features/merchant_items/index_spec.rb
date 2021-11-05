@@ -61,4 +61,15 @@ RSpec.describe 'Merchant Items Index' do
       end
     end
   end
+
+  it 'lists the top five items' do
+    visit "/merchants/1/items"
+
+    within('#top_five_items') do
+      expect('Item Qui Esse; Total Revenue: $20,278.89').to appear_before('Item Ea Voluptatum; Total Revenue: $15,504.48')
+      expect(page).to have_content('Item Expedita Aliquam; Total Revenue: $10,308.45')
+      expect(page).to have_content('Item Voluptatem Sint; Total Revenue: $8,918.10')
+      expect(page).to have_content('Item Provident At; Total Revenue: $7,803.25')
+    end
+  end
 end
