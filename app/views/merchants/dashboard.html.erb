@@ -19,7 +19,7 @@
 <h4>Items Ready to Ship</h4>
 <% @merchant.items_ready_to_ship.each do |data| %>
   <p>
-  <%= data.item_name %> - Invoice #<%= data.invoice_id %> - <%= data.invoice_created_at %>
+  <%= data.item_name %> - Invoice #<%= link_to "#{data.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{data.invoice_id}" %> - <%= data.invoice_created_at %>
   </p>
 <% end %>
 

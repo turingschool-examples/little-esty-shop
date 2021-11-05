@@ -96,15 +96,12 @@ RSpec.describe "Merchant's dashboard", type: :feature do
         expect(page).to have_content("YoYo - Invoice ##{@invoice_6.id} - #{@invoice_6.created_at}")
         expect(page).to have_content("YoYo - Invoice ##{@invoice_7.id} - #{@invoice_7.created_at}")
       end
-      save_and_open_page
+  save_and_open_page
     end
 
-    xit "I see each invoice id as a link to my merchant's invoice show page" do
+    it "I see each invoice id as a link to my merchant's invoice show page" do
       within ("div#items-ready-to-ship") do
-        expect(page).to have_link("/merchants/#{@merchant.id}/invoices/#{@invoice_6.id}")
-        expect(page).to have_link("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
-
-        click_link ("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
+        click_on "#{@invoice_7.id}"
         expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
       end
     end
