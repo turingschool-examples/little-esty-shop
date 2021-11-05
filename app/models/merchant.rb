@@ -2,12 +2,31 @@ class Merchant < ApplicationRecord
   has_many :items
 
   def favorite_customers
-    id_tx_hash = Customer.joins(invoices: [:transactions]
+    Customer.joins(invoices: [:transactions]
       ).where(transactions: { result: 'success' }
       ).joins(invoices: [invoice_items: [item: [:merchant]]]
-      ).where(merchants: { id: id }
+      ).where(merchants: { id: id }  #second id is the id of the merchant that's getting called out
       ).group(:id
       ).order(Arel.sql('COUNT(transactions.id) DESC')
       ).limit(5)
   end
+
+  def items_ready_to_ship
+    Item.joins(invoice_items: [:invoice])
+      .where.not(invoice_items: {status: "shipped"})
+      .joins(:merchant)
+      .where(merchants: { id: id })
+      .select("items.name as item_name,
+              invoices.id as invoice_id,
+              invoices.created_at as invoice_created_at"
+      )
+  end
+  #
+  # def invoice_for_item_ready_to_ship
+  #   Invoice.joins(invoice_items: [item: [:merchant]]
+  #     ).where(merchants: { id: id }
+  #
+  #     ).joins(:invoice_items)
+  #      .where.not("invoice_items.status = shipped")
+  # end
 end

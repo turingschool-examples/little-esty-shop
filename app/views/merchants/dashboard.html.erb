@@ -13,3 +13,14 @@
 <% end %>
 </ol>
 </div>
+
+
+<div id='items-ready-to-ship'>
+<h4>Items Ready to Ship</h4>
+<% @merchant.items_ready_to_ship.each do |data| %>
+  <p>
+  <%= data.item_name %> - Invoice #<%= data.invoice_id %> - <%= data.invoice_created_at %>
+  </p>
+<% end %>
+
+</div>

@@ -20,12 +20,18 @@ RSpec.describe "Merchant's dashboard", type: :feature do
       @invoice_4 = @customer_4.invoices.create(status: 'Completed')
       @invoice_5 = @customer_5.invoices.create(status: 'Completed')
       @invoice_6 = @customer_6.invoices.create(status: 'Completed')
+      @invoice_7 = @customer_6.invoices.create(status: 'Completed')
+
 
       @invoice_item_1 = @invoice_1.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'shipped')
       @invoice_item_2 = @invoice_2.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'shipped')
       @invoice_item_3 = @invoice_3.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'shipped')
       @invoice_item_4 = @invoice_4.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'shipped')
       @invoice_item_5 = @invoice_5.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'shipped')
+      @invoice_item_6 = @invoice_6.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'packaged')
+      @invoice_item_7 = @invoice_7.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'pending')
+
+
 
       @transaction_1 = @invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
       @transaction_2 = @invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
@@ -75,6 +81,32 @@ RSpec.describe "Merchant's dashboard", type: :feature do
       expect(page).to have_content "#{@customer_2.last_name} - 2 purchases"
       expect(page).to have_content "#{@customer_4.last_name} - 2 purchases"
       expect(page).to have_content "#{@customer_3.last_name} - 1 purchases"
+    end
+
+# When I visit my merchant dashboard
+# Then I see a section for "Items Ready to Ship"
+# In that section I see a list of the names of all of my items that
+# have been ordered and have not yet been shipped,
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
+
+    it 'I see a section for "Items Ready to Ship"' do
+      within ("div#items-ready-to-ship") do
+        expect(page).to have_content("Items Ready to Ship")
+        expect(page).to have_content("YoYo - Invoice ##{@invoice_6.id} - #{@invoice_6.created_at}")
+        expect(page).to have_content("YoYo - Invoice ##{@invoice_7.id} - #{@invoice_7.created_at}")
+      end
+      save_and_open_page
+    end
+
+    xit "I see each invoice id as a link to my merchant's invoice show page" do
+      within ("div#items-ready-to-ship") do
+        expect(page).to have_link("/merchants/#{@merchant.id}/invoices/#{@invoice_6.id}")
+        expect(page).to have_link("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
+
+        click_link ("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
+        expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
+      end
     end
   end
 end
