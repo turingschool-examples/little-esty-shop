@@ -30,7 +30,6 @@ RSpec.describe 'merchant dashboard show page' do
   end
 
   it 'should have items ready to ship in order from oldest to newest' do
-save_and_open_page
     expect(page).to have_content("Items Ready to Ship")
     expect(page).to have_content(@merchant.shippable_items.first.name)
     expect(page).to have_content("Wednesday, March 07, 2012")
