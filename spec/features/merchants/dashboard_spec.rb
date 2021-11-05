@@ -61,6 +61,7 @@ RSpec.describe 'Dashboard', type: :feature do
 
       it 'i see number of successful transactions next to each customer' do
 
+        
       end
     end
   end

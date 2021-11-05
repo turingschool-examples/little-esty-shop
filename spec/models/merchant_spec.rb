@@ -52,6 +52,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe '#top_customers' do
+    
     xit 'can sort top 5 customers for merchant' do
       expect(@merchant.top_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
     end
