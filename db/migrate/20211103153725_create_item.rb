@@ -1,7 +1,6 @@
 class CreateItem < ActiveRecord::Migration[5.2]
   def change
-    create_table :items, :id => false do |t|
-      t.integer :id
+    create_table :items do |t|
       t.string :name
       t.string :description
       t.integer :unit_price
@@ -9,6 +8,5 @@ class CreateItem < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    execute 'ALTER TABLE items ADD PRIMARY KEY (id);'
   end
 end
