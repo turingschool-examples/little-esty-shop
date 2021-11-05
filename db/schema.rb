@@ -15,14 +15,14 @@ ActiveRecord::Schema.define(version: 2021_11_03_154028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "customers", id: :integer, default: nil, force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "invoice_items", id: :integer, default: nil, force: :cascade do |t|
+  create_table "invoice_items", force: :cascade do |t|
     t.bigint "item_id"
     t.bigint "invoice_id"
     t.integer "quantity"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_154028) do
     t.index ["item_id"], name: "index_invoice_items_on_item_id"
   end
 
-  create_table "invoices", id: :integer, default: nil, force: :cascade do |t|
+  create_table "invoices", force: :cascade do |t|
     t.bigint "customer_id"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_154028) do
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
   end
 
-  create_table "items", id: :integer, default: nil, force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "unit_price"
@@ -52,13 +52,13 @@ ActiveRecord::Schema.define(version: 2021_11_03_154028) do
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
-  create_table "merchants", id: :integer, default: nil, force: :cascade do |t|
+  create_table "merchants", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", id: :integer, default: nil, force: :cascade do |t|
+  create_table "transactions", force: :cascade do |t|
     t.bigint "invoice_id"
     t.string "credit_card_number"
     t.string "credit_card_expiration_date"
