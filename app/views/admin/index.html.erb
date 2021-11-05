@@ -12,5 +12,7 @@
 
 <h3> Incomplete Invoices </h3>
 <% @pending_invoices.each do |invoice| %>
-  Invoice #<%= invoice.id %> - <%= invoice.created_at %>
+  <div id="id-<%= invoice.id %>">
+    Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> - <%= invoice.created_at.strftime("%A, %B %-d, %Y") %><br>
+  </div>
 <% end %>
