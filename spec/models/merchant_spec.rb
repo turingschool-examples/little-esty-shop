@@ -11,7 +11,6 @@ RSpec.describe Merchant, type: :model do
 
   describe '#top_customers' do
     it 'returns the top 5 customers for the given merchant' do
-
       expect(@merchant.top_customers.length).to eq(5)
     end
   end
@@ -19,10 +18,9 @@ RSpec.describe Merchant, type: :model do
   describe '#shippable_items' do
     it 'returns the items that are ready to ship in order from oldest to newest' do
 
-      expect(@merchant.shippable_items).to be_a(Array)
       expect(@merchant.shippable_items.length).to eq(21)
-      expect(@merchant.shippable_items[0][0]).to eq("Item Quo Magnam")
-      expect(@merchant.shippable_items[0][2]).to be < @merchant.shippable_items[20][2]
+      expect(@merchant.shippable_items.first.name).to eq("Item Expedita Aliquam")
+      expect(@merchant.shippable_items.first.invoice_created_at).to be < @merchant.shippable_items.last.invoice_created_at
     end
   end
 end

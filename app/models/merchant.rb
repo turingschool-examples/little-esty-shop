@@ -16,16 +16,11 @@ class Merchant < ApplicationRecord
                           DESC
                           LIMIT 5"
                         ).rows
+    # Customer.joins(invoices: [:transactions, :items]).joins('INNER JOIN merchants ON merchants.id = items.merchant_id').where("transactions.result = 'success' AND merchants.id = '#{self.id}'").count
+    # result = Customer.select('customers.*, COUNT(transactions.*) AS transaction_count').joins(invoices: [:items, :transactions]).where("transactions.result = 'success' AND merchants.id = '#{Merchant.first.id}'").group(:customer_id).order(transaction_count: :desc).limit(5)
   end
 
   def shippable_items
-    ActiveRecord::Base.connection.exec_query(
-                         "SELECT items.name, invoice_items.id, invoice_items.created_at
-                          FROM items
-                          INNER JOIN invoice_items ON items.id = invoice_items.item_id
-                          INNER JOIN merchants ON merchants.id = items.merchant_id
-                          WHERE invoice_items.status = '0' AND merchants.id = '#{self.id}'
-                          ORDER BY invoice_items.created_at"
-                        ).rows
+    items.select("items.*, invoice_items.invoice_id AS invoice_id, invoices.created_at AS invoice_created_at").joins(:invoices).where("invoice_items.status = '0'").order('invoices.created_at')
   end
 end
