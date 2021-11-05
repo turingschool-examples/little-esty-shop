@@ -56,10 +56,18 @@ RSpec.describe 'Admin Index' do
   end
 
   it 'has a section for incomplete invoices' do
+    merchant1 = Merchant.create!(name: 'Bob Burger')
     customer1 = Customer.create!(first_name: "Bob", last_name: "Dylan")
-    invoice3 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
     invoice1 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
     invoice2 = Invoice.create!(customer_id: customer1.id, status: 'completed')
+    invoice3 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
+    item1 = Item.create!(name: 'book', description: 'good book', unit_price: 12, merchant_id: merchant1.id)
+    item2 = Item.create!(name: 'spatula', description: 'good spatula', unit_price: 8, merchant_id: merchant1.id)
+    item3 = Item.create!(name: 'compressed air', description: 'working gpu', unit_price: 6000, merchant_id: merchant1.id)
+    invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 2, unit_price: 24, status: 'pending')
+    invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 2, unit_price: 16, status: 'shipped')
+    invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 2, unit_price: 12000, status: 'packaged')
+
 
     visit admin_index_path
 
@@ -67,7 +75,7 @@ RSpec.describe 'Admin Index' do
     second_invoice = "Invoice ##{invoice1.id} - #{invoice1.created_at.strftime("%A, %B %-d, %Y")}"
 
     expect(page).to have_content('Incomplete Invoices')
-    
+
     within "#id-#{invoice3.id}" do
       expect(page).to have_content("Invoice ##{invoice3.id} - #{invoice3.created_at.strftime("%A, %B %-d, %Y")}")
     end
@@ -75,6 +83,10 @@ RSpec.describe 'Admin Index' do
     within "#id-#{invoice1.id}" do
       expect(page).to have_content("Invoice ##{invoice1.id} - #{invoice1.created_at.strftime("%A, %B %-d, %Y")}")
     end
+
+    #need to figure out how to test order by date
+    # expect(invoice1.created_at.strftime("%A, %B %-d, %Y")).to appear_before(invoice3.created_at.strftime("%A, %B %-d, %Y"))
+    # expect("Invoice ##{invoice1.id}").to appear_before("Invoice ##{invoice3.id}")
 
     click_link "#{invoice3.id}"
 

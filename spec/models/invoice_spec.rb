@@ -8,12 +8,17 @@ RSpec.describe Invoice, type: :model do
 
   describe '::pending_invoices' do
     it 'returns an array of pending invoices' do
+      merchant1 = Merchant.create!(name: 'Bob Burger')
       customer1 = Customer.create!(first_name: "Bob", last_name: "Dylan")
-      invoice3 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
       invoice1 = Invoice.create!(customer_id: customer1.id, status: 'in progress')
       invoice2 = Invoice.create!(customer_id: customer1.id, status: 'completed')
+      item1 = Item.create!(name: 'book', description: 'good book', unit_price: 12, merchant_id: merchant1.id)
+      item2 = Item.create!(name: 'spatula', description: 'good spatula', unit_price: 8, merchant_id: merchant1.id)
+      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 2, unit_price: 24, status: 'pending')
+      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 2, unit_price: 16, status: 'shipped')
 
-      expect(Invoice.pending_invoices).to eq([invoice3, invoice1])
+
+      expect(Invoice.pending_invoices).to eq([invoice1])
     end
   end
 end
