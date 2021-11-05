@@ -5,7 +5,13 @@
   <% @items.item_status('enabled').each do |item| %>
     <div id="item-<%= item.id %>">
       <%= link_to item.name, merchant_item_path(@merchant, item) %>
-      <%= button_to 'Disable', merchant_item_path(@merchant, item), method: :patch, params: { status: 'disabled'} %>
+      <%= form_with model: [@merchant, item], local: true do |form| %>
+        <%= form.hidden_field :name %>
+        <%= form.hidden_field :description %>
+        <%= form.hidden_field :unit_price %>
+        <%= form.hidden_field :status, value: 'disabled' %>
+        <%= form.submit 'Disable' %>
+      <% end %>
     </div>
   <% end %><br>
 </div>
@@ -15,7 +21,15 @@
   <% @items.item_status('disabled').each do |item| %>
     <div id="item-<%= item.id %>">
       <%= link_to item.name, merchant_item_path(@merchant, item) %>
-      <%= button_to 'Enable', merchant_item_path(@merchant, item), method: :patch, params: { status: 'enabled'} %>
-    </div>
+      <%= form_with model: [@merchant, item], local: true do |form| %>
+        <%= form.hidden_field :name %>
+        <%= form.hidden_field :description %>
+        <%= form.hidden_field :unit_price %>
+        <%= form.hidden_field :status, value: 'enabled' %>
+        <%= form.submit 'Enable' %>
+      <% end %>
+    </div> 
   <% end %>
 </div>
+
+<%= link_to "Create New Item", new_merchant_item_path(@merchant) %>

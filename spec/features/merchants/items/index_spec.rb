@@ -29,7 +29,7 @@ RSpec.describe "merchant's item index page" do
 
   it 'has a button next to item to enable/disable' do
     within("#item-#{@item1.id}") do
-      click_button 'Enable'
+      click_on 'Enable'
       expect(page).to have_button('Disable')
     end
   end
@@ -40,9 +40,13 @@ RSpec.describe "merchant's item index page" do
     end 
 
     within('#disabled') do 
-      save_and_open_page
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item2.name)
     end 
+  end 
+
+  it 'has a link to create a new item' do 
+    click_link "Create New Item"
+    expect(current_path).to eq(new_merchant_item_path(@merchant))
   end 
 end
