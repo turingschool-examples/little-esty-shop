@@ -83,24 +83,22 @@ RSpec.describe "Merchant's dashboard", type: :feature do
       expect(page).to have_content "#{@customer_3.last_name} - 1 purchases"
     end
 
-# When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
-
     it 'I see a section for "Items Ready to Ship"' do
       within ("div#items-ready-to-ship") do
         expect(page).to have_content("Items Ready to Ship")
         expect(page).to have_content("YoYo - Invoice ##{@invoice_6.id} - #{@invoice_6.created_at}")
         expect(page).to have_content("YoYo - Invoice ##{@invoice_7.id} - #{@invoice_7.created_at}")
       end
-  save_and_open_page
+
     end
 
     it "I see each invoice id as a link to my merchant's invoice show page" do
       within ("div#items-ready-to-ship") do
+        click_on "#{@invoice_6.id}"
+        expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_6.id}")
+
+        visit "/merchants/#{@merchant.id}/dashboard"
+
         click_on "#{@invoice_7.id}"
         expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
       end
