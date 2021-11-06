@@ -9,11 +9,6 @@ class Item < ApplicationRecord
 
   def self.top_5_by_revenue
     select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:invoice_items).group(:id).order('revenue desc').limit(5)
-    # item_revenue.group(:item_id)
-    # revenue.order.limit(5)
-    # select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue").group(:id).order('revenue desc').limit(5)
-    # group(:id).all(&:revenue).order('revenue desc').limit(5)
-
   end
 end
 
