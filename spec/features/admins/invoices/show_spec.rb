@@ -17,6 +17,11 @@ RSpec.describe 'Admin Invoice Show Page' do
     @invoice_2 = Invoice.create!(status: 0, customer_id: @customer_1.id)
     @invoice_3 = Invoice.create!(status: 0, customer_id: @customer_2.id)
     @invoice_4 = Invoice.create!(status: 2, customer_id: @customer_2.id)
+
+    @ii_1 = InvoiceItem.create!(quantity: 1, unit_price: 10, status: 1, item_id: @item_1.id, invoice_id: @invoice_1.id)
+    @ii_2 = InvoiceItem.create!(quantity: 1, unit_price: 12, status: 2, item_id: @item_2.id, invoice_id: @invoice_2.id)
+    @ii_3 = InvoiceItem.create!(quantity: 1, unit_price: 40, status: 0, item_id: @item_3.id, invoice_id: @invoice_3.id)
+    @ii_4 = InvoiceItem.create!(quantity: 1, unit_price: 30, status: 2, item_id: @item_4.id, invoice_id: @invoice_4.id)
   end
 
   it 'displays an invoices attributes' do
@@ -24,8 +29,18 @@ RSpec.describe 'Admin Invoice Show Page' do
 
     expect(page).to have_content(@invoice_1.id)
     expect(page).to have_content(@invoice_1.status)
-    expect(page).to have_content('Saturday Nov 6 2021')
+    expect(page).to have_content('Saturday Nov 6, 2021')
     expect(page).to have_content(@customer_1.first_name)
     expect(page).to have_content(@customer_1.last_name)
+  end
+
+  it 'displays the items and their attributes' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@ii_1.quantity)
+    expect(page).to have_content(@ii_1.status)
+    expect(page).to have_content(@item_1.unit_price)
   end
 end

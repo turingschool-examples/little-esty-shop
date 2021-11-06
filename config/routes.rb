@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get '/admin/invoices',             to: 'admin_invoices#index'
   get '/admin/invoices/:invoice_id', to: 'admin_invoices#show'
 
+  # resources :admin, only: :index do
+  #   resources :merchants, only: [:index, :new, :show, :create, :update, :edit]
+  #   resources :invoices, only: [:index, :show]
+  # end
+
 
   resources :merchants, only: :index do
     resources :dashboard, only: [:index]
