@@ -1,5 +1,7 @@
 <h1>Admin Merchants</h1>
 
+  <%= link_to "Add Merchant", new_admin_merchant_path %>
+
 <div id="enabled">
   <h3>Enabled Merchants</h3>
   <% @merchants.merchant_status('enabled').each do |merchant| %>

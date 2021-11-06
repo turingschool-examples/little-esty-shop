@@ -48,10 +48,10 @@ RSpec.describe Merchant, type: :model do
 
     it 'identifies status' do
       @merchant = create(:merchant)
-      @merchant1 = create(:merchant, status: "disabled")
+      @merchant1 = create(:merchant, status: "enabled")
 
-      expect(Merchant.merchant_status('enabled')).to eq([@merchant])
-      expect(Merchant.merchant_status('disabled')).to eq([@merchant1])
+      expect(Merchant.merchant_status('disabled')).to eq([@merchant])
+      expect(Merchant.merchant_status('enabled')).to eq([@merchant1])
     end
   end
 end

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "admin merchants" do
+RSpec.describe "admin merchants index" do
   before do
     @merchant = create(:merchant)
     @merchant1 = create(:merchant)
     @merchant2 = create(:merchant)
     @merchant3 = create(:merchant)
-    @merchant4 = create(:merchant, status: 'disabled')
+    @merchant4 = create(:merchant, status: 'enabled')
 
     visit admin_merchants_path
   end
@@ -29,20 +29,25 @@ RSpec.describe "admin merchants" do
 
   it 'has button to enable/disable merchant' do
     within("#merchant-#{@merchant.id}") do
-      click_on "Disable"
-      expect(page).to have_button("Enable")
+      click_on "Enable"
+      expect(page).to have_button("Disable")
     end
- end
+  end
 
- it 'has sections for enabled and disabled items' do
+  it 'has sections for enabled and disabled items' do
    within('#enabled') do
+    expect(page).to have_content(@merchant4.name)
+   end
+
+   within('#disabled') do
      expect(page).to have_content(@merchant.name)
      expect(page).to have_content(@merchant1.name)
      expect(page).to have_content(@merchant2.name)
    end
+  end
 
-   within('#disabled') do
-     expect(page).to have_content(@merchant4.name)
-   end
- end
+  it 'has link to create new merchant' do
+    expect(page).to have_link("Add Merchant")
+  end
+
 end
