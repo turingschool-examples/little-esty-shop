@@ -19,11 +19,12 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_items
-    items.joins(invoices: :transactions)
+    var = items.joins(invoices: :transactions)
          .where("transactions.result = 'success'")
          .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
          .group(:id)
          .order('revenue desc')
          .limit(5)
-  end 
+         require "pry"; binding.pry
+  end
 end
