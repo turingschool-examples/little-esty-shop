@@ -40,9 +40,10 @@ RSpec.describe 'show page' do
   it 'shows dropdown for changing status' do
     expect(page).to have_content('packaged pending shipped')
     expect(page).to have_content('Change status')
-    save_and_open_page
+
     within("#item-#{@invoice.items.last.id}") do
       select('shipped', from: 'invoice_item_status')
+      expect(@invoice.items.last.invoice_item_status(@invoice)).to eq('shipped')
     end
   end
 end
