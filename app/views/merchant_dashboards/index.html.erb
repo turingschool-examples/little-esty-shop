@@ -9,7 +9,7 @@
 <h4>Favorite Customers</h4>
 <ol>
 <% @merchant.favorite_customers.each do |customer| %>
-  <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.successful_transactions(@merchant.id) %> purchases</li>
+  <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.successful_transactions %> purchases</li>
 <% end %>
 </ol>
 </div>
