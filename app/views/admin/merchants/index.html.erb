@@ -1,5 +1,29 @@
 <h1>Admin Merchants</h1>
 
-<% @merchants.each do |merchant| %>
-  <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-<% end %>
+<div id="enabled">
+  <h3>Enabled Merchants</h3>
+  <% @merchants.merchant_status('enabled').each do |merchant| %>
+    <div id="merchant-<%= merchant.id %>">
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+      <%= form_with model: [:admin, merchant], local: true do |form| %>
+        <%= form.hidden_field :name %>
+        <%= form.hidden_field :status, value: 'disabled' %>
+        <%= form.submit 'Disable' %>
+      <% end %>
+    </div>
+  <% end %><br>
+</div>
+
+<div id="disabled">
+  <h3>Disabled Merchants</h3>
+  <% @merchants.merchant_status('disabled').each do |merchant| %>
+    <div id="merchant-<%= merchant.id %>">
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+      <%= form_with model: [:admin, merchant], local: true do |form| %>
+        <%= form.hidden_field :name %>
+        <%= form.hidden_field :status, value: 'enabled' %>
+        <%= form.submit 'Enable' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

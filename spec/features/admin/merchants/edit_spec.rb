@@ -12,7 +12,7 @@ RSpec.describe "admin merchant edit" do
 
     expect(current_path).to eq(admin_merchant_path(@merchant))
     expect(page).to have_content("Stephanie's Shop")
-    #expect(page).to have_content("Merchant name has been updated.")
+    expect(page).to have_content("Merchant has been updated.")
   end
 end
 
