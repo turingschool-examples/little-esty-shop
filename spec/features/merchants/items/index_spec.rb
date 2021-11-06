@@ -80,7 +80,8 @@ RSpec.describe "merchant's item index page" do
       within("#item-#{@item1.id}") do
         expect(page).to have_link(@item1.name)
         expect(page).to have_content('revenue generated')
-
+        expect(page).to have_content('Top selling date')
+        
         click_link(@item1.name, match: :first)
 
         expect(current_path).to eq(merchant_item_path(@merchant, @item1))

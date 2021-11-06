@@ -17,5 +17,6 @@ class Item < ApplicationRecord
             .order('created_at desc')
             .first
             .created_at
+            .to_date
   end
 end
