@@ -8,4 +8,16 @@ class Customer < ApplicationRecord
   def full_name
     first_name + " " + last_name
   end
+
+
+  def self.admin_favorite_customers
+    self.joins(invoices: :transactions)
+             .where('transactions.result = ?', 'success')
+             .group('customers.id')
+             .select('customers.*')
+             .order(count: :desc)
+             .limit(5)
+             .count
+  end
+
 end

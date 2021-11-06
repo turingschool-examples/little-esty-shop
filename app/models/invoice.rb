@@ -11,4 +11,5 @@ class Invoice < ApplicationRecord
   def self.order_from_oldest
     order(created_at: :desc)
   end
+
 end
