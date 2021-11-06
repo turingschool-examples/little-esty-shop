@@ -28,7 +28,7 @@ RSpec.describe 'Admin Invoice Show Page' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content(@invoice_1.id)
-    expect(page).to have_content(@invoice_1.status)
+    expect(page).to have_field(:status)
     expect(page).to have_content('Saturday Nov 6, 2021')
     expect(page).to have_content(@customer_1.first_name)
     expect(page).to have_content(@customer_1.last_name)
@@ -48,5 +48,22 @@ RSpec.describe 'Admin Invoice Show Page' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Total Revenue Generated: $#{@ii_1.item_revenue}")
+  end
+
+  it 'lets users select a new invoice status' do
+    visit "/admin/invoices/#{@invoice_2.id}"
+
+    expect(page).to have_field(:status)
+    expect(page).to have_button("Update Invoice Status")
+  end
+
+  it 'returns a user to the show page after updating invoice status' do
+    visit "/admin/invoices/#{@invoice_2.id}"
+    expect(@invoice_2.status).to eq("cancelled")
+
+    select 'completed', from: :status
+    click_button "Update Invoice Status"
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice_2.id}")
   end
 end
