@@ -19,7 +19,6 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_items
-    binding.pry
     items.joins(invoices: :transactions)
          .where("transactions.result = 'success'")
          .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')

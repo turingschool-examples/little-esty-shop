@@ -83,15 +83,14 @@ RSpec.describe Merchant, type: :model do
       @inv_item2 = create :invoice_item, { item_id: @item2.id, invoice_id: @invoice1.id, unit_price: 9000, quantity: 1}
       @inv_item3 = create :invoice_item, { item_id: @item3.id, invoice_id: @invoice2.id, unit_price: 8000, quantity: 1}
       @inv_item4 = create :invoice_item, { item_id: @item4.id, invoice_id: @invoice2.id, unit_price: 7000, quantity: 1}
-      @inv_item5 = create :invoice_item, { item_id: @item5.id, invoice_id: @invoice3.id, unit_price: 6000, quantity: 1}
+      @inv_item5 = create :invoice_item, { item_id: @item5.id, invoice_id: @invoice2.id, unit_price: 6000, quantity: 1}
       @inv_item6 = create :invoice_item, { item_id: @item6.id, invoice_id: @invoice3.id, unit_price: 10000000, quantity: 1}
       @inv_item7 = create :invoice_item, { item_id: @item6.id, invoice_id: @invoice4.id, unit_price: 10000000, quantity: 1}
     end 
 
     describe '#top_five_items' do 
       it 'retruns the top five items by total revenue' do 
-      #  expect(@merchant.top_five_items).to contain_exactly(@item1,@item2,@item3,@item4,@item5)
-      expect(@merchant.top_five_items.to_a).to eq([@item1,@item2,@item3,@item4,@item5])
+      expect(@merchant.top_five_items).to eq([@item1,@item2,@item3,@item4,@item5])
       end 
     end 
   end 
