@@ -8,6 +8,7 @@ class Customer < ApplicationRecord
     .joins(invoice: [invoice_items: [item: [:merchant]]])
     .where(merchants: { id: merchant_id })
     .count
+  end
 
   def self.top_customers
     customers = joins(invoices: :transactions)
