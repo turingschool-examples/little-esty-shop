@@ -8,7 +8,5 @@ class Merchant < ApplicationRecord
 
   def top_5
     items.top_5_by_revenue
-    # select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue").group(:id).order('revenue desc').limit(5)
-    # group(:id).all(&:revenue).order('revenue desc').limit(5)
   end
 end
