@@ -5,12 +5,14 @@ Rails.application.routes.draw do
 
   get '/admin', to: 'admins#dashboard'
 
-  get '/admin/merchants', to: 'admin_merchants#index'
-  get '/admin/merchants/new', to: 'admin_merchants#new'
-  post '/admin/merchants', to: 'admin_merchants#create'
-  patch '/admin/merchants/:merchant_id', to: 'admin_merchants#update'
+  get '/admin/merchants',                   to: 'admin_merchants#index'
+  get '/admin/merchants/new',               to: 'admin_merchants#new'
+  post '/admin/merchants',                  to: 'admin_merchants#create'
+  patch '/admin/merchants/:merchant_id',    to: 'admin_merchants#update'
   get '/admin/merchants/:merchant_id/edit', to: 'admin_merchants#edit'
-  get '/admin/merchants/:merchant_id', to: 'admin_merchants#show'
+  get '/admin/merchants/:merchant_id',      to: 'admin_merchants#show'
+
+  get '/admin/invoices', to: 'admin_invoices#index'
 
 
   resources :merchants, only: :index do
