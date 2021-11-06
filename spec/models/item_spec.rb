@@ -64,5 +64,15 @@ RSpec.describe Item, type: :model do
         expect(item.invoice_item_status(invoice)).to eq("packaged")
       end
     end
+
+    describe '#invoice_item' do
+      it 'should give the quantity of the item sold' do
+        invoice_item = InvoiceItem.first
+        invoice = Invoice.find_by(id: invoice_item.invoice_id)
+        item = Item.find_by(id: invoice_item.item_id)
+
+        expect(item.invoice_item(invoice).id).to eq(InvoiceItem.first.id)
+      end
+    end
   end
 end
