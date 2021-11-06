@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post '/admin/merchants', to: 'admin_merchants#create'
 
   get '/admin/invoices', to: 'admin_invoices#index'
-  get '/admin/invoices/:id', to: 'admin_invoices#show'
+  get '/admin/invoices/:id', to: 'admin_invoices#show', as: :admin_invoices_show
   # namespace :admin do
   #   resources :merchants, only: [:index]
   #   resources :invoices, only: [:index]
