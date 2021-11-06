@@ -45,6 +45,7 @@ group :development, :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'launchy'
+  gem 'table_print'
   
 end
 

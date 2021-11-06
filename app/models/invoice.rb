@@ -5,7 +5,6 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items, source: :invoice_items
 
-  
   enum status: [:cancelled, :completed, 'in progress' ]
   
 end
