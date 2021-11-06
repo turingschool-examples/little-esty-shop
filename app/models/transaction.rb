@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
 
 
   def self.success
-    where(result: 0).group(:id)
+    where(result: 0).distinct
   end
 
 
