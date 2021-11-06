@@ -8,10 +8,8 @@
 
 <body>
       <ol>
-      <li><%= @customers.top_5.first.first_name + " " + @customers.top_5.first.last_name + ": " + @customers.top_5.first.number_of_transactions.to_s %></li>
-      <li><%= @customers.top_5.second.first_name + " " + @customers.top_5.second.last_name  + ": " + @customers.top_5.second.number_of_transactions.to_s %></li>
-      <li><%= @customers.top_5.third.first_name + " " + @customers.top_5.third.last_name  + ": " + @customers.top_5.third.number_of_transactions.to_s %></li>
-      <li><%= @customers.top_5.fourth.first_name + " " + @customers.top_5.fourth.last_name  + ": " + @customers.top_5.fourth.number_of_transactions.to_s %></li>
-      <li><%= @customers.top_5.fifth.first_name + " " + @customers.top_5.fifth.last_name  + ": " + @customers.top_5.fifth.number_of_transactions.to_s %></li>
+      <% @top_customers.each do |customer| %>
+          <li> <%= customer["first_name"] + " " + customer["last_name"] + ": " + customer["transaction_count"].to_s %> </li>
+      <% end %>
       </ol>
 </body>

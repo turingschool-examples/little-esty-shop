@@ -16,6 +16,6 @@ class Customer < ApplicationRecord
     end
   end
   def self.top_5
-    Customer.select("customers.id as id, customers.first_name as first_name, customers.last_name as last_name, count(transactions) as transaction_count").where("transactions.result = '0'").group("transactions.result").joins(:invoices).group("customers.id").joins(:transactions).group('invoices').order('transaction_count DESC').distinct.limit(5)
+    top_5 = Customer.select("customers.id as id, customers.first_name as first_name, customers.last_name as last_name, count(transactions) as transaction_count").where("transactions.result = '0'").group("transactions.result").joins(:invoices).group("customers.id").joins(:transactions).group('invoices').order('transaction_count DESC').distinct.limit(5)
   end
 end
