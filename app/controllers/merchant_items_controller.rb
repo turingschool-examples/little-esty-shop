@@ -13,8 +13,7 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-    binding.pry
-    params[:unit_price] = params[:price].to_i * 100
+    params[:unit_price] = (params[:unit_price].to_f * 100).to_i
     merchant = Merchant.find(params[:merchant_id])
     item = merchant.items.create(item_params)
     redirect_to "/merchants/#{params[:merchant_id]}/items"
