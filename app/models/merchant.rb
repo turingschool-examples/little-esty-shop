@@ -4,6 +4,8 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
 
+  validates_presence_of :name
+
   def merchant_invoices
     invoices
   end
@@ -17,7 +19,7 @@ class Merchant < ApplicationRecord
              .limit(5)
              .count
   end
-
+  
   def top_five_items
     var = items.joins(invoices: :transactions)
          .where("transactions.result = 'success'")
@@ -25,6 +27,9 @@ class Merchant < ApplicationRecord
          .group(:id)
          .order('revenue desc')
          .limit(5)
-         require "pry"; binding.pry
+  end 
+
+  def self.merchant_status(status)
+    where(status: status)
   end
 end
