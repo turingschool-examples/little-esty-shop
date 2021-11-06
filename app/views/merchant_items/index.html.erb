@@ -7,3 +7,15 @@
 <div id='new-item'>
 <%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %>
 </div>
+
+<div id='top-items'>
+<h2>Top Items</h2>
+<ol>
+<% @merchant.top_items_by_revenue.each do |item| %>
+  <li>
+  <%= link_to item.item_name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  - <%= number_to_currency(item.revenue) %> in sales
+  </li>
+<% end %>
+</ol>
+</div>

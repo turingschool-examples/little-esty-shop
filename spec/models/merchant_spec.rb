@@ -57,8 +57,8 @@ RSpec.describe Merchant do
         expect(@merchant.favorite_customers).to be_an ActiveRecord::Relation
         expect(@merchant.favorite_customers.length).to eq 5
         expect(@merchant.favorite_customers).to_not include(@customer_6)
-        expect(@merchant.favorite_customers.first).to eq @customer_5
-        expect(@merchant.favorite_customers.last).to eq @customer_3
+        expect(@merchant.favorite_customers.first.first_name).to eq @customer_5.first_name
+        expect(@merchant.favorite_customers.last.first_name).to eq @customer_3.first_name
       end
     end
 
@@ -68,7 +68,7 @@ RSpec.describe Merchant do
         expect(@merchant.top_items_by_revenue.length).to eq 5
         expect(@merchant.top_items_by_revenue[0].item_id).to eq @item_1.id
         expect(@merchant.top_items_by_revenue[4].item_id).to eq @item_2.id
-        expect(@merchant.top_items_by_revenue[0].revenue).to eq @item_1.unit_price * 6
+        expect(@merchant.top_items_by_revenue[0].revenue).to eq (@item_1.unit_price * 6 / 100)
       end
     end
   end
