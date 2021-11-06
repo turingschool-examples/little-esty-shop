@@ -4,3 +4,12 @@
 <%= link_to "Invoice Index", "/admin/invoices" %>
 
 <h3>Top Customers:</h3>
+
+
+<body>
+      <ol>
+      <% @top_customers.each do |customer| %>
+          <li> <%= customer["first_name"] + " " + customer["last_name"] + ": " + customer["transaction_count"].to_s %> </li>
+      <% end %>
+      </ol>
+</body>
