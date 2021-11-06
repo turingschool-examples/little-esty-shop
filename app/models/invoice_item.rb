@@ -8,7 +8,7 @@ class InvoiceItem < ApplicationRecord
     quantity * unit_price
   end
 
-  def self.item_revenue_top_five
+  def self.item_revenue
     revenue = group(:item_id).sum('quantity * unit_price')
     revenue.sort_by{ |_, v| -v }.to_h.keys
 
