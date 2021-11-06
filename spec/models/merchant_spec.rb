@@ -102,5 +102,12 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant.top_five_items).to eq([@item1,@item2,@item3,@item4,@item5])
       end
     end
+
+    ###  TECHNICAL DEBT: this needs to be moved to item model along with set-up
+    describe '#item_best_day' do
+      it 'returns the date of the greatest number of sales for items' do
+        expect(@merchant.top_five_items.first.item_best_day).to eq(DateTime.new(2021, 1, 4))
+      end
+    end
   end
 end
