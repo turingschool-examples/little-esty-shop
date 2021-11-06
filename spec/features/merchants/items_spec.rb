@@ -39,7 +39,6 @@ before(:each) do
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item2.name)
         expect(page).to_not have_content(@item3.name)
-        save_and_open_page
       end
     end
 end
