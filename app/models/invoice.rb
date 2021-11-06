@@ -6,4 +6,8 @@ class Invoice < ApplicationRecord
   belongs_to :customer
 
   enum status: [:cancelled, :completed, 'in progress']
+
+  def successful_transactions
+    transactions.success
+  end
 end

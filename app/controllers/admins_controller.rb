@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   def dashboard
-    @transactions = Transaction.all
+    @customers = Customer.all
+    @top_customers = Customer.top_5.map {|customer| customer.attributes}
   end
 end
