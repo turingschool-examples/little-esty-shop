@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
   def dashboard
-    @transactions = Transaction.all
+    @customers = Customer.all
   end
 end
