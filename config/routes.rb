@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   get '/admin/merchants', to: 'admin_merchants#index'
+  get '/admin/merchants/new', to: 'admin_merchants#new'
+  post '/admin/merchants', to: 'admin_merchants#create'
+
   get '/admin/invoices', to: 'admin_invoices#index'
   get '/admin/invoices/:id', to: 'admin_invoices#show'
   # namespace :admin do
