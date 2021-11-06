@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Invoice Show page' do
-  'All the items on the invoice are shown' do
+  it 'All the items on the invoice are shown' do
     customer = Customer.create!(first_name: 'Bob', last_name: 'Dylan')
     merchant = Merchant.create!(name: 'Jen')
     invoice = Invoice.create!(customer_id: customer.id, status: 'completed')
@@ -12,14 +12,20 @@ RSpec.describe 'Admin Invoice Show page' do
 
     visit admin_invoices_show_path(invoice.id)
 
-    expect(page).to have_content('Item name: Pumpkin')
-    expect(page).to have_content('Quantity of Pumpkin(s) ordered: 10')
-    expect(page).to have_content('Total price the Pumpkin(s): 30 ')
-    expect(page).to have_content('Invoice item status: shipped ')
+    expect(page).to have_content('Items:')
+
+    within "#item-id-#{item1.id}" do
+      expect(page).to have_content('Item name: Pumpkin')
+      expect(page).to have_content('Quantity of Pumpkin(s) ordered: 10')
+      expect(page).to have_content('Total price of the Pumpkin(s): 30')
+      expect(page).to have_content('Status: shipped')
+    end
     
-    expect(page).to have_content('Item name: Pillow')
-    expect(page).to have_content('Quantity of Pillow(s) ordered: 2')
-    expect(page).to have_content('Total price the Pillow(s): 40 ')
-    expect(page).to have_content('Invoice item status: shipped ')
+    within "#item-id-#{item2.id}" do
+      expect(page).to have_content('Item name: Pillow')
+      expect(page).to have_content('Quantity of Pillow(s) ordered: 2')
+      expect(page).to have_content('Total price of the Pillow(s): 40')
+      expect(page).to have_content('Status: shipped')
+    end
   end
 end
