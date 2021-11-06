@@ -112,6 +112,7 @@ RSpec.describe Merchant, type: :model do
       it 'returns the date of the greatest number of sales for items' do
         expect(@merchant.top_five_items.first.item_best_day).to eq(DateTime.new(2021, 1, 4))
       end
+    end
 
     it 'identifies status' do
       @merchant = create(:merchant)
