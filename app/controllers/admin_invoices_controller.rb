@@ -3,5 +3,6 @@ class AdminInvoicesController < ApplicationController
   end
   
   def show
+    @invoice = Invoice.find(params[:id])
   end
 end

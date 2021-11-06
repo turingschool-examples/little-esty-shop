@@ -1,0 +1,14 @@
+<h1>Invoice <%= @invoice.id %></h1>
+
+<h3>Items:</h3>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="item-id-<%= invoice_item.item.id %>">
+    <p>
+      Item name: <%= invoice_item.item.name %><br>
+      Quantity of <%= invoice_item.item.name %>(s) ordered: <%= invoice_item.quantity %><br>
+      Total price of the <%= invoice_item.item.name %>(s): <%= invoice_item.unit_price %><br>
+      Status: <%= invoice_item.status %><br>
+      <br>
+    </p>
+  </div>
+<% end %>
