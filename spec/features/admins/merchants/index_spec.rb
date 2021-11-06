@@ -39,6 +39,15 @@ RSpec.describe 'Admin Merchant Index' do
     visit '/admin/merchants'
 
     click_link "Create New Merchant"
-    expect(current_path).to eq("/admin/merchant/new")
+    expect(current_path).to eq("/admin/merchants/new")
+  end
+
+  it 'seperates merchants by status' do
+    visit '/admin/merchants'
+
+    expect(page).to have_content("Enabled Merchants")
+    expect(page).to have_content("Disabled Merchants")
+
+    expect(@merchant_1.name).to appear_before("Disabled Merchants")
   end
 end
