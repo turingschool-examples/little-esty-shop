@@ -4,6 +4,8 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
 
+  validates_presence_of :name
+
   def merchant_invoices
     invoices
   end
@@ -25,5 +27,9 @@ class Merchant < ApplicationRecord
          .group(:id)
          .order('revenue desc')
          .limit(5)
+  end
+
+  def self.merchant_status(status)
+    where(status: status)
   end
 end
