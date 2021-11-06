@@ -45,7 +45,6 @@ namespace :csv_load do
     Item.destroy_all
     CSV.foreach('./db/data/items.csv', headers: true) do |row|
       Item.create!(row.to_h)
-
     end
     table = 'items'
     auto_inc_val = 2484
@@ -62,9 +61,14 @@ namespace :csv_load do
     ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_inc_val}")
   end
 
-  task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions] do
-  end 
-
+  # task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions] do
+  # end 
+  task :all do
+    tables = [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
+    tables.each do |table|
+      Rake::Task["csv_load:#{table}"].invoke
+    end
+  end
   # task all: :environment do
   #   Rake::Task['csv_load:customers'].invoke
   #   Rake::Task['csv_load:merchants'].invoke
