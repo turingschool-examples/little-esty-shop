@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
-    it { should have_many :items}
+    it { should have_many :items }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
   end
 
   describe 'model methods' do
@@ -40,6 +44,14 @@ RSpec.describe Merchant, type: :model do
       @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id}
 
       expect(@merchant.favorite_customers).to include(@customer1.id, @customer2.id, @customer3.id, @customer4.id, @customer5.id)
+    end
+
+    it 'identifies status' do
+      @merchant = create(:merchant)
+      @merchant1 = create(:merchant, status: "enabled")
+
+      expect(Merchant.merchant_status('disabled')).to eq([@merchant])
+      expect(Merchant.merchant_status('enabled')).to eq([@merchant1])
     end
   end
 end

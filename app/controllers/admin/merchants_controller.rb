@@ -4,15 +4,33 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+  def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    merchant = Merchant.new(merchant_params)
+    merchant.save
+    redirect_to admin_merchants_path
+  end
+
   def edit
     @merchant = Merchant.find(params[:id])
   end
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
-    flash[:notice] = "Merchant name has been updated."
-    redirect_to admin_merchant_path(merchant)
+    if merchant.update(merchant_params)
+      flash[:notice] = "Merchant has been updated."
+      if params[:merchant][:status]
+        redirect_to admin_merchants_path
+      else
+        redirect_to admin_merchant_path(merchant)
+      end
+    else
+      flash[:alert] = "Please enter a valid name"
+      redirect_to admin_merchant_path(merchant)
+    end
   end
 
   def show
@@ -21,6 +39,6 @@ class Admin::MerchantsController < ApplicationController
 
   private
     def merchant_params
-      params.require(:merchant).permit(:name)
+      params.require(:merchant).permit(:name, :status)
     end
 end
