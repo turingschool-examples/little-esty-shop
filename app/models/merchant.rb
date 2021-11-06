@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+  has_many :invoice_items, through: :items
 
   def top_customers
     Customer.select("customers.*, COUNT(transactions.*) AS transaction_count").joins(
