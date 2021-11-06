@@ -4,7 +4,12 @@
 <h3>Top five most popular items</h3>
 <ol id="top_five_items">
   <% @merchant.items.top_five_items.each do |item| %>
-    <li><%= item.name %>; Total Revenue: <%= number_to_currency(item.total_revenue/100.0) %></li>
+    <li><%= item.name %>
+      <ul>
+        <li>Total Revenue: <%= number_to_currency(item.total_revenue/100.0) %></li>
+        <li>Top selling date was: <%= item.invoices.highest_date %></li>
+      </ul>
+    </li>
   <% end %>
 </ol>
 
