@@ -4,7 +4,11 @@ class InvoiceItem < ApplicationRecord
   enum status: [:packaged, :pending, :shipped]
 
   def item_revenue
-    # InvoiceItem.group(:id).sum(quantity * unit_price)
     quantity * unit_price
+  end
+
+  def self.item_revenue
+    revenue = group(:item_id).sum('quantity * unit_price')
+    revenue.sort_by{ |_, v| -v }.to_h.keys
   end
 end

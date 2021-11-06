@@ -8,9 +8,11 @@ class Item < ApplicationRecord
   end
 
   def self.top_5_by_revenue
-    item_revenue.group(:item_id)
-    # revenue.order.limit(5)
-
+    select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .joins(:invoice_items)
+    .group(:id)
+    .order('revenue desc')
+    .limit(5)
   end
 end
 

@@ -44,7 +44,7 @@ RSpec.describe InvoiceItem, type: :model do
 
   describe 'class methods' do
     it 'returns item revenue top 5' do
-      expect(InvoiceItem.item_revenue_top_five).to eq([@item_6.id, @item_4.id, @item_3.id, @item_5.id, @item_2.id, @item_1.id, @item_7.id])
+      expect(InvoiceItem.item_revenue).to eq([@item_6.id, @item_4.id, @item_3.id, @item_5.id, @item_2.id, @item_1.id, @item_7.id])
     end
   end
 end
