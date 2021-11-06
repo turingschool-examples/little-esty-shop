@@ -20,4 +20,25 @@ RSpec.describe 'Admin Merchant Index' do
     expect(page).to have_content(@merchant_1.name)
     expect(page).to have_link(@merchant_1.name)
   end
+
+  xit 'has a button to enable/disable a given merchant' do
+    visit '/admin/merchants'
+
+    expect(page).to have_button("Disable")
+    expect(@merchant_1.status).to eq(true)
+
+    within(".#{@merchant_1.id}-button") do
+      click_button "Disable"
+    end
+
+    expect(page).to have_button("Enable")
+    expect(@merchant_1.status).to eq(false)
+  end
+
+  it 'provides a link to create a new merchant' do
+    visit '/admin/merchants'
+
+    click_link "Create New Merchant"
+    expect(current_path).to eq("/admin/merchant/new")
+  end
 end
