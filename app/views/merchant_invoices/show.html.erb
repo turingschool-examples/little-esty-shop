@@ -12,8 +12,13 @@
 <h2>Items on this Invoice:</h2>
 
 <% @invoice.items.each do |item| %>
-  <h4><%= item.name %></h4>
-  <p>Quantity: <%= item.invoice_item_quantity(@invoice) %></p>
-  <p>Price: <%= number_to_currency(item.invoice_item_price(@invoice)/100.0) %></p>
-  <p>Status: <%= item.invoice_item_status(@invoice) %></p>
+<div id="item-<%= item.id %>">
+    <h4><%= item.name %></h4>
+      <p>Quantity: <%= item.invoice_item_quantity(@invoice) %></p>
+      <p>Price: <%= number_to_currency(item.invoice_item_price(@invoice)/100.0) %></p>
+      <p>Status: <%= item.invoice_item_status(@invoice) %></p> <%= form_for(item.invoice_item(@invoice)) do |f| %>
+      <%= f.label :change_status %>
+      <%= f.select(:status, options_for_select([['packaged', 'packaged'], ['pending', 'pending'], ['shipped', 'shipped']]), { include_blank: true }, onchange: 'this.form.submit()') %>
+      <% end %>
+  </div>
 <% end %>

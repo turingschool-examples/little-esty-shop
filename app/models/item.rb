@@ -16,6 +16,9 @@ class Item < ApplicationRecord
     where(status: 0)
   end
 
+  def invoice_item(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id)
+  end
   def invoice_item_price(invoice)
     InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).unit_price
   end

@@ -27,7 +27,6 @@ RSpec.describe 'show page' do
   end
 
   it 'shows the item name, quantity ordered, price, invoice item status' do
-    save_and_open_page
     expect(page).to have_content(@invoice.items.first.name)
     expect(page).to have_content(@invoice.items.first.invoice_item_quantity(@invoice))
     expect(page).to have_content("$751.07")
@@ -36,5 +35,14 @@ RSpec.describe 'show page' do
 
   it 'shows invoice total revenue' do
     expect(page).to have_content("$12,817.94")
+  end
+
+  it 'shows dropdown for changing status' do
+    expect(page).to have_content('packaged pending shipped')
+    expect(page).to have_content('Change status')
+    save_and_open_page
+    within("#item-#{@invoice.items.last.id}") do
+      select('shipped', from: 'invoice_item_status')
+    end
   end
 end
