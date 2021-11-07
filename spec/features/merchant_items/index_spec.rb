@@ -101,7 +101,7 @@ RSpec.describe 'the merchants items index' do
       end
     end
 
-    xit "disable/enable items" do
+    it "disable/enable items" do
       item_1 = @merchant.items.create(
         name: 'fidget spinner',
         description: 'it spins',
@@ -147,7 +147,7 @@ RSpec.describe 'the merchants items index' do
       end
     end
 
-    it "top item's best day" do
+    xit "top item's best day" do
       merchant = Merchant.create(name: "Friendly Traveling Merchant")
       item_1 = merchant.items.create(name: 'YoYo', description: 'its on a string', unit_price: 1000)
       item_2 = merchant.items.create(name: 'raisin', description: 'dried grape', unit_price: 100)
