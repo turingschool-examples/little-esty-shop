@@ -7,7 +7,6 @@ def update
 end
 
 private
-
     def invoice_item_params
       params.require(:invoice_item).permit(:status)
     end

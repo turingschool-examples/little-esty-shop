@@ -1,5 +1,5 @@
 require 'rails_helper'
-FactoryBot.find_definitions
+# FactoryBot.find_definitions
 
 RSpec.describe Item, type: :model do
   before :each do
@@ -77,13 +77,13 @@ RSpec.describe Item, type: :model do
     end
 
     describe '#invoice_item_status' do
-      it 'should give the quantity of the item sold' do
+      it 'should return the status of the invoice' do
         expect(@item1.invoice_item_status(@invoice)).to eq("packaged")
       end
     end
 
     describe '#invoice_item' do
-      it 'should give the quantity of the item sold' do
+      it 'should give invoice item corresponding to the given item and invoice' do
         expect(@item1.invoice_item(@invoice).id).to eq(@invitem1.id)
       end
     end

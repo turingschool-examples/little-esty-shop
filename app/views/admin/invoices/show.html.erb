@@ -1,0 +1,19 @@
+<h3>Invoice #<%= @invoice.id %></h3>
+<p>Status: <%= @invoice.status %></p>
+<p>Customer Name: <%= @invoice.customer.first_name + " " + @invoice.customer.last_name %></p>
+<p>Created On: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Total Revenue: <%= number_to_currency(@invoice.invoice_revenue/100.0) %>
+
+<h4>Items:</h4>
+<ul>
+  <% @invoice.items.each_with_index do |item, index| %>
+    <li id="item-<%= index %>">
+      <%= item.name %>
+        <ul>
+          <li>Quantity: <%= item.invoice_item_quantity(@invoice) %></li>
+          <li>Sold For: <%= number_to_currency(item.invoice_item_price(@invoice)/100.0) %></li>
+          <li>Status: <%= item.invoice_item_status(@invoice) %></li>
+        </ul>
+    </li>
+  <% end %>
+</ul>
