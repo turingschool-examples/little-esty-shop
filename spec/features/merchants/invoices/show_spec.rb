@@ -64,4 +64,11 @@ RSpec.describe 'merchant invoices show page' do
     expect(page).to_not have_content(@customer_1.first_name)
     expect(page).to_not have_content(@customer_1.last_name)
   end
+
+  it 'shows item names' do
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}"
+
+    expect(page).to have_content(@item_2.name)
+
+  end
 end
