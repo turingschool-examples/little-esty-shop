@@ -75,8 +75,8 @@ RSpec.describe Merchant, type: :model do
       @invoice3 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 1) }
       @invoice4 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 1) }
       @invoice5 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 2) }
-      @invoice6 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 3) }
-      @invoice7 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 4) }
+      @invoice6 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 3), status: 'completed' }
+      @invoice7 = create :invoice, { customer_id: @customer2.id, created_at: DateTime.new(2021, 1, 3), status: 'completed' }
 
       @transaction1 = create :transaction, { invoice_id: @invoice1.id, result: 'success' }
       @transaction2 = create :transaction, { invoice_id: @invoice1.id, result: 'success' }
@@ -110,7 +110,7 @@ RSpec.describe Merchant, type: :model do
     ###  TECHNICAL DEBT: this needs to be moved to item model test along with set-up. Or does it? Let's discuss.
     describe '#item_best_day' do
       it 'returns the date of the greatest number of sales for items' do
-        expect(@merchant.top_five_items.first.item_best_day).to eq(DateTime.new(2021, 1, 4))
+        expect(@merchant.top_five_items.first.item_best_day).to eq(DateTime.new(2021, 1, 3))
       end
     end
 

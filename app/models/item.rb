@@ -12,9 +12,10 @@ class Item < ApplicationRecord
   end
 
   def item_best_day
-    invoices.select('invoices.created_at')
-            .group('invoices.created_at')
-            .order('created_at desc')
+    invoices.joins(:invoice_items)
+            .select('invoices.created_at, invoice_items.quantity')
+            .where("invoices.status in ('completed', 'in-progress')")
+            .order('invoice_items.quantity desc')
             .first
             .created_at
             .to_date
