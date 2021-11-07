@@ -3,13 +3,13 @@ Rails.application.routes.draw do
 
   resources :merchants do
     get 'dashboard', on: :member
-    resources :items, only: [:index]
+    resources :items, except: [:delete]
     resources :invoices, only: [:index, :show]
   end
 
   namespace :admin do
     root to: 'dashboard#index', as: 'dashboard'
-    resources :merchants, only: [:index, :show]
+    resources :merchants, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show]
   end
 

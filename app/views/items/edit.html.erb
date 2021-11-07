@@ -1,0 +1,6 @@
+<h1>Edit Item Info</h1>
+<% flash.each do |type, message| %>
+  <p><%= message %></p>
+<% end %>
+
+<%= render partial: 'form', locals: {item: @item} %>

@@ -4,6 +4,8 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
 
+  validates_presence_of :name
+
   def merchant_invoices
     invoices
   end
@@ -16,5 +18,18 @@ class Merchant < ApplicationRecord
              .order(count: :desc)
              .limit(5)
              .count
+  end
+
+  def top_five_items
+    items.joins(invoices: :transactions)
+         .where("transactions.result = 'success'")
+         .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+         .group(:id)
+         .order('revenue desc')
+         .limit(5)
+  end
+
+  def self.merchant_status(status)
+    where(status: status)
   end
 end
