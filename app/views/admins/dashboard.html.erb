@@ -17,9 +17,9 @@
 
 <h3>Incomplete Invoices</h3>
 <body>
-
+    <ul>
       <% @incomplete_invoices.each do |invoice_id| %>
-       <%= link_to("#{invoice_id}", "/admin/invoices/#{invoice_id}") %> 
+       <li><%= link_to("#{invoice_id}", "/admin/invoices/#{invoice_id}") %></li>
       <% end %>
-
+    </ul>
 </body>

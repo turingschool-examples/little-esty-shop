@@ -13,6 +13,11 @@ class InvoiceItem < ApplicationRecord
   end
 
   def self.incomplete_invoices
-    InvoiceItem.select('invoice_items.*').where("status = 0 OR status = 1").distinct.order(invoice_id: :asc).pluck(:invoice_id)
+
+    incomplete_invoices = InvoiceItem.select('invoice_items.*').where("status = 0 OR status = 1").distinct.order(invoice_id: :asc).pluck(:invoice_id)
+    if incomplete_invoices == nil
+      incomplete_invoices = []
+    end
+    incomplete_invoices
   end
 end
