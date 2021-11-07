@@ -9,5 +9,5 @@ class Item < ApplicationRecord
 
   def self.item_status(status)
     where(status: status)
-  end 
+  end
 end

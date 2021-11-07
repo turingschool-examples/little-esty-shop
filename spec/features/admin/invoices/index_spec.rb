@@ -48,10 +48,11 @@ RSpec.describe "admin invoices index" do
     expect(page).to have_content(@invoice12.id)
 
     within('#invoice-index') do
-      within("invoice-#{@invoice8.id}")
+      within("#invoice-#{@invoice8.id}") do
         expect(page).to have_link(@invoice8.id)
         click_link "#{@invoice8.id}"
         expect(current_path).to eq(admin_invoice_path(@invoice8.id))
+      end
     end
   end
 end
