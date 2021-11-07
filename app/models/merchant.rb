@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices, source: :invoice_items
   has_many :transactions, through: :invoices
 
+  validates_presence_of :name 
+
   def top_customers
     Transaction.joins(invoice: :customer)
     .where("result =?", 0)
