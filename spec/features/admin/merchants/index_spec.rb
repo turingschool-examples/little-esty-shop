@@ -49,5 +49,12 @@ RSpec.describe "admin merchants index" do
   it 'has link to create new merchant' do
     expect(page).to have_link("Add Merchant")
   end
-
 end
+
+# Admin Merchants: Top 5 Merchants by Revenue
+#
+# As an admin,
+# When I visit the admin merchants index
+# Then I see the names of the top 5 merchants by total revenue generated
+# And I see that each merchant name links to the admin merchant show page for that merchant
+# And I see the total revenue generated next to each merchant name
