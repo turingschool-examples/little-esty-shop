@@ -148,5 +148,9 @@ RSpec.describe Merchant, type: :model do
     it 'lists top 5 merchants by revenue' do
       expect(Merchant.top_five_merchants).to eq([@merchant, @merchant3, @merchant1, @merchant2, @merchant4])
     end
+
+    it 'shows merchant best day' do
+      expect(Merchant.merchant_best_day).to eq(@invoice9.created_at.to_date)
+    end
   end
 end

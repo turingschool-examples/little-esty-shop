@@ -89,4 +89,21 @@ RSpec.describe "admin merchants index" do
       end
     end
   end
+
+  it 'shows merchant best day' do
+    within("#top-five-merchants") do
+      within("#merchant-#{@merchant1.id}") do
+        expect(page).to have_content("Top selling date for #{@merchant1.name} was #{Merchant.merchant_best_day}.")
+      end
+    end
+  end
 end
+
+# Admin Merchants: Top Merchant's Best Day
+#
+# As an admin,
+# When I visit the admin merchants index
+# Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
+# And I see a label “Top selling date for <merchant name> was <date with most sales>"
+#
+# Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
