@@ -36,7 +36,7 @@
   <h3>Five Most Popular Items</h3>
   <% @merchant.top_five_items.each do |item| %>
     <div id="item-<%= item.id %>">
-      <%= link_to item.name, merchant_item_path(@merchant, item) %> (<%= number_to_currency(item.revenue.fdiv(100)) %> revenue generated)<br>
+      <%= link_to item.name, merchant_item_path(@merchant, item) %> (<%= number_to_currency(item.revenue.fdiv(100)) %> revenue generated). Top selling date for <%= item.name %> was <%= item.item_best_day %>.<br>
     </div>
   <% end %>
 </div>
