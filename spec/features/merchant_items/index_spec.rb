@@ -96,7 +96,6 @@ RSpec.describe 'the merchants items index' do
           expect(item_5.name).to appear_before item_3.name
           expect(item_3.name).to appear_before item_4.name
           expect(item_4.name).to appear_before item_2.name
-
           expect(page).to have_content "#{item_5.name} - $22.00 in sales"
         end
       end
@@ -147,5 +146,49 @@ RSpec.describe 'the merchants items index' do
         expect(page).to have_content(item_5.name)
       end
     end
+
+    it "top item's best day" do
+      merchant = Merchant.create(name: "Friendly Traveling Merchant")
+      item_1 = merchant.items.create(name: 'YoYo', description: 'its on a string', unit_price: 1000)
+      item_2 = merchant.items.create(name: 'raisin', description: 'dried grape', unit_price: 100)
+      item_3 = merchant.items.create(name: 'apple', description: 'nice and crisp', unit_price: 500)
+      item_4 = merchant.items.create(name: 'banana', description: 'mushy but good', unit_price: 200)
+      item_5 = merchant.items.create(name: 'pear', description: 'refreshing treat', unit_price: 600)
+      customer_1 = Customer.create(first_name: 'George', last_name: 'Washington')
+      invoice_1 = customer_1.invoices.create(status: 'Completed')
+      invoice_2 = customer_1.invoices.create(status: 'Completed')
+      invoice_3 = customer_1.invoices.create(status: 'Completed')
+      invoice_item_1 = invoice_1.invoice_items.create(item_id: item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
+      invoice_item_2 = invoice_1.invoice_items.create(item_id: item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
+      invoice_item_3 = invoice_1.invoice_items.create(item_id: item_3.id, quantity: 1, unit_price: 400, status: 'shipped')
+      invoice_item_4 = invoice_2.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+      invoice_item_5 = invoice_2.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+      invoice_item_6 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 2, unit_price: 500, status: 'shipped')
+      invoice_item_7 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+      transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
+      transaction_2 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_3 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
+      transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+
+      visit "/merchants/#{merchant.id}/items"
+
+      within 'div#top-items' do
+        expect("Top selling date for #{item_1.name} was").to appear_before("Top selling date for #{item_5.name} was")
+        expect("Top selling date for #{item_4.name} was").to appear_before("Top selling date for #{item_2.name} was")
+        expect(item_5.name).to appear_before item_3.name
+        expect(item_3.name).to appear_before item_4.name
+        expect(item_4.name).to appear_before item_2.name
+        expect(page).to have_content "#{item_5.name} - $22.00 in sales"
+      end
+    end
+# next to each of the 5 most popular items
+# I see the date with the most sales for each item.
+# And I see a label “Top selling date for was "  TESTING UP TO HERE
+#
+# Note: use the invoice date. If there are multiple
+# days with equal number of sales, return the most recent day.
+#item order = item_1, 5, 3, 4, 2
+
   end
 end
