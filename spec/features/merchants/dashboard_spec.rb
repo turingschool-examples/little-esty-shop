@@ -108,7 +108,7 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'shows items that are ready to be shippped' do
-        save_and_open_page
+
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_3.name)
         expect(page).to have_content(@item_4.name)
