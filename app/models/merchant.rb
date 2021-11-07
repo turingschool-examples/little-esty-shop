@@ -1,7 +1,16 @@
 class Merchant < ApplicationRecord
   has_many :items
   has_many :invoice_items, through: :items
+  enum status: { "Disabled" => 0, "Enabled" => 1}
 
+  def self.enabled
+    where(status: 1)
+  end
+
+  def self.disabled
+    where(status: 0)
+  end
+  
   def top_customers
     Customer.select("customers.*, COUNT(transactions.*) AS transaction_count").joins(
                          "INNER JOIN invoices ON invoices.customer_id = customers.id
