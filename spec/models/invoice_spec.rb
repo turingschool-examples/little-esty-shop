@@ -11,6 +11,7 @@ RSpec.describe Invoice, type: :model do
   describe 'model methods' do
     before do
       @merchant = create(:merchant)
+      @merchant2 = create(:merchant)
 
       @customer1 = create :customer
       @customer2 = create :customer
@@ -22,6 +23,7 @@ RSpec.describe Invoice, type: :model do
       @item = create :item, { merchant_id: @merchant.id }
       @item2 = create :item, { merchant_id: @merchant.id }
       @item3 = create :item, { merchant_id: @merchant.id }
+      @item4 = create :item, { merchant_id: @merchant2.id }
 
       @invoice1 = create :invoice, { customer_id: @customer1.id, status: 'in progress' }
       @invoice2 = create :invoice, { customer_id: @customer2.id, status: 'in progress' }
@@ -45,6 +47,8 @@ RSpec.describe Invoice, type: :model do
       @inv_item6 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice6.id}
       @inv_item7 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice1.id, unit_price: 100, quantity: 1 }
       @inv_item8 = create :invoice_item, { item_id: @item.id, invoice_id: @invoice1.id, unit_price: 100, quantity: 3 }
+      @inv_item9 = create :invoice_item, { item_id: @item4.id, invoice_id: @invoice1.id, unit_price: 100, quantity: 1 }
+
     end
 
     it 'returns invoices where status is in progress' do
@@ -56,8 +60,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe "#total_revenue" do
-      it 'calcs total revenue from an invoice' do
-        expect(@invoice1.total_revenue).to eq(500)
+      it 'calcs total revenue from an invoice for a given merchant' do
+        expect(@invoice1.total_revenue(@merchant.id)).to eq(500)
       end
     end
   end
