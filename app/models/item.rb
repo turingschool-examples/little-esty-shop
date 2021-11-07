@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   end
 
   def item_best_day
-    invoices.joins(:invoice_items)
+    var = invoices.joins(:invoice_items)
             .select('invoices.created_at, invoice_items.quantity')
             .where("invoices.status in ('completed', 'in-progress')")
             .order('invoice_items.quantity desc')
