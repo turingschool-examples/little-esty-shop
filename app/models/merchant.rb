@@ -16,4 +16,11 @@ class Merchant < ApplicationRecord
     .order(top_count: :desc)
     .limit(5)
   end
+
+  def not_shipped
+    item_ids = invoice_items.where.not(status: "2").order(:created_at).pluck(:item_id)
+    item_ids.map do |item_id|
+      Item.find(item_id)
+    end
+  end
 end
