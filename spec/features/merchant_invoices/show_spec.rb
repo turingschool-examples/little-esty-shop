@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'show page' do
   before(:each) do
-    @merchant = Merchant.first
+    @merchant = create(:merchant)
+    @customer = create(:customer)
+    
     @inv_id = @merchant.invoice_ids.first
     @invoice = Invoice.find(@inv_id)
     visit "/merchants/#{@merchant.id}/invoices/#{@inv_id}"
