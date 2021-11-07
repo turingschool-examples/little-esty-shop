@@ -137,7 +137,6 @@ RSpec.describe Merchant, type: :model do
       @inv_item13 = create :invoice_item, { item_id: @item9.id, invoice_id: @invoice10.id, unit_price: 300, quantity: 30}
       @inv_item14 = create :invoice_item, { item_id: @item10.id, invoice_id: @invoice11.id, unit_price: 45, quantity: 3000}
       @inv_item15 = create :invoice_item, { item_id: @item11.id, invoice_id: @invoice12.id, unit_price: 1200, quantity: 7}
-
     end
 
     describe '#top_five_items' do
@@ -146,8 +145,8 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    it 'calculates merchant revenue' do
-      expect(Merchant.merchant_revenue).to eq([@merchant, @merchant3, @merchant1, @merchant2, @merchant4])
+    it 'lists top 5 merchants by revenue' do
+      expect(Merchant.top_five_merchants).to eq([@merchant, @merchant3, @merchant1, @merchant2, @merchant4])
     end
   end
 end

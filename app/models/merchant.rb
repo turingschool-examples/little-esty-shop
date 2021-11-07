@@ -33,7 +33,7 @@ class Merchant < ApplicationRecord
     where(status: status)
   end
 
-  def self.merchant_revenue
+  def self.top_five_merchants
     self.joins(:items)
        .joins(invoices: :transactions)
        .where("transactions.result = 'success'")
