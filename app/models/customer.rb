@@ -2,8 +2,6 @@ class Customer < ApplicationRecord
   has_many :invoices
   has_many :invoice_items, through: :invoices
 
-  attr_accessor :transaction_count
-
   def successful_transactions_count
     invoice_ids = self.invoices.pluck(:id)
     transaction_ids = Transaction.where(invoice_id: invoice_ids).where(result: 'success').count
