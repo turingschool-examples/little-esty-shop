@@ -3,8 +3,6 @@ FactoryBot.find_definitions
 
 RSpec.describe 'Merchant Items Show' do
   before :each do
-    # @merchant = Merchant.create!(name: "Angela's Shop")
-    # @item_1 = @merchant.items.create!(name: "Jade Rabbit", description: "25mmx25mm hand carved jade rabbit", unit_price: 2500)
     @merchant = create(:merchant)
     @item_1 = create(:item, merchant: @merchant, unit_price: 2500)
   end
