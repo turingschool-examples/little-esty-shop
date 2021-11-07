@@ -6,7 +6,7 @@
 
 
 <h3>Top 5 Customers:</h3>
-<%# <% @merchant.top_customers.each do |customer| %>
-  <%# <p><%= customer.name %></p> %>
-<%# <% end %> %> %>
+<% @merchant.top_customers.each do |customer| %>
+    <p><%= customer.first_name%>: <%= customer.top_count %> transaction(s)</p>
+<% end %>
 
