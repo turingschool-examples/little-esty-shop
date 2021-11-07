@@ -1,5 +1,5 @@
 require 'rails_helper'
-FactoryBot.find_definitions
+# FactoryBot.find_definitions
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
@@ -22,7 +22,7 @@ RSpec.describe Merchant, type: :model do
     @invoice4 = create(:invoice, customer: @customer4)
     @invoice5 = create(:invoice, customer: @customer5)
     @invoice6 = create(:invoice, customer: @customer6)
-
+    
     @item1 = create(:item, merchant: @merchant)
     @item2 = create(:item, merchant: @merchant)
     @item3 = create(:item, merchant: @merchant)
