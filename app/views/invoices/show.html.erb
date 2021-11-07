@@ -1,1 +1,5 @@
-<h1><%= @invoice.id %> (Merchant <%= @merchant.name %>)</h1>
+<h1>Invoice <%= @invoice.id %> (Merchant <%= @merchant.name %>)</h1>
+
+Status: <%= @invoice.status %><br>
+Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
+Customer: <%= @invoice.customer.full_name %><br>
