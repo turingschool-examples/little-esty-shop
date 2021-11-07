@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'merchant invoice show page' do
   before do
-    @merchant = create(:merchant)
+    @merchant1 = create(:merchant)
+    @merchant2 = create(:merchant)
 
-    @item = create :item, { merchant_id: @merchant.id }
+    @item1 = create :item, { merchant_id: @merchant1.id }
+    @item2 = create :item, { merchant_id: @merchant1.id }
+    @item3 = create :item, { merchant_id: @merchant2.id }
 
     @customer = create :customer
 
@@ -12,13 +15,15 @@ RSpec.describe 'merchant invoice show page' do
 
     @transaction = create :transaction, { invoice_id: @invoice.id, result: 'success' }
 
-    @inv_item = create :invoice_item, { item_id: @item.id, invoice_id: @invoice.id}
+    @inv_item1 = create :invoice_item, { item_id: @item1.id, invoice_id: @invoice.id}
+    @inv_item2 = create :invoice_item, { item_id: @item2.id, invoice_id: @invoice.id}
+    @inv_item3 = create :invoice_item, { item_id: @item3.id, invoice_id: @invoice.id}
 
-    visit merchant_invoice_path(@merchant, @invoice)
+    visit merchant_invoice_path(@merchant1, @invoice)
   end
 
   it 'when i visit merchant invoice show page' do
-    expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice))
+    expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice))
   end
 
   it 'i see invoice id, status, created_at formatted, and customer first and last' do
@@ -27,10 +32,13 @@ RSpec.describe 'merchant invoice show page' do
     expect(page).to have_content(@invoice.created_at.strftime("%A, %B %d, %Y"))
     expect(page).to have_content(@invoice.customer.full_name)
   end
-end
 
-# Then I see information related to that invoice including:
-# - Invoice id
-# - Invoice status
-# - Invoice created_at date in the format "Monday, July 8, 209"
-# - Customer first and last name
+  it 'i see all the items on the invoice with name, quantity, sell price and inv_item status only for this merchant' do
+    expect(page).to have_content(@item1.name)
+    expect(page).to have_content(@item1.invoice_items.first.quantity)
+    expect(page).to have_content(@item1.invoice_items.first.unit_price.fdiv(100))
+    expect(page).to have_content(@item1.invoice_items.first.status)
+    expect(page).to have_content(@item2.name)
+    expect(page).to_not have_content(@item3.name)
+  end
+end
