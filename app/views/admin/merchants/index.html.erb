@@ -2,6 +2,8 @@
 
 <ul>
   <% @merchants.each do |merchant| %>
-    <%= merchant.name %>
+    <li>
+      <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+    </li>
   <% end %>
 </ul>
