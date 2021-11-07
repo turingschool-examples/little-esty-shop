@@ -71,7 +71,11 @@ RSpec.describe Merchant, type: :model do
     it { should have_many :items }
   end
 
-  describe '#top_customers' do    
+  describe 'validations' do
+    it { should validate_presence_of :name }
+  end 
+
+  describe '#top_customers' do
     it 'can sort top 5 customers for merchant' do
 
       expect(@merchant1.top_customers.first.first_name).to eq(@customer_1.first_name)

@@ -74,7 +74,6 @@ RSpec.describe 'Dashboard', type: :feature do
     
     describe 'favorite customers' do
       it 'i see names for top 5 customers' do
-        save_and_open_page
         expect(page).to have_content("Top 5 Customers:" )
         expect(page).to have_content(@customer1.first_name)
         # expect(@customer1.first_name).to appear_before(@customer2.first_name)
@@ -86,7 +85,6 @@ RSpec.describe 'Dashboard', type: :feature do
 
       it 'i see number of successful transactions next to each customer' do
 
-        
       end
     end
   end
