@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
 
     @transaction = create(:transaction, result: 'success', invoice: @invoice)
 
-    @invitem1 = create(:invoice_item, quantity: 10, unit_price: 1, invoice: @invoice, item: @item1)
+    @invitem1 = create(:invoice_item, quantity: 10, unit_price: 1, status:"packaged", invoice: @invoice, item: @item1)
     @invitem2 = create(:invoice_item, quantity: 10, unit_price: 2, invoice: @invoice, item: @item2)
     @invitem3 = create(:invoice_item, quantity: 10, unit_price: 3, invoice: @invoice, item: @item3)
     @invitem4 = create(:invoice_item, quantity: 10, unit_price: 4, invoice: @invoice, item: @item4)
@@ -77,22 +77,14 @@ RSpec.describe Item, type: :model do
     end
 
     describe '#invoice_item_status' do
-      xit 'should give the quantity of the item sold' do
-        invoice_item = InvoiceItem.first
-        invoice = Invoice.find_by(id: invoice_item.invoice_id)
-        item = Item.find_by(id: invoice_item.item_id)
-
-        expect(item.invoice_item_status(invoice)).to eq("packaged")
+      it 'should give the quantity of the item sold' do
+        expect(@item1.invoice_item_status(@invoice)).to eq("packaged")
       end
     end
 
     describe '#invoice_item' do
-      xit 'should give the quantity of the item sold' do
-        invoice_item = InvoiceItem.first
-        invoice = Invoice.find_by(id: invoice_item.invoice_id)
-        item = Item.find_by(id: invoice_item.item_id)
-
-        expect(item.invoice_item(invoice).id).to eq(InvoiceItem.first.id)
+      it 'should give the quantity of the item sold' do
+        expect(@item1.invoice_item(@invoice).id).to eq(@invitem1.id)
       end
     end
   end
