@@ -6,6 +6,7 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name
 
+  # Do we need this method for anything? Can't we just call .invoices on a merchant?
   def merchant_invoices
     invoices
   end
