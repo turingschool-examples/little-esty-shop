@@ -4,4 +4,5 @@
 <p>First Name:</p><%= @invoice.customer.first_name %>
 <p>Last Name:</p><%= @invoice.customer.last_name %>
 <h3>Created At: </h3><%= @invoice.created_at.strftime('%A, %B %d, %Y') %>
-<h3>Created At: </h3><%= @item.name %>
+<h3>Items: </h3><%= @item.name %>
+<p>Quantity: </p><%= @invoice_items.quantity %>

@@ -71,4 +71,10 @@ RSpec.describe 'merchant invoices show page' do
     expect(page).to have_content(@item_2.name)
 
   end
+
+  it 'shows item quantities' do
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}"
+
+    expect(page).to have_content(@ii_2.quantity)
+  end
 end
