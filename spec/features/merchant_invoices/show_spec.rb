@@ -11,13 +11,11 @@ RSpec.describe 'show page' do
   end
 
   it 'shows invoice id and status' do
-
     expect(page).to have_content(@invoice.id)
     expect(page).to have_content(@invoice.status)
   end
 
   it 'shows created_at information as day of week, month day #, year' do
-
     expect(page).to have_content("Sunday, March 25, 2012")
   end
 
