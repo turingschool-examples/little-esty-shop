@@ -13,4 +13,14 @@ class Item < ApplicationRecord
       update(status: "able")
     end
   end
+
+  def top_revenue_invoice_dates
+    invoice_items.joins(:invoice)
+    .where(invoice: {status: "complete"})
+    .group(:invoice)
+    .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price)'))
+    .last  #might have to do desc and .first to get the newest invoice for equal sums. check
+    .select("invoices.created_at as invoice_date")
+  end
+
 end

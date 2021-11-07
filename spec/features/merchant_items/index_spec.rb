@@ -101,7 +101,7 @@ RSpec.describe 'the merchants items index' do
       end
     end
 
-    it "disable/enable items" do
+    xit "disable/enable items" do
       item_1 = @merchant.items.create(
         name: 'fidget spinner',
         description: 'it spins',
@@ -174,20 +174,13 @@ RSpec.describe 'the merchants items index' do
       visit "/merchants/#{merchant.id}/items"
 
       within 'div#top-items' do
-        expect("Top selling date for #{item_1.name} was").to appear_before("Top selling date for #{item_5.name} was")
-        expect("Top selling date for #{item_4.name} was").to appear_before("Top selling date for #{item_2.name} was")
-        expect(item_5.name).to appear_before item_3.name
-        expect(item_3.name).to appear_before item_4.name
-        expect(item_4.name).to appear_before item_2.name
-        expect(page).to have_content "#{item_5.name} - $22.00 in sales"
+        expect("Top selling date for #{item_1.name} is").to appear_before("Top selling date for #{item_5.name} is")
+        expect("Top selling date for #{item_4.name} is").to appear_before("Top selling date for #{item_2.name} is")
+        expect(page).to have_content("Top selling date for #{item_4.name} is #{invoice_2.created_at}")
+        expect(page).to have_content("Top selling date for #{item_5.name} is #{invoice_3.created_at}")
       end
     end
-# next to each of the 5 most popular items
-# I see the date with the most sales for each item.
-# And I see a label “Top selling date for was "  TESTING UP TO HERE
-#
-# Note: use the invoice date. If there are multiple
-# days with equal number of sales, return the most recent day.
+# if there are multiple days with equal number of sales, return the most recent day.
 #item order = item_1, 5, 3, 4, 2
 
   end
