@@ -16,4 +16,13 @@ Rails.application.routes.draw do
   get '/merchants/:id/invoices/:inv_id', to: 'merchant_invoices#show'
 
   resources :invoice_items, only: [:update]
+
+  namespace :admin do
+    get '/', to: 'admin#show'
+    get '/merchants', to: 'merchants#index'
+    get '/merchants/:id', to: 'merchants#show'
+
+    get '/invoices', to: 'invoices#index'
+    get '/invoices', to: 'invoices#show'
+  end
 end
