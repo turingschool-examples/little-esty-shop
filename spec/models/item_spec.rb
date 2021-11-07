@@ -1,5 +1,5 @@
 require 'rails_helper'
-FactoryBot.find_definitions
+# FactoryBot.find_definitions
 
 RSpec.describe Item, type: :model do
   before :each do
