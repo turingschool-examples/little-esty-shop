@@ -101,5 +101,51 @@ RSpec.describe 'the merchants items index' do
         end
       end
     end
+
+    xit "disable/enable items" do
+      item_1 = @merchant.items.create(
+        name: 'fidget spinner',
+        description: 'it spins',
+        unit_price: 1500,
+        status: "able"
+      )
+
+      visit "/merchants/#{@merchant.id}/items"
+
+      click_on "Enable/Disable"
+
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+      expect(item_1.status).to eq("unable")
+
+      click_on "Enable/Disable"
+      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+      expect(item_1.status).to eq("able")
+      expect(page).to have_content("Status: Able")
+    end
+
+    it "group items by status" do
+      merchant = Merchant.create(name: "Friendly Traveling Merchant")
+      item_1 = merchant.items.create(name: 'YoYo', description: 'its on a string', unit_price: 1000)
+      item_2 = merchant.items.create(name: 'raisin', description: 'dried grape', unit_price: 100)
+      item_3 = merchant.items.create(name: 'apple', description: 'nice and crisp', unit_price: 500, status: 'unable')
+      item_4 = merchant.items.create(name: 'banana', description: 'mushy but good', unit_price: 200, status: 'unable')
+      item_5 = merchant.items.create(name: 'pear', description: 'refreshing treat', unit_price: 600, status: 'unable')
+
+      visit "/merchants/#{merchant.id}/items"
+      expect(page).to have_content("Enabled Items:")
+      expect(page).to have_content("Disabled Items:")
+
+      within("div#enabled-items") do
+        expect(page).to have_content(item_1.name)
+        expect(page).to have_content(item_2.name)
+        expect(page).to_not have_content(item_3.name)
+      end
+
+      within("div#disabled-items") do
+        expect(page).to have_content(item_3.name)
+        expect(page).to have_content(item_4.name)
+        expect(page).to have_content(item_5.name)
+      end
+    end
   end
 end
