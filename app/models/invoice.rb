@@ -12,4 +12,8 @@ class Invoice < ApplicationRecord
     order(created_at: :desc)
   end
 
+  # def customer_name
+  #   joins(customers: :invoices)
+  #     .select(customer.first_name)
+  # end
 end

@@ -1,4 +1,3 @@
-#module Admin
 class Admin::InvoicesController < ApplicationController
 
   def index
@@ -6,5 +5,6 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show
+    @invoice = Invoice.find(params[:id])
   end
 end
