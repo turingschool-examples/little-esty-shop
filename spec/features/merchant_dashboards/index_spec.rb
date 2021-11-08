@@ -14,13 +14,13 @@ RSpec.describe "Merchant's dashboard", type: :feature do
       @customer_5 = Customer.create(first_name: 'James', last_name: 'Monroe')
       @customer_6 = Customer.create(first_name: 'John Quincy', last_name: 'Adams')
 
-      @invoice_1 = @customer_1.invoices.create(status: 'Completed')
-      @invoice_2 = @customer_2.invoices.create(status: 'Completed')
-      @invoice_3 = @customer_3.invoices.create(status: 'Completed')
-      @invoice_4 = @customer_4.invoices.create(status: 'Completed')
-      @invoice_5 = @customer_5.invoices.create(status: 'Completed')
-      @invoice_6 = @customer_6.invoices.create(status: 'Completed')
-      @invoice_7 = @customer_6.invoices.create(status: 'Completed')
+      @invoice_1 = @customer_1.invoices.create(status: 2)
+      @invoice_2 = @customer_2.invoices.create(status: 2)
+      @invoice_3 = @customer_3.invoices.create(status: 2)
+      @invoice_4 = @customer_4.invoices.create(status: 2)
+      @invoice_5 = @customer_5.invoices.create(status: 2)
+      @invoice_6 = @customer_6.invoices.create(status: 2)
+      @invoice_7 = @customer_6.invoices.create(status: 2)
 
 
       @invoice_item_1 = @invoice_1.invoice_items.create(item_id: @item.id, quantity: 1, unit_price: 1000, status: 'shipped')
