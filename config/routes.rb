@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   get '/admin/merchants', to: 'admin_merchants#index'
   get '/admin/merchants/new', to: 'admin_merchants#new'
   post '/admin/merchants', to: 'admin_merchants#create'
+  patch '/admin/merchants', to: 'admin_merchants#update'
 
   get '/admin/invoices', to: 'admin_invoices#index'
   get '/admin/invoices/:id', to: 'admin_invoices#show', as: :admin_invoices_show
+  patch '/admin/invoices/:id', to: 'admin_invoices#update'
   # namespace :admin do
   #   resources :merchants, only: [:index]
   #   resources :invoices, only: [:index]

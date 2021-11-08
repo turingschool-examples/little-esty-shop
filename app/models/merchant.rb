@@ -19,6 +19,14 @@ class Merchant < ApplicationRecord
               invoices.created_at as invoice_created_at")
       .order("invoice_created_at")
   end
+
+  def change_status
+    if status == "Enabled"
+      update(status: 'Disabled')
+    else
+      update(status: 'Enabled')
+    end
+  end
   #
   # def invoice_for_item_ready_to_ship
   #   Invoice.joins(invoice_items: [item: [:merchant]]

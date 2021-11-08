@@ -11,6 +11,13 @@ class AdminMerchantsController < ApplicationController
     redirect_to admin_merchants_path
   end
 
+  def update
+    merchant = Merchant.find(params[:merchant_id])
+    merchant.change_status
+
+    redirect_to admin_merchants_path
+  end
+
   private
 
   def merchant_params
