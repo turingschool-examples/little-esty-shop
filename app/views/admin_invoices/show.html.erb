@@ -1,5 +1,13 @@
 <h1>Invoice <%= @invoice.id %></h1>
 
+Invoice status is: <%= @invoice.status %>
+
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :get do |f| %>
+  Change invoice status: <%= f.select(:status, options_for_select([['in progress', 'in progress'], ['completed', 'completed'], ['cancelled', 'cancelled']])) %>
+  <%= button_to 'Update Invoice Status', "/admin/invoices/#{@invoice.id}", method: :patch %>
+<% end %>
+
+
 <h3>Items:</h3>
 <% @invoice.invoice_items.each do |invoice_item| %>
   <div id="item-id-<%= invoice_item.item.id %>">
