@@ -1,7 +1,7 @@
 <h1>Admin Merchants</h1>
 <% @merchants.each do |merchant| %>
   <div id="id-<%= merchant.id %>">
-    Name: <%= merchant.name %>
+    Name: <%= merchant.name %><br>
     Status: <%= merchant.status %>
     <%= button_to 'Enable/Disable', "/admin/merchants", params: {change_status: true, merchant_id: merchant.id}, method: :patch %>
   </div>
