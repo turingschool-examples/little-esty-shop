@@ -29,28 +29,26 @@ RSpec.describe 'admin merchants index' do
   end
 
   it 'has an interface to enable or disable merchants' do
-    @merchant_2.destroy
-    @merchant_3.destroy
-    @merchant_4.destroy
-    @merchant_5.destroy
 
     visit admin_merchants_path
 
-    within('#disabled_merchants') do
-      expect(page).not_to have_button("Disable")
+    within("#disabled-merchants") do
+      within("#merchant-#{@merchant_1.id}") do
+        expect(page).not_to have_button("Disable")
 
-      click_button("Enable")
-
-      expect(page).not_to have_button("Disable")
+        click_button("Enable")
+      end
       expect(page).not_to have_content(@merchant_1.name)
     end
 
-    within('#enabled_merchants') do
-      expect(page).to have_button("Disable")
+    within('#enabled-merchants') do
+      within("#merchant-#{@merchant_1.id}") do
+        expect(page).to have_button("Disable")
 
-      click_button("Disable")
+        click_button("Disable")
 
-      expect(page).not_to have_content("Disable")
+      end
+      expect(page).not_to have_button("Disable")
       expect(page).not_to have_content(@merchant_1.name)
     end
 
