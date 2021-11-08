@@ -64,14 +64,13 @@ RSpec.describe "admin merchants index" do
   it 'has sections for enabled and disabled items' do
     within('#enabled') do
       expect(page).to have_content(@merchant4.name)
-    end  
-   end
+    end
 
-   within('#disabled') do
-     expect(page).to have_content(@merchant.name)
-     expect(page).to have_content(@merchant1.name)
-     expect(page).to have_content(@merchant2.name)
-   end
+    within('#disabled') do
+      expect(page).to have_content(@merchant.name)
+      expect(page).to have_content(@merchant1.name)
+      expect(page).to have_content(@merchant2.name)
+    end
   end
 
   it 'has link to create new merchant' do

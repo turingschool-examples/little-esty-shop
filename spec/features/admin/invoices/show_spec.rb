@@ -11,8 +11,8 @@ RSpec.describe "admin invoice show" do
 
     @invoice8 = create :invoice, { customer_id: @customer3.id, created_at: DateTime.new(2021, 1, 5) }
 
-    @inv_item11 = create :invoice_item, { item_id: @item7.id, invoice_id: @invoice8.id, unit_price: 10000, quantity: 4 }
-    @inv_item12 = create :invoice_item, { item_id: @item8.id, invoice_id: @invoice8.id, unit_price: 3000, quantity: 6 }
+    @inv_item11 = create :invoice_item, { item_id: @item7.id, invoice_id: @invoice8.id, unit_price: 10000, quantity: 4, status: "pending" }
+    @inv_item12 = create :invoice_item, { item_id: @item8.id, invoice_id: @invoice8.id, unit_price: 3000, quantity: 6, status: "shipped"}
 
     visit admin_invoice_path(@invoice8.id)
   end
@@ -31,9 +31,15 @@ RSpec.describe "admin invoice show" do
     within("#item-#{@item7.id}") do
       expect(page).to have_content(@item7.name)
       expect(page).to have_content(@inv_item11.quantity)
-      expect(page).to have_content(@inv_item11.unit_price)
+      expect(page).to have_content(@inv_item11.unit_price / 100)
       expect(page).to have_content(@inv_item11.status)
       expect(page).to_not have_content(@inv_item12.status)
     end
   end
+
+  xit 'gives dropdown menu option for invoice item status' do
+    within("#item-#{@item7.id}") do
+    end
+  end
 end
+# options_for_select(:status, options_for_select([["pending", 1], ["shipped", 2], 1)

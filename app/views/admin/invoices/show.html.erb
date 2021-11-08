@@ -2,6 +2,7 @@ Invoice id: <%= @invoice.id %><br>
 Invoice status: <%= @invoice.status %><br>
 Invoice created at: <%= @invoice.created_at.strftime('%A, %B %e, %Y') %><br>
 Invoice customer name: <%= @invoice.customer.full_name %><br>
+Invoice total revenue: <%= number_to_currency(@invoice.total_revenue(@invoice.id).fdiv(100)) %><br>
 Inovice items:
 <hr>
 <% @invoice.items.each do |item| %>
@@ -9,7 +10,7 @@ Inovice items:
     Item name: <%= item.name %><br>
     <% item.invoice_items.each do |inv_item| %>
       Quantity: <%= inv_item.quantity %><br>
-      Price: <%= inv_item.unit_price %><br>
+      Price: <%= number_to_currency(inv_item.unit_price.fdiv(100)) %><br>
       Status: <%= inv_item.status %><br>
     <% end %>
     <hr>
