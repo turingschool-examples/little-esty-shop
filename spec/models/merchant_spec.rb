@@ -57,5 +57,15 @@ RSpec.describe Merchant do
         expect(@merchant.favorite_customers.last).to eq @customer_3
       end
     end
+
+    describe '#change_status' do
+      it 'changes the status of a merchant to the opposite one' do
+        merchant1 = Merchant.create!(name: 'Bob Burger', status: 'Enabled')
+
+        merchant1.change_status
+
+        expect(merchant1.status).to eq("Disabled")
+      end
+    end
   end
 end
