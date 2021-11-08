@@ -18,9 +18,11 @@ class Merchant < ApplicationRecord
   end
 
   def not_shipped
-    item_ids = invoice_items.where.not(status: "2").order(:created_at).pluck(:item_id)
+    item_ids = invoice_items.where.not(status: "2")
+                            .order(:created_at)
+                            .pluck(:item_id)
     item_ids.map do |item_id|
       Item.find(item_id)
-    end
+    end.uniq
   end
 end
