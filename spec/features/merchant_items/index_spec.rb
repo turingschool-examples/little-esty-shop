@@ -70,6 +70,7 @@ RSpec.describe 'the merchants items index' do
         item_3 = merchant.items.create(name: 'apple', description: 'nice and crisp', unit_price: 500)
         item_4 = merchant.items.create(name: 'banana', description: 'mushy but good', unit_price: 200)
         item_5 = merchant.items.create(name: 'pear', description: 'refreshing treat', unit_price: 600)
+
         customer_1 = Customer.create(first_name: 'George', last_name: 'Washington')
         invoice_1 = customer_1.invoices.create(status: 'Completed')
         invoice_2 = customer_1.invoices.create(status: 'Completed')
@@ -81,6 +82,7 @@ RSpec.describe 'the merchants items index' do
         invoice_item_5 = invoice_2.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
         invoice_item_6 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 2, unit_price: 500, status: 'shipped')
         invoice_item_7 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+
         transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
         transaction_2 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
         transaction_3 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
@@ -154,14 +156,26 @@ RSpec.describe 'the merchants items index' do
       item_3 = merchant.items.create(name: 'apple', description: 'nice and crisp', unit_price: 500)
       item_4 = merchant.items.create(name: 'banana', description: 'mushy but good', unit_price: 200)
       item_5 = merchant.items.create(name: 'pear', description: 'refreshing treat', unit_price: 600)
+
       customer_1 = Customer.create(first_name: 'George', last_name: 'Washington')
+
       invoice_1 = customer_1.invoices.create(status: 'Completed')
-      invoice_2 = customer_1.invoices.create(status: 'Completed')
-      invoice_3 = customer_1.invoices.create(status: 'Completed')
+      invoice_3 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-24")
+
+      invoice_2 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-25")
+      invoice_4 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-27")
+      invoice_5 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-28")
+
       invoice_item_1 = invoice_1.invoice_items.create(item_id: item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
       invoice_item_2 = invoice_1.invoice_items.create(item_id: item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
       invoice_item_3 = invoice_1.invoice_items.create(item_id: item_3.id, quantity: 1, unit_price: 400, status: 'shipped')
+
+#for testing same revenue, return most recent date - invoice_5.created_at, item_4
       invoice_item_4 = invoice_2.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+      invoice_item_8 = invoice_4.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+      invoice_item_9 = invoice_5.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+
+
       invoice_item_5 = invoice_2.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
       invoice_item_6 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 2, unit_price: 500, status: 'shipped')
       invoice_item_7 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
@@ -172,12 +186,9 @@ RSpec.describe 'the merchants items index' do
       transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
 
       visit "/merchants/#{merchant.id}/items"
-
       within 'div#top-items' do
-        expect("Top selling date for #{item_1.name} is").to appear_before("Top selling date for #{item_5.name} is")
-        expect("Top selling date for #{item_4.name} is").to appear_before("Top selling date for #{item_2.name} is")
-        expect(page).to have_content("Top selling date for #{item_4.name} is #{invoice_2.created_at}")
-        expect(page).to have_content("Top selling date for #{item_5.name} is #{invoice_3.created_at}")
+        expect(page).to have_content("Top selling date for #{item_4.name} is #{invoice_5.created_at.strftime("%A, %B %-d, %Y")}")
+        expect(page).to have_content("Top selling date for #{item_5.name} is #{invoice_3.created_at.strftime("%A, %B %-d, %Y")}")
       end
     end
 # if there are multiple days with equal number of sales, return the most recent day.

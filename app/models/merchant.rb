@@ -31,15 +31,39 @@ class Merchant < ApplicationRecord
     Item.joins(:merchant, invoice_items: [invoice: [:transactions]])
       .where(merchants: { id: id })
       .where(transactions: { result: 'success' })
-      .group(:id)
+      .group(:id, "invoices.created_at")
       .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price) DESC'))
       .limit(5)
       .select(
         "items.id as item_id,
         items.name as item_name,
-        SUM(invoice_items.quantity * invoice_items.unit_price / 100) as revenue"
+        SUM(invoice_items.quantity * invoice_items.unit_price / 100) as revenue,
+        invoices.created_at as invoice_date"
       )
   end
+
+  # def top_revenue_invoice_dates(item_id)
+  #   Item.joins(invoice_items: [invoice: [:transactions]])
+  #       .where(items: { id: item_id })
+        # .where(transactions: {result: :'success'})
+        # .group("invoices.created_at")
+        # .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price)'))
+        # .last
+        # .select("invoices.created_at as invoice_date")
+  # end
+# 
+#   def top_revenue_invoice_dates(item_id)
+# require "pry"; binding.pry
+#     Invoice.joins(:transactions, invoice_items: [:item])
+#           .where(items: { id: item_id })
+#           .where(transactions: {result: :'success'})
+#           .group("invoices.created_at")
+#           .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price)'))
+#           .last
+#           .select("invoices.created_at as invoice_date")
+#   end
+
+#might have to do desc and .first to get the newest invoice for equal sums. check
 
   # def top_revenue_invoice_dates
   #   top_items_id = top_items_by_revenue.item_id
