@@ -46,5 +46,8 @@ RSpec.describe InvoiceItem, type: :model do
     it 'returns item revenue top 5' do
       expect(InvoiceItem.item_revenue).to eq([@item_6.id, @item_4.id, @item_3.id, @item_5.id, @item_2.id, @item_1.id, @item_7.id])
     end
+    it 'returns an array of incomplete invoice_item ids' do
+      expect(InvoiceItem.incomplete_invoices).to eq([@invoice_1.id, @invoice_2.id])
+    end
   end
 end
