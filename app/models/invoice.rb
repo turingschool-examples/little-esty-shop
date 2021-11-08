@@ -10,4 +10,9 @@ class Invoice < ApplicationRecord
   def successful_transactions
     transactions.success
   end
+
+  def self.ordered_incomplete_invoices
+    incomplete_invoices_ids = InvoiceItem.incomplete_invoices
+    Invoice.where(id: incomplete_invoices_ids).order(created_at: :asc).pluck(:id, :created_at)
+  end
 end

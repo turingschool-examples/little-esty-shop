@@ -57,10 +57,14 @@ RSpec.describe 'dashboard' do
 
   end
 
-  it 'has an incomplete invoices section' do
+  it 'has an incomplete invoices section ordered by date w/ date created shown' do
     visit '/admin'
     expect(page).to have_content("Incomplete Invoices")
     expect(page).to have_link("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_1.created_at}")
+    this = "#{@invoice_1.id}"
+    that = "#{@invoice_2.id}"
+    expect(this).to appear_before(that)
     click_link("#{@invoice_1.id}")
     expect(page).to have_current_path("/admin/invoices/#{@invoice_1.id}")
   end

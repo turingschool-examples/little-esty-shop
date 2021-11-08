@@ -18,8 +18,10 @@
 <h3>Incomplete Invoices</h3>
 <body>
     <ul>
-      <% @incomplete_invoices.each do |invoice_id| %>
-       <li><%= link_to("#{invoice_id}", "/admin/invoices/#{invoice_id}") %></li>
+      <% @incomplete_invoices_created_at.each do |invoice_array| %>
+       <li><%= link_to("#{invoice_array.first}", "/admin/invoices/#{invoice_array.first}") %>
+            <%= invoice_array.second %> </li>
       <% end %>
+
     </ul>
 </body>
