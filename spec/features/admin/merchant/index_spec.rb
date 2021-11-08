@@ -7,6 +7,13 @@ RSpec.describe 'Admin Merchant Index page' do
     click_link 'Create Merchant'
 
     expect(current_path).to eq(admin_merchants_new_path)
+
+    fill_in :name, with: 'Bob'
+    click_button "Submit"
+
+    expect(current_path).to eq(admin_merchants_path)
+    expect(page).to have_content('Name: Bob')
+    expect(page).to have_content('Status: Disabled')
   end
 
   it 'has a button to change the status of a merchant' do
