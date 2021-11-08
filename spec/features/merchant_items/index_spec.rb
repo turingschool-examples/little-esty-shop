@@ -101,7 +101,7 @@ RSpec.describe 'the merchants items index' do
       end
     end
 
-    xit "disable/enable items" do
+    it "disable/enable items" do
       item_1 = @merchant.items.create(
         name: 'fidget spinner',
         description: 'it spins',
@@ -114,7 +114,7 @@ RSpec.describe 'the merchants items index' do
       click_on "Enable/Disable"
 
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
-      expect(item_1.status).to eq("unable")
+      expect(page).to have_content("Status: Unable")
 
       click_on "Enable/Disable"
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
@@ -147,7 +147,7 @@ RSpec.describe 'the merchants items index' do
       end
     end
 
-    xit "top item's best day" do
+    it "top item's best day" do
       merchant = Merchant.create(name: "Friendly Traveling Merchant")
       item_1 = merchant.items.create(name: 'YoYo', description: 'its on a string', unit_price: 1000)
       item_2 = merchant.items.create(name: 'raisin', description: 'dried grape', unit_price: 100)

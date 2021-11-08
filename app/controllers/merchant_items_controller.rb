@@ -8,8 +8,8 @@ class MerchantItemsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:merchant_id])
 
-    if change_item_status_params[:change_item_status]
-      @item = @merchant.items.find(change_item_status_params[:item_id_for_change])
+    if params[:change_item_status]
+      @item = @merchant.items.find(params[:item_id_for_change])
       @item.change_status
 
       redirect_to "/merchants/#{@merchant.id}/items"
@@ -36,9 +36,5 @@ class MerchantItemsController < ApplicationController
   private
     def item_params
       params.permit(:name, :description, :unit_price)
-    end
-
-    def change_item_status_params
-      params.permit(:change_item_status, :item_id_for_change)
     end
 end
