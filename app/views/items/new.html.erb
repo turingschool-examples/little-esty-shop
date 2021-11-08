@@ -1,0 +1,22 @@
+<h1>New Item</h1>
+
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
+<table>
+  <tr>
+    <td><%= form.label :name %></td>
+    <td><%= form.text_field :name %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :description %></td>
+    <td><%= form.text_field :description %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :unit_price %></td>
+    <td><%= form.number_field :unit_price %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%= form.submit 'Create Item' %></td>
+  </tr>
+</table>
+<% end %>
