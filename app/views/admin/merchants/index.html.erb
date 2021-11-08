@@ -1,9 +1,27 @@
 <h1>Merchants</h1>
 
-<ul>
-  <% @merchants.each do |merchant| %>
-    <li>
-      <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+<h3>Enabled Merchants</h3>
+<ul id="enabled-merchants">
+  <% @merchants.enabled.each do |merchant| %>
+    <li id="merchant-<%=merchant.id%>">
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %>
+        <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch, local: true do |f| %>
+          <%= f.submit "Disable" %>
+          <%= f.hidden_field :disable, value: 'true' %>
+        <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Disabled Merchants</h3>
+<ul id="disabled-merchants">
+  <% @merchants.disabled.each do |merchant| %>
+    <li id="merchant-<%=merchant.id%>">
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"  %>
+        <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch, local: true do |f| %>
+          <%= f.submit "Enable" %>
+          <%= f.hidden_field :enable, value: 'true' %>
+        <% end %>
     </li>
   <% end %>
 </ul>

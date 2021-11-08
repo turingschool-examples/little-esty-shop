@@ -1,5 +1,5 @@
 require 'rails_helper'
-# FactoryBot.find_definitions
+FactoryBot.find_definitions
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
@@ -22,7 +22,7 @@ RSpec.describe Merchant, type: :model do
     @invoice4 = create(:invoice, customer: @customer4)
     @invoice5 = create(:invoice, customer: @customer5)
     @invoice6 = create(:invoice, customer: @customer6)
-    
+
     @item1 = create(:item, merchant: @merchant)
     @item2 = create(:item, merchant: @merchant)
     @item3 = create(:item, merchant: @merchant)
@@ -47,6 +47,21 @@ RSpec.describe Merchant, type: :model do
     create(:transaction, result: 'success', invoice: @invoice4)
     create(:transaction, result: 'success', invoice: @invoice5)
     create(:transaction, result: 'success', invoice: @invoice5)
+  end
+
+
+  describe '.enabled' do
+    it 'returns a collection of enabled merchants' do
+      merchant_2 = create(:merchant, status: 1)
+      expect(Merchant.enabled).to eq([merchant_2])
+    end
+  end
+
+  describe '.disabled' do
+    it 'returns a collection of disabled items' do
+      @merchant_2 = create(:merchant, status: 1)
+      expect(Merchant.disabled).to eq([@merchant])
+    end
   end
 
   describe '#top_customers' do

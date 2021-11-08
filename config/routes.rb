@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get '/', to: 'base#show' #route for admin dashboard
     get '/merchants', to: 'merchants#index'
     get '/merchants/:id', to: 'merchants#show'
+    patch '/merchants/:id', to: 'merchants#update'
 
     get '/invoices', to: 'invoices#index'
     get '/invoices/:id', to: 'invoices#show'
