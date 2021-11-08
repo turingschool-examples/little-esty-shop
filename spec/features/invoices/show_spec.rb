@@ -19,6 +19,11 @@ RSpec.describe 'Show page', type: :feature do
       expect(page).to have_content(@invoice_1.status)
       expect(page).to have_content("Created at: Monday, November 8, 2021")
     end
+
+    it 'shows invoice customer deatials' do
+
+      expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
+    end
   end
 end
 
