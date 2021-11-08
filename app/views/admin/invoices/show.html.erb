@@ -7,11 +7,16 @@ Inovice items:
 <hr>
 <% @invoice.items.each do |item| %>
   <div id="item-<%= item.id %>">
-    Item name: <%= item.name %><br>
     <% item.invoice_items.each do |inv_item| %>
-      Quantity: <%= inv_item.quantity %><br>
-      Price: <%= number_to_currency(inv_item.unit_price.fdiv(100)) %><br>
-      Status: <%= inv_item.status %><br>
+      <% if inv_item.invoice_id == @invoice.id %>
+          Item name: <%= item.name %><br>
+          Quantity: <%= inv_item.quantity %><br>
+          Price: <%= number_to_currency(inv_item.unit_price.fdiv(100)) %><br>
+          Status: <%= form_with model: [:admin, inv_item], local: true do |form| %>
+            <%= form.select :status, [["pending"], ["packaged"], ["shipped"]], :selected => inv_item.status %>
+            <%= form.submit "Update Invoice Status" %>
+          <% end %><br>
+      <% end %>
     <% end %>
     <hr>
   </div>
