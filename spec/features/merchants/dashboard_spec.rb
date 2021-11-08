@@ -118,6 +118,7 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'shows the items invoice number' do
+
         expect(page).to have_content(@item_1.invoices.first.id)
         expect(page).to have_content(@item_3.invoices.first.id)
         expect(page).to have_content(@item_4.invoices.first.id)

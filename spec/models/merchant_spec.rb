@@ -85,7 +85,7 @@ RSpec.describe Merchant, type: :model do
 
   describe '#not_shipped' do
     it 'shows items that havent been shipped' do
-      expect(@merchant1.not_shipped).to eq([@item_1, @item_1, @item_3, @item_4, @item_7, @item_8, @item_4, @item_4])
+      expect(@merchant1.not_shipped).to eq([@item_1, @item_3, @item_4, @item_7, @item_8])
     end
   end
 end

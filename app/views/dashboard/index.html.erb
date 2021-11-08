@@ -14,6 +14,8 @@
 <% @merchant.not_shipped.each do |item| %>
     <p><%= item.name %></p>
         <% item.invoices.each do |invoice| %>
+        <div id="invoice_<%= invoice.id %>" %>
             <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+        </div>
         <% end %>
 <% end %>
