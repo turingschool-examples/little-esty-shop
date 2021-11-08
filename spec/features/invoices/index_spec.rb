@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Dashboard', type: :feature do
-  describe 'Merchant Dashboard' do
+RSpec.describe 'invoice index page', type: :feature do
+  describe 'Merchant Invoice Index page' do
     before(:each) do
       @merchant_1 = Merchant.create!(name: 'Hair Care')
       @merchant_2 = Merchant.create!(name: 'Jewelry')
@@ -47,15 +47,15 @@ RSpec.describe 'Dashboard', type: :feature do
       @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
       @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2, created_at: "2012-03-28 14:54:09")
       @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_3.id, quantity: 3, unit_price: 5, status: 1, created_at: "2012-03-30 14:54:09")
-      @ii_6 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-01 14:54:09")
-      @ii_7 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_7.id, quantity: 1, unit_price: 3, status: 1, created_at: "2012-04-02 14:54:09")
-      @ii_8 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_8.id, quantity: 1, unit_price: 5, status: 1, created_at: "2012-04-03 14:54:09")
-      @ii_9 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_10 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_9.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_12 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_10.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_13 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_11.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_14 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_12.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_5 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-01 14:54:09")
+      @ii_6 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_7.id, quantity: 1, unit_price: 3, status: 1, created_at: "2012-04-02 14:54:09")
+      @ii_7 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_8.id, quantity: 1, unit_price: 5, status: 1, created_at: "2012-04-03 14:54:09")
+      @ii_8 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_9 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_10 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_9.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_10.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_12 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_11.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_13 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_12.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
 
       @transaction_1 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_1.id)
       @transaction_2 = Transaction.create!(credit_card_number: 230948, result: 0, invoice_id: @invoice_2.id)
@@ -66,73 +66,33 @@ RSpec.describe 'Dashboard', type: :feature do
       @transaction_7 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_7.id)
       @transaction_7 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_8.id)
       @transaction_8 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_9.id)
-      visit "/merchants/#{@merchant_1.id}/dashboard"
+      visit "/merchants/#{@merchant_1.id}/invoices"
     end
 
-    it 'shows merchant name' do
-      expect(page).to have_content(@merchant_1.name)
+    it 'shows invoices ids for the merchant' do
+
+      expect(page).to have_content(@invoice_1.id)
+      expect(page).to have_content(@invoice_2.id)
+      expect(page).to have_content(@invoice_3.id)
+      expect(page).to have_content(@invoice_4.id)
+      expect(page).to have_content(@invoice_5.id)
+      expect(page).to have_content(@invoice_6.id)
+      expect(page).to have_content(@invoice_7.id)
+      expect(page).to have_content(@invoice_8.id)
+
     end
 
-    it 'links to merchant items index' do
-      click_on "Items Index"
+    it 'links to each invoices show page' do
 
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
-    end
-
-    it 'links to merchant invoices index' do
-      click_on "Invoices Index"
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
-    end
-    
-    describe 'favorite customers' do
-      it 'names  top 5 customers' do
-
-        expect(page).to have_content("Top 5 Customers:" )
-        expect(page).to have_content(@customer_1.first_name)
-        expect(@customer_1.first_name).to appear_before(@customer_6.first_name)
-        expect(@customer_6.first_name).to appear_before(@customer_2.first_name)
-        expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
-        expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
-        expect(page).to_not have_content(@customer_5.first_name)
-      end
-
-      it 'shows number of successful transactions next to each customer' do
-
-      end
-    end
-
-    describe 'items ready to be shipped' do
-
-      it 'has ready to be shipped section' do
-        expect(page).to have_content("Items Ready to Ship")
-      end
-
-      it 'shows items that are ready to be shippped' do
-
-        expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_3.name)
-        expect(page).to have_content(@item_4.name)
-        expect(page).to have_content(@item_7.name)
-        expect(page).to have_content(@item_8.name)
-        expect(page).to_not have_content(@item_2.name)
-      end
-
-      it 'shows the items invoice number' do
-        expect(page).to have_content(@item_1.invoices.first.id)
-        expect(page).to have_content(@item_3.invoices.first.id)
-        expect(page).to have_content(@item_4.invoices.first.id)
-        expect(page).to have_content(@item_7.invoices.first.id)
-        expect(page).to have_content(@item_8.invoices.first.id)
-        expect(page).to_not have_content(@item_2.invoices.first.id)
-      end
-
-      it 'has a link to each invoice' do
-        within("#invoice_#{@invoice_1.id}") do
-          click_link "#{@item_1.invoices.first.id}"
-        end
-
-        expect(page).to have_content(@item_1.invoices.first.id)
-      end
+      click_link "#{@invoice_1.id}"
+      
+      expect(page).to have_content(@invoice_1.id)
     end
   end
 end
+
+# As a merchant,
+# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
+# Then I see all of the invoices that include at least one of my merchant's items
+# And for each invoice I see its id
+# And each id links to the merchant invoice show page

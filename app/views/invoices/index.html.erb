@@ -1,0 +1,5 @@
+<h3> <%= @merchant.name %>'s Invoices</h3>
+
+<% @invoices.each do |invoice| %>
+  <p><%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>
+<% end %>
