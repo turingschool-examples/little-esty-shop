@@ -1,5 +1,5 @@
 require 'rails_helper'
-FactoryBot.find_definitions
+# FactoryBot.find_definitions
 
 RSpec.describe 'admin merchants index' do
   before :each do
