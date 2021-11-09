@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   get '/admin/merchants', to: 'admin_merchants#index'
+  get '/admin/merchants/:id', to: 'admin_merchants#show'
   get '/admin/invoices', to: 'admin_invoices#index'
   get '/admin/invoices/:id', to: 'admin_invoices#show'
   # namespace :admin do
