@@ -23,7 +23,7 @@ RSpec.describe '' do
   it 'links to the invoice show page' do
     visit '/admin/invoices'
 
-    click_link(@invoice_1.id)
+    click_link("#{@invoice_1.id}")
 
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
   end
