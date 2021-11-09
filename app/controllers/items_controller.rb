@@ -30,21 +30,21 @@ class ItemsController < ApplicationController
     end
   end
 
-  def new 
+  def new
     @item = Item.new
     @merchant = Merchant.find(params[:merchant_id])
-  end 
+  end
 
-  def create 
+  def create
     item = Item.new(item_params.merge({merchant_id: params[:merchant_id]}))
     merchant = Merchant.find(params[:merchant_id])
-    if item.save 
+    if item.save
       redirect_to merchant_items_path(merchant)
-    else 
+    else
       redirect_to new_merchant_item_path(merchant)
       flash[:alert] = "Please enter valid data"
     end
-  end 
+  end
 
   private
   def item_params

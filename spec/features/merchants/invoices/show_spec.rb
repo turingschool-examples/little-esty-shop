@@ -15,7 +15,7 @@ RSpec.describe 'merchant invoice show page' do
 
     @transaction = create :transaction, { invoice_id: @invoice.id, result: 'success' }
 
-    @inv_item1 = create :invoice_item, { item_id: @item1.id, invoice_id: @invoice.id}
+    @inv_item1 = create :invoice_item, { item_id: @item1.id, invoice_id: @invoice.id, status: 'pending' }
     @inv_item2 = create :invoice_item, { item_id: @item2.id, invoice_id: @invoice.id}
     @inv_item3 = create :invoice_item, { item_id: @item3.id, invoice_id: @invoice.id}
 
@@ -44,5 +44,17 @@ RSpec.describe 'merchant invoice show page' do
 
   it 'i see total revenue for all of my items on invoice' do
     expect(page).to have_content("Total Merchant Revenue for this Invoice")
+  end
+
+  it 'item status is a select field that shows current status and can change status' do
+    within("#item-#{@item1.id}") do
+      expect(find_field(:invoice_item_status).value).to eq('pending')
+      select 'packaged'
+      click_button 'Update Item Status'
+
+      expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice))
+
+      expect(find_field(:invoice_item_status).value).to eq('packaged')
+    end
   end
 end
