@@ -85,7 +85,6 @@ RSpec.describe 'invoice index page', type: :feature do
     it 'links to each invoices show page' do
 
       click_link "#{@invoice_1.id}"
-      save_and_open_page
       expect(page).to have_content(@invoice_1.id)
     end
   end
