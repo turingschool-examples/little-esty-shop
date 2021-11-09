@@ -12,22 +12,10 @@ RSpec.describe "Merchant Invoice Show" do
 
     visit "merchants/#{merchant1.id}/invoices/#{invoice1.id}"
     save_and_open_page
-    
+
     expect(page).to have_content(item1.name)
     expect(page).to have_content(invoiceitem1.quantity)
     expect(page).to have_content(invoiceitem1.unit_price)
     expect(page).to have_content(invoiceitem1.status)
   end
 end
-
-
-
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see all of my items on the invoice including:
-#
-# Item name
-# The quantity of the item ordered
-# The price the Item sold for
-# The Invoice Item status
-# And I do not see any information related to Items for other merchants

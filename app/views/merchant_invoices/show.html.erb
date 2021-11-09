@@ -2,7 +2,7 @@
 
 <% @invoice.invoice_items.each do |invoice_item| %>
   <%= Item.find_item(invoice_item.item_id).name %><br>
-  <%= Item.find_item(invoice_item.item_id).unit_price %><br>
-  <%= invoice_item.quantity %><br>
-  <%= invoice_item.status %><br>
+  Price: <%= Item.find_item(invoice_item.item_id).unit_price %><br>
+  Quantity: <%= invoice_item.quantity %><br>
+  Status: <%= invoice_item.status %><br>
 <% end %>
