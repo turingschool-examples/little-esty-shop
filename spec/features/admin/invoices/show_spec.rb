@@ -33,13 +33,21 @@ RSpec.describe "admin invoice show" do
       expect(page).to have_content(@inv_item11.quantity)
       expect(page).to have_content(@inv_item11.unit_price / 100)
       expect(page).to have_content(@inv_item11.status)
-      expect(page).to_not have_content(@inv_item12.status)
+      expect(page).to_not have_content(@inv_item12.quantity)
     end
   end
 
-  xit 'gives dropdown menu option for invoice item status' do
+  it 'gives dropdown menu option for invoice item status' do
     within("#item-#{@item7.id}") do
+      expect(find_field(:invoice_item_status).value).to eq("pending")
+
+      expect(page).to have_button("Update Invoice Status")
+      select "shipped", from: 'invoice_item_status'
+      click_button "Update Invoice Status"
+
+      expect(current_path).to eq(admin_invoice_path(@invoice8.id))
+
+      expect(find_field(:invoice_item_status).value).to eq("shipped")
     end
   end
 end
-# options_for_select(:status, options_for_select([["pending", 1], ["shipped", 2], 1)
