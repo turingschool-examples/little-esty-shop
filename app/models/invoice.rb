@@ -8,16 +8,9 @@ class Invoice < ApplicationRecord
                  "completed" => 1,
                  "in progress" => 2
                }
-  def self.successful_invoices
-    joins(:transactions).where(transactions: {result: "success"}).distinct
-  end
 
   def invoice_revenue
     invoice_items.invoice_item_revenue
-  end
-
-  def self.total_invoices_revenue
-    join(:invoice_items).sum("unit_price * quantity").limit(5)
   end
 
   def self.highest_date
