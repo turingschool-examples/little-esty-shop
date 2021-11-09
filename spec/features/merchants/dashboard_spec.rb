@@ -32,8 +32,8 @@ RSpec.describe 'Dashboard', type: :feature do
       @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
       @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Kuhn')
 
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
       @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 1)
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
       @invoice_3 = Invoice.create!(customer_id: @customer_2.id, status: 1)
       @invoice_4 = Invoice.create!(customer_id: @customer_3.id, status: 1)
       @invoice_5 = Invoice.create!(customer_id: @customer_4.id, status: 1)
@@ -128,11 +128,20 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'has a link to each invoice' do
-        within("#invoice_#{@invoice_1.id}") do
           click_link "#{@item_1.invoices.first.id}"
-        end
 
         expect(page).to have_content(@item_1.invoices.first.id)
+      end
+
+      it 'shows invoice created by date' do
+        
+        # expect(page).to have_content(@item_1.invoices.first.created_at.strftime("%A, %B %e, %Y"))
+        expect(page).to have_content("Sunday, November 7, 2021")
+      end
+
+      it 'shows items in reverse order' do
+
+        expect(@invoice_2.id).to appear_before(@invoice_1.id)
       end
     end
   end
