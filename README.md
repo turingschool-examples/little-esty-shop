@@ -36,3 +36,7 @@ This project requires Ruby 2.7.2.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+
+
+![Database design](/assets/database_design.png)
