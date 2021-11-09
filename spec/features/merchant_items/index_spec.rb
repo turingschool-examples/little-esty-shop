@@ -185,6 +185,7 @@ RSpec.describe 'the merchants items index' do
       transaction_5 = invoice_5.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
 
       visit "/merchants/#{merchant.id}/items"
+
       within 'div#top-items' do
         expect(page).to have_content("Top selling date for #{item_4.name} is #{invoice_5.created_at.strftime("%A, %B %-d, %Y")}")
         expect(page).to have_content("Top selling date for #{item_5.name} is #{invoice_3.created_at.strftime("%A, %B %-d, %Y")}")
