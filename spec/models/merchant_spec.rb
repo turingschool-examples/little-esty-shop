@@ -191,8 +191,8 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe 'favorite_customers' do 
-      it 'returns the top 5 customers' do 
+    describe 'favorite_customers' do
+      it 'returns the top 5 customers' do
         merchant = create(:merchant)
         item1 = create :item, { merchant_id: merchant.id }
         customer1 = create :customer
@@ -236,23 +236,15 @@ RSpec.describe Merchant, type: :model do
         inv_item5 = create :invoice_item, { item_id: item1.id, invoice_id: invoice5.id, unit_price: 100, quantity: 1}
 
         expected = {customer1.id => 5, customer2.id => 4, customer3.id => 3, customer4.id => 2, customer5.id => 1}
-        
+
         expect(merchant.favorite_customers). to eq(expected)
-      end 
-    end 
-
-    describe 'merchant_invoices' do 
-      it 'returns all invoices for a merchant' do 
-        expect(@merchant.merchant_invoices).to eq(@merchant.invoices)
-      end 
-    end 
-
-    it 'identifies status' do
-      @merchant = create(:merchant)
-      @merchant1 = create(:merchant, status: "enabled")
-
-      expect(Merchant.merchant_status('disabled')).to eq([@merchant])
-      expect(Merchant.merchant_status('enabled')).to eq([@merchant1])
+      end
     end
+
+    describe 'merchant_invoices' do
+      it 'returns all invoices for a merchant' do
+        expect(@merchant.merchant_invoices).to eq(@merchant.invoices)
+      end
+    end 
   end
 end
