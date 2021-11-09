@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'dashboard', on: :member
     resources :items, except: [:delete]
     resources :invoices, only: [:index, :show]
+    resources :invoice_items, only: :update
   end
 
   namespace :admin do
