@@ -12,5 +12,12 @@ RSpec.describe 'Admin invoice show page' do
     it 'shows the invoice header' do
       expect(page).to have_content("Invoice #{@invoice.id}")
     end
+
+    it 'shows all the necessary information' do
+      expect(page).to have_content(@invoice.status)
+      expect(page).to have_content('November')
+      expect(page).to have_content(@customer.first_name)
+      expect(page).to have_content(@customer.last_name)
+    end
   end
 end
