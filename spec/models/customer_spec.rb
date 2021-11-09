@@ -19,4 +19,49 @@ RSpec.describe Customer, type: :model do
 
     expect(customer.successful_transactions_count).to eq(3)
   end
+
+  describe '#top_five_customers' do
+    it 'returns the top five customers' do
+      customer1 = create(:customer)
+      customer2 = create(:customer)
+      customer3 = create(:customer)
+      customer4 = create(:customer)
+      customer5 = create(:customer)
+      customer6 = create(:customer)
+
+      invoice1 = create(:invoice, customer: customer1)
+      invoice2 = create(:invoice, customer: customer2)
+      invoice3 = create(:invoice, customer: customer3)
+      invoice4 = create(:invoice, customer: customer4)
+      invoice5 = create(:invoice, customer: customer5)
+      invoice6 = create(:invoice, customer: customer6)
+
+      create(:transaction, result: 'success', invoice: invoice1)
+      create(:transaction, result: 'success', invoice: invoice1)
+      create(:transaction, result: 'success', invoice: invoice1)
+      create(:transaction, result: 'success', invoice: invoice1)
+      create(:transaction, result: 'success', invoice: invoice1)
+
+      create(:transaction, result: 'success', invoice: invoice2)
+      create(:transaction, result: 'success', invoice: invoice2)
+      create(:transaction, result: 'success', invoice: invoice2)
+      create(:transaction, result: 'success', invoice: invoice2)
+
+      create(:transaction, result: 'success', invoice: invoice3)
+      create(:transaction, result: 'success', invoice: invoice3)
+      create(:transaction, result: 'success', invoice: invoice3)
+
+      create(:transaction, result: 'success', invoice: invoice4)
+      create(:transaction, result: 'success', invoice: invoice4)
+
+      create(:transaction, result: 'success', invoice: invoice5)
+
+      expect(Customer.top_five_customers).to eq([ customer1,
+                                                  customer2,
+                                                  customer3,
+                                                  customer4,
+                                                  customer5
+                                                  ])
+    end
+  end
 end
