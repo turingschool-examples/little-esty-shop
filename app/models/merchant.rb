@@ -42,4 +42,14 @@ class Merchant < ApplicationRecord
        .order('revenue desc')
        .limit(5)
   end
+
+  def self.merchant_best_day
+      self.joins(items: :invoices)
+        .select('invoices.created_at')
+            .group('invoices.created_at')
+            .order('created_at desc')
+            .first
+            .created_at
+            .to_date
+  end
 end

@@ -164,5 +164,9 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.merchant_status('enabled')).to eq([@merchant1])
 
     end
+
+    it 'shows merchant best day' do
+      expect(Merchant.merchant_best_day).to eq(@invoice9.created_at.to_date)
+    end
   end
 end

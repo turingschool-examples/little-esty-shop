@@ -1,0 +1,9 @@
+<h1>Admin Invoices Index</h1>
+
+<div id="invoice-index">
+  <% @invoices.each do |invoice| %>
+    <div id="invoice-<%= invoice.id %>">
+      Invoice id:<%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
+    </div>
+  <% end %>
+</div>

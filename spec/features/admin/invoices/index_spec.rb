@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admin merchants index" do
+RSpec.describe "admin invoices index" do
   before do
     @merchant = create(:merchant)
     @merchant1 = create(:merchant)
@@ -35,67 +35,23 @@ RSpec.describe "admin merchants index" do
     @inv_item14 = create :invoice_item, { item_id: @item10.id, invoice_id: @invoice11.id, unit_price: 45, quantity: 3000}
     @inv_item15 = create :invoice_item, { item_id: @item11.id, invoice_id: @invoice12.id, unit_price: 1200, quantity: 7}
 
-    visit admin_merchants_path
+    visit admin_invoices_path
   end
 
-  it 'can visit admin merchants index and see the name of each merchant' do
-    expect(current_path).to eq(admin_merchants_path)
+  it 'lists all invoice ids as links to show pages' do
+    expect(current_path).to eq(admin_invoices_path)
 
-    expect(page).to have_content(@merchant.name)
-    expect(page).to have_content(@merchant1.name)
-    expect(page).to have_content(@merchant2.name)
-    expect(page).to have_content(@merchant3.name)
-    expect(page).to have_content(@merchant4.name)
-  end
+    expect(page).to have_content(@invoice8.id)
+    expect(page).to have_content(@invoice9.id)
+    expect(page).to have_content(@invoice10.id)
+    expect(page).to have_content(@invoice11.id)
+    expect(page).to have_content(@invoice12.id)
 
-  it 'can click on the name of a merchant' do
-    expect(page).to have_link(@merchant.name)
-    click_link "#{@merchant.name}"
-    expect(current_path).to eq(admin_merchant_path(@merchant.id))
-  end
-
-  it 'has button to enable/disable merchant' do
-    within("#merchant-#{@merchant.id}") do
-      click_on "Enable"
-      expect(page).to have_button("Disable")
-    end
-  end
-
-  it 'has sections for enabled and disabled items' do
-    within('#enabled') do
-      expect(page).to have_content(@merchant4.name)
-    end  
-   end
-
-   within('#disabled') do
-     expect(page).to have_content(@merchant.name)
-     expect(page).to have_content(@merchant1.name)
-     expect(page).to have_content(@merchant2.name)
-   end
-  end
-
-  it 'has link to create new merchant' do
-    expect(page).to have_link("Add Merchant")
-  end
-
-  it 'shows top 5 merchants by revenue' do
-    within("#top-five-merchants") do
-      within("#merchant-#{@merchant1.id}") do
-        expect(page).to have_link(@merchant1.name)
-        expect(page).to have_content('revenue generated')
-
-        click_link(@merchant1.name, match: :first)
-
-        expect(current_path).to eq(admin_merchant_path(@merchant1))
-      end
-    end
-  end
-
-  it 'shows merchant best day' do
-    within("#top-five-merchants") do
-      within("#merchant-#{@merchant1.id}") do
-        expect(page).to have_content("Top selling date for #{@merchant1.name} was #{Merchant.merchant_best_day}.")
-      end
+    within('#invoice-index') do
+      within("invoice-#{@invoice8.id}")
+        expect(page).to have_link(@invoice8.id)
+        click_link "#{@invoice8.id}"
+        expect(current_path).to eq(admin_invoice_path(@invoice8.id))
     end
   end
 end
