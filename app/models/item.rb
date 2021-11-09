@@ -21,11 +21,18 @@ class Item < ApplicationRecord
   end
 
   def self.top_five_items
+    # joins(invoices: :transactions)
+    #   .where(transactions: {result: "success"})
+    #   .group(:id).select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+    #   .order("total_revenue" => :desc)
+    #   .limit(5)
+
     joins(invoices: :transactions)
       .where(transactions: {result: "success"})
-      .group(:id).select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+      .group(:id)
+      .select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
       .order("total_revenue" => :desc)
-      .limit(5)
+      .first(5)
   end
 
   def invoice_item_price(invoice)

@@ -12,5 +12,5 @@
 <h2>Items Ready to Ship</h2>
 
 <% @merchant.shippable_items.each do |item| %>
- <p><%= item.name %>- Invoice #<%= item.invoice_id %> <%= item.invoice_created_at.strftime("%A, %B %d, %Y") %></p>
+  <p><%= item.name %>- Invoice #<%= item.invoice_id %> <%= item.invoice_created_at.strftime("%A, %B %d, %Y") %></p>
 <% end %>
