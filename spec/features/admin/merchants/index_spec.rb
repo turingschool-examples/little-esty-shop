@@ -20,7 +20,7 @@ RSpec.describe 'admin merchants index' do
      expect(page).to have_content(@merchant_5.name)
   end
 
-  it 'links to a mercant show page' do
+  it 'links to a merchant show page' do
     visit admin_merchants_path
 
     click_link(@merchant_1.name)
