@@ -15,7 +15,11 @@
       <p>
       <%= link_to "Merchants Index", "/merchants" %> //
       <%= link_to "Admins Index", "/admin" %>
-      </p><hr>
+      </p>
+      <p>
+      GitHub Repository: <%= link_to GithubFacade.repository.name, "https://github.com/haewonito/little-esty-shop" %>
+      </p>
+      <hr>
     </section>
     <%= yield %>
   </body>
