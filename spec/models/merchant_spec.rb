@@ -173,11 +173,29 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant.top_five_items).to eq([@item1,@item2,@item3,@item4,@item5])
       end
     end
-
+    
     describe 'merchant best day' do
       it 'shows merchant best day' do
         expect(@merchant.merchant_best_day).to eq(@invoice1.created_at.to_date)
       end
+
+    it 'lists top 5 merchants by revenue' do
+      expect(Merchant.top_five_merchants).to eq([@merchant, @merchant3, @merchant1, @merchant2, @merchant4])
+    end 
+    
+    ###  TECHNICAL DEBT: this needs to be moved to item model test along with set-up. Or does it? Let's discuss.
+    describe '#item_best_day' do
+      it 'returns the date of the greatest number of sales for items' do
+        expect(@merchant.top_five_items.first.item_best_day).to eq(DateTime.new(2021, 1, 4))
+      end
+    end
+
+    it 'identifies status' do
+      @merchant = create(:merchant)
+      @merchant1 = create(:merchant, status: "enabled")
+
+      expect(Merchant.merchant_status('disabled')).to eq([@merchant])
+      expect(Merchant.merchant_status('enabled')).to eq([@merchant1])
     end
   end
 end
