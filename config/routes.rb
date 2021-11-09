@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # resources :merchant_dashboards, only: [:index]
   # resources :merchant_items,      only: [:index, :new, :create, :show]
   # resources :merchant_invoices,   only: [:index, :show]
+  get "/merchants", to: "merchants#index"
+
   get "/merchants/:merchant_id/dashboard", to: "merchant_dashboards#index"
 
   get "/merchants/:merchant_id/items", to: "merchant_items#index"
