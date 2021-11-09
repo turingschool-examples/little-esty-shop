@@ -27,6 +27,14 @@ class Merchant < ApplicationRecord
       update(status: 'Enabled')
     end
   end
+
+  def self.top_merchants
+    joins(items: [{invoice_items: { invoice: :transactions} }] )
+      .where(transactions: {result: :success})
+      .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
+      .group('merchants.id')
+      .order('revenue DESC')
+  end
   #
   # def invoice_for_item_ready_to_ship
   #   Invoice.joins(invoice_items: [item: [:merchant]]
