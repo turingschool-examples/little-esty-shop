@@ -114,6 +114,62 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe 'favorite_customers' do 
+      it 'returns the top 5 customers' do 
+        merchant = create(:merchant)
+        item1 = create :item, { merchant_id: merchant.id }
+        customer1 = create :customer
+        customer2 = create :customer
+        customer3 = create :customer
+        customer4 = create :customer
+        customer5 = create :customer
+        customer6 = create :customer
+        invoice1 = create :invoice, { customer_id: customer1.id }
+        invoice2 = create :invoice, { customer_id: customer2.id }
+        invoice3 = create :invoice, { customer_id: customer3.id }
+        invoice4 = create :invoice, { customer_id: customer4.id }
+        invoice5 = create :invoice, { customer_id: customer5.id }
+        invoice6 = create :invoice, { customer_id: customer6.id }
+        invoice1 = create :invoice, { customer_id: customer1.id }
+        invoice2 = create :invoice, { customer_id: customer2.id }
+        invoice3 = create :invoice, { customer_id: customer3.id }
+        invoice4 = create :invoice, { customer_id: customer4.id }
+        invoice5 = create :invoice, { customer_id: customer5.id }
+        invoice6 = create :invoice, { customer_id: customer6.id }
+        transaction1 = create :transaction, { invoice_id: invoice1.id, result: 'success' }
+        transaction2 = create :transaction, { invoice_id: invoice1.id, result: 'success' }
+        transaction3 = create :transaction, { invoice_id: invoice1.id, result: 'success' }
+        transaction4 = create :transaction, { invoice_id: invoice1.id, result: 'success' }
+        transaction5 = create :transaction, { invoice_id: invoice1.id, result: 'success' }
+        transaction6 = create :transaction, { invoice_id: invoice2.id, result: 'success' }
+        transaction7 = create :transaction, { invoice_id: invoice2.id, result: 'success' }
+        transaction8 = create :transaction, { invoice_id: invoice2.id, result: 'success' }
+        transaction9 = create :transaction, { invoice_id: invoice2.id, result: 'success' }
+        transaction10 = create :transaction, { invoice_id: invoice3.id, result: 'success' }
+        transaction11 = create :transaction, { invoice_id: invoice3.id, result: 'success' }
+        transaction12 = create :transaction, { invoice_id: invoice3.id, result: 'success' }
+        transaction13 = create :transaction, { invoice_id: invoice4.id, result: 'success' }
+        transaction14 = create :transaction, { invoice_id: invoice4.id, result: 'success' }
+        transaction15 = create :transaction, { invoice_id: invoice5.id, result: 'success' }
+        transaction16 = create :transaction, { invoice_id: invoice6.id, result: 'failed' }
+        inv_item1 = create :invoice_item, { item_id: item1.id, invoice_id: invoice1.id, unit_price: 100, quantity: 5}
+        inv_item2 = create :invoice_item, { item_id: item1.id, invoice_id: invoice2.id, unit_price: 100, quantity: 4}
+        inv_item3 = create :invoice_item, { item_id: item1.id, invoice_id: invoice3.id, unit_price: 100, quantity: 3}
+        inv_item4 = create :invoice_item, { item_id: item1.id, invoice_id: invoice4.id, unit_price: 100, quantity: 2}
+        inv_item5 = create :invoice_item, { item_id: item1.id, invoice_id: invoice5.id, unit_price: 100, quantity: 1}
+
+        expected = {customer1.id => 5, customer2.id => 4, customer3.id => 3, customer4.id => 2, customer5.id => 1}
+        
+        expect(merchant.favorite_customers). to eq(expected)
+      end 
+    end 
+
+    describe 'merchant_invoices' do 
+      it 'returns all invoices for a merchant' do 
+        expect(@merchant.merchant_invoices).to eq(@merchant.invoices)
+      end 
+    end 
+
     it 'identifies status' do
       @merchant = create(:merchant)
       @merchant1 = create(:merchant, status: "enabled")

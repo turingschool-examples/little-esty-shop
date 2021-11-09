@@ -40,4 +40,3 @@ RSpec.describe 'merchants invoices index page' do
     end
   end
 end
-# And each id links to the merchant invoice show page
