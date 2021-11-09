@@ -64,8 +64,9 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice1.total_revenue(@merchant.id)).to eq(500)
       end
 
-    it 'caluclates total revenue for an invoice' do
-      expect(@invoice1.total_revenue(@invoice1.id)).to eq(@invoice1.total_revenue(@invoice1.id))
+      it 'caluclates total revenue for an invoice' do
+        expect(@invoice1.total_revenue(@invoice1.id)).to eq(@invoice1.total_revenue(@invoice1.id))
+      end
     end
   end
 end
