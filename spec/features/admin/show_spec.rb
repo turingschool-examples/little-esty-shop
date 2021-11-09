@@ -56,7 +56,6 @@ RSpec.describe 'admin dashboard show page' do
 
   it 'lists the top five customers' do
     within('#top-five-customers') do
-      save_and_open_page
 
       expect(@customer1.first_name).to appear_before(@customer2.first_name)
       expect(@customer2.first_name).to appear_before(@customer3.first_name)
