@@ -4,8 +4,6 @@
 
 <%= link_to "My Invoices", admin_invoices_path %>
 
-
-
 <div id="top5">
   Favorite Customers<% @customers.admin_favorite_customers.each do |id, count| %>
   <div id="cust-<%= id %>">
@@ -13,8 +11,6 @@
   </div>
   <% end %>
 </div>
-
-
 
 <div id="incomplete_invoices">
   Incomplete Invoices <% @invoices.order_from_oldest.each do |invoice| %>
