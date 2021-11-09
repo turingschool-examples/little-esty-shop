@@ -9,9 +9,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  
+
 
 <body>
+
+  <%response = Faraday.get('https://api.github.com/repos/jacobyarborough/little-esty-shop')
+  body = response.body
+  parsed = JSON.parse(body, symbolize_names: true)
+  repo_name = parsed[:name]%>
+
+  <%= repo_name %>
+
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>

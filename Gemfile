@@ -33,7 +33,7 @@ gem 'factory_bot_rails'
 gem 'faker'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'faraday'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.9.1', require: false
 
