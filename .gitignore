@@ -30,4 +30,4 @@
 # Ignore test-related files
 /coverage.data
 /coverage/*
-/coverage/index.html
+coverage/index.html
