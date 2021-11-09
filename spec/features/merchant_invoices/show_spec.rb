@@ -17,11 +17,11 @@ RSpec.describe "merchant's invoice show page", type: :feature do
       @invoice_1 = @customer.invoices.create(status: 'Completed')
       @invoice_2 = @customer.invoices.create(status: 'Completed')
 
-      # @invoice_item_1 = @invoice_1.invoice_items.create(item_id: @item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
-      # @invoice_item_2 = @invoice_1.invoice_items.create(item_id: @item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
-      # @invoice_item_3 = @invoice_1.invoice_items.create(item_id: @item_3.id, quantity: 1, unit_price: 400, status: 'shipped')
-      # @invoice_item_4 = @invoice_1.invoice_items.create(item_id: @item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
-      # @invoice_item_5 = @invoice_1.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+      @invoice_item_1 = @invoice_1.invoice_items.create(item_id: @item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
+      @invoice_item_2 = @invoice_1.invoice_items.create(item_id: @item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
+      @invoice_item_3 = @invoice_1.invoice_items.create(item_id: @item_3.id, quantity: 1, unit_price: 400, status: 'shipped')
+      @invoice_item_4 = @invoice_1.invoice_items.create(item_id: @item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+      @invoice_item_5 = @invoice_1.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
 
       # transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
       # transaction_2 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
@@ -29,23 +29,21 @@ RSpec.describe "merchant's invoice show page", type: :feature do
       # transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
       # transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
 
-      visit "/merchants/#{@merchant.id}/invoice/#{@invoice_1.id}"
+      visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
     end
 
     it "I see invoice's id, status and created_at date" do
+      save_and_open_page
       expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
       expect(page).to_not have_content("Invoice ID: #{@invoice_2.id}")
 
       expect(page).to have_content("Invoice Status: #{@invoice_1.status}")
-      expect(page).to have_content("Created At: ")
-
-
-
-      #date in the format "Monday, July 18, 2019"
+      expect(page).to have_content("Created At: #{@invoice_1.created_at.strftime("%A, %B %-d, %Y")}")
     end
 
     it "I see customer's first and last name" do
+      expect(page).to have_content("Customer: #{@customer.first_name} #{@customer.last_name}")
     end
   end
 end

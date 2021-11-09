@@ -29,16 +29,14 @@
 <%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %>
 </div>
 
-<!-- I've been messing with this, so put it back the way it was! -->
 <div id='top-items'>
 <h2>Top Items</h2>
 <ol>
 <% @merchant.top_items_by_revenue.each do |item| %>
   <li>
-
-  <%= link_to item.item_name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  <%= link_to item.item_name, "/merchants/#{@merchant.id}/items/#{item.item_id}" %>
   - <%= number_to_currency(item.revenue) %> in sales
-  - Top selling date for <%= item.item_name %> is <%= item.invoice_date.strftime("%A, %B %-d, %Y") %>
+  - Top selling date for <%= item.item_name %> is <%= @merchant.top_date(item.item_id).date.strftime("%A, %B %-d, %Y") %>
   </li>
 <% end %>
 </ol>

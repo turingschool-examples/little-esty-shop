@@ -9,4 +9,10 @@ class Customer < ApplicationRecord
                 .count
     result = customers.sort_by { |name, count| count }.reverse
   end
+#there must be a simpler way to do this but it's too late in the day
+  def self.find_by_invoice_id(invoice_id)
+    invoice = Invoice.find(invoice_id)
+    id = invoice.customer_id
+    Customer.find(id)
+  end
 end

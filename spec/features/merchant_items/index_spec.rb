@@ -160,9 +160,8 @@ RSpec.describe 'the merchants items index' do
       customer_1 = Customer.create(first_name: 'George', last_name: 'Washington')
 
       invoice_1 = customer_1.invoices.create(status: 'Completed')
-      invoice_3 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-24")
-
-      invoice_2 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-25")
+      invoice_2 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-24")
+      invoice_3 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-25")
       invoice_4 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-27")
       invoice_5 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-28")
 
@@ -172,18 +171,18 @@ RSpec.describe 'the merchants items index' do
 
 #for testing same revenue, return most recent date - invoice_5.created_at, item_4
       invoice_item_4 = invoice_2.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
-      invoice_item_8 = invoice_4.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
-      invoice_item_9 = invoice_5.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+      invoice_item_5 = invoice_4.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
+      invoice_item_6 = invoice_5.invoice_items.create(item_id: item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
 
+      invoice_item_7 = invoice_2.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+      invoice_item_8 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 2, unit_price: 500, status: 'shipped')
+      invoice_item_9 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
 
-      invoice_item_5 = invoice_2.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
-      invoice_item_6 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 2, unit_price: 500, status: 'shipped')
-      invoice_item_7 = invoice_3.invoice_items.create(item_id: item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
-      transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
-      transaction_2 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-      transaction_3 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-      transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
-      transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_2 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_3 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_4 = invoice_4.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+      transaction_5 = invoice_5.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
 
       visit "/merchants/#{merchant.id}/items"
       within 'div#top-items' do
@@ -191,8 +190,5 @@ RSpec.describe 'the merchants items index' do
         expect(page).to have_content("Top selling date for #{item_5.name} is #{invoice_3.created_at.strftime("%A, %B %-d, %Y")}")
       end
     end
-# if there are multiple days with equal number of sales, return the most recent day.
-#item order = item_1, 5, 3, 4, 2
-
   end
 end
