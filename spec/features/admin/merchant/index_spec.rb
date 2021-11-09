@@ -71,7 +71,7 @@ RSpec.describe 'Admin Merchant Index page' do
     transaction_3 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
 
     visit admin_merchants_path
-    save_and_open_page
+
     expect(page).to have_content('Top 5 Merchants:')
     expect('Kevin - 6000').to appear_before('Bob - 20')
   end
