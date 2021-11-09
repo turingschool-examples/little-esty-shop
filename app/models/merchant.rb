@@ -12,7 +12,7 @@ class Merchant < ApplicationRecord
   end
 
   def top_customers
-    wip = Customer.joins(invoices: [:transactions, {items: :merchant}])
+    Customer.joins(invoices: [:transactions, {items: :merchant}])
     .where(transactions: {result: :success}, merchants: {id: "#{self.id}"})
     .group(:id)
     .order("transactions.count DESC")
