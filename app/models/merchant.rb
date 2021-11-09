@@ -56,6 +56,12 @@ class Merchant < ApplicationRecord
       .first
   end
 
+  def find_invoices
+    Invoice.joins(invoice_items: [item: [:merchant]])
+      .where(merchants: { id: id })
+      .distinct
+  end
+
 
   # def top_revenue_invoice_dates(item_id)
   #   Item.joins(invoice_items: [invoice: [:transactions]])

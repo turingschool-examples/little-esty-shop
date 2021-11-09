@@ -23,18 +23,11 @@ RSpec.describe "merchant's invoice show page", type: :feature do
       @invoice_item_4 = @invoice_1.invoice_items.create(item_id: @item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
       @invoice_item_5 = @invoice_1.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
 
-      # transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
-      # transaction_2 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-      # transaction_3 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-      # transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
-      # transaction_4 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-
       visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
 
     end
 
     it "I see invoice's id, status and created_at date" do
-      save_and_open_page
       expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
       expect(page).to_not have_content("Invoice ID: #{@invoice_2.id}")
 

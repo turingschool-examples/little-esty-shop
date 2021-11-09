@@ -71,5 +71,12 @@ RSpec.describe Merchant do
         expect(@merchant.top_items_by_revenue[0].revenue).to eq (@item_1.unit_price * 6 / 100)
       end
     end
+
+    describe '#find_invoices' do
+      it 'returns all invoices associated with the merchants items' do
+        expect(@merchant.find_invoices.sort).to eq([@invoice_1, @invoice_2, @invoice_3, @invoice_4, @invoice_5])
+        expect(@merchant.find_invoices.sort).to_not include(@invoice_6)
+      end
+    end
   end
 end

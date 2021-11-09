@@ -1,1 +1,6 @@
-<h1>My Invoices</h1>
+<h1>This is MerchantInvoice Index Page</h1>
+
+<h2>All Invoices Associated with Merchant's Items:</h2>
+<% @merchant.find_invoices.each do |invoice| %>
+  <%= link_to "Invoice ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}", method: :get %><br>
+<% end %>
