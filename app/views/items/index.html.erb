@@ -3,3 +3,5 @@
 <% @items.each do |item| %>
   <p><%= item.name %></p>
 <% end %>
+<br>
+<%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
