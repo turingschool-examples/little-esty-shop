@@ -3,3 +3,8 @@
 <p>Created at: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
 
 <p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"%><p>
+
+<p>Item Name: <%= @invoice.items.first.name %>
+<p>Item Price: <%= @invoice.invoice_items.first.unit_price %>
+<p>Item Quantity: <%= @invoice.invoice_items.first.quantity %>
+<p>Invoice Status: <%= @invoice.invoice_items.first.status %>
