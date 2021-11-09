@@ -93,7 +93,7 @@ RSpec.describe "admin merchants index" do
   it 'shows merchant best day' do
     within("#top-five-merchants") do
       within("#merchant-#{@merchant1.id}") do
-        expect(page).to have_content("Top selling date for #{@merchant1.name} was #{Merchant.merchant_best_day}.")
+        expect(page).to have_content("Top selling date for #{@merchant1.name} was #{@merchant1.merchant_best_day}.")
       end
     end
   end
