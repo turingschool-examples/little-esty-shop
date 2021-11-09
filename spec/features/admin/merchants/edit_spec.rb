@@ -11,7 +11,7 @@ RSpec.describe "merchant admin edit page" do
     expect(page).to have_content "#{@merchant.name}"
 
     fill_in 'Name', with: "Goldman Sachs"
-
+    save_and_open_page
     click_button "Submit"
     
     expect(current_path).to eq("/admin/merchants/#{@merchant.id}")

@@ -15,16 +15,16 @@ class Admin::MerchantsController < ApplicationController
      merchant = Merchant.find(params[:id])
 
      if params[:enable]
-       merchant.update!(status: 1)
+       merchant.update(status: 1)
        redirect_to "/admin/merchants"
      elsif params[:disable]
-       merchant.update!(status: 0)
+       merchant.update(status: 0)
        redirect_to "/admin/merchants"
 
      else
-       if merchant.update!(merchant_params)
+       if merchant.update(merchant_params)
          flash[:alert] = "Information has been successfully updated"
-         redirect_to "/admin/merchants/"
+         redirect_to "/admin/merchants/#{merchant.id}"
        else
          flash[:alert] = "Failed to update merchant"
          redirect_to "admin/merchants/edit"
@@ -32,4 +32,8 @@ class Admin::MerchantsController < ApplicationController
      end
    end
 
+private
+   def merchant_params
+    params.require(:merchant).permit(:name)
+   end
 end
