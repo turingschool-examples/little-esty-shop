@@ -20,6 +20,14 @@
 
   <%= repo_name %>
 
+  <%response = Faraday.get('https://api.github.com/repos/jacobyarborough/little-esty-shop/contributors')
+  body = response.body
+  parsed = JSON.parse(body, symbolize_names: true)%>
+    <% parsed.each do |contributor|%>
+      <%= contributor[:login] %>
+    <% end %>
+
+
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
