@@ -1,5 +1,5 @@
 require 'rails_helper'
-FactoryBot.find_definitions
+# FactoryBot.find_definitions
 
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
@@ -75,7 +75,8 @@ RSpec.describe Merchant, type: :model do
 
       expect(@merchant.shippable_items.length).to eq(3)
       expect(@merchant.shippable_items).to eq([@item1, @item2, @item3])
-      expect(@merchant.shippable_items.first.invoice_created_at).to be < @merchant.shippable_items.last.invoice_created_at
+      expect(@merchant.shippable_items.first.created_at).to be < @merchant.shippable_items.last.created_at
+      # above method adjusted per shippable items changes in merchant class
     end
   end
 
