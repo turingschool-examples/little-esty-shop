@@ -16,24 +16,10 @@ RSpec.describe 'admin dashboard show page' do
     invoice5 = create(:invoice, customer: @customer5)
     invoice6 = create(:invoice, customer: @customer6)
 
-    create(:transaction, result: 'success', invoice: invoice1)
-    create(:transaction, result: 'success', invoice: invoice1)
-    create(:transaction, result: 'success', invoice: invoice1)
-    create(:transaction, result: 'success', invoice: invoice1)
-    create(:transaction, result: 'success', invoice: invoice1)
-
-    create(:transaction, result: 'success', invoice: invoice2)
-    create(:transaction, result: 'success', invoice: invoice2)
-    create(:transaction, result: 'success', invoice: invoice2)
-    create(:transaction, result: 'success', invoice: invoice2)
-
-    create(:transaction, result: 'success', invoice: invoice3)
-    create(:transaction, result: 'success', invoice: invoice3)
-    create(:transaction, result: 'success', invoice: invoice3)
-
-    create(:transaction, result: 'success', invoice: invoice4)
-    create(:transaction, result: 'success', invoice: invoice4)
-
+    create_list(:transaction, 5, result: 'success', invoice: invoice1)
+    create_list(:transaction, 4, result: 'success', invoice: invoice2)
+    create_list(:transaction, 3, result: 'success', invoice: invoice3)
+    create_list(:transaction, 2, result: 'success', invoice: invoice4)
     create(:transaction, result: 'success', invoice: invoice5)
 
     visit "/admin/"
