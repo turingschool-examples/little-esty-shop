@@ -15,6 +15,7 @@ RSpec.describe "merchant admin edit page" do
     click_button "Submit"
     
     expect(current_path).to eq("/admin/merchants/#{@merchant.id}")
+    expect(page).to have_content "Information has been successfully updated"
 
     expect(page).to have_content "Goldman Sachs"
     expect(page).not_to have_content "Jade Rabbit"
