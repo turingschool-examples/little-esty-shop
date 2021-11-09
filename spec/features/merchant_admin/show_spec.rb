@@ -18,9 +18,3 @@ RSpec.describe "Merchant Admin Show" do
     expect(page).to have_content(merchant2.name)
   end
 end
-
-
-#     As an admin,
-# When I click on the name of a merchant from the admin merchants index page,
-# Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)
-# And I see the name of that merchant
