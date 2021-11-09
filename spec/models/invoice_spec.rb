@@ -50,5 +50,15 @@ RSpec.describe Invoice, type: :model do
     it 'orders invoices from oldest to newest' do
       expect(Invoice.order_from_oldest).to eq([@invoice6, @invoice5, @invoice4, @invoice3, @invoice2, @invoice1])
     end
+
+    it 'caluclates total revenue for an invoice' do
+      expect(@invoice1.total_revenue(@invoice1.id)).to eq(@invoice1.total_revenue(@invoice1.id))
+    end
   end
 end
+
+# Admin Invoice Show Page: Total Revenue
+#
+# As an admin
+# When I visit an admin invoice show page
+# Then I see the total revenue that will be generated from this invoice

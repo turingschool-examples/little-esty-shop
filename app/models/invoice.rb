@@ -11,4 +11,10 @@ class Invoice < ApplicationRecord
   def self.order_from_oldest
     order(created_at: :desc)
   end
+
+  def total_revenue(invoice_id)
+    invoice_items.joins(:invoice)
+                 .where(invoice_items: {invoice_id: invoice_id})
+                 .sum("invoice_items.unit_price * invoice_items.quantity")
+  end
 end
