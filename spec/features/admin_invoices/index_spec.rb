@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe 'the admin invoice index' do
   describe 'as an admin' do
     before :each do
-      customer = Customer.create(first_name: 'Taylor', last_name: 'Swift')
-      @invoice_1 = customer.invoices.create(status: 'in progress')
-      @invoice_2 = customer.invoices.create(status: 'cancelled')
-      @invoice_3 = customer.invoices.create(status: 'completed')
+      @customer = Customer.create(first_name: 'Taylor', last_name: 'Swift')
+      @invoice_1 = @customer.invoices.create(status: 'in progress')
+      @invoice_2 = @customer.invoices.create(status: 'cancelled')
+      @invoice_3 = @customer.invoices.create(status: 'completed')
     end
 
     it 'I see a list of all Invoice ids in the system' do
