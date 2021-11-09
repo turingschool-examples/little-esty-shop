@@ -22,12 +22,12 @@ class Admin::MerchantsController < ApplicationController
        redirect_to "/admin/merchants"
 
      else
-       if merchant.update(merchant_params)
+       if merchant_params[:name] != merchant.name && merchant.update(merchant_params)
          flash[:alert] = "Information has been successfully updated"
          redirect_to "/admin/merchants/#{merchant.id}"
        else
          flash[:alert] = "Failed to update merchant"
-         redirect_to "admin/merchants/edit"
+         redirect_to "/admin/merchants/#{merchant.id}/edit"
        end
      end
    end
