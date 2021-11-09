@@ -10,4 +10,13 @@ class Item < ApplicationRecord
   def self.item_status(status)
     where(status: status)
   end
+
+  def item_best_day
+    invoices.select('invoices.created_at')
+            .group('invoices.created_at')
+            .order('created_at desc')
+            .first
+            .created_at
+            .to_date
+  end
 end
