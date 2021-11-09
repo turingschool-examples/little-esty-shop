@@ -22,4 +22,4 @@ Customer: <%= @invoice.customer.full_name %><br>
 <% end %><br><br>
 
 <h3>Total Merchant Revenue for this Invoice</h3>
-  <%= number_to_currency(@invoice.total_revenue(@merchant.id).fdiv(100)) %>
+  <%= number_to_currency(@invoice.total_invoice_revenue(@merchant.id).fdiv(100)) %>
