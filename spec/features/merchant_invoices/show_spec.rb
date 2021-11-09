@@ -21,7 +21,7 @@ RSpec.describe 'show page' do
   end
 
   it 'shows created_at information as day of week, month day #, year' do
-    expect(page).to have_content(DateTime.now.strftime("%A, %B %d, %Y"))
+    expect(page).to have_content(DateTime.now.new_offset(0).strftime("%A, %B %d, %Y"))
   end
 
   it 'shows the first and last name of the customer related to the invoice' do

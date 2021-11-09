@@ -51,7 +51,7 @@ RSpec.describe 'merchant dashboard show page' do
 
     expect(page).to have_content("Items Ready to Ship")
     expect(page).to have_content(@merchant.shippable_items.first.name)
-    expect(page).to have_content(DateTime.now.strftime("%A, %B %d, %Y"))
+    expect(page).to have_content(DateTime.now.new_offset(0).strftime("%A, %B %d, %Y"))
     expect(@merchant.shippable_items.first.name).to appear_before(@merchant.shippable_items.last.name)
   end
 end
