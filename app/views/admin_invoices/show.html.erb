@@ -2,9 +2,9 @@
 
 Invoice status is: <%= @invoice.status %>
 
-<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :get do |f| %>
-  Change invoice status: <%= f.select(:status, options_for_select([['in progress', 'in progress'], ['completed', 'completed'], ['cancelled', 'cancelled']])) %>
-  <%= button_to 'Update Invoice Status', "/admin/invoices/#{@invoice.id}", method: :patch %>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |f| %>
+  Change invoice status: <%= f.select(:status, options_for_select([['in progress', 'in progress'], ['completed', 'completed'], ['cancelled', 'cancelled']], :selected => @invoice.status)) %>
+  <%= f.submit 'Update Invoice Status' %>
 <% end %>
 
 

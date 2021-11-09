@@ -86,7 +86,9 @@ RSpec.describe 'Admin Index' do
 
     #need to figure out how to test order by date
     # expect(invoice1.created_at.strftime("%A, %B %-d, %Y")).to appear_before(invoice3.created_at.strftime("%A, %B %-d, %Y"))
-    # expect("Invoice ##{invoice1.id}").to appear_before("Invoice ##{invoice3.id}")
+    expect("Invoice ##{invoice1.id}").to appear_before("Invoice ##{invoice3.id}", only_text: true)
+    
+    # expect(invoice1.id).to appear_before(invoice3.id)
 
     click_link "#{invoice3.id}"
 
