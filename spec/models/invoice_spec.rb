@@ -61,11 +61,12 @@ RSpec.describe Invoice, type: :model do
 
     describe "#total_revenue" do
       it 'calcs total revenue from an invoice for a given merchant' do
-        expect(@invoice1.total_revenue(@merchant.id)).to eq(500)
+        expect(@invoice1.total_item_revenue_by_merchant(@merchant.id)).to eq(500)
       end
 
+      #This test isn't really testing anything external to it.
       it 'caluclates total revenue for an invoice' do
-        expect(@invoice1.total_revenue(@invoice1.id)).to eq(@invoice1.total_revenue(@invoice1.id))
+        expect(@invoice1.total_invoice_revenue(@invoice1.id)).to eq(@invoice1.total_invoice_revenue(@invoice1.id))
       end
     end
   end
