@@ -6,7 +6,8 @@ RSpec.describe 'Show page', type: :feature do
     @merchant_2 = Merchant.create!(name: 'Jewelry')
 
     @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant_1.id)
-    @item_2 = Item.create!(name: "Bracelet", description: "Wrist bling", unit_price: 200, merchant_id: @merchant_2.id)
+    @item_2 = Item.create!(name: "Bracelet", description: "Wrist bling", unit_price: 200, merchant_id: @merchant_1.id)
+    @item_3 = Item.create!(name: "Bracelet 2", description: "Wrist bling", unit_price: 200, merchant_id: @merchant_2.id)
 
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
     @customer_2 = Customer.create!(first_name: 'Joy', last_name: 'Smith')
@@ -15,7 +16,8 @@ RSpec.describe 'Show page', type: :feature do
     @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
 
     @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
-    @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2, created_at: "2012-03-28 14:54:09")
+    @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
+    @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 2, unit_price: 8, status: 2, created_at: "2012-03-28 14:54:09")
     visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
   end
 
@@ -24,7 +26,8 @@ RSpec.describe 'Show page', type: :feature do
 
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_1.status)
-      expect(page).to have_content("Created at: Monday, November 8, 2021")
+      expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %e, %Y")}")
+      #needs to fix time
     end
 
     it 'shows invoice customer details' do
@@ -33,12 +36,25 @@ RSpec.describe 'Show page', type: :feature do
     end
 
     it 'shows item information' do
+      
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@ii_1.unit_price)
       expect(page).to have_content(@ii_1.quantity)
       expect(page).to have_content(@ii_1.status)
+
+      expect(page).to have_content(@item_2.name)
+      expect(page).to have_content(@ii_2.unit_price)
+      expect(page).to have_content(@ii_2.quantity)
+      expect(page).to have_content(@ii_2.status)
       
-      expect(page).to_not have_content(@item_2.name)
+      expect(page).to_not have_content(@item_3.name)
+    end
+
+    it 'shows total revenue' do
+      expect(page).to have_content("Total Revenue: 100")
     end
   end
 end
+# As a merchant
+# When I visit my merchant invoice show page
+# Then I see the total revenue that will be generated from all of my items on the invoice

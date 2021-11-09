@@ -136,12 +136,12 @@ RSpec.describe 'Dashboard', type: :feature do
       it 'shows invoice created by date' do
         
         # expect(page).to have_content(@item_1.invoices.first.created_at.strftime("%A, %B %e, %Y"))
-        expect(page).to have_content("Sunday, November 7, 2021")
+        expect(page).to have_content("Tuesday, November 9, 2021")
       end
 
       it 'shows items in reverse order' do
-
-        expect(@invoice_2.id).to appear_before(@invoice_1.id)
+        
+        expect(@invoice_2.id).to appear_before(@invoice_1.id) #pass in raw HTML, if not try CSS
       end
     end
   end

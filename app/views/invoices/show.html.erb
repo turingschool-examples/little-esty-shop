@@ -4,7 +4,11 @@
 
 <p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"%><p>
 
-<p>Item Name: <%= @invoice.items.first.name %>
-<p>Item Price: <%= @invoice.invoice_items.first.unit_price %>
-<p>Item Quantity: <%= @invoice.invoice_items.first.quantity %>
-<p>Invoice Status: <%= @invoice.invoice_items.first.status %>
+<% @invoice.items.each do |item| %>
+  <p>Item Name: <%= item.name %>
+  <p>Item Price: <%= item.invoice_items.first.unit_price %>
+  <p>Item Quantity: <%= item.invoice_items.first.quantity %>
+  <p>Invoice Status: <%= item.invoice_items.first.status %>
+  <% end %>
+  
+  <p>Total Revenue: <%= @invoice.total_revenue %>
