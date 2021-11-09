@@ -1,0 +1,25 @@
+<h1>Invoice <%= @invoice.id %> (Merchant <%= @merchant.name %>)</h1>
+
+Status: <%= @invoice.status %><br>
+Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
+Customer: <%= @invoice.customer.full_name %><br>
+
+<h3>Items</h3>
+<% @invoice.items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <% if item.merchant == @merchant %>
+      Item name: <%= item.name %><br>
+        <% item.invoice_items.each do |inv_item| %>
+          Quantity sold: <%= inv_item.quantity %><br>
+          Selling price: <%= number_to_currency(inv_item.unit_price.fdiv(100)) %><br>
+          Status: <%= form_with model: [@merchant, inv_item], local: true do |f| %>
+            <%= f.select :status, %w[shipped packaged pending], selected: inv_item.status %>
+            <%= f.submit 'Update Item Status' %>
+          <% end %>
+        <% end %>
+    <% end %>
+  </div>
+<% end %><br><br>
+
+<h3>Total Merchant Revenue for this Invoice</h3>
+  <%= number_to_currency(@invoice.total_invoice_revenue(@merchant.id).fdiv(100)) %>

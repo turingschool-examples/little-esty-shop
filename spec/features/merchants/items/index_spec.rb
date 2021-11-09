@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "merchant's item index page" do
   before(:each) do
-    @merchant = create(:merchant)
-    @merchant2 = create(:merchant)
+    @merchant = create :merchant
+    @merchant2 = create :merchant
 
     @item1 = create :item, { merchant_id: @merchant.id }
     @item2 = create :item, { merchant_id: @merchant.id }
@@ -81,11 +81,17 @@ RSpec.describe "merchant's item index page" do
         expect(page).to have_link(@item1.name)
         expect(page).to have_content('revenue generated')
         expect(page).to have_content('Top selling date')
-        
+
         click_link(@item1.name, match: :first)
 
         expect(current_path).to eq(merchant_item_path(@merchant, @item1))
       end
     end
   end
+
+  it 'has a link to create a new item' do 
+    click_link "Create New Item"
+
+    expect(current_path).to eq(new_merchant_item_path(@merchant))
+  end 
 end

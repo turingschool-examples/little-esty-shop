@@ -17,4 +17,11 @@ RSpec.describe 'the new items form page' do
     expect(current_path).to eq(merchant_items_path(@merchant))
     expect(page).to have_content("Cool new item")
   end 
-end 
+
+  it 'will raise an error if invalid data is entered' do
+    click_button "Create Item"
+    
+    expect(page).to have_content("Please enter valid data")
+    expect(current_path).to eq(new_merchant_item_path(@merchant))
+  end
+end
