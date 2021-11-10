@@ -23,8 +23,11 @@
   <%response = Faraday.get('https://api.github.com/repos/jacobyarborough/little-esty-shop/contributors')
   body = response.body
   parsed = JSON.parse(body, symbolize_names: true)%>
+    <% instructor_names = %w(BrianZanti timomitchel scottalexandra jamisonordway) %>
     <% parsed.each do |contributor|%>
-      <%= contributor[:login] %>
+      <% if !instructor_names.include?(contributor[:login]) %>
+        <%= contributor[:login] %>
+      <% end %>
     <% end %>
 
 
