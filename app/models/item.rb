@@ -5,4 +5,12 @@ class Item < ApplicationRecord
   def price
     unit_price/100.0
   end
+
+  def change_status
+    if status == "able"
+      update(status: "unable")
+    else
+      update(status: "able")
+    end
+  end
 end

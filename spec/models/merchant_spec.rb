@@ -37,7 +37,9 @@ RSpec.describe Merchant do
       @invoice_item_2 = @invoice_2.invoice_items.create(item_id: @item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
       @invoice_item_3 = @invoice_3.invoice_items.create(item_id: @item_3.id, quantity: 1, unit_price: 400, status: 'shipped')
       @invoice_item_4 = @invoice_4.invoice_items.create(item_id: @item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
-      @invoice_item_5 = @invoice_5.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+      @invoice_item_5 = @invoice_5.invoice_items.create(item_id: @item_5.id, quantity: 2, unit_price: 600, status: 'shipped')
+      @invoice_item_6 = @invoice_6.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
+
 
       @transaction_1 = @invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
       @transaction_2 = @invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
@@ -69,6 +71,20 @@ RSpec.describe Merchant do
         expect(@merchant.top_items_by_revenue[0].item_id).to eq @item_1.id
         expect(@merchant.top_items_by_revenue[4].item_id).to eq @item_2.id
         expect(@merchant.top_items_by_revenue[0].revenue).to eq (@item_1.unit_price * 6 / 100)
+      end
+    end
+
+#item_5, invoice_5
+    describe '#top_date' do
+      it 'returns the invoice created_at date when the item made the most revenue' do
+        expect(@merchant.top_date(@item_5.id).date).to eq(@invoice_5.created_at)
+      end
+    end
+
+    describe '#find_invoices' do
+      it 'returns all invoices associated with the merchants items' do
+        expect(@merchant.find_invoices.sort).to eq([@invoice_1, @invoice_2, @invoice_3, @invoice_4, @invoice_5, @invoice_6])
+        expect(@merchant.find_invoices.sort).to_not include(@invoice_7)
       end
     end
   end
