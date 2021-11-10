@@ -61,3 +61,4 @@ class Merchant < ApplicationRecord
       .where(merchants: { id: id })
       .distinct
   end
+end
