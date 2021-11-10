@@ -25,4 +25,5 @@ class Merchant < ApplicationRecord
       Item.find(item_id)
     end.uniq
   end
+
 end

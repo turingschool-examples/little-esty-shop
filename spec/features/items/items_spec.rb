@@ -9,15 +9,22 @@ before(:each) do
       @item3 = @merchant2.items.create!(name: "Item 3", description: "Another other item", unit_price: 1240, status: 1)
     
       visit "/merchants/#{@merchant1.id}/items"
+end
+
+  describe 'merchant item index page' do
+    xit 'shows a merchants items' do
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item2.name)
+      expect(page).to_not have_content(@item3.name)
+
     end
 
-    describe 'merchant item index page' do
-      it 'shows a merchants items' do
-        expect(page).to have_content(@item1.name)
-        expect(page).to have_content(@item2.name)
-        expect(page).to_not have_content(@item3.name)
-      end
+    xit 'links to create items page' do
+      click_on 'New Item'
+
+      expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/new")
     end
+
 
   it 'lets you click on the disabled button' do 
     within("#item-#{@item1.id}") do 
@@ -36,4 +43,5 @@ before(:each) do
     expect(@item2.reload.status).to eq("enabled")
     expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
   end 
+end
 end
