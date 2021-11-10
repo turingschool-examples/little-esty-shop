@@ -74,5 +74,6 @@ RSpec.describe 'Admin Merchant Index page' do
 
     expect(page).to have_content('Top 5 Merchants:')
     expect('Kevin - 6000').to appear_before('Bob - 20')
+    expect(page).to_not have_content('Zach - 10')
   end
 end

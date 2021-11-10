@@ -3,7 +3,7 @@
   <div id="id-<%= merchant.id %>">
     Name: <%= merchant.name %><br>
     Status: <%= merchant.status %>
-    <%= button_to 'Enable/Disable', "/admin/merchants", params: {change_status: true, merchant_id: merchant.id}, method: :patch %>
+    <%= button_to 'Enable/Disable', "/admin/merchants/#{merchant.id}", params: {change_status: true, merchant_id: merchant.id}, method: :patch %>
   </div>
 <% end %>
 <%= link_to 'Create Merchant', admin_merchants_new_path %>

@@ -34,6 +34,7 @@ class Merchant < ApplicationRecord
       .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
       .group('merchants.id')
       .order('revenue DESC')
+      .limit(5)
   end
   #
   # def invoice_for_item_ready_to_ship
