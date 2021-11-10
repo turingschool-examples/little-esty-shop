@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
 
   validates_presence_of :customer_id
   validates_presence_of :status
+
+  def total_revenue
+    invoice_items.sum("quantity * unit_price")
+  end
 end
