@@ -3,3 +3,9 @@
 <%= link_to "Admin Merchants Index", "/admin/merchants" %>
 <br>
 <%= link_to "Admin Invoices Index", "/admin/invoices" %>
+
+<h3>Incomplete Invoices</h3>
+  <% @invoice_items.incomplete_invoices.each do |invoice| %>
+    <p><%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %></p>
+  <% end %>
+  
