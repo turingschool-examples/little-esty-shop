@@ -55,6 +55,3 @@ RSpec.describe 'Show page', type: :feature do
     end
   end
 end
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see the total revenue that will be generated from all of my items on the invoice
