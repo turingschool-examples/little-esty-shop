@@ -4,11 +4,13 @@
   <h3><%= Item.find_item(invoice_item.item_id).name %><br></h3>
   Price: <%= Item.find_item(invoice_item.item_id).unit_price %><br>
   Quantity: <%= invoice_item.quantity %><br>
-  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
-    <%= f.label :status, "Status" %>
-    <%= f.select :status, ["Packaged", "Pending", "Shipped"], selected:invoice_item.status %><br>
-    <%= f.submit "Update Item Status" %>
-  <% end %>
+  <div id="id-<%=invoice_item.id%>">
+    <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+      <%= f.label :status, "Status:" %>
+      <%= f.select :status, ["Packaged", "Pending", "Shipped"], selected:invoice_item.status %><br>
+      <%= f.button "Update Item Status", type: "submit", name: "invoice_item_id", value: "#{invoice_item.id}" %>
+    <% end %>
+  </div>
 <% end %>
 
 <h3>Total Revenue: <%= @invoice.total_revenue %></h3>

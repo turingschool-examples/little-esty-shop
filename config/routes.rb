@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
 
 
+
+  patch "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#update"
   get "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#show"
+  get "/merchants/:merchant_id/invoices/:invoice_id", to: "merhcant_invoices#edit"
 
   resources :admin, only: [:index]
 
