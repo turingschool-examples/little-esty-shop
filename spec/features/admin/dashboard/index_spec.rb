@@ -85,5 +85,11 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_3.id)
     end
+
+    it 'has links to the incomplete invoices' do
+      click_link "#{@invoice_1.id}"
+
+      expect(page).to have_content(@invoice_1.id)
+    end
   end
 end
