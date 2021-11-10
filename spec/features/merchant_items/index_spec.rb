@@ -72,9 +72,9 @@ RSpec.describe 'the merchants items index' do
         item_5 = merchant.items.create(name: 'pear', description: 'refreshing treat', unit_price: 600)
 
         customer_1 = Customer.create(first_name: 'George', last_name: 'Washington')
-        invoice_1 = customer_1.invoices.create(status: 'Completed')
-        invoice_2 = customer_1.invoices.create(status: 'Completed')
-        invoice_3 = customer_1.invoices.create(status: 'Completed')
+        invoice_1 = customer_1.invoices.create(status: 2)
+        invoice_2 = customer_1.invoices.create(status: 2)
+        invoice_3 = customer_1.invoices.create(status: 2)
         invoice_item_1 = invoice_1.invoice_items.create(item_id: item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
         invoice_item_2 = invoice_1.invoice_items.create(item_id: item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
         invoice_item_3 = invoice_1.invoice_items.create(item_id: item_3.id, quantity: 1, unit_price: 400, status: 'shipped')
