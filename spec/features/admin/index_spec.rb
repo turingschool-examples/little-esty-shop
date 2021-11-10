@@ -84,12 +84,8 @@ RSpec.describe 'Admin Index' do
       expect(page).to have_content("Invoice ##{invoice1.id} - #{invoice1.created_at.strftime("%A, %B %-d, %Y")}")
     end
 
-    #need to figure out how to test order by date
-    # expect(invoice1.created_at.strftime("%A, %B %-d, %Y")).to appear_before(invoice3.created_at.strftime("%A, %B %-d, %Y"))
     expect("Invoice ##{invoice1.id}").to appear_before("Invoice ##{invoice3.id}", only_text: true)
     
-    # expect(invoice1.id).to appear_before(invoice3.id)
-
     click_link "#{invoice3.id}"
 
     expect(current_path).to eq("/admin/invoices/#{invoice3.id}")
