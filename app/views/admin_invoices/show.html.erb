@@ -1,12 +1,22 @@
 <h1>Invoice <%= @invoice.id %></h1>
 
-Invoice status is: <%= @invoice.status %>
+<div id='customer-info'>
+<h2>Customer:</h2>
+  <p>
+    <%= Customer.find(@invoice.customer_id).first_name %>
+    <%= Customer.find(@invoice.customer_id).last_name %>
+  </p>
+</div>
+
+<div id='invoice-info'>
+Status: <%= @invoice.status %><br>
+Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %>
+</div>
 
 <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |f| %>
   Change invoice status: <%= f.select(:status, options_for_select([['in progress', 'in progress'], ['completed', 'completed'], ['cancelled', 'cancelled']], :selected => @invoice.status)) %>
   <%= f.submit 'Update Invoice Status' %>
 <% end %>
-
 
 <h3>Items:</h3>
 <% @invoice.invoice_items.each do |invoice_item| %>
