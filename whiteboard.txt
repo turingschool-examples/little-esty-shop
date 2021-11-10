@@ -1,0 +1,29 @@
+<%response = Faraday.get('https://api.github.com/repos/jacobyarborough/little-esty-shop')
+body = response.body
+parsed = JSON.parse(body, symbolize_names: true)
+repo_name = parsed[:name]%>
+
+<%= repo_name %><br>
+
+
+  <%response = Faraday.get('https://api.github.com/repos/jacobyarborough/little-esty-shop/stats/contributors')
+  body = response.body
+  parsed = JSON.parse(body, symbolize_names: true)%>
+    <% instructor_names = %w(BrianZanti timomitchel scottalexandra jamisonordway) %>
+    <% parsed.each do |contributor|%>
+      <% if !instructor_names.include?(contributor[:author][:login]) %>
+        <%= contributor[:author][:login] %>
+        <%= contributor[:total] %><br>
+      <% end %>
+    <% end %>
+
+  <%response = Faraday.get('https://api.github.com/repos/jacobyarborough/little-esty-shop/pulls?state=closed&per_page=100')
+  body = response.body
+  parsed = JSON.parse(body, symbolize_names: true)%>
+  <% instructor_names = %w(BrianZanti timomitchel scottalexandra jamisonordway) %>
+  <% closed = 0 %>
+  <% parsed.each do |pull|%>
+    <% closed += 1 if !instructor_names.include?(pull[:user][:login]) %>
+  <% end %>
+
+  <%= closed %>
