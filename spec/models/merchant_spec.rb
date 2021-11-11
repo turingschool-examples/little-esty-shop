@@ -4,7 +4,7 @@ RSpec.describe Merchant, type: :model do
   before do
       @merchant1 = Merchant.create!(name: 'Hair Care')
       @merchant2 = Merchant.create!(name: 'Jewelry')
-      @merchant3 = Merchant.create!(name: 'Office Space')
+      @merchant3 = Merchant.create!(name: 'Office Space', status: 1)
       @merchant4 = Merchant.create!(name: 'The Office')
       @merchant5 = Merchant.create!(name: 'Office Improvement')
       @merchant6 = Merchant.create!(name: 'Pens & Stuff')
@@ -91,4 +91,13 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant1.top_five_items_by_revenue).to eq([@item_1, @item_4, @item_2, @item_3, @item_8])
     end
   end
+
+  describe 'disable/enable' do 
+    it ".disabled_merchants" do
+      expect(Merchant.disabled_merchants).to eq([@merchant3])
+    end
+    it ".enabled_merchants" do
+      expect(Merchant.enabled_merchants).to eq([@merchant1, @merchant2, @merchant4, @merchant5, @merchant6])
+    end
+  end 
 end

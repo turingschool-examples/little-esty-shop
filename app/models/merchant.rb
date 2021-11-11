@@ -6,6 +6,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates_presence_of :name
+  enum status: {enabled: 0, disabled: 1}
 
   def top_customers
     temp = Transaction.joins(invoice: :customer)
@@ -33,5 +34,13 @@ class Merchant < ApplicationRecord
     .group(:id)
     .order(total_revenue: :desc)
     .limit(5)
+  end
+  
+  def self.enabled_merchants
+    where(status: 0)    
+  end
+
+  def self.disabled_merchants
+    where(status: 1)    
   end
 end

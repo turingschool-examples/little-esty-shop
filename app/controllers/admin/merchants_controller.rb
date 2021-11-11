@@ -12,10 +12,14 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
+    @merchant = Merchant.find(params[:id])
+    @merchant.update(merchant_params)
+    @merchant.update(status: params[:disable].to_i) if params[:disable]
+    @merchant.update(status: params[:enable].to_i) if params[:enable]
+
     flash[:success] = 'Merchant updated'
-    redirect_to admin_merchant_path(merchant)
+    redirection 
+    # redirect_to admin_merchant_path(@merchant)
   end
 
   def new
@@ -35,6 +39,14 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.require(:merchant).permit(:name)
+    params.permit(:name)
+  end
+
+  def redirection
+    if params[:disable] || params[:enable]
+      redirect_to admin_merchants_path
+      else
+      redirect_to admin_merchant_path(@merchant)
+    end
   end
 end
