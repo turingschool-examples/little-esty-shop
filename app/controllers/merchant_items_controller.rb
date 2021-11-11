@@ -6,13 +6,19 @@ class MerchantItemsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
+    merchant = Merchant.find(params[:merchant_id])
+    item = merchant.items.find(params[:item_id])
 
     if params[:change_item_status]
-      @item = @merchant.items.find(params[:item_id_for_change])
-      @item.change_status
+      item.change_status
+      redirect_to "/merchants/#{merchant.id}/items"
+    else
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
+    end
 
-      redirect_to "/merchants/#{@merchant.id}/items"
+    if item.save
+      flash[:success] = 'Item updated successfully :)'
     end
   end
 
@@ -30,6 +36,11 @@ class MerchantItemsController < ApplicationController
     merchant = Merchant.find(params[:merchant_id])
     item = merchant.items.create(item_params)
     redirect_to "/merchants/#{params[:merchant_id]}/items"
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:item_id])
   end
 
 
