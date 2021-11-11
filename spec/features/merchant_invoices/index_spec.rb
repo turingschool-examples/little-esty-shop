@@ -14,8 +14,8 @@ RSpec.describe "merchant's invoices index", type: :feature do
 
       @customer = Customer.create(first_name: 'George', last_name: 'Washington')
 
-      @invoice_1 = @customer.invoices.create(status: 'Completed')
-      @invoice_2 = @customer.invoices.create(status: 'Completed')
+      @invoice_1 = @customer.invoices.create(status: 2)
+      @invoice_2 = @customer.invoices.create(status: 2)
 
       @invoice_item_1 = @invoice_1.invoice_items.create(item_id: @item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
       @invoice_item_2 = @invoice_1.invoice_items.create(item_id: @item_2.id, quantity: 1, unit_price: 100, status: 'shipped')

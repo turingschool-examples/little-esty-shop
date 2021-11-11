@@ -13,6 +13,7 @@
 # it.
 require 'simplecov'
 SimpleCov.start
+
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
