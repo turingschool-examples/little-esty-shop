@@ -3,7 +3,7 @@
 <u><h3>Enabled Items:</h3></u>
 <% @merchant.items.enabled_items.each do |item| %>
 <section id="item-<%= item.id %>">
-  <p><%= link_to item.name, merchant_item_path(@merchant, item) %>: <%= item.status.capitalize %> </p>
+  <p><%= link_to item.name, merchant_item_path(@merchant, item) %>: <%= item.status %> </p>
   
   <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_id: item.id, disable: 1} %>
 
@@ -13,7 +13,7 @@
 <u><h3>Disabled Items:</h3></u>
 <% @merchant.items.disabled_items.each do |item| %>
 <section id="item-<%= item.id %>">
-  <p><%= link_to item.name, merchant_item_path(@merchant, item)%>: <%= item.status.capitalize %></p>
+  <p><%= link_to item.name, merchant_item_path(@merchant, item)%>: <%= item.status %></p>
 
   <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_id: item.id, enable: 0}  %>
   </section>

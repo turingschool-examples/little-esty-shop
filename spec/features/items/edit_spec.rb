@@ -14,7 +14,6 @@ RSpec.describe "Merchant Items Edit Page" do
       click_button 'Submit'
       expect(current_path).to eq(merchant_item_path(@merchant, @item))
       expect(page).to have_content('first item')
-      # expect(page).to have_content('Successfully Updated')
     end
   end
 end

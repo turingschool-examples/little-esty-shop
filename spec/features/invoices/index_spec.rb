@@ -66,7 +66,7 @@ RSpec.describe 'invoice index page', type: :feature do
       @transaction_7 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_7.id)
       @transaction_7 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_8.id)
       @transaction_8 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_9.id)
-      visit "/merchants/#{@merchant_1.id}/invoices"
+      visit merchant_invoices_path(@merchant_1)
     end
 
     it 'shows invoices ids for the merchant' do

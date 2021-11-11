@@ -5,7 +5,7 @@ RSpec.describe 'Admin merchants show page' do
     it 'has the merchants name' do
       merchant = Merchant.create(name: 'Test Merchant')
 
-      visit "/admin/merchants/#{merchant.id}"
+      visit admin_merchant_path(merchant)
 
       expect(page).to have_content(merchant.name)
     end
@@ -13,7 +13,7 @@ RSpec.describe 'Admin merchants show page' do
     it 'links to update page' do
       merchant = Merchant.create(name: 'Test Merchant')
 
-      visit "/admin/merchants/#{merchant.id}"
+      visit admin_merchant_path(merchant)
 
       click_link "Update #{merchant.name}"
 

@@ -6,7 +6,7 @@ RSpec.describe 'admin invoices index' do
       @customer = Customer.create!(first_name: 'John', last_name: 'Wick')
       @invoice = Invoice.create!(customer_id: @customer.id, status: 0)
 
-      visit "/admin/invoices"
+      visit admin_invoices_path
     end
 
     it 'has a header' do
@@ -20,7 +20,7 @@ RSpec.describe 'admin invoices index' do
     it 'links to the invoice show page' do
       click_on "#{@invoice.id}"
 
-      expect(page).to have_current_path("/admin/invoices/#{@invoice.id}")
+      expect(page).to have_current_path(admin_invoice_path(@invoice))
     end
   end
 end

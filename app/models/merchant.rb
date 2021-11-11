@@ -19,12 +19,10 @@ class Merchant < ApplicationRecord
   end
 
   def not_shipped
-    item_ids = invoice_items.where.not(status: "2")
+    item_ids = invoice_items.where.not(status: 2)
                             .order(:created_at)
                             .pluck(:item_id)
-    item_ids.map do |item_id|
-      Item.find(item_id)
-    end.uniq
+    Item.find(item_ids)
   end
 
   def top_five_items_by_revenue
@@ -37,10 +35,10 @@ class Merchant < ApplicationRecord
   end
   
   def self.enabled_merchants
-    where(status: 0)    
+    where(status: 0)
   end
 
   def self.disabled_merchants
-    where(status: 1)    
+    where(status: 1)
   end
 end

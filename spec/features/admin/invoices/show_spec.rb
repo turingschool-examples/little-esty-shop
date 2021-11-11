@@ -9,7 +9,7 @@ RSpec.describe 'Admin invoice show page' do
       @item = Item.create!(name: 'Test Item', description: 'Just a thing', unit_price: 1300, merchant_id: @merchant.id)
       @invoice_item = InvoiceItem.create!(item_id: @item.id, invoice_id: @invoice.id, quantity: 50, unit_price: 2000)
 
-      visit "/admin/invoices/#{@invoice.id}"
+      visit admin_invoice_path(@invoice)
     end
 
     it 'shows the invoice header' do

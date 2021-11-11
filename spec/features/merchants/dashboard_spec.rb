@@ -76,12 +76,12 @@ RSpec.describe 'Dashboard', type: :feature do
     it 'links to merchant items index' do
       click_on "Items Index"
 
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
     end
 
     it 'links to merchant invoices index' do
       click_on "Invoices Index"
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
+      expect(current_path).to eq(merchant_invoices_path(@merchant_1))
     end
 
     describe 'favorite customers' do
@@ -94,10 +94,6 @@ RSpec.describe 'Dashboard', type: :feature do
         expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
         expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
         expect(page).to_not have_content(@customer_5.first_name)
-      end
-
-      it 'shows number of successful transactions next to each customer' do
-
       end
     end
 
