@@ -11,7 +11,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of :name }
     it { should validate_presence_of :description }
     it { should validate_presence_of :unit_price }
-  end 
+  end
 
   before(:each) do
       @merchant1 = Merchant.create!(name: 'Willms and Sons')
@@ -21,8 +21,7 @@ RSpec.describe Item, type: :model do
       @item3 = @merchant2.items.create!(name: "Item 3", description: "Another other item", unit_price: 1240, status:1)
     end
 
-    it ".disabled_items" do 
-      
-      expect(Item.disabled_items).to eq([@item2])  
-    end 
+    it ".disabled_items" do
+      expect(Item.disabled_items).to eq([@item2, @item3])
+    end
 end

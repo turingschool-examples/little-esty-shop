@@ -83,7 +83,7 @@ RSpec.describe 'Dashboard', type: :feature do
       click_on "Invoices Index"
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     end
-    
+
     describe 'favorite customers' do
       it 'names  top 5 customers' do
 
@@ -127,20 +127,17 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'has a link to each invoice' do
-          click_link "#{@item_1.invoices.first.id}"
+        click_link "#{@item_1.invoices.first.id}"
 
         expect(page).to have_content(@item_1.invoices.first.id)
       end
 
       it 'shows invoice created by date' do
-        
-        # expect(page).to have_content(@item_1.invoices.first.created_at.strftime("%A, %B %e, %Y"))
-        expect(page).to have_content("Tuesday, November 9, 2021")
+        expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %e, %Y")}")
       end
 
       it 'shows items in reverse order' do
-        
-        expect(@invoice_2.id).to appear_before(@invoice_1.id) #pass in raw HTML, if not try CSS
+        expect(@invoice_1.id).to appear_before(@invoice_2.id) #pass in raw HTML, if not try CSS
       end
     end
   end

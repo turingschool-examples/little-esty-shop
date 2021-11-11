@@ -54,10 +54,7 @@ RSpec.describe InvoiceItem, type: :model do
     end
 
     it 'returns incomplete invoices' do
-      expect(InvoiceItem.incomplete_invoices).to eq([@invoice_1, @invoice_3])
+      expect(InvoiceItem.incomplete_invoices).to include(@invoice_3, @invoice_1)
     end
-
-
   end
 end
-
