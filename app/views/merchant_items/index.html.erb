@@ -1,1 +1,43 @@
 <h1>My Items</h1>
+
+<% @merchant.items.each do |item| %>
+  <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %><br><br>
+  <%= "Status: #{item.status.capitalize}   " %><br><br>
+  <%= button_to "Enable/Disable", "/merchants/#{@merchant.id}/items", params: {change_item_status: true, item_id_for_change: item.id}, method: :patch %>
+
+<% end %>
+
+<br>
+<br>
+
+<div id="enabled-items">
+  <h2>Enabled Items:</h2>
+  <% @enabled_items.each do |item| %>
+    <%= item.name %><br>
+  <% end %>
+</div>
+
+
+<div id="disabled-items">
+  <h2>Disabled Items:</h2>
+  <% @disabled_items.each do |item| %>
+    <%= item.name %><br>
+  <% end %>
+</div>
+
+<div id='new-item'>
+<%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %>
+</div>
+
+<div id='top-items'>
+<h2>Top Items</h2>
+<ol>
+<% @merchant.top_items_by_revenue.each do |item| %>
+  <li>
+  <%= link_to item.item_name, "/merchants/#{@merchant.id}/items/#{item.item_id}" %>
+  - <%= number_to_currency(item.revenue) %> in sales
+  - Top selling date for <%= item.item_name %> is <%= @merchant.top_date(item.item_id).date.strftime("%A, %B %-d, %Y") %>
+  </li>
+<% end %>
+</ol>
+</div>

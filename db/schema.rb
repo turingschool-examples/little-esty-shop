@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_174529) do
+ActiveRecord::Schema.define(version: 2021_11_08_161256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_174529) do
     t.bigint "invoice_id"
     t.integer "quantity"
     t.integer "unit_price"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_174529) do
 
   create_table "invoices", force: :cascade do |t|
     t.bigint "customer_id"
-    t.string "status"
+    t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_174529) do
     t.integer "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "able"
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_174529) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "Disabled"
   end
 
   create_table "transactions", force: :cascade do |t|

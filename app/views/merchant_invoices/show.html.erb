@@ -14,3 +14,12 @@
 <% end %>
 
 <h3>Total Revenue: <%= @invoice.total_revenue %></h3>
+
+<h1>This is MerchantInvoice Show Page</h1>
+
+<h3>Invoice ID: <%= @invoice.id %> </h3><br>
+<h3>Invoice Status: <%= @invoice.status %> </h3><br>
+<h3>Created At: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %> </h3><br><br>
+
+<h3>Customer: <%= @customer.first_name %> <%= @customer.last_name %></h3>
+

@@ -25,8 +25,17 @@ RSpec.describe Customer, type: :model do
       transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
       transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'failed')
       transaction8 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 123, credit_card_expiration_date: nil, result: 'success')
-      
+
       expect(Customer.top_customers).to eq([["#{customer1.first_name} #{customer1.last_name}", 4], ["#{customer2.first_name} #{customer2.last_name}", 2], ["#{customer3.first_name} #{customer3.last_name}", 1]])
+    end
+  end
+
+  describe '::find_by_invoice_id' do
+    it 'should return the customer associated with the invoice' do
+      customer1 = Customer.create!(first_name: "Bob", last_name: "Dylan")
+      invoice1 = Invoice.create!(customer_id: customer1.id, status: 'completed')
+
+      expect(Customer.find_by_invoice_id(invoice1.id)).to eq(customer1)
     end
   end
 end
