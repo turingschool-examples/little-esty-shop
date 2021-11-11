@@ -71,9 +71,20 @@ RSpec.describe 'Admin Merchant Index page' do
     transaction_3 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
 
     visit admin_merchants_path
-
+    
     expect(page).to have_content('Top 5 Merchants:')
-    expect('Kevin - 6000').to appear_before('Bob - 20')
-    expect(page).to_not have_content('Zach - 10')
+    expect('Kevin - $60').to appear_before('Bob - $0.20')
+    expect(page).to_not have_content('Zach - $0.10')
+  end
+
+  it 'has sections for enabled and disabled merchants' do
+    merchant1 = Merchant.create!(name: 'Jimmy Pesto')
+    merchant1 = Merchant.create!(name: 'Linda Belcher')
+    merchant1 = Merchant.create!(name: 'Louis Belcher')
+
+    visit '/admin/merchants'
+
+    expect(page).to have_content("Enabled Merchants")
+    expect(page).to have_content("Disabled Merchants")
   end
 end
