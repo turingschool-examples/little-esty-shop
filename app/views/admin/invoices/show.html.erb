@@ -1,27 +1,37 @@
-<h1>Invoice <%= @invoice.id %></h1>
+<h1>Invoice
+  <%= @invoice.id %></h1>
 
-<p>Status: <%= @invoice.status %></p>
-<p>Date Created: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
-<p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"%></p>
+<p>Status:
+  <%= @invoice.status %></p>
+<p>Date Created:
+  <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
+<p>Customer Name:
+  <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"%></p>
 
 <h3>Invoice Status</h3>
 <section id='status'>
   <%= form_with model: [:admin, @invoice], method: :patch, local: true do |form| %>
   <%= form.select(:status, ['completed', 'in progress', 'cancelled'], selected: @invoice.status) %>
   <%= form.submit "Update Invoice Status" %>
-  <% end %>
-</section><br>
+<% end %>
+</section>
+<br>
 
 <h3>Invoice Items</h3>
 
-  <% @items.each do |item| %>
-    <ul>
-      <li>Item name: <%= item.name %></li>
-      <li>Amount of Items: <%= item.amount(@invoice.id) %></li>
-      <li>Item Sold Price: <%= item.sold_price(@invoice.id) %></li>
-      <li>Order status: <%= item.order_status(@invoice.id) %></li>
-    </ul>
+<% @items.each do |item| %>
+<ul>
+  <li>Item name:
+    <%= item.name %></li>
+  <li>Amount of Items:
+    <%= item.amount(@invoice.id) %></li>
+  <li>Item Sold Price:
+    <%= item.sold_price(@invoice.id) %></li>
+  <li>Order status:
+    <%= item.order_status(@invoice.id) %></li>
+</ul>
 
-  <% end %>
+<% end %>
 
- <p>Total Revenue: <%= @invoice.total_revenue %>
+<p>Total Revenue:
+<%= @invoice.total_revenue %>
