@@ -15,24 +15,18 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
+    @merchant = @item.merchant
+    @item.update(status: params[:disable].to_i) if params[:disable]
+    @item.update(status: params[:enable].to_i) if params[:enable]
     if @item.update(item_params)
       flash[:success] = 'Successfully Updated'
-      redirection
+      redirection 
+      # redirect_to merchant_item_path(@merchant)
     else
       flash[:alert] = 'Try Again'
-      redirect_to edit_merchant_item_path(@merchant, @item)
-    end
-  end
-
-  def update
-    item = Item.find(params[:item_id])
-    merchant = item.merchant
-
-    item.update(status: params[:disable].to_i) if params[:disable]
-    item.update(status: params[:enable].to_i) if params[:enable]
-    redirect_to merchant_items_path(merchant)
+      redirect_to edit_merchant_item_path(@merchant, @item) #need this
+      end
   end
 
   def new
@@ -53,15 +47,14 @@ class ItemsController < ApplicationController
 end
 
 private
-
 def item_params
   params.permit(:id, :name, :description, :unit_price, :merchant_id, :status)
+end
 
-   def redirection
-     if params[:disable] || params[:enable]
-        redirect_to merchant_items_path(@merchant)
-     else
-      redirect_to merchant_item_path(@merchant, @item)
-     end
-   end
+def redirection
+  if params[:disable] || params[:enable]
+    redirect_to merchant_items_path(@merchant)
+  else
+  redirect_to merchant_item_path(@merchant, @item)
+  end
 end
