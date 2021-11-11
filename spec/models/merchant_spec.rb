@@ -128,6 +128,10 @@ RSpec.describe Merchant do
         merchant1.change_status
 
         expect(merchant1.status).to eq("Disabled")
+        
+        merchant1.change_status
+        
+        expect(merchant1.status).to eq("Enabled")
       end
     end
   end
