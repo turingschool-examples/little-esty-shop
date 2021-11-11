@@ -83,7 +83,7 @@ RSpec.describe 'Dashboard', type: :feature do
       click_on "Invoices Index"
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     end
-    
+
     describe 'favorite customers' do
       it 'names  top 5 customers' do
 
@@ -137,7 +137,7 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'shows items in reverse order' do
-        
+
         expect(@invoice_2.id).to appear_before(@invoice_1.id) #pass in raw HTML, if not try CSS
       end
     end
