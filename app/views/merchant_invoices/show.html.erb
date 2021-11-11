@@ -1,8 +1,8 @@
 <h1> Invoice #<%= @invoice.id %> </h1>
 
 <% @invoice.invoice_items.each do |invoice_item| %>
-  <h3><%= Item.find_item(invoice_item.item_id).name %><br></h3>
-  Price: <%= Item.find_item(invoice_item.item_id).unit_price %><br>
+  <h3><%= Item.find(invoice_item.item_id).name %><br></h3>
+  Price: <%= Item.find(invoice_item.item_id).unit_price %><br>
   Quantity: <%= invoice_item.quantity %><br>
   <div id="id-<%=invoice_item.id%>">
     <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
