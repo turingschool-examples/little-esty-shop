@@ -17,10 +17,20 @@
       <%= link_to "Admins Index", "/admin" %>
       </p>
       <p>
-      GitHub Repository: <%= link_to GithubFacade.repository.name, "https://github.com/haewonito/little-esty-shop" %>
+      GitHub Repository: <%= link_to GithubFacade.repository.name, "https://github.com/haewonito/little-esty-shop" %><br>
+      Github Users:<ol>
+                      <% GithubFacade.users.user_and_contributions.each do |login, contribution| %>
+                        <li><%= link_to login, "https://github.com/#{login}" %> - Commits: <%= contribution %>
+                      <% end %>
+                    <ol>
       </p>
       <hr>
     </section>
+
+    <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

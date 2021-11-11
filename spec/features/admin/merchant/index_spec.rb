@@ -116,5 +116,21 @@ RSpec.describe 'Admin Merchant Index page' do
     expect(page).to have_content("Top selling date for #{merchant2.name} was: #{invoice_2.created_at.strftime("%A, %B %-d, %Y")}")
     expect(page).to have_content("Top selling date for #{merchant1.name} was: #{invoice_4.created_at.strftime("%A, %B %-d, %Y")}")
     expect(page).to have_content("Top selling date for #{merchant3.name} was: #{invoice_6.created_at.strftime("%A, %B %-d, %Y")}")
+    visit admin_merchants_path
+
+    expect(page).to have_content('Top 5 Merchants:')
+    expect('Kevin - $60').to appear_before('Bob - $0.20')
+    expect(page).to_not have_content('Zach - $0.10')
+  end
+
+  it 'has sections for enabled and disabled merchants' do
+    merchant1 = Merchant.create!(name: 'Jimmy Pesto')
+    merchant1 = Merchant.create!(name: 'Linda Belcher')
+    merchant1 = Merchant.create!(name: 'Louis Belcher')
+
+    visit '/admin/merchants'
+
+    expect(page).to have_content("Enabled Merchants")
+    expect(page).to have_content("Disabled Merchants")
   end
 end
