@@ -1,6 +1,8 @@
 class AdminMerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
+    @enabled_merchants = @merchants.where(status: "Enabled")
+    @disabled_merchants = @merchants.where(status: "Disabled")
   end
 
   def new
@@ -27,7 +29,7 @@ class AdminMerchantsController < ApplicationController
     else
       merchant.update(merchant_params)
       redirect_to admin_merchants_show_path
-      flash.alert = 'Information updated successfully' 
+      flash.alert = 'Information updated successfully'
     end
   end
 

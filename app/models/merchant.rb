@@ -78,4 +78,16 @@ class Merchant < ApplicationRecord
       .where(merchants: { id: id })
       .distinct
   end
+
+  def top_day
+    Invoice.joins(invoice_items: [item: [:merchant]])
+      .where(merchants: { id: id })
+      .select(
+        'invoices.created_at AS day,
+        sum(invoice_items.unit_price * invoice_items.quantity / 100.0) AS revenue')
+      .group('day')
+      .order('revenue')
+      .last
+
+  end
 end
