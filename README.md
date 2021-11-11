@@ -8,7 +8,7 @@
 
 ## Schema
 
-There are 6 tables with 5 one-to-many relationships as below:
+There are 6 tables with 5 one-to-many relationships:
 
 ![Schema](./wireframes/schema_little_esty_shop.png)
 
