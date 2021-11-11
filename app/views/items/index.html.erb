@@ -22,3 +22,12 @@
 <br>
 <%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
 
+<div id="top_items">
+<h3>Top Items by Revenue</h3>
+<% @merchant.top_five_items_by_revenue.each do |item| %>
+  <div id="id-#{item.id}">
+  <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item)%> - total revenue: <%= item.total_revenue %></p>
+  </div>
+<% end %>
+</div>
+
