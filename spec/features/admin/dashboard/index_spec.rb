@@ -91,5 +91,9 @@ RSpec.describe 'admin dashboard' do
 
       expect(page).to have_content(@invoice_1.id)
     end
+      it 'sorts from oldest to newest' do
+      
+      expect("#{@invoice_1.id}").to appear_before("#{@invoice_3.id}", only_text: true)
+    end
   end
 end
