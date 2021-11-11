@@ -137,8 +137,7 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'shows items in reverse order' do
-
-        expect(@invoice_2.id).to appear_before(@invoice_1.id) #pass in raw HTML, if not try CSS
+        expect(@invoice_1.id).to appear_before(@invoice_2.id) #pass in raw HTML, if not try CSS
       end
     end
   end
