@@ -21,7 +21,7 @@ RSpec.describe 'Admin Invoice Show page' do
       expect(page).to have_content('Total price of the Pumpkin(s): 30')
       expect(page).to have_content('Status: shipped')
     end
-    
+
     within "#item-id-#{@item2.id}" do
       expect(page).to have_content('Item name: Pillow')
       expect(page).to have_content('Quantity of Pillow(s) ordered: 2')
