@@ -33,11 +33,27 @@ RSpec.describe 'Admin invoice show page' do
     end
 
     it 'shows total revenue' do
-
       expect(page).to have_content("Total Revenue: #{@invoice.total_revenue}")
+    end
+
+    it 'can see and update invoice status' do
+      visit(admin_invoice_path(@invoice))
+
+      within('#status') do
+        expect(page).to have_content(@invoice.status)
+      end
+
+      select('completed', from: 'invoice_status')
+
+      within('#status') do
+        click_button 'Update Invoice Status'
+      end
+
+      expect(current_path).to eq(admin_invoice_path(@invoice))
+
+      within('#status') do
+        expect(page).to have_content('completed')
+      end
     end
   end
 end
-# As an admin
-# When I visit an admin invoice show page
-# Then I see the total revenue that will be generated from this invoice
