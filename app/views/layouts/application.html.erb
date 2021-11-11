@@ -19,8 +19,8 @@
       <p>
       GitHub Repository: <%= link_to GithubFacade.repository.name, "https://github.com/haewonito/little-esty-shop" %><br>
       Github Users:<ol>
-                      <% GithubFacade.users.get_users.each do |user| %>
-                        <li><%= link_to user, "https://github.com/#{user}" %>
+                      <% GithubFacade.users.user_and_contributions.each do |login, contribution| %>
+                        <li><%= link_to login, "https://github.com/#{login}" %> - Commits: <%= contribution %>
                       <% end %>
                     <ol>
       </p>
