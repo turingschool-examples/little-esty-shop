@@ -16,7 +16,7 @@ There are 6 tables with 5 one-to-many relationships as below:
 - Rails 5.2.6
 - Ruby 2.7.2
 - PostgreSQL
-- Heroku (address: https://frozen-peak-55560.herokuapp.com/)
+- Heroku (address: https://frozen-peak-55560.herokuapp.com)
 
 ## Setup
 
