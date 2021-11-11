@@ -7,8 +7,6 @@ class InvoiceItem < ApplicationRecord
   incomplete_invoices =  InvoiceItem.where.not(status: "2")
                                     .distinct
                                     .pluck(:invoice_id)
-    incomplete_invoices.map do |invoice|
-      Invoice.find(invoice)
-    end
+  Invoice.order(:created_at).find(incomplete_invoices)
   end
 end
