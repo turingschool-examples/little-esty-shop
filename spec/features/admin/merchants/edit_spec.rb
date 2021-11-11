@@ -7,10 +7,10 @@ RSpec.describe 'merchant edit page' do
 
     visit edit_admin_merchant_path(merchant)
 
-    fill_in 'merchant_name', with: 'It worked!'
+    fill_in 'Name', with: 'It worked!'
     click_button 'Edit'
 
-    expect(current_path).to eq(admin_merchant_path(merchant))
+    expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content('It worked!')
   end
 end

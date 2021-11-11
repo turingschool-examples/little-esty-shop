@@ -18,7 +18,7 @@ class Admin::MerchantsController < ApplicationController
     @merchant.update(status: params[:enable].to_i) if params[:enable]
 
     flash[:success] = 'Merchant updated'
-    redirection 
+    redirection
     # redirect_to admin_merchant_path(@merchant)
   end
 
@@ -27,8 +27,8 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.new(merchant_params)
-    if @merchant.save
+    merchant = Merchant.create!(name: params[:name])
+    if merchant.save
       redirect_to admin_merchants_path
     else
       flash[:alert] = 'Error! Please try again'
@@ -43,10 +43,10 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def redirection
-    if params[:disable] || params[:enable]
-      redirect_to admin_merchants_path
-      else
+    if params[:name]
       redirect_to admin_merchant_path(@merchant)
+    else
+      redirect_to admin_merchants_path
     end
   end
 end
