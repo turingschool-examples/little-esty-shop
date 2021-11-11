@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :items, except: :delete
     resources :invoices, only: [:index, :show, :update]
+
     # get "/dashboard", controller: :merchants, action: :show, as: "dashboard"
   end
 
