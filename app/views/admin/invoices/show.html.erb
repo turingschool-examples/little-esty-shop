@@ -16,4 +16,8 @@
 
   <% end %>
 
- <p>Total Revenue: <%= @invoice.total_revenue %>
+<p>Total Revenue: <%= @invoice.total_revenue %>
+
+<%  @items.top_five_items_by_revenue.each do |item| %>
+  
+<% end %>
