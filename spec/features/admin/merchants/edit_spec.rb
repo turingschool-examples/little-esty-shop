@@ -11,6 +11,6 @@ RSpec.describe 'merchant edit page' do
     click_button 'Edit'
 
     expect(current_path).to eq(admin_merchant_path(merchant))
-    expect(page).to have_content(merchant.name)
+    expect(page).to have_content('It worked!')
   end
 end
