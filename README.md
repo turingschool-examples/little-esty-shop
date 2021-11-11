@@ -1,6 +1,6 @@
 # README
 
-### Mod3 Group Project: Little Esty Shop
+### Mod2 Group Project: Little Esty Shop
 ### Micha Bernhard, Sam Devine, Haewon Jeon & Christian Valesares
 ---
 
