@@ -9,7 +9,7 @@ class Merchant < ApplicationRecord
 
   def top_customers
     temp = Transaction.joins(invoice: :customer)
-    .where("result =?", :success)
+    .where("result =?", 0)
     .where("status =?", 1)
     .select("customers.*, count(transactions.id) as top_count")
     .group("customers.id")
