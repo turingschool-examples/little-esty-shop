@@ -5,8 +5,6 @@ RSpec.describe Merchant do
     it {should have_many :items}
   end
 
-  describe 'validations'
-
   describe 'class methods' do
     describe '::top_merchants' do
       it 'returns the top five merchants by revenue' do

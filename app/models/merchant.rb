@@ -77,6 +77,7 @@ class Merchant < ApplicationRecord
     else
       update(status: 'Enabled')
     end
+  end
 
   def top_day
     Invoice.joins(invoice_items: [item: [:merchant]])

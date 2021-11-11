@@ -9,11 +9,6 @@ class MerchantInvoicesController < ApplicationController
     @customer = Customer.find_by_invoice_id(params[:invoice_id])
   end
 
-  def edit
-    invoice = Invoice.find(params[:invoice_id])
-    merchant = Merchant.find(params[:merchant_id])
-  end
-
   def update
     merchant = Merchant.find(params[:merchant_id])
     invoice = Invoice.find(params[:invoice_id])

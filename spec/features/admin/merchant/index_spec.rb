@@ -119,8 +119,8 @@ RSpec.describe 'Admin Merchant Index page' do
     visit admin_merchants_path
 
     expect(page).to have_content('Top 5 Merchants:')
-    expect('Kevin - $60').to appear_before('Bob - $0.20')
-    expect(page).to_not have_content('Zach - $0.10')
+    expect('Kevin - $270.00').to appear_before('Bob - $0.60')
+    expect('Bob - $0.60').to appear_before('Zach - $0.16')
   end
 
   it 'has sections for enabled and disabled merchants' do
