@@ -14,13 +14,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.highest_date
-    # select("invoices.created_at, count(invoices.*) as date_count")
-    #   .order(created_at: :desc)
-    #   .group(:created_at)
-    #   .order(date_count: :desc)
-    #   .first
-    #   .created_at
-
     select("invoices.created_at")
       .order(created_at: :desc)
       .group(:created_at)
@@ -28,5 +21,4 @@ class Invoice < ApplicationRecord
       .first
       .created_at
   end
-
 end

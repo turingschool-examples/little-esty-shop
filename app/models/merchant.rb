@@ -12,19 +12,11 @@ class Merchant < ApplicationRecord
   end
 
   def top_customers
-    Customer.joins(invoices: [:transactions, {items: :merchant}])
-    .where(transactions: {result: :success}, merchants: {id: "#{self.id}"})
-    .group(:id)
-    .order("transactions.count DESC")
-    .limit(5)
+    Customer.top_customers(self)
   end
 
   def shippable_items
-   items.joins(:invoices)
-        .select("items.*, invoice_items.invoice_id as invoice_id")
-        .select("invoices.created_at AS invoice_created_at")
-        .where(invoice_items: {status: '0'})
-        .order(:invoice_created_at)
+    items.shippable_items
   end
 
   def invoice_ids
