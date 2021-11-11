@@ -31,5 +31,13 @@ RSpec.describe 'Admin invoice show page' do
       expect(page).to have_content(@invoice_item.unit_price)
       expect(page).to have_content(@invoice_item.status)
     end
+
+    it 'shows total revenue' do
+
+      expect(page).to have_content("Total Revenue: #{@invoice.total_revenue}")
+    end
   end
 end
+# As an admin
+# When I visit an admin invoice show page
+# Then I see the total revenue that will be generated from this invoice
