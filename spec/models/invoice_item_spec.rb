@@ -55,6 +55,7 @@ RSpec.describe InvoiceItem, type: :model do
 
     it 'returns incomplete invoices' do
       expect(InvoiceItem.incomplete_invoices).to include(@invoice_3, @invoice_1)
+      expect(InvoiceItem.incomplete_invoices).to_not include(@invoice_2)
     end
   end
 end

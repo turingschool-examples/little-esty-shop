@@ -24,4 +24,7 @@ RSpec.describe Item, type: :model do
     it ".disabled_items" do
       expect(Item.disabled_items).to eq([@item2, @item3])
     end
+    it ".enabled_items" do
+      expect(Item.enabled_items).to eq([@item1])
+    end
 end
