@@ -13,8 +13,48 @@
 # it.
 require 'simplecov'
 SimpleCov.start
+
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.before(:each) do
+    stub_request(:get, "https://api.github.com/repos/haewonito/little-esty-shop").
+    with(
+      headers: {
+      'Accept'=>'*/*',
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'User-Agent'=>'Faraday v1.8.0'
+      }).
+    to_return(status: 200, body: '{
+      "name": "little-esty-shop"
+    }', headers: {})
+
+    stub_request(:get, "https://api.github.com/repos/haewonito/little-esty-shop/contributors").
+         with(
+           headers: {
+       	  'Accept'=>'*/*',
+       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	  'User-Agent'=>'Faraday v1.8.0'
+           }).
+         to_return(status: 200, body: '[{
+          "login": "timomitchel",
+          "contributions": 9
+        },
+        {
+          "login": "scottalexandra",
+          "contributions": 3
+        },
+        {
+          "login": "jamisonordway",
+          "contributions": 1
+        },
+        {
+          "login": "michab17",
+          "contributions": 22
+        }
+      ]', headers: {})
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
