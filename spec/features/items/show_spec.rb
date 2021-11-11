@@ -17,7 +17,7 @@ RSpec.describe "Merchant's Item Show Page" do
     describe "Merchant Item Edit" do
       it "i see a link that takes me to a merchant item edit page" do
         click_on "Update Item"
-        # expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item.id}/edit")
+        expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item.id}/edit")
       end
     end
   end

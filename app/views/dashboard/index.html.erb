@@ -12,10 +12,9 @@
 
 <h3>Items Ready to Ship:</h3>
 <% @merchant.not_shipped.each do |item| %>
-    <p><%= item.name %></p>
+    <h3><%= item.name %></h3>
         <% item.invoices.each do |invoice| %>
-        <div id="invoice_<%= invoice.id %>" %>
             <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
-        </div>
+            <p>Created at: "<%= invoice.created_at.strftime("%A, %B %e, %Y") %>"</p>
         <% end %>
 <% end %>

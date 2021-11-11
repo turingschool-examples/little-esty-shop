@@ -1,1 +1,23 @@
 <h1><%= @invoice.id %></h1>
+<p>Status: <%= @invoice.status %></p>
+<p>Created at: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
+
+<p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"%><p>
+
+<% @invoice.items.each do |item| %>
+  <p>Item Name: <%= item.name %></p>
+  <p>Item Quantity: <%= item.invoice_items.first.quantity %></p>
+  <p>Item Price: <%= item.invoice_items.first.unit_price %></p>
+  <p>invoice item id:<%= item.invoice_items.first.id %></p>
+  <div id="id-<%= item.invoice_items.first.id %>">
+  <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
+  <%= f.label :status, "Invoice Status" %>
+  <%= f.select :status, ["packaged", "pending", "shipped"], selected:item.invoice_items.first.status %><br>
+  <%= f.button "Update Item Status", type: "submit", name: "invoice_item_id", value: "#{item.invoice_items.first.id}" %>
+  </div>
+  <% end %>
+  
+  <% end %>
+  
+  <p>Total Revenue: <%= @invoice.total_revenue %>
+

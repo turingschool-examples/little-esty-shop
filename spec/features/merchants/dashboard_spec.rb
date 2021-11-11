@@ -32,8 +32,8 @@ RSpec.describe 'Dashboard', type: :feature do
       @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
       @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Kuhn')
 
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
       @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 1)
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
       @invoice_3 = Invoice.create!(customer_id: @customer_2.id, status: 1)
       @invoice_4 = Invoice.create!(customer_id: @customer_3.id, status: 1)
       @invoice_5 = Invoice.create!(customer_id: @customer_4.id, status: 1)
@@ -43,19 +43,19 @@ RSpec.describe 'Dashboard', type: :feature do
 
       @invoice_9 = Invoice.create!(customer: @customer_1, status: 2)
 
-      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
-      @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
-      @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2, created_at: "2012-03-28 14:54:09")
-      @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_3.id, quantity: 3, unit_price: 5, status: 1, created_at: "2012-03-30 14:54:09")
-      @ii_6 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-01 14:54:09")
-      @ii_7 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_7.id, quantity: 1, unit_price: 3, status: 1, created_at: "2012-04-02 14:54:09")
-      @ii_8 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_8.id, quantity: 1, unit_price: 5, status: 1, created_at: "2012-04-03 14:54:09")
-      @ii_9 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_10 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_9.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_12 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_10.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_13 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_11.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
-      @ii_14 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_12.id, quantity: 1, unit_price: 1, status: 1, created_at: "2012-04-04 14:54:09")
+      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0)
+      @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0)
+      @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2)
+      @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_3.id, quantity: 3, unit_price: 5, status: 1)
+      @ii_6 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1)
+      @ii_7 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_7.id, quantity: 1, unit_price: 3, status: 1)
+      @ii_8 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_8.id, quantity: 1, unit_price: 5, status: 1)
+      @ii_9 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1)
+      @ii_10 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1)
+      @ii_11 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_9.id, quantity: 1, unit_price: 1, status: 1)
+      @ii_12 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_10.id, quantity: 1, unit_price: 1, status: 1)
+      @ii_13 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_11.id, quantity: 1, unit_price: 1, status: 1)
+      @ii_14 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_12.id, quantity: 1, unit_price: 1, status: 1)
 
       @transaction_1 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_1.id)
       @transaction_2 = Transaction.create!(credit_card_number: 230948, result: 0, invoice_id: @invoice_2.id)
@@ -83,9 +83,9 @@ RSpec.describe 'Dashboard', type: :feature do
       click_on "Invoices Index"
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     end
-    
+
     describe 'favorite customers' do
-      it 'names  top 5 customers' do
+      xit 'names  top 5 customers' do
 
         expect(page).to have_content("Top 5 Customers:" )
         expect(page).to have_content(@customer_1.first_name)
@@ -102,7 +102,6 @@ RSpec.describe 'Dashboard', type: :feature do
     end
 
     describe 'items ready to be shipped' do
-
       it 'has ready to be shipped section' do
         expect(page).to have_content("Items Ready to Ship")
       end
@@ -128,11 +127,17 @@ RSpec.describe 'Dashboard', type: :feature do
       end
 
       it 'has a link to each invoice' do
-        within("#invoice_#{@invoice_1.id}") do
-          click_link "#{@item_1.invoices.first.id}"
-        end
+        click_link "#{@item_1.invoices.first.id}"
 
         expect(page).to have_content(@item_1.invoices.first.id)
+      end
+
+      it 'shows invoice created by date' do
+        expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %e, %Y")}")
+      end
+
+      xit 'shows items in reverse order' do
+        expect(@invoice_1.id).to appear_before(@invoice_2.id) #pass in raw HTML, if not try CSS
       end
     end
   end

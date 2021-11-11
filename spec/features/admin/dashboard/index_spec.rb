@@ -1,13 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe InvoiceItem, type: :model do
-  describe 'relationships' do
-    it { should belong_to :invoice }
-    it { should belong_to :item }
-  end
-
-  describe 'methods' do
-    before do
+RSpec.describe 'admin dashboard' do
+  before do
       @merchant_1 = Merchant.create!(name: 'Hair Care')
       @merchant_2 = Merchant.create!(name: 'Jewelry')
       @merchant_3 = Merchant.create!(name: 'Office Space')
@@ -44,17 +38,58 @@ RSpec.describe InvoiceItem, type: :model do
       @invoice_9 = Invoice.create!(customer: @customer_1, status: 2)
 
       @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 1)
-      @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_3.id, quantity: 1, unit_price: 10, status: 1)
-      @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2)
+      @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 10, status: 1)
+      @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 2, unit_price: 8, status: 2)
       @ii_4 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 5, status: 1)
 
       @transaction_1 = Transaction.create!(credit_card_number: 203942, result: 0, invoice_id: @invoice_1.id)
       @transaction_2 = Transaction.create!(credit_card_number: 230948, result: 0, invoice_id: @invoice_2.id)
       @transaction_3 = Transaction.create!(credit_card_number: 234092, result: 0, invoice_id: @invoice_3.id)
+
+    visit "/admin/dashboard"
+  end
+
+  describe 'page layout' do
+    it 'has a header' do
+
+      expect(page).to have_content('Admin Dashboard')
     end
 
-    it 'returns incomplete invoices' do
-      expect(InvoiceItem.incomplete_invoices).to include(@invoice_3, @invoice_1)
+    it 'has a link to admin merchants index' do
+
+      click_on "Admin Merchants Index"
+
+      expect(page).to have_current_path("/admin/merchants")
+    end
+
+    it 'has a link to admin invoices index' do
+
+      click_on "Admin Invoices Index"
+
+      expect(page).to have_current_path("/admin/invoices")
+    end
+  end
+
+  describe 'Incomplete Invoices' do
+    it 'has a section for incomplete invoices' do
+
+      expect(page).to have_content("Incomplete Invoices")
+    end
+
+    it 'shows incomplete invoices' do
+      expect(page).to have_content("Incomplete Invoices")
+    end
+
+    it 'shows incomplete invoices' do
+
+      expect(page).to have_content(@invoice_1.id)
+      expect(page).to have_content(@invoice_3.id)
+    end
+
+    it 'has links to the incomplete invoices' do
+      click_link "#{@invoice_1.id}"
+
+      expect(page).to have_content(@invoice_1.id)
     end
   end
 end
