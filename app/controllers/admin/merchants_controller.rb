@@ -12,6 +12,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
+    merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
     flash[:success] = 'Merchant updated'
     redirect_to admin_merchant_path(merchant)
