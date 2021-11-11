@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboard, only: [:index]
     resources :merchants, except: [:delete]
-    resources :invoices, only: [:index, :show]
+    resources :invoices, except: [:delete]
   end
 end

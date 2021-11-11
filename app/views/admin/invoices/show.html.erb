@@ -4,6 +4,14 @@
 <p>Date Created: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
 <p>Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"%></p>
 
+<h3>Invoice Status</h3>
+<section id='status'>
+  <%= form_with model: [:admin, @invoice], method: :patch, local: true do |form| %>
+  <%= form.select(:status, ['completed', 'in progress', 'cancelled'], selected: @invoice.status) %>
+  <%= form.submit "Update Invoice Status" %>
+  <% end %>
+</section><br>
+
 <h3>Invoice Items</h3>
 
   <% @items.each do |item| %>

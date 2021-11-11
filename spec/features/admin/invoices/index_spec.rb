@@ -8,7 +8,7 @@ RSpec.describe 'admin invoices index' do
 
       visit "/admin/invoices"
     end
-    
+
     it 'has a header' do
       expect(page).to have_content('Admin Invoices')
     end
