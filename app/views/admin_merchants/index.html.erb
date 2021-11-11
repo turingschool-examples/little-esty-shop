@@ -18,6 +18,7 @@
 <ol>
 <% Merchant.top_merchants.each do |merchant| %>
     <li><%= merchant.name %> - <%= number_to_currency(merchant.revenue) %></li>
+    Top selling date for <%= merchant.name %> was: <%= merchant.top_day.day.strftime("%A, %B %-d, %Y") %>
 <% end %>
 </ol>
 <hr>
