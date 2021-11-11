@@ -1,5 +1,9 @@
+
+<h1> <%= @merchant.name %> </h1>
+
 <h3>Merchant #<%= @merchant.id %></h3>
 
 <h3>Name: <%= @merchant.name %></h3>
 
 <%= link_to 'Update Merchant', admin_merchants_edit_path(@merchant.id), method: :get %>
+

@@ -1,5 +1,16 @@
 <h1>Admin Merchants</h1>
 
+<div id = "Enabled" >
+<h3> Enabled Merchants </h3>
+<% @merchants.each do |merchant| %>
+  <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><br>
+<% end %>
+</div>
+
+<div id = "Disabled" >
+<h3> Disabled Merchants <h3>
+</div>
+
 <h3>Top 5 Merchants:</h3>
 <ol>
 <% Merchant.top_merchants.each do |merchant| %>
@@ -16,3 +27,4 @@
   </div>
 <% end %>
 <%= link_to 'Create Merchant', admin_merchants_new_path %>
+
