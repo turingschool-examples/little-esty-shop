@@ -24,5 +24,13 @@ RSpec.describe 'admin merchants index' do
 
       expect(page).to have_current_path("/admin/merchants/#{merchant.id}")
     end
+
+    it 'links to new page' do
+      visit "/admin/merchants"
+
+      click_link "New Merchant"
+
+      expect(page).to have_current_path(new_admin_merchant_path)
+    end
   end
 end
