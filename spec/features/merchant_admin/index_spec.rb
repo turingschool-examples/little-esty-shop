@@ -12,7 +12,6 @@ RSpec.describe 'Admin Merchant Index' do
     expect(page).to have_content("Disabled Merchants")
 
     within "#Enabled" do
-      save_and_open_page
       expect(page).to have_content(merchant1.name)
     end
 
