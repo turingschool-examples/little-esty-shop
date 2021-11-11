@@ -15,6 +15,7 @@ RSpec.describe 'Item index page', type: :feature do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item2.name)
       expect(page).to_not have_content(@item3.name)
+
     end
 
     it 'links to create items page' do
@@ -22,5 +23,24 @@ RSpec.describe 'Item index page', type: :feature do
 
       expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/new")
     end
-  end
+
+
+  it 'lets you click on the disabled button' do 
+    within("#item-#{@item1.id}") do 
+      click_button 'Disable'
+    end 
+
+    expect(@item1.reload.status).to eq("disabled")
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+  end  
+
+  it 'lets you click on the enable button' do 
+    within("#item-#{@item2.id}") do 
+      click_button 'Enable'
+    end 
+
+    expect(@item2.reload.status).to eq("enabled")
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+  end 
+end
 end
