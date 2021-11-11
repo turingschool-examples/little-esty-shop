@@ -10,3 +10,12 @@
     <li><%= customer.first_name %> <%= customer.last_name %>:   <%= customer.successful_transactions_count %> transactions</li>
   <% end %>
 </ol>
+
+<h3>Incomplete Invoices</h3>
+<ul id="incomplete-invoices">
+  <% @invoices.incomplete_invoices.each do |invoice| %>
+    <li>
+      <%= link_to invoice.id, "/admin/invoices/#{invoice.id}" %> <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
+    </li>
+  <% end %>
+</ul>

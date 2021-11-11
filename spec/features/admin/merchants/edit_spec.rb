@@ -9,7 +9,7 @@ describe 'edit form' do
   context 'when valid information entered' do
     it 'allows admin to edit merchant' do
       expect(page).not_to have_content "Goldman Sachs"
-      expect(page).to have_content "#{@merchant.name}"
+      expect(page).to have_field('Name', with: "#{@merchant.name}")
 
       fill_in 'Name', with: "Goldman Sachs"
       click_button "Submit"

@@ -1,7 +1,7 @@
 require 'rails_helper'
 # FactoryBot.find_definitions
 
-RSpec.describe '' do
+RSpec.describe 'admin invoice index' do
   before :each do
     @invoice_1 = create(:invoice)
     @invoice_2 = create(:invoice)
@@ -10,7 +10,7 @@ RSpec.describe '' do
     @invoice_5 = create(:invoice)
   end
 
-  it 'lists all of the invoce ids' do
+  it 'lists all of the invoice ids' do
     visit '/admin/invoices'
 
     expect(page).to have_content(@invoice_1.id)

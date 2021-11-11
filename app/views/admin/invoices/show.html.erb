@@ -1,5 +1,11 @@
 <h3>Invoice #<%= @invoice.id %></h3>
-<p>Status: <%= @invoice.status %></p>
+<div id="change_status_section">
+<p>Status: <%= @invoice.status %>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+<%= f.label :change_status %>
+<%= f.select(:status, options_for_select([['cancelled', 'cancelled'], ['completed', 'completed'], ['in progress', 'in progress']], @invoice.status), { include_blank: true }, onchange: 'this.form.submit()') %>
+<% end %>
+</div>
 <p>Customer Name: <%= @invoice.customer.first_name + " " + @invoice.customer.last_name %></p>
 <p>Created On: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p>Total Revenue: <%= number_to_currency(@invoice.invoice_revenue/100.0) %>
