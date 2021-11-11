@@ -4,37 +4,43 @@ RSpec.describe 'the merchants items index' do
   describe 'as a merchant' do
     before :each do
       @merchant = Merchant.create(name: 'Toys and Stuff')
-    end
-
-    it 'shows all of the items for this merchant' do
-      item_1 = @merchant.items.create(
+      @item_1 = @merchant.items.create(
         name: 'fidget spinner',
         description: 'it spins',
         unit_price: 1500
       )
-      item_2 = @merchant.items.create(
+      @item_2 = @merchant.items.create(
         name: 'yo-yo',
         description: 'do some cool tricks!',
         unit_price: 1000
       )
+    end
 
+    it 'shows all of the items for this merchant' do
       visit "/merchants/#{@merchant.id}/items"
 
-      expect(page).to have_content item_1.name
-      expect(page).to have_content item_2.name
+      expect(page).to have_content @item_1.name
+      expect(page).to have_content @item_2.name
     end
 
     it 'each item on my items index is a link to the show page' do
-      item = @merchant.items.create(
-        name: 'fidget spinner',
-        description: 'it spins',
-        unit_price: 1500
-      )
-
       visit "/merchants/#{@merchant.id}/items"
-      click_on item.name
 
-      expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{item.id}"
+      click_on @item_1.name
+
+      expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{@item_1.id}"
+    end
+
+    it 'each item has an edit button' do
+      visit "/merchants/#{@merchant.id}/items"
+
+      within "div#item-#{@item_1.id}" do
+        expect(page).to have_link "Edit this item"
+
+        click_link "Edit this item"
+      end
+
+      expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{@item_1.id}/edit"
     end
 
     describe 'item create' do
@@ -113,12 +119,17 @@ RSpec.describe 'the merchants items index' do
 
       visit "/merchants/#{@merchant.id}/items"
 
-      click_on "Enable/Disable"
+      within "div#item-#{item_1.id}" do
+        click_on "Enable/Disable"
+      end
 
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
       expect(page).to have_content("Status: Unable")
 
-      click_on "Enable/Disable"
+      within "div#item-#{item_1.id}" do
+        click_on "Enable/Disable"
+      end
+
       expect(current_path).to eq("/merchants/#{@merchant.id}/items")
       expect(item_1.status).to eq("able")
       expect(page).to have_content("Status: Able")
@@ -159,11 +170,11 @@ RSpec.describe 'the merchants items index' do
 
       customer_1 = Customer.create(first_name: 'George', last_name: 'Washington')
 
-      invoice_1 = customer_1.invoices.create(status: 'Completed')
-      invoice_2 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-24")
-      invoice_3 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-25")
-      invoice_4 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-27")
-      invoice_5 = customer_1.invoices.create(status: 'Completed', created_at: "2012-03-28")
+      invoice_1 = customer_1.invoices.create(status: 2)
+      invoice_2 = customer_1.invoices.create(status: 2, created_at: "2012-03-24")
+      invoice_3 = customer_1.invoices.create(status: 2, created_at: "2012-03-25")
+      invoice_4 = customer_1.invoices.create(status: 2, created_at: "2012-03-27")
+      invoice_5 = customer_1.invoices.create(status: 2, created_at: "2012-03-28")
 
       invoice_item_1 = invoice_1.invoice_items.create(item_id: item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
       invoice_item_2 = invoice_1.invoice_items.create(item_id: item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
