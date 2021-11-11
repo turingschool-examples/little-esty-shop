@@ -8,37 +8,39 @@ RSpec.describe Merchant do
   describe 'validations'
 
   describe 'class methods' do
-    it 'returns the top five customers by revenue' do
-      merchant1 = Merchant.create(name: "Bob")
-      merchant2 = Merchant.create(name: "Kevin")
-      merchant3 = Merchant.create(name: "Zach")
-  
-      item1 = merchant1.items.create(name: 'Mug', description: 'You can drink with it', unit_price: 5)
-      item2 = merchant2.items.create(name: 'GPU', description: 'Its too expensive', unit_price: 1500)
-      item3 = merchant3.items.create(name: 'Compressed Air', description: 'Its compressed', unit_price: 2)
-  
-      customer_1 = Customer.create(first_name: 'Jen', last_name: 'R')
-      customer_2 = Customer.create(first_name: 'Micha', last_name: 'B')
-      customer_3 = Customer.create(first_name: 'Richard', last_name: 'A')
-  
-      invoice_1 = customer_1.invoices.create(status: 'completed')
-      invoice_2 = customer_2.invoices.create(status: 'completed')
-      invoice_3 = customer_3.invoices.create(status: 'in progress')
-  
-      invoice_item_1 = invoice_1.invoice_items.create(item_id: item1.id, quantity: 2, unit_price: 5, status: 'shipped')
-      invoice_item_2 = invoice_2.invoice_items.create(item_id: item2.id, quantity: 2, unit_price: 1500, status: 'shipped')
-      invoice_item_3 = invoice_3.invoice_items.create(item_id: item3.id, quantity: 2, unit_price: 2, status: 'shipped')
-      invoice_item_4 = invoice_1.invoice_items.create(item_id: item1.id, quantity: 2, unit_price: 5, status: 'shipped')
-      invoice_item_5 = invoice_2.invoice_items.create(item_id: item2.id, quantity: 2, unit_price: 1500, status: 'shipped')
-      invoice_item_6 = invoice_3.invoice_items.create(item_id: item3.id, quantity: 2, unit_price: 2, status: 'shipped')
-      
-      transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-      transaction_2 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
-      transaction_3 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
+    describe '::top_merchants' do
+      it 'returns the top five merchants by revenue' do
+        merchant1 = Merchant.create(name: "Bob")
+        merchant2 = Merchant.create(name: "Kevin")
+        merchant3 = Merchant.create(name: "Zach")
 
-      expect(Merchant.top_merchants.length).to eq(2)
-      expect(Merchant.top_merchants.first).to eq(merchant2)
-      expect(Merchant.top_merchants.last).to eq(merchant1)
+        item1 = merchant1.items.create(name: 'Mug', description: 'You can drink with it', unit_price: 5)
+        item2 = merchant2.items.create(name: 'GPU', description: 'Its too expensive', unit_price: 1500)
+        item3 = merchant3.items.create(name: 'Compressed Air', description: 'Its compressed', unit_price: 2)
+
+        customer_1 = Customer.create(first_name: 'Jen', last_name: 'R')
+        customer_2 = Customer.create(first_name: 'Micha', last_name: 'B')
+        customer_3 = Customer.create(first_name: 'Richard', last_name: 'A')
+
+        invoice_1 = customer_1.invoices.create(status: 'completed')
+        invoice_2 = customer_2.invoices.create(status: 'completed')
+        invoice_3 = customer_3.invoices.create(status: 'in progress')
+
+        invoice_item_1 = invoice_1.invoice_items.create(item_id: item1.id, quantity: 2, unit_price: 5, status: 'shipped')
+        invoice_item_2 = invoice_2.invoice_items.create(item_id: item2.id, quantity: 2, unit_price: 1500, status: 'shipped')
+        invoice_item_3 = invoice_3.invoice_items.create(item_id: item3.id, quantity: 2, unit_price: 2, status: 'shipped')
+        invoice_item_4 = invoice_1.invoice_items.create(item_id: item1.id, quantity: 2, unit_price: 5, status: 'shipped')
+        invoice_item_5 = invoice_2.invoice_items.create(item_id: item2.id, quantity: 2, unit_price: 1500, status: 'shipped')
+        invoice_item_6 = invoice_3.invoice_items.create(item_id: item3.id, quantity: 2, unit_price: 2, status: 'shipped')
+
+        transaction_1 = invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+        transaction_2 = invoice_2.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
+        transaction_3 = invoice_3.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'failed')
+
+        expect(Merchant.top_merchants.length).to eq(2)
+        expect(Merchant.top_merchants.first).to eq(merchant2)
+        expect(Merchant.top_merchants.last).to eq(merchant1)
+      end
     end
   end
 
@@ -65,6 +67,8 @@ RSpec.describe Merchant do
       @invoice_4 = @customer_4.invoices.create(status: 2)
       @invoice_5 = @customer_5.invoices.create(status: 2)
       @invoice_6 = @customer_6.invoices.create(status: 2)
+      @invoice_7 = @customer_6.invoices.create(status: 2)
+      @invoice_8 = @customer_6.invoices.create(status: 2)
 
       @invoice_item_1 = @invoice_1.invoice_items.create(item_id: @item_1.id, quantity: 3, unit_price: 1000, status: 'shipped')
       @invoice_item_2 = @invoice_2.invoice_items.create(item_id: @item_2.id, quantity: 1, unit_price: 100, status: 'shipped')
@@ -72,7 +76,8 @@ RSpec.describe Merchant do
       @invoice_item_4 = @invoice_4.invoice_items.create(item_id: @item_4.id, quantity: 1, unit_price: 200, status: 'shipped')
       @invoice_item_5 = @invoice_5.invoice_items.create(item_id: @item_5.id, quantity: 2, unit_price: 600, status: 'shipped')
       @invoice_item_6 = @invoice_6.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 600, status: 'shipped')
-
+      @invoice_item_7 = @invoice_7.invoice_items.create(item_id: @item_1.id, quantity: 1, unit_price: 10, status: 'packaged')
+      @invoice_item_8 = @invoice_8.invoice_items.create(item_id: @item_5.id, quantity: 1, unit_price: 10, status: 'pending')
 
       @transaction_1 = @invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
       @transaction_2 = @invoice_1.transactions.create(credit_card_number: 1234123412341234, credit_card_expiration_date: '2012-03-27', result: 'success')
@@ -107,7 +112,6 @@ RSpec.describe Merchant do
       end
     end
 
-#item_5, invoice_5
     describe '#top_date' do
       it 'returns the invoice created_at date when the item made the most revenue' do
         expect(@merchant.top_date(@item_5.id).date).to eq(@invoice_5.created_at)
@@ -116,8 +120,15 @@ RSpec.describe Merchant do
 
     describe '#find_invoices' do
       it 'returns all invoices associated with the merchants items' do
-        expect(@merchant.find_invoices.sort).to eq([@invoice_1, @invoice_2, @invoice_3, @invoice_4, @invoice_5, @invoice_6])
-        expect(@merchant.find_invoices.sort).to_not include(@invoice_7)
+        expect(@merchant.find_invoices.sort).to eq([@invoice_1, @invoice_2, @invoice_3, @invoice_4, @invoice_5, @invoice_6, @invoice_7, @invoice_8])
+      end
+    end
+
+    describe '#items_ready_to_ship' do
+      it 'returns the merchants items that have been ordered but not shipped' do
+        expect(@merchant.items_ready_to_ship.length).to eq 2
+        expect(@merchant.items_ready_to_ship[0].item_name).to eq @item_1.name
+        expect(@merchant.items_ready_to_ship[1].item_name).to eq @item_5.name
       end
     end
 
@@ -128,9 +139,9 @@ RSpec.describe Merchant do
         merchant1.change_status
 
         expect(merchant1.status).to eq("Disabled")
-        
+
         merchant1.change_status
-        
+
         expect(merchant1.status).to eq("Enabled")
       end
     end
