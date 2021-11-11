@@ -15,19 +15,18 @@ RSpec.describe 'Show page', type: :feature do
     @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
     @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
 
-    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
-    @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
-    @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 2, unit_price: 8, status: 2, created_at: "2012-03-28 14:54:09")
-    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0)
+    @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 10, status: 1)
+    @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 2, unit_price: 8, status: 2)
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
   end
 
   describe 'invoice show page' do
-    xit 'shows invoice information' do
+    it 'shows invoice information' do
 
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_1.status)
       expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %e, %Y")}")
-      #needs to fix time
     end
 
     it 'shows invoice customer details' do
@@ -52,6 +51,17 @@ RSpec.describe 'Show page', type: :feature do
 
     it 'shows total revenue' do
       expect(page).to have_content("Total Revenue: 100")
+    end
+
+    it 'shows a drop menu for invoice item status' do
+      
+      within("#id-#{@ii_1.id}") do
+        select "pending", from: "Invoice Status"
+        click_button "Update Item Status"
+      end
+        
+      @ii_1.reload
+      expect(@ii_1.status).to eq("pending")
     end
   end
 end
