@@ -10,7 +10,9 @@
 
 There are 6 tables with 5 one-to-many relationships:
 
-![Schema](./wireframes/schema_little_esty_shop.png)
+<img width="658" alt="schema_little_esty_shop copy" src="https://user-images.githubusercontent.com/86392608/141384508-04b2a58d-8a04-4f84-b4e5-8ca4d0b80123.png">
+
+
 
 ## Tools Used:
 - Rails 5.2.6
