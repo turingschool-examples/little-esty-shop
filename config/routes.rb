@@ -37,6 +37,11 @@ Rails.application.routes.draw do
   get '/admin/invoices', to: 'admin_invoices#index'
   get '/admin/invoices/:id', to: 'admin_invoices#show', as: :admin_invoices_show
   patch '/admin/invoices/:id', to: 'admin_invoices#update'
+
+  #bulk_discount
+  get "/merchants/:merchant_id/discounts", to: "merchant_discounts#index"
+  get "/merchants/:merchant_id/discounts/:discount_id", to: "merchant_discounts#show"
+
   # namespace :admin do
   #   resources :merchants, only: [:index]
   #   resources :invoices, only: [:index]

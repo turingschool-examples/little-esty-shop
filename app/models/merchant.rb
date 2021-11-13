@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+  has_many :discounts
 
   def self.top_merchants
     joins(items: [{invoice_items: { invoice: :transactions} }] )

@@ -1,3 +1,6 @@
+### notes to myself:
+1. figure out how to do error flash messages for creating a new discount with wrong values such as, when percentage is over 100, put %, or even when creating a discount that will never be used.  
+
 # README
 
 ### Mod2 Group Project: Little Esty Shop

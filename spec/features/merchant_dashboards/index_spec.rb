@@ -111,5 +111,10 @@ RSpec.describe "Merchant's dashboard", type: :feature do
         expect("#{@invoice_6.id}").to appear_before("#{@invoice_7.id}")
       end
     end
+#bulk discount US1 first part
+    it "I see a link to view all my discounts, which takes me to bulk discounts index page" do
+      click_on "View All Discounts"
+      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts")
+    end
   end
 end
