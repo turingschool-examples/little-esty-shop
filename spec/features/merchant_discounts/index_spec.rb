@@ -63,23 +63,18 @@ RSpec.describe "Merchants Discount Index", type: :feature do
       click_on "Discount #{@discount1.id}"
       expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/#{@discount1.id}")
     end
-
+#test for valid data inputs. also, refuse to create irrelevant discounts
     it "I can create a new discount" do
       click_on "Create a New Discount"
-      save_and_open_page
-      # expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/new")
-      #
-      # fill_in "Threshhold Quantity", with: "100"
-      # fill_in "Discount Percentage", with: "30"
-      # click_on "Submit"
+
+      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/new")
+
+      fill_in "Threshhold quantity", with: "100"
+      fill_in "Discount percentage", with: "30"
+      click_on "Submit"
+      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts")
+      expect(page).to have_content("Quantity: 100 units, Discount: 30%")
+
     end
   end
 end
-# As a merchant
-# When I visit my bulk discounts index
-# Then I see a link to create a new discount
-# When I click this link
-# Then I am taken to a new page where I see a form to add a new bulk discount
-# When I fill in the form with valid data
-# Then I am redirected back to the bulk discount index
-# And I see my new bulk discount listed
