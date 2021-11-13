@@ -76,5 +76,11 @@ RSpec.describe "Merchants Discount Index", type: :feature do
       expect(page).to have_content("Quantity: 100 units, Discount: 30%")
 
     end
+
+    it "I can see a link to delete each discount, and delete that discount" do
+      click_on "Delete Discount #{@discount1.id}"
+      expect(current_path).to eq(("/merchants/#{@merchant.id}/discounts")
+      expect(page).to_not have_content("Discount #{@discount1.id}")
+    end
   end
 end
