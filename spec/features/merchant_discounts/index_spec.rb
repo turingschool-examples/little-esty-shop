@@ -60,7 +60,8 @@ RSpec.describe "Merchants Discount Index", type: :feature do
     end
 
     it "I see each discount has a link to its show page" do
-      click_on "Discount #{@discount1.id}"
+
+      click_on "Go to Discount #{@discount1.id}"
       expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/#{@discount1.id}")
     end
 #test for valid data inputs. also, refuse to create irrelevant discounts
@@ -79,7 +80,7 @@ RSpec.describe "Merchants Discount Index", type: :feature do
 
     it "I can see a link to delete each discount, and delete that discount" do
       click_on "Delete Discount #{@discount1.id}"
-      expect(current_path).to eq(("/merchants/#{@merchant.id}/discounts")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts")
       expect(page).to_not have_content("Discount #{@discount1.id}")
     end
   end

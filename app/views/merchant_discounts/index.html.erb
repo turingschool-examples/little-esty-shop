@@ -3,8 +3,8 @@
 
 <% @discounts.each do |discount| %>
   <h3>Discount <%= discount.id %> ---  Quantity: <%= discount.threshhold_quantity %> units, Discount: <%= discount.discount_percentage %>%</h3>
-  <%= link_to "Go to Discount #{discount.id}'s page  ", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
-  <%= link_to "Delete Discount #{discount.id}", "/merchants/#{@merchant.id}/discounts/:discount_id", method: :delete %>
+  <%= link_to "Go to Discount #{discount.id}'s page  ", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %><br>
+  <%= link_to "Delete Discount #{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %>
 <% end  %>
 
 <br><br>

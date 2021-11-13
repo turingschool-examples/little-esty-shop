@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   post "/merchants/:merchant_id/discounts", to: "merchant_discounts#create"
   get "/merchants/:merchant_id/discounts/:discount_id", to: "merchant_discounts#show"
 
+  delete "/merchants/:merchant_id/discounts/:discount_id", to: "merchant_discounts#destroy"
 
   # namespace :admin do
   #   resources :merchants, only: [:index]
