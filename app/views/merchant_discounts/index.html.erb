@@ -5,3 +5,5 @@
   <h3>Discount <%= discount.id %> ---  Quantity: <%= discount.threshhold_quantity %> units, Discount: <%= discount.discount_percentage %>%</h3>
   <%= link_to "Go to Discount #{discount.id}'s page", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
 <% end  %>
+
+<%= link_to "Create a New Discount", "/merchants/#{@merchant.id}/discounts/new" %>

@@ -61,16 +61,17 @@ RSpec.describe "Merchants Discount Index", type: :feature do
 
     it "I see each discount has a link to its show page" do
       click_on "Discount #{@discount1.id}"
-      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/@{discount1.id}")
+      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/#{@discount1.id}")
     end
 
     it "I can create a new discount" do
       click_on "Create a New Discount"
-      expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/new")
-
-      fill_in "Required Quantity for Discount:", with: "100"
-      fill_in "Discount Percentage:", with: "30"
-      click_on "Submit"
+      save_and_open_page
+      # expect(current_path).to eq("/merchants/#{@merchant.id}/discounts/new")
+      #
+      # fill_in "Threshhold Quantity", with: "100"
+      # fill_in "Discount Percentage", with: "30"
+      # click_on "Submit"
     end
   end
 end
