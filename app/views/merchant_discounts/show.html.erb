@@ -1,1 +1,7 @@
-<h1>discount show page</h1>
+<h1>Discount Show Page</h1
+
+<h3>Discount <%= @discount.id %> ---  Quantity: <%= @discount.threshhold_quantity %> units, Discount: <%= @discount.discount_percentage %>%</h3>
+<br>
+<br>
+
+<%= link_to "Edit This Discount", "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit" %>

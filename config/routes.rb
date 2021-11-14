@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   post "/merchants/:merchant_id/discounts", to: "merchant_discounts#create"
   get "/merchants/:merchant_id/discounts/:discount_id", to: "merchant_discounts#show"
 
+  get "/merchants/:merchant_id/discounts/:discount_id/edit", to: "merchant_discounts#edit"
+  patch "/merchants/:merchant_id/discounts/:discount_id", to: "merchant_discounts#update"
+
   delete "/merchants/:merchant_id/discounts/:discount_id", to: "merchant_discounts#destroy"
 
   # namespace :admin do
