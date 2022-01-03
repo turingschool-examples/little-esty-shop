@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Invoices:</strong>
+  <%= @transaction.invoices %>
+</p>
+
+<p>
+  <strong>Credit card number:</strong>
+  <%= @transaction.credit_card_number %>
+</p>
+
+<p>
+  <strong>Credit card expiration date:</strong>
+  <%= @transaction.credit_card_expiration_date %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @transaction.result %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>
