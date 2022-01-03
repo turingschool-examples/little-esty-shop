@@ -2,6 +2,7 @@ require 'csv'
 
 desc "Import customers from csv"
 task :import => [:environment] do
+
   file = "db/data/customers.csv"
 
   CSV.foreach(file, :headers => true) do |row|
@@ -12,7 +13,7 @@ task :import => [:environment] do
       created_at = row[3],
       updated_at = row[4]
 
-      Customer.create(id: id,
+      Customer.create!(id: id,
                       first_name: first_name,
                       last_name: last_name,
                       created_at: created_at,
