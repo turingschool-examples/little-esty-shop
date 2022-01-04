@@ -1,6 +1,7 @@
 namespace :csv_load do
+  
   desc 'rake import data from customer csv files'
-  task customer_data: :environment do
+  task customer: :environment do
     require 'csv'
     CSV.foreach('db/data/customers.csv', headers: true) do |row|
       Customer.create!(row.to_hash)
