@@ -34,7 +34,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_inc_val}")
   end
 
-  task invoice: :environment do
+  task invoices: :environment do
     Invoice.destroy_all
     CSV.foreach('./db/data/invoices.csv', headers: true) do |row|
       Invoice.create!(row.to_h)
