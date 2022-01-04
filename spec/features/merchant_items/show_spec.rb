@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe "Merchant item index" do
+RSpec.describe "Merchant item show" do
   before do
     @merchant1 = Merchant.create!(name: "Kelly")
     @merchant2 = Merchant.create!(name: "Craig")
@@ -8,16 +8,11 @@ RSpec.describe "Merchant item index" do
     @item3 = @merchant2.items.create!(name: "Hat", description: "sdasasdsd", unit_price: 88)
   end
 
-  it 'I see a list of the names of all of my items' do
-    visit merchant_items_path(@merchant1)
-    expect(page).to have_content(@item1.name)
-    expect(page).to have_content(@item2.name)
-    expect(page).to_not have_content(@item3.name)
-  end
-
-  it 'each items name is a link to the show page' do
+  it 'I see all of the items attributes' do
     visit merchant_items_path(@merchant1)
     click_link "#{@item1.name}"
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+    expect(page).to have_content(@item1.name)
+    expect(page).to have_content(@item1.description)
+    expect(page).to have_content(@item1.unit_price)
   end
 end
