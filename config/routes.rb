@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  
+  resources :merchants do
+    get '/dashboard', to: 'merchants#dashboard'
+    resources :items
+    resources :invoices
+  end
+
   resources :transactions
-  resources :invoices
   resources :customers
-  resources :items
-  resources :merchants
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
