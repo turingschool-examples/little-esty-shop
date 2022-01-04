@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  get '/merchants/:merchant_id/dashboard', to: 'dashboard#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # get '/merchants/:merchant_id/dashboard', to: 'dashboard#index'
+
+  resources :merchants do 
+    resources :items, :invoices
+    resources :dashboard, only: [:index]
+  end
 end
