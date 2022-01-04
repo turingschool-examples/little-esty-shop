@@ -1,15 +1,17 @@
 namespace :csv_load do
-  desc 'rake import data from customer csv files'
-  task customer_data: :environment do
+
+  desc 'rake import data from customer csv file'
+
+  task customers: :environment do
     require 'csv'
     CSV.foreach('db/data/customers.csv', headers: true) do |row|
       Customer.create!(row.to_hash)
     end
 
     table = 'customers'
-    max_id = Customer.last.id
+    first_id = (Customer.last.id += 1)
     ActiveRecord::Base.connection.execute(
-      "ALTER SEQUENCE #{table}_id_seq RESTART WITH #{max_id}"
+      "ALTER SEQUENCE #{table}_id_seq RESTART WITH #{first_id}"
     )
   end
 end
