@@ -38,4 +38,4 @@ This project requires Ruby 2.7.2.
 1. [Evaluation](./doc/evaluation.md)
 
 ## Schema
-![image](https://user-images.githubusercontent.com/78194232/147985935-55fc91a4-4cab-4c7d-b358-2485389dc53a.png)
+![image](https://user-images.githubusercontent.com/78194232/148001346-16797f55-3f82-4c71-b79e-5f822fb32130.png)
