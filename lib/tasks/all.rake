@@ -1,7 +1,5 @@
 namespace :csv_load do
-  task :all => [:customers, :merchants, :items] do
-  # Rake::Task['customers'].invoke
-  # Rake::Task['merchants'].invoke
-  # Rake::Task['items'].invoke
+  task :all => [:customers, :merchants, :items, :transactions, :invoices, :invoice_items] do
+    
   end
 end
