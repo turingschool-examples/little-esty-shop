@@ -20,4 +20,14 @@ RSpec.describe 'Merchant Items Index Page' do
     expect(page).to_not have_content("Fridge")
   end
 
+  it 'can disable or enable item' do
+    expect(page).to have_button("Enable")
+    expect(page).to have_button("Disable")
+  end
+
+  it 'can update status of item' do
+    click_button("Enable", id: @item_1.id)
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+  end
+
 end

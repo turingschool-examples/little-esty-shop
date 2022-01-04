@@ -19,13 +19,17 @@ class MerchantItemsController < ApplicationController
 
     flash[:message] = 'changes saved successfully'
 
-    redirect_to action: :show
+    if params[:status].present?
+      redirect_to action: :index
+    else
+      redirect_to action: :show      
+    end
   end
 
   private
 
   def item_params
-    params.permit(:name, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :status)
   end
 
 end
