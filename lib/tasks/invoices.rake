@@ -6,8 +6,8 @@ namespace :csv_load do
       Customer.create!(row.to_hash)
     end
 
-    table = 'customers'
-    first_id = (Customer.last.id += 1)
+    table = 'invoices'
+    first_id = (Invoice.last.id += 1)
     ActiveRecord::Base.connection.execute(
       "ALTER SEQUENCE #{table}_id_seq RESTART WITH #{first_id}"
     )

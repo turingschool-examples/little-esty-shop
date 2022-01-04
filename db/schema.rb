@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_01_04_031803) do
+=======
+ActiveRecord::Schema.define(version: 2022_01_04_022752) do
+>>>>>>> d7577de4d6a69901f030f4acdb86f527bbcdf657
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_031803) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "invoices", force: :cascade do |t|
     t.bigint "customer_id"
     t.integer "status"
@@ -31,4 +36,12 @@ ActiveRecord::Schema.define(version: 2022_01_04_031803) do
   end
 
   add_foreign_key "invoices", "customers"
+=======
+  create_table "merchants", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> d7577de4d6a69901f030f4acdb86f527bbcdf657
 end
