@@ -1,0 +1,2 @@
+class MerchantController < ApplicationController
+end
