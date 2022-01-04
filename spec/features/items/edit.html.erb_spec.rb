@@ -10,4 +10,18 @@ RSpec.describe "items/edit", type: :view do
     ))
   end
 
+  it "renders the edit item form" do
+    render
+
+    assert_select "form[action=?][method=?]", item_path(@item), "post" do
+
+      assert_select "input[name=?]", "item[name]"
+
+      assert_select "input[name=?]", "item[merchants_id]"
+
+      assert_select "textarea[name=?]", "item[description]"
+
+      assert_select "input[name=?]", "item[unit_price]"
+    end
+  end
 end
