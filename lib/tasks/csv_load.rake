@@ -1,16 +1,6 @@
 require 'csv'
 
 namespace :csv_load do
-  task customers: :environment do
-    Customer.destroy_all
-    CSV.foreach('./db/data/customers.csv', headers: true) do |row|
-      Customer.create!(row.to_h)
-    end
-
-    table = 'customers'
-    auto_inc_val = 1001
-    ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_inc_val}")
-  end
 
   task merchants: :environment do
     Merchant.destroy_all
@@ -67,6 +57,17 @@ namespace :csv_load do
     ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_inc_val}")
   end
 
+  task customers: :environment do
+    Customer.destroy_all
+    CSV.foreach('./db/data/customers.csv', headers: true) do |row|
+      Customer.create!(row.to_h)
+    end
+
+    table = 'customers'
+    auto_inc_val = 1001
+    ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_inc_val}")
+  end
+  
   task :all do
     tables = [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
     tables.each do |table|
