@@ -1,9 +1,9 @@
 namespace :csv_load do
   desc 'rake import data from transaction csv files'
-  task transaction_data: :environment do
+  task transactions: :environment do
     require 'csv'
     CSV.foreach('db/data/transactions.csv', headers: true) do |row|
-      Customer.create!(row.to_hash)
+      Transaction.create!(row.to_hash)
     end
 
     table = 'transactions'
