@@ -4,7 +4,7 @@ namespace :csv_load do
 
   task customers: :environment do
     require 'csv'
-    CSV.foreach('db/data/invoices.csv', headers: true) do |row|
+    CSV.foreach('db/data/customers.csv', headers: true) do |row|
       Customer.create!(row.to_hash)
     end
 
