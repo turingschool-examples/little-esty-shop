@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_232628) do
     t.bigint "invoice_id"
     t.integer "quantity"
     t.integer "unit_price"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_232628) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.string "status"
+    t.integer "status"
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
