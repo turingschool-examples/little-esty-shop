@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class MerchantItemsController < ApplicationController
 
   def index
     @items = Item.where(merchant_id: params[:merchant_id])
@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     item = Item.find(params[:item_id])
 
     item.update(item_params)
-    
+
     flash[:message] = 'changes saved successfully'
 
     redirect_to action: :show
