@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2022_01_04_025823) do
 
   # These are extensions that must be enabled in order to support this database
@@ -32,6 +33,14 @@ ActiveRecord::Schema.define(version: 2022_01_04_025823) do
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_invoices_on_customer_id"
+  end
+
   create_table "merchants", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -39,4 +48,5 @@ ActiveRecord::Schema.define(version: 2022_01_04_025823) do
   end
 
   add_foreign_key "items", "merchants"
+  add_foreign_key "invoices", "customers"
 end
