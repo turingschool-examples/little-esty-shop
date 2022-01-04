@@ -23,33 +23,33 @@ ActiveRecord::Schema.define(version: 2022_01_03_224709) do
   end
 
   create_table "invoice_items", force: :cascade do |t|
-    t.bigint "items_id"
-    t.bigint "invoices_id"
+    t.bigint "item_id"
+    t.bigint "invoice_id"
     t.integer "quantity"
     t.integer "unit_price"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["invoices_id"], name: "index_invoice_items_on_invoices_id"
-    t.index ["items_id"], name: "index_invoice_items_on_items_id"
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+    t.index ["item_id"], name: "index_invoice_items_on_item_id"
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.bigint "customers_id"
+    t.bigint "customer_id"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customers_id"], name: "index_invoices_on_customers_id"
+    t.index ["customer_id"], name: "index_invoices_on_customer_id"
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.bigint "merchants_id"
+    t.bigint "merchant_id"
     t.text "description"
     t.integer "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["merchants_id"], name: "index_items_on_merchants_id"
+    t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -59,18 +59,18 @@ ActiveRecord::Schema.define(version: 2022_01_03_224709) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "invoices_id"
-    t.integer "credit_card_number"
+    t.bigint "invoice_id"
+    t.string "credit_card_number"
     t.date "credit_card_expiration_date"
     t.integer "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["invoices_id"], name: "index_transactions_on_invoices_id"
+    t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
   end
 
-  add_foreign_key "invoice_items", "invoices", column: "invoices_id"
-  add_foreign_key "invoice_items", "items", column: "items_id"
-  add_foreign_key "invoices", "customers", column: "customers_id"
-  add_foreign_key "items", "merchants", column: "merchants_id"
-  add_foreign_key "transactions", "invoices", column: "invoices_id"
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoice_items", "items"
+  add_foreign_key "invoices", "customers"
+  add_foreign_key "items", "merchants"
+  add_foreign_key "transactions", "invoices"
 end
