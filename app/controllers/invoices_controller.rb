@@ -1,25 +1,20 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: %i[ show edit update destroy ]
 
-  # GET /invoices or /invoices.json
   def index
     @invoices = Invoice.all
   end
 
-  # GET /invoices/1 or /invoices/1.json
   def show
   end
 
-  # GET /invoices/new
   def new
     @invoice = Invoice.new
   end
 
-  # GET /invoices/1/edit
   def edit
   end
 
-  # POST /invoices or /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
 
@@ -34,7 +29,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /invoices/1 or /invoices/1.json
   def update
     respond_to do |format|
       if @invoice.update(invoice_params)
@@ -47,7 +41,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # DELETE /invoices/1 or /invoices/1.json
   def destroy
     @invoice.destroy
     respond_to do |format|
@@ -57,7 +50,7 @@ class InvoicesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  
     def set_invoice
       @invoice = Invoice.find(params[:id])
     end
