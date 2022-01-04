@@ -8,7 +8,7 @@ RSpec.describe "invoices/edit", type: :view do
     ))
   end
 
-  it "renders the edit invoice form" do
+  xit "renders the edit invoice form" do
     render
 
     assert_select "form[action=?][method=?]", invoice_path(@invoice), "post" do
