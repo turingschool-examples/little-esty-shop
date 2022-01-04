@@ -7,10 +7,4 @@ RSpec.describe "invoices/show", type: :view do
       status: ""
     ))
   end
-
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(//)
-    expect(rendered).to match(//)
-  end
 end
