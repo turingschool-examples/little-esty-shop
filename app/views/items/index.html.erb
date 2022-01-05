@@ -1,4 +1,4 @@
 <h1> <%= @merchant.name %></h1>
 <% @items.each do |item| %>
-<%= link_to "#{item.name}", "/merchants/#{item.merchant.id}/items/#{item.id}", method: :get %>
+<%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
 <% end %>
