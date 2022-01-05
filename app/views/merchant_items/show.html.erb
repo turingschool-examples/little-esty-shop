@@ -2,4 +2,5 @@
   <h1><%= @item.name %>'s Info</h1>
   <%= @item.description %>
   <%= @item.unit_price %>
+  <%= link_to  "Update #{@item.name}", edit_merchant_item_path(@merchant, @item) %>
 </div>
