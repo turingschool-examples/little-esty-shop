@@ -14,7 +14,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:unit_price) }
     it { should validate_numericality_of(:unit_price) }
   end
-  
+
   describe 'class methods' do
     it '#invoice_finder' do
       merchant1 = create(:merchant)
