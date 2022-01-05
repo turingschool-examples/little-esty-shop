@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
   describe 'associations' do
     it { should have_many(:items) }
-    it { should have_many}
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:customers).through(:invoices) }
+    it { should have_many(:transactions).through(:invoices)}
   end
 
   describe 'validations' do
@@ -47,7 +50,9 @@ RSpec.describe Merchant, type: :model do
         expect(merchant.top_customers(6)).to eq([customer_3, customer_1, customer_5, customer_2, customer_4])
       end
 
-      describe customers
+      describe 'customers' do
+
+      end
     end
   end
 end
