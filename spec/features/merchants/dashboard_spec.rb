@@ -6,6 +6,6 @@ RSpec.describe 'merchant dashboard' do
 
       visit "/merchants/#{merchant.id}/dashboard"
 
-      expect(page).to have content('Bob')
+      expect(page).to have_content('Bob')
     end
 end

@@ -1,2 +1,2 @@
-class InvoicesController < ApplicationController
+class InvoicesController < ApplicationsController
 end
