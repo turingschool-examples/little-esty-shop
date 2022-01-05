@@ -6,7 +6,7 @@ get '/merchants/:merchant_id/invoices', to: 'merchant_invoices#index'
 
   resources :merchants, only: [:show] do
     resources :dashboard, only: [:index, :show]
-    resources :items, only: [:index, :show]
+    resources :items, only: [:index, :show, :edit, :update]
     # resources :invoices, only: [:index, :show]
   end
 end
