@@ -10,6 +10,8 @@ RSpec.describe Merchant, type: :model do
 
     let!(:item_1) {merchant_1.items.create!(name: 'Obsidian Nobice', description: 'A beautiful obsidian', unit_price: 50)}
     let!(:item_2) {merchant_1.items.create!(name: 'Pleasure Geode', description: 'Glamourous Geode', unit_price: 100)}
+    let!(:item_3) {merchant_1.items.create!(name: 'Brown Pebble', description: 'GClassic rock', unit_price: 50)}
+
 
     let!(:customer_1) {Customer.create!(first_name: 'Billy', last_name: 'Carruthers')}
     let!(:customer_2) {Customer.create!(first_name: 'Dave', last_name: 'King')}
@@ -37,13 +39,15 @@ RSpec.describe Merchant, type: :model do
 
     let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
     let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
+    let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_3.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending')}
+
 
     xit "favorite customers" do
       expect(merchant_1.favorite_customers).to eq([customer_1.first_name, customer_2.first_name, customer_3.first_name, customer_4.first_name, customer_5.first_name])
     end
 
     it 'items_ready_to_ship' do
-      expect(merchant_1.items_ready_to_ship).to eq([item_2])
+      expect(merchant_1.items_ready_to_ship).to eq([item_3, item_2])
     end
 
   end
