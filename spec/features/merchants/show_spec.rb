@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
+RSpec.describe "Merchant Dashboad Show Page" do
   
   before(:each) do
     @merch_1 = Merchant.create!(name: "Shop Here")
@@ -28,13 +28,42 @@ RSpec.describe Merchant, type: :model do
 
   end
   
-  describe "methods" do 
+  it 'shows merchant name' do
+    @merch_1 = Merchant.create!(name: "Shop Here")
 
-    xit "returns top 5 customers with most successful transactions" do
+    visit "/merchants/#{@merch_1.id}/dashboard"
 
-      expect(@merch_1.favorite_customers).to eq([@cust_2, @cust_3, @cust_4, @cust_5, @cust_6])
-
+    within ".merchant" do
+      expect(page).to have_content("Merchant Name: #{@merch_1.name}")
     end
   end
 
+  it "links to items index" do
+    @merch_1 = Merchant.create!(name: "Shop Here")
+    visit "/merchants/#{@merch_1.id}/dashboard"
+
+    expect(page).to have_content("Items Index")
+    click_link "Items Index"
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
+  end
+
+  it "links to invoices index" do
+    @merch_1 = Merchant.create!(name: "Shop Here")
+    visit "/merchants/#{@merch_1.id}/dashboard"
+
+    expect(page).to have_content("Invoices Index")
+    click_link "Invoices Index"
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/invoices")
+  end
+
+  xit "has top 5 favorite customers with most transaction activity with this merchant" do 
+    
+    visit "/merchants/#{@merch_1.id}/dashboard"
+    
+    expect(page).to have_content("Kimmy Gibbler | Successful Transactions: 1")
+    expect(page).to have_content("Bob Sagget | Successful Transactions: 1")
+    expect(page).to have_content("Uncle Dave | Successful Transactions: 1")
+    expect(page).to have_content("Uncle Jessie | Successful Transactions: 1")
+    expect(page).to have_content("DJ Tanner |Successful Transactions: 1")
+  end
 end
