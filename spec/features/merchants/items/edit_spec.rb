@@ -16,7 +16,7 @@ RSpec.describe "Merchant Item Edit Page" do
       fill_in 'description', with: "has pineapples"
       click_on 'Submit'
     end
-    save_and_open_page
+
     expect(current_path).to eq(merchant_item_path(merchant1, item1))
 
     within ".item" do
