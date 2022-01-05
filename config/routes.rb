@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show, :update, :create, :edit]
     resources :invoices, only: [:index, :show]
   end
+
+  patch '/admin/merchants', to: 'admin/merchants#update'
 end
