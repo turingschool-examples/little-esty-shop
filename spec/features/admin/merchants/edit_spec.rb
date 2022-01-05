@@ -15,6 +15,6 @@ describe 'admin merchants edit page' do
     click_button("Submit")
     expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
     expect(page).to have_content("Name: Spencer")
-    expect(notice:).to be_present
+    expect(:alert).to be_present
   end
 end
