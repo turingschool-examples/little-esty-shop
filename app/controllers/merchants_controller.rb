@@ -1,8 +1,8 @@
 class MerchantsController < ApplicationController
-  # def dashboard
-  #   @merchant = Merchant.find(params[:merchant_id])
-  #   # redirect_to "/merchants/#{@merchant.id}/dashboard"
-  # end
+  def dashboard
+    @merchant = Merchant.find(params[:merchant_id])
+    # redirect_to "/merchants/#{@merchant.id}/dashboard"
+  end
 
   # def create
   #   @merchant = Merchant.new(merchant_params)
