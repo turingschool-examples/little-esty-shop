@@ -17,20 +17,4 @@ RSpec.describe "Merchant item show" do
     expect(page).to have_content(@item1.description)
     expect(page).to have_content(@item1.unit_price)
   end
-
-  it 'has a link to an edit page for the item' do
-    # "/merchants/#{item.merchant.id}/items/#{item.id}"
-    visit merchant_item_path(@merchant1, @item1)
-    click_link "Edit #{@item1.name}"
-
-    expect(current_path).to eq(edit_merchant_item_path(@item1))
-  end
-
-  xit 'updates the items information and redirects to show page' do
-
-  end
-
-  xit 'displays a successfully updated flash message' do
-
-  end
 end
