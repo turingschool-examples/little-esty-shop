@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
+  before do
+
+  end
   describe 'relationships' do
     it {should have_many(:items)}
+
   end
 
   describe 'validations' do
