@@ -14,9 +14,9 @@ RSpec.describe Merchant do
     @merchant_3 = Merchant.create!(name: 'Tom Haverford')
     @merchant_4 = Merchant.create!(name: 'April Ludgate')
 
-    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
     @item_2 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
     @item_3 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
+    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
     @item_4 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
     @item_5 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
     @item_6 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
@@ -63,26 +63,26 @@ RSpec.describe Merchant do
     @invoice_19 = @customer_5.invoices.create!(status: 1)
     @invoice_20 = @customer_6.invoices.create!(status: 1)
 
-    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id)
-    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id)
-    @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id)
-    @invoice_item_4 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id)
-    @invoice_item_5 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_5.id)
-    @invoice_item_6 = InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_6.id)
-    @invoice_item_7 = InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_7.id)
-    @invoice_item_8 = InvoiceItem.create!(item_id: @item_8.id, invoice_id: @invoice_8.id)
-    @invoice_item_9 = InvoiceItem.create!(item_id: @item_9.id, invoice_id: @invoice_9.id)
-    @invoice_item_10 = InvoiceItem.create!(item_id: @item_10.id, invoice_id: @invoice_10.id)
-    @invoice_item_11 = InvoiceItem.create!(item_id: @item_11.id, invoice_id: @invoice_11.id)
-    @invoice_item_12 = InvoiceItem.create!(item_id: @item_12.id, invoice_id: @invoice_12.id)
-    @invoice_item_13 = InvoiceItem.create!(item_id: @item_13.id, invoice_id: @invoice_13.id)
-    @invoice_item_14 = InvoiceItem.create!(item_id: @item_14.id, invoice_id: @invoice_14.id)
-    @invoice_item_15 = InvoiceItem.create!(item_id: @item_15.id, invoice_id: @invoice_15.id)
-    @invoice_item_16 = InvoiceItem.create!(item_id: @item_16.id, invoice_id: @invoice_16.id)
-    @invoice_item_17 = InvoiceItem.create!(item_id: @item_17.id, invoice_id: @invoice_17.id)
-    @invoice_item_18 = InvoiceItem.create!(item_id: @item_18.id, invoice_id: @invoice_18.id)
-    @invoice_item_19 = InvoiceItem.create!(item_id: @item_19.id, invoice_id: @invoice_19.id)
-    @invoice_item_20 = InvoiceItem.create!(item_id: @item_20.id, invoice_id: @invoice_20.id)
+    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0)
+    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0)
+    @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, status: 0)
+    @invoice_item_4 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_4.id, status: 1)
+    @invoice_item_5 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_5.id, status: 1)
+    @invoice_item_6 = InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_6.id, status: 2)
+    @invoice_item_7 = InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_7.id, status: 2)
+    @invoice_item_8 = InvoiceItem.create!(item_id: @item_8.id, invoice_id: @invoice_8.id, status: 2)
+    @invoice_item_9 = InvoiceItem.create!(item_id: @item_9.id, invoice_id: @invoice_9.id, status: 2)
+    @invoice_item_10 = InvoiceItem.create!(item_id: @item_10.id, invoice_id: @invoice_10.id, status: 2)
+    @invoice_item_11 = InvoiceItem.create!(item_id: @item_11.id, invoice_id: @invoice_11.id, status: 2)
+    @invoice_item_12 = InvoiceItem.create!(item_id: @item_12.id, invoice_id: @invoice_12.id, status: 2)
+    @invoice_item_13 = InvoiceItem.create!(item_id: @item_13.id, invoice_id: @invoice_13.id, status: 2)
+    @invoice_item_14 = InvoiceItem.create!(item_id: @item_14.id, invoice_id: @invoice_14.id, status: 2)
+    @invoice_item_15 = InvoiceItem.create!(item_id: @item_15.id, invoice_id: @invoice_15.id, status: 2)
+    @invoice_item_16 = InvoiceItem.create!(item_id: @item_16.id, invoice_id: @invoice_16.id, status: 2)
+    @invoice_item_17 = InvoiceItem.create!(item_id: @item_17.id, invoice_id: @invoice_17.id, status: 2)
+    @invoice_item_18 = InvoiceItem.create!(item_id: @item_18.id, invoice_id: @invoice_18.id, status: 2)
+    @invoice_item_19 = InvoiceItem.create!(item_id: @item_19.id, invoice_id: @invoice_19.id, status: 2)
+    @invoice_item_20 = InvoiceItem.create!(item_id: @item_20.id, invoice_id: @invoice_20.id, status: 2)
 
     @transaction_1 = @invoice_1.transactions.create!(result: 'success')
     @transaction_2 = @invoice_2.transactions.create!(result: 'success')
@@ -110,5 +110,9 @@ RSpec.describe Merchant do
     it 'returns top 5 customers with most succesful transactions' do
       expect(@merchant_1.top_5_customers).to eq([@customer_5, @customer_1, @customer_3, @customer_4, @customer_2])
     end
-  end
+
+    it '.items_not_shipped' do 
+      expect(@merchant_1.items_not_shipped).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
+    end
+  end 
 end
