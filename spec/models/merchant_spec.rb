@@ -47,7 +47,8 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'items_ready_to_ship' do
-      expect(merchant_1.items_ready_to_ship).to eq([item_2, item_3])
+      # binding.pry
+      expect(merchant_1.items_ready_to_ship).to eq([item_3, item_2])
     end
 
   end

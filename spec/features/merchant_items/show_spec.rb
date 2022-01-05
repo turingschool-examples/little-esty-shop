@@ -9,6 +9,8 @@ RSpec.describe 'Merchant Items Show Page' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
   end
 
+  ## Add testing to click link from index page
+
   it 'lists attributes of the item' do
     expect(page).to have_content("Couch")
     expect(page).to have_content("comfy couch")
