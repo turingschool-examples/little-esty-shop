@@ -8,11 +8,13 @@ RSpec.describe 'merchant dashboard' do
     end
 
     it 'has a link to merchant invoices index' do
+      merchant = create(:merchant)
       visit "/merchants/#{merchant.id}/dashboard"
       expect(page).to have_link("/merchants/#{merchant.id}/invoices")
     end
 
     it 'has a link to merchant items index' do
+      merchant = create(:merchant)
       visit "/merchants/#{merchant.id}/dashboard"
       expect(page).to have_link("/merchants/#{merchant.id}/items")
     end
