@@ -7,4 +7,11 @@ describe 'Admin Merchant show page' do
     visit "/admin/merchants/#{merchant_1.id}"
     expect(page).to have_content("Merchant Name: #{merchant_1.name}")
   end
+
+  it 'I see a link to update the merchants information' do
+    merchant_1 = Merchant.create!(name: 'merchant_1')
+    visit "/admin/merchants/#{merchant_1.id}"
+
+    expect(page).to have_link("Update Merchant")
+  end
 end
