@@ -3,11 +3,13 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @items = Item.all
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   # GET /items/1 or /items/1.json
   def show
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
   end
 
   # GET /items/new
@@ -17,6 +19,8 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @item = Item.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   # POST /items or /items.json
@@ -36,15 +40,15 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1 or /items/1.json
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: "Item was successfully updated." }
-        format.json { render :show, status: :ok, location: @item }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.find(params[:id])
+    item.update(
+      name: params[:name],
+      description: params[:description],
+      unit_price: params[:unit_price]
+    )
+    item.save
+    redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
   end
 
   # DELETE /items/1 or /items/1.json
@@ -57,13 +61,13 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def item_params
-      params.require(:item).permit(:name, :merchants_id, :description, :unit_price)
-    end
+  # Only allow a list of trusted parameters through.
+  def item_params
+    params.require(:item).permit(:name, :merchants_id, :description, :unit_price)
+  end
 end
