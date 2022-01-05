@@ -16,6 +16,7 @@ RSpec.describe "Merchant Item Edit Page" do
       fill_in 'description', with: "has pineapples"
       click_on 'Submit'
     end
+    save_and_open_page
     expect(current_path).to eq(merchant_item_path(merchant1, item1))
 
     within ".item" do
@@ -23,6 +24,9 @@ RSpec.describe "Merchant Item Edit Page" do
       expect(page).to have_content('pizza')
       expect(page).to have_content('has pineapples')
       expect(page).to have_content(10000)
+    end
+    within '.flash' do
+      expect(page).to have_content("pizza was successfully updated.")
     end
   end
 end

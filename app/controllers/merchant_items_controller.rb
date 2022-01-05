@@ -8,6 +8,7 @@ class MerchantItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
+    flash.keep
   end
 
   def edit
@@ -17,9 +18,10 @@ class MerchantItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-    item.update(item_params)
-    ## below: params[:merchant_id] >> looks for object with that merchant id
+    if item.update(item_params)
+      flash[:success] = item.name + ' was successfully updated.'
     redirect_to merchant_item_path(params[:merchant_id], item)
+    end
   end
 
   private
