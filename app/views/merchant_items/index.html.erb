@@ -3,8 +3,8 @@
 
 <ul>
 <% @items.each do |item| %>
-<div class= "item-<%= item.id %>">
-  <li><%= item.name %></li>
-</div>
+  <div class= "item-<%= item.id %>">
+    <li><%= link_to  item.name, merchant_item_path(@merchant, item) %></li>
+  </div>
 <% end %>
 </div>
