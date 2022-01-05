@@ -6,6 +6,4 @@ class Invoice < ApplicationRecord
   has_many :merchants
 
   enum status: ['in progress', 'cancelled', 'completed']
-
-
 end
