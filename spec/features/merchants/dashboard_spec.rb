@@ -44,6 +44,14 @@ RSpec.describe 'merchant dashboard' do
     # merchant.invoices.limit(8).offset(8).update(customer_id: customer_3.id)
     # merchant.invoices.limit(1).offset(16).update(customer_id: customer_4.id)
     # merchant.invoices.last(3).update(customer_id: customer_5.id)
-    require "pry"; binding.pry
+
+    visit "/merchants/#{merchant.id}/dashboard"
+
+    within 'div.top_customers' do
+      expect('Abe').to appear_before('Bob')
+      expect('Bob').to appear_before('Charlie')
+      expect('Charlie').to appear_before('John')
+      expect('John').to appear_before('Zach')
+    end
   end
 end
