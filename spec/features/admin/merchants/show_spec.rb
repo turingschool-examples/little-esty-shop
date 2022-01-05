@@ -13,5 +13,7 @@ describe 'Admin Merchant show page' do
     visit "/admin/merchants/#{merchant_1.id}"
 
     expect(page).to have_link("Update Merchant")
+    click_link("Update Merchant")
+    expect(current_path).to eq("/admin/merchants/#{merchant_1.id}/edit")
   end
 end
