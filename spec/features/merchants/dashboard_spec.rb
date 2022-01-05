@@ -36,11 +36,11 @@ RSpec.describe 'Merchant Dashboard' do
     @customer_6 = Customer.create!(first_name: "Dave", last_name: "Chappelle")
 
     @invoice_1 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')
-    @invoice_2 = @customer_2.invoices.create!(status: 1, created_at: '2012-03-25 08:54:09')
-    @invoice_3 = @customer_3.invoices.create!(status: 1, created_at: '2012-03-25 04:54:09')
-    @invoice_4 = @customer_4.invoices.create!(status: 1, created_at: '2012-03-25 01:54:09')
-    @invoice_5 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-25 12:54:09')
-    @invoice_6 = @customer_2.invoices.create!(status: 1, created_at: '2012-03-25 07:54:09')
+    @invoice_2 = @customer_2.invoices.create!(status: 1, created_at: '2012-04-25 08:54:09')
+    @invoice_3 = @customer_3.invoices.create!(status: 1, created_at: '2012-10-25 04:54:09')
+    @invoice_4 = @customer_4.invoices.create!(status: 1, created_at: '2012-03-26 01:54:09')
+    @invoice_5 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')
+    @invoice_6 = @customer_2.invoices.create!(status: 1, created_at: '2012-03-29 07:54:09')
     @invoice_7 = @customer_3.invoices.create!(status: 1)
     @invoice_8 = @customer_4.invoices.create!(status: 1)
     @invoice_9 = @customer_1.invoices.create!(status: 1)
@@ -172,20 +172,18 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content(@invoice_item_3.invoice_creation_date)
       expect(page).to have_content(@invoice_item_4.invoice_creation_date)
       expect(page).to have_content(@invoice_item_5.invoice_creation_date)
-      save_and_open_page
     end
 
     scenario 'visitor sees list ordered from oldest to newest' do
+      first = find("#invoiceitem#{@invoice_item_1.id}")
+      second = find("#invoiceitem#{@invoice_item_4.id}")
+      third = find("#invoiceitem#{@invoice_item_5.id}")
+      fourth = find("#invoiceitem#{@invoice_item_2.id}")
+      fifth = find("#invoiceitem#{@invoice_item_3.id}")
+      expect(first).to appear_before(second)
+      expect(second).to appear_before(third)
+      expect(third).to appear_before(fourth)
+      expect(fourth).to appear_before(fifth)
     end
   end
-
 end
-
-# Merchant Dashboard Invoices sorted by least recent
-#
-# As a merchant
-# When I visit my merchant dashboard
-# In the section for "Items Ready to Ship",
-# Next to each Item name I see the date that the invoice was created
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
