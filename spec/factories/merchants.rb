@@ -10,7 +10,7 @@ FactoryBot.define do
         evaluator.invoice_count.times do
           item = create(:item, merchant: merchant)
           invoice = create(:invoice)
-          invoice_item = (:invoice_item, item: item, invoice: invoice )
+          invoice_item = create(:invoice_item, item: item, invoice: invoice)
         end
       end
     end
