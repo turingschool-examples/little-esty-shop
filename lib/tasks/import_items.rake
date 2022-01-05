@@ -20,7 +20,8 @@ task :import_items_csv => [:environment] do
                       unit_price: unit_price,
                       merchant_id: merchant_id,
                       created_at: created_at,
-                      updated_at: updated_at)
+                      updated_at: updated_at,
+                      status: 0)
 
   end
 
