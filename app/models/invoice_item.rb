@@ -1,6 +1,11 @@
-class InvoiceItem < ApplicationRecord 
+class InvoiceItem < ApplicationRecord
   enum status: ["packaged", "pending", "shipped"]
-  
+
   belongs_to :invoice
-  belongs_to :item 
-end 
+  belongs_to :item
+
+  def invoice_creation_date
+    date = invoice.created_at
+    date.strftime("%A, %B %d,%Y")
+  end
+end
