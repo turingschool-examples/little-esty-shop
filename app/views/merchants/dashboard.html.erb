@@ -8,5 +8,5 @@
 <p>Items Ready to Ship<p>
   <% @merchant.items_ready_to_ship.each do |item| %>
   <p><%= item.name %></p>
-  <p><%= link_to item.retrieve_invoice_id, "/merchants/#{@merchant.id}/invoices/:id" %></p>
+  <p><%= link_to item.retrieve_invoice_id, "/merchants/#{@merchant.id}/invoices/#{item.retrieve_invoice_id}" %></p>
 <% end %>
