@@ -12,4 +12,9 @@ class Merchant < ApplicationRecord
     .order(transaction_count: :desc)
     .limit(5)
   end
+
+  def items_not_shipped
+    items.joins(:invoice_items)
+    .where.not("invoice_items.status = ?", 2)
+  end
 end
