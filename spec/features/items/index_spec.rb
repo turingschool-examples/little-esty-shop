@@ -23,5 +23,11 @@ describe 'merchants items index' do
       click_link(@item1.name)
       expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
     end
+
+    xit 'has a link to create a new item' do
+      click_link "Create New Item"
+
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items/new")
+    end
   end
-end
+end 
