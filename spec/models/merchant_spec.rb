@@ -35,8 +35,16 @@ RSpec.describe Merchant, type: :model do
     let!(:transaction_7) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
     let!(:transaction_8) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
 
-    it "favorite customers" do
+    let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
+    let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
+
+    xit "favorite customers" do
       expect(merchant_1.favorite_customers).to eq([customer_1.first_name, customer_2.first_name, customer_3.first_name, customer_4.first_name, customer_5.first_name])
     end
+
+    it 'items_ready_to_ship' do
+      expect(merchant_1.items_ready_to_ship).to eq([item_2])
+    end
+
   end
 end

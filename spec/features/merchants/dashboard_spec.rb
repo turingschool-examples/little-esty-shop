@@ -30,6 +30,9 @@ RSpec.describe 'the merchants dashboard page' do
   let!(:transaction_7) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
   let!(:transaction_8) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
 
+  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
+  let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
+
   it "shows the name of the merchant" do
     visit "/merchants/#{merchant_1.id}/dashboard"
     expect(page).to have_content(merchant_1.name)
@@ -43,7 +46,7 @@ RSpec.describe 'the merchants dashboard page' do
     expect(page).to have_content(item_2.name)
   end
 
-  it "links to the merchant invoices index" do
+  xit "links to the merchant invoices index" do
     visit "/merchants/#{merchant_1.id}/dashboard"
     click_link 'My Invoices'
     expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices")
@@ -57,6 +60,11 @@ RSpec.describe 'the merchants dashboard page' do
     expect(page).to have_content(customer_4.name)
     expect(page).to have_content(customer_5.name)
   end
+
+  it 'displays items not yet shipped' do
+    visit "/merchants/#{merchant_1.id}/dashboard"
+
+    expect(page).to have_content(item_2.name)
+    expect(page).to_not have_content(item_1.name)
+  end
 end
-
-

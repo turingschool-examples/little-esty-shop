@@ -4,4 +4,7 @@
 <p><%= link_to "My Items", "/merchants/#{@merchant.id}/items", method: :get %></p>
 <p><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %></p>
 
-
+<p>Items Ready To Ship: </p>
+<% @merchant.items_ready_to_ship.each do |item| %>
+  <ul>Name: <%= item.name %>, Invoice IDs:<%= item.invoice_ids %></ul>
+<% end %>
