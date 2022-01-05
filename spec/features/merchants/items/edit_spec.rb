@@ -23,7 +23,7 @@ RSpec.describe "Merchant Item Edit Page" do
       expect(page).to have_content("pizza's Info")
       expect(page).to have_content('pizza')
       expect(page).to have_content('has pineapples')
-      expect(page).to have_content(10000)
+      expect(page).to have_content("$100.00")
     end
     within '.flash' do
       expect(page).to have_content("pizza was successfully updated.")

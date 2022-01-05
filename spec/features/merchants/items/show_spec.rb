@@ -11,7 +11,7 @@ RSpec.describe 'Merchant Items Show page' do
     within ".item" do
       expect(page).to have_content("#{item1.name}'s Info")
       expect(page).to have_content("Item description: #{item1.description}")
-      expect(page).to have_content("Item cost: #{"$" + (item1.unit_price / 100).to_f.to_s}")
+      expect(page).to have_content("Item cost: #{"$" + (item1.unit_price / 100).to_f.to_s + "0"}")
     end
   end
 
