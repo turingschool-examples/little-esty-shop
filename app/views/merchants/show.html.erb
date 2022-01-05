@@ -6,5 +6,8 @@
 
 <p>Items Ready To Ship: </p>
 <% @merchant.items_ready_to_ship.each do |item| %>
-  <ul>Name: <%= item.name %>, Invoice IDs:<%= item.invoice_ids %></ul>
+  <% item.invoices.each do |invoice| %>
+  <ul>Name: <%= item.name %>, Invoice IDs:<%= item.invoice_ids %> Created at: <%= invoice.created_at.strftime("%A, %B %d %Y") %></ul>
 <% end %>
+<% end %>
+
