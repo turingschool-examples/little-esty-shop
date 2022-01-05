@@ -8,4 +8,27 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
   end
+
+  # def index
+  # @books = Book.all
+  # flash.now[:notice] = "We have exactly #{@books.size} books available."
+  # end
+
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+      flash[:notice] = "Item sccessfully updated"
+      redirect_to(merchant_item_path)
+    end
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
+  end
+
+  private
+  def item_params
+    params.permit(:name, :description, :unit_price)
+  end
 end
