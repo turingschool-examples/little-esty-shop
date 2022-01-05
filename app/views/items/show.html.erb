@@ -2,3 +2,6 @@
 <p>Name: <%= @item.name %>
 Description: <%= @item.description %>
 Current Selling Price: <%= @item.unit_price %></p>
+
+
+<%= link_to "Edit #{@item.name}", edit_merchant_item_path(@item.merchant, @item) %>

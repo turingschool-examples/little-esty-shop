@@ -11,6 +11,8 @@ RSpec.describe "Merchant item show" do
   it 'I see all of the items attributes' do
     visit merchant_items_path(@merchant1)
     click_link "#{@item1.name}"
+
+    expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item1.description)
     expect(page).to have_content(@item1.unit_price)
