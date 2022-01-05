@@ -123,10 +123,25 @@ RSpec.describe 'Merchant Dashboard' do
     expect(page).to have_no_content(@customer_6.first_name)
   end
 
-#   As a merchant,
-# When I visit my merchant dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions with my merchant
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
+  scenario 'visitor sees number of successful transactions next to each customer' do
+    within "#customer#{@merchant_1.top_5_customers.first.id}" do
+      expect(page).to have_content(@merchant_1.top_5_customers.first.transaction_count)
+    end
+
+    within "#customer#{@merchant_1.top_5_customers[1].id}" do
+      expect(page).to have_content(@merchant_1.top_5_customers[1].transaction_count)
+    end
+
+    within "#customer#{@merchant_1.top_5_customers[2].id}" do
+      expect(page).to have_content(@merchant_1.top_5_customers[2].transaction_count)
+    end
+
+    within "#customer#{@merchant_1.top_5_customers[3].id}" do
+      expect(page).to have_content(@merchant_1.top_5_customers[3].transaction_count)
+    end
+
+    within "#customer#{@merchant_1.top_5_customers[4].id}" do
+      expect(page).to have_content(@merchant_1.top_5_customers[4].transaction_count)
+    end
+  end
 end
