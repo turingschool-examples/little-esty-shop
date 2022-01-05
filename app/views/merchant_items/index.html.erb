@@ -1,0 +1,10 @@
+<div class= "merchant">
+  <h1><%= @merchant.name %>'s Items</h1>
+
+<ul>
+<% @items.each do |item| %>
+<div class= "item-<%= item.id %>">
+  <li><%= item.name %></li>
+</div>
+<% end %>
+</div>

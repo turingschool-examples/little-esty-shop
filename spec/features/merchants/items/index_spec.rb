@@ -8,9 +8,9 @@ RSpec.describe 'Merchant Items Index page' do
     item1 = merchant1.items.create!(name: 'item1', description: 'coolest item ever1', unit_price: 10000)
     item2 = merchant1.items.create!(name: 'item2', description: 'coolest item ever2', unit_price: 20000)
     item3 = merchant1.items.create!(name: 'item3', description: 'coolest item ever3', unit_price: 30000)
-    item4 = merchant2.create!(name: 'item4', description: 'coolest item ever4', unit_price: 40000)
+    item4 = merchant2.items.create!(name: 'item4', description: 'coolest item ever4', unit_price: 40000)
 
-    visit merchant_path(merchant1)
+    visit merchant_items_path(merchant1)
 
     within ".merchant" do
       expect(page).to have_content("#{merchant1.name}'s Items")
