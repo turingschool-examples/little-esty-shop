@@ -22,29 +22,23 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it "has the names of the top 5 customers with largest number of completed transactions" do
-    merchant = create(:merchant_with_completed_invoices, invoice_count: 20)
+    merchant = create(:merchant)
+
     customer_1 = create(:customer, first_name: 'Bob')
     customer_2 = create(:customer, first_name: 'John')
     customer_3 = create(:customer, first_name: 'Abe')
     customer_4 = create(:customer, first_name: 'Zach')
     customer_5 = create(:customer, first_name: 'Charlie')
 
-    # Assign completed transactions to specific customers.
-    first = merchant.invoices.first.id
-    last = merchant.invoices.last.id
-    merchant.invoices.where(id: first..first + 5).update(customer_id: customer_1.id)
-    merchant.invoices.where(id: first + 6..first + 7).update(customer_id: customer_2.id)
-    merchant.invoices.where(id: first + 8..first + 15).update(customer_id: customer_3.id)
-    merchant.invoices.where(id: first + 16).update(customer_id: customer_4.id)
-    merchant.invoices.where(id: first + 17..last).update(customer_id: customer_5.id)
+    merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
+    merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
+    merchant_3 = create(:merchant_with_invoices, invoice_count: 8, customer: customer_3, invoice_status: 2)
+    merchant_4 = create(:merchant_with_invoices, invoice_count: 1, customer: customer_4, invoice_status: 2)
+    merchant_5 = create(:merchant_with_invoices, invoice_count: 4, customer: customer_5, invoice_status: 2)
 
-    # I thought this would work but it didn't
-    # merchant.invoices.first(6).update(customer_id: customer_1.id)
-    # merchant.invoices.limit(2).offset(6).update(customer_id: customer_2.id)
-    # merchant.invoices.limit(8).offset(8).update(customer_id: customer_3.id)
-    # merchant.invoices.limit(1).offset(16).update(customer_id: customer_4.id)
-    # merchant.invoices.last(3).update(customer_id: customer_5.id)
-
+    #update all items to be under original merchant
+    Item.where(merchant_id: [merchant_1.id, merchant_2.id, merchant_3.id, merchant_4.id, merchant_5.id]).update(merchant: merchant)
+    
     visit "/merchants/#{merchant.id}/dashboard"
 
     within 'div.top_customers' do
