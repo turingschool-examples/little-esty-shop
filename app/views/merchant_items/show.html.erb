@@ -1,6 +1,9 @@
 <div class="item">
+
   <h1><%= @item.name %>'s Info</h1>
-  <%= @item.description %>
-  <%= @item.unit_price %>
-  <%= link_to  "Update #{@item.name}", edit_merchant_item_path(@merchant, @item) %>
+  <ul>
+  <li>Item description: <%= @item.description %></li>
+  <li>Item cost: <%= "$#{(@item.unit_price / 100).to_f.to_s}" %></li>
+  <li><%= link_to  "Update #{@item.name}", edit_merchant_item_path(@merchant, @item) %></li>
+  </ul>
 </div>

@@ -9,9 +9,8 @@ RSpec.describe 'Merchant Items Show page' do
     visit merchant_item_path(merchant1, item1)
     within ".item" do
       expect(page).to have_content("#{item1.name}'s Info")
-      expect(page).to have_content("#{item1.name}")
-      expect(page).to have_content("#{item1.description}")
-      expect(page).to have_content("#{item1.unit_price}")
+      expect(page).to have_content("Item description: #{item1.description}")
+      expect(page).to have_content("Item cost: #{"$" + (item1.unit_price / 100).to_f.to_s}")
     end
   end
 
