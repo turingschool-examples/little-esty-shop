@@ -157,7 +157,7 @@ RSpec.describe 'Merchant Dashboard' do
     end
 
     scenario 'i see the invoice id next to the item name' do 
-save_and_open_page
+
       expect(page).to have_link(@invoice_item_1.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_1.id))
       expect(page).to have_link(@invoice_item_2.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_2.id))
       expect(page).to have_link(@invoice_item_3.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_3.id))
@@ -166,10 +166,3 @@ save_and_open_page
     end 
   end
 end 
-# As a merchant
-# When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
