@@ -5,6 +5,8 @@ RSpec.describe 'the merchants dashboard page' do
 
   let!(:item_1) {merchant_1.items.create!(name: 'Obsidian Nobice', description: 'A beautiful obsidian', unit_price: 50)}
   let!(:item_2) {merchant_1.items.create!(name: 'Pleasure Geode', description: 'Glamourous Geode', unit_price: 100)}
+  let!(:item_3) {merchant_1.items.create!(name: 'Brown Pebble', description: 'GClassic rock', unit_price: 50)}
+
 
   let!(:customer_1) {Customer.create!(first_name: 'Billy', last_name: 'Carruthers')}
   let!(:customer_2) {Customer.create!(first_name: 'Dave', last_name: 'King')}
@@ -32,6 +34,8 @@ RSpec.describe 'the merchants dashboard page' do
 
   let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
   let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
+  let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_3.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
+
 
   it "shows the name of the merchant" do
     visit "/merchants/#{merchant_1.id}/dashboard"
@@ -67,10 +71,11 @@ RSpec.describe 'the merchants dashboard page' do
     expect(page).to_not have_content(item_1.name)
   end
 
-  it "displays the date of items not yet shipped" do
+  it "displays the date of items not yet shipped by most recent created first" do
     visit "/merchants/#{merchant_1.id}/dashboard"
     expect(page).to have_content("Wednesday, January 05 2022")
+    expect(item_2.name).to appear_before(item_3.name)
   end
 
-  
+
 end
