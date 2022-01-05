@@ -9,7 +9,7 @@ describe 'merchants items index' do
     @item2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
     @item3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: @merchant2.id)
 
-    visit "merchants/#{@merchant1.id}/items"
+    visit merchant_items_path(@merchant1)
   end
 
   describe 'display' do
@@ -17,6 +17,11 @@ describe 'merchants items index' do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item2.name)
       expect(page).to_not have_content(@item3.name)
+    end
+
+    it 'every item name is a link to its show page' do
+      click_link(@item1.name)
+      expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
     end
   end
 end
