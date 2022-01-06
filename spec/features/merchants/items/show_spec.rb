@@ -16,17 +16,18 @@ RSpec.describe 'Merchant Items Show page' do
     merchant1 = create(:merchant)
     item1 = create(:item, merchant: merchant1)
     visit "/merchants/#{merchant1.id}/items/#{item1.id}"
-
-    expect(page).to have_content("Update #{item1.name}")
+    expect(page).to have_button("Update #{item1.name}")
     click_on("Update #{item1.name}")
+
     expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
 
     within("#update_item") do
       fill_in 'unit_price', with: 11111
+      click_on 'Submit'
     end
-    click_on 'Submit'
-    expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+    expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
+    save_and_open_page
     #checking for flash message
-    expect(page).to have_content("Item Succeefully Updated")
-  end 
+    expect(page).to have_content("Item Successfully Updated")
+  end
 end
