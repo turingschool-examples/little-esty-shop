@@ -1,14 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Customers:</strong>
-  <%= @invoice.customers %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @invoice.status %>
-</p>
-
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+<h1><%= @merchant.name %></h1>
+<h2>Invoice #<%= @invoice.id %></h2>
+<ul>
+  <li>Status: <%= @invoice.status %></li>
+  <li>Created On: <%= @invoice.created_at_formatted %></li>
+</ul>
+<h2>Customer:</h2>
+<p><%= @invoice.customer_full_name %></p>

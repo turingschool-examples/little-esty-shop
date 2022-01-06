@@ -9,16 +9,4 @@ RSpec.describe "transactions/edit", type: :view do
     ))
   end
 
-  xit "renders the edit transaction form" do
-    render
-
-    assert_select "form[action=?][method=?]", transaction_path(@transaction), "post" do
-
-      assert_select "input[name=?]", "transaction[invoices_id]"
-
-      assert_select "input[name=?]", "transaction[credit_card_number]"
-
-      assert_select "input[name=?]", "transaction[result]"
-    end
-  end
 end
