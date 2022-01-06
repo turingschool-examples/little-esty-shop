@@ -35,9 +35,15 @@ class ItemsController < ApplicationController
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
-    item.update(item_params)
-    item.save
-    redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
+    if params[:name] == "" || params[:description] == "" || params[:unit_price] == ""
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}/edit"
+      flash[:alert] = "You cannot leave any field blank."
+    else
+      item.update(item_params)
+      item.save
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
+      flash[:notice] = "Your item has been updated!"
+    end
   end
 
   # DELETE /items/1 or /items/1.json
