@@ -46,9 +46,23 @@ RSpec.describe 'the merchant invoice show page' do
     expect(page).to have_content(invoice_item_3.status)
   end
 
+
+  it 'updates invoice item status when selected from a dropdown menu ' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+    within "##{item_1.id}" do
+      expect(page).to have_content('Status: shipped')
+      select 'packaged', from: :new_invoice_item_status
+      click_button("Update Item Status")
+    end
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
+    within "##{item_1.id}" do
+      expect(page).to have_content('Status: packaged')
+      expect(page).to_not have_content('Status: shipped')
+    end
+
   it 'displays total revenue for merchants invoices' do
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-    expect(page).to have_content('Total Revenue: 150')
+    expect(page).to have_content('Total Revenue: 300')
   end
 end
