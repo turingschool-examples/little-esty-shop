@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many(:items) }
+    it { should have_many(:invoices).through(:items)}
+    it { should have_many(:invoice_items).through(:items)}
+    it { should have_many(:transactions).through(:invoices)}
+    it { should have_many(:customers).through(:invoices)}
   end
 
   describe 'instance methods' do
@@ -10,7 +14,10 @@ RSpec.describe Merchant, type: :model do
 
     let!(:item_1) {merchant_1.items.create!(name: 'Obsidian Nobice', description: 'A beautiful obsidian', unit_price: 50)}
     let!(:item_2) {merchant_1.items.create!(name: 'Pleasure Geode', description: 'Glamourous Geode', unit_price: 100)}
-    let!(:item_3) {merchant_1.items.create!(name: 'Brown Pebble', description: 'GClassic rock', unit_price: 50)}
+    let!(:item_3) {merchant_1.items.create!(name: 'Brown Pebble', description: 'Classic rock', unit_price: 50)}
+    let!(:item_4) {merchant_1.items.create!(name: 'Red Rock', description: 'A big red rock', unit_price: 50)}
+    let!(:item_5) {merchant_1.items.create!(name: 'Solid Limestone', description: 'not crumbly', unit_price: 50)}
+    let!(:item_6) {merchant_1.items.create!(name: 'Healing Crystal', description: 'does nothing', unit_price: 50)}
 
 
     let!(:customer_1) {Customer.create!(first_name: 'Billy', last_name: 'Carruthers')}
@@ -38,8 +45,13 @@ RSpec.describe Merchant, type: :model do
     let!(:transaction_8) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
 
     let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
-    let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
+    let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'packaged')}
     let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_3.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
+    let!(:invoice_item_4) {InvoiceItem.create!(invoice_id: invoice_4.id, item_id: item_4.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2020))}
+    let!(:invoice_item_5) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_5.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2019))}
+    let!(:invoice_item_6) {InvoiceItem.create!(invoice_id: invoice_6.id, item_id: item_6.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
+
+
 
 
     xit "favorite customers" do
@@ -48,7 +60,7 @@ RSpec.describe Merchant, type: :model do
 
     it 'items_ready_to_ship' do
       # binding.pry
-      expect(merchant_1.items_ready_to_ship).to eq([item_3, item_2])
+      expect(merchant_1.items_ready_to_ship).to eq([invoice_item_6, invoice_item_5, invoice_item_4, invoice_item_3, invoice_item_2])
     end
 
   end

@@ -25,8 +25,11 @@ RSpec.describe 'Merchant Items Index Page' do
     expect(page).to have_button("Disable")
   end
 
-  it 'can update status of item' do
+  it 'item is disabled by default' do
     expect(page).to have_content('Couch (disabled)')
+  end
+
+  it 'can update status of item' do
     click_button("Enable", id: @item_1.id)
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
     expect(page).to have_content('Couch (enabled)')
