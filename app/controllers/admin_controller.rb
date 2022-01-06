@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
   def dashboard
-
-  end 
+    @merchants = Merchant.all 
+  end
 end

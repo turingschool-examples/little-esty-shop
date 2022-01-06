@@ -2,3 +2,8 @@
 
 <h3><%= link_to "Merchants Index", "/admin/merchants"%></h3>
 <h3><%= link_to "Invoices Index", "/admin/invoices"%></h3>
+
+<h2>Top 5 Customers</h2>
+<% @merchants.top_customers.each do |customer| %>
+  <h3><%= customer.full_name %> with <%= customer.successful_transactions %> completed transactions</h3>
+<% end %>

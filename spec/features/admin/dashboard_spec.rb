@@ -15,11 +15,11 @@ RSpec.describe 'The Admin Dashboard page' do
   end
 
   it 'shows the names of the top 5 customers ' do
-    customer_1 = create(:customer, first_name: 'Bob')
-    customer_2 = create(:customer, first_name: 'John')
-    customer_3 = create(:customer, first_name: 'Abe')
-    customer_4 = create(:customer, first_name: 'Zach')
-    customer_5 = create(:customer, first_name: 'Charlie')
+    customer_1 = create(:customer, first_name: 'Bob', last_name: "Smith")
+    customer_2 = create(:customer, first_name: 'John', last_name: "Charles")
+    customer_3 = create(:customer, first_name: 'Abe', last_name: "McConnel")
+    customer_4 = create(:customer, first_name: 'Zach', last_name: "Doe")
+    customer_5 = create(:customer, first_name: 'Charlie', last_name: "Rey")
 
     merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
     merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
@@ -30,12 +30,12 @@ RSpec.describe 'The Admin Dashboard page' do
     visit "/admin"
     expect(page).to have_content("Top 5 Customers")
 
-    expect('Abe').to appear_before('Bob')
-    expect('Bob').to appear_before('Charlie')
-    expect('Charlie').to appear_before('John')
-    expect('John').to appear_before('Zach')
+    expect('Abe McConnel').to appear_before('Bob Smith')
+    expect('Bob Smith').to appear_before('Charlie Rey')
+    expect('Charlie Rey').to appear_before('John Charles')
+    expect('John Charles').to appear_before('Zach Doe')
 
-    expect(page).to have_content("Abe Completed Transactions: 8")
-    expect(page).to have_content("Zach Completed Transactions: 8")
-  end 
+    expect(page).to have_content("Abe McConnel with 8 completed transactions")
+    expect(page).to have_content("Zach Doe with 1 completed transactions")
+  end
 end
