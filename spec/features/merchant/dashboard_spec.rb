@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Dashboard Index' do
   describe 'view' do
-    before(:each) do
-      @merchant_1 = Merchant.create!(name: "Frank")
-    end
+    # before(:each) do
+    #   @merchant_1 = Merchant.create!(name: "Frank")
+    # end
 
     it 'displays the name of the Merchant' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
@@ -30,7 +30,6 @@ RSpec.describe 'Merchant Dashboard Index' do
 
     it 'shows the names of the top 5 customers and their number of successful transactions' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-
       expect(page).to have_content("Top 5 Customers")
       expect(page).to have_content("#{@customer_2.first_name}: 2 successful transactions")
       expect(page).to have_content("#{@customer_3.first_name}: 3 successful transactions")

@@ -25,13 +25,17 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-    item.update(item_params)
-
-    redirect_to merchant_item_path(item.merchant, item), notice: "Successfully Updated"
+    if params[:item_status]
+      item.update(item_params)
+      redirect_to merchant_items_path(item.merchant)
+    else
+      item.update(item_params)
+      redirect_to merchant_item_path(item.merchant, item), notice: "Successfully Updated"
+    end
   end
 
   private
     def item_params
-      params.permit(:name, :description, :unit_price)
+      params.permit(:name, :description, :unit_price, :item_status)
     end
 end

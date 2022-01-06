@@ -35,4 +35,31 @@ RSpec.describe "Merchant item index" do
     click_link "Create a New Item"
 
   end
+
+  it 'has an enable button for each item that changes the status' do
+    visit merchant_items_path(@merchant1)
+
+    within("#item-#{@item1.id}") do
+      click_button("Enable")
+
+      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(page).to have_content("Status: enabled" )
+    end
+  end
+
+  it 'has a disable button for each item that changes the status' do
+    visit merchant_items_path(@merchant1)
+
+    within("#item-#{@item1.id}") do
+      click_button("Disable")
+
+      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(page).to have_content("Status: disabled" )
+
+      click_button("Enable")
+
+      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(page).to have_content("Status: enabled" )
+    end
+  end
 end
