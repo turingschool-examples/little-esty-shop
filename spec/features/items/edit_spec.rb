@@ -21,17 +21,10 @@ describe 'merchant item edit page' do
 
     click_button('Submit')
     expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
-    save_and_open_page
 
     expect(page).to have_content('Sulfate free shampoo')
     expect(page).to have_content('Gentle hair cleanser')
     expect(page).to have_content(11)
     expect(page).to have_content("Item sccessfully updated")
-
   end
-  #
-  # it 'flash message' do
-  #
-  #   expect(page).to have_content("Item sccessfully updated")
-  # end
 end
