@@ -42,11 +42,11 @@ RSpec.describe Merchant do
     @customer_5 = Customer.create!(first_name: "Rick", last_name: "James")
     @customer_6 = Customer.create!(first_name: "Dave", last_name: "Chappelle")
 
-    @invoice_1 = @customer_1.invoices.create!(status: 1)
-    @invoice_2 = @customer_2.invoices.create!(status: 1)
-    @invoice_3 = @customer_3.invoices.create!(status: 1)
-    @invoice_4 = @customer_4.invoices.create!(status: 1)
-    @invoice_5 = @customer_1.invoices.create!(status: 1)
+    @invoice_1 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')
+    @invoice_2 = @customer_2.invoices.create!(status: 1, created_at: '2012-04-25 08:54:09')
+    @invoice_3 = @customer_3.invoices.create!(status: 1, created_at: '2012-10-25 04:54:09')
+    @invoice_4 = @customer_4.invoices.create!(status: 1, created_at: '2012-03-26 01:54:09')
+    @invoice_5 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')
     @invoice_6 = @customer_2.invoices.create!(status: 1)
     @invoice_7 = @customer_3.invoices.create!(status: 1)
     @invoice_8 = @customer_4.invoices.create!(status: 1)
@@ -107,12 +107,16 @@ RSpec.describe Merchant do
   end
 
   describe 'instance methods' do
-    it 'returns top 5 customers with most succesful transactions' do
-      expect(@merchant_1.top_5_customers).to eq([@customer_5, @customer_1, @customer_3, @customer_4, @customer_2])
+    describe '#top_5_customers' do
+      it 'returns top 5 customers with most succesful transactions' do
+        expect(@merchant_1.top_5_customers).to eq([@customer_5, @customer_1, @customer_3, @customer_4, @customer_2])
+      end
     end
 
-    it '.items_not_shipped' do 
-      expect(@merchant_1.items_not_shipped).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
+    describe '#items_not_shipped' do
+      it 'returns unshipped items ordered by their invoice creation date' do
+        expect(@merchant_1.items_not_shipped).to eq([@item_1, @item_4, @item_5, @item_2, @item_3])
+      end
     end
-  end 
+  end
 end

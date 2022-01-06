@@ -35,12 +35,12 @@ RSpec.describe 'Merchant Dashboard' do
     @customer_5 = Customer.create!(first_name: "Rick", last_name: "James")
     @customer_6 = Customer.create!(first_name: "Dave", last_name: "Chappelle")
 
-    @invoice_1 = @customer_1.invoices.create!(status: 1)
-    @invoice_2 = @customer_2.invoices.create!(status: 1)
-    @invoice_3 = @customer_3.invoices.create!(status: 1)
-    @invoice_4 = @customer_4.invoices.create!(status: 1)
-    @invoice_5 = @customer_1.invoices.create!(status: 1)
-    @invoice_6 = @customer_2.invoices.create!(status: 1)
+    @invoice_1 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')
+    @invoice_2 = @customer_2.invoices.create!(status: 1, created_at: '2012-04-25 08:54:09')
+    @invoice_3 = @customer_3.invoices.create!(status: 1, created_at: '2012-10-25 04:54:09')
+    @invoice_4 = @customer_4.invoices.create!(status: 1, created_at: '2012-03-26 01:54:09')
+    @invoice_5 = @customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')
+    @invoice_6 = @customer_2.invoices.create!(status: 1, created_at: '2012-03-29 07:54:09')
     @invoice_7 = @customer_3.invoices.create!(status: 1)
     @invoice_8 = @customer_4.invoices.create!(status: 1)
     @invoice_9 = @customer_1.invoices.create!(status: 1)
@@ -76,6 +76,7 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_18 = InvoiceItem.create!(item_id: @item_18.id, invoice_id: @invoice_18.id, status: 2)
     @invoice_item_19 = InvoiceItem.create!(item_id: @item_19.id, invoice_id: @invoice_19.id, status: 2)
     @invoice_item_20 = InvoiceItem.create!(item_id: @item_20.id, invoice_id: @invoice_20.id, status: 2)
+    # @invoice_item_21 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_15.id, status: 2)
 
     @transaction_1 = @invoice_1.transactions.create!(result: 'success')
     @transaction_2 = @invoice_2.transactions.create!(result: 'success')
@@ -145,8 +146,8 @@ RSpec.describe 'Merchant Dashboard' do
     end
   end
 
-  describe 'in items ready to ship section' do 
-    scenario 'i see a list of item names that have not been shipped' do 
+  describe 'in items ready to ship section' do
+    scenario 'visitor sees a list of item names that have not been shipped' do
       expect(page).to have_content("Items Ready to Ship")
 
       expect(page).to have_content(@item_1.name)
@@ -156,13 +157,33 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content(@item_5.name)
     end
 
-    scenario 'i see the invoice id next to the item name' do 
+    scenario 'visitor sees the invoice id next to the item name' do
 
-      expect(page).to have_link(@invoice_item_1.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_1.id))
-      expect(page).to have_link(@invoice_item_2.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_2.id))
-      expect(page).to have_link(@invoice_item_3.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_3.id))
-      expect(page).to have_link(@invoice_item_4.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_4.id))
-      expect(page).to have_link(@invoice_item_5.invoice_id, href: merchant_invoice_path(@merchant_1.id, @invoice_5.id))
-    end 
+      expect(page).to have_link("#{@invoice_item_1.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_1.id))
+      expect(page).to have_link("#{@invoice_item_2.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_2.id))
+      expect(page).to have_link("#{@invoice_item_3.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_3.id))
+      expect(page).to have_link("#{@invoice_item_4.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_4.id))
+      expect(page).to have_link("#{@invoice_item_5.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_5.id))
+    end
+
+    scenario 'visitor sees date of invoice creation next to each item' do
+      expect(page).to have_content(@invoice_item_1.invoice_creation_date)
+      expect(page).to have_content(@invoice_item_2.invoice_creation_date)
+      expect(page).to have_content(@invoice_item_3.invoice_creation_date)
+      expect(page).to have_content(@invoice_item_4.invoice_creation_date)
+      expect(page).to have_content(@invoice_item_5.invoice_creation_date)
+    end
+
+    scenario 'visitor sees list ordered from oldest to newest' do
+      first = find("#invoiceitem#{@invoice_item_1.id}")
+      second = find("#invoiceitem#{@invoice_item_4.id}")
+      third = find("#invoiceitem#{@invoice_item_5.id}")
+      fourth = find("#invoiceitem#{@invoice_item_2.id}")
+      fifth = find("#invoiceitem#{@invoice_item_3.id}")
+      expect(first).to appear_before(second)
+      expect(second).to appear_before(third)
+      expect(third).to appear_before(fourth)
+      expect(fourth).to appear_before(fifth)
+    end
   end
-end 
+end
