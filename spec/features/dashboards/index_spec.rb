@@ -80,6 +80,13 @@ RSpec.describe 'merchant dashboard page', type: :feature do
         expect(cust_3.first_name).to appear_before(cust_6.first_name)
         expect(cust_6.first_name).to_not appear_before(cust_2.first_name)
       end
+      it "shows the count of succesfull transactions for the top 5 customers" do
+        expect(page).to have_content("Count of Transactions:")
+        expect("Count of Transactions: 2").to appear_before("Count of Transactions: 1")
+        expect(page).to have_content(1)
+        expect(page).to have_content(2)
+      save_and_open_page
+      end
     end
   end
 end
