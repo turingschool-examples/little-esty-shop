@@ -1,2 +1,2 @@
-class InvoiceItemsController < ApplicationsController
+class InvoiceItemsController < ApplicationController
 end

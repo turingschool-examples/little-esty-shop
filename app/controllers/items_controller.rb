@@ -1,3 +1,3 @@
-class ItemsController < ApplicationsController
+class ItemsController < ApplicationController
 
 end
