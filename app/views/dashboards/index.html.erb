@@ -7,5 +7,6 @@
 <% @merchant.top_customers.each do |customer| %>
 <h3> <%= customer.first_name %> </h3>
 <p>Count of Transactions: <%= customer.count_transaction %></p>
-
 <% end %>
+<p>Items Packaged and Ready to Ship: </p>
+<%= @merchant.items_ready_ship %> </p>

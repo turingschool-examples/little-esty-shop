@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def top_customers
-     Transaction.joins(invoice: :customer)
+     transactions.joins(invoice: :customer)
     .where('result =?',2)
     .select('customers.*,count(transactions) as count_transaction')
     .group('customers.id')
@@ -16,8 +16,6 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_ship
-    InvoiceItem.joins(:item)
-    .where('status = 1')
-    .pluck(:name)
+    invoice_items.where('status = 1').pluck(:name)
   end
 end

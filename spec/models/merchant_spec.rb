@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
 
    let!(:merch_1) { Merchant.create!(name: 'name_1') }
+   let!(:merch_2) { create(:merch_w_all, customer_count: 2) }
 
    let!(:cust_1) { Customer.create!(first_name: 'fn_1', last_name: 'ln_1') }
    let!(:cust_2) { Customer.create!(first_name: 'fn_2', last_name: 'ln_2') }
@@ -78,6 +79,7 @@ RSpec.describe Merchant, type: :model do
   describe 'Merchant Bashboard Items Ready to ship' do
     it "shows the item is ready to ship" do
       expected = [item_2.name, item_3.name, item_5.name]
+      # require "pry"; binding.pry
       expect(merch_1.items_ready_ship).to eq(expected)
     end
   end
