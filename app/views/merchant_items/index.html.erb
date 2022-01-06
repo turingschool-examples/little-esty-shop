@@ -25,3 +25,10 @@
 </div>
 
 <%= link_to "Create Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+
+<h3>Top 5 Items</h3>
+<div id='top-5-items'>
+  <% @items.top_5.each do |item| %>
+    <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>, Revenue: $<%= item.revenue_generated %></p>
+  <% end %>
+</div>
