@@ -6,4 +6,10 @@ Rails.application.routes.draw do
     get '/items', to: 'merchant_items#index'
     get '/invoices', to: 'merchant_invoices#index'
   end
+
+  namespace :admin do
+    root to: 'admin#index'
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
+  end
 end
