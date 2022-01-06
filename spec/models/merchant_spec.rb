@@ -11,7 +11,7 @@ RSpec.describe Merchant do
 
   describe 'class methods' do
     it '#top_five_customers' do
-      expect(@merchant_1.top_five_customers).to eq([@customer_4, @customer_5, @customer_6, @customer_3, @customer_2])
+      expect(@merchant_1.top_five_customers).to eq([@customer_6, @customer_4, @customer_5, @customer_3, @customer_2])
     end
 
     it '#items_ready_to_ship' do

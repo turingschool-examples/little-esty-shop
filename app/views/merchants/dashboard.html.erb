@@ -5,7 +5,7 @@
 
 <p>Top 5 Customers</p>
 <% @merchant.top_five_customers.each do |customer| %>
-  <p><%= customer.first_name %>: <%= customer.good_transactions %> successful transactions</p>
+  <p><%= customer.first_name %>: <%= customer.successful_transactions_count %> successful transactions</p>
 <% end %>
 
 <p>Items Ready to Ship<p>

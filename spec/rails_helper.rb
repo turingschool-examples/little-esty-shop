@@ -85,6 +85,7 @@ RSpec.configure do |config|
     @invoice_16 = @customer_6.invoices.create!
     @invoice_17 = @customer_6.invoices.create!
     @invoice_18 = @customer_6.invoices.create!
+    @invoice_19 = @customer_6.invoices.create!
     #invoice items
     @invoice_1.invoice_items.create!(item_id: @item_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0)
     @invoice_2.invoice_items.create!(item_id: @item_2.id, quantity: 2, unit_price: @item_2.unit_price, status: 0)
@@ -101,9 +102,10 @@ RSpec.configure do |config|
     @invoice_13.invoice_items.create!(item_id: @item_3.id, quantity: 13, unit_price: @item_3.unit_price, status: 1)
     @invoice_14.invoice_items.create!(item_id: @item_4.id, quantity: 14, unit_price: @item_4.unit_price, status: 1)
     @invoice_15.invoice_items.create!(item_id: @item_5.id, quantity: 15, unit_price: @item_5.unit_price, status: 1)
-    @invoice_16.invoice_items.create!(item_id: @item_6.id, quantity: 16, unit_price: @item_9.unit_price, status: 2)
-    @invoice_17.invoice_items.create!(item_id: @item_7.id, quantity: 17, unit_price: @item_2.unit_price, status: 2)
-    @invoice_18.invoice_items.create!(item_id: @item_8.id, quantity: 18, unit_price: @item_3.unit_price, status: 2)
+    @invoice_16.invoice_items.create!(item_id: @item_6.id, quantity: 16, unit_price: @item_6.unit_price, status: 2)
+    @invoice_17.invoice_items.create!(item_id: @item_7.id, quantity: 17, unit_price: @item_7.unit_price, status: 2)
+    @invoice_18.invoice_items.create!(item_id: @item_8.id, quantity: 18, unit_price: @item_8.unit_price, status: 2)
+    @invoice_19.invoice_items.create!(item_id: @item_8.id, quantity: 18, unit_price: @item_8.unit_price, status: 0)
     #transaction
     @invoice_1.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
     @invoice_2.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
@@ -123,6 +125,7 @@ RSpec.configure do |config|
     @invoice_16.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
     @invoice_17.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
     @invoice_18.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
+    @invoice_19.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "failed")
   end
 
   config.after(:each) do
