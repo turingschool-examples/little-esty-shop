@@ -1,7 +1,9 @@
-<<<<<<< HEAD
-<h1>Invoices</h1>
+<h1><%= @merchant.name %> Invoices</h1>
 
-=======
+<h2>My Invoices</h2>
 
-<h1>Invoices</h1>
->>>>>>> 7800c15616b0572dec662dc66feb667bf81c76c3
+<ul>
+  <% @invoices.each do |invoice| %>
+    <li>Invoice #<%= link_to invoice.id, [@merchant, invoice] %></li>
+  <% end %>
+</ul>
