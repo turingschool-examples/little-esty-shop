@@ -31,4 +31,14 @@ RSpec.describe Invoice, type: :model do
   describe 'class methods' do
 
   end
+
+  describe 'instance methods' do
+    describe '#created_at_formatted' do
+      it 'should return created_at date formatted' do
+        invoice_1 = build(:invoice, created_at: DateTime.new(2022, 1, 5, 0 , 0, 0))
+  
+        expect(invoice_1.created_at_formatted).to eq('Wednesday, January 5, 2022')
+      end
+    end
+  end
 end
