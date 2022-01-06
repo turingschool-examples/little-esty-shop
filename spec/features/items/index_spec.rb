@@ -24,7 +24,7 @@ RSpec.describe "Merchant item index" do
 
   it 'has an enable button for each item that changes the status' do
     visit merchant_items_path(@merchant1)
-    save_and_open_page
+
     within("#item-#{@item1.id}") do
       click_button("Enable")
       expect(current_path).to eq(merchant_items_path(@merchant1))
