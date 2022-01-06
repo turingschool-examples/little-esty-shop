@@ -45,4 +45,10 @@ RSpec.describe 'the merchant invoice show page' do
     expect(page).to have_content(invoice_item_2.status)
     expect(page).to have_content(invoice_item_3.status)
   end
+
+  it 'displays total revenue for merchants invoices' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+    expect(page).to have_content('Total Revenue: 150')
+  end
 end
