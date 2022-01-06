@@ -14,6 +14,13 @@ RSpec.describe 'Merchant Items Index page' do
     expect(page).to_not have_content('Eric')
   end
 
+  it "Has buttons next to each item to enable or disable. Both buttons refresh the page with updated status" do
+    merchant = create(:merchant)
+    visit "/merchants/#{merchant.id}/items"
+
+    within("")
+  end
+
   it "has a link to create a new item" do
     merchant = create(:merchant)
 

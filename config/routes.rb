@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   get '/admin/invoices', to: 'admin_invoices#index'
 
-  # resources :merchant, only: [:index, :show, :new, :edit, :create, :update] do
-  #   resources :index
-  # end
+  # resources :merchant, only: [:index, :show, :new, :edit, :create, :update]
+#run rails routes after i get my syntax right and comment out handrolled
 end
