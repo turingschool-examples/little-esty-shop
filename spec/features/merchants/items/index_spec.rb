@@ -44,5 +44,6 @@ RSpec.describe 'Merchant Items Index page' do
     item3 = merchant1.items.create!(name: 'item3', description: 'coolest item ever3', unit_price: 30000)
 
     find(".item-#{item1.id}").click
+    expected(page).to have_content("Item Status: #{item1.status}")
   end
 end
