@@ -20,4 +20,3 @@ class Merchant < ApplicationRecord
             .order(created_at: :asc)
   end
 end
-bundle lock --add-platform x86_64-linux
