@@ -58,6 +58,13 @@ RSpec.describe 'Merchant Dashboard' do
     @transaction_1 = @invoice_1.transactions.create!(result: 'success')
     @transaction_2 = @invoice_2.transactions.create!(result: 'success')
     @transaction_3 = @invoice_3.transactions.create!(result: 'success')
+    @transaction_4 = @invoice_1.transactions.create!(result: 'success')
+    @transaction_5 = @invoice_2.transactions.create!(result: 'success')
+    @transaction_6 = @invoice_3.transactions.create!(result: 'success')
+    @transaction_7 = @invoice_1.transactions.create!(result: 'success')
+    @transaction_8 = @invoice_2.transactions.create!(result: 'success')
+    @transaction_9 = @invoice_3.transactions.create!(result: 'success')
+    @transaction_10 = @invoice_3.transactions.create!(result: 'success')
 
 
     visit merchant_items_path(@merchant_1.id)
@@ -66,9 +73,16 @@ RSpec.describe 'Merchant Dashboard' do
   scenario 'visitor sees the name of all items of particular merchant as links' do
     expect(current_path).to eq(merchant_items_path(@merchant_1.id))
 
-    expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
-    expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
-    expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
+    within "#all_items-#{@merchant_1.id}" do
+      expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
+      expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
+      expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
+      expect(page).to have_link("#{@item_4.name}", href: merchant_item_path(@merchant_1.id, @item_4.id))
+      expect(page).to have_link("#{@item_5.name}", href: merchant_item_path(@merchant_1.id, @item_5.id))
+      expect(page).to have_link("#{@item_6.name}", href: merchant_item_path(@merchant_1.id, @item_6.id))
+      expect(page).to have_link("#{@item_7.name}", href: merchant_item_path(@merchant_1.id, @item_7.id))
+      expect(page).to have_link("#{@item_8.name}", href: merchant_item_path(@merchant_1.id, @item_8.id))
+    end
   end
 
 # As a merchant
@@ -95,17 +109,25 @@ RSpec.describe 'Merchant Dashboard' do
     expect(second).to appear_before(third)
     expect(third).to appear_before(fourth)
     expect(fourth).to appear_before(fifth)
-    save_and_open_page
   end
 
-  xscenario 'visitor sees that each item name in the top item list also links to that item show page' do
+  scenario 'visitor sees that each item name in the top item list also links to that item show page' do
+    within "#top_five_items-#{@merchant_1.id}" do
+      expect(page).to have_link(@item_7.name)
+      expect(page).to have_link(@item_1.name)
+      expect(page).to have_link(@item_3.name)
+      expect(page).to have_link(@item_8.name)
+      expect(page).to have_link(@item_2.name)
+    end
   end
-
-  xscenario 'visitor sees the total revenue generated next to each item name' do
+###STILL NEED TO FIGURE OUT MONEY CONVERSIONS FOR THIS VIEW
+  scenario 'visitor sees the total revenue generated next to each item name' do
+    within "#top_five_items-#{@merchant_1.id}" do
+      expect(page).to have_content(@merchant_1.top_five_items[0].total_revenue)
+      expect(page).to have_content(@merchant_1.top_five_items[1].total_revenue)
+      expect(page).to have_content(@merchant_1.top_five_items[2].total_revenue)
+      expect(page).to have_content(@merchant_1.top_five_items[3].total_revenue)
+      expect(page).to have_content(@merchant_1.top_five_items[4].total_revenue)
+    end
   end
-
-  xscenario 'only invoices with at least one successful transaction should count towards revenue' do
-  end
-
-
 end
