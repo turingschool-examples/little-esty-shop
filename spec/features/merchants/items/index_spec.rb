@@ -51,7 +51,7 @@ RSpec.describe 'Merchant Items Index page' do
     end
 
     find("#enable-#{item1.id}").click
-
+    
     within '.enabled-items' do
       expect(page).to have_content(item1.name)
     end
