@@ -1,5 +1,10 @@
-<h1> <%= @item.name %> Info</h1>
+<h1>Item Info</h1>
 
-<p><%= @item.name %></p>
-<p><%= @item.description %></p>
-<p><%= @item.unit_price %></p>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+<p>Name: <%= @item.name %></p>
+<p>Description: <%= @item.description %></p>
+<p>Current Selling Price: <%= @item.unit_price %></p>
+
+<%= link_to 'Edit Item', "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %>
