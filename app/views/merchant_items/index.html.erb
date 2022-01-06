@@ -4,8 +4,8 @@
   <% @items.each do |item| %>
     <div class="<%= "item_#{item.id}" %>">
       <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
-      <h4><%= link_to "Enable", "/merchants/#{@merchant.id}/items/", method: :patch %></h4>
-      <h4><%= link_to "Disable", "/merchants/#{@merchant.id}/items/", method: :patch %></h4>
+      <h4><%= link_to "Enable", "/merchants/#{@merchant.id}/items", method: :patch %></h4>
+      <h4><%= link_to "Disable", "/merchants/#{@merchant.id}/items", method: :patch %></h4>
     </div>
   <% end %>
 </div>
