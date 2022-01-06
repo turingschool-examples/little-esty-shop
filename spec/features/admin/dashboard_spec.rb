@@ -38,4 +38,16 @@ RSpec.describe 'The Admin Dashboard page' do
     expect(page).to have_content("Abe McConnel with 8 completed transactions")
     expect(page).to have_content("Zach Doe with 1 completed transactions")
   end
+
+  it 'shows incomplete invoices with all invoice ids' do
+    invoice_1 = create(:invoice, status: 0)
+    invoice_2 = create(:invoice, status: 0)
+    invoice_3 = create(:invoice, status: 2)
+    visit "/admin"
+
+    expect(page).to have_content("Incomplete Invoices")
+    expect(page).to have_content(invoice_1.id)
+    expect(page).to have_content(invoice_2.id)
+    expect(page).to_not have_content(invoice_3.id)
+  end
 end
