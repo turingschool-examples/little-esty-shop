@@ -27,6 +27,11 @@ class MerchantItemsController < ApplicationController
   end
 
   def new
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:id])
   end
 
 
