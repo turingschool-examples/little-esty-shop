@@ -26,7 +26,7 @@ class Admin::MerchantsController < ApplicationController
     if params[:status]
       @merchant.update(name: params[:status])
       redirect_to "/admin/merchants"
-    else
+    else 
       @merchant.update(name: params[:name])
       @merchant.save
       flash[:alert] = "Information successfully updated"
