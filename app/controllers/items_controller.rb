@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = Item.new
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   # GET /items/1/edit
@@ -25,28 +25,17 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
-
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: "Item was successfully created." }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.new(item_params)
+    item.save
+    redirect_to "/merchants/#{merchant.id}/items/"
   end
 
   # PATCH/PUT /items/1 or /items/1.json
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
-    item.update(
-      name: params[:name],
-      description: params[:description],
-      unit_price: params[:unit_price]
-    )
+    item.update(item_params)
     item.save
     redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
   end
@@ -68,6 +57,6 @@ class ItemsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:name, :merchants_id, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :merchant_id,)
   end
 end
