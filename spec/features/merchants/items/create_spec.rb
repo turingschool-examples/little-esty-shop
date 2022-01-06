@@ -15,7 +15,5 @@ RSpec.describe "Merchant Item Create page" do
 
     expect(current_path).to eq("/merchants/#{merchant1.id}/items")
     expect(page).to have_content("Paul's Item")
-    # expect(page).to have_content("An item from Paul")
-    # expect(page).to have_content(1000)
   end
 end
