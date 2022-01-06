@@ -16,6 +16,7 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_ship
-    invoice_items.where('status = 1').pluck(:name)
+    invoice_items.where('status = 1')
+
   end
 end

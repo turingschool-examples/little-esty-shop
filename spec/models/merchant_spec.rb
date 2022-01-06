@@ -80,7 +80,11 @@ RSpec.describe Merchant, type: :model do
     it "shows the item is ready to ship" do
       expected = [item_2.name, item_3.name, item_5.name]
       # require "pry"; binding.pry
-      expect(merch_1.items_ready_ship).to eq(expected)
+      expect(merch_1.items_ready_ship.pluck(:name)).to eq(expected)
+    end
+
+    it "shows the items ids" do
+      expected = [item_2.invoices.ids, item_3.invoices.ids, item_5.invoices.ids]
     end
   end
 end
