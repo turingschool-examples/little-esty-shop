@@ -16,9 +16,22 @@ RSpec.describe 'Merchant Items Index page' do
 
   it "Has buttons next to each item to enable or disable. Both buttons refresh the page with updated status" do
     merchant = create(:merchant)
+    item1 = create(:item, merchant: merchant, name: "Paul")
+    item2 = create(:item, merchant: merchant, name: "Leland")
     visit "/merchants/#{merchant.id}/items"
 
-    within("")
+    within("div.item_#{item1.id}") do
+      expect(page).to have_button("Enable")
+      expect(page).to have_content("Disable")
+    end
+    #these tests might need work ^ and also unsure what to test for string/integer with status
+    within("div.item_#{item2.id}") do
+      expect(page).to have_content("Enable")
+      expect(page).to have_content("Disable")
+
+      click_button("Enable")
+      expect(item2.status).to eq("Enabled")
+    end
   end
 
   it "has a link to create a new item" do
