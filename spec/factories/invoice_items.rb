@@ -1,9 +1,21 @@
 FactoryBot.define do
   factory :invoice_item do
-    items { nil }
-    invoices { nil }
-    quantity { 1 }
-    unit_price { 1 }
-    status { 1 }
+    sequence(:quantity)
+    sequence(:unit_price)
+    
+    trait :pending do
+      status { 'pending' }
+    end
+
+    trait :packaged do
+      status { 'packaged' }
+    end
+
+    trait :shipped do
+      status { 'shipped' }
+    end
+
+    item
+    invoice
   end
 end

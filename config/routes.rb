@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :dashboards, only: [:index]
 
     resources :items
-    resources :invoices
+    resources :invoices, only: [:index]
   end
 
   resources :transactions
