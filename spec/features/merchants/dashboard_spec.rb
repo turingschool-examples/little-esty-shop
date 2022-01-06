@@ -38,7 +38,7 @@ RSpec.describe 'merchant dashboard' do
 
     #update all items to be under original merchant
     Item.where(merchant_id: [merchant_1.id, merchant_2.id, merchant_3.id, merchant_4.id, merchant_5.id]).update(merchant: merchant)
-    
+
     visit "/merchants/#{merchant.id}/dashboard"
 
     within 'div.top_customers' do
@@ -46,6 +46,30 @@ RSpec.describe 'merchant dashboard' do
       expect('Bob').to appear_before('Charlie')
       expect('Charlie').to appear_before('John')
       expect('John').to appear_before('Zach')
+    end
+  end
+
+  it "has a section called 'Items ready to ship'" do
+    merchant = create(:merchant)
+    visit "/merchants/#{merchant.id}/dashboard"
+    within "div.items_ready_to_ship" do
+      expect(page).to have_content("Items Ready to Ship")
+    end
+  end
+
+  it "ready to ship sections shows all items that have been ordered and have not yet been shipped" do
+    merchant = create(:merchant)
+    item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0, name: "item_1")
+    item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, name: "item_2")
+    item_3 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, name: "item_3")
+    item_4 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 2, name: "item_4")
+    visit "/merchants/#{merchant.id}/dashboard"
+
+    within "div.items_ready_to_ship" do
+      expect(page).to have_content("item_1")
+      expect(page).to have_content("item_2")
+      expect(page).to have_content("item_3")
+      expect(page).to_not have_content("item_4")
     end
   end
 end
