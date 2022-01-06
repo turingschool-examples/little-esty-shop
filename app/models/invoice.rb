@@ -10,7 +10,11 @@ class Invoice < ApplicationRecord
     (customer.first_name) + " " + (customer.last_name)
   end
 
-  def merchant_invoice_items(merchant)
+  def merchant_items(merchant)
     Item.joins(:invoice_items).where( items: {merchant_id: merchant.id})
+  end
+
+  def merchant_invoice_items(merchant)
+    InvoiceItem.joins(:item).where( items: {merchant_id: merchant.id})
   end
 end
