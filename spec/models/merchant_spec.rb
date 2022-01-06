@@ -83,8 +83,8 @@ RSpec.describe Merchant, type: :model do
       expect(merch_1.items_ready_ship.pluck(:name)).to eq(expected)
     end
 
-    xit "shows the items ids" do
-      expected = [item_2.invoice.id, item_3.invoice.id, item_5.invoice.id]
+    it "shows the items ids" do
+      expected = [item_2.invoices.ids, item_3.invoices.ids, item_5.invoices.ids]
     end
   end
 end
