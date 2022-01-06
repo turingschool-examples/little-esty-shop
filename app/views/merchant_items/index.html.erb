@@ -5,8 +5,23 @@
 <% end %>
 
 <% @items.each do |item| %>
-  <p><%= item.name %></p>
+  <p><%= item.name %> (<%= item.status %>)</p>
   <%=  button_to 'Enable', "/merchants/#{item.merchant_id}/items/#{item.id}?status=enabled", method: :patch, id: item.id %>
   <%=  button_to 'Disable', "/merchants/#{item.merchant_id}/items/#{item.id}?status=disabled", method: :patch, id: item.id %>
 <% end %>
 
+<h3>Enabled Items:</h3>
+<div id='enabled'>
+  <% @items.only_enabled.each do |item| %>
+    <%= item.name %>,
+  <% end %>
+</div>
+
+<h3>Disabled Items:</h3>
+<div id='disabled'>
+  <% @items.only_disabled.each do |item| %>
+    <%= item.name %>,
+  <% end %>
+</div>
+
+<%= link_to "Create Item", "/merchants/#{@merchant.id}/items/new", method: :get %>

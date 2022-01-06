@@ -2,6 +2,7 @@ class MerchantItemsController < ApplicationController
 
   def index
     @items = Item.where(merchant_id: params[:merchant_id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def show
@@ -17,13 +18,21 @@ class MerchantItemsController < ApplicationController
 
     item.update(item_params)
 
-    flash[:message] = 'changes saved successfully'
-
     if params[:status].present?
       redirect_to action: :index
     else
-      redirect_to action: :show      
+      flash[:message] = 'changes saved successfully'
+      redirect_to action: :show
     end
+  end
+
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    Item.create(name: params[:name], description: params[:description], unit_price: params[:unit_price], status: 'disabled', merchant_id: params[:merchant_id])
+    redirect_to action: :index
   end
 
   private
