@@ -18,7 +18,6 @@ RSpec.describe 'the merchant invoice show page' do
 
   it 'displays invoice attributes' do
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
-save_and_open_page
     expect(page).to have_content(invoice_1.id)
     expect(page).to have_content(invoice_1.status)
     expect(page).to have_content(invoice_1.created_at.strftime("%A, %B %d %Y"))
@@ -29,5 +28,21 @@ save_and_open_page
 
     expect(page).to have_content(customer_1.first_name)
     expect(page).to have_content(customer_1.last_name)
+  end
+
+  it 'shows all item information on the invoice' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+    expect(page).to have_content(item_1.name)
+    expect(page).to have_content(item_2.name)
+    expect(page).to have_content(item_3.name)
+    expect(page).to have_content(invoice_item_1.quantity)
+    expect(page).to have_content(invoice_item_2.quantity)
+    expect(page).to have_content(invoice_item_3.quantity)
+    expect(page).to have_content(invoice_item_1.unit_price)
+    expect(page).to have_content(invoice_item_2.unit_price)
+    expect(page).to have_content(invoice_item_3.unit_price)
+    expect(page).to have_content(invoice_item_1.status)
+    expect(page).to have_content(invoice_item_2.status)
+    expect(page).to have_content(invoice_item_3.status)
   end
 end
