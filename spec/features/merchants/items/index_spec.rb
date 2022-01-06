@@ -42,20 +42,20 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0)
     @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0)
     @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, status: 0)
-   
+
     @transaction_1 = @invoice_1.transactions.create!(result: 'success')
     @transaction_2 = @invoice_2.transactions.create!(result: 'success')
     @transaction_3 = @invoice_3.transactions.create!(result: 'success')
-    
 
-    visit merchant_items_path(@merchant_1.id) 
+
+    visit merchant_items_path(@merchant_1.id)
   end
 
-  scenario 'visitor sees the name of all items of particular merchant' do
+  scenario 'visitor sees the name of all items of particular merchant as links' do
     expect(current_path).to eq(merchant_items_path(@merchant_1.id))
 
-    expect(page).to have_content(@item_1.name)
-    expect(page).to have_content(@item_2.name)
-    expect(page).to have_content(@item_3.name)
+    expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
+    expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
+    expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
   end
 end
