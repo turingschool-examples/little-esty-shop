@@ -67,11 +67,12 @@ RSpec.describe 'Merchant Dashboard Index' do
       expect(page).to have_content("#{@invoice_4.created_at.strftime("%A, %B %d, %Y")}")
     end
 
-    # it 'sorts invoices from oldest to newest' do
-    #   visit "/merchants/#{@merchant_1.id}/dashboard"
-    #
-    #   expect(@invoice_1.id).to appear_first
-    #   expect(@invoice_1.id).to acert_equal
-    # end
+    it 'sorts invoices from oldest to newest' do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      expect("#{@invoice_1.id}").to appear_before("#{@invoice_2.id}")
+      expect("#{@invoice_2.id}").to appear_before("#{@invoice_3.id}")
+      expect("#{@invoice_3.id}").to appear_before("#{@invoice_4.id}")
+    end
   end
 end
