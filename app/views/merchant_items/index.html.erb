@@ -3,3 +3,7 @@
 <% @items.each do |item| %>
   <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
 <% end %>
+<h2>Enabled Items:</h2>
+<hr>
+<h2>Disabled Items:</h2>
+<hr>
