@@ -22,7 +22,12 @@ RSpec.describe 'Merchant Items Index page' do
 
     within("div.item_#{item1.id}") do
       expect(page).to have_button("Enable")
-      expect(page).to have_content("Disable")
+      expect(page).to have_button("Disable")
+
+      click_button("Disable")
+      expect(current_path).to eq("/merchants/#{merchant.id}/items")
+      #^not sure if this works from a within block
+      expect(item1.status).to eq("Disabled")
     end
     #these tests might need work ^ and also unsure what to test for string/integer with status
     within("div.item_#{item2.id}") do
@@ -30,6 +35,7 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to have_content("Disable")
 
       click_button("Enable")
+      expect(current_path).to eq("/merchants/#{merchant.id}/items")
       expect(item2.status).to eq("Enabled")
     end
   end
