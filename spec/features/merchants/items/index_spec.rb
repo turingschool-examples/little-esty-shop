@@ -10,4 +10,12 @@ RSpec.describe 'Merchant Items Index page' do
     expect(page).to_not have_content(item2.name)
     expect(page).to_not have_content(item3.name)
   end
+
+  it "has a link to create a new item" do
+    visit "/merchants/#{item1.merchant_id}/items"
+
+    click_link("Create New Item")
+
+    expect(current_path).to eq("/merchants/#{item1.merchant_id}/items/new")
+  end
 end
