@@ -7,9 +7,9 @@ RSpec.describe 'Merchant Dashboard' do
     @merchant_3 = Merchant.create!(name: 'Tom Haverford')
     @merchant_4 = Merchant.create!(name: 'April Ludgate')
 
-    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
-    @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your neck", unit_price: 100)
-    @item_3 = @merchant_1.items.create!(name: "Earrings", description: "A thing around your neck", unit_price: 100)
+    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100, status: 0)
+    @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your neck", unit_price: 100, status: 0)
+    @item_3 = @merchant_1.items.create!(name: "Earrings", description: "A thing around your neck", unit_price: 100, status: 1)
 
     @customer_1 = Customer.create!(first_name: "Billy", last_name: "Joel")
     @customer_2 = Customer.create!(first_name: "Britney", last_name: "Spears")
@@ -58,4 +58,26 @@ RSpec.describe 'Merchant Dashboard' do
     expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
     expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
   end
+
+  describe 'item disable/enable button' do 
+    scenario 'visitor sees a button to disable that item' do 
+      within "#enabled_item-#{@item_1.name}" do
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      end
+      
+      expect(page).to have_content("Enable")
+      expect(current_path).to eq(merchant_items_path(@merchant_1.id))
+    end 
+
+    scenario 'visitor sees a button to disable that item' do 
+      within "#disabled_item-#{@item_3.name}" do
+        expect(page).to have_button("Enable")
+        click_button "Enable"
+      end
+      
+      expect(page).to have_content("Disable")
+      expect(current_path).to eq(merchant_items_path(@merchant_1.id))
+    end  
+  end 
 end
