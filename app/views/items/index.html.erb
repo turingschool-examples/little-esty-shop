@@ -1,0 +1,3 @@
+<% @items.each do |item| %>
+  <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p> 
+<% end %>
