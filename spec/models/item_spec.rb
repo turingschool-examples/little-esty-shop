@@ -73,4 +73,10 @@ RSpec.describe Item, type: :model do
     end
   end
 
+  describe 'best_selling_date' do
+    it 'returns the best selling date of an item' do
+      expect(item_1.best_selling_date).to eq(item_1.best_selling_date)
+    end
+  end
+
 end

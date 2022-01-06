@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   end
 
   def revenue_generated
-    InvoiceItem.where(item_id: self.id).sum('quantity*unit_price')
+    invoice_items.sum('quantity*unit_price')
   end
 
   def self.top_5
@@ -25,6 +25,10 @@ class Item < ApplicationRecord
       ORDER BY revenue DESC
       LIMIT 5
     ")
+  end
+
+  def best_selling_date
+    invoice_items.order('quantity*unit_price').first.created_at
   end
 
 end

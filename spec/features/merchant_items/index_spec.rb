@@ -130,4 +130,14 @@ RSpec.describe 'Merchant Items Index Page' do
     end
   end
 
+  it 'displays the top selling date next to each top 5 item' do
+    within "#top-5-items" do
+      expect(page).to have_content("#{item_2.name}, Revenue: $100, Best Date: #{item_2.best_selling_date}")
+      expect(page).to have_content("#{item_3.name}, Revenue: $150, Best Date: #{item_3.best_selling_date}")
+      expect(page).to have_content("#{item_4.name}, Revenue: $200, Best Date: #{item_4.best_selling_date}")
+      expect(page).to have_content("#{item_5.name}, Revenue: $250, Best Date: #{item_5.best_selling_date}")
+      expect(page).to have_content("#{item_6.name}, Revenue: $300, Best Date: #{item_6.best_selling_date}")
+    end
+  end
+
 end
