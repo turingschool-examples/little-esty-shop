@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def top_five_customers
-    Customer.joins(:transactions)
+    customers.joins(:transactions)
              .where(transactions: {result: "success"})
              .group(:id)
              .select("customers.*, count(transactions) as good_transactions")
@@ -20,3 +20,4 @@ class Merchant < ApplicationRecord
             .order(created_at: :asc)
   end
 end
+bundle lock --add-platform x86_64-linux
