@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
 
+  get '/admin', to: 'admin#dashboard'
 end
