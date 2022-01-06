@@ -13,4 +13,5 @@ RSpec.describe 'admin index page' do
     expect(page).to have_link('Merchants')
     expect(page).to have_link('Invoices')
   end
+
 end

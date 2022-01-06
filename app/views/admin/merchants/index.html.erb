@@ -1,0 +1,15 @@
+<% @merchants.each do |merchant| %>
+  <p>Name: <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
+
+  <p>Status: <%= merchant.status %></p>
+
+  <% if merchant.status == 'enable' %>
+    <%= button_to "Disable #{merchant.name}", '/admin/merchants', method: :patch, params: {status: 'disable', id: merchant.id} %>
+  <% elsif merchant.status == 'disable' %>
+    <%= button_to "Enable #{merchant.name}", '/admin/merchants', method: :patch, params: {status: 'enable', id: merchant.id} %>
+  <% end %>
+
+
+<% end %>
+
+<%= link_to "Add Merchant", '/admin/merchants/new', method: :get%>
