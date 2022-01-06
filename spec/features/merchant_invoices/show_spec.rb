@@ -1,0 +1,33 @@
+require 'rails_helper'
+
+RSpec.describe 'the merchant invoice show page' do
+
+  let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
+
+  let!(:item_1) {merchant_1.items.create!(name: 'Obsidian Nobice', description: 'A beautiful obsidian', unit_price: 50)}
+  let!(:item_2) {merchant_1.items.create!(name: 'Pleasure Geode', description: 'Glamourous Geode', unit_price: 100)}
+  let!(:item_3) {merchant_1.items.create!(name: 'Brown Pebble', description: 'GClassic rock', unit_price: 50)}
+
+  let!(:customer_1) {Customer.create!(first_name: 'Billy', last_name: 'Carruthers')}
+
+  let!(:invoice_1) {customer_1.invoices.create!(status: 'completed' )}
+
+  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
+  let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
+  let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
+
+  it 'displays invoice attributes' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+save_and_open_page
+    expect(page).to have_content(invoice_1.id)
+    expect(page).to have_content(invoice_1.status)
+    expect(page).to have_content(invoice_1.created_at.strftime("%A, %B %d %Y"))
+  end
+
+  it 'displays customer attributes' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+    expect(page).to have_content(customer_1.first_name)
+    expect(page).to have_content(customer_1.last_name)
+  end
+end
