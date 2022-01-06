@@ -1,12 +1,25 @@
 class Merchant < ApplicationRecord
   has_many :items 
+  has_many :invoice_items, :through => :items
+  has_many :invoices, :through => :invoice_items 
+  has_many :customers, :through => :invoices 
 
-  # def favorite_customers 
-  #   # get items for the merchant_id
-  #   # get invoice_items with this item id
-  #   # get invoice id from invoice_items
-  #   # look up transactions and customers with the invoice_id
-  #   require "pry"; binding.pry
-  #   joins({items: :invoice_items}).where(merchants: { merchant_id: self.id } )
+  # def merchants_invoices 
+    
+  #   Invoice.select("invoices.*").joins(:invoice_items, :items).where(items: {merchant_id: self.id}).order(created_at: :asc)
+
+  #   self.invoices.order(created_at: :asc)
   # end
+
+  def ship_ready_items
+    items.joins(:invoice_items).where(invoice_items: {status: 1})
+  end
+
+  def ready_items_dates
+    ship_ready_items.select("items.name, invoices.created_at").joins(:invoices)
+  end
+
+  def favorite_customers 
+    Customer.select("customers.*, count(customers.id) as count").joins(:invoices, :transactions).joins(:invoice_items, :items).where(items: {merchant_id: self.id}).group("customers.id").limit(5).order("count")
+  end
 end
