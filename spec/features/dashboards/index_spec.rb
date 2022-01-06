@@ -75,6 +75,10 @@ RSpec.describe 'merchant dashboard page', type: :feature do
       end
       it "shows the name of top 5 customers who have conducted the largest number of succesful transactions" do
         expect(page).to have_content("Top Five Customers:")
+        expect(cust_1.first_name).to appear_before(cust_2.first_name)
+        expect(cust_2.first_name).to appear_before(cust_3.first_name)
+        expect(cust_3.first_name).to appear_before(cust_6.first_name)
+        expect(cust_6.first_name).to_not appear_before(cust_2.first_name)
       end
     end
   end
