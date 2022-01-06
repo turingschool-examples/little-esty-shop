@@ -5,4 +5,5 @@ class Item < ApplicationRecord
   belongs_to :merchant
 
   validates :name, :description, :unit_price, presence: true
+  enum item_status: { disabled: 0, enabled: 1}
 end
