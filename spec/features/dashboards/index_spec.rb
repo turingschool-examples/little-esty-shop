@@ -32,9 +32,9 @@ RSpec.describe 'merchant dashboard page', type: :feature do
 
   let!(:ii_1) { InvoiceItem.create!(item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1, status: 0) }
   let!(:ii_2) { InvoiceItem.create!(item: item_2, invoice: invoice_2, quantity: 2, unit_price: 2, status: 1) }
-  let!(:ii_3) { InvoiceItem.create!(item: item_3, invoice: invoice_3, quantity: 3, unit_price: 3, status: 2) }
+  let!(:ii_3) { InvoiceItem.create!(item: item_3, invoice: invoice_3, quantity: 3, unit_price: 3, status: 1) }
   let!(:ii_4) { InvoiceItem.create!(item: item_4, invoice: invoice_4, quantity: 3, unit_price: 4, status: 2) }
-  let!(:ii_5) { InvoiceItem.create!(item: item_5, invoice: invoice_5, quantity: 3, unit_price: 5, status: 2) }
+  let!(:ii_5) { InvoiceItem.create!(item: item_5, invoice: invoice_5, quantity: 3, unit_price: 5, status: 1) }
   let!(:ii_6) { InvoiceItem.create!(item: item_6, invoice: invoice_6, quantity: 3, unit_price: 6, status: 2) }
   # let!(:ii_7) { InvoiceItem.create!(item: item_7, invoice: invoice_7, quantity: 3, unit_price: 7, status: 2) }
 
@@ -85,7 +85,13 @@ RSpec.describe 'merchant dashboard page', type: :feature do
         expect("Count of Transactions: 2").to appear_before("Count of Transactions: 1")
         expect(page).to have_content(1)
         expect(page).to have_content(2)
-      save_and_open_page
+      end
+
+      it "shows the items ready to be shipped for each customer" do
+        expect(page).to have_content('Items Packaged and Ready to Ship:')
+        expect(page).to have_content(item_2.name)
+        expect(page).to have_content(item_3.name)
+        expect(page).to have_content(item_5.name)
       end
     end
   end
