@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
-  has_many :items 
+  has_many :items
 
-  # def favorite_customers 
+  # def favorite_customers
   #   # get items for the merchant_id
   #   # get invoice_items with this item id
   #   # get invoice id from invoice_items
