@@ -22,7 +22,7 @@ class Merchant < ApplicationRecord
     # Limit to customer_count
 
     customer_ids = invoices.where(status: :completed)
-            .joins(:customer)
+            .joins(:customer, :transactions)
             .group(:customer_id)
             .order(count_customer_id: :desc)
             .limit(customer_count)
