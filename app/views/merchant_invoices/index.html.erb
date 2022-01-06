@@ -1,0 +1,6 @@
+<h1>My invoices: </h1>
+<% @merchant.invoices.each do |m| %>
+  <p>ID: <%= link_to "#{m.id}", "/merchants/#{@merchant.id}/invoices/#{m.id}", method: :get %>,
+  Status: <%= m.status %>,
+  Customer ID: <%= m.customer_id %></p>
+<% end %>
