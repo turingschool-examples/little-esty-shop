@@ -7,9 +7,14 @@ RSpec.describe 'Merchant Dashboard' do
     @merchant_3 = Merchant.create!(name: 'Tom Haverford')
     @merchant_4 = Merchant.create!(name: 'April Ludgate')
 
-    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100)
-    @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your neck", unit_price: 100)
-    @item_3 = @merchant_1.items.create!(name: "Earrings", description: "A thing around your neck", unit_price: 100)
+    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
+    @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900)
+    @item_3 = @merchant_1.items.create!(name: "Earrings", description: "These go through your ears", unit_price: 1500)
+    @item_4 = @merchant_1.items.create!(name: "Ring", description: "A thing around your finger", unit_price: 1000)
+    @item_5 = @merchant_1.items.create!(name: "Toe Ring", description: "A thing around your neck", unit_price: 800)
+    @item_6 = @merchant_1.items.create!(name: "Pendant", description: "A thing to put somewhere", unit_price: 1500)
+    @item_7 = @merchant_1.items.create!(name: "Bandana", description: "Many uses", unit_price: 400)
+    @item_8 = @merchant_1.items.create!(name: "Hair clip", description: "A thing to clip in your hair", unit_price: 500)
 
     @customer_1 = Customer.create!(first_name: "Billy", last_name: "Joel")
     @customer_2 = Customer.create!(first_name: "Britney", last_name: "Spears")
@@ -39,9 +44,16 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_19 = @customer_5.invoices.create!(status: 1)
     @invoice_20 = @customer_6.invoices.create!(status: 1)
 
-    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, status: 0)
-    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, status: 0)
-    @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, status: 0)
+    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, unit_price: 1000, quantity: 1,  status: 0)
+    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, unit_price: 900, quantity: 1, status: 0)
+    @invoice_item_3 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_3.id, unit_price: 1500, quantity: 2,  status: 0)
+    @invoice_item_4 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, unit_price: 1000, quantity: 3,  status: 1)
+    @invoice_item_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, unit_price: 1000, quantity: 1,  status: 1)
+    @invoice_item_6 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, unit_price: 900, quantity: 1, status: 2)
+    @invoice_item_7 = InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_3.id, unit_price: 400, quantity: 36, status: 2)
+    @invoice_item_8 = InvoiceItem.create!(item_id: @item_8.id, invoice_id: @invoice_3.id, unit_price: 500, quantity: 2, status: 2)
+    @invoice_item_9 = InvoiceItem.create!(item_id: @item_8.id, invoice_id: @invoice_1.id, unit_price: 500, quantity: 2, status: 2)
+    @invoice_item_10 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_2.id, unit_price: 800, quantity: 1,status: 2)
 
     @transaction_1 = @invoice_1.transactions.create!(result: 'success')
     @transaction_2 = @invoice_2.transactions.create!(result: 'success')
@@ -58,4 +70,42 @@ RSpec.describe 'Merchant Dashboard' do
     expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
     expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
   end
+
+# As a merchant
+# When I visit my items index page
+# Then I see the names of the top 5 most popular items ranked by total revenue generated
+# And I see that each item name links to my merchant item show page for that item
+# And I see the total revenue generated next to each item name
+#
+# Notes on Revenue Calculation:
+#
+# Only invoices with at least one successful transaction should count towards revenue
+# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+# sum(invoice_item.unit_price * invoice_item.quantity)
+
+  scenario 'visitor sees the names of the top 5 most popular items ranked by total revenue generated' do
+    expect(page).to have_content('Top 5 Items')
+    first = find("#item#{@item_7.id}")
+    second = find("#item#{@item_1.id}")
+    third = find("#item#{@item_3.id}")
+    fourth = find("#item#{@item_8.id}")
+    fifth = find("#item#{@item_2.id}")
+    expect(first).to appear_before(second)
+    expect(second).to appear_before(third)
+    expect(third).to appear_before(fourth)
+    expect(fourth).to appear_before(fifth)
+    save_and_open_page
+  end
+
+  xscenario 'visitor sees that each item name in the top item list also links to that item show page' do
+  end
+
+  xscenario 'visitor sees the total revenue generated next to each item name' do
+  end
+
+  xscenario 'only invoices with at least one successful transaction should count towards revenue' do
+  end
+
+
 end
