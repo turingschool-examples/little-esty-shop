@@ -5,11 +5,13 @@ FactoryBot.define do
     factory :merchant_with_invoices do
       transient do
         invoice_count {2}
+        customer {create(:customer)}
+        invoice_status {0}
       end
       after(:create) do |merchant, evaluator|
         evaluator.invoice_count.times do
           item = create(:item, merchant: merchant)
-          invoice = create(:invoice)
+          invoice = create(:invoice, status: evaluator.invoice_status, customer: evaluator.customer)
           invoice_item = create(:invoice_item, item: item, invoice: invoice)
         end
       end
