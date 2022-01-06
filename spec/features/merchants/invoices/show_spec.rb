@@ -74,7 +74,7 @@ RSpec.describe 'merchants invoice show page' do
     item3 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoice: invoice1)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-    save_and_open_page
+    
     expect(page).to have_content(item.name)
     expect(page).to have_content(item3.name)
     expect(page).to_not have_content(item2.name)
