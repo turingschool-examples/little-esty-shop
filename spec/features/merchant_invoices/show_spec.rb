@@ -12,9 +12,9 @@ RSpec.describe 'the merchant invoice show page' do
 
   let!(:invoice_1) {customer_1.invoices.create!(status: 'completed' )}
 
-  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
+  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 2, unit_price: 50, status: 'shipped')}
   let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
-  let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
+  let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 3, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
 
   it 'displays invoice attributes' do
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
