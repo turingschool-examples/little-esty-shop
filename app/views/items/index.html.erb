@@ -1,3 +1,15 @@
-<% @items.each do |item| %>
-  <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p> 
+<h3>Enabled Items</h3>
+<% @items.enabled_items.each do |item| %>
+  <div id="enabled_item-<%=item.name%>">
+    <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p> 
+    <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), method: :patch, params: { item_id: item.id, disable: 1 } %>
+  </div>
+<% end %>
+
+<h3>Disabled Items</h3>
+<% @items.disabled_items.each do |item| %>
+  <div id="disabled_item-<%=item.name%>">
+    <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p> 
+    <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), method: :patch, params: { item_id: item.id, enable: 0 } %>
+  </div>
 <% end %>
