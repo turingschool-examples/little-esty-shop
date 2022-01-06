@@ -5,5 +5,5 @@
 
 <h2>Top 5 Customers</h2>
 <% @merchants.top_customers.each do |customer| %>
-  <h3><%= customer.full_name %> with <%= customer.successful_transactions %> completed transactions</h3>
+  <h3><%= customer.full_name %> with <%= customer.successful_transactions_count %> completed transactions</h3>
 <% end %>

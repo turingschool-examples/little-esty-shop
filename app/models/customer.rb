@@ -4,7 +4,7 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def successful_transactions
+  def successful_transactions_count
     invoices.where(status: :completed).count
   end
 
