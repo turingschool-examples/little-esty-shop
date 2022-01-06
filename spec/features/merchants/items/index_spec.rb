@@ -47,7 +47,12 @@ RSpec.describe 'Merchant Items Index page' do
     find("#disable-#{item1.id}").click
 
     within '.disabled-items' do
-      save_and_open_page
+      expect(page).to have_content(item1.name)
+    end
+
+    find("#enable-#{item1.id}").click
+
+    within '.enabled-items' do
       expect(page).to have_content(item1.name)
     end
   end

@@ -18,7 +18,7 @@
   <h2>Disabled Items</h2>
 <% @items.disabled.each do |item| %>
     <li><%= link_to  item.name, merchant_item_path(@merchant, item) %></li>
-    <%= button_to "Enable", merchant_item_path(@merchant, item), params: {status: :disabled}, id: "enable-#{item.id}", method: :patch %>
+    <%= button_to "Enable", merchant_item_path(@merchant, item), params: {status: :enabled}, id: "enable-#{item.id}", method: :patch %>
 
 <% end %>
 </ul>
