@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def top_five_customers
-    customers.joins(:transactions)
+    Customer.joins(:transactions)
              .where(transactions: {result: "success"})
              .group(:id)
              .select("customers.*, count(transactions) as good_transactions")
@@ -14,6 +14,9 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-    Item.joins(:invoice_items).where(invoice_items: {status: 1}).includes(:invoices)
+    Item.joins(:invoice_items)
+            .where(invoice_items: {status: 1})
+            .includes(:invoices)
+            .order(created_at: :asc)
   end
 end
