@@ -4,7 +4,7 @@ class Invoice < ApplicationRecord
   belongs_to :customer
   has_many :transactions
 
-  enum status: [:cancelled, :completed, 'in progress']
+  enum status: [:cancelled, 'in progress', :completed]
 
   def incomplete_invoices
     # Catalog.where.not("state = ?", "finished")

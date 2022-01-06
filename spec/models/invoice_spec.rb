@@ -8,7 +8,7 @@ describe Invoice, type: :model do
   end
 
   describe 'enum' do
-    it { should define_enum_for(:status).with_values({completed: 0, in_progress: 1, cancelled: 2})}
+    it { should define_enum_for(:status).with_values([:cancelled, 'in progress', :completed])}
   end
 
   # describe 'methods' do
