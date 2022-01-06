@@ -1,0 +1,5 @@
+<% @merchant.items.each do |item| %>
+  <% item.invoices.each do |invoice| %>
+    <%= invoice.id %><br>
+  <% end %>
+<% end %>
