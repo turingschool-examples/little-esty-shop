@@ -18,4 +18,12 @@ RSpec.describe 'Merchant Items Index page' do
 
     expect(current_path).to eq("/merchants/#{item1.merchant_id}/items/new")
   end
+
+  it "has two sections, one for enabled items, and one for disabled items" do
+    visit "/merchants/#{item1.merchant_id}/items"
+
+    expect(page).to have_content("Enabled Items")
+    expect(page).to have_content("Disabled Items")
+    #Not sure what this means so I am just going to add this ^ to the view for now
+  end
 end
