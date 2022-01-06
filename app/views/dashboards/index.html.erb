@@ -8,5 +8,7 @@
 <h3> <%= customer.first_name %> </h3>
 <p>Count of Transactions: <%= customer.count_transaction %></p>
 <% end %>
-<p>Items Packaged and Ready to Ship: </p>
-<%= @merchant.items_ready_ship %> </p>
+<h3>Items Packaged and Ready to Ship: </h3>
+<% @merchant.items_ready_ship.each do |merch_items| %>
+<p>  <%= merch_items.item.name  %>- Invoice ID# <%= merch_items.invoice.id %></p>
+  <% end  %>
