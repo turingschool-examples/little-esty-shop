@@ -73,9 +73,8 @@ RSpec.describe 'the merchants dashboard page' do
     expect(page).to_not have_content(item_1.name)
   end
 
-  it "displays the date of items not yet shipped by most recent created first" do
+  xit "displays the date of items not yet shipped by most recent created first" do
     visit "/merchants/#{merchant_1.id}/dashboard"
-    save_and_open_page
     expect(page).to have_content("Wednesday, January 05 2022")
     expect(item_2.name).to appear_before(item_3.name)
   end
