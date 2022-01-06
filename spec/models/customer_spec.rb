@@ -13,11 +13,11 @@ RSpec.describe Customer, type: :model do
 
   describe 'instance methods' do
     describe 'successful_transactions' do
-      xit "returns all the sucessful transactions associated with that customer" do
+      it "returns all the sucessful transactions associated with that customer" do
 
       end
 
-      it 'returns the count of successful transactions' do
+      it '#successful_transactions_count' do
         customer_1 = create(:customer, first_name: 'Bob', last_name: "Smith")
         customer_2 = create(:customer, first_name: 'John', last_name: "Charles")
         customer_3 = create(:customer, first_name: 'Abe', last_name: "McConnel")
@@ -38,7 +38,7 @@ RSpec.describe Customer, type: :model do
         customer_1 = create(:customer, first_name: 'Bob', last_name: "Smith")
 
         expect(customer_1.full_name).to eq "Bob Smith"
-      end 
+      end
     end
   end
 end
