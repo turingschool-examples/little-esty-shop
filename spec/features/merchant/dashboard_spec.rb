@@ -28,15 +28,15 @@ RSpec.describe 'Merchant Dashboard Index' do
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     end
 
-    xit 'shows the names of the top 5 customers and their number of successful transactions' do
+    it 'shows the names of the top 5 customers and their number of successful transactions' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
       expect(page).to have_content("Top 5 Customers")
-      expect(page).to have_content("#{@customer_2.name}: 2 successful transactions")
-      expect(page).to have_content("#{@customer_3.name}: 3 successful transactions")
-      expect(page).to have_content("#{@customer_4.name}: 4 successful transactions")
-      expect(page).to have_content("#{@customer_5.name}: 4 successful transactions")
-      expect(page).to have_content("#{@customer_6.name}: 4 successful transactions")
+      expect(page).to have_content("#{@customer_2.first_name}: 2 successful transactions")
+      expect(page).to have_content("#{@customer_3.first_name}: 3 successful transactions")
+      expect(page).to have_content("#{@customer_4.first_name}: 4 successful transactions")
+      expect(page).to have_content("#{@customer_5.first_name}: 4 successful transactions")
+      expect(page).to have_content("#{@customer_6.first_name}: 4 successful transactions")
     end
 
     it 'lists names of items that are ordered but not shipped' do
@@ -57,5 +57,21 @@ RSpec.describe 'Merchant Dashboard Index' do
       expect(page).to have_link("#{@invoice_3.id}")
       expect(page).to have_link("#{@invoice_4.id}")
     end
+
+    it 'includes date that invoice was created in proper format' do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
+      expect(page).to have_content("#{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
+      expect(page).to have_content("#{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
+      expect(page).to have_content("#{@invoice_4.created_at.strftime("%A, %B %d, %Y")}")
+    end
+
+    # it 'sorts invoices from oldest to newest' do
+    #   visit "/merchants/#{@merchant_1.id}/dashboard"
+    #
+    #   expect(@invoice_1.id).to appear_first
+    #   expect(@invoice_1.id).to acert_equal
+    # end
   end
 end

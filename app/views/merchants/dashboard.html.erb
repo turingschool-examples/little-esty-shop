@@ -4,9 +4,14 @@
 <h1><%= @merchant.name %></h1>
 
 <p>Top 5 Customers</p>
+<% @merchant.top_five_customers.each do |customer| %>
+  <p><%= customer.first_name %>: <%= customer.good_transactions %> successful transactions</p>
+<% end %>
 
 <p>Items Ready to Ship<p>
   <% @merchant.items_ready_to_ship.each do |item| %>
-  <p><%= item.name %></p>
-  <p><%= link_to item.retrieve_invoice_id, "/merchants/#{@merchant.id}/invoices/:id" %></p>
+    <% item.invoices.each do |invoice| %>
+      <p><%= item.name %> | <%= link_to "Invoice ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>
+      <p>Created on: <%= invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+    <% end %>
 <% end %>
