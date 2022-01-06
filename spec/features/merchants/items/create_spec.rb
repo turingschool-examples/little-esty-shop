@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Merchant Item Create page" do
 
   it "has a form for new item, and redirects to merchant items index with new item listed" do
-    merchant1 = create(:merchant)
-    visit "merchants/#{merchant1.id}/items/new"
+    @merchant1 = create(:merchant)
+    visit "merchants/#{@merchant1.id}/items/new"
 
     within('#create_item') do
       fill_in "Name:", with: "Paul's Item"

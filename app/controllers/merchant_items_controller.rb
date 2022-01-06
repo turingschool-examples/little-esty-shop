@@ -27,7 +27,6 @@ class MerchantItemsController < ApplicationController
   end
 
   def new
-    
   end
 
 

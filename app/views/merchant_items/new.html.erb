@@ -1,5 +1,6 @@
+<h1>New Item for <%= @merchant.name %></h1>
 <div id=create_item>
-  <%= form_with url: "/merchants/#{merchant.id}/items/", method: :post, local: true do |form| %>
+  <%= form_with url: "/merchants/:id/items/", method: :post, local: true do |form| %>
     <%= form.label "Name:" %>
     <%= form.text_field :name %>
     <%= form.label "Description:" %>
