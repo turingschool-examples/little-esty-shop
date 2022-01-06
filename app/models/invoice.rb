@@ -6,4 +6,9 @@ class Invoice < ApplicationRecord
   has_many :merchants, through: :items
 
   enum status: ['in progress', 'cancelled', 'completed']
+
+  # Instance Methods
+  def created_at_formatted
+    created_at.strftime("%A, %B %-d, %Y")
+  end
 end
