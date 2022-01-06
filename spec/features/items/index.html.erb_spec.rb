@@ -1,11 +1,13 @@
 require 'rails_helper'
 
-# Merchant Items Index Page
+# Merchant Item Disable/Enable
 #
-# As a merchant,
-# When I visit my merchant items index page ("merchants/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
+# As a merchant
+# When I visit my items index page
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed
 
 RSpec.describe "items/index", type: :feature do
   before(:each) do
@@ -27,5 +29,11 @@ RSpec.describe "items/index", type: :feature do
   it 'has button that goes to new page' do
     click_link "Create New Item"
     expect(current_path).to eq(new_merchant_item_path(@merchant_1))
+  end
+
+
+  xit 'has an enable button' do
+    click_button "Enable"
+    expect(@item_1.status).to eq("Enabled")
   end
 end
