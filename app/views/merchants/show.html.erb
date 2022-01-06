@@ -5,9 +5,8 @@
 <p><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %></p>
 
 <p>Items Ready To Ship: </p>
-<% @merchant.items_ready_to_ship.each do |item| %>
-  <% item.invoice_items.each do |invoice_item| %>
-  <ul>Name: <%=item.name %>, Invoice ID:<%= invoice_item.invoice_id %> Created at: <%= invoice_item.created_at.strftime("%A, %B %d %Y") %></ul>
+<% @merchant.items_ready_to_ship.each do |invoice_item| %>
+  <ul> Name: <%= invoice_item.item.name %>, Invoice ID:<%= invoice_item.invoice_id %> Status: <%= invoice_item.status%> Created at: <%= invoice_item.created_at.strftime("%A, %B %d %Y") %></ul>
 <% end %>
-<% end %>
+
 

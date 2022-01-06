@@ -13,7 +13,10 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-    item_id = InvoiceItem.where.not(status: 'shipped').order(created_at: :desc).pluck(:item_id)
-    items.where(id: item_id)
+    invoice_items
+    .order(created_at: :asc)
+    .where.not(status: 'shipped')
+    # item_id = InvoiceItem.where.not(status: 'shipped').order(created_at: :asc).pluck(:item_id)
+    # items.where(id: item_id)
   end
 end
