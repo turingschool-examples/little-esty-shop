@@ -30,22 +30,33 @@ RSpec.describe 'admin merchants index page' do
 
   it 'has button to toggle merchant status' do
     merchant_1 = Merchant.create!(name: 'merchant_1')
-    merchant_2 = Merchant.create!(name: 'merchant_2', status: 1)
+    merchant_2 = Merchant.create!(name: 'merchant_2', status: 0)
 
     visit '/admin/merchants'
 
-    expect(page).to have_button("Disable #{merchant_1.name}")
-    expect(page).to have_button("Enable #{merchant_2.name}")
+    expect(page).to have_button("Enable #{merchant_1.name}")
+    expect(page).to have_button("Disable #{merchant_2.name}")
   end
 
   it 'when clicked merchant status is changed' do
     merchant_1 = Merchant.create!(name: 'merchant_1')
 
     visit '/admin/merchants'
-    click_button("Disable #{merchant_1.name}")
+    click_button("Enable #{merchant_1.name}")
 
     expect(current_path).to eq("/admin/merchants")
-    expect(page).to have_content("Status: #{merchant_1.status}")
+    expect(page).to have_content("Status: disable")
+  end
+
+  it 'creates new merchants' do
+    visit '/admin/merchants'
+    click_link("Add Merchant")
+    fill_in 'Name', with: "new merchant"
+    click_button("Submit")
+
+    expect(current_path).to eq("/admin/merchants")
+    expect(page).to have_content("new merchant")
+    expect(page).to have_content("Status: disable")
   end
 
 end

@@ -9,4 +9,7 @@
     <%= button_to "Enable #{merchant.name}", '/admin/merchants', method: :patch, params: {status: 'enable', id: merchant.id} %>
   <% end %>
 
+
 <% end %>
+
+<%= link_to "Add Merchant", '/admin/merchants/new', method: :get%>
