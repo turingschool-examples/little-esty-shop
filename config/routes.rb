@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     get '/items', to: 'merchant_items#index'
     get '/items/:id', to: 'merchant_items#show'
+    get '/items/:id/edit', to: 'merchant_items#edit'
     get '/invoices', to: 'merchant_invoices#index'
   end
 end
