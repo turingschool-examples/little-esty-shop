@@ -18,9 +18,14 @@ RSpec.describe "items/index", type: :feature do
     visit merchant_items_path(@merchant_1)
   end
 
-it 'has the names of merchant items' do
-  expect(page).to have_content(@item_1.name)
-  expect(page).to have_content(@item_2.name)
-  expect(page).to_not have_content(@item_3.name)
+  it 'has the names of merchant items' do
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
+    expect(page).to_not have_content(@item_3.name)
+  end
+
+  it 'has button that goes to new page' do
+    click_link "Create New Item"
+    expect(current_path).to eq(new_merchant_item_path(@merchant_1))
   end
 end
