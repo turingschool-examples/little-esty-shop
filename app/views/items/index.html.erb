@@ -2,3 +2,6 @@
 <% @items.each do |item| %>
 <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
 <% end %>
+<p>Remember to add back in enabled and disabled items</p>
+
+<%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %>
