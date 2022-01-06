@@ -8,11 +8,11 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def top_customers
-    test = Transaction.joins(invoice: :customer)
+     Transaction.joins(invoice: :customer)
     .where('result =?',2)
     .select('customers.*,count(transactions)')
     .group('customers.id')
     .order(count: :desc).limit(5)
-    require "pry"; binding.pry
+
   end
 end

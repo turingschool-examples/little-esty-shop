@@ -2,3 +2,8 @@
 
 <p><%= link_to "Merchant Items", merchant_items_path(@merchant) %></p>
 <p><%= link_to "Merchant Invoices", merchant_invoices_path(@merchant) %></p>
+
+<p>Top Five Customers:</p>
+<% @merchant.top_customers.each do |customer| %>
+<p> <%= customer.first_name %></p>
+<% end %>
