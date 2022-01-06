@@ -42,8 +42,13 @@ RSpec.describe 'Merchant Items Index page' do
     item1 = merchant1.items.create!(name: 'item1', description: 'coolest item ever1', unit_price: 10000)
     item2 = merchant1.items.create!(name: 'item2', description: 'coolest item ever2', unit_price: 20000)
     item3 = merchant1.items.create!(name: 'item3', description: 'coolest item ever3', unit_price: 30000)
+    visit merchant_items_path(merchant1)
 
-    find(".item-#{item1.id}").click
-    expected(page).to have_content("Item Status: #{item1.status}")
+    find("#disable-#{item1.id}").click
+
+    within '.disabled-items' do
+      save_and_open_page
+      expect(page).to have_content(item1.name)
+    end
   end
 end
