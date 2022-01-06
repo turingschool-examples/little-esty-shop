@@ -24,8 +24,8 @@
     invoice_4 = Invoice.create(customer_id:"#{cust_5.id}", status:1)
     invoice_5 = Invoice.create(customer_id:"#{cust_6.id}", status:1)
     
-    invoice_item_1 = InvoiceItem.create(invoice_id:"#{invoice_1.id}", item_id:"#{item_1.id}", status: 2, quantity:1, unit_price:600)
-    invoice_item_2 = InvoiceItem.create(invoice_id:"#{invoice_2.id}", item_id:"#{item_2.id}", status: 2, quantity:1, unit_price:700)
+    invoice_item_1 = InvoiceItem.create(invoice_id:"#{invoice_1.id}", item_id:"#{item_1.id}", status: 1, quantity:1, unit_price:600)
+    invoice_item_2 = InvoiceItem.create(invoice_id:"#{invoice_2.id}", item_id:"#{item_2.id}", status: 1, quantity:1, unit_price:700)
     invoice_item_3 = InvoiceItem.create(invoice_id:"#{invoice_3.id}", item_id:"#{item_2.id}", status: 2, quantity:1, unit_price:700)
     invoice_item_4 = InvoiceItem.create!(invoice_id:"#{invoice_4.id}", item_id:"#{item_1.id}", status: 2, quantity:1, unit_price:600)
     invoice_item_5 = InvoiceItem.create!(invoice_id:"#{invoice_5.id}", item_id:"#{item_1.id}", status: 2, quantity:1, unit_price:600)
