@@ -21,10 +21,10 @@ RSpec.describe 'Merchant Items Index page' do
     visit "/merchants/#{merchant.id}/items"
 
     within("div.item_#{item1.id}") do
-      expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
+      expect(page).to have_link("Enable")
+      expect(page).to have_link("Disable")
 
-      click_button("Disable")
+      click_link("Disable")
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
       #^not sure if this works from a within block
       expect(item1.status).to eq("Disabled")
