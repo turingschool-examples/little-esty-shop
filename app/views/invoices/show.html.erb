@@ -1,2 +1,8 @@
 <h1><%= @merchant.name %></h1>
 <h2>Invoice #<%= @invoice.id %></h2>
+<ul>
+  <li>Status: <%= @invoice.status %></li>
+  <li>Created On: <%= @invoice.created_at_formatted %></li>
+</ul>
+<h2>Customer:</h2>
+<p><%= @invoice.customer_full_name %></p>
