@@ -81,10 +81,15 @@ RSpec.describe 'the merchants dashboard page' do
 
   it "displays the date of items not yet shipped by most recent created first" do
     visit "/merchants/#{merchant_1.id}/dashboard"
+
+    expect(page).to have_content("Wednesday, January 05 2022")
+    expect(item_2.name).to appear_before(item_3.name)
+
     expect(item_6.name).to appear_before(item_5.name)
     expect(item_5.name).to appear_before(item_4.name)
     expect(item_4.name).to appear_before(item_3.name)
     expect(item_3.name).to appear_before(item_2.name)
+
   end
 
 
