@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
   def top_5_customers
@@ -18,4 +19,24 @@ class Merchant < ApplicationRecord
     .where.not("invoice_items.status = ?", 2)
     .order('invoices.created_at')
   end
-end
+
+  def top_five_items
+    items.joins(invoices: [:transactions, :invoice_items])
+    .where('transactions.result = ?', 'success')
+    .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+    .group(:id)
+    .order(total_revenue: :desc)
+    .limit(5)
+  end
+
+  # def date_with_most_sales
+  #   items.joins(invoices: [:transactions, :invoice_items])
+  #   .where('transactions.result = ?', 'success')
+  #   .select("invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+  #   .order(total_revenue: :desc)
+  #   .group("invoices.created_at")
+  #   .first
+  #   .created_at
+  #   .strftime("%A, %B %d, %Y")
+  # end
+end 

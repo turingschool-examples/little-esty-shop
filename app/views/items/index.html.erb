@@ -1,3 +1,22 @@
+<h1>My Items</h1>
+
+<br>
+<section id="all_items-<%=@merchant.id%>">
 <% @items.each do |item| %>
-  <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p> 
+  <p><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></p>
 <% end %>
+</section>
+
+<section id="top_five_items-<%=@merchant.id%>">
+<h3>Top 5 Items:</h3>
+<ol>
+<% @merchant.top_five_items.each do |item| %>
+<div id="item<%=item.id%>">
+  <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> - <%= item.total_revenue %> in sales 
+  <br>Top Day for <%= item.name %> was <%= item.date_with_most_sales %></li>
+</div>
+<% end %>
+</ol>
+</section>
+
+
