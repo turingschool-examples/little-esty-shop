@@ -39,8 +39,10 @@ RSpec.describe Merchant, type: :model do
     it {should have_many(:invoices).through(:invoice_items) }
     it {should have_many(:customers).through(:invoices) }
   end
+  
   describe "methods" do 
     
+    #refactor opportunity for later
     xit "#merchants_invoices - returns all of a merchant's invoices" do 
       expect(@merch_1.merchants_invoices).to eq([@invoice_1, @invoice_2, @invoice_3, @invoice_4, @invoice_5])
     end
@@ -49,8 +51,7 @@ RSpec.describe Merchant, type: :model do
       expect(@merch_1.items_ready_to_ship).to contain_exactly(@invoice_item_1, @invoice_item_2)
     end
     
-    xit "#favorite_customers - returns top 5 customers with most successful transactions" do
-      require 'pry'; binding.pry
+    it "#favorite_customers - returns top 5 customers with most successful transactions" do
       expect(@merch_1.favorite_customers).to contain_exactly(@cust_2, @cust_3, @cust_4, @cust_5, @cust_6)
     end
   end
