@@ -28,4 +28,15 @@ class Merchant < ApplicationRecord
     .order(total_revenue: :desc)
     .limit(5)
   end
-end
+
+  # def date_with_most_sales
+  #   items.joins(invoices: [:transactions, :invoice_items])
+  #   .where('transactions.result = ?', 'success')
+  #   .select("invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
+  #   .order(total_revenue: :desc)
+  #   .group("invoices.created_at")
+  #   .first
+  #   .created_at
+  #   .strftime("%A, %B %d, %Y")
+  # end
+end 

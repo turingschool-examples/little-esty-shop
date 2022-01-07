@@ -130,4 +130,14 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content(@merchant_1.top_five_items[4].total_revenue)
     end
   end
-end
+scenario 'vistor sees date with most sales next to top five most popular items' do 
+    within "#top_five_items-#{@merchant_1.id}" do
+      expect(page).to have_content(@merchant_1.top_five_items[0].date_with_most_sales)
+      expect(page).to have_content(@merchant_1.top_five_items[1].date_with_most_sales)
+      expect(page).to have_content(@merchant_1.top_five_items[2].date_with_most_sales)
+      expect(page).to have_content(@merchant_1.top_five_items[3].date_with_most_sales)
+      expect(page).to have_content(@merchant_1.top_five_items[4].date_with_most_sales)
+      save_and_open_page
+    end
+  end
+end 

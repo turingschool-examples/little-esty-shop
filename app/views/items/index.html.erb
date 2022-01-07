@@ -12,8 +12,11 @@
 <ol>
 <% @merchant.top_five_items.each do |item| %>
 <div id="item<%=item.id%>">
-  <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> - <%= item.total_revenue %> in sales </li>
+  <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> - <%= item.total_revenue %> in sales 
+  <br>Top Day for <%= item.name %> was <%= item.date_with_most_sales %></li>
 </div>
 <% end %>
 </ol>
 </section>
+
+
