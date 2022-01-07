@@ -1,5 +1,8 @@
 <h1> <%= @merchant.name %></h1>
-<% @items.each do |item| %>
+
+<h3>Enabled Items</h3>
+<div id='enableditems'>
+<% @items.enabled.each do |item| %>
 <section id="item-<%=item.id%>">
   <p>
     <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
@@ -12,6 +15,27 @@
 </section>
 <% end %>
 
+</div>
+
+<h3>Disabled Items</h3>
+<div id='disableditems'>
+<% @items.disabled.each do |item| %>
+<section id="item-<%=item.id%>">
+  <p>
+    <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+    <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :enabled} %>
+    <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :disabled} %>
+  </p>
+  <p>
+    <%= "Status: #{item.item_status}" %>
+  </p>
+</section>
+<% end %>
+</div>
+
+<%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %>
+
+
 
 <p>Top 5 Most Popular Items</p>
 
@@ -20,3 +44,4 @@
     <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
   </section>
 <% end %>
+

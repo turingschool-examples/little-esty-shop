@@ -2,25 +2,47 @@ require 'rails_helper'
 ## i had to remove the before each here because we needed the complete dataset to run the more
 ## complex tests. I commented out and didn't delete anything. all tests pass.
 RSpec.describe "Merchant item index" do
-  # before :each do
-  #   @merchant1 = Merchant.create!(name: "Kelly")
-  #   @merchant2 = Merchant.create!(name: "Craig")
-  #   @item_1 = @merchant1.items.create!(name: "Mixing Bowl", description: "xyz", unit_price: 500)
-  #   @item_2 = @merchant1.items.create!(name: "Gumball", description: "abc", unit_price: 25)
-  #   @item3 = @merchant2.items.create!(name: "Hat", description: "sdasasdsd", unit_price: 88)
-  # end
 
   it 'I see a list of the names of all of my items' do
-    visit merchant_items_path(@merchant_1)
+    visit "/merchants/#{@merchant_1.id}/items"
+
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_2.name)
-    # expect(page).to_not have_content(@item3.name)
   end
 
   it 'each items name is a link to the show page' do
-    visit merchant_items_path(@merchant_1)
+    visit "/merchants/#{@merchant_1.id}/items"
+
     click_link "#{@item_1.name}"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+  end
+
+  it 'displays two sections, one for Enabled Items and one for Disabled Items' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    expect(page).to have_content("Enabled Items")
+    expect(page).to have_content("Disabled Items")
+  end
+
+  it 'has enabled items in the enabled section and disable items in disabled section' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within '#enableditems' do
+      expect(page).to have_no_content
+    end
+
+    within '#disableditems' do
+      expect(page).to have_link("Item_1")
+      expect(page).to have_link("Item_2")
+      expect(page).to have_link("Item_3")
+    end
+  end
+
+  it 'has a link to create a new item' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    expect(page).to have_link("Create a New Item")
+    click_link "Create a New Item"
   end
 
   it 'has an enable button for each item that changes the status' do
