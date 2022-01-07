@@ -12,7 +12,8 @@ FactoryBot.define do
         transaction_count {2}
         transaction_result {0}
       end
-      create_list(:transaction, evaluator.transaction_count, invoice: invoice, status: evaluator.transaction_result)
+      after(:create) do |invoice, evaluator|
+        create_list(:transaction, evaluator.transaction_count, invoice: invoice, status: evaluator.transaction_result)
       end
     end
 
