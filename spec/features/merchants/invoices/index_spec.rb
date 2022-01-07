@@ -1,6 +1,6 @@
 require 'rails_helper'
 describe 'merchants invoices index page' do
-  it 'has all invoices that include atleast one of a merchants items' do
+  xit 'has all invoices that include atleast one of a merchants items' do
     merchant_1 = Merchant.create!(name: 'merchant_1')
     merchant_2 = Merchant.create!(name: 'merchant_2')
     customer_1 = Customer.create!(first_name: 'customer_1', last_name: 'last_name_1')

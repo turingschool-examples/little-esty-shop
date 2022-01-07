@@ -2,3 +2,8 @@
 
 <p><%= link_to "Merchants", "/admin/merchants" %></p>
 <p><%= link_to "Invoices", "/admin/invoices" %></p>
+<ol>Incomplete Invoices:
+  <% @invoices.incomplete_invoices.each do |incomplete| %>
+  <li><%= incomplete.id %></li>
+  <% end %>
+</ol>

@@ -7,10 +7,11 @@ class Invoice < ApplicationRecord
   enum status: [:cancelled, 'in progress', :completed]
 
   def incomplete_invoices
-    # Catalog.where.not("state = ?", "finished")
+    require "pry"; binding.pry
+    invoice_items.where(status: [0, 1])
   end
 
-  def total_revenue    
+  def total_revenue
     invoice_items.sum(:unit_price)
   end
 end
