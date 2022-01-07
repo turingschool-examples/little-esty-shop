@@ -54,8 +54,8 @@ RSpec.describe Invoice, type: :model do
         invoice1 = create(:invoice)
         item = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant1, invoice: invoice1, invoice_item_unit_price: 15000)
         item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoice: invoice1, invoice_item_unit_price: 20000)
-        
-        expect(invocie_1.potential_revenue).to eq(55000)
+
+        expect(invoice1.potential_revenue(merchant1)).to eq(55000)
       end
     end
   end
