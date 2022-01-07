@@ -26,7 +26,7 @@
   <h2>Top 5 Best Selling Items</h2>
 <% @items.top_five.each do |item| %>
     <div class = "item-<%= item.id %>">
-    <li><%= link_to  item.name, merchant_item_path(@merchant, item) %>-<%= number_to_currency(item.sum / 100) %> in sales</li>
+    <li><%= link_to  item.name, merchant_item_path(@merchant, item) %>-<%= number_to_currency(item.sum.to_f / 100) %> in sales</li>
     </div>
 <% end %>
 </ul>
