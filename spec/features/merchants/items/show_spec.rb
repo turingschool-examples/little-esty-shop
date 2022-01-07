@@ -16,15 +16,15 @@ RSpec.describe 'Merchant Items Show page' do
     merchant1 = create(:merchant)
     item1 = create(:item, merchant: merchant1, unit_price: 77777)
     visit "/merchants/#{merchant1.id}/items/#{item1.id}"
-    expect(page).to have_button("Update #{item1.name}")
+    expect(page).to have_link("Update #{item1.name}")
     click_on("Update #{item1.name}")
-
+    # save_and_open_page
     expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
-    expect(page).to have_field(:unit_price, with: 77777)
+    expect(page).to have_field(:item_unit_price, with: 77777)
 
     within("#update_item") do
-      fill_in 'unit_price', with: 11111
-      click_on 'Submit'
+      fill_in 'item_unit_price', with: 11111
+      click_on 'Update Item'
     end
     expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
 

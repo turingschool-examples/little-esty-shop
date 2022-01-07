@@ -5,7 +5,7 @@ RSpec.describe 'Admin_Invoices Index page' do
     invoice_1 = create(:invoice)
     invoice_2 = create(:invoice)
     invoice_3 = create(:invoice)
-    visit "/admin/invoices"
+    visit "admin/invoices"
     # save_and_open_page
     expect(page).to have_content(invoice_1.id)
     click_on(invoice_1.id)
