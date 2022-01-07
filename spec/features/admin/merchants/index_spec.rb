@@ -11,7 +11,6 @@ RSpec.describe 'admin merchants index' do
 
   it 'shows the name of all merchants' do
     visit '/admin/merchants'
-    save_and_open_page
     expect(page).to have_content(@merchant.name)
     expect(page).to have_content(@merchant1.name)
     expect(page).to have_content(@merchant2.name)
