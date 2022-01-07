@@ -6,7 +6,9 @@
 #   movies = Movie.create =  name: 'Star Wars'  =  name: 'Lord of the Rings' ])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-merchant_1 = Merchant.create!(name: 'Billys Pet Rocks')
+merchant_1 = Merchant.create!(name: 'Billys Pet Rocks', status: 0)
+merchant_2 = Merchant.create!(name: 'Jimmy Pet Stones', status: 1)
+
 
 item_1 = merchant_1.items.create!(name: 'Obsidian Nobice', description: 'A beautiful obsidian', unit_price: 50)
 item_2 = merchant_1.items.create!(name: 'Pleasure Geode', description: 'Glamourous Geode', unit_price: 100)

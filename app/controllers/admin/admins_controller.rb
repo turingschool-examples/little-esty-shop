@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class Admin::AdminsController < ApplicationController
 
   def index
     @merchants = Merchant.all
@@ -15,12 +15,15 @@ class AdminController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
+    if params[:status].present?
+      redirect_to action: :index
+    end
   end
 
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 
 
