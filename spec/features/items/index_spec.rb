@@ -22,11 +22,19 @@ RSpec.describe "Merchant item index" do
     expect(page).to have_content("Disabled Items")
   end
 
-  # it 'has enabled items in the enabled section and disable items in disabled section' do
-  #   visit "/merchants/#{@merchant_1.id}/items"
-  #
-  #   within "Enabled Items" do
-  # end
+  it 'has enabled items in the enabled section and disable items in disabled section' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within '#enableditems' do
+      expect(page).to have_no_content
+    end
+
+    within '#disableditems' do
+      expect(page).to have_link("Item_1")
+      expect(page).to have_link("Item_2")
+      expect(page).to have_link("Item_3")
+    end
+  end
 
   it 'has a link to create a new item' do
     visit "/merchants/#{@merchant_1.id}/items"
