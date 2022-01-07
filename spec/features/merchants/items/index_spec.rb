@@ -19,23 +19,29 @@ RSpec.describe 'Merchant Items Index page' do
     item1 = create(:item, merchant: merchant, name: "Paul")
     item2 = create(:item, merchant: merchant, name: "Leland")
     visit "/merchants/#{merchant.id}/items"
+    #
+    # expect(item1.status).to eq("Disabled")
+    # click_button "Enable #{item1.name}"
+    # expect(item1.status).to eq("Enabled")
 
     within("div.item_#{item1.id}") do
-      expect(page).to have_link("Enable")
-      expect(page).to have_link("Disable")
+      expect(page).to have_button("Enable")
+      expect(page).to have_button("Disable")
 
-      click_link("Disable")
+      click_button("Disable")
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
-      #^not sure if this works from a within block
+      item1.reload
       expect(item1.status).to eq("Disabled")
     end
-    #these tests might need work ^ and also unsure what to test for string/integer with status
+
+    visit "/merchants/#{merchant.id}/items"
     within("div.item_#{item2.id}") do
-      expect(page).to have_content("Enable")
-      expect(page).to have_content("Disable")
+      expect(page).to have_button("Enable")
+      expect(page).to have_button("Disable")
 
       click_button("Enable")
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
+      item2.reload
       expect(item2.status).to eq("Enabled")
     end
   end
