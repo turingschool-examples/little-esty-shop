@@ -25,5 +25,22 @@ FactoryBot.define do
         create_list(:item, evaluator.item_count, merchant: merchant)
       end
     end
+
+    factory :merchant_with_transactions do
+      transient do
+        transaction_count {2}
+        customer {create(:customer)}
+        transaction_status {0}
+      end
+      after(:create) do |merchant, evaluator|
+        evaluator.invoice_count.times do
+          item = create(:item, merchant: merchant)
+          invoice = create(:invoice, customer: evaluator.customer)
+          invoice_item = create(:invoice_item, item: item, invoice: invoice)
+          transaction = create(:transaction, status: evaluator.transaction_status, invoice: invoice)
+        end
+      end
+    end
+
   end
 end

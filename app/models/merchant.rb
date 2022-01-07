@@ -53,7 +53,12 @@ class Merchant < ApplicationRecord
   #need transaction result = 0
   def self.top_5
     binding.pry
-    Customer.joins(:invoices => :transactions).where(:transactions => {result: 0})
+    Customer.joins(:invoices => :transactions)
+            .where(:transactions => {result: 0})
+            .group(:customer_id)
+            .order(count_customer_id: :desc)
+            .limit(customer_count)
+            .count(:customer_id)
     # trans = Customer.trans
     # Customer.joins(:invoices => trans).where(result: :success)
   end
