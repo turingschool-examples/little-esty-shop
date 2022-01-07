@@ -8,7 +8,7 @@ require 'rails_helper'
 RSpec.describe "Merchant invoice index" do
 
   it 'I see all of the invoices that include at least one of my merchants items' do
-    visit "/merchants/#{@merchant_1.id}/invoices"
+    visit merchant_invoices_path(@merchant_1)
     expect(page).to have_content(@invoice_1.id)
   end
 end

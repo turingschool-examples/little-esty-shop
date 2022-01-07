@@ -22,7 +22,7 @@ RSpec.describe 'Merchant Dashboard Index' do
 
     it 'displays a link to merchant invoices index page' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-
+# save_and_open_page
       expect(page).to have_link("Invoices")
       click_link "Invoices"
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
