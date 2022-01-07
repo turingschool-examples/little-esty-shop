@@ -35,45 +35,96 @@ RSpec.describe 'merchant invoice show page', type: :feature do
         expect(page).to have_content(invoice_1.customer_full_name)
       end
 
-      it 'displays invoice items info, name, quantity, unit price, and status' do
+      it 'displays invoice items info, name, quantity, and unit price' do
         within("#item-#{item_1.id}") do
           expect(page).to have_content(item_1.name)
           expect(page).to have_content(invoice_item_1.quantity)
           expect(page).to have_content(invoice_item_1.unit_price)
-          expect(page).to have_content(invoice_item_1.status)
         end
 
         within("#item-#{item_2.id}") do
           expect(page).to have_content(item_2.name)
           expect(page).to have_content(invoice_item_2.quantity)
           expect(page).to have_content(invoice_item_2.unit_price)
-          expect(page).to have_content(invoice_item_2.status)
         end
 
         within("#item-#{item_3.id}") do
           expect(page).to have_content(item_3.name)
           expect(page).to have_content(invoice_item_3.quantity)
           expect(page).to have_content(invoice_item_3.unit_price)
-          expect(page).to have_content(invoice_item_3.status)
         end
       end
       
       it 'does not display invoice items from other merchants' do
-        expect(page).to have_no_content(item_4.name)
-        expect(page).to have_no_content(invoice_item_4.quantity)
-        expect(page).to have_no_content(invoice_item_4.unit_price)
+        within('table') do
+          expect(page).to have_no_content(item_4.name)
+          expect(page).to have_no_content(invoice_item_4.quantity)
+          expect(page).to have_no_content(invoice_item_4.unit_price)
 
-        expect(page).to have_no_content(item_5.name)
-        expect(page).to have_no_content(invoice_item_5.quantity)
-        expect(page).to have_no_content(invoice_item_5.unit_price)
+          expect(page).to have_no_content(item_5.name)
+          expect(page).to have_no_content(invoice_item_5.quantity)
+          expect(page).to have_no_content(invoice_item_5.unit_price)
 
-        expect(page).to have_no_content(item_6.name)
-        expect(page).to have_no_content(invoice_item_6.quantity)
-        expect(page).to have_no_content(invoice_item_6.unit_price)
+          expect(page).to have_no_content(item_6.name)
+          expect(page).to have_no_content(invoice_item_6.quantity)
+          expect(page).to have_no_content(invoice_item_6.unit_price)
+        end
       end
 
       it 'displays total revenue for the invoice' do
         expect(page).to have_content("Total Revenue: #{invoice_1.total_revenue}")
+      end
+
+      it 'displays a status dropdown and update button' do
+        within("#item-#{item_1.id}") do
+          expect(page).to have_select('invoice_item_status', options: ['pending', 'packaged', 'shipped'], selected: 'pending')
+          
+          expect(page).to have_button('Update Item Status')
+        end
+        
+        within("#item-#{item_2.id}") do
+          expect(page).to have_select('invoice_item_status', options: ['pending', 'packaged', 'shipped'], selected: 'pending')
+          
+          expect(page).to have_button('Update Item Status')
+        end
+
+        within("#item-#{item_3.id}") do
+          expect(page).to have_select('invoice_item_status', options: ['pending', 'packaged', 'shipped'], selected: 'pending')
+
+          expect(page).to have_button('Update Item Status')
+        end
+      end
+    end
+    
+    describe 'clickable elements' do
+      it 'updates the invoice items status' do
+        within("#item-#{item_1.id}") do
+          select('packaged', from: 'invoice_item_status')
+          click_button('Update Item Status')
+          
+          expect(page).to have_select('invoice_item_status', selected: 'packaged')
+        end
+
+        expect(page).to have_current_path(merchant_invoice_path(merch_1, invoice_1))
+        
+        within("#item-#{item_2.id}") do
+          select('pending', from: 'invoice_item_status')
+          click_button('Update Item Status')
+          
+          expect(page).to have_select('invoice_item_status', selected: 'pending')
+        end
+        
+        expect(page).to have_current_path(merchant_invoice_path(merch_1, invoice_1))
+
+        within("#item-#{item_3.id}") do
+          select('shipped', from: 'invoice_item_status')
+          click_button('Update Item Status')
+          
+          expect(page).to have_select('invoice_item_status', selected: 'shipped')
+        end
+
+        expect(page).to have_current_path(merchant_invoice_path(merch_1, invoice_1))
+        save_and_open_page
       end
     end
   end
