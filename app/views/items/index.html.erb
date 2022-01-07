@@ -3,8 +3,11 @@
 <section id="item-<%=item.id%>">
   <p>
     <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
-    <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :enabled} %>
-    <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :disabled} %>
+    <% if item.disabled? %>
+      <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :enabled} %>
+    <% else %>
+      <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :disabled} %>
+    <% end %>
   </p>
   <p>
     <%= "Status: #{item.item_status}" %>
