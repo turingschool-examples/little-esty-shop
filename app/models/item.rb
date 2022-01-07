@@ -2,7 +2,6 @@ class Item < ApplicationRecord
   belongs_to :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
-  # alias_attribute :transactions, :sales
   has_many :transactions, through: :invoices
   enum status: %i[enabled disabled]
 
