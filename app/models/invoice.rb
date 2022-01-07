@@ -7,7 +7,6 @@ class Invoice < ApplicationRecord
   enum status: [:cancelled, 'in progress', :completed]
 
   def incomplete_invoices
-    require "pry"; binding.pry
     invoice_items.where(status: [0, 1])
   end
 
