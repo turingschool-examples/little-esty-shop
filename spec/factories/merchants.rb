@@ -33,7 +33,7 @@ FactoryBot.define do
         transaction_result {0}
       end
       after(:create) do |merchant, evaluator|
-        evaluator.invoice_count.times do
+        evaluator.transaction_count.times do
           item = create(:item, merchant: merchant)
           invoice = create(:invoice, customer: evaluator.customer)
           invoice_item = create(:invoice_item, item: item, invoice: invoice)
