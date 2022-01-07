@@ -24,9 +24,9 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
 
     if params[:status]
-      @merchant.update(name: params[:status])
+      @merchant.update(status: params[:status])
       redirect_to "/admin/merchants"
-    else 
+    elsif params[:name]
       @merchant.update(name: params[:name])
       @merchant.save
       flash[:alert] = "Information successfully updated"
