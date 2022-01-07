@@ -1,5 +1,4 @@
 class Merchant < ApplicationRecord
-  after_initialize :set_status
 
   has_many(:items)
   has_many :invoices, through: :items
@@ -8,10 +7,6 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   enum status: {"disabled" => 0, "enabled" => 1}
-
-  def set_status
-    self.status = 0
-  end
 
   def favorite_customers
     transactions

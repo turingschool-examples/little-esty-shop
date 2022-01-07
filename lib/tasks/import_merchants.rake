@@ -14,7 +14,8 @@ task :import_merchants_csv => [:environment] do
     Merchant.create!(id: id,
                     name: name,
                     created_at: created_at,
-                    updated_at: updated_at)
+                    updated_at: updated_at,
+                    status: 0)
   end
   ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
 end
