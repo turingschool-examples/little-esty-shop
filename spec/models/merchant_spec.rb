@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
 
+
    let!(:merch_1) { Merchant.create!(name: 'name_1') }
    let!(:merch_2) { create(:merch_w_all, customer_count: 2) }
 
@@ -55,7 +56,6 @@ RSpec.describe Merchant, type: :model do
    let!(:transactions_12) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 1)}
    # let!(:transactions_13) { Transaction.create!(invoice_id: invoice_7.id, credit_card_number: "4654405418240013", credit_card_expiration_date: "0013", result: 2)}
    # let!(:transactions_14) { Transaction.create!(invoice_id: invoice_7.id, credit_card_number: "4654405418240014", credit_card_expiration_date: "0014", result: 2)}
-
   describe 'relationships' do
     it {should have_many(:items)}
     it {should have_many(:invoice_items).through(:items)}
