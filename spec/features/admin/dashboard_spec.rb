@@ -50,4 +50,18 @@ RSpec.describe 'The Admin Dashboard page' do
     expect(page).to have_link(invoice_2.id)
     expect(page).to_not have_content(invoice_3.id)
   end
+
+  it 'shows the created at dates in order of oldest to newest' do
+    invoice_1 = create(:invoice, created_at: "2022-01-06")
+    invoice_2 = create(:invoice, created_at: "2022-01-05")
+    invoice_3 = create(:invoice, created_at: "2022-01-04")
+    invoice_4 = create(:invoice, created_at: "2022-01-03")
+
+    visit "/admin"
+
+    expect("Incomplete Invoices").to appear_before("2022-01-06")
+    expect("2022-01-06").to appear_before("2022-01-05")
+    expect("2022-01-05").to appear_before("2022-01-04")
+    expect("2022-01-04").to appear_before("2022-01-03")
+  end 
 end
