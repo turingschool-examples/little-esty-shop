@@ -1,8 +1,6 @@
 class Admin::BaseController < ApplicationController
 
   def index
-
-  end 
-
-
+    @invoices = Invoice.all
+  end
 end
