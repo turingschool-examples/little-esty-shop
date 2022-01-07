@@ -90,12 +90,12 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the total revenue that will be generated from the invoice' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 15000)
+    item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 15000)
     item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 20000)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     expect(page).to have_content("Total Potential Revenue")
-    expect(page).to have_content("$550.0")
+    expect(page).to have_content("$350.0")
   end
 end

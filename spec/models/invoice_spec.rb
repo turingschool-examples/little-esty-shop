@@ -16,11 +16,12 @@ RSpec.describe Invoice, type: :model do
     describe '#customer_name' do
       it 'displays a customers first and last name' do
         merchant1 = create(:merchant)
-        invoice1 = create(:invoice)
+        customer = create(:customer, first_name: 'Bob', last_name: 'Dole')
+        invoice1 = create(:invoice, customer: customer)
         item1 = create(:item, merchant: merchant1)
         invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
 
-        expect(invoice1.customer_name).to eq("Default First Name 1 Default Last Name 1")
+        expect(invoice1.customer_name).to eq("Bob Dole")
       end
     end
 
