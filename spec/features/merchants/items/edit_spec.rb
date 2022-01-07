@@ -10,17 +10,17 @@ RSpec.describe 'MerchantItems edit page' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item1.id}/edit"
   end
 
-  it 'has a preloaded form to edit merchant item information' do 
+  it 'has a preloaded form to edit merchant item information' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item1.id}"
-    
+
     click_link "Update Item #{@item1.name}"
-    
+
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item1.id}/edit")
-    
-    page.should have_field(:name, with: @item1.name)
-    page.should have_field(:description, with: @item1.description)
-    page.should have_field(:unit_price, with: @item1.unit_price)
-    
+
+    expect(page).to have_field(:name, with: @item1.name)
+    expect(page).to have_field(:description, with: @item1.description)
+    expect(page).to have_field(:unit_price, with: @item1.unit_price)
+
     fill_in :name, with: "Smallie"
     fill_in :description, with: "Smallmouth Bass"
     fill_in :unit_price, with: 400
