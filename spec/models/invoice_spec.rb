@@ -58,7 +58,7 @@ RSpec.describe Invoice, type: :model do
         invoice_item_2 = create(:invoice_item, item: items[1], invoice: invoice_1, unit_price: 200)
         invoice_item_3 = create(:invoice_item, item: items[2], invoice: invoice_1, unit_price: 300)
 
-        expect(invoice_1.total_revenue).to eq(600)
+        expect(invoice_1.total_revenue).to eq('$6.00')
       end
       
       it 'should not return revenue from other items not on the invoice' do
@@ -67,8 +67,8 @@ RSpec.describe Invoice, type: :model do
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, unit_price: 100)
 
         invoice_item_2 = create(:invoice_item, unit_price: 200)
-        
-        expect(invoice_1.total_revenue).to eq(100)
+
+        expect(invoice_1.total_revenue).to eq('$1.00')
       end
     end
   end
