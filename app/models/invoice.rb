@@ -10,4 +10,9 @@ class Invoice < ApplicationRecord
     date = self.created_at
     date.strftime("%A, %B %d, %Y")
   end
+
+  def items_by_merchant(merchant_id)
+    items.joins(:invoice_items)
+         .where('merchant_id = ?', merchant_id)
+  end
 end
