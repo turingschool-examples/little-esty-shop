@@ -81,6 +81,7 @@ RSpec.describe 'merchant dashboard' do
     invoice_2 = item_2.invoices.first
     invoice_3 = item_2.invoices.last
 
+
     visit "/merchants/#{merchant.id}/dashboard"
     within "div.item_#{item_1.id}" do
       click_link "Invoice ID: #{invoice_1.id}"
