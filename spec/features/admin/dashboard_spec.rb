@@ -59,9 +59,9 @@ RSpec.describe 'The Admin Dashboard page' do
 
     visit "/admin"
 
-    expect("Incomplete Invoices").to appear_before("2022-01-06")
-    expect("2022-01-06").to appear_before("2022-01-05")
-    expect("2022-01-05").to appear_before("2022-01-04")
-    expect("2022-01-04").to appear_before("2022-01-03")
-  end 
+    expect("Incomplete Invoices").to appear_before("2022-01-03")
+    expect("2022-01-03").to appear_before("2022-01-04")
+    expect("2022-01-04").to appear_before("2022-01-05")
+    expect("2022-01-05").to appear_before("2022-01-06")
+  end
 end
