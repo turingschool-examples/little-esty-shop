@@ -33,5 +33,15 @@ RSpec.describe Item, type: :model do
 
       expect(Item.enabled_items).to eq([item3, item4])
     end
+
+    it '#disabled_items' do
+      merchant = create(:merchant)
+      item1 = create(:item, merchant: merchant, name: "Paul")
+      item2 = create(:item, merchant: merchant, name: "Leland")
+      item3 = create(:item, merchant: merchant, name: "Josh", status: 1)
+      item4 = create(:item, merchant: merchant, name: "My mom", status: 1)
+
+      expect(Item.disabled_items).to eq([item1, item2])
+    end
   end
 end
