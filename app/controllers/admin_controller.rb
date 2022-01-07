@@ -8,4 +8,20 @@ class AdminController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def edit
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def update
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchant_params)
+  end
+
+  private
+
+  def merchant_params
+    params.permit(:name)
+  end
+
+
 end
