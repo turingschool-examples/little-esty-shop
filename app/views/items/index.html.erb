@@ -1,4 +1,5 @@
 <h1> <%= @merchant.name %></h1>
+<h3>Enabled Items</h3>
 <% @items.each do |item| %>
 <section id="item-<%=item.id%>">
   <p>
@@ -11,6 +12,7 @@
   </p>
 </section>
 <% end %>
-<p>Remember to add back in enabled and disabled items</p>
+
+<h3>Disabled Items</h3>
 
 <%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %>
