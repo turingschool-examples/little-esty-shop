@@ -60,10 +60,6 @@ RSpec.describe "Merchant item index" do
     visit merchant_items_path(@merchant_1)
 
     within("#item-#{@item_1.id}") do
-      click_button("Disable")
-
-      expect(current_path).to eq(merchant_items_path(@merchant_1))
-
       click_button("Enable")
 
       expect(current_path).to eq(merchant_items_path(@merchant_1))
@@ -71,7 +67,6 @@ RSpec.describe "Merchant item index" do
       click_button("Disable")
 
       expect(current_path).to eq(merchant_items_path(@merchant_1))
-
     end
   end
 
