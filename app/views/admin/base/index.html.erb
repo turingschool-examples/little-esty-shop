@@ -1,0 +1,8 @@
+<h1>Admin dashboard</h1>
+<p><%= link_to "Merchants Link", "/admin/merchants", method: :get %>
+<%= link_to "Invoices Link", "/admin/invoices", method: :get %></p>
+<h3>Incomplete Invoices:</h3>
+
+<% @invoices.incomplete_invoices.each do |invitem| %>
+<ul>Invoice ID: <%= link_to "#{invitem.invoice_id}", "/admin/invoices/#{invitem.invoice_id}" %></ul>
+<% end %>
