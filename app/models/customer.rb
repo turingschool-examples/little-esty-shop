@@ -10,5 +10,6 @@ class Customer < ApplicationRecord
     .where('transactions.result = ?', 'success')
     .group('id')
     .order('transactions.count DESC')
+    .limit(5)
   end
 end
