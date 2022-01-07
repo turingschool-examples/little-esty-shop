@@ -61,17 +61,9 @@ RSpec.describe 'Merchant Items Index page' do
 
     expect(page).to have_content("Enabled Items:")
     expect(page).to have_content("Disabled Items:")
+    expect(@item1.name).to appear_before("Disabled Items")
+    expect(@item2.name).to appear_before("Disabled Items")
+    expect("Disabled Items:").to appear_before(@item3.name)
 
-    within("div.Enabled_Items") do
-      expect(page).to have_content(item1.name)
-      expect(page).to have_content(item2.name)
-      expect(page).to_not have_content(item3.name)
-    end
-
-    within("div.Disabled_Items") do
-      expect(page).to_not have_content(item1.name)
-      expect(page).to_not have_content(item2.name)
-      expect(page).to have_content(item3.name)
-    end
   end
 end
