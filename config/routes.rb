@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
   namespace :admin do
     resources :merchants
+    resources :invoices
   end
   # get '/admin/', to: 'admin#index'
   # get '/admin/merchants', to: 'admin#index'
