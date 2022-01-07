@@ -16,5 +16,4 @@ RSpec.describe 'Admin show page' do
     expect(page).to_not have_content("#{merchant_2.name}")
   end
 
-
 end
