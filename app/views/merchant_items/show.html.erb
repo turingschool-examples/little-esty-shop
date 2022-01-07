@@ -3,7 +3,7 @@
   <h1><%= @item.name %>'s Info</h1>
   <ul>
   <li>Item description: <%= @item.description %></li>
-  <li>Item cost: <%= number_to_currency((@item.unit_price) / 100) %></li>
+  <li>Item cost: <%= number_to_currency((@item.unit_price).to_f / 100) %></li>
   <li><%= link_to  "Update #{@item.name}", edit_merchant_item_path(@merchant, @item) %></li>
   </ul>
 </div>
