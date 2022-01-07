@@ -32,6 +32,7 @@ RSpec.describe 'Admin dashboard page' do
 
 
 
+
   let!(:transaction_1) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
   let!(:transaction_2) {invoice_2.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
   let!(:transaction_3) {invoice_3.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
@@ -82,8 +83,32 @@ RSpec.describe 'Admin dashboard page' do
     expect(page).to have_link(invoice_7.id)
   end
 
+  it 'Admin Top Customers' do
+    transaction_elvind = invoice_4.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')
+    transaction_ethan_1 = invoice_5.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')
+    transaction_ethan_2 = invoice_5.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')
+
+    visit '/admin'
+
+    within("#top5") do
+      expect("Name: #{customer_5.first_name}, Succesful Transactions: #{customer_5.transactions.length}")
+      .to appear_before("Name: #{customer_1.first_name}, Succesful Transactions: #{customer_1.transactions.length}")
+
+      expect("Name: #{customer_1.first_name}, Succesful Transactions: #{customer_1.transactions.length}")
+      .to appear_before("Name: #{customer_4.first_name}, Succesful Transactions: #{customer_4.transactions.length}")
+
+      expect("Name: #{customer_4.first_name}, Succesful Transactions: #{customer_4.transactions.length}")
+      .to appear_before("Name: #{customer_2.first_name}, Succesful Transactions: #{customer_2.transactions.length}")
+
+      expect("Name: #{customer_2.first_name}, Succesful Transactions: #{customer_2.transactions.length}")
+      .to appear_before("Name: #{customer_3.first_name}, Succesful Transactions: #{customer_3.transactions.length}")
+    end
+  end
 
 end
+
+
+
 
 # Then I see a section for "Incomplete Invoices"
 # In that section I see a list of the ids of all invoices
