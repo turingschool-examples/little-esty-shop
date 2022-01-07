@@ -8,6 +8,7 @@ class Item < ApplicationRecord
     .joins(:invoice_items)
     .select("invoices.created_at, invoice_items.quantity as item_quantity")
     .order(item_quantity: :desc)
+    .order('invoices.created_at desc')
     .first
     .created_at
     .strftime("%m/%d/%Y")

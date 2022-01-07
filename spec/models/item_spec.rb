@@ -30,11 +30,12 @@ RSpec.describe Item do
       @invoice_item_3 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, unit_price: 1000, quantity: 1, status: 0)
       @invoice_item_4 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, unit_price: 1000, quantity: 9, status: 0)
       @invoice_item_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, unit_price: 1000, quantity: 2, status: 0)
+      @invoice_item_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_7.id, unit_price: 1000, quantity: 9, status: 0)
     end
 
     describe '#date_with_most_sales' do
-      it 'shows date' do
-        expect(@item_1.date_with_most_sales).to eq("03/28/2012")
+      it 'shows date that the items sold the most and returns most recent date if multiple days have equal sales' do
+        expect(@item_1.date_with_most_sales).to eq("05/28/2012")
       end
     end
   end
