@@ -60,10 +60,9 @@ RSpec.describe 'admin invoices show page' do
 
     visit "/admin/invoices/#{invoice_1.id}"
     select "Completed", :from => "invoice_status"
-    # find('#invoice_status').find(:xpath, 'Completed').select_option
+
     click_button('Submit')
-    # save_and_open_page
     expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
-    expect(page).to have_content('Completed')
+    expect(page).to have_content('Invoice Status: completed')
   end
 end

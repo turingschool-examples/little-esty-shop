@@ -1,5 +1,7 @@
 <h3>Invoice Id: <%= @invoice.id %> </h3>
 
+<h3>Invoice Status: <%= @invoice.status %></h3>
+
 <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
   <%= f.select(:invoice_status, options_for_select([['Cancelled', 0], ['In Progress', 1], ['Completed', 2]],Invoice.statuses[@invoice.status])) %>
   <%= f.submit "Submit" %>
