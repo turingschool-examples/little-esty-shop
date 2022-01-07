@@ -38,4 +38,30 @@ RSpec.describe 'The Admin Dashboard page' do
     expect(page).to have_content("Abe McConnel with 8 completed transactions")
     expect(page).to have_content("Zach Doe with 1 completed transactions")
   end
+
+  it 'shows incomplete invoices with all invoice ids as well as links to their show page' do
+    invoice_1 = create(:invoice, status: 0)
+    invoice_2 = create(:invoice, status: 0)
+    invoice_3 = create(:invoice, status: 2)
+    visit "/admin"
+
+    expect(page).to have_content("Incomplete Invoices")
+    expect(page).to have_content(invoice_1.id)
+    expect(page).to have_link(invoice_2.id)
+    expect(page).to_not have_content(invoice_3.id)
+  end
+
+  it 'shows the created at dates in order of oldest to newest' do
+    invoice_1 = create(:invoice, created_at: "2022-01-06")
+    invoice_2 = create(:invoice, created_at: "2022-01-05")
+    invoice_3 = create(:invoice, created_at: "2022-01-04")
+    invoice_4 = create(:invoice, created_at: "2022-01-03")
+
+    visit "/admin"
+    
+    expect("Incomplete Invoices").to appear_before("Monday, January 03, 2022")
+    expect("Monday, January 03, 2022").to appear_before("Tuesday, January 04, 2022")
+    expect("Tuesday, January 04, 2022").to appear_before("Wednesday, January 05, 2022")
+    expect("Wednesday, January 05, 2022").to appear_before("Thursday, January 06, 2022")
+  end
 end
