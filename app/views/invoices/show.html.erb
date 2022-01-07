@@ -1,0 +1,7 @@
+<h1>Invoice Number <%= @invoice.id %></h1>
+
+<h2>Invoice Status: <%= @invoice.status %></h2>
+<h2>Created On: <%= @invoice.creation_date_formatted %></h2>
+<h2>Customer Information:</h2>
+<p>First Name: <%= @invoice.customer.first_name %></p>
+<p>Last Name: <%= @invoice.customer.last_name %></p>
