@@ -5,3 +5,15 @@
 <h2>Customer Information:</h2>
 <p>First Name: <%= @invoice.customer.first_name %></p>
 <p>Last Name: <%= @invoice.customer.last_name %></p>
+
+<h2>Merchant Items:</h2>
+<% @merchant_items.each do |item| %>
+  <div id="item<%= item.id %>">
+    <p>Item: <%= item.name %> </p>
+    <% item.invoice_items.each do |invoice_item| %>
+      <p>Unit Price: <%= invoice_item.unit_price %> </p>
+      <p>Quantity: <%= invoice_item.quantity %> </p>
+      <p>Status: <%= invoice_item.status %> </p>
+    <% end %>
+  </div>
+<% end %>
