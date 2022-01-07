@@ -10,6 +10,7 @@ RSpec.describe 'merchants invoice show page' do
   #   visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
   # end
 
+
   it 'displays all information related to that invoice' do
     merchant1 = create(:merchant, name: "Bob Barker")
     customer_1 = create(:customer, first_name: "Eric", last_name: "Mielke")
@@ -27,7 +28,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the invoiced item name' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_count: 1, name: 'Toy')
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy')
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -39,7 +40,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the quantity of the item ordered' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_count: 1, name: 'Toy')
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy')
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -51,7 +52,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the price the item sold for' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_count: 1, name: 'Toy', invoice_item_unit_price: 15000)
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy', invoice_item_unit_price: 15000)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -63,7 +64,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the invoice item status' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_count: 1, invoice_item_status: 2)
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, invoice_item_status: 2)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -75,9 +76,9 @@ RSpec.describe 'merchants invoice show page' do
   it 'does not display any other merchants items information' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoice: invoice1)
-    item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoice: invoice1)
-    item3 = create(:item_with_invoices, invoice: invoice1)
+    item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1])
+    item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1])
+    item3 = create(:item_with_invoices, invoices: [invoice1])
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -89,12 +90,12 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the total revenue that will be generated from the invoice' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant1, invoice: invoice1, invoice_item_unit_price: 15000)
-    item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoice: invoice1, invoice_item_unit_price: 20000)
+    item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 15000)
+    item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 20000)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     expect(page).to have_content("Total Potential Revenue")
-    expect(page).to have_content("$550.0")
+    expect(page).to have_content("$350.0")
   end
 end

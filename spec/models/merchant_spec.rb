@@ -49,8 +49,16 @@ RSpec.describe Merchant, type: :model do
         expect(merchant.top_customers(6)).to eq([customer_3, customer_1, customer_5, customer_2, customer_4])
       end
 
-      describe 'customers' do
+      describe 'items_ready_to_ship' do
+        it "returns a list of all items with an invoice_item status of 0 or 1" do
+          merchant = create(:merchant)
+          item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0)
+          item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1)
+          item_3 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1)
+          item_4 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 2)
 
+          expect(merchant.items_ready_to_ship).to eq([item_1, item_2, item_3])
+        end
       end
     end
   end

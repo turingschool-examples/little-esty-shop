@@ -50,4 +50,8 @@ class Merchant < ApplicationRecord
             .keys
     Customer.find(customer_ids)
   end
+
+  def items_ready_to_ship
+    items.joins(:invoice_items).where("invoice_items.status != 2").distinct
+  end
 end
