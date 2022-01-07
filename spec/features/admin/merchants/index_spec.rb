@@ -2,17 +2,19 @@ require 'rails_helper'
 
 RSpec.describe 'admin merchants index' do
   before(:each) do
-    @merchant = Merchant.create!(name: "Parker")
-    @merchant2 = Merchant.create!(name: "Joel")
-    @merchant3 = Merchant.create!(name: "Kerri")
-    @merchant4 = Merchant.create!(name: "John")
+    @merchant = FactoryBot.create(:merchant)
+    @merchant1 = FactoryBot.create(:merchant)
+    @merchant2 = FactoryBot.create(:merchant)
+    @merchant3 = FactoryBot.create(:merchant)
     visit '/admin/merchants'
   end
 
   it 'shows the name of all merchants' do
-    expect(page).to have_content("Parker")
-    expect(page).to have_content("Joel")
-    expect(page).to have_content("Kerri")
-    expect(page).to have_content("John")
+    visit '/admin/merchants'
+    save_and_open_page
+    expect(page).to have_content(@merchant.name)
+    expect(page).to have_content(@merchant1.name)
+    expect(page).to have_content(@merchant2.name)
+    expect(page).to have_content(@merchant3.name)
   end
 end
