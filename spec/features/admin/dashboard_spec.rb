@@ -58,10 +58,10 @@ RSpec.describe 'The Admin Dashboard page' do
     invoice_4 = create(:invoice, created_at: "2022-01-03")
 
     visit "/admin"
-
-    expect("Incomplete Invoices").to appear_before("2022-01-03")
-    expect("2022-01-03").to appear_before("2022-01-04")
-    expect("2022-01-04").to appear_before("2022-01-05")
-    expect("2022-01-05").to appear_before("2022-01-06")
+    
+    expect("Incomplete Invoices").to appear_before("Monday, January 03, 2022")
+    expect("Monday, January 03, 2022").to appear_before("Tuesday, January 04, 2022")
+    expect("Tuesday, January 04, 2022").to appear_before("Wednesday, January 05, 2022")
+    expect("Wednesday, January 05, 2022").to appear_before("Thursday, January 06, 2022")
   end
 end
