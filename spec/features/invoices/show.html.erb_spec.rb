@@ -71,6 +71,10 @@ RSpec.describe 'merchant invoice show page', type: :feature do
         expect(page).to have_no_content(invoice_item_6.quantity)
         expect(page).to have_no_content(invoice_item_6.unit_price)
       end
+
+      it 'displays total revenue for the invoice' do
+        expect(page).to have_content("Total Revenue: #{invoice_1.total_revenue}")
+      end
     end
   end
 end
