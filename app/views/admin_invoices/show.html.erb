@@ -1,0 +1,7 @@
+<h1>Admin Invoice View</h1>
+
+<h3>Invoice ID #: <%= @invoice.id %><br>
+    Status: <%= @invoice.status%><br>
+    Created On:<%= @invoice.created_at.strftime("%A, %B %d, %Y")%><br>
+    Customer: <%=@invoice.customer_name%><br>
+</h3>
