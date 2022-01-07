@@ -63,6 +63,6 @@ RSpec.describe 'Merchant items show page' do
     scenario 'merchant sees list of item attributes on item show page' do
         expect(page).to have_content(@item_3.name)
         expect(page).to have_content(@item_3.description)
-        expect(page).to have_content(@item_3.unit_price)
+        expect(page).to have_content(@item_3.unit_price.to_f/100)
     end
 end
