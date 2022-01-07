@@ -23,7 +23,7 @@ RSpec.describe Merchant do
     # invoice_item_revenue = invoice_item.unit_price * invoice_item.quantity
     # invoice revenue = sum of all invoice items
     # only invoices with at least one successful transaction should count to revenue
-    it '#top_five_items' do
+    it '#top_five_items by revenue' do
       expect(@merchant_1.top_five_items).to eq([@item_4, @item_7, @item_10, @item_6, @item_5])
     end
   end
