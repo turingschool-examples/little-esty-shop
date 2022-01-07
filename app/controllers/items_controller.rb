@@ -3,47 +3,46 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @items = Item.all
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   # GET /items/1 or /items/1.json
   def show
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
   end
 
   # GET /items/new
   def new
-    @item = Item.new
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   # GET /items/1/edit
   def edit
+    @item = Item.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
-
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: "Item was successfully created." }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.new(item_params)
+    item.save
+    redirect_to "/merchants/#{merchant.id}/items/"
   end
 
   # PATCH/PUT /items/1 or /items/1.json
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: "Item was successfully updated." }
-        format.json { render :show, status: :ok, location: @item }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.find(params[:id])
+    if params[:name] == "" || params[:description] == "" || params[:unit_price] == ""
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}/edit"
+      flash[:alert] = "You cannot leave any field blank."
+    else
+      item.update(item_params)
+      item.save
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
+      flash[:notice] = "Your item has been updated!"
     end
   end
 
@@ -57,13 +56,13 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def item_params
-      params.require(:item).permit(:name, :merchants_id, :description, :unit_price)
-    end
+  # Only allow a list of trusted parameters through.
+  def item_params
+    params.permit(:name, :description, :unit_price, :merchant_id,)
+  end
 end

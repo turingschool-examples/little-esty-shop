@@ -1,24 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h1>Item Info</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+<p>Name: <%= @item.name %></p>
+<p>Description: <%= @item.description %></p>
+<p>Current Selling Price: <%= @item.unit_price %></p>
 
-<p>
-  <strong>Merchants:</strong>
-  <%= @item.merchants %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @item.description %>
-</p>
-
-<p>
-  <strong>Unit price:</strong>
-  <%= @item.unit_price %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<%= link_to 'Edit Item', "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %>

@@ -1,6 +1,19 @@
-<h1>Editing Item</h1>
+<h1>Edit Item</h1>
 
-<%= render 'form', item: @item %>
+<%= form_with url: "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true do |f| %>
+<% if flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
+<%= f.label "Name:" %>
+<%= f.text_field :name, value: @item.name %>
 
-<%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %>
+<%= f.label "Description:" %>
+<%= f.text_field :description, value: @item.description %>
+
+<%= f.label "Current Selling Price:" %>
+<%= f.text_field :unit_price, value: @item.unit_price%>
+
+<%= f.submit 'Save Changes'%>
+<%= f.hidden_field :merchant_id %>
+<%= hidden_field_tag :merchant_id, "#{@item.merchant.id}" %>
+<% end %>

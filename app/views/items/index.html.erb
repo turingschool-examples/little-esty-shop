@@ -1,1 +1,11 @@
 <h1>Items</h1>
+
+<h2>Enabled Items</h2>
+
+
+<h2>Disabled Items</h2>
+<% @merchant.disabled_items.each do |item| %>
+  <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+<% end %>
+
+<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>

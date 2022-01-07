@@ -6,6 +6,10 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates :name, presence: true
+  
+  def disabled_items
+    items.where(status: "Disabled")
+  end
 
   def top_customers
      transactions.joins(invoice: :customer)

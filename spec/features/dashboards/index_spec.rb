@@ -95,10 +95,14 @@ RSpec.describe 'merchant dashboard page', type: :feature do
       end
 
       it "shows the items invoice ids" do
-        save_and_open_page
         expect(page).to have_content("Invoice id# #{item_2.invoices.ids.first}" )
         expect(page).to have_content("Invoice id# #{item_3.invoices.ids.first}")
         expect(page).to have_content("Invoice id# #{item_5.invoices.ids.first}")
+      end
+
+      it "has a link for the invoice id that leads to the invoice show page" do
+        click_link "#{item_2.invoices.ids.first}"
+        expect(current_path).to eq("/merchants/#{merch_1.id}/invoices/#{item_2.invoices.ids.first}")
       end
     end
   end
