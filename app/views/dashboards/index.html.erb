@@ -10,5 +10,5 @@
 <% end %>
 <h3>Items Packaged and Ready to Ship: </h3>
 <% @merchant.items_ready_ship.each do |merch_items| %>
-<p>  <%= merch_items.item.name  %> - Invoice id# <%= merch_items.invoice.id %></p>
+<p>  <%= merch_items.item.name  %> - Invoice id# <%= link_to merch_items.invoice.id, [@merchant, merch_items.invoice] %></p>
   <% end  %>
