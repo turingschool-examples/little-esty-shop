@@ -5,4 +5,6 @@ class Item < ApplicationRecord
 
   enum status: %i[enabled disabled]
 
+  #join invoices to invoice items
+
 end

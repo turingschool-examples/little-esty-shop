@@ -14,7 +14,7 @@ class Merchant < ApplicationRecord
     invoice_items.order(created_at: :asc).where(status: 1)
   end
 
-  def favorite_customers 
-    Customer.select("customers.*, count(customers.id) as count").joins(:invoices, :transactions).joins(:invoice_items, :items).where(items: {merchant_id: self.id}).group("customers.id").limit(5).order("count")
+  def merchants_favorite_customers 
+    customers.favorite_customers
   end
 end

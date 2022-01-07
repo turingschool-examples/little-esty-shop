@@ -20,11 +20,11 @@ RSpec.describe Merchant, type: :model do
     @invoice_4 = Invoice.create!(customer_id:"#{@cust_5.id}", status:1)
     @invoice_5 = Invoice.create!(customer_id:"#{@cust_6.id}", status:1)
 
-    @transaction_1 = Transaction.create(invoice_id:"#{@invoice_1.id}")
-    @transaction_2 = Transaction.create(invoice_id:"#{@invoice_2.id}")
-    @transaction_3 = Transaction.create(invoice_id:"#{@invoice_3.id}")
-    @transaction_4 = Transaction.create(invoice_id:"#{@invoice_4.id}")
-    @transaction_5 = Transaction.create(invoice_id:"#{@invoice_5.id}")
+    @transaction_1 = Transaction.create(invoice_id:"#{@invoice_1.id}", result: "success")
+    @transaction_2 = Transaction.create(invoice_id:"#{@invoice_2.id}", result: "success")
+    @transaction_3 = Transaction.create(invoice_id:"#{@invoice_3.id}", result: "success")
+    @transaction_4 = Transaction.create(invoice_id:"#{@invoice_4.id}", result: "success")
+    @transaction_5 = Transaction.create(invoice_id:"#{@invoice_5.id}", result: "success")
     
     @invoice_item_1 = InvoiceItem.create!(invoice_id:"#{@invoice_1.id}", item_id:"#{@item_1.id}", status: 1, quantity:1, unit_price:600)
     @invoice_item_2 = InvoiceItem.create!(invoice_id:"#{@invoice_2.id}", item_id:"#{@item_1.id}", status: 1, quantity:1, unit_price:600)
@@ -52,7 +52,7 @@ RSpec.describe Merchant, type: :model do
     end
     
     it "#favorite_customers - returns top 5 customers with most successful transactions" do
-      expect(@merch_1.favorite_customers).to contain_exactly(@cust_2, @cust_3, @cust_4, @cust_5, @cust_6)
+      expect(@merch_1.merchants_favorite_customers).to contain_exactly(@cust_2, @cust_3, @cust_4, @cust_5, @cust_6)
     end
   end
   
