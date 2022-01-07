@@ -45,6 +45,8 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false, group: :test
   gem 'orderly'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
