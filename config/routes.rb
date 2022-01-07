@@ -11,10 +11,17 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/welcome', to: 'welcome#index'
   get '/merchants/:id/dashboard', to: 'merchants#show'
-  get '/admin/dashboard', to: 'admin#index'
+
   # get "/merchants/:id/items", to: "items#show"
   resources :merchants, except: [:show] do
     resources :items
     resources :invoices
   end
+
+  resources :admin, only: [:index]
+  namespace :admin do
+    resources :merchants
+  end
+  # get '/admin/', to: 'admin#index'
+  # get '/admin/merchants', to: 'admin#index'
 end
