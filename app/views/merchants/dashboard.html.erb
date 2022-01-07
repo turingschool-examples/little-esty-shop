@@ -8,3 +8,15 @@
     <p><%= "Name: #{customer.full_name}" %></p>
   <% end %>
 </div>
+
+<div class="items_ready_to_ship">
+  <h3>Items Ready to Ship</h3>
+  <% @merchant.items_ready_to_ship.each do |item| %>
+    <div class=<% "item_#{item.id}" %>>
+      <p><%= item.name %></p>
+      <% item.invoices.each do |invoice| %>
+        <p><%= link_to "Invoice ID: #{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
