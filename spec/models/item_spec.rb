@@ -31,7 +31,7 @@ RSpec.describe Item, type: :model do
       item3 = create(:item, merchant: merchant, name: "Josh", status: 1)
       item4 = create(:item, merchant: merchant, name: "My mom", status: 1)
 
-      expect(Item.enabled_items).to eq([@item3, @item4])
+      expect(Item.enabled_items).to eq([item3, item4])
     end
   end
 end
