@@ -115,7 +115,6 @@ RSpec.describe 'merchant dashboard' do
 
       visit "/merchants/#{merchant.id}/dashboard"
 
-      save_and_open_page
       within "div.items_ready_to_ship" do
         expect("Wednesday, January 05, 2022").to appear_before("Friday, January 07, 2022")
       end
