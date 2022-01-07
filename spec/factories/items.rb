@@ -9,7 +9,7 @@ FactoryBot.define do
 
       transient do
         invoice_count {1}
-        invoices {create_list(:invoice, evaluator.invoice_count)}
+        invoices {create_list(:invoice, invoice_count)}
         invoice_item_unit_price {15000}
         invoice_item_status {0}
         invoice_quantity {8}
