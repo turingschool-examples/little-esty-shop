@@ -64,5 +64,6 @@ RSpec.describe 'Merchant Items Index page' do
     expect(item3.name).to appear_before("Disabled Items")
     expect("Disabled Items:").to appear_before(item2.name)
     expect("Disabled Items:").to appear_before(item1.name)
+    save_and_open_page
   end
 end
