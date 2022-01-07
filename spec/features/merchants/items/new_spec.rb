@@ -17,5 +17,6 @@ RSpec.describe 'MerchantItem new page' do
     expect(current_path).to eq(merchant_items_path(merchant1))
 
     expect(page).to have_content("Issa New Item")
+    expect(page).to have_button("Disable")
   end
 end
