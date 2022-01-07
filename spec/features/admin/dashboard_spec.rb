@@ -61,6 +61,19 @@ RSpec.describe 'Admin dashboard page' do
     expect(page).to have_link("Invoices Link")
   end
 
+  it 'directs to admin merchants index page if link is clicked' do
+    visit '/admin'
+    click_link("Merchants Link")
+    expect(current_path).to eq("/admin/merchants")
+  end
+
+  xit 'directs to admin invoices index page if link is clicked' do
+    visit '/admin'
+    click_link("Invoices Link")
+    expect(current_path).to eq("/admin/invoices")
+  end
+
+
   it "incomplete invoices" do
     visit '/admin'
     expect(page).to have_content("Incomplete Invoices:")
