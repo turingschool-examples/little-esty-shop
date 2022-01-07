@@ -6,3 +6,10 @@
 <% @invoices.incomplete_invoices.each do |invitem| %>
 <li>Invoice ID: <%=link_to "#{invitem.invoice_id}", "/admin/invoices/#{invitem.invoice_id}" %> Created at: <%= invitem.created_at.strftime("%A, %B %d %Y") %></li>
 <% end %>
+<br>
+<div id="top5">
+  <p>Top 5 Customers:</p>
+  <% @customers.top_five_customers.each do |customer| %>
+    <p>Name: <%= customer.first_name %>, Succesful Transactions: <%= customer.transactions.length %></p>
+  <% end %>
+</div>
