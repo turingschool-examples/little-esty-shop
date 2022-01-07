@@ -24,20 +24,11 @@ RSpec.describe 'merchant dashboard' do
   it "has the names of the top 5 customers with largest number of completed transactions" do
     merchant = create(:merchant)
 
-    customer_1 = create(:customer, first_name: 'Bob')
-    customer_2 = create(:customer, first_name: 'John')
-    customer_3 = create(:customer, first_name: 'Abe')
-    customer_4 = create(:customer, first_name: 'Zach')
-    customer_5 = create(:customer, first_name: 'Charlie')
-
-    merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
-    merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
-    merchant_3 = create(:merchant_with_invoices, invoice_count: 8, customer: customer_3, invoice_status: 2)
-    merchant_4 = create(:merchant_with_invoices, invoice_count: 1, customer: customer_4, invoice_status: 2)
-    merchant_5 = create(:merchant_with_invoices, invoice_count: 4, customer: customer_5, invoice_status: 2)
-
-    #update all items to be under original merchant
-    Item.where(merchant_id: [merchant_1.id, merchant_2.id, merchant_3.id, merchant_4.id, merchant_5.id]).update(merchant: merchant)
+    customer_1 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 6, first_name: 'Bob')
+    customer_2 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 3, first_name: 'John')
+    customer_3 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 8, first_name: 'Abe')
+    customer_4 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 1, first_name: 'Zach')
+    customer_5 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 4, first_name: 'Charlie')
 
     visit "/merchants/#{merchant.id}/dashboard"
 
