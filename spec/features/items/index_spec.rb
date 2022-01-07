@@ -35,10 +35,10 @@ describe 'merchants items index' do
         expect(@item1.status).to eq("Disabled")
       end
       within("#item-#{@item1.id}") do
-        click_button "change status"
+        click_button "Enable this item"
         expect(current_path).to eq(merchant_items_path(@merchant1))
         expect(@item1.status).to eq("Enabled")
-      end 
+      end
     end
   end
 end

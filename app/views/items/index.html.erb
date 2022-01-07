@@ -5,6 +5,10 @@
 <% @items.each do |item| %>
   <section id="item-<%= item.id %>">
     <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Status: <%= "#{item.status}" %></p>
-    <p><%= button_to "change status", "/merchants/#{@merchant.id}/items/#{item.id}/change_status", method: :get %></p>
+    <% if item.status == 'Enabled' %>
+      <%= button_to "Disable this item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+    <% elsif item.status == 'Disabled' %>
+      <%= button_to "Enable this item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+    <% end %>
   </section>
 <% end %>

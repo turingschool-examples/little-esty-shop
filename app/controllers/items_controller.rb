@@ -35,11 +35,11 @@ class ItemsController < ApplicationController
   def create
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.create!(item_params)
-    redirect_to(merchant_items_path)
+    redirect_to(merchant_items_path(@merchant))
   end
 
   private
   def item_params
-    params.permit(:name, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :status)
   end
 end
