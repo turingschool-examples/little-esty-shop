@@ -2,3 +2,20 @@
 
 <p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items"%></p>
 <p><%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices"%></p>
+
+<h3><div class="items-ready-to-ship">Items Ready To Ship</h3>
+  <% @merchant.items_ready_to_ship.each do |invoice_item| %>
+    <p><%= invoice_item.item.name %></p>
+      <p>Invoice No. <%= invoice_item.invoice.id %> Created: <%= invoice_item.item.created_at.strftime("%A %B %m %Y") %></p>
+    <% end %>
+</div>
+
+<%
+=begin%>
+ <h3><div class="favorite-customers">Favorite Customers</h3>
+  <% @merchant.favorite_customers.each do |customer| %>
+    <%= customer.name %>
+    <% end %>
+</div> 
+<%
+=end%>
