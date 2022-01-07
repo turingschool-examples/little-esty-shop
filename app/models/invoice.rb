@@ -15,4 +15,8 @@ class Invoice < ApplicationRecord
   def customer_full_name
     self.customer.first_name + ' ' + self.customer.last_name
   end
+
+  def items_ready_ship
+    invoice_items.where('status = 1').distinct(:item_id)
+  end
 end
