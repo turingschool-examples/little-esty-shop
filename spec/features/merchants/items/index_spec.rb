@@ -56,7 +56,7 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to have_content(item1.name)
     end
   end
-  
+
   it 'displays top 5 best selling items' do
     merchant = Merchant.create!(name: 'merchant name')
       item_1 = Item.create!(merchant_id: merchant.id, name: 'widget-1', description: 'widget description', unit_price: 100)
@@ -106,12 +106,14 @@ RSpec.describe 'Merchant Items Index page' do
       expect(second_item).to appear_before(third_item)
       expect(fourth_item).to appear_before(fifth_item)
       expect(fifth_item).to_not appear_before(first_item)
-      
+
       expect(page).to have_content("#{item_10.name}-#{((invoice_item_1.quantity * invoice_item_1.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
       expect(page).to have_content("#{item_9.name}-#{((invoice_item_2.quantity * invoice_item_2.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
       expect(page).to have_content("#{item_8.name}-#{((invoice_item_3.quantity * invoice_item_3.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
       expect(page).to have_content("#{item_7.name}-#{((invoice_item_4.quantity * invoice_item_4.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
       expect(page).to have_content("#{item_6.name}-#{((invoice_item_5.quantity * invoice_item_5.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
+    end
+  end 
 
 
   it 'displays top 5 best selling items' do
