@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
   validates :last_name, presence: true
 
   def successful_transactions_count
-    invoices.where(status: :completed).count
+    total = invoices.joins(:transactions).where(:transactions => {result: 0}).count
   end
 
   def full_name
