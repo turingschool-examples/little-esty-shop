@@ -1,11 +1,16 @@
 class Customer < ApplicationRecord
   has_many :invoices
+  has_many :transactions, through: :invoices
 
   validates :first_name, presence: true
   validates :last_name, presence: true
 
   def successful_transactions_count
-    total = invoices.joins(:transactions).where(:transactions => {result: 0}).count
+    successful_transactions.count
+  end
+
+  def successful_transactions
+    transactions.where(result: 0)
   end
 
   def full_name

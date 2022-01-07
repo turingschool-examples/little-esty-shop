@@ -4,6 +4,7 @@ RSpec.describe Customer, type: :model do
 
   describe 'relationships' do
     it { should have_many(:invoices)}
+    it { should have_many(:transactions).through(:invoices) }
   end
 
   describe 'validations' do
@@ -14,7 +15,17 @@ RSpec.describe Customer, type: :model do
   describe 'instance methods' do
     describe 'successful_transactions' do
       it "returns all the sucessful transactions associated with that customer" do
+        customer_1 = create(:customer_with_transactions, transaction_count: 3, transaction_result: 1)
+        expect(customer_1.successful_transactions).to eq([])
 
+        customer_2 = create(:customer_with_transactions, transaction_count: 3, transaction_result: 0)
+        expect(customer_2.successful_transactions).to eq(customer_2.transactions)
+
+        customer_3 = create(:customer_with_transactions, transaction_count: 3, transaction_result: 0)
+        expected = customer_3.transactions
+        invoice = create(:invoice, customer: customer_3)
+        transaction = create(:transaction, invoice: invoice, result: 1)
+        expect(customer_3.successful_transactions).to eq(expected)
       end
 
       it '#successful_transactions_count' do
