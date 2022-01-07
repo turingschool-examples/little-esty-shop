@@ -7,10 +7,6 @@ RSpec.describe 'Admin Dashboard Index page' do
     expect(page).to have_content("Welcome to Admin Dashboard")
   end
 
-#   As an admin,
-# When I visit the admin dashboard (/admin)
-# Then I see a link to the admin merchants index (/admin/merchants)
-# And I see a link to the admin invoices index (/admin/invoices)
   it 'shows links to admin merchants index' do
     visit admin_index_path
 
