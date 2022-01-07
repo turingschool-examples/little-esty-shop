@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin index page' do
+RSpec.describe 'Admin merchant index page' do
 
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks', status:1)}
   let!(:merchant_2) {Merchant.create!(name: 'Merchant 2', status: 1)}
@@ -22,7 +22,6 @@ RSpec.describe 'Admin index page' do
 
   it 'has button to enable merchant, if disabled' do
     visit '/admin/merchants'
-    save_and_open_page
     expect(page).to have_button("Disable Billys Pet Rocks")
     expect(page).to have_button("Disable Merchant 2")
 

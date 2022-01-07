@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin show page' do
+RSpec.describe 'Admin merchant show page' do
 
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
   let!(:merchant_2) {Merchant.create!(name: 'Merchant 2')}
