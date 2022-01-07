@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  
+
   before(:each) do
     @merch_1 = Merchant.create!(name: "Shop Here")
 
     @item_1 = Item.create!(name:"jumprope", description:"Pink and sparkly.", unit_price:600, merchant_id:"#{@merch_1.id}")
-    
+
     @cust_1 = Customer.create!(first_name:"Hannah", last_name:"Warner")
-    @cust_2 = Customer.create!(first_name:"Kimmy", last_name:"Gibbler") 
+    @cust_2 = Customer.create!(first_name:"Kimmy", last_name:"Gibbler")
     @cust_3 = Customer.create!(first_name:"Bob", last_name:"Sagget")
     @cust_4 = Customer.create!(first_name:"Uncle", last_name:"Dave")
     @cust_5 = Customer.create!(first_name:"Uncle", last_name:"Jessie")
