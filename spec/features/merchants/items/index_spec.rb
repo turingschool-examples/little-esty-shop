@@ -3,9 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Merchant Dashboard' do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Ron Swanson')
-    @merchant_2 = Merchant.create!(name: 'Leslie Knope')
-    @merchant_3 = Merchant.create!(name: 'Tom Haverford')
-    @merchant_4 = Merchant.create!(name: 'April Ludgate')
 
     @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
     @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900)
