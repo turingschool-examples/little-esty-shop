@@ -9,15 +9,15 @@ FactoryBot.define do
 
       transient do
         invoice_count {2}
-        invoice {create(:invoice)}
+        invoices {create_list(:invoice, invoice_count)}
         invoice_item_unit_price {15000}
         invoice_item_status {0}
       end
 
       after(:create) do |item, evaluator|
-        evaluator.invoice_count.times do
+        evaluator.invoice_count.times do |index|
           invoice_item = create(:invoice_item,
-          invoice: evaluator.invoice,
+          invoice: evaluator.invoices[index],
           item: item,
           unit_price: evaluator.invoice_item_unit_price,
           status: evaluator.invoice_item_status)
