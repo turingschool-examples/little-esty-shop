@@ -14,6 +14,9 @@ RSpec.describe "Merchant Item Create page" do
     end
 
     expect(current_path).to eq("/merchants/#{merchant1.id}/items")
-    expect(page).to have_content("Paul's Item")
+    save_and_open_page
+    within("div.item_#{merchant1.items.last.id}") do
+      expect(page).to have_content("Paul's Item")
+    end
   end
 end

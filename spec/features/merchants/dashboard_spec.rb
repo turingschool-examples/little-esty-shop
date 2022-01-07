@@ -24,21 +24,12 @@ RSpec.describe 'merchant dashboard' do
   it "has the names of the top 5 customers with largest number of completed transactions" do
     merchant = create(:merchant)
 
-    customer_1 = create(:customer, first_name: 'Bob')
-    customer_2 = create(:customer, first_name: 'John')
-    customer_3 = create(:customer, first_name: 'Abe')
-    customer_4 = create(:customer, first_name: 'Zach')
-    customer_5 = create(:customer, first_name: 'Charlie')
+    customer_1 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 6, first_name: 'Bob')
+    customer_2 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 3, first_name: 'John')
+    customer_3 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 8, first_name: 'Abe')
+    customer_4 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 1, first_name: 'Zach')
+    customer_5 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 4, first_name: 'Charlie')
 
-    merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
-    merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
-    merchant_3 = create(:merchant_with_invoices, invoice_count: 8, customer: customer_3, invoice_status: 2)
-    merchant_4 = create(:merchant_with_invoices, invoice_count: 1, customer: customer_4, invoice_status: 2)
-    merchant_5 = create(:merchant_with_invoices, invoice_count: 4, customer: customer_5, invoice_status: 2)
-
-    #update all items to be under original merchant
-    Item.where(merchant_id: [merchant_1.id, merchant_2.id, merchant_3.id, merchant_4.id, merchant_5.id]).update(merchant: merchant)
-    
     visit "/merchants/#{merchant.id}/dashboard"
 
     within 'div.top_customers' do
@@ -47,5 +38,58 @@ RSpec.describe 'merchant dashboard' do
       expect('Charlie').to appear_before('John')
       expect('John').to appear_before('Zach')
     end
+  end
+
+  it "has a section called 'Items ready to ship'" do
+    merchant = create(:merchant)
+    visit "/merchants/#{merchant.id}/dashboard"
+    within "div.items_ready_to_ship" do
+      expect(page).to have_content("Items Ready to Ship")
+    end
+  end
+
+  it "items ready to ship section shows all items that have been ordered and have not yet been shipped" do
+    merchant = create(:merchant)
+    item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0, name: "item_1")
+    item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, name: "item_2")
+    item_3 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, name: "item_3")
+    item_4 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 2, name: "item_4")
+    visit "/merchants/#{merchant.id}/dashboard"
+
+    within "div.items_ready_to_ship" do
+      expect(page).to have_content("item_1")
+      expect(page).to have_content("item_2")
+      expect(page).to have_content("item_3")
+      expect(page).to_not have_content("item_4")
+    end
+  end
+
+  it "items ready to ship section shows invoice id next to item, and this is a link to the merchant invoice show page" do
+    merchant = create(:merchant)
+    item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0, invoice_count: 1)
+    item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, invoice_count: 2)
+    invoice_1 = item_1.invoices.first
+    invoice_2 = item_2.invoices.first
+    invoice_3 = item_2.invoices.last
+
+
+    visit "/merchants/#{merchant.id}/dashboard"
+    within "div.item_#{item_1.id}" do
+      click_link "Invoice ID: #{invoice_1.id}"
+      expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_1.id}")
+    end
+
+    visit "/merchants/#{merchant.id}/dashboard"
+    within "div.item_#{item_2.id}" do
+      click_link "Invoice ID: #{invoice_2.id}"
+      expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_2.id}")
+    end
+
+    visit "/merchants/#{merchant.id}/dashboard"
+    within "div.item_#{item_2.id}" do
+      click_link "Invoice ID: #{invoice_3.id}"
+      expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_3.id}")
+    end
+
   end
 end

@@ -12,17 +12,29 @@ class Merchant < ApplicationRecord
   end
 
   def top_customers(customer_count = 5)
-    # edge case, don't show more customers than exists
     if customer_count > customers.count
       customer_count = customers.count
     end
 
-    # Get completed transactions grouped by customer.
-    # Order desc by count of completed transactions
-    # Limit to customer_count
+    customer_ids = Customer.joins(:invoices => :transactions)
+    .where(:transactions => {result: 0})
+    .group(:customer_id)
+    .order(count_customer_id: :desc)
+    .limit(customer_count)
+    .count(:customer_id)
+    .keys
+    Customer.find(customer_ids)
 
-    customer_ids = invoices.where(status: :completed)
-            .joins(:customer)
+  end
+
+  def self.top_customers(customer_count = 5)
+    customers = Customer.all
+    if customer_count > customers.count
+      customer_count = customers.count
+    end
+
+    customer_ids = Customer.joins(:invoices => :transactions)
+            .where(:transactions => {result: 0})
             .group(:customer_id)
             .order(count_customer_id: :desc)
             .limit(customer_count)
@@ -30,24 +42,8 @@ class Merchant < ApplicationRecord
             .keys
     Customer.find(customer_ids)
   end
-  def self.top_customers(customer_count = 5)
-    customers = Customer.all
-    # edge case, don't show more customers than exists
-    if customer_count > customers.count
-      customer_count = customers.count
-    end
 
-    # Get completed transactions grouped by customer.
-    # Order desc by count of completed transactions
-    # Limit to customer_count
-
-    customer_ids = Invoice.where(status: :completed)
-            .joins(:customer)
-            .group(:customer_id)
-            .order(count_customer_id: :desc)
-            .limit(customer_count)
-            .count(:customer_id)
-            .keys
-    Customer.find(customer_ids)
+  def items_ready_to_ship
+    items.joins(:invoice_items).where("invoice_items.status != 2").distinct
   end
 end

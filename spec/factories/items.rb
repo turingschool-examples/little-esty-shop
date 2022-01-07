@@ -8,19 +8,21 @@ FactoryBot.define do
     factory :item_with_invoices do
 
       transient do
-        invoice_count {2}
-        invoice {create(:invoice)}
+        invoice_count {1}
+        invoices {create_list(:invoice, invoice_count)}
         invoice_item_unit_price {15000}
         invoice_item_status {0}
+        invoice_quantity {8}
       end
 
       after(:create) do |item, evaluator|
-        evaluator.invoice_count.times do
+        evaluator.invoice_count.times do |index|
           invoice_item = create(:invoice_item,
-          invoice: evaluator.invoice,
+          invoice: evaluator.invoices[index],
           item: item,
           unit_price: evaluator.invoice_item_unit_price,
-          status: evaluator.invoice_item_status)
+          status: evaluator.invoice_item_status,
+          quantity: evaluator.invoice_quantity)
         end
         item.reload
       end
