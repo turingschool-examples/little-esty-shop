@@ -13,3 +13,6 @@
     <p>Status: <%=invoice_item.status%></p>
   </section>
 <%end%>
+
+<h2>Total Potential Revenue</h2>
+<h4>$<%=@invoice.potential_revenue(@merchant).to_f/100%></h4>
