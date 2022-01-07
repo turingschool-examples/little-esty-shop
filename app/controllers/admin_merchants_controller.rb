@@ -1,5 +1,26 @@
 class AdminMerchantsController < ApplicationController
   def index
-    @merchants = Merchants.all 
+    @merchants = Merchant.all
   end
+
+  def show
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def update
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchant_params)
+    redirect_to "/admin/merchants/#{merchant.id}",  notice: "Merchant Successfully Updated"
+  end
+
+  private
+
+  def merchant_params
+    params.permit(:name)
+  end
+
 end
