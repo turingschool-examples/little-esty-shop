@@ -3,8 +3,7 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
-  enum status: { disabled: 0, enabled: 1 }
-  #need to make this default to disabled 
+  enum status: [:Disabled, :Enabled]
 
   validates :name, presence: true
   validates :description, presence: true
