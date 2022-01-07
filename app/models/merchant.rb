@@ -6,26 +6,16 @@ class Merchant < ApplicationRecord
   has_many :customers, :through => :invoices 
 
   # def merchants_invoices 
-    
-  #   Invoice.select("invoices.*").joins(:invoice_items, :items).where(items: {merchant_id: self.id}).order(created_at: :asc)
+    #   Invoice.select("invoices.*").joins(:invoice_items, :items).where(items: {merchant_id: self.id}).order(created_at: :asc)
 
-  #   self.invoices.order(created_at: :asc)
-  # end
-
-  # def ship_ready_items
-  #   items.joins(:invoice_items).where(invoice_items: {status: 1})
-  # end
-
-  # def ready_items_dates
-  #   ship_ready_items.select("items.name, invoices.created_at").joins(:invoices).order(created_at: :asc)
-  #   # require 'pry'; binding.pry
+    #   self.invoices.order(created_at: :asc)
   # end
 
   def items_ready_to_ship
     invoice_items.order(created_at: :asc).where(status: 1)
   end
 
-  def favorite_customers 
-    Customer.select("customers.*, count(customers.id) as count").joins(:invoices, :transactions).joins(:invoice_items, :items).where(items: {merchant_id: self.id}).group("customers.id").limit(5).order("count")
+  def merchants_favorite_customers 
+    customers.favorite_customers
   end
 end
