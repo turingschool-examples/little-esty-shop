@@ -6,10 +6,12 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def favorite_customers
-    transactions
-    .joins(invoice: :customer)
-    .where(transactions: {result: :success})
-    .select('customers.*')
+    customers
+    .joins(invoices: :transactions)
+    .where('transactions.result = ?', 'success')
+    .group('customers.id')
+    .order('transactions.count DESC')
+    .limit(5)
   end
 
   def items_ready_to_ship
