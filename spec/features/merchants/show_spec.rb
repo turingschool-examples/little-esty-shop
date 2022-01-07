@@ -69,23 +69,17 @@ RSpec.describe "Merchant Dashboard Show Page" do
     
     within(".items-ready-to-ship") do 
       expect(page).to have_content(@item_1.name)
-      expect(page).to have_content("Invoice Created: #{@invoice_1.created_at.strftime("%A %B %m %Y")}")
+      expect(page).to have_content("Invoice No. #{@invoice_1.id} Created: #{@invoice_1.created_at.strftime("%A %B %m %Y")}")
 
       expect(page).to have_content(@item_1.name)
-      # require 'pry'; binding.pry
-      expect(page).to have_content("Invoice Created: #{@invoice_2.created_at.strftime("%A %B %m %Y")}")
+      expect(page).to have_content("Invoice No. #{@invoice_2.id} Created: #{@invoice_2.created_at.strftime("%A %B %m %Y")}")
     end
   end
     
-  xit "has items ordered from oldest to newest" do 
-    visit "/merchants/#{@merch_1}/dashboard"
-
-    #mock item with created_at date
-
-    within("#items-ready-to-ship") do 
-      expect(@item_1.name).to appear_before()
-      expect(page).to have_content("")
-    end
+  it "has items ordered from oldest to newest" do 
+    visit "/merchants/#{@merch_1.id}/dashboard"
+    
+    expect("#{@invoice_1.id}").to appear_before("#{@invoice_2.id}")
   end
 
   xit "has top 5 favorite customers with most transaction activity with this merchant" do 
