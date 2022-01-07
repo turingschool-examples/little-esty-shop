@@ -50,4 +50,11 @@ class Merchant < ApplicationRecord
             .keys
     Customer.find(customer_ids)
   end
+  #need transaction result = 0
+  def self.top_5
+    binding.pry
+    Customer.joins(:invoices => :transactions).where(:transactions => {result: 0})
+    # trans = Customer.trans
+    # Customer.joins(:invoices => trans).where(result: :success)
+  end
 end

@@ -21,12 +21,13 @@ RSpec.describe 'The Admin Dashboard page' do
     customer_4 = create(:customer, first_name: 'Zach', last_name: "Doe")
     customer_5 = create(:customer, first_name: 'Charlie', last_name: "Rey")
 
-    merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
-    merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
-    merchant_3 = create(:merchant_with_invoices, invoice_count: 8, customer: customer_3, invoice_status: 2)
-    merchant_4 = create(:merchant_with_invoices, invoice_count: 1, customer: customer_4, invoice_status: 2)
-    merchant_5 = create(:merchant_with_invoices, invoice_count: 4, customer: customer_5, invoice_status: 2)
-
+    successful_transactions_1 = create(:transactions_with_invoices, invoice_count: 6, customer: customer_1, result: 0)
+    successful_transactions_2 = create(:transactions_with_invoices, invoice_count: 3, customer: customer_2, result: 0)
+    successful_transactions_3 = create(:transactions_with_invoices, invoice_count: 8, customer: customer_3, result: 0)
+    successful_transactions_4 = create(:transactions_with_invoices, invoice_count: 1, customer: customer_4, result: 0)
+    successful_transactions_5 = create(:transactions_with_invoices, invoice_count: 4, customer: customer_5, result: 0)
+    # transaction_4 = create(:transaction, invoice: customer_4.invoices)
+    # transaction_5 = create(:transaction, invoice: customer_5.invoices)
     visit "/admin"
     expect(page).to have_content("Top 5 Customers")
 

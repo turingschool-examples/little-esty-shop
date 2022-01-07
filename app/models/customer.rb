@@ -11,4 +11,10 @@ class Customer < ApplicationRecord
   def full_name
     (self.first_name) + " " + (self.last_name)
   end
+
+  def self.trans
+    binding.pry
+    self.invoices.transactions
+    # Transactions.all
+  end
 end

@@ -4,6 +4,6 @@
 <h3><%= link_to "Invoices Index", "/admin/invoices"%></h3>
 
 <h2>Top 5 Customers</h2>
-<% @merchants.top_customers.each do |customer| %>
+<% @merchants.top_5.each do |customer| %>
   <h3><%= customer.full_name %> with <%= customer.successful_transactions_count %> completed transactions</h3>
 <% end %>
