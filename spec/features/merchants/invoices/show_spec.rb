@@ -43,27 +43,33 @@ RSpec.describe 'merchants invoice show page' do
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    expect(page).to have_content("Quantity Ordered: 8")
+    within("#invoice_#{item.id}") do
+      expect(page).to have_content("Quantity Ordered: 8")
+    end
   end
 
   it 'displays the price the item sold for' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, name: 'Toy', invoice_item_unit_price: 15000)
+    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_count: 1, name: 'Toy', invoice_item_unit_price: 15000)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    expect(page).to have_content("Unit Price: $150.0")
+    within("#invoice_#{item.id}") do
+      expect(page).to have_content("Unit Price: $150.0")
+    end
   end
 
   it 'displays the invoice item status' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_item_status: 2)
+    item = create(:item_with_invoices, merchant: merchant1, invoice: invoice1, invoice_count: 1, invoice_item_status: 2)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    expect(page).to have_content("Status: shipped")
+    within("#invoice_#{item.id}") do
+      expect(page).to have_content("Status: shipped")
+    end
   end
 
   it 'does not display any other merchants items information' do
@@ -88,6 +94,7 @@ RSpec.describe 'merchants invoice show page' do
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    expect(page).to have_content("Total Potential Revenue: $550.0")
+    expect(page).to have_content("Total Potential Revenue")
+    expect(page).to have_content("$550.0")
   end
 end
