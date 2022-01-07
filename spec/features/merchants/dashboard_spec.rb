@@ -99,7 +99,7 @@ RSpec.describe 'merchant dashboard' do
       invoice = create(:invoice, created_at: Date.new(2022,01,07))
       item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0, invoices: [invoice])
 
-      visit "/merchant/#{merchant.id}/dashboard"
+      visit "/merchants/#{merchant.id}/dashboard"
       within "div.item_#{item_1.id}" do
         expect(page).to have_content("Friday, January 07, 2022")
       end
@@ -113,8 +113,10 @@ RSpec.describe 'merchant dashboard' do
       invoice_2 = create(:invoice, created_at: Date.new(2022,01,05))
       item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0, invoices: [invoice_2])
 
-      visit "/merchant/#{merchant.id}/dashboard"
-      within "div.items_ready_to_ship#{item_1.id}" do
+      visit "/merchants/#{merchant.id}/dashboard"
+
+      save_and_open_page
+      within "div.items_ready_to_ship" do
         expect("Wednesday, January 05, 2022").to appear_before("Friday, January 07, 2022")
       end
     end

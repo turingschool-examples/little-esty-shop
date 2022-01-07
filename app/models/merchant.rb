@@ -44,6 +44,9 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-    items.joins(:invoice_items).where("invoice_items.status != 2").distinct
+    items.joins(:invoice_items)
+        .where("invoice_items.status != 2")
+        .distinct
+        .order(:invoice => {created_at: :desc})
   end
 end

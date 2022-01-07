@@ -15,7 +15,8 @@
     <div class=<%= "item_#{item.id}" %>>
       <p><%= item.name %></p>
       <% item.invoices.each do |invoice| %>
-        <p><%= link_to "Invoice ID: #{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>
+        <p><%= link_to "Invoice ID: #{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> Created On: <%= "#{invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
+        <p></p>
       <% end %>
     </div>
   <% end %>

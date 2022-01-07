@@ -59,6 +59,15 @@ RSpec.describe Merchant, type: :model do
 
           expect(merchant.items_ready_to_ship).to eq([item_1, item_2, item_3])
         end
+
+        it "returns items in descending order based on create_at date" do
+          merchant = create(:merchant)
+          item_1 = create(:item_with_invoices, merchant: merchant, created_at: Date.new(2022, 4, 20)
+          item_2 = create(:item_with_invoices, merchant: merchant, created_at: Date.new(2022, 1, 12)
+          item_3 = create(:item_with_invoices, merchant: merchant, created_at: Date.new(2022, 3, 2)
+
+          expect(merchant.items_ready_to_ship).to eq([item_2, item_3, item_1])
+        end
       end
     end
   end
