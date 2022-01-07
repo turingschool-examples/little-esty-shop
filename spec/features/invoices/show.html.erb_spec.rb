@@ -9,6 +9,15 @@ RSpec.describe 'merchant invoice show page', type: :feature do
   let!(:invoice_item_1) { create(:invoice_item, item: item_1, invoice: invoice_1) }
   let!(:invoice_item_2) { create(:invoice_item, item: item_2, invoice: invoice_1) }
   let!(:invoice_item_3) { create(:invoice_item, item: item_3, invoice: invoice_1) }
+
+  let!(:merch_2) { create(:merchant) }
+  let!(:item_4) { create(:item, merchant: merch_2) }
+  let!(:item_5) { create(:item, merchant: merch_2) }
+  let!(:item_6) { create(:item, merchant: merch_2) }
+  let!(:invoice_2) { create(:invoice) }
+  let!(:invoice_item_4) { create(:invoice_item, item: item_4, invoice: invoice_2) }
+  let!(:invoice_item_5) { create(:invoice_item, item: item_5, invoice: invoice_2) }
+  let!(:invoice_item_6) { create(:invoice_item, item: item_6, invoice: invoice_2) }
   # let(:merch_2) { create(:merch_w_all, customer_count: 2) }
   # let(:invoice_1) { merch_2.invoices[0] }
   # let(:invoice_2) { merch_2.invoices[1] }
@@ -47,6 +56,20 @@ RSpec.describe 'merchant invoice show page', type: :feature do
           expect(page).to have_content(invoice_item_3.unit_price)
           expect(page).to have_content(invoice_item_3.status)
         end
+      end
+      
+      it 'does not display invoice items from other merchants' do
+        expect(page).to have_no_content(item_4.name)
+        expect(page).to have_no_content(invoice_item_4.quantity)
+        expect(page).to have_no_content(invoice_item_4.unit_price)
+
+        expect(page).to have_no_content(item_5.name)
+        expect(page).to have_no_content(invoice_item_5.quantity)
+        expect(page).to have_no_content(invoice_item_5.unit_price)
+
+        expect(page).to have_no_content(item_6.name)
+        expect(page).to have_no_content(invoice_item_6.quantity)
+        expect(page).to have_no_content(invoice_item_6.unit_price)
       end
     end
   end
