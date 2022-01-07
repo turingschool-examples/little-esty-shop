@@ -39,7 +39,7 @@ RSpec.describe 'The Admin Dashboard page' do
     expect(page).to have_content("Zach Doe with 1 completed transactions")
   end
 
-  it 'shows incomplete invoices with all invoice ids' do
+  it 'shows incomplete invoices with all invoice ids as well as links to their show page' do
     invoice_1 = create(:invoice, status: 0)
     invoice_2 = create(:invoice, status: 0)
     invoice_3 = create(:invoice, status: 2)
@@ -47,7 +47,7 @@ RSpec.describe 'The Admin Dashboard page' do
 
     expect(page).to have_content("Incomplete Invoices")
     expect(page).to have_content(invoice_1.id)
-    expect(page).to have_content(invoice_2.id)
+    expect(page).to have_link(invoice_2.id)
     expect(page).to_not have_content(invoice_3.id)
   end
 end
