@@ -12,9 +12,9 @@ RSpec.describe 'the merchant invoice show page' do
 
   let!(:invoice_1) {customer_1.invoices.create!(status: 'completed' )}
 
-  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'shipped')}
+  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 2, unit_price: 50, status: 'shipped')}
   let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'pending')}
-  let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
+  let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 3, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
 
   it 'displays invoice attributes' do
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
@@ -44,5 +44,25 @@ RSpec.describe 'the merchant invoice show page' do
     expect(page).to have_content(invoice_item_1.status)
     expect(page).to have_content(invoice_item_2.status)
     expect(page).to have_content(invoice_item_3.status)
+  end
+
+
+  it 'updates invoice item status when selected from a dropdown menu ' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+    within "##{item_1.id}" do
+      expect(page).to have_content('Status: shipped')
+      select 'packaged', from: :new_invoice_item_status
+      click_button("Update Item Status")
+    end
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
+    within "##{item_1.id}" do
+      expect(page).to have_content('Status: packaged')
+      expect(page).to_not have_content('Status: shipped')
+    end
+
+  it 'displays total revenue for merchants invoices' do
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+    expect(page).to have_content('Total Revenue: 300')
   end
 end

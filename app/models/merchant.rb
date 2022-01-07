@@ -16,7 +16,6 @@ class Merchant < ApplicationRecord
     invoice_items
     .order(created_at: :asc)
     .where.not(status: 'shipped')
-    # item_id = InvoiceItem.where.not(status: 'shipped').order(created_at: :asc).pluck(:item_id)
-    # items.where(id: item_id)
   end
+
 end
