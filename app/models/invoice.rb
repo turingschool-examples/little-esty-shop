@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
   def incomplete_invoices
     # Catalog.where.not("state = ?", "finished")
   end
+
+  def total_revenue    
+    invoice_items.sum(:unit_price)
+  end
 end

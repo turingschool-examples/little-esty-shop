@@ -42,10 +42,12 @@ RSpec.describe 'admin merchants index page' do
     merchant_1 = Merchant.create!(name: 'merchant_1')
 
     visit '/admin/merchants'
-    click_button("Enable #{merchant_1.name}")
+    within "status_toggle-#{merchant_1.id}" do
+      click_button("Enable #{merchant_1.name}")
 
-    expect(current_path).to eq("/admin/merchants")
-    expect(page).to have_content("Status: disable")
+      expect(current_path).to eq("/admin/merchants")
+      expect(page).to have_content("Status: disable")
+    end
   end
 
   it 'creates new merchants' do
