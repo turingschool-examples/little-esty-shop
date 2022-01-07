@@ -46,8 +46,8 @@ RSpec.describe 'Admin dashboard page' do
   let!(:invoice_item_4) {InvoiceItem.create!(invoice_id: invoice_4.id, item_id: item_4.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2020))}
   let!(:invoice_item_5) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_5.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2019))}
   let!(:invoice_item_6) {InvoiceItem.create!(invoice_id: invoice_6.id, item_id: item_6.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
-  let!(:invoice_item_7) {InvoiceItem.create!(invoice_id: invoice_7.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
-  let!(:invoice_item_8) {InvoiceItem.create!(invoice_id: invoice_7.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'shipped', created_at: Time.new(2018))}
+  let!(:invoice_item_7) {InvoiceItem.create!(invoice_id: invoice_7.id, item_id: item_1.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2017))}
+  let!(:invoice_item_8) {InvoiceItem.create!(invoice_id: invoice_8.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'shipped', created_at: Time.new(2018))}
 
 
   it 'shows a header indicating that you are on the admin dashboard' do
@@ -64,9 +64,9 @@ RSpec.describe 'Admin dashboard page' do
   it "incomplete invoices" do
     visit '/admin'
     expect(page).to have_content("Incomplete Invoices:")
+    expect("#{invoice_7.id}").to appear_before("#{invoice_6.id}")
     expect(page).to have_link(invoice_6.id)
     expect(page).to have_link(invoice_7.id)
-    save_and_open_page
   end
 
 
