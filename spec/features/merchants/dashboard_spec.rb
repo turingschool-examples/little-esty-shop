@@ -24,11 +24,11 @@ RSpec.describe 'merchant dashboard' do
   it "has the names of the top 5 customers with largest number of completed transactions" do
     merchant = create(:merchant)
 
-    customer_1 = create(:customer_with_transactions, merchant: merchant, transaction_status: 0, transaction_count: 6, first_name: 'Bob')
-    customer_2 = create(:customer_with_transactions, merchant: merchant, transaction_status: 0, transaction_count: 3, first_name: 'John')
-    customer_3 = create(:customer_with_transactions, merchant: merchant, transaction_status: 0, transaction_count: 8, first_name: 'Abe')
-    customer_4 = create(:customer_with_transactions, merchant: merchant, transaction_status: 0, transaction_count: 1, first_name: 'Zach')
-    customer_5 = create(:customer_with_transactions, merchant: merchant, transaction_status: 0, transaction_count: 4, first_name: 'Charlie')
+    customer_1 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 6, first_name: 'Bob')
+    customer_2 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 3, first_name: 'John')
+    customer_3 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 8, first_name: 'Abe')
+    customer_4 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 1, first_name: 'Zach')
+    customer_5 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 4, first_name: 'Charlie')
 
     visit "/merchants/#{merchant.id}/dashboard"
 

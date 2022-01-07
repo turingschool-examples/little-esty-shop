@@ -18,17 +18,17 @@ FactoryBot.define do
       transient do
         transaction_count {2}
         merchant {create(:merchant)}
-        transaction_status {0}
+        transaction_result {0}
       end
 
       after(:create) do |customer, evaluator|
         evaluator.transaction_count.times do
-          item = create(:item, merchant: merchant)
+          item = create(:item, merchant: evaluator.merchant)
           invoice = create(:invoice, customer: customer)
           invoice_item = create(:invoice_item, item: item, invoice: invoice)
-          transaction = create(:transaction, status: evaluator.transaction_status, invoice: invoice)
+          transaction = create(:transaction, result: evaluator.transaction_result, invoice: invoice)
         end
-      end 
+      end
     end
   end
 end
