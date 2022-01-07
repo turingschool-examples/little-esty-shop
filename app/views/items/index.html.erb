@@ -1,4 +1,14 @@
 <h1> <%= @merchant.name %></h1>
+<hr>
+
+<h3>Top 5 Most Popular Items</h3>
+<hr>
+
+<div id="top_five_items">
+<% @merchant.top_five_items.each do |item| %>
+    <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
+<% end %>
+</div>
 
 <p>Top 5 Most Popular Items</p>
 <div id='topfiveitems'>
@@ -8,39 +18,37 @@
 </div>
 
 <h3>Enabled Items</h3>
+<hr>
 <div id='enableditems'>
 <% @items.enabled.each do |item| %>
-<section id="item-<%=item.id%>">
-  <p>
-    <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
-    <% if item.disabled? %>
-      <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :enabled} %>
-    <% else %>
-      <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :disabled} %>
-    <% end %>
-  </p>
-  <p>
-    <%= "Status: #{item.item_status}" %>
-  </p>
-</section>
+  <section id="item-<%=item.id%>">
+    <p>
+      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+      <%= render partial: 'availability', locals: {
+        item: item,
+        merchant: @merchant
+      }%>
+    </p>
+  </section>
 <% end %>
 
 </div>
 
 <h3>Disabled Items</h3>
+<hr>
 <div id='disableditems'>
 <% @items.disabled.each do |item| %>
-<section id="item-<%=item.id%>">
-  <p>
-    <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
-    <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :enabled} %>
-    <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :disabled} %>
-  </p>
-  <p>
-    <%= "Status: #{item.item_status}" %>
-  </p>
-</section>
+  <section id="item-<%=item.id%>">
+    <p>
+      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+      <%= render partial: 'availability', locals: {
+        item: item,
+        merchant: @merchant
+      }%>
+    </p>
+  </section>
 <% end %>
 </div>
 
+<hr>
 <%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %>
