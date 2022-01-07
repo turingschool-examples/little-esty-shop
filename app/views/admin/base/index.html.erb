@@ -4,5 +4,5 @@
 <h3>Incomplete Invoices:</h3>
 
 <% @invoices.incomplete_invoices.each do |invitem| %>
-<ul>Invoice ID: <%= link_to "#{invitem.invoice_id}", "/admin/invoices/#{invitem.invoice_id}" %></ul>
+<ul>Invoice ID: <%=link_to "#{invitem.invoice_id}", "/admin/invoices/#{invitem.invoice_id}" %> Created at: <%= invitem.created_at.strftime("%A, %B %d %Y") %></ul>
 <% end %>

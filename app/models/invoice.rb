@@ -9,6 +9,6 @@ class Invoice < ApplicationRecord
 
   def self.incomplete_invoices
     invoice_ids = self.where.not(status: 1).pluck(:id)
-    InvoiceItem.where.not(status: "shipped").where(invoice_id: invoice_ids)
+    InvoiceItem.where.not(status: "shipped").where(invoice_id: invoice_ids).order(created_at: :asc)
   end
 end
