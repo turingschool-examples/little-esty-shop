@@ -31,7 +31,6 @@ RSpec.describe Merchant, type: :model do
     @invoice_item_3 = InvoiceItem.create!(invoice_id:"#{@invoice_3.id}", item_id:"#{@item_1.id}", status: 2, quantity:1, unit_price:600)
     @invoice_item_4 = InvoiceItem.create!(invoice_id:"#{@invoice_4.id}", item_id:"#{@item_1.id}", status: 2, quantity:1, unit_price:600)
     @invoice_item_5 = InvoiceItem.create!(invoice_id:"#{@invoice_5.id}", item_id:"#{@item_1.id}", status: 2, quantity:1, unit_price:600)
-
   end
   
   describe "relationships" do
@@ -40,7 +39,6 @@ RSpec.describe Merchant, type: :model do
     it {should have_many(:invoices).through(:invoice_items) }
     it {should have_many(:customers).through(:invoices) }
   end
-
   describe "methods" do 
     
     xit "#merchants_invoices - returns all of a merchant's invoices" do 

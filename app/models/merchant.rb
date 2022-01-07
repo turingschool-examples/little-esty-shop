@@ -1,4 +1,8 @@
 class Merchant < ApplicationRecord
+<<<<<<< HEAD
+=======
+
+>>>>>>> cca6c656a10de4a69717266f2a0fb933827159aa
   has_many :items 
   has_many :invoice_items, :through => :items
   has_many :invoices, :through => :invoice_items 
