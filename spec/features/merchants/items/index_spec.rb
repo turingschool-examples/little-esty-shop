@@ -85,19 +85,6 @@ RSpec.describe 'Merchant Dashboard' do
     end
   end
 
-# As a merchant
-# When I visit my items index page
-# Then I see the names of the top 5 most popular items ranked by total revenue generated
-# And I see that each item name links to my merchant item show page for that item
-# And I see the total revenue generated next to each item name
-#
-# Notes on Revenue Calculation:
-#
-# Only invoices with at least one successful transaction should count towards revenue
-# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-# sum(invoice_item.unit_price * invoice_item.quantity)
-
   scenario 'visitor sees the names of the top 5 most popular items ranked by total revenue generated' do
     expect(page).to have_content('Top 5 Items')
     first = find("#item#{@item_7.id}")
@@ -120,7 +107,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_link(@item_2.name)
     end
   end
-###STILL NEED TO FIGURE OUT MONEY CONVERSIONS FOR THIS VIEW
+
   scenario 'visitor sees the total revenue generated next to each item name' do
     within "#top_five_items-#{@merchant_1.id}" do
       expect(page).to have_content(@merchant_1.top_five_items[0].total_revenue)
