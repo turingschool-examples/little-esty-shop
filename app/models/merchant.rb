@@ -10,7 +10,8 @@ class Merchant < ApplicationRecord
              .where(transactions: {result: "success"})
              .group(:id)
              .select("customers.*, count(transactions) as good_transactions")
-             .order(good_transactions: :desc).limit(5)
+             .order(good_transactions: :desc)
+             .limit(5)
   end
 
   def items_ready_to_ship
@@ -21,8 +22,11 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_items
-# items.joins(invoices: :transactions).where(transactions: {result: "success"})
-# InvoiceItem.select("quantity*unit_price as item_invoice_revenue").first.item_invoice_revenue
-# Merchant.first.items.joins(invoice_items: :transactions).where(transactions: {result: "success"})
+    items.joins(invoice_items: :transactions)
+         .where(transactions: {result: "success"})
+         .group(:id)
+         .select("items.*, sum(quantity * invoice_items.unit_price) as revenue")
+         .order(revenue: :desc)
+         .limit(5)
   end
 end
