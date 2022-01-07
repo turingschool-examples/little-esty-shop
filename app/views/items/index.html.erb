@@ -1,5 +1,12 @@
 <h1> <%= @merchant.name %></h1>
 
+<p>Top 5 Most Popular Items</p>
+<div id='topfiveitems'>
+<% @merchant.top_five_items.each do |item| %>
+  <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
+<% end %>
+</div>
+
 <h3>Enabled Items</h3>
 <div id='enableditems'>
 <% @items.enabled.each do |item| %>
@@ -37,14 +44,3 @@
 </div>
 
 <%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %>
-
-
-
-<p>Top 5 Most Popular Items</p>
-
-<% @merchant.top_five_items.each do |item| %>
-  <section id="item=<%=item.id%>">
-    <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
-  </section>
-<% end %>
-

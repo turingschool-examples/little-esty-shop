@@ -73,21 +73,20 @@ RSpec.describe "Merchant item index" do
 
       click_button("Disable")
 
-      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
       expect(page).to have_content("Status: disabled" )
     end
   end
 
   it 'show the top 5 most popular items and links to the merchant_items show page' do
     visit merchant_items_path(@merchant_1)
-    
-    within("#item-#{@item4.id}") do
-      expect(page).to have_content("#{@item4.name}" )
-      expect(page).to have_content("#{@item4.revenue}" )
-
-      click_link(@item4.name)
-      expect(current_path).to eq(merchant_items_path(@merchant_1, @item4))
-
+    within('#topfiveitems') do
+      @merchant_1.top_five_items.each do |item|
+      expect(page).to have_content(item.name)
+      expect(page).to have_content(item.revenue)
     end
+      click_link(@item_4.name)
+    end
+      expect(current_path).to eq(merchant_item_path(@merchant_1, @item_4))
   end
 end
