@@ -6,3 +6,20 @@
 </ul>
 <h2>Customer:</h2>
 <p><%= @invoice.customer_full_name %></p>
+<h2>Items on this Invoice:</h2>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.invoice_items.each do |ii| %>
+    <tr id="item-<%= ii.item_id %>">
+      <td><%= ii.item.name %></td>  
+      <td><%= ii.quantity %></td>
+      <td><%= ii.unit_price %></td>
+      <td><%= ii.status %></td>
+    </tr>
+  <% end %>
+</table>
