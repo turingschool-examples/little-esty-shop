@@ -38,5 +38,13 @@ RSpec.describe Invoice do
         expect(invoice_1.items_by_merchant(merchant_1.id)).to_not include(item_3)
       end
     end
+
+    describe '#total_revenue_by_merchant' do
+      it 'multiplies unit price by quantity of item on invoice and adds together to return total revenue for specific merchant' do
+        total_revenue = (invoice_item_1.unit_price * invoice_item_1.quantity) + (invoice_item_2.unit_price * invoice_item_2.quantity)
+
+        expect(invoice_1.total_revenue_by_merchant(merchant_1.id)).to eq(total_revenue)
+      end
+    end
   end
 end
