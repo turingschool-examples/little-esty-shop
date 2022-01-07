@@ -19,4 +19,10 @@ class Merchant < ApplicationRecord
             .includes(:invoices)
             .order(created_at: :asc)
   end
+
+  def top_five_items
+# items.joins(invoices: :transactions).where(transactions: {result: "success"})
+# InvoiceItem.select("quantity*unit_price as item_invoice_revenue").first.item_invoice_revenue
+# Merchant.first.items.joins(invoice_items: :transactions).where(transactions: {result: "success"})
+  end
 end
