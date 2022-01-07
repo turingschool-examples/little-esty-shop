@@ -32,10 +32,6 @@ RSpec.describe 'Items New Page' do
       new_item = Item.last
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
       expect(page).to have_content("#{new_item.name}")
-      
-      within("#item-#{new_item.id}") do
-        expect(page).to have_content("Status: disabled" )
-      end
     end
   end
 end
