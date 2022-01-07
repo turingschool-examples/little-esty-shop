@@ -67,24 +67,11 @@ RSpec.describe "Merchant item index" do
       click_button("Disable")
 
       expect(current_path).to eq(merchant_items_path(@merchant_1))
-<<<<<<< HEAD
-      expect(page).to have_content("Status: disabled" )
-=======
->>>>>>> 57b715571a1609b3058e1a17d3de126a41ea731e
     end
   end
 
   it 'show the top 5 most popular items and links to the merchant_items show page' do
     visit merchant_items_path(@merchant_1)
-<<<<<<< HEAD
-    within('#topfiveitems') do
-      @merchant_1.top_five_items.each do |item|
-      expect(page).to have_content(item.name)
-      expect(page).to have_content(item.revenue)
-    end
-      click_link(@item_4.name)
-    end
-=======
     within "#top_five_items" do
       @merchant_1.top_five_items.each do |item|
         expect(page).to have_content(item.name)
@@ -93,7 +80,6 @@ RSpec.describe "Merchant item index" do
       click_link(@item_4.name)
     end
 
->>>>>>> 57b715571a1609b3058e1a17d3de126a41ea731e
       expect(current_path).to eq(merchant_item_path(@merchant_1, @item_4))
   end
 end
