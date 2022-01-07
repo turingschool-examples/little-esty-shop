@@ -17,8 +17,7 @@ class MerchantItemsController < ApplicationController
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:item_id])
-    require "pry"; binding.pry
-    if params[:status_update].present?
+    if params[:status]
       item.update(item_params)
       redirect_to "/merchants/#{merchant.id}/items"
     else
@@ -39,9 +38,9 @@ class MerchantItemsController < ApplicationController
 
 
 
-  private
+    private
 
-  def item_params
-    params.permit(:name, :description, :unit_price, :status)
-  end
+    def item_params
+      params.permit(:name, :description, :unit_price, :status)
+    end
 end
