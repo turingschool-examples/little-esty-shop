@@ -15,12 +15,12 @@ RSpec.describe "Merchant item index" do
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
   end
 
-  # it 'displays two sections, one for Enabled Items and one for Disabled Items' do
-  #   visit "/merchants/#{@merchant_1.id}/items"
-  #
-  #   expect(page).to have_content("Enabled Items")
-  #   expect(page).to have_content("Disabled Items")
-  # end
+  it 'displays two sections, one for Enabled Items and one for Disabled Items' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    expect(page).to have_content("Enabled Items")
+    expect(page).to have_content("Disabled Items")
+  end
 
   # it 'has enabled items in the enabled section and disable items in disabled section' do
   #   visit "/merchants/#{@merchant_1.id}/items"
@@ -37,28 +37,28 @@ RSpec.describe "Merchant item index" do
   end
 
   it 'has an enable button for each item that changes the status' do
-    visit merchant_items_path(@merchant1)
+    visit merchant_items_path(@merchant_1)
 
-    within("#item-#{@item1.id}") do
+    within("#item-#{@item_1.id}") do
       click_button("Enable")
 
-      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
       expect(page).to have_content("Status: enabled" )
     end
   end
 
   it 'has a disable button for each item that changes the status' do
-    visit merchant_items_path(@merchant1)
+    visit merchant_items_path(@merchant_1)
 
-    within("#item-#{@item1.id}") do
+    within("#item-#{@item_1.id}") do
       click_button("Disable")
 
-      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
       expect(page).to have_content("Status: disabled" )
 
       click_button("Enable")
 
-      expect(current_path).to eq(merchant_items_path(@merchant1))
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
       expect(page).to have_content("Status: enabled" )
     end
   end
