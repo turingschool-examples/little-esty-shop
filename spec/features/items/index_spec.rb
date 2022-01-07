@@ -1,6 +1,8 @@
 require 'rails_helper'
-
+## i had to remove the before each here because we needed the complete dataset to run the more
+## complex tests. I commented out and didn't delete anything. all tests pass.
 RSpec.describe "Merchant item index" do
+
   it 'I see a list of the names of all of my items' do
     visit "/merchants/#{@merchant_1.id}/items"
 
@@ -41,7 +43,6 @@ RSpec.describe "Merchant item index" do
 
     expect(page).to have_link("Create a New Item")
     click_link "Create a New Item"
-
   end
 
   it 'has an enable button for each item that changes the status' do
@@ -68,6 +69,19 @@ RSpec.describe "Merchant item index" do
 
       expect(current_path).to eq(merchant_items_path(@merchant_1))
       expect(page).to have_content("Status: enabled" )
+    end
+  end
+
+  it 'show the top 5 most popular items and links to the merchant_items show page' do
+    visit merchant_items_path(@merchant_1)
+    
+    within("#item-#{@item4.id}") do
+      expect(page).to have_content("#{@item4.name}" )
+      expect(page).to have_content("#{@item4.revenue}" )
+
+      click_link(@item4.name)
+      expect(current_path).to eq(merchant_items_path(@merchant_1, @item4))
+
     end
   end
 end

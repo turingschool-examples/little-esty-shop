@@ -14,6 +14,7 @@
   </p>
 </section>
 <% end %>
+
 </div>
 
 <h3>Disabled Items</h3>
@@ -33,3 +34,14 @@
 </div>
 
 <%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %>
+
+
+
+<p>Top 5 Most Popular Items</p>
+
+<% @merchant.top_five_items.each do |item| %>
+  <section id="item=<%=item.id%>">
+    <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
+  </section>
+<% end %>
+
