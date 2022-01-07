@@ -66,7 +66,7 @@ RSpec.describe 'Merchant Dashboard' do
         click_button "Disable"
       end
       
-      expect(page).to have_content("Enable")
+      expect(page).to have_button("Enable")
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
     end 
 
@@ -76,7 +76,7 @@ RSpec.describe 'Merchant Dashboard' do
         click_button "Enable"
       end
       
-      expect(page).to have_content("Disable")
+      expect(page).to have_button("Disable")
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
     end  
   end 
