@@ -94,7 +94,7 @@ RSpec.describe 'Merchant Items Index page' do
       actual = Item.top_five
       Transaction.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed", created_at: "2012-03-27 14:54:09", updated_at: "2012-03-27 14:54:09", invoice_id: invoice_1.id)
       visit merchant_items_path(merchant)
-      
+
     within '.top-five' do
       first_item = find(".item-#{item_10.id}")
       second_item = find(".item-#{item_9.id}")
@@ -105,6 +105,12 @@ RSpec.describe 'Merchant Items Index page' do
       expect(second_item).to appear_before(third_item)
       expect(fourth_item).to appear_before(fifth_item)
       expect(fifth_item).to_not appear_before(first_item)
+      
+      expect(page).to have_content("#{item_10.name}-#{((invoice_item_1.quantity * invoice_item_1.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
+      expect(page).to have_content("#{item_9.name}-#{((invoice_item_2.quantity * invoice_item_2.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
+      expect(page).to have_content("#{item_8.name}-#{((invoice_item_3.quantity * invoice_item_3.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
+      expect(page).to have_content("#{item_7.name}-#{((invoice_item_4.quantity * invoice_item_4.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
+      expect(page).to have_content("#{item_6.name}-#{((invoice_item_5.quantity * invoice_item_5.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
     end
   end
 end
