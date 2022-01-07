@@ -14,4 +14,8 @@ class Item < ApplicationRecord
     Invoice.joins(:invoice_items => :item).where(:items => {:merchant_id => merchant_id})
   end
 
+  def self.enabled_items
+    Item.all.where(status: 1)
+  end
+
 end
