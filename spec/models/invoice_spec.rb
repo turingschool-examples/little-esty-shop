@@ -20,7 +20,7 @@ RSpec.describe Invoice, type: :model do
 
     describe 'pretty_created_at' do
       it 'formats created_at datetime' do
-        expect(@invoice.pretty_created_at).to eq(Date.today.strftime("%A, %B%-d, %Y"))
+        expect(@invoice.pretty_created_at).to eq(Date.today.strftime("%A, %B %-d, %Y"))
       end
     end
 
