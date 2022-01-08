@@ -23,6 +23,10 @@ RSpec.describe Merchant, type: :model do
   let!(:item_5) {merchant_1.items.create!(name: 'Solid Limestone', description: 'not crumbly', unit_price: 50)}
   let!(:item_6) {merchant_1.items.create!(name: 'Healing Crystal', description: 'does nothing', unit_price: 50)}
 
+  let!(:item_7) {merchant_2.items.create!(name: 'Green Rock', description: 'A big green rock', unit_price: 50)}
+  let!(:item_8) {merchant_2.items.create!(name: 'Colorado Sandstone', description: 'crumbly', unit_price: 50)}
+  let!(:item_9) {merchant_2.items.create!(name: 'Salt Lick', description: 'delicious', unit_price: 50)}
+
 
   let!(:customer_1) {Customer.create!(first_name: 'Billy', last_name: 'Carruthers')}
   let!(:customer_2) {Customer.create!(first_name: 'Dave', last_name: 'King')}
@@ -37,6 +41,7 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice_4) {customer_4.invoices.create!(status: 'completed' )}
   let!(:invoice_5) {customer_5.invoices.create!(status: 'completed' )}
   let!(:invoice_6) {customer_6.invoices.create!(status: 'completed' )}
+
 
   #Billy
   let!(:transaction_1) {invoice_1.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'success')}
@@ -57,7 +62,7 @@ RSpec.describe Merchant, type: :model do
   #Chris
   let!(:transaction_6) {invoice_6.transactions.create!(credit_card_number: '1234123412341234', credit_card_expiration_date: '11/22', result: 'failed')}
 
-  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 1, unit_price: 100, status: 'shipped')}
+  let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 3, unit_price: 100, status: 'shipped')}
   let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'packaged')}
   let!(:invoice_item_3) {InvoiceItem.create!(invoice_id: invoice_3.id, item_id: item_3.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2021))}
   let!(:invoice_item_4) {InvoiceItem.create!(invoice_id: invoice_4.id, item_id: item_4.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2020))}
@@ -65,6 +70,11 @@ RSpec.describe Merchant, type: :model do
 
   let!(:invoice_item_5) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_5.id, quantity: 1, unit_price: 100, status: 'pending', created_at: Time.new(2019))}
   let!(:invoice_item_6) {InvoiceItem.create!(invoice_id: invoice_6.id, item_id: item_6.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
+
+   let!(:invoice_item_8) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_7.id, quantity: 1, unit_price: 50, status: 'shipped', created_at: Time.new(2018))}
+   let!(:invoice_item_9) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_8.id, quantity: 1, unit_price: 100, status: 'pending', created_at: Time.new(2019))}
+   let!(:invoice_item_10) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_9.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
+
 
 
   describe 'instance methods' do
@@ -76,6 +86,11 @@ RSpec.describe Merchant, type: :model do
     it 'items_ready_to_ship' do
       expect(merchant_1.items_ready_to_ship).to eq([invoice_item_6, invoice_item_5, invoice_item_4, invoice_item_3, invoice_item_2])
     end
+
+    it "total_revenue" do
+      expect(merchant_2.total_revenue).to eq(200)
+    end
+
 
   end
 
@@ -90,6 +105,11 @@ RSpec.describe Merchant, type: :model do
       merchants = Merchant.all
       expect(merchants.only_disabled).to eq([merchant_4, merchant_5, merchant_6])
     end
-  end
 
+    it 'top_5_total_revenue' do
+      expect(Merchant.top_5_total_revenue).to eq([merchant_1, merchant_2])
+      #beef out test
+    end
+
+  end
 end

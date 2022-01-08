@@ -23,12 +23,25 @@ class Merchant < ApplicationRecord
     .where.not(status: 'shipped')
   end
 
+  def total_revenue
+     invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
+  end
+
   def self.only_enabled
     where(status: 1)
   end
 
   def self.only_disabled
     where(status: 0)
+  end
+
+  def self.top_5_total_revenue
+    joins(items: [invoices: :transactions])
+    .where(transactions: {result: "success"})
+    .select("merchants.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+    .group(:id)
+    .order("total_revenue DESC")
+    .limit(5)
   end
 
 end
