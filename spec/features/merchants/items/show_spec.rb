@@ -53,8 +53,8 @@ RSpec.describe 'Merchant items show page' do
     scenario 'merchant sees item show page when clicking on item link on index page' do
         visit merchant_items_path(@merchant_1.id)
 
-        within "#all_items-#{@merchant_1.id}" do
-          click_link("#{@item_3.name}")
+        within "#top_five_items-#{@merchant_1.id}" do
+            click_link("#{@item_3.name}")
         end
         
         expect(current_path).to eq(merchant_item_path(@merchant_1.id, @item_3.id))

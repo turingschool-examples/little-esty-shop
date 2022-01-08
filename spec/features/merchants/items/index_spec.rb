@@ -63,17 +63,17 @@ RSpec.describe 'Merchant Dashboard' do
     @transaction_9 = @invoice_3.transactions.create!(result: 'success')
     @transaction_10 = @invoice_3.transactions.create!(result: 'success')
 
-
     visit merchant_items_path(@merchant_1.id)
   end
 
   scenario 'visitor sees the name of all items of particular merchant as links' do
     expect(current_path).to eq(merchant_items_path(@merchant_1.id))
 
-   within "#enabled" do
-      expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
-      expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
-   
+    within "#enabled" do
+        expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
+        expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
+    end 
+
     within "#disabled" do 
       expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
     end 
@@ -112,7 +112,7 @@ RSpec.describe 'Merchant Dashboard' do
     end
   end
 
-scenario 'vistor sees date with most sales next to top five most popular items' do
+  scenario 'vistor sees date with most sales next to top five most popular items' do
     within "#top_five_items-#{@merchant_1.id}" do
       expect(page).to have_content(@merchant_1.top_five_items[0].date_with_most_sales)
       expect(page).to have_content(@merchant_1.top_five_items[1].date_with_most_sales)
