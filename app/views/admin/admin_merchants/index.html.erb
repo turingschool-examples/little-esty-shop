@@ -1,5 +1,7 @@
 <h1>Admin Merchants Index:</h1>
 
+<%= link_to "Create new merchant", "/admin/merchants/new", method: :get %>
+
 <div id="enabled">
   <h3>Enabled:</h3>
   <% @merchants.each do |m| %>

@@ -1,0 +1,11 @@
+<%= form_with url: "/admin/merchants", method: :post, local: true do |form| %>
+
+  <%= form.hidden_field :status, value: 'disabled' %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+
+  <%= form.submit "Create merchant" %>
+
+<% end %>

@@ -70,7 +70,23 @@ RSpec.describe 'Admin merchant index page' do
       expect(page).to_not have_content(merchant_1.name)
       expect(page).to_not have_content(merchant_2.name)
     end
-
   end
+
+  it 'has link to create new merchant' do
+    visit '/admin/merchants'
+    expect(page).to have_link("Create new merchant")
+  end
+
+  it 'creates new merchant when link is clicked' do
+    visit '/admin/merchants'
+    click_link 'Create new merchant'
+    expect(current_path).to eq("/admin/merchants/new")
+    fill_in(:name, with: "Dylan's harps")
+    click_button("Create merchant")
+    expect(current_path).to eq("/admin/merchants")
+    expect(page).to have_content("Dylan's harps")
+    expect(page).to have_button("Enable Dylan's harps")
+  end
+
 
 end
