@@ -1,22 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant invoice index page' do
-  before(:each) do
-    @merchant = FactoryBot.create(:merchant)
-    @item = FactoryBot.create(:item, merchant: @merchant)
-    @item2 = FactoryBot.create(:item, merchant: @merchant)
-    @item3 = FactoryBot.create(:item, merchant: @merchant)
-    @invoice_item = FactoryBot.create(:invoice_item, item: @item)
-    @invoice_item2 = FactoryBot.create(:invoice_item, item: @item2)
-    @invoice_item3 = FactoryBot.create(:invoice_item, item: @item3)
-    visit "/merchants/#{@merchant.id}/invoices"
-  end
+
+  let!(merchant_1) {FactoryBot.create(:merchant)}
+
+  let!(item_1) {FactoryBot.create(:item, merchant: merchant)}
+  let!(item_2) {FactoryBot.create(:item, merchant: merchant)}
+  let!(item_3) {FactoryBot.create(:item, merchant: merchant)}
+
+  let!(invoice_item_1) {FactoryBot.create(:invoice_item, item: item_1)}
+  let!(invoice_item_2) {FactoryBot.create(:invoice_item, item: item_2)}
+  let!(invoice_item_3) {FactoryBot.create(:invoice_item, item: item_3)}
 
   it 'shows each merchant invoice id' do
-    expect(page).to have_content(@invoice_item.invoice_id)
-    expect(page).to have_content(@invoice_item2.invoice_id)
-    expect(page).to have_content(@invoice_item3.invoice_id)
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    expect(page).to have_content(invoice_item_1.invoice_id)
+    expect(page).to have_content(invoice_item_2.invoice_id)
+    expect(page).to have_content(invoice_item_3.invoice_id)
   end
-
-
 end
