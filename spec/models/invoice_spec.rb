@@ -12,4 +12,22 @@ RSpec.describe Invoice do
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:merchant).through(:items) }
   end
+
+  describe 'models' do
+    it '#incomplete_invoices' do
+      expected_result = [@invoice_1, @invoice_2, @invoice_3,
+                         @invoice_4, @invoice_5, @invoice_6,
+                         @invoice_7, @invoice_8, @invoice_9,
+                         @invoice_10, @invoice_11, @invoice_12,
+                         @invoice_13, @invoice_14, @invoice_15,
+                         @invoice_19, @invoice_20]
+                         
+      expect(Invoice.incomplete_invoices).to eq(expected_result)
+    end
+    
+    it '#total_revenue' do
+     expect(@invoice_1.total_revenue).to eq(16)
+     expect(@invoice_2.total_revenue).to eq(23)
+    end
+  end
 end
