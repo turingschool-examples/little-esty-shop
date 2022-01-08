@@ -1,0 +1,7 @@
+<h1>ADMIN: INVOICES</h1>
+
+<% @invoices.each do |invoice| %>
+  <section id="admin-invoice-<%= invoice.id %>">
+    <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %><br>
+  </section>
+<% end %>

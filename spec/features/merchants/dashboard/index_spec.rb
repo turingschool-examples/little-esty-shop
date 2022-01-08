@@ -51,12 +51,14 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_3 = InvoiceItem.create!(invoice: @invoice_3, item: @item3, quantity: 20, unit_price: 400, status: "packaged")
     @invoice_item_4 = InvoiceItem.create!(invoice: @invoice_4, item: @item4, quantity: 20, unit_price: 400, status: "packaged")
     @invoice_item_5 = InvoiceItem.create!(invoice: @invoice_5, item: @item5, quantity: 20, unit_price: 400, status: "packaged")
+    
+    @merchant = FactoryBot.create(:merchant)
 
     visit "/merchants/#{@merchant.id}/dashboard"
   end
 
   it 'shows the merchants name' do
-    expect(page).to have_content("Parker")
+    expect(page).to have_content(@merchant.name)
   end
 
   it 'links to merchant items index' do
@@ -68,6 +70,7 @@ RSpec.describe 'Merchant Dashboard' do
     click_link("Invoices")
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
   end
+
 
   it 'shows the names of the top 5 customers' do
     expect(@customer_2.first_name).to appear_before(@customer_4.first_name)
@@ -120,6 +123,4 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to_not have_content(@item6.name)
     end
   end
-
-
 end
