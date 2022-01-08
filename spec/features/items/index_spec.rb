@@ -80,10 +80,15 @@ RSpec.describe "Merchant item index" do
       click_link(@item_4.name)
     end
 
-      expect(current_path).to eq(merchant_item_path(@merchant_1, @item_4))
+    expect(current_path).to eq(merchant_item_path(@merchant_1, @item_4))
   end
 
   it 'shows the date of the most sales for the top 5 items' do
-
+    visit merchant_items_path(@merchant_1)
+    within "#top_five_items" do
+      @merchant_1.top_five_items.each do |item|
+        expect(page).to have_content(item.top_item_best_day.strftime("%m-%d-%y"))
+      end
+    end
   end
 end
