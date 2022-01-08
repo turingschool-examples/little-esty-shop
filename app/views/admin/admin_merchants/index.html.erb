@@ -1,9 +1,21 @@
 <h1>Admin Merchants Index:</h1>
-<% @merchants.each do |m| %>
-  <%= link_to "#{m.name}", "/admin/merchants/#{m.id}", method: :get %>
-  <% if m.status == "disabled" %>
-    <%= button_to "Enable #{m.name}", "/admin/merchants/#{m.id}?status=enabled", method: :patch %>
-  <% elsif m.status == "enabled" %>
-    <%= button_to "Disable #{m.name}", "/admin/merchants/#{m.id}?status=disabled", method: :patch %>
+
+<div id="enabled">
+  <h3>Enabled:</h3>
+  <% @merchants.each do |m| %>
+    <% if m.status == "enabled" %>
+      <%= link_to "#{m.name}", "/admin/merchants/#{m.id}", method: :get %>
+      <%= button_to "Disable #{m.name}", "/admin/merchants/#{m.id}?status=disabled", method: :patch %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
+<div id="disabled">
+  <h3>Disabled:</h3>
+  <% @merchants.each do |m| %>
+    <% if m.status == "disabled" %>
+      <%= link_to "#{m.name}", "/admin/merchants/#{m.id}", method: :get %>
+      <%= button_to "Enable #{m.name}", "/admin/merchants/#{m.id}?status=enabled", method: :patch %>
+    <% end %>
+  <% end %>
+</div>

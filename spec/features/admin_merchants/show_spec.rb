@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Admin merchant show page' do
 
-  let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
-  let!(:merchant_2) {Merchant.create!(name: 'Merchant 2')}
+  let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks', status: 'enabled')}
+  let!(:merchant_2) {Merchant.create!(name: 'Merchant 2', status: 'enabled')}
 
   it 'show page is accessible with link from index page' do
     visit '/admin/merchants'
