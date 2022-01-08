@@ -1,5 +1,11 @@
 <h1> Admin: All Merchants </h1>
 
+<div class="list_merchants">
 <% @merchants.each do |merchant| %>
   <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
   <% end %>
+</div>
+
+<div class="new_merchant">
+<%= link_to "Create Merchant", new_admin_merchant_path %>
+</div>
