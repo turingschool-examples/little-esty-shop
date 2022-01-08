@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'merchants invoice show page' do
-  #
-  # before :each do
-  #   merchant1 = create(:merchant, name: "Bob Barker")
-  #   customer_1 = create(:customer, first_name: "Eric", last_name: "Mielke")
-  #   invoice1 = create(:invoice, customer: @customer_1)
-  #
-  #   visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
-  # end
 
   it 'displays all information related to that invoice' do
     merchant1 = create(:merchant, name: "Bob Barker")
@@ -67,8 +59,8 @@ RSpec.describe 'merchants invoice show page' do
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    within("#invoice_#{item.id}") do
-      expect(page).to have_content("Status: shipped")
+    within("#status-#{item.id}") do
+      expect(page).to have_field(:status, with: "shipped")
     end
   end
 
@@ -96,5 +88,24 @@ RSpec.describe 'merchants invoice show page' do
 
     expect(page).to have_content("Total Potential Revenue")
     expect(page).to have_content("$550.0")
+  end
+
+  it 'displays an invoices status as a select form' do
+    merchant1 = create(:merchant, name: "Bob Barker")
+    invoice1 = create(:invoice)
+    item = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant1, invoice: invoice1)
+    visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+
+    within("#status-#{item.id}") do
+      expect(page).to have_field(:status, with: "pending")
+      select 'packaged', from: :status
+      click_on "Update Item Status"
+      expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
+      expect(page).to have_field(:status, with: "packaged")
+      select 'shipped', from: :status
+      click_on "Update Item Status"
+      expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
+      expect(page).to have_field(:status, with: "shipped")
+    end
   end
 end
