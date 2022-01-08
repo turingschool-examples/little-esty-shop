@@ -15,7 +15,7 @@ RSpec.describe Customer do
   end
 
   it '#successful_transactions_count' do
-    expect(@customer_6.transactions.count).to eq(5)
+    expect(@customer_6.transactions.count).to eq(6)
     expect(@customer_6.successful_transactions_count).to eq(4)
   end
 end
