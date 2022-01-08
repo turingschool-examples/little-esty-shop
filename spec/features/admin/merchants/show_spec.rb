@@ -14,12 +14,12 @@ RSpec.describe 'Admin_Merchants Show Page' do
 
     expect(page).to have_link("Update Information")
     click_on "Update Information"
-
-    expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
-    expect(page).to have_field(:name, with: "Willy's Bakery")
     
-    fill_in 'name', with: "Jimmy's Bakery"
-    click_on 'Submit'
+    expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
+    expect(page).to have_field(:merchant_name, with: "Willy's Bakery")
+
+    fill_in 'merchant_name', with: "Jimmy's Bakery"
+    click_on 'Update Merchant'
 
     expect(current_path).to eq("/admin/merchants/#{merchant.id}")
     expect(page).to have_content("Merchant Successfully Updated")

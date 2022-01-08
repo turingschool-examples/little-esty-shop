@@ -7,12 +7,12 @@ class MerchantItemsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def edit
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def update
@@ -36,8 +36,6 @@ class MerchantItemsController < ApplicationController
     item = merchant.items.create!(item_params)
     redirect_to "/merchants/#{merchant.id}/items"
   end
-
-
 
     private
 
