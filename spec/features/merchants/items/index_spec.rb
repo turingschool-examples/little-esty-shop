@@ -45,13 +45,12 @@ RSpec.describe 'Merchant Items Index page' do
     visit merchant_items_path(merchant1)
 
     find("#disable-#{item1.id}").click
-
     within '.disabled-items' do
       expect(page).to have_content(item1.name)
     end
 
     find("#enable-#{item1.id}").click
-
+    
     within '.enabled-items' do
       expect(page).to have_content(item1.name)
     end
@@ -105,7 +104,7 @@ RSpec.describe 'Merchant Items Index page' do
       expect(second_item).to appear_before(third_item)
       expect(fourth_item).to appear_before(fifth_item)
       expect(fifth_item).to_not appear_before(first_item)
-      
+
       expect(page).to have_content("#{item_10.name}-#{((invoice_item_1.quantity * invoice_item_1.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
       expect(page).to have_content("#{item_9.name}-#{((invoice_item_2.quantity * invoice_item_2.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
       expect(page).to have_content("#{item_8.name}-#{((invoice_item_3.quantity * invoice_item_3.unit_price).to_f / 100).to_s.ljust(6, '0').prepend('$')}")
