@@ -23,10 +23,11 @@ RSpec.describe 'merchant dashboard page', type: :feature do
 
 
   let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
+  sleep(0.01)
   let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
-  let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
-  let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
   let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
+  let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
+  let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
   let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
 
 
@@ -103,6 +104,11 @@ RSpec.describe 'merchant dashboard page', type: :feature do
       it "has a link for the invoice id that leads to the invoice show page" do
         click_link "#{item_2.invoices.ids.first}"
         expect(current_path).to eq("/merchants/#{merch_1.id}/invoices/#{item_2.invoices.ids.first}")
+      end
+
+      it "shows the items in order of invoice tiem created" do
+        expect(item_2.name).to appear_before(item_5.name)
+        expect(item_5.name).to appear_before(item_3.name)
       end
     end
   end

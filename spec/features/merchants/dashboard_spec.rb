@@ -8,7 +8,7 @@ RSpec.describe 'merchant dashboard page', type: :feature do
   describe 'as a user' do
     describe 'view elements' do
       it 'displays the merchants name' do
-        expect(page).to have_content(merch_1.name)  
+        expect(page).to have_content(merch_1.name)
       end
     end
   end

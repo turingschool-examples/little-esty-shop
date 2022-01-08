@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates :name, presence: true
-  
+
   def disabled_items
     items.where(status: "Disabled")
   end
@@ -19,8 +19,9 @@ class Merchant < ApplicationRecord
     .order(count: :desc).limit(5)
   end
 
-  def items_ready_ship
-    invoice_items.where('status = 1')
-
+  def order_by_invoice
+    invoices.order(:created_at).distinct
   end
+
+
 end

@@ -27,9 +27,9 @@ RSpec.describe Merchant, type: :model do
 
    let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
    let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
-   let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
-   let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
    let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
+   let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
+   let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
    let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
 
 
@@ -77,14 +77,12 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'Merchant Bashboard Items Ready to ship' do
-    it "shows the item is ready to ship" do
-      expected = [item_2.name, item_3.name, item_5.name]
-      # require "pry"; binding.pry
-      expect(merch_1.items_ready_ship.pluck(:name)).to eq(expected)
-    end
 
-    it "shows the items ids" do
-      expected = [item_2.invoices.ids, item_3.invoices.ids, item_5.invoices.ids]
+
+    it "checks that the invoices are in order" do
+      expected = [invoice_1, invoice_2, invoice_5, invoice_4, invoice_3, invoice_6]
+      test = merch_1.order_by_invoice
+      expect(test.to_a).to eq(expected)
     end
   end
 end
