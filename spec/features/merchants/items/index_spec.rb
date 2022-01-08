@@ -19,25 +19,15 @@ RSpec.describe 'Merchant Items Index page' do
     item1 = create(:item, merchant: merchant, name: "Paul")
     item2 = create(:item, merchant: merchant, name: "Leland")
     visit "/merchants/#{merchant.id}/items"
-
-    within("div.item_#{item1.id}") do
-      expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
-
-      click_button("Disable")
-      expect(current_path).to eq("/merchants/#{merchant.id}/items")
-      item1.reload
-      expect(item1.status).to eq("Disabled")
-    end
-
-    visit "/merchants/#{merchant.id}/items"
     within("div.item_#{item2.id}") do
       expect(page).to have_button("Enable")
-      expect(page).to have_button("Disable")
 
       click_button("Enable")
+
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
+      
       item2.reload
+
       expect(item2.status).to eq("Enabled")
     end
   end
