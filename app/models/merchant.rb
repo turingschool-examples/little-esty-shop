@@ -22,4 +22,8 @@ class Merchant < ApplicationRecord
       .select(:name, :id)
       .limit(5)
   end
+
+  def filter_item_status(status_enum)
+    items.where(status: status_enum)
+  end
 end
