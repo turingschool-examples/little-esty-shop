@@ -60,4 +60,25 @@ RSpec.describe 'admin merchants index page' do
     expect(page).to have_content("Status: disable")
   end
 
+  it "has merchants listed in corresponding enabled or disabled sections" do
+    merchant_1 = Merchant.create!(name: 'merchant_1')
+    merchant_2 = Merchant.create!(name: 'merchant_2', status: 0)
+    merchant_3 = Merchant.create!(name: 'merchant_3')
+    merchant_4 = Merchant.create!(name: 'merchant_4', status: 0)
+
+    visit '/admin/merchants'
+
+    within('#enabled_merchants') do
+      expect(page).to have_content('Enabled Merchants:')
+      expect(page).to have_content(merchant_2.name)
+      expect(page).to have_content(merchant_4.name)
+    end
+
+    within('#disabled_merchants') do
+      expect(page).to have_content('Disabled Merchants:')
+      expect(page).to have_content(merchant_1.name)
+      expect(page).to have_content(merchant_3.name)
+    end
+  end
+
 end
