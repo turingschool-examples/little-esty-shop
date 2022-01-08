@@ -17,3 +17,12 @@
     <%= button_to "Enable #{m.name}", "/admin/merchants/#{m.id}?status=enabled", method: :patch %>
   <% end %>
 </div>
+
+<div id="top_5_merchants">
+  <h3>Top 5 Merchants:</h3>
+  <%@merchants.top_5_total_revenue.each do |m| %>
+  <ul><%= m.name %> Total Revenue: <%= m.total_revenue %></ul>
+  <% end %>
+</div>
+
+
