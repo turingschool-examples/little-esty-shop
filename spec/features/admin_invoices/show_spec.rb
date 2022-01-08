@@ -51,12 +51,40 @@ RSpec.describe 'the admin invoice show page' do
 
   it 'displays invoice attributes' do
     visit "admin/invoices/#{invoice_1.id}"
-save_and_open_page
+
     expect(page).to have_content("Invoice #{invoice_1.id}")
     expect(page).to have_content(invoice_1.customer_id)
     expect(page).to have_content(invoice_1.status)
     expect(page).to have_content(invoice_1.created_at.strftime("%A, %B %d %Y"))
     expect(page).to have_content(customer_1.first_name)
     expect(page).to have_content(customer_1.last_name)
+  end
+
+  it 'displays Item/InvoiceItem attributes' do
+    invoice_item_7 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'shipped')
+    invoice_item_8 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 2, unit_price: 150, status: 'packaged')
+    invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_4.id, quantity: 3, unit_price: 200, status: 'pending')
+
+    visit "admin/invoices/#{invoice_1.id}"
+save_and_open_page
+    expect(page).to have_content(item_1.name)
+    expect(page).to have_content(item_2.name)
+    expect(page).to have_content(item_3.name)
+    expect(page).to have_content(item_4.name)
+
+    expect(page).to have_content(invoice_item_1.quantity)
+    expect(page).to have_content(invoice_item_7.quantity)
+    expect(page).to have_content(invoice_item_8.quantity)
+    expect(page).to have_content(invoice_item_9.quantity)
+
+    expect(page).to have_content(invoice_item_1.unit_price)
+    expect(page).to have_content(invoice_item_7.unit_price)
+    expect(page).to have_content(invoice_item_8.unit_price)
+    expect(page).to have_content(invoice_item_9.unit_price)
+
+    expect(page).to have_content(invoice_item_4.status)
+    expect(page).to have_content(invoice_item_7.status)
+    expect(page).to have_content(invoice_item_8.status)
+    expect(page).to have_content(invoice_item_9.status)
   end
 end
