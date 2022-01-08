@@ -13,11 +13,12 @@ RSpec.describe "Admin merchant edit feature" do
     it 'has a form to edit the merchant and redirects to show page' do
       visit edit_admin_merchant_path(@merchant_1)
 
-      fill_in("merchant[name]", with: "Charlie Chesterfield's Chess Boards")
+      fill_in(:name, with: "Charlie Chesterfield's Chess Boards")
       click_button "Submit"
 
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
       expect(page).to have_content("Charlie Chesterfield's Chess Boards")
+      expect(page).to have_content("Successfully Updated")
     end
   end
 end
