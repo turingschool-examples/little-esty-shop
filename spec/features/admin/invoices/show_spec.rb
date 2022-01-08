@@ -16,7 +16,7 @@ RSpec.describe 'admin invoice show page' do
   end
 
   it 'shows invoice created_at in correct format' do
-    expect(page).to have_content(@invoice.created_at.strftime("%A, %B%-d, %Y"))
+    expect(page).to have_content(@invoice.created_at.strftime("%A, %B %-d, %Y"))
   end
 
   it 'shows invoice customer first_name and last_name' do

@@ -21,11 +21,10 @@ RSpec.describe 'merchant item index page' do
     end
 
     it 'the item name is a link to the merchant items show page' do
-      click_link("#{@item1.name}")
+      click_link("#{@item.name}")
 
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item1.id}")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item.id}")
     end
-  end
 
   describe 'enable/disable button' do
     it 'has a button to enable/disable an item' do
