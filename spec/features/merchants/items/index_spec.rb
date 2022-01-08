@@ -27,7 +27,6 @@ RSpec.describe 'Merchant Items Index page' do
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
 
       item2.reload
-
       expect(item2.status).to eq("Enabled")
     end
   end

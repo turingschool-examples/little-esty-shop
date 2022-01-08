@@ -19,10 +19,10 @@ class MerchantItemsController < ApplicationController
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
     if params[:status]
-      item.update(item_params)
+      item.update(item_params_2)
       redirect_to "/merchants/#{merchant.id}/items"
     else
-      item.update(item_params)
+      item.update(item_params_2)
       redirect_to "/merchants/#{merchant.id}/items/#{item.id}",  notice: "Item Successfully Updated"
     end
   end
@@ -34,7 +34,7 @@ class MerchantItemsController < ApplicationController
 
   def create
     merchant = Merchant.find(params[:merchant_id])
-    item = merchant.items.create!(item_params)
+    merchant.items.create!(item_params)
     redirect_to "/merchants/#{merchant.id}/items"
   end
 
@@ -42,5 +42,9 @@ class MerchantItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:name, :description, :unit_price, :status)
+    end
+
+    def item_params_2
+      params.permit(:name, :description, :unit_price, :status)
     end
 end
