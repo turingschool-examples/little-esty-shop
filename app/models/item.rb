@@ -14,4 +14,14 @@ class Item < ApplicationRecord
   def disabled
     items.where(item_status: 0)
   end
+
+  # are the successful transactions redundant here after doing it in top_five_items
+  def top_item_best_day
+    invoices.joins(:transactions)
+            .select("invoices.*, sum(quantity) as total_sales")
+            # .where(transactions: {result: "success"})
+            .group(:id)
+            .order(total_sales: :desc)
+            .first
+  end
 end
