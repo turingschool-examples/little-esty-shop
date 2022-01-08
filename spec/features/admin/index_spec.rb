@@ -8,13 +8,6 @@ RSpec.describe 'admin index page' do
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1)
     invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 1)
     invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
-
-    #invoice 0 = cancelled, 1 = in_progress, 2 = completed
-    #invoice_item 0 = packaged, 1 = pending, 2 = shipped
-    #incomplete_invoices
-      #invoice_items.where('status = ?', 0 || 1)
-
-
     item_1 = Item.create!(name: 'item_1', description: 'item_1_description', unit_price: 1, merchant_id: merchant_1.id)
     item_2 = Item.create!(name: 'item_2', description: 'item_2_description', unit_price: 2, merchant_id: merchant_1.id)
     item_3 = Item.create!(name: 'item_3', description: 'item_2_description', unit_price: 2, merchant_id: merchant_2.id)
@@ -33,13 +26,6 @@ RSpec.describe 'admin index page' do
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1)
     invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 1)
     invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
-
-    #invoice 0 = cancelled, 1 = in_progress, 2 = completed
-    #invoice_item 0 = packaged, 1 = pending, 2 = shipped
-    #incomplete_invoices
-      #invoice_items.where('status = ?', 0 || 1)
-
-
     item_1 = Item.create!(name: 'item_1', description: 'item_1_description', unit_price: 1, merchant_id: merchant_1.id)
     item_2 = Item.create!(name: 'item_2', description: 'item_2_description', unit_price: 2, merchant_id: merchant_1.id)
     item_3 = Item.create!(name: 'item_3', description: 'item_2_description', unit_price: 2, merchant_id: merchant_2.id)
@@ -59,13 +45,6 @@ RSpec.describe 'admin index page' do
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1)
     invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 1)
     invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
-
-    #invoice 0 = cancelled, 1 = in_progress, 2 = completed
-    #invoice_item 0 = packaged, 1 = pending, 2 = shipped
-    #incomplete_invoices
-      #invoice_items.where('status = ?', 0 || 1)
-
-
     item_1 = Item.create!(name: 'item_1', description: 'item_1_description', unit_price: 1, merchant_id: merchant_1.id)
     item_2 = Item.create!(name: 'item_2', description: 'item_2_description', unit_price: 2, merchant_id: merchant_1.id)
     item_3 = Item.create!(name: 'item_3', description: 'item_2_description', unit_price: 2, merchant_id: merchant_2.id)
@@ -73,8 +52,11 @@ RSpec.describe 'admin index page' do
     invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 2, unit_price: 3, status: 2)
     invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, quantity: 2, unit_price: 3, status: 0)
     visit '/admin'
-    save_and_open_page
     expect(page).to have_content("Incomplete Invoices: #{invoice_1.id} #{invoice_3.id}")
     expect(page).to_not have_content(invoice_2.id)
+    expect(page).to have_link(invoice_1.id)
+    expect(page).to have_link(invoice_3.id)
+    click_link("#{invoice_1.id}")
+    expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
   end
 end

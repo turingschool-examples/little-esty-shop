@@ -14,7 +14,6 @@ describe 'merchants invoices index page' do
     invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 2, unit_price: 3, status: 2)
     invoice_item_2 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, quantity: 2, unit_price: 3, status: 2)
     visit "/merchants/#{merchant_1.id}/invoices"
-    save_and_open_page
     expect(page).to have_content("Invoices: #{invoice_1.id} #{invoice_2.id}")
     expect(page).to_not have_content(invoice_3.id)
   end
