@@ -18,7 +18,6 @@ RSpec.describe 'Merchant Items Show page' do
     visit "/merchants/#{merchant1.id}/items/#{item1.id}"
     expect(page).to have_link("Update #{item1.name}")
     click_on("Update #{item1.name}")
-    # save_and_open_page
     expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
     expect(page).to have_field(:item_unit_price, with: 77777)
 
