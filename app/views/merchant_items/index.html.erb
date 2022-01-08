@@ -1,5 +1,5 @@
 <% @merchant.items.each do |item| %>
-  <div id="item-<%= item.id %>">  
+  <div id="item-<%= item.id %>">
     <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
     <% if item.status == "disabled" %>
       <%= button_to "Enable" ,"/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true, params: {status: "enabled"} %>
@@ -8,3 +8,5 @@
     <% end  %>
   </div>
 <% end %>
+
+<%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" %>
