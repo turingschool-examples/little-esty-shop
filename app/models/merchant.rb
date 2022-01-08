@@ -20,7 +20,7 @@ class Merchant < ApplicationRecord
   end
 
   def order_by_invoice
-    invoices.order(:created_at)
+    invoices.order(:created_at).distinct
   end
 
 

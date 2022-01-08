@@ -17,6 +17,6 @@ class Invoice < ApplicationRecord
   end
 
   def items_ready_ship
-    invoice_items.where('status = 1').distinct(:item_id)
+    invoice_items.where('invoice_items.status = ?', 1)
   end
 end

@@ -110,11 +110,6 @@ RSpec.describe 'merchant dashboard page', type: :feature do
         expect(item_2.name).to appear_before(item_5.name)
         expect(item_5.name).to appear_before(item_3.name)
       end
-
-      it "checks that the invoices are in order" do
-        expected = [invoice_1, invoice_2, invoice_5, invoice_4, invoice_3, invoice_6]
-        expect(merch_1.order_by_invoice).to eq(expected)
-      end
     end
   end
 end
