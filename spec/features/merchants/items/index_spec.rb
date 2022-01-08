@@ -25,7 +25,7 @@ RSpec.describe 'Merchant Items Index page' do
       click_button("Enable")
 
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
-      
+
       item2.reload
 
       expect(item2.status).to eq("Enabled")
@@ -54,6 +54,5 @@ RSpec.describe 'Merchant Items Index page' do
     expect(item3.name).to appear_before("Disabled Items")
     expect("Disabled Items:").to appear_before(item2.name)
     expect("Disabled Items:").to appear_before(item1.name)
-    save_and_open_page
   end
 end
