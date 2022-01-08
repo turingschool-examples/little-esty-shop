@@ -83,7 +83,7 @@ RSpec.describe 'merchant invoices show page' do
     visit merchant_invoice_path(merchant, invoice)
 
     within '.revenue' do
-      expect(page). to have_content("Total Revenue: #{(invoice.total_revenue / 100).to_f.to_s.ljust(5, '0').prepend('$')}")
+      expect(page). to have_content("Total Revenue: #{(invoice.total_revenue / 100.to_f).to_s.prepend('$').insert(2, ',')}")
     end
   end
 end
