@@ -1,0 +1,10 @@
+<div class="admin_edit_merchant_form">
+  <h1>Edit <%= @merchant.name %></h1>
+
+  <%= form_with model: @merchant, local: true do |f| %>
+    <%= f.label :name, "Merchant Name: " %>
+    <%= f.text_field :name, id: :name %>
+
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
