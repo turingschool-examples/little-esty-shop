@@ -6,12 +6,12 @@
   <p>Customer first name:<%= @invoice.customer.first_name %></p>
   <p>Customer last name:<%= @invoice.customer.last_name %></p>
 
-<h3>Items on invoice</h3>
+<h2>Items on invoice</h2>
 <hr>
 
-<% @invoice.items.each do |item| %>
-  <p>Name: <%= item.name %>
-  <%# ADD QUANTITY HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< %>
-  <p>Price: <%= item.unit_price %>
-  <p>Status: <%= item.item_status %>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <h3>Name: <%= invoice_item.item.name %> </h3>
+  <p>Price: <%= invoice_item.quantity %></p>
+  <p>Price: <%= number_to_currency(invoice_item.unit_price/100, precision: 0) %></p>
+  <p>Status: <%= invoice_item.status %></p>
 <% end %>
