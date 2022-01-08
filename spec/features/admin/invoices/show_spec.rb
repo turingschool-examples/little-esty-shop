@@ -17,20 +17,13 @@ RSpec.describe 'Admin Invoice Show Page' do
     @invoice_item_2 = InvoiceItem.create!(invoice_id:"#{@invoice_2.id}", item_id:"#{@item_2.id}", status: 2, quantity:1, unit_price:700)
     @invoice_item_3 = InvoiceItem.create!(invoice_id:"#{@invoice_3.id}", item_id:"#{@item_2.id}", status: 2, quantity:1, unit_price:700)
   end
-  # As an admin,
-  # When I visit an admin invoice show page
-  # Then I see information related to that invoice including:
-  #
-  # Invoice id
-  # Invoice status
-  # Invoice created_at date in the format "Monday, July 18, 2019"
-  # Customer first and last name
+
 
   it 'shows information for the invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
-    expect(page).to have_content(@invoice_1.status)
+    expect(page).to have_content("Invoice Status: #{@invoice_1.status}")
     expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
     expect(page).to have_content(@cust_1.first_name)
     expect(page).to have_content(@cust_1.last_name)
