@@ -5,8 +5,8 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
   let!(:merchant_1) {Merchant.create!(name: 'Ron Swanson')}
   let!(:merchant_2) {Merchant.create!(name: 'Deb Millhouse')}
 
-  let!(:item_1) {merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 150)}
-  let!(:item_2) {merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 300)}
+  let!(:item_1) {merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 150, status: 1)}
+  let!(:item_2) {merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 300,)}
   let!(:item_3) {merchant_2.items.create!(name: "Earrings", description: "A thing around your ears", unit_price: 220)}
   let!(:item_4) {merchant_2.items.create!(name: "Button", description: "A thing for your pants", unit_price: 150)}
 
@@ -70,4 +70,33 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
       expect(page).to have_content(total_revenue)
     end
   end
+
+  describe 'item status update field' do
+    scenario 'merchant sees item status select field  and submit button next to each item' do
+      expect(page).to have_field('Status')
+      within "#item#{item_1.id}" do
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_button("Update Item Status")
+      end
+
+      within "#item#{item_2.id}" do
+        expect(page).to have_field('Status', with: 'enabled')
+        expect(page).to have_button("Update Item Status")
+      end
+    end
+
+    scenario 'the item select field is populated by item status and changes when updated'
+  end
+  #   As a merchant
+  # When I visit my merchant invoice show page
+  # I see that each invoice item status is a select field
+  # And I see that the invoice item's current status is selected
+  # When I click this select field,
+  # Then I can select a new status for the Item,
+  # And next to the select field I see a button to "Update Item Status"
+  # When I click this button
+  # I am taken back to the merchant invoice show page
+  # And I see that my Item's status has now been updated
+
+
 end
