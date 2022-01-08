@@ -1,7 +1,8 @@
 class MerchantItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:id])
-    @items = @merchant.items
+    @enabled_items_array = @merchant.items.enabled_items
+    @disabled_items_array = @merchant.items.disabled_items
   end
 
   def show
@@ -17,13 +18,13 @@ class MerchantItemsController < ApplicationController
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:item_id])
-    item.update(item_params)
-    # flash[:notice] = "Item Successfully Updated"
-    # binding.pry
-    # if item.save
-    redirect_to "/merchants/#{merchant.id}/items/#{item.id}",  notice: "Item Successfully Updated"
-    # else
-    # end
+    if params[:status]
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items"
+    else
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}",  notice: "Item Successfully Updated"
+    end
   end
 
   def new
@@ -38,9 +39,9 @@ class MerchantItemsController < ApplicationController
 
 
 
-  private
+    private
 
-  def item_params
-    params.permit(:name, :description, :unit_price)
-  end
+    def item_params
+      params.permit(:name, :description, :unit_price, :status)
+    end
 end
