@@ -6,13 +6,13 @@ RSpec.describe Item do
     it { should have_many :invoice_items }
     it { should have_many(:invoices).through(:invoice_items) }
   end
-
-
-  describe 'instance methods' do
-    before(:each) do
+  
+   before(:each) do
       @merchant_1 = Merchant.create!(name: 'Ron Swanson')
 
       @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
+      @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your neck", unit_price: 100, status: 0)
+      @item_3 = @merchant_1.items.create!(name: "Earrings", description: "A thing around your neck", unit_price: 100, status: 1)
 
       @customer_1 = Customer.create!(first_name: "Billy", last_name: "Joel")
       @customer_2 = Customer.create!(first_name: "Britney", last_name: "Spears")
@@ -30,8 +30,23 @@ RSpec.describe Item do
       @invoice_item_3 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, unit_price: 1000, quantity: 1, status: 0)
       @invoice_item_4 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, unit_price: 1000, quantity: 9, status: 0)
       @invoice_item_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, unit_price: 1000, quantity: 2, status: 0)
-    end
+   end
+    
+  describe '#class_methods' do 
+    describe "::disabled_items" do 
+      it 'returns disabled items' do
+        expect(Item.disabled_items).to eq([@item_3])
+      end
+    end 
 
+    describe "::enabled_items" do 
+      it 'returns enabled items' do
+        expect(Item.enabled_items).to eq([@item_1, @item_2])
+      end
+    end 
+  end 
+  
+  describe 'instance methods' do
     describe '#date_with_most_sales' do
       it 'shows date that the item sold the most' do
         expect(@item_1.date_with_most_sales).to eq("03/28/2012")
@@ -41,7 +56,6 @@ RSpec.describe Item do
         invoice_item_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_7.id, unit_price: 1000, quantity: 9, status: 0)
         expect(@item_1.date_with_most_sales).to eq("05/28/2012")
       end
-
     end
   end
 end

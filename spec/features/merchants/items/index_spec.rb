@@ -4,9 +4,9 @@ RSpec.describe 'Merchant Dashboard' do
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Ron Swanson')
 
-    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
-    @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900)
-    @item_3 = @merchant_1.items.create!(name: "Earrings", description: "These go through your ears", unit_price: 1500)
+    @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000, status: 0)
+    @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900, status: 0)
+    @item_3 = @merchant_1.items.create!(name: "Earrings", description: "These go through your ears", unit_price: 1500, status: 1)
     @item_4 = @merchant_1.items.create!(name: "Ring", description: "A thing around your finger", unit_price: 1000)
     @item_5 = @merchant_1.items.create!(name: "Toe Ring", description: "A thing around your neck", unit_price: 800)
     @item_6 = @merchant_1.items.create!(name: "Pendant", description: "A thing to put somewhere", unit_price: 1500)
@@ -70,16 +70,13 @@ RSpec.describe 'Merchant Dashboard' do
   scenario 'visitor sees the name of all items of particular merchant as links' do
     expect(current_path).to eq(merchant_items_path(@merchant_1.id))
 
-    within "#all_items-#{@merchant_1.id}" do
+   within "#enabled" do
       expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
       expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
+   
+    within "#disabled" do 
       expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
-      expect(page).to have_link("#{@item_4.name}", href: merchant_item_path(@merchant_1.id, @item_4.id))
-      expect(page).to have_link("#{@item_5.name}", href: merchant_item_path(@merchant_1.id, @item_5.id))
-      expect(page).to have_link("#{@item_6.name}", href: merchant_item_path(@merchant_1.id, @item_6.id))
-      expect(page).to have_link("#{@item_7.name}", href: merchant_item_path(@merchant_1.id, @item_7.id))
-      expect(page).to have_link("#{@item_8.name}", href: merchant_item_path(@merchant_1.id, @item_8.id))
-    end
+    end 
   end
 
   scenario 'visitor sees the names of the top 5 most popular items ranked by total revenue generated' do
@@ -124,4 +121,26 @@ scenario 'vistor sees date with most sales next to top five most popular items' 
       expect(page).to have_content(@merchant_1.top_five_items[4].date_with_most_sales)
     end
   end
+
+  describe 'item disable/enable button' do 
+    scenario 'visitor sees a button to disable that item' do 
+      within "#enabled_item-#{@item_1.name}" do
+        expect(page).to have_button("Disable")
+        click_button "Disable"
+      end
+      
+      expect(page).to have_button("Enable")
+      expect(current_path).to eq(merchant_items_path(@merchant_1.id))
+    end 
+
+    scenario 'visitor sees a button to disable that item' do 
+      within "#disabled_item-#{@item_3.name}" do
+        expect(page).to have_button("Enable")
+        click_button "Enable"
+      end
+      
+      expect(page).to have_button("Disable")
+      expect(current_path).to eq(merchant_items_path(@merchant_1.id))
+    end  
+  end 
 end
