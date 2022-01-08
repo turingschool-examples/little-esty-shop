@@ -75,11 +75,15 @@ RSpec.describe "Merchant item index" do
     within "#top_five_items" do
       @merchant_1.top_five_items.each do |item|
         expect(page).to have_content(item.name)
-        expect(page).to have_content(item.revenue)
+        expect(page).to have_content(h.number_to_currency(item.revenue/100, precision: 0))
       end
       click_link(@item_4.name)
     end
 
       expect(current_path).to eq(merchant_item_path(@merchant_1, @item_4))
+  end
+
+  it 'shows the date of the most sales for the top 5 items' do
+
   end
 end
