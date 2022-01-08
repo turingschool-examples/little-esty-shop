@@ -1,3 +1,14 @@
 <h1>Welcome to the admin dashboard</h1>
 <%= link_to "Merchants", '/admin/merchants' %>
 <%= link_to "Invoices", '/admin/invoices' %>
+
+<h3>Incomplete Invoices</h3>
+<div id="incompleteinvoices">
+  <% @invoices.incomplete.each do |invoice| %>
+    <section id="invoice-<%=invoice.id%>">
+      <p>
+        <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
+      </p>
+    </section>
+  <% end %>
+</div>
