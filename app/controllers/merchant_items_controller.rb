@@ -1,23 +1,23 @@
 class MerchantItemsController < ApplicationController
   def index
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
     @enabled_items_array = @merchant.items.enabled_items
     @disabled_items_array = @merchant.items.disabled_items
   end
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def edit
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def update
     merchant = Merchant.find(params[:merchant_id])
-    item = Item.find(params[:item_id])
+    item = Item.find(params[:id])
     if params[:status]
       item.update(item_params)
       redirect_to "/merchants/#{merchant.id}/items"
@@ -28,7 +28,7 @@ class MerchantItemsController < ApplicationController
   end
 
   def new
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
@@ -36,8 +36,6 @@ class MerchantItemsController < ApplicationController
     item = merchant.items.create!(item_params)
     redirect_to "/merchants/#{merchant.id}/items"
   end
-
-
 
     private
 

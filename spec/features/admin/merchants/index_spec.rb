@@ -7,4 +7,4 @@ RSpec.describe 'Admin_Merchants Index Page' do
 
     expect(page).to have_content("Willy's Bakery")
   end
-end 
+end

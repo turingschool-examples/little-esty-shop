@@ -17,12 +17,12 @@ class Merchant < ApplicationRecord
     end
 
     customer_ids = Customer.joins(:invoices => :transactions)
-    .where(:transactions => {result: 0})
-    .group(:customer_id)
-    .order(count_customer_id: :desc)
-    .limit(customer_count)
-    .count(:customer_id)
-    .keys
+                            .where(:transactions => {result: 0})
+                            .group(:customer_id)
+                            .order(count_customer_id: :desc)
+                            .limit(customer_count)
+                            .count(:customer_id)
+                            .keys
     Customer.find(customer_ids)
 
   end
@@ -34,16 +34,19 @@ class Merchant < ApplicationRecord
     end
 
     customer_ids = Customer.joins(:invoices => :transactions)
-            .where(:transactions => {result: 0})
-            .group(:customer_id)
-            .order(count_customer_id: :desc)
-            .limit(customer_count)
-            .count(:customer_id)
-            .keys
+                            .where(:transactions => {result: 0})
+                            .group(:customer_id)
+                            .order(count_customer_id: :desc)
+                            .limit(customer_count)
+                            .count(:customer_id)
+                            .keys
     Customer.find(customer_ids)
   end
 
   def items_ready_to_ship
-    items.joins(:invoice_items).where("invoice_items.status != 2").distinct
+    items.joins(:invoice_items => :invoice)
+          .where.not(:invoice_items => {status: 2})
+          .order("invoices.created_at asc")
+          # this needs to be distinct. If there are two identical items with duplicate invoices and invoice items it repeats.
   end
 end
