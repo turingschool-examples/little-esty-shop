@@ -6,7 +6,7 @@
 <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d %Y") %></p>
 <br>
 <h3>Items:</h3>
-<% @invoice_items.each do |invoice_item| %>
+<% @invoice.invoice_items.each do |invoice_item| %>
   <p>Name: <%= invoice_item.item.name %></p>
   <p>Quantity: <%= invoice_item.quantity %></p>
   <p>Price per unit: $<%= invoice_item.unit_price %></p>

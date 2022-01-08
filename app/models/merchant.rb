@@ -23,4 +23,12 @@ class Merchant < ApplicationRecord
     .where.not(status: 'shipped')
   end
 
+  def self.only_enabled
+    where(status: 1)
+  end
+
+  def self.only_disabled
+    where(status: 0)
+  end
+
 end
