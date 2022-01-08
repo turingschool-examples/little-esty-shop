@@ -65,7 +65,7 @@ RSpec.configure do |config|
     # @item_11 = @merchant_2.items.create!(name: "Item_11", description: "Description_11", unit_price: 1515)
     # @item_12 = @merchant_2.items.create!(name: "Item_12", description: "Description_12", unit_price: 8787)
     #customer
-    @customer_1 = Customer.create!(first_name: "Customer", last_name: "1111 1111 1111 1111")
+    @customer_1 = Customer.create!(first_name: "Customer", last_name: "1")
     @customer_2 = Customer.create!(first_name: "ACustomer", last_name: "2")
     @customer_3 = Customer.create!(first_name: "BCustomer", last_name: "3")
     @customer_4 = Customer.create!(first_name: "CCustomer", last_name: "4")

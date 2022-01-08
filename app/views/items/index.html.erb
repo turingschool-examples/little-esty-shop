@@ -10,6 +10,13 @@
 <% end %>
 </div>
 
+<p>Top 5 Most Popular Items</p>
+<div id='topfiveitems'>
+<% @merchant.top_five_items.each do |item| %>
+  <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
+<% end %>
+</div>
+
 <h3>Enabled Items</h3>
 <hr>
 <div id='enableditems'>
