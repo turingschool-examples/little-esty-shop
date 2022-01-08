@@ -36,3 +36,7 @@ This project requires Ruby 2.7.2.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+
+![image](https://user-images.githubusercontent.com/15107515/148599839-a478be3e-c43e-4977-9e3c-f26198e40b33.png)
+
