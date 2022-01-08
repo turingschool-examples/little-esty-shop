@@ -26,7 +26,7 @@ RSpec.describe 'Admin Dashboard Index' do
 
       expect(page).to have_content("Incomplete Invoices")
       within "#incompleteinvoices" do
-        Invoice.incomplete.each do |invoice|
+        Invoice.incomplete_invoices.each do |invoice|
           expect(page).to have_content(invoice.id)
         end
         click_link("#{@invoice_4.id}")
