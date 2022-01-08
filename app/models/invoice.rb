@@ -1,4 +1,5 @@
 class Invoice < ApplicationRecord
+  include ApplicationHelper
   belongs_to :customer
   has_many :invoice_items
   has_many :items, through: :invoice_items
@@ -18,5 +19,9 @@ class Invoice < ApplicationRecord
 
   def items_ready_ship
     invoice_items.where('invoice_items.status = ?', 1)
+  end
+  
+  def total_revenue
+    cents_to_dollars(invoice_items.sum(:unit_price))
   end
 end

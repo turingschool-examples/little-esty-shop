@@ -90,6 +90,28 @@ RSpec.describe Invoice, type: :model do
 
         expect(invoice.items_ready_ship).to eq([invoice_items[0], invoice_items[1], invoice_items[2]])
       end
+    end 
+    
+    describe '#total_revenue' do
+      it 'should return the total revenue for the invoice' do
+        invoice_1 = create(:invoice)
+        items = create_list(:item, 3)
+        invoice_item_1 = create(:invoice_item, item: items[0], invoice: invoice_1, unit_price: 100)
+        invoice_item_2 = create(:invoice_item, item: items[1], invoice: invoice_1, unit_price: 200)
+        invoice_item_3 = create(:invoice_item, item: items[2], invoice: invoice_1, unit_price: 300)
+
+        expect(invoice_1.total_revenue).to eq('$6.00')
+      end
+      
+      it 'should not return revenue from other items not on the invoice' do
+        invoice_1 = create(:invoice)
+        item_1 = create(:item)
+        invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, unit_price: 100)
+
+        invoice_item_2 = create(:invoice_item, unit_price: 200)
+
+        expect(invoice_1.total_revenue).to eq('$1.00')
+      end
     end
   end
 end
