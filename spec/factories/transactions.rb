@@ -9,8 +9,8 @@ FactoryBot.define do
       transient do
         customer {create(:customer)}
       end
-      after(:create) do |transaction, invoice, evaluator|
-        invoice.update(customer: evaluator.customer)
+      after(:create) do |transaction, evaluator|
+        transaction.invoice.update(customer: evaluator.customer)
       end
     end
   end

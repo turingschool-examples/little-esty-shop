@@ -5,7 +5,6 @@ RSpec.describe Customer, type: :model do
   describe 'relationships' do
     it { should have_many(:invoices)}
     it { should have_many(:transactions).through(:invoices) }
-    it { should belong_to(:customer) }
   end
 
   describe 'validations' do
@@ -32,18 +31,9 @@ RSpec.describe Customer, type: :model do
       end
 
       it '#successful_transactions_count' do
-        customer_1 = create(:customer, first_name: 'Bob', last_name: "Smith")
-        customer_2 = create(:customer, first_name: 'John', last_name: "Charles")
-        customer_3 = create(:customer, first_name: 'Abe', last_name: "McConnel")
-        customer_4 = create(:customer, first_name: 'Zach', last_name: "Doe")
-        customer_5 = create(:customer, first_name: 'Charlie', last_name: "Rey")
+        customer_1 = create(:customer_with_transactions, first_name: 'Bob', last_name: "Smith", transaction_result: 0, transaction_count: 6)
 
-        merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
-        merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
-        merchant_3 = create(:merchant_with_invoices, invoice_count: 8, customer: customer_3, invoice_status: 2)
-        merchant_4 = create(:merchant_with_invoices, invoice_count: 1, customer: customer_4, invoice_status: 2)
-        merchant_5 = create(:merchant_with_invoices, invoice_count: 4, customer: customer_5, invoice_status: 2)
-        expect(customer_1.successful_transactions_count).to eq 6
+        expect(customer_1.successful_transactions_count).to eq (6)
       end
     end
 
