@@ -77,7 +77,6 @@ RSpec.describe 'merchant dashboard' do
 
 
       visit "/merchants/#{merchant.id}/dashboard"
-      save_and_open_page
       within "div.invoice_#{invoice_1.id}" do
         click_link "Invoice ID: #{invoice_1.id}"
         expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_1.id}")
