@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :invoice
-  validates :invoice, :credit_card_number, :credit_card_expiration_date, presence: true
+  validates :invoice, :credit_card_number, presence: true
 
     enum result: {
     failed: 0,
