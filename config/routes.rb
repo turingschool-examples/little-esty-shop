@@ -11,4 +11,13 @@ get '/merchants/:merchant_id/dashboard', to: 'merchants#dashboard'
     resources :items
     resources :invoices, only: [:index, :show]
   end
+
+  namespace :admin do
+    root to: '/admin#index'
+    resources :dogs 
+  end
+
+  # resources :admin, only: [:index]
+
+
 end

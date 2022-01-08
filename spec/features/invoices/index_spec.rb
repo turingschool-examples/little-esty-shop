@@ -10,5 +10,7 @@ RSpec.describe "Merchant invoice index" do
   it 'I see all of the invoices that include at least one of my merchants items' do
     visit merchant_invoices_path(@merchant_1)
     expect(page).to have_content(@invoice_1.id)
+    click_link "Invoice #{@invoice_1.id}"
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
   end
 end
