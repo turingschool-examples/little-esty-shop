@@ -94,7 +94,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays an invoices status as a select form' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant1, invoice: invoice1)
+    item = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant1, invoices: [invoice1])
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     within("#status-#{item.id}") do
