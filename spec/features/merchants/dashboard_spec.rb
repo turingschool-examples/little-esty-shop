@@ -70,7 +70,7 @@ RSpec.describe 'merchant dashboard' do
     it "shows invoice id next to item, and this is a link to the merchant invoice show page" do
       merchant = create(:merchant)
       item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0, invoice_count: 1)
-      item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, invoice_count: 2)
+      item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1, invoice_count: 1)
       invoice_1 = item_1.invoices.first
       invoice_2 = item_2.invoices.first
       invoice_3 = item_2.invoices.last

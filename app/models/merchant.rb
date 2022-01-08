@@ -45,7 +45,8 @@ class Merchant < ApplicationRecord
 
   def items_ready_to_ship
     items.joins(:invoice_items => :invoice)
-        .where.not(:invoice_items => {status: 2})
-        .order("invoices.created_at asc")
+          .where.not(:invoice_items => {status: 2})
+          .order("invoices.created_at asc")
+          # this needs to be distinct. If there are two identical items with duplicate invoices and invoice items it repeats.
   end
 end
