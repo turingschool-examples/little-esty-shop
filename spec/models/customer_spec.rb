@@ -5,6 +5,7 @@ RSpec.describe Customer, type: :model do
   describe 'relationships' do
     it { should have_many(:invoices)}
     it { should have_many(:transactions).through(:invoices) }
+    it { should belong_to(:customer) }
   end
 
   describe 'validations' do
