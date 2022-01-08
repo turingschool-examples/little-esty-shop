@@ -3,7 +3,7 @@
 <p><%= link_to "Merchants", "/admin/merchants" %></p>
 <p><%= link_to "Invoices", "/admin/invoices" %></p>
 <p>Incomplete Invoices:</p>
-<% @invoices.each do |invoice| %>
+<% @invoices.ordered_invoices.each do |invoice| %>
   <% invoice.incomplete_invoices.each do |invoice_item| %>
     <%= link_to "#{invoice_item.invoice_id}", "/admin/invoices/#{invoice_item.invoice_id}" %>
     <p>Created: <%= invoice.created_at.strftime("%A, %B %d, %Y") %></p>

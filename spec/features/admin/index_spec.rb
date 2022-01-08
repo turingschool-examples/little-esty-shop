@@ -66,18 +66,18 @@ RSpec.describe 'admin index page' do
     merchant_1 = Merchant.create!(name: 'merchant_1')
     merchant_2 = Merchant.create!(name: 'merchant_2')
     customer_1 = Customer.create!(first_name: 'customer_1', last_name: 'last_name_1')
-    invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1)
-    invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 1)
-    invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
+    invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1, created_at: "2012-03-25 09:54:09 UTC")
+    invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 1, created_at: "2012-03-24 15:54:10 UTC")
+    invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1, created_at: "2012-03-06 21:54:10 UTC")
     item_1 = Item.create!(name: 'item_1', description: 'item_1_description', unit_price: 1, merchant_id: merchant_1.id)
     item_2 = Item.create!(name: 'item_2', description: 'item_2_description', unit_price: 2, merchant_id: merchant_1.id)
     item_3 = Item.create!(name: 'item_3', description: 'item_2_description', unit_price: 2, merchant_id: merchant_2.id)
     invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2, status: 1)
-    invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 2, unit_price: 3, status: 2)
+    invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 2, unit_price: 3, status: 1)
     invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, quantity: 2, unit_price: 3, status: 0)
 
     visit '/admin'
-    save_and_open_page
-    expect(invoice_1.id).to appear_before(invoice_3.id)
+    expect("#{invoice_3.id}").to appear_before("#{invoice_2.id}")
+    expect("#{invoice_2.id}").to appear_before("#{invoice_1.id}")
   end
 end

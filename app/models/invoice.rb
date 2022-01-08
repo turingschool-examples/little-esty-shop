@@ -10,6 +10,10 @@ class Invoice < ApplicationRecord
     invoice_items.where(status: [0, 1])
   end
 
+  def self.ordered_invoices
+    order(created_at: :asc)
+  end
+
   def total_revenue
     invoice_items.sum(:unit_price)
   end
