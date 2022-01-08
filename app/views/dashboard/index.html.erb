@@ -1,3 +1,21 @@
-<%= @merchant.name %><br>
+<h2>Merchant: <%= @merchant.name %></h2>
 <%= link_to "Items", merchant_items_path %><br>
 <%= link_to "Invoices", merchant_invoices_path %>
+
+
+<% @customers.each do |customer| %>
+  <p><div id="customer-<%= customer.first_name %>">
+  <%= customer.last_name %>
+  <%= customer.transaction_count %>
+  </div>
+  </p>
+<% end %>
+</div>
+
+<h2>Items Ready To Ship</h2>
+<div id="merchant-items">
+  <% @items.each do |item| %>
+    <p><%= item.name %>
+    <%= link_to item.invoices.first.id, "/merchants/#{@merchant.id}/invoices" %></p>
+  <% end %>
+</div>
