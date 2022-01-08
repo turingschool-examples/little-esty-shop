@@ -18,4 +18,10 @@ RSpec.describe Customer do
     expect(@customer_6.transactions.count).to eq(6)
     expect(@customer_6.successful_transactions_count).to eq(4)
   end
+
+  describe 'class methods' do
+    it '::top_customers' do
+      expect(Customer.top_customers).to eq([@customer_4, @customer_5, @customer_6, @customer_3, @customer_2])
+    end
+  end
 end
