@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'admin invoice show page' do
   before(:each) do
-    @invoice = FactoryBot.create(:invoice)
+    @invoice = FactoryBot.create(:invoice, status: "in progress")
 
     visit "/admin/invoices/#{@invoice.id}"
   end
