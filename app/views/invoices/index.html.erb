@@ -1,0 +1,8 @@
+<h1><%= @merchant.name %> Invoices Index</h1>
+
+<% @invoices.each do |invoice| %>
+  <div id="invoice<%= invoice.id %>">
+    <p><%= link_to invoice.id, merchant_invoices_path(@merchant.id, invoice.id) %></p>
+  </div>
+
+<% end %>

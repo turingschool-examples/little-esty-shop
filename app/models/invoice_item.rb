@@ -5,7 +5,6 @@ class InvoiceItem < ApplicationRecord
   belongs_to :item
 
   def invoice_creation_date
-    date = invoice.created_at
-    date.strftime("%A, %B %d,%Y")
+    invoice.creation_date_formatted
   end
 end

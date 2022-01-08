@@ -1,3 +1,6 @@
+<h1>My Items</h1>
+
+<section id="enabled">
 <h3>Enabled Items</h3>
 <% @items.enabled_items.each do |item| %>
   <div id="enabled_item-<%=item.name%>">
@@ -5,7 +8,9 @@
     <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), method: :patch, params: { item_id: item.id, disable: 1 } %>
   </div>
 <% end %>
-
+</section>
+ 
+<section id="disabled">
 <h3>Disabled Items</h3>
 <% @items.disabled_items.each do |item| %>
   <div id="disabled_item-<%=item.name%>">
@@ -13,3 +18,18 @@
     <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), method: :patch, params: { item_id: item.id, enable: 0 } %>
   </div>
 <% end %>
+</section>
+
+<section id="top_five_items-<%=@merchant.id%>">
+<h3>Top 5 Items:</h3>
+<ol>
+<% @merchant.top_five_items.each do |item| %>
+<div id="item<%=item.id%>">
+  <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> - <%= item.total_revenue %> in sales 
+  <br>Top Day for <%= item.name %> was <%= item.date_with_most_sales %></li>
+</div>
+<% end %>
+</ol>
+</section>
+
+
