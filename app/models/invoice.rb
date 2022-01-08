@@ -13,7 +13,7 @@ class Invoice < ApplicationRecord
   }
 
   def pretty_created_at
-    created_at.strftime("%A, %B%-d, %Y")
+    created_at.strftime("%A, %B %d, %Y")
   end
 
   def customer_name
