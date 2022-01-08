@@ -34,6 +34,7 @@ RSpec.describe 'Admin Dashboard Index' do
       end
 
       expect(current_path).to eq(admin_invoice_path(@invoice_4.id))
+    end
 
     it 'shows top 5 customers' do
       visit admin_root_path
@@ -52,7 +53,7 @@ RSpec.describe 'Admin Dashboard Index' do
         expect(page).to have_content(@customer_4.last_name)
         expect(page).to have_content("4 Purchases")
       end
-      expect(page).to_not have_content(@customer_1.last_name)
+      expect(page).to_not have_content("Customer 1")
     end
   end
 end
