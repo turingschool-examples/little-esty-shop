@@ -14,7 +14,7 @@ RSpec.describe 'Merchant Items Index page' do
     expect(page).to_not have_content('Eric')
   end
 
-  it "Has buttons next to each item to enable or disable. Both buttons refresh the page with updated status" do
+  it "Has button next to each item to enable. Buttons refreshes the page with updated enabled status" do
     merchant = create(:merchant)
     item1 = create(:item, merchant: merchant, name: "Paul")
     item2 = create(:item, merchant: merchant, name: "Leland")
@@ -28,6 +28,23 @@ RSpec.describe 'Merchant Items Index page' do
 
       item2.reload
       expect(item2.status).to eq("Enabled")
+    end
+  end
+
+  it "Has button next to each item to disable. Buttons refreshes the page with updated disabled status" do
+    merchant = create(:merchant)
+    item1 = create(:item, merchant: merchant, name: "Paul")
+    item2 = create(:item, merchant: merchant, name: "Leland", status: "Enabled")
+    visit "/merchants/#{merchant.id}/items"
+    within("div.item_#{item2.id}") do
+      expect(page).to have_button("Disable")
+
+      click_button("Disable")
+
+      expect(current_path).to eq("/merchants/#{merchant.id}/items")
+
+      item2.reload
+      expect(item2.status).to eq("Disabled")
     end
   end
 

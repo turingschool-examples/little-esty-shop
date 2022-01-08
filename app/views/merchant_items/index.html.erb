@@ -5,8 +5,10 @@
   <% @enabled_items_array.each do |item| %>
     <div class="<%= "item_#{item.id}" %>">
       <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
-      <h4><%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Disabled"} %></h4>
-      <hr>
+      <%= form_with model: [@merchant, item], local: true do |form| %>
+        <%= form.hidden_field :status, value: "Disabled" %>
+        <%= form.submit "Disable #{item.name}"%>
+      <% end %>
     </div>
   <% end %>
 
@@ -14,7 +16,10 @@
   <% @disabled_items_array.each do |item| %>
     <div class="<%= "item_#{item.id}" %>">
       <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
-      <h4><%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Enabled"} %></h4>
+      <%= form_with model: [@merchant, item], local: true do |form| %>
+        <%= form.hidden_field :status, value: "Enabled" %>
+        <%= form.submit "Enable #{item.name}"%>
+      <% end %>
       <hr>
     </div>
   <% end %>
