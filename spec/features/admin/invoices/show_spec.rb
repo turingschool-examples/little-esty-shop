@@ -19,7 +19,7 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
 
-  it 'shows information for the invoice' do
+  it 'shows customer and status information for the invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
@@ -28,4 +28,18 @@ RSpec.describe 'Admin Invoice Show Page' do
     expect(page).to have_content(@cust_1.first_name)
     expect(page).to have_content(@cust_1.last_name)
   end
+
+  it 'shows Item information for the the show page' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    within ".invoice" do
+      expect(page).to have_content(@item_1.name)
+      expect(page).to_not have_content(@item_2.name)
+      expect(page).to have_content(@invoice_item_1.quantity)
+      expect(page).to have_content(@invoice_item_1.unit_price)
+      expect(page).to_not have_content(@invoice_item_3.unit_price)
+      expect(page).to have_content(@invoice_item_1.status)
+    end
+  end
+
 end
