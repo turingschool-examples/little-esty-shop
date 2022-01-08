@@ -2,17 +2,20 @@ require 'rails_helper'
 
 RSpec.describe 'merchant invoice index page' do
   before(:each) do
-    @merchant = Merchant.create!(name: "Parker")
-    @item = @merchant.items.create!(name: "Small Thing", description: "Its a thing that is small.", unit_price: 400)
-    @item2 = @merchant.items.create!(name: "Large Thing", description: "Its a thing that is large.", unit_price: 800)
-    @customer = Customer.create!(first_name: "Fred", last_name: "Rogers")
-    @invoice = @customer.invoices.create!(status: "in progress")
-    @invoice_item = InvoiceItem.create!(invoice: @invoice, item: @item, quantity: 20, unit_price: 400, status: "pending")
+    @merchant = FactoryBot.create(:merchant)
+    @item = FactoryBot.create(:item, merchant: @merchant)
+    @item2 = FactoryBot.create(:item, merchant: @merchant)
+    @item3 = FactoryBot.create(:item, merchant: @merchant)
+    @invoice_item = FactoryBot.create(:invoice_item, item: @item)
+    @invoice_item2 = FactoryBot.create(:invoice_item, item: @item2)
+    @invoice_item3 = FactoryBot.create(:invoice_item, item: @item3)
     visit "/merchants/#{@merchant.id}/invoices"
   end
 
   it 'shows each merchant invoice id' do
-    expect(page).to have_content(@invoice.id)
+    expect(page).to have_content(@invoice_item.invoice_id)
+    expect(page).to have_content(@invoice_item2.invoice_id)
+    expect(page).to have_content(@invoice_item3.invoice_id)
   end
 
 
