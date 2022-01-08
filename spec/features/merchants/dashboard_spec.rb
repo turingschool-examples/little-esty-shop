@@ -75,20 +75,22 @@ RSpec.describe 'merchant dashboard' do
       invoice_2 = item_2.invoices.first
       invoice_3 = item_2.invoices.last
 
+
       visit "/merchants/#{merchant.id}/dashboard"
-      within "div.item_#{item_1.id}" do
+      save_and_open_page
+      within "div.invoice_#{invoice_1.id}" do
         click_link "Invoice ID: #{invoice_1.id}"
         expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_1.id}")
       end
 
       visit "/merchants/#{merchant.id}/dashboard"
-      within "div.item_#{item_2.id}" do
+      within "div.invoice_#{invoice_2.id}" do
         click_link "Invoice ID: #{invoice_2.id}"
         expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_2.id}")
       end
 
       visit "/merchants/#{merchant.id}/dashboard"
-      within "div.item_#{item_2.id}" do
+      within "div.invoice_#{invoice_2.id}" do
         click_link "Invoice ID: #{invoice_3.id}"
         expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_3.id}")
       end
