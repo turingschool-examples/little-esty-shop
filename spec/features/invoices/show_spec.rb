@@ -16,7 +16,7 @@ RSpec.describe "Merchant invoice show" do
 
     @invoice_1.items.each do |item|
       expect(page).to have_content(item.name)
-      #>>>>>>>WE NEED TO INCLUDE QUANTITY<<<<<<<<<<<<
+      #ADD QUANTITY METHOD THAT ACTUALLY COUNTS THIS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       expect(page).to have_content(item.unit_price)
       expect(page).to have_content(item.item_status)
     end
