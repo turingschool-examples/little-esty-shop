@@ -16,7 +16,6 @@
     <tr>
       <td><%= inv_itm.item.name%></td>
       <td><%=inv_itm.quantity %></td>
-      <%= binding.pry %>
       <td><%=number_to_currency(inv_itm.unit_price.to_f / 100) %></td>
       <td><%=inv_itm.status %></td>
     </tr>
