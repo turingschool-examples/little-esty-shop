@@ -16,7 +16,7 @@ get '/merchants/:merchant_id/dashboard', to: 'merchants#dashboard'
   namespace :admin do
     root to: '/admin#index'
     resources :merchants, only: [:index, :show]
-    resources :invoices, only: [:index, :show]
+    resources :invoices, only: [:index, :show, :update]
   end
 
   # resources :admin, only: [:index]

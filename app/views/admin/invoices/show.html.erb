@@ -5,3 +5,10 @@
 <p>Customer first name:<%= @invoice.customer.first_name %></p>
 <p>Customer last name:<%= @invoice.customer.last_name %></p>
 <p>Total revenue generated:<%= @invoice.total_revenue %> </p>
+<p>
+  <%= form_with model: [:admin, @invoice], local: true do |form| %>
+    <%= form.label "Status:" %>
+    <%= form.select :status, [:pending, :cancelled, "in progress", :completed], selected: @invoice.status %>
+    <%= form.submit "Update Invoice Status" %>
+  <% end %>
+</p>
