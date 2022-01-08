@@ -11,7 +11,6 @@ class Invoice < ApplicationRecord
   end
 
   def merchant_items(merchant)
-    # require "pry"; binding.pry
     Item.joins(:invoice_items).where( items: {merchant_id: merchant.id})
   end
 
