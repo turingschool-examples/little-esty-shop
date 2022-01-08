@@ -6,4 +6,9 @@ class Invoice < ApplicationRecord
   has_many :merchant, through: :items
   validates :status, presence: true
   enum status: { cancelled: 0, "in progress" => 1, completed: 2, pending: 3 }
+
+  def self.incomplete_invoices
+    joins(:invoice_items)
+    .where.not(invoice_items: {status: "shipped"})
+  end
 end
