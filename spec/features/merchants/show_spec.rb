@@ -27,6 +27,11 @@ RSpec.describe "Merchant Dashboard Show Page" do
     @invoice_item_4 = InvoiceItem.create!(invoice_id:"#{@invoice_4.id}", item_id:"#{@item_1.id}", status: 2, quantity:1, unit_price:600)
     @invoice_item_5 = InvoiceItem.create!(invoice_id:"#{@invoice_5.id}", item_id:"#{@item_1.id}", status: 2, quantity:1, unit_price:600)
 
+    @transaction_1 = Transaction.create(invoice_id:"#{@invoice_1.id}", result: "success")
+    @transaction_2 = Transaction.create(invoice_id:"#{@invoice_2.id}", result: "success")
+    @transaction_3 = Transaction.create(invoice_id:"#{@invoice_3.id}", result: "success")
+    @transaction_4 = Transaction.create(invoice_id:"#{@invoice_4.id}", result: "success")
+    @transaction_5 = Transaction.create(invoice_id:"#{@invoice_5.id}", result: "success")
   end
   
   it 'shows merchant name' do
@@ -82,7 +87,7 @@ RSpec.describe "Merchant Dashboard Show Page" do
     expect("#{@invoice_1.id}").to appear_before("#{@invoice_2.id}")
   end
 
-  xit "has top 5 favorite customers with most transaction activity with this merchant" do 
+  it "has top 5 favorite customers with most successful transaction activity with this merchant" do 
     
     visit "/merchants/#{@merch_1.id}/dashboard"
     

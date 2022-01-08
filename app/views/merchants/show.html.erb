@@ -10,12 +10,9 @@
     <% end %>
 </div>
 
-<%
-=begin%>
  <h3><div class="favorite-customers">Favorite Customers</h3>
-  <% @merchant.favorite_customers.each do |customer| %>
-    <%= customer.name %>
+  <% @merchant.merchants_favorite_customers.each do |customer| %>
+    <%= customer.first_name %> <%= customer.last_name %> | Successful Transactions: <%= customer.transactions.count %>
     <% end %>
 </div> 
-<%
-=end%>
+
