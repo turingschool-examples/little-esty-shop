@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'simplecov'
 SimpleCov.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -33,6 +34,18 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+module ViewHelpers
+  def h
+    ViewHelper.instance
+  end
+
+  class ViewHelper
+    include Singleton
+    include ActionView::Helpers::NumberHelper
+    include ApplicationHelper
+  end
+end
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -41,6 +54,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ViewHelpers
   config.before(:each) do
     Invoice.destroy_all
     Customer.destroy_all
