@@ -16,6 +16,6 @@ RSpec.describe Item, type: :model do
 
   it '#top_item_best_day' do
     expect(@item_7.invoice_items.first.quantity).to eq(@item_7.invoice_items.second.quantity)
-    expect(@item_7.top_item_best_day).to eq(@item_7.invoices.first)
+    expect(@item_7.top_item_best_day).to eq(@item_7.invoices.first.updated_at)
   end
 end

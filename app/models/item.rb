@@ -16,12 +16,13 @@ class Item < ApplicationRecord
   end
 
   # are the successful transactions redundant here after doing it in top_five_items
+  # good or bad to include the updated_at on the end?
   def top_item_best_day
     invoices.joins(:transactions)
             .select("invoices.*, sum(quantity) as total_sales")
             # .where(transactions: {result: "success"})
             .group(:id)
             .order(total_sales: :desc)
-            .first
+            .first.updated_at
   end
 end
