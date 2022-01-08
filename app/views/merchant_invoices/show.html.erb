@@ -1,0 +1,22 @@
+<div class = "header" >
+  <h2>Invoice #<%= @invoice.id %></h2>
+</div>
+
+<div class = "invoice-items">
+  <table>
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Unit Price </th>
+      <th>Status</th>
+    </tr>
+   <% @invoice_items.each do |inv_itm| %>
+    <tr>
+      <td><%= inv_itm.item.name%></td>
+      <td><%=inv_itm.quantity %></td>
+      <td><%=number_to_currency(inv_itm.unit_price.to_f / 100) %></td>
+      <td><%=inv_itm.status %></td>
+    </tr>
+    <% end %>
+   </table>
+</div>
