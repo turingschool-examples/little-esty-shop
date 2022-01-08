@@ -17,7 +17,8 @@ RSpec.describe "Merchant invoice show" do
     @invoice_1.invoice_items.each do |invoice_item|
       expect(page).to have_content(invoice_item.item.name)
       expect(page).to have_content(invoice_item.quantity)
-      expect(page).to have_content(h.number_to_currency(invoice_item.unit_price))
+      # require 'pry'; binding.pry
+      expect(page).to have_content("Price: #{h.number_to_currency(invoice_item.unit_price/100, precision: 0)}")
       expect(page).to have_content(invoice_item.status)
     end
   end
@@ -29,5 +30,18 @@ RSpec.describe "Merchant invoice show" do
     visit merchant_invoice_path(@merchant_1, @invoice_1)
 
     expect(page).to_not have_content("#{other_merchant_item.name}")
+  end
+
+  it 'has a select field to update the invoice_item status' do
+    visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+    @invoice_1.invoice_items.each do |invoice_item|
+      expect(page).to have_content("#{invoice_item.status}")
+      select :packaged, from: :status
+      click_on "Update Item Status"
+
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
+      expect(page).to have_content("#{invoice_item.status}")
+    end
   end
 end
