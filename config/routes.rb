@@ -14,5 +14,4 @@ Rails.application.routes.draw do
     resources :merchants
     resources :invoices
   end
-  
 end
