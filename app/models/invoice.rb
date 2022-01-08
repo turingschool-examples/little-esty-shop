@@ -20,5 +20,5 @@ class Invoice < ApplicationRecord
 
   def potential_revenue(merchant)
     merchant_invoice_items(merchant).sum(:unit_price)
-  end 
+  end
 end

@@ -27,7 +27,6 @@ RSpec.describe 'Merchant Items Show page' do
       click_on 'Submit'
     end
     expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
-
     #checking for flash message
     expect(page).to have_content("Item Successfully Updated")
   end
