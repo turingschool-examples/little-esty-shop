@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'simplecov'
 SimpleCov.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -33,6 +34,18 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+module ViewHelpers
+  def h
+    ViewHelper.instance
+  end
+
+  class ViewHelper
+    include Singleton
+    include ActionView::Helpers::NumberHelper
+    include ApplicationHelper
+  end
+end
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -41,6 +54,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ViewHelpers
   config.before(:each) do
     Invoice.destroy_all
     Customer.destroy_all
@@ -94,6 +108,7 @@ RSpec.configure do |config|
     @invoice_17 = @customer_6.invoices.create!
     @invoice_18 = @customer_6.invoices.create!
     @invoice_19 = @customer_6.invoices.create!
+    @invoice_20 = @customer_6.invoices.create!
 
     # @invoice_20 = @customer_7.invoices.create!
     # @invoice_21 = @customer_7.invoices.create!
@@ -116,9 +131,10 @@ RSpec.configure do |config|
     @invoice_14.invoice_items.create!(item_id: @item_4.id, quantity: 444, unit_price: @item_4.unit_price, status: 1)
     @invoice_15.invoice_items.create!(item_id: @item_5.id, quantity: 120, unit_price: @item_5.unit_price, status: 1)
     @invoice_16.invoice_items.create!(item_id: @item_6.id, quantity: 165, unit_price: @item_6.unit_price, status: 2)
-    @invoice_17.invoice_items.create!(item_id: @item_7.id, quantity: 395, unit_price: @item_7.unit_price, status: 2)
+    @invoice_17.invoice_items.create!(item_id: @item_7.id, quantity: 399, unit_price: @item_7.unit_price, status: 2)
     @invoice_18.invoice_items.create!(item_id: @item_8.id, quantity: 18, unit_price: @item_8.unit_price, status: 2)
     @invoice_19.invoice_items.create!(item_id: @item_8.id, quantity: 18, unit_price: @item_8.unit_price, status: 0)
+    @invoice_20.invoice_items.create!(item_id: @item_7.id, quantity: 18, unit_price: @item_7.unit_price, status: 0)
 
     # @invoice_20.invoice_items.create!(item_id: @item_11.id, quantity: 13, unit_price: @item_11.unit_price, status: 2)
     # @invoice_21.invoice_items.create!(item_id: @item_12.id, quantity: 17, unit_price: @item_12.unit_price, status: 2)
@@ -144,6 +160,7 @@ RSpec.configure do |config|
     @invoice_17.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
     @invoice_18.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "success")
     @invoice_19.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "failed")
+    @invoice_20.transactions.create!(credit_card_number: "1111 1111 1111 1111", result: "failed")
   end
 
   config.after(:each) do

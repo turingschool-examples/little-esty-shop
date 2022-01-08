@@ -6,7 +6,12 @@
 
 <div id="top_five_items">
 <% @merchant.top_five_items.each do |item| %>
-    <p> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= item.revenue %> </p>
+    <p>
+      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Total Revenue Generated: <%= number_to_currency(item.revenue/100, precision: 0) %>
+    </p>
+    <p>
+      <%= "Top selling date for #{item.name} was #{item.top_item_best_day.strftime("%m-%d-%y")}" %>
+    </p>
 <% end %>
 </div>
 
@@ -24,10 +29,7 @@
   <section id="item-<%=item.id%>">
     <p>
       <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
-      <%= render partial: 'availability', locals: {
-        item: item,
-        merchant: @merchant
-      }%>
+      <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :disabled} %>
     </p>
   </section>
 <% end %>
@@ -41,10 +43,7 @@
   <section id="item-<%=item.id%>">
     <p>
       <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
-      <%= render partial: 'availability', locals: {
-        item: item,
-        merchant: @merchant
-      }%>
+      <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: {item_status: :enabled} %>
     </p>
   </section>
 <% end %>
