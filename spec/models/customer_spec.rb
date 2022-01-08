@@ -21,11 +21,13 @@ RSpec.describe Customer, type: :model do
         customer_2 = create(:customer_with_transactions, transaction_count: 3, transaction_result: 0)
         expect(customer_2.successful_transactions).to eq(customer_2.transactions)
 
-        customer_3 = create(:customer_with_transactions, transaction_count: 3, transaction_result: 0)
-        expected = customer_3.transactions
-        invoice = create(:invoice, customer: customer_3)
-        transaction = create(:transaction, invoice: invoice, result: 1)
-        expect(customer_3.successful_transactions).to eq(expected)
+        customer_3 = create(:customer)
+        transaction_1 = create(:transaction_with_customer, customer: customer_3, result: 0)
+        transaction_2 = create(:transaction_with_customer, customer: customer_3, result: 1)
+        transaction_3 = create(:transaction_with_customer, customer: customer_3, result: 0)
+        transaction_4 = create(:transaction_with_customer, customer: customer_3, result: 0)
+
+        expect(customer_3.successful_transactions).to eq([transaction_1, transaction_3, transaction_4])
       end
 
       it '#successful_transactions_count' do
