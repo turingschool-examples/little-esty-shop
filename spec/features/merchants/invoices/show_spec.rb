@@ -52,4 +52,39 @@ RSpec.describe 'merchant invoices show page' do
       expect(page).to_not have_content(item_5.name)
     end
   end
+  it 'lists the total revenue for the invoice' do
+    merchant = Merchant.create!(name: 'merchant name')
+    not_included_merchant = Merchant.create!(name: 'merchant name')
+    customer = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
+    item_1 = Item.create!(merchant_id: merchant.id, name: 'widget-1', description: 'widget description',
+                          unit_price: 100)
+    item_2 = Item.create!(merchant_id: merchant.id, name: 'widget-2', description: 'widget description',
+                          unit_price: 200)
+    item_3 = Item.create!(merchant_id: merchant.id, name: 'widget-3', description: 'widget description',
+                          unit_price: 300)
+    item_4 = Item.create!(merchant_id: merchant.id, name: 'widget-4', description: 'widget description',
+                          unit_price: 400)
+    item_5 = Item.create!(merchant_id: not_included_merchant.id, name: 'widget-20', description: 'widget description',
+                          unit_price: 40440)
+
+    invoice = Invoice.create!(customer_id: customer.id, status: 'completed')
+    invoice_2 = Invoice.create!(customer_id: customer.id, status: 'completed')
+    invoice_item_1 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_1.id, quantity: 7,
+                                         unit_price: 100)
+    invoice_item_2 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_2.id, quantity: 3,
+                                         unit_price: 200)
+    invoice_item_3 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_3.id, quantity: 2,
+                                         unit_price: 300)
+    invoice_item_4 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_4.id, quantity: 2,
+                                         unit_price: 400)
+
+    invoice_item_5 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_5.id, quantity: 1,
+                                         unit_price: 700)
+
+    visit merchant_invoice_path(merchant, invoice)
+    
+    within '.revenue' do
+      expect(page). to have_content("Total Revenue: #{(invoice.total_revenue / 100).to_f.to_s.ljust(5, '0').prepend('$')}")
+    end
+  end
 end
