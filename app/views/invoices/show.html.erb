@@ -3,6 +3,26 @@
 <ul>
   <li>Status: <%= @invoice.status %></li>
   <li>Created On: <%= @invoice.created_at_formatted %></li>
+  <li>Total Revenue: <%= @invoice.total_revenue %></li>
 </ul>
 <h2>Customer:</h2>
 <p><%= @invoice.customer_full_name %></p>
+<h2>Items on this Invoice:</h2>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.invoice_items.each do |ii| %>
+    <tr id="item-<%= ii.item_id %>">
+      <td><%= ii.item.name %></td>  
+      <td><%= ii.quantity %></td>
+      <td><%= ii.unit_price %></td>
+      <%= form_with model: [@merchant, ii], local: true do |f| %>
+        <td><%= f.select :status, ['pending', 'packaged', 'shipped'] %> <%= f.submit 'Update Item Status' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
