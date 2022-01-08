@@ -11,6 +11,7 @@ class Invoice < ApplicationRecord
   end
 
   def merchant_items(merchant)
+    # require "pry"; binding.pry
     Item.joins(:invoice_items).where( items: {merchant_id: merchant.id})
   end
 
@@ -20,5 +21,5 @@ class Invoice < ApplicationRecord
 
   def potential_revenue(merchant)
     merchant_invoice_items(merchant).sum(:unit_price)
-  end 
+  end
 end
