@@ -15,9 +15,11 @@ Rails.application.routes.draw do
   post '/merchants/:merchant_id/items', to: 'merchant_items#create'
 
   get '/admin', to: 'admin/base#index'
-  get '/admin/merchants', to: 'admin/admins#index'
-  get '/admin/merchants/:id', to: 'admin/admins#show'
-  get '/admin/merchants/:id/edit', to: 'admin/admins#edit'
-  patch '/admin/merchants/:id', to: 'admin/admins#update'
+  get '/admin/merchants', to: 'admin/admin_merchants#index'
+  get '/admin/invoices', to: 'admin/admin_invoices#index'
+  get '/admin/invoices/:id', to: 'admin/admin_invoices#show'
+  get '/admin/merchants/:id', to: 'admin/admin_merchants#show'
+  get '/admin/merchants/:id/edit', to: 'admin/admin_merchants#edit'
+  patch '/admin/merchants/:id', to: 'admin/admin_merchants#update'
 
 end

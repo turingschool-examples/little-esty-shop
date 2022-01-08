@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin index page' do
+RSpec.describe 'Admin merchant index page' do
 
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks', status:1)}
   let!(:merchant_2) {Merchant.create!(name: 'Merchant 2', status: 1)}
@@ -22,7 +22,6 @@ RSpec.describe 'Admin index page' do
 
   it 'has button to enable merchant, if disabled' do
     visit '/admin/merchants'
-    save_and_open_page
     expect(page).to have_button("Disable Billys Pet Rocks")
     expect(page).to have_button("Disable Merchant 2")
 
@@ -50,6 +49,28 @@ RSpec.describe 'Admin index page' do
     expect(page).to have_button("Enable Merchant 2")
     expect(page).to_not have_button("Disable Merchant 2")
     # expect(merchant_2.status).to eq("disabled")
+  end
+
+  it 'separates enabled and disabled' do
+    visit '/admin/merchants'
+
+    within "#enabled" do
+      expect(page).to have_content(merchant_1.name)
+      expect(page).to have_content(merchant_2.name)
+
+      expect(page).to_not have_content(merchant_3.name)
+      expect(page).to_not have_content(merchant_4.name)
+      expect(page).to_not have_content(merchant_5.name)
+    end
+    within "#disabled" do
+      expect(page).to have_content(merchant_3.name)
+      expect(page).to have_content(merchant_4.name)
+      expect(page).to have_content(merchant_5.name)
+
+      expect(page).to_not have_content(merchant_1.name)
+      expect(page).to_not have_content(merchant_2.name)
+    end
+
   end
 
 end

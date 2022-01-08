@@ -28,7 +28,9 @@ class Item < ApplicationRecord
   end
 
   def best_selling_date
-    invoice_items.order('quantity*unit_price').first.created_at
+    invoice_items.order(Arel.sql('quantity*unit_price')).first.created_at
+    #Great caution should be taken to avoid SQL injection vulnerabilities.
+    #This method should not be used with unsafe values such as request parameters or model attributes.
   end
 
 end
