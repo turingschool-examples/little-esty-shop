@@ -66,7 +66,7 @@ RSpec.describe 'the admin invoice show page' do
     invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_4.id, quantity: 3, unit_price: 200, status: 'pending')
 
     visit "admin/invoices/#{invoice_1.id}"
-save_and_open_page
+
     expect(page).to have_content(item_1.name)
     expect(page).to have_content(item_2.name)
     expect(page).to have_content(item_3.name)
@@ -86,5 +86,15 @@ save_and_open_page
     expect(page).to have_content(invoice_item_7.status)
     expect(page).to have_content(invoice_item_8.status)
     expect(page).to have_content(invoice_item_9.status)
+  end
+
+  it 'displays total revenue for this invoice' do
+    invoice_item_7 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1, unit_price: 50, status: 'shipped')
+    invoice_item_8 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 2, unit_price: 150, status: 'packaged')
+    invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_4.id, quantity: 3, unit_price: 200, status: 'pending')
+
+    visit "admin/invoices/#{invoice_1.id}"
+
+    expect(page).to have_content('Total Revenue: 1000')
   end
 end
