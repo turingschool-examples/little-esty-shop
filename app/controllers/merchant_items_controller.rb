@@ -1,7 +1,8 @@
 class MerchantItemsController < ApplicationController
   def index
-    @merchant = Merchant.find(params[:merchant_id])
-    @items = @merchant.items
+    @merchant = Merchant.find(params[:id])
+    @enabled_items_array = @merchant.items.enabled_items
+    @disabled_items_array = @merchant.items.disabled_items
   end
 
   def show
@@ -16,19 +17,29 @@ class MerchantItemsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:merchant_id])
-    item = Item.find(params[:id])
-    item.update(item_params)
-    # flash[:notice] = "Item Successfully Updated"
-    # binding.pry
-    # if item.save
-    redirect_to "/merchants/#{merchant.id}/items/#{item.id}",  notice: "Item Successfully Updated"
-    # else
-    # end
+    item = Item.find(params[:item_id])
+    if params[:status]
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items"
+    else
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}",  notice: "Item Successfully Updated"
+    end
   end
 
-  private
-
-  def item_params
-    params.require(:item).permit(:name, :description, :unit_price)
+  def new
+    @merchant = Merchant.find(params[:id])
   end
+
+  def create
+    merchant = Merchant.find(params[:merchant_id])
+    item = merchant.items.create!(item_params)
+    redirect_to "/merchants/#{merchant.id}/items"
+  end
+
+    private
+
+    def item_params
+      params.permit(:name, :description, :unit_price, :status)
+    end
 end

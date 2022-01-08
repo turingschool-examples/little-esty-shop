@@ -29,9 +29,8 @@ RSpec.describe Invoice, type: :model do
       it 'organizes an invoices items by a given merchant' do
         merchant_1 = create(:merchant, name: 'Bob')
         invoice_1 = create(:invoice)
-        item_1 = create(:item_with_invoices, name: 'Toy', merchant: merchant_1, invoices: [invoice_1])
-        item_2 = create(:item_with_invoices, name: 'Car', merchant: merchant_1, invoices: [invoice_1])
-        item_3 = create(:item_with_invoices, name: 'Candy', invoices: [invoice_1])
+        item_1 = create(:item_with_invoices, invoice_count: 1, name: 'Toy', merchant: merchant_1, invoice: invoice_1)
+        item_2 = create(:item_with_invoices, invoice_count: 1, name: 'Car', merchant: merchant_1, invoice: invoice_1)
 
         expect(invoice_1.merchant_items(merchant_1)).to eq([item_1, item_2])
       end

@@ -25,23 +25,14 @@ RSpec.describe Merchant, type: :model do
 
   describe 'instance methods' do
     describe 'top_customers' do
-      it 'returns an array of the top customers based on the number of thier number completed invoices for the merchants items' do
+      it 'returns an array of the top customers based on the number of thier number completed transactions for the merchants items' do
         merchant = create(:merchant)
 
-        customer_1 = create(:customer, first_name: 'Bob')
-        customer_2 = create(:customer, first_name: 'John')
-        customer_3 = create(:customer, first_name: 'Abe')
-        customer_4 = create(:customer, first_name: 'Zach')
-        customer_5 = create(:customer, first_name: 'Charlie')
-
-        merchant_1 = create(:merchant_with_invoices, invoice_count: 6, customer: customer_1, invoice_status: 2)
-        merchant_2 = create(:merchant_with_invoices, invoice_count: 3, customer: customer_2, invoice_status: 2)
-        merchant_3 = create(:merchant_with_invoices, invoice_count: 8, customer: customer_3, invoice_status: 2)
-        merchant_4 = create(:merchant_with_invoices, invoice_count: 1, customer: customer_4, invoice_status: 2)
-        merchant_5 = create(:merchant_with_invoices, invoice_count: 4, customer: customer_5, invoice_status: 2)
-
-        #update all items to be under original merchant
-        Item.where(merchant_id: [merchant_1.id, merchant_2.id, merchant_3.id, merchant_4.id, merchant_5.id]).update(merchant: merchant)
+        customer_1 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 6, first_name: 'Bob')
+        customer_2 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 3, first_name: 'John')
+        customer_3 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 8, first_name: 'Abe')
+        customer_4 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 1, first_name: 'Zach')
+        customer_5 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 4, first_name: 'Charlie')
 
         expect(merchant.top_customers(1)).to eq([customer_3])
         expect(merchant.top_customers(2)).to eq([customer_3, customer_1])
@@ -58,6 +49,18 @@ RSpec.describe Merchant, type: :model do
           item_4 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 2)
 
           expect(merchant.items_ready_to_ship).to eq([item_1, item_2, item_3])
+        end
+
+        it "returns items in descending order based on created_at date" do
+          merchant = create(:merchant)
+          invoice_1 = create(:invoice, created_at: Date.new(2022, 4, 20))
+          invoice_2 = create(:invoice, created_at: Date.new(2022, 1, 12))
+          invoice_3 = create(:invoice, created_at: Date.new(2022, 3, 2))
+          item_1 = create(:item_with_invoices, merchant: merchant, invoices: [invoice_1])
+          item_2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice_2])
+          item_3 = create(:item_with_invoices, merchant: merchant, invoices: [invoice_3])
+
+          expect(merchant.items_ready_to_ship).to eq([item_2, item_3, item_1])
         end
       end
     end

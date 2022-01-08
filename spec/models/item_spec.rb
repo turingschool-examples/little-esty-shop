@@ -23,5 +23,25 @@ RSpec.describe Item, type: :model do
       invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
       expect(Item.invoice_finder(item1.merchant_id)).to eq [invoice1]
     end
+
+    it '#enabled_items' do
+      merchant = create(:merchant)
+      item1 = create(:item, merchant: merchant, name: "Paul")
+      item2 = create(:item, merchant: merchant, name: "Leland")
+      item3 = create(:item, merchant: merchant, name: "Josh", status: 1)
+      item4 = create(:item, merchant: merchant, name: "My mom", status: 1)
+
+      expect(Item.enabled_items).to eq([item3, item4])
+    end
+
+    it '#disabled_items' do
+      merchant = create(:merchant)
+      item1 = create(:item, merchant: merchant, name: "Paul")
+      item2 = create(:item, merchant: merchant, name: "Leland")
+      item3 = create(:item, merchant: merchant, name: "Josh", status: 1)
+      item4 = create(:item, merchant: merchant, name: "My mom", status: 1)
+
+      expect(merchant.items.disabled_items).to eq([item1, item2])
+    end
   end
 end
