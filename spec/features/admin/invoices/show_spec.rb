@@ -36,7 +36,7 @@ RSpec.describe 'Admin_Invoices Show Page' do
   it 'shows the price the item sold for' do
     merchant = create(:merchant)
     invoice = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], unit_price: 13000)
+    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 13000)
 
     visit "/admin/invoices/#{invoice.id}"
 

@@ -11,5 +11,6 @@
   <section id="invoice_<%=@invoice.id%>">
   <h3>Item: <%=invoice_item.item.name%></h3>
   <p>Quantity Ordered: <%=invoice_item.quantity%></p>
+  <p>Unit Price: <%=money_honey(invoice_item.unit_price)%></p>
   </section>
   <%end%>
