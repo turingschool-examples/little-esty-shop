@@ -46,6 +46,20 @@ describe 'merchant invoice show' do
           expect(page).to_not have_content(@item3)
         end
       end
+
+      it 'select update invoice item status' do
+        within "#invoice_item-#{@invoice_item2.id}" do
+          expect(find_field('invoice_item_status').value).to eq('pending')
+          select 'packaged'
+          click_button 'Update Invoice'
+        end
+        expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice1))
+
+        within "#invoice_item-#{@invoice_item1.id}" do
+          expect(find_field('invoice_item_status').value).to eq('packaged')
+          expect(page).to have_content('packaged')
+        end
+      end
     end
   end
 end

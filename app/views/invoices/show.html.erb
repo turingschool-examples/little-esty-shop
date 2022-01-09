@@ -14,5 +14,9 @@
     <p>Quantity: <%= invoice_item.quantity %></p>
     <p>Price: <%= number_to_currency(invoice_item.unit_price.fdiv(100)) %></p>
     <p>Status: <%= invoice_item.status %></p>
+    <p><%= form_with model: [@merchant, invoice_item], local: true do |f| %>
+      <%= f.select :status, InvoiceItem.statuses.keys, value: "#{@invoice.status}" %>
+      <%= f.submit 'Update Invoice' %>
+    <% end %>
   </div>
 <% end %>
