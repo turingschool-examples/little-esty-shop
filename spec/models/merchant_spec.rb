@@ -88,31 +88,27 @@ RSpec.describe Merchant, type: :model do
 
       @inv1 = @cust1.invoices.create!(status: 1)
       @tran1 = FactoryBot.create(:transaction, invoice: @inv1,  result: 1)
-      @tran2 = FactoryBot.create(:transaction, invoice: @inv1,  result: 1)
 
       @inv2 = @cust1.invoices.create!(status: 1)
-      @tran3 = FactoryBot.create(:transaction, invoice: @inv2,  result: 1)
-      @tran4 = FactoryBot.create(:transaction, invoice: @inv2,  result: 1)
+      @tran2 = FactoryBot.create(:transaction, invoice: @inv2,  result: 1)
 
       @inv3 = @cust2.invoices.create!(status: 1)
-      @tran7 = FactoryBot.create(:transaction, invoice: @inv3,  result: 1)
+      @tran3 = FactoryBot.create(:transaction, invoice: @inv3,  result: 1)
 
       @inv4 = @cust2.invoices.create!(status: 1)
-      @tran8 = FactoryBot.create(:transaction, invoice: @inv4,  result: 1)
+      @tran4 = FactoryBot.create(:transaction, invoice: @inv4,  result: 1)
 
       @inv5 = @cust3.invoices.create!(status: 1)
-      @tran9 = FactoryBot.create(:transaction, invoice: @inv5,  result: 1)
+      @tran5 = FactoryBot.create(:transaction, invoice: @inv5,  result: 1)
 
-      #edge cases below; needs result AND status BOTH must == 1
-      #need to create ii with these so they are edge cases
       @inv6 = @cust3.invoices.create!(status: 0)
-      @tran10 = FactoryBot.create(:transaction, invoice: @inv6,  result: 1)
+      @tran6 = FactoryBot.create(:transaction, invoice: @inv6,  result: 1)
 
       @inv7 = @cust3.invoices.create!(status: 1)
-      @tran11 = FactoryBot.create(:transaction, invoice: @inv7,  result: 0)
+      @tran7 = FactoryBot.create(:transaction, invoice: @inv7,  result: 0)
 
       @inv8 = @cust3.invoices.create!(status: 0)
-      @tran12 = FactoryBot.create(:transaction, invoice: @inv8,  result: 0)
+      @tran8 = FactoryBot.create(:transaction, invoice: @inv8,  result: 0)
 
       @item1 = FactoryBot.create(:item, merchant: @merch_1, unit_price: 100)
       @item2 = FactoryBot.create(:item, merchant: @merch_1, unit_price: 200)
@@ -124,29 +120,17 @@ RSpec.describe Merchant, type: :model do
       @item8 = FactoryBot.create(:item, merchant: @merch_2, unit_price: 10000)
 
       @ii_1 = InvoiceItem.create!(invoice: @inv1, item: @item7, quantity: 20, unit_price: 700, status: "pending")
-      #14000
       @ii_2 = InvoiceItem.create!(invoice: @inv1, item: @item5, quantity: 10, unit_price: 500, status: "pending")
-      #5000
       @ii_3 = InvoiceItem.create!(invoice: @inv2, item: @item7, quantity: 20, unit_price: 700, status: "pending")
-      #14000
       @ii_4 = InvoiceItem.create!(invoice: @inv2, item: @item5, quantity: 10, unit_price: 500, status: "pending")
-      #5000
       @ii_4 = InvoiceItem.create!(invoice: @inv2, item: @item1, quantity: 30, unit_price: 100, status: "pending")
-      #3000
       @ii_5 = InvoiceItem.create!(invoice: @inv3, item: @item4, quantity: 3, unit_price: 400, status: "pending")
-      #1200
       @ii_6 = InvoiceItem.create!(invoice: @inv3, item: @item1, quantity: 30, unit_price: 100, status: "pending")
-      #3000
       @ii_7 = InvoiceItem.create!(invoice: @inv3, item: @item2, quantity: 5, unit_price: 200, status: "pending")
-      #1000 - Item2 won't be in top 5
       @ii_8 = InvoiceItem.create!(invoice: @inv4, item: @item3, quantity: 5, unit_price: 300, status: "pending")
-      #1500
       @ii_9 = InvoiceItem.create!(invoice: @inv5, item: @item3, quantity: 5, unit_price: 300, status: "pending")
-      #1500
       @ii_10 = InvoiceItem.create!(invoice: @inv5, item: @item6, quantity: 1, unit_price: 600, status: "pending")
-      #600 - Item6 won't be in top 5
 
-      #edge cases!
       @ii_11 = InvoiceItem.create!(invoice: @inv6, item: @item6, quantity: 2000, unit_price: 600, status: "pending")
       @ii_12 = InvoiceItem.create!(invoice: @inv7, item: @item6, quantity: 2000, unit_price: 600, status: "pending")
       @ii_13 = InvoiceItem.create!(invoice: @inv8, item: @item6, quantity: 2000, unit_price: 600, status: "pending")
