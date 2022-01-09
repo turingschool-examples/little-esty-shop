@@ -1,9 +1,16 @@
 <h3>Invoice Id: <%= @invoice.id %> </h3>
-<h3>Invoice Status: <%= @invoice.status %> </h3>
+
+<h3>Invoice Status: <%= @invoice.status %></h3>
+
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+  <%= f.select(:invoice_status, options_for_select([['Cancelled', 0], ['In Progress', 1], ['Completed', 2]],Invoice.statuses[@invoice.status])) %>
+  <%= f.submit "Submit" %>
+<% end %>
+
 <h3>Created: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </h3>
 <h3>Customer First Name: <%= @invoice.customer.first_name %> </h3>
 <h3>Customer Last Name: <%= @invoice.customer.last_name %> </h3>
- 
+
 <p>Items: <% @invoice.invoice_items.each do |invoice_item| %>
   <p>Item: <%= invoice_item.item.name %></p>
   <p>Quantity: <%= invoice_item.quantity %></p>
@@ -11,3 +18,4 @@
   <p>Status: <%= invoice_item.status %></p>
   <% end %>
 </p>
+<p>Total Revenue: <%= @invoice.total_revenue %></p>
