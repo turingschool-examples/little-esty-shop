@@ -8,6 +8,7 @@
     <section id="invoice-<%=invoice.id%>">
       <p>
         <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %>
+        Created on: <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
       </p>
     </section>
   <% end %>
