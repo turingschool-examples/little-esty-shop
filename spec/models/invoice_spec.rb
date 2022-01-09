@@ -16,6 +16,8 @@ RSpec.describe Invoice, type: :model do
     before(:each) do
       @customer = FactoryBot.create(:customer, first_name: "Cookie", last_name: "Monster")
       @invoice = FactoryBot.create(:invoice, customer: @customer)
+      @item = FactoryBot.create(:item, status: "enabled")
+      @invoiceitem = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item, status: "pending")
     end
 
     describe 'pretty_created_at' do
@@ -27,6 +29,16 @@ RSpec.describe Invoice, type: :model do
     describe 'customer_name' do
       it 'outputs customer full name' do
         expect(@invoice.customer_name).to eq("Cookie Monster")
+      end
+    end
+
+    describe 'items_info' do
+      it 'shows invoice items with order info' do
+        first = @invoice.items_info.first
+        expect(first.name).to eq(@item.name)
+        expect(first.quantity).to eq(@invoiceitem.quantity)
+        expect(first.status).to eq(@invoiceitem.status)
+        expect(first.unit_price).to eq(@invoiceitem.unit_price)
       end
     end
   end
