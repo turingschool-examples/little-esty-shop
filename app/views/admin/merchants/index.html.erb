@@ -16,4 +16,13 @@
     <% end %>
   </div>
 
+  <section id="top_five_merchants">
+    <h3>Top Five Merchants</h3>
+      <ol>
+        <% @merchants.top_five_merchants.each do |merchant| %>
+          <li>Name: <%= merchant.name %> - <%= merchant.rev_count %></li>
+        <% end %>
+      </ol>
+  </section>
+
 <%= link_to "Add Merchant", '/admin/merchants/new', method: :get%>

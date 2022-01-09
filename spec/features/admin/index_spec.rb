@@ -118,6 +118,11 @@ RSpec.describe 'admin index page' do
     visit '/admin'
 
     within"#top_five_customers" do
+      expect(page).to have_content("Name: #{customer_1.full_name} - 6")
+      expect(page).to have_content("Name: #{customer_2.full_name} - 5")
+      expect(page).to have_content("Name: #{customer_3.full_name} - 4")
+      expect(page).to have_content("Name: #{customer_4.full_name} - 3")
+      expect(page).to have_content("Name: #{customer_5.full_name} - 2")
       expect(customer_1.full_name).to appear_before(customer_2.full_name)
       expect(customer_2.full_name).to appear_before(customer_3.full_name)
       expect(customer_3.full_name).to appear_before(customer_4.full_name)
