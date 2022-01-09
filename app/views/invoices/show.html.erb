@@ -1,0 +1,22 @@
+<h1>Invoice Number: <%= @invoice.id %></h1>
+
+<u><h2>Invoice Details</h2></u>
+<p>Status: <%= @invoice.status %></p>
+<p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer Name: <%= @invoice.customer.full_name %></p>
+<p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.fdiv(100)) %></p>
+
+<h2>Invoice Items:</h2>
+
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="invoice_item-<%= invoice_item.id %>">
+    <u><h3><%= invoice_item.item.name %></h3></u>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Price: <%= number_to_currency(invoice_item.unit_price.fdiv(100)) %></p>
+    <p>Status: <%= invoice_item.status %></p>
+    <p><%= form_with model: [@merchant, invoice_item], local: true do |f| %>
+      <%= f.select :status, InvoiceItem.statuses.keys, value: "#{@invoice.status}" %>
+      <%= f.submit 'Update Invoice' %>
+    <% end %>
+  </div>
+<% end %>
