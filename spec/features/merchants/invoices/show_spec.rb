@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant invoices show page' do
+
+  it 'visits merchant inoice shopw page and displays information of that invoice' do
+    merchant = Merchant.create!(name: 'merchant name')
+    customer = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
+    invoice = Invoice.create!(customer_id: customer.id, status: 'completed')
+
+    visit merchant_invoice_path(merchant, invoice)
+
+    within '.header' do
+      expect(page).to have_content(invoice.id)
+      expect(page).to have_content(invoice.status)
+      expect(page).to have_content(invoice.created_at.strftime("%A %B %m %Y"))
+      expect(page).to have_content(customer.first_name)
+      expect(page).to have_content(customer.last_name)
+    end
+  end
   it 'lists items for an invoice and their attributes' do
     merchant = Merchant.create!(name: 'merchant name')
     not_included_merchant = Merchant.create!(name: 'merchant name')
