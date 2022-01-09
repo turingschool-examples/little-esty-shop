@@ -20,7 +20,7 @@
     <h3>Top Five Merchants</h3>
       <ol>
         <% @merchants.top_five_merchants.each do |merchant| %>
-          <li>Name: <%= merchant.name %> - <%= merchant.rev_count %></li>
+          <li>Merchant: <%= merchant.name %> - <%= merchant.rev_count %></li>
         <% end %>
       </ol>
   </section>

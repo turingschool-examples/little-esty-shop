@@ -86,42 +86,41 @@ RSpec.describe 'admin merchants index page' do
     item_1 = create(:item, merchant_id: merchant_1.id)
     customer_1 = create(:customer)
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
-    transaction_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: invoice_1.id)
+    transaction_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: invoice_1.id, result: 0)
     invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, status: 2, quantity: 1, unit_price: 5)
 
     merchant_2 = Merchant.create!(name: 'John')
     item_2 = create(:item, merchant_id: merchant_2.id)
     invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 2)
-    transaction_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: invoice_2.id)
+    transaction_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: invoice_2.id, result: 0)
     invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_2.id, status: 2, quantity: 1, unit_price: 5)
 
     merchant_3 = Merchant.create!(name: 'Jim')
     item_3 = create(:item, merchant_id: merchant_3.id)
     invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 2)
-    transaction_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: invoice_3.id)
+    transaction_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: invoice_3.id, result: 0)
     invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_3.id, status: 2, quantity: 1, unit_price: 5)
 
     merchant_4 = Merchant.create!(name: 'Ben')
     item_4 = create(:item, merchant_id: merchant_4.id)
     invoice_4 = Invoice.create!(customer_id: customer_1.id, status: 2)
-    transaction_list_4 = FactoryBot.create_list(:transaction, 3, invoice_id: invoice_4.id)
+    transaction_list_4 = FactoryBot.create_list(:transaction, 3, invoice_id: invoice_4.id, result: 0)
     invoice_item_4 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_4.id, status: 2, quantity: 1, unit_price: 5)
 
     merchant_5 = Merchant.create!(name: 'Josh')
     item_5 = create(:item, merchant_id: merchant_5.id)
     invoice_5 = Invoice.create!(customer_id: customer_1.id, status: 2)
-    transaction_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: invoice_5.id)
+    transaction_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: invoice_5.id, result: 0)
     invoice_item_5 = create(:invoice_item, item_id: item_5.id, invoice_id: invoice_5.id, status: 2, quantity: 1, unit_price: 5)
 
     merchant_6 = Merchant.create!(name: 'Rob')
     item_6 = create(:item, merchant_id: merchant_6.id)
     item_7 = create(:item, merchant_id: merchant_6.id)
     invoice_6 = Invoice.create!(customer_id: customer_1.id, status: 2)
-    transaction_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: invoice_6.id)
+    transaction_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: invoice_6.id, result: 0)
     invoice_item_6 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_6.id, status: 2, quantity: 1, unit_price: 5)
     invoice_item_7 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_6.id, status: 1, quantity: 1)
     visit '/admin/merchants'
-    save_and_open_page
     within"#top_five_merchants" do
       expect(page).to have_content("Merchant: #{merchant_1.name} - 30")
       expect(page).to have_content("Merchant: #{merchant_2.name} - 25")
