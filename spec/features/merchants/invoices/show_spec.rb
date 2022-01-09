@@ -7,6 +7,8 @@ RSpec.describe 'merchants invoice show page' do
     merchant1 = create(:merchant, name: "Bob Barker")
     customer_1 = create(:customer, first_name: "Eric", last_name: "Mielke")
     invoice1 = create(:invoice, customer: customer_1)
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy', invoice_item_unit_price: 15000)
+
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -49,7 +51,7 @@ RSpec.describe 'merchants invoice show page' do
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     within("#invoice_#{item.id}") do
-      expect(page).to have_content("Unit Price: $150.0")
+      expect(page).to have_content("Unit Price: $150.00")
     end
   end
 
@@ -82,13 +84,13 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the total revenue that will be generated from the invoice' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 15000)
-    item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 20000)
+    item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 150000)
+    item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 200000)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     expect(page).to have_content("Total Potential Revenue")
-    expect(page).to have_content("$350.0")
+    expect(page).to have_content("$3,500.00")
   end
 
   it 'displays an invoices status as a select form' do
