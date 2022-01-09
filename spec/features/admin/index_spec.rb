@@ -115,16 +115,15 @@ RSpec.describe 'admin index page' do
     invoice_6 = create(:invoice, customer_id: customer_6.id, created_at: "2012-03-25 09:54:09 UTC")
     invoice_item_6 = create(:invoice_item, item_id: item.id, invoice_id: invoice_6.id, status: 2)
     transactions_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: invoice_6.id, result: 0)
-    require "pry"; binding.pry
     visit '/admin'
 
     within"#top_five_customers" do
-      expect(customer_1.name).to appear_before(customer_2.name)
-      expect(customer_2.name).to appear_before(customer_3.name)
-      expect(customer_3.name).to appear_before(customer_4.name)
-      expect(customer_4.name).to appear_before(customer_5.name)
-      expect(page).to have_content(customer_5.name)
-      expect(page).to_not have_content(customer_6.name)
+      expect(customer_1.full_name).to appear_before(customer_2.full_name)
+      expect(customer_2.full_name).to appear_before(customer_3.full_name)
+      expect(customer_3.full_name).to appear_before(customer_4.full_name)
+      expect(customer_4.full_name).to appear_before(customer_5.full_name)
+      expect(page).to have_content(customer_5.full_name)
+      expect(page).to_not have_content(customer_6.full_name)
     end
   end
 
