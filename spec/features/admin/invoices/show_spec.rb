@@ -19,7 +19,6 @@ RSpec.describe 'admin invoice show page' do
     @invoiceitem5 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item3)
     @invoiceitem6 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item4)
 
-
     visit "/admin/invoices/#{@invoice.id}"
   end
 
