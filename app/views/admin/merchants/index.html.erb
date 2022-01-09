@@ -1,4 +1,18 @@
 <h1>Merchants</h1>
-<% @merchants.each do |merchant| %>
-<%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%>
+
+<% @merchants.enabled.each do |merchant| %>
+  <section id="merchant-<%=merchant.id%>">
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%>
+      status: <%= merchant.merchant_status %>
+      <%= button_to "Disable", admin_merchant_path(merchant), method: :patch, params: {merchant_status: :disabled} %>
+  </section>
+<% end %>
+<% @merchants.disabled.each do |merchant| %>
+  <section id="merchant-<%=merchant.id%>">
+    <p>
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%>
+      status: <%= merchant.merchant_status %>
+      <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, params: {merchant_status: :enabled} %>
+    </p>
+  </section>
 <% end %>
