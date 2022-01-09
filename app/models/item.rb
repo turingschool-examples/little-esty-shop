@@ -11,4 +11,8 @@ class Item < ApplicationRecord
   # }
 
   enum status: [:disabled, :enabled]
+
+  def date_created
+    invoices.first.created_at.strftime("%A, %B %-d, %Y")
+  end
 end

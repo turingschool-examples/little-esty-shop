@@ -13,9 +13,11 @@
 </div>
 
 <h2>Items Ready To Ship</h2>
-<div id="merchant-items">
+  <!-- <div id="Items-Ready-To-Ship"> -->
   <% @merchant.ready_items.each do |item| %>
-    <p><%= item.name %>
-    <%= link_to item.invoices.first.id, "/merchants/#{@merchant.id}/invoices" %></p>
+    <p><div id="merchants-item-<%= item.name %>">
+      <%= item.name %>
+      <%= link_to item.invoices.first.id, "/merchants/#{@merchant.id}/invoices" %>
+      <%= item.date_created %>
+    </div></p>
   <% end %>
-</div>
