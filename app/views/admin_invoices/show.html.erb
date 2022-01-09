@@ -7,8 +7,9 @@
 </h3>
 
 <h2><%=@invoice.id%>'s Items</h2>
-<%@invoice.items.each do |item| %>
+<%@invoice.invoice_items.each do |invoice_item| %>
   <section id="invoice_<%=@invoice.id%>">
-  <h3>Item: <%=item.name%></h3>
+  <h3>Item: <%=invoice_item.item.name%></h3>
+  <p>Quantity Ordered: <%=invoice_item.quantity%></p>
   </section>
   <%end%>

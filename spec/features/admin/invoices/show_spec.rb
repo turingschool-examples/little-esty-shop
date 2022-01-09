@@ -26,12 +26,14 @@ RSpec.describe 'Admin_Invoices Show Page' do
   it 'shows the quantity of the item ordered' do
     merchant = create(:merchant)
     invoice = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], quantity: 12)
+    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_quantity: 12)
+
     visit "/admin/invoices/#{invoice.id}"
+
     expect(page).to have_content("Quantity Ordered: 12")
   end
 
-  xit 'shows the price the item sold for' do
+  it 'shows the price the item sold for' do
     merchant = create(:merchant)
     invoice = create(:invoice)
     item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], unit_price: 13000)
