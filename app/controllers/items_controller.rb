@@ -24,9 +24,13 @@ class ItemsController < ApplicationController
   end
 
   def create 
-    item = Item.create(name: params[:name], description: params[:description], unit_price: params[:unit_price], merchant_id: params[:merchant_id], status: params[:status])
+    item = Item.create(item_params)
     merchant = Merchant.find(params[:merchant_id])
-    item.save 
     redirect_to merchant_items_path(merchant.id)
+  end
+
+  private
+  def item_params
+    params.permit(:name, :description, :unit_price, :merchant_id, :status)    
   end
 end
