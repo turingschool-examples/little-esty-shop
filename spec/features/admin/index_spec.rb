@@ -82,10 +82,33 @@ RSpec.describe 'admin index page' do
   end
 
   it 'I see the names of the top 5 customers who have conducted successful transactions' do
-    merchant_1 = create :merchant
-    merchant_2 = create :merchant
-    item_1 = create :item, { merchant_id: merchant_1.id }
-    created_transactions = FactoryBot.create_list(:transaction, 30)
+    merchant_1 = create(:merchant)
+    item = create(:item, merchant_id: merchant_1.id)
+    # customer 1, 6 succesful transactions and 1 failed
+    customer_1 = create(:customer)
+    invoice_1 = create(:invoice, customer_id: customer_1.id, created_at: "2012-03-25 09:54:09 UTC")
+    invoice_item_1 = create(:invoice_item, item_id: item.id, invoice_id: invoice_1.id, status: 2)
+    transaction_1 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_2 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_3 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_4 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_5 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_6 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    # failed
+    transaction_7 = create(:transaction, invoice_id: invoice_1.id, result: 1)
+    #customer 2, 5 succesfull trasnactions
+    customer_2 = create(:customer)
+    invoice_2 = create(:invoice, customer_id: customer_1.id, created_at: "2012-03-25 09:54:09 UTC")
+    invoice_item_2 = create(:invoice_item, item_id: item.id, invoice_id: invoice_1.id, status: 2)
+    transaction_8 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_9 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_10 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_11 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_12 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+    transaction_13 = create(:transaction, invoice_id: invoice_1.id, result: 0)
+
+    transactions = FactoryBot.create_list(:transaction, 6), { invoice_id: invoice_1.id, result: 0 }
     require "pry"; binding.pry
   end
+
 end

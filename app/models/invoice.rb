@@ -10,6 +10,10 @@ class Invoice < ApplicationRecord
     invoice_items.where(status: [0, 1])
   end
 
+  def completed_invoices
+    invoice_items.where(status: [2]) # = shipped 
+  end
+
   def self.ordered_invoices
     order(created_at: :asc)
   end
