@@ -5,3 +5,10 @@
     Created On:<%= @invoice.created_at.strftime("%A, %B %d, %Y")%><br>
     Customer: <%=@invoice.customer_name%><br>
 </h3>
+
+<h2><%=@invoice.id%>'s Items</h2>
+<%@invoice.items.each do |item| %>
+  <section id="invoice_<%=@invoice.id%>">
+  <h3>Item: <%=item.name%></h3>
+  </section>
+  <%end%>
