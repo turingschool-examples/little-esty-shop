@@ -20,11 +20,11 @@ RSpec.describe 'Merchant Dashboard' do
     @customer_5 = FactoryBot.create(:customer)
     @customer_6 = FactoryBot.create(:customer)
 
-    @invoice_1 = FactoryBot.create(:invoice, customer: @customer_1, status: "in progress")
-    @invoice_2 = FactoryBot.create(:invoice, customer: @customer_2, status: "in progress")
-    @invoice_3 = FactoryBot.create(:invoice, customer: @customer_3, status: "in progress")
-    @invoice_4 = FactoryBot.create(:invoice, customer: @customer_4, status: "in progress")
-    @invoice_5 = FactoryBot.create(:invoice, customer: @customer_5, status: "in progress")
+    @invoice_1 = FactoryBot.create(:invoice, customer: @customer_1, status: "in progress", created_at: "Sun, 09 Jan 2022 01:18:59 UTC +00:00")
+    @invoice_2 = FactoryBot.create(:invoice, customer: @customer_2, status: "in progress", created_at: "Sun, 09 Jan 2022 01:19:59 UTC +00:00")
+    @invoice_3 = FactoryBot.create(:invoice, customer: @customer_3, status: "in progress", created_at: "Sun, 09 Jan 2022 01:20:59 UTC +00:00")
+    @invoice_4 = FactoryBot.create(:invoice, customer: @customer_4, status: "in progress", created_at: "Sun, 09 Jan 2022 01:21:59 UTC +00:00")
+    @invoice_5 = FactoryBot.create(:invoice, customer: @customer_5, status: "in progress", created_at: "Sun, 09 Jan 2022 01:22:59 UTC +00:00")
 
     @transaction_1 = FactoryBot.create(:transaction, invoice: @invoice_1, result: "success")
     @transaction_2 = FactoryBot.create(:transaction, invoice: @invoice_1, result: "success")
@@ -94,7 +94,7 @@ RSpec.describe 'Merchant Dashboard' do
     end
 
     within "#customer-#{@customer_5.first_name}" do
-      expect(page).to have_content(3)
+      expect(page).to have_content(2)
     end
 
     within "#customer-#{@customer_3.first_name}" do
@@ -106,20 +106,71 @@ RSpec.describe 'Merchant Dashboard' do
     expect(page).to have_content("Items Ready To Ship")
   end
 
-  it 'lists the items that have been ordered but not shipped with the invoice id, as a link, next to them' do
-    within "#merchant-items" do
+  it 'lists the item names of those that have been ordered but not shipped'  do # with the invoice id, as a link, next to them'
+    within "#merchants-item-#{@item3.name}" do
       expect(page).to have_content(@item3.name)
-      expect(page).to have_content(@item3.invoices.first.id)
 
-      expect(page).to have_content(@item4.name)
-      expect(page).to have_content(@item4.invoices.first.id)
-
-      expect(page).to have_content(@item5.name)
-      expect(page).to have_content(@item5.invoices.first.id)
-      # edge cases
+      expect(page).to_not have_content(@item4.name)
+      expect(page).to_not have_content(@item5.name)
       expect(page).to_not have_content(@item.name)
       expect(page).to_not have_content(@item2.name)
       expect(page).to_not have_content(@item6.name)
     end
+
+    within "#merchants-item-#{@item4.name}" do
+      expect(page).to have_content(@item4.name)
+
+      expect(page).to_not have_content(@item3.name)
+      expect(page).to_not have_content(@item5.name)
+      expect(page).to_not have_content(@item.name)
+      expect(page).to_not have_content(@item2.name)
+      expect(page).to_not have_content(@item6.name)
+    end
+
+    within "#merchants-item-#{@item5.name}" do
+      expect(page).to have_content(@item5.name)
+
+      expect(page).to_not have_content(@item3.name)
+      expect(page).to_not have_content(@item4.name)
+      expect(page).to_not have_content(@item.name)
+      expect(page).to_not have_content(@item2.name)
+      expect(page).to_not have_content(@item6.name)
+    end
+  end
+
+  it 'has the invoice id as a link next to the item name' do
+    within "#merchants-item-#{@item3.name}" do
+      expect(page).to have_content(@item3.invoices.first.id)
+      expect(page).to have_link(@item3.invoices.first.id, href: "/merchants/#{@merchant.id}/invoices")
+    end
+
+    within "#merchants-item-#{@item4.name}" do
+      expect(page).to have_content(@item4.invoices.first.id)
+      expect(page).to have_link(@item4.invoices.first.id, href: "/merchants/#{@merchant.id}/invoices")
+    end
+
+    within "#merchants-item-#{@item5.name}" do
+      expect(page).to have_content(@item5.invoices.first.id)
+      expect(page).to have_link(@item5.invoices.first.id, href: "/merchants/#{@merchant.id}/invoices")
+    end
+  end
+
+  it 'has the date of the invoice creation next to each item' do
+    within "#merchants-item-#{@item3.name}" do
+      expect(page).to have_content(@item3.invoices.first.created_at.strftime("%A, %B %-d, %Y"))
+    end
+
+    within "#merchants-item-#{@item4.name}" do
+      expect(page).to have_content(@item4.invoices.first.created_at.strftime("%A, %B %-d, %Y"))
+    end
+
+    within "#merchants-item-#{@item5.name}" do
+      expect(page).to have_content(@item5.invoices.first.created_at.strftime("%A, %B %-d, %Y"))
+    end
+  end
+
+  it 'lists the items from oldest to newest by invoice' do
+    expect(@item3.name).to appear_before(@item4.name)
+    expect(@item4.name).to appear_before(@item5.name)
   end
 end

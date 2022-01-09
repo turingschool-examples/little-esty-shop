@@ -24,6 +24,7 @@ class Merchant < ApplicationRecord
       .where(invoice_items: {status: "packaged"})
       .select(:name, :id)
       .limit(5)
+      .order(:created_at)
   end
 
   def top_items

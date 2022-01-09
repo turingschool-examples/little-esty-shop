@@ -4,6 +4,6 @@ class Customer < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   def transaction_count
-    transactions.count
+    transactions.where('result = 1').count
   end
 end
