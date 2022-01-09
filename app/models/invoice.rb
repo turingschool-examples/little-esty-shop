@@ -18,7 +18,11 @@ class Invoice < ApplicationRecord
     InvoiceItem.joins(:item).where( items: {merchant_id: merchant.id})
   end
 
-  def potential_revenue(merchant)
-    merchant_invoice_items(merchant).sum(:unit_price)
+  def potential_revenue
+    
+  end
+
+  def potential_revenue_by_merchant(merchant)
+    merchant_invoice_items(merchant).potential_revenue
   end
 end
