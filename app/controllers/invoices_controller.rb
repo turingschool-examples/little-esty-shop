@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
   before_action :do_merchant, only: [:index, :show]
 
   def index
-    @invoices = @merchant.invoices
+    @invoices = @merchant.invoices.distinct
   end
 
   def show
