@@ -30,4 +30,16 @@ describe 'merchant invoice show' do
       expect(page).to_not have_content(@invoice2)
     end
   end
+
+  describe 'invoice items' do
+    it 'lists all invoice item names, quantity, price and status' do
+      within "#invoice_item-#{@invoice_item1.id}" do
+        expect(page).to have_content(@invoice_item1.item.name)
+        expect(page).to have_content(@invoice_item1.quantity)
+        expect(page).to have_content(@invoice_item1.unit_price)
+        expect(page).to have_content(@invoice_item1.status)
+        expect(page).to_not have_content(@item3)
+      end
+    end
+  end 
 end
