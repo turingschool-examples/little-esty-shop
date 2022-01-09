@@ -13,9 +13,9 @@ RSpec.describe 'merchant items show page' do
   let!(:invoice_item_3) {FactoryBot.create(:invoice_item, item: item_3)}
 
   it 'displays invoice attributes' do 
-    visit "merchants/#{merchant_1.id}/invoices/#{invoice_item_1.id}"
+    visit "merchants/#{merchant_1.id}/invoices/#{invoice_item_1.invoice.id}"
     
-    expect(page).to have_content(invoice_item_1.id)
+    expect(page).to have_content(invoice_item_1.invoice.id)
     expect(page).to have_content(invoice_item_1.invoice.status)
     expect(page).to have_content(invoice_item_1.created_at.strftime("%A, %B %d, %Y"))
     expect(page).to have_content("Customer Name: #{invoice_item_1.invoice.customer.first_name} #{invoice_item_1.invoice.customer.last_name}")
