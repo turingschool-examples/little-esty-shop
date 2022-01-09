@@ -5,6 +5,38 @@ RSpec.describe 'Admin Merchants Index' do
   let!(:merchant_2) {Merchant.create!(name: 'Leslie Knope', status: 0)}
   let!(:merchant_3) {Merchant.create!(name: 'Oprah Winfrey', status: 0)}
   let!(:merchant_4) {Merchant.create!(name: 'Leonardo Dicaprio')}
+  let!(:merchant_5) {Merchant.create!(name: 'Steve Carell')}
+  let!(:merchant_6) {Merchant.create!(name: 'Jenna Fischer')}
+
+  let!(:item_1) {merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000, status: 0)}
+  let!(:item_2) {merchant_2.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900, status: 0)}
+  let!(:item_3) {merchant_3.items.create!(name: "Earrings", description: "These go through your ears", unit_price: 1500, status: 1)}
+  let!(:item_4) {merchant_4.items.create!(name: "Ring", description: "A thing around your finger", unit_price: 1000)}
+  let!(:item_5) {merchant_5.items.create!(name: "Toe Ring", description: "A thing around your neck", unit_price: 800)}
+  let!(:item_6) {merchant_6.items.create!(name: "Pendant", description: "A thing to put somewhere", unit_price: 1500)}
+
+  let!(:customer_1) {Customer.create!(first_name: "Billy", last_name: "Joel")}
+
+  let!(:invoice_1) {customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')}
+  let!(:invoice_2) {customer_1.invoices.create!(status: 1, created_at: '2012-04-25 08:54:09')}
+  let!(:invoice_3) {customer_1.invoices.create!(status: 1, created_at: '2012-10-25 04:54:09')}
+  let!(:invoice_4) {customer_1.invoices.create!(status: 1, created_at: '2012-03-26 01:54:09')}
+  let!(:invoice_5) {customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')}
+  let!(:invoice_6) {customer_1.invoices.create!(status: 1, created_at: '2012-03-29 07:54:09')}
+
+  let!(:invoice_item_1)  {InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 1000, quantity: 1, status: 0)}
+  let!(:invoice_item_2)  {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, unit_price: 1000, quantity: 13, status: 0)}
+  let!(:invoice_item_3)  {InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, unit_price: 1000, quantity: 2, status: 0)}
+  let!(:invoice_item_4)  {InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, unit_price: 1000, quantity: 4, status: 1)}
+  let!(:invoice_item_5)  {InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, unit_price: 1000, quantity: 20, status: 1)}
+  let!(:invoice_item_6)  {InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, unit_price: 1000, quantity: 7, status: 2)}
+
+  let!(:transaction_1) {invoice_1.transactions.create!(result: 'success')}
+  let!(:transaction_2) {invoice_2.transactions.create!(result: 'success')}
+  let!(:transaction_3) {invoice_3.transactions.create!(result: 'success')}
+  let!(:transaction_4) {invoice_4.transactions.create!(result: 'success')}
+  let!(:transaction_5) {invoice_5.transactions.create!(result: 'success')}
+  let!(:transaction_6) {invoice_6.transactions.create!(result: 'success')}
 
   before(:each) do
    visit admin_merchants_path
@@ -85,4 +117,73 @@ RSpec.describe 'Admin Merchants Index' do
       expect(page).to have_content('Newest Merchant')
     end
   end
+
+  scenario 'visitor sees list of top 5 merchants ordered by total revenue' do
+    first = find("#merchant#{merchant_5.id}")
+    second = find("#merchant#{merchant_2.id}")
+    third = find("#merchant#{merchant_6.id}")
+    fourth = find("#merchant#{merchant_4.id}")
+    fifth = find("#merchant#{merchant_3.id}")
+    expect(first).to appear_before(second)
+    expect(second).to appear_before(third)
+    expect(third).to appear_before(fourth)
+    expect(fourth).to appear_before(fifth)
+  end
+
+  scenario 'visitor sees the top 5 merchant names as links to their respective show pages' do
+    within "#merchant#{merchant_5.id}" do
+      expect(page).to have_link("#{merchant_5.name}", href: admin_merchant_path(merchant_5.id))
+    end
+
+    within "#merchant#{merchant_2.id}" do
+      expect(page).to have_link("#{merchant_2.name}", href: admin_merchant_path(merchant_2.id))
+    end
+
+    within "#merchant#{merchant_6.id}" do
+      expect(page).to have_link("#{merchant_6.name}", href: admin_merchant_path(merchant_6.id))
+    end
+
+    within "#merchant#{merchant_4.id}" do
+      expect(page).to have_link("#{merchant_4.name}", href: admin_merchant_path(merchant_4.id))
+    end
+
+    within "#merchant#{merchant_3.id}" do
+      expect(page).to have_link("#{merchant_3.name}", href: admin_merchant_path(merchant_3.id))
+    end
+  end
+
+  scenario 'visitor sees the total_revenue generated next to each merchant name' do
+    within "#merchant#{merchant_5.id}" do
+      expect(page).to have_content(Merchant.top_five.first.total_revenue)
+    end
+
+    within "#merchant#{merchant_2.id}" do
+      expect(page).to have_content(Merchant.top_five[1].total_revenue)
+    end
+
+    within "#merchant#{merchant_6.id}" do
+      expect(page).to have_content(Merchant.top_five[2].total_revenue)
+    end
+
+    within "#merchant#{merchant_4.id}" do
+      expect(page).to have_content(Merchant.top_five[3].total_revenue)
+    end
+
+    within "#merchant#{merchant_3.id}" do
+      expect(page).to have_content(Merchant.top_five[4].total_revenue)
+    end
+  end
 end
+
+# As an admin,
+# When I visit the admin merchants index
+# Then I see the names of the top 5 merchants by total revenue generated
+# And I see that each merchant name links to the admin merchant show page for that merchant
+# And I see the total revenue generated next to each merchant name
+#
+# Notes on Revenue Calculation:
+#
+# Only invoices with at least one successful transaction should count towards revenue
+# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+# sum(invoice_item.unit_price * invoice_item.quantity)
