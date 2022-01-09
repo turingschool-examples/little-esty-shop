@@ -7,7 +7,7 @@ class Invoice < ApplicationRecord
   enum status: ["in progress", "completed", "cancelled"]
 
   def self.merchants_invoices(merchant)
-    joins(:invoice_items, :items).where(items: { merchant_id: merchant.id })
+    joins(:invoice_items, :items).where(items: { merchant_id: merchant.id }).distinct(:invoice_id)
   end
 
   def total_revenue
