@@ -19,3 +19,13 @@
   </div>
 <% end %>
 </section>
+
+<h3>Top Merchants</h3>
+<ol>
+<% @merchants.top_five.each do |merchant| %>
+  <div id="merchant<%=merchant.id%>">
+    <li><%=link_to merchant.name, admin_merchant_path(merchant.id)%> - <%= merchant.total_revenue %> in sales <br>
+  Top day for <%= merchant.name %> was </li>
+  </div>
+<% end %>
+</ol>

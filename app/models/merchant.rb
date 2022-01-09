@@ -38,4 +38,13 @@ class Merchant < ApplicationRecord
   def self.enabled
     where(status: 0)
   end
+
+  def self.top_five
+    joins(invoices: :transactions)
+    .where('transactions.result = ?', 'success')
+    .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .group(:id)
+    .order(total_revenue: :desc)
+    .limit(5)
+  end
 end
