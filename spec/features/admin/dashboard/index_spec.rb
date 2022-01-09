@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard Page' do
-  before :each do 
+  before :each do
     @merchant_1 = Merchant.create!(name: 'Ron Swanson')
 
     @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100, status: 0)
@@ -96,19 +96,19 @@ RSpec.describe 'Admin Dashboard Page' do
     @transaction_20 = @invoice_20.transactions.create!(result: 'success')
 
     visit admin_dashboard_index_path
-  end 
+  end
 
-  scenario 'visitor sees a header' do 
+  scenario 'visitor sees a header' do
     expect(page).to have_content("Admin Dashboard")
   end
 
-  scenario 'visitor sees a link to the admin merchant index page' do 
+  scenario 'visitor sees a link to the admin merchant index page' do
     expect(page).to have_link("Merchants", href: admin_merchants_path)
-  end 
-  
-  scenario 'visitor sees a link to the admin invoices index page' do 
+  end
+
+  scenario 'visitor sees a link to the admin invoices index page' do
     expect(page).to have_link("Invoices", href: admin_invoices_path)
-  end 
+  end
 
   scenario 'visitor sees top 5 customers' do
     expect(page).to have_content(@customer_1.first_name)
@@ -139,6 +139,32 @@ RSpec.describe 'Admin Dashboard Page' do
 
     within "#customer#{Customer.top_5[4].id}" do
       expect(page).to have_content(Customer.top_5[4].transaction_count)
-    end 
+    end
   end
-end 
+
+  describe 'incomplete invoices section' do
+    scenario 'admin sees section for incomplete invoices' do
+      expect(page).to have_content('Incomplete Invoices')
+    end
+
+    scenario 'incomplete invoices show all invoice ids with items that have not been shipped' do
+      within "#incomplete-invoices" do
+        expect(page).to have_content(@invoice_1.id)
+        expect(page).to have_content(@invoice_2.id)
+        expect(page).to have_content(@invoice_3.id)
+        expect(page).to have_content(@invoice_4.id)
+        expect(page).to have_content(@invoice_5.id)
+      end
+    end
+
+    scenario 'each invoice id links to the invoice admin show' do
+      within "#incomplete-invoices" do
+        expect(page).to have_link("#{@invoice_1.id}", href: admin_invoice_path(@invoice_1.id))
+        expect(page).to have_link("#{@invoice_2.id}", href: admin_invoice_path(@invoice_2.id))
+        expect(page).to have_link("#{@invoice_3.id}", href: admin_invoice_path(@invoice_3.id))
+        expect(page).to have_link("#{@invoice_4.id}", href: admin_invoice_path(@invoice_4.id))
+        expect(page).to have_link("#{@invoice_5.id}", href: admin_invoice_path(@invoice_5.id))
+      end
+    end
+  end
+end
