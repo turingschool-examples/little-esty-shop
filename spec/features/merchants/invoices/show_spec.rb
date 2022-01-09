@@ -94,6 +94,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
         expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
         expect(page).to have_field('Status', with: 'enabled')
+
       end
     end
   end
