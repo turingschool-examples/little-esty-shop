@@ -29,4 +29,8 @@ class Merchant < ApplicationRecord
   def filter_item_status(status_enum)
     items.where(status: status_enum)
   end
+
+  def self.filter_merchant_status(status_enum)
+    where(status: status_enum)
+  end
 end
