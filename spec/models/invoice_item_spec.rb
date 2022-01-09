@@ -19,10 +19,22 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe 'instance methods' do
-    describe 'potential_revenue' do
+    describe 'revenue' do
       it "multiplies unit_price and quantity" do
         invoice_item = create(:invoice_item, quantity: 3, unit_price: 1000)
-        expect(invoice_item.potential_revenue).to eq(3000)
+        expect(invoice_item.revenue).to eq(3000)
+      end
+    end
+  end
+
+  describe 'class methods' do
+    describe 'revenue' do
+      it "multiplies unit_price and quantity for a collection of invoice_items and sums them" do
+        invoice_item_1 = create(:invoice_item, quantity: 3, unit_price: 1000)
+        invoice_item_2 = create(:invoice_item, quantity: 5, unit_price: 1000)
+        invoice_item_3 = create(:invoice_item, quantity: 1, unit_price: 1000)
+        invoice_items = [invoice_item_1, invoice_item_2, invoice_item_3]
+        expect(.revenue).to eq(9000)
       end
     end
   end
