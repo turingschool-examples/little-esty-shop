@@ -12,9 +12,9 @@ RSpec.describe 'admin invoice show page' do
     @item4 = FactoryBot.create(:item)
     @item5 = FactoryBot.create(:item)
 
-    @invoiceitem = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item, unit_price: 1300)
-    @invoiceitem2 = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item2, unit_price: 1400)
-    @invoiceitem3 = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item3, unit_price: 1500)
+    @invoiceitem = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item, unit_price: 1300, status: "pending" )
+    @invoiceitem2 = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item2, unit_price: 1400, status: "pending")
+    @invoiceitem3 = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item3, unit_price: 1500, status: "pending")
     @invoiceitem4 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item2)
     @invoiceitem5 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item3)
     @invoiceitem6 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item4)
