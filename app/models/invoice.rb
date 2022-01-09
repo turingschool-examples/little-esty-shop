@@ -4,6 +4,9 @@ class Invoice < ApplicationRecord
   belongs_to :customer
   has_many :transactions
 
+  validates_presence_of :status,
+                        :customer_id
+
   enum status: [:cancelled, :completed, 'in progress']
 
   def incomplete_invoices
