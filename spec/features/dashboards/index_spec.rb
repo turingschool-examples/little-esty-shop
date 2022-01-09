@@ -53,7 +53,7 @@ RSpec.describe 'merchant dashboard page', type: :feature do
   let!(:transactions_11) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240011", credit_card_expiration_date: "0011", result: 2)}
   let!(:transactions_12) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 1)}
 
-  before(:each) { visit merchant_dashboards_path(merch_1) }
+  before(:each) { visit merchant_dashboard_index_path(merch_1) }
 
   describe 'as a user' do
     describe 'view elements' do
