@@ -31,6 +31,19 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def top_date
+    invoices
+    .joins(:transactions)
+    .where('transactions.result = ?', 'success')
+    .select('invoices.*, invoices.created_at as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .group(:id)
+    .order(total_revenue: :desc)
+    .order(invoice_date: :desc)
+    .first
+    .invoice_date
+    .strftime("%m/%d/%y")
+  end
+
   def self.disabled
     where(status: 1)
   end
