@@ -7,5 +7,7 @@
 
 <div class="incomplete invoices">
   <p>Incomplete Invoices</p>
-  
+  <% @invoices.incomplete_invoices.each do |invoice| %>
+  <p><%= invoice.id %></p>
+  <% end %>
 </div>
