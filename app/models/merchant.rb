@@ -15,9 +15,10 @@ class Merchant < ApplicationRecord
   end
 
   def items_not_shipped
-    items.joins(:invoice_items, :invoices)
+    items.joins(invoice_items: :invoice)
+    .select('items.*, invoices.created_at as invoice_created, invoices.id as invoice_id')
     .where.not("invoice_items.status = ?", 2)
-    .order('invoices.created_at')
+    .order('invoices.created_at asc')
   end
 
   def top_five_items
@@ -39,4 +40,4 @@ class Merchant < ApplicationRecord
   #   .created_at
   #   .strftime("%A, %B %d, %Y")
   # end
-end 
+end

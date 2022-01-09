@@ -167,19 +167,19 @@ RSpec.describe 'Merchant Dashboard' do
     end
 
     scenario 'visitor sees date of invoice creation next to each item' do
-      expect(page).to have_content(@invoice_item_1.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_2.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_3.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_4.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_5.invoice_creation_date)
+      expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d,%Y"))
+      expect(page).to have_content(@invoice_2.created_at.strftime("%A, %B %d,%Y"))
+      expect(page).to have_content(@invoice_3.created_at.strftime("%A, %B %d,%Y"))
+      expect(page).to have_content(@invoice_4.created_at.strftime("%A, %B %d,%Y"))
+      expect(page).to have_content(@invoice_5.created_at.strftime("%A, %B %d,%Y"))
     end
 
     scenario 'visitor sees list ordered from oldest to newest' do
-      first = find("#invoiceitem#{@invoice_item_1.id}")
-      second = find("#invoiceitem#{@invoice_item_4.id}")
-      third = find("#invoiceitem#{@invoice_item_5.id}")
-      fourth = find("#invoiceitem#{@invoice_item_2.id}")
-      fifth = find("#invoiceitem#{@invoice_item_3.id}")
+      first = find("#item#{@item_1.id}")
+      second = find("#item#{@item_4.id}")
+      third = find("#item#{@item_5.id}")
+      fourth = find("#item#{@item_2.id}")
+      fifth = find("#item#{@item_3.id}")
       expect(first).to appear_before(second)
       expect(second).to appear_before(third)
       expect(third).to appear_before(fourth)
