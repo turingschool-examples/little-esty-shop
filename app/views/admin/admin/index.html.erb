@@ -5,3 +5,19 @@
   <%= link_to "Merchants", admin_merchants_path %>
   <%= link_to "Invoices", admin_invoices_path %>
 </section>
+
+<h3>Top Customers:</h3>
+<table>
+  <tr>
+    <th>Customer Name</th>
+    <th>Number of Successful Transactions</th>
+  </tr>
+  <% @customers.top_5.each do |customer| %>
+    <div id="top-customer-<%= customer.last_name %>">
+      <tr>
+        <td><%= customer.first_name %> <%= customer.last_name %></td>
+        <td><%= customer.transaction_count %></td>
+      </tr>
+    </div>
+  <% end %>
+</table>
