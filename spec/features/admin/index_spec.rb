@@ -55,5 +55,10 @@ RSpec.describe 'Admin Dashboard Index' do
       end
       expect(page).to_not have_content("Customer 1")
     end
+
+    it 'shows a link to create a new merchant' do 
+
+
+    end
   end
 end

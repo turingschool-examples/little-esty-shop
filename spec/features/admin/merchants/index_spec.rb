@@ -16,5 +16,12 @@ RSpec.describe 'Admin Merchant Index' do
       click_link "#{@merchant_1.name}"
       expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
     end
+
+    it 'shows a link to create a new merchant' do
+      visit "/admin/merchants"
+
+      click_link "Create New Merchant"
+      expect(current_path).to eq('/admin/merchants/new')
+    end
   end
 end
