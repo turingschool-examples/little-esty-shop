@@ -39,7 +39,4 @@ RSpec.describe 'Admin Merchant Show Page' do
     expect(page).to have_content('Ronny Wrongson')
     expect(page).to have_content("Successfully Updated Merchant Information")
   end
-
-  scenario 'visitor does not update the information but clicks submit with the field pre-populated' do
-  end 
 end
