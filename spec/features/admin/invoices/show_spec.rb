@@ -43,10 +43,10 @@ RSpec.describe 'Admin_Invoices Show Page' do
     expect(page).to have_content("Unit Price: $130.00")
   end
 
-  xit 'shows the invoice items status' do
+  it 'shows the invoice items status' do
     merchant = create(:merchant)
     invoice = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], name: 'Toy', status: "shipped")
+    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_status: "shipped")
 
     visit "/admin/invoices/#{invoice.id}"
 
