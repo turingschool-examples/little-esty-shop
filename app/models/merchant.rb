@@ -16,15 +16,12 @@ class Merchant < ApplicationRecord
       customer_count = customers.count
     end
 
-    customer_ids = Customer.joins(:invoices => :transactions)
-                            .where(:transactions => {result: 0})
-                            .group(:customer_id)
-                            .order(count_customer_id: :desc)
-                            .limit(customer_count)
-                            .count(:customer_id)
-                            .keys
-    Customer.find(customer_ids)
-
+    Customer.joins(:invoices => :transactions)
+                .where(:transactions => {result: 0})
+                .select("customers.*, count(transactions.id) as count_transactions_id")
+                .group(:id)
+                .order(count_transactions_id: :desc)
+                .limit(customer_count)
   end
 
   def self.top_customers(customer_count = 5)
@@ -33,14 +30,12 @@ class Merchant < ApplicationRecord
       customer_count = customers.count
     end
 
-    customer_ids = Customer.joins(:invoices => :transactions)
-                            .where(:transactions => {result: 0})
-                            .group(:customer_id)
-                            .order(count_customer_id: :desc)
-                            .limit(customer_count)
-                            .count(:customer_id)
-                            .keys
-    Customer.find(customer_ids)
+    Customer.joins(:invoices => :transactions)
+            .select("customers.*, count(transactions.id) as count_transactions_id")
+            .where(:transactions => {result: 0})
+            .group(:id)
+            .order(count_transactions_id: :desc)
+            .limit(customer_count)
   end
 
   def items_ready_to_ship
