@@ -1,6 +1,13 @@
 <h1>Welcome to Admin Dashboard</h1>
-<section class='navigation' id='merchants'>
+<div class='navigation' id='merchants'>
 
-<h6><%= link_to "Admin Merchants Index", admin_merchants_path %></h6>
-<h6><%= link_to "Admin Invoices Index", admin_invoices_path %></h6>
-</section>
+  <h6><%= link_to "Admin Merchants Index", admin_merchants_path %></h6>
+  <h6><%= link_to "Admin Invoices Index", admin_invoices_path %></h6>
+</div>
+
+<div class="incomplete invoices">
+  <p>Incomplete Invoices</p>
+  <% @invoices.incomplete_invoices.each do |invoice| %>
+  <p><%= link_to invoice.id, "/admin/invoices/#{invoice.id}" %></p>
+  <% end %>
+</div>
