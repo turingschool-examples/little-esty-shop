@@ -18,6 +18,10 @@ class Admin::MerchantsController < ApplicationController
     redirect_to admin_merchant_path(merchant), notice: "Successfully Updated"
   end
 
+  def new
+
+  end
+
   private
   def merchant_params
     params.permit(:name)
