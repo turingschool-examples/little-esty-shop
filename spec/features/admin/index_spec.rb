@@ -80,4 +80,12 @@ RSpec.describe 'admin index page' do
     expect("#{invoice_3.id}").to appear_before("#{invoice_2.id}")
     expect("#{invoice_2.id}").to appear_before("#{invoice_1.id}")
   end
+
+  it 'I see the names of the top 5 customers who have conducted successful transactions' do
+    merchant_1 = create :merchant
+    merchant_2 = create :merchant
+    item_1 = create :item, { merchant_id: merchant_1.id }
+    created_transactions = FactoryBot.create_list(:transaction, 30)
+    require "pry"; binding.pry
+  end
 end
