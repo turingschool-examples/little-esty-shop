@@ -17,4 +17,13 @@ RSpec.describe InvoiceItem, type: :model do
     it { should validate_presence_of(:unit_price)}
     it { should validate_numericality_of(:unit_price)}
   end
+
+  describe 'instance methods' do
+    describe 'potential_revenue' do
+      it "multiplies unit_price and quantity" do
+        invoice_item = create(:invoice_item, quantity: 3, unit_price: 1000)
+        expect(invoice_item.potential_revenue).to eq(3000)
+      end
+    end
+  end
 end
