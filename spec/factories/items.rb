@@ -12,8 +12,8 @@ FactoryBot.define do
         invoice_count {1}
         invoices {create_list(:invoice, invoice_count)}
         invoice_item_unit_price {15000}
+        invoice_item_quantity {8}
         invoice_item_status {0}
-        invoice_quantity {8}
       end
 
       after(:create) do |item, evaluator|
@@ -23,7 +23,7 @@ FactoryBot.define do
           item: item,
           unit_price: evaluator.invoice_item_unit_price,
           status: evaluator.invoice_item_status,
-          quantity: evaluator.invoice_quantity)
+          quantity: evaluator.invoice_item_quantity)
         end
         item.reload
       end

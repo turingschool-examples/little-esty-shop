@@ -53,11 +53,11 @@ RSpec.describe Invoice, type: :model do
         invoice1 = create(:invoice)
         item1 = create(:item_with_invoices, name: 'Toy', invoices: [invoice1], invoice_item_quantity: 3, invoice_item_unit_price: 15000)
         item2 = create(:item_with_invoices, name: 'Car', invoices: [invoice1], invoice_item_quantity: 5, invoice_item_unit_price: 20000)
-        transaction_1 = create(:transaction, invoice: invoice1, status: 1)
+        transaction_1 = create(:transaction, invoice: invoice1, result: 1)
 
         expect(invoice1.potential_revenue).to eq(0)
 
-        transaction_2 = create(:transaction, invoice: invoice1, status: 0)
+        transaction_2 = create(:transaction, invoice: invoice1, result: 0)
         expect(invoice1.potential_revenue).to eq(145000)
       end
     end
@@ -69,7 +69,7 @@ RSpec.describe Invoice, type: :model do
         invoice1 = create(:invoice)
         item1 = create(:item_with_invoices, name: 'Toy', merchant: merchant_1, invoices: [invoice1], invoice_item_quantity: 3, invoice_item_unit_price: 15000)
         item2 = create(:item_with_invoices, name: 'Car', merchant: merchant_2, invoices: [invoice1], invoice_item_quantity: 5, invoice_item_unit_price: 20000)
-        transaction_2 = create(:transaction, invoice: invoice1, status: 0)
+        transaction_2 = create(:transaction, invoice: invoice1, result: 0)
         expect(invoice1.potential_revenue_by_merchant(merchant_1)).to eq(45000)
         expect(invoice1.potential_revenue_by_merchant(merchant_2)).to eq(100000)
       end
