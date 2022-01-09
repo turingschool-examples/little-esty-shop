@@ -21,7 +21,6 @@ RSpec.describe 'Admin Dashboard Index' do
       expect(current_path).to eq('/admin/invoices')
     end
 
-
     it 'I see a section for Incomplete Invoices with IDs of all invoices' do
       visit "/admin"
 
