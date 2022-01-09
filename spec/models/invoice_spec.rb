@@ -16,6 +16,11 @@ RSpec.describe Invoice, type: :model do
     before(:each) do
       @customer = FactoryBot.create(:customer, first_name: "Cookie", last_name: "Monster")
       @invoice = FactoryBot.create(:invoice, customer: @customer)
+      @invoice2 = FactoryBot.create(:invoice)
+      @item = FactoryBot.create(:item, status: "enabled")
+      @item2 = FactoryBot.create(:item)
+      @invoiceitem = FactoryBot.create(:invoice_item, invoice: @invoice, item: @item, status: "pending", quantity: 5, unit_price: 1000)
+      @invoiceitem2 = FactoryBot.create(:invoice_item, invoice: @invoice2, item: @item2, quantity: 10, unit_price: 2000)
     end
 
     describe 'pretty_created_at' do
@@ -29,5 +34,22 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice.customer_name).to eq("Cookie Monster")
       end
     end
+
+    describe 'items_info' do
+      it 'shows invoice items with order info' do
+        first = @invoice.items_info.first
+        expect(first.name).to eq(@item.name)
+        expect(first.quantity).to eq(@invoiceitem.quantity)
+        expect(first.status).to eq(@invoiceitem.status)
+        expect(first.unit_price).to eq(@invoiceitem.unit_price)
+      end
+    end
+
+    describe 'total_revenue' do
+      it 'calculates total revenue for invoice' do
+        expect(@invoice.total_revenue).to eq(25000)
+      end
+    end
+
   end
 end

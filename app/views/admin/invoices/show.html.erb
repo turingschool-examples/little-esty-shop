@@ -1,6 +1,16 @@
-<h1>ADMIN <%= @invoice.id %></h1>
-<p>
-  Status: <%= @invoice.status %>
-  Created at: <%= @invoice.pretty_created_at %>
-  Customer: <%= @invoice.customer_name %>
-</p>
+<h1>ADMIN Invoice #<%= @invoice.id %></h1>
+  Status: <%= @invoice.status %><br>
+  Created at: <%= @invoice.pretty_created_at %><br>
+  Customer: <%= @invoice.customer_name %><br>
+  Items:
+  <hr>
+  <% @invoice.items_info.each_with_index do |info, index| %>
+      <section id="invoice-item-<%= index %>">
+        Item name: <%= info.name %><br>
+        Qty: <%= info.quantity %><br>
+        Unit price: <%= format_price(info.unit_price) %><br>
+        <%= info.status %><br>
+      </section>
+      <hr>
+  <% end %>
+  Total: <%= format_price(@invoice.total_revenue) %><br>
