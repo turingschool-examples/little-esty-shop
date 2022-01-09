@@ -6,7 +6,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
   let!(:merchant_2) {Merchant.create!(name: 'Deb Millhouse')}
 
   let!(:item_1) {merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 150, status: 1)}
-  let!(:item_2) {merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 300,)}
+  let!(:item_2) {merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 300, status: 0)}
   let!(:item_3) {merchant_2.items.create!(name: "Earrings", description: "A thing around your ears", unit_price: 220)}
   let!(:item_4) {merchant_2.items.create!(name: "Button", description: "A thing for your pants", unit_price: 150)}
 
@@ -73,7 +73,6 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
   describe 'item status update field' do
     scenario 'merchant sees item status select field  and submit button next to each item' do
-      expect(page).to have_field('Status')
       within "#item#{item_1.id}" do
         expect(page).to have_field('Status', with: 'disabled')
         expect(page).to have_button("Update Item Status")
@@ -85,7 +84,24 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
       end
     end
 
-    scenario 'the item select field is populated by item status and changes when updated'
+    scenario 'the item select field is populated by item status and changes when updated' do
+      save_and_open_page
+
+      within "#item#{item_1.id}" do
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_button("Update Item Status")
+
+        select "Enabled", from: "Status"
+        click_button("Update Item Status")
+
+        expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
+        expect(page).to have_field('Status', with: 'enabled')
+        expect(page).to have_button("Update Item Status")
+      end
+
+      save_and_open_page
+
+    end
   end
   #   As a merchant
   # When I visit my merchant invoice show page
