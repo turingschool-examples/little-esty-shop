@@ -2,17 +2,11 @@
 <%= link_to "My items", merchant_items_path(@merchant.id) %>
 <%= link_to "My invoices", merchant_invoices_path(@merchant.id) %>
 
-<% @merchant.top_5_customers.each do |customer| %>
-  <div id="customer<%= customer.id %>">
-  <p><%= customer.first_name %> <%= customer.last_name %> <%= customer.transaction_count %></p>
-  </div>
-<% end %>
+<%= render partial: '/layouts/partials/top_customers' %>
 
 <h3>Items Ready to Ship</h3>
 <% @merchant.items_not_shipped.each do |item| %>
-  <% item.invoice_items.each do |invoice_item| %>
-  <div id="invoiceitem<%=invoice_item.id%>">
-    <p><%= item.name %> - Invoice#<%= link_to invoice_item.invoice_id, merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %> - <%= invoice_item.invoice_creation_date %></p>
+  <div id="item<%=item.id%>">
+    <li><%= item.name %> - Invoice#<%= link_to item.invoice_id, merchant_invoice_path(@merchant.id, item.invoice_id) %> - <%= item.invoice_created.strftime("%A, %B %d,%Y") %></li>
   </div>
-  <% end %>
 <% end %>
