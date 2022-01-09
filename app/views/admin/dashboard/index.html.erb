@@ -10,3 +10,11 @@
     <hr>
   <% end %>
 <% end %>
+<section id="top_five_customers">
+  <h3>Top Five Customers</h3>
+    <ol>
+      <% Customer.all.top_five_customers.each do |customer| %>
+        <li>Name: <%= customer.name %> - <%= customer.transaction_count %></li>
+      <% end %>
+    </ol>
+</section>
