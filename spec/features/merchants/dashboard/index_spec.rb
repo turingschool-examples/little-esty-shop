@@ -94,7 +94,7 @@ RSpec.describe 'Merchant Dashboard' do
     end
 
     within "#customer-#{@customer_5.first_name}" do
-      expect(page).to have_content(3)
+      expect(page).to have_content(2)
     end
 
     within "#customer-#{@customer_3.first_name}" do
