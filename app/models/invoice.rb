@@ -19,4 +19,9 @@ class Invoice < ApplicationRecord
   def customer_name
     customer.first_name + " " + customer.last_name
   end
+
+  def items_info
+    invoice_items.joins(:item)
+      .select("invoice_items.*, items.name")
+  end
 end
