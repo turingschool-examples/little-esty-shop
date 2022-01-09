@@ -21,8 +21,10 @@ RSpec.describe Invoice do
                          @invoice_10, @invoice_11, @invoice_12,
                          @invoice_13, @invoice_14, @invoice_15,
                          @invoice_19, @invoice_20]
-                         
-      expect(Invoice.incomplete_invoices).to eq(expected_result)
+
+      #Expected result ordered oldest to newest
+
+      expect(Invoice.incomplete_invoices).to eq(expected_result.reverse())
     end
     
     it '#total_revenue' do
