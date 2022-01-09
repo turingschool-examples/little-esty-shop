@@ -1,4 +1,19 @@
 <h1>Merchants</h1>
+<div id="all_merchants">
 <% @merchants.each do |merchant| %>
-<%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%>
+  <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%>
 <% end %>
+</div>
+
+<h3>Top Five Merchants</h3>
+<hr>
+<div id="top_five_merchants">
+<% @merchants.top_five_merchants.each do |merchant| %>
+  <section id="merchant-<%=merchant.name%>">
+    <p>
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+      Total Revenue Generated: <%= number_to_currency(merchant.revenue/100, precision: 0) %>
+    </p>
+  </section>
+<% end %>
+</div>
