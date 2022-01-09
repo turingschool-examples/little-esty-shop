@@ -32,7 +32,13 @@ class Admin::MerchantsController < ApplicationController
 
     if merchant.update(admin_merchant_params)
       flash[:success] = merchant.name + ' was successfully updated.'
-      redirect_to admin_merchant_path(params[:id])
+
+      if(params[:redirect_to]) == "index"
+        redirect_to admin_merchants_path
+      else
+        redirect_to admin_merchant_path(params[:id])
+      end
+
     else
       flash[:alert] = "Error: #{error_message(merchant.errors)}"
     end 

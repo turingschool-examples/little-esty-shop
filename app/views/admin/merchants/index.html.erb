@@ -4,13 +4,27 @@
 <h3>Enabled Merchants</h3>
 <% @merchants.enabled_merchants.each do |merchant| %>
   <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> | Status: <%= merchant.status %></p>
+
+    <p><%= form_with url:"/admin/merchants/#{merchant.id}", method: :put, local: true do |f| %>
+      <%= f.hidden_field :status, value: "disabled" %> 
+      <%= f.hidden_field :redirect_to, value: "index" %> 
+      <%= f.submit "Disable #{merchant.name}", class: "btn" %>
+    <% end %></p>
+
   <% end %>
 </div>
 
 <div class="disabled_merchants">
-<h3>Disabled Merchants
+<h3>Disabled Merchants</h3>
 <% @merchants.disabled_merchants.each do |merchant| %>
-  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> | Status: <%= merchant.status %></p>
+  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> | Status: <%= merchant.status %> </p>
+  
+    <p><%= form_with url:"/admin/merchants/#{merchant.id}", method: :put, local: true do |f| %>
+      <%= f.hidden_field :status, value: "enabled" %> 
+      <%= f.hidden_field :redirect_to, value: "index" %>
+      <%= f.submit "Enable #{merchant.name}", class: "btn" %>
+    <% end %></p>
+
   <% end %>
 </div>
 
