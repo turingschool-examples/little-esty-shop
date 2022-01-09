@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Admin Merchant Edit Page", type: :feature do 
 
-  it "form edits merchant name and redirects back to the show page" do 
+  it "form edits merchant details and redirects back to the show page" do 
     
     merch_1 = Merchant.create!(name: "Easily Amused Studio")
     merch_2 = Merchant.create!(name: "Retro Furniture")
