@@ -9,10 +9,10 @@ RSpec.describe Merchant do
   end
 
   before(:each) do
-    @merchant_1 = Merchant.create!(name: 'Ron Swanson')
-    @merchant_2 = Merchant.create!(name: 'Leslie Knope')
-    @merchant_3 = Merchant.create!(name: 'Tom Haverford')
-    @merchant_4 = Merchant.create!(name: 'April Ludgate')
+    @merchant_1 = Merchant.create!(name: 'Ron Swanson', status: 0)
+    @merchant_2 = Merchant.create!(name: 'Leslie Knope', status: 0)
+    @merchant_3 = Merchant.create!(name: 'Tom Haverford', status: 0)
+    @merchant_4 = Merchant.create!(name: 'April Ludgate', status: 1)
 
     @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
     @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900)
@@ -125,5 +125,19 @@ RSpec.describe Merchant do
         expect(@merchant_1.top_five_items).to eq([@item_7, @item_3, @item_4, @item_6, @item_1])
       end
     end
+  end
+
+    describe 'class methods' do
+      describe '::disabled' do
+        it 'returns all merchants with a status of disabled' do
+          expect(Merchant.disabled).to eq([@merchant_4])
+        end
+      end
+
+      describe '::enabled' do
+        it 'returns all merchants with a status of enabled' do
+          expect(Merchant.enabled).to eq([@merchant_1, @merchant_2, @merchant_3])
+        end
+      end
   end
 end
