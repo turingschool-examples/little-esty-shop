@@ -24,10 +24,13 @@ RSpec.describe 'Admin Merchant Index' do
         click_button("Enable")
 
         expect(current_path).to eq('/admin/merchants')
+        expect(page).to have_content("status: enabled")
 
         click_button("Disable")
 
         expect(current_path).to eq('/admin/merchants')
+        expect(page).to have_content("status: disabled")
+        expect(@merchant_1.merchant_status).to eq("disabled")
         expect(page).to have_content(@merchant_1.merchant_status)
       end
     end
