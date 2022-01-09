@@ -12,7 +12,7 @@ RSpec.describe Merchant do
     @merchant_1 = Merchant.create!(name: 'Ron Swanson', status: 0)
     @merchant_2 = Merchant.create!(name: 'Leslie Knope', status: 0)
     @merchant_3 = Merchant.create!(name: 'Tom Haverford', status: 0)
-    @merchant_4 = Merchant.create!(name: 'April Ludgate', status: 1)
+    @merchant_4 = Merchant.create!(name: 'April Ludgate')
 
     @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
     @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 900)
