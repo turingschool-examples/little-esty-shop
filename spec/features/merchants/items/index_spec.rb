@@ -100,8 +100,8 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_link(@item_8.name)
       expect(page).to have_link(@item_2.name)
     end
-  end
-
+  end 
+  
   scenario 'visitor sees the total revenue generated next to each item name' do
     within "#top_five_items-#{@merchant_1.id}" do
       expect(page).to have_content(@merchant_1.top_five_items[0].total_revenue)
@@ -142,5 +142,24 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_button("Disable")
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
     end  
+  end 
+
+  describe 'creating an item' do 
+    scenario 'visitor sees a link to create a new item' do 
+      expect(page).to have_link("Create Item", href: new_merchant_item_path(@merchant_1.id))
+    end
+    
+    scenario 'visitor clicks link and is taken to form to add info' do 
+      click_link "Create Item"
+
+      fill_in(:name, with: 'Rare Pokemon Card')
+      fill_in(:description, with: 'Holograph Machamp')
+      fill_in(:unit_price, with: 100)
+
+      click_button "Submit"
+
+      expect(current_path).to eq(merchant_items_path(@merchant_1.id))
+      expect(page).to have_content('Rare Pokemon Card')
+    end 
   end 
 end
