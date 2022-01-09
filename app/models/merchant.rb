@@ -1,5 +1,8 @@
 class Merchant < ApplicationRecord
   has_many :items
+  validates :name, presence: true
+
+  enum status: [:disabled, :enabled]
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -30,5 +33,12 @@ class Merchant < ApplicationRecord
         .group(:id)
         .order("revenue desc")
         .limit(5)
+
+  def filter_item_status(status_enum)
+    items.where(status: status_enum)
+  end
+
+  def self.filter_merchant_status(status_enum)
+    where(status: status_enum)
   end
 end
