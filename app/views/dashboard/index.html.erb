@@ -2,11 +2,7 @@
 <%= link_to "My items", merchant_items_path(@merchant.id) %>
 <%= link_to "My invoices", merchant_invoices_path(@merchant.id) %>
 
-<% @merchant.top_5_customers.each do |customer| %>
-  <div id="customer<%= customer.id %>">
-  <p><%= customer.first_name %> <%= customer.last_name %> <%= customer.transaction_count %></p>
-  </div>
-<% end %>
+<%= render partial: '/layouts/partials/top_customers' %>
 
 <h3>Items Ready to Ship</h3>
 <% @merchant.items_not_shipped.each do |item| %>
