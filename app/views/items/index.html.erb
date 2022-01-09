@@ -1,14 +1,14 @@
 <h1>All Items For This Merchant</h1>
 
-<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+<%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
 
 <% @items.each do |item| %>
   <section id="item-<%= item.id %>">
     <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Status: <%= "#{item.status}" %></p>
     <% if item.status == 'Enabled' %>
-      <%= button_to "Disable this item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+      <%= button_to "Disable this item", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Disabled"} %>
     <% elsif item.status == 'Disabled' %>
-      <%= button_to "Enable this item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
+      <%= button_to "Enable this item", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Enabled"} %>
     <% end %>
   </section>
 <% end %>

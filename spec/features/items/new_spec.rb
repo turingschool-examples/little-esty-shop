@@ -4,7 +4,7 @@ describe 'new merchant item form' do
   before do
     @merchant1 = Merchant.create!(name: 'Long Hair Dont Care')
 
-    visit "merchants/#{@merchant1.id}/items/new"
+    visit new_merchant_item_path(@merchant1)
   end
 
   it 'has a form for a new item' do

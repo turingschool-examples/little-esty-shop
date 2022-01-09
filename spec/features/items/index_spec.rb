@@ -27,17 +27,21 @@ describe 'merchants items index' do
     it 'has a link to create a new item' do
       click_link "Create New Item"
 
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+      expect(current_path).to eq(new_merchant_item_path(@merchant1))
     end
 
     it 'has a button to enable or disable next to each item name' do
       within("#item-#{@item1.id}") do
-        expect(@item1.status).to eq("Disabled")
+        click_button "Enable this item"
+
+        item = Item.find(@item1.id)
+        expect(item.status).to eq("Enabled")
       end
       within("#item-#{@item1.id}") do
-        click_button "Enable this item"
-        expect(current_path).to eq(merchant_items_path(@merchant1))
-        expect(@item1.status).to eq("Enabled")
+        click_button "Disable this item"
+
+        item = Item.find(@item1.id)
+        expect(item.status).to eq("Disabled")
       end
     end
   end

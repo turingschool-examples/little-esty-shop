@@ -7,16 +7,8 @@ describe Invoice, type: :model do
     it { should have_many :transactions }
   end
 
-  describe 'enum' do
-    it { should define_enum_for(:status).with_values({completed: 0, in_progress: 1, cancelled: 2})}
-  end
-
-  # describe 'methods' do
-  #   xit '' do
-  #     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0)
-  #     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0)
-  #     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0)
-  #     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0)
-  #
-  #   end
-  end
+  describe 'validations' do
+    it { should validate_presence_of :customer_id }
+    it { should validate_presence_of :status }
+  end 
+end

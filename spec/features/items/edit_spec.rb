@@ -25,6 +25,6 @@ describe 'merchant item edit page' do
     expect(page).to have_content('Sulfate free shampoo')
     expect(page).to have_content('Gentle hair cleanser')
     expect(page).to have_content(11)
-    expect(page).to have_content("Item sccessfully updated")
+    expect(page).to have_content("Item successfully updated")
   end
 end
