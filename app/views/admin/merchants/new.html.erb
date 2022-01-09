@@ -1,0 +1,12 @@
+<h1>Create Merchant</h1>
+
+<%= form_with url: admin_merchants_path, local: true do |f| %>
+  <%= f.label :name, "Merchant's Name: " %>
+  <%= f.text_field :name, id: :name %>
+  <%= f.radio_button :status, "disabled" %>
+  <%= f.label :status, "Disabled (Default)", :value => 0 %>
+  <%= f.radio_button :status, "enabled" %>
+  <%= f.label :status, "Enabled", :value => 1 %>
+  
+  <%= f.submit "Create Merchant" %>
+<% end %>

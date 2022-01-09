@@ -1,9 +1,14 @@
 <div class="admin_edit_merchant_form">
   <h1>Edit <%= @merchant.name %></h1>
 
-  <%= form_with model: @merchant, local: true do |f| %>
+  <%= form_with url: admin_merchant_path, method: :patch, local: true do |f| %>
     <%= f.label :name, "Merchant Name: " %>
-    <%= f.text_field :name, id: :name %>
+    <%= f.text_field :name, id: :name, value: @merchant.name  %>
+
+    <%= f.radio_button :status, "disabled" %>
+    <%= f.label :disabled, "Disabled (Default)" %>
+    <%= f.radio_button :status, "enabled" %>
+    <%= f.label :enabled, "Enabled" %>
 
     <%= f.submit "Submit" %>
   <% end %>
