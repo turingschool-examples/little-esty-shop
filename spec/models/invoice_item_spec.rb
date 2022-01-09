@@ -34,7 +34,7 @@ RSpec.describe InvoiceItem, type: :model do
         invoice_item_2 = create(:invoice_item, quantity: 5, unit_price: 1000)
         invoice_item_3 = create(:invoice_item, quantity: 1, unit_price: 1000)
         invoice_items = [invoice_item_1, invoice_item_2, invoice_item_3]
-        expect(.revenue).to eq(9000)
+        expect(invoice_items.revenue).to eq(9000)
       end
     end
   end

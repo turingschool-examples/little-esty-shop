@@ -12,7 +12,7 @@ RSpec.describe Invoice, type: :model do
     it { should define_enum_for(:status).with([:in_progress, :cancelled, :completed])}
   end
 
-  describe 'instant methods' do
+  describe 'instance methods' do
     describe '#customer_name' do
       it 'displays a customers first and last name' do
         merchant1 = create(:merchant)
@@ -50,12 +50,11 @@ RSpec.describe Invoice, type: :model do
 
     describe '#potential_revenue' do
       it 'reports potential revenue from all items on a given invoice' do
-        merchant1 = create(:merchant, name: "Bob Barker")
         invoice1 = create(:invoice)
-        item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 15000)
-        item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 20000)
+        item1 = create(:item_with_invoices, name: 'Toy', invoices: [invoice1], invoice_item_quantity: 3, invoice_item_unit_price: 15000)
+        item2 = create(:item_with_invoices, name: 'Car', invoices: [invoice1], invoice_item_quantity: 5, invoice_item_unit_price: 20000)
 
-        expect(invoice1.potential_revenue(merchant1)).to eq(35000)
+        expect(invoice1.potential_revenue).to eq(145000)
       end
     end
   end
