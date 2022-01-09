@@ -17,6 +17,8 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue_by_merchant(merchant_id)
-    items_by_merchant(merchant_id).pluck(Arel.sql("invoice_items.unit_price * invoice_items.quantity")).sum
+    items_by_merchant(merchant_id)
+    .pluck(Arel.sql("invoice_items.unit_price * invoice_items.quantity"))
+    .sum
   end
 end
