@@ -21,4 +21,9 @@ class Merchant < ApplicationRecord
     .order(rev_count: :desc)
     .limit(5)
   end
+
+  def best_sales_date
+    require "pry"; binding.pry
+    invoices.joins(:transactions).where(transactions: { result: 0}).select('invoices.created_at, SUM')
+  end
 end

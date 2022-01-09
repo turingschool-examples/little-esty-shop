@@ -135,4 +135,47 @@ RSpec.describe 'admin merchants index page' do
     end
   end
 
+  it 'lists the date with the most revenue for that merchant' do
+    merchant_1 = Merchant.create!(name: 'Seth')
+    item_1 = create(:item, merchant_id: merchant_1.id)
+    customer_1 = create(:customer)
+    invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
+    transaction_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: invoice_1.id, result: 0)
+    invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, status: 2, quantity: 1, unit_price: 5)
+
+    merchant_2 = Merchant.create!(name: 'John')
+    item_2 = create(:item, merchant_id: merchant_2.id)
+    invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 2)
+    transaction_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: invoice_2.id, result: 0)
+    invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_2.id, status: 2, quantity: 1, unit_price: 5)
+
+    merchant_3 = Merchant.create!(name: 'Jim')
+    item_3 = create(:item, merchant_id: merchant_3.id)
+    invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 2)
+    transaction_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: invoice_3.id, result: 0)
+    invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_3.id, status: 2, quantity: 1, unit_price: 5)
+
+    merchant_4 = Merchant.create!(name: 'Ben')
+    item_4 = create(:item, merchant_id: merchant_4.id)
+    invoice_4 = Invoice.create!(customer_id: customer_1.id, status: 2)
+    transaction_list_4 = FactoryBot.create_list(:transaction, 3, invoice_id: invoice_4.id, result: 0)
+    invoice_item_4 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_4.id, status: 2, quantity: 1, unit_price: 5)
+
+    merchant_6 = Merchant.create!(name: 'Rob')
+    item_6 = create(:item, merchant_id: merchant_6.id)
+    item_7 = create(:item, merchant_id: merchant_6.id)
+    invoice_6 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2012-03-25 09:54:09 UTC")
+    invoice_7 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2013-03-25 09:54:09 UTC")
+    invoice_8 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2014-03-25 09:54:09 UTC")
+    transaction_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: invoice_6.id, result: 0)
+    invoice_item_6 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_6.id, status: 2, quantity: 10, unit_price: 5)
+    invoice_item_7 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_7.id, status: 2, quantity: 1, unit_price: 5)
+    invoice_item_8 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_6.id, status: 2, quantity: 10, unit_price: 5)
+
+    visit '/admin/merchants'
+    within "#top_five_merchants" do
+      expect(page).to have_content("Top Selling Date: #{invoice_8.created_at}")
+    end
+  end
+
 end

@@ -71,5 +71,4 @@ describe Merchant, type: :model do
       expect(Merchant.top_five_merchants).to eq([merchant_1, merchant_2, merchant_3, merchant_4, merchant_5])
     end
   end
-
 end
