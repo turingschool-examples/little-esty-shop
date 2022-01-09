@@ -6,9 +6,7 @@
 
 <h3>Items Ready to Ship</h3>
 <% @merchant.items_not_shipped.each do |item| %>
-  <% item.invoice_items.each do |invoice_item| %>
-  <div id="invoiceitem<%=invoice_item.id%>">
-    <p><%= item.name %> - Invoice#<%= link_to invoice_item.invoice_id, merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %> - <%= invoice_item.invoice_creation_date %></p>
+  <div id="item<%=item.id%>">
+    <li><%= item.name %> - Invoice#<%= link_to item.invoice_id, merchant_invoice_path(@merchant.id, item.invoice_id) %> - <%= item.invoice_created.strftime("%A, %B %d,%Y") %></li>
   </div>
-  <% end %>
 <% end %>

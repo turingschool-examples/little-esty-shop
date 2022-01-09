@@ -116,7 +116,7 @@ RSpec.describe Merchant do
   #   end
 
     describe '#items_not_shipped' do
-      it 'returns unshipped items ordered by their invoice creation date' do
+      it 'returns unshipped items ordered by their invoice creation date least recent' do
         expect(@merchant_1.items_not_shipped).to eq([@item_1, @item_4, @item_5, @item_2, @item_3])
       end
     end
