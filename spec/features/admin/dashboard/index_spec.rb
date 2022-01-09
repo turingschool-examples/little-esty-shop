@@ -1,11 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Dashboard' do
-  before(:each) do
+RSpec.describe 'Admin Dashboard Page' do
+  before :each do 
     @merchant_1 = Merchant.create!(name: 'Ron Swanson')
-    @merchant_2 = Merchant.create!(name: 'Leslie Knope')
-    @merchant_3 = Merchant.create!(name: 'Tom Haverford')
-    @merchant_4 = Merchant.create!(name: 'April Ludgate')
 
     @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 100, status: 0)
     @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your neck", unit_price: 100, status: 0)
@@ -98,22 +95,22 @@ RSpec.describe 'Merchant Dashboard' do
     @transaction_19 = @invoice_19.transactions.create!(result: 'success')
     @transaction_20 = @invoice_20.transactions.create!(result: 'success')
 
-    visit "/merchants/#{@merchant_1.id}/dashboard"
+    visit admin_dashboard_index_path
+  end 
+
+  scenario 'visitor sees a header' do 
+    expect(page).to have_content("Admin Dashboard")
   end
 
-  scenario 'visitor sees the name of my merchant' do
-    expect(page).to have_content(@merchant_1.name)
-  end
+  scenario 'visitor sees a link to the admin merchant index page' do 
+    expect(page).to have_link("Merchants", href: admin_merchants_path)
+  end 
+  
+  scenario 'visitor sees a link to the admin invoices index page' do 
+    expect(page).to have_link("Invoices", href: admin_invoices_path)
+  end 
 
-  scenario 'visitor sees link to merchant item index' do
-    expect(page).to have_link("My items", href: merchant_items_path(@merchant_1.id))
-  end
-
-  scenario 'visitor sees link to merchant invoices index' do
-    expect(page).to have_link("My invoices", href: merchant_invoices_path(@merchant_1.id))
-  end
-
-  scenario 'visitor sees top 5 customers associated with merchant' do
+  scenario 'visitor sees top 5 customers' do
     expect(page).to have_content(@customer_1.first_name)
     expect(page).to have_content(@customer_1.last_name)
     expect(page).to have_content(@customer_2.first_name)
@@ -124,65 +121,24 @@ RSpec.describe 'Merchant Dashboard' do
   end
 
   scenario 'visitor sees number of successful transactions next to each customer' do
-    within "#customer#{@merchant_1.top_5_customers.first.id}" do
-      expect(page).to have_content(@merchant_1.top_5_customers.first.transaction_count)
+    within "#customer#{Customer.top_5.first.id}" do
+      expect(page).to have_content(Customer.top_5.first.transaction_count)
     end
 
-    within "#customer#{@merchant_1.top_5_customers[1].id}" do
-      expect(page).to have_content(@merchant_1.top_5_customers[1].transaction_count)
+    within "#customer#{Customer.top_5[1].id}" do
+      expect(page).to have_content(Customer.top_5[1].transaction_count)
     end
 
-    within "#customer#{@merchant_1.top_5_customers[2].id}" do
-      expect(page).to have_content(@merchant_1.top_5_customers[2].transaction_count)
+    within "#customer#{Customer.top_5[2].id}" do
+      expect(page).to have_content(Customer.top_5[2].transaction_count)
     end
 
-    within "#customer#{@merchant_1.top_5_customers[3].id}" do
-      expect(page).to have_content(@merchant_1.top_5_customers[3].transaction_count)
+    within "#customer#{Customer.top_5[3].id}" do
+      expect(page).to have_content(Customer.top_5[3].transaction_count)
     end
 
-    within "#customer#{@merchant_1.top_5_customers[4].id}" do
-      expect(page).to have_content(@merchant_1.top_5_customers[4].transaction_count)
-    end
+    within "#customer#{Customer.top_5[4].id}" do
+      expect(page).to have_content(Customer.top_5[4].transaction_count)
+    end 
   end
-
-  describe 'in items ready to ship section' do
-    scenario 'visitor sees a list of item names that have not been shipped' do
-      expect(page).to have_content("Items Ready to Ship")
-
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to have_content(@item_3.name)
-      expect(page).to have_content(@item_4.name)
-      expect(page).to have_content(@item_5.name)
-    end
-
-    scenario 'visitor sees the invoice id next to the item name' do
-
-      expect(page).to have_link("#{@invoice_item_1.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_1.id))
-      expect(page).to have_link("#{@invoice_item_2.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_2.id))
-      expect(page).to have_link("#{@invoice_item_3.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_3.id))
-      expect(page).to have_link("#{@invoice_item_4.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_4.id))
-      expect(page).to have_link("#{@invoice_item_5.invoice_id}", href: merchant_invoice_path(@merchant_1.id, @invoice_5.id))
-    end
-
-    scenario 'visitor sees date of invoice creation next to each item' do
-      expect(page).to have_content(@invoice_item_1.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_2.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_3.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_4.invoice_creation_date)
-      expect(page).to have_content(@invoice_item_5.invoice_creation_date)
-    end
-
-    scenario 'visitor sees list ordered from oldest to newest' do
-      first = find("#invoiceitem#{@invoice_item_1.id}")
-      second = find("#invoiceitem#{@invoice_item_4.id}")
-      third = find("#invoiceitem#{@invoice_item_5.id}")
-      fourth = find("#invoiceitem#{@invoice_item_2.id}")
-      fifth = find("#invoiceitem#{@invoice_item_3.id}")
-      expect(first).to appear_before(second)
-      expect(second).to appear_before(third)
-      expect(third).to appear_before(fourth)
-      expect(fourth).to appear_before(fifth)
-    end
-  end
-end
+end 
