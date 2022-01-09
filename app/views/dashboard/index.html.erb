@@ -13,7 +13,7 @@
 </div>
 
 <h2>Items Ready To Ship</h2>
-  <!-- <div id="Items-Ready-To-Ship"> -->
+
   <% @merchant.ready_items.each do |item| %>
     <p><div id="merchants-item-<%= item.name %>">
       <%= item.name %>
