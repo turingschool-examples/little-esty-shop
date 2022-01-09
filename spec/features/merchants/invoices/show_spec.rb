@@ -85,8 +85,6 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     end
 
     scenario 'the item select field is populated by item status and changes when updated' do
-      save_and_open_page
-
       within "#item#{item_1.id}" do
         expect(page).to have_field('Status', with: 'disabled')
         expect(page).to have_button("Update Item Status")
@@ -96,11 +94,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
         expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
         expect(page).to have_field('Status', with: 'enabled')
-        expect(page).to have_button("Update Item Status")
       end
-
-      save_and_open_page
-
     end
   end
   #   As a merchant
