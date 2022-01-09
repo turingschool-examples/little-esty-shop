@@ -9,7 +9,6 @@ RSpec.describe "Admin Merchant Edit Page", type: :feature do
     merch_3 = Merchant.create!(name: "Vintage Accessories")
 
     visit "/admin/merchants/#{merch_3.id}/edit"
-
     expect(page).to have_field(:name, with: 'Vintage Accessories')
 
     fill_in :name, with: ("Vintage Shoppe")
