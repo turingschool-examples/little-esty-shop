@@ -14,6 +14,7 @@ class Admin::MerchantsController < ApplicationController
 
   def create 
     merchant = Merchant.new(admin_merchant_params)
+
     if merchant.save
       redirect_to "/admin/merchants"
     else

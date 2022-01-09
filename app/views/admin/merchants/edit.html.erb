@@ -5,6 +5,11 @@
     <%= f.label :name, "Merchant Name: " %>
     <%= f.text_field :name, id: :name, value: @merchant.name  %>
 
+    <%= f.radio_button :status, "disabled" %>
+    <%= f.label :disabled, "Disabled (Default)" %>
+    <%= f.radio_button :status, "enabled" %>
+    <%= f.label :enabled, "Enabled" %>
+
     <%= f.submit "Submit" %>
   <% end %>
 </div>

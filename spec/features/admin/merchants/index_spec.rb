@@ -38,4 +38,21 @@ RSpec.describe "Admin Merchants Index Page", type: :feature do
     expect(current_path).to eq(new_admin_merchant_path)
   end
 
+  it "lists merchants in correct section: enabled or disabled" do 
+    merch_1 = Merchant.create!(name: "Easily Amused Studio", status: 1)
+    merch_2 = Merchant.create!(name: "Retro Furniture")
+    merch_3 = Merchant.create!(name: "Vintage Accessories")
+
+    visit admin_merchants_path
+
+    within ".enabled_merchants" do 
+      expect(page).to have_content(merch_1.name)
+    end
+
+    within ".disabled_merchants" do
+      expect(page).to have_content(merch_2.name)
+      expect(page).to have_content(merch_3.name)
+    end
+  end
+
 end

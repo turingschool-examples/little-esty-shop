@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Create Merchant form page", type: :feature do 
 
-  it "creates a new merchant" do 
+  it "creates a new merchant with disabled status by default" do 
 
     visit "/admin/merchants/new"
 
@@ -11,8 +11,8 @@ RSpec.describe "Create Merchant form page", type: :feature do
 
     expect(current_path).to eq(admin_merchants_path)
     
-    within(".list_merchants") do
-      expect(page).to have_content("Handmade by Hannah")
+    within(".disabled_merchants") do
+      expect(page).to have_content("Handmade by Hannah | Status: disabled")
     end
     
   end

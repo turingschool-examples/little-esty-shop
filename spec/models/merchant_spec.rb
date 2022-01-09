@@ -4,6 +4,8 @@ RSpec.describe Merchant, type: :model do
 
   before(:each) do
     @merch_1 = Merchant.create!(name: "Shop Here")
+    @merch_2 = Merchant.create!(name: "Handmade by Hannah", status: 1)
+    @merch_3 = Merchant.create!(name: "Curiosities", status: 1)
 
     @item_1 = Item.create!(name:"jumprope", description:"Pink and sparkly.", unit_price:600, merchant_id:"#{@merch_1.id}")
 
@@ -53,6 +55,14 @@ RSpec.describe Merchant, type: :model do
     
     it "#favorite_customers - returns top 5 customers with most successful transactions" do
       expect(@merch_1.merchants_favorite_customers).to contain_exactly(@cust_2, @cust_3, @cust_4, @cust_5, @cust_6)
+    end
+
+    it ".enabled_merchants" do 
+      expect(Merchant.enabled_merchants).to eq([@merch_2, @merch_3])
+    end
+
+    it ".disabled_merchants" do 
+      expect(Merchant.disabled_merchants).to eq([@merch_1])
     end
   end
   

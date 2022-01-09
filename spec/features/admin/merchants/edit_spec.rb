@@ -12,12 +12,13 @@ RSpec.describe "Admin Merchant Edit Page", type: :feature do
     expect(page).to have_field(:name, with: 'Vintage Accessories')
 
     fill_in :name, with: ("Vintage Shoppe")
+    choose('status_enabled')
     click_button "Submit"
 
     expect(current_path).to eq("/admin/merchants/#{merch_3.id}")
     
     expect(page).to have_content("Vintage Shoppe")
-
+    
     within ".flash" do 
       expect(page).to have_content("Vintage Shoppe was successfully updated.")
     end
