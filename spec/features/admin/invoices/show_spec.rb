@@ -59,4 +59,8 @@ RSpec.describe 'admin invoice show page' do
       expect(page).to have_content(@invoiceitem3.status)
     end
   end
+
+  it 'shows invoice total revenue' do
+    expect(page).to have_content("$#{@invoice.total_revenue.to_s.insert(-3, ".")}")
+  end
 end
