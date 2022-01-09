@@ -76,7 +76,6 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_18 = InvoiceItem.create!(item_id: @item_18.id, invoice_id: @invoice_18.id, status: 2)
     @invoice_item_19 = InvoiceItem.create!(item_id: @item_19.id, invoice_id: @invoice_19.id, status: 2)
     @invoice_item_20 = InvoiceItem.create!(item_id: @item_20.id, invoice_id: @invoice_20.id, status: 2)
-    # @invoice_item_21 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_15.id, status: 2)
 
     @transaction_1 = @invoice_1.transactions.create!(result: 'success')
     @transaction_2 = @invoice_2.transactions.create!(result: 'success')
