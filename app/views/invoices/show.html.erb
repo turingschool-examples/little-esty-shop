@@ -13,8 +13,16 @@
     <% item.invoice_items.each do |invoice_item| %>
       <p>Unit Price: <%= invoice_item.unit_price %> </p>
       <p>Quantity: <%= invoice_item.quantity %> </p>
-      <p>Status: <%= invoice_item.status %> </p>
+      <p>Invoice Status: <%= invoice_item.status %> </p>
     <% end %>
+    <p> <%= form_with url: merchant_invoice_path(item.merchant_id, @invoice.id), method: :patch, local: true do |f| %>
+      <%= f.hidden_field :item_id, value: item.id %>
+      <%= f.label :status, "Status"  %>
+      <%= f.select :status, [["Enabled", 'enabled'], ["Disabled", 'disabled']], selected: "#{item.status}" %>
+      <%= f.submit "Update Item Status" %>
+      <% end %>
+
+    </p>
   </div>
 <% end %>
 
