@@ -1,4 +1,6 @@
 class Merchant < ApplicationRecord
+  enum status: ["enabled", "disabled"]
+
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
@@ -29,14 +31,11 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
-  # def date_with_most_sales
-  #   items.joins(invoices: [:transactions, :invoice_items])
-  #   .where('transactions.result = ?', 'success')
-  #   .select("invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue")
-  #   .order(total_revenue: :desc)
-  #   .group("invoices.created_at")
-  #   .first
-  #   .created_at
-  #   .strftime("%A, %B %d, %Y")
-  # end
-end 
+  def self.disabled
+    where(status: 1)
+  end
+
+  def self.enabled
+    where(status: 0)
+  end
+end
