@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'admin#index'
-    resources :merchants, only: [:index, :show]
+    resources :merchants, only: [:index, :show, :edit, :update]
     resources :invoices, only: [:index, :show]
   end
 end
