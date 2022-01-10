@@ -11,4 +11,16 @@ class Item < ApplicationRecord
   # }
 
   enum status: [:disabled, :enabled]
-end
+
+  def invoice_item_quantity(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).quantity
+  end
+
+  def invoice_item_unit_price(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).unit_price
+  end
+
+  def invoice_item_status(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).status
+  end
+end 
