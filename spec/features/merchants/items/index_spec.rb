@@ -123,20 +123,19 @@ RSpec.describe 'Merchant Items Index page' do
 
     it "shows the date with the most sales for each item" do
       merchant = create(:merchant)
-      invoice_1 = create(:invoice, created_at: Date.new(2022, 1, 10))
+      invoice_1 = create(:invoice, created_at: DateTime.new(2022, 1, 10, 1, 1, 1))
       item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoices: [invoice_1], invoice_item_quantity: 4, invoice_item_unit_price: 100000)
 
       #create a smaller invoice that should not affect top date
-      invoice_2 = create(:invoice, created_at: Date.new(2022, 1, 10))
+      invoice_2 = create(:invoice, created_at: DateTime.new(2022, 1, 10, 1, 1, 1))
       item_2 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoices: [invoice_2], invoice_item_quantity: 2, invoice_item_unit_price: 1000)
       item_2.invoice_items.update(item: item_1)
 
       #create an equal revenue invoice that should not affect top date becuase it is older
-      invoice_3 = create(:invoice, created_at: Date.new(2022, 1, 5))
+      invoice_3 = create(:invoice, created_at: DateTime.new(2022, 1, 5, 1, 1, 1))
       item_3 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoices: [invoice_3], invoice_item_quantity: 4, invoice_item_unit_price: 100000)
       item_3.invoice_items.update(item: item_1)
-      
-      allow(item_1.top_date).to eq(Date.new(2022, 1, 10))
+
       visit "merchants/#{merchant.id}/items"
 
       within "div.top_items" do
