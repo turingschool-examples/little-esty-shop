@@ -11,8 +11,7 @@ RSpec.describe 'New Merchant Creation' do
 
     it 'can create a new merchant' do
       visit '/admin/merchants/new'
-
-      fill_in(:name, with: 'TEsty Merchant')
+      fill_in('Name', with: 'TEsty Merchant')
       click_button('Create Merchant')
 
       expect(current_path).to eq('/admin/merchants')
