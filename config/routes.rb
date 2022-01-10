@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # resources :merchants do
   #   resources :invoices, controller: 'merchant_invoices'
   # end
-  
+
   get 'merchants/:id/invoices', to: 'merchant_invoices#index'
   get 'merchants/:merchant_id/invoices/:invoice_id', to: 'merchant_invoices#show'
   patch '/merchants/:merchant_id/invoices/:invoice_id/:invoice_item_id', to: 'invoice_items#update'
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   get '/admin', to: 'admin#dashboard'
 
+  patch '/admin/invoices/:invoice_id/:invoice_item_id', to: 'admin_invoice_items#update'
 #   unsure if we need this. Merging in github. Leland
   # get '/admin/merchants', to: 'admin_merchants#index'
 #   get '/admin/merchants/:id', to: 'admin_merchants#show'
