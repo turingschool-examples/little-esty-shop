@@ -99,9 +99,9 @@ RSpec.describe 'Merchant Items Index page' do
       item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy")
 
       visit "merchants/#{merchant.id}/items"
-
+      
       within "div.top_items" do
-        within "div.item_#{item_1.id}" do
+        within "div.top_item_#{item_1.id}" do
           click_link "Toy"
           expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item_1.id}")
         end
@@ -113,9 +113,9 @@ RSpec.describe 'Merchant Items Index page' do
       item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
 
       visit "merchants/#{merchant.id}/items"
-      
+
       within "div.top_items" do
-        within "div.item_#{item_1.id}" do
+        within "div.top_item_#{item_1.id}" do
           expect(page).to have_content("Total Revenue: $4,000.00")
         end
       end

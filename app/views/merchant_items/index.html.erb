@@ -27,8 +27,8 @@
 
 <div class="top_items">
   <h2>Top Items</h2>
-  <% @merchant.items.each do |item| %>
-    <div class=<%= "popular_item_#{item.id}" %>>
+  <% @merchant.popular_items(5).each do |item| %>
+    <div class=<%= "top_item_#{item.id}" %>>
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
       <p><%= item.potential_revenue %></p>
     </div>
