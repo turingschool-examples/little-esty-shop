@@ -71,4 +71,54 @@ RSpec.describe 'Merchant Items Index page' do
     expect("Disabled Items:").to appear_before(item2.name)
     expect("Disabled Items:").to appear_before(item1.name)
   end
+
+  describe 'most popular items section in merhcant items index' do
+    it "lists the top 5 most popular items ranked by total revenue generated" do
+      merchant = create(:merchant)
+      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 1000)
+      item_2 = create(:item_with_transactions, merchant: merchant, name: "Apple", invoice_item_quantity: 4, invoice_item_unit_price: 1000000)
+      item_3 = create(:item_with_transactions, merchant: merchant, name: "Zebra", invoice_item_quantity: 4, invoice_item_unit_price: 100)
+      item_4 = create(:item_with_transactions, merchant: merchant, name: "Bus", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+      item_5 = create(:item_with_transactions, merchant: merchant, name: "Dog", invoice_item_quantity: 4, invoice_item_unit_price: 10000)
+      item_6 = create(:item_with_transactions, merchant: merchant, name: "Legos", invoice_item_quantity: 4, invoice_item_unit_price: 10)
+
+      visit "merchants/#{merchant.id}/items"
+
+      within('div.top_items') do
+        expect(page).to have_content("Apple")
+        expect(page).to have_content("Bus")
+        expect(page).to have_content("Dog")
+        expect(page).to have_content("Toy")
+        expect(page).to have_content("Zebra")
+        expect(page).to_not have_content("Legos")
+      end
+    end
+
+    it "each item name is a link to the merchants item show page for that item" do
+      merchant = create(:merchant)
+      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy")
+
+      visit "merchants/#{merchant.id}/items"
+      
+      within "div.top_items" do
+        within "div.top_item_#{item_1.id}" do
+          click_link "Toy"
+          expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item_1.id}")
+        end
+      end
+    end
+
+    it "shows the total revenue generated next to each item name" do
+      merchant = create(:merchant)
+      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+
+      visit "merchants/#{merchant.id}/items"
+
+      within "div.top_items" do
+        within "div.top_item_#{item_1.id}" do
+          expect(page).to have_content("Total Revenue: $4,000.00")
+        end
+      end
+    end
+  end
 end
