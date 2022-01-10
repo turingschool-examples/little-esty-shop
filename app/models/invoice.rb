@@ -21,4 +21,8 @@ class Invoice < ApplicationRecord
   def potential_revenue(merchant)
     merchant_invoice_items(merchant).sum(:unit_price)
   end
+
+  def admin_potential_revenue
+    invoice_items.sum('quantity * unit_price')
+  end
 end
