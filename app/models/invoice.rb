@@ -11,7 +11,7 @@ class Invoice < ApplicationRecord
   end
 
   def completed_invoices
-    invoice_items.where(status: [2]) # = shipped 
+    invoice_items.where(status: [2]) # = shipped
   end
 
   def self.ordered_invoices
@@ -19,6 +19,6 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.sum(:unit_price)
+    invoice_items.sum('unit_price * quantity')
   end
 end
