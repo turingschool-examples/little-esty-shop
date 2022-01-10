@@ -63,4 +63,8 @@ RSpec.describe 'admin merchants index' do
       expect(page).to_not have_content(merchant_3.name)
     end
   end
+
+  it 'has a link to create a new merchant on a new page' do
+    expect(page).to have_link("Create a New Merchant", href: "/admin/merchants/new")
+  end
 end
