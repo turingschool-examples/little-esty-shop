@@ -76,7 +76,7 @@ RSpec.describe 'Admin Merchant Index' do
 
       Merchant.top_five_merchants.each do |merchant|
         within("#merchant-#{merchant.name}") do
-          expect(page).to have_content("Top selling date for #{merchant.name} was #{merchant.top_merchant_best_day.strftime("%m-%d-%y")}")
+          expect(page).to have_content("Top selling date for #{merchant.name} was #{merchant.top_merchant_best_day.strftime("%A, %B %d, %Y")}")
         end
       end
     end
