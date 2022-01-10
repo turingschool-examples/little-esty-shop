@@ -5,11 +5,6 @@ class Item < ApplicationRecord
   validates :name, :description, :merchant, presence: true
   validates :unit_price, numericality: { only_integer: true }
 
-  # enum result: {
-  #   disabled: 0,
-  #   enabled: 1
-  # }
-
   enum status: [:disabled, :enabled]
 
   def date_created
