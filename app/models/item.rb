@@ -18,10 +18,8 @@ class Item < ApplicationRecord
   def invoice_item_status(invoice)
     InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).status
   end
-end 
 
   def date_created
     invoices.first.created_at.strftime("%A, %B %-d, %Y")
   end
 end
-
