@@ -12,9 +12,15 @@ class InvoicesController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:item_id])
+    @invoice = Invoice.find(params[:id])
 
-    @item.update(status: params[:status].to_i)
+    if params[:status]["enabled"]
+      @item = Item.find(params[:item_id])
+      @item.update(status: 0)
+    elsif params[:status]['disabled']
+      @item = Item.find(params[:item_id])
+      @item.update(status: 1)
+    end
 
     redirect_to merchant_invoice_path(params[:merchant_id], params[:id])
   end

@@ -35,7 +35,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     end
 
     it 'displays invoice created_at date in format DAY, MM DD,YYYY' do
-      expect(page).to have_content("Sunday, March 25, 2012")
+      expect(page).to have_content(invoice_1.creation_date_formatted)
     end
 
     it 'displays customer first and last name' do
@@ -85,8 +85,6 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     end
 
     scenario 'the item select field is populated by item status and changes when updated' do
-      save_and_open_page
-
       within "#item#{item_1.id}" do
         expect(page).to have_field('Status', with: 'disabled')
         expect(page).to have_button("Update Item Status")
@@ -96,23 +94,15 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
         expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
         expect(page).to have_field('Status', with: 'enabled')
-        expect(page).to have_button("Update Item Status")
+        expect(page).to have_no_field('Status', with: 'disabled')
+
+        select "Disabled", from: "Status"
+        click_button("Update Item Status")
+
+        expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_no_field('Status', with: 'enabled')
       end
-
-      save_and_open_page
-
     end
   end
-  #   As a merchant
-  # When I visit my merchant invoice show page
-  # I see that each invoice item status is a select field
-  # And I see that the invoice item's current status is selected
-  # When I click this select field,
-  # Then I can select a new status for the Item,
-  # And next to the select field I see a button to "Update Item Status"
-  # When I click this button
-  # I am taken back to the merchant invoice show page
-  # And I see that my Item's status has now been updated
-
-
 end
