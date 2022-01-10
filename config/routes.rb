@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     get '/items/:id', to: 'merchant_items#show'
     get '/items/:id/edit', to: 'merchant_items#edit'
     patch 'items/:id', to: 'merchant_items#update'
+    
     get '/invoices', to: 'merchant_invoices#index'
+    get '/invoices/:invoice_id', to: 'merchant_invoices#show'
   end
 
   namespace :admin do
