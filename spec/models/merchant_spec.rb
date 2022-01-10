@@ -60,5 +60,11 @@ RSpec.describe Merchant do
 
       expect(Merchant.top_five_merchants).to eq(expected_result)
     end
+
+    it '#top_merchant_best_day' do
+      expected_result = @merchant_1.top_merchant_best_day.strftime("%A, %B %d, %Y")
+
+      expect(@merchant_1.top_merchant_best_day.strftime("%A, %B %d, %Y")).to eq(expected_result)
+    end
   end
 end
