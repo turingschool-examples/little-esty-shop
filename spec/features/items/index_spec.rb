@@ -87,7 +87,7 @@ RSpec.describe "Merchant item index" do
     visit merchant_items_path(@merchant_1)
     within "#top_five_items" do
       @merchant_1.top_five_items.each do |item|
-        expect(page).to have_content(item.top_item_best_day.strftime("%m-%d-%y"))
+        expect(page).to have_content(item.top_item_best_day.strftime("%A, %B %d, %Y"))
       end
     end
   end
