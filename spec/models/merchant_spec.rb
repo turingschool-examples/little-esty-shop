@@ -70,6 +70,22 @@ describe Merchant, type: :model do
       invoice_item_7 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_6.id, status: 1, quantity: 1)
       expect(Merchant.top_five_merchants).to eq([merchant_1, merchant_2, merchant_3, merchant_4, merchant_5])
     end
-  end
 
+    it '#best_sales_date' do
+      customer_1 = create(:customer)
+      merchant_6 = Merchant.create!(name: 'Rob')
+      item_6 = create(:item, merchant_id: merchant_6.id, unit_price: 5)
+      item_7 = create(:item, merchant_id: merchant_6.id, unit_price: 5)
+      invoice_6 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2012-03-25 09:54:09 UTC")
+      invoice_7 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2016-03-25 09:54:09 UTC")
+      invoice_8 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2014-03-25 09:54:09 UTC")
+      transaction_1 = create(:transaction, invoice_id: invoice_6.id, result: 0)
+      transaction_2 = create(:transaction, invoice_id: invoice_7.id, result: 0)
+      transaction_3 = create(:transaction, invoice_id: invoice_8.id, result: 0)
+      invoice_item_6 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_6.id, status: 2, quantity: 1, unit_price: 5)
+      invoice_item_7 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_7.id, status: 2, quantity: 10, unit_price: 5)
+      invoice_item_8 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_8.id, status: 2, quantity: 10, unit_price: 5)
+      expect(merchant_6.best_sales_date).to eq(invoice_7.created_at)
+    end
+  end
 end

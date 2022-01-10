@@ -21,4 +21,12 @@ class Merchant < ApplicationRecord
     .order(rev_count: :desc)
     .limit(5)
   end
+
+  def best_sales_date
+    invoices.joins(:transactions, :invoice_items).where(transactions: {result: 0})
+    .select('invoices.*, sum(invoice_items.quantity) as total_sales')
+    .group(:id)
+    .order(created_at: :desc)
+    .first.created_at
+  end
 end
