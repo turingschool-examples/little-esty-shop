@@ -25,8 +25,8 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     joins(:invoice_items)
     .select('invoices.*')
-    .group('invoices.id')
     .where.not('invoice_items.status = ?', 2)
+    .group('invoices.id')
     .distinct
   end
 
