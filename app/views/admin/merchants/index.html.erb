@@ -13,6 +13,7 @@
     <p>
       <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
       Total Revenue Generated: <%= number_to_currency(merchant.revenue/100, precision: 0) %>
+      Top selling date for <%=merchant.name%> was <%= "#{merchant.top_merchant_best_day.strftime("%m-%d-%y")}" %>
     </p>
   </section>
 <% end %>
