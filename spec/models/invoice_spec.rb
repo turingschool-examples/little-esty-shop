@@ -13,10 +13,14 @@ RSpec.describe Invoice do
   let!(:customer_1) {Customer.create!(first_name: "Billy", last_name: "Joel")}
 
   let!(:invoice_1) {customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')}
+  let!(:invoice_2) {customer_1.invoices.create!(status: 1, created_at: '2012-02-25 09:54:09')}
+  let!(:invoice_3) {customer_1.invoices.create!(status: 1, created_at: '2012-01-25 09:54:09')}
 
   let!(:invoice_item_1) {InvoiceItem.create!(quantity: 3, unit_price: item_1.unit_price, item_id: item_1.id, invoice_id: invoice_1.id, status: 0)}
   let!(:invoice_item_2) {InvoiceItem.create!(quantity: 5, unit_price: item_2.unit_price, item_id: item_2.id, invoice_id: invoice_1.id, status: 0)}
   let!(:invoice_item_3) {InvoiceItem.create!(quantity: 1, unit_price: item_3.unit_price, item_id: item_3.id, invoice_id: invoice_1.id, status: 0)}
+  let!(:invoice_item_4) {InvoiceItem.create!(quantity: 1, unit_price: item_3.unit_price, item_id: item_3.id, invoice_id: invoice_2.id, status: 1)}
+  let!(:invoice_item_5) {InvoiceItem.create!(quantity: 1, unit_price: item_3.unit_price, item_id: item_3.id, invoice_id: invoice_3.id, status: 2)}
 
   describe 'relations' do
     it { should belong_to :customer }
@@ -44,6 +48,21 @@ RSpec.describe Invoice do
         total_revenue = (invoice_item_1.unit_price * invoice_item_1.quantity) + (invoice_item_2.unit_price * invoice_item_2.quantity)
 
         expect(invoice_1.total_revenue_by_merchant(merchant_1.id)).to eq(total_revenue)
+      end
+    end
+  end
+
+  describe 'class methods' do
+    describe '.incomplete_invoices' do
+      it 'returns invoices only with items that are packaged or pending' do
+        expect(Invoice.incomplete_invoices).to eq([invoice_1, invoice_2])
+        expect(Invoice.incomplete_invoices).to_not include(invoice_3)
+      end
+    end
+
+    describe '.order_by_created_at_old_to_new' do
+      it 'orders invoices from oldest to newest by created_at attribute' do
+        expect(Invoice.order_by_created_at_old_to_new).to eq([invoice_3, invoice_2, invoice_1])
       end
     end
   end
