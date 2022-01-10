@@ -4,7 +4,7 @@ RSpec.describe 'Admin_Invoices Show Page' do
   it 'shows the invoice attributes and the customer full name' do
     customer_1 = create(:customer, first_name: 'Bob', last_name: "Smith")
     invoice = create(:invoice, customer: customer_1, created_at: "2022-01-06")
-
+    item = create(:item_with_invoices, invoices: [invoice], invoice_item_unit_price: 13000)
     visit "/admin/invoices/#{invoice.id}"
 
     expect(page).to have_content(invoice.id)
@@ -79,5 +79,17 @@ RSpec.describe 'Admin_Invoices Show Page' do
     within("#invoice_#{invoice.invoice_items.second.id}") do
       expect(page).to have_content("Status: pending")
     end
+  end
+
+  it 'calculates the potential revenue of the invoice' do
+    merchant = create(:merchant)
+    invoice = create(:invoice)
+    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 3000, invoice_quantity: 8)
+    item2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 2500, invoice_quantity: 8)
+
+    visit "/admin/invoices/#{invoice.id}"
+
+    expect(page).to have_content("Total Potential Revenue")
+    expect(page).to have_content("$440.00")
   end
 end
