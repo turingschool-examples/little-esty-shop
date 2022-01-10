@@ -16,11 +16,11 @@ RSpec.describe 'Admin_Merchants Index Page' do
     visit "/admin/merchants"
 
     expect("Enabled Merchants:").to appear_before("Disabled Merchants:")
-    expect("Enabled Merchants:").to appear_before(merchant1)
-    expect(merchant1).to appear_before("Disabled Merchants:")
-    expect(merchant2).to appear_before("Disabled Merchants:")
-    expect("Disabled Merchants").to appear_before(merchant3)
-    expect("Disabled Merchants").to appear_before(merchant4)
+    expect("Enabled Merchants:").to appear_before(merchant1.name)
+    expect(merchant1.name).to appear_before("Disabled Merchants:")
+    expect(merchant2.name).to appear_before("Disabled Merchants:")
+    expect("Disabled Merchants").to appear_before(merchant3.name)
+    expect("Disabled Merchants").to appear_before(merchant4.name)
   end
 
   it "has a link to create a new Admin_Merchant" do
