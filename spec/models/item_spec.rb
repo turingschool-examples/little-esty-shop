@@ -44,4 +44,21 @@ RSpec.describe Item, type: :model do
       expect(merchant.items.disabled_items).to eq([item1, item2])
     end
   end
+
+  describe "instance methods" do
+    describe 'potential_revenue' do
+      it "returns the potential_revenue associated with that item. Only counts invoices that have valid transactions." do
+        item_1 = create(:item_with_transactions, name: 'Toy', invoice_item_quantity: 3, invoice_item_unit_price: 15000, transaction_result: 1)
+        expect(item_1.potential_revenue).to eq(0)
+
+        item_2 = create(:item_with_transactions, name: 'Car', invoice_item_quantity: 5, invoice_item_unit_price: 20000, transaction_result: 0)
+        expect(item_2.potential_revenue).to eq(100000)
+
+        item_3 = create(:item_with_transactions, name: 'Desk', invoice_item_quantity: 2, invoice_item_unit_price: 20000, transaction_result: 0)
+        item_3.item_invoices.update(item: item_2)
+        expect(item_2.potential_revenue).to eq(140000)
+
+      end
+    end
+  end
 end
