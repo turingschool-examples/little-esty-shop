@@ -170,10 +170,12 @@ RSpec.describe 'Admin Dashboard Page' do
     scenario 'visitor sees invoice creation date next to each invoice' do
       within "#incomplete-invoices-#{@invoice_1.id}" do
         expect(page).to have_content(@invoice_1.creation_date_formatted)
+        expect(page).to have_content("Sunday, March 25, 2012")
       end
 
       within "#incomplete-invoices-#{@invoice_2.id}" do
         expect(page).to have_content(@invoice_2.creation_date_formatted)
+        expect(page).to have_content("Wednesday, April 25, 2012")
       end
     end
 

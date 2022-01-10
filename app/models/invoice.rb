@@ -27,4 +27,8 @@ class Invoice < ApplicationRecord
     .where.not('invoice_items.status = ?', 2)
     .distinct
   end
+
+  def self.order_by_created_at_old_to_new
+    self.order(:created_at)
+  end
 end
