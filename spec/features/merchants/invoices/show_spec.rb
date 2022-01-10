@@ -5,8 +5,8 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
   let!(:merchant_1) {Merchant.create!(name: 'Ron Swanson')}
   let!(:merchant_2) {Merchant.create!(name: 'Deb Millhouse')}
 
-  let!(:item_1) {merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 150)}
-  let!(:item_2) {merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 300)}
+  let!(:item_1) {merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 150, status: 1)}
+  let!(:item_2) {merchant_1.items.create!(name: "Bracelet", description: "A thing around your wrist", unit_price: 300, status: 0)}
   let!(:item_3) {merchant_2.items.create!(name: "Earrings", description: "A thing around your ears", unit_price: 220)}
   let!(:item_4) {merchant_2.items.create!(name: "Button", description: "A thing for your pants", unit_price: 150)}
 
@@ -68,6 +68,41 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
       total_revenue = (invoice_item_1.unit_price * invoice_item_1.quantity) + (invoice_item_2.unit_price * invoice_item_2.quantity)
 
       expect(page).to have_content(total_revenue)
+    end
+  end
+
+  describe 'item status update field' do
+    scenario 'merchant sees item status select field  and submit button next to each item' do
+      within "#item#{item_1.id}" do
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_button("Update Item Status")
+      end
+
+      within "#item#{item_2.id}" do
+        expect(page).to have_field('Status', with: 'enabled')
+        expect(page).to have_button("Update Item Status")
+      end
+    end
+
+    scenario 'the item select field is populated by item status and changes when updated' do
+      within "#item#{item_1.id}" do
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_button("Update Item Status")
+
+        select "Enabled", from: "Status"
+        click_button("Update Item Status")
+
+        expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
+        expect(page).to have_field('Status', with: 'enabled')
+        expect(page).to have_no_field('Status', with: 'disabled')
+
+        select "Disabled", from: "Status"
+        click_button("Update Item Status")
+
+        expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_no_field('Status', with: 'enabled')
+      end
     end
   end
 end
