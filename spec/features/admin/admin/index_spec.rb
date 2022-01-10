@@ -35,8 +35,11 @@ RSpec.describe 'admin index page' do
   let!(:transaction_15) {FactoryBot.create(:transaction, invoice: invoice_5, result: "success")}
   let!(:transaction_16) {FactoryBot.create(:transaction, invoice: invoice_5, result: "failed")}
 
-  let!(:invoice_item_1) {FactoryBot.create(:invoice_item, status: "pending")}
-  let!(:invoice_item_2) {FactoryBot.create(:invoice_item, status: "packaged")}
+  let!(:invoice_6) {FactoryBot.create(:invoice, created_at: "Sun, 9 Jan 2022 06:10:00 UTC +00:00")}
+  let!(:invoice_7) {FactoryBot.create(:invoice, created_at: "Mon, 10 Jan 2022 06:15:00 UTC +00:00")}
+
+  let!(:invoice_item_1) {FactoryBot.create(:invoice_item, invoice: invoice_6, status: "pending")}
+  let!(:invoice_item_2) {FactoryBot.create(:invoice_item, invoice: invoice_7, status: "packaged")}
   let!(:invoice_item_3) {FactoryBot.create(:invoice_item, status: "shipped")}
   let!(:invoice_item_4) {FactoryBot.create(:invoice_item, status: "shipped")}
 
@@ -97,8 +100,17 @@ RSpec.describe 'admin index page' do
   end
 
   it 'has invoices which are all links to that invoices admin show page' do
-    
     expect(page).to have_link(invoice_item_1.invoice.id, href: "/admin/invoices/#{invoice_item_1.invoice.id}")
     expect(page).to have_link(invoice_item_2.invoice.id, href: "/admin/invoices/#{invoice_item_2.invoice.id}")
   end
+
+  it 'lists the invoices displays the date they were created' do
+    expect(page).to have_content(invoice_item_1.invoice.created_at.strftime("%A, %B %-d, %Y"))
+    expect(page).to have_content(invoice_item_2.invoice.created_at.strftime("%A, %B %-d, %Y"))
+  end
+
+  it 'lists in order' do
+    expect(invoice_item_1.invoice.created_at.strftime("%A, %B %-d, %Y")).to appear_before(invoice_item_2.invoice.created_at.strftime("%A, %B %-d, %Y"))
+  end
+
 end
