@@ -72,13 +72,13 @@ RSpec.describe 'Admin_Invoices Show Page' do
 
     visit "/admin/invoices/#{invoice.id}"
 
-    within("#invoice_#{invoice.invoice_items.first.id}") do
-      expect(page).to have_content("Status: shipped")
+    within("#status_#{invoice.invoice_items.first.id}") do
+      expect(page).to have_field(:status, with: "shipped")
     end
 
-    within("#invoice_#{invoice.invoice_items.second.id}") do
-      expect(page).to have_content("Status: pending")
-    end
+    within("#status_#{invoice.invoice_items.second.id}") do
+      expect(page).to have_field(:status, with: "pending")
+    end  
   end
 
   it 'calculates the potential revenue of the invoice' do
@@ -91,5 +91,27 @@ RSpec.describe 'Admin_Invoices Show Page' do
 
     expect(page).to have_content("Total Potential Revenue")
     expect(page).to have_content("$440.00")
+  end
+
+  it 'displays invoice_items status and allows edits' do
+    merchant = create(:merchant)
+    invoice = create(:invoice)
+    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice])
+
+    visit "/admin/invoices/#{invoice.id}"
+     # save_and_open_page
+    within("#status_#{invoice.invoice_items.first.id}") do
+      expect(page).to have_field(:status, with: "pending")
+
+      select 'packaged', from: :status
+      click_on "Update Item Status"
+      expect(current_path).to eq("/admin/invoices/#{invoice.id}")
+      expect(page).to have_field(:status, with: "packaged")
+
+      select 'shipped', from: :status
+      click_on "Update Item Status"
+      expect(current_path).to eq("/admin/invoices/#{invoice.id}")
+      expect(page).to have_field(:status, with: "shipped")
+    end
   end
 end
