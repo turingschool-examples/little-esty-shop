@@ -191,13 +191,5 @@ RSpec.describe 'Admin Dashboard Page' do
         expect(fourth).to appear_before(fifth)
       end
     end
-
-
-#     As an admin,
-# When I visit the admin dashboard
-# In the section for "Incomplete Invoices",
-# Next to each invoice id I see the date that the invoice was created
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
   end
 end
