@@ -23,7 +23,10 @@ class Merchant < ApplicationRecord
   end
 
   def best_sales_date
-    require "pry"; binding.pry
-    invoices.joins(:transactions).where(transactions: { result: 0}).select('invoices.created_at, SUM')
+    invoices.joins(:transactions, :invoice_items).where(transactions: {result: 0})
+    .select('invoices.*, sum(invoice_items.quantity) as total_sales')
+    .group(:id)
+    .order(created_at: :desc)
+    .first.created_at
   end
 end
