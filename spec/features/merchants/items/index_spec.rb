@@ -75,12 +75,12 @@ RSpec.describe 'Merchant Items Index page' do
   describe 'most popular items section' do
     it "lists the top 5 most popular items ranked by total revenue generated" do
       merchant = create(:merchant)
-      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_quantity: 4, invoice_item_unit_price: 1000)
-      item_2 = create(:item_with_transactions, merchant: merchant, name: "Apple", invoice_quantity: 4, invoice_item_unit_price: 1000000)
-      item_3 = create(:item_with_transactions, merchant: merchant, name: "Zebra", invoice_quantity: 4, invoice_item_unit_price: 100)
-      item_4 = create(:item_with_transactions, merchant: merchant, name: "Bus", invoice_quantity: 4, invoice_item_unit_price: 100000)
-      item_5 = create(:item_with_transactions, merchant: merchant, name: "Dog", invoice_quantity: 4, invoice_item_unit_price: 10000)
-      item_6 = create(:item_with_transactions, merchant: merchant, name: "Legos", invoice_quantity: 4, invoice_item_unit_price: 10)
+      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 1000)
+      item_2 = create(:item_with_transactions, merchant: merchant, name: "Apple", invoice_item_quantity: 4, invoice_item_unit_price: 1000000)
+      item_3 = create(:item_with_transactions, merchant: merchant, name: "Zebra", invoice_item_quantity: 4, invoice_item_unit_price: 100)
+      item_4 = create(:item_with_transactions, merchant: merchant, name: "Bus", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+      item_5 = create(:item_with_transactions, merchant: merchant, name: "Dog", invoice_item_quantity: 4, invoice_item_unit_price: 10000)
+      item_6 = create(:item_with_transactions, merchant: merchant, name: "Legos", invoice_item_quantity: 4, invoice_item_unit_price: 10)
 
       within "div.top_items" do
         expect(page).to have_content("Apple")
@@ -105,7 +105,7 @@ RSpec.describe 'Merchant Items Index page' do
 
     it "shows the total revenue generated next to each item name" do
       merchant = create(:merchant)
-      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_quantity: 4, invoice_item_unit_price: 100000)
+      item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
       within "div.top_items" do
         within "div.item_#{item_1.id}" do
           expect(page).to have_content("Total Revenue: $4,000.00")
