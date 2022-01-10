@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
         expect(item_2.potential_revenue).to eq(100000)
 
         item_3 = create(:item_with_transactions, name: 'Desk', invoice_item_quantity: 2, invoice_item_unit_price: 20000, transaction_result: 0)
-        item_3.item_invoices.update(item: item_2)
+        item_3.invoice_items.update(item: item_2)
         expect(item_2.potential_revenue).to eq(140000)
 
       end
