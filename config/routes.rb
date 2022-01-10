@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   resources :merchants, only:[:show] do
-    resources :items, only:[:index]
-    resources :invoices, only:[:index]
+    resources :items, except:[:destroy]
+    resources :item_status, only:[:update]
+    resources :invoices, only:[:index, :show]
+    resources :invoice_items, only: [:update]
     resources :dashboard, only:[:index]
   end
 

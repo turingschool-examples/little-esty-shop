@@ -6,6 +6,9 @@ class Invoice < ApplicationRecord
 
   enum status: [:cancelled, 'in progress', :completed]
 
+  validates_presence_of :status,
+                        :customer_id
+
   def incomplete_invoices
     invoice_items.where(status: [0, 1])
   end

@@ -7,6 +7,11 @@ describe Invoice, type: :model do
     it { should have_many :transactions }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of :customer_id }
+    it { should validate_presence_of :status }
+  end
+
   describe 'enum' do
     it { should define_enum_for(:status).with_values([:cancelled, 'in progress', :completed])}
   end
@@ -73,5 +78,4 @@ describe Invoice, type: :model do
       expect(invoice_1.completed_invoices).to eq([invoice_item_2])
     end
   end
-
 end
