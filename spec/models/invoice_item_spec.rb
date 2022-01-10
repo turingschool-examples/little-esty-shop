@@ -48,6 +48,11 @@ RSpec.describe InvoiceItem, type: :model do
         invoice_item_3 = create(:invoice_item, quantity: 1, unit_price: 1000, invoice: invoice_2)
         invoice_items = InvoiceItem.where(id:[invoice_item_1.id, invoice_item_2.id, invoice_item_3.id])
 
+        # these invoice_items should not be included in any potential revenue
+        invoice_3 = create(:invoice)
+        invoice_item_4 = create(:invoice_item, quantity: 1, unit_price: 1000, invoice: invoice_3)
+        transaction = create(:transaction, result: 0, invoice: invoice_3)
+
         # test for no transactions
         expect(invoice_items.potential_revenue).to eq(0)
 
