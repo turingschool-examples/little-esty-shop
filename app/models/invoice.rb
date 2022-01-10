@@ -19,8 +19,7 @@ class Invoice < ApplicationRecord
   end
 
   def potential_revenue
-    invoice_items.joins(invoice: :transactions).where(transactions: {result: 0})
-    .revenue
+    invoice_items.potential_revenue
   end
 
   def potential_revenue_by_merchant(merchant)
