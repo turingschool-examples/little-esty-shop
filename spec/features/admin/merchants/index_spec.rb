@@ -27,7 +27,7 @@ RSpec.describe 'Admin_Merchants Index Page' do
     merchant2 = create(:merchant, name: "Mark", status: 1)
     visit "/admin/merchants"
 
-    click_button "Enable #{merchant2.name}"
+    click_button "Disable #{merchant2.name}"
 
     expect(current_path).to eq("/admin/merchants")
     merchant2.reload
