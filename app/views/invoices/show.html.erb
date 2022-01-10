@@ -10,7 +10,7 @@
 <% @merchant_items.each do |item| %>
   <div id="item<%= item.id %>">
     <p>Item: <%= item.name %> </p>
-    <% item.items_on_invoice(@invoice.id).each do |invoice_item| %>
+    <% item.invoice_items_filtered_by_ivoice_id(@invoice.id).each do |invoice_item| %>
       <p>Unit Price: <%= invoice_item.unit_price %> </p>
       <p>Quantity: <%= invoice_item.quantity %> </p>
       <p>Invoice Status: <%= invoice_item.status %> </p>
