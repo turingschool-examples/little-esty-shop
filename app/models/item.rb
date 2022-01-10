@@ -23,4 +23,10 @@ class Item < ApplicationRecord
     .created_at
     .strftime("%m/%d/%Y")
   end
+
+  def invoice_items_filtered_by_ivoice_id(invoice_id)
+    invoice_items
+    .select('invoice_items.*')
+    .where('invoice_id = ?', invoice_id)
+  end
 end
