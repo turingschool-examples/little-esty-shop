@@ -35,6 +35,11 @@ RSpec.describe 'admin index page' do
   let!(:transaction_15) {FactoryBot.create(:transaction, invoice: invoice_5, result: "success")}
   let!(:transaction_16) {FactoryBot.create(:transaction, invoice: invoice_5, result: "failed")}
 
+  let!(:invoice_item_1) {FactoryBot.create(:invoice_item, status: "pending")}
+  let!(:invoice_item_2) {FactoryBot.create(:invoice_item, status: "packaged")}
+  let!(:invoice_item_3) {FactoryBot.create(:invoice_item, status: "shipped")}
+  let!(:invoice_item_4) {FactoryBot.create(:invoice_item, status: "shipped")}
+
   before(:each) do
     visit '/admin/'
   end
@@ -60,7 +65,6 @@ RSpec.describe 'admin index page' do
   end
 
   it 'shows the names of the top 5 customers' do
-    save_and_open_page
     expect(customer_2.last_name).to appear_before(customer_4.first_name)
     expect(customer_4.last_name).to appear_before(customer_1.first_name)
     expect(customer_1.last_name).to appear_before(customer_5.first_name)
@@ -81,5 +85,20 @@ RSpec.describe 'admin index page' do
     within("#top-customer-#{customer_3.last_name}") do
       expect(page).to have_content(1)
     end
+  end
+
+  it 'has a section for Incomplete Invoices' do
+    expect(page).to have_content("Incomplete Invoices")
+  end
+
+  it 'has a list of all invoices with unshipped items' do
+    expect(page).to have_content(invoice_item_1.invoice.id)
+    expect(page).to have_content(invoice_item_2.invoice.id)
+  end
+
+  it 'has invoices which are all links to that invoices admin show page' do
+    save_and_open_page
+    expect(page).to have_link(invoice_item_1.invoice.id, href: "/admin/invoices/#{invoice_item_1.invoice.id}")
+    expect(page).to have_link(invoice_item_2.invoice.id, href: "/admin/invoices/#{invoice_item_2.invoice.id}")
   end
 end
