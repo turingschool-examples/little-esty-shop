@@ -30,7 +30,7 @@
   <% @merchant.popular_items(5).each do |item| %>
     <div class=<%= "top_item_#{item.id}" %>>
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-      <p><%= item.potential_revenue %></p>
+      <p><%= "Total Revenue: #{money_honey(item.potential_revenue)}" %></p>
     </div>
 
   <% end %>
