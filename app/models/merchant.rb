@@ -52,7 +52,7 @@ class Merchant < ApplicationRecord
     where(status: 0)
   end
 
-  def self.top_five
+  def self.top_five_merchants
     joins(invoices: :transactions)
     .where('transactions.result = ?', 'success')
     .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')

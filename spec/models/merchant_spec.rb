@@ -204,7 +204,7 @@ RSpec.describe Merchant do
   describe 'class methods' do
     describe '::top_five' do
       it 'lists the top five merchants ordered by total revenue' do
-        expect(Merchant.top_five).to eq([merchant_5, merchant_2, merchant_4, merchant_6, merchant_1])
+        expect(Merchant.top_five_merchants).to eq([merchant_5, merchant_2, merchant_4, merchant_6, merchant_1])
       end
     end
   end

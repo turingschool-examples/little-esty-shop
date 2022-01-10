@@ -174,47 +174,46 @@ RSpec.describe 'Admin Merchants Index' do
 
   scenario 'visitor sees the total_revenue generated next to each merchant name' do
     within "#merchant#{merchant_5.id}" do
-      expect(page).to have_content(Merchant.top_five.first.total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants.first.total_revenue)
     end
 
     within "#merchant#{merchant_2.id}" do
-      expect(page).to have_content(Merchant.top_five[1].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[1].total_revenue)
     end
 
     within "#merchant#{merchant_4.id}" do
-      expect(page).to have_content(Merchant.top_five[2].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[2].total_revenue)
     end
 
     within "#merchant#{merchant_6.id}" do
-      expect(page).to have_content(Merchant.top_five[3].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[3].total_revenue)
     end
 
     within "#merchant#{merchant_1.id}" do
-      expect(page).to have_content(Merchant.top_five[4].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[4].total_revenue)
     end
   end
 
   scenario 'visitor sees the date with most revenue for each merchant' do
     within "#merchant#{merchant_5.id}" do
-      expect(page).to have_content(Merchant.top_five.first.top_date)
+      expect(page).to have_content(Merchant.top_five_merchants.first.top_date)
     end
 
     within "#merchant#{merchant_2.id}" do
-      expect(page).to have_content(Merchant.top_five[1].top_date)
+      expect(page).to have_content(Merchant.top_five_merchants[1].top_date)
     end
 
     within "#merchant#{merchant_4.id}" do
-      expect(page).to have_content(Merchant.top_five[2].top_date)
+      expect(page).to have_content(Merchant.top_five_merchants[2].top_date)
     end
 
     within "#merchant#{merchant_6.id}" do
-      expect(page).to have_content(Merchant.top_five[3].top_date)
+      expect(page).to have_content(Merchant.top_five_merchants[3].top_date)
     end
 
     within "#merchant#{merchant_1.id}" do
-      expect(page).to have_content(Merchant.top_five[4].top_date)
+      expect(page).to have_content(Merchant.top_five_merchants[4].top_date)
     end
-    save_and_open_page
   end
 
   scenario 'visitor sees the most recent date if multiple days had the same revenue' do
