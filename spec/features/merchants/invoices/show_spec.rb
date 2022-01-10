@@ -94,7 +94,14 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
         expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
         expect(page).to have_field('Status', with: 'enabled')
-        expect(page).to have_button("Update Item Status")
+        expect(page).to have_no_field('Status', with: 'disabled')
+
+        select "Disabled", from: "Status"
+        click_button("Update Item Status")
+
+        expect(current_path).to eq(merchant_invoice_path(merchant_1.id, invoice_1.id))
+        expect(page).to have_field('Status', with: 'disabled')
+        expect(page).to have_no_field('Status', with: 'enabled')
       end
     end
   end
