@@ -60,5 +60,16 @@ RSpec.describe Invoice, type: :model do
         expect(invoice1.potential_revenue(merchant1)).to eq(35000)
       end
     end
+
+    describe '#admin_potential_revenue' do
+      it 'calculates potential revnue of invoice' do
+        merchant = create(:merchant)
+        invoice = create(:invoice)
+        item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 3000, invoice_quantity: 8)
+        item2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 2500, invoice_quantity: 8)
+
+        expect(invoice.admin_potential_revenue).to eq(44000)
+      end
+    end
   end
 end
