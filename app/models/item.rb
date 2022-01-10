@@ -22,4 +22,7 @@ class Item < ApplicationRecord
     Item.all.where(status: 0)
   end
 
+  def potential_revenue
+    invoice_items.potential_revenue
+  end
 end
