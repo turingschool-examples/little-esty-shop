@@ -86,11 +86,12 @@ RSpec.describe 'merchants invoice show page' do
     invoice1 = create(:invoice)
     item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 150000)
     item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 200000)
+    transaction = create(:transaction, invoice: invoice1, result: 0)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     expect(page).to have_content("Total Potential Revenue")
-    expect(page).to have_content("$3,500.00")
+    expect(page).to have_content("$28,000.00")
   end
 
   it 'displays an invoices status as a select form' do

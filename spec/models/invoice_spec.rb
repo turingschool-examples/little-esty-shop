@@ -65,13 +65,20 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe '#potential_revenue_by_merchant' do
-      it "reports potential revenue associated with the items of a particular merchant" do
+      it "reports potential revenue associated with items that belong to a particular merchant that are on a particular invoice" do
         merchant_1 = create(:merchant)
         merchant_2 = create(:merchant)
         invoice1 = create(:invoice)
         item1 = create(:item_with_invoices, name: 'Toy', merchant: merchant_1, invoices: [invoice1], invoice_item_quantity: 3, invoice_item_unit_price: 15000)
         item2 = create(:item_with_invoices, name: 'Car', merchant: merchant_2, invoices: [invoice1], invoice_item_quantity: 5, invoice_item_unit_price: 20000)
         transaction_2 = create(:transaction, invoice: invoice1, result: 0)
+
+        # revenue associated with this invoice should not be included in potential revenue calcs.
+        invoice2 = create(:invoice)
+        item3 = create(:item_with_invoices, name: 'Plane', merchant: merchant_1, invoices: [invoice2], invoice_item_quantity: 3, invoice_item_unit_price: 33000)
+        item4 = create(:item_with_invoices, name: 'Yoyo', merchant: merchant_2, invoices: [invoice2], invoice_item_quantity: 5, invoice_item_unit_price: 77000)
+        transaction_3 = create(:transaction, invoice: invoice2, result: 0)
+
         expect(invoice1.potential_revenue_by_merchant(merchant_1)).to eq(45000)
         expect(invoice1.potential_revenue_by_merchant(merchant_2)).to eq(100000)
       end
