@@ -13,7 +13,8 @@
   <h3>Incomplete Invoices:</h3>
 
   <% @incomplete_invoices.each do |invoice| %>
-    <p><%= link_to invoice.id, admin_invoice_path(invoice.id) %></p>
-
+    <div id="incomplete-invoices-<%= invoice.id %>">
+      <p><%= link_to invoice.id, admin_invoice_path(invoice.id) %> - <%= invoice.creation_date_formatted %></p>
+    </div>
   <% end %>
 </div>
