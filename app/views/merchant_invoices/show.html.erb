@@ -4,3 +4,11 @@
 
 <li>Invoice Created: <%= @invoice.pretty_created_at %></li>
 <li>Customer Name: <%= @invoice.customer_name %></li>
+
+<% @invoice.items.each do |item| %>
+<h2>Item Name: <%= item.name %></h2>
+<% end %>
+
+<h3>Quantity: <%= @invoice_item.quantity %></h3>
+<h3>Unit Price: <%= @invoice_item.unit_price %></h3>
+<h3>Status: <%= @invoice_item.status %></h3>

@@ -15,7 +15,7 @@ RSpec.describe Invoice, type: :model do
   describe 'instance methods' do
     before(:each) do
       @customer = FactoryBot.create(:customer, first_name: "Cookie", last_name: "Monster")
-      @invoice = FactoryBot.create(:invoice, customer: @customer)
+      @invoice = FactoryBot.create(:invoice, customer: @customer, created_at: Date.today)
     end
 
     describe 'pretty_created_at' do
