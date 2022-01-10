@@ -51,5 +51,16 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '::incomplete' do
+      let!(:invoice_item_1) {FactoryBot.create(:invoice_item, status: "pending")}
+      let!(:invoice_item_2) {FactoryBot.create(:invoice_item, status: "packaged")}
+      let!(:invoice_item_3) {FactoryBot.create(:invoice_item, status: "shipped")}
+      let!(:invoice_item_4) {FactoryBot.create(:invoice_item, status: "shipped")}
+      it 'returns all of the invoices which havent yet shipped' do
+        expect(Invoice.incomplete).to include(invoice_item_1.invoice)
+        expect(Invoice.incomplete).to include(invoice_item_2.invoice)
+        expect(Invoice.incomplete).to include(@invoiceitem.invoice)
+      end
+    end
   end
 end
