@@ -72,7 +72,7 @@ RSpec.describe 'Merchant Items Index page' do
     expect("Disabled Items:").to appear_before(item1.name)
   end
 
-  describe 'most popular items section' do
+  describe 'most popular items section in merhcant items index' do
     it "lists the top 5 most popular items ranked by total revenue generated" do
       merchant = create(:merchant)
       item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 1000)
@@ -82,7 +82,9 @@ RSpec.describe 'Merchant Items Index page' do
       item_5 = create(:item_with_transactions, merchant: merchant, name: "Dog", invoice_item_quantity: 4, invoice_item_unit_price: 10000)
       item_6 = create(:item_with_transactions, merchant: merchant, name: "Legos", invoice_item_quantity: 4, invoice_item_unit_price: 10)
 
-      within "div.top_items" do
+      visit "merchants/#{merchant.id}/items"
+
+      within('div.top_items') do
         expect(page).to have_content("Apple")
         expect(page).to have_content("Bus")
         expect(page).to have_content("Dog")
@@ -95,6 +97,9 @@ RSpec.describe 'Merchant Items Index page' do
     it "each item name is a link to the merchants item show page for that item" do
       merchant = create(:merchant)
       item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy")
+
+      visit "merchants/#{merchant.id}/items"
+
       within "div.top_items" do
         within "div.item_#{item_1.id}" do
           click_link "Toy"
@@ -106,6 +111,9 @@ RSpec.describe 'Merchant Items Index page' do
     it "shows the total revenue generated next to each item name" do
       merchant = create(:merchant)
       item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+
+      visit "merchants/#{merchant.id}/items"
+      
       within "div.top_items" do
         within "div.item_#{item_1.id}" do
           expect(page).to have_content("Total Revenue: $4,000.00")
