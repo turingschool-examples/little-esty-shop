@@ -21,3 +21,9 @@
     </div>
   <% end %>
 </table>
+
+<h3>Incomplete Invoices</h3>
+
+<% @invoices.incomplete.each do |invoice| %>
+  <p>Invoice: <%= link_to invoice.id, "/admin/invoices/#{invoice.id}" %></p>
+<% end %>
