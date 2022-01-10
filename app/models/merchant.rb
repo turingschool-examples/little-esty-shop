@@ -38,4 +38,12 @@ class Merchant < ApplicationRecord
          .order(revenue: :desc)
          .limit(5)
   end
+
+  def top_merchant_best_day #NEED TO CHECK AND SEE THAT THIS IS CORRECTLY TESTING THE BEST DAYS
+    invoices.joins(:transactions)
+          .select("invoices.*, sum(quantity) as total_sales")
+          .group(:id)
+          .order(total_sales: :desc)
+          .first.updated_at
+  end
 end
