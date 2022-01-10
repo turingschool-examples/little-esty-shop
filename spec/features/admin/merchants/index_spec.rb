@@ -64,9 +64,19 @@ RSpec.describe 'Admin Merchant Index' do
       end
 
       Merchant.top_five_merchants.each do |merchant|
-      within("#merchant-#{merchant.name}") do
+        within("#merchant-#{merchant.name}") do
           expect(page).to have_link("#{merchant.name}")
           expect(page).to have_content(h.number_to_currency(merchant.revenue/100, precision: 0))
+        end
+      end
+    end
+
+    it 'next to each top 5 merchant it says Top selling date for merchant_name was date' do #PLEASE CHECK AND SEE THAT THIS TEST IS CORRECTLY TESTING THE BEST DAYS
+      visit "/admin/merchants"
+
+      Merchant.top_five_merchants.each do |merchant|
+        within("#merchant-#{merchant.name}") do
+          expect(page).to have_content("Top selling date for #{merchant.name} was #{merchant.top_merchant_best_day.strftime("%m-%d-%y")}")
         end
       end
     end
