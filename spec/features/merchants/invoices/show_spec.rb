@@ -35,7 +35,7 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     end
 
     it 'displays invoice created_at date in format DAY, MM DD,YYYY' do
-      expect(page).to have_content("Sunday, March 25, 2012")
+      expect(page).to have_content(invoice_1.creation_date_formatted)
     end
 
     it 'displays customer first and last name' do

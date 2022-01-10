@@ -3,8 +3,4 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :invoice
   belongs_to :item
-
-  def invoice_creation_date
-    invoice.creation_date_formatted
-  end
 end
