@@ -22,7 +22,7 @@ RSpec.describe InvoiceItem, type: :model do
     describe 'revenue' do
       it "multiplies unit_price and quantity" do
         invoice_item = create(:invoice_item, quantity: 3, unit_price: 1000)
-        expect(invoice_item.potential_revenue).to eq(3000)
+        expect(invoice_item.revenue).to eq(3000)
       end
     end
   end

@@ -25,7 +25,6 @@ FactoryBot.define do
         transaction.invoice.update(customer: evaluator.customer)
         create(:invoice_item, item: evaluator.item, invoice: transaction.invoice, quantity: invoice_item_quantity, unit_price: invoice_item_unit_price)
       end
-      transaction.reload
     end
   end
 end
