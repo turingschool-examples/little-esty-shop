@@ -10,7 +10,7 @@ RSpec.describe "Merchant Item Create page" do
       fill_in "Name:", with: "Paul's Item"
       fill_in "Description", with: "An item from Paul"
       fill_in "Unit Price:", with: 1000
-      click_button "Submit"
+      click_button "Create Item"
     end
 
     expect(current_path).to eq("/merchants/#{merchant1.id}/items")
