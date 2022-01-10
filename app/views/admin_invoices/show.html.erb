@@ -12,7 +12,11 @@
     <h3>Item: <%=invoice_item.item.name%></h3>
     <p>Quantity Ordered: <%=invoice_item.quantity%></p>
     <p>Unit Price: <%=money_honey(invoice_item.unit_price)%></p>
-    <p>Status: <%=invoice_item.status %></p>
+    <section id="status_<%=invoice_item.id%>">
+      <%= form_with url: "/admin/invoices/#{@invoice.id}/#{invoice_item.id}", method: :patch, local: true do |f| %>
+      <p>Status: <%= f.select(:status, [:pending, :packaged, :shipped], selected: invoice_item.status)%> <%= f.submit "Update Item Status"%></p>
+      <%end%>
+    </section>
   </section>
 <%end%>
 
