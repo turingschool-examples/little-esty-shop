@@ -29,6 +29,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:merchant) }
     it { should validate_numericality_of(:unit_price) }
+    it { should define_enum_for(:status).with_values(disabled: 0,enabled: 1) }
   end 
   
   describe 'instance methods' do 
@@ -42,6 +43,12 @@ RSpec.describe Item, type: :model do
 
     it 'can return the status of the item on an invoice' do 
       expect(item_1.invoice_item_status(invoice_1)).to eq("pending")
+    end
+  end
+
+  describe '#date_created' do
+    it 'returns the date created of an items invoice and formats it' do
+      expect(invoice_item_1.item.date_created).to eq(invoice_item_1.invoice.created_at.strftime("%A, %B %-d, %Y"))
     end
   end
 end

@@ -5,11 +5,6 @@ class Item < ApplicationRecord
   validates :name, :description, :merchant, presence: true
   validates :unit_price, numericality: { only_integer: true }
 
-  # enum result: {
-  #   disabled: 0,
-  #   enabled: 1
-  # }
-
   enum status: [:disabled, :enabled]
 
   def invoice_item_quantity(invoice)
@@ -24,3 +19,9 @@ class Item < ApplicationRecord
     InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).status
   end
 end 
+
+  def date_created
+    invoices.first.created_at.strftime("%A, %B %-d, %Y")
+  end
+end
+

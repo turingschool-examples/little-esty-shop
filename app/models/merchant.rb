@@ -1,5 +1,8 @@
 class Merchant < ApplicationRecord
   has_many :items
+  validates :name, presence: true
+
+  enum status: [:disabled, :enabled]
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -21,5 +24,23 @@ class Merchant < ApplicationRecord
       .where(invoice_items: {status: "packaged"})
       .select(:name, :id)
       .limit(5)
+      .order(:created_at)
+  end
+
+  def top_items
+    Item.joins(invoices: :transactions)
+        .where(invoices: {status: 1}, transactions: {result: 1})
+        .select("items.id, items.name, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+        .group(:id)
+        .order("revenue desc")
+        .limit(5)
+  end
+
+  def filter_item_status(status_enum)
+    items.where(status: status_enum)
+  end
+
+  def self.filter_merchant_status(status_enum)
+    where(status: status_enum)
   end
 end

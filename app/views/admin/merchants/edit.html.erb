@@ -1,0 +1,6 @@
+<h1>ADMIN Update <%= @merchant.name %> Info</h1>
+<%= form_with model: [:admin, @merchant], local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Save' %>
+<% end %>
