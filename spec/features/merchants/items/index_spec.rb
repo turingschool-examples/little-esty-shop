@@ -174,5 +174,18 @@ RSpec.describe 'merchant item index page' do
         expect(page).to_not have_content("-$600.00 in sales")
       end
     end
+
+    xit 'for each top item it shows the date with the most sales' do
+      visit "/merchants/#{@merch_1.id}/items"
+
+      #need to format date to mm/dd/yy
+      within("#top-items") do
+        expect(page).to have_content("Top day for #{item7.name} was ")
+        expect(page).to have_content("Top day for #{item5.name} was ")
+        expect(page).to have_content("Top day for #{item1.name} was ")
+        expect(page).to have_content("Top day for #{item3.name} was ")
+        expect(page).to have_content("Top day for #{item4.name} was ")
+      end
+    end
   end
 end
