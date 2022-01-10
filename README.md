@@ -1,34 +1,46 @@
-# Little Esty Shop
+![Screen Shot 2022-01-09 at 11 27 27 PM](https://user-images.githubusercontent.com/88950699/148721783-bbc0ba33-af58-4a40-bbbd-80e08eaf6b54.png)
 
-## Background and Description
+A simple and lightweight e-commerce platform that allows for unlimited customization.
+- Allows for admin and merchant users
+   - Admin users can manage merchant accounts, track customer invoices, and view sales data.  
+   - Merchant users can manage their inventory, create invoices and transactions, track order status, and even view data showing best-selling items, repeat customers, and more. 
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+→ [Click here to navigate a demo as an admin user](https://agile-springs-94475.herokuapp.com/admin)  
+→ [Click here to navigate a demo as a merchant user](https://agile-springs-94475.herokuapp.com/merchants/1/dashboard)
+ 
+Created using:  
+![RoR](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+![pgsql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)  
+Ruby 2.7.2 - Rails 5.2.6 - PostgreSQL 14.1  
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+Tested using:   
+![rspec](https://img.shields.io/gem/v/rspec-rails?label=rspec&style=flat-square)
+![shoulda](https://img.shields.io/gem/v/shoulda-matchers?label=shoulda-matchers&style=flat-square)
+![capybara](https://img.shields.io/gem/v/capybara?label=capybara&style=flat-square)
+![simplecov](https://img.shields.io/gem/v/simplecov?label=simplecov&style=flat-square)
+![orderly](https://img.shields.io/gem/v/orderly?label=orderly&style=flat-square)
+![factory](https://img.shields.io/gem/v/factory_bot?label=factory%20bot&style=flat-square)
+![faker](https://img.shields.io/gem/v/faker?label=faker&style=flat-square)
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
+![closed PRs](https://img.shields.io/github/issues-pr-closed/kbhoffmann/little-esty-shop?style=flat-square)   
 
-## Setup
+## Contributors 
+<table>
+   <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/84674761?s=120&v=4" width=150 height=150></td>
+      <td><img src="https://avatars.githubusercontent.com/u/69736499?s=120&v=4"></td>
+      <td><img src="https://avatars.githubusercontent.com/u/81737385?s=120&v=4"></td>
+      <td><img src="https://avatars.githubusercontent.com/u/88950699?s=120&v=4"></td>
+   </tr>
+   <tr>
+      <td><a href="https://github.com/kbhoffmann">Kerri</a></td>
+      <td><a href="https://github.com/joeldenverdev">Joel</a></td>
+      <td><a href="https://github.com/JCNapier">John</a></td>
+      <td><a href="https://github.com/ParkerLockhart">Parker</a></td>
+   </tr>
+</table>
 
-This project requires Ruby 2.7.2.
-
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
 
 ## Phases
 
