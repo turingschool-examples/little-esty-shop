@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  enum status: [:Disabled, :Enabled]
+
   validates :name, presence: true
 
   def invoice_finder
