@@ -166,5 +166,38 @@ RSpec.describe 'Admin Dashboard Page' do
         expect(page).to have_link("#{@invoice_5.id}", href: admin_invoice_path(@invoice_5.id))
       end
     end
+
+    scenario 'visitor sees invoice creation date next to each invoice' do
+      within "#incomplete-invoices-#{@invoice_1.id}" do
+        expect(page).to have_content(@invoice_1.creation_date_formatted)
+      end
+
+      within "#incomplete-invoices-#{@invoice_2.id}" do
+        expect(page).to have_content(@invoice_2.creation_date_formatted)
+      end
+    end
+
+    scenario 'visitor sees invoices are ordered from oldest to newest' do
+      first = find("#incomplete-invoices-#{@invoice_1.id}")
+      second = find("#incomplete-invoices-#{@invoice_4.id}")
+      third = find("#incomplete-invoices-#{@invoice_5.id}")
+      fourth = find("#incomplete-invoices-#{@invoice_2.id}")
+      fifth = find("#incomplete-invoices-#{@invoice_3.id}")
+
+      within "#incomplete-invoices" do
+        expect(first).to appear_before(second)
+        expect(second).to appear_before(third)
+        expect(third).to appear_before(fourth)
+        expect(fourth).to appear_before(fifth)
+      end
+    end
+
+
+#     As an admin,
+# When I visit the admin dashboard
+# In the section for "Incomplete Invoices",
+# Next to each invoice id I see the date that the invoice was created
+# And I see the date formatted like "Monday, July 18, 2019"
+# And I see that the list is ordered from oldest to newest
   end
 end
