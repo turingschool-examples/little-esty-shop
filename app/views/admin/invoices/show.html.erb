@@ -11,3 +11,5 @@
     <p> Status: <%= invoice_item.status %></p>
   <% end  %>
 <% end %>
+<br>
+<h3> Total Revenue: $<%= @invoice.invoice_items.revenue.to_f/100 %> </h3>
