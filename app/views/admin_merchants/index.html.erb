@@ -5,7 +5,7 @@
   <h2>Top Merchants</h2>
   <% Merchant.top_merchants(5).each do |merchant| %>
     <div class=<%= "top_merchant_#{merchant.id}" %>>
-      <p><%= merchant.name %></p>
+      <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
     </div>
   <% end %>
 </div>

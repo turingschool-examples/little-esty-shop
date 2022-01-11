@@ -58,7 +58,7 @@ RSpec.describe 'Admin_Merchants Index Page' do
 
       within "div.top_merchants" do
         click_link "Zach"
-        expect(current_path).to be("/admin/merchants/#{merchant_1.id}")
+        expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
       end
     end
   end
