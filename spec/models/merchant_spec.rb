@@ -49,12 +49,14 @@ RSpec.describe Merchant, type: :model do
         merchant_5 = create(:merchant_with_transactions, name: 'Bob', invoice_item_quantity: 3, invoice_item_unit_price: 10000)
         merchant_6 = create(:merchant_with_transactions, name: 'Charlie', invoice_item_quantity: 3, invoice_item_unit_price: 1000)
 
-        expect(Merchant.top_merchants(1)).to eq(merchant_2)
+        expect(Merchant.top_merchants(1)).to eq([merchant_2])
         expect(Merchant.top_merchants(2)).to eq([merchant_2, merchant_5])
 
         # Create new items to test top_merchants across multiple invoices for one merchant.
         # Test with invalid transaction.
-        new_items = create(:item_with_transactions, merchant: merchant_6, invoice_item_quantity: 15, invoice_item_unit_price: 100000, transaction_result: 1)
+        invoice_1 = create(:invoice_with_transactions, transaction_result: 1)
+        new_items = create(:item_with_transactions, merchant: merchant_6, invoice: invoice_1, invoice_item_quantity: 15, invoice_item_unit_price: 100000, transaction_result: 1)
+
         expect(Merchant.top_merchants(2)).to eq([merchant_2, merchant_5])
 
         # Test with valid transaction.
