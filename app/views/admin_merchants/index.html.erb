@@ -1,6 +1,15 @@
 <h1>Merchants Index</h1>
 <h3><%= link_to "Create New Admin Merchant", "/admin/merchants/new" %></h3>
 
+<div class="top_merchants">
+  <h2>Top Merchants</h2>
+  <% Merchant.top_merchants(5).each do |merchant| %>
+    <div class=<%= "top_merchant_#{merchant.id}" %>>
+      <p><%= merchant.name %></p>
+    </div>
+  <% end %>
+</div>
+
 <h2>Enabled Merchants:</h2>
 <% @enabled_merchants_array.each do |merchant| %>
   <h3><%= merchant.name %></h3>
