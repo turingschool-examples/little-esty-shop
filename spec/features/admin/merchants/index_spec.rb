@@ -30,4 +30,25 @@ RSpec.describe 'Admin_Merchants Index Page' do
 
     expect(current_path).to eq("/admin/merchants/new")
   end
+
+  describe 'top merchants section' do
+    it "lists the top five merchants by total revenue" do
+      merchant_1 = create(:merchant_with_transactions, name: 'Zach', invoice_item_quantity: 3, invoice_item_unit_price: 10)
+      merchant_2 = create(:merchant_with_transactions, name: 'Abe', invoice_item_quantity: 15, invoice_item_unit_price: 100000)
+      merchant_3 = create(:merchant_with_transactions, name: 'Nobody', invoice_item_quantity: 3, invoice_item_unit_price: 1)
+      merchant_4 = create(:merchant_with_transactions, name: 'Jenny', invoice_item_quantity: 3, invoice_item_unit_price: 100)
+      merchant_5 = create(:merchant_with_transactions, name: 'Bob', invoice_item_quantity: 3, invoice_item_unit_price: 10000)
+      merchant_6 = create(:merchant_with_transactions, name: 'Charlie', invoice_item_quantity: 3, invoice_item_unit_price: 1)
+
+      visit "/admin/merchants"
+
+      within "div.top_merchants" do
+        expect('Abe').to appear_before('Bob')
+        expect('Bob').to appear_before('Charlie')
+        expect('Charlie').to appear_before('Jenny')
+        expect('Jenny').to appear_before('Zach')
+        expect(page).to_not have_content('Nobody')
+      end
+    end
+  end
 end
