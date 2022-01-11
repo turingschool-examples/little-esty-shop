@@ -6,6 +6,7 @@
   <% Merchant.top_merchants(5).each do |merchant| %>
     <div class=<%= "top_merchant_#{merchant.id}" %>>
       <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
+      <p><%= "Top selling date for #{merchant.name} was #{merchant.best_day.strftime("%A, %B %d, %Y")}." %></p>
     </div>
   <% end %>
 </div>

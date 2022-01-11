@@ -63,14 +63,14 @@ RSpec.describe 'Admin_Merchants Index Page' do
     end
 
     it "lists top selling date" do
-      invoice_1 = create(:invoice, created_at: DateTime.new(2022, 1, 10, 1, 1, 1))
-      merchant_1 = create(:merchant_with_transactions, name: 'Zach', invoice_item_quantity: 3, invoice_item_unit_price: 10)
+      invoice_1 = create(:invoice, created_at: DateTime.new(2022, 1, 15, 1, 1, 1))
+      merchant_1 = create(:merchant_with_transactions, name: 'Bob', invoice: invoice_1, invoice_item_quantity: 3, invoice_item_unit_price: 10)
 
       visit "/admin/merchants"
 
       within "div.top_merchants" do
-        within "div.top_merchants_#{merchant_1.id}" do
-          expect(page).to have_content("Top selling date for Zach was Monday, January 10, 2022.")
+        within "div.top_merchant_#{merchant_1.id}" do
+          expect(page).to have_content("Top selling date for Bob was Saturday, January 15, 2022.")
         end
       end
     end
