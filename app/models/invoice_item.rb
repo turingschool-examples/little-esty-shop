@@ -4,5 +4,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
 
-  
+  def self.revenue
+      sum('quantity * unit_price')
+  end
 end

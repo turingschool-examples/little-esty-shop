@@ -21,6 +21,7 @@ RSpec.describe 'Admin Invoice Show page' do
 
   scenario 'admin sees invoice attributes' do
     expect(page).to have_content(invoice_1.id)
+    expect(page).to have_content(invoice_1.status)
     expect(page).to have_content(invoice_1.creation_date_formatted)
     expect(page).to have_content(customer_1.first_name)
     expect(page).to have_content(customer_1.last_name)
@@ -31,34 +32,6 @@ RSpec.describe 'Admin Invoice Show page' do
     expect(page).to have_content(item_1.unit_price.to_f/100)
     expect(page).to have_content(invoice_item_1.quantity)
     expect(page).to have_content(invoice_item_3.status)
-  end
-
-  scenario 'visitor sees invoice status is a select field next to invoice with current status selected' do
-    expect(page).to have_field('Status', with: 'completed')
-    expect(page).to have_button('Update Invoice Status')
-  end
-
-  scenario 'visitor can select new status and update by clicking submit button' do
-    expect(page).to have_field('Status', with: 'completed')
-    expect(page).to have_button('Update Invoice Status')
-
-    select 'Cancelled', from: 'Status'
-    click_button('Update Invoice Status')
-
-    expect(current_path).to eq(admin_invoice_path(invoice_1.id))
-    expect(page).to have_field('Status', with: 'cancelled')
-
-    select 'In Progress', from: 'Status'
-    click_button('Update Invoice Status')
-
-    expect(current_path).to eq(admin_invoice_path(invoice_1.id))
-    expect(page).to have_field('Status', with: 'in progress')
-
-    select 'Completed', from: 'Status'
-    click_button('Update Invoice Status')
-
-    expect(current_path).to eq(admin_invoice_path(invoice_1.id))
-    expect(page).to have_field('Status', with: 'completed')
   end
 
   scenario 'admin sees total revenue generated from this invoice' do
