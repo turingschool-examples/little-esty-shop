@@ -5,6 +5,7 @@
 <%= render partial: '/layouts/partials/top_customers' %>
 
 <h3>Items Ready to Ship</h3>
+<% require "pry"; binding.pry %>
 <% @merchant.items_not_shipped.each do |item| %>
   <div id="item<%=item.id%>">
     <li><%= item.name %> - Invoice#<%= link_to item.invoice_id, merchant_invoice_path(@merchant.id, item.invoice_id) %> - <%= item.invoice_created.strftime("%A, %B %d,%Y") %></li>
