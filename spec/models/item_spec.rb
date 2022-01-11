@@ -6,13 +6,15 @@ RSpec.describe Item do
     it { should have_many :invoice_items }
     it { should have_many(:invoices).through(:invoice_items) }
   end
-  
+
    before(:each) do
       @merchant_1 = Merchant.create!(name: 'Ron Swanson')
+      @merchant_2 = Merchant.create!(name: 'Swan Ronson')
 
       @item_1 = @merchant_1.items.create!(name: "Necklace", description: "A thing around your neck", unit_price: 1000)
       @item_2 = @merchant_1.items.create!(name: "Bracelet", description: "A thing around your neck", unit_price: 100, status: 0)
       @item_3 = @merchant_1.items.create!(name: "Earrings", description: "A thing around your neck", unit_price: 100, status: 1)
+      @item_4 = @merchant_2.items.create!(name: "Earrings", description: "A thing around your neck", unit_price: 100, status: 1)
 
       @customer_1 = Customer.create!(first_name: "Billy", last_name: "Joel")
       @customer_2 = Customer.create!(first_name: "Britney", last_name: "Spears")
@@ -29,23 +31,26 @@ RSpec.describe Item do
       @invoice_item_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, unit_price: 1000, quantity: 4, status: 0)
       @invoice_item_3 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, unit_price: 1000, quantity: 1, status: 0)
       @invoice_item_4 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, unit_price: 1000, quantity: 9, status: 0)
-      @invoice_item_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, unit_price: 1000, quantity: 2, status: 0)
+      @invoice_item_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, unit_price: @item_1.unit_price, quantity: 2, status: 0)
+      @invoice_item_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, unit_price: @item_2.unit_price, quantity: 4, status: 0)
+      @invoice_item_7 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_6.id, unit_price: @item_3.unit_price, quantity: 1, status: 0)
+      @invoice_item_8 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_6.id, unit_price: @item_4.unit_price, quantity: 5, status: 0)
    end
-    
-  describe '#class_methods' do 
-    describe "::disabled_items" do 
-      it 'returns disabled items' do
-        expect(Item.disabled_items).to eq([@item_3])
-      end
-    end 
 
-    describe "::enabled_items" do 
+  describe '#class_methods' do
+    describe "::disabled_items" do
+      it 'returns disabled items' do
+        expect(Item.disabled_items).to eq([@item_3, @item_4])
+      end
+    end
+
+    describe "::enabled_items" do
       it 'returns enabled items' do
         expect(Item.enabled_items).to eq([@item_1, @item_2])
       end
-    end 
-  end 
-  
+    end
+  end
+
   describe 'instance methods' do
     describe '#date_with_most_sales' do
       it 'shows date that the item sold the most' do
@@ -55,6 +60,16 @@ RSpec.describe Item do
       it 'returns most recent date if multiple days have equal top sales' do
         invoice_item_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_7.id, unit_price: 1000, quantity: 9, status: 0)
         expect(@item_1.date_with_most_sales).to eq("05/28/2012")
+      end
+    end
+
+    describe '#invoice_items_filtered_by_ivoice_id' do
+      it 'returns all invoice_items for an item that are associated with a specific invoice_id' do
+        expect(@item_1.invoice_items_filtered_by_ivoice_id(@invoice_3.id)).to eq([@invoice_item_3])
+      end
+
+      it 'returns multiple invoice items if it has been added to an invoice multiple times' do
+        expect(@item_1.invoice_items_filtered_by_ivoice_id(@invoice_6.id)).to eq([@invoice_item_5, @invoice_item_6])
       end
     end
   end
