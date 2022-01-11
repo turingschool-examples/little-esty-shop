@@ -11,3 +11,5 @@
 <p>Unit Price: <%= item.invoice_item_unit_price(@invoice) %></p>
 <p>Item Status: <%= item.invoice_item_status(@invoice) %></p>
 <% end %>
+
+<h2>Total Revenue: <%= @invoice.total_revenue %></h2>

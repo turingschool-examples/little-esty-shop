@@ -18,6 +18,12 @@ class Item < ApplicationRecord
   def invoice_item_status(invoice)
     InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).status
   end
+   
+  #  (InvoiceItem.find_by(item_id: x, invoice_id: @invoice.id).quantity) * (InvoiceItem.find_by(item_id: x, invoice_id: @invoice.id).unit_price)
+
+  def self.total_unit_price
+    sum(:unit_price)
+  end
 
   def date_created
     invoices.first.created_at.strftime("%A, %B %-d, %Y")
