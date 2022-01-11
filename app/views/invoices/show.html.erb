@@ -11,7 +11,7 @@
   <div id="item<%= item.id %>">
     <p>Item: <%= item.name %> </p>
     <% item.invoice_items.each do |invoice_item| %>
-      <p>Unit Price: <%= invoice_item.unit_price %> </p>
+      <p>Unit Price: $<%= invoice_item.unit_price.to_f/100 %> </p>
       <p>Quantity: <%= invoice_item.quantity %> </p>
       <p>Invoice Status: <%= invoice_item.status %> </p>
     <% end %>
@@ -26,4 +26,4 @@
   </div>
 <% end %>
 
-<h2>Total Revenue: <%= @total_revenue %> </h2>
+<h2>Total Revenue: $<%= @total_revenue.to_f/100 %> </h2>
