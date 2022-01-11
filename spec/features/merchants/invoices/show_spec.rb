@@ -9,7 +9,6 @@ RSpec.describe 'merchants invoice show page' do
     invoice1 = create(:invoice, customer: customer_1)
     item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], name: 'Toy', invoice_item_unit_price: 15000)
 
-
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     expect(page).to have_content("#{invoice1.id}'s Information")
@@ -87,6 +86,7 @@ RSpec.describe 'merchants invoice show page' do
     item = create(:item_with_invoices, name: 'Toy', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 150000)
     item2 = create(:item_with_invoices, name: 'Car', merchant: merchant1, invoices: [invoice1], invoice_item_unit_price: 200000)
     transaction = create(:transaction, invoice: invoice1, result: 0)
+
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 

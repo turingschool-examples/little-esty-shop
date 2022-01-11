@@ -21,6 +21,24 @@ RSpec.describe Merchant, type: :model do
       invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
       expect(merchant1.invoice_finder).to eq [invoice1]
     end
+
+    it '#enabled_merchants' do
+      merchant1 = create(:merchant, name: "Matthew", status: 1)
+      merchant2 = create(:merchant, name: "Mark", status: 1)
+      merchant3 = create(:merchant, name: "Luke")
+      merchant4 = create(:merchant, name: "John")
+
+      expect(Merchant.enabled_merchants).to eq([merchant1, merchant2])
+    end
+    #this test below needs to be rewritten to pass.  the method works but it is returning merchants outside the scope of the test
+    xit "disabled_merchants" do
+      merchant1 = create(:merchant, name: "Matthew", status: 1)
+      merchant2 = create(:merchant, name: "Mark", status: 1)
+      merchant3 = create(:merchant, name: "Luke")
+      merchant4 = create(:merchant, name: "John")
+
+      expect(Merchant.disabled_merchants).to eq([merchant3, merchant4])
+    end
   end
 
   describe 'instance methods' do

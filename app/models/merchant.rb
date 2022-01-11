@@ -40,6 +40,14 @@ class Merchant < ApplicationRecord
             .limit(customer_count)
   end
 
+  def self.enabled_merchants
+    Merchant.all.where(status: 1)
+  end
+
+  def self.disabled_merchants
+    Merchant.all.where(status: 0)
+  end
+
   def items_ready_to_ship
     items.joins(:invoice_items => :invoice)
           .where.not(:invoice_items => {status: 2})
