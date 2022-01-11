@@ -24,7 +24,7 @@
 <ol>
 <% @merchants.top_five_merchants.each do |merchant| %>
   <div id="merchant<%=merchant.id%>">
-    <li><%=link_to merchant.name, admin_merchant_path(merchant.id)%> - <%= merchant.total_revenue %> in sales <br>
+    <li><%=link_to merchant.name, admin_merchant_path(merchant.id)%> - $<%= merchant.total_revenue.to_f/100 %> in sales <br>
   Top day for <%= merchant.name %> was <%= merchant.top_date %> </li>
   </div>
 <% end %>

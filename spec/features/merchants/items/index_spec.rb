@@ -72,11 +72,11 @@ RSpec.describe 'Merchant Dashboard' do
     within "#enabled" do
         expect(page).to have_link("#{@item_1.name}", href: merchant_item_path(@merchant_1.id, @item_1.id))
         expect(page).to have_link("#{@item_2.name}", href: merchant_item_path(@merchant_1.id, @item_2.id))
-    end 
+    end
 
-    within "#disabled" do 
+    within "#disabled" do
       expect(page).to have_link("#{@item_3.name}", href: merchant_item_path(@merchant_1.id, @item_3.id))
-    end 
+    end
   end
 
   scenario 'visitor sees the names of the top 5 most popular items ranked by total revenue generated' do
@@ -100,15 +100,15 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_link(@item_8.name)
       expect(page).to have_link(@item_2.name)
     end
-  end 
-  
+  end
+
   scenario 'visitor sees the total revenue generated next to each item name' do
     within "#top_five_items-#{@merchant_1.id}" do
-      expect(page).to have_content(@merchant_1.top_five_items[0].total_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items[1].total_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items[2].total_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items[3].total_revenue)
-      expect(page).to have_content(@merchant_1.top_five_items[4].total_revenue)
+      expect(page).to have_content(@merchant_1.top_five_items[0].total_revenue.to_f/100)
+      expect(page).to have_content(@merchant_1.top_five_items[1].total_revenue.to_f/100)
+      expect(page).to have_content(@merchant_1.top_five_items[2].total_revenue.to_f/100)
+      expect(page).to have_content(@merchant_1.top_five_items[3].total_revenue.to_f/100)
+      expect(page).to have_content(@merchant_1.top_five_items[4].total_revenue.to_f/100)
     end
   end
 
@@ -122,34 +122,34 @@ RSpec.describe 'Merchant Dashboard' do
     end
   end
 
-  describe 'item disable/enable button' do 
-    scenario 'visitor sees a button to disable that item' do 
+  describe 'item disable/enable button' do
+    scenario 'visitor sees a button to disable that item' do
       within "#enabled_item-#{@item_1.name}" do
         expect(page).to have_button("Disable")
         click_button "Disable"
       end
-      
+
       expect(page).to have_button("Enable")
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
-    end 
+    end
 
-    scenario 'visitor sees a button to disable that item' do 
+    scenario 'visitor sees a button to disable that item' do
       within "#disabled_item-#{@item_3.name}" do
         expect(page).to have_button("Enable")
         click_button "Enable"
       end
-      
+
       expect(page).to have_button("Disable")
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
-    end  
-  end 
+    end
+  end
 
-  describe 'creating an item' do 
-    scenario 'visitor sees a link to create a new item' do 
+  describe 'creating an item' do
+    scenario 'visitor sees a link to create a new item' do
       expect(page).to have_link("Create Item", href: new_merchant_item_path(@merchant_1.id))
     end
-    
-    scenario 'visitor clicks link and is taken to form to add info' do 
+
+    scenario 'visitor clicks link and is taken to form to add info' do
       click_link "Create Item"
 
       fill_in(:name, with: 'Rare Pokemon Card')
@@ -160,6 +160,6 @@ RSpec.describe 'Merchant Dashboard' do
 
       expect(current_path).to eq(merchant_items_path(@merchant_1.id))
       expect(page).to have_content('Rare Pokemon Card')
-    end 
-  end 
+    end
+  end
 end

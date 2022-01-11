@@ -53,21 +53,21 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
         expect(page).to have_content(item_1.name)
         expect(page).to have_content(invoice_item_1.quantity)
         expect(page).to have_content(invoice_item_1.status)
-        expect(page).to have_content(invoice_item_1.unit_price)
+        expect(page).to have_content(invoice_item_1.unit_price.to_f/100)
       end
 
       within "#item#{item_2.id}" do
         expect(page).to have_content(item_2.name)
         expect(page).to have_content(invoice_item_2.quantity)
         expect(page).to have_content(invoice_item_2.status)
-        expect(page).to have_content(invoice_item_2.unit_price)
+        expect(page).to have_content(invoice_item_2.unit_price.to_f/100)
       end
     end
 
     scenario 'merchant sees total revenue from the sale of their items on an invoice' do
       total_revenue = (invoice_item_1.unit_price * invoice_item_1.quantity) + (invoice_item_2.unit_price * invoice_item_2.quantity)
 
-      expect(page).to have_content(total_revenue)
+      expect(page).to have_content(total_revenue.to_f/100)
     end
   end
 

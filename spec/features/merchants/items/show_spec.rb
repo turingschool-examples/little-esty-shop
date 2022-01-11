@@ -65,4 +65,28 @@ RSpec.describe 'Merchant items show page' do
         expect(page).to have_content(@item_3.description)
         expect(page).to have_content(@item_3.unit_price.to_f/100)
     end
+
+    describe 'merchant item update' do
+        scenario 'merchant sees link to update item info' do
+            visit merchant_item_path(@merchant_1.id, @item_1.id)
+            expect(page).to have_link("Update Item", href: edit_merchant_item_path(@merchant_1.id, @item_1.id))
+        end
+
+        scenario 'merchant clicks link to edit item' do
+            visit merchant_item_path(@merchant_1.id, @item_1.id)
+            click_link "Update Item"
+            expect(current_path).to eq(edit_merchant_item_path(@merchant_1.id, @item_1.id))
+        end
+
+        scenario 'merchant fills out form' do
+            visit edit_merchant_item_path(@merchant_1.id, @item_1.id)
+            fill_in("Name", with: "Charlie Murphy's Ring")
+            fill_in("Description", with: "Rick James")
+            fill_in("Unit Price", with: 10000)
+            click_button("Update")
+            expect(current_path).to eq(merchant_item_path(@merchant_1.id, @item_1.id))
+            expect(page).to have_content("Charlie Murphy's Ring")
+            expect(page).to have_content("Item has been updated!")
+        end
+    end
 end
