@@ -14,7 +14,7 @@ class Invoice < ApplicationRecord
   end
 
   def completed_invoices
-    invoice_items.where(status: [2]) # = shipped
+    invoice_items.where(status: [2])
   end
 
   def self.ordered_invoices

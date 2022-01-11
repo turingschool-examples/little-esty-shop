@@ -7,9 +7,8 @@ class ItemStatusController < ApplicationController
     redirect_to merchant_items_path
   end
 
-    private
-
-      def item_status_params
-        params.permit(:status)
-      end
+  private
+    def item_status_params
+      params.permit(:status)
+    end
 end
