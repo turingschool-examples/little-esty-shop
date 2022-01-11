@@ -33,16 +33,16 @@ describe 'merchants items index' do
     end
 
     it 'has a button to enable or disable next to each item name' do
-        expect(@item1.status).to eq("Disabled")
-        click_button "Enable #{@item1.name}"
-        expect(@item1.status).to eq("Enabled")
-
-        # item 1 is named shampoo. Disabled by default
-
-        # click_button "Disable this item"
-        #
-        # item = Item.find(@item1.id)
-        # expect(item.status).to eq("Disabled")
+      within('#disabled_items') do
+        within("#item-#{@item1.id}") do
+          click_button "Enable this item"
+        end
+      end
+      within('#enabled_items') do
+        within("#item-#{@item1.id}") do
+          expect(page).to have_content("Status: Enabled")
+        end
+      end
     end
 
     it "has items listed in corresponding enabled or disabled sections" do

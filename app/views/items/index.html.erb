@@ -5,15 +5,19 @@
 <section id='disabled_items'>
 <h3>Disabled Items:</h3>
 <% @merchant.disabled_items.each do |item|%>
-<p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Status: <%= "#{item.status}" %></p>
-<%= button_to "Enable #{item.name}", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Enabled"} %>
+  <div id="item-<%= item.id %>">
+    <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Status: <%= "#{item.status}" %></p>
+    <%= button_to "Enable this item", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Enabled"} %>
+  </div>
 <% end %>
 </section>
 
 <section id='enabled_items'>
 <h3>Enabled Items:</h3>
 <% @merchant.enabled_items.each do |item|%>
-<p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Status: <%= "#{item.status}" %></p>
-<%= button_to "Disable #{item.name}", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Disabled"} %>
+  <div id="item-<%= item.id %>">
+    <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> Status: <%= "#{item.status}" %></p>
+    <%= button_to "Disable this item", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Disabled"} %>
+  </div>
 <% end %>
 </section>
