@@ -12,4 +12,16 @@
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+  <%= @repo.repo_name %>
+
+  <h3>Contributors</h3>
+  <% @contributors.each do |contributor| %>
+  <% binding.pry %>
+    <p><%= contributor.user_name %> Commits: <%= @commits.filter_by_user_and_count(contributor.user_name) %></p>
+  <% end  %>
+
+
+  </footer>
 </html>
