@@ -7,6 +7,7 @@ class MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
+    require "pry"; binding.pry
     redirect_to "/admin/merchants"
   end
 

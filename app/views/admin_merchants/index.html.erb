@@ -5,7 +5,7 @@
 <% @enabled_merchants_array.each do |merchant| %>
   <h3><%= merchant.name %></h3> %>
   <%= form_with model: [merchant], local: true do |form| %>
-    <%= form.hidden_field :status, value: 1 %>
+    <%= form.hidden_field :status, value: "Disabled" %>
     <%= form.submit "Disable #{merchant.name}" %>
   <% end %>
 <% end %>
@@ -14,7 +14,7 @@
 <% @disabled_merchants_array.each do |merchant| %>
   <h3><%= merchant.name %></h3>
   <%= form_with model: [merchant], local: true do |form| %>
-    <%= form.hidden_field :status, value: 0 %>
+    <%= form.hidden_field :status, value: "Enabled" %>
     <%= form.submit "Enable #{merchant.name}" %>
   <% end %>
 <% end %>
