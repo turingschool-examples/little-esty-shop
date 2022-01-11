@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :merchant do
     sequence(:name) { |n| "Default Merchant Name #{n}" }
+    status { 0 }
 
     factory :merchant_with_invoices do
       transient do

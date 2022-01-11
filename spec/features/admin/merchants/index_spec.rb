@@ -7,4 +7,12 @@ RSpec.describe 'Admin_Merchants Index Page' do
 
     expect(page).to have_content("Willy's Bakery")
   end
+
+  it "has a link to create a new Admin_Merchant" do
+    visit "/admin/merchants"
+
+    click_link "Create New Admin Merchant"
+
+    expect(current_path).to eq("/admin/merchants/new")
+  end
 end
