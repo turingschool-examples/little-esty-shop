@@ -36,12 +36,12 @@ FactoryBot.define do
         invoice_item_quantity {4}
         invoice_item_unit_price {15000}
         transaction_result {0}
+        invoice {create(:invoice, customer: customer)}
       end
       after(:create) do |item, evaluator|
         evaluator.transaction_count.times do
-          invoice = create(:invoice, customer: evaluator.customer)
-          invoice_item = create(:invoice_item, item: item, invoice: invoice, quantity: evaluator.invoice_item_quantity, unit_price: evaluator.invoice_item_unit_price)
-          transaction = create(:transaction, result: evaluator.transaction_result, invoice: invoice)
+          invoice_item = create(:invoice_item, item: item, invoice: evaluator.invoice, quantity: evaluator.invoice_item_quantity, unit_price: evaluator.invoice_item_unit_price)
+          transaction = create(:transaction, result: evaluator.transaction_result, invoice: evaluator.invoice)
         end
       end
     end
