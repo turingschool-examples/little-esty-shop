@@ -12,3 +12,12 @@
     <% end %>
   </section>
 <% end %>
+<section id='top_five_items'>
+  <h3>Top Five Items:</h3>
+  <ol>
+    <% @merchant.top_five_items.each do |item| %>
+      <li>Item: <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - Total Sales: <%= item.total_sales %></li>
+    <% end %>
+  </ol>
+
+</section>
