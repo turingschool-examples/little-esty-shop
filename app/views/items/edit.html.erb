@@ -1,9 +1,9 @@
-<%= form_with url: merchant_item_path(@merchant.id, @items.id), method: :patch, local: true do |form|%>
+<%= form_with url: merchant_item_path(@merchant.id, @item.id), method: :patch, local: true do |form|%>
 <%= form.label :name %>
-<%= form.text_field :name %>
+<%= form.text_field :name, value: @item.name %>
 <%= form.label :description %>
-<%= form.text_field :description %>
-<%= form.label "Unit Price" %>
-<%= form.text_field "Unit Price" %>
+<%= form.text_field :description, value: @item.description %>
+<%= form.label :unit_price, "Unit Price (in USD)" %>
+<%= form.text_field :unit_price, value: @item.unit_price.to_f/100 %>
 <%= form.submit "Update" %>
 <% end  %>
