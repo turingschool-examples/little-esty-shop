@@ -146,12 +146,12 @@ RSpec.describe 'Merchant Dashboard' do
 
     within "#merchants-item-#{@item4.name}" do
       expect(page).to have_content(@item4.invoices.first.id)
-      expect(page).to have_link("#{@item4.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices")
+      expect(page).to have_link("#{@item4.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices/#{@item4.invoices.first.id}")
     end
 
     within "#merchants-item-#{@item5.name}" do
       expect(page).to have_content(@item5.invoices.first.id)
-      expect(page).to have_link("#{@item5.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices")
+      expect(page).to have_link("#{@item5.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices/#{@item5.invoices.first.id}")
     end
   end
 
