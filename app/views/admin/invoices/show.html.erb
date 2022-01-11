@@ -4,7 +4,7 @@
 <p> Customer Name: <%= @customer.first_name %> <%= @customer.last_name %></p>
 
 <% @items.each do |item| %>
-   <% item.invoice_items.each do |invoice_item| %>
+   <% item.invoice_items_filtered_by_ivoice_id(@invoice.id).each do |invoice_item| %>
     <h3>Item Name: <%= item.name %></h3>
     <p> Quantity: <%= invoice_item.quantity %></p>
     <p> Price: $<%= item.unit_price.to_f/100 %></p>
