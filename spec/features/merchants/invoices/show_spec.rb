@@ -7,7 +7,7 @@ RSpec.describe 'merchants invoice show page' do
     merchant1 = create(:merchant, name: "Bob Barker")
     customer_1 = create(:customer, first_name: "Eric", last_name: "Mielke")
     invoice1 = create(:invoice, customer: customer_1)
-    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy', invoice_item_unit_price: 15000)
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], name: 'Toy', invoice_item_unit_price: 15000)
 
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
@@ -22,7 +22,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the invoiced item name' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy')
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], name: 'Toy')
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -34,7 +34,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the quantity of the item ordered' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy')
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], name: 'Toy')
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -46,7 +46,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the price the item sold for' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, name: 'Toy', invoice_item_unit_price: 15000)
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], name: 'Toy', invoice_item_unit_price: 15000)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
@@ -58,7 +58,7 @@ RSpec.describe 'merchants invoice show page' do
   it 'displays the invoice item status' do
     merchant1 = create(:merchant, name: "Bob Barker")
     invoice1 = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_count: 1, invoice_item_status: 2)
+    item = create(:item_with_invoices, merchant: merchant1, invoices: [invoice1], invoice_item_status: 2)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
