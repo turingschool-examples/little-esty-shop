@@ -38,7 +38,7 @@ RSpec.describe 'Admin_Merchants Index Page' do
       merchant_3 = create(:merchant_with_transactions, name: 'Nobody', invoice_item_quantity: 3, invoice_item_unit_price: 1)
       merchant_4 = create(:merchant_with_transactions, name: 'Jenny', invoice_item_quantity: 3, invoice_item_unit_price: 100)
       merchant_5 = create(:merchant_with_transactions, name: 'Bob', invoice_item_quantity: 3, invoice_item_unit_price: 10000)
-      merchant_6 = create(:merchant_with_transactions, name: 'Charlie', invoice_item_quantity: 3, invoice_item_unit_price: 1)
+      merchant_6 = create(:merchant_with_transactions, name: 'Charlie', invoice_item_quantity: 3, invoice_item_unit_price: 1000)
 
       visit "/admin/merchants"
 
