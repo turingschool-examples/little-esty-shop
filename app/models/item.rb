@@ -29,10 +29,9 @@ class Item < ApplicationRecord
 
   def best_day
     invoices.joins(:transactions, :invoice_items).where(transactions: {result: 0})
-    .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+    .select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
     .group(:id)
     .order(:revenue)
-    .limit(1)
-
+    .first.created_at
   end
 end

@@ -78,7 +78,7 @@ RSpec.describe Item, type: :model do
         item_3.invoice_items.update(item: item_1)
 
         item_1.reload
-        expect(item_1.best_day).to eq("2022-01-10")
+        expect(item_1.best_day).to eq(DateTime.new(2022, 1, 10, 1, 1, 1))
       end
     end
   end
