@@ -74,8 +74,9 @@ RSpec.describe Merchant, type: :model do
         item_4 = create(:item_with_transactions, merchant: merchant, name: "Bus", invoice_item_quantity: 4, invoice_item_unit_price: 100000)
         item_5 = create(:item_with_transactions, merchant: merchant, name: "Dog", invoice_item_quantity: 4, invoice_item_unit_price: 10000)
         item_6 = create(:item_with_transactions, merchant: merchant, name: "Legos", invoice_item_quantity: 4000, invoice_item_unit_price: 100000, transaction_result: 1)
-        
+
         expected = [item_2, item_4, item_5, item_1, item_3]
+
         expect(merchant.popular_items(5)).to eq(expected)
       end
     end
