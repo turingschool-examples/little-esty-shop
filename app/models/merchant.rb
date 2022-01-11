@@ -59,6 +59,7 @@ class Merchant < ApplicationRecord
     item_ids.map do |id|
       Item.find(id)
     end
+  end
 
   def top_five_items
     items.joins(invoice_items: { invoice: :transactions}).where(transactions: {result: 0})
@@ -66,6 +67,5 @@ class Merchant < ApplicationRecord
     .group(:id)
     .order(total_sales: :desc)
     .limit(5)
-
   end
 end
