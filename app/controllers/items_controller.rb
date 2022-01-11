@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   def show 
     @item = Item.find(params[:id])
+    @merchant = @item.merchant
   end
 
   def update
@@ -14,8 +15,12 @@ class ItemsController < ApplicationController
     if params[:disable]
       @item.update(status: params[:disable].to_i)
       redirect_to merchant_items_path(@merchant.id) 
-     elsif params[:enable] 
+    elsif params[:enable] 
       redirect_to merchant_items_path(@merchant.id)
+    else 
+      @item.update(item_params)
+      redirect_to merchant_item_path(params[:merchant_id], params[:id])
+      flash[:notice] = "Item has been updated!"
     end 
   end
 
@@ -27,6 +32,11 @@ class ItemsController < ApplicationController
     item = Item.create(item_params)
     merchant = Merchant.find(params[:merchant_id])
     redirect_to merchant_items_path(merchant.id)
+  end
+
+  def edit
+    @items = Item.find(params[:id])
+    @merchant = @items.merchant
   end
 
   private
