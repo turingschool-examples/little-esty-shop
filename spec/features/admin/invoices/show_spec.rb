@@ -84,14 +84,9 @@ RSpec.describe 'Admin_Invoices Show Page' do
   it 'calculates the potential revenue of the invoice' do
     merchant = create(:merchant)
     invoice = create(:invoice)
-<<<<<<< HEAD
     item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 3000, invoice_item_quantity: 8)
     item2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 2500, invoice_item_quantity: 8)
-=======
-    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 3000)
-    item2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 2500)
     transaction = create(:transaction, invoice: invoice, result: 0)
->>>>>>> c986b43ea2ddfc43157e15e34c041cf801d1fc6c
 
     visit "/admin/invoices/#{invoice.id}"
 
