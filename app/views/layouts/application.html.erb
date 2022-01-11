@@ -13,17 +13,17 @@
     <%= yield %>
   </body>
 
-  <footer>
+  <!-- <footer>
     <h3><%= @repo.repo_name %></h3>
 
     <h3>Contributors</h3>
     <% @contributors.each do |contributor| %>
       <% if contributor.user_name == "Sierra-T-9598" || contributor.user_name == "jbreit88" || contributor.user_name == "karanm645" || contributor.user_name == "jgrazulis" %>
         <p><%= contributor.user_name %> Commits: <%= @commits.select { |commit| commit.commit_author == contributor.user_name }.count %></p>
-      <% end %>  
+      <% end %>
     <% end  %>
     <h3> Closed Pull Requests: <%= @pull_requests.count %> </h3>
 
 
-  </footer>
+  </footer> -->
 </html>
