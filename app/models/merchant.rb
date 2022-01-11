@@ -30,10 +30,19 @@ class Merchant < ApplicationRecord
     .first.created_at
   end
 
+
   def ordered_items_to_ship
     item_ids = InvoiceItem.where("status = 0 OR status = 1").order(:created_at).pluck(:item_id)
     item_ids.map do |id|
       Item.find(id)
     end
+
+  def top_five_items
+    items.joins(invoice_items: { invoice: :transactions}).where(transactions: {result: 0})
+    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_sales')
+    .group(:id)
+    .order(total_sales: :desc)
+    .limit(5)
+
   end
 end
