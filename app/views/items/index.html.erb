@@ -10,6 +10,7 @@
     <%= button_to "Enable this item", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Enabled"} %>
   </div>
 <% end %>
+
 </section>
 
 <section id='enabled_items'>
@@ -20,4 +21,14 @@
     <%= button_to "Disable this item", merchant_item_status_path(@merchant, item), method: :patch, params: {status: "Disabled"} %>
   </div>
 <% end %>
+
+<section id='top_five_items'>
+  <h3>Top Five Items:</h3>
+  <ol>
+    <% @merchant.top_five_items.each do |item| %>
+      <li>Item: <%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - Total Sales: <%= item.total_sales %></li>
+    <% end %>
+  </ol>
+
+
 </section>
