@@ -30,4 +30,49 @@ RSpec.describe 'Admin_Merchants Index Page' do
 
     expect(current_path).to eq("/admin/merchants/new")
   end
+
+  describe 'top merchants section' do
+    it "lists the top five merchants by total revenue" do
+      merchant_1 = create(:merchant_with_transactions, name: 'Zach', invoice_item_quantity: 3, invoice_item_unit_price: 10)
+      merchant_2 = create(:merchant_with_transactions, name: 'Abe', invoice_item_quantity: 15, invoice_item_unit_price: 100000)
+      merchant_3 = create(:merchant_with_transactions, name: 'Nobody', invoice_item_quantity: 3, invoice_item_unit_price: 1)
+      merchant_4 = create(:merchant_with_transactions, name: 'Jenny', invoice_item_quantity: 3, invoice_item_unit_price: 100)
+      merchant_5 = create(:merchant_with_transactions, name: 'Bob', invoice_item_quantity: 3, invoice_item_unit_price: 10000)
+      merchant_6 = create(:merchant_with_transactions, name: 'Charlie', invoice_item_quantity: 3, invoice_item_unit_price: 1000)
+
+      visit "/admin/merchants"
+
+      within "div.top_merchants" do
+        expect('Abe').to appear_before('Bob')
+        expect('Bob').to appear_before('Charlie')
+        expect('Charlie').to appear_before('Jenny')
+        expect('Jenny').to appear_before('Zach')
+        expect(page).to_not have_content('Nobody')
+      end
+    end
+
+    it "the name is a link to each admin merchant show page" do
+      merchant_1 = create(:merchant_with_transactions, name: 'Zach', invoice_item_quantity: 3, invoice_item_unit_price: 10)
+
+      visit "/admin/merchants"
+
+      within "div.top_merchants" do
+        click_link "Zach"
+        expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
+      end
+    end
+
+    it "lists top selling date" do
+      invoice_1 = create(:invoice, created_at: DateTime.new(2022, 1, 15, 1, 1, 1))
+      merchant_1 = create(:merchant_with_transactions, name: 'Bob', invoice: invoice_1, invoice_item_quantity: 3, invoice_item_unit_price: 10)
+
+      visit "/admin/merchants"
+
+      within "div.top_merchants" do
+        within "div.top_merchant_#{merchant_1.id}" do
+          expect(page).to have_content("Top selling date for Bob was Saturday, January 15, 2022.")
+        end
+      end
+    end
+  end
 end

@@ -26,4 +26,12 @@ class Item < ApplicationRecord
   def potential_revenue
     invoice_items.potential_revenue
   end
+
+  def best_day
+    invoices.joins(:transactions, :invoice_items).where(transactions: {result: 0})
+    .select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+    .group(:id)
+    .order(:revenue)
+    .first.created_at
+  end
 end
