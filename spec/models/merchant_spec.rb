@@ -143,7 +143,7 @@ RSpec.describe Merchant, type: :model do
 
         #create an higher revenue invoice that should  affect top date becuase it has more revenue
         invoice_3 = create(:invoice, created_at: DateTime.new(2022, 1, 12, 1, 1, 1))
-        item_3 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice: invoice_3, invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+        item_3 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice: invoice_3, invoice_item_quantity: 5, invoice_item_unit_price: 100000)
         expect(merchant.best_day).to eq(DateTime.new(2022, 1, 12, 1, 1, 1))
       end
     end
