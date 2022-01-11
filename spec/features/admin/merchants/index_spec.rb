@@ -23,6 +23,28 @@ RSpec.describe 'Admin_Merchants Index Page' do
     expect("Disabled Merchants").to appear_before(merchant4.name)
   end
 
+  it "has a button to disable next to each enabled merchant, button refreshes page and changes merchant status" do
+    merchant2 = create(:merchant, name: "Mark", status: 1)
+    visit "/admin/merchants"
+
+    click_button "Disable #{merchant2.name}"
+
+    expect(current_path).to eq("/admin/merchants")
+    merchant2.reload
+    expect(merchant2.status).to eq("Disabled")
+  end
+
+  it "has a button to enable next to each disabled merchant, button refreshes page and changes merchant status" do
+    merchant3 = create(:merchant, name: "Luke")
+    visit "/admin/merchants"
+
+    click_button "Enable #{merchant3.name}"
+
+    expect(current_path).to eq("/admin/merchants")
+    merchant3.reload
+    expect(merchant3.status).to eq("Enabled")
+  end
+
   it "has a link to create a new Admin_Merchant" do
     visit "/admin/merchants"
 

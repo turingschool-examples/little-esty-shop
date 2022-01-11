@@ -11,6 +11,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
+    it {should define_enum_for(:status).with([:Disabled, :Enabled])}
   end
 
   describe 'class methods' do
@@ -31,7 +32,7 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.enabled_merchants).to eq([merchant1, merchant2])
     end
     #this test below needs to be rewritten to pass.  the method works but it is returning merchants outside the scope of the test
-    xit "disabled_merchants" do
+    it "disabled_merchants" do
       merchant1 = create(:merchant, name: "Matthew", status: 1)
       merchant2 = create(:merchant, name: "Mark", status: 1)
       merchant3 = create(:merchant, name: "Luke")
