@@ -11,7 +11,7 @@ class Invoice < ApplicationRecord
     invoice_ids = self.where.not(status: 1).pluck(:id)
     InvoiceItem.where.not(status: "shipped").where(invoice_id: invoice_ids).order(created_at: :asc)
   end
-  
+
   def total_revenue
     invoice_items
     .sum('quantity*unit_price')
