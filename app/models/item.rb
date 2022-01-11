@@ -22,4 +22,10 @@ class Item < ApplicationRecord
   def date_created
     invoices.first.created_at.strftime("%A, %B %-d, %Y")
   end
+
+  def top_day
+      invoices.select("invoices.created_at, invoice_items.quantity")
+              .order(:quantity)
+              .last.created_at
+  end
 end

@@ -1,13 +1,5 @@
 <h1>Items for Merchant: <%= @merchant.name %></h1>
 
-<div id="top-items">
-  <h2>Top Items</h2>
-  <% @merchant.top_items.each do |item| %>
-    <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-    <p>-<%= number_to_currency(item.revenue)%>  in sales</p>
-  <% end %>
-</div>
-
 <div id="Enabled-items">
   <h3>Enabled Items</h3>
   <% @merchant.filter_item_status(1).each do |item| %>
@@ -24,4 +16,15 @@
   <% end %>
 <div>
 
-<%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" %>
+<div id="top-items">
+  <h2>Top Items</h2>
+  <% @merchant.top_items.each do |item| %>
+    <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <p>-   <%= number_to_currency(item.revenue)%>  in sales</p>
+    <p>Top day for <%= item.name %> was <%= item.top_day.strftime('%m/%d/%Y') %> </p>
+  <% end %>
+</div>
+
+  
+<h3><%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" %></h3>
+
