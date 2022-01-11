@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Invoices Index page' do
-  invoice_item1 = FactoryBot.create(:invoice_item)
-  invoice_item2 = FactoryBot.create(:invoice_item)
-  invoice_item3 = FactoryBot.create(:invoice_item)
   it 'shows all of the invoices that include at least one of the merchants items with a link to that invoice' do
+    invoice_item1 = FactoryBot.create(:invoice_item)
+    invoice_item2 = FactoryBot.create(:invoice_item)
+    invoice_item3 = FactoryBot.create(:invoice_item)
     item = Item.find(invoice_item1.item_id)
     visit "/merchants/#{item.merchant_id}/invoices"
     # save_and_open_page
