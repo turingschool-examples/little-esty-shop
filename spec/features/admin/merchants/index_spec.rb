@@ -174,23 +174,23 @@ RSpec.describe 'Admin Merchants Index' do
 
   scenario 'visitor sees the total_revenue generated next to each merchant name' do
     within "#merchant#{merchant_5.id}" do
-      expect(page).to have_content(Merchant.top_five_merchants.first.total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants.first.total_revenue.to_f/100)
     end
 
     within "#merchant#{merchant_2.id}" do
-      expect(page).to have_content(Merchant.top_five_merchants[1].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[1].total_revenue.to_f/100)
     end
 
     within "#merchant#{merchant_4.id}" do
-      expect(page).to have_content(Merchant.top_five_merchants[2].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[2].total_revenue.to_f/100)
     end
 
     within "#merchant#{merchant_6.id}" do
-      expect(page).to have_content(Merchant.top_five_merchants[3].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[3].total_revenue.to_f/100)
     end
 
     within "#merchant#{merchant_1.id}" do
-      expect(page).to have_content(Merchant.top_five_merchants[4].total_revenue)
+      expect(page).to have_content(Merchant.top_five_merchants[4].total_revenue.to_f/100)
     end
   end
 
