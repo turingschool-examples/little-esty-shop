@@ -100,8 +100,8 @@ RSpec.describe 'admin index page' do
   end
 
   it 'has invoices which are all links to that invoices admin show page' do
-    expect(page).to have_link(invoice_item_1.invoice.id, href: "/admin/invoices/#{invoice_item_1.invoice.id}")
-    expect(page).to have_link(invoice_item_2.invoice.id, href: "/admin/invoices/#{invoice_item_2.invoice.id}")
+    expect(page).to have_link("#{invoice_item_1.invoice.id}", href: "/admin/invoices/#{invoice_item_1.invoice.id}")
+    expect(page).to have_link("#{invoice_item_2.invoice.id}", href: "/admin/invoices/#{invoice_item_2.invoice.id}")
   end
 
   it 'lists the invoices displays the date they were created' do
