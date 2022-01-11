@@ -11,9 +11,9 @@ RSpec.describe 'Admin Invoice Show page' do
 
   let!(:invoice_1) {customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')}
 
-  let!(:invoice_item_1)  {InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 1000, quantity: 2, status: 0)}
-  let!(:invoice_item_2)  {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, unit_price: 1000, quantity: 26, status: 0)}
-  let!(:invoice_item_3)  {InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, unit_price: 1000, quantity: 2, status: 0)}
+  let!(:invoice_item_1)  {InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, unit_price: item_1.unit_price, quantity: 2, status: 0)}
+  let!(:invoice_item_2)  {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, unit_price: item_2.unit_price, quantity: 26, status: 0)}
+  let!(:invoice_item_3)  {InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, unit_price: item_3.unit_price, quantity: 2, status: 0)}
 
   before(:each) do
     visit admin_invoice_path(invoice_1.id)
@@ -32,5 +32,9 @@ RSpec.describe 'Admin Invoice Show page' do
     expect(page).to have_content(item_1.unit_price.to_f/100)
     expect(page).to have_content(invoice_item_1.quantity)
     expect(page).to have_content(invoice_item_3.status)
+  end
+
+  scenario 'admin sees total revenue generated from this invoice' do
+    expect(page).to have_content(invoice_1.invoice_items.revenue.to_f/100)
   end
 end
