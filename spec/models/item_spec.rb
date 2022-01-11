@@ -28,6 +28,20 @@ describe Item, type: :model do
 
       expect(@merchant1.enabled_items).to eq([@item4])
     end
+
+    it '#most_revenue' do
+      customer_1 = create(:customer)
+      merchant_6 = Merchant.create!(name: 'Rob')
+      item_6  = create(:item, name: 'name_1', merchant_id: merchant_6.id)
+      invoice_6 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2013-03-25 09:54:09 UTC")
+      invoice_12 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2012-03-25 09:54:09 UTC")
+      transaction_6 = create(:transaction, invoice_id: invoice_6.id, result: 0)
+      transaction_6 = create(:transaction, invoice_id: invoice_12.id, result: 0)
+      invoice_item_6 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_6.id, status: 2, quantity: 1, unit_price: 50)
+      invoice_item_12 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_12.id, status: 2, quantity: 1, unit_price: 50)
+
+      expect(item_6.most_revenue).to eq(invoice_6.created_at.to_date)
+    end
   end
 
 
