@@ -1,3 +1,7 @@
 <h3><%= @item.name %> Page</h3>
 <p>Description: <%= @item.description %></p>
 <p>Current Selling Price: <%= number_to_currency(@item.unit_price.to_f/100) %></p>
+<%= link_to "Update Item", edit_merchant_item_path(@merchant.id, @item.id) %>
+<% if flash.any? %>
+  <%= flash[:notice] %>
+<% end %>
