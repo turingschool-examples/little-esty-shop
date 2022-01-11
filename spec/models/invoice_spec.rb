@@ -55,14 +55,8 @@ RSpec.describe Invoice do
   describe 'class methods' do
     describe '.incomplete_invoices' do
       it 'returns invoices only with items that are packaged or pending' do
-        expect(Invoice.incomplete_invoices).to eq([invoice_1, invoice_2])
+        expect(Invoice.incomplete_invoices).to eq([invoice_2, invoice_1])
         expect(Invoice.incomplete_invoices).to_not include(invoice_3)
-      end
-    end
-
-    describe '.order_by_created_at_old_to_new' do
-      it 'orders invoices from oldest to newest by created_at attribute' do
-        expect(Invoice.order_by_created_at_old_to_new).to eq([invoice_3, invoice_2, invoice_1])
       end
     end
   end
