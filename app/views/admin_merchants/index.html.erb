@@ -4,11 +4,11 @@
 <h2>Enabled Merchants:</h2>
 <% @enabled_merchants_array.each do |merchant| %>
   <h3><%= merchant.name %></h3> %>
-  <%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}", method: :patch, params: [merchant_status: :Disabled] %>
+  <%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}", method: :patch, params: [status: :Disabled] %>
 <% end %>
 
 <h2>Disabled Merchants:</h2>
 <% @disabled_merchants_array.each do |merchant| %>
   <h3><%= merchant.name %></h3>
-<%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}", method: :patch, params: [merchant_status: :Enabled] %>
+<%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}", method: :patch, params: [status: :Enabled] %>
 <% end %>
