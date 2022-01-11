@@ -4,11 +4,11 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
-  # def update
-  #   merchant = Merchant.find(params[:id])
-  #   merchant.update(merchant_params)
-  #   redirect_to "/admin/merchants"
-  # end
+  def update
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchant_params)
+    redirect_to "/admin/merchants"
+  end
 
 
   private
