@@ -1,0 +1,9 @@
+<%= form_with url: merchant_item_path(@merchant.id, @items.id), method: :patch, local: true do |form|%>
+<%= form.label :name %>
+<%= form.text_field :name %>
+<%= form.label :description %>
+<%= form.text_field :description %>
+<%= form.label "Unit Price" %>
+<%= form.text_field "Unit Price" %>
+<%= form.submit "Update" %>
+<% end  %>
