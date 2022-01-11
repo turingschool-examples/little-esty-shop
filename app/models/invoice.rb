@@ -25,8 +25,4 @@ class Invoice < ApplicationRecord
   def potential_revenue_by_merchant(merchant)
     merchant_invoice_items(merchant).potential_revenue
   end
-
-  def admin_potential_revenue
-    invoice_items.sum('quantity * unit_price')
-  end
 end
