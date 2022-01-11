@@ -9,7 +9,7 @@ class InvoiceItem < ApplicationRecord
 
   enum status: { "pending" => 0, :packaged => 1, "shipped" =>2 }
 
-  def self.potential_revenue
+  def self.revenue
     InvoiceItem.joins(invoice: :transactions).where(transactions: {result: 0})
     .sum("invoice_items.quantity * invoice_items.unit_price")
   end

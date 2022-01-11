@@ -20,7 +20,7 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe 'class methods' do
-      describe 'potential_revenue' do
+      describe 'revenue' do
       it "multiplies unit_price and quantity for a collection of invoice_items and sums them only if they are associated with an invoice that has at least 1 successful transaction" do
         invoice_1 = create(:invoice)
         invoice_2 = create(:invoice)
@@ -35,19 +35,19 @@ RSpec.describe InvoiceItem, type: :model do
         transaction = create(:transaction, result: 0, invoice: invoice_3)
 
         # test for no transactions
-        expect(invoice_items.potential_revenue).to eq(0)
+        expect(invoice_items.revenue).to eq(0)
 
         # test for no successful transactions.
         transaction_1 = create(:transaction, result: 1, invoice: invoice_1)
-        expect(invoice_items.potential_revenue).to eq(0)
+        expect(invoice_items.revenue).to eq(0)
 
         # test for successful transactions
         transaction_2 = create(:transaction, result: 0, invoice: invoice_1)
-        expect(invoice_items.potential_revenue).to eq(8000)
+        expect(invoice_items.revenue).to eq(8000)
 
         # test for multiple invoices with successful transactions
         transaction_3 = create(:transaction, result: 0, invoice: invoice_2)
-        expect(invoice_items.potential_revenue).to eq(9000)
+        expect(invoice_items.revenue).to eq(9000)
       end
     end
   end

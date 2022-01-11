@@ -23,8 +23,8 @@ class Item < ApplicationRecord
     Item.all.where(status: 0)
   end
 
-  def potential_revenue
-    invoice_items.potential_revenue
+  def revenue
+    invoice_items.revenue
   end
 
   def best_day
