@@ -4,10 +4,10 @@ RSpec.describe Item, type: :model do
   let!(:merchant_1) {FactoryBot.create(:merchant)}
   let!(:merchant_2) {FactoryBot.create(:merchant)}
 
-  let!(:item_1) {FactoryBot.create(:item, merchant: merchant_1)}
-  let!(:item_2) {FactoryBot.create(:item, merchant: merchant_1)}
-  let!(:item_3) {FactoryBot.create(:item, merchant: merchant_1)}
-  let!(:item_4) {FactoryBot.create(:item, merchant: merchant_2)}
+  let!(:item_1) {FactoryBot.create(:item, merchant: merchant_1, unit_price: 200)}
+  let!(:item_2) {FactoryBot.create(:item, merchant: merchant_1, unit_price: 100)}
+  let!(:item_3) {FactoryBot.create(:item, merchant: merchant_1, unit_price: 300)}
+  let!(:item_4) {FactoryBot.create(:item, merchant: merchant_2, unit_price: 400)}
 
   let!(:invoice_1) {FactoryBot.create(:invoice)}
 
