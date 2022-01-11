@@ -1,6 +1,7 @@
 class AdminMerchantsController < ApplicationController
   def index
-    @merchants = Merchant.all
+    @enabled_merchants_array = Merchant.enabled_merchants
+    @disabled_merchants_array = Merchant.disabled_merchants
   end
 
   def show
@@ -17,10 +18,19 @@ class AdminMerchantsController < ApplicationController
     redirect_to "/admin/merchants/#{merchant.id}",  notice: "Merchant Successfully Updated"
   end
 
+  def new
+
+  end
+
+  def create
+    merchant = Merchant.create!(merchant_params)
+    redirect_to "admin/merchants"
+  end
+
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 
 end

@@ -84,8 +84,9 @@ RSpec.describe 'Admin_Invoices Show Page' do
   it 'calculates the potential revenue of the invoice' do
     merchant = create(:merchant)
     invoice = create(:invoice)
-    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 3000, invoice_item_quantity: 8)
-    item2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 2500, invoice_item_quantity: 8)
+    item = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 3000)
+    item2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice], invoice_item_unit_price: 2500)
+    transaction = create(:transaction, invoice: invoice, result: 0)
 
     visit "/admin/invoices/#{invoice.id}"
 
@@ -99,7 +100,7 @@ RSpec.describe 'Admin_Invoices Show Page' do
     item = create(:item_with_invoices, merchant: merchant, invoices: [invoice])
 
     visit "/admin/invoices/#{invoice.id}"
-     # save_and_open_page
+
     within("#status_#{invoice.invoice_items.first.id}") do
       expect(page).to have_field(:status, with: "pending")
 

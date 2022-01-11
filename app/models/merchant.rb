@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  enum status: [:Disabled, :Enabled]
+
   validates :name, presence: true
 
   def invoice_finder
@@ -36,6 +38,14 @@ class Merchant < ApplicationRecord
             .group(:id)
             .order(count_transactions_id: :desc)
             .limit(customer_count)
+  end
+
+  def self.enabled_merchants
+    Merchant.all.where(status: 1)
+  end
+
+  def self.disabled_merchants
+    Merchant.all.where(status: 0)
   end
 
   def items_ready_to_ship
