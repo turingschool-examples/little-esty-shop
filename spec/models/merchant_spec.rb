@@ -123,5 +123,29 @@ RSpec.describe Merchant, type: :model do
         expect(merchant.popular_items(5)).to eq(expected)
       end
     end
+
+    describe 'best_day' do
+      it "returns the created_at date of the invoice associated with the highest total revenue" do
+        merchant = create(:merchant)
+        invoice_1 = create(:invoice, created_at: DateTime.new(2022, 1, 10, 1, 1, 1))
+        item_1 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice: invoice_1, invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+        expect(merchant.best_day).to eq(DateTime.new(2022, 1, 10, 1, 1, 1))
+
+        #create a smaller invoice that should not affect top date
+        invoice_2 = create(:invoice, created_at: DateTime.new(2022, 1, 11, 1, 1, 1))
+        item_2 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice: invoice_2, invoice_item_quantity: 2, invoice_item_unit_price: 1000)
+        expect(merchant.best_day).to eq(DateTime.new(2022, 1, 10, 1, 1, 1))
+
+        #create an equal revenue invoice that should not affect top date becuase it is older
+        invoice_3 = create(:invoice, created_at: DateTime.new(2022, 1, 5, 1, 1, 1))
+        item_3 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice: invoice_3, invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+        expect(merchant.best_day).to eq(DateTime.new(2022, 1, 10, 1, 1, 1))
+
+        #create an higher revenue invoice that should  affect top date becuase it has more revenue
+        invoice_3 = create(:invoice, created_at: DateTime.new(2022, 1, 12, 1, 1, 1))
+        item_3 = create(:item_with_transactions, merchant: merchant, name: "Toy", invoice: invoice_3, invoice_item_quantity: 4, invoice_item_unit_price: 100000)
+        expect(merchant.best_day).to eq(DateTime.new(2022, 1, 12, 1, 1, 1))
+      end
+    end
   end
 end
