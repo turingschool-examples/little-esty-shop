@@ -53,7 +53,7 @@ RSpec.describe Invoice do
   end
 
   describe 'class methods' do
-    describe '.incomplete_invoices' do #Ask about this at project check-in
+    describe '.incomplete_invoices' do 
       it 'returns invoices only with items that are packaged or pending' do
         expect(Invoice.incomplete_invoices).to eq([invoice_1, invoice_2])
         expect(Invoice.incomplete_invoices).to_not include(invoice_3)
