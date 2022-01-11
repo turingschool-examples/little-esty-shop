@@ -56,13 +56,13 @@ The premise is a fictitious e-commerce platform where both merchants and admins 
 
 ### SetUp
 - Ruby Version
-  ```$ ruby -v
-    ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [arm64-darwin20]
-    ```
+  `$ ruby -v
+    ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [arm64-darwin20]`
+    
 - Rails Version
-  ```$ rails -v
-    Rails 5.2.6
-  ```
+  `$ rails -v
+    Rails 5.2.6`
+    
 - Database Creation
  `$ rails db:{drop, create, migrate, seed}`
   
