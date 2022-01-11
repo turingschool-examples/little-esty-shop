@@ -87,5 +87,24 @@ describe Merchant, type: :model do
       invoice_item_8 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_8.id, status: 2, quantity: 10, unit_price: 5)
       expect(merchant_6.best_sales_date).to eq(invoice_7.created_at)
     end
+
+    describe '#ordered_items_to_ship' do
+      it 'returns items with incompleted invoices, ordered by creation' do
+        merchant = create :merchant
+        item1 = create :item, { merchant_id: merchant.id, id: 1 }
+        item2 = create :item, { merchant_id: merchant.id, id: 2 }
+        item4 = create :item, { merchant_id: merchant.id, id: 3 }
+        item3 = create :item, { merchant_id: merchant.id, id: 4 }
+        invoice1 = create :invoice, { status: 0 }
+        invoice2 = create :invoice, { status: 1 }
+        invoice3 = create :invoice, { status: 2 }
+        invoice_item1 = create :invoice_item, { invoice_id: invoice1.id, item_id: item1.id, status: 0 }
+        invoice_item2 = create :invoice_item, { invoice_id: invoice3.id, item_id: item2.id, status: 1 }
+        invoice_item3 = create :invoice_item, { invoice_id: invoice2.id, item_id: item3.id, status: 2 }
+        invoice_item4 = create :invoice_item, { invoice_id: invoice1.id, item_id: item4.id, status: 0 }
+
+        expect(merchant.ordered_items_to_ship).to eq([item1, item2, item4])
+      end
+    end
   end
 end
