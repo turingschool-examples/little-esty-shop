@@ -4,6 +4,6 @@ FactoryBot.define do
     invoice
     sequence(:quantity) { |n| 5 + n }
     sequence(:unit_price) { |n| 10000 + (n * 1000) }
-    status { 0 }
+    status { 0 }    
   end
 end

@@ -5,3 +5,20 @@
     Created On:<%= @invoice.created_at.strftime("%A, %B %d, %Y")%><br>
     Customer: <%=@invoice.customer_name%><br>
 </h3>
+
+<h2><%=@invoice.id%>'s Items</h2>
+<%@invoice.invoice_items.each do |invoice_item| %>
+  <section id="invoice_<%=invoice_item.id%>">
+    <h3>Item: <%=invoice_item.item.name%></h3>
+    <p>Quantity Ordered: <%=invoice_item.quantity%></p>
+    <p>Unit Price: <%=money_honey(invoice_item.unit_price)%></p>
+    <section id="status_<%=invoice_item.id%>">
+      <%= form_with url: "/admin/invoices/#{@invoice.id}/#{invoice_item.id}", method: :patch, local: true do |f| %>
+      <p>Status: <%= f.select(:status, [:pending, :packaged, :shipped], selected: invoice_item.status)%> <%= f.submit "Update Item Status"%></p>
+      <%end%>
+    </section>
+  </section>
+<%end%>
+
+<h2>Total Potential Revenue</h2>
+<h4><%= money_honey(@invoice.potential_revenue) %></h4>

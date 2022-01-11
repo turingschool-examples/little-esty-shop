@@ -1,8 +1,8 @@
 <h1>Invoice <%=@invoice.id%>'s Information</h1>
 <h3>Merchant: <%=@merchant.name%></h3>
-<p>Status: <%=@invoice.status%></p>
-<p>Created On: <%=@invoice.created_at.strftime("%A, %B %d, %Y")%></p>
-<p>Customer: <%=@invoice.customer_name%></p>
+  <p>Status: <%=@invoice.status%></p>
+  <p>Created On: <%=@invoice.created_at.strftime("%A, %B %d, %Y")%></p>
+  <p>Customer: <%=@invoice.customer_name%></p>
 
 <h2><%=@invoice.id%>'s Items</h2>
 <%@invoice.merchant_invoice_items(@merchant).each do |invoice_item|%>
@@ -19,4 +19,5 @@
 <%end%>
 
 <h2>Total Potential Revenue</h2>
-<h4><%= money_honey(@invoice.potential_revenue(@merchant)) %></h4>
+<h4><%= money_honey(@invoice.potential_revenue_by_merchant(@merchant)) %></h4>
+
