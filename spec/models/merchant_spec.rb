@@ -88,6 +88,25 @@ describe Merchant, type: :model do
       expect(merchant_6.best_sales_date).to eq(invoice_7.created_at)
     end
 
+
+    describe '#ordered_items_to_ship' do
+      it 'returns items with incompleted invoices, ordered by creation' do
+        merchant = create :merchant
+        item1 = create :item, { merchant_id: merchant.id, id: 1 }
+        item2 = create :item, { merchant_id: merchant.id, id: 2 }
+        item4 = create :item, { merchant_id: merchant.id, id: 3 }
+        item3 = create :item, { merchant_id: merchant.id, id: 4 }
+        invoice1 = create :invoice, { status: 0 }
+        invoice2 = create :invoice, { status: 1 }
+        invoice3 = create :invoice, { status: 2 }
+        invoice_item1 = create :invoice_item, { invoice_id: invoice1.id, item_id: item1.id, status: 0 }
+        invoice_item2 = create :invoice_item, { invoice_id: invoice3.id, item_id: item2.id, status: 1 }
+        invoice_item3 = create :invoice_item, { invoice_id: invoice2.id, item_id: item3.id, status: 2 }
+        invoice_item4 = create :invoice_item, { invoice_id: invoice1.id, item_id: item4.id, status: 0 }
+
+        expect(merchant.ordered_items_to_ship).to eq([item1, item2, item4])
+      end
+
     it '#top_five_items' do
       customer_1 = create(:customer)
       merchant_6 = Merchant.create!(name: 'Rob')
@@ -116,6 +135,7 @@ describe Merchant, type: :model do
       invoice_item_10 = create(:invoice_item, item_id: item_10.id, invoice_id: invoice_10.id, status: 1, quantity: 1, unit_price: 30)
       invoice_item_11 = create(:invoice_item, item_id: item_11.id, invoice_id: invoice_11.id, status: 1, quantity: 1, unit_price: 5)
       expect(merchant_6.top_five_items).to eq([item_6, item_7, item_8, item_9, item_10])
+
     end
   end
 end
