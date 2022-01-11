@@ -48,27 +48,27 @@ class GithubInfo
   end
 
   def get_contributor
-    binding.pry
     user_name_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/contributors")
     JSON.parse(user_name_response.body, symbolize_names: true).map {|user| user[:login]}
   end
 
   def get_commits_per_person
-    user_name_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/contributors")
-    user_names = JSON.parse(user_name_response.body, symbolize_names: true).map {|user| user[:login]}
+    # user_name_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/contributors")
+    # user_names = JSON.parse(user_name_response.body, symbolize_names: true).map {|user| user[:login]}
 
     commits_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/commits?page=1&per_page=100")
     commits = JSON.parse(commits_response.body, symbolize_names: true)
 
     commit_hash = Hash.new(0)
-    user_names.each do |user|
+    @contributors.each do |contributor|
       commits.each do |commit|
-        if user == commit[:author][:login]
-          commit_hash[user] += 1
+        if contributor == commit[:author][:login]
+          commit_hash[contributor] += 1
         end
       end
     end
-    commit_hash[:name]
+
+    commit_hash
   end
 
   def get_all_merged
