@@ -1,6 +1,6 @@
-require 'rails_helper' 
+require 'rails_helper'
 
-RSpec.describe 'Admin Invoices Index page', type: :feature do   
+RSpec.describe 'Admin Invoices Index page', type: :feature do
 
   let!(:customer_1) {Customer.create!(first_name: "Billy", last_name: "Joel")}
   let!(:customer_2) {Customer.create!(first_name: "Britney", last_name: "Spears")}
@@ -21,9 +21,8 @@ RSpec.describe 'Admin Invoices Index page', type: :feature do
   end
 
   scenario 'each id links to admin invoice show page' do
-    expect(page).to have_link("#{invoice_1.id}"), href: admin_invoices_path(invoice_1.id)
-    expect(page).to have_link("#{invoice_2.id}"), href: admin_invoices_path(invoice_2.id)
-    expect(page).to have_link("#{invoice_3.id}"), href: admin_invoices_path(invoice_3.id)
-    save_and_open_page
+    expect(page).to have_link("#{invoice_1.id}", href: admin_invoice_path(invoice_1.id))
+    expect(page).to have_link("#{invoice_2.id}", href: admin_invoice_path(invoice_2.id))
+    expect(page).to have_link("#{invoice_3.id}", href: admin_invoice_path(invoice_3.id))
   end
 end
