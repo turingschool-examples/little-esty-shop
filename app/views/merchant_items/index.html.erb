@@ -20,7 +20,7 @@
   <h2>Top Items</h2>
   <% @merchant.top_items.each do |item| %>
     <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-    <p>-<%= number_to_currency(item.revenue)%>  in sales</p>
-    <p>Top day for <%= item.name %> was <%= item.top_day %> </p>
+    <p>-   <%= number_to_currency(item.revenue)%>  in sales</p>
+    <p>Top day for <%= item.name %> was <%= item.top_day.strftime('%m/%d/%Y') %> </p>
   <% end %>
 </div>
