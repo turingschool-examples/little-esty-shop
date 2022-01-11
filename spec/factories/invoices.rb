@@ -13,7 +13,7 @@ FactoryBot.define do
         transaction_result {0}
       end
       after(:create) do |invoice, evaluator|
-        create_list(:transaction, evaluator.transaction_count, invoice: invoice, status: evaluator.transaction_result)
+        create_list(:transaction, evaluator.transaction_count, invoice: invoice, result: evaluator.transaction_result)
       end
     end
 
