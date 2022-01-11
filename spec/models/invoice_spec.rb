@@ -45,8 +45,8 @@ RSpec.describe Invoice, type: :model do
         item_3 = create(:item_with_invoices, name: 'Zed', merchant: merchant_1, invoices: [invoice_1])
         item_4 = create(:item_with_invoices, name: 'Candy', invoices: [invoice_1])
         ## dig into possible refactor with a different factory: need => see item_name, set merchant, set invoice, invoice_item variable
-
-        expect(invoice_1.merchant_invoice_items(merchant_1)).to eq([item_2.invoice_items.first, item_1.invoice_items.first, item_3.invoice_items.first] )
+      
+        expect(invoice_1.merchant_invoice_items(merchant_1)).to eq([item_2.invoice_items.first, item_1.invoice_items.first, item_3.invoice_items.first])
       end
     end
 
@@ -83,6 +83,7 @@ RSpec.describe Invoice, type: :model do
         expect(invoice1.potential_revenue_by_merchant(merchant_2)).to eq(100000)
       end
     end
+<<<<<<< HEAD
 
     describe '#admin_potential_revenue' do
       it 'calculates potential revnue of invoice' do
@@ -94,5 +95,7 @@ RSpec.describe Invoice, type: :model do
         expect(invoice.admin_potential_revenue).to eq(44000)
       end
     end
+=======
+>>>>>>> c986b43ea2ddfc43157e15e34c041cf801d1fc6c
   end
 end
