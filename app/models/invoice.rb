@@ -31,6 +31,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete
-    joins(:invoice_items).where.not(invoice_items: { status: 2 }).order(:created_at)
+    joins(:invoice_items).where.not(invoice_items: { status: 2 }).order(:created_at).uniq
   end
 end

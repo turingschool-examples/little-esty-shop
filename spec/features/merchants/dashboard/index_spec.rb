@@ -141,17 +141,17 @@ RSpec.describe 'Merchant Dashboard' do
   it 'has the invoice id as a link next to the item name' do
     within "#merchants-item-#{@item3.name}" do
       expect(page).to have_content(@item3.invoices.first.id)
-      expect(page).to have_link(@item3.invoices.first.id, href: "/merchants/#{@merchant.id}/invoices")
+      expect(page).to have_link("#{@item3.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices/#{@item3.invoices.first.id}")
     end
 
     within "#merchants-item-#{@item4.name}" do
       expect(page).to have_content(@item4.invoices.first.id)
-      expect(page).to have_link(@item4.invoices.first.id, href: "/merchants/#{@merchant.id}/invoices")
+      expect(page).to have_link("#{@item4.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices/#{@item4.invoices.first.id}")
     end
 
     within "#merchants-item-#{@item5.name}" do
       expect(page).to have_content(@item5.invoices.first.id)
-      expect(page).to have_link(@item5.invoices.first.id, href: "/merchants/#{@merchant.id}/invoices")
+      expect(page).to have_link("#{@item5.invoices.first.id}", href: "/merchants/#{@merchant.id}/invoices/#{@item5.invoices.first.id}")
     end
   end
 
