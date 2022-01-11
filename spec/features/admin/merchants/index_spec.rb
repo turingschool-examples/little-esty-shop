@@ -50,5 +50,16 @@ RSpec.describe 'Admin_Merchants Index Page' do
         expect(page).to_not have_content('Nobody')
       end
     end
+
+    it "the name is a link to each admin merchant show page" do
+      merchant_1 = create(:merchant_with_transactions, name: 'Zach', invoice_item_quantity: 3, invoice_item_unit_price: 10)
+
+      visit "/admin/merchants"
+
+      within "div.top_merchants" do
+        click_link "Zach"
+        expect(current_path).to be("/admin/merchants/#{merchant_1.id}")
+      end
+    end
   end
 end
