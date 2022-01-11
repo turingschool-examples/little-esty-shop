@@ -15,7 +15,7 @@ RSpec.describe Invoice, type: :model do
   describe 'instance methods' do
     before(:each) do
       @customer = FactoryBot.create(:customer, first_name: "Cookie", last_name: "Monster")
-      @invoice = FactoryBot.create(:invoice, customer: @customer)
+      @invoice = FactoryBot.create(:invoice, customer: @customer, created_at: Date.today)
       @invoice2 = FactoryBot.create(:invoice)
       @item = FactoryBot.create(:item, status: "enabled")
       @item2 = FactoryBot.create(:item)
@@ -51,5 +51,24 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '::incomplete' do
+      let!(:invoice_6) {FactoryBot.create(:invoice, created_at: "Sun, 9 Jan 2022 06:10:00 UTC +00:00")}
+      let!(:invoice_7) {FactoryBot.create(:invoice, created_at: "Mon, 10 Jan 2022 06:15:00 UTC +00:00")}
+
+      let!(:invoice_item_1) {FactoryBot.create(:invoice_item, invoice: invoice_6, status: "pending")}
+      let!(:invoice_item_2) {FactoryBot.create(:invoice_item, invoice: invoice_7, status: "packaged")}
+      let!(:invoice_item_3) {FactoryBot.create(:invoice_item, status: "shipped")}
+      let!(:invoice_item_4) {FactoryBot.create(:invoice_item, status: "shipped")}
+
+      it 'returns all of the invoices which havent yet shipped, in order from oldest to newest' do
+        expect(Invoice.incomplete).to include(invoice_item_1.invoice)
+        expect(Invoice.incomplete).to include(invoice_item_2.invoice)
+        expect(Invoice.incomplete).to include(@invoiceitem.invoice)
+      end
+
+      it 'is ordered from oldest to newest' do
+        expect(Invoice.incomplete).to eq([invoice_item_1.invoice, invoice_item_2.invoice, @invoiceitem.invoice])
+      end
+    end
   end
 end

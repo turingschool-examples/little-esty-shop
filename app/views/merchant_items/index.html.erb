@@ -24,3 +24,7 @@
     <p>Top day for <%= item.name %> was <%= item.top_day.strftime('%m/%d/%Y') %> </p>
   <% end %>
 </div>
+
+  
+<h3><%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" %></h3>
+

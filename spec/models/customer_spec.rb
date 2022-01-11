@@ -13,10 +13,10 @@ RSpec.describe Customer, type: :model do
   describe "instance methods" do
     let!(:customer_1) {FactoryBot.create(:customer)}
     let!(:invoice_1) {FactoryBot.create(:invoice, customer: customer_1)}
-    let!(:transaction_1) {FactoryBot.create(:transaction, invoice: invoice_1)}
-    let!(:transaction_2) {FactoryBot.create(:transaction, invoice: invoice_1)}
-    let!(:transaction_3) {FactoryBot.create(:transaction, invoice: invoice_1)}
-    let!(:transaction_4) {FactoryBot.create(:transaction, invoice: invoice_1)}
+    let!(:transaction_1) {FactoryBot.create(:transaction, result: "success", invoice: invoice_1)}
+    let!(:transaction_2) {FactoryBot.create(:transaction, result: "success", invoice: invoice_1)}
+    let!(:transaction_3) {FactoryBot.create(:transaction, result: "success", invoice: invoice_1)}
+    let!(:transaction_4) {FactoryBot.create(:transaction, result: "success", invoice: invoice_1)}
     describe '#transaction_count' do
       it 'returns number of transaction for customer' do
         expect(customer_1.transaction_count).to eq(4)

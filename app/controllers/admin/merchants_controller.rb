@@ -12,6 +12,11 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def create
+    Merchant.create!(name: params[:name])
+    redirect_to "/admin/merchants"
+  end
+
   def update
     merchant = Merchant.find(params[:id])
     if params[:merchant][:status] == "enabled"
