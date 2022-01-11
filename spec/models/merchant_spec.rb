@@ -20,6 +20,28 @@ describe Merchant, type: :model do
       expect(Merchant.enabled_merchants).to eq([merchant_2, merchant_4])
     end
 
+    it "#ready_to_ship" do
+      customer_1 = create(:customer)
+      merchant_6 = Merchant.create!(name: 'Rob')
+      item_6 = create(:item, merchant_id: merchant_6.id, unit_price: 5, name: 'item_6_name')
+      item_7 = create(:item, merchant_id: merchant_6.id, unit_price: 5, name: 'item_7_name')
+      item_8 = create(:item, merchant_id: merchant_6.id, unit_price: 5, name: 'item_8_name')
+      item_9 = create(:item, merchant_id: merchant_6.id, unit_price: 5, name: 'item_9_name')
+      invoice_6 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2012-03-25 09:54:09 UTC")
+      invoice_7 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2013-03-25 09:54:09 UTC")
+      invoice_8 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2014-03-25 09:54:09 UTC")
+      invoice_9 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: "2015-03-25 09:54:09 UTC")
+      transaction_1 = create(:transaction, invoice_id: invoice_6.id, result: 0)
+      transaction_2 = create(:transaction, invoice_id: invoice_7.id, result: 0)
+      transaction_3 = create(:transaction, invoice_id: invoice_8.id, result: 0)
+      invoice_item_6 = create(:invoice_item, item_id: item_6.id, invoice_id: invoice_6.id, status: 1, quantity: 1, unit_price: 5)
+      invoice_item_7 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_7.id, status: 1, quantity: 10, unit_price: 5)
+      invoice_item_8 = create(:invoice_item, item_id: item_8.id, invoice_id: invoice_8.id, status: 1, quantity: 10, unit_price: 5)
+      invoice_item_9 = create(:invoice_item, item_id: item_9.id, invoice_id: invoice_9.id, status: 2, quantity: 10, unit_price: 5)
+
+      expect(merchant_6.ready_to_ship).to eq([invoice_item_6, invoice_item_7, invoice_item_8])
+    end
+
     it '.disabled_merchants' do
       merchant_1 = Merchant.create!(name: 'merchant_1')
       merchant_2 = Merchant.create!(name: 'merchant_2', status: 0)
