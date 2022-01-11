@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+    <% github_info = GithubInfo.new %>
+    <p>Repo name: <%= github_info.repo_name %> </p>
+    <p>Contributors: <%= github_info.contributors %> </p>
+    <p>Commits per person: <%= github_info.commits_per_person %> </p>
+    <p>Merged PR count: <%= github_info.all_merged %> </p>
+
+
     <p></p>
     <title>LittleEtsyShop</title>
     <%= csrf_meta_tags %>
