@@ -64,14 +64,14 @@ The premise is a fictitious e-commerce platform where both merchants and admins 
     Rails 5.2.6
   ```
 - Database Creation
-  ```$ rails db:{drop, create, migrate, seed}
-  ```
+ `$ rails db:{drop, create, migrate, seed}`
+  
 - Database Loading
-```$ rails csv_load:all
-```
+`$ rails csv_load:all`
+
 - Run Entire Test Suite
-```$ bundle exec rspec
-```
+`$ bundle exec rspec`
+
 - [Local Deployment](http://localhost:3000/)
 ```$rails s
 => Booting Puma
