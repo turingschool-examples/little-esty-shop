@@ -50,21 +50,21 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
-    describe '#potential_revenue' do
+    describe '#revenue' do
       it 'reports potential revenue from all items on a given invoice if there is at least 1 successful transaction' do
         invoice1 = create(:invoice)
         item1 = create(:item_with_invoices, name: 'Toy', invoices: [invoice1], invoice_item_quantity: 3, invoice_item_unit_price: 15000)
         item2 = create(:item_with_invoices, name: 'Car', invoices: [invoice1], invoice_item_quantity: 5, invoice_item_unit_price: 20000)
         transaction_1 = create(:transaction, invoice: invoice1, result: 1)
 
-        expect(invoice1.potential_revenue).to eq(0)
+        expect(invoice1.revenue).to eq(0)
 
         transaction_2 = create(:transaction, invoice: invoice1, result: 0)
-        expect(invoice1.potential_revenue).to eq(145000)
+        expect(invoice1.revenue).to eq(145000)
       end
     end
 
-    describe '#potential_revenue_by_merchant' do
+    describe '#revenue_by_merchant' do
       it "reports potential revenue associated with items that belong to a particular merchant that are on a particular invoice" do
         merchant_1 = create(:merchant)
         merchant_2 = create(:merchant)
@@ -79,8 +79,8 @@ RSpec.describe Invoice, type: :model do
         item4 = create(:item_with_invoices, name: 'Yoyo', merchant: merchant_2, invoices: [invoice2], invoice_item_quantity: 5, invoice_item_unit_price: 77000)
         transaction_3 = create(:transaction, invoice: invoice2, result: 0)
 
-        expect(invoice1.potential_revenue_by_merchant(merchant_1)).to eq(45000)
-        expect(invoice1.potential_revenue_by_merchant(merchant_2)).to eq(100000)
+        expect(invoice1.revenue_by_merchant(merchant_1)).to eq(45000)
+        expect(invoice1.revenue_by_merchant(merchant_2)).to eq(100000)
       end
     end
   end

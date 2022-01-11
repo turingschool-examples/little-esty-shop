@@ -48,17 +48,17 @@ RSpec.describe Item, type: :model do
   end
 
   describe "instance methods" do
-    describe 'potential_revenue' do
-      it "returns the potential_revenue associated with that item. Only counts invoices that have valid transactions." do
+    describe 'revenue' do
+      it "returns the revenue associated with that item. Only counts invoices that have valid transactions." do
         item_1 = create(:item_with_transactions, name: 'Toy', invoice_item_quantity: 3, invoice_item_unit_price: 15000, transaction_result: 1)
-        expect(item_1.potential_revenue).to eq(0)
+        expect(item_1.revenue).to eq(0)
 
         item_2 = create(:item_with_transactions, name: 'Car', invoice_item_quantity: 5, invoice_item_unit_price: 20000, transaction_result: 0)
-        expect(item_2.potential_revenue).to eq(100000)
+        expect(item_2.revenue).to eq(100000)
 
         item_3 = create(:item_with_transactions, name: 'Desk', invoice_item_quantity: 2, invoice_item_unit_price: 20000, transaction_result: 0)
         item_3.invoice_items.update(item: item_2)
-        expect(item_2.potential_revenue).to eq(140000)
+        expect(item_2.revenue).to eq(140000)
       end
     end
 

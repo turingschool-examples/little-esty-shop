@@ -18,11 +18,11 @@ class Invoice < ApplicationRecord
     invoice_items.joins(:item).where( items: {merchant_id: merchant.id}).order("items.name asc")
   end
 
-  def potential_revenue
-    invoice_items.potential_revenue
+  def revenue
+    invoice_items.revenue
   end
 
-  def potential_revenue_by_merchant(merchant)
-    merchant_invoice_items(merchant).potential_revenue
+  def revenue_by_merchant(merchant)
+    merchant_invoice_items(merchant).revenue
   end
 end
