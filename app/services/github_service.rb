@@ -24,19 +24,15 @@ class GithubService
     commits_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/commits?page=1&per_page=100")
     commits = JSON.parse(commits_response.body, symbolize_names: true)
     commit_hash = Hash.new(0)
-    @contributors.each do |contributor|
-      commits.each do |commit|
-        if contributor == commit[:author][:login]
-          commit_hash[contributor] += 1
-        end
-      end
+    commits.each do |commit|
+      commit_hash[commit[:login]] += commit[:contributions]
     end
     commit_hash
   end
 
+
   def get_all_merged
     pr_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/pulls?state=closed&page=1&per_page=100")
-
     JSON.parse(pr_response.body, symbolize_names: true).count
   end
 end
