@@ -33,4 +33,8 @@ class Invoice < ApplicationRecord
   def self.incomplete
     joins(:invoice_items).where.not(invoice_items: { status: 2 }).order(:created_at).uniq
   end
+
+  def merchant_invoice_id(invoice)
+    Item.find((InvoiceItem.find_by(invoice_id: invoice.id)).item_id).merchant_id
+  end
 end

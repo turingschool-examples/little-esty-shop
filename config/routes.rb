@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     get '/invoices', to: 'merchant_invoices#index'
     get '/invoices/:invoice_id', to: 'merchant_invoices#show'
+    patch '/invoices/:invoice_id', to: 'merchant_invoices#update'
   end
 
   namespace :admin do

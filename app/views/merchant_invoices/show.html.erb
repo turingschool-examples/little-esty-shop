@@ -6,10 +6,16 @@
 <li>Customer Name: <%= @invoice.customer_name %></li>
 
 <% @invoice.items.each do |item| %>
+<div id= "item_id<%= item.id %>">
 <h2>Item Name: <%= item.name %></h2>
 <p>Quantity: <%= item.invoice_item_quantity(@invoice) %></p>
 <p>Unit Price: <%= item.invoice_item_unit_price(@invoice) %></p>
-<p>Item Status: <%= item.invoice_item_status(@invoice) %></p>
+<p>Item Status: <%= item.invoice_item_status(@invoice) %></p> 
+<%= form_with url: "/merchants/#{@invoice.merchant_invoice_id(@invoice)}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+  <%= form.select :change_status, ['packaged', 'pending', 'shipped'], selected: item.invoice_item_status(@invoice) %>
+  <%= form.submit "Update Invoice Status" %>
+  <% end %>
+</div>
 <% end %>
 
 <h2>Total Revenue: <%= @invoice.total_revenue %></h2>

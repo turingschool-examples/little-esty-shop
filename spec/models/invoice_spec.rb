@@ -72,4 +72,16 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.incomplete).to eq([invoice_item_1.invoice, invoice_item_2.invoice])
     end
   end
+
+  describe 'merchant by invoice id' do 
+    let!(:merchant_1) {FactoryBot.create(:merchant)}
+    let!(:item_1) {FactoryBot.create(:item, merchant: merchant_1, unit_price: 100)}
+    let!(:invoice_1) {FactoryBot.create(:invoice, status: 0)}
+    let!(:transaction_1) {FactoryBot.create(:transaction, invoice: invoice_1, credit_card_expiration_date: Date.today, result: 0)}
+    let!(:invoice_item_1) {FactoryBot.create(:invoice_item, quantity: 100, unit_price: 100, item: item_1, invoice: invoice_1, status: 0)}
+
+    it 'returns merchant id tied to invoice' do 
+      expect(invoice_1.merchant_invoice_id(invoice_1)).to eq(merchant_1.id)
+    end
+  end
 end
