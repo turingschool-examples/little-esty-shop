@@ -9,6 +9,7 @@ RSpec.describe Merchant do
   end
 
   describe 'validations' do
+    it { should define_enum_for(:status).with_values([:enabled, :disabled]) }
     it { should validate_presence_of(:name) }
   end
 

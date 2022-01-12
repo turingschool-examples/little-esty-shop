@@ -8,6 +8,7 @@ RSpec.describe Item do
   end
 
   describe 'validations' do
+    it { should define_enum_for(:status).with_values([:enabled, :disabled]) }
     it { should validate_presence_of(:name)}
     it { should validate_presence_of(:description)}
     it { should validate_presence_of(:unit_price)}

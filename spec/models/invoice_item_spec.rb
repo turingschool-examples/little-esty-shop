@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe InvoiceItem do
   describe 'validation' do
-    it { should define_enum_for(:status).with([:packaged, :pending, :shipped]) }
+    it { should define_enum_for(:status).with_values([:packaged, :pending, :shipped]) }
     it { should validate_presence_of(:quantity) }
     it { should validate_presence_of(:unit_price) }
     it { should validate_presence_of(:item_id) }
