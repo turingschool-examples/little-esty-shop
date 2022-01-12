@@ -6,6 +6,8 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
+  validates_presence_of :customer_id
+
   def creation_date_formatted
     date = self.created_at
     date.strftime("%A, %B %d, %Y")
