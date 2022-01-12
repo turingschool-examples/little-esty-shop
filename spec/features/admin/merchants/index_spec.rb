@@ -23,13 +23,10 @@ RSpec.describe 'Admin Merchants Index' do
   let!(:invoice_4) {customer_1.invoices.create!(status: 1, created_at: '2012-03-26 01:54:09')}
   let!(:invoice_5) {customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')}
   let!(:invoice_6) {customer_1.invoices.create!(status: 1, created_at: '2012-03-29 07:54:09')}
-
   let!(:invoice_7) {customer_1.invoices.create!(status: 1, created_at: '2013-03-25 09:54:09')}
   let!(:invoice_8) {customer_1.invoices.create!(status: 1, created_at: '2013-04-25 08:54:09')}
   let!(:invoice_9) {customer_1.invoices.create!(status: 1, created_at: '2013-10-25 04:54:09')}
   let!(:invoice_10) {customer_1.invoices.create!(status: 1, created_at: '2013-03-26 01:54:09')}
-  let!(:invoice_11) {customer_1.invoices.create!(status: 1, created_at: '2013-03-28 12:54:09')}
-  let!(:invoice_12) {customer_1.invoices.create!(status: 1, created_at: '2013-03-29 07:54:09')}
 
   let!(:invoice_item_1)  {InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 1000, quantity: 2, status: 0)}
   let!(:invoice_item_2)  {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, unit_price: 1000, quantity: 26, status: 0)}
@@ -42,8 +39,6 @@ RSpec.describe 'Admin Merchants Index' do
   let!(:invoice_item_8)  {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_8.id, unit_price: 1000, quantity: 13, status: 0)}
   let!(:invoice_item_9)  {InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_9.id, unit_price: 1000, quantity: 4, status: 0)}
   let!(:invoice_item_10)  {InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_10.id, unit_price: 1000, quantity: 8, status: 1)}
-  let!(:invoice_item_11)  {InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_11.id, unit_price: 1000, quantity: 40, status: 1)}
-  let!(:invoice_item_12)  {InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_12.id, unit_price: 1000, quantity: 14, status: 2)}
 
   let!(:transaction_1) {invoice_1.transactions.create!(result: 'success')}
   let!(:transaction_2) {invoice_2.transactions.create!(result: 'success')}
@@ -55,8 +50,6 @@ RSpec.describe 'Admin Merchants Index' do
   let!(:transaction_8) {invoice_8.transactions.create!(result: 'success')}
   let!(:transaction_9) {invoice_9.transactions.create!(result: 'failed')}
   let!(:transaction_10) {invoice_10.transactions.create!(result: 'success')}
-  let!(:transaction_11) {invoice_11.transactions.create!(result: 'success')}
-  let!(:transaction_12) {invoice_12.transactions.create!(result: 'failed')}
 
   before(:each) do
    visit admin_merchants_path
