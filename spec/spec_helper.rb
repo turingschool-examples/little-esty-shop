@@ -16,6 +16,8 @@
 # require 'webmock/rspec'
 # WebMock.disable_net_connect!(allow_localhost: true)
 require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
   # config.before(:each) do
   #   pn1 = Pathname.new('spec/support/vcr_cassettes/GithubService/returns_the_repo.yml')
