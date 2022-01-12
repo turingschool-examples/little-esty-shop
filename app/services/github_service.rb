@@ -1,6 +1,5 @@
 class GithubService
   attr_reader :repo_name, :contributors, :commits_per_person, :all_merged
-  VCR.turn_on!
 
   def initialize
 
