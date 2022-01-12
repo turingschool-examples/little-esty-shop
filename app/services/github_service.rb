@@ -1,3 +1,5 @@
+require 'httparty'
+
 class GithubService
   attr_reader :repo_name, :contributors, :commits_per_person, :all_merged
 
@@ -10,6 +12,7 @@ class GithubService
   end
 
   def get_repo_response
+    binding.pry
     response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop")
     name = JSON.parse(response.body, symbolize_names: true)[:name]
   end
