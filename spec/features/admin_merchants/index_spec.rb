@@ -128,7 +128,6 @@ RSpec.describe 'Admin merchant index page' do
     within "#disabled" do
       expect(page).to have_content(merchant_4.name)
       expect(page).to have_content(merchant_5.name)
-      save_and_open_page
       expect(page).to have_content(merchant_6.name)
 
       expect(page).to_not have_content(merchant_1.name)
@@ -167,7 +166,14 @@ RSpec.describe 'Admin merchant index page' do
 
   end
 
+  it 'shows github info on current page' do
+    visit '/admin/merchants'
+    github_service = GithubService.new
 
+    expect(page).to have_content(github_service.repo_name)
+    expect(page).to have_content("BrianZanti: 51\ndylan-harper: 49\nHenchworm: 42\ncroixk: 22\njacksonvaldez: 10\ntimomitchel: 9\nscottalexandra: 3\njamisonordway: 1\nMerged commits count: 82")
+    expect(page).to have_content(github_service.all_merged)
+  end
 
 
 
