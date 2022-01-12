@@ -20,6 +20,7 @@
 ![capybara v badge](https://img.shields.io/gem/v/capybara?color=cyan&label=capybara)
 ![shoulda-matchers v badge](https://img.shields.io/gem/v/shoulda-matchers?label=shoulda-matchers)
 ![orderly v badge](https://img.shields.io/gem/v/orderly?label=orderly)
+![launchy v badge](https://img.shields.io/gem/v/launchy?color=red&label=launchy)
 ![rspec v badge](https://img.shields.io/gem/v/rspec?color=orange&label=rspec)
 ![simplecov v badge](https://img.shields.io/gem/v/simplecov?color=green&label=simplecov)
 
