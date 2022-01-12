@@ -4,14 +4,13 @@ RSpec.describe 'Admin Invoices Index page', type: :feature do
 
   let!(:customer_1) {Customer.create!(first_name: "Billy", last_name: "Joel")}
   let!(:customer_2) {Customer.create!(first_name: "Britney", last_name: "Spears")}
-  let!(:customer_3) {Customer.create!(first_name: "Prince", last_name: "Mononym")}
 
-  let!(:invoice_1)  {customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')}
-  let!(:invoice_2)  {customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')}
-  let!(:invoice_3)  {customer_2.invoices.create!(status: 1, created_at: '2012-04-25 08:54:09')}
+  let!(:invoice_1) {customer_1.invoices.create!(status: 1, created_at: '2012-03-25 09:54:09')}
+  let!(:invoice_2) {customer_1.invoices.create!(status: 1, created_at: '2012-03-28 12:54:09')}
+  let!(:invoice_3) {customer_2.invoices.create!(status: 1, created_at: '2012-04-25 08:54:09')}
 
   before (:each) do
-      visit admin_invoices_path
+    visit admin_invoices_path
   end
 
   scenario 'admin sees list of all invoice ids in system' do
