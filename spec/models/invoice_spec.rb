@@ -9,7 +9,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'enum validation' do
-    it { should define_enum_for(:status).with([:in_progress, :cancelled, :completed])}
+    it { should define_enum_for(:status).with(["in progress", :cancelled, :completed])}
   end
 
   describe 'instance methods' do

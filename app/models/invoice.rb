@@ -4,7 +4,7 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :transactions
 
-  enum status: { in_progress: 0, cancelled: 1, completed: 2}
+  enum status: { "in progress": 0, cancelled: 1, completed: 2}
 
   def customer_name
     (customer.first_name) + " " + (customer.last_name)
