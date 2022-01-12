@@ -1,6 +1,7 @@
 require 'rails_helper'
 require "httparty"
 RSpec.describe GithubService do
+  VCR.turn_on!
 
   it 'returns the repo', :vcr, js: true do
     github_service = GithubService.new
