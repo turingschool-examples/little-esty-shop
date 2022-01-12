@@ -14,8 +14,6 @@ RSpec.describe Item do
     it { should validate_presence_of(:merchant_id)}
   end
 
-
-
   let!(:merchant_1) {Merchant.create!(name: 'Ron Swanson')}
   let!(:merchant_2) {Merchant.create!(name: 'Swan Ronson')}
 
