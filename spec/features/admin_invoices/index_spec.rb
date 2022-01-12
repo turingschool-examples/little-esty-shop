@@ -3,6 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'the admin invoices index page' do
 
+
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
 
   let!(:item_1) {merchant_1.items.create!(name: 'Obsidian Nobice', description: 'A beautiful obsidian', unit_price: 50, status: 'enabled')}

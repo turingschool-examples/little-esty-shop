@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'webmock'
 
 RSpec.describe 'Admin dashboard page' do
-
+  
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
 
 
@@ -68,7 +69,7 @@ RSpec.describe 'Admin dashboard page' do
     expect(current_path).to eq("/admin/merchants")
   end
 
-  xit 'directs to admin invoices index page if link is clicked' do
+  it 'directs to admin invoices index page if link is clicked' do
     visit '/admin'
     click_link("Invoices Link")
     expect(current_path).to eq("/admin/invoices")

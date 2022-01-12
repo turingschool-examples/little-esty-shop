@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Item Edit Page' do
 
+
   before(:each) do
     @merchant_1 = Merchant.create!(name: 'Merchant Name')
     @item_1 = Item.create!(name: 'Couch', description: 'comfy couch', unit_price: '1000', merchant_id: @merchant_1.id)

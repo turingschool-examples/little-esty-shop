@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin merchant index page' do
-
+  
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks', status: 'enabled')}
   let!(:merchant_2) {Merchant.create!(name: 'Dylans harps', status: 'enabled')}
   let!(:merchant_3) {Merchant.create!(name: 'Croixs Roids', status: 'enabled')}
@@ -154,8 +154,11 @@ RSpec.describe 'Admin merchant index page' do
   end
 
   it "has the top 5 merchants displayed and their total revenue" do
+    save_and_open_page
     visit '/admin/merchants'
     within "#top_5_merchants" do
+      save_and_open_page
+
     expect(page).to have_content(merchant_1.name)
     expect(page).to have_content(merchant_2.name)
     expect(page).to have_content(merchant_1.total_revenue)
