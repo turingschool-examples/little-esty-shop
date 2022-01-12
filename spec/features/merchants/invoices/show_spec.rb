@@ -16,10 +16,6 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
   let!(:invoice_item_1) {InvoiceItem.create!(quantity: 3, unit_price: item_1.unit_price, item_id: item_1.id, invoice_id: invoice_1.id, status: 0)}
   let!(:invoice_item_2) {InvoiceItem.create!(quantity: 5, unit_price: item_2.unit_price, item_id: item_2.id, invoice_id: invoice_1.id, status: 0)}
-  let!(:invoice_item_3) {InvoiceItem.create!(quantity: 1, unit_price: item_3.unit_price, item_id: item_3.id, invoice_id: invoice_1.id, status: 0)}
-  let!(:invoice_item_4) {InvoiceItem.create!(quantity: 1, unit_price: item_4.unit_price, item_id: item_4.id, invoice_id: invoice_1.id, status: 0)}
-
-  let!(:transaction_1) {invoice_1.transactions.create!(result: 'success')}
 
   before (:each) do
     visit merchant_invoice_path(merchant_1.id, invoice_1.id)
