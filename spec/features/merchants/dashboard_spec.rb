@@ -43,21 +43,21 @@ RSpec.describe 'Merchant Dashboard' do
   let!(:invoice_14) {customer_4.invoices.create!(status: 1)}
   let!(:invoice_15) {customer_5.invoices.create!(status: 1)}
 
-  let!(:invoice_item_1) {InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)}
-  let!(:invoice_item_2) {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 0)}
-  let!(:invoice_item_3) {InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 0)}
-  let!(:invoice_item_4) {InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: 1)}
-  let!(:invoice_item_5) {InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: 1)}
-  let!(:invoice_item_6) {InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, status: 2)}
-  let!(:invoice_item_7) {InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_7.id, status: 2)}
-  let!(:invoice_item_8) {InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_8.id, status: 2)}
-  let!(:invoice_item_9) {InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_9.id, status: 2)}
-  let!(:invoice_item_10) {InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_10.id, status: 2)}
-  let!(:invoice_item_11) {InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_11.id, status: 2)}
-  let!(:invoice_item_12) {InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_12.id, status: 2)}
-  let!(:invoice_item_13) {InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_13.id, status: 2)}
-  let!(:invoice_item_14) {InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_14.id, status: 2)}
-  let!(:invoice_item_15) {InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_15.id, status: 2)}
+  let!(:invoice_item_1) {InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, unit_price: item_1.unit_price, quantity: 2, status: 0)}
+  let!(:invoice_item_2) {InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, unit_price: item_2.unit_price, quantity: 2, status: 0)}
+  let!(:invoice_item_3) {InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, unit_price: item_3.unit_price, quantity: 2, status: 0)}
+  let!(:invoice_item_4) {InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, unit_price: item_4.unit_price, quantity: 2, status: 1)}
+  let!(:invoice_item_5) {InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, unit_price: item_5.unit_price, quantity: 2, status: 1)}
+  let!(:invoice_item_6) {InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, unit_price: item_6.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_7) {InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_7.id, unit_price: item_7.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_8) {InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_8.id, unit_price: item_8.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_9) {InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_9.id, unit_price: item_9.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_10) {InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_10.id, unit_price: item_10.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_11) {InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_11.id, unit_price: item_11.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_12) {InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_12.id, unit_price: item_12.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_13) {InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_13.id, unit_price: item_13.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_14) {InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_14.id, unit_price: item_14.unit_price, quantity: 2, status: 2)}
+  let!(:invoice_item_15) {InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_15.id, unit_price: item_15.unit_price, quantity: 2, status: 2)}
 
   let!(:transaction_1) {invoice_1.transactions.create!(result: 'success')}
   let!(:transaction_2) {invoice_2.transactions.create!(result: 'success')}
