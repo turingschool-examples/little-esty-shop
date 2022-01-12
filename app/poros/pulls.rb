@@ -3,6 +3,7 @@ class Pulls
 
   def initialize(data)
     data_hash = Hash.new(data)
-    @number = data_hash[:number]
+    needed_info = data_has[:number]
+    @number = needed_info[:number]
   end
 end

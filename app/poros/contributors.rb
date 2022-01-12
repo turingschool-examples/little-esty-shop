@@ -3,7 +3,8 @@ class Contributors
 
   def initialize(data)
     data_hash = Hash.new(data)
-    @commits = data_hash[:contributions]
-    @username = data_hash[:login]
+    needed_info = data_hash[:contributions]
+    @commits = needed_info[:contributions]
+    @username = needed_info[:login]
   end
 end
