@@ -6,8 +6,8 @@ RSpec.describe Customer do
   end
 
   describe 'validations' do
-    it {should validate_presence_of(:first_name)}
-    it {should validate_presence_of(:last_name)}
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
   end
 
   let!(:customer_1) {Customer.create!(first_name: "Billy", last_name: "Joel")}
