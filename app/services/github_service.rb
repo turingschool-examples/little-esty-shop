@@ -1,8 +1,10 @@
 require 'httparty'
 class GithubService
   attr_reader :repo_name, :contributors, :commits_per_person, :all_merged
+  VCR.turn_on!
 
   def initialize
+
     @repo_name = get_repo_response
     @contributors = get_contributor
     @commits_per_person = get_commits_per_person

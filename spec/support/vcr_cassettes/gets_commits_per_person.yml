@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Wed, 12 Jan 2022 05:41:38 GMT
+      - Wed, 12 Jan 2022 16:54:51 GMT
       Content-Type:
       - application/json; charset=utf-8
       Cache-Control:
@@ -60,19 +60,19 @@ http_interactions:
       X-Ratelimit-Limit:
       - '60'
       X-Ratelimit-Remaining:
-      - '15'
+      - '29'
       X-Ratelimit-Reset:
-      - '1641967959'
+      - '1642009813'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
-      - '45'
+      - '31'
       Accept-Ranges:
       - bytes
       Content-Length:
       - '43780'
       X-Github-Request-Id:
-      - B21C:426A:14B659:17707F:61DE6A1B
+      - EA8B:2B12:8FED3D:18C6E72:61DF07E1
     body:
       encoding: ASCII-8BIT
       string: '[{"sha":"03fdb749c64b78cb69cd47b10037929f1e468b4a","node_id":"C_kwDOGnnmSNoAKDAzZmRiNzQ5YzY0Yjc4Y2I2OWNkNDdiMTAwMzc5MjlmMWU0NjhiNGE","commit":{"author":{"name":"Dylan
@@ -601,5 +601,5 @@ http_interactions:
         Harper","email":"dylanharper4@icloud.com","date":"2022-01-05T00:53:02Z"},"committer":{"name":"Dylan
         Harper","email":"dylanharper4@icloud.com","date":"2022-01-05T00:53:02Z"},"message":"Close
         to done with user_story_4","tree":{"sha":"5554e123db688ac31c0d8924c1bbc0870670547b","url":"https://api.github.com/repos/croixk/little-esty-shop/git/trees/5554e123db688ac31c0d8924c1bbc0870670547b"},"url":"https://api.github.com/repos/croixk/little-esty-shop/git/commits/faf1b24a19311359d7ba5c92c1d7d0ad812fc314","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/croixk/little-esty-shop/commits/faf1b24a19311359d7ba5c92c1d7d0ad812fc314","html_url":"https://github.com/croixk/little-esty-shop/commit/faf1b24a19311359d7ba5c92c1d7d0ad812fc314","comments_url":"https://api.github.com/repos/croixk/little-esty-shop/commits/faf1b24a19311359d7ba5c92c1d7d0ad812fc314/comments","author":{"login":"dylan-harper","id":39470230,"node_id":"MDQ6VXNlcjM5NDcwMjMw","avatar_url":"https://avatars.githubusercontent.com/u/39470230?v=4","gravatar_id":"","url":"https://api.github.com/users/dylan-harper","html_url":"https://github.com/dylan-harper","followers_url":"https://api.github.com/users/dylan-harper/followers","following_url":"https://api.github.com/users/dylan-harper/following{/other_user}","gists_url":"https://api.github.com/users/dylan-harper/gists{/gist_id}","starred_url":"https://api.github.com/users/dylan-harper/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/dylan-harper/subscriptions","organizations_url":"https://api.github.com/users/dylan-harper/orgs","repos_url":"https://api.github.com/users/dylan-harper/repos","events_url":"https://api.github.com/users/dylan-harper/events{/privacy}","received_events_url":"https://api.github.com/users/dylan-harper/received_events","type":"User","site_admin":false},"committer":{"login":"dylan-harper","id":39470230,"node_id":"MDQ6VXNlcjM5NDcwMjMw","avatar_url":"https://avatars.githubusercontent.com/u/39470230?v=4","gravatar_id":"","url":"https://api.github.com/users/dylan-harper","html_url":"https://github.com/dylan-harper","followers_url":"https://api.github.com/users/dylan-harper/followers","following_url":"https://api.github.com/users/dylan-harper/following{/other_user}","gists_url":"https://api.github.com/users/dylan-harper/gists{/gist_id}","starred_url":"https://api.github.com/users/dylan-harper/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/dylan-harper/subscriptions","organizations_url":"https://api.github.com/users/dylan-harper/orgs","repos_url":"https://api.github.com/users/dylan-harper/repos","events_url":"https://api.github.com/users/dylan-harper/events{/privacy}","received_events_url":"https://api.github.com/users/dylan-harper/received_events","type":"User","site_admin":false},"parents":[{"sha":"447792a01658e67087ca9a94a1ce2d74dc0de9e1","url":"https://api.github.com/repos/croixk/little-esty-shop/commits/447792a01658e67087ca9a94a1ce2d74dc0de9e1","html_url":"https://github.com/croixk/little-esty-shop/commit/447792a01658e67087ca9a94a1ce2d74dc0de9e1"}]}]'
-  recorded_at: Wed, 12 Jan 2022 05:41:48 GMT
+  recorded_at: Wed, 12 Jan 2022 16:54:57 GMT
 recorded_with: VCR 6.0.0

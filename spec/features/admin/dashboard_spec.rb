@@ -1,8 +1,8 @@
 require 'rails_helper'
+require 'webmock'
 
 RSpec.describe 'Admin dashboard page' do
-
-
+  
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
 
 

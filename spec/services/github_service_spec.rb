@@ -1,7 +1,6 @@
 require 'rails_helper'
 require "httparty"
 RSpec.describe GithubService do
-  VCR.turn_on!
 
   it 'returns the repo', :vcr, js: true do
     github_service = GithubService.new
@@ -32,5 +31,4 @@ RSpec.describe GithubService do
     end
   end
 end
-# vcr: {cassette_name: 'repo_name', record: :new_episodes}
 
