@@ -8,6 +8,10 @@ RSpec.describe Merchant do
     it { should have_many(:customers).through(:invoices) }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
+
   let!(:merchant_1) {Merchant.create!(name: 'Ron Swanson', status: 0)}
   let!(:merchant_2) {Merchant.create!(name: 'Leslie Knope', status: 0)}
   let!(:merchant_3) {Merchant.create!(name: 'Oprah Winfrey', status: 0)}
