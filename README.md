@@ -1,4 +1,5 @@
-# Little Esty Shop ### Forked from https://github.com/turingschool-examples/little-esty-shop
+# Little Esty Shop
+[Assignment prompt](https://github.com/turingschool-examples/little-esty-shop)
 ### Collaborators:
 * Croix Kimmel [croixk](https://github.com/croixk)
 * Dylan Harper [dylan-harper](https://github.com/dylan-harper)
