@@ -12,9 +12,8 @@ class GithubService
   end
 
   def get_repo_response
-    repo_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop")
-    repo_name = JSON.parse(repo_response.body, symbolize_names: true)
-    repo_name[:name]
+    response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop")
+    JSON.parse(response.body, symbolize_names: true)[:name]
   end
 
   def get_contributor
