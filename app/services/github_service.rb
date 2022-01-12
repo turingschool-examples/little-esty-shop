@@ -1,5 +1,4 @@
 class GithubService
-  include HTTParty
   attr_reader :repo_name, :contributors, :commits_per_person, :all_merged
 
   def initialize

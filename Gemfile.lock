@@ -46,7 +46,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
     bindex (0.8.1)
-    bootsnap (1.9.3)
+    bootsnap (1.9.4)
       msgpack (~> 1.0)
     builder (3.2.4)
     capybara (3.36.0)
@@ -74,7 +74,7 @@ GEM
     docile (1.4.0)
     erubi (1.10.0)
     execjs (2.8.1)
-    ffi (1.15.4)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
@@ -110,8 +110,6 @@ GEM
     multi_xml (0.6.0)
     nio4r (2.5.8)
     nokogiri (1.13.0-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.0-x86_64-linux)
       racc (~> 1.4)
     orderly (0.1.1)
       capybara (>= 1.1)
@@ -236,7 +234,6 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
-  x86_64-linux
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
