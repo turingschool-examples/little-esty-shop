@@ -1,38 +1,69 @@
 # Little Esty Shop
+> Little Esty Shop is a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+## Table of Contents
+* [General Info](#general-information)
+* [Installation](#installation)
+* [Technologies Used](#technologies-used)
+* [Featured Applications](#featured-applications)
+* [Room For Improvement](#room-for-improvement)
+* [Acknowledgements](#acknowledgements)
+* [Contact](#contact)
 
-## Background and Description
+## General Information
+This solution contains a Ruby on Rails Web Application using MVC architecture:
+- This solution requires Ruby 2.7.2.
+- Utilizes custom data tables with foreign key relationships
+- Manage customers, merchants, items, transactions and invoices.
+- [Database Schema Diagram](https://dbdiagram.io/d/61b0e0908c901501c0e724a4)
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
-
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
-
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
-
-## Setup
-
-This project requires Ruby 2.7.2.
-
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
+## Installation
+Code can be found on Git Hub where it can be cloned to your local machine for further use.
+- [Git Hub Link](https://github.com/russellrockwood/MaintenanceTracker)
+- From the command line, install gems and set up your DB:
     * `bundle`
     * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
+- Or visit the [deployed version](https://blooming-stream-46033.herokuapp.com/) on Heroku
 
-## Phases
+## Technologies Used
+- Ruby/Rails
+- [Atom](https://visualstudio.microsoft.com/downloads/) Free and open-source text and source code editor.
+- [RSpec](https://rspec.info/) Ruby behavior driven development test suite.
+- [dbdiagram.io](https://dbdiagram.io/home) A free, simple tool to draw ER diagrams.
+- [Postgres](https://www.postgresql.org/) PostgreSQL is a free and open-source relational database management system. 
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+## Featured Applications
+### Merchants:
+ * Manage your products 
+ 
+ <img width="233" alt="Screen Shot 2022-01-11 at 5 48 56 PM" src="https://user-images.githubusercontent.com/63167887/149033760-39b4a973-3d74-41ee-b210-d6510d58de6f.png">
+ 
+ * View your top customers and the number of transactions with each customer 
+ 
+  <img width="414" src="https://user-images.githubusercontent.com/63167887/149033746-6e109fd4-fac1-4459-8af2-64a97ec15960.png">
+
+### Admin
+ - Enable or disable merchant access
+
+<img width="225" alt="Screen Shot 2022-01-11 at 6 06 56 PM" src="https://user-images.githubusercontent.com/63167887/149035557-cf8557aa-3847-4f44-9eaa-faf7911b64a2.png">
+
+- View top merchants by total sales revenue
+
+<img width="515" alt="Screen Shot 2022-01-11 at 6 05 15 PM" src="https://user-images.githubusercontent.com/63167887/149035553-54a4e43f-b4c9-4e42-91a2-6db42413ef5e.png">
+
+## Room for Improvement
+
+The following features can be further expanded upon to increase functionality of the solution:
+- Front-end design for a better user experience
+- Implementing partials to reduce repeated code in views
+- Reduction of repeated code in features tests
+- Improvement of existing features and addition of new features
+
+## Acknowledgements
+- This project was inspired by a Turing School of Software and Design Assignment Prompt.
+- Many thanks to Jamison Ordway, Mike Dao and all Turing staff and faculty for guidance during this project.
+
+## Collaborators
+- [Seth Perna](https://github.com/SethPerna)
+- [Katy Harrod](https://github.com/mcharrod)
+- [Devin Pilé](https://github.com/devin-p-lay)
+- [Russell Rockwood](https://github.com/russellrockwood)
