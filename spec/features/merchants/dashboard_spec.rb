@@ -111,4 +111,6 @@ RSpec.describe 'the merchants dashboard page' do
   end
 
 
+   # the body of the test would go here...
 end
+

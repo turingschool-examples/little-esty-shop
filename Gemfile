@@ -45,6 +45,8 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'launchy'
   gem 'simplecov', require: false, group: :test
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
@@ -55,6 +57,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'httparty'
   gem 'json'
+
 end
 
 

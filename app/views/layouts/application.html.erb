@@ -17,13 +17,5 @@
     <%= yield %>
   </body>
 
-  <footer>
-    <h3>Github Stats:</h3>
-    <% github_info = GithubInfo.new %>
-    <p>Repo name: <%= github_info.repo_name %> </p>
-    <% github_info.commits_per_person.each_pair do |k, v| %>
-      <span><%= k.to_s + ": " + v.to_s + "," %></span>
-    <% end %>
-    <p>Merged PR count: <%= github_info.all_merged %> </p>
-  </footer>
+
 </html>
