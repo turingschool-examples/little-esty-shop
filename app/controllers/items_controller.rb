@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.update(item_params)
-    flash[:success] = ' Item successfully updated'
+    flash[:success] = 'Item successfully updated'
     redirect_to(merchant_item_path)
   end
 
