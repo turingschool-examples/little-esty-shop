@@ -64,7 +64,6 @@ RSpec.describe 'the merchants dashboard page' do
 
 
   it "shows the name of the merchant" do
-    # allow(Httparty).to_receive(:get).and_return(response: @repo_response)
 
     visit "/merchants/#{merchant_1.id}/dashboard"
     expect(page).to have_content(merchant_1.name)
