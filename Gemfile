@@ -48,7 +48,6 @@ group :development, :test do
   gem 'simplecov', require: false, group: :test
   gem 'vcr'
   gem 'webmock'
-  gem 'httparty'
 end
 
 group :development do
@@ -58,6 +57,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'json'
+  gem 'httparty'
+
 end
 
 
