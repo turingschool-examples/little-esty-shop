@@ -19,7 +19,10 @@
     <h3>Github Stats:</h3>
      <% github_info = GithubService.new %>
     <p>Repo name: <%=github_info.repo_name%> </p>
-    <p>Contributors: <%=github_info.commits_per_person%> </p>
+    <p>Commits per user:</p>
+    <%github_info.commits_per_person.each_pair do |user, commits|%>
+    <ul> <%= user + ": " + commits.to_s %></ul>
+    <% end %>
     <p>Merged commits count: <%=github_info.all_merged%> </p>
   </footer>
 

@@ -128,6 +128,7 @@ RSpec.describe 'Admin merchant index page' do
     within "#disabled" do
       expect(page).to have_content(merchant_4.name)
       expect(page).to have_content(merchant_5.name)
+      save_and_open_page
       expect(page).to have_content(merchant_6.name)
 
       expect(page).to_not have_content(merchant_1.name)
@@ -156,7 +157,7 @@ RSpec.describe 'Admin merchant index page' do
   it "has the top 5 merchants displayed and their total revenue" do
     visit '/admin/merchants'
     within "#top_5_merchants" do
-      
+
 
     expect(page).to have_content(merchant_1.name)
     expect(page).to have_content(merchant_2.name)
