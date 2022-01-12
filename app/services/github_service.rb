@@ -21,7 +21,7 @@ class GithubService
 
   def get_commits_per_person
 
-    commits_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/commits?page=1&per_page=100")
+    commits_response = HTTParty.get("https://api.github.com/repos/croixk/little-esty-shop/contributors")
     commits = JSON.parse(commits_response.body, symbolize_names: true)
     commit_hash = Hash.new(0)
     commits.each do |commit|
