@@ -4,7 +4,7 @@
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
-Screen Shot 2022-01-03 at 4.21.54 PM (2).png
+![Screen Shot 2022-01-03 at 4 21 54 PM (2)](https://user-images.githubusercontent.com/39470230/149063403-e5691f8b-2588-45b8-be89-dcc5c92fa3b8.png)
 
 ## Ruby Gems
 
