@@ -7,7 +7,7 @@
 * [Featured Applications](#featured-applications)
 * [Room For Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
+* [Collaborator](#collaborators)
 
 ## General Information
 This solution contains a Ruby on Rails Web Application using MVC architecture:
