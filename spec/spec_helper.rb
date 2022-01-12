@@ -24,6 +24,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     #repo name
+
   stub_request(:get, "https://api.github.com/repos/croixk/little-esty-shop").
     with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
     to_return(status: 200, body: '{"id":444196424,"node_id":"R_kgDOGnnmSA","name":"little-esty-shop"}', headers: {})
