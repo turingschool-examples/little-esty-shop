@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_action :initialize_api
-  before_action :initialize_repo
-  before_action :initialize_contributors
-  before_action :initialize_commits
-  before_action :initialize_pull_requests
+  # before_action :initialize_api
+  # before_action :initialize_repo
+  # before_action :initialize_contributors
+  # before_action :initialize_commits
+  # before_action :initialize_pull_requests
 
 
   def initialize_api
