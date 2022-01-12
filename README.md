@@ -1,9 +1,9 @@
 # Little Esty Shop
 ### Collaborators:
-* [croixk](https://github.com/croixk)
-* [dylan-harper](https://github.com/dylan-harper)
-* [Henchworm](https://github.com/Henchworm)
-* [jacksonvaldez](https://github.com/jacksonvaldez)
+* Croix Kimmel [croixk](https://github.com/croixk)
+* Dylan Harper [dylan-harper](https://github.com/dylan-harper)
+* Chris Hewitt [Henchworm](https://github.com/Henchworm)
+* Jackson Valdex [jacksonvaldez](https://github.com/jacksonvaldez)
 
 ## Background and Description
 
