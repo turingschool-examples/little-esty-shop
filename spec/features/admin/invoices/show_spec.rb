@@ -5,7 +5,7 @@ RSpec.describe 'admin invoices show page' do
     customer_1 = Customer.create!(first_name: 'customer_1', last_name: 'last_name_1')
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1)
 
-    visit "/admin/invoices/#{invoice_1.id}"
+    visit admin_invoice_path(invoice_1.id)
 
     expect(page).to have_content("Invoice Id: #{invoice_1.id}")
     expect(page).to have_content("Created: #{invoice_1.created_at.strftime("%A, %B %d, %Y")}")
@@ -22,7 +22,7 @@ RSpec.describe 'admin invoices show page' do
     invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2, status: 1)
     invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 2, unit_price: 3, status: 2)
 
-    visit "/admin/invoices/#{invoice_1.id}"
+    visit admin_invoice_path(invoice_1.id)
 
     expect(page).to have_content("Item: #{item_1.name}")
     expect(page).to have_content("Quantity: #{invoice_item_1.quantity}")
@@ -44,7 +44,7 @@ RSpec.describe 'admin invoices show page' do
     invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2, status: 1)
     invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 2, unit_price: 3, status: 2)
 
-    visit "/admin/invoices/#{invoice_1.id}"
+    visit admin_invoice_path(invoice_1.id)
 
     expect(page).to have_content("Total Revenue: #{invoice_1.total_revenue}")
   end
@@ -58,11 +58,11 @@ RSpec.describe 'admin invoices show page' do
     invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2, status: 1)
     invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 2, unit_price: 3, status: 2)
 
-    visit "/admin/invoices/#{invoice_1.id}"
+    visit admin_invoice_path(invoice_1.id)
     select "Completed", :from => "invoice_status"
 
     click_button('Submit')
-    expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
+    expect(current_path).to eq(admin_invoice_path(invoice_1.id))
     expect(page).to have_content('Invoice Status: completed')
   end
 end

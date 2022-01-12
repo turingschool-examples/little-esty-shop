@@ -101,7 +101,7 @@ describe 'merchants items index' do
         expect(item_9.name).to appear_before(item_10.name)
         expect(page).to have_link(item_6.name)
         click_link(item_6.name)
-        expect(current_path).to eq("/merchants/#{merchant_6.id}/items/#{item_6.id}")
+        expect(current_path).to eq(merchant_item_path(merchant_6, item_6))
       end
     end
     it 'next to most popular items I see the date with the most sales for each item' do

@@ -5,7 +5,7 @@ describe 'merchant item edit page' do
     @merchant1 = Merchant.create!(name: 'Hair Care')
     @item1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id)
 
-    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}/edit"
+    visit edit_merchant_item_path(@merchant1, @item1)
   end
 
   it 'has a form with current item information' do

@@ -13,7 +13,7 @@ describe 'Merchant Dashboard' do
     @invoice_item2 = create :invoice_item, { invoice_id: @invoice1.id, item_id: @item2.id, quantity: 1, unit_price: 20, status: 1 }
     @invoice_item3 = create :invoice_item, { invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 30, status: 2 }
 
-    visit "/merchants/#{@merchant.id}/dashboard"
+    visit merchant_dashboard_index_path(@merchant)
   end
 
   describe 'display' do
@@ -23,12 +23,12 @@ describe 'Merchant Dashboard' do
 
     it 'has a link to view all merchant items' do
       click_link "Merchant Items"
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items")
+      expect(current_path).to eq(merchant_items_path(@merchant))
     end
 
     it 'has a link to view all merchant invoices' do
       click_link "Merchant Invoices"
-      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
+      expect(current_path).to eq(merchant_invoices_path(@merchant))
     end
 
     describe 'section for items ready to ship' do
@@ -69,7 +69,8 @@ describe 'Merchant Dashboard' do
     invoice_item_8 = create(:invoice_item, item_id: item_8.id, invoice_id: invoice_8.id, status: 1, quantity: 10, unit_price: 5)
     invoice_item_9 = create(:invoice_item, item_id: item_9.id, invoice_id: invoice_9.id, status: 2, quantity: 10, unit_price: 5)
 
-    visit "/merchants/#{merchant_6.id}/dashboard"
+    # visit "/merchants/#{merchant_6.id}/dashboard"
+    visit merchant_dashboard_index_path(merchant_6)
 
     within '#ready_to_ship' do
       expect(page).to have_content("Item: #{item_6.name} - Invoice Date: #{invoice_6.created_at.strftime("%A, %B %d, %Y")}")
@@ -115,7 +116,7 @@ describe 'Merchant Dashboard' do
     transaction_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: invoice_6.id, result: 0)
     invoice_item_6 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_6.id, status: 2, quantity: 1, unit_price: 1)
 
-    visit "/merchants/#{merchant_1.id}/dashboard"
+    visit merchant_dashboard_index_path(merchant_1)
 
     within("#top_five_customers") do
       expect(page).to have_content("Customer: #{customer_1.full_name} - Total Transactions: 6")

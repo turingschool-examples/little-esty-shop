@@ -17,7 +17,7 @@ describe 'Merchant item show page' do
 
     it 'includes a link to update item info' do
       click_link "Update Item Information"
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
+      expect(current_path).to eq(edit_merchant_item_path(@merchant1, @item1))
     end
   end
 end
