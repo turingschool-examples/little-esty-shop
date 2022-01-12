@@ -4,6 +4,18 @@
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
+Screen Shot 2022-01-03 at 4.21.54 PM (2).png
+
+## Ruby Gems
+
+![closed pull requests badge](https://img.shields.io/github/issues-pr-closed/dylan-harper/relational_rails?color=blue)
+![pry v badge](https://img.shields.io/gem/v/pry?color=blue&label=pry)
+![capybara v badge](https://img.shields.io/gem/v/capybara?color=cyan&label=capybara)
+![shoulda-matchers v badge](https://img.shields.io/gem/v/shoulda-matchers?label=shoulda-matchers)
+![orderly v badge](https://img.shields.io/gem/v/orderly?label=orderly)
+![rspec v badge](https://img.shields.io/gem/v/rspec?color=orange&label=rspec)
+![simplecov v badge](https://img.shields.io/gem/v/simplecov?color=green&label=simplecov)
+
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
 - Utilize advanced routing techniques including namespacing to organize and group like functionality together.
