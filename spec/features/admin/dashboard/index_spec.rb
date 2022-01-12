@@ -192,10 +192,4 @@ RSpec.describe 'Admin Dashboard Page' do
       end
     end
   end
-
-  describe 'presence of github information' do
-    scenario 'visitor sees repo name, contributors, commits, and total pull requests on page' do
-      allow
-    end
-  end
 end
