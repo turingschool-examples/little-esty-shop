@@ -1,9 +1,7 @@
 
 class GithubService
   attr_reader :repo_name, :contributors, :commits_per_person, :all_merged
-
-
-
+  
   def initialize
     @repo_name = get_repo_response
     @contributors = get_contributor
