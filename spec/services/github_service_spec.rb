@@ -30,10 +30,6 @@ RSpec.describe GithubService do
     expect(33).to be >= (github_service.get_all_merged)
     end
   end
-
-
-
-
 end
 # vcr: {cassette_name: 'repo_name', record: :new_episodes}
 
