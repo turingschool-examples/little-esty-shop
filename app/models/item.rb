@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
 
   def self.invoice_finder(merchant_id)
-    Invoice.joins(:invoice_items => :item).where(:items => {:merchant_id => merchant_id})
+    Invoice.joins(:invoice_items => :item).where(:items => {:merchant_id => merchant_id}).distinct 
   end
 
   def self.enabled_items
