@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin merchant edit page' do
+  VCR.turn_off!
+
 
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
 

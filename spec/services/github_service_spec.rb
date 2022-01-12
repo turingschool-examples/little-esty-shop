@@ -31,5 +31,4 @@ RSpec.describe GithubService do
     end
   end
 end
-# vcr: {cassette_name: 'repo_name', record: :new_episodes}
 

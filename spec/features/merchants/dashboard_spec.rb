@@ -1,5 +1,9 @@
 require 'rails_helper'
+require 'webmock'
+require 'httparty'
 RSpec.describe 'the merchants dashboard page' do
+
+
 
   let!(:merchant_1) {Merchant.create!(name: 'Billys Pet Rocks')}
 
@@ -56,6 +60,9 @@ RSpec.describe 'the merchants dashboard page' do
 
 
   it "shows the name of the merchant" do
+    # WebMock.disable_net_connect!
+    # WebMock.stub_request(:get, "https://api.github.com/repos/croixk/little-esty-shop").with(:headers => { 'Content-Length' => 3 }).to_return(body: @repo_response)
+
     visit "/merchants/#{merchant_1.id}/dashboard"
     expect(page).to have_content(merchant_1.name)
   end
@@ -107,10 +114,10 @@ RSpec.describe 'the merchants dashboard page' do
     expect(item_5.name).to appear_before(item_4.name)
     expect(item_4.name).to appear_before(item_3.name)
     expect(item_3.name).to appear_before(item_2.name)
+  end
 
   end
 
 
    # the body of the test would go here...
-end
 

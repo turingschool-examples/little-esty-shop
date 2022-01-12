@@ -1,8 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'vcr'
 require 'simplecov'
-SimpleCov.start
+require 'webmock/rspec'
 
+SimpleCov.start
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
@@ -39,6 +40,7 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.configure_rspec_metadata!
   config.ignore_localhost = true
+  config.allow_http_connections_when_no_cassette = true
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

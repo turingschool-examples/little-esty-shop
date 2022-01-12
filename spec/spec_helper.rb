@@ -15,13 +15,19 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 # require 'webmock/rspec'
 # WebMock.disable_net_connect!(allow_localhost: true)
-
+require 'webmock/rspec'
 RSpec.configure do |config|
-
-
-  # rspec-expectations config goes here. You can use an alternate
-  # assertion/expectation library such as wrong or the stdlib/minitest
-  # assertions if you prefer.
+  # config.before(:each) do
+  #   pn1 = Pathname.new('spec/support/vcr_cassettes/GithubService/returns_the_repo.yml')
+  #   WebMock.stub_request(:get, "https://api.github.com/repos/croixk/little-esty-shop").
+  #         with(
+  #           headers: {
+  #                 'Accept'=>'*/*',
+  #                 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+  #                 'User-Agent'=>'Ruby'
+  #           }).
+  #         to_return(status: 200, body: pn1.read, headers: {})
+  # end
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
