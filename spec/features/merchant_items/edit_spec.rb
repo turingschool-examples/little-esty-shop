@@ -23,14 +23,4 @@ RSpec.describe 'Merchant Item Edit Page' do
     expect(page).to have_content("changes saved successfully") # Flash Message
   end
 
-  it 'shows github info on current page' do
-    visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit"
-    github_service = GithubService.new
-
-
-    expect(page).to have_content(github_service.repo_name)
-    expect(page).to have_content("BrianZanti: 51\ndylan-harper: 49\nHenchworm: 42\ncroixk: 22\njacksonvaldez: 10\ntimomitchel: 9\nscottalexandra: 3\njamisonordway: 1\nMerged commits count: 82")
-    expect(page).to have_content(github_service.all_merged)
-  end
-
 end
