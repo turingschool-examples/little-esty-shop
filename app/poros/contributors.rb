@@ -4,5 +4,5 @@ class Contributors
   def initialize(data)
     @commits = data[:contributions]
     @username = data[:login]
-  end
+  end 
 end
