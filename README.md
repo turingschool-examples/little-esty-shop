@@ -33,10 +33,10 @@ This project requires Ruby 2.7.2.
 * Run your development server with `rails s` to see the app in action.
 
 ## Contributors
-[Leland Curtis](https://github.com/LelandCurtis)
-[Josh Walsh](https://github.com/jaw772)
-[Paul Leonard](https://github.com/pleonar1)
-[Eric Mielke](https://github.com/emielke76)
+* [Leland Curtis](https://github.com/LelandCurtis)
+* [Josh Walsh](https://github.com/jaw772)
+* [Paul Leonard](https://github.com/pleonar1)
+* [Eric Mielke](https://github.com/emielke76)
 
 
 
