@@ -1,6 +1,6 @@
 ## Evaluation
 
-This project evaluation will consist of two 15-20 minute presentations each followed by 10-15 minutes of instructor led Q&A. 
+This project evaluation will consist of two ~10 minute presentations each followed by 5-10 minutes of instructor led Q&A. 
 
 ### Part 1: Student Presentation
 
