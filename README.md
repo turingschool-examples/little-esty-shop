@@ -1,8 +1,11 @@
 # Little Esty Shop
 
+Schema:
+![image](https://user-images.githubusercontent.com/15107515/148599839-a478be3e-c43e-4977-9e3c-f26198e40b33.png)
+
 ## Background and Description
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a group project that required students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
@@ -13,10 +16,6 @@
 ## Requirements
 - must use Rails 5.2.x
 - must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
 
 ## Setup
 
@@ -27,16 +26,18 @@ This project requires Ruby 2.7.2.
 * From the command line, install gems and set up your DB:
     * `bundle`
     * `rails db:create`
+    * `rails import_csv:all` to seed the database with the full CSV data set. 
+    * Each table in the database does have its own rake command to seed individually, which can be run with `rails import_csv:<tablename>`
+
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 
-## Phases
+## Contributors
+* [Leland Curtis](https://github.com/LelandCurtis)
+* [Josh Walsh](https://github.com/jaw772)
+* [Paul Leonard](https://github.com/pleonar1)
+* [Eric Mielke](https://github.com/emielke76)
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
 
 
-![image](https://user-images.githubusercontent.com/15107515/148599839-a478be3e-c43e-4977-9e3c-f26198e40b33.png)
 
