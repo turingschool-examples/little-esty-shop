@@ -15,3 +15,4 @@
     <p>Name: <%= customer.first_name %>, Succesful Transactions: <%= customer.transactions.length %></p>
   <% end %>
 </div>
+<p><%= link_to "View all discounts", "/merchants/#{@merchant.id}/discounts", method: :get %></p>

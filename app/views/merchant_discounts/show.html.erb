@@ -1,0 +1,4 @@
+<p>Discount percent off: <%= @discount.percent_off %>%</p>
+<p>Discount minimum quantity: <%= @discount.min_quantity %> items</p>
+
+<p><%= link_to "Edit this discount", "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit" %></p>

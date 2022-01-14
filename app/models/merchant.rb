@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
 
   has_many(:items)
+  has_many :discounts
   has_many :invoices, through: :items
   has_many :invoice_items, through: :items
   has_many :transactions, through: :invoices
@@ -54,4 +55,3 @@ class Merchant < ApplicationRecord
             .first.created_at.strftime("%A, %B %d %Y")
   end
 end
-

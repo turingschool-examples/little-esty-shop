@@ -1,0 +1,11 @@
+<%= form_with url: "/merchants/#{@merchant.id}/discounts", method: :post, local: true do |form| %>
+
+  <%= form.label :min_quantity %>
+  <%= form.text_field :min_quantity %>
+
+  <%= form.label :percent_off %>
+  <%= form.text_field :percent_off %>
+
+  <%= form.submit "Create discount" %>
+
+<% end %>
