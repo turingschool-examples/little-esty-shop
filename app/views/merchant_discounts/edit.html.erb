@@ -1,0 +1,10 @@
+<%= form_with url: "/merchants/#{@discount.merchant.id}/discounts/#{@discount.id}", method: :patch, local: true do |form| %>
+  <%= form.label :percent_off %>
+  <%= form.text_field :percent_off, value: @discount.percent_off %>
+
+  <%= form.label :min_quantity %>
+  <%= form.text_field :min_quantity, value: @discount.min_quantity %>
+
+  <%= form.submit "Save changes" %>
+
+<% end %>
