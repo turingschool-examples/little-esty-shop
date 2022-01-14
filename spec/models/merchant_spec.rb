@@ -164,5 +164,23 @@ RSpec.describe Merchant, type: :model do
         expect(merchant_1.successful_transactions).to eq(5)
       end
     end
+
+    describe 'total_revenue' do
+      it "returns total revenue of all successful transactions" do
+        merchant_1 = create(:merchant_with_transactions, name: 'Zach', invoice_item_quantity: 3, invoice_item_unit_price: 100000)
+
+        expect(merchant_1.total_revenue).to eq(300000)
+
+        # Create new items to test top_merchants across multiple invoices for one merchant.
+        # Test with invalid transaction.
+        new_items = create(:item_with_transactions, merchant: merchant_1, invoice_item_quantity: 15, invoice_item_unit_price: 100000, transaction_result: 1)
+
+        expect(merchant_1.total_revenue).to eq(300000)
+
+        # Test with valid transaction.
+        new_items = create(:item_with_transactions, merchant: merchant_1, invoice_item_quantity: 15, invoice_item_unit_price: 100000, transaction_result: 0)
+        expect(merchant_1.total_revenue).to eq(1800000)
+      end
+    end
   end
 end

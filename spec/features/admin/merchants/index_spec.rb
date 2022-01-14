@@ -96,5 +96,18 @@ RSpec.describe 'Admin_Merchants Index Page' do
         end
       end
     end
+
+    it "lists total revenue per merchant" do
+      invoice_1 = create(:invoice, created_at: DateTime.new(2022, 1, 15, 1, 1, 1))
+      merchant_1 = create(:merchant_with_transactions, name: 'Bob', invoice: invoice_1, invoice_item_quantity: 3, invoice_item_unit_price: 10000)
+
+      visit "/admin/merchants"
+
+      within "div.top_merchants" do
+        within "div.top_merchant_#{merchant_1.id}" do
+          expect(page).to have_content("Total Revenue: $300.00")
+        end
+      end
+    end
   end
 end

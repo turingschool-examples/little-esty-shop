@@ -7,6 +7,7 @@
     <div class=<%= "top_merchant_#{merchant.id}" %>>
       <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
       <p><%= "Top selling date for #{merchant.name} was #{merchant.best_day.strftime("%A, %B %d, %Y")}." %></p>
+      <p><%= "Total Revenue: #{money_honey(merchant.total_revenue)}" %></p>
     </div>
   <% end %>
 </div>
