@@ -86,14 +86,16 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe 'items_ready_to_ship' do
-      it "returns a list of all items with an invoice_item status of 0 or 1" do
+      it "returns a list of all invoice_items with status of 0 or 1 ordered by the invoice created_at date" do
         merchant = create(:merchant)
-        item_1 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 0)
-        item_2 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1)
-        item_3 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 1)
-        item_4 = create(:item_with_invoices, merchant: merchant, invoice_item_status: 2)
+        item_1 = create(:item, merchant: merchant)
+        item_2 = create(:item, merchant: merchant)
+        invoice_item_1 = create(:invoice_item, item: item_1, status: 0)
+        invoice_item_2 = create(:invoice_item, item: item_1, status: 1)
+        invoice_item_3 = create(:invoice_item, item: item_2, status: 1)
+        invoice_item_4 = create(:invoice_item, item: item_1, status: 2)
 
-        expect(merchant.items_ready_to_ship).to eq([item_1, item_2, item_3])
+        expect(merchant.invoice_items_ready_to_ship).to eq([invoice_item_1, invoice_item_2, invoice_item_3])
       end
 
       it "returns items in descending order based on created_at date" do
@@ -101,11 +103,12 @@ RSpec.describe Merchant, type: :model do
         invoice_1 = create(:invoice, created_at: Date.new(2022, 4, 20))
         invoice_2 = create(:invoice, created_at: Date.new(2022, 1, 12))
         invoice_3 = create(:invoice, created_at: Date.new(2022, 3, 2))
-        item_1 = create(:item_with_invoices, merchant: merchant, invoices: [invoice_1])
-        item_2 = create(:item_with_invoices, merchant: merchant, invoices: [invoice_2])
-        item_3 = create(:item_with_invoices, merchant: merchant, invoices: [invoice_3])
+        item_1 = create(:item, merchant: merchant)
+        invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1)
+        invoice_item_2 = create(:invoice_item, item: item_1, invoice: invoice_2)
+        invoice_item_3 = create(:invoice_item, item: item_1, invoice: invoice_3)
 
-        expect(merchant.items_ready_to_ship).to eq([item_2, item_3, item_1])
+        expect(merchant.invoice_items_ready_to_ship).to eq([invoice_item_2, invoice_item_3, invoice_item_1])
       end
     end
 
