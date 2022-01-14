@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
   end
 
   def successful_transactions
-    transactions.where(result: 0)
+    transactions.where(result: 0).distinct
   end
 
   def full_name

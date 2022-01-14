@@ -5,7 +5,9 @@
 <div class="top_customers">
   <h3>Top Customers</h3>
   <% @merchant.top_customers(5).each do |customer| %>
-    <p><%= "Name: #{customer.full_name}" %></p>
+    <div class=<%= "top_customer_#{customer.id}" %>>
+      <p><%= "Name: #{customer.full_name}, Successful Transactions: #{customer.successful_transactions_count}" %></p>
+    </div>
   <% end %>
 </div>
 

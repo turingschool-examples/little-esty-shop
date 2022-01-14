@@ -32,8 +32,12 @@ RSpec.describe Customer, type: :model do
 
       it '#successful_transactions_count' do
         customer_1 = create(:customer_with_transactions, first_name: 'Bob', last_name: "Smith", transaction_result: 0, transaction_count: 6)
+        customer_2 = create(:customer_with_transactions, first_name: 'Troy', last_name: "Smith", transaction_result: 0, transaction_count: 8)
+        customer_3 = create(:customer_with_transactions, first_name: 'Bill', last_name: "Smith", transaction_result: 0, transaction_count: 1)
 
-        expect(customer_1.successful_transactions_count).to eq (6)
+        expect(customer_1.successful_transactions_count).to eq(6)
+        expect(customer_2.successful_transactions_count).to eq(8)
+        expect(customer_3.successful_transactions_count).to eq(1)
       end
     end
 

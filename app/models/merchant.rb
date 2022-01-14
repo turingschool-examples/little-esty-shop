@@ -90,4 +90,8 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .first.created_at
   end
+
+  def successful_transactions
+    transactions.where(result: 0).distinct.count
+  end
 end

@@ -32,12 +32,33 @@ RSpec.describe 'merchant dashboard' do
       customer_5 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 4, first_name: 'Charlie')
 
       visit "/merchants/#{merchant.id}/dashboard"
-
+      
       within 'div.top_customers' do
         expect('Abe').to appear_before('Bob')
         expect('Bob').to appear_before('Charlie')
         expect('Charlie').to appear_before('John')
         expect('John').to appear_before('Zach')
+      end
+    end
+
+    it "prints the number of successful transactions next to each name" do
+      merchant = create(:merchant)
+
+      customer_1 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 6, first_name: 'Bob')
+      customer_2 = create(:customer_with_transactions, merchant: merchant, transaction_result: 0, transaction_count: 3, first_name: 'John')
+
+      visit "/merchants/#{merchant.id}/dashboard"
+
+      within 'div.top_customers' do
+        within "div.top_customer_#{customer_1.id}" do
+          expect(page).to have_content("Successful Transactions: 6")
+        end
+      end
+
+      within 'div.top_customers' do
+        within "div.top_customer_#{customer_2.id}" do
+          expect(page).to have_content("Successful Transactions: 3")
+        end
       end
     end
   end
