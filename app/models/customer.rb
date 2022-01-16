@@ -5,6 +5,13 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  scope :successful_transactions_count, -> {
+    joins(:invoices => :transactions)
+    .select("customers.*, count(transactions.id) as count_transactions_id")
+    .where(:transactions => {result: 0})
+    .group(:id)
+    .order(count_transactions_id: :desc)}
+
   def successful_transactions_count
     successful_transactions.count
   end
