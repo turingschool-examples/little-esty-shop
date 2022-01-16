@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
 
   def self.invoice_finder(merchant_id)
-    Invoice.joins(:invoice_items => :item).where(:items => {:merchant_id => merchant_id}).distinct 
+    Invoice.joins(:invoice_items => :item).where(:items => {:merchant_id => merchant_id}).distinct
   end
 
   def self.enabled_items
@@ -28,9 +28,10 @@ class Item < ApplicationRecord
   end
 
   def best_day
-    invoices.joins(:transactions, :invoice_items).where(transactions: {result: 0})
-    .select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
-    .group(:id)
+    invoices.joins(:transactions, :invoice_items)
+    .select("invoices.*")
+    .merge(Transaction.successful)
+    .merge(InvoiceItem.grouped_total_revenue)
     .order(:revenue)
     .first.created_at
   end
