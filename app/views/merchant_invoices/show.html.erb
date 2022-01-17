@@ -8,16 +8,18 @@
 
 <h2>Items on this invoice:</h2>
 <% @invoice.invoice_items.each do |invitem| %>
-<div id="<%= invitem.item_id %>">
-  <p>Name: <%=invitem.item.name %></p>
-  <p>Quantity: <%=invitem.quantity %></p>
-  <p>Price sold at: <%=invitem.unit_price %></p>
-  <p>Status: <%=invitem.status %></p>
-  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?invoice_item_id=#{invitem.id}", method: :patch, local: true do |form| %>
-    <%= form.select :new_invoice_item_status, ['pending', 'shipped', 'packaged'], selected: invitem.status %>
-    <%= form.submit "Update Item Status" %>
-  <% end %>
-</div>
-
-<br>
+  <div id="<%= invitem.item_id %>">
+    <p>Name: <%=invitem.item.name %></p>
+    <p>Quantity: <%=invitem.quantity %></p>
+    <p>Price sold at: <%=invitem.unit_price %></p>
+    <p>Status: <%=invitem.status %></p>
+    <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?invoice_item_id=#{invitem.id}", method: :patch, local: true do |form| %>
+      <%= form.select :new_invoice_item_status, ['pending', 'shipped', 'packaged'], selected: invitem.status %>
+      <%= form.submit "Update Item Status" %>
+    <% end %>
+  </div>
+  <% if (invitem.item_discount(invitem.id)) != nil  %>
+    <p>Link to discount applied: <%= link_to "#{invitem.item.name} discount", "/merchants/#{@merchant.id}/discounts/#{invitem.item_discount(invitem.id).id}" %></p>
+  <% end  %>
+  <br>
 <% end %>

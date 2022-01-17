@@ -21,9 +21,7 @@ class Invoice < ApplicationRecord
   def discounted_total_revenue
 
     merchant = Merchant.first
-
     discounted_total = 0
-
     discounts = Discount.order(:min_quantity)
 
     items = InvoiceItem
@@ -58,7 +56,9 @@ class Invoice < ApplicationRecord
     #     .distinct
     #     .where('invoice_items.quantity < discounts.min_quantity')
     #     .sum('invoice_items.unit_price * invoice_items.quantity')
-    
+
   end
+
+
 
 end
