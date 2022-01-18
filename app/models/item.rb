@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many(:invoice_items)
   has_many(:invoices, through: :invoice_items)
 
+  has_many :discounts, through: :merchants 
+
   enum status: {"disabled" => 0, "enabled" => 1}
 
   def self.only_enabled
