@@ -1,5 +1,7 @@
 <h1>Invoice <%= @invoice.id %></h1>
 <h4>Total Revenue: <%= @invoice.total_revenue %></h4>
+<p>Total Discounted Revenue: <%= @invoice.discounted_total_revenue %></p>
+
 
 <div id="status-select">
   <h4>Status: <%= @invoice.status %></h4>
