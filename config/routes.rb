@@ -30,15 +30,17 @@ Rails.application.routes.draw do
 
 
 
-  get '/merchants/:merchant_id/discounts/new', to: 'merchant_discounts#new'
-  get '/merchants/:merchant_id/discounts', to: 'merchant_discounts#index'
-  get '/merchants/:merchant_id/discounts/:discount_id', to: 'merchant_discounts#show'
-  get '/merchants/:merchant_id/discounts/new', to: 'merchant_discounts#new'
-  get '/merchants/:merchant_id/discounts/:discount_id/edit', to: 'merchant_discounts#edit'
-  patch '/merchants/:merchant_id/discounts/:discount_id', to: 'merchant_discounts#update'
-  post '/merchants/:merchant_id/discounts', to: 'merchant_discounts#create'
-  delete '/merchants/:merchant_id/discounts/:discount_id', to: 'merchant_discounts#destroy'
+  get '/merchants/:merchant_id/discounts/new', to: 'discounts#new'
+  get '/merchants/:merchant_id/discounts', to: 'discounts#index'
+  get '/merchants/:merchant_id/discounts/:discount_id', to: 'discounts#show'
+  get '/merchants/:merchant_id/discounts/new', to: 'discounts#new'
+  get '/merchants/:merchant_id/discounts/:discount_id/edit', to: 'discounts#edit'
+  delete '/merchants/:merchant_id/discounts/:discount_id', to: 'discounts#destroy'
+  patch '/merchants/:merchant_id/discounts/:discount_id', to: 'discounts#update'
+  post '/merchants/:merchant_id/discounts', to: 'discounts#create'
 
-
+  # resources :merchants do
+  #   resources :discounts
+  # end
 
 end
