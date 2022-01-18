@@ -82,6 +82,8 @@ RSpec.describe 'the admin invoice show page' do
     expect(page).to have_content('Total Discounted Revenue: 51')
   end
 
+
+
   it 'provides select field to edit the invoice status' do
     invoice_10 = customer_6.invoices.create!(status: 'in progress')
 
