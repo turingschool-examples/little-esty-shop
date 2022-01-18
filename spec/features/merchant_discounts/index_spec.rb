@@ -80,7 +80,11 @@ RSpec.describe 'the merchant discount index page' do
 
   it 'has link to delete discount' do
     visit "/merchants/#{merchant_1.id}/discounts"
-    expect(page).to have_link("Delete this discount")
+    expect(page).to have_link("Delete discount - id #{discount_1.id}")
+    save_and_open_page
+    click_link "Delete discount - id #{discount_1.id}"
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts")
+    expect(page).to_not have_link("Delete discount - id #{discount_1.id}")
   end
 
 
