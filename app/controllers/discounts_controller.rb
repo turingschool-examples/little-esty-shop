@@ -1,4 +1,4 @@
-class MerchantDiscountsController < ApplicationController
+class DiscountsController < ApplicationController
 
   def index
     @discounts = Discount.where(merchant_id: params[:merchant_id])
@@ -31,8 +31,12 @@ class MerchantDiscountsController < ApplicationController
   end
 
   def destroy
-    Discount.destroy(params[:discount_id])
+    merchant = Merchant.find(params[:merchant_id])
+    discount = Discount.find(params[:discount_id])
+    discount.destroy
+    # redirect_to action: :index
     redirect_to action: :index
+
   end
 
   private
