@@ -4,6 +4,8 @@ class Invoice < ApplicationRecord
 
   has_many :invoice_items
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
+  has_many :discounts, through: :merchants
 
   enum status: { "cancelled" => 0, "completed" => 1, "in progress" => 2 }
 
@@ -20,15 +22,14 @@ class Invoice < ApplicationRecord
 
   def discounted_total_revenue
 
-    merchant = Merchant.first
     discounted_total = 0
     discounts = Discount.order(:min_quantity)
 
-    items = InvoiceItem
+    invoice_items = InvoiceItem
       .joins(item: :merchant)
 
 
-    items.each do |item|
+    invoice_items.each do |item|
       item_total = item.quantity * item.unit_price
       discounted_total = item_total + discounted_total
 
@@ -43,14 +44,29 @@ class Invoice < ApplicationRecord
 
     return discounted_total
 
+
+    #  binding.pry
+    #
+    # #### new code for testing
+    #
+    # invoice_items = InvoiceItem
+    #   .joins(item: :merchant)
+    #   .select('quantity')
+    #
+    #
+    #
+    # items = Invoice.joins(:discounts)
+    # .group(:item_id)
+    # .order(:quantity)
+    # .where('invoice_item.quantity > discount.min_quantity')
+    # .select()
+    #
+
     # discount_items_total = InvoiceItem
     #   .joins(item: {merchant: :discounts})
-    #   .distinct
-    #   .where('quantity >= min_quantity')
-    #   .sum('invoice_items.unit_price * invoice_items.quantity * (100 - percent_off) / 100')
-    #
-    #
-    #
+    #   .order(:item_id, :min_quantity)
+
+
     # full_price_items_total = InvoiceItem
     #     .joins(item: {merchant: :discounts})
     #     .distinct
