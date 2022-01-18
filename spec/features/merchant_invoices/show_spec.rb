@@ -80,7 +80,6 @@ RSpec.describe 'the merchant invoice show page' do
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
     expect(page).to have_content('Total Discounted Revenue: 51')
-    save_and_open_page
   end
 
   it 'displays link to discount applied for items - routes to discount show page:' do
