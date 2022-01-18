@@ -59,12 +59,12 @@ RSpec.describe 'the merchant discount delete link' do
   let!(:invoice_item_6) {InvoiceItem.create!(invoice_id: invoice_6.id, item_id: item_6.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
 
 
-  it 'can delete discount' do
-    visit "/merchants/#{merchant_1.id}/discounts"
-    click_link "Delete this discount"
-    expect(page).to_not have_content("Discount percent off: 20")
-    expect(page).to_not have_content("Discount minimum quantity: 10")
-  end
+  # it 'can delete discount' do
+  #   visit "/merchants/#{merchant_1.id}/discounts"
+  #   click_link "Delete this discount"
+  #   expect(page).to_not have_content("Discount percent off: 20")
+  #   expect(page).to_not have_content("Discount minimum quantity: 10")
+  # end
 
 
 end
