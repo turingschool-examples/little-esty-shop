@@ -14,6 +14,7 @@ RSpec.describe 'the merchant invoice show page' do
   let!(:customer_1) {Customer.create!(first_name: 'Billy', last_name: 'Carruthers')}
 
   let!(:invoice_1) {customer_1.invoices.create!(status: 'completed' )}
+  let!(:invoice_2) {customer_1.invoices.create!(status: 'completed' )}
 
   let!(:invoice_item_1) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 10, unit_price: 1, status: 'shipped', created_at: Time.new(2021))}
   let!(:invoice_item_2) {InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 20, unit_price: 1, status: 'pending', created_at: Time.new(2021))}
