@@ -1,8 +1,10 @@
 <p><%= link_to "Create a new discount", "/merchants/#{@merchant.id}/discounts/new" %></p>
 
-<% @merchant.discounts.each do |discount| %>
-  <p>Discount percent off: <%= discount.percent_off %>%</p>
-  <p>Discount minimum quantity: <%= discount.min_quantity %> items</p>
-  <p><%= link_to "See discount details", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></p>
-  <p><%= button_to "Delete discount - id #{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %></p>
-<% end %>
+<div id='discounts'>
+  <% @merchant.discounts.each do |discount| %>
+    <p>Discount percent off: <%= discount.percent_off %>%</p>
+    <p>Discount minimum quantity: <%= discount.min_quantity %> items</p>
+    <p><%= link_to "See discount details", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></p>
+    <p><%= button_to "Delete discount - id #{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %></p>
+  <% end %>
+</div>

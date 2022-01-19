@@ -58,32 +58,39 @@ RSpec.describe 'the merchant discount index page' do
   let!(:invoice_item_5) {InvoiceItem.create!(invoice_id: invoice_5.id, item_id: item_5.id, quantity: 1, unit_price: 100, status: 'pending', created_at: Time.new(2019))}
   let!(:invoice_item_6) {InvoiceItem.create!(invoice_id: invoice_6.id, item_id: item_6.id, quantity: 1, unit_price: 50, status: 'pending', created_at: Time.new(2018))}
 
-  it 'has information for all discounts' do
+  before(:each) do
     visit "/merchants/#{merchant_1.id}/discounts"
-    expect(page).to have_content("Discount percent off: 20")
-    expect(page).to have_content("Discount minimum quantity: 10")
+  end
+
+  it 'has information for all discounts' do
+    within "#discounts" do
+      expect(page).to have_content("Discount percent off: 20")
+      expect(page).to have_content("Discount minimum quantity: 10")
+    end
   end
 
   it 'has link to show page for one discount' do
-    visit "/merchants/#{merchant_1.id}/discounts"
-    expect(page).to have_link("See discount details")
-    click_link("See discount details")
-    expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts/#{discount_1.id}")
+    within "#discounts" do
+      expect(page).to have_link("See discount details")
+      click_link("See discount details")
+      expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts/#{discount_1.id}")
+    end
   end
 
   it 'has link to create a new discount' do
-    visit "/merchants/#{merchant_1.id}/discounts"
     expect(page).to have_link("Create a new discount")
     click_link ("Create a new discount")
     expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts/new")
   end
 
   it 'has link to delete discount' do
-    visit "/merchants/#{merchant_1.id}/discounts"
-    expect(page).to have_button("Delete discount - id #{discount_1.id}")
-    click_button "Delete discount - id #{discount_1.id}"
-    expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts")
-    expect(page).to_not have_button("Delete discount - id #{discount_1.id}")
+    within "#discounts" do
+      visit "/merchants/#{merchant_1.id}/discounts"
+      expect(page).to have_button("Delete discount - id #{discount_1.id}")
+      click_button "Delete discount - id #{discount_1.id}"
+      expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts")
+      expect(page).to_not have_button("Delete discount - id #{discount_1.id}")
+    end
   end
 
 
