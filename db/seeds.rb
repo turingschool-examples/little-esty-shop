@@ -48,6 +48,7 @@ invoice_item_4 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_4.i
 invoice_item_5 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_5.id, quantity: 5, unit_price: 50, status: 'pending')
 invoice_item_6 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_6.id, quantity: 6, unit_price: 50, status: 'pending')
 
+
 discount_1 = Discount.create!(min_quantity: 2, percent_off: 10, merchant_id: merchant_1.id)
 discount_2 = Discount.create!(min_quantity: 3, percent_off: 20, merchant_id: merchant_1.id)
 discount_3 = Discount.create!(min_quantity: 4, percent_off: 30, merchant_id: merchant_1.id)
