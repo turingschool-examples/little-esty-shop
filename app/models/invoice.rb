@@ -25,11 +25,10 @@ class Invoice < ApplicationRecord
     discounted_total = 0
     discounts = Discount.order(:min_quantity)
 
-    invoice_items = InvoiceItem
-      .joins(item: :merchant)
+    items = invoice_items.joins(item: :merchant)
 
 
-    invoice_items.each do |item|
+    items.each do |item|
       item_total = item.quantity * item.unit_price
       discounted_total = item_total + discounted_total
 
