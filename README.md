@@ -20,7 +20,7 @@
 
 ## Setup
 
-This project requires Ruby 2.7.2.
+This project requires Ruby 2.7.4.
 
 * Fork this repository
 * Clone your fork
