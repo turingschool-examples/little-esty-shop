@@ -6,6 +6,10 @@
 
 # Ignore bundler config.
 /.bundle
+capybara-*.html
+.rspec
+/coverage/*
+/coverage/index.html
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -22,6 +26,7 @@
 
 /public/assets
 .byebug_history
+
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
