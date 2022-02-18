@@ -3,9 +3,7 @@ require 'csv'
 namespace :csv_load do
 
   desc 'Run all CSV load tasks'
-  task all: [:destroy_all, :create_customers] do
-    #  [:destroy_all, :create_customers, :create_merchants, :create_invoices, :create_items, :create_transactions, :create_invoice_items, :reset_all_pks] 
-  end 
+  task all: [:destroy_all, :create_customers, :create_merchants, :create_items, :create_invoices, :create_transactions, :create_invoice_items, :reset_all_pks]
 
   desc "Destroys all existing seed data, in order to properly seed new data"
   task destroy_all: :environment do 
@@ -19,18 +17,18 @@ namespace :csv_load do
   end 
 
   desc "Create all customers"
-  task customers: :environment do
+  task create_customers: :environment do
       Customer.destroy_all
       path = './db/data/customers.csv'
       CSV.foreach(path, :headers => true) do |row|
           Customer.create!(row.to_hash)
         end
-      ActiveRecord::Base.connection.reset_pk_sequence!('customers')
+      # ActiveRecord::Base.connection.reset_pk_sequence!('customers')
       puts "Inserted #{Customer.all.count} Customers"
   end
 
   desc "Create all invoice items"
-  task invoice_items: :environment do 
+  task create_invoice_items: :environment do 
     path = './db/data/invoice_items.csv'
       CSV.foreach(path, :headers => true) do |row|
           InvoiceItem.create!(row.to_hash)
@@ -39,7 +37,7 @@ namespace :csv_load do
   end 
 
   desc "Create all invoices"
-  task invoices: :environment do
+  task create_invoices: :environment do
   path = './db/data/invoices.csv'
       CSV.foreach(path, :headers => true) do |row|
           Invoice.create!(row.to_hash)
@@ -48,7 +46,7 @@ namespace :csv_load do
   end
 
   desc "Create all items"
-  task items: :environment do
+  task create_items: :environment do
   path = './db/data/items.csv'
       CSV.foreach(path, :headers => true) do |row|
           Item.create!(row.to_hash)
@@ -57,7 +55,7 @@ namespace :csv_load do
   end
 
   desc "Create all merchants"
-  task merchants: :environment do
+  task create_merchants: :environment do
   path = './db/data/merchants.csv'
       CSV.foreach(path, :headers => true) do |row|
           Merchant.create!(row.to_hash)
@@ -66,7 +64,7 @@ namespace :csv_load do
   end
 
   desc "Create all transactions"
-  task transactions: :environment do
+  task create_transactions: :environment do
   path = './db/data/transactions.csv'
       CSV.foreach(path, :headers => true) do |row|
           Transaction.create!(row.to_hash)
