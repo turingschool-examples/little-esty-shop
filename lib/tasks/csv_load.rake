@@ -43,8 +43,8 @@ namespace :csv_load do
 end
 
 def load_csv(class_variable, link_variable)
-  # require "pry"; binding.pry
   CSV.foreach("db/data/#{link_variable}.csv", headers: true) do |row|
     class_variable.create(row.to_h)
+    ActiveRecord::Base.connection.reset_pk_sequence!(link_variable)
   end
 end
