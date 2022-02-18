@@ -43,6 +43,8 @@ group :development, :test do
   gem 'shoulda-matchers' # requires config
   gem 'launchy'
   gem 'orderly'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry'
   gem 'simplecov' # simplecov.start in rails_helper
 end
