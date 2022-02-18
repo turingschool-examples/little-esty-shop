@@ -1,5 +1,26 @@
 # Little Esty Shop
 
+## Rake Tasks
+
+```mermaid
+graph TD
+    A{Database Setup} -->|/db/data| B[Rake Tasks]
+    B --> C(6 Individual Rake Tasks)
+    C -->|One| D[Customers]
+    C -->|Two| E[Invoice Items]
+    C -->|Three| F[Invoices]
+    C -->|Four| G[Items]
+    C -->|Five| H[Merchants]
+    C -->|Six| I[Transactions]
+    D --> J(1 Aggregate Rake Task)
+    E -->J(1 Aggregate Rake Task)
+    F -->J(1 Aggregate Rake Task)
+    G -->J(1 Aggregate Rake Task)
+    H -->J(1 Aggregate Rake Task)
+    I -->J(1 Aggregate Rake Task)
+```
+
+
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
