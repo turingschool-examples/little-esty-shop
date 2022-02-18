@@ -77,6 +77,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.tables.each do |t|
       ActiveRecord::Base.connection.reset_pk_sequence!(t)
     end 
+    puts "Reset primary key autoincrement sequences for all tables"
   end 
 end
 # rails csv_load:customers
