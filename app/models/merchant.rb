@@ -7,6 +7,6 @@ class Merchant < ApplicationRecord
 
 
   def merchant_invoices
-    invoices.order(:id)
+    (invoices.order(:id)).uniq
   end 
 end

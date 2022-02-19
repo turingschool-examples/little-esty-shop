@@ -2,9 +2,18 @@
 <h1> Merchant Invoices Show Page </h1>
 
 <div class="Invoice Information">
-  <p>Invoice Id: <%= @merchant_invoice.id %></p>
-  <p>Invoice Status: <%= @merchant_invoice.status %></p>
-  <p>Created At: <%= @merchant_invoice.format_created_at(@merchant_invoice.created_at) %></p>
-  <p>Customer Name: <%= @merchant_invoice.customer_name %></p>
+  <p>Invoice Id: <%= @invoice.id %></p>
+  <p>Invoice Status: <%= @invoice.status %></p>
+  <p>Created At: <%= @invoice.format_created_at(@invoice.created_at) %></p>
+  <p>Customer Name: <%= @invoice.customer_name %></p>
+</div>
+
+<div class="Invoice Items Information">
+  <% @invoice.invoice_items.each do |ii| %>
+    <p>Item name: <%= ii.item.name %></p>
+    <p>Item quantity: <%= ii.quantity %></p>
+    <p>Item price sold at: <%= ii.item.display_price %></p>
+    <p>Item status: <%= ii.status %></p>
+  <% end %>
 </div>
 </center>
