@@ -3,7 +3,7 @@
 
 <div class="all_invoices">
   <% @merchant_invoices.each do |invoice| %>
-    <p><%=invoice.id %></p>
+    <p>Invoice Id: <%= link_to "#{invoice.id}", merchant_invoice_path((params[:merchant_id]), invoice.id) %></p>
   <% end %>
 </div>
 </center>
