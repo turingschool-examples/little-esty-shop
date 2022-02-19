@@ -44,18 +44,18 @@ RSpec.describe 'the merchant dashboard' do
     @invoice_item_11 = InvoiceItem.create!(invoice_id: @invoice_11.id, item_id: @item_3.id, quantity: 5, unit_price: 84, status: "packaged")
     @invoice_item_12 = InvoiceItem.create!(invoice_id: @invoice_12.id, item_id: @item_4.id, quantity: 6, unit_price: 25, status: "pending")
     # result assigned evenly spread around, not sure if we should adjust for different amounts of each
-    @transcation_1 = @invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: "success")
-    @transcation_2 = @invoice_2.transactions.create!(credit_card_number: "4654405418249634", result: "success")
-    @transcation_3 = @invoice_3.transactions.create!(credit_card_number: "4654405418249635", result: "success")
-    @transcation_4 = @invoice_4.transactions.create!(credit_card_number: "4654405418249636", result: "success")
-    @transcation_5 = @invoice_5.transactions.create!(credit_card_number: "4654405418249637", result: "success")
-    @transcation_6 = @invoice_6.transactions.create!(credit_card_number: "4654405418249638", result: "success")
-    @transcation_7 = @invoice_7.transactions.create!(credit_card_number: "4654405418249639", result: "success")
-    @transcation_8 = @invoice_8.transactions.create!(credit_card_number: "4654405418249630", result: "success")
-    @transcation_9 = @invoice_9.transactions.create!(credit_card_number: "4654405418249612", result: "success")
-    @transcation_10 = @invoice_10.transactions.create!(credit_card_number: "4654405418249613", result: "success")
-    @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: "success")
-    @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
+    @transcation_1 = @invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: 1)
+    @transcation_2 = @invoice_2.transactions.create!(credit_card_number: "4654405418249634", result: 1)
+    @transcation_3 = @invoice_3.transactions.create!(credit_card_number: "4654405418249635", result: 1)
+    @transcation_4 = @invoice_4.transactions.create!(credit_card_number: "4654405418249636", result: 1)
+    @transcation_5 = @invoice_5.transactions.create!(credit_card_number: "4654405418249637", result: 1)
+    @transcation_6 = @invoice_6.transactions.create!(credit_card_number: "4654405418249638", result: 1)
+    @transcation_7 = @invoice_7.transactions.create!(credit_card_number: "4654405418249639", result: 1)
+    @transcation_8 = @invoice_8.transactions.create!(credit_card_number: "4654405418249630", result: 1)
+    @transcation_9 = @invoice_9.transactions.create!(credit_card_number: "4654405418249612", result: 1)
+    @transcation_10 = @invoice_10.transactions.create!(credit_card_number: "4654405418249613", result: 1)
+    @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: 1)
+    @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: 0)
   end
   describe 'existance and links' do
     it 'has a dashboard page' do
@@ -81,12 +81,13 @@ RSpec.describe 'the merchant dashboard' do
     it 'is able to list top 5 customers for this merchant' do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".top_customers" do
-        expect(page).to have_content("#{@customer_1.name}, #{@customer_1.transaction_count}")
-        expect(page).to have_content("#{@customer_2.name}, #{@customer_2.transaction_count}")
-        expect(page).to have_content("#{@customer_3.name}, #{@customer_3.transaction_count}")
-        expect(page).to have_content("#{@customer_4.name}, #{@customer_4.transaction_count}")
-        expect(page).to have_content("#{@customer_5.name}, #{@customer_5.transaction_count}")
-        expect(page).to_not have_content("#{@customer_6.name}, #{@customer_6.transaction_count}")
+        binding.pry
+        expect(page).to have_content("#{@customer_1.name}, #{@customer_1.successful_transactions_count}")
+        expect(page).to have_content("#{@customer_2.name}, #{@customer_2.successful_transactions_count}")
+        expect(page).to have_content("#{@customer_3.name}, #{@customer_3.successful_transactions_count}")
+        expect(page).to have_content("#{@customer_4.name}, #{@customer_4.successful_transactions_count}")
+        expect(page).to have_content("#{@customer_5.name}, #{@customer_5.successful_transactions_count}")
+        expect(page).to_not have_content("#{@customer_6.name}, #{@customer_6.successful_transactions_count}")
       end
     end
   end
