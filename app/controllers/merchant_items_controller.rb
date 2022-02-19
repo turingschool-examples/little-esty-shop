@@ -5,8 +5,7 @@ class MerchantItemsController < ApplicationController
   end
 
   def show
-    # require "pry"; binding.pry
     @merchant = Merchant.find(params[:id])
-    @item = @merchant.items.find(params[:id])
+    @item = @merchant.items.find(params[:item_id])
   end
 end
