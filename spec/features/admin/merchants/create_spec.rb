@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating a new merchant', type: :feature do
-  # before do
-  #   @merchant = create(:merchant)
-  # end
+  
   it 'creates a new merchant' do
     visit '/admin/merchants'
 
