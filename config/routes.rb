@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope :merchants, module: :merchants do
     get ':id/dashboard', to: 'dashboard#index'
     get ':id/items', to: 'items#index'
+    get ':id/invoices', to: 'invoices#index'
   end
 
   scope :admin, module: :admin do
