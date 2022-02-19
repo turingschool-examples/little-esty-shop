@@ -1,0 +1,9 @@
+<center> 
+<h1> Merchant Invoices Index </h1>
+
+<div class="all_invoices">
+  <% @merchant_invoices.each do |invoice| %>
+    <p><%=invoice.id %></p>
+  <% end %>
+</div>
+</center>

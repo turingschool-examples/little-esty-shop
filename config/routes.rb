@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
 
   # Routes Aedan created below
-  resources :merchants, module: :merchant do 
+  resources :merchants, only: [:show, :index], module: :merchant do
     resources :invoices
   end 
   # End routes Aedan created
