@@ -13,8 +13,4 @@ RSpec.describe 'admin merchant index page', type: :feature do
     expect(page).to have_content(@merchant2.name)
     expect(page).to have_content(@merchant3.name)
   end
-#
-#   As an admin,
-# When I visit the admin merchants index (/admin/merchants)
-# Then I see the name of each merchant in the system
 end
