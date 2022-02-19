@@ -1,7 +1,5 @@
 require 'rails_helper'
-# As a merchant,
-# When I visit my merchant dashboard (/merchant/merchant_id/dashboard)
-# Then I see the name of my merchant
+
 RSpec.describe 'the merchant dashboard' do
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
@@ -17,7 +15,7 @@ RSpec.describe 'the merchant dashboard' do
     @customer_4 = Customer.create!(first_name: "Person 4", last_name: "Mcperson 4")
     @customer_5 = Customer.create!(first_name: "Person 5", last_name: "Mcperson 5")
     @customer_6 = Customer.create!(first_name: "Person 6", last_name: "Mcperson 6")
-    # status assigned evenly spread around, not sure if we should adjust for different amounts of each
+
     @invoice_1 = @customer_1.invoices.create!(status: :completed)
     @invoice_2 = @customer_1.invoices.create!(status: :cancelled)
     @invoice_3 = @customer_2.invoices.create!(status: :in_progress)
@@ -30,7 +28,7 @@ RSpec.describe 'the merchant dashboard' do
     @invoice_10 = @customer_4.invoices.create!(status: :completed)
     @invoice_11 = @customer_5.invoices.create!(status: :cancelled)
     @invoice_12 = @customer_6.invoices.create!(status: :in_progress)
-    #for now unit prices match between items and invoice_items, may want to adjust as testing requires
+
     @invoice_item_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: :shipped)
     @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: :packaged)
     @invoice_item_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending)
@@ -43,31 +41,30 @@ RSpec.describe 'the merchant dashboard' do
     @invoice_item_10 = InvoiceItem.create!(invoice_id: @invoice_10.id, item_id: @item_2.id, quantity: 4, unit_price: 29, status: :shipped)
     @invoice_item_11 = InvoiceItem.create!(invoice_id: @invoice_11.id, item_id: @item_3.id, quantity: 5, unit_price: 84, status: :packaged)
     @invoice_item_12 = InvoiceItem.create!(invoice_id: @invoice_12.id, item_id: @item_4.id, quantity: 6, unit_price: 25, status: :pending)
-    # result assigned evenly spread around, not sure if we should adjust for different amounts of each
-    @transcation_1 = @invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: 1)
-    @transcation_2 = @invoice_2.transactions.create!(credit_card_number: "4654405418249634", result: 1)
-    @transcation_3 = @invoice_3.transactions.create!(credit_card_number: "4654405418249635", result: 1)
-    @transcation_4 = @invoice_4.transactions.create!(credit_card_number: "4654405418249636", result: 1)
-    @transcation_5 = @invoice_5.transactions.create!(credit_card_number: "4654405418249637", result: 1)
-    @transcation_6 = @invoice_6.transactions.create!(credit_card_number: "4654405418249638", result: 1)
-    @transcation_7 = @invoice_7.transactions.create!(credit_card_number: "4654405418249639", result: 1)
-    @transcation_8 = @invoice_8.transactions.create!(credit_card_number: "4654405418249630", result: 1)
-    @transcation_9 = @invoice_9.transactions.create!(credit_card_number: "4654405418249612", result: 1)
-    @transcation_10 = @invoice_10.transactions.create!(credit_card_number: "4654405418249613", result: 1)
-    @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: 1)
-    @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: 0)
+
+    @transcation_1 = @invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: :success)
+    @transcation_2 = @invoice_2.transactions.create!(credit_card_number: "4654405418249634", result: :success)
+    @transcation_3 = @invoice_3.transactions.create!(credit_card_number: "4654405418249635", result: :success)
+    @transcation_4 = @invoice_4.transactions.create!(credit_card_number: "4654405418249636", result: :success)
+    @transcation_5 = @invoice_5.transactions.create!(credit_card_number: "4654405418249637", result: :success)
+    @transcation_6 = @invoice_6.transactions.create!(credit_card_number: "4654405418249638", result: :success)
+    @transcation_7 = @invoice_7.transactions.create!(credit_card_number: "4654405418249639", result: :success)
+    @transcation_8 = @invoice_8.transactions.create!(credit_card_number: "4654405418249630", result: :success)
+    @transcation_9 = @invoice_9.transactions.create!(credit_card_number: "4654405418249612", result: :success)
+    @transcation_10 = @invoice_10.transactions.create!(credit_card_number: "4654405418249613", result: :success)
+    @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: :success)
+    @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: :failed)
   end
-  describe 'existance and links' do
+
+  describe 'existence and links' do
+
     it 'has a dashboard page' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchant/#{merchant.id}/dashboard"
       expect(current_path).to eq("/merchant/#{merchant.id}/dashboard")
       expect(page).to have_content(merchant.name)
     end
-    # As a merchant,
-    # When I visit my merchant dashboard
-    # Then I see link to my merchant items index (/merchant/merchant_id/items)
-    # And I see a link to my merchant invoices index (/merchant/merchant_id/invoices)
+
     it 'has links to the merchant items index' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchant/#{merchant.id}/dashboard"
@@ -81,7 +78,6 @@ RSpec.describe 'the merchant dashboard' do
     it 'is able to list top 5 customers for this merchant' do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".top_customers" do
-        binding.pry
         expect(page).to have_content("#{@customer_1.name}, #{@customer_1.successful_transactions_count}")
         expect(page).to have_content("#{@customer_2.name}, #{@customer_2.successful_transactions_count}")
         expect(page).to have_content("#{@customer_3.name}, #{@customer_3.successful_transactions_count}")
