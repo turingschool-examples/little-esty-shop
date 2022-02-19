@@ -19,5 +19,12 @@ RSpec.describe 'Invoices', type: :feature do
     expect(page).to have_content("Order Status: #{@invoice3.status}")
     expect(page).to have_content("Invoice Number: #{@invoice3.id}")
   end
-  
+
+  it "links from the merchants/invoices index to merch/inv/show" do
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    click_link("Invoice Number: #{@invoice1.id}")
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice1.id}")
+  end
+
 end
