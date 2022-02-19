@@ -1,0 +1,11 @@
+<h1><%= @item.name.titleize %></h1>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <p style="color:Green;" > <%= msg %></p>
+  </div>
+<% end %>
+
+<p> <b>Item Description:</b> <%= @item.description %></p>
+<b>Current Selling Price:</b> <%= @item.unit_price %>
+<p><%= link_to "Update #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}/edit"%></p>
