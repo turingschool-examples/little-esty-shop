@@ -27,5 +27,11 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice1.customer_name).to eq("Tired Person")
        end 
     end 
+
+    describe '#format_created_at' do
+      it 'returns the time the invoice was created at in "Weekday, Month Day, Year format' do
+        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq("Saturday, February 19, 2022")
+       end 
+    end 
   end 
 end
