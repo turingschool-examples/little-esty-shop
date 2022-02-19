@@ -1,4 +1,4 @@
-equire 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe 'Merchant Items Show page' do
   describe '#user story #34' do

@@ -1,6 +1,6 @@
 <h1><%= @merchant.name.titleize %></h1>
 <% @merchant.items.each do |item| %>
   <ul>
-    <li><%= item.name.titleize %> </li>
+    <li><%= link_to "#{item.name.titleize}", "/merchants/#{@merchant.id}/items/#{item.id}" %> </li>
  </ul>
 <% end %>
