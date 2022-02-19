@@ -16,8 +16,7 @@ RSpec.describe 'Invoices', type: :feature do
 
   it "each merchant has an invoice index page." do
     visit "/merchants/#{@merchant1.id}/invoices"
-    # save_and_open_page
-    # binding.pry
+
     expect(page).to have_content("Order Status: #{@invoice1.status}")
     expect(page).to have_content("Invoice Number: #{@invoice1.id}")
     # expect(page).to have_content("Order Status: #{@invoice2.status}")

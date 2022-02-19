@@ -23,7 +23,6 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
 
   it " lists all the attributes for a single invoice." do
     visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
-    save_and_open_page
     expect(page).to have_content("#{@invoice1.id}")
     expect(page).to have_content("#{@invoice1.status}")
     expect(page).to have_content("#{@invoice1.id}")
