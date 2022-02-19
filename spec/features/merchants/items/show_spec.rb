@@ -22,9 +22,9 @@ RSpec.describe 'Merchant Items Show page' do
       expect(page).to have_link("Update #{item1.name}")
       click_on("Update #{item1.name}")
       expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
-      expect(page).to have_field(item_name: 'Monkey Paw')
-      expect(page).to have_field(item_description: 'A furry mystery')
-      expect(page).to have_field(item_unit_price: 3)
+      expect(page).to have_field(:item_name, with: 'Monkey Paw')
+      expect(page).to have_field(:item_description, with: 'A furry mystery')
+      expect(page).to have_field(:item_unit_price, with: 3)
 
       within('#item_update') do
         fill_in 'item_unit_price', with: 23
