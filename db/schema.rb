@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2022_02_18_013114) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
+  end 
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "invoice_id"

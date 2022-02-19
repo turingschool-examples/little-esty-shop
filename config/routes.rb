@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   scope :admin, module: :admin do
     get '/merchants', to: 'merchants#index'
+    get '/merchants/new', to: 'merchants#new'
+    post '/merchants/create', to: 'merchants#create'
   end
 end
