@@ -1,5 +1,10 @@
 <h1>Merchant Items:</h1>
-<p>----------------------</p>
+<hr>
 <% @merchant.items.each do |item| %>
 <p><b>Name:</b> <%= item.name %> </p>
+<% if item.status == "Disabled" %>
+<%= button_to "Enable #{item.name}", "/items/#{item.id}?status=enable", method: :patch %>
+<% elsif item.status == "Enabled" %>
+<%= button_to "Disable #{item.name}", "/items/#{item.id}?status=disable", method: :patch %>
+<% end %>
 <% end %>

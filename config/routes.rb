@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   get '/merchant/:id/dashboard', to: 'merchants#show'
   get '/merchants/:id/items', to: 'merchant_items#index'
   get '/merchant/:id/invoices', to: 'merchant_invoices#index'
+
+  get '/items/:id', to: 'items#show'
+  patch 'items/:id', to: 'items#update_status'
 end
