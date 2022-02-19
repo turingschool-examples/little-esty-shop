@@ -1,0 +1,6 @@
+<h1><%= @merchant.name.titleize %></h1>
+<% @merchant.items.each do |item| %>
+  <ul>
+    <li><%= item.name.titleize %> </li>
+ </ul>
+<% end %>
