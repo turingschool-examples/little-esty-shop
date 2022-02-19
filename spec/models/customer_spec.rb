@@ -57,7 +57,7 @@ RSpec.describe Customer, type: :model do
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: :failed)
   end
   describe "relationships" do
-    it { should have_many :invoices }
+    it { should have_many(:invoices) }
     it { should have_many(:transactions).through(:invoices) }
   end
 
