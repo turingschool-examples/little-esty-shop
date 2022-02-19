@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   scope :admin, module: :admin do
-    get '', to: 'dashboard#index'
+    get '/', to: 'dashboard#index'
     get '/merchants', to: 'merchants#index'
   end
 end
