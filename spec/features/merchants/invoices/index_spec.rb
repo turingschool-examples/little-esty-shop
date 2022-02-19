@@ -1,21 +1,18 @@
 require 'rails_helper'
-
-RSpec.describe 'Merchant invoice index page', type: :feature do
+RSpec.describe 'Invoices', type: :feature do
   before do
-    @merchant = create(:merchant)
+    @merchant1 = Merchant.create!(name: "The Tornado")
+    @item1 = @merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
+    @customer1 = Customer.create!(first_name: "Marky", last_name: "Mark" )
+    @invoice1 = @customer1.invoices.create!(status: 1)
+    @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
   end
 
-  xit 'displays invoice index info' do
-    item = create(:item, merchant: @merchant)
-    ii1 = create(:invoice_item, item: item)
-    ii1 = create(:invoice_item, item: item)
-    ii1 = create(:invoice_item, item: item)
+  it "each merchant has an invoice index page." do
+    visit "/merchants/#{@merchant1.id}/invoices"
 
-    visit "/merchants/#{@merchant.id}/invoices"
-
-    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
-    expect(page).to have_content(ii1.invoice.id)
-    expect(page).to have_content(ii2.invoice.id)
-    expect(page).to have_content(ii3.invoice.id)
+    expect(page).to have_content("Order Status: #{@invoice1.status}")
+    expect(page).to have_content("Invoice Number: #{@invoice1.id}")
   end
-end 
+end
+
