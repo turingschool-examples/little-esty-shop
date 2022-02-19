@@ -7,6 +7,6 @@ class Invoice < ApplicationRecord
 
   def customer_name
     customer = Customer.find(customer_id)
-   customer.first_name + " " + customer.last_name
+    customer.first_name + " " + customer.last_name
   end 
 end

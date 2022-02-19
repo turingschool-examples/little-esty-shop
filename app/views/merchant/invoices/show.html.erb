@@ -1,0 +1,10 @@
+<center> 
+<h1> Merchant Invoices Show Page </h1>
+
+<div class="Invoice Information">
+  <p>Invoice Id: <%= @merchant_invoice.id %></p>
+  <p>Invoice Status: <%= @merchant_invoice.status %></p>
+  <p>Created At: <%= @merchant_invoice.format_created_at(@merchant_invoice.created_at) %></p>
+  <p>Customer Name: <%= @merchant_invoice.customer_name %></p>
+</div>
+</center>
