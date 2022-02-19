@@ -4,4 +4,9 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
+
+  def customer_name
+    customer = Customer.find(customer_id)
+   customer.first_name + " " + customer.last_name
+  end 
 end

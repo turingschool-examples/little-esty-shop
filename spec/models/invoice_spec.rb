@@ -11,4 +11,21 @@ RSpec.describe Invoice, type: :model do
   describe 'validations' do 
     it { should define_enum_for(:status).with_values([:pending, :completed]) }
   end 
+
+  before :each do 
+    @customer1 = Customer.create!(first_name: 'Tired', last_name: 'Person')
+    @customer2 = Customer.create!(first_name: 'Hungry', last_name: 'Individual')
+    
+    @invoice1 =Invoice.create!(status: 0, customer_id: @customer1.id)
+    @invoice2 =Invoice.create!(status: 0, customer_id: @customer1.id)
+    @invoice3 =Invoice.create!(status: 0, customer_id: @customer2.id)
+  end
+
+  describe 'instance methods' do 
+    describe '#customer_name' do
+      it 'returns the full name of a the customer an invoice belongs to' do
+        expect(@invoice1.customer_name).to eq("Tired Person")
+       end 
+    end 
+  end 
 end
