@@ -14,12 +14,12 @@
 @item_3 = @merchant_2.items.create!(name: "calculator", description: "TI-84", unit_price: 84)
 @item_4 = @merchant_2.items.create!(name: "paperclips", description: "24 Count", unit_price: 25)
 
-@customer_1 = Costmer.create!(first_name: "Person 1", last_name: "Mcperson 1")
-@customer_2 = Costmer.create!(first_name: "Person 2", last_name: "Mcperson 2")
-@customer_3 = Costmer.create!(first_name: "Person 3", last_name: "Mcperson 3")
-@customer_4 = Costmer.create!(first_name: "Person 4", last_name: "Mcperson 4")
-@customer_5 = Costmer.create!(first_name: "Person 5", last_name: "Mcperson 5")
-@customer_6 = Costmer.create!(first_name: "Person 6", last_name: "Mcperson 6")
+@customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
+@customer_2 = Customer.create!(first_name: "Person 2", last_name: "Mcperson 2")
+@customer_3 = Customer.create!(first_name: "Person 3", last_name: "Mcperson 3")
+@customer_4 = Customer.create!(first_name: "Person 4", last_name: "Mcperson 4")
+@customer_5 = Customer.create!(first_name: "Person 5", last_name: "Mcperson 5")
+@customer_6 = Customer.create!(first_name: "Person 6", last_name: "Mcperson 6")
 # status assigned evenly spread around, not sure if we should adjust for different amounts of each
 @invoice_1 = @customer_1.invoices.create!(status: "completed")
 @invoice_2 = @customer_1.invoices.create!(status: "cancelled")
