@@ -18,7 +18,6 @@ class MerchantItemsController < ApplicationController
     @item = @merchant.items.find(params[:item_id])
       @item.update(item_params)
         redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
-
         flash.alert = "#{@item.name} has been updated"
     end
 
