@@ -1,5 +1,5 @@
 <h1>Merchant items</h1>
-<%#binding.pry%>
+
 <% @merchants.invoices.each do |invoice| %>
   <p><%=link_to "Invoice Number: #{invoice.id}", "/merchants/#{@merchants.id}/invoices/#{invoice.id}" %>
     <%="Order Status: #{invoice.status}" %></p>
