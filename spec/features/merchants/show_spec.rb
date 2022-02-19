@@ -73,18 +73,4 @@ RSpec.describe 'the merchant dashboard' do
       expect(page).to have_link("Invoice Index")
     end
   end
-
-  # describe 'top customers section' do
-  #   it 'is able to list top 5 customers for this merchant' do
-  #     visit "/merchant/#{@merchant_1.id}/dashboard"
-  #     within ".top_customers" do
-  #       expect(page).to have_content("#{@customer_1.name}, #{@customer_1.successful_transactions_count}")
-  #       expect(page).to have_content("#{@customer_2.name}, #{@customer_2.successful_transactions_count}")
-  #       expect(page).to have_content("#{@customer_3.name}, #{@customer_3.successful_transactions_count}")
-  #       expect(page).to have_content("#{@customer_4.name}, #{@customer_4.successful_transactions_count}")
-  #       expect(page).to have_content("#{@customer_5.name}, #{@customer_5.successful_transactions_count}")
-  #       expect(page).to_not have_content("#{@customer_6.name}, #{@customer_6.successful_transactions_count}")
-  #     end
-  #   end
-  # end
 end
