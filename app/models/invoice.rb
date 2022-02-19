@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
     customer = Customer.find(customer_id)
     customer.first_name + " " + customer.last_name
   end 
+
+  def invoice_revenue
+  (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
+  end 
 end
