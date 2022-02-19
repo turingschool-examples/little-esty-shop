@@ -1,7 +1,5 @@
 require 'rails_helper'
-# As a merchant,
-# When I visit my merchant dashboard (/merchant/merchant_id/dashboard)
-# Then I see the name of my merchant
+
 RSpec.describe 'the merchant dashboard' do
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
@@ -61,27 +59,21 @@ RSpec.describe 'the merchant dashboard' do
     it 'has a dashboard page' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchant/#{merchant.id}/dashboard"
+
       expect(current_path).to eq("/merchant/#{merchant.id}/dashboard")
       expect(page).to have_content(merchant.name)
     end
-    # As a merchant,
-    # When I visit my merchant dashboard
-    # Then I see link to my merchant items index (/merchant/merchant_id/items)
-    # And I see a link to my merchant invoices index (/merchant/merchant_id/invoices)
     it 'has links to the merchant items index' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchant/#{merchant.id}/dashboard"
-
       expect(page).to have_link("Item Index")
       expect(page).to have_link("Invoice Index")
     end
   end
-
   describe 'top customers section' do
     it 'is able to list top 5 customers for this merchant' do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".top_customers" do
-        binding.pry
         expect(page).to have_content("#{@customer_1.name}, #{@customer_1.successful_transactions_count}")
         expect(page).to have_content("#{@customer_2.name}, #{@customer_2.successful_transactions_count}")
         expect(page).to have_content("#{@customer_3.name}, #{@customer_3.successful_transactions_count}")
@@ -91,4 +83,37 @@ RSpec.describe 'the merchant dashboard' do
       end
     end
   end
+
+  describe 'items ready to ship section' do
+#   As a merchant
+#   When I visit my merchant dashboard
+#   Then I see a section for "Items Ready to Ship"
+#   In that section I see a list of the names of all of my items that
+#   have been ordered and have not yet been shipped,
+#   And next to each Item I see the id of the invoice that ordered my item
+#   And each invoice id is a link to my merchant's invoice show page
+
+# @invoice_item_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: "shipped")
+# @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: "packaged")
+# @invoice_item_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: "pending")
+# @invoice_item_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 4, unit_price: 25, status: "Shipped")
+# @invoice_item_5 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_1.id, quantity: 5, unit_price: 13, status: "packaged")
+# @invoice_item_6 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_2.id, quantity: 6, unit_price: 29, status: "pending")
+# @invoice_item_7 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_3.id, quantity: 1, unit_price: 84, status: "Shipped")
+# @invoice_item_8 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_4.id, quantity: 2, unit_price: 25, status: "packaged")
+# @invoice_item_9 = InvoiceItem.create!(invoice_id: @invoice_9.id, item_id: @item_1.id, quantity: 3, unit_price: 13, status: "pending")
+# @invoice_item_10 = InvoiceItem.create!(invoice_id: @invoice_10.id, item_id: @item_2.id, quantity: 4, unit_price: 29, status: "Shipped")
+# @invoice_item_11 = InvoiceItem.create!(invoice_id: @invoice_11.id, item_id: @item_3.id, quantity: 5, unit_price: 84, status: "packaged")
+# @invoice_item_12 = InvoiceItem.create!(invoice_id: @invoice_12.id, item_id: @item_4.id, quantity: 6, unit_price: 25, status: "pending")
+
+
+    it "lists ordered && unshipped item's names & it's invoice id as a link" do
+      visit "/merchant/#{@merchant_1.id}/dashboard"
+      within ".items-ready-to-ship" do
+        
+      end
+    end
+
+  end
+
 end
