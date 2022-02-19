@@ -3,8 +3,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
 
-  def display_price
-    cents = self.unit_price
-    '%.2f' % (cents /100.0)
+  def find_merchant_item
+    Item.find(self.item_id)
   end
 end 
