@@ -6,6 +6,7 @@ class Merchant::InvoicesController < ApplicationController
 
   def show
     find_invoice
+    find_merchant
   end
 
 private 
