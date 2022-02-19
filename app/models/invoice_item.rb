@@ -3,7 +3,4 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
 
-  def find_merchant_item
-    Item.find(self.item_id)
-  end
 end 

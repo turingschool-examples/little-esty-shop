@@ -30,13 +30,7 @@ RSpec.describe InvoiceItem, type: :model do
   end 
 
   describe 'instance methods' do
-    describe '#find_merchant_item' do
-        it 'finds the parent item associated with an instance of an invoice item' do
-          expect(@invoice_item1.find_merchant_item).to eq(@item1)
-          expect(@invoice_item2.find_merchant_item).to eq(@item2)
-        
-        end
-    end 
+
     
   end 
 end
