@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
+  scope :merchants, module: :merchants do
+    get ':id/dashboard', to: 'dashboard#index'
+    get ':id/items', to: 'items#index'
+  end
 
-  get '/admin/merchants', to: 'admin_merchants#index'
-
-  get '/merchants/:id/dashboard', to: 'merchants#dashboard'
+  scope :admin, module: :admin do
+    get '/merchants', to: 'merchants#index'
+  end
 end
