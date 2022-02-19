@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe "Merchant Items Show Page" do
   describe 'when I visit this page' do
     it "has the Item listed with all of its attributes" do
-      Merchant.destroy_all
-      Item.destroy_all
       merchant = Merchant.create!(name: "Paul the Merchant")
       item1 = merchant.items.create!(name: "Paul's Item",
                                      description: "Paul's very popular item",
