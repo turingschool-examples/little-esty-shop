@@ -1,1 +1,4 @@
 <%= @merchant.name %>
+
+<%= link_to "View store items", "/merchants/#{@merchant.id}/items" %>
+<%= link_to "View invoices", "/merchants/#{@merchant.id}/invoices" %>
