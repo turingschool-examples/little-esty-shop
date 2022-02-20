@@ -4,6 +4,7 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
 
   def customer_name
     customer = Customer.find(customer_id)
@@ -11,6 +12,6 @@ class Invoice < ApplicationRecord
   end 
 
   def invoice_revenue
-  (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
+    (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
   end 
 end
