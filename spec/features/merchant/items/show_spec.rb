@@ -15,6 +15,8 @@ RSpec.describe 'Merchant Items Show Page' do
     expect(page).to_not have_content(@item_2.name)
     expect(page).to_not have_content(@item_2.description)
     expect(page).to_not have_content(@item_2.unit_price)
+    expect(page).to have_link("Edit #{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")
+
 
     visit "/merchants/#{@merchant_1.id}/items/#{@item_2.id}"
     expect(page).to have_content(@item_2.name)
@@ -23,6 +25,8 @@ RSpec.describe 'Merchant Items Show Page' do
     expect(page).to_not have_content(@item_1.name)
     expect(page).to_not have_content(@item_1.description)
     expect(page).to_not have_content(@item_1.unit_price)
+    expect(page).to have_link("Edit #{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")
+
   end
 
 
