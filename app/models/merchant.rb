@@ -7,7 +7,3 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name
 end
-
-RSpec.describe Merchant, type: :model do
-
-end

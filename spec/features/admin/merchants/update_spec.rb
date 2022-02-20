@@ -7,3 +7,4 @@ RSpec.describe 'Creating a new merchant', type: :feature do
 
 
   end
+end 
