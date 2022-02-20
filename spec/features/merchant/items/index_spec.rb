@@ -14,12 +14,12 @@ RSpec.describe 'Merchant Items index page' do
   end
 
   it 'shows items specific to merchant' do
-    visit "merchants/#{@merchant_1.id}/items"
+    visit "/merchants/#{@merchant_1.id}/items"
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_2.name)
     expect(page).to_not have_content(@item_3.name)
 
-    visit "merchants/#{@merchant_2.id}/items"
+    visit "/merchants/#{@merchant_2.id}/items"
     expect(page).to_not have_content(@item_1.name)
     expect(page).to_not have_content(@item_2.name)
     expect(page).to have_content(@item_3.name)
