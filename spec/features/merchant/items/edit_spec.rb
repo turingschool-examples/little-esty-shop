@@ -17,7 +17,7 @@ RSpec.describe 'Merchant Items Edit Page' do
      visit "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
      click_button("Submit")
 
-     expect(current_path).to eq("/countries/#{@country.id}")
+     expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item.id}")
    end
 
 end
