@@ -37,6 +37,8 @@ RSpec.describe 'Admin Merchants Index' do
     before :each do
       @merchant_1 = Merchant.create!(name: "LT's Tee Shirts LLC", status: 0)
       @merchant_2 = Merchant.create!(name: 'Handmade in CO Co.', status: 1)
+      @merchant_3 = Merchant.create!(name: 'Happy Crafts', status: 1)
+      @merchant_4 = Merchant.create!(name: 'Not-So-Happy Crafts')
 
       visit "/admin/merchants"
     end
@@ -46,7 +48,7 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to have_content(@merchant_2.name)
         expect(page).to_not have_content(@merchant_1.name)
       end
-
+    save_and_open_page
       within("#disabled_merchants") do
         expect(page).to have_content(@merchant_1.name)
         expect(page).to_not have_content(@merchant_2.name)
