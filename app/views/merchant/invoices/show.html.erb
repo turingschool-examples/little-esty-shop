@@ -1,24 +1,32 @@
 <center> 
 <h1> Merchant Invoices Show Page </h1>
 
-<div class="Total Revenue"
+<div class="total_revenue"
   <p>Total Revenue: <%=@invoice.invoice_revenue %></p>
 
 </div>
 
-<div class="Invoice Information">
+<div class="invoice_information">
   <p>Invoice Id: <%= @invoice.id %></p>
   <p>Invoice Status: <%= @invoice.status %></p>
   <p>Created At: <%= @invoice.format_created_at(@invoice.created_at) %></p>
   <p>Customer Name: <%= @invoice.customer_name %></p>
 </div>
 
-<div class="Invoice Items Information">
+<div class="invoice_items_information">
   <% @invoice.invoice_items.each do |ii| %>
-    <p>Item name: <%= ii.item.name %></p>
-    <p>Item quantity: <%= ii.quantity %></p>
-    <p>Item price sold at: <%= ii.item.display_price %></p>
-    <p>Item status: <%= ii.status %></p>
+    <div id="id-<%=ii.id%>"
+      <p>Item name: <%= ii.item.name %></p>
+      <p>Item quantity: <%= ii.quantity %></p>
+      <p>Item price sold at: $<%= ii.item.display_price %></p>
+      <p>Item status: <%= ii.status %></p>
+
+      <%= form_with url: merchant_invoice_path(@merchant.id, @invoice.id), method: :patch, local: true do |form| %>
+            <%= form.hidden_field :ii_id, value: ii.id %>
+            <%= form.select :status, options_for_select([:Pending, :Packaged, :Shipped], ii.status) %>
+            <%= form.submit "Update Item Status" %>
+          <% end %>
+    </div>
   <% end %>
 </div>
 </center>

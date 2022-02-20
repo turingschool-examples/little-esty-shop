@@ -29,4 +29,18 @@ RSpec.describe 'The Merchant Invoice Show Page' do
     expect(page).to have_content(@invoice1.invoice_revenue)
     expect(page).to have_no_content(@invoice2.invoice_revenue)
   end 
+
+  it 'displays status as a select field that can update the items status' do 
+    visit merchant_invoice_path(@merchant.id, @invoice1.id)
+    expect(page).to have_content(@invoice_item1.status)
+    expect(@invoice_item1.status).to eq("Packaged")
+    within("div#id-#{@invoice_item1.id}") do
+      expect(page).to have_button("Update Item Status")
+      select "Shipped", :from => "status"
+      click_button("Update Item Status")
+      @invoice_item1.reload
+      expect(page).to have_content ("Shipped")
+    end
+    expect(page).to have_content ("Item Status Has Been Updated!")
+  end 
 end
