@@ -6,6 +6,14 @@ class Admin::MerchantsController < ApplicationController
   def new
   end
 
+  def show
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:id])
+  end
+
   def create
     merchant = Merchant.create(merchant_params)
 
@@ -14,6 +22,17 @@ class Admin::MerchantsController < ApplicationController
     else
       redirect_to "/admin/merchants/new"
       #flash[:alert] = "Error: #{error_message(app.errors)}"
+    end
+  end
+
+  def update
+    merchant = Merchant.find(params[:id])
+    merchant.update(merchant_params)
+
+    if merchant.save
+      redirect_to "/admin/merchants/#{merchant.id}"
+    else
+      redirect_to "/admin/merchants/#{merchant.id}/edit"
     end
   end
 

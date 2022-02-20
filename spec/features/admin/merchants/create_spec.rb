@@ -14,7 +14,7 @@ RSpec.describe 'Creating a new merchant', type: :feature do
 
     click_button("Submit")
     expect(current_path).to eq('/admin/merchants')
-save_and_open_page
+
     within("#merchant-#{Merchant.last.id}") do
       expect(page).to have_content("Bliffert's Bootleg Beanie Babies")
       expect(page).to have_content("status: disabled")
