@@ -42,12 +42,23 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
     bindex (0.8.1)
     binding.repl (3.0.0)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    capybara (3.36.0)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
     cd (1.0.1)
     clipboard (1.3.6)
     code (0.9.3)
@@ -67,6 +78,7 @@ GEM
       binding.repl (~> 3.0)
       paint (>= 0.9, < 3.0)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     erubi (1.10.0)
     every_day_irb (2.1.1)
       cd (~> 1.0)
@@ -112,6 +124,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -122,6 +136,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    matrix (0.4.2)
     method_source (1.0.0)
     methodfinder (2.2.3)
     mini_mime (1.1.2)
@@ -141,6 +156,9 @@ GEM
     nokogiri (1.13.1-x86-mingw32)
       racc (~> 1.4)
     object_shadow (1.1.1)
+    orderly (0.1.1)
+      capybara (>= 1.1)
+      rspec (>= 2.14)
     ori (0.1.0)
     os (1.1.4)
     paint (2.2.1)
@@ -154,6 +172,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
       spoon (~> 0.0)
+    public_suffix (4.0.6)
     puma (3.12.6)
     puma (3.12.6-java)
     racc (1.6.0)
@@ -189,8 +208,13 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    regexp_parser (2.2.1)
     reline (0.3.1)
       io-console (~> 0.5)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -223,6 +247,14 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    shoulda-matchers (3.1.3)
+      activesupport (>= 4.0.0)
+    simplecov (0.21.2)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     spoon (0.0.6)
       ffi
     spring (2.1.1)
@@ -262,6 +294,8 @@ GEM
     websocket-extensions (0.1.5)
     wirb (2.2.2)
       paint (>= 0.9, < 3.0)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   java
@@ -272,16 +306,21 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  capybara
   coffee-rails (~> 4.2)
   irbtools
   jbuilder (~> 2.5)
+  launchy
   listen (>= 3.0.5, < 3.2)
+  orderly
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)
   rails (~> 5.2.6)
   rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)
+  shoulda-matchers (~> 3.1)
+  simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
