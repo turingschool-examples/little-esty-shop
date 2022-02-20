@@ -15,6 +15,7 @@ require 'rails_helper'
 # And I see that the items status has changed
 
 RSpec.describe 'Merchants Index' do
+
   before :each do
     @merchant_1 = Merchant.create!(name: "Ana Maria")
     @merchant_2 = Merchant.create!(name: "Juan Lopez")
@@ -32,10 +33,14 @@ RSpec.describe 'Merchants Index' do
 
   it 'can see a list of the names of all of the items' do
     visit "/merchants/#{@merchant_1.id}/items"
+require "pry"; binding.pry
+    within("#item-0") do
 
     expect(page).to have_content(@item_1.name)
-    expect(page).to have_content(@item_2.name)
-    expect(page).to_not have_content(@item_3.name)
+    expect(page).to have_content(@item_1.description)
+    expect(page).to have_content(@item_1.display_price)
+    expect(page).to_not have_content(@item_2.name)
+    end
   end
 
   it 'can see an enable/ disable button next to each item' do
@@ -44,21 +49,24 @@ RSpec.describe 'Merchants Index' do
     within("#item-0") do
 
       expect(page).to have_content(@item_3.name)
-      expect(page).to have_content(@item_3.name)
+      expect(page).to have_content(@item_3.description)
+      expect(page).to have_content(@item_3.display_price)
       expect(page).to have_button("Enable #{@item_3.name}")
 
     end
 
     within("#item-1") do
       expect(page).to have_content(@item_4.name)
-      expect(page).to have_content(@item_4.name)
+      expect(page).to have_content(@item_4.description)
+      expect(page).to have_content(@item_4.display_price)
       expect(page).to have_button("Disable #{@item_4.name}")
 
     end
 
     within("#item-2") do
       expect(page).to have_content(@item_5.name)
-      expect(page).to have_content(@item_5.name)
+      expect(page).to have_content(@item_5.description)
+      expect(page).to have_content(@item_5.display_price)
       expect(page).to have_button("Enable #{@item_5.name}")
 
     end
@@ -69,11 +77,10 @@ RSpec.describe 'Merchants Index' do
     within("#item-1") do
 
       expect(page).to have_content(@item_5.name)
-      expect(page).to have_content(@item_5.name)
+      expect(page).to have_content(@item_5.description)
+      expect(page).to have_content(@item_5.display_price)
       expect(page).to have_button("Disable #{@item_5.name}")
     end
 
   end
-
-
 end
