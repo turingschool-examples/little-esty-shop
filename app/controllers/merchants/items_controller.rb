@@ -1,16 +1,17 @@
 class Merchants::ItemsController < ApplicationController
-  
+
   def index
     @merchant = Merchant.find(params[:id])
   end
-  
+
   def show
-    @item = Item.find(params[:item_id])   
+    merchant = Merchant.find(params[:merchant_id])
+    @item = merchant.items.find(params[:item_id])
   end
 
   def edit
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:item_id])
+    @item = @merchant.items.find(params[:item_id])
   end
 
   def update
