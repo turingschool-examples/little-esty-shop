@@ -1,0 +1,9 @@
+<h1><%= "Herein the glorious attributes are herein listed"%></h1>
+
+  <ul>
+    <li>Customer name: <%="#{@invoice.customer.first_name}"%> <%="#{@invoice.customer.last_name}"%></li>
+    <li>Customer ID: <%="#{@invoice.customer_id}"%></li>
+    <li>Invoice Status: <%="#{@invoice.status}"%></li>
+    <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
+    <li>Invoice ID: <%="#{@invoice.id}"%></li>
+  </ul>
