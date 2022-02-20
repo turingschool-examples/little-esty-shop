@@ -41,8 +41,8 @@ RSpec.describe 'Admin Merchants Show Page' do
       merchant_1 = Merchant.create!(name: "LT's Tee Shirts LLC")
       visit "/admin/merchants/#{merchant_1.id}/edit"
 
-      fill_in "Name", with: "LT's T-shirts and Hoodies LLC"
-      click_button("Update Merchant")
+      fill_in('Name', with: "LT's T-shirts and Hoodies LLC")
+      click_button 'Update Merchant'
 
       expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
       expect(page).to have_content("LT's T-shirts and Hoodies LLC")

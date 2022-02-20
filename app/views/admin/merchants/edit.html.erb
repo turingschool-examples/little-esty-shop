@@ -1,5 +1,7 @@
+<h2> Edit Merchant </h2>
+
 <%= form_with model: [:admin, @merchant], local: true do |form| %>
   <%= form.label :name %>
-  <%= form.text_field :name, required: :true %>
-  <%= form.submit "Update Merchant" %>
+  <%= form.text_field :name, :value => @merchant.name %>
+  <%= form.submit "Update Merchant"%>
 <% end %>
