@@ -9,9 +9,9 @@ RSpec.describe 'Admin Merchants Index' do
 
       visit "/admin/merchants"
 
-      expect(page).to have_content("LT's Tee Shirt Wondertorium")
-      expect(page).to have_content('Stickers R Us')
-      expect(page).to have_content('Moss Box Exchange')
+      expect(page).to have_content("LT's Tee Shirts LLC")
+      expect(page).to have_content('Handmade in CO Co.')
+      expect(page).to have_content('Moss Box Inc')
     end
   end
 end
