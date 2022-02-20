@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   scope :admin, module: :admin do
     get '/', to: 'dashboard#index'
     get '/merchants', to: 'merchants#index'
-    get '/merchants/:id', to: 'merchants#show'
     get '/merchants/new', to: 'merchants#new'
+    get '/merchants/:id', to: 'merchants#show'
     post '/merchants/create', to: 'merchants#create'
     get '/merchants/:id/edit', to: 'merchants#edit'
     patch '/merchants/:id', to: 'merchants#update'
