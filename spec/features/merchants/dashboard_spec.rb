@@ -77,11 +77,19 @@ RSpec.describe 'merchant dashboard' do
             expect(page).to have_content(customer_4.first_name)
             expect(page).to have_content(customer_3.first_name)
             expect(page).to have_content(customer_2.first_name)
+            expect(page).to_not have_content(customer_1.first_name)
             expect(page).to have_content(Customer.transaction_count(customer_4.id))
             expect(page).to have_content(Customer.transaction_count(customer_5.id))
             expect(page).to have_content(Customer.transaction_count(customer_6.id))
             expect(page).to have_content(Customer.transaction_count(customer_3.id))
             expect(page).to have_content(Customer.transaction_count(customer_2.id))
+
+            expect(customer_6.first_name).to appear_before(customer_4.first_name)
+            expect(customer_4.first_name).to appear_before(customer_5.first_name)
+            expect(customer_5.first_name).to appear_before(customer_3.first_name)
+            expect(customer_3.first_name).to appear_before(customer_2.first_name)
         end 
     end
+    
+    
 end
