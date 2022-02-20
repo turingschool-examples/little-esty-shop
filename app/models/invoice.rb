@@ -7,4 +7,8 @@ class Invoice < ApplicationRecord
   validates_presence_of :status
 
   enum status: { "in progress" => 0, "cancelled" => 1, "completed" => 2 }
+
+  def item_quantity(arg)
+    items.where(["name = ? and description = ?", arg.name, arg.description]).count
+  end
 end
