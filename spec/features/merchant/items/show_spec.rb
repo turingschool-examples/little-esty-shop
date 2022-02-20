@@ -8,7 +8,7 @@ RSpec.describe 'Merchant Items Show Page' do
   end
 
   it 'contains relevant item information' do
-    visit "/mechants/#{@merchant_1.id}/items/#{@item_1.id}"
+    visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_1.description)
     expect(page).to have_content(@item_1.unit_price)
@@ -16,7 +16,7 @@ RSpec.describe 'Merchant Items Show Page' do
     expect(page).to_not have_content(@item_2.description)
     expect(page).to_not have_content(@item_2.unit_price)
 
-    visit "/mechants/#{@merchant_1.id}/items/#{@item_2.id}"
+    visit "/merchants/#{@merchant_1.id}/items/#{@item_2.id}"
     expect(page).to have_content(@item_2.name)
     expect(page).to have_content(@item_2.description)
     expect(page).to have_content(@item_2.unit_price)
