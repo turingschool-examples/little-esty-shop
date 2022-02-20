@@ -13,19 +13,11 @@ RSpec.describe 'Merchant Items Edit Page' do
     expect(page).to have_field('Unit price', with: '75107')
   end
 
-  # it 'can edit country attributes' do
-  #   visit "/merchants/#{@merchant.id}/items/#{@item.id}"
-  #
-  #   fill_in(:country_name, with: "The Unified Hobbiathan State")
-  #   fill_in(:nuclear_power, with: "false")
-  #   fill_in(:military_power_rank, with: "5")
-  #
-  #   click_button("Update Country")
-  #
-  #   #save_and_open_page
-  #
-  #   expect(current_path).to eq("/countries/#{@country.id}")
-  #   expect(page).to have_content("The Unified Hobbiathan State")
-  # end
+   it 'can edit country attributes and redirect' do
+     visit "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
+     click_button("Submit")
+
+     expect(current_path).to eq("/countries/#{@country.id}")
+   end
 
 end
