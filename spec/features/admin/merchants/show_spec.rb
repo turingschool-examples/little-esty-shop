@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Merchants Show' do
+RSpec.describe 'Admin Merchants Show Page' do
   describe 'user story #16' do
     it "when clicking merchant name I am directed to that merchants show page" do
       merchant_1 = Merchant.create!(name: "LT's Tee Shirts LLC")
@@ -40,7 +40,8 @@ RSpec.describe 'Admin Merchants Show' do
     it "updates are submitted - redirected back to admin/merchant show page w/ updated info and flash message" do
       merchant_1 = Merchant.create!(name: "LT's Tee Shirts LLC")
       visit "/admin/merchants/#{merchant_1.id}/edit"
-      fill_in 'Name', with: "LT's T-shirts and Hoodies LLC"
+
+      fill_in "Name", with: "LT's T-shirts and Hoodies LLC"
       click_button("Update Merchant")
 
       expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
