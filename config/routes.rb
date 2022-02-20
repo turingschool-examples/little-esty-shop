@@ -3,8 +3,13 @@ Rails.application.routes.draw do
 
   scope :merchants, module: :merchants do
     get ':id/dashboard', to: 'dashboard#index'
+
     get ':id/items', to: 'items#index'
-    get ':id/items/:id', to: 'items#show'
+
+    get ':merchant_id/items/:item_id', to: 'items#show'
+    get ':merchant_id/items/:item_id/edit', to: 'items#edit'
+    patch ':merchant_id/items/:item_id', to: 'items#update'
+    
     get ':id/invoices', to: 'invoices#index'
     get ':id/invoices/:id', to: 'invoices#show'
   end
@@ -14,6 +19,5 @@ Rails.application.routes.draw do
     get '/merchants', to: 'merchants#index'
     get '/merchants/new', to: 'merchants#new'
     post '/merchants/create', to: 'merchants#create'
-
   end
 end
