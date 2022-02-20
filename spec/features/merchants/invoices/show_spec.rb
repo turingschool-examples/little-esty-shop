@@ -3,12 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
   before do
     @merchant1 = Merchant.create!(name: "The Tornado")
-    @item1 = @merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
-    @item2 = @merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
-    @customer1 = Customer.create!(first_name: "Marky", last_name: "Mark" )
-    @invoice1 = @customer1.invoices.create!(status: 0)
-    @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
-    @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 2, unit_price: 125, status: 1)
+
+    @item1 = create(:item, merchant: @merchant1)
+    @invoice1 = create(:invoice)
+    
+    @invoice_item1 = create(:invoice_item, item: @item1, invoice: @invoice1, quantity: 2)
   end
 
   it "links from the merchants/invoices index to merch/inv/show" do
@@ -34,7 +33,8 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
 
     expect(page).to have_content("Item name: #{@item1.name}")
     expect(page).to have_content("Item price: #{@item1.unit_price}")
-    expect(page).to have_content("Quantity purchased: #{@invoice1.item_quantity(@item1)}")
+    expect(page).to have_content("Quantity purchased: #{@invoice_item1.quantity}")
+    expect(page).to have_content("Item status: #{@invoice_item1.status}")
   end
 
   it 'does not display items from other merchants' do
