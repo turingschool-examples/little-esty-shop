@@ -83,6 +83,13 @@ GEM
     every_day_irb (2.1.1)
       cd (~> 1.0)
     execjs (2.8.1)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     fancy_irb (1.4.3)
       paint (>= 0.9, < 3.0)
       unicode-display_width (>= 1.1)
@@ -308,6 +315,8 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   capybara
   coffee-rails (~> 4.2)
+  factory_bot_rails
+  faker
   irbtools
   jbuilder (~> 2.5)
   launchy
