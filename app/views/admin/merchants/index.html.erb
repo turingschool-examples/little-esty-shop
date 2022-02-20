@@ -1,0 +1,7 @@
+
+<h3>All Merchants</h3>
+<% @merchants.each do |merchant| %>
+  <div id="merchant-<%=merchant.id%>">
+    <%= merchant.name %>
+  </div>
+<% end %>
