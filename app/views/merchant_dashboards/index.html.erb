@@ -1,1 +1,5 @@
 <%= @merchant.name %>
+
+<%= link_to "Items", to: "/merchants/#{@merchant.id}/items" %>
+
+<%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %>
