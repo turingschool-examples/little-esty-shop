@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating a new merchant', type: :feature do
-  
+
   it 'creates a new merchant' do
     visit '/admin/merchants'
 
@@ -14,10 +14,10 @@ RSpec.describe 'Creating a new merchant', type: :feature do
 
     click_button("Submit")
     expect(current_path).to eq('/admin/merchants')
-
-    # within("#Merchant-#{Merchant.last.id}") do
+save_and_open_page
+    within("#merchant-#{Merchant.last.id}") do
       expect(page).to have_content("Bliffert's Bootleg Beanie Babies")
-      # expect(page).to have_content("Status: Disabled")
-    # end
+      expect(page).to have_content("status: disabled")
+    end
   end
 end

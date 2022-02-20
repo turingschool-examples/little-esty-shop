@@ -1,7 +1,7 @@
 <h1>All Merchants</h1>
 
 <% @merchants.each do |merchant| %>
-<p><%= merchant.name %></p>
+<li id="merchant-<%= merchant.id%>"><%= merchant.name %> - status: <%= merchant.status %></li>
 <% end %>
 
 <%= link_to "Add New Merchant", "/admin/merchants/new" %>
