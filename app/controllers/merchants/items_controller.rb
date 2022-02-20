@@ -1,6 +1,11 @@
 class Merchants::ItemsController < ApplicationController
+  
   def index
     @merchant = Merchant.find(params[:id])
+  end
+  
+  def show
+    @item = Item.find(params[:item_id])   
   end
 
   def edit
@@ -15,11 +20,8 @@ class Merchants::ItemsController < ApplicationController
     flash[:alert] = "Item successfully updated!"
   end
 
-  def show
-  end 
-
-  private
-    def item_params
-      params.permit(:name, :description, :unit_price)
-    end
+    private
+      def item_params
+        params.permit(:name, :description, :unit_price)
+      end
 end

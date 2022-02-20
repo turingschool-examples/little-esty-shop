@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
   before do
-    # @merchant = create(:merchant)
-    # @customer = create(:customer)
-    # @invoice1 = create(:invoice, customer: @customer)
-    # @invoice2 = create(:invoice, customer: @customer)
+
 
     @merchant1 = Merchant.create!(name: "The Tornado")
     @item1 = @merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
