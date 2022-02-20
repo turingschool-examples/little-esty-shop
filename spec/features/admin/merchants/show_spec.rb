@@ -8,7 +8,7 @@ RSpec.describe 'Admin Merchants Show' do
       visit "/admin/merchants"
       click_link("#{merchant_1.name}")
 
-      expect(current_path).to eq("/admin/merchants/#{merchant_1.id}"))
+      expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
     end
 
     it "Merchants name appears on show page" do
@@ -16,7 +16,7 @@ RSpec.describe 'Admin Merchants Show' do
 
       visit "/admin/merchants/#{merchant_1.id}"
 
-      expect(page).to have_content("#{merchant_1.name}"))
+      expect(page).to have_content("#{merchant_1.name}")
     end
   end
 end
