@@ -19,6 +19,7 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
 
     expect(page).to have_content("Bliffert's Bootleg Beanie Babies")
     expect(page).to have_content("status: disabled")
+    expect(page).to have_content("Merchant successfully updated!")
   end
 
   it 'updates a merchants status' do
@@ -39,6 +40,7 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
 
     expect(page).to have_content(name)
     expect(page).to have_content("status: enabled")
+    expect(page).to have_content("Merchant successfully updated!")
   end
 
   it 'updates a merchants name and status' do
@@ -59,6 +61,7 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
 
     expect(page).to have_content("Jerry Jipper's Jingle Jangles")
     expect(page).to have_content("status: enabled")
+    expect(page).to have_content("Merchant successfully updated!")
   end
-  
+
 end

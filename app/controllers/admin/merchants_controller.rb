@@ -31,6 +31,7 @@ class Admin::MerchantsController < ApplicationController
 
     if merchant.save
       redirect_to "/admin/merchants/#{merchant.id}"
+      flash[:alert] = "Merchant successfully updated!"
     else
       redirect_to "/admin/merchants/#{merchant.id}/edit"
     end
