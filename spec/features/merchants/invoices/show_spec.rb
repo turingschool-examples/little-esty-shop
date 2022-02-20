@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
   before do
 
+
     @merchant1 = Merchant.create!(name: "The Tornado")
     @item1 = @merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
     @customer1 = Customer.create!(first_name: "Marky", last_name: "Mark" )
@@ -12,7 +13,7 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
 
   it "links from the merchants/invoices index to merch/inv/show" do
     visit "/merchants/#{@merchant1.id}/invoices"
-    
+
     click_link("Invoice Number: #{@invoice1.id}")
     expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end

@@ -10,11 +10,11 @@ RSpec.describe 'Invoices', type: :feature do
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
   end
 
+
   it "each merchant has an invoice index page." do
     visit "/merchants/#{@merchant1.id}/invoices"
 
     expect(page).to have_content("Order Status: #{@invoice1.status}")
     expect(page).to have_content("Invoice Number: #{@invoice1.id}")
   end
-
 end
