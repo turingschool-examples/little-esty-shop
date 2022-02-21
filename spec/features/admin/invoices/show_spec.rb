@@ -21,4 +21,11 @@ RSpec.describe 'Invoices', type: :feature do
     expect(page).to have_content("Invoice Number: #{@invoice2.id}")
     expect(page).to have_content("Invoice Number: #{@invoice3.id}")
   end
+
+  it "has a link to the invoice page" do
+    visit "/admin/invoices"
+
+    click_link("Invoice Number: #{@invoice1.id}")
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+  end
 end

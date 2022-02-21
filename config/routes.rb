@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   scope :admin, module: :admin do
     get '/', to: 'dashboard#index'
+    get '/invoices', to: 'invoices#index'
+    get '/invoices/:id', to: 'invoices#show'
     get '/merchants', to: 'merchants#index'
     get '/merchants/new', to: 'merchants#new'
     get '/merchants/:id', to: 'merchants#show'
