@@ -1,0 +1,13 @@
+<h1> <%= @item.name %> </h1>
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+    <%= msg %>
+  </div>
+<% end %>
+<ul>
+    <li> Description: <%= @item.description%>
+    </li>
+    <li> Current Selling Price: <%= format_money(@item.unit_price)%>
+    </li>
+</ul>
+<%= link_to "Edit item", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit"%>
