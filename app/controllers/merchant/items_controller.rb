@@ -1,7 +1,10 @@
 class Merchant::ItemsController < ApplicationController
 
 def index
+  # require "pry"; binding.pry
     @merchant = Merchant.find(params[:merchant_id])
+    @merchant_enabled = @merchant.enabled_status
+    @merchant_disabled = @merchant.disabled_status
   end
 
   def show
