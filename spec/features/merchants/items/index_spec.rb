@@ -12,7 +12,7 @@ require 'rails_helper'
 # Next to each item name I see a button to disable or enable that item.
 # When I click this button
 # Then I am redirected back to the items index
-# And I see that the items status has changed
+# And I see that the items item_status has changed
 
 RSpec.describe 'Merchants Index' do
 
@@ -20,20 +20,20 @@ RSpec.describe 'Merchants Index' do
     @merchant_1 = Merchant.create!(name: "Ana Maria")
     @merchant_2 = Merchant.create!(name: "Juan Lopez")
     @merchant_3 = Merchant.create!(name: "Jamie Fergerson")
-    @item_1 = @merchant_1.items.create!(name: "cheese", description: "european cheese", unit_price: 2400, status: 1)
-    @item_2 = @merchant_1.items.create!(name: "onion", description: "red onion", unit_price: 3450, status: 1)
+    @item_1 = @merchant_1.items.create!(name: "cheese", description: "european cheese", unit_price: 2400, item_status: 1)
+    @item_2 = @merchant_1.items.create!(name: "onion", description: "red onion", unit_price: 3450, item_status: 1)
     @item_3 = @merchant_2.items.create!(name: "earing", description: "Lotus earings", unit_price: 14500)
-    @item_4 = @merchant_2.items.create!(name: "bracelet", description: "Silver bracelet", unit_price: 76000, status: 1)
-    @item_5 = @merchant_2.items.create!(name: "ring", description: "red onion", unit_price: 34)
-    @item_6 = @merchant_3.items.create!(name: "skirt", description: "Hoop skirt", unit_price: 2175, status: 1)
-    @item_7 = @merchant_3.items.create!(name: "shirt", description: "Mike's Yellow Shirt", unit_price: 5405, status: 1)
+    @item_4 = @merchant_2.items.create!(name: "bracelet", description: "Silver bracelet", unit_price: 76000, item_status: 1)
+    @item_5 = @merchant_2.items.create!(name: "ring", description: "lotus ring", unit_price: 2345)
+    @item_6 = @merchant_3.items.create!(name: "skirt", description: "Hoop skirt", unit_price: 2175, item_status: 1)
+    @item_7 = @merchant_3.items.create!(name: "shirt", description: "Mike's Yellow Shirt", unit_price: 5405, item_status: 1)
     @item_8 = @merchant_3.items.create!(name: "socks", description: "Cat Socks", unit_price: 934)
 
   end
 
   it 'can see a list of the names of all of the items' do
     visit "/merchants/#{@merchant_1.id}/items"
-require "pry"; binding.pry
+
     within("#item-0") do
 
     expect(page).to have_content(@item_1.name)
@@ -72,9 +72,8 @@ require "pry"; binding.pry
     end
 
     click_button "Enable #{@item_5.name}"
-    expect(current_path).to eq("/merchants/#{@merchant_2.id}/items")
 
-    within("#item-1") do
+      within("#item-2") do
 
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_5.description)

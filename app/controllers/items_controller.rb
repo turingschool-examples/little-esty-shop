@@ -3,8 +3,10 @@ class ItemsController < ApplicationController
     Item.create(item_params)
   end
 
+  
+
   private
     def item_params
-      params.permit(:name, :description, :unit_price, :status)
+      params.permit(:name, :description, :unit_price, :item_status)
     end
 end
