@@ -6,5 +6,11 @@ Rails.application.routes.draw do
   get '/merchants/:id/invoices', to: 'invoices#index'
   get '/merchants/:merchant_id/invoices/:invoice_id', to: 'invoices#show'
   patch '/merchants/:merchant_id/invoices/:invoice_id', to: 'invoices#update'
-  # patch '/invoice_items/:invoice_items_id', to: 'invoice_items#update'
+
+  # get '/merchants/:id/invoices/:id', to: 'invoices#show'
+
+  get '/merchants/:merchant_id/items', to: 'items#index'
+  get '/merchants/:merchant_id/items/:item_id', to: 'items#show'
+  get '/merchants/:merchant_id/items/:item_id/edit', to: 'items#edit'
+  patch '/merchants/:merchant_id/items/:item_id', to: 'items#update'
 end

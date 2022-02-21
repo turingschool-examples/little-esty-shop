@@ -69,7 +69,9 @@ RSpec.describe 'merchants invoices show page' do
 
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-    expect(invoice_1.total_revenue).to eq(42)
+    # expect(invoice_1.total_revenue).to be_a(Integer)
+    expect(invoice_1.total_revenue).to eq(42) #-- for current test
+    # expect(invoice_1.total_revenue).to eq(66) -- for rspec as a whole
   end
 
   it 'shows each invoice item status is a select field where current status is selected' do
