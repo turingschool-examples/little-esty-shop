@@ -58,4 +58,10 @@ RSpec.describe Merchant, type: :model do
   describe "relationships" do
     it { should have_many(:items) }
   end
+
+  describe "instance methods" do
+    it '.ship_ready_items' do
+      expect(@merchant_1.ship_ready_items).to eq([@invoice_item_2, @invoice_item_3, @invoice_item_5, @invoice_item_6, @invoice_item_8, @invoice_item_9, @invoice_item_11, @invoice_item_12])
+    end
+  end
 end
