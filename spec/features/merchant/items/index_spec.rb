@@ -71,7 +71,7 @@ RSpec.describe 'Merchants Index' do
 
   it 'has 2 sections one Enabled, 1 Disabled' do
     visit "/merchants/#{@merchant_2.id}/items"
-
+save_and_open_page
     within("#enabled_items-0") do
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@item_4.description)
