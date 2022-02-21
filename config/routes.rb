@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/merchants/:id/dashboard', to: 'merchants#show'
 
   get '/merchants/:id/invoices', to: 'invoices#index'
-  get '/merchants/:id/invoices/:id', to: 'invoices#show'
-
+  get '/merchants/:merchant_id/invoices/:invoice_id', to: 'invoices#show'
+  patch '/merchants/:merchant_id/invoices/:invoice_id', to: 'invoices#update'
+  # patch '/invoice_items/:invoice_items_id', to: 'invoice_items#update'
 end
