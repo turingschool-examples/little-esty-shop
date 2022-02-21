@@ -2,5 +2,8 @@
 <header>
   <%= link_to "#{@merchant.name}'s items", "/merchants/#{@merchant_id}/items", method: :get %>
   <%= link_to "#{@merchant.name}'s invoices", merchant_invoices_path(@merchant.id) %>
-
 </header>
+
+<div id="ready_to_ship">
+  
+</div>

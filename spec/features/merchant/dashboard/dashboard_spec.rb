@@ -18,7 +18,7 @@ RSpec.describe 'The Merchant Dashboard' do
     expect(page).to have_content(@katz.name)
   end
 
-  it "has links to merchant items and invoices" do
+  xit "has links to merchant items and invoices" do
     visit "/merchants/#{@katz.id}/dashboard"
     click_on "#{@katz.name}'s items"
     expect(current_path).to eq("/merchants/#{@katz.id}/items")
@@ -35,7 +35,7 @@ RSpec.describe 'The Merchant Dashboard' do
     end
   end
 
-  it "ready to ship has the item ids of the invoices that ordered the items" do
+  xit "ready to ship has the item ids of the invoices that ordered the items" do
     visit "/merchants/#{@katz.id}/dashboard"
     within '#ready_to_ship' do
       expect(page).to have_content(@invoice1.id)
@@ -43,7 +43,7 @@ RSpec.describe 'The Merchant Dashboard' do
     end
   end
 
-  it "in ready to ship the item ids are links to merchant_invoices" do
+  xit "in ready to ship the item ids are links to merchant_invoices" do
     visit "/merchants/#{@katz.id}/dashboard"
     within '#ready_to_ship' do
       click_on "Invoice ID: #{@invoice_item1.id}"
@@ -51,14 +51,14 @@ RSpec.describe 'The Merchant Dashboard' do
     end
   end
 
-  it "in ready to ship the invoice dates are present" do
+  xit "in ready to ship the invoice dates are present" do
     visit "/merchants/#{@katz.id}/dashboard"
     within '#ready_to_ship' do
       expect(page).to have_content(@invoice1.created_at)
     end
   end
 
-  it "in ready to ship the invoices apear from least to most recent" do
+  xit "in ready to ship the invoices apear from least to most recent" do
     visit "/merchants/#{@katz.id}/dashboard"
     within '#ready_to_ship' do
       expect(@invoice1.id).to appear_before(@invoice2.id)
