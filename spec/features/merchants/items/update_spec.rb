@@ -7,17 +7,15 @@ RSpec.describe 'Merchant item update', type: :feature do
     @item2 = create(:item, merchant: @merchant)
   end
 
-  xit 'links to item update from item show page' do
+  it 'links to item update from item show page' do
     visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
 
-    within "#item-#{@item1.id}" do
-      click_link "Update item"
-    end
+    click_link "Update item"
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item1.id}/edit")
   end
 
-  xit 'has a form to update the item' do
+  it 'has a form to update the item' do
     visit "/merchants/#{@merchant.id}/items/#{@item1.id}/edit"
 
     expect(page).to have_field('Item name', with: 'old name')
@@ -28,8 +26,8 @@ RSpec.describe 'Merchant item update', type: :feature do
     click_button 'Update item'
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item1.id}")
-    # expect(page).to have_content('new name')
-    # expect(page).to have_content('new description')
+    expect(page).to have_content('new name')
+    expect(page).to have_content('new description')
     expect(page).to have_content('Item successfully updated!')
   end
 end
