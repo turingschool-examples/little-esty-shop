@@ -8,5 +8,9 @@ class Merchant < ApplicationRecord
 
   def merchant_invoices
     (invoices.order(:id)).uniq
-  end 
+  end
+
+  def not_shipped
+    invoice_items.where("status != 2")
+  end
 end

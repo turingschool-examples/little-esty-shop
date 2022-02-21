@@ -18,22 +18,4 @@ RSpec.describe Item, type: :model do
       expect(item_1.display_price).to eq("24.75")
     end
   end
-
-  describe 'class methods' do
-    describe '#get_name_from_invoice' do
-      it "lists items names that are on invoices" do
-        @katz = Merchant.create!(name: 'Katz Kreations')
-        @mrpickles = Customer.create!(first_name: 'Mr', last_name: 'Pickles')
-        @sashimi = Customer.create!(first_name: 'Sashimi', last_name: 'Kity')
-        @invoice1 = Invoice.create!(status: 0, customer_id: @mrpickles.id)
-        @invoice2 = Invoice.create!(status: 0, customer_id: @mrpickles.id)
-        @item1 = Item.create!(name: 'food', description: 'delicious', unit_price: '2000', merchant_id: @katz.id)
-        @item2 = Item.create!(name: 'toy', description: 'fun', unit_price: '5000', merchant_id: @katz.id)
-        @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 1)
-        @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 2)
-
-        expect(Item.name).to eq([])
-      end
-    end
-  end
 end

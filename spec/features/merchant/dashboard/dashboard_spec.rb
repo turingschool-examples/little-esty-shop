@@ -27,40 +27,41 @@ RSpec.describe 'The Merchant Dashboard' do
     expect(current_path).to eq("/merchants/#{@katz.id}/invoices")
   end
 
-  it "has a section ready to ship with names of items that are oredered but not shipped" do
+  it "has a section not shipped with names of items that are oredered but not shipped" do
     visit "/merchants/#{@katz.id}/dashboard"
-    within '#ready_to_ship' do
+    within '#not_shipped' do
       expect(page).to have_content(@item1.name)
       expect(page).to_not have_content(@item2.name)
     end
   end
 
-  xit "ready to ship has the item ids of the invoices that ordered the items" do
+  it "not shipped has the item ids of the invoices that ordered the items" do
     visit "/merchants/#{@katz.id}/dashboard"
-    within '#ready_to_ship' do
+    within '#not_shipped' do
       expect(page).to have_content(@invoice1.id)
       expect(page).to_not have_content(@invoice2.id)
     end
   end
 
-  xit "in ready to ship the item ids are links to merchant_invoices" do
+  it "in not shipped the item ids are links to merchant_invoices" do
     visit "/merchants/#{@katz.id}/dashboard"
-    within '#ready_to_ship' do
-      click_on "Invoice ID: #{@invoice_item1.id}"
+    within '#not_shipped' do
+
+      click_on "#{@invoice1.id}"
       expect(current_path).to eq("/merchants/#{@katz.id}/invoices")
     end
   end
 
-  xit "in ready to ship the invoice dates are present" do
+  it "in not shipped the invoice dates are present" do
     visit "/merchants/#{@katz.id}/dashboard"
-    within '#ready_to_ship' do
+    within '#not_shipped' do
       expect(page).to have_content(@invoice1.created_at)
     end
   end
 
-  xit "in ready to ship the invoices apear from least to most recent" do
+  xit "in not shipped the invoices apear from least to most recent" do
     visit "/merchants/#{@katz.id}/dashboard"
-    within '#ready_to_ship' do
+    within '#not_shipped' do
       expect(@invoice1.id).to appear_before(@invoice2.id)
     end
   end

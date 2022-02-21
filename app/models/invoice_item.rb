@@ -3,4 +3,9 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
 
-end 
+  def get_name_from_invoice
+    item.name
+  end
+
+  
+end
