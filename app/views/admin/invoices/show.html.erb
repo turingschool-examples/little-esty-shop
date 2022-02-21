@@ -8,3 +8,13 @@
     <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
     <li>Invoice ID: <%="#{@invoice.id}"%></li>
   </ul>
+  <h3> Items on this invoice you consumerist pig dog </h3>
+  <ul>
+    <%@invoice.invoice_items.each do |item| %>
+      <p><li>Item id: <%="#{item.id}"%></li>
+    <li>Item name: <%="#{item.item.name}" %></li>
+    <li>Amount ordered: <%="#{item.quantity}"%></li>
+    <li>Unit cost: <%="#{item.unit_price}"%></li>
+    <li>Item status: <%="#{item.status}" %></li></p>
+    <%end%>
+  </ul>
