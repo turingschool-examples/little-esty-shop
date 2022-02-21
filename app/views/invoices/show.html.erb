@@ -11,5 +11,5 @@
 <p>Name: <%= @invoice.invoice_items.first.item.name %></p>
 <p>Quantity: <%= @invoice.invoice_items.first.quantity %></p>
 <p>Price: $<%= @invoice.invoice_items.first.item.unit_price %>.00</p>
-
 <p>Status: <%= @invoice.invoice_items.first.status %></p>
+<p>Total Revenue: <%= @invoice.total_revenue %></p>
