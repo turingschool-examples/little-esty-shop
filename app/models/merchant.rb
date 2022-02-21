@@ -14,4 +14,7 @@ class Merchant < ApplicationRecord
     invoice_items.where("status != 2").order("created_at desc")
   end
 
+  def top_five
+    binding.pry
+  end
 end
