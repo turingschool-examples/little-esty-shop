@@ -85,18 +85,18 @@ RSpec.describe 'the merchant dashboard' do
     it "lists ordered && unshipped item's names & it's invoice id as a link" do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".items-ready-to-ship" do
-        expect(page).to_not have_link("#{@invoice_1.id}")
-        expect(page).to have_link("#{@invoice_2.id}")
-        expect(page).to have_link("#{@invoice_3.id}")
-        expect(page).to_not have_link("#{@invoice_4.id}")
-        expect(page).to have_link("#{@invoice_5.id}")
-        expect(page).to have_link("#{@invoice_6.id}")
-        expect(page).to_not have_link("#{@invoice_7.id}")
-        expect(page).to have_link("#{@invoice_8.id}")
-        expect(page).to have_link("#{@invoice_9.id}")
-        expect(page).to_not have_link("#{@invoice_10.id}")
-        expect(page).to have_link("#{@invoice_11.id}")
-        expect(page).to have_link("#{@invoice_12.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_1.id}")
+        expect(page).to have_link("Order number: #{@invoice_2.id}")
+        expect(page).to have_link("Order number: #{@invoice_3.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_4.id}")
+        expect(page).to have_link("Order number: #{@invoice_5.id}")
+        expect(page).to have_link("Order number: #{@invoice_6.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_7.id}")
+        expect(page).to have_link("Order number: #{@invoice_8.id}")
+        expect(page).to have_link("Order number: #{@invoice_9.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_10.id}")
+        expect(page).to have_link("Order number: #{@invoice_11.id}")
+        expect(page).to have_link("Order number: #{@invoice_12.id}")
       end
     end
   end
