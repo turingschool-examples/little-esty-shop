@@ -6,6 +6,7 @@ RSpec.describe Invoice, type: :model do
     it {should have_many(:transactions)}
     it {should have_many(:invoice_items)}
     it {should have_many(:items).through(:invoice_items)}
+    it {should have_many(:merchants).through(:items)}
   end
 
   describe 'validations' do 
@@ -41,7 +42,7 @@ RSpec.describe Invoice, type: :model do
 
     describe '#format_created_at' do
       it 'returns the time the invoice was created at in "Weekday, Month Day, Year format' do
-        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq("Saturday, February 19, 2022")
+        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq("Sunday, February 20, 2022")
        end 
     end 
 

@@ -24,23 +24,16 @@ RSpec.describe 'Merchant Item update' do
     click_link "Update #{item_2.name}"
     expect(current_path).to eq("/merchants/#{merchant_2.id}/items/#{item_2.id}/edit")
 
-    # expect(page).to have_content(item_2.name)
-    # expect(page).to have_content(item_2.description)
-    # expect(page).to have_content(item_2.unit_price)
-
-    # expect(find('form')).to have_content(item_2.name)
-    # expect(find('form')).to have_content('Description')
-    # expect(find('form')).to have_content('Unit_price')
 
     fill_in "Unit price", with: "2567"
     click_button "Submit"
 
-    save_and_open_page
+
     expect(current_path).to eq("/merchants/#{merchant_2.id}/items/#{item_2.id}")
     expect(page).to have_content("#{item_2.name} has been updated")
     expect(page).to have_content(item_2.name)
     expect(page).to have_content(item_2.description)
-    # expect(page).to have_content(item_2.display_price)
+
     expect(page).to have_content("$25.67")
 
   end
