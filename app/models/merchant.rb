@@ -6,4 +6,6 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates_presence_of :name
+
+  enum status: { "disabled" => 0, "enabled" => 1 }
 end
