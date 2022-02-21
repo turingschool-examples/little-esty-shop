@@ -8,5 +8,12 @@
 <% @merchant.favorite_customers(5).each do |customer| %>
     <%= "#{customer.first_name} #{customer.last_name} - #{Customer.transaction_count(customer.id)} purchases" %> <br>
 <% end %>
+</section>
+
+<section id="ready_to_ship">
+<h3>Items Ready to Ship</h3>
+<% @merchant.items_ready_to_ship.each do |irts| %>
+    <%= "#{irts.name} - " %> <%= link_to "Invoice ##{irts.id}", "/invoices/#{irts.id}" %> <br>
+<% end %>
 
 </section>
