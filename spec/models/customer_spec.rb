@@ -19,7 +19,7 @@ RSpec.describe Customer, type: :model do
     # status assigned evenly spread around, not sure if we should adjust for different amounts of each
     @invoice_1 = @customer_1.invoices.create!(status: :completed)
     @invoice_2 = @customer_1.invoices.create!(status: :cancelled)
-    @invoice_3 = @customer_2.invoices.create!(status: :in_progress)
+    @invoice_3 = @customer_1.invoices.create!(status: :in_progress)
     @invoice_4 = @customer_2.invoices.create!(status: :completed)
     @invoice_5 = @customer_2.invoices.create!(status: :cancelled)
     @invoice_6 = @customer_3.invoices.create!(status: :in_progress)
@@ -63,6 +63,7 @@ RSpec.describe Customer, type: :model do
 
   describe 'instance methods' do
     it 'can count transactions' do
+      binding.pry
     expect(@customer_1.transaction_count).to eq(2)
     end
 
