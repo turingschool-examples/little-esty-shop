@@ -1,6 +1,29 @@
 
 <center><h2>My Items</h2></center>
 
-<% @merchant.items.each do |item| %>
-<%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  <% @merchant.items.each_with_index do |item, index| %>
+  <div id="item-<%= index %>">
+
+  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
+    <%= item.description %><br>
+    <%= item.display_price %><br>
+
+  <% if item.item_status == 1 %>
+  <section class="to disable button">
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
+    <%= f.text_field :item_status, value: 2, hidden: true %>
+    <%= f.submit "Disable #{item.name}" %>
+    <% end %>
+  </section>
+  <% end %>
+
+  <% if item.item_status == 2 %>
+  <section class="to enable button">
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
+    <%= f.text_field :item_status, value: 1, hidden: true %>
+    <%= f.submit "Enable #{item.name}" %>
+    <% end %>
+  </section>
+  <% end %>
+</div>
 <% end %>
