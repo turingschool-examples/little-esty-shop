@@ -18,11 +18,16 @@ RSpec.describe 'Merchant Items index page' do
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_2.name)
     expect(page).to_not have_content(@item_3.name)
+    expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+    expect(page).to have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
+
 
     visit "/merchants/#{@merchant_2.id}/items"
     expect(page).to_not have_content(@item_1.name)
     expect(page).to_not have_content(@item_2.name)
     expect(page).to have_content(@item_3.name)
+    expect(page).to have_link("#{@item_3.name}", :href => "/merchants/#{@merchant_2.id}/items/#{@item_3.id}")
+
 
   end
 end

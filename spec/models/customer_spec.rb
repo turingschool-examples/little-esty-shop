@@ -12,6 +12,7 @@ RSpec.describe Customer, type: :model do
     it { should validate_presence_of(:last_name) }
   end
 
+
   describe ".top_5_customers" do
     before(:each) do
 
@@ -54,5 +55,11 @@ RSpec.describe Customer, type: :model do
 
       expect(Customer.top_5_customers).to eq([@customer,@customer_2,@customer_3,@customer_4,@customer_5])
     end
+
+  it "exists" do
+    customer = create(:customer)
+    expect(customer).to be_a(Customer)
+    expect(customer).to be_valid
+
   end
 end
