@@ -74,6 +74,7 @@ RSpec.describe 'the merchant dashboard' do
     end
   end
 
+
   describe 'top customers section' do
     it 'is able to list top 5 customers for this merchant' do
       visit "/merchant/#{@merchant_1.id}/dashboard"
@@ -93,4 +94,5 @@ RSpec.describe 'the merchant dashboard' do
       end
     end
   end
+
 end

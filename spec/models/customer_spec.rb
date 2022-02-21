@@ -70,5 +70,9 @@ RSpec.describe Customer, type: :model do
     it 'can count successful transactions' do
       expect(@customer_1.successful_transactions_count).to eq(1)
     end
+
+    it "can return its full name" do
+      expect(@customer_1.name).to eq("Person 1 Mcperson 1")
+    end
   end
 end

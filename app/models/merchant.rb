@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+
   has_many :invoice_items, through: :items
    has_many :invoices, through: :invoice_items
    has_many :customers, through: :invoices
@@ -18,4 +19,5 @@ class Merchant < ApplicationRecord
        .order(trans_count: :desc)
        .limit(5)
    end
+
 end
