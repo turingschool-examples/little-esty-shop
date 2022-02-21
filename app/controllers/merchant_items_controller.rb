@@ -15,7 +15,6 @@ def index
   end
 
   def update
-  # require "pry"; binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:item_id])
     @item.update(item_params)
