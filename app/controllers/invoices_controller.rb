@@ -6,6 +6,7 @@ class InvoicesController < ApplicationController
   end
 
   def show
-
-  end 
+    @invoice = Invoice.find(params[:id])
+    # require "pry"; binding.pry
+  end
 end
