@@ -17,16 +17,14 @@ class Merchant < ApplicationRecord
     end
 
     def items_ready_to_ship
-      Merchant.find_by_sql("SELECT items.name, invoices.id FROM merchants 
+      Merchant.find_by_sql("SELECT items.name, invoices.id, invoices.created_at FROM merchants 
                             JOIN items ON merchants.id = items.merchant_id
                             JOIN invoice_items ON items.id = invoice_items.item_id
                             JOIN invoices ON invoice_items.invoice_id = invoices.id 
                             JOIN transactions ON invoices.id = transactions.invoice_id
                             WHERE merchants.id = #{id} AND invoice_items.status != 2 
-                            AND transactions.result = 0 AND invoices.status != 2")
+                            AND transactions.result = 0 AND invoices.status != 2
+                            ORDER BY invoices.created_at ASC")
+                            
     end
-    Merchant.joins(items: [invoice_items: [invoice: :transactions]])
-    .where(merchants: { id: 1}, invoice_items: {status: [0,1]}, transactions: {result: 0}, invoices: {status: [0,1]})
-Merchant.select(items: :name).where(merchants: { id: 1}, invoice_items: {status: [0,1]}).joins(items: :invoice_items)
-
   end

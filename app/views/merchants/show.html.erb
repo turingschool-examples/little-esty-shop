@@ -13,7 +13,7 @@
 <section id="ready_to_ship">
 <h3>Items Ready to Ship</h3>
 <% @merchant.items_ready_to_ship.each do |irts| %>
-    <%= "#{irts.name} - " %> <%= link_to "Invoice ##{irts.id}", "/invoices/#{irts.id}" %> <br>
+    <%= "#{irts.name} - " %> <%= link_to "Invoice ##{irts.id}", "/invoices/#{irts.id}" %> 
+    <%= "- #{date_formatter(irts.created_at)}" %><br>
 <% end %>
-
 </section>
