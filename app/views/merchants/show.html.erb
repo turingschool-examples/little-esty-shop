@@ -2,6 +2,12 @@
 <%= link_to "Item Index", "/merchant/#{@merchant.id}/items" %>
 <%= link_to "Invoice Index", "/merchant/#{@merchant.id}/invoices" %>
 <div class="top_customers">
+  <ol>
+    <% @merchant.top_five_customers.each do |customer| %>
+      <li><%= customer.name %>, <%= customer.trans_count %></li>
+    <% end %>
+
+  </ol>
 
 
 </div>

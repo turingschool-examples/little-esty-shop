@@ -75,13 +75,6 @@ RSpec.describe 'the merchant dashboard' do
   end
 
   describe 'items ready to ship section' do
-#   As a merchant
-#   When I visit my merchant dashboard
-#   Then I see a section for "Items Ready to Ship"
-#   In that section I see a list of the names of all of my items that
-#   have been ordered and have not yet been shipped,
-#   And next to each Item I see the id of the invoice that ordered my item
-#   And each invoice id is a link to my merchant's invoice show page
     it "lists ordered && unshipped item's names & it's invoice id as a link" do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".items-ready-to-ship" do
@@ -97,6 +90,26 @@ RSpec.describe 'the merchant dashboard' do
         expect(page).to_not have_link("Order number: #{@invoice_10.id}")
         expect(page).to have_link("Order number: #{@invoice_11.id}")
         expect(page).to have_link("Order number: #{@invoice_12.id}")
+      end
+    end
+  end
+
+  describe 'top customers section' do
+    it 'is able to list top 5 customers for this merchant' do
+      visit "/merchant/#{@merchant_1.id}/dashboard"
+      save_and_open_page
+      within ".top_customers" do
+        expect(page).to have_content("#{@customer_2.name}, 9")
+        expect(page).to have_content("#{@customer_3.name}, 9")
+        expect(page).to have_content("#{@customer_1.name}, 4")
+        expect(page).to have_content("#{@customer_4.name}, 4")
+        expect(page).to have_content("#{@customer_5.name}, 1")
+
+        expect(@customer_2.name).to appear_before(@customer_3.name)
+        expect(@customer_3.name).to appear_before(@customer_1.name)
+        expect(@customer_1.name).to appear_before(@customer_4.name)
+        expect(@customer_4.name).to appear_before(@customer_5.name)
+        expect(page).to_not have_content("#{@customer_6.name}, 34")
       end
     end
   end

@@ -8,4 +8,17 @@ class Merchant < ApplicationRecord
   def ship_ready_items
     self.invoice_items.where.not(status: :shipped)
   end
+  
+  def customers_list
+    customers.distinct
+  end
+
+  def top_five_customers
+    customers.joins(invoices: :transactions)
+             .where(transactions:{result: 1})
+             .select("customers.*, COUNT(transactions.*) AS trans_count")
+             .group("customers.id")
+             .order(trans_count: :desc)
+             .limit(5)
+   end
 end
