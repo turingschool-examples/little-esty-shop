@@ -11,4 +11,10 @@ RSpec.describe InvoiceItem, type: :model do
     it { should validate_presence_of(:unit_price) }
     it { should validate_presence_of(:status) }
   end
+
+  it "exists" do
+    invoice_item = create(:invoice_item)
+    expect(invoice_item).to be_a(InvoiceItem)
+    expect(invoice_item).to be_valid
+  end
 end
