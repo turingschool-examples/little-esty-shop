@@ -25,7 +25,7 @@ RSpec.describe 'Merchant Items Show Page' do
     expect(page).to_not have_content(@item_1.unit_price)
   end
 
-  it 'links to appropiate edit button' do
+  it 'links to appropriate edit button' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
     click_button("Edit #{@item_1.name}")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")
