@@ -18,7 +18,7 @@ RSpec.describe 'The Merchant Dashboard' do
     expect(page).to have_content(@katz.name)
   end
 
-  xit "has links to merchant items and invoices" do
+  it "has links to merchant items and invoices" do
     visit "/merchants/#{@katz.id}/dashboard"
     click_on "#{@katz.name}'s items"
     expect(current_path).to eq("/merchants/#{@katz.id}/items")
@@ -55,14 +55,14 @@ RSpec.describe 'The Merchant Dashboard' do
   it "in not shipped the invoice dates are present" do
     visit "/merchants/#{@katz.id}/dashboard"
     within '#not_shipped' do
-      expect(page).to have_content(@invoice1.created_at)
+      expect(page).to have_content(@invoice_item1.format_created_at(@invoice_item1.created_at))
     end
   end
 
-  xit "in not shipped the invoices apear from least to most recent" do
+  it "in not shipped the invoices apear from least to most recent" do
     visit "/merchants/#{@katz.id}/dashboard"
     within '#not_shipped' do
-      expect(@invoice1.id).to appear_before(@invoice2.id)
+      expect(@invoice2.id).to appear_before(@invoice1.id)
     end
   end
 end

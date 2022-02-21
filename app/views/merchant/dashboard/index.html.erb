@@ -1,13 +1,14 @@
 <h1> <%= @merchant.name %> </h1>
 <header>
-  <%= link_to "#{@merchant.name}'s items", "/merchants/#{@merchant_id}/items", method: :get %>
+  <%= link_to "#{@merchant.name}'s items", merchant_items_path(@merchant.id), method: :get %>
   <%= link_to "#{@merchant.name}'s invoices", merchant_invoices_path(@merchant.id) %>
 </header>
 
 <div id="not_shipped">
   <p>Not Shipped</p>
   <% @not_shipped.each do |item_invoice| %>
-    <p>Item: <%= item_invoice.get_name_from_invoice %></p>
+    <p>Item: <%= item_invoice.get_name_from_invoice %>
+    <%= item_invoice.format_created_at(item_invoice.created_at) %></p>
     <p>Invoice ID: <%= link_to "#{item_invoice.invoice_id}", merchant_invoices_path(@merchant.id) %></p>
   <% end %>
 </div>

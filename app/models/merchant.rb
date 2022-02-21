@@ -11,6 +11,7 @@ class Merchant < ApplicationRecord
   end
 
   def not_shipped
-    invoice_items.where("status != 2")
+    invoice_items.where("status != 2").order("created_at desc")
   end
+
 end

@@ -7,5 +7,4 @@ class InvoiceItem < ApplicationRecord
     item.name
   end
 
-  
 end

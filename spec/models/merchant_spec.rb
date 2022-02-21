@@ -57,9 +57,10 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '.not_shipped' do
-      it "lists invoice items that have been ordered but are not shipped" do
-        expect(@merchant.not_shipped).to eq([@invoice_item1, @invoice_item2])
+      it "lists invoice items that have been ordered but are not shipped from least to most recent" do
+        expect(@merchant.not_shipped).to eq([@invoice_item2, @invoice_item1])
       end
     end
+
   end
 end

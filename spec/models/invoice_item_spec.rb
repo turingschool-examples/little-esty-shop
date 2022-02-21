@@ -37,12 +37,4 @@ RSpec.describe InvoiceItem, type: :model do
       end
     end
   end
-
-  describe 'class methods' do
-    describe '#not_shipped' do
-      it "lists items that have been ordered but are not shipped" do
-        expect(InvoiceItem.not_shipped).to eq([@invoice_item1, @invoice_item2, @invoice_item3])
-      end
-    end
-  end
 end
