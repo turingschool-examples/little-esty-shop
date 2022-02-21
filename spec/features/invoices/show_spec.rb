@@ -39,6 +39,12 @@ RSpec.describe 'merchants invoices show page' do
     invoice_1 = create(:invoice, customer_id: customer_1.id)
     invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id)
 
+    item_2 = create(:item, merchant_id: merchant_1.id)
+    invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id)
+
+    item_3 = create(:item, merchant_id: merchant_1.id)
+    invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id)
+
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
     expect(page).to have_content("Invoice Item Information")
@@ -63,6 +69,6 @@ RSpec.describe 'merchants invoices show page' do
 
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-    expect(invoice_1.total_revenue).to eq(30)
+    expect(invoice_1.total_revenue).to eq(42)
   end
 end
