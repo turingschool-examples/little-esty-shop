@@ -6,7 +6,12 @@
 
 </div>
 
+<h2> Items ready to ship </h2>
 <div class="items-ready-to-ship">
-
-
+  <% @shippable_invoice_items.each do |invoice_item| %>
+    <li>
+      <%= "#{invoice_item.item.name}" %>
+      <%= link_to "Order number: #{invoice_item.invoice.id}", "/merchant/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
+    </li>
+  <% end %>
 </div>
