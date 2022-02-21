@@ -21,6 +21,5 @@ Rails.application.routes.draw do
     post '/merchants/create', to: 'merchants#create'
     get '/merchants/:id/edit', to: 'merchants#edit'
     patch '/merchants/:id', to: 'merchants#update'
-
   end
 end
