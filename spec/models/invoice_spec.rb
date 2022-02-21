@@ -7,4 +7,10 @@ RSpec.describe Invoice, type: :model do
   it {should have_many :transactions}
   it {should belong_to :customer}
 
+  describe 'instance methods' do
+    it 'can reformat the created_at timestamp' do
+      invoice_1 = create(:invoice)
+      expect(invoice_1.created_at_date).to eq("Monday, February 21, 2022")
+    end
+  end
 end
