@@ -33,4 +33,8 @@ RSpec.describe 'Item Index page' do
             expect(page).to have_content(@item_5.name)
         end
     end
+    it 'will have a link to add a new item on the page' do 
+        visit "/merchants/#{@merchant_1.id}/items"
+        expect(page).to have_link('Create Item')
+    end
 end
