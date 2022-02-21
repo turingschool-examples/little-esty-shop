@@ -8,10 +8,17 @@
 
 <h3>Invoice Item Information</h3>
 <% @invoice.invoice_items.each do |item| %>
+  <div id="<%= item.id %>">
   <p>Name: <%= item.item.name %></p>
   <p>Quantity: <%= item.quantity %></p>
   <p>Price: $<%= item.unit_price %>.00</p>
   <p>Status: <%= item.status %></p>
+  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch do |f| %>
+  <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: item.status %>
+  <%= hidden_field_tag "invoice_item_id", "#{item.id}" %>
+  <%= f.submit 'Update Item Status' %>
+  <% end %>
+</div>
 <p>--------------</p>
 <% end %>
 <p>Total Revenue: $<%= @invoice.total_revenue %>.00</p>
