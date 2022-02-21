@@ -1,0 +1,30 @@
+<h1> <%=@merchant.name%>'s Items </h1>
+<div class = enabled>
+<h3> Enabled Items </h3>
+<% @merchant.items.enabled.each do |item| %>
+
+      <ul>
+        <li>
+          <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
+            <%= item.name%>
+          </a>
+          <%= button_to("Disable", "/merchants/#{item.merchant.id}/items/#{item.id}/", method: :patch, name: "status",value: "disable") %>
+        </li>
+      </ul>
+<% end %>
+</div>
+
+<div class = disabled>
+<h3> Disabled Items </h3>
+<% @merchant.items.disabled.each do |item| %>
+
+      <ul>
+        <li>
+          <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
+            <%= item.name%>
+          </a>
+          <%=button_to("Enable", "/merchants/#{item.merchant.id}/items/#{item.id}/", method: :patch, name: "status",value: "enable")%>
+        </li>
+      </ul>
+<% end %>
+</div>
