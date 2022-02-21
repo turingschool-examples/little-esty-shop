@@ -1,6 +1,6 @@
 <center><h1>My Items</h1></center>
       <h2>Enabled Items</h2>
-  <% @merchant_enabled.each_with_index do |item, index| %>
+  <% @merchant.enabled_status.each_with_index do |item, index| %>
       <div id="enabled_items-<%= index %>">
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
         <%= item.description %><br>
@@ -16,9 +16,8 @@
       <br>
       <br>
       <br>
-
       <h2>Disabled Items</h2>
-  <% @merchant_disabled.each_with_index do |item, index| %>
+  <% @merchant.disabled_status.each_with_index do |item, index| %>
     <div id="disabled_items-<%= index %>">
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
       <%= item.description %><br>
