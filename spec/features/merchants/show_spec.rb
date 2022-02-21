@@ -61,6 +61,7 @@ RSpec.describe 'the merchant dashboard' do
     it 'has a dashboard page' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchant/#{merchant.id}/dashboard"
+
       expect(current_path).to eq("/merchant/#{merchant.id}/dashboard")
       expect(page).to have_content(merchant.name)
     end
@@ -68,12 +69,30 @@ RSpec.describe 'the merchant dashboard' do
     it 'has links to the merchant items index' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchant/#{merchant.id}/dashboard"
-
       expect(page).to have_link("Item Index")
       expect(page).to have_link("Invoice Index")
     end
   end
 
+  describe 'items ready to ship section' do
+    it "lists ordered && unshipped item's names & it's invoice id as a link" do
+      visit "/merchant/#{@merchant_1.id}/dashboard"
+      within ".items-ready-to-ship" do
+        expect(page).to_not have_link("Order number: #{@invoice_1.id}")
+        expect(page).to have_link("Order number: #{@invoice_2.id}")
+        expect(page).to have_link("Order number: #{@invoice_3.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_4.id}")
+        expect(page).to have_link("Order number: #{@invoice_5.id}")
+        expect(page).to have_link("Order number: #{@invoice_6.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_7.id}")
+        expect(page).to have_link("Order number: #{@invoice_8.id}")
+        expect(page).to have_link("Order number: #{@invoice_9.id}")
+        expect(page).to_not have_link("Order number: #{@invoice_10.id}")
+        expect(page).to have_link("Order number: #{@invoice_11.id}")
+        expect(page).to have_link("Order number: #{@invoice_12.id}")
+      end
+    end
+  end
 
   describe 'top customers section' do
     it 'is able to list top 5 customers for this merchant' do
@@ -94,5 +113,4 @@ RSpec.describe 'the merchant dashboard' do
       end
     end
   end
-
 end

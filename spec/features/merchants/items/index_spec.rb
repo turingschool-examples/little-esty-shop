@@ -37,12 +37,13 @@ RSpec.describe 'the merchant item index page' do
     expect(page).to have_content("Status:")
 
     @item_1.reload
-    
+
     expect(@item_1.status).to eq("Enabled")
+  end
 
   it "the names of merchants are links to their show page" do
     visit "/merchants/#{@merchant_1.id}/items"
-    
+
     click_link("#{@item_1.name}")
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
