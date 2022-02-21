@@ -18,7 +18,7 @@ class MerchantItemsController < ApplicationController
     item = Item.find(params[:item_id])
     item.update(item_params)
 
-    redirect_to "/merchants/#{merchant.id}/items/#{item.id}"
+    redirect_to "/merchants/#{merchant.id}/items/#{item.id}", alert: "Notice: Item successfully updated."
   end
 
   private
