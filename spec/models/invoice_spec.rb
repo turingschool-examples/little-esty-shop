@@ -12,4 +12,10 @@ RSpec.describe Invoice, type: :model do
   describe "validations" do
     it { should validate_presence_of(:status) }
   end
+
+  it "exists" do
+    invoice = create(:invoice)
+    expect(invoice).to be_a(Invoice)
+    expect(invoice).to be_valid
+  end
 end

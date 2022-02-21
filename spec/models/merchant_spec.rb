@@ -12,4 +12,10 @@ RSpec.describe Merchant, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
   end
+
+  it "exists" do
+    merchant = create(:merchant)
+    expect(merchant).to be_a(Merchant)
+    expect(merchant).to be_valid
+  end
 end

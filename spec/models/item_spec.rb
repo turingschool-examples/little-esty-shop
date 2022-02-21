@@ -12,4 +12,11 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:unit_price) }
   end
+
+  it "exists" do
+    merchant = create(:merchant)
+    item = create(:item)
+    expect(item).to be_a(Item)
+    expect(item).to be_valid
+  end
 end
