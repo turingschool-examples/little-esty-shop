@@ -78,6 +78,7 @@ RSpec.describe 'the merchant dashboard' do
     it "lists ordered && unshipped item's names & it's invoice id as a link" do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".items-ready-to-ship" do
+        expect(page).to have_content(@item_1.name)
         expect(page).to_not have_link("Order number: #{@invoice_1.id}")
         expect(page).to have_link("Order number: #{@invoice_2.id}")
         expect(page).to have_link("Order number: #{@invoice_3.id}")
@@ -92,12 +93,20 @@ RSpec.describe 'the merchant dashboard' do
         expect(page).to have_link("Order number: #{@invoice_12.id}")
       end
     end
+
+    it "is ordered by oldest and displays date created" do
+      visit "/merchant/#{@merchant_1.id}/dashboard"
+      within ".items-ready-to-ship" do
+        expect(page).to have_content("Ordered at: #{@invoice_1.created_at}")
+        expect("Order number: #{@invoice_2.id}").to appear_before("Order number: #{@invoice_3.id}")
+        expect("Order number: #{@invoice_3.id}").to appear_before("Order number: #{@invoice_5.id}")
+      end
+    end
   end
 
   describe 'top customers section' do
     it 'is able to list top 5 customers for this merchant' do
       visit "/merchant/#{@merchant_1.id}/dashboard"
-      save_and_open_page
       within ".top_customers" do
         expect(page).to have_content("#{@customer_2.name}, 9")
         expect(page).to have_content("#{@customer_3.name}, 9")
