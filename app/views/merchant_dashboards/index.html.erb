@@ -1,5 +1,10 @@
 <%= @merchant.name %>
 
+<h1>Favorite Customers</h1>
+<% @merchant.customers.top_5_customers.each do |customer| %>
+  <h3><%= customer.first_name %> <%= customer.last_name %> - <%= customer.top_result %> purchases</h3>
+<% end %>
+
 <%= link_to "Items", to: "/merchants/#{@merchant.id}/items" %>
 
 <%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %>
