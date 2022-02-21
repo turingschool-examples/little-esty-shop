@@ -1,9 +1,6 @@
 FactoryBot.define do
   factory :invoice do
-    transactions
-    invoice_items
-    items
-    merchants 
-    status {}
+    customer 
+    status { [0,1,2].sample }
   end
 end

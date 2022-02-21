@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :item do
-    invoice_items
-    invoices through invoice items
-    name { }
-    description { }
-    unit_price { }
+    merchant
+    name { Faker::Device.model_name }
+    description { Faker::Device.manufacturer }
+    unit_price { Faker::Number.decimal(l_digits: 2) }
   end
 end
