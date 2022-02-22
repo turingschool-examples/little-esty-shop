@@ -97,7 +97,7 @@ RSpec.describe 'the merchant dashboard' do
     it "is ordered by oldest and displays date created" do
       visit "/merchant/#{@merchant_1.id}/dashboard"
       within ".items-ready-to-ship" do
-        expect(page).to have_content("Ordered at: #{@invoice_1.created_at}")
+        expect(page).to have_content("Ordered on: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
         expect("Order number: #{@invoice_2.id}").to appear_before("Order number: #{@invoice_3.id}")
         expect("Order number: #{@invoice_3.id}").to appear_before("Order number: #{@invoice_5.id}")
       end
