@@ -57,7 +57,7 @@ RSpec.describe 'the merchant item index page' do
 
   it "Has Enabled and Disabled section on index page" do
     @enabled_item = @merchant_1.items.create!(name: "pen", description: "red ink", unit_price: 5, status: "Enabled")
-    
+
     visit "/merchants/#{@merchant_1.id}/items"
 
     expect(page).to have_content('Enabled Items')
@@ -73,4 +73,13 @@ RSpec.describe 'the merchant item index page' do
     end
   end
 
+  it "Has Enabled and Disabled section on index page" do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    expect(page).to have_content('Enabled Items')
+
+    within ".enabled_items" do
+      expect(page).to have_content(@enabled_item.name)
+    end
+  end
 end
