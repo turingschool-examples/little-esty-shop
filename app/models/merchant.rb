@@ -1,6 +1,9 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
+
+  enum status: {enabled: 0, disabled: 1}
+  
   validates :name, presence: true
                         
     def favorite_customers(count)
