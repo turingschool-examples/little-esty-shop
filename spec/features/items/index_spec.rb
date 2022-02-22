@@ -36,4 +36,54 @@ RSpec.describe 'Item Index page' do
         visit "/merchants/#{@merchant_1.id}/items"
         expect(page).to have_link('Create Item')
     end
+    describe '5 most popular items' do 
+        before(:each) do 
+            @merchant_1 = create(:merchant)
+            #all items belong to merchant 1
+            @item_1 = create(:item, merchant_id: @merchant_1.id, name: 'Stuffed Bear')
+            @item_2 = create(:item, merchant_id: @merchant_1.id, name: 'Doll')
+            @item_3 = create(:item, merchant_id: @merchant_1.id, name: 'Roller Skates')
+            @item_4 = create(:item, merchant_id: @merchant_1.id, name: 'Yoyo')
+            @item_5 = create(:item, merchant_id: @merchant_1.id, name: 'Coloring Book')
+            @item_6 = create(:item, merchant_id: @merchant_1.id, name: 'Gift Card')
+            # make revenue unique
+            @invoice_item_1 = create(:invoice_item, unit_price: 30, quantity: 5, item: @item_1)
+            @invoice_item_2 = create(:invoice_item, unit_price: 30, quantity: 4, item: @item_1)
+            @invoice_item_3 = create(:invoice_item, unit_price: 50, quantity: 4, item: @item_2)
+            @invoice_item_4 = create(:invoice_item, unit_price: 40, quantity: 4, item: @item_3)
+            @invoice_item_5 = create(:invoice_item, unit_price: 20, quantity: 4, item: @item_4)
+            @invoice_item_6 = create(:invoice_item, unit_price: 90, quantity: 1, item: @item_5)
+            @invoice_item_7 = create(:invoice_item, unit_price: 240, quantity: 1, item: @item_6)
+            # transactions are successful linked to invoice item
+            @transaction_1 = create(:transaction, invoice_id: @invoice_item_1.invoice_id)
+            @transaction_2 = create(:transaction, invoice_id: @invoice_item_2.invoice_id)
+            @transaction_3 = create(:transaction, invoice_id: @invoice_item_3.invoice_id)
+            @transaction_4 = create(:transaction, invoice_id: @invoice_item_4.invoice_id)
+            @transaction_5 = create(:transaction, invoice_id: @invoice_item_5.invoice_id)
+            @transaction_6 = create(:transaction, invoice_id: @invoice_item_6.invoice_id)
+            @transaction_7 = create(:transaction, invoice_id: @invoice_item_7.invoice_id)
+            # $270 item 1, $200 item 2, $160 item 3, $80 item 4, $90 item 5, $240 item 6
+        end
+        it 'will list the names of the 5 most popular items ranked by total revenue' do 
+            list = Item.most_popular_items(@merchant_1).map(&:name)
+            expect(list).to eq(["Stuffed Bear", "Gift Card", "Doll", "Roller Skates", "Coloring Book"])
+        end
+        it 'will have the revenues for these items' do 
+            list = Item.most_popular_items(@merchant_1).map(&:revenue)
+            expect(list).to eq([270, 240, 200, 160, 90])
+        end
+        it 'will have links to those items' do 
+            visit "/merchants/#{@merchant_1.id}/items"
+            within "#item-#{@item_1.id}" do 
+                click_link
+            end
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+        end
+        it 'will have the total revenue generated next to each item name' do 
+            visit "/merchants/#{@merchant_1.id}/items"
+            within "#item-#{@item_1.id}" do 
+                expect(page).to have_content("Total Revenue: $270.00")
+            end
+        end
+    end
 end
