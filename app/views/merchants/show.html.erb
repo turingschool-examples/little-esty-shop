@@ -18,6 +18,7 @@
     <li>
       <%= "#{invoice_item.item.name}" %>
       <%= link_to "Order number: #{invoice_item.invoice.id}", "/merchant/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
+      <%= "Ordered on: #{invoice_item.invoice.created_at.strftime("%A, %B %d, %Y")}" %>
     </li>
   <% end %>
 </div>
