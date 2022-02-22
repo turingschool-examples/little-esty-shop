@@ -15,24 +15,24 @@ RSpec.describe 'Create new item' do
     # @item_8 = @merchant_3.items.create!(name: "socks", description: "Cat Socks", unit_price: 934)
   end
   it 'can see item just created displayed in list of items' do
-    
-    visit merchant_items_path(@merchant_1)
+
+    visit merchant_items_path(@merchant_1.id)
     expect(page).to have_link('Create New Item')
 
     click_link 'Create New Item'
 
-    expect(current_path).to eq(new_merchant_item_path(@merchant_1))
+    expect(current_path).to eq(new_merchant_item_path(@merchant_1.id))
 
     fill_in 'Name', with: 'bananas'
     fill_in 'Description', with: 'ripe bananas'
     fill_in 'Unit price', with: 75
 
-    click_link 'Submit'
+    click_button 'Submit'
 
     banana = Item.last
 
     expect(current_path).to eq(merchant_items_path(@merchant_1))
-
+save_and_open_page
     within("#disabled_items-1") do
 
     expect(page).to have_content(banana.name)
