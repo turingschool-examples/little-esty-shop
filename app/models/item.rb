@@ -11,5 +11,13 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: true
 
+  def self.most_popular_items(merchant)
+    joins(invoice_items: {invoice: :transactions}).
+    where(transactions: {result: 0}, merchant_id:merchant.id).
+    group(:id).
+    select('SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue, items.*').
+    order('revenue desc').
+    limit(5)
+  end
 
 end
