@@ -15,6 +15,7 @@ RSpec.describe "Merchant Item Create page" do
 
       expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
       expect(merchant_1.items.last.name).to eq("Paul's new item")
+      expect(merchant_1.items.last.status).to eq("Disabled")
     end
   end
 end
