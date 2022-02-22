@@ -2,11 +2,12 @@ require 'rails_helper'
 RSpec.describe "the merchant invoice index" do
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
+    @merchant_2 = Merchant.create!(name: "Home Depot")
 
     @item_1 = @merchant_1.items.create!(name: "stapler", description: "Staples papers together", unit_price: 13)
     @item_2 = @merchant_1.items.create!(name: "paper", description: "construction", unit_price: 29)
     @item_3 = @merchant_1.items.create!(name: "calculator", description: "TI-84", unit_price: 84)
-    @item_4 = @merchant_1.items.create!(name: "paperclips", description: "24 Count", unit_price: 25)
+    @item_4 = @merchant_2.items.create!(name: "paperclips", description: "24 Count", unit_price: 25)
 
     @customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
     @customer_2 = Customer.create!(first_name: "Person 2", last_name: "Mcperson 2")
@@ -69,9 +70,17 @@ RSpec.describe "the merchant invoice index" do
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_2.id)
       expect(page).to have_content(@invoice_3.id)
-      expect(page).to have_content(@invoice_4.id)
+      expect(page).to_not have_content(@invoice_4.id)
       expect(page).to have_content(@invoice_5.id)
       expect(page).to have_content(@invoice_6.id)
+      expect(page).to have_content(@invoice_7.id)
+      expect(page).to_not have_content(@invoice_8.id)
+    end
+
+    it 'links to invoices show page' do
+      visit "/merchants/#{@merchant_1.id}/invoices"
+      click_on "#{@invoice_1.id}"
+      expect(current_path).to eq("/invoices/#{@invoice_1.id}")
     end
   end
 end

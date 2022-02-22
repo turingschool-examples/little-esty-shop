@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   patch 'items/:id', to: 'items#update_status'
 
   get '/merchants/:id/items/:item_id', to: 'merchant_items#show'
+
+  get '/invoices/:id', to: 'invoices#show'
 end
