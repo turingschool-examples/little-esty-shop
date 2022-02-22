@@ -1,7 +1,18 @@
-class ItemsController < ApplicationController
+class MerchantItemsController < ApplicationController
     def index 
         @merchant = Merchant.find(params[:merchant_id])
     end
+
+    def new 
+       @merchant =  Merchant.find(params[:merchant_id])
+    end
+
+    def create 
+        merchant = Merchant.find(params[:merchant_id])
+        new_item = merchant.items.create(item_params)
+        redirect_to "/merchants/#{merchant.id}/items"
+    end
+
     def show 
        @item = Item.find(params[:item_id])
     end
