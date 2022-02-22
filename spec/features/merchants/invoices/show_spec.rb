@@ -67,7 +67,7 @@ RSpec.describe "Merchant Invoices Show Page" do
   end
 
   it "displays all the invoice items names, qty, price, and shipping status" do
-    @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 13, status: :shipped)
+    @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 29, status: :shipped)
 
     visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
@@ -84,5 +84,13 @@ RSpec.describe "Merchant Invoices Show Page" do
 
     expect(page).to have_content("Status: #{@invoice_item_1.status}")
     expect(page).to have_content("Status: #{@invoice_item_13.status}")
+  end
+
+  it "displays total revenue" do
+    @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 29, status: :shipped)
+
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Total Revenue: 42")
   end
 end
