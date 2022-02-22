@@ -1,5 +1,29 @@
 <h1>Merchants</h1>
 
+<h3> Enabled Merchants </h3>
+<div class = enabled>
 <% @merchants.each do |merchant| %>
-    <%= merchant.name %> <br>
+    <% if merchant.status == "enabled" %>
+      <ul>
+        <li>
+          <%= merchant.name%>
+          <%= button_to("Disable", "/admin/merchants/#{merchant.id}/", method: :patch, name: "status",value: "disable") %>
+        </li>
+      </ul>
+    <% end %>
+<% end  %>
+</div>
+
+<h3> Disabled Merchants </h3>
+<div class = disabled>
+<% @merchants.each do |merchant| %>
+    <% if merchant.status == "disabled" %>
+      <ul>
+        <li>
+          <%= merchant.name%>
+          <%=button_to("Enable", "/admin/merchants/#{merchant.id}/", method: :patch, name: "status",value: "enable")%>
+        </li>
+      </ul>
+    <% end %>
 <% end %>
+</div>
