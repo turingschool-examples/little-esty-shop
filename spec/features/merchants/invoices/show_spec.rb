@@ -65,4 +65,24 @@ RSpec.describe "Merchant Invoices Show Page" do
     expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
   end
+
+  it "displays all the invoice items names, qty, price, and shipping status" do
+    @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 13, status: :shipped)
+
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("#{@item_1.name}")
+    expect(page).to have_content("#{@item_2.name}")
+    expect(page).to_not have_content("#{@item_3.name}")
+
+    expect(page).to have_content("Qty: #{@item_1.quantity}")
+    expect(page).to have_content("Qty: #{@item_2.quantity}")
+
+    expect(page).to have_content("Unit price: #{@item_1.unit_price}")
+    expect(page).to have_content("Unit price: #{@item_2.unit_price}")
+
+    expect(page).to have_content("Status: #{@invoice_item_1.status}")
+    expect(page).to have_content("Status: #{@invoice_item_2.status}")
+    expect(page).to_not have_content("Status: #{@invoice_item_3.status}")
+  end
 end
