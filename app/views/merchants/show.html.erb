@@ -2,6 +2,23 @@
 <%= link_to "Item Index", "/merchant/#{@merchant.id}/items" %>
 <%= link_to "Invoice Index", "/merchant/#{@merchant.id}/invoices" %>
 <div class="top_customers">
+  <ol>
+    <% @merchant.top_five_customers.each do |customer| %>
+      <li><%= customer.name %>, <%= customer.trans_count %></li>
+    <% end %>
+
+  </ol>
 
 
+</div>
+
+<h2> Items ready to ship </h2>
+<div class="items-ready-to-ship">
+  <% @shippable_invoice_items.each do |invoice_item| %>
+    <li>
+      <%= "#{invoice_item.item.name}" %>
+      <%= link_to "Order number: #{invoice_item.invoice.id}", "/merchant/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
+      <%= "Ordered on: #{invoice_item.invoice.created_at.strftime("%A, %B %d, %Y")}" %>
+    </li>
+  <% end %>
 </div>
