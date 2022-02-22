@@ -21,6 +21,10 @@ class MerchantItemsController < ApplicationController
     redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: "Item Successfully Updated"
   end
 
+  def new
+
+  end
+
   private
 
     def item_params
