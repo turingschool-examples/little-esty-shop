@@ -71,18 +71,18 @@ RSpec.describe "Merchant Invoices Show Page" do
 
     visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-    expect(page).to have_content("#{@item_1.name}")
-    expect(page).to have_content("#{@item_2.name}")
-    expect(page).to_not have_content("#{@item_3.name}")
+    expect(page).to have_content("Item name: #{@item_1.name}")
+    expect(page).to have_content("Item name: #{@item_2.name}")
+    expect(page).to_not have_content("Item name: #{@item_3.name}")
 
-    expect(page).to have_content("Qty: #{@item_1.quantity}")
-    expect(page).to have_content("Qty: #{@item_2.quantity}")
+    expect(page).to have_content("Qty: #{@invoice_item_1.quantity}")
+    expect(page).to have_content("Qty: #{@invoice_item_13.quantity}")
+    expect(page).to_not have_content("Qty: #{@invoice_item_3.quantity}")
 
     expect(page).to have_content("Unit price: #{@item_1.unit_price}")
     expect(page).to have_content("Unit price: #{@item_2.unit_price}")
 
     expect(page).to have_content("Status: #{@invoice_item_1.status}")
-    expect(page).to have_content("Status: #{@invoice_item_2.status}")
-    expect(page).to_not have_content("Status: #{@invoice_item_3.status}")
+    expect(page).to have_content("Status: #{@invoice_item_13.status}")
   end
 end
