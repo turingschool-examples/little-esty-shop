@@ -17,61 +17,10 @@ RSpec.describe 'Merchants Index' do
 
   end
 
-  # it 'can see a list of the names of all of the items' do
-  #   visit "/merchants/#{@merchant_1.id}/items"
-  #
-  #   within("#item-0") do
-  #
-  #   expect(page).to have_content(@item_1.name)
-  #   expect(page).to have_content(@item_1.description)
-  #   expect(page).to have_content(@item_1.display_price)
-  #   expect(page).to_not have_content(@item_2.name)
-  #   end
-  # end
-
-  # it 'can see an enable/ disable button next to each item' do
-  #   visit "/merchants/#{@merchant_2.id}/items"
-  #
-  #   within("#item-0") do
-  #
-  #     expect(page).to have_content(@item_3.name)
-  #     expect(page).to have_content(@item_3.description)
-  #     expect(page).to have_content(@item_3.display_price)
-  #     expect(page).to have_button("Enable #{@item_3.name}")
-  #
-  #   end
-  #
-  #   within("#item-1") do
-  #     expect(page).to have_content(@item_4.name)
-  #     expect(page).to have_content(@item_4.description)
-  #     expect(page).to have_content(@item_4.display_price)
-  #     expect(page).to have_button("Disable #{@item_4.name}")
-  #
-  #   end
-  #
-  #   within("#item-2") do
-  #     expect(page).to have_content(@item_5.name)
-  #     expect(page).to have_content(@item_5.description)
-  #     expect(page).to have_content(@item_5.display_price)
-  #     expect(page).to have_button("Enable #{@item_5.name}")
-  #
-  #   end
-  #
-  #   click_button "Enable #{@item_5.name}"
-  #
-  #     within("#item-2") do
-  #
-  #     expect(page).to have_content(@item_5.name)
-  #     expect(page).to have_content(@item_5.description)
-  #     expect(page).to have_content(@item_5.display_price)
-  #     expect(page).to have_button("Disable #{@item_5.name}")
-  #   end
-  #
-  # end
-
-  it 'has 2 sections one Enabled, 1 Disabled' do
+  describe "Merchant Items show page"
+  it 'has an index with  2 sections- 1 Enabled, 1 Disabled' do
     visit "/merchants/#{@merchant_2.id}/items"
-save_and_open_page
+
     within("#enabled_items-0") do
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@item_4.description)
@@ -96,16 +45,27 @@ save_and_open_page
       expect(page).to have_button("Enable #{@item_5.name}")
 
     end
+  end 
 
-    # click_button "Enable #{@item_5.name}"
-    #
-    #   within("#item-2") do
-    #
-    #   expect(page).to have_content(@item_5.name)
-    #   expect(page).to have_content(@item_5.description)
-    #   expect(page).to have_content(@item_5.display_price)
-    #   expect(page).to have_button("Disable #{@item_5.name}")
-    # end
+    it "You can click on the button to cgange an item's status between enabled/ disabled" do
+      visit "/merchants/#{@merchant_2.id}/items"
 
+      within("#disabled_items-1") do
+      expect(page).to have_content(@item_5.name)
+      expect(page).to have_content(@item_5.description)
+      expect(page).to have_content(@item_5.display_price)
+      expect(page).to have_button("Enable #{@item_5.name}")
+
+    end
+
+      click_button "Enable #{@item_5.name}"
+
+      within("#enabled_items-1") do
+
+      expect(page).to have_content(@item_5.name)
+      expect(page).to have_content(@item_5.description)
+      expect(page).to have_content(@item_5.display_price)
+      expect(page).to have_button("Disable #{@item_5.name}")
+    end
   end
 end

@@ -1,15 +1,5 @@
 require 'rails_helper'
-#   Merchant Item Update
-#
-# As a merchant,
-# When I visit the merchant show page of an item
-# I see a link to update the item information.
-# When I click the link
-# Then I am taken to a page to edit this item
-# And I see a form filled in with the existing item attribute information
-# When I update the information in the form and I click ‘submit’
-# Then I am redirected back to the item show page where I see the updated information
-# And I see a flash message stating that the information has been successfully updated.
+
 RSpec.describe 'Merchant Item update' do
   it 'can update show page with a form for merchant items' do
     merchant_1 = Merchant.create!(name: "Ana Maria")
@@ -17,7 +7,8 @@ RSpec.describe 'Merchant Item update' do
     item_1 = merchant_1.items.create!(name: "cheese", description: "european cheese", unit_price: 2400)
     item_2 = merchant_2.items.create!(name: "onion", description: "red onion", unit_price: 3400)
 
-    visit "/merchants/#{merchant_2.id}/items/#{item_2.id}"
+    # visit "/merchants/#{merchant_2.id}/items/#{item_2.id}"
+    visit merchant_item_path(merchant_2, item_2)
 
     expect(page).to have_link("Update #{item_2.name}")
 
