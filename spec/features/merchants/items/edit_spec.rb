@@ -14,8 +14,21 @@ RSpec.describe "Merchant Items Show Page" do
       expect(page).to have_field(:item_description, with: item1.description)
     end
 
-    it "When the form is filled out and submitted, I am redirected " do
+    it "When the form is filled out and submitted, I am redirected to the show page and the updated info is there" do
+      merchant = Merchant.create!(name: "Paul the Merchant")
+      item1 = merchant.items.create!(name: "Paul's Item",
+                                     description: "Paul's very popular item",
+                                     unit_price: "2500")
+      visit "/merchants/#{merchant.id}/items/#{item1.id}/edit"
 
+      within("#update_item") do
+        fill_in 'item_unit_price', with: 10
+        click_on 'Update Item'
+      end
+      expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item1.id}")
+      expect(page).to have_content("Item Successfully Updated")
+      item1.reload
+      expect(item1.unit_price).to eq(10)
     end
   end
 end
