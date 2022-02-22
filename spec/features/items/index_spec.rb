@@ -23,14 +23,13 @@ RSpec.describe 'Item Index page' do
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
     end
     it 'will have a section for enabled items' do 
-        @item_5.disabled!
+        @item_5.enabled!
         visit "/merchants/#{@merchant_1.id}/items"
         within ".enabled" do 
-            expect(page).to have_content(@item_1.name)
-            expect(page).to have_content(@item_2.name)
+            expect(page).to have_content(@item_5.name)
         end
         within ".disabled" do 
-            expect(page).to have_content(@item_5.name)
+            expect(page).to have_content(@item_1.name)
         end
     end
     it 'will have a link to add a new item on the page' do 
