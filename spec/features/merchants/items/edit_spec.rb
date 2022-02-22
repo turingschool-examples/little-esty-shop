@@ -14,7 +14,7 @@ RSpec.describe "Merchant Items Show Page" do
       expect(page).to have_field(:item_description, with: item1.description)
     end
 
-    it "When the form is filled out and submitted, " do
+    it "When the form is filled out and submitted, I am redirected " do
 
     end
   end
