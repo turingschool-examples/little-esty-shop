@@ -9,4 +9,12 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true
   enum status: { enabled: 0, disabled: 1 }
+
+  def self.enabled_items
+    where(status: 0)
+  end
+
+  def self.disabled_items
+    where(status: 1)
+  end
 end
