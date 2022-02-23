@@ -96,14 +96,14 @@ describe "Top 5 Revenue" do
     @customer_7 = Customer.create!(first_name: "Person 7", last_name: "Mcperson 7")
     @customer_8 = Customer.create!(first_name: "Person 8", last_name: "Mcperson 8")
 
-    @invoice_1 = @customer_1.invoices.create!(status: :completed)
-    @invoice_2 = @customer_2.invoices.create!(status: :cancelled)
-    @invoice_3 = @customer_3.invoices.create!(status: :in_progress)
-    @invoice_4 = @customer_4.invoices.create!(status: :completed)
-    @invoice_5 = @customer_5.invoices.create!(status: :cancelled)
-    @invoice_6 = @customer_6.invoices.create!(status: :in_progress)
-    @invoice_7 = @customer_7.invoices.create!(status: :in_progress)
-    @invoice_8 = @customer_8.invoices.create!(status: :in_progress)
+    @invoice_1 = @customer_1.invoices.create!(status: "completed")
+    @invoice_2 = @customer_2.invoices.create!(status: "cancelled")
+    @invoice_3 = @customer_3.invoices.create!(status: "in progress")
+    @invoice_4 = @customer_4.invoices.create!(status: "completed")
+    @invoice_5 = @customer_5.invoices.create!(status: "cancelled")
+    @invoice_6 = @customer_6.invoices.create!(status: "in progress")
+    @invoice_7 = @customer_7.invoices.create!(status: "in progress")
+    @invoice_8 = @customer_8.invoices.create!(status: "in progress")
 
     @invoice_item_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: :shipped)
     @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: :packaged) #*
