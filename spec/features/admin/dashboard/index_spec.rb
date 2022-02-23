@@ -11,16 +11,11 @@ describe 'Admin Dashboard Index Page' do
     expect(page).to have_content('Admin Dashboard')
   end
 
-  xit 'should have links to merchants and invoices index' do
+  it 'should have links to merchants and invoices index' do
+    visit '/admin'
+    click_link "View invoices"
 
-    # uncomment out the first part of this test when we have
-    # the admin invoices index page merged in!
-    # It should fail since we don't have a link in our view -Katy
-
-    # visit '/admin'
-    # click_link "View invoices"
-
-    # expect(current_path).to eq("/admin/invoices")
+    expect(current_path).to eq("/admin/invoices")
 
     visit '/admin'
     click_link "View merchants"
