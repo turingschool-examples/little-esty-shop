@@ -28,7 +28,7 @@ RSpec.describe 'Merchant Invoices Index page' do
     transaction2 = Transaction.create!(credit_card_number: 203942, result: "success", invoice_id: invoice_4.id)
 
     visit "/merchants/#{merchant1.id}/invoices"
-save_and_open_page
+
     expect(page).to have_content(invoice_1.id)
     expect(page).to have_content(invoice_1a.id)
   end
