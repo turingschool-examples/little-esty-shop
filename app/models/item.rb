@@ -7,4 +7,6 @@ class Item < ApplicationRecord
                         :description,
                         :unit_price
 
+  # enum status: { true => 'enabled', 
+  #             false => 'disabled'}
 end
