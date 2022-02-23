@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def ship_ready_items
-    self.invoice_items.where.not(status: :shipped)
+    invoice_items.where.not(status: :shipped)
   end
 
   def customers_list
@@ -20,6 +20,7 @@ class Merchant < ApplicationRecord
              .group("customers.id")
              .order(trans_count: :desc)
              .limit(5)
+
    end
 
    def top_five_items
@@ -29,5 +30,5 @@ class Merchant < ApplicationRecord
               .group("items.id")
               .order(trans_count: :desc)
               .limit(5)
-    end
+   end
 end
