@@ -20,3 +20,5 @@
     <li>Item status: <%= item.status %></li></p>
     <%end%>
   </ul>
+
+  <h3> Total amount from <%="#{@invoice.customer.first_name}"%>'s invoice: $<%= "#{@inv_items.sum(:unit_price)}"%>
