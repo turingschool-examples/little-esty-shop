@@ -21,6 +21,22 @@ class Merchants::ItemsController < ApplicationController
     flash[:alert] = "Item successfully updated!"
   end
 
+  def new
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def create
+    merchant = Merchant.find(params[:id])
+    item = merchant.items.create(item_params)
+
+    if item.save
+      redirect_to "/merchants/#{params[:id]}/items"
+    else
+      redirect_to "/merchants/#{params[:id]}/items/new"
+      flash[:alert] = "Error: #{error_message(item.errors)}"
+    end
+  end
+
     private
       def item_params
         params.permit(:name, :description, :unit_price)
