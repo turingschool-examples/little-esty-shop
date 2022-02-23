@@ -8,4 +8,5 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :unit_price, presence: true
+  enum status: { enabled: 0, disabled: 1 }
 end

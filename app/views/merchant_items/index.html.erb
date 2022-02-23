@@ -1,6 +1,19 @@
 <h1><%= @merchant.name.titleize %></h1>
 <% @merchant.items.each do |item| %>
   <ul>
-    <li><%= link_to "#{item.name.titleize}", "/merchants/#{@merchant.id}/items/#{item.id}" %> </li>
- </ul>
+    <li><%= link_to "#{item.name.titleize}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <div class="<%= "item_#{item.id}" %>">
+        <%= form_with model: [@merchant, item], local: true do |form| %>
+          <%= form.hidden_field :redirect_target, value: 'merchant_item_index' %>
+          <% if item.enabled? %>
+            <%= form.hidden_field :status, value: "disabled" %>
+            <%= form.submit "Disable #{item.name}"%>
+          <% else %>
+            <%= form.hidden_field :status, value: "enabled" %>
+            <%= form.submit "Enable #{item.name}"%>
+          <% end %>
+        <% end %>
+      </div></li>
+      <li> <%=item.status.titleize  %> </li>
+    </ul>
 <% end %>
