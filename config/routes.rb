@@ -5,4 +5,9 @@
       resources :invoices
       resources :items
     end
+    namespace :admin, module: :admin do
+      resources :dashboard
+      resources :merchants
+      resources :items
+    end
 end
