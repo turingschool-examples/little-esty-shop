@@ -20,14 +20,15 @@ class Merchant < ApplicationRecord
              .group("customers.id")
              .order(trans_count: :desc)
              .limit(5)
-  end
 
-  def top_five_items
-    items.joins(:invoice_items, invoices: [:transactions])
-        .where(transactions:{result: 1})
-        .select("items.*, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
-        .group("items.id")
-        .order(totalrevenue: :desc)
-        .limit(5)
-  end
+   end
+
+   def top_five_items
+     items.joins(invoices: :transactions)
+              .where(transactions:{result: 1})
+              .select("items.*, COUNT(transactions.*) AS trans_count")
+              .group("items.id")
+              .order(trans_count: :desc)
+              .limit(5)
+   end
 end
