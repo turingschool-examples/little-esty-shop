@@ -32,7 +32,7 @@ RSpec.describe 'The Merchant Dashboard' do
 
   it "has a section not shipped with names of items that are oredered but not shipped" do
     visit merchant_dashboard_index_path(@katz)
-    within '#not_shipped' do
+    within '#not_shipped-0' do
       expect(page).to have_content(@item1.name)
       expect(page).to_not have_content(@item2.name)
     end
@@ -40,7 +40,7 @@ RSpec.describe 'The Merchant Dashboard' do
 
   it "not shipped has the item ids of the invoices that ordered the items" do
     visit merchant_dashboard_index_path(@katz)
-    within '#not_shipped' do
+    within '#not_shipped-0' do
       expect(page).to have_content(@invoice1.id)
       expect(page).to_not have_content(@invoice2.id)
     end
@@ -48,7 +48,7 @@ RSpec.describe 'The Merchant Dashboard' do
 
   it "in not shipped the item ids are links to merchant_invoices" do
     visit merchant_dashboard_index_path(@katz)
-    within '#not_shipped' do
+    within '#not_shipped-0' do
 
       click_on "#{@invoice1.id}"
       expect(current_path).to eq("/merchants/#{@katz.id}/invoices")
@@ -57,7 +57,7 @@ RSpec.describe 'The Merchant Dashboard' do
 
   it "in not shipped the invoice dates are present" do
     visit merchant_dashboard_index_path(@katz)
-    within '#not_shipped' do
+    within '#not_shipped-0' do
       expect(page).to have_content(@invoice_item1.format_created_at(@invoice_item1.created_at))
     end
   end

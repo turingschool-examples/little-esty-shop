@@ -13,7 +13,7 @@
 </div>
 
 <p>Not Shipped</p>
-<% @not_shipped.each_with_index do |invoice_item, index| %>
+<% @merchant.not_shipped.each_with_index do |invoice_item, index| %>
   <div id="not_shipped-<%= index %>">
     <p>Item: <%= invoice_item.get_name_from_invoice %>
     <%= invoice_item.format_created_at(invoice_item.created_at) %></p>
