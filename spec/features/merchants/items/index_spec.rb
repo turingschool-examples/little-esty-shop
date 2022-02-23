@@ -96,14 +96,14 @@ describe "Top 5 Revenue" do
     @customer_7 = Customer.create!(first_name: "Person 7", last_name: "Mcperson 7")
     @customer_8 = Customer.create!(first_name: "Person 8", last_name: "Mcperson 8")
 
-    @invoice_1 = @customer_1.invoices.create!(status: "completed")
-    @invoice_2 = @customer_2.invoices.create!(status: "cancelled")
-    @invoice_3 = @customer_3.invoices.create!(status: "in progress")
-    @invoice_4 = @customer_4.invoices.create!(status: "completed")
-    @invoice_5 = @customer_5.invoices.create!(status: "cancelled")
-    @invoice_6 = @customer_6.invoices.create!(status: "in progress")
-    @invoice_7 = @customer_7.invoices.create!(status: "in progress")
-    @invoice_8 = @customer_8.invoices.create!(status: "in progress")
+    @invoice_1 = @customer_1.invoices.create!(status: "completed", created_at: DateTime.new(2022, 2, 23))
+    @invoice_2 = @customer_2.invoices.create!(status: "cancelled", created_at: DateTime.new(2022, 2, 23))
+    @invoice_3 = @customer_3.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    @invoice_4 = @customer_4.invoices.create!(status: "completed", created_at: DateTime.new(2022, 2, 23))
+    @invoice_5 = @customer_5.invoices.create!(status: "cancelled", created_at: DateTime.new(2022, 2, 23))
+    @invoice_6 = @customer_6.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    @invoice_7 = @customer_7.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    @invoice_8 = @customer_8.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
 
     @invoice_item_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: "shipped")
     @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: :packaged) #*
@@ -159,14 +159,49 @@ describe "Top 5 Revenue" do
       expect(page).to have_content('100') #item 4
       expect(page).to have_content('145') #item 7 & 8
     end
-    
+
   end
 
   it "has a link to create a new item" do
     visit "/merchants/#{@merchant_1.id}/items"
 
     click_link("Create New Item")
-    
+
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+  end
+
+  it "Shows Items Data" do
+    invoice_9 = @customer_1.invoices.create!(status: "completed", created_at: DateTime.new(2022, 2, 23))
+    invoice_10 = @customer_2.invoices.create!(status: "cancelled", created_at: DateTime.new(2022, 2, 23))
+    invoice_11 = @customer_3.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    invoice_12 = @customer_4.invoices.create!(status: "completed", created_at: DateTime.new(2022, 2, 23))
+    invoice_13 = @customer_5.invoices.create!(status: "cancelled", created_at: DateTime.new(2022, 2, 23))
+    invoice_14 = @customer_6.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    invoice_15 = @customer_7.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    invoice_16 = @customer_8.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+
+    invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_9.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: "shipped")
+    invoice_item_10 = InvoiceItem.create!(invoice_id: invoice_10.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: :packaged) #*
+    invoice_item_11 = InvoiceItem.create!(invoice_id: invoice_11.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending) #*
+    invoice_item_12 = InvoiceItem.create!(invoice_id: invoice_12.id, item_id: @item_4.id, quantity: 4, unit_price: 25, status: "shipped") #*
+    invoice_item_13 = InvoiceItem.create!(invoice_id: invoice_13.id, item_id: @item_5.id, quantity: 55, unit_price: 83, status: :packaged)
+    invoice_item_14 = InvoiceItem.create!(invoice_id: invoice_14.id, item_id: @item_6.id, quantity: 65, unit_price: 92, status: :pending)
+    invoice_item_15 = InvoiceItem.create!(invoice_id: invoice_15.id, item_id: @item_7.id, quantity: 5, unit_price: 29, status: :pending) #*
+    invoice_item_16 = InvoiceItem.create!(invoice_id: invoice_16.id, item_id: @item_8.id, quantity: 5, unit_price: 29, status: :pending) #*
+
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within ".top_items" do
+      expect(page).to have_content("Top selling dates for #{@item_2.name} was ") #item 2
+      expect(page).to have_content("Top selling dates for #{@item_3.name} was ") #item 3
+      expect(page).to have_content("Top selling dates for #{@item_4.name} was ") #item 4
+      expect(page).to have_content("Top selling dates for #{@item_7.name} was ") #item 7
+      expect(page).to have_content("Top selling dates for #{@item_8.name} was ") #item 8
+      expect(@item_8.name).to appear_before(@item_7.name)
+      expect(@item_7.name).to appear_before(@item_4.name)
+      expect(@item_4.name).to appear_before(@item_3.name)
+      expect(@item_3.name).to appear_before(@item_2.name)
+      expect(@item_2.name).to_not appear_before(@item_8.name)
+    end
   end
 end
