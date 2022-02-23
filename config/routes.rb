@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get '/', to: 'welcome#index'
-  get 'admin/invoices/:invoice_id', to: 'admin/invoices#show'
-
+  
   namespace :merchants, module: :merchants do
     get ':id', to: 'dashboard#index'
 

@@ -7,3 +7,5 @@
     <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
     <li>Invoice ID: <%="#{@invoice.id}"%></li>
   </ul>
+
+    <h3> Total amount from <%="#{@invoice.customer.first_name}"%>'s invoice: $<%= "#{@items.sum(:unit_price)}"%>

@@ -4,7 +4,7 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:invoice_id])
+    @invoice = Invoice.find(params[:id])
     @inv_items = @invoice.items
   end
 end
