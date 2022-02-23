@@ -14,14 +14,17 @@ RSpec.describe 'Invoices', type: :feature do
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
   end
 
+
   # I think we are looking at the invoices index on the admin side - Katy
   it "Admin invoice index page" do
+
     visit "/admin/invoices"
 
     expect(page).to have_content("Invoice Number: #{@invoice1.id}")
     expect(page).to have_content("Invoice Number: #{@invoice2.id}")
     expect(page).to have_content("Invoice Number: #{@invoice3.id}")
   end
+
 
   it "has a link to the invoice show page" do
     visit "/admin/invoices"

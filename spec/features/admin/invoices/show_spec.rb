@@ -14,19 +14,22 @@ RSpec.describe 'Invoices', type: :feature do
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
   end
 
-  # look at the invoices index under admin - Katy 
-  xit "each merchant has an invoice index page." do
-    visit "/admin/invoices"
 
-    expect(page).to have_content("Invoice Number: #{@invoice1.id}")
-    expect(page).to have_content("Invoice Number: #{@invoice2.id}")
-    expect(page).to have_content("Invoice Number: #{@invoice3.id}")
+  it "has a link to the invoice page" do
+    visit "/admin/invoices/#{@invoice1.id}"
+
+    expect(page).to have_content("Customer name: Marky Mark")
+    expect(page).to have_content("Customer ID: #{@customer1.id}")
+    expect(page).to have_content("Invoice Status: #{@invoice1.status}")
+    expect(page).to have_content("Invoice Created: #{@invoice1.created_at.strftime("%A, %B, %d, %Y")}")
+    expect(page).to have_content("Invoice ID: #{@invoice1.id}")
   end
 
-  xit "has a link to the invoice page" do
-    visit "/admin/invoices"
+  it "tests for sad path attributes" do #unable to sad path status and created_at as they could creat a failure.
+    visit "/admin/invoices/#{@invoice1.id}"
 
-    click_link("Invoice Number: #{@invoice1.id}")
-    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+    expect(page).to_not have_content("Customer name: Sparky Spark")
+    expect(page).to_not have_content("Customer ID: #{@customer2.id}")
+    expect(page).to_not have_content("Invoice ID: #{@invoice2.id}")
   end
 end
