@@ -1,12 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe 'Creating a new merchant', type: :feature do
-  
-  it 'creates a new merchant' do
+RSpec.describe 'Creating a new merchant:', type: :feature do
+
+  it 'happy path' do
     visit '/admin/merchants'
 
-    expect(page).to have_link("Add New Merchant")
-    click_link("Add New Merchant")
+    within("#new-link-top") do
+      expect(page).to have_link("Add New Merchant")
+      click_link("Add New Merchant")
+    end
 
     expect(current_path).to eq('/admin/merchants/new')
 
@@ -15,9 +17,23 @@ RSpec.describe 'Creating a new merchant', type: :feature do
     click_button("Submit")
     expect(current_path).to eq('/admin/merchants')
 
-    # within("#Merchant-#{Merchant.last.id}") do
+    within("#merchant-#{Merchant.last.id}") do
       expect(page).to have_content("Bliffert's Bootleg Beanie Babies")
-      # expect(page).to have_content("Status: Disabled")
-    # end
+      expect(page).to have_content("status: disabled")
+    end
+  end
+
+  it 'does not create merchant if Name field is empty' do
+    visit '/admin/merchants'
+
+    within("#new-link-bottom") do
+      expect(page).to have_link("Add New Merchant")
+      click_link("Add New Merchant")
+    end
+
+    click_button("Submit")
+    expect(current_path).to eq('/admin/merchants/new')
+
+    expect(page).to have_content("Error: Name can't be blank")
   end
 end
