@@ -19,15 +19,15 @@ RSpec.describe Merchant, type: :model do
     expect(merchant).to be_valid
   end 
 
-  it 'lists items ready to ship' do
-    merchant = create(:merchant)
-    item1 = create(:item)
-    item2 = create(:item)
-    item3 = create(:item)
-    item4 = create(:item)
-    invoice_item1 = (:invoice_item, result: 0, item_id: item1.id)
-    invoice_item2 = (:invoice_item, result: 2, item_id: item2.id)
+  # it 'lists items ready to ship' do
+  #   merchant = create(:merchant)
+  #   item1 = create(:item)
+  #   item2 = create(:item)
+  #   item3 = create(:item)
+  #   item4 = create(:item)
+  #   invoice_item1 = (:invoice_item, result: 0, item_id: item1.id)
+  #   invoice_item2 = (:invoice_item, result: 2, item_id: item2.id)
 
-    expect(merchant.ordered_items_to_ship).to eq([item1, item1, item3, item8, item5])
-  end
+  #   expect(merchant.ordered_items_to_ship).to eq([item1, item1, item3, item8, item5])
+  # end
 end
