@@ -8,4 +8,11 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :unit_price, presence: true
+  validates :merchant_id, presence: true
+
+  def invoice_items_by_id(invoice_id)
+    invoice_items
+      .select('invoice_items.*')
+      .where('invoice_id = ?', invoice_id)
+  end
 end
