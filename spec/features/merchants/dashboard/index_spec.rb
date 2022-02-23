@@ -4,7 +4,7 @@ describe "Merchant Dashboard", type: :feature do
   before do
     @merchant = create(:merchant)
 
-    visit "/merchants/#{@merchant.id}/dashboard"
+    visit "/merchants/#{@merchant.id}"
   end
 
   it 'displays the name of the merchant on the page' do

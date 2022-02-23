@@ -14,6 +14,7 @@ RSpec.describe 'Invoices', type: :feature do
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
   end
 
+
   it "has a link to the invoice page" do
     visit "/admin/invoices/#{@invoice1.id}"
 
