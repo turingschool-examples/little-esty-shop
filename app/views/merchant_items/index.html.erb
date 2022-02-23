@@ -31,7 +31,7 @@
     <h2>Top 5 Items by Revenue</h2>
     <% @merchant.top_five_items.each do |item| %>
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-      <%= item.revenue %>
+      <%= item.totalrevenue %>
     <% end %>
   </ol>
 </div>
