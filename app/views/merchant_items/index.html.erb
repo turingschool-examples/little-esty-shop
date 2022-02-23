@@ -2,7 +2,6 @@
 
 <% @merchant.items.each do |item| %>
 <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>"><h2><%= item.name %></h2></a>
-<h2>item status: </h2>
-<%= form_with url: "/merchants/#{@merchant.id}/items", method: 'POST', local: true do |form| %>
-  <%= form.submit "#{status} Item"%>
+<h2>enabled: <%= item.status.to_s %></h2>
+<%= button_to "Switch Status", "/merchants/#{@merchant.id}/items/", method: :change_status, params: {item_id: item.id} %>
 <% end %>
