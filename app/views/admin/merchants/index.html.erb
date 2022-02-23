@@ -1,8 +1,12 @@
 <h1>All Merchants</h1>
-<a href="/admin/merchants/new"> Add New Merchant </a>
+
+<div id="new-link-top"><%= link_to "Add New Merchant", "/admin/merchants/new" %></div>
+
 <br>
 <% @merchants.each do |merchant| %>
 <li><%= merchant.name %> - status: <%= merchant.status %></li>
 <% end %>
 <br>
-<a href="/admin/merchants/new"> Add New Merchant </a>
+
+<div id="new-link-bottom"><%= link_to "Add New Merchant", "/admin/merchants/new" %></div>
+
