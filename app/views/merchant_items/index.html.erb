@@ -5,10 +5,10 @@
 
       <ul>
         <li>
-          <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
+          <a href="/merchants/<%=@merchant.id%>/merchant_items/<%=item.id%>">
             <%= item.name%>
           </a>
-          <%= button_to("Disable", "/merchants/#{item.merchant.id}/items/#{item.id}/", method: :patch, name: "status",value: "disable") %>
+          <%= button_to("Disable", "/merchants/#{item.merchant.id}/merchant_items/#{item.id}/", method: :patch, name: "status",value: "disable") %>
         </li>
       </ul>
 <% end %>
@@ -20,10 +20,10 @@
 
       <ul>
         <li>
-          <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
+          <a href="/merchants/<%=@merchant.id%>/merchant_items/<%=item.id%>">
             <%= item.name%>
           </a>
-          <%=button_to("Enable", "/merchants/#{item.merchant.id}/items/#{item.id}/", method: :patch, name: "status",value: "enable")%>
+          <%=button_to("Enable", "/merchants/#{item.merchant.id}/merchant_items/#{item.id}/", method: :patch, name: "status",value: "enable")%>
         </li>
       </ul>
 <% end %>
@@ -35,7 +35,7 @@
   <div id= item-<%=item.id%>> 
       <ul>
         <li>
-          <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
+          <a href="/merchants/<%=@merchant.id%>/merchant_items/<%=item.id%>">
             <%= item.name%> </a> Total Revenue: <%= number_to_currency(item.revenue)%>
           
         </li>
@@ -45,6 +45,6 @@
 <% end %>
 </div>
 <div class = create>
-<%= link_to("Create Item", "/merchants/#{@merchant.id}/items/new" ) %>
+<%= link_to("Create Item", "/merchants/#{@merchant.id}/merchant_items/new" ) %>
 </div> 
 

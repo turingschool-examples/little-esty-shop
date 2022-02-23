@@ -10,4 +10,4 @@
     <li> Current Selling Price: <%= number_to_currency(@item.unit_price)%>
     </li>
 </ul>
-<%= link_to "Edit item", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit"%>
+<%= link_to "Edit item", "/merchants/#{@item.merchant.id}/merchant_items/#{@item.id}/edit"%>

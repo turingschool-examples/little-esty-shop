@@ -11,28 +11,28 @@ class MerchantItemsController < ApplicationController
     def create 
         merchant = Merchant.find(params[:merchant_id])
         new_item = merchant.items.create(item_params)
-        redirect_to "/merchants/#{merchant.id}/items"
+        redirect_to "/merchants/#{merchant.id}/merchant_items"
     end
 
     def show 
-       @item = Item.find(params[:item_id])
+       @item = Item.find(params[:id])
     end
 
     def edit 
-       @item = Item.find(params[:item_id])
+       @item = Item.find(params[:id])
     end
 
     def update 
-        @item = Item.find(params[:item_id])
+        @item = Item.find(params[:id])
         if params[:status] == 'Disable'
             @item.disabled!
-            redirect_to "/merchants/#{@item.merchant.id}/items/", notice: "Status changed"
+            redirect_to "/merchants/#{@item.merchant.id}/merchant_items/", notice: "Status changed"
         elsif params[:status]== 'Enable' 
             @item.enabled!
-            redirect_to "/merchants/#{@item.merchant.id}/items/", notice: "Status changed"
+            redirect_to "/merchants/#{@item.merchant.id}/merchant_items/", notice: "Status changed"
         else
         @item.update(item_params)
-        redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}", notice: "Successfully updated"
+        redirect_to "/merchants/#{@item.merchant.id}/merchant_items/#{@item.id}", notice: "Successfully updated"
         end
     end
     private 
