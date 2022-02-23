@@ -41,8 +41,8 @@ RSpec.describe Invoice, type: :model do
     end 
 
     describe '#format_created_at' do
-      it 'returns the time the invoice was created at in "Weekday, Month Day, Year format' do
-        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq("Wednesday, February 23, 2022")
+      it 'returns the time the invoice was created at in "Weekday, Month-Day, Year format' do
+        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq(Date.today.strftime("%A, %B %d, %Y"))
        end 
     end 
 
