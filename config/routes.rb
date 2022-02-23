@@ -4,5 +4,4 @@
       resources :invoices
       resources :items
     end
-
 end
