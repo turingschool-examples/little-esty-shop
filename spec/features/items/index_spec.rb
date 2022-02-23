@@ -85,5 +85,13 @@ RSpec.describe 'Item Index page' do
                 expect(page).to have_content("Total Revenue: $270.00")
             end
         end
+        it 'will show the best day' do 
+            visit "/merchants/#{@merchant_1.id}/items"
+            save_and_open_page
+            within "#item-#{@item_1.id}" do 
+                expect(page).to have_content("Total Revenue: $270.00")
+            end
+
+        end
     end
 end

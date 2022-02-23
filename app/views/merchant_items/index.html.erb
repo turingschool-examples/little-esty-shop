@@ -35,6 +35,7 @@
   <div id= item-<%=item.id%>> 
       <ul>
         <li>
+        <%binding.pry%>
           <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
             <%= item.name%> </a> Total Revenue: <%= number_to_currency(item.revenue)%>
           
