@@ -3,7 +3,7 @@
 <%= form_with url: '/admin/merchants', method: :post, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  
+
   <%= f.hidden_field :status, :value => "disabled" %>
 
   <%= f.submit "Submit" %>
