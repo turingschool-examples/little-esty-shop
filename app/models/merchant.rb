@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   def ship_ready_items
     self.invoice_items.where.not(status: :shipped)
   end
-  
+
   def customers_list
     customers.distinct
   end
@@ -21,4 +21,13 @@ class Merchant < ApplicationRecord
              .order(trans_count: :desc)
              .limit(5)
    end
+
+   def top_five_items
+     items.joins(invoices: :transactions)
+              .where(transactions:{result: 1})
+              .select("items.*, COUNT(transactions.*) AS trans_count")
+              .group("items.id")
+              .order(trans_count: :desc)
+              .limit(5)
+    end
 end
