@@ -23,4 +23,13 @@ RSpec.describe 'Merchant item creation', type: :feature do
     expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
     expect(page).to have_content("Hairbrush")
   end
+
+  it 'invalid data entry' do
+    visit "/merchants/#{@merchant1.id}/items/new"
+
+    fill_in "Description", with: "this will not work :)"
+    click_button "Save"
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+    expect(page).to have_content("Error: Name can't be blank, Unit price can't be blank")
+  end
 end
