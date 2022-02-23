@@ -38,7 +38,6 @@ RSpec.describe 'Invoices', type: :feature do
 
   it " displays the items on the invoice." do
     visit "/admin/invoices/#{@invoice1.id}"
-    save_and_open_page
     expect(page).to have_content("Item name: #{@item1.name}")
     expect(page).to have_content("Item name: #{@item2.name}")
     expect(page).to have_content("Item status: #{@invoice_item1.status}")
@@ -51,7 +50,7 @@ RSpec.describe 'Invoices', type: :feature do
 
   it " tests sad path." do
     visit "/admin/invoices/#{@invoice1.id}"
-    save_and_open_page
+    
     expect(page).to_not have_content("Item name: #{@item3.name}")
 
     expect(page).to_not have_content("Item status: #{@invoice_item3.status}")
