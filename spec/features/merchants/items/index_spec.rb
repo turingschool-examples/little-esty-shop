@@ -15,4 +15,60 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to_not have_content('Rodrigo Rippers')
     end
   end
+
+  describe '#User story #32' do
+    it 'can enable an item' do
+      merchant1 = Merchant.create!(name: 'Primate Privleges')
+      item1 = merchant1.items.create!(name: 'Monkey Paw', description: 'A furry mystery', unit_price: 3)
+      item2 = merchant1.items.create!(name: 'Gorilla Grip Glue', description: 'A sticky mystery', unit_price: 7)
+
+      visit "/merchants/#{merchant1.id}/items"
+
+      within("div.item_#{item1.id}") do
+        expect(page).to have_button("Disable #{item1.name}")
+        click_button("Disable #{item1.name}")
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+        expect(page).to have_button("Enable #{item1.name}")
+        item1.reload
+        expect(item1.status).to eq('disabled')
+      end
+    end
+
+    it 'can disable an item' do
+      merchant1 = Merchant.create!(name: 'Primate Privleges')
+      item1 = merchant1.items.create!(name: 'Monkey Paw', description: 'A furry mystery', unit_price: 3)
+      item2 = merchant1.items.create!(name: 'Gorilla Grip Glue', description: 'A sticky mystery', unit_price: 7)
+
+      visit "/merchants/#{merchant1.id}/items"
+
+      within("div.item_#{item1.id}") do
+        click_button("Disable #{item1.name}")
+        expect(page).to have_button("Enable #{item1.name}")
+        click_button("Enable #{item1.name}")
+
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+
+        expect(page).to have_button("Disable #{item1.name}")
+        item1.reload
+        expect(item1.status).to eq('enabled')
+      end
+    end
+  end
+
+  describe '#User story #31' do
+    it 'seperates enabled and disabled items' do
+      merchant1 = Merchant.create!(name: 'Primate Privleges')
+      item1 = merchant1.items.create!(name: 'Monkey Paw', description: 'A furry mystery', unit_price: 3)
+      item2 = merchant1.items.create!(name: 'Gorilla Grip Glue', description: 'A sticky mystery', unit_price: 7,
+                                      status: 1)
+
+      visit "/merchants/#{merchant1.id}/items"
+      expect(page).to have_content('Enabled Items')
+      expect(page).to have_content('Disabled Items')
+      expect('Disabled Items').to appear_before(item2.name)
+      expect('Enabled Items').to appear_before(item1.name)
+    end
+  end
 end
