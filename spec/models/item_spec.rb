@@ -12,6 +12,7 @@ RSpec.describe Item do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:unit_price) }
     it { should validate_presence_of(:merchant_id) }
+    it { should define_enum_for(:status).with({ enabled: 0, disabled: 1 }) }
   end
 
   describe '#invoice_items_by_id(' do
