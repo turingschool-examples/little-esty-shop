@@ -80,13 +80,13 @@ RSpec.describe Merchant, type: :model do
 
     describe '.not_shipped' do
       it "lists invoice items that have been ordered but are not shipped from least to most recent" do
-        expect(@merchant.not_shipped).to eq([@invoice_item2, @invoice_item1])
+        expect(@merchant.not_shipped).to eq([@invoice_item1, @invoice_item2])
       end
     end
 
-    describe '.top_five' do
+    describe '.top_five_customers' do
       it "finds the top five customers by successful transactions" do
-        expect(@merchant.top_five).to eq([@customer1, @customer2, @customer3, @customer6, @customer5])
+        expect(@merchant.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer5, @customer6])
       end
     end
 

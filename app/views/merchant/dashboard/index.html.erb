@@ -6,17 +6,17 @@
 
 <div id="stats">
   <p>Top 5 customers</p>
-  <% @merchant.top_five each do |customer| %>
-    <p>Name: <%= customer.name %> </p>
-    <p>Number of orders: <%=  %></p>
+  <% @merchant.top_five_customers.each do |customer| %>
+    <p>Name: <%= customer.first_name %> <%= customer.last_name %> </p>
+    <p>Number of orders: <%= customer.transaction_count %></p>
   <% end %>
 </div>
 
-<div id="not_shipped">
-  <p>Not Shipped</p>
-  <% @not_shipped.each do |item_invoice| %>
-    <p>Item: <%= item_invoice.get_name_from_invoice %>
-    <%= item_invoice.format_created_at(item_invoice.created_at) %></p>
-    <p>Invoice ID: <%= link_to "#{item_invoice.invoice_id}", merchant_invoices_path(@merchant.id) %></p>
-  <% end %>
-</div>
+<p>Not Shipped</p>
+<% @not_shipped.each_with_index do |invoice_item, index| %>
+  <div id="not_shipped-<%= index %>">
+    <p>Item: <%= invoice_item.get_name_from_invoice %>
+    <%= invoice_item.format_created_at(invoice_item.created_at) %></p>
+    <p>Invoice ID: <%= link_to "#{invoice_item.invoice_id}", merchant_invoices_path(@merchant.id) %></p>
+  </div>
+<% end %>

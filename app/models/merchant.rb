@@ -12,11 +12,15 @@ class Merchant < ApplicationRecord
   end
 
   def not_shipped
-    invoice_items.where("status != 2").order("created_at desc")
+    invoice_items.where("status != 2")
   end
 
-  def top_five
-    binding.pry
-    customers.order(Customer.transactions.where(result: 0).count).limit(5)
+  def top_five_customers
+    customers.joins(invoices: :transactions)
+              .where("transactions.result =?", 0)
+              .select("customers.*, count('transactions') AS transaction_count")
+              .group("customers.id")
+              .order("transaction_count DESC")
+              .limit(5)
   end
 end
