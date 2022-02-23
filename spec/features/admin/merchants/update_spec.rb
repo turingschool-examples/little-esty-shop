@@ -64,6 +64,7 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
     expect(page).to have_content("Merchant successfully updated!")
   end
 
+  # Mark says help me pls 
   xit 'sad path: illegal value for status' do
 
     merchant = create(:merchant, status: "disabled")

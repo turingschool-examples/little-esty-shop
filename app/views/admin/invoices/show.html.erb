@@ -1,4 +1,5 @@
 
+
   <h1> Invoice info </h1>
 
   <ul>
@@ -8,6 +9,7 @@
     <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
     <li>Invoice ID: <%="#{@invoice.id}"%></li>
   </ul>
+
   <h3> Material items for a material girl </h3>
   <ul>
     <%@invoice.invoice_items.each do |item| %>
