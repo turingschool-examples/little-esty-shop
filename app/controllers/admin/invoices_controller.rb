@@ -6,7 +6,5 @@ class Admin::InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:invoice_id])
     @inv_items = @invoice.items
-    #binding.pry
   end
-
 end
