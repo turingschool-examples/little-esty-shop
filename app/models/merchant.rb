@@ -16,4 +16,14 @@ class Merchant < ApplicationRecord
   def self.enabled
     where(status: 1)
   end
+
+  # commented out by LT --- this is not working - we may need more of the project written? I'll come back to this. 
+  # def self.top_five_merchants
+  #   joins(invoices: :transactions)
+  #   .where('transactions.result = ?', 'success')
+  #   .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+  #   .group(:id)
+  #   .order(total_revenue: :desc)
+  #   .limit(5)
+  # end
 end
