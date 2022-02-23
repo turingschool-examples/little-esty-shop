@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
 
   namespace :admin do
-    resources :merchants
+    resources :merchants, :invoices
   end
 
   resources :admin, only: [:index]
