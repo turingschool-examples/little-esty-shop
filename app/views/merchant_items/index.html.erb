@@ -1,4 +1,5 @@
 <h1>Merchant Items:</h1>
+<p><%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %></p>
 <hr>
 
 <div class="enabled_items">
@@ -21,6 +22,16 @@
     <p><b>Name:</b> <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> </p>
     <%= button_to "Enable #{item.name}", "/items/#{item.id}?status=enable", method: :patch %>
     <% end %>
+    <% end %>
+  </ol>
+</div>
+
+<div class="top_items">
+  <ol>
+    <h2>Top 5 Items by Revenue</h2>
+    <% @merchant.top_five_items.each do |item| %>
+      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <%= item.revenue %>
     <% end %>
   </ol>
 </div>
