@@ -9,8 +9,9 @@ RSpec.describe Invoice, type: :model do
 
   describe 'instance methods' do
     it 'can reformat the created_at timestamp' do
-      invoice_1 = create(:invoice)
-      expect(invoice_1.created_at_date).to eq("Monday, February 21, 2022")
+      invoice_1 = create(:invoice, created_at: Time.parse("2022-02-22"))
+
+      expect(invoice_1.created_at_date).to eq("Tuesday, February 22, 2022")
     end
 
     it 'can calculate the total revenue of each merchant' do
@@ -18,13 +19,13 @@ RSpec.describe Invoice, type: :model do
       customer_1 = create(:customer)
       item_1 = create(:item, merchant_id: merchant_1.id)
       invoice_1 = create(:invoice, customer_id: customer_1.id)
-      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 3)
 
       item_2 = create(:item, merchant_id: merchant_1.id)
-      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id)
+      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, unit_price: 5)
 
       item_3 = create(:item, merchant_id: merchant_1.id)
-      invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id)
+      invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id, unit_price: 4)
 
       expect(invoice_1.total_revenue).to eq(12)
     end
