@@ -32,7 +32,7 @@ RSpec.describe 'Create new item' do
     banana = Item.last
 
     expect(current_path).to eq(merchant_items_path(@merchant_1))
-save_and_open_page
+
     within("#disabled_items-1") do
 
     expect(page).to have_content(banana.name)
