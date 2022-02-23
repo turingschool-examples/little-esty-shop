@@ -7,9 +7,9 @@ RSpec.describe InvoiceItem, type: :model do
     it {should have_many(:merchants).through(:item)}
   end
 
-  describe 'validations' do
-    it { should define_enum_for(:status).with_values([:Pending, :Packaged, :Shipped]) }
-  end
+  describe 'validations' do 
+    it { should define_enum_for(:status).with_values([:pending, :packaged, :shipped]) }
+  end 
 
   before :each do
     @merchant = Merchant.create!(name: 'BuyMyThings')

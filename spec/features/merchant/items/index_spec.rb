@@ -1,19 +1,5 @@
 require 'rails_helper'
 
-# As a merchant,
-# When I visit my merchant items index page ("merchants/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
-#
-# Merchant Item Disable/Enable
-#
-# As a merchant
-# When I visit my items index page
-# Next to each item name I see a button to disable or enable that item.
-# When I click this button
-# Then I am redirected back to the items index
-# And I see that the items item_status has changed
-
 RSpec.describe 'Merchants Index' do
 
   before :each do
@@ -31,22 +17,19 @@ RSpec.describe 'Merchants Index' do
 
   end
 
-  it 'can see a list of the names of all of the items' do
-    visit "/merchants/#{@merchant_1.id}/items"
-
-    within("#item-0") do
-
-    expect(page).to have_content(@item_1.name)
-    expect(page).to have_content(@item_1.description)
-    expect(page).to have_content(@item_1.display_price)
-    expect(page).to_not have_content(@item_2.name)
-    end
-  end
-
-  it 'can see an enable/ disable button next to each item' do
+  describe "Merchant Items show page"
+  it 'has an index with  2 sections- 1 Enabled, 1 Disabled' do
     visit "/merchants/#{@merchant_2.id}/items"
 
-    within("#item-0") do
+    within("#enabled_items-0") do
+      expect(page).to have_content(@item_4.name)
+      expect(page).to have_content(@item_4.description)
+      expect(page).to have_content(@item_4.display_price)
+      expect(page).to have_button("Disable #{@item_4.name}")
+
+    end
+
+      within("#disabled_items-0") do
 
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@item_3.description)
@@ -55,15 +38,19 @@ RSpec.describe 'Merchants Index' do
 
     end
 
-    within("#item-1") do
-      expect(page).to have_content(@item_4.name)
-      expect(page).to have_content(@item_4.description)
-      expect(page).to have_content(@item_4.display_price)
-      expect(page).to have_button("Disable #{@item_4.name}")
+      within("#disabled_items-1") do
+      expect(page).to have_content(@item_5.name)
+      expect(page).to have_content(@item_5.description)
+      expect(page).to have_content(@item_5.display_price)
+      expect(page).to have_button("Enable #{@item_5.name}")
 
     end
+  end 
 
-    within("#item-2") do
+    it "You can click on the button to cgange an item's status between enabled/ disabled" do
+      visit "/merchants/#{@merchant_2.id}/items"
+
+      within("#disabled_items-1") do
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_5.description)
       expect(page).to have_content(@item_5.display_price)
@@ -71,15 +58,14 @@ RSpec.describe 'Merchants Index' do
 
     end
 
-    click_button "Enable #{@item_5.name}"
+      click_button "Enable #{@item_5.name}"
 
-      within("#item-2") do
+      within("#enabled_items-1") do
 
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_5.description)
       expect(page).to have_content(@item_5.display_price)
       expect(page).to have_button("Disable #{@item_5.name}")
     end
-
   end
 end

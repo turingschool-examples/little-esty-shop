@@ -1,5 +1,5 @@
 class InvoiceItem < ApplicationRecord
-  enum status: { Pending: 0, Packaged: 1, Shipped: 2 }
+  enum status: { pending: 0, packaged: 1, shipped: 2 }
   belongs_to :invoice
   belongs_to :item
   has_many :merchants, through: :item
@@ -7,5 +7,4 @@ class InvoiceItem < ApplicationRecord
   def get_name_from_invoice
     item.name
   end
-
 end

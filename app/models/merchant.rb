@@ -11,6 +11,13 @@ class Merchant < ApplicationRecord
     (invoices.order(:id)).uniq
   end
 
+  def enabled_status
+    self.items.where("item_status =?", 1)
+  end
+
+  def disabled_status
+    self.items.where("item_status =?", 2)
+
   def not_shipped
     invoice_items.where("status != 2")
   end
