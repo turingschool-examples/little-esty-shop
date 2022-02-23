@@ -4,9 +4,8 @@
 
 <br>
 <% @merchants.each do |merchant| %>
-<li><%= merchant.name %> - status: <%= merchant.status %></li>
+<li id="merchant-<%= merchant.id %>"><%= merchant.name %> - status: <%= merchant.status %></li>
 <% end %>
 <br>
 
 <div id="new-link-bottom"><%= link_to "Add New Merchant", "/admin/merchants/new" %></div>
-
