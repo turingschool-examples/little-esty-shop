@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def ship_ready_items
-    invoice_items.where.not(status: :shipped)
+    invoice_items.where.not(status: "shipped")
   end
 
   def customers_list
