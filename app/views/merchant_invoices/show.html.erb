@@ -11,5 +11,14 @@
     <%= "Unit price: #{invoice_item.item.unit_price}" %>
     <%= "Status: #{invoice_item.status}" %>
   </li>
+  <%= form_with url: "/merchant/#{invoice_item.item.merchant.id}/invoices/#{@invoice.id}?invoice_item_id=#{invoice_item.id}", method: :patch, local: true do |form| %>
+    <%= form.radio_button :status, "pending" %>
+    <%= form.label :status_pending, "pending" %>
+    <%= form.radio_button :status, "packaged" %>
+    <%= form.label :status_packaged, "packaged" %>
+    <%= form.radio_button :status, "shipped" %>
+    <%= form.label :status_shipped, "shipped" %>
+    <%= form.submit "Update Item Status" %>
+  <% end %>
 <% end %>
 <h2> <%= "Total Revenue: #{@invoice.total_revenue}" %> </h2>
