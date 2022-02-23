@@ -23,15 +23,16 @@ RSpec.describe "Merchant Invoice Show Page" do
   end
 
 
-
   it "shows an invoice from a merchant" do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
 
     expect(page).to have_content(@invoice.id)
     expect(page).to have_content(@invoice.status)
-    expect(page).to have_content(@invoice.created_at)
+    expect(page).to have_content(@invoice.created_at.strftime("%A, %B %-d, %Y"))
     expect(page).to have_content(@customer.first_name)
     expect(page).to have_content(@customer.last_name)
-    save_and_open_page
+
+    expect(page).to_not have_content(@customer_2.first_name)
+    expect(page).to_not have_content(@customer_2.last_name)
   end
 end
