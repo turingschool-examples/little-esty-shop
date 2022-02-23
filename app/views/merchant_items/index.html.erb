@@ -35,11 +35,11 @@
   <div id= item-<%=item.id%>> 
       <ul>
         <li>
-        <%binding.pry%>
           <a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>">
             <%= item.name%> </a> Total Revenue: <%= number_to_currency(item.revenue)%>
           
         </li>
+        <li>Top Selling Date for <%= item.name %> was <%= date_formatter(item.best_day.first.created_at)%> with <%= item.best_day.first.count %> sales.</li>
       </ul>
   </div>
 <% end %>
