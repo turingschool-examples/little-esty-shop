@@ -93,4 +93,19 @@ RSpec.describe "Merchant Invoices Show Page" do
 
     expect(page).to have_content("Total Revenue: 42")
   end
+
+  it "can change an item's status" do
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Status: shipped")
+    expect(page).to_not have_content("Status: packaged")
+
+    choose('packaged')
+    click_on('Update Item Status')
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+
+    expect(page).to_not have_content("Status: shipped")
+    expect(page).to have_content("Status: packaged")
+  end
 end
