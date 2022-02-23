@@ -9,3 +9,11 @@ Rails.application.routes.draw do
     patch "/merchants/:id/items/:item_id", to: 'merchant_items#update'
 
 end
+
+# Rails.application.routes.draw do
+#     resources :merchant do 
+#         resources :dashboard, only: [:show] do
+#         resources :items 
+#         end
+#     end
+# end
