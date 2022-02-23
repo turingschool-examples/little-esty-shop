@@ -97,7 +97,6 @@ RSpec.describe 'the merchant dashboard' do
   describe 'top customers section' do
     it 'is able to list top 5 customers for this merchant' do
       visit "/merchant/#{@merchant_1.id}/dashboard"
-      save_and_open_page
       within ".top_customers" do
         expect(page).to have_content("#{@customer_2.name}, 9")
         expect(page).to have_content("#{@customer_3.name}, 9")
