@@ -7,4 +7,8 @@ RSpec.describe Transaction, type: :model do
     it {should have_many(:items).through(:invoice_items)}
     it {should have_many(:customers).through(:invoice)}
   end
+
+  describe 'validations' do
+    it {should define_enum_for(:result).with_values([:success, :failed])}
+  end
 end
