@@ -46,14 +46,24 @@ RSpec.describe 'Item Index page' do
             @item_4 = create(:item, merchant_id: @merchant_1.id, name: 'Yoyo')
             @item_5 = create(:item, merchant_id: @merchant_1.id, name: 'Coloring Book')
             @item_6 = create(:item, merchant_id: @merchant_1.id, name: 'Gift Card')
+            # add invoice date for best day 
+            @invoice_1 = create(:invoice, created_at: '2012-03-21 14:54:09 UTC')
+            @invoice_2 = create(:invoice, created_at: '2012-03-21 14:54:09 UTC')
+            @invoice_3 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC')
+            @invoice_4 = create(:invoice, created_at: '2012-03-24 14:54:09 UTC')
+            @invoice_5 = create(:invoice, created_at: '2012-03-25 14:54:09 UTC')
+            @invoice_6 = create(:invoice, created_at: '2012-03-24 14:54:09 UTC')
+            @invoice_7 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC')
             # make revenue unique
-            @invoice_item_1 = create(:invoice_item, unit_price: 30, quantity: 5, item: @item_1)
-            @invoice_item_2 = create(:invoice_item, unit_price: 30, quantity: 4, item: @item_1)
-            @invoice_item_3 = create(:invoice_item, unit_price: 50, quantity: 4, item: @item_2)
-            @invoice_item_4 = create(:invoice_item, unit_price: 40, quantity: 4, item: @item_3)
-            @invoice_item_5 = create(:invoice_item, unit_price: 20, quantity: 4, item: @item_4)
-            @invoice_item_6 = create(:invoice_item, unit_price: 90, quantity: 1, item: @item_5)
-            @invoice_item_7 = create(:invoice_item, unit_price: 240, quantity: 1, item: @item_6)
+            @invoice_item_1 = create(:invoice_item, unit_price: 30, quantity: 5, item: @item_1, invoice_id: @invoice_1.id)
+            @invoice_item_2 = create(:invoice_item, unit_price: 30, quantity: 4, item: @item_1, invoice_id: @invoice_2.id)
+            @invoice_item_3 = create(:invoice_item, unit_price: 50, quantity: 4, item: @item_2, invoice_id: @invoice_3.id)
+            @invoice_item_4 = create(:invoice_item, unit_price: 40, quantity: 4, item: @item_3, invoice_id: @invoice_4.id)
+            @invoice_item_5 = create(:invoice_item, unit_price: 20, quantity: 4, item: @item_4, invoice_id: @invoice_5.id)
+            @invoice_item_6 = create(:invoice_item, unit_price: 90, quantity: 1, item: @item_5, invoice_id: @invoice_6.id)
+            @invoice_item_7 = create(:invoice_item, unit_price: 240, quantity: 1, item: @item_6, invoice_id: @invoice_7.id)
+
+
             # transactions are successful linked to invoice item
             @transaction_1 = create(:transaction, invoice_id: @invoice_item_1.invoice_id)
             @transaction_2 = create(:transaction, invoice_id: @invoice_item_2.invoice_id)
@@ -83,6 +93,18 @@ RSpec.describe 'Item Index page' do
             visit "/merchants/#{@merchant_1.id}/items"
             within "#item-#{@item_1.id}" do 
                 expect(page).to have_content("Total Revenue: $270.00")
+            end
+        end
+        it 'will show the best day' do 
+            visit "/merchants/#{@merchant_1.id}/items"
+            within "#item-#{@item_1.id}" do 
+                expect(page).to have_content(date_formatter(@item_1.best_day.first.created_at))
+            end
+        end 
+        it 'will show the count of transactions on a given day' do 
+            visit "/merchants/#{@merchant_1.id}/items"
+            within "#item-#{@item_1.id}" do 
+                expect(page).to have_content(@item_1.best_day.first.count)
             end
         end
     end
