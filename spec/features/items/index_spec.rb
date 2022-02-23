@@ -11,20 +11,20 @@ RSpec.describe 'Item Index page' do
         @item_4 = create(:item, merchant_id: @merchant_2.id)
     end
     it 'will show a list of items that a merchant has' do 
-        visit "/merchants/#{@merchant_1.id}/items"
+        visit "/merchants/#{@merchant_1.id}/merchant_items"
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_2.name)
         expect(page).to_not have_content(@item_3.name)
         expect(page).to_not have_content(@item_4.name)
     end
     it 'will have links on the name that will direct user to show page of item' do 
-        visit "/merchants/#{@merchant_1.id}/items"
+        visit "/merchants/#{@merchant_1.id}/merchant_items"
         click_on"#{@item_1.name}"
-        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/merchant_items/#{@item_1.id}")
     end
     it 'will have a section for enabled items' do 
         @item_5.enabled!
-        visit "/merchants/#{@merchant_1.id}/items"
+        visit "/merchants/#{@merchant_1.id}/merchant_items"
         within ".enabled" do 
             expect(page).to have_content(@item_5.name)
         end
@@ -33,7 +33,7 @@ RSpec.describe 'Item Index page' do
         end
     end
     it 'will have a link to add a new item on the page' do 
-        visit "/merchants/#{@merchant_1.id}/items"
+        visit "/merchants/#{@merchant_1.id}/merchant_items"
         expect(page).to have_link('Create Item')
     end
     describe '5 most popular items' do 
@@ -83,26 +83,26 @@ RSpec.describe 'Item Index page' do
             expect(list).to eq([270, 240, 200, 160, 90])
         end
         it 'will have links to those items' do 
-            visit "/merchants/#{@merchant_1.id}/items"
+            visit "/merchants/#{@merchant_1.id}/merchant_items"
             within "#item-#{@item_1.id}" do 
                 click_link
             end
-            expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/merchant_items/#{@item_1.id}")
         end
         it 'will have the total revenue generated next to each item name' do 
-            visit "/merchants/#{@merchant_1.id}/items"
+            visit "/merchants/#{@merchant_1.id}/merchant_items"
             within "#item-#{@item_1.id}" do 
                 expect(page).to have_content("Total Revenue: $270.00")
             end
         end
         it 'will show the best day' do 
-            visit "/merchants/#{@merchant_1.id}/items"
+            visit "/merchants/#{@merchant_1.id}/merchant_items"
             within "#item-#{@item_1.id}" do 
                 expect(page).to have_content(date_formatter(@item_1.best_day.first.created_at))
             end
         end 
         it 'will show the count of transactions on a given day' do 
-            visit "/merchants/#{@merchant_1.id}/items"
+            visit "/merchants/#{@merchant_1.id}/merchant_items"
             within "#item-#{@item_1.id}" do 
                 expect(page).to have_content(@item_1.best_day.first.count)
             end
