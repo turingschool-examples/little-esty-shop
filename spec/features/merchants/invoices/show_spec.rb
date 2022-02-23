@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the merchant dashboard' do
+RSpec.describe "Merchant Invoices Show Page" do
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
 
@@ -56,70 +56,56 @@ RSpec.describe 'the merchant dashboard' do
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: :failed)
   end
 
-  describe 'existence and links' do
+  it "displays the invoice id, status, when it was created and customer name" do
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-    it 'has a dashboard page' do
-      merchant = Merchant.create!(name: "Steve")
-      visit "/merchant/#{merchant.id}/dashboard"
-
-      expect(current_path).to eq("/merchant/#{merchant.id}/dashboard")
-      expect(page).to have_content(merchant.name)
-    end
-
-    it 'has links to the merchant items index' do
-      merchant = Merchant.create!(name: "Steve")
-      visit "/merchant/#{merchant.id}/dashboard"
-      expect(page).to have_link("Item Index")
-      expect(page).to have_link("Invoice Index")
-    end
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_1.status}")
+    expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
   end
 
-  describe 'items ready to ship section' do
-    it "lists ordered && unshipped item's names & it's invoice id as a link" do
-      visit "/merchant/#{@merchant_1.id}/dashboard"
-      within ".items-ready-to-ship" do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to_not have_link("Order number: #{@invoice_1.id}")
-        expect(page).to have_link("Order number: #{@invoice_2.id}")
-        expect(page).to have_link("Order number: #{@invoice_3.id}")
-        expect(page).to_not have_link("Order number: #{@invoice_4.id}")
-        expect(page).to have_link("Order number: #{@invoice_5.id}")
-        expect(page).to have_link("Order number: #{@invoice_6.id}")
-        expect(page).to_not have_link("Order number: #{@invoice_7.id}")
-        expect(page).to have_link("Order number: #{@invoice_8.id}")
-        expect(page).to have_link("Order number: #{@invoice_9.id}")
-        expect(page).to_not have_link("Order number: #{@invoice_10.id}")
-        expect(page).to have_link("Order number: #{@invoice_11.id}")
-        expect(page).to have_link("Order number: #{@invoice_12.id}")
-      end
-    end
+  it "displays all the invoice items names, qty, price, and shipping status" do
+    @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 29, status: :shipped)
 
-    it "is ordered by oldest and displays date created" do
-      visit "/merchant/#{@merchant_1.id}/dashboard"
-      within ".items-ready-to-ship" do
-        expect(page).to have_content("Ordered on: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
-        expect("Order number: #{@invoice_2.id}").to appear_before("Order number: #{@invoice_3.id}")
-        expect("Order number: #{@invoice_3.id}").to appear_before("Order number: #{@invoice_5.id}")
-      end
-    end
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Item name: #{@item_1.name}")
+    expect(page).to have_content("Item name: #{@item_2.name}")
+    expect(page).to_not have_content("Item name: #{@item_3.name}")
+
+    expect(page).to have_content("Qty: #{@invoice_item_1.quantity}")
+    expect(page).to have_content("Qty: #{@invoice_item_13.quantity}")
+    expect(page).to_not have_content("Qty: #{@invoice_item_3.quantity}")
+
+    expect(page).to have_content("Unit price: #{@item_1.unit_price}")
+    expect(page).to have_content("Unit price: #{@item_2.unit_price}")
+
+    expect(page).to have_content("Status: #{@invoice_item_1.status}")
+    expect(page).to have_content("Status: #{@invoice_item_13.status}")
   end
 
-  describe 'top customers section' do
-    it 'is able to list top 5 customers for this merchant' do
-      visit "/merchant/#{@merchant_1.id}/dashboard"
-      within ".top_customers" do
-        expect(page).to have_content("#{@customer_2.name}, 9")
-        expect(page).to have_content("#{@customer_3.name}, 9")
-        expect(page).to have_content("#{@customer_1.name}, 4")
-        expect(page).to have_content("#{@customer_4.name}, 4")
-        expect(page).to have_content("#{@customer_5.name}, 1")
+  it "displays total revenue" do
+    @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 29, status: :shipped)
 
-        expect(@customer_2.name).to appear_before(@customer_3.name)
-        expect(@customer_3.name).to appear_before(@customer_1.name)
-        expect(@customer_1.name).to appear_before(@customer_4.name)
-        expect(@customer_4.name).to appear_before(@customer_5.name)
-        expect(page).to_not have_content("#{@customer_6.name}, 34")
-      end
-    end
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Total Revenue: 42")
+  end
+
+  it "can change an item's status" do
+    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Status: shipped")
+    expect(page).to_not have_content("Status: packaged")
+
+    choose('packaged')
+    click_on('Update Item Status')
+
+    expect(current_path).to eq("/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+
+    expect(page).to_not have_content("Status: shipped")
+    expect(page).to have_content("Status: packaged")
   end
 end

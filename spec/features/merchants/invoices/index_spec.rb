@@ -1,13 +1,13 @@
 require 'rails_helper'
-
-RSpec.describe 'the merchant dashboard' do
+RSpec.describe "the merchant invoice index" do
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
+    @merchant_2 = Merchant.create!(name: "Home Depot")
 
     @item_1 = @merchant_1.items.create!(name: "stapler", description: "Staples papers together", unit_price: 13)
     @item_2 = @merchant_1.items.create!(name: "paper", description: "construction", unit_price: 29)
     @item_3 = @merchant_1.items.create!(name: "calculator", description: "TI-84", unit_price: 84)
-    @item_4 = @merchant_1.items.create!(name: "paperclips", description: "24 Count", unit_price: 25)
+    @item_4 = @merchant_2.items.create!(name: "paperclips", description: "24 Count", unit_price: 25)
 
     @customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
     @customer_2 = Customer.create!(first_name: "Person 2", last_name: "Mcperson 2")
@@ -55,71 +55,32 @@ RSpec.describe 'the merchant dashboard' do
     @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: :success)
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: :failed)
   end
-
-  describe 'existence and links' do
-
-    it 'has a dashboard page' do
-      merchant = Merchant.create!(name: "Steve")
-      visit "/merchant/#{merchant.id}/dashboard"
-
-      expect(current_path).to eq("/merchant/#{merchant.id}/dashboard")
-      expect(page).to have_content(merchant.name)
+  # As a merchant,
+  # When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
+  # Then I see all of the invoices that include at least one of my merchant's items
+  # And for each invoice I see its id
+  # And each id links to the merchant invoice show page
+  describe 'the invoice index page' do
+    it 'exists' do
+      visit "/merchants/#{@merchant_1.id}/invoices"
     end
 
-    it 'has links to the merchant items index' do
-      merchant = Merchant.create!(name: "Steve")
-      visit "/merchant/#{merchant.id}/dashboard"
-      expect(page).to have_link("Item Index")
-      expect(page).to have_link("Invoice Index")
-    end
-  end
-
-  describe 'items ready to ship section' do
-    it "lists ordered && unshipped item's names & it's invoice id as a link" do
-      visit "/merchant/#{@merchant_1.id}/dashboard"
-      within ".items-ready-to-ship" do
-        expect(page).to have_content(@item_1.name)
-        expect(page).to_not have_link("Order number: #{@invoice_1.id}")
-        expect(page).to have_link("Order number: #{@invoice_2.id}")
-        expect(page).to have_link("Order number: #{@invoice_3.id}")
-        expect(page).to_not have_link("Order number: #{@invoice_4.id}")
-        expect(page).to have_link("Order number: #{@invoice_5.id}")
-        expect(page).to have_link("Order number: #{@invoice_6.id}")
-        expect(page).to_not have_link("Order number: #{@invoice_7.id}")
-        expect(page).to have_link("Order number: #{@invoice_8.id}")
-        expect(page).to have_link("Order number: #{@invoice_9.id}")
-        expect(page).to_not have_link("Order number: #{@invoice_10.id}")
-        expect(page).to have_link("Order number: #{@invoice_11.id}")
-        expect(page).to have_link("Order number: #{@invoice_12.id}")
-      end
+    it 'lists a merchants invoices' do
+      visit "/merchants/#{@merchant_1.id}/invoices"
+      expect(page).to have_content(@invoice_1.id)
+      expect(page).to have_content(@invoice_2.id)
+      expect(page).to have_content(@invoice_3.id)
+      expect(page).to_not have_content(@invoice_4.id)
+      expect(page).to have_content(@invoice_5.id)
+      expect(page).to have_content(@invoice_6.id)
+      expect(page).to have_content(@invoice_7.id)
+      expect(page).to_not have_content(@invoice_8.id)
     end
 
-    it "is ordered by oldest and displays date created" do
-      visit "/merchant/#{@merchant_1.id}/dashboard"
-      within ".items-ready-to-ship" do
-        expect(page).to have_content("Ordered on: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
-        expect("Order number: #{@invoice_2.id}").to appear_before("Order number: #{@invoice_3.id}")
-        expect("Order number: #{@invoice_3.id}").to appear_before("Order number: #{@invoice_5.id}")
-      end
-    end
-  end
-
-  describe 'top customers section' do
-    it 'is able to list top 5 customers for this merchant' do
-      visit "/merchant/#{@merchant_1.id}/dashboard"
-      within ".top_customers" do
-        expect(page).to have_content("#{@customer_2.name}, 9")
-        expect(page).to have_content("#{@customer_3.name}, 9")
-        expect(page).to have_content("#{@customer_1.name}, 4")
-        expect(page).to have_content("#{@customer_4.name}, 4")
-        expect(page).to have_content("#{@customer_5.name}, 1")
-
-        expect(@customer_2.name).to appear_before(@customer_3.name)
-        expect(@customer_3.name).to appear_before(@customer_1.name)
-        expect(@customer_1.name).to appear_before(@customer_4.name)
-        expect(@customer_4.name).to appear_before(@customer_5.name)
-        expect(page).to_not have_content("#{@customer_6.name}, 34")
-      end
+    it 'links to invoices show page' do
+      visit "/merchants/#{@merchant_1.id}/invoices"
+      click_on "#{@invoice_1.id}"
+      expect(current_path).to eq("/invoices/#{@invoice_1.id}")
     end
   end
 end

@@ -159,5 +159,14 @@ describe "Top 5 Revenue" do
       expect(page).to have_content('100') #item 4
       expect(page).to have_content('145') #item 7 & 8
     end
+    
+  end
+
+  it "has a link to create a new item" do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    click_link("Create New Item")
+    
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
   end
 end
