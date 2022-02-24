@@ -1,0 +1,11 @@
+<h1>Create New Item For <%= @merchant.name %> </h1>
+<%= form_with model: [@merchant, @item], local: true do |form|%>
+<p> <b><%= form.label 'name' %></b>
+  <%= form.text_field :name %> </p>
+  <p> <b><%= form.label 'description' %></b>
+    <%= form.text_field :description %> </p>
+    <p> <b><%= form.label 'unit_price' %></b>
+      <%= form.text_field :unit_price %> </p>
+      <%= form.hidden_field :status, value: "disabled" %>
+      <p> <%= form.submit 'Submit' %> </p>
+      <% end %>
