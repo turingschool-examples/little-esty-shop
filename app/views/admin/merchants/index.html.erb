@@ -1,9 +1,9 @@
 <%= link_to "New Merchant", "/admin/merchants/new"%>
 
 <h3> Enabled Merchants </h3>
-<div id="enabled_merchants">
+<div id="enabled">
   <% @merchants.enabled.each do |merchant| %>
-    <div id="merchant-<%=merchant.id%>">
+    <div id="enabled_merchant-<%=merchant.id%>">
         <%= link_to merchant.name, "/admin/merchants/#{merchant.id}"%>
         <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: { disable: 0 }  %>
     </div>
@@ -11,9 +11,9 @@
 </div>
 
 <h3> Disabled Merchants </h3>
-<div id="disabled_merchants">
+<div id="disabled">
   <% @merchants.disabled.each do |merchant| %>
-    <div id="merchant-<%=merchant.id%>">
+    <div id="disabled_merchant-<%=merchant.id%>">
       <%= link_to merchant.name, "/admin/merchants/#{merchant.id}"%>
       <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: { enable: 1 } %>
     </div>

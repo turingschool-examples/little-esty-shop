@@ -14,7 +14,7 @@ RSpec.describe 'Admin Merchants New' do
 
       expect(current_path).to eq("/admin/merchants")
 
-      within("#disabled_merchants") do
+      within("#disabled") do
         expect(page).to have_content("Bumblebee Honey Co")
       end
     end
