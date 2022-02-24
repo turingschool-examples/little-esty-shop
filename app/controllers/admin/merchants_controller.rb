@@ -1,7 +1,15 @@
 class Admin::MerchantsController < ApplicationController
-
+    
     def index
         @merchants = Merchant.all
+    end
+    
+    def new
+    end
+    
+    def create
+        @merchant = Merchant.create!({name: params[:name], status: 1})
+        redirect_to "/admin/merchants/", notice: "#{@merchant.name} Added"
     end
 
     def show 
@@ -17,7 +25,7 @@ class Admin::MerchantsController < ApplicationController
         if params[:status] == 'Disable'
             @merchant.disabled!
             redirect_to "/admin/merchants/", notice: "Status changed"
-        elsif params[:status]== 'Enable' 
+        elsif params[:status] == 'Enable' 
             @merchant.enabled!
             redirect_to "/admin/merchants/", notice: "Status changed"
         else
@@ -25,6 +33,7 @@ class Admin::MerchantsController < ApplicationController
             redirect_to "/admin/merchants/#{@merchant.id}", notice: "Successfully Updated"
         end 
     end
+
 
     private
         def merchant_params
