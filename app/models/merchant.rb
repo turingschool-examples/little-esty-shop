@@ -10,10 +10,6 @@ class Merchant < ApplicationRecord
                   .where.not(status: 2)
   end
 
-  def customers_list
-    customers.distinct
-  end
-
   def top_five_customers
     customers.joins(invoices: :transactions)
              .where(transactions:{result: 1})
