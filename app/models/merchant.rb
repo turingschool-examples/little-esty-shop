@@ -17,7 +17,8 @@ class Merchant < ApplicationRecord
 
   def disabled_status
     self.items.where("item_status =?", 2)
-
+  end
+  
   def not_shipped
     invoice_items.where("status != 2")
   end
