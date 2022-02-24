@@ -9,7 +9,6 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def update
-
     @invoice = Invoice.find(params[:id])
     @invoice.update(status: params[:status])
     redirect_to "/admin/invoices/#{params[:id]}"
@@ -18,4 +17,5 @@ private
   def invoice_params
     params.permit(:status)
   end
+
 end
