@@ -48,14 +48,18 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
 
   it "can update status via dropdown menu's" do
     visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+    within "##{@invoice_item1.item_id}" do
 
-    expect(page).to have_content("Item status: #{@invoice_item1.status}")
-    select'shipped', from: :status
-    click_button("Update Item Status")
+      select'shipped', from: :status
+      click_button("Update Item Status")
+    end
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+    within("##{@invoice_item1.item_id}") do
+      save_and_open_page
+      expect(page).to have_content("Item status: shipped")
+      expect(page).to_not have_content("Item status: pending")
+      expect(page).to_not have_content("Item status: packaged")
+    end
 
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
-    expect(page).to have_content("Item status: shipped")
-    expect(page).to_not have_content("Item status: pending")
-    expect(page).to_not have_content("Item status: packaged")
   end
 end
