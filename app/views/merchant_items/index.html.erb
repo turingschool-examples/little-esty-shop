@@ -6,7 +6,7 @@ table, th, td {
 </style>
 <center>
 <h1><%= @merchant.name.titleize %></h1>
-
+<p> <%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %> </p>
 <table style="width:100%">
   <tr>
     <td>Enabled Items</td>

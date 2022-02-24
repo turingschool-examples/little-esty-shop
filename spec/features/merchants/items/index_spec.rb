@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index page' do
   describe '#User story 35' do
-    it 'shows a list of the names of all of my items and no other merchants items' do
+    it 'shows a list of all the items of one merchant' do
       merchant1 = Merchant.create!(name: 'Primate Privleges')
       merchant2 = Merchant.create!(name: 'Sandras Affairs')
       item1 = merchant1.items.create!(name: 'Monkey Paw', description: 'A furry mystery', unit_price: 3)
@@ -69,6 +69,26 @@ RSpec.describe 'Merchant Items Index page' do
       expect(page).to have_content('Disabled Items')
       expect('Disabled Items').to appear_before(item2.name)
       expect('Enabled Items').to appear_before(item1.name)
+    end
+  end
+  describe '#User story #30' do
+    it 'can create a new item' do
+      merchant1 = Merchant.create!(name: 'Primate Privleges')
+      item1 = merchant1.items.create!(name: 'Monkey Paw', description: 'A furry mystery', unit_price: 3)
+      item2 = merchant1.items.create!(name: 'Gorilla Grip Glue', description: 'A sticky mystery', unit_price: 7)
+      visit "/merchants/#{merchant1.id}/items"
+
+      expect(page).to have_content('Create New Item')
+      click_link('Create New Item')
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items/new")
+
+      fill_in 'item_name', with: 'Chimpanzee Cheese'
+      fill_in 'item_description', with: 'banana flavored cheese'
+      fill_in 'item_unit_price', with: 2122
+      click_on('Submit')
+
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+      expect(page).to have_content('Chimpanzee Cheese')
     end
   end
 end
