@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Merchant Invoice Show Page" do
   before(:each) do
-     @merchant = Merchant.find_or_create_by!(name: 'Chuckin Pucks')
+     @merchant = Merchant.create!(name: 'Chuckin Pucks')
+     @merchant2 = Merchant.create!(name: 'Baby Beanies')
      @customer = Customer.create!(first_name: 'Samantha', last_name: 'Ore')
      @customer_2 = Customer.create!(first_name: 'Jake', last_name: 'Statefarm')
 
@@ -12,10 +13,13 @@ RSpec.describe "Merchant Invoice Show Page" do
 
 
      @item_1 = Item.create!(name: "Shampoo", description: "Cleans the lettuce", unit_price: 5, merchant_id: @merchant.id)
+     @item_2 = Item.create!(name: "Beans", description: "The musical", unit_price: 3, merchant_id: @merchant.id)
+     @item_3 = Item.create!(name: "Harry the Hat", description: "Super warm", unit_price: 4, merchant_id: @merchant2.id)
 
      @ii_1 = InvoiceItem.create!(invoice_id: @invoice.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
-     @ii_2 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
-     @ii_3 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
+     @ii_2 = InvoiceItem.create!(invoice_id: @invoice.id, item_id: @item_2.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
+
+     @ii_3 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item_3.id, quantity: 12, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
 
      @transaction1 = Transaction.create!(credit_card_number: 203942, result: "success", invoice_id: @invoice.id)
      @transaction2 = Transaction.create!(credit_card_number: 203942, result: "success", invoice_id: @invoice2.id)
@@ -29,10 +33,29 @@ RSpec.describe "Merchant Invoice Show Page" do
     expect(page).to have_content(@invoice.id)
     expect(page).to have_content(@invoice.status)
     expect(page).to have_content(@invoice.created_at.strftime("%A, %B %-d, %Y"))
+
     expect(page).to have_content(@customer.first_name)
     expect(page).to have_content(@customer.last_name)
 
     expect(page).to_not have_content(@customer_2.first_name)
     expect(page).to_not have_content(@customer_2.last_name)
+  end
+
+  it "shows items from an invoice" do
+    visit "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
+
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@ii_1.quantity)
+    expect(page).to have_content(@item_1.unit_price)
+
+    expect(page).to have_content(@item_2.name)
+    expect(page).to have_content(@ii_2.quantity)
+    expect(page).to have_content(@item_2.unit_price)
+
+    expect(page).to have_content(@ii_1.status)
+    expect(page).to have_content(@ii_2.status)
+
+    expect(page).to_not have_content(@item_3.name)
+    save_and_open_page
   end
 end
