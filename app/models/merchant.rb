@@ -18,4 +18,13 @@ class Merchant < ApplicationRecord
       .where(merchants: {id: id}, invoice_items: {status: [0,1]}, invoices: {status: [0,1]}, transactions: {result: 0})
       .select("items.name, invoices.id, invoices.created_at").order("invoices.created_at ASC")                            
     end
+
+    def self.top_merchants(count)
+      joins(items: [invoice_items: [invoice: :transactions]])
+      .where(transactions: {result: 0})
+      .group(:id)
+      .select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+      .order(revenue: :desc)
+      .limit(count)
+    end
   end

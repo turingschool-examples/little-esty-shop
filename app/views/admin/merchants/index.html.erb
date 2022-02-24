@@ -2,8 +2,22 @@
 
 <p><%= link_to "New Merchant", "/admin/merchants/new" %></p>
 
-<h3> Enabled Merchants </h3>
+<div class = top_merchants>
+<h3> Top Merchants </h3>
+<ul>
+<% Merchant.top_merchants(5).each do |merchant| %>
+  <li>
+    <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+    <%= "- #{number_to_currency(merchant.revenue)} in sales" %>
+  </li>
+<% end %>
+</ul>
+
+
+</div>
+
 <div class = enabled>
+<h3> Enabled Merchants </h3>
 <% @merchants.each do |merchant| %>
     <% if merchant.status == "enabled" %>
       <ul>
@@ -16,8 +30,8 @@
 <% end  %>
 </div>
 
-<h3> Disabled Merchants </h3>
 <div class = disabled>
+<h3> Disabled Merchants </h3>
 <% @merchants.each do |merchant| %>
     <% if merchant.status == "disabled" %>
       <ul>
