@@ -55,11 +55,29 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
     end
       expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
     within("##{@invoice_item1.item_id}") do
-      save_and_open_page
+      expect(page).to have_content("Item status: shipped")
+      select'shipped', from: :status
+      click_button("Update Item Status")
       expect(page).to have_content("Item status: shipped")
       expect(page).to_not have_content("Item status: pending")
       expect(page).to_not have_content("Item status: packaged")
     end
 
+    within("##{@invoice_item1.item_id}") do
+      select'pending', from: :status
+      click_button("Update Item Status")
+
+      expect(page).to have_content("Item status: pending")
+      expect(page).to_not have_content("Item status: shipped")
+      expect(page).to_not have_content("Item status: packaged")
+    end
+
+    within("##{@invoice_item1.item_id}") do
+      select'packaged', from: :status
+      click_button("Update Item Status")
+      expect(page).to have_content("Item status: packaged")
+      expect(page).to_not have_content("Item status: shipped")
+      expect(page).to_not have_content("Item status: pending")
+    end
   end
 end
