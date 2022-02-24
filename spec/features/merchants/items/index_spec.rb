@@ -106,22 +106,22 @@ describe "Top 5 Revenue" do
     @invoice_8 = @customer_8.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
                                                                                                     #               #
     @invoice_item_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: "shipped")
-    @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: :packaged) #*
-    @invoice_item_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending) #*
+    @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: "packaged") #*
+    @invoice_item_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: "pending") #*
     @invoice_item_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 4, unit_price: 25, status: "shipped") #*
-    @invoice_item_5 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 55, unit_price: 83, status: :packaged)
-    @invoice_item_6 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 65, unit_price: 92, status: :pending)
-    @invoice_item_7 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_7.id, quantity: 5, unit_price: 29, status: :pending) #*
-    @invoice_item_8 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_8.id, quantity: 5, unit_price: 29, status: :pending) #*
+    @invoice_item_5 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_5.id, quantity: 55, unit_price: 83, status: "packaged")
+    @invoice_item_6 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_6.id, quantity: 65, unit_price: 92, status: "pending")
+    @invoice_item_7 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_7.id, quantity: 5, unit_price: 29, status: "pending") #*
+    @invoice_item_8 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_8.id, quantity: 5, unit_price: 29, status: "pending") #*
 
-    @transcation_1 = @invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: :success)
-    @transcation_2 = @invoice_2.transactions.create!(credit_card_number: "4654405418249634", result: :success)
-    @transcation_3 = @invoice_3.transactions.create!(credit_card_number: "4654405418249635", result: :success)
-    @transcation_4 = @invoice_4.transactions.create!(credit_card_number: "4654405418249636", result: :success)
-    @transcation_5 = @invoice_5.transactions.create!(credit_card_number: "4654405418249637", result: :failed)
-    @transcation_6 = @invoice_6.transactions.create!(credit_card_number: "4654405418249638", result: :failed)
-    @transcation_7 = @invoice_7.transactions.create!(credit_card_number: "4654405418249638", result: :success)
-    @transcation_8 = @invoice_8.transactions.create!(credit_card_number: "4654405418249638", result: :success)
+    @transcation_1 = @invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: "success")
+    @transcation_2 = @invoice_2.transactions.create!(credit_card_number: "4654405418249634", result: "success")
+    @transcation_3 = @invoice_3.transactions.create!(credit_card_number: "4654405418249635", result: "success")
+    @transcation_4 = @invoice_4.transactions.create!(credit_card_number: "4654405418249636", result: "success")
+    @transcation_5 = @invoice_5.transactions.create!(credit_card_number: "4654405418249637", result: "failed")
+    @transcation_6 = @invoice_6.transactions.create!(credit_card_number: "4654405418249638", result: "failed")
+    @transcation_7 = @invoice_7.transactions.create!(credit_card_number: "4654405418249638", result: "success")
+    @transcation_8 = @invoice_8.transactions.create!(credit_card_number: "4654405418249638", result: "success")
   end
 
   it "Section with Top 5 Items by revenue" do
@@ -178,10 +178,10 @@ describe "Top 5 Revenue" do
     invoice_13 = @customer_5.invoices.create!(status: "cancelled", created_at: DateTime.new(2021, 12, 18))
 
     invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_9.id, item_id: @item_1.id, quantity: 1, unit_price: 1, status: "shipped")
-    invoice_item_10 = InvoiceItem.create!(invoice_id: invoice_10.id, item_id: @item_2.id, quantity: 1, unit_price: 1, status: :packaged) #*
-    invoice_item_11 = InvoiceItem.create!(invoice_id: invoice_11.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending) #*
+    invoice_item_10 = InvoiceItem.create!(invoice_id: invoice_10.id, item_id: @item_2.id, quantity: 1, unit_price: 1, status: "packaged") #*
+    invoice_item_11 = InvoiceItem.create!(invoice_id: invoice_11.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: "pending") #*
     invoice_item_12 = InvoiceItem.create!(invoice_id: invoice_12.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: "shipped") #*
-    invoice_item_13 = InvoiceItem.create!(invoice_id: invoice_13.id, item_id: @item_5.id, quantity: 1, unit_price: 1, status: :packaged)
+    invoice_item_13 = InvoiceItem.create!(invoice_id: invoice_13.id, item_id: @item_5.id, quantity: 1, unit_price: 1, status: "packaged")
 
     visit "/merchants/#{@merchant_1.id}/items"
     
