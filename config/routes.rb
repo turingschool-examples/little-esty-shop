@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :items, controller: 'merchant_items'
   end
+
+  get '/', to: "welcome#index"
+
   get '/items/:id', to: 'items#show'
   patch 'items/:id', to: 'items#update_status'
   get '/merchant/:id/dashboard', to: 'merchants#show'

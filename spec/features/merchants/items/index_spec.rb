@@ -96,15 +96,15 @@ describe "Top 5 Revenue" do
     @customer_7 = Customer.create!(first_name: "Person 7", last_name: "Mcperson 7")
     @customer_8 = Customer.create!(first_name: "Person 8", last_name: "Mcperson 8")
 
-    @invoice_1 = @customer_1.invoices.create!(status: "completed")
-    @invoice_2 = @customer_2.invoices.create!(status: "cancelled")
-    @invoice_3 = @customer_3.invoices.create!(status: "in progress")
-    @invoice_4 = @customer_4.invoices.create!(status: "completed")
-    @invoice_5 = @customer_5.invoices.create!(status: "cancelled")
-    @invoice_6 = @customer_6.invoices.create!(status: "in progress")
-    @invoice_7 = @customer_7.invoices.create!(status: "in progress")
-    @invoice_8 = @customer_8.invoices.create!(status: "in progress")
-
+    @invoice_1 = @customer_1.invoices.create!(status: "completed", created_at: DateTime.new(2022, 2, 23))##
+    @invoice_2 = @customer_2.invoices.create!(status: "cancelled", created_at: DateTime.new(2022, 2, 23))
+    @invoice_3 = @customer_3.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    @invoice_4 = @customer_4.invoices.create!(status: "completed", created_at: DateTime.new(2022, 2, 23))
+    @invoice_5 = @customer_5.invoices.create!(status: "cancelled", created_at: DateTime.new(2022, 2, 23))
+    @invoice_6 = @customer_6.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    @invoice_7 = @customer_7.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+    @invoice_8 = @customer_8.invoices.create!(status: "in progress", created_at: DateTime.new(2022, 2, 23))
+                                                                                                    #               #
     @invoice_item_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 13, status: "shipped")
     @invoice_item_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 2, unit_price: 29, status: :packaged) #*
     @invoice_item_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending) #*
@@ -159,14 +159,38 @@ describe "Top 5 Revenue" do
       expect(page).to have_content('100') #item 4
       expect(page).to have_content('145') #item 7 & 8
     end
-    
+
   end
 
   it "has a link to create a new item" do
     visit "/merchants/#{@merchant_1.id}/items"
 
     click_link("Create New Item")
-    
+
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+  end
+
+  it "Shows Items Data" do
+    invoice_9 = @customer_1.invoices.create!(status: "completed", created_at: DateTime.new(2021, 12, 18))
+    invoice_10 = @customer_2.invoices.create!(status: "cancelled", created_at: DateTime.new(2021, 12, 18))
+    invoice_11 = @customer_3.invoices.create!(status: "in progress", created_at: DateTime.new(2021, 12, 18))
+    invoice_12 = @customer_4.invoices.create!(status: "completed", created_at: DateTime.new(2021, 12, 18))
+    invoice_13 = @customer_5.invoices.create!(status: "cancelled", created_at: DateTime.new(2021, 12, 18))
+
+    invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_9.id, item_id: @item_1.id, quantity: 1, unit_price: 1, status: "shipped")
+    invoice_item_10 = InvoiceItem.create!(invoice_id: invoice_10.id, item_id: @item_2.id, quantity: 1, unit_price: 1, status: :packaged) #*
+    invoice_item_11 = InvoiceItem.create!(invoice_id: invoice_11.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending) #*
+    invoice_item_12 = InvoiceItem.create!(invoice_id: invoice_12.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: "shipped") #*
+    invoice_item_13 = InvoiceItem.create!(invoice_id: invoice_13.id, item_id: @item_5.id, quantity: 1, unit_price: 1, status: :packaged)
+
+    visit "/merchants/#{@merchant_1.id}/items"
+    
+    within ".top_items" do
+      expect(page).to have_content("Top selling date for #{@item_2.name} was 2022-02-23 00:00:00 UTC") #item 2
+      expect(page).to have_content("Top selling date for #{@item_3.name} was 2022-02-23 00:00:00 UTC") #item 3
+      expect(page).to have_content("Top selling date for #{@item_4.name} was 2022-02-23 00:00:00 UTC") #item 4
+      expect(page).to have_content("Top selling date for #{@item_7.name} was 2022-02-23 00:00:00 UTC") #item 7
+      expect(page).to have_content("Top selling date for #{@item_8.name} was 2022-02-23 00:00:00 UTC") #item 8
+    end
   end
 end

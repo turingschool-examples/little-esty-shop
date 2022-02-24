@@ -32,6 +32,7 @@
     <% @merchant.top_five_items.each do |item| %>
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
       <%= item.totalrevenue %>
+      <p>Top selling date for <%= item.name %> was <%= item.best_day %></p>
     <% end %>
   </ol>
 </div>

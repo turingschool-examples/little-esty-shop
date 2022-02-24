@@ -5,4 +5,12 @@ class Item < ApplicationRecord
 
   enum status: {"Disabled" => 0, "Enabled" => 1}
 
+  def best_day
+    invoices.joins(:invoice_items, :transactions)
+            .where(transactions:{result: 1})
+            .select("invoices.*, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
+            .group("invoices.id")
+            .order(totalrevenue: :desc)
+            .first.created_at
+  end
 end
