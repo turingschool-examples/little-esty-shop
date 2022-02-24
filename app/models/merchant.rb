@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def ship_ready_items
-    invoice_items.joins(:invoice) #ask at check in
+    invoice_items.joins(:invoice)
                   .where.not(status: 2)
                   .order(:created_at)
   end
