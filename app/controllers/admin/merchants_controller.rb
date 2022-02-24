@@ -27,9 +27,9 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
-# binding.pry
+
     if merchant.update(merchant_params)
-      if merchant_params.count == 1 # as in, only having :status
+      if params[:status_button] == "true"
         redirect_to "/admin/merchants"
         flash[:alert] = "Merchant successfully updated!"
       else

@@ -5,7 +5,7 @@
 <br>
 <% @merchants.each do |merchant| %>
   <li id="merchant-<%= merchant.id %>"><%= merchant.name %> - status: <%= merchant.status %>
-  <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch, local: true do |form| %>
+  <%= form_with url: "/admin/merchants/#{merchant.id}?status_button=true", method: :patch, local: true do |form| %>
   <% statusing = [ "enabled", "enable" ] %>
   <% statusing = [ "disabled", "disable" ] if merchant.status == "enabled" %>
   <%= form.hidden_field :status, value: statusing[0] %>
