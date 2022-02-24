@@ -11,6 +11,7 @@ class Merchant < ApplicationRecord
   enum status: { "disabled" => 0, "enabled" => 1 }
 
   def ready_items
+    # grab all the invoices unless status is shipped
     invoice_items.where.not(status: 2)
   end
 end
