@@ -52,7 +52,6 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
     within "##{@invoice_item1.item_id}" do
       select'shipped', from: :status
       click_button("Update Item Status")
-
     end
       expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
     within("##{@invoice_item1.item_id}") do
