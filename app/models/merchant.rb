@@ -9,4 +9,8 @@ class Merchant < ApplicationRecord
   validates_presence_of :status
 
   enum status: { "disabled" => 0, "enabled" => 1 }
+
+  def ready_items
+    invoice_items.where.not(status: 2)
+  end
 end

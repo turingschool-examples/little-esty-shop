@@ -22,4 +22,27 @@ describe "Merchant Dashboard", type: :feature do
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/invoices")
   end
+
+  it 'has items ready to ship section' do
+    merchant2 = create(:merchant)
+
+    item1 = create(:item, merchant: merchant2)
+    item2 = create(:item, merchant: merchant2)
+
+    # item 1 has already been shipped, do not display name
+    ii1 = create(:invoice_item, status: "shipped", item: item1)
+    
+    # item 2 is packaged, display name
+    ii2 = create(:invoice_item, status: "packaged", item: item2)
+    ii3 = create(:invoice_item, status: "packaged", item: item2)
+
+    visit "/merchants/#{merchant2.id}"
+
+    expect(page).to have_content("Items ready to ship")
+
+    expect(page).not_to have_content(ii1.item.name)
+
+    expect(page).to have_content(ii2.item.name)
+    expect(page).to have_content(ii3.item.name)
+  end
 end
