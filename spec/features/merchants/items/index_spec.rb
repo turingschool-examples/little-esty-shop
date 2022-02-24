@@ -24,15 +24,22 @@ RSpec.describe 'merchant item index', type: :feature do
 
     visit "/merchants/#{merchant.id}/items"
 
-    expect(item1.status).to eq("disabled")
 
     within "#item-#{item1.id}" do
 
+      expect(item1.status).to eq("disabled")
+
       click_button "enable"
+      item1.reload
 
       expect(item1.status).to eq("enabled")
+
+      click_button "disable"
+      item1.reload
+
+      expect(item1.status).to eq("disabled")
     end
-    
+
     expect(page).to have_content("Item status updated!")
   end
 end
