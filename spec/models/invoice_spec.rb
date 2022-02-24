@@ -19,15 +19,15 @@ RSpec.describe Invoice, type: :model do
       customer_1 = create(:customer)
       item_1 = create(:item, merchant_id: merchant_1.id)
       invoice_1 = create(:invoice, customer_id: customer_1.id)
-      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 3)
+      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 3, quantity: 1)
 
       item_2 = create(:item, merchant_id: merchant_1.id)
-      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, unit_price: 5)
+      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, unit_price: 5, quantity: 1)
 
       item_3 = create(:item, merchant_id: merchant_1.id)
-      invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id, unit_price: 4)
+      invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id, unit_price: 4, quantity: 2)
 
-      expect(invoice_1.total_revenue).to eq(12)
+      expect(invoice_1.total_revenue).to eq(16)
     end
   end
 end
