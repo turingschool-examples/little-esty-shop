@@ -66,7 +66,6 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
     within("##{@invoice_item1.item_id}") do
       select'pending', from: :status
       click_button("Update Item Status")
-
       expect(page).to have_content("Item status: pending")
       expect(page).to_not have_content("Item status: shipped")
       expect(page).to_not have_content("Item status: packaged")
