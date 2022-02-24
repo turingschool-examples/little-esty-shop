@@ -5,16 +5,10 @@
   <ul>
     <li>Customer name: <%="#{@invoice.customer.first_name}"%> <%="#{@invoice.customer.last_name}"%></li>
     <li>Customer ID: <%="#{@invoice.customer_id}"%></li>
+    <li>Invoice Status: <%="#{@invoice.status}"%></li>
     <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
-    <div id="<%=@invoice.id %>">
-      <li>Invoice ID: <%="#{@invoice.id}"%></li>
-      <li>Invoice Status: <%="#{@invoice.status}"%></li>
+    <li>Invoice ID: <%="#{@invoice.id}"%></li>
   </ul>
-  <% #binding.pry%>
-    <%= form_with url: "/admin/invoices/#{@invoice.id}?item=#{@invoice.id}", method: :patch, local: true do |form|%>
-    <%=form.select :status, ["in progress", "cancelled", "completed"], selected: item.status %>
-    <%= form.submit "Update Invoice Status" %>
-    <%end%></div><br>
 
   <h3> Material items for a material girl </h3>
   <ul>
@@ -24,7 +18,6 @@
     <li>Amount ordered: <%= item.quantity %></li>
     <li>Unit cost: <%= item.unit_price %></li>
     <li>Item status: <%= item.status %></li></p>
-
     <%end%>
   </ul>
 
