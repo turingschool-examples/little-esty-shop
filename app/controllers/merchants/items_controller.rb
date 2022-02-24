@@ -16,9 +16,15 @@ class Merchants::ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:item_id])
-    item.update(item_params)
-    redirect_to "/merchants/#{params[:merchant_id]}/items/#{item.id}"
-    flash[:alert] = "Item successfully updated!"
+
+    if params[:status].present?
+      item.update({ status: params[:status] })
+      redirect_to "/merchants/#{params[:merchant_id]}/items"
+      flash[:alert] = "Item status updated!"
+    else
+      item.update(item_params)
+      flash[:alert] = "Item successfully updated!"
+    end
   end
 
   def new
