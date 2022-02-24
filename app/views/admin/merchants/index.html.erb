@@ -1,0 +1,11 @@
+<center>
+<h1>The Admin Merchants Index</h1>
+</center>
+
+<center>
+<% @merchants.each do |merchant| %>
+<section id= "<%= merchant.name.parameterize %>">
+  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
+<% end %>
+</section>
+</center>
