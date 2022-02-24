@@ -1,0 +1,43 @@
+<h1> <%= @merchant.name %>  </h1>
+
+
+
+<h3> Invoice #<%= @invoice.id %>   </h3>
+
+
+
+<h4> Status: <%= @invoice.status %>   </h4>
+
+<h4> Created On: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %>   </h4>
+
+<h4> Total Revenue: <%= @invoice.total_revenue %>  </h4>
+
+
+<h3>Customer:</h3>
+
+<h4> <%= @invoice.customer.first_name + " " + @invoice.customer.last_name   %> </h4>
+
+<h3>Items on this Invoice:</h3>
+
+<% @invoice.items.each do |item| %>
+  <h5>Name</h5>
+  <%= item.name %>
+  <br>
+  <h5>Quantity</h5>
+  <%= item.invoice_items.first.quantity %>
+  <br>
+  <h5>Unit Price</h5>
+  <%= item.unit_price %>
+  <br>
+
+
+
+  <div id="item-status">
+  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+    <%= form.label :status %>
+    <%= form.select :status, ['pending', 'packaged', 'shipped'] %>
+    <%= form.submit "Update Item Status"%>
+  <% end %>
+  </div>
+  <br>
+<% end %>

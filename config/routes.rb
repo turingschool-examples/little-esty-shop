@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+    get '/', to: 'welcome#index'
     get "/merchant/:id/dashboard", to: 'merchant_dashboards#index'
+
+    get "/merchants/:id/invoices/:invoice_id", to: 'merchant_invoices#show'
+    patch "/merchants/:id/invoices/:invoice_id", to: 'merchant_invoices#update'
 
     get "/merchants/:id/items" , to: 'merchant_items#index'
     get "/merchants/:id/items/:item_id", to: 'merchant_items#show'
@@ -12,9 +16,9 @@ Rails.application.routes.draw do
 end
 
 # Rails.application.routes.draw do
-#     resources :merchant do 
+#     resources :merchant do
 #         resources :dashboard, only: [:show] do
-#         resources :items 
+#         resources :items
 #         end
 #     end
 # end
