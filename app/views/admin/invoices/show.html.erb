@@ -1,24 +1,30 @@
 
+    <h1> Invoice info </h1>
 
-  <h1> Invoice info </h1>
+    <ul>
+      <li>Customer name: <%="#{@invoice.customer.first_name}"%> <%="#{@invoice.customer.last_name}"%></li>
+      <li>Customer ID: <%="#{@invoice.customer_id}"%></li>
+      <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
+      <div id="<%=@invoice.id %>">
+        <li>Invoice ID: <%="#{@invoice.id}"%></li>
+        <li>Invoice Status: <%="#{@invoice.status}"%></li>
+    <% #binding.pry%>
+      <%= form_with url: "/admin/invoices/#{@invoice.id}?item=#{@invoice.id}", method: :patch, local: true do |form|%>
+      <%=form.select :status, ["in progress", "cancelled", "completed"], selected: item.status %>
+      <%= form.submit "Update Invoice Status" %>
+      <%end%></div><br>
+    </ul>
 
-  <ul>
-    <li>Customer name: <%="#{@invoice.customer.first_name}"%> <%="#{@invoice.customer.last_name}"%></li>
-    <li>Customer ID: <%="#{@invoice.customer_id}"%></li>
-    <li>Invoice Status: <%="#{@invoice.status}"%></li>
-    <li>Invoice Created: <%=@invoice.created_at.strftime("%A, %B, %d, %Y")%></li>
-    <li>Invoice ID: <%="#{@invoice.id}"%></li>
-  </ul>
+    <h3> Material items for a material girl </h3>
+    <ul>
+      <%@invoice.invoice_items.each do |item| %>
+        <p><li>Item id: <%="#{item.id}"%></li>
+      <li>Item name: <%= item.item.name %></li>
+      <li>Amount ordered: <%= item.quantity %></li>
+      <li>Unit cost: <%= item.unit_price %></li>
+      <li>Item status: <%= item.status %></li></p>
 
-  <h3> Material items for a material girl </h3>
-  <ul>
-    <%@invoice.invoice_items.each do |item| %>
-      <p><li>Item id: <%="#{item.id}"%></li>
-    <li>Item name: <%= item.item.name %></li>
-    <li>Amount ordered: <%= item.quantity %></li>
-    <li>Unit cost: <%= item.unit_price %></li>
-    <li>Item status: <%= item.status %></li></p>
-    <%end%>
-  </ul>
+      <%end%>
+    </ul>
 
-  <h3> Total amount from <%="#{@invoice.customer.first_name}"%>'s invoice: $<%= "#{@inv_items.sum(:unit_price)}"%>
+    <h3> Total amount from <%="#{@invoice.customer.first_name}"%>'s invoice: $<%= "#{@inv_items.sum(:unit_price)}"%>
