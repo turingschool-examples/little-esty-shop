@@ -63,4 +63,17 @@ RSpec.describe "Merchant Invoice Show Page" do
 
     expect(page).to have_content(@invoice.total_revenue)
   end
+
+  it "should have select field to update item status" do
+    visit "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
+    save_and_open_page
+    expect(page).to have_button("Update Item Status")
+    select "packaged", :from => "status", match: :first
+    click_on("Update Item Status", match: :first)
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice.id}")
+
+    within("#item-status", match: :first) do
+      expect(page).to have_content(@ii_1.status)
+    end
+  end
 end
