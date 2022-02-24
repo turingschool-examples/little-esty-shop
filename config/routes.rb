@@ -21,7 +21,7 @@ end
 #  get '/merchants/:merchant_id/items/:item_id/edit', to: 'merchant_items#edit'
 #  patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
   namespace :admin  do
-    resources :merchants, only: [:index, :show, :edit, :update]
+    resources :merchants, only: [:index, :show, :edit, :update, :new, :create]
   end
 #  get '/admin/merchants', to: 'admin/merchants#index'
 #  get '/admin/merchants/:id', to: 'admin/merchants#show'
