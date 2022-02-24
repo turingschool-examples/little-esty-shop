@@ -200,7 +200,7 @@ RSpec.describe 'merchant dashboard' do
         visit "/merchants/#{merchant.id}/dashboard"
 
         within("#ready_to_ship") do 
-            date = Date.today
+            date = Time.current
             expect(page).to have_content("#{item_1.name} - Invoice ##{invoice_1.id} - #{date.strftime('%A, %B %d, %Y')}")
             expect(page).to have_content("#{item_2.name} - Invoice ##{invoice_1.id} - #{date.strftime('%A, %B %d, %Y')}")
             expect(page).to have_content("#{item_2.name} - Invoice ##{invoice_2.id} - #{date.strftime('%A, %B %d, %Y')}")
