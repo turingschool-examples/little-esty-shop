@@ -6,7 +6,8 @@ class Admin::InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:invoice_id])
     @inv_items = @invoice.items
-  end
+
+ end
 
   def update
     @invoice = Invoice.find(params[:invoice_id])
@@ -18,5 +19,4 @@ private
   def invoice_params
     params.permit(:status)
   end
-
 end
