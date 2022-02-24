@@ -170,7 +170,7 @@ describe "Top 5 Revenue" do
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
   end
 
-  xit "Shows Items Data" do
+  it "Shows Items Data" do
     invoice_9 = @customer_1.invoices.create!(status: "completed", created_at: DateTime.new(2021, 12, 18))
     invoice_10 = @customer_2.invoices.create!(status: "cancelled", created_at: DateTime.new(2021, 12, 18))
     invoice_11 = @customer_3.invoices.create!(status: "in progress", created_at: DateTime.new(2021, 12, 18))
@@ -179,23 +179,18 @@ describe "Top 5 Revenue" do
 
     invoice_item_9 = InvoiceItem.create!(invoice_id: invoice_9.id, item_id: @item_1.id, quantity: 1, unit_price: 1, status: "shipped")
     invoice_item_10 = InvoiceItem.create!(invoice_id: invoice_10.id, item_id: @item_2.id, quantity: 1, unit_price: 1, status: :packaged) #*
-    invoice_item_11 = InvoiceItem.create!(invoice_id: invoice_11.id, item_id: @item_3.id, quantity: 1, unit_price: 1, status: :pending) #*
+    invoice_item_11 = InvoiceItem.create!(invoice_id: invoice_11.id, item_id: @item_3.id, quantity: 3, unit_price: 84, status: :pending) #*
     invoice_item_12 = InvoiceItem.create!(invoice_id: invoice_12.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: "shipped") #*
     invoice_item_13 = InvoiceItem.create!(invoice_id: invoice_13.id, item_id: @item_5.id, quantity: 1, unit_price: 1, status: :packaged)
 
     visit "/merchants/#{@merchant_1.id}/items"
-
+    
     within ".top_items" do
-      expect(page).to have_content("Top selling dates for #{@item_2.name} was #{DateTime.new(2022, 2, 23)} ") #item 2
-      expect(page).to have_content("Top selling dates for #{@item_3.name} was #{DateTime.new(2022, 2, 23)} ") #item 3
-      expect(page).to have_content("Top selling dates for #{@item_4.name} was #{DateTime.new(2022, 2, 23)} ") #item 4
-      expect(page).to have_content("Top selling dates for #{@item_7.name} was #{DateTime.new(2022, 2, 23)} ") #item 7
-      expect(page).to have_content("Top selling dates for #{@item_8.name} was #{DateTime.new(2022, 2, 23)} ") #item 8
-      expect(@item_8.name).to appear_before(@item_7.name)
-      expect(@item_7.name).to appear_before(@item_4.name)
-      expect(@item_4.name).to appear_before(@item_3.name)
-      expect(@item_3.name).to appear_before(@item_2.name)
-      expect(@item_2.name).to_not appear_before(@item_8.name)
+      expect(page).to have_content("Top selling date for #{@item_2.name} was 2022-02-23 00:00:00 UTC") #item 2
+      expect(page).to have_content("Top selling date for #{@item_3.name} was 2022-02-23 00:00:00 UTC") #item 3
+      expect(page).to have_content("Top selling date for #{@item_4.name} was 2022-02-23 00:00:00 UTC") #item 4
+      expect(page).to have_content("Top selling date for #{@item_7.name} was 2022-02-23 00:00:00 UTC") #item 7
+      expect(page).to have_content("Top selling date for #{@item_8.name} was 2022-02-23 00:00:00 UTC") #item 8
     end
   end
 end
