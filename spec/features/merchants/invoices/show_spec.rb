@@ -6,7 +6,7 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
 
     @item1 = create(:item, merchant: @merchant1)
     @invoice1 = create(:invoice)
-    
+
     @invoice_item1 = create(:invoice_item, item: @item1, invoice: @invoice1, quantity: 2)
   end
 
@@ -44,5 +44,39 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
     visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
 
     expect(page).not_to have_content(other_item.name)
+  end
+
+  it "can update status via dropdown menu's" do
+    visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+    within "##{@invoice_item1.item_id}" do
+
+      select'shipped', from: :status
+      click_button("Update Item Status")
+    end
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+    within("##{@invoice_item1.item_id}") do
+      expect(page).to have_content("Item status: shipped")
+      select'shipped', from: :status
+      click_button("Update Item Status")
+      expect(page).to have_content("Item status: shipped")
+      expect(page).to_not have_content("Item status: pending")
+      expect(page).to_not have_content("Item status: packaged")
+    end
+
+    within("##{@invoice_item1.item_id}") do
+      select'pending', from: :status
+      click_button("Update Item Status")
+      expect(page).to have_content("Item status: pending")
+      expect(page).to_not have_content("Item status: shipped")
+      expect(page).to_not have_content("Item status: packaged")
+    end
+
+    within("##{@invoice_item1.item_id}") do
+      select'packaged', from: :status
+      click_button("Update Item Status")
+      expect(page).to have_content("Item status: packaged")
+      expect(page).to_not have_content("Item status: shipped")
+      expect(page).to_not have_content("Item status: pending")
+    end
   end
 end
