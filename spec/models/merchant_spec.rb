@@ -60,6 +60,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'instance methods' do
+
     it 'knows its customers' do
       expect(@merchant_1.customers_list).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5, @customer_6])
     end

@@ -14,6 +14,7 @@
 
 <h2> Items ready to ship </h2>
 <div class="items-ready-to-ship">
+
   <% @merchant.ship_ready_items.each do |invoice_item| %>
     <li>
       <%= "#{invoice_item.item.name}" %>

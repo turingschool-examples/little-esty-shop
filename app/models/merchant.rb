@@ -11,10 +11,6 @@ class Merchant < ApplicationRecord
                   .order(:created_at)
   end
 
-  def customers_list
-    customers.distinct
-  end
-
   def top_five_customers
     customers.joins(invoices: :transactions)
              .where(transactions:{result: 1})
