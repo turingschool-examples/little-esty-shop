@@ -17,5 +17,15 @@ RSpec.describe 'merchant item index', type: :feature do
     expect(page).to have_content(@item3.name)
   end
 
+  it 'can toggle the status from the index page' do
+    visit "/merchants/#{@merchant.id}/items"
 
+    within "#item-#{@item1.id}" do
+      expect(@item1.status).to eq("disabled")
+
+      click_button "Enable"
+
+      expect(@item1.status).to eq("enabled")
+    end
+  end
 end

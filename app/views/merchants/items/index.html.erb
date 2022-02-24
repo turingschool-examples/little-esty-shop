@@ -2,5 +2,9 @@
 
 <%= link_to "Create item", "/merchants/#{@merchant.id}/items/new" %>
 <% @merchant.items.each do |item| %>
-  <p><%= item.name %></p>
+  <div id="item-<%= item.id %>">
+    <p><%= item.name %> - status: <%= item.status %></p>
+
+    <!-- button_to "Change status",  -->
+  </div>
 <% end  %>
