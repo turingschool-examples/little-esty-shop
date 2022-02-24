@@ -8,9 +8,8 @@
       <div id="<%=@invoice.id %>">
         <li>Invoice ID: <%="#{@invoice.id}"%></li>
         <li>Invoice Status: <%="#{@invoice.status}"%></li>
-    <% #binding.pry%>
       <%= form_with url: "/admin/invoices/#{@invoice.id}?item=#{@invoice.id}", method: :patch, local: true do |form|%>
-      <%=form.select :status, ["in progress", "cancelled", "completed"], selected: item.status %>
+      <%=form.select :status, ["in progress", "cancelled", "completed"], selected: @invoice.status %>
       <%= form.submit "Update Invoice Status" %>
       <%end%></div><br>
     </ul>
