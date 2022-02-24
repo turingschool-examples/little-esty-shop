@@ -16,8 +16,7 @@ RSpec.describe 'merchants invoices index' do
 
     expect(page).to have_content("Merchant's Invoices")
     expect(page).to have_content("Invoice")
-    # expect(page).to have_content(invoice_1.id)
-    # expect(page).to have_content(item_1.name)
+    expect(page).to have_content(invoice_1.id)
   end
 
 
