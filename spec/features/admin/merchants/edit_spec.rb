@@ -24,6 +24,7 @@ RSpec.describe 'Admin Merchant Edit Page' do
     fill_in "Name", with: "New Name"
     click_on "Submit"
     expect(current_path).to eq(admin_merchant_path(@merchant_1))
-    expect(page).to have_content("Update Successful")
+    
+    expect(page).to have_content("New Name has been updated")
   end
 end
