@@ -16,6 +16,7 @@
     <p>Rank: <%="#{index += 1}"%></p>
     <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></p>
     <p>Total Revenue: $<%= merchant.cents_to_dollars(merchant.total_revenue)  %></p>
+    <p><%="Top selling date for #{merchant.name} was #{merchant.format_created_at(merchant.top_merchant_best_day)}"  %></p>
   </section>
 <% end %>
 </section>

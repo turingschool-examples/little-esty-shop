@@ -160,5 +160,52 @@ RSpec.describe 'The Admin Merchants Index' do
       expect(page).to have_no_content(merchant6.name)
     end 
   end 
+
+  it 'displays the date where a top merchant had the highest revenue' do 
+    merchant1 = Merchant.create!(name: 'BuyMyThings1')
+    merchant2 = Merchant.create!(name: 'BuyMyThings2')
+    merchant3 = Merchant.create!(name: 'BuyMyThings3')
+    merchant4 = Merchant.create!(name: 'BuyMyThings4')
+    merchant5 = Merchant.create!(name: 'BuyMyThings5')
+    merchant6 = Merchant.create!(name: 'BuyMyThings6')
+
+    customer1 = Customer.create!(first_name: 'Fred', last_name: 'Dunce')
+
+    invoice1 =Invoice.create!(status: 0, customer_id: customer1.id)
+    invoice2 =Invoice.create!(status: 0, customer_id: customer1.id)
+
+    item1 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant1.id)
+    item2 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant1.id)
+    item3 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant2.id)
+    item4 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant2.id)
+    item5 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant3.id)
+    item6 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant3.id)
+    item7 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant4.id)
+    item8 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant4.id)
+    item9 = Item.create!(name: 'really good item', description: 'really good', unit_price: 10000, merchant_id: merchant5.id)
+    item10 = Item.create!(name: 'really good item0', description: 'really good', unit_price: 10000, merchant_id: merchant5.id)
+
+    invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 2, unit_price: 100, status: 1)
+    invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 3, unit_price: 400, status: 1)
+    invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice1.id, quantity: 2, unit_price: 200, status: 1)
+    invoice_item4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice1.id, quantity: 2, unit_price: 100, status: 1)
+    invoice_item5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice1.id, quantity: 5, unit_price: 100, status: 1)
+    invoice_item6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice1.id, quantity: 2, unit_price: 400, status: 1)
+    invoice_item7 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice1.id, quantity: 3, unit_price: 200, status: 1)
+    invoice_item8 = InvoiceItem.create!(item_id: item8.id, invoice_id: invoice1.id, quantity: 2, unit_price: 100, status: 1)
+    invoice_item9 = InvoiceItem.create!(item_id: item9.id, invoice_id: invoice1.id, quantity: 2, unit_price: 100, status: 1)
+    invoice_item10 = InvoiceItem.create!(item_id: item10.id, invoice_id: invoice1.id, quantity: 2, unit_price: 100, status: 1)
+    
+    transaction1 = Transaction.create!(result: 0, invoice_id: invoice1.id)
+    transaction2 = Transaction.create!(result: 0, invoice_id: invoice2.id)
+
+    visit admin_merchants_path
+    within "#top_merchant-#{merchant1.id}" do 
+    expect(page).to have_content("Top selling date for #{merchant1.name} was #{merchant1.format_created_at(merchant1.top_merchant_best_day)}")
+  end
+    within "#top_merchant-#{merchant2.id}" do 
+      expect(page).to have_content("Top selling date for #{merchant2.name} was #{merchant2.format_created_at(merchant2.top_merchant_best_day)}")
+    end 
+  end 
     
 end 
