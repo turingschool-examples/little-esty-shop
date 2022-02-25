@@ -10,4 +10,6 @@
 <h2>Item Information:</h2>
 <% @invoice.invoice_items.each do |invoice_item| %>
 <p>-----------------------------</p>
+<p><b>Name: </b><%= invoice_item.item.name %></p>
+<p><b>Quantity: </b> <%= invoice_item.quantity %>
   <% end %>
