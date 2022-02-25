@@ -16,6 +16,7 @@ RSpec.describe 'the admin invoice index' do
 save_and_open_page
     expect(page).to have_content("#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.status}")
+    expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
   end
 
 end
