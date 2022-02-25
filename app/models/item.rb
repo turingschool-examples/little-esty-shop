@@ -5,6 +5,11 @@ class Item < ApplicationRecord
 
   enum status: {"Disabled" => 0, "Enabled" => 1}
 
+  validates_presence_of :name
+  validates_presence_of :description
+  validates_presence_of :unit_price
+  validates_presence_of :status
+
   def best_day
     invoices.joins(:invoice_items, :transactions)
             .where(transactions:{result: 1})

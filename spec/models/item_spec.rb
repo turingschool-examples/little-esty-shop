@@ -1,11 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
+
   describe "relationships" do
-    it { should have_many :invoice_items }
+    it { should have_many(:invoice_items) }
     it { should have_many(:invoices).through(:invoice_items) }
-    it { should belong_to :merchant }
+    it { should belong_to(:merchant) }
   end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:unit_price) }
+    it { should validate_presence_of(:status) }
+  end
+
   it "Shows the best revenue day" do
     merchant_1 = Merchant.create!(name: "Staples")
     customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
