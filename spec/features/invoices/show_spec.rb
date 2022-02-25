@@ -59,16 +59,56 @@ RSpec.describe 'merchants invoices show page' do
     customer_1 = create(:customer)
     item_1 = create(:item, merchant_id: merchant_1.id)
     invoice_1 = create(:invoice, customer_id: customer_1.id)
-    invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 20)
+    invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, unit_price: 20, quantity: 1)
 
     item_2 = create(:item, merchant_id: merchant_1.id)
-    invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, unit_price: 22)
+    invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, unit_price: 22, quantity: 1)
 
     item_3 = create(:item, merchant_id: merchant_1.id)
-    invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id, unit_price: 24)
+    invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id, unit_price: 24, quantity: 1)
 
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
     expect(invoice_1.total_revenue).to eq(66)
+  end
+
+  it 'shows each invoice item status is a select field where current status is selected' do
+    merchant_1 = create(:merchant)
+    customer_1 = create(:customer)
+    item_1 = create(:item, merchant_id: merchant_1.id)
+    invoice_1 = create(:invoice, customer_id: customer_1.id)
+    invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id)
+
+    item_2 = create(:item, merchant_id: merchant_1.id)
+    invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id)
+
+    item_3 = create(:item, merchant_id: merchant_1.id)
+    invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_1.id)
+
+    visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+    within("##{invoice_item_1.id}") do
+      select "#{invoice_item_1.status}"
+      select("packaged")
+      expect(page).to have_button("Update Item Status")
+
+      click_button "Update Item Status"
+      expect(page).to have_select(selected: "packaged")
+      expect(page).to_not have_select(selected: "shipped")
+      expect(page).to_not have_select(selected: "pending")
+    end
+
+    within("##{invoice_item_2.id}") do
+      select "#{invoice_item_2.status}"
+      select("shipped")
+      expect(page).to have_button("Update Item Status")
+
+      click_button "Update Item Status"
+      expect(page).to have_select(selected: "shipped")
+      expect(page).to_not have_select(selected: "pending")
+      expect(page).to_not have_select(selected: "packaged")
+    end
+
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
   end
 end
