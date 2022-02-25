@@ -26,29 +26,31 @@ RSpec.describe 'the admin invoice index' do
   it "Lists Invoice Id on index page" do
     visit '/admin/invoices'
 
-    expect(page).to have_content(@invoice_1.id)
-    expect(page).to have_content(@invoice_3.id)
-    expect(page).to have_content(@invoice_6.id)
-    expect(page).to have_content(@invoice_10.id)
-    expect(page).to have_content(@invoice_12.id)
+    expect(page).to have_content("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_3.id}")
+    expect(page).to have_content("#{@invoice_6.id}")
+    expect(page).to have_content("#{@invoice_10.id}")
+    expect(page).to have_content("#{@invoice_12.id}")
   end
 
   it "Invoice Id's are links to admin invoice show page" do
     visit '/admin/invoices'
 
-    expect(page).to have_link(@invoice_1.id)
-    expect(page).to have_link(@invoice_12.id)
-  endit "Invoice Id's are links to admin invoice show page" do
+    expect(page).to have_link("#{@invoice_1.id}")
+    expect(page).to have_link("#{@invoice_12.id}")
+  end
+
+  it "Invoice Id's are links to admin invoice show page" do
     visit '/admin/invoices'
 
-    expect(page).to have_link(@invoice_1.id)
-    expect(page).to have_link(@invoice_12.id)
+    expect(page).to have_link("#{@invoice_1.id}")
+    expect(page).to have_link("#{@invoice_12.id}")
   end
 
   it "Has a show page" do
     visit '/admin/invoices'
 
-    click_link(@invoice_1.id)
+    click_link("#{@invoice_1.id}")
 
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
   end
