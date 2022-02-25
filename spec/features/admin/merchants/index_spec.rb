@@ -140,7 +140,6 @@ RSpec.describe 'the admin merchant index' do
     visit '/admin/merchants'
 
     within ".top_merchants" do
-      expect(page).to_not have_content("5")
       expect(page).to have_content("10")
       expect(page).to have_content("15")
       expect(page).to have_content("20")
