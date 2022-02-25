@@ -57,9 +57,9 @@ RSpec.describe "Merchant Invoices Show Page" do
   end
 
   it "displays the invoice id, status, when it was created and customer name" do
-    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-    expect(current_path).to eq("/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.status}")
     expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
@@ -69,7 +69,7 @@ RSpec.describe "Merchant Invoices Show Page" do
   it "displays all the invoice items names, qty, price, and shipping status" do
     @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 29, status: "shipped")
 
-    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Item name: #{@item_1.name}")
     expect(page).to have_content("Item name: #{@item_2.name}")
@@ -89,13 +89,13 @@ RSpec.describe "Merchant Invoices Show Page" do
   it "displays total revenue" do
     @invoice_item_13 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 29, status: "shipped")
 
-    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Total Revenue: 42")
   end
 
   it "can change an item's status" do
-    visit "/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+    visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("Status: shipped")
     expect(page).to_not have_content("Status: packaged")
@@ -103,7 +103,7 @@ RSpec.describe "Merchant Invoices Show Page" do
     choose('packaged')
     click_on('Update Item Status')
 
-    expect(current_path).to eq("/merchant/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
 
     expect(page).to_not have_content("Status: shipped")
     expect(page).to have_content("Status: packaged")
