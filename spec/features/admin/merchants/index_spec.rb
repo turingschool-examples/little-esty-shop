@@ -101,5 +101,14 @@ RSpec.describe 'The Admin Merchants Index' do
       expect(page).to have_no_content(merchant1.name)
     end
   end 
+
+  it 'has a button that brings the user to a form to create a new merchant' do 
+    visit admin_merchants_path
+    within '#create' do
+      expect(page).to have_button ("Create New Merchant")
+      click_button("Create New Merchant")
+      expect(current_path).to eq(new_admin_merchant_path)
+    end 
+  end   
     
 end 

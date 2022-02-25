@@ -12,6 +12,10 @@ class Admin::MerchantsController < ApplicationController
     end 
   end 
 
+  def new
+  
+  end 
+
 private 
 
   def set_merchant 
