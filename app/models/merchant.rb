@@ -9,4 +9,8 @@ class Merchant < ApplicationRecord
   validates_presence_of :status
 
   enum status: { "disabled" => 0, "enabled" => 1 }
+
+  def ordered_items
+    items.order(:name)
+  end
 end

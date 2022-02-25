@@ -1,7 +1,7 @@
 <h1>Merchant items</h1>
 
 <%= link_to "Create item", "/merchants/#{@merchant.id}/items/new" %>
-<% @merchant.items.each do |item| %>
+<% @merchant.ordered_items.each do |item| %>
   <div id="item-<%= item.id %>">
       <p><%= item.name %> status: <%= item.status %></p>
 
