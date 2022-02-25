@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/', to: 'welcome#index'
+  get 'admin/invoices/:invoice_id', to: 'admin/invoices#show'
 
   namespace :merchants, module: :merchants do
     get ':id', to: 'dashboard#index'
@@ -13,11 +14,11 @@ Rails.application.routes.draw do
 
     get ':id/invoices', to: 'invoices#index'
     get ':merchant_id/invoices/:invoice_id', to: 'invoices#show'
+    patch ':merchant_id/invoices/:invoice_id', to: 'invoices#update'
   end
 
   namespace :admin, module: :admin do
     get '/', to: 'dashboard#index'
-
     resources :merchants, only:[:index, :new, :show, :create, :edit, :update]
 
     resources :invoices, only:[:index, :show]
@@ -28,4 +29,5 @@ Rails.application.routes.draw do
     # get '/merchants/:id/edit', to: 'merchants#edit'
     # patch '/merchants/:id', to: 'merchants#updat
   end
+
 end

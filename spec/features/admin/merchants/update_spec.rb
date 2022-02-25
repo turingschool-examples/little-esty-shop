@@ -7,7 +7,6 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
     merchant = create(:merchant, status: "disabled")
 
     visit "/admin/merchants/#{merchant.id}"
-
     click_link("Update Merchant")
 
     expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
@@ -33,7 +32,7 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
 
     expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
 
-    fill_in("Status", with: "enabled")
+    select "enabled", from: :status
 
     click_button("Update Merchant")
     expect(current_path).to eq("/admin/merchants/#{merchant.id}")
@@ -54,7 +53,7 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
     expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
 
     fill_in("Name", with: "Jerry Jipper's Jingle Jangles")
-    fill_in("Status", with: "enabled")
+    select "enabled", from: :status
 
     click_button("Update Merchant")
     expect(current_path).to eq("/admin/merchants/#{merchant.id}")
@@ -62,26 +61,6 @@ RSpec.describe 'Updates an existing merchant:', type: :feature do
     expect(page).to have_content("Jerry Jipper's Jingle Jangles")
     expect(page).to have_content("status: enabled")
     expect(page).to have_content("Merchant successfully updated!")
-  end
-
-  # Mark says help me pls 
-  xit 'sad path: illegal value for status' do
-
-    merchant = create(:merchant, status: "disabled")
-
-    visit "/admin/merchants/#{merchant.id}"
-
-    click_link("Update Merchant")
-
-    expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
-
-    fill_in("Name", with: "Jerry Jipper's Jingle Jangles")
-    fill_in("Status", with: "banana")
-
-    click_button("Update Merchant")
-    expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
-
-    expect(page).to have_content("Error: 'banana' is not a valid status")
   end
 
   it 'sad path: no value entered for name' do

@@ -19,4 +19,22 @@ RSpec.describe Item, type: :model do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
   end
+
+  it 'item toggle status' do
+    merchant = create(:merchant)
+
+    item1 = create(:item, merchant: merchant)
+
+      expect(item1.status).to eq("disabled")
+
+      item1.update({ status: "enabled" })
+      item1.reload
+
+      expect(item1.status).to eq("enabled")
+
+      item1.update({ status: "disabled" })
+      item1.reload
+
+      expect(item1.status).to eq("disabled")
+  end
 end

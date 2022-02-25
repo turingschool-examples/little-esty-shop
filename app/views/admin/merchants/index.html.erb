@@ -4,9 +4,15 @@
 
 <br>
 <% @merchants.each do |merchant| %>
-<li><%= merchant.name %> - status: <%= merchant.status %></li>
+  <li id="merchant-<%= merchant.id %>"><%= merchant.name %> - status: <%= merchant.status %>
+  <%= form_with url: "/admin/merchants/#{merchant.id}?status_button=true", method: :patch, local: true do |form| %>
+  <% statusing = [ "enabled", "enable" ] %>
+  <% statusing = [ "disabled", "disable" ] if merchant.status == "enabled" %>
+  <%= form.hidden_field :status, value: statusing[0] %>
+  <%= form.submit statusing[1] %>
+  </li>
+  <% end %>
 <% end %>
 <br>
 
 <div id="new-link-bottom"><%= link_to "Add New Merchant", "/admin/merchants/new" %></div>
-
