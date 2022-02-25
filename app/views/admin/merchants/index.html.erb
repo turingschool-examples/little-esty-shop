@@ -5,7 +5,8 @@
 <center>
 <% @merchants.each do |merchant| %>
 <section id= "<%= merchant.name.parameterize %>">
-  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
-<% end %>
+<p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
+<%= button_to "#{merchant.change_status.chop} merchant", admin_merchant_path(merchant.id, trigger:'status_change'), method: :patch %>
 </section>
+<% end %>
 </center>
