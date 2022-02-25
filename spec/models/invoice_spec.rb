@@ -31,6 +31,16 @@ RSpec.describe Invoice, type: :model do
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 1)
     @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 400, status: 1)
     @invoice_item3 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 1)
+
+    @transaction1 = Transaction.create!(result: 0, invoice_id: @invoice1.id)
+    @transaction2 = Transaction.create!(result: 0, invoice_id: @invoice3.id)
+    @transaction3 = Transaction.create!(result: 1, invoice_id: @invoice3.id)
+  end
+
+  describe 'scopes' do
+    it 'returns invoices with successful transactions' do 
+    expect(Invoice.with_successful_transactions.count).to eq(2)
+    end 
   end
 
   describe 'instance methods' do 
