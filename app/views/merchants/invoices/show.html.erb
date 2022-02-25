@@ -1,9 +1,9 @@
+
 <h1>Herein the glorious attributes are herein listed</h1>
 
 <ul>
   <li>Customer name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></li>
   <li>Customer ID: <%= @invoice.customer_id %></li>
-  <li>Invoice Status: <%= @invoice.status %></li>
   <li>Invoice Created: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></li>
   <li>Invoice ID: <%= @invoice.id %></li>
   <li>Invoice status: <%= @invoice.status %></li>
@@ -18,8 +18,11 @@
   <li>Item price: <%= invoice_item.item.unit_price %></li>
   <li>Quantity purchased: <%= invoice_item.quantity %></li>
 
-  <div id="<%=invoice_item.item_id %>">
+<div id="<%=invoice_item.item_id %>">
   <li>Item status: <%= invoice_item.status %></li>
+  
+  <h3> Total amount from <%="#{@invoice.customer.first_name}"%>'s invoice: $<%= "#{@invoice.total_revenue}"%>
+
   <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?invoice_item=#{invoice_item.id}", method: :patch, local: true do |form|%>
       <%=form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>
       <%= form.submit "Update Item Status" %>
