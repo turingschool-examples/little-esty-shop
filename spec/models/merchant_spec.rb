@@ -115,5 +115,15 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.enabled_merchants).to eq([merchant2, merchant4])
       end 
     end 
+
+    describe '#disabled_merchants' do 
+      it 'returns merchants with status: disabled' do 
+        merchant1 = Merchant.create!(name: 'BuyMyThings', status: 'disabled')
+        merchant2 = Merchant.create!(name: 'BuyTheirThings')
+        merchant3 = Merchant.create!(name: 'BuyTheThings', status: 'disabled')
+        merchant4 = Merchant.create!(name: 'BuyOneThing')
+        expect(Merchant.disabled_merchants).to eq([merchant1, merchant3])
+      end 
+    end 
   end 
 end
