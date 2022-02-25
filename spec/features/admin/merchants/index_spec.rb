@@ -33,12 +33,9 @@ RSpec.describe 'The Admin Merchants Index' do
     end 
   end 
 
-  it 'displays a button an admin can use to enable or disable a merchants status' do 
+  it 'displays a button an admin can use to disable an enabled merchants status' do 
     merchant1 = Merchant.create!(name: 'The Duke')
     merchant2 = Merchant.create!(name: 'The Fluke')
-    merchant3 = Merchant.create!(name: 'The Crook')
-    merchant4 = Merchant.create!(name: 'The Hook')
-    merchant5 = Merchant.create!(name: 'The Nook')
     visit admin_merchants_path
     within '#enabled' do
       within '#the-duke' do
@@ -49,6 +46,22 @@ RSpec.describe 'The Admin Merchants Index' do
         expect(current_path).to eq(admin_merchants_path)
         merchant1.reload
         expect(merchant1.status).to eq("disabled")
+      end 
+    end 
+  end
+    
+  it 'displays a button an admin can use to enable a disabled merchants status' do 
+    merchant1 = Merchant.create!(name: 'The Duke', status: :disabled)
+    visit admin_merchants_path
+    within '#disabled' do
+      within '#the-duke' do
+        expect(page).to have_button("enable merchant")
+        expect(merchant1.status).to eq("disabled")
+        expect(page).to have_no_button("disable merchant")  
+        click_button("enable merchant")
+        expect(current_path).to eq(admin_merchants_path)
+        merchant1.reload
+        expect(merchant1.status).to eq("enabled")
       end 
     end 
   end
