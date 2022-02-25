@@ -115,7 +115,7 @@ RSpec.describe Customer do
       transcation_13 = invoice_13.transactions.create!(credit_card_number: "4654405418249635", result: "success")
       transcation_14 = invoice_14.transactions.create!(credit_card_number: "4654405418249635", result: "success")
 
-      expect(Customer.top_five).to eq([customer_1, customer_3, customer_4, customer_5, customer_6])
+      expect(Customer.top_five).to eq([customer_3, customer_1, customer_4, customer_5, customer_6])
     end
   end
 end
