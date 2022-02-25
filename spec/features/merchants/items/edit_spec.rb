@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Items Show Page" do
+RSpec.describe "Merchant Items Edit Page" do
   describe "when I visit the merchant items edit page" do
     it "I see form filled in with existing info" do
       merchant = Merchant.create!(name: "Paul the Merchant")
