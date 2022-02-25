@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
+
+  describe "relationships" do
+    it { should have_many(:items) }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices) }
+  end
+
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
 
@@ -55,17 +63,28 @@ RSpec.describe Merchant, type: :model do
     @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: "success")
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
   end
-  describe "relationships" do
-    it { should have_many(:items) }
-  end
 
   describe 'instance methods' do
-
     it '.ship_ready_items' do
-      expect(@merchant_1.ship_ready_items).to eq([@invoice_item_2, @invoice_item_3, @invoice_item_5, @invoice_item_6, @invoice_item_8, @invoice_item_9, @invoice_item_11, @invoice_item_12])
+      expect(@merchant_1.ship_ready_items).to eq([@invoice_item_2,
+                                                  @invoice_item_3,
+                                                  @invoice_item_5,
+                                                  @invoice_item_6,
+                                                  @invoice_item_8,
+                                                  @invoice_item_9,
+                                                  @invoice_item_11,
+                                                  @invoice_item_12
+                                                  ])
     end
 
-    #needs a model test for top 5 customers
+    it ".top_five_customers" do
+      expect(@merchant_1.top_five_customers).to eq([@customer_2,
+                                                    @customer_3,
+                                                    @customer_1,
+                                                    @customer_4,
+                                                    @customer_5
+                                                    ])
+    end
 
     it "orders each merchant's item by its revenue" do
       merchant_1 = Merchant.create!(name: "Staples")
@@ -115,7 +134,12 @@ RSpec.describe Merchant, type: :model do
       transcation_7 = invoice_7.transactions.create!(credit_card_number: "4654405418249638", result: "success")
       transcation_8 = invoice_8.transactions.create!(credit_card_number: "4654405418249638", result: "success")
 
-      expect(merchant_1.top_five_items).to eq([item_3, item_7, item_8, item_4, item_2])
+      expect(merchant_1.top_five_items).to eq([item_3,
+                                                item_7,
+                                                item_8,
+                                                item_4,
+                                                item_2
+                                                ])
     end
   end
 end
