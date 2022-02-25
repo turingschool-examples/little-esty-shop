@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
+
+  describe "relationships" do
+    it { should have_many(:invoices) }
+    it { should have_many(:transactions).through(:invoices) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+  end
+
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
     @merchant_2 = Merchant.create!(name: "Dunder Miflin")
@@ -55,10 +66,6 @@ RSpec.describe Customer, type: :model do
     @transcation_10 = @invoice_10.transactions.create!(credit_card_number: "4654405418249613", result: "failed")
     @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: "success")
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
-  end
-  describe "relationships" do
-    it { should have_many(:invoices) }
-    it { should have_many(:transactions).through(:invoices) }
   end
 
   describe 'instance methods' do
