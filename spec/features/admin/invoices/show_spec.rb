@@ -15,6 +15,7 @@ RSpec.describe 'the admin invoice index' do
     visit "/admin/invoices/#{@invoice_1.id}"
 save_and_open_page
     expect(page).to have_content("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_1.status}")
   end
 
 end
