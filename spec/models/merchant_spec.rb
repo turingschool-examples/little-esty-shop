@@ -11,7 +11,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of :name }
-
+    it { should define_enum_for(:status).with_values([:enabled, :disabled]) }
   end
 
   before :each do
@@ -91,6 +91,17 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
+    describe 'change_status' do 
+      it 'swaps a merchants status from enabled => disabled or disabled => enabled' do 
+      merchant = Merchant.create!(name: 'BuyMyThings')
+      expect(merchant.status).to eq("enabled")
+      merchant.change_status
+      expect(merchant.status).to eq("disabled")
+      merchant.change_status
+      expect(merchant.status).to eq("enabled")
+      end 
+    end 
+
   describe 'class methods' do
     describe '#top_five_merchants' do
       it "finds the top 5 merchants by revenue" do
@@ -105,5 +116,28 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.top_five_merchants).to eq([@merchant2, @merchant])
       end
     end
-  end
+    
+    describe '#enabled_merchants' do 
+      it 'returns merchants with status: enabled' do 
+        InvoiceItem.destroy_all
+        Item.destroy_all
+        Merchant.destroy_all
+        merchant1 = Merchant.create!(name: 'BuyMyThings', status: 'disabled')
+        merchant2 = Merchant.create!(name: 'BuyTheirThings')
+        merchant3 = Merchant.create!(name: 'BuyTheThings', status: 'disabled')
+        merchant4 = Merchant.create!(name: 'BuyOneThing')
+        expect(Merchant.enabled_merchants).to eq([merchant2, merchant4])
+      end 
+    end 
+
+    describe '#disabled_merchants' do 
+      it 'returns merchants with status: disabled' do 
+        merchant1 = Merchant.create!(name: 'BuyMyThings', status: 'disabled')
+        merchant2 = Merchant.create!(name: 'BuyTheirThings')
+        merchant3 = Merchant.create!(name: 'BuyTheThings', status: 'disabled')
+        merchant4 = Merchant.create!(name: 'BuyOneThing')
+        expect(Merchant.disabled_merchants).to eq([merchant1, merchant3])
+      end 
+    end 
+  end 
 end

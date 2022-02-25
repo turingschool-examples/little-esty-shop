@@ -1,4 +1,5 @@
 class Merchant < ApplicationRecord
+  enum status: {enabled: 0, disabled: 1}
   validates :name, presence: true
 
   has_many :items
@@ -20,7 +21,25 @@ class Merchant < ApplicationRecord
 
   def disabled_status
     self.items.where("item_status =?", 2)
+  end 
+
+  def change_status
+    if status == 'enabled'
+      self.disabled!
+      status
+    elsif status == 'disabled'
+      self.enabled!
+      status
+    end 
   end
+
+  def self.enabled_merchants
+    where(status: :enabled)
+  end 
+
+  def self.disabled_merchants
+    where(status: :disabled)
+  end 
 
   def not_shipped
     invoice_items.where("status != 2")
