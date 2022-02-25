@@ -28,7 +28,7 @@ RSpec.describe 'the admin invoice index' do
 
     expect(page).to have_content("#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_3.id}")
-    expect(page).to have_content"#{(@invoice_6.id}")
+    expect(page).to have_content("#{@invoice_6.id}")
     expect(page).to have_content("#{@invoice_10.id}")
     expect(page).to have_content("#{@invoice_12.id}")
   end
