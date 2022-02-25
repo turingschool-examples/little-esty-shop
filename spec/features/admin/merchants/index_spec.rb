@@ -10,9 +10,16 @@ RSpec.describe 'The Admin Merchants Index' do
 
   it 'displays the name of each merchant in the system' do 
     visit admin_merchants_path
-    expect(page).to have_content(@merchant1.name)
-    expect(page).to have_content(@merchant2.name)
-    expect(page).to have_content(@merchant3.name)
+
+    within '#the-duke' do 
+      expect(page).to have_content(@merchant1.name)
+    end 
+    within '#the-fluke' do 
+      expect(page).to have_content(@merchant2.name)
+    end 
+    within '#the-crook' do 
+      expect(page).to have_content(@merchant3.name)
+    end 
   end 
 
   it 'displays each merchant name as a link to that merchants show page' do 
