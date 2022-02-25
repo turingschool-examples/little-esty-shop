@@ -34,15 +34,15 @@ RSpec.describe Merchant, type: :model do
 
     @item1 = Item.create!(name: 'food', description: 'delicious', unit_price: '2000', merchant_id: @merchant.id)
     @item2 = Item.create!(name: 'more food', description: 'even more delicious', unit_price: '3000', merchant_id: @merchant.id)
-    @item3 = Item.create!(name: 'not food at all', description: 'definitely not food', unit_price: '1500', merchant_id: @merchant2.id)
+    @item3 = Item.create!(name: 'not food at all', description: 'definitely not food', unit_price: '3500', merchant_id: @merchant2.id)
 
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 1)
-    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 400, status: 0)
+    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 3, unit_price: 400, status: 0)
     @invoice_item3 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice3.id, quantity: 2, unit_price: 200, status: 2)
     @invoice_item4 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 2)
-    @invoice_item5 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice4.id, quantity: 2, unit_price: 100, status: 2)
+    @invoice_item5 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice4.id, quantity: 5, unit_price: 100, status: 2)
     @invoice_item6 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice5.id, quantity: 2, unit_price: 400, status: 2)
-    @invoice_item7 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice6.id, quantity: 2, unit_price: 200, status: 2)
+    @invoice_item7 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice6.id, quantity: 3, unit_price: 200, status: 2)
     @invoice_item8 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 100, status: 2)
 
     @transaction1 = Transaction.create!(result: 0, invoice_id: @invoice1.id)
@@ -89,6 +89,21 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer5, @customer6])
       end
     end
+  end
 
+  describe 'class methods' do
+    describe '#top_five_merchants' do
+      it "finds the top 5 merchants by revenue" do
+        @invoice_item9 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 3, unit_price: 100, status: 1)
+        @invoice_item10 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice2.id, quantity: 3, unit_price: 400, status: 0)
+        @invoice_item11 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 7, unit_price: 200, status: 2)
+        @invoice_item12 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 2)
+        @invoice_item13 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice4.id, quantity: 5, unit_price: 100, status: 2)
+        @invoice_item14 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice5.id, quantity: 2, unit_price: 400, status: 2)
+        @invoice_item15 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice6.id, quantity: 3, unit_price: 200, status: 2)
+        @invoice_item16 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 100, status: 2)
+        expect(Merchant.top_five_merchants).to eq([@merchant2, @merchant])
+      end
+    end
   end
 end
