@@ -11,11 +11,19 @@ class InvoiceItem < ApplicationRecord
   enum status: {pending: 0, packaged: 1, shipped: 2}
 
   before_validation :integer_status
+
+    def change_status(result)
+       self.pending! if result == 'pending'
+       self.packaged! if result == 'packaged'
+       self.shipped! if result == 'shipped' 
+  end
+
   private
   def integer_status
     self.status = 0 if self.status == 'pending'
     self.status = 1 if self.status == 'packaged'
     self.status = 2 if self.status == 'shipped'
   end
+
 
 end
