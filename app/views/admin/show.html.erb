@@ -6,3 +6,9 @@
   <%= link_to "Invoices", '/admin/invoices' %>
 
 </div>
+
+<div class="top_customers">
+  <% @customers.top_five.each do |customer| %>
+    <p><%= customer.name %> - <%= customer.count_transactions_id %> purchases</p>
+  <% end %>
+</div>
