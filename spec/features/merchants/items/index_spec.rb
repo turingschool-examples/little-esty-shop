@@ -15,6 +15,22 @@ RSpec.describe 'merchant item index', type: :feature do
     expect(page).to have_content(item3.name)
   end
 
+  it 'has links to each items show page' do
+    merchant = create(:merchant)
+
+    item1 = create(:item, merchant: merchant)
+    item2 = create(:item, merchant: merchant)
+    item3 = create(:item, merchant: merchant)
+
+    visit "/merchants/#{merchant.id}/items"
+
+    within "#item-#{item2.id}" do
+      click_link "View item"
+    end
+
+    expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item2.id}")
+  end
+
   it 'can toggle the status from the index page' do
     merchant = create(:merchant)
 
