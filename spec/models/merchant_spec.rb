@@ -101,4 +101,19 @@ RSpec.describe Merchant, type: :model do
       end 
     end 
   end
+
+  describe 'Class Methods' do 
+    describe '#enabled_merchants' do 
+      it 'returns merchants with status: enabled' do 
+        InvoiceItem.destroy_all
+        Item.destroy_all
+        Merchant.destroy_all
+        merchant1 = Merchant.create!(name: 'BuyMyThings', status: 'disabled')
+        merchant2 = Merchant.create!(name: 'BuyTheirThings')
+        merchant3 = Merchant.create!(name: 'BuyTheThings', status: 'disabled')
+        merchant4 = Merchant.create!(name: 'BuyOneThing')
+        expect(Merchant.enabled_merchants).to eq([merchant2, merchant4])
+      end 
+    end 
+  end 
 end

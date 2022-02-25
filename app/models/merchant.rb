@@ -30,6 +30,10 @@ class Merchant < ApplicationRecord
     end 
   end
 
+  def self.enabled_merchants
+    where(status: :enabled)
+  end 
+
   def not_shipped
     invoice_items.where("status != 2")
   end
