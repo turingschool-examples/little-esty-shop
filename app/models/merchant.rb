@@ -67,6 +67,7 @@ class Merchant < ApplicationRecord
     Merchant.select("SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue,
       invoices.created_at AS invoice_date")
     .joins(:invoices)
+    .where(id: self.id)
     .group(:invoice_date)
     .order(total_revenue: :desc, invoice_date: :desc)
     .limit(1)
