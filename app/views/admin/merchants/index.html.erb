@@ -3,3 +3,12 @@
     <%= merchant.name %>
   <% end %>
 </div>
+
+<div class="top_merchants">
+  <% @merchants.top_5_merchants.each do |merchant| %>
+  <li>
+    <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant_1.id}" %>
+    <%= merchant.total_revenue %>
+  </li>
+  <% end %>
+</div>
