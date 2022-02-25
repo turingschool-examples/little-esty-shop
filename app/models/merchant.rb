@@ -23,8 +23,10 @@ class Merchant < ApplicationRecord
   def change_status
     if status == 'enabled'
       self.disabled!
+      status
     elsif status == 'disabled'
       self.enabled!
+      status
     end 
   end
 
