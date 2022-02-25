@@ -15,6 +15,7 @@ RSpec.describe 'Creating a new merchant:', type: :feature do
     fill_in("Name", with: "Bliffert's Bootleg Beanie Babies")
 
     click_button("Submit")
+
     expect(current_path).to eq('/admin/merchants')
 
     within("#merchant-#{Merchant.last.id}") do
