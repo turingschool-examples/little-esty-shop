@@ -7,14 +7,23 @@
 
 <h1>Invoice Items</h1>
 <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id = "invoice-item-<%=invoice_item.id%>">
     <ul>
         <li>Item: <%=invoice_item.item.name%></li>
         <li>Quantity: <%=invoice_item.quantity%></li>
         <li>Price: <%=invoice_item.unit_price%></li>
-        <li>Status: <%=invoice_item.status%></li>
+        <li>Status: <%= invoice_item.status %>
+            <section id="<%=invoice_item.id%>">
+                <%= form_tag("/admin/invoices/#{@invoice.id}/", method: :patch) do %>
+                <%= hidden_field_tag("item_id", invoice_item.id) %>
+                <p> <%= select_tag(:status, options_for_select(["pending", "packaged", "shipped"], params[:status]), include_blank: "Update Status") %> </p>
+                <%= submit_tag("Update") %>
+                <% end %>
+            </section>
+        </li>
     </ul>
 
 <% end %>
-
+</div>
 <h1>Total Revenue</h1>
 <p>Total Revenue: <%=number_to_currency(@invoice.total_revenue)%></p>
