@@ -8,11 +8,7 @@ class Customer < ApplicationRecord
     first_name + " " + last_name
   end
 
-  def transaction_count
-    transactions.count
-  end
+  def self.top_5
 
-  def successful_transactions_count
-    transactions.where(result: 1).count
   end
 end
