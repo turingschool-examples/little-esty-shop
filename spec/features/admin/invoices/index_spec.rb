@@ -38,5 +38,18 @@ RSpec.describe 'the admin invoice index' do
 
     expect(page).to have_link(@invoice_1.id)
     expect(page).to have_link(@invoice_12.id)
+  endit "Invoice Id's are links to admin invoice show page" do
+    visit '/admin/invoices'
+
+    expect(page).to have_link(@invoice_1.id)
+    expect(page).to have_link(@invoice_12.id)
+  end
+
+  it "Has a show page" do
+    visit '/admin/invoices'
+
+    click_link(@invoice_1.id)
+
+    expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
   end
 end
