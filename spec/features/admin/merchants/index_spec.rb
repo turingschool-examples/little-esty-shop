@@ -82,14 +82,6 @@ RSpec.describe 'The Admin Merchants Index' do
     visit admin_merchants_path
     within '#disabled' do
       expect(page).to have_content("Disabled Merchants")
-      merchant1.reload
-      merchant2.reload
-      merchant3.reload
-      merchant4.reload
-      merchant5.reload
-      merchant4.change_status
-      merchant5.change_status
-
       expect(page).to have_content(merchant4.name)
       expect(page).to have_content(merchant5.name)
       expect(page).to have_no_content(merchant3.name)
