@@ -30,14 +30,8 @@ RSpec.describe 'merchant item index', type: :feature do
       expect(item1.status).to eq("disabled")
 
       click_button "enable"
-      item1.reload
 
-      expect(item1.status).to eq("enabled")
-
-      click_button "disable"
-      item1.reload
-
-      expect(item1.status).to eq("disabled")
+      expect(page).to have_content("enabled")
     end
 
     expect(page).to have_content("Item status updated!")

@@ -5,7 +5,7 @@
   <div id="item-<%= item.id %>">
       <p><%= item.name %> status: <%= item.status %></p>
 
-    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |form| %>
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
       <% statusing = [ "enabled", "enable" ] %>
       <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
       <%= form.hidden_field :status, value: statusing[0] %>
