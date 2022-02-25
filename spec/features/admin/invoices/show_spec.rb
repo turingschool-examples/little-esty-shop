@@ -19,6 +19,7 @@ save_and_open_page
     expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@customer_1.first_name}")
+    expect(page).to have_content("#{@customer_1.last_name}")
   end
 
 end
