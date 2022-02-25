@@ -87,6 +87,7 @@ RSpec.describe 'the admin merchant index' do
       click_link(merchant_1.name)
     end
     expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
+    expect(page).to have_content(merchant_1.name)
   end
 
   it "each merchant's total revenue genenrated is next to their name" do
