@@ -9,7 +9,7 @@
     <div id="<%=@invoice.id %>">
         <li>Invoice Status: <%=@invoice.status%></li>
       <%= form_with url: "/admin/invoices/#{@invoice.id}?item=#{@invoice.id}", method: :patch, local: true do |form|%>
-      <%=form.select :status, ["in progress", "cancelled", "completed"], selected: @invoice.status %>
+      <%= form.select :status, ["in progress", "cancelled", "completed"], selected: @invoice.status %>
       <%= form.submit "Update Invoice Status" %>
       <%end%></div><br>
     </ul>
