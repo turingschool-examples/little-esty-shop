@@ -11,7 +11,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of :name }
-
+    it { should define_enum_for(:status).with_values([:enabled, :disabled]) }
   end
 
   before :each do
@@ -90,5 +90,15 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe 'change_status' do 
+      it 'swaps a merchants status from enabled => disabled or disabled => enabled' do 
+      merchant = Merchant.create!(name: 'BuyMyThings')
+      expect(merchant.status).to eq("enabled")
+      merchant.change_status
+      expect(merchant.status).to eq("disabled")
+      merchant.change_status
+      expect(merchant.status).to eq("enabled")
+      end 
+    end 
   end
 end
