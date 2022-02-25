@@ -6,8 +6,15 @@ class Admin::MerchantsController < ApplicationController
 
   def update 
     if params[:trigger]
-      # Somehow clicking the button is changing the merchant's status before I even can do it here? Weird. Must be in the view 
+      merchant = set_merchant
+      merchant.change_status
       redirect_to admin_merchants_path
     end 
+  end 
+
+private 
+
+  def set_merchant 
+    @merchant = Merchant.find(params[:id])
   end 
 end
