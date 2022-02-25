@@ -37,6 +37,7 @@ RSpec.describe 'the admin invoice index' do
 
   it "Shows Invoice Items with item details" do
     visit "/admin/invoices/#{@invoice_1.id}"
+save_and_open_page
 
     expect(page).to have_content("#{@item_1.name}")
     expect(page).to have_content("#{@item_2.name}")
