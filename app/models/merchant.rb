@@ -8,6 +8,9 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  scope :with_successful_transactions, -> { joins(:transactions)
+            .where("transactions.result =?", 0)}
+
   def merchant_invoices
     (invoices.order(:id)).uniq
   end
@@ -43,11 +46,19 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_customers
-    customers.joins(invoices: :transactions)
-              .where("transactions.result =?", 0)
+    customers.with_successful_transactions
               .select("customers.*, count('transactions') AS transaction_count")
               .group("customers.id")
               .order("transaction_count DESC")
               .limit(5)
+  end
+
+  def self.top_five_merchants
+    with_successful_transactions
+    .joins(:invoice_items)
+    .select("merchants.*, sum(invoice_items.quantity*invoice_items.unit_price) AS total_revenue")
+    .group("merchants.id")
+    .order("total_revenue DESC")
+    .limit(5)
   end
 end
