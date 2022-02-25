@@ -2,9 +2,24 @@
 <h1>The Admin Merchants Index</h1>
 </center>
 
-<div id="create">
+<center>
+<section id="create">
   <%= button_to 'Create New Merchant', new_admin_merchant_path, method: :get %>
-</div>
+</section>
+</center>
+
+<center>
+<section id="top_five_merchants"
+<h2>Top Merchants</h2>
+<% @merchants.top_five_merchants.each_with_index do |merchant, index| %>
+  <section id="top_merchant-<%= merchant.id %>">
+    <p>Rank: <%="#{index += 1}"%></p>
+    <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></p>
+    <p>Total Revenue: $<%= merchant.cents_to_dollars(merchant.total_revenue)  %></p>
+  </section>
+<% end %>
+</section>
+<center>
 
 <center>
 <section id="enabled"
