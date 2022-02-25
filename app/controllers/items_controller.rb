@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def update_status
+  def update
     @item = Item.find(params[:id])
     if params[:status] == 'enable'
       @item.update(status: 1)

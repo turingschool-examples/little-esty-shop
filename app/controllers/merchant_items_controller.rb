@@ -15,7 +15,6 @@ class MerchantItemsController < ApplicationController
   end
 
   def update
-    binding.pry
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
     item.update(item_params)
