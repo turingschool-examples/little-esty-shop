@@ -1,33 +1,18 @@
 Rails.application.routes.draw do
+  get '/', to: "welcome#index"
+  get '/admin', to: 'admin#show'
+  get '/merchants/:id/dashboard', to: 'merchants#show'
+
   resources :merchants do
-    resources :items, controller: 'merchant_items'
+    resources :items, except:[:destroy], controller: 'merchant_items'
+    resources :invoices, only:[:index, :show, :update], controller: 'merchant_invoices'
   end
 
-  get '/', to: "welcome#index"
+  resources :items, only:[:show, :update]
+  resources :invoices, only:[:show]
 
-  get '/items/:id', to: 'items#show'
-  patch 'items/:id', to: 'items#update_status'
-  get '/merchant/:id/dashboard', to: 'merchants#show'
-
-  get '/merchants/:id/invoices', to: 'merchant_invoices#index'
-  get '/merchants/:id/items', to: 'merchant_items#index'
-  get '/merchant/:id/invoices', to: 'merchant_invoices#index'
-
-  get '/merchant/:merchant_id/invoices/:invoice_id', to: 'merchant_invoices#show'
-  patch '/merchant/:merchant_id/invoices/:invoice_id', to: 'merchant_invoices#update'
-  get '/merchants/:id/items/:item_id', to: 'merchant_items#show'
-  get '/invoices/:id', to: 'invoices#show'
-
-  get '/admin', to: 'admin#show'
-  get '/admin/merchants', to: 'admin_merchants#index'
-  get '/admin/invoices', to: 'admin_invoices#index'
-
-
-
-
-
-
-
-
-
+  namespace :admin do
+    resources :merchants
+    resources :invoices
+  end
 end

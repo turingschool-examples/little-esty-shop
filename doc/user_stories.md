@@ -2,11 +2,11 @@
 
 These user stories will require you to build many pages. This repo includes wireframes for the following pages:
 
-* [Merchant Dashboard](./wireframes/Merchant_Dashboard.png)
-* [Merchant Items Index](./wireframes/Merchant_Items.png)
-* [Merchant Items Show](./wireframes/Merchant_Item_Show.png)
-* [Merchant Invoices Index](./wireframes/Merchant_Invoices.png)
-* [Merchant Invoices Show](./wireframes/Merchant_Invoice_Show.png)
+* [Merchant Dashboard](./wireframes/merchants_Dashboard.png)
+* [Merchant Items Index](./wireframes/merchants_Items.png)
+* [Merchant Items Show](./wireframes/merchants_Item_Show.png)
+* [Merchant Invoices Index](./wireframes/merchants_Invoices.png)
+* [Merchant Invoices Show](./wireframes/merchants_Invoice_Show.png)
 * [Admin Dashboard](./wireframes/Admin_Dashboard.png)
 * [Admin Merchants Index](./wireframes/Admin_Merchants.png)
 * [Admin Merchants Show](./wireframes/Admin_Merchant_Show.png)
@@ -21,7 +21,7 @@ These user stories will require you to build many pages. This repo includes wire
 Merchant Dashboard
 
 As a merchant,
-When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
+When I visit my merchant dashboard (/merchants/merchants_id/dashboard)
 Then I see the name of my merchant
 ```
 
@@ -30,8 +30,8 @@ Merchant Dashboard Links
 
 As a merchant,
 When I visit my merchant dashboard
-Then I see link to my merchant items index (/merchants/merchant_id/items)
-And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
+Then I see link to my merchant items index (/merchants/merchants_id/items)
+And I see a link to my merchant invoices index (/merchants/merchants_id/invoices)
 ```
 
 ```
@@ -74,7 +74,7 @@ And I see that the list is ordered from oldest to newest
 Merchant Items Index Page
 
 As a merchant,
-When I visit my merchant items index page ("merchants/merchant_id/items")
+When I visit my merchant items index page ("merchants/merchants_id/items")
 I see a list of the names of all of my items
 And I do not see items for any other merchant
 ```
@@ -84,7 +84,7 @@ Merchant Items Show Page
 
 As a merchant,
 When I click on the name of an item from the merchant items index page,
-Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
+Then I am taken to that merchant's item's show page (/merchants/merchants_id/items/item_id)
 And I see all of the item's attributes including:
 
 - Name
@@ -173,7 +173,7 @@ When a customer purchases something from the shop, a new invoice will be created
 Merchant Invoices Index
 
 As a merchant,
-When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
+When I visit my merchant's invoices index (/merchants/merchants_id/invoices)
 Then I see all of the invoices that include at least one of my merchant's items
 And for each invoice I see its id
 And each id links to the merchant invoice show page
@@ -183,7 +183,7 @@ And each id links to the merchant invoice show page
 Merchant Invoice Show Page
 
 As a merchant
-When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+When I visit my merchant's invoice show page(/merchants/merchants_id/invoices/invoice_id)
 Then I see information related to that invoice including:
 - Invoice id
 - Invoice status
@@ -296,7 +296,7 @@ Admin Merchant Show
 
 As an admin,
 When I click on the name of a merchant from the admin merchants index page,
-Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)
+Then I am taken to that merchant's admin show page (/admin/merchants/merchants_id)
 And I see the name of that merchant
 ```
 
