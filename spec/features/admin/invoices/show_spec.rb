@@ -77,7 +77,6 @@ RSpec.describe 'Invoices', type: :feature do
       expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
       expect(page).to have_content("Invoice Status: in progress")
     within("##{@invoice1.id}") do
-      save_and_open_page
       select'cancelled', from: :status
       click_button("Update Invoice Status")
       expect(page).to have_content("Invoice Status: cancelled")
