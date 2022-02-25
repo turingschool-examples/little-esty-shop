@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  validates_presence_of :name
+
   def ship_ready_items
     invoice_items.joins(:invoice)
                   .where.not(status: 2)
