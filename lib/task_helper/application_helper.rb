@@ -7,5 +7,3 @@ module ApplicationHelper
     ActiveRecord::Base.connection.execute("ALTER SEQUENCE invoice_items_id_seq RESTART WITH #{type.maximum(:id) + 1}")
   end
 end
-
-
