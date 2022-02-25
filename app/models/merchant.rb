@@ -5,11 +5,14 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  validates_presence_of(:name)
+
 
   def ship_ready_items
     invoice_items.joins(:invoice)
                   .where.not(status: 2)
                   .order(:created_at)
+
   end
 
   def top_five_customers
@@ -22,7 +25,7 @@ class Merchant < ApplicationRecord
   end
 
 
-   end
+
 
    def top_five_items
      items.joins(invoice_items: {invoice: :transactions})
@@ -41,14 +44,4 @@ class Merchant < ApplicationRecord
      .order(totalrevenue: :desc)
      .limit(5)
    end
-
-  def top_five_items
-    items.joins(invoice_items: {invoice: :transactions})
-        .where(transactions:{result: 1})
-        .select("items.*, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
-        .group("items.id")
-        .order(totalrevenue: :desc)
-        .limit(5)
-  end
-
 end
