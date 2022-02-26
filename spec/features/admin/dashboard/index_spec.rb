@@ -16,15 +16,6 @@ RSpec.describe 'The Admin Dashboard Index' do
     expect(page).to have_link("Admin invoices index")
   end
 
-  #   Admin Dashboard Statistics - Top Customers
-  #
-  # As an admin,
-  # When I visit the admin dashboard
-  # Then I see the names of the top 5 customers
-  # who have conducted the largest number of successful transactions
-  # And next to each customer name I see the number of successful transactions they have
-  # conducted
-
   before :each do
     @merchant2 = Merchant.create!(name: "Juan Lopez")
 
@@ -92,7 +83,6 @@ end
     expect(page).to have_content("#{@customer4.first_name} #{@customer4.last_name}")
     expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name}")
   end
-
 
   it 'can see a section for "Incomplete Invoices"' do
     visit admin_dashboard_index_path
