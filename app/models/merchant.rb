@@ -14,4 +14,16 @@ class Merchant < ApplicationRecord
     # grab all the invoices unless status is shipped
     invoice_items.where.not(status: 2)
   end
+
+  def ordered_items
+    items.order(:name)
+  end
+
+  def self.enabled
+    where(status: 1)
+  end
+
+  def self.disabled
+    where(status: 0)
+  end
 end

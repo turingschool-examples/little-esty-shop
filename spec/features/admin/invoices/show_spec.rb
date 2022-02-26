@@ -66,4 +66,38 @@ RSpec.describe 'Invoices', type: :feature do
 
     expect(page).to have_content("Total amount from Marky's invoice: $2125")
   end
+
+  it "can update status via dropdown menu's" do
+    visit "/admin/invoices/#{@invoice1.id}"
+
+    within("##{@invoice1.id}") do
+      select'in progress', from: :status
+      click_button("Update Invoice Status")
+    end
+      expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+      expect(page).to have_content("Invoice Status: in progress")
+    within("##{@invoice1.id}") do
+      select'cancelled', from: :status
+      click_button("Update Invoice Status")
+      expect(page).to have_content("Invoice Status: cancelled")
+      expect(page).to_not have_content("Invoice Status: in progress")
+      expect(page).to_not have_content("Invoice Status: completed")
+    end
+
+    within("##{@invoice1.id}") do
+      select'completed', from: :status
+      click_button("Update Invoice Status")
+      expect(page).to have_content("Invoice Status: completed")
+      expect(page).to_not have_content("Invoice Status: in progress")
+      expect(page).to_not have_content("Invoice Status: cancelled")
+    end
+
+    within("##{@invoice1.id}") do
+      select'completed', from: :status
+      click_button("Update Invoice Status")
+      expect(page).to have_content("Invoice Status: completed")
+      expect(page).to_not have_content("Invoice Status: in progress")
+      expect(page).to_not have_content("Invoice Status: cancelled")
+    end
+  end
 end

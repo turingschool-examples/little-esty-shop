@@ -29,8 +29,13 @@ class Admin::MerchantsController < ApplicationController
     merchant = Merchant.find(params[:id])
 
     if merchant.update(merchant_params)
-      redirect_to "/admin/merchants/#{merchant.id}"
-      flash[:alert] = "Merchant successfully updated!"
+      if params[:status_button] == "true"
+        redirect_to "/admin/merchants"
+        flash[:alert] = "Merchant successfully updated!"
+      else
+        redirect_to "/admin/merchants/#{merchant.id}"
+        flash[:alert] = "Merchant successfully updated!"
+      end
     else
       redirect_to "/admin/merchants/#{merchant.id}/edit"
       flash[:alert] = "Error: #{error_message(merchant.errors)}"
@@ -42,8 +47,8 @@ class Admin::MerchantsController < ApplicationController
     def merchant_params
       param_hash = {}
 
-      param_hash[:name] = params[:name] unless params[:name] == ""
-      param_hash[:status] = params[:status] unless params[:status] == ""
+      param_hash[:name] = params[:name] unless params[:name] == "" || params[:name] == nil
+      param_hash[:status] = params[:status] unless params[:status] == "" || params[:status] == nil
 
       param_hash
     end

@@ -1,4 +1,5 @@
 <div class="container text-center">
+
 <h1>Admin: Invoices</h1>
 <% @invoices.each do |invoice| %>
   <p><%=link_to "Invoice Number: #{invoice.id}", "/admin/invoices/#{invoice.id}" %>

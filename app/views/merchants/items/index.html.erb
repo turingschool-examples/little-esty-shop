@@ -1,5 +1,18 @@
 <h1>Merchant items</h1>
 
-<% @merchant.items.each do |item| %>
-  <p><%= item.name %></p>
+<%= link_to "Create item", "/merchants/#{@merchant.id}/items/new" %>
+
+<% @merchant.ordered_items.each do |item| %>
+  <div id="item-<%= item.id %>">
+      <p><%= item.name %> status: <%= item.status %></p>
+
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
+      <% statusing = [ "enabled", "enable" ] %>
+      <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
+      <%= form.hidden_field :status, value: statusing[0] %>
+      <%= form.submit statusing[1] %>
+    <% end %>
+    <%= link_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  </div>
 <% end  %>
+

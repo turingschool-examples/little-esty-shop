@@ -1,3 +1,13 @@
 @import "/*";
 @import "bootstrap";
  @import "tether";
+
+
+.merchant-div {
+  display: flex;
+  flex-direction: row;
+}
+.right-div{
+padding-top: 3.4rem;
+padding-left: 1rem;
+}
