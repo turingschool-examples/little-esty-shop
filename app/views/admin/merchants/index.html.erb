@@ -1,10 +1,10 @@
-
+<div class="container text-center">
+  <br>
 <h1>All Merchants</h1>
-<div class="merchant-div">
-<br>
+  <div id="new-link-top"><%=button_to "Add New Merchant", "/admin/merchants/new", method: :get %></div>
+  <div class="merchant-div">
 <ul>
 <div id="enabled">
-  <div id="new-link-top"><%= button_to "Add New Merchant", "/admin/merchants/new", method: :get %><br>
 <h4>Active Merchants</h4>
 <% @merchants.enabled.each do |merchant| %>
   <li id="merchant-<%= merchant.id %>">Name: <%= merchant.name %> <br> Current status: <%= merchant.status %>
@@ -23,6 +23,7 @@
 <br>
 <div id="disabled" class='right-div'>
   <h4>Inactive Merchants</h4>
+<ul>
 <% @merchants.disabled.each do |merchant| %>
   <li id="merchant-<%= merchant.id %>">Name: <%= merchant.name %> <br> Current status: <%= merchant.status %>
   <%= form_with url: "/admin/merchants/#{merchant.id}?status_button=true", method: :patch, local: true do |form| %>
@@ -33,7 +34,9 @@
   </li><br>
   <% end %>
 <% end %>
+</ul>
 </div>
 <br>
 </div>
 <div id="new-link-bottom"><%= button_to "Add New Merchant", "/admin/merchants/new", method: :get %></div>
+</div>

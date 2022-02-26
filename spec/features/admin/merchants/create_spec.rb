@@ -6,8 +6,7 @@ RSpec.describe 'Creating a new merchant:', type: :feature do
     visit '/admin/merchants'
 
     within("#new-link-top") do
-      expect(page).to have_button("Add New Merchant")
-      click_button("Add New Merchant")
+        click_button("Add New Merchant")
     end
 
     expect(current_path).to eq('/admin/merchants/new')

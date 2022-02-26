@@ -1,10 +1,15 @@
-<h1>Merchant items</h1>
+<div class="container text-center">
+<br><h1>Merchant items</h1>
+<%= button_to "Create item", "/merchants/#{@merchant.id}/items/new", method: :get%><br>
 
-<%= link_to "Create item", "/merchants/#{@merchant.id}/items/new" %>
 
-<% @merchant.ordered_items.each do |item| %>
+
+<div class="merchant-div">
+  <ul>
+    <div id=enabled>
+<% @merchant.ordered_items.enabled.each do |item| %>
   <div id="item-<%= item.id %>">
-      <p><%= item.name %> status: <%= item.status %></p>
+      <li>Name:<%= item.name %> <br> Status: <%= item.status %></li>
 
     <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
       <% statusing = [ "enabled", "enable" ] %>
@@ -12,7 +17,28 @@
       <%= form.hidden_field :status, value: statusing[0] %>
       <%= form.submit statusing[1] %>
     <% end %>
-    <%= link_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <%= button_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %><br>
   </div>
 <% end  %>
+</ul>
+<div>
 
+<div id="disabled" class='merch-right-div'>
+<% @merchant.ordered_items.disabled.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <ul>
+      <li>Name: <%= item.name %><br> Status: <%= item.status %></li>
+
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
+      <% statusing = [ "enabled", "enable" ] %>
+      <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
+      <%= form.hidden_field :status, value: statusing[0] %>
+      <%= form.submit statusing[1] %>
+    <% end %>
+    <%= button_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
+  </div>
+<% end  %>
+<ul>
+</div>
+</div>
+</div>
