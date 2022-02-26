@@ -12,4 +12,9 @@ class Invoice < ApplicationRecord
   def total_revenue
     self.items.sum(:unit_price)
   end
+
+  def self.incomplete
+    not_cancelled = self.where.not(status: 1).pluck(:id)
+    InvoiceItem.where.not(status: "shipped").where(invoice_id: not_cancelled)
+  end
 end

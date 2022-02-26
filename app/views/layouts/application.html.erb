@@ -9,8 +9,9 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <button><a href="/admin">Admin</a></button>  <button><a href="/admin/merchants"> Admin Merchants</a></button>
-      <button><a href="/admin/invoices">Admin invoices</a></button>
+
+  <div class="container text-center"><button><a href="/admin">Admin</a></button>  <button><a href="/admin/merchants"> Admin Merchants</a></button>
+      <button><a href="/admin/invoices">Admin invoices</a></button></div>
   <body>
     <% flash.each do |type, msg| %>
       <div>
