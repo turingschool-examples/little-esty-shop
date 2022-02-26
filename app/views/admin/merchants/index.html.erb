@@ -1,6 +1,20 @@
-<div class="merchant_list">
+<div class="enabled_merchants">
+  <h2> Enabled Merchants </h2>
   <% @merchants.each do |merchant| %>
-    <%= merchant.name %>
+    <% if merchant.status == "enabled" %>
+      <%= merchant.name %>
+      <%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}?status=disabled", method: :put %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="disabled_merchants">
+  <h2> Disabled Merchants </h2>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == "disabled" %>
+      <%= merchant.name %>
+      <%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}?status=enabled", method: :put %>
+    <% end %>
   <% end %>
 </div>
 
@@ -10,5 +24,14 @@
     <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
     <%= merchant.totalrevenue %>
   </li>
+  <% end %>
+</div>
+
+<div class="create_merchant">
+  <h2> Create new merchant </h2>
+  <%= form_with url: "/admin/merchants", method: :post, local: true do |form| %>
+    <%= form.label "Name:" %>
+    <%= form.text_field :name %>
+    <%= form.submit %>
   <% end %>
 </div>
