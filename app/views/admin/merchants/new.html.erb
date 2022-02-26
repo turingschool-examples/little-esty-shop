@@ -1,0 +1,8 @@
+<h1> New Merchant </h1>
+
+<%= form_for [:admin, @merchant], local: true do |f| %> 
+  <p><%= f.label :name %></p>
+  <p><%= f.text_field :name %></p> <br>
+
+  <p><%= f.submit %></p>
+<%end%>

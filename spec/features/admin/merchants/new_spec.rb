@@ -15,13 +15,17 @@ RSpec.describe 'Admin Merchant New Page' do
   it "after filling out the form you are redirected to the index page and see the new merchant" do
     visit new_admin_merchant_path
     fill_in "Name", with: "Conor's Crap"
-    expect(current_path).to eq(admin_merchant_path)
+
+    click_on "Create Merchant"
+    expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content("Conor's Crap")
   end
 
   it "New merchants status is disabled by default" do
     visit new_admin_merchant_path
     fill_in "Name", with: "Aedan's Applications"
-    expect(page).to have_content("Disabled")
+    click_on "Create Merchant"
+    
+    expect(page).to have_button("enable merchant")
   end
 end

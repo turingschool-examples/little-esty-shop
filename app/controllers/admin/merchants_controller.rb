@@ -18,7 +18,7 @@ class Admin::MerchantsController < ApplicationController
       merchant.change_status
       redirect_to admin_merchants_path
     elsif merchant.name != params[:name]
-      merchant.update!(name: params[:name])
+      merchant.update!(name: params[:merchant][:name])
       redirect_to admin_merchant_path(merchant)
       flash[:notice] = "#{merchant.name} has been updated"
     else
@@ -27,6 +27,12 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    merchent = Merchant.create!(name: params[:merchant][:name], status: :disabled)
+    redirect_to admin_merchants_path
   end
 
 private
