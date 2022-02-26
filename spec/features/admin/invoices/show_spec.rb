@@ -63,7 +63,7 @@ RSpec.describe 'the admin invoice index' do
 
   it "can change an invoice status" do
     visit "/admin/invoices/#{@invoice_1.id}"
-    
+
     expect(page).to have_content("Invoice Status: completed")
     expect(page).to_not have_content("Invoice Status: cancelled")
     expect(page).to_not have_content("Invoice Status: in progress")
