@@ -13,10 +13,7 @@ class Invoice < ApplicationRecord
   end
 
   def total_invoice_revenue
-    total = invoice_items.map do |invoice_item|
-      invoice_item.quantity * invoice_item.unit_price
-    end
-    return total.sum
+      invoice_items.pluck("unit_price * quantity").sum
   end
 
 end
