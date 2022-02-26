@@ -14,4 +14,9 @@ class Invoice < ApplicationRecord
   def invoice_revenue
     (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
   end
+
+  def self.not_shipped
+    invoice_items = InvoiceItem.all
+    invoice_items.where("status != 2")
+  end
 end
