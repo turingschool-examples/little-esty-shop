@@ -37,7 +37,6 @@ RSpec.describe 'the admin invoice index' do
 
   it "Shows Invoice Items with item details" do
     visit "/admin/invoices/#{@invoice_1.id}"
-save_and_open_page
 
     expect(page).to have_content("#{@item_1.name}")
     expect(page).to have_content("#{@item_2.name}")
@@ -47,6 +46,19 @@ save_and_open_page
     expect(page).to have_content("#{@invoice_item_2.unit_price}")
     expect(page).to have_content("#{@invoice_item_1.status}")
     expect(page).to have_content("#{@invoice_item_2.status}")
+  end
+
+  it "Total Revenue will be shown for each item" do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content(13)
+    expect(page).to have_content(58)
+  end
+
+  it "Total Revenue will be shown for each Invoice" do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content(71)
   end
 
 end
