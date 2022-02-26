@@ -55,12 +55,11 @@ RSpec.describe Invoice, type: :model do
     invoice_item9 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item2.id, quantity: 1, unit_price: 2000, status: 2)
 
 
-    expect(Invoice.incomplete).to include(invoice_item1)
-    expect(Invoice.incomplete).to include(invoice_item3)
-    expect(Invoice.incomplete).to include(invoice_item4)
-    expect(Invoice.incomplete).to include(invoice_item5)
-    expect(Invoice.incomplete).to_not include(invoice_item6)
-    expect(Invoice.incomplete).to_not include(invoice_item7)
-    expect(Invoice.incomplete).to_not include(invoice_item9)
+    expect(Invoice.incomplete).to include(invoice1)
+    expect(Invoice.incomplete).to include(invoice2)
+    expect(Invoice.incomplete).to include(invoice3)
+
+    expect(Invoice.incomplete).to_not include(invoice4)
+    expect(Invoice.incomplete).to_not include(invoice5)
   end
 end

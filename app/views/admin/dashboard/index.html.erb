@@ -9,7 +9,7 @@
 <div class="center-admin">
 <ul>
 <% @incomplete.each do |invoice| %>
-  <li> <%= link_to "Invoice ID: #{invoice.invoice_id}", "/admin/invoices/#{invoice.invoice_id}"%>   Order created:  <%=invoice.created_at.strftime("%A, %B %d, %Y")%></li>
+  <li> <%= link_to "Invoice ID: #{invoice.id}", "/admin/invoices/#{invoice.id}"%>   Order created:  <%=invoice.created_at.strftime("%A, %B %d, %Y")%></li>
   <%end%>
   </ul>
 </div>

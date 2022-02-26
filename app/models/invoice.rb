@@ -14,7 +14,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete
-    not_cancelled = self.where.not(status: 1).pluck(:id)
-    InvoiceItem.where.not(status: "shipped").where(invoice_id: not_cancelled)
+    Invoice.where.not(status: 1).joins(:invoice_items).where.not(status: 2).group("invoices.id")
   end
 end

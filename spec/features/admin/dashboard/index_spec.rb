@@ -15,17 +15,17 @@ describe 'Admin Dashboard Index Page' do
     @invoice3 = @customer3.invoices.create!(status: 0)
     @invoice4 = @customer4.invoices.create!(status: 2)
     @invoice5 = @customer4.invoices.create!(status: 1)
-    # invoice1 will test both items packeaged
+    # invoice1 will test both items packaged
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 0)
-    #@invoice_item2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 2, unit_price: 2000, status: 0)
+    @invoice_item2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 2, unit_price: 2000, status: 0)
 
     # invoice2 will test 1 item packaged, 1 item pending.
     @invoice_item3 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item3.id, quantity: 5, unit_price: 125, status: 0)
-    #@invoice_item4 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
+    @invoice_item4 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
 
     # invoice3 will test both packages pending
     @invoice_item5 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item2.id, quantity: 2, unit_price: 2000, status: 1)
-    #@invoice_item8 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item2.id, quantity: 1, unit_price: 2000, status: 1)
+    @invoice_item8 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item2.id, quantity: 1, unit_price: 2000, status: 1)
 
     #invoice 4 will test completed order with all items shipped, it should not appear
     @invoice_item6 = InvoiceItem.create!(invoice_id: @invoice4.id, item_id: @item3.id, quantity: 1, unit_price: 125, status: 2)
@@ -54,19 +54,19 @@ describe 'Admin Dashboard Index Page' do
   it "lists the invoices that are incomplete " do
     visit '/admin'
 
-    #save_and_open_page
+    save_and_open_page
     #binding.pry
-    expect(page).to have_link("Invoice ID: #{@invoice_item1.invoice_id}")
-    expect(page).to have_link("Invoice ID: #{@invoice_item3.invoice_id}")
-    expect(page).to have_link("Invoice ID: #{@invoice_item5.invoice_id}")
-    expect(page).to_not have_content("Invoice ID: #{@invoice_item6.invoice_id}")
-    expect(page).to_not have_content("Invoice ID: #{@invoice_item9.invoice_id}")
+    expect(page).to have_link("Invoice ID: #{@invoice1.id}")
+    expect(page).to have_link("Invoice ID: #{@invoice2.id}")
+    expect(page).to have_link("Invoice ID: #{@invoice3.id}")
+    expect(page).to_not have_content("Invoice ID: #{@invoice4.id}")
+    expect(page).to_not have_content("Invoice ID: #{@invoice5.id}")
   end
   it "has links on Invoices that go to show pages." do
     visit '/admin'
     #save_and_open_page
     #binding.pry
-    click_link("Invoice ID: #{@invoice_item1.invoice_id}")
-    expect(current_path).to eq("/admin/invoices/#{@invoice_item1.invoice_id}")
+    click_link("Invoice ID: #{@invoice1.id}")
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
   end
 end
