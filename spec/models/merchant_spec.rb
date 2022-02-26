@@ -19,6 +19,18 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:transactions).through(:invoices) }
   end
 
+  it '#ready_items' do
+    merchant1 = create(:merchant)
+
+    item1 = create(:item, merchant: merchant1)
+
+    ii1 = create(:invoice_item, status: "shipped", item: item1)
+    ii2 = create(:invoice_item, status: "packaged", item: item1)
+    ii3 = create(:invoice_item, status: "pending", item: item1)
+
+    expect(merchant1.ready_items).to eq([ii2, ii3])
+  end
+
   it "lists only enabled merchants" do
     @merchant1 = Merchant.create!(name: "The Tornado", status: 1)
     @merchant3 = Merchant.create!(name: "The Mornado", status: 1)
@@ -28,7 +40,7 @@ RSpec.describe Merchant, type: :model do
     expect(Merchant.enabled).to_not eq([@merchant2, @merchant4])
   end
 
-  it "lists only disenabled merchants" do
+  it "lists only disabled merchants" do
     @merchant1 = Merchant.create!(name: "The Tornado", status: 1)
     @merchant3 = Merchant.create!(name: "The Mornado", status: 1)
     @merchant2 = Merchant.create!(name: "The Vornado", status: 0)
