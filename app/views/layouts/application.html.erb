@@ -10,11 +10,13 @@
   </head>
 
   <body>
-  <% flash.each do |type, msg| %>
+    <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
       </div>
     <% end %>
+    <%= link_to "Merchants (Admin)", "/admin/merchants" %>
+    <%= link_to "Invoices (Admin)", "/admin/invoices" %>
     <%= yield %>
   </body>
 </html>
