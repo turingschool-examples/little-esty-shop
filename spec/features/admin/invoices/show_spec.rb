@@ -57,7 +57,6 @@ RSpec.describe 'the admin invoice index' do
 
   it "Total Revenue will be shown for each Invoice" do
     visit "/admin/invoices/#{@invoice_1.id}"
-save_and_open_page
 
     expect(page).to have_content(71)
   end
