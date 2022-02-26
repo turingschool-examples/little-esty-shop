@@ -205,12 +205,12 @@ RSpec.describe 'the admin merchant index' do
 
   it "can add a merchant" do
     visit '/admin/merchants'
-
+    
     expect(page).to_not have_content('Newest Merchant')
 
     within ".create_merchant" do
       fill_in 'name', with: 'Newest Merchant'
-      click_on 'Submit'
+      click_on 'Save'
     end
 
     expect(page).to have_content('Newest Merchant')

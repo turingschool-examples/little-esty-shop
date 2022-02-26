@@ -23,4 +23,9 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def create
+    Merchant.create!(name: params[:name])
+    redirect_to "/admin/merchants"
+  end
+
 end
