@@ -3,6 +3,15 @@
 
 <p><b>Invoice Id:</b> <%= @invoice.id %></p>
 <p><b>Invoice Status:</b> <%= @invoice.status %></p>
+<%= form_with url: "/admin/invoices/#{@invoice.id}?invoice_id=#{@invoice.id}", method: :patch, local: true do |form| %>
+    <%= form.radio_button :status, "completed" %>
+    <%= form.label :status_pending, "completed" %>
+    <%= form.radio_button :status, "cancelled" %>
+    <%= form.label :status_packaged, "cancelled" %>
+    <%= form.radio_button :status, "in progress" %>
+    <%= form.label :status_shipped, "in progress" %>
+    <%= form.submit "Update Invoice Status" %>
+  <% end %>
 <p><b>Invoice Creation Date:</b> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p><b>Customer Name: </b> <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 <p><b>Total Invoice Revenue: </b> $<%= @invoice.total_invoice_revenue %>
