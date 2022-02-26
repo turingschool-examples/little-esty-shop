@@ -18,5 +18,16 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:customers).through(:invoices) }
     it { should have_many(:transactions).through(:invoices) }
   end
+
+  it '#ready_items' do
+    merchant1 = create(:merchant)
+
+    item1 = create(:item, merchant: merchant1)
+
+    ii1 = create(:invoice_item, status: "shipped", item: item1)
+    ii2 = create(:invoice_item, status: "packaged", item: item1)
+    ii3 = create(:invoice_item, status: "pending", item: item1)
+
+    expect(merchant1.ready_items).to eq([ii2, ii3])
+  end
 end
- 
