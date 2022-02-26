@@ -82,9 +82,9 @@ RSpec.describe 'the admin dashboard' do
   it "has a list of all incompleted invoices with their ID, which is a link to its show page" do
     customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
 
-    invoice_1 = customer_1.invoices.create!(status: "completed")
-    invoice_2 = customer_1.invoices.create!(status: "completed")
-    invoice_3 = customer_1.invoices.create!(status: "in progress")
+    invoice_1 = customer_1.invoices.create!(status: "in progress")
+    invoice_2 = customer_1.invoices.create!(status: "in progress")
+    invoice_3 = customer_1.invoices.create!(status: "completed")
 
     visit "/admin"
 
