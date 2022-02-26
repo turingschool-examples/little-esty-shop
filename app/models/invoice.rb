@@ -11,4 +11,12 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum(:unit_price)
   end
+
+  def total_invoice_revenue
+    total = invoice_items.map do |invoice_item|
+      invoice_item.quantity * invoice_item.unit_price
+    end
+    return total.sum
+  end
+
 end
