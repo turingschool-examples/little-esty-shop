@@ -14,4 +14,5 @@
 <p><b>Quantity: </b> <%= invoice_item.quantity %>
 <p><b>Price Sold For: </b> <%= invoice_item.unit_price %>
 <p><b>Invoice Item Status: </b> <%= invoice_item.status %>
+<p><b>Item Revenue: $</b> <%= (invoice_item.quantity * invoice_item.unit_price) %>
   <% end %>
