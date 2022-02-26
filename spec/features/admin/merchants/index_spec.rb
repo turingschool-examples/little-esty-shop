@@ -157,7 +157,6 @@ RSpec.describe 'the admin merchant index' do
 
     visit '/admin/merchants'
 
-    save_and_open_page
     within ".enabled_merchants" do
       expect(page).to_not have_content(disabled_merchant.name)
       expect(page).to have_content(enabled_merchant.name)
@@ -202,6 +201,18 @@ RSpec.describe 'the admin merchant index' do
       expect(page).to have_content(disabled_merchant.name)
       expect(page).to have_content(enabled_merchant.name)
     end
+  end
 
+  it "can add a merchant" do
+    visit '/admin/merchants'
+
+    expect(page).to_not have_content('Newest Merchant')
+
+    within ".create_merchant" do
+      fill_in 'name', with: 'Newest Merchant'
+      click_on 'Submit'
+    end
+
+    expect(page).to have_content('Newest Merchant')
   end
 end
