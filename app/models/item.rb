@@ -21,6 +21,11 @@ class Item < ApplicationRecord
   end
 
   def best_day
-    invoices.joins(:invoice_items, :transactions).where(transactions: {result: 0}).select("invoices.created_at, (COUNT(invoice_items.item_id = #{id}))").group(:created_at).order(count: :desc, created_at: :desc).limit(1)
+    invoices.joins(:invoice_items, :transactions)
+    .where(transactions: {result: 0})
+    .select("invoices.created_at, (COUNT(invoice_items.item_id = #{id}))")
+    .group(:created_at)
+    .order(count: :desc, created_at: :desc)
+    .limit(1)
   end
 end

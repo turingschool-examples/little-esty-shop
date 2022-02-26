@@ -107,9 +107,9 @@ RSpec.describe 'admin merchant index' do
         end
     end
 
-    describe 'Top Merchants By Revenue' do 
+    describe 'Top Merchants By Revenue and Best Day for top Merchants' do 
         before(:each) do 
-            # Revenue Generated: 470
+            # Revenue Generated: 530
             @merchant_1 = create(:merchant)
             @item_1 = create(:item, merchant_id: @merchant_1.id, name: 'Stuffed Bear')
             @item_2 = create(:item, merchant_id: @merchant_1.id, name: 'Doll')
@@ -136,12 +136,12 @@ RSpec.describe 'admin merchant index' do
             @merchant_6 = create(:merchant)
             @item_9 = create(:item, merchant_id: @merchant_6.id, name: 'Puzzle')
             
-            # Revenue Generated: 150 
+            # Revenue Generated: 210
             @invoice_1 = create(:invoice, created_at: '2012-03-21 14:54:09 UTC', status: 1)
             # Revenue Generated: 120
-            @invoice_2 = create(:invoice, created_at: '2012-03-21 14:54:09 UTC', status: 1)
+            @invoice_2 = create(:invoice, created_at: '2012-03-22 14:54:09 UTC', status: 1)
             # # Revenue Generated: 200
-            @invoice_3 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC', status: 1)
+            @invoice_3 = create(:invoice, created_at: '2012-03-22 14:54:09 UTC', status: 1)
             # Revenue Generated: 160
             @invoice_4 = create(:invoice, created_at: '2012-03-24 14:54:09 UTC', status: 1)
             # # Revenue Generated: 80
@@ -151,13 +151,13 @@ RSpec.describe 'admin merchant index' do
             # # Revenue Generated: 240
             @invoice_7 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC', status: 1)
             # # Revenue Generated: 200
-            @invoice_8 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC', status: 1)
+            @invoice_8 = create(:invoice, created_at: '2012-03-27 14:54:09 UTC', status: 1)
             # # Revenue Generated: 55
-            @invoice_9 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC', status: 1)
-            @invoice_10 = create(:invoice, created_at: '2012-03-23 14:54:09 UTC', status: 1)
+            @invoice_9 = create(:invoice, created_at: '2012-03-26 14:54:09 UTC', status: 1)
+            @invoice_10 = create(:invoice, created_at: '2012-03-27 14:54:09 UTC', status: 1)
             
-            # Revenue Generated: 150
-            @invoice_item_1 = create(:invoice_item, unit_price: 30, quantity: 5, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 2)
+            # Revenue Generated: 210
+            @invoice_item_1 = create(:invoice_item, unit_price: 30, quantity: 7, item_id: @item_1.id, invoice_id: @invoice_1.id, status: 2)
             # Revenue Generated: 120
             @invoice_item_2 = create(:invoice_item, unit_price: 30, quantity: 4, item_id: @item_1.id, invoice_id: @invoice_2.id, status: 2)
             # # Revenue Generated: 200
@@ -177,7 +177,7 @@ RSpec.describe 'admin merchant index' do
             # # Revenue Generated: 10
             @invoice_item_10 = create(:invoice_item, unit_price: 10, quantity: 1, item_id: @item_9.id, invoice_id: @invoice_10.id, status: 2)
             # @invoice_item_10 = create(:invoice_item, unit_price: 10, quantity: 1, item_id: @item_9.id, invoice_id: @invoice_10.id, status: 2)
-        
+            
             @transaction_1 = create(:transaction, invoice_id: @invoice_item_1.invoice_id, result: 0)
             @transaction_2 = create(:transaction, invoice_id: @invoice_item_2.invoice_id, result: 0)
             @transaction_3 = create(:transaction, invoice_id: @invoice_item_3.invoice_id, result: 0)
@@ -209,7 +209,7 @@ RSpec.describe 'admin merchant index' do
         end
         it 'each merchant is a link to the admin merchant show page for that merchant' do 
             visit '/admin/merchants/'
-
+            
             within ".top_merchants" do 
                 expect(page).to have_link(@merchant_1.name)
                 expect(page).to have_link(@merchant_3.name)
@@ -223,13 +223,24 @@ RSpec.describe 'admin merchant index' do
         end
         it 'displays total revenue for each next to merchant name' do 
             visit '/admin/merchants/'
-
+            
             within ".top_merchants" do 
-                expect(page).to have_content("#{@merchant_1.name} - $470.00 in sales")
+                expect(page).to have_content("#{@merchant_1.name} - $530.00 in sales")
                 expect(page).to have_content("#{@merchant_3.name} - $330.00 in sales")
                 expect(page).to have_content("#{@merchant_2.name} - $240.00 in sales")
                 expect(page).to have_content("#{@merchant_4.name} - $200.00 in sales")
                 expect(page).to have_content("#{@merchant_5.name} - $45.00 in sales")
+            end
+        end
+        it 'shows best date next to each merchant when they had the most single-day revenue' do 
+            visit '/admin/merchants/'
+            
+            within ".top_merchants" do 
+                expect(page).to have_content("Top selling date for #{@merchant_1.name} was #{date_formatter(@merchant_1.best_day.first.created_at)}")
+                expect(page).to have_content("Top selling date for #{@merchant_3.name} was #{date_formatter(@merchant_3.best_day.first.created_at)}")
+                expect(page).to have_content("Top selling date for #{@merchant_2.name} was #{date_formatter(@merchant_2.best_day.first.created_at)}")
+                expect(page).to have_content("Top selling date for #{@merchant_4.name} was #{date_formatter(@merchant_4.best_day.first.created_at)}")
+                expect(page).to have_content("Top selling date for #{@merchant_5.name} was #{date_formatter(@merchant_5.best_day.first.created_at)}")
             end
         end
     end
