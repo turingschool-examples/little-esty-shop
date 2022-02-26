@@ -7,7 +7,7 @@ RSpec.describe 'the admin merchant show' do
     visit"/admin/merchants/#{merchant_1.id}/edit"
 
     within(".update_merchant") do
-      expect(page).to have_field(:name, with: "Staples")
+      expect(page).to have_field(:name, with: merchant_1.name)
     end
   end
 
@@ -18,11 +18,14 @@ RSpec.describe 'the admin merchant show' do
 
     within(".update_merchant") do
       fill_in 'name', with: "Sams Club"
-      click_on 'Update merchant'
+      click_on 'Save'
     end
 
     expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
+
     expect(page).to have_content("Sams Club")
     expect(page).to_not have_content("Staples")
+
+    #flash message test
   end
 end
