@@ -26,9 +26,6 @@ class Merchant < ApplicationRecord
              .limit(5)
   end
 
-
-
-
    def top_five_items
      items.joins(invoice_items: {invoice: :transactions})
          .where(transactions:{result: 1})
