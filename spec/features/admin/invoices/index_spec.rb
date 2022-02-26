@@ -118,11 +118,14 @@ RSpec.describe 'The Admin Invoices Index' do
     it 'will list all Invoice ids' do
 
       visit admin_invoices_path
-
-      within("#invoice-0") do
+save_and_open_page
+      within("#admin_invoice-0") do
 
       expect(page).to have_content(@invoice1.id)
-      expect(page).to have_link(merchant_invoice_path(@invoice1))
+      expect(page).to have_link(@invoice1.id)
+      click_link(@invoice1.id)
+      expect(current_path).to eq(admin_invoice_path(@invoice1))
+
       end
     end
   end
