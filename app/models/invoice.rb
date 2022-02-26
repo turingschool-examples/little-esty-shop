@@ -20,6 +20,7 @@ class Invoice < ApplicationRecord
 
   def self.all_open_oldest_first
     where(status: "in progress").order(:created_at)
+  end
 
   def self.incomplete
     Invoice.where.not(status: 1).joins(:invoice_items).where.not(status: 2).group("invoices.id")
