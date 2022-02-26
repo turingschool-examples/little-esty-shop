@@ -13,7 +13,8 @@ class Invoice < ApplicationRecord
   end
 
   def total_invoice_revenue
-      invoice_items.pluck("unit_price * quantity").sum
+    invoice_items.
+    # invoice_items.pluck("unit_price * quantity").sum
   end
 
 end
