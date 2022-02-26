@@ -52,8 +52,11 @@ describe "Merchant Dashboard", type: :feature do
 
     item1 = create(:item, merchant: merchant2)
 
-    ii2 = create(:invoice_item, status: "packaged", item: item1)
-    ii3 = create(:invoice_item, status: "pending", item: item1)
+    invoice1 = create(:invoice)
+    invoice2 = create(:invoice)
+
+    ii2 = create(:invoice_item, status: "packaged", item: item1, invoice: invoice1)
+    ii3 = create(:invoice_item, status: "pending", item: item1, invoice: invoice2)
 
     visit "/merchants/#{merchant2.id}"
 
@@ -75,6 +78,6 @@ describe "Merchant Dashboard", type: :feature do
     expect(current_path).to eq("/merchants/#{merchant2.id}/invoices/#{ii3.invoice.id}")
 
     # sad path
-    expect(current_path).to_not eq("/merchants/#{merchant2.id}/invoices/#{ii3.invoice.id}")
+    expect(current_path).to_not eq("/merchants/#{merchant2.id}/invoices/#{ii2.invoice.id}")
   end
 end
