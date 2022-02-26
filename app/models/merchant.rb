@@ -5,8 +5,10 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
-  validates_presence_of(:name)
+  enum status: {"disabled" => 0, "enabled" => 1}
 
+  validates_presence_of(:name)
+  validates_presence_of(:status)
 
   def ship_ready_items
     invoice_items.joins(:invoice)
@@ -23,9 +25,6 @@ class Merchant < ApplicationRecord
              .order(trans_count: :desc)
              .limit(5)
   end
-
-
-
 
    def top_five_items
      items.joins(invoice_items: {invoice: :transactions})

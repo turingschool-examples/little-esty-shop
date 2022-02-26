@@ -73,7 +73,7 @@ RSpec.describe 'the admin merchant index' do
     end
   end
 
-  it "each merchant is a link to it's admin show page" do
+  it "each top merchant is a link to it's admin show page" do
     customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
     invoice_1 = customer_1.invoices.create!(status: "completed")
     transcation_1 = invoice_1.transactions.create!(credit_card_number: "4654405418249632", result: "success")
@@ -90,7 +90,7 @@ RSpec.describe 'the admin merchant index' do
     expect(page).to have_content(merchant_1.name)
   end
 
-  it "each merchant's total revenue genenrated is next to their name" do
+  it "each merchant's total revenue generated is next to their name" do
     customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
 
     invoice_1 = customer_1.invoices.create!(status: "completed")
@@ -149,5 +149,70 @@ RSpec.describe 'the admin merchant index' do
       expect(page).to have_content("35")
       expect(page).to have_content("40")
     end
+  end
+
+  it "has enabled merchants who can become disabled" do
+    enabled_merchant = Merchant.create!(name: "Staples", status: "enabled")
+    disabled_merchant = Merchant.create!(name: "Home Depot", status: "disabled")
+
+    visit '/admin/merchants'
+
+    within ".enabled_merchants" do
+      expect(page).to_not have_content(disabled_merchant.name)
+      expect(page).to have_content(enabled_merchant.name)
+
+      click_button("Disable #{enabled_merchant.name}")
+    end
+
+    expect(current_path).to eq("/admin/merchants")
+
+    within ".enabled_merchants" do
+      expect(page).to_not have_content(disabled_merchant.name)
+      expect(page).to_not have_content(enabled_merchant.name)
+    end
+
+    within ".disabled_merchants" do
+      expect(page).to have_content(disabled_merchant.name)
+      expect(page).to have_content(enabled_merchant.name)
+    end
+  end
+
+  it "has disabled merchants who can become enabled" do
+    enabled_merchant = Merchant.create!(name: "Staples", status: "enabled")
+    disabled_merchant = Merchant.create!(name: "Home Depot", status: "disabled")
+
+    visit '/admin/merchants'
+
+    within ".disabled_merchants" do
+      expect(page).to have_content(disabled_merchant.name)
+      expect(page).to_not have_content(enabled_merchant.name)
+
+      click_button("Enable #{disabled_merchant.name}")
+    end
+
+    expect(current_path).to eq("/admin/merchants")
+
+    within ".disabled_merchants" do
+      expect(page).to_not have_content(disabled_merchant.name)
+      expect(page).to_not have_content(enabled_merchant.name)
+    end
+
+    within ".enabled_merchants" do
+      expect(page).to have_content(disabled_merchant.name)
+      expect(page).to have_content(enabled_merchant.name)
+    end
+  end
+
+  it "can add a merchant" do
+    visit '/admin/merchants'
+    
+    expect(page).to_not have_content('Newest Merchant')
+
+    within ".create_merchant" do
+      fill_in 'name', with: 'Newest Merchant'
+      click_on 'Save'
+    end
+
+    expect(page).to have_content('Newest Merchant')
   end
 end

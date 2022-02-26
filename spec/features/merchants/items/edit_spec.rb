@@ -28,8 +28,7 @@ RSpec.describe "Merchant Items Edit Page" do
       expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item1.id}")
       item1.reload
       expect(item1.unit_price).to eq(10)
-      # expect(page).to have_content("Item Successfully Updated")
-      #comeback to test for flash message when you are smarter
+      #flash message test
     end
   end
 end

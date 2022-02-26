@@ -26,7 +26,6 @@ RSpec.describe 'the admin merchant show' do
 
     expect(page).to have_content("Sams Club")
     expect(page).to_not have_content("Staples")
-
     #flash message test
   end
 end
