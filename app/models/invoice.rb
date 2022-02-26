@@ -12,4 +12,8 @@ class Invoice < ApplicationRecord
   def total_revenue
     self.items.sum(:unit_price)
   end
+
+  def self.all_oldest_first
+    order(:created_at)
+  end
 end

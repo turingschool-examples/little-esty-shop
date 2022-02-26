@@ -27,4 +27,14 @@ RSpec.describe Invoice, type: :model do
 
     expect(@invoice1.total_revenue).to eq(125)
   end
+
+  describe 'class methods' do
+    it "gives invoices listed by oldest first" do
+      invoice1 = create(:invoice)
+      invoice2 = create(:invoice)
+      invoice3 = create(:invoice)
+
+      expect(Invoice.all_oldest_first).to eq([invoice1, invoice2, invoice3])
+    end
+  end
 end
