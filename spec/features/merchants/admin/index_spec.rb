@@ -244,4 +244,73 @@ RSpec.describe 'admin merchant index' do
             end
         end
     end
+    
+    describe 'Merchants can be sorted by name or created_date' do 
+        before(:each) do 
+            @merchant_1 = create(:merchant, name: "Dell", created_at: '2012-03-22 14:54:09 UTC')
+            @merchant_2 = create(:merchant, name: "Keychron", created_at: '2012-03-20 14:54:09 UTC')
+            @merchant_3 = create(:merchant, name: "Arch City Apparel", created_at: '2012-03-24 14:54:09 UTC')         
+            @merchant_4 = create(:merchant, name: "Uplift", status: 1, created_at: '2012-03-24 14:54:09 UTC')
+            @merchant_5 = create(:merchant, name: "Roomba", status: 1, created_at: '2012-03-23 14:54:09 UTC')
+        end
+        it 'has links to sort alphabetically and by created_at date' do
+            visit '/admin/merchants/'
+            expect(page).to have_link("Sort Alphabetically")
+            expect(page).to have_link("Sort by Date Created")
+        end
+        it 'sorts alphabetically when link is clicked' do 
+            visit '/admin/merchants/'
+            within ".enabled" do 
+               expect(@merchant_1.name).to appear_before(@merchant_2.name) 
+               expect(@merchant_2.name).to appear_before(@merchant_3.name)
+               expect(page).to_not have_content(@merchant_4.name)
+               expect(page).to_not have_content(@merchant_5.name)
+            end
+            within ".disabled" do 
+                expect(@merchant_4.name).to appear_before(@merchant_5.name)
+                expect(page).to_not have_content(@merchant_1.name)
+                expect(page).to_not have_content(@merchant_3.name)
+            end
+            
+            click_link("Sort Alphabetically")
+            
+            within ".enabled" do 
+                expect(@merchant_3.name).to appear_before(@merchant_1.name) 
+                expect(@merchant_1.name).to appear_before(@merchant_2.name)
+                expect(page).to_not have_content(@merchant_4.name)
+            end
+            within ".disabled" do 
+                expect(@merchant_5.name).to appear_before(@merchant_4.name)
+                expect(page).to_not have_content(@merchant_1.name)
+                expect(page).to_not have_content(@merchant_3.name)
+            end
+        end
+        it 'sorts by created_at date when link is clicked' do 
+            visit '/admin/merchants/'
+            within ".enabled" do 
+               expect(@merchant_1.name).to appear_before(@merchant_2.name) 
+               expect(@merchant_2.name).to appear_before(@merchant_3.name)
+               expect(page).to_not have_content(@merchant_4.name)
+               expect(page).to_not have_content(@merchant_5.name)
+            end
+            within ".disabled" do 
+                expect(@merchant_4.name).to appear_before(@merchant_5.name)
+                expect(page).to_not have_content(@merchant_1.name)
+                expect(page).to_not have_content(@merchant_3.name)
+            end
+            
+            click_link("Sort by Date Created")
+            
+            within ".enabled" do 
+                expect(@merchant_2.name).to appear_before(@merchant_1.name) 
+                expect(@merchant_1.name).to appear_before(@merchant_3.name)
+                expect(page).to_not have_content(@merchant_4.name)
+            end
+            within ".disabled" do 
+                expect(@merchant_5.name).to appear_before(@merchant_4.name)
+                expect(page).to_not have_content(@merchant_1.name)
+                expect(page).to_not have_content(@merchant_3.name)
+            end
+        end
+    end
 end
