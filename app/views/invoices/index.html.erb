@@ -1,4 +1,5 @@
 <h1>Merchant's Invoices</h1>
+<%= render partial: 'sortable' %>
 
 <% @invoices.each do |invoice| %>
   <p>Invoice: <%= link_to invoice.id, "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>

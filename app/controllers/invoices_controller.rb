@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
 
   def index
-    @invoices = Invoice.all
+    @invoices = helpers.sortable(Invoice.all, params)
     @merchant = Merchant.find(params[:merchant_id])
   end
 
