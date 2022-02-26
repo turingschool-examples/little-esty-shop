@@ -81,4 +81,18 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice_1.total_invoice_revenue).to eq(84)
     end
   end
+
+  describe "class methods" do
+    it "can return all invoices that are incomplete aka 'in progress'" do
+      customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
+
+      invoice_1 = customer_1.invoices.create!(status: "in progress")
+      invoice_2 = customer_1.invoices.create!(status: "in progress")
+      invoice_3 = customer_1.invoices.create!(status: "completed")
+      invoice_4 = customer_1.invoices.create!(status: "completed")
+      invoice_5 = customer_1.invoices.create!(status: "completed")
+
+      expect(Invoice.not_completed).to eq([invoice_1, invoice_2])
+    end
+  end
 end
