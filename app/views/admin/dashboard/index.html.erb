@@ -3,3 +3,9 @@
 <%= link_to "View merchants", "/admin/merchants" %>
 
 <%= link_to "View invoices", "/admin/invoices" %>
+
+<h2>Incomplete Invoices</h2>
+
+<% @open_invoices.each do |invoice| %>
+  <li>Invoice Number: <%= invoice.id %> - created <%= invoice.format_date %></li>
+<% end %>

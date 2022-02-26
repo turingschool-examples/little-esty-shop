@@ -13,7 +13,11 @@ class Invoice < ApplicationRecord
     self.items.sum(:unit_price)
   end
 
-  def self.all_oldest_first
-    order(:created_at)
+  def format_date
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def self.all_open_oldest_first
+    where(status: "in progress").order(:created_at)
   end
 end
