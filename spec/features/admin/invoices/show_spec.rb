@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'The Admin Invoices Index' do
+RSpec.describe 'The Admin Invoices Show' do
   before :each do
     @merchant1 = Merchant.create!(name: "Suzy Hernandez")
     @merchant2 = Merchant.create!(name: "Juan Lopez")
@@ -114,19 +114,15 @@ RSpec.describe 'The Admin Invoices Index' do
     @transaction8 = Transaction.create!(result: 0, invoice_id: @invoice16.id)
   end
 
-  describe 'list all invoice ids with a link to the show page' do
-    it 'will list all Invoice ids' do
+  describe 'list list the invoice attributes' do
+    it 'will list the details of an invoice' do
 
-      visit admin_invoices_path
+      visit admin_invoice_path(@invoice7)
 
-      within("#admin_invoice-0") do
-
-      expect(page).to have_content(@invoice1.id)
-      expect(page).to have_link(@invoice1.id)
-      click_link(@invoice1.id)
-      expect(current_path).to eq(admin_invoice_path(@invoice1))
-
+      expect(page).to have_content(@invoice7.id)
+      expect(page).to have_content(@invoice7.display_status)
+      expect(page).to have_content(@invoice7.display_date)
+      expect(page).to have_content(@invoice7.customer_name)
       end
     end
   end
-end
