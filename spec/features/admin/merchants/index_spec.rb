@@ -157,11 +157,12 @@ RSpec.describe 'the admin merchant index' do
 
     visit '/admin/merchants'
 
+    save_and_open_page
     within ".enabled_merchants" do
       expect(page).to_not have_content(disabled_merchant.name)
       expect(page).to have_content(enabled_merchant.name)
 
-      click_button("Disable #{@enabled_merchant.name}")
+      click_button("Disable #{enabled_merchant.name}")
     end
 
     expect(current_path).to eq("/admin/merchants")
@@ -187,7 +188,7 @@ RSpec.describe 'the admin merchant index' do
       expect(page).to have_content(disabled_merchant.name)
       expect(page).to_not have_content(enabled_merchant.name)
 
-      click_button("Enable #{@disabled_merchant.name}")
+      click_button("Enable #{disabled_merchant.name}")
     end
 
     expect(current_path).to eq("/admin/merchants")
