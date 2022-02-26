@@ -8,7 +8,12 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :status
 
-  enum status: { "disabled" => 0, "enabled" => 1}
+  enum status: { "disabled" => 0, "enabled" => 1 }
+
+  def ready_items
+    # grab all the invoices unless status is shipped
+    invoice_items.where.not(status: 2)
+  end
 
   def ordered_items
     items.order(:name)
@@ -21,5 +26,4 @@ class Merchant < ApplicationRecord
   def self.disabled
     where(status: 0)
   end
-
 end

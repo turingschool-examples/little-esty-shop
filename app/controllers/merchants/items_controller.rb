@@ -17,20 +17,22 @@ class Merchants::ItemsController < ApplicationController
   def update
     item = Item.find(params[:item_id])
 
-    if params[:mode] == "form"
+    if item.update(item_params)
+      if params[:mode] == "form"
 
       item.update(item_params)
       flash[:alert] = "Item successfully updated!"
       redirect_to "/merchants/#{params[:merchant_id]}/items/#{item.id}"
 
-    elsif params[:mode] == "button"
+      elsif params[:mode] == "button"
 
+        redirect_to "/merchants/#{params[:merchant_id]}/items"
+        flash[:alert] = "Item status updated!"
+      end
+    else
+      redirect_to "/merchants/#{params[:merchant_id]}/items/#{item.id}/edit"
+      flash[:alert] = "Error: #{error_message(item.errors)}"
 
-      item.update(item_params)
-      # item.update({ status: params[:status] })
-
-      redirect_to "/merchants/#{params[:merchant_id]}/items"
-      flash[:alert] = "Item status updated!"
     end
   end
 
