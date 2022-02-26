@@ -64,7 +64,7 @@ RSpec.describe 'The Merchant Dashboard' do
 
   it "in not shipped the invoice ids apear from least to most recent" do
     visit merchant_dashboard_index_path(@katz)
-    #save_and_open_page
+
     within '#not_shipped-0' do
       expect(page).to have_content("Invoice ID: #{@invoice1.id}")
     end
@@ -109,7 +109,7 @@ RSpec.describe 'The Merchant Dashboard' do
     @transaction6 = Transaction.create!(result: 0, invoice_id: @invoice7.id)
     @transaction7 = Transaction.create!(result: 0, invoice_id: @invoice2.id)
     visit merchant_dashboard_index_path(@katz)
-    #save_and_open_page
+
     within '#stats' do
       expect(page).to have_content(@customer1.first_name)
       expect(page).to have_content(@customer1.last_name)

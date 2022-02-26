@@ -11,5 +11,6 @@
       resources :dashboard
       resources :merchants
       resources :items
+      resources :invoices
     end
 end
