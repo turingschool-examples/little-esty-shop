@@ -9,6 +9,8 @@
   <li>
     <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
     <%= "- #{number_to_currency(merchant.revenue)} in sales" %>
+    <br>
+    <%= "Top selling date for #{merchant.name} was #{date_formatter(merchant.best_day.first.created_at)}" %>
   </li>
 <% end %>
 </ul>
