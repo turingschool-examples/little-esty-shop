@@ -54,7 +54,7 @@ describe 'Admin Dashboard Index Page' do
   it "lists the invoices that are incomplete " do
     visit '/admin'
 
-    save_and_open_page
+    #save_and_open_page
     #binding.pry
     expect(page).to have_link("Invoice ID: #{@invoice_item1.invoice_id}")
     expect(page).to have_link("Invoice ID: #{@invoice_item3.invoice_id}")
@@ -64,7 +64,7 @@ describe 'Admin Dashboard Index Page' do
   end
   it "has links on Invoices that go to show pages." do
     visit '/admin'
-    save_and_open_page
+    #save_and_open_page
     #binding.pry
     click_link("Invoice ID: #{@invoice_item1.invoice_id}")
     expect(current_path).to eq("/admin/invoices/#{@invoice_item1.invoice_id}")
