@@ -27,7 +27,6 @@ RSpec.describe Item, type: :model do
 
       expect(item_2.display_price).to eq("34.50")
       expect(item_1.display_price).to eq("24.75")
-
     end
   end
 end

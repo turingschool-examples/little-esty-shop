@@ -10,7 +10,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'validations' do 
-    it { should define_enum_for(:status).with_values([:pending, :completed]) }
+    it { should define_enum_for(:status).with_values(['in progress', :cancelled, :completed]) }
   end 
 
   before :each do 
@@ -41,8 +41,8 @@ RSpec.describe Invoice, type: :model do
     end 
 
     describe '#format_created_at' do
-      it 'returns the time the invoice was created at in "Weekday, Month Day, Year format' do
-        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq("Sunday, February 20, 2022")
+      it 'returns the time the invoice was created at in "Weekday, Month-Day, Year format' do
+        expect(@invoice1.format_created_at(@invoice1.created_at)).to eq(Date.today.strftime("%A, %B %d, %Y"))
        end 
     end 
 

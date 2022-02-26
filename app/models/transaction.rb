@@ -4,4 +4,6 @@ class Transaction < ApplicationRecord
   has_many :invoice_items, through: :invoice
   has_many :items, through: :invoice_items
   has_many :customers, through: :invoice
+
+  scope :successful_transactions, -> { where("transactions.result =?", 0) }
 end
