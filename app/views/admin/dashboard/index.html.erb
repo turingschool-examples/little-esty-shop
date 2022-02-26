@@ -1,6 +1,7 @@
+<div class="container text-center">
 <h1> Admin Dashboard </h1>
 
-<%= link_to "View merchants", "/admin/merchants" %>
+
 
 <%= link_to "View invoices", "/admin/invoices" %>
 
@@ -9,3 +10,16 @@
 <% @open_invoices.each do |invoice| %>
   <li>Invoice Number: <%= invoice.id %> - created <%= invoice.format_date %></li>
 <% end %>
+
+<div id='adminnavbuttons'><%= button_to "View Merchants", "/admin/merchants", method: :get %><%= button_to "View Invoices", "/admin/invoices", method: :get %></div>
+<h3>Incomplete Invoices</h3>
+</div>
+
+<div class="center-admin">
+<ul>
+<% @incomplete.each do |invoice| %>
+  <li> <%= link_to "Invoice ID: #{invoice.id}", "/admin/invoices/#{invoice.id}"%>   Order created:  <%=invoice.created_at.strftime("%A, %B %d, %Y")%></li>
+  <%end%>
+  </ul>
+</div>
+
