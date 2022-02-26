@@ -94,4 +94,13 @@ end
   end
 
 
+  it 'can see a section for "Incomplete Invoices"' do
+    visit admin_dashboard_index_path
+    not_shipped_invoices = Invoice.not_shipped
+
+    expect(page).to have_content("Incomplete Invoices")
+
+    expect(page).to have_content("#{not_shipped_invoices.first.id}")
+    expect(page).to have_content("#{not_shipped_invoices.last.id}")
+  end
 end
