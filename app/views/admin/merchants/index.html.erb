@@ -9,12 +9,7 @@
     <% @merchants.top_five_merchants.each do |merchant| %>
       <li><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></li>
       <p> <%= "#{merchant.name}" %> - <%= merchant.totalrevenue %> in sales </p>
-      <p>Top day for <%= "#{merchant.name}" was: %><%= merchant.best_sales_day %></p>
+      <p>Top day: <%=  merchant.best_sales_day %></p>
     <% end %>
   </ol>
-
-
-
-
-
 </div>

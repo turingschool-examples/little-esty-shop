@@ -92,13 +92,6 @@ RSpec.describe Merchant, type: :model do
 
 
     it 'knows a merchants best day' do
-      # As an admin,
-      # When I visit the admin merchants index
-      # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
-      # And I see a label “Top selling date for was "
-      #
-      # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
-
       merchant_1 = Merchant.create!(name: "Staples")
       merchant_2 = Merchant.create!(name: "Here store")
 
@@ -128,8 +121,6 @@ RSpec.describe Merchant, type: :model do
       transcation_4 = invoice_6.transactions.create!(credit_card_number: "4654405418249634", result: "success")
       expect(merchant_1.best_sales_day).to eq(DateTime.new(2022, 2, 24))
       expect(merchant_2.best_sales_day).to eq(DateTime.new(2022, 2, 27))
-
-
     end
 
     it "orders each merchant's item by its revenue" do

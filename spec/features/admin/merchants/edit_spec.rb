@@ -5,7 +5,6 @@ RSpec.describe 'the admin merchant show' do
     merchant_1 = Merchant.create!(name: "Staples")
 
     visit"/admin/merchants/#{merchant_1.id}/edit"
-    save_and_open_page
 
     within(".update_merchant") do
       expect(page).to have_field(:name, with: "#{merchant_1.name}")
