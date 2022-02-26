@@ -25,7 +25,10 @@ class Merchants::ItemsController < ApplicationController
 
     elsif params[:mode] == "button"
 
-      item.update({ status: params[:status] })
+
+      item.update(item_params)
+      # item.update({ status: params[:status] })
+
       redirect_to "/merchants/#{params[:merchant_id]}/items"
       flash[:alert] = "Item status updated!"
     end
@@ -49,6 +52,6 @@ class Merchants::ItemsController < ApplicationController
 
     private
       def item_params
-        params.permit(:name, :description, :unit_price)
+        params.permit(:name, :description, :unit_price, :status)
       end
 end
