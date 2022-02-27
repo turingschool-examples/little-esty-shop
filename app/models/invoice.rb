@@ -15,6 +15,11 @@ class Invoice < ApplicationRecord
     (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
   end
 
+  def revenue_display_price
+    cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
+    '%.2f' % (cents / 100.0)
+  end
+
   def display_date
     self.created_at.strftime("%m/%d/%Y")
   end

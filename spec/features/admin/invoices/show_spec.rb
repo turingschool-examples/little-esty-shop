@@ -123,6 +123,7 @@ RSpec.describe 'The Admin Invoices Show' do
       expect(page).to have_content(@invoice7.display_status)
       expect(page).to have_content(@invoice7.display_date)
       expect(page).to have_content(@invoice7.customer_name)
+      expect(page).to have_content(@invoice7.revenue_display_price)
       end
 
     it 'will list the details of the items on the invoice' do

@@ -2,6 +2,7 @@
     <p>Status: <%= @invoice.display_status %></p>
     <p>Date Ordered: <%= @invoice.display_date %></p>
     <p>Customer Name: <%= @invoice.customer_name %></<br>
+    <p>Renevue Generated: $<%= @invoice.revenue_display_price %></<br>
   <h2>Items included in this invoice</h2>
 <% @invoice_items.each_with_index do |i_item, index| %>
   <div id="invoice_items-<%= index %>">
