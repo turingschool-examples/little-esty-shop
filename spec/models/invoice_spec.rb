@@ -61,8 +61,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe 'display date' do
-      it 'returns a date formated MMDDYY' do
-        expect(@invoice1.display_date).to eq("02/27/2022")
+      it 'returns a date formated long' do
+        expect(@invoice1.display_date).to eq("Sunday, February 27, 2022")
        end
     end
   end

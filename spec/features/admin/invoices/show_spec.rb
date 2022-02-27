@@ -158,6 +158,9 @@ RSpec.describe 'The Admin Invoices Show' do
       expect(page).to have_content(@invoice_item38.display_price)
       expect(page).to have_content(@invoice_item38.status)
       end
+
+      expect(page).not_to have_content(@item3.name)
+      expect(page).not_to have_content(@item4.name)
     end
   end
 
