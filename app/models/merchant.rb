@@ -1,4 +1,5 @@
 class Merchant < ApplicationRecord
+  enum status: {enabled: 0, disabled: 1}
   validates :name, presence: true
 
   has_many :items
@@ -6,6 +7,9 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
+
+  scope :with_successful_transactions, -> { joins(:transactions)
+            .where("transactions.result =?", 0)}
 
   def merchant_invoices
     (invoices.order(:id)).uniq
@@ -17,17 +21,44 @@ class Merchant < ApplicationRecord
 
   def disabled_status
     self.items.where("item_status =?", 2)
+  end 
+
+  def change_status
+    if status == 'enabled'
+      self.disabled!
+      status
+    elsif status == 'disabled'
+      self.enabled!
+      status
+    end 
+  end
+
+  def self.enabled_merchants
+    where(status: :enabled)
+  end 
+
+  def self.disabled_merchants
+    where(status: :disabled)
+  end 
 
   def not_shipped
     invoice_items.where("status != 2")
   end
 
   def top_five_customers
-    customers.joins(invoices: :transactions)
-              .where("transactions.result =?", 0)
+    customers.with_successful_transactions
               .select("customers.*, count('transactions') AS transaction_count")
               .group("customers.id")
               .order("transaction_count DESC")
               .limit(5)
+  end
+
+  def self.top_five_merchants
+    with_successful_transactions
+    .joins(:invoice_items)
+    .select("merchants.*, sum(invoice_items.quantity*invoice_items.unit_price) AS total_revenue")
+    .group("merchants.id")
+    .order("total_revenue DESC")
+    .limit(5)
   end
 end

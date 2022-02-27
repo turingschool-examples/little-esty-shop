@@ -1,0 +1,34 @@
+<center>
+<h1>The Admin Merchants Index</h1>
+</center>
+
+<div id="create">
+  <%= button_to 'Create New Merchant', new_admin_merchant_path, method: :get %>
+</div>
+
+<center>
+<section id="enabled"
+<h3>Enabled Merchants</h3>
+<% @merchants.enabled_merchants.each do |merchant| %>
+  <section id= "<%= merchant.name.parameterize %>">
+  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
+  <%= button_to "#{merchant.change_status.chop} merchant", admin_merchant_path(merchant.id), method: :patch, params: { trigger: 'change status', merchant: { status: merchant.change_status }}  %>
+</section>
+<% end %>
+</section>
+</center>
+
+<br>
+
+<center>
+<section id="disabled"
+<h3>Disabled Merchants</h3>
+<% @merchants.disabled_merchants.each do |merchant| %>
+  <section id= "<%= merchant.name.parameterize %>">
+  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
+  <%= button_to "#{merchant.change_status.chop} merchant", admin_merchant_path(merchant.id), method: :patch, params: { trigger: 'change status', merchant: { status: merchant.change_status }}  %>
+  
+</section>
+<% end %>
+</section>
+</center>
