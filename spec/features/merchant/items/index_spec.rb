@@ -37,6 +37,6 @@ RSpec.describe 'Merchant Items index page' do
   it 'properly links to new page' do
     visit "merchants/#{@merchant_1.id}/items"
     click_button("Create New Item")
-    expect(current_path).to eq("merchants/#{@merchant_1.id}/items/new")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
   end
 end
