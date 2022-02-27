@@ -22,7 +22,6 @@ class Invoice < ApplicationRecord
 
   def display_date
     self.created_at.strftime("%A, %B %d, %Y")
-    # date.strftime("%A, %B %d, %Y")
   end
 
 

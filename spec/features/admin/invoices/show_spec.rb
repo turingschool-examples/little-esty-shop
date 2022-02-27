@@ -115,7 +115,7 @@ RSpec.describe 'The Admin Invoices Show' do
   end
 
   describe 'list list the invoice attributes' do
-  it 'will list the details of an invoice' do
+    it 'will list the details of an invoice' do
 
       visit admin_invoice_path(@invoice7)
 
@@ -124,7 +124,7 @@ RSpec.describe 'The Admin Invoices Show' do
       expect(page).to have_content(@invoice7.display_date)
       expect(page).to have_content(@invoice7.customer_name)
       expect(page).to have_content(@invoice7.revenue_display_price)
-      end
+    end
 
     it 'will list the details of the items on the invoice' do
 
@@ -137,26 +137,26 @@ RSpec.describe 'The Admin Invoices Show' do
 
       within("#invoice_items-0") do
 
-      expect(page).to have_content(@item15.name)
-      expect(page).to have_content(@invoice_item36.quantity)
-      expect(page).to have_content(@invoice_item36.display_price)
-      expect(page).to have_content(@invoice_item36.status)
+        expect(page).to have_content(@item15.name)
+        expect(page).to have_content(@invoice_item36.quantity)
+        expect(page).to have_content(@invoice_item36.display_price)
+        expect(page).to have_content(@invoice_item36.status)
       end
 
       within("#invoice_items-1") do
 
-      expect(page).to have_content(@item10.name)
-      expect(page).to have_content(@invoice_item37.quantity)
-      expect(page).to have_content(@invoice_item37.display_price)
-      expect(page).to have_content(@invoice_item37.status)
+        expect(page).to have_content(@item10.name)
+        expect(page).to have_content(@invoice_item37.quantity)
+        expect(page).to have_content(@invoice_item37.display_price)
+        expect(page).to have_content(@invoice_item37.status)
       end
 
       within("#invoice_items-2") do
 
-      expect(page).to have_content(@item16.name)
-      expect(page).to have_content(@invoice_item38.quantity)
-      expect(page).to have_content(@invoice_item38.display_price)
-      expect(page).to have_content(@invoice_item38.status)
+        expect(page).to have_content(@item16.name)
+        expect(page).to have_content(@invoice_item38.quantity)
+        expect(page).to have_content(@invoice_item38.display_price)
+        expect(page).to have_content(@invoice_item38.status)
       end
 
       expect(page).not_to have_content(@item3.name)
@@ -164,22 +164,22 @@ RSpec.describe 'The Admin Invoices Show' do
     end
   end
 
-    describe 'admin can update the status of an invoice' do
-      it 'the invoice status will display a select field that can be updated' do
+  describe 'admin can update the status of an invoice' do
+    it 'the invoice status will display a select field that can be updated' do
 
-        visit admin_invoice_path(@invoice12)
-        expect(page).to have_content(@invoice12.id)
-        expect(page).to have_content('in progress')
+      visit admin_invoice_path(@invoice12)
+      expect(page).to have_content(@invoice12.id)
+      expect(page).to have_content('in progress')
 
-        select 'cancelled', from: :status
-        click_button('Save')
+      select 'cancelled', from: :status
+      click_button('Save')
 
-        expect(current_path).to eq(admin_invoice_path(@invoice12))
+      expect(current_path).to eq(admin_invoice_path(@invoice12))
 
-        expect(page).to have_content(@invoice12.id)
-        expect(page).to have_content('cancelled')
-        expect(page).to have_content("Invoice Status Has Been Updated!")
+      expect(page).to have_content(@invoice12.id)
+      expect(page).to have_content('cancelled')
+      expect(page).to have_content("Invoice Status Has Been Updated!")
 
-      end
+    end
   end
 end
