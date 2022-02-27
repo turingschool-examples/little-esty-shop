@@ -24,12 +24,5 @@ class Invoice < ApplicationRecord
     self.created_at.strftime("%m/%d/%Y")
   end
 
-  def display_status
-    if self.status = 0 ; 'In progress'
-    elsif self.status = 1 ; 'Cancelled'
-    elsif self.status = 2 ; 'Completed'
-    else "Error"
-    end
-  end
 
 end

@@ -41,16 +41,16 @@ RSpec.describe 'The Admin Invoices Show' do
     @invoice4 =Invoice.create!(status: 0, customer_id: @customer4.id)
     @invoice5 =Invoice.create!(status: 2, customer_id: @customer4.id)
     @invoice6 =Invoice.create!(status: 2, customer_id: @customer5.id)
-    @invoice7 =Invoice.create!(status: 1, customer_id: @customer6.id)
+    @invoice7 =Invoice.create!(status: 2, customer_id: @customer6.id)
     @invoice8 =Invoice.create!(status: 2, customer_id: @customer7.id)
     @invoice9 =Invoice.create!(status: 2, customer_id: @customer7.id)
     @invoice10 =Invoice.create!(status: 2, customer_id: @customer8.id)
     @invoice11 =Invoice.create!(status: 2, customer_id: @customer8.id)
-    @invoice12 =Invoice.create!(status: 1, customer_id: @customer9.id)
+    @invoice12 =Invoice.create!(status: 0, customer_id: @customer9.id)
     @invoice13 =Invoice.create!(status: 2, customer_id: @customer1.id)
     @invoice14 =Invoice.create!(status: 2, customer_id: @customer3.id)
     @invoice15 =Invoice.create!(status: 2, customer_id: @customer7.id)
-    @invoice16 =Invoice.create!(status: 0, customer_id: @customer10.id)
+    @invoice16 =Invoice.create!(status: 1, customer_id: @customer10.id)
 
 
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 3, unit_price: 2400, status: 1)
@@ -115,12 +115,12 @@ RSpec.describe 'The Admin Invoices Show' do
   end
 
   describe 'list list the invoice attributes' do
-    it 'will list the details of an invoice' do
+  it 'will list the details of an invoice' do
 
       visit admin_invoice_path(@invoice7)
 
       expect(page).to have_content(@invoice7.id)
-      expect(page).to have_content(@invoice7.display_status)
+      expect(page).to have_content('completed')
       expect(page).to have_content(@invoice7.display_date)
       expect(page).to have_content(@invoice7.customer_name)
       expect(page).to have_content(@invoice7.revenue_display_price)
@@ -129,9 +129,9 @@ RSpec.describe 'The Admin Invoices Show' do
     it 'will list the details of the items on the invoice' do
 
       visit admin_invoice_path(@invoice16)
-save_and_open_page
+
       expect(page).to have_content(@invoice16.id)
-      expect(page).to have_content(@invoice16.display_status)
+      expect(page).to have_content('cancelled')
       expect(page).to have_content(@invoice16.display_date)
       expect(page).to have_content(@invoice16.customer_name)
 
@@ -140,7 +140,7 @@ save_and_open_page
       expect(page).to have_content(@item15.name)
       expect(page).to have_content(@invoice_item36.quantity)
       expect(page).to have_content(@invoice_item36.display_price)
-      expect(page).to have_content(@invoice_item36.display_status)
+      expect(page).to have_content(@invoice_item36.status)
       end
 
       within("#invoice_items-1") do
@@ -148,7 +148,7 @@ save_and_open_page
       expect(page).to have_content(@item10.name)
       expect(page).to have_content(@invoice_item37.quantity)
       expect(page).to have_content(@invoice_item37.display_price)
-      expect(page).to have_content(@invoice_item37.display_status)
+      expect(page).to have_content(@invoice_item37.status)
       end
 
       within("#invoice_items-2") do
@@ -156,8 +156,27 @@ save_and_open_page
       expect(page).to have_content(@item16.name)
       expect(page).to have_content(@invoice_item38.quantity)
       expect(page).to have_content(@invoice_item38.display_price)
-      expect(page).to have_content(@invoice_item38.display_status)
+      expect(page).to have_content(@invoice_item38.status)
       end
     end
+  end
+
+    describe 'admin can update the status of an invoice' do
+      it 'the invoice status will display a select field that can be updated' do
+
+        visit admin_invoice_path(@invoice12)
+        expect(page).to have_content(@invoice12.id)
+        expect(page).to have_content('in progress')
+
+        select 'cancelled', from: :status
+        click_button('Save')
+
+        expect(current_path).to eq(admin_invoice_path(@invoice12))
+
+        expect(page).to have_content(@invoice12.id)
+        expect(page).to have_content('cancelled')
+        expect(page).to have_content("Invoice Status Has Been Updated!")
+
+      end
   end
 end

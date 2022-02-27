@@ -1,13 +1,17 @@
 <h1><%= "Invoice #{@invoice.id}'s Show Page" %></h1>
-    <p>Status: <%= @invoice.display_status %></p>
+    <p>Status: <%= form_with url: admin_invoice_path(@invoice.id), method: :patch, local: true do |f| %></p>
+                <%= f.hidden_field :invoice_id, value: @invoice.id %>
+                <%= f.select :status, options_for_select(['in progress', :cancelled, :completed], @invoice.status) %>
+                <%= f.submit %>
+                <% end %>
     <p>Date Ordered: <%= @invoice.display_date %></p>
     <p>Customer Name: <%= @invoice.customer_name %></<br>
-    <p>Renevue Generated: $<%= @invoice.revenue_display_price %></<br>
-  <h2>Items included in this invoice</h2>
+    <p>Renevue Generated: $<%= @invoice.revenue_display_price %></<br><br>
+  <h2>Items included in this invoice:</h2>
 <% @invoice_items.each_with_index do |i_item, index| %>
   <div id="invoice_items-<%= index %>">
     <p>Item: <%= i_item.get_name_from_invoice %></p>
     <p>Quantity: <%= i_item.quantity %></p>
     <p>Price: $<%= i_item.display_price %></p>
-    <p>Status: <%= i_item.display_status %></p><br><br>
+    <p>Status: <%= i_item.status %></p><br>
 <% end %>
