@@ -1,3 +1,7 @@
 <% @invoices.each do |invoice| %>
   <p>Invoice id: <%= link_to "#{invoice.id}", "/invoices/#{invoice.id}" %></p>
 <% end %>
+
+<div class="github-info">
+  <p> Repo name: <%= @repo_name.name %> </p>
+</div>

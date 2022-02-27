@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe "Merchant Items Show Page" do
+
+  describe 'github api' do
+    it "has the repo name" do
+      merchant = Merchant.create!(name: "Paul the Merchant")
+      item1 = merchant.items.create!(name: "Paul's Item",
+                                     description: "Paul's very popular item",
+                                     unit_price: "2500")
+                                     
+      visit "/merchants/#{merchant.id}/items/#{item1.id}"
+
+      within ".github-info" do
+        expect(page).to have_content("SullyBirashk/little-esty-shop")
+      end
+    end
+  end
+
   describe 'when I visit this page' do
     it "has the Item listed with all of its attributes" do
       merchant = Merchant.create!(name: "Paul the Merchant")

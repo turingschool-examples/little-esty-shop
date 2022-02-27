@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Merchant Item Create page" do
+
+  describe 'github api' do
+    it "has the repo name" do
+      merchant_1 = Merchant.create!(name: "Staples")
+      visit "merchants/#{merchant_1.id}/items/new"
+
+      within ".github-info" do
+        expect(page).to have_content("SullyBirashk/little-esty-shop")
+      end
+    end
+  end
+
   describe "when I visit the merchant item create page," do
     it "has a form for a new item, once filled out and submitted it redirect to index with item listed" do
       merchant_1 = Merchant.create!(name: "Staples")

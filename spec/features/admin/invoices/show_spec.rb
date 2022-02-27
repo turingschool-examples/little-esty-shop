@@ -24,6 +24,16 @@ RSpec.describe 'the admin invoice index' do
     @invoice_item_4 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_4.id, quantity: 4, unit_price: 25, status: "shipped")
   end
 
+  describe 'github api' do
+    it "has the repo name" do
+      visit "/admin/invoices/#{@invoice_1.id}"
+
+      within ".github-info" do
+        expect(page).to have_content("SullyBirashk/little-esty-shop")
+      end
+    end
+  end
+
   it "Invoice Information in show page" do
     visit "/admin/invoices/#{@invoice_1.id}"
 

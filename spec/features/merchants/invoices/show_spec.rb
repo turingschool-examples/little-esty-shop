@@ -56,6 +56,16 @@ RSpec.describe "Merchant Invoices Show Page" do
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
   end
 
+  describe 'github api' do
+    it "has the repo name" do
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+      within ".github-info" do
+        expect(page).to have_content("SullyBirashk/little-esty-shop")
+      end
+    end
+  end
+
   it "displays the invoice id, status, when it was created and customer name" do
     visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 

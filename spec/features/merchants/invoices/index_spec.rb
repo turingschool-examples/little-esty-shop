@@ -55,11 +55,17 @@ RSpec.describe "the merchant invoice index" do
     @transcation_11 = @invoice_11.transactions.create!(credit_card_number: "4654405418249614", result: "success")
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
   end
-  # As a merchant,
-  # When I visit my merchant's invoices index (/merchants/merchants_id/invoices)
-  # Then I see all of the invoices that include at least one of my merchant's items
-  # And for each invoice I see its id
-  # And each id links to the merchant invoice show page
+
+  describe 'github api' do
+    it "has the repo name" do
+      visit "/merchants/#{@merchant_1.id}/invoices"
+
+      within ".github-info" do
+        expect(page).to have_content("SullyBirashk/little-esty-shop")
+      end
+    end
+  end
+
   describe 'the invoice index page' do
     it 'exists' do
       visit "/merchants/#{@merchant_1.id}/invoices"

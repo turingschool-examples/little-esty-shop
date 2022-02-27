@@ -1,15 +1,18 @@
 class MerchantItemsController < ApplicationController
 
   def index
+    repo_name
     @merchant = Merchant.find(params[:merchant_id])
   end
 
   def show
+    repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:id])
   end
 
   def edit
+    repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:id])
   end
@@ -22,6 +25,7 @@ class MerchantItemsController < ApplicationController
   end
 
   def new
+    repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.create()
   end
@@ -37,5 +41,5 @@ class MerchantItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:name, :description, :unit_price, :status)
     end
-    
+
 end
