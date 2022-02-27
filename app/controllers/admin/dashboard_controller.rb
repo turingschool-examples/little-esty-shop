@@ -6,4 +6,5 @@ class Admin::DashboardController < ApplicationController
       @invoices = Invoice.all
       @incomplete = @invoices.incomplete
     end
+
   end

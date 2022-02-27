@@ -6,12 +6,19 @@
 .merchant-div {
   display: flex;
   flex-direction: row;
-}
-.right-div{
-padding-top: 3.4rem;
-padding-left: 1rem;
+  flex-basis: 100%;
+  flex: 2;
+  padding-left: 11rem;
 }
 
+.right-div{
+padding-left: 9rem;
+}
+
+.merch-right-div{
+padding-left: 10rem;
+flex: 50%;
+}
 .center-admin{
 padding-left: 29rem;
 }

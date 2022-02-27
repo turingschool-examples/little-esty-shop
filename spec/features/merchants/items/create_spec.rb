@@ -7,7 +7,7 @@ RSpec.describe 'Merchant item creation', type: :feature do
 
   it 'has a link to item creation page from merchant items index' do
     visit "/merchants/#{@merchant1.id}/items"
-    click_link "Create item"
+    click_button "Create item"
 
     expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
   end
