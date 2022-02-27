@@ -1,7 +1,16 @@
 <h1> <%= @merchant.name %></h1>
 
-<% @merchant.items.each do |item| %>
-<a href="/merchants/<%=@merchant.id%>/items/<%=item.id%>"><h2><%= item.name %></h2></a>
-<h2>enabled: <%= item.status.to_s %></h2>
-<%= button_to "Switch Status", "/merchants/#{@merchant.id}/items/", method: :change_status, params: {item_id: item.id} %>
+<h2 style="color: green;"> Enabled Items: </h2>
+<% @merchant.group_items_by_status(true).each do |en_item| %>
+  <a href="/merchants/<%=@merchant.id%>/items/<%=en_item.id%>"><h2><%= en_item.name %></h2></a>
+  <h2>enabled: <%= en_item.status.to_s %></h2>
+  <%= button_to "Switch Status", "/merchants/#{@merchant.id}/items/", method: :change_status, params: {item_id: en_item.id} %>
+<% end %>
+
+
+<h2 style="color: red;"> Disabled Items: </h2>
+<% @merchant.group_items_by_status(false).each do |dis_item| %>
+  <a href="/merchants/<%=@merchant.id%>/items/<%=dis_item.id%>"><h2><%= dis_item.name %></h2></a>
+  <h2>enabled: <%= dis_item.status.to_s %></h2>
+  <%= button_to "Switch Status", "/merchants/#{@merchant.id}/items/", method: :change_status, params: {item_id: dis_item.id} %>
 <% end %>
