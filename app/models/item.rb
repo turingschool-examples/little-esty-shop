@@ -27,6 +27,4 @@ class Item < ApplicationRecord
     .date
     .strftime("%m/%d/%Y")
   end
-
-
 end
