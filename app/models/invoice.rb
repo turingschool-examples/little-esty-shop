@@ -19,4 +19,10 @@ class Invoice < ApplicationRecord
     invoice_items = InvoiceItem.all
     invoice_items.where("status != 2")
   end
+
+  # def not_shipped
+  #   invoice_ids = InvoiceItem.where("status != 2")
+  #   # .pluck(:invoice_id)
+  #   # invoice_items.where("status != 2")
+  # end
 end
