@@ -96,4 +96,18 @@ RSpec.describe 'the admin dashboard' do
       expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
     end
   end
+
+  it "list of incompleted invoices is ordered from least recent to most recent" do
+    customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
+
+    invoice_1 = customer_1.invoices.create!(status: "in progress", created_at: "2022-01-06")
+    invoice_2 = customer_1.invoices.create!(status: "in progress", created_at: "2022-01-05")
+    invoice_3 = customer_1.invoices.create!(status: "in progress", created_at: "2022-01-04")
+    visit "/admin"
+
+    within(".incompleted_invoices") do
+      expect(invoice_3.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice_2.created_at.strftime("%A, %B %d, %Y"))
+      expect(invoice_2.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice_1.created_at.strftime("%A, %B %d, %Y"))
+    end
+  end
 end
