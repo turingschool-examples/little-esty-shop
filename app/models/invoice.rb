@@ -15,13 +15,24 @@ class Invoice < ApplicationRecord
     (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
   end
 
+  # def self.not_shipped
+  #   # invoice_items = InvoiceItem.all
+  #   Invoice.select("invoices.status, invoices.created_at AS created_at")
+  #               .joins(:invoice_items)
+  #               .where("invoice_items.status != 2")
+  #               # .where(invoice.id: self.id)
+  #               # require "pry"; binding.pry
+  #               .group(:id)
+  #               .order(created_at: :asc)
+  #               .distinct
+  # end
+
   def self.not_shipped
     # invoice_items = InvoiceItem.all
-    Invoice.select("invoices.status, invoices.created_at AS created_at")
-                .joins(:invoice_items)
+    # Invoice.select("invoices.status, invoices.created_at AS created_at")
+                joins(:invoice_items)
                 .where("invoice_items.status != 2")
                 # .where(invoice.id: self.id)
-                # require "pry"; binding.pry
                 .group(:id)
                 .order(created_at: :asc)
                 .distinct
