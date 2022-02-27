@@ -92,3 +92,21 @@ RSpec.describe Merchant, type: :model do
 
   end
 end
+RSpec.describe 'enabled and disabled status' do
+
+  before :each do
+    @merchant_1 = Merchant.create!(name: "Ana Maria")
+
+    @item_1 = @merchant_1.items.create!(name: "cheese", description: "european cheese", unit_price: 2400, item_status: 1)
+    @item_2 = @merchant_1.items.create!(name: "onion", description: "red onion", unit_price: 3450, item_status: 1)
+    @item_3 = @merchant_1.items.create!(name: "earing", description: "Lotus earings", unit_price: 14500)
+    @item_4 = @merchant_1.items.create!(name: "bracelet", description: "Silver bracelet", unit_price: 76000, item_status: 1)
+    @item_5 = @merchant_1.items.create!(name: "ring", description: "lotus ring", unit_price: 2345)
+  end
+
+  it 'will sore item by status' do
+    expect(@merchant_1.enabled_status).to eq([@item_1, @item_2, @item_4])
+    expect(@merchant_1.disabled_status).to eq([@item_3, @item_5])
+  end
+
+end
