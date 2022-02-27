@@ -16,4 +16,8 @@ class Invoice < ApplicationRecord
       invoice_items.pluck("unit_price * quantity").sum
   end
 
+  def self.not_completed
+    where(:invoices => {status: 1}).order(created_at: :asc)
+  end
+
 end
