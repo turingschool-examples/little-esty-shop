@@ -3,12 +3,12 @@
 <%= link_to "Admin merchants index", admin_merchants_path %>
 <%= link_to "Admin invoices index", admin_invoices_path %>
 
+<p>Top 5 Customers:</p>
 <% @customers.each do |customer| %>
-<%= "#{customer.first_name} #{customer.last_name}"  %>
+<%= "#{customer.first_name} #{customer.last_name}"  %>, Succesful Transactions: <%= customer.transactions.length %></p>
 <% end %>
 
-
 <h1> Incomplete Invoices </h1>
-<% @invoices.each do |invoice| %>
-Invoice #<%= "#{invoice.id}" %>
+<% @invoices.each do |inv| %>
+Invoice #<%= link_to "#{inv.invoice.id}", "/admin/merchants/#{inv.invoice_id}" %> Created at: <%= inv.created_at.strftime("%A, %B %d %Y") %>
 <% end %>
