@@ -2,3 +2,15 @@
 
 <%= link_to "View store items", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "View invoices", "/merchants/#{@merchant.id}/invoices" %>
+
+
+<% if @merchant.invoice_items.present? %>
+  <h2>Items ready to ship</h2>
+    <% @merchant.ready_items.each do |invoice_item| %>
+      <div id="invoice_item-<%= invoice_item.id %>">
+        <%= invoice_item.item.name %>
+        <%= link_to "View invoice #{invoice_item.invoice.id}",
+        "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
+      </div>
+    <% end  %>
+<% end %>

@@ -2,6 +2,15 @@
 <h1> Admin Dashboard </h1>
 
 
+
+<%= link_to "View invoices", "/admin/invoices" %>
+
+<h2>Incomplete Invoices</h2>
+
+<% @open_invoices.each do |invoice| %>
+  <li>Invoice Number: <%= invoice.id %> - created <%= invoice.format_date %></li>
+<% end %>
+
 <div id='adminnavbuttons'><%= button_to "View Merchants", "/admin/merchants", method: :get %><%= button_to "View Invoices", "/admin/invoices", method: :get %></div>
 <h3>Incomplete Invoices</h3>
 </div>
@@ -13,3 +22,4 @@
   <%end%>
   </ul>
 </div>
+

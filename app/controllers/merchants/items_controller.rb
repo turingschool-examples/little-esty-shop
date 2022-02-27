@@ -25,6 +25,7 @@ class Merchants::ItemsController < ApplicationController
       redirect_to "/merchants/#{params[:merchant_id]}/items/#{item.id}"
 
       elsif params[:mode] == "button"
+
         redirect_to "/merchants/#{params[:merchant_id]}/items"
         flash[:alert] = "Item status updated!"
       end
