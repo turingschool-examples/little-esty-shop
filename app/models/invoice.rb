@@ -22,7 +22,7 @@ class Invoice < ApplicationRecord
   def display_status
     if self.status = 0 ; 'In progress'
     elsif self.status = 1 ; 'Cancelled'
-    elsif self.status = 2 ; "Completed"
+    elsif self.status = 2 ; 'Completed'
     else "Error"
     end
   end

@@ -93,7 +93,7 @@ InvoiceItem.destroy_all
 @invoice_item23 = InvoiceItem.create!(item_id: @item10.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 3450, status: 2)
 @invoice_item24 = InvoiceItem.create!(item_id: @item14.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 2175, status: 2)
 @invoice_item25 = InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice8.id, quantity: 2, unit_price: 2400, status: 2)
-@invoice_item26 = InvoiceItem.create!(item_id: @item12.id, invoice_id: @invoice8.id, quantity: 2, unit_price: 1908, status: 2)
+@invoice_item26 = InvoiceItem.create!(item_id: @item12.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 1908, status: 2)
 @invoice_item27 = InvoiceItem.create!(item_id: @item11.id, invoice_id: @invoice9.id, quantity: 2, unit_price: 2375, status: 2)
 @invoice_item28 = InvoiceItem.create!(item_id: @item15.id, invoice_id: @invoice10.id, quantity: 2, unit_price: 5405, status: 2)
 @invoice_item29 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice10.id, quantity: 2, unit_price: 934, status: 2)
@@ -105,7 +105,7 @@ InvoiceItem.destroy_all
 @invoice_item35 = InvoiceItem.create!(item_id: @item13.id, invoice_id: @invoice15.id, quantity: 2, unit_price: 2345, status: 2)
 @invoice_item36 = InvoiceItem.create!(item_id: @item15.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 5405, status: 2)
 @invoice_item37 = InvoiceItem.create!(item_id: @item10.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 3450, status: 2)
-@invoice_item38 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 934, status: 2)
+@invoice_item38 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice9.id, quantity: 2, unit_price: 934, status: 2)
 
 @transaction1 = Transaction.create!(result: 0, invoice_id: @invoice1.id)
 @transaction2 = Transaction.create!(result: 0, invoice_id: @invoice2.id)

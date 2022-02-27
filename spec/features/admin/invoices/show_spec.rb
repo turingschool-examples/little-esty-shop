@@ -124,5 +124,39 @@ RSpec.describe 'The Admin Invoices Show' do
       expect(page).to have_content(@invoice7.display_date)
       expect(page).to have_content(@invoice7.customer_name)
       end
+
+    it 'will list the details of the items on the invoice' do
+
+      visit admin_invoice_path(@invoice16)
+save_and_open_page
+      expect(page).to have_content(@invoice16.id)
+      expect(page).to have_content(@invoice16.display_status)
+      expect(page).to have_content(@invoice16.display_date)
+      expect(page).to have_content(@invoice16.customer_name)
+
+      within("#invoice_items-0") do
+
+      expect(page).to have_content(@item15.name)
+      expect(page).to have_content(@invoice_item36.quantity)
+      expect(page).to have_content(@invoice_item36.display_price)
+      expect(page).to have_content(@invoice_item36.display_status)
+      end
+
+      within("#invoice_items-1") do
+
+      expect(page).to have_content(@item10.name)
+      expect(page).to have_content(@invoice_item37.quantity)
+      expect(page).to have_content(@invoice_item37.display_price)
+      expect(page).to have_content(@invoice_item37.display_status)
+      end
+
+      within("#invoice_items-2") do
+
+      expect(page).to have_content(@item16.name)
+      expect(page).to have_content(@invoice_item38.quantity)
+      expect(page).to have_content(@invoice_item38.display_price)
+      expect(page).to have_content(@invoice_item38.display_status)
+      end
     end
   end
+end
