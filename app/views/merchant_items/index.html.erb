@@ -1,7 +1,6 @@
 <h1> <%= @merchant.name %></h1>
 
-<%= button_to "Create New Item", "/merchants/#{@merchant.id}/items/new", get: :new %>
-
+<%= button_to "Create New Item", "/merchants/#{@merchant.id}/items/new", method: :get%>
 
 <h2 style="color: green;"> Enabled Items: </h2>
 <% @merchant.group_items_by_status(true).each do |en_item| %>
