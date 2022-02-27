@@ -12,3 +12,9 @@
     <p><%= customer.name %> - <%= customer.count_transactions_id %> purchases</p>
   <% end %>
 </div>
+
+<div class="incompleted_invoices">
+  <% @invoices.not_completed.each do |invoice| %>
+    <p><%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> Created On: <%= invoice.created_at %></p>
+  <% end %>
+</div>

@@ -79,7 +79,7 @@ RSpec.describe 'the admin dashboard' do
     end
   end
 
-  xit "has a list of all incompleted invoices with their ID, which is a link to its show page" do
+  it "has a list of all incompleted invoices with their ID, which is a link to its show page" do
     customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
 
     invoice_1 = customer_1.invoices.create!(status: "in progress")
@@ -93,7 +93,7 @@ RSpec.describe 'the admin dashboard' do
       expect(page).to have_content(invoice_2.id)
       expect(page).to_not have_content(invoice_3.id)
       click_link(invoice_1.id)
-      expect(current_path).to eq(visit "/admin/invoices/#{@invoice_1.id}")
+      expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
     end
   end
 end
