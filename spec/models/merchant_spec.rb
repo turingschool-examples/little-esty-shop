@@ -76,7 +76,6 @@ RSpec.describe Merchant, type: :model do
         expect(merchant2.merchant_invoices).to eq([invoice3])
       end
     end
-<<<<<<< HEAD
 
     describe '.not_shipped' do
       it "lists invoice items that have been ordered but are not shipped from least to most recent" do
@@ -107,24 +106,6 @@ RSpec.describe Merchant, type: :model do
       end 
     end 
   end
-=======
-  end
-
-
-
-  end
-
-    describe 'change_status' do
-      it 'swaps a merchants status from enabled => disabled or disabled => enabled' do
-      merchant = Merchant.create!(name: 'BuyMyThings')
-      expect(merchant.status).to eq("enabled")
-      merchant.change_status
-      expect(merchant.status).to eq("disabled")
-      merchant.change_status
-      expect(merchant.status).to eq("enabled")
-      end
-    end
->>>>>>> bd580c045639b8d68d76e60dbd1b5536d40859e3
 
   describe 'class methods' do
     describe '#top_five_merchants' do
@@ -141,13 +122,8 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-<<<<<<< HEAD
     describe '#enabled_merchants' do 
       it 'returns merchants with status: enabled' do 
-=======
-    describe '#enabled_merchants' do
-      it 'returns merchants with status: enabled' do
->>>>>>> bd580c045639b8d68d76e60dbd1b5536d40859e3
         InvoiceItem.destroy_all
         Item.destroy_all
         Merchant.destroy_all
@@ -169,6 +145,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
   end
+end 
 
 
   RSpec.describe Merchant, type: :model do

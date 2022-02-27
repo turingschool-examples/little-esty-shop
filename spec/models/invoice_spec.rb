@@ -121,7 +121,7 @@ describe 'class method' do
     transaction6 = Transaction.create!(result: 0, invoice_id: invoice5.id)
     transaction7 = Transaction.create!(result: 0, invoice_id: invoice6.id)
     transaction8 = Transaction.create!(result: 1, invoice_id: invoice7.id)
-
+    
     expect(Invoice.not_shipped).to eq([invoice1, invoice2])
 
     end
