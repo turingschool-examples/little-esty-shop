@@ -1,10 +1,11 @@
 <h1>Merchants</h1>
 
 <p><%= link_to "New Merchant", "/admin/merchants/new" %></p>
+<%= render partial: 'sortable' %>
 
 <div class = top_merchants>
 <h3> Top Merchants </h3>
-<ul>
+<ol>
 <% Merchant.top_merchants(5).each do |merchant| %>
   <li>
     <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
@@ -13,9 +14,7 @@
     <%= "Top selling date for #{merchant.name} was #{date_formatter(merchant.best_day.first.created_at)}" %>
   </li>
 <% end %>
-</ul>
-
-
+</ol>
 </div>
 
 <div class = enabled>

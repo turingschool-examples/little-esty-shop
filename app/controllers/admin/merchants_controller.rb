@@ -1,7 +1,7 @@
 class Admin::MerchantsController < ApplicationController
     
     def index
-        @merchants = Merchant.all
+        @merchants = helpers.sortable(Merchant.all, params)
     end
     
     def new

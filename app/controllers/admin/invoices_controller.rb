@@ -1,6 +1,6 @@
 class Admin::InvoicesController < ApplicationController
     def index
-        @invoices = Invoice.all
+        @invoices = helpers.sortable(Invoice.all, params)
     end
     def show 
         @invoice = Invoice.find(params[:id])

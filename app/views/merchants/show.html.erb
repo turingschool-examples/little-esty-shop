@@ -2,6 +2,8 @@
 
 <%= link_to "My Items", "/merchants/#{@merchant.id}/merchant_items" %>
 <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+<br>
+<%= render partial: 'sortable' %>
 
 <section id="favorite_customers">
 <h3>Favorite Customers</h3>
@@ -12,7 +14,7 @@
 
 <section id="ready_to_ship">
 <h3>Items Ready to Ship</h3>
-<% @merchant.items_ready_to_ship.each do |irts| %>
+<% sortable(@merchant.items_ready_to_ship, params).each do |irts| %>
     <%= "#{irts.name} - " %> <%= link_to "Invoice ##{irts.id}", "/invoices/#{irts.id}" %> 
     <%= "- #{date_formatter(irts.created_at)}" %><br>
 <% end %>

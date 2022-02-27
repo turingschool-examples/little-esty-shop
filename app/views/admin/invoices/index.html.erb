@@ -1,5 +1,7 @@
 <h1>Invoice Index Page</h1>
 
+<%= render partial: 'sortable' %>
+
 <% @invoices.each do |invoice| %>
 <h3>  <%= link_to("Invoice #{invoice.id}", "/admin/invoices/#{invoice.id}")%></h3>
 
