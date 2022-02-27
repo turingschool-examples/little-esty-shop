@@ -17,17 +17,16 @@ RSpec.describe Merchant, type: :model do
     merchant = create(:merchant)
     expect(merchant).to be_a(Merchant)
     expect(merchant).to be_valid
-  end 
+  end
 
-  # it 'lists items ready to ship' do
-  #   merchant = create(:merchant)
-  #   item1 = create(:item)
-  #   item2 = create(:item)
-  #   item3 = create(:item)
-  #   item4 = create(:item)
-  #   invoice_item1 = (:invoice_item, result: 0, item_id: item1.id)
-  #   invoice_item2 = (:invoice_item, result: 2, item_id: item2.id)
+  describe 'class methods' do 
+    it '::group_items_by_status(bool)' do
+      merchant = Merchant.create!(name: "Joe Schmoe's Lil Shoppe")
+      item = merchant.items.create!(name: "Plutonium", description: "Good ol' Plutonium brother! YEE YEE!", unit_price: 300, status: true)
+      item_two = merchant.items.create!(name: "Uranium", description: "Boring Uranium-235", unit_price: 150)
 
-  #   expect(merchant.ordered_items_to_ship).to eq([item1, item1, item3, item8, item5])
-  # end
+      expect(merchant.group_items_by_status(true)).to eq([merchant.items.find(item.id)])
+      expect(merchant.group_items_by_status(false)).to eq([merchant.items.find(item_two.id)])
+    end
+  end
 end
