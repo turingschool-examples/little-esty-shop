@@ -27,7 +27,16 @@ RSpec.describe 'Merchant Items index page' do
     expect(page).to_not have_content(@item_2.name)
     expect(page).to have_content(@item_3.name)
     expect(page).to have_link("#{@item_3.name}", :href => "/merchants/#{@merchant_2.id}/items/#{@item_3.id}")
+  end
 
+  it 'shows link to create new item' do
+    visit "merchants/#{@merchant_1.id}/items"
+    expect(page).to have_button("Create New Item")
+  end
 
+  it 'properly links to new page' do
+    visit "merchants/#{@merchant_1.id}/items"
+    click_button("Create New Item")
+    expect(current_path).to eq("merchants/#{@merchant_1.id}/items/new")
   end
 end
