@@ -10,5 +10,5 @@
 
 <h1> Incomplete Invoices </h1>
 <% @invoices.each do |inv| %>
-Invoice #<%= link_to "#{inv.invoice.id}", "/admin/merchants/#{inv.invoice_id}" %> Created at: <%= inv.created_at.strftime("%A, %B %d %Y") %>
+Invoice #<%= link_to "#{inv.id}", admin_invoice_path(inv.id) %> Created at: <%= inv.created_at.strftime("%A, %B %d %Y") %>
 <% end %>
