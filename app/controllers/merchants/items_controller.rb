@@ -2,12 +2,10 @@ class Merchants::ItemsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:id])
-    @inventory = Item.where(merchant_id: params[:id])
   end
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    #binding.pry
     @item = @merchant.items.find(params[:item_id])
   end
 

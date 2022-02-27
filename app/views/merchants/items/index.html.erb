@@ -5,7 +5,8 @@
 <div class="merchant-div">
 <div id="top-five" class="left-div">
 <h4> Top five selling items</h4>
-  <% @inventory.top_five.each do |item|%>
+  <% @merchant.top_five.each do |item|%>
+  <% #binding.pry%>
     <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %><br> Revenue Generated: <%=item.money_made%></p><br>
 
   <%end%>

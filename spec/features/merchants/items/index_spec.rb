@@ -102,27 +102,37 @@ RSpec.describe 'merchant item index', type: :feature do
     invoice1 = customer1.invoices.create!(status: 0)
     invoice2 = customer2.invoices.create!(status: 0)
     invoice3 = customer3.invoices.create!(status: 0)
-    invoice_item2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 2, unit_price: 2000, status: 0)
+    invoice4 = customer4.invoices.create!(status: 0)
+    invoice5 = customer4.invoices.create!(status: 0)
+
+    invoice_item2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 2, unit_price: 2000, status: 0)
     invoice_item4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item1.id, quantity: 2, unit_price: 120, status: 1)
     invoice_item7 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item7.id, quantity: 15, unit_price: 50, status: 2)
-    invoice_item3 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item3.id, quantity: 5, unit_price: 125, status: 0)
-    invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 2, unit_price: 125, status: 0)
-    invoice_item6 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item6.id, quantity: 20, unit_price: 25, status: 2)
+    invoice_item3 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item3.id, quantity: 5, unit_price: 125, status: 0)
+    invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 2, unit_price: 125, status: 0)
+    invoice_item6 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item6.id, quantity: 20, unit_price: 25, status: 2)
     invoice_item5 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 2, unit_price: 2000, status: 1)
-    invoice_item8 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 1, unit_price: 2000, status: 1)
+    invoice_item8 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item2.id, quantity: 1, unit_price: 2000, status: 1)
     invoice_item9 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item4.id, quantity: 3, unit_price: 1400, status: 2)
+
+    transaction1 = Transaction.create!(credit_card_number: 123456, result: 1, invoice_id: invoice1.id)
+    transaction2 = Transaction.create!(credit_card_number: 123456, result: 1, invoice_id: invoice2.id)
+    transaction3 = Transaction.create!(credit_card_number: 123456, result: 1, invoice_id: invoice3.id)
+    transaction4 = Transaction.create!(credit_card_number: 123456, result: 1, invoice_id: invoice4.id)
+    transaction5 = Transaction.create!(credit_card_number: 123456, result: 1, invoice_id: invoice5.id)
 
     visit "/merchants/#{merchant1.id}/items"
     within("#top-five") do
-      expect(page).to have_content("FunPants")
-      expect("FunPants").to appear_before("VeinyShorts")
-      expect("Revenue Generated: 10000").to appear_before("Revenue Generated: 4200")
+
+      expect("FunPants").to appear_before("SmartPants")
+      expect("Revenue Generated: 6250").to appear_before("Revenue Generated: 4240")
+      expect("SmartPants").to appear_before("VeinyShorts")
       expect("VeinyShorts").to appear_before("SunStoppers")
+      expect("SunStoppers").to appear_before("FitPants")
       expect(page).to_not have_content("SpringSocks")
-      expect(page).to_not have_content("SmartPants")
-      save_and_open_page
-      click_link("#{item2.name}")
-      expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item2.id}")
+      expect(page).to_not have_content("UnderRoos")
+      click_link("#{item1.name}")
+      expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}")
 
     end
   end
