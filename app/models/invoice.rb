@@ -24,6 +24,5 @@ class Invoice < ApplicationRecord
 
   def self.incomplete
     Invoice.where.not(status: 1).joins(:invoice_items).where.not(status: 2).group("invoices.id")
-
   end
 end

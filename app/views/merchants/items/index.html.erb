@@ -1,15 +1,22 @@
 <div class="container text-center">
-<br><h1>Merchant items</h1>
+<br><h1><%= @merchant.name %> items</h1>
 <%= button_to "Create item", "/merchants/#{@merchant.id}/items/new", method: :get%><br>
 
-
-
 <div class="merchant-div">
+<div id="top-five" class="left-div">
+<h4> Top five selling items</h4>
+  <% @inventory.top_five.each do |item|%>
+    <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %><br> Revenue Generated: <%=item.money_made%></p><br>
+
+  <%end%>
+</div>
+
   <ul>
-    <div id=enabled>
-<% @merchant.ordered_items.enabled.each do |item| %>
-  <div id="item-<%= item.id %>">
-      <li>Name:<%= item.name %> <br> Status: <%= item.status %></li>
+      <h4>Items in inventory</h4>
+      <div id="enabled">
+<%@merchant.ordered_items.enabled.each do |item| %>
+  <div id="item-<%= item.id %>"class="center-col">
+      <li>Name: <%= item.name %> <br> Status: <%= item.status %></li>
 
     <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
       <% statusing = [ "enabled", "enable" ] %>
@@ -20,13 +27,14 @@
     <%= button_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %><br>
   </div>
 <% end  %>
+</div>
 </ul>
-<div>
 
 <div id="disabled" class='merch-right-div'>
-<% @merchant.ordered_items.disabled.each do |item| %>
-  <div id="item-<%= item.id %>">
-    <ul>
+  <ul>
+    <h4>Not in inventory</h4>
+<%@merchant.ordered_items.disabled.each do |item| %>
+  <div id="item-<%= item.id %>" class='merch-right-div'>
       <li>Name: <%= item.name %><br> Status: <%= item.status %></li>
 
     <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>

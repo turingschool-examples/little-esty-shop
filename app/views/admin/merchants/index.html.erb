@@ -7,7 +7,8 @@
 <div id="enabled">
 <h4>Active Merchants</h4>
 <% @merchants.enabled.each do |merchant| %>
-  <li id="merchant-<%= merchant.id %>">Name: <%= merchant.name %> <br> Current status: <%= merchant.status %>
+  <li id="merchant-<%= merchant.id %>">Name: <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", method: :get %><br> Current status: <%= merchant.status %><br>
+  Merchant dashbord :<%= button_to "#{merchant.name} Dashboard", "/merchants/#{merchant.id}", method: :get %>
   <%= form_with url: "/admin/merchants/#{merchant.id}?status_button=true", method: :patch, local: true do |form| %>
   <% statusing = [ "enabled", "enable" ] %>
   <% statusing = [ "disabled", "disable" ] if merchant.status == "enabled" %>
@@ -25,7 +26,8 @@
   <h4>Inactive Merchants</h4>
 <ul>
 <% @merchants.disabled.each do |merchant| %>
-  <li id="merchant-<%= merchant.id %>">Name: <%= merchant.name %> <br> Current status: <%= merchant.status %>
+  <li id="merchant-<%= merchant.id %>">Name: <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}", method: :get %> <br>Current status: <%= merchant.status %><br>
+  Merchant dashbord :<%= button_to "#{merchant.name} Dashboard", "/merchants/#{merchant.id}", method: :get %>
   <%= form_with url: "/admin/merchants/#{merchant.id}?status_button=true", method: :patch, local: true do |form| %>
   <% statusing = [ "enabled", "enable" ] %>
   <% statusing = [ "disabled", "disable" ] if merchant.status == "enabled" %>

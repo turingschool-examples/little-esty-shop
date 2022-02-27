@@ -6,18 +6,24 @@
 .merchant-div {
   display: flex;
   flex-direction: row;
-  flex-basis: 100%;
   flex: 2;
-  padding-left: 11rem;
+  padding-left: 12rem;
+  text-align: left;
 }
 
+
+.left-div{
+text-align: left;
+}
 .right-div{
 padding-left: 9rem;
 }
-
+.center-col {
+text-align: left;
+}
 .merch-right-div{
-padding-left: 10rem;
 flex: 50%;
+text-align: left;
 }
 .center-admin{
 padding-left: 29rem;
