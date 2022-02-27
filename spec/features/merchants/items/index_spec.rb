@@ -88,7 +88,7 @@ RSpec.describe 'merchant item index', type: :feature do
 
   it "Lists the top five selling items for the merchant" do
     merchant1 = Merchant.create!(name: "The Tornado")
-    item1 = merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
+    item1 = merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 120)
     item2 = merchant1.items.create!(name: "FunPants", description: "Cha + 20", unit_price: 2000)
     item3 = merchant1.items.create!(name: "FitPants", description: "Con + 20", unit_price: 150)
     item4 = merchant1.items.create!(name: "VeinyShorts", description: "Str + 20", unit_price: 1400)
@@ -103,22 +103,15 @@ RSpec.describe 'merchant item index', type: :feature do
     invoice2 = customer2.invoices.create!(status: 0)
     invoice3 = customer3.invoices.create!(status: 0)
 
-    # invoice1 will test both items packaged
-    invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 2, unit_price: 125, status: 0)
+
     invoice_item2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 2, unit_price: 2000, status: 0)
-
-    # invoice2 will test 1 item packaged, 1 item pending.
+    invoice_item4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item1.id, quantity: 2, unit_price: 120, status: 1)
+    invoice_item7 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item7.id, quantity: 15, unit_price: 50, status: 2)
     invoice_item3 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item3.id, quantity: 5, unit_price: 125, status: 0)
-    invoice_item4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item1.id, quantity: 2, unit_price: 125, status: 1)
-
-    # invoice3 will test both packages pending
+    invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 2, unit_price: 125, status: 0)
+    invoice_item6 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item6.id, quantity: 20, unit_price: 25, status: 2)
     invoice_item5 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 2, unit_price: 2000, status: 1)
     invoice_item8 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 1, unit_price: 2000, status: 1)
-
-    #invoice 4 will test completed order with all items shipped, it should not appear
-    invoice_item6 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item6.id, quantity: 20, unit_price: 25, status: 2)
-    invoice_item7 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item7.id, quantity: 15, unit_price: 50, status: 2)
-    #invoice 5 was cancelled so it will test that canceled orders will not appear.
     invoice_item9 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item4.id, quantity: 3, unit_price: 1400, status: 2)
 
     visit "/merchants/#{merchant1.id}/items"
@@ -127,9 +120,12 @@ RSpec.describe 'merchant item index', type: :feature do
       expect("FunPants").to appear_before("VeinyShorts")
       expect("Revenue Generated: 10000").to appear_before("Revenue Generated: 4200")
       expect("VeinyShorts").to appear_before("SunStoppers")
+      expect(page).to_not have_content("SpringSocks")
+      expect(page).to_not have_content("SmartPants")
+      save_and_open_page
       click_link("#{item2.name}")
       expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item2.id}")
-      save_and_open_page
+
     end
   end
 
