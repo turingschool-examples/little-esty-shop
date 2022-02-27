@@ -7,6 +7,7 @@ class Merchant::ItemsController < ApplicationController
   def new
     @merchant = Merchant.find(params[:merchant_id])
   end
+  
   def create
     @merchant = Merchant.find(params[:merchant_id])
     Item.create(item_params)

@@ -1,6 +1,6 @@
 class Admin::MerchantsController < ApplicationController
 
-  def index 
+  def index
     @merchants = Merchant.all
   end
 
@@ -12,26 +12,32 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
-  def update 
+  def update
     merchant = set_merchant
     if params[:trigger]
       merchant.change_status
       redirect_to admin_merchants_path
     elsif merchant.name != params[:name]
-      merchant.update!(name: params[:name])
+      merchant.update!(name: params[:merchant][:name])
       redirect_to admin_merchant_path(merchant)
       flash[:notice] = "#{merchant.name} has been updated"
-    else 
+    else
       redirect_to admin_merchant_path(merchant)
-    end 
+    end
   end
 
   def new
-  end 
+    @merchant = Merchant.new
+  end
 
-private 
+  def create
+    merchent = Merchant.create!(name: params[:merchant][:name], status: :disabled)
+    redirect_to admin_merchants_path
+  end
 
-  def set_merchant 
+private
+
+  def set_merchant
     @merchant = Merchant.find(params[:id])
-  end 
+  end
 end

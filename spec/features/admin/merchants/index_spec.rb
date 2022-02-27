@@ -1,39 +1,38 @@
 require 'rails_helper'
 
-RSpec.describe 'The Admin Merchants Index' do 
+RSpec.describe 'The Admin Merchants Index' do
 
-  it 'displays the name of each merchant in the system' do 
+  it 'displays the name of each merchant in the system' do
     merchant1 = Merchant.create!(name: 'The Duke')
     merchant2 = Merchant.create!(name: 'The Fluke')
     merchant3 = Merchant.create!(name: 'The Crook')
     visit admin_merchants_path
-
-    within '#enabled' do 
-      within '#the-duke' do 
+    within '#enabled' do
+      within '#the-duke' do
         expect(page).to have_content(merchant1.name)
-      end 
-      within '#the-fluke' do 
+      end
+      within '#the-fluke' do
         expect(page).to have_content(merchant2.name)
-      end 
-      within '#the-crook' do 
+      end
+      within '#the-crook' do
         expect(page).to have_content(merchant3.name)
-      end 
-    end 
-  end 
+      end
+    end
+  end
 
-  it 'displays each merchant name as a link to that merchants show page' do 
+  it 'displays each merchant name as a link to that merchants show page' do
     merchant1 = Merchant.create!(name: 'The Duke')
     merchant2 = Merchant.create!(name: 'The Fluke')
     visit admin_merchants_path
 
-    within '#enabled' do 
+    within '#enabled' do
       expect(page).to have_link(merchant1.name)
       click_link(merchant1.name)
       expect(current_path).to eq(admin_merchant_path(merchant1.id))
-    end 
-  end 
+    end
+  end
 
-  it 'displays a button an admin can use to disable an enabled merchants status' do 
+  it 'displays a button an admin can use to disable an enabled merchants status' do
     merchant1 = Merchant.create!(name: 'The Duke')
     merchant2 = Merchant.create!(name: 'The Fluke')
     visit admin_merchants_path
@@ -41,32 +40,32 @@ RSpec.describe 'The Admin Merchants Index' do
       within '#the-duke' do
         expect(page).to have_button("disable merchant")
         expect(merchant1.status).to eq("enabled")
-        expect(page).to have_no_button("enable merchant")  
+        expect(page).to have_no_button("enable merchant")
         click_button("disable merchant")
         expect(current_path).to eq(admin_merchants_path)
         merchant1.reload
         expect(merchant1.status).to eq("disabled")
-      end 
-    end 
+      end
+    end
   end
-    
-  it 'displays a button an admin can use to enable a disabled merchants status' do 
+
+  it 'displays a button an admin can use to enable a disabled merchants status' do
     merchant1 = Merchant.create!(name: 'The Duke', status: :disabled)
     visit admin_merchants_path
     within '#disabled' do
       within '#the-duke' do
         expect(page).to have_button("enable merchant")
         expect(merchant1.status).to eq("disabled")
-        expect(page).to have_no_button("disable merchant")  
+        expect(page).to have_no_button("disable merchant")
         click_button("enable merchant")
         expect(current_path).to eq(admin_merchants_path)
         merchant1.reload
         expect(merchant1.status).to eq("enabled")
-      end 
-    end 
+      end
+    end
   end
-    
-  it 'displays a section for enabled merchants' do 
+
+  it 'displays a section for enabled merchants' do
     merchant1 = Merchant.create!(name: 'The Duke')
     merchant2 = Merchant.create!(name: 'The Fluke')
     merchant3 = Merchant.create!(name: 'The Crook')
@@ -81,7 +80,7 @@ RSpec.describe 'The Admin Merchants Index' do
       expect(page).to have_no_content(merchant4.name)
       end
     end
-    
+
   it 'displays a section for disabled merchants' do
     InvoiceItem.destroy_all
     Item.destroy_all
@@ -100,9 +99,9 @@ RSpec.describe 'The Admin Merchants Index' do
       expect(page).to have_no_content(merchant3.name)
       expect(page).to have_no_content(merchant1.name)
     end
-  end 
+  end
 
-  it 'has a button that brings the user to a form to create a new merchant' do 
+  it 'has a button that brings the user to a form to create a new merchant' do
     visit admin_merchants_path
     within '#create' do
       expect(page).to have_button ("Create New Merchant")

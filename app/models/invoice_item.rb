@@ -7,4 +7,11 @@ class InvoiceItem < ApplicationRecord
   def get_name_from_invoice
     item.name
   end
+
+  # def self.not_shipped
+  #   invoice_ids = InvoiceItem.where("status != 2")
+  #                             .order("DESC")
+  #   # .pluck(:invoice_id)
+  #   # invoice_items.where("status != 2")
+  # end
 end
