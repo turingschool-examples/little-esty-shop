@@ -90,21 +90,11 @@ end
 
     expect(page).to have_content("Incomplete Invoices")
 
+
     expect(page).to have_content("#{not_shipped_invoices.first.id}")
     expect(page).to have_content("#{not_shipped_invoices.last.id}")
-    # expect(page).to have_link("#{invoice.id}")
+    expect(page).to have_link("#{invoice1.id}")
+    expect(current_path).to eq("/admin/merchants/#{inv.invoice_id}")
   end
 
-#   Admin Dashboard Invoices sorted by least recent
-#
-# As an admin,
-# When I visit the admin dashboard
-# In the section for "Incomplete Invoices",
-# Next to each invoice id I see the date that the invoice was created
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
-
-  xit '' do
-
-  end
 end
