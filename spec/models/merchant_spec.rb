@@ -170,7 +170,7 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  
+
   RSpec.describe Merchant, type: :model do
   describe 'instance method' do
   before :each do
@@ -237,5 +237,4 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant2.five_most_popular_items).to eq([@item4, @item3, @item7, @item1, @item2])
     end
   end
-
 end

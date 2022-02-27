@@ -1,21 +1,6 @@
 require "rails_helper"
+
 RSpec.describe 'The Admin Dashboard Index' do
-
-  it 'displays a header that reads Admin Dashboard' do
-    visit admin_dashboard_index_path
-    expect(page).to have_content("Admin Dashboard")
-  end
-
-  it 'can see link to admin merchant index' do
-    visit admin_dashboard_index_path
-    expect(page).to have_link("Admin merchants index")
-  end
-
-  it 'can see link to admin merchant index' do
-    visit admin_dashboard_index_path
-    expect(page).to have_link("Admin invoices index")
-  end
-
   before :each do
     @merchant2 = Merchant.create!(name: "Juan Lopez")
 
@@ -73,7 +58,22 @@ RSpec.describe 'The Admin Dashboard Index' do
     @transaction6 = Transaction.create!(result: 0, invoice_id: @invoice5.id)
     @transaction7 = Transaction.create!(result: 0, invoice_id: @invoice6.id)
     @transaction8 = Transaction.create!(result: 1, invoice_id: @invoice7.id)
-end
+  end
+
+  it 'displays a header that reads Admin Dashboard' do
+    visit admin_dashboard_index_path
+    expect(page).to have_content("Admin Dashboard")
+  end
+
+  it 'can see link to admin merchant index' do
+    visit admin_dashboard_index_path
+    expect(page).to have_link("Admin merchants index")
+  end
+
+  it 'can see link to admin merchant index' do
+    visit admin_dashboard_index_path
+    expect(page).to have_link("Admin invoices index")
+  end
 
   it 'can see the names of the top 5 customers with successful transactions' do
     visit admin_dashboard_index_path
@@ -90,11 +90,9 @@ end
 
     expect(page).to have_content("Incomplete Invoices")
 
-
     expect(page).to have_content("#{not_shipped_invoices.first.id}")
     expect(page).to have_content("#{not_shipped_invoices.last.id}")
-    expect(page).to have_link("#{invoice1.id}")
-    expect(current_path).to eq("/admin/merchants/#{inv.invoice_id}")
+    expect(page).to_not have_content(@invoice5.id)
+    expect(page).to have_link(@invoice1.id)
   end
-
 end

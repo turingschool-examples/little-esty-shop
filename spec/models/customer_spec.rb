@@ -93,6 +93,7 @@ RSpec.describe Customer, type: :model do
       transaction5 = Transaction.create!(result: 0, invoice_id: invoice6.id)
       transaction6 = Transaction.create!(result: 0, invoice_id: invoice7.id)
       transaction7 = Transaction.create!(result: 0, invoice_id: invoice2.id)
+
     expect(Customer.top_five_customers).to eq([customer1, customer2, customer3, customer5, customer6])
   end
 end
