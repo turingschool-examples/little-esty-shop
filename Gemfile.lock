@@ -91,6 +91,10 @@ GEM
     fancy_irb (1.4.3)
       paint (>= 0.9, < 3.0)
       unicode-display_width (>= 1.1)
+    faraday (2.2.0)
+      faraday-net_http (~> 2.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (2.0.1)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -217,6 +221,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
+    ruby2_keywords (0.0.5)
     ruby_dep (1.5.0)
     ruby_engine (1.0.1)
     ruby_info (1.0.1)
@@ -284,6 +289,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   coffee-rails (~> 4.2)
   factory_bot_rails
+  faraday
   irbtools
   jbuilder (~> 2.5)
   launchy
