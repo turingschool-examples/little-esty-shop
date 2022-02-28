@@ -29,3 +29,11 @@
   </section>
   <% end %>
 </div>
+<h2>Top Items</h2>
+<% @merchant.five_most_popular_items.each_with_index do |item, index| %>
+<div id="top_items-<%= index %>">
+  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  <p>Total Revenue: $<%= item.display_price %> in sales</p>
+  <p>Top selling date for <%= item.name %> was <%= item.item_best_day %></p>
+  <% end %>
+</div>
