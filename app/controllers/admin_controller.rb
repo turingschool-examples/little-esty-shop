@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   def show
-    repo_name
+    # repo_name
     @customers = Customer.all
   end
 end

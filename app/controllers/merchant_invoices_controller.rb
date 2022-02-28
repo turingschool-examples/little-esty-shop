@@ -1,13 +1,13 @@
 class MerchantInvoicesController < ApplicationController
 
   def index
-    repo_name
+    # repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @invoices = @merchant.invoices
   end
 
   def show
-    repo_name
+    # repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = @merchant.invoices.find(params[:id])
   end

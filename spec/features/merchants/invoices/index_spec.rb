@@ -56,15 +56,15 @@ RSpec.describe "the merchant invoice index" do
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
   end
 
-  describe 'github api' do
-    it "has the repo name" do
-      visit "/merchants/#{@merchant_1.id}/invoices"
-
-      within ".github-info" do
-        expect(page).to have_content("SullyBirashk/little-esty-shop")
-      end
-    end
-  end
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit "/merchants/#{@merchant_1.id}/invoices"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
 
   describe 'the invoice index page' do
     it 'exists' do

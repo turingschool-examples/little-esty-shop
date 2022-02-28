@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'the admin dashboard' do
 
-  describe 'github api' do
-    it "has the repo name" do
-      visit"/admin"
-
-      within ".github-info" do
-        expect(page).to have_content("SullyBirashk/little-esty-shop")
-      end
-    end
-  end
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit"/admin"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
 
   it 'exists' do
     visit '/admin'

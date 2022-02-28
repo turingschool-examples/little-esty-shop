@@ -1,18 +1,18 @@
 class MerchantItemsController < ApplicationController
 
   def index
-    repo_name
+    # repo_name
     @merchant = Merchant.find(params[:merchant_id])
   end
 
   def show
-    repo_name
+    # repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:id])
   end
 
   def edit
-    repo_name
+    # repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:id])
   end

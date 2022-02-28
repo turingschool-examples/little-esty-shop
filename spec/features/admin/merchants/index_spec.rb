@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'the admin merchant index' do
 
-  describe 'github api' do
-    it "has the repo name" do
-      visit "/admin/merchants"
-
-      within ".github-info" do
-        expect(page).to have_content("SullyBirashk/little-esty-shop")
-      end
-    end
-  end
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit "/admin/merchants"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
 
   it 'list the merchants' do
     merchant_1 = Merchant.create!(name: "Staples")

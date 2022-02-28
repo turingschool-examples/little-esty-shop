@@ -2,19 +2,19 @@ require 'rails_helper'
 
 RSpec.describe "Merchant Items Edit Page" do
 
-  describe 'github api' do
-    it "has the repo name" do
-      merchant = Merchant.create!(name: "Paul the Merchant")
-      item1 = merchant.items.create!(name: "Paul's Item",
-                                     description: "Paul's very popular item",
-                                     unit_price: "2500")
-      visit "/merchants/#{merchant.id}/items/#{item1.id}/edit"
-
-      within ".github-info" do
-        expect(page).to have_content("SullyBirashk/little-esty-shop")
-      end
-    end
-  end
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     merchant = Merchant.create!(name: "Paul the Merchant")
+  #     item1 = merchant.items.create!(name: "Paul's Item",
+  #                                    description: "Paul's very popular item",
+  #                                    unit_price: "2500")
+  #     visit "/merchants/#{merchant.id}/items/#{item1.id}/edit"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
 
   describe "when I visit the merchant items edit page" do
     it "I see form filled in with existing info" do
