@@ -89,4 +89,36 @@ RSpec.describe 'the admin dashboard' do
       expect(page).to have_content("#{customer_6.name} - 2 purchases")
     end
   end
- end
+
+  it "has a list of all incompleted invoices with their ID, which is a link to its show page" do
+    customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
+
+    invoice_1 = customer_1.invoices.create!(status: "in progress")
+    invoice_2 = customer_1.invoices.create!(status: "in progress")
+    invoice_3 = customer_1.invoices.create!(status: "completed")
+
+    visit "/admin"
+
+    within(".incompleted_invoices") do
+      expect(page).to have_content(invoice_1.id)
+      expect(page).to have_content(invoice_2.id)
+      expect(page).to_not have_content(invoice_3.id)
+      click_link(invoice_1.id)
+      expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
+    end
+  end
+
+  it "list of incompleted invoices is ordered from least recent to most recent" do
+    customer_1 = Customer.create!(first_name: "Person 1", last_name: "Mcperson 1")
+
+    invoice_1 = customer_1.invoices.create!(status: "in progress", created_at: "2022-01-06")
+    invoice_2 = customer_1.invoices.create!(status: "in progress", created_at: "2022-01-05")
+    invoice_3 = customer_1.invoices.create!(status: "in progress", created_at: "2022-01-04")
+    visit "/admin"
+
+    within(".incompleted_invoices") do
+      expect(invoice_3.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice_2.created_at.strftime("%A, %B %d, %Y"))
+      expect(invoice_2.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice_1.created_at.strftime("%A, %B %d, %Y"))
+    end
+  end
+end
