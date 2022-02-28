@@ -1,0 +1,50 @@
+<center>
+<h1>The Admin Merchants Index</h1>
+</center>
+
+<center>
+<section id="create">
+  <%= button_to 'Create New Merchant', new_admin_merchant_path, method: :get %>
+</section>
+</center>
+
+<center>
+<section id="top_five_merchants"
+<h2>Top Merchants</h2>
+<% @merchants.top_five_merchants.each_with_index do |merchant, index| %>
+  <section id="top_merchant-<%= merchant.id %>">
+    <p>Rank: <%="#{index += 1}"%></p>
+    <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></p>
+    <p>Total Revenue: $<%= merchant.cents_to_dollars(merchant.total_revenue)  %></p>
+    <p><%="Top selling date for #{merchant.name} was #{merchant.format_created_at(merchant.top_merchant_best_day)}"  %></p>
+  </section>
+<% end %>
+</section>
+<center>
+
+<center>
+<section id="enabled"
+<h3>Enabled Merchants</h3>
+<% @merchants.enabled_merchants.each do |merchant| %>
+  <section id= "<%= merchant.name.parameterize %>">
+  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
+  <%= button_to "#{merchant.change_status.chop} merchant", admin_merchant_path(merchant.id), method: :patch, params: { trigger: 'change status', merchant: { status: merchant.change_status }}  %>
+</section>
+<% end %>
+</section>
+</center>
+
+<br>
+
+<center>
+<section id="disabled"
+<h3>Disabled Merchants</h3>
+<% @merchants.disabled_merchants.each do |merchant| %>
+  <section id= "<%= merchant.name.parameterize %>">
+  <p><%= link_to merchant.name, admin_merchant_path(merchant.id) %><p>
+  <%= button_to "#{merchant.change_status.chop} merchant", admin_merchant_path(merchant.id), method: :patch, params: { trigger: 'change status', merchant: { status: merchant.change_status }}  %>
+  
+</section>
+<% end %>
+</section>
+</center>

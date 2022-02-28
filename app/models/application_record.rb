@@ -4,4 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   def format_created_at(date)
     date.strftime("%A, %B %d, %Y")
   end
+
+  def cents_to_dollars(cents)
+    '%.2f' % (cents /100.0)
+  end 
 end

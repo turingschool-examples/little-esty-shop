@@ -6,6 +6,9 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
 
+  scope :with_successful_transactions, -> { joins(:transactions)
+  .where("transactions.result =?", 0)}
+
   def customer_name
     customer = Customer.find(customer_id)
     customer.first_name + " " + customer.last_name
@@ -24,5 +27,12 @@ class Invoice < ApplicationRecord
     self.created_at.strftime("%A, %B %d, %Y")
   end
 
+  def self.not_shipped
+                joins(:invoice_items)
+                .where("invoice_items.status != 2")
+                .group(:id)
+                .order(created_at: :asc)
+                .distinct
+  end
 
 end
