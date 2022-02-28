@@ -1,7 +1,3 @@
 <div class="update_merchant">
-  <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |form| %>
-    <%= form.label "Name:" %>
-    <%= form.text_field :name, :value => @merchant.name %>
-    <%= form.submit %>
-  <% end %>
+<%= render partial: 'form' %>
 </div>

@@ -1,0 +1,9 @@
+<%= form_with model: [@merchant, @item], local: true do |form| %>
+  <%= form.label name %>
+  <%= form.text_field :name %>
+  <%= form.label "Description:" %>
+  <%= form.text_field :description %>
+  <%= form.label "Current Selling Price:" %>
+  <%= form.text_field :unit_price%>
+  <%= form.submit%>
+<% end %>

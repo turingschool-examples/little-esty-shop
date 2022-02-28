@@ -5,9 +5,9 @@ RSpec.describe "Merchant Item Create page" do
     it "has a form for a new item, once filled out and submitted it redirect to index with item listed" do
       merchant_1 = Merchant.create!(name: "Staples")
       visit "merchants/#{merchant_1.id}/items/new"
-
+      save_and_open_page
       within('#create_item') do
-        fill_in "Name", with: "Paul's new item"
+        fill_in "Name:", with: "Paul's new item"
         fill_in "Description", with: "An item made by paul"
         fill_in "Unit Price:", with: 1000
         click_button "Create Item"
