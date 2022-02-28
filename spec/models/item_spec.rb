@@ -145,11 +145,11 @@ RSpec.describe Item, type: :model do
     @transaction8 = Transaction.create!(result: 0, invoice_id: @invoice16.id)
   end
 
+
   describe 'item_best_day' do
     it 'determines the best selling day for an item' do
-
-      expect(@item1.item_best_day).to eq("02/27/22")
-      expect(@item2.item_best_day).to eq("02/27/22")
+      expect(@item1.item_best_day).to eq("02/28/22")
+      expect(@item2.item_best_day).to eq("02/28/22")
 
     end
   end

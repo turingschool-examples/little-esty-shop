@@ -46,7 +46,7 @@ RSpec.describe 'Merchants Index' do
     end
   end
 
-  it "You can click on the button to cgange an item's status between enabled/ disabled" do
+  it "You can click on the button to change an item's status between enabled/ disabled" do
     visit "/merchants/#{@merchant_2.id}/items"
 
     within("#disabled_items-1") do

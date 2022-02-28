@@ -9,7 +9,7 @@ class Merchant < ApplicationRecord
 
   scope :with_successful_transactions, -> { joins(:transactions)
           .where("transactions.result =?", 0)}
-          
+
   def merchant_invoices
     (invoices.order(:id)).uniq
   end
@@ -35,9 +35,9 @@ class Merchant < ApplicationRecord
   end
 
   def five_most_popular_items
-  items.joins(invoice_items: { invoice: :transactions })
-      .where('transactions.result =?', 0)
+    items.joins(invoice_items: { invoice: :transactions })
       .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
+      .where('transactions.result =?', 0)
       .group("invoice_items.item_id, items.id")
       .order(total_item_sales: :DESC)
       .limit(5)

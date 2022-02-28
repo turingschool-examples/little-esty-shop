@@ -14,7 +14,7 @@ class Item < ApplicationRecord
 
   def display_price
     cents = self.unit_price
-    '%.2f' % (cents /100.0)
+    '%.2f' % (cents / 100.0)
   end
 
   def item_best_day

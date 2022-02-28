@@ -105,7 +105,7 @@ describe 'Merchant model methods' do
   end
 
   describe '.top_five_customers' do
-    xit "finds the top five customers by successful transactions" do
+    it "finds the top five customers by successful transactions" do
       expect(@merchant.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer5, @customer6])
     end
   end
@@ -226,8 +226,7 @@ describe 'Merchant model methods' do
       end
 
       it "will calculate a merchant's five most popular items" do
-        expect(@merchant1.five_most_popular_items).to eq([@item15, @item10, @item9, @oitem11, @item13])
-        expect(@merchant2.five_most_popular_items).to eq([@item4, @item3, @item6, @item7, @item1])
+        expect(@merchant1.five_most_popular_items).to eq([@item15, @item10, @item9, @item11, @item13])
       end
     end
   end
