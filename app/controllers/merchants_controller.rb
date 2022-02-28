@@ -1,6 +1,7 @@
 class MerchantsController < ApplicationController
+  # before_action
   def show
-    # repo_name
+     #contributors
     @merchant = Merchant.find(params[:id])
   end
 
