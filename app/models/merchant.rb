@@ -24,13 +24,12 @@ class Merchant < ApplicationRecord
     self.items.where("item_status =?", 2)
   end
 
-  def five_most_popular_items
-    items.joins(invoice_items: { invoice: :transactions })
-    .where('transactions.result =?', 0)
-    .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
-    .group("invoice_items.item_id, items.id")
-    .order(total_item_sales: :DESC)
-    .limit(5)
+  def self.enabled_merchants
+    where(status: :enabled)
+  end
+
+  def self.disabled_merchants
+    where(status: :disabled)
   end
 
   def change_status
@@ -43,12 +42,13 @@ class Merchant < ApplicationRecord
     end
   end
 
-  def self.enabled_merchants
-    where(status: :enabled)
-  end
-
-  def self.disabled_merchants
-    where(status: :disabled)
+  def five_most_popular_items
+    items.joins(invoice_items: { invoice: :transactions })
+      .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
+      .where('transactions.result =?', 0)
+      .group("invoice_items.item_id, items.id")
+      .order(total_item_sales: :DESC)
+      .limit(5)
   end
 
   def not_shipped
@@ -61,15 +61,6 @@ class Merchant < ApplicationRecord
             .group("customers.id")
             .order("transaction_count DESC")
             .limit(5)
-  end
-
-  def five_most_popular_items
-    items.joins(invoice_items: { invoice: :transactions })
-      .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
-      .where('transactions.result =?', 0)
-      .group("invoice_items.item_id, items.id")
-      .order(total_item_sales: :DESC)
-      .limit(5)
   end
 
   def self.top_five_merchants
@@ -92,5 +83,5 @@ class Merchant < ApplicationRecord
     .limit(1)
     .first
     .invoice_date
-  end 
+  end
 end
