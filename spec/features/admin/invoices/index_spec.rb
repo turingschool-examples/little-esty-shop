@@ -23,6 +23,16 @@ RSpec.describe 'the admin invoice index' do
     @invoice_12 = @customer_6.invoices.create!(status: "in progress")
   end
 
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit '/admin/invoices'
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
+
   it "Lists Invoice Id on index page" do
     visit '/admin/invoices'
 
