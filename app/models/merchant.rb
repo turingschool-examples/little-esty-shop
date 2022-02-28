@@ -21,7 +21,16 @@ class Merchant < ApplicationRecord
 
   def disabled_status
     self.items.where("item_status =?", 2)
-  end 
+  end
+
+  def five_most_popular_items
+    items.joins(invoice_items: { invoice: :transactions })
+    .where('transactions.result =?', 0)
+    .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
+    .group("invoice_items.item_id, items.id")
+    .order(total_item_sales: :DESC)
+    .limit(5)
+  end
 
   def change_status
     if status == 'enabled'
@@ -30,16 +39,16 @@ class Merchant < ApplicationRecord
     elsif status == 'disabled'
       self.enabled!
       status
-    end 
+    end
   end
 
   def self.enabled_merchants
     where(status: :enabled)
-  end 
+  end
 
   def self.disabled_merchants
     where(status: :disabled)
-  end 
+  end
 
   def not_shipped
     invoice_items.where("status != 2")
@@ -60,5 +69,19 @@ class Merchant < ApplicationRecord
     .group("merchants.id")
     .order("total_revenue DESC")
     .limit(5)
+
   end
+
+  def top_merchant_best_day
+    invoices.with_successful_transactions
+    Merchant.select("SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue,
+      invoices.created_at AS invoice_date")
+    .joins(:invoices)
+    .where(id: self.id)
+    .group(:invoice_date)
+    .order(total_revenue: :desc, invoice_date: :desc)
+    .limit(1)
+    .first
+    .invoice_date
+  end 
 end
