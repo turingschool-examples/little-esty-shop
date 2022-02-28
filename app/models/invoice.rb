@@ -28,11 +28,11 @@ class Invoice < ApplicationRecord
   end
 
   def self.not_shipped
-                joins(:invoice_items)
-                .where("invoice_items.status != 2")
-                .group(:id)
-                .order(created_at: :asc)
-                .distinct
+                  joins(:invoice_items)
+                  .where("invoice_items.status != 2")
+                  .group(:id)
+                  .order(created_at: :asc)
+                  .distinct
   end
 
 end
