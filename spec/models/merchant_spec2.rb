@@ -82,7 +82,6 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant.not_shipped).to eq([@invoice_item1, @invoice_item2])
       end
     end
-  end
 end
 
 describe 'Merchant model methods' do
@@ -229,22 +228,22 @@ describe 'Merchant model methods' do
         expect(@merchant1.five_most_popular_items).to eq([@item15, @item10, @item9, @item11, @item13])
       end
 
-    describe 'change_status' do 
-      it 'swaps a merchants status from enabled => disabled or disabled => enabled' do 
+    describe 'change_status' do
+      it 'swaps a merchants status from enabled => disabled or disabled => enabled' do
         merchant = Merchant.create!(name: 'BuyMyThings')
         expect(merchant.status).to eq("enabled")
         merchant.change_status
         expect(merchant.status).to eq("disabled")
         merchant.change_status
         expect(merchant.status).to eq("enabled")
-      end 
+      end
     end
 
-    describe 'top_merchant_best_day' do 
-      it 'returns the date of the date with the most revenue for a merchant' do 
+    describe 'top_merchant_best_day' do
+      it 'returns the date of the date with the most revenue for a merchant' do
         expect(@merchant.top_merchant_best_day).to eq(@invoice2.created_at)
-      end 
-    end 
+      end
+    end
   end
 
   describe 'class methods' do
@@ -262,8 +261,8 @@ describe 'Merchant model methods' do
       end
     end
 
-    describe '#enabled_merchants' do 
-      it 'returns merchants with status: enabled' do 
+    describe '#enabled_merchants' do
+      it 'returns merchants with status: enabled' do
         InvoiceItem.destroy_all
         Item.destroy_all
         Merchant.destroy_all
@@ -285,7 +284,7 @@ describe 'Merchant model methods' do
       end
     end
   end
-end 
+end
 
 
   RSpec.describe Merchant, type: :model do

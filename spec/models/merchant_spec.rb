@@ -127,7 +127,7 @@ RSpec.describe Merchant, type: :model do
 
   end
 
-  describe 'Class Methods' do
+  describe 'Class Methods' do 
     describe '#enable and disable item status from index page' do
       it 'will sort item by status' do
         expect(@merchant1.enabled_status).to eq([@item9, @item10, @item12, @item14, @item15])
@@ -228,9 +228,9 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '.five_most_popular_items' do
-      it "will calculate a merchan't top 5 selling items by revenie " do
+      it "will calculate a merchan't top 5 selling items by revenue" do
         expect(@merchant1.five_most_popular_items).to eq([@item15, @item10, @item9, @item11, @item13])
-        expect(@merchant2.five_most_popular_items).to eq([@item4, @item3, @item7, @item1, @item2])
+        expect(@merchant2.five_most_popular_items).to eq([@item4, @item3, @item7, @item6, @item1])
       end
     end
   end
