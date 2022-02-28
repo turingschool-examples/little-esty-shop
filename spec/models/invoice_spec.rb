@@ -62,6 +62,18 @@ RSpec.describe Invoice, type: :model do
         expect(@invoice2.invoice_revenue).to eq(8)
        end
     end
+
+    describe 'revenue display price' do
+      it 'returns the total revenue as a display unit' do
+        expect(@invoice1.revenue_display_price).to eq('6.00')
+        expect(@invoice2.revenue_display_price).to eq('8.00')
+       end
+    end
+
+    describe 'display date' do
+      it 'returns a date formated long' do
+        expect(@invoice1.display_date).to eq("Monday, February 28, 2022")
+       end
   end
 
 describe 'class method' do

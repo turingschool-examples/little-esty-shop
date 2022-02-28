@@ -7,7 +7,6 @@ RSpec.describe 'Merchant Item update' do
     item_1 = merchant_1.items.create!(name: "cheese", description: "european cheese", unit_price: 2400)
     item_2 = merchant_2.items.create!(name: "onion", description: "red onion", unit_price: 3400)
 
-    # visit "/merchants/#{merchant_2.id}/items/#{item_2.id}"
     visit merchant_item_path(merchant_2, item_2)
 
     expect(page).to have_link("Update #{item_2.name}")

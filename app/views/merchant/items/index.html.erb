@@ -1,35 +1,34 @@
 <center><h1>My Items</h1></center>
-  <%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %>
-      <h2>Enabled Items</h2>
-  <% @merchant.enabled_status.each_with_index do |item, index| %>
-      <div id="enabled_items-<%= index %>">
-      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
-        <%= item.description %><br>
-        <%= item.display_price %><br>
-      <section class="to disable button">
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
-        <%= f.text_field :item_status, value: 2, hidden: true %>
-        <%= f.submit "Disable #{item.name}" %>
-        <% end %>
-      </section>
-      <% end %>
-      </div>
-      <br>
-      <h2>Disabled Items</h2>
-  <% @merchant.disabled_status.each_with_index do |item, index| %>
-    <div id="disabled_items-<%= index %>">
-      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
-      <%= item.description %><br>
-      <%= item.display_price %><br>
-      <section class="to enable button">
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
-        <%= f.text_field :item_status, value: 1, hidden: true %>
-        <%= f.submit "Enable #{item.name}" %>
-        <% end %>
-      </section>
-      <% end %>
-      </div>
-      <br>
+<%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %>
+<h2>Enabled Items</h2>
+<% @merchant.enabled_status.each_with_index do |item, index| %>
+<div id="enabled_items-<%= index %>">
+  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
+  <%= item.description %><br>
+  <%= item.display_price %><br>
+  <section class="to disable button">
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
+    <%= f.text_field :item_status, value: 2, hidden: true %>
+    <%= f.submit "Disable #{item.name}" %>
+    <% end %>
+  </section>
+  <% end %>
+</div>
+<br><br><br>
+<h2>Disabled Items</h2>
+<% @merchant.disabled_status.each_with_index do |item, index| %>
+<div id="disabled_items-<%= index %>">
+  <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
+  <%= item.description %><br>
+  <%= item.display_price %><br>
+  <section class="to enable button">
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |f| %>
+    <%= f.text_field :item_status, value: 1, hidden: true %>
+    <%= f.submit "Enable #{item.name}" %>
+    <% end %>
+  </section>
+  <% end %>
+</div>
 <h2>Top Items</h2>
 <% @merchant.five_most_popular_items.each_with_index do |item, index| %>
 <div id="top_items-<%= index %>">
