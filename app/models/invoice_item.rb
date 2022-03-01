@@ -7,4 +7,9 @@ class InvoiceItem < ApplicationRecord
   def get_name_from_invoice
     item.name
   end
+
+  def display_price
+    cents = self.unit_price
+    '%.2f' % (cents / 100.0)
+  end
 end

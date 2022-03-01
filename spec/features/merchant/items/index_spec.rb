@@ -29,8 +29,7 @@ RSpec.describe 'Merchants Index' do
 
     end
 
-      within("#disabled_items-0") do
-
+    within("#disabled_items-0") do
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@item_3.description)
       expect(page).to have_content(@item_3.display_price)
@@ -38,7 +37,7 @@ RSpec.describe 'Merchants Index' do
 
     end
 
-      within("#disabled_items-1") do
+    within("#disabled_items-1") do
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_5.description)
       expect(page).to have_content(@item_5.display_price)
@@ -47,10 +46,10 @@ RSpec.describe 'Merchants Index' do
     end
   end
 
-    it "You can click on the button to cgange an item's status between enabled/ disabled" do
-      visit "/merchants/#{@merchant_2.id}/items"
+  it "You can click on the button to change an item's status between enabled/ disabled" do
+    visit "/merchants/#{@merchant_2.id}/items"
 
-      within("#disabled_items-1") do
+    within("#disabled_items-1") do
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_5.description)
       expect(page).to have_content(@item_5.display_price)
@@ -58,10 +57,9 @@ RSpec.describe 'Merchants Index' do
 
     end
 
-      click_button "Enable #{@item_5.name}"
+    click_button "Enable #{@item_5.name}"
 
-      within("#enabled_items-1") do
-
+    within("#enabled_items-1") do
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_5.description)
       expect(page).to have_content(@item_5.display_price)

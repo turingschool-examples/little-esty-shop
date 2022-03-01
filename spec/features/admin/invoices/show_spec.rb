@@ -1,37 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Item, type: :model do
-
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:description) }
-    it { should validate_presence_of(:unit_price) }
-    it { should validate_numericality_of(:unit_price) }
-    it { should validate_presence_of(:item_status) }
-    it { should validate_numericality_of(:item_status) }
-  end
-
-  describe 'relationships' do
-    it {should have_many(:invoice_items)}
-    it {should have_many(:invoices).through(:invoice_items)}
-    it {should have_many(:transactions).through(:invoices)}
-  end
-
-  describe 'display price method' do
-    it 'will display dollars in cents' do
-      merchant_1 = Merchant.create!(name: "Ana Maria")
-      merchant_2 = Merchant.create!(name: "Juan Lopez")
-      item_1 = merchant_1.items.create!(name: "cheese", description: "european cheese", unit_price: 2475)
-      item_2 = merchant_2.items.create!(name: "onion", description: "red onion", unit_price: 3450)
-
-      expect(item_2.display_price).to eq("34.50")
-      expect(item_1.display_price).to eq("24.75")
-    end
-  end
-end
-
-RSpec.describe Item, type: :model do
-
+RSpec.describe 'The Admin Invoices Show' do
   before :each do
     @merchant1 = Merchant.create!(name: "Suzy Hernandez")
     @merchant2 = Merchant.create!(name: "Juan Lopez")
@@ -72,16 +41,16 @@ RSpec.describe Item, type: :model do
     @invoice4 =Invoice.create!(status: 0, customer_id: @customer4.id)
     @invoice5 =Invoice.create!(status: 2, customer_id: @customer4.id)
     @invoice6 =Invoice.create!(status: 2, customer_id: @customer5.id)
-    @invoice7 =Invoice.create!(status: 1, customer_id: @customer6.id)
+    @invoice7 =Invoice.create!(status: 2, customer_id: @customer6.id)
     @invoice8 =Invoice.create!(status: 2, customer_id: @customer7.id)
     @invoice9 =Invoice.create!(status: 2, customer_id: @customer7.id)
     @invoice10 =Invoice.create!(status: 2, customer_id: @customer8.id)
     @invoice11 =Invoice.create!(status: 2, customer_id: @customer8.id)
-    @invoice12 =Invoice.create!(status: 1, customer_id: @customer9.id)
+    @invoice12 =Invoice.create!(status: 0, customer_id: @customer9.id)
     @invoice13 =Invoice.create!(status: 2, customer_id: @customer1.id)
     @invoice14 =Invoice.create!(status: 2, customer_id: @customer3.id)
     @invoice15 =Invoice.create!(status: 2, customer_id: @customer7.id)
-    @invoice16 =Invoice.create!(status: 0, customer_id: @customer10.id)
+    @invoice16 =Invoice.create!(status: 1, customer_id: @customer10.id)
 
 
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 3, unit_price: 2400, status: 1)
@@ -110,7 +79,7 @@ RSpec.describe Item, type: :model do
     @invoice_item23 = InvoiceItem.create!(item_id: @item10.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 3450, status: 2)
     @invoice_item24 = InvoiceItem.create!(item_id: @item14.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 2175, status: 2)
     @invoice_item25 = InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice8.id, quantity: 2, unit_price: 2400, status: 2)
-    @invoice_item26 = InvoiceItem.create!(item_id: @item12.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 1908, status: 2)
+    @invoice_item26 = InvoiceItem.create!(item_id: @item12.id, invoice_id: @invoice8.id, quantity: 2, unit_price: 1908, status: 2)
     @invoice_item27 = InvoiceItem.create!(item_id: @item11.id, invoice_id: @invoice9.id, quantity: 2, unit_price: 2375, status: 2)
     @invoice_item28 = InvoiceItem.create!(item_id: @item15.id, invoice_id: @invoice10.id, quantity: 2, unit_price: 5405, status: 2)
     @invoice_item29 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice10.id, quantity: 2, unit_price: 934, status: 2)
@@ -122,7 +91,7 @@ RSpec.describe Item, type: :model do
     @invoice_item35 = InvoiceItem.create!(item_id: @item13.id, invoice_id: @invoice15.id, quantity: 2, unit_price: 2345, status: 2)
     @invoice_item36 = InvoiceItem.create!(item_id: @item15.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 5405, status: 2)
     @invoice_item37 = InvoiceItem.create!(item_id: @item10.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 3450, status: 2)
-    @invoice_item38 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice9.id, quantity: 2, unit_price: 934, status: 2)
+    @invoice_item38 = InvoiceItem.create!(item_id: @item16.id, invoice_id: @invoice16.id, quantity: 2, unit_price: 934, status: 2)
 
     @transaction1 = Transaction.create!(result: 0, invoice_id: @invoice1.id)
     @transaction2 = Transaction.create!(result: 0, invoice_id: @invoice2.id)
@@ -145,11 +114,71 @@ RSpec.describe Item, type: :model do
     @transaction8 = Transaction.create!(result: 0, invoice_id: @invoice16.id)
   end
 
+  describe 'list list the invoice attributes' do
+    it 'will list the details of an invoice' do
 
-  describe 'item_best_day' do
-    it 'determines the best selling day for an item' do
-      expect(@item1.item_best_day).to eq("02/28/22")
-      expect(@item2.item_best_day).to eq("02/28/22")
+      visit admin_invoice_path(@invoice7)
+
+      expect(page).to have_content(@invoice7.id)
+      expect(page).to have_content('completed')
+      expect(page).to have_content(@invoice7.display_date)
+      expect(page).to have_content(@invoice7.customer_name)
+      expect(page).to have_content(@invoice7.revenue_display_price)
+    end
+
+    it 'will list the details of the items on the invoice' do
+
+      visit admin_invoice_path(@invoice16)
+
+      expect(page).to have_content(@invoice16.id)
+      expect(page).to have_content('cancelled')
+      expect(page).to have_content(@invoice16.display_date)
+      expect(page).to have_content(@invoice16.customer_name)
+
+      within("#invoice_items-0") do
+
+        expect(page).to have_content(@item15.name)
+        expect(page).to have_content(@invoice_item36.quantity)
+        expect(page).to have_content(@invoice_item36.display_price)
+        expect(page).to have_content(@invoice_item36.status)
+      end
+
+      within("#invoice_items-1") do
+
+        expect(page).to have_content(@item10.name)
+        expect(page).to have_content(@invoice_item37.quantity)
+        expect(page).to have_content(@invoice_item37.display_price)
+        expect(page).to have_content(@invoice_item37.status)
+      end
+
+      within("#invoice_items-2") do
+
+        expect(page).to have_content(@item16.name)
+        expect(page).to have_content(@invoice_item38.quantity)
+        expect(page).to have_content(@invoice_item38.display_price)
+        expect(page).to have_content(@invoice_item38.status)
+      end
+
+      expect(page).not_to have_content(@item3.name)
+      expect(page).not_to have_content(@item4.name)
+    end
+  end
+
+  describe 'admin can update the status of an invoice' do
+    it 'the invoice status will display a select field that can be updated' do
+
+      visit admin_invoice_path(@invoice12)
+      expect(page).to have_content(@invoice12.id)
+      expect(page).to have_content('in progress')
+
+      select 'cancelled', from: :status
+      click_button('Save')
+
+      expect(current_path).to eq(admin_invoice_path(@invoice12))
+
+      expect(page).to have_content(@invoice12.id)
+      expect(page).to have_content('cancelled')
+      expect(page).to have_content("Invoice Status Has Been Updated!")
 
     end
   end

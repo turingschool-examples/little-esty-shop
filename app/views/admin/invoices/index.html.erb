@@ -1,0 +1,6 @@
+<h1>Admin Invoices Index Page</h1><br><br>
+<h3>Invoices: </h3>
+<% @invoices.each_with_index do |invoice, index| %>
+  <div id="admin_invoice-<%= index %>">
+  <%= link_to "Invoice id: #{invoice.id}", admin_invoice_path(invoice.id) %><br><br>
+<% end %>

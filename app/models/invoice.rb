@@ -18,11 +18,21 @@ class Invoice < ApplicationRecord
     (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
   end
 
-  def self.not_shipped
-                joins(:invoice_items)
-                .where("invoice_items.status != 2")
-                .group(:id)
-                .order(created_at: :asc)
-                .distinct
+  def revenue_display_price
+    cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
+    '%.2f' % (cents / 100.0)
   end
+
+  def display_date
+    self.created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def self.not_shipped
+                  joins(:invoice_items)
+                  .where("invoice_items.status != 2")
+                  .group(:id)
+                  .order(created_at: :asc)
+                  .distinct
+  end
+
 end

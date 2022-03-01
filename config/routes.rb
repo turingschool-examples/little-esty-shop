@@ -6,6 +6,7 @@
       resources :dashboard, only: [:index]
       resources :items, only: [:index, :show, :edit, :update, :new, :create]
     end
+    
     namespace :admin, only: [:index, :show, :edit, :update, :new, :create], module: :admin do
       resources :dashboard, only: [:index]
       resources :merchants, only: [:index, :show, :edit, :update, :new, :create]

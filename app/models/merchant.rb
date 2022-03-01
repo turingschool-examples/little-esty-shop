@@ -9,7 +9,8 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   scope :with_successful_transactions, -> { joins(:transactions)
-            .where("transactions.result =?", 0)}
+          .where("transactions.result =?", 0)}
+
 
   def merchant_invoices
     (invoices.order(:id)).uniq
@@ -23,13 +24,12 @@ class Merchant < ApplicationRecord
     self.items.where("item_status =?", 2)
   end
 
-  def five_most_popular_items
-    items.joins(invoice_items: { invoice: :transactions })
-    .where('transactions.result =?', 0)
-    .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
-    .group("invoice_items.item_id, items.id")
-    .order(total_item_sales: :DESC)
-    .limit(5)
+  def self.enabled_merchants
+    where(status: :enabled)
+  end
+
+  def self.disabled_merchants
+    where(status: :disabled)
   end
 
   def change_status
@@ -42,12 +42,13 @@ class Merchant < ApplicationRecord
     end
   end
 
-  def self.enabled_merchants
-    where(status: :enabled)
-  end
-
-  def self.disabled_merchants
-    where(status: :disabled)
+  def five_most_popular_items
+    items.joins(invoice_items: { invoice: :transactions })
+      .select("items.*, invoice_items.item_id, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")
+      .where('transactions.result =?', 0)
+      .group("invoice_items.item_id, items.id")
+      .order(total_item_sales: :DESC)
+      .limit(5)
   end
 
   def not_shipped
@@ -55,11 +56,11 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_customers
-    customers.with_successful_transactions
-              .select("customers.*, count('transactions') AS transaction_count")
-              .group("customers.id")
-              .order("transaction_count DESC")
-              .limit(5)
+  customers.with_successful_transactions
+            .select("customers.*, count('transactions') AS transaction_count")
+            .group("customers.id")
+            .order("transaction_count DESC")
+            .limit(5)
   end
 
   def self.top_five_merchants
@@ -69,7 +70,11 @@ class Merchant < ApplicationRecord
     .group("merchants.id")
     .order("total_revenue DESC")
     .limit(5)
+<<<<<<< HEAD
   end 
+=======
+  end
+>>>>>>> 03df24f6f15a33bde4ba7c7017a3d8fd28ec3908
 
   def top_merchant_best_day
     invoices.with_successful_transactions
@@ -82,5 +87,5 @@ class Merchant < ApplicationRecord
     .limit(1)
     .first
     .invoice_date
-  end 
+  end
 end

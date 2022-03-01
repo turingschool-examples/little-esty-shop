@@ -7,9 +7,9 @@ RSpec.describe InvoiceItem, type: :model do
     it {should have_many(:merchants).through(:item)}
   end
 
-  describe 'validations' do 
+  describe 'validations' do
     it { should define_enum_for(:status).with_values([:pending, :packaged, :shipped]) }
-  end 
+  end
 
   before :each do
     @merchant = Merchant.create!(name: 'BuyMyThings')
@@ -35,6 +35,10 @@ RSpec.describe InvoiceItem, type: :model do
     describe '.get_name_from_invoice' do
       it "lists items names that are on invoices" do
         expect(@invoice_item2.get_name_from_invoice).to eq("more food")
+      end
+      it 'will change unit price in cents to a diaplay price' do
+
+       expect(@invoice_item4.display_price).to eq('1.00')
       end
     end
   end
