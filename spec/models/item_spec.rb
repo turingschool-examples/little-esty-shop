@@ -148,8 +148,8 @@ RSpec.describe Item, type: :model do
 
   describe 'item_best_day' do
     it 'determines the best selling day for an item' do
-      expect(@item1.item_best_day).to eq("02/28/22")
-      expect(@item2.item_best_day).to eq("02/28/22")
+      expect(@item1.item_best_day).to eq(@item1.created_at.strftime("%m/%d/%y"))
+      expect(@item2.item_best_day).to eq(@item2.created_at.strftime("%m/%d/%y"))
 
     end
   end
