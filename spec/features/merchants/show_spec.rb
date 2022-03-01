@@ -72,8 +72,7 @@ RSpec.describe 'the merchant dashboard' do
       visit "/merchants/#{merchant.id}/dashboard"
 
       expect(current_path).to eq("/merchants/#{merchant.id}/dashboard")
-      save_and_open_page
-  
+
       expect(page).to have_content(merchant.name)
     end
 

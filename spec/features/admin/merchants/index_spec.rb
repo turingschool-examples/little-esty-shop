@@ -151,15 +151,15 @@ RSpec.describe 'the admin merchant index' do
     invoice_item_8 = InvoiceItem.create!(invoice_id: invoice_8.id, item_id: item_8.id, quantity: 1, unit_price: 40, status: "shipped")
 
     visit '/admin/merchants'
-save_and_open_page
+
     within ".top_merchants" do
-      expect(page).to have_content("10")
-      expect(page).to have_content("15")
-      expect(page).to have_content("20")
-      expect(page).to_not have_content("25")
-      expect(page).to_not have_content("30")
-      expect(page).to have_content("35")
-      expect(page).to have_content("40")
+      expect(page).to have_content("$10")
+      expect(page).to have_content("$15")
+      expect(page).to have_content("$20")
+      expect(page).to_not have_content("$25")
+      expect(page).to_not have_content("$30")
+      expect(page).to have_content("$35")
+      expect(page).to have_content("$40")
     end
   end
 

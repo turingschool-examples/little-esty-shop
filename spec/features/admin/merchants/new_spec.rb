@@ -10,9 +10,10 @@ RSpec.describe "create admin/merchants" do
 
   it 'can create a new merchant' do
     visit "/admin/merchants/new"
-    save_and_open_page
+
     fill_in :name, with: "Store 1"
     click_on "Save"
+    
     expect(current_path).to eq("/admin/merchants")
     expect(page).to have_content("Store 1")
   end

@@ -30,8 +30,6 @@ RSpec.describe 'the admin merchant edit page' do
       fill_in :merchant_name, with: "Sams Club"
       click_on 'Update Merchant'
 
-      save_and_open_page
-
     expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
 
     expect(page).to have_content("Sams Club")
