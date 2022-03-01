@@ -30,7 +30,7 @@ RSpec.describe Invoice, type: :model do
 
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 1)
     @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 400, status: 1)
-    @invoice_item3 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 1)
+    @invoice_item3 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 200, status: 2)
 
     @transaction1 = Transaction.create!(result: 0, invoice_id: @invoice1.id)
     @transaction2 = Transaction.create!(result: 0, invoice_id: @invoice3.id)
@@ -80,7 +80,13 @@ end
 
 RSpec.describe Invoice, type: :model do
   describe 'class method' do
-      it 'not shipped method' do
+      it '#not_shipped' do
+        Transaction.destroy_all
+        InvoiceItem.destroy_all
+        Invoice.destroy_all
+        Item.destroy_all
+        Merchant.destroy_all
+        Customer.destroy_all
       merchant2 = Merchant.create!(name: "Juan Lopez")
 
       item1 = merchant2.items.create!(name: "cheese", description: "european cheese", unit_price: 2400, item_status: 1)
