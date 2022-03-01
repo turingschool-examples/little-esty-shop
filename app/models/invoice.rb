@@ -8,10 +8,6 @@ class Invoice < ApplicationRecord
 
   validates_presence_of :status
 
-  def total_revenue
-    invoice_items.sum(:unit_price)
-  end
-
   def total_invoice_revenue
     invoice_items.sum("unit_price * quantity")
   end

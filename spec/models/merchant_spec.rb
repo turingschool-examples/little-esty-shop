@@ -70,8 +70,25 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'instance methods' do
+    it ".unique_invoices" do
+      expect(@merchant_1.unique_invoices).to eq([
+                                                  @invoice_1,
+                                                  @invoice_2,
+                                                  @invoice_3,
+                                                  @invoice_4,
+                                                  @invoice_5,
+                                                  @invoice_6,
+                                                  @invoice_7,
+                                                  @invoice_8,
+                                                  @invoice_9,
+                                                  @invoice_10,
+                                                  @invoice_11,
+                                                  @invoice_12,
+                                                  ])
+    end
     it '.ship_ready_items' do
-      expect(@merchant_1.ship_ready_items).to eq([@invoice_item_2,
+      expect(@merchant_1.ship_ready_items).to eq([
+                                                  @invoice_item_2,
                                                   @invoice_item_3,
                                                   @invoice_item_5,
                                                   @invoice_item_6,
