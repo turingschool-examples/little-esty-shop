@@ -8,7 +8,7 @@
     <% @merchant.items.each do |item| %>
     <% if item.status == "Enabled" %>
     <p><b>Name:</b> <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> </p>
-    <%= button_to "Disable #{item.name}", "/items/#{item.id}?status=disable", method: :patch %>
+    <%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?status=0", method: :put %>
     <% end %>
     <% end %>
   </ol>
@@ -20,7 +20,7 @@
     <% @merchant.items.each do |item| %>
     <% if item.status == "Disabled" %>
     <p><b>Name:</b> <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> </p>
-    <%= button_to "Enable #{item.name}", "/items/#{item.id}?status=enable", method: :patch %>
+    <%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?status=1", method: :put %>
     <% end %>
     <% end %>
   </ol>

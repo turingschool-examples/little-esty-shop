@@ -17,8 +17,14 @@ class MerchantItemsController < ApplicationController
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
-    item.update(item_params)
-    redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: "Item Successfully Updated"
+    if params[:_method] == 'patch'
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: "Item Successfully Updated"
+    else params[:_method] == 'put'
+      # binding.pry
+      item.update(status: (params[:status].to_i))
+      redirect_to "/merchants/#{merchant.id}/items"
+    end
   end
 
   def new
