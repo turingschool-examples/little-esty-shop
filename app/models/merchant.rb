@@ -69,8 +69,7 @@ class Merchant < ApplicationRecord
     .group("merchants.id")
     .order("total_revenue DESC")
     .limit(5)
-
-  end
+  end 
 
   def top_merchant_best_day
     invoices.with_successful_transactions
