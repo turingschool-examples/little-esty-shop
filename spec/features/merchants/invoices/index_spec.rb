@@ -86,7 +86,7 @@ RSpec.describe "the merchant invoice index" do
     it 'links to invoices show page' do
       visit "/merchants/#{@merchant_1.id}/invoices"
       click_on "#{@invoice_1.id}"
-      expect(current_path).to eq("/invoices/#{@invoice_1.id}")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
     end
   end
 end
