@@ -127,7 +127,7 @@ RSpec.describe Merchant, type: :model do
 
   end
 
-  describe 'Class Methods' do 
+  describe 'Class Methods' do
     describe '#enable and disable item status from index page' do
       it 'will sort item by status' do
         expect(@merchant1.enabled_status).to eq([@item9, @item10, @item12, @item14, @item15])
@@ -149,15 +149,7 @@ RSpec.describe Merchant, type: :model do
     describe '#top_five_merchants' do
       it "finds the top 5 merchants by revenue" do
 
-        @invoice_item9 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 3, unit_price: 100, status: 1)
-        @invoice_item10 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice2.id, quantity: 3, unit_price: 400, status: 0)
-        @invoice_item11 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 7, unit_price: 200, status: 2)
-        @invoice_item12 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 100, status: 2)
-        @invoice_item13 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice4.id, quantity: 5, unit_price: 100, status: 2)
-        @invoice_item14 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice5.id, quantity: 2, unit_price: 400, status: 2)
-        @invoice_item15 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice6.id, quantity: 3, unit_price: 200, status: 2)
-        @invoice_item16 = InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice7.id, quantity: 2, unit_price: 100, status: 2)
-        expect(Merchant.top_five_merchants).to eq([@merchant2, @merchant])
+        expect(Merchant.top_five_merchants).to eq([@merchant2, @merchant1])
       end
     end
 
@@ -204,26 +196,44 @@ RSpec.describe Merchant, type: :model do
         invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 2, unit_price: 100, status: 1)
         invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 2, unit_price: 100, status: 1)
         invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 2, unit_price: 100, status: 1)
+
         expect(merchant.merchant_invoices).to eq([invoice1, invoice2])
         expect(merchant2.merchant_invoices).to eq([invoice3])
       end
     end
 
     describe '.not_shipped' do
+      merchant = Merchant.create!(name: 'BuyMyThings')
+      merchant2 = Merchant.create!(name: 'BuyMyThings')
+      customer1 = Customer.create!(first_name: 'Tired', last_name: 'Person')
+      customer2 = Customer.create!(first_name: 'Tired', last_name: 'Person')
+
+      invoice1 =Invoice.create!(status: 0, customer_id: customer1.id)
+      invoice2 =Invoice.create!(status: 0, customer_id: customer1.id)
+      invoice3 =Invoice.create!(status: 0, customer_id: customer2.id)
+
+      item1 = Item.create!(name: 'food', description: 'delicious', unit_price: '2000', merchant_id: merchant.id)
+      item2 = Item.create!(name: 'more food', description: 'even more delicious', unit_price: '3000', merchant_id: merchant.id)
+      item3 = Item.create!(name: 'not food at all', description: 'definitely not food', unit_price: '1500', merchant_id: merchant2.id)
+
+      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 2, unit_price: 100, status: 1)
+      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 2, unit_price: 100, status: 1)
+      invoice_item3 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice3.id, quantity: 2, unit_price: 100, status: 2)
+
       it "lists invoice items that have been ordered but are not shipped from least to most recent" do
-        expect(@merchant.not_shipped).to eq([@invoice_item1, @invoice_item2])
+        expect(merchant.not_shipped).to eq([invoice_item1, invoice_item2])
       end
     end
 
     describe '.top_five_customers' do
       it "finds the top five customers by successful transactions" do
-        expect(@merchant.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer5, @customer6])
+        expect(@merchant1.top_five_customers).to eq([@customer7, @customer8, @customer6, @customer10, @customer3])
       end
     end
 
     describe '.top_merchant_best_day' do
       it 'returns the date of the date with the most revenue for a merchant' do
-        expect(@merchant.top_merchant_best_day).to eq(@invoice2.created_at)
+        expect(@merchant1.top_merchant_best_day).to eq(@invoice16.created_at)
       end
     end
 
