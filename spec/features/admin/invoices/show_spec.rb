@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin invoice index' do
+RSpec.describe 'the admin invoice show' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Staples")
     @merchant_2 = Merchant.create!(name: "Dunder Miflin")
@@ -56,13 +56,6 @@ RSpec.describe 'the admin invoice index' do
     expect(page).to have_content("#{@invoice_item_2.unit_price}")
     expect(page).to have_content("#{@invoice_item_1.status}")
     expect(page).to have_content("#{@invoice_item_2.status}")
-  end
-
-  it "Total Revenue will be shown for each item" do
-    visit "/admin/invoices/#{@invoice_1.id}"
-
-    expect(page).to have_content(13)
-    expect(page).to have_content(58)
   end
 
   it "Total Revenue will be shown for each Invoice" do

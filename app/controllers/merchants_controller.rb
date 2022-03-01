@@ -1,7 +1,7 @@
 class MerchantsController < ApplicationController
   # before_action
   def show
-     #contributors
+     contributors
     @merchant = Merchant.find(params[:id])
   end
 
