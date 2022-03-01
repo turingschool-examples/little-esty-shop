@@ -1,5 +1,5 @@
-<%= form_with model: @merchant, local: true do |form| %>
-  <%= form.label name %>
-  <%= form.text_field name %>
+<%= form_with model: model, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
   <%= form.submit %>
 <% end %>

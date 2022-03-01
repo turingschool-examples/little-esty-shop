@@ -29,11 +29,4 @@
 
 </div>
 
-<div class="create_merchant">
-  <h2> Create new merchant </h2>
-  <%= form_with url: "/admin/merchants", method: :post, local: true do |form| %>
-    <%= form.label "Name:" %>
-    <%= form.text_field :name %>
-    <%= form.submit %>
-  <% end %>
-</div>
+  <%= link_to "Create New Merchant", "/admin/merchants/new" %>

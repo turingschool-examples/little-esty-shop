@@ -19,9 +19,9 @@ RSpec.describe "Merchant Item Create page" do
       visit "merchants/#{merchant_1.id}/items/new"
       save_and_open_page
       within('#create_item') do
-        fill_in "Name:", with: "Paul's new item"
-        fill_in "Description", with: "An item made by paul"
-        fill_in "Unit Price:", with: 1000
+        fill_in :item_name, with: "Paul's new item"
+        fill_in :item_description, with: "An item made by paul"
+        fill_in :item_unit_price, with: 1000
         click_button "Create Item"
       end
 
