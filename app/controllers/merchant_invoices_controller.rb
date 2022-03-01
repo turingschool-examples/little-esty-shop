@@ -7,6 +7,7 @@ class MerchantInvoicesController < ApplicationController
   end
 
   def show
+    # repo_name
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = @merchant.invoices.find(params[:id])
   end

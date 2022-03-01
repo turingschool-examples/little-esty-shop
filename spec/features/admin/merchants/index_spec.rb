@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe 'the admin merchant index' do
+
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit "/admin/merchants"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
+
   it 'list the merchants' do
     merchant_1 = Merchant.create!(name: "Staples")
     merchant_2 = Merchant.create!(name: "Home Depot")
@@ -267,7 +278,7 @@ RSpec.describe 'the admin merchant index' do
 
   it "can add a merchant" do
     visit '/admin/merchants'
-    
+
     expect(page).to_not have_content('Newest Merchant')
 
     within ".create_merchant" do

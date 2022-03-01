@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin invoice index' do
+RSpec.describe 'the admin invoice show' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Staples")
     @merchant_2 = Merchant.create!(name: "Dunder Miflin")
@@ -24,6 +24,16 @@ RSpec.describe 'the admin invoice index' do
     @invoice_item_4 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_4.id, quantity: 4, unit_price: 25, status: "shipped")
   end
 
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit "/admin/invoices/#{@invoice_1.id}"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
+
   it "Invoice Information in show page" do
     visit "/admin/invoices/#{@invoice_1.id}"
 
@@ -46,13 +56,6 @@ RSpec.describe 'the admin invoice index' do
     expect(page).to have_content("#{@invoice_item_2.unit_price}")
     expect(page).to have_content("#{@invoice_item_1.status}")
     expect(page).to have_content("#{@invoice_item_2.status}")
-  end
-
-  it "Total Revenue will be shown for each item" do
-    visit "/admin/invoices/#{@invoice_1.id}"
-
-    expect(page).to have_content(13)
-    expect(page).to have_content(58)
   end
 
   it "Total Revenue will be shown for each Invoice" do

@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   def show
     @item = Item.find(params[:id])
   end
@@ -13,5 +12,4 @@ class ItemsController < ApplicationController
     end
     redirect_to "/items/#{@item.id}"
   end
-
 end

@@ -11,6 +11,16 @@ RSpec.describe 'the merchant item index page' do
     @item_4 = @merchant_2.items.create!(name: "paperclips", description: "24 Count", unit_price: 25)
   end
 
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit "/merchants/#{@merchant_1.id}/items"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
+
   it "will show merchants item names" do
     visit "/merchants/#{@merchant_1.id}/items"
 

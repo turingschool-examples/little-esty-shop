@@ -56,13 +56,24 @@ RSpec.describe 'the merchant dashboard' do
     @transcation_12 = @invoice_12.transactions.create!(credit_card_number: "4654405418249635", result: "failed")
   end
 
-  describe 'existence and links' do
+  # describe 'github api' do
+  #   it "has the repo name" do
+  #     visit "/merchants/#{@merchant_1.id}/dashboard"
+  #
+  #     within ".github-info" do
+  #       expect(page).to have_content("SullyBirashk/little-esty-shop")
+  #     end
+  #   end
+  # end
 
+  describe 'existence and links' do
     it 'has a dashboard page' do
       merchant = Merchant.create!(name: "Steve")
       visit "/merchants/#{merchant.id}/dashboard"
 
       expect(current_path).to eq("/merchants/#{merchant.id}/dashboard")
+      save_and_open_page
+  
       expect(page).to have_content(merchant.name)
     end
 
