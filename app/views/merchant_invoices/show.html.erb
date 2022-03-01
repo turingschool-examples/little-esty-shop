@@ -5,12 +5,10 @@
 
 <h2> Items </h2>
 <% @invoice.invoice_items.each do |invoice_item| %>
-  <li>
-    <%= "Item name: #{invoice_item.item.name}" %>
-    <%= "Qty: #{invoice_item.quantity}" %>
-    <%= "Unit price: #{invoice_item.unit_price}" %>
-    <%= "Status: #{invoice_item.status}" %>
-  </li>
+  <li> <%= "Item name: #{invoice_item.item.name}" %> </li>
+  <li> <%= "Qty: #{invoice_item.quantity}" %> </li>
+  <li> <%= "Unit price: #{invoice_item.unit_price}" %> </li>
+  <li> <%= "Status: #{invoice_item.status}" %> </li>
   <%= form_with url: "/merchants/#{invoice_item.item.merchant.id}/invoices/#{@invoice.id}?invoice_item_id=#{invoice_item.id}", method: :patch, local: true do |form| %>
     <%= form.radio_button :status, "pending" %>
     <%= form.label :status_pending, "pending" %>
