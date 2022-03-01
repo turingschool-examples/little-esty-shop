@@ -22,18 +22,11 @@
   <ol>
     <% @merchants.top_five_merchants.each do |merchant| %>
       <li><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></li>
-      <p> <%= "#{merchant.name}" %> - <%= merchant.totalrevenue %> in sales </p>
+      <p> <%= "#{merchant.name}" %> - $<%= merchant.totalrevenue %> in sales </p>
       <p>Top day: <%=  merchant.best_sales_day %></p>
     <% end %>
   </ol>
 
 </div>
 
-<div class="create_merchant">
-  <h2> Create new merchant </h2>
-  <%= form_with url: "/admin/merchants", method: :post, local: true do |form| %>
-    <%= form.label "Name:" %>
-    <%= form.text_field :name %>
-    <%= form.submit %>
-  <% end %>
-</div>
+  <%= link_to "Create New Merchant", "/admin/merchants/new" %>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin merchant show' do
+RSpec.describe 'the admin merchant edit page' do
   # describe 'github api' do
   #   it "has the repo name" do
   #     merchant_1 = Merchant.create!(name: "Staples")
@@ -17,10 +17,8 @@ RSpec.describe 'the admin merchant show' do
     merchant_1 = Merchant.create!(name: "Staples")
 
     visit"/admin/merchants/#{merchant_1.id}/edit"
+      expect(page).to have_field(:merchant_name, with: "#{merchant_1.name}")
 
-    within(".update_merchant") do
-      expect(page).to have_field(:name, with: "#{merchant_1.name}")
-    end
   end
 
   it "fills in the form and is redirected to show page where the name has changed" do
@@ -28,10 +26,9 @@ RSpec.describe 'the admin merchant show' do
 
     visit"/admin/merchants/#{merchant_1.id}/edit"
 
-    within(".update_merchant") do
-      fill_in 'name', with: "Sams Club"
-      click_on 'Save'
-    end
+
+      fill_in :merchant_name, with: "Sams Club"
+      click_on 'Update Merchant'
 
     expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
 
