@@ -153,13 +153,13 @@ RSpec.describe 'the admin merchant index' do
     visit '/admin/merchants'
 
     within ".top_merchants" do
-      expect(page).to have_content("10")
-      expect(page).to have_content("15")
-      expect(page).to have_content("20")
-      expect(page).to_not have_content("25")
-      expect(page).to_not have_content("30")
-      expect(page).to have_content("35")
-      expect(page).to have_content("40")
+      expect(page).to have_content("$10")
+      expect(page).to have_content("$15")
+      expect(page).to have_content("$20")
+      expect(page).to_not have_content("$25")
+      expect(page).to_not have_content("$30")
+      expect(page).to have_content("$35")
+      expect(page).to have_content("$40")
     end
   end
 
@@ -276,16 +276,5 @@ RSpec.describe 'the admin merchant index' do
     end
   end
 
-  it "can add a merchant" do
-    visit '/admin/merchants'
 
-    expect(page).to_not have_content('Newest Merchant')
-
-    within ".create_merchant" do
-      fill_in 'name', with: 'Newest Merchant'
-      click_on 'Save'
-    end
-
-    expect(page).to have_content('Newest Merchant')
-  end
 end
