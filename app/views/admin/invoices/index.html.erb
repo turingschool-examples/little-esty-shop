@@ -4,5 +4,6 @@
 
 <% @invoices.each do |invoice| %>
 <h3>  <%= link_to("Invoice #{invoice.id}", "/admin/invoices/#{invoice.id}")%></h3>
+<p>Status: <%=invoice.status%></p>
 
 <% end %>
