@@ -10,6 +10,10 @@ class Merchant < ApplicationRecord
   validates_presence_of(:name)
   validates_presence_of(:status)
 
+  def unique_invoices
+    invoices.distinct
+  end
+
   def ship_ready_items
     invoice_items.joins(:invoice)
                   .where.not(status: 2)
