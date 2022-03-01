@@ -9,7 +9,7 @@ class Invoice < ApplicationRecord
   validates_presence_of :status
 
   def total_invoice_revenue
-    invoice_items.sum("unit_price * quantity").to_f
+    invoice_items.sum("unit_price * quantity")
   end
 
   def self.not_completed
