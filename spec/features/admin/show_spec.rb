@@ -103,7 +103,7 @@ RSpec.describe 'the admin dashboard' do
       expect(page).to have_content(invoice_1.id)
       expect(page).to have_content(invoice_2.id)
       expect(page).to_not have_content(invoice_3.id)
-      click_link(invoice_1.id)
+      click_link("#{invoice_1.id}")
       expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
     end
   end
