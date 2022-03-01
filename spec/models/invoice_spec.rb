@@ -44,19 +44,19 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'instance methods' do
-    describe '#customer_name' do
+    describe '.customer_name' do
       it 'returns the full name of a the customer an invoice belongs to' do
         expect(@invoice1.customer_name).to eq("Tired Person")
        end
     end
 
-    describe '#format_created_at' do
+    describe '.format_created_at' do
       it 'returns the time the invoice was created at in "Weekday, Month-Day, Year format' do
         expect(@invoice1.format_created_at(@invoice1.created_at)).to eq(Date.today.strftime("%A, %B %d, %Y"))
        end
     end
 
-    describe '#invoice_revenue' do
+    describe '.invoice_revenue' do
       it 'returns the total revenue that will be generated from all of the items on the invoice' do
         expect(@invoice1.invoice_revenue).to eq(6)
         expect(@invoice2.invoice_revenue).to eq(8)
