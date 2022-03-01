@@ -70,11 +70,7 @@ class Merchant < ApplicationRecord
     .group("merchants.id")
     .order("total_revenue DESC")
     .limit(5)
-<<<<<<< HEAD
-  end 
-=======
   end
->>>>>>> 03df24f6f15a33bde4ba7c7017a3d8fd28ec3908
 
   def top_merchant_best_day
     invoices.with_successful_transactions

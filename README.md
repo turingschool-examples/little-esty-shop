@@ -68,7 +68,6 @@
 - must deploy completed code to Heroku
 
 ## Phases
-
 1. [Database Setup](./doc/db_setup.md)
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
