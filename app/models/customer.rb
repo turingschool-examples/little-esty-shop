@@ -8,6 +8,15 @@ class Customer < ApplicationRecord
   def self.transaction_count(id)
     Customer.find(id).transactions.count
   end
+
+  def self.top_customers(count)
+  joins(invoices: :transactions).
+  where(transactions: {result: 0}).
+  group(:id).
+  select('customers.*, COUNT(transactions.created_at)').
+  order('count desc').
+  limit(count)
+  end
   
   
 end
