@@ -13,9 +13,9 @@ class InvoiceItem < ApplicationRecord
   before_validation :integer_status
 
   def change_status(result)
-      self.pending! if result == 'pending'
-      self.packaged! if result == 'packaged'
-      self.shipped! if result == 'shipped' 
+    self.pending! if result == 'pending'
+    self.packaged! if result == 'packaged'
+    self.shipped! if result == 'shipped'
   end
 
   private
@@ -24,6 +24,4 @@ class InvoiceItem < ApplicationRecord
     self.status = 1 if self.status == 'packaged'
     self.status = 2 if self.status == 'shipped'
   end
-
-
 end
