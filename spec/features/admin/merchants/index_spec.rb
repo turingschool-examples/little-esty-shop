@@ -276,5 +276,21 @@ RSpec.describe 'the admin merchant index' do
     end
   end
 
+    it "has links to admin/merchants show page as merchant names" do
+      enabled_merchant = Merchant.create!(name: "Staples", status: "enabled")
+      disabled_merchant = Merchant.create!(name: "Home Depot", status: "disabled")
+
+      visit '/admin/merchants'
+
+      within ".disabled_merchants" do
+        expect(page).to have_link(disabled_merchant.name)
+
+        click_on("#{disabled_merchant.name}")
+      end
+
+      expect(current_path).to eq("/admin/merchants/#{disabled_merchant.id}")
+
+    end
+
 
 end

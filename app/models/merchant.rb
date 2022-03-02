@@ -17,8 +17,7 @@ class Merchant < ApplicationRecord
   def ship_ready_items
     invoice_items.joins(:invoice)
                   .where.not(status: 2)
-                  .order(:created_at)
-
+                  .order('invoices.created_at')
   end
 
   def top_five_customers
@@ -51,8 +50,8 @@ class Merchant < ApplicationRecord
    def best_sales_day
      invoices.joins(:invoice_items, :transactions)
              .where(transactions:{result: 1})
-             .select("invoices.*, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
-             .group("invoices.id")
+             .select("invoices.created_at, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
+             .group("invoices.created_at")
              .order(totalrevenue: :desc)
              .first.created_at
 

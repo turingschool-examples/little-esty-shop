@@ -34,20 +34,13 @@ RSpec.describe 'the merchant item index page' do
   it "Can enable and disable an item" do
     item_5 = @merchant_1.items.create!(name: "paperclips 2", description: "24 Count", unit_price: 25, status: "Enabled")
 
-    visit "/items/#{@item_1.id}"
-
-
-    expect(page).to have_content("Status: Disabled")
-
     visit "/merchants/#{@merchant_1.id}/items"
 
     expect(page).to have_button("Enable #{@item_1.name}")
 
     click_button("Enable #{@item_1.name}")
 
-    expect(current_path).to eq("/items/#{@item_1.id}")
-
-    expect(page).to have_content("Status:")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
     @item_1.reload
 
@@ -57,7 +50,7 @@ RSpec.describe 'the merchant item index page' do
 
     click_button("Disable #{@item_1.name}")
 
-    expect(current_path).to eq("/items/#{@item_1.id}")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
     @item_1.reload
 
