@@ -9,10 +9,12 @@ Rails.application.routes.draw do
     resources :merchant_items, only: [:index, :new, :show, :create, :edit, :update]
   end
 
-  namespace :admin  do
+  namespace :admin do
     resources :merchants, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show, :update]
+    resources :dashboard, only: [:index]
   end
 
   resources :github_api, only: [:index]
+  
 end
