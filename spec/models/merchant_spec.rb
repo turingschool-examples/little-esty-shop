@@ -16,7 +16,6 @@ RSpec.describe Merchant, type: :model do
 
   before (:each) do
     @merchant_1 = Merchant.create!(name: "Staples")
-
     @item_1 = @merchant_1.items.create!(name: "stapler", description: "Staples papers together", unit_price: 13)
     @item_2 = @merchant_1.items.create!(name: "paper", description: "construction", unit_price: 29)
     @item_3 = @merchant_1.items.create!(name: "calculator", description: "TI-84", unit_price: 84)
