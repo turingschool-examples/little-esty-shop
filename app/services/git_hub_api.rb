@@ -15,10 +15,8 @@ class GitHubApi
     end
 
     def pull_requests
-        response = @conn.get("/repos/stevenjames-turing/little-esty-shop/pulls?state=closed")
+        response = @conn.get("/repos/stevenjames-turing/little-esty-shop/pulls?state=closed&per_page=100")
         github = JSON.parse(response.body, :symbolize_names => true)
-        binding.pry
-
     end
 
     def contributors 
@@ -42,9 +40,9 @@ class GitHubApi
     def commit_count
         count_hash = Hash.new(0)
         @commits.each do |commit| 
-            count_hash[commit.name] += 1
+            count_hash[commit.username] += 1
         end
-        count_hash['Merges'] = count_hash.delete('stevenjames-turing')
+        count_hash['Merges'] = count_hash.delete('Steven James (he/him)')
         return count_hash
     end
 

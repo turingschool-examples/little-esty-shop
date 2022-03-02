@@ -1,0 +1,22 @@
+<h1>GitHub API Stats</h1>
+<%= link_to "Github Repo", "https://github.com/stevenjames-turing/adopt_dont_shop" %>
+
+<section id="api_stats">
+    Repo: <%= @gh.repo.name %>
+    <br>
+    Pull Requests: <%= @gh.pull_requests.count %>
+    <br>
+    <section id="contributors">
+        <h3>Contributors:</h3>
+        <ul>
+        <% @gh.contributors.each do |contributor| %>
+            <% if @gh.commit_count[contributor.username] > 0 %>
+                <li>
+                <%= contributor.username %>:
+                <%= @gh.commit_count[contributor.username] %> commits
+                </li>
+            <% end %>
+        <% end %>
+        </ul>
+    </section>
+</section>

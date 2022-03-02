@@ -10,13 +10,21 @@
   </head>
 
   <body>
+  <div class="content">
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
       </div>
     <% end %>
+    <%= link_to "Home", "/" %>
     <%= link_to "Merchants (Admin)", "/admin/merchants" %>
     <%= link_to "Invoices (Admin)", "/admin/invoices" %>
     <%= yield %>
+    </div>
+  
+   <footer class="footer">
+    <%= link_to "GitHub Api Data", "/github_api/" %>
+   </footer>
+  
   </body>
 </html>
