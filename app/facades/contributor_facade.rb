@@ -5,11 +5,4 @@ class ContributorFacade
       Contributor.new(data)
     end
   end
-
-  def self.num_pull_requests
-    json = ContributorService.num_pull_requests
-    json[:data].map do | data |
-      Contributer.new(data)
-    end
-  end
 end
