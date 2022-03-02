@@ -6,7 +6,7 @@ class PullsService
   end
 
   def self.num_pull_requests
-    response = conn.get("/repos/sullybirashk/little-esty-shop/pulls?per_page=1&state=closed")
+    response = conn.get("/repos/sullybirashk/little-esty-shop/pulls?per_page=100&state=closed")
     JSON.parse(response.body, symbolize_names: true)
   end
 end
