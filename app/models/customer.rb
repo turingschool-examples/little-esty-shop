@@ -10,13 +10,11 @@ class Customer < ApplicationRecord
   end
 
   def self.top_customers(count)
-  joins(invoices: :transactions).
-  where(transactions: {result: 0}).
-  group(:id).
-  select('customers.*, COUNT(transactions.created_at)').
-  order('count desc').
-  limit(count)
+    joins(invoices: :transactions).
+    where(transactions: {result: 0}).
+    group(:id).
+    select('customers.*, COUNT(transactions.created_at)').
+    order('count desc').
+    limit(count)
   end
-  
-  
 end
