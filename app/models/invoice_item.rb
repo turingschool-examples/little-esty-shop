@@ -12,10 +12,10 @@ class InvoiceItem < ApplicationRecord
 
   before_validation :integer_status
 
-    def change_status(result)
-       self.pending! if result == 'pending'
-       self.packaged! if result == 'packaged'
-       self.shipped! if result == 'shipped' 
+  def change_status(result)
+      self.pending! if result == 'pending'
+      self.packaged! if result == 'packaged'
+      self.shipped! if result == 'shipped' 
   end
 
   private
