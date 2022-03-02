@@ -8,12 +8,13 @@ class Invoice < ApplicationRecord
   enum status: {'in progress' => 0, completed: 1, cancelled: 2}
 
   before_validation :integer_status
+
   def created_at_date
-    self.created_at.strftime("%A, %B %d, %Y")
+    created_at.strftime("%A, %B %d, %Y")
   end
 
   def total_revenue
-    self.invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
+    invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
   end
 
   private
