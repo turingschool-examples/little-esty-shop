@@ -2,7 +2,7 @@
   <h2> Enabled Merchants </h2>
   <% @merchants.each do |merchant| %>
     <% if merchant.status == "enabled" %>
-      <%= merchant.name %>
+    <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
       <%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}?status=disabled", method: :put %>
     <% end %>
   <% end %>
@@ -12,7 +12,7 @@
   <h2> Disabled Merchants </h2>
   <% @merchants.each do |merchant| %>
     <% if merchant.status == "disabled" %>
-      <%= merchant.name %>
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
       <%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}?status=enabled", method: :put %>
     <% end %>
   <% end %>

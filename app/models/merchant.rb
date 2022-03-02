@@ -50,8 +50,8 @@ class Merchant < ApplicationRecord
    def best_sales_day
      invoices.joins(:invoice_items, :transactions)
              .where(transactions:{result: 1})
-             .select("invoices.*, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
-             .group("invoices.id")
+             .select("invoices.created_at, SUM( invoice_items.unit_price * invoice_items.quantity)  AS totalrevenue")
+             .group("invoices.created_at")
              .order(totalrevenue: :desc)
              .first.created_at
 
