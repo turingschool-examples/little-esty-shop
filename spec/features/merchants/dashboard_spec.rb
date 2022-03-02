@@ -214,6 +214,5 @@ RSpec.describe 'merchant dashboard' do
             expect(page).to have_content("#{item_3.name} - Invoice ##{invoice_6.id} - #{date.strftime('%A, %B %d, %Y')}")
 
         end
-
     end
 end
