@@ -40,9 +40,11 @@ class GitHubApi
     def commit_count
         count_hash = Hash.new(0)
         @commits.each do |commit| 
-            count_hash[commit.name] += 1
+            # count_hash[commit.name] += 1
+            count_hash[commit.username] += 1
         end
-        count_hash['Merges'] = count_hash.delete('stevenjames-turing')
+        # Let's look at why there are 2 pieces of this data before deleting this.
+        # count_hash['Merges'] = count_hash.delete('stevenjames-turing')
         return count_hash
     end
 

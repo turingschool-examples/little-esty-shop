@@ -1,0 +1,11 @@
+<% gh = GitHubApi.new %>
+<% gh.connect %>
+
+Repo: <%= gh.repo.name %>
+<br>
+Contributors: 
+<% gh.contributors.each do |contributor| %>
+    <%= contributor.username %>:
+    <%= gh.commit_count[contributor.username] %> commits, 
+<% end %>
+<br>
