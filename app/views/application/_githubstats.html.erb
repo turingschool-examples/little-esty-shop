@@ -6,6 +6,6 @@ Repo: <%= gh.repo.name %>
 Contributors: 
 <% gh.contributors.each do |contributor| %>
     <%= contributor.username %>:
-    <%= gh.commit_count[contributor.username] %> commits, 
+    <%= gh.commit_count[contributor.username] %> commits,
 <% end %>
 <br>
