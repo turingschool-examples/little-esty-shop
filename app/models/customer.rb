@@ -8,6 +8,4 @@ class Customer < ApplicationRecord
   def self.transaction_count(id)
     Customer.find(id).transactions.count
   end
-  
-  
 end
