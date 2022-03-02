@@ -85,10 +85,8 @@ RSpec.describe 'admin merchant index' do
                 expect(page).to have_button("Enable", count: 4)
             end
         end
-
     end
         
-
     it 'Admin Merchants Grouped by Status' do 
         merchant_1 = create(:merchant)
         merchant_2 = create(:merchant)
