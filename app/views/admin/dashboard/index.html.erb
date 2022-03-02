@@ -5,3 +5,15 @@
         <li> <%= link_to("Admin Merchants Index", admin_merchants_url) %></li>
         <li> <%= link_to("Admin Invoices Index", admin_invoices_url) %></li>
 </ul>
+<div class = "top_customers">
+<h3>Top Customers</h3>
+    <% @top_customers.each do |customer| %>
+    <ul>
+        <li>Customer: <%="#{customer.first_name} #{customer.last_name} "%> </li> 
+        <li>Successful Transactions: <%=" #{customer.count}" %> 
+        </li>
+    </ul>
+    
+    <% end %>
+    
+</div>
