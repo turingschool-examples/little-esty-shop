@@ -17,8 +17,6 @@ class GitHubApi
     def pull_requests
         response = @conn.get("/repos/stevenjames-turing/little-esty-shop/pulls?state=closed")
         github = JSON.parse(response.body, :symbolize_names => true)
-        binding.pry
-
     end
 
     def contributors 
