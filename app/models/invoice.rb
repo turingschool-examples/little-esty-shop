@@ -22,5 +22,4 @@ class Invoice < ApplicationRecord
     self.status = 1 if self.status == 'completed'
     self.status = 2 if self.status == 'cancelled'
   end
-
 end
