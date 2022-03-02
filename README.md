@@ -27,7 +27,7 @@
 | Pry         | Github        | Git           | Heroku        |
 
 ## How to Use 
-**Visit** [This url](heroku_link_placeholder).     
+**Visit** [This url](https://glacial-journey-57738.herokuapp.com).     
 
 ## Contributors 
 👤 **Becky Nisttahuz** 
@@ -48,16 +48,6 @@
 
 ## Database Design
 ![little-etsy-shop-db-design.png](https://i.postimg.cc/2SNYrYPc/little-etsy-shop-db-design.png)
-
-## Background and Description
-
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
-
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
 
 ## Requirements
 - must use Rails 5.2.x
