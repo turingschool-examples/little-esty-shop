@@ -36,6 +36,62 @@ RSpec.describe 'Item Index page' do
         visit "/merchants/#{@merchant_1.id}/merchant_items"
         expect(page).to have_link('Create Item')
     end
+    describe 'Merchant Item Disable/Enable' do 
+        it 'disabled items can be enabled with button click' do 
+            merchant = create(:merchant)
+            item_1 = create(:item, merchant_id: merchant.id, status: 0)
+            item_2 = create(:item, merchant_id: merchant.id, status: 0)
+            item_3 = create(:item, merchant_id: merchant.id)
+            visit "/merchants/#{merchant.id}/merchant_items/"
+            within(".enabled") do 
+                expect(page).to have_content(item_1.name)
+                expect(page).to have_content(item_2.name)
+                expect(page).to_not have_content(item_3.name)
+            end
+            within(".disabled") do 
+                expect(page).to have_content(item_3.name)
+            end
+            
+            click_button("Enable")
+            
+            within(".enabled") do 
+                expect(page).to have_content(item_1.name)
+                expect(page).to have_content(item_2.name)
+                expect(page).to have_content(item_3.name)
+            end
+            within(".disabled") do 
+                expect(page).to_not have_content(item_3.name)
+            end
+        end
+        it 'enabled items can be DISABLED with button click' do 
+            merchant = create(:merchant)
+            item_1 = create(:item, merchant_id: merchant.id, status: 0)
+            item_2 = create(:item, merchant_id: merchant.id)
+            item_3 = create(:item, merchant_id: merchant.id)
+            visit "/merchants/#{merchant.id}/merchant_items/"
+            within(".enabled") do 
+                expect(page).to have_content(item_1.name)
+                expect(page).to_not have_content(item_2.name)
+                expect(page).to_not have_content(item_3.name)
+            end
+            within(".disabled") do 
+                expect(page).to have_content(item_2.name)
+                expect(page).to have_content(item_3.name)
+                expect(page).to_not have_content(item_1.name)
+            end
+            
+            click_button("Disable")
+            
+            within(".enabled") do 
+                expect(page).to_not have_content(item_1.name)
+            end
+            within(".disabled") do 
+                expect(page).to have_content(item_1.name)
+                expect(page).to have_content(item_2.name)
+                expect(page).to have_content(item_3.name)
+            end
+        end
+    end
     describe '5 most popular items' do 
         before(:each) do 
             @merchant_1 = create(:merchant)
