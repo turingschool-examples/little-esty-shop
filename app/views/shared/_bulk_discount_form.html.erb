@@ -1,0 +1,12 @@
+<%= form_for [:merchant, @bulk_discount], local: true do |f| %>
+  <p><%= f.label :name %></p>
+  <p><%= f.text_field :name %></p> <br>
+
+  <p><%= f.label :percent_discount %></p>
+  <p><%= f.number_field :percent_discount, :step => 0.01 %></p> <br>
+
+  <p><%= f.label :quantity_threshold %></p>
+  <p><%= f.number_field :quantity_threshold %></p> <br>
+
+  <p><%= f.submit %></p>
+<%end%>

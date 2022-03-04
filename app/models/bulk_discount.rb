@@ -8,4 +8,5 @@ class BulkDiscount < ApplicationRecord
   def display_discount
     (percent_discount * 100).round
   end
+
 end
