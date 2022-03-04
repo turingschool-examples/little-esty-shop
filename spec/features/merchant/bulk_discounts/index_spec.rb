@@ -21,19 +21,19 @@ RSpec.describe 'The Merchant Invoices Index' do
       expect(page).to have_content("#{@merchant1.name}'s bulk discounts")
 
       within("#bulk_discount-0") do
-        expect(page).to have_content(@ten.name)
+        expect(page).to have_link(@ten.name)
         expect(page).to have_content(@ten.display_discount)
         expect(page).to have_content(@ten.quantity_threshold)
       end
 
       within("#bulk_discount-1") do
-        expect(page).to have_content(@fifteen.name)
+        expect(page).to have_link(@fifteen.name)
         expect(page).to have_content(@fifteen.display_discount)
         expect(page).to have_content(@fifteen.quantity_threshold)
       end
 
       within("#bulk_discount-2") do
-        expect(page).to have_content(@fifty.name)
+        expect(page).to have_link(@fifty.name)
         expect(page).to have_content(@fifty.display_discount)
         expect(page).to have_content(@fifty.quantity_threshold)
       end
