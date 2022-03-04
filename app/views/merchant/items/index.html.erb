@@ -1,5 +1,6 @@
 <center><h1>My Items</h1></center>
 <%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %>
+<%= link_to "My bulk discounts", merchant_bulk_discounts_path(@merchant.id) %><br>
 <h2>Enabled Items</h2>
 <% @merchant.enabled_status.each_with_index do |item, index| %>
 <div id="enabled_items-<%= index %>">
