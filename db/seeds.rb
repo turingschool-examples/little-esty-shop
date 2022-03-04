@@ -7,12 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 BulkDiscount.destroy_all
-Customer.destroy_all
-Merchant.destroy_all
-Invoice.destroy_all
-Transaction.destroy_all
-Item.destroy_all
 InvoiceItem.destroy_all
+Invoice.destroy_all
+Item.destroy_all
+Merchant.destroy_all
+Transaction.destroy_all
+Customer.destroy_all
+
 
 
 
@@ -24,6 +25,11 @@ InvoiceItem.destroy_all
 @ten = BulkDiscount.create!(name: 'Ten', percent_discount: 0.10, quantity_threshold: 10, merchant_id: @merchant1.id)
 @fifteen = BulkDiscount.create!(name: 'Fifteen', percent_discount: 0.15, quantity_threshold: 15, merchant_id: @merchant1.id)
 @fifty = BulkDiscount.create!(name: 'Fifty', percent_discount: 0.50, quantity_threshold: 50, merchant_id: @merchant1.id)
+
+@six = BulkDiscount.create!(name: 'Six', percent_discount: 0.06, quantity_threshold: 6, merchant_id: @merchant2.id)
+@eleven = BulkDiscount.create!(name: 'Eleven', percent_discount: 0.11, quantity_threshold: 11, merchant_id: @merchant2.id)
+@sixteen = BulkDiscount.create!(name: 'Sixteen', percent_discount: 0.16, quantity_threshold: 16, merchant_id: @merchant2.id)
+@fifty_one = BulkDiscount.create!(name: 'Fifty One', percent_discount: 0.51, quantity_threshold: 51, merchant_id: @merchant2.id)
 
 
 @item1 = @merchant2.items.create!(name: "cheese", description: "european cheese", unit_price: 2400, item_status: 1)
