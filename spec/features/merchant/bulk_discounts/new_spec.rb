@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'The Merchant Invoices Index' do
+RSpec.describe 'Merchant create #new bulk discount' do
 
   before :each do
     @merchant1 = Merchant.create!(name: "Suzy Hernandez")
@@ -23,11 +23,11 @@ RSpec.describe 'The Merchant Invoices Index' do
         fill_in 'Quantity threshold', with: 6
 
         click_button "Create Bulk discount"
-
         six = BulkDiscount.last
+        
+        expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
 
         within("#bulk_discount-3") do
-          expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
           expect(page).to have_content(six.name)
           expect(page).to have_content(six.display_discount)
           expect(page).to have_content(six.quantity_threshold)
@@ -48,7 +48,7 @@ RSpec.describe 'The Merchant Invoices Index' do
         click_button "Create Bulk discount"
         expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
         expect(page).to have_content("Name can't be blank, Quantity threshold can't be blank, Quantity threshold is not a number")
-        end
       end
     end
   end
+end
