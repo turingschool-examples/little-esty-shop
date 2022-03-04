@@ -243,5 +243,14 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant2.five_most_popular_items).to eq([@item4, @item3, @item7, @item6, @item1])
       end
     end
+
+    describe '.bulk_dicounts' do
+      it "return all the bulk discounts of a merchant" do
+
+        five = BulkDiscount.create!(name: 'Five', percent_discount: 0.05, quantity_threshold: 5, merchant_id: @merchant1.id)
+        ten = BulkDiscount.create!(name: 'Ten', percent_discount: 0.10, quantity_threshold: 10, merchant_id: @merchant1.id)
+        expect(@merchant1.bulk_dicounts).to eq([five, ten])
+      end
+    end
   end
 end

@@ -1,22 +1,23 @@
 <h1> <%= @merchant.name %> </h1>
 <header>
-  <%= link_to "#{@merchant.name}'s items", merchant_items_path(@merchant.id), method: :get %>
-  <%= link_to "#{@merchant.name}'s invoices", merchant_invoices_path(@merchant.id) %>
+  <%= link_to "#{@merchant.name}'s items", merchant_items_path(@merchant.id), method: :get %><br>
+  <%= link_to "#{@merchant.name}'s invoices", merchant_invoices_path(@merchant.id) %><br>
+  <%= link_to "#{@merchant.name}'s bulk discount index", merchant_bulk_discounts_path(@merchant.id) %><br>
 </header>
 
 <div id="stats">
   <p>Top 5 customers</p>
   <% @merchant.top_five_customers.each do |customer| %>
-    <p>Name: <%= customer.first_name %> <%= customer.last_name %> </p>
-    <p>Number of orders: <%= customer.transaction_count %></p>
+    <p>Name: <%= customer.first_name %> <%= customer.last_name %> </p><br>
+    <p>Number of orders: <%= customer.transaction_count %></p><br><br>
   <% end %>
 </div>
 
 <p>Not Shipped</p>
 <% @merchant.not_shipped.each_with_index do |invoice_item, index| %>
   <div id="not_shipped-<%= index %>">
-    <p>Item: <%= invoice_item.get_name_from_invoice %>
-    <%= invoice_item.format_created_at(invoice_item.created_at) %></p>
-    <p>Invoice ID: <%= link_to "#{invoice_item.invoice_id}", merchant_invoices_path(@merchant.id) %></p>
+    <p>Item: <%= invoice_item.get_name_from_invoice %><br>
+    <%= invoice_item.format_created_at(invoice_item.created_at) %></p><br>
+    <p>Invoice ID: <%= link_to "#{invoice_item.invoice_id}", merchant_invoices_path(@merchant.id) %></p><br><br>
   </div>
 <% end %>
