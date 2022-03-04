@@ -4,6 +4,10 @@ class Merchant::BulkDiscountsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
+  def show
+    @discount = BulkDiscount.find(params[:id])
+  end
+
   def new
     @bulk_discount = BulkDiscount.new
   end
@@ -19,20 +23,20 @@ class Merchant::BulkDiscountsController < ApplicationController
     end
   end
 
-    def destroy
-      @merchant = Merchant.find_by(id: params[:merchant_id])
-      BulkDiscount.find(params[:id]).destroy
-      redirect_to merchant_bulk_discounts_path(@merchant.id)
-      flash[:alert] = "Your discount was deleted"
-    end
+  def destroy
+    @merchant = Merchant.find_by(id: params[:merchant_id])
+    BulkDiscount.find(params[:id]).destroy
+    redirect_to merchant_bulk_discounts_path(@merchant.id)
+    flash[:alert] = "Your discount was deleted"
+  end
 
   private
-    def bulk_discount_params
-      {
-        name: params[:bulk_discount][:name],
-        percent_discount: params[:bulk_discount][:percent_discount],
-        quantity_threshold: params[:bulk_discount][:quantity_threshold],
-        merchant_id: params[:merchant_id]
-      }
-    end
+  def bulk_discount_params
+    {
+      name: params[:bulk_discount][:name],
+      percent_discount: params[:bulk_discount][:percent_discount],
+      quantity_threshold: params[:bulk_discount][:quantity_threshold],
+      merchant_id: params[:merchant_id]
+    }
+  end
 end

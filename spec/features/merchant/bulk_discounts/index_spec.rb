@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'The Merchant Invoices Index' do
+RSpec.describe 'The Merchant Bulk Discount Index' do
 
   before :each do
     @merchant1 = Merchant.create!(name: "Suzy Hernandez")

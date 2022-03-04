@@ -26,12 +26,12 @@ RSpec.describe 'Merchant #destroy bulk discount' do
           click_link("Delete")
         end
 
-          expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+        expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
 
-          expect(page).to have_content("Your discount was deleted")
-          expect(page).not_to have_content(@ten.name)
-          expect(page).not_to have_content(@ten.display_discount)
-          expect(page).not_to have_content(@ten.quantity_threshold)
+        expect(page).to have_content("Your discount was deleted")
+        expect(page).not_to have_content(@ten.name)
+        expect(page).not_to have_content(@ten.display_discount)
+        expect(page).not_to have_content(@ten.quantity_threshold)
       end
     end
   end
