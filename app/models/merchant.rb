@@ -84,4 +84,8 @@ class Merchant < ApplicationRecord
     .first
     .invoice_date
   end
+
+  def bulk_dicounts
+    BulkDiscount.all
+  end
 end
