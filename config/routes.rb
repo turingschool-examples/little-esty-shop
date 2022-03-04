@@ -1,11 +1,12 @@
   Rails.application.routes.draw do
 
-  get '/merchants', to: 'merchants#index'
+
   get '/', to: 'application#welcome'
     resources :merchants, only: [:show, :index, :update, :post], module: :merchant do
       resources :invoices, only: [:index, :show, :update]
       resources :dashboard, only: [:index]
       resources :items, only: [:index, :show, :edit, :update, :new, :create]
+      resources :bulk_discount, only: [:index]
     end
 
     namespace :admin, only: [:index, :show, :edit, :update, :new, :create], module: :admin do
