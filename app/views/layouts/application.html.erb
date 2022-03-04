@@ -10,11 +10,10 @@
   </head>
 
   <body>
-    <header>
-      <%= link_to "Merchant Index", merchants_path %>
+    <nav>
       <%= link_to "Admin Dashboard", admin_dashboard_index_path %>
       <%= link_to "Admin Merchants", admin_merchants_path %>
-    </header>
+    </nav>
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>

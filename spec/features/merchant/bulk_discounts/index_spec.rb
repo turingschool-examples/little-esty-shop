@@ -17,7 +17,7 @@ RSpec.describe 'The Merchant Invoices Index' do
       click_link("#{@merchant1.name}'s bulk discount index")
 
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
-save_and_open_page
+
       expect(page).to have_content("#{@merchant1.name}'s bulk discounts")
 
       within("#bulk_discount-0") do

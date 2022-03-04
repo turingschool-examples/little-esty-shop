@@ -1,7 +1,5 @@
   Rails.application.routes.draw do
 
-
-  get '/', to: 'application#welcome'
     resources :merchants, only: [:show, :index, :update, :post], module: :merchant do
       resources :invoices, only: [:index, :show, :update]
       resources :dashboard, only: [:index]
