@@ -20,22 +20,19 @@ RSpec.describe 'Merchant #edit bulk discount' do
         expect(page).to have_content(@ten.quantity_threshold)
         expect(page).to have_link('Edit Bulk discount')
 
-        click_link('Edit Bulk Discount')
-
-        expect(page).to have_content(@ten.name)
-        expect(page).to have_content(@ten.display_discount)
-        expect(page).to have_content(@ten.quantity_threshold)
+        click_link('Edit Bulk discount')
 
         fill_in 'Quantity threshold', with: 11
 
         click_button "Update Bulk discount"
 
         expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @ten.id))
-
+require "pry"; binding.pry
         expect(page).to have_content(@ten.name)
         expect(page).to have_content(@ten.display_discount)
         expect(page).to have_content(@ten.quantity_threshold)
-        expect(@ten.quantity_threshold).to eq(11)
+        expect(page).to have_content('With purchase of 11 or more')
+        expect(page).to_not have_content('With purchase of 10 or more')
       end
     end
   end
