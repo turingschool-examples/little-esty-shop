@@ -14,9 +14,9 @@ class Invoice < ApplicationRecord
     customer.first_name + " " + customer.last_name
   end
 
-  def invoice_revenue
-    (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
-  end
+  # def invoice_revenue
+  #   (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
+  # end
 
   def revenue_display_price
     cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))

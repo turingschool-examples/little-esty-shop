@@ -56,10 +56,10 @@ RSpec.describe Invoice, type: :model do
        end
     end
 
-    describe '.invoice_revenue' do
+    describe '.revenue_display_price' do
       it 'returns the total revenue that will be generated from all of the items on the invoice' do
-        expect(@invoice1.invoice_revenue).to eq(6)
-        expect(@invoice2.invoice_revenue).to eq(8)
+        expect(@invoice1.revenue_display_price).to eq('6.00')
+        expect(@invoice2.revenue_display_price).to eq('8.00')
        end
     end
 
