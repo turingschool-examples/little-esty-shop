@@ -89,7 +89,3 @@ class Merchant < ApplicationRecord
     BulkDiscount.where('merchant_id =?', self.id)
   end
 end
-# def show
-#   @merchant = Merchant.find(params[:merchant_id])
-#   @item = @merchant.items.find(params[:id])
-# end

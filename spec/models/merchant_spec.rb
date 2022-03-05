@@ -249,7 +249,7 @@ RSpec.describe Merchant, type: :model do
 
         five = BulkDiscount.create!(name: 'Five', percent_discount: 0.05, quantity_threshold: 5, merchant_id: @merchant1.id)
         ten = BulkDiscount.create!(name: 'Ten', percent_discount: 0.10, quantity_threshold: 10, merchant_id: @merchant1.id)
-        expect(@merchant1.bulk_dicounts).to eq([five, ten])
+        expect(@merchant1.discounts).to eq([five, ten])
       end
     end
   end
