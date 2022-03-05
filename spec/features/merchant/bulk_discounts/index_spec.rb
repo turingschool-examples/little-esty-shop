@@ -12,9 +12,9 @@ RSpec.describe 'The Merchant Bulk Discount Index' do
     it "will list a merchant's bulk discounts, including their percentage discount and quantity thresholds" do
 
       visit merchant_dashboard_index_path (@merchant1)
+
       expect(page).to have_link("#{@merchant1.name}'s bulk discount index")
       click_link("#{@merchant1.name}'s bulk discount index")
-
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
 
       expect(page).to have_content("#{@merchant1.name}'s bulk discounts")

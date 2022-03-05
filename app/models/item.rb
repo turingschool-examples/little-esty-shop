@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   attribute :item_status, :integer, default: 2
 
   belongs_to :merchant
-  has_many :invoice_items
+  has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
 

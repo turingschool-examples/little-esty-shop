@@ -2,7 +2,7 @@ class Merchant < ApplicationRecord
   enum status: {enabled: 0, disabled: 1}
   validates :name, presence: true
 
-  has_many :items
+  has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
@@ -85,7 +85,11 @@ class Merchant < ApplicationRecord
     .invoice_date
   end
 
-  def bulk_dicounts
-    BulkDiscount.all
+  def discounts
+    BulkDiscount.where('merchant_id =?', self.id)
   end
 end
+# def show
+#   @merchant = Merchant.find(params[:merchant_id])
+#   @item = @merchant.items.find(params[:id])
+# end
