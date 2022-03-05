@@ -17,15 +17,16 @@ RSpec.describe 'Merchant create #new bulk discount' do
 
         expect(page).to have_link('Add new Discount')
         click_link('Add new Discount')
+        expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
 
         fill_in 'Name', with: 'Six'
         fill_in 'Percent discount', with: 0.06
         fill_in 'Quantity threshold', with: 6
+        click_button 'Create Bulk discount'
 
-        click_button "Create Bulk discount"
-        six = BulkDiscount.last
-        
         expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+
+        six = BulkDiscount.last
 
         within("#bulk_discount-3") do
           expect(page).to have_content(six.name)
@@ -46,6 +47,7 @@ RSpec.describe 'Merchant create #new bulk discount' do
         fill_in 'Percent discount', with: 0.06
 
         click_button "Create Bulk discount"
+
         expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
         expect(page).to have_content("Name can't be blank, Quantity threshold can't be blank, Quantity threshold is not a number")
       end

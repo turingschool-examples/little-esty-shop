@@ -1,5 +1,4 @@
 <%= form_for [:merchant, @bulk_discount], local: true do |f| %>
-  <p><%= f.number_field :id, value: @bulk_discount.id, hidden: true %></p> <br>
 
   <p><%= f.label :name %></p>
   <p><%= f.text_field :name %></p> <br>
@@ -9,8 +8,6 @@
 
   <p><%= f.label :quantity_threshold %></p>
   <p><%= f.number_field :quantity_threshold %></p> <br>
-
-  <p><%= f.number_field :merchant_id, value: @bulk_discount.merchant_id, hidden: true %></p> <br>
 
   <p><%= f.submit %></p>
 <%end%>

@@ -4,7 +4,7 @@ get '/', to: 'application#welcome'
       resources :invoices, only: [:index, :show, :update]
       resources :dashboard, only: [:index]
       resources :items, only: [:index, :show, :edit, :update, :new, :create]
-      resources :bulk_discounts, only: [:index, :edit, :show, :new, :create, :update, :delete, :destroy]
+      resources :bulk_discounts
     end
 
     namespace :admin, only: [:index, :show, :edit, :update, :new, :create], module: :admin do
