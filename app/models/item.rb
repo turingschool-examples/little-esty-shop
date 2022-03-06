@@ -12,6 +12,7 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
 
 
+
   def display_price
     cents = self.unit_price
     '%.2f' % (cents / 100.0)
