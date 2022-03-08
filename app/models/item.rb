@@ -30,4 +30,3 @@ class Item < ApplicationRecord
       .strftime("%m/%d/%y")
   end
 end
-# Song.select(:title).where('play_count >= ?', 3000).order(length: :desc).limit(2)

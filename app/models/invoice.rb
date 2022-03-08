@@ -8,57 +8,49 @@ class Invoice < ApplicationRecord
   has_many :bulk_discounts, through: :merchants
 
   scope :with_successful_transactions, -> { joins(:transactions)
-  .where("transactions.result =?", 0)}
+    .where("transactions.result =?", 0)}
 
-  def customer_name
-    customer = Customer.find(customer_id)
-    customer.first_name + " " + customer.last_name
-  end
-
-  def pre_discount_revenue
-    cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
-    '%.2f' % (cents / 100.0)
-  end
-
-  def sucessful_transactions
-    transactions.where('transactions.result =?', 0)
-  end
-
-    def merchant_discounts
-      if self.sucessful_transactions.count > 0
-      bulk_discounts.joins(merchant: :invoice_items)
-      .select("bulk_discounts.*, bulk_discounts.merchant_id, bulk_discounts.name, bulk_discounts.percent_discount, bulk_discounts.quantity_threshold")
-      .group("bulk_discounts.merchant_id, bulk_discounts.id")
-      .order('bulk_discounts.merchant_id, bulk_discounts.quantity_threshold')
+    def customer_name
+      customer = Customer.find(customer_id)
+      customer.first_name + " " + customer.last_name
     end
-  end
 
-  def apply_discount
-    revenue = 0
-    if self.sucessful_transactions.count > 0
+    def pre_discount_revenue
+      cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
+      '%.2f' % (cents / 100.0)
+    end
+
+    def sucessful_transactions
+      transactions.where('transactions.result =?', 0)
+    end
+
+    def apply_discount
+      revenue = 0.00
       invoice_items.each do |item|
-        if item.merchant_discounts != nil
-          discounted_renevue = item.calculate_discounted_renevue
-          discounted_renevue += revenue
-        elsif item.merchant_discounts = nil
-          non_discounted_renevue = item.calculate_renevue
-          non_discounted_renevue += revenue
+        if item.merchant_discount != nil
+          revenue += item.calculate_discounted_renevue
+        elsif item.merchant_discount == nil
+          revenue += item.calculate_renevue
         end
       end
-    end 
+      return revenue
+    end
+
+    def display_discount_revenue
+      cents = self.apply_discount
+      '%.2f' % (cents / 100.0)
+    end
+
+    def display_date
+      self.created_at.strftime("%A, %B %d, %Y")
+    end
+
+    def self.not_shipped
+      joins(:invoice_items)
+      .where("invoice_items.status != 2")
+      .group(:id)
+      .order(created_at: :asc)
+      .distinct
+    end
+
   end
-
-
-  def display_date
-    self.created_at.strftime("%A, %B %d, %Y")
-  end
-
-  def self.not_shipped
-                  joins(:invoice_items)
-                  .where("invoice_items.status != 2")
-                  .group(:id)
-                  .order(created_at: :asc)
-                  .distinct
-  end
-
-end
