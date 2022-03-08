@@ -24,25 +24,32 @@ class Invoice < ApplicationRecord
     transactions.where('transactions.result =?', 0)
   end
 
-  def merchant_discounts
-    if self.sucessful_transactions.count > 0
-    bulk_discounts.joins(merchant: :invoice_items)
-    .select("bulk_discounts.*, bulk_discounts.merchant_id, bulk_discounts.name, bulk_discounts.percent_discount, bulk_discounts.quantity_threshold")
-    .group("bulk_discounts.merchant_id, bulk_discounts.id")
-    .order('bulk_discounts.merchant_id, bulk_discounts.quantity_threshold')
+    def merchant_discounts
+      if self.sucessful_transactions.count > 0
+      bulk_discounts.joins(merchant: :invoice_items)
+      .select("bulk_discounts.*, bulk_discounts.merchant_id, bulk_discounts.name, bulk_discounts.percent_discount, bulk_discounts.quantity_threshold")
+      .group("bulk_discounts.merchant_id, bulk_discounts.id")
+      .order('bulk_discounts.merchant_id, bulk_discounts.quantity_threshold')
+    end
   end
-end
 
-
-    #
-  # def discounted_revenue
-  #   revenue = 0
-  #   discounts = merchant_discounts
-  #   self.invoice_items.each do |item|
-  #     item.
-  #
-  #
+  # def invoice_items
+  #   invoice_items
   # end
+
+#   def apply_discount
+#     if self.sucessful_transactions.count > 0
+#     revenue = 0
+#     invoice_items.each do |item|
+#       if item.merchant_discount
+#         += revenue
+#         if not
+#           non_discount_revenue += revenue
+#   end
+# end
+
+
+
 
 
   def display_date
