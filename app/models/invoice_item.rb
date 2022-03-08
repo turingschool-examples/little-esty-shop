@@ -21,10 +21,12 @@ class InvoiceItem < ApplicationRecord
   end
 
   def calculate_discounted_renevue
-    unit_price * quantity * (1 - merchant_discount.percent_discount)
+    cents = unit_price * quantity * (1 - merchant_discount.percent_discount)
+    '%.2f' % (cents / 100.0)
   end
 
   def calculate_renevue
-    unit_price * quantity
+    cents = unit_price * quantity
+    '%.2f' % (cents / 100.0)
   end
 end

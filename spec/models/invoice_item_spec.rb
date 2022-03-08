@@ -175,9 +175,22 @@ before :each do
 
   describe 'instance methods' do
       it 'caculate a discount' do
-require "pry"; binding.pry
+
        expect(@invoice_item4.merchant_discount).to eq(@sixteen)
+       expect(@invoice_item1.merchant_discount).to eq(@six)
        expect(@invoice_item3.merchant_discount).to eq(nil)
+     end
+
+      it 'calculate_discounted_renevue' do
+
+       expect(@invoice_item4.calculate_discounted_renevue).to eq("771.83")
+       expect(@invoice_item1.calculate_discounted_renevue).to eq("135.36")
+     end
+
+      it 'calculate_non_discounted_renevue' do
+
+       expect(@invoice_item4.calculate_renevue).to eq("918.85")
+       expect(@invoice_item1.calculate_renevue).to eq("144.00")
      end
   end
 end
