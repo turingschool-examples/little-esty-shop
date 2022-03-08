@@ -18,8 +18,12 @@
       <p>Item quantity: <%= ii.quantity %></p>
       <p>Item price sold at: $<%= ii.item.display_price %></p>
       <p>Item status: <%= ii.status %></p>
-
-      <%= form_with url: merchant_invoice_path(@merchant.id, @invoice.id), method: :patch, local: true do |form| %>
+  <% if ii.merchant_discount != nil %>
+  <div class="link_to_discoount">
+<p><%= link_to "Discount applied to #{ii.item.name}", merchant_bulk_discount_path(ii.item.merchant_id, ii.merchant_discount.id) %><p>
+  </div>
+  <% end %>
+    <%= form_with url: merchant_invoice_path(@merchant.id, @invoice.id), method: :patch, local: true do |form| %>
             <%= form.hidden_field :ii_id, value: ii.id %>
             <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
             <%= form.submit "Update Item Status" %>
