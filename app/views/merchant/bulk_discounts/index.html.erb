@@ -9,3 +9,8 @@
     <p><%= link_to "Delete #{discount.name} discount", merchant_bulk_discount_path(@merchant.id, discount.id), method: :delete %></p><br>
   </div>
 <% end %>
+<h3>Upcomming Holidays:</h3>
+<% @holidays.each do |holiday| %>
+<%= holiday.name %>
+<%= holiday.date %><br>
+<% end %>
