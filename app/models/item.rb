@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
+  has_many :bulk_discounts, through: :merchant
 
 
 
@@ -29,3 +30,4 @@ class Item < ApplicationRecord
       .strftime("%m/%d/%y")
   end
 end
+# Song.select(:title).where('play_count >= ?', 3000).order(length: :desc).limit(2)

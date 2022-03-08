@@ -16,7 +16,15 @@ class InvoiceItem < ApplicationRecord
 
   def merchant_discount
     bulk_discounts.where("bulk_discounts.quantity_threshold <= ?", quantity)
-    .order('percent_discount DESC')
+    .order('bulk_discounts.quantity_threshold DESC')
     .first
+  end
+
+  def calculate_discounted_renevue
+    unit_price * quantity * (1 - merchant_discount.percent_discount)
+  end
+
+  def calculate_renevue
+    unit_price * quantity
   end
 end

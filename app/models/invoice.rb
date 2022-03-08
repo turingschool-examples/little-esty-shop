@@ -33,23 +33,20 @@ class Invoice < ApplicationRecord
     end
   end
 
-  # def invoice_items
-  #   invoice_items
-  # end
-
-#   def apply_discount
-#     if self.sucessful_transactions.count > 0
-#     revenue = 0
-#     invoice_items.each do |item|
-#       if item.merchant_discount
-#         += revenue
-#         if not
-#           non_discount_revenue += revenue
-#   end
-# end
-
-
-
+  def apply_discount
+    revenue = 0
+    if self.sucessful_transactions.count > 0
+      invoice_items.each do |item|
+        if item.merchant_discounts != nil
+          discounted_renevue = item.calculate_discounted_renevue
+          discounted_renevue += revenue
+        elsif item.merchant_discounts = nil
+          non_discounted_renevue = item.calculate_renevue
+          non_discounted_renevue += revenue
+        end
+      end
+    end 
+  end
 
 
   def display_date
