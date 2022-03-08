@@ -90,6 +90,6 @@ class Merchant < ApplicationRecord
   end
 
   def discounts
-    BulkDiscount.where('merchant_id =?', self.id)
+    self.bulk_discounts
   end
 end

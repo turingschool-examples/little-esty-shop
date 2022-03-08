@@ -5,34 +5,52 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
+  has_many :bulk_discounts, through: :merchants
 
   scope :with_successful_transactions, -> { joins(:transactions)
-  .where("transactions.result =?", 0)}
+    .where("transactions.result =?", 0)}
 
-  def customer_name
-    customer = Customer.find(customer_id)
-    customer.first_name + " " + customer.last_name
+    def customer_name
+      customer = Customer.find(customer_id)
+      customer.first_name + " " + customer.last_name
+    end
+
+    def pre_discount_revenue
+      cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
+      '%.2f' % (cents / 100.0)
+    end
+
+    def sucessful_transactions
+      transactions.where('transactions.result =?', 0)
+    end
+
+    def apply_discount
+      revenue = 0.00
+      invoice_items.each do |item|
+        if item.merchant_discount != nil
+          revenue += item.calculate_discounted_renevue
+        elsif item.merchant_discount == nil
+          revenue += item.calculate_renevue
+        end
+      end
+      return revenue
+    end
+
+    def display_discount_revenue
+      cents = self.apply_discount
+      '%.2f' % (cents / 100.0)
+    end
+
+    def display_date
+      self.created_at.strftime("%A, %B %d, %Y")
+    end
+
+    def self.not_shipped
+      joins(:invoice_items)
+      .where("invoice_items.status != 2")
+      .group(:id)
+      .order(created_at: :asc)
+      .distinct
+    end
+
   end
-
-  # def invoice_revenue
-  #   (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
-  # end
-
-  def revenue_display_price
-    cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
-    '%.2f' % (cents / 100.0)
-  end
-
-  def display_date
-    self.created_at.strftime("%A, %B %d, %Y")
-  end
-
-  def self.not_shipped
-                  joins(:invoice_items)
-                  .where("invoice_items.status != 2")
-                  .group(:id)
-                  .order(created_at: :asc)
-                  .distinct
-  end
-
-end

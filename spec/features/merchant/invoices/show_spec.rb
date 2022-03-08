@@ -28,9 +28,9 @@ RSpec.describe 'The Merchant Invoice Show Page' do
 
   it 'displays the total revenue that will be generated from all items on the invoice' do
     visit merchant_invoice_path(@merchant.id, @invoice1.id)
-    expect(page).to have_content(@invoice1.revenue_display_price)
+    expect(page).to have_content(@invoice1.pre_discount_revenue)
     within(".total_revenue") do
-      expect(page).to have_no_content(@invoice2.revenue_display_price)
+      expect(page).to have_no_content(@invoice2.pre_discount_revenue)
     end
   end
 

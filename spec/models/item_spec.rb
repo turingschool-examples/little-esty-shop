@@ -2,21 +2,21 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
 
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:description) }
-    it { should validate_presence_of(:unit_price) }
-    it { should validate_numericality_of(:unit_price) }
-    it { should validate_presence_of(:item_status) }
-    it { should validate_numericality_of(:item_status) }
-  end
-
-  describe 'relationships' do
-    it {should belong_to(:merchant)}
-    it {should have_many(:invoice_items)}
-    it {should have_many(:invoices).through(:invoice_items)}
-    it {should have_many(:transactions).through(:invoices)}
-  end
+  # describe 'validations' do
+  #   it { should validate_presence_of(:name) }
+  #   it { should validate_presence_of(:description) }
+  #   it { should validate_presence_of(:unit_price) }
+  #   it { should validate_numericality_of(:unit_price) }
+  #   it { should validate_presence_of(:item_status) }
+  #   it { should validate_numericality_of(:item_status) }
+  # end
+  #
+  # describe 'relationships' do
+  #   it {should belong_to(:merchant)}
+  #   it {should have_many(:invoice_items)}
+  #   it {should have_many(:invoices).through(:invoice_items)}
+  #   it {should have_many(:transactions).through(:invoices)}
+  # end
 
   describe 'display price method' do
     it 'will display dollars in cents' do
@@ -151,7 +151,6 @@ RSpec.describe Item, type: :model do
     it 'determines the best selling day for an item' do
       expect(@item1.item_best_day).to eq(@item1.created_at.strftime("%m/%d/%y"))
       expect(@item2.item_best_day).to eq(@item2.created_at.strftime("%m/%d/%y"))
-
     end
   end
 end

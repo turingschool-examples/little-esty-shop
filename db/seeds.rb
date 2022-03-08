@@ -14,10 +14,6 @@ Invoice.destroy_all
 Merchant.destroy_all
 Customer.destroy_all
 
-
-
-
-
 @merchant1 = Merchant.create!(name: "Suzy Hernandez")
 @merchant2 = Merchant.create!(name: "Juan Lopez")
 
