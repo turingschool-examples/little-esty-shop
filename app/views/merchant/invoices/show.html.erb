@@ -1,9 +1,9 @@
 <h1> Merchant Invoices Show Page </h1>
 
 <div class="total_revenue"
-  <p>Total Revenue: $<%=@invoice.pre_discount_revenue %></p>
+<p>Revenue pre-discount: $<%= @invoice.pre_discount_revenue %></p>
+<p>Revenue post-discount: $<%= @invoice.display_discount_revenue %></p>
 </div>
-
 <div class="invoice_information">
   <p>Invoice Id: <%= @invoice.id %></p>
   <p>Invoice Status: <%= @invoice.status %></p>
