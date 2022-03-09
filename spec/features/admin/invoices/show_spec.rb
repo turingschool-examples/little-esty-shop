@@ -5,6 +5,16 @@ RSpec.describe 'The Admin Invoices Show' do
     @merchant1 = Merchant.create!(name: "Suzy Hernandez")
     @merchant2 = Merchant.create!(name: "Juan Lopez")
 
+    @five = BulkDiscount.create!(name: 'Five', percent_discount: 0.05, quantity_threshold: 5, merchant_id: @merchant1.id)
+    @ten = BulkDiscount.create!(name: 'Ten', percent_discount: 0.10, quantity_threshold: 10, merchant_id: @merchant1.id)
+    @fifteen = BulkDiscount.create!(name: 'Fifteen', percent_discount: 0.15, quantity_threshold: 15, merchant_id: @merchant1.id)
+    @fifty = BulkDiscount.create!(name: 'Fifty', percent_discount: 0.50, quantity_threshold: 50, merchant_id: @merchant1.id)
+
+    @six = BulkDiscount.create!(name: 'Six', percent_discount: 0.06, quantity_threshold: 6, merchant_id: @merchant2.id)
+    @eleven = BulkDiscount.create!(name: 'Eleven', percent_discount: 0.11, quantity_threshold: 11, merchant_id: @merchant2.id)
+    @sixteen = BulkDiscount.create!(name: 'Sixteen', percent_discount: 0.16, quantity_threshold: 16, merchant_id: @merchant2.id)
+
+
     @item1 = @merchant2.items.create!(name: "cheese", description: "european cheese", unit_price: 2400, item_status: 1)
     @item2 = @merchant2.items.create!(name: "onion", description: "red onion", unit_price: 3450, item_status: 1)
     @item3 = @merchant2.items.create!(name: "earing", description: "Lotus earings", unit_price: 14500)
@@ -113,8 +123,26 @@ RSpec.describe 'The Admin Invoices Show' do
     @transaction8 = Transaction.create!(result: 0, invoice_id: @invoice15.id)
     @transaction8 = Transaction.create!(result: 0, invoice_id: @invoice16.id)
   end
+  
+  describe 'displays bulk discounts' do
+    it 'will display the pre-discounted revenue' do
+      visit admin_invoice_path(@invoice7.id)
 
-  describe 'list list the invoice attributes' do
+      within(".total_revenue") do
+        expect(page).to have_content("Revenue pre-discount: $#{@invoice7.pre_discount_revenue}")
+      end
+    end
+
+    it 'will display the post-discounted revenue' do
+      visit admin_invoice_path(@invoice7.id)
+
+      within(".total_revenue") do
+        expect(page).to have_content("Revenue post-discount: $#{@invoice7.display_discount_revenue}")
+      end
+    end
+  end
+
+  describe 'list the invoice attributes' do
     it 'will list the details of an invoice' do
 
       visit admin_invoice_path(@invoice7)
