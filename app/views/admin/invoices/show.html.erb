@@ -1,4 +1,8 @@
 <h1><%= "Invoice #{@invoice.id}'s Show Page" %></h1>
+<div class="total_revenue"
+<p>Revenue pre-discount: $<%= @invoice.pre_discount_revenue %></p>
+<p>Revenue post-discount: $<%= @invoice.display_discount_revenue %></p>
+</div>
     <p>Status: <%= form_with url: admin_invoice_path(@invoice.id), method: :patch, local: true do |f| %></p>
                 <%= f.hidden_field :invoice_id, value: @invoice.id %>
                 <%= f.select :status, options_for_select(['in progress', :cancelled, :completed], @invoice.status) %>
