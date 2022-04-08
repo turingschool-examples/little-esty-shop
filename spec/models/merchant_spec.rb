@@ -12,4 +12,8 @@ RSpec.describe Merchant do
       expect(@merchant.name).to eq("Frank's Eel Pudding")
     end
   end
+
+  context 'validations' do
+    it { should validate_presence_of :name }
+  end
 end
