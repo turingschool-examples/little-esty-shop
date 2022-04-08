@@ -1,7 +1,6 @@
 class CreateTableMerchants < ActiveRecord::Migration[5.2]
   def change
-    create_table :table_merchants do |t|
-      t.bigint :id
+    create_table :merchants do |t|
       t.string :name
 
       t.timestamps
