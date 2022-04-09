@@ -1,0 +1,23 @@
+require 'rails_helper'
+
+
+RSpec.describe 'Merchant Dashboard Page' do
+
+  before do
+
+    @merch1 = Merchant.create!(name: 'Jeffs Gold Blooms')
+    @merch2 = Merchant.create!(name: 'Miyazakis Dark Souls')
+    visit "/merchants/#{@merch1}.id/dashboard"
+  end
+
+  describe 'As a Merchant' do
+
+    it 'I visit my merchant dashboard, and see the name of my merchant' do
+      expect(page).to have_content("Jeffs Gold Blooms")
+      expect(page).to_not have_content('Miyazakis Dark Souls')
+    end
+
+
+  end
+
+end
