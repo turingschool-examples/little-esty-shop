@@ -1,7 +1,6 @@
 class CreateTableMerchants < ActiveRecord::Migration[5.2]
   def change
-    create_table :table_merchants, id: false do |t|
-      t.bigint :id
+    create_table :merchants do |t|
       t.string :name
       t.datetime :created_at
       t.datetime :updated_at

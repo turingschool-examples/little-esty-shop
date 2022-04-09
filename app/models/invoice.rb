@@ -1,13 +1,12 @@
 class Invoice < ApplicationRecord
-  validates :status, presence: true, numbericality: true
+  validates :status, presence: true, numericality: true
   validates :created_at, presence: true
   validates :updated_at, presence: true
-  belongs_to :invoice_item
-  belongs_to :transaction
+  validates :customer_id, presence: true
+  has_many :invoice_items
+  has_many :transactions
   belongs_to :customer
-
   has_many :items, through: :invoice_items
 
-
-
+  enum status: [:cancelled, 'in progress', :completed]
 end

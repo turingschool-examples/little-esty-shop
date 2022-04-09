@@ -4,4 +4,6 @@ class Transaction < ApplicationRecord
   validates :created_at, presence: true
   validates :updated_at, presence: true
   belongs_to :invoice
-end
+  
+  enum result: {success: 0, failed: 1}
+end 
