@@ -33,19 +33,19 @@ namespace :csv_load do
     # InvoiceItem.destroy_all
 
     csv.each do |row|
-      # ii = InvoiceItem.new
-      # ii.id = row["id"]
-      # ii.item_id = row["item_id"]
-      # ii.invoice_id = row["invoice_id"]
-      # ii.quantity = row["quantity"]
-      # ii.unit_price = row["unit_price"]
-      # ii.status = row["status"]
-      # ii.created_at = row["created_at"]
-      # ii.updated_at = row["updated_at"]
-      # ii.save
-      #
-      # puts "Invoice Item ##{ii.id} saved"
-      puts "Invoice Item ##{row["id"]} saved"
+      ii = InvoiceItem.new
+      ii.id = row["id"]
+      ii.invoice_id = row["invoice_id"]
+      ii.item_id = row["item_id"]
+      ii.quantity = row["quantity"]
+      ii.unit_price = row["unit_price"]
+      ii.status = row["status"]
+      ii.created_at = row["created_at"]
+      ii.updated_at = row["updated_at"]
+      ii.save
+
+      puts "Invoice Item ##{ii.id} saved"
+      # puts "Invoice Item ##{row["id"]} saved"
     end
   end
 
@@ -53,19 +53,19 @@ namespace :csv_load do
     csv_text = File.read(Rails.root.join('db', 'data', 'invoices.csv'))
     csv = CSV.parse(csv_text, :headers => true)
 
-    # Invoice.destroy_all
+    Invoice.destroy_all
 
     csv.each do |row|
-      # i = Invoice.new
-      # i.id = row["id"]
-      # i.customer_id = row["customer_id"]
-      # i.status = row["status"]
-      # i.created_at = row["created_at"]
-      # i.updated_at = row["updated_at"]
-      # i.save
+      i = Invoice.new
+      i.id = row["id"]
+      i.customer_id = row["customer_id"]
+      i.status = row["status"]
+      i.created_at = row["created_at"]
+      i.updated_at = row["updated_at"]
+      i.save
 
-      # puts "Invoice ##{i.id} saved"
-      puts "Invoice ##{row["id"]} saved"
+      puts "Invoice ##{i.id} saved"
+      # puts "Invoice ##{row["id"]} saved"
     end
   end
 
@@ -95,18 +95,18 @@ namespace :csv_load do
     csv_text = File.read(Rails.root.join('db', 'data', 'merchants.csv'))
     csv = CSV.parse(csv_text, :headers => true)
 
-    # Merchant.destroy_all
+    Merchant.destroy_all
 
     csv.each do |row|
-      # m = Merchant.new
-      # m.id = row["id"]
-      # m.name = row["name"]
-      # m.created_at = row["created_at"]
-      # m.updated_at = row["updated_at"]
-      # m.save
-      #
-      # puts "Merchant #{m.name} save"
-      puts "Merchant #{row["name"]} save"
+      m = Merchant.new
+      m.id = row["id"]
+      m.name = row["name"]
+      m.created_at = row["created_at"]
+      m.updated_at = row["updated_at"]
+      m.save
+
+      puts "Merchant #{m.name} save"
+      # puts "Merchant #{row["name"]} save"
     end
   end
 
@@ -135,11 +135,11 @@ namespace :csv_load do
   task :all do
     system("rake csv_load:customers")
     sleep(1)
-    system("rake csv_load:invoice_items")
-    sleep(1)
     system("rake csv_load:invoices")
     sleep(1)
     system("rake csv_load:items")
+    sleep(1)
+    system("rake csv_load:invoice_items")
     sleep(1)
     system("rake csv_load:merchants")
     sleep(1)
