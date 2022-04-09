@@ -126,7 +126,7 @@ namespace :csv_load do
       t.id = row["id"]
       t.invoice_id = row["invoice_id"]
       t.credit_card_number = row["credit_card_number"]
-      t.credit_card_expiration_date = nill
+      # t.credit_card_expiration_date = nill
       t.result = row["result"]
       t.created_at = row["created_at"]
       t.updated_at = row["updated_at"]
