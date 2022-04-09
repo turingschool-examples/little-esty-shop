@@ -5,9 +5,9 @@ RSpec.describe 'Merchant Dashboard Page' do
 
   before do
 
-    @merch1 = Merchant.create!(name: 'Jeffs Gold Blooms')
-    @merch2 = Merchant.create!(name: 'Miyazakis Dark Souls')
-    visit "/merchants/#{@merch1}.id/dashboard"
+    @merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
+    @merch2 = Merchant.create!(name: 'Miyazakis Dark Souls', created_at: Time.now, updated_at: Time.now)
+    visit "/merchants/#{@merch1.id}/dashboard"
   end
 
   describe 'As a Merchant' do
