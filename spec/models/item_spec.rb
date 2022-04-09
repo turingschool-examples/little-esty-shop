@@ -1,5 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Item, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"  these are ppaceholders, delete in each
+  describe 'validations' do
+    it { should validate_presence_of(:name)}
+    it { should validate_presence_of(:status)}
+    it { should validate_numericality_of(:unit_price)}
+    it { should validate_presence_of(:enabled)}
+  end
 end
