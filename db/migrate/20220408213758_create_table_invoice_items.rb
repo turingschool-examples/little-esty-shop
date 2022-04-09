@@ -1,6 +1,6 @@
 class CreateTableInvoiceItems < ActiveRecord::Migration[5.2]
   def change
-    create_table :table_invoice_items do |t|
+    create_table :table_invoice_items, id: false do |t|
       t.references :item, foreign_key: true
       t.references :invoice, foreign_key: true
       t.integer :quantity
