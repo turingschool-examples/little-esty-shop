@@ -150,6 +150,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.3.0)
+    require_all (3.0.0)
     rexml (3.2.5)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
@@ -259,6 +260,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 5.2.6)
+  require_all
   rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.1)
