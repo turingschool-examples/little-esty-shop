@@ -8,4 +8,6 @@ class InvoiceItem < ApplicationRecord
   validates :unit_price, numericality: true
   validates :unit_price, numericality: {only_integer: true, greater_than: 0}
 
+  enum status: {"packaged" => 0, "pending" => 1, "shipped" => 2}
+
 end
