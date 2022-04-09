@@ -14,9 +14,19 @@ namespace :csv_load do
   task merchants: :environment do
     Merchant.destroy_all
     CSV.foreach('db/data/merchants.csv', headers: true) do |row|
-      merchant.create!(row.to_h)
+      Merchant.create!(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+  end
+
+  desc 'seed data from invoice items'
+  task invoice_items: :environment do
+    InvoiceItem.destroy_all
+    CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
+      InvoiceItem.create!(row.to_h)
+    end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
   desc 'seed date from Items.csv'
@@ -36,7 +46,7 @@ namespace :csv_load do
     Invoice.destroy_all
     CSV.foreach('db/data/invoices.csv', headers: true) do |row|
       customer = Customer.find(row.to_h["customer_id"])
-      customer.invoice.create!(row.to_h)
+      customer.invoices.create!(row.to_h)
     end
   ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
@@ -46,8 +56,16 @@ namespace :csv_load do
     Transaction.destroy_all
     CSV.foreach('db/data/transactions.csv', headers: true) do |row|
       invoice = Invoice.find(row.to_h["invoice_id"])
-      invoice.transaction.create!(row.to_h)
+      invoice.transactions.create!(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
+  end
+
+  desc 'seed all data from csv'
+  task :all do
+    tables = [:customers, :merchants, :invoices, :items, :invoice_items, :transactions]
+    tables.each do |table|
+      Rake::Task["csv_load:#{table}"].invoke
+    end
   end
 end

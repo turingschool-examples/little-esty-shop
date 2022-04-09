@@ -33,6 +33,7 @@ GEM
       activemodel (= 5.2.6.2)
       activesupport (= 5.2.6.2)
       arel (>= 9.0)
+    activerecord-reset-pk-sequence (0.2.1)
     activestorage (5.2.6.2)
       actionpack (= 5.2.6.2)
       activerecord (= 5.2.6.2)
@@ -256,6 +257,7 @@ PLATFORMS
   x86-mswin32
 
 DEPENDENCIES
+  activerecord-reset-pk-sequence
   bootsnap (>= 1.1.0)
   capybara
   coffee-rails (~> 4.2)
