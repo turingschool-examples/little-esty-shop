@@ -7,6 +7,7 @@ namespace :import do
   task customers: :environment do
     filename = File.join Rails.root, "/db/data/customers.csv"
     CSV.foreach(filename, :headers => true) do |row|
+      row.delete(0)
       Customer.create!(row.to_h)
     end
   end
@@ -15,6 +16,7 @@ namespace :import do
   task invoice_items: :environment do
     filename = File.join Rails.root, "/db/data/invoice_items.csv"
     CSV.foreach(filename, :headers => true) do |row|
+      row.delete(0)
       InvoiceItem.create!(row.to_h)
     end
   end
@@ -23,6 +25,7 @@ namespace :import do
   task invoices: :environment do
     filename = File.join Rails.root, "/db/data/invoices.csv"
     CSV.foreach(filename, :headers => true) do |row|
+      row.delete(0)
       Invoice.create!(row.to_h)
     end
   end
@@ -31,6 +34,7 @@ namespace :import do
   task items: :environment do
     filename = File.join Rails.root, "/db/data/items.csv"
     CSV.foreach(filename, :headers => true) do |row|
+      row.delete(0)
       Item.create!(row.to_h)
     end
   end
@@ -39,6 +43,7 @@ namespace :import do
   task merchants: :environment do
     filename = File.join Rails.root, "/db/data/merchants.csv"
     CSV.foreach(filename, :headers => true) do |row|
+      row.delete(0)
       Merchant.create!(row.to_h)
     end
   end
@@ -47,6 +52,7 @@ namespace :import do
   task transactions: :environment do
     filename = File.join Rails.root, "/db/data/transactions.csv"
     CSV.foreach(filename, :headers => true) do |row|
+      row.delete(0)
       Transaction.create!(row.to_h)
     end
   end
