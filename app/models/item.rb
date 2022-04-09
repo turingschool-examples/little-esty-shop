@@ -5,4 +5,5 @@ class Item < ApplicationRecord
   validates :created_at, presence: true
   validates :updated_at, presence: true
   belongs_to :merchant
+  has_many :invoices, through: :invoice_items
 end
