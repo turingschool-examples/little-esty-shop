@@ -43,4 +43,13 @@ namespace :csv_load do
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
+
+  task transactions: :environment do
+    Transaction.destroy_all
+    CSV.foreach('db/data/transactions.csv', headers: true) do |row|
+      invoice = Invoice.find(row.to_h["invoice_id"])
+      invoice.transactions.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
+  end
 end
