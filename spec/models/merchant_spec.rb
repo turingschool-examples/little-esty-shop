@@ -9,7 +9,7 @@ RSpec.describe Merchant do
 
   context 'readable attributes' do
     it 'has a name' do
-      expect(@merchant.name).to eq("Frank's Eel Pudding")
+      expect(@merchant.name).to eq("Frank's Pudding")
     end
   end
 
