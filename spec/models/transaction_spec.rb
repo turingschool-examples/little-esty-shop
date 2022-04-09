@@ -17,7 +17,7 @@ RSpec.describe Transaction do
 
   context 'readable attributes' do
     it 'has a credit card' do
-      expect(@transaction.credit_card_number).to eq(4654405418249632)
+      expect(@transaction.credit_card_number).to eq('4654405418249632')
     end
 
     it 'has a result' do
