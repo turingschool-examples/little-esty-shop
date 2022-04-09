@@ -21,6 +21,10 @@ RSpec.describe 'Merchant Dashboard Page' do
       expect(page).to have_link("My Items")
     end
 
+    it 'I see a link to my merchant invoice index' do
+      expect(page).to have_link("My Invoices")
+    end
+
 
   end
 
