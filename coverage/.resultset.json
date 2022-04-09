@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/mailers/application_mailer.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -11,7 +11,7 @@
         "branches": {
         }
       },
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/models/application_record.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/models/application_record.rb": {
         "lines": [
           0,
           0,
@@ -20,7 +20,7 @@
         "branches": {
         }
       },
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/jobs/application_job.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/jobs/application_job.rb": {
         "lines": [
           0,
           0
@@ -28,7 +28,7 @@
         "branches": {
         }
       },
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/controllers/application_controller.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/controllers/application_controller.rb": {
         "lines": [
           0,
           0
@@ -36,7 +36,7 @@
         "branches": {
         }
       },
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/helpers/application_helper.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           0,
           0
@@ -44,7 +44,7 @@
         "branches": {
         }
       },
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/channels/application_cable/connection.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
           0,
@@ -54,7 +54,7 @@
         "branches": {
         }
       },
-      "/Users/jimbo/turing/2module/projects/little-esty-shop/app/channels/application_cable/channel.rb": {
+      "/Users/lukepascale/turing/2module/projects/little-esty-shop/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
           0,
@@ -65,6 +65,6 @@
         }
       }
     },
-    "timestamp": 1649470130
+    "timestamp": 1649513387
   }
 }
