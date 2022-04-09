@@ -17,6 +17,10 @@ RSpec.describe 'Merchant Dashboard Page' do
       expect(page).to_not have_content('Miyazakis Dark Souls')
     end
 
+    it 'I see a link to my merchant items index' do
+      expect(page).to have_link("My Items")
+    end
+
 
   end
 
