@@ -132,7 +132,7 @@ namespace :csv_load do
       t.updated_at = row["updated_at"]
       t.save
 
-      puts "Transaction for card ending in #{t.credit_card_number[-4..-1]} saved"
+      puts "Transaction for card #{t.credit_card_number} saved"
       # puts "Transaction for card ending in #{row["credit_card_number"][-4..-1]} saved"
     end
   end
