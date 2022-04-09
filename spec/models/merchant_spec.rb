@@ -9,3 +9,8 @@ require 'rails_helper'
 #     require "pry"; binding.pry
 #   end
 # end
+describe 'validations' do
+  it { should validate_presence_of(:name)}
+  it { should allow_value([true, false]).for(:enabled) }
+  it { should_not allow_value(nil).for(:open) }
+end
