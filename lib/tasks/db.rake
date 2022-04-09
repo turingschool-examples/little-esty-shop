@@ -24,9 +24,7 @@ namespace :csv_seed do
 
   task import_items: :environment do
     CSV.foreach("db/data/items.csv", headers: true) do |row|
-      row = row.to_hash
-      row[:unit_price] = row[:unit_price].to_f / 100
-      Item.create!(row)
+      Item.create!(row.to_hash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!("items")
   end
