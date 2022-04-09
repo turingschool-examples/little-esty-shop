@@ -6,8 +6,8 @@ class CreateTableInvoiceItems < ActiveRecord::Migration[5.2]
       t.integer :quantity
       t.integer :unit_price
       t.integer :status, default: 0
-
-      t.timestamps
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end

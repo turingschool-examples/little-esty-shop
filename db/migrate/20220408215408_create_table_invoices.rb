@@ -4,8 +4,8 @@ class CreateTableInvoices < ActiveRecord::Migration[5.2]
       t.bigint :id
       t.references :customer, foreign_key: true
       t.integer :status, default: 0
-
-      t.timestamps
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end
