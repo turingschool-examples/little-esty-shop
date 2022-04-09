@@ -19,7 +19,10 @@ RSpec.describe InvoiceItem do
                               created_at: Time.parse('2012-03-27 14:53:59 UTC'),
                               updated_at: Time.parse('2012-03-27 14:53:59 UTC'))
 
-    @invoice_item = InvoiceItem.create!(status: 'in progress', invoice_id: @invoice.id, item_id: @item.id)
+    @invoice_item = InvoiceItem.create!(invoice_id: @invoice.id, item_id: @item.id,
+                                            status: 'in progress', quantity: 9, unit_price: 13232,
+                                        created_at: Time.parse('2012-03-27 14:54:09 UTC'),
+                                        updated_at: Time.parse('2012-03-27 14:54:09 UTC'))
   end
 
   context 'readable attributes' do
@@ -27,6 +30,12 @@ RSpec.describe InvoiceItem do
       expect(@invoice_item.status).to eq('in progress')
     end
   end
+
+ context 'validations' do
+   it { should validate_presence_of :quantity }
+   it { should validate_presence_of :unit_price }
+   it { should validate_presence_of :status }
+ end
 
   context 'relationships' do
     it { should belong_to :item}
