@@ -51,6 +51,16 @@ RSpec.describe 'merchant show page' do
 			expect(page).to_not have_content(@invoice_item1.invoice_id)
 		end
 	end
+	it 'items_ready_to_ship section shows invoice created_at date with weekday, mon, date, year format' do 
+		@item1 = @merchant1.items.create!(name: "Item Qui Esse", description: "Nihil autem sit odio inventore deleniti. Est lauda...", unit_price: 75107)
+		@customer1 = Customer.create!(first_name: "Joey", last_name: "Ondricka")
+		@invoice1 = Invoice.create!(customer_id: @customer1.id, status: 0)
+		@invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 75100, status: "pending",)
 
+		visit "/merchants/#{@merchant1.id}/dashboard"
+		within('#items_to_ship') do 
+			expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %-d, %Y"))
+		end
+	end
 
 end
