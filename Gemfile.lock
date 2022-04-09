@@ -219,8 +219,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    spoon (0.0.6)
-      ffi
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -283,7 +281,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 5.2.6)
-  rspec-rails
+  rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.1)
   simplecov
