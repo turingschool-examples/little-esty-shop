@@ -1,5 +1,5 @@
 # Little Esty Shop
-
+/var/folders/cw/hqkdn4yx0bj7xzzkbwv_yj_40000gn/T/TemporaryItems/NSIRD_screencaptureui_OiJicO/Screen Shot 2022-04-09 at 1.34.11 AM.png
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
