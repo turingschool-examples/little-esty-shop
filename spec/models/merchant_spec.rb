@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Merchant do
   before :each do
-    @merchant = Merchant.create!(name: "Frank's Eel Pudding",
-                                 created_at: Time.parse('2012-03-27 14:53:59 UTC'),
-                                 updated_at: Time.parse('2012-03-27 14:53:59 UTC'))
+    @merchant = Merchant.create!(name: "Frank's Pudding",
+                            created_at: Time.parse('2012-03-27 14:53:59 UTC'),
+                            updated_at: Time.parse('2012-03-27 14:53:59 UTC'))
   end
 
   context 'readable attributes' do
