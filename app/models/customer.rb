@@ -1,5 +1,9 @@
 class Customer < ApplicationRecord
-  validates_presence_of :first_name
-  validates_presence_of :last_name
-  has_many :invoices
-end 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :created_at, presence: true
+  validates :updated_at, presence: true
+
+  has_many :invoices, dependent: :destroy 
+
+end
