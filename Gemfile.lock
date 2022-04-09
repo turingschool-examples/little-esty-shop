@@ -276,7 +276,7 @@ DEPENDENCIES
   rails (~> 5.2.6)
   rspec-rails
   sass-rails (~> 5.0)
-  shoulda-matchers (~> 3.1)
+  shoulda-matchers
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)

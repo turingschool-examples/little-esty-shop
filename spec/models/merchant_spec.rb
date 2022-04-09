@@ -1,6 +1,9 @@
 require 'rails_helper'
 
-# RSpec.describe Merchant, type: :model do
+ RSpec.describe Merchant, type: :model do
+   describe 'relationships' do
+    it { should have_many(:items)}
+   end
 #   it "text" do
 #     merchant = create(:merchant, enabled: false)  can control attributes by adding them in here after comma
 #     merchants = create_list(:merchant, 5, merchant: merchant)
@@ -8,4 +11,4 @@ require 'rails_helper'
 #     # items = create_list(:item, 5, merchant: merchant) ==> creates multiple instances relationship for item belongs_to merchant.  Automatically assigns foreign key to that merchant
 #     require "pry"; binding.pry
 #   end
-# end
+end
