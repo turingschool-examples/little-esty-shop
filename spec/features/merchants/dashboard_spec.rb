@@ -25,14 +25,14 @@ RSpec.describe 'Merchant Dashboard' , type: :feature do
       it 'has a link to view all merchant items' do
         expect(page).to have_link("Merchant Items")
 
-        click_link
+        click_link "Merchant Items"
         expect(current_path).to eq(merchant_items_path(@merchant))
       end
 
       it 'has a link to view all merchant invoices' do
         expect(page).to have_link("Merchant Invoices")
 
-        click_link
+        click_link "Merchant Invoices"
         expect(current_path).to eq(merchant_invoices_path(@merchant))
       end
     end
