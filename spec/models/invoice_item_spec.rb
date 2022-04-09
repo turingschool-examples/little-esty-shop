@@ -20,14 +20,14 @@ RSpec.describe InvoiceItem do
                               updated_at: Time.parse('2012-03-27 14:53:59 UTC'))
 
     @invoice_item = InvoiceItem.create!(invoice_id: @invoice.id, item_id: @item.id,
-                                            status: 'in progress', quantity: 9, unit_price: 13232,
+                                            status: 'packaged', quantity: 9, unit_price: 13232,
                                         created_at: Time.parse('2012-03-27 14:54:09 UTC'),
                                         updated_at: Time.parse('2012-03-27 14:54:09 UTC'))
   end
 
   context 'readable attributes' do
     it 'has a status' do
-      expect(@invoice_item.status).to eq('in progress')
+      expect(@invoice_item.status).to eq('packaged')
     end
   end
 
