@@ -2,3 +2,12 @@
 
 <%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+
+<section id = 'items_to_ship'>
+<h3>Items Ready to Ship:</h3>
+<% @merchant.items_ready_to_ship.each_with_index do |invoice_item, index| %>
+	<h4>Item No. <%= index + 1 %></h4>
+	<p>Item name: <%= invoice_item.item.name  %></p>
+	<p>Invoice id: <%= invoice_item.invoice_id %></p>
+<% end %>
+</section>
