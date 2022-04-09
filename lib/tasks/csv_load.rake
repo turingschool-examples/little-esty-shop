@@ -23,7 +23,9 @@ namespace :csv_load do
   task items: :environment do
     Item.destroy_all
     CSV.foreach('db/data/items.csv', headers: true) do |row|
-      Item.create!(row.to_h)
+      row_hash = row.to_h
+      merchant = Merchant.find(row_hash["merchant_id"])
+      merchant.items.create!(row_hash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
