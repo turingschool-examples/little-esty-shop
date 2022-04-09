@@ -3,6 +3,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
     create_table :items do |t|
       t.string :name
       t.integer :unit_price
+      t.references :merchant, foreign_key: true
       t.datetime :created_at
       t.datetime :updated_at
     end
