@@ -27,8 +27,4 @@ RSpec.describe Item do
     it { should validate_presence_of :description}
     it { should validate_presence_of :unit_price}
   end
-
-  context 'relationships' do
-    it { should belong_to :merchant}
-  end
 end
