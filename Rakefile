@@ -4,7 +4,3 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
-
-task :hello do
-  puts 'hello'
-end
