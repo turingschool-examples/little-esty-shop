@@ -1,6 +1,6 @@
 require 'require_all'
 
-desc 'Say hello!'
+desc 'Seed CSV data'
 namespace :csv_load do
 
   require_all './app/models'
@@ -10,19 +10,19 @@ namespace :csv_load do
     csv_text = File.read(Rails.root.join('db', 'data', 'customers.csv'))
     csv = CSV.parse(csv_text, :headers => true)
 
-    # Customer.destroy_all
+    Customer.destroy_all
 
     csv.each do |row|
-      # c = Customer.new
-      # c.id = row["id"]
-      # c.first_name = row["first_name"]
-      # c.last_name = row["last_name"]
-      # c.created_at = row["created_at"]
-      # c.updated_at = row["updated_at"]
-      # c.save
-      #
-      # puts "#{c.first_name} #{c.last_name} saved"
-      puts "#{row["first_name"]} #{row["last_name"]} saved"
+      c = Customer.new
+      c.id = row["id"]
+      c.first_name = row["first_name"]
+      c.last_name = row["last_name"]
+      c.created_at = row["created_at"]
+      c.updated_at = row["updated_at"]
+      c.save
+
+      puts "#{c.first_name} #{c.last_name} saved"
+      # puts "#{row["first_name"]} #{row["last_name"]} saved"
     end
   end
 
