@@ -12,7 +12,7 @@
   <ol>
     <% @merchant.top_five_customers.each do |customer| %>
     <li>
-      Customer: <%= customer.full_name %> Total Transactions: <%= customer.total_transactions %>
+      Customer: <%= customer.full_name %> - Total Transactions: <%= customer.total_transactions %>
     </li>
     <% end %>
   </ol>
