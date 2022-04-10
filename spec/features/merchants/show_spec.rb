@@ -106,11 +106,13 @@ describe 'merchant dashboard page' do
   end
 
   it 'displays the merchants name' do
+    save_and_open_page
     expect(page).to have_content("Store Store")
   end
 
   it 'has links to the merchant item index' do
     click_link("Store Store's Items")
+    save_and_open_page
     expect(page).to have_content("Cup")
     expect(page).to have_content("Soccer Ball")
     expect(page).not_to have_content("Beer")
@@ -118,6 +120,7 @@ describe 'merchant dashboard page' do
 
   it 'has links to the merchant invoice index' do
     click_link("Invoices")
+    save_and_open_page
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice ##{@invoice_2.id}")
     expect(page).not_to have_content("Invoice ##{@invoice_3.id}")

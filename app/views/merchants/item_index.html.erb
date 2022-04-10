@@ -1,0 +1,8 @@
+<h1> <%= @merchant.name %>'s items </h1>
+<br/><hr/>
+<% @items.each do |item| %>
+  <h3> <%= item.name %> </h3>
+  <p> <%= item.description %> </p>
+  <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
+  <hr/>
+<% end %>
