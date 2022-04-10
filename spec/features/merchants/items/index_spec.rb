@@ -23,6 +23,7 @@ RSpec.describe 'merchants items index page', type: :feature do
 
   it 'has the ability to enable or disable an item' do
     visit "merchants/#{@merchant1.id}/items"
+    # require "pry"; binding.pry
     within ".item-#{@item1.id}" do
       click_on "Enable"
     end
