@@ -31,4 +31,5 @@ class Admin::MerchantsController < ApplicationController
     private
       def merchant_params
         params.permit(:id, :name, :status)
+      end
 end
