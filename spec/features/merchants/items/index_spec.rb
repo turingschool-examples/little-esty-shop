@@ -46,4 +46,20 @@ RSpec.describe 'merchants items index page', type: :feature do
       expect(page).to have_button("Enable")
     end
   end
+
+  it 'groups items by disabled or enabled items' do
+    visit "/merchants/#{@merchant1.id}/items"
+
+    expect(page).to have_content("Enabled Items")
+    expect(page).to have_content("Disabled Items")
+
+    within ".enabled" do
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item2.name)
+    end
+
+    within ".disabled" do
+      expect(page).to have_content(@item3.name)
+    end
+  end
 end
