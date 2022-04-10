@@ -7,8 +7,8 @@ RSpec.describe 'Merchant Item Index Page' do
 
     @merch1 = Merchant.create!(name: 'Jeffs Gold Blooms', created_at: Time.now, updated_at: Time.now)
     @merch2 = Merchant.create!(name: 'Miyazakis Dark Souls', created_at: Time.now, updated_at: Time.now)
-    @item1 = @merch1.items.create(name: "Golden Rose", description: "24k gold rose", unit_price: 100)
-    @item2 = @merch2.items.create(name: 'Dark Sole Shoes', description: "Dress shoes", unit_price: 200)
+    @item1 = @merch1.items.create!(name: "Golden Rose", description: "24k gold rose", unit_price: 100, created_at: Time.now, updated_at: Time.now)
+    @item2 = @merch2.items.create!(name: 'Dark Sole Shoes', description: "Dress shoes", unit_price: 200, created_at: Time.now, updated_at: Time.now)
     visit "/merchants/#{@merch1.id}/items"
   end
 
