@@ -9,7 +9,7 @@ RSpec.describe InvoiceItem do
   describe "validations" do
     it { should validate_numericality_of(:quantity) }
     it { should validate_numericality_of(:unit_price) }
-    it { should validate_numericality_of(:status) }
+    it { should validate_presence_of(:status) }
     it { should validate_presence_of(:created_at) }
     it { should validate_presence_of(:updated_at) }
   end
