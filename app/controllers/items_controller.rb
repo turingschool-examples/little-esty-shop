@@ -8,10 +8,11 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:id])
     if !params[:enable].nil?
       item = Item.find(params[:enable])
-      # require "pry"; binding.pry
       item.update(status: 1)
+    elsif !params[:disable].nil?
+      item = Item.find(params[:disable])
+      item.update(status: 0)
     end
     redirect_to "/merchants/#{@merchant.id}/items"
-    # require "pry"; binding.pry
   end
 end
