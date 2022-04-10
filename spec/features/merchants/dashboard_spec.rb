@@ -26,7 +26,7 @@ RSpec.describe 'Merchant Dashboard Page' do
     end
 
     it 'lists top 5 customers and number of successful transactions for each customer' do
-      merchant_1 = Merchant.create!(name: 'merchant_1')
+      merchant_1 = Merchant.create!(name: 'merchant_1', created_at: Time.now, updated_at: Time.now)
       item_1 = create(:item, merchant_id: merchant_1.id, unit_price: 750, name: 'item_1_name')
 
       customer_1 = create(:customer)
@@ -64,10 +64,10 @@ RSpec.describe 'Merchant Dashboard Page' do
       within("#top_five_customers") do
         expect(page).to have_content("Customer: #{customer_1.full_name} - Total Transactions: 6")
         expect(page).to have_content("Customer: #{customer_2.full_name} - Total Transactions: 5")
-        expect(page).to have_content("Customer: #{customer_3.full_name} - Total Transactions: 4")
-        expect(page).to have_content("Customer: #{customer_4.full_name} - Total Transactions: 3")
+        expect(page).to have_content("Customer: #{customer_3.full_name} - Total Transactions: 3")
+        expect(page).to have_content("Customer: #{customer_4.full_name} - Total Transactions: 4")
         expect(page).to have_content("Customer: #{customer_5.full_name} - Total Transactions: 2")
-        expect(page).to have_content("Customer: #{customer_6.full_name} - Total Transactions: 1")
+        expect(page).to_not have_content("Customer: #{customer_6.full_name} - Total Transactions: 1")
       end
     end
   end
