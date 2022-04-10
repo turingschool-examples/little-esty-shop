@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   get '/' ,to: "welcome#index"
 
   get '/merchants/:id/dashboard', to: "dashboard#index"
+  get '/merchants/:id/items', to: "merchant_items#index"
 
 end
