@@ -54,6 +54,8 @@ group :development, :test do
   gem 'orderly'
   gem 'database_cleaner-active_record'
   gem 'csv'
+  gem 'factory_bot_rails'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 group :development do
