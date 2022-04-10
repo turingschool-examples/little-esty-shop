@@ -33,6 +33,7 @@ RSpec.describe 'merchants items index page', type: :feature do
     expect(Item.find(@item1.id).status).to eq("disabled")
     within ".item-#{@item1.id}" do
       expect(page).to have_button("Enable")
+      expect(page).not_to have_button("Disable")
     end
 
     visit "/merchants/#{@merchant1.id}/items"
@@ -45,6 +46,7 @@ RSpec.describe 'merchants items index page', type: :feature do
     expect(Item.find(@item3.id).status).to eq("enabled")
     within ".item-#{@item3.id}" do
       expect(page).to have_button("Disable")
+      expect(page).not_to have_button("Enable")
     end
   end
 
