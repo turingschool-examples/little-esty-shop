@@ -25,7 +25,51 @@ RSpec.describe 'Merchant Dashboard Page' do
       expect(page).to have_link("My Invoices")
     end
 
+    it 'lists top 5 customers and number of successful transactions for each customer' do
+      merchant_1 = Merchant.create!(name: 'merchant_1')
+      item_1 = create(:item, merchant_id: merchant_1.id, unit_price: 750, name: 'item_1_name')
 
+      customer_1 = create(:customer)
+      invoice_1 = create(:invoice, customer_id: customer_1.id)
+      transaction_list_1 = FactoryBot.create_list(:transaction, 6, invoice_id: invoice_1.id, result: 0)
+      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, status: 2, quantity: 1, unit_price: 1)
+
+      customer_2 = create(:customer)
+      invoice_2 = create(:invoice, customer_id: customer_2.id)
+      transaction_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: invoice_2.id, result: 0)
+      invoice_item_2 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_2.id, status: 2, quantity: 1, unit_price: 1)
+
+      customer_3 = create(:customer)
+      invoice_3 = create(:invoice, customer_id: customer_3.id)
+      transaction_list_3 = FactoryBot.create_list(:transaction, 3, invoice_id: invoice_3.id, result: 0)
+      invoice_item_3 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_3.id, status: 2, quantity: 1, unit_price: 1)
+
+      customer_4 = create(:customer)
+      invoice_4 = create(:invoice, customer_id: customer_4.id)
+      transaction_list_4 = FactoryBot.create_list(:transaction, 4, invoice_id: invoice_4.id, result: 0)
+      invoice_item_4 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_4.id, status: 2, quantity: 1, unit_price: 1)
+
+      customer_5 = create(:customer)
+      invoice_5 = create(:invoice, customer_id: customer_5.id)
+      transaction_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: invoice_5.id, result: 0)
+      invoice_item_5 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_5.id, status: 2, quantity: 1, unit_price: 1)
+
+      customer_6 = create(:customer)
+      invoice_6 = create(:invoice, customer_id: customer_6.id)
+      transaction_list_6 = FactoryBot.create_list(:transaction, 1, invoice_id: invoice_6.id, result: 0)
+      invoice_item_6 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_6.id, status: 2, quantity: 1, unit_price: 1)
+
+      visit "/merchants/#{merchant_1.id}/dashboard"
+
+      within("#top_five_customers") do
+        expect(page).to have_content("Customer: #{customer_1.full_name} - Total Transactions: 6")
+        expect(page).to have_content("Customer: #{customer_2.full_name} - Total Transactions: 5")
+        expect(page).to have_content("Customer: #{customer_3.full_name} - Total Transactions: 4")
+        expect(page).to have_content("Customer: #{customer_4.full_name} - Total Transactions: 3")
+        expect(page).to have_content("Customer: #{customer_5.full_name} - Total Transactions: 2")
+        expect(page).to have_content("Customer: #{customer_6.full_name} - Total Transactions: 1")
+      end
+    end
   end
 
 end
