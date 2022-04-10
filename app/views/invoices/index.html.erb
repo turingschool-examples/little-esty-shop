@@ -1,0 +1,3 @@
+<% @invoices.uniq.each do |invoice| %>
+  <h1>Invoice ID: <%= link_to invoice.id, "/merchants/#{params[:id]}/invoices/#{invoice.id}" %></h1>
+<% end %>

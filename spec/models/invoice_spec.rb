@@ -10,5 +10,8 @@ RSpec.describe Invoice, type: :model do
     let!(:status) { %i[cancelled in_progress completed] }
   end
 
-  
+  describe "instance methods" do
+    
+  end
+
 end
