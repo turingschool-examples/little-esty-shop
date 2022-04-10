@@ -27,7 +27,7 @@ RSpec.describe 'merchants items index page', type: :feature do
     within ".item-#{@item1.id}" do
       click_on "Enable"
     end
-    expect(current_path).to eq("merchants/#{@merchant1.id}/items")
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
     expect(Item.find(@item1.id).status).to eq("disabled")
     within ".item-#{@item1.id}" do
       expect(page).to have_button("Disable")

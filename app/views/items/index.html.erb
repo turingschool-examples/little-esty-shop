@@ -4,7 +4,9 @@
 <div class="item-<%=item.id%>"
 <p> <%= item.name %>
 <% if item.status == "enabled" %>
-  <%= button_to "Enable", "/merchants/#{@merchant.id}/items", method: :patch %>
+  <%= button_to "Enable", "/merchants/#{@merchant.id}/items", params: {enable: item.id}, method: :patch %>
+<% elsif item.status == "disabled" %>
+  <%= button_to "Disable", "/merchants/#{@merchant.id}/items", params: {disable: item.id}, method: :patch  %>
 <% end %></p>
 </div>
 
