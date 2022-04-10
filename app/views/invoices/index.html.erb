@@ -1,1 +1,9 @@
-<h1>All Invoices</h1>
+<h1><%= @merchant.name %> Invoices</h1>
+
+<div id="merchant_invoices">
+  if @merchant.invoices.include?(@merchant.items)
+    <% @merchant.invoices.each do |invoice| %>
+      <p>"Invoice ID: "<%= link_to "invoice.id", "/merchants/#{@merchant.id}/invoices" %></p>
+    <% end %>
+  <% end %>
+</div>
