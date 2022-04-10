@@ -10,9 +10,9 @@ RSpec.describe Merchant, type: :model do
   end
 
 
-  describe 'instance methods' do 
-    describe '.items_ready_to_ship' do 
-      it 'returns invoice_items of a merchant with status other than shipped' do 
+  describe 'instance methods' do
+    describe '.items_ready_to_ship' do
+      it 'returns invoice_items of a merchant with status other than shipped' do
         @merchant1 = Merchant.create!(name: "Schroeder-Jerde")
         @item1 = @merchant1.items.create!(name: "Item Qui Esse", description: "Nihil autem sit odio inventore deleniti. Est lauda...", unit_price: 75107)
         @item2 = @merchant1.items.create!(name: "Item Autem Minima", description: "Cumque consequuntur ad. Fuga tenetur illo molestia...", unit_price: 67076)
@@ -26,7 +26,30 @@ RSpec.describe Merchant, type: :model do
 
 
         expect(@merchant1.items_ready_to_ship).to eq([@invoice_item2, @invoice_item3])
-      end 
+      end
+    end
+    describe 'enabled/disabled items' do
+      before (:each) do
+        @merchant1 = Merchant.create!(name: "Klein, Rempel and Jones")
+        @merchant2 = Merchant.create!(name: "Williamson Group")
+
+        @item1 = @merchant1.items.create!(name: "Item Ea Voluptatum",   description: "A thing that does things", unit_price: 7654)
+        @item2 = @merchant1.items.create!(name: "Item Quo Magnam", description: "A thing that does nothing", unit_price: 10099)
+        @item3 = @merchant1.items.create!(name: "Item Voluptatem Sint", description: "A thing that does everything", unit_price: 8790, status: "disabled")
+        @item4 = @merchant2.items.create!(name: "Item Rerum Est", description: "A thing that barks", unit_price: 3455)
+        @item5 = @merchant2.items.create!(name: "Item Itaque Consequatur", description: "A thing that makes noise", unit_price: 7900)
+      end
+
+      it '#enabled_items' do
+        expect(@merchant1.enabled_items).to eq([@item1, @item2])
+        expect(@merchant2.enabled_items).to eq([@item4, @item5])
+      end
+
+      it '#disabled_items' do
+        # require "pry"; binding.pry
+        expect(@merchant1.disabled_items).to eq([@item3])
+        expect(@merchant2.disabled_items).to eq([])
+      end
     end
   end
 end
