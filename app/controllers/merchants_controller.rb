@@ -10,7 +10,6 @@ class MerchantsController < ApplicationController
 
   def invoice_index
     @merchant = Merchant.find(params[:id])
-    @invoices = Invoice.joins(:merchants)
-    .where("items.merchant_id = #{@merchant.id}")
+    @invoices = Invoice.find_invs_by_merchant(@merchant.id)
   end
 end
