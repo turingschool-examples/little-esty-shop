@@ -8,10 +8,10 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:id])
     if !params[:enable].nil?
       item = Item.find(params[:enable])
-      item.update(status: 1)
+      item.update(status: 0)
     elsif !params[:disable].nil?
       item = Item.find(params[:disable])
-      item.update(status: 0)
+      item.update(status: 1)
     end
     redirect_to "/merchants/#{@merchant.id}/items"
   end
