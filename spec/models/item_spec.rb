@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:unit_price)}
     it { should validate_numericality_of(:unit_price).only_integer }
     it {should validate_numericality_of(:unit_price).is_greater_than(0)}
-    let(:status) {%i[enabled disabled]}
+    it { should define_enum_for(:status).with([:enabled, :disabled])}
   end
 
   describe 'default' do

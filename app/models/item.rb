@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-	
+
 	has_many :invoice_items
 	belongs_to	:merchant
 
@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :unit_price , numericality: { only_integer: true }
   validates :unit_price , numericality: { greater_than: 0 }
 
-	enum result: {"enabled" => 0, "disabled" => 1}
+	enum status: {"enabled" => 0, "disabled" => 1}
 
 
 end
