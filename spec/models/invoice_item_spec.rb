@@ -34,9 +34,12 @@ RSpec.describe InvoiceItem do
  context 'validations' do
    it { should validate_presence_of :quantity }
    it { should validate_numericality_of :quantity }
+
    it { should validate_presence_of :unit_price }
    it { should validate_numericality_of :unit_price}
+
    it { should validate_presence_of :status }
+   it { should define_enum_for(:status).with_values(['pending', 'packaged', 'shipped']) }
  end
 
   context 'relationships' do

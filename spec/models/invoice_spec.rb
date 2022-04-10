@@ -19,6 +19,7 @@ RSpec.describe Invoice do
 
   context 'validations' do
     it { should validate_presence_of :status}
+    it { should define_enum_for(:status).with_values(['in progress', 'cancelled', 'completed']) }
   end
 
   context 'relationships' do
