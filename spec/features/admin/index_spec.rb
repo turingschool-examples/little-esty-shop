@@ -14,6 +14,8 @@ RSpec.describe "Admin Dashboard" do
     within(".link_bar") do
       expect(page).to have_link("Admin Merchants")
     end
+    click_link "Admin Merchants"
+    expect(current_path).to eq('/admin/merchants')
   end
 
   it 'displays link to admin invoices index' do
@@ -21,5 +23,7 @@ RSpec.describe "Admin Dashboard" do
     within(".link_bar") do
       expect(page).to have_link("Admin Invoices")
     end
+    click_link "Admin Invoices"
+    expect(current_path).to eq('/admin/invoices')
   end
 end
