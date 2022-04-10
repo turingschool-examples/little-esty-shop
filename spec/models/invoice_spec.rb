@@ -9,4 +9,6 @@ RSpec.describe Invoice, type: :model do
   describe "validations" do
     let!(:status) { %i[cancelled in_progress completed] }
   end
+
+  
 end
