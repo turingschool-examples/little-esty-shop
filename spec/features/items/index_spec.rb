@@ -20,10 +20,21 @@ describe 'Merchants Items index' , type: :feature do
 
   describe 'display' do
     it 'displays all items from this merchant' do
-      save_and_open_page
-      expect(page).to have_content(@item1.name)
-      expect(page).to have_content(@item2.name)
-      expect(page).to_not have_content(@item3.name)
+      within "#merchant_items" do
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@item2.name)
+        expect(page).to_not have_content(@item3.name)
+      end
+    end
+
+    it 'displays all items from this merchant' do
+      visit merchant_items_path(@merchant2)
+      within "#merchant_items" do
+        save_and_open_page
+        expect(page).to have_content(@item3.name)
+        expect(page).to_not have_content(@item2.name)
+        expect(page).to_not have_content(@item1.name)
+      end
     end
   end
 end
