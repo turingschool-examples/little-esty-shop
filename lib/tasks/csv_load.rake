@@ -1,16 +1,13 @@
 require 'require_all'
+require_all './app/models'
+require 'csv'
 
 desc 'Seed CSV data'
 namespace :csv_load do
 
-  require_all './app/models'
-  require 'csv'
-
   task customers: :environment do
     csv_text = File.read(Rails.root.join('db', 'data', 'customers.csv'))
     csv = CSV.parse(csv_text, :headers => true)
-
-    Customer.destroy_all
 
     csv.each do |row|
       c = Customer.new
@@ -22,17 +19,13 @@ namespace :csv_load do
       c.save
 
       puts "#{c.first_name} #{c.last_name} saved"
-      # puts "#{row["first_name"]} #{row["last_name"]} saved"
     end
   end
 
   task invoice_items: :environment do
     csv_text = File.read(Rails.root.join('db', 'data', 'invoice_items.csv'))
     csv = CSV.parse(csv_text, :headers => true)
-
     enums = {"pending" => "0", "packaged" => "1", "shipped" => "2"}
-
-    InvoiceItem.destroy_all
 
     csv.each do |row|
       ii = InvoiceItem.new
@@ -47,38 +40,30 @@ namespace :csv_load do
       ii.save
 
       puts "Invoice Item ##{ii.id} saved"
-      # puts "Invoice Item ##{row["id"]} saved"
     end
   end
 
   task invoices: :environment do
     csv_text = File.read(Rails.root.join('db', 'data', 'invoices.csv'))
     csv = CSV.parse(csv_text, :headers => true)
-
-    Invoice.destroy_all
-
     enums = { "in progress" => "0", "completed" => "1", "cancelled" => "2" }
 
     csv.each do |row|
       i = Invoice.new
       i.id = row["id"]
       i.customer_id = row["customer_id"]
-      puts "#{row["status"]}"
       i.status = enums[row["status"]]
       i.created_at = row["created_at"]
       i.updated_at = row["updated_at"]
       i.save
 
       puts "Invoice ##{i.id} saved"
-      # puts "Invoice ##{row["id"]} saved"
     end
   end
 
   task items: :environment do
     csv_text = File.read(Rails.root.join('db', 'data', 'items.csv'))
     csv = CSV.parse(csv_text, :headers => true)
-
-    Item.destroy_all
 
     csv.each do |row|
       it = Item.new
@@ -92,15 +77,12 @@ namespace :csv_load do
       it.save
 
       puts "#{it.name} saved"
-      # puts "#{row["name"]} saved"
     end
   end
 
   task merchants: :environment do
     csv_text = File.read(Rails.root.join('db', 'data', 'merchants.csv'))
     csv = CSV.parse(csv_text, :headers => true)
-
-    Merchant.destroy_all
 
     csv.each do |row|
       m = Merchant.new
@@ -111,7 +93,6 @@ namespace :csv_load do
       m.save
 
       puts "Merchant #{m.name} save"
-      # puts "Merchant #{row["name"]} save"
     end
   end
 
@@ -119,37 +100,34 @@ namespace :csv_load do
     csv_text = File.read(Rails.root.join('db', 'data', 'transactions.csv'))
     csv = CSV.parse(csv_text, :headers => true)
 
-    Transaction.destroy_all
-
     csv.each do |row|
       t = Transaction.new
       t.id = row["id"]
       t.invoice_id = row["invoice_id"]
       t.credit_card_number = row["credit_card_number"]
-      # t.credit_card_expiration_date = nill
       t.result = row["result"]
       t.created_at = row["created_at"]
       t.updated_at = row["updated_at"]
       t.save
 
       puts "Transaction for card #{t.credit_card_number} saved"
-      # puts "Transaction for card ending in #{row["credit_card_number"][-4..-1]} saved"
     end
   end
 
-  task :all do
+  task all: :environment do
+    InvoiceItem.destroy_all unless !InvoiceItem.first.present?
+    Item.destroy_all unless !Item.first.present?
+    Merchant.destroy_all unless !Merchant.first.present?
+    Transaction.destroy_all unless !Transaction.first.present?
+    Invoice.destroy_all unless !Invoice.first.present?
+    Customer.destroy_all unless !Customer.first.present?
+
     system("rake csv_load:merchants")
-    sleep(1)
     system("rake csv_load:items")
-    sleep(1)
     system("rake csv_load:customers")
-    sleep(1)
     system("rake csv_load:invoices")
-    sleep(1)
     system("rake csv_load:invoice_items")
-    sleep(1)
     system("rake csv_load:transactions")
-    sleep(1)
   end
 
 end
