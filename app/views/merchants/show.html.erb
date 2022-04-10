@@ -9,5 +9,6 @@
 	<h4>Item No. <%= index + 1 %></h4>
 	<p>Item name: <%= invoice_item.item.name  %></p>
 	<p>Invoice id: <%= invoice_item.invoice_id %></p>
+	<p>Invoice created on: <%= invoice_item.invoice.created_at.strftime("%A, %B %-d, %Y")  %></p>
 <% end %>
 </section>
