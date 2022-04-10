@@ -24,11 +24,12 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     @merchant.update(merchant_params)
-    @merchant.save 
+    @merchant.save
   end
 
 
     private
       def merchant_params
         params.permit(:id, :name, :status)
+      end 
 end
