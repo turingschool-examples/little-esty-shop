@@ -4,6 +4,10 @@ class Customer < ApplicationRecord
   validates :created_at, presence: true
   validates :updated_at, presence: true
 
-  has_many :invoices, dependent: :destroy 
+  has_many :invoices, dependent: :destroy
 
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
