@@ -16,7 +16,7 @@ RSpec.describe 'merchant items index page' do
 
         expect(page).to have_content(item_1.name)
         expect(page).to have_content(item_1.description)
-        expect(page).to have_content(item_1.unit_price)
+        expect(page).to have_content("Current Selling Price: $250000.00")
         expect(page).not_to have_content(item_2.name)
         expect(page).not_to have_content(item_2.description)
         expect(page).not_to have_content(item_2.unit_price)
