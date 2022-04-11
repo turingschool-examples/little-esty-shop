@@ -16,5 +16,13 @@ describe "Admin dashboard", type: :feature do
 
       expect(current_path).to eq("/admin/merchants")
     end
+
+    it "displays a link to admin/invoices" do
+      visit "/admin"
+
+      click_on "Admin: Invoices"
+
+      expect(current_path).to eq("/admin/invoices")
+    end
   end
 end
