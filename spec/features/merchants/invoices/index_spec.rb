@@ -32,8 +32,12 @@ RSpec.describe 'Merchant Invoice Index Page' do
     it 'I see all invoices with atleast one of my items, I see the invoice ID and links' do
 
       visit "/merchants/#{@merch1.id}/invoices"
+      expect(page).to have_content("Invoice ID: #{@invoice1.id}")
+      expect(page).to have_content("Invoice ID: #{@invoice2.id}")
+      expect(page).to have_content("Invoice ID: #{@invoice4.id}")
+      expect(page).to have_content("Invoice ID: #{@invoice4.id}")
 
-
+      # save_and_open_page
 
     end
 
