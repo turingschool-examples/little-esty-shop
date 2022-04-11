@@ -52,5 +52,17 @@ RSpec.describe Merchant, type: :model do
 
           expect(merchant_1.top_five_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
     end
+
+    it "#items_ready_to_ship" do
+      merchant_1 = create(:merchant)
+      item_1 = create(:item, merchant_id: merchant_1.id)
+      item_2 = create(:item, merchant_id: merchant_1.id)
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, status: 1)
+      invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id)
+      invoice_item_2 = create(:invoice_item, status: 2, item_id: item_2.id, invoice_id: invoice.id)
+
+      expect(merchant_1.items_ready_to_ship).to eq([item_1])
+    end
   end
 end
