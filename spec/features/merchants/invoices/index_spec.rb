@@ -3,6 +3,10 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Invoice Index Page' do
   before do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
     @merch1 = FactoryBot.create(:merchant)
     @merch2 = FactoryBot.create(:merchant)
     @cust1 = FactoryBot.create(:customer)
@@ -32,11 +36,16 @@ RSpec.describe 'Merchant Invoice Index Page' do
     it 'I see all invoices with atleast one of my items, I see the invoice ID and links' do
 
       visit "/merchants/#{@merch1.id}/invoices"
+
       expect(page).to have_content("Invoice ID: #{@invoice1.id}")
       expect(page).to have_content("Invoice ID: #{@invoice2.id}")
       expect(page).to have_content("Invoice ID: #{@invoice4.id}")
       expect(page).to have_content("Invoice ID: #{@invoice4.id}")
       expect(page).to_not have_content("Invoice ID: #{@invoice3.id}")
+
+    end
+
+    it 'All Invoice IDs link to that invoices show page' do
       within "#invoice_id-#{@invoice1.id}" do
         expect(page).to have_selector(:link_or_button, "#{@invoice1.id}")
       end
@@ -44,16 +53,14 @@ RSpec.describe 'Merchant Invoice Index Page' do
       within "#invoice_id-#{@invoice2.id}" do
         expect(page).to have_selector(:link_or_button, "#{@invoice2.id}")
       end
-      within "#invoice_id-#{@invoice1.id}" do
-        expect(page).to have_selector(:link_or_button, "#{@invoice4.id}")
-      end
-      within "#invoice_id-#{@invoice1.id}" do
+      within "#invoice_id-#{@invoice4.id}" do
         expect(page).to have_selector(:link_or_button, "#{@invoice4.id}")
       end
 
-
-      # save_and_open_page
-
+      within "#invoice_id-#{@invoice2.id}" do
+        click_link "#{@invoice2.id}"
+      end
+      expect(current_path).to eq("/merchants/:id/invoices/#{@invoice2.id}")
     end
 
   end

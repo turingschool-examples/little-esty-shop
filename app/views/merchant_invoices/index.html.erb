@@ -1,5 +1,10 @@
 <h1><%=@merchant.name  %></h1>
 
 <% @merchant.invoices.each do |invoice| %>
-  <p> Invoice ID: <%= invoice.id %> <p>
+<section id="invoice_id-<%= invoice.id %>">
+
+  <p> Invoice ID: <%= link_to "#{invoice.id}", "/merchants/:id/invoices/#{invoice.id}" %> <p>
+
+  </section>
+
 <% end %>
