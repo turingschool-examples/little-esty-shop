@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   end
 
   get '/admin', to: 'application#admin_dashboard'
-  get '/admin/merchants', to: 'application#admin_merchants_dashboar
+  get '/admin/merchants', to: 'application#admin_merchants_dashboard'
 end
