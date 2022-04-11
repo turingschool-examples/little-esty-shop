@@ -8,5 +8,13 @@ describe "Admin dashboard", type: :feature do
 
       expect(page).to have_content("Admin Dashboard")
     end
+
+    it "displays a link to admin/merchants" do
+      visit "/admin"
+
+      click_on "Admin: Merchants"
+
+      expect(current_path).to eq("/admin/merchants")
+    end
   end
 end
