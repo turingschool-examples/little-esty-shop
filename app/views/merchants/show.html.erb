@@ -10,3 +10,11 @@
     Invoices
   </a>
 </h3>
+
+<h2>Top 5 Customers: </h2>
+  <ol>
+    <% @merchant.top_5_customers.each do |cust| %>
+      <li id="<%= cust.id %>">Name: <%= cust.first_name %> <%= cust.last_name %><br> Successful Transactions: <%= cust.successful_transactions %></li>
+      <br>
+    <% end %>
+  </ol>
