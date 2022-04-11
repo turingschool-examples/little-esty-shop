@@ -1,3 +1,6 @@
 class Customer < ApplicationRecord
-  # belongs_to :invoice
+  has_many :invoices
+  has_many :invoice_items, through: :invoices
+  has_many :items, through: :invoice_items
+  has_many :transactions, through: :invoices
 end
