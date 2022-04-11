@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get '/admin', to: 'application#admin_dashboard'
+  get '/admin/merchants', to: 'application#admin_merchants_dashboard'
 end
