@@ -34,6 +34,7 @@ RSpec.describe 'Merchant Invoice Index Page' do
       visit "/merchants/#{@merch1.id}/invoices"
 
 
+
     end
 
   end
