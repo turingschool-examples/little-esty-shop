@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
 
+
   def index
     @merchant = Merchant.find(params[:id])
   end
+
 
   def update
     @merchant = Merchant.find(params[:id])
@@ -14,5 +16,8 @@ class ItemsController < ApplicationController
       item.update(status: 1)
     end
     redirect_to "/merchants/#{@merchant.id}/items"
+
+  def show
+    @item = Item.find(params[:id])
   end
 end
