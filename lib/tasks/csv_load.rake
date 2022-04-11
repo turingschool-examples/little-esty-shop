@@ -1,12 +1,5 @@
-# require 'require_all'
-# require_all './app/models'
-require "./app/models/application_record"
-require "./app/models/customer"
-require "./app/models/invoice_item"
-require "./app/models/invoice"
-require "./app/models/item"
-require "./app/models/merchant"
-require "./app/models/transaction"
+require "require_all"
+require_all "./app/models"
 require "csv"
 
 desc "Seed CSV data"
