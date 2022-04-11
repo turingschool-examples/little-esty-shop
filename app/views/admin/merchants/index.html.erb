@@ -1,0 +1,10 @@
+<div>
+  <header class="header">
+    <h1>Merchant Index - Admin</h1>
+  </header>
+  <ul class="index">
+    <% @merchants.each do |merchant| %>
+      <p><%= merchant.name %></p>
+    <% end %>
+  </ul>
+</div>
