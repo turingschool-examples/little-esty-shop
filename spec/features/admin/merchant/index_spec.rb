@@ -33,8 +33,6 @@ RSpec.describe "Admin Merchants Index" do
     Rake::Task['csv_fake:items'].invoke
     Rake::Task['csv_fake:transactions'].invoke
     Rake::Task['csv_fake:invoice_items'].invoke
-    binding.pry
     expect(Customer.all.length).to eq(40)
-    binding.pry
   end
 end
