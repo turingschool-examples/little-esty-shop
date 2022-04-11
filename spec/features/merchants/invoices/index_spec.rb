@@ -46,6 +46,8 @@ RSpec.describe 'Merchant Invoice Index Page' do
     end
 
     it 'All Invoice IDs link to that invoices show page' do
+      visit "/merchants/#{@merch1.id}/invoices"
+
       within "#invoice_id-#{@invoice1.id}" do
         expect(page).to have_selector(:link_or_button, "#{@invoice1.id}")
       end

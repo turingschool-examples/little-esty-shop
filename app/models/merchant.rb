@@ -19,4 +19,11 @@ class Merchant < ApplicationRecord
               .group('customers.id')
               .limit(5)
   end
+
+
+
+
+  def unique_invoices
+    invoices.uniq
+  end
 end
