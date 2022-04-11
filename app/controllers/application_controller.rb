@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-
+  def welcome
+  end
   def admin_dashboard
   end
 
