@@ -6,4 +6,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show]
     resources :dashboard, only: [:index]
   end
+
+  get '/admin', to: 'application#admin_dashboard'
+  get '/admin/merchants', to: 'application#admin_merchants_dashboar
 end
