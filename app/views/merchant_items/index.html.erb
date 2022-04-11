@@ -1,3 +1,7 @@
+<h1>All Items For: <%= @merchant.name %></h1>
 <% @merchant.items.each do |item| %>
   <p> <%= item.name %> <p>
+  <p> <%= item.status %> <p>  
 <% end %>
+
+<%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
