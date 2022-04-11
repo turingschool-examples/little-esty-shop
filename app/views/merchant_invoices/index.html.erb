@@ -1,6 +1,6 @@
 <h1><%=@merchant.name  %></h1>
 
-<% @merchant.invoices.each do |invoice| %>
+<% @merchant.unique_invoices.each do |invoice| %>
 <section id="invoice_id-<%= invoice.id %>">
 
   <p> Invoice ID: <%= link_to "#{invoice.id}", "/merchants/:id/invoices/#{invoice.id}" %> <p>

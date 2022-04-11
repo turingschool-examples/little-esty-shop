@@ -58,7 +58,7 @@ RSpec.describe 'Merchant Invoice Index Page' do
       within "#invoice_id-#{@invoice4.id}" do
         expect(page).to have_selector(:link_or_button, "#{@invoice4.id}")
       end
-
+      # save_and_open_page
       within "#invoice_id-#{@invoice2.id}" do
         click_link "#{@invoice2.id}"
       end
