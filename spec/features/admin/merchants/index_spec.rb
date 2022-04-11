@@ -24,6 +24,7 @@ describe "the admin/merchants index page" do
       click_on "Targay"
 
       expect(current_path).to eq("/admin/merchants/#{@targay.id}")
+      expect(page).to have_content("Targay")
     end
   end
 end
