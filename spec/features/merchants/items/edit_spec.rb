@@ -32,7 +32,7 @@ RSpec.describe 'merchant items edit page' do
 
         click_link "Update Item Information"
 
-        expect(page).to have_field("Name", with: "#{@item_1.id}")
+        expect(page).to have_field("Name", with: "#{@item_1.name}")
         expect(page).to have_field("Description", with: "#{@item_1.description}")
         expect(page).to have_field("Unit price", with: "#{@item_1.unit_price}")
       end
@@ -45,15 +45,15 @@ RSpec.describe 'merchant items edit page' do
         click_link "Update Item Information"
 
         fill_in 'Description', with: 'Wine Red Finish, Rosewood Fingerboard'
-        fill_in 'Unit price', with: 200000
+        fill_in 'Unit price', with: 20000000
 
-        click_button 'Submit'
+        click_on 'Save'
 
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content("Description: Wine Red Finish, Rosewood Fingerboard")
         expect(page).to have_content("Current Selling Price: $200000.00")
-        expect(flash).to match("Information Successfully Updated")
+        expect(page).to have_content(flash[:success])
       end
     end
   end
