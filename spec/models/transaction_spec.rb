@@ -30,7 +30,7 @@ RSpec.describe Transaction do
     it { should validate_numericality_of :credit_card_number }
 
     it { should validate_presence_of :result }
-    it { should define_enum_for(:result).with_values(['success', 'failed']) }
+    it { should define_enum_for(:result) }
   end
 
   context 'relationships' do
