@@ -4,4 +4,7 @@ class AdminController < ApplicationController
 
   def merchants
   end
+
+  def invoices
+  end
 end
