@@ -36,6 +36,21 @@ RSpec.describe 'Merchant Invoice Index Page' do
       expect(page).to have_content("Invoice ID: #{@invoice2.id}")
       expect(page).to have_content("Invoice ID: #{@invoice4.id}")
       expect(page).to have_content("Invoice ID: #{@invoice4.id}")
+      expect(page).to_not have_content("Invoice ID: #{@invoice3.id}")
+      within "#invoice_id-#{@invoice1.id}" do
+        expect(page).to have_selector(:link_or_button, "#{@invoice1.id}")
+      end
+
+      within "#invoice_id-#{@invoice2.id}" do
+        expect(page).to have_selector(:link_or_button, "#{@invoice2.id}")
+      end
+      within "#invoice_id-#{@invoice1.id}" do
+        expect(page).to have_selector(:link_or_button, "#{@invoice4.id}")
+      end
+      within "#invoice_id-#{@invoice1.id}" do
+        expect(page).to have_selector(:link_or_button, "#{@invoice4.id}")
+      end
+
 
       # save_and_open_page
 
