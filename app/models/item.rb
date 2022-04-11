@@ -4,5 +4,5 @@ class Item < ApplicationRecord
   validates_presence_of :unit_price
   validates_presence_of :merchant_id
 
-  be :customer
+  belongs_to :merchant
 end
