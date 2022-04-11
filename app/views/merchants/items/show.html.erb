@@ -4,3 +4,7 @@
 
 <%= link_to "Update Item Information",
     "/merchants/#{@item.merchant_id}/items/#{@item.id}/edit" %>
+
+<% flash.each do |type, message| %>
+  <p><%= message %></p>
+<% end %>

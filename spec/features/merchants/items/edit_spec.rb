@@ -53,7 +53,7 @@ RSpec.describe 'merchant items edit page' do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content("Description: Wine Red Finish, Rosewood Fingerboard")
         expect(page).to have_content("Current Selling Price: $200000.00")
-        expect(page).to have_content(flash[:success])
+        expect(page).to have_content("Information Successfully Updated")
       end
     end
   end
