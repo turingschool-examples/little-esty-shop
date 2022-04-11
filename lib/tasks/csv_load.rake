@@ -1,13 +1,19 @@
-require 'require_all'
-require_all './app/models'
-require 'csv'
+# require 'require_all'
+# require_all './app/models'
+require "./app/models/application_record"
+require "./app/models/customer"
+require "./app/models/invoice_item"
+require "./app/models/invoice"
+require "./app/models/item"
+require "./app/models/merchant"
+require "./app/models/transaction"
+require "csv"
 
-desc 'Seed CSV data'
+desc "Seed CSV data"
 namespace :csv_load do
-
   task customers: :environment do
-    csv_text = File.read(Rails.root.join('db', 'data', 'customers.csv'))
-    csv = CSV.parse(csv_text, :headers => true)
+    csv_text = File.read(Rails.root.join("db", "data", "customers.csv"))
+    csv = CSV.parse(csv_text, headers: true)
 
     csv.each do |row|
       c = Customer.new
@@ -23,8 +29,8 @@ namespace :csv_load do
   end
 
   task invoice_items: :environment do
-    csv_text = File.read(Rails.root.join('db', 'data', 'invoice_items.csv'))
-    csv = CSV.parse(csv_text, :headers => true)
+    csv_text = File.read(Rails.root.join("db", "data", "invoice_items.csv"))
+    csv = CSV.parse(csv_text, headers: true)
     enums = {"pending" => "0", "packaged" => "1", "shipped" => "2"}
 
     csv.each do |row|
@@ -44,9 +50,9 @@ namespace :csv_load do
   end
 
   task invoices: :environment do
-    csv_text = File.read(Rails.root.join('db', 'data', 'invoices.csv'))
-    csv = CSV.parse(csv_text, :headers => true)
-    enums = { "in progress" => "0", "completed" => "1", "cancelled" => "2" }
+    csv_text = File.read(Rails.root.join("db", "data", "invoices.csv"))
+    csv = CSV.parse(csv_text, headers: true)
+    enums = {"in progress" => "0", "completed" => "1", "cancelled" => "2"}
 
     csv.each do |row|
       i = Invoice.new
@@ -62,8 +68,8 @@ namespace :csv_load do
   end
 
   task items: :environment do
-    csv_text = File.read(Rails.root.join('db', 'data', 'items.csv'))
-    csv = CSV.parse(csv_text, :headers => true)
+    csv_text = File.read(Rails.root.join("db", "data", "items.csv"))
+    csv = CSV.parse(csv_text, headers: true)
 
     csv.each do |row|
       it = Item.new
@@ -81,8 +87,8 @@ namespace :csv_load do
   end
 
   task merchants: :environment do
-    csv_text = File.read(Rails.root.join('db', 'data', 'merchants.csv'))
-    csv = CSV.parse(csv_text, :headers => true)
+    csv_text = File.read(Rails.root.join("db", "data", "merchants.csv"))
+    csv = CSV.parse(csv_text, headers: true)
 
     csv.each do |row|
       m = Merchant.new
@@ -97,8 +103,8 @@ namespace :csv_load do
   end
 
   task transactions: :environment do
-    csv_text = File.read(Rails.root.join('db', 'data', 'transactions.csv'))
-    csv = CSV.parse(csv_text, :headers => true)
+    csv_text = File.read(Rails.root.join("db", "data", "transactions.csv"))
+    csv = CSV.parse(csv_text, headers: true)
 
     csv.each do |row|
       t = Transaction.new
@@ -129,5 +135,4 @@ namespace :csv_load do
     system("rake csv_load:invoice_items")
     system("rake csv_load:transactions")
   end
-
 end
