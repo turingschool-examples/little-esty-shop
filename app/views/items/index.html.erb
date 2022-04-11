@@ -1,7 +1,6 @@
 <h1> <%= @merchant.name %></h1>
-<h3> Items </h3>
 
-<h4> Enabled Items </h4>
+<h3> Enabled Items </h3>
 <section class="enabled">
     <% @merchant.enabled_items.each do |item| %>
       <div class="item-<%=item.id%>">
@@ -12,8 +11,8 @@
       <% end %>
 </section>
 
-<h4> Disabled Items </h4>
-<div class="disabled">
+<h3> Disabled Items </h3>
+<section class="disabled">
     <% @merchant.disabled_items.each do |item| %>
       <div class="item-<%=item.id%>"
           <p> <%= item.name %>
@@ -21,4 +20,4 @@
           </p>
       </div>
       <% end %>
-</div>
+</section>

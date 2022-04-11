@@ -46,7 +46,6 @@ RSpec.describe Merchant, type: :model do
       end
 
       it '#disabled_items' do
-        # require "pry"; binding.pry
         expect(@merchant1.disabled_items).to eq([@item3])
         expect(@merchant2.disabled_items).to eq([])
       end
