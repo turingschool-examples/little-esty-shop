@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   end
 
   def merchants
+    @merchants = Merchant.all
   end
 
   def invoices
