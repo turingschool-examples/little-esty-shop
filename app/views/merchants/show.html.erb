@@ -1,2 +1,4 @@
 <h1> <%= @merchant.name %> </h1>
 <%= link_to "Merchant's Items", "/merchants/#{@merchant.id}/items", method: :get %>
+
+<%= link_to "Merchant's Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %>
