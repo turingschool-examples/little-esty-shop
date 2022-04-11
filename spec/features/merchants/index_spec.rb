@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-<<<<<<< HEAD
 RSpec.describe 'merchant dashboard' do
   before :each do
     @merchant1 = Merchant.create!(name: "Pabu")
@@ -21,20 +20,4 @@ RSpec.describe 'merchant dashboard' do
     click_button "Invoices Index"
     expect(current_path).to eq(merchant_invoices_path(@merchant1))
   end
-=======
-RSpec.describe 'Merchant items index' do
-  before do
-
-    visit "merchant/#{@merchant.id}/items"
-  end
-
-  describe 'Displays' do
-    it 'lists names of all merchant items' do
-
-      expect(page).to have_current_path('/applications')
-      expect(page).to have_content(@application_1.name)
-
-    end
-  end
->>>>>>> 3443533 (Test: spec files for merchant index and merchant item index)
 end
