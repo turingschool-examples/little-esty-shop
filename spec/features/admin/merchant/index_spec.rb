@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'rake'
+Rails.application.load_tasks
 
 RSpec.describe "Admin Merchants Index" do
   it 'displays a header showing the Admin Merchants Index' do
@@ -22,5 +24,15 @@ RSpec.describe "Admin Merchants Index" do
       expect(page).to have_content('Jimmys')
       expect(page).to_not have_content('Willys')
     end
+  end
+
+  it 'loads into test db' do
+    Rake::Task['csv_fake:customers'].invoke
+    Rake::Task['csv_fake:merchants'].invoke
+    Rake::Task['csv_fake:invoices'].invoke
+    Rake::Task['csv_fake:items'].invoke
+    Rake::Task['csv_fake:transactions'].invoke
+    Rake::Task['csv_fake:invoice_items'].invoke
+    expect(Customer.all.length).to eq(40)
   end
 end
