@@ -222,7 +222,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  bundler
   capybara
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
