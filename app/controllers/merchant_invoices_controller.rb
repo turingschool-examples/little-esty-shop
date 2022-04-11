@@ -4,4 +4,8 @@ class MerchantInvoicesController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def show
+
+  end
+
 end
