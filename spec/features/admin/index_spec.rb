@@ -70,7 +70,6 @@ RSpec.describe "Admin Dashboard" do
     expect(page).to have_content("Zeke Bristol")
     expect(page).to have_content("Flipper McDaniel")
     expect(page).to have_no_content("Tildy Lynch")
-save_and_open_page
     within("#customer-#{bob.id}") do
       expect(page).to have_content("6")
       expect(page).to have_no_content("4")
