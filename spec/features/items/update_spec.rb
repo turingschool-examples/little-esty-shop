@@ -18,7 +18,7 @@ describe "Merchants Items update", type: :feature do
   end
   it 'displays update link' do
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
-    save_and_open_page
+
     expect(page).to have_link("Update #{@item1.name}")
     click_link("Update #{@item1.name}")
 
@@ -33,5 +33,16 @@ describe "Merchants Items update", type: :feature do
     expect(find('form')).to have_content('Description')
     expect(find('form')).to have_content('Unit price')
     expect(find('form')).to have_content('Enabled')
+  end
+
+  it 'updates item info' do
+    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    click_link("Update #{@item1.name}")
+
+    fill_in 'Name', with: 'Different Item'
+    click_button 'Save'
+
+    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+    expect(page).to have_content("Different Item")
   end
 end
