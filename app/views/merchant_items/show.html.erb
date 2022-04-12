@@ -4,3 +4,4 @@ Item Name: <%= @merchant_item.name %><br>
 Item Unit Price: <%= @merchant_item.unit_price %><br>
 Item Description: <%= @merchant_item.description %><br>
 
+<%= link_to "Edit #{@merchant_item.name}", "/merchants/#{@merchant.id}/items/#{@merchant_item.id}/edit" %>
