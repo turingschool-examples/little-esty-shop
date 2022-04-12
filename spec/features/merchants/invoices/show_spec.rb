@@ -44,24 +44,24 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within "#invoice_item-#{invoice_item_1.id}" do
         expect(page).to have_content("Item Name: #{item1.name}")
         expect(page).to have_content("Quantity Ordered: #{invoice_item_1.quantity}")
-        expect(page).to have_content("Item Price: #{invoice_item_1.unit_price}")
+        expect(page).to have_content("Item Price: #{invoice_item_1.price_to_dollars}")
         expect(page).to have_content("Invoice Item Status: #{invoice_item_1.status}")
       end
       within "#invoice_item-#{invoice_item_2.id}" do
         expect(page).to have_content("Item Name: #{item2.name}")
         expect(page).to have_content("Quantity Ordered: #{invoice_item_2.quantity}")
-        expect(page).to have_content("Item Price: #{invoice_item_2.unit_price}")
+        expect(page).to have_content("Item Price: #{invoice_item_2.price_to_dollars}")
         expect(page).to have_content("Invoice Item Status: #{invoice_item_2.status}")
       end
       within "#invoice_item-#{invoice_item_3.id}" do
         expect(page).to have_content("Item Name: #{item3.name}")
         expect(page).to have_content("Quantity Ordered: #{invoice_item_3.quantity}")
-        expect(page).to have_content("Item Price: #{invoice_item_3.unit_price}")
+        expect(page).to have_content("Item Price: #{invoice_item_3.price_to_dollars}")
         expect(page).to have_content("Invoice Item Status: #{invoice_item_3.status}")
       end
 
       expect(page).to_not have_content("#{item4.name}")
-      expect(page).to_not have_content("#{invoice_item_4.unit_price}")
+      expect(page).to_not have_content("#{invoice_item_4.price_to_dollars}")
 
     end
 
