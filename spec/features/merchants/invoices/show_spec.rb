@@ -38,6 +38,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item4.id, invoice_id: invoice1.id)
 
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
+      # require "pry"; binding.pry
       expect(page).to have_content("My Items on This Invoice:")
 
       within "#item-#{item1.id}" do
