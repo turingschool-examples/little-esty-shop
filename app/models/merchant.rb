@@ -26,4 +26,10 @@ class Merchant < ApplicationRecord
   def unique_invoices
     invoices.uniq
   end
+
+
+  def current_invoice_items(invoice_id)
+    invoice_items.where(invoice_id: invoice_id)
+
+  end
 end
