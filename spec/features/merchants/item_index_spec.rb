@@ -112,8 +112,16 @@ describe 'merchant item index page' do
     expect(page).not_to have_content("Beer")
   end
 
-  it 'has a button to create a new item' do
+  xit 'has a button to create a new item' do
     click_button("Create a New Item")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+  end
+
+  it 'has all the items attributes' do
+    click_on('Cup')
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@cup.id}")
+    expect(page).to have_content('Cup')
+    expect(page).to have_content('What the **** is this thing?')
+    expect(page).to have_content('100')
   end
 end
