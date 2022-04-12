@@ -90,7 +90,7 @@ RSpec.describe 'Merchant Dashboard Page' do
       
       within "#item-#{item_1.id}" do
         expect(page).to have_content(item_1.name)
-        expect(page).to have_link(invoice.id)
+        expect(page).to have_link("#{invoice.id}")
       end
 
       click_link "#{invoice.id}"
