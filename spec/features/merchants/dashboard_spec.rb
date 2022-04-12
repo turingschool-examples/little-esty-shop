@@ -72,14 +72,15 @@ RSpec.describe 'Merchant Dashboard Page' do
     end
 
     it "displays items that are ready to ship" do
-      item_1 = create(:item, merchant_id: @merch1.id)
-      item_2 = create(:item, merchant_id: @merch1.id)
-
+      merchant_1 = create(:merchant)
+      
+      item_1 = create(:item, merchant_id: merchant_1.id)
+      item_2 = create(:item, merchant_id: merchant_1.id)
       customer = create(:customer)
       invoice = create(:invoice, customer_id: customer.id, status: 1)
       invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id)
       invoice_item_2 = create(:invoice_item, status: 2, item_id: item_2.id, invoice_id: invoice.id)
-      
+      visit "/merchants/#{merchant_1.id}/dashboard"
       expect(page).to have_content("Items Ready to Ship")
 
       within "#items_ready_to_ship" do
@@ -87,21 +88,14 @@ RSpec.describe 'Merchant Dashboard Page' do
         expect(page).to_not have_content(item_2.name)
       end
       
-      within "#items-#{item_1.id}" do
+      within "#item-#{item_1.id}" do
         expect(page).to have_content(item_1.name)
         expect(page).to have_link(invoice.id)
       end
 
       click_link "#{invoice.id}"
-      expect(current_path).to eq("/merchants/#{@merch1}/invoices/#{invoice.id}")
+      expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice.id}")
     end
-#     As a merchant
-# When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
   end
 
 end
