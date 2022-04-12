@@ -14,8 +14,4 @@ class Item < ApplicationRecord
   def new
 
   end
-
-  def create
-    @merchant = Merchant.find(params[:id])
-  end
 end

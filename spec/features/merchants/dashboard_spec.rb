@@ -96,7 +96,7 @@ RSpec.describe 'Merchant Dashboard Page' do
       expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice.id}")
     end
     
-    it "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest" do
+    xit "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest" do
       merchant_1 = create(:merchant)
       
       item_1 = create(:item, merchant_id: merchant_1.id)

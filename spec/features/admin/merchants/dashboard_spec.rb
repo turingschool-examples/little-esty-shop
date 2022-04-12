@@ -55,7 +55,7 @@ end
       transactions_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: invoice_5.id, result: 0)
         visit "/admin/merchants/#{merchant_1.id}/dashboard"
       expect(merchant_1.top_five_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
-save_and_open_page
+
       within("#top_five_customers") do
         expect(page).to_not have_content("#{customer_6.id}")
 
