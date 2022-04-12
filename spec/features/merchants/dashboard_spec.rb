@@ -112,19 +112,20 @@ RSpec.describe 'Merchant Dashboard Page' do
       invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
       invoice_item_2 = create(:invoice_item, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
       invoice_item_3 = create(:invoice_item, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+      
       visit "/merchants/#{merchant_1.id}/dashboard"
       
       within "#item-#{item_1.id}" do
-        expect(page).to have_content("February 1, 2008")
+        expect(page).to have_content("February 8, 2015")
       end
       within "#item-#{item_2.id}" do
-        expect(page).to have_content("February 1, 2008")
+        expect(page).to have_content("February 21, 2020")
       end
       within "#item-#{item_3.id}" do
-        expect(page).to have_content("September 1, 2008")
+        expect(page).to have_content("March 12, 2018")
       end
-      expect(item_1).to appear_before(item_2)
-      expect(item_3).to appear_before(item_2)
+      expect(item_2).to appear_before(item_3)
+      expect(item_3).to appear_before(item_1)
     end
     #     As a merchant
     # When I visit my merchant dashboard

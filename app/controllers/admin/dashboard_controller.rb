@@ -1,5 +1,5 @@
 class Admin::DashboardController < ApplicationController
-  def index
-
-  end 
+    def index
+    @merchant = Merchant.find(params[:id])
+    end
 end
