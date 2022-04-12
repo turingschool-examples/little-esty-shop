@@ -8,7 +8,8 @@ end
 
   it 'has a link to the admin/merchant and admin/invoices indecise' do
     visit '/admin/'
-    expect(page). to have_link('admin/merchants')
-    expect(page). to have_link('admin/invoices')
+    save_and_open_page
+    expect(page). to have_link('Merchants (administrator)')
+    expect(page). to have_link('Invoices (administrator)')
   end
 end
