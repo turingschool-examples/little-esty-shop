@@ -1,5 +1,7 @@
 <h1> <%= @merchant.name %>'s items </h1>
 <br/><hr/>
+
+<%= button_to("Create a New Item", "/merchants/#{@merchant.id}/items/new", method: :get) %>
 <% @items.each do |item| %>
   <h3> <%= item.name %> </h3>
   <p> <%= item.description %> </p>

@@ -111,4 +111,9 @@ describe 'merchant item index page' do
     expect(page).to have_content("Soccer Ball")
     expect(page).not_to have_content("Beer")
   end
+
+  it 'has a button to create a new item' do
+    click_button("Create a New Item")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+  end
 end
