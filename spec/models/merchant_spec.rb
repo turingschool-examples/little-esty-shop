@@ -69,8 +69,24 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_4 = FactoryBot.create(:invoice_item, item_id: @item2.id, invoice_id: @invoice3.id)
 
       expect(@merch1.unique_invoices).to eq([@invoice1, @invoice2, @invoice3])
+    end
 
+    it '#current_invoice_items returns a merchants invoice items for a given invoice' do
+      merch1 = FactoryBot.create(:merchant)
+      merch2 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item4 = FactoryBot.create(:item, merchant_id: merch2.id)
 
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice1.id)
+      invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item3.id, invoice_id: invoice1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item4.id, invoice_id: invoice1.id)
+      # require "pry"; binding.pry
+      expect(merch1.current_invoice_items(invoice1.id)).to eq([invoice_item_1, invoice_item_2, invoice_item_4])
     end
   end
 end
