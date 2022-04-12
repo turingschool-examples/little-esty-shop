@@ -1,5 +1,6 @@
 <h1> Item Show </h1>
 
+<h3><%= link_to "Update #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></h3>
 <p>Name: <%= @item.name %></p>
 <p>Description: <%= @item.description %></p>
 <p>Price: <%= @item.unit_price %></p>
