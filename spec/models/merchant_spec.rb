@@ -48,9 +48,27 @@ RSpec.describe Merchant, type: :model do
           invoice_item_5 = create(:invoice_item, item_id: item.id, invoice_id: invoice_5.id, status: 2)
           transactions_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: invoice_5.id, result: 0)
 
-
-
           expect(merchant_1.top_five_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
+    end
+
+    it 'returns #unique_invoices for a given merchant' do
+      merch1 = FactoryBot.create(:merchant)
+      item1 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, merchant_id: merch1.id)
+      cust1 = FactoryBot.create(:customer)
+
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
+
+      invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id)
+
+      invoice3 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice3.id)
+      invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice3.id)
+
+      expect(merch1.unique_invoices).to eq([invoice1, invoice2, invoice3])
     end
 
     it "#items_ready_to_ship" do
@@ -64,5 +82,45 @@ RSpec.describe Merchant, type: :model do
 
       expect(merchant_1.items_ready_to_ship).to eq([item_1])
     end
+    it '#current_invoice_items returns a merchants invoice items for a given invoice' do
+      merch1 = FactoryBot.create(:merchant)
+      merch2 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, merchant_id: merch1.id)
+      item4 = FactoryBot.create(:item, merchant_id: merch2.id)
+
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice1.id)
+      invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item3.id, invoice_id: invoice1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item4.id, invoice_id: invoice1.id)
+
+      invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id)
+
+      # require "pry"; binding.pry
+      expect(merch1.current_invoice_items(invoice1.id)).to eq([invoice_item_1, invoice_item_2, invoice_item_4])
+    end
+
+    it 'returns the total revenue for a merchant for a given invoice' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id)
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, invoice_id: invoice1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, invoice_id: invoice1.id)
+
+      invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id)
+
+      expect(merch1.total_revenue_for_invoice(invoice1.id)).to eq(4167.88)
+    end
+
+
   end
 end
