@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Merchants Dashboard', type: :feature do
+RSpec.describe 'Admin Merchants Index', type: :feature do
 
   before :each do
     @merchant_1 = create(:merchant)
