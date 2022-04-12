@@ -4,10 +4,20 @@
 <p><%= link_to "Admin: Invoices", "/admin/invoices" %></p>
 
 <div id='customers'>
-<h3>Top Customers:</h3>
-<% @customers.each do |customer| %>
-  <div id='customer-<%= "#{customer.id}" %>'
-    <p><li><%= customer.full_name %> -
-    <%= customer.transaction_count %> purchase(s)</li></p>
+  <h3>Top Customers:</h3>
+  <% @customers.each do |customer| %>
+    <div id='customer-<%= "#{customer.id}" %>'
+      <p><li><%= customer.full_name %> -
+      <%= customer.transaction_count %> purchase(s)</li></p>
     </div>
-<% end %></div>
+  <% end %>
+</div><br><br>
+
+<div id='invoices'>
+  <h3>Incomplete Invoices:</h3>
+  <% @invoices.each do |invoice| %>
+    <div id='invoice-<%= "#{invoice.id}" %>'
+      <p><li>Purchase #<%= "#{invoice.id}" %> </li></p>
+    </div>
+  <% end %>
+</div>

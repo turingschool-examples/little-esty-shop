@@ -7,9 +7,11 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
 
-  enum status: {in_progress: 0, completed: 1, cancelled: 2}
+  enum status: {"in progress" => 0, "completed" => 1, "cancelled" => 2}
 
   def self.pending_invoices
-    where(status: :in_progress)
+    # joins(:invoice_items)
+    # .where.not(status: 1)
+    where(status: 0)
   end
 end
