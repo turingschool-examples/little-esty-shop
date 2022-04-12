@@ -40,5 +40,19 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
         expect(page).to_not have_link("#{@merchant_3.name}", href: "/admin/merchants/#{@merchant_3.id}")
       end
     end
+
+    click_link("#{@merchant_1.name}")
+
+    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+  end
+
+  it 'Links from index to page for creation of new merchant' do
+    visit '/admin/merchants'
+
+    expect(page).to have_link("Create New Merchant", href: "/admin/merchants/new")
+
+    click_link("Create New Merchant")
+
+    expect(current_path).to eq("/admin/merchants/new")
   end
 end
