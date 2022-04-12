@@ -39,15 +39,15 @@ RSpec.describe 'merchant items index page' do
         visit "/merchants/#{merchant_1.id}/items"
 
         within("#item-#{item_1.id}") do
-          expect(page).to have_button("Disable")
+          expect(page).to have_button("Enable")
         end
 
         within("#item-#{item_2.id}") do
-          expect(page).to have_button("Disable")
+          expect(page).to have_button("Enable")
         end
 
         within("#item-#{item_3.id}") do
-          expect(page).to have_button("Enable")
+          expect(page).to have_button("Disable")
         end
       end
 
@@ -68,27 +68,27 @@ RSpec.describe 'merchant items index page' do
         visit "/merchants/#{merchant_1.id}/items"
 
         within("#item-#{item_1.id}") do
-          click_button("Disable")
-        end
-
-        expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
-
-        within("#item-#{item_1.id}") do
-          expect(page).to have_button("Enable")
-        end
-
-        within("#item-#{item_2.id}") do
-          expect(page).to have_button("Disable")
-        end
-
-        within("#item-#{item_3.id}") do
           click_button("Enable")
         end
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
 
-        within("#item-#{item_3.id}") do
+        within("#item-#{item_1.id}") do
           expect(page).to have_button("Disable")
+        end
+
+        within("#item-#{item_2.id}") do
+          expect(page).to have_button("Enable")
+        end
+
+        within("#item-#{item_3.id}") do
+          click_button("Disable")
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
+
+        within("#item-#{item_3.id}") do
+          expect(page).to have_button("Enable")
         end
       end
 
@@ -111,39 +111,39 @@ RSpec.describe 'merchant items index page' do
 
         visit "/merchants/#{merchant_1.id}/items"
 
-        within("#enabled_items") do
-          expect(page).to have_content("Enabled Items")
+        within("#disabled_items") do
+          expect(page).to have_content("Disabled Items")
           expect(page).to have_content(item_2.name)
           within("#item-#{item_2.id}") do
-            expect(page).to have_button("Disable")
+            expect(page).to have_button("Enable")
           end
 
           expect(page).to have_content(item_4.name)
           within("#item-#{item_4.id}") do
-            expect(page).to have_button("Disable")
+            expect(page).to have_button("Enable")
           end
 
           expect(page).not_to have_content(item_1.name)
           expect(page).not_to have_content(item_3.name)
-          expect(page).not_to have_button("Enable")
+          expect(page).not_to have_button("Disable")
         end
 
-        within("#disabled_items") do
-          expect(page).to have_content("Disabled Items")
+        within("#enabled_items") do
+          expect(page).to have_content("Enabled Items")
 
           expect(page).to have_content(item_1.name)
           within("#item-#{item_1.id}") do
-            expect(page).to have_button("Enable")
+            expect(page).to have_button("Disable")
           end
 
           expect(page).to have_content(item_3.name)
           within("#item-#{item_3.id}") do
-            expect(page).to have_button("Enable")
+            expect(page).to have_button("Disable")
           end
 
           expect(page).not_to have_content(item_2.name)
           expect(page).not_to have_content(item_4.name)
-          expect(page).not_to have_button("Disable")
+          expect(page).not_to have_button("Enable")
         end
       end
     end

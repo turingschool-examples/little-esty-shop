@@ -14,10 +14,10 @@ class Merchants::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     if params[:disable]
-      item.update(status: 1)
+      item.update(status: 0)
       redirect_to "/merchants/#{item.merchant_id}/items"
     elsif params[:enable]
-      item.update(status: 0)
+      item.update(status: 1)
       redirect_to "/merchants/#{item.merchant_id}/items"
     elsif item.update(item_params)
       redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
