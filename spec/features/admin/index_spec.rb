@@ -25,7 +25,7 @@ describe "Admin dashboard", type: :feature do
       expect(current_path).to eq("/admin/invoices")
     end
 
-    it "displays the name of the top 5 customers" do
+    xit "displays the name of the top 5 customers" do
       visit "/admin"
 
       expect(page).to have_content("blah")
