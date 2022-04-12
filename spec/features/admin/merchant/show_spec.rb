@@ -13,7 +13,7 @@ RSpec.describe "Admin Merchants Show" do
       expect(page).to have_content("Merchant Show - Admin")
     end
 
-    within("merch-#{@merchant_1.id}") do
+    within(".text") do
       expect(page).to have_content("Mollys")
       expect(page).to_not have_content("Berrys")
     end
