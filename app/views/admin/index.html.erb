@@ -1,2 +1,9 @@
 <%= render "header" %>
 <%= render "link_bar" %>
+<h3>Top Customers: </h3>
+<% @customers.top_five.each do |customer| %>
+  <div id="customer-<%= customer.id %>">
+    <h3><%= [customer.first_name, " ", customer.last_name].join %></h3>
+    <p>Successful transactions: <%= customer.transactions.count %></p>
+  </div>
+<% end %>
