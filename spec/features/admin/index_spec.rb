@@ -26,4 +26,21 @@ RSpec.describe "Admin Dashboard" do
     click_link "Admin Invoices"
     expect(current_path).to eq('/admin/invoices')
   end
+
+  it 'displays the names of top 5 customers' do
+    visit '/admin'
+
+    expect(page).to have_content("Bob Benson")
+    expect(page).to have_content("Nate Chaffee")
+    expect(page).to have_content("Barty Dasher")
+    expect(page).to have_content("Zeke Bristol")
+    expect(page).to have_content("Flipper McDaniel")
+    expect(page).to have_no_content("Tildy Lynch")
+
+    within("#customer-#{bob.id}") do
+      
+      expect(page).to have_content("25")
+      expect(page).to have_no_content("20")
+    end
+  end
 end
