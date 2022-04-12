@@ -103,6 +103,10 @@ RSpec.describe Merchant, type: :model do
       invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, invoice_id: invoice1.id)
       invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, invoice_id: invoice1.id)
       invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, invoice_id: invoice1.id)
+
+      invoice2 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_5 = FactoryBot.create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id)
+
       expect(merch1.total_revenue_for_invoice(invoice1.id)).to eq(4167.88)
     end
 
