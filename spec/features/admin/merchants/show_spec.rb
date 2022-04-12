@@ -19,13 +19,13 @@ RSpec.describe 'Admin Merchant Show', type: :feature do
   it 'contains a link to edit the merchant' do
     visit "admin/merchants/#{@merchant_2.id}"
 
-    within("#update_merchant") do
-      expect(page).to have_link("Edit Merchant", href: "admin/merchants/:id/edit")
+    within("#update-merchant") do
+      expect(page).to have_link("Edit Merchant", href: "#{@merchant_2.id}/edit")
     end
 
     click_link("Edit Merchant")
 
-    expect(current_path).to eq("admin/merchants/:id/edit")
+    expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}/edit")
   end
 
 end
