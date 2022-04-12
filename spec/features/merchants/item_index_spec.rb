@@ -114,6 +114,6 @@ describe 'merchant item index page' do
 
   it 'has a button to create a new item' do
     click_button("Create a New Item")
-    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+    expect(current_path).to eq("/items/new")
   end
 end
