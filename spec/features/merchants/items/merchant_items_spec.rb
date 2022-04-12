@@ -29,5 +29,13 @@ RSpec.describe 'Merchant items index' do
       expect(page).to_not have_content(@start.name)
 
     end
+
+    it 'lists enabled items in own section' do
+
+      expect(page).to have_current_path("/merchants/#{@starw.id}/items")
+      within "#id-#{@starw.id}"
+      expect(page).to have_content(@starw.name)
+      expect(page).to_not have_content(@start.name)
+    end
   end
 end
