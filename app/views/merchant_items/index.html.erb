@@ -1,8 +1,7 @@
 <h1> <%= @merchant.name %>'s Items  </h1>
 
-<ul id="items">
 <% @merchant.items.each do |item| %>
     <li>
-      <p>Name: <%= item.name %> </p>
+      Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a>
     </li>
 <% end %>
