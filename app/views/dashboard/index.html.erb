@@ -26,6 +26,7 @@
     <% item.invoices.each do |invoice| %>
       <%= item.name %>
       <li><%= link_to "Invoice ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li>
+      <li><%= invoice.formatted_created_at %>
       <% end %>
   <% end %>
   </ul>

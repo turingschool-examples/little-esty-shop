@@ -12,4 +12,11 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:transactions) }
   end
+
+  describe "instance methods" do
+    it "#formatted_created_at" do
+      invoice = create(:invoice)
+      expect(invoice.formatted_created_at).to be_a(String)
+    end
+  end
 end
