@@ -3,12 +3,7 @@
 <h2>Enabled Items</h2>
 
 <% @enabled_items.each do |item| %>
-      Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a>
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
-      method: :patch, local: true do |f| %>
-        <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
-        <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
+      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
@@ -22,15 +17,10 @@
 <div id="disabled-<%= @merchant.id %>">
 <h2>Disabled Items</h2>
 <% @disabled_items.each do |item| %>
-      Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a>
+      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
-        <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
-      method: :patch, local: true do |f| %>
-        <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %>
       <br>
