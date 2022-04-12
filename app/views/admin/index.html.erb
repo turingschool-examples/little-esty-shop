@@ -2,3 +2,8 @@
 
 <p><%= link_to "Admin: Merchants", "/admin/merchants" %></p>
 <p><%= link_to "Admin: Invoices", "/admin/invoices" %></p>
+
+<h3>Top Customers:</h3>
+<% @customers.each do |customer| %>
+  <p><%= customer.full_name %></p>
+<% end %>
