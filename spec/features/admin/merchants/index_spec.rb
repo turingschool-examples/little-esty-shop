@@ -55,4 +55,20 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
 
     expect(current_path).to eq("/admin/merchants/new")
   end
+
+  it 'Has buttons for each merchant to toggle enable/disable status' do
+    visit '/admin/merchants'
+
+    within("#merchant-#{@merchant_1.id}") do
+      expect(page).to have_link("Enabled")
+      click_link("Enabled")
+    end
+
+    expect(current_path).to eq("/admin/merchants")
+
+    within("#merchant-#{@merchant_1.id}") do
+      expect(page).to have_link("Disabled")
+    end
+  end
+
 end

@@ -16,6 +16,13 @@ class Admin::MerchantsController < ApplicationController
     redirect_to("/admin/merchants")
   end
 
+  def switch
+    @merchant = Merchant.find(params[:id])
+    Merchant.update(@merchant.id, :enabled => !@merchant.enabled)
+    redirect_to "/admin/merchants"
+  end
+
+
   private
 
   def merchant_params
