@@ -29,7 +29,7 @@ RSpec.describe 'merchant invoices index page' do
   # As a merchant,
   # When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
   # Then I see all of the invoices that include at least one of my merchant's items
-  # And for each invoice I see its id
+  # And for each invoice I see its id x
 
   # And each id links to the merchant invoice show page
   it "displays all invoices that include at least one of my merchant's items" do
@@ -40,5 +40,31 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to_not have_content("Invoice: #{@invoice_5.id}")
   end
 
-  it "each invoice_id links to the merchant invoice show page"
+  it "each invoice_id links to the merchant invoice show page" do
+    within "#invoice-#{@invoice_1.id}" do
+      click_link @invoice_1.id
+    end
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    within "#invoice-#{@invoice_2.id}" do
+      click_link @invoice_2.id
+    end
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_2.id}")
+
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    within "#invoice-#{@invoice_3.id}" do
+      click_link @invoice_3.id
+    end
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_3.id}")
+
+    visit "/merchants/#{@merchant.id}/invoices"
+
+    within "#invoice-#{@invoice_4.id}" do
+      click_link @invoice_4.id
+    end
+    expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_4.id}")
+  end
 end
