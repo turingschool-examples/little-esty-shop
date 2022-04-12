@@ -122,6 +122,10 @@ RSpec.describe 'merchant items index page' do
           within("#item-#{item_4.id}") do
             expect(page).to have_button("Disable")
           end
+
+          expect(page).not_to have_content(item_1.name)
+          expect(page).not_to have_content(item_3.name)
+          expect(page).not_to have_button("Enable")
         end
 
         within("#disabled_items") do
@@ -136,6 +140,10 @@ RSpec.describe 'merchant items index page' do
           within("#item-#{item_3.id}") do
             expect(page).to have_button("Enable")
           end
+
+          expect(page).not_to have_content(item_2.name)
+          expect(page).not_to have_content(item_4.name)
+          expect(page).not_to have_button("Disable")
         end
       end
     end
