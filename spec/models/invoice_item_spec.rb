@@ -22,8 +22,8 @@ RSpec.describe InvoiceItem, type: :model do
 
       invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
       invoice_item_1 = FactoryBot.create(:invoice_item, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice1.id)
-      expect(invoice_item_1.formatted_price).to eq(752.07)
-      
+      expect(invoice_item_1.price_to_dollars).to eq(751.07)
+
     end
 
 
