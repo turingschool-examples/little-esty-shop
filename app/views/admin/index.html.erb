@@ -6,5 +6,8 @@
 <div id='customers'>
 <h3>Top Customers:</h3>
 <% @customers.each do |customer| %>
-  <p><li><%= customer.full_name %></li></p>
+  <div id='customer-<%= "#{customer.id}" %>'
+    <p><li><%= customer.full_name %> -
+    <%= customer.transaction_count %> purchase(s)</li></p>
+    </div>
 <% end %></div>

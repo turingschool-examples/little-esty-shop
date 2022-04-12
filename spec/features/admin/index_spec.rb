@@ -33,7 +33,7 @@ describe "Admin dashboard", type: :feature do
       expect(current_path).to eq("/admin/invoices")
     end
 
-    it "displays the name of the top 5 customers" do
+    it "displays the name of the top 5 customers and how many transactions" do
       @deviant = Merchant.create!(name: "Deviant Queer")
 
       @john = Customer.create!(first_name: "John", last_name: "H")
@@ -66,12 +66,21 @@ describe "Admin dashboard", type: :feature do
       @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
       visit "/admin"
+      # save_and_open_page
 
       within('#customers') do
         expect("Joseph").to appear_before("John")
         expect("John").to appear_before("August")
         expect("August").to appear_before("Ian")
         expect(page).to_not have_content("Amanda")
+      end
+
+      within("#customer-#{@joseph.id}") do
+        expect(page).to have_content("5")
+      end
+
+      within("#customer-#{@august.id}") do
+        expect(page).to have_content("3")
       end
     end
   end
