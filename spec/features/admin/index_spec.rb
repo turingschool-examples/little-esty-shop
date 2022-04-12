@@ -43,25 +43,26 @@ describe "Admin dashboard", type: :feature do
       @transactions_1c = @invoice1.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
       @transactions_1d = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
-      @august = (first_name: "August", last_name: "R")
+      @august = Customer.create!(first_name: "August", last_name: "R")
       @invoice2 = @august.invoices.create!(status: "completed")
       @transactions_2a = @invoice2.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
       @transactions_2b = @invoice2.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
       @transactions_2c = @invoice2.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
 
-      @ian = (first_name: "Ian", last_name: "R")
+      @ian = Customer.create!(first_name: "Ian", last_name: "R")
       @invoice3 = @ian.invoices.create!(status: "completed")
       @transactions_3a = @invoice3.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
 
       @joseph = Customer.create!(first_name: "Joseph", last_name: "S")
       @invoice4 = @joseph.invoices.create!(status: "completed")
-      @transactions_4a = @invoice1.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
-      @transactions_4b = @invoice1.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
-      @transactions_4c = @invoice1.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
-      @transactions_4d = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
-      @transactions_4e = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+      @transactions_4a = @invoice4.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
+      @transactions_4b = @invoice4.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
+      @transactions_4c = @invoice4.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
+      @transactions_4d = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+      @transactions_4e = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
       visit "/admin"
+      save_and_open_page
 
       expect(page).to have_content("Joseph")
       expect(page).to have_content("Ian")
