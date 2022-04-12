@@ -8,9 +8,9 @@ RSpec.describe 'Admin Merchant Show', type: :feature do
   end
 
   it 'Shows the name attribute for the selected merchant' do
-    visit '/admin/merchants/:id'
+    visit "admin/merchants/#{@merchant_1.id}"
 
-    within("#merchant-#{@merchant_1.id}") do
+    within("#merchant-info") do
       expect(page).to have_content(@merchant_1.name)
       expect(page).to_not have_content(@merchant_2.name)
     end 

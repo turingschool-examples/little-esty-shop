@@ -9,7 +9,7 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
   end
   
   it 'Has all merchants' do
-    visit '/admin/merchants'
+    visit "admin/merchants"
 
     within("#merchants") do
       expect(page).to have_content(@merchant_1.name)
