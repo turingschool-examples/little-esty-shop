@@ -15,6 +15,11 @@ class Merchant < ApplicationRecord
       .group(:id)
       .order('successful_transactions desc')
       .limit(5)
-      # binding.pry
+  end
+
+  def top_five_items
+    customers.joins(invoices: :transactions).select('items.*, (invoice_items.unit_price * invoice_items.quantity) AS inv_total').where("transactions.result LIKE 'success'")
+    .order('total_rev desc')
+    .limit(5)
   end
 end

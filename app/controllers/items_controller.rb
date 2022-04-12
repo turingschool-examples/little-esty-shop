@@ -3,6 +3,11 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
+  def index
+    @merchant = Merchant.find(params[:merchant_id])
+    @items = @merchant.items
+  end
+
   def create
     merchant = Merchant.find(params[:merchant_id])
     item = merchant.items.create(item_params)

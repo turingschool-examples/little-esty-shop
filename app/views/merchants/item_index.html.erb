@@ -1,7 +1,16 @@
 <h1> <%= @merchant.name %>'s items </h1>
-<br/><hr/>
-
+<br/>
 <%= button_to("Create a New Item", "/items/new", method: :get, params: {:merchant_id => @merchant.id}) %>
+<hr/>
+
+<div id="top_five_items">
+  <h2>Top 5 Items</h2>
+  <% @merchant.top_five_items.each do |item| %>
+    <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
+    <h5>Total revenue generated:<strong> $<%= item.total_rev %></strong></h5>
+  <% end %>
+</div>
+
 <% @items.each do |item| %>
   <h3> <%= item.name %> </h3>
   <p> <%= item.description %> </p>
