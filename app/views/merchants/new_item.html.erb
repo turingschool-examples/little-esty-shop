@@ -1,0 +1,8 @@
+<h1> Create a new item for <%= @merchant.name %></h1>
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post do |f| %>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_area :name %>
+  <%= f.text_area :description %>
+  <%= f.number_field :unit_price %>
+  <%= f.submit "Create Item" %>
+<% end %>
