@@ -30,6 +30,6 @@ class Merchant < ApplicationRecord
 
   def current_invoice_items(invoice_id)
     invoice_items.where(invoice_id: invoice_id)
-
+  
   end
 end

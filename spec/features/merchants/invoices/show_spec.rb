@@ -40,22 +40,22 @@ RSpec.describe 'Merchant Invoice Show Page' do
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
       # require "pry"; binding.pry
       expect(page).to have_content("My Items on This Invoice:")
-
-      within "#item-#{item1.id}" do
+      save_and_open_page
+      within "#invoice_item-#{invoice_item_1.id}" do
         expect(page).to have_content("Item Name: #{item1.name}")
-        expect(page).to have_content("Item Name: #{invoice_item_1.quantity}")
+        expect(page).to have_content("Quantity Ordered: #{invoice_item_1.quantity}")
         expect(page).to have_content("Item Price: #{invoice_item_1.unit_price}")
         expect(page).to have_content("Invoice Item Status: #{invoice_item_1.status}")
       end
-      within "#item-#{item2.id}" do
+      within "#invoice_item-#{invoice_item_2.id}" do
         expect(page).to have_content("Item Name: #{item2.name}")
-        expect(page).to have_content("Item Name: #{invoice_item_2.quantity}")
+        expect(page).to have_content("Quantity Ordered: #{invoice_item_2.quantity}")
         expect(page).to have_content("Item Price: #{invoice_item_2.unit_price}")
         expect(page).to have_content("Invoice Item Status: #{invoice_item_2.status}")
       end
-      within "#item-#{item3.id}" do
+      within "#invoice_item-#{invoice_item_3.id}" do
         expect(page).to have_content("Item Name: #{item3.name}")
-        expect(page).to have_content("Item Name: #{invoice_item_3.quantity}")
+        expect(page).to have_content("Quantity Ordered: #{invoice_item_3.quantity}")
         expect(page).to have_content("Item Price: #{invoice_item_3.unit_price}")
         expect(page).to have_content("Invoice Item Status: #{invoice_item_3.status}")
       end
