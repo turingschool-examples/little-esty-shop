@@ -32,6 +32,8 @@ RSpec.describe 'merchant items index page' do
       click_button "Disable/Enable #{item_1.name}"
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
       expect(page).to have_content("unavailable")
+      click_button "Disable/Enable #{item_1.name}"
+      expect(page).to have_content("available")
     end
   end
 end

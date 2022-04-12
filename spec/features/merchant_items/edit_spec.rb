@@ -23,6 +23,12 @@ RSpec.describe 'edit merchant items show page' do
 
       fill_in 'name', with: 'flask'
       fill_in 'unit_price', with: '30'
+
+      click_button "Update Item"
+
+      expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item_1.id}/edit")
+      fill_in 'name', with: 'flask'
+      fill_in 'unit_price', with: '30'
       fill_in 'description', with: 'wine'
       click_button "Update Item"
 
