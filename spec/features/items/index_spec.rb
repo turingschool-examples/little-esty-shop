@@ -39,7 +39,7 @@ describe "Merchants Items index", type: :feature do
     it "links to item show page" do
       visit merchant_items_path(@merchant2)
       within "#merchant_items" do
-        save_and_open_page
+        # save_and_open_page
         #binding.pry
         expect(page).to have_link("#{@item3.name}")
         click_link("#{@item3.name}")
