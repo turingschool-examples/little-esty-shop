@@ -34,6 +34,6 @@ class Merchant < ApplicationRecord
 
   def total_revenue_for_invoice(invoice_id)
     # x = current_invoice_items(invoice_id)
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
   end
 end
