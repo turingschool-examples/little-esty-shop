@@ -1,15 +1,8 @@
 require 'rails_helper'
-# require 'rakes'
-# Rails.application.load_tasks
-# require 'database_cleaner'
 require 'rspec'
 
 describe "Admin dashboard", type: :feature do
-  # before (:each) do
-  #   DatabaseCleaner.strategy = :truncation
-  #   DatabaseCleaner.clean
-  #   Rake::Task['csv_load:all'].invoke
-  # end
+
   describe "when I visit the admin dashboard page" do
     it "displays a header telling me where I am" do
       visit "/admin"
@@ -66,7 +59,6 @@ describe "Admin dashboard", type: :feature do
       @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
       visit "/admin"
-      # save_and_open_page
 
       within('#customers') do
         expect("Joseph").to appear_before("John")
@@ -81,6 +73,32 @@ describe "Admin dashboard", type: :feature do
 
       within("#customer-#{@august.id}") do
         expect(page).to have_content("3")
+      end
+
+      it "displays a list of Incomplete Invoices" do
+        @john = Customer.create!(first_name: "John", last_name: "H")
+        @invoice1 = @john.invoices.create!(status: "completed")
+        @invoice2 = @john.invoices.create!(status: "cancelled")
+        @invoice3 = @john.invoices.create!(status: "in_progress")
+        @invoice4 = @john.invoices.create!(status: "in_progress")
+        @invoice5 = @john.invoices.create!(status: "in_progress")
+
+        visit "/admin"
+
+        within('invoices') do
+          expect(page).to have_content(@invoice3.id)
+          expect(page).to have_content(@invoice4.id)
+          expect(page).to have_content(@invoice5.id)
+          expect(page).to_not have_content(@invoice1.id)
+          expect(page).to_not have_content(@invoice2.id)
+        end
+
+        within("#invoice-#{@invoice3.id}") do
+          click_on "Invoice #{@invoice3.id}"
+        end
+
+        expect(current_path).to eq("/admin/invoices/#{@invoice3.id}")
+
       end
     end
   end
