@@ -1,6 +1,8 @@
 class MerchantInvoicesController < ApplicationController
   def index
     @merchant = Merchant.find(params[:id])
-    # require 'pry'; binding.pry
+  end
+
+  def show
   end
 end
