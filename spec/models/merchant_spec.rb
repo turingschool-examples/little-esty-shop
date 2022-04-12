@@ -92,5 +92,7 @@ RSpec.describe Merchant, type: :model do
       # require "pry"; binding.pry
       expect(merch1.current_invoice_items(invoice1.id)).to eq([invoice_item_1, invoice_item_2, invoice_item_4])
     end
+
+    
   end
 end

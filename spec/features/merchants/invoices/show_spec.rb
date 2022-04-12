@@ -65,8 +65,5 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     end
 
-
-
-
   end
 end
