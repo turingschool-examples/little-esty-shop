@@ -26,6 +26,12 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def update
+    Merchant.update(params[:id], merchant_params)
+    redirect_to("/admin/merchants/#{params[:id]}")
+  end
+
+
 
   private
 
