@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get '/merchants', to: 'merchants#index'
   namespace :merchants do
     get '/:id/items', to: 'items#index'
     get '/:id/items/new', to: 'items#new'
@@ -10,10 +9,10 @@ Rails.application.routes.draw do
     patch '/:id/items/:id', to: 'items#update'
   end
 
-  get '/admin', to: 'admin#index'
+  resources :admin, only: [:index]
 
   namespace :admin do
-    get '/merchants', to: 'merchants#index'
-    get '/invoices', to: 'invoices#index'
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
   end
 end
