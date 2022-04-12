@@ -1,8 +1,10 @@
 <h1>New Merchant Form</h1>
 
-<%= form_with url: "/admin/merchants/", method: :post do |f| %>
-  <%= f.label :name, "Merchant Name: " %>
-  <%= f.text_field :name %>
-  <%= f.hidden_field :enabled, value: false %>
-  <%= f.submit :submit %>
-<% end %>
+<div id="new_merchant_form">
+  <%= form_with url: "/admin/merchants/", method: :post do |f| %>
+    <%= f.label :name, "Merchant Name: " %>
+    <%= f.text_field :name %>
+    <%= f.hidden_field :enabled, value: false %>
+    <%= f.submit :submit %>
+  <% end %>
+</div>
