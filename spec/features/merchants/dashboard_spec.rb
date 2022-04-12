@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe 'Merchant Dashboard Page' do
 
   before do
@@ -82,7 +81,7 @@ RSpec.describe 'Merchant Dashboard Page' do
       invoice_item_2 = create(:invoice_item, status: 2, item_id: item_2.id, invoice_id: invoice.id)
       visit "/merchants/#{merchant_1.id}/dashboard"
       expect(page).to have_content("Items Ready to Ship")
-
+      
       within "#items_ready_to_ship" do
         expect(page).to have_content(item_1.name)
         expect(page).to_not have_content(item_2.name)
@@ -92,10 +91,47 @@ RSpec.describe 'Merchant Dashboard Page' do
         expect(page).to have_content(item_1.name)
         expect(page).to have_link("#{invoice.id}")
       end
-
+      
       click_link "#{invoice.id}"
       expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice.id}")
     end
+    
+    it "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest" do
+      merchant_1 = create(:merchant)
+      
+      item_1 = create(:item, merchant_id: merchant_1.id)
+      item_2 = create(:item, merchant_id: merchant_1.id)
+      item_3 = create(:item, merchant_id: merchant_1.id)
+      customer = create(:customer)
+      date_1 = 	"2015-02-08 09:54:09 UTC".to_datetime
+      date_2 = 	"2020-02-21 09:54:09 UTC".to_datetime
+      date_3 = 	"2018-03-12 09:54:09 UTC".to_datetime
+      invoice_1 = create(:invoice, customer_id: customer.id, status: 1, created_at: date_1)
+      invoice_2 = create(:invoice, customer_id: customer.id, status: 1, created_at: date_2)
+      invoice_3 = create(:invoice, customer_id: customer.id, status: 1, created_at: date_3)
+      invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = create(:invoice_item, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
+      invoice_item_3 = create(:invoice_item, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+      visit "/merchants/#{merchant_1.id}/dashboard"
+      
+      within "#item-#{item_1.id}" do
+        expect(page).to have_content("February 1, 2008")
+      end
+      within "#item-#{item_2.id}" do
+        expect(page).to have_content("February 1, 2008")
+      end
+      within "#item-#{item_3.id}" do
+        expect(page).to have_content("September 1, 2008")
+      end
+      expect(item_1).to appear_before(item_2)
+      expect(item_3).to appear_before(item_2)
+    end
+    #     As a merchant
+    # When I visit my merchant dashboard
+# In the section for "Items Ready to Ship",
+# Next to each Item name I see the date that the invoice was created
+# And I see the date formatted like "Monday, July 18, 2019"
+# And I see that the list is ordered from oldest to newest
   end
 
 end
