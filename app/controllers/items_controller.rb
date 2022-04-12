@@ -1,24 +1,23 @@
 class ItemsController < ApplicationController
-  before_action :find_merchant
-
   def index
-    @items = @merchant.items
+    @merchant = Merchant.find(params[:merchant_id])
   end
-
+  
   def new
-    # @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
-
-    item = Item.create(item_params)
-    
-    redirect_to "/merchants/#{@merchant.id}/items"
-
+    merch_id = params[:id].to_i
+    merchant = Merchant.find(merch_id)
+    item = merchant.items.create!(item_params)
+    if item.save
+    redirect_to "/merchants/#{merchant.id}/items"
+    end
   end
 
     private
       def item_params
-        params.permit(:id, :name, :description, :unit_price, :merchant_id, :status)
+        params.permit(:id, :name, :description, :unit_price, :status, :created_at, :updated_at, :merchant_id)
       end
 end
