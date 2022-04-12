@@ -25,25 +25,13 @@ RSpec.describe 'merchant items index page' do
       item_3 = merchant.items.create!(name: 'Mug', unit_price: 15, description: 'Coffee')
       item_4 = merchant_2.items.create!(name: 'Kettle', unit_price: 20, description: 'Tea')
 
-      within "#items-#{item_1.id}" do
-        visit "/merchants/#{merchant.id}/items"
-        expect(page).to have_button("Disable/Enable #{item_1.name}")
-        # expect(page).to have_content("available")
+      visit "/merchants/#{merchant.id}/items"
+      expect(page).to have_button("Disable/Enable #{item_1.name}")
+      expect(page).to have_content("available")
 
-        click_button "Disable/Enable #{item_1.name}"
-        expect(current_path).to eq("/merchants/#{merchant.id}/items")
-        # expect(page).to have_content("unavailable")
-      end
-
-      within "#items-#{item_2.id}" do
-        visit "/merchants/#{merchant.id}/items"
-        expect(page).to have_button("Disable/Enable #{item_2.name}")
-        expect(page).to have_content("available")
-
-        click_button "Disable/Enable #{item_2.name}"
-        expect(current_path).to eq("/merchants/#{merchant.id}/items")
-        expect(page).to have_content("unavailable")
-      end
+      click_button "Disable/Enable #{item_1.name}"
+      expect(current_path).to eq("/merchants/#{merchant.id}/items")
+      expect(page).to have_content("unavailable")
     end
   end
 end
