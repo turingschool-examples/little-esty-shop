@@ -2,6 +2,13 @@
 
 <h3>Name: <%= @merchant.name %></h3>
 
-<% @merchant_items.each do |item| %>
-  <%= item.name %><br>
-<% end %>
+  <% @merchant_items.each do |item| %>
+
+    <%= item.name %><br>
+      <% if item.status == 1 %>
+        Status: <%= 'available' %>
+      <% elsif item.status == 0 %>
+        Status: <%= 'unavailable' %>
+      <% end %>
+    <%= button_to "Disable/Enable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
+  <% end %>
