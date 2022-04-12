@@ -1,0 +1,5 @@
+<h1><%= @merchant.name %></h1>
+<div id="index-buttons">
+  <%= button_to 'Items Index', merchant_items_path(@merchant), method: :get %>
+  <%= button_to 'Invoices Index', merchant_invoices_path(@merchant), method: :get %>
+</div>
