@@ -12,10 +12,12 @@ RSpec.describe 'the new merchant items form' do
     fill_in 'Description', with: 'Clown noses, big and red'
     fill_in 'Unit Price', with: 1399
     click_button 'Submit'
-
+save_and_open_page
+  expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
     expect(page).to have_content('Big red clown noses')
     expect(page).to have_content('Clown noses, big and red')
     expect(page).to have_content(1399)
+    expect(page).to have_content('Disabled')
 
   end
 end

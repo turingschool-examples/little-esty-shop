@@ -6,15 +6,15 @@ class ItemsController < ApplicationController
   end
 
   def new
-
+    # @merchant = Merchant.find(params[:id])
   end
 
   def create
-    require 'pry'; binding.pry
-    item = Item.new(item_params)
-    if item.save
+
+    item = Item.create(item_params)
+    
     redirect_to "/merchants/#{@merchant.id}/items"
-    end
+
   end
 
     private
