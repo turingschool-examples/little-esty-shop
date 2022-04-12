@@ -16,34 +16,34 @@ RSpec.describe Merchant, type: :model do
         merchant_1 = Merchant.create!(name: "Jim's Rare Guitars")
         item_1 = merchant_1.items.create!(name: "1959 Gibson Les Paul",
                                         description: "Tobacco Burst Finish, Rosewood Fingerboard",
-                                        unit_price: 25000000)
+                                        unit_price: 2500)
         item_2 = merchant_1.items.create!(name: "1954 Fender Stratocaster",
                                         description: "Seafoam Green Finish, Maple Fingerboard",
-                                        unit_price: 10000000)
+                                        unit_price: 1000)
         item_3 = merchant_1.items.create!(name: "1968 Gibson SG",
                                         description: "Cherry Red Finish, Rosewood Fingerboard",
-                                        unit_price: 400000)
+                                        unit_price: 40)
         item_4 = merchant_1.items.create!(name: "1984 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 600000)
+                                        unit_price: 60)
         item_5 = merchant_1.items.create!(name: "1991 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 900000)
+                                        unit_price: 90)
         item_6 = merchant_1.items.create!(name: "1993 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 700000)
+                                        unit_price: 70)
         item_7 = merchant_1.items.create!(name: "2004 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 200000)
+                                        unit_price: 20)
         item_8 = merchant_1.items.create!(name: "1997 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 100000)
+                                        unit_price: 10)
         item_9 = merchant_1.items.create!(name: "1996 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 100000)
+                                        unit_price: 10)
         item_10 = merchant_1.items.create!(name: "1975 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 400000)
+                                        unit_price: 40)
         customer_1 = Customer.create!(first_name: "Guthrie", last_name: "Govan")
         invoice_1 = customer_1.invoices.create!(status: 1)
         invoice_2 = customer_1.invoices.create!(status: 1)
