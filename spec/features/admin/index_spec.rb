@@ -61,13 +61,18 @@ describe "Admin dashboard", type: :feature do
       @transactions_4d = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
       @transactions_4e = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
-      visit "/admin"
-      save_and_open_page
+      @amanda = Customer.create!(first_name: "Amanda", last_name: "A")
+      @invoice5 = @amanda.invoices.create!(status: "completed")
+      @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
-      expect(page).to have_content("Joseph")
-      expect(page).to have_content("Ian")
-      expect(page).to have_content("August")
-      expect(page).to have_content("John")
+      visit "/admin"
+
+      within('#customers') do
+        expect("Joseph").to appear_before("John")
+        expect("John").to appear_before("August")
+        expect("August").to appear_before("Ian")
+        expect(page).to_not have_content("Amanda")
+      end
     end
   end
 end
