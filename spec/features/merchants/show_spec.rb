@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'merchant dashboard page' do
+describe "merchant dashboard page" do
   before do
     @merchant_1 = Merchant.create!(
       name: "Store Store",
@@ -106,11 +106,11 @@ describe 'merchant dashboard page' do
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
 
-  it 'displays the merchants name' do
+  it "displays the merchants name" do
     expect(page).to have_content("Store Store")
   end
 
-  it 'has links to the merchant item index' do
+  it "has links to the merchant item index" do
     click_link("Store Store's Items")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
@@ -119,7 +119,7 @@ describe 'merchant dashboard page' do
     expect(page).not_to have_content("Beer")
   end
 
-  it 'has links to the merchant invoice index' do
+  it "has links to the merchant invoice index" do
     click_link("Invoices")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     # save_and_open_page
@@ -197,5 +197,11 @@ describe 'merchant dashboard page' do
     within "##{cust_3.id}" do
       expect(page).to have_content("Successful Transactions: 4")
     end
+  end
+
+  it "has 'items ready to ship' section" do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    expect(page).to have_content("Items ready to ship")
   end
 end
