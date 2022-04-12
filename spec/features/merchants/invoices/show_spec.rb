@@ -40,7 +40,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
       # require "pry"; binding.pry
       expect(page).to have_content("My Items on This Invoice:")
-      save_and_open_page
+      # save_and_open_page
       within "#invoice_item-#{invoice_item_1.id}" do
         expect(page).to have_content("Item Name: #{item1.name}")
         expect(page).to have_content("Quantity Ordered: #{invoice_item_1.quantity}")
@@ -62,6 +62,32 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
       expect(page).to_not have_content("#{item4.name}")
       expect(page).to_not have_content("#{invoice_item_4.price_to_dollars}")
+
+    end
+
+    it 'I see the total revenue that will be generated from all my items on the invoice' do
+      merch1 = FactoryBot.create(:merchant)
+      merch2 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id)
+      # item4 = FactoryBot.create(:item, unit_price: 45345, merchant_id: merch2.id)
+
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, invoice_id: invoice1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, invoice_id: invoice1.id)
+      # invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item4.id, unit_price: item4.unit_price, quantity: 1, nvoice_id: invoice1.id)
+
+      visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
+
+      expect(page).to have_content("Total Revenue From This Invoice: $4167.88")
+      within "#total_revenue" do
+        expect(page).to have_content("Revenue: ")
+      end
+
+
 
     end
 
