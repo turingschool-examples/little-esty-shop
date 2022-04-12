@@ -22,7 +22,7 @@ RSpec.describe Invoice, type: :model do
       invoice1 = FactoryBot.create(:invoice, created_at: date, customer_id: cust1.id)
       invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id)
 
-      expect(invoice1.formatted_created_at).to eq("Saturday, Febuary 8, 2020")
+      expect(invoice1.formatted_created_at).to eq("Saturday, February 8, 2020")
     end
   end
 end
