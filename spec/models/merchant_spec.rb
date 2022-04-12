@@ -93,6 +93,19 @@ RSpec.describe Merchant, type: :model do
       expect(merch1.current_invoice_items(invoice1.id)).to eq([invoice_item_1, invoice_item_2, invoice_item_4])
     end
 
-    
+    it 'returns the total revenue for a merchant for a given invoice' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id)
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, invoice_id: invoice1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, invoice_id: invoice1.id)
+      expect(merch1.total_revenue_for_invoice(invoice1.id)).to eq(4167.88)
+    end
+
+
   end
 end
