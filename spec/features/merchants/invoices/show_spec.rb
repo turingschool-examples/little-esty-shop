@@ -20,8 +20,8 @@ RSpec.describe 'Merchant Invoice Show Page' do
       save_and_open_page
       expect(page).to have_content("Invoice ID: #{@invoice1.id}")
       expect(page).to have_content("Status: #{@invoice1.status}")
-      expect(page).to have_content("Created At: #{@invoice1.created_at}")
-      expect(page).to have_content("Customer Name: #{@cust1.first_name} #{@cust1.last_name}")
+      expect(page).to have_content("Created At: #{@invoice1.formatted_created_at}")
+      expect(page).to have_content("Customer Name: #{@invoice1.customer_name}")
 
 
     end
