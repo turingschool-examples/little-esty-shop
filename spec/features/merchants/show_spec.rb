@@ -27,7 +27,6 @@ describe "merchant dashboard page" do
       created_at: Date.current,
       updated_at: Date.current
     )
-
     @beer = @merchant_2.items.create!(
       name: "Beer",
       description: "Happiness <3",
@@ -92,7 +91,6 @@ describe "merchant dashboard page" do
       created_at: Date.current,
       updated_at: Date.current
     )
-
     @invoice_item_4 = InvoiceItem.create!(
       item_id: @beer.id,
       invoice_id: @invoice_3.id,
@@ -126,6 +124,23 @@ describe "merchant dashboard page" do
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice ##{@invoice_2.id}")
     expect(page).not_to have_content("Invoice ##{@invoice_3.id}")
+  end
+
+  it "has 'items ready to ship' section" do
+    @basketball = @merchant_1.items.create!(
+      name: "Basketball",
+      description: "A ball of pure basket.",
+      unit_price: 35000,
+      created_at: Date.current,
+      updated_at: Date.current
+    )
+
+    expect(page).to have_content("Items ready to ship")
+    within ".items_ready_to_ship" do
+      expect(page).to have_content("Soccer Ball")
+      expect(page).to have_content("Cup")
+      expect(page).to_not have_content("Basketball")
+    end
   end
 
   it "finds shows top_5_customers names and displays the number of successful transactions for each" do
@@ -197,11 +212,5 @@ describe "merchant dashboard page" do
     within "##{cust_3.id}" do
       expect(page).to have_content("Successful Transactions: 4")
     end
-  end
-
-  it "has 'items ready to ship' section" do
-    visit "/merchants/#{@merchant_1.id}/dashboard"
-
-    expect(page).to have_content("Items ready to ship")
   end
 end
