@@ -44,5 +44,16 @@ describe "Merchants Items update", type: :feature do
 
     expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}")
     expect(page).to have_content("Different Item")
+    expect(page).to have_content("Item updated successfully")
+  end
+  it 'displays error message' do
+    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    click_link("Update #{@item1.name}")
+
+    fill_in 'Name', with: ''
+    click_button 'Save'
+
+    expect(page).to have_content("Error: Name can't be blank")
+    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
   end
 end
