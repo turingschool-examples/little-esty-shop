@@ -83,7 +83,7 @@ describe "Admin dashboard", type: :feature do
       @invoice3 = @john.invoices.create!(status: "in progress")
       @invoice4 = @john.invoices.create!(status: "in progress")
       @invoice5 = @john.invoices.create!(status: "in progress")
-      
+
       visit "/admin"
 
       within('#invoices') do
@@ -100,6 +100,41 @@ describe "Admin dashboard", type: :feature do
 
       expect(current_path).to eq("/admin/invoices/#{@invoice3.id}")
 
+    end
+
+    it "display the created at next to the invoice" do
+      date = "2020-02-08 09:54:09 UTC".to_datetime
+      @john = Customer.create!(first_name: "John", last_name: "H")
+      @invoice1 = @john.invoices.create!(status: "completed")
+      @invoice2 = @john.invoices.create!(status: "cancelled")
+      @invoice3 = @john.invoices.create!(status: "in progress", created_at: date)
+      @invoice4 = @john.invoices.create!(status: "in progress")
+      @invoice5 = @john.invoices.create!(status: "in progress")
+
+      visit "/admin"
+
+      within("#invoice-#{@invoice3.id}") do
+        expect(page).to have_content("Saturday, February 8, 2020")
+      end
+    end
+
+    it "orders the invoice from oldest to newest" do
+      date1 = "2020-02-08 09:54:09 UTC".to_datetime
+      date2 = "2020-01-08 09:54:09 UTC".to_datetime
+      date3 = "2020-04-08 09:54:09 UTC".to_datetime
+      @john = Customer.create!(first_name: "John", last_name: "H")
+      @invoice1 = @john.invoices.create!(status: "completed")
+      @invoice2 = @john.invoices.create!(status: "cancelled")
+      @invoice3 = @john.invoices.create!(status: "in progress", created_at: date1)
+      @invoice4 = @john.invoices.create!(status: "in progress", created_at: date2)
+      @invoice5 = @john.invoices.create!(status: "in progress", created_at: date3)
+
+      visit "/admin"
+
+      within("#invoices") do
+        expect("Invoice #{@invoice4.id}").to appear_before("Invoice #{@invoice3.id}")
+        expect("Invoice #{@invoice3.id}").to appear_before("Invoice #{@invoice5.id}")
+      end
     end
   end
 end

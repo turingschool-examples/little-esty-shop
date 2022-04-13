@@ -13,5 +13,11 @@ class Invoice < ApplicationRecord
     # joins(:invoice_items)
     # .where.not(status: 1)
     where(status: 0)
+    .order(:created_at)
   end
+
+  def format_time
+    created_at.strftime('%A, %B %e, %Y')
+  end
+
 end
