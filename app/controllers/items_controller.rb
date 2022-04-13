@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
   end
-  
+
   def new
     @merchant = Merchant.find(params[:merchant_id])
   end
@@ -14,6 +14,11 @@ class ItemsController < ApplicationController
     if item.save
     redirect_to "/merchants/#{merchant.id}/items"
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
     private

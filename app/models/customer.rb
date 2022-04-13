@@ -10,4 +10,13 @@ class Customer < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def self.top_five_customers
+    joins(invoices: :transactions)
+    .where(transactions: { result: 0})
+    .select('customers.*, count(transactions.*) as total_transactions')
+    .order(total_transactions: :desc)
+    .group('customers.id')
+    .limit(5)
+  end
 end

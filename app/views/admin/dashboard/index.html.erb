@@ -6,7 +6,7 @@
 <section id="top_five_customers">
   <h3>Top Five Customers</h3>
   <ol>
-    <% @merchant.top_five_customers.each do |customer| %>
+    <% @customers.top_five_customers.each do |customer| %>
     <li>
       Customer: <%= customer.full_name %> - Total Transactions: <%= customer.total_transactions %>
     </li>

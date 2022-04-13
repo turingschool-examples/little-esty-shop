@@ -3,14 +3,13 @@ require "rails_helper"
 RSpec.describe 'admin dashboad spec' do
 
   it 'has a header incidacting that i am on the admin dashboard' do
-    merch1 = create(:merchant)
-    visit "/admin/merchants/#{merch1.id}/dashboard"
-  expect(page).to have_content('Admin Dashboard')
-end
+    visit "/admin"
+    expect(page).to have_content('Admin Dashboard')
+  end
 
   it 'has a link to the admin/merchant and admin/invoices indecise' do
     merch1 = create(:merchant)
-    visit "/admin/merchants/#{merch1.id}/dashboard"
+    visit "/admin"
     expect(page). to have_link('Merchants (administrator)')
     expect(page). to have_link('Invoices (administrator)')
   end
@@ -50,7 +49,7 @@ end
       invoice_5 = create(:invoice, customer_id: customer_5.id, created_at: "2012-03-25 09:54:09 UTC")
       invoice_item_5 = create(:invoice_item, item_id: item.id, invoice_id: invoice_5.id, status: 2)
       transactions_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: invoice_5.id, result: 0)
-        visit "/admin/merchants/#{merchant_1.id}/dashboard"
+        visit "/admin"
       expect(merchant_1.top_five_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
 
       within("#top_five_customers") do
