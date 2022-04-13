@@ -3,13 +3,13 @@
 
 <%= link_to "Merchant's Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %>
 
-<h4><%= @merchant.name %>'s Statistics:</h4>
+<h2><%= @merchant.name %>'s Statistics:</h2>
 
 <div id="statistics">
-  <p>Top 5 Customers: </p><br>
+  <h3>Top 5 Customers: </h3>
   <% @merchant.top_five_customers.each do |customer| %>
     <div id="customer-<%= customer.id %>">
-      <p>Name: <%= customer.first_name %> <%= customer.last_name %></p>
+      <h4>Name: <%= customer.first_name %> <%= customer.last_name %></h4>
       <p>Successful Transactions: <%= customer.transactions.count %></p>
     </div>
   <% end %><br>
