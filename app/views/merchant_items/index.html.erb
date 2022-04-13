@@ -1,4 +1,7 @@
 <h1> <%= @merchant.name %>'s Items  </h1>
+
+<%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
+<hr>
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
 

@@ -27,20 +27,22 @@ RSpec.describe 'Merchant items new page' do
                           unit_price:1000
                          )
 
-    visit new_merchant_item_path(@starw)
   end
 
-  it 'has a form for a new item' do
+  it 'has a form for a new item and creates new item' do
+    visit new_merchant_item_path(@starw)
 
-      fill_in(:name, with: "Darth Vader")
-      fill_in(:description, with: "Darth Vader 16 inch action figure")
-      fill_in(:unit_price, with: 1000)
+    fill_in(:name, with: "Darth Vader")
+    fill_in(:description, with: "Darth Vader 16 inch action figure")
+    fill_in(:unit_price, with: 1000)
 
-      click_button('Create Item')
+    click_button('Create Item')
 
-      expect(current_path).to eq(merchant_items_path(@starw))
+    expect(current_path).to eq(merchant_items_path(@starw))
+
+    within "#disabled-#{@starw.id}" do
+      expect(page).to have_content("Disabled Items")
       expect(page).to have_content("Darth Vader")
-      expect(page).to have_content("Darth Vader 16 inch action figure")
-      expect(page).to have_content("$10")
+    end
   end
 end
