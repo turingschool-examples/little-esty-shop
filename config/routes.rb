@@ -6,14 +6,15 @@ Rails.application.routes.draw do
     get '/:id/items/:id', to: 'items#show'
     get '/:id/items/:id/edit', to: 'items#edit'
     patch '/:id/items/:id', to: 'items#update'
-    
+
     get '/:id/dashboard', to: 'merchants#dashboard'
   end
 
   resources :admin, only: [:index]
 
+
   namespace :admin do
     resources :merchants, only: [:index]
-    resources :invoices, only: [:index]
+    resources :invoices, only: [:index, :show]
   end
 end
