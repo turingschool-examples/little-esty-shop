@@ -55,5 +55,13 @@ RSpec.describe 'Merchant items index' do
         expect(page).to_not have_content(@item3.name)
       end
     end
+
+    it 'has and links to create a new item' do
+       expect(page).to have_button("Create New Item")
+
+       click_button("Create New Item")
+       expect(current_path).to eq(new_merchant_item_path(@starw))
+       
+    end
   end
 end
