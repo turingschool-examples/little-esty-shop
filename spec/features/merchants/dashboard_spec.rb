@@ -71,7 +71,6 @@ RSpec.describe 'merchant dashboard' do
   end
 
   context 'dashboard statistics' do
-
     it 'displays the top 5 customers based on transactions' do
       within '#statistics' do
         expect("Joey Ondricka").to appear_before("Osinski Cecelia")
