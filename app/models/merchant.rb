@@ -21,7 +21,7 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship
-    invoice_items.joins(:invoice).where.not(status: 2).order(:created_at)
+    invoice_items.joins(:invoice).where.not(status: 2).order('invoices.created_at')
   end
 
 
