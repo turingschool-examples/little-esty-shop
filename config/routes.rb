@@ -2,8 +2,13 @@ Rails.application.routes.draw do
 
   resources :merchants do
     resources :dashboard, controller: 'merchant_dashboard', only: [:index]
+<<<<<<< HEAD
     resources :items, controller: 'merchant_items' 
     resources :invoices, controller: 'merchant_invoices', only: [:index]
+=======
+    resources :items, controller: 'merchant_items'
+    resources :invoices, controller: 'merchant_invoices', only: [:index, :show]
+>>>>>>> b55c654 (feat: add crud for merchant invoices index)
   end
 
   get '/admin', to: 'admin#index'
