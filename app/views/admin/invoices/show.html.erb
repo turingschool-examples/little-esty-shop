@@ -1,0 +1,8 @@
+<h1>Invoice Info</h1>
+
+<div id="invoice-info">
+  <p><strong>Invoice ID: <%= @invoice.id %></strong></p>
+  <p><strong>Invoice Status: <%= @invoice.status %></strong></p>
+  <p><strong>Created At: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></strong></p>
+  <p><strong>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></strong></p>
+</div>

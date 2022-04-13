@@ -1,22 +1,21 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Admin Merchant Show', type: :feature do
-
+RSpec.describe "Admin Merchant Show", type: :feature do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
   end
 
-  it 'Shows the name attribute for the selected merchant' do
+  it "Shows the name attribute for the selected merchant" do
     visit "admin/merchants/#{@merchant_1.id}"
 
     within("#merchant-info") do
       expect(page).to have_content(@merchant_1.name)
       expect(page).to_not have_content(@merchant_2.name)
-    end 
+    end
   end
 
-  it 'contains a link to edit the merchant' do
+  it "contains a link to edit the merchant" do
     visit "admin/merchants/#{@merchant_2.id}"
 
     within("#update-merchant") do
@@ -27,5 +26,4 @@ RSpec.describe 'Admin Merchant Show', type: :feature do
 
     expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}/edit")
   end
-
 end

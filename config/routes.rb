@@ -13,6 +13,6 @@ Rails.application.routes.draw do
     get "/", to: "admin#dashboard"
     patch "/merchants/:id", to: "merchants#switch"
     resources :merchants, only: [:index, :show, :new, :create, :update, :edit]
-    resources :invoices, only: [:index]
+    resources :invoices, only: [:index, :show]
   end
 end

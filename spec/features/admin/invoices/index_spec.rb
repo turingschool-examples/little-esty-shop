@@ -33,7 +33,7 @@ RSpec.describe "Admin Invoices Index", type: :feature do
     end
   end
 
-  xit "Links from index to show page for each invoice" do
+  it "Links from index to show page for each invoice" do
     visit "/admin/invoices"
 
     within("#invoices") do
