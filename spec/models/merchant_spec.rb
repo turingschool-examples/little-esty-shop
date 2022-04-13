@@ -75,9 +75,5 @@ RSpec.describe Merchant do
     it '.top_five_customers returns best customers based on transactions' do
       expect(@merchant.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
     end
-
-    it '.customers_ordered_by_transactions should order customers by number of successful transactions' do
-      expect(@merchant.customers_ordered_by_transactions).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5, @customer_6])
-    end
   end
 end
