@@ -3,3 +3,19 @@
   <%= button_to 'Items Index', merchant_items_path(@merchant), method: :get %>
   <%= button_to 'Invoices Index', merchant_invoices_path(@merchant), method: :get %>
 </div>
+<div id="unshipped-invoice-items">
+  <h2>Items Ready to Ship</h2>
+  <table>
+    <tr>
+      <th>Item Name</th>
+      <th>Invoice Number</th>
+    </tr>
+    <% @merchant.unshipped_invoice_items.each do |invoice_item| %>
+      <tr>
+        <div id="unshipped_invoice_item_<%= invoice_item.invoice_item_id %>">
+          <td> <%= invoice_item.name %> </td><td> <a href="/invoices/<%= invoice_item.invoice_id %>/"><%=invoice_item.invoice_id%></a> </td>
+        </div>
+      </tr>
+      <% end %>
+  </table>
+</div>
