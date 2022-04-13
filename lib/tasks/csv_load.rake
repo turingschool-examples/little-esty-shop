@@ -1,11 +1,12 @@
 require 'csv'
+require 'pry'
 
 namespace :csv_load do
   task :customers => :environment do
    file = "db/data/customers.csv"
     CSV.foreach(file, headers: true) do |row|
       customer_hash = row.to_hash
-      customer = Customer.where(id: customer_hash["id"])
+            customer = Customer.where(id: customer_hash["id"])
       if customer.count == 1
         customer.first.update_attributes(customer_hash)
       else
@@ -20,6 +21,13 @@ namespace :csv_load do
    file = "db/data/invoices.csv"
     CSV.foreach(file, headers: true) do |row|
       invoice_hash = row.to_hash
+      if invoice_hash["status"] == "in progress"
+        invoice_hash["status"] = 0
+      elsif invoice_hash["status"] == "completed"
+        invoice_hash["status"] = 1
+      elsif invoice_hash["status"] == "cancelled"
+        invoice_hash["status"] = 2
+      end
       invoice = Invoice.where(id: invoice_hash["id"])
       if invoice.count == 1
         invoice.first.update_attributes(invoice_hash)
@@ -76,6 +84,13 @@ namespace :csv_load do
     file = "db/data/invoice_items.csv"
     CSV.foreach(file, headers: true) do |row|
       invoice_items_hash = row.to_hash
+      if invoice_items_hash["status"] == "pending"
+        invoice_items_hash["status"] = 0
+      elsif invoice_items_hash["status"] == "packaged"
+        invoice_items_hash["status"] = 1
+      elsif invoice_items_hash["status"] == "shipped"
+        invoice_items_hash["status"] = 2
+      end
       invoice_items = InvoiceItem.where(id: invoice_items_hash["id"])
       if invoice_items.count == 1
         invoice_items.first.update_attributes(invoice_items_hash)
