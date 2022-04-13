@@ -13,4 +13,10 @@ class Invoice < ApplicationRecord
   def formatted_created_at
     created_at.strftime('%A, %B %e, %Y')
   end
+
+  def customer_name
+    first_name = "#{customer.first_name}"
+    last_name ="#{customer.last_name}"
+    "#{first_name} #{last_name}"
+  end
 end

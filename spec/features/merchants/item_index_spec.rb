@@ -23,7 +23,7 @@ RSpec.describe 'Merchant Item Index Page' do
     it 'every item name is a link to its show page' do
       click_link(@item1.name)
       expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item1.id}")
-          save_and_open_page
+          
     end
 
   end

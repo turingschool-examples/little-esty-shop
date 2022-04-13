@@ -23,4 +23,19 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     items.joins(:invoice_items).where.not(invoice_items: {status: 2})
   end
+
+
+  def unique_invoices
+    invoices.uniq
+  end
+
+
+  def current_invoice_items(invoice_id)
+    invoice_items.where(invoice_id: invoice_id)
+  end
+
+  def total_revenue_for_invoice(invoice_id)
+    # x = current_invoice_items(invoice_id)
+    # require "pry"; binding.pry
+  end
 end
