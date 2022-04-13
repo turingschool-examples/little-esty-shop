@@ -17,19 +17,21 @@ RSpec.describe 'Item edit page' do
     end 
   
     it "has a form to update the item " do
-    expect(page).to have_content("Edit Cup")
-
-    expect(find('form')).to have_content('Name')
-    expect(find('form')).to have_content('Description')
-    expect(find('form')).to have_content('Unit price')
+        expect(page).to have_content("Edit Cup")
+        expect(find('form')).to have_content('Name')
+        expect(find('form')).to have_content('Description')
+        expect(find('form')).to have_content('Unit price')
     end 
 
-    it "can submit the filled in form" do
+    it "can submit the filled in form and redirect with a flash message" do
+        fill_in 'Name', with: 'Mug'
+        fill_in 'Description', with: 'Holds Coffee'
+        fill_in 'Unit price', with: 800
 
-    fill_in 'Name', with: 'Mug'
-    fill_in 'Description', with: 'Holds Coffee'
-    fill_in 'Unit price', with: 800
-    
+        click_on "Update"
+        expect(current_path).to eq("/items/#{@cup.id}")
+        expect(page).to have_content("Mug")
+        expect(page).to have_content("Mug has been updated")
     end 
 
  
