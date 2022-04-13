@@ -58,8 +58,7 @@ describe "Admin dashboard", type: :feature do
       @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
       visit "/admin"
-      # save_and_open_page
-
+     
       within('#customers') do
         expect("Joseph").to appear_before("John")
         expect("John").to appear_before("August")
