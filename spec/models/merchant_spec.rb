@@ -51,8 +51,6 @@ RSpec.describe Merchant do
     @invoice_6 = @customer_6.invoices.create!(status: 'completed')
     @item_1.invoice_items.create!(invoice_id: @invoice_6.id, quantity: 3, unit_price: 4, status: 2)
     @invoice_6.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
-
-    visit "/merchants/#{@merchant.id}/dashboard"
   end
 
   context 'readable attributes' do
@@ -67,11 +65,19 @@ RSpec.describe Merchant do
 
   context 'relationships' do
     it { should have_many :items }
+    it { should have_many(:invoice_items).through(:items)}
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices) }
+    it { should have_many(:customers).through(:invoices) }
   end
 
   context 'instance methods' do
     it '.top_five_customers returns best customers based on transactions' do
       expect(@merchant.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
+    end
+
+    it '.customers_ordered_by_transactions should order customers by number of successful transactions' do
+      expect(@merchant.customers_ordered_by_transactions).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5, @customer_6])
     end
   end
 end

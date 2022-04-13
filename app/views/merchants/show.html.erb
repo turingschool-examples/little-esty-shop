@@ -2,3 +2,15 @@
 <%= link_to "Merchant's Items", "/merchants/#{@merchant.id}/items", method: :get %>
 
 <%= link_to "Merchant's Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %>
+
+<h4><%= @merchant.name %>'s Statistics:</h4>
+
+<div id="statistics">
+  <p>Top 5 Customers: </p><br>
+  <% @merchant.top_five_customers.each do |customer| %>
+    <div id="customer-<%= customer.id %>">
+      <p>Name: <%= customer.first_name %> <%= customer.last_name %></p>
+      <p>Successful Transactions: <%= customer.transactions.count %></p>
+    </div>
+  <% end %><br>
+</div>

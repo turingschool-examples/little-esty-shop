@@ -83,23 +83,23 @@ RSpec.describe 'merchant dashboard' do
 
     it 'displays the number of successful transactions next to customer' do
       within "#customer-#{@customer_1.id}" do
-        expect(page).to have_content('Succesful Transactions: 6')
+        expect(page).to have_content('Successful Transactions: 6')
       end
 
       within "#customer-#{@customer_2.id}" do
-        expect(page).to have_content('Succesful Transactions: 5')
+        expect(page).to have_content('Successful Transactions: 5')
       end
 
       within "#customer-#{@customer_3.id}" do
-        expect(page).to have_content('Succesful Transactions: 4')
+        expect(page).to have_content('Successful Transactions: 4')
       end
 
       within "#customer-#{@customer_4.id}" do
-        expect(page).to have_content('Succesful Transactions: 3')
+        expect(page).to have_content('Successful Transactions: 3')
       end
 
       within "#customer-#{@customer_5.id}" do
-        expect(page).to have_content('Succesful Transactions: 2')
+        expect(page).to have_content('Successful Transactions: 2')
       end
     end
   end
