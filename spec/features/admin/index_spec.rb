@@ -37,24 +37,24 @@ describe "Admin dashboard", type: :feature do
       @deviant = Merchant.create!(name: "Deviant Queer")
 
       @john = Customer.create!(first_name: "John", last_name: "H")
-      @invoice1 = @john.invoices.create!(status: "completed")
+      @invoice1 = @john.invoices.create!(status: "Completed")
       @transactions_1a = @invoice1.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
       @transactions_1b = @invoice1.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
       @transactions_1c = @invoice1.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
       @transactions_1d = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
       @august = Customer.create!(first_name: "August", last_name: "R")
-      @invoice2 = @august.invoices.create!(status: "completed")
+      @invoice2 = @august.invoices.create!(status: "Completed")
       @transactions_2a = @invoice2.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
       @transactions_2b = @invoice2.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
       @transactions_2c = @invoice2.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
 
       @ian = Customer.create!(first_name: "Ian", last_name: "R")
-      @invoice3 = @ian.invoices.create!(status: "completed")
+      @invoice3 = @ian.invoices.create!(status: "Completed")
       @transactions_3a = @invoice3.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
 
       @joseph = Customer.create!(first_name: "Joseph", last_name: "S")
-      @invoice4 = @joseph.invoices.create!(status: "completed")
+      @invoice4 = @joseph.invoices.create!(status: "Completed")
       @transactions_4a = @invoice4.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
       @transactions_4b = @invoice4.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
       @transactions_4c = @invoice4.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
@@ -62,7 +62,7 @@ describe "Admin dashboard", type: :feature do
       @transactions_4e = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
       @amanda = Customer.create!(first_name: "Amanda", last_name: "A")
-      @invoice5 = @amanda.invoices.create!(status: "completed")
+      @invoice5 = @amanda.invoices.create!(status: "Completed")
       @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
       visit "/admin"

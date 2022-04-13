@@ -7,4 +7,6 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item
   belongs_to :invoice
+
+  enum status: {"In Progress" => 0, "Completed" => 1, "Cancelled" => 2}
 end
