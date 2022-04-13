@@ -20,8 +20,8 @@ class Merchant < ApplicationRecord
               .limit(5)
   end
 
-  def items_ready_to_ship
-    items.joins(:invoice_items).where.not(invoice_items: {status: 2})
+  def ready_to_ship
+    invoice_items.joins(:invoice).where.not(status: 2).order(:created_at)
   end
 
 
