@@ -65,7 +65,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     end
 
-    it 'I see the total revenue that will be generated from all my items on the invoice' do
+    xit 'I see the total revenue that will be generated from all my items on the invoice' do
       merch1 = FactoryBot.create(:merchant)
       # merch2 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
