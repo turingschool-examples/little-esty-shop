@@ -2,7 +2,7 @@
   <h1>Top 5 Most Popular Items:</h1>
   <% @merchant.most_popular_items.each do |item| %>
   <div id="popular_item-<%= item.id %>">
-    <h3><%= item.name %></h3>
+    <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
     <p>Total Revenue: $<%= "%.2f" % (item.total_revenue.to_f/100).truncate(2) %></p>
   </div>
   <% end %>

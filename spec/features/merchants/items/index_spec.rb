@@ -266,6 +266,12 @@ RSpec.describe 'merchant items index page' do
         within "#popular_item-#{item_6.id}" do
           expect(page).to have_content("Total Revenue: $119000.00")
         end
+
+        within "#popular_item-#{item_3.id}" do
+          click_link "#{item_3.name}"
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_3.id}")
       end
     end
   end
