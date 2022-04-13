@@ -10,5 +10,7 @@ class Invoice < ApplicationRecord
   def self.incomplete
     joins(:invoice_items)
     .where('invoice_items.status != ?', '2')
+    .distinct
+    .order(:id)
   end
 end
