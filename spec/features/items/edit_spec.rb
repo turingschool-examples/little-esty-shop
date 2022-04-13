@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'Item show page' do
+RSpec.describe 'Item edit page' do
     before :each do 
         @merchant_1 = Merchant.create!(
             name: "Store Store",
@@ -13,14 +13,26 @@ RSpec.describe 'Item show page' do
             created_at: Date.current,
             updated_at: Date.current
             )
-        visit "/merchants/#{@merchant_1.id}/items/#{@cup.id}"
+        visit "/items/#{@cup.id}/edit"
     end 
   
- 
+    it "has a form to update the item " do
+    expect(page).to have_content("Edit Cup")
 
-    it 'item show page has edit button' do
-        expect(page).to have_link('Edit')
-    end
+    expect(find('form')).to have_content('Name')
+    expect(find('form')).to have_content('Description')
+    expect(find('form')).to have_content('Unit price')
+    end 
+
+    it "can submit the filled in form" do
+
+    fill_in 'Name', with: 'Mug'
+    fill_in 'Description', with: 'Holds Coffee'
+    fill_in 'Unit price', with: 800
+    
+    end 
+
+ 
 
   
 end 

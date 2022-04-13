@@ -14,7 +14,7 @@ RSpec.describe 'Item show page' do
             created_at: Date.current,
             updated_at: Date.current
             )
-        end 
+    end 
         
     it 'has a list of the items attributes' do
         visit "/merchants/#{@merchant_1.id}/items/#{@cup.id}"
@@ -29,7 +29,7 @@ RSpec.describe 'Item show page' do
         expect(page).to have_link('Edit')
         click_on ('Edit')
         expect(current_path).to eq("/items/#{cup.id}/edit")
-        
+
     end
 
 end 
