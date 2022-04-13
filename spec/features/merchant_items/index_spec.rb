@@ -43,7 +43,6 @@ RSpec.describe 'merchant items index page' do
       item_4 = merchant_2.items.create!(name: 'Kettle', unit_price: 20, description: 'Tea')
       visit "/merchants/#{merchant.id}/items"
       click_button "Disable #{item_3.name}"
-      save_and_open_page
       expect("#{item_1.name}").to appear_before("#{item_3.name}")
       expect("#{item_2.name}").to appear_before("#{item_3.name}")
       click_button "Disable #{item_1.name}"
