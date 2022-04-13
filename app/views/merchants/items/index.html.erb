@@ -1,3 +1,13 @@
+<div id="most_popular_items">
+  <h1>Top 5 Most Popular Items:</h1>
+  <% @merchant.most_popular_items.each do |item| %>
+  <div id="popular_item-<%= item.id %>">
+    <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
+    <p>Total Revenue: $<%= "%.2f" % (item.total_revenue.to_f/100).truncate(2) %></p>
+  </div>
+  <% end %>
+</div>
+
 <div id="enabled_items">
   <h1>Enabled Items</h1>
   <% @merchant.items.enabled.each do |item| %>
