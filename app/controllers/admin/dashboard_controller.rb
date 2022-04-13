@@ -1,5 +1,6 @@
 class Admin::DashboardController < ApplicationController
     def index
-    @merchant = Merchant.find(params[:id])
+      @invoices = Invoice.all
+      @customers = Customer.all
     end
 end
