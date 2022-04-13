@@ -1,3 +1,13 @@
 <h1><%= @merchant.name %></h1>
 <%= link_to "This Merchant's Items", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "This Merchant's Invoices", "/merchants/#{@merchant.id}/invoices" %>
+<br>
+<h3> Top 5 Customers</h3>
+  <ol type="1">
+    <%  @top_five.each do |customer| %>
+    <li>
+        <%= customer.first_name %>
+        <%= customer.last_name %>
+    </li>
+    <% end %>
+  </ol>

@@ -5,7 +5,6 @@ RSpec.describe 'merchant dashboard page' do
 
         merchant_1 = Merchant.create!(name: "Geddy's Skydiving Emporium")
         visit "/merchants/#{merchant_1.id}/dashboard"
-
         expect(page).to have_content(merchant_1.name)
   end
 
@@ -85,15 +84,11 @@ RSpec.describe 'merchant dashboard page' do
 
     visit "/merchants/#{merchant.id}/dashboard"
 
-    expect(page).to have_content("1. Bob")
-    expect(page).to have_content("2. Nate")
-    expect(page).to have_content("3. Barty")
-    expect(page).to have_content("4. Zeke")
-    expect(page).to have_content("5. Flipper")
-end
 
-
+    expect(page).to have_content("Bob Benson")
+    expect(page).to have_content("Barty Dasher")
+    expect(page).to have_content("Nate Chaffee")
+    expect(page).to have_content("Zeke Bristol")
+    expect(page).to have_content("Flipper McDaniel")
   end
-
-
 end
