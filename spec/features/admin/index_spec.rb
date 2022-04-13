@@ -1,15 +1,7 @@
 require 'rails_helper'
-# require 'rakes'
-# Rails.application.load_tasks
-# require 'database_cleaner'
 require 'rspec'
 
 describe "Admin dashboard", type: :feature do
-  # before (:each) do
-  #   DatabaseCleaner.strategy = :truncation
-  #   DatabaseCleaner.clean
-  #   Rake::Task['csv_load:all'].invoke
-  # end
   describe "when I visit the admin dashboard page" do
     it "displays a header telling me where I am" do
       visit "/admin"
@@ -66,6 +58,17 @@ describe "Admin dashboard", type: :feature do
       @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
       visit "/admin"
+     
+      within('#customers') do
+        expect("Joseph").to appear_before("John")
+        expect("John").to appear_before("August")
+        expect("August").to appear_before("Ian")
+        expect(page).to_not have_content("Amanda")
+      end
+
+      within("#customer-#{@joseph.id}") do
+        expect(page).to have_content("5")
+      end
 
       within('#customers') do
         expect("Joseph").to appear_before("John")
