@@ -4,6 +4,8 @@
   <%= button_to 'Invoices Index', merchant_invoices_path(@merchant), method: :get %>
 </div>
 
+<hr>
+<h2>Top Five Customers</h2>
 <div id="top-customers">
   <% @customers.each do |customer| %>
     <strong><p><%= customer.first_name %></p></strong>

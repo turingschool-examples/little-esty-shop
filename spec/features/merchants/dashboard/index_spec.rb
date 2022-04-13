@@ -5,24 +5,24 @@ RSpec.describe 'merchant dashboard' do
     @merchant1 = Merchant.create!(name: "Pabu")
 
     @customer1 = Customer.create!(first_name: "John", last_name: "H")
-    @invoice1 = @customer1.invoices.create!(status: "Completed")
+    @invoice1 = @customer1.invoices.create!(status: "completed")
     @transactions_1a = @invoice1.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
     @transactions_1b = @invoice1.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
     @transactions_1c = @invoice1.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
     @transactions_1d = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
     @customer2 = Customer.create!(first_name: "Joseph", last_name: "D")
-    @invoice2 = @customer2.invoices.create!(status: "Completed")
+    @invoice2 = @customer2.invoices.create!(status: "completed")
     @transactions_2a = @invoice2.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
     @transactions_2b = @invoice2.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
     @transactions_2c = @invoice2.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
 
     @customer3 = Customer.create!(first_name: "Ian", last_name: "R")
-    @invoice3 = @customer3.invoices.create!(status: "Completed")
+    @invoice3 = @customer3.invoices.create!(status: "completed")
     @transactions_3a = @invoice3.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
 
     @customer4 = Customer.create!(first_name: "Loki", last_name: "R")
-    @invoice4 = @customer4.invoices.create!(status: "Completed")
+    @invoice4 = @customer4.invoices.create!(status: "completed")
     @transactions_4a = @invoice4.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
     @transactions_4b = @invoice4.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
     @transactions_4c = @invoice4.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
@@ -30,7 +30,7 @@ RSpec.describe 'merchant dashboard' do
     @transactions_4e = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
 
     @customer5 = Customer.create!(first_name: "Amanda", last_name: "A")
-    @invoice5 = @customer5.invoices.create!(status: "Completed")
+    @invoice5 = @customer5.invoices.create!(status: "completed")
     @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
     visit merchant_dashboard_index_path(@merchant1)
