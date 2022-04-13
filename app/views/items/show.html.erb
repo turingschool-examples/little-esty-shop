@@ -3,4 +3,12 @@
 <h3><%= link_to "Update #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></h3>
 <p>Name: <%= @item.name %></p>
 <p>Description: <%= @item.description %></p>
-<p>Price: <%= @item.unit_price %></p>
+<p>Price: $<%= @item.unit_price %></p>
+<p>Enabled?: <%= @item.enabled %></p>
+
+
+<% if @item.enabled == "enabled" %>
+  <p><%= button_to "Disable #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, params: {:enabled => "disabled"} %></p>
+<% else %>
+  <p><%= button_to "Enable #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, params: {:enabled => "enabled"} %></p>
+<% end %>
