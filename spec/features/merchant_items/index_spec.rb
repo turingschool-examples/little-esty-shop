@@ -24,16 +24,31 @@ RSpec.describe 'merchant items index page' do
       item_2 = merchant.items.create!(name: 'Can', unit_price: 5, description: 'Soda')
       item_3 = merchant.items.create!(name: 'Mug', unit_price: 15, description: 'Coffee')
       item_4 = merchant_2.items.create!(name: 'Kettle', unit_price: 20, description: 'Tea')
-
       visit "/merchants/#{merchant.id}/items"
-      expect(page).to have_button("Disable/Enable #{item_1.name}")
+      expect(page).to have_button("Disable #{item_1.name}")
       expect(page).to have_content("available")
-
-      click_button "Disable/Enable #{item_1.name}"
+      click_button "Disable #{item_1.name}"
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
       expect(page).to have_content("unavailable")
-      click_button "Disable/Enable #{item_1.name}"
+      click_button "Enable #{item_1.name}"
       expect(page).to have_content("available")
+    end
+
+    it 'Then I see two sections, one for enabled items and one for disabled items' do
+      merchant = Merchant.create!(name: 'Yeti')
+      merchant_2 = Merchant.create!(name: 'Hydroflask')
+      item_1 = merchant.items.create!(name: 'Bottle', unit_price: 10, description: 'H20')
+      item_2 = merchant.items.create!(name: 'Can', unit_price: 5, description: 'Soda')
+      item_3 = merchant.items.create!(name: 'Mug', unit_price: 15, description: 'Coffee')
+      item_4 = merchant_2.items.create!(name: 'Kettle', unit_price: 20, description: 'Tea')
+      visit "/merchants/#{merchant.id}/items"
+      click_button "Disable #{item_3.name}"
+      save_and_open_page
+      expect("#{item_1.name}").to appear_before("#{item_3.name}")
+      expect("#{item_2.name}").to appear_before("#{item_3.name}")
+      click_button "Disable #{item_1.name}"
+      expect("#{item_2.name}").to appear_before("#{item_1.name}")
+      click_button "Enable #{item_1.name}"
     end
   end
 end
