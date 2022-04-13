@@ -6,4 +6,9 @@ class Invoice < ApplicationRecord
   has_many :merchants, through: :items
 
   enum status: ["in progress".to_sym, :completed, :cancelled]
+
+  def self.incomplete
+    joins(:invoice_items)
+    .where('invoice_items.status != ?', '2')
+  end
 end
