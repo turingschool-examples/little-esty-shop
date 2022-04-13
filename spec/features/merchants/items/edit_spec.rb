@@ -30,13 +30,11 @@ RSpec.describe 'Merchant Items Edit Page' do
   end
 
    it 'can edit attributes and redirect' do
+     
      fill_in('Name', with: 'Y-wing')
      fill_in('Description', with: 'Y-wing ship')
      fill_in('Unit price', with: '2000')
      click_button("Submit")
-
-#    save_and_open_page
-
      expect(current_path).to eq(merchant_item_path(@starw,@item1))
      expect(page).to have_content("Y-wing")
      expect(page).to have_content("Y-wing ship")
