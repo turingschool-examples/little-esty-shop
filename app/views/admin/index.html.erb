@@ -7,3 +7,10 @@
     <p>Successful transactions: <%= customer.transactions.count %></p>
   </div>
 <% end %>
+<div class="invoices">
+  <h3>Incomplete Invoices:</h3>
+  <% @invoices.incomplete.each do |invoice| %>
+  <p>Invoice ID: <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}"  %></p>
+  <% end %>
+
+</div>
