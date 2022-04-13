@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
 
   has_many :items
+  has_many :invoices, through: :items
 
   def unshipped_invoice_items
     # Item.find_by_sql("SELECT * FROM merchants INNER JOIN items ON merchants.id = items.merchant_id INNER JOIN invoice_items ON items.id = invoice_items.item_id WHERE merchant_id = ? ", id )

@@ -3,6 +3,15 @@
   <%= button_to 'Items Index', merchant_items_path(@merchant), method: :get %>
   <%= button_to 'Invoices Index', merchant_invoices_path(@merchant), method: :get %>
 </div>
+<hr>
+<h2>Top Five Customers</h2>
+<div id="top-customers">
+  <% @customers.each do |customer| %>
+    <strong><p><%= customer.first_name %></p></strong>
+    Succsessful transactions: <%= customer.succsessful_transaction_count %>
+  <% end %>
+</div>
+<hr>
 <div id="unshipped-invoice-items">
   <h2>Items Ready to Ship</h2>
   <table>
@@ -18,4 +27,3 @@
       </tr>
       <% end %>
   </table>
-</div>

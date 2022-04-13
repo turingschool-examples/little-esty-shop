@@ -1,0 +1,49 @@
+<h1> <%= @merchant.name %>'s Items  </h1>
+
+<%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
+<hr>
+<div id="enabled-<%= @merchant.id %>">
+<h2>Enabled Items</h2>
+
+<% @enabled_items.each do |item| %>
+      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
+        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
+      method: :patch, local: true do |f| %>
+        <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
+        <%= f.text_field :item_id, value: item.id, hidden: true %>
+      <% end %>
+      <br>
+<% end %>
+
+</div>
+
+<div id="disabled-<%= @merchant.id %>">
+<h2>Disabled Items</h2>
+<% @disabled_items.each do |item| %>
+      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
+        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
+      method: :patch, local: true do |f| %>
+        <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
+        <%= f.text_field :item_id, value: item.id, hidden: true %>
+      <% end %>
+      <br>
+<% end %>
+</div>
+
+<% @merchant.items.each do |item| %>
+  <% if item.status == nil %>
+<h2>Unknown status </h2>
+      <li> Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a>
+      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
+                    method: :patch, local: true do |f| %>
+        <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
+        <%= f.text_field :item_id, value: item.id, hidden: true %>
+      <% end %>
+        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
+      method: :patch, local: true do |f| %>
+        <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
+        <%= f.text_field :item_id, value: item.id, hidden: true %>
+      <% end %>
+      </li>
+  <% end %>
+<% end %>

@@ -17,5 +17,14 @@ describe "the admin/merchants index page" do
       expect(page).to have_content("Sauer and Sons")
 
     end
+
+    it "has each name as a link to that show page" do
+      visit "/admin/merchants"
+
+      click_on "Targay"
+
+      expect(current_path).to eq("/admin/merchants/#{@targay.id}")
+      expect(page).to have_content("Targay")
+    end
   end
 end
