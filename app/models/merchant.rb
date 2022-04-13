@@ -11,8 +11,9 @@ class Merchant < ApplicationRecord
   end
 
   def customers_ordered_by_transactions
-    customers.sort_by do |customer|
-      transactions.where(result: 'success')
-    end
+    customers.select("customers.*, count(transactions) as transaction_count")
+             .joins(invoices: :transactions)
+             .where(transactions: {result: 'success'})
+             .group(:id).order(transaction_count: :desc)
   end
 end
