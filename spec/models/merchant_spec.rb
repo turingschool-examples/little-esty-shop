@@ -71,7 +71,7 @@ RSpec.describe Merchant, type: :model do
       expect(merch1.unique_invoices).to eq([invoice1, invoice2, invoice3])
     end
 
-    xit "#items_ready_to_ship" do
+    it "#items_ready_to_ship" do
       merchant_1 = create(:merchant)
       item_1 = create(:item, merchant_id: merchant_1.id)
       item_2 = create(:item, merchant_id: merchant_1.id)
@@ -84,7 +84,9 @@ RSpec.describe Merchant, type: :model do
       invoice_item_2 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_2)
       invoice_item_3 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_3)
 
-      expect(merchant_1.ready_to_ship).to eq([invoice_item_1, invoice_item_3, invoice_item_2])
+      expect(merchant_1.ready_to_ship[0]).to eq(invoice_item_1)
+      expect(merchant_1.ready_to_ship[1]).to eq(invoice_item_2)
+      expect(merchant_1.ready_to_ship[2]).to eq(invoice_item_3)
     end
     it '#current_invoice_items returns a merchants invoice items for a given invoice' do
       merch1 = FactoryBot.create(:merchant)
