@@ -116,12 +116,17 @@ describe 'merchant item index page' do
     click_button("Create a New Item")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
   end
-
-  it 'has all the items attributes' do
+  it 'has a link to the item show page with the attributes' do
     click_on('Cup')
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@cup.id}")
     expect(page).to have_content('Cup')
     expect(page).to have_content('What the **** is this thing?')
     expect(page).to have_content('100')
   end
+  
+  it 'item show page has edit button' do
+    visit "/merchants/#{@merchant_1.id}/items/#{@cup.id}"
+    expect(page).to have_link('Edit')
+  end
+
 end
