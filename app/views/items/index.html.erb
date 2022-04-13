@@ -17,9 +17,11 @@
 
 <h2>All Items</h2>
 
-<% @merchant.items.each do |item| %>
-  <h3> <%= item.name %> </h3>
-  <p> <%= item.description %> </p>
-  <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
-  <hr/>
-<% end %>
+<div id="all_items">
+  <% @merchant.items.each do |item| %>
+    <h3> <%= item.name %> </h3>
+    <p> <%= item.description %> </p>
+    <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
+    <hr/>
+  <% end %>
+</div>

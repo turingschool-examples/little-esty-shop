@@ -126,7 +126,7 @@ describe 'merchant item index page' do
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
   end
 
-  describe 'displays the merchants top 5 items' do
+  describe 'merchants top 5 items' do
     before do
       @nothing = @merchant_1.items.create!(
         name: "nothing",
@@ -230,6 +230,16 @@ describe 'merchant item index page' do
       within("#top_item_#{@nothing.id}") do
         expect(page).to have_content("Total revenue generated: $899.1")
       end
+    end
+
+  end
+  it "displays the merchant and merchant item's names" do
+    expect(page).to have_content(@merchant_1.name)
+    within("#all_items") do
+      expect(page).to have_content(@cup.name)
+      expect(page).to have_content(@soccer.name)
+
+      expect(page).not_to have_content(@beer.name)
     end
   end
 end

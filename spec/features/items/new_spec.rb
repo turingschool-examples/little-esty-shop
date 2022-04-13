@@ -48,4 +48,15 @@ describe 'merchant item index page' do
     expect(page).to have_content("Barbados Lupus")
     expect(page).to have_content("Price: $150.99")
   end
+
+  it "redirects to the new page if you don't enter all info" do
+    click_button("Create a New Item")
+
+    fill_in 'Name:', with: "Gundam"
+
+    click_button "Create Item"
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/new")
+
+  end
 end
