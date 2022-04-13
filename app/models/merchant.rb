@@ -19,4 +19,8 @@ class Merchant < ApplicationRecord
               .group('customers.id')
               .limit(5)
   end
+
+  def items_ready_to_ship
+    items.joins(:invoice_items).where.not(invoice_items: {status: 2})
+  end
 end
