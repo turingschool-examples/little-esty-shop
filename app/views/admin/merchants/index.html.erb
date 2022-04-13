@@ -4,7 +4,7 @@
   </header>
   <ul class="index">
     <% @merchants.each do |merchant| %>
-      <p><%= merchant.name %></p>
+      <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
     <% end %>
   </ul>
 </div>
