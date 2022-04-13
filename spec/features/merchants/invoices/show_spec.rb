@@ -65,7 +65,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     end
 
-    xit 'I see the total revenue that will be generated from all my items on the invoice' do
+    it 'I see the total revenue that will be generated from all my items on the invoice' do
       merch1 = FactoryBot.create(:merchant)
       # merch2 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
@@ -81,7 +81,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       # invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item4.id, unit_price: item4.unit_price, quantity: 1, nvoice_id: invoice1.id)
 
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
-
+      save_and_open_page
       expect(page).to have_content("Total Revenue From This Invoice:")
       within "#total_revenue" do
         expect(page).to have_content("Revenue: $4167.88")

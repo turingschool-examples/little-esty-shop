@@ -18,3 +18,7 @@
 </section>
 
 <% end %>
+<h3>Total Revenue From This Invoice:</h3>
+<section id="total_revenue">
+  Revenue: $<%= @merchant.total_revenue_for_invoice(@invoice.id)  %>
+</section>
