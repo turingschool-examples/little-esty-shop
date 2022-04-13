@@ -29,6 +29,8 @@ RSpec.describe Invoice do
   end
 
   context 'instance methods' do
-    expect(@invoice.formatted_date).to eq("Sunday, March 25, 2012")
+    it '.formatted_date returns the date in day, month, year format' do
+      expect(@invoice.formatted_date).to eq("Sunday, March 25, 2012")
+    end
   end
 end

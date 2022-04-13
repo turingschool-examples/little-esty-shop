@@ -10,15 +10,7 @@ RSpec.describe 'merchant invoice show page' do
     @invoice_1 = @customer.invoices.create(status: "in progress", created_at: Time.parse("2022-04-12 09:54:09"))
 
   end
-
-#   As a merchant
-# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-# Then I see information related to that invoice including:
-#
-# Invoice id
-# Invoice status
-# Invoice created_at date in the format "Monday, July 18, 2019"
-# Customer first and last name
+  
   it "displays information related to the invoice" do
     visit "/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}"
     expect(page).to have_content(@invoice_1.id)
