@@ -27,4 +27,8 @@ RSpec.describe Invoice do
     it { should have_many :transactions }
     it { should have_many(:items).through(:invoice_items)}
   end
+
+  context 'instance methods' do
+    expect(@invoice.formatted_date).to eq("Sunday, March 25, 2012")
+  end
 end
