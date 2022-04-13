@@ -114,7 +114,6 @@ RSpec.describe "Admin Dashboard" do
     InvoiceItem.create!(invoice_id: invoice_11.id, item_id: item_11.id, quantity: 1, status: 2)
 
     visit '/admin'
-save_and_open_page
     expect(page).to have_content(invoice_1.id)
     expect(page).to have_content(invoice_4.id)
     expect(page).to have_content(invoice_7.id)
