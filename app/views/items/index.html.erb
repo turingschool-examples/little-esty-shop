@@ -3,8 +3,21 @@
 <%= button_to("Create a New Item", "/merchants/#{@merchant.id}/items/new", method: :get) %>
 <hr/>
 
+<div id="top_five_items">
+  <h2>Top 5 Items</h2>
+  <% @merchant.top_five_items.each do |item| %>
+  <div id="top_item_<%= item.id %>"
+    <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
+    <p>Total revenue generated:<strong> $<%= item.total_rev.to_f / 100 %></strong></p>
+    <hr/>
+  </div>
+  <% end %>
+</div>
 
-<% @items.each do |item| %>
+
+<h2>All Items</h2>
+
+<% @merchant.items.each do |item| %>
   <h3> <%= item.name %> </h3>
   <p> <%= item.description %> </p>
   <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>

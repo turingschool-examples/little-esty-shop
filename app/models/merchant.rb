@@ -18,8 +18,11 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_items
-    customers.joins(invoices: :transactions).select('items.*, (invoice_items.unit_price * invoice_items.quantity) AS inv_total').where("transactions.result LIKE 'success'")
-    .order('total_rev desc')
-    .limit(5)
+    Item.joins(invoices: :transactions)
+        .where(invoices: {status: 1}, transactions: {result: 'success'})
+        .select("items.id, items.name, sum(invoice_items.quantity * invoice_items.unit_price) as total_rev")
+        .group(:id)
+        .order("total_rev desc")
+        .limit(5)
   end
 end
