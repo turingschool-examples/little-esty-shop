@@ -9,48 +9,52 @@ RSpec.describe 'merchant dashboard' do
     @invoice_1 = @customer_1.invoices.create!(status: 'completed')
     @item_1 = @merchant.items.create!(name: 'Pencil', unit_price: 5, description: 'Writes things.')
     @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 2)
-
-    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: '4654405418249632', result: 'success')
-    @transaction_1a = @invoice_1.transactions.create!(credit_card_number: '4654405418249631', result: 'success')
-    @transaction_1b = @invoice_1.transactions.create!(credit_card_number: '4654405418249633', result: 'success')
-    @transaction_1c = @invoice_1.transactions.create!(credit_card_number: '4654405418249635', result: 'success')
-    @transaction_1d = @invoice_1.transactions.create!(credit_card_number: '4654405418249635', result: 'success')
-    @transaction_1e = @invoice_1.transactions.create!(credit_card_number: '4654405418249635', result: 'success')
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249632', result: 'success')
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249631', result: 'success')
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249633', result: 'success')
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249635', result: 'success')
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249635', result: 'success')
+    @invoice_1.transactions.create!(credit_card_number: '4654405418249635', result: 'success')
 
     @customer_2 = Customer.create!(first_name: 'Osinski', last_name: 'Cecelia')
     @invoice_2 = @customer_2.invoices.create!(status: 'completed')
-    @transaction_2 = @invoice_2.transactions.create!(credit_card_number: '5654405418249632', result: 'success')
-    @transaction_2a = @invoice_2.transactions.create!(credit_card_number: '5654405418249631', result: 'success')
-    @transaction_2b = @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
-    @transaction_2c = @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
-    @transaction_2d = @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
+    @item_1.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 3, unit_price: 4, status: 2)
+    @invoice_2.transactions.create!(credit_card_number: '5654405418249632', result: 'success')
+    @invoice_2.transactions.create!(credit_card_number: '5654405418249631', result: 'success')
+    @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
+    @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
+    @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
 
     @customer_3 = Customer.create!(first_name: 'Toy', last_name: 'Mariah')
     @invoice_3 = @customer_3.invoices.create!(status: 'completed')
-    @transaction_3 = @invoice_3.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
-    @transaction_3a = @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
-    @transaction_3b = @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
-    @transaction_3c = @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
+    @item_1.invoice_items.create!(invoice_id: @invoice_3.id, quantity: 3, unit_price: 4, status: 2)
+    @invoice_3.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
+    @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
+    @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
 
     @customer_4 = Customer.create!(first_name: 'Joy', last_name: 'Braun')
     @invoice_4 = @customer_4.invoices.create!(status: 'completed')
-    @transaction_4 = @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
-    @transaction_4a = @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
-    @transaction_4b = @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @item_1.invoice_items.create!(invoice_id: @invoice_4.id, quantity: 3, unit_price: 4, status: 2)
+    @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
 
     @customer_5 = Customer.create!(first_name: 'Mark', last_name: 'Brains')
     @invoice_5 = @customer_5.invoices.create!(status: 'completed')
-    @transaction_5a = @invoice_5.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
-    @transaction_5b = @invoice_5.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @item_1.invoice_items.create!(invoice_id: @invoice_5.id, quantity: 3, unit_price: 4, status: 2)
+    @invoice_5.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @invoice_5.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
 
     @customer_6 = Customer.create!(first_name: 'Smark', last_name: 'Mrains')
     @invoice_6 = @customer_6.invoices.create!(status: 'completed')
-    @transaction_6 = @invoice_6.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
+    @item_1.invoice_items.create!(invoice_id: @invoice_6.id, quantity: 3, unit_price: 4, status: 2)
+    @invoice_6.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
 
     visit "/merchants/#{@merchant.id}/dashboard"
   end
 
-  it 'dispalys the name of the merchant' do
+  it 'displays the name of the merchant' do
     expect(page).to have_content('Brylan')
   end
 
