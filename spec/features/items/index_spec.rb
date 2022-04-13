@@ -209,7 +209,6 @@ describe 'merchant item index page' do
 
     it 'displays them in order' do
       within('#top_five_items') do
-        save_and_open_page
         expect("gnihton").to appear_before("Cup")
         expect("Cup").to appear_before("lotion")
         expect("lotion").to appear_before("something")
