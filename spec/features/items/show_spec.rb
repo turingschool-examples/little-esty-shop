@@ -27,6 +27,9 @@ RSpec.describe 'Item show page' do
     it 'has edit button' do
         visit "/merchants/#{@merchant_1.id}/items/#{@cup.id}"
         expect(page).to have_link('Edit')
+        click_on ('Edit')
+        expect(current_path).to eq("/items/#{cup.id}/edit")
+        
     end
 
 end 

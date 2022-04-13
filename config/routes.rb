@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get '/merchants/:id/items/new', to: 'merchants#new_item'
   get '/merchants/:id/invoices', to: 'merchants#invoice_index'
   get '/merchants/:merch_id/items/:item_id', to: 'merchants#item_show'
+  get '/items/:id/edit', to: 'items#edit'
 end
