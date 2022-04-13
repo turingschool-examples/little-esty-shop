@@ -17,4 +17,9 @@ class Customer < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def succsessful_transaction_count
+    transactions.where("result = 'success'")
+    .count
+  end
 end

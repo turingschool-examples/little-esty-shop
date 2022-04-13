@@ -21,9 +21,21 @@ RSpec.describe "Merchant items Show page" do
   end
 
   it "Displays an item's Attributes" do
-#    save_and_open_page
+
     expect(page).to have_content(@item1.name)
     expect(page).to_not have_content(@item2.name)
+
+  end
+
+  it "has an edit button for the item" do
+
+    click_button("Edit #{@item1.name}")
+    expect(current_path).to eq(edit_merchant_item_path(@starw,@item1))
+
+    visit merchant_item_path(@starw,@item2)
+
+    click_button("Edit #{@item2.name}")
+    expect(current_path).to eq(edit_merchant_item_path(@starw,@item2))
 
   end
 end
