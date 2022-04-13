@@ -1,3 +1,11 @@
 <h1><%= @item.name %>'s Attributes</h1>
 <h3>Description: <%= @item.description %></h3>
 <h3>Current Selling Price: $<%= @item.unit_price.to_f/100%></h3>
+
+<%= button_to "Edit #{@item.name}", edit_merchant_item_path, method: :get %>
+
+<% flash.each do |type, msg| %>
+  <div>
+     <p><%= msg %></p>
+  </div>
+<% end %>
