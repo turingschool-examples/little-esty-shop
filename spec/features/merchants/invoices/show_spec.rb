@@ -95,14 +95,14 @@ RSpec.describe 'Merchant Invoice Show Page' do
       item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
       invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
       invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, status: 0, invoice_id: invoice1.id)
-      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, status: 1, invoice_id: invoice1.id)
+
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
-      save_and_open_page
       expect(page).to have_button("Update Item Status")
 
       within "#invoice_item-#{invoice_item_1.id}" do
         expect(find_field('status').value).to eq('packaged')
-        select 'packaged'
+        select 'shipped'
         click_button 'Update Item Status'
       end
       expect(current_path).to eq("/merchants/#{merch1.id}/invoices/#{invoice1.id}")
@@ -110,7 +110,6 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within "#invoice_item-#{invoice_item_1.id}" do
         expect(page).to have_content("shipped")
       end
-
     end
 
   end

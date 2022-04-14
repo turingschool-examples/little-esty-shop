@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :dashboard, only:[:index]
   end
 
+  post '/merchants/:merchant_id/invoice_items', to: 'invoice_items#update'
   get '/admin/merchants/:id/dashboard', to: "admin/dashboard#index"
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
   get '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#show'
