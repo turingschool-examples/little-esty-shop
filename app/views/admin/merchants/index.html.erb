@@ -3,7 +3,9 @@
 <h4>All Merchants Currently In System</h4><br>
 
 <% @merchants.each do |merchant| %>
+<section id="merchant-<%= merchant.id %>">
 
   <%= merchant.name %> <br><br>
 
+</section>
 <% end %>
