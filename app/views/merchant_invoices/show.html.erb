@@ -19,10 +19,10 @@
 
 <h2>Items ordered:</h2>
 
-<%= @invoice.items.each do |item| %>
+<% @invoice.items.each do |item| %>
   <div id="item-<%= item.id %>">
+    <h4><%= item.name %></h4>
     <ul>
-      <p><%= item.name %><p>
       <li>
         <p>Quantity: <%= @invoice.get_invoice_item(item.id).quantity %></p>
       </li>
