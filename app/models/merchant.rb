@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :created_at
   validates_presence_of :updated_at
-  enum status: {enable: 0, disable: 1}
+  enum status: {enabled: 0, disabled: 1}
 
 
   def top_five_customers
