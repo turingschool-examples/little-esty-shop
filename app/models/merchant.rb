@@ -8,13 +8,12 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def top_5_customers
-    # binding.pry
     customers.joins(invoices: :transactions)
-      .select('customers.*, count(transactions) as successful_transactions')
-      .where('transactions.result = ?', "success")
-      .group(:id)
-      .order('successful_transactions desc')
-      .limit(5)
+        .select('customers.*, count(transactions) as successful_transactions')
+        .where('transactions.result = ?', "success")
+        .group(:id)
+        .order('successful_transactions desc')
+        .limit(5)
   end
 
   def top_five_items

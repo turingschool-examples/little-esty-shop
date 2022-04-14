@@ -2,6 +2,8 @@
 <br/><hr/>
 
 <% @invoices.each do |inv|%>
-  <h3> Invoice #<%= inv.id %></h3>
+  <h3>
+    Invoice #<a href="/merchants/<%= @merchant.id %>/invoices/<%= inv.id %>"><%= inv.id %></a>
+  </h3>
   <hr/>
 <% end %>
