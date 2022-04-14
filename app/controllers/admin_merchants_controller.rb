@@ -6,4 +6,11 @@ class AdminMerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
   end
+
+  def edit
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def update
+  end
 end
