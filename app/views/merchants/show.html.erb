@@ -17,9 +17,9 @@
     <h3>Items ready to ship:</h3>
     <% @merchant.items_ready_to_ship.each do |item| %>
       <div id="item-<%= item.id %>">
-        <h4><%= item.name %> with invoices:
+        <h4><%= item.name %> with invoices:<br>
           <% item.invoices.each do |invoice| %>
-            <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+            <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %><br> 
           <% end %>
         </h4>
       </div>
