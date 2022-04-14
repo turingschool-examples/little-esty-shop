@@ -5,6 +5,7 @@
 </div>
 
 <hr>
+
 <h2>Top Five Customers</h2>
 <div id="top-customers">
   <% @customers.each do |customer| %>
@@ -12,3 +13,24 @@
     Succsessful transactions: <%= customer.succsessful_transaction_count %>
   <% end %>
 </div>
+
+<hr>
+
+<div id="unshipped-invoice-items">
+  <h2>Items Ready to Ship</h2>
+  <table>
+    <tr>
+      <th>Item Name</th>
+      <th>Invoice Number</th>
+      <th>Invoice Opened</th>
+    </tr>
+    <% @invoice_items_to_ship.each do |invoice_item| %>
+      <tr>
+        <div id="unshipped_invoice_item_<%= invoice_item.invoice_item_id %>">
+          <td> <%= invoice_item.name %> </td>
+          <td> <a href="/merchants/<%= @merchant.id %>/invoices/<%= invoice_item.invoice_id %>/"><%=invoice_item.invoice_id%></a> </td>
+          <td> <%= date_formatter(invoice_item.invoice_created_at) %></td>
+        </div>
+      </tr>
+      <% end %>
+  </table>
