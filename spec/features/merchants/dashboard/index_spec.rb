@@ -75,13 +75,14 @@ RSpec.describe 'merchant dashboard' do
     within ("#unshipped_invoice_item_#{invoice_item_1.id}") do
       expect(page).to have_content(invoice_item_1.invoice_id)
       expect(page).to have_content(item_1.name)
-      expect(page).to have_link(href: "/invoices/#{invoice_1.id}/")
+    save_and_open_page
+      expect(page).to have_link(href: "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}/")
     end
 
     within ("#unshipped_invoice_item_#{invoice_item_2.id}") do
       expect(page).to have_content(invoice_item_2.invoice_id)
       expect(page).to have_content(item_2.name)
-      expect(page).to have_link(href: "/invoices/#{invoice_2.id}/")
+      expect(page).to have_link(href: "/merchants/#{merchant_1.id}/invoices/#{invoice_2.id}/")
     end
 
   end
