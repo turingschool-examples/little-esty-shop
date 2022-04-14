@@ -21,8 +21,13 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
-  def update
+  def edit
     @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    # @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
     @item.update(item_params)
     flash[:success] = 'You have successfully updated this item'
