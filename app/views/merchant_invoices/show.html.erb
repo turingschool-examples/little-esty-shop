@@ -16,3 +16,20 @@
     <p>Customer name: <%=  @invoice.customer.first_name %>  <%=  @invoice.customer.last_name %> </p>
   </li>
 </ul>
+
+<h2>Items ordered:</h2>
+
+<%= @invoice.items.each do |item| %>
+  <ul>
+    <p><%= item.name %><p>
+    <li>
+      <p><%= @invoice.get_invoice_item(item.id).quantity %></p>
+    </li>
+    <li>
+      <p><%= @invoice.get_invoice_item(item.id).unit_price %></p>
+    </li>
+    <li>
+      <p><%= @invoice.get_invoice_item(item.id).status %></p>
+    </li>
+  </ul>
+<% end %>
