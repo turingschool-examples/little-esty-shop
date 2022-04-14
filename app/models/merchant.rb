@@ -3,8 +3,6 @@ class Merchant < ApplicationRecord
 
   has_many :items
   has_many :invoices, through: :items
-
-  def most_popular_items
-    
-  end
+  has_many :invoice_items, through: :invoices
+  
 end
