@@ -7,13 +7,13 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
   end
-  
+
   def edit
-      @item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
-  def show 
-      @item = Item.find(params[:id])
+  def show
+    @item = Item.find(params[:id])
   end
 
   def create
@@ -28,15 +28,15 @@ class ItemsController < ApplicationController
     end
   end
 
-  def update  
-      Item.update(item_params)
-      @item = Item.find(params[:id])
-      redirect_to "/items/#{@item.id}", alert: "#{@item.name} has been updated"
+  def update
+    Item.update(item_params)
+    @item = Item.find(params[:id])
+    redirect_to "/items/#{@item.id}", alert: "#{@item.name} has been updated"
   end
 
-  private 
+  private
 
-  def item_params 
-      params.permit(:name, :description, :unti_price)
+  def item_params
+    params.permit(:name, :description, :unit_price)
   end
 end
