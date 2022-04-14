@@ -19,7 +19,7 @@ RSpec.describe "Admin Merchants Index Page" do
       merch5 = Merchant.create!(name: 'Corgi Town', created_at: date5, updated_at: date5, status: 0)
 
       visit "/admin/merchants"
-
+      save_and_open_page
       expect(page).to have_content('Lord Eldens')
       expect(page).to have_content("Jeffs GoldBlooms")
       expect(page).to have_content("Souls Darkery")

@@ -1,1 +1,9 @@
 <h1>Admin Merchants</h1>
+
+<h4>All Merchants Currently In System</h4><br>
+
+<% @merchants.each do |merchant| %>
+
+  <%= merchant.name %> <br><br>
+
+<% end %>
