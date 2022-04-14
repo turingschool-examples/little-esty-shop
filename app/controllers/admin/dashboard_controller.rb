@@ -3,7 +3,8 @@ class Admin::DashboardController < ApplicationController
       @invoices = Invoice.all
       @customers = Customer.all
       @merchants = Merchant.all
-      
+      @invoice_items = InvoiceItem.all
+
       require "pry"; binding.pry
     end
 end
