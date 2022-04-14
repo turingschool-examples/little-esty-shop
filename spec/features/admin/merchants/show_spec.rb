@@ -36,6 +36,9 @@ describe "admin/merchant/show page" do
 
       expect(current_path).to eq("/admin/merchants/#{@kilback.id}")
       expect(page).to have_content("Pretty Pony")
+      within("#flash") do
+        expect(page).to have_content("Update Successful")
+      end
     end
   end
 end
