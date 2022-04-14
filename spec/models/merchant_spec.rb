@@ -45,6 +45,7 @@ RSpec.describe Merchant do
     @ii_8 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_8.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     @ii_9 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_9.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     @ii_10 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_10.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+
     @ii_11 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_11.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     @ii_12 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_12.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     @ii_13 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_13.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -70,7 +71,6 @@ RSpec.describe Merchant do
     @transaction_13 = @invoice_13.transactions.create!(credit_card_number: 4023948573948293, result: "success")
     @transaction_14 = @invoice_14.transactions.create!(credit_card_number: 4023948573948293, result: "success")
     @transaction_15 = @invoice_15.transactions.create!(credit_card_number: 4023948573948293, result: "success")
-
   end
 
   describe "relationships" do
@@ -92,6 +92,53 @@ RSpec.describe Merchant do
       expect(@merch_1.top_five_items).to eq([@item_4, @item_1, @item_3, @item_2, @item_6])
 
       expect(@merch_1.top_five_items).not_to include(@item_5)
+    end
+
+    it "#items_ready_to_ship returns all items that have been ordered but not shipped" do
+      merchant = Merchant.create!(name: "MerchyMcMerchFace")
+
+      invoice = @cust_1.invoices.create!(status: :in_progress)
+      other_invoice = @cust_1.invoices.create!(status: :in_progress)
+
+      pending_item = merchant.items.create!(
+        name: "Pending Item",
+        description: "an item that is pending",
+        unit_price: 2500
+      )
+      pending_invoice_item = InvoiceItem.create!(
+        item_id: pending_item.id,
+        invoice_id: invoice.id,
+        quantity: 1,
+        unit_price: pending_item.unit_price,
+        status: 0
+      )
+      packaged_item = merchant.items.create!(
+        name: "Packaged Item",
+        description: "an item that has been packaged",
+        unit_price: 4500
+      )
+      packaged_invoice_item = InvoiceItem.create!(
+        item_id: packaged_item.id,
+        invoice_id: invoice.id,
+        quantity: 1,
+        unit_price: packaged_item.unit_price,
+        status: 1
+      )
+      shipped_item = merchant.items.create!(
+        name: "Shipped Item",
+        description: "an item that has been shipped",
+        unit_price: 3500
+      )
+      shipped_invoice_item = InvoiceItem.create!(
+        item_id: shipped_item.id,
+        invoice_id: other_invoice.id,
+        quantity: 1,
+        unit_price: shipped_item.unit_price,
+        status: 2
+      )
+      expect(merchant.items_ready_to_ship.ids).to include(packaged_invoice_item.invoice_id)
+      expect(merchant.items_ready_to_ship.ids).to include(pending_invoice_item.invoice_id)
+      expect(merchant.items_ready_to_ship.ids).to_not include(shipped_invoice_item.invoice_id)
     end
   end
 end
