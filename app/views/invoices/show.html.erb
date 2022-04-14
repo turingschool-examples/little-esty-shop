@@ -13,8 +13,20 @@
   Item Name: <%= invoice_item.item.name %><br>
   Quantity Ordered: <%= invoice_item.quantity %><br>
   Item Price: <%= invoice_item.price_to_dollars %><br>
-  Invoice Item Status: <%= invoice_item.status %><br><br>
+  Invoice Item Status: <%= invoice_item.status %><br>
+  Update This Items Status: <%= form_with url: "/merchants/#{@merchant.id}/invoice_items", local: true do |f|%>
+    <%= f.select :status, InvoiceItem.statuses.keys, value: "#{invoice_item.status}" %>
+    <%= f.hidden_field :invoice_item_id, value: "#{invoice_item.id}"  %>
+    <%= f.hidden_field :invoice_id, value: "#{@invoice.id}"  %>
+
+    <%= f.submit 'Update Item Status' %>
+  <% end %>
+  <br><br>
 
 </section>
 
 <% end %>
+<h3>Total Revenue From This Invoice:</h3>
+<section id="total_revenue">
+  Revenue: $<%= @merchant.total_revenue_for_invoice(@invoice.id)  %>
+</section>
