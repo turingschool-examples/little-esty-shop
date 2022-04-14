@@ -15,7 +15,7 @@ RSpec.describe 'Merchant Item Index Page' do
 
     it 'items index page shows my items' do
       expect(page).to have_content("Golden Rose")
-      expect(page).to_not have_content('Dark Sole Shoes')
+      expect(page).to have_content('Dark Sole Shoes')
     end
 
     it 'every item name is a link to its show page' do
