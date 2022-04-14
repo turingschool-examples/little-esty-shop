@@ -6,15 +6,19 @@ class ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
-    # binding.pry
   end
 
   def update
     merchant = Merchant.find(params[:merchant_id])
     item = Item.find(params[:id])
-    item.status = 1
-    item.save
 
+    if item.status == "disabled"
+      item.status = "enabled"
+    else
+      item.status = "disabled"
+    end
+    
+    item.save
     redirect_to "/merchants/#{merchant.id}/items"
   end
 
