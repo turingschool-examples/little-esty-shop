@@ -233,6 +233,7 @@ describe 'merchant item index page' do
     end
 
   end
+
   it "displays the merchant and merchant item's names" do
     expect(page).to have_content(@merchant_1.name)
     within("#all_items") do
@@ -242,12 +243,4 @@ describe 'merchant item index page' do
       expect(page).not_to have_content(@beer.name)
     end
   end
-
-  it'shows the best day of sales for each top item' do
-    within("#top_five_items") do 
-      save_and_open_page
-      expect(page).to have_content("Best sales day:")
-    end
-    
-  end 
 end
