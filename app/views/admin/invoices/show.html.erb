@@ -12,8 +12,10 @@
   <div id="invoice_items-<%= invoice_item.id %>">
     <p>Item name: <%= invoice_item.item.name %></p>
     <p>Quantity Ordered: <%= invoice_item.quantity %></p>
-    <p>Item Selling Price: <%= invoice_item.unit_price %></p>
+    <p>Item Selling Price: $<%= invoice_item.unit_price %></p>
     <p>Item Status: <%= invoice_item.status %></p>
     <br>
   </div>
 <% end %>
+
+<h2>Invoice Total Revenue: $<%= @invoice.total_revenue %></h2>

@@ -21,14 +21,14 @@ RSpec.describe "Admin Invoices Index", type: :feature do
         expect(page).to_not have_content(@invoices.last.id)
       end
       within("#invoice-#{@invoices.second.id}") do
-        expect(page).to_not have_content(@invoices.first.id)
         expect(page).to have_content(@invoices.second.id)
+        expect(page).to_not have_content(@invoices.first.id)
         expect(page).to_not have_content(@invoices.last.id)
       end
       within("#invoice-#{@invoices.last.id}") do
+        expect(page).to have_content(@invoices.last.id)
         expect(page).to_not have_content(@invoices.first.id)
         expect(page).to_not have_content(@invoices.second.id)
-        expect(page).to have_content(@invoices.last.id)
       end
     end
   end
