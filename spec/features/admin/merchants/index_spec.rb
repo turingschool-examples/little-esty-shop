@@ -10,11 +10,20 @@ RSpec.describe 'Admin Merchant Index' do
       merchant_4 = Merchant.create!(name: 'Craig')
 
       visit "/admin/merchants"
-      
+
       expect(page).to have_content('Brylan')
       expect(page).to have_content('Antonio')
       expect(page).to have_content('Chris')
       expect(page).to have_content('Craig')
+
+    end
+
+    it 'has link to each merchant show page by clicking name' do
+      merchant_1 = Merchant.create!(name: 'Brylan')
+      visit "/admin/merchants"
+
+      click_link "Brylan"
+      expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
 
     end
   end
