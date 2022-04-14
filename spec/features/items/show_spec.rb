@@ -2,7 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'the merchant item show page' do
   before do
-    @merchant = Merchant.create!(name: "Hondo MacGuillicutty", created_at: Time.now, updated_at: Time.now)
-    @item = @merchant.items.create!(name:)
+    @merchant1 = Merchant.create!(name: "Hondo MacGuillicutty", created_at: Time.now, updated_at: Time.now)
+    @item1 = Item.create!(name: "Left-handed back scratcher", description: "Finally a solution for left-handed people with itchy backs", unit_price: 25, created_at: Time.now, updated_at: Time.now, merchant_id: @merchant1.id)
+
+    visit merchant_items_path(@merchant1, @item1)
+  end
+
+  describe 'page display' do
+    it 'shows all the items attributes' do
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item1.description)
+      expect(page).to have_content(@item1.unit_price)
+    end
   end
 end
