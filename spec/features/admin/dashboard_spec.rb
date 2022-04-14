@@ -110,7 +110,7 @@ RSpec.describe 'admin dashboad spec' do
     end
 
     it 'has a section showing ids of invoices with unshipped items ' do
-      within("incomplete_invoices") do
+      within("#incomplete_invoices") do
         expect(page).to have_content(@invoice_2.id)
         expect(page).to have_content(@invoice_6.id)
         expect(page).to_not have_content(@invoice_2.id)
