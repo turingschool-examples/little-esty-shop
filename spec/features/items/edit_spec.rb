@@ -13,4 +13,16 @@ RSpec.describe 'the item edit page' do
     expect(page).to have_field('Description', with: @item1.description)
     expect(page).to have_field('Unit Price', with: @item1.unit_price)
   end
+
+  it 'updates the item info after clicking the update button' do
+    fill_in('Name', with: 'Two-handed back scratcher')
+    fill_in('Description', with: 'Finally everyone can scratch their backs with two hands')
+    fill_in('Unit Price', with: 35)
+    click_button 'Update'
+    expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
+    expect(page).to have_content('Two-handed back scratcher')
+    expect(page).to have_content('Finally everyone can scratch their backs with two hands')
+    expect(page).to have_content('35')
+    expect(page).to have_content('You have successfully updated this item')
+  end
 end
