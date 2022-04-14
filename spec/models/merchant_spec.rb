@@ -162,12 +162,5 @@ RSpec.describe Merchant, type: :model do
       merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
       expect(Merchant.status_disabled).to eq([merch2, merch4, merch6])
     end
-
-
-
-
-
-
-
   end
 end
