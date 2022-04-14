@@ -18,15 +18,15 @@ class Merchant < ApplicationRecord
 
   def top_five_items
     Item.joins(invoices: :transactions)
-        .where(invoices: {status: 1}, transactions: {result: 'success'})
-        .select("items.id, items.name, sum(invoice_items.quantity * invoice_items.unit_price) as total_rev")
-        .group(:id)
-        .order("total_rev desc")
-        .limit(5)
+      .where(invoices: {status: 1}, transactions: {result: "success"})
+      .select("items.id, items.name, sum(invoice_items.quantity * invoice_items.unit_price) as total_rev")
+      .group(:id)
+      .order("total_rev desc")
+      .limit(5)
   end
 
   def items_ready_to_ship
-    invoices.select("items.name, invoices.id, items.id as item_id")
+    invoices.select("items.name, invoices.id, items.id as item_id, invoices.created_at")
       .where("invoice_items.status != 2")
   end
 end

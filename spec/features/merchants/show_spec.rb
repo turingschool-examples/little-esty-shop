@@ -50,7 +50,7 @@ describe "merchant dashboard page" do
 
     @invoice_1 = @customer_1.invoices.create!(
       status: 0,
-      created_at: Date.current,
+      created_at: "Thu, 13 Apr 2022 00:00:00 UTC +00:00",
       updated_at: Date.current
     )
     @invoice_2 = @customer_1.invoices.create!(
@@ -135,6 +135,7 @@ describe "merchant dashboard page" do
         created_at: Date.current,
         updated_at: Date.current
       )
+
       expect(page).to have_content("Items ready to ship")
       within ".items_ready_to_ship" do
         expect(page).to have_content("Soccer Ball")
@@ -150,6 +151,16 @@ describe "merchant dashboard page" do
           expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
         end
       end
+    end
+
+    it "displays item invoice dates" do
+      within ".items_ready_to_ship" do
+        expect(page).to have_content("Thursday, April 13, 2022")
+      end
+    end
+
+    it "displays items oldest to newest" do
+      # code
     end
   end
 
