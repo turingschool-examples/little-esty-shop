@@ -155,7 +155,7 @@ describe "merchant dashboard page" do
 
     it "displays item invoice dates" do
       within ".items_ready_to_ship" do
-        expect(page).to have_content("Thursday, April 13, 2022")
+        expect(page).to have_content("Wednesday, April 13, 2022")
       end
     end
 
