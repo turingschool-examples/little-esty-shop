@@ -8,15 +8,22 @@ class ItemsController < ApplicationController
     @items = @merchant.items
   end
 
-  def edit
-    @item = Item.find(params[:id])
-  end
+  def update
+    merchant = Merchant.find(params[:merchant_id])
+    item = Item.find(params[:id])
 
-  def show
-    @item = Item.find(params[:id])
+    if item.status == "disabled"
+      item.status = "enabled"
+    else
+      item.status = "disabled"
+    end
+    
+    item.save
+    redirect_to "/merchants/#{merchant.id}/items"
   end
 
   def create
+    binding.pry
     merchant = Merchant.find(params[:merchant_id])
     item = merchant.items.create(item_params)
 
@@ -26,12 +33,6 @@ class ItemsController < ApplicationController
       # flash[:alert] = "Error: missing information. Please fill in all fields"
       redirect_to "/merchants/#{merchant.id}/items/new"
     end
-  end
-
-  def update
-    Item.update(item_params)
-    @item = Item.find(params[:id])
-    redirect_to "/items/#{@item.id}", alert: "#{@item.name} has been updated"
   end
 
   private

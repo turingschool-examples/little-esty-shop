@@ -233,6 +233,7 @@ describe 'merchant item index page' do
     end
 
   end
+
   it "displays the merchant and merchant item's names" do
     expect(page).to have_content(@merchant_1.name)
     within("#all_items") do
@@ -242,4 +243,20 @@ describe 'merchant item index page' do
       expect(page).not_to have_content(@beer.name)
     end
   end
+
+  it "has a button to disable or enable an item" do
+    expect(@cup.status).to eq("disabled")
+
+    within("#DisabledItem-#{@cup.id}") do
+      click_button "Enable Item"
+    end
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+
+    within("#EnabledItem-#{@cup.id}") do
+      expect(page).to_not have_button("Enable Item")
+      expect(page).to have_button("Disable Item")
+    end
+  end
+
 end
