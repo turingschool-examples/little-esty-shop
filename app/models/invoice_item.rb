@@ -8,8 +8,4 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
 
   enum status: ['pending', 'packaged', 'shipped']
-
-  def price_in_dollars
-    "$#{unit_price/100.00}"
-  end
 end

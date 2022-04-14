@@ -27,7 +27,7 @@
         <p>Quantity: <%= @invoice.get_invoice_item(item.id).quantity %></p>
       </li>
       <li>
-        <p>Price per Item: <%= @invoice.get_invoice_item(item.id).price_in_dollars.ljust(5, "0") %></p>
+        <p>Price per Item: $<%= @invoice.get_invoice_item(item.id).unit_price.to_s.insert(-3, ".") %></p>
       </li>
       <li>
         <p>Status: <%= @invoice.get_invoice_item(item.id).status %></p>
