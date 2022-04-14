@@ -1,5 +1,4 @@
 class Admin::MerchantsController < ApplicationController
-
   def index
     @merchants = Merchant.all
   end
@@ -18,7 +17,7 @@ class Admin::MerchantsController < ApplicationController
 
   def switch
     @merchant = Merchant.find(params[:id])
-    Merchant.update(@merchant.id, :enabled => !@merchant.enabled)
+    Merchant.update(@merchant.id, enabled: !@merchant.enabled)
     redirect_to "/admin/merchants"
   end
 
@@ -30,8 +29,6 @@ class Admin::MerchantsController < ApplicationController
     Merchant.update(params[:id], merchant_params)
     redirect_to("/admin/merchants/#{params[:id]}")
   end
-
-
 
   private
 
