@@ -15,33 +15,33 @@ RSpec.describe Merchant do
     @cust_5 = Customer.create!(first_name: "Pistol", last_name: "Pete")
     @cust_6 = Customer.create!(first_name: "Bronson", last_name: "Shmonson")
 
-    @invoice_1 = @cust_1.invoices.create!(status: "1")
-    @invoice_2 = @cust_1.invoices.create!(status: "1")
-    @invoice_3 = @cust_1.invoices.create!(status: "1")
-    @invoice_4 = @cust_2.invoices.create!(status: "1")
-    @invoice_5 = @cust_2.invoices.create!(status: "1")
-    @invoice_6 = @cust_2.invoices.create!(status: "1")
-    @invoice_7 = @cust_3.invoices.create!(status: "1")
-    @invoice_8 = @cust_3.invoices.create!(status: "1")
-    @invoice_9 = @cust_4.invoices.create!(status: "1")
-    @invoice_10 = @cust_4.invoices.create!(status: "1")
-    @invoice_11 = @cust_5.invoices.create!(status: "1")
-    @invoice_12 = @cust_5.invoices.create!(status: "1")
-    @invoice_13 = @cust_6.invoices.create!(status: "1")
+    @invoice_1 = @cust_1.invoices.create!(status: 1)
+    @invoice_2 = @cust_1.invoices.create!(status: 1)
+    @invoice_3 = @cust_1.invoices.create!(status: 1)
+    @invoice_4 = @cust_2.invoices.create!(status: 1)
+    @invoice_5 = @cust_2.invoices.create!(status: 1)
+    @invoice_6 = @cust_2.invoices.create!(status: 1)
+    @invoice_7 = @cust_3.invoices.create!(status: 1)
+    @invoice_8 = @cust_3.invoices.create!(status: 1)
+    @invoice_9 = @cust_4.invoices.create!(status: 1)
+    @invoice_10 = @cust_4.invoices.create!(status: 1)
+    @invoice_11 = @cust_5.invoices.create!(status: 1)
+    @invoice_12 = @cust_5.invoices.create!(status: 1)
+    @invoice_13 = @cust_6.invoices.create!(status: 1)
 
-    @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_3 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_4 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_7 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_7.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_8 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_8.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_9 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_9.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_10 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_10.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_11 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_11.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_12 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_12.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
-    @ii_13 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_13.id, quantity: 1, unit_price: @item_1.unit_price, status: "2")
+    @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_3 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_4 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_7 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_7.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_8 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_8.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_9 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_9.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_10 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_10.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_11 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_11.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
+    @ii_12 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_12.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
+    @ii_13 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_13.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
 
     @transaction_1 = @invoice_1.transactions.create!(credit_card_number: 4039485738495837, result: "success")
     @transaction_2 = @invoice_2.transactions.create!(credit_card_number: 4039485738495837, result: "success")
@@ -56,7 +56,6 @@ RSpec.describe Merchant do
     @transaction_11 = @invoice_11.transactions.create!(credit_card_number: 4738473664751832, result: "success")
     @transaction_12 = @invoice_12.transactions.create!(credit_card_number: 4738473664751832, result: "success")
     @transaction_13 = @invoice_13.transactions.create!(credit_card_number: 4023948573948293, result: "success")
-
   end
   describe "relationships" do
     it { should have_many(:items) }
@@ -71,6 +70,53 @@ RSpec.describe Merchant do
       expect(@merch_1.top_5_customers).to eq([@cust_1, @cust_2, @cust_3, @cust_4, @cust_5])
 
       expect(@merch_1.top_5_customers.first.successful_transactions).to eq(9)
+    end
+
+    it "#items_ready_to_ship returns all items that have been ordered but not shipped" do
+      merchant = Merchant.create!(name: "MerchyMcMerchFace")
+
+      invoice = @cust_1.invoices.create!(status: :in_progress)
+      other_invoice = @cust_1.invoices.create!(status: :in_progress)
+
+      pending_item = merchant.items.create!(
+        name: "Pending Item",
+        description: "an item that is pending",
+        unit_price: 2500
+      )
+      pending_invoice_item = InvoiceItem.create!(
+        item_id: pending_item.id,
+        invoice_id: invoice.id,
+        quantity: 1,
+        unit_price: pending_item.unit_price,
+        status: 0
+      )
+      packaged_item = merchant.items.create!(
+        name: "Packaged Item",
+        description: "an item that has been packaged",
+        unit_price: 4500
+      )
+      packaged_invoice_item = InvoiceItem.create!(
+        item_id: packaged_item.id,
+        invoice_id: invoice.id,
+        quantity: 1,
+        unit_price: packaged_item.unit_price,
+        status: 1
+      )
+      shipped_item = merchant.items.create!(
+        name: "Shipped Item",
+        description: "an item that has been shipped",
+        unit_price: 3500
+      )
+      shipped_invoice_item = InvoiceItem.create!(
+        item_id: shipped_item.id,
+        invoice_id: other_invoice.id,
+        quantity: 1,
+        unit_price: shipped_item.unit_price,
+        status: 2
+      )
+      expect(merchant.items_ready_to_ship.ids).to include(packaged_invoice_item.invoice_id)
+      expect(merchant.items_ready_to_ship.ids).to include(pending_invoice_item.invoice_id)
+      expect(merchant.items_ready_to_ship.ids).to_not include(shipped_invoice_item.invoice_id)
     end
   end
 end
