@@ -77,10 +77,16 @@ RSpec.describe Merchant, type: :model do
       item_2 = create(:item, merchant_id: merchant_1.id)
       customer = create(:customer)
       invoice = create(:invoice, customer_id: customer.id, status: 1)
-      invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id)
-      invoice_item_2 = create(:invoice_item, status: 2, item_id: item_2.id, invoice_id: invoice.id)
+      date_1 = 	"2015-02-08 09:54:09 UTC".to_datetime
+      date_2 = 	"2020-02-21 09:54:09 UTC".to_datetime
+      date_3 = 	"2018-03-12 09:54:09 UTC".to_datetime
+      invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_1)
+      invoice_item_2 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_2)
+      invoice_item_3 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_3)
 
-      expect(merchant_1.items_ready_to_ship).to eq([item_1])
+      expect(merchant_1.ready_to_ship[0]).to eq(invoice_item_1)
+      expect(merchant_1.ready_to_ship[1]).to eq(invoice_item_2)
+      expect(merchant_1.ready_to_ship[2]).to eq(invoice_item_3)
     end
     it '#current_invoice_items returns a merchants invoice items for a given invoice' do
       merch1 = FactoryBot.create(:merchant)

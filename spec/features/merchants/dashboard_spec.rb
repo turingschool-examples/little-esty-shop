@@ -87,7 +87,7 @@ RSpec.describe 'Merchant Dashboard Page' do
         expect(page).to_not have_content(item_2.name)
       end
       
-      within "#item-#{item_1.id}" do
+      within "#invoice-item-#{invoice_item_1.id}" do
         expect(page).to have_content(item_1.name)
         expect(page).to have_link("#{invoice.id}")
       end
@@ -96,7 +96,7 @@ RSpec.describe 'Merchant Dashboard Page' do
       expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice.id}")
     end
     
-    xit "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest" do
+    it "displays created_at date for each invoice in 'Ready to Ship' and they are ordered oldest to newest" do
       merchant_1 = create(:merchant)
       
       item_1 = create(:item, merchant_id: merchant_1.id)
@@ -115,17 +115,18 @@ RSpec.describe 'Merchant Dashboard Page' do
       
       visit "/merchants/#{merchant_1.id}/dashboard"
       
-      within "#item-#{item_1.id}" do
+      within "#invoice-item-#{invoice_item_1.id}" do
         expect(page).to have_content("February 8, 2015")
       end
-      within "#item-#{item_2.id}" do
+      within "#invoice-item-#{invoice_item_2.id}" do
         expect(page).to have_content("February 21, 2020")
       end
-      within "#item-#{item_3.id}" do
+      within "#invoice-item-#{invoice_item_3.id}" do
         expect(page).to have_content("March 12, 2018")
       end
-      expect(item_2).to appear_before(item_3)
-      expect(item_3).to appear_before(item_1)
+      # save_and_open_page
+      expect(item_1.name).to appear_before(item_3.name)
+      expect(item_3.name).to appear_before(item_2.name)
     end
     #     As a merchant
     # When I visit my merchant dashboard
