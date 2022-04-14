@@ -13,3 +13,13 @@
     <% end %>
   </ol>
 </section>
+
+
+<section id="incomplete_invoices">
+  <h3>Incomplete Invoices</h3>
+
+  <% @invoices.incomplete_invoices.each do |invoice| %>
+    Invoice #<%= link_to "admin/invoice/#{invoice.id}", "admin/invoices/#{invoice.id}" %>
+
+    <% end %>
+</section>

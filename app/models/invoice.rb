@@ -20,5 +20,10 @@ class Invoice < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def self.incomplete_invoices
+    Invoice.all.where(status: [0,1])
+    # require "pry"; binding.pry
+    # invoice_items.where(status: [0,1])
+  end
 
 end
