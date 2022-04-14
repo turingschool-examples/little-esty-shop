@@ -20,8 +20,5 @@ class Invoice < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def incomplete
-    invoices.where_not(status: 2)
-  end
 
 end
