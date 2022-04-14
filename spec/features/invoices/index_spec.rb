@@ -121,4 +121,10 @@ describe 'merchant item index page' do
 
     expect(page).not_to have_content("Invoice ##{@invoice_3.id}")
   end
+
+  it 'has links to invoice show pages' do
+    click_link("#{@invoice_2.id}")
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}")
+  end
 end
