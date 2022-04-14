@@ -10,4 +10,7 @@ class Item < ApplicationRecord
 
 
   belongs_to :merchant
+  def to_dollars
+    unit_price.to_f / 100
+  end
 end

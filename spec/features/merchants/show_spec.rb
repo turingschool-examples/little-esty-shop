@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'merchant dashboard page' do
+describe "merchant dashboard page" do
   before do
     @merchant_1 = Merchant.create!(
       name: "Store Store",
@@ -27,7 +27,6 @@ describe 'merchant dashboard page' do
       created_at: Date.current,
       updated_at: Date.current
     )
-
     @beer = @merchant_2.items.create!(
       name: "Beer",
       description: "Happiness <3",
@@ -92,7 +91,6 @@ describe 'merchant dashboard page' do
       created_at: Date.current,
       updated_at: Date.current
     )
-
     @invoice_item_4 = InvoiceItem.create!(
       item_id: @beer.id,
       invoice_id: @invoice_3.id,
@@ -106,11 +104,11 @@ describe 'merchant dashboard page' do
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
 
-  it 'displays the merchants name' do
+  it "displays the merchants name" do
     expect(page).to have_content("Store Store")
   end
 
-  it 'has links to the merchant item index' do
+  it "has links to the merchant item index" do
     click_link("Store Store's Items")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
@@ -119,13 +117,40 @@ describe 'merchant dashboard page' do
     expect(page).not_to have_content("Beer")
   end
 
-  it 'has links to the merchant invoice index' do
+  it "has links to the merchant invoice index" do
     click_link("Invoices")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
     # save_and_open_page
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice ##{@invoice_2.id}")
     expect(page).not_to have_content("Invoice ##{@invoice_3.id}")
+  end
+
+  describe "items ready to ship section" do
+    it "displays items ready to ship" do
+      @basketball = @merchant_1.items.create!(
+        name: "Basketball",
+        description: "A ball of pure basket.",
+        unit_price: 35000,
+        created_at: Date.current,
+        updated_at: Date.current
+      )
+      expect(page).to have_content("Items ready to ship")
+      within ".items_ready_to_ship" do
+        expect(page).to have_content("Soccer Ball")
+        expect(page).to have_content("Cup")
+        expect(page).to_not have_content("Basketball")
+      end
+    end
+
+    it "has links to merchant item invoice page" do
+      within ".items_ready_to_ship" do
+        within "##{@soccer.id}" do
+          click_link(@invoice_1.id.to_s)
+          expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+        end
+      end
+    end
   end
 
   it "finds shows top_5_customers names and displays the number of successful transactions for each" do

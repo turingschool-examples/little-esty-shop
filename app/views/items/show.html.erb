@@ -1,0 +1,5 @@
+<h1><%= @item.name %></h1>
+<h3>Description: <%= @item.description%></h3>
+<h3>Price: <%= @item.to_dollars %></h3>
+
+<%= link_to 'Edit', "/items/#{@item.id}/edit" %>
