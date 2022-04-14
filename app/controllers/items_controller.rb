@@ -22,6 +22,10 @@ class ItemsController < ApplicationController
     redirect_to "/merchants/#{merchant.id}/items"
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
   def create
     binding.pry
     merchant = Merchant.find(params[:merchant_id])
