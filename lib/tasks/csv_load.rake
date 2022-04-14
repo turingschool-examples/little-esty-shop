@@ -5,7 +5,7 @@ namespace :csv_load do
    file = "db/data/customers.csv"
     CSV.foreach(file, headers: true) do |row|
       customer_hash = row.to_hash
-      customer = Customer.where(id: customer_hash["id"])
+            customer = Customer.where(id: customer_hash["id"])
       if customer.count == 1
         customer.first.update_attributes(customer_hash)
       else
