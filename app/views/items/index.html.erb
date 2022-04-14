@@ -21,7 +21,7 @@
   <h3> <%= item.name %> </h3>
   <p> <%= item.description %> </p>
   <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
-  <div id="DisabledItem-<%= item.id %>"
+  <div id="DisabledItem-<%= item.id %>">
     <%= button_to "Enable Item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
   </div>
   <hr/>
@@ -34,7 +34,7 @@
   <h3> <%= item.name %> </h3>
   <p> <%= item.description %> </p>
   <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
-  <div id="DisabledItem-<%= item.id %>"
+  <div id="EnabledItem-<%= item.id %>"
     <%= button_to "Disable Item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %>
   </div>
   <hr/>
