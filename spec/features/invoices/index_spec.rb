@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'merchant item index page' do
+describe 'merchant invoice index page' do
   before do
     @merchant_1 = Merchant.create!(
       name: "Store Store",
