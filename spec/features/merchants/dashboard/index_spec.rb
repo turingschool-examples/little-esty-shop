@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'time'
 
 RSpec.describe 'merchant dashboard' do
   before :each do
@@ -53,10 +54,10 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it "merchant dashboard items ready to ship" do
-    # comprehensively tests all possible item compartmentalizations
-    item_1 = @merchant1.items.create!(name: "spoon", description: "stamped stainless steel, not deburred", unit_price: 80, status: 1, merchant_id: @merchant1.id)
-    item_2 = @merchant1.items.create!(name: "fork", description: "stamped stainless steel, not deburred", unit_price: 90, status: 1, merchant_id: @merchant1.id)
-    item_3 = @merchant1.items.create!(name: "butter knife", description: "stamped stainless steel, not deburred", unit_price: 65, status: 1, merchant_id: @merchant1.id)
+    merchant_1 = Merchant.create!(name: "Pabu")
+    item_1 = merchant_1.items.create!(name: "spoon", description: "stamped stainless steel, not deburred", unit_price: 80, status: 1, merchant_id: merchant_1.id)
+    item_2 = merchant_1.items.create!(name: "fork", description: "stamped stainless steel, not deburred", unit_price: 90, status: 1, merchant_id: merchant_1.id)
+    item_3 = merchant_1.items.create!(name: "butter knife", description: "stamped stainless steel, not deburred", unit_price: 65, status: 1, merchant_id: merchant_1.id)
     customer_1 = Customer.create(first_name: "Max", last_name: "Powers")
     customer_2 = Customer.create!(first_name: "Bob", last_name: "Ross")
     invoice_1 = customer_1.invoices.create!(status: 0)
@@ -65,7 +66,7 @@ RSpec.describe 'merchant dashboard' do
     invoice_item_2 = invoice_2.invoice_items.create!(quantity: 12, unit_price: item_2.unit_price, status: 1, item_id: item_2.id)
     invoice_item_3 = invoice_1.invoice_items.create!(quantity: 12, unit_price: item_3.unit_price, status: 2, item_id: item_1.id)
 
-    visit merchant_dashboard_index_path(@merchant1)
+    visit merchant_dashboard_index_path(merchant_1)
 
     expect(page).to have_content("Items Ready to Ship")
     expect(page).to have_content(item_2.name)
@@ -82,6 +83,29 @@ RSpec.describe 'merchant dashboard' do
       expect(page).to have_content(item_2.name)
       expect(page).to have_link(href: "/invoices/#{invoice_2.id}/")
     end
+
+  end
+
+  it "sorts invoices by least recent" do
+    item_1 = @merchant1.items.create!(name: "spoon", description: "stamped stainless steel, not deburred", unit_price: 80, status: 1, merchant_id: @merchant1.id)
+    item_2 = @merchant1.items.create!(name: "fork", description: "stamped stainless steel, not deburred", unit_price: 90, status: 1, merchant_id: @merchant1.id)
+    item_3 = @merchant1.items.create!(name: "butter knife", description: "stamped stainless steel, not deburred", unit_price: 65, status: 1, merchant_id: @merchant1.id)
+    customer_1 = Customer.create(first_name: "Max", last_name: "Powers")
+    customer_2 = Customer.create!(first_name: "Bob", last_name: "Ross")
+    invoice_1 = customer_1.invoices.create!(status: 0, created_at: Time.parse("2015.11.23"))
+    invoice_2 = customer_2.invoices.create!(status: 0)
+    invoice_item_1 = invoice_1.invoice_items.create!(quantity: 12, unit_price: item_1.unit_price, status: 0, item_id: item_1.id)
+    invoice_item_2 = invoice_2.invoice_items.create!(quantity: 12, unit_price: item_2.unit_price, status: 1, item_id: item_2.id)
+    invoice_item_3 = invoice_1.invoice_items.create!(quantity: 12, unit_price: item_3.unit_price, status: 1, item_id: item_3.id)
+
+    visit merchant_dashboard_index_path(@merchant1)
+
+    expect(item_3.name).to appear_before(item_2.name) # Invoice_1 items should appear first based on forced created_at date
+
+    within ("#unshipped_invoice_item_#{invoice_item_1.id}") do
+      expect(page).to have_content("Monday, November 23, 2015")
+    end
+
 
   end
 

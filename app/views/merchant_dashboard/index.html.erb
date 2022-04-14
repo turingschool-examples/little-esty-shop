@@ -18,11 +18,14 @@
     <tr>
       <th>Item Name</th>
       <th>Invoice Number</th>
+      <th>Invoice Opened</th>
     </tr>
-    <% @merchant.unshipped_invoice_items.each do |invoice_item| %>
+    <% @invoice_items_to_ship.each do |invoice_item| %>
       <tr>
         <div id="unshipped_invoice_item_<%= invoice_item.invoice_item_id %>">
-          <td> <%= invoice_item.name %> </td><td> <a href="/invoices/<%= invoice_item.invoice_id %>/"><%=invoice_item.invoice_id%></a> </td>
+          <td> <%= invoice_item.name %> </td>
+          <td> <a href="/invoices/<%= invoice_item.invoice_id %>/"><%=invoice_item.invoice_id%></a> </td>
+          <td> <%= date_formatter(invoice_item.invoice_created_at) %></td>
         </div>
       </tr>
       <% end %>
