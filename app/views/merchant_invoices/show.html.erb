@@ -13,7 +13,12 @@
   Item Name: <%= invoice_item.item.name %><br>
   Quantity Ordered: <%= invoice_item.quantity %><br>
   Item Price: <%= invoice_item.price_to_dollars %><br>
-  Invoice Item Status: <%= invoice_item.status %><br><br>
+  Invoice Item Status: <%= invoice_item.status %>
+  <%= form_with url: "merchants/#{@merchant.id}/invoice_items", local: true do |f|%>
+    <%= f.select :status, InvoiceItem.statuses.keys, value: "#{invoice_item.status}" %>
+    <%= f.submit 'Update Item Status' %>
+  <% end %>
+  <br><br>
 
 </section>
 
