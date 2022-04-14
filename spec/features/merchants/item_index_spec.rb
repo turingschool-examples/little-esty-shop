@@ -26,12 +26,32 @@ RSpec.describe 'Merchant Item Index Page' do
           
     end
 
+    it 'has a button to enable or disable each item' do
+      within "#enabled-items" do
+        expect(page).to have_content("Golden Rose")
+        expect(page).to have_content("Dark Sole Shoes")
+      end
+      
+      within "#item-#{@item1.id}" do
+        click_button("Disable")
+      end
+
+      within "#enabled-items" do
+        expect(page).to_not have_content("Golden Rose")
+        expect(page).to have_content("Dark Sole Shoes")
+      end
+      
+      within "#disabled-items" do
+        expect(page).to have_content("Golden Rose")
+        expect(page).to_not have_content("Dark Sole Shoes")
+      end
+    end
   end
 
 end
-
-
-# As a merchant,
-# When I visit my merchant items index page ("merchant/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
+# As a merchant
+# When I visit my items index page
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed
