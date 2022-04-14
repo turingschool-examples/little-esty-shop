@@ -51,7 +51,7 @@ describe 'invoice show page' do
 
     @invoice_1 = @customer_1.invoices.create!(
       status: 1,
-      created_at: Date.current,
+      created_at: Date.new(2020,12,12),
       updated_at: Date.current
     )
     @invoice_2 = @customer_1.invoices.create!(
@@ -118,7 +118,7 @@ describe 'invoice show page' do
   it 'displays pertinent information' do
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice status: completed")
-    expect(page).to have_content("Invoice created at: #{@invoice_1.created_at.strftime('%A, %B %d, %Y')}")
+    expect(page).to have_content("Invoice created at: Saturday, December 12, 2020")
     expect(page).to have_content("For customer: Malcolm Jordan")
   end
 end
