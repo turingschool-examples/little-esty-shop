@@ -13,4 +13,10 @@
       <p>Successful Transactions: <%= customer.successful_transactions.count %></p>
     </div>
   <% end %><br>
+  <div id="items-ready-to-ship">
+    <h3>Items ready to ship:</h3>
+    <% @merchant.items_ready_to_ship.each do |item| %>
+      <%= item.name %>
+    <% end %>
+  </div>
 </div>
