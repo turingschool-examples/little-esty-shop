@@ -1,1 +1,32 @@
-<h1>Sandisz puts code here</h1>
+<h1>
+  Invoice #<%= @invoice.id %>
+</h1>
+
+<h2>
+  For customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
+</h2>
+
+<hr/>
+
+<h3>
+  Invoice status: <%= @invoice.status %>
+</h3>
+
+<p>
+  Invoice created at: <strong><%= @invoice.created_at.strftime('%A, %B %d, %Y') %></strong>
+</p>
+
+<hr/>
+<div id="invoice_items">
+  <h1> Invoice Items </h1>
+  <hr/>
+  <% @invoice.invoice_items.each do |ii| %>
+  <div id="ii-<%= ii.id %>">
+    <h2><%= ii.item.name %></h2>
+    <p>Quantity: <strong><%= ii.quantity %></strong></p>
+    <p>Sold for: <strong>$<%= ii.unit_price / 100.0 %></strong> each</p>
+    <p>Status: <strong><%= ii.status %></strong></p>
+
+    <hr/>
+  <% end %>
+</div>
