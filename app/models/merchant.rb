@@ -46,6 +46,6 @@ class Merchant < ApplicationRecord
   end
   
   def disabled_items
-    # items.where(status: 0)
+    items.where(status: 0)
   end
 end
