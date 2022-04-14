@@ -123,8 +123,8 @@ describe 'merchant item index page' do
   end
 
   it 'has links to invoice show pages' do
-    click_link("#{@invoice_2.id}")
+    click_link("#{@invoice_1.id}")
 
-    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}")
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
   end
 end
