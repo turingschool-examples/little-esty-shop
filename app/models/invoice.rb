@@ -19,4 +19,9 @@ class Invoice < ApplicationRecord
     last_name ="#{customer.last_name}"
     "#{first_name} #{last_name}"
   end
+
+  def incomplete
+    invoices.where_not(status: 2)
+  end
+
 end

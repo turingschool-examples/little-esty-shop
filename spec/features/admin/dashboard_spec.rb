@@ -78,11 +78,11 @@ RSpec.describe 'admin dashboad spec' do
       # customer_2 5 succesful transactions
       @customer_2 = create(:customer)
       @invoice_2 = create(:invoice, status: 2, customer_id: @customer_2.id, created_at: "2012-03-25 09:54:09 UTC")
-      @invoice_item_2 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_2.id, status: 2)
+      @invoice_item_2 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_2.id, status: 1)
       transactions_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: @invoice_2.id, result: 0)
       #customer_3 4 succesful
       @customer_3 = create(:customer)
-      @invoice_3 = create(:invoice, status: 2,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
       @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 2)
       @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
       #customer_6 1 succesful
@@ -101,23 +101,20 @@ RSpec.describe 'admin dashboad spec' do
       @invoice_5 = create(:invoice, customer_id: @customer_5.id, created_at: "2012-03-25 09:54:09 UTC")
       @invoice_item_5 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_5.id, status: 2)
       @transactions_list_5 = FactoryBot.create_list(:transaction, 2, invoice_id: @invoice_5.id, result: 0)
-        visit "/admin/"
+
+        visit "/admin"
     end
 
     it 'has a section showing ids of invoices with unshipped items ' do
       expect(page).to_not have_content(@invoice_2.id)
       expect(page).to_not have_content(@invoice_3.id)
-      expect(page).to have_link(@invoice_1.id)
+      expect(page).to_not have_link(@invoice_1.id)
       expect(page).to have_link(@invoice_4.id)
       expect(page).to have_link(@invoice_5.id)
       expect(page).to have_link(@invoice_6.id)
 
       click_link(@invoice_5.id)
       expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
-    end
-
-
-
     end
   end
 end
