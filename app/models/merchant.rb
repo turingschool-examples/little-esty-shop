@@ -36,7 +36,8 @@ class Merchant < ApplicationRecord
   end
 
   def total_revenue_for_invoice(invoice_id)
-    # x = current_invoice_items(invoice_id)
-    # require "pry"; binding.pry
+    invoice = Invoice.find(invoice_id)
+    invoice.invoice_items.sum('unit_price * quantity') / 100.to_f
+
   end
 end
