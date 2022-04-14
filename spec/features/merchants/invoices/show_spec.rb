@@ -86,8 +86,32 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within "#total_revenue" do
         expect(page).to have_content("Revenue: $4167.88")
       end
+    end
 
+    it 'has a drop down menu for each invoice item status, to change said status' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id)
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, status: 0, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, invoice_id: invoice1.id)
+      invoice_item_3 = FactoryBot.create(:invoice_item, item_id: item3.id, unit_price: item3.unit_price, quantity: 2, invoice_id: invoice1.id)
+      visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
 
+      expect(page).to have_button("Update Item Status")
+
+      within "#invoice_item-#{invoice_item_1.id}" do
+        expect(find_field('invoice_item_status').value).to eq('packaged')
+        select 'packaged'
+        click_button 'Update Invoice'
+      end
+      expect(current_path).to eq("/merchants/#{merch1.id}/invoices/#{invoice1.id}")
+
+      within "#invoice_item-#{invoice_item_1.id}" do
+        expect(page).to have_content("shipped")
+      end
 
     end
 
