@@ -8,6 +8,7 @@
   <% @merchant.top_five_items.each do |item| %>
     <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
     <h5>Total revenue generated:<strong> $<%= item.total_rev %></strong></h5>
+    <h5>Best sales day:</h5>
   <% end %>
 </div>
 

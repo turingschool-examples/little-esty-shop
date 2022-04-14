@@ -9,7 +9,9 @@
   <div id="top_item_<%= item.id %>"
     <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
     <p>Total revenue generated:<strong> $<%= item.total_rev.to_f / 100 %></strong></p>
+    <h5>Best sales day:</h5>
     <hr/>
+  <br>
   </div>
   <% end %>
 </div>
