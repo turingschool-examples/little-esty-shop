@@ -66,8 +66,32 @@ RSpec.describe 'Merchant items index' do
 
     it 'lists the names of the top 5 most popular items ranked by total revenue' do
 
-        expect(page).to have_content("Top Items")
+        expect(page).to have_content("Top 5 Items")
 
+        merchant1 = create(:merchant)
+        merchant2 = create(:merchant)
+
+        customer1 = create(:customer)
+
+        invoice1 = create(:invoice, customer: customer1, status: 1)
+        invoice2 = create(:invoice, customer: customer1, status: 1)
+
+        transaction1 = create(:transaction, invoice: invoice1, result: 'success')
+        transaction2 = create(:transaction, invoice: invoice1, result: 'failed')
+
+        item1 = create(:item, merchant: merchant1, unit_price: 300)
+        item2 = create(:item, merchant: merchant1, unit_price: 15)
+        item3 = create(:item, merchant: merchant1, unit_price: 15)
+        item4 = create(:item, merchant: merchant1, unit_price: 15)
+        item5 = create(:item, merchant: merchant1, unit_price: 15)
+        item6 = create(:item, merchant: merchant1, unit_price: 15)
+
+        invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 1, unit_price: 300) #300 rev
+        invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 2, unit_price: 10) #20 rev
+        invoice_item3 = create(:invoice_item, item: item3, invoice: invoice1, quantity: 3, unit_price: 10) #30 rev
+        invoice_item4 = create(:invoice_item, item: item4, invoice: invoice1, quantity: 1, unit_price: 10) #10 rev
+        invoice_item5 = create(:invoice_item, item: item5, invoice: invoice2, quantity: 5, unit_price: 10) #50 rev
+        invoice_item6 = create(:invoice_item, item: item6, invoice: invoice2, quantity: 2, unit_price: 10) #20 rev
     end
   end
 end
