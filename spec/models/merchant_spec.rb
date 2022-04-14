@@ -21,4 +21,17 @@ RSpec.describe Merchant, type: :model do
     it { should allow_value([true, false]).for(:enabled) }
     it { should_not allow_value(nil).for(:enabled) }
   end
+
+  describe "methods" do
+    it 'Finds all enabled or disabled merchants' do
+      merchant_1 = create(:merchant)
+      merchant_2 = Merchant.create!(name: "Doesn't matter", enabled: false)
+      merchant_3 = create(:merchant)
+      merchant_4 = create(:merchant)
+
+      expect(Merchant.enabled_check(true)).to eq([merchant_1, merchant_3, merchant_4])
+      expect(Merchant.enabled_check(false)).to eq([merchant_2])
+    end
+  end
+      
 end
