@@ -31,13 +31,13 @@ RSpec.describe 'merchant dashboard' do
 
   it 'has link to each invoice show page' do
     within("#invoices") do
-      click_link @invoice1.id
+      click_link "#{@invoice1.id}"
       expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1))
     end
   end
   it 'has link to seperate invoice' do
     within("#invoices") do
-      click_link @invoice2.id
+      click_link "#{@invoice2.id}"
       expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice2))
     end
   end
