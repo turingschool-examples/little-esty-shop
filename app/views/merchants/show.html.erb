@@ -1,4 +1,5 @@
-<h1><%= @merchant.name %> </h1>
+<h1><%= @merchant.name %>
+</h1>
 <br>
 <h3>
   <a href="/merchants/<%= @merchant.id %>/items">
@@ -11,10 +12,23 @@
   </a>
 </h3>
 
-<h2>Top 5 Customers: </h2>
-  <ol>
-    <% @merchant.top_5_customers.each do |cust| %>
-      <li id="<%= cust.id %>">Name: <%= cust.first_name %> <%= cust.last_name %><br> Successful Transactions: <%= cust.successful_transactions %></li>
-      <br>
-    <% end %>
-  </ol>
+<h2>Top 5 Customers:
+</h2>
+<ol>
+  <% @merchant.top_5_customers.each do |cust| %>
+    <li id="<%= cust.id %>">
+      Name: <%= cust.first_name %> <%= cust.last_name %><br>
+      Successful Transactions:
+      <%= cust.successful_transactions %></li>
+    <br>
+  <% end %>
+</ol>
+
+<div class="items_ready_to_ship">
+<h2>Items ready to ship</h2>
+<ul>
+  <% @merchant.items_ready_to_ship.each do |item| %>
+  <li id="<%= item.item_id %>"><%= item.name %>: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.id %>"><%= item.id %></a></li>
+  <% end %>
+</ul>
+</div>

@@ -1,0 +1,9 @@
+<h1> <%= @merchant.name %> </h1>
+<br/><hr/>
+
+<% @invoices.each do |inv|%>
+  <h3>
+    Invoice #<a href="/merchants/<%= @merchant.id %>/invoices/<%= inv.id %>"><%= inv.id %></a>
+  </h3>
+  <hr/>
+<% end %>
