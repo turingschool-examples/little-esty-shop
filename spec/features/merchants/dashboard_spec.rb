@@ -12,7 +12,7 @@ RSpec.describe 'merchant dashboard' do
     @invoice_1 = @customer_1.invoices.create!(status: 'completed')
     @invoice_7 = @customer_1.invoices.create!(status: 'completed')
     @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 'packaged')
-    @item_2.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 5, unit_price: 4, status: 'packaged')
+    @item_2.invoice_items.create!(invoice_id: @invoice_7.id, quantity: 5, unit_price: 4, status: 'packaged')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249632', result: 'success')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249631', result: 'success')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249633', result: 'success')
@@ -118,7 +118,7 @@ RSpec.describe 'merchant dashboard' do
 
     # And next to each Item I see the id of the invoice that ordered my item
     # And each invoice id is a link to my merchant's invoice show page
-    
+
     it 'each item has its invoice id as link to its invoice show page'
   end
 end
