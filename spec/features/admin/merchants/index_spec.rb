@@ -71,4 +71,22 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     end
   end
 
+  it 'Sorts merchants on enabled/disabled status' do
+    merchant_4 = Merchant.create!(name: "This Is A Test Value", enabled: false)
+    visit '/admin/merchants'
+
+    within("#enabled-merchants") do
+      expect(page).to have_content("#merchant-#{@merchant_1.id}")
+      expect(page).to have_content("#merchant-#{@merchant_2.id}")
+      expect(page).to have_content("#merchant-#{@merchant_3.id}")
+      expect(page).to_not have_content("#merchant-#{@merchant_4.id}")
+    end
+
+    within("#disabled_merchants") do
+      expect(page).to_not have_content("#merchant-#{@merchant_1.id}")
+      expect(page).to_not have_content("#merchant-#{@merchant_2.id}")
+      expect(page).to_not have_content("#merchant-#{@merchant_3.id}")
+      expect(page).to have_content("#merchant-#{@merchant_4.id}")
+    end      
+  end
 end
