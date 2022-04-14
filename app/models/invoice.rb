@@ -7,11 +7,5 @@ class Invoice < ApplicationRecord
   has_many :transactions
   belongs_to :customer
 
-  enum status: {"in_progress" => 0, "completed" => 1, "cancelled" => 2}
-
-  def self.find_invs_by_merchant(merchant_id)
-    joins(:merchants)
-      .where("items.merchant_id = #{merchant_id}")
-      .distinct
-  end
+  enum status: { "in_progress" => 0, "completed" => 1, "cancelled" => 2 }
 end
