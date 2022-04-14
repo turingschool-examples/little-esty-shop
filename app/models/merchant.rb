@@ -8,11 +8,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
-  def self.enabled
-    where(enabled: true).all
+  def self.enabled_check(check)
+    where(enabled: check).all
   end
 
-  def self.disabled
-    where(enabled: false).all
-  end
 end

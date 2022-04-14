@@ -2,18 +2,18 @@
 
 <div id="merchants">
   <div id="enabled-merchants">
-    <% @merchants.enabled.each do |merchant| %>
+    <% @merchants.enabled_check(true).each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
         <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-        <%= link_to "#{merchant.enabled ? "Enabled" : "Disabled"}", "/admin/merchants/#{merchant.id}", method: :patch %>
+        <%= link_to "Enabled", "/admin/merchants/#{merchant.id}", method: :patch %>
       </div>
     <% end %>
   </div>
   <div id="disabled-merchants">
-    <% @merchants.disabled.each do |merchant| %>
+    <% @merchants.enabled_check(false).each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
         <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-        <%= link_to "#{merchant.enabled ? "Enabled" : "Disabled"}", "/admin/merchants/#{merchant.id}", method: :patch %>
+        <%= link_to "Disabled", "/admin/merchants/#{merchant.id}", method: :patch %>
       </div>
     <% end %>
   </div>
