@@ -50,14 +50,12 @@ RSpec.describe Invoice do
       item_1 = merchant.items.create!(name: 'Bottle', unit_price: 10, description: 'H20')
       item_2 = merchant.items.create!(name: 'Can', unit_price: 3, description: 'Soda')
       item_3 = merchant.items.create!(name: 'Bowl', unit_price: 15, description: 'Soda')
-      item_4 = merchant.items.create!(name: 'Mug', unit_price: 5, description: 'Soda')
       customer = Customer.create!(first_name: "Billy", last_name: "Jonson")
       invoice = customer.invoices.create(status: "in progress", created_at: Time.parse("2022-04-12 09:54:09"))
       item_1.invoice_items.create!(invoice_id: invoice.id, quantity: 3, unit_price: 4, status: 2)
       item_2.invoice_items.create!(invoice_id: invoice.id, quantity: 3, unit_price: 4, status: 2)
       item_3.invoice_items.create!(invoice_id: invoice.id, quantity: 3, unit_price: 4, status: 2)
-      item_4.invoice_items.create!(invoice_id: invoice.id, quantity: 3, unit_price: 4, status: 2)
-      expect(invoice.total_revenue).to eq(48)
+      expect(invoice.total_revenue).to eq(36)
     end
   end
 end

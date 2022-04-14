@@ -51,7 +51,7 @@ RSpec.describe 'merchant invoice show page' do
       @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 2)
       @item_2.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 2)
       @item_3.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 2)
-      expect(page).to have_content("Total Revenue: $3300")
+      expect(page).to have_content("Total Revenue: $33.00")
     end
   end
 end

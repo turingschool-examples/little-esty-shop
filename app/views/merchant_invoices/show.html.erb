@@ -36,4 +36,4 @@
   </div>
 <% end %>
 
-<h2>Total Revenue: $<%= @invoice.total_revenue %> </h2>
+<h2>Total Revenue: $<%= @invoice.total_revenue.to_s.insert(-3,".") %> </h2>
