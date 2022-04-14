@@ -76,17 +76,17 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     visit '/admin/merchants'
 
     within("#enabled-merchants") do
-      expect(page).to have_content("#merchant-#{@merchant_1.id}")
-      expect(page).to have_content("#merchant-#{@merchant_2.id}")
-      expect(page).to have_content("#merchant-#{@merchant_3.id}")
-      expect(page).to_not have_content("#merchant-#{@merchant_4.id}")
+      expect(page).to have_content(@merchant_1.name)
+      expect(page).to have_content(@merchant_2.name)
+      expect(page).to have_content(@merchant_3.name)
+      expect(page).to_not have_content(merchant_4.name)
     end
 
-    within("#disabled_merchants") do
-      expect(page).to_not have_content("#merchant-#{@merchant_1.id}")
-      expect(page).to_not have_content("#merchant-#{@merchant_2.id}")
-      expect(page).to_not have_content("#merchant-#{@merchant_3.id}")
-      expect(page).to have_content("#merchant-#{@merchant_4.id}")
+    within("#disabled-merchants") do
+      expect(page).to_not have_content(@merchant_1.name)
+      expect(page).to_not have_content(@merchant_2.name)
+      expect(page).to_not have_content(@merchant_3.name)
+      expect(page).to have_content(merchant_4.name)
     end      
   end
 end

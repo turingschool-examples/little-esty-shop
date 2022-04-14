@@ -1,13 +1,24 @@
 <h1>Merchants Dashboard</h1>
 
 <div id="merchants">
-  <% @merchants.each do |merchant| %>
-    <div id="merchant-<%= merchant.id %>">
-      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-      <%= link_to "#{merchant.enabled ? "Enabled" : "Disabled"}", "/admin/merchants/#{merchant.id}", method: :patch %>
-    </div>
-  <% end %>
+  <div id="enabled-merchants">
+    <% @merchants.enabled.each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+        <%= link_to "#{merchant.enabled ? "Enabled" : "Disabled"}", "/admin/merchants/#{merchant.id}", method: :patch %>
+      </div>
+    <% end %>
+  </div>
+  <div id="disabled-merchants">
+    <% @merchants.disabled.each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+        <%= link_to "#{merchant.enabled ? "Enabled" : "Disabled"}", "/admin/merchants/#{merchant.id}", method: :patch %>
+      </div>
+    <% end %>
+  </div>
 </div>
+
 
 <div id="new_merchant_link">
   <%= link_to "Create New Merchant", "/admin/merchants/new" %>
