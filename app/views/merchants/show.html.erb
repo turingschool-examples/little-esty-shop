@@ -1,7 +1,7 @@
 <h1> <%= @merchant.name %> </h1>
-<%= link_to "Merchant's Items", "/merchants/#{@merchant.id}/items", method: :get %>
+<%= link_to "Merchant's Items", "/merchants/#{@merchant.id}/items" %>
 
-<%= link_to "Merchant's Invoices", "/merchants/#{@merchant.id}/invoices", method: :get %>
+<%= link_to "Merchant's Invoices", "/merchants/#{@merchant.id}/invoices" %>
 
 <h2><%= @merchant.name %>'s Statistics:</h2>
 
@@ -16,7 +16,11 @@
   <div id="items-ready-to-ship">
     <h3>Items ready to ship:</h3>
     <% @merchant.items_ready_to_ship.each do |item| %>
-      <%= item.name %>
+      <div id="item-<%= item.id %>">
+        <h4><%= item.name %> with invoice:
+          <%= link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %>
+        </h4>
+      </div>
     <% end %>
   </div>
 </div>

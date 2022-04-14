@@ -119,6 +119,18 @@ RSpec.describe 'merchant dashboard' do
     # And next to each Item I see the id of the invoice that ordered my item
     # And each invoice id is a link to my merchant's invoice show page
 
-    it 'each item has its invoice id as link to its invoice show page'
+    it 'each item has its invoice id as link to its invoice show page' do
+      within "#item-#{@item_1.id}" do
+        click_link "#{@invoice_1.id}"
+      end
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+      visit "/merchants/#{@merchant.id}/dashboard"
+
+      within "#item-#{@item_2.id}" do
+        click_link "#{@invoice_7.id}"
+      end
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
+    end
   end
 end
