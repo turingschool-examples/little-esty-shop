@@ -73,7 +73,6 @@ namespace :csv_load do
       it.merchant_id = row["merchant_id"]
       it.created_at = row["created_at"]
       it.updated_at = row["updated_at"]
-      it.status = 0
       it.save
 
       puts "#{it.name} saved"
