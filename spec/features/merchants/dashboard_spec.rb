@@ -124,6 +124,14 @@ RSpec.describe 'merchant dashboard' do
 
       visit "/merchants/#{@merchant.id}/dashboard"
 
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_link("#{@invoice_2.id}")
+        expect(page).to have_link("#{@invoice_3.id}")
+        expect(page).to have_link("#{@invoice_4.id}")
+        expect(page).to have_link("#{@invoice_5.id}")
+        expect(page).to have_link("#{@invoice_6.id}")
+      end
+
       within "#item-#{@item_2.id}" do
         click_link "#{@invoice_7.id}"
       end
