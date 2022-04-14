@@ -116,9 +116,6 @@ RSpec.describe 'merchant dashboard' do
       end
     end
 
-    # And next to each Item I see the id of the invoice that ordered my item
-    # And each invoice id is a link to my merchant's invoice show page
-
     it 'each item has its invoice id as link to its invoice show page' do
       within "#item-#{@item_1.id}" do
         click_link "#{@invoice_1.id}"
