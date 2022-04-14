@@ -38,6 +38,9 @@ class Merchant < ApplicationRecord
   def total_revenue_for_invoice(invoice_id)
     invoice = Invoice.find(invoice_id)
     invoice.invoice_items.sum('unit_price * quantity') / 100.to_f
+  end
 
+  def self.status_enabled
+    where(status: 0)
   end
 end

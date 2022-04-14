@@ -127,7 +127,7 @@ RSpec.describe Merchant, type: :model do
       expect(merch1.total_revenue_for_invoice(invoice1.id)).to eq(4167.88)
     end
 
-    xit '#status_enabled returns all merchants with the status: enabled (0)' do
+    it '#status_enabled returns all merchants with the status: enabled (0)' do
       date1 = "2020-02-08 09:54:09 UTC".to_datetime
       date2 = "2017-03-16 04:04:09 UTC".to_datetime
       date3 = "2012-08-07 01:44:09 UTC".to_datetime
@@ -136,12 +136,12 @@ RSpec.describe Merchant, type: :model do
       date6 = "2016-08-18 02:36:09 UTC".to_datetime
       date7 = "2016-11-18 02:36:09 UTC".to_datetime
       merch1 = Merchant.create!(name: 'Lord Eldens', created_at: date1, updated_at: date1, status: 0)
-      merch2 = Merchant.create!(name: 'Lord Eldens', created_at: date2, updated_at: date2, status: 1)
-      merch3 = Merchant.create!(name: 'Lord Eldens', created_at: date3, updated_at: date3, status: 0)
-      merch4 = Merchant.create!(name: 'Lord Eldens', created_at: date4, updated_at: date4, status: 1)
-      merch5 = Merchant.create!(name: 'Lord Eldens', created_at: date5, updated_at: date5, status: 0)
-      merch6 = Merchant.create!(name: 'Lord Eldens', created_at: date5, updated_at: date6, status: 1)
-      merch7 = Merchant.create!(name: 'Lord Eldens', created_at: date7, updated_at: date7, status: 0)
+      merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: date2, updated_at: date2, status: 1)
+      merch3 = Merchant.create!(name: 'Souls Darkery', created_at: date3, updated_at: date3, status: 0)
+      merch4 = Merchant.create!(name: 'My Dog Skeeter', created_at: date4, updated_at: date4, status: 1)
+      merch5 = Merchant.create!(name: 'Corgi Town', created_at: date5, updated_at: date5, status: 0)
+      merch6 = Merchant.create!(name: 'Cheese Company', created_at: date5, updated_at: date6, status: 1)
+      merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
 
       expect(Merchant.status_enabled).to eq([merch1, merch3, merch5, merch7])
     end
