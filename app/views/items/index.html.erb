@@ -4,24 +4,22 @@
 <div id="enabled-items">
 <h3> Enabled Items </h3>
 <% @merchant.enabled_items.each do |item| %>
-<div id="item-<% item.id %>">
   <p> <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> <p>
+  <p> <%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Disabled"} %> <p>
   <p> <%= item.description %> <p>
   <p> <%= item.unit_price %> <p>
   <p> <%= item.status %> <p>  
-</div>
 <% end %>
 </div>
 
 <div id="disabled-items">
 <h3> Disabled Items </h3>
 <% @merchant.disabled_items.each do |item| %>
-<div id="item-<% item.id %>">
   <p> <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> <p>
+  <p> <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Enabled"} %> <p>
   <p> <%= item.description %> <p>
   <p> <%= item.unit_price %> <p>
   <p> <%= item.status %> <p>  
-</div>
 <% end %>
 </div>
 
