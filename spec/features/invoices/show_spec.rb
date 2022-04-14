@@ -97,7 +97,7 @@ describe 'invoice show page' do
       item_id: @beer.id,
       invoice_id: @invoice_3.id,
       quantity: 2,
-      unit_price: @beer.unit_price * 2,
+      unit_price: @beer.unit_price,
       status: 0,
       created_at: Date.current,
       updated_at: Date.current
@@ -120,5 +120,25 @@ describe 'invoice show page' do
     expect(page).to have_content("Invoice status: completed")
     expect(page).to have_content("Invoice created at: Saturday, December 12, 2020")
     expect(page).to have_content("For customer: Malcolm Jordan")
+  end
+
+  it 'displays invoice item information' do
+    within("#ii-#{@invoice_item_1.id}") do
+      expect(page).to have_content("Soccer Ball")
+      expect(page).to have_content("Quantity: 1")
+      expect(page).to have_content("Sold for: $320.0 each")
+      expect(page).to have_content("Status: packaged")
+    end
+    within("#ii-#{@invoice_item_2.id}") do
+      expect(page).to have_content("Cup")
+      expect(page).to have_content("Quantity: 50")
+      expect(page).to have_content("Sold for: $100.0 each")
+      expect(page).to have_content("Status: packaged")
+    end
+    within ("#invoice_items") do
+      expect(page).not_to have_content("Beer")
+      expect(page).not_to have_content("Quantity: 2")
+      expect(page).not_to have_content("Sold for: $1.0 each")
+    end
   end
 end
