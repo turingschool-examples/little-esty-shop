@@ -20,16 +20,18 @@
 <h2>Items ordered:</h2>
 
 <%= @invoice.items.each do |item| %>
-  <ul>
-    <p><%= item.name %><p>
-    <li>
-      <p><%= @invoice.get_invoice_item(item.id).quantity %></p>
-    </li>
-    <li>
-      <p><%= @invoice.get_invoice_item(item.id).unit_price %></p>
-    </li>
-    <li>
-      <p><%= @invoice.get_invoice_item(item.id).status %></p>
-    </li>
-  </ul>
+  <div id="item-<%= item.id %>">
+    <ul>
+      <p><%= item.name %><p>
+      <li>
+        <p>Quantity: <%= @invoice.get_invoice_item(item.id).quantity %></p>
+      </li>
+      <li>
+        <p>Price per item: <%= @invoice.get_invoice_item(item.id).price_in_dollars %></p>
+      </li>
+      <li>
+        <p>Status: <%= @invoice.get_invoice_item(item.id).status %></p>
+      </li>
+    </ul>
+  </div>
 <% end %>

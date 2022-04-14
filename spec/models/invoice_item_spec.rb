@@ -46,4 +46,10 @@ RSpec.describe InvoiceItem do
     it { should belong_to :item}
     it { should belong_to :invoice}
   end
+
+  context 'instance methods' do
+    it '.price_in_dollars should return the price in $0.00 format' do
+      expect(@invoice_item.price_in_dollars).to eq("$132.32")
+    end
+  end
 end
