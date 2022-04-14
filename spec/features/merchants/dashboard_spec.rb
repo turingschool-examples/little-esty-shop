@@ -31,7 +31,7 @@ RSpec.describe 'merchant dashboard' do
 
     @customer_3 = Customer.create!(first_name: 'Toy', last_name: 'Mariah')
     @invoice_3 = @customer_3.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_3.id, quantity: 3, unit_price: 4, status: 2)
+    @item_1.invoice_items.create!(invoice_id: @invoice_3.id, quantity: 3, unit_price: 4, status: 'packaged')
     @invoice_3.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
     @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
     @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
