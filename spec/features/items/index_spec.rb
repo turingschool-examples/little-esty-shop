@@ -45,6 +45,5 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_current_path("/merchants/#{@merchant2.id}/items/#{@item3.id}")
       end
     end
-
   end
 end

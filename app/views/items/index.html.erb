@@ -1,8 +1,9 @@
 <h1><%= @merchant.name %> Items</h1>
+<%= link_to "Add new item", "/merchants/#{@merchant.id}/items/new" %>
+
 
 <div id="merchant_items">
 <% @merchant.items.each do |item| %>
-
 <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
 <% end %>
 </div>
