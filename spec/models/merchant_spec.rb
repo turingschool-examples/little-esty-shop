@@ -75,5 +75,9 @@ RSpec.describe Merchant do
     it '.top_five_customers returns best customers based on transactions' do
       expect(@merchant.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
     end
+
+    it 'can return the top five items revenue' do
+      expect(@merchant.top_five_items_by_revenue).to eq(5)
+    end
   end
 end

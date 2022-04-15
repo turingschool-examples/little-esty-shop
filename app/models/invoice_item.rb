@@ -6,6 +6,12 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item
   belongs_to :invoice
+  has_many :transactions, through: :invoice
 
   enum status: ['pending', 'packaged', 'shipped']
+
+  def items_total_revenue
+    # require "pry"; binding.pry
+    quantity * unit_price
+  end
 end
