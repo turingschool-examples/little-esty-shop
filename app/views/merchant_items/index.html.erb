@@ -13,7 +13,7 @@
       Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
       method: :patch, local: true do |f| %>
-        <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
+        <button type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %>
       <br>

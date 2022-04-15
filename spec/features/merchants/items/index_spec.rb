@@ -40,7 +40,7 @@ RSpec.describe 'Merchant items index' do
 
     end
 
-    it 'lists enabled and disabled items in thier own section' do
+    it 'lists enabled and disabled items in their own section' do
       expect(page).to have_current_path("/merchants/#{@starw.id}/items")
 
       within "#enabled-#{@starw.id}" do
