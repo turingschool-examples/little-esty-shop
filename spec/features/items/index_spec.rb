@@ -244,14 +244,13 @@ describe 'merchant item index page' do
   end
 
   it "has a button to change item status" do
-    save_and_open_page
     within("#DisabledItem-#{@cup.id}") do
       expect(page).to_not have_button("Disable Item")
       click_button("Enable Item")
     end
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
-    save_and_open_page
+
     within("#EnabledItem-#{@cup.id}") do
       expect(page).to_not have_button("Enable Item")
       expect(page).to have_button("Disable Item")
@@ -259,7 +258,7 @@ describe 'merchant item index page' do
     end
 
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
-    save_and_open_page
+
     within("#DisabledItem-#{@cup.id}") do
       expect(page).to have_button("Enable Item")
       expect(page).to_not have_button("Disable Item")
