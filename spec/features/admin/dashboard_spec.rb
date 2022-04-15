@@ -14,4 +14,10 @@ RSpec.describe "admin dashboard" do
 
     expect(current_path).to eq("/admin/merchants")
   end
+
+  it "has link to admin invoices index" do
+    click_link("Admin Invoices Index")
+
+    expect(current_path).to eq("/admin/invoices")
+  end
 end
