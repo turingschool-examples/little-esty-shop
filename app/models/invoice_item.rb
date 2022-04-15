@@ -10,8 +10,7 @@ class InvoiceItem < ApplicationRecord
 
   enum status: ['pending', 'packaged', 'shipped']
 
-  def items_total_revenue
-    # require "pry"; binding.pry
-    quantity * unit_price
+  def self.items_total_revenue
+    sum('quantity * unit_price')
   end
 end

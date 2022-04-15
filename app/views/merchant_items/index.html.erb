@@ -6,8 +6,8 @@
 
 <div id="top_merchant_items-<%= @merchant.id %>">
 <% @merchant.top_five_items_by_revenue.each do |item| %>
-<%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %><br>
-Total Revenue: <%= item.items_total_revenue %>
+  <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  Total Revenue: <%= item.invoice_items.items_total_revenue %></p>
 <% end %><hr>
 </div>
 

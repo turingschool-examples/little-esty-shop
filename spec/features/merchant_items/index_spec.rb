@@ -117,10 +117,10 @@ RSpec.describe 'merchant items index page' do
       invoice_2.transactions.create!(credit_card_number: '5654405418249632', result: 'success')
 
       visit "/merchants/#{merchant.id}/items"
+      expect(page).to have_content("Total Revenue: 58")
       save_and_open_page
       click_link "#{item_5.name}"
       expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item_5.id}")
-      expect(page).to have_content("Total Revenue: 58")
     end
   end
 end
