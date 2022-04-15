@@ -11,8 +11,10 @@ RSpec.describe 'merchant dashboard' do
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
     @invoice_1 = @customer_1.invoices.create!(status: 'completed')
     @invoice_7 = @customer_1.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 400, status: 'packaged')
-    @item_2.invoice_items.create!(invoice_id: @invoice_7.id, quantity: 5, unit_price: 400, status: 'packaged')
+    @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-03-27 14:54:09 UTC"))
+    @item_2.invoice_items.create!(invoice_id: @invoice_7.id, quantity: 5, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-03-28 14:54:09 UTC"))
     @invoice_1.transactions.create!(credit_card_number: '4654405418249632', result: 'success')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249631', result: 'success')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249633', result: 'success')
@@ -22,7 +24,8 @@ RSpec.describe 'merchant dashboard' do
 
     @customer_2 = Customer.create!(first_name: 'Osinski', last_name: 'Cecelia')
     @invoice_2 = @customer_2.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 3, unit_price: 400, status: 'packaged')
+    @item_1.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 3, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-03-29 14:54:09 UTC"))
     @invoice_2.transactions.create!(credit_card_number: '5654405418249632', result: 'success')
     @invoice_2.transactions.create!(credit_card_number: '5654405418249631', result: 'success')
     @invoice_2.transactions.create!(credit_card_number: '5654405418249633', result: 'success')
@@ -31,7 +34,8 @@ RSpec.describe 'merchant dashboard' do
 
     @customer_3 = Customer.create!(first_name: 'Toy', last_name: 'Mariah')
     @invoice_3 = @customer_3.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_3.id, quantity: 3, unit_price: 400, status: 'packaged')
+    @item_1.invoice_items.create!(invoice_id: @invoice_3.id, quantity: 3, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-03-30 14:54:09 UTC"))
     @invoice_3.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
     @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
     @invoice_3.transactions.create!(credit_card_number: '6654405418249631', result: 'success')
@@ -39,20 +43,23 @@ RSpec.describe 'merchant dashboard' do
 
     @customer_4 = Customer.create!(first_name: 'Joy', last_name: 'Braun')
     @invoice_4 = @customer_4.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_4.id, quantity: 3, unit_price: 400, status: 'packaged')
+    @item_1.invoice_items.create!(invoice_id: @invoice_4.id, quantity: 3, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-04-01 14:54:09 UTC"))
     @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
     @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
     @invoice_4.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
 
     @customer_5 = Customer.create!(first_name: 'Mark', last_name: 'Brains')
     @invoice_5 = @customer_5.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_5.id, quantity: 3, unit_price: 400, status: 'packaged')
+    @item_1.invoice_items.create!(invoice_id: @invoice_5.id, quantity: 3, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-04-02 14:54:09 UTC"))
     @invoice_5.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
     @invoice_5.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
 
     @customer_6 = Customer.create!(first_name: 'Smark', last_name: 'Mrains')
     @invoice_6 = @customer_6.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_6.id, quantity: 3, unit_price: 400, status: 'packaged')
+    @item_1.invoice_items.create!(invoice_id: @invoice_6.id, quantity: 3, unit_price: 400, status: 'packaged',
+                                                                                       created_at: Time.parse("2012-04-03 14:54:09 UTC"))
     @invoice_6.transactions.create!(credit_card_number: '6654405418249632', result: 'success')
 
     visit "/merchants/#{@merchant.id}/dashboard"
@@ -130,12 +137,31 @@ RSpec.describe 'merchant dashboard' do
         expect(page).to have_link("#{@invoice_4.id}")
         expect(page).to have_link("#{@invoice_5.id}")
         expect(page).to have_link("#{@invoice_6.id}")
+        expect(page).to_not have_link("#{@invoice_7.id}")
       end
 
       within "#item-#{@item_2.id}" do
         click_link "#{@invoice_7.id}"
       end
       expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_7.id}")
+    end
+
+    it 'invoices have formatted date of creation and are ordered from oldest to newest' do
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_content("Tuesday, March 27, 2012")
+        expect(page).to have_content("Wednesday, March 28, 2012")
+        expect(page).to have_content("Thursday, March 29, 2012")
+        expect(page).to have_content("Friday, March 30, 2012")
+        expect(page).to have_content("Saturday, April 1, 2012")
+      end
+
+      within "#item-#{@item_1.id}" do
+        expect("#{@invoice_1.id}").to appear_before("#{@invoice_2.id}")
+        expect("#{@invoice_2.id}").to appear_before("#{@invoice_3.id}")
+        expect("#{@invoice_3.id}").to appear_before("#{@invoice_4.id}")
+        expect("#{@invoice_4.id}").to appear_before("#{@invoice_5.id}")
+        expect("#{@invoice_5.id}").to appear_before("#{@invoice_6.id}")
+      end
     end
   end
 end
