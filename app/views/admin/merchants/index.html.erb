@@ -8,7 +8,7 @@
 <% @enabled.each do |enabled_merchant| %>
 <section id="enabled_merchants-<%= enabled_merchant.id %>">
 
-  <%= enabled_merchant.name %><br>
+  <%= link_to "#{enabled_merchant.name}", "/admin/merchants/#{enabled_merchant.id}" %><br>
 
 </section>
 <% end %>
@@ -18,7 +18,11 @@
 
 <h3>Disabled Merchants</h3>
 <% @disabled.each do |disabled_merchant| %>
+
 <section id="disabled_merchants-<%= disabled_merchant.id %>">
-  <%= disabled_merchant.name %><br>
+
+  <%= link_to "#{disabled_merchant.name}", "/admin/merchants/#{disabled_merchant.id}" %><br>
+
+
 </section>
 <% end %>

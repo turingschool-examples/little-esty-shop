@@ -72,7 +72,7 @@ RSpec.describe "Admin Merchants Index Page" do
       merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
       merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
       visit "/admin/merchants"
-
+      save_and_open_page
       within "#enabled_merchants-#{merch1.id}" do
         expect(page).to have_link("#{merch1.name}")
       end
@@ -82,6 +82,8 @@ RSpec.describe "Admin Merchants Index Page" do
       within "#enabled_merchants-#{merch3.id}" do
         expect(page).to have_link("#{merch3.name}")
       end
+      click_on "#{merch3.name}"
+      expect(current_path).to eq("/admin/merchants/#{merch3.id}")
     end
 
 
