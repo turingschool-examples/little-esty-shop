@@ -21,9 +21,9 @@ RSpec.describe "Admin Merchants Index Page" do
       visit "/admin/merchants"
       # save_and_open_page
 
-      within "#merchant-#{merch1.id}" do
-        expect(page).to have_content('Lord Eldens')
-      end
+      # within "#merchant-#{merch1.id}" do
+      #   expect(page).to have_content('Lord Eldens')
+      # end
       expect(page).to have_content("Jeffs GoldBlooms")
       expect(page).to have_content("Souls Darkery")
       expect(page).to have_content("My Dog Skeeter")
@@ -41,7 +41,7 @@ RSpec.describe "Admin Merchants Index Page" do
       merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: Time.now, updated_at: Time.now, status: 0)
 
       visit "/admin/merchants"
-
+      save_and_open_page
       within "#enabled_merchants" do
         expect(page).to have_content("Lord Eldens")
         expect(page).to have_content("Souls Darkery")
@@ -57,8 +57,6 @@ RSpec.describe "Admin Merchants Index Page" do
         expect(page).to have_content("Cheese Company")
         expect(page).to_not have_content("Lord Eldens")
       end
-
-
     end
 
 

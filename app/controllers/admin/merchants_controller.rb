@@ -2,6 +2,8 @@ class Admin::MerchantsController < ApplicationController
 
   def index
     @merchants = Merchant.all
+    @enabled = @merchants.status_enabled
+    @disabled = @merchants.status_disabled
   end
 
   def show
@@ -31,5 +33,5 @@ class Admin::MerchantsController < ApplicationController
     private
       def merchant_params
         params.permit(:id, :name, :status)
-    end 
+    end
 end

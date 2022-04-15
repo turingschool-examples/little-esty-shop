@@ -1,11 +1,18 @@
 <h1>Admin Merchants</h1>
 
-<h4>All Merchants Currently In System</h4><br>
 
-<% @merchants.each do |merchant| %>
-<section id="merchant-<%= merchant.id %>">
 
-  <%= merchant.name %> <br><br>
-
-</section>
+<h3>Enabled Merchants</h3>
+<section id="enabled_merchants">
+<% @enabled.each do |enabled_merchant| %>
+  <%= enabled_merchant.name %><br>
 <% end %>
+</section>
+<br><br>
+
+<h3>Disabled Merchants</h3>
+<section id="disabled_merchants">
+<% @disabled.each do |disabled_merchant| %>
+  <%= disabled_merchant.name %><br>
+<% end %>
+</section>
