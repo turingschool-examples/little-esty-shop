@@ -118,7 +118,6 @@ RSpec.describe 'merchant items index page' do
 
       visit "/merchants/#{merchant.id}/items"
       expect(page).to have_content("Total Revenue: $58.00")
-      save_and_open_page
       click_link "#{item_5.name}"
       expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item_5.id}")
     end
