@@ -28,7 +28,10 @@
 <h2>Items ready to ship</h2>
 <ul>
   <% @merchant.items_ready_to_ship.each do |item| %>
-  <li id="<%= item.item_id %>"><%= item.name %>: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.id %>"><%= item.id %></a></li>
+  <li id="<%= item.item_id %>">
+    <%= item.name %>: <a href="/merchants/<%= @merchant.id %>/invoices/<%= item.id %>"><%= item.id %></a>
+    <%= item.created_at.strftime("%A, %B %d, %Y") %>
+  </li>
   <% end %>
 </ul>
 </div>
