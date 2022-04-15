@@ -127,6 +127,25 @@ RSpec.describe Merchant, type: :model do
       expect(merch1.total_revenue_for_invoice(invoice1.id)).to eq(4167.88)
     end
 
+    it '#enabled_items' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id, status: 1)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id, status: 1)
+
+      expect(merch1.enabled_items).to eq([item1, item3])
+    end
+    
+    it '#disabled_items' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id, status: 1)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id, status: 1)
+
+      expect(merch1.disabled_items).to eq([item2])
+    end
 
   end
 end
