@@ -4,37 +4,64 @@
 <hr>
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
-
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Options </th>
+    <th> Top Selling Date For Was </th>
+  </tr>
 <% @enabled_items.each do |item| %>
-      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
+  <tr>
+    <td>Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %></td>
+    <td><%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-      <br>
+      <% end %></td>
+    <td>
+      <!-- best selling day method here -->
+    </td>
+  </tr>
 <% end %>
+</table>
 
 </div>
 
 <div id="disabled-<%= @merchant.id %>">
 <h2>Disabled Items</h2>
-<% @disabled_items.each do |item| %>
-      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Options </th>
+    <th> Top Selling Date For Was </th>
+  </tr>
+  <% @disabled_items.each do |item| %>
+  <tr>
+    <td> Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %> </td>
+    <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-      <br>
+      <% end %></td>
+    <td>
+      placeholder <!-- best selling date method here -->
+    </td>
+  </tr>
 <% end %>
+</table>
 </div>
 
+<h2>Unknown status </h2>
+<table>
+<% if @merchant.items.pluck(:status).include?(nil) %>
+  <tr><th> Name </th>
+  <th> Options </th>
+  <th> Top Selling Date For Was </th></tr>
+<% end %>
 <% @merchant.items.each do |item| %>
   <% if item.status == nil %>
-<h2>Unknown status </h2>
-      <li> Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a>
-      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
+      <tr><td> Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a> </td>
+      <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
                     method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
@@ -43,7 +70,10 @@
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-      </li>
+      <% end %></td>
+      <td>
+        placeholder <!-- Fill with item.best_selling_day_method -->
+      </td></tr>
   <% end %>
 <% end %>
+</table>
