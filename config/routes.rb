@@ -7,12 +7,11 @@ Rails.application.routes.draw do
   end
 
   get '/admin', to: 'admin#index'
-
   get '/admin/merchants', to: 'admin_merchants#index'
   get '/admin/merchants/:id', to: 'admin_merchants#show'
   get '/admin/merchants/:id/edit', to: 'admin_merchants#edit'
   patch '/admin/merchants/:id', to: 'admin_merchants#update'
-
   get '/admin/invoices', to: 'admin_invoices#index'
   get '/admin/invoices/:id', to: 'admin_invoices#show'
+  
 end
