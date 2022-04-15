@@ -59,7 +59,7 @@ RSpec.describe Invoice, type: :model do
         @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
         @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 2)
         @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
-
+    
       expect(Invoice.incomplete_invoices).to eq([@invoice_1, @invoice_3])
 
     end
