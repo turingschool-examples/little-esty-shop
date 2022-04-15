@@ -41,22 +41,39 @@ RSpec.describe "Admin Merchants Index Page" do
       merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: Time.now, updated_at: Time.now, status: 0)
 
       visit "/admin/merchants"
-      save_and_open_page
-      within "#enabled_merchants" do
+      # Enabled Merchants Section
+      within "#enabled_merchants-#{merch1.id}" do
         expect(page).to have_content("Lord Eldens")
+      end
+      within "#enabled_merchants-#{merch3.id}" do
         expect(page).to have_content("Souls Darkery")
+      end
+      within "#enabled_merchants-#{merch5.id}" do
         expect(page).to have_content("Corgi Town")
+      end
+      within "#enabled_merchants-#{merch7.id}" do
         expect(page).to have_content("Brisket is Tasty")
-        expect(page).to_not have_content("Cheese Company")
-
       end
 
-      within "#disabled_merchants" do
+      # Disabled Merchants Section
+      within "#disabled_merchants-#{merch2.id}" do
         expect(page).to have_content("Jeffs GoldBlooms")
-        expect(page).to have_content("My Dog Skeeter")
-        expect(page).to have_content("Cheese Company")
-        expect(page).to_not have_content("Lord Eldens")
       end
+      within "#disabled_merchants-#{merch4.id}" do
+        expect(page).to have_content("My Dog Skeeter")
+      end
+      within "#disabled_merchants-#{merch6.id}" do
+        expect(page).to have_content("Cheese Company")
+      end
+    end
+
+    it 'each merchants name is a link to their admin/merchants show page' do
+      merch1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
+      merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
+      merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
+      visit "/admin/merchants"
+
+      # within "#merchant"
     end
 
 
