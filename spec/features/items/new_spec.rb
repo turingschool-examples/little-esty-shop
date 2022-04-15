@@ -34,9 +34,7 @@ describe "New Items", type: :feature do
     fill_in 'Name', with: "This new item"
     fill_in 'Description', with: 'New item'
     fill_in 'Unit price', with: 2
-    save_and_open_page
     click_button 'Submit'
-    save_and_open_page
 
     expect(page).to have_current_path("/merchants/#{@merchant2.id}/items")
     expect(page).to have_content("This new item")

@@ -32,7 +32,6 @@ class ItemsController < ApplicationController
   def create
     @merchant = Merchant.find(params[:merchant_id])
     item = Item.new(item_params)
-    binding.pry
       if item.save
         redirect_to "/merchants/#{@merchant.id}/items"
       else
