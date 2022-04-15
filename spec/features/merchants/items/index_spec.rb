@@ -96,11 +96,11 @@ RSpec.describe 'Merchant items index' do
     end
 
     it "Lists the date of that item's most ever sales next to the item" do
-      merchant_1 = create(:merchant)
-      item_1 = create(:item, merchant: merchant_1, status: 1)
-      customer_1 = create(:customer)
-      invoice_1 = create(:invoice, customer: customer_1, created_at: Time.parse("2019.04.16"))
-      invoice_item = create(:invoice_item, item: item_1, invoice: invoice_1)
+      merchant1 = Merchant.create!(name: "Monolith")
+      item_1 = merchant_1.items.create!(name: "Bone", description: "femur, unpreserved", unit_price: 2001, status: 1)
+      customer_1 = Customer.create!(first_name: "monkey", last_name: "wild")
+      invoice_1 = customer_1.invoices.create!(status: 0, created_at: Time.parse("2019.04.16"))
+      invoice_item = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id)
 
       visit merchant_items_path(merchant_1)
 
