@@ -143,6 +143,7 @@ RSpec.describe Merchant, type: :model do
       merch6 = Merchant.create!(name: 'Cheese Company', created_at: date5, updated_at: date6, status: 1)
       merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
       expect(Merchant.status_enabled).to eq([merch1, merch3, merch5, merch7])
+    end
 
     it '#enabled_items' do
       merch1 = FactoryBot.create(:merchant)
