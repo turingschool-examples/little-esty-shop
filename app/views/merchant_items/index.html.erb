@@ -9,8 +9,9 @@
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
 
-<% @enabled_items.each do |item| %>
-  <div id="enabled-<%= item.id %>">
+<div id="enabled-<%= item.id %>">
+<% @merchant.items.enabled.each do |item| %>
+  
       Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
       method: :patch, local: true do |f| %>
@@ -25,8 +26,10 @@
 
 <div id="disabled-<%= @merchant.id %>">
 <h2>Disabled Items</h2>
-<% @disabled_items.each do |item| %>
-  <div id="disabled-<%= item.id %>">
+
+<div id="disabled-<%= item.id %>">
+<% @merchant.items.disabled.each do |item| %>
+
       Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
       method: :patch, local: true do |f| %>
