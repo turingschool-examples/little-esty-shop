@@ -141,4 +141,23 @@ describe 'invoice show page' do
       expect(page).not_to have_content("Sold for: $1.0 each")
     end
   end
+
+  it "displays the total revenue to be made by all items on the invoice" do
+    within("#total_revenue") do
+      expect(page).to have_content("Total: $5320.0")
+    end
+  end
+
+  it 'displays a form to switch item status' do
+    # As a merchant
+    # When I visit my merchant invoice show page
+    # I see that each invoice item status is a select field
+    # And I see that the invoice item's current status is selected
+    # When I click this select field,
+    # Then I can select a new status for the Item,
+    # And next to the select field I see a button to "Update Item Status"
+    # When I click this button
+    # I am taken back to the merchant invoice show page
+    # And I see that my Item's status has now been updated
+  end
 end
