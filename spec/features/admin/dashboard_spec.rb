@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "admin dashboard" do
-  before :all do
+  before :each do
     visit "/admin"
   end
 
@@ -17,7 +17,7 @@ RSpec.describe "admin dashboard" do
 
   it "has link to admin invoices index" do
     click_link("Admin Invoices Index")
-
+  
     expect(current_path).to eq("/admin/invoices")
   end
 end
