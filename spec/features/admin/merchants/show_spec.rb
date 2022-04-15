@@ -26,7 +26,26 @@ RSpec.describe "Admin Merchants Show Page" do
 
         # expect(page).to have_content("#{merch1.name}")
       end
+    end
 
-  end
+    describe "clicking the submit button I am redirected back to the merchant show page" do
+
+      it 'I see the updated info as well as a flash message stating it was succesful' do
+        merch1 = Merchant.create!(name: 'Cheese Company', created_at: Time.now, updated_at: Time.now, status: 1)
+        visit "/admin/merchants/#{merch1.id}"
+        within "#update_this_merchant" do
+          expect(page).to have_link("Update This Merchant")
+        end
+        click_on "Update This Merchant"
+
+        fill_in "Name", with: "Holy Mackerels"
+        click_on "Submit"
+        expect(current_path).to eq("/admin/merchants/#{merch1.id}")
+        expect(page).to have_content("Holy Mackerels")
+        expect(page).to have_content("Update Succesful!")
+      end
+
+    end
+
   end
 end
