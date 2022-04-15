@@ -38,9 +38,12 @@ RSpec.describe 'merchant dashboard' do
       expect(page).to have_content(@customer1.last_name)
     end
   end
+  it 'has item header' do
+    expect(page).to have_content("Invoice Items")
+  end
 
   it 'shows all item attributes' do
-    within("#invoice-item-#{@item1.id}") do
+    within("#invoice-item-#{@item1.id}-#{@ii1.id}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content("Quantity:")
       expect(page).to have_content(@ii1.quantity)
@@ -52,11 +55,19 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it 'does not have items from other merchants' do
-    within("#invoice-item-#{@item1.id}") do
+    within("#invoice-item-#{@item1.id}-#{@ii1.id}") do
       expect(page).to_not have_content(@item3.name)
       expect(page).to_not have_content(@ii4.quantity)
       expect(page).to_not have_content(@item3.unit_price)
-      expect(page).to_not have_content(@ii4.status)
+    end
+  end
+
+  it 'does not have items from other merchants' do
+    within("#invoice-item-#{@item1.id}-#{@ii1.id}") do
+      select "shipped", from: "Change status"
+      click_button "Update Item Status"
+
+      expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1))
     end
   end
 end
