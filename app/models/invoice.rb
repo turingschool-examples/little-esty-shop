@@ -21,9 +21,12 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete_invoices
-    Invoice.all.where(status: [0,1])
-    # require "pry"; binding.pry
-    # invoice_items.where(status: [0,1])
+
+   joins(:invoice_items).where(status: [0,1])
+  end
+
+  def self.order_invoices
+    order(:created_at)
   end
 
 end
