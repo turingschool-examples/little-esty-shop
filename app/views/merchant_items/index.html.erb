@@ -1,11 +1,15 @@
 <h1> <%= @merchant.name %>'s Items  </h1>
 
 <%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
+<h3>Top 5 Items</h3>
+<% @merchant.most_popular_items.each do |item| %>
+<p><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></p>
+<% end %>
 <hr>
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
 
-<% @enabled_items.each do |item| %>
+<% @merchant.items.enabled.each do |item| %>
       Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
       method: :patch, local: true do |f| %>
@@ -19,7 +23,7 @@
 
 <div id="disabled-<%= @merchant.id %>">
 <h2>Disabled Items</h2>
-<% @disabled_items.each do |item| %>
+<% @merchant.items.disabled.each do |item| %>
       Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
         <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
       method: :patch, local: true do |f| %>
