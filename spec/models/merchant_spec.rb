@@ -143,6 +143,26 @@ RSpec.describe Merchant, type: :model do
       merch6 = Merchant.create!(name: 'Cheese Company', created_at: date5, updated_at: date6, status: 1)
       merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
       expect(Merchant.status_enabled).to eq([merch1, merch3, merch5, merch7])
+
+    it '#enabled_items' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id, status: 1)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id, status: 1)
+
+      expect(merch1.enabled_items).to eq([item1, item3])
+    end
+    
+    it '#disabled_items' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id, status: 1)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id, status: 1)
+
+      expect(merch1.disabled_items).to eq([item2])
+
     end
 
     it '#status_disabled returns all merchants with the status: disabled (1)' do
