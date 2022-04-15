@@ -22,4 +22,11 @@ class Merchant < ApplicationRecord
               .order(total_revenue: :desc)
               .limit(5)
   end
+
+  def items_ready_to_ship
+    items.joins(:invoices).select('items.*')
+         .where("invoice_items.status = 1")
+         .group("items.id")
+         .distinct
+  end
 end

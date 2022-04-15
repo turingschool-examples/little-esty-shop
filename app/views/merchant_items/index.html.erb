@@ -10,6 +10,7 @@
   Total Revenue: $<%= item.invoice_items.items_total_revenue.to_s.insert(-3,'.') %></p>
 <% end %><hr>
 </div>
+<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
 
 <h4>Enabled Items</h4>
 <% @merchant_items.each do |item| %>

@@ -16,3 +16,24 @@
     <p>Customer name: <%=  @invoice.customer.first_name %>  <%=  @invoice.customer.last_name %> </p>
   </li>
 </ul>
+
+<h2>Items ordered:</h2>
+
+<% @invoice.items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <h4><%= item.name %></h4>
+    <ul>
+      <li>
+        <p>Quantity: <%= @invoice.get_invoice_item(item.id).quantity %></p>
+      </li>
+      <li>
+        <p>Price per Item: $<%= @invoice.get_invoice_item(item.id).unit_price.to_s.insert(-3, ".") %></p>
+      </li>
+      <li>
+        <p>Status: <%= @invoice.get_invoice_item(item.id).status %></p>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<h2>Total Revenue: $<%= @invoice.total_revenue.to_s.insert(-3,".") %> </h2>

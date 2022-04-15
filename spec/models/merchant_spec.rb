@@ -6,10 +6,14 @@ RSpec.describe Merchant do
                             created_at: Time.parse('2012-03-27 14:53:59 UTC'),
                             updated_at: Time.parse('2012-03-27 14:53:59 UTC'))
     @item_1 = @merchant.items.create!(name: 'Pencil', unit_price: 5, description: 'Writes things.')
+    @item_2 = @merchant.items.create!(name: 'Pen', unit_price: 4, description: 'Writes things, but dark.')
+    @item_3 = @merchant.items.create!(name: 'Marker', unit_price: 4, description: 'Writes things, but dark, and thicc.')
 
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
     @invoice_1 = @customer_1.invoices.create!(status: 'completed')
-    @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 2)
+    @invoice_7 = @customer_1.invoices.create!(status: 'completed')
+    @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 'packaged')
+    @item_2.invoice_items.create!(invoice_id: @invoice_7.id, quantity: 5, unit_price: 4, status: 'packaged')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249632', result: 'success')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249631', result: 'success')
     @invoice_1.transactions.create!(credit_card_number: '4654405418249633', result: 'success')
@@ -96,6 +100,10 @@ RSpec.describe Merchant do
       item_7.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 5, unit_price: 8, status: 2)
 
       expect(@merchant.top_five_items_by_revenue).to eq([item_5, @item_1, item_4, item_7, item_6])
+    end
+    
+    it ".items_ready_to_ship returns items with invoice_items that have 'packaged' status" do
+      expect(@merchant.items_ready_to_ship).to eq([@item_1, @item_2])
     end
   end
 end
