@@ -2,6 +2,14 @@
 
 <h3>Name: <%= @merchant.name %></h3>
 
+<h3>Top Five Items By Revenue</h3>
+
+<div id="top_merchant_items-<%= @merchant.id %>">
+<% @merchant.top_five_items_by_revenue.each do |item| %>
+  <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+  Total Revenue: <%= item.invoice_items.items_total_revenue %></p>
+<% end %><hr>
+</div>
 <%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new" %>
 
 <h4>Enabled Items</h4>
@@ -11,7 +19,7 @@
     Status: <%= 'available' %>
     <%= button_to "Disable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
   <% end %>
-<% end %>
+<% end %><hr>
 
 <h4>Disabled Items</h4>
 <% @merchant_items.each do |item| %>
