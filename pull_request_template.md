@@ -16,8 +16,8 @@ ____ Reviewed
 
 ## Check the correct boxes
 - [x] This broke nothing
-- [] This broke some stuff
-- [] This broke everything
+- [] All Tests are Passing
+- [] The code will run locally
 
 ## Testing Changes
 - [x] Tests have been added
@@ -33,3 +33,4 @@ ____ Reviewed
 - [x] I have removed any testing syntax (save_and_open_page/pry) in my spec files
 
 ## Please include a link to a gif of how you feel about this branch:
+

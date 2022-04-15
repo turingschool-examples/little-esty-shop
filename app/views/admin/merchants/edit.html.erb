@@ -1,0 +1,6 @@
+  <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :put do |f| %>
+    <%= f.label :name, "Merchant Name: " %>
+    <%= f.text_field :name, value: @merchant.name %>
+    <%= f.hidden_field :enabled, value: @merchant.enabled %>
+    <%= f.submit :submit %>
+  <% end %>
