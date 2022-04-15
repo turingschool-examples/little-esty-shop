@@ -100,6 +100,7 @@ RSpec.describe 'Merchant items index' do
       item_1 = create(:item, merchant: merchant_1, status: 1)
       customer_1 = create(:customer)
       invoice_1 = create(:invoice, customer: customer_1, created_at: Time.parse("2019.04.16"))
+      invoice_item = create(:invoice_item, item: item_1, invoice: invoice_1)
 
       visit merchant_items_path(merchant_1)
 
