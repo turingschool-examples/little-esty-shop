@@ -5,13 +5,25 @@
   <p><strong>Invoice created time: </strong><%= @invoice.created_at.strftime("%A, %b %d, %Y") %></p>
   <p><strong>Invoice customer: </strong><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name%></p>
 </div>
-<% @invoice_items.each do |invoice_item| %>
-  <div id="invoice-item-<%= invoice_item.item_id %>">
-    <h3><%= invoice_item.item.name %></h3>
-    <tr>
-      <td><strong>Quantity: </strong><%= invoice_item.quantity %></td><br>
-      <td><strong>Price: </strong><%= invoice_item.unit_price %></td><br>
-      <td><strong>Invoice item status: </strong><%= invoice_item.status %></td>
-    </tr>
-  </div>
+<hr>
+<h2>Invoice Items</h2>
+<% @items.each do |item| %>
+  <% item.invoice_items.each do |invoice_item| %>
+    <div id="invoice-item-<%= invoice_item.item_id %>-<%= invoice_item.id %>">
+      <h4><%= invoice_item.item.name %></h4>
+      <tr>
+        <td><strong>Quantity: </strong><%= invoice_item.quantity %></td><br>
+        <td><strong>Price: </strong><%= invoice_item.unit_price %></td><br>
+        <td><strong>Invoice item status: <%= invoice_item.status %></strong><br>
+
+        <%= form_with url: merchant_invoice_path(item.merchant_id, @invoice.id), method: :patch, local: true do |form| %>
+        <%= form.hidden_field :invoice_item_id, value: invoice_item.id %>
+        <strong><%= form.label :status, "Change status"%></strong><br>
+        <%= form.select :status, ['packaged', 'pending', 'shipped'] %><br>
+
+        <%= form.submit "Update Item Status" , selected: invoice_item.status %>
+        <% end %></td>
+      </tr>
+    </div>
+  <% end %>
 <% end %>
