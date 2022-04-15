@@ -33,7 +33,6 @@ RSpec.describe 'Merchant items index' do
   describe 'Displays' do
     it 'lists names of all merchant items' do
 
-#      save_and_open_page
       expect(page).to have_current_path("/merchants/#{@starw.id}/items")
       expect(page).to have_content(@starw.name)
       expect(page).to_not have_content(@start.name)
@@ -53,6 +52,30 @@ RSpec.describe 'Merchant items index' do
         expect(page).to have_content("Disabled Items")
         expect(page).to have_content(@item2.name)
         expect(page).to_not have_content(@item3.name)
+      end
+    end
+
+    it 'on clicking enable/disable button item is sorted into enabled/disabled section' do
+      within "#enabled-#{@starw.id}" do
+        expect(page).to have_content("Enabled Items")
+        within "#enabled-#{@item1.id}" do
+          expect(page).to have_content(@item1.name)
+          click_button("Disable")
+        end
+        expect(current_path).to eq(merchant_items_path(@starw))
+        expect(page).to_not have_content(@item1.name)
+      end
+
+      within "#disabled-#{@starw.id}" do
+        expect(page).to have_content("Disabled Items")
+
+        within "#disabled-#{@item2.id}" do
+          expect(page).to have_content(@item2.name)
+
+          click_button("Enable")
+        end
+        expect(current_path).to eq(merchant_items_path(@starw))
+        expect(page).to_not have_content(@item2.name)
       end
     end
 
