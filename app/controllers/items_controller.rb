@@ -29,9 +29,21 @@ class ItemsController < ApplicationController
   end
 
   def update
-    Item.update(item_params)
-    @item = Item.find(params[:id])
-    redirect_to "/items/#{@item.id}", alert: "#{@item.name} has been updated"
+    if params[:status] == "enable"
+      merchant = Merchant.find(params[:merchant_id])
+      @item = Item.find(params[:id])
+      @item.update(status: 1)
+      redirect_to "/merchants/#{merchant.id}/items"
+    elsif params[:status] == "disable"
+      merchant = Merchant.find(params[:merchant_id])
+      @item = Item.find(params[:id])
+      @item.update(status: "disabled")
+      redirect_to "/merchants/#{merchant.id}/items"
+    else
+      Item.update(item_params)
+      @item = Item.find(params[:id])
+      redirect_to "/items/#{@item.id}", alert: "#{@item.name} has been updated"
+    end
   end
 
   private
