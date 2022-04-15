@@ -31,6 +31,36 @@ RSpec.describe "Admin Merchants Index Page" do
 
     end
 
+    it 'I see a section for enabled/disabled merchants, each merchant in appropriate section' do
+      merch1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
+      merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
+      merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
+      merch4 = Merchant.create!(name: 'My Dog Skeeter', created_at: Time.now, updated_at: Time.now, status: 1)
+      merch5 = Merchant.create!(name: 'Corgi Town', created_at: Time.now, updated_at: Time.now, status: 0)
+      merch6 = Merchant.create!(name: 'Cheese Company', created_at: Time.now, updated_at: Time.now, status: 1)
+      merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: Time.now, updated_at: Time.now, status: 0)
+
+      visit "/admin/merchants"
+
+      within "#enabled_merchants" do
+        expect(page).to have_content("Lord Eldens")
+        expect(page).to have_content("Souls Darkery")
+        expect(page).to have_content("Corgi Town")
+        expect(page).to have_content("Brisket is Tasty")
+        expect(page).to_not have_content("Cheese Company")
+
+      end
+
+      within "#disabled_merchants" do
+        expect(page).to have_content("Jeffs GoldBlooms")
+        expect(page).to have_content("My Dog Skeeter")
+        expect(page).to have_content("Cheese Company")
+        expect(page).to_not have_content("Lord Eldens")
+      end
+
+
+    end
+
 
 
 
