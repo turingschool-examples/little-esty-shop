@@ -26,11 +26,11 @@
   <% end %>
 </div>
 
-<% @disabled_items = @merchant.items.find_all {|item| item.status == 0}%>
+<% @disabled_items = @merchant.items.find_all {|item| item.status == "disabled"}%>
 
 <h2>Disabled Items:</h2>
 <% @disabled_items.each do |item| %>
-  <h3> <%= item.name %> </h3>
+  <h3> <%= link_to item.name, "/items/#{item.id}"%> </h3>
   <p> <%= item.description %> </p>
   <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
   <div id="DisabledItem-<%= item.id %>">
@@ -38,11 +38,11 @@
   </div>
   <hr/>
 <% end %>
-<% @enabled_items = @merchant.items.find_all {|item| item.status == 1} %>
+<% @enabled_items = @merchant.items.find_all {|item| item.status == "enabled"} %>
 
 <h2>Enabled Items:</h2>
 <% @enabled_items.each do |item| %>
-  <h3> <%= item.name %> </h3>
+  <h3> <%= link_to item.name, "/items/#{item.id}"%></h3>
   <p> <%= item.description %> </p>
   <h4> Price: $<%= item.unit_price.to_f / 100 %> </h4>
   <div id="EnabledItem-<%= item.id %>">
