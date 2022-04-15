@@ -15,5 +15,8 @@ Rails.application.routes.draw do
   end
 
   get "/merchants/:merch_id/items/:item_id", to: "merchants#item_show"
-  resources :mice
+
+  get "/admin", to: "admin/dashboard#index"
+  get "/admin/merchants", to: "admin/merchants#index"
+  get "/admin/invoices", to: "admin/invoices#index"
 end
