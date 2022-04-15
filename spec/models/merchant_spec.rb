@@ -77,7 +77,25 @@ RSpec.describe Merchant do
     end
 
     it 'can return the top five items revenue' do
-      expect(@merchant.top_five_items_by_revenue).to eq(5)
+
+      item_2 = @merchant.items.create!(name: 'Eraser', unit_price: 2, description: 'Does things.')
+      item_3 = @merchant.items.create!(name: 'Pen', unit_price: 3, description: 'Helps things.')
+      item_4 = @merchant.items.create!(name: 'Calculator', unit_price: 4, description: 'Considers things.')
+      item_5 = @merchant.items.create!(name: 'Stapler', unit_price: 5, description: 'Wishes things.')
+      item_6 = @merchant.items.create!(name: 'Computer', unit_price: 6, description: 'Hopes things.')
+      item_7 = @merchant.items.create!(name: 'Backpack', unit_price: 7, description: 'Forgets things.')
+      item_2.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 2, unit_price: 5, status: 2)
+      item_3.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 6, status: 2)
+      item_4.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 4, unit_price: 7, status: 2)
+      item_5.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 5, unit_price: 8, status: 2)
+
+      item_3.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 1, unit_price: 4, status: 2)
+      item_4.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 2, unit_price: 5, status: 2)
+      item_5.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 3, unit_price: 6, status: 2)
+      item_6.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 4, unit_price: 7, status: 2)
+      item_7.invoice_items.create!(invoice_id: @invoice_2.id, quantity: 5, unit_price: 8, status: 2)
+
+      expect(@merchant.top_five_items_by_revenue).to eq([item_5, @item_1, item_4, item_7, item_6])
     end
   end
 end

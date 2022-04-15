@@ -46,4 +46,10 @@ RSpec.describe InvoiceItem do
     it { should belong_to :item}
     it { should belong_to :invoice}
   end
+
+  describe 'instance methods' do
+    it 'can calculate the items total revenue' do
+      expect(@invoice_item.items_total_revenue).to eq(119088)
+    end
+  end
 end
