@@ -73,7 +73,15 @@ RSpec.describe "Admin Merchants Index Page" do
       merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
       visit "/admin/merchants"
 
-      # within "#merchant"
+      within "#enabled_merchants-#{merch1.id}" do
+        expect(page).to have_link("#{merch1.name}")
+      end
+      within "#disabled_merchants-#{merch2.id}" do
+        expect(page).to have_link("#{merch2.name}")
+      end
+      within "#enabled_merchants-#{merch3.id}" do
+        expect(page).to have_link("#{merch3.name}")
+      end
     end
 
 
