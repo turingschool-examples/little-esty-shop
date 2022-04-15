@@ -2,8 +2,6 @@ class MerchantItemsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:merchant_id])
-    @enabled_items = @merchant.items.where(status: :enabled)
-    @disabled_items = @merchant.items.where(status: :disabled)
   end
 
   def show
@@ -14,7 +12,6 @@ class MerchantItemsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
 
     if params[:status]
