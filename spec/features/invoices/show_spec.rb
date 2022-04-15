@@ -141,4 +141,10 @@ describe 'invoice show page' do
       expect(page).not_to have_content("Sold for: $1.0 each")
     end
   end
+
+  it "displays the total revenue to be made by all items on the invoice" do
+    within("#total_revenue") do
+      expect(page).to have_content("Total: $5320")
+    end
+  end
 end
