@@ -22,11 +22,11 @@ RSpec.describe Item, type: :model do
       invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 0,created_at: Time.parse("2019.04.15"))
       invoice_4 = Invoice.create!(customer_id: customer_1.id, status: 1,created_at: Time.parse("2019.04.13"))
       invoice_5 = Invoice.create!(customer_id: customer_1.id, status: 1,created_at: Time.parse("2019.04.12"))
-      invoice_item_1 = InvoiceItem.create!(unit_price: 42, status: 1, quantity, item_id: item_1.id, invoice_id: invoice_1.id)
-      invoice_item_2 = InvoiceItem.create!(unit_price: 42, status: 1, quantity, item_id: item_1.id, invoice_id: invoice_2.id)
-      invoice_item_3 = InvoiceItem.create!(unit_price: 42, status: 1, quantity, item_id: item_1.id, invoice_id: invoice_3.id)
-      invoice_item_4 = InvoiceItem.create!(unit_price: 42, status: 1, quantity, item_id: item_1.id, invoice_id: invoice_4.id)
-      invoice_item_5 = InvoiceItem.create!(unit_price: 42, status: 1, quantity, item_id: item_1.id, invoice_id: invoice_5.id)
+      invoice_item_1 = InvoiceItem.create!(unit_price: 42, status: 1, quantity:100, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(unit_price: 42, status: 1, quantity: 50, item_id: item_1.id, invoice_id: invoice_2.id)
+      invoice_item_3 = InvoiceItem.create!(unit_price: 42, status: 1, quantity: 55, item_id: item_1.id, invoice_id: invoice_3.id)
+      invoice_item_4 = InvoiceItem.create!(unit_price: 42, status: 1, quantity: 75, item_id: item_1.id, invoice_id: invoice_4.id)
+      invoice_item_5 = InvoiceItem.create!(unit_price: 42, status: 1, quantity: 15, item_id: item_1.id, invoice_id: invoice_5.id)
 
       expect(item_1.best_sales_date).to eq("April 15, 2019")
     end
