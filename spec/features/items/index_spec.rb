@@ -244,6 +244,7 @@ describe 'merchant item index page' do
   end
 
   it "has a button to change item status" do
+    save_and_open_page
     within("#DisabledItem-#{@cup.id}") do
       expect(page).to_not have_button("Disable Item")
       click_button("Enable Item")
