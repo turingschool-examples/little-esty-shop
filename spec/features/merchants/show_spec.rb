@@ -50,7 +50,7 @@ describe "merchant dashboard page" do
 
     @invoice_1 = @customer_1.invoices.create!(
       status: 0,
-      created_at: "Thu, 13 Apr 2022 00:00:00 UTC +00:00",
+      created_at: "Thu, 14 Apr 2022 00:00:00 UTC +00:00",
       updated_at: Date.current
     )
     @invoice_2 = @customer_1.invoices.create!(
@@ -155,12 +155,39 @@ describe "merchant dashboard page" do
 
     it "displays item invoice dates" do
       within ".items_ready_to_ship" do
-        expect(page).to have_content("Wednesday, April 13, 2022")
+        expect(page).to have_content("Thursday, April 14, 2022")
       end
     end
 
     it "displays items oldest to newest" do
-      # code
+      @basketball = @merchant_1.items.create!(
+        name: "Basketball",
+        description: "A ball of pure basket.",
+        unit_price: 35000,
+        created_at: Date.current,
+        updated_at: Date.current
+      )
+
+      @invoice_4 = @customer_2.invoices.create!(
+        status: 0,
+        created_at: "Tue, 12 Apr 2022 00:00:00 UTC +00:00",
+        updated_at: Date.current
+      )
+
+      @invoice_item_5 = InvoiceItem.create!(
+        item_id: @basketball.id,
+        invoice_id: @invoice_4.id,
+        quantity: 2,
+        unit_price: @basketball.unit_price * 2,
+        status: 0,
+        created_at: Date.current,
+        updated_at: Date.current
+      )
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      within ".items_ready_to_ship" do
+        expect("Tuesday, April 12, 2022").to appear_before("Thursday, April 14, 2022")
+      end
     end
   end
 
