@@ -40,6 +40,7 @@ RSpec.describe "Admin Merchants Show Page" do
 
         fill_in "Name", with: "Holy Mackerels"
         click_on "Submit"
+        save_and_open_page
         expect(current_path).to eq("/admin/merchants/#{merch1.id}")
         expect(page).to have_content("Holy Mackerels")
         expect(page).to have_content("Update Succesful!")

@@ -24,9 +24,13 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
+    # require "pry"; binding.pry
     @merchant = Merchant.find(params[:id])
     @merchant.update(merchant_params)
-    @merchant.save
+    if @merchant.save
+      flash[:notice] = "Update Succesful!"
+      redirect_to "/admin/merchants/#{@merchant.id}"
+    end 
   end
 
 
