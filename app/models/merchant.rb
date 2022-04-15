@@ -16,7 +16,8 @@ class Merchant < ApplicationRecord
       .group('items.id')
       .order('total_revenue desc')
       .limit(5)
-    end
+  end
+
 
   def unshipped_invoice_items
     items.select('items.name, invoice_items.invoice_id, invoice_items.status, invoice_items.id AS invoice_item_id, invoices.created_at AS invoice_created_at')
