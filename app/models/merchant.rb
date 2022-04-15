@@ -28,5 +28,6 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     invoices.select("items.name, invoices.id, items.id as item_id, invoices.created_at")
       .where("invoice_items.status != 2")
+      .order("invoices.created_at ASC")
   end
 end
