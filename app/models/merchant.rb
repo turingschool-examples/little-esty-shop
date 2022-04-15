@@ -21,5 +21,11 @@ class Merchant < ApplicationRecord
               .select("items.*, sum(quantity * invoice_items.unit_price) as total_revenue")
               .order(total_revenue: :desc)
               .limit(5)
+    
+  def items_ready_to_ship
+    items.joins(:invoices).select('items.*')
+         .where("invoice_items.status = 1")
+         .group("items.id")
+         .distinct
   end
 end
