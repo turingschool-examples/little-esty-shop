@@ -2,8 +2,8 @@
 
 
 
+<div id="all_enabled_merchants">
 <h3>Enabled Merchants</h3>
-
 
 <% @enabled.each do |enabled_merchant| %>
 <section id="enabled_merchants-<%= enabled_merchant.id %>">
@@ -12,10 +12,10 @@
 
 </section>
 <% end %>
-
+</div>
 
 <br><br>
-
+<div id="all_disabled_merchants">
 <h3>Disabled Merchants</h3>
 <% @disabled.each do |disabled_merchant| %>
 
@@ -26,3 +26,4 @@
 
 </section>
 <% end %>
+</div>
