@@ -149,10 +149,10 @@ RSpec.describe 'merchant dashboard' do
     it 'invoices have formatted date of creation and are ordered from oldest to newest' do
       within "#item-#{@item_1.id}" do
         expect(page).to have_content("Tuesday, March 27, 2012")
-        expect(page).to have_content("Wednesday, March 28, 2012")
         expect(page).to have_content("Thursday, March 29, 2012")
         expect(page).to have_content("Friday, March 30, 2012")
-        expect(page).to have_content("Saturday, April 1, 2012")
+        expect(page).to have_content("Sunday, April 01, 2012")
+        expect(page).to_not have_content("Wednesday, March 28, 2012")
       end
 
       within "#item-#{@item_1.id}" do
