@@ -102,7 +102,7 @@ RSpec.describe "Admin Merchants Index Page" do
       within "#enabled_merchants-#{merch1.id}" do
         click_button("Disable Lord Eldens")
       end
-      
+
       within "#all_enabled_merchants" do
         expect(page).to_not have_content("Lord Eldens")
       end

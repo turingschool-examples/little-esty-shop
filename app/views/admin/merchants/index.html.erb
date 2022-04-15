@@ -9,7 +9,7 @@
 <section id="enabled_merchants-<%= enabled_merchant.id %>">
 
   <%= link_to "#{enabled_merchant.name}", "/admin/merchants/#{enabled_merchant.id}" %><br>
-
+<p> <%= button_to "Disable #{enabled_merchant.name}", "merchants/#{enabled_merchant.id}", method: :patch, params: {status: "disabled"} %> <p>
 </section>
 <% end %>
 </div>
@@ -22,7 +22,7 @@
 <section id="disabled_merchants-<%= disabled_merchant.id %>">
 
   <%= link_to "#{disabled_merchant.name}", "/admin/merchants/#{disabled_merchant.id}" %><br>
-
+<p> <%= button_to "Enable #{disabled_merchant.name}", "admin/merchants/#{disabled_merchant.id}", method: :patch, params: {status: "enabled"} %> <p>
 
 </section>
 <% end %>
