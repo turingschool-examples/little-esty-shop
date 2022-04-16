@@ -85,6 +85,31 @@ RSpec.describe "Admin Merchants Index Page" do
       click_on "#{merch3.name}"
       expect(current_path).to eq("/admin/merchants/#{merch3.id}")
     end
+    
+    it 'each merchant has a button to enable or disable them' do
+      merch1 = Merchant.create!(name: 'Lord Eldens', created_at: Time.now, updated_at: Time.now, status: 0)
+      merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: Time.now, updated_at: Time.now, status: 1)
+      merch3 = Merchant.create!(name: 'Souls Darkery', created_at: Time.now, updated_at: Time.now, status: 0)
+      visit "/admin/merchants"
+    
+      within "#all_enabled_merchants" do
+        expect(page).to have_content("Lord Eldens")
+      end
+      within "#all_disabled_merchants" do
+        expect(page).to_not have_content("Lord Eldens")
+      end
+      
+      within "#enabled_merchants-#{merch1.id}" do
+        click_button("Disable Lord Eldens")
+      end
+
+      within "#all_enabled_merchants" do
+        expect(page).to_not have_content("Lord Eldens")
+      end
+      within "#all_disabled_merchants" do
+        expect(page).to have_content("Lord Eldens")
+      end
+    end
 
     describe 'Top 5 Merchants by revenue are shown' do
       
