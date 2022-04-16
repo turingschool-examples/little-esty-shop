@@ -1,6 +1,6 @@
-class Admin::InvoiceController < ApplicationController
+class Admin::InvoicesController < ApplicationController
   def index
-    @invoices = Invoices.all
+    @invoices = Invoice.all
   end
 
   def show
