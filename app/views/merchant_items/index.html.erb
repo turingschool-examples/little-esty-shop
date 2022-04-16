@@ -1,6 +1,10 @@
 <h1> <%= @merchant.name %>'s Items  </h1>
 
 <%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
+<h3>Top 5 Items</h3>
+<% @merchant.most_popular_items.each do |item| %>
+<p><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></p>
+<% end %>
 <hr>
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
@@ -14,8 +18,9 @@
   <tr>
     <td>Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %></td>
     <td><%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
+
       method: :patch, local: true do |f| %>
-        <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
+        <button type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %></td>
     <td>
