@@ -20,4 +20,9 @@ RSpec.describe "admin dashboard" do
   
     expect(current_path).to eq("/admin/invoices")
   end
+
+  it 'has an incomplete section' do
+    expect(page).to have_content("Incomplete Invoices")
+  end
+  
 end
