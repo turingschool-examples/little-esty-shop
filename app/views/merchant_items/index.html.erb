@@ -5,7 +5,9 @@
 <% @merchant.most_popular_items.each do |item| %>
 <p><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></p>
 <% end %>
+
 <hr>
+
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
 <table>
@@ -15,7 +17,7 @@
     <th> Top Selling Date For Was </th>
   </tr>
 <% @merchant.items.each do |item| %>
-  <% if item.status == 1 %>
+  <% if item.status == "enabled" %>
   <tr>
     <td>Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %></td>
     <td><%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
@@ -31,8 +33,9 @@
   <% end %>
 <% end %>
 </table>
-
 </div>
+
+<hr>
 
 <div id="disabled-<%= @merchant.id %>">
 <h2>Disabled Items</h2>
@@ -43,7 +46,7 @@
     <th> Top Selling Date For Was </th>
   </tr>
   <% @merchant.items.each do |item| %>
-    <% if item.status == 0 %>
+    <% if item.status == "disabled" %>
   <tr>
     <td> Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %> </td>
     <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
@@ -59,6 +62,8 @@
 <% end %>
 </table>
 </div>
+
+<hr>
 
 <h2>Unknown status </h2>
 <table>
