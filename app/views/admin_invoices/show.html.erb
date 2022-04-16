@@ -1,0 +1,21 @@
+<h1>Invoice <%= "#{@invoice.id}" %> Show Page</h1>
+
+
+Id: <%= "#{@invoice.id}"  %><br>
+Status: <%= "#{@invoice.status}"  %><br>
+
+<%# <%= form_for(:select_list_form, :url => {:controller => "admin_invoices", :action => "show"}) do |f| %> %>
+  <!-- <select name="status_selector" id="post_status"> -->
+    <!-- <option value="In Progress">In Progress</option> -->
+    <!-- <option value="Completed">Completed</option> -->
+    <!-- <option value="Cancelled">Cancelled</option> -->
+    <!-- <option value="Completed">Completed</option> -->
+  <!-- </select><br><br> -->
+  <%# <%= f.select "Cancelled", "form-button form-left" %> %>
+  <%# <%= f.submit "Submit", :class => "form-button form-left" %> %>
+<%# <% end %> %>
+
+<%# <%= select_tag(:status_id, '<option value="1">In Progress</option>')%> %>
+
+Created: <%= "#{@invoice.created_at.strftime("%A, %B %d, %Y")}"  %><br>
+Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"  %><br>

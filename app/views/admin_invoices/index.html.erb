@@ -1,0 +1,7 @@
+<h1>Admin Invoice Index Page</h1>
+
+
+<% @invoices.each do |invoice| %>
+  Customer Name: <%= invoice.customer.first_name %> <%= invoice.customer.last_name %><br>
+  Invoice Number: <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %><br>
+<% end %>
