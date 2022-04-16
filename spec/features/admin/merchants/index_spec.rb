@@ -136,7 +136,7 @@ RSpec.describe "Admin Merchants Index Page" do
         invoice_item_7 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_6.id, status: 1, quantity: 2, unit_price: 3242)
 
         visit "/admin/merchants"
-
+        save_and_open_page
         within "#top_5_big" do
           expect("Cheese Company").to appear_before("My Dog Skeeter")
           expect("My Dog Skeeter").to appear_before("Lord Eldens")
@@ -144,26 +144,26 @@ RSpec.describe "Admin Merchants Index Page" do
           expect("Jeffs GoldBlooms").to appear_before("Souls Darkery")
         end
 
-        within "top_five_merchant-#{merchant_6.id}" do
+        within "#top_five_merchant-#{merchant_6.id}" do
           expect(page).to have_link("Cheese Company")
         end
 
-        within "top_five_merchant-#{merchant_4.id}" do
+        within "#top_five_merchant-#{merchant_4.id}" do
           expect(page).to have_link("My Dog Skeeter")
         end
 
-        within "top_five_merchant-#{merchant_1.id}" do
+        within "#top_five_merchant-#{merchant_1.id}" do
           expect(page).to have_link("Lord Eldens")
         end
 
-        within "top_five_merchant-#{merchant_2.id}" do
+        within "#top_five_merchant-#{merchant_2.id}" do
           expect(page).to have_link("Jeffs GoldBlooms")
         end
 
-        within "top_five_merchant-#{merchant_3.id}" do
+        within "#top_five_merchant-#{merchant_3.id}" do
           click_link "Souls Darkery"
         end
-        expect(current_path).to eq("/admin/merchants/#{merchant_3.idß}")
+        expect(current_path).to eq("/admin/merchants/#{merchant_3.id}")
 
       end
 

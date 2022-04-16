@@ -26,3 +26,20 @@
 
 </section>
 <% end %>
+
+
+
+
+
+<h3>Top 5 Merchants By Revenue</h3>
+
+<div id="top_5_big">
+
+<% @top_five.each do |merchant| %>
+<section id="top_five_merchant-<%= merchant.id %>">
+
+  <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><br>
+
+<section>
+<% end %>
+</div>
