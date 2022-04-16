@@ -19,6 +19,7 @@
 <% @merchant.items.each do |item| %>
   <% if item.status == "enabled" %>
   <tr>
+    <div id="enabled-<%= item.id %>">
     <td>Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %></td>
     <td><%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
 
@@ -29,6 +30,7 @@
     <td>
       <%= item.best_sales_date %>
     </td>
+    </div>
   </tr>
   <% end %>
 <% end %>
@@ -48,6 +50,7 @@
   <% @merchant.items.each do |item| %>
     <% if item.status == "disabled" %>
   <tr>
+    <div id="disabled-<%= item.id %>">
     <td> Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %> </td>
     <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
       method: :patch, local: true do |f| %>
@@ -57,6 +60,7 @@
     <td>
       <%= item.best_sales_date %>
     </td>
+    </div>
   </tr>
   <% end %>
 <% end %>
