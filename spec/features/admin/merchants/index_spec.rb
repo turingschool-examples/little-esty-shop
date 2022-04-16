@@ -90,4 +90,14 @@ describe "the admin/merchants index page" do
       end
     end
   end
+
+  describe "I see a link to create a new merchant" do
+    it "takes me to a new page to fill out a form" do
+      visit "/admin/merchants"
+
+      click_on "Create New Merchant"
+
+      expect(current_path).to eq("/admin/merchants/new")
+    end
+  end
 end
