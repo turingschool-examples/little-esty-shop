@@ -136,7 +136,7 @@ RSpec.describe "Admin Merchants Index Page" do
         invoice_item_7 = create(:invoice_item, item_id: item_7.id, invoice_id: invoice_6.id, status: 1, quantity: 2, unit_price: 3242)
 
         visit "/admin/merchants"
-        save_and_open_page
+        # save_and_open_page
         within "#top_5_big" do
           expect("Cheese Company").to appear_before("My Dog Skeeter")
           expect("My Dog Skeeter").to appear_before("Lord Eldens")
