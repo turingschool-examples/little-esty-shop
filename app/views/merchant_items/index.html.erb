@@ -14,7 +14,8 @@
     <th> Options </th>
     <th> Top Selling Date For Was </th>
   </tr>
-<% @enabled_items.each do |item| %>
+<% @merchant.items.each do |item| %>
+  <% if item.status == 1 %>
   <tr>
     <td>Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %></td>
     <td><%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
@@ -27,6 +28,7 @@
       <%= item.best_sales_date %>
     </td>
   </tr>
+  <% end %>
 <% end %>
 </table>
 
@@ -40,7 +42,8 @@
     <th> Options </th>
     <th> Top Selling Date For Was </th>
   </tr>
-  <% @disabled_items.each do |item| %>
+  <% @merchant.items.each do |item| %>
+    <% if item.status == 0 %>
   <tr>
     <td> Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %> </td>
     <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
@@ -52,6 +55,7 @@
       <%= item.best_sales_date %>
     </td>
   </tr>
+  <% end %>
 <% end %>
 </table>
 </div>
