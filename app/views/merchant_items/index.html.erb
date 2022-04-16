@@ -19,7 +19,7 @@
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %></td>
     <td>
-      placeholder <!-- best selling day method here -->
+      <%= item.best_sales_date %>
     </td>
   </tr>
 <% end %>
@@ -44,7 +44,7 @@
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %></td>
     <td>
-      placeholder <!-- best selling date method here -->
+      <%= item.best_sales_date %>
     </td>
   </tr>
 <% end %>
@@ -72,7 +72,7 @@
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %></td>
       <td>
-        placeholder <!-- Fill with item.best_selling_day_method -->
+        <%= item.best_sales_date %>
       </td></tr>
   <% end %>
 <% end %>
