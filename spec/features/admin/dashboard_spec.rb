@@ -22,7 +22,10 @@ RSpec.describe "admin dashboard" do
   end
 
   it 'has an incomplete section' do
-    expect(page).to have_content("Incomplete Invoices")
+    within "#incomplete" do
+      expect(page).to have_content("Incomplete Invoices")
+
+    end
   end
   
 end
