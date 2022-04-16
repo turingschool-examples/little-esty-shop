@@ -24,4 +24,11 @@ class AdminMerchantsController < ApplicationController
     end
 
   end
+
+  def new
+  end
+
+  def create
+    merchant = Merchant.create(:name) 
+  end
 end
