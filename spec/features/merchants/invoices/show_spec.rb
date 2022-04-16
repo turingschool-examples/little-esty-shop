@@ -65,7 +65,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     end
 
-    xit 'I see the total revenue that will be generated from all my items on the invoice' do
+    it 'I see the total revenue that will be generated from all my items on the invoice' do
       merch1 = FactoryBot.create(:merchant)
       # merch2 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
@@ -81,14 +81,34 @@ RSpec.describe 'Merchant Invoice Show Page' do
       # invoice_item_4 = FactoryBot.create(:invoice_item, item_id: item4.id, unit_price: item4.unit_price, quantity: 1, nvoice_id: invoice1.id)
 
       visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
-
       expect(page).to have_content("Total Revenue From This Invoice:")
       within "#total_revenue" do
         expect(page).to have_content("Revenue: $4167.88")
       end
+    end
 
+    it 'has a drop down menu for each invoice item status, to change said status' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      invoice1 = FactoryBot.create(:invoice, customer_id: cust1.id)
+      invoice_item_1 = FactoryBot.create(:invoice_item, item_id: item1.id, unit_price: item1.unit_price, quantity: 3, status: 0, invoice_id: invoice1.id)
+      invoice_item_2 = FactoryBot.create(:invoice_item, item_id: item2.id, unit_price: item2.unit_price, quantity: 1, status: 1, invoice_id: invoice1.id)
 
+      visit "/merchants/#{merch1.id}/invoices/#{invoice1.id}"
+      expect(page).to have_button("Update Item Status")
 
+      within "#invoice_item-#{invoice_item_1.id}" do
+        expect(find_field('status').value).to eq('packaged')
+        select 'shipped'
+        click_button 'Update Item Status'
+      end
+      expect(current_path).to eq("/merchants/#{merch1.id}/invoices/#{invoice1.id}")
+
+      within "#invoice_item-#{invoice_item_1.id}" do
+        expect(page).to have_content("shipped")
+      end
     end
 
   end

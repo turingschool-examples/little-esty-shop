@@ -1,0 +1,9 @@
+<h1>Admin Merchant Show Page</h1>
+
+<h3>Merchant Name: <%= @merchant.name %></h3>
+
+<h4>Update Merchant</h4>
+
+<section id="update_this_merchant">
+  <%= link_to "Update This Merchant", "/admin/merchants/#{@merchant.id}/edit" %>
+</section>

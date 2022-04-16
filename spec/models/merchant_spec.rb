@@ -77,10 +77,16 @@ RSpec.describe Merchant, type: :model do
       item_2 = create(:item, merchant_id: merchant_1.id)
       customer = create(:customer)
       invoice = create(:invoice, customer_id: customer.id, status: 1)
-      invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id)
-      invoice_item_2 = create(:invoice_item, status: 2, item_id: item_2.id, invoice_id: invoice.id)
+      date_1 = 	"2015-02-08 09:54:09 UTC".to_datetime
+      date_2 = 	"2020-02-21 09:54:09 UTC".to_datetime
+      date_3 = 	"2018-03-12 09:54:09 UTC".to_datetime
+      invoice_item_1 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_1)
+      invoice_item_2 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_2)
+      invoice_item_3 = create(:invoice_item, status: 0, item_id: item_1.id, invoice_id: invoice.id, created_at: date_3)
 
-      expect(merchant_1.items_ready_to_ship).to eq([item_1])
+      expect(merchant_1.ready_to_ship[0]).to eq(invoice_item_1)
+      expect(merchant_1.ready_to_ship[1]).to eq(invoice_item_2)
+      expect(merchant_1.ready_to_ship[2]).to eq(invoice_item_3)
     end
     it '#current_invoice_items returns a merchants invoice items for a given invoice' do
       merch1 = FactoryBot.create(:merchant)
@@ -104,7 +110,7 @@ RSpec.describe Merchant, type: :model do
       expect(merch1.current_invoice_items(invoice1.id)).to eq([invoice_item_1, invoice_item_2, invoice_item_4])
     end
 
-    xit 'returns the total revenue for a merchant for a given invoice' do
+    it 'returns the total revenue for a merchant for a given invoice' do
       merch1 = FactoryBot.create(:merchant)
       cust1 = FactoryBot.create(:customer)
       item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id)
@@ -121,6 +127,61 @@ RSpec.describe Merchant, type: :model do
       expect(merch1.total_revenue_for_invoice(invoice1.id)).to eq(4167.88)
     end
 
+    it '#status_enabled returns all merchants with the status: enabled (0)' do
+      date1 = "2020-02-08 09:54:09 UTC".to_datetime
+      date2 = "2017-03-16 04:04:09 UTC".to_datetime
+      date3 = "2012-08-07 01:44:09 UTC".to_datetime
+      date4 = "2015-05-03 08:23:09 UTC".to_datetime
+      date5 = "2021-01-11 12:55:09 UTC".to_datetime
+      date6 = "2016-08-18 02:36:09 UTC".to_datetime
+      date7 = "2016-11-18 02:36:09 UTC".to_datetime
+      merch1 = Merchant.create!(name: 'Lord Eldens', created_at: date1, updated_at: date1, status: 0)
+      merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: date2, updated_at: date2, status: 1)
+      merch3 = Merchant.create!(name: 'Souls Darkery', created_at: date3, updated_at: date3, status: 0)
+      merch4 = Merchant.create!(name: 'My Dog Skeeter', created_at: date4, updated_at: date4, status: 1)
+      merch5 = Merchant.create!(name: 'Corgi Town', created_at: date5, updated_at: date5, status: 0)
+      merch6 = Merchant.create!(name: 'Cheese Company', created_at: date5, updated_at: date6, status: 1)
+      merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
+      expect(Merchant.status_enabled).to eq([merch1, merch3, merch5, merch7])
+    end
 
+    it '#enabled_items' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id, status: 1)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id, status: 1)
+
+      expect(merch1.enabled_items).to eq([item1, item3])
+    end
+    
+    it '#disabled_items' do
+      merch1 = FactoryBot.create(:merchant)
+      cust1 = FactoryBot.create(:customer)
+      item1 = FactoryBot.create(:item, unit_price: 75107, merchant_id: merch1.id, status: 1)
+      item2 = FactoryBot.create(:item, unit_price: 59999, merchant_id: merch1.id)
+      item3 = FactoryBot.create(:item, unit_price: 65734, merchant_id: merch1.id, status: 1)
+
+      expect(merch1.disabled_items).to eq([item2])
+
+    end
+
+    it '#status_disabled returns all merchants with the status: disabled (1)' do
+      date1 = "2020-02-08 09:54:09 UTC".to_datetime
+      date2 = "2017-03-16 04:04:09 UTC".to_datetime
+      date3 = "2012-08-07 01:44:09 UTC".to_datetime
+      date4 = "2015-05-03 08:23:09 UTC".to_datetime
+      date5 = "2021-01-11 12:55:09 UTC".to_datetime
+      date6 = "2016-08-18 02:36:09 UTC".to_datetime
+      date7 = "2016-11-18 02:36:09 UTC".to_datetime
+      merch1 = Merchant.create!(name: 'Lord Eldens', created_at: date1, updated_at: date1, status: 0)
+      merch2 = Merchant.create!(name: 'Jeffs GoldBlooms', created_at: date2, updated_at: date2, status: 1)
+      merch3 = Merchant.create!(name: 'Souls Darkery', created_at: date3, updated_at: date3, status: 0)
+      merch4 = Merchant.create!(name: 'My Dog Skeeter', created_at: date4, updated_at: date4, status: 1)
+      merch5 = Merchant.create!(name: 'Corgi Town', created_at: date5, updated_at: date5, status: 0)
+      merch6 = Merchant.create!(name: 'Cheese Company', created_at: date5, updated_at: date6, status: 1)
+      merch7 = Merchant.create!(name: 'Brisket is Tasty', created_at: date7, updated_at: date7, status: 0)
+      expect(Merchant.status_disabled).to eq([merch2, merch4, merch6])
+    end
   end
 end

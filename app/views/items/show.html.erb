@@ -2,3 +2,4 @@
 <p> <%= @item.description %> <p>
 <p> <%= @item.unit_price %> <p>
   <%= link_to "Back To My Items", "/merchants/#{@merchant.id}/items" %>
+  <%= link_to "Update This Item", "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch %>
