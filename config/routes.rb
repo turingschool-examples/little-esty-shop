@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     resources :dashboard, only:[:index]
   end
 
-<<<<<<< HEAD
   resources :admin, controller: 'admin/dashboard', only: [:index]
   namespace :admin do
     resources :invoices
@@ -19,7 +18,6 @@ Rails.application.routes.draw do
   # get '/admin/invoices/:id', to: 'admin/invoices#show'
 
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
-=======
 
   post '/merchants/:merchant_id/invoice_items', to: 'invoice_items#update'
   get '/admin/merchants/:id/dashboard', to: "admin/dashboard#index"
@@ -31,6 +29,5 @@ Rails.application.routes.draw do
   patch '/admin/merchants/:id', to: 'admin/merchants#update'
 
   # get '/merchants/:id/invoices', to: 'merchant_invoices#index'
->>>>>>> 4683c8546f0d087b2ea39f158a4addb3b79886da
   get '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#show'
 end

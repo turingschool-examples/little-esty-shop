@@ -22,7 +22,7 @@ class Invoice < ApplicationRecord
 
   def self.incomplete_invoices
 
-   joins(:invoice_items).where(status: [0,1])
+   joins(:invoice_items).where(status: [1])
   end
 
   def self.order_invoices

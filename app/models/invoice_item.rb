@@ -12,7 +12,7 @@ class InvoiceItem < ApplicationRecord
     unit_price / 100.to_f
   end
 
-  def incomplete_invoices
-  invoice_items.where(status: [0,1])
-  end
+  # def incomplete_invoices
+  # invoice_items.where(status: [0,1])
+  # end
 end
