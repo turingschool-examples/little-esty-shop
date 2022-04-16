@@ -43,7 +43,7 @@ RSpec.describe "Admin Merchants Show Page" do
         # save_and_open_page
         expect(current_path).to eq("/admin/merchants/#{merch1.id}")
         expect(page).to have_content("Holy Mackerels")
-        expect(page).to have_content("Update Succesful!")
+        expect(page).to have_content("Update Successful!")
       end
 
     end
