@@ -26,7 +26,8 @@
     <p>Quantity: <strong><%= ii.quantity %></strong></p>
     <p>Sold for: <strong>$<%= ii.unit_price / 100.0 %></strong> each</p>
     <p>Status: <strong><%= ii.status %></strong></p>
-</div>
+  </div>
+<% end %>
 
 <div id="total_revenue">
   <h1> Total: $<%= @invoice.invoice_total %> </h1>
