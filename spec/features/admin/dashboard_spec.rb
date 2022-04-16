@@ -83,17 +83,18 @@ RSpec.describe 'admin dashboad spec' do
       @invoice_item_2 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_2.id, status: 2)
       transactions_list_2 = FactoryBot.create_list(:transaction, 5, invoice_id: @invoice_2.id, result: 0)
 
-      #customer_3 4 succesful
-      @customer_3 = create(:customer)
-      @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
-      @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 1)
-      @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
 
       #customer_4 3 succesful
       @customer_4 = create(:customer)
       @invoice_4 = create(:invoice, status: 1, customer_id: @customer_4.id, created_at: "2012-03-25 09:54:09 UTC")
       @invoice_item_4 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_4.id, status: 1)
       @transactions_list_4 = FactoryBot.create_list(:transaction, 3, invoice_id: @invoice_4.id, result: 0)
+
+      #customer_3 4 succesful
+      @customer_3 = create(:customer)
+      @invoice_3 = create(:invoice, status: 1,customer_id: @customer_3.id, created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_item_3 = create(:invoice_item, item_id: @item.id, invoice_id: @invoice_3.id, status: 1)
+      @transactions_list_3 = FactoryBot.create_list(:transaction, 4, invoice_id: @invoice_3.id, result: 0)
 
       #customer_5 2 succesful
       @customer_5 = create(:customer)
@@ -111,8 +112,7 @@ RSpec.describe 'admin dashboad spec' do
 
     it 'has a section showing ids of invoices with unshipped items sorted from oldest to newest created_by ' do
       within"#incomplete_invoices"do
-save_and_open_page
-# require "pry"; binding.pry
+
         expect(page).to have_content(@invoice_4.id)
         expect(page).to have_content(@invoice_6.id)
         expect(page).to have_content(@invoice_3.id)
@@ -123,10 +123,14 @@ save_and_open_page
         expect(page).to have_link("#{@invoice_6.id}")
         expect(page).to have_link("#{@invoice_3.id}")
 
+      end
     end
-    # click_link(@invoice_6.id)
 
-      # expect(current_path).to eq("/admin/invoices/#{@invoice_6.id}")
+    it ' shows unshipped items sorted from oldest to newest created_by ' do
+      within"#incomplete_invoices" do
+        expect("#{@invoice_4.id}").to appear_before("#{@invoice_3.id}")
+        expect("#{@invoice_3.id}").to appear_before("#{@invoice_6.id}")
+      end
     end
   end
 end
