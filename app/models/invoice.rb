@@ -19,4 +19,14 @@ class Invoice < ApplicationRecord
     last_name ="#{customer.last_name}"
     "#{first_name} #{last_name}"
   end
+
+  def self.incomplete_invoices
+
+   joins(:invoice_items).where(status: [1])
+  end
+
+  def self.order_invoices
+    order(:created_at)
+  end
+
 end

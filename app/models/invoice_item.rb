@@ -11,4 +11,8 @@ class InvoiceItem < ApplicationRecord
   def price_to_dollars
     unit_price / 100.to_f
   end
+
+  # def incomplete_invoices
+  # invoice_items.where(status: [0,1])
+  # end
 end

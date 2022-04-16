@@ -9,6 +9,15 @@ Rails.application.routes.draw do
     resources :dashboard, only:[:index]
   end
 
+  resources :admin, controller: 'admin/dashboard', only: [:index]
+  namespace :admin do
+    resources :invoices
+    resources :merchants
+  end
+  # get '/admin', controller: 'admin/dashboard', to: "admin/dashboard#index"
+  # get '/admin/invoices/:id', to: 'admin/invoices#show'
+
+  get '/merchants/:id/invoices', to: 'merchant_invoices#index'
 
   post '/merchants/:merchant_id/invoice_items', to: 'invoice_items#update'
   get '/admin/merchants/:id/dashboard', to: "admin/dashboard#index"
