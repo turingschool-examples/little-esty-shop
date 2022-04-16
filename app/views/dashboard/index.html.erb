@@ -1,0 +1,32 @@
+
+<h1>Little Esty Shop</h1>
+
+
+<h3><%= @merchant.name %></h3>
+
+<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
+<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+
+
+<section id="top_five_customers">
+  <h3>Top Five Customers</h3>
+  <ol>
+    <% @merchant.top_five_customers.each do |customer| %>
+    <li>
+      Customer: <%= customer.full_name %> - Total Transactions: <%= customer.total_transactions %>
+    </li>
+    <% end %>
+  </ol>
+</section>
+
+<section id="items_ready_to_ship">
+  <h3>Items Ready to Ship</h3>
+  <ul>
+  <% @merchant.ready_to_ship.each do |invoice_item| %>
+    <div id="invoice-item-<%= invoice_item.id %>">
+      <%= invoice_item.item.name %>
+      <li><%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %></li>
+      <li><%= invoice_item.invoice.formatted_created_at %>
+  <% end %>
+  </ul>
+</section>
