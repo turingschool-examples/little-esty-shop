@@ -99,5 +99,23 @@ describe "the admin/merchants index page" do
 
       expect(current_path).to eq("/admin/merchants/new")
     end
+
+    it "allows me to create a new merchant" do
+      visit "/admin/merchants"
+save_and_open_page
+      expect(page).to_not have_content("New merch")
+
+      click_on "Create New Merchant"
+
+      fill_in(:name, with: "New merch")
+
+      click_on "Submit"
+save_and_open_page
+      expect(current_path).to eq("/admin/merchants")
+      expect(page).to have_content("New merch")
+      within("#disabled_merchants") do
+        expect(page).to have_content("New merch")
+      end
+    end
   end
 end
