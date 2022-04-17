@@ -89,10 +89,10 @@ RSpec.describe "admin dashboard" do
   it 'has an incomplete section' do
     within "#incomplete" do
       save_and_open_page
-      # binding.pry
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to have_content("#{@invoice_1.id}")
       expect(page).to_not have_content("#{@invoice_2.id}")
+      
 
     end
   end

@@ -7,11 +7,9 @@
 <div id="incomplete">
     <h3>Incomplete Invoices</h3>
     <ul>
-    <%# <% binding.pry %> %>
         <% @invoices.each do |invoice| %>
-        
             <% if invoice.has_items_not_shipped == false %>
-            <li><%= invoice.id %></li>
+            <li><%= link_to "#{invoice.id}", "/invoice/#{invoice.id}"  %></li>
             <% end %>
         <% end %>
     </ul>
