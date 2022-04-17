@@ -23,11 +23,11 @@ RSpec.describe 'Admin Invoice Show' do
       invoice_1 = customer.invoices.create(status: "in progress")
 
       visit "/admin/invoices/#{invoice_1.id}"
-      save_and_open_page
-      
+
       select "cancelled" , from: :status
       click_button 'Change Status'
-
+      expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
+      expect(page).to have_content('cancelled')
 
     end
   end
