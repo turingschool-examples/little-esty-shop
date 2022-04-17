@@ -1,6 +1,6 @@
 <h1><%= @merchant.name %></h1>
 
-<%= link_to "Update #{@merchant.name}", "/admin/merchants/#{@merchant.id}/edit" %>
+<p><%= link_to "Update #{@merchant.name}", "/admin/merchants/#{@merchant.id}/edit" %></p>
 
 <% flash.each do |type, msg| %>
   <div id='flash'>
@@ -8,4 +8,4 @@
   </div>
 <% end %>
 
-<%= link_to "Back to Merchants", "/admin/merchants" %>
+<p><%= link_to "Back to Merchants", "/admin/merchants" %></p>
