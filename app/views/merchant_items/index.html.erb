@@ -3,11 +3,17 @@
 <%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
 <h3>Top 5 Items</h3>
 <table>
+  <tr>
+    <th>Item Name</th>
+    <th>Best Sales Date</th>
+  </tr>
 <% @merchant.most_popular_items.each do |item| %>
-<td><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></td>
-<td>
-  <%= item.best_sales_date %>
-</td>
+  <tr>
+    <td><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></td>
+    <td>
+      <%= item.best_sales_date %>
+    </td>
+  </tr>
 <% end %>
 </table>
 
@@ -19,7 +25,6 @@
   <tr>
     <th> Name </th>
     <th> Options </th>
-    <th> Top Selling Date For Was </th>
   </tr>
 <% @merchant.items.each do |item| %>
   <% if item.status == "enabled" %>
@@ -75,7 +80,7 @@
 <% if @merchant.items.pluck(:status).include?(nil) %>
   <tr><th> Name </th>
   <th> Options </th>
-  <th> Top Selling Date For Was </th></tr>
+</tr>
 <% end %>
 <% @merchant.items.each do |item| %>
   <% if item.status == nil %>
