@@ -2,9 +2,14 @@
 
 <%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
 <h3>Top 5 Items</h3>
+<table>
 <% @merchant.most_popular_items.each do |item| %>
-<p><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></p>
+<td><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></td>
+<td>
+  <%= item.best_sales_date %>
+</td>
 <% end %>
+</table>
 
 <hr>
 
@@ -45,7 +50,6 @@
   <tr>
     <th> Name </th>
     <th> Options </th>
-    <th> Top Selling Date For Was </th>
   </tr>
   <% @merchant.items.each do |item| %>
     <% if item.status == "disabled" %>
@@ -57,9 +61,6 @@
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %></td>
-    <td>
-      <%= item.best_sales_date %>
-    </td>
     </div>
   </tr>
   <% end %>
@@ -89,9 +90,7 @@
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
       <% end %></td>
-      <td>
-        <%= item.best_sales_date %>
-      </td></tr>
+    </tr>
   <% end %>
 <% end %>
 </table>
