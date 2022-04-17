@@ -3,7 +3,7 @@
  <h2><b>Items:</b></h2>
   <% @invoice.invoice_items.each do |invoice_item| %>
   <h3><%= invoice_item.item.name %></h3>
-  <p>     Price: $<%= (invoice_item.item.unit_price.to_f)/100 %><br>
+  <p>     Price: ¢<%= invoice_item.item.unit_price %><br>
        Quantity sold: <%= invoice_item.quantity %><br>
      _______________________</p>
   <% end %>
