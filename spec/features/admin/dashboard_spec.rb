@@ -2,26 +2,6 @@ require "rails_helper"
 
 RSpec.describe "admin dashboard" do
   before :each do
-    visit "/admin"
-  end
-
-  it "exists" do
-    expect(page).to have_content("Admin Dashboard")
-  end
-
-  it "has link to admin merchants index" do
-    click_link("Admin Merchants Index")
-
-    expect(current_path).to eq("/admin/merchants")
-  end
-
-  it "has link to admin invoices index" do
-    click_link("Admin Invoices Index")
-  
-    expect(current_path).to eq("/admin/invoices")
-  end
-
-  it 'has an incomplete section' do
       @merchant_1 = Merchant.create!(
       name: "Store Store",
       created_at: Date.current,
@@ -86,7 +66,30 @@ RSpec.describe "admin dashboard" do
       created_at: Date.current,
       updated_at: Date.current
     )
+        visit "/admin"
+
+  end
+
+  it "exists" do
+    expect(page).to have_content("Admin Dashboard")
+  end
+
+  it "has link to admin merchants index" do
+    click_link("Admin Merchants Index")
+
+    expect(current_path).to eq("/admin/merchants")
+  end
+
+  it "has link to admin invoices index" do
+    click_link("Admin Invoices Index")
+  
+    expect(current_path).to eq("/admin/invoices")
+  end
+
+  it 'has an incomplete section' do
     within "#incomplete" do
+      save_and_open_page
+      # binding.pry
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to have_content("#{@invoice_1.id}")
       expect(page).to_not have_content("#{@invoice_2.id}")
