@@ -3,6 +3,7 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show 
+    binding.pry
     @invoice = Invoice.find(params[:id])
   end 
 end
