@@ -9,7 +9,8 @@
     <ul>
         <% @invoices.each do |invoice| %>
             <% if invoice.has_items_not_shipped == false %>
-            <li><%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}"  %></li>
+            <li><%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}"  %> 
+            - Date: <%= invoice.created_at.strftime('%A, %B %d, %Y') %></li>
             <% end %>
         <% end %>
     </ul>

@@ -100,5 +100,8 @@ RSpec.describe "admin dashboard" do
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.id}")
   end
-  
+
+  it 'incomplete section has a date' do
+  expect(page).to have_content("Saturday, December 12, 2020")
+  end 
 end
