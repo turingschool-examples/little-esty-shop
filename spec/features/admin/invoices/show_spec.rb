@@ -18,16 +18,17 @@ RSpec.describe 'Admin Invoice Show' do
 
     end
 
-    # it 'lists a link to update Invoice status using a select field' do
-    #   customer = Customer.create!(first_name: "Billy", last_name: "Jonson")
-    #   invoice_1 = customer.invoices.create(status: "in progress")
-    #
-    #   visit "/admin/invoices/#{invoice_1.id}"
-    #   # select_list_form("Cancelled")
-    #   assert_selector :status_id, 'Cancelled'
-    #   click_button 'Submit'
-    #
-    #
-    # end
+    it 'lists a link to update Invoice status using a select field' do
+      customer = Customer.create!(first_name: "Billy", last_name: "Jonson")
+      invoice_1 = customer.invoices.create(status: "in progress")
+
+      visit "/admin/invoices/#{invoice_1.id}"
+      save_and_open_page
+      
+      select "cancelled" , from: :status
+      click_button 'Change Status'
+
+
+    end
   end
 end
