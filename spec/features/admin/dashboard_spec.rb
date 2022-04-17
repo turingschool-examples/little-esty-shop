@@ -92,8 +92,9 @@ RSpec.describe "admin dashboard" do
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to have_content("#{@invoice_1.id}")
       expect(page).to_not have_content("#{@invoice_2.id}")
-      
 
+      click_on("#{@invoice_1.id}")
+      expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
     end
   end
   
