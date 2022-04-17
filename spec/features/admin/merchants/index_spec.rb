@@ -33,11 +33,18 @@ RSpec.describe "Admin Merchants Index" do
     end
 
     it "links to each merchants show page" do
-        save_and_open_page
         click_on "The Store"
         expect(current_path).to eq("/admin/merchants/#{@merchant_4.id}")
         expect(page).to have_content("The Store")
         expect(page).to_not have_content("Wally World")
+    end
+
+    it "has a button to enable or disable merchant" do
+    save_and_open_page
+        # within("#Wally World") do
+            expect(page).to have_button("Enable")
+        # end 
+
     end
 
 end

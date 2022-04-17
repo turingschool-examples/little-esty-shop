@@ -1,6 +1,10 @@
 <h1>Admin Merchants Index</h1>
 <ul>
 <%@merchants.each do |merchant|%>
-    <li> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> </li>
+    <li id= "<%=merchant.name%>"> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> </li>
+        <%if merchant.status == "disabled" %> 
+            <%=button_to "Enable", "/merchants/#{merchant.id}" %>
+        <% else %>
+            <%=button_to "Disable", "/merchants/#{merchant.id}" %>
     <% end %>
 </ul>
