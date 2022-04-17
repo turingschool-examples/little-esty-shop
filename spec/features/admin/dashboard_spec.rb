@@ -37,7 +37,7 @@ RSpec.describe "admin dashboard" do
     )
     @invoice_4 = @customer_1.invoices.create!(
       status: 1,
-      created_at: Date.new(1997,12,12),
+      created_at: Date.new(2022,12,12),
       updated_at: Date.current
     )
     @invoice_item_1 = InvoiceItem.create!(
@@ -117,6 +117,9 @@ RSpec.describe "admin dashboard" do
 
   it  'Incomplete invoice items are organized by date' do
   save_and_open_page
-  expect(@invoice_3.id).to appear_before(@invoice_1.id)
+    within("#incomplete") do
+      expect("1999").to appear_before("2020")
+      expect("1999").to appear_before("2022")
+    end 
   end 
 end
