@@ -33,8 +33,11 @@ RSpec.describe "Admin Merchants Index" do
     end
 
     it "links to each merchants show page" do
+        save_and_open_page
         click_on "The Store"
-        expect(current_path).to eq("admin/merchants/#{@merchant_4.id}")
+        expect(current_path).to eq("/admin/merchants/#{@merchant_4.id}")
+        expect(page).to have_content("The Store")
+        expect(page).to_not have_content("Wally World")
     end
 
 end
