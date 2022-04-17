@@ -2,9 +2,12 @@
 
 <div id="invoice-info">
   <p><strong>Invoice ID: <%= @invoice.id %></strong></p>
-  <p><strong>Invoice Status: <%= @invoice.status %></strong></p>
   <p><strong>Created At: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></strong></p>
   <p><strong>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></strong></p>
+  <%= form_with(model: [:admin, @invoice]) do |f| %>
+    <p><strong>Invoice Status: </strong><%= f.select :status, ['Cancelled', 'In Progress', 'Completed'], status: @invoice.status %>
+    <%= f.submit "Update Invoice Status" %>
+  <% end %>
 </div>
 <br>
 <h2>Invoice Items Info</h2>
