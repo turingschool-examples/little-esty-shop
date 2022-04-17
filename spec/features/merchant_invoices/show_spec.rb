@@ -26,7 +26,7 @@ RSpec.describe 'merchant invoice show page' do
     expect(page).to have_content("Jonson")
   end
 
-  context 'showing invoice items' do
+  context 'invoice items' do
     it 'should show the names of all items related to the invoice' do
       expect(page).to have_content("Bottle")
       expect(page).to have_content("Can")
@@ -58,9 +58,9 @@ RSpec.describe 'merchant invoice show page' do
       within "#item-#{@item_1.id}" do
         expect(page).to have_content("Status: shipped")
       end
-
+      
       within "#item-#{@item_1.id}" do
-        page.select 'packaged', from: 'update_status'
+        select 'packaged', from: 'select_status'
         click_button "Update Item Status"
       end
 
