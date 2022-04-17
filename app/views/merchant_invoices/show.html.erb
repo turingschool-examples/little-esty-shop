@@ -37,7 +37,7 @@
                method: :patch, local: true do |form| %>
       <%= form.label :select_status %>
       <%= form.select :select_status,
-                      ['pending', 'packaged', 'shipped'] %>
+                      ['pending', 'packaged', 'shipped'], selected: @invoice.status %>
       <%= form.submit 'Update Item Status' %>
     <% end %>
   </div>
