@@ -67,12 +67,12 @@ RSpec.describe Invoice do
       )
       @invoice_2 = @customer_1.invoices.create!(
         status: 2,
-        created_at: Date.current,
+        created_at: Date.new(2021,12,12),
         updated_at: Date.current
       )
       @invoice_3 = @customer_2.invoices.create!(
         status: 0,
-        created_at: Date.current,
+        created_at: Date.new(1999,12,12),
         updated_at: Date.current
       )
 
@@ -127,5 +127,8 @@ RSpec.describe Invoice do
     it "calculates the total value for an invoice" do
       expect(@invoice_1.invoice_total).to eq(5320.0)
     end
+
+    it 'orders invoices by oldest to newest'
+    expect(Invoice.oldest_first).to eq([@invoice_3, @invoice_1, @invoice_2])
   end
 end
