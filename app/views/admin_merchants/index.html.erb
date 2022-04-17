@@ -1,5 +1,7 @@
 <h1>Merchants</h1>
 
+<p><%= link_to "Create New Merchant", "/admin/merchants/new" %></p>
+
 <div id='enabled_merchants'>
   <h2>Enabled Merchants</h2>
   <% @merchants.enabled.each do |merchant| %>
