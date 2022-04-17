@@ -20,4 +20,8 @@ class Invoice < ApplicationRecord
   def has_items_not_shipped
     invoice_items.where.not(status: 2).empty?
   end
+
+  def self.oldest_first
+    Invoice.order(:created_at)
+  end
 end
