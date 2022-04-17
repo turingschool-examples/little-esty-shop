@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Merchant Invoices Show' do
+RSpec.describe "Merchant Invoices Show" do
   before :each do
     @merchants = create_list(:merchant, 3)
     @items1 = create_list(:item, 3, merchant: @merchants[0])
@@ -19,18 +19,18 @@ RSpec.describe 'Merchant Invoices Show' do
     visit merchant_invoice_path(@merchants[0], @invoices1[0])
   end
 
-  describe 'display' do
-    it 'invoice attributes' do
+  describe "display" do
+    it "invoice attributes", :vcr do
       expect(page).to have_content(@invoices1[0].id)
       expect(page).to have_content("Status: In Progress")
-      expect(page).to have_content("Created On: #{@invoices1[0].created_at.strftime('%A, %B %d, %Y')}")
+      expect(page).to have_content("Created On: #{@invoices1[0].created_at.strftime("%A, %B %d, %Y")}")
       expect(page).to have_content(@invoices1[0].customer.full_name)
       expect(page).to_not have_content(@invoices1[1])
       expect(page).to_not have_content(@invoices2)
     end
 
-    describe 'invoice items' do
-      it 'lists all invoice item names, quantity, price and status' do
+    describe "invoice items" do
+      it "lists all invoice item names, quantity, price and status", :vcr do
         within "#invoice_item-#{@invoice_item2.id}" do
           expect(page).to have_content(@invoice_item2.item.name)
           expect(page).to have_content(@invoice_item2.quantity)

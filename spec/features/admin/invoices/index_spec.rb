@@ -11,7 +11,7 @@ RSpec.describe "Admin Invoices Index", type: :feature do
     @invoice_item3 = create(:invoice_item, invoice: @invoices.last, item: @items.last)
   end
 
-  it "Has all invoice ids" do
+  it "Has all invoice ids", :vcr do
     visit "/admin/invoices"
 
     within("#invoices") do
@@ -33,7 +33,7 @@ RSpec.describe "Admin Invoices Index", type: :feature do
     end
   end
 
-  it "Links from index to show page for each invoice" do
+  it "Links from index to show page for each invoice", :vcr do
     visit "/admin/invoices"
 
     within("#invoices") do

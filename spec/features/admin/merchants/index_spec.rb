@@ -7,7 +7,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     @merchant_3 = create(:merchant)
   end
 
-  it "Has all merchants" do
+  it "Has all merchants", :vcr do
     visit "/admin/merchants"
 
     within("#merchants") do
@@ -29,7 +29,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end
   end
 
-  it "Links from index to show page for each merchant" do
+  it "Links from index to show page for each merchant", :vcr do
     visit "/admin/merchants"
 
     within("#merchants") do
@@ -45,7 +45,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
   end
 
-  it "Links from index to page for creation of new merchant" do
+  it "Links from index to page for creation of new merchant", :vcr do
     visit "/admin/merchants"
 
     expect(page).to have_link("Create New Merchant", href: "/admin/merchants/new")
@@ -55,7 +55,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     expect(current_path).to eq("/admin/merchants/new")
   end
 
-  it "Has buttons for each merchant to toggle enable/disable status" do
+  it "Has buttons for each merchant to toggle enable/disable status", :vcr do
     visit "/admin/merchants"
 
     within("#merchant-#{@merchant_1.id}") do
