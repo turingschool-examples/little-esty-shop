@@ -55,7 +55,7 @@ RSpec.describe "admin dashboard" do
       invoice_id: @invoice_1.id,
       quantity: 1,
       unit_price: @soccer.unit_price,
-      status: 1,
+      status: 0,
       created_at: Date.current,
       updated_at: Date.current
     )  
@@ -87,8 +87,9 @@ RSpec.describe "admin dashboard" do
       updated_at: Date.current
     )
     within "#incomplete" do
-      @invoice = 
       expect(page).to have_content("Incomplete Invoices")
+      expect(page).to have_content("#{@invoice_1.id}")
+      expect(page).to_not have_content("#{@invoice_2.id}")
 
     end
   end
