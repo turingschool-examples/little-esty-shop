@@ -17,9 +17,10 @@ RSpec.describe "Invoice Show Page" do
     end
 
     it "contains information about the invoice" do
+        binding.pry
     expect(page).to have_content(@invoice_1.id)
     expect(page).to have_content(@invoice_1.status)
-    expect(page).to have_content("Monday, July 18, 2019")
+    expect(page).to have_content("Saturday, December 12, 2020")
     expect(page).to have_content("Malcolm Jordan")
     end 
 
