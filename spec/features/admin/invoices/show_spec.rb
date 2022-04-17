@@ -24,5 +24,16 @@ RSpec.describe "Admin Invoice Show Page" do
       expect(page).to have_content("#{@item_11.name}")
       expect(page).to have_content("#{@item_111.name}")
     end
+
+    it 'shows the unit price and quantity sold for each item' do
+      expect(page).to have_content("#{@item_1.unit_price}")
+      expect(page).to have_content("#{@item_11.unit_price}")
+      expect(page).to have_content("#{@item_111.unit_price}")
+      expect(page).to have_content("#{@invoice_item_1.quantity}")
+      expect(page).to have_content("#{@invoice_item_11.quantity}")
+      expect(page).to have_content("#{@invoice_item_111.quantity}")
+    end
+
+
   end
 end
