@@ -10,18 +10,18 @@ RSpec.describe 'Admin invoice show page' do
     @invoice2 = @customer1.invoices.create!(status: 1)
 
 
-    @invoiceitem1 = @invoice1.items.create!(name:	"X-wing",
+    @invoiceitem1 = @invoice1.invoice_items.create!(
                           quantity: 1,
                           unit_price:75107,
                           status: 1
                          )
 
-    @invoiceitem2 = @invoice1.items.create!(name:	"Tie-fighter",
+    @invoiceitem2 = @invoice1.invoice_items.create!(
                           quantity: 1,
                           unit_price:75000,
                           status: 0
                          )
-    @invoiceitem3 = @invoice2.items.create!(name:	"Lightsaber",
+    @invoiceitem3 = @invoice2.invoice_items.create!(
                           quantity: 1,
                           unit_price:7500,
                           status: 1
@@ -47,7 +47,6 @@ RSpec.describe 'Admin invoice show page' do
 
   it 'shows all item attributes on the invoice' do
     within("#invoice_item-#{@invoiceitem1.id}") do
-      expect(page).to have_content(@invoiceitem1.name)
       expect(page).to have_content(@invoiceitem1.quantity)
       expect(page).to have_content(@invoiceitem1.unit_price)
       expect(page).to have_content(@invoiceitem1.status)
