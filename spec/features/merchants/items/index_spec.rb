@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'time'
 
 RSpec.describe 'Merchant items index' do
   before do
@@ -116,17 +117,18 @@ RSpec.describe 'Merchant items index' do
         invoice_item5 = create(:invoice_item, item: item5, invoice: invoice2, quantity: 5, unit_price: 10) #50 rev
         invoice_item6 = create(:invoice_item, item: item6, invoice: invoice2, quantity: 2, unit_price: 10) #20 rev
     end
+
+    it "Lists the date of that item's most ever sales next to the item" do
+      merchant_1 = Merchant.create!(name: "Monolith")
+      item_1 = merchant_1.items.create!(name: "Bone", description: "femur, unpreserved", unit_price: 2001, status: 1)
+      item_2 = merchant_1.items.create!(name: "Plumbus", description: "multipurpose", unit_price: 999, status: 1)
+      customer_1 = Customer.create!(first_name: "monkey", last_name: "wild")
+      invoice_1 = customer_1.invoices.create!(status: 0, created_at: Time.parse("2019.04.16"))
+      invoice_item = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 12, unit_price: 1300, status: 1)
+
+      visit merchant_items_path(merchant_1)
+      expect(page).to have_content("2019.04.16")
+      expect(page).to have_content("no sales records available")
+    end
   end
 end
-# As a merchant
-# When I visit my items index page
-# Then I see the names of the top 5 most popular items ranked by total revenue generated
-# And I see that each item name links to my merchant item show page for that item
-# And I see the total revenue generated next to each item name
-#
-# Notes on Revenue Calculation:
-#
-# Only invoices with at least one successful transaction should count towards revenue
-# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# Revenue for an invoice item should be calculated as the invoice item unit price multiplied
-# by the quantity (do not use the item unit price)

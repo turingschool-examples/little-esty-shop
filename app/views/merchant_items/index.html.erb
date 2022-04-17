@@ -2,50 +2,90 @@
 
 <%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
 <h3>Top 5 Items</h3>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Best Sales Date</th>
+  </tr>
 <% @merchant.most_popular_items.each do |item| %>
-<p><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></p>
+  <tr>
+    <td><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></td>
+    <td>
+      <%= item.best_sales_date %>
+    </td>
+  </tr>
 <% end %>
+</table>
+
 <hr>
+
 <div id="enabled-<%= @merchant.id %>">
 <h2>Enabled Items</h2>
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Options </th>
+  </tr>
+<% @merchant.items.each do |item| %>
+  <% if item.status == "enabled" %>
+  <tr>
+    <div id="enabled-<%= item.id %>">
+    <td>Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %></td>
+    <td><%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
 
-<% @merchant.items.enabled.each do |item| %>
-<div id="enabled-<%= item.id %>">
-
-      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=disabled",
       method: :patch, local: true do |f| %>
         <button type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-  </div>
-      <br>
+      <% end %></td>
+    <td>
+      <%= item.best_sales_date %>
+    </td>
+    </div>
+  </tr>
+  <% end %>
 <% end %>
-
+</table>
 </div>
+
+<hr>
 
 <div id="disabled-<%= @merchant.id %>">
 <h2>Disabled Items</h2>
-
-<% @merchant.items.disabled.each do |item| %>
-<div id="disabled-<%= item.id %>">
-
-      Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %>
-        <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Options </th>
+  </tr>
+  <% @merchant.items.each do |item| %>
+    <% if item.status == "disabled" %>
+  <tr>
+    <div id="disabled-<%= item.id %>">
+    <td> Name: <%= link_to "#{item.name}", merchant_item_path(@merchant,item)  %> </td>
+    <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-  </div>
-      <br>
+      <% end %></td>
+    </div>
+  </tr>
+  <% end %>
 <% end %>
+</table>
 </div>
 
+<hr>
+
+<h2>Unknown status </h2>
+<table>
+<% if @merchant.items.pluck(:status).include?(nil) %>
+  <tr><th> Name </th>
+  <th> Options </th>
+</tr>
+<% end %>
 <% @merchant.items.each do |item| %>
   <% if item.status == nil %>
-<h2>Unknown status </h2>
-      <li> Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a>
-      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
+      <tr><td> Name: <a href="/merchants/<%=@merchant.id%>/items/<%= item.id %>"> <%= item.name %> </a> </td>
+      <td> <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=enabled",
                     method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Enable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
@@ -54,7 +94,8 @@
       method: :patch, local: true do |f| %>
         <button class="btn btn-success btn-secondary btn-sm" type="submit">Disable</button>
         <%= f.text_field :item_id, value: item.id, hidden: true %>
-      <% end %>
-      </li>
+      <% end %></td>
+    </tr>
   <% end %>
 <% end %>
+</table>
