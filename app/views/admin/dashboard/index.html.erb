@@ -7,7 +7,7 @@
 <div id="incomplete">
     <h3>Incomplete Invoices</h3>
     <ul>
-        <% @invoices.each do |invoice| %>
+        <% @invoices.oldest_first.each do |invoice| %>
             <% if invoice.has_items_not_shipped == false %>
             <li><%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}"  %> 
             - Date: <%= invoice.created_at.strftime('%A, %B %d, %Y') %></li>

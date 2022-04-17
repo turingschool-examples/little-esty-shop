@@ -30,6 +30,16 @@ RSpec.describe "admin dashboard" do
       created_at: Date.new(2020,12,12),
       updated_at: Date.current
     )
+    @invoice_3 = @customer_1.invoices.create!(
+      status: 1,
+      created_at: Date.new(1999,12,12),
+      updated_at: Date.current
+    )
+    @invoice_4 = @customer_1.invoices.create!(
+      status: 1,
+      created_at: Date.new(1997,12,12),
+      updated_at: Date.current
+    )
     @invoice_item_1 = InvoiceItem.create!(
       item_id: @soccer.id,
       invoice_id: @invoice_1.id,
@@ -41,16 +51,16 @@ RSpec.describe "admin dashboard" do
     )  
      @invoice_item_2 = InvoiceItem.create!(
       item_id: @soccer.id,
-      invoice_id: @invoice_1.id,
+      invoice_id: @invoice_4.id,
       quantity: 50,
       unit_price: @soccer.unit_price,
-      status: 2,
+      status: 1,
       created_at: Date.current,
       updated_at: Date.current
     )
     @invoice_item_3 = InvoiceItem.create!(
       item_id: @soccer.id,
-      invoice_id: @invoice_1.id,
+      invoice_id: @invoice_3.id,
       quantity: 1,
       unit_price: @soccer.unit_price,
       status: 1,
@@ -103,5 +113,10 @@ RSpec.describe "admin dashboard" do
 
   it 'incomplete section has a date' do
   expect(page).to have_content("Saturday, December 12, 2020")
+  end 
+
+  it  'Incomplete invoice items are organized by date' do
+  save_and_open_page
+  expect(@invoice_3.id).to appear_before(@invoice_1.id)
   end 
 end
