@@ -29,6 +29,6 @@ RSpec.describe "Admin Merchants Index" do
     it 'has a list of merchants'  do 
         expect(page).to have_content("Wally World")
         expect(page).to have_content("The Store")
-        expect(page).to have_content("Soccerball")
+        expect(page).to_not have_content("Soccerball")
     end
 end
