@@ -14,6 +14,7 @@ RSpec.describe "Admin Merchants Index" do
 
       @merchant_3 = Merchant.create!(
       name: "Silly Stuff",
+      status: "enabled",
       created_at: Date.current,
       updated_at: Date.current)
 
@@ -40,11 +41,17 @@ RSpec.describe "Admin Merchants Index" do
     end
 
     it "has a button to enable or disable merchant" do
-    save_and_open_page
-        # within("#Wally World") do
+        save_and_open_page
+        within("##{@merchant_1.id}") do 
             expect(page).to have_button("Enable")
-        # end 
+        end
+        within("##{@merchant_3.id}") do
+            expect(page).to have_button("Disable")
+        end 
+    end
 
+    xit "will change the enabled or disabled status of merchant" do
+        within()
     end
 
 end
