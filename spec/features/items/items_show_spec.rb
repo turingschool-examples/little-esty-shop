@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Merchant Items Show' do
+RSpec.describe "Merchant Items Show" do
   before :each do
     @merchant = create :merchant
     @merchant2 = create :merchant
@@ -16,12 +16,11 @@ RSpec.describe 'Merchant Items Show' do
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
   end
 
-  it 'shows item attributes' do
+  it "shows item attributes", :vcr do
     visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item1.description)
     expect(page).to have_content(@item1.unit_price)
   end
-
 end

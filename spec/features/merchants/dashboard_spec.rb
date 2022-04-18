@@ -18,18 +18,18 @@ RSpec.describe "Merchant Dashboard", type: :feature do
   end
 
   describe "display" do
-    it "displays merchant name" do
+    it "displays merchant name", :vcr do
       expect(page).to have_content(@merchant.name)
     end
 
-    it "has a link to view all merchant items" do
+    it "has a link to view all merchant items", :vcr do
       expect(page).to have_link("Merchant Items")
 
       click_link "Merchant Items"
       expect(current_path).to eq(merchant_items_path(@merchant))
     end
 
-    it "has a link to view all merchant invoices" do
+    it "has a link to view all merchant invoices", :vcr do
       expect(page).to have_link("Merchant Invoices")
 
       click_link "Merchant Invoices"

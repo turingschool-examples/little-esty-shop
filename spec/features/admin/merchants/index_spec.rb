@@ -1,14 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Admin Merchants Index', type: :feature do
-
+RSpec.describe "Admin Merchants Index", type: :feature do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
     @merchant_3 = create(:merchant)
   end
-  
-  it 'Has all merchants' do
+
+  it "Has all merchants", :vcr do
     visit "/admin/merchants"
 
     within("#merchants") do
@@ -30,24 +29,24 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     end
   end
 
-  it 'Links from index to show page for each merchant' do
-    visit '/admin/merchants'
-  
+  it "Links from index to show page for each merchant", :vcr do
+    visit "/admin/merchants"
+
     within("#merchants") do
       within("#merchant-#{@merchant_1.id}") do
-        expect(page).to have_link("#{@merchant_1.name}", href: "/admin/merchants/#{@merchant_1.id}")
-        expect(page).to_not have_link("#{@merchant_2.name}", href: "/admin/merchants/#{@merchant_2.id}")
-        expect(page).to_not have_link("#{@merchant_3.name}", href: "/admin/merchants/#{@merchant_3.id}")
+        expect(page).to have_link(@merchant_1.name.to_s, href: "/admin/merchants/#{@merchant_1.id}")
+        expect(page).to_not have_link(@merchant_2.name.to_s, href: "/admin/merchants/#{@merchant_2.id}")
+        expect(page).to_not have_link(@merchant_3.name.to_s, href: "/admin/merchants/#{@merchant_3.id}")
       end
     end
 
-    click_link("#{@merchant_1.name}")
+    click_link(@merchant_1.name.to_s)
 
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
   end
 
-  it 'Links from index to page for creation of new merchant' do
-    visit '/admin/merchants'
+  it "Links from index to page for creation of new merchant", :vcr do
+    visit "/admin/merchants"
 
     expect(page).to have_link("Create New Merchant", href: "/admin/merchants/new")
 
@@ -56,8 +55,8 @@ RSpec.describe 'Admin Merchants Index', type: :feature do
     expect(current_path).to eq("/admin/merchants/new")
   end
 
-  it 'Has buttons for each merchant to toggle enable/disable status' do
-    visit '/admin/merchants'
+  it "Has buttons for each merchant to toggle enable/disable status", :vcr do
+    visit "/admin/merchants"
 
     within("#merchant-#{@merchant_1.id}") do
       expect(page).to have_link("Enabled")
