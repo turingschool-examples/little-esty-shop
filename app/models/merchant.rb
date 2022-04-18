@@ -32,6 +32,7 @@ class Merchant < ApplicationRecord
       .group(:id)
       .order("total_rev desc")
       .limit(5)
+      .distinct
   end
 
   def items_ready_to_ship
