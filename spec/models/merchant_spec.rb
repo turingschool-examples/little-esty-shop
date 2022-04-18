@@ -21,4 +21,15 @@ RSpec.describe Merchant, type: :model do
     it { should allow_value([true, false]).for(:enabled) }
     it { should_not allow_value(nil).for(:enabled) }
   end
+
+  describe "sorting" do
+    it "returns enabled items" do
+      expect(@merchant.enabled_items.first).to eq(@item1)
+    end
+
+    it "returns disabled items" do
+      expect(@merchant.disabled_items.first).to eq(@item2)
+    end
+
+  end
 end
