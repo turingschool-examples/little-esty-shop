@@ -109,6 +109,14 @@ RSpec.describe "Admin Merchants Index" do
       end
     end
 
+    it "links to the merchants show page" do
+      within('#top_five_merchants') do
+        click_link("Store six")
+
+        expect(current_path).to eq("/admin/merchants/#{@merch_6.id}")
+      end
+    end
+
     it 'displays the top 5 merchants total revenue' do
       within("#top_5_#{@merch_6.id}") do
         expect(page).to have_content("Total Revenue: $6000.0")
