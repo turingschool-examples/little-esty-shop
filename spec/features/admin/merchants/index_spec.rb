@@ -114,7 +114,6 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     invoice_item_5 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_5.id, quantity: 3, unit_price: item_5.unit_price)
     invoice_item_6 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_6.id, quantity: 3, unit_price: item_6.unit_price)
     
-    binding.pry
     visit admin_merchants_path()
     
   end
