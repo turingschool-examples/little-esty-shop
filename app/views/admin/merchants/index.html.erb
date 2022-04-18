@@ -3,6 +3,10 @@
 <div id="merchants">
 
   <div id="top_five_merchants">
+    <% @merchants.top_sellers.each do |merchant| %>
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+      <h2>Total Revenue: <%= merchant.total_revenue %></h2>
+    <% end %>
   </div>
   <div id="enabled-merchants">
     <% @merchants.enabled_check(true).each do |merchant| %>

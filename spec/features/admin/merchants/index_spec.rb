@@ -124,11 +124,11 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       expect(page).to have_content(merchant_5.name)
       expect(page).to have_content(merchant_6.name)
 
-      expect(@merchant_3.total_revenue).to appear_before(merchant_5.total_revenue)
-      expect(merchant_5.total_revenue).to appear_before(@merchant_2.total_revenue)
-      expect(@merchant_2.total_revenue).to appear_before(@merchant_1.total_revenue)
-      expect(@merchant_1.total_revenue).to appear_before(merchant_6.total_revenue)
-      expect(merchant_6.total_revenue).to_not appear_before(@merchant_3.total_revenue)
+      expect(@merchant_3.total_revenue.to_s).to appear_before(merchant_5.total_revenue.to_s)
+      expect(merchant_5.total_revenue.to_s).to appear_before(@merchant_2.total_revenue.to_s)
+      expect(@merchant_2.total_revenue.to_s).to appear_before(@merchant_1.total_revenue.to_s)
+      expect(@merchant_1.total_revenue.to_s).to appear_before(merchant_6.total_revenue.to_s)
+      expect(merchant_6.total_revenue.to_s).to_not appear_before(@merchant_3.total_revenue.to_s)
     end
   end
 end
