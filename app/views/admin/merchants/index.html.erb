@@ -1,6 +1,9 @@
 <h1>Merchants Dashboard</h1>
 
 <div id="merchants">
+
+  <div id="top_five_merchants">
+  </div>
   <div id="enabled-merchants">
     <% @merchants.enabled_check(true).each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
