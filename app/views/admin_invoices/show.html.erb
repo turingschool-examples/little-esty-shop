@@ -3,7 +3,12 @@
   <p><strong>Invoice id: </strong><%= @invoice.id %></p>
   <p><strong>Invoice status: </strong><%= @invoice.status %></p>
   <p><strong>Invoice created time: </strong><%= @invoice.created_at.strftime("%A, %b %d, %Y") %></p>
-  <p><strong>Invoice customer: </strong><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name%></p>
+  <p><strong>Invoice customer: </strong><%= @invoice.customer.first_name %><%= @invoice.customer.last_name%></p>
+  <p><strong>Total revenue generated: </strong><%= number_to_currency(@invoice.total_rev/100, precision: 2) %></p>
+    <%= form_with url: "/admin/invoices/#{@invoice.id}/", method: :patch, local: true do |f| %>
+        <%= f.select :update_status, ["in progress", "completed", "cancelled"], selected: @invoice.status %>
+    <%= f.submit :update_invoice_status %>
+  <% end %>
 </div>
 <hr>
 
@@ -14,7 +19,6 @@
   <p><strong>Item name: </strong><%= invoice_item.item.name %></p>
   <p><strong>Quantity: </strong><%= invoice_item.quantity %></p>
   <p><strong>Sale price: </strong> <%= number_to_currency(invoice_item.unit_price/100, precision: 2) %>
-  <p><strong>Status: </strong><%= invoice_item.status %> </p>
+  <p><strong>Status: </strong><%= invoice_item.status %></p>
 </div>
-<p></p>
 <% end %>

@@ -64,4 +64,31 @@ RSpec.describe 'Admin invoice show page' do
     end
   end
 
+  it 'shows total revenue for the invoice' do
+    @invoiceitem2.update(quantity: 3)
+    visit "/admin/invoices/#{@invoice1.id}"
+
+    expect(page).to have_content("Total revenue generated: $4.00")
+  end
+
+  it 'shows the invoice status as a select field that is editable, with a submit button' do
+    expected = find_field(:update_status).value
+
+    expect(expected).to eq("in progress")
+
+    visit "/admin/invoices/#{@invoice2.id}"
+
+    expected = find_field(:update_status).value
+
+    expect(expected).to eq("completed")
+
+    select "cancelled", from: :update_status
+
+    click_on :update_invoice_status
+
+    expected = find_field(:update_status).value
+
+    expect(expected).to eq("cancelled")
+  end
+
 end
