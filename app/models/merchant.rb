@@ -28,5 +28,6 @@ class Merchant < ApplicationRecord
          .where("invoice_items.status = 1")
          .group("items.id")
          .distinct
+         .order(:created_at)
   end
 end

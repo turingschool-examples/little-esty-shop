@@ -19,7 +19,8 @@
       <div id="item-<%= item.id %>">
         <h4><%= item.name %> with invoices:<br>
           <% item.invoices.each do |invoice| %>
-            <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %><br> 
+            <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+            Ordered on: <%= invoice.get_invoice_item(item.id).created_at.strftime("%A, %B %d, %Y") %><br> 
           <% end %>
         </h4>
       </div>

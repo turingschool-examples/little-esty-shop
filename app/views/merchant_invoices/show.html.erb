@@ -10,7 +10,7 @@
     <p>Status: <%= @invoice.status %></p>
   </li>
   <li>
-    <p>Created at: <%= @invoice.formatted_date %></p>
+    <p>Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
   </li>
   <li>
     <p>Customer name: <%=  @invoice.customer.first_name %>  <%=  @invoice.customer.last_name %> </p>

@@ -1,0 +1,14 @@
+<h1>Invoice <%= "#{@invoice.id}" %> Show Page</h1>
+
+
+Id: <%= "#{@invoice.id}"  %><br>
+Status: <%= "#{@invoice.status}"  %><br>
+
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+  <%= f.label :status, 'New Status' %>
+  <%= f.select :status, ["in progress","cancelled", "success"], selected: @invoice.status %>
+  <%= f.submit 'Change Status' %>
+<% end %>
+
+Created: <%= "#{@invoice.created_at.strftime("%A, %B %d, %Y")}"  %><br>
+Customer Name: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}"  %><br>
