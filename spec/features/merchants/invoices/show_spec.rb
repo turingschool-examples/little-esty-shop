@@ -74,7 +74,7 @@ RSpec.describe 'merchant dashboard' do
   it 'shows total revenue generated' do
     expect(page).to have_content("Total revenue generated:")
     within("#invoice") do
-      expect(page).to have_content(@invoice1.total_rev)
+      expect(page).to have_content("$2.00")
     end
   end
 end
