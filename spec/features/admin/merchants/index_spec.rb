@@ -57,4 +57,11 @@ RSpec.describe "Admin Merchants Index" do
         end
     end
 
+    it "displays the names of the top 5 merchants by revenue" do
+      within('#top_five_merchats') do
+        save_and_open_page
+        expect(page).to have_content()
+      end
+    end
+
 end
