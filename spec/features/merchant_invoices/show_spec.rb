@@ -53,5 +53,22 @@ RSpec.describe 'merchant invoice show page' do
       @item_3.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 4, status: 2)
       expect(page).to have_content("Total Revenue: $33.00")
     end
+
+    it 'displays a select box to change an invoice_item status' do
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_content("Status: shipped")
+      end
+      
+      within "#item-#{@item_1.id}" do
+        select 'packaged', from: 'select_status'
+        click_button "Update Item Status"
+      end
+
+      expect(current_path).to eq("/merchants/#{@merchant.id}/invoices/#{@invoice_1.id}")
+
+      within "#item-#{@item_1.id}" do
+        expect(page).to have_content("Status: packaged")
+      end
+    end
   end
 end

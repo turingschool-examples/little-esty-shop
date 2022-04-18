@@ -33,6 +33,13 @@
         <p>Status: <%= @invoice.get_invoice_item(item.id).status %></p>
       </li>
     </ul>
+    <%= form_with url: "/merchants/#{@invoice.get_invoice_item(item.id).item.merchant_id}/invoices/#{@invoice.id}?item_id=#{item.id}",
+               method: :patch, local: true do |form| %>
+      <%= form.label :select_status %>
+      <%= form.select :select_status,
+                      ['pending', 'packaged', 'shipped'], selected: @invoice.status %>
+      <%= form.submit 'Update Item Status' %>
+    <% end %>
   </div>
 <% end %>
 
