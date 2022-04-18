@@ -24,7 +24,7 @@ namespace :csv_load do
   task invoice_items: :environment do
     csv_text = File.read(Rails.root.join("db", "data", "invoice_items.csv"))
     csv = CSV.parse(csv_text, headers: true)
-    enums = {"pending" => "0", "packaged" => "1", "shipped" => "2"}
+    enums = {"pending" => 0, "packaged" => 1, "shipped" => 2}
 
     csv.each do |row|
       ii = InvoiceItem.new
@@ -45,7 +45,7 @@ namespace :csv_load do
   task invoices: :environment do
     csv_text = File.read(Rails.root.join("db", "data", "invoices.csv"))
     csv = CSV.parse(csv_text, headers: true)
-    enums = {"in progress" => "0", "completed" => "1", "cancelled" => "2"}
+    enums = {"in progress" => 0, "completed" => 1, "cancelled" => 2}
 
     csv.each do |row|
       i = Invoice.new
