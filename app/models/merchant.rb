@@ -12,4 +12,8 @@ class Merchant < ApplicationRecord
     where(enabled: check).all
   end
 
+  def total_revenue
+    invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
+  end
+
 end
