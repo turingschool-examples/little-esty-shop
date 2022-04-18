@@ -115,6 +115,20 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     invoice_item_6 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_6.id, quantity: 3, unit_price: item_6.unit_price)
     
     visit admin_merchants_path()
-    
+
+    within("#top_five_merchants") do
+      expect(page).to have_content(@merchant_1.name)
+      expect(page).to have_content(@merchant_2.name)
+      expect(page).to have_content(@merchant_3.name)
+      expect(page).to_not have_content(merchant_4.name)
+      expect(page).to have_content(merchant_5.name)
+      expect(page).to have_content(merchant_6.name)
+
+      expect(@merchant_3.total_revenue).to appear_before(merchant_5.total_revenue)
+      expect(merchant_5.total_revenue).to appear_before(@merchant_2.total_revenue)
+      expect(@merchant_2.total_revenue).to appear_before(@merchant_1.total_revenue)
+      expect(@merchant_1.total_revenue).to appear_before(merchant_6.total_revenue)
+      expect(merchant_6.total_revenue).to_not appear_before(@merchant_3.total_revenue)
+    end
   end
 end
