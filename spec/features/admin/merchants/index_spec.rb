@@ -109,6 +109,24 @@ RSpec.describe "Admin Merchants Index" do
       end
     end
 
+    it 'displays the top 5 merchants total revenue' do
+      within("#top_5_#{@merch_6.id}") do
+        expect(page).to have_content("Total Revenue: $6000.0")
+      end
+      within("#top_5_#{@merch_5.id}") do
+        expect(page).to have_content("Total Revenue: $1500.0")
+      end
+      within("#top_5_#{@merch_3.id}") do
+        expect(page).to have_content("Total Revenue: $1200.0")
+      end
+      within("#top_5_#{@merch_4.id}") do
+        expect(page).to have_content("Total Revenue: $400.0")
+      end
+      within("#top_5_#{@merch_2.id}") do
+        expect(page).to have_content("Total Revenue: $200.0")
+      end
+    end
+
   end
 
 end
