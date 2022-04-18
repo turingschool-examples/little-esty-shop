@@ -3,7 +3,16 @@
 
 
 <div id="merchant_items">
-<% @merchant.items.each do |item| %>
-<%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-<% end %>
+  <div id="enabled">
+    <h3>Enabled Items</h3>
+    <% @merchant.enabled_items.each do |item| %>
+    <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <% end %>
+    </div>
+  <div id="disabled">
+    <h3>Disabled Items</h3>
+      <% @merchant.disabled_items.each do |item| %>
+      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <% end %>
+  </div>
 </div>
