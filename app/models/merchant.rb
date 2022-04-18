@@ -16,4 +16,10 @@ class Merchant < ApplicationRecord
     invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
+  def self.top_sellers
+    joins(:invoice_items)
+    .select("invoice_items.quantity * invoice_items.unit_price AS total_price, merchants.*")
+    .order(total_price: :desc)
+    .first(5)
+  end
 end
