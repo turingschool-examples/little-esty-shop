@@ -84,7 +84,7 @@ RSpec.describe 'Admin invoice show page' do
 
     select "cancelled", from: :update_status
 
-    click_on :update_invoice_status
+    click_on "Update Invoice Status"
 
     expected = find_field(:update_status).value
 

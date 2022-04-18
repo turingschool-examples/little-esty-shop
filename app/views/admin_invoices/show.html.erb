@@ -8,7 +8,7 @@
   <p><strong>Status:
     <%= form_with url: "/admin/invoices/#{@invoice.id}/", method: :patch, local: true do |f| %>
         <%= f.select :update_status, ["in progress", "completed", "cancelled"], selected: @invoice.status %>
-    <%= f.submit :update_invoice_status %>
+    <%= f.submit "Update Invoice Status" %>
   <% end %>
   </p>
 </div>
