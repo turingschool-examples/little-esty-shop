@@ -1,0 +1,13 @@
+<h1>New Item</h1>
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local:true do |f|%>
+	<p><%= f.label :name %></p>
+	<p><%= f.text_area :name %></p>
+	<p><%= f.label :description %></p>
+	<p><%= f.text_area :description %></p>
+	<p><%= f.label :unit_price %></p>
+	<p><%= f.text_area :unit_price %></p>
+  <%= f.hidden_field :enabled, :value => "disabled" %>
+  <%= f.hidden_field :merchant_id, :value => @merchant.id %>
+	<p><%= f.submit "Submit" %></p>
+
+<% end %>

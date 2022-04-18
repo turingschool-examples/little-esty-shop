@@ -19,7 +19,7 @@ describe "Merchants Items index", type: :feature do
   end
 
   describe "display" do
-    it "displays all items from this merchant" do
+    it "displays all items from this merchant in order by item", :vcr do
       within "#merchant_items" do
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item2.name)
@@ -27,24 +27,14 @@ describe "Merchants Items index", type: :feature do
       end
     end
 
-    it "displays all items from this merchant" do
+    it "links to item show page", :vcr do
       visit merchant_items_path(@merchant2)
       within "#merchant_items" do
-        expect(page).to have_content(@item3.name)
-        expect(page).to_not have_content(@item2.name)
-        expect(page).to_not have_content(@item1.name)
-      end
-    end
-
-    it "links to item show page" do
-      visit merchant_items_path(@merchant2)
-      within "#merchant_items" do
-        expect(page).to have_link("#{@item3.name}")
-        click_link("#{@item3.name}")
+        expect(page).to have_link(@item3.name.to_s)
+        click_link(@item3.name.to_s)
 
         expect(page).to have_current_path("/merchants/#{@merchant2.id}/items/#{@item3.id}")
       end
     end
-
   end
 end
