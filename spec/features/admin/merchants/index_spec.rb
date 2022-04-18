@@ -46,17 +46,17 @@ RSpec.describe "Admin Merchants Index", type: :feature do
   end
 
   it "Links from index to page for creation of new merchant", :vcr do
-    visit "/admin/merchants"
+    visit admin_merchants_path()
 
     expect(page).to have_link("Create New Merchant", href: "/admin/merchants/new")
 
     click_link("Create New Merchant")
 
-    expect(current_path).to eq("/admin/merchants/new")
+    expect(current_path).to eq(new_admin_merchant_path())
   end
 
   it "Has buttons for each merchant to toggle enable/disable status", :vcr do
-    visit "/admin/merchants"
+    visit admin_merchants_path()
 
     within("#merchant-#{@merchant_1.id}") do
       expect(page).to have_link("Enabled")
@@ -70,9 +70,9 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end
   end
 
-  it 'Sorts merchants on enabled/disabled status' do
+  it 'Sorts merchants on enabled/disabled status', :vcr do
     merchant_4 = Merchant.create!(name: "This Is A Test Value", enabled: false)
-    visit '/admin/merchants'
+    visit admin_merchants_path()
 
     within("#enabled-merchants") do
       expect(page).to have_content(@merchant_1.name)
@@ -87,5 +87,14 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       expect(page).to_not have_content(@merchant_3.name)
       expect(page).to have_content(merchant_4.name)
     end      
+  end
+
+  it 'Finds top 5 merchants', :vcr do
+    merchant_4 = create(:merchant)
+    merchant_5 = create(:merchant)
+    merchant_6 = create(:merchant)
+
+    visit admin_merchants_path()
+    
   end
 end
