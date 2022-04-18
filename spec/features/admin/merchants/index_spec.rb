@@ -50,8 +50,10 @@ RSpec.describe "Admin Merchants Index" do
         end 
     end
 
-    xit "will change the enabled or disabled status of merchant" do
-        within()
+    it "will change the enabled or disabled status of merchant" do
+         within("##{@merchant_1.id}") do 
+            click_on "Enable"
+         end
     end
 
 end

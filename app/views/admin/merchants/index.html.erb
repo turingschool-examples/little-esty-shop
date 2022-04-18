@@ -4,9 +4,9 @@
     <div id="<%=merchant.id%>">
         <li> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> 
             <%if merchant.status == "enabled" %> 
-                <%=button_to "Disable", 'merchant_path' %>
+                <%=button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch %>
             <% else %>
-                <%=button_to "Enable", 'edit_merchant_path' %>
+                <%=button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>
             <% end %>
         </li>
     </div>
