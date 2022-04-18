@@ -41,7 +41,6 @@ RSpec.describe "Admin Merchants Index" do
     end
 
     it "has a button to enable or disable merchant" do
-        save_and_open_page
         within("##{@merchant_1.id}") do 
             expect(page).to have_button("Enable")
         end
@@ -51,9 +50,14 @@ RSpec.describe "Admin Merchants Index" do
     end
 
     it "will change the enabled or disabled status of merchant" do
-         within("##{@merchant_1.id}") do 
+        within("##{@merchant_1.id}") do 
+            expect(page).to have_button('Enable')
+            save_and_open_page
             click_on "Enable"
-         end
+            save_and_open_page
+            expect(page).to have_button('Disable')
+        end
+        save_and_open_page
     end
 
 end
