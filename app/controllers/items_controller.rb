@@ -25,9 +25,24 @@ class ItemsController < ApplicationController
     end
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:merchant_id])
+    item = Item.new(item_params)
+      if item.save
+        redirect_to "/merchants/#{@merchant.id}/items"
+      else
+        redirect_to "/merchants/#{@merchant.id}/items/new"
+        flash[:notice] = "Error: all requested areas must be filled!"
+      end
+  end
+
   private
 
   def item_params
-    params.permit(:id, :name, :unit_price, :description, :enabled)
+    params.permit(:id, :name, :unit_price, :description, :enabled, :merchant_id)
   end
 end
