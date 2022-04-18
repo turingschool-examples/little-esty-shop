@@ -107,6 +107,9 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
     invoice_2 = Invoice.create!(customer_id: customer_2.id, status: 2)
 
+    transaction_1 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "12341234", invoice_id: invoice_1.id, result: 0)
+    transaction_2 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "56785678", invoice_id: invoice_2.id, result: 1)
+
     invoice_item_1 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 4, unit_price: item_1.unit_price)
     invoice_item_2 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 3, unit_price: item_2.unit_price)
     invoice_item_3 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 8, unit_price: item_3.unit_price)
@@ -118,17 +121,15 @@ RSpec.describe "Admin Merchants Index", type: :feature do
 
     within("#top_five_merchants") do
       expect(page).to have_content(@merchant_1.name)
-      expect(page).to have_content(@merchant_2.name)
+      expect(page).to_not have_content(@merchant_2.name)
       expect(page).to have_content(@merchant_3.name)
       expect(page).to_not have_content(merchant_4.name)
       expect(page).to have_content(merchant_5.name)
-      expect(page).to have_content(merchant_6.name)
+      expect(page).to_not have_content(merchant_6.name)
 
       expect(@merchant_3.total_revenue.to_s).to appear_before(merchant_5.total_revenue.to_s)
-      expect(merchant_5.total_revenue.to_s).to appear_before(@merchant_2.total_revenue.to_s)
-      expect(@merchant_2.total_revenue.to_s).to appear_before(@merchant_1.total_revenue.to_s)
-      expect(@merchant_1.total_revenue.to_s).to appear_before(merchant_6.total_revenue.to_s)
-      expect(merchant_6.total_revenue.to_s).to_not appear_before(@merchant_3.total_revenue.to_s)
+      expect(merchant_5.total_revenue.to_s).to appear_before(@merchant_1.total_revenue.to_s)
+      expect(@merchant_1.total_revenue.to_s).to_not appear_before(@merchant_3.total_revenue.to_s)
     end
   end
 end

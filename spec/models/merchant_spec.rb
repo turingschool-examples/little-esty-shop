@@ -63,6 +63,9 @@ RSpec.describe Merchant, type: :model do
   
       invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
       invoice_2 = Invoice.create!(customer_id: customer_2.id, status: 2)
+
+      transaction_1 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "12341234", invoice_id: invoice_1.id, result: 0)
+      transaction_2 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "56785678", invoice_id: invoice_2.id, result: 1)
   
       invoice_item_1 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 4, unit_price: item_1.unit_price)
       invoice_item_2 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 3, unit_price: item_2.unit_price)
@@ -73,7 +76,7 @@ RSpec.describe Merchant, type: :model do
       
       merchants = Merchant.all
 
-      expect(merchants.top_sellers).to eq([merchant_3, merchant_5, merchant_2, merchant_1, merchant_6])
+      expect(merchants.top_sellers).to eq([merchant_3, merchant_5, merchant_1])
 
     end
   end
