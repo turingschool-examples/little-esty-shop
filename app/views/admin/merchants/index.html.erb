@@ -5,14 +5,14 @@
   <hr/>
   <ul>
     <% @merchants.top_five_merchants.each do |merch| %>
-    <li> <%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %>
+      <li id="top_5_<%= merch.id %>"> <%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %>
+        <br/>
+        <p>
+          Total Revenue:<strong> $<%= merch.total_rev / 100.0 %></strong>
+        </p>
+      </li>
       <br/>
-      <p>
-        Total Revenue:<strong> $<%= merch.total_rev %> </strong>
-      </p>
-    </li>
-    <br/>
-    <hr/>
+      <hr/>
     <% end %>
   </ul>
 </div>
