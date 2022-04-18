@@ -4,7 +4,7 @@ RSpec.describe Invoice, type: :model do
   describe "validations" do
     it {
       should define_enum_for(:status).with([
-        :cancelled, "in progress", :completed
+        "Cancelled", "In Progress", "Completed"
       ])
     }
   end

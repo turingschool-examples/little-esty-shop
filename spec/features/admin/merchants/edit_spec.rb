@@ -1,19 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Admin Merchant Edit Page", type: :feature do
-
   before :each do
     @merchant_1 = create(:merchant)
   end
 
-  it 'Updates a singular merchant name' do
+  it "Updates a singular merchant name", :vcr do
     visit "/admin/merchants/#{@merchant_1.id}/edit"
 
     name = @merchant_1.name
 
     fill_in :name, with: "Isaac Childres"
     click_on :submit
-
 
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
 

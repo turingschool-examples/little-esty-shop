@@ -1,8 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'New Merchant Page', type: :feature do
-
-  it "allows creation of a new merchant within the database" do
+RSpec.describe "New Merchant Page", type: :feature do
+  it "allows creation of a new merchant within the database", :vcr do
     visit "/admin/merchants"
 
     click_link "Create New Merchant"
@@ -15,7 +14,7 @@ RSpec.describe 'New Merchant Page', type: :feature do
       fill_in :name,	with: "Isaac Childres"
       click_on :submit
     end
-    
+
     expect(current_path).to eq("/admin/merchants")
 
     within("#merchants") do
