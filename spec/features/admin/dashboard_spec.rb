@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "admin dashboard" do
   before :each do
-<<<<<<< HEAD
     @merch_1 = Merchant.create!(name: "Two-Legs Fashion")
 
     @item_1 = @merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 5000)
@@ -73,9 +72,7 @@ RSpec.describe "admin dashboard" do
     @transaction_14 = @invoice_14.transactions.create!(credit_card_number: 4023948573948293, result: "success")
     @transaction_15 = @invoice_15.transactions.create!(credit_card_number: 4023948573948293, result: "success")
 
-    visit "/admin"
-=======
-      @merchant_1 = Merchant.create!(
+    @merchant_1 = Merchant.create!(
       name: "Store Store",
       created_at: Date.current,
       updated_at: Date.current
@@ -121,7 +118,7 @@ RSpec.describe "admin dashboard" do
       status: 0,
       created_at: Date.current,
       updated_at: Date.current
-    )  
+    )
      @invoice_item_2 = InvoiceItem.create!(
       item_id: @soccer.id,
       invoice_id: @invoice_4.id,
@@ -139,7 +136,7 @@ RSpec.describe "admin dashboard" do
       status: 1,
       created_at: Date.current,
       updated_at: Date.current
-    )  
+    )
      @invoice_item_4 = InvoiceItem.create!(
       item_id: @soccer.id,
       invoice_id: @invoice_2.id,
@@ -149,9 +146,8 @@ RSpec.describe "admin dashboard" do
       created_at: Date.current,
       updated_at: Date.current
     )
-        visit "/admin"
 
->>>>>>> main
+    visit "/admin"
   end
 
   it "exists" do
@@ -170,29 +166,30 @@ RSpec.describe "admin dashboard" do
     expect(current_path).to eq("/admin/invoices")
   end
 
-<<<<<<< HEAD
   it "lists top 5 customers for their merchant" do
     within("#Top5Customers") do
-      expect(@cust_7).to appear_before(@cust_1)
-      expect(@cust_1).to appear_before(@cust_2)
-      expect(@cust_2).to appear_before(@cust_4)
-      expect(@cust_4).to appear_before(@cust_3)
+      # binding.pry
+      # save_and_open_page
+      expect(@cust_1.first_name).to appear_before(@cust_2.first_name)
+      expect(@cust_2.first_name).to appear_before(@cust_5.first_name)
+      expect(@cust_5.first_name).to appear_before(@cust_4.first_name)
+      expect(@cust_4.first_name).to appear_before(@cust_3.first_name)
     end
-
-    within("##{@cust_7.first_name}#{@cust_7.last_name}") do
-      expect(page).to have_content("Successful Transactions: 12")
+    # save_and_open_page
+    within("##{@cust_3.id}") do
+      expect(page).to have_content("Successful Transactions - 2")
     end
   end
-=======
+
   it 'has an incomplete section' do
     within "#incomplete" do
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to have_content("#{@invoice_1.id}")
       expect(page).to_not have_content("#{@invoice_2.id}")
-    end 
-  end 
+    end
+  end
 
-  it ' has a link to show page'do 
+  it ' has a link to show page'do
     click_on("#{@invoice_1.id}")
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.id}")
@@ -200,13 +197,12 @@ RSpec.describe "admin dashboard" do
 
   it 'incomplete section has a date' do
   expect(page).to have_content("Saturday, December 12, 2020")
-  end 
+  end
 
   it  'Incomplete invoice items are organized by date' do
     within("#incomplete") do
       expect("1999").to appear_before("2020")
       expect("1999").to appear_before("2022")
-    end 
-  end 
->>>>>>> main
+    end
+  end
 end

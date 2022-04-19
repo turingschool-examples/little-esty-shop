@@ -3,13 +3,15 @@
 <h3><%= link_to "Admin Merchants Index", "/admin/merchants", method: :get %></h3>
 <h3><%= link_to "Admin Invoices Index", "/admin/invoices", method: :get %></h3>
 
-<<<<<<< HEAD
-<h2 id="Top5Customers">Top 5 Customers:</h2>
+<div id="Top5Customers">
+<h2>Top 5 Customers:</h2>
 <ol>
   <% @top_5_customers.each do |c| %>
-    <li id=<%= c.first_name %><%= c.last_name %>><%= c.first_name %> <%= c.last_name %>: Successful Transactions - <%= c.successful_transactions %></li>
+
+    <li id="<%= c.id %>"><%= c.first_name %> <%= c.last_name %>: Successful Transactions - <%= c.successful_transactions %></li>
   <% end %>
 </ol>
+</div>
 
 <div id="incomplete">
     <h3>Incomplete Invoices</h3>

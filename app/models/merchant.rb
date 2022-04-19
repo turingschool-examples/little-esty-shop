@@ -16,13 +16,6 @@ class Merchant < ApplicationRecord
       .order("successful_transactions desc")
       .limit(5)
   end
-  # 
-  # def self.top_5_customers_all_merchants
-  #   binding.pry
-  #   joins(invoices: :transactions)
-  #   .select("customers.*, count(transactions) as successful_transactions")
-  #   .where("transactions.result = ?", "success")
-  # end
 
   def top_five_items
     Item.joins(invoices: :transactions)
@@ -43,11 +36,11 @@ class Merchant < ApplicationRecord
       .distinct
   end
 
-  def self.enabled 
+  def self.enabled
     where(status: "enabled")
   end
 
-  def self.disabled 
+  def self.disabled
     where.not(status: "enabled")
   end
 

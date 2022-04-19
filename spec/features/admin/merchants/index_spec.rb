@@ -18,7 +18,8 @@ RSpec.describe "Admin Merchants Index" do
     name: "The Store",
     created_at: Date.current,
     updated_at: Date.current)
-      visit '/admin/merchants'
+    
+    visit '/admin/merchants'
   end
   it 'has a list of merchants'  do
       expect(page).to have_content("Wally World")

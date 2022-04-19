@@ -88,7 +88,7 @@ RSpec.describe Customer do
     it { should validate_presence_of(:last_name) }
   end
 
-  # it "finds top 5 customers" do
-  #   expect(Customer.top_5_customers).to eq([@cust_7, @cust_1, @cust_2, @cust_4, @cust_3])
-  # end
+  it "finds top 5 customers" do
+    expect(Customer.top_5_customers).to eq([@cust_1, @cust_2, @cust_5, @cust_4, @cust_3])
+  end
 end

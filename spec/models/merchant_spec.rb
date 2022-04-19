@@ -123,10 +123,10 @@ RSpec.describe Merchant do
       expect(Merchant.top_five_merchants).to eq([@merch_1, @merch_5, @merch_3, @merch_4, @merch_2])
     end
 
-    it 'sort the enabled merchant' do 
+    it 'sort the enabled merchant' do
       expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
     end
-    it 'sort the disabled merchant' do 
+    it 'sort the disabled merchant' do
       expect(Merchant.disabled).to eq([@merch_1, @merch_3, @merch_5, @merch_6])
     end
   end
@@ -189,10 +189,6 @@ RSpec.describe Merchant do
       expect(merchant.items_ready_to_ship.ids).to include(packaged_invoice_item.invoice_id)
       expect(merchant.items_ready_to_ship.ids).to include(pending_invoice_item.invoice_id)
       expect(merchant.items_ready_to_ship.ids).to_not include(shipped_invoice_item.invoice_id)
-    end
-
-    it "finds top 5 customers for all merchants" do
-      expect(Merchant.top_5_customers_all_merchants).to eq([@cust_7, @cust_1, @cust_2, @cust_4, @cust_3])
     end
   end
 end
