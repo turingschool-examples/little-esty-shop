@@ -123,10 +123,10 @@ RSpec.describe Merchant do
       expect(Merchant.top_five_merchants).to eq([@merch_1, @merch_5, @merch_3, @merch_4, @merch_2])
     end
 
-    it 'sort the enabled merchant' do 
+    it 'sort the enabled merchant' do
       expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
     end
-    it 'sort the disabled merchant' do 
+    it 'sort the disabled merchant' do
       expect(Merchant.disabled).to eq([@merch_1, @merch_3, @merch_5, @merch_6])
     end
   end
