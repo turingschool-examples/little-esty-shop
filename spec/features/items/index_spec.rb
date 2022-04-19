@@ -49,7 +49,6 @@ describe "Merchants Items index", type: :feature do
     it "displays popular items", :vcr do
       visit merchant_items_path(@merchant)
       within "#popular_items" do
-        save_and_open_page
         expect(page).to have_content("Total Revenue: $#{@invoice_item1.unit_price}")
         expect(page).to have_link(@item1.name.to_s)
         click_link(@item1.name.to_s)
