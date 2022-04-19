@@ -108,5 +108,6 @@ RSpec.describe "admin dashboard" do
     click_link("Create Merchant")
 
     expect(current_path).to eq("/admin/merchants/new")
+    expect(find("form")).to have_content("Name")
   end
 end

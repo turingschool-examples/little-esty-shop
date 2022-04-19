@@ -140,5 +140,9 @@ RSpec.describe Merchant do
       expect(merchant.items_ready_to_ship.ids).to include(pending_invoice_item.invoice_id)
       expect(merchant.items_ready_to_ship.ids).to_not include(shipped_invoice_item.invoice_id)
     end
+
+    it "finds top 5 customers for all merchants" do
+      expect(Merchant.top_5_customers_all_merchants).to eq([@cust_7, @cust_1, @cust_2, @cust_4, @cust_3])
+    end
   end
 end

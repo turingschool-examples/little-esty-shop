@@ -2,3 +2,12 @@
 
 <h3><%= link_to "Admin Merchants Index", "/admin/merchants", method: :get %></h3>
 <h3><%= link_to "Admin Invoices Index", "/admin/invoices", method: :get %></h3>
+
+<h2 id="Top5Customers">Top 5 Customers:</h2>
+<ol>
+  <% @top_5_customers.each do |c| %>
+    <li id=<%= c.first_name %><%= c.last_name %>><%= c.first_name %> <%= c.last_name %>: Successful Transactions - <%= c.successful_transactions %></li>
+  <% end %>
+</ol>
+
+<%= link_to "Create Merchant", "/admin/merchants/new", method: :get, local: true %>
