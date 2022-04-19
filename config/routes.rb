@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/merchants/:id/dashboard", to: "merchants#show"
   # get '/merchants/:id/items', to: 'merchants#item_index'
   # get '/merchants/:id/items/new', to: 'merchants#new_item'
-  # get '/merchants/:id/invoices', to: 'merchants#invoice_index'
+  # get '/merchants/:id/invoices/:id', to: 'merchants#invoice_index'
   get "/items/:id/edit", to: "items#edit"
   patch "/items/:id", to: "items#update"
   get "/items/:id", to: "items#show"
@@ -12,13 +12,14 @@ Rails.application.routes.draw do
   resources :merchants, only: [:show, :edit] do
     resources :items, only: [:index, :new, :create, :update, :show]
     resources :invoices, only: [:index, :show]
+    resources :invoice_items, only: [:update]
   end
 
   get "/admin", to: "admin/dashboard#index"
   get "/admin/merchants", to: "admin/merchants#index"
   get "/admin/invoices", to: "admin/invoices#index"
-  get "/admin/invoices/:id", to:"admin/invoices#show"
-  get "/admin/merchants/:id", to:"admin/merchants#show"
+  get "/admin/invoices/:id", to: "admin/invoices#show"
+  get "/admin/merchants/:id", to: "admin/merchants#show"
   patch "/admin/merchants/:id", to: "admin/merchants#update"
   get "admin/merchants/:id/edit", to: "admin/merchants#edit"
 end

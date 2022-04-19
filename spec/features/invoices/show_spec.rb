@@ -166,4 +166,14 @@ describe "invoice show page" do
       expect(find("form")).to have_content("pending packaged shipped")
     end
   end
+
+  it "updates invoice item status" do
+    within("#ii-#{@invoice_item_1.id}") do
+      select "shipped", from: "status"
+      click_button "Update"
+      expect(page).to have_content("Status: shipped")
+      expect(page).to_not have_content("Status: packaged")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+    end
+  end
 end

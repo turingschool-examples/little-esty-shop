@@ -26,7 +26,7 @@
     <p>Quantity: <strong><%= ii.quantity %></strong></p>
     <p>Sold for: <strong>$<%= ii.unit_price / 100.0 %></strong> each</p>
     <p>Status: <strong><%= ii.status %></strong></p>
-    <p>Status:<%= form_with url: "someurl", method: :patch, local: true do |f| %>
+    <p>Status:<%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{ii.id}", method: :patch, local: true do |f| %>
       <%= f.select(:status, ['pending', 'packaged', 'shipped'], selected: "#{ii.status}") %>
       <%= f.submit "Update" %>
       <% end %>
