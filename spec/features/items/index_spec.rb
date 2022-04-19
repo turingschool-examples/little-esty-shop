@@ -15,7 +15,7 @@ describe "Merchants Items index", type: :feature do
     @invoice_item1 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item1.id, quantity: 1, unit_price: 22, status: 0}
     @invoice_item2 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item2.id, quantity: 1, unit_price: 45, status: 1}
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
-      @transaction1 = create :transaction, {result: 0, invoice_id: @invoice1.id, credit_card_expiration_date: 12121212}
+    @transaction1 = create :transaction, {result: 0, invoice_id: @invoice1.id, credit_card_expiration_date: 12121212}
   end
 
   describe "display" do
@@ -49,6 +49,8 @@ describe "Merchants Items index", type: :feature do
     it "displays popular items", :vcr do
       visit merchant_items_path(@merchant)
       within "#popular_items" do
+        save_and_open_page
+        expect(page).to have_content("Total Revenue: $#{@invoice_item1.unit_price}")
         expect(page).to have_link(@item1.name.to_s)
         click_link(@item1.name.to_s)
         expect(page).to have_current_path("/merchants/#{@merchant.id}/items/#{@item1.id}")
