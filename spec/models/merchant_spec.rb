@@ -85,10 +85,10 @@ RSpec.describe Merchant do
   describe 'class methods' do
     before do
       @merch_2 = Merchant.create!(name: "Store Two", status: "enabled")
-      @merch_3 = Merchant.create!(name: "Store three")
+      @merch_3 = Merchant.create!(name: "Store three", status: "disabled")
       @merch_4 = Merchant.create!(name: "Store four", status: "enabled")
       @merch_5 = Merchant.create!(name: "Store five")
-      @merch_6 = Merchant.create!(name: "Store six")
+      @merch_6 = Merchant.create!(name: "Store six", status: "disabled")
 
       @m2_item = @merch_2.items.create!(name: "Merch 2 Item", description: "Item belongs to m2", unit_price: 20000)
       @m3_item = @merch_3.items.create!(name: "Merch 3 Item", description: "Item belongs to m3", unit_price: 30000)
@@ -126,8 +126,8 @@ RSpec.describe Merchant do
     it 'sort the enabled merchant' do 
       expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
     end
-    it 'sort the enabled merchant' do 
-      expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
+    it 'sort the disabled merchant' do 
+      expect(Merchant.disabled).to eq([@merch_1, @merch_3, @merch_5, @merch_6])
     end
   end
 

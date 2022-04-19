@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   validates :name, presence: true
+  attribute :status, :string, default: 'disabled'
 
   has_many :items
   has_many :invoice_items, through: :items
@@ -37,6 +38,10 @@ class Merchant < ApplicationRecord
 
   def self.enabled 
     where(status: "enabled")
+  end
+
+  def self.disabled 
+    where.not(status: "enabled")
   end
 
   def items_ready_to_ship
