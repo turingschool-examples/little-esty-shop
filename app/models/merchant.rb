@@ -11,18 +11,26 @@ class Merchant < ApplicationRecord
 
   def most_popular_items
     items.joins(invoices: :transactions)
-      .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
-      .where('transactions.result = ?', 'success')
-      .group('items.id')
-      .order('total_revenue desc')
-      .limit(5)
+    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+    .where('transactions.result = ?', 'success')
+    .group('items.id')
+    .order('total_revenue desc')
+    .limit(5)
   end
-
 
   def unshipped_invoice_items
     items.select('items.name, invoice_items.invoice_id, invoice_items.status, invoice_items.id AS invoice_item_id, invoices.created_at AS invoice_created_at')
     .where("invoice_items.status = 0 OR invoice_items.status = 1")
     .joins(:invoices)
     .order('invoices.created_at')
+  end
+
+  def best_date_by_revenue
+  wip =  items.joins(:invoice_items, invoices: :transactions)
+    .where('transactions.result = ?', 'success')
+    # .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    binding.pry
+    # .group('invoices.id')
+    # .order("invoices.created_at")
   end
 end
