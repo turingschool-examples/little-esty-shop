@@ -1,6 +1,13 @@
 <h1><%= @merchant.name %> Items</h1>
 <%= link_to "Add new item", "/merchants/#{@merchant.id}/items/new" %>
 
+<div id="popular_items">
+  <h3>Most Popular Items</h3>
+  <% @merchant.popular_items.each do |item| %>
+  <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Total Revenue: $<%=item.revenue%>
+  <% end %>  
+</div>
+
 
 <div id="merchant_items">
   <div id="enabled">
