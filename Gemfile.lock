@@ -265,12 +265,8 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
-<<<<<<< HEAD
-  arm64-darwin-21
-=======
   ruby
   x86_64-darwin-21
->>>>>>> 59426a1b2290363db992383b0ec3f11ac394ad00
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
