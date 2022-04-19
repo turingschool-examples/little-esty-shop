@@ -1,0 +1,32 @@
+<h1>Merchants Dashboard</h1>
+
+<div id="merchants">
+
+  <div id="top_five_merchants">
+    <% @merchants.top_sellers.each do |merchant| %>
+      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+      <h2>Total Revenue: <%= merchant.total_revenue %></h2>
+    <% end %>
+  </div>
+  <div id="enabled-merchants">
+    <% @merchants.enabled_check(true).each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+        <%= link_to "Enabled", "/admin/merchants/#{merchant.id}", method: :patch %>
+      </div>
+    <% end %>
+  </div>
+  <div id="disabled-merchants">
+    <% @merchants.enabled_check(false).each do |merchant| %>
+      <div id="merchant-<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+        <%= link_to "Disabled", "/admin/merchants/#{merchant.id}", method: :patch %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div id="new_merchant_link">
+  <%= link_to "Create New Merchant", "/admin/merchants/new" %>
+</div>
