@@ -3,6 +3,7 @@
 <h3><%= link_to "Admin Merchants Index", "/admin/merchants", method: :get %></h3>
 <h3><%= link_to "Admin Invoices Index", "/admin/invoices", method: :get %></h3>
 
+<<<<<<< HEAD
 <h2 id="Top5Customers">Top 5 Customers:</h2>
 <ol>
   <% @top_5_customers.each do |c| %>
@@ -11,3 +12,17 @@
 </ol>
 
 <%= link_to "Create Merchant", "/admin/merchants/new", method: :get, local: true %>
+=======
+
+<div id="incomplete">
+    <h3>Incomplete Invoices</h3>
+    <ul>
+        <% @invoices.oldest_first.each do |invoice| %>
+            <% if invoice.has_items_not_shipped == false %>
+            <li><%= link_to "#{invoice.id}", "admin/invoices/#{invoice.id}"  %> 
+            - Date: <%= invoice.created_at.strftime('%A, %B %d, %Y') %></li>
+            <% end %>
+        <% end %>
+    </ul>
+</div>
+>>>>>>> main

@@ -77,8 +77,58 @@ RSpec.describe Merchant do
     it { should have_many(:items) }
   end
 
+
   describe "validations" do
     it { should validate_presence_of(:name) }
+  end
+
+  describe 'class methods' do
+    before do
+      @merch_2 = Merchant.create!(name: "Store Two", status: "enabled")
+      @merch_3 = Merchant.create!(name: "Store three", status: "disabled")
+      @merch_4 = Merchant.create!(name: "Store four", status: "enabled")
+      @merch_5 = Merchant.create!(name: "Store five")
+      @merch_6 = Merchant.create!(name: "Store six", status: "disabled")
+
+      @m2_item = @merch_2.items.create!(name: "Merch 2 Item", description: "Item belongs to m2", unit_price: 20000)
+      @m3_item = @merch_3.items.create!(name: "Merch 3 Item", description: "Item belongs to m3", unit_price: 30000)
+      @m4_item = @merch_4.items.create!(name: "Merch 4 Item", description: "Item belongs to m4", unit_price: 40000)
+      @m5_item = @merch_5.items.create!(name: "Merch 5 Item", description: "Item belongs to m5", unit_price: 50000)
+      @m6_item = @merch_6.items.create!(name: "Merch 6 Item", description: "Item belongs to m6", unit_price: 60000)
+
+      @test_custy = Customer.create!(first_name: "Test", last_name: "Custy")
+
+      @m2_inv = @test_custy.invoices.create!(status: 1)
+      @m3_inv = @test_custy.invoices.create!(status: 1)
+      @m4_inv = @test_custy.invoices.create!(status: 1)
+      @m5_inv = @test_custy.invoices.create!(status: 1)
+      @m6_inv0 = @test_custy.invoices.create!(status: 0)
+      @m6_inv2 = @test_custy.invoices.create!(status: 2)
+
+      @m2_ii = InvoiceItem.create!(item_id: @m2_item.id, invoice_id: @m2_inv.id, quantity: 1, unit_price: @m2_item.unit_price, status: 2)
+      @m3_ii = InvoiceItem.create!(item_id: @m3_item.id, invoice_id: @m3_inv.id, quantity: 4, unit_price: @m3_item.unit_price, status: 2)
+      @m4_ii = InvoiceItem.create!(item_id: @m4_item.id, invoice_id: @m4_inv.id, quantity: 1, unit_price: @m4_item.unit_price, status: 2)
+      @m5_ii = InvoiceItem.create!(item_id: @m5_item.id, invoice_id: @m5_inv.id, quantity: 3, unit_price: @m5_item.unit_price, status: 2)
+      @m6_ii0 = InvoiceItem.create!(item_id: @m6_item.id, invoice_id: @m6_inv0.id, quantity: 10, unit_price: @m6_item.unit_price, status: 0)
+      @m6_ii2 = InvoiceItem.create!(item_id: @m6_item.id, invoice_id: @m6_inv2.id, quantity: 10, unit_price: @m6_item.unit_price, status: 0)
+
+      @m2_tr = @m2_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+      @m3_tr = @m3_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+      @m4_tr = @m4_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+      @m5_tr = @m5_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+      @m6_tr2 = @m6_inv2.transactions.create!(credit_card_number: 4039485738495837, result: "failed")
+    end
+
+    it 'returns top 5 merchants by revenue' do
+      expect(Merchant.top_five_merchants).to eq([@merch_1, @merch_5, @merch_3, @merch_4, @merch_2])
+    end
+
+    it 'sort the enabled merchant' do 
+      expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
+    end
+    it 'sort the disabled merchant' do 
+      expect(Merchant.disabled).to eq([@merch_1, @merch_3, @merch_5, @merch_6])
+    end
   end
 
   describe "instance methods" do
