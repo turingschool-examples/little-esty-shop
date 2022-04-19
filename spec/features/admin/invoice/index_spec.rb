@@ -44,4 +44,11 @@ RSpec.describe Merchant do
     expect(page).to have_content("Invoice ##{@m5_inv.id}")
     expect(page).to have_content("Invoice ##{@m6_inv.id}")
   end
+
+  it 'links to invoice show page' do
+    click_link "#{@m2_inv.id}"
+
+
+    expect(current_path).to eq("/admin/invoices/#{@m2_inv.id}")
+  end
 end
