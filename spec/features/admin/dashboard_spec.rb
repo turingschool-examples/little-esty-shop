@@ -98,7 +98,6 @@ RSpec.describe "admin dashboard" do
 
   it 'has an incomplete section' do
     within "#incomplete" do
-      save_and_open_page
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to have_content("#{@invoice_1.id}")
       expect(page).to_not have_content("#{@invoice_2.id}")
@@ -116,7 +115,6 @@ RSpec.describe "admin dashboard" do
   end 
 
   it  'Incomplete invoice items are organized by date' do
-  save_and_open_page
     within("#incomplete") do
       expect("1999").to appear_before("2020")
       expect("1999").to appear_before("2022")

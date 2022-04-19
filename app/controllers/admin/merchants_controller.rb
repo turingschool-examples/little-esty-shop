@@ -15,7 +15,6 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
-    binding.pry
       if params[:name].present?
         merchant.update!(name: params[:name])
         merchant.save

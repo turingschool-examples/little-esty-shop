@@ -58,7 +58,6 @@ RSpec.describe "Admin Merchants Index" do
   end
 
   it 'merchants are broken up by enabled and disabled' do
-    save_and_open_page
     within("#enabled") do 
       expect(page).to have_content("Silly Stuff")
       expect(page).to_not have_content("Wally World")
