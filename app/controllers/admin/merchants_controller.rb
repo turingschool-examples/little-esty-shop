@@ -18,6 +18,7 @@ class Admin::MerchantsController < ApplicationController
       if params[:status] == nil
         merchant.update!(name: params[:name])
         merchant.save
+        flash.alert = "INFO HAS BEEN UPDATED!!!!!"
         redirect_to "/admin/merchants/#{merchant.id}"
       elsif merchant.status == nil || merchant.status == "disabled"
         merchant.update!(status: "enabled")

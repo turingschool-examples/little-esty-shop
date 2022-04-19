@@ -14,6 +14,8 @@ RSpec.describe "Admin Merchant Show" do
         save_and_open_page
         fill_in "Name", with: "Boat Shop"
         click_button "Update"
+        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+        expect(page).to have_content("INFO HAS BEEN UPDATED!!!!!")
         save_and_open_page
 
 
