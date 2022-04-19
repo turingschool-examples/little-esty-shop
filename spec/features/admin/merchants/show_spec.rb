@@ -11,12 +11,10 @@ RSpec.describe "Admin Merchant Show" do
 
         visit "/admin/merchants/#{@merchant_1.id}"
         click_link "Edit"
-        save_and_open_page
         fill_in "Name", with: "Boat Shop"
         click_button "Update"
         expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
         expect(page).to have_content("INFO HAS BEEN UPDATED!!!!!")
-        save_and_open_page
 
 
         
