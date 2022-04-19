@@ -16,7 +16,7 @@ describe "New Items", type: :feature do
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
   end
 
-  it "links to item create page" do
+  it "links to item create page", :vcr do
     visit "/merchants/#{@merchant2.id}/items"
       expect(page).to have_link("Add new item")
       click_link("Add new item")
@@ -27,7 +27,7 @@ describe "New Items", type: :feature do
       expect(find('form')).to have_content('Unit price')
   end
 
-  it "has form for new item" do
+  it "has form for new item", :vcr do
     visit "/merchants/#{@merchant2.id}/items"
     click_link("Add new item")
 

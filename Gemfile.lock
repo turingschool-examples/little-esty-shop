@@ -110,10 +110,12 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.5.1)
     nio4r (2.5.8)
-    nokogiri (1.13.4-arm64-darwin)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orderly (0.1.1)
       capybara (>= 1.1)
@@ -263,7 +265,12 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+<<<<<<< HEAD
   arm64-darwin-21
+=======
+  ruby
+  x86_64-darwin-21
+>>>>>>> 59426a1b2290363db992383b0ec3f11ac394ad00
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)

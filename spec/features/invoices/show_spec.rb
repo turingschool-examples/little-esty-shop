@@ -29,6 +29,13 @@ RSpec.describe "Merchant Invoices Show" do
       expect(page).to_not have_content(@invoices2)
     end
 
+    it "Shows the total revenue for the selected invoice", :vcr do
+      expected = (@invoice_item1.quantity * @invoice_item1.unit_price) + (@invoice_item2.quantity * @invoice_item2.unit_price)
+      save_and_open_page
+      expect(page).to have_content(@invoices1[0].total_revenue)
+      expect(@invoices1[0].total_revenue).to eq(expected)
+    end
+
     describe "invoice items" do
       it "lists all invoice item names, quantity, price and status", :vcr do
         within "#invoice_item-#{@invoice_item2.id}" do
@@ -48,6 +55,18 @@ RSpec.describe "Merchant Invoices Show" do
           expect(page).to have_content(@invoice_item6.status)
           expect(page).to_not have_content(@items2[1])
           expect(page).to_not have_content(@items1)
+        end
+      end
+
+      it 'select update invoice item status', :vcr do
+        visit merchant_invoice_path(@merchants[0], @invoices1[0])
+        within "#invoice_item-#{@invoice_item2.id}" do
+          expect(page).to have_content('Pending')
+          select 'Packaged'
+          click_button 'Update Invoice Item Status'
+
+          expect(current_path).to eq(merchant_invoice_path(@merchants[0], @invoices1[0]))
+          expect(@invoice_item2.reload.status).to eq("Packaged")
         end
       end
     end
