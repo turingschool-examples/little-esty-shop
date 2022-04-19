@@ -46,5 +46,10 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_content(@item2.name)
       end
     end
+  #  it "displays popular items", :vcr do
+  #    visit merchant_items_path(@merchant)
+  #    within "#popular_items" do
+  #      expect(page).to have_content(@item1.name)
+  #    end
   end
 end
