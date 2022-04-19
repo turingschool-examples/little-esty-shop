@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'invoice show page' do
+describe "invoice show page" do
   before do
     @merchant_1 = Merchant.create!(
       name: "Store Store",
@@ -51,7 +51,7 @@ describe 'invoice show page' do
 
     @invoice_1 = @customer_1.invoices.create!(
       status: 1,
-      created_at: Date.new(2020,12,12),
+      created_at: Date.new(2020, 12, 12),
       updated_at: Date.current
     )
     @invoice_2 = @customer_1.invoices.create!(
@@ -104,25 +104,25 @@ describe 'invoice show page' do
     )
 
     @transaction_1 = @invoice_1.transactions.create!(
-      credit_card_number:"4654405418249632",
+      credit_card_number: "4654405418249632",
       result: "success"
     )
     @transaction_2 = @invoice_2.transactions.create!(
-      credit_card_number:"4654405418249632",
+      credit_card_number: "4654405418249632",
       result: "failed"
     )
 
     visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
   end
 
-  it 'displays pertinent information' do
+  it "displays pertinent information" do
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice status: completed")
     expect(page).to have_content("Invoice created at: Saturday, December 12, 2020")
     expect(page).to have_content("For customer: Malcolm Jordan")
   end
 
-  it 'displays invoice item information' do
+  it "displays invoice item information" do
     within("#ii-#{@invoice_item_1.id}") do
       expect(page).to have_content("Soccer Ball")
       expect(page).to have_content("Quantity: 1")
@@ -135,7 +135,7 @@ describe 'invoice show page' do
       expect(page).to have_content("Sold for: $100.0 each")
       expect(page).to have_content("Status: packaged")
     end
-    within ("#invoice_items") do
+    within("#invoice_items") do
       expect(page).not_to have_content("Beer")
       expect(page).not_to have_content("Quantity: 2")
       expect(page).not_to have_content("Sold for: $1.0 each")
@@ -148,16 +148,22 @@ describe 'invoice show page' do
     end
   end
 
-  it 'displays a form to switch item status' do
-    # As a merchant
-    # When I visit my merchant invoice show page
-    # I see that each invoice item status is a select field
-    # And I see that the invoice item's current status is selected
-    # When I click this select field,
-    # Then I can select a new status for the Item,
-    # And next to the select field I see a button to "Update Item Status"
-    # When I click this button
-    # I am taken back to the merchant invoice show page
-    # And I see that my Item's status has now been updated
+  # it 'displays a form to switch item status' do
+  #   # As a merchant
+  #   # When I visit my merchant invoice show page
+  #   # I see that each invoice item status is a select field
+  #   # And I see that the invoice item's current status is selected
+  #   # When I click this select field,
+  #   # Then I can select a new status for the Item,
+  #   # And next to the select field I see a button to "Update Item Status"
+  #   # When I click this button
+  #   # I am taken back to the merchant invoice show page
+  #   # And I see that my Item's status has now been updated
+  # end
+
+  it "invoice item statuses are select fields" do
+    within("#ii-#{@invoice_item_1.id}") do
+      expect(find("form")).to have_content("pending packaged shipped")
+    end
   end
 end
