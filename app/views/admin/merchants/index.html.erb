@@ -1,9 +1,29 @@
 <h1>Admin Merchants Index</h1>
+
+<div id="top_five_merchants">
+  <h2> Top Five Merchants </h2>
+  <hr/>
+  <ul>
+    <% @merchants.top_five_merchants.each do |merch| %>
+      <li id="top_5_<%= merch.id %>"> <%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %>
+        <br/>
+        <p>
+          Total Revenue:<strong> $<%= merch.total_rev / 100.0 %></strong>
+        </p>
+      </li>
+      <br/>
+      <hr/>
+    <% end %>
+  </ul>
+</div>
+
+<h2> Top Five Merchants </h2>
+<hr/>
 <ul>
 <%@merchants.each do |merchant|%>
     <div id="<%=merchant.id%>">
-        <li> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> 
-            <%if merchant.status == "enabled" %> 
+        <li> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+            <%if merchant.status == "enabled" %>
                 <%=button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch %>
             <% else %>
                 <%=button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>

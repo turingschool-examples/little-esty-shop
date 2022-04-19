@@ -3,7 +3,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  def show 
+  def show
     @merchant = Merchant.find(params[:id])
   end
 
@@ -12,10 +12,10 @@ class Admin::MerchantsController < ApplicationController
       if merchant.status == nil || merchant.status == "disabled"
         merchant.update!(status: "enabled")
         merchant.save
-      else 
+      else
         merchant.update!(status: "disabled")
         merchant.save
-      end 
+      end
       redirect_to "/admin/merchants"
-  end 
+  end
 end
