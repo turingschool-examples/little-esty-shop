@@ -17,10 +17,10 @@
   </ul>
 </div>
 
-<h2> Top Five Merchants </h2>
-<hr/>
-<ul>
-<%@merchants.each do |merchant|%>
+
+<h2>Enabled Merchants </h2>
+<ul id= "enabled">
+<%@merchants.enabled.each do |merchant|%>
     <div id="<%=merchant.id%>">
         <li> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
             <%if merchant.status == "enabled" %>
@@ -34,3 +34,23 @@
         <hr>
 <% end %>
 </ul>
+
+
+<h2>Disabled Merchants </h2>
+<div id="disabled">
+    <ul>
+        <%@merchants.disabled.each do |merchant|%>
+            <div id="<%=merchant.id%>">
+                <li> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+                    <%if merchant.status == "enabled" %>
+                        <%=button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch %>
+                    <% else %>
+                        <%=button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>
+                    <% end %>
+                </li>
+            </div>
+                <br>
+                <hr>
+        <% end %>
+    </ul>
+</div>
