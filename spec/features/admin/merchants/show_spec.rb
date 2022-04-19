@@ -10,6 +10,11 @@ RSpec.describe "Admin Merchant Show" do
         updated_at: Date.current)
 
         visit "/admin/merchants/#{@merchant_1.id}"
+        click_link "Edit"
+        save_and_open_page
+        fill_in "Name", with: "Boat Shop"
+        click_button "Update"
+        save_and_open_page
 
 
         

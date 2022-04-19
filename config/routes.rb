@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   patch "/items/:id", to: "items#update"
   get "/items/:id", to: "items#show"
 
-  resources :merchants, only: [:show] do
+  resources :merchants, only: [:show, :edit] do
     resources :items, only: [:index, :new, :create, :update, :show]
     resources :invoices, only: [:index, :show]
   end
@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get "/admin/invoices/:id", to:"admin/invoices#show"
   get "/admin/merchants/:id", to:"admin/merchants#show"
   patch "/admin/merchants/:id", to: "admin/merchants#update"
+  get "admin/merchants/:id/edit", to: "admin/merchants#edit"
 end
