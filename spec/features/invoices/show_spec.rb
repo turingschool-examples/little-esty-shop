@@ -50,6 +50,18 @@ RSpec.describe "Merchant Invoices Show" do
           expect(page).to_not have_content(@items1)
         end
       end
+
+      it 'select update invoice item status', :vcr do
+        within "#invoice_item-#{@invoice_item2.id}" do
+          expect(page).to have_content('Pending')
+          select 'Packaged'
+          save_and_open_page
+          click_button 'Update Invoice Item Status'
+
+          expect(current_path).to eq(merchant_invoice_path(@merchants[0], @invoices1[0]))
+          expect(@invoice_item2.reload.status).to eq("Packaged")
+        end
+      end
     end
   end
 end
