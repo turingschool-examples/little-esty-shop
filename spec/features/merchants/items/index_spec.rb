@@ -90,8 +90,6 @@ RSpec.describe 'Merchant items index' do
 
     it 'lists the names of the top 5 most popular items ranked by total revenue' do
 
-        expect(page).to have_content("Top 5 Items")
-
         merchant1 = create(:merchant)
         merchant2 = create(:merchant)
 
@@ -103,19 +101,29 @@ RSpec.describe 'Merchant items index' do
         transaction1 = create(:transaction, invoice: invoice1, result: 'success')
         transaction2 = create(:transaction, invoice: invoice1, result: 'failed')
 
-        item1 = create(:item, merchant: merchant1, unit_price: 300)
-        item2 = create(:item, merchant: merchant1, unit_price: 15)
-        item3 = create(:item, merchant: merchant1, unit_price: 15)
-        item4 = create(:item, merchant: merchant1, unit_price: 15)
-        item5 = create(:item, merchant: merchant1, unit_price: 15)
-        item6 = create(:item, merchant: merchant1, unit_price: 15)
+        item1 = create(:item, name: "x-wing", merchant: merchant1, unit_price: 300)
+        item2 = create(:item, name: "tie-fighter", merchant: merchant1, unit_price: 15)
+        item3 = create(:item, name: "Lightsaber", merchant: merchant1, unit_price: 15)
+        item4 = create(:item, name: "Yoda", merchant: merchant1, unit_price: 15)
+        item5 = create(:item, name: "Darth Vader", merchant: merchant1, unit_price: 15)
+        item6 = create(:item, name: "Death Star", merchant: merchant1, unit_price: 15)
 
-        invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 1, unit_price: 300) #300 rev
-        invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 2, unit_price: 10) #20 rev
-        invoice_item3 = create(:invoice_item, item: item3, invoice: invoice1, quantity: 3, unit_price: 10) #30 rev
-        invoice_item4 = create(:invoice_item, item: item4, invoice: invoice1, quantity: 1, unit_price: 10) #10 rev
-        invoice_item5 = create(:invoice_item, item: item5, invoice: invoice2, quantity: 5, unit_price: 10) #50 rev
-        invoice_item6 = create(:invoice_item, item: item6, invoice: invoice2, quantity: 2, unit_price: 10) #20 rev
+        invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 1, unit_price: 3000) #300 rev
+        invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 2, unit_price: 100) #20 rev
+        invoice_item3 = create(:invoice_item, item: item3, invoice: invoice1, quantity: 3, unit_price: 100) #30 rev
+        invoice_item4 = create(:invoice_item, item: item4, invoice: invoice1, quantity: 1, unit_price: 100) #10 rev
+        invoice_item5 = create(:invoice_item, item: item5, invoice: invoice1, quantity: 5, unit_price: 100) #50 rev
+        invoice_item6 = create(:invoice_item, item: item6, invoice: invoice2, quantity: 2, unit_price: 100) #20 rev
+
+        visit "/merchants/#{merchant1.id}/items"
+        within "#top_five" do
+
+          expect(page).to have_content("Top 5 Items")
+          expect(item1.name).to appear_before(item5.name)
+          expect(item5.name).to appear_before(item3.name)
+          expect(item3.name).to appear_before(item2.name)
+          expect(item2.name).to appear_before(item4.name)
+        end
     end
 
     it "Lists the date of that item's most ever sales next to the item" do

@@ -1,12 +1,14 @@
 <h1> <%= @merchant.name %>'s Items  </h1>
 
 <%= button_to 'Create New Item', new_merchant_item_path(@merchant), method: :get %>
+<div id="top_five">
 <h3>Top 5 Items</h3>
 <table>
   <tr>
     <th>Item Name</th>
     <th>Best Sales Date</th>
   </tr>
+
 <% @merchant.most_popular_items.each do |item| %>
   <tr>
     <td><%= link_to "#{item.name}", merchant_item_path(@merchant,item) %>: Total Revenue: <%= number_to_currency(item.total_revenue/100, precision: 2) %></td>
@@ -15,6 +17,8 @@
     </td>
   </tr>
 <% end %>
+  </div>
+
 </table>
 
 <hr>
