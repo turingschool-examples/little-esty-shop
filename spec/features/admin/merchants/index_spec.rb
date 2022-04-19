@@ -57,6 +57,21 @@ RSpec.describe "Admin Merchants Index" do
       end
   end
 
+  it 'merchants are broken up by enabled and disabled' do
+    save_and_open_page
+    within("#enabled") do 
+      expect(page).to have_content("Silly Stuff")
+      expect(page).to_not have_content("Wally World")
+    end 
+    within("#disabled") do 
+      expect(page).to_not have_content("Silly Stuff")
+      expect(page).to have_content("Wally World")
+      expect(page).to have_content("Mako")
+      
+    end
+  end
+
+
   describe 'top five merchants' do
     before do
       @merch_2 = Merchant.create!(name: "Store Two")

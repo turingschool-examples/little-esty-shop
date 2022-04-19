@@ -84,9 +84,9 @@ RSpec.describe Merchant do
 
   describe 'class methods' do
     before do
-      @merch_2 = Merchant.create!(name: "Store Two")
+      @merch_2 = Merchant.create!(name: "Store Two", status: "enabled")
       @merch_3 = Merchant.create!(name: "Store three")
-      @merch_4 = Merchant.create!(name: "Store four")
+      @merch_4 = Merchant.create!(name: "Store four", status: "enabled")
       @merch_5 = Merchant.create!(name: "Store five")
       @merch_6 = Merchant.create!(name: "Store six")
 
@@ -121,6 +121,13 @@ RSpec.describe Merchant do
 
     it 'returns top 5 merchants by revenue' do
       expect(Merchant.top_five_merchants).to eq([@merch_1, @merch_5, @merch_3, @merch_4, @merch_2])
+    end
+
+    it 'sort the enabled merchant' do 
+      expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
+    end
+    it 'sort the enabled merchant' do 
+      expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
     end
   end
 
