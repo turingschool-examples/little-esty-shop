@@ -31,7 +31,6 @@ RSpec.describe "Merchant Invoices Show" do
 
     it "Shows the total revenue for the selected invoice", :vcr do
       expected = (@invoice_item1.quantity * @invoice_item1.unit_price) + (@invoice_item2.quantity * @invoice_item2.unit_price)
-      save_and_open_page
       expect(page).to have_content(@invoices1[0].total_revenue)
       expect(@invoices1[0].total_revenue).to eq(expected)
     end
