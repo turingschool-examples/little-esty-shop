@@ -52,10 +52,10 @@ RSpec.describe "Merchant Invoices Show" do
       end
 
       it 'select update invoice item status', :vcr do
+        visit merchant_invoice_path(@merchants[0], @invoices1[0])
         within "#invoice_item-#{@invoice_item2.id}" do
           expect(page).to have_content('Pending')
           select 'Packaged'
-          save_and_open_page
           click_button 'Update Invoice Item Status'
 
           expect(current_path).to eq(merchant_invoice_path(@merchants[0], @invoices1[0]))
