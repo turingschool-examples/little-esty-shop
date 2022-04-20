@@ -11,7 +11,7 @@ RSpec.describe Invoice do
     it { should validate_presence_of(:status) }
   end
 
-  describe 'methods' do
+  describe "methods" do
     before :each do
       @merchant_1 = Merchant.create!(
         name: "Store Store",
@@ -62,17 +62,17 @@ RSpec.describe Invoice do
 
       @invoice_1 = @customer_1.invoices.create!(
         status: 1,
-        created_at: Date.new(2020,12,12),
+        created_at: Date.new(2020, 12, 12),
         updated_at: Date.current
       )
       @invoice_2 = @customer_1.invoices.create!(
         status: 2,
-        created_at: Date.new(2021,12,12),
+        created_at: Date.new(2021, 12, 12),
         updated_at: Date.current
       )
       @invoice_3 = @customer_2.invoices.create!(
         status: 0,
-        created_at: Date.new(1999,12,12),
+        created_at: Date.new(1999, 12, 12),
         updated_at: Date.current
       )
 
@@ -109,17 +109,17 @@ RSpec.describe Invoice do
         invoice_id: @invoice_3.id,
         quantity: 2,
         unit_price: @beer.unit_price,
-        status: 0,
+        status: 2,
         created_at: Date.current,
         updated_at: Date.current
       )
 
       @transaction_1 = @invoice_1.transactions.create!(
-        credit_card_number:"4654405418249632",
+        credit_card_number: "4654405418249632",
         result: "success"
       )
       @transaction_2 = @invoice_2.transactions.create!(
-        credit_card_number:"4654405418249632",
+        credit_card_number: "4654405418249632",
         result: "failed"
       )
     end
@@ -128,12 +128,17 @@ RSpec.describe Invoice do
       it "calculates the total value for an invoice" do
         expect(@invoice_1.invoice_total).to eq(5320.0)
       end
-    end 
-    
+
+      it "determines if there are any unshipped invoice items" do
+        expect(@invoice_3.has_items_not_shipped).to eq(true)
+        expect(@invoice_1.has_items_not_shipped).to eq(false)
+      end
+    end
+
     describe "-class" do
-      it 'orders invoices by oldest to newest' do
+      it "orders invoices by oldest to newest" do
         expect(Invoice.oldest_first).to eq([@invoice_3, @invoice_1, @invoice_2])
       end
-    end 
-  end 
+    end
+  end
 end
