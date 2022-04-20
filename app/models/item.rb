@@ -16,14 +16,11 @@ class Item < ApplicationRecord
     date_hash = Invoice.joins(:items)
       .where("items.id=#{id}")
       .select("invoices.created_at AS invoice_created_at, invoice_items.quantity AS quantity")
-      .group("invoices.created_at")
+      .group("date_trunc('day', invoices.created_at)")
       .sum(:quantity)
     return "no sales records available" if date_hash == {}
-    date_hash.transform_keys!{ |date_obj| date_obj.strftime("%Y.%m.%d")}
-    final_sum_hash = Hash.new(0)
-    date_hash.each_pair { |date, sum| final_sum_hash[date] += sum }
     max = [{"starter date" => 0}]
-    final_sum_hash.each_pair do |date, sum|
+    date_hash.each_pair do |date, sum|
       if max[0].values[0] < sum
         max.clear
         max << {"#{date}" => sum}
