@@ -13,7 +13,11 @@ class Item < ApplicationRecord
   enum status: { disabled: 0, enabled: 1 }
 
   def best_sales_date
-    date_hash = Invoice.joins(:items).where("items.id=#{id}").select("invoices.created_at AS invoice_created_at, invoice_items.quantity AS quantity").group("invoices.created_at").sum(:quantity)
+    date_hash = Invoice.joins(:items)
+      .where("items.id=#{id}")
+      .select("invoices.created_at AS invoice_created_at, invoice_items.quantity AS quantity")
+      .group("invoices.created_at")
+      .sum(:quantity)
     return "no sales records available" if date_hash == {}
     date_hash.transform_keys!{ |date_obj| date_obj.strftime("%Y.%m.%d")}
     final_sum_hash = Hash.new(0)
