@@ -5,7 +5,9 @@
   <h3>Most Popular Items</h3>
   <% @merchant.popular_items.each do |item| %>
   <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Total Revenue: $<%=item.revenue%>
-  <% end %>  
+    Best day for sales: <%=item.item_best_day%>
+
+  <% end %>
 </div>
 
 

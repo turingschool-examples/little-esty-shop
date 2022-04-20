@@ -73,5 +73,12 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant.popular_items[3].name).to eq(@item4.name)
       expect(@merchant.popular_items[4].name).to eq(@item5.name)
     end
+
+    it "returns best day" do
+      expect(@merchant.popular_items[0].item_best_day).to eq(@invoice1.created_at)
+    end
+
+
+
   end
 end
