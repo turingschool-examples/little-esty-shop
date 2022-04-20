@@ -1,52 +1,64 @@
-require 'rails_helper'
+require "rails_helper"
+
 RSpec.describe "Admin Merchants Index" do
   before :each do
     @merchant_1 = Merchant.create!(
-    name: "Wally World",
-    created_at: Date.current,
-    updated_at: Date.current)
+      name: "Wally World",
+      created_at: Date.current,
+      updated_at: Date.current
+    )
+
     @merchant_2 = Merchant.create!(
-    name: "Mako",
-    created_at: Date.current,
-    updated_at: Date.current)
+      name: "Mako",
+      created_at: Date.current,
+      updated_at: Date.current
+    )
+
     @merchant_3 = Merchant.create!(
-    name: "Silly Stuff",
-    status: "enabled",
-    created_at: Date.current,
-    updated_at: Date.current)
+      name: "Silly Stuff",
+      status: "enabled",
+      created_at: Date.current,
+      updated_at: Date.current
+    )
+
     @merchant_4 = Merchant.create!(
-    name: "The Store",
-    created_at: Date.current,
-    updated_at: Date.current)
-    
-    visit '/admin/merchants'
+      name: "The Store",
+      created_at: Date.current,
+      updated_at: Date.current
+    )
+
+    visit "/admin/merchants"
   end
-  it 'has a list of merchants'  do
-      expect(page).to have_content("Wally World")
-      expect(page).to have_content("The Store")
-      expect(page).to_not have_content("Soccerball")
+
+  it "has a list of merchants" do
+    expect(page).to have_content("Wally World")
+    expect(page).to have_content("The Store")
+    expect(page).to_not have_content("Soccerball")
   end
   it "links to each merchants show page" do
-      click_on "The Store"
-      expect(current_path).to eq("/admin/merchants/#{@merchant_4.id}")
-      expect(page).to have_content("The Store")
-      expect(page).to_not have_content("Wally World")
+    click_on "The Store"
+    expect(current_path).to eq("/admin/merchants/#{@merchant_4.id}")
+    expect(page).to have_content("The Store")
+    expect(page).to_not have_content("Wally World")
   end
   it "has a button to enable or disable merchant" do
-      within("##{@merchant_1.id}") do
-          expect(page).to have_button("Enable")
-      end
-      within("##{@merchant_3.id}") do
-          expect(page).to have_button("Disable")
-      end
+    within("##{@merchant_1.id}") do
+      expect(page).to have_button("Enable")
+    end
+    within("##{@merchant_3.id}") do
+      expect(page).to have_button("Disable")
+    end
   end
   it "will change the enabled or disabled status of merchant" do
-      within("##{@merchant_1.id}") do
-          expect(page).to have_button('Enable')
-          click_on "Enable"
-          expect(page).to have_button('Disable')
-      end
+    within("##{@merchant_1.id}") do
+      expect(page).to have_button("Enable")
+      click_on "Enable"
+      expect(page).to have_button("Disable")
+      click_on "Disable"
+      expect(page).to have_button("Enable")
+    end
   end
+
   it 'merchants are broken up by enabled and disabled' do
     within("#enabled") do
       expect(page).to have_content("Silly Stuff")
@@ -58,6 +70,7 @@ RSpec.describe "Admin Merchants Index" do
       expect(page).to have_content("Mako")
     end
   end
+
   describe 'top five merchants' do
     before do
       @merch_2 = Merchant.create!(name: "Store Two")
@@ -86,10 +99,11 @@ RSpec.describe "Admin Merchants Index" do
       @m4_tr = @m4_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
       @m5_tr = @m5_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
       @m6_tr = @m6_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+
       visit '/admin/merchants'
     end
     it "displays the names of the top 5 merchants by revenue" do
-      within('#top_five_merchants') do
+      within("#top_five_merchants") do
         expect(page).to have_content("Store six")
         expect(page).to have_content("Store five")
         expect(page).to have_content("Store three")
@@ -102,12 +116,13 @@ RSpec.describe "Admin Merchants Index" do
       end
     end
     it "links to the merchants show page" do
-      within('#top_five_merchants') do
+      within("#top_five_merchants") do
         click_link("Store six")
         expect(current_path).to eq("/admin/merchants/#{@merch_6.id}")
       end
     end
-    it 'displays the top 5 merchants total revenue' do
+
+    it "displays the top 5 merchants total revenue" do
       within("#top_5_#{@merch_6.id}") do
         expect(page).to have_content("Total Revenue: $6000.0")
       end
