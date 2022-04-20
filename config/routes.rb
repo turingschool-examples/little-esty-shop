@@ -6,8 +6,6 @@ Rails.application.routes.draw do
     resources :invoices, controller: 'merchant_invoices', only: [:index, :show, :update]
   end
 
-  get '/', to: 'admin#index'
-
   get '/admin', to: 'admin#index'
 
   get '/admin/merchants', to: 'admin_merchants#index'
