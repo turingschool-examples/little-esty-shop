@@ -16,4 +16,12 @@ class Item < ApplicationRecord
   def to_dollars
     unit_price.to_f / 100
   end
+
+  def top_date_sales
+ invoices.select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as total_rev")
+      .group("invoices.created_at")
+      .order("total_rev")
+      .first
+      .created_at  
+  end
 end

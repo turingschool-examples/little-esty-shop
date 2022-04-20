@@ -120,6 +120,7 @@ describe 'merchant item index page' do
 
       @invoice_4 = @customer_1.invoices.create!(
         status: 1,
+        created_at: DateTime.new(2012,12,12)
       )
 
       @invoice_item_5 = InvoiceItem.create!(
@@ -166,6 +167,12 @@ describe 'merchant item index page' do
         expect("something").to appear_before("nothing")
 
         expect(page).not_to have_content("Soccer Ball")
+      end
+    end
+
+    it 'has the best date for sales', :vcr do 
+      within("#top_item_#{@gnihton.id}") do
+        expect(page).to have_content("Top selling date was: 2012-12-12")
       end
     end
 
