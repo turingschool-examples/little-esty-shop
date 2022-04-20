@@ -210,7 +210,9 @@ describe "the admin/merchants index page" do
       expect(page).to have_content("Wednesday, April 08 2020")
     end
   end
-  
+end
+
+describe "The top 5" do
   describe "I see top 5 merchants" do
     before :each do
       @merchant1 = Merchant.create!(name: "Pabu")
