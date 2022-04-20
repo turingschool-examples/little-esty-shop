@@ -37,7 +37,7 @@ RSpec.describe Merchant do
     visit '/admin/invoices'
   end
 
-  it 'displays all invoices' do
+  it 'displays all invoices', :vcr do
     expect(page).to have_content("Invoice ##{@m2_inv.id}")
     expect(page).to have_content("Invoice ##{@m3_inv.id}")
     expect(page).to have_content("Invoice ##{@m4_inv.id}")
@@ -45,7 +45,7 @@ RSpec.describe Merchant do
     expect(page).to have_content("Invoice ##{@m6_inv.id}")
   end
 
-  it 'links to invoice show page' do
+  it 'links to invoice show page', :vcr do
     click_link "#{@m2_inv.id}"
 
 

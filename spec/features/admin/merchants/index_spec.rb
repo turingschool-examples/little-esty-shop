@@ -30,18 +30,20 @@ RSpec.describe "Admin Merchants Index" do
     visit "/admin/merchants"
   end
 
-  it "has a list of merchants" do
+  it "has a list of merchants", :vcr do
     expect(page).to have_content("Wally World")
     expect(page).to have_content("The Store")
     expect(page).to_not have_content("Soccerball")
   end
-  it "links to each merchants show page" do
+
+  it "links to each merchants show page", :vcr do
     click_on "The Store"
     expect(current_path).to eq("/admin/merchants/#{@merchant_4.id}")
     expect(page).to have_content("The Store")
     expect(page).to_not have_content("Wally World")
   end
-  it "has a button to enable or disable merchant" do
+
+  it "has a button to enable or disable merchant", :vcr do
     within("##{@merchant_1.id}") do
       expect(page).to have_button("Enable")
     end
@@ -49,7 +51,8 @@ RSpec.describe "Admin Merchants Index" do
       expect(page).to have_button("Disable")
     end
   end
-  it "will change the enabled or disabled status of merchant" do
+
+  it "will change the enabled or disabled status of merchant", :vcr do
     within("##{@merchant_1.id}") do
       expect(page).to have_button("Enable")
       click_on "Enable"
@@ -59,7 +62,7 @@ RSpec.describe "Admin Merchants Index" do
     end
   end
 
-  it "merchants are broken up by enabled and disabled" do
+  it 'merchants are broken up by enabled and disabled', :vcr do
     within("#enabled") do
       expect(page).to have_content("Silly Stuff")
       expect(page).to_not have_content("Wally World")
@@ -102,7 +105,8 @@ RSpec.describe "Admin Merchants Index" do
 
       visit "/admin/merchants"
     end
-    it "displays the names of the top 5 merchants by revenue" do
+
+    it "displays the names of the top 5 merchants by revenue", :vcr do
       within("#top_five_merchants") do
         expect(page).to have_content("Store six")
         expect(page).to have_content("Store five")
@@ -115,14 +119,15 @@ RSpec.describe "Admin Merchants Index" do
         expect(page).not_to have_content("The Store")
       end
     end
-    it "links to the merchants show page" do
+
+    it "links to the merchants show page", :vcr do
       within("#top_five_merchants") do
         click_link("Store six")
         expect(current_path).to eq("/admin/merchants/#{@merch_6.id}")
       end
     end
 
-    it "displays the top 5 merchants total revenue" do
+    it "displays the top 5 merchants total revenue", :vcr do
       within("#top_5_#{@merch_6.id}") do
         expect(page).to have_content("Total Revenue: $6000.0")
       end
@@ -148,7 +153,7 @@ RSpec.describe "Admin Merchants Index" do
     end
   end
 
-  it "has a link to create new merchant" do
+  it "has a link to create new merchant", :vcr do
     click_link("Create Merchant")
 
     expect(current_path).to eq("/admin/merchants/new")

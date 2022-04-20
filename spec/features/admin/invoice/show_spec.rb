@@ -115,14 +115,14 @@ RSpec.describe "Invoice Show Page" do
     visit "/admin/invoices/#{@invoice_1.id}"
   end
 
-  it "contains information about the invoice" do
+  it "contains information about the invoice", :vcr do
     expect(page).to have_content(@invoice_1.id)
     expect(page).to have_content(@invoice_1.status)
     expect(page).to have_content("Saturday, December 12, 2020")
     expect(page).to have_content("Malcolm Jordan")
   end
 
-  it "displays invoice item info" do
+  it "displays invoice item info", :vcr do
     within("#ii-#{@invoice_item_1.id}") do
       expect(page).to have_content("Soccer Ball")
       expect(page).to have_content("Quantity: 1")

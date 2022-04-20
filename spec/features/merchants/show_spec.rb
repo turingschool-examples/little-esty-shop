@@ -4,64 +4,45 @@ describe "merchant dashboard page" do
   before do
     @merchant_1 = Merchant.create!(
       name: "Store Store",
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @merchant_2 = Merchant.create!(
       name: "Erots",
-      created_at: Date.current,
-      updated_at: Date.current
     )
 
     @cup = @merchant_1.items.create!(
       name: "Cup",
       description: "What the **** is this thing?",
       unit_price: 10000,
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @soccer = @merchant_1.items.create!(
       name: "Soccer Ball",
       description: "A ball of pure soccer.",
       unit_price: 32000,
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @beer = @merchant_2.items.create!(
       name: "Beer",
       description: "Happiness <3",
       unit_price: 100,
-      created_at: Date.current,
-      updated_at: Date.current
     )
 
     @customer_1 = Customer.create!(
       first_name: "Malcolm",
       last_name: "Jordan",
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @customer_2 = Customer.create!(
       first_name: "Jimmy",
       last_name: "Felony",
-      created_at: Date.current,
-      updated_at: Date.current
     )
 
     @invoice_1 = @customer_1.invoices.create!(
       status: 0,
       created_at: "Thu, 14 Apr 2022 00:00:00 UTC +00:00",
-      updated_at: Date.current
     )
     @invoice_2 = @customer_1.invoices.create!(
       status: 1,
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @invoice_3 = @customer_2.invoices.create!(
       status: 0,
-      created_at: Date.current,
-      updated_at: Date.current
     )
 
     @invoice_item_1 = InvoiceItem.create!(
@@ -70,8 +51,6 @@ describe "merchant dashboard page" do
       quantity: 2,
       unit_price: @soccer.unit_price * 2,
       status: 0,
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @invoice_item_2 = InvoiceItem.create!(
       item_id: @cup.id,
@@ -79,8 +58,6 @@ describe "merchant dashboard page" do
       quantity: 4,
       unit_price: @cup.unit_price * 4,
       status: 0,
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @invoice_item_3 = InvoiceItem.create!(
       item_id: @soccer.id,
@@ -88,8 +65,6 @@ describe "merchant dashboard page" do
       quantity: 4,
       unit_price: @soccer.unit_price * 4,
       status: 2,
-      created_at: Date.current,
-      updated_at: Date.current
     )
     @invoice_item_4 = InvoiceItem.create!(
       item_id: @beer.id,
@@ -97,18 +72,16 @@ describe "merchant dashboard page" do
       quantity: 2,
       unit_price: @beer.unit_price * 2,
       status: 0,
-      created_at: Date.current,
-      updated_at: Date.current
     )
 
     visit "/merchants/#{@merchant_1.id}/dashboard"
   end
 
-  it "displays the merchants name" do
+  it "displays the merchants name", :vcr do
     expect(page).to have_content("Store Store")
   end
 
-  it "has links to the merchant item index" do
+  it "has links to the merchant item index", :vcr do
     click_link("Store Store's Items")
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
 
@@ -117,23 +90,21 @@ describe "merchant dashboard page" do
     expect(page).not_to have_content("Beer")
   end
 
-  it "has links to the merchant invoice index" do
+  it "has links to the merchant invoice index", :vcr do
     click_link("Invoices")
+
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
-    # save_and_open_page
     expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice ##{@invoice_2.id}")
     expect(page).not_to have_content("Invoice ##{@invoice_3.id}")
   end
 
   describe "items ready to ship section" do
-    it "displays items ready to ship" do
+    it "displays items ready to ship", :vcr do
       @basketball = @merchant_1.items.create!(
         name: "Basketball",
         description: "A ball of pure basket.",
         unit_price: 35000,
-        created_at: Date.current,
-        updated_at: Date.current
       )
 
       expect(page).to have_content("Items ready to ship")
@@ -144,7 +115,7 @@ describe "merchant dashboard page" do
       end
     end
 
-    it "has links to merchant item invoice page" do
+    it "has links to merchant item invoice page", :vcr do
       within ".items_ready_to_ship" do
         within "##{@soccer.id}" do
           click_link(@invoice_1.id.to_s)
@@ -153,25 +124,22 @@ describe "merchant dashboard page" do
       end
     end
 
-    it "displays item invoice dates" do
+    it "displays item invoice dates", :vcr do
       within ".items_ready_to_ship" do
         expect(page).to have_content("Thursday, April 14, 2022")
       end
     end
 
-    it "displays items oldest to newest" do
+    it "displays items oldest to newest", :vcr do
       @basketball = @merchant_1.items.create!(
         name: "Basketball",
         description: "A ball of pure basket.",
         unit_price: 35000,
-        created_at: Date.current,
-        updated_at: Date.current
       )
 
       @invoice_4 = @customer_2.invoices.create!(
         status: 0,
         created_at: "Tue, 12 Apr 2022 00:00:00 UTC +00:00",
-        updated_at: Date.current
       )
 
       @invoice_item_5 = InvoiceItem.create!(
@@ -180,8 +148,6 @@ describe "merchant dashboard page" do
         quantity: 2,
         unit_price: @basketball.unit_price * 2,
         status: 0,
-        created_at: Date.current,
-        updated_at: Date.current
       )
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
@@ -191,7 +157,7 @@ describe "merchant dashboard page" do
     end
   end
 
-  it "finds shows top_5_customers names and displays the number of successful transactions for each" do
+  it "finds shows top_5_customers names and displays the number of successful transactions for each", :vcr do
     merch_1 = Merchant.create!(name: "Two-Legs Fashion")
 
     item_1 = merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 5000)
@@ -248,7 +214,7 @@ describe "merchant dashboard page" do
     transaction_13 = invoice_13.transactions.create!(credit_card_number: 4023948573948293, result: "success")
 
     visit "/merchants/#{merch_1.id}/dashboard"
-    # save_and_open_page
+    
     expect("Name: Debbie Twolegs").to appear_before("Name: Tommy Doubleleg")
     expect("Name: Tommy Doubleleg").to appear_before("Name: Brian Twinlegs")
     expect("Name: Brian Twinlegs").to appear_before("Name: Jared Goffleg")

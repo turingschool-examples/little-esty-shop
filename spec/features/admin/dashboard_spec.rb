@@ -150,23 +150,23 @@ RSpec.describe "admin dashboard" do
     visit "/admin"
   end
 
-  it "exists" do
+  it "exists", :vcr do
     expect(page).to have_content("Admin Dashboard")
   end
 
-  it "has link to admin merchants index" do
+  it "has link to admin merchants index", :vcr do
     click_link("Admin Merchants Index")
 
     expect(current_path).to eq("/admin/merchants")
   end
 
-  it "has link to admin invoices index" do
+  it "has link to admin invoices index", :vcr do
     click_link("Admin Invoices Index")
 
     expect(current_path).to eq("/admin/invoices")
   end
 
-  it "lists top 5 customers for their merchant" do
+  it "lists top 5 customers for their merchant", :vcr do
     within("#Top5Customers") do
       # binding.pry
       # save_and_open_page
@@ -181,7 +181,7 @@ RSpec.describe "admin dashboard" do
     end
   end
 
-  it 'has an incomplete section' do
+  it 'has an incomplete section', :vcr do
     within "#incomplete" do
       expect(page).to have_content("Incomplete Invoices")
       expect(page).to have_content("#{@invoice_1.id}")
@@ -189,17 +189,17 @@ RSpec.describe "admin dashboard" do
     end
   end
 
-  it ' has a link to show page'do
+  it 'has a link to show page', :vcr do
     click_on("#{@invoice_1.id}")
     expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_1.id}")
   end
 
-  it 'incomplete section has a date' do
+  it 'incomplete section has a date', :vcr do
   expect(page).to have_content("Saturday, December 12, 2020")
   end
 
-  it  'Incomplete invoice items are organized by date' do
+  it  'Incomplete invoice items are organized by date', :vcr do
     within("#incomplete") do
       expect("1999").to appear_before("2020")
       expect("1999").to appear_before("2022")
