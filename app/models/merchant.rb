@@ -41,4 +41,17 @@ class Merchant < ApplicationRecord
       return "No sales data"
     end
   end
+  
+  def self.top_5_merchants
+    joins(:invoice_items, :transactions)
+    .where('result = ?', 'success')
+    .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
+    .group('merchants.id')
+    .limit(5)
+    .order('revenue DESC')
+  end
+
+  def total_rev
+    invoice_items.sum("invoice_items.unit_price * quantity")
+  end
 end
