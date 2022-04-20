@@ -1,4 +1,9 @@
-<%= @facade.repo_name.name %>
+<% @facade.repo_name.each do |element| %>
+<% if element.name == "little-esty-shop" %>
+  <h4>Github repo: <%= element.name %></h4>
+  <% end %>
+<% end %>
+
 <h1>Admin Dashboard</h1>
 
 <p><%= link_to "Admin: Merchants", "/admin/merchants" %></p>
