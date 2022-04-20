@@ -36,11 +36,11 @@ class Merchant < ApplicationRecord
       .distinct
   end
 
-  def self.enabled 
+  def self.enabled
     where(status: "enabled")
   end
 
-  def self.disabled 
+  def self.disabled
     where.not(status: "enabled")
   end
 
