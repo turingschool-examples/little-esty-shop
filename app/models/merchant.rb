@@ -18,9 +18,13 @@ class Merchant < ApplicationRecord
 
   def self.top_sellers
     joins(:invoice_items, :invoices, :transactions)
-    .select("invoice_items.quantity * invoice_items.unit_price AS total_price, merchants.*")
-    .where("transactions.result = 0")
-    .order(total_price: :desc)
-    .first(5)
+      .select("invoice_items.quantity * invoice_items.unit_price AS total_price, merchants.*")
+      .where("transactions.result = 0")
+      .order(total_price: :desc)
+      .first(5)
+  end
+
+  def items_ready_to_ship
+    invoice_items.joins(:invoice).where(status: [0, 1])
   end
 end
