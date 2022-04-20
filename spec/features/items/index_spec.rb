@@ -55,5 +55,12 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_current_path("/merchants/#{@merchant.id}/items/#{@item1.id}")
       end
     end
+    it "displays best sales day for each item", :vcr do
+      visit merchant_items_path(@merchant)
+      within "#popular_items" do
+        save_and_open_page
+        expect(page).to have_content("Best day for sales: #{@invoice1.created_at}")
+      end
+    end
   end
 end
