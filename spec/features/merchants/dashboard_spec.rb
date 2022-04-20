@@ -35,5 +35,21 @@ RSpec.describe "Merchant Dashboard", type: :feature do
       click_link "Merchant Invoices"
       expect(current_path).to eq(merchant_invoices_path(@merchant))
     end
+
+    it "displays items ready to ship with a link to the item's invoice", :vcr do
+      expect(@merchant.items_ready_to_ship).to eq([@invoice_item1, @invoice_item2])
+
+      within("#items_to_ship-#{@invoice_item1.id}") do
+        expect(page).to have_link(@invoice_item1.invoice.id)
+        expect(page).to have_content(@item1.name)
+        expect(page).to have_content(@invoice1.id)
+      end
+
+      within("#items_to_ship-#{@invoice_item2.id}") do
+        expect(page).to have_link(@invoice_item2.invoice.id)
+        expect(page).to have_content(@item2.name)
+        expect(page).to have_content(@invoice1.id)
+      end
+    end
   end
 end
