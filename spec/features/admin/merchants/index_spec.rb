@@ -149,7 +149,6 @@ RSpec.describe "Admin Merchants Index" do
       within("#top_5_#{@merch_3.id}") do
         expect(page).to have_content("Top selling date: 1969-02-14 00:00:00 UTC")
       end
-      save_and_open_page
     end
   end
 
