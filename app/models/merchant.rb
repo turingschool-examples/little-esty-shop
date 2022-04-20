@@ -23,5 +23,21 @@ class Merchant < ApplicationRecord
         .select('SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue, items.*')
         .order('revenue desc')
         .limit(5)
+
+  def self.enabled_check(check)
+    where(enabled: check).all
+  end
+
+  def total_revenue
+    invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
+  end
+
+  def self.top_sellers
+    joins(:invoice_items, :invoices, :transactions)
+    .select("invoice_items.quantity * invoice_items.unit_price AS total_price, merchants.*")
+    .where("transactions.result = 0")
+    .order(total_price: :desc)
+    .first(5)
+
   end
 end

@@ -1,12 +1,4 @@
 require "rails_helper"
-#   it "text" do
-#     merchant = create(:merchant, enabled: false)  can control attributes by adding them in here after comma
-#     merchants = create_list(:merchant, 5, merchant: merchant)
-#     # item1 = create(:item, merchant: merchant)  to create one instance
-#     # items = create_list(:item, 5, merchant: merchant) ==> creates multiple instances relationship for item belongs_to merchant.  Automatically assigns foreign key to that merchant
-#     require "pry"; binding.pry
-#   end
-# end
 RSpec.describe Merchant, type: :model do
   describe "relationships" do
     it { should have_many(:items) }
@@ -22,7 +14,7 @@ RSpec.describe Merchant, type: :model do
     it { should_not allow_value(nil).for(:enabled) }
   end
 
-  before :each do
+  describe "sorting" do
     @merchant = create :merchant
     @merchant2 = create :merchant
     @item1 = create :item, {merchant_id: @merchant.id, enabled: "enabled"}
@@ -55,9 +47,6 @@ RSpec.describe Merchant, type: :model do
     @transaction2 = create :transaction, {result: 1, invoice_id: @invoice2.id, credit_card_expiration_date: 12121212}
     @invoice_item10 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item6.id, quantity: 1, unit_price: 100, status: 2}
 
-  end
-
-  describe "sorting" do
     it "returns enabled items" do
       expect(@merchant.enabled_items.first).to eq(@item1)
     end
@@ -77,8 +66,65 @@ RSpec.describe Merchant, type: :model do
     it "returns best day" do
       expect(@merchant.popular_items[0].item_best_day).to eq(@invoice1.created_at)
     end
+  end
+#end deleted while merging, might be needed if I counted dos/ends poorly
+  describe "methods" do
+    it 'Finds all enabled or disabled merchants' do
+      merchant_1 = create(:merchant)
+      merchant_2 = Merchant.create!(name: "Doesn't matter", enabled: false)
+      merchant_3 = create(:merchant)
+      merchant_4 = create(:merchant)
 
+      expect(Merchant.enabled_check(true)).to eq([merchant_1, merchant_3, merchant_4])
+      expect(Merchant.enabled_check(false)).to eq([merchant_2])
+    end
 
+    it 'Shows total revenue for a merchant' do
+      merchant_1 = create(:merchant)
+      item_1 = Item.create!(name: "Gloomhaven", description: "Lorem ipsum", unit_price: 5, enabled: 0, merchant_id: merchant_1.id)
+      customer_1 = create(:customer)
+      invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
+      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 4, unit_price: item_1.unit_price)
 
+      expect(merchant_1.total_revenue).to eq(20)
+    end
+
+    it 'Sorts merchants by total revenue' do
+      merchant_1 = create(:merchant)
+      merchant_2 = create(:merchant)
+      merchant_3 = create(:merchant)
+      merchant_4 = create(:merchant)
+      merchant_5 = create(:merchant)
+      merchant_6 = create(:merchant)
+  
+      customer_1 = create(:customer)
+      customer_2 = create(:customer)
+  
+      item_1 = Item.create!(name: "Gloomhaven", description: "Lorem ipsum", unit_price: 5, enabled: 0, merchant_id: merchant_1.id)
+      item_2 = Item.create!(name: "Frosthaven", description: "Lorem ipsum 2", unit_price: 7, enabled: 0, merchant_id: merchant_2.id)
+      item_3 = Item.create!(name: "Monopoly", description: "The worst board game", unit_price: 4, enabled: 0, merchant_id: merchant_3.id)
+      item_4 = Item.create!(name: "Mysterium", description: "Lorem ipsum 4", unit_price: 4, enabled: 0, merchant_id: merchant_4.id)
+      item_5 = Item.create!(name: "Apocrypha", description: "Lorem ipsum 5", unit_price: 8, enabled: 0, merchant_id: merchant_5.id)
+      item_6 = Item.create!(name: "Zombicide", description: "Lorem ipsum 6", unit_price: 6, enabled: 0, merchant_id: merchant_6.id)
+  
+      invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
+      invoice_2 = Invoice.create!(customer_id: customer_2.id, status: 2)
+
+      transaction_1 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "12341234", invoice_id: invoice_1.id, result: 0)
+      transaction_2 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "56785678", invoice_id: invoice_2.id, result: 1)
+  
+      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 4, unit_price: item_1.unit_price)
+      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_2.id, quantity: 3, unit_price: item_2.unit_price)
+      invoice_item_3 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 8, unit_price: item_3.unit_price)
+      invoice_item_4 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_4.id, quantity: 4, unit_price: item_4.unit_price)
+      invoice_item_5 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_5.id, quantity: 3, unit_price: item_5.unit_price)
+      invoice_item_6 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_6.id, quantity: 3, unit_price: item_6.unit_price)
+      
+      merchants = Merchant.all
+
+      expect(merchants.top_sellers).to eq([merchant_3, merchant_5, merchant_1])
+
+    end
   end
 end
+
