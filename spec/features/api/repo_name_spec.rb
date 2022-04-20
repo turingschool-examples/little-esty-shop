@@ -8,8 +8,8 @@ RSpec.describe 'Display Repo Name', type: :feature do
 
       expect(page).to have_content("Github repo: little-esty-shop")
 
-      visit merchant_items_path(@starw)
-      expect(page).to have_content("Github repo: little-esty-shop")
+#      visit merchant_items_path(@starw)
+#      expect(page).to have_content("Github repo: little-esty-shop")
 
     end
   end
