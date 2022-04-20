@@ -10,6 +10,8 @@
     <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
     <p>Total revenue generated:<strong> $<%= item.total_rev.to_f / 100 %></strong></p>
     <hr/>
+    <br>
+    <h3>Top selling date was: <%= item.top_date_sales %> </h3>
   </div>
   <% end %>
 </div>
