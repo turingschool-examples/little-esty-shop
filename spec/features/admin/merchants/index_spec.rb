@@ -74,7 +74,7 @@ RSpec.describe "Admin Merchants Index" do
     end
   end
 
-  describe 'top five merchants' do
+  describe "top five merchants" do
     before do
       @merch_2 = Merchant.create!(name: "Store Two")
       @merch_3 = Merchant.create!(name: "Store three")
@@ -88,7 +88,7 @@ RSpec.describe "Admin Merchants Index" do
       @m6_item = @merch_6.items.create!(name: "Merch 6 Item", description: "Item belongs to m6", unit_price: 60000)
       @test_custy = Customer.create!(first_name: "Test", last_name: "Custy")
       @m2_inv = @test_custy.invoices.create!(status: 1)
-      @m3_inv = @test_custy.invoices.create!(status: 1)
+      @m3_inv = @test_custy.invoices.create!(status: 1, created_at: DateTime.new(1969, 2, 14))
       @m4_inv = @test_custy.invoices.create!(status: 1)
       @m5_inv = @test_custy.invoices.create!(status: 1)
       @m6_inv = @test_custy.invoices.create!(status: 1)
@@ -103,7 +103,7 @@ RSpec.describe "Admin Merchants Index" do
       @m5_tr = @m5_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
       @m6_tr = @m6_inv.transactions.create!(credit_card_number: 4039485738495837, result: "success")
 
-      visit '/admin/merchants'
+      visit "/admin/merchants"
     end
 
     it "displays the names of the top 5 merchants by revenue", :vcr do
@@ -143,6 +143,13 @@ RSpec.describe "Admin Merchants Index" do
       within("#top_5_#{@merch_2.id}") do
         expect(page).to have_content("Total Revenue: $200.0")
       end
+    end
+
+    it "displays top day for merchant", :vcr do
+      within("#top_5_#{@merch_3.id}") do
+        expect(page).to have_content("Top selling date: 1969-02-14 00:00:00 UTC")
+      end
+      save_and_open_page
     end
   end
 
