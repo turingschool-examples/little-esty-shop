@@ -132,7 +132,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       expect(@merchant_1.total_revenue.to_s).to_not appear_before(@merchant_3.total_revenue.to_s)
     end
 
-    it 'shows the best revenue day of the top 5 merchants' do
+    it 'shows the best revenue day of the top 5 merchants', :vcr do
       merchant_4 = create(:merchant)
       merchant_5 = create(:merchant)
       merchant_6 = create(:merchant)

@@ -23,4 +23,11 @@ class Merchant < ApplicationRecord
     .order(total_price: :desc)
     .limit(5)
   end
+
+  def self.best_day(id)
+    joins(:invoice_items, :invoices)
+    .select("invoice_items.quantity * invoice_items.unit_price AS total_price, invoices.created_at AS invoice_date")
+    .where("merchants.id = ?", id)
+  end
+
 end
