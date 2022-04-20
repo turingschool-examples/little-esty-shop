@@ -4,6 +4,7 @@
   <% end %>
 <% end %>
 
+
 <h1>Admin Dashboard</h1>
 
 <p><%= link_to "Admin: Merchants", "/admin/merchants" %></p>
@@ -19,15 +20,7 @@
   <% end %>
 </div><br><br>
 
-<div id="top-5-merchants">
-  <h3>Top 5 Merchants</h3>
-  <% @merchants.each do |merchant| %>
-  <div id="merchant-<%= merchant.id %>">
-    <p><li><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> -
-    $<%= merchant.total_rev/100 %> made</li></p>
-  </div>
-  <% end %>
-</div><br><br>
+
 
 <div id='invoices'>
   <h3>Incomplete Invoices:</h3>

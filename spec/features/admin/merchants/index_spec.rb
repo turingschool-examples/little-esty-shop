@@ -210,7 +210,9 @@ describe "the admin/merchants index page" do
       expect(page).to have_content("Wednesday, April 08 2020")
     end
   end
-  
+end
+
+describe "The top 5" do
   describe "I see top 5 merchants" do
     before :each do
       @merchant1 = Merchant.create!(name: "Pabu")
@@ -254,7 +256,7 @@ describe "the admin/merchants index page" do
       @transaction5 = Transaction.create!(credit_card_number: 102938, result: 'failed', invoice_id: @invoice5.id)
       @transaction6 = Transaction.create!(credit_card_number: 879799, result: 'success', invoice_id: @invoice6.id)
 
-      visit "/admin"
+      visit "/admin/merchants"
     end
 
     it 'lists merchants in correct order' do
@@ -267,18 +269,18 @@ describe "the admin/merchants index page" do
       end
     end
     it 'has link to each merchant show page' do
-      within("#merchant-#{@merchant1.id}") do
+      within("#merchant_top_5-#{@merchant1.id}") do
         click_link "#{@merchant1.name}"
         expect(current_path).to eq("/admin/merchants/#{@merchant1.id}")
       end
     end
     it 'shows total revenue next to each merchant' do
       within("#top-5-merchants") do
-        expect(page).to have_content("$#{@merchant1.total_rev/100} made")
-        expect(page).to have_content("$#{@merchant2.total_rev/100} made")
-        expect(page).to have_content("$#{@merchant3.total_rev/100} made")
-        expect(page).to have_content("$#{@merchant4.total_rev/100} made")
-        expect(page).to have_content("$#{@merchant6.total_rev/100} made")
+        expect(page).to have_content("$10.00")
+        expect(page).to have_content("$65.00")
+        expect(page).to have_content("$15.00")
+        expect(page).to have_content("$25.00")
+        expect(page).to have_content("$1.00")
       end
     end
   end
