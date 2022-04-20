@@ -1,6 +1,6 @@
 class Merchant < ApplicationRecord
   validates :name, presence: true
-  attribute :status, :string, default: 'disabled'
+  attribute :status, :string, default: "disabled"
 
   has_many :items
   has_many :invoice_items, through: :items
@@ -27,7 +27,7 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_five_merchants
-      joins(:customers, invoices: :transactions)
+    joins(:customers, invoices: :transactions)
       .where(invoices: {status: 1}, transactions: {result: "success"})
       .select("merchants.id, merchants.name, sum(invoice_items.quantity * invoice_items.unit_price) as total_rev")
       .group(:id)
@@ -48,5 +48,13 @@ class Merchant < ApplicationRecord
     invoices.select("items.name, invoices.id, items.id as item_id, invoices.created_at")
       .where("invoice_items.status != 2")
       .order("invoices.created_at ASC")
+  end
+
+  def top_date
+    invoices.select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as total_rev")
+      .group("invoices.created_at")
+      .order("total_rev")
+      .first
+      .created_at
   end
 end

@@ -19,21 +19,21 @@ RSpec.describe Merchant do
     @cust_6 = Customer.create!(first_name: "Bronson", last_name: "Shmonson")
     @cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
 
-    @invoice_1 = @cust_1.invoices.create!(status: 1)
-    @invoice_2 = @cust_1.invoices.create!(status: 1)
-    @invoice_3 = @cust_1.invoices.create!(status: 1)
-    @invoice_4 = @cust_2.invoices.create!(status: 1)
-    @invoice_5 = @cust_2.invoices.create!(status: 1)
-    @invoice_6 = @cust_2.invoices.create!(status: 1)
-    @invoice_7 = @cust_3.invoices.create!(status: 1)
-    @invoice_8 = @cust_3.invoices.create!(status: 1)
-    @invoice_9 = @cust_4.invoices.create!(status: 1)
-    @invoice_10 = @cust_4.invoices.create!(status: 1)
-    @invoice_11 = @cust_5.invoices.create!(status: 1)
-    @invoice_12 = @cust_5.invoices.create!(status: 1)
-    @invoice_13 = @cust_6.invoices.create!(status: 1)
-    @invoice_14 = @cust_7.invoices.create!(status: 1)
-    @invoice_15 = @cust_7.invoices.create!(status: 2)
+    @invoice_1 = @cust_1.invoices.create!(status: 1, created_at: "12/30/2011")
+    @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "06/15/2016")
+    @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "04/04/2019")
+    @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "07/13/2008")
+    @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "10/11/2020")
+    @invoice_7 = @cust_3.invoices.create!(status: 1, created_at: "03/14/2011")
+    @invoice_8 = @cust_3.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_9 = @cust_4.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_10 = @cust_4.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_11 = @cust_5.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_12 = @cust_5.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_13 = @cust_6.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_14 = @cust_7.invoices.create!(status: 1, created_at: "03/14/2009")
+    @invoice_15 = @cust_7.invoices.create!(status: 2, created_at: "03/14/2009")
 
     @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -77,12 +77,11 @@ RSpec.describe Merchant do
     it { should have_many(:items) }
   end
 
-
   describe "validations" do
     it { should validate_presence_of(:name) }
   end
 
-  describe 'class methods' do
+  describe "class methods" do
     before do
       @merch_2 = Merchant.create!(name: "Store Two", status: "enabled")
       @merch_3 = Merchant.create!(name: "Store three", status: "disabled")
@@ -119,14 +118,14 @@ RSpec.describe Merchant do
       @m6_tr2 = @m6_inv2.transactions.create!(credit_card_number: 4039485738495837, result: "failed")
     end
 
-    it 'returns top 5 merchants by revenue' do
+    it "returns top 5 merchants by revenue" do
       expect(Merchant.top_five_merchants).to eq([@merch_1, @merch_5, @merch_3, @merch_4, @merch_2])
     end
 
-    it 'sort the enabled merchant' do
-      expect(Merchant.enabled).to eq([@merch_2, @merch_4 ])
+    it "sort the enabled merchant" do
+      expect(Merchant.enabled).to eq([@merch_2, @merch_4])
     end
-    it 'sort the disabled merchant' do
+    it "sort the disabled merchant" do
       expect(Merchant.disabled).to eq([@merch_1, @merch_3, @merch_5, @merch_6])
     end
   end
@@ -189,6 +188,10 @@ RSpec.describe Merchant do
       expect(merchant.items_ready_to_ship.ids).to include(packaged_invoice_item.invoice_id)
       expect(merchant.items_ready_to_ship.ids).to include(pending_invoice_item.invoice_id)
       expect(merchant.items_ready_to_ship.ids).to_not include(shipped_invoice_item.invoice_id)
+    end
+
+    it "finds top selling date for merchant" do
+      expect(@merch_1.top_date).to eq("2019-04-04 00:00:00")
     end
   end
 end
