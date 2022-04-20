@@ -14,7 +14,6 @@ class GithubFacade
     pr_history = service.get_all_pull_requests
     count = Hash.new(0)
     pr_history.each{ |pr|
-      # binding.pry
       count[pr["user"]["login"]]+=1
     }
     count
