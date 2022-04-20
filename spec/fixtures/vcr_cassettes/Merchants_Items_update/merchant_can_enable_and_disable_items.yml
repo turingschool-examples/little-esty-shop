@@ -19,7 +19,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 15:36:14 GMT
+      - Wed, 20 Apr 2022 20:15:24 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -50,7 +50,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650471656'
+      - '1650489314'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -58,7 +58,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2C9:6561:11624D:21DD6A:6260286E
+      - E656:5C4A:36AE26:6C349E:626069DC
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
@@ -66,7 +66,7 @@ http_interactions:
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 15:36:14 GMT
+  recorded_at: Wed, 20 Apr 2022 20:15:24 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop/contributors
@@ -86,7 +86,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 15:36:14 GMT
+      - Wed, 20 Apr 2022 20:15:24 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -117,7 +117,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650471656'
+      - '1650489314'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -125,7 +125,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2CA:34A9:1690BA:4217C8:6260286E
+      - E657:4C92:37EFEF:6A053F:626069DC
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
@@ -133,7 +133,7 @@ http_interactions:
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 15:36:14 GMT
+  recorded_at: Wed, 20 Apr 2022 20:15:24 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop
@@ -153,7 +153,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 15:36:15 GMT
+      - Wed, 20 Apr 2022 20:15:24 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -184,7 +184,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650471657'
+      - '1650489314'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -192,7 +192,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2CB:539E:234F75:42E73B:6260286F
+      - E658:5D27:37B3A1:6E7D43:626069DC
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
@@ -200,7 +200,7 @@ http_interactions:
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 15:36:15 GMT
+  recorded_at: Wed, 20 Apr 2022 20:15:24 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop/contributors
@@ -220,7 +220,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 15:36:15 GMT
+      - Wed, 20 Apr 2022 20:15:24 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -251,7 +251,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650471657'
+      - '1650489314'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -259,7 +259,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2CC:59BB:14EF0C:2CA260:6260286F
+      - E659:4306:3FA951:7615D4:626069DC
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
@@ -267,7 +267,7 @@ http_interactions:
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 15:36:15 GMT
+  recorded_at: Wed, 20 Apr 2022 20:15:24 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop
@@ -287,7 +287,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 15:36:15 GMT
+      - Wed, 20 Apr 2022 20:15:24 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -318,7 +318,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650471657'
+      - '1650489314'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -326,7 +326,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2CD:602F:14BD63:2C10A7:6260286F
+      - E65A:7F2F:24963A:51060D:626069DC
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
@@ -334,7 +334,7 @@ http_interactions:
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 15:36:15 GMT
+  recorded_at: Wed, 20 Apr 2022 20:15:24 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop/contributors
@@ -354,7 +354,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 15:36:15 GMT
+      - Wed, 20 Apr 2022 20:15:24 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -385,7 +385,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650471657'
+      - '1650489314'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -393,7 +393,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2CE:265E:1745D5:42C651:6260286F
+      - E65B:7A77:340201:69FB06:626069DC
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
@@ -401,5 +401,5 @@ http_interactions:
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 15:36:15 GMT
+  recorded_at: Wed, 20 Apr 2022 20:15:24 GMT
 recorded_with: VCR 6.1.0

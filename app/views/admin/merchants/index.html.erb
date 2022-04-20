@@ -6,6 +6,7 @@
     <% @merchants.top_sellers.each do |merchant| %>
       <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
       <h2>Total Revenue: <%= merchant.total_revenue %></h2>
+      <h2>Top selling day for was <%= merchant.best_day %></h2>
     <% end %>
   </div>
   <div id="enabled-merchants">

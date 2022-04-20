@@ -147,8 +147,8 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       item_5 = Item.create!(name: "Apocrypha", description: "Lorem ipsum 5", unit_price: 8, enabled: 0, merchant_id: merchant_5.id)
       item_6 = Item.create!(name: "Zombicide", description: "Lorem ipsum 6", unit_price: 6, enabled: 0, merchant_id: merchant_6.id)
   
-      invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: rand(10.years).ago)
-      invoice_2 = Invoice.create!(customer_id: customer_2.id, status: 2, created_at: rand(10.years).ago)
+      invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2, created_at: rand(10.years).seconds.ago)
+      invoice_2 = Invoice.create!(customer_id: customer_2.id, status: 2, created_at: rand(10.years).seconds.ago)
   
       transaction_1 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "12341234", invoice_id: invoice_1.id, result: 0)
       transaction_2 = Transaction.create!(credit_card_expiration_date: "0 Seconds From Now", credit_card_number: "56785678", invoice_id: invoice_2.id, result: 1)
@@ -170,6 +170,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
         within("#merchant-#{@merchant_5.id}") do
           expect(page).to have_content("Top selling date for was #{invoice_1.created_at}")
           expect(page).to_not have_content("Top selling date for was #{invoice_2.created_at}")
+        end
       end
     end
   end
