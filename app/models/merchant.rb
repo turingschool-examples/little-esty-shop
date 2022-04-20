@@ -26,11 +26,32 @@ class Merchant < ApplicationRecord
   end
 
   def best_date_by_revenue
-  wip =  items.joins(:invoice_items, invoices: :transactions)
+    invoices.joins(:transactions)
     .where('transactions.result = ?', 'success')
-    # .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
-    binding.pry
-    # .group('invoices.id')
-    # .order("invoices.created_at")
+    .where(status: "completed")
+    .select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .group('invoices.id')
+    .order('revenue DESC, invoices.created_at')
+  end
+
+  def best_date_formatted
+    if best_date_by_revenue.empty? == false
+      return best_date_by_revenue.first.created_at.strftime("%A, %B %d %Y")
+    else
+      return "No sales data"
+    end
+  end
+  
+  def self.top_5_merchants
+    joins(:invoice_items, :transactions)
+    .where('result = ?', 'success')
+    .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
+    .group('merchants.id')
+    .limit(5)
+    .order('revenue DESC')
+  end
+
+  def total_rev
+    invoice_items.sum("invoice_items.unit_price * quantity")
   end
 end
