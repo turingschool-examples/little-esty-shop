@@ -7,14 +7,13 @@ class Invoice < ApplicationRecord
   has_many :transactions
   belongs_to :customer
 
-  enum status: { "in_progress" => 0, "completed" => 1, "cancelled" => 2 }
+  enum status: {"in_progress" => 0, "completed" => 1, "cancelled" => 2}
 
   def invoice_total
     total = invoice_items
-    .group(:invoice_id)
-    .sum("invoice_items.unit_price * invoice_items.quantity")
-
-    total[id]/100.0
+      .group(:invoice_id)
+      .sum("invoice_items.unit_price * invoice_items.quantity")
+    total[id] / 100.0
   end
 
   def has_items_not_shipped
