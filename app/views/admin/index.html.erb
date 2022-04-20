@@ -4,8 +4,14 @@
   <% end %>
 <% end %>
 
-
+<p><strong>Contributors:</strong></p>
+<% @facade.contributor_pull_requests.each_pair do |name, count| %>
+<ul>
+  <li><%= name %>, <%= count %> pull requests</li>
+</ul>
+<% end %>
 <h1>Admin Dashboard</h1>
+
 
 <p><%= link_to "Admin: Merchants", "/admin/merchants" %></p>
 <p><%= link_to "Admin: Invoices", "/admin/invoices" %></p>
