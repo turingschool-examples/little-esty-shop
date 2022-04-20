@@ -14,6 +14,8 @@ class Invoice < ApplicationRecord
     .group(:invoice_id)
     .sum("invoice_items.unit_price * invoice_items.quantity")
 
+    binding.pry
+
     total[id]/100.0
   end
 
