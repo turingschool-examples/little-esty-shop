@@ -21,10 +21,16 @@ class Merchant < ApplicationRecord
       .select("invoice_items.quantity * invoice_items.unit_price AS total_price, merchants.*")
       .where("transactions.result = 0")
       .order(total_price: :desc)
-      .first(5)
+      .limit(5)
   end
 
   def items_ready_to_ship
     invoice_items.joins(:invoice).where(status: [0, 1])
+  end
+
+  def self.best_day(id)
+    joins(:invoice_items, :invoices)
+      .select("invoice_items.quantity * invoice_items.unit_price AS total_price, invoices.created_at AS invoice_date")
+      .where("merchants.id = ?", id)
   end
 end
