@@ -16,38 +16,39 @@ RSpec.describe Merchant, type: :model do
 
   describe "sorting" do
     before do
-    @merchant = create :merchant
-    @merchant2 = create :merchant
-    @item1 = create :item, {merchant_id: @merchant.id, enabled: "enabled"}
-    @item2 = create :item, {merchant_id: @merchant.id, enabled: "disabled"}
-    @item3 = create :item, {merchant_id: @merchant.id}
-    @item4 = create :item, {merchant_id: @merchant.id}
-    @item5 = create :item, {merchant_id: @merchant.id}
-    @item6 = create :item, {merchant_id: @merchant.id}
-    @item7 = create :item, {merchant_id: @merchant2.id}
+      @merchant = create :merchant
+      @merchant2 = create :merchant
+      @item1 = create :item, {merchant_id: @merchant.id, enabled: "enabled"}
+      @item2 = create :item, {merchant_id: @merchant.id, enabled: "disabled"}
+      @item3 = create :item, {merchant_id: @merchant.id}
+      @item4 = create :item, {merchant_id: @merchant.id}
+      @item5 = create :item, {merchant_id: @merchant.id}
+      @item6 = create :item, {merchant_id: @merchant.id}
+      @item7 = create :item, {merchant_id: @merchant2.id}
 
-    @customer = create :customer
-    @invoice1 = create :invoice, {customer_id: @customer.id}
-    @invoice2 = create :invoice, {customer_id: @customer.id}
+      @customer = create :customer
+      @invoice1 = create :invoice, {customer_id: @customer.id}
+      @invoice2 = create :invoice, {customer_id: @customer.id}
 
-    @invoice_item1 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 10, status: 2}
-    @invoice_item2 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item2.id, quantity: 1, unit_price: 45, status: 2}
-    @invoice_item3 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item3.id, quantity: 1, unit_price: 25, status: 2}
-    @invoice_item4 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item4.id, quantity: 1, unit_price: 4, status: 2}
-    @invoice_item5 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: 3, status: 2}
-    @invoice_item6 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item6.id, quantity: 1, unit_price: 2, status: 2}
-    @transaction1 = create :transaction, {result: 0, invoice_id: @invoice1.id, credit_card_expiration_date: 12121212}
-    #2nd invoice item for item1
-    @invoice_item7 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item1.id, quantity: 1, unit_price: 10, status: 2}
-    #different merchant
-    @invoice_item9 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item7.id, quantity: 1, unit_price: 60, status: 2}
-    #cancelled invoice
-    @invoice3 = create :invoice, {customer_id: @customer.id, status: 0}
-    @invoice_item8 = create :invoice_item, {invoice_id: @invoice3.id, item_id: @item7.id, quantity: 1, unit_price: 60, status: 2}
-    # failed transaction
-    @transaction2 = create :transaction, {result: 1, invoice_id: @invoice2.id, credit_card_expiration_date: 12121212}
-    @invoice_item10 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item6.id, quantity: 1, unit_price: 100, status: 2}
+      @invoice_item1 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 10, status: 2}
+      @invoice_item2 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item2.id, quantity: 1, unit_price: 45, status: 2}
+      @invoice_item3 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item3.id, quantity: 1, unit_price: 25, status: 2}
+      @invoice_item4 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item4.id, quantity: 1, unit_price: 4, status: 2}
+      @invoice_item5 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: 3, status: 2}
+      @invoice_item6 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item6.id, quantity: 1, unit_price: 2, status: 2}
+      @transaction1 = create :transaction, {result: 0, invoice_id: @invoice1.id, credit_card_expiration_date: 12121212}
+      #2nd invoice item for item1
+      @invoice_item7 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item1.id, quantity: 1, unit_price: 10, status: 2}
+      #different merchant
+      @invoice_item9 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item7.id, quantity: 1, unit_price: 60, status: 2}
+      #cancelled invoice
+      @invoice3 = create :invoice, {customer_id: @customer.id, status: 0}
+      @invoice_item8 = create :invoice_item, {invoice_id: @invoice3.id, item_id: @item7.id, quantity: 1, unit_price: 60, status: 2}
+      # failed transaction
+      @transaction2 = create :transaction, {result: 1, invoice_id: @invoice2.id, credit_card_expiration_date: 12121212}
+      @invoice_item10 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item6.id, quantity: 1, unit_price: 100, status: 2}
     end
+
     it "returns enabled items" do
       expect(@merchant.enabled_items.first).to eq(@item1)
     end
@@ -70,7 +71,7 @@ RSpec.describe Merchant, type: :model do
   end
 #end deleted while merging, might be needed if I counted dos/ends poorly
   describe "methods" do
-    it 'Finds all enabled or disabled merchants' do
+    it "Finds all enabled or disabled merchants" do
       merchant_1 = create(:merchant)
       merchant_2 = Merchant.create!(name: "Doesn't matter", enabled: false)
       merchant_3 = create(:merchant)
@@ -80,7 +81,7 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.enabled_check(false)).to eq([merchant_2])
     end
 
-    it 'Shows total revenue for a merchant' do
+    it "Shows total revenue for a merchant" do
       merchant_1 = create(:merchant)
       item_1 = Item.create!(name: "Gloomhaven", description: "Lorem ipsum", unit_price: 5, enabled: 0, merchant_id: merchant_1.id)
       customer_1 = create(:customer)
@@ -90,7 +91,7 @@ RSpec.describe Merchant, type: :model do
       expect(merchant_1.total_revenue).to eq(20)
     end
 
-    it 'Sorts merchants by total revenue' do
+    it "Sorts merchants by total revenue" do
       merchant_1 = create(:merchant)
       merchant_2 = create(:merchant)
       merchant_3 = create(:merchant)
@@ -124,8 +125,21 @@ RSpec.describe Merchant, type: :model do
       merchants = Merchant.all
 
       expect(merchants.top_sellers).to eq([merchant_3, merchant_5, merchant_1])
+    end
 
+    it "lists all items ordered but not shipped" do
+      @merchant1 = create(:merchant)
+      @items = create_list(:item, 4, merchant: @merchant1)
+      @customer1 = create(:customer)
+      @customer2 = create(:customer)
+      @invoice1 = create(:invoice, customer: @customer1)
+      @invoice2 = create(:invoice, customer: @customer2)
+      @invoice_item1 = create(:invoice_item, invoice: @invoice1, item: @items.first, status: 1)
+      @invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @items.second, status: 1)
+      @invoice_item3 = create(:invoice_item, invoice: @invoice2, item: @items.third, status: 0)
+      @invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items.last, status: 2)
+
+      expect(@merchant1.items_ready_to_ship).to eq([@invoice_item1, @invoice_item2, @invoice_item3])
     end
   end
 end
-
