@@ -86,7 +86,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       expect(page).to_not have_content(@merchant_2.name)
       expect(page).to_not have_content(@merchant_3.name)
       expect(page).to have_content(merchant_4.name)
-    end      
+    end
   end
 
   it 'Finds top 5 merchants', :vcr do
@@ -116,7 +116,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     invoice_item_4 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_4.id, quantity: 4, unit_price: item_4.unit_price)
     invoice_item_5 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_5.id, quantity: 3, unit_price: item_5.unit_price)
     invoice_item_6 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_6.id, quantity: 3, unit_price: item_6.unit_price)
-    
+
     visit admin_merchants_path()
 
     within("#top_five_merchants") do
