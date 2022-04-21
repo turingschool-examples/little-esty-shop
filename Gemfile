@@ -30,6 +30,7 @@ gem "faraday"
 gem "factory_bot_rails"
 gem "faker"
 gem "standardrb"
+gem "hirb"
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

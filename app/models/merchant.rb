@@ -8,6 +8,22 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  def enabled_items
+    Item.where(merchant_id: self.id).where(enabled: "enabled")
+  end
+
+  def disabled_items
+    Item.where(merchant_id: self.id).where(enabled: "disabled")
+  end
+
+  def popular_items
+    Item.joins(invoice_items: {invoice: :transactions})
+        .where(transactions: {result: 0}, merchant_id: self.id) #might not need merch id
+        .group(:id)
+        .select('SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue, items.*')
+        .order('revenue desc')
+        .limit(5)
+
   def self.enabled_check(check)
     where(enabled: check).all
   end
@@ -22,5 +38,6 @@ class Merchant < ApplicationRecord
     .where("transactions.result = 0")
     .order(total_price: :desc)
     .first(5)
+
   end
 end
