@@ -30,7 +30,7 @@ describe "Merchants Invoicess index", type: :feature do
         click_link @invoices.last.id
       end
 
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoices.last.id}")
+      expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoices[2]))
     end
   end
 end

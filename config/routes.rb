@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   get "/", to: "application#welcome"
 
   resources :merchants, only: [:show] do
+    resources :dashboard, only: [:index]
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show]
     resources :invoice_items, only: [:update]
-    resources :dashboard, only: [:index]
   end
 
   namespace :admin do

@@ -4,7 +4,7 @@
   <p><strong>Invoice ID: <%= @invoice.id %></strong></p>
   <p><strong>Created At: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></strong></p>
   <p><strong>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></strong></p>
-  <%= form_with(model: [:admin, @invoice]) do |f| %>
+  <%= form_with model: [:admin, @invoice] do |f| %>
     <p><strong>Invoice Status: </strong><%= f.select :status, ['Cancelled', 'In Progress', 'Completed'], status: @invoice.status %>
     <%= f.submit "Update Invoice Status" %>
   <% end %>
@@ -15,10 +15,10 @@
   <div id="invoice_items-<%= invoice_item.id %>">
     <p>Item name: <%= invoice_item.item.name %></p>
     <p>Quantity Ordered: <%= invoice_item.quantity %></p>
-    <p>Item Selling Price: $<%= invoice_item.unit_price %></p>
+    <p>Item Selling Price: <%= number_to_currency(invoice_item.unit_price.fdiv(100)) %></p>
     <p>Item Status: <%= invoice_item.status %></p>
     <br>
   </div>
 <% end %>
 
-<h2>Invoice Total Revenue: $<%= @invoice.total_revenue %></h2>
+<h2>Invoice Total Revenue: $<%= @invoice.total_revenue.fdiv(100) %></h2>
