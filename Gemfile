@@ -30,6 +30,7 @@ gem "faraday"
 gem "factory_bot_rails"
 gem "faker"
 gem "standardrb"
+gem "hirb"
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -49,8 +50,8 @@ group :development, :test do
   gem "orderly"
   gem "simplecov"
   gem "shoulda-matchers", "~> 3.1"
-  gem 'vcr'
-  gem 'webmock'
+  gem "vcr"
+  gem "webmock"
 end
 
 group :development do
