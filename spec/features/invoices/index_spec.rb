@@ -6,31 +6,31 @@ describe "Merchants Invoicess index", type: :feature do
     @items1 = create_list(:item, 3, merchant: @merchant1)
     @customer1 = create(:customer)
     @invoices = create_list(:invoice, 3, customer: @customer1)
-    @invoice_item1 = create(:invoice_item, invoice: @invoices.first, item: @items1.first)
-    @invoice_item2 = create(:invoice_item, invoice: @invoices.second, item: @items1.second)
-    @invoice_item3 = create(:invoice_item, invoice: @invoices.last, item: @items1.last)
+    @invoice_item1 = create(:invoice_item, invoice: @invoices[0], item: @items1[0])
+    @invoice_item2 = create(:invoice_item, invoice: @invoices[1], item: @items1[1])
+    @invoice_item3 = create(:invoice_item, invoice: @invoices[2], item: @items1[2])
   end
 
   describe "display" do
     it "displays all invoices for this merchant", :vcr do
-      visit merchant_invoices_path(@merchant1.id)
+      visit merchant_invoices_path(@merchant1)
 
-      within "#invoice-#{@invoices.first.id}" do
-        expect(page).to have_link(@invoices.first.id)
-        expect(page).to_not have_link(@invoices.second.id)
-        expect(page).to_not have_link(@invoices.last.id)
+      within "#invoice-#{@invoices[0].id}" do
+        expect(page).to have_link(@invoices[0].id)
+        expect(page).to_not have_link(@invoices[1].id)
+        expect(page).to_not have_link(@invoices[2].id)
       end
 
-      within "#invoice-#{@invoices.second.id}" do
-        expect(page).to have_link(@invoices.second.id)
+      within "#invoice-#{@invoices[1].id}" do
+        expect(page).to have_link(@invoices[1].id)
       end
 
-      within "#invoice-#{@invoices.last.id}" do
-        expect(page).to have_link(@invoices.last.id)
-        click_link @invoices.last.id
+      within "#invoice-#{@invoices[2].id}" do
+        expect(page).to have_link(@invoices[2].id)
       end
 
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoices.last.id}")
+      click_link @invoices[2].id
+      expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoices[2]))
     end
   end
 end

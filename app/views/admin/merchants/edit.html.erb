@@ -1,4 +1,4 @@
-  <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :put do |f| %>
+  <%= form_with url: admin_merchant_path(@merchant), method: :put do |f| %>
     <%= f.label :name, "Merchant Name: " %>
     <%= f.text_field :name, value: @merchant.name %>
     <%= f.hidden_field :enabled, value: @merchant.enabled %>

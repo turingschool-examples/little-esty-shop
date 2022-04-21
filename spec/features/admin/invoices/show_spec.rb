@@ -8,14 +8,14 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     @customer2 = create(:customer)
     @invoice1 = create(:invoice, customer: @customer1)
     @invoice2 = create(:invoice, customer: @customer2)
-    @invoice_item1 = create(:invoice_item, invoice: @invoice1, item: @items.first)
-    @invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @items.second)
-    @invoice_item3 = create(:invoice_item, invoice: @invoice2, item: @items.third)
-    @invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items.last)
+    @invoice_item1 = create(:invoice_item, invoice: @invoice1, item: @items[0])
+    @invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @items[1])
+    @invoice_item3 = create(:invoice_item, invoice: @invoice2, item: @items[2])
+    @invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items[3])
   end
 
   it "Shows the attributes for the selected invoice", :vcr do
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoice_path(@invoice1)
 
     within("#invoice-info") do
       expect(page).to have_content(@invoice1.id)
@@ -30,7 +30,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
   end
 
   it "Shows the attributes for the invoice items on the selected invoice", :vcr do
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoice_path(@invoice1)
 
     within("#invoice_items-#{@invoice_item1.id}") do
       expect(page).to have_content(@items.first.name)
@@ -50,7 +50,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
   end
 
   it "Shows the total revenue for the selected invoice", :vcr do
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoice_path(@invoice1)
 
     expected = (@invoice_item1.quantity * @invoice_item1.unit_price) + (@invoice_item2.quantity * @invoice_item2.unit_price)
 
@@ -60,7 +60,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
 
   it "Updates the invoice status to the status that is selected from the status select field", :vcr do
     @invoice1.update(status: "In Progress")
-    visit admin_invoice_path(@invoice1.id)
+    visit admin_invoice_path(@invoice1)
 
     within("#invoice-info") do
       expect(page).to have_content("In Progress")
@@ -69,7 +69,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     select "Completed"
     click_button "Update Invoice Status"
 
-    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+    expect(current_path).to eq(admin_invoice_path(@invoice1))
     expect(@invoice1.reload.status).to eq("Completed")
   end
 end
