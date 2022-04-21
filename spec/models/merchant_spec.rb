@@ -175,4 +175,8 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.best_day(merchant_1.id)[0].invoice_date).to_not eq(invoice_2.created_at)
     end
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> 1504b172fbe457e938a3add614a3def565442f78

@@ -3,3 +3,10 @@
  <p><%= link_to "Merchant Items", merchant_items_path(params[:merchant_id]) %></p>
   <%= link_to "Merchant Invoices", merchant_invoices_path(params[:merchant_id]) %>
 </ul>
+
+ <h3>Items Ready to Ship:</h3>
+ <% @merchant.items_ready_to_ship.each_with_index do |invoice_item, index| %>
+   <div id="items_to_ship-<%= invoice_item.id %>">
+     <p><%= invoice_item.item.name %> Invoice ID: <%= link_to "#{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices" %> Created At: <%= invoice_item.invoice.created_at.strftime("%A, %B %e, %Y") %></p>
+   </div>
+ <% end %>
