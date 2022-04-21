@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Repository do
-  it "exists and has attributes" do
+  it "exists and has attributes expected attributes" do
     data = {name: "Git Repo Test"}
     repo = Repository.new(data)
 

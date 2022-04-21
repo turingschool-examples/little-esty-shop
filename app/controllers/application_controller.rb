@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :repository_info, only: [:index, :show, :edit, :new, :welcome]
+  before_action :repository_info, :contributors_info
 
   def welcome
 
@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   def repository_info
     @repo = RepositoryFacade.repo_or_error_message
+  end
+
+  def contributors_info
+    @contributors = ContributorsFacade.contributors_or_error_message
   end
 
   private

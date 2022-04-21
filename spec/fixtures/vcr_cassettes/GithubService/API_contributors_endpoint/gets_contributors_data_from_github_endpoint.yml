@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop
+    uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop/contributors
     body:
       encoding: US-ASCII
       string: ''
@@ -58,7 +58,7 @@ http_interactions:
       Content-Length:
       - '278'
       X-Github-Request-Id:
-      - E2DA:6AB5:8F05D:18DBF9:62602870
+      - E2DB:6C56:12F42F:291201:62602870
     body:
       encoding: UTF-8
       string: '{"message":"API rate limit exceeded for 99.10.93.177. (But here''s
