@@ -17,18 +17,19 @@ describe "New Items", type: :feature do
   end
 
   it "links to item create page", :vcr do
-    visit "/merchants/#{@merchant2.id}/items"
-      expect(page).to have_link("Add new item")
-      click_link("Add new item")
+    visit merchant_items_path(@merchant2)
 
-      expect(page).to have_current_path("/merchants/#{@merchant2.id}/items/new")
-      expect(find('form')).to have_content('Name')
-      expect(find('form')).to have_content('Description')
-      expect(find('form')).to have_content('Unit price')
+    expect(page).to have_link("Add new item")
+    click_link("Add new item")
+
+    expect(page).to have_current_path(new_merchant_item_path(@merchant2))
+    expect(find('form')).to have_content('Name')
+    expect(find('form')).to have_content('Description')
+    expect(find('form')).to have_content('Unit price')
   end
 
   it "has form for new item", :vcr do
-    visit "/merchants/#{@merchant2.id}/items"
+    visit merchant_items_path(@merchant2)
     click_link("Add new item")
 
     fill_in 'Name', with: "This new item"
@@ -36,7 +37,7 @@ describe "New Items", type: :feature do
     fill_in 'Unit price', with: 2
     click_button 'Submit'
 
-    expect(page).to have_current_path("/merchants/#{@merchant2.id}/items")
+    expect(page).to have_current_path(merchant_items_path(@merchant2))
     expect(page).to have_content("This new item")
   end
 end
