@@ -7,3 +7,14 @@
     <p><%= @repo[:message] %></p>
   <% end %>
 <% end %>
+<% if @contributors.present? %>
+  <% if @contributors.is_a?(Contributors) %>
+    <p>List of contributors:</p>
+    <% @contributors.each do |contributor| %>
+      <p><%= contributor.login %></p>
+    <% end %>
+  <% else %>
+  <p><%= @contributors[:message] %></p>
+  <% end %>
+<% end %>
+
