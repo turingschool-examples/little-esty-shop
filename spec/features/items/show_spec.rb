@@ -17,7 +17,7 @@ RSpec.describe "Merchant Items Show" do
   end
 
   it "shows item attributes", :vcr do
-    visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant, @item1)
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item1.description)

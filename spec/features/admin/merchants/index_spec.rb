@@ -8,7 +8,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
   end
 
   it "Has all merchants", :vcr do
-    visit admin_merchants_path()
+    visit admin_merchants_path
 
     within("#merchants") do
       within("#merchant-#{@merchant_1.id}") do
@@ -30,40 +30,40 @@ RSpec.describe "Admin Merchants Index", type: :feature do
   end
 
   it "Links from index to show page for each merchant", :vcr do
-    visit admin_merchants_path()
+    visit admin_merchants_path
 
     within("#merchants") do
       within("#merchant-#{@merchant_1.id}") do
-        expect(page).to have_link(@merchant_1.name.to_s, href: "/admin/merchants/#{@merchant_1.id}")
-        expect(page).to_not have_link(@merchant_2.name.to_s, href: "/admin/merchants/#{@merchant_2.id}")
-        expect(page).to_not have_link(@merchant_3.name.to_s, href: "/admin/merchants/#{@merchant_3.id}")
+        expect(page).to have_link(@merchant_1.name, href: admin_merchant_path(@merchant_1))
+        expect(page).to_not have_link(@merchant_2.name, href: admin_merchant_path(@merchant_2))
+        expect(page).to_not have_link(@merchant_3.name, href: admin_merchant_path(@merchant_3))
       end
     end
 
-    click_link(@merchant_1.name.to_s)
+    click_link(@merchant_1.name)
 
-    expect(current_path).to eq(admin_merchant_path(@merchant_1.id))
+    expect(current_path).to eq(admin_merchant_path(@merchant_1))
   end
 
   it "Links from index to page for creation of new merchant", :vcr do
-    visit admin_merchants_path()
+    visit admin_merchants_path
 
-    expect(page).to have_link("Create New Merchant", href: "/admin/merchants/new")
+    expect(page).to have_link("Create New Merchant", href: new_admin_merchant_path)
 
     click_link("Create New Merchant")
 
-    expect(current_path).to eq(new_admin_merchant_path())
+    expect(current_path).to eq(new_admin_merchant_path)
   end
 
   it "Has buttons for each merchant to toggle enable/disable status", :vcr do
-    visit admin_merchants_path()
+    visit admin_merchants_path
 
     within("#merchant-#{@merchant_1.id}") do
       expect(page).to have_link("Enabled")
       click_link("Enabled")
     end
 
-    expect(current_path).to eq(admin_merchants_path())
+    expect(current_path).to eq(admin_merchants_path)
 
     within("#merchant-#{@merchant_1.id}") do
       expect(page).to have_link("Disabled")
@@ -72,7 +72,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
 
   it 'Sorts merchants on enabled/disabled status', :vcr do
     merchant_4 = Merchant.create!(name: "This Is A Test Value", enabled: false)
-    visit admin_merchants_path()
+    visit admin_merchants_path
 
     within("#enabled-merchants") do
       expect(page).to have_content(@merchant_1.name)
@@ -86,7 +86,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
       expect(page).to_not have_content(@merchant_2.name)
       expect(page).to_not have_content(@merchant_3.name)
       expect(page).to have_content(merchant_4.name)
-    end      
+    end
   end
 
   it 'Finds top 5 merchants', :vcr do
@@ -116,8 +116,8 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     invoice_item_4 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_4.id, quantity: 4, unit_price: item_4.unit_price)
     invoice_item_5 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_5.id, quantity: 3, unit_price: item_5.unit_price)
     invoice_item_6 = InvoiceItem.create!(invoice_id: invoice_2.id, item_id: item_6.id, quantity: 3, unit_price: item_6.unit_price)
-    
-    visit admin_merchants_path()
+
+    visit admin_merchants_path
 
     within("#top_five_merchants") do
       expect(page).to have_content(@merchant_1.name)

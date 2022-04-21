@@ -15,17 +15,18 @@ describe "Merchants Items update", type: :feature do
     @invoice_item2 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item2.id, quantity: 1, unit_price: 45, status: 1}
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
   end
+
   it "displays update link", :vcr do
-    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant1, @item1)
 
     expect(page).to have_link("Update #{@item1.name}")
     click_link("Update #{@item1.name}")
 
-    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
+    expect(page).to have_current_path(edit_merchant_item_path(@merchant1, @item1))
   end
 
   it "has form to update item", :vcr do
-    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant1, @item1)
     click_link("Update #{@item1.name}")
 
     expect(find("form")).to have_content("Name")
@@ -35,35 +36,34 @@ describe "Merchants Items update", type: :feature do
   end
 
   it "updates item info", :vcr do
-    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant1, @item1)
     click_link("Update #{@item1.name}")
 
     fill_in "Name", with: "Different Item"
     click_button "Save"
 
-    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+    expect(page).to have_current_path(merchant_item_path(@merchant1, @item1))
     expect(page).to have_content("Different Item")
     expect(page).to have_content("Item updated successfully")
   end
 
   it "displays error message", :vcr do
-    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant1, @item1)
     click_link("Update #{@item1.name}")
 
     fill_in "Name", with: ""
     click_button "Save"
 
     expect(page).to have_content("Error: Name can't be blank")
-    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
+    expect(page).to have_current_path(edit_merchant_item_path(@merchant1, @item1))
   end
 
   it "merchant can enable and disable items", :vcr do
-    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+    visit merchant_item_path(@merchant1, @item1)
     if @item1.enabled == "enabled"
       expect(page).to have_button("Disable #{@item1.name}")
       click_button "Disable #{@item1.name}"
 
-      # expect(@item1.enabled).to eq("disabled") #this is not working, but page looks updated?
       expect(page).to have_content("Item updated successfully")
       expect(page).to have_button("Enable #{@item1.name}")
     end
@@ -72,8 +72,7 @@ describe "Merchants Items update", type: :feature do
       expect(page).to have_button("Enable #{@item1.name}")
       click_button "Enable #{@item1.name}"
 
-      # expect(@item1.enabled).to eq("enabled") #this is not working, but page looks updated?
-      expect(page).to have_content("Item updated successfully")
+      expect(page).to have_content("#{@item1.name} updated successfully")
       expect(page).to have_button("Disable #{@item1.name}")
     end
   end

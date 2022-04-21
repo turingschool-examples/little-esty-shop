@@ -1,10 +1,12 @@
 <h1><%= @merchant.name %> Items</h1>
-<%= link_to "Add new item", "/merchants/#{@merchant.id}/items/new" %>
+<%= link_to "Add new item", new_merchant_item_path(@merchant) %>
+
+
 
 <div id="popular_items">
   <h3>Most Popular Items</h3>
   <% @merchant.popular_items.each do |item| %>
-  <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Total Revenue: $<%=item.revenue%>
+  <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %> Total Revenue: $<%=item.revenue%>
     Best day for sales: <%=item.item_best_day%>
 
   <% end %>
@@ -15,13 +17,13 @@
   <div id="enabled">
     <h3>Enabled Items</h3>
     <% @merchant.enabled_items.each do |item| %>
-    <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %>
     <% end %>
     </div>
   <div id="disabled">
     <h3>Disabled Items</h3>
       <% @merchant.disabled_items.each do |item| %>
-      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <%= link_to "#{item.name}", merchant_item_path(@merchant, item.id) %>
       <% end %>
   </div>
 </div>

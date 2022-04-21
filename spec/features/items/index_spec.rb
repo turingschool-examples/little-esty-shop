@@ -21,6 +21,7 @@ describe "Merchants Items index", type: :feature do
   describe "display" do
     it "displays all items from this merchant in order by item", :vcr do
       visit merchant_items_path(@merchant)
+
       within "#merchant_items" do
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item2.name)
@@ -30,15 +31,18 @@ describe "Merchants Items index", type: :feature do
 
     it "links to item show page", :vcr do
       visit merchant_items_path(@merchant2)
-      within "#merchant_items" do
-        expect(page).to have_link(@item3.name.to_s)
-        click_link(@item3.name.to_s)
 
-        expect(page).to have_current_path("/merchants/#{@merchant2.id}/items/#{@item3.id}")
+      within "#merchant_items" do
+        expect(page).to have_link(@item3.name)
+        click_link(@item3.name)
+
+        expect(page).to have_current_path(merchant_item_path(@merchant2, @item3))
       end
     end
+
     it "has sections for enabled and disabled items", :vcr do
       visit merchant_items_path(@merchant)
+
       within "#enabled" do
         expect(page).to have_content(@item1.name)
       end
@@ -46,17 +50,21 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_content(@item2.name)
       end
     end
+
     it "displays popular items", :vcr do
       visit merchant_items_path(@merchant)
+
       within "#popular_items" do
         expect(page).to have_content("Total Revenue: $#{@invoice_item1.unit_price}")
-        expect(page).to have_link(@item1.name.to_s)
-        click_link(@item1.name.to_s)
-        expect(page).to have_current_path("/merchants/#{@merchant.id}/items/#{@item1.id}")
+        expect(page).to have_link(@item1.name)
+        click_link(@item1.name)
+        expect(page).to have_current_path(merchant_item_path(@merchant, @item1))
       end
     end
+
     it "displays best sales day for each item", :vcr do
       visit merchant_items_path(@merchant)
+
       within "#popular_items" do
         expect(page).to have_content("Best day for sales: #{@invoice1.created_at}")
       end

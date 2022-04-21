@@ -12,7 +12,7 @@ class Admin::MerchantsController < ApplicationController
 
   def create
     Merchant.create!(merchant_params)
-    redirect_to("/admin/merchants")
+    redirect_to admin_merchants_path
   end
 
   def switch
@@ -26,8 +26,22 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    Merchant.update(params[:id], merchant_params)
-    redirect_to("/admin/merchants/#{params[:id]}")
+    @merchant = Merchant.find(params[:id])
+    if @merchant.update(merchant_params)
+      redirect_to admin_merchant_path(params[:id])
+      flash[:alert] = "Update Successful"
+    end
+  end
+
+  def enable
+    @merchant = Merchant.find(params[:id])
+    if params[:enabled] == "true"
+      @merchant.update(enabled: true)
+      redirect_to admin_merchants_path
+    else
+      @merchant.update(enabled: false)
+      redirect_to admin_merchants_path
+    end
   end
 
   private

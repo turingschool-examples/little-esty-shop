@@ -7,7 +7,7 @@ RSpec.describe "Admin Merchant Show", type: :feature do
   end
 
   it "Shows the name attribute for the selected merchant", :vcr do
-    visit "admin/merchants/#{@merchant_1.id}"
+    visit admin_merchant_path(@merchant_1)
 
     within("#merchant-info") do
       expect(page).to have_content(@merchant_1.name)
@@ -16,14 +16,16 @@ RSpec.describe "Admin Merchant Show", type: :feature do
   end
 
   it "contains a link to edit the merchant", :vcr do
-    visit "admin/merchants/#{@merchant_2.id}"
+    visit admin_merchant_path(@merchant_2)
 
     within("#update-merchant") do
-      expect(page).to have_link("Edit Merchant", href: "#{@merchant_2.id}/edit")
+      expect(page).to have_link("Edit Merchant", href: edit_admin_merchant_path(@merchant_2.id))
+      expect(page).to_not have_link("Edit Merchant", href: edit_admin_merchant_path(@merchant_1.id))
     end
 
     click_link("Edit Merchant")
 
-    expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}/edit")
+    expect(current_path).to eq(edit_admin_merchant_path(@merchant_2))
+    expect(current_path).to_not eq(edit_admin_merchant_path(@merchant_1))
   end
 end
