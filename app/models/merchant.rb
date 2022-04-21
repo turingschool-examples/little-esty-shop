@@ -23,6 +23,7 @@ class Merchant < ApplicationRecord
         .select('SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue, items.*')
         .order('revenue desc')
         .limit(5)
+  end
 
   def self.enabled_check(check)
     where(enabled: check).all
