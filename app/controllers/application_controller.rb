@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :repository_info, :contributors_info
 
   def welcome
+
   end
 
   def repository_info

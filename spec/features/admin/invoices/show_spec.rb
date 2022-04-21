@@ -15,7 +15,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
   end
 
   it "Shows the attributes for the selected invoice", :vcr do
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoice_path(@invoice1.id)
 
     within("#invoice-info") do
       expect(page).to have_content(@invoice1.id)
@@ -30,7 +30,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
   end
 
   it "Shows the attributes for the invoice items on the selected invoice", :vcr do
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoice_path(@invoice1.id)
 
     within("#invoice_items-#{@invoice_item1.id}") do
       expect(page).to have_content(@items.first.name)
@@ -50,7 +50,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
   end
 
   it "Shows the total revenue for the selected invoice", :vcr do
-    visit "/admin/invoices/#{@invoice1.id}"
+    visit admin_invoice_path(@invoice1.id)
 
     expected = (@invoice_item1.quantity * @invoice_item1.unit_price) + (@invoice_item2.quantity * @invoice_item2.unit_price)
 
@@ -69,7 +69,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     select "Completed"
     click_button "Update Invoice Status"
 
-    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+    expect(current_path).to eq(admin_invoice_path(@invoice1.id))
     expect(@invoice1.reload.status).to eq("Completed")
   end
 end
