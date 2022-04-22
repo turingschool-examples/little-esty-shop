@@ -17,10 +17,10 @@ class Merchant < ApplicationRecord
   end
 
   def popular_items
-    Item.joins(invoice_items: {invoice: :transactions})
-        .where(transactions: {result: 0}, merchant_id: self.id) #might not need merch id
-        .group(:id)
+    items.joins(invoice_items: {invoice: :transactions})
+        .where(transactions: {result: 0})
         .select('SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue, items.*')
+        .group(:id)
         .order('revenue desc')
         .limit(5)
   end
@@ -34,11 +34,12 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_sellers
-    joins(:invoice_items, :invoices, :transactions)
-    .select("invoice_items.quantity * invoice_items.unit_price AS total_price, merchants.*")
+    joins(invoice_items: {invoice: :transactions})
     .where("transactions.result = 0")
+    .select("SUM(invoice_items.quantity * invoice_items.unit_price) AS total_price, merchants.*")
+    .group(:id)
     .order(total_price: :desc)
-    .first(5)
+    .limit(5)
   end
 
   def items_ready_to_ship
