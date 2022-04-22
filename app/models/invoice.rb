@@ -13,7 +13,7 @@ class Invoice < ApplicationRecord
     invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
-  def incomplete_invoices
-    invoice_items.where(status: [0, 1])
+  def self.incomplete_invoices
+    where(status: [0, 1])
   end
 end
