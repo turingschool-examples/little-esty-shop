@@ -40,11 +40,11 @@ RSpec.describe Invoice, type: :model do
     merch = create(:merchant)
     item = create(:item, merchant: merch)
     customer = create(:customer)
-    incomplete_invoice = create(:invoice, customer: customer, status: 1)
-    incomplete_invoice_item = create(:invoice_item, invoice: incomplete_invoice, item: item, status: 1)
-    complete_invoice = create(:invoice, customer: customer, status: 2)
-    complete_invoice_item = create(:invoice_item, invoice: complete_invoice, item: item, status: 2)
-    expect(Invoice.incomplete_invoices[0]).to eq(incomplete_invoice)
-    expect(Invoice.incomplete_invoices[1]).to eq(nil)
+    invoice1 = create(:invoice, customer: customer, status: 1)
+    invoice2 = create(:invoice, customer: customer, status: 2)
+    invoice_item1 = create(:invoice_item, invoice: invoice1, item: item, status: 1)
+    invoice_item2 = create(:invoice_item, invoice: invoice1, item: item, status: 2)
+
+    expect(invoice1.incomplete_invoices).to eq([invoice_item1])
   end
 end
