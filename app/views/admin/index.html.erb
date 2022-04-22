@@ -3,6 +3,13 @@
 </div>
 
 <div id="dashboard-links">
-   <p><%= link_to "Merchants View", admin_merchants_path %></p>
+  <p><%= link_to "Merchants View", admin_merchants_path %></p>
   <p><%= link_to "Invoices View", admin_invoices_path %></p>
 </div>
+
+<h3>Incomplete Invoices:</h3>
+<% @invoices.incomplete_invoices.each_with_index do |invoice, index|%>
+  <div id="incomplete-invoices-<%= invoice.id %>">
+    <p><strong><%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> Created At: <%= invoice.created_at.strftime("%A, %B %e, %Y") %></strong></p>
+  </div>
+<% end %>
