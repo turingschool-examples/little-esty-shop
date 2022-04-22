@@ -70,7 +70,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end
   end
 
-  it 'Sorts merchants on enabled/disabled status', :vcr do
+  it "Sorts merchants on enabled/disabled status", :vcr do
     merchant_4 = Merchant.create!(name: "This Is A Test Value", enabled: false)
     visit admin_merchants_path
 
@@ -89,7 +89,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end
   end
 
-  it 'Finds top 5 merchants', :vcr do
+  it "Finds top 5 merchants", :vcr do
     merchant_4 = create(:merchant)
     merchant_5 = create(:merchant)
     merchant_6 = create(:merchant)
@@ -97,12 +97,12 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     customer_1 = create(:customer)
     customer_2 = create(:customer)
 
-    item_1 = Item.create!(name: "Gloomhaven", description: "Lorem ipsum", unit_price: 5, enabled: 0, merchant_id: @merchant_1.id)
-    item_2 = Item.create!(name: "Frosthaven", description: "Lorem ipsum 2", unit_price: 7, enabled: 0, merchant_id: @merchant_2.id)
-    item_3 = Item.create!(name: "Monopoly", description: "The worst board game", unit_price: 4, enabled: 0, merchant_id: @merchant_3.id)
-    item_4 = Item.create!(name: "Mysterium", description: "Lorem ipsum 4", unit_price: 4, enabled: 0, merchant_id: merchant_4.id)
-    item_5 = Item.create!(name: "Apocrypha", description: "Lorem ipsum 5", unit_price: 8, enabled: 0, merchant_id: merchant_5.id)
-    item_6 = Item.create!(name: "Zombicide", description: "Lorem ipsum 6", unit_price: 6, enabled: 0, merchant_id: merchant_6.id)
+    item_1 = create :item, {unit_price: 5, enabled: 0, merchant_id: @merchant_1.id}
+    item_2 = create :item, {unit_price: 7, enabled: 0, merchant_id: @merchant_2.id}
+    item_3 = create :item, {unit_price: 4, enabled: 0, merchant_id: @merchant_3.id}
+    item_4 = create :item, {unit_price: 4, enabled: 0, merchant_id: merchant_4.id}
+    item_5 = create :item, {unit_price: 8, enabled: 0, merchant_id: merchant_5.id}
+    item_6 = create :item, {unit_price: 6, enabled: 0, merchant_id: merchant_6.id}
 
     invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 2)
     invoice_2 = Invoice.create!(customer_id: customer_2.id, status: 2)
