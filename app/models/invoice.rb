@@ -14,6 +14,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete_invoices
-    where(status: [0, 1])
+    joins(:invoice_items).where("invoice_items.status = 0 OR invoice_items.status = 1").group("invoices.id")
   end
 end

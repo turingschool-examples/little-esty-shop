@@ -36,15 +36,15 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  it "displays incomplete invoices", :vcr do
+  it "displays incomplete invoices" do
     merch = create(:merchant)
     item = create(:item, merchant: merch)
     customer = create(:customer)
-    invoice1 = create(:invoice, customer: customer, status: 1)
-    invoice2 = create(:invoice, customer: customer, status: 2)
+    invoice1 = create(:invoice, customer: customer)
+    invoice2 = create(:invoice, customer: customer)
     invoice_item1 = create(:invoice_item, invoice: invoice1, item: item, status: 1)
     invoice_item2 = create(:invoice_item, invoice: invoice1, item: item, status: 2)
-
-    expect(invoice1.incomplete_invoices).to eq([invoice_item1])
+    invoice_all = Invoice.all
+    expect(invoice_all.incomplete_invoices[0]).to eq(invoice1)
   end
 end

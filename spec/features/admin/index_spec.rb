@@ -22,14 +22,23 @@ RSpec.describe "Admin Dashboard", type: :feature do
     merch = create(:merchant)
     item = create(:item, merchant: merch)
     customer = create(:customer)
-    invoice1 = create(:invoice, customer: customer, status: 0)
-    invoice2 = create(:invoice, customer: customer, status: 1)
-    invoice3 = create(:invoice, customer: customer, status: 2)
+    invoice1 = create(:invoice, customer: customer)
+    invoice2 = create(:invoice, customer: customer)
+    invoice3 = create(:invoice, customer: customer)
+    invoice_item1 = create(:invoice_item, invoice: invoice1, item: item, status: 0)
+    invoice_item2 = create(:invoice_item, invoice: invoice1, item: item, status: 0)
+    invoice_item3 = create(:invoice_item, invoice: invoice1, item: item, status: 2)
+    invoice_item4 = create(:invoice_item, invoice: invoice2, item: item, status: 1)
+    invoice_item5 = create(:invoice_item, invoice: invoice2, item: item, status: 1)
+    invoice_item6 = create(:invoice_item, invoice: invoice2, item: item, status: 2)
+    invoice_item7 = create(:invoice_item, invoice: invoice3, item: item, status: 2)
+    invoice_item8 = create(:invoice_item, invoice: invoice3, item: item, status: 2)
+    invoice_item9 = create(:invoice_item, invoice: invoice3, item: item, status: 2)
 
     visit admin_index_path
 
     expect(page).to have_content("Incomplete Invoices:")
-
+    save_and_open_page
     within("#incomplete-invoices-#{invoice1.id}") do
       expect(page).to have_content(invoice1.id.to_s)
       expect(page).to_not have_content(invoice2.id.to_s)
