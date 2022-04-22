@@ -9,11 +9,11 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def enabled_items
-    Item.where(merchant_id: self.id).where(enabled: "enabled")
+    Item.where(merchant_id: id).where(enabled: "enabled")
   end
 
   def disabled_items
-    Item.where(merchant_id: self.id).where(enabled: "disabled")
+    Item.where(merchant_id: id).where(enabled: "disabled")
   end
 
   def popular_items

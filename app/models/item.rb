@@ -13,11 +13,11 @@ class Item < ApplicationRecord
   enum enabled: {enabled: 0, disabled: 1}
 
   def item_best_day
-        Item.joins(invoice_items: {invoice: :transactions})
-        .where(transactions: {result: 0})
-        .select('invoices.*, SUM(invoice_items.quantity)')
-        .group('invoices.id, items.id')
-        .order(sum: :desc) #sum all the quantites for each date
-        .first.created_at
-      end
+    Item.joins(invoice_items: {invoice: :transactions})
+      .where(transactions: {result: 0})
+      .select("invoices.*, SUM(invoice_items.quantity)")
+      .group("invoices.id, items.id")
+      .order(sum: :desc) # sum all the quantites for each date
+      .first.created_at
+  end
 end

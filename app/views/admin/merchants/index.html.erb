@@ -1,21 +1,26 @@
 <h1>Merchants Dashboard</h1>
-
+<div id="new_merchant_link">
+  <p><strong><%= link_to "Create New Merchant", new_admin_merchant_path %></strong></p>
+</div>
+<hr>
 <div id="merchants">
-
+  <h2>Top Five Merchants:</h2>
   <div id="top_five_merchants">
     <% @merchants.top_sellers.each do |merchant| %>
-      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-      <h2>Total Revenue: <%= merchant.total_revenue %></h2>
+      <h3><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>  Total Revenue: <%= number_to_currency(merchant.total_revenue.fdiv(100)) %></h3>
     <% end %>
   </div>
+  <hr>
+  <h3>Enabled Merchants:</h3>
   <div id="enabled-merchants">
     <% @merchants.enabled_check(true).each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
-        <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-        <%= link_to "Enabled", admin_merchant_path(merchant.id), method: :patch %>
+        <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+        <%= link_to "Enabled", admin_merchant_path(merchant.id), method: :patch %></p>
       </div>
     <% end %>
   </div>
+  <h3>Disabled Merchants:</h3>
   <div id="disabled-merchants">
     <% @merchants.enabled_check(false).each do |merchant| %>
       <div id="merchant-<%= merchant.id %>">
@@ -24,9 +29,4 @@
       </div>
     <% end %>
   </div>
-</div>
-
-
-<div id="new_merchant_link">
-  <%= link_to "Create New Merchant", new_admin_merchant_path %>
 </div>
