@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
   attribute :status, :string, default: "disabled"
 
+  has_many :bulk_discounts
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
