@@ -19,7 +19,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Sun, 17 Apr 2022 22:15:07 GMT
+      - Fri, 22 Apr 2022 07:01:54 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -50,21 +50,21 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650237292'
+      - '1650614237'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '276'
+      - '278'
       X-Github-Request-Id:
-      - C77D:694A:25FBE92:79989F5:625C916B
+      - DCDD:23B3:F311B5:1D78E51:626252E2
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 24.8.241.1. (But here''s the
-        good news: Authenticated requests get a higher rate limit. Check out the documentation
-        for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+      string: '{"message":"API rate limit exceeded for 73.217.7.141. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Sun, 17 Apr 2022 22:15:07 GMT
+  recorded_at: Fri, 22 Apr 2022 07:01:54 GMT
 recorded_with: VCR 6.1.0

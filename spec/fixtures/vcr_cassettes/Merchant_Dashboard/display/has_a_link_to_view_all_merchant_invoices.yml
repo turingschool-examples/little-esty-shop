@@ -19,7 +19,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Sun, 17 Apr 2022 22:15:11 GMT
+      - Fri, 22 Apr 2022 07:01:57 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -50,23 +50,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650237292'
+      - '1650614237'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '276'
+      - '278'
       X-Github-Request-Id:
-      - C78D:0F6B:FC957A:2A3C70F:625C916F
+      - DCED:5F31:F025D9:1CD6190:626252E5
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 24.8.241.1. (But here''s the
-        good news: Authenticated requests get a higher rate limit. Check out the documentation
-        for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+      string: '{"message":"API rate limit exceeded for 73.217.7.141. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Sun, 17 Apr 2022 22:15:11 GMT
+  recorded_at: Fri, 22 Apr 2022 07:01:57 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop
@@ -86,7 +86,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Sun, 17 Apr 2022 22:15:11 GMT
+      - Fri, 22 Apr 2022 07:01:57 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -117,21 +117,21 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650237292'
+      - '1650614236'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '276'
+      - '278'
       X-Github-Request-Id:
-      - C78E:5CD3:1DCE487:426FAD8:625C916F
+      - DCEE:8869:B1DA77:219EA52:626252E5
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 24.8.241.1. (But here''s the
-        good news: Authenticated requests get a higher rate limit. Check out the documentation
-        for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+      string: '{"message":"API rate limit exceeded for 73.217.7.141. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Sun, 17 Apr 2022 22:15:11 GMT
+  recorded_at: Fri, 22 Apr 2022 07:01:57 GMT
 recorded_with: VCR 6.1.0
