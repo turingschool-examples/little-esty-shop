@@ -19,7 +19,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Sun, 17 Apr 2022 22:15:09 GMT
+      - Fri, 22 Apr 2022 07:01:55 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -50,23 +50,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650237292'
+      - '1650614236'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '276'
+      - '278'
       X-Github-Request-Id:
-      - C785:6946:76EFA6:1ACA031:625C916D
+      - DCE5:0E4C:5E07AA:E0A71A:626252E3
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 24.8.241.1. (But here''s the
-        good news: Authenticated requests get a higher rate limit. Check out the documentation
-        for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+      string: '{"message":"API rate limit exceeded for 73.217.7.141. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Sun, 17 Apr 2022 22:15:09 GMT
+  recorded_at: Fri, 22 Apr 2022 07:01:55 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop
@@ -86,7 +86,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Sun, 17 Apr 2022 22:15:09 GMT
+      - Fri, 22 Apr 2022 07:01:56 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -117,23 +117,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650237292'
+      - '1650614237'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '276'
+      - '278'
       X-Github-Request-Id:
-      - C786:7D6E:2D5C2DF:7B49AF1:625C916D
+      - DCE6:4913:B85A56:21CE8DD:626252E4
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 24.8.241.1. (But here''s the
-        good news: Authenticated requests get a higher rate limit. Check out the documentation
-        for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+      string: '{"message":"API rate limit exceeded for 73.217.7.141. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Sun, 17 Apr 2022 22:15:09 GMT
+  recorded_at: Fri, 22 Apr 2022 07:01:56 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/ScottSullivanltd/little-esty-shop
@@ -153,7 +153,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Sun, 17 Apr 2022 22:15:09 GMT
+      - Fri, 22 Apr 2022 07:01:56 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -184,21 +184,21 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650237292'
+      - '1650614237'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '276'
+      - '278'
       X-Github-Request-Id:
-      - C787:6E84:3284F62:60EC2EF:625C916D
+      - DCE7:1500:8C1B18:13DF7A6:626252E4
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 24.8.241.1. (But here''s the
-        good news: Authenticated requests get a higher rate limit. Check out the documentation
-        for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
+      string: '{"message":"API rate limit exceeded for 73.217.7.141. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Sun, 17 Apr 2022 22:15:09 GMT
+  recorded_at: Fri, 22 Apr 2022 07:01:56 GMT
 recorded_with: VCR 6.1.0

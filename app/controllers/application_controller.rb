@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :repository_info, only: [:index, :show, :edit, :new]
+  # before_action :repository_info, only: [:index, :show, :edit, :new]
 
   def welcome
   end
