@@ -3,46 +3,46 @@ require "rails_helper"
 describe "merchant dashboard page" do
   before do
     @merchant_1 = Merchant.create!(
-      name: "Store Store",
+      name: "Store Store"
     )
     @merchant_2 = Merchant.create!(
-      name: "Erots",
+      name: "Erots"
     )
 
     @cup = @merchant_1.items.create!(
       name: "Cup",
       description: "What the **** is this thing?",
-      unit_price: 10000,
+      unit_price: 10000
     )
     @soccer = @merchant_1.items.create!(
       name: "Soccer Ball",
       description: "A ball of pure soccer.",
-      unit_price: 32000,
+      unit_price: 32000
     )
     @beer = @merchant_2.items.create!(
       name: "Beer",
       description: "Happiness <3",
-      unit_price: 100,
+      unit_price: 100
     )
 
     @customer_1 = Customer.create!(
       first_name: "Malcolm",
-      last_name: "Jordan",
+      last_name: "Jordan"
     )
     @customer_2 = Customer.create!(
       first_name: "Jimmy",
-      last_name: "Felony",
+      last_name: "Felony"
     )
 
     @invoice_1 = @customer_1.invoices.create!(
       status: 0,
-      created_at: "Thu, 14 Apr 2022 00:00:00 UTC +00:00",
+      created_at: "Thu, 14 Apr 2022 00:00:00 UTC +00:00"
     )
     @invoice_2 = @customer_1.invoices.create!(
-      status: 1,
+      status: 1
     )
     @invoice_3 = @customer_2.invoices.create!(
-      status: 0,
+      status: 0
     )
 
     @invoice_item_1 = InvoiceItem.create!(
@@ -50,28 +50,28 @@ describe "merchant dashboard page" do
       invoice_id: @invoice_1.id,
       quantity: 2,
       unit_price: @soccer.unit_price * 2,
-      status: 0,
+      status: 0
     )
     @invoice_item_2 = InvoiceItem.create!(
       item_id: @cup.id,
       invoice_id: @invoice_1.id,
       quantity: 4,
       unit_price: @cup.unit_price * 4,
-      status: 0,
+      status: 0
     )
     @invoice_item_3 = InvoiceItem.create!(
       item_id: @soccer.id,
       invoice_id: @invoice_2.id,
       quantity: 4,
       unit_price: @soccer.unit_price * 4,
-      status: 2,
+      status: 2
     )
     @invoice_item_4 = InvoiceItem.create!(
       item_id: @beer.id,
       invoice_id: @invoice_3.id,
       quantity: 2,
       unit_price: @beer.unit_price * 2,
-      status: 0,
+      status: 0
     )
 
     visit "/merchants/#{@merchant_1.id}/dashboard"
@@ -99,12 +99,17 @@ describe "merchant dashboard page" do
     expect(page).not_to have_content("Invoice ##{@invoice_3.id}")
   end
 
+  it "has link to bulk discounts index page" do
+    click_link "View all discounts"
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/bulk_discounts")
+  end
+
   describe "items ready to ship section" do
     it "displays items ready to ship", :vcr do
       @basketball = @merchant_1.items.create!(
         name: "Basketball",
         description: "A ball of pure basket.",
-        unit_price: 35000,
+        unit_price: 35000
       )
 
       expect(page).to have_content("Items ready to ship")
@@ -134,12 +139,12 @@ describe "merchant dashboard page" do
       @basketball = @merchant_1.items.create!(
         name: "Basketball",
         description: "A ball of pure basket.",
-        unit_price: 35000,
+        unit_price: 35000
       )
 
       @invoice_4 = @customer_2.invoices.create!(
         status: 0,
-        created_at: "Tue, 12 Apr 2022 00:00:00 UTC +00:00",
+        created_at: "Tue, 12 Apr 2022 00:00:00 UTC +00:00"
       )
 
       @invoice_item_5 = InvoiceItem.create!(
@@ -147,7 +152,7 @@ describe "merchant dashboard page" do
         invoice_id: @invoice_4.id,
         quantity: 2,
         unit_price: @basketball.unit_price * 2,
-        status: 0,
+        status: 0
       )
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
@@ -214,7 +219,7 @@ describe "merchant dashboard page" do
     transaction_13 = invoice_13.transactions.create!(credit_card_number: 4023948573948293, result: "success")
 
     visit "/merchants/#{merch_1.id}/dashboard"
-    
+
     expect("Name: Debbie Twolegs").to appear_before("Name: Tommy Doubleleg")
     expect("Name: Tommy Doubleleg").to appear_before("Name: Brian Twinlegs")
     expect("Name: Brian Twinlegs").to appear_before("Name: Jared Goffleg")
