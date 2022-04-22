@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :bulk_discounts, only: [:index]
   end
 
+  resources :bulk_discounts, only: [:show]
+
   get "/admin", to: "admin/dashboard#index"
   get "/admin/merchants", to: "admin/merchants#index"
   get "/admin/invoices", to: "admin/invoices#index"
