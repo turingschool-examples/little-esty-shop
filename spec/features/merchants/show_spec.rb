@@ -102,6 +102,7 @@ describe "merchant dashboard page" do
   it "has link to bulk discounts index page" do
     click_link "View all discounts"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/bulk_discounts")
+    expect(page).to have_content("Bulk Discounts")
   end
 
   describe "items ready to ship section" do
