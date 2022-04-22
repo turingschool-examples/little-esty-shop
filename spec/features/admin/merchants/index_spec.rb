@@ -73,7 +73,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
   it "Sorts merchants on enabled/disabled status", :vcr do
     merchant_4 = Merchant.create!(name: "This Is A Test Value", enabled: false)
     visit admin_merchants_path
-    save_and_open_page
+
     within("#enabled-merchants") do
       expect(page).to have_content(@merchant_1.name)
       expect(page).to have_content(@merchant_2.name)
