@@ -36,7 +36,7 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  it "displays incomplete invoices" do
+  it "displays incomplete invoices with date it was created and link to their show page" do
     merch = create(:merchant)
     item = create(:item, merchant: merch)
     customer = create(:customer)
@@ -46,5 +46,7 @@ RSpec.describe Invoice, type: :model do
     invoice_item2 = create(:invoice_item, invoice: invoice1, item: item, status: 2)
     invoice_all = Invoice.all
     expect(invoice_all.incomplete_invoices[0]).to eq(invoice1)
+    expect(invoice_all.incomplete_invoices[0].created_at.strftime("%A, %B %e, %Y")).to eq(invoice1.created_at.strftime("%A, %B %e, %Y"))
+    expect(invoice_all.incomplete_invoices.length).to eq(1)
   end
 end
