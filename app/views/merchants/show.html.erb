@@ -1,15 +1,19 @@
-<h1><%= @merchant.name %>
-</h1>
+<h1><%= @merchant.name %></h1>
 <br>
 <h3>
   <a href="/merchants/<%= @merchant.id %>/items">
     <%= @merchant.name %>'s Items
   </a>
-</h3><br/>
+</h3>
 <h3>
   <a href="/merchants/<%= @merchant.id %>/invoices">
     Invoices
   </a>
+</h3>
+<h3>
+  <a href="/merchants/<%= @merchant.id %>/bulk_discounts">
+    View all discounts
+    </a>
 </h3>
 
 <h2>Top 5 Customers:
