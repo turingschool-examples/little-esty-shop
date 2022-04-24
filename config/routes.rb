@@ -13,10 +13,10 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create, :update, :show]
     resources :invoices, only: [:index, :show]
     resources :invoice_items, only: [:update]
-    resources :bulk_discounts, only: [:index, :new, :create, :destroy]
+    resources :bulk_discounts, only: [:index, :new, :create, :destroy, :show]
   end
 
-  resources :bulk_discounts, only: [:show]
+  # resources :bulk_discounts, only: [:show]
 
   get "/admin", to: "admin/dashboard#index"
   get "/admin/merchants", to: "admin/merchants#index"
