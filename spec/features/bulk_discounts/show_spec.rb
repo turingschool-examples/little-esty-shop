@@ -16,4 +16,9 @@ RSpec.describe "Bulk discounts show page" do
     expect(page).to_not have_content("Percentage: 0.2")
     expect(page).to_not have_content("Quantity: 40000")
   end
+
+  it "links to bulk discounts edit page" do
+    click_link "Edit"
+    expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount_a.id}/edit")
+  end
 end
