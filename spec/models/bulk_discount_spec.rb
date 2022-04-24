@@ -1,5 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe BulkDiscount, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe BulkDiscount do
+  describe "relationships" do
+    it { should belong_to(:merchant) }
+  end
+
+  describe "validations" do
+    it { should validate_numericality_of(:percentage) }
+    it { should validate_numericality_of(:quantity) }
+  end
 end
