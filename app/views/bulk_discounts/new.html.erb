@@ -1,0 +1,8 @@
+<h1> New bulk discount for: <%= @merchant.name %></h1>
+<%= form_with url: "/merchants/#{@merchant.id}/bulk_discounts", method: :post do |f| %>
+  <%= f.label :percentage, "Percentage:" %>
+  <%= f.number_field :percentage %>
+  <%= f.label :quantity, "Item quantity:" %>
+  <%= f.number_field :quantity %>
+  <%= f.submit "Create discount" %>
+<% end %>

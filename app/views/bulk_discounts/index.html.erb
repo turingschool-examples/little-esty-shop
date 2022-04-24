@@ -1,8 +1,13 @@
 <h1>Bulk Discounts</h1>
 <% @bulk_discounts.each do |bulk_discount| %>
   <div>
+    <br>
     Bulk Discount: <a href="/bulk_discounts/<%=bulk_discount.id%>"><%= bulk_discount.id %></a>
+    <br>
     Percentage: <%= bulk_discount.percentage %>
+    <br>
     Quantity: <%= bulk_discount.quantity %>
   </div>
 <% end %>
+<br>
+<a href="/merchants/<%= @merchant.id %>/bulk_discounts/new">New bulk discount</a>
