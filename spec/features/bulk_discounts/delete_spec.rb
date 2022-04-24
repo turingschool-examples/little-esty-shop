@@ -15,7 +15,8 @@ RSpec.describe "Bulk discounts delete page" do
   it "has link to delete bulk discount" do
     within "##{bulk_discount_b.id}" do
       click_link "Delete"
-      expect(page).to_not have_content("Bulk Discount: #{bulk_discount_b.id}")
     end
+
+    expect(page).to_not have_content("Bulk Discount: #{bulk_discount_b.id}")
   end
 end
