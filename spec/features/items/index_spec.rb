@@ -19,7 +19,7 @@ describe "Merchants Items index", type: :feature do
   end
 
   describe "display" do
-    it "displays all items from this merchant in order by item", :vcr do
+    it "displays all items from this merchant in order by item" do
       visit merchant_items_path(@merchant)
       within "#merchant_items" do
         expect(page).to have_content(@item1.name)
@@ -28,7 +28,7 @@ describe "Merchants Items index", type: :feature do
       end
     end
 
-    it "links to item show page", :vcr do
+    it "links to item show page" do
       visit merchant_items_path(@merchant2)
       within "#merchant_items" do
         expect(page).to have_link(@item3.name.to_s)
@@ -37,7 +37,7 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_current_path("/merchants/#{@merchant2.id}/items/#{@item3.id}")
       end
     end
-    it "has sections for enabled and disabled items", :vcr do
+    it "has sections for enabled and disabled items" do
       visit merchant_items_path(@merchant)
       within "#enabled" do
         expect(page).to have_content(@item1.name)
@@ -46,7 +46,7 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_content(@item2.name)
       end
     end
-    it "displays popular items", :vcr do
+    it "displays popular items" do
       visit merchant_items_path(@merchant)
       within "#popular_items" do
         expect(page).to have_content("Total Revenue: $#{@invoice_item1.unit_price}")
@@ -55,7 +55,7 @@ describe "Merchants Items index", type: :feature do
         expect(page).to have_current_path("/merchants/#{@merchant.id}/items/#{@item1.id}")
       end
     end
-    it "displays best sales day for each item", :vcr do
+    it "displays best sales day for each item" do
       visit merchant_items_path(@merchant)
       within "#popular_items" do
         expect(page).to have_content("Best day for sales: #{@invoice1.created_at}")

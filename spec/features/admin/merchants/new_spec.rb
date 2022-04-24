@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "New Merchant Page", type: :feature do
-  it "allows creation of a new merchant within the database", :vcr do
+  it "allows creation of a new merchant within the database" do
     visit "/admin/merchants"
 
     click_link "Create New Merchant"

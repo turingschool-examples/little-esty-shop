@@ -7,7 +7,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     @merchant_3 = create(:merchant)
   end
 
-  it "Has all merchants", :vcr do
+  it "Has all merchants" do
     visit admin_merchants_path()
 
     within("#merchants") do
@@ -29,7 +29,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end
   end
 
-  it "Links from index to show page for each merchant", :vcr do
+  it "Links from index to show page for each merchant" do
     visit admin_merchants_path()
 
     within("#merchants") do
@@ -45,7 +45,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     expect(current_path).to eq(admin_merchant_path(@merchant_1.id))
   end
 
-  it "Links from index to page for creation of new merchant", :vcr do
+  it "Links from index to page for creation of new merchant" do
     visit admin_merchants_path()
 
     expect(page).to have_link("Create New Merchant", href: "/admin/merchants/new")
@@ -55,7 +55,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     expect(current_path).to eq(new_admin_merchant_path())
   end
 
-  it "Has buttons for each merchant to toggle enable/disable status", :vcr do
+  it "Has buttons for each merchant to toggle enable/disable status" do
     visit admin_merchants_path()
 
     within("#merchant-#{@merchant_1.id}") do
@@ -70,7 +70,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end
   end
 
-  it 'Sorts merchants on enabled/disabled status', :vcr do
+  it 'Sorts merchants on enabled/disabled status' do
     merchant_4 = Merchant.create!(name: "This Is A Test Value", enabled: false)
     visit admin_merchants_path()
 
@@ -89,7 +89,7 @@ RSpec.describe "Admin Merchants Index", type: :feature do
     end      
   end
 
-  it 'Finds top 5 merchants', :vcr do
+  it 'Finds top 5 merchants' do
     merchant_4 = create(:merchant)
     merchant_5 = create(:merchant)
     merchant_6 = create(:merchant)

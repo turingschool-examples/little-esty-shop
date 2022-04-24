@@ -15,7 +15,7 @@ describe "Merchants Items update", type: :feature do
     @invoice_item2 = create :invoice_item, {invoice_id: @invoice1.id, item_id: @item2.id, quantity: 1, unit_price: 45, status: 1}
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
   end
-  it "displays update link", :vcr do
+  it "displays update link" do
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
 
     expect(page).to have_link("Update #{@item1.name}")
@@ -24,7 +24,7 @@ describe "Merchants Items update", type: :feature do
     expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
   end
 
-  it "has form to update item", :vcr do
+  it "has form to update item" do
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
     click_link("Update #{@item1.name}")
 
@@ -34,7 +34,7 @@ describe "Merchants Items update", type: :feature do
     expect(find("form")).to have_content("Enabled")
   end
 
-  it "updates item info", :vcr do
+  it "updates item info" do
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
     click_link("Update #{@item1.name}")
 
@@ -46,7 +46,7 @@ describe "Merchants Items update", type: :feature do
     expect(page).to have_content("Item updated successfully")
   end
 
-  it "displays error message", :vcr do
+  it "displays error message" do
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
     click_link("Update #{@item1.name}")
 
@@ -57,7 +57,7 @@ describe "Merchants Items update", type: :feature do
     expect(page).to have_current_path("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
   end
 
-  it "merchant can enable and disable items", :vcr do
+  it "merchant can enable and disable items" do
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
     if @item1.enabled == "enabled"
       expect(page).to have_button("Disable #{@item1.name}")

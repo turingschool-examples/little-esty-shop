@@ -1,9 +1,0 @@
-<% if @repo.present? %>
-  <% if @repo.is_a?(Repository) %>
-  <br>
-  <hr>
-    <p><h3>Repo Name: <%= @repo.name %></h3></p>
-  <% else %>
-    <p><%= @repo[:message] %></p>
-  <% end %>
-<% end %>

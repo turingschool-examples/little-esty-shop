@@ -12,7 +12,7 @@ describe "Merchants Invoicess index", type: :feature do
   end
 
   describe "display" do
-    it "displays all invoices for this merchant", :vcr do
+    it "displays all invoices for this merchant" do
       visit merchant_invoices_path(@merchant1.id)
 
       within "#invoice-#{@invoices.first.id}" do

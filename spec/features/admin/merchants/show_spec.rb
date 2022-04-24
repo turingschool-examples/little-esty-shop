@@ -6,7 +6,7 @@ RSpec.describe "Admin Merchant Show", type: :feature do
     @merchant_2 = create(:merchant)
   end
 
-  it "Shows the name attribute for the selected merchant", :vcr do
+  it "Shows the name attribute for the selected merchant" do
     visit "admin/merchants/#{@merchant_1.id}"
 
     within("#merchant-info") do
@@ -15,7 +15,7 @@ RSpec.describe "Admin Merchant Show", type: :feature do
     end
   end
 
-  it "contains a link to edit the merchant", :vcr do
+  it "contains a link to edit the merchant" do
     visit "admin/merchants/#{@merchant_2.id}"
 
     within("#update-merchant") do

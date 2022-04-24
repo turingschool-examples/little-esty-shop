@@ -14,7 +14,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     @invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items.last)
   end
 
-  it "Shows the attributes for the selected invoice", :vcr do
+  it "Shows the attributes for the selected invoice" do
     visit "/admin/invoices/#{@invoice1.id}"
 
     within("#invoice-info") do
@@ -29,7 +29,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     end
   end
 
-  it "Shows the attributes for the invoice items on the selected invoice", :vcr do
+  it "Shows the attributes for the invoice items on the selected invoice" do
     visit "/admin/invoices/#{@invoice1.id}"
 
     within("#invoice_items-#{@invoice_item1.id}") do
@@ -49,7 +49,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     end
   end
 
-  it "Shows the total revenue for the selected invoice", :vcr do
+  it "Shows the total revenue for the selected invoice" do
     visit "/admin/invoices/#{@invoice1.id}"
 
     expected = (@invoice_item1.quantity * @invoice_item1.unit_price) + (@invoice_item2.quantity * @invoice_item2.unit_price)
@@ -58,7 +58,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     expect(@invoice1.total_revenue).to eq(expected)
   end
 
-  it "Updates the invoice status to the status that is selected from the status select field", :vcr do
+  it "Updates the invoice status to the status that is selected from the status select field" do
     @invoice1.update(status: "In Progress")
     visit admin_invoice_path(@invoice1.id)
 

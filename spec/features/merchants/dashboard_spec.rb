@@ -18,25 +18,25 @@ RSpec.describe "Merchant Dashboard", type: :feature do
   end
 
   describe "display" do
-    it "displays merchant name", :vcr do
+    it "displays merchant name" do
       expect(page).to have_content(@merchant.name)
     end
 
-    it "has a link to view all merchant items", :vcr do
+    it "has a link to view all merchant items" do
       expect(page).to have_link("Merchant Items")
 
       click_link "Merchant Items"
       expect(current_path).to eq(merchant_items_path(@merchant))
     end
 
-    it "has a link to view all merchant invoices", :vcr do
+    it "has a link to view all merchant invoices" do
       expect(page).to have_link("Merchant Invoices")
 
       click_link "Merchant Invoices"
       expect(current_path).to eq(merchant_invoices_path(@merchant))
     end
 
-    it "displays items ready to ship with a link to the item's invoice", :vcr do
+    it "displays items ready to ship with a link to the item's invoice" do
       expect(@merchant.items_ready_to_ship).to eq([@invoice_item1, @invoice_item2])
 
       within("#items_to_ship-#{@invoice_item1.id}") do
@@ -52,7 +52,7 @@ RSpec.describe "Merchant Dashboard", type: :feature do
       end
     end
 
-    it "displays items ready to ship with the date the invoice was created", :vcr do
+    it "displays items ready to ship with the date the invoice was created" do
       within("#items_to_ship-#{@invoice_item2.id}") do
         expect(page).to have_link(@invoice_item2.invoice.id)
         expect(page).to have_content(@item2.name)

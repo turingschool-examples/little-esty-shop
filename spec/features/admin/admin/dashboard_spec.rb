@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Admin Dashboard", type: :feature do
-  it "shows admin dash header", :vcr do
+  it "shows admin dash header" do
     visit "/admin"
 
     within("#admin-header") do
@@ -9,7 +9,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
     end
   end
 
-  it "contains links to merchant and invoice admin views", :vcr do
+  it "contains links to merchant and invoice admin views" do
     visit "/admin"
 
     within("#dashboard-links") do

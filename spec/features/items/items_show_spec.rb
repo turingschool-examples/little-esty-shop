@@ -16,7 +16,7 @@ RSpec.describe "Merchant Items Show" do
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
   end
 
-  it "shows item attributes", :vcr do
+  it "shows item attributes" do
     visit "/merchants/#{@merchant.id}/items/#{@item1.id}"
 
     expect(page).to have_content(@item1.name)

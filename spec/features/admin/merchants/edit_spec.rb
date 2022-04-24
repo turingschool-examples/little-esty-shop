@@ -5,7 +5,7 @@ RSpec.describe "Admin Merchant Edit Page", type: :feature do
     @merchant_1 = create(:merchant)
   end
 
-  it "Updates a singular merchant name", :vcr do
+  it "Updates a singular merchant name" do
     visit "/admin/merchants/#{@merchant_1.id}/edit"
 
     name = @merchant_1.name

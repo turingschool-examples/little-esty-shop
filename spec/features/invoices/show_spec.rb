@@ -20,7 +20,7 @@ RSpec.describe "Merchant Invoices Show" do
   end
 
   describe "display" do
-    it "invoice attributes", :vcr do
+    it "invoice attributes" do
       expect(page).to have_content(@invoices1[0].id)
       expect(page).to have_content("Status: In Progress")
       expect(page).to have_content("Created On: #{@invoices1[0].created_at.strftime("%A, %B %d, %Y")}")
@@ -29,14 +29,14 @@ RSpec.describe "Merchant Invoices Show" do
       expect(page).to_not have_content(@invoices2)
     end
 
-    it "Shows the total revenue for the selected invoice", :vcr do
+    it "Shows the total revenue for the selected invoice" do
       expected = (@invoice_item1.quantity * @invoice_item1.unit_price) + (@invoice_item2.quantity * @invoice_item2.unit_price)
       expect(page).to have_content(@invoices1[0].total_revenue)
       expect(@invoices1[0].total_revenue).to eq(expected)
     end
 
     describe "invoice items" do
-      it "lists all invoice item names, quantity, price and status", :vcr do
+      it "lists all invoice item names, quantity, price and status" do
         within "#invoice_item-#{@invoice_item2.id}" do
           expect(page).to have_content(@invoice_item2.item.name)
           expect(page).to have_content(@invoice_item2.quantity)
@@ -57,7 +57,7 @@ RSpec.describe "Merchant Invoices Show" do
         end
       end
 
-      it "select update invoice item status", :vcr do
+      it "select update invoice item status" do
         visit merchant_invoice_path(@merchants[0], @invoices1[0])
         within "#invoice_item-#{@invoice_item2.id}" do
           expect(page).to have_content("Pending")
