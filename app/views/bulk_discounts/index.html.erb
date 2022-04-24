@@ -1,12 +1,14 @@
 <h1>Bulk Discounts</h1>
 <% @bulk_discounts.each do |bulk_discount| %>
-  <div>
+  <div id="<%=bulk_discount.id%>">
     <br>
     Bulk Discount: <a href="/bulk_discounts/<%=bulk_discount.id%>"><%= bulk_discount.id %></a>
     <br>
     Percentage: <%= bulk_discount.percentage %>
     <br>
     Quantity: <%= bulk_discount.quantity %>
+    <br>
+    <%= link_to 'Delete', "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete %>
   </div>
 <% end %>
 <br>
