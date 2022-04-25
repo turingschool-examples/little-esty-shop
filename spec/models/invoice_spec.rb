@@ -122,11 +122,29 @@ RSpec.describe Invoice do
         credit_card_number: "4654405418249632",
         result: "failed"
       )
+      @bulk_discount_10 = @merchant_1.bulk_discounts.create!(quantity: 10, percentage: 0.10)
     end
 
     describe "-instance" do
       it "calculates the total value for an invoice" do
-        expect(@invoice_1.invoice_total).to eq(5320.0)
+        expect(@invoice_1.invoice_total).to eq(532000)
+      end
+
+      it "calculates discounted revenue" do
+        expect(@invoice_1.discounted_revenue).to eq(482000)
+      end
+
+      it "#discounted_revenue works" do
+        merchant = Merchant.create!(name: "Test Store")
+        customer = Customer.create!(first_name: "Jo", last_name: "Customer")
+        ball = Item.create!(name: "Ball", description: "its a ball", unit_price: 12, merchant_id: merchant.id)
+        invoice = Invoice.create!(customer_id: customer.id, status: 0)
+        invoice_item = InvoiceItem.create!(invoice_id: invoice.id, item_id: ball.id, quantity: 2, unit_price: 78808, status: 2)
+        bulk_discount = merchant.bulk_discounts.create!(quantity: 10, percentage: 0.10)
+        bulk_discount_2 = merchant.bulk_discounts.create!(quantity: 9, percentage: 0.50)
+
+        expect(invoice.discounted_revenue).to eq(invoice.invoice_total)
+        expect(invoice.discounted_revenue).to eq(157616)
       end
 
       it "determines if there are any unshipped invoice items" do
