@@ -24,8 +24,8 @@ class Invoice < ApplicationRecord
 
     non_discounted_item_total = invoice_items.joins(:bulk_discounts)
       .where.not("invoice_items.quantity >= bulk_discounts.quantity")
+      .distinct
       .sum("invoice_items.unit_price * invoice_items.quantity")
-
     discounted_item_total + non_discounted_item_total
   end
 
