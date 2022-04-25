@@ -112,12 +112,12 @@ describe "invoice show page" do
 
   it "displays the total revenue to be made by all items on the invoice", :vcr do
     within("#total_revenue") do
-      expect(page).to have_content("Total: $5320.0")
+      expect(page).to have_content("Total: $5,320.00")
     end
   end
 
   it "displays revenue after applying discounts" do
-    expect(page).to have_content("Discounted Revenue: $4788")
+    expect(page).to have_content("Discounted Revenue: $4,820.00")
   end
 
   it "invoice item statuses are select fields", :vcr do
