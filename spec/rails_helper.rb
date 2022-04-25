@@ -40,7 +40,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = ENV["NO_TRANSACTIONS"].blank?
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -75,7 +75,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 VCR.configure do |config|
-  config.cassette_library_dir = 'spec/fixtures/vcr_csettes'
+  config.cassette_library_dir = "spec/fixtures/vcr_csettes"
   config.hook_into :webmock
   config.configure_rspec_metadata!
 end

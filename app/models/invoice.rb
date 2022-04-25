@@ -13,7 +13,20 @@ class Invoice < ApplicationRecord
     total = invoice_items
       .group(:invoice_id)
       .sum("invoice_items.unit_price * invoice_items.quantity")
-    total[id] / 100.0
+    total[id]
+  end
+
+  def discounted_revenue
+    discounted_item_total = invoice_items.joins(:bulk_discounts)
+      .where("items.merchant_id = bulk_discounts.merchant_id") # Prevent discounts from applying to items with different merchants on same invoice.
+      .where("invoice_items.quantity >= bulk_discounts.quantity")
+      .sum("invoice_items.unit_price * invoice_items.quantity * (1-bulk_discounts.percentage)")
+
+    non_discounted_item_total = invoice_items.joins(:bulk_discounts)
+      .where.not("invoice_items.quantity >= bulk_discounts.quantity")
+      .sum("invoice_items.unit_price * invoice_items.quantity")
+
+    discounted_item_total + non_discounted_item_total
   end
 
   def has_items_not_shipped

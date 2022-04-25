@@ -31,5 +31,7 @@
 <% end %>
 
 <div id="total_revenue">
-  <h1> Total: $<%= @invoice.invoice_total %> </h1>
+  <h1> Total: <%= number_to_currency(@invoice.invoice_total / 100.0) %> </h1>
 </div>
+
+<h3> Discounted Revenue: $<%= @invoice.invoice_total %> </h3>

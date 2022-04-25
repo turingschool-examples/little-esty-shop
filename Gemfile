@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.4"
 
 gem "standard"
+gem "hirb"
 # gem "htmlbeautifier"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.7"
@@ -47,8 +48,8 @@ group :development, :test do
   gem "simplecov"
   gem "shoulda-matchers", "~> 3.1"
   gem "orderly"
-  gem 'vcr'
-  gem 'webmock'
+  gem "vcr"
+  gem "webmock"
 end
 
 group :development do
@@ -63,7 +64,6 @@ end
 gem "require_all"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 
 gem "standardrb"
 gem "faraday"
