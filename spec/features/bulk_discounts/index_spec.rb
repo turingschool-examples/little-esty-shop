@@ -34,19 +34,19 @@ RSpec.describe 'Merchant Bulk Discount Index', type: :feature do
         expect(page).to have_content("Discount #{@bulk_discount1.id}: #{@bulk_discount1.percentage_discount}% off if you purchase #{@bulk_discount1.quantity_threshold} or more of an item.")
         expect(page).to_not have_content("Discount #{@bulk_discount2.id}: #{@bulk_discount2.percentage_discount}% off if you purchase #{@bulk_discount2.quantity_threshold} or more of an item.")
         expect(page).to_not have_content("Discount #{@bulk_discount3.id}: #{@bulk_discount3.percentage_discount}% off if you purchase #{@bulk_discount3.quantity_threshold} or more of an item.")
-        expect(page).to have_link("View Details", href: merchant_bulk_discounts_show_path(@bulk_discount1.id))
+        expect(page).to have_link("View Details", href: merchant_bulk_discount_path(@merchant.id, @bulk_discount1.id))
       end
       within "#discount-#{@bulk_discount2.id}" do
         expect(page).to_not have_content("Discount #{@bulk_discount1.id}: #{@bulk_discount1.percentage_discount}% off if you purchase #{@bulk_discount1.quantity_threshold} or more of an item.")
         expect(page).to have_content("Discount #{@bulk_discount2.id}: #{@bulk_discount2.percentage_discount}% off if you purchase #{@bulk_discount2.quantity_threshold} or more of an item.")
         expect(page).to_not have_content("Discount #{@bulk_discount3.id}: #{@bulk_discount3.percentage_discount}% off if you purchase #{@bulk_discount3.quantity_threshold} or more of an item.")
-        expect(page).to have_link("View Details", href: merchant_bulk_discounts_show_path(@bulk_discount2.id))
+        expect(page).to have_link("View Details", href: merchant_bulk_discount_path(@merchant.id, @bulk_discount2.id))      
       end
       within "#discount-#{@bulk_discount3.id}" do
         expect(page).to_not have_content("Discount #{@bulk_discount1.id}: #{@bulk_discount1.percentage_discount}% off if you purchase #{@bulk_discount1.quantity_threshold} or more of an item.")
         expect(page).to_not have_content("Discount #{@bulk_discount2.id}: #{@bulk_discount2.percentage_discount}% off if you purchase #{@bulk_discount2.quantity_threshold} or more of an item.")
         expect(page).to have_content("Discount #{@bulk_discount3.id}: #{@bulk_discount3.percentage_discount}% off if you purchase #{@bulk_discount3.quantity_threshold} or more of an item.")
-        expect(page).to have_link("View Details", href: merchant_bulk_discounts_show_path(@bulk_discount3.id))
+        expect(page).to have_link("View Details", href: merchant_bulk_discount_path(@merchant.id, @bulk_discount3.id))      
       end
     end
   end
