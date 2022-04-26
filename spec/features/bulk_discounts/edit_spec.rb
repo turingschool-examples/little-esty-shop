@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Bulk Discount Show Page', type: :feature do
+RSpec.describe 'Edit Bulk Discount Page', type: :feature do
 
   before :each do
     @merchant1 = create :merchant
@@ -21,17 +21,20 @@ RSpec.describe 'Merchant Bulk Discount Show Page', type: :feature do
     @invoice_item3 = create :invoice_item, {invoice_id: @invoice2.id, item_id: @item3.id, quantity: 1, unit_price: 72, status: 2}
   end
 
-  it 'Shows all attributes of an individual bulk discount' do
+  it 'Allows a user to edit an individual bulk discount' do
     visit merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id)
 
-    expect(page).to have_content(@bulk_discount1.id)
-    expect(page).to_not have_content(@bulk_discount2.id)
-    expect(page).to_not have_content(@bulk_discount3.id)
+    click_link "Edit Discount"
 
-    expect(page).to have_content("Percentage Discount: #{@bulk_discount1.percentage_discount}%")
+    fill_in :percentage_discount,	with: 15
+    fill_in :quantity_threshold, with: 3
+    click_on :submit
+    
+    expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id))
+
+    expect(page).to have_content("Percentage Discount: #{@bulk_discount1.percentage_discount}")
     expect(page).to have_content("Minimum # of Items: #{@bulk_discount1.quantity_threshold}")
-
-    expect(page).to have_link("Edit Discount", edit_merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id))
+    expect(@bulk_discount1.percentage_discount).to eq(15)
+    expect(@bulk_discount1.quantity_threshold).to eq(3)
   end
-
 end
