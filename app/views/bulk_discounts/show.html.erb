@@ -2,3 +2,5 @@
 
 <h2>Percentage Discount: <%= @bulk_discount.percentage_discount.to_s %>%</h2>
 <h2>Minimum # of Items: <%= @bulk_discount.quantity_threshold.to_s %></h2>
+
+<%= link_to "Edit Discount", edit_merchant_bulk_discount_path(@bulk_discount.merchant_id, @bulk_discount.id) %>

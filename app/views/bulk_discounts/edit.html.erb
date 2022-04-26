@@ -1,6 +1,6 @@
-<h1>New Bulk Discount</h1>
+<h1>Edit Bulk Discount</h1>
 
-<%= form_with url: merchant_bulk_discounts_path(@merchant.id), method: :post do |form| %>
+<%= form_with url: merchant_bulk_discount_path(params[:merchant_id], params[:id]), method: :patch do |form| %>
   <%= form.label "Percentage" %>
   <%= form.text_field :percentage_discount %>
   <%= form.label "Minimum Quantity" %>
