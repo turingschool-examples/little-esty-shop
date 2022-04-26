@@ -135,6 +135,5 @@ RSpec.describe "Invoice Show Page" do
 
   it "displays discounted revenue" do
     expect(page).to have_content("Discounted Revenue: $4,820.00")
-    save_and_open_page
   end
 end
