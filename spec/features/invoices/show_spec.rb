@@ -75,9 +75,25 @@ RSpec.describe "Merchant Invoices Show" do
 
   it 'Shows discounted revenue for the selected invoice' do
 
-
     expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) * @invoice_item1.bulk_discount) + ((@invoice_item2.quantity * @invoice_item2.unit_price) * @invoice_item2.bulk_discount)
     expect(page).to have_content(@invoices1[0].discounted_revenue)
     expect(@invoices1[0].discounted_revenue).to eq(expected.to_f)
+  end
+
+  it "Links to each invoice item's applied discount's page, if it exists." do
+    within "#invoice_item-#{@invoice_item1.id}" do
+      if @invoice_item1.discount
+        expect(page).to have_link("View Discount", href: merchant_bulk_discount_path(@invoice_item1.discount.merchant_id, @invoice_item1.discount.id))
+      else
+        expect(page).to_not have_link("View Discount")
+      end
+    end
+    within "#invoice_item-#{@invoice_item2.id}" do
+      if @invoice_item2.discount
+        expect(page).to have_link("View Discount", href: merchant_bulk_discount_path(@invoice_item2.discount.merchant_id, @invoice_item2.discount.id))
+      else
+        expect(page).to_not have_link("View Discount")
+      end
+    end
   end
 end

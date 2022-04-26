@@ -13,6 +13,9 @@
     <u><h3><%= invoice_item.item.name %></h3></u>
     <p>Quantity: <%= invoice_item.quantity %></p>
     <p>Price: <%= number_to_currency(invoice_item.unit_price.fdiv(100)) %></p>
+    <% if invoice_item.discount %>
+      <%= link_to "View Discount", merchant_bulk_discount_path(invoice_item.item.merchant_id, invoice_item.discount.id) %>
+    <% end %>
     <p><%= form_with model: [@merchant, invoice_item] do |f| %>
       <p><strong>Invoice Item Status: </strong><%= f.select :status, ['Pending', 'Packaged', 'Shipped'], status: invoice_item.status %>
       <%= f.submit 'Update Invoice Item Status' %>
