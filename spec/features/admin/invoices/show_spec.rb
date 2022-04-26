@@ -89,7 +89,19 @@ RSpec.describe "Admin Invoice Show", type: :feature do
 
     visit admin_invoice_path(invoice1.id)
 
-    expected = ((invoice_item1.quantity * invoice_item1.unit_price) / invoice_item1.bulk_discount?) + ((invoice_item2.quantity * invoice_item2.unit_price) / invoice_item2.bulk_discount?)
+    if invoice_item1.bulk_discount? > 0
+      invoice_item_1_discount = BigDecimal("1.00") - (@invoice_item1.bulk_discount? * BigDecimal("0.01"))
+    else
+      invoice_item_1_discount = 1
+    end
+
+    if invoice_item2.bulk_discount? > 0
+      invoice_item_2_discount = BigDecimal("1.00") - (@invoice_item2.bulk_discount? * BigDecimal("0.01"))
+    else
+      invoice_item_2_discount = 1
+    end
+
+    expected = ((invoice_item1.quantity * invoice_item1.unit_price) * invoice_item_1_discount) + ((invoice_item2.quantity * invoice_item2.unit_price) * invoice_item_2_discount)
 
     expect(page).to have_content(invoice1.discounted_revenue)
     expect(invoice1.discounted_revenue).to eq(expected)

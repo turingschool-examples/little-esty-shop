@@ -89,7 +89,6 @@ RSpec.describe "Merchant Invoices Show" do
     end
 
     expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) * invoice_item_1_discount) + ((@invoice_item2.quantity * @invoice_item2.unit_price) * invoice_item_2_discount)
-    binding.pry
     expect(page).to have_content(@invoice1.discounted_revenue)
     expect(@invoices1[0].discounted_revenue).to eq(expected.to_f)
   end
