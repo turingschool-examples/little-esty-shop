@@ -79,6 +79,7 @@ describe "invoice show page" do
       result: "failed"
     )
     @bulk_discount_10 = @merchant_1.bulk_discounts.create!(quantity: 10, percentage: 0.10)
+    @bulk_discount_100 = @merchant_1.bulk_discounts.create!(quantity: 100, percentage: 0.50)
 
     visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
   end
@@ -118,6 +119,13 @@ describe "invoice show page" do
 
   it "displays revenue after applying discounts" do
     expect(page).to have_content("Discounted Revenue: $4,820.00")
+  end
+
+  it "has links to bulk discounts that were applied" do
+    within("#ii-#{@invoice_item_2.id}") do
+      click_link "Bulk discount applied"
+    end
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/bulk_discounts/#{@bulk_discount_10.id}")
   end
 
   it "invoice item statuses are select fields", :vcr do
