@@ -1,9 +1,8 @@
-require_relative "../../../lib/holiday_api/holiday_service"
-# require "./lib/holiday_api/holiday_service"
+require "./lib/holiday_api/holiday_service"
 
 RSpec.describe HolidayService do
   describe "#holidays" do
-    it "gets list of holidays for next year" do
+    it "gets list of holidays for next year", :vcr do
       holiday_service = HolidayService.new
       expect(holiday_service.holidays).to eq([
         {
