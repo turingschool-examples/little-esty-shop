@@ -111,6 +111,8 @@ RSpec.describe "Invoice Show Page" do
       credit_card_number: "4654405418249632",
       result: "failed"
     )
+    @bulk_discount_10 = @merchant_1.bulk_discounts.create!(quantity: 10, percentage: 0.10)
+    @bulk_discount_100 = @merchant_1.bulk_discounts.create!(quantity: 100, percentage: 0.50)
 
     visit "/admin/invoices/#{@invoice_1.id}"
   end
@@ -129,5 +131,10 @@ RSpec.describe "Invoice Show Page" do
       expect(page).to have_content("Sold for: $320.0 each")
       expect(page).to have_content("Status: packaged")
     end
+  end
+
+  it "displays discounted revenue" do
+    expect(page).to have_content("Discounted Revenue: $4,820.00")
+    save_and_open_page
   end
 end
