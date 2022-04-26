@@ -31,11 +31,11 @@ RSpec.describe 'New Merchant Bulk Discount Page', type: :feature do
   it 'Allows a user to create a new bulk discount for a merchant' do
     visit new_merchant_bulk_discount_path(@merchant2.id)
 
-    fill_in "Percentage",	with: 15
-    fill_in "Quantity", with: 3
-    click_on "Submit"
+    fill_in :percentage_discount,	with: 15
+    fill_in :quantity_threshold, with: 3
+    click_on :submit
 
-    expect(current_path).to eq(merchant_bulk_discount_path(@merchant2.id))
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant2.id))
 
     within "#discounts" do
       expect(page).to have_content("15% off if you purchase 3 or more of an item.")
