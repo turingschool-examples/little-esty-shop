@@ -34,4 +34,12 @@ RSpec.describe "Bulk discounts index page" do
     click_link "New bulk discount"
     expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/new")
   end
+
+  it "displays upcoming holidays" do
+    within ".upcoming-holidays" do
+      # expect(page).to have_content(#holiday 1)
+      # expect(page).to have_content(#holiday 2)
+      # expect(page).to have_content(#holiday 3)
+    end
+  end
 end
