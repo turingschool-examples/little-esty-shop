@@ -74,21 +74,9 @@ RSpec.describe "Merchant Invoices Show" do
   end
 
   it 'Shows discounted revenue for the selected invoice' do
-    visit merchant_invoice_path(@merchants[0], @invoices1[0])
 
-    if @invoice_item1.bulk_discount? > 0
-      invoice_item_1_discount = BigDecimal("1.00") - (@invoice_item1.bulk_discount? * BigDecimal("0.01"))
-    else
-      invoice_item_1_discount = 1
-    end
 
-    if @invoice_item2.bulk_discount? > 0
-      invoice_item_2_discount = BigDecimal("1.00") - (@invoice_item2.bulk_discount? * BigDecimal("0.01"))
-    else
-      invoice_item_2_discount = 1
-    end
-
-    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) * invoice_item_1_discount) + ((@invoice_item2.quantity * @invoice_item2.unit_price) * invoice_item_2_discount)
+    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) * @invoice_item1.bulk_discount) + ((@invoice_item2.quantity * @invoice_item2.unit_price) * @invoice_item2.bulk_discount)
     expect(page).to have_content(@invoice1.discounted_revenue)
     expect(@invoices1[0].discounted_revenue).to eq(expected.to_f)
   end

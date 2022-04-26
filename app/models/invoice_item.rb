@@ -7,14 +7,16 @@ class InvoiceItem < ApplicationRecord
 
   enum status: {"Pending" => 0, "Packaged" => 1, "Shipped" => 2}
 
-  def bulk_discount?
+  def bulk_discount
     discounts = item.merchant.bulk_discounts.order("quantity_threshold DESC, percentage_discount DESC")
     
     discount = discounts.where("quantity_threshold <= ?", quantity).first
     if discount
-    discount[:percentage_discount]
+      percentage = BigDecimal("1.00") - discount[:percentage_discount] * BigDecimal("0.01")
     else
-      0
+      percentage = BigDecimal("1.00")
     end
+
+    percentage
   end
 end

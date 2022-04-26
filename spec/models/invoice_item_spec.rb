@@ -25,10 +25,10 @@ RSpec.describe InvoiceItem, type: :model do
     bulk_discount1 = create :bulk_discount, {quantity_threshold: 3, percentage_discount: 10, merchant: merchant}
     bulk_discount2 = create :bulk_discount, {quantity_threshold: 5, percentage_discount: 20, merchant: merchant}
 
-    expected = bulk_discount1[:percentage_discount]
+    expected = BigDecimal("1.00") - bulk_discount1[:percentage_discount] * BigDecimal("0.01")
 
-    actual = invoice_item.bulk_discount?
+    actual = invoice_item.bulk_discount
 
-    expect(actual).to eq(expected)
+    expect(actual).to eq(expected.to_f)
   end
 end
