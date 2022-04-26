@@ -8,7 +8,7 @@ RSpec.describe 'Edit Bulk Discount Page', type: :feature do
     @item1 = create :item, {merchant_id: @merchant1.id}
     @item2 = create :item, {merchant_id: @merchant1.id}
     @item3 = create :item, {merchant_id: @merchant2.id}
-    @bulk_discount1 = create :bulk_discount, {merchant_id: @merchant1.id}
+    @bulk_discount1 = create :bulk_discount, {merchant_id: @merchant1.id, percentage_discount: 25, quantity_threshold: 2}
     @bulk_discount2 = create :bulk_discount, {merchant_id: @merchant1.id}
     @bulk_discount3 = create :bulk_discount, {merchant_id: @merchant1.id}
     @bulk_discount4 = create :bulk_discount, {merchant_id: @merchant2.id}
@@ -32,11 +32,11 @@ RSpec.describe 'Edit Bulk Discount Page', type: :feature do
     
     expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id))
 
-    expect(page).to have_content("Percentage Discount: #{@bulk_discount1.percentage_discount}")
-    expect(page).to have_content("Minimum # of Items: #{@bulk_discount1.quantity_threshold}")
-    expect(@bulk_discount1.percentage_discount).to eq(15)
-    expect(@bulk_discount1.quantity_threshold).to eq(3)
+    expect(page).to_not have_content("Percentage Discount: #{@bulk_discount1.percentage_discount}%")
+    expect(page).to have_content("Percentage Discount: 15%")
+    expect(page).to_not have_content("Minimum # of Items: #{@bulk_discount1.quantity_threshold}")
+    expect(page).to have_content("Minimum # of Items: 3")
 
-    expect(page).to have_link("Edit Discount", edit_merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id))
+    expect(page).to have_link("Edit Discount", href: edit_merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id ))
   end
 end
