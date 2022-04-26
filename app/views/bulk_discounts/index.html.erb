@@ -5,6 +5,7 @@
     <div id="discount-<%= discount.id %>">
       <h2>Discount <%= discount.id.to_s %>: <%= discount.percentage_discount.to_s %>% off if you purchase <%= discount.quantity_threshold.to_s %> or more of an item.</h2>  
       <%= link_to "View Details", merchant_bulk_discount_path(@merchant.id, discount.id) %>
+      <%= link_to "Delete Discount", merchant_bulk_discount_path(@merchant.id, discount.id), method: :delete %>
     </div>
   <% end %>
 </div>

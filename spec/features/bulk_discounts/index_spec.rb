@@ -62,19 +62,19 @@ RSpec.describe 'Merchant Bulk Discount Index', type: :feature do
     visit merchant_bulk_discounts_path(@merchant1.id)
 
     within "#discounts" do
-      expect(page).to have_button("Delete Discount", count: 3)
+      expect(page).to have_link("Delete Discount", count: 3)
       expect(page).to have_content(@bulk_discount1.id)
       expect(page).to have_content(@bulk_discount2.id)
       expect(page).to have_content(@bulk_discount3.id)
       within "#discount-#{@bulk_discount1.id}" do
-        click_on "Delete Discount"
+        click_link "Delete Discount"
       end
     end
 
     expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1.id))
     
     within "#discounts" do
-      expect(page).to have_button("Delete Discount", count: 2)
+      expect(page).to have_link("Delete Discount", count: 2)
       expect(page).to_not have_content(@bulk_discount1.id)
       expect(page).to have_content(@bulk_discount2.id)
       expect(page).to have_content(@bulk_discount3.id)
