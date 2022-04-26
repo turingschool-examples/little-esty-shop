@@ -75,11 +75,23 @@ RSpec.describe "Admin Invoice Show", type: :feature do
   end
 
   it 'Shows discounted revenue for the selected invoice' do
-    visit admin_invoice_path(@invoice1.id)
+    merchant1 = create(:merchant)
+    items = create_list(:item, 4, merchant: @merchant1)
+    customer1 = create(:customer)
+    customer2 = create(:customer)
+    invoice1 = create(:invoice, customer: @customer1)
+    invoice2 = create(:invoice, customer: @customer2)
+    invoice_item1 = create(:invoice_item, invoice: @invoice1, item: @items.first)
+    invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @items.second)
+    invoice_item3 = create(:invoice_item, invoice: @invoice2, item: @items.third)
+    invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items.last)
+    bulk_discounts = create_list(:bulk_discount, 3, merchant: @merchant1)
 
-    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) / @invoice_item1.bulk_discount?) + ((@invoice_item2.quantity * @invoice_item2.unit_price) / @invoice_item2.bulk_discount?)
+    visit admin_invoice_path(invoice1.id)
 
-    expect(page).to have_content(@invoice1.discounted_revenue)
+    expected = ((invoice_item1.quantity * invoice_item1.unit_price) / invoice_item1.bulk_discount?) + ((invoice_item2.quantity * invoice_item2.unit_price) / invoice_item2.bulk_discount?)
+
+    expect(page).to have_content(invoice1.discounted_revenue)
     expect(invoice1.discounted_revenue).to eq(expected)
   end
 end

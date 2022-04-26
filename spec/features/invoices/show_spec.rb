@@ -70,4 +70,13 @@ RSpec.describe "Merchant Invoices Show" do
       end
     end
   end
+
+  it 'Shows discounted revenue for the selected invoice' do
+    visit admin_invoice_path(@invoice1.id)
+
+    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) / @invoice_item1.bulk_discount?) + ((@invoice_item2.quantity * @invoice_item2.unit_price) / @invoice_item2.bulk_discount?)
+
+    expect(page).to have_content(@invoice1.discounted_revenue)
+    expect(invoice1.discounted_revenue).to eq(expected)
+  end
 end
