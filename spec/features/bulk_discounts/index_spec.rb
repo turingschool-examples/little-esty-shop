@@ -37,9 +37,10 @@ RSpec.describe "Bulk discounts index page" do
 
   it "displays upcoming holidays" do
     within ".upcoming-holidays" do
-      # expect(page).to have_content(#holiday 1)
-      # expect(page).to have_content(#holiday 2)
-      # expect(page).to have_content(#holiday 3)
+      expect("Memorial Day").to appear_before("Juneteenth")
+      expect("Juneteenth").to appear_before("Independence Day")
+      expect("2022-05-30").to appear_before("2022-06-20")
+      expect("2022-06-20").to appear_before("2022-07-04")
     end
   end
 end
