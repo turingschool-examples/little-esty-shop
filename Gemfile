@@ -51,6 +51,7 @@ group :development, :test do
   gem "simplecov"
   gem "shoulda-matchers", "~> 3.1"
   gem "webmock"
+  gem "httparty"
 end
 
 group :development do
