@@ -11,6 +11,10 @@ class InvoiceItem < ApplicationRecord
     discounts = item.merchant.bulk_discounts.order("quantity_threshold DESC, percentage_discount DESC")
     
     discount = discounts.where("quantity_threshold <= ?", quantity).first
+    if discount
     discount[:percentage_discount]
+    else
+      0
+    end
   end
 end

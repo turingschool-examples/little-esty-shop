@@ -87,7 +87,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items.last)
     bulk_discounts = create_list(:bulk_discount, 3, merchant: @merchant1)
 
-    visit merchant_invoice_path(merchant1.id, invoice1.id)
+    visit admin_invoice_path(invoice1.id)
 
     expected = ((invoice_item1.quantity * invoice_item1.unit_price) / invoice_item1.bulk_discount?) + ((invoice_item2.quantity * invoice_item2.unit_price) / invoice_item2.bulk_discount?)
 

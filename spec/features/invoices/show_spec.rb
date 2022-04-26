@@ -16,6 +16,8 @@ RSpec.describe "Merchant Invoices Show" do
     @invoice_item6 = create(:invoice_item, invoice: @invoices2[0], item: @items2[0])
     @invoice_item4 = create(:invoice_item, invoice: @invoices2[1], item: @items2[1])
 
+    @bulk_discounts = create_list(:bulk_discount, 3, merchant: @merchants[0])
+
     visit merchant_invoice_path(@merchants[0], @invoices1[0])
   end
 
@@ -72,11 +74,23 @@ RSpec.describe "Merchant Invoices Show" do
   end
 
   it 'Shows discounted revenue for the selected invoice' do
-    visit admin_invoice_path(@merchant1.id, @invoice1.id)
+    visit merchant_invoice_path(@merchants[0], @invoices1[0])
 
-    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) / @invoice_item1.bulk_discount?) + ((@invoice_item2.quantity * @invoice_item2.unit_price) / @invoice_item2.bulk_discount?)
+    if @invoice_item1.bulk_discount? > 0
+      invoice_item_1_discount = BigDecimal("1.00") - (@invoice_item1.bulk_discount? * BigDecimal("0.01"))
+    else
+      invoice_item_1_discount = 1
+    end
 
+    if @invoice_item2.bulk_discount? > 0
+      invoice_item_2_discount = BigDecimal("1.00") - (@invoice_item2.bulk_discount? * BigDecimal("0.01"))
+    else
+      invoice_item_2_discount = 1
+    end
+
+    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) * invoice_item_1_discount) + ((@invoice_item2.quantity * @invoice_item2.unit_price) * invoice_item_2_discount)
+    binding.pry
     expect(page).to have_content(@invoice1.discounted_revenue)
-    expect(invoice1.discounted_revenue).to eq(expected)
+    expect(@invoices1[0].discounted_revenue).to eq(expected.to_f)
   end
 end
