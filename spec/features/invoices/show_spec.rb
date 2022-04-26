@@ -72,7 +72,7 @@ RSpec.describe "Merchant Invoices Show" do
   end
 
   it 'Shows discounted revenue for the selected invoice' do
-    visit admin_invoice_path(@invoice1.id)
+    visit admin_invoice_path(@merchant1.id, @invoice1.id)
 
     expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) / @invoice_item1.bulk_discount?) + ((@invoice_item2.quantity * @invoice_item2.unit_price) / @invoice_item2.bulk_discount?)
 
