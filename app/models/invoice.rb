@@ -12,4 +12,9 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
   end
+
+  def discounted_revenue
+    discounted_items = invoice_items.map { |invoice_item| (invoice_item.quantity * invoice_item.unit_price) * invoice_item.bulk_discount }
+    discounted_items.sum.to_f
+  end
 end
