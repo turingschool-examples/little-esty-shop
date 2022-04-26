@@ -12,6 +12,7 @@ RSpec.describe "Admin Invoice Show", type: :feature do
     @invoice_item2 = create(:invoice_item, invoice: @invoice1, item: @items.second)
     @invoice_item3 = create(:invoice_item, invoice: @invoice2, item: @items.third)
     @invoice_item4 = create(:invoice_item, invoice: @invoice2, item: @items.last)
+    @bulk_discounts = create_list(:bulk_discount, 3, merchant: @merchant1)
   end
 
   it "Shows the attributes for the selected invoice" do
@@ -71,5 +72,14 @@ RSpec.describe "Admin Invoice Show", type: :feature do
 
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
     expect(@invoice1.reload.status).to eq("Completed")
+  end
+
+  it 'Shows discounted revenue for the selected invoice' do
+    visit admin_invoice_path(@invoice1.id)
+
+    expected = ((@invoice_item1.quantity * @invoice_item1.unit_price) / @invoice_item1.bulk_discount?) + ((@invoice_item2.quantity * @invoice_item2.unit_price) / @invoice_item2.bulk_discount?)
+
+    expect(page).to have_content(@invoice1.discounted_revenue)
+    expect(invoice1.discounted_revenue).to eq(expected)
   end
 end
