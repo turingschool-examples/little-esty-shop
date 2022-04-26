@@ -92,7 +92,6 @@ RSpec.describe "Admin Invoice Show", type: :feature do
 
 
     expected = ((invoice_item1.quantity * invoice_item1.unit_price) * invoice_item1.bulk_discount) + ((invoice_item2.quantity * invoice_item2.unit_price) * invoice_item2.bulk_discount)
-    binding.pry
     expect(page).to have_content(invoice1.discounted_revenue)
     expect(invoice1.discounted_revenue).to eq(expected)
   end
