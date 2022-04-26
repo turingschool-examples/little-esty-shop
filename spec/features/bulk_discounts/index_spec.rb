@@ -85,7 +85,6 @@ RSpec.describe 'Merchant Bulk Discount Index', type: :feature do
     visit merchant_bulk_discounts_path(@merchant1.id)
 
     response = HTTParty.get('https://date.nager.at/api/v3/NextPublicHolidays/US')
-    binding.pry
 
     within "#holidays" do
       expect(page).to have_content("Upcoming Holidays")

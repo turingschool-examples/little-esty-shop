@@ -13,3 +13,9 @@
 <div id="new-discount">
   <%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant.id) %>
 </div>
+
+<div id="holidays">
+<h2>Upcoming Holidays</h2>
+<h3><%= @response[0]["name"]%>: <%= @response[0]["date"]%></h3>
+<h3><%= @response[1]["name"]%>: <%= @response[1]["date"]%></h3>
+<h3><%= @response[2]["name"]%>: <%= @response[2]["date"]%></h3>

@@ -2,6 +2,7 @@ class BulkDiscountsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:merchant_id])
+    @response = HTTParty.get("https://date.nager.at/api/v3/NextPublicHolidays/US")
   end
 
   def show
