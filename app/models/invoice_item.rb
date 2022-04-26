@@ -12,4 +12,13 @@ class InvoiceItem < ApplicationRecord
   has_many :bulk_discounts, through: :merchant
 
   enum status: {"pending" => 0, "packaged" => 1, "shipped" => 2}
+
+  def has_discount?
+    !bulk_discount.nil?
+  end
+
+  def bulk_discount
+    bulk_discounts.select { |discount| quantity >= discount.quantity }
+      .max_by(&:percentage)
+  end
 end

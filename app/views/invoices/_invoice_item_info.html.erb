@@ -21,6 +21,9 @@
     <h2><%= ii.item.name %></h2>
     <p>Quantity: <strong><%= ii.quantity %></strong></p>
     <p>Sold for: <strong>$<%= ii.unit_price / 100.0 %></strong> each</p>
+    <% if ii.has_discount? %>
+      <%= link_to "Bulk discount applied", "/merchants/#{ii.merchant.id}/bulk_discounts/#{ii.bulk_discount.id}" %>
+    <% end %>
     <p>Status: <strong><%= ii.status %></strong></p>
     <p>Status:<%= form_with url: "/merchants/#{ii.merchant.id}/invoice_items/#{ii.id}", method: :patch, local: true do |f| %>
       <%= f.select(:status, ['pending', 'packaged', 'shipped'], selected: "#{ii.status}") %>
