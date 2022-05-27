@@ -11,6 +11,7 @@ namespace :csv_load do
     csv.each do |row|
       Customer.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
   end
 
   desc 'imports the invoice items csv into seed file'
@@ -21,6 +22,7 @@ namespace :csv_load do
     csv.each do |row|
       InvoiceItem.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
   desc 'imports the customers csv into seed file'
@@ -31,6 +33,7 @@ namespace :csv_load do
     csv.each do |row|
       Invoice.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
 
   desc 'imports the customers csv into seed file'
@@ -41,6 +44,7 @@ namespace :csv_load do
     csv.each do |row|
       Item.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
 
   desc 'imports the merchants csv into seed file'
@@ -51,6 +55,7 @@ namespace :csv_load do
     csv.each do |row|
       Merchant.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
 
   desc 'imports the customers csv into seed file'
@@ -61,5 +66,6 @@ namespace :csv_load do
     csv.each do |row|
       Transaction.create!(row.to_hash)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 end
