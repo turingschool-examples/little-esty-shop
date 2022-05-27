@@ -3,6 +3,9 @@ require 'csv'
 namespace :csv_load do
   desc 'TODO'
   task customers: :environment do
+    CSV.foreach('db/data/customers.csv', headers: true) do |row|                                 # For now I just did it for the one im doing so you can see what I did and get some hands on
+      Customer.create(row.to_h)                                                                  # with it yourself. Eventually we will move this into a method so it doesnt have to be repeated.
+    end
   end
 
   desc 'TODO'
@@ -19,6 +22,9 @@ namespace :csv_load do
 
   desc 'TODO'
   task merchants: :environment do
+    CSV.foreach('db/data/merchants.csv', headers: true) do |row|                                 # For now I just did it for the one im doing so you can see what I did and get some hands on
+      Merchant.create(row.to_h)                                                                  # with it yourself. Eventually we will move this into a method so it doesnt have to be repeated.
+    end
   end
 
   desc 'TODO'
