@@ -1,6 +1,8 @@
 require 'csv'
 
 namespace :csv_load do
+  task all: %i[customers merchants items invoices invoice_items transactions]
+
   desc 'imports the customers csv into seed file'
   task customers: :environment do
     # reset primary key
@@ -61,5 +63,3 @@ namespace :csv_load do
     end
   end
 end
-
-# id,first_name,last_name,created_at,updated_at
