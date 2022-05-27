@@ -11,15 +11,15 @@ namespace :csv_load do
     end
   end
 
-  # desc 'imports the customers csv into seed file'
-  # task invoice_items: :environment do
-  #   # reset primary key
-  #   csv_text = File.read(Rails.root.join('db', 'data', 'invoice_items.csv'))
-  #   csv = CSV.parse(csv_text, headers: true)
-  #   csv.each do |row|
-  #     InvoiceItem.create!(row.to_hash)
-  #   end
-  # end
+  desc 'imports the invoice items csv into seed file'
+  task invoice_items: :environment do
+    # reset primary key
+    csv_text = File.read(Rails.root.join('db', 'data', 'invoice_items.csv'))
+    csv = CSV.parse(csv_text, headers: true)
+    csv.each do |row|
+      InvoiceItem.create!(row.to_hash)
+    end
+  end
 
   desc 'imports the customers csv into seed file'
   task invoices: :environment do
@@ -51,15 +51,15 @@ namespace :csv_load do
     end
   end
 
-  # desc 'imports the customers csv into seed file'
-  # task transactions: :environment do
-  #   # reset primary key
-  #   csv_text = File.read(Rails.root.join('db', 'data', 'transactions.csv'))
-  #   csv = CSV.parse(csv_text, headers: true)
-  #   csv.each do |row|
-  #     Transaction.create!(row.to_hash)
-  #   end
-  # end
+  desc 'imports the customers csv into seed file'
+  task transactions: :environment do
+    # reset primary key
+    csv_text = File.read(Rails.root.join('db', 'data', 'transactions.csv'))
+    csv = CSV.parse(csv_text, headers: true)
+    csv.each do |row|
+      Transaction.create!(row.to_hash)
+    end
+  end
 end
 
 # id,first_name,last_name,created_at,updated_at
