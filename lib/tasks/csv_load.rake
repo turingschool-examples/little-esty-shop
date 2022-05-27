@@ -21,15 +21,15 @@ namespace :csv_load do
   #   end
   # end
 
-  # desc 'imports the customers csv into seed file'
-  # task invoices: :environment do
-  #   # reset primary key
-  #   csv_text = File.read(Rails.root.join('db', 'data', 'invoices.csv'))
-  #   csv = CSV.parse(csv_text, headers: true)
-  #   csv.each do |row|
-  #     Invoice.create!(row.to_hash)
-  #   end
-  # end
+  desc 'imports the customers csv into seed file'
+  task invoices: :environment do
+    # reset primary key
+    csv_text = File.read(Rails.root.join('db', 'data', 'invoices.csv'))
+    csv = CSV.parse(csv_text, headers: true)
+    csv.each do |row|
+      Invoice.create!(row.to_hash)
+    end
+  end
 
   desc 'imports the customers csv into seed file'
   task items: :environment do
