@@ -31,25 +31,25 @@ namespace :csv_load do
   #   end
   # end
 
-  # desc 'imports the customers csv into seed file'
-  # task items: :environment do
-  #   # reset primary key
-  #   csv_text = File.read(Rails.root.join('db', 'data', 'items.csv'))
-  #   csv = CSV.parse(csv_text, headers: true)
-  #   csv.each do |row|
-  #     Item.create!(row.to_hash)
-  #   end
-  # end
+  desc 'imports the customers csv into seed file'
+  task items: :environment do
+    # reset primary key
+    csv_text = File.read(Rails.root.join('db', 'data', 'items.csv'))
+    csv = CSV.parse(csv_text, headers: true)
+    csv.each do |row|
+      Item.create!(row.to_hash)
+    end
+  end
 
-  # desc 'imports the customers csv into seed file'
-  # task merchants: :environment do
-  #   # reset primary key
-  #   csv_text = File.read(Rails.root.join('db', 'data', 'merchants.csv'))
-  #   csv = CSV.parse(csv_text, headers: true)
-  #   csv.each do |row|
-  #     Merchant.create!(row.to_hash)
-  #   end
-  # end
+  desc 'imports the merchants csv into seed file'
+  task merchants: :environment do
+    # reset primary key
+    csv_text = File.read(Rails.root.join('db', 'data', 'merchants.csv'))
+    csv = CSV.parse(csv_text, headers: true)
+    csv.each do |row|
+      Merchant.create!(row.to_hash)
+    end
+  end
 
   # desc 'imports the customers csv into seed file'
   # task transactions: :environment do
