@@ -44,9 +44,9 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
-  task :merchants do 
+  task merchants: :environment do 
     Merchant.destroy_all
-    CSV.foreach('db/data/transactions.csv', headers: true) do |row|
+    CSV.foreach('db/data/merchants.csv', headers: true) do |row|
       Merchant.create!(row.to_h)
     end 
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
