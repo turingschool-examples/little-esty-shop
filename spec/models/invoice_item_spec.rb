@@ -5,7 +5,8 @@ RSpec.describe InvoiceItem do
     it { should belong_to(:invoice) }
     it { should belong_to(:item) }
 
-    it { should validate_precense_of(:first_name) }
-    it { should validate_precense_of(:last_name) }
+    it { should validate_presence_of(:quantity) }
+    it { should validate_presence_of(:unit_price) }
+    it { should validate_presence_of(:status) }
   end
 end
