@@ -18,6 +18,9 @@ namespace :csv_load do
 
   desc 'TODO'
   task items: :environment do
+    CSV.foreach('db/data/items.csv', headers: true) do |row|                                 # For now I just did it for the one im doing so you can see what I did and get some hands on
+      Item.create(row.to_h)   
+    end 
   end
 
   desc 'TODO'
