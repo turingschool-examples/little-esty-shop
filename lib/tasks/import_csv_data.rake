@@ -29,7 +29,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
 
-  task transactions: :environment do 
+  task transactions: :environment do
     Transaction.destroy_all
     CSV.foreach('db/data/transactions.csv', headers: true) do |row|
       row[4] = if row[4] == 'success'
@@ -44,13 +44,50 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
-  task merchants: :environment do 
+  task merchants: :environment do
     Merchant.destroy_all
     CSV.foreach('db/data/merchants.csv', headers: true) do |row|
       Merchant.create!(row.to_h)
-    end 
+    end
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
+
+  task items: :environment do
+    Item.destroy_all
+    CSV.foreach('db/data/items.csv', headers: true) do |row|
+      Item.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+  end
+
+  task invoice_items: :environment do
+    InvoiceItem.destroy_all
+    CSV.foreach('db/data/invoice_items.csv', headers: true) do |row|
+      row[5] = if row[5] == 'pending'
+                 0
+               elsif row[5] == 'packaged'
+                 1
+               elsif row[5] == 'shipped'
+                 2
+               else
+                 raise 'Unknown status found'
+               end
+      InvoiceItem.create(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+  end
+
+  task delete_all: :environment do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+    Transaction.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
+  end
+
+  task :all => [:delete_all, :customers, :invoices, :transactions, :merchants, :items, :invoice_items] 
+
 
   desc 'reset all table primary keys'
   task reset_keys: :environment do
