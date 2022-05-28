@@ -79,7 +79,7 @@ RSpec.describe 'merchant dashboard show' do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Top 5 Favorite Customers:")
-save_and_open_page
+
     within ".favorite_customers" do
       expect(page).to have_content(customer6.first_name)
       expect(page).to have_content(customer6.last_name)
