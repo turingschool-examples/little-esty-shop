@@ -30,13 +30,13 @@ namespace :csv_load do
   task invoice_items: :environment do
     InvoiceItem.destroy_all
     CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
-        # if row[5] == "packaged"
-        # row[5] = 0
-        # elsif row[5] == "pending"
-        #   row[5] = 1
-        # else row[5] == "shipped"
-        #   row[5] = 2
-        # end
+        if row[5] == "packaged"
+        row[5] = 0
+        elsif row[5] == "pending"
+          row[5] = 1
+        else row[5] == "shipped"
+          row[5] = 2
+        end
       InvoiceItem.create(row.to_h)
     end
       ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
@@ -45,13 +45,13 @@ namespace :csv_load do
   task invoices: :environment do
     Invoice.destroy_all
     CSV.foreach('./db/data/invoices.csv', headers: true) do |row|
-       # if row[2] == "cancelled"
-       #  row[2] = 0
-       #  elsif row[2] == "in progress"
-       #    row[2] = 1
-       #  else row[2] == "completed"
-       #    row[2] = 2
-       #  end
+       if row[2] == "cancelled"
+        row[2] = 0
+        elsif row[2] == "in progress"
+          row[2] = 1
+        else row[2] == "completed"
+          row[2] = 2
+        end
       Invoice.create(row.to_h)
     end
       ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
