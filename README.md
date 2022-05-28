@@ -30,13 +30,12 @@ This project requires Ruby 2.7.4.
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 
-## Schema
-![Screen Shot 2022-05-28 at 9 16 18 AM](https://user-images.githubusercontent.com/99001315/170831535-23d45b5d-5c90-4f1c-a519-fa318298031e.png)
-
-
 ## Phases
 
 1. [Database Setup](./doc/db_setup.md)
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+## Schema
+![Screen Shot 2022-05-28 at 9 16 18 AM](https://user-images.githubusercontent.com/99001315/170831535-23d45b5d-5c90-4f1c-a519-fa318298031e.png)
