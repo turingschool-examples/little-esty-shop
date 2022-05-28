@@ -9,6 +9,13 @@ RSpec.describe 'merchant dashboard show' do
   it "displays a merchant's name" do
     visit "/merchants/#{merchant1.id}/dashboard"
 
-    \expect(page).to have_content("Schroeder-Jerde")
+    expect(page).to have_content("Schroeder-Jerde")
+  end
+
+  it "has links to items and invoices" do
+    visit "/merchants/#{merchant1.id}/dashboard"
+
+    expect(page).to have_link("Items Index")
+    expect(page).to have_link("Invoices Index")
   end
 end
