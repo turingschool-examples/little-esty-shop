@@ -14,6 +14,9 @@ namespace :csv_load do
 
   desc 'TODO'
   task invoices: :environment do
+    CSV.foreach('db/data/invoices.csv', headers: true) do |row|                                 # For now I just did it for the one im doing so you can see what I did and get some hands on
+      Invoice.create(row.to_h) 
+    end
   end
 
   desc 'TODO'
