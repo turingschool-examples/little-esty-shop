@@ -1,3 +1,11 @@
-<h2><%= @merchant.name %></h2>
+<h2>Merchant Dashboard of: <%= @merchant.name %></h2>
 <%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
+
+<div class= "favorite_customers">
+  <h3>Top 5 Favorite Customers:</h3>
+  <% Customer.favorite_customers(5).each do |customer| %>
+    <p>Customer: <%= "#{customer.first_name} #{customer.last_name}" %></p>
+    <p>Number of Successful Transactions: <%= Customer.count_successful_transactions(customer.id) %></p>
+    <% end %>
+</div>

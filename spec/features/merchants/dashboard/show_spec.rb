@@ -22,6 +22,7 @@ RSpec.describe 'merchant dashboard show' do
   let!(:invoice8) { customer5.invoices.create!(status: "completed") }
   let!(:invoice9) { customer6.invoices.create!(status: "in progress") }
   let!(:invoice10) { customer6.invoices.create!(status: "cancelled") }
+  let!(:invoice11) { customer6.invoices.create!(status: "cancelled") }
 
   let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 13635, status: "packaged") }
   let!(:invoice_item2) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 9, unit_price: 23324, status: "pending") }
@@ -33,16 +34,17 @@ RSpec.describe 'merchant dashboard show' do
   let!(:invoice_item8) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice8.id, quantity: 2, unit_price: 23324, status: "pending") }
   let!(:invoice_item9) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice9.id, quantity: 4, unit_price: 34873, status: "packaged") }
   let!(:invoice_item10) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice10.id, quantity: 8, unit_price: 2196, status: "packaged") }
+  let!(:invoice_item11) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice11.id, quantity: 8, unit_price: 2196, status: "packaged") }
 
   let!(:customer1) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
   let!(:customer2) { Customer.create!(first_name: "Sylvester", last_name: "Nader") }
   let!(:customer3) { Customer.create!(first_name: "Heber", last_name: "Kuhn") }
   let!(:customer4) { Customer.create!(first_name: "Mariah", last_name: "Toy") }
-  let!(:customer5) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
+  let!(:customer5) { Customer.create!(first_name: "Carl", last_name: "Junior") }
   let!(:customer6) { Customer.create!(first_name: "Tony", last_name: "Bologna") }
 
   let!(:transaction1) { Transaction.create!(invoice_id: invoice1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "2/22", result: "success") }
-  let!(:transaction2) { Transaction.create!(invoice_id: invoice2.id, credit_card_number: 4580251236515201, credit_card_expiration_date: "1/22", result: "success") }
+  let!(:transaction2) { Transaction.create!(invoice_id: invoice2.id, credit_card_number: 4580251236515201, credit_card_expiration_date: "1/22", result: "failed") }
   let!(:transaction3) { Transaction.create!(invoice_id: invoice3.id, credit_card_number: 4354495077693036, credit_card_expiration_date: "10/22", result: "success") }
   let!(:transaction4) { Transaction.create!(invoice_id: invoice4.id, credit_card_number: 4515551623735607, credit_card_expiration_date: "4/25", result: "success") }
   let!(:transaction5) { Transaction.create!(invoice_id: invoice5.id, credit_card_number: 4844518708741275, credit_card_expiration_date: "4/23", result: "success") }
@@ -51,6 +53,7 @@ RSpec.describe 'merchant dashboard show' do
   let!(:transaction8) { Transaction.create!(invoice_id: invoice8.id, credit_card_number: 4540842003561938, credit_card_expiration_date: "2/22", result: "failed") }
   let!(:transaction9) { Transaction.create!(invoice_id: invoice9.id, credit_card_number: 4140149827486249, credit_card_expiration_date: "3/22", result: "success") }
   let!(:transaction10) { Transaction.create!(invoice_id: invoice10.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
+  let!(:transaction11) { Transaction.create!(invoice_id: invoice11.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
 
   it "displays a merchant's name" do
     visit "/merchants/#{merchant1.id}/dashboard"
@@ -74,32 +77,33 @@ RSpec.describe 'merchant dashboard show' do
   # conducted with my merchant
   it "displays the largest number of successful transactions with top 5 customers" do
     visit "/merchants/#{merchant1.id}/dashboard"
-# require "pry"; binding.pry
-    expect(page).to have_content("Top 5 Favorite Customers: ")
 
-    within "#customer-#{customer1.id}" do
-      expect(page).to have_content(customer1.name)
-      expect(page).to have_content("Number of Successful Transactions: ")
-    end
+    expect(page).to have_content("Top 5 Favorite Customers:")
 
-    within "#customer-#{customer2.id}" do
-      expect(page).to have_content(customer2.name)
-      expect(page).to have_content("Number of Successful Transactions: ")
-    end
+    within ".favorite_customers" do
+      expect(page).to have_content(customer6.first_name)
+      expect(page).to have_content(customer6.last_name)
+      expect(page).to have_content("Number of Successful Transactions: 3")
+      expect("Number of Successful Transactions: 3").to appear_before("Customer: Carl Junior")
 
-    within "#customer-#{customer3.id}" do
-      expect(page).to have_content(customer3.name)
-      expect(page).to have_content("Number of Successful Transactions: ")
-    end
+      expect(page).to have_content(customer5.first_name)
+      expect(page).to have_content(customer5.last_name)
+      expect(page).to have_content("Number of Successful Transactions: 2")
+      expect("Number of Successful Transactions: 2").to appear_before("Customer: Heber Kuhn")
 
-    within "#customer-#{customer4.id}" do
-      expect(page).to have_content(customer4.name)
-      expect(page).to have_content("Number of Successful Transactions: ")
-    end
+      expect(page).to have_content(customer3.first_name)
+      expect(page).to have_content(customer3.last_name)
+      expect(page).to have_content("Number of Successful Transactions: 1")
+      expect("Number of Successful Transactions: 1").to appear_before("Customer: Mariah Toy")
 
-    within "#customer-#{customer5.id}" do
-      expect(page).to have_content(customer5.name)
-      expect(page).to have_content("Number of Successful Transactions: ")
+      expect(page).to have_content(customer4.first_name)
+      expect(page).to have_content(customer4.last_name)
+
+      expect(page).to have_content(customer1.first_name)
+      expect(page).to have_content(customer1.last_name)
+
+      expect(page).to_not have_content(customer2.first_name)
+      expect(page).to_not have_content(customer2.last_name)
     end
   end
 end
