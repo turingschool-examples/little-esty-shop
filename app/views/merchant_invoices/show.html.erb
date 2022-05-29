@@ -6,6 +6,6 @@
 <% @invoice.invoice_items.each do |ii| %>
   <h3><%= ii.item.name %></h3>
   Quantity: <%= ii.quantity %><br>
-  Price: $<%= ii.item.unit_price %><br>
+  Unit Price: $<%= ii.item.unit_price %><br>
   Status: <%= ii.status %><br><br><br>
 <% end %>
