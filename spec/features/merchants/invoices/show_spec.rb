@@ -11,11 +11,11 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     @cust_2 = Customer.create!(first_name: "Tommy", last_name: "Doubleleg")
 
     @invoice_1 = @cust_1.invoices.create!(status: 1)
-    @invoice_2 = @cust_1.invoices.create!(status: 1)
+    @invoice_2 = @cust_1.invoices.create!(status: 2)
     @invoice_3 = @cust_1.invoices.create!(status: 1)
     @invoice_4 = @cust_2.invoices.create!(status: 1)
     @invoice_5 = @cust_2.invoices.create!(status: 1)
-    @invoice_6 = @cust_2.invoices.create!(status: 1)
+    @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "2021-05-29 17:44:03 UTC")
   end
 
   it "shows invoice ID, invoice status, created at time formatted and customer name" do
@@ -28,7 +28,7 @@ RSpec.describe "merchant's invoice show page", type: :feature do
 
     expect(page).to_not have_content("#{@invoice_2.id}")
     expect(page).to_not have_content("#{@invoice_2.status}")
-    expect(page).to_not have_content("#{@invoice_2.created_at}")
+    expect(page).to_not have_content("#{@invoice_6.created_at}")
     expect(page).to_not have_content("Tommy Doubleleg")
   end
 end
