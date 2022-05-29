@@ -12,4 +12,11 @@ RSpec.describe "merchant dashboard", type: :feature do
     expect(page).to_not have_content("Klein, Rempel and Jones")
   end
 
+  it "has links to merchant items index and merchant invoices index" do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    expect(page).to have_link("My Items", href: "/merchants/#{@merchant_1.id}/items")
+    expect(page).to_not have_link("My Items", href: "/merchants/#{@merchant_2.id}/items")
+  end
+
 end
