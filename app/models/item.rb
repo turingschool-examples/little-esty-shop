@@ -7,4 +7,8 @@ class Item < ApplicationRecord
   def unit_price_to_dollars
     self.unit_price / 100.00
   end
+
+  def merchant_object
+    Merchant.find(self.merchant_id)
+  end
 end
