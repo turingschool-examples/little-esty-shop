@@ -1,6 +1,8 @@
 require 'csv'
 
 namespace :csv_load do
+  desc 'runs all tasks'
+  task create: [:create_customers, :create_invoices, :create_merchants, :create_items, :create_invoice_items, :create_transactions]
 
   task :create_customers => :environment do
     CSV.foreach(Rails.root.join('db/data/customers.csv'), headers: true) do |row|
