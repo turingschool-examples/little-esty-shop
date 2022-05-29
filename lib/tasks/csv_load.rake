@@ -51,10 +51,10 @@ namespace :csv_load do
 
   task all: :environment do
     Rake::Task["csv_load:customers"].execute
-    Rake::Task["csv_load:invoice_items"].execute
+    Rake::Task["csv_load:merchants"].execute
     Rake::Task["csv_load:invoices"].execute
     Rake::Task["csv_load:items"].execute
-    Rake::Task["csv_load:merchants"].execute
+    Rake::Task["csv_load:invoice_items"].execute
     Rake::Task["csv_load:transactions"].execute
   end
 end
