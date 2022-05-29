@@ -14,12 +14,12 @@ RSpec.describe Merchant do
 
     before :each do
       @merch_1 = Merchant.create!(name: "Two-Legs Fashion")
-      @merch_2 = Merchant.create!(name: "One-Leg Fashion")
+      @merch_2 = Merchant.create!(name: "Klein, Rempel and Jones")
 
       @item_1 = @merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 5000)
       @item_2 = @merch_1.items.create!(name: "Two-Leg Shorts", description: "shorts built for people with two legs", unit_price: 3000)
       @item_3 = @merch_1.items.create!(name: "Hat", description: "hat built for people with two legs and one head", unit_price: 6000)
-      @item_4 = @merch_2.items.create!(name: "Single Legged Pant", description: "pants built for people with one leg", unit_price: 50000)
+      @item_4 = @merch_2.items.create!(name: "Pant", description: "pants built for people", unit_price: 50000)
   
       @cust_1 = Customer.create!(first_name: "Debbie", last_name: "Twolegs")
       @cust_2 = Customer.create!(first_name: "Tommy", last_name: "Doubleleg")
