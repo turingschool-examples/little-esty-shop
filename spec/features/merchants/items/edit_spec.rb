@@ -21,9 +21,15 @@ RSpec.describe "merchant items edit page", type: :feature do
     visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit"
 
     fill_in "Name", with: "One-Leg Pantaloons"
+    fill_in "Description", with: "Very niche market"
+    fill_in "unit_price", with: 1233
     click_button "Submit"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
     expect(page).to have_content("Item successfully updated!")
+    expect(page).to have_content("One-Leg Pantaloons")
+    expect(page).to have_content("Very niche market")
+    expect(page).to_not have_content("Two-Leg Pantaloons")
+    expect(page).to have_content("Price: $12.33")
   end
 
     it "can prevent item from being updated with incorrect information" do
@@ -35,7 +41,6 @@ RSpec.describe "merchant items edit page", type: :feature do
     click_button "Submit"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")
     expect(page).to have_content("Error: Name can't be blank, Description can't be blank")
-    save_and_open_page
   end
 
 end
