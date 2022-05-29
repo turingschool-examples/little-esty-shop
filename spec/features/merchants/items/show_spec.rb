@@ -21,4 +21,12 @@ RSpec.describe "merchant items show page", type: :feature do
     expect(page).to_not have_content("shorts built for people with two legs")
   end
 
+   it "can link to merchant items edit page" do
+    visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
+
+    expect(page).to have_link("Update Item")
+    click_link "Update Item"
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")
+  end
+
 end
