@@ -9,7 +9,7 @@
     <div id="item-<%= index %>">
         <%= invoice_item.item.name %> 
         &nbsp
-        Invoice #<%= invoice_item.invoice.id %>
+        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
     </div>
 <% end %>
 
