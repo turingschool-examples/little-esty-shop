@@ -23,7 +23,19 @@ RSpec.describe "merchant items edit page", type: :feature do
     fill_in "Name", with: "One-Leg Pantaloons"
     click_button "Submit"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
-    expect(controller).to set_flash[:success]
+    expect(page).to have_content("Item successfully updated!")
+  end
+
+    it "can prevent item from being updated with incorrect information" do
+    visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit"
+
+    fill_in "Name", with: ""
+    fill_in "Description", with: ""
+    fill_in "unit_price", with: "asdasd"
+    click_button "Submit"
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")
+    expect(page).to have_content("Error: Name can't be blank, Description can't be blank")
+    save_and_open_page
   end
 
 end
