@@ -1,4 +1,6 @@
-<%= @invoice.id %>
-<%= @invoice.status %>
-<%= @invoice.created_at %>
-<%= @invoice.customer.first_name %> <%=  @invoice.customer.last_name %>
+<h1> Invoice ID: <%= @invoice.id %></h1>
+<p>Status: <%= @invoice.status %></p>
+<p>Status: <%= @invoice.created_at.strftime( "%A, %b %e, %Y") %></p>
+<p>Customer: <%= @invoice.customer.first_name %> <%=  @invoice.customer.last_name %></p>
+<br><br>
+<%= binding.pry %>
