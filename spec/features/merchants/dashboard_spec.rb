@@ -49,30 +49,38 @@ RSpec.describe "merchant dashboard", type: :feature do
     visit "/merchants/#{@merchant_1.id}/dashboard"
 
     expect(page).to have_content("Items Ready To Ship")
-    save_and_open_page
+    
     within("#item-0") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_1.id)
       expect(page).to_not have_content(@item_2.name)
       expect(page).to_not have_content(@invoice_2.id)
+      click_link "Invoice ##{@invoice_1.id}"
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id})")
     end
     within("#item-1") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_2.id)
       expect(page).to_not have_content(@item_2.name)
       expect(page).to_not have_content(@invoice_1.id)
+      click_link "Invoice ##{@invoice_2.id}"
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id})")
     end
     within("#item-2") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_4.id)
       expect(page).to_not have_content(@item_4.name)
       expect(page).to_not have_content(@invoice_1.id)
+      click_link "Invoice ##{@invoice_4.id}"
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id})")
     end
     within("#item-3") do
       expect(page).to have_content(@item_2.name)
       expect(page).to have_content(@invoice_4.id)
       expect(page).to_not have_content(@item_4.name)
       expect(page).to_not have_content(@invoice_2.id)
+      click_link "Invoice ##{@invoice_4.id}"
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id})")
     end
   end
 
