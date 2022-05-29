@@ -27,8 +27,8 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     expect(page).to have_content("Debbie Twolegs")
 
     expect(page).to_not have_content("#{@invoice_2.id}")
-    expect(page).to_not have_content("#{@invoice_2.id}")
-    expect(page).to_not have_content("#{@invoice_2.id}")
+    expect(page).to_not have_content("#{@invoice_2.status}")
+    expect(page).to_not have_content("#{@invoice_2.created_at}")
     expect(page).to_not have_content("Tommy Doubleleg")
   end
 end
