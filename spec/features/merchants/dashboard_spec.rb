@@ -17,5 +17,6 @@ RSpec.describe 'merchants dashboard' do
     expect(page).to have_content('Items Index')
 
     expect(page).to have_content('Invoices Index')
+    save_and_open_page
   end
 end
