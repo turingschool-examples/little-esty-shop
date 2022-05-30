@@ -11,11 +11,11 @@ RSpec.describe "Admin dashboard" do
     visit '/admin'
 
     click_link "Admin Merchant Index"
-    expect(path).to eq "/admin/merchants"
+    expect(current_path).to eq "/admin/merchants"
 
     visit '/admin'
 
     click_link "Admin Invoice Index"
-    expect(path).to eq "/admin/invoices"
+    expect(current_path).to eq "/admin/invoices"
   end
 end
