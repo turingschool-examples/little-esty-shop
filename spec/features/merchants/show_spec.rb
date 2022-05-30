@@ -9,6 +9,8 @@ RSpec.describe "Merchants show page" do
       merchant = create(:merchant)
       visit "/merchants/#{merchant.id}/dashboard"
 
+      # save_and_open_page # does not include CSS
+
       expect(page).to have_content(merchant.name)
     end
   end
