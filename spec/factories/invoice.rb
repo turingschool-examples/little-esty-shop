@@ -1,11 +1,7 @@
-# FactoryBot.define do 
-#   sequence :status do |
-
-#   end
-# end
-FactoryBot.define do 
-  factory :invoice do 
-    status { 0 }
+FactoryBot.define do
+  factory :invoice do
+    possible_status = [0, 1, 2]
+    status { possible_status.sample }
     customer
   end
 end
