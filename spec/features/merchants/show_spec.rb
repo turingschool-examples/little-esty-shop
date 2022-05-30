@@ -19,10 +19,8 @@ RSpec.describe 'Merchants show page', type: :feature do
   describe 'Dashboard Links' do
     it 'links to merchant items and merchant invoices' do
       visit "/merchants/#{merchant1.id}/dashboard"
-
       click_link 'My Items'
       expect(current_path).to eq("/merchants/#{merchant1.id}/items")
-      save_and_open_page
 
       visit "/merchants/#{merchant1.id}/dashboard"
 
