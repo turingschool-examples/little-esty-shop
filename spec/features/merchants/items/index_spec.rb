@@ -26,19 +26,21 @@ RSpec.describe 'merchant items index page' do
     expect(page).to_not have_content("Pirate Pants")
   end
 
-  it 'can disable/enable an item' do
+  it 'can disable/enable an item and the items are seperated and displayed by status' do
     visit "/merchants/#{@merch_1.id}/items"
-    within "#item-#{@item_1.id}" do
-      expect(page).to_not have_button("Disable")
-      click_button("Enable")
-      expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
+    within "#disabled" do
+      within "#item-#{@item_1.id}" do
+        expect(page).to_not have_button("Disable")
+        click_button("Enable")
+        expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
+      end
     end
-    within "#item-#{@item_1.id}" do
-      expect(page).to_not have_button("Enable")
-      click_button("Disable")
-      expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
+    within "#enabled" do
+      within "#item-#{@item_1.id}" do
+        expect(page).to_not have_button("Enable")
+        click_button("Disable")
+        expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
+      end
     end
-
-
   end
 end
