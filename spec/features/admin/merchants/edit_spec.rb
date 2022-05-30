@@ -18,7 +18,7 @@ RSpec.describe "merchant edit page", type: :feature do
     fill_in "Name", with: "Buck-An-Ear Jewelry"
     click_button "Submit"
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
-    expect(page).to have_content("Item successfully updated!")
+    expect(page).to have_content("Merchant successfully updated!")
     expect(page).to have_content("Buck-An-Ear Jewelry")
     expect(page).to_not have_content("Klein, Rempel and Jones")
     expect(page).to_not have_content("Schroeder-Jerde")
