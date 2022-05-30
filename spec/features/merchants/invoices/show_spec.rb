@@ -16,19 +16,36 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     @invoice_4 = @cust_2.invoices.create!(status: 1)
     @invoice_5 = @cust_2.invoices.create!(status: 1)
     @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "2021-05-29 17:44:03 UTC")
+
+    @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 2, unit_price: @item_2.unit_price, status: 1)
   end
 
   it "shows invoice ID, invoice status, created at time formatted and customer name" do
     visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id})"
 
-    expect(page).to have_content("#{@invoice_1.id}")
-    expect(page).to have_content("#{@invoice_1.status}")
-    expect(page).to have_content("#{@invoice_1.created_at}")
+    expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
+    expect(page).to have_content("Status: in progress")
+    expect(page).to have_content("Sunday, May 29, 2022")
     expect(page).to have_content("Debbie Twolegs")
 
     expect(page).to_not have_content("#{@invoice_2.id}")
     expect(page).to_not have_content("#{@invoice_2.status}")
     expect(page).to_not have_content("#{@invoice_6.created_at}")
     expect(page).to_not have_content("Tommy Doubleleg")
+  end
+
+  it "shows item name, quantity, price, status from just this merchant" do
+    visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id})"
+
+    expect(page).to have_content("Two-Leg Pantaloons")
+    expect(page).to have_content("Quantity: 1")
+    expect(page).to have_content("Price: $5000")
+    expect(page).to have_content("Status: shipped")
+
+    expect(page).to_not have_content("Two-Leg Shorts")
+    expect(page).to_not have_content("Quantity: 2")
+    expect(page).to_not have_content("Price: $3000")
+    expect(page).to_not have_content("Status: packaged")
   end
 end
