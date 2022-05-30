@@ -13,3 +13,39 @@
  *= require_tree .
  *= require_self
  */
+.page-defaults {
+  font-family: arial;
+}
+
+#shopId {
+  text-align: center;
+}
+
+#shopId > h1 span {
+ background-color: lightgrey;
+}
+
+#splitSides {
+ display: flex;
+ flex-direction: row;
+}
+
+#leftSide {
+  width: 50%;
+  text-align: left;
+}
+
+#rightSide {
+  width: 50%;
+  text-align: right;
+}
+
+#leftSide2 {
+  width: 50%;
+  text-align: center;
+}
+
+#rightSide2 {
+  width: 50%;
+  text-align: center;
+}

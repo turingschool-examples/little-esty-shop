@@ -9,6 +9,7 @@ namespace :csv_load do
     end
     # resets primary key sequence in rails based on current data
     ActiveRecord::Base.connection.reset_pk_sequence!('customers')
+    puts "'Customers' Created"
   end
 
   task invoices: :environment do
@@ -21,12 +22,12 @@ namespace :csv_load do
                elsif row[2] == 'cancelled'
                  2
                else
-                 raise 'Unknown status found'
+                 raise "Unknown 'status' found while creating 'Invoices'"
                end
       Invoice.create(row.to_h)
     end
-    # resets primary key sequence in rails based on current data
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
+    puts "'Invoices' Created"
   end
 
   task transactions: :environment do
@@ -37,11 +38,12 @@ namespace :csv_load do
               elsif row[4] == 'failed'
                 1
               else
-                raise 'Unknown result found'
+                raise "Unknown 'result' found while creating 'Transactions'"
               end
       Transaction.create!(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
+    puts "'Transactions' Created"
   end
 
   task merchants: :environment do
@@ -50,6 +52,7 @@ namespace :csv_load do
       Merchant.create!(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+    puts "'Merchants' Created"
   end
 
   task items: :environment do
@@ -58,6 +61,7 @@ namespace :csv_load do
       Item.create!(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('items')
+    puts "'Items' Created"
   end
 
   task invoice_items: :environment do
@@ -70,11 +74,12 @@ namespace :csv_load do
                elsif row[5] == 'shipped'
                  2
                else
-                 raise 'Unknown status found'
+                 raise "Unknown 'status' found while creating 'Invoice Items'"
                end
       InvoiceItem.create(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+    puts "'Invoice Items' Created"
   end
 
   task delete_all: :environment do
@@ -84,10 +89,10 @@ namespace :csv_load do
     Transaction.destroy_all
     Invoice.destroy_all
     Customer.destroy_all
+    puts "'Delete All' Complete"
   end
 
-  task :all => [:delete_all, :customers, :invoices, :transactions, :merchants, :items, :invoice_items] 
-
+  task :all => [:delete_all, :customers, :invoices, :transactions, :merchants, :items, :invoice_items]
 
   desc 'reset all table primary keys'
   task reset_keys: :environment do
