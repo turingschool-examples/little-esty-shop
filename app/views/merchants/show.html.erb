@@ -9,7 +9,10 @@
   </div>
 
   <div class="page-defaults" id="rightSide">
-    nav menu
+    <ul>
+      <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+      <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+    </ul>
   </div>
 
 </div>
