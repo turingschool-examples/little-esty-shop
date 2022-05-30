@@ -4,8 +4,10 @@
 <p>Customer: <%= @invoice.customer.first_name %> <%=  @invoice.customer.last_name %></p>
 <br><br>
 <% @invoice.invoice_items.each do |ii| %>
-  <h3><%= ii.item.name %></h3>
-  Quantity: <%= ii.quantity %><br>
-  Unit Price: $<%= ii.item.unit_price %><br>
-  Status: <%= ii.status %><br><br><br>
+  <% if ii.item.merchant_id == params[:merchant_id].to_i %>
+    <h3><%= ii.item.name %></h3>
+    Quantity: <%= ii.quantity %><br>
+    Unit Price: $<%= ii.item.unit_price %><br>
+    Status: <%= ii.status %><br><br><br>
+  <% end %>
 <% end %>
