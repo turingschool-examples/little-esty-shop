@@ -7,4 +7,5 @@ class Invoice < ApplicationRecord
   enum status: ['cancelled','in progress', 'completed']
 
   validates :status, inclusion: { in: statuses.keys }
+
 end
