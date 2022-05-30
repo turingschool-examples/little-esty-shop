@@ -68,4 +68,13 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id})"
     expect(page).to have_content("Total Revenue: $610.00")
   end
+
+  it "can change the invoice status" do
+    visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id})"
+    expect(find_field('invoice_item_status').value).to eq("Pending")
+    select "Packaged"
+    click_button "Update Invoice"
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}/edit")
+    expect(page).to have_content("Status: Packaged")
+  end
 end
