@@ -14,4 +14,3 @@ class Merchant < ApplicationRecord
     InvoiceItem.where(item_id: merchant_items).where(status: [0,1])
   end
 end
-
