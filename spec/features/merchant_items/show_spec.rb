@@ -11,11 +11,12 @@ RSpec.describe "Merchant Items Show Page" do
     item_3 = merchant_2.items.create!(name: "Ea Voluptatum", description: "Sunt officia", unit_price: 68723)
 
     visit "/merchants/#{merchant_1.id}/items"
-    expect(page).to have_link("#{item_1.name}")
+    expect(page).to have_link(item_1.name)
 
     click_link "#{item_1.name}"
     expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
 
+save_and_open_page
     expect(page).to have_content("Name:")
     expect(page).to have_content(item_1.name)
     expect("Name: ").to appear_before("Qui Esse")
@@ -24,7 +25,7 @@ RSpec.describe "Merchant Items Show Page" do
     expect("Description: ").to appear_before("Nihil autem sit odio inventore deleniti")
     expect(page).to have_content("Current Selling Price:")
     expect(page).to have_content(item_1.unit_price)
-    expect("Current Selling Price: ").to appear_before("$67076")
+    expect("Current Selling Price: ").to appear_before("$75107")
 
     expect(page).to_not have_content(item_2.name)
     expect(page).to_not have_content(item_3.name)
