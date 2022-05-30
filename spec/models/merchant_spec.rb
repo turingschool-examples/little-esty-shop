@@ -9,7 +9,7 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:transactions).through(:invoices) }
   end
 
-  describe 'valdiations' do 
+  describe 'valdiations' do
     it { should validate_presence_of :name}
   end
 end
