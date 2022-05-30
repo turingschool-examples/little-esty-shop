@@ -7,7 +7,9 @@
   <% if ii.item.merchant_id == params[:merchant_id].to_i %>
     <h3><%= ii.item.name %></h3>
     Quantity: <%= ii.quantity %><br>
-    Unit Price: $<%= ii.item.unit_price %><br>
-    Status: <%= ii.status %><br><br><br>
+    Unit Price: $<%= '%.2f' % ii.item.unit_price_to_dollars %><br>
+    Status: <%= ii.status %><br><br>
   <% end %>
 <% end %>
+
+Total Revenue: $<%= ('%.2f' % @invoice.total_revenue.fdiv(100)) %>
