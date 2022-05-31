@@ -3,5 +3,8 @@
 <% @items.each do |item| %>
   <div id="item-<%= item.id %>">
     <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <p>Current Status: <%= item.status %></p>
+    <p><%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { status: 1} %></p>
+    <p><%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { status: 0} %></p>
   </div>
 <% end %>
