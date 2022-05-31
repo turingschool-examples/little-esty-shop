@@ -34,6 +34,16 @@ RSpec.describe 'merchants items index' do
   end
 
   it "shows a link to update item information and displays a flash message when successful" do
+    # As a merchant,
+    # When I visit the merchant show page of an item
+    # I see a link to update the item information.
+    # When I click the link
+    # Then I am taken to a page to edit this item
+    # And I see a form filled in with the existing item attribute information
+    # When I update the information in the form and I click ‘submit’
+    # Then I am redirected back to the item show page where I see the updated information
+    # And I see a flash message stating that the information has been successfully updated.
+
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
     item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950)
@@ -46,10 +56,10 @@ RSpec.describe 'merchants items index' do
     fill_in :description, with: 'New and Improved'
     click_button 'Update Item'
     expect(current_path).to eq("/merchants/#{merch1.id}/items/#{item1.id}")
-    expect(page).to have_content("Floopy New")  
+    expect(page).to have_content("Floopy New")
     expect(page).to have_content("New and Improved")
     expect(page).to have_content("450")
     expect(page).to have_content("Success: Item information has been updated.")
   end
-  
+
 end

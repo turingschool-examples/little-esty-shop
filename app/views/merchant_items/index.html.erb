@@ -1,5 +1,23 @@
 <h2><%= @merchant.name %></h2>
 
-<% @items.each do |item| %>
-  <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
-<% end %>
+<h3>Enabled Items</h3>
+  <div id="enabled-items">
+    <% @items.enabled_items.each do |item| %>
+      <div id="item-<%= item.id %>">
+        <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+        <p>Current Status: <%= item.status %></p>
+        <p><%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { status: 0} %></p>
+      </div>
+    <% end %>
+  </div>
+
+<h3>Disabled Items</h3>
+  <div id="disabled-items">
+    <% @items.disabled_items.each do |item| %>
+      <div id="item-<%= item.id %>">
+        <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+        <p>Current Status: <%= item.status %></p>
+        <p><%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { status: 1} %></p>
+      </div>
+    <% end %>
+  </div>

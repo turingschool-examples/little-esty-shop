@@ -3,9 +3,15 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
-  # def self.merchants_items_all
-  #   binding.pry
-  # end
+  enum status: [:disabled, :enabled]
+
+  def self.enabled_items
+    where(status: 1)
+  end
+
+  def self.disabled_items
+    where(status: 0)
+  end
 
   def find_invoice_id
     invoice_items.first.invoice.id
