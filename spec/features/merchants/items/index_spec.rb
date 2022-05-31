@@ -46,7 +46,6 @@ RSpec.describe 'merchants items index' do
     within "#item-#{item1.id}" do
       expect(page).to have_content(item1.name)
       expect(page).to have_content(item1.status)
-      expect(page).to have_button("Disable #{item1.name}")
       expect(page).to have_button("Enable #{item1.name}")
 
       expect(page).to_not have_content(item2.name)
@@ -66,11 +65,10 @@ RSpec.describe 'merchants items index' do
       expect(page).to have_content(item2.name)
       expect(page).to have_content(item2.status)
       expect(page).to have_button("Disable #{item2.name}")
-      expect(page).to have_button("Enable #{item2.name}")
       expect(page).to have_content("Current Status: enabled")
     end
-    #
-    #
+
+
     click_button "Enable #{item1.name}"
     expect(current_path).to eq("/merchants/#{merch1.id}/items/")
     within "#item-#{item1.id}" do
@@ -96,6 +94,8 @@ RSpec.describe 'merchants items index' do
     item4 = merch1.items.create!(name: 'Floopy Retro', description: 'the OG', unit_price: 2950, status: 1)
 
     visit "/merchants/#{merch1.id}/items"
+
+    # save_and_open_page
 
     expect(page).to have_content("Enabled Items")
     expect(page).to have_content("Disabled Items")
