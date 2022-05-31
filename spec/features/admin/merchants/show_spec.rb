@@ -18,4 +18,11 @@ RSpec.describe 'admin merchants show page', type: :feature do
     expect(page).to_not have_content(@merch_4.name)
   end
 
+  it "links to merchant edit form" do
+    visit "admin/merchants/#{@merch_3.id}"
+    click_link "Update Merchant"
+
+    expect(current_path).to eq("/admin/merchants/#{@merch_3.id}/edit")
+  end
+
 end

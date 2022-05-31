@@ -20,6 +20,6 @@ RSpec.describe 'admin merchants index', type: :feature do
   it "links to merchants show page from merchants name" do
     visit "admin/merchants"
     click_link "Orange You Glad"
-    expect(current_path).to eq("/admin/merchants/#{@merch_3}")
+    expect(current_path).to eq("/admin/merchants/#{@merch_3.id}")
   end
 end
