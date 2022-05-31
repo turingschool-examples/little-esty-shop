@@ -6,7 +6,6 @@ RSpec.describe 'Admin Invoice Index Page' do
   @invoice_1 = @customer_1.invoices.create!(status: "cancelled", created_at: Time.now, updated_at: Time.now)
   @invoice_2 = @customer_1.invoices.create!(status: "in progress", created_at: Time.now, updated_at: Time.now)
   @invoice_3 = @customer_1.invoices.create!(status: "completed", created_at: Time.now, updated_at: Time.now)
-
   end
 
   it "lists all invoice ID's and links to their show page" do
