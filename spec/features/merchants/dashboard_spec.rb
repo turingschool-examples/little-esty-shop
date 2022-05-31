@@ -20,13 +20,6 @@ RSpec.describe "merchant dashboard", type: :feature do
     @invoice_5 = @cust_2.invoices.create!(status: 1)
     @invoice_6 = @cust_2.invoices.create!(status: 1)
 
-    @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0)
-    @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
-    @ii_3 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_2.unit_price, status: 2)
-    @ii_4 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_3.unit_price, status: 2)
-    @ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
-    @ii_6 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_2.unit_price, status: 1)
-    @ii_7 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_4.unit_price, status: 1)
   end
 
   it "shows name of merchant" do
@@ -46,10 +39,18 @@ RSpec.describe "merchant dashboard", type: :feature do
   end
 
   it "shows list of items ready to ship with their invoice id" do
+    ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0)
+    ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
+    ii_3 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_2.unit_price, status: 2)
+    ii_4 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_3.unit_price, status: 2)
+    ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
+    ii_6 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_2.unit_price, status: 1)
+    ii_7 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_4.unit_price, status: 1)
+  
     visit "/merchants/#{@merchant_1.id}/dashboard"
 
     expect(page).to have_content("Items Ready To Ship")
-  
+    
     within("#item-0") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_1.id)
@@ -86,6 +87,46 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}")
       visit "/merchants/#{@merchant_1.id}/dashboard"
     end
+  end
+
+  it 'displays invoice date created next to item in items ready to ship and orders by oldest first' do
+    ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0, created_at: "2022-05-30 22:07:10")
+    ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 1, created_at: "2022-04-30 22:07:10")
+    ii_3 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_2.unit_price, status: 2, created_at: "2022-05-30 22:07:10")
+    ii_4 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_3.unit_price, status: 2, created_at: "2022-05-30 22:07:10")
+    ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 1, created_at: "2022-04-18 20:07:10")
+    ii_6 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_2.unit_price, status: 1, created_at: "2022-05-30 15:07:10")
+    ii_7 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_4.unit_price, status: 1, created_at: "2022-02-30 22:07:10")
+ 
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    within("#item-0") do
+      expect(page).to have_content("Monday, April 18, 2022")
+      expect(page).to_not have_content("Monday, May 30, 2022")
+      expect(page).to_not have_content("Saturday, April 30, 2022")
+      expect(page).to_not have_content("Monday, May 30, 2022")
+    end
+    within("#item-1") do
+      expect(page).to have_content("Saturday, April 30, 2022")
+      expect(page).to_not have_content("Monday, April 18, 2022")
+      expect(page).to_not have_content("Monday, May 30, 2022")
+      expect(page).to_not have_content("Monday, May 30, 2022")
+    end
+    within("#item-2") do
+      expect(page).to have_content("Monday, May 30, 2022")
+      expect(page).to have_content(@item_2.name)
+      expect(page).to_not have_content("Monday, April 18, 2022")
+      expect(page).to_not have_content("Saturday, April 30, 2022")
+    end
+    within("#item-3") do
+      expect(page).to have_content("Monday, May 30, 2022")
+      expect(page).to have_content(@item_1.name)
+      expect(page).to_not have_content("Monday, April 18, 2022")
+      expect(page).to_not have_content("Saturday, April 30, 2022")
+    end
+
+    expect("Monday, April 18, 2022").to appear_before("Saturday, April 30, 2022")
+    expect("Saturday, April 30, 2022").to appear_before("Monday, May 30, 2022")
   end
 
 end
