@@ -32,4 +32,24 @@ RSpec.describe 'merchants items index' do
     expect(page).to_not have_content(item2.name)
 
   end
+
+  it "shows a link to update item information and displays a flash message when successful" do
+    merch1 = Merchant.create!(name: 'Floopy Fopperations')
+    item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
+    item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950)
+    item3 = merch1.items.create!(name: 'Floopy Retro', description: 'the OG', unit_price: 550)
+
+    visit "/merchants/#{merch1.id}/items/#{item1.id}"
+    click_link "Edit #{item1.name}"
+    expect(current_path).to eq("/merchants/#{merch1.id}/items/#{item1.id}/edit")
+    fill_in :name, with: 'Floopy New'
+    fill_in :description, with: 'New and Improved'
+    click_button 'Update Item'
+    expect(current_path).to eq("/merchants/#{merch1.id}/items/#{item1.id}")
+    expect(page).to have_content("Floopy New")  
+    expect(page).to have_content("New and Improved")
+    expect(page).to have_content("450")
+    expect(page).to have_content("Success: Item information has been updated.")
+  end
+  
 end
