@@ -1,3 +1,3 @@
 class Customer < ApplicationRecord
-  #validations later
+  has_many :invoices
 end
