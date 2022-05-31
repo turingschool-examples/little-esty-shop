@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Invoice Index Page' do
   before :each do
-  @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka")
-  @invoice_1 = @customer_1.invoices.create!(status: "cancelled")
-  @invoice_2 = @customer_1.invoices.create!(status: "in progress")
-  @invoice_3 = @customer_1.invoices.create!(status: "completed")
+  @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka", created_at: Time.now, updated_at: Time.now)
+  @invoice_1 = @customer_1.invoices.create!(status: "cancelled", created_at: Time.now, updated_at: Time.now)
+  @invoice_2 = @customer_1.invoices.create!(status: "in progress", created_at: Time.now, updated_at: Time.now)
+  @invoice_3 = @customer_1.invoices.create!(status: "completed", created_at: Time.now, updated_at: Time.now)
 
   end
 
