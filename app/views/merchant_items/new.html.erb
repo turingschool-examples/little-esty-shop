@@ -1,3 +1,15 @@
 <h1>New Item</h1>
 
-c
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :unit_price %>
+  <%= f.number_field :unit_price %>
+
+  <%= f.submit %>
+<% end %>

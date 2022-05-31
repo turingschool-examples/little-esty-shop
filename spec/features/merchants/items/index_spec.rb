@@ -48,5 +48,6 @@ RSpec.describe 'merchant items index page' do
     visit "/merchants/#{@merch_1.id}/items"
     click_link("New Item")
     expect(current_path).to eq("/merchants/#{@merch_1.id}/items/new")
+
   end
 end

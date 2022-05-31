@@ -1,4 +1,6 @@
-RSpec.describe 'merchant items index page' do 
+require 'rails_helper'
+
+RSpec.describe 'merchant items new page' do 
   before :each do
     @merch_1 = Merchant.create!(name: "Two-Legs Fashion")
     @merch_2 = Merchant.create!(name: "One-Legs Fashion")
@@ -12,17 +14,20 @@ RSpec.describe 'merchant items index page' do
     @item_6 = @merch_2.items.create!(name: "Pirate Pants", description: "Peg legs don't need pant legs", unit_price: 1000)
   end
 
-  xit 'can create a new merchant item' do
+  it 'can create a new merchant item' do
     visit "/merchants/#{@merch_1.id}/items/new"
 
-    fill_in "Name", with: "Llamakini"
-    fill_in "Description", with: "Llama Swimsuit"
+    fill_in "name", with: "Llamakini"
+    fill_in "description", with: "Llama Swimsuit"
+    click_button 'Save'
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/items/new")
+    expect(page).to have_content("Error: Please fill out all required fields!")
+    
+    fill_in "name", with: "Llamakini"
+    fill_in "description", with: "Llama Swimsuit"
     fill_in "unit_price", with: 420
     click_button 'Save'
-
     expect(current_path).to eq("/merchants/#{@merch_1.id}/items")
-    within "#disabled" do
-      expect(page).to have_content("Llamakini")
-    end
+    expect(page).to have_content("Llamakini")
   end
 end
