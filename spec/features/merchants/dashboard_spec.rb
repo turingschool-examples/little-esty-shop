@@ -124,6 +124,9 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(page).to_not have_content("Monday, April 18, 2022")
       expect(page).to_not have_content("Saturday, April 30, 2022")
     end
+
+    expect("Monday, April 18, 2022").to appear_before("Saturday, April 30, 2022")
+    expect("Saturday, April 30, 2022").to appear_before("Monday, May 30, 2022")
   end
 
 end
