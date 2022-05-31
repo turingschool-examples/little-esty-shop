@@ -11,3 +11,5 @@ Items:
 <p>Item Status: <%= invoice_item.status %> </p>
 <br>
 <% end %>
+
+Total Revenue from this Invoice: $<%= @invoice.total_revenue.round(2) %>
