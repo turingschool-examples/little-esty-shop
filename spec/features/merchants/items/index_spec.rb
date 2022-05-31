@@ -72,12 +72,13 @@ RSpec.describe 'merchants items index' do
     #
     #
     click_button "Enable #{item1.name}"
-    click_button "Disable #{item2.name}"
-
+    expect(current_path).to eq("/merchants/#{merch1.id}/items/")
     within "#item-#{item1.id}" do
       expect(page).to have_content("Current Status: enabled")
     end
 
+    click_button "Disable #{item2.name}"
+    expect(current_path).to eq("/merchants/#{merch1.id}/items/")
     within "#item-#{item2.id}" do
       expect(page).to have_content("Current Status: disabled")
     end
