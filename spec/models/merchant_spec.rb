@@ -73,6 +73,7 @@ RSpec.describe Merchant do
         @cust_5 = Customer.create!(first_name: "Pistol", last_name: "Pete")
         @cust_6 = Customer.create!(first_name: "Bronson", last_name: "Shmonson")
         @cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
+        @cust_8 = Customer.create!(first_name: "Anthony", last_name: "Smith")
         
         @invoice_1 = @cust_1.invoices.create!(status: 1)
         @invoice_2 = @cust_1.invoices.create!(status: 1)
@@ -89,6 +90,8 @@ RSpec.describe Merchant do
         @invoice_13 = @cust_6.invoices.create!(status: 1)
         @invoice_14 = @cust_7.invoices.create!(status: 1)
         @invoice_15 = @cust_7.invoices.create!(status: 2)
+        @invoice_16 = @cust_7.invoices.create!(status: 2)
+        @invoice_17 = @cust_8.invoices.create!(status: 1)
         
         @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
         @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -109,7 +112,9 @@ RSpec.describe Merchant do
         @ii_16 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_14.id, quantity: 30, unit_price: @item_1.unit_price, status: 2)
         @ii_17 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_14.id, quantity: 30, unit_price: @item_2.unit_price, status: 2)
         @ii_18 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_14.id, quantity: 30, unit_price: @item_3.unit_price, status: 2)
-        @ii_19 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_15.id, quantity: 700, unit_price: @item_4.unit_price, status: 0)
+        @ii_19 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_15.id, quantity: 700, unit_price: @item_5.unit_price, status: 2)
+        @ii_20 = InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_16.id, quantity: 700, unit_price: @item_7.unit_price, status: 2)
+        @ii_21 = InvoiceItem.create!(item_id: @item_7.id, invoice_id: @invoice_17.id, quantity: 300, unit_price: @item_7.unit_price, status: 2)
         
         @transaction_1 = @invoice_1.transactions.create!(credit_card_number: 4039485738495837, credit_card_expiration_date: "1", result: "success")
         @transaction_2 = @invoice_2.transactions.create!(credit_card_number: 4039485738495837, credit_card_expiration_date: "1", result: "success")
@@ -124,12 +129,14 @@ RSpec.describe Merchant do
         @transaction_11 = @invoice_11.transactions.create!(credit_card_number: 4738473664751832, credit_card_expiration_date: "1", result: "success")
         @transaction_12 = @invoice_12.transactions.create!(credit_card_number: 4738473664751832, credit_card_expiration_date: "1", result: "success")
         @transaction_13 = @invoice_13.transactions.create!(credit_card_number: 4023948573948293, credit_card_expiration_date: "1", result: "success")
-        @transaction_14 = @invoice_14.transactions.create!(credit_card_number: 4023948573948293, credit_card_expiration_date: "1", result: "success")
+        @transaction_14 = @invoice_14.transactions.create!(credit_card_number: 4023948573948293, credit_card_expiration_date: "1", result: "failure")
         @transaction_15 = @invoice_15.transactions.create!(credit_card_number: 4023948573948293, credit_card_expiration_date: "1", result: "success")
+        @transaction_16 = @invoice_17.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
       end
 
       it 'returns the top 5 customers with the merchant' do
-        expect(@merch_1.favorite_customers).to eq([@cust_1, @cust_2, @cust_3, @cust_5, @cust6])
+        expect(@merch_1.favorite_customers).to eq([@cust_1, @cust_2, @cust_3, @cust_5, @cust_6])
+        expect(@merch_2.favorite_customers).to eq([@cust_8])
       end
     end
 
