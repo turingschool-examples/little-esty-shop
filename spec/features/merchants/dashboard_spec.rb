@@ -194,7 +194,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     transaction_16 = invoice_17.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
   
     visit "/merchants/#{@merch_1.id}/dashboard"
-
+save_and_open_page
     expect(page).to have_content("Favorite Customers")
     expect("Debbie Twolegs").appear_before("Tommy Doubleleg")
     expect("Tommy Doubleleg").appear_before("Brian Twinlegs")
