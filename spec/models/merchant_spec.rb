@@ -135,8 +135,8 @@ RSpec.describe Merchant do
       end
 
       it 'returns the top 5 customers with the merchant' do
-        expect(@merch_1.favorite_customers).to eq([@cust_1, @cust_2, @cust_3, @cust_5, @cust_6])
-        expect(@merch_2.favorite_customers).to eq([@cust_8])
+        expect(@merch_1.top_5_customers).to eq([@cust_1, @cust_2, @cust_3, @cust_5, @cust_6])
+        expect(@merch_2.top_5_customers).to eq([@cust_8])
       end
     end
 

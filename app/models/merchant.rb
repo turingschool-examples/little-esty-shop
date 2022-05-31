@@ -11,7 +11,7 @@ class Merchant < ApplicationRecord
   end
 
 
-  def favorite_customers
+  def top_5_customers
     merchant_items_ids = Item.where(merchant_id: id).pluck(:id)
     invoice_ids = Invoice.joins(:items).where(items: { id: merchant_items_ids }).pluck(:id)
     successful_invoice_ids = Invoice.joins(:transactions).where(id: invoice_ids).where(transactions: { result: "success" }).pluck(:id)
