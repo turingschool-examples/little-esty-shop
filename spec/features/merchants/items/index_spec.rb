@@ -28,4 +28,20 @@ RSpec.describe 'merchants items index' do
     expect(page).to_not have_content(item5.name)
 
   end
+
+  it 'allows me to enable / disable items belonging to a merchant' do
+    # As a merchant
+    # When I visit my items index page
+    # Next to each item name I see a button to disable or enable that item.
+    # When I click this button
+    # Then I am redirected back to the items index
+    # And I see that the items status has changed
+    merch1 = Merchant.create!(name: 'Floopy Fopperations')
+    item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
+    item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950)
+    item3 = merch1.items.create!(name: 'Floopy Retro', description: 'the OG', unit_price: 550)
+
+    visit "/merchants/#{merch1.id}/items"
+
+  end
 end
