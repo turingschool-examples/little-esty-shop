@@ -10,6 +10,7 @@
         <%= invoice_item.item.name %> 
         &nbsp
         <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
+        - <%= invoice_item.created_at.strftime(" %A, %B %e, %Y") %>
     </div>
 <% end %>
 
