@@ -6,6 +6,7 @@ RSpec.describe "Admin Invoice Show Page" do
 
     @bracelet = @billman.items.create!(name: "Bracelet", description: "shiny", unit_price: 1001, created_at: Time.now, updated_at: Time.now)
     @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002, created_at: Time.now, updated_at: Time.now)
+    @necklace = @billman.items.create!(name: "Necklace", description: "Sparkly", unit_price: 3045, created_at: Time.now, updated_at: Time.now)
 
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka", created_at: Time.now, updated_at: Time.now)
 
@@ -14,7 +15,7 @@ RSpec.describe "Admin Invoice Show Page" do
 
     @invoice_items_1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice_1.id, created_at: Time.now, updated_at: Time.now)
     @invoice_items_2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Pending", invoice_id: @invoice_2.id, created_at: Time.now, updated_at: Time.now)
-
+    @invoice_items_3 = @necklace.invoice_items.create!(quantity: 1, unit_price: 3003, status: "Pending", invoice_id: @invoice_1.id, created_at: Time.now, updated_at: Time.now)
   end
 
   it "shows all attributes of an invoice" do
@@ -30,11 +31,19 @@ RSpec.describe "Admin Invoice Show Page" do
   it "shows item attributes for items on an invoice" do
     visit "/admin/invoices/#{@invoice_1.id}"
     expect(page).to have_content("Item Name: Bracelet")
+    expect(page).to have_content("Item Name: Necklace")
     expect(page).to have_content("Quantity: 1")
     expect(page).to have_content("Price Sold For: $10.01")
+    expect(page).to have_content("Price Sold For: $30.03")
     expect(page).to have_content("Item Status: Pending")
 
     expect(page).to_not have_content("Item Name: Mood Ring")
     expect(page).to_not have_content("Price Sold For: $20.02")
+  end
+
+  it "shows total revenue in dollars for an invoice" do
+    visit "/admin/invoices/#{@invoice_1.id}"
+    expect(page).to have_content("Total Revenue from this Invoice: $40.04")
+    expect(page).to_not have_content("Total Revenue from this Invoice: $20.02")
   end
 end
