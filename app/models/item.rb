@@ -7,4 +7,9 @@ class Item < ApplicationRecord
   #   binding.pry
   # end
 
+  def find_invoice_id
+    invoice_items.first.invoice.id
+  end
+  
+
 end
