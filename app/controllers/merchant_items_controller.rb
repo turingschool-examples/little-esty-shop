@@ -31,6 +31,9 @@ class MerchantItemsController < ApplicationController
         end
     end
 
+    def new
+    end
+
     private
         def item_params
             params.permit(:name, :description, :unit_price, :status)
