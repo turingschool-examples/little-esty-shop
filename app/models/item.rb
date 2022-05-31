@@ -3,8 +3,12 @@ class Item < ApplicationRecord
 
   enum status: [:disabled, :enabled]
 
-  # def self.merchants_items_all
-  #   binding.pry
-  # end
+  def self.enabled_items
+    where(status: 1)
+  end
+
+  def self.disabled_items
+    where(status: 0)
+  end
 
 end
