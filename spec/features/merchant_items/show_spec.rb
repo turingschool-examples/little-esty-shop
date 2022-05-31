@@ -16,7 +16,6 @@ RSpec.describe "Merchant Items Show Page" do
     click_link "#{item_1.name}"
     expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
 
-save_and_open_page
     expect(page).to have_content("Name:")
     expect(page).to have_content(item_1.name)
     expect("Name: ").to appear_before("Qui Esse")
