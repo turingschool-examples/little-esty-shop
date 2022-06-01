@@ -1,6 +1,6 @@
 <h2>Merchant Dashboard of: <%= @merchant.name %></h2>
-<%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %>
-<%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
+<%= link_to "Items Index", merchant_items_path(@merchant) %>
+<%= link_to "Invoices Index", merchant_invoices_path(@merchant) %>
 
 <div class= "favorite_customers">
   <h3>Top 5 Favorite Customers:</h3>
