@@ -22,6 +22,14 @@ class AdminMerchantsController < ApplicationController
     end
   end
 
+  def new
+  end
+
+  def create
+    require "pry"; binding.pry
+    merchant = Merchant.create
+  end
+
   private
     def merchant_params
         params.permit(:name)
