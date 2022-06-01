@@ -134,6 +134,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     item_6 = @merch_1.items.create!(name: "String of Numbers", description: "54921752964273", unit_price: 100)
     item_7 = @merch_2.items.create!(name: "Shirt", description: "shirt for people", unit_price: 50000)
 
+    
     cust_3 = Customer.create!(first_name: "Brian", last_name: "Twinlegs")
     cust_4 = Customer.create!(first_name: "Jared", last_name: "Goffleg")
     cust_5 = Customer.create!(first_name: "Pistol", last_name: "Pete")
@@ -141,11 +142,11 @@ RSpec.describe "merchant dashboard", type: :feature do
     cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
     cust_8 = Customer.create!(first_name: "Anthony", last_name: "Smith")
     
-    invoice_7 = cust_3.invoices.create!(status: 1)
+    invoice_7 = @cust_2.invoices.create!(status: 1)
     invoice_8 = cust_3.invoices.create!(status: 1)
-    invoice_9 = cust_4.invoices.create!(status: 1)
+    invoice_9 = cust_3.invoices.create!(status: 1)
     invoice_10 = cust_5.invoices.create!(status: 1)
-    invoice_11 = cust_5.invoices.create!(status: 1)
+    invoice_11 = cust_6.invoices.create!(status: 1)
     invoice_12 = cust_6.invoices.create!(status: 1)
     invoice_13 = cust_6.invoices.create!(status: 1)
     invoice_14 = cust_7.invoices.create!(status: 1)
@@ -196,40 +197,40 @@ RSpec.describe "merchant dashboard", type: :feature do
     visit "/merchants/#{@merch_1.id}/dashboard"
 
     expect(page).to have_content("Favorite Customers")
-    expect("1. Debbie Twolegs").to appear_before("2. Tommy Doubleleg")
-    expect("2. Tommy Doubleleg").to appear_before("3. Brian Twinlegs")
-    expect("3. Brian Twinlegs").to appear_before("4. Pistol Pete")
-    expect("4. Pistol Pete").to appear_before("5. Bronson Shmonson")
+    expect("1. Tommy Doubleleg").to appear_before("2. Debbie Twolegs")
+    expect("2. Debbie Twolegs").to appear_before("3. Bronson Shmonson")
+    expect("3. Bronson Shmonson").to appear_before("4. Brian Twinlegs")
+    expect("4. Brian Twinlegs").to appear_before("5. Pistol Pete")
     within("#customer-0") do
-      expect(page).to have_content("Debbie Twolegs - 3")
+      expect(page).to have_content("1. Tommy Doubleleg - 3")
       expect(page).to_not have_content("Bronson Shmonson - 2")
       expect(page).to_not have_content("Tommy Doubleleg - 3")
       expect(page).to_not have_content("Pistol Pete - 2")
       expect(page).to_not have_content("Brian Twinlegs - 2")
     end
     within("#customer-1") do
-      expect(page).to have_content("Tommy Doubleleg - 3")
+      expect(page).to have_content("2. Debbie Twolegs - 3")
       expect(page).to_not have_content("Debbie Twolegs - 3")
       expect(page).to_not have_content("Bronson Shmonson - 2")
       expect(page).to_not have_content("Pistol Pete - 2")
       expect(page).to_not have_content("Brian Twinlegs - 2")
     end
     within("#customer-2") do
-      expect(page).to have_content("Brian Twinlegs - 2")
+      expect(page).to have_content("3. Bronson Shmonson - 2")
       expect(page).to_not have_content("Tommy Doubleleg - 3")
       expect(page).to_not have_content("Debbie Twolegs - 3")
       expect(page).to_not have_content("Bronson Shmonson - 2")
       expect(page).to_not have_content("Pistol Pete - 2")
     end
     within("#customer-3") do
-      expect(page).to have_content("Pistol Pete - 2")
+      expect(page).to have_content("4. Brian Twinlegs - 2")
       expect(page).to_not have_content("Brian Twinlegs - 2")
       expect(page).to_not have_content("Tommy Doubleleg - 3")
       expect(page).to_not have_content("Debbie Twolegs - 3")
       expect(page).to_not have_content("Bronson Shmonson - 2")
     end
     within("#customer-4") do
-      expect(page).to have_content("Bronson Shmonson - 2")
+      expect(page).to have_content("5. Pistol Pete - 2")
       expect(page).to_not have_content("Tommy Doubleleg - 3")
       expect(page).to_not have_content("Debbie Twolegs - 3")
       expect(page).to_not have_content("Pistol Pete - 2")

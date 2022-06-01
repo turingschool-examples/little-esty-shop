@@ -81,11 +81,11 @@ RSpec.describe Merchant do
         @invoice_4 = @cust_2.invoices.create!(status: 1)
         @invoice_5 = @cust_2.invoices.create!(status: 1)
         @invoice_6 = @cust_2.invoices.create!(status: 1)
-        @invoice_7 = @cust_3.invoices.create!(status: 1)
+        @invoice_7 = @cust_2.invoices.create!(status: 1)
         @invoice_8 = @cust_3.invoices.create!(status: 1)
-        @invoice_9 = @cust_4.invoices.create!(status: 1)
+        @invoice_9 = @cust_3.invoices.create!(status: 1)
         @invoice_10 = @cust_5.invoices.create!(status: 1)
-        @invoice_11 = @cust_5.invoices.create!(status: 1)
+        @invoice_11 = @cust_6.invoices.create!(status: 1)
         @invoice_12 = @cust_6.invoices.create!(status: 1)
         @invoice_13 = @cust_6.invoices.create!(status: 1)
         @invoice_14 = @cust_7.invoices.create!(status: 1)
@@ -135,7 +135,7 @@ RSpec.describe Merchant do
       end
 
       it 'returns the top 5 customers with the merchant' do
-        expect(@merch_1.top_5_customers).to eq([@cust_1, @cust_2, @cust_3, @cust_5, @cust_6])
+        expect(@merch_1.top_5_customers).to eq([@cust_2, @cust_1, @cust_6, @cust_3, @cust_5])
         expect(@merch_2.top_5_customers).to eq([@cust_8])
       end
     end
