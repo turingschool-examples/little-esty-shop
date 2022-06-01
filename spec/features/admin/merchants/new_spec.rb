@@ -11,7 +11,6 @@ RSpec.describe 'Admin merchant new' do
     click_button "Submit"
     expect(current_path).to eq('/admin/merchants')
     expect(page).to have_content("Axolotl Lederhosen")
-    #need a test to make sure the default status is disabled
   end
 
 end
