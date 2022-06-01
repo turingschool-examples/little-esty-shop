@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   def update
     if params[:status]
       @item.update(items_status_params)
-      redirect_to merchant_items_path(@merchant)
+      redirect_to merchant_items_path
     else
       if @item.update(item_params)
         flash[:message] = 'You have successfully updated this item!'
@@ -40,10 +40,14 @@ class ItemsController < ApplicationController
   end
 
 
-private
-
+ private
+  
   def item_params
     params.permit(:name, :description, :unit_price)
   end
 
+  def item_status_params
+    params.permit(:status)
+  end
+  
 end

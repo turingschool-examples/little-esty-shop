@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Merchant Items Index Page" do
+
     let!(:merchant_1) {Merchant.create!(name: "REI")}
     let!(:merchant_2) {Merchant.create!(name: "Target")}
 
@@ -12,7 +13,7 @@ RSpec.describe "Merchant Items Index Page" do
     let!(:item6) {merchant_1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25)}
     let!(:item7) {merchant_1.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199)}
 
-    let!(:item7) {merchant_2.items.create!(name: "Conditioner", description: "Bye slit ends!", unit_price: 7)}
+    let!(:item8) {merchant_2.items.create!(name: "Conditioner", description: "Bye slit ends!", unit_price: 7)}
 
     let!(:customer1) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
     let!(:customer2) { Customer.create!(first_name: "Sylvester", last_name: "Nader") }
@@ -50,12 +51,39 @@ RSpec.describe "Merchant Items Index Page" do
   before do
     visit merchant_items_path(merchant_1)
   end
-
+  
   it "displays only a specified merchant's items" do
 
     expect(page).to have_content("Boots")
     expect(page).to have_content("Tent")
     expect(page).to_not have_content("Conditioner")
+  end
+  
+  it "can click a button to disable or enable a specific item" do
+    within ".enabled-items" do
+      expect(page).to_not have_content("Boots")
+    end
+
+    within ".disabled-items" do
+      within "#item-#{item1.id}" do
+        expect(page).to have_content("Boots")
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_content("Tent")
+
+        click_button "Enable"
+   
+      end
+    end
+    expect(current_path).to eq(merchant_items_path(merchant_1))
+
+    within ".enabled-items" do
+      within "#item-#{item1.id}" do
+        expect(page).to have_content("Boots")
+        expect(page).to have_button("Disable")
+
+        click_button "Disable"
+      end
+    end
   end
 
   it "has a link to create a new item" do
@@ -86,7 +114,5 @@ RSpec.describe "Merchant Items Index Page" do
     within(".top_5") do
 
     end
-end
-
-
+  end
 end
