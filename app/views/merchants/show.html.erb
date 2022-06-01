@@ -16,7 +16,7 @@
 <h3>Favorite Customers</h3>
 <% @merchant.top_5_customers.each_with_index do |customer, index| %>
     <div id="customer-<%= index %>">
-
+        <%= (index + 1).to_s + ". " + customer.first_name + " " + customer.last_name%>
     </div>
 <% end %>
 
