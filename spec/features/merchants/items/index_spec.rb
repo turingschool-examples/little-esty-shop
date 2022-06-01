@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.describe 'merchants items index' do
 
   it 'shows the name of the items belonging to a merchant' do
-    # As a merchant,
-    # When I visit my merchant items index page ("merchant/merchant_id/items")
-    # I see a list of the names of all of my items
-    # And I do not see items for any other merchant
+
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
     item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950)
@@ -18,8 +15,6 @@ RSpec.describe 'merchants items index' do
 
     visit "/merchants/#{merch1.id}/items"
 
-    # save_and_open_page
-
     expect(page).to have_content(merch1.name)
     expect(page).to have_content(item1.name)
     expect(page).to have_content(item2.name)
@@ -30,18 +25,12 @@ RSpec.describe 'merchants items index' do
   end
 
   it 'allows me to enable / disable items belonging to a merchant' do
-    # As a merchant
-    # When I visit my items index page
-    # Next to each item name I see a button to disable or enable that item.
-    # When I click this button
-    # Then I am redirected back to the items index
-    # And I see that the items status has changed
+
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450, status: 0)
     item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950, status: 1)
 
     visit "/merchants/#{merch1.id}/items"
-    # save_and_open_page
 
     within "#item-#{item1.id}" do
       expect(page).to have_content(item1.name)
@@ -83,10 +72,7 @@ RSpec.describe 'merchants items index' do
   end
 
   it 'groups the items by enabled or disabled status' do
-    # As a merchant,
-    # When I visit my merchant items index page
-    # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
-    # And I see that each Item is listed in the appropriate section
+  
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450, status: 0)
     item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950, status: 1)
@@ -94,8 +80,6 @@ RSpec.describe 'merchants items index' do
     item4 = merch1.items.create!(name: 'Floopy Retro', description: 'the OG', unit_price: 2950, status: 1)
 
     visit "/merchants/#{merch1.id}/items"
-
-    # save_and_open_page
 
     expect(page).to have_content("Enabled Items")
     expect(page).to have_content("Disabled Items")

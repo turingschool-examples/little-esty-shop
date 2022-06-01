@@ -3,14 +3,6 @@ require 'rails_helper'
 RSpec.describe 'merchants items index' do
 
   it 'shows the attrs of a given item belonging to a merchant' do
-    # As a merchant,
-    # When I click on the name of an item from the merchant items index page,
-    # Then I am taken to that merchant's item's show page (/merchant/merchant_id/items/item_id)
-    # And I see all of the item's attributes including:
-    #
-    # Name
-    # Description
-    # Current Selling Price
 
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
@@ -24,7 +16,6 @@ RSpec.describe 'merchants items index' do
     visit "/merchants/#{merch1.id}/items"
 
     click_link "#{item1.name}"
-    # save_and_open_page
 
     expect(page).to have_content("Name: #{item1.name}")
     expect(page).to have_content("Description: #{item1.description}")
@@ -34,15 +25,6 @@ RSpec.describe 'merchants items index' do
   end
 
   it "shows a link to update item information and displays a flash message when successful" do
-    # As a merchant,
-    # When I visit the merchant show page of an item
-    # I see a link to update the item information.
-    # When I click the link
-    # Then I am taken to a page to edit this item
-    # And I see a form filled in with the existing item attribute information
-    # When I update the information in the form and I click ‘submit’
-    # Then I am redirected back to the item show page where I see the updated information
-    # And I see a flash message stating that the information has been successfully updated.
 
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
@@ -61,5 +43,6 @@ RSpec.describe 'merchants items index' do
     expect(page).to have_content("450")
     expect(page).to have_content("Success: Item information has been updated.")
   end
+  
 
 end
