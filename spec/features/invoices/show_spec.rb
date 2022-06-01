@@ -79,7 +79,7 @@ RSpec.describe "Merchant Invoices Show Page" do
 
   it "displays an invoice's attributes" do
     visit merchant_invoice_path(merchant1, invoice1)
-# require "pry"; binding.pry
+
     expect(page).to have_content("Invoice ##{invoice1.id}")
     expect(page).to have_content("Status: #{invoice1.status}")
     expect(page).to have_content("Created at: #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
