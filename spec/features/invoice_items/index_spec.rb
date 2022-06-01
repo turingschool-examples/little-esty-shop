@@ -25,11 +25,18 @@ RSpec.describe "Merchant Invoice page" do
   end
 
   it 'can display all of the invoices that include at least one of my merchants items, and their ids' do
-    visit "/merchants/#{@merchant.id}/invoices"
+    visit merchant_invoices_path(@merchant.id)
 
-    expect(page).to have_content("My Invoices")
-    expect(page).to have_content("Invoice ##{@invoice_1.id}")
-    expect(page).to have_content("Invoice Item: Pen")
-    expect(page).to not_have_content("Invoice Item: Marker")
+    within "#heading" do
+      expect(page).to have_content("My Invoices")
+    end
+
+    within "#invoice-#{@invoice_1.id}" do
+      expect(page).to have_content("Invoice ##{@invoice_1.id}")
+    end
+
+    within "#invoice-#{@invoice_7.id}" do
+      expect(page).to have_content("Invoice ##{@invoice_7.id}")
+    end
   end
 end

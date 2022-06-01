@@ -1,7 +1,7 @@
-<h1> My Invoices </h1>
+<h1 id = 'heading'> My Invoices </h1>
 
 <div1>
   <% @invoices.each do |invoice| %>
-    <% binding.pry %>
+    <p1 id = "invoice-<%=invoice.id%>"> Invoice #<%= invoice.id %></p1><br>
   <% end %>
 </div1>
