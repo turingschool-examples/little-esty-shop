@@ -15,6 +15,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
             InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 1000, status: 0)
             InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1300, status: 1)
             InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 20, unit_price: 2000, status: 1)
+            InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 1000, status: 2)
             InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 5, unit_price: 1000, status: 2)
         end
 
@@ -38,6 +39,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
                 expect(page).to_not have_content("Unit Price: 1000")
                 expect(page).to_not have_content("Status: Cancelled")
             end
+            expect(page).to_not have_content("Name: Floopy Geo")
         end
         
     end

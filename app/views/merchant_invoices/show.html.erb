@@ -2,9 +2,11 @@
 
 <h3><%= @invoice.invoice_items.each do |invoice_item| %></h3>
     <div id="invoice-item-<%= invoice_item.item.id %>">
+    <% if @merchant.items.include?(invoice_item.item) %>
         <p>Name: <%= invoice_item.item.name %></p>
         <p>Quantity: <%= invoice_item.quantity %></p>
         <p>Unit Price: <%= invoice_item.unit_price %></p>
         <p>Status: <%= invoice_item.status %></p><hr>
+    <% end %>
     </div>
 <% end %>
