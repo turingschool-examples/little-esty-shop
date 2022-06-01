@@ -39,4 +39,20 @@ RSpec.describe "Merchant Invoice page" do
       expect(page).to have_content("Invoice ##{@invoice_7.id}")
     end
   end
+
+  it 'Links each invoice with its specific show page' do
+    visit merchant_invoices_path(@merchant.id)
+    save_and_open_page
+    click_on "Invoice ##{@invoice_1.id}"
+
+    expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice_1))
+  end
+
+  it 'Links each invoice with its specific show page' do
+    visit merchant_invoices_path(@merchant.id)
+    save_and_open_page
+    click_on "Invoice ##{@invoice_7.id}"
+
+    expect(current_path).to eq(merchant_invoice_path(@merchant, @invoice_7))
+  end
 end
