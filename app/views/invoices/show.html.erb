@@ -4,3 +4,13 @@ Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
 <div class="customer">
   <%= @invoice.invoice_customer %><br>
 </div>
+
+<h3>Invoice Items</h3>
+<div class="invoice_items">
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <p>Item Name: <%= invoice_item.item.name %></p>
+    <p>Quantity Sold: <%= invoice_item.quantity %></p>
+    <p>Sold at: <%= number_to_currency(invoice_item.unit_price) %></p>
+    <p>Invoice Item Status: <%= invoice_item.status %></p>
+  <% end %>
+</div>
