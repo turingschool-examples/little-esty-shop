@@ -11,10 +11,4 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
-
-  def unshipped
-    invoice_items.each do |ii|
-      self if ii.status != 2
-    end
-  end
 end

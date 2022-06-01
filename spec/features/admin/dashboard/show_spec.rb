@@ -83,7 +83,7 @@ RSpec.describe "Admin dashboard" do
     expect(page).to have_content(@invoice_2.id)
     expect(page).to have_content(@invoice_3.id)
     expect(page).to have_content(@invoice_4.id)
-    # save_and_open_page
+    
     expect(page).to_not have_content(@invoice_5.id)
     expect(page).to_not have_content(@invoice_6.id)
     expect(page).to_not have_content(@invoice_7.id)
