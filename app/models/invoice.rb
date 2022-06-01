@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
   validates :status, presence: true
 
   enum status: {'cancelled' => 0, 'in progress' => 1, 'completed' => 2}
+
+  def self.invoices_with_merchant_items(merchant)
+    merchant.invoices.uniq
+  end
 end

@@ -2,6 +2,10 @@ class InvoicesController < ApplicationController
   before_action :find_merchant
 
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.invoices_with_merchant_items(@merchant)
+  end
+
+  def show
+
   end
 end
