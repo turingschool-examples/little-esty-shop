@@ -8,7 +8,7 @@ RSpec.describe "Merchant Invoice Show page" do
         @item_3 = @merchant.items.create!(name: 'Marker', unit_price: 400, description: 'Writes things, but dark, and thicc.')
 
         @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
-        @invoice_1 = @customer_1.invoices.create!(status: 'completed')
+        @invoice_1 = @customer_1.invoices.create!(status: 'completed', created_at: 'Wed, 01 Jan 2022 21:20:02 UTC +00:00')
         @invoice_7 = @customer_1.invoices.create!(status: 'completed')
         @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 3, unit_price: 400, status: 'packaged',
                                                                                            created_at: Time.parse("2012-03-27 14:54:09 UTC"))
@@ -25,15 +25,15 @@ RSpec.describe "Merchant Invoice Show page" do
 
   it "displays the invoice information in the show page" do
     visit merchant_invoice_path(@merchant, @invoice_1)
-    save_and_open_page
 
     within "#invoice-header-#{@invoice_1.id}" do
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
     end
 
     within "#invoice-#{@invoice_1.id}" do
-      expect(page).to have_content("Status: Completed")
-      expect(page).to have_content("Created on: Wedensday, June 1, 2022 ")
+      save_and_open_page
+      expect(page).to have_content("Status: completed")
+      expect(page).to have_content("Created on: Saturday, January 01, 2022 ")
       expect(page).to have_content("Joey Ondricka")
     end
   end

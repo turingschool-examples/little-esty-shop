@@ -1,1 +1,6 @@
-<h1> 
+<h1 id="invoice-header-<%=@invoice.id%>"> Invoice #<%= @invoice.id %></h1>
+
+<div id ="invoice-<%=@invoice.id%>">Status: <%= @invoice.status %><br>
+  Created on: <%= @invoice.created_at.strftime('%A, %B %m, %Y') %><br>
+  Customer:<br>
+  <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name%></div>
