@@ -26,12 +26,5 @@ RSpec.describe Merchant do
         it "lists the items ready for shipment" do
             expect(@merch1.ready_items).to eq([@item2, @item3])
         end
-
-        it 'lists all merchant invoices' do
-          expect(@merch1.merch_invoices).to eq([@invoice1, @invoice2])
-        end
-
     end
-
-
 end

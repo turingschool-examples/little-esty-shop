@@ -16,8 +16,8 @@ RSpec.describe 'merchant invoices page', type: :feature do
     @inv1 = @cust1.invoices.create!(status: "in progress")
     @inv2 = @cust1.invoices.create!(status: "completed")
 
-    @invoice_item1 = InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv1.id}")
-    @invoice_item2 = InvoiceItem.create!(item_id: "#{@item4.id}", invoice_id: "#{@inv2.id}")
+    InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv1.id}")
+    InvoiceItem.create!(item_id: "#{@item4.id}", invoice_id: "#{@inv2.id}")
   end
 
   it 'can see all the invoices(and id) that have at least one of my merchants items' do
@@ -30,9 +30,17 @@ RSpec.describe 'merchant invoices page', type: :feature do
 
   expect(page).to have_content("Invoice #{@inv1.id}")
   expect(page).to have_content("Status: #{@inv1.status}")
+  expect(page).to_not have_content("Invoice #{@inv2.id}")
+
 
   end
 
-  it 'has a link on each id to the merchant invoice show page'
+  it 'has a link on each id to the merchant invoice show page' do
   # And each id links to the merchant invoice show page
+    visit "/merchants/#{@merch1.id}/invoices"
+
+    click_link "#{@inv1.id}"
+
+    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@inv1.id}")
+  end
 end
