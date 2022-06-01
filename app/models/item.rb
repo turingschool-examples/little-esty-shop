@@ -1,4 +1,6 @@
 class Item < ApplicationRecord 
+  enum status: { 'Enabled' => 0, 'Disabled' => 1 }
+  
   belongs_to :merchant
 
   has_many :invoice_items

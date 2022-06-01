@@ -1,9 +1,25 @@
 <h1>Little Esty Shop</h1>
 
 <h3><%= @merchant.name %></h3>
+<strong> My Items </strong></br>
 
-<p><strong> My Items </strong></p>
+<strong>Enabled Items</strong></br>
+<% @items.each_with_index do |item, index| %>
+<div id="enabled-<%= index %>">
+  <% if item.status == "Enabled" %>
+    <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
+    <%= button_to 'Disable Item', merchant_item_path(@merchant.id, item.id), method: :patch, params: { status: "Disabled", item_id: item.id } %>
+  </div>
+  <%end%>
+<%end%>
 
-<% @items.each do |item| %>
-<%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
-<% end %>
+<strong>Disabled Items</strong></br>
+<% @items.each_with_index do |item, index| %>
+<div id="disabled-<%= index %>">
+  <% if item.status == "Disabled" %>
+      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> 
+      <%= button_to 'Enable Item', merchant_item_path(@merchant.id, item.id), method: :patch, params: { status: "Enabled", item_id: item.id } %>
+    </div>  
+  <%end%>
+<%end%>
+
