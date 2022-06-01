@@ -13,10 +13,8 @@ class Invoice < ApplicationRecord
   end
 
   def unshipped
-
-    
-    self.all.each do |invoice|
-      invoice if invoice.invoice_item.status != 2
+    invoice_items.each do |ii|
+      self if ii.status != 2
     end
   end
 end
