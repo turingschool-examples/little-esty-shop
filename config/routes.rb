@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :merchants, only: %i[index show]
+    resources :merchants, only: %i[index show edit update]
   end
 end
