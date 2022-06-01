@@ -17,7 +17,7 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     @invoice_5 = @cust_2.invoices.create!(status: 1)
     @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "2021-05-29 17:44:03 UTC")
 
-    @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+    @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0)
     @ii_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 2, unit_price: @item_2.unit_price, status: 1)
   end
 
@@ -45,17 +45,15 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     expect(page).to have_content("Two-Leg Pantaloons")
     expect(page).to have_content("Quantity: 1")
     expect(page).to have_content("Unit Price: $50.00")
-    expect(page).to have_content("Status: shipped")
+    expect(find_field('ii_status').value).to eq("packaged")
 
     expect(page).to_not have_content("Two-Leg Shorts")
     expect(page).to_not have_content("Quantity: 2")
     expect(page).to_not have_content("Unit Price: $30.00")
-    expect(page).to_not have_content("Status: packaged")
 
     expect(page).to_not have_content("test")
     expect(page).to_not have_content("Quantity: 6")
     expect(page).to_not have_content("Unit Price: $10.00")
-    expect(page).to_not have_content("Status: packaged")
   end
 
   it "Shows sum of all items sold in receipt" do
@@ -67,5 +65,17 @@ RSpec.describe "merchant's invoice show page", type: :feature do
 
     visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id})"
     expect(page).to have_content("Total Revenue: $610.00")
+  end
+
+  it "can change the invoice status" do
+    visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+    #within the first item section
+      within "#ii-#{@ii_1.id}" do
+        expect(find_field('ii_status').value).to eq("packaged")
+        select "pending"
+        click_button "Update Invoice"
+        expect(current_path).to eq( "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}" )
+        expect(page).to have_content('pending')
+      end
   end
 end
