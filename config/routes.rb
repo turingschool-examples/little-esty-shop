@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
   get "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#show"
 
+  patch "/merchants/:merchant_id/invoices/:invoice_id", to: "invoice_items#update"
+
   get "/admin", to: "admin#show"
   
   get "/admin/merchants/:merchant_id", to: 'admin_merchants#show'
@@ -25,4 +27,5 @@ Rails.application.routes.draw do
   get "/admin/merchants", to: "admin_merchants#index"
   
   get "/admin/invoices", to: "admin_invoices#index"
+
 end
