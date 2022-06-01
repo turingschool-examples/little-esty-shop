@@ -88,13 +88,13 @@ RSpec.describe "Merchant Invoices Index Page" do
 
     within ".invoice_index" do
       expect(page).to have_content("Invoice: ")
-      expect(page).to have_link(invoice1.id)
-      expect(page).to have_link(invoice2.id)
-      expect(page).to have_link(invoice3.id)
-      expect(page).to have_link(invoice4.id)
-      expect(page).to have_link(invoice5.id)
+      expect(page).to have_link("#{invoice1.id}")
+      expect(page).to have_link("#{invoice2.id}")
+      expect(page).to have_link("#{invoice3.id}")
+      expect(page).to have_link("#{invoice4.id}")
+      expect(page).to have_link("#{invoice5.id}")
       expect(page).to_not have_content(invoice6.id)
-      expect(page).to_not have_link(invoice6.id)
+      expect(page).to_not have_link("#{invoice6.id}")
 
     end
     click_link("#{invoice1.id}")
