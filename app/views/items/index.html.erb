@@ -1,0 +1,9 @@
+<h1><%= @merchant.name %>'s Items</h1>
+
+<p><%= link_to "Create A New Item", new_merchant_item_path(@merchant) %></p>
+<hr>
+<ol><% @items.each do |item| %>
+  <div id ="item-<%=item.id%>">
+  <li><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %> </li>
+  </div>
+<% end %> </ol>
