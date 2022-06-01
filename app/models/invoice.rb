@@ -9,6 +9,12 @@ class Invoice < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
 
   def total_revenue
-  invoice_items.sum("unit_price * quantity")
+    invoice_items.sum("unit_price * quantity")
+  end
+
+  def unshipped
+    all.each do |invoice|
+      invoice if invoice.invoice_item.status != 2
+    end
   end
 end
