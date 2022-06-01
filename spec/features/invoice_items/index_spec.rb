@@ -15,7 +15,7 @@ RSpec.describe "Merchant Invoice page" do
                                                                                            created_at: Time.parse("2012-03-27 14:54:09 UTC"))
         @item_2.invoice_items.create!(invoice_id: @invoice_7.id, quantity: 5, unit_price: 400, status: 'packaged',
                                                                                            created_at: Time.parse("2012-03-28 14:54:09 UTC"))
-                                                                                           
+
         @invoice_1.transactions.create!(credit_card_number: '4654405418249632', result: 'success')
         @invoice_1.transactions.create!(credit_card_number: '4654405418249631', result: 'success')
         @invoice_1.transactions.create!(credit_card_number: '4654405418249633', result: 'success')
@@ -27,8 +27,8 @@ RSpec.describe "Merchant Invoice page" do
   it 'can display all of the invoices that include at least one of my merchants items, and their ids' do
     visit "/merchants/#{@merchant.id}/invoices"
 
-    expect(page).to have_content("Brylan's Invoices Index")
-    expect(page).to have_content("Invoice Item: Pencil")
+    expect(page).to have_content("My Invoices")
+    expect(page).to have_content("Invoice ##{@invoice_1.id}")
     expect(page).to have_content("Invoice Item: Pen")
     expect(page).to not_have_content("Invoice Item: Marker")
   end
