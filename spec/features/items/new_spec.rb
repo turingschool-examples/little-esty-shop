@@ -16,11 +16,11 @@ describe "Merchant Items New Page" do
 
     expect(current_path).to eq(merchant_items_path(merchant_1))
 
-    # within "#disabled-items" do
+    # within ".disabled-items" do
       expect(page).to have_content("Cool New Thingymabob")
     # end
 
-    # within "#enabled-items" do
+    # within ".enabled-items" do
       # expect(page).to_not have_content("Cool New Thingymabob")
     # end
   ##will need to test that the item has a default status of disabled when the functionality is done being created by Rue
