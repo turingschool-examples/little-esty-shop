@@ -7,6 +7,21 @@
 # Ignore bundler config.
 /.bundle
 
+*.rbc
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+/public/system
+/coverage/*
+/coverage/index.html
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
+
+/public/*
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
