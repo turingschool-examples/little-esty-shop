@@ -31,7 +31,7 @@ RSpec.describe 'Admin invoices show page' do
 
     expect(page).to have_content("#{@invoice_1.id}")
     expect(page).to have_content("Status: in progress")
-    expect(page).to have_content("#{@invoice_1.created_at.strftime("%A %b %M %Y")}")
+    expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("Debbie Twolegs")
   end
 
@@ -45,3 +45,4 @@ RSpec.describe 'Admin invoices show page' do
     expect(page).to have_content("Total Revenue: $104.97")
   end
 end
+

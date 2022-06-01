@@ -9,6 +9,6 @@ class Invoice < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
 
   def total_revenue
-  invoice_items.sum("unit_price * quantity")
+    invoice_items.sum("unit_price * quantity")
   end
 end
