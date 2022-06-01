@@ -11,8 +11,8 @@ RSpec.describe "Merchant Items Index Page" do
     item_3 = merchant_2.items.create!(name: "Ea Voluptatum", description: "Sunt officia", unit_price: 68723)
 
     visit "/merchants/#{merchant_1.id}/items"
-    expect(page).to have_content(item_1.name)
-    expect(page).to have_content(item_2.name)
-    expect(page).to_not have_content(item_3.name)
+    expect(page).to have_content("Qui Esse")
+    expect(page).to have_content("Autem Minima")
+    expect(page).to_not have_content("Ea Voluptatum")
   end
 end
