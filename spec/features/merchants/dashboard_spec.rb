@@ -202,38 +202,38 @@ RSpec.describe "merchant dashboard", type: :feature do
     expect("3. Bronson Shmonson").to appear_before("4. Brian Twinlegs")
     expect("4. Brian Twinlegs").to appear_before("5. Pistol Pete")
     within("#customer-0") do
-      expect(page).to have_content("1. Tommy Doubleleg - 3")
-      expect(page).to_not have_content("Bronson Shmonson - 2")
-      expect(page).to_not have_content("Tommy Doubleleg - 3")
+      expect(page).to have_content("1. Tommy Doubleleg - 4")
+      expect(page).to_not have_content("Bronson Shmonson - 3")
+      expect(page).to_not have_content("Debbie Twolegs - 3")
       expect(page).to_not have_content("Pistol Pete - 2")
       expect(page).to_not have_content("Brian Twinlegs - 2")
     end
     within("#customer-1") do
       expect(page).to have_content("2. Debbie Twolegs - 3")
-      expect(page).to_not have_content("Debbie Twolegs - 3")
-      expect(page).to_not have_content("Bronson Shmonson - 2")
-      expect(page).to_not have_content("Pistol Pete - 2")
+      expect(page).to_not have_content("Tommy Doubleleg - 4")
+      expect(page).to_not have_content("Bronson Shmonson - 3")
+      expect(page).to_not have_content("Pistol Pete - 1")
       expect(page).to_not have_content("Brian Twinlegs - 2")
     end
     within("#customer-2") do
-      expect(page).to have_content("3. Bronson Shmonson - 2")
-      expect(page).to_not have_content("Tommy Doubleleg - 3")
+      expect(page).to have_content("3. Bronson Shmonson - 3")
+      expect(page).to_not have_content("Tommy Doubleleg - 4")
       expect(page).to_not have_content("Debbie Twolegs - 3")
-      expect(page).to_not have_content("Bronson Shmonson - 2")
-      expect(page).to_not have_content("Pistol Pete - 2")
+      expect(page).to_not have_content("Brian Twinlegs - 2")
+      expect(page).to_not have_content("Pistol Pete - 1")
     end
     within("#customer-3") do
       expect(page).to have_content("4. Brian Twinlegs - 2")
-      expect(page).to_not have_content("Brian Twinlegs - 2")
-      expect(page).to_not have_content("Tommy Doubleleg - 3")
+      expect(page).to_not have_content("Pistol Pete - 1")
+      expect(page).to_not have_content("Tommy Doubleleg - 4")
       expect(page).to_not have_content("Debbie Twolegs - 3")
-      expect(page).to_not have_content("Bronson Shmonson - 2")
+      expect(page).to_not have_content("Bronson Shmonson - 3")
     end
     within("#customer-4") do
-      expect(page).to have_content("5. Pistol Pete - 2")
-      expect(page).to_not have_content("Tommy Doubleleg - 3")
+      expect(page).to have_content("5. Pistol Pete - 1")
+      expect(page).to_not have_content("Tommy Doubleleg - 4")
       expect(page).to_not have_content("Debbie Twolegs - 3")
-      expect(page).to_not have_content("Pistol Pete - 2")
+      expect(page).to_not have_content("Bronson Shmonson - 3")
       expect(page).to_not have_content("Brian Twinlegs - 2")
     end
   end
