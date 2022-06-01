@@ -26,4 +26,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-echo coverage >> .gitignore
+
+# Ignore simplecov coverage
+/coverage/*
+/coverage/index.html
+
