@@ -1,0 +1,9 @@
+<h1>Little Esty Shop</h1>
+
+<div id="merchants">
+
+  <% @merchants.each do |merchant| %>
+    <p><%= link_to merchant.name, admin_merchant_path(merchant) %></p>
+  <% end %>
+
+</div>
