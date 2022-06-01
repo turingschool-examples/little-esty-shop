@@ -11,7 +11,7 @@ RSpec.describe "Merchant Invoices Show Page" do
   let!(:item4) { merchant2.items.create!(name: "Nemo Facere", description: "Sunt eum id eius", unit_price: 15925) }
   let!(:item5) { merchant3.items.create!(name: "Expedita Aliquam", description: "Vol pt", unit_price: 31163) }
 
-  let!(:invoice1) { customer1.invoices.create!(status: "cancelled") }
+  let!(:invoice1) { customer1.invoices.create!(status: "in progress") }
   let!(:invoice2) { customer2.invoices.create!(status: "completed") }
   let!(:invoice3) { customer3.invoices.create!(status: "in progress") }
   let!(:invoice4) { customer4.invoices.create!(status: "completed") }
@@ -81,11 +81,32 @@ RSpec.describe "Merchant Invoices Show Page" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Invoice ##{invoice1.id}")
-    expect(page).to have_content("Status: #{invoice1.status}")
+    expect(page).to have_content("Status: in progress")
     expect(page).to have_content("Created at: #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
+
+    expect(page).to_not have_content("Invoice ##{invoice2.id}")
+    expect(page).to_not have_content("Status: completed")
 
     within ".customer" do
       expect(page).to have_content("Leanne Braun")
+      expect(page).to_not have_content("Tony Bologna")
+    end
+  end
+
+  it "displays a list of items on the invoice and their attributes" do
+    visit merchant_invoice_path(merchant1, invoice1)
+
+    expect(page).to have_content("Invoice Items")
+
+    within ".invoice_items" do
+      expect(page).to have_content("Item Name: Qui Esse")
+      expect(page).to have_content("Quantity Sold: 5")
+      expect(page).to have_content("Sold at: $13,635")
+      expect(page).to have_content("Invoice Item Status: packaged")
+
+      expect(page).to_not have_content("Item Name: Ea Voluptatum")
+      expect(page).to_not have_content("Quantity Sold: 3")
+      expect(page).to_not have_content("Sold at: $52,100")
     end
   end
 end
