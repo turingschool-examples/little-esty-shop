@@ -12,10 +12,10 @@ class Merchant < ApplicationRecord
 
 
   def top_5_customers
-    #Find items associated with the curent merchant
-    merchant_items = Item.where(merchant_id: id)
+    #Find items associated with the curent merchant 
+    merchant_items = Item.where(merchant_id: id)  ##works in heroku
     #Find the invoices associated with these items
-    merchant_invoices = Invoice.joins(:items).where(items: { id: merchant_items })
+    merchant_invoices = Invoice.joins(:items).where(items: { id: merchant_items })  ##works
     #Find only the invoices that had successful transactions
     successful_invoices = Invoice.joins(:transactions).where(id: merchant_invoices).where(transactions: { result: "success" })
     #Group the invoices by customer_id and count how many invoices there are for each customer, order them from most invoices to least
@@ -27,3 +27,6 @@ class Merchant < ApplicationRecord
   end
 
 end
+
+# merchant_items = Item.where(merchant_id: Merchant.all[26])
+# merchant_invoices = merchant_invoices.pluck(:id)
