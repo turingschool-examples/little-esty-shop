@@ -50,8 +50,7 @@ RSpec.describe Merchant, type: :model do
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
-      binding.pry
-      expect(merchants[0]).to eq(customers[1..5])
+      expect(merchants[0].top_5_customers).to eq(customers[1..5])
 
     end
   end
