@@ -13,4 +13,8 @@ class Invoice < ApplicationRecord
   def self.invoices_with_merchant_items(merchant)
     merchant.invoices.uniq
   end
+
+  def invoice_customer
+    "#{customer.first_name} #{customer.last_name}"
+  end
 end
