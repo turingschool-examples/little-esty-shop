@@ -26,18 +26,32 @@ RSpec.describe Merchant, type: :model do
     end
 
     @transactions = @invoices.each_with_index.flat_map do |invoice, index|
-      if index < 4
+      if index < 2
         create_list(:transaction, 2, invoice: invoice, result: 1)
       else
         create_list(:transaction, 2, invoice: invoice, result: 0)
       end
     end
+
   end
+  let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0]) }
+  let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1]) }
+  let!(:invoice_item3) { create(:invoice_item, item: @items[0], invoice: @invoices[2]) }
+  let!(:invoice_item4) { create(:invoice_item, item: @items[1], invoice: @invoices[3]) }
+  let!(:invoice_item5) { create(:invoice_item, item: @items[0], invoice: @invoices[4]) }
+  let!(:invoice_item6) { create(:invoice_item, item: @items[1], invoice: @invoices[5]) }
+  let!(:invoice_item7) { create(:invoice_item, item: @items[0], invoice: @invoices[6]) }
+  let!(:invoice_item8) { create(:invoice_item, item: @items[1], invoice: @invoices[7]) }
+  let!(:invoice_item9) { create(:invoice_item, item: @items[0], invoice: @invoices[8]) }
+  let!(:invoice_item10) { create(:invoice_item, item: @items[1], invoice: @invoices[9]) }
+  let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10]) }
+  let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11]) }
 
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
-      expect()
+      binding.pry
+      expect(merchants[0]).to eq(customers[1..5])
 
     end
   end
