@@ -6,6 +6,6 @@
 <div id="ready-items">
     <h3>Items Ready to Ship</h3>
     <% @merchant.ready_items.each do |item| %>
-        <p><%= "#{item.name}" %><%= link_to "#{item.find_invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.find_invoice_id}" %></p>
+        <p><%= "#{item.name}" %><%= link_to "#{item.find_invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.find_invoice_id}" %> <%= item.invoice_time %></p>
     <% end %>
 </div>
