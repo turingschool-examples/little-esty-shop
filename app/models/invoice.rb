@@ -13,7 +13,9 @@ class Invoice < ApplicationRecord
   end
 
   def unshipped
-    all.each do |invoice|
+
+    
+    self.all.each do |invoice|
       invoice if invoice.invoice_item.status != 2
     end
   end
