@@ -7,4 +7,13 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :unit_price, presence: true
+
+
+  # def self.enabled_items
+  #   where(status: 1)
+  # end
+  #
+  # def self.disabled_items
+  #   where(status: 0)
+  # end
 end

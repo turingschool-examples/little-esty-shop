@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :find_merchant, only: [:index, :edit, :show, :update]
+  before_action :find_merchant, only: [:index, :edit, :show, :update, :new, :create]
   before_action :find_item, only: [:edit, :show, :update]
 
   def index
@@ -12,6 +12,15 @@ class ItemsController < ApplicationController
 
   def edit
 
+  end
+
+  def new
+
+  end
+
+  def create
+    @merchant.items.create!(item_params)
+    redirect_to merchant_items_path(@merchant)
   end
 
   def update
@@ -29,7 +38,7 @@ class ItemsController < ApplicationController
 private
 
   def item_params
-    params.permit(:name, :description, :unit_price, :merchant_id)
+    params.permit(:name, :description, :unit_price)
   end
 
 end
