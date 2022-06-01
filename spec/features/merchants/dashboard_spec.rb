@@ -29,27 +29,32 @@ RSpec.describe 'merchants dashboard' do
     expect(page).to have_link('Invoices Index')
   end
 
-  it "has a section for items ready to ship" do
+  it 'has a section for items ready to ship' do
     visit "/merchants/#{@merch1.id}/dashboard"
-    within "#ready-items" do
-      expect(page).to have_content("Items Ready to Ship") 
-      expect(page).to have_content("Floopy Updated")
-      expect(page).to have_content("#{@invoice1.id}")
-      expect(page).to have_content("Floopy Retro") 
-      expect(page).to have_content("#{@invoice2.id}")
-      expect(page).to_not have_content("Floopy Original") 
-      expect(page).to_not have_content("Floopy Geo") 
+    within '#ready-items' do
+      expect(page).to have_content('Items Ready to Ship')
+      expect(page).to have_content('Floopy Updated')
+      expect(page).to have_content(@invoice1.id.to_s)
+      expect(page).to have_content('Floopy Retro')
+      expect(page).to have_content(@invoice2.id.to_s)
+      expect(page).to_not have_content('Floopy Original')
+      expect(page).to_not have_content('Floopy Geo')
     end
   end
 
-  it "has link from items ready to ship that leads to merchant invoice show page" do
+  it 'has link from items ready to ship that leads to merchant invoice show page' do
     visit "/merchants/#{@merch1.id}/dashboard"
-    within "#ready-items" do
-      expect(page).to have_content("#{@invoice1.id}")
-      click_link "#{@invoice1.id}"
+    within '#ready-items' do
+      expect(page).to have_content(@invoice1.id.to_s)
+      click_link @invoice1.id.to_s
     end
     expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
   end
-  
-  
+
+  it 'shows invoice dates and lists them oldest to newest' do
+    visit "/merchants/#{@merch1.id}/dashboard"
+    within '#ready-items' do
+      expect(@invoice1).to appear_before(@invoice2)
+    end
+  end
 end
