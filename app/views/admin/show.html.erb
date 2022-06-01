@@ -1,3 +1,12 @@
 <h1>Admin Dashboard</h1>
 <%= link_to "Admin Merchant Index", "/admin/merchants" %>
 <%= link_to "Admin Invoice Index", "/admin/invoices" %>
+
+<h3>Incomplete Invoices</h3>
+<% @invoices.each do |invoice| %>
+  <% invoice.invoice_items.each do |ii| %>
+    <% if ii.status != "shipped" %>
+      <%= link_to "#{ii.invoice_id}", "/admin/invoices/#{ii.invoice_id}" %><br>
+    <% end %>
+  <% end %>
+<% end %>
