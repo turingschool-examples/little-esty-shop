@@ -49,7 +49,8 @@ RSpec.describe "Merchant Invoices Show Page" do
   let!(:invoice_item16) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice16.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item17) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice17.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item18) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice18.id, quantity: 8, unit_price: 2196, status: "packaged") }
-
+  let!(:invoice_item19) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 9, unit_price: 23324, status: "packaged") }
+    # invoice_item19 has a second item from the first merchant, so that an invoice would have more than one item - in this case, invoice1 now has items 1 and 2
 
   let!(:customer1) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
   let!(:customer2) { Customer.create!(first_name: "Sylvester", last_name: "Nader") }
@@ -103,6 +104,10 @@ RSpec.describe "Merchant Invoices Show Page" do
       expect(page).to have_content("Quantity Sold: 5")
       expect(page).to have_content("Sold at: $13,635")
       expect(page).to have_content("Invoice Item Status: packaged")
+
+      expect(page).to have_content("Item Name: Autem Minima")
+      expect(page).to have_content("Quantity Sold: 9")
+      expect(page).to have_content("Sold at: $23,324")
 
       expect(page).to_not have_content("Item Name: Ea Voluptatum")
       expect(page).to_not have_content("Quantity Sold: 3")
