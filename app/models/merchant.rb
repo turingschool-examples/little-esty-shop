@@ -6,4 +6,11 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates :name, presence: true
+
+  def items_ready_to_ship
+    Merchant.joins(invoice_items: [invoice: :transactions]).
+    where(merchants: {id: self.id}, invoice_items: {status: [0,2]}, invoices: {status: [1,2]}, transactions: {result: true}).
+    select("items.name, invoices.id, invoices.created_at").
+    order("invoices.created_at ASC")
+  end
 end
