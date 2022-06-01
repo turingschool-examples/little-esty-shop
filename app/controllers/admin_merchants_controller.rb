@@ -26,8 +26,8 @@ class AdminMerchantsController < ApplicationController
   end
 
   def create
-    require "pry"; binding.pry
-    merchant = Merchant.create
+    merchant = Merchant.create(merchant_params)
+    redirect_to "/admin/merchants"
   end
 
   private
