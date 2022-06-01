@@ -83,18 +83,22 @@ RSpec.describe "Merchant Invoices Index Page" do
     # invoices 1-5 are what I want to see
     # invoice_items 1-2 have item1, invoice_items 2-5 have item2
 
-    expect(page).to have_content("Merchant Invoices")
-    expect(page).to have_content("Invoice: ")
-    expect(page).to have_link(invoice1.id)
-    expect(page).to have_link(invoice2.id)
-    expect(page).to have_link(invoice3.id)
-    expect(page).to have_link(invoice4.id)
-    expect(page).to have_link(invoice5.id)
-    expect(page).to_not have_content(invoice6.id)
+    expect(page).to have_content("Merchant Invoices Index")
+    expect(page).to have_content("Schroeder-Jerde's Invoices")
 
-    epxect(page).to have_content(invoice1.id)
+    within ".invoice_index" do
+      expect(page).to have_content("Invoice: ")
+      expect(page).to have_link(invoice1.id)
+      expect(page).to have_link(invoice2.id)
+      expect(page).to have_link(invoice3.id)
+      expect(page).to have_link(invoice4.id)
+      expect(page).to have_link(invoice5.id)
+      expect(page).to_not have_content(invoice6.id)
+      expect(page).to_not have_link(invoice6.id)
 
-    click_link(invoice1.id)
-    expect(current_path).to eq(merchant_invoice_path(mechant1.id, invoice1.id))
+    end
+    click_link("#{invoice1.id}")
+
+    expect(current_path).to eq(merchant_invoice_path(merchant1, invoice1.id))
   end
 end
