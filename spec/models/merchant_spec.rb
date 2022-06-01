@@ -52,7 +52,7 @@ RSpec.describe Merchant do
       end
     end
 
-    describe '#favorite_customers' do
+    describe '#top_5_customers' do
 
       before :each do
         @merch_1 = Merchant.create!(name: "Two-Legs Fashion")
