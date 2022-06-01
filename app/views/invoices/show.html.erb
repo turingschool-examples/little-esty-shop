@@ -2,7 +2,7 @@
 Status: <%= @invoice.status %><br>
 Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
 <div class="customer">
-  <%= @invoice.invoice_customer %><br>
+  Customer Name: <%= @invoice.invoice_customer %><br>
 </div>
 
 <h3>Invoice Items</h3>
@@ -14,3 +14,5 @@ Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
     <p>Invoice Item Status: <%= invoice_item.status %></p>
   <% end %>
 </div>
+
+Total Revenue: <%= number_to_currency(@invoice.total_revenue) %>

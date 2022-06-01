@@ -89,7 +89,7 @@ RSpec.describe "Merchant Invoices Show Page" do
     expect(page).to_not have_content("Status: completed")
 
     within ".customer" do
-      expect(page).to have_content("Leanne Braun")
+      expect(page).to have_content("Customer Name: Leanne Braun")
       expect(page).to_not have_content("Tony Bologna")
     end
   end
@@ -102,16 +102,22 @@ RSpec.describe "Merchant Invoices Show Page" do
     within ".invoice_items" do
       expect(page).to have_content("Item Name: Qui Esse")
       expect(page).to have_content("Quantity Sold: 5")
-      expect(page).to have_content("Sold at: $13,635")
+      expect(page).to have_content("Sold at: $13,635.00")
       expect(page).to have_content("Invoice Item Status: packaged")
 
       expect(page).to have_content("Item Name: Autem Minima")
       expect(page).to have_content("Quantity Sold: 9")
-      expect(page).to have_content("Sold at: $23,324")
+      expect(page).to have_content("Sold at: $23,324.00")
 
       expect(page).to_not have_content("Item Name: Ea Voluptatum")
       expect(page).to_not have_content("Quantity Sold: 3")
-      expect(page).to_not have_content("Sold at: $52,100")
+      expect(page).to_not have_content("Sold at: $52,100.00")
     end
+  end
+
+  it "displays the total reveue of items sold on the invoice" do
+    visit merchant_invoice_path(merchant1, invoice1)
+
+    expect(page).to have_content("Total Revenue: $278,091.00")
   end
 end
