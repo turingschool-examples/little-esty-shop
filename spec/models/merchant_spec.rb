@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Merchant do
     describe "relationships" do
-        it { should have_many :items } 
+        it { should have_many :items }
+        it { should have_many(:invoice_items).through(:items) }
+        it { should have_many(:invoices).through(:invoice_items) }
     end
 
     describe "instance methods" do
@@ -24,8 +26,5 @@ RSpec.describe Merchant do
         it "lists the items ready for shipment" do
             expect(@merch1.ready_items).to eq([@item2, @item3])
         end
-        
     end
-    
-    
 end

@@ -96,5 +96,44 @@ RSpec.describe 'merchants items index' do
 
   end
 
+  it 'can add an create a merchant item and have the default value be disabled' do
+    # As a merchant
+    # When I visit my items index page
+    # I see a link to create a new item.
+    # When I click on the link,
+    # I am taken to a form that allows me to add item information.
+    # When I fill out the form I click ‘Submit’
+    # Then I am taken back to the items index page
+    # And I see the item I just created displayed in the list of items.
+    # And I see my item was created with a default status of disabled.
+    merch1 = Merchant.create!(name: 'Floopy Fopperations')
+    item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450, status: 0)
+    item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950, status: 1)
+    item3 = merch1.items.create!(name: 'Floopy Remix', description: 'the even better', unit_price: 1950, status: 0)
+
+    visit "/merchants/#{merch1.id}/items"
+
+    click_link "Create a new Item"
+    expect(current_path).to eq("/merchants/#{merch1.id}/items/new")
+
+    # save_and_open_page
+
+    fill_in 'Name', with: 'Floopy Retro'
+    fill_in 'Description', with: 'the OG'
+    fill_in 'unit_price', with: 1950
+
+    click_button "Submit"
+    expect(current_path).to eq("/merchants/#{merch1.id}/items")
+
+    within "#disabled-items" do
+      expect(page).to have_content('Floopy Retro')
+    end
+
+    within "#enabled-items" do
+      expect(page).to_not have_content('Floopy Retro')
+    end
+
+  end
+
 
 end
