@@ -1,3 +1,6 @@
 <h1>Name: <%= @item.name %></h1>
 <p>Description: <%= @item.description %></p>
 <p>Current Selling Price: <%= number_to_currency(@item.unit_price) %></p>
+
+
+<%= link_to "Update Item", merchant_item_path(@merchant, @item), method: :patch %>
