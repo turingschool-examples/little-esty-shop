@@ -1,0 +1,10 @@
+<h1>Merchant Invoice Show Page</h1>
+
+<h3><%= @invoice.invoice_items.each do |invoice_item| %></h3>
+    <div id="invoice-item-<%= invoice_item.item.id %>">
+        <p>Name: <%= invoice_item.item.name %></p>
+        <p>Quantity: <%= invoice_item.quantity %></p>
+        <p>Unit Price: <%= invoice_item.unit_price %></p>
+        <p>Status: <%= invoice_item.status %></p><hr>
+    </div>
+<% end %>
