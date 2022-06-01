@@ -12,4 +12,13 @@ RSpec.describe Invoice do
   describe 'validations' do
     it { should validate_presence_of(:status) }
   end
+
+  describe "instance methods" do
+    it "#invoice_customer" do
+      customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
+      invoice1 = customer1.invoices.create!(status: "cancelled")
+
+      expect(invoice1.invoice_customer).to eq("Leanne Braun")
+    end
+  end
 end

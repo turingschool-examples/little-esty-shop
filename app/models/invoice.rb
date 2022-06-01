@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   validates :status, presence: true
 
   enum status: {'cancelled' => 0, 'in progress' => 1, 'completed' => 2}
+
+  def invoice_customer
+    "#{customer.first_name} #{customer.last_name}"
+  end
 end
