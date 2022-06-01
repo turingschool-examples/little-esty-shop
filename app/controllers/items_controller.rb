@@ -15,7 +15,21 @@ class ItemsController < ApplicationController
   end
 
   def update
-    
-    redirect_to edit_merchant_item_path(@merchant, @item)
+    if @item.update(item_params)
+      flash[:message] = 'You have successfully updated this item!'
+      redirect_to merchant_item_path(@merchant, @item)
+    else
+      flash[:message] = 'Please fill out all fields to update this item!'
+      # render :new not sure why this doesn't work here
+      redirect_to edit_merchant_item_path(@merchant, @item)
+    end
   end
+
+
+private
+
+  def item_params
+    params.permit(:name, :description, :unit_price, :merchant_id)
+  end
+
 end
