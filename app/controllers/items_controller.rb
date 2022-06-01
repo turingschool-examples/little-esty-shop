@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
 
   def update
     if params[:status]
-      @item.update(items_status_params)
+      @item.update(item_status_params)
       redirect_to merchant_items_path
     else
       if @item.update(item_params)
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
 
 
  private
-  
+
   def item_params
     params.permit(:name, :description, :unit_price)
   end
@@ -49,5 +49,5 @@ class ItemsController < ApplicationController
   def item_status_params
     params.permit(:status)
   end
-  
+
 end
