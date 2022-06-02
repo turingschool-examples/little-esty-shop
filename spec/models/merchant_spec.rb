@@ -99,10 +99,4 @@ RSpec.describe Merchant do
       expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
     end
   end
-  # 
-  # describe '#top_items_best_day' do
-  #   it "returns the top items best selling date" do
-  #     expect(merchant_1.top_items_best_day).to eq("Thu, 02 Jun 2022")
-  #   end
-  # end
 end
