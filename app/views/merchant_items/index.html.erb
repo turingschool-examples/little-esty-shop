@@ -5,6 +5,8 @@
   <% @merchant.top_five_items_by_revenue.each do |item| %>
     <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
     <p>Total Revenue: <%= item.invoice_items.item_revenue.to_s.insert(-3,'.') %></p>
+    <p>Top selling date was <%= item.item_best_day %></p>
+    <hr>
   <% end %>
 </div>
 

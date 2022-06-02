@@ -13,7 +13,7 @@ RSpec.describe 'merchants items index' do
     @item6 = @merch1.items.create!(name: 'Floopy Blue', description: 'the better', unit_price: 950)
     @item7 = @merch1.items.create!(name: 'Floopy Red', description: 'the OG', unit_price: 550)
     @item8 = @merch1.items.create!(name: 'Floopy Black', description: 'the OG', unit_price: 550)
-    @invoice1 = @customer1.invoices.create!(status: 2)
+    @invoice1 = @customer1.invoices.create!(status: 2, updated_at: Time.parse("2012-03-30 14:54:09 UTC"))
     @invoice1.transactions.create!(result: 0)
     @invoice2 = @customer1.invoices.create!(status: 2)
     @invoice2.transactions.create!(result: 0)
@@ -168,6 +168,14 @@ RSpec.describe 'merchants items index' do
       expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item8.id}") 
     end
   end
+
+  it "displays items best day" do
+    visit "/merchants/#{@merch1.id}/items"
+    within "#top-items" do
+      expect(page).to have_content(@invoice1.updated_at)
+    end
+  end
+  
   
 
 
