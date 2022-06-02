@@ -29,5 +29,19 @@ RSpec.describe Item, type: :feature do
         expect(page).to have_field(:description, with: "Description1")
         expect(page).to have_field(:unit_price, with: "$1.11")
     end
+
+    it 'update button will change attribute values, has a success flash message' do
+      visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+      click_on "Update"
+        fill_in "Name", with: "Item1newname"
+        fill_in "Description", with: "NewDescription1"
+        fill_in "Unit Price", with: "121"
+        click_on "Update"
+save_and_open_page
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+      expect(page).to have_content("Item1newname")
+      expect(page).to have_content("NewDescription1")
+      expect(page).to have_content("$1.21")
+    end
   end
 end
