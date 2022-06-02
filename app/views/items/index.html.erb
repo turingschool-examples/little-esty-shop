@@ -33,7 +33,8 @@
   <h3> Top Five Most Popular Items: </h3>
     <ol>
       <% @merchant.top_five_items.each do |item| %>
-      <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <i>Total Revenue: <%= number_to_currency(item.revenue) %></i></li>
+        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <i>Total Revenue: <%= number_to_currency(item.revenue) %></i></li>
+          <p>Top selling date for <%= item.name %> was <%= item.best_sales_date %></p>
       <% end %>
     </ol>
 </div>

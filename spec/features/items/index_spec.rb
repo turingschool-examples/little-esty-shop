@@ -21,12 +21,12 @@ RSpec.describe "Merchant Items Index Page" do
     let!(:customer5) { Customer.create!(first_name: "Carl", last_name: "Junior") }
     let!(:customer6) { Customer.create!(first_name: "Tony", last_name: "Bologna") }
 
-    let!(:invoice1) { customer1.invoices.create!(status: 2) }
-    let!(:invoice2) { customer2.invoices.create!(status: 2) }
-    let!(:invoice3) { customer3.invoices.create!(status: 2) }
-    let!(:invoice4) { customer4.invoices.create!(status: 2) }
-    let!(:invoice5) { customer5.invoices.create!(status: 2) }
-    let!(:invoice6) { customer6.invoices.create!(status: 2) }
+    let!(:invoice1) { customer1.invoices.create!(status: 2, created_at: '2012-03-21 14:53:59') }
+    let!(:invoice2) { customer2.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
+    let!(:invoice3) { customer3.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
+    let!(:invoice4) { customer4.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
+    let!(:invoice5) { customer5.invoices.create!(status: 2, created_at: '2012-03-26 14:53:59') }
+    let!(:invoice6) { customer6.invoices.create!(status: 2, created_at: '2012-03-27 14:53:59') }
 
     let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 130, status: "packaged") }
     let!(:invoice_item2) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 10, unit_price: 130, status: "pending") }
@@ -110,9 +110,12 @@ RSpec.describe "Merchant Items Index Page" do
   end
 
   it "displays the best selling day for each of the top 5 most popular items" do
-    within("#item-#{item1.id}") do
-      expect(page).to have_content("Boots")
-      expect(page).to have_content("Thu, 02 Jun 2022")
+    within(".top-5") do
+      expect(page).to have_content("Top selling date for Boots was Fri, 23 Mar 2012")
+      expect(page).to have_content("Top selling date for Tent was Sat, 24 Mar 2012")
+      expect(page).to have_content("Top selling date for Fanny Pack was Wed, 21 Mar 2012")
+      expect(page).to have_content("Top selling date for Backpack was Sun, 25 Mar 2012")
+      expect(page).to have_content("Top selling date for Socks was Mon, 26 Mar 2012")
     end
   end
 end
