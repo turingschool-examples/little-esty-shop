@@ -54,18 +54,18 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'returns item names ordered, not shipped' do 
-      expect(merchants[0].ordered_not_shipped).to eq({
-        @items[0].name =>@invoice[0].id, 
-        @items[1].name =>@invoice[1].id, 
-        @items[0].name =>@invoice[2].id, 
-        @items[1].name =>@invoice[3].id, 
-        @items[0].name =>@invoice[4].id,
-        @items[1].name =>@invoice[5].id, 
-        @items[0].name =>@invoice[6].id, 
-        @items[1].name =>@invoice[7].id, 
-        @items[0].name =>@invoice[8].id, 
-        @items[1].name =>@invoice[9].id
-        })#item and item invoice number
+      expect(merchants[0].ordered_not_shipped).to eq([
+        invoice_item1, 
+        invoice_item2, 
+        invoice_item3, 
+        invoice_item4, 
+        invoice_item5,
+        invoice_item6, 
+        invoice_item7, 
+        invoice_item8, 
+        invoice_item9, 
+        invoice_item10
+        ])#item and item invoice number
     end
   end
 end

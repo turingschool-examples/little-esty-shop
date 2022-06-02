@@ -21,7 +21,9 @@
 
   <div class="page-defaults" id="leftSide2">
     <p>Items Ready to Ship</p>
-    
+    <% @merchant.ordered_not_shipped.each do |invoice_item| %>
+    <% binding.pry %> <%= invoice_item.item.name %>- <>
+    <% end %>
   </div>
 
   <div class="page-defaults" id="rightSide2">
