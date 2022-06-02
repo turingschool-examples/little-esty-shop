@@ -90,8 +90,17 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the top 5 most popular items ordered by total revenue" do
+  it "displays the total revenue next to the item" do
+    within(".top-5") do
+      expect(page).to have_content("Total Revenue: $1,950.00")
+      expect(page).to have_content("Total Revenue: $1,760.00")
+      expect(page).to have_content("Total Revenue: $140.00")
+      expect(page).to have_content("Total Revenue: $100.00")
+      expect(page).to have_content("Total Revenue: $60.00")
+    end
+  end
 
+  it "displays the top 5 most popular items ordered by total revenue" do
     within(".top-5") do
       expect("Boots").to appear_before("Tent")
       expect("Tent").to appear_before("Fanny Pack")
@@ -100,13 +109,10 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the total revenue next to the item" do
-    within(".top-5") do
-      expect(page).to have_content("Total Revenue: $1,950.00")
-      expect(page).to have_content("Total Revenue: $1,760.00")
-      expect(page).to have_content("Total Revenue: $140.00")
-      expect(page).to have_content("Total Revenue: $100.00")
-      expect(page).to have_content("Total Revenue: $60.00")
+  it "displays the best selling day for each of the top 5 most popular items" do
+    within("#item-#{item1.id}") do
+      expect(page).to have_content("Boots")
+      expect(page).to have_content("Thu, 02 Jun 2022")
     end
   end
 end
