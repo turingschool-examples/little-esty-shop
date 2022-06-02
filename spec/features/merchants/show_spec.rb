@@ -76,16 +76,36 @@ RSpec.describe 'Merchants show page', type: :feature do
     end
   end
 
-  describe 'merchant dashboard items ready to ship' do 
-    it 'has a section for items ready to ship' do 
+  describe 'merchant dashboard items ready to ship' do
+    it 'has a section for items ready to ship' do
       visit "/merchants/#{merchants[0].id}/dashboard"
-      save_and_open_page
+
       expect(page).to have_content("Items Ready to Ship")
-      within ".invoice-item-#{invoice_item1.id}" do 
-        expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.id} - #{invoice_item1.created_at}")
-        click_link "Invoice ##{invoice_item1.id}"
-      end 
+      within ".invoice-item-#{invoice_item1.id}" do
+        expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.invoice_id}")
+        click_link "Invoice ##{invoice_item1.invoice_id}"
+      end
       expect(current_path).to eq("/merchants/#{merchants[0].id}/invoices")
+    end
+  end
+
+  describe 'merchant dashboard invoices sorted by least recent' do
+    it 'has a the invoices sorted by least recent' do
+      visit "/merchants/#{merchants[0].id}/dashboard"
+
+      within "#leftSide2" do
+
+        expect(page).to have_content("Items Ready to Ship")
+        expect(page).to have_link("Invoice ##{invoice_item1.invoice_id}")
+        expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.invoice_id} - #{invoice_item1.invoice.created_at.strftime("%A, %B %d, %Y")}")
+        # This .strftime("%A, %B %d, %Y") will format date to look like "Monday, July 18, 2019"
+
+        expect("Invoice ##{invoice_item1.invoice_id}").to appear_before("Invoice ##{invoice_item2.invoice_id}")
+        expect("Invoice ##{invoice_item2.invoice_id}").to appear_before("Invoice ##{invoice_item3.invoice_id}")
+        expect("Invoice ##{invoice_item3.invoice_id}").to appear_before("Invoice ##{invoice_item4.invoice_id}")
+        # need to refactor "invoice_item1.invoice.created_at" into it's own method
+        # also item.name
+      end
     end
   end
 end
