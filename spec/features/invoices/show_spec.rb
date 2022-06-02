@@ -82,11 +82,11 @@ RSpec.describe "Merchant Invoices Show Page" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Invoice ##{invoice1.id}")
-    expect(page).to have_content("Status: in progress")
+    expect(page).to have_content("Status: In Progress")
     expect(page).to have_content("Created at: #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
 
     expect(page).to_not have_content("Invoice ##{invoice2.id}")
-    expect(page).to_not have_content("Status: completed")
+    expect(page).to_not have_content("Status: Completed")
 
     within ".customer" do
       expect(page).to have_content("Customer Name: Leanne Braun")
@@ -103,7 +103,8 @@ RSpec.describe "Merchant Invoices Show Page" do
       expect(page).to have_content("Item Name: Qui Esse")
       expect(page).to have_content("Quantity Sold: 5")
       expect(page).to have_content("Sold at: $13,635.00")
-      expect(page).to have_content("Invoice Item Status: packaged")
+      expect(page).to have_content("Invoice Item Status: Packaged")
+
 
       expect(page).to have_content("Item Name: Autem Minima")
       expect(page).to have_content("Quantity Sold: 9")
