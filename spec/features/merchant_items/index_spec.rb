@@ -45,4 +45,30 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(page).to_not have_content(@items[3].name)
     end
   end
+
+  describe 'merchant items show page' do 
+    it 'has links for the item names' do 
+      visit "/merchants/#{merchants[0].id}/items"
+
+      within ".merchant-items-#{merchants[0].items[0].id}" do 
+        click_link "#{merchants[0].items[0].name}"
+      end
+      expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}")
+      # expect(page).to have_content(items[0].name)
+      # expect(page).to have_content(items[0].description)
+      # expect(page).to have_content(items[0].unit_price)
+      # expect(page).to_not have_content(items[1].name)
+
+      visit "/merchants/#{merchants[0].id}/items"
+
+      within ".merchant-items-#{merchants[0].items[1].id}" do 
+        click_link "#{merchants[0].items[1].name}"
+      end 
+      expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[1].id}")
+      # expect(page).to have_content(items[1].name)
+      # expect(page).to have_content(items[1].description)
+      # expect(page).to have_content(items[1].unit_price)
+      # expect(page).to_not have_content(items[0].name)
+    end
+  end
 end

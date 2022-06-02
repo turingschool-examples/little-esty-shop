@@ -22,7 +22,8 @@
   <div class="page-defaults" id="leftSide2">
     <p>New Item</p>
     <% @merchant.items.each do |item| %>
-      <p><%= item.name %></p>
+    <div class="merchant-items-<%= item.id %>">
+      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
     <% end %>
   </div>
 
