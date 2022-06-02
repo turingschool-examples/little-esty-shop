@@ -5,9 +5,7 @@ class Invoice < ApplicationRecord
   has_many :transactions
 
   validates_presence_of :status
-  validates_presence_of :created_at
-  validates_presence_of :updated_at
-
+  
   def total_revenue
     invoice_items.sum('unit_price * quantity') * 0.01.to_f
   end
