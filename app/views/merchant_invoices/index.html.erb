@@ -1,0 +1,27 @@
+<div class="page-defaults" id="shopId" >
+  <h1><span>Little Esty Shop</span></h1>
+</div>
+
+<div class="page-defaults" id="splitSides">
+
+  <div class="page-defaults" id="leftSide">
+    <%= @merchant.name %>
+  </div>
+
+  <div class="page-defaults" id="rightSide">
+    <ul>
+      <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+      <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+    </ul>
+  </div>
+
+</div>
+
+<div class="page-defaults" id="splitSides">
+  <div class="page-defaults" id="leftSide2">
+    <h2>My Invoices</h2>
+    <% @merchant.invoices.each do |invoice| %>
+      <p><%= link_to "Invoice ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> </p>
+    <% end %>
+  </div>
+</div>
