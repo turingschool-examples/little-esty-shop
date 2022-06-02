@@ -5,4 +5,7 @@ class InvoiceItem < ApplicationRecord
   validates_presence_of :quantity
   validates_presence_of :unit_price
   validates_presence_of :status
-end
+
+  def price_convert
+    unit_price * 0.01.to_f
+  end

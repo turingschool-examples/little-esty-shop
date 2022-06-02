@@ -7,9 +7,4 @@ class Item < ApplicationRecord
   validates_presence_of :description
   validates_presence_of :unit_price
 
-
-  def to_money(number)
-    number.to_i
-    number_to_currency(number)
-  end
 end
