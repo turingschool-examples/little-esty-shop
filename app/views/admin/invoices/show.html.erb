@@ -13,3 +13,9 @@ Items:
 <% end %>
 
 Total Revenue from this Invoice: $<%= @invoice.total_revenue.round(2) %>
+<br>
+<p>Update Invoice Status:</p>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+<%= form.select(:status, options_for_select(["cancelled", "in progress", "completed"], :selected => @invoice.status)) %>
+<%= form.submit "Update Status" %>
+<% end %>
