@@ -24,13 +24,10 @@ RSpec.describe Item, type: :feature do
     it "has an update link to an edit page form with fields prepopulated with items current information" do
       visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
       click_on "Update"
-      expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item.id}/edit")
-
-      within("#form") do
-        expect(page).to have_content("Item1")
-        expect(page).to have_content("Description1")
-        expect(page).to have_content("$1.11")
-      end
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
+        expect(page).to have_field(:name, with: "Item1")
+        expect(page).to have_field(:description, with: "Description1")
+        expect(page).to have_field(:unit_price, with: "$1.11")
     end
   end
 end
