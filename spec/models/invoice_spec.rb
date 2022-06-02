@@ -35,9 +35,10 @@ RSpec.describe Invoice do
       @ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
       @ii_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     end
+    
     describe '#incomplete_invoices_ordered' do
       it 'returns incomplete invoices orderd from oldest to newest' do
-        expect(Invoice.incomplete_invoices_ordered).to eq([@invoice_1, @invoice_2, @invoice_4, @invoice_5])
+        expect(Invoice.incomplete_invoices_ordered).to eq([@invoice_5, @invoice_4, @invoice_2, @invoice_1])
       end
     end
   end

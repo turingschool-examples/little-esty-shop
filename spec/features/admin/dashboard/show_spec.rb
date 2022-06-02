@@ -94,10 +94,10 @@ RSpec.describe "Admin dashboard" do
 
   it "displays the incomplete invoices created at dates and orders them by oldest to youngest" do
     visit '/admin'
-save_and_open_page
-    expect(@invoice_4.id).to appear_before(@invoice_3.id)
-    expect(@invoice_3.id).to appear_before(@invoice_2.id)
-    expect(@invoice_2.id).to appear_before(@invoice_1.id)
+
+    expect("#{@invoice_4.id}").to appear_before("#{@invoice_3.id}")
+    expect("#{@invoice_3.id}").to appear_before("#{@invoice_2.id}")
+    expect("#{@invoice_2.id}").to appear_before("#{@invoice_1.id}")
     expect(page).to have_content("#{@invoice_4.id} - #{@invoice_4.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@invoice_3.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@invoice_2.id} - #{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
