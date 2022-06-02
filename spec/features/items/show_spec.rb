@@ -37,7 +37,7 @@ RSpec.describe Item, type: :feature do
         fill_in "Description", with: "NewDescription1"
         fill_in "Unit Price", with: "121"
         click_on "Update"
-save_and_open_page
+
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
       expect(page).to have_content("Item1newname")
       expect(page).to have_content("NewDescription1")
