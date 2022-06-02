@@ -1,1 +1,9 @@
-this is the admin merchants index (will change later)
+
+<h1>Admin Merchant Index Page</h1>
+
+<h3>Merchant Names</h3>
+<% @merchants.each do |merchant| %>
+    <p><%= merchant.name %></p>
+    <hr>
+<% end %>
+
