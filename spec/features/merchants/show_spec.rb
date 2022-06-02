@@ -116,4 +116,16 @@ RSpec.describe 'merchant dashboard show' do
 
     end
   end
+
+  it "displays all merchant items ready to ship" do
+    visit "/merchants/#{merchant1.id}/dashboard"
+
+    expect(page).to have_content("Items Ready to Ship:")
+    within ".items_ready_to_ship" do
+      expect(page).to have_content("#{item2.name}")
+      expect(page).to have_link("#{invoice3.id}")
+      expect(page).to have_link("#{invoice4.id}")
+    end
+
+  end
 end

@@ -7,7 +7,6 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
-
   def top_five_items
     items
     .joins(invoice_items: [invoice: :transactions])
@@ -16,5 +15,12 @@ class Merchant < ApplicationRecord
     .group(:id)
     .order('revenue desc')
     .limit(5)
+  end
+  
+  def items_ready_to_ship
+    Merchant.joins(invoice_items: [invoice: :transactions]).
+    where(merchants: {id: self.id}, invoice_items: {status: [0,2]}, invoices: {status: [1,2]}, transactions: {result: true}).
+    select("items.name, invoices.id, invoices.created_at").
+    order("invoices.created_at ASC")
   end
 end
