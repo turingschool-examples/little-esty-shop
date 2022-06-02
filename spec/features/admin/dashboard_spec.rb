@@ -22,12 +22,12 @@ RSpec.describe 'merchants dashboard' do
     # And I see a link to the admin invoices index (/admin/invoices)
     visit "/admin"
 
-    click_link('Merchants Index')
+    click_link('Admin Merchants Index')
     expect(current_path).to eq("/admin/merchants")
 
     visit "/admin"
 
-    click_link('Merchants Index')
+    click_link('Admin Invoices Index')
     expect(current_path).to eq("/admin/invoices")
 
   end
