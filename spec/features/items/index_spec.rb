@@ -4,13 +4,13 @@ RSpec.describe "Merchant Items Index Page" do
     let!(:merchant_1) {Merchant.create!(name: "REI")}
     let!(:merchant_2) {Merchant.create!(name: "Target")}
 
-    let!(:item1) {merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135)}
-    let!(:item2) {merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99)}
-    let!(:item3) {merchant_1.items.create!(name: "Backpack", description: "Can carry all your hiking snacks", unit_price: 99)}
-    let!(:item4) {merchant_1.items.create!(name: "Socks", description: "Oooooh, wool", unit_price: 15)}
-    let!(:item5) {merchant_1.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12)}
-    let!(:item6) {merchant_1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25)}
-    let!(:item7) {merchant_1.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199)}
+    let!(:item1) { merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135) }
+    let!(:item2) { merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99) }
+    let!(:item3) { merchant_1.items.create!(name: "Backpack", description: "Can carry all your hiking snacks", unit_price: 99) }
+    let!(:item4) { merchant_1.items.create!(name: "Socks", description: "Oooooh, wool", unit_price: 15) }
+    let!(:item5) { merchant_1.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12) }
+    let!(:item6) { merchant_1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25) }
+    let!(:item7) { merchant_1.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199) }
 
     let!(:item8) {merchant_2.items.create!(name: "Conditioner", description: "Bye slit ends!", unit_price: 7)}
 
