@@ -25,18 +25,18 @@ RSpec.describe 'Merchants show page', type: :feature do
     end
 
   end
-  let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0]) }
-  let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1]) }
-  let!(:invoice_item3) { create(:invoice_item, item: @items[0], invoice: @invoices[2]) }
-  let!(:invoice_item4) { create(:invoice_item, item: @items[1], invoice: @invoices[3]) }
-  let!(:invoice_item5) { create(:invoice_item, item: @items[0], invoice: @invoices[4]) }
-  let!(:invoice_item6) { create(:invoice_item, item: @items[1], invoice: @invoices[5]) }
-  let!(:invoice_item7) { create(:invoice_item, item: @items[0], invoice: @invoices[6]) }
-  let!(:invoice_item8) { create(:invoice_item, item: @items[1], invoice: @invoices[7]) }
-  let!(:invoice_item9) { create(:invoice_item, item: @items[0], invoice: @invoices[8]) }
-  let!(:invoice_item10) { create(:invoice_item, item: @items[1], invoice: @invoices[9]) }
-  let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10]) }
-  let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11]) }
+  let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0], status: 0) }
+  let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1], status: 1) }
+  let!(:invoice_item3) { create(:invoice_item, item: @items[0], invoice: @invoices[2], status: 1) }
+  let!(:invoice_item4) { create(:invoice_item, item: @items[1], invoice: @invoices[3], status: 0) }
+  let!(:invoice_item5) { create(:invoice_item, item: @items[0], invoice: @invoices[4], status: 0) }
+  let!(:invoice_item6) { create(:invoice_item, item: @items[1], invoice: @invoices[5], status: 1) }
+  let!(:invoice_item7) { create(:invoice_item, item: @items[0], invoice: @invoices[6], status: 1) }
+  let!(:invoice_item8) { create(:invoice_item, item: @items[1], invoice: @invoices[7], status: 1) }
+  let!(:invoice_item9) { create(:invoice_item, item: @items[0], invoice: @invoices[8], status: 1) }
+  let!(:invoice_item10) { create(:invoice_item, item: @items[1], invoice: @invoices[9], status: 0) }
+  let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10], status: 2) }
+  let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11], status: 2) }
 
   describe 'Merchant Dashboard' do
     # As a merchant,
@@ -73,6 +73,19 @@ RSpec.describe 'Merchants show page', type: :feature do
       expect(page).to have_content("4. #{customers[4].first_name} #{customers[4].last_name} - 8 purchases")
       expect(page).to have_content("5. #{customers[5].first_name} #{customers[5].last_name} - 8 purchases")
 
+    end
+  end
+
+  describe 'merchant dashboard items ready to ship' do 
+    it 'has a section for items ready to ship' do 
+      visit "/merchants/#{merchants[0].id}/dashboard"
+      save_and_open_page
+      expect(page).to have_content("Items Ready to Ship")
+      within ".invoice-item-#{invoice_item1.id}" do 
+        expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.id} - #{invoice_item1.created_at}")
+        click_link "Invoice ##{invoice_item1.id}"
+      end 
+      expect(current_path).to eq("/merchants/#{merchants[0].id}/invoices")
     end
   end
 end
