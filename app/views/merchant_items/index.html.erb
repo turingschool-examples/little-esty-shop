@@ -1,5 +1,13 @@
 <h2><%= @merchant.name %></h2>
 
+<h3>Top Five Items By Revenue</h3><hr>
+<div id="top-items">
+  <% @merchant.top_five_items_by_revenue.each do |item| %>
+    <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <p>Total Revenue: <%= item.invoice_items.item_revenue.to_s.insert(-3,'.') %></p>
+  <% end %>
+</div>
+
 <p><%= link_to "Create a new Item", "/merchants/#{@merchant.id}/items/new" %></p>
 
 <h3>Enabled Items</h3>
