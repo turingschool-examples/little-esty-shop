@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index Page' do
+RSpec.describe 'Merchant Items Show Page' do
   let!(:merchants) { create_list(:merchant, 2) }
   let!(:customers) { create_list(:customer, 6) }
 
@@ -35,32 +35,21 @@ RSpec.describe 'Merchant Items Index Page' do
   let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10], status: 2) }
   let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11], status: 2) }
 
-  describe 'merchant items' do
-    it 'has list of items for a specific merchant' do
-      visit "/merchants/#{merchants[0].id}/items"
-      # save_and_open_page
-      expect(page).to have_content(@items[0].name)
+  describe 'basic attributes on show page' do 
+    it 'shows name, description, and current selling price for an item' do 
+      visit "/merchants/#{merchants[0].id}/items/#{@items[1].id}"
+
       expect(page).to have_content(@items[1].name)
-      expect(page).to_not have_content(@items[2].name)
-      expect(page).to_not have_content(@items[3].name)
+      expect(page).to have_content(@items[1].description)
+      expect(page).to have_content(@items[1].unit_price)
+      expect(page).to_not have_content(@items[0].name)
+
+      visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
+
+      expect(page).to have_content(@items[0].name)
+      expect(page).to have_content(@items[0].description)
+      expect(page).to have_content(@items[0].unit_price)
+      expect(page).to_not have_content(@items[1].name)
     end
   end
-
-  describe 'merchant items links on index page' do 
-    it 'has links for the item names' do 
-      visit "/merchants/#{merchants[0].id}/items"
-
-      within ".merchant-items-#{merchants[0].items[0].id}" do 
-        click_link "#{merchants[0].items[0].name}"
-      end
-      expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}")
-
-      visit "/merchants/#{merchants[0].id}/items"
-
-      within ".merchant-items-#{merchants[0].items[1].id}" do 
-        click_link "#{merchants[0].items[1].name}"
-      end 
-      expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[1].id}")
-    end 
-  end
-end
+end 
