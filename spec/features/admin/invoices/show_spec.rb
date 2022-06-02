@@ -19,7 +19,7 @@ RSpec.describe "Admin Invoice Show Page" do
   end
 
   it "shows all attributes of an invoice" do
-    visit "/admin/invoices/#{@invoice_1.id}"
+    visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
     expect(page).to have_content("Invoice Status: #{@invoice_1.status}")
     expect(page).to have_content("Customer Name: #{@customer_1.first_name} #{@customer_1.last_name}")
@@ -28,7 +28,7 @@ RSpec.describe "Admin Invoice Show Page" do
   end
 
   it "shows item attributes for items on an invoice" do
-    visit "/admin/invoices/#{@invoice_1.id}"
+    visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Item Name: Bracelet")
     expect(page).to have_content("Item Name: Necklace")
     expect(page).to have_content("Quantity: 1")
@@ -41,17 +41,17 @@ RSpec.describe "Admin Invoice Show Page" do
   end
 
   it "shows total revenue in dollars for an invoice" do
-    visit "/admin/invoices/#{@invoice_1.id}"
+    visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Total Revenue from this Invoice: $40.04")
     expect(page).to_not have_content("Total Revenue from this Invoice: $20.02")
   end
 
   it "can update invoice status via a select form" do
-    visit "/admin/invoices/#{@invoice_1.id}"
+    visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Invoice Status: cancelled")
     select "in progress", from: :status
     click_button("Update Status")
-    expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+    expect(current_path).to eq(admin_invoice_path(@invoice_1))
     expect(page).to have_content("Invoice Status: in progress")
   end
 end
