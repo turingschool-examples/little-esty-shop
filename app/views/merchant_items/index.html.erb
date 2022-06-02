@@ -2,6 +2,8 @@
 <h2>ITEMS INDEX</h2>
 
 <% @items.each do |item|%>
-  <%= item.name %><br>
+<section id=<%="#{item.name}"%>>
+<strong><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></strong><br>
+</section> 
 <% end %>
 

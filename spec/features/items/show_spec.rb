@@ -10,10 +10,17 @@ RSpec.describe Item, type: :feature do
       @item2 = @merchant2.items.create!(name: 'Item2', description: 'Description2', unit_price: 222, created_at: Time.now, updated_at: Time.now)
     end
     
-    it 'is linked from item on index page' do
+    it 'is linked from item name on index page and shows all attributes of item' do
       visit "/merchants/#{@merchant1.id}/items"
+          
       click_on 'Item1' 
-      expect(current_path).to be("merchants/#{@merchant1.id}/items/#{@item1.id}")
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+save_and_open_page
+
+      expect(page).to have_content("Description1")
+      expect(page).to have_content("$1.11")
+      expect(page).to have_content("Item1")
+      
     end
   end
 end
