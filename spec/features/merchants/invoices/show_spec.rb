@@ -25,15 +25,15 @@ RSpec.describe 'Merchant Invoice Show Page' do
                 expect(page).to have_content("Name: Floopy Original")
                 expect(page).to have_content("Quantity: 5")
                 expect(page).to have_content("Unit Price: 1000")
-                expect(page).to have_content("Status: Pending")
+                expect(page).to have_content("Status: pending")
                 expect(page).to_not have_content("Name: Floopy Geo")
-                expect(page).to_not have_content("Status: Cancelled")
+                expect(page).to_not have_content("Status: cancelled")
             end
             within "#invoice-item-#{@item3.id}" do
                 expect(page).to have_content("Name: Floopy Retro")
                 expect(page).to have_content("Quantity: 20")
                 expect(page).to have_content("Unit Price: 2000")
-                expect(page).to have_content("Status: Packaged")
+                expect(page).to have_content("Status: packaged")
                 expect(page).to_not have_content("Name: Floopy Geo")
                 expect(page).to_not have_content("Quantity: 5")
                 expect(page).to_not have_content("Unit Price: 1000")
