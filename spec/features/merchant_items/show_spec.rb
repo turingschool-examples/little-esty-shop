@@ -52,4 +52,13 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(page).to_not have_content(@items[1].name)
     end
   end
+
+  describe 'merchant item update' do 
+    it 'has a link to update the item information' do 
+      visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
+
+      click_link "Update Item"
+      expect(current_path).to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit")
+    end
+  end
 end 
