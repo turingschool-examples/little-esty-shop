@@ -34,24 +34,38 @@ RSpec.describe Merchant, type: :model do
     end
 
   end
-  let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0]) }
-  let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1]) }
-  let!(:invoice_item3) { create(:invoice_item, item: @items[0], invoice: @invoices[2]) }
-  let!(:invoice_item4) { create(:invoice_item, item: @items[1], invoice: @invoices[3]) }
-  let!(:invoice_item5) { create(:invoice_item, item: @items[0], invoice: @invoices[4]) }
-  let!(:invoice_item6) { create(:invoice_item, item: @items[1], invoice: @invoices[5]) }
-  let!(:invoice_item7) { create(:invoice_item, item: @items[0], invoice: @invoices[6]) }
-  let!(:invoice_item8) { create(:invoice_item, item: @items[1], invoice: @invoices[7]) }
-  let!(:invoice_item9) { create(:invoice_item, item: @items[0], invoice: @invoices[8]) }
-  let!(:invoice_item10) { create(:invoice_item, item: @items[1], invoice: @invoices[9]) }
-  let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10]) }
-  let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11]) }
+  let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0], status: 0) }
+  let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1], status: 1) }
+  let!(:invoice_item3) { create(:invoice_item, item: @items[0], invoice: @invoices[2], status: 1) }
+  let!(:invoice_item4) { create(:invoice_item, item: @items[1], invoice: @invoices[3], status: 0) }
+  let!(:invoice_item5) { create(:invoice_item, item: @items[0], invoice: @invoices[4], status: 0) }
+  let!(:invoice_item6) { create(:invoice_item, item: @items[1], invoice: @invoices[5], status: 1) }
+  let!(:invoice_item7) { create(:invoice_item, item: @items[0], invoice: @invoices[6], status: 1) }
+  let!(:invoice_item8) { create(:invoice_item, item: @items[1], invoice: @invoices[7], status: 1) }
+  let!(:invoice_item9) { create(:invoice_item, item: @items[0], invoice: @invoices[8], status: 1) }
+  let!(:invoice_item10) { create(:invoice_item, item: @items[1], invoice: @invoices[9], status: 0) }
+  let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10], status: 2) }
+  let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11], status: 2) }
 
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
       expect(merchants[0].top_5_customers).to eq(customers[1..5])
+    end
 
+    it 'returns item names ordered, not shipped' do 
+      expect(merchants[0].ordered_not_shipped).to eq({
+        @items[0].name =>@invoice[0].id, 
+        @items[1].name =>@invoice[1].id, 
+        @items[0].name =>@invoice[2].id, 
+        @items[1].name =>@invoice[3].id, 
+        @items[0].name =>@invoice[4].id,
+        @items[1].name =>@invoice[5].id, 
+        @items[0].name =>@invoice[6].id, 
+        @items[1].name =>@invoice[7].id, 
+        @items[0].name =>@invoice[8].id, 
+        @items[1].name =>@invoice[9].id
+        })#item and item invoice number
     end
   end
 end
