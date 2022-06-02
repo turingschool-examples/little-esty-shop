@@ -26,5 +26,9 @@ RSpec.describe Merchant do
         it "lists the items ready for shipment" do
             expect(@merch1.ready_items).to eq([@item2, @item3])
         end
+
+        it 'returns the revenue of all items on the invoice' do
+          expect(@invoice1.total_revenue(@merch1.id)).to eq(10000)
+        end
     end
 end

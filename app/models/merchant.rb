@@ -10,4 +10,5 @@ class Merchant < ApplicationRecord
          .distinct
          .order(:created_at)
   end
+
 end
