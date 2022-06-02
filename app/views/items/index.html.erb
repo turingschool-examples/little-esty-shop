@@ -18,15 +18,21 @@
 <div class="disabled-items">
   <p>Status: Disabled</p>
   <% @items.each do |item| %>
+  <div id="item-<%= item.id %>">
     <% if item.status == "disabled" %>
-    <div id="item-<%= item.id %>">
       <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
       <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: { status: 'enabled', merchant_id: @merchant.id, item_id: item.id } %>
-    </div>
+  </div>
     <% end %>
   <% end %>
 
 
 
 <div class="top-5">
+  <h3> Top Five Most Popular Items: </h3>
+    <ol>
+      <% @merchant.top_five_items.each do |item| %>
+        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <i>Total Revenue: <%= number_to_currency(item.revenue) %></i></li>
+      <% end %>
+    </ol>
 </div>
