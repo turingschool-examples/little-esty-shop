@@ -4,29 +4,38 @@
 <hr>
 
 <div class="enabled-items">
-  <p>Status: Enabled</p>
-  <% @items.each do |item| %>
+  <h3>Status: Enabled</h3>
+  <ul><% @items.each do |item| %>
     <% if item.status == "enabled" %>
     <div id="item-<%= item.id %>">
-      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+    <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
       <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: { status: 'disabled', merchant_id: @merchant.id, item_id: item.id } %>
+    </li>
     </div>
     <% end %>
-  <% end %>
+  <% end %></ul>
 </div>
 
+
 <div class="disabled-items">
-  <p>Status: Disabled</p>
-  <% @items.each do |item| %>
+  <h3>Status: Disabled</h3>
+  <ul><% @items.each do |item| %>
     <% if item.status == "disabled" %>
     <div id="item-<%= item.id %>">
-      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+      <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
       <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: { status: 'enabled', merchant_id: @merchant.id, item_id: item.id } %>
-    </div>
+      </li>
+  </div>
     <% end %>
-  <% end %>
-
+  <% end %></ul>
+</div>
 
 
 <div class="top-5">
+  <h3> Top Five Most Popular Items: </h3>
+    <ol>
+      <% @merchant.top_five_items.each do |item| %>
+        <li> <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <i>Total Revenue: <%= number_to_currency(item.revenue) %></i></li>
+      <% end %>
+    </ol>
 </div>
