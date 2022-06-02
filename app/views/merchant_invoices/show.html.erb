@@ -1,0 +1,28 @@
+<div class="page-defaults" id="shopId" >
+  <h1><span>Little Esty Shop</span></h1>
+</div>
+
+<div class="page-defaults" id="splitSides">
+
+  <div class="page-defaults" id="leftSide">
+    <%= @merchant.name %>
+  </div>
+
+  <div class="page-defaults" id="rightSide">
+    <ul>
+      <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+      <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+    </ul>
+  </div>
+
+</div>
+
+<div class="page-defaults" id="splitSides">
+  <div class="page-defaults" id="leftSide2">
+    <h2><%= "Invoice: #{@invoice.id}"%> </h2>
+    <p><%= "Status: #{@invoice.status}" %> </p>
+    <p><%= "Created on: #{@invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
+    <h2>Customer</h2>
+    <p> <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
+  </div>
+</div>
