@@ -25,7 +25,7 @@ RSpec.describe 'merchants items index' do
     InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice2.id, quantity: 6, unit_price: 10000, status: 2)
     InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 500, status: 2)
     InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 10000, status: 2)
-        
+
   end
 
   it 'shows the name of the items belonging to a merchant' do
@@ -98,7 +98,7 @@ RSpec.describe 'merchants items index' do
   end
 
   it 'groups the items by enabled or disabled status' do
-  
+
     merch1 = Merchant.create!(name: 'Floopy Fopperations')
     item1 = merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450, status: 0)
     item2 = merch1.items.create!(name: 'Floopy Updated', description: 'the better', unit_price: 950, status: 1)
@@ -155,28 +155,30 @@ RSpec.describe 'merchants items index' do
     visit "/merchants/#{@merch1.id}/items"
     within "#top-items" do
       expect(page).to have_content("Floopy Black")
-      expect(page).to have_content("Total Revenue: 1000.00") 
+      expect(page).to have_content("Total Revenue: 1000.00")
       expect(page).to have_content("Floopy Blue")
-      expect(page).to have_content("Total Revenue: 600.00") 
+      expect(page).to have_content("Total Revenue: 600.00")
       expect(page).to have_content("Floopy Green")
-      expect(page).to have_content("Total Revenue: 500.00") 
+      expect(page).to have_content("Total Revenue: 500.00")
       expect(page).to have_content("Floopy Geo")
-      expect(page).to have_content("Total Revenue: 400.00") 
+      expect(page).to have_content("Total Revenue: 400.00")
       expect(page).to have_content("Floopy Retro")
       expect(page).to have_content("Total Revenue: 300.00")
       click_link "#{@item8.name}"
-      expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item8.id}") 
+      expect(current_path).to eq("/merchants/#{@merch1.id}/items/#{@item8.id}")
     end
   end
 
   it "displays items best day" do
     visit "/merchants/#{@merch1.id}/items"
+    save_and_open_page
     within "#top-items" do
       expect(page).to have_content(@invoice1.updated_at)
+      expect(page).to have_content(@merch1.top_five_items_by_revenue.first.item_best_day)
     end
   end
-  
-  
+
+
 
 
 end
