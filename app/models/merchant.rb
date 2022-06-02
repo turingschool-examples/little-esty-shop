@@ -6,4 +6,15 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates :name, presence: true
+
+
+  def top_five_items
+    items
+    .joins(invoice_items: [invoice: :transactions])
+    .where(transactions: {result:true})
+    .select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) as revenue")
+    .group(:id)
+    .order('revenue desc')
+    .limit(5)
+  end
 end
