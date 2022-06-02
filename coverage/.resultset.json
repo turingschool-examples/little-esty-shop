@@ -1,58 +1,24 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/spec/features/merchants/dashboard_spec.rb": {
+      "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/spec/features/admin/merchants/index_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
           1,
           1,
           1,
           1,
           null,
           null,
-          null,
           1,
           1,
           1,
           1,
           1,
-          null,
+          1,
           1,
           null,
           null,
@@ -340,12 +306,72 @@
           1,
           1,
           null,
+          1,
           null
         ]
       },
       "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
+          null
+        ]
+      },
+      "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/spec/features/merchants/dashboard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -1017,11 +1043,12 @@
           null
         ]
       },
-      "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+      "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/app/controllers/admin_merchants_controller.rb": {
         "lines": [
           1,
           1,
-          4,
+          1,
+          null,
           null,
           null
         ]
@@ -1029,6 +1056,15 @@
       "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          null
+        ]
+      },
+      "/Users/antoniosalmeron/turing/round2module/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          4,
+          null,
           null
         ]
       },
@@ -1104,6 +1140,6 @@
         ]
       }
     },
-    "timestamp": 1654138798
+    "timestamp": 1654184402
   }
 }
