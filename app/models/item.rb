@@ -7,4 +7,15 @@ class Item < ApplicationRecord
   validates_presence_of :name, :description, :unit_price
 
   enum status: { 'disabled' => 0, 'enabled' => 1 }
+
+  def best_sales_date
+    invoices
+    .joins(:invoice_items)
+    .select("invoices.*, MAX(invoice_items.quantity) AS most_sold")
+    .group(:id)
+    .order(most_sold: :desc)
+    .first
+    .created_at
+    .strftime("%a, %d %b %Y")
+  end
 end
