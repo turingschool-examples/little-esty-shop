@@ -22,7 +22,9 @@
   <div class="page-defaults" id="leftSide2">
     <p>Items Ready to Ship</p>
     <% @merchant.ordered_not_shipped.each do |invoice_item| %>
-      <p><%= invoice_item.item.name %> - #<%= link_to "#{invoice_item.id}", "merchants/invoices/merchant_invoices"%> - <%= invoice_item.created_at %></p>
+      <div class="invoice-item-<%= invoice_item.id %>">
+      <p><%= invoice_item.item.name %> - <%= link_to "Invoice ##{invoice_item.id}", "/merchants/#{@merchant.id}/invoices"%> - <%= invoice_item.created_at %></p>
+      </div>
     <% end %>
   </div>
 
