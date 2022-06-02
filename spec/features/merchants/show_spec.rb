@@ -113,7 +113,6 @@ RSpec.describe 'merchant dashboard show' do
       expect("Carl Junior").to appear_before("Tony Bologna")
       expect("Tony Bologna").to appear_before("Leanne Braun")
       expect("Leanne Braun").to appear_before("Heber Kuhn")
-
     end
   end
 

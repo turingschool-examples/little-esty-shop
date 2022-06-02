@@ -64,7 +64,7 @@ RSpec.describe Merchant do
       it "lists the top five items ordered in highest to lowest revenue" do
         expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
       end
-
+    end
     it 'items_ready_to_ship should return array of items ready to ship ordered by invoice date' do
       merchant1 = Merchant.create!(name: "Schroeder-Jerde")
 
