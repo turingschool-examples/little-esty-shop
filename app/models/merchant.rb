@@ -1,12 +1,9 @@
 class Merchant < ApplicationRecord
   has_many :items
 
-  has_many :invoice_items, through: :items
-  has_many :invoices, through: :invoice_items
-  has_many :customers, through: :invoices
-  has_many :transactions, through: :invoices 
-
   validates_presence_of :name
-  validates_presence_of :created_at
-  validates_presence_of :updated_at
+
+  def items_to_ship
+  items.joins(:invoice_items).select("items.name, invoice_items.invoice_id").where.not("status = 'Shipped'")
+  end
 end
