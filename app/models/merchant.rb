@@ -10,4 +10,8 @@ class Merchant < ApplicationRecord
   def top_5_customers
     customers.joins(:transactions).where("transactions.result = ?", 0).group("customers.id").select("customers.*, count(transactions) as transaction_count").order("transaction_count desc").limit(5)
   end
+
+  def ordered_not_shipped
+
+  end
 end
