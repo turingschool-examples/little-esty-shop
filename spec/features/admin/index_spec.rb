@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Admin Dashboad" do
-
   let!(:merchant_1) {Merchant.create!(name: "REI")}
 
   let!(:customer1) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
