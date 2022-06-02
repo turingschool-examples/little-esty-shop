@@ -49,3 +49,9 @@
   width: 50%;
   text-align: center;
 }
+
+#centerSide {
+  width: 100%;
+  border-top: 5px solid black;
+  text-align: center;
+}

@@ -17,18 +17,9 @@
 
 </div>
 
-<div class="page-defaults" id="splitSides">
-
-  <div class="page-defaults" id="leftSide2">
-    <p>New Item</p>
-    <% @merchant.items.each do |item| %>
-    <div class="merchant-items-<%= item.id %>">
-      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
-    <% end %>
-  </div>
-
-  <div class="page-defaults" id="rightSide2">
-  <p>Top Items</p>
-  </div>
-
+<div class="page-defaults" id="centerSide">
+  <p><%= @item.name %></p>
 </div>
+
+<p>Description: <%= @item.description %></p>
+<p>Current Price: <%= @item.unit_price %></p>
