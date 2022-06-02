@@ -6,6 +6,10 @@ class Item < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :unit_price
-  validates_presence_of :created_at
-  validates_presence_of :updated_at
+
+
+  def to_money(number)
+    number.to_i
+    number_to_currency(number)
+  end
 end
