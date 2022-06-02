@@ -1,6 +1,6 @@
 <h1>Merchant Invoice Show Page</h1>
 
-<h3><%= @invoice.invoice_items.each do |invoice_item| %></h3>
+<h3><% @invoice.invoice_items.each do |invoice_item| %></h3>
     <div id="invoice-item-<%= invoice_item.item.id %>">
     <% if @merchant.items.include?(invoice_item.item) %>
         <p>Name: <%= invoice_item.item.name %></p>
