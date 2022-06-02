@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
 
   end
 
-  describe 'Merchant items index page' do
+  describe 'Merchant items index page content' do
     it 'shows all items for the merchant' do
       expect(page).to have_content("Item1")
       expect(page).to have_content("Item11")

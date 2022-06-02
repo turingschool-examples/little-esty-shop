@@ -13,4 +13,8 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of(:unit_price)}
   end
 
+  describe 'status validation' do
+    it {should validate_presence_of(:status)}
+  end
+
 end
