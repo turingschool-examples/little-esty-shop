@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Index page", type: :feature do
-
+RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
   let!(:merchants) { create_list(:merchant, 2) }
   let!(:customers) { create_list(:customer, 6) }
 
@@ -37,23 +36,26 @@ RSpec.describe "Index page", type: :feature do
   let!(:invoice_item12) { create(:invoice_item, item: @items[2], invoice: @invoices[11], status: 1) }
   let!(:invoice_item13) { create(:invoice_item, item: @items[2], invoice: @invoices[0], status: 1) }
 
+# Merchant Invoice Show Page
+#
+# As a merchant
+# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+# Then I see information related to that invoice including:
+# - Invoice id
+# - Invoice status
+# - Invoice created_at date in the format "Monday, July 18, 2019"
+# - Customer first and last name
+  describe 'Merchant_Invoices User Story 2' do
+    it "can display all information related to an invoice" do
+      visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
 
-  describe 'Merchant invoices user story 1' do
-    it "can see all merchants invoices with items and a link to the invoice show page" do
+      expect(page).to have_content("Invoice: #{@invoices[0].id}")
+      expect(page).to have_content("Status: #{@invoices[0].status}")
+      expect(page).to_not have_content("Status: #{@invoices[11].status}")
+      expect(page).to have_content("Created on: #{@invoices[0].created_at.strftime("%A, %B %d, %Y")}")
 
-      visit "/merchants/#{merchants[0].id}/invoices"
-
-      expect(page).to have_content("Invoice ##{@invoices[0].id}")
-      expect(page).to have_content("Invoice ##{@invoices[1].id}")
-      expect(page).to have_content("Invoice ##{@invoices[2].id}")
-      expect(page).to have_content("Invoice ##{@invoices[3].id}")
-      expect(page).to have_content("Invoice ##{@invoices[4].id}")
-      expect(page).to have_content("Invoice ##{@invoices[5].id}")
-      expect(page).to_not have_content("Invoice ##{@invoices[11].id}")
-
-      click_link "Invoice ##{@invoices[0].id}"
-
-      expect(current_path).to eq("/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}")
+      expect(page).to have_content("#{customers[0].first_name} #{customers[0].last_name}")
+      expect(page).to_not have_content("#{customers[1].first_name} #{customers[1].last_name}")
     end
   end
 end
