@@ -48,7 +48,6 @@ RSpec.describe "Admin Invoice Show Page" do
 
   it "can update invoice status via a select form" do
     visit "/admin/invoices/#{@invoice_1.id}"
-    save_and_open_page
     expect(page).to have_content("Invoice Status: cancelled")
     select "in progress", from: :status
     click_button("Update Status")
