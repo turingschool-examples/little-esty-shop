@@ -20,14 +20,16 @@ RSpec.describe Merchant do
             @item7 = @merch1.items.create!(name: 'Floopy Red', description: 'the OG', unit_price: 550)
             @item8 = @merch1.items.create!(name: 'Floopy Black', description: 'the OG', unit_price: 550)
             @invoice1 = @customer1.invoices.create!(status: 2)
+            @invoice1.transactions.create!(result: 0)
             @invoice2 = @customer1.invoices.create!(status: 2)
+            @invoice2.transactions.create!(result: 0)
             InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 10000, status: 0)
             InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 10000, status: 1)
             InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 3, unit_price: 10000, status: 1)
             InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 4, unit_price: 10000, status: 2)
             InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 10000, status: 0)
             InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice2.id, quantity: 6, unit_price: 10000, status: 2)
-            InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 50000, status: 2)
+            InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 500, status: 2)
             InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 10000, status: 2)
         end
 
@@ -36,7 +38,7 @@ RSpec.describe Merchant do
         end
 
         it "list the top 5 items by revenue per a specific merchant" do
-            exepct(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
+            expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
         end
         
     end
