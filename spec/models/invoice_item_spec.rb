@@ -29,7 +29,8 @@ RSpec.describe InvoiceItem do
             InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 4, unit_price: 10000, status: 2)
             InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 10000, status: 0)
             InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice2.id, quantity: 6, unit_price: 10000, status: 2)
-            InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 500, status: 2)
+            InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 500, status: 2, created_at: Time.parse('2012-03-27 14:54:09 UTC'))
+            InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 500, status: 2, created_at: Time.parse('2012-03-30 14:54:09 UTC'))
             InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 10000, status: 2)
         end
 
