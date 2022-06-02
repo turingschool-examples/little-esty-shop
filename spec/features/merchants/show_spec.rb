@@ -79,10 +79,10 @@ RSpec.describe 'Merchants show page', type: :feature do
   describe 'merchant dashboard items ready to ship' do 
     it 'has a section for items ready to ship' do 
       visit "/merchants/#{merchants[0].id}/dashboard"
-
+save_and_open_page
       within "#leftSide2" do 
         expect(page).to have_content("Items Ready to Ship")
-        expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.id}")
+        expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.id} - #{invoice_item1.created_at}")
         click_link "Invoice ##{invoice_item1.id}"
       end 
       expect(current_path).to eq("merchants/#{merchants[0].id}/invoices/#{invoice_item1.invoice_id}")
