@@ -28,9 +28,21 @@ RSpec.describe 'Admin invoices show page' do
 
   it 'displays the invoices id, status, created time, and customers first and last name' do
     visit "/admin/invoices/#{@invoice_1.id}"
+
     expect(page).to have_content("#{@invoice_1.id}")
     expect(page).to have_content("Status: in progress")
     expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("Debbie Twolegs")
   end
+
+  it 'displays total revenue for invoice' do
+    merch_1 = Merchant.create!(name: "Two-Legs Fashion")
+
+    item_1 = merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 3499)
+    InvoiceItem.create!(item_id: item_1.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: item_1.unit_price, status: 2)
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Total Revenue: $104.97")
+  end
 end
+
