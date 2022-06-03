@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   get "/merchants/:merchant_id/dashboard", to: "merchants#show"
-  
+
   get "/merchants/:merchant_id/items", to: "merchant_items#index"
   get "/merchants/:merchant_id/items/:item_id", to: "merchant_items#show"
 
   get "/merchants/:merchant_id/items/:item_id/edit", to: "merchant_items#edit"
-  patch "merchants/:merchant_id/items/:item_id", to: "merchant_items#update"
+  patch "/merchants/:merchant_id/items/:item_id", to: "merchant_items#update"
 
+  get "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#show"
   get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
+
 
   get '/admin/invoices', to: 'admin/invoices#index'
   get '/admin/invoices/:id', to: 'admin/invoices#show'
