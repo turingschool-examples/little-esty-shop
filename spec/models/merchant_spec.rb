@@ -64,7 +64,7 @@ RSpec.describe Merchant do
       it "lists the top five items ordered in highest to lowest revenue" do
         expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
       end
-    end  
+    end
 
   let!(:merchant_1) {Merchant.create!(name: "REI")}
   let!(:merchant_2) {Merchant.create!(name: "Target")}
@@ -144,5 +144,6 @@ RSpec.describe Merchant do
       expect(merchant1.items_ready_to_ship.first.name).to eq("#{item2.name}")
       expect(merchant1.items_ready_to_ship.first.created_at).to eq(invoice3.created_at)
     end
+  end
   end
 end

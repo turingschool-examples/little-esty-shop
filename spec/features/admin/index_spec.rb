@@ -29,7 +29,7 @@ describe "Admin Dashboad" do
   let!(:invoice15) { customer4.invoices.create!(status: 2) }
   let!(:invoice16) { customer5.invoices.create!(status: 2) }
   let!(:invoice17) { customer5.invoices.create!(status: 2) }
-  let!(:invoice18) { customer1.invoices.create!(status: 2) }
+  let!(:invoice18) { customer4.invoices.create!(status: 2) }
   let!(:invoice19) { customer1.invoices.create!(status: 2) }
   let!(:invoice20) { customer1.invoices.create!(status: 2) }
   let!(:invoice21) { customer5.invoices.create!(status: 2) }
@@ -102,15 +102,14 @@ describe "Admin Dashboad" do
     end
   end
 
-
   it "orders incomplete invoices by oldest to newest" do
     expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
     expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
+    ##this should probably be updated to include the added invoices from the top 5 customers method
   end
-  
+
   it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
-      save_and_open_page
       expect("Leanne Braun").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
       expect("Carl Junior").to appear_before("Tony Bologna")
