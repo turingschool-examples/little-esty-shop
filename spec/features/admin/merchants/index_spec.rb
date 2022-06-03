@@ -10,7 +10,7 @@ RSpec.describe "Admin Merchants Index Page" do
 
     expect(page).to have_content("Admin Merchants Index")
 
-    within ".merchant_index" do
+    within ".disabled-merchants" do
       expect(page).to have_content("REI")
       expect(page).to have_content("Target")
       expect(page).to have_content("Walgreens")

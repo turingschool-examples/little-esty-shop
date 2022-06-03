@@ -1,6 +1,15 @@
 <h1>Admin Merchants Index</h1>
 
-<div class="merchant_index">
+<div class="enabled-merchants">
+  <h3> Status: Enabled </h3>
+  <ul><% @merchants.each do |merchant| %>
+    <li><%= merchant.name %></li>
+  <% end %></ul>
+</div>
+
+
+<div class="disabled-merchants">
+  <h3> Status: Disabled </h3>
   <ul><% @merchants.each do |merchant| %>
     <li><%= merchant.name %></li>
   <% end %></ul>
