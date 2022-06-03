@@ -23,4 +23,8 @@ class Invoice < ApplicationRecord
     .distinct
     .order(:created_at)
   end
+  
+  def self.invoices_with_merchant_items(merchant)
+    merchant.invoices.distinct(:id)
+  end
 end
