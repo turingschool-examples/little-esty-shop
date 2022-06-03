@@ -86,7 +86,7 @@ RSpec.describe "Merchant Invoices Show Page" do
     expect(page).to have_content("Created at: #{invoice1.created_at.strftime("%A, %B %d, %Y")}")
 
     expect(page).to_not have_content("Invoice ##{invoice2.id}")
-    expect(page).to_not have_content("Status: Completed")
+    expect(page).to_not have_content("Status: completed")
 
     within ".customer" do
       expect(page).to have_content("Customer Name: Leanne Braun")
@@ -105,7 +105,6 @@ RSpec.describe "Merchant Invoices Show Page" do
       expect(page).to have_content("Sold at: $13,635.00")
       expect(page).to have_content("Invoice Item Status: Packaged")
 
-
       expect(page).to have_content("Item Name: Autem Minima")
       expect(page).to have_content("Quantity Sold: 9")
       expect(page).to have_content("Sold at: $23,324.00")
@@ -120,5 +119,22 @@ RSpec.describe "Merchant Invoices Show Page" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Total Revenue: $278,091.00")
+  end
+
+  it "can update and Invoice Item's status via a selector" do
+    visit merchant_invoice_path(merchant1, invoice1)
+
+    within "##{invoice_item1.id}" do
+      select "#{invoice_item1.status}"
+      select "shipped"
+      expect(page).to have_button("Update Invoice Item Status")
+
+      click_button "Update Invoice Item Status"
+      expect(page).to have_select(selected: "shipped")
+      expect(page).to_not have_select(selected: "packaged")
+      expect(page).to_not have_select(selected: "pending")
+    end
+
+    expect(current_path).to eq(merchant_invoice_path(merchant1, invoice1))
   end
 end
