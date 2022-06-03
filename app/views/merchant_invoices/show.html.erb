@@ -38,11 +38,16 @@
       <th><h2> Status </h2></th>
     </tr>
       <% @invoice.invoice_items.each do |invoice_item| %>
-        <tr>
+        <tr id="invoiceItem-<%= invoice_item.id %>">
           <td> <%= invoice_item.item.name %></td>
-          <td> <%= invoice_item.status %>
-          <td> <%= invoice_item.unit_price_converted %></td>
           <td> <%= invoice_item.quantity %></td>
+          <td> <%= invoice_item.unit_price_converted %></td>
+          <td>
+            <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?invoice_item_id=#{invoice_item.id}", method: :patch do |form| %>
+              <%= form.select :status, ["pending", "packaged", "shipped"], :selected => invoice_item.status %>
+              <%= form.submit "Update Item Status" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
   </table>
