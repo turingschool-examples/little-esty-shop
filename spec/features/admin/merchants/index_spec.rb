@@ -7,7 +7,7 @@ RSpec.describe "Admin Merchants Index Page" do
     merchant3 = Merchant.create!(name: "Walgreens")
 
     visit admin_merchants_path
-
+    
     expect(page).to have_content("Admin Merchants Index")
 
     within ".merchant_index" do
