@@ -5,3 +5,10 @@
   <li> Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></li>
 </ul>
 
+<% @invoice.invoice_items.each do |ii| %></p>
+      <p>Item: <%= ii.item.name %></p>
+      <p>Quantity ordered: <%= ii.quantity %></p>
+      <p>Unit price: <%= ii.unit_price %></p>
+      <p>Status: <%= ii.status %></p>
+    <% end %>
+
