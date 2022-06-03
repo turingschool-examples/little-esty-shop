@@ -19,7 +19,7 @@
       <hr><br>
       <ol>
         <% @customers.top_customers.each do |customer| %>
-        <h5><li><%= "#{customer.first_name} #{customer.last_name}" %> - <%= customer.count_of_successful_transactions %> purchases</li></h5><br>
+        <h5><li><%= "#{customer.first_name} #{customer.last_name}" %> - <%= customer.transaction_count %> purchases</li></h5><br>
         <% end %>
       </ol>
     </div>

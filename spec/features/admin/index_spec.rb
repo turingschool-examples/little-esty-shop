@@ -11,7 +11,6 @@ describe "Admin Dashboad" do
   let!(:customer5) { Customer.create!(first_name: "Carl", last_name: "Junior") }
   let!(:customer6) { Customer.create!(first_name: "Tony", last_name: "Bologna") }
 
-
   let!(:invoice1) { customer1.invoices.create!(status: 2, created_at: '2012-03-21 14:53:59') }
   let!(:invoice2) { customer1.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
   let!(:invoice3) { customer1.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
@@ -110,6 +109,7 @@ describe "Admin Dashboad" do
 
   it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
+      save_and_open_page
       expect("Leanne Braun").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
       expect("Carl Junior").to appear_before("Tony Bologna")

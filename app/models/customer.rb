@@ -7,6 +7,8 @@ class Customer < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
+  # TODO: refactor these methods they are basically the same
+
   def self.favorite_customers(count)
     joins(invoices: :transactions).
     where(transactions: {result: true}).
@@ -22,12 +24,8 @@ class Customer < ApplicationRecord
   def self.top_customers
     joins(invoices: :transactions)
     .where(transactions: {result: true})
-    .group(:id).select("customers.*, COUNT(transactions) AS top_customers")
-    .order("top_customers desc")
+    .group(:id).select("customers.*, COUNT(transactions) AS transaction_count")
+    .order("transaction_count desc")
     .limit(5)
-  end
-
-  def count_of_successful_transactions
-    self.transactions.where(transactions: {result: true}).count
   end
 end

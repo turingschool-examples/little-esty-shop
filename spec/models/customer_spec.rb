@@ -147,20 +147,5 @@ RSpec.describe Customer do
         expect(Customer.top_customers).to eq([customer1, customer4, customer5, customer6, customer2])
       end
     end
-
-    describe "#count_successful_transactions" do
-      it "can count the number of successful transactions of a customer" do
-        expect(customer5.count_of_successful_transactions).to eq(4)
-        expect(customer2.count_of_successful_transactions).to eq(2)
-        expect(customer1.count_of_successful_transactions).to eq(6)
-      end
-    end
-
-    # c1- 6
-    # c4- 5
-    # c5- 4
-    # c6- 3
-    # c2- 2
-    # c3- 1
   end
 end
