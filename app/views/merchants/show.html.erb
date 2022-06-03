@@ -2,3 +2,10 @@
 <h2><%= @merchant.name %></h2>
 <%= link_to "#{@merchant.name}'s Items", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "#{@merchant.name}'s Invoices", "/merchants/#{@merchant.id}/invoices" %>
+
+<section id="itemsReadyToShip">
+  <h3>Items Ready to Ship</h3>
+  <% @merchant.items_to_ship.each do |item| %>
+    <p><%= item.name %>-Invoice <%= link_to "##{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %></p>
+    <% end %>
+</section>
