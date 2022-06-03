@@ -2,8 +2,19 @@
 <h2>ITEMS INDEX</h2>
 
 <% @items.each do |item|%>
-<section id=<%="#{item.name}"%>>
 <strong><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></strong><br>
+
+    <section id=<%="status-#{item.id}"%>>
+      <%= "Status: #{item.status}"%><br>
+    </section> 
+
+<section id=<%="Item-#{item.name}"%>>
+<% if item.enabled? %>
+  <% button_label = "Disable" %>
+  <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "disabled"}, method: :patch %>  <br>
+<% else button_label = "Enable" %>
+  <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "enabled"}, method: :patch %></strong><br>
 </section> 
+<% end %>
 <% end %>
 

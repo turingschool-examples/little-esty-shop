@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/items/:item_id", to: "merchant_items#show"
   get "/merchants/:merchant_id/items/:item_id/edit", to: "merchant_items#edit"
   patch "merchants/:merchant_id/items/:item_id", to: "merchant_items#update"
-  patch "/merchants/:merchant_id/items/:item_id/status_button", to: "merchant_items#status_button"
 
   get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
 end
