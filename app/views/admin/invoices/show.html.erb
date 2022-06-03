@@ -1,0 +1,21 @@
+<h3>Invoice ID: <%= @invoice.id %> </h3>
+<p>Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </p>
+<p> Invoice Status: <%= @invoice.status %></p>
+<p> Invoice Created at: <%= @invoice.created_at_format %> </p>
+<br>
+Items:
+<% @invoice.invoice_items.each do |invoice_item| %>
+<p>Item Name: <%= invoice_item.item.name %> </p>
+<p>Quantity: <%= invoice_item.quantity %> </p>
+<p>Price Sold For: $<%= invoice_item.price_convert %> </p>
+<p>Item Status: <%= invoice_item.status %> </p>
+<br>
+<% end %>
+
+Total Revenue from this Invoice: $<%= @invoice.total_revenue.round(2) %>
+<br>
+<p>Update Invoice Status:</p>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+<%= form.select(:status, options_for_select(["cancelled", "in progress", "completed"], :selected => @invoice.status)) %>
+<%= form.submit "Update Status" %>
+<% end %>
