@@ -91,4 +91,16 @@ RSpec.describe "Admin dashboard" do
     click_link "#{@invoice_1.id}"
     expect(current_path).to eq "/admin/invoices/#{@invoice_1.id}"
   end
+
+  it "displays the incomplete invoices created at dates and orders them by oldest to youngest" do
+    visit '/admin'
+
+    expect("#{@invoice_4.id}").to appear_before("#{@invoice_3.id}")
+    expect("#{@invoice_3.id}").to appear_before("#{@invoice_2.id}")
+    expect("#{@invoice_2.id}").to appear_before("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_4.id} - #{@invoice_4.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@invoice_3.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@invoice_2.id} - #{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@invoice_1.id} - #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
+  end
 end
