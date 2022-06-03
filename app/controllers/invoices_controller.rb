@@ -2,11 +2,11 @@ class InvoicesController < ApplicationController
   before_action :find_merchant
 
   def index
-    @invoices = @merchant.invoices
+    @invoices = Invoice.invoices_with_merchant_items(@merchant)
   end
 
   def show
-    @invoices = Invoice.invoices_with_merchant_items(@merchant)
+    @invoice = Invoice.find(params[:id])
   end
 
   def update
