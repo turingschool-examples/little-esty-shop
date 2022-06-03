@@ -1,19 +1,24 @@
-<h2 style="text-align:center;"> Welcome to the Admin Dashboard </h2>
-<p> <%= link_to "Merchants Index", admin_merchants_path %> |
-  <%= link_to "Invoices Index", admin_invoices_path %> </p>
+<%= render 'partials/navbar_admin' %>
+<%= render 'partials/two_columns' %>
 
-<div class ="incomplete-invoices">
-  <h3> Incomplete Invoices </h3>
-  <ul><% @invoice_items.incomplete_invoice_ids.each do |id| %>
-      <li> <%= link_to "#{id}", admin_invoice_path(id) %> </li>
-  <% end %></ul>
-</div>
+<div class="row">
+  <div class="column";>
+    <div class ="incomplete-invoices">
+      <h3> Incomplete Invoices </h3>
+      <ul><% @invoice_items.incomplete_invoice_ids.each do |id| %>
+          <li> <%= link_to "#{id}", admin_invoice_path(id) %> </li>
+      <% end %></ul>
+    </div>
+  </div>
 
-<div class="top-five-customers">
-  <h3>Top Customers</h3>
-  <ol>
-    <% @customers.top_customers.each do |customer| %>
-    <li><%= "#{customer.first_name} #{customer.last_name}" %> - <%= customer.count_of_successful_transactions %> purchases</li>
-    <% end %>
-  </ol>
+  <div class="column";>
+    <div class="top-five-customers">
+      <h3>Top Customers</h3>
+      <ol>
+        <% @customers.top_customers.each do |customer| %>
+        <li><%= "#{customer.first_name} #{customer.last_name}" %> - <%= customer.count_of_successful_transactions %> purchases</li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
 </div>
