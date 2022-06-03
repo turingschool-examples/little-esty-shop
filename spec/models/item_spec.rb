@@ -31,4 +31,8 @@ RSpec.describe Item, type: :model do
       @order3 = @mood.invoice_items.create!(quantity: 3, unit_price: 2002, status: "Shipped", invoice_id: @invoice2.id)
     end
   end
+
+  describe 'status validation' do
+    it {should validate_presence_of(:status)}
+  end
 end
