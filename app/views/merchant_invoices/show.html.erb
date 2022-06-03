@@ -22,6 +22,7 @@
     <h2><%= "Invoice: #{@invoice.id}"%> </h2>
     <p><%= "Status: #{@invoice.status}" %> </p>
     <p><%= "Created on: #{@invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
+    <p><%= "Total Revenue: #{@invoice.total_revenue}" %></p>
     <h2>Customer</h2>
     <p> <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
   </div>
@@ -40,7 +41,7 @@
         <tr>
           <td> <%= invoice_item.item.name %></td>
           <td> <%= invoice_item.status %>
-          <td> <%= invoice_item.item.unit_price %></td>
+          <td> <%= invoice_item.unit_price %></td>
           <td> <%= invoice_item.quantity %></td>
         </tr>
       <% end %>
