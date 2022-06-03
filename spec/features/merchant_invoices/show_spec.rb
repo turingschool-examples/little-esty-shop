@@ -36,26 +36,45 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
   let!(:invoice_item12) { create(:invoice_item, item: @items[2], invoice: @invoices[11], status: 1) }
   let!(:invoice_item13) { create(:invoice_item, item: @items[2], invoice: @invoices[0], status: 1) }
 
-# Merchant Invoice Show Page
-#
-# As a merchant
-# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-# Then I see information related to that invoice including:
-# - Invoice id
-# - Invoice status
-# - Invoice created_at date in the format "Monday, July 18, 2019"
-# - Customer first and last name
   describe 'Merchant_Invoices User Story 2' do
     it "can display all information related to an invoice" do
       visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
 
       expect(page).to have_content("Invoice: #{@invoices[0].id}")
       expect(page).to have_content("Status: #{@invoices[0].status}")
-      expect(page).to_not have_content("Status: #{@invoices[11].status}")
       expect(page).to have_content("Created on: #{@invoices[0].created_at.strftime("%A, %B %d, %Y")}")
 
       expect(page).to have_content("#{customers[0].first_name} #{customers[0].last_name}")
       expect(page).to_not have_content("#{customers[1].first_name} #{customers[1].last_name}")
+    end
+  end
+  # Merchant Invoice Show Page: Invoice Item Information
+
+# As a merchant
+# When I visit my merchant invoice show page
+# Then I see all of my items on the invoice including:
+# - Item name
+# - The quantity of the item ordered
+# - The price the Item sold for
+# - The Invoice Item status
+# And I do not see any information related to Items for other merchants
+  describe 'Merchant_Invoices User Story 3' do
+    it 'can display items attributes that belongs to an invoice' do
+      visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
+
+      within '#itemtable' do
+        expect(page).to have_content("Item Name")
+        expect(page).to have_content("Quantity")
+        expect(page).to have_content("Unit Price")
+        expect(page).to have_content("Status")
+        expect(page).to have_content(@items[0].name)
+        expect(page).to_not have_content(@items[3].name)
+        expect(page).to have_content(invoice_item1.quantity)
+        expect(page).to have_content(@items[0].unit_price)
+        expect(page).to_not have_content(@items[3].unit_price)
+        expect(page).to have_content(invoice_item1.status)
+
+      end
     end
   end
 end

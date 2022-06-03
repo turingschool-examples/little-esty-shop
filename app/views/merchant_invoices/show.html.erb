@@ -26,3 +26,23 @@
     <p> <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
   </div>
 </div>
+
+
+<div class="page-defaults" id="itemtable">
+  <table>
+    <tr>
+      <th><h2> Item Name </h2></th>
+      <th><h2> Quantity </h2></th>
+      <th><h2> Unit Price </h2></th>
+      <th><h2> Status </h2></th>
+    </tr>
+      <% @invoice.invoice_items.each do |invoice_item| %>
+        <tr>
+          <td> <%= invoice_item.item.name %></td>
+          <td> <%= invoice_item.status %>
+          <td> <%= invoice_item.item.unit_price %></td>
+          <td> <%= invoice_item.quantity %></td>
+        </tr>
+      <% end %>
+  </table>
+</div>
