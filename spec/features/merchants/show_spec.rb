@@ -40,9 +40,9 @@ RSpec.describe 'merchant dashboard show' do
   let!(:invoice_item6) { InvoiceItem.create!(item_id: item3.id, invoice_id: invoice6.id, quantity: 3, unit_price: 52100, status: "packaged") }
   let!(:invoice_item7) { InvoiceItem.create!(item_id: item4.id, invoice_id: invoice7.id, quantity: 7, unit_price: 13635, status: "packaged") }
   let!(:invoice_item8) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice8.id, quantity: 2, unit_price: 23324, status: "pending") }
-  let!(:invoice_item9) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice9.id, quantity: 4, unit_price: 34873, status: "packaged") }
-  let!(:invoice_item10) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice10.id, quantity: 8, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item11) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice11.id, quantity: 8, unit_price: 2196, status: "packaged") }
+  let!(:invoice_item9) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice9.id, quantity: 4, unit_price: 34873, status: "packaged") }
+  let!(:invoice_item10) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice10.id, quantity: 8, unit_price: 2196, status: "packaged") }
+  let!(:invoice_item11) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice11.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item12) { InvoiceItem.create!(item_id: item3.id, invoice_id: invoice12.id, quantity: 3, unit_price: 52100, status: "packaged") }
   let!(:invoice_item13) { InvoiceItem.create!(item_id: item4.id, invoice_id: invoice13.id, quantity: 7, unit_price: 13635, status: "packaged") }
   let!(:invoice_item14) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice14.id, quantity: 2, unit_price: 23324, status: "pending") }
@@ -103,15 +103,15 @@ RSpec.describe 'merchant dashboard show' do
     expect(page).to have_content("Top 5 Favorite Customers:")
 
     within ".favorite_customers" do
+      expect(page).to have_content("Tony Bologna, 9 Successful Transactions")
       expect(page).to have_content("Mariah Toy, 5 Successful Transactions")
       expect(page).to have_content("Carl Junior, 4 Successful Transactions")
-      expect(page).to have_content("Tony Bologna, 3 Successful Transactions")
       expect(page).to have_content("Leanne Braun, 2 Successful Transactions")
       expect(page).to have_content("Heber Kuhn, 1 Successful Transactions")
 
+      expect("Tony Bologna").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
-      expect("Carl Junior").to appear_before("Tony Bologna")
-      expect("Tony Bologna").to appear_before("Leanne Braun")
+      expect("Carl Junior").to appear_before("Leanne Braun")
       expect("Leanne Braun").to appear_before("Heber Kuhn")
     end
   end

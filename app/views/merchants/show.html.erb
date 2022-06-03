@@ -5,10 +5,10 @@
 <div class= "favorite_customers">
   <h3>Top 5 Favorite Customers:</h3>
   <ol>
-  <% Customer.favorite_customers(5).each do |customer| %>
+  <% @merchant.top_five_favorite_customers.each do |customer| %>
     <div id="customer-<%= customer.id %>">
       <li><b> <%= "#{customer.first_name} #{customer.last_name}" %></b>,
-      <%= Customer.count_successful_transactions(customer.id) %> Successful Transactions</li>
+      <%= customer.transaction_count %> Successful Transactions</li>
     </div>
   <% end %>
   </ol>
