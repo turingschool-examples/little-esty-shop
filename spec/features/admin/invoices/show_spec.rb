@@ -68,7 +68,6 @@ RSpec.describe 'Admin invoices show page' do
 
   it 'displays the item name, quantity ordered, price sold for, and invoice item status' do
     visit "/admin/invoices/#{@invoice_1.id}"
-    save_and_open_page
     expect(page).to have_content("Two-Leg Pantaloons")
     expect(page).to have_content("Quantity ordered: 1")
     expect(page).to have_content(5000)
