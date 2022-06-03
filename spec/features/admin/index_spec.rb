@@ -109,7 +109,6 @@ describe "Admin Dashboad" do
 
   it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
-      save_and_open_page
       expect("Leanne Braun").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
       expect("Carl Junior").to appear_before("Tony Bologna")
