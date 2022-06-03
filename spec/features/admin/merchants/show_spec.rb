@@ -6,6 +6,6 @@ RSpec.describe "Admin Merchant Show" do
   it "displays the name of a Merchant" do
     visit admin_merchant_path(merchant1)
 
-    expect(page).to have_content("REI")
+    expect(page).to have_content("REI's Admin Page")
   end
 end
