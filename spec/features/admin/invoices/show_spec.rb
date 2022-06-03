@@ -71,7 +71,7 @@ RSpec.describe 'Admin invoices show page' do
     visit "/admin/invoices/#{@invoice_1.id}"
     expect(page).to have_content("Two-Leg Pantaloons")
     expect(page).to have_content("Quantity ordered: 1")
-    expect(page).to have_content(5000)
+    expect(page).to have_content("Unit price: $50.00")
     expect(page).to have_content("shipped")
   end
   
