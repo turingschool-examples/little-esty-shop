@@ -25,4 +25,12 @@ class Merchant < ApplicationRecord
     .order('revenue desc')
     .limit(5)
   end
+
+  def enabled
+    where(status: 1)
+  end
+  
+  def disabled
+    where(status: 1)
+  end
 end
