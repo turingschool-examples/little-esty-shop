@@ -4,8 +4,8 @@
 
 <div class ="incomplete-invoices">
   <h3> Incomplete Invoices </h3>
-  <ul><% @invoice_items.incomplete_invoice_ids.each do |id| %>
-      <li> <%= link_to "#{id}", admin_invoice_path(id) %> </li>
+  <ul><% @invoices.incomplete_invoices.each do |invoice| %>
+      <li> <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %> <i>Created on: <%= invoice.created_at.strftime("%A, %d %b %Y") %> </i></li>
   <% end %></ul>
 
 </div>
