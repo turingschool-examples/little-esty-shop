@@ -8,12 +8,19 @@
 <h2>Invoice Items</h2>
 <div class="invoice_items">
   <% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="<%= invoice_item.id %>">
     <h4>Item Name: <%= invoice_item.item.name %></h4>
     <p>Quantity Sold: <%= invoice_item.quantity %></p>
     <p>Sold at: <%= number_to_currency(invoice_item.unit_price) %></p>
     <p>Invoice Item Status: <%= invoice_item.status.titleize %></p>
-    <hr>
+      <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch do |form| %>
+        <%= form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>
+        <%= hidden_field_tag "invoice_item_id", "#{invoice_item.id}" %>
+        <%= form.submit "Update Invoice Item Status" %>
+      <% end %>
+  </div>
+  <hr>
   <% end %>
 </div>
 
-Total Revenue: <%= number_to_currency(@invoice.total_revenue) %>
+<p><b>Total Revenue:</b> <%= number_to_currency(@invoice.total_revenue) %></p>
