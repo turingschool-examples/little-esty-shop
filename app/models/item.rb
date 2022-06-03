@@ -16,6 +16,16 @@ class Item < ApplicationRecord
   def find_invoice_id
     invoice_items.first.invoice.id
   end
+
+  def item_best_day
+    invoices.joins(:transactions)
+            .where(transactions: {result: 0})
+            .group(:id)
+            .select("invoices.*, sum(invoice_items.quantity) as revenue")
+            .order(revenue: :desc)
+            .first.updated_at
+  end
+  
   
 
 end
