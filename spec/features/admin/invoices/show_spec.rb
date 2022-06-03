@@ -86,15 +86,15 @@ RSpec.describe 'Admin invoices show page' do
 
   it "has a select menu for the invoice status and you can update the status" do
     visit "/admin/invoices/#{@invoice_1.id}"
-    # save_and_open_page
+    save_and_open_page
 
-    expect(page).to have_select(dropdown, :selected => "in progress")
+    expect(page).to have_select(:status, :selected => "in progress")
     select 'completed', from: 'Status'
 
     click_button 'Update Invoice Status'
 
     expect(current_path).to eq "/admin/invoices/#{@invoice_1.id}"
 
-    expect(page).to have_select(dropdown, :selected => "completed")
+    expect(page).to have_select(:status, :selected => "completed")
   end
 end
