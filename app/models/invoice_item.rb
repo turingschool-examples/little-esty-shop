@@ -9,3 +9,4 @@ class InvoiceItem < ApplicationRecord
   def price_convert
     unit_price * 0.01.to_f
   end
+end
