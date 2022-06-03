@@ -40,7 +40,6 @@ RSpec.describe 'admin merchants index', type: :feature do
     end
 
     within "#enabled" do
-        save_and_open_page
         within "#merchant-#{@merch_1.id}" do
             expect(page).to_not have_button("Enable")
             click_button("Disable")
