@@ -1,0 +1,27 @@
+<%= render 'partials/navbar_admin' %>
+<%= render 'partials/two_columns' %>
+
+<div class="row">
+  <div class="column";>
+    <div class ="incomplete-invoices">
+      <h3 style="text-align:center;"> Incomplete Invoices </h3>
+      <hr><br>
+      <ul><% @invoices.incomplete_invoices.each do |invoice| %>
+        <li> <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %> <i>Created on: <%= invoice.created_at.strftime("%A, %d %b %Y") %> </i></li>
+    <% end %></ul>
+    </div>
+  </div>
+
+
+  <div class="column">
+    <div class="top-five-customers">
+      <h3 style="text-align:center;">Top Customers</h3>
+      <hr><br>
+      <ol>
+        <% @customers.top_customers.each do |customer| %>
+        <h5><li><%= "#{customer.first_name} #{customer.last_name}" %> - <%= customer.transaction_count %> purchases</li></h5><br>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</div>

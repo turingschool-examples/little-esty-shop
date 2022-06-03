@@ -4,13 +4,13 @@ RSpec.describe "Merchant Items Index Page" do
     let!(:merchant_1) {Merchant.create!(name: "REI")}
     let!(:merchant_2) {Merchant.create!(name: "Target")}
 
-    let!(:item1) {merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135)}
-    let!(:item2) {merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99)}
-    let!(:item3) {merchant_1.items.create!(name: "Backpack", description: "Can carry all your hiking snacks", unit_price: 99)}
-    let!(:item4) {merchant_1.items.create!(name: "Socks", description: "Oooooh, wool", unit_price: 15)}
-    let!(:item5) {merchant_1.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12)}
-    let!(:item6) {merchant_1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25)}
-    let!(:item7) {merchant_1.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199)}
+    let!(:item1) { merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135) }
+    let!(:item2) { merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99) }
+    let!(:item3) { merchant_1.items.create!(name: "Backpack", description: "Can carry all your hiking snacks", unit_price: 99) }
+    let!(:item4) { merchant_1.items.create!(name: "Socks", description: "Oooooh, wool", unit_price: 15) }
+    let!(:item5) { merchant_1.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12) }
+    let!(:item6) { merchant_1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25) }
+    let!(:item7) { merchant_1.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199) }
 
     let!(:item8) {merchant_2.items.create!(name: "Conditioner", description: "Bye slit ends!", unit_price: 7)}
 
@@ -21,12 +21,12 @@ RSpec.describe "Merchant Items Index Page" do
     let!(:customer5) { Customer.create!(first_name: "Carl", last_name: "Junior") }
     let!(:customer6) { Customer.create!(first_name: "Tony", last_name: "Bologna") }
 
-    let!(:invoice1) { customer1.invoices.create!(status: 2) }
-    let!(:invoice2) { customer2.invoices.create!(status: 2) }
-    let!(:invoice3) { customer3.invoices.create!(status: 2) }
-    let!(:invoice4) { customer4.invoices.create!(status: 2) }
-    let!(:invoice5) { customer5.invoices.create!(status: 2) }
-    let!(:invoice6) { customer6.invoices.create!(status: 2) }
+    let!(:invoice1) { customer1.invoices.create!(status: 2, created_at: '2012-03-21 14:53:59') }
+    let!(:invoice2) { customer2.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
+    let!(:invoice3) { customer3.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
+    let!(:invoice4) { customer4.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
+    let!(:invoice5) { customer5.invoices.create!(status: 2, created_at: '2012-03-26 14:53:59') }
+    let!(:invoice6) { customer6.invoices.create!(status: 2, created_at: '2012-03-27 14:53:59') }
 
     let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 130, status: "packaged") }
     let!(:invoice_item2) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 10, unit_price: 130, status: "pending") }
@@ -90,8 +90,17 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the top 5 most popular items ordered by total revenue" do
+  it "displays the total revenue next to the item" do
+    within(".top-5") do
+      expect(page).to have_content("Total Revenue: $1,950.00")
+      expect(page).to have_content("Total Revenue: $1,760.00")
+      expect(page).to have_content("Total Revenue: $140.00")
+      expect(page).to have_content("Total Revenue: $100.00")
+      expect(page).to have_content("Total Revenue: $60.00")
+    end
+  end
 
+  it "displays the top 5 most popular items ordered by total revenue" do
     within(".top-5") do
       expect("Boots").to appear_before("Tent")
       expect("Tent").to appear_before("Fanny Pack")
@@ -100,13 +109,13 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the total revenue next to the item" do
+  it "displays the best selling day for each of the top 5 most popular items" do
     within(".top-5") do
-      expect(page).to have_content("Total Revenue: $1,950.00")
-      expect(page).to have_content("Total Revenue: $1,760.00")
-      expect(page).to have_content("Total Revenue: $140.00")
-      expect(page).to have_content("Total Revenue: $100.00")
-      expect(page).to have_content("Total Revenue: $60.00")
+      expect(page).to have_content("Top selling date for Boots was Fri, 23 Mar 2012")
+      expect(page).to have_content("Top selling date for Tent was Sat, 24 Mar 2012")
+      expect(page).to have_content("Top selling date for Fanny Pack was Wed, 21 Mar 2012")
+      expect(page).to have_content("Top selling date for Backpack was Sun, 25 Mar 2012")
+      expect(page).to have_content("Top selling date for Socks was Mon, 26 Mar 2012")
     end
   end
 end
