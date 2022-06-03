@@ -22,4 +22,31 @@ RSpec.describe 'admin merchants index', type: :feature do
     click_link "Orange You Glad"
     expect(current_path).to eq("/admin/merchants/#{@merch_3.id}")
   end
+
+  it 'has buttons next to each merchant that can enable/disable' do
+    visit "/admin/merchants/"
+    within "#merchant-#{@merch_1.id}" do
+        expect(page).to_not have_button("Disable")
+        click_button("Enable")
+        expect(current_path).to eq("/admin/merchants/")
+    end
+
+    within "#merchant-#{@merch_4.id}" do
+        expect(page).to_not have_button("Disable")
+        click_button("Enable")
+        expect(current_path).to eq("/admin/merchants/")
+    end
+
+    within "#merchant-#{@merch_1.id}" do
+        expect(page).to_not have_button("Enable")
+        click_button("Disable")
+        expect(current_path).to eq("/admin/merchants/")
+    end
+
+    within "#merchant-#{@merch_4.id}" do
+        expect(page).to_not have_button("Enable")
+        click_button("Disable")
+        expect(current_path).to eq("/admin/merchants/")
+    end
+  end
 end
