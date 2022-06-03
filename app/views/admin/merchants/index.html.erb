@@ -2,15 +2,14 @@
 
 <div class="enabled-merchants">
   <h3> Status: Enabled </h3>
-  <ul><% @merchants.each do |merchant| %>
+  <ul><% @enabled_merchants.each do |merchant| %>
     <li><%= merchant.name %></li>
   <% end %></ul>
 </div>
 
-
 <div class="disabled-merchants">
   <h3> Status: Disabled </h3>
-  <ul><% @merchants.each do |merchant| %>
+  <ul><% @disabled_merchants.each do |merchant| %>
     <li><%= merchant.name %></li>
   <% end %></ul>
 </div>

@@ -50,8 +50,12 @@ RSpec.describe Invoice do
     let!(:transaction6) { Transaction.create!(invoice_id: invoice6.id, credit_card_number: 4203696133194408, credit_card_expiration_date: "5/22", result: "success") }
 
     it ".invoices_with_merchant_items(merchant)" do
-      expect(Invoice.invoices_with_merchant_items(merchant1)).to eq([invoice1, invoice2, invoice3, invoice4, invoice5])
-      expect(Invoice.invoices_with_merchant_items(merchant1)).to_not eq([invoice6])
+      expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice1)
+      expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice2)
+      expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice3)
+      expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice4)
+      expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice5)
+      expect(Invoice.invoices_with_merchant_items(merchant1)).to_not include(invoice6)
     end
   end
 
