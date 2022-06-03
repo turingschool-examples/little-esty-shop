@@ -10,7 +10,10 @@
 </div>
 
 <div class="top-five-customers">
-  <% @customers.top_customers.each do |customer| %>
-    <h5><%= "#{customer.first_name} #{customer.last_name}" %> | Number of Successful Transactions: <%= customer.count_of_successful_transactions %></h5>
-  <% end %>
+  <h3>Top Customers</h3>
+  <ol>
+    <% @customers.top_customers.each do |customer| %>
+    <li><%= "#{customer.first_name} #{customer.last_name}" %> - <%= customer.count_of_successful_transactions %> purchases</li>
+    <% end %>
+  </ol>
 </div>

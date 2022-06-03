@@ -123,11 +123,11 @@ describe "Admin Dashboad" do
       expect("Carl Junior").to appear_before("Tony Bologna")
       expect("Tony Bologna").to appear_before("Sylvester Nader")
 
-      expect(page).to have_content("Leanne Braun | Number of Successful Transactions: 6")
-      expect(page).to have_content("Mariah Toy | Number of Successful Transactions: 5")
-      expect(page).to have_content("Carl Junior | Number of Successful Transactions: 4")
-      expect(page).to have_content("Tony Bologna | Number of Successful Transactions: 3")
-      expect(page).to have_content("Sylvester Nader | Number of Successful Transactions: 2")
+      expect(page).to have_content("Leanne Braun - 6 purchases")
+      expect(page).to have_content("Mariah Toy - 5 purchases")
+      expect(page).to have_content("Carl Junior - 4 purchases")
+      expect(page).to have_content("Tony Bologna - 3 purchases")
+      expect(page).to have_content("Sylvester Nader - 2 purchases")
     end
   end
 end
