@@ -1,0 +1,7 @@
+<h2>Update <%= @merchant.name %></h2>
+
+<%= form_with url: admin_merchant_path(@merchant), method: :patch, local: true do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name, value: @merchant.name %>
+  <%= f.submit 'Submit'%>
+<% end %>
