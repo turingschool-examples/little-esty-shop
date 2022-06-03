@@ -1,17 +1,19 @@
 <h1>Invoice: #<%= @invoice.id %></h1>
 <ul>
+
   <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |f| %>
     <li>Status: <%= f.select :status, options_for_select(Invoice.statuses.keys.map{ |key| [key] }, selected: @invoice.status) %>
                 <%= f.submit "Update Invoice Status"%>
   <% end %></li>
-  <li>Created at: <%= @invoice.created_at.strftime("%A %b %M %Y") %></li>
+  <li>Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></li>
+
   <li>Total Revenue: $<%= ('%.2f' % @invoice.total_revenue.fdiv(100)) %></li>
   <li> Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></li>
 </ul>
 
 <% @invoice.invoice_items.each do |ii| %></p>
-      <p>Item: <%= ii.item.name %></p>
-      <p>Quantity ordered: <%= ii.quantity %></p>
-      <p>Unit price: <%= ii.unit_price %></p>
-      <p>Status: <%= ii.status %></p>
-    <% end %>
+  <p>Item: <%= ii.item.name %></p>
+  <p>Quantity ordered: <%= ii.quantity %></p>
+  <p>Unit price: $<%= ('%.2f' % ii.unit_price.fdiv(100)) %></p>
+  <p>Status: <%= ii.status %></p>
+ <% end %>

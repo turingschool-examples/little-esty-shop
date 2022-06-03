@@ -71,7 +71,7 @@ RSpec.describe 'Admin invoices show page' do
     visit "/admin/invoices/#{@invoice_1.id}"
     expect(page).to have_content("Two-Leg Pantaloons")
     expect(page).to have_content("Quantity ordered: 1")
-    expect(page).to have_content(5000)
+    expect(page).to have_content("Unit price: $50.00")
     expect(page).to have_content("shipped")
   end
 
@@ -81,7 +81,8 @@ RSpec.describe 'Admin invoices show page' do
     item_1 = merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 3499)
     InvoiceItem.create!(item_id: item_1.id, invoice_id: @invoice_1.id, quantity: 3, unit_price: item_1.unit_price, status: 2)
     visit "/admin/invoices/#{@invoice_1.id}"
-    expect(page).to have_content("Total Revenue: $104.97")
+
+    expect(page).to have_content("Total Revenue: $154.97")
   end
 
   it "has a select menu for the invoice status and you can update the status" do
