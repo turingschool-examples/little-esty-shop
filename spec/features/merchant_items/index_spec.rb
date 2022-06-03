@@ -50,7 +50,7 @@ RSpec.describe 'Merchant Items Index Page' do
       visit "/merchants/#{merchant.id}/items"
 
       within ".merchant-items-enabled" do 
-        click_button(item.id)
+        click_button("#{item.id}")
       end 
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
       within ".merchant-items-enabled" do 
@@ -59,7 +59,7 @@ RSpec.describe 'Merchant Items Index Page' do
       item.reload
       expect(item.status).to eq("Disabled")
       within ".merchant-items-disabled" do 
-        click_button(item2.id)
+        click_button("#{item2.id}")
       end 
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
       within ".merchant-items-disabled" do 
