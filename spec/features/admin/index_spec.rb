@@ -100,21 +100,6 @@ describe "Admin Dashboad" do
     end
   end
 
-# Admin Dashboard Statistics - Top Customers
-#
-# As an admin,
-# When I visit the admin dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted
-
-# c1- 6
-# c4- 5
-# c5- 4
-# c6- 3
-# c2- 2
-
   it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
       save_and_open_page
