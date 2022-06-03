@@ -35,38 +35,67 @@ RSpec.describe 'Merchant Items Index Page' do
   end
 
   describe 'merchant item disable/enable' do 
-    it 'has a button to enable item' do 
+    it 'has a button to enable and a button to disable item' do 
       visit "/merchants/#{merchant.id}/items"
       # save_and_open_page
       within ".merchant-items-enabled" do 
         expect(page).to have_button("Disable")
+        expect(page).to_not have_button("Enable")
       end 
       within ".merchant-items-disabled" do 
         expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
       end 
     end
 
     it 'redirects back to items index with changed status when clicked' do 
       visit "/merchants/#{merchant.id}/items"
 
-      within ".merchant-items-enabled" do 
+      within ".merchant-items-enabled" do
+        expect(page).to have_content(item.name)
+        expect(item.status).to eq("Enabled")
         click_button("#{item.id}")
       end 
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
+
       within ".merchant-items-enabled" do 
         expect(page).to_not have_content(item.name)
+        item.reload
+        expect(item.status).to eq("Disabled")
       end 
-      item.reload
-      expect(item.status).to eq("Disabled")
-      within ".merchant-items-disabled" do 
+
+      within ".merchant-items-disabled" do
+        expect(page).to have_content(item2.name)
+        expect(item2.status).to eq("Disabled")
         click_button("#{item2.id}")
       end 
       expect(current_path).to eq("/merchants/#{merchant.id}/items")
+
       within ".merchant-items-disabled" do 
         expect(page).to_not have_content(item2.name)
+        item2.reload
+        expect(item2.status).to eq("Enabled")
       end 
-      item2.reload
-      expect(item2.status).to eq("Enabled")
+    end
+
+    it 'can group by status' do 
+      visit "/merchants/#{merchant.id}/items"
+
+      within ".merchant-items-enabled" do
+        expect(page).to have_content("Enabled Items")
+        expect(page).to have_content(item.name)
+        expect(page).to have_content(item4.name)
+        expect(page).to_not have_content(item2.name)
+        expect(page).to_not have_content(item5.name)
+      end
+
+      within ".merchant-items-disabled" do
+        expect(page).to have_content("Disabled Items")
+        expect(page).to have_content(item2.name)
+        expect(page).to have_content(item5.name)
+        expect(page).to_not have_content(item.name)
+        expect(page).to_not have_content(item4.name)
+      end
     end
   end
 end
