@@ -63,4 +63,14 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[1].id}")
     end 
   end
+
+  describe 'merchant item disable/enable' do 
+    it 'has a button to disable or enable item' do 
+      visit "/merchants/#{merchants[0].id}/items"
+
+      within ".merchant-items-#{merchants[0].items[1].id}" do 
+        expect(page).to have_content("")
+      end
+    end
+  end
 end
