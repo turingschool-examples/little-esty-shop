@@ -20,7 +20,7 @@ class MerchantItemsController < ApplicationController
     item.update(item_params)
     # if it successfully posts
     # flash[:notice]='Item Successfully Updated'
-    redirect_to "/merchants/#{merchant.id}/items", flash[:notice] = 'Item Successfully Updated'
+    redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: 'Item Successfully Updated'
   end
 
   private
