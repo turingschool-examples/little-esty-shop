@@ -41,14 +41,16 @@ RSpec.describe 'Merchant Items Show Page' do
 
       expect(page).to have_content(@items[1].name)
       expect(page).to have_content("Description: #{@items[1].description}")
-      expect(page).to have_content("Current Price: #{@items[1].unit_price}")
+      expect(page).to have_content("Current Price: ")
+      expect(page).to have_content((@items[1].unit_price).to_f / 100.0)
       expect(page).to_not have_content(@items[0].name)
 
       visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
 
       expect(page).to have_content(@items[0].name)
       expect(page).to have_content("Description: #{@items[0].description}")
-      expect(page).to have_content("Current Price: #{@items[0].unit_price}")
+      expect(page).to have_content("Current Price: ")
+      expect(page).to have_content((@items[0].unit_price).to_f / 100.0)
       expect(page).to_not have_content(@items[1].name)
     end
   end
