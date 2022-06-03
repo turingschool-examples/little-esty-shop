@@ -7,6 +7,8 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
+  enum status: { 'disabled' => 0, 'enabled' => 1 }
+
   def items_ready_to_ship
     Merchant.joins(invoice_items: [invoice: :transactions]).
     where(merchants: {id: self.id}, invoice_items: {status: [0,2]}, invoices: {status: [1,2]}, transactions: {result: true}).
