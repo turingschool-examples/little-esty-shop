@@ -11,6 +11,28 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of :name}
     it {should validate_presence_of :description}
     it {should validate_numericality_of :unit_price}
+    it {should define_enum_for(:status).with_values(["Disabled", "Enabled"])}
+  end
 
+  describe 'class methods' do 
+    it 'returns enabled items' do 
+      merchant = create(:merchant)
+      item = create(:item, merchant: merchant, status: 1)
+      item2 = create(:item, merchant: merchant, status: 0)
+      item3 = create(:item, merchant: merchant, status: 1)
+
+      expect(Item.enabled).to eq([item, item3])
+      expect(Item.enabled).to_not eq([item2])
+    end
+
+    it 'returns disabled items' do 
+      merchant = create(:merchant)
+      item = create(:item, merchant: merchant, status: 1)
+      item2 = create(:item, merchant: merchant, status: 0)
+      item3 = create(:item, merchant: merchant, status: 1)
+
+      expect(Item.disabled).to eq([item2])
+      expect(Item.disabled).to_not eq([item, item3])
+    end 
   end
 end

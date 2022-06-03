@@ -6,4 +6,14 @@ class Item < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :description
   validates_numericality_of :unit_price
+
+  enum status:["Disabled", "Enabled"]
+
+  def self.enabled
+    where(status: 1)
+  end
+
+  def self.disabled
+    where(status: 0)
+  end
 end

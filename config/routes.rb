@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     resources :items, controller: 'merchant_items', only: %i[index show edit update]
     resources :invoices, controller: 'merchant_invoices', only: %i[index show update]
   end
+  patch '/merchants/:merchant_id/items', to: 'merchant_items#update'
 end

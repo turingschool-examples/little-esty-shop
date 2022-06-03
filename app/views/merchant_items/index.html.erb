@@ -20,15 +20,25 @@
 <div class="page-defaults" id="splitSides">
 
   <div class="page-defaults" id="leftSide2">
-    <p>New Item</p>
-    <% @merchant.items.each do |item| %>
-    <div class="merchant-items-<%= item.id %>">
-      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <h3>New Item</h3>
+    <div class="merchant-items-enabled">
+    <h2>Enabled Items</h2>
+    <% @merchant.items.enabled.each do |item| %>
+      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> <%= button_to "Disable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Disabled", id: item.id} %>
     <% end %>
+    </div>
+
+      <div class="merchant-items-disabled">
+      <h3>Disabled Items</h3>
+    <% @merchant.items.disabled.each do |item| %>
+      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> 
+      <%= button_to "Enable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Enabled", id: item.id} %>
+    <% end %>
+    </div>
   </div>
 
   <div class="page-defaults" id="rightSide2">
-  <p>Top Items</p>
+  <h3>Top Items</h3>
   </div>
 
 </div>
