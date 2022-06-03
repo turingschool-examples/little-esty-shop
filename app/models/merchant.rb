@@ -13,6 +13,7 @@ class Merchant < ApplicationRecord
          .order(:created_at)
   end
 
+
   def top_five_items_by_revenue
     items.joins(invoice_items: :transactions)
          .where(transactions: {result: 0})
