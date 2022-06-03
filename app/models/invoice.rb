@@ -13,6 +13,6 @@ class Invoice < ApplicationRecord
   end
 
   def self.incomplete_invoices_ordered
-    Invoice.joins(:invoice_items).where(invoice_items: { status: [0, 1] }).order(created_at: :desc)
+    Invoice.joins(:invoice_items).where(invoice_items: { status: [0, 1] }).order(:created_at)
   end
 end
