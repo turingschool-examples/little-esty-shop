@@ -11,6 +11,7 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of(:name)}
     it {should validate_presence_of(:description)}
     it {should validate_presence_of(:unit_price)}
+
   end
 
   describe 'instance methods' do
@@ -30,4 +31,5 @@ RSpec.describe Item, type: :model do
       @order3 = @mood.invoice_items.create!(quantity: 3, unit_price: 2002, status: "Shipped", invoice_id: @invoice2.id)
     end
   end
+
 end

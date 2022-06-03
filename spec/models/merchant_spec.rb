@@ -7,6 +7,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'validations' do
     it {should validate_presence_of(:name)}
+
   end
 
   describe 'instance methods' do
@@ -34,5 +35,6 @@ RSpec.describe Merchant, type: :model do
       expect(@billman.items_to_ship.pluck(:invoice_id)).to eq([@invoice1.id, @invoice1.id])
       expect(@billman.items_to_ship.pluck(:invoice_id)).to_not eq([@invoice2.id])
     end
+
   end
 end
