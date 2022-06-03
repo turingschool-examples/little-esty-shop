@@ -13,8 +13,17 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of(:unit_price)}
   end
 
-  describe 'status validation' do
-    it {should validate_presence_of(:status)}
+  describe "class variable" do
+    it "#change_status will change the status of the item" do
+      @merchant1 = Merchant.create!(name: 'Merchant1')
+      @item1 = @merchant1.items.create!(name: 'Item1', description: 'Description1', unit_price: 111)
+
+      expect(@item1.status).to eq("enabled")
+      @item1.change_status
+      expect(@item1.status).to eq("disabled")
+      @item1.change_status
+      expect(@item1.status).to eq("enabled")
+    end
   end
 
 end
