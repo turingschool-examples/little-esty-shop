@@ -26,7 +26,7 @@ class MerchantItemsController < ApplicationController
   private
 
   def item_params
-    binding.pry
+    # binding.pry
     params.require(:item).permit(
       :name,
       :description,
