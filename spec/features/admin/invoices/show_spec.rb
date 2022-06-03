@@ -62,7 +62,7 @@ RSpec.describe 'Admin invoices show page' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content("#{@invoice_1.id}")
-    expect(page).to have_content("Status: in progress")
+    expect(page).to have_select(:status, :selected => "in progress")
     expect(page).to have_content("Created at: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("Debbie Twolegs")
   end
