@@ -9,4 +9,4 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum('unit_price * quantity') * 0.01.to_f
   end
-
+end
