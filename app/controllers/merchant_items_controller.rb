@@ -29,7 +29,7 @@ class MerchantItemsController < ApplicationController
     params.permit(
       :name,
       :description,
-      :unit_price.to_f / 100
+      unit_price: params[:unit_price].to_f / 100
     )
   end
 end
