@@ -21,14 +21,15 @@
 
   <div class="page-defaults" id="leftSide2">
     <p>New Item</p>
-    <% @merchant.items.each do |item| %>
-    <div class="merchant-items-<%= item.id %>">
-      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <% @merchant.items.enabled.each do |item| %>
+    <div class="merchant-items-enabled-<%= item.id %>">
+      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> <%= button_to "Disable", "/merchants/{#@merchant.id}/items", method: :patch%>
+      </div>
     <% end %>
-    <% if @merchant.items.enabled %>
-      <%= button_to "Disable", "/merchants/{#@merchant.id}/items", method: :patch%>
-    <% else %>
-      <%= button_to "Enable", "/merchants/#{@merchant.id}/items", method: :patch %>
+    <% @merchant.items.disabled.each do  %>
+      <div class="merchant-items-disabled-<%= item.id %>">
+      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> <%= button_to "Enable", "/merchants/{#@merchant.id}/items", method: :patch%>
+      </div>
     <% end %>
   </div>
 

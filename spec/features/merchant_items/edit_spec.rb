@@ -28,7 +28,7 @@ RSpec.describe 'Merchant Items Edit Page' do
       # expect(page).to have_content(@items[0].name)
       # expect(page).to have_content(@items[0].description)
       # expect(page).to have_content(@items[0].unit_price)
-      save_and_open_page
+      # save_and_open_page
       fill_in('item[name]', with: 'Bow Tie Pasta')
       fill_in('item[description]', with: 'Tasty')
       click_on('Submit')

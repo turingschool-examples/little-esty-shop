@@ -37,14 +37,14 @@ RSpec.describe 'Merchant Items Index Page' do
     it 'has links for the item names' do 
       visit "/merchants/#{merchants[0].id}/items"
 
-      within ".merchant-items-#{merchants[0].items[0].id}" do 
+      within ".merchant-items-disabled-#{merchants[0].items[0].id}" do 
         click_link "#{merchants[0].items[0].name}"
       end
       expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}")
 
       visit "/merchants/#{merchants[0].id}/items"
 
-      within ".merchant-items-#{merchants[0].items[1].id}" do 
+      within ".merchant-items-disabled-#{merchants[0].items[1].id}" do 
         click_link "#{merchants[0].items[1].name}"
       end 
       expect(current_path). to eq("/merchants/#{merchants[0].id}/items/#{@items[1].id}")
@@ -59,13 +59,12 @@ RSpec.describe 'Merchant Items Index Page' do
 
       visit "/merchants/#{merchant.id}/items"
 
-      within ".merchant-items-#{item.id}" do 
+      within "merchant-items-enabled-#{merchant.id.item.id}" do 
         expect(page).to have_button("Disable")
-      end
-
-      within ".merchant-items-#{item2.id}" do 
+      end 
+      within "merchant-items-enabled-#{merchant.id.item.id}" do 
         expect(page).to have_button("Enable")
-      end
+      end 
     end
   end
 end
