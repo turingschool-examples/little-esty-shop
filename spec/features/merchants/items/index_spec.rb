@@ -13,6 +13,8 @@ RSpec.describe 'merchant items index page' do
     @item_6 = @merch_1.items.create!(name: "String of Numbers", description: "54921752964273", unit_price: 10000)
     @item_6 = @merch_2.items.create!(name: "Pirate Pants", description: "Peg legs don't need pant legs", unit_price: 1000)
 
+    @cust_1 = Customer.create!(first_name: "Debbie", last_name: "Twolegs")
+
     @invoice_1 = @cust_1.invoices.create!(status: 1)
 
     @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0)
@@ -67,7 +69,7 @@ RSpec.describe 'merchant items index page' do
       expect(@item_5.name).to appear_before(@item_4.name)
       expect(@item_4.name).to appear_before(@item_3.name)
       expect(page).to_not have_content(@item_1.name)
-      
+
       expect(page).to have_content("$600.00")
       expect(page).to have_content("$7,000.00")
       expect(page).to have_content("$80,000.00")
