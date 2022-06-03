@@ -11,10 +11,11 @@ describe "Admin Dashboad" do
   let!(:customer5) { Customer.create!(first_name: "Carl", last_name: "Junior") }
   let!(:customer6) { Customer.create!(first_name: "Tony", last_name: "Bologna") }
 
-  let!(:invoice1) { customer1.invoices.create!(status: 2) }
-  let!(:invoice2) { customer1.invoices.create!(status: 2) }
-  let!(:invoice3) { customer1.invoices.create!(status: 2) }
-  let!(:invoice4) { customer4.invoices.create!(status: 2) }
+
+  let!(:invoice1) { customer1.invoices.create!(status: 2, created_at: '2012-03-21 14:53:59') }
+  let!(:invoice2) { customer1.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
+  let!(:invoice3) { customer1.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
+  let!(:invoice4) { customer1.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
   let!(:invoice5) { customer5.invoices.create!(status: 2) }
   let!(:invoice6) { customer6.invoices.create!(status: 2) }
   let!(:invoice7) { customer2.invoices.create!(status: 2) }
@@ -93,6 +94,7 @@ describe "Admin Dashboad" do
     within ".incomplete-invoices" do
       expect(page).to have_link("#{invoice1.id}")
       expect(page).to have_link("#{invoice2.id}")
+      expect(page).to have_link("#{invoice4.id}")
       expect(page).to_not have_link("#{invoice3.id}")
 
       click_link("#{invoice1.id}")
@@ -100,6 +102,12 @@ describe "Admin Dashboad" do
     end
   end
 
+
+  it "orders incomplete invoices by oldest to newest" do
+    expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
+    expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
+  end
+  
   it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
       save_and_open_page

@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
 
   def index
-    @invoice_items = InvoiceItem.all
+    @invoices = Invoice.all
     @customers = Customer.all
   end
 end
