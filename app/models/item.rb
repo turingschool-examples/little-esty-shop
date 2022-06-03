@@ -9,11 +9,11 @@ class Item < ApplicationRecord
 
   enum status:["Disabled", "Enabled"]
 
-  def self.enabled_items
+  def self.enabled
     where(status: 1)
   end
 
-  def self.disabled_items
+  def self.disabled
     where(status: 0)
   end
 end

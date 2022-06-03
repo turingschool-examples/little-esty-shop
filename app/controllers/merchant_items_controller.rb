@@ -26,10 +26,11 @@ class MerchantItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(
+    params.require(:item).permit(
       :name,
       :description,
-      unit_price: params[:unit_price].to_f / 100.0
+      unit_price: params[:unit_price].to_f / 100.0,
+      # :status
     )
   end
 end

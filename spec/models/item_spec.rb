@@ -21,8 +21,8 @@ RSpec.describe Item, type: :model do
       item2 = create(:item, merchant: merchant, status: 0)
       item3 = create(:item, merchant: merchant, status: 1)
 
-      expect(Item.enabled_items).to eq([item, item3])
-      expect(Item.enabled_items).to_not eq([item2])
+      expect(Item.enabled).to eq([item, item3])
+      expect(Item.enabled).to_not eq([item2])
     end
 
     it 'returns disabled items' do 
@@ -31,8 +31,8 @@ RSpec.describe Item, type: :model do
       item2 = create(:item, merchant: merchant, status: 0)
       item3 = create(:item, merchant: merchant, status: 1)
 
-      expect(Item.disabled_items).to eq([item2])
-      expect(Item.disabled_items).to_not eq([item, item3])
+      expect(Item.disabled).to eq([item2])
+      expect(Item.disabled).to_not eq([item, item3])
     end 
   end
 end

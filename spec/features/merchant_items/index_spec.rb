@@ -55,15 +55,15 @@ RSpec.describe 'Merchant Items Index Page' do
     it 'has a button to enable item' do 
       merchant = create(:merchant)
       item = create(:item, merchant: merchant, status: 1)
-      item2 = create(:item, merchant: merchant, status: 1)
+      item2 = create(:item, merchant: merchant, status: 0)
 
       visit "/merchants/#{merchant.id}/items"
 
-      within ".merchant-items-#{merchant.item.id}" do 
-        expect(page).to have_button("Enable")
+      within ".merchant-items-#{item.id}" do 
+        expect(page).to have_button("Disable")
       end
 
-      within ".merchant-items-#{merchant.item2.id}" do 
+      within ".merchant-items-#{item2.id}" do 
         expect(page).to have_button("Enable")
       end
     end
