@@ -21,11 +21,11 @@ RSpec.describe Invoice do
       @cust_1 = Customer.create!(first_name: "Debbie", last_name: "Twolegs")
       @cust_2 = Customer.create!(first_name: "Tommy", last_name: "Doubleleg")
 
-      @invoice_1 = @cust_1.invoices.create!(status: 1)
-      @invoice_2 = @cust_1.invoices.create!(status: 1)
+      @invoice_1 = @cust_1.invoices.create!(status: 1, created_at: "2022-06-03 17:51:52")
+      @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-25 17:51:52")
       @invoice_3 = @cust_1.invoices.create!(status: 1)
-      @invoice_4 = @cust_2.invoices.create!(status: 1)
-      @invoice_5 = @cust_2.invoices.create!(status: 1)
+      @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
+      @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-08 17:51:52")
       @invoice_6 = @cust_2.invoices.create!(status: 1)
 
       @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 0)
@@ -38,7 +38,7 @@ RSpec.describe Invoice do
     
     describe '#incomplete_invoices_ordered' do
       it 'returns incomplete invoices orderd from oldest to newest' do
-        expect(Invoice.incomplete_invoices_ordered).to eq([@invoice_5, @invoice_4, @invoice_2, @invoice_1])
+        expect(Invoice.incomplete_invoices_ordered).to eq([@invoice_4, @invoice_5, @invoice_2, @invoice_1])
       end
     end
   end
