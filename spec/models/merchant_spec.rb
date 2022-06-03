@@ -59,25 +59,31 @@ RSpec.describe Merchant do
     let!(:transaction6) { Transaction.create!(invoice_id: invoice5.id, credit_card_number: 4203696133194408, credit_card_expiration_date: "5/22", result: "success") }
     let!(:transaction7) { Transaction.create!(invoice_id: invoice6.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "failed") }
 
-    it "#top_five_items" do
-      expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
+    describe '#top_five_items' do
+      it "lists the top five items ordered in highest to lowest revenue" do
+        expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
+      end
     end
 
-    it '#items_ready_to_ship' do
-      expect(merchant_1.items_ready_to_ship.first.id).to eq(invoice1.id)
-      expect(merchant_1.items_ready_to_ship.first.name).to eq("Boots")
-      expect(merchant_1.items_ready_to_ship.first.created_at).to eq(invoice1.created_at)
+    describe '#items_ready_to_ship' do
+      it 'returns an array of items ready to ship ordered by invoice date' do
+        expect(merchant_1.items_ready_to_ship.first.id).to eq(invoice1.id)
+        expect(merchant_1.items_ready_to_ship.first.name).to eq("Boots")
+        expect(merchant_1.items_ready_to_ship.first.created_at).to eq(invoice1.created_at)
+      end
     end
 
-    it "#top_five_favorite_customers" do
-      expect(merchant_1.top_five_favorite_customers).to eq([customer5, customer1, customer4, customer2, customer3])
-    end
+    describe '#top_five_favorite_customers'
+      it "returns an array of the customers with the most transactions from the merchant" do
+        expect(merchant_1.top_five_favorite_customers).to eq([customer5, customer1, customer4, customer2, customer3])
+      end
 
-    it "counts the number of successful transactions of a customer" do
-      test_customers = merchant_1.top_five_favorite_customers
+      it "counts the number of successful transactions of a customer" do
+        test_customers = merchant_1.top_five_favorite_customers
 
-      expect(test_customers[0].transaction_count).to eq(4)
-      expect(test_customers[4].transaction_count).to eq(1)
+        expect(test_customers[0].transaction_count).to eq(4)
+        expect(test_customers[4].transaction_count).to eq(1)
+      end
     end
   end
 end
