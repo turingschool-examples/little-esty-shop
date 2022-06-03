@@ -66,12 +66,17 @@ RSpec.describe Merchant do
       end
     end
 
-  describe '#items_ready_to_ship' do
-    it 'items_ready_to_ship should return array of items ready to ship ordered by invoice date' do
-      expect(merchant_1.items_ready_to_ship.first.id).to eq(invoice3.id)
-      expect(merchant_1.items_ready_to_ship.first.name).to eq("#{item2.name}")
-      expect(merchant_1.items_ready_to_ship.first.created_at).to eq(invoice3.created_at)
+    describe '#items_ready_to_ship' do
+      it 'items_ready_to_ship should return array of items ready to ship ordered by invoice date' do
+        expect(merchant_1.items_ready_to_ship.first.id).to eq(invoice3.id)
+        expect(merchant_1.items_ready_to_ship.first.name).to eq("#{item2.name}")
+        expect(merchant_1.items_ready_to_ship.first.created_at).to eq(invoice3.created_at)
+      end
     end
-  end
+
+    # describe '#top_date_by_revenue' do
+    #   it "returns the date with the most revenue for each merchant" do
+    #   end
+    # end
   end
 end
