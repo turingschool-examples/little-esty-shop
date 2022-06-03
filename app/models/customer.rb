@@ -20,6 +20,19 @@ class Customer < ApplicationRecord
   end
 
   def self.top_customers
-    # joins(invoices: :transactions).where(transactions: {result: true}).select(customer.name,  )
+    joins(invoices: :transactions)
+    .where(transactions: {result: true})
+    .group(:id).select("customers.*, COUNT(transactions) AS top_customers")
+    .order("top_customers desc")
+    .limit(5)
+  end
+
+  def count_of_transactions
+    self.transactions.count
   end
 end
+
+# Then I see the names of the top 5 customers
+# who have conducted the largest number of successful transactions
+# And next to each customer name I see the number of successful transactions they have
+# conducted

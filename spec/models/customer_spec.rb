@@ -102,6 +102,7 @@ RSpec.describe Customer do
     let!(:invoice19) { customer1.invoices.create!(status: 2) }
     let!(:invoice20) { customer1.invoices.create!(status: 2) }
     let!(:invoice21) { customer5.invoices.create!(status: 2) }
+    let!(:invoice22) { customer4.invoices.create!(status: 2) }
 
     let!(:item1) { merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135) }
     let!(:item2) { merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99) }
@@ -138,12 +139,28 @@ RSpec.describe Customer do
     let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
     let!(:transaction19) { Transaction.create!(invoice_id: invoice19.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
     let!(:transaction20) { Transaction.create!(invoice_id: invoice20.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
-    let!(:transaction20) { Transaction.create!(invoice_id: invoice21.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
+    let!(:transaction21) { Transaction.create!(invoice_id: invoice21.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
+    let!(:transaction22) { Transaction.create!(invoice_id: invoice22.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
 
     describe "::top_customers" do
-      xit "returns the names of the top 5 customers and the number of successful transactions they made" do
-        expect(Customer.top_customers).to eq([customer1, customer2, customer6, customer4, customer5])
+      it "returns the names of the top 5 customers and the number of successful transactions they made" do
+        expect(Customer.top_customers).to eq([customer1, customer4, customer5, customer6, customer2])
       end
     end
+
+    describe "#count_of_transactions" do
+      it "can count the number of transactions of a customer" do
+        expect(customer1.count_of_transactions).to eq(6)
+        expect(customer2.count_of_transactions).to eq(2)
+        expect(customer3.count_of_transactions).to eq(1)
+      end
+    end
+
+    # c1- 6
+    # c4- 5
+    # c5- 4
+    # c6- 3
+    # c2- 2
+    # c3- 1
   end
 end

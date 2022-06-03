@@ -32,6 +32,7 @@ describe "Admin Dashboad" do
   let!(:invoice19) { customer1.invoices.create!(status: 2) }
   let!(:invoice20) { customer1.invoices.create!(status: 2) }
   let!(:invoice21) { customer5.invoices.create!(status: 2) }
+  let!(:invoice22) { customer4.invoices.create!(status: 2) }
 
   let!(:item1) { merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135) }
   let!(:item2) { merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99) }
@@ -68,7 +69,8 @@ describe "Admin Dashboad" do
   let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
   let!(:transaction19) { Transaction.create!(invoice_id: invoice19.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
   let!(:transaction20) { Transaction.create!(invoice_id: invoice20.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
-  let!(:transaction20) { Transaction.create!(invoice_id: invoice21.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
+  let!(:transaction21) { Transaction.create!(invoice_id: invoice21.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
+  let!(:transaction22) { Transaction.create!(invoice_id: invoice22.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
 
   before do
     visit admin_index_path
