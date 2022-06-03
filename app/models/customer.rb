@@ -7,10 +7,6 @@ class Customer < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
-  def self.count_successful_transactions(id)
-    Customer.find(id).transactions.where(result: true).count
-  end
-
   def self.top_customers
     joins(invoices: :transactions)
     .where(transactions: {result: true})
