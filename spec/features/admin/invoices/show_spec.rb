@@ -74,7 +74,7 @@ RSpec.describe 'Admin invoices show page' do
     expect(page).to have_content("Unit price: $50.00")
     expect(page).to have_content("shipped")
   end
-  
+
   it 'displays total revenue for invoice' do
     merch_1 = Merchant.create!(name: "Two-Legs Fashion")
 
@@ -84,5 +84,17 @@ RSpec.describe 'Admin invoices show page' do
 
     expect(page).to have_content("Total Revenue: $154.97")
   end
-end
 
+  it "has a select menu for the invoice status and you can update the status" do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_select(:status, :selected => "in progress")
+    select 'completed', from: 'status'
+
+    click_button 'Update Invoice Status'
+
+    expect(current_path).to eq "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_select(:status, :selected => "completed")
+  end
+end
