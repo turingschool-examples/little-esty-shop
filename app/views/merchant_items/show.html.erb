@@ -23,3 +23,10 @@
 
 <p>Description: <%= @item.description %></p>
 <p>Current Price: <%= @item.unit_price %></p>
+<p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>

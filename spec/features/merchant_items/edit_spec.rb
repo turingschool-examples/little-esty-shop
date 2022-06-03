@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Show Page' do
+RSpec.describe 'Merchant Items Edit Page' do
   let!(:merchants) { create_list(:merchant, 2) }
   let!(:customers) { create_list(:customer, 6) }
 
@@ -34,31 +34,20 @@ RSpec.describe 'Merchant Items Show Page' do
   let!(:invoice_item10) { create(:invoice_item, item: @items[1], invoice: @invoices[9], status: 0) }
   let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10], status: 2) }
   let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11], status: 2) }
+  describe 'form to edit item' do
+    it 'is filled in with existing attribute information' do
+      visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit"
+      # expect(page).to have_content(@items[0].name)
+      # expect(page).to have_content(@items[0].description)
+      # expect(page).to have_content(@items[0].unit_price)
 
-  describe 'basic attributes on show page' do 
-    it 'shows name, description, and current selling price for an item' do 
-      visit "/merchants/#{merchants[0].id}/items/#{@items[1].id}"
-
-      expect(page).to have_content(@items[1].name)
-      expect(page).to have_content("Description: #{@items[1].description}")
-      expect(page).to have_content("Current Price: #{@items[1].unit_price}")
-      expect(page).to_not have_content(@items[0].name)
-
-      visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
-
-      expect(page).to have_content(@items[0].name)
-      expect(page).to have_content("Description: #{@items[0].description}")
-      expect(page).to have_content("Current Price: #{@items[0].unit_price}")
-      expect(page).to_not have_content(@items[1].name)
+      fill_in(:name, with: 'Bow Tie Pasta')
+      fill_in(:description, with: 'Tasty')
+      click_on('Submit')
+      expect(current_path).to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}")
+      expect(page).to have_content('Item Successfully Updated')
+      expect(page).to have_content('Bow Tie Pasta')
+      expect(page).to have_content('Tasty')
     end
   end
-
-  describe 'merchant item update' do 
-    it 'has a link to update the item information' do 
-      visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
-
-      click_link "Update Item"
-      expect(current_path).to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit")
-    end
-  end
-end 
+end
