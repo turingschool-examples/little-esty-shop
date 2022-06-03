@@ -24,6 +24,8 @@
     <% @merchant.items.each do |item| %>
     <div class="merchant-items-<%= item.id %>">
       <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+      <% if merchant.enabled_item %>
+        <%= button_to "Disable", "/merchants/{#@merchant.id}/items", method: :patch%>
     <% end %>
   </div>
 

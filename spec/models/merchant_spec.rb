@@ -67,25 +67,5 @@ RSpec.describe Merchant, type: :model do
         invoice_item10
         ])#item and item invoice number
     end
-
-    it 'returns enabled items' do 
-      merchant = create(:merchant)
-      item = create(:item, merchant: merchant, status: 1)
-      item2 = create(:item, merchant: merchant, status: 0)
-      item3 = create(:item, merchant: merchant, status: 1)
-
-      expect(merchant.enabled_items).to eq([item, item3])
-      expect(merchant.enabled_items).to_not eq([item2])
-    end
-
-    it 'returns disabled items' do 
-      merchant = create(:merchant)
-      item = create(:item, merchant: merchant, status: 1)
-      item2 = create(:item, merchant: merchant, status: 0)
-      item3 = create(:item, merchant: merchant, status: 1)
-
-      expect(merchant.disabled_items).to eq([item2])
-      expect(merchant.disabled_items).to_not eq([item, item3])
-    end
   end
 end

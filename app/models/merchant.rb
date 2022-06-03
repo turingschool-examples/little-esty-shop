@@ -15,12 +15,4 @@ class Merchant < ApplicationRecord
     # binding.pry
     invoice_items.joins(:invoice).where.not(status: 2).order("invoices.created_at asc")
   end
-
-  def enabled_items
-    items.where(status: 1)
-  end
-
-  def disabled_items
-    items.where(status: 0)
-  end
 end
