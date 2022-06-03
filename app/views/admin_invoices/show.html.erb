@@ -1,7 +1,7 @@
 <h1>Invoice: #<%= @invoice.id %></h1>
 <ul>
-  <li>Status: <%= select_tag :status, options_for_select(Invoice.statuses.map {|k,v| [k, v]}, @invoice.status) %></li>
-  <li>       <%= button_to "Update Invoice Status", method: :patch %>
+  <li>Status: <%= select_tag :status, options_for_select(Invoice.statuses.keys.map{ |key| [key] }, selected: @invoice.status) %></li>
+              <%= button_to "Update Invoice Status", method: :patch %>
   <li>Created at: <%= @invoice.created_at.strftime("%A %b %M %Y") %></li>
   <li>Total Revenue: $<%= ('%.2f' % @invoice.total_revenue.fdiv(100)) %></li>
   <li> Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></li>
