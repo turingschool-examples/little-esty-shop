@@ -8,7 +8,6 @@ RSpec.describe Item, type: :model do
     @item1 = @merchant1.items.create!(name: 'Item1', description: 'Description1', unit_price: 111, status: 0)
     @item11 = @merchant1.items.create!(name: 'Item11', description: 'Description11', unit_price: 1111,status: 0)
     @item2 = @merchant2.items.create!(name: 'Item2', description: 'Description2', unit_price: 222, status: 0)
-    
 
     visit "/merchants/#{@merchant1.id}/items"
 
