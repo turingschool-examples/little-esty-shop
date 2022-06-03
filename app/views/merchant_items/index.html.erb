@@ -20,12 +20,11 @@
 <div class="page-defaults" id="splitSides">
 
   <div class="page-defaults" id="leftSide2">
-    <p>New Item</p>
+    <h3>New Item</h3>
     <div class="merchant-items-enabled">
-    <h3>Enabled Items</h3>
+    <h2>Enabled Items</h2>
     <% @merchant.items.enabled.each do |item| %>
-      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> 
-      <%= button_to "Disable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Disabled", id: item.id} %>
+      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> <%= button_to "Disable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Disabled", id: item.id} %>
     <% end %>
     </div>
 
@@ -39,7 +38,7 @@
   </div>
 
   <div class="page-defaults" id="rightSide2">
-  <p>Top Items</p>
+  <h3>Top Items</h3>
   </div>
 
 </div>

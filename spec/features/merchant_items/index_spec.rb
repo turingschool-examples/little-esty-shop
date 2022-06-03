@@ -80,7 +80,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
     it 'can group by status' do 
       visit "/merchants/#{merchant.id}/items"
-
+save_and_open_page
       within ".merchant-items-enabled" do
         expect(page).to have_content("Enabled Items")
         expect(page).to have_content(item.name)
