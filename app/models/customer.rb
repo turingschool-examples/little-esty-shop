@@ -18,4 +18,8 @@ class Customer < ApplicationRecord
   def self.count_successful_transactions(id)
     Customer.find(id).transactions.where(result: true).count
   end
+
+  def self.top_customers
+    # joins(invoices: :transactions).where(transactions: {result: true}).select(customer.name,  )
+  end
 end

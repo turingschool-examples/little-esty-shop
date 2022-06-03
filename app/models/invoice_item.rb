@@ -7,4 +7,8 @@ class InvoiceItem < ApplicationRecord
   validates :status, presence: true
 
   enum status: {'pending' => 0, 'shipped' => 1, 'packaged' => 2}
+
+  def self.incomplete_invoice_ids
+    where.not(status: 1).distinct.pluck(:invoice_id)
+  end
 end

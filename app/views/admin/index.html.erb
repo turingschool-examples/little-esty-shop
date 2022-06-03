@@ -1,0 +1,11 @@
+<h2> Welcome to the Admin Dashboard </h2>
+<p> <%= link_to "Merchants Index", admin_merchants_path %> |
+  <%= link_to "Invoices Index", admin_invoices_path %> </p>
+
+<div class ="incomplete-invoices">
+  <h3> Incomplete Invoices </h3>
+  <ul><% @invoice_items.incomplete_invoice_ids.each do |id| %>
+      <li> <%= link_to "#{id}", admin_invoice_path(id) %> </li>
+  <% end %></ul>
+
+</div>
