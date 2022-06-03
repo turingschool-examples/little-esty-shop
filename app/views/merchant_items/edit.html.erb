@@ -6,6 +6,6 @@
 <%= f.label :description, 'Description' %>
 <%= f.text_field :description, value: @item.description %><br>
 <%= f.label :unit_price, 'Unit Price' %>
-<%= f.text_field :unit_price, value: "$#{(@item.unit_price.to_f)/100}" %><br>
+<%= f.text_field :unit_price, value: "$#{(@item.unit_price.to_f)/100}"%><br>
 <%= f.submit 'Update' %>
 <% end %>
