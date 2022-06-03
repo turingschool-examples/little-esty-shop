@@ -25,28 +25,33 @@ RSpec.describe 'admin merchants index', type: :feature do
 
   it 'has buttons next to each merchant that can enable/disable' do
     visit "/admin/merchants/"
-    within "#merchant-#{@merch_1.id}" do
-        expect(page).to_not have_button("Disable")
-        click_button("Enable")
-        expect(current_path).to eq("/admin/merchants/")
+    within "#disabled" do
+        within "#merchant-#{@merch_1.id}" do
+            expect(page).to_not have_button("Disable")
+            click_button("Enable")
+            expect(current_path).to eq("/admin/merchants/")
+        end
+
+        within "#merchant-#{@merch_4.id}" do
+            expect(page).to_not have_button("Disable")
+            click_button("Enable")
+            expect(current_path).to eq("/admin/merchants/")
+        end
     end
 
-    within "#merchant-#{@merch_4.id}" do
-        expect(page).to_not have_button("Disable")
-        click_button("Enable")
-        expect(current_path).to eq("/admin/merchants/")
-    end
+    within "#enabled" do
+        save_and_open_page
+        within "#merchant-#{@merch_1.id}" do
+            expect(page).to_not have_button("Enable")
+            click_button("Disable")
+            expect(current_path).to eq("/admin/merchants/")
+        end
 
-    within "#merchant-#{@merch_1.id}" do
-        expect(page).to_not have_button("Enable")
-        click_button("Disable")
-        expect(current_path).to eq("/admin/merchants/")
-    end
-
-    within "#merchant-#{@merch_4.id}" do
-        expect(page).to_not have_button("Enable")
-        click_button("Disable")
-        expect(current_path).to eq("/admin/merchants/")
+        within "#merchant-#{@merch_4.id}" do
+            expect(page).to_not have_button("Enable")
+            click_button("Disable")
+            expect(current_path).to eq("/admin/merchants/")
+        end
     end
   end
 end
