@@ -48,16 +48,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
       expect(page).to_not have_content("#{customers[1].first_name} #{customers[1].last_name}")
     end
   end
-  # Merchant Invoice Show Page: Invoice Item Information
 
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see all of my items on the invoice including:
-# - Item name
-# - The quantity of the item ordered
-# - The price the Item sold for
-# - The Invoice Item status
-# And I do not see any information related to Items for other merchants
   describe 'Merchant_Invoices User Story 3' do
     it 'can display items attributes that belongs to an invoice' do
       visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
@@ -75,6 +66,14 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
         expect(page).to have_content(invoice_item1.status)
 
       end
+    end
+  end
+
+  describe "User Story 4 - Merchant Invoice Show Page: Total Revenue" do
+    it "shows the total revenue of all items on the invoice" do
+      visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
+
+      expect(page).to have_content("Total Revenue: #{@invoices[0].total_revenue}")
     end
   end
 end
