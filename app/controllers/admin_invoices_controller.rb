@@ -8,6 +8,7 @@ class AdminInvoicesController < ApplicationController
   end
 
   def update
-    binding.pry
+    Invoice.update(params[:invoice_id], status: params[:status])
+    redirect_to action: 'show'
   end
 end
