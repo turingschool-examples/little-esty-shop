@@ -20,6 +20,14 @@ class Customer < ApplicationRecord
   end
 
   def self.top_customers
-    # joins(invoices: :transactions).where(transactions: {result: true}).select(customer.name,  )
+    joins(invoices: :transactions)
+    .where(transactions: {result: true})
+    .group(:id).select("customers.*, COUNT(transactions) AS top_customers")
+    .order("top_customers desc")
+    .limit(5)
+  end
+
+  def count_of_successful_transactions
+    self.transactions.where(transactions: {result: true}).count
   end
 end
