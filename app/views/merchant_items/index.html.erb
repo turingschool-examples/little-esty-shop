@@ -24,13 +24,14 @@
     <div class="merchant-items-enabled">
     <% @merchant.items.enabled.each do |item| %>
       <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> 
-      <%= button_to "Disable", "/merchants/{#@merchant.id}/items", method: :patch %>
+      <%= button_to "Disable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Disabled", id: item.id} %>
     <% end %>
     </div>
+
       <div class="merchant-items-disabled">
     <% @merchant.items.disabled.each do |item| %>
       <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> 
-      <%= button_to "Enable", "/merchants/{#@merchant.id}/items", method: :patch %>
+      <%= button_to "Enable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Enabled", id: item.id} %>
     <% end %>
     </div>
   </div>

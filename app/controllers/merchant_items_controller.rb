@@ -16,11 +16,15 @@ class MerchantItemsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:merchant_id])
+    # binding.pry
     item = Item.find(params[:id])
-    item.update(item_params)
-    # if it successfully posts
-    # flash[:notice]='Item Successfully Updated'
-    redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: 'Item Successfully Updated'
+    if params[:item][:status]
+      item.update(status: params[:item][:status])
+      redirect_to "/merchants/#{merchant.id}/items"
+    else
+      item.update(item_params)
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: 'Item Successfully Updated'
+    end
   end
 
   private
@@ -30,8 +34,8 @@ class MerchantItemsController < ApplicationController
     params.require(:item).permit(
       :name,
       :description,
-      unit_price: params[:unit_price].to_f / 100.0,
-      # :status
+      :status,
+      unit_price: params[:unit_price].to_f / 100.0
     )
   end
 end
