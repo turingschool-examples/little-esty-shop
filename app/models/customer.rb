@@ -27,12 +27,7 @@ class Customer < ApplicationRecord
     .limit(5)
   end
 
-  def count_of_transactions
-    self.transactions.count
+  def count_of_successful_transactions
+    self.transactions.where(transactions: {result: true}).count
   end
 end
-
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions
-# And next to each customer name I see the number of successful transactions they have
-# conducted

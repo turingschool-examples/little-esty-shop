@@ -143,16 +143,16 @@ RSpec.describe Customer do
     let!(:transaction22) { Transaction.create!(invoice_id: invoice22.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
 
     describe "::top_customers" do
-      it "returns the names of the top 5 customers and the number of successful transactions they made" do
+      it "returns the top 5 customers with the highest count of successful transactions" do
         expect(Customer.top_customers).to eq([customer1, customer4, customer5, customer6, customer2])
       end
     end
 
-    describe "#count_of_transactions" do
-      it "can count the number of transactions of a customer" do
-        expect(customer1.count_of_transactions).to eq(6)
-        expect(customer2.count_of_transactions).to eq(2)
-        expect(customer3.count_of_transactions).to eq(1)
+    describe "#count_successful_transactions" do
+      it "can count the number of successful transactions of a customer" do
+        expect(customer5.count_of_successful_transactions).to eq(4)
+        expect(customer2.count_of_successful_transactions).to eq(2)
+        expect(customer1.count_of_successful_transactions).to eq(6)
       end
     end
 

@@ -7,5 +7,10 @@
   <ul><% @invoice_items.incomplete_invoice_ids.each do |id| %>
       <li> <%= link_to "#{id}", admin_invoice_path(id) %> </li>
   <% end %></ul>
+</div>
 
+<div class="top-five-customers">
+  <% @customers.top_customers.each do |customer| %>
+    <h5><%= "#{customer.first_name} #{customer.last_name}" %> | Number of Successful Transactions: <%= customer.count_of_successful_transactions %></h5>
+  <% end %>
 </div>

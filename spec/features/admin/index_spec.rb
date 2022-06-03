@@ -114,14 +114,20 @@ describe "Admin Dashboad" do
 # c5- 4
 # c6- 3
 # c2- 2
-# c3- 1
 
-  xit "lists the names of the top 5 customers with the largest number of successful transactions" do
+  it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
+      save_and_open_page
       expect("Leanne Braun").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
       expect("Carl Junior").to appear_before("Tony Bologna")
       expect("Tony Bologna").to appear_before("Sylvester Nader")
+
+      expect(page).to have_content("Leanne Braun | Number of Successful Transactions: 6")
+      expect(page).to have_content("Mariah Toy | Number of Successful Transactions: 5")
+      expect(page).to have_content("Carl Junior | Number of Successful Transactions: 4")
+      expect(page).to have_content("Tony Bologna | Number of Successful Transactions: 3")
+      expect(page).to have_content("Sylvester Nader | Number of Successful Transactions: 2")
     end
   end
 end
