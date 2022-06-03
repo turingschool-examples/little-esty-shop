@@ -7,16 +7,6 @@ class Customer < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
-  # TODO: refactor these methods they are basically the same
-
-  def self.favorite_customers(count)
-    joins(invoices: :transactions).
-    where(transactions: {result: true}).
-    group(:id).select('customers.*, COUNT(transactions.created_at)').
-    order('count desc').
-    limit(count)
-  end
-
   def self.count_successful_transactions(id)
     Customer.find(id).transactions.where(result: true).count
   end
