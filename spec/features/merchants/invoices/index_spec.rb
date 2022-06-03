@@ -40,4 +40,12 @@ RSpec.describe 'Merchant invoices index', type: :feature do
     expect(page).to have_content(@invoice2.id)
     expect(page).to have_content(@invoice3.id)
   end
+
+  it 'has the invoice ids as links to that invoices show page' do
+    visit "/merchants/#{@billman.id}/invoices"
+
+    click_link("#{@invoice1.id}")
+
+    expect(page).to have_current_path("/merchants/#{@billman.id}/invoices/#{@invoice1.id}")
+  end
 end

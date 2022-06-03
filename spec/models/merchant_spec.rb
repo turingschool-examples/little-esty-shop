@@ -26,7 +26,8 @@ RSpec.describe Merchant, type: :model do
       @order2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Packaged", invoice_id: @invoice1.id)
       @order3 = @mood.invoice_items.create!(quantity: 3, unit_price: 2002, status: "Shipped", invoice_id: @invoice2.id)
     end
-    it 'returns an array of items that are not shipped' do
+
+    it 'items_to_ship returns an array of items that are not shipped' do
       expect(@billman.items_to_ship[0].name).to eq("Bracelet")
       expect(@billman.items_to_ship[1].name).to eq("Mood Ring")
       expect(@billman.items_to_ship[0].invoice_id).to eq(@invoice1.id)
@@ -36,5 +37,13 @@ RSpec.describe Merchant, type: :model do
       expect(@billman.items_to_ship.pluck(:invoice_id)).to_not eq([@invoice2.id])
     end
 
+    it 'indiv_invoice_ids returns an array of invoice ids for a merchant' do
+      parker = Merchant.create!(name: "Parker's Perfection Pagoda")
+      jimbob = Customer.create!(first_name: "Jimbob", last_name: "Dudeguy")
+      invoice3 = jimbob.invoices.create!(status: "Completed")
+      invoice4 = jimbob.invoices.create!(status: "Completed")
+      expect(@billman.indiv_invoice_ids).to eq([@invoice1.id, @invoice2.id])
+      expect(@billman.indiv_invoice_ids).to_not eq([invoice3.id, invoice4.id])
+    end
   end
 end
