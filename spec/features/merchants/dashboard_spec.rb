@@ -10,10 +10,13 @@ RSpec.describe 'merchants dashboard' do
     @item4 = @merch1.items.create!(name: 'Floopy Geo', description: 'the OG', unit_price: 550)
     @invoice1 = @customer1.invoices.create!(status: 2)
     @invoice2 = @customer1.invoices.create!(status: 2)
-    InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 1000, status: 0)
-    InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 5, unit_price: 1000, status: 1)
-    InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 1000, status: 1)
-    InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 5, unit_price: 1000, status: 2)
+    @invoice3 = @customer1.invoices.create!(status: 2)
+    InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 1000, status: 0,
+                        created_at: '2022-06-02 21:08:18 UTC')
+    InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 5, unit_price: 1000, status: 1,
+                        created_at: '2022-06-01 21:08:15 UTC')
+    InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 5, unit_price: 1000, status: 1,
+                        created_at: '2022-06-03 21:08:15 UTC')
   end
   it 'shows the name of the merchant' do
     visit "/merchants/#{@merch1.id}/dashboard"
@@ -53,6 +56,7 @@ RSpec.describe 'merchants dashboard' do
 
   it 'shows invoice dates and lists them oldest to newest' do
     visit "/merchants/#{@merch1.id}/dashboard"
+    save_and_open_page
     within '#ready-items' do
       expect(@invoice1).to appear_before(@invoice2)
     end
