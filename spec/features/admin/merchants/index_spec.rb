@@ -9,7 +9,7 @@ RSpec.describe "Admin Merchant Index" do
     end
 
     describe "Admin Merchant Index" do
-        xit "displays the name of all merchants in the system" do
+        it "displays the name of all merchants in the system" do
             visit "/admin/merchants"
             expect(page).to have_content("Floopy Fopperations")
             expect(page).to have_content("A-Team")
@@ -18,17 +18,7 @@ RSpec.describe "Admin Merchant Index" do
         end
 
         it 'displays the top 5 merchants by revenue' do
-            # As an admin,
-            # When I visit the admin merchants index
-            # Then I see the names of the top 5 merchants by total revenue generated
-            # And I see that each merchant name links to the admin merchant show page for that merchant
-            # And I see the total revenue generated next to each merchant name
-            #
-            # Notes on Revenue Calculation:
-            #
-            # Only invoices with at least one successful transaction should count towards revenue
-            # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-            # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+
             @merch5 = Merchant.create!(name: 'Rawnald')
             @merch6 = Merchant.create!(name: 'Zombies R Us')
             @merch7 = Merchant.create!(name: 'We are Coffee')
@@ -58,13 +48,9 @@ RSpec.describe "Admin Merchant Index" do
             InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 500, status: 2)
             InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice3.id, quantity: 1000, unit_price: 10000, status: 2)
             InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 20000, status: 2)
-            # @merch1.total_revenue
-            # @merch8.total_revenue
-            # binding.pry
+
             visit "/admin/merchants"
-            # x = Merchant.top_five_merchants_by_revenue
-            # save_and_open_page
-            # binding.pry
+
             #making the assumption that the only "check" we are doing is if the transaction wsa successful to count towards revenue (invoice item status does not matter)
 
             expect(page).to have_content("Top 5 Merchants by Total Revenue Generated:")
@@ -84,8 +70,6 @@ RSpec.describe "Admin Merchant Index" do
             end
 
             expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
-            # binding.pry
-            # save_and_open_page
             expect(page).to have_content(@merch1.name)
             expect(page).to_not have_content(@merch2.name)
         end
