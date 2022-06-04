@@ -6,6 +6,9 @@
 <div id="ready-items">
     <h3>Items Ready to Ship</h3>
     <% @merchant.ready_items.each do |item| %>
-        <p><%= "#{item.name}" %><%= link_to "#{item.find_invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.find_invoice_id}" %> <%= item.invoice_time %></p>
+        <p><%= "#{item.name}" %><%= link_to "#{item.find_invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.find_invoice_id}" %> 
+        <% item.invoice_time.each do |invoice| %>
+            Date Ordered: <%= invoice.get_invoice_item(item.id).created_at.strftime('%A %B %e %Y') %>
+    <% end %>
     <% end %>
 </div>
