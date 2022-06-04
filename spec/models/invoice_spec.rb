@@ -30,5 +30,7 @@ RSpec.describe Invoice, type: :model do
     it "#total_revenue returns total revenue of an invoice" do
       expect(invoice1.total_revenue).to eq("$55.35")
     end
+
+    it 'returns the invoices with a'
   end
 end
