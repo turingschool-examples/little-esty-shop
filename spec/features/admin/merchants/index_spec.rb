@@ -17,4 +17,17 @@ RSpec.describe 'Admin Merchant Index Page' do
     click_link ("#{@jacobs.name}")
     expect(current_path).to eq(admin_merchant_path(@jacobs.id))
   end
+
+  it "can update merchant status to enabled/disabled" do
+    visit admin_merchants_path
+    expect(page).to_not have_button("Enable")
+    expect(page).to have_button("Disable", count: 2)
+
+    click_button 'Disable', match: :first
+
+    expect(current_path).to eq(admin_merchants_path)
+    save_and_open_page
+    expect(page).to have_button("Disable", count: 1)
+    expect(page).to have_button("Enable", count: 1)
+  end
 end
