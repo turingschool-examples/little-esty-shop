@@ -19,10 +19,10 @@ RSpec.describe "Admin dashboard" do
     @cust_6 = Customer.create!(first_name: "Bronson", last_name: "Shmonson")
     @cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
 
-    @invoice_1 = @cust_1.invoices.create!(status: 1)
-    @invoice_2 = @cust_1.invoices.create!(status: 1)
-    @invoice_3 = @cust_1.invoices.create!(status: 1)
-    @invoice_4 = @cust_2.invoices.create!(status: 1)
+    @invoice_1 = @cust_1.invoices.create!(status: 1, created_at: "2022-06-03 17:51:52")
+    @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-25 17:51:52")
+    @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+    @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
     @invoice_5 = @cust_2.invoices.create!(status: 1)
     @invoice_6 = @cust_2.invoices.create!(status: 1)
     @invoice_7 = @cust_3.invoices.create!(status: 1)
@@ -59,7 +59,7 @@ RSpec.describe "Admin dashboard" do
 
   it "shows the admin dashboard" do
     visit '/admin'
-
+    
     expect(page).to have_content "Admin Dashboard"
   end
 
@@ -83,12 +83,24 @@ RSpec.describe "Admin dashboard" do
     expect(page).to have_content(@invoice_2.id)
     expect(page).to have_content(@invoice_3.id)
     expect(page).to have_content(@invoice_4.id)
-    
+
     expect(page).to_not have_content(@invoice_5.id)
     expect(page).to_not have_content(@invoice_6.id)
     expect(page).to_not have_content(@invoice_7.id)
 
     click_link "#{@invoice_1.id}"
     expect(current_path).to eq "/admin/invoices/#{@invoice_1.id}"
+  end
+
+  it "displays the incomplete invoices created at dates and orders them by oldest to youngest" do
+    visit '/admin'
+
+    expect("#{@invoice_4.id}").to appear_before("#{@invoice_3.id}")
+    expect("#{@invoice_3.id}").to appear_before("#{@invoice_2.id}")
+    expect("#{@invoice_2.id}").to appear_before("#{@invoice_1.id}")
+    expect(page).to have_content("#{@invoice_4.id} - #{@invoice_4.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@invoice_3.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@invoice_2.id} - #{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
+    expect(page).to have_content("#{@invoice_1.id} - #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
   end
 end

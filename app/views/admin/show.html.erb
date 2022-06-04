@@ -3,10 +3,8 @@
 <%= link_to "Admin Invoice Index", "/admin/invoices" %>
 
 <h3>Incomplete Invoices</h3>
-<% @invoices.each do |invoice| %>
-  <% invoice.invoice_items.each do |ii| %>
-    <% if ii.status != "shipped" %>
-      <%= link_to "#{ii.invoice_id}", "/admin/invoices/#{ii.invoice_id}" %><br>
-    <% end %>
-  <% end %>
+<% @invoices.incomplete_invoices_ordered.each do |invoice| %>
+  <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+  <%= " - #{invoice.created_at.strftime("%A, %B %d, %Y")}" %>
+  <br>
 <% end %>

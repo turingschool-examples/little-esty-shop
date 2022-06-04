@@ -10,6 +10,7 @@ RSpec.describe Merchant do
 
   describe 'validations' do
     it { should validate_presence_of :name}
+    it { should validate_presence_of :status}
   end
 
   describe 'instance methods' do

@@ -30,4 +30,5 @@ Rails.application.routes.draw do
 
   get "/admin/invoices", to: "admin_invoices#index"
   get "/admin/invoices/:invoice_id", to: "admin_invoices#show"
+  patch "/admin/invoices/:invoice_id", to: "admin_invoices#update"
 end

@@ -3,8 +3,7 @@ class Merchant < ApplicationRecord
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
 
-
-  validates_presence_of :name
+  validates_presence_of :name, :status
 
   def items_ready_to_ship
     merchant_items = Item.where("merchant_id = #{self.id}")
