@@ -42,7 +42,7 @@
   <h3>Top Items</h3>
     <% @items.most_popular.each do |item| %>
       <ol id="topItem-<%= item.id %>", type="1">
-        <li><%= link_to "#{item.name}", "merchant_item_path(#{item.id})" %> - <%= number_to_currency(item.revenue / 100) %> in sales</li>
+        <li><%= link_to "#{item.name}", merchant_item_path(id: item.id) %> - <%= number_to_currency(item.revenue / 100) %> in sales</li>
       </ol>
     <% end %>
   </div>

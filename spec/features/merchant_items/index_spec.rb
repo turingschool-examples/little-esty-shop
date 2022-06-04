@@ -171,9 +171,9 @@ RSpec.describe 'Merchant Items Index Page' do
       within "#topItem-#{items[5].id}" do
         expect(page).to have_link("#{items[5].name}")
         expect(page).to have_content("#{items[5].name} - $400.00 in sales")
-        click_link "#{item5.name}"
+        click_link "#{items[5].name}"
       end 
-      expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item5.id}")
+      expect(current_path).to eq("/merchants/#{merchant.id}/items/#{items[5].id}")
     end
   end
 end
