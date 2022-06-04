@@ -78,15 +78,16 @@ RSpec.describe "Admin Merchant Index" do
               expect(page).to have_link(@merch4.name)
               expect(page).to have_content(40000)
               expect(page).to have_link(@merch3.name)
-              expect(page).to have_content(@merch3.merchant_total_revenue)
-              expect(page).to have_link(@merch3.name)
               expect(page).to have_content(30000)
 
               click_link(@merch1.name)
-              expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
-              expect(page).to have_content(@merch1.name)
-              expect(page).to_not have_content(@merch2.name)
             end
+
+            expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
+            # binding.pry
+            # save_and_open_page
+            expect(page).to have_content(@merch1.name)
+            expect(page).to_not have_content(@merch2.name)
         end
     end
 
