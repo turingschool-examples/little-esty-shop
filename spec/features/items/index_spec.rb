@@ -46,4 +46,31 @@ RSpec.describe Item, type: :model do
       end
     end
   end
+
+  describe "Index Page Content" do
+    it "items are placed into the section, enabled or disabled, that matches their status" do
+      merchant1 = Merchant.create!(name: 'Merchant1')
+      item1 = @merchant1.items.create!(name: 'Item1', description: 'Description1', unit_price: 111, status: 0)
+      tem11 = @merchant1.items.create!(name: 'Item11', description: 'Description11', unit_price: 1111,status: 1)
+      item111 = @merchant1.items.create!(name: 'Item111', description: 'Description111', unit_price: 11111, status: 1)
+      item1111 = @merchant1.items.create!(name: 'Item1111', description: 'Description1111', unit_price: 111111, status: 0)
+        
+      visit "/merchants/#{@merchant1.id}/items"
+
+      expect(page).to have_content("Enabled Items")
+      expect(page).to have_content("Disabled Items")
+      
+      within("#enabled_items") do
+        expect(page).to have_content("Item1")
+        expect(page).to have_content("Item1111")
+        expect(page).to_not have_content("Item11")
+      end
+
+      within("#disabled_items") do
+        expect(page).to have_content("Item11")
+        expect(page).to have_content("Item111")
+        expect(page).to_not have_content("Item1")
+      end
+    end
+  end
 end
