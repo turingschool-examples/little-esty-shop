@@ -26,6 +26,10 @@ class Merchant < ApplicationRecord
     customers_top_5 = Customer.find(cust_ids)
   end
 
+  def best_day
+    binding.pry
+  end
+
 end
 
 # merchant_items = Item.where(merchant_id: Merchant.all[26])
