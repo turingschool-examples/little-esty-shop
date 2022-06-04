@@ -1,8 +1,11 @@
 
-class AdminMerchantsController < ApplicationController 
+class AdminMerchantsController < ApplicationController
     def index
         @merchants = Merchant.all
     end
-    
-end
 
+    def show
+      @merchant = Merchant.find(params[:id])
+    end
+
+end

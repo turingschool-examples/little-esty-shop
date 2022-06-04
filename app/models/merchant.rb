@@ -31,11 +31,11 @@ class Merchant < ApplicationRecord
           .limit(5)
   end
 
-  def merchant_total_revenue
-     invoice_items.joins(:transactions)
-      .where(transactions: {result: 0})
-      .sum("invoice_items.unit_price * invoice_items.quantity")
-      # binding.pry
-  end
+  # def merchant_total_revenue
+  #    invoice_items.joins(:transactions)
+  #     .where(transactions: {result: 0})
+  #     .sum("invoice_items.unit_price * invoice_items.quantity")
+  #     # binding.pry
+  # end
 
 end
