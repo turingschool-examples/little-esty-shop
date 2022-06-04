@@ -22,7 +22,7 @@
   <div class="page-defaults" id="leftSide2">
   <h3>Incomplete Invoices</h3>
   <% @not_shipped.each do |invoice| %>
-    <%= invoice.id %>
+    <%= link_to "#{invoice.id}", invoice_path(invoice.id) %>
   <% end %>
   </div>
 </div>

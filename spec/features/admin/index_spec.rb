@@ -54,8 +54,10 @@ RSpec.describe "Admin Dashboard", type: :feature do
         expect(page).to have_link("#{invoices[2].id}")
         expect(page).to have_link("#{invoices[1].id}")
         expect(page).to have_link("#{invoices[3].id}")
-        expect(page).to_not have_link(invoices[0].id)
+        expect(page).to_not have_link("#{invoices[0].id}")
+        click_link "#{invoices[2].id}"
       end
+      expect(current_path).to eq invoice_path(invoices[2].id)
     end
   end
 end
