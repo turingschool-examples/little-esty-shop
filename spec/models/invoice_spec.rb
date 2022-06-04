@@ -33,13 +33,15 @@ RSpec.describe Invoice, type: :model do
       expect(invoices[0].total_revenue).to eq("$55.35")
     end
 
+    it 'formats the date correctly' do 
+      expect(invoices[0].formatted_date).to eq("Saturday, June 2, 2022")
+    end
   end
 
   describe ".class methods" do 
     it 'returns all invoices without a shipped status' do 
       expect(Invoice.not_shipped).to eq([invoices[0], invoices[1], invoices[2]])
       expect(Invoice.not_shipped).to_not eq(invoices[3])
-
     end
   end 
 end

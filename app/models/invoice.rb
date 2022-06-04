@@ -17,6 +17,10 @@ class Invoice < ApplicationRecord
     .where.not("invoice_items.status = ?", 2)
   end
 
+  def formatted_date
+    binding.pry
+  end
+
 private
 # Helper Methods
   def helpers
