@@ -26,4 +26,10 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     # click_link invoice1.id.to_s
     # expect(current_path).to eq
   end
+
+  it 'id links to corresponding show page' do
+    visit admin_invoices_path
+    click_link "Invoice ##{invoice1.id}"
+    expect(current_path).to eq(admin_invoices_path(invoice1.id))
+  end
 end
