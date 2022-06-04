@@ -69,20 +69,8 @@ RSpec.describe Merchant, type: :model do
     end
     
     it 'successful transactions' do 
-      # merchant = create(:merchant)
-      # customer = create(:customer)
-      # items = create_list(:item, 6, merchant: merchant)
-      # invoices = create_list(:invoice, 3, customer: customer)
-  
-      # transaction1 = create(:transaction, invoice: invoices[0], result: 1)
-      # transaction2 = create(:transaction, invoice: invoices[0], result: 1)
-      # transaction3 = create(:transaction, invoice: invoices[1], result: 0)
-      # transaction4 = create(:transaction, invoice: invoices[1], result: 1)
-      # transaction5 = create(:transaction, invoice: invoices[2], result: 0)
-      # transaction6 = create(:transaction, invoice: invoices[2], result: 0)
-  
-      
       expect(merchants[0].successful_transactions).to eq([@invoices[2], @invoices[3], @invoices[4], @invoices[5], @invoices[6], @invoices[7], @invoices[8], @invoices[9], @invoices[10], @invoices[11]])
+      expect(merchants[0].successful_transactions).to_not eq([@invoices[0], @invoices[1]])
     end
   end
 end
