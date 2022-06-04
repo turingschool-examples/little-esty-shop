@@ -14,10 +14,9 @@ RSpec.describe "Admin Merchant Edit Page" do
     fill_in "name", with: "Mike"
     click_on 'Save'
     expect(current_path).to eq(admin_merchant_path(@jacobs.id))
-    save_and_open_page
     expect(page).to have_content("Merchant Name: Mike")
     expect(page).to have_content("Merchant Information Has Been Successfully Updated")
-    
+
     expect(page).to_not have_content("Merchant Name: Jacobs")
   end
 
