@@ -40,6 +40,6 @@ RSpec.describe Merchant do
         it "list the top 5 items by revenue per a specific merchant" do
             expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
         end
-        
+
     end
 end

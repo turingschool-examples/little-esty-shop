@@ -171,7 +171,7 @@ RSpec.describe 'merchants items index' do
 
   it "displays items best day" do
     visit "/merchants/#{@merch1.id}/items"
-    save_and_open_page
+    # save_and_open_page
     within "#top-items" do
       expect(page).to have_content(@invoice1.updated_at)
       expect(page).to have_content(@merch1.top_five_items_by_revenue.first.item_best_day)
