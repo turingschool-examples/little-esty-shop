@@ -9,7 +9,7 @@ RSpec.describe "Admin Merchant Index" do
     end
 
     describe "Admin Merchant Index" do
-        it "displays the name of all merchants in the system" do
+        xit "displays the name of all merchants in the system" do
             visit "/admin/merchants"
             expect(page).to have_content("Floopy Fopperations")
             expect(page).to have_content("A-Team")
@@ -57,23 +57,30 @@ RSpec.describe "Admin Merchant Index" do
             InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice2.id, quantity: 6, unit_price: 10000, status: 2)
             InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 500, status: 2)
             InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice3.id, quantity: 1000, unit_price: 10000, status: 2)
-            InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice1.id, quantity: 1000, unit_price: 10000, status: 2)
+            InvoiceItem.create!(item_id: @item9.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 20000, status: 2)
+            # @merch1.total_revenue
+            # @merch8.total_revenue
+            # binding.pry
             visit "/admin/merchants"
-            binding.pry
+            # x = Merchant.top_five_merchants_by_revenue
+            # save_and_open_page
+            # binding.pry
             #making the assumption that the only "check" we are doing is if the transaction wsa successful to count towards revenue (invoice item status does not matter)
 
             expect(page).to have_content("Top 5 Merchants by Total Revenue Generated:")
             within "#top-5-merchants" do
               expect(page).to have_link(@merch1.name)
-              expect(page).to have_content(@merch1.total_revenue)
-              expect(page).to have_link(@merch2.name)
-              expect(page).to have_content(@merch2.total_revenue)
-              expect(page).to have_link(@merch3.name)
-              expect(page).to have_content(@merch3.total_revenue)
-              expect(page).to have_link(@merch4.name)
-              expect(page).to have_content(@merch4.total_revenue)
+              expect(page).to have_content(210000)
+              expect(page).to have_link(@merch6.name)
+              expect(page).to have_content(60000)
               expect(page).to have_link(@merch5.name)
-              expect(page).to have_content(@merch5.total_revenue)
+              expect(page).to have_content(50000)
+              expect(page).to have_link(@merch4.name)
+              expect(page).to have_content(40000)
+              expect(page).to have_link(@merch3.name)
+              expect(page).to have_content(@merch3.merchant_total_revenue)
+              expect(page).to have_link(@merch3.name)
+              expect(page).to have_content(30000)
 
               click_link(@merch1.name)
               expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
