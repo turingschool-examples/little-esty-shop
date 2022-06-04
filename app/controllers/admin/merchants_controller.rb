@@ -20,4 +20,13 @@ class Admin::MerchantsController < ApplicationController
     flash[:notice] = "You have successfully updated this Merchant!"
     redirect_to admin_merchant_path(merchant)
   end
+
+  def new
+
+  end
+
+  def create
+    @merchant = Merchant.create!(params.permit(:name))
+    redirect_to admin_merchants_path
+  end
 end
