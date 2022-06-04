@@ -1,2 +1,3 @@
 <%= render partial: 'form', locals: {model: [@merchant, @item],
+                                     url: new_merchant_item_path(@merchant.id),
                                       button_text: 'Submit'} %>

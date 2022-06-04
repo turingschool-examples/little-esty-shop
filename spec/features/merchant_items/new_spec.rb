@@ -4,7 +4,6 @@ RSpec.describe 'New Merchant Items Page' do
   describe 'form' do
     it 'takes the user to a new form page when clicked' do
       visit merchant_items_path(merchant.id)
-
       click_link 'Create New Item'
       expect(current_path).to eq(new_merchant_item_path(merchant.id))
 
