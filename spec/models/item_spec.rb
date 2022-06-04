@@ -61,7 +61,7 @@ RSpec.describe Item, type: :model do
       invoice_item11 = create(:invoice_item, item: items[4], invoice: invoices[1], quantity: 7, unit_price: 5)
       invoice_item12 = create(:invoice_item, item: items[5], invoice: invoices[1], quantity: 9, unit_price: 6)
 
-      expect(Item.most_popular).to eq([items[3], @items[5], @items[2], @items[4], @items[1]])
+      expect(Item.most_popular).to eq([items[3], items[5], items[2], items[4], items[1]])
     end
   end
 end
