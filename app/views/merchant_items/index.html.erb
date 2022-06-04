@@ -39,9 +39,13 @@
   </div>
 
   <div class="page-defaults" id="rightSide2">
-  <div id="topItems">
   <h3>Top Items</h3>
-  </div>
+    <% @items.most_popular.each do |item| %>
+      <div id="topItems">
+      <ol type="1">
+        <li><%= item.name %> - <%= number_to_currency(item.revenue / 100) %> in sales</li>
+      </div>
+    <% end %>
   </div>
 
 </div>
