@@ -6,6 +6,7 @@
 
   <div class="page-defaults" id="leftSide">
     <%= @merchant.name %>
+    <p> <%= link_to 'Create New Item', "/merchants/#{@merchant.id}/items/new" %></p>
   </div>
 
   <div class="page-defaults" id="rightSide">
