@@ -48,6 +48,8 @@ RSpec.describe Item, type: :model do
   end
 
   describe "Index Page Content" do
+    InvoiceItem.joins(:item).where(items: {status: 0}).count
+   
     it "items are placed into the section, enabled or disabled, that matches their status" do
       merchant1 = Merchant.create!(name: 'Merchant1')
       item1 = @merchant1.items.create!(name: 'Item1', description: 'Description1', unit_price: 111, status: 0)
