@@ -13,11 +13,8 @@ Rails.application.routes.draw do
 
   resources :admin, only: [:index]
 
-  # get '/admin/merchants', to: 'admin_merchants#index'
-  # get '/admin/invoices', to: 'admin_invoices#index'
-
   scope :admin do 
-    resources :merchants, controller: 'admin_merchants', only: [:index]
+    resources :merchants, controller: 'admin_merchants', only: [:index, :show]
     resources :invoices, controller: 'admin_invoices', only: [:index, :show]
   end 
 end
