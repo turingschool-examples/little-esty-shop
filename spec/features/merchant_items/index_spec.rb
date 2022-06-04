@@ -105,5 +105,14 @@ RSpec.describe 'Merchant Items Index Page' do
 
       expect(page).to have_link("Create New Item")
     end
+
+    it 'takes the user to a new form page when clicked' do 
+      visit "/merchants/#{merchant.id}/items"
+
+      click_link "Create New User"
+      expect(current_path).to eq("/merchants/#{merchant.id}/items/new")
+
+      
+    end
   end
 end
