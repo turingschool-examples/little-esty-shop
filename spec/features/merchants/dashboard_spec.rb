@@ -37,9 +37,9 @@ RSpec.describe 'merchants dashboard' do
     within '#ready-items' do
       expect(page).to have_content('Items Ready to Ship')
       expect(page).to have_content('Floopy Updated')
-      expect(page).to have_content(@invoice1.id.to_s)
-      expect(page).to have_content('Floopy Retro')
       expect(page).to have_content(@invoice2.id.to_s)
+      expect(page).to have_content('Floopy Retro')
+      expect(page).to have_content(@invoice3.id.to_s)
       expect(page).to_not have_content('Floopy Original')
       expect(page).to_not have_content('Floopy Geo')
     end
@@ -48,17 +48,16 @@ RSpec.describe 'merchants dashboard' do
   it 'has link from items ready to ship that leads to merchant invoice show page' do
     visit "/merchants/#{@merch1.id}/dashboard"
     within '#ready-items' do
-      expect(page).to have_content(@invoice1.id.to_s)
-      click_link @invoice1.id.to_s
+      expect(page).to have_content(@invoice2.id.to_s)
+      click_link @invoice2.id.to_s
     end
-    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice1.id}")
+    expect(current_path).to eq("/merchants/#{@merch1.id}/invoices/#{@invoice2.id}")
   end
 
   it 'shows invoice dates and lists them oldest to newest' do
     visit "/merchants/#{@merch1.id}/dashboard"
-    save_and_open_page
     within '#ready-items' do
-      expect(@invoice1).to appear_before(@invoice2)
+      expect(@invoice2.get_invoice_item(@item2.id).created_at.strftime('%A %B %e %Y')).to appear_before(@invoice3.get_invoice_item(@item3.id).created_at.strftime('%A %B %e %Y'))
     end
   end
 end

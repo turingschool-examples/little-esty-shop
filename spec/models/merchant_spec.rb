@@ -39,7 +39,7 @@ RSpec.describe Merchant do
 
 
         it 'returns the revenue of all items on the invoice' do
-          expect(@invoice1.total_revenue(@merch1.id)).to eq(10000)
+          expect(@invoice1.total_revenue(@merch1.id)).to eq(90500)
         end
 
         it "list the top 5 items by revenue per a specific merchant" do
