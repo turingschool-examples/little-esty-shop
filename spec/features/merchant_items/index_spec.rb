@@ -140,28 +140,39 @@ RSpec.describe 'Merchant Items Index Page' do
     it "has the top 5 most popular items ranked by total revenue generated" do
       visit "/merchants/#{merchant.id}/items"
       save_and_open_page
-      expect(page).to have_content("Top Items")
-      
-      within "#topItems" do
+      within "#rightSide2" do 
+        expect(page).to have_content("Top Items")
         expect(items[3].name).to appear_before(items[5].name)
         expect(items[5].name).to appear_before(items[2].name)
         expect(items[2].name).to appear_before(items[4].name)
         expect(items[4].name).to appear_before(items[1].name)
-
-        expect(items[4].name).to have_link("#{items[4].name}")
-        expect(items[4].name).to have_link("#{items[5].name}")
-        expect(items[4].name).to have_link("#{items[3].name}")
-        expect(items[4].name).to have_link("#{items[2].name}")
-        expect(items[4].name).to have_link("#{items[1].name}")
-
-        # expect(page).to have_content("#{items[4].name} - #{items[4].total_revenue} in sales")
-        # expect(page).to have_content("#{items[5].name} - #{items[5].total_revenue} in sales")
-        # expect(page).to have_content("#{items[3].name} - #{items[3].total_revenue} in sales")
-        # expect(page).to have_content("#{items[2].name} - #{items[2].total_revenue} in sales")
-        # expect(page).to have_content("#{items[1].name} - #{items[1].total_revenue} in sales")
-        click_link "#{item5.name}"
+      end 
+      
+      within "#topItem-#{items[1].id}" do
+        expect(page).to have_link("#{items[1].name}")
+        expect(page).to have_content("#{items[1].name} - $60.00 in sales")
+      end 
+      
+      within "#topItem-#{items[2].id}" do
+        expect(page).to have_link("#{items[2].name}")
+        expect(page).to have_content("#{items[2].name} - $153.00 in sales")
       end
+        
+      within "#topItem-#{items[3].id}" do
+        expect(page).to have_link("#{items[3].name}")
+        expect(page).to have_content("#{items[3].name} - $1,280.00 in sales")
+      end 
 
+      within "#topItem-#{items[4].id}" do
+        expect(page).to have_link("#{items[4].name}")
+        expect(page).to have_content("#{items[4].name} - $120.00 in sales")
+      end 
+
+      within "#topItem-#{items[5].id}" do
+        expect(page).to have_link("#{items[5].name}")
+        expect(page).to have_content("#{items[5].name} - $400.00 in sales")
+        click_link "#{item5.name}"
+      end 
       expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item5.id}")
     end
   end
