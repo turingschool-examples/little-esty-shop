@@ -45,5 +45,17 @@ RSpec.describe "Admin Dashboard", type: :feature do
         expect(page).to_not have_content(invoices[0].id)
       end
     end
+
+    it 'has each id as a link to a show page' do 
+      visit admin_index_path
+
+      within "#leftSide2" do 
+        expect(page).to have_content("Incomplete Invoices")
+        expect(page).to have_link("#{invoices[2].id}")
+        expect(page).to have_link("#{invoices[1].id}")
+        expect(page).to have_link("#{invoices[3].id}")
+        expect(page).to_not have_link(invoices[0].id)
+      end
+    end
   end
 end
