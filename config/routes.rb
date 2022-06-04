@@ -17,4 +17,5 @@ Rails.application.routes.draw do
     resources :merchants, controller: 'admin_merchants', only: [:index, :show]
     resources :invoices, controller: 'admin_invoices', only: [:index, :show]
   end 
+
 end
