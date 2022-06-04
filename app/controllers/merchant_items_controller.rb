@@ -33,7 +33,8 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-    # @item = Item.create
+    merchant = Merchant.find(params[:merchant_id])
+    @item = merchant.items.create!(item_params)
   end
 
   private
