@@ -26,7 +26,6 @@ RSpec.describe 'Admin Merchant Index Page' do
     click_button 'Disable', match: :first
 
     expect(current_path).to eq(admin_merchants_path)
-    save_and_open_page
     expect(page).to have_button("Disable", count: 1)
     expect(page).to have_button("Enable", count: 1)
   end
