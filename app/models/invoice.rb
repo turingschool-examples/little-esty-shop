@@ -18,7 +18,7 @@ class Invoice < ApplicationRecord
   end
 
   def formatted_date
-    binding.pry
+    created_at.strftime("%A, %B %d, %Y")
   end
 
 private

@@ -34,7 +34,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     it 'formats the date correctly' do 
-      expect(invoices[0].formatted_date).to eq("Saturday, June 2, 2022")
+      expect(invoices[0].formatted_date).to eq("Saturday, June 04, 2022")
     end
   end
 
