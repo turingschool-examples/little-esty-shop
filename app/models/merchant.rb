@@ -19,4 +19,5 @@ class Merchant < ApplicationRecord
   def successful_transactions
     invoices.joins(:transactions).select("invoices.*, transactions.result").where("transactions.result = 0").distinct
   end
+
 end
