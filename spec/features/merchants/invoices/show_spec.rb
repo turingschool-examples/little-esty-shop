@@ -34,7 +34,12 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
 
   it 'displays all the information pertaining to an invoice' do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
+
     expect(page).to have_content(@invoice1.id)
+    expect(page).to_not have_content(@invoice2.id)
+    expect(page).to_not have_content(@invoice3.id)
+    expect(page).to_not have_content(@invoice4.id)
+    expect(page).to_not have_content(@invoice5.id)
 
     testdate = Date.today.strftime('%A, %B %-e, %Y') #test is rendering with an extra space between month and day, modified in test to be one space only
 
