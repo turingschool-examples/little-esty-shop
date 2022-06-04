@@ -92,4 +92,4 @@ RSpec.describe Merchant do
       end
     end
   end
-end
+
