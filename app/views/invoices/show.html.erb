@@ -2,7 +2,7 @@
 <b>Status:</b> <%= @invoice.status.titleize %><br>
 <b>Created at:</b> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
 <div class="customer">
-  Customer Name: <%= @invoice.invoice_customer %><br>
+  <b>Customer Name:</b> <%= @invoice.invoice_customer %><br><br>
 </div>
 
 <h2>Invoice Items</h2>
