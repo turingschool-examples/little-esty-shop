@@ -33,4 +33,13 @@ class Merchant < ApplicationRecord
   def self.disabled
     where(status: 0)
   end
+    
+  def top_five_favorite_customers
+    customers.joins(invoices: :transactions)
+    .where(transactions: { result: true })
+    .select('customers.*, count(transactions.*) as transaction_count')
+    .group('customers.id')
+    .order(transaction_count: :desc)
+    .limit(5)
+  end
 end
