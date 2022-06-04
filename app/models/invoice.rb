@@ -15,6 +15,7 @@ class Invoice < ApplicationRecord
     all
     .joins(:invoice_items)
     .where.not("invoice_items.status = ?", 2)
+    .order(created_at: :desc)
   end
 
   def formatted_date

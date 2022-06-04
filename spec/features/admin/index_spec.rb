@@ -62,12 +62,12 @@ RSpec.describe "Admin Dashboard", type: :feature do
 
     it 'has a formatted date for invoices completed and is ordered from oldest to newest' do 
       visit admin_index_path
-
+      # save_and_open_page
       within "#leftSide2" do 
-        expect(invoices[0]).to appear_before(invoices[1])
-        expect(invoices[1]).to appear_before(invoices[2])
-        expect(invoices[2]).to appear_before(invoices[3])
-        expect(page).to have_content("Invoice ##{invoices[0].id} - #{invoices[0].created_at.strftime("%A, %B %d, %Y")}")
+        expect("#{invoices[3].id}").to appear_before("#{invoices[2].id}")
+        expect("#{invoices[2].id}").to appear_before("#{invoices[1].id}")
+        expect(page).to have_content("Invoice ##{invoices[1].id} - #{invoices[1].created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to_not have_content("Invoice ##{invoices[0].id}")
       end
     end
   end
