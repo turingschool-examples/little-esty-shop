@@ -7,6 +7,7 @@ require 'rails_helper'
 # Then I see the name of each merchant in the system
 
 RSpec.describe "Admin Merchants Index Page ", type: :feature do
+  describe 'User Story 1 - Admin Merchants Index'
   let!(:merchants) { create_list(:merchant, 2) }
 
   it "can display all the merchants" do
