@@ -27,6 +27,10 @@ class MerchantItemsController < ApplicationController
     end
   end
 
+  def new
+    @item = Item.new
+  end
+
   private
 
   def item_params
