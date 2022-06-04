@@ -64,7 +64,7 @@ RSpec.describe 'merchant items index page' do
 
   it "lists the 5 most popular items by revenue" do
     visit "/merchants/#{@merch_1.id}/items"
-    
+
     within "#top_5_items" do
       expect(@item_6.name).to appear_before(@item_5.name)
       expect(@item_5.name).to appear_before(@item_4.name)
