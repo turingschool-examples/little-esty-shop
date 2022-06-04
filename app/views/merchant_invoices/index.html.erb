@@ -1,1 +1,7 @@
-<h1>INVOICES INDEX</h1>
+<h1>Little Esty Shop</h1>
+<h2><%= @merchant.name %></h2>
+
+<h3>My Invoices</h3>
+<% @merchant.indiv_invoice_ids.each do |id| %>
+<p>Invoice #<%= link_to "#{id}", "/merchants/#{@merchant.id}/invoices/#{id}"%></p>
+<% end %>

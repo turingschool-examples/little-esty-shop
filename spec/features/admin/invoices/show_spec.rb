@@ -2,20 +2,20 @@ require 'rails_helper'
 
 RSpec.describe "Admin Invoice Show Page" do
   before :each do
-    @billman = Merchant.create!(name: "Billman", created_at: Time.now, updated_at: Time.now)
+    @billman = Merchant.create!(name: "Billman")
 
-    @bracelet = @billman.items.create!(name: "Bracelet", description: "shiny", unit_price: 1001, created_at: Time.now, updated_at: Time.now)
-    @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002, created_at: Time.now, updated_at: Time.now)
-    @necklace = @billman.items.create!(name: "Necklace", description: "Sparkly", unit_price: 3045, created_at: Time.now, updated_at: Time.now)
+    @bracelet = @billman.items.create!(name: "Bracelet", description: "shiny", unit_price: 1001)
+    @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002)
+    @necklace = @billman.items.create!(name: "Necklace", description: "Sparkly", unit_price: 3045)
 
-    @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka", created_at: Time.now, updated_at: Time.now)
+    @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka")
 
-    @invoice_1 = @customer_1.invoices.create!(status: "cancelled", created_at: Time.now, updated_at: Time.now)
-    @invoice_2 = @customer_1.invoices.create!(status: "in progress", created_at: Time.now, updated_at: Time.now)
+    @invoice_1 = @customer_1.invoices.create!(status: "cancelled")
+    @invoice_2 = @customer_1.invoices.create!(status: "in progress")
 
-    @invoice_items_1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice_1.id, created_at: Time.now, updated_at: Time.now)
-    @invoice_items_2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Pending", invoice_id: @invoice_2.id, created_at: Time.now, updated_at: Time.now)
-    @invoice_items_3 = @necklace.invoice_items.create!(quantity: 1, unit_price: 3003, status: "Pending", invoice_id: @invoice_1.id, created_at: Time.now, updated_at: Time.now)
+    @invoice_items_1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice_1.id)
+    @invoice_items_2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Pending", invoice_id: @invoice_2.id)
+    @invoice_items_3 = @necklace.invoice_items.create!(quantity: 1, unit_price: 3003, status: "Pending", invoice_id: @invoice_1.id)
   end
 
   it "shows all attributes of an invoice" do
