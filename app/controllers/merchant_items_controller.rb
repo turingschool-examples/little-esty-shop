@@ -33,8 +33,10 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
+    # binding.pry
     merchant = Merchant.find(params[:merchant_id])
     @item = merchant.items.create!(item_params)
+    redirect_to merchant_items_path(merchant.id)
   end
 
   private
@@ -45,7 +47,7 @@ class MerchantItemsController < ApplicationController
       :name,
       :description,
       :status,
-      unit_price: params[:unit_price].to_f / 100.0
+      :unit_price
     )
   end
 end
