@@ -9,7 +9,7 @@
 <section id="invoiceItemsDetails">
   <h4>Items on this Invoice</h4>
   <% @invoice.invoice_items.each do |invoice_item| %>
-    <% if invoice_item.item.merchant == @merchant %>
+    <% if invoice_item.belongs_to_merchant(@merchant) %>
       <p class="invoiceItem"><%= invoice_item.item.name %></p>
       <p>Quantity: <%= invoice_item.quantity %></p>
       <p>Price: <%= invoice_item.unit_price %></p>
