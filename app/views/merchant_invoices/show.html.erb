@@ -1,1 +1,8 @@
-<h1> MERCHANT INVOICE SHOW PAGE </h1>
+<h1> Little Esty Shop </h1>
+<h3>Invoice #<%= @invoice.id %></h3>
+<section id="invoiceDetails">
+  <p> Status: <%= "#{@invoice.status}"%> </p><br>
+  <p> Created on: <%= "#{@invoice.created_at_format}" %> </p><br>
+  <h4>Customer:</h4>
+  <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
+</section>
