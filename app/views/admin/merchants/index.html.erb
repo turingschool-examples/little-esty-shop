@@ -1,7 +1,17 @@
-<h1>Admin Merchants Index</h1>
+<%= render 'partials/navbar_admin' %><br>
 
-<div class="merchant_index">
-  <ul><% @merchants.each do |merchant| %>
+<h2>Admin Merchants Index</h2>
+
+<div class="enabled-merchants">
+  <h3> Status: Enabled </h3>
+  <ul><% @enabled_merchants.each do |merchant| %>
+    <li><%= merchant.name %></li>
+  <% end %></ul>
+</div>
+
+<div class="disabled-merchants">
+  <h3> Status: Disabled </h3>
+  <ul><% @disabled_merchants.each do |merchant| %>
     <li><%= merchant.name %></li>
   <% end %></ul>
 </div>

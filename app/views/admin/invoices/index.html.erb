@@ -1,3 +1,5 @@
+<%= render 'partials/navbar_admin' %><br>
+
 <h1>Admin Invoices Index</h1>
 <h2> Invoices </h2>
 
@@ -6,3 +8,4 @@
     <li>Invoice: <%= link_to invoice.id, admin_invoice_path(invoice.id) %></li>
   <% end %>
 </div>
+

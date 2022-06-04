@@ -14,6 +14,7 @@ RSpec.describe Merchant do
   end
 
   describe 'instance methods' do
+
     let!(:merchant_1) {Merchant.create!(name: "REI")}
     let!(:merchant_2) {Merchant.create!(name: "Target")}
 
@@ -59,11 +60,16 @@ RSpec.describe Merchant do
     let!(:transaction6) { Transaction.create!(invoice_id: invoice5.id, credit_card_number: 4203696133194408, credit_card_expiration_date: "5/22", result: "success") }
     let!(:transaction7) { Transaction.create!(invoice_id: invoice6.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "failed") }
 
-    describe '#top_five_items' do
-      it "lists the top five items ordered in highest to lowest revenue" do
-        expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
-      end
+  describe '#top_five_items' do
+    it "lists the top five items ordered in highest to lowest revenue" do
+      expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
     end
+  end
+  
+  # describe '#top_date_by_revenue' do
+    #   it "returns the date with the most revenue for each merchant" do
+    #   end
+  # end
 
     describe '#items_ready_to_ship' do
       it 'returns an array of items ready to ship ordered by invoice date' do
