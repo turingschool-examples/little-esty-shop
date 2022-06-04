@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
  def index
-
- end
+  @not_shipped = Invoice.not_shipped
+  end
 end
