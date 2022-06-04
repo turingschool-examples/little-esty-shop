@@ -32,7 +32,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     @order7 = @beard.invoice_items.create!(quantity: 1, unit_price: 5099, status: "Packaged", invoice_id: @invoice4.id)
   end
 
-  xit 'displays all the information pertaining to an invoice' do
+  it 'displays all the information pertaining to an invoice' do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
 
     expect(page).to have_content(@invoice1.id)
@@ -50,7 +50,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     end
   end
 
-  xit 'lists all the items on the invoice' do
+  it 'lists all the items on the invoice' do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
 
     expect(page).to have_content(@bracelet.name)
@@ -71,7 +71,6 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
 
   it 'lists all the items on the invoice from just the designated merchant' do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice3.id}"
-    save_and_open_page
 
     expect(page).to have_content(@necklace.name)
     expect(page).to_not have_content(@balm.name)
@@ -83,9 +82,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
       expect(page).to have_content("Price: #{@necklace.unit_price}")
       expect(page).to have_content("Status: #{@order6.status}")
       expect(page).to_not have_content(@balm.name)
-      expect(page).to_not have_content("Quantity: #{@order7.quantity}")
       expect(page).to_not have_content("Price: #{@balm.unit_price}")
-      expect(page).to_not have_content("Status: #{@order7.status}")
     end
   end
 end
