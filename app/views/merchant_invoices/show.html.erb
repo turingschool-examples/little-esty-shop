@@ -9,9 +9,11 @@
 <section id="invoiceItemsDetails">
   <h4>Items on this Invoice</h4>
   <% @invoice.invoice_items.each do |invoice_item| %>
-    <p class="invoiceItem"><%= invoice_item.item.name %></p>
-    <p>Quantity: <%= invoice_item.quantity %></p>
-    <p>Price: <%= invoice_item.unit_price %></p>
-    <p>Status: <%= invoice_item.status %></p>
+    <% if invoice_item.item.merchant == @merchant %>
+      <p class="invoiceItem"><%= invoice_item.item.name %></p>
+      <p>Quantity: <%= invoice_item.quantity %></p>
+      <p>Price: <%= invoice_item.unit_price %></p>
+      <p>Status: <%= invoice_item.status %></p>
+      <% end %>
     <% end %>
 </section>
