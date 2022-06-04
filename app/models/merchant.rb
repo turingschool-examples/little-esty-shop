@@ -7,12 +7,11 @@ class Merchant < ApplicationRecord
 
   def ready_items
     items.joins(:invoices).select('items.*')
-         .where("invoice_items.status = 1")
-         .group("items.id")
+         .where('invoice_items.status = 1')
+         .group('items.id')
          .distinct
          .order(:created_at)
   end
-
 
   def top_five_items_by_revenue
     items.joins(invoice_items: :transactions)
@@ -31,12 +30,4 @@ class Merchant < ApplicationRecord
           .order(total_revenue: :desc)
           .limit(5)
   end
-
-  # def merchant_total_revenue
-  #    invoice_items.joins(:transactions)
-  #     .where(transactions: {result: 0})
-  #     .sum("invoice_items.unit_price * invoice_items.quantity")
-  #     # binding.pry
-  # end
-
 end
