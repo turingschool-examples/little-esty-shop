@@ -15,9 +15,10 @@ Rails.application.routes.draw do
 
   get '/admin/merchants', to: 'admin_merchants#index'
   get '/admin/invoices', to: 'admin_invoices#index'
+  get '/admin/invoices/:invoice_id', to: 'admin_invoices#show'
 
   # namespace :admin do
   #   resources :merchants, controller: 'admin_merchants', only: [:index]
   #   resources :invoices, controller: 'admin_invoices', only: [:index]
-# end
+  # end
 end

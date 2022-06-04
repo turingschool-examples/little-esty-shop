@@ -17,9 +17,12 @@
 
 <div class="page-defaults" id="splitSides">
   <div class="page-defaults" id="leftSide2">
-    <h2>Invoices</h2>
-    <% @invoices.each do |invoice| %>
-      <p><%=  "Invoice ##{invoice.id}" %> </p>
-    <% end %>
+    <h2>Invoice #<%= "#{@invoice.id}" %> </h2>
+    <p><%=  "Status: #{@invoice.status}" %> </p>
+    <p><%= "Created on: #{@invoice.created_at}" %></p>
+    <h3>Customer:</h3>
+    <div>
+      <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
+    </div>
   </div>
 </div>
