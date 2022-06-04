@@ -65,31 +65,30 @@ RSpec.describe Merchant do
       expect(merchant_1.top_five_items).to eq([item1, item2, item6, item3, item4])
     end
   end
-  
+
   # describe '#top_date_by_revenue' do
     #   it "returns the date with the most revenue for each merchant" do
     #   end
   # end
 
-    describe '#items_ready_to_ship' do
-      it 'returns an array of items ready to ship ordered by invoice date' do
-        expect(merchant_1.items_ready_to_ship.first.id).to eq(invoice1.id)
-        expect(merchant_1.items_ready_to_ship.first.name).to eq("Boots")
-        expect(merchant_1.items_ready_to_ship.first.created_at).to eq(invoice1.created_at)
-      end
-    end
-
-    describe '#top_five_favorite_customers'
-      it "returns an array of the customers with the most transactions from the merchant" do
-        expect(merchant_1.top_five_favorite_customers).to eq([customer5, customer1, customer4, customer2, customer3])
-      end
-
-      it "counts the number of successful transactions of a customer" do
-        test_customers = merchant_1.top_five_favorite_customers
-
-        expect(test_customers[0].transaction_count).to eq(4)
-        expect(test_customers[4].transaction_count).to eq(1)
-      end
+  describe '#items_ready_to_ship' do
+    it 'returns an array of items ready to ship ordered by invoice date' do
+      expect(merchant_1.items_ready_to_ship.first.id).to eq(invoice1.id)
+      expect(merchant_1.items_ready_to_ship.first.name).to eq("Boots")
+      expect(merchant_1.items_ready_to_ship.first.created_at).to eq(invoice1.created_at)
     end
   end
 
+  describe '#top_five_favorite_customers'
+    it "returns an array of the customers with the most transactions from the merchant" do
+      expect(merchant_1.top_five_favorite_customers).to eq([customer5, customer1, customer4, customer2, customer3])
+    end
+
+    it "counts the number of successful transactions of a customer" do
+      test_customers = merchant_1.top_five_favorite_customers
+
+      expect(test_customers[0].transaction_count).to eq(4)
+      expect(test_customers[4].transaction_count).to eq(1)
+    end
+  end
+end
