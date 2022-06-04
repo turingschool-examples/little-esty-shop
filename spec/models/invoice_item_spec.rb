@@ -7,6 +7,9 @@ RSpec.describe InvoiceItem, type: :model do
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka")
     @invoice_1 = @customer_1.invoices.create!(status: "cancelled")
     @invoice_items_1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice_1.id)
+
+    @parker = Merchant.create!(name: "Parker's Perfection Pagoda")
+
   end
 
   describe 'relationships' do
@@ -26,5 +29,14 @@ RSpec.describe InvoiceItem, type: :model do
       expect(@invoice_items_1.price_convert).to eq(10.01)
     end
 
+    it 'belongs to merchant returns true if an invoice item belongs to the given merchant' do
+
+      expect(@invoice_items_1.belongs_to_merchant(@billman)).to eq(true)
+    end
+
+    it 'belongs to merchant returns false if an invoice item does not belong to the given merchant' do
+
+      expect(@invoice_items_1.belongs_to_merchant(@parker)).to eq(false)
+    end
   end
 end
