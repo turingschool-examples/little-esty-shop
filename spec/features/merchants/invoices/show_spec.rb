@@ -11,7 +11,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     @necklace = @billman.items.create!(name: "Necklace", description: "Sparkly", unit_price: 3045)
 
     @beard = @parker.items.create!(name: "Beard Oil", description: "Lavender Scented", unit_price: 5099)
-    @balm = @billman.items.create!(name: "Shaving Balm", description: "Balmy", unit_price: 4599)
+    @balm = @parker.items.create!(name: "Shaving Balm", description: "Balmy", unit_price: 4599)
 
     @brenda = Customer.create!(first_name: "Brenda", last_name: "Bhoddavista")
     @jimbob = Customer.create!(first_name: "Jimbob", last_name: "Dudeguy")
@@ -24,7 +24,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     @invoice5 = @casey.invoices.create!(status: "Completed")
 
     @order1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice1.id)
-    @order2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Packaged", invoice_id: @invoice1.id)
+    @order2 = @mood.invoice_items.create!(quantity: 5, unit_price: 2002, status: "Packaged", invoice_id: @invoice1.id)
     @order3 = @mood.invoice_items.create!(quantity: 3, unit_price: 2002, status: "Pending", invoice_id: @invoice2.id)
     @order4 = @beard.invoice_items.create!(quantity: 5, unit_price: 5099, status: "Shipped", invoice_id: @invoice5.id)
     @order5 = @balm.invoice_items.create!(quantity: 3, unit_price: 4599, status: "Shipped", invoice_id: @invoice3.id)
@@ -32,7 +32,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     @order7 = @beard.invoice_items.create!(quantity: 1, unit_price: 5099, status: "Packaged", invoice_id: @invoice4.id)
   end
 
-  it 'displays all the information pertaining to an invoice' do
+  xit 'displays all the information pertaining to an invoice' do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
 
     expect(page).to have_content(@invoice1.id)
@@ -47,6 +47,45 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
       expect(page).to have_content(@invoice1.status)
       expect(page).to have_content("Created on: #{testdate}")
       expect(page).to have_content("Brenda Bhoddavista")
+    end
+  end
+
+  xit 'lists all the items on the invoice' do
+    visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
+
+    expect(page).to have_content(@bracelet.name)
+    expect(page).to have_content(@mood.name)
+    expect(page).to_not have_content(@beard.name)
+
+    within "#invoiceItemsDetails" do
+      expect(page).to have_content(@bracelet.name)
+      expect(page).to have_content("Quantity: #{@order1.quantity}")
+      expect(page).to have_content("Price: #{@bracelet.unit_price}")
+      expect(page).to have_content("Status: #{@order1.status}")
+      expect(page).to have_content(@mood.name)
+      expect(page).to have_content("Quantity: #{@order2.quantity}")
+      expect(page).to have_content("Price: #{@mood.unit_price}")
+      expect(page).to have_content("Status: #{@order2.status}")
+    end
+  end
+
+  it 'lists all the items on the invoice from just the designated merchant' do
+    visit "/merchants/#{@billman.id}/invoices/#{@invoice3.id}"
+    save_and_open_page
+
+    expect(page).to have_content(@necklace.name)
+    expect(page).to_not have_content(@balm.name)
+    expect(page).to_not have_content(@beard.name)
+
+    within "#invoiceItemsDetails" do
+      expect(page).to have_content(@necklace.name)
+      expect(page).to have_content("Quantity: #{@order6.quantity}")
+      expect(page).to have_content("Price: #{@necklace.unit_price}")
+      expect(page).to have_content("Status: #{@order6.status}")
+      expect(page).to_not have_content(@balm.name)
+      expect(page).to_not have_content("Quantity: #{@order7.quantity}")
+      expect(page).to_not have_content("Price: #{@balm.unit_price}")
+      expect(page).to_not have_content("Status: #{@order7.status}")
     end
   end
 end
