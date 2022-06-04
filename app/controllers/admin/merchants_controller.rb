@@ -14,14 +14,20 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
+    old_enabled = merchant.enabled
     merchant.update(merchant_params)
     merchant.save
-    flash[:notice] = "Merchant Information Has Been Successfully Updated"
-    redirect_to admin_merchant_path(merchant.id)
+
+    if old_enabled == merchant.enabled
+      flash[:notice] = "Merchant Information Has Been Successfully Updated"
+      redirect_to admin_merchant_path(merchant.id)
+    else
+      redirect_to admin_merchants_path
+    end
   end
 
   private
   def merchant_params
-    params.permit(:id, :name)
+    params.permit(:id, :name, :enabled)
   end
 end
