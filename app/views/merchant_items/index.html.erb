@@ -32,9 +32,9 @@
 
 <%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
 
-<div id="top_5_items">
   <h3>Best Selling Items</h3>
+  <ol id="top_5_items">
   <% @merchant.top_5_items.each do |best_seller| %>
-    <%= best_seller.name %> <%= best_seller.revenue %>
+    <li><%= best_seller.name %> - Total Revenue: $<%= best_seller.total_revenue %></li>
   <% end %>
-</div>
+</ol>
