@@ -67,5 +67,10 @@ RSpec.describe Merchant, type: :model do
         invoice_item10
         ])#item and item invoice number
     end
+    
+    it 'successful transactions' do 
+      expect(merchants[0].successful_transactions).to eq([@invoices[2], @invoices[3], @invoices[4], @invoices[5], @invoices[6], @invoices[7], @invoices[8], @invoices[9], @invoices[10], @invoices[11]])
+      expect(merchants[0].successful_transactions).to_not eq([@invoices[0], @invoices[1]])
+    end
   end
 end

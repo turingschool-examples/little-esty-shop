@@ -16,4 +16,14 @@ class Item < ApplicationRecord
   def self.disabled
     where(status: 0)
   end
+
+  def self.most_popular
+    # binding.pry
+    joins(invoices: :transactions)
+    .where("transactions.result = ?", 0)
+    .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .group(:id)
+    .order(revenue: :desc)
+    .limit(5)
+  end
 end
