@@ -24,5 +24,22 @@
     <div>
       <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
     </div>
+    <h3>Items on this Invoice</h3>
+    <table>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Status</th>
+      </tr>
+      <% @invoice.items.each do |item| %>
+        <tr>
+          <td><%= "#{item.name}" %></td>
+          <td><%= "#{item.unit_price}" %></td>
+          <td><%= "#{item.quantity}" %></td>
+          <td><%= "#{item.status}" %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>
