@@ -10,6 +10,18 @@ class Invoice < ApplicationRecord
     helpers.number_to_currency((self.invoice_items.sum(:unit_price).to_f)/100)
   end
 
+  def self.not_shipped
+    # binding.pry
+    all
+    .joins(:invoice_items)
+    .where.not("invoice_items.status = ?", 2)
+    .order(created_at: :desc)
+  end
+
+  def formatted_date
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
 private
 # Helper Methods
   def helpers

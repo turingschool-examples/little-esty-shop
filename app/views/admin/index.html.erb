@@ -20,6 +20,9 @@
 
 <div class="page-defaults" id="splitSides">
   <div class="page-defaults" id="leftSide2">
-
+  <h3>Incomplete Invoices</h3>
+  <% @not_shipped.each do |invoice| %>
+    <p>Invoice #<%= link_to "#{invoice.id}", invoice_path(invoice.id) %> - <%= invoice.formatted_date %></p>
+  <% end %>
   </div>
 </div>
