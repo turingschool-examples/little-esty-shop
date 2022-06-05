@@ -20,7 +20,7 @@ RSpec.describe 'admin merchant show page' do
 
     fill_in 'Name', with: 'Cherry Chidona'
 
-    click_button('Submit')
+    click_on('Save')
 
     expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
 
