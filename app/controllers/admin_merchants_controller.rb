@@ -16,6 +16,11 @@ class AdminMerchantsController < ApplicationController
     @merchant = Merchant.new
   end
 
+  def create
+    Merchant.create!(merchant_params)
+    redirect_to merchants_path
+  end
+
   def update
     merchant = Merchant.find(params[:id])
     if params[:update_status_to] == "disabled"
