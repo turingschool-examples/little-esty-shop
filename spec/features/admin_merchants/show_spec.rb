@@ -52,10 +52,11 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
       visit "/admin/merchants/#{merchants[0].id}/edit"
       # save_and_open_page
     
-      fill_in 'Name', with: 'Cruch Wrap Industries'
+      fill_in 'Name', with: 'Crunch Wrap Industries'
       click_on 'Submit'
       expect(current_path).to eq("/admin/merchants/#{merchants[0].id}")
       expect(page).to have_content('Crunch Wrap Industries')
+      expect(page).to have_content('Merchant Successfully Updated')
     end
   end
 end
