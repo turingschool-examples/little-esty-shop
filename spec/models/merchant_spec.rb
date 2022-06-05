@@ -36,20 +36,4 @@ RSpec.describe Merchant, type: :model do
       expect(@billman.items_to_ship.pluck(:invoice_id)).to_not eq([@invoice2.id])
     end
   end
-
-  describe "class methods" do
-    before(:each) do
-      @billman = Merchant.create!(name: "Billman")
-
-      @bracelet = @billman.items.create!(name: "Bracelet", description: "shiny", unit_price: 1001, status: "disabled")
-      @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002)
-      @necklace = @billman.items.create!(name: "Necklace", description: "Sparkly", unit_price: 3045, status: "disabled")
-      @toe_ring = @billman.items.create!(name: "Toe Ring", description: "Saucy", unit_price: 1053)
-    end
-
-    it "can sort items by their status" do
-      expect(@billman.enabled_items).to eq([@mood, @toe_ring])
-      expect(@billman.disabled_items).to eq([@bracelet, @necklace])
-    end
-  end
 end
