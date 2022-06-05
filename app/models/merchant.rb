@@ -1,5 +1,4 @@
 class Merchant < ApplicationRecord
-
   has_many :items, dependent: :destroy
 
   validates_presence_of :name
@@ -14,6 +13,10 @@ class Merchant < ApplicationRecord
 
   def disabled_items
       items.where("items.status = 1")
+  end
+
+  def indiv_invoice_ids
+    InvoiceItem.all.where(item_id: items.ids).pluck(:invoice_id).uniq
   end
 
 end

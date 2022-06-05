@@ -28,6 +28,6 @@ RSpec.describe Item, type: :model do
       expect(@billman.enabled_items).to eq([@mood, @toe_ring])
       expect(@billman.disabled_items).to eq([@bracelet, @necklace])
     end
+
   end
 end
-
