@@ -7,7 +7,7 @@ capybara-*.html
 /public/system
 /coverage/*
 /coverage/index.html
-coverage/.resultset.json
+/coverage/.resultset.json
 /spec/tmp
 *.orig
 rerun.txt
