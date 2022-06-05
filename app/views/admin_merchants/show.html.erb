@@ -25,5 +25,11 @@
 
 <div class="page-defaults" id="splitSides">
   <div class="page-defaults" id="leftSide2">
+  <%= link_to "Update Merchant", "/admin/merchants/#{@merchant.id}/edit" %>
   </div>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
 </div>
