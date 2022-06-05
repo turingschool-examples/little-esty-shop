@@ -29,7 +29,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
     # And I see that the merchant's status has changed
     it "has a button to disable or enable each merchant and merchants are grouped together by status" do
       visit '/admin/merchants'
-      save_and_open_page
+
       within '#enabledMerchants' do
         expect(page).to have_button('Disable')
         expect(page).to have_content(merchant2.name)
@@ -48,28 +48,28 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
         expect(page).to_not have_content(merchant4.name)
         expect(page).to_not have_button('Disable')
       end
-      expect(merchant2.status).to eq("Enabled")
-      within "#enabled-#{merchant2}" do
+      expect(merchant2.status).to eq("enabled")
+      within "#enabled-#{merchant2.id}" do
         click_button "Disable"
       end
 
       expect(current_path).to eq("/admin/merchants")
       merchant2.reload
-      expect(merchant2.status).to eq("Disabled")
+      expect(merchant2.status).to eq("disabled")
       within '#enabledMerchants' do
         expect(page).to_not have_content(merchant2.name)
       end
       within '#disabledMerchants' do
         expect(page).to have_content(merchant2.name)
       end
-      expect(merchant3.status).to eq("Disabled")
-      within "#disabled-#{merchant3}" do
+      expect(merchant3.status).to eq("disabled")
+      within "#disabled-#{merchant3.id}" do
         click_button "Enable"
       end
 
       expect(current_path).to eq("/admin/merchants")
       merchant3.reload
-      expect(merchant3.status).to eq("Enabled")
+      expect(merchant3.status).to eq("enabled")
       within '#enabledMerchants' do
         expect(page).to have_content(merchant3.name)
       end

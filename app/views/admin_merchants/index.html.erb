@@ -26,7 +26,7 @@
         <div id="enabled-<%= merchant.id %>">
           <p>
             <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-            <%= button_to "Enable", "/merchants/#{merchant.id}", method: :patch %>
+            <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {update_status_to: :disabled} %>
           </p>
         </div>
       <% end %>
@@ -38,7 +38,7 @@
         <div id="disabled-<%= merchant.id %>">
           <p>
             <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-            <%= button_to "Disable", "/merchants/#{merchant.id}", method: :patch %>
+            <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {update_status_to: :enabled} %>
           </p>
         </div>
       <% end %>

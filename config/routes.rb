@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   scope :admin do
-    resources :merchants, controller: 'admin_merchants', only: [:index, :show]
+    resources :merchants, controller: 'admin_merchants', only: [:index, :show, :update]
     resources :invoices, controller: 'admin_invoices', only: [:index, :show]
   end
 end
