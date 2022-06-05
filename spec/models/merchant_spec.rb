@@ -49,6 +49,9 @@ RSpec.describe Merchant, type: :model do
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
+      # this fails like once out of every 20 tests...
+      # I think it might be because if the transaction count is the same...
+      # it doesn't have an explicit order...should we also order by name? how would we test for that?
       expect(merchants[0].top_5_customers).to eq(customers[1..5])
     end
 

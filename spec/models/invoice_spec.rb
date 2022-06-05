@@ -18,7 +18,7 @@ RSpec.describe Invoice, type: :model do
   let!(:item1) { create(:item, merchant: merchant1) }
   let!(:item2) { create(:item, merchant: merchant1) }
 
-  let!(:invoices) { create_list(:invoice, 4, customer: customer1) }
+  let!(:invoices) { create_list(:invoice, 4, customer: customer1, created_at: "2022-03-10 00:54:09 UTC") }
 
   let!(:transaction1) { create(:transaction, invoice: invoices[0], result: 1) }
 
@@ -33,15 +33,15 @@ RSpec.describe Invoice, type: :model do
       expect(invoices[0].total_revenue).to eq("$55.35")
     end
 
-    it 'formats the date correctly' do 
-      expect(invoices[0].formatted_date).to eq("Saturday, June 04, 2022")
+    it 'formats the date correctly' do
+      expect(invoices[0].formatted_date).to eq("Thursday, March 10, 2022")
     end
   end
 
-  describe ".class methods" do 
-    it 'returns all invoices without a shipped status' do 
+  describe ".class methods" do
+    it 'returns all invoices without a shipped status' do
       expect(Invoice.not_shipped).to eq([invoices[0], invoices[1], invoices[2]])
       expect(Invoice.not_shipped).to_not eq(invoices[3])
     end
-  end 
+  end
 end

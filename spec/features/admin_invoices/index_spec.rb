@@ -20,7 +20,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
   let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice2, unit_price: 3011) }
   let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice2, unit_price: 2524) }
   it 'lists invoice ids' do
-    visit admin_invoices_path
+    visit "admin/invoices/"
     expect(page).to have_content("Invoice ##{invoice1.id}")
     expect(page).to have_content("Invoice ##{invoice2.id}")
     # click_link invoice1.id.to_s
@@ -28,8 +28,8 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
   end
 
   it 'id links to corresponding show page' do
-    visit admin_invoices_path
+    visit "admin/invoices/"
     click_link "Invoice ##{invoice1.id}"
-    expect(current_path).to eq(admin_invoices_path(invoice1.id))
+    expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
   end
 end

@@ -12,7 +12,6 @@ class Merchant < ApplicationRecord
   end
 
   def ordered_not_shipped
-    # binding.pry
     invoice_items.joins(:invoice).where.not(status: 2).order("invoices.created_at asc")
   end
 end
