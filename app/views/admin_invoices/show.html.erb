@@ -24,22 +24,26 @@
     <div>
       <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
     </div>
-    <h3>Items on this Invoice</h3>
-    <table>
-      <tr>
-        <th>Item Name</th>
-        <th>Quantity</th>
-        <th>Unit Price</th>
-        <th>Status</th>
-      </tr>
-      <% @invoice.items.each do |item| %>
+    <h3>Items on this Invoice:</h3>
+    <div class="page-defaults" id="itemtable">
+      <table>
         <tr>
-          <td><%= "#{item.name}" %></td>
-          <td><%= "#{item.unit_price}" %></td>
-          <td><%= "#{item.quantity}" %></td>
-          <td><%= "#{item.status}" %></td>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Status</th>
         </tr>
-      <% end %>
-    </table>
+        <%= @invoice.invoice_items.each do |invoice_item| %>
+          <div id="invoice-item-<%= invoice_item.id %>">
+            <tr>
+              <td><%= "#{invoice_item.item.name}" %></td>
+              <td><%= "#{invoice_item.quantity}" %></td>
+              <td><%= "$#{invoice_item.unit_price * 0.01}" %></td>
+              <td><%= "#{invoice_item.status}" %></td>
+            </tr>
+          </div>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>
