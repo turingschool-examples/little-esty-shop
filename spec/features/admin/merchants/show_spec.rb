@@ -15,12 +15,5 @@ RSpec.describe "Admin Merchant Show" do
     click_link "Update Merchant"
 
     expect(current_path).to eq(edit_admin_merchant_path(merchant1))
-
-    fill_in :name, with: 'Black Diamond'
-    click_on "Submit"
-    
-    expect(current_path).to eq(admin_merchant_path(merchant1))
-    expect(page).to have_content('Black Diamond')
-    expect(page).to have_content('You have successfully updated this Merchant!')
   end
 end
