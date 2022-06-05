@@ -29,7 +29,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
     # And I see that the merchant's status has changed
     it "has a button to disable or enable each merchant and merchants are grouped together by status" do
       visit '/admin/merchants'
-
+      save_and_open_page
       within '#enabledMerchants' do
         expect(page).to have_button('Disable')
         expect(page).to have_content(merchant2.name)

@@ -22,7 +22,7 @@
 
     <div id="enabledMerchants">
       <h2>Enabled Merchants</h2>
-      <% @merchants.each do |merchant| %>
+      <% @merchants.enabled.each do |merchant| %>
         <div id="enabled-<%= merchant.id %>">
           <p>
             <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
@@ -34,7 +34,7 @@
 
     <div id="disabledMerchants">
       <h2>Disabled Merchants</h2>
-      <% @merchants.each do |merchant| %>
+      <% @merchants.disabled.each do |merchant| %>
         <div id="disabled-<%= merchant.id %>">
           <p>
             <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
