@@ -10,7 +10,6 @@ class Merchant < ApplicationRecord
     InvoiceItem.where(item_id: merchant_items).where(status: [0,1]).order(:created_at)
   end
 
-
   def top_5_customers
     #Find items associated with the curent merchant 
     merchant_items = Item.where(merchant_id: id)  ##works in heroku
@@ -27,10 +26,9 @@ class Merchant < ApplicationRecord
   end
 
   def best_day
-    binding.pry
+    #returns hash, key: day, value: count of invoices for that day
+    best_day_num_invoices = invoices.group("DATE(invoices.created_at)").count.sort_by { |day, num_invoices| num_invoices }.last
+    best_day_num_invoices[0]
   end
 
 end
-
-# merchant_items = Item.where(merchant_id: Merchant.all[26])
-# merchant_invoices = merchant_invoices.pluck(:id)

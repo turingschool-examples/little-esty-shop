@@ -15,8 +15,6 @@ RSpec.describe Merchant do
 
   describe 'instance methods' do
 
-
-
     describe '#items_ready_to_ship' do
 
       before :each do
@@ -155,17 +153,17 @@ RSpec.describe Merchant do
         @cust_3 = Customer.create!(first_name: "Brian", last_name: "Twinlegs")
         
         @invoice_1 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
-        @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
-        @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
-        @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
-        @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-23 17:51:52")
-        @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-23 17:51:52")
-        @invoice_7 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-23 17:51:52")
-        @invoice_8 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-23 17:51:52")
-        @invoice_9 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-23 17:51:52")
-        @invoice_10 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:52")
-        @invoice_11 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:52")
-        @invoice_12 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:52")
+        @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-13 17:52:52")
+        @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-13 17:53:52")
+        @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-13 17:54:52")
+        @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-23 17:55:52")
+        @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-23 17:56:52")
+        @invoice_7 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-23 17:57:52")
+        @invoice_8 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-23 17:58:52")
+        @invoice_9 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-23 17:59:52")
+        @invoice_10 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:53")
+        @invoice_11 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:54")
+        @invoice_12 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:55")
 
         InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
         InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -182,8 +180,8 @@ RSpec.describe Merchant do
       end
 
       it 'returns the date with the most revenue for the merchant' do
-        expect(@merch_1.best_day).to eq("2022-05-13")
-        expect(@merch_2.best_day).to eq("2022-05-30")
+        expect(@merch_1.best_day.strftime("%A, %B %d, %Y")).to eq("Friday, May 13, 2022")
+        expect(@merch_2.best_day.strftime("%A, %B %d, %Y")).to eq("Monday, May 30, 2022")
       end
     end
     
