@@ -15,6 +15,7 @@ class AdminMerchantsController < ApplicationController
     merch = Merchant.find(merch_params[:id])
     merch.update(merch_params)
     redirect_to "/admin/merchants/#{merch.id}"
+    flash[:message] = 'Merchant has been successfully updated!'
   end
 
   private

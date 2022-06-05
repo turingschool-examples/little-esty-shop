@@ -24,6 +24,8 @@ RSpec.describe 'admin merchant show page' do
 
     expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
 
+    expect(page).to have_content('Merchant has been successfully updated!')
+
     expect(page).to have_content('Name: Cherry Chidona')
 
     expect(page).to_not have_content('Name: Floopy Fopperations')
