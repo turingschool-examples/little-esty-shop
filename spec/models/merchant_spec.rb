@@ -38,18 +38,18 @@ RSpec.describe Merchant, type: :model do
   let!(:transaction6) { create(:transaction, invoice: invoice3, result: 1) }
 
 
-  let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100) }
-  let!(:invoice_item2) { create(:invoice_item, item: item1, invoice: invoice3, quantity: 6, unit_price: 4) }
-  let!(:invoice_item3) { create(:invoice_item, item: item2, invoice: invoice1, quantity: 3, unit_price: 200) }
-  let!(:invoice_item4) { create(:invoice_item, item: item2, invoice: invoice2, quantity: 22, unit_price: 200) }
-  let!(:invoice_item5) { create(:invoice_item, item: item3, invoice: invoice3, quantity: 5, unit_price: 300) }
-  let!(:invoice_item6) { create(:invoice_item, item: item3, invoice: invoice1, quantity: 63, unit_price: 400) }
-  let!(:invoice_item7) { create(:invoice_item, item: item4, invoice: invoice2, quantity: 16, unit_price: 500) }
-  let!(:invoice_item8) { create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 500) }
-  let!(:invoice_item9) { create(:invoice_item, item: item5, invoice: invoice2, quantity: 2, unit_price: 500) }
-  let!(:invoice_item10) { create(:invoice_item, item: item5, invoice: invoice1, quantity: 7, unit_price: 200) }
-  let!(:invoice_item11) { create(:invoice_item, item: item6, invoice: invoice3, quantity: 1, unit_price: 100) }
-  let!(:invoice_item12) { create(:invoice_item, item: item6, invoice: invoice3, quantity: 1, unit_price: 250) }
+  let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100, status: 2) }
+  let!(:invoice_item2) { create(:invoice_item, item: item1, invoice: invoice3, quantity: 6, unit_price: 4, status: 1) }
+  let!(:invoice_item3) { create(:invoice_item, item: item2, invoice: invoice1, quantity: 3, unit_price: 200, status: 0) }
+  let!(:invoice_item4) { create(:invoice_item, item: item2, invoice: invoice2, quantity: 22, unit_price: 200, status: 2) }
+  let!(:invoice_item5) { create(:invoice_item, item: item3, invoice: invoice3, quantity: 5, unit_price: 300, status: 1) }
+  let!(:invoice_item6) { create(:invoice_item, item: item3, invoice: invoice1, quantity: 63, unit_price: 400, status: 0) }
+  let!(:invoice_item7) { create(:invoice_item, item: item4, invoice: invoice2, quantity: 16, unit_price: 500, status: 2) }
+  let!(:invoice_item8) { create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 500, status: 1) }
+  let!(:invoice_item9) { create(:invoice_item, item: item5, invoice: invoice2, quantity: 2, unit_price: 500, status: 0) }
+  let!(:invoice_item10) { create(:invoice_item, item: item5, invoice: invoice1, quantity: 7, unit_price: 200, status: 2) }
+  let!(:invoice_item11) { create(:invoice_item, item: item6, invoice: invoice3, quantity: 1, unit_price: 100, status: 1) }
+  let!(:invoice_item12) { create(:invoice_item, item: item6, invoice: invoice3, quantity: 1, unit_price: 250, status: 0) }
 
   describe ".class methods" do
     # let!(:merchant_1) { create(:merchant, status: 0) }
@@ -87,27 +87,17 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  xdescribe '#instance methods' do
-    it 'returns top 5 customers' do
+  describe '#instance methods' do
+    xit 'returns top 5 customers' do
       # this fails like once out of every 20 tests...
       # I think it might be because if the transaction count is the same...
       # it doesn't have an explicit order...should we also order by name? how would we test for that?
       expect(merchants[0].top_5_customers).to eq(customers[1..5])
     end
 
-    xit 'returns item names ordered, not shipped' do
-      expect(merchants[0].ordered_not_shipped).to eq([
-        invoice_item1,
-        invoice_item2,
-        invoice_item3,
-        invoice_item4,
-        invoice_item5,
-        invoice_item6,
-        invoice_item7,
-        invoice_item8,
-        invoice_item9,
-        invoice_item10
-        ])#item and item invoice number
+    it 'returns item names ordered, not shipped' do
+      expect(merchants[0].ordered_not_shipped).to eq([invoice_item2])
+      expect(merchants[5].ordered_not_shipped).to eq([invoice_item11, invoice_item12])
     end
   end
 
