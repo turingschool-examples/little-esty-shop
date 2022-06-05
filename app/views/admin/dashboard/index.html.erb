@@ -1,3 +1,12 @@
 <h1>Admin Dashboard</h1>
 <h3><%=link_to "Merchants", "/admin/merchants" %>
     <%=link_to "Invoices", "/admin/invoices" %></h3>
+
+<section id="incompleteInvoices">
+<h4>Incomplete Invoices</h4>
+<% @merchants.each do |merchant| %>
+  <% merchant.items_to_ship.each do |item| %>
+    <%= item.invoice_id %>
+    <% end %>
+  <% end %>
+</section>

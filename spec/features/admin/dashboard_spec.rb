@@ -57,5 +57,18 @@ end
     click_link("Invoices")
 
     expect(current_path).to eq("/admin/invoices")
-  end 
+  end
+
+  it 'has a section for incomplete invoices' do
+    visit '/admin'
+
+    expect(page).to have_content("Incomplete Invoices")
+
+      within '#incompleteInvoices' do
+        expect(page).to have_content(@invoice1.id)
+        expect(page).to have_content(@invoice2.id)
+        expect(page).to have_content(@invoice3.id)
+        expect(page).to have_content(@invoice4.id)
+      end
+  end
 end
