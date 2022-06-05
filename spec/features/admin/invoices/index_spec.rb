@@ -9,13 +9,13 @@ RSpec.describe 'Admin Invoice Index Page' do
   end
 
   it "lists all invoice ID's and links to their show page" do
-    visit '/admin/invoices'
+    visit admin_invoices_path
     expect(page).to have_content("Invoice ID's:")
     expect(page).to have_content(@invoice_1.id)
     expect(page).to have_content(@invoice_2.id)
     expect(page).to have_content(@invoice_3.id)
     click_link "#{@invoice_1.id}"
-    expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+    expect(current_path).to eq(admin_invoice_path(@invoice_1))
   end
 
 end

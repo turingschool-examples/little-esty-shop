@@ -1,0 +1,13 @@
+<h5>Enabled Merchants:</h5>
+<% @merchants.each do |merchant| %>
+<% if merchant.enabled? %>
+<%=link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+<%= button_to("Disable", admin_merchant_path(merchant.id), method: :patch, params: {enabled: false}) %>
+<% end %> <% end %>
+
+<h5>Disabled Merchants: </h5>
+<% @merchants.each do |merchant| %>
+<% if !merchant.enabled? %>
+<%=link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+<%=button_to("Enable", admin_merchant_path(merchant.id), method: :patch, params: {enabled: true}) %>
+<% end %> <% end %>

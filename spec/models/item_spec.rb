@@ -14,6 +14,7 @@ RSpec.describe Item, type: :model do
 
   end
 
+
   describe "class methods" do
     before(:each) do
       @billman = Merchant.create!(name: "Billman")
@@ -29,5 +30,5 @@ RSpec.describe Item, type: :model do
       expect(@billman.disabled_items).to eq([@bracelet, @necklace])
     end
   end
-end
 
+end

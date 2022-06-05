@@ -9,4 +9,8 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum('unit_price * quantity') * 0.01.to_f
   end
+
+  def incomplete?
+    invoice_items.where.not(status: 'shipped').count > 0
+  end
 end
