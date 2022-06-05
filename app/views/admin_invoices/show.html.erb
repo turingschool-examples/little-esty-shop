@@ -1,0 +1,49 @@
+<div class="page-defaults" id="shopId" >
+  <h1><span>Little Esty Shop</span></h1>
+</div>
+
+<div class="page-defaults" id="splitSides">
+
+  <div class="page-defaults" id="leftSide">
+    <h2>Admin Dashboard</h2>
+  </div>
+
+  <div class="page-defaults" id="rightSide">
+    <ul>
+    </ul>
+  </div>
+
+</div>
+
+<div class="page-defaults" id="splitSides">
+  <div class="page-defaults" id="leftSide2">
+    <h2>Invoice #<%= "#{@invoice.id}" %> </h2>
+    <p><%=  "Status: #{@invoice.status}" %> </p>
+    <p><%= "Created on: #{@invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
+    <h3>Customer:</h3>
+    <div>
+      <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
+    </div>
+    <h3>Items on this Invoice:</h3>
+    <div class="page-defaults" id="itemtable">
+      <table>
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Status</th>
+        </tr>
+        <%= @invoice.invoice_items.each do |invoice_item| %>
+          <div id="invoice-item-<%= invoice_item.id %>">
+            <tr>
+              <td><%= "#{invoice_item.item.name}" %></td>
+              <td><%= "#{invoice_item.quantity}" %></td>
+              <td><%= "$#{invoice_item.unit_price * 0.01}" %></td>
+              <td><%= "#{invoice_item.status}" %></td>
+            </tr>
+          </div>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
