@@ -95,7 +95,7 @@ RSpec.describe Item, type: :model do
       invoice_item6 = create(:invoice_item, item: items[5], invoice: invoice3, quantity: 9, unit_price: 5000)
       invoice_item12 = create(:invoice_item, item: items[5], invoice: invoice2, quantity: 9, unit_price: 6)
 
-      expect(items[1].best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
+      expect(items[1].best_day).to eq(invoice3.created_at.strftime("%m/%d/%y"))
       expect(items[2].best_day).to eq(invoice3.created_at.strftime("%m/%d/%y"))
       expect(items[3].best_day).to eq(invoice3.created_at.strftime("%m/%d/%y"))
       expect(items[4].best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))

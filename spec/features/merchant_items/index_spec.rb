@@ -207,7 +207,7 @@ RSpec.describe 'Merchant Items Index Page' do
       visit "/merchants/#{merchant.id}/items"
 
       within "#topItem-#{items[1].id}" do
-        expect(page).to have_content("Top selling date for #{items[1].name} was #{invoice2.created_at.strftime("%m/%d/%y")}")
+        expect(page).to have_content("Top selling date for #{items[1].name} was #{invoice3.created_at.strftime("%m/%d/%y")}")
       end
 
       within "#topItem-#{items[2].id}" do

@@ -15,9 +15,4 @@ class Merchant < ApplicationRecord
     # binding.pry
     invoice_items.joins(:invoice).where.not(status: 2).order("invoices.created_at asc")
   end
-
-  def successful_transactions
-    invoices.joins(:transactions).select("invoices.*, transactions.result").where("transactions.result = 0").distinct
-  end
-
 end
