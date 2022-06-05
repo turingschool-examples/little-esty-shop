@@ -15,4 +15,9 @@ class Merchant < ApplicationRecord
   def ordered_not_shipped
     invoice_items.joins(:invoice).where.not(status: 2).order("invoices.created_at asc")
   end
+
+  def self.top_5
+    # binding.pry
+    joins(:transactions).where(transactions: {result: 0}).select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue").group('merchants.id').order(revenue: :desc).limit(5)
+  end
 end

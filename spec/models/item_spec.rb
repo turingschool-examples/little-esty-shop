@@ -69,7 +69,7 @@ RSpec.describe Item, type: :model do
     it "#best_day returns the item's best selling day" do
       merchant = create(:merchant)
       customer = create(:customer)
-      items = create_list(:item, 6, merchant: merchant)
+      items = create_list(:item, 6, merchant: merchant, status: 1)
 
       invoice1 = create(:invoice, customer: customer, created_at: "2012-03-10 00:54:09 UTC")
       invoice2 = create(:invoice, customer: customer, created_at: "2012-03-10 00:54:09 UTC")
