@@ -19,6 +19,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
   let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524) }
   let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice2, unit_price: 3011) }
   let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice2, unit_price: 2524) }
+
   it 'lists invoice ids' do
     visit "admin/invoices/"
     expect(page).to have_content("Invoice ##{invoice1.id}")
@@ -27,7 +28,7 @@ RSpec.describe 'Admin Invoices Index Page', type: :feature do
     # expect(current_path).to eq
   end
 
-  xit 'id links to corresponding show page' do
+  it 'id links to corresponding show page' do
     visit "/admin/invoices/"
     click_link "Invoice ##{invoice1.id}"
     # currently returns error:
