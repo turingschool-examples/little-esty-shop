@@ -56,7 +56,7 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
 
   describe 'admin merchant update' do
     it 'has a link to update the merchants information' do 
-      visit "/admin/merchants"
+      visit "/admin/merchants/#{merchants[0].id}"
 
       expect(page).to have_link("Update Merchant")
     end
