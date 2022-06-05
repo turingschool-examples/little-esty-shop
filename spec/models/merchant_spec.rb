@@ -32,7 +32,6 @@ RSpec.describe Merchant, type: :model do
         create_list(:transaction, 2, invoice: invoice, result: 0)
       end
     end
-
   end
   let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0], status: 0) }
   let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1], status: 1) }
@@ -53,24 +52,19 @@ RSpec.describe Merchant, type: :model do
       expect(merchants[0].top_5_customers).to eq(customers[1..5])
     end
 
-    it 'returns item names ordered, not shipped' do 
+    it 'returns item names ordered, not shipped' do
       expect(merchants[0].ordered_not_shipped).to eq([
-        invoice_item1, 
-        invoice_item2, 
-        invoice_item3, 
-        invoice_item4, 
+        invoice_item1,
+        invoice_item2,
+        invoice_item3,
+        invoice_item4,
         invoice_item5,
-        invoice_item6, 
-        invoice_item7, 
-        invoice_item8, 
-        invoice_item9, 
+        invoice_item6,
+        invoice_item7,
+        invoice_item8,
+        invoice_item9,
         invoice_item10
         ])#item and item invoice number
-    end
-    
-    it 'successful transactions' do 
-      expect(merchants[0].successful_transactions).to eq([@invoices[2], @invoices[3], @invoices[4], @invoices[5], @invoices[6], @invoices[7], @invoices[8], @invoices[9], @invoices[10], @invoices[11]])
-      expect(merchants[0].successful_transactions).to_not eq([@invoices[0], @invoices[1]])
     end
   end
 end
