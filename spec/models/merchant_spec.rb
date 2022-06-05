@@ -11,6 +11,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'valdiations' do
     it { should validate_presence_of :name}
+    it {should define_enum_for(:status).with_values(["disabled", "enabled"])}
   end
 
   let!(:merchants) { create_list(:merchant, 2) }
@@ -46,6 +47,28 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10], status: 2) }
   let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11], status: 2) }
 
+  describe ".class methods" do
+    let!(:merchant1) { create(:merchant, status: 0) }
+    let!(:merchant2) { create(:merchant, status: 1) }
+    let!(:merchant3) { create(:merchant, status: 0) }
+    let!(:merchant4) { create(:merchant, status: 1) }
+
+    it ".enabled returns only merchants with an enabled status" do
+      # enums method
+      expect(Merchant.enabled).to include(merchant2)
+      expect(Merchant.enabled).to include(merchant4)
+      expect(Merchant.enabled).to_not include(merchant1)
+      expect(Merchant.enabled).to_not include(merchant3)
+    end
+
+    it ".disabled returns only merchants with a disabled status" do
+      # enums method
+      expect(Merchant.disabled).to include(merchant1)
+      expect(Merchant.disabled).to include(merchant3)
+      expect(Merchant.disabled).to_not include(merchant2)
+      expect(Merchant.disabled).to_not include(merchant4)
+    end
+  end
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
