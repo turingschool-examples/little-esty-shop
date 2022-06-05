@@ -11,7 +11,7 @@ RSpec.describe "Admin Merchants Index Page" do
   end
 
   it "displays the name of each merchant in the system" do
-    expect(page).to have_content("Admin Merchants Index")
+    expect(page).to have_content("Welcome to the Admin Dashboard")
 
     within ".disabled-merchants" do
       expect(page).to have_content("REI")
@@ -46,6 +46,7 @@ RSpec.describe "Admin Merchants Index Page" do
   end
 
   it "displays a link to create a new merchant" do
+    save_and_open_page
     expect(page).to have_link('New Merchant')
   end
 end
