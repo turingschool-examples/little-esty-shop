@@ -21,7 +21,7 @@
 
 <div class="page-defaults" id="splitSides">
   <div class="page-defaults" id="leftSide2">
-    <% @merchant.each do |merchant| %>
+    <% @merchants.each do |merchant| %>
       <p> <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> </p>
     <% end %>
   </div>
