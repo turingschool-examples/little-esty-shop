@@ -1,5 +1,5 @@
-<%= form_with model: model do |f| %>
+<%= form_with model: model, url: url do |f| %>
   <p><%= f.label :name %></p>
   <%= f.text_field :name %>
   <%= f.submit button_text %>
-<%= end %>
+<% end %>

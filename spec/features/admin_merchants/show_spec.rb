@@ -50,8 +50,8 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
 
     it 'has a form to update the merchant name' do 
       visit "/admin/merchants/#{merchants[0].id}/edit"
-      expect(page).to have_content(merchants[0].name)
-
+      # save_and_open_page
+    
       fill_in 'Name', with: 'Cruch Wrap Industries'
       click_on 'Submit'
       expect(current_path).to eq("/admin/merchants/#{merchants[0].id}")
