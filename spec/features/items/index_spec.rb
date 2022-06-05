@@ -4,7 +4,6 @@ RSpec.describe Item, type: :model do
   before :each do
     @merchant1 = Merchant.create!(name: 'Merchant1')
     @merchant2 = Merchant.create!(name: 'Merchant2')
-
     @item1 = @merchant1.items.create!(name: 'Item1', description: 'Description1', unit_price: 111, status: 0)
     @item11 = @merchant1.items.create!(name: 'Item11', description: 'Description11', unit_price: 1111,status: 1)
     @item2 = @merchant2.items.create!(name: 'Item2', description: 'Description2', unit_price: 222, status: 0)
@@ -47,14 +46,12 @@ RSpec.describe Item, type: :model do
   end
   
   describe "Index Page Content" do
-    # InvoiceItem.joins(:item).where(items: {status: 0}).count
-    
     it "items are placed into the section, enabled or disabled, that matches their status" do
       item111 = @merchant1.items.create!(name: 'Item111', description: 'Description111', unit_price: 11111, status: 1)
       item1111 = @merchant1.items.create!(name: 'Item1111', description: 'Description1111', unit_price: 111111, status: 0)
       
       visit "/merchants/#{@merchant1.id}/items"
-      save_and_open_page
+
       expect(page).to have_content("Enabled Items")
       expect(page).to have_content("Disabled Items")
       
@@ -69,6 +66,16 @@ RSpec.describe Item, type: :model do
         expect(page).to have_content("Item111")
         expect(page).to_not have_content("Item1 ")
       end
+    end
+  end
+
+  describe 'creating a new item' do
+    it 'has button to link to a create new item page' do
+    expect(page).to have_button("Create Item")
+
+    click_button "Create Item"
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+    save_and_open_page
     end
   end
 end
