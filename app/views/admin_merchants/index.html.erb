@@ -9,20 +9,45 @@
   </div>
 
   <div class="page-defaults" id="rightSide">
+    <ul>
     <%= link_to "Merchants", '/admin/merchants' %>
     <%= link_to "Invoices", '/admin/invoices' %>
-    <ul>
-
     </ul>
-
   </div>
 
 </div>
 
 <div class="page-defaults" id="splitSides">
   <div class="page-defaults" id="leftSide2">
-    <% @merchant.each do |merchant| %>
-      <p> <%=link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> </p>
-    <% end %>
+
+    <div id="enabledMerchants">
+      <h2>Enabled Merchants</h2>
+      <% @merchants.enabled.each do |merchant| %>
+        <div id="enabled-<%= merchant.id %>">
+          <p>
+            <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+            <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {update_status_to: :disabled} %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="disabledMerchants">
+      <h2>Disabled Merchants</h2>
+      <% @merchants.disabled.each do |merchant| %>
+        <div id="disabled-<%= merchant.id %>">
+          <p>
+            <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+            <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {update_status_to: :enabled} %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
   </div>
+
+  <div class="page-defaults" id="rightSide2">
+    <h2>Top Merchants</h2>
+  </div>
+
 </div>
