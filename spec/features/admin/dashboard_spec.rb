@@ -23,13 +23,13 @@ RSpec.describe 'the admin dashboard', type: :feature do
   @invoice4 = @jimbob.invoices.create!(status: "Completed")
   @invoice5 = @casey.invoices.create!(status: "Completed")
 
-  @order1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice1.id)
-  @order2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Packaged", invoice_id: @invoice1.id)
-  @order3 = @mood.invoice_items.create!(quantity: 3, unit_price: 2002, status: "Pending", invoice_id: @invoice2.id)
-  @order4 = @beard.invoice_items.create!(quantity: 5, unit_price: 5099, status: "Shipped", invoice_id: @invoice5.id)
-  @order5 = @balm.invoice_items.create!(quantity: 3, unit_price: 4599, status: "Shipped", invoice_id: @invoice3.id)
-  @order6 = @necklace.invoice_items.create!(quantity: 1, unit_price: 3045, status: "Pending", invoice_id: @invoice3.id)
-  @order7 = @beard.invoice_items.create!(quantity: 1, unit_price: 5099, status: "Packaged", invoice_id: @invoice4.id)
+  @order1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "pending", invoice_id: @invoice1.id)
+  @order2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "packaged", invoice_id: @invoice1.id)
+  @order3 = @mood.invoice_items.create!(quantity: 3, unit_price: 2002, status: "pending", invoice_id: @invoice2.id)
+  @order4 = @beard.invoice_items.create!(quantity: 5, unit_price: 5099, status: "shipped", invoice_id: @invoice5.id)
+  @order5 = @balm.invoice_items.create!(quantity: 3, unit_price: 4599, status: "shipped", invoice_id: @invoice3.id)
+  @order6 = @necklace.invoice_items.create!(quantity: 1, unit_price: 3045, status: "pending", invoice_id: @invoice3.id)
+  @order7 = @beard.invoice_items.create!(quantity: 1, unit_price: 5099, status: "packaged", invoice_id: @invoice4.id)
 end
 
   it 'has a header indicating I am on the admin dashboard' do
@@ -69,6 +69,18 @@ end
         expect(page).to have_content(@invoice2.id)
         expect(page).to have_content(@invoice3.id)
         expect(page).to have_content(@invoice4.id)
+      end
+  end
+
+  it 'each incomplete invoice links to invoice admin show page' do
+    visit '/admin'
+
+      within '#incompleteInvoices' do
+        expect(page).to have_content(@invoice1.id)
+
+        click_link "#{@invoice1.id}"
+
+        expect(current_path).to eq(admin_invoice_path(@invoice1))
       end
   end
 end
