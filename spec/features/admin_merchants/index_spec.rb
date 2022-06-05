@@ -24,8 +24,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe "Admin Merchant Enable/Disable" do
-
-    it "has a button to disable or enable each merchant and merchants are grouped together by status" do
+    it "has a button to disable or enable each merchant and updates status" do
       visit '/admin/merchants'
 
       within '#enabledMerchants' do
@@ -72,6 +71,26 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
         expect(page).to have_content(merchant3.name)
       end
       within '#disabledMerchants' do
+        expect(page).to_not have_content(merchant3.name)
+      end
+    end
+
+    it 'is grouped into sections by status' do 
+      visit '/admin/merchants'
+      expect(page).to have_content("Enabled Merchants")
+      expect(page).to have_content("Disabled Merchants")
+
+      within "#disabledMerchants" do 
+        expect(page).to have_button('Enable')
+        expect(page).to have_content(merchant1.name)
+        expect(page).to have_content(merchant3.name)
+        expect(page).to_not have_content(merchant2.name)
+      end
+
+      within "#enabledMerchants" do 
+        expect(page).to have_button('Disable')
+        expect(page).to have_content(merchant2.name)
+        expect(page).to have_content(merchant4.name)
         expect(page).to_not have_content(merchant3.name)
       end
     end
