@@ -1,6 +1,8 @@
 <%= render 'partials/navbar_admin' %><br>
 <%= render 'partials/two_columns' %>
 
+<h5 style="padding-left: 20px"><%= link_to "Create a New Merchant", new_admin_merchant_path %></h5>
+
 <div class="row">
   <div class="column";>
     <div class="enabled-merchants">
@@ -26,5 +28,3 @@
     </div>
   </div>
 </div>
-
-<h5 style="padding: 10%"><%= link_to "Create a New Merchant", new_admin_merchant_path %></h5>
