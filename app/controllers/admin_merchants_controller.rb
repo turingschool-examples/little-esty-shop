@@ -7,9 +7,13 @@ class AdminMerchantsController < ApplicationController
     # binding.pry
     @merchant = Merchant.find(params[:id])
   end
-  
+
   def edit
     @merchant = Merchant.find(params[:id])
+  end
+
+  def new
+    
   end
 
   def update
