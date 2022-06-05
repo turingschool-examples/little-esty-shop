@@ -17,8 +17,6 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
 
   let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011) }
   let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524) }
-  let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice2, unit_price: 3011) }
-  let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice2, unit_price: 2524) }
   it 'lists invoice attributes' do
     visit "/admin/invoices/#{invoice1.id}"
     expect(page).to have_content("Status: #{invoice1.status}")
@@ -29,9 +27,18 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
 
   it 'lists items on the invoice' do
     visit "/admin/invoices/#{invoice1.id}"
-    expect(page).to have_content(item1.name.to_s)
-    expect(page).to have_content('$30.11')
-    expect(page).to have_content('1') # quantity
-    expect(page).to have_content(item1.status.to_s)
+    within '#itemtable' do
+      expect(page).to have_content('Item Name')
+      expect(page).to have_content('Unit Price')
+      expect(page).to have_content('Status')
+      expect(page).to have_content('Quantity')
+    end
+
+    within "#invoice-item-#{invoice_item1.id}" do
+      expect(page).to have_text(item1.name.to_s)
+      expect(page).to have_text('$30.11')
+      expect(page).to have_text(invoice_item1.quantity.to_s)
+      expect(page).to have_text(invoice_item1.status.to_s)
+    end
   end
 end
