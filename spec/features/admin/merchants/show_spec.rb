@@ -8,4 +8,22 @@ RSpec.describe 'admin merchant show page' do
 
     expect(page).to have_content('Name: Floopy Fopperations')
   end
+
+  it 'can update the merchant' do
+    @merch1 = Merchant.create!(name: 'Floopy Fopperations')
+
+    visit "/admin/merchants/#{@merch1.id}"
+
+    click_link('Update Merchant')
+
+    expect(current_path).to eq("/admin/merchants/#{@merch1.id}/edit")
+
+    fill_in 'Name', with: 'Cherry Chidona'
+
+    click_button('Submit')
+
+    expect(current_path).to eq("/admin/merchants/#{@merch1.id}")
+
+    expect(page).to have_content('Name: Cherry Chidona')
+  end
 end
