@@ -9,6 +9,7 @@
   </div>
 
   <div class="page-defaults" id="rightSide">
+    <%= link_to "Dashboard", '/admin' %>
     <%= link_to "Merchants", '/admin/merchants' %>
     <%= link_to "Invoices", '/admin/invoices' %>
     <ul>
@@ -24,5 +25,16 @@
   <% @not_shipped.each do |invoice| %>
     <p>Invoice #<%= link_to "#{invoice.id}", invoice_path(invoice.id) %> - <%= invoice.formatted_date %></p>
   <% end %>
+  </div>
+
+  <div class="page-defaults" id="rightSide2">
+    <h3>Top Customers</h3>
+    <ol>
+      <li>"Merchant name" - 672 purchases</li>
+      <li>"Merchant name" - 672 purchases</li>
+      <li>"Merchant name" - 672 purchases</li>
+      <li>"Merchant name" - 672 purchases</li>
+      <li>"Merchant name" - 672 purchases</li>
+    </ol>
   </div>
 </div>
