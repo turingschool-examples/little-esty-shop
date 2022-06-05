@@ -13,7 +13,7 @@ class AdminMerchantsController < ApplicationController
   end
 
   def new
-    
+    @merchant = Merchant.new
   end
 
   def update
@@ -35,6 +35,6 @@ class AdminMerchantsController < ApplicationController
 
   private
     def merchant_params
-      params.require(:merchant).permit(:name)
+      params.require(:merchant).permit(:name, :status)
     end
 end
