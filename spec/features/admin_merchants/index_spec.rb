@@ -75,19 +75,19 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       end
     end
 
-    it 'is grouped into sections by status' do 
+    it 'is grouped into sections by status' do
       visit '/admin/merchants'
       expect(page).to have_content("Enabled Merchants")
       expect(page).to have_content("Disabled Merchants")
 
-      within "#disabledMerchants" do 
+      within "#disabledMerchants" do
         expect(page).to have_button('Enable')
         expect(page).to have_content(merchant1.name)
         expect(page).to have_content(merchant3.name)
         expect(page).to_not have_content(merchant2.name)
       end
 
-      within "#enabledMerchants" do 
+      within "#enabledMerchants" do
         expect(page).to have_button('Disable')
         expect(page).to have_content(merchant2.name)
         expect(page).to have_content(merchant4.name)
@@ -96,13 +96,20 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
     end
   end
 
-  describe 'admin merchant create' do 
-    it 'has a link to create a new merchant' do 
+  describe 'admin merchant create' do
+    it 'has a link to create a new merchant' do
       visit "/admin/merchants"
 
       expect(page).to have_content("Create New Merchant")
       click_link "Create New Merchant"
       expect(current_path).to eq(new_merchant_path)
+    end
+  end
+
+  describe "Admin Merchants: Top Merchant's Best Day" do
+    it "can calculate the date with the most sales" do
+      
+
     end
   end
 end

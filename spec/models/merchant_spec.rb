@@ -93,4 +93,52 @@ RSpec.describe Merchant, type: :model do
         ])#item and item invoice number
     end
   end
+
+  it "#best_day returns the merchants best selling day" do
+    merchant1 = create(:merchant)
+    merchant2 = create(:merchant)
+    merchant3 = create(:merchant)
+    merchant4 = create(:merchant)
+    merchant5 = create(:merchant)
+
+    customer = create(:customer)
+
+    item1 = create(:item, merchant: merchant1, status: 0)
+    item2 = create(:item, merchant: merchant2, status: 0)
+    item3 = create(:item, merchant: merchant3, status: 0)
+    item4 = create(:item, merchant: merchant4, status: 0)
+    item5 = create(:item, merchant: merchant5, status: 0)
+
+
+    invoice1 = create(:invoice, customer: customer, created_at: "2012-03-10 00:54:09 UTC")
+    invoice2 = create(:invoice, customer: customer, created_at: "2013-03-10 00:54:09 UTC")
+    invoice3 = create(:invoice, customer: customer, created_at: "2014-03-10 00:54:09 UTC")
+
+
+    transaction1 = create(:transaction, invoice: invoice1, result: 1)
+    transaction2 = create(:transaction, invoice: invoice1, result: 1)
+    transaction3 = create(:transaction, invoice: invoice2, result: 0)
+    transaction4 = create(:transaction, invoice: invoice2, result: 1)
+    transaction5 = create(:transaction, invoice: invoice3, result: 0)
+    transaction6 = create(:transaction, invoice: invoice3, result: 0)
+
+
+    invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
+    invoice_item2 = create(:invoice_item, item: item1, invoice: invoice3, quantity: 6, unit_price: 4)
+    invoice_item3 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 3, unit_price: 200)
+    invoice_item4 = create(:invoice_item, item: item2, invoice: invoice2, quantity: 22, unit_price: 200)
+    invoice_item5 = create(:invoice_item, item: item3, invoice: invoice3, quantity: 5, unit_price: 300)
+    invoice_item6 = create(:invoice_item, item: item3, invoice: invoice1, quantity: 63, unit_price: 400)
+    invoice_item7 = create(:invoice_item, item: item4, invoice: invoice2, quantity: 16, unit_price: 500)
+    invoice_item8 = create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 500)
+    invoice_item9 = create(:invoice_item, item: item5, invoice: invoice2, quantity: 2, unit_price: 500)
+    invoice_item10 = create(:invoice_item, item: item5, invoice: invoice1, quantity: 7, unit_price: 200)
+
+  expect(merchant1.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
+  expect(merchant2.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
+  expect(merchant3.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
+  expect(merchant4.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
+  expect(merchant5.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
+
+  end
 end
