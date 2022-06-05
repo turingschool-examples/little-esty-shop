@@ -21,21 +21,16 @@ RSpec.describe "Admin Invoice Index" do
     end
 
     it 'shows me the admin invoice index page with all the invoices' do
-#       As an admin,
-      # When I visit the admin Invoices index ("/admin/invoices")
-      # Then I see a list of all Invoice ids in the system
-      # Each id links to the admin invoice show page
 
       visit("/admin/invoices")
 
-      expect(page).to have_content(@inv1.name)
-      expect(page).to have_content(@inv2.name)
-      expect(page).to have_link(@inv1.id)
-      expect(page).to have_link(@inv2.id)
+      expect(page).to have_link("#{@inv1.id}")
+      expect(page).to have_link("#{@inv2.id}")
 
-      click_link(@inv1.id)
+      click_link "#{@inv1.id}"
+
       expect(current_path).to eq("/admin/invoices/#{@inv1.id}")
-      expect(page).to have_content(@inv1.name)
+      expect(page).to have_content(@inv1.status)
 
     end
 
