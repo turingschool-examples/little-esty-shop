@@ -7,13 +7,10 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
   let!(:item2) { create(:item, merchant: merchant1) }
 
   let!(:customer1) { create(:customer) }
-  let!(:customer2) { create(:customer) }
 
   let!(:invoice1) { create(:invoice, customer: customer1) }
-  let!(:invoice2) { create(:invoice, customer: customer2) }
 
   let!(:transaction1) { create(:transaction, invoice: invoice1, result: 1) }
-  let!(:transaction2) { create(:transaction, invoice: invoice2, result: 1) }
 
   let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011) }
   let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524) }
@@ -41,4 +38,13 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
       expect(page).to have_text(invoice_item1.status.to_s)
     end
   end
+
+  it 'shows total revenue that will be generated from this invoice' do
+    visit "/admin/invoices/#{invoice1.id}"
+
+    expect(page).to have_content('Total Revenue: $55.35')
+  end
+  # As an admin
+  # When I visit an admin invoice show page
+  # Then I see the total revenue that will be generated from this invoice end
 end
