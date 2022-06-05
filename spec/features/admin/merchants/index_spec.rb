@@ -45,4 +45,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
+  it "displays a link to create a new merchant" do
+    expect(page).to have_link('New Merchant')
+  end
 end

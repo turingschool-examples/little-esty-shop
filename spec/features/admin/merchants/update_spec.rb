@@ -15,7 +15,7 @@ end
   end
 
   context 'given valid data' do
-    it "submits the edit form and updates the merchant" do
+    it "can submit an edit form and update the merchant" do
       fill_in :name, with: 'Black Diamond'
       click_on "Submit"
 
