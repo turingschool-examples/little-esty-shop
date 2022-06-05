@@ -11,6 +11,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'valdiations' do
     it { should validate_presence_of :name}
+    it {should define_enum_for(:status).with_values(["disabled", "enabled"])}
   end
 
   let!(:merchants) { create_list(:merchant, 2) }
@@ -32,7 +33,6 @@ RSpec.describe Merchant, type: :model do
         create_list(:transaction, 2, invoice: invoice, result: 0)
       end
     end
-
   end
   let!(:invoice_item1) { create(:invoice_item, item: @items[0], invoice: @invoices[0], status: 0) }
   let!(:invoice_item2) { create(:invoice_item, item: @items[1], invoice: @invoices[1], status: 1) }
@@ -47,30 +47,50 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice_item11) { create(:invoice_item, item: @items[0], invoice: @invoices[10], status: 2) }
   let!(:invoice_item12) { create(:invoice_item, item: @items[1], invoice: @invoices[11], status: 2) }
 
+  describe ".class methods" do
+    let!(:merchant1) { create(:merchant, status: 0) }
+    let!(:merchant2) { create(:merchant, status: 1) }
+    let!(:merchant3) { create(:merchant, status: 0) }
+    let!(:merchant4) { create(:merchant, status: 1) }
+
+    it ".enabled returns only merchants with an enabled status" do
+      # enums method
+      expect(Merchant.enabled).to include(merchant2)
+      expect(Merchant.enabled).to include(merchant4)
+      expect(Merchant.enabled).to_not include(merchant1)
+      expect(Merchant.enabled).to_not include(merchant3)
+    end
+
+    it ".disabled returns only merchants with a disabled status" do
+      # enums method
+      expect(Merchant.disabled).to include(merchant1)
+      expect(Merchant.disabled).to include(merchant3)
+      expect(Merchant.disabled).to_not include(merchant2)
+      expect(Merchant.disabled).to_not include(merchant4)
+    end
+  end
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
+      # this fails like once out of every 20 tests...
+      # I think it might be because if the transaction count is the same...
+      # it doesn't have an explicit order...should we also order by name? how would we test for that?
       expect(merchants[0].top_5_customers).to eq(customers[1..5])
     end
 
-    it 'returns item names ordered, not shipped' do 
+    it 'returns item names ordered, not shipped' do
       expect(merchants[0].ordered_not_shipped).to eq([
-        invoice_item1, 
-        invoice_item2, 
-        invoice_item3, 
-        invoice_item4, 
+        invoice_item1,
+        invoice_item2,
+        invoice_item3,
+        invoice_item4,
         invoice_item5,
-        invoice_item6, 
-        invoice_item7, 
-        invoice_item8, 
-        invoice_item9, 
+        invoice_item6,
+        invoice_item7,
+        invoice_item8,
+        invoice_item9,
         invoice_item10
         ])#item and item invoice number
-    end
-    
-    it 'successful transactions' do 
-      expect(merchants[0].successful_transactions).to eq([@invoices[2], @invoices[3], @invoices[4], @invoices[5], @invoices[6], @invoices[7], @invoices[8], @invoices[9], @invoices[10], @invoices[11]])
-      expect(merchants[0].successful_transactions).to_not eq([@invoices[0], @invoices[1]])
     end
   end
 end

@@ -19,7 +19,7 @@
   <div class="page-defaults" id="leftSide2">
     <h2>Invoices</h2>
     <% @invoices.each do |invoice| %>
-      <p><%= link_to "Invoice ##{invoice.id}", admin_invoices_path(invoice.id) %> </p>
+      <p><%= link_to "Invoice ##{invoice.id}", invoice_path(invoice.id) %>  </p>
     <% end %>
   </div>
 </div>

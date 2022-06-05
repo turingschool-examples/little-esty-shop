@@ -1,0 +1,5 @@
+<%= form_with model: model, url: url, local: true do |f| %>
+  <p><%= f.label :name %></p>
+  <%= f.text_field :name %>
+  <%= f.submit button_text %>
+<% end %>

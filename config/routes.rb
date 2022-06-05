@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   resources :admin, only: [:index]
 
-  scope :admin do
-    resources :merchants, controller: 'admin_merchants', only: %i[index show]
+  scope '/admin' do
+    resources :merchants, controller: 'admin_merchants', except: %i[delete]
     resources :invoices, controller: 'admin_invoices', only: %i[index show]
   end
 end

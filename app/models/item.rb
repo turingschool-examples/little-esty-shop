@@ -26,4 +26,28 @@ class Item < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
+
+  def best_day
+    # # by revenue
+    # invoices
+    # .joins(:transactions)
+    # .select("invoices.created_at")
+    # .where("transactions.result = ?", 0)
+    # .order(Arel.sql("sum(invoice_items.quantity * invoice_items.unit_price) desc, date_trunc('day', invoices.created_at) desc"))
+    # .group("invoices.created_at")
+    # .pluck("invoices.created_at")
+    # .first
+    # .strftime("%m/%d/%y")
+
+    # by quantity
+    invoices
+    .joins(:transactions)
+    .select("invoices.created_at")
+    .where("transactions.result = ?", 0)
+    .order(Arel.sql("sum(invoice_items.quantity) desc, date_trunc('day', invoices.created_at) desc"))
+    .group("invoices.created_at")
+    .pluck("invoices.created_at")
+    .first
+    .strftime("%m/%d/%y")
+  end
 end

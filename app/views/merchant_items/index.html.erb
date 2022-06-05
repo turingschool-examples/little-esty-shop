@@ -32,17 +32,18 @@
       <div class="merchant-items-disabled">
       <h3>Disabled Items</h3>
     <% @items.disabled.each do |item| %>
-      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p> 
+      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
       <%= button_to "Enable", "/merchants/#{@merchant.id}/items", id: item.id, method: :patch, params: {:"item[status]" => "Enabled", id: item.id} %>
     <% end %>
     </div>
   </div>
 
   <div class="page-defaults" id="rightSide2">
-  <h3>Top Items</h3>
+    <h3>Top Items</h3>
     <% @items.most_popular.each do |item| %>
       <ol id="topItem-<%= item.id %>", type="1">
         <li><%= link_to "#{item.name}", merchant_item_path(id: item.id) %> - <%= number_to_currency(item.revenue / 100) %> in sales</li>
+        <li><%= "Top selling date for #{item.name} was #{item.best_day}" %></li>
       </ol>
     <% end %>
   </div>
