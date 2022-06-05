@@ -9,4 +9,8 @@ class InvoiceItem < ApplicationRecord
   def price_convert
     unit_price * 0.01.to_f
   end
+
+  def belongs_to_merchant(merchant)
+    item.merchant == merchant
+  end
 end
