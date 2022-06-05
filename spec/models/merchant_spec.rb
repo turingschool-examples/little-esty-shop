@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   describe "relationships" do
-    it { should have_many :items }
+    it { should have_many(:items) }
     it { should have_many(:invoice_items).through(:items) }
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:customers).through(:invoices) }
@@ -115,7 +115,7 @@ RSpec.describe Merchant, type: :model do
         tied_customers = [customers[1], customers[3], customers[4], customers[5]]
         expected = tied_customers.sort_by(&:last_name).sort_by(&:first_name).unshift(top_customer)
 
-        expect(Merchant.top_5_customers).to have_content(expected)
+        expect(Merchant.top_5_customers).to eq(expected)
       end
     end
   end
@@ -125,10 +125,15 @@ RSpec.describe Merchant, type: :model do
       # this fails like once out of every 20 tests...
       # I think it might be because if the transaction count is the same...
       # it doesn't have an explicit order...should we also order by name? how would we test for that?
+      top_customer = customers[2]
+      tied_customers = [customers[1], customers[3], customers[4], customers[5]]
+      expected = tied_customers.sort_by(&:last_name).sort_by(&:first_name).unshift(top_customer)
+      # binding.pry
       expect(merchants[0].top_5_customers).to eq(customers[1..5])
     end
 
     it 'returns item names ordered, not shipped' do
+      # binding.pry
       expect(merchants[0].ordered_not_shipped).to eq([
         invoice_item1,
         invoice_item2,
@@ -139,7 +144,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item7,
         invoice_item8,
         invoice_item9,
-        invoice_item10
+        invoice_item10,
         ])#item and item invoice number
     end
   end
