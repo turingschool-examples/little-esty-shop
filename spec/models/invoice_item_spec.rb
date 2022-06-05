@@ -25,6 +25,5 @@ RSpec.describe InvoiceItem, type: :model do
     it "converts unit price into dollar format" do
       expect(@invoice_items_1.price_convert).to eq(10.01)
     end
-
   end
 end

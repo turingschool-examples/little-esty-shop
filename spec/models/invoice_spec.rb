@@ -7,9 +7,13 @@ RSpec.describe Invoice, type: :model do
     @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002)
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: "Ondricka")
     @invoice_1 = @customer_1.invoices.create!(status: "cancelled")
-    @invoice_items_1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "Pending", invoice_id: @invoice_1.id)
-    @invoice_items_2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "Pending", invoice_id: @invoice_1.id)
-
+    @invoice_2 = @customer_1.invoices.create!(status: "cancelled")
+    @invoice_3 = @customer_1.invoices.create!(status: "cancelled")
+    @invoice_items_1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "pending", invoice_id: @invoice_1.id)
+    @invoice_items_2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "pending", invoice_id: @invoice_1.id)
+    @invoice_items_3 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "shipped", invoice_id: @invoice_2.id)
+    @invoice_items_4 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "packaged", invoice_id: @invoice_3.id)
+    @invoice_items_5 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "shipped", invoice_id: @invoice_3.id)
   end
 
   describe 'relationships' do
@@ -27,6 +31,12 @@ RSpec.describe Invoice, type: :model do
   describe 'instance methods' do
     it "can give total revenue for invoice" do
       expect(@invoice_1.total_revenue).to eq(30.03)
+    end
+
+    it "determines incomplete invoices" do
+      expect(@invoice_1.incomplete?).to eq(true)
+      expect(@invoice_2.incomplete?).to eq(false)
+      expect(@invoice_3.incomplete?).to eq(true)
     end
   end
 end
