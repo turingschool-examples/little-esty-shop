@@ -26,7 +26,6 @@ RSpec.describe Item, type: :feature do
       visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
 
       click_on "Update"
-      save_and_open_page
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
       expect(page).to have_field(:name, with: "Item1")
       expect(page).to have_field(:description, with: "Description1")

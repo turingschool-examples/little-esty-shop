@@ -9,7 +9,6 @@ class Merchant < ApplicationRecord
   end
 
   def enabled_items
-    # items.joins(:invoice_items).where("items.status = 0")
     items.where("items.status = 0")
   end
 
