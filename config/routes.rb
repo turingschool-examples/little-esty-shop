@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   get "/merchants/:merchant_id/dashboard", to: "merchants#show"
-  
   get "/merchants/:merchant_id/items", to: "merchant_items#index"
   get "/merchants/:merchant_id/items/new", to: "merchant_items#new"
   post "/merchants/:merchant_id/items", to: "merchant_items#create"
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
 
   get "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#show"
   get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
+  patch "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#update"
 
   get '/admin', to: "admin/dashboard#index"
 

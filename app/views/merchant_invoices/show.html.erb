@@ -3,7 +3,7 @@
 <section id="invoiceDetails">
   <p> Status: <%= "#{@invoice.status}"%> </p><br>
   <p> Created on: <%= "#{@invoice.created_at_format}" %> </p><br>
-  <p>Total Revenue: <%= @merchant.my_total_revenue(@invoice) %></p>
+  <p>Total Revenue: <%= @merchant.my_total_revenue(@invoice).round(2) %></p>
   <h4>Customer:</h4>
   <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
 </section>
@@ -11,10 +11,17 @@
   <h4>Items on this Invoice</h4>
   <% @invoice.invoice_items.each do |invoice_item| %>
     <% if invoice_item.belongs_to_merchant(@merchant) %>
-      <p class="invoiceItem"><%= invoice_item.item.name %></p>
+    <div id="invoiceItem-<%= invoice_item.id %>">
+      <p><%= invoice_item.item.name %></p>
       <p>Quantity: <%= invoice_item.quantity %></p>
       <p>Price: <%= invoice_item.unit_price %></p>
-      <p>Status: <%= invoice_item.status %></p>
+      <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+        <%= f.label :status %>
+        <%= f.select :status, ["Pending", "Packaged", "Shipped"], selected: "#{invoice_item.status}" %>
+        <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
+        <%= f.submit "Update Item Status"%>
+        <% end %>
+        </div>
       <% end %>
     <% end %>
 </section>
