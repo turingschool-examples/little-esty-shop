@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
 
   validates_presence_of :name, :status
 
@@ -24,6 +25,15 @@ class Merchant < ApplicationRecord
     cust_ids = invoice_customer_count_sorted.limit(5).pluck(:customer_id)
     #Return an array of the top 5 customers
     customers_top_5 = Customer.find(cust_ids)
+  end
+
+  def self.top_5_merchants_by_revenue
+    joins(invoices: :transactions)
+          .where(transactions: {result: 'success'})
+          .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+          .group(:id)
+          .order(total_revenue: :desc)
+          .limit(5)
   end
 
 end
