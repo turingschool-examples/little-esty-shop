@@ -10,3 +10,4 @@ class Item < ApplicationRecord
   validates_presence_of :unit_price
 
 end
+
