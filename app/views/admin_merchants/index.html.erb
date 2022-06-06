@@ -19,7 +19,7 @@
 
 <div class="page-defaults" id="splitSides">
   <div class="page-defaults" id="leftSide2">
-    <div id="enabledMerchants">
+    <div class="enabled-merchants">
       <h2>Enabled Merchants</h2>
       <% @merchants.enabled.each do |merchant| %>
         <div id="enabled-<%= merchant.id %>">
@@ -31,7 +31,7 @@
       <% end %>
     </div>
 
-    <div id="disabledMerchants">
+    <div class="disabled-merchants">
       <h2>Disabled Merchants</h2>
       <% @merchants.disabled.each do |merchant| %>
         <div id="disabled-<%= merchant.id %>">
@@ -45,13 +45,13 @@
   </div>
 
   <div class="page-defaults" id="rightSide2">
-    <div id="topMerchants">
     <h3>Top Merchants</h3>
     <ol type="1">
-      <% @merchants.top_5.each do |merch| %>
-        <li><%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %> - <%= number_to_currency(merch.revenue / 100) %> in sales</li>
+      <% @merchants.top_5.each_with_index do |merch, index| %>
+      <div id="topMerchant-<%=index%>">
+        <li><%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %> - <%= number_to_currency(merch.revenue / 100.0) %> in sales</li>
+      </div>
       <% end %>
     </ol>
-    </div>
   </div>
 </div>

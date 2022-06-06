@@ -9,7 +9,7 @@ RSpec.describe 'New Merchant Form' do
     click_button 'Submit'
     expect(current_path).to eq("/admin/merchants")
 
-    within "#disabledMerchants" do 
+    within ".disabled-merchants" do 
       expect(page).to have_content('Pop Rock Enterprises')
       expect(page).to have_button('Enable')
       expect(page).to_not have_button('Disable')

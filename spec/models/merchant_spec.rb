@@ -118,7 +118,7 @@ RSpec.describe Merchant, type: :model do
 
     it 'returns item names ordered, not shipped' do
       expect(merchants[0].ordered_not_shipped).to eq([invoice_item2])
-      expect(merchants[5].ordered_not_shipped).to eq([invoice_item11, invoice_item12])
+      expect(merchants[5].ordered_not_shipped).to match_array([invoice_item11, invoice_item12])
     end
   end
 

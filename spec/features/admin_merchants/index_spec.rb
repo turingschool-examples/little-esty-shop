@@ -58,10 +58,10 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       expect(current_path).to eq("/admin/merchants")
       merchants[0].reload
       expect(merchants[0].status).to eq("disabled")
-      within '#enabledMerchants' do
+      within '.enabled-merchants' do
         expect(page).to_not have_content(merchants[0].name)
       end
-      within '#disabledMerchants' do
+      within '.disabled-merchants' do
         expect(page).to have_content(merchants[0].name)
       end
       expect(merchants2[1].status).to eq("disabled")
@@ -72,10 +72,10 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       expect(current_path).to eq("/admin/merchants")
       merchants2[1].reload
       expect(merchants2[1].status).to eq("enabled")
-      within '#enabledMerchants' do
+      within '.enabled-merchants' do
         expect(page).to have_content(merchants2[1].name)
       end
-      within '#disabledMerchants' do
+      within '.disabled-merchants' do
         expect(page).to_not have_content(merchants2[1].name)
       end
     end
@@ -85,14 +85,14 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       expect(page).to have_content("Enabled Merchants")
       expect(page).to have_content("Disabled Merchants")
 
-      within "#disabledMerchants" do
+      within ".disabled-merchants" do
         expect(page).to have_button('Enable')
         expect(page).to have_content(merchants2[0].name)
         expect(page).to have_content(merchants2[1].name)
         expect(page).to_not have_content(merchants[0].name)
       end
 
-      within "#enabledMerchants" do
+      within ".enabled-merchants" do
         expect(page).to have_button('Disable')
         expect(page).to have_content(merchants[0].name)
         expect(page).to have_content(merchants[1].name)
@@ -115,19 +115,32 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
     it 'lists the names of the top five merchants and their revenue' do
       visit '/admin/merchants'
 
-
-      within "#topMerchants" do
-        expect(merchants[2].name).to appear_before(merchants[3].name)
-        expect(merchants[3].name).to appear_before(merchants[1].name)
-        expect(merchants[1].name).to appear_before(merchants[4].name)
-        expect(merchants[4].name).to appear_before(merchants[0].name)
-
+      within "#topMerchant-0" do
+        expect(page).to have_link("#{merchants[2].name}")
         expect(page).to have_content("#{merchants[2].name} - $504.00 in sales")
+      end
+      
+      within "#topMerchant-1" do
+        expect(page).to have_link("#{merchants[3].name}")
         expect(page).to have_content("#{merchants[3].name} - $80.00 in sales")
+      end
+      
+      within "#topMerchant-2" do
+        expect(page).to have_link("#{merchants[1].name}")
         expect(page).to have_content("#{merchants[1].name} - $56.00 in sales")
-        expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
+      end
+      
+      within "#topMerchant-4" do
+        expect(page).to have_link("#{merchants[0].name}")
         expect(page).to have_content("#{merchants[0].name} - $24.00 in sales")
       end
+      
+      within "#topMerchant-3" do
+        expect(page).to have_link("#{merchants[4].name}")
+        expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
+        click_link "#{merchants[4].name}"
+      end
+      expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
     end
 
     it 'has links for the merchant names' do 
