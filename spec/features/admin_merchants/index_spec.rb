@@ -142,21 +142,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       end
       expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
     end
-
-    it 'has links for the merchant names' do 
-      visit '/admin/merchants'
-
-      within "#topMerchants" do
-        expect(page).to have_link("#{merchants[0].name}")
-        expect(page).to have_link("#{merchants[2].name}")
-        expect(page).to have_link("#{merchants[3].name}")
-        expect(page).to have_link("#{merchants[1].name}")
-        expect(page).to have_link("#{merchants[4].name}")
-        click_link "#{merchants[4].name}"
-      end
-      expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
-    end
-  end
+  end 
 
   describe "Admin Merchants: Top Merchant's Best Day" do
     xit "can calculate the date with the most sales" do
