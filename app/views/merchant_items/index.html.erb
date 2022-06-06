@@ -1,6 +1,13 @@
 <h1><%= "#{@merchant.name}'s" %></h1>
 <h2>ITEMS INDEX</h2>
 
+<section id="top5items">
+<h2>Top 5 Selling Items by Revenue</h2>
+<% @top5items.each do |item| %>
+<h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3><br>
+<strong><%= "Total Revenue = #{number_to_currency(item.total_revenue)}"%></strong><br>
+<%end%></section>
+
 <%= button_to "Create Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
 <section id= "enabled_items">
 <h2>Enabled Items</h2>
