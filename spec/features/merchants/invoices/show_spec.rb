@@ -117,6 +117,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     expect(page).to have_current_path("/merchants/#{@billman.id}/invoices/#{@invoice1.id}")
 
     within "#invoiceItem-#{@order1.id}" do
+      expect(page.has_select?(:status, selected: "Pending")).to eq(false)
       expect(page.has_select?(:status, selected: "Packaged")).to eq(true)
     end
   end
