@@ -1,11 +1,14 @@
-<%= link_to "Items Index", "/merchants/:id/items" %>
-<%= link_to "Invoices Index", "/merchants/:id/invoices" %><br>
+<%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %>
+<%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices" %><br>
 
 <h2><%= @merchant.name %></h2>
 
 <div id="ready-items">
     <h3>Items Ready to Ship</h3>
     <% @merchant.ready_items.each do |item| %>
-        <p><%= "#{item.name}" %><%= link_to "#{item.find_invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.find_invoice_id}" %></p>
+        <p><%= "#{item.name}" %><%= link_to "#{item.find_invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.find_invoice_id}" %>
+        <% item.invoice_time.each do |invoice| %>
+            Date Ordered: <%= invoice.get_invoice_item(item.id).created_at.strftime('%A %B %e %Y') %>
+        <% end %>
     <% end %>
 </div>

@@ -27,7 +27,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
                 expect(page).to have_content("Unit Price: 1000")
                 expect(page).to have_content("Status: pending")
                 expect(page).to_not have_content("Name: Floopy Geo")
-                expect(page).to_not have_content("Status: Cancelled")
+                expect(page).to_not have_content("Status: cancelled")
             end
             within "#invoice-item-#{@item3.id}" do
                 expect(page).to have_content("Name: Floopy Retro")
@@ -45,7 +45,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
         it 'shows the total revenue from all items on invoice' do
 
           visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
-
+          
           expect(page).to have_content("Total Revenue: 58000")
         end
 
