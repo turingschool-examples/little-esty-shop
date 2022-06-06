@@ -13,3 +13,10 @@
 <%=link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
 <%=button_to("Enable", admin_merchant_path(merchant.id), method: :patch, params: {enabled: true}) %>
 <% end %> <% end %>
+
+<section id="top5">
+<h5>Top 5 Merchants:</h5>
+<% @merchants.top_five_revenue.each do |merchant| %>
+<p><%=link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+  Total Revenue: <%= number_to_currency(merchant.total) %>
+<% end %></p> </section>
