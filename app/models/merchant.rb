@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
 
   validates_presence_of :name, :status
 
@@ -9,7 +10,6 @@ class Merchant < ApplicationRecord
     merchant_items = Item.where("merchant_id = #{self.id}")
     InvoiceItem.where(item_id: merchant_items).where(status: [0,1]).order(:created_at)
   end
-
 
   def top_5_customers
     #Find items associated with the curent merchant
@@ -26,6 +26,15 @@ class Merchant < ApplicationRecord
     customers_top_5 = Customer.find(cust_ids)
   end
 
+  def self.top_5_merchants_by_revenue
+    joins(invoices: :transactions)
+          .where(transactions: {result: 'success'})
+          .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+          .group(:id)
+          .order(total_revenue: :desc)
+          .limit(5)
+  end
+  
   def top_5_items
     top_5_items = self.items.joins(invoice_items: [:invoice]).where(invoices: {status: 2}).select("items.*, sum(invoice_items.quantity * invoice_items.unit_price)").group(:id).order(sum: :desc).limit(5).to_a
   end

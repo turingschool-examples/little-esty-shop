@@ -1,5 +1,16 @@
 <h1>Admin Merchant Index</h1>
 <ul>
+    <div id="top_5">
+        <h3>Top 5 Merchants:</h3>
+        <% Merchant.top_5_merchants_by_revenue.each_with_index do |merchant, index| %>
+            <div id="merchant-<%= index %>">
+                    <%=link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+                    - $<%= number_with_delimiter(merchant.total_revenue.div(100)) %> in sales
+            </div>
+        <% end %>
+    </div>
+</ul>
+<ul>
     <div id="disabled">
         <h3>Disabled Merchants:</h3>
         <% @merchants.each do |merchant| %>
