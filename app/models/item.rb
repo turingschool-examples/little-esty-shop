@@ -25,7 +25,7 @@ class Item < ApplicationRecord
             .order(sales: :desc)
             .first.updated_at
   end
-
+  
   def invoice_time
     invoices.order(created_at: :asc)
   end
