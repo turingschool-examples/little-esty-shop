@@ -196,3 +196,4 @@ RSpec.describe 'admin merchants index', type: :feature do
     end
   end
 end
+
