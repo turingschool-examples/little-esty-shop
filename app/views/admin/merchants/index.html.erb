@@ -7,24 +7,24 @@
   <div class="column";>
     <div class="enabled-merchants">
       <h3> Status: Enabled </h3>
-      <hr><br>
-      <ul>
-      <% @enabled_merchants.each do |merchant| %>
-      <h5><li><%= merchant.name %></li></h5>
-      <% end %>
-      </ul>
+      <ul><% @enabled_merchants.each do |merchant| %>
+        <div id="enabled-merchants-<%= merchant.id %>">
+        <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+        <%= button_to "Disable", admin_merchant_path(merchant), method: :patch, params: { status: 'disabled' } %></li>
+        </div>
+      <% end %></ul>
     </div>
   </div>
 
   <div class="column">
     <div class="disabled-merchants">
       <h3> Status: Disabled </h3>
-      <hr><br>
-      <ul>
-      <% @disabled_merchants.each do |merchant| %>
-      <h5><li><%= merchant.name %></li></h5>
-      <% end %>
-      </ul>
-    </div>
+      <ul><% @disabled_merchants.each do |merchant| %>
+        <div id="disabled-merchants-<%= merchant.id %>">
+        <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+        <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, params: { status: 'enabled' } %></li>
+        </div>
+      <% end %></ul>
+    </div>      
   </div>
 </div>

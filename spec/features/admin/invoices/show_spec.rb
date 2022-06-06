@@ -54,4 +54,21 @@ RSpec.describe "Admin Invoice Show Page" do
 
     expect(page).to have_content("Total Revenue: $278,091.00")
   end
+
+  it "can update and Invoice Item's status via a selector" do
+    visit admin_invoice_path(invoice1)
+
+    within "##{invoice_item1.id}" do
+      select "#{invoice_item1.status}"
+      select "shipped"
+      expect(page).to have_button("Update Invoice Item Status")
+
+      click_button "Update Invoice Item Status"
+      expect(page).to have_select(selected: "shipped")
+      expect(page).to_not have_select(selected: "packaged")
+      expect(page).to_not have_select(selected: "pending")
+    end
+
+    expect(current_path).to eq(admin_invoice_path(invoice1))
+  end
 end

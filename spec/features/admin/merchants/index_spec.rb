@@ -28,6 +28,59 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
+  it "has a link to each Merchant's Admin Show page" do
+    visit admin_merchants_path
+
+    within "#enabled-merchants-#{merchant4.id}" do
+      expect(page).to have_link("Hot Topic")
+      expect(page).to_not have_link("Target")
+      click_link ("Hot Topic")
+    end
+
+    expect(current_path).to eq(admin_merchant_path(merchant4))
+
+    visit admin_merchants_path
+
+    within "#disabled-merchants-#{merchant1.id}" do
+      expect(page).to have_link("REI")
+      expect(page).to_not have_link("Hot Topic")
+      click_link ("REI")
+    end
+
+    expect(current_path).to eq(admin_merchant_path(merchant1))
+  end
+
+  it "has a button to enable/disable a merchant" do
+    visit admin_merchants_path
+
+    within "#enabled-merchants-#{merchant4.id}" do
+      expect(page).to have_link("Hot Topic")
+      expect(page).to_not have_link("Target")
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enable")
+      click_button ("Disable")
+    end
+
+    within "#disabled-merchants-#{merchant1.id}" do
+      expect(page).to have_link("REI")
+      expect(page).to_not have_link("Hot Topic")
+      expect(page).to have_button("Enable")
+      expect(page).to_not have_button("Disable")
+      click_button ("Enable")
+    end
+
+    visit admin_merchants_path
+
+    within ".enabled-merchants" do
+      expect(page).to_not have_link("Hot Topic")
+      expect(page).to have_link("REI")
+    end
+
+    within ".disabled-merchants" do
+      expect(page).to_not have_link("REI")
+      expect(page).to have_link("Hot Topic")
+    end
+
   it "can fill out a form to create a new merchant and display the default status of disabled" do
     expect(page).to_not have_content('Backcountry')
 
@@ -46,7 +99,6 @@ RSpec.describe "Admin Merchants Index Page" do
   end
 
   it "displays a link to create a new merchant" do
-    save_and_open_page
     expect(page).to have_link('New Merchant')
   end
 end
