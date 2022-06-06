@@ -6,6 +6,8 @@
             <div id="merchant-<%= index %>">
                     <%=link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
                     - $<%= number_with_delimiter(merchant.total_revenue.div(100)) %> in sales
+                    <br>
+                    Top day for <%= merchant.name%>'s store was <%= merchant.best_day.strftime("%m/%d/%y") %>
             </div>
         <% end %>
     </div>
