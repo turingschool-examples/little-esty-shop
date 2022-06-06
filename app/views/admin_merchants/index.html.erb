@@ -11,8 +11,8 @@
 
   <div class="page-defaults" id="rightSide">
     <ul>
-    <%= link_to "Merchants", '/admin/merchants' %>
-    <%= link_to "Invoices", '/admin/invoices' %>
+      <%= link_to "Merchants", '/admin/merchants' %>
+      <%= link_to "Invoices", '/admin/invoices' %>
     </ul>
   </div>
 </div>
@@ -46,7 +46,7 @@
 
   <div class="page-defaults" id="rightSide2">
     <h3>Top Merchants</h3>
-    <ol id="topMerchants", type="1">
+    <ol id="topMerchants" type="1">
       <% @merchants.top_5.each do |merch| %>
         <li><%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %> - <%= number_to_currency(merch.revenue / 100) %> in sales</li>
       <% end %>
