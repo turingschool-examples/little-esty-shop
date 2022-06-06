@@ -43,16 +43,16 @@ RSpec.describe 'admin dashboard' do
     visit '/admin'
     expect(page).to have_content('Incomplete Invoices:')
 
-    expect(page).to have_link(@invoice1.id)
+    expect(page).to have_content(@invoice1.id)
 
-    expect(page).to have_link(@invoice2.id)
+    expect(page).to have_content(@invoice2.id)
 
-    expect(page).to have_link(@invoice3.id)
+    expect(page).to have_content(@invoice3.id)
 
-    expect(page).to_not have_link(@invoice4.id)
+    expect(page).to_not have_content(@invoice4.id)
 
     click_link(@invoice1.id.to_s)
 
-    expect(current_path).to eq("admin/invoices/#{invoice.id}")
+    expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
   end
 end
