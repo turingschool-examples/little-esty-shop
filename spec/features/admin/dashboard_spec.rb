@@ -1,7 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'merchants dashboard' do
+RSpec.describe 'admin dashboard' do
   before :each do
+    @customer1 = Customer.create!(first_name: 'Joe', last_name: 'Bob')
+    @invoice1 = @customer1.invoices.create!(status: 0)
+    @invoice2 = @customer1.invoices.create!(status: 0)
+    @invoice3 = @customer1.invoices.create!(status: 1)
+    @invoice4 = @customer1.invoices.create!(status: 2)
   end
   it 'shows admin dashboard' do
     visit '/admin'
@@ -25,5 +30,13 @@ RSpec.describe 'merchants dashboard' do
     visit '/admin'
 
     expect(page).to have_content('Incomplete Invoices:')
+
+    expect(page).to have_content(@invoice1.id)
+
+    expect(page).to have_content(@invoice2.id)
+
+    expect(page).to have_content(@invoice3.id)
+
+    expect(page).to_not have_content(@invoice4.id)
   end
 end
