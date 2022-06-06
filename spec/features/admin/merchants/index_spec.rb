@@ -139,6 +139,18 @@ RSpec.describe 'admin merchants index', type: :feature do
   end
 
   it 'shows top 5 merchants by revenue' do
-    visit '/admin/merchant'
+    visit '/admin/merchants'
+    within "#top_5" do
+        within "#merchant-0" do
+            expect(page).to have_content("Orange You Glad")
+            expect(page).to have_content("$21000000.00")
+            expect(page).to_not have_content(@merch_1.name)
+        end
+        within "#merchant-4" do
+            expect(page).to have_content("Two-Legs Fashion")
+            expect(page).to have_content("$650.00")
+            expect(page).to_not have_content(@merch_4.name)
+        end
+    end
   end
 end
