@@ -11,7 +11,7 @@ RSpec.describe 'Merchant Items Index Page' do
   describe 'merchant items' do
     it 'has list of items for a specific merchant' do
       visit "/merchants/#{merchant.id}/items"
-      # save_and_open_page
+
       expect(page).to have_content(item.name)
       expect(page).to have_content(item2.name)
       expect(page).to_not have_content(item3.name)
@@ -37,7 +37,7 @@ RSpec.describe 'Merchant Items Index Page' do
   describe 'merchant item disable/enable' do
     it 'has a button to enable and a button to disable item' do
       visit "/merchants/#{merchant.id}/items"
-      # save_and_open_page
+
       within '.merchant-items-enabled' do
         expect(page).to have_button('Disable')
         expect(page).to_not have_button('Enable')
@@ -135,7 +135,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
     it "has the top 5 most popular items ranked by total revenue generated" do
       visit "/merchants/#{merchant.id}/items"
-      # save_and_open_page
+
       within "#rightSide2" do
         expect(page).to have_content("Top Items")
         expect(items[3].name).to appear_before(items[5].name)
@@ -202,7 +202,6 @@ RSpec.describe 'Merchant Items Index Page' do
     let!(:invoice_item6) { create(:invoice_item, item: items[5], invoice: invoice3, quantity: 9, unit_price: 5000) }
     let!(:invoice_item12) { create(:invoice_item, item: items[5], invoice: invoice2, quantity: 9, unit_price: 6) }
 
-    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
     it "has the date with the most sales for each item" do
       visit "/merchants/#{merchant.id}/items"
 

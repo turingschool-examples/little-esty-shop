@@ -4,7 +4,6 @@ class AdminMerchantsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @merchant = Merchant.find(params[:id])
   end
 
@@ -38,7 +37,7 @@ class AdminMerchantsController < ApplicationController
       flash[:notice] = 'Merchant Successfully Updated'
     end
   end
-  
+
 
   private
     def merchant_params
