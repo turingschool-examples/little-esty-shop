@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
-  describe "relationships" do
+  describe 'relationships' do
     it { should belong_to :customer }
     it { should have_many :transactions }
     it { should have_many :invoice_items }
@@ -9,7 +9,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'validations' do
-    it { should define_enum_for(:status).with_values(["in progress", "completed", "cancelled"])}
+    it { should define_enum_for(:status).with_values(['in progress', 'completed', 'cancelled']) }
   end
 
   let!(:merchant1) { create(:merchant) }
@@ -28,13 +28,13 @@ RSpec.describe Invoice, type: :model do
   let!(:invoice_item4) { create(:invoice_item, item: item2, invoice: invoices[2], unit_price: 2524, status: 1) }
   let!(:invoice_item5) { create(:invoice_item, item: item2, invoice: invoices[3], unit_price: 2524, status: 2) }
 
-  describe "#instance methods" do
-    it "#total_revenue returns total revenue of an invoice" do
-      expect(invoices[0].total_revenue).to eq("$55.35")
+  describe '#instance methods' do
+    it '#total_revenue returns total revenue of an invoice' do
+      expect(invoices[0].total_revenue).to eq('$55.35')
     end
 
     it 'formats the date correctly' do
-      expect(invoices[0].formatted_date).to eq("Thursday, March 10, 2022")
+      expect(invoices[0].formatted_date).to eq('Thursday, March 10, 2022')
     end
   end
 

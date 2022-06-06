@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   describe "relationships" do
-    it { should have_many :items }
+    it { should have_many(:items) }
     it { should have_many(:invoice_items).through(:items) }
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:customers).through(:invoices) }
@@ -109,19 +109,67 @@ RSpec.describe Merchant, type: :model do
       ]
       expect(Merchant.top_5_customers).to eq(expected)
     end
+
+    describe ".top_5_customers" do
+      InvoiceItem.destroy_all
+      Item.destroy_all
+      Merchant.destroy_all
+      Transaction.destroy_all
+      Invoice.destroy_all
+      Customer.destroy_all
+
+      let!(:merchants) { create_list(:merchant, 2) }
+      let!(:customers) { create_list(:customer, 6) }
+
+      let!(:item1) { create(:item, merchant: merchants[0]) }
+      let!(:item2) { create(:item, merchant: merchants[1]) }
+
+      let!(:invoice1) { create(:invoice, customer: customers[0]) }
+      let!(:invoice2) { create(:invoice, customer: customers[1]) }
+      let!(:invoice3) { create(:invoice, customer: customers[2]) }
+      let!(:invoice4) { create(:invoice, customer: customers[3]) }
+      let!(:invoice5) { create(:invoice, customer: customers[4]) }
+      let!(:invoice6) { create(:invoice, customer: customers[5]) }
+
+      let!(:transaction1) { create(:transaction, invoice: invoice1, result: 1) }
+      let!(:transaction2) { create(:transaction, invoice: invoice1, result: 1) }
+      let!(:transaction3) { create(:transaction, invoice: invoice2, result: 0) }
+      let!(:transaction4) { create(:transaction, invoice: invoice2, result: 1) }
+      let!(:transaction5) { create(:transaction, invoice: invoice3, result: 0) }
+      let!(:transaction6) { create(:transaction, invoice: invoice3, result: 0) }
+      let!(:transaction7) { create(:transaction, invoice: invoice4, result: 0) }
+      let!(:transaction8) { create(:transaction, invoice: invoice4, result: 1) }
+      let!(:transaction9) { create(:transaction, invoice: invoice5, result: 0) }
+      let!(:transaction10) { create(:transaction, invoice: invoice5, result: 1) }
+      let!(:transaction11) { create(:transaction, invoice: invoice6, result: 0) }
+      let!(:transaction12) { create(:transaction, invoice: invoice6, result: 1) }
+
+      let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, status: 0) }
+      let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice2, status: 1) }
+      let!(:invoice_item3) { create(:invoice_item, item: item1, invoice: invoice3, status: 1) }
+      let!(:invoice_item4) { create(:invoice_item, item: item2, invoice: invoice4, status: 0) }
+      let!(:invoice_item5) { create(:invoice_item, item: item1, invoice: invoice5, status: 0) }
+      let!(:invoice_item6) { create(:invoice_item, item: item2, invoice: invoice6, status: 1) }
+
+      it "returns the top 5 customers that have made the most purchases with successful transactions" do
+        top_customer = customers[2]
+        tied_customers = [customers[1], customers[3], customers[4], customers[5]]
+        expected = tied_customers.sort_by(&:last_name).sort_by(&:first_name).unshift(top_customer)
+
+        expect(Merchant.top_5_customers).to eq(expected)
+      end
+    end
   end
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
-      # this fails like once out of every 20 tests...
-      # I think it might be because if the transaction count is the same...
-      # it doesn't have an explicit order...should we also order by name? how would we test for that?
       expect(merchants[2].top_5_customers).to eq([customer1, customer6, customer2, customer4, customer5])
     end
 
     it 'returns item names ordered, not shipped' do
       expect(merchants[0].ordered_not_shipped).to eq([invoice_item2])
       expect(merchants[5].ordered_not_shipped).to eq([invoice_item11, invoice_item12])
+
     end
   end
 
