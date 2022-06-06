@@ -20,7 +20,7 @@ class Admin::MerchantsController < ApplicationController
       merchant.update(merchant_status_params)
       redirect_to admin_merchants_path
     else
-      if merchant.update(merchant_params)
+      if merchant.update(merchant_name_params)
         flash[:notice] = "You have successfully updated this Merchant!"
         redirect_to admin_merchant_path(merchant)
       else
@@ -30,12 +30,21 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
-  private
-    def merchant_params
-      params.permit(:name)
-    end
+  def new
 
-    def merchant_status_params
-      params.permit(:status)
-    end
+  end
+
+  def create
+    @merchant = Merchant.create!(params.permit(:name))
+    redirect_to admin_merchants_path
+  end
+
+private
+  def merchant_name_params
+    params.permit(:name)
+  end
+
+  def merchant_status_params
+    params.permit(:status)
+  end
 end
