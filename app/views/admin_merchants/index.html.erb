@@ -9,9 +9,16 @@
   <% end %>
 </div>
 
-<h3>Merchant Names</h3>
+<h3>Merchants</h3>
 <% @merchants.each do |merchant| %>
-    <p><%= merchant.name %></p>
-    <p><%= merchant.status %></p>
+<div id="merchant-<%= merchant.id %>">
+    <p>Name: <%= merchant.name %></p>
+    <p>Status: <%= merchant.status %></p>
+    <% if merchant.status == "disabled" %>
+      <%= button_to "Enable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %>
+    <% elsif merchant.status == "enabled" %>
+      <%= button_to "Disable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %>
+    <% end %>
     <hr>
+</div>
 <% end %>
