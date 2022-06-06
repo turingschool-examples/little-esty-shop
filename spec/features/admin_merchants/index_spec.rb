@@ -119,22 +119,22 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
         expect(page).to have_link("#{merchants[2].name}")
         expect(page).to have_content("#{merchants[2].name} - $504.00 in sales")
       end
-      
+
       within "#topMerchant-1" do
         expect(page).to have_link("#{merchants[3].name}")
         expect(page).to have_content("#{merchants[3].name} - $80.00 in sales")
       end
-      
+
       within "#topMerchant-2" do
         expect(page).to have_link("#{merchants[1].name}")
         expect(page).to have_content("#{merchants[1].name} - $56.00 in sales")
       end
-      
+
       within "#topMerchant-4" do
         expect(page).to have_link("#{merchants[0].name}")
         expect(page).to have_content("#{merchants[0].name} - $24.00 in sales")
       end
-      
+
       within "#topMerchant-3" do
         expect(page).to have_link("#{merchants[4].name}")
         expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
@@ -142,10 +142,31 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       end
       expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
     end
-  end 
+  end
 
   describe "Admin Merchants: Top Merchant's Best Day" do
-    xit "can calculate the date with the most sales" do
+    it "can calculate the date with the most sales" do
+      visit '/admin/merchants'
+
+      within '#topMerchant-0' do
+        expect(page).to have_content("Top selling date for #{merchants[2].name} was #{merchants[2].best_day}")
+      end
+
+      within '#topMerchant-1' do
+        expect(page).to have_content("Top selling date for #{merchants[3].name} was #{merchants[3].best_day}")
+      end
+
+      within '#topMerchant-2' do
+        expect(page).to have_content("Top selling date for #{merchants[1].name} was #{merchants[1].best_day}")
+      end
+
+      within '#topMerchant-4' do
+        expect(page).to have_content("Top selling date for #{merchants[0].name} was #{merchants[0].best_day}")
+      end
+
+      within '#topMerchant-3' do
+        expect(page).to have_content("Top selling date for #{merchants[4].name} was #{merchants[4].best_day}")
+      end
     end
   end
 end
