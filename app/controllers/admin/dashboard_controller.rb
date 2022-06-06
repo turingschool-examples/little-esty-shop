@@ -1,6 +1,7 @@
 class Admin::DashboardController < ApplicationController
 
   def index
-  end 
+    @invoices = Invoice.all
+  end
 
 end

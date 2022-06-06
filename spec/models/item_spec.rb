@@ -11,9 +11,8 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of(:name)}
     it {should validate_presence_of(:description)}
     it {should validate_presence_of(:unit_price)}
-
   end
-
+  
   describe "class methods" do
     before(:each) do
       @billman = Merchant.create!(name: "Billman")
@@ -28,6 +27,5 @@ RSpec.describe Item, type: :model do
       expect(@billman.enabled_items).to eq([@mood, @toe_ring])
       expect(@billman.disabled_items).to eq([@bracelet, @necklace])
     end
-
   end
 end
