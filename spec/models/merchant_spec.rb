@@ -34,7 +34,7 @@ RSpec.describe Merchant do
         end
 
         it "lists the items ready for shipment" do
-            expect(@merch1.ready_items).to eq([@item2, @item3])
+          expect(@merch1.ready_items).to eq([@item2, @item3])
         end
 
 
@@ -43,7 +43,71 @@ RSpec.describe Merchant do
         end
 
         it "list the top 5 items by revenue per a specific merchant" do
-            expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
+          expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
+        end
+
+        it 'gives me the top 5 customers per a specific merchant' do
+          @merch1 = Merchant.create!(name: 'Floopy Fopperations')
+          @item1 = @merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
+          @item2 = @merch1.items.create!(name: 'A-Team Original', description: 'the better', unit_price: 950)
+
+          @cust1 = Customer.create!(first_name: "Mark", last_name: "Ruffalo")
+          @cust2 = Customer.create!(first_name: "Jim", last_name: "Raddle")
+          @cust3 = Customer.create!(first_name: "Bryan", last_name: "Cranston")
+          @cust4 = Customer.create!(first_name: "Walter", last_name: "White")
+          @cust5 = Customer.create!(first_name: "Hank", last_name: "Williams")
+          @cust6 = Customer.create!(first_name: "Sammy", last_name: "Sosa")
+          @cust7 = Customer.create!(first_name: "Barry", last_name: "Bonds")
+
+          @inv1 = @cust1.invoices.create!(status: "in progress")
+          @inv2 = @cust2.invoices.create!(status: "completed")
+          @inv3 = @cust3.invoices.create!(status: "completed")
+          @inv4 = @cust4.invoices.create!(status: "completed")
+          @inv5 = @cust5.invoices.create!(status: "completed")
+          @inv6 = @cust6.invoices.create!(status: "completed")
+          @inv7 = @cust7.invoices.create!(status: "completed")
+
+          InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv1.id}", quantity: 100, unit_price: 1000, status: 1)
+          InvoiceItem.create!(item_id: "#{@item2.id}", invoice_id: "#{@inv2.id}", quantity: 200, unit_price: 2000, status: 1)
+          InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv3.id}", quantity: 200, unit_price: 2000, status: 1)
+          InvoiceItem.create!(item_id: "#{@item2.id}", invoice_id: "#{@inv4.id}", quantity: 200, unit_price: 2000, status: 1)
+          InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv5.id}", quantity: 200, unit_price: 2000, status: 1)
+          InvoiceItem.create!(item_id: "#{@item2.id}", invoice_id: "#{@inv6.id}", quantity: 200, unit_price: 2000, status: 1)
+          InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv7.id}", quantity: 200, unit_price: 2000, status: 1)
+
+          @inv1.transactions.create!(result: 0)
+          @inv1.transactions.create!(result: 0)
+          @inv1.transactions.create!(result: 0)
+
+          @inv2.transactions.create!(result: 0)
+          @inv2.transactions.create!(result: 0)
+          @inv2.transactions.create!(result: 0)
+
+          @inv3.transactions.create!(result: 0)
+          @inv3.transactions.create!(result: 0)
+          @inv3.transactions.create!(result: 0)
+
+          @inv4.transactions.create!(result: 0)
+          @inv4.transactions.create!(result: 0)
+          @inv4.transactions.create!(result: 0)
+          @inv4.transactions.create!(result: 1)
+          @inv4.transactions.create!(result: 1)
+          @inv4.transactions.create!(result: 1)
+          @inv4.transactions.create!(result: 1)
+
+          @inv5.transactions.create!(result: 0)
+          @inv5.transactions.create!(result: 0)
+          @inv5.transactions.create!(result: 0)
+          @inv5.transactions.create!(result: 0)
+          @inv5.transactions.create!(result: 0)
+
+          @inv6.transactions.create!(result: 1)
+          @inv6.transactions.create!(result: 1)
+          @inv6.transactions.create!(result: 1)
+          @inv6.transactions.create!(result: 1)
+
+          @inv7.transactions.create!(result: 0)
+          expect(@merch1.top_five_customers).to eq([@cust5, @cust1, @cust2, @cust3, @cust4])
         end
     end
 

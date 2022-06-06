@@ -4,7 +4,7 @@ RSpec.describe Invoice do
     describe "relationships" do
         it { should belong_to :customer }
         it { should have_many :invoice_items }
-        it { should have_many(:items).through(:invoice_items) } 
+        it { should have_many(:items).through(:invoice_items) }
         it { should have_many(:merchants).through(:items) }
     end
 
@@ -29,12 +29,25 @@ RSpec.describe Invoice do
             @ii3 = InvoiceItem.create!(item_id: "#{@item4.id}", invoice_id: "#{@inv2.id}", quantity: 300)
         end
 
-        describe "#invoice_total_revenue" do
+        describe "#invoice_total_revenue(merch_id)" do
             it "calculates total revenue of an invoice" do
                 expect(@inv1.total_revenue(@merch1.id)).to eq(500000)
             end
         end
-        
+
+        describe "#invoice_get_invoice_item(item_id)" do
+            it "calculates total revenue of an invoice" do
+                expect(@inv2.get_invoice_item(@item4.id)).to eq(@ii3)
+            end
+        end
+
+        describe "#invoice_revenue" do
+            it "calculates total revenue of an invoice" do
+              @ii4 = InvoiceItem.create!(item_id: "#{@item2.id}", invoice_id: "#{@inv1.id}", quantity: 1, unit_price: 2000, status: 1)
+                expect(@inv1.invoice_revenue).to eq(502000)
+            end
+        end
+
     end
-    
+
 end

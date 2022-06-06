@@ -83,6 +83,10 @@ RSpec.describe 'admin merchant show page' do
       @inv4.transactions.create!(result: 0)
       @inv4.transactions.create!(result: 0)
       @inv4.transactions.create!(result: 0)
+      @inv4.transactions.create!(result: 1)
+      @inv4.transactions.create!(result: 1)
+      @inv4.transactions.create!(result: 1)
+      @inv4.transactions.create!(result: 1)
 
       @inv5.transactions.create!(result: 0)
       @inv5.transactions.create!(result: 0)
@@ -97,26 +101,28 @@ RSpec.describe 'admin merchant show page' do
 
       @inv7.transactions.create!(result: 0)
 
-      binding.pry
+      # binding.pry
 
       #top 5 should be Hank Williams, then Mark, Jim, Bryan and Walter.  Sammy and Barry should not appear on this page
 
       visit "/admin/merchants/#{@merch1.id}"
 
+      # save_and_open_page
+
       within "#top-5-customers" do
-        expect(page).to have_content(@cust5.name)
+        expect(page).to have_content("#{@cust5.first_name} #{@cust5.last_name}")
         expect(page).to have_content("5 successful transactions")
-        expect(page).to have_content(@cust1.name)
+        expect(page).to have_content("#{@cust1.first_name} #{@cust1.last_name}")
         expect(page).to have_content("3 successful transactions")
-        expect(page).to have_content(@cust2.name)
+        expect(page).to have_content("#{@cust2.first_name} #{@cust2.last_name}")
         expect(page).to have_content("3 successful transactions")
-        expect(page).to have_content(@cust3.name)
+        expect(page).to have_content("#{@cust3.first_name} #{@cust3.last_name}")
         expect(page).to have_content("3 successful transactions")
-        expect(page).to have_content(@cust4.name)
+        expect(page).to have_content("#{@cust4.first_name} #{@cust4.last_name}")
         expect(page).to have_content("3 successful transactions")
 
-        expect(page).to_not have_content(@cust6.name)
-        expect(page).to_not have_content(@cust7.name)
+        expect(page).to_not have_content("#{@cust6.first_name} #{@cust6.last_name}")
+        expect(page).to_not have_content("#{@cust7.first_name} #{@cust7.last_name}")
       end
 
     end
