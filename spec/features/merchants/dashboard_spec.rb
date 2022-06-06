@@ -37,6 +37,7 @@ RSpec.describe 'merchants dashboard' do
 
   it 'has a section for items ready to ship' do
     visit "/merchants/#{@merch1.id}/dashboard"
+    # save_and_open_page
     within '#ready-items' do
       expect(page).to have_content('Items Ready to Ship')
       expect(page).to have_content('Floopy Updated')

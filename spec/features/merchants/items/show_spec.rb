@@ -44,5 +44,4 @@ RSpec.describe 'merchants items index' do
     expect(page).to have_content("Success: Item information has been updated.")
   end
 
-
 end

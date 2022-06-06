@@ -6,10 +6,13 @@ Rails.application.routes.draw do
   get '/admin/merchants/:id', to: 'admin_merchants#show'
   get '/admin/merchants/:id/edit', to: 'admin_merchants#edit'
   get '/admin/invoices', to: 'admin_invoices#index'
+  get '/admin/invoices/:id', to: 'admin_invoices#show'
+  patch '/admin/invoices/:id', to: 'admin_invoices#update'
 
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
   get '/merchants/:id/invoices/:invoice_id', to: 'merchant_invoices#show'
+  patch '/merchants/:id/invoices/:invoice_id', to: 'merchant_invoices#update'
 
   get '/merchants/:id/items', to: 'merchant_items#index'
   get '/merchants/:id/items/new', to: 'merchant_items#new'

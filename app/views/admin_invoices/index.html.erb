@@ -1,1 +1,7 @@
-this is the admin invoices index (will change later)
+
+<h1>Admin Invoice Index Page</h1>
+
+<% @invoices.each do |invoice| %>
+    <h3>Invoice ID: <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %></h3>
+    <hr>
+<% end %>

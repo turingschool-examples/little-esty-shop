@@ -24,4 +24,8 @@ class Invoice < ApplicationRecord
       .group(:id)
       .select('invoices.*')
   end
+
+  def invoice_revenue
+    invoice_items.joins(:item).sum("invoice_items.unit_price * invoice_items.quantity")
+  end 
 end
