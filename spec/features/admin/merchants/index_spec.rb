@@ -90,6 +90,7 @@ RSpec.describe "Admin Merchant Index" do
           fill_in "Name", with: "Zachary's Coffee Grounds"
           click_on "Submit"
           expect(current_path).to eq("/admin/merchants")
+          save_and_open_page
           expect(page).to have_content("Zachary's Coffee Grounds")
           expect(page).to have_content("disabled")
         end
