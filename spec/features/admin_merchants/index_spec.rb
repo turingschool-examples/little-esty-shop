@@ -149,22 +149,22 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       visit '/admin/merchants'
 
       within '#topMerchant-0' do
-        expect(page).to have_content("Top selling date for #{merchants[0].name} was #{merchants[0].best_day}")
-      end
-
-      within '#topMerchant-1' do
-        expect(page).to have_content("Top selling date for #{merchants[1].name} was #{merchants[1].best_day}")
-      end
-
-      within '#topMerchant-2' do
         expect(page).to have_content("Top selling date for #{merchants[2].name} was #{merchants[2].best_day}")
       end
 
-      within '#topMerchant-3' do
+      within '#topMerchant-1' do
         expect(page).to have_content("Top selling date for #{merchants[3].name} was #{merchants[3].best_day}")
       end
 
+      within '#topMerchant-2' do
+        expect(page).to have_content("Top selling date for #{merchants[1].name} was #{merchants[1].best_day}")
+      end
+
       within '#topMerchant-4' do
+        expect(page).to have_content("Top selling date for #{merchants[0].name} was #{merchants[0].best_day}")
+      end
+
+      within '#topMerchant-3' do
         expect(page).to have_content("Top selling date for #{merchants[4].name} was #{merchants[4].best_day}")
       end
     end
