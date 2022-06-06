@@ -57,15 +57,18 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     expect(page).to have_content(@mood.name)
     expect(page).to_not have_content(@beard.name)
 
-    within "#invoiceItemsDetails" do
+    within "#invoiceItem-#{@order1.id}" do
       expect(page).to have_content(@bracelet.name)
       expect(page).to have_content("Quantity: #{@order1.quantity}")
       expect(page).to have_content("Price: #{@bracelet.unit_price}")
-      expect(page).to have_content("Status: #{@order1.status}")
+      expect(page.has_select?(:status, selected: "Pending")).to eq(true)
+    end
+
+    within "#invoiceItem-#{@order2.id}" do
       expect(page).to have_content(@mood.name)
       expect(page).to have_content("Quantity: #{@order2.quantity}")
       expect(page).to have_content("Price: #{@mood.unit_price}")
-      expect(page).to have_content("Status: #{@order2.status}")
+      expect(page.has_select?(:status, selected: "Packaged")).to eq(true)
     end
   end
 
@@ -76,19 +79,38 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     expect(page).to_not have_content(@balm.name)
     expect(page).to_not have_content(@beard.name)
 
-    within "#invoiceItemsDetails" do
+    within "#invoiceItem-#{@order6.id}" do
       expect(page).to have_content(@necklace.name)
       expect(page).to have_content("Quantity: #{@order6.quantity}")
       expect(page).to have_content("Price: #{@necklace.unit_price}")
-      expect(page).to have_content("Status: #{@order6.status}")
+      expect(page.has_select?(:status, selected: "Pending")).to eq(true)
       expect(page).to_not have_content(@balm.name)
       expect(page).to_not have_content("Price: #{@balm.unit_price}")
     end
   end
+
   it 'can list total revenue for this merchant generated from the invoice' do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice3.id}"
     expect(page).to have_content("Total Revenue: 30.45")
 
     expect(page).to_not have_content("Total Revenue: 168.42")
+  end
+
+  it 'has a drop down box for invoice item status that contains the current status' do
+    visit "/merchants/#{@parker.id}/invoices/#{@invoice5.id}"
+
+    expect(page).to have_select(:status, :with_options => ["Pending", "Packaged", "Shipped"])
+
+    expect(page.has_select?(:status, selected: "Shipped")).to eq(true)
+    expect(page.has_select?(:status, selected: "Pending")).to eq(false)
+  end
+
+  it 'can update the items status to selected status when entered' do
+    visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
+
+    within "#invoiceItem-#{@order1.id}" do
+      select("Packaged", from: :status)
+      click_button "Update Item Status"
+    end
   end
 end
