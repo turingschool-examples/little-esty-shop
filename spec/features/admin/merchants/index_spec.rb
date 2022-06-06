@@ -80,6 +80,7 @@ RSpec.describe "Admin Merchants Index Page" do
       expect(page).to_not have_link("REI")
       expect(page).to have_link("Hot Topic")
     end
+  end
 
   it "can fill out a form to create a new merchant and display the default status of disabled" do
     expect(page).to_not have_content('Backcountry')

@@ -13,8 +13,8 @@ RSpec.describe Merchant do
     it { should validate_presence_of(:name) }
   end
 
-  let!(:merchant_1) {Merchant.create!(name: "REI")}
-  let!(:merchant_2) {Merchant.create!(name: "Target", status: 1)}
+  let!(:merchant_1) { Merchant.create!(name: "REI") }
+  let!(:merchant_2) { Merchant.create!(name: "Target", status: 1) }
 
   let!(:item1) {merchant_1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135)}
   let!(:item2) {merchant_1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99)}
@@ -32,12 +32,12 @@ RSpec.describe Merchant do
   let!(:customer5) { Customer.create!(first_name: "Carl", last_name: "Junior") }
   let!(:customer6) { Customer.create!(first_name: "Tony", last_name: "Bologna") }
 
-  let!(:invoice1) { customer1.invoices.create!(status: 2) }
-  let!(:invoice2) { customer2.invoices.create!(status: 2) }
-  let!(:invoice3) { customer3.invoices.create!(status: 2) }
-  let!(:invoice4) { customer4.invoices.create!(status: 2) }
-  let!(:invoice5) { customer5.invoices.create!(status: 2) }
-  let!(:invoice6) { customer6.invoices.create!(status: 2) }
+  let!(:invoice1) { customer1.invoices.create!(status: 2, created_at: '2012-03-21 14:53:59') }
+  let!(:invoice2) { customer2.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice3) { customer3.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
+  let!(:invoice4) { customer4.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
+  let!(:invoice5) { customer5.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
+  let!(:invoice6) { customer6.invoices.create!(status: 2, created_at: '2012-03-26 14:53:59') }
 
   let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 130, status: "packaged") }
   let!(:invoice_item2) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 10, unit_price: 130, status: "pending") }
