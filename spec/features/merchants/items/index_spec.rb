@@ -78,4 +78,12 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content("Total Revenue: $60.00")
     end
   end
+
+  it "adds the date to the top 5 most popular items" do
+    visit "/merchants/#{@merch_1.id}/items"
+
+    within "#top_5_items" do
+      expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.invoices.first.created_at}")
+    end
+  end
 end
