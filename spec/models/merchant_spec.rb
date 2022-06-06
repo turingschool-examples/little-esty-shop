@@ -16,7 +16,13 @@ RSpec.describe Merchant, type: :model do
 
   let!(:merchants)  { create_list(:merchant, 6, status: 1) }
   let!(:merchants2) { create_list(:merchant, 2, status: 0)}
-  let!(:customer) { create(:customer) }
+  
+  let!(:customer1) { create(:customer, first_name: 'Luke', last_name: 'Skywalker')}
+  let!(:customer2) { create(:customer, first_name: 'Padme', last_name: 'Amidala')}
+  let!(:customer3) { create(:customer, first_name: 'Boba', last_name: 'Fett')}
+  let!(:customer4) { create(:customer, first_name: 'Baby', last_name: 'Yoda')}
+  let!(:customer5) { create(:customer, first_name: 'Darth', last_name: 'Vader')}
+  let!(:customer6) { create(:customer, first_name: 'Obi', last_name: 'Wan Kenobi')}
 
   let!(:item1) { create(:item, merchant: merchants[0], status: 1) }
   let!(:item2) { create(:item, merchant: merchants[1], status: 1) }
@@ -25,10 +31,12 @@ RSpec.describe Merchant, type: :model do
   let!(:item5) { create(:item, merchant: merchants[4], status: 1) }
   let!(:item6) { create(:item, merchant: merchants[5], status: 1) }
 
-  let!(:invoice1) { create(:invoice, customer: customer, created_at: "2012-03-10 00:54:09 UTC") }
-  let!(:invoice2) { create(:invoice, customer: customer, created_at: "2013-03-10 00:54:09 UTC") }
-  let!(:invoice3) { create(:invoice, customer: customer, created_at: "2014-03-10 00:54:09 UTC") }
-
+  let!(:invoice1) { create(:invoice, customer: customer1, created_at: "2012-03-10 00:54:09 UTC") }
+  let!(:invoice2) { create(:invoice, customer: customer2, created_at: "2013-03-10 00:54:09 UTC") }
+  let!(:invoice3) { create(:invoice, customer: customer3, created_at: "2014-03-10 00:54:09 UTC") }
+  let!(:invoice4) { create(:invoice, customer: customer4, created_at: "2014-03-10 00:54:09 UTC") }
+  let!(:invoice5) { create(:invoice, customer: customer5, created_at: "2014-03-10 00:54:09 UTC") }
+  let!(:invoice6) { create(:invoice, customer: customer6, created_at: "2014-03-10 00:54:09 UTC") }
 
   let!(:transaction1) { create(:transaction, invoice: invoice1, result: 0) }
   let!(:transaction2) { create(:transaction, invoice: invoice1, result: 0) }
@@ -36,7 +44,11 @@ RSpec.describe Merchant, type: :model do
   let!(:transaction4) { create(:transaction, invoice: invoice2, result: 0) }
   let!(:transaction5) { create(:transaction, invoice: invoice3, result: 1) }
   let!(:transaction6) { create(:transaction, invoice: invoice3, result: 1) }
-
+  let!(:transaction7) { create(:transaction, invoice: invoice4, result: 0) }
+  let!(:transaction8) { create(:transaction, invoice: invoice5, result: 0) }
+  let!(:transaction9) { create(:transaction, invoice: invoice6, result: 0) }
+  let!(:transaction10) { create(:transaction, invoice: invoice6, result: 0) }
+  let!(:transaction11) { create(:transaction, invoice: invoice6, result: 0) }
 
   let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100, status: 2) }
   let!(:invoice_item2) { create(:invoice_item, item: item1, invoice: invoice3, quantity: 6, unit_price: 4, status: 1) }
@@ -50,13 +62,14 @@ RSpec.describe Merchant, type: :model do
   let!(:invoice_item10) { create(:invoice_item, item: item5, invoice: invoice1, quantity: 7, unit_price: 200, status: 2) }
   let!(:invoice_item11) { create(:invoice_item, item: item6, invoice: invoice3, quantity: 1, unit_price: 100, status: 1) }
   let!(:invoice_item12) { create(:invoice_item, item: item6, invoice: invoice3, quantity: 1, unit_price: 250, status: 0) }
+  let!(:invoice_item13) { create(:invoice_item, item: item3, invoice: invoice1, quantity: 0, unit_price: 0, status: 0) }
+  let!(:invoice_item14) { create(:invoice_item, item: item3, invoice: invoice2, quantity: 0, unit_price: 0, status: 1) }
+  let!(:invoice_item15) { create(:invoice_item, item: item3, invoice: invoice3, quantity: 0, unit_price: 0, status: 1) }
+  let!(:invoice_item16) { create(:invoice_item, item: item3, invoice: invoice4, quantity: 0, unit_price: 0, status: 0) }
+  let!(:invoice_item17) { create(:invoice_item, item: item3, invoice: invoice5, quantity: 0, unit_price: 0, status: 0) }
+  let!(:invoice_item18) { create(:invoice_item, item: item3, invoice: invoice6, quantity: 0, unit_price: 0, status: 1) }
 
   describe ".class methods" do
-    # let!(:merchant_1) { create(:merchant, status: 0) }
-    # let!(:merchant_2) { create(:merchant, status: 1) }
-    # let!(:merchant_3) { create(:merchant, status: 0) }
-    # let!(:merchant_4) { create(:merchant, status: 1) }
-
     it ".enabled returns only merchants with an enabled status" do
       # enums method
       expect(Merchant.enabled).to include(merchants[0])
@@ -85,63 +98,35 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.top_5).to eq([merchants[2], merchants[3], merchants[1], merchants[4], merchants[0]])
       expect(Merchant.top_5).to_not eq(merchants[6])
     end
+
+    it "returns the top 5 customers that have made the most purchases with successful transactions" do
+      expected = [
+        customer6, 
+        customer1,
+        customer4, 
+        customer5,
+        customer2
+      ]
+      expect(Merchant.top_5_customers).to eq(expected)
+    end
   end
 
   describe '#instance methods' do
-    xit 'returns top 5 customers' do
+    it 'returns top 5 customers' do
       # this fails like once out of every 20 tests...
       # I think it might be because if the transaction count is the same...
       # it doesn't have an explicit order...should we also order by name? how would we test for that?
-      expect(merchants[0].top_5_customers).to eq(customers[1..5])
+      expect(merchants[2].top_5_customers).to eq([customer1, customer6, customer2, customer4, customer5])
     end
 
     it 'returns item names ordered, not shipped' do
-      expect(merchants[0].ordered_not_shipped).to eq([invoice_item2])
+      expect(merchants[0].ordered_not_shipped).to eq([invoice_item13, invoice_item2, invoice_item15, invoice_item17])
       expect(merchants[5].ordered_not_shipped).to eq([invoice_item11, invoice_item12])
     end
   end
 
   
   xit "#best_day returns the merchants best selling day" do
-    merchant1 = create(:merchant)
-    merchant2 = create(:merchant)
-    merchant3 = create(:merchant)
-    merchant4 = create(:merchant)
-    merchant5 = create(:merchant)
-    
-    customer = create(:customer)
-    
-    item1 = create(:item, merchant: merchant1, status: 0)
-    item2 = create(:item, merchant: merchant2, status: 0)
-    item3 = create(:item, merchant: merchant3, status: 0)
-    item4 = create(:item, merchant: merchant4, status: 0)
-    item5 = create(:item, merchant: merchant5, status: 0)
-    
-    
-    invoice1 = create(:invoice, customer: customer, created_at: "2012-03-10 00:54:09 UTC")
-    invoice2 = create(:invoice, customer: customer, created_at: "2013-03-10 00:54:09 UTC")
-    invoice3 = create(:invoice, customer: customer, created_at: "2014-03-10 00:54:09 UTC")
-    
-    
-    transaction1 = create(:transaction, invoice: invoice1, result: 1)
-    transaction2 = create(:transaction, invoice: invoice1, result: 1)
-    transaction3 = create(:transaction, invoice: invoice2, result: 0)
-    transaction4 = create(:transaction, invoice: invoice2, result: 1)
-    transaction5 = create(:transaction, invoice: invoice3, result: 0)
-    transaction6 = create(:transaction, invoice: invoice3, result: 0)
-    
-    
-    invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
-    invoice_item2 = create(:invoice_item, item: item1, invoice: invoice3, quantity: 6, unit_price: 4)
-    invoice_item3 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 3, unit_price: 200)
-    invoice_item4 = create(:invoice_item, item: item2, invoice: invoice2, quantity: 22, unit_price: 200)
-    invoice_item5 = create(:invoice_item, item: item3, invoice: invoice3, quantity: 5, unit_price: 300)
-    invoice_item6 = create(:invoice_item, item: item3, invoice: invoice1, quantity: 63, unit_price: 400)
-    invoice_item7 = create(:invoice_item, item: item4, invoice: invoice2, quantity: 16, unit_price: 500)
-    invoice_item8 = create(:invoice_item, item: item4, invoice: invoice3, quantity: 1, unit_price: 500)
-    invoice_item9 = create(:invoice_item, item: item5, invoice: invoice2, quantity: 2, unit_price: 500)
-    invoice_item10 = create(:invoice_item, item: item5, invoice: invoice1, quantity: 7, unit_price: 200)
-    
     expect(merchant1.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
     expect(merchant2.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
     expect(merchant3.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
