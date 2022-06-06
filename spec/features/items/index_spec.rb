@@ -90,4 +90,48 @@ RSpec.describe Item, type: :model do
         end
     end
   end
+
+  describe "top 5 items" do
+    it 'lists the top 5 items by revenue' do
+      @merchant1 = Merchant.create!(name: 'Merchant1')
+      @itemA = @merchant1.items.create!(name: 'itemA', description: 'Description1', unit_price: 222, status: 0)
+      @itemB = @merchant1.items.create!(name: 'itemB', description: 'Descriptions', unit_price: 222,status: 0)
+      @itemD = @merchant1.items.create!(name: 'itemD', description: 'Descriptive', unit_price: 222, status: 0)
+      @itemC = @merchant1.items.create!(name: 'itemC', description: 'Descriptionless', unit_price: 222, status: 0)
+      @itemF = @merchant1.items.create!(name: 'ItemF', description: 'Descriptionulous', unit_price: 222, status: 0)
+      @itemZ = @merchant1.items.create!(name: 'ItemZ', description: 'DescriptionZ', unit_price: 2222, status: 0)
+      @itemX = @merchant1.items.create!(name: 'ItemX', description: 'Descriptionx', unit_price: 2222, status: 0)
+      @customer1 = Customer.create!(first_name: "Cuss", last_name: "Tomer")
+      @invoiceA = @customer1.invoices.create!(status: "Completed")
+      @invoiceB = @customer1.invoices.create!(status: "Completed")
+      @invoiceD = @customer1.invoices.create!(status: "Completed")
+      @invoiceC = @customer1.invoices.create!(status: "Completed")
+      @invoiceF = @customer1.invoices.create!(status: "Completed")
+      @invoiceZ = @customer1.invoices.create!(status: "Completed")
+      @invoiceX = @customer1.invoices.create!(status: "Completed")
+      @transaction1 = @invoiceA.transactions.create!(credit_card_number: "1234567891234567", credit_card_expiration_date: "1234", result: "success")
+      @transaction2 = @invoiceB.transactions.create!(credit_card_number: "1234567891234567", credit_card_expiration_date: "1234", result: "success" )
+      @transaction3 = @invoiceD.transactions.create!(credit_card_number: "1234567891234567", credit_card_expiration_date: "1234", result: "success" )
+      @transaction4 = @invoiceC.transactions.create!(credit_card_number: "1234567891234567", credit_card_expiration_date: "1234", result: "success" )
+      @transaction5 = @invoiceF.transactions.create!(credit_card_number: "1234567891234567", credit_card_expiration_date: "1234", result: "success" )
+      @transaction6 = @invoiceZ.transactions.create!(credit_card_number: "1234567891234567", credit_card_expiration_date: "1234", result: "success" )
+      @transaction7 = @invoiceX.transactions.create!(credit_card_number: "12345678912134567", credit_card_expiration_date: "1234", result: "failed" )
+      @invoice_itemA = @invoiceA.invoice_items.create!(quantity: 1, unit_price: 10, item_id: @itemA.id, status: "shipped")
+      @invoice_itemB = @invoiceB.invoice_items.create!(quantity: 1, unit_price: 8, item_id: @itemB.id, status: "shipped")
+      @invoice_itemD = @invoiceD.invoice_items.create!(quantity: 1, unit_price: 6, item_id: @itemD.id, status: "shipped")
+      @invoice_itemC = @invoiceC.invoice_items.create!(quantity: 1, unit_price: 4, item_id: @itemC.id, status: "shipped")
+      @invoice_itemF = @invoiceF.invoice_items.create!(quantity: 1, unit_price: 2, item_id: @itemC.id, status: "shipped")
+      @invoice_itemZ = @invoiceZ.invoice_items.create!(quantity: 1, unit_price: 1, item_id: @itemZ.id, status: "shipped")
+      @invoice_itemX = @invoiceX.invoice_items.create!(quantity: 1, unit_price: 12, item_id: @itemX.id, status: "shipped")
+  
+      within("#top5items") do
+        expect(@itemA).to appear_before(@itemB)
+        expect(@itemB).to appear_before(@itemD)
+        expect(@itemD).to appear_before(@itemC)
+        expect(@itemC).to appear_before(@itemF)
+        expect(page).to_not have_content(@itemZ) #6th highest total revenue 
+        expect(page).to_not have_content(@itemX) #transactions result not success
+      end
+    end
+  end
 end
