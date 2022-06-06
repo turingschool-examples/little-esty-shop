@@ -73,6 +73,19 @@ RSpec.describe "Admin Merchant Index" do
             expect(page).to have_content(@merch1.name)
             expect(page).to_not have_content(@merch2.name)
         end
+
+        it 'can create a new merchant and show its status' do
+          
+          visit "/admin/merchants"
+          click_link "Create a New Merchant"
+          expect(current_path).to eq("/admin/merchants/new")
+          fill_in "Name", with: "Zachary's Coffee Grounds"
+          click_on "Submit"
+          expect(current_path).to eq("/admin/merchants")
+          save_and_open_page
+          expect(page).to have_content("Zachary's Coffee Grounds")
+          expect(page).to have_content("disabled")
+        end
     end
 
 end

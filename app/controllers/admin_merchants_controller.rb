@@ -18,6 +18,15 @@ class AdminMerchantsController < ApplicationController
     flash[:message] = 'Merchant has been successfully updated!'
   end
 
+  def new
+
+  end
+
+  def create
+    merchant = Merchant.create!(merch_params)
+    redirect_to "/admin/merchants"
+  end
+
   private
 
   def merch_params

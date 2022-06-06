@@ -1,6 +1,6 @@
 
 <h1>Admin Merchant Index Page</h1>
-
+<%= link_to "Create a New Merchant", "/admin/merchants/new" %>
 <div id="top-5-merchants">
 <h2>Top 5 Merchants by Total Revenue Generated:</h2>
   <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
@@ -12,5 +12,6 @@
 <h3>Merchant Names</h3>
 <% @merchants.each do |merchant| %>
     <p><%= merchant.name %></p>
+    <p><%= merchant.status %></p>
     <hr>
 <% end %>
