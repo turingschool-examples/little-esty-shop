@@ -24,6 +24,8 @@ RSpec.describe 'merchant items index page' do
     @ii_5 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_5.unit_price, status: 2)
     @ii_6 = InvoiceItem.create!(item_id: @item_6.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_6.unit_price, status: 2)
 
+    @trans_1 = @invoice_1.transactions.create!(credit_card_number: '4444555566667777', result: 'success')
+
   end
 
   it 'displays a list of the names of all the merchants items and none from any other merchant' do
@@ -80,10 +82,62 @@ RSpec.describe 'merchant items index page' do
   end
 
   it "adds the date to the top 5 most popular items" do
-    visit "/merchants/#{@merch_1.id}/items"
+    merch1 = Merchant.create!(name: 'Merch1')
+    merch2 = Merchant.create!(name: 'Merch2')
+
+    item1 = merch1.items.create!(name: 'item1', description: 'test item1', unit_price: 100)
+    item2 = merch1.items.create!(name: 'item2', description: 'test item2', unit_price: 100)
+    item3 = merch1.items.create!(name: 'item3', description: 'test item3', unit_price: 100)
+    item4 = merch1.items.create!(name: 'item4', description: 'test item4', unit_price: 100)
+    item5 = merch1.items.create!(name: 'item5', description: 'test item5', unit_price: 100)
+    item6 = merch1.items.create!(name: 'item6', description: 'test item6', unit_price: 100)
+
+    item7 = merch2.items.create!(name: 'item7', description: 'test item7', unit_price: 100)
+    item8 = merch2.items.create!(name: 'item8', description: 'test item8', unit_price: 100)
+    item9 = merch2.items.create!(name: 'item9', description: 'test item9', unit_price: 100)
+    item10 = merch2.items.create!(name: 'item10', description: 'test item10', unit_price: 100)
+    item11 = merch2.items.create!(name: 'item11', description: 'test item11', unit_price: 100)
+    item12 = merch2.items.create!(name: 'item12', description: 'test item12', unit_price: 100)
+
+    cust1 = Customer.create!(first_name: 'Cory', last_name: 'Bethune')
+    cust2 = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+
+    invoice1 = cust1.invoices.create!(status: 2)
+    invoice2 = cust2.invoices.create!(status: 2)
+
+    trans1 = invoice1.transactions.create!(credit_card_number: '0000111122223333', result: 'success')
+    trans2 = invoice2.transactions.create!(credit_card_number: '4444555566667777', result: 'success')
+
+    ii1 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 2, item_id: item1.id, invoice_id: invoice1.id)
+    ii2 = InvoiceItem.create!(quantity: 2, unit_price: 100, status: 2, item_id: item2.id, invoice_id: invoice1.id)
+    ii3 = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, item_id: item3.id, invoice_id: invoice1.id)
+    ii4 = InvoiceItem.create!(quantity: 20, unit_price: 100, status: 2, item_id: item4.id, invoice_id: invoice1.id)
+    ii5 = InvoiceItem.create!(quantity: 100, unit_price: 100, status: 2, item_id: item5.id, invoice_id: invoice1.id)
+    ii6 = InvoiceItem.create!(quantity: 1, unit_price: 100, status: 2, item_id: item6.id, invoice_id: invoice1.id)
+
+    ii7 = InvoiceItem.create!(quantity: 1, unit_price: 100, status: 2, item_id: item7.id, invoice_id: invoice2.id)
+    ii8 = InvoiceItem.create!(quantity: 12, unit_price: 100, status: 2, item_id: item8.id, invoice_id: invoice2.id)
+    ii9 = InvoiceItem.create!(quantity: 13, unit_price: 100, status: 2, item_id: item9.id, invoice_id: invoice2.id)
+    ii10 = InvoiceItem.create!(quantity: 100, unit_price: 100, status: 2, item_id: item10.id, invoice_id: invoice2.id)
+    ii11 = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 2, item_id: item11.id, invoice_id: invoice2.id)
+    ii12 = InvoiceItem.create!(quantity: 0, unit_price: 100, status: 2, item_id: item12.id, invoice_id: invoice2.id)
+
+    visit "/merchants/#{merch1.id}/items"
 
     within "#top_5_items" do
-      expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.invoices.first.created_at}")
+      expect(page).to have_content("Top selling date for #{item5.name} was #{item5.invoices.first.created_at.strftime('%B %d, %Y')}")
+      expect(page).to have_content("Top selling date for #{item4.name} was #{item4.invoices.first.created_at.strftime('%B %d, %Y')}")
+      expect(page).to have_content("Top selling date for #{item1.name} was #{item1.invoices.first.created_at.strftime('%B %d, %Y')}")
+      expect(page).to have_content("Top selling date for #{item3.name} was #{item3.invoices.first.created_at.strftime('%B %d, %Y')}")
+      expect(page).to have_content("Top selling date for #{item2.name} was #{item2.invoices.first.created_at.strftime('%B %d, %Y')}")
+      expect(item5.name).to appear_before(item4.name)
+      expect(item4.name).to appear_before(item1.name)
+      expect(item1.name).to appear_before(item3.name)
+      expect(item3.name).to appear_before(item2.name)
+
+      expect(page).to_not have_content(item7.name)
+      expect(page).to_not have_content(item10.name)
+      expect(page).to_not have_content(item9.name)
     end
   end
 end
