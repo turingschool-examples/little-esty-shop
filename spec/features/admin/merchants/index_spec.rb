@@ -73,6 +73,26 @@ RSpec.describe "Admin Merchant Index" do
             expect(page).to have_content(@merch1.name)
             expect(page).to_not have_content(@merch2.name)
         end
+
+        it 'can create a new merchant and show its status' do
+          # As an admin,
+          # When I visit the admin merchants index
+          # I see a link to create a new merchant.
+          # When I click on the link,
+          # I am taken to a form that allows me to add merchant information.
+          # When I fill out the form I click ‘Submit’
+          # Then I am taken back to the admin merchants index page
+          # And I see the merchant I just created displayed
+          # And I see my merchant was created with a default status of disabled.
+          visit "/admin/merchants"
+          click_link "Create a New Merchant"
+          expect(current_path).to eq("/admin/merchants/new")
+          fill_in "Name", with: "Zachary's Coffee Grounds"
+          click_on "Submit"
+          expect(current_path).to eq("/admin/merchants")
+          expect(page).to have_content("Zachary's Coffee Grounds")
+          expect(page).to have_content("disabled")
+        end
     end
 
 end
