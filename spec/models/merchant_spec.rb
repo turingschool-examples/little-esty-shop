@@ -122,12 +122,12 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  xit "#best_day returns the merchants best selling day" do
-    expect(merchant1.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
-    expect(merchant2.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
-    expect(merchant3.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
-    expect(merchant4.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
-    expect(merchant5.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
-  end
+  it "#best_day returns the merchants best selling day" do
+      expect(merchants[0].best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
+      expect(merchants[1].best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
+      expect(merchants[2].best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
+      expect(merchants[3].best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
+      expect(merchants[4].best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
+    end
 
 end

@@ -46,4 +46,16 @@ class Merchant < ApplicationRecord
     .order(:last_name)
     .limit(5)
   end
+
+  def best_day
+    invoices
+    .joins(:transactions)
+    .select("invoices.created_at")
+    .where("transactions.result = ?", 0)
+    .order(Arel.sql("sum(invoice_items.quantity) desc, date_trunc('day', invoices.created_at) desc"))
+    .group("invoices.created_at")
+    .pluck("invoices.created_at")
+    .first
+    .strftime("%m/%d/%y")
+  end
 end
