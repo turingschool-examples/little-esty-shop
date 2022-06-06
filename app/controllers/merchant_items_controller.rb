@@ -25,8 +25,6 @@ class MerchantItemsController < ApplicationController
     elsif item.update(item_params)
       redirect_to "/merchants/#{item.merchant.id}/items/#{item.id}"
       flash[:notice] = "Success: Item information has been updated."
-    else
-      redirect_to "/merchants/#{item.merchant.id}/items/#{item.id}"
     end
   end
 

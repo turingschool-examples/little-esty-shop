@@ -2,5 +2,5 @@ class InvoiceItem < ApplicationRecord
     belongs_to :invoice
     belongs_to :item
 
-    enum status: ['Pending', 'Packaged', 'Shipped']
+    enum status: ['pending', 'packaged', 'shipped']
 end
