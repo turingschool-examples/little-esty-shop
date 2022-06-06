@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
 
   validates_presence_of :name, :status
 
@@ -25,6 +26,15 @@ class Merchant < ApplicationRecord
     customers_top_5 = Customer.find(cust_ids)
   end
 
+  def self.top_5_merchants_by_revenue
+    joins(invoices: :transactions)
+          .where(transactions: {result: 'success'})
+          .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS total_revenue")
+          .group(:id)
+          .order(total_revenue: :desc)
+          .limit(5)
+  end
+  
   def best_day
     best_day_revenue = invoices.group("DATE(invoices.created_at)").sum("invoice_items.quantity * invoice_items.unit_price").sort_by { |day, revenue| revenue }.last
     best_day_revenue[0]
@@ -35,6 +45,3 @@ class Merchant < ApplicationRecord
   end
 
 end
-
-# merchant_items = Item.where(merchant_id: Merchant.all[26])
-# merchant_invoices = merchant_invoices.pluck(:id)
