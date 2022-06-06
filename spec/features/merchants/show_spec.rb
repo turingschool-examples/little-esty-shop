@@ -66,12 +66,14 @@ RSpec.describe 'Merchants show page', type: :feature do
     it "can display top 5 customers and their transaction count" do
 
       visit "/merchants/#{merchants[0].id}/dashboard"
+      tied_customers = [customers[1], customers[2], customers[3], customers[4], customers[5]]
+      expected = tied_customers.sort_by(&:last_name).sort_by(&:first_name)
 
-      expect(page).to have_content("1. #{customers[1].first_name} #{customers[1].last_name} - 8 purchases")
-      expect(page).to have_content("2. #{customers[2].first_name} #{customers[2].last_name} - 8 purchases")
-      expect(page).to have_content("3. #{customers[3].first_name} #{customers[3].last_name} - 8 purchases")
-      expect(page).to have_content("4. #{customers[4].first_name} #{customers[4].last_name} - 8 purchases")
-      expect(page).to have_content("5. #{customers[5].first_name} #{customers[5].last_name} - 8 purchases")
+      expect(page).to have_content("1. #{expected[0].first_name} #{expected[0].last_name} - 8 purchases")
+      expect(page).to have_content("2. #{expected[1].first_name} #{expected[1].last_name} - 8 purchases")
+      expect(page).to have_content("3. #{expected[2].first_name} #{expected[2].last_name} - 8 purchases")
+      expect(page).to have_content("4. #{expected[3].first_name} #{expected[3].last_name} - 8 purchases")
+      expect(page).to have_content("5. #{expected[4].first_name} #{expected[4].last_name} - 8 purchases")
 
     end
   end

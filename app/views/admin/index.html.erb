@@ -30,11 +30,9 @@
   <div class="page-defaults" id="rightSide2">
     <h3>Top Customers</h3>
     <ol>
-      <li>"Merchant name" - 672 purchases</li>
-      <li>"Merchant name" - 672 purchases</li>
-      <li>"Merchant name" - 672 purchases</li>
-      <li>"Merchant name" - 672 purchases</li>
-      <li>"Merchant name" - 672 purchases</li>
+      <% @merchants.top_5_customers.each do |customer| %>
+        <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.transaction_count} purchases" %> - 672 purchases</li>
+      <% end %>
     </ol>
   </div>
 </div>
