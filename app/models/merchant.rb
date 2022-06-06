@@ -1,5 +1,4 @@
 class Merchant < ApplicationRecord
-
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
 
@@ -7,6 +6,14 @@ class Merchant < ApplicationRecord
 
   def items_to_ship
     items.joins(:invoice_items).select("items.name, invoice_items.invoice_id").where.not("invoice_items.status = 'Shipped'")
+  end
+
+  def enabled_items
+    items.where("items.status = 0")
+  end
+
+  def disabled_items
+      items.where("items.status = 1")
   end
 
   def indiv_invoice_ids
@@ -17,3 +24,4 @@ class Merchant < ApplicationRecord
     invoice_items.where(invoice_items: {invoice_id: invoice.id} ).sum('invoice_items.unit_price * quantity')* 0.01.to_f
   end
 end
+

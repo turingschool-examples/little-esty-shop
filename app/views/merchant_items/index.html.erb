@@ -1,20 +1,42 @@
 <h1><%= "#{@merchant.name}'s" %></h1>
 <h2>ITEMS INDEX</h2>
 
-<% @items.each do |item|%>
+<%= button_to "Create Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+<section id= "enabled_items">
+<h2>Enabled Items</h2>
+<% @items_enabled.each do |item|%>
 <strong><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></strong><br>
 
-    <section id=<%="status-#{item.id}"%>>
-      <%= "Status: #{item.status}"%><br>
-    </section> 
+     <section id=<%="status-#{item.id}"%>>
+      <%= "Status: #{item.status}  "%>
+      </section>
 
-<section id=<%="Item-#{item.name}"%>>
-<% if item.enabled? %>
-  <% button_label = "Disable" %>
-  <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "disabled"}, method: :patch %>  <br>
-<% else button_label = "Enable" %>
-  <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "enabled"}, method: :patch %></strong><br>
-</section> 
+      <section id=<%="Item-#{item.name}"%>>
+      <%# if item.enabled? %>
+      <% button_label = "Disable" %>
+      <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "disabled"}, method: :patch %>  <br>
+      <%# else button_label = "Enable" %>
+        <%# = button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "enabled"}, method: :patch</strong><br> %>
+      </section>
+<%# end %>
 <% end %>
+</section>
+<section id = "disabled_items">
+<h2>Disabled Items</h2>
+<% @items_disabled.each do |item|%>
+<strong><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></strong><br>
+
+      <section id=<%="status-#{item.id}"%>>
+      <%= "Status: #{item.status}  "%>
+      </section>
+
+      <section id=<%="Item-#{item.name}"%>>
+      <%# <% if item.enabled? %>
+        <%# button_label = "Disable" %>
+        <%#= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "disabled"}, method: :patch %>  <br> 
+      <%button_label = "Enable" %>
+        <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "enabled"}, method: :patch %></strong><br>
+      </section> 
+<%# end %>
 <% end %>
 

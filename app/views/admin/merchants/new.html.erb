@@ -1,0 +1,6 @@
+<h3> New Merchant: </h3>
+<%= form_with url: admin_merchants_path, method: :post, local: true do |f| %>
+<%= f.label :name, "Name:" %>
+<%= f.text_field :name %>
+<%= f.submit %>
+<% end %>
