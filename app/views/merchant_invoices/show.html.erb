@@ -3,6 +3,7 @@
 <section id="invoiceDetails">
   <p> Status: <%= "#{@invoice.status}"%> </p><br>
   <p> Created on: <%= "#{@invoice.created_at_format}" %> </p><br>
+  <p>Total Revenue: <%= @merchant.my_total_revenue(@invoice) %></p>
   <h4>Customer:</h4>
   <p><%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
 </section>
