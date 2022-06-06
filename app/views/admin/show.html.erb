@@ -8,3 +8,14 @@
   <%= " - #{invoice.created_at.strftime("%A, %B %d, %Y")}" %>
   <br>
 <% end %>
+
+
+<div id='top_5'>
+  <h3>Top 5 Customers</h3>
+  <ul>
+  <% @customers.top_5_by_successful_transactions.each do |customer| %>
+    <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.successful_transactions %></li>
+    <% end %>
+  </ul>
+</div>
+
