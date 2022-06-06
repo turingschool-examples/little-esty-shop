@@ -149,7 +149,6 @@ RSpec.describe 'admin merchants index', type: :feature do
         within "#merchant-4" do
             expect(page).to have_content("Two-Legs Fashion")
             expect(page).to have_content("$650 in sales")
-            save_and_open_page
             expect(page).to_not have_content(@merch_4.name)
         end
     end
