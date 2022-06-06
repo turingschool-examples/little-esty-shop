@@ -10,10 +10,10 @@ RSpec.describe Item, type: :feature do
       @item2 = @merchant2.items.create!(name: 'Item2', description: 'Description2', unit_price: 222)
       visit "/merchants/#{@merchant1.id}/items"
    end
-    
+
     it 'is linked from item name on index page and shows all attributes of item' do
-          
-      click_on 'Item1' 
+
+      click_on 'Item1'
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
 
       expect(page).to have_content("Description1")
@@ -30,19 +30,17 @@ RSpec.describe Item, type: :feature do
       expect(page).to have_field(:name, with: "Item1")
       expect(page).to have_field(:description, with: "Description1")
       expect(page).to have_field(:unit_price, with: "$1.11")
-   
-
     end
-    
+
     it 'update button will change attribute values, has a success flash message' do
       visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
-      
+
       click_on "Update"
-      
+
         fill_in 'Name', with: 'Item1newname'
         fill_in 'Description', with: "NewDescription1"
         fill_in 'Unit Price', with: "121"
-        
+
         click_on "Update"
 
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")

@@ -1,7 +1,7 @@
 <h1><%= "#{@merchant.name}'s" %></h1>
 <h2>ITEMS INDEX</h2>
 
-<%= button_to "Create Item", "/merchants/#{@merchant.id}/items/new",  method: :get %>
+<%= button_to "Create Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
 <section id= "enabled_items">
 <h2>Enabled Items</h2>
 <% @items_enabled.each do |item|%>

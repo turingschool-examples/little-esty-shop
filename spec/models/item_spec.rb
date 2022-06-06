@@ -11,8 +11,17 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of(:name)}
     it {should validate_presence_of(:description)}
     it {should validate_presence_of(:unit_price)}
-
   end
+  
+  describe "class methods" do
+    before(:each) do
+      @billman = Merchant.create!(name: "Billman")
+
+      @bracelet = @billman.items.create!(name: "Bracelet", description: "shiny", unit_price: 1001, status: "disabled")
+      @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002)
+      @necklace = @billman.items.create!(name: "Necklace", description: "Sparkly", unit_price: 3045, status: "disabled")
+      @toe_ring = @billman.items.create!(name: "Toe Ring", description: "Saucy", unit_price: 1053)
+    end
 
   describe "class methods" do
     before(:each) do
@@ -30,4 +39,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
