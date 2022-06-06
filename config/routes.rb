@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   get "/merchants/:merchant_id/dashboard", to: "merchants#show"
+
   get "/merchants/:merchant_id/items", to: "merchant_items#index"
   get "/merchants/:merchant_id/items/new", to: "merchant_items#new"
   post "/merchants/:merchant_id/items", to: "merchant_items#create"
