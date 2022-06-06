@@ -114,13 +114,22 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   describe 'top five merchants by revenue' do
     it 'lists the names of the top five merchants and their revenue' do 
       visit '/admin/merchants'
+      save_and_open_page
+      within "#topMerchants" do 
+        expect(merchants[2].name).to appear_before(merchants[3].name)
+        expect(merchants[3].name).to appear_before(merchants[1].name)
+        expect(merchants[1].name).to appear_before(merchants[4].name)
+        expect(merchants[4].name).to appear_before(merchants[0].name)
 
-      within "#rightSide2" do 
-        expect(page).to have_content("Top Merchants")
-        expect(page).to have_content
+        expect(page).to have_content("#{merchants[2].name} - $504.00 in sales")
+        expect(page).to have_content("#{merchants[3].name} - $80.00 in sales")
+        expect(page).to have_content("#{merchants[1].name} - $56.00 in sales")
+        expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
+        expect(page).to have_content("#{merchants[0].name} - $24.00 in sales")
       end
     end
   end
+
   describe "Admin Merchants: Top Merchant's Best Day" do
     xit "can calculate the date with the most sales" do
     end
