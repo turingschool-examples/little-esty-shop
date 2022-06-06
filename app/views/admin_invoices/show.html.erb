@@ -1,4 +1,13 @@
+<h1>Admin Invoice Show Page</h1>
 <h2>ID: <%= @invoice.id %></h2>
 <h2>Status: <%= @invoice.status %></h2>
 <h4>Created At: <%= @invoice.created_at.strftime('%A, %B %e, %Y')%></h4>
-<h4>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></h4>
+<h4>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></h4><hr>
+<% @invoice.invoice_items.each do |invoice_item| %>
+<div id="invoice-item-<%= invoice_item.id %>">
+    <p>Item Name: <%= invoice_item.item.name %></p>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Unit Price: <%= invoice_item.unit_price.to_s.insert(-3,'.') %></p>
+    <p>Status: <%= invoice_item.status %></p><hr>
+</div>
+<% end %>

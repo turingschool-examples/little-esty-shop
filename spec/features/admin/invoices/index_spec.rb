@@ -16,8 +16,8 @@ RSpec.describe "Admin Invoice Index" do
       @inv1 = @cust1.invoices.create!(status: "in progress")
       @inv2 = @cust1.invoices.create!(status: "completed")
 
-      InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv1.id}")
-      InvoiceItem.create!(item_id: "#{@item4.id}", invoice_id: "#{@inv2.id}")
+      InvoiceItem.create!(item_id: "#{@item1.id}", invoice_id: "#{@inv1.id}", quantity: 100, unit_price: 1000, status: 1)
+      InvoiceItem.create!(item_id: "#{@item4.id}", invoice_id: "#{@inv2.id}", quantity: 200, unit_price: 2000, status: 1)
     end
 
     it 'shows me the admin invoice index page with all the invoices' do
