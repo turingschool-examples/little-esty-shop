@@ -1,24 +1,29 @@
 <h1><%= "#{@merchant.name}'s" %></h1>
 <h2>ITEMS INDEX</h2>
 
+<section id="top5items">
+<h2>Top 5 Selling Items by Revenue</h2>
+<% @top5items.each do |item| %>
+<h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3><br>
+<strong><%= "Total Revenue = #{number_to_currency(item.total_revenue)}"%></strong><br>
+<%end%></section>
+
 <%= button_to "Create Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
 <section id= "enabled_items">
 <h2>Enabled Items</h2>
 <% @items_enabled.each do |item|%>
 <strong><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></strong><br>
 
-     <section id=<%="status-#{item.id}"%>>
+    <section id=<%="status-#{item.id}"%>>
       <%= "Status: #{item.status}  "%>
       </section>
 
       <section id=<%="Item-#{item.name}"%>>
-      <%# if item.enabled? %>
       <% button_label = "Disable" %>
       <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "disabled"}, method: :patch %>  <br>
-      <%# else button_label = "Enable" %>
-        <%# = button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "enabled"}, method: :patch</strong><br> %>
+  
       </section>
-<%# end %>
+<
 <% end %>
 </section>
 <section id = "disabled_items">
@@ -30,13 +35,10 @@
       <%= "Status: #{item.status}  "%>
       </section>
 
-      <section id=<%="Item-#{item.name}"%>>
-      <%# <% if item.enabled? %>
-        <%# button_label = "Disable" %>
-        <%#= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "disabled"}, method: :patch %>  <br> 
+      <section id=<%="Item-#{item.name}"%>><br>
       <%button_label = "Enable" %>
         <%= button_to "#{button_label}", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: "enabled"}, method: :patch %></strong><br>
       </section> 
-<%# end %>
+
 <% end %>
 
