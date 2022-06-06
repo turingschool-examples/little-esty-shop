@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :invoice_items, through: :items
 
   validates_presence_of :name
 
@@ -19,5 +20,8 @@ class Merchant < ApplicationRecord
     InvoiceItem.all.where(item_id: items.ids).pluck(:invoice_id).uniq
   end
 
+  def my_total_revenue(invoice)
+    invoice_items.where(invoice_items: {invoice_id: invoice.id} ).sum('invoice_items.unit_price * quantity')* 0.01.to_f
+  end
 end
 

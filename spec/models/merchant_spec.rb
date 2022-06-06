@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it {should have_many :items}
+    it {should have_many(:invoice_items).through(:items)}
   end
 
   describe 'validations' do
@@ -46,5 +47,18 @@ RSpec.describe Merchant, type: :model do
       expect(@billman.indiv_invoice_ids).to_not eq([invoice3.id, invoice4.id])
     end
 
+    it 'my_total_revenue can return a single merchants revenue for an invoice' do
+      parker = Merchant.create!(name: "Parker's Perfection Pagoda")
+      jimbob = Customer.create!(first_name: "Jimbob", last_name: "Dudeguy")
+      invoice3 = jimbob.invoices.create!(status: "Completed")
+      invoice4 = jimbob.invoices.create!(status: "Completed")
+      beard = parker.items.create!(name: "Beard Oil", description: "Lavender Scented", unit_price: 5099)
+
+      order6 = @bracelet.invoice_items.create!(quantity: 2, unit_price: 1001, status: "Pending", invoice_id: invoice3.id)
+      order7 = beard.invoice_items.create!(quantity: 3, unit_price: 5099, status: "Packaged", invoice_id: invoice3.id)
+
+      expect(@billman.my_total_revenue(invoice3)).to eq(20.02)
+      expect(@billman.my_total_revenue(invoice3)).to_not eq(172.99)
+    end
   end
 end

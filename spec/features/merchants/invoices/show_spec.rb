@@ -41,7 +41,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     expect(page).to_not have_content(@invoice4.id)
     expect(page).to_not have_content(@invoice5.id)
 
-    testdate = Date.today.strftime('%A, %B %-e, %Y') #test is rendering with an extra space between month and day, modified in test to be one space only
+    testdate = @invoice1.created_at.strftime('%A, %B %-e, %Y') #test is rendering with an extra space between month and day, modified in test to be one space only
 
     within "#invoiceDetails" do
       expect(page).to have_content(@invoice1.status)
@@ -84,5 +84,11 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
       expect(page).to_not have_content(@balm.name)
       expect(page).to_not have_content("Price: #{@balm.unit_price}")
     end
+  end
+  it 'can list total revenue for this merchant generated from the invoice' do
+    visit "/merchants/#{@billman.id}/invoices/#{@invoice3.id}"
+    expect(page).to have_content("Total Revenue: 30.45")
+
+    expect(page).to_not have_content("Total Revenue: 168.42")
   end
 end
