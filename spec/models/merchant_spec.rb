@@ -165,7 +165,7 @@ RSpec.describe Merchant do
         @invoice_11 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:54")
         @invoice_12 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-30 17:51:55")
 
-        InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
+        InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 4, unit_price: @item_1.unit_price, status: 2)
         InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
         InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
         InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -180,7 +180,7 @@ RSpec.describe Merchant do
       end
 
       it 'returns the date with the most revenue for the merchant' do
-        expect(@merch_1.best_day.strftime("%A, %B %d, %Y")).to eq("Friday, May 13, 2022")
+        expect(@merch_1.best_day.strftime("%A, %B %d, %Y")).to eq("Tuesday, May 03, 2022")
         expect(@merch_2.best_day.strftime("%A, %B %d, %Y")).to eq("Monday, May 30, 2022")
       end
     end

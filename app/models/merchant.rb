@@ -26,9 +26,8 @@ class Merchant < ApplicationRecord
   end
 
   def best_day
-    #returns hash, key: day, value: count of invoices for that day
-    best_day_num_invoices = invoices.group("DATE(invoices.created_at)").count.sort_by { |day, num_invoices| num_invoices }.last
-    best_day_num_invoices[0]
+    best_day_revenue = invoices.group("DATE(invoices.created_at)").sum("invoice_items.quantity * invoice_items.unit_price").sort_by { |day, revenue| revenue }.last
+    best_day_revenue[0]
   end
 
 end
