@@ -41,7 +41,6 @@ RSpec.describe 'admin dashboard' do
 
   it 'shows incomplete invoices' do
     visit '/admin'
-    save_and_open_page
     expect(page).to have_content('Incomplete Invoices:')
 
     expect(page).to have_link(@invoice1.id)
