@@ -9,25 +9,27 @@ class Merchant < ApplicationRecord
   enum status: ["disabled", "enabled"]
 
   def self.top_5_customers
-    Customer.joins(:transactions)
-    .where("transactions.result = ?", 0)
-    .group("customers.id")
-    .select("customers.*, count(transactions) as transaction_count")
-    .order(transaction_count: :desc)
-    .order(:first_name)
-    .order(:last_name)
-    .limit(5)
+    Customer.top_five
+    # .joins(:transactions)
+    # .where("transactions.result = ?", 0)
+    # .group("customers.id")
+    # .select("customers.*, count(transactions) as transaction_count")
+    # .order(transaction_count: :desc)
+    # .order(:first_name)
+    # .order(:last_name)
+    # .limit(5)
   end
 
   def top_5_customers
-    customers.joins(:transactions)
-    .where("transactions.result = ?", 0)
-    .group("customers.id")
-    .select("customers.*, count(transactions) as transaction_count")
-    .order(transaction_count: :desc)
-    .order(:first_name)
-    .order(:last_name)
-    .limit(5)
+    customers.top_five
+    # .joins(:transactions)
+    # .where("transactions.result = ?", 0)
+    # .group("customers.id")
+    # .select("customers.*, count(transactions) as transaction_count")
+    # .order(transaction_count: :desc)
+    # .order(:first_name)
+    # .order(:last_name)
+    # .limit(5)
   end
 
   def ordered_not_shipped
