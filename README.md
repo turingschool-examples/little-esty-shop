@@ -37,6 +37,6 @@ This project requires Ruby 2.7.4.
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
 
-## Schema
+## Database Diagram
 ![Screen Shot 2022-05-28 at 9 21 46 AM](https://user-images.githubusercontent.com/99001315/170831788-29184f94-9549-4723-aecb-9ec3345331ce.png)
 
