@@ -11,11 +11,14 @@ RSpec.describe 'admin dashboard' do
     @invoice1 = @customer1.invoices.create!(status: 2)
     @invoice2 = @customer1.invoices.create!(status: 2)
     @invoice3 = @customer1.invoices.create!(status: 2)
+    @invoice4 = @customer1.invoices.create!(status: 1)
     InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 1000, status: 0,
                         created_at: '2022-06-02 21:08:18 UTC')
     InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 5, unit_price: 1000, status: 1,
                         created_at: '2022-06-01 21:08:15 UTC')
     InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice3.id, quantity: 5, unit_price: 1000, status: 1,
+                        created_at: '2022-06-03 21:08:15 UTC')
+    InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice4.id, quantity: 5, unit_price: 1000, status: 2,
                         created_at: '2022-06-03 21:08:15 UTC')
   end
   it 'shows admin dashboard' do
@@ -38,15 +41,19 @@ RSpec.describe 'admin dashboard' do
 
   it 'shows incomplete invoices' do
     visit '/admin'
-
+    save_and_open_page
     expect(page).to have_content('Incomplete Invoices:')
 
-    expect(page).to have_content(@invoice1.id)
+    expect(page).to have_link(@invoice1.id)
 
-    expect(page).to have_content(@invoice2.id)
+    expect(page).to have_link(@invoice2.id)
 
-    expect(page).to have_content(@invoice3.id)
+    expect(page).to have_link(@invoice3.id)
 
-    expect(page).to_not have_content(@invoice4.id)
+    expect(page).to_not have_link(@invoice4.id)
+
+    click_link(@invoice1.id.to_s)
+
+    expect(current_path).to eq("admin/invoices/#{invoice.id}")
   end
 end
