@@ -1,3 +1,5 @@
+<h4><%= link_to "Create New Merchant", new_admin_merchant_path %> </h4>
+
 <h5>Enabled Merchants:</h5>
 <% @merchants.each do |merchant| %>
 <% if merchant.enabled? %>
