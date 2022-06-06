@@ -26,25 +26,25 @@ RSpec.describe 'admin merchants index', type: :feature do
         @cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
         @cust_8 = Customer.create!(first_name: "Anthony", last_name: "Smith")
         
-        @invoice_1 = @cust_1.invoices.create!(status: 1)
-        @invoice_2 = @cust_1.invoices.create!(status: 1)
-        @invoice_3 = @cust_1.invoices.create!(status: 1)
-        @invoice_4 = @cust_2.invoices.create!(status: 1)
-        @invoice_5 = @cust_2.invoices.create!(status: 1)
-        @invoice_6 = @cust_2.invoices.create!(status: 1)
-        @invoice_7 = @cust_2.invoices.create!(status: 1)
-        @invoice_8 = @cust_3.invoices.create!(status: 1)
-        @invoice_9 = @cust_3.invoices.create!(status: 1)
-        @invoice_10 = @cust_5.invoices.create!(status: 1)
-        @invoice_11 = @cust_6.invoices.create!(status: 1)
-        @invoice_12 = @cust_6.invoices.create!(status: 1)
-        @invoice_13 = @cust_6.invoices.create!(status: 1)
-        @invoice_14 = @cust_7.invoices.create!(status: 1)
-        @invoice_15 = @cust_7.invoices.create!(status: 2)
-        @invoice_16 = @cust_7.invoices.create!(status: 2)
-        @invoice_17 = @cust_8.invoices.create!(status: 1)
-        @invoice_18 = @cust_8.invoices.create!(status: 1)
-        @invoice_19 = @cust_8.invoices.create!(status: 1)
+        @invoice_1 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
+        @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
+        @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
+        @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
+        @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
+        @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
+        @invoice_7 = @cust_2.invoices.create!(status: 1, created_at: "2022-05-13 17:51:52")
+        @invoice_8 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+        @invoice_9 = @cust_3.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+        @invoice_10 = @cust_5.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+        @invoice_11 = @cust_6.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+        @invoice_12 = @cust_6.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+        @invoice_13 = @cust_6.invoices.create!(status: 1, created_at: "2022-05-20 17:51:52")
+        @invoice_14 = @cust_7.invoices.create!(status: 1, created_at: "2022-05-01 17:51:52")
+        @invoice_15 = @cust_7.invoices.create!(status: 2, created_at: "2022-05-30 17:51:52")
+        @invoice_16 = @cust_7.invoices.create!(status: 2, created_at: "2022-06-03 17:51:52")
+        @invoice_17 = @cust_8.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
+        @invoice_18 = @cust_8.invoices.create!(status: 1, created_at: "2022-05-21 17:51:52")
+        @invoice_19 = @cust_8.invoices.create!(status: 1, created_at: "2022-05-03 17:51:52")
         
         @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
         @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -153,4 +153,47 @@ RSpec.describe 'admin merchants index', type: :feature do
         end
     end
   end
+
+  it 'displays the top selling date for each of the top 5 merchants' do
+    visit '/admin/merchants'
+    
+    within "#top_5" do
+      within "#merchant-0" do
+        expect(page).to have_content("Top day for Orange You Glad's store was 05/30/22")
+        expect(page).to_not have_content("Top day for Absolutely Authentic Autographs's store was 06/03/22")
+        expect(page).to_not have_content("Top day for Buck-an-Ear Jewelry's store was 05/03/22")
+        expect(page).to_not have_content("Top day for Peg-Leg Fashion's store was 05/21/22")
+        expect(page).to_not have_content("Top day for Two-Legs Fashion's store was 05/01/22")
+      end
+      within "#merchant-1" do
+        expect(page).to have_content("Top day for Absolutely Authentic Autographs's store was 06/03/22")
+        expect(page).to_not have_content("Top day for Orange You Glad's store was 05/30/22")
+        expect(page).to_not have_content("Top day for Buck-an-Ear Jewelry's store was 05/03/22")
+        expect(page).to_not have_content("Top day for Peg-Leg Fashion's store was 05/21/22")
+        expect(page).to_not have_content("Top day for Two-Legs Fashion's store was 05/01/22")
+      end
+      within "#merchant-2" do
+        expect(page).to have_content("Top day for Buck-an-Ear Jewelry's store was 05/03/22")
+        expect(page).to_not have_content("Top day for Orange You Glad's store was 05/30/22")
+        expect(page).to_not have_content("Top day for Absolutely Authentic Autographs's store was 06/03/22")
+        expect(page).to_not have_content("Top day for Peg-Leg Fashion's store was 05/21/22")
+        expect(page).to_not have_content("Top day for Two-Legs Fashion's store was 05/01/22")
+      end
+      within "#merchant-3" do
+        expect(page).to have_content("Top day for Peg-Leg Fashion's store was 05/21/22")
+        expect(page).to_not have_content("Top day for Orange You Glad's store was 05/30/22")
+        expect(page).to_not have_content("Top day for Absolutely Authentic Autographs's store was 06/03/22")
+        expect(page).to_not have_content("Top day for Buck-an-Ear Jewelry's store was 05/03/22")
+        expect(page).to_not have_content("Top day for Two-Legs Fashion's store was 05/01/22")
+      end
+      within "#merchant-4" do
+        expect(page).to have_content("Top day for Two-Legs Fashion's store was 05/01/22")
+        expect(page).to_not have_content("Top day for Orange You Glad's store was 05/30/22")
+        expect(page).to_not have_content("Top day for Absolutely Authentic Autographs's store was 06/03/22")
+        expect(page).to_not have_content("Top day for Buck-an-Ear Jewelry's store was 05/03/22")
+        expect(page).to_not have_content("Top day for Peg-Leg Fashion's store was 05/21/22")
+      end
+    end
+  end
 end
+
