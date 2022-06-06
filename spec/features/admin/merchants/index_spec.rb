@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "Admin Merchants Index Page" do
-  it "displays the name of each merchant in the system" do
-    merchant1 = Merchant.create!(name: "REI")
-    merchant2 = Merchant.create!(name: "Target")
-    merchant3 = Merchant.create!(name: "Walgreens")
-    merchant4 = Merchant.create!(name: "Hot Topic", status: 1)
+  let!(:merchant1) { Merchant.create!(name: "REI") }
+  let!(:merchant2) { Merchant.create!(name: "Target") }
+  let!(:merchant3) { Merchant.create!(name: "Walgreens") }
+  let!(:merchant4) { Merchant.create!(name: "Hot Topic", status: 1) }
 
+  before do
     visit admin_merchants_path
-    
-    expect(page).to have_content("Admin Merchants Index")
+  end
+
+  it "displays the name of each merchant in the system" do
+    expect(page).to have_content("Welcome to the Admin Dashboard")
 
     within ".disabled-merchants" do
       expect(page).to have_content("REI")
@@ -24,5 +26,27 @@ RSpec.describe "Admin Merchants Index Page" do
       expect(page).to_not have_content("Target")
       expect(page).to_not have_content("Walgreens")
     end
+  end
+
+  it "can fill out a form to create a new merchant and display the default status of disabled" do
+    expect(page).to_not have_content('Backcountry')
+
+    click_link "Create a New Merchant"
+    expect(current_path).to eq(new_admin_merchant_path)
+
+    fill_in :name, with: 'Backcountry'
+    click_on "Submit"
+
+    expect(current_path).to eq(admin_merchants_path)
+
+    within ".disabled-merchants" do
+      expect(page).to have_content('Backcountry')
+      expect(page).to have_content('Status: Disabled')
+    end
+  end
+
+  it "displays a link to create a new merchant" do
+    save_and_open_page
+    expect(page).to have_link('New Merchant')
   end
 end
