@@ -114,7 +114,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   describe 'top five merchants by revenue' do
     it 'lists the names of the top five merchants and their revenue' do 
       visit '/admin/merchants'
-      # save_and_open_page
+      save_and_open_page
       within "#topMerchants" do 
         expect(merchants[2].name).to appear_before(merchants[3].name)
         expect(merchants[3].name).to appear_before(merchants[1].name)
@@ -132,7 +132,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
     it 'has links for the merchant names' do 
       visit '/admin/merchants'
 
-      within "#rightSide2" do
+      within "#topMerchants" do
         expect(page).to have_link("#{merchants[0].name}")
         expect(page).to have_link("#{merchants[2].name}")
         expect(page).to have_link("#{merchants[3].name}")
