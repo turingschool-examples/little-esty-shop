@@ -125,7 +125,6 @@ RSpec.describe Item, type: :model do
       @invoice_itemX = @invoiceX.invoice_items.create!(quantity: 1, unit_price: 1200, item_id: @itemX.id, status: "shipped")
       visit "merchants/#{@merchant1.id}/items"
       within("#top5items") do
-        save_and_open_page
         expect("itemA").to appear_before("itemB")
         expect("itemB").to appear_before("itemD")
         expect("itemD").to appear_before("itemC")
