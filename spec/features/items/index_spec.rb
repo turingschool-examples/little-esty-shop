@@ -71,11 +71,23 @@ RSpec.describe Item, type: :model do
 
   describe 'creating a new item' do
     it 'has button to link to a create new item page' do
-    expect(page).to have_button("Create Item")
+      expect(page).to have_button("Create Item")
 
-    click_button "Create Item"
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
-    save_and_open_page
+        click_button "Create Item"
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+    end
+  
+    it 'creates a new item after form completed' do
+      visit "/merchants/#{@merchant1.id}/items"
+        click_on "Create Item"
+        fill_in "Name", with: "NewItem"
+        fill_in "Description", with: "NewDescription"
+        fill_in "Unit Price", with: "1234"
+        click_on "Submit"
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+        within("#enabled_items") do
+          expect(page).to have_content("NewItem")
+        end
     end
   end
 end
