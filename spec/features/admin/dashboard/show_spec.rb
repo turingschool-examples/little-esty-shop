@@ -55,6 +55,23 @@ RSpec.describe "Admin dashboard" do
     @ii_17 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_14.id, quantity: 30, unit_price: @item_2.unit_price, status: 2)
     @ii_18 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_14.id, quantity: 30, unit_price: @item_3.unit_price, status: 2)
     @ii_19 = InvoiceItem.create!(item_id: @item_5.id, invoice_id: @invoice_15.id, quantity: 700, unit_price: @item_4.unit_price, status: 2)
+
+    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+    @transaction_2 = @invoice_2.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+    @transaction_3 = @invoice_3.transactions.create!(credit_card_number: 4039485738495837, result: "success")
+    @transaction_4 = @invoice_4.transactions.create!(credit_card_number: 4847583748374837, result: "success")
+    @transaction_5 = @invoice_5.transactions.create!(credit_card_number: 4847583748374837, result: "success")
+    @transaction_6 = @invoice_6.transactions.create!(credit_card_number: 4847583748374837, result: "success")
+    @transaction_7 = @invoice_7.transactions.create!(credit_card_number: 4364756374652636, result: "success")
+    @transaction_8 = @invoice_8.transactions.create!(credit_card_number: 4364756374652636, result: "success")
+    @transaction_9 = @invoice_9.transactions.create!(credit_card_number: 4928294837461125, result: "success")
+    @transaction_10 = @invoice_10.transactions.create!(credit_card_number: 4928294837461125, result: "success")
+    @transaction_11 = @invoice_11.transactions.create!(credit_card_number: 4738473664751832, result: "success")
+    @transaction_12 = @invoice_12.transactions.create!(credit_card_number: 4738473664751832, result: "success")
+    @transaction_13 = @invoice_13.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_14 = @invoice_14.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_15 = @invoice_15.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+
   end
 
   it "shows the admin dashboard" do
@@ -102,5 +119,51 @@ RSpec.describe "Admin dashboard" do
     expect(page).to have_content("#{@invoice_3.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@invoice_2.id} - #{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
     expect(page).to have_content("#{@invoice_1.id} - #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
+  end
+
+  it 'displays the top 5 customers with the most successful transactions and lists their number of successful transactions next to each' do
+    @invoice_16 = @cust_1.invoices.create!(status: 1)
+    @invoice_17 = @cust_1.invoices.create!(status: 1)
+    @invoice_18 = @cust_1.invoices.create!(status: 1)
+    @invoice_19 = @cust_1.invoices.create!(status: 1)
+    @invoice_20 = @cust_2.invoices.create!(status: 1)
+    @invoice_21 = @cust_2.invoices.create!(status: 1)
+    @invoice_22 = @cust_3.invoices.create!(status: 1)
+    @invoice_23 = @cust_3.invoices.create!(status: 1)
+    @invoice_24 = @cust_3.invoices.create!(status: 1)
+    @invoice_25 = @cust_3.invoices.create!(status: 1)
+    @invoice_26 = @cust_4.invoices.create!(status: 1)
+    @invoice_27 = @cust_4.invoices.create!(status: 1)
+    @invoice_28 = @cust_7.invoices.create!(status: 1)
+
+    @transaction_16 = @invoice_16.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_17 = @invoice_17.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_18 = @invoice_18.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_19 = @invoice_19.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_20 = @invoice_20.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_21 = @invoice_21.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_22 = @invoice_22.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_23 = @invoice_23.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_24 = @invoice_24.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_25 = @invoice_25.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_26 = @invoice_26.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_27 = @invoice_27.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+    @transaction_28 = @invoice_28.transactions.create!(credit_card_number: 4023948573948293, result: "success")
+
+    visit '/admin'
+
+    within "#top_5" do
+      expect("Debbie Twolegs").to appear_before("Brian Twinlegs")
+      expect("Brian Twinlegs").to appear_before("Tommy Doubleleg")
+      expect("Tommy Doubleleg").to appear_before("Jared Goffleg")
+      expect("Jared Goffleg").to appear_before("Anten Branden")
+      expect("Jared Goffleg").to_not appear_before("Debbie Twolegs")
+      expect(page).to have_content("Debbie Twolegs - 7")
+      expect(page).to have_content("Brian Twinlegs - 6")
+      expect(page).to have_content("Tommy Doubleleg - 5")
+      expect(page).to have_content("Jared Goffleg - 4")
+      expect(page).to have_content("Anten Branden - 3")
+      expect(page).to_not have_content("Pistol Pete - 2")
+    end
   end
 end

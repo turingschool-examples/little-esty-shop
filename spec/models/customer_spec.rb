@@ -97,5 +97,35 @@ RSpec.describe Customer, type: :model do
         expect(@cust_1.successful_transactions_with_merchant(@merch_1)).to eq(3)
       end
     end
+
+    describe 'top 5 customers' do
+      it 'returns the 5 customers with the most successful transactions' do
+        @invoice_18 = @cust_1.invoices.create!(status: 1)
+        @invoice_19 = @cust_1.invoices.create!(status: 1)
+        @invoice_20 = @cust_1.invoices.create!(status: 1)
+        @invoice_21 = @cust_2.invoices.create!(status: 1)
+        @invoice_22 = @cust_2.invoices.create!(status: 1)
+        @invoice_23 = @cust_3.invoices.create!(status: 1)
+        @invoice_24 = @cust_3.invoices.create!(status: 1)
+        @invoice_25 = @cust_6.invoices.create!(status: 1)
+
+        @transaction_17 = @invoice_18.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_18 = @invoice_19.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_19 = @invoice_20.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_20 = @invoice_21.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_21 = @invoice_22.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_22 = @invoice_23.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_23 = @invoice_24.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+        @transaction_24 = @invoice_25.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
+
+        expected = [@cust_1, @cust_2, @cust_3, @cust_6, @cust_5]
+        top_5 = Customer.top_5_by_successful_transactions
+        expect(expected).to eq(top_5)
+      end
+
+      it 'can return a customers number of successful transactions' do
+        expect(@cust_1.successful_transactions).to eq(3)
+      end
+    end
   end
 end
