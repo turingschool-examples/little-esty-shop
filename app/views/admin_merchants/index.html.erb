@@ -49,7 +49,6 @@
     <ol type="1">
       <% @merchants.top_5.each_with_index do |merch, index| %>
       <div id="topMerchant-<%=index%>">
-      <% #binding.pry %>
         <li><%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %> - <%= number_to_currency(merch.revenue / 100.0) %> in sales</li>
       </div>
       <% end %>

@@ -114,14 +114,6 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   describe 'top five merchants by revenue' do
     it 'lists the names of the top five merchants and their revenue' do
       visit '/admin/merchants'
-      # save_and_open_page
-      # within ".top5" do 
-      #   expect(page).to have_content "Top Merchants"
-      #   expect(merchants[2].name).to appear_before(merchants[3].name)
-      #   expect(merchants[3].name).to appear_before(merchants[1].name)
-      #   expect(merchants[1].name).to appear_before(merchants[4].name)
-      #   expect(merchants[4].name).to appear_before(merchants[0].name)
-      # end
 
       within "#topMerchant-0" do
         expect(page).to have_link("#{merchants[2].name}")
@@ -146,6 +138,20 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       within "#topMerchant-3" do
         expect(page).to have_link("#{merchants[4].name}")
         expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
+        click_link "#{merchants[4].name}"
+      end
+      expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
+    end
+
+    it 'has links for the merchant names' do 
+      visit '/admin/merchants'
+
+      within "#topMerchants" do
+        expect(page).to have_link("#{merchants[0].name}")
+        expect(page).to have_link("#{merchants[2].name}")
+        expect(page).to have_link("#{merchants[3].name}")
+        expect(page).to have_link("#{merchants[1].name}")
+        expect(page).to have_link("#{merchants[4].name}")
         click_link "#{merchants[4].name}"
       end
       expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
