@@ -11,3 +11,4 @@
     <p>Status: <%= invoice_item.status %></p><hr>
 </div>
 <% end %>
+<h3>Total Revenue: <%= @invoice.invoice_revenue.to_s.insert(-3,'.') %></h3>
