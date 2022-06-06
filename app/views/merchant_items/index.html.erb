@@ -31,3 +31,10 @@
 </ul>
 
 <%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %>
+
+  <h3>Best Selling Items</h3>
+  <ol id="top_5_items">
+  <% @merchant.top_5_items.each do |best_seller| %>
+    <li><%= link_to "#{best_seller.name}", "/merchants/#{@merchant.id}/items/#{best_seller.id}" %> - Total Revenue: $<%= best_seller.total_revenue %></li>
+  <% end %>
+</ol>

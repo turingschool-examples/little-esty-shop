@@ -11,9 +11,8 @@ class Merchant < ApplicationRecord
     InvoiceItem.where(item_id: merchant_items).where(status: [0,1]).order(:created_at)
   end
 
-
   def top_5_customers
-    #Find items associated with the curent merchant 
+    #Find items associated with the curent merchant
     merchant_items = Item.where(merchant_id: id)  ##works in heroku
     #Find the invoices associated with these items
     merchant_invoices = Invoice.joins(:items).where(items: { id: merchant_items })  ##works
@@ -34,6 +33,10 @@ class Merchant < ApplicationRecord
           .group(:id)
           .order(total_revenue: :desc)
           .limit(5)
+  end
+  
+  def top_5_items
+    top_5_items = self.items.joins(invoice_items: [:invoice]).where(invoices: {status: 2}).select("items.*, sum(invoice_items.quantity * invoice_items.unit_price)").group(:id).order(sum: :desc).limit(5).to_a
   end
 
 end

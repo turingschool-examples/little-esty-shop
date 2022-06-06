@@ -11,4 +11,9 @@ class Item < ApplicationRecord
   def merchant_object
     Merchant.find(self.merchant_id)
   end
+
+  def total_revenue
+    invoice_items.sum("quantity * unit_price").to_s.rjust(3, "0").insert(-3, ".")
+  end
+
 end
