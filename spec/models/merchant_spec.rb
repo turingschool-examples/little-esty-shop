@@ -36,6 +36,7 @@ RSpec.describe Merchant, type: :model do
       expect(@billman.items_to_ship.pluck(:invoice_id)).to_not eq([@invoice2.id])
     end
 
+
     it 'indiv_invoice_ids returns an array of invoice ids for a merchant' do
       parker = Merchant.create!(name: "Parker's Perfection Pagoda")
       jimbob = Customer.create!(first_name: "Jimbob", last_name: "Dudeguy")
@@ -44,5 +45,6 @@ RSpec.describe Merchant, type: :model do
       expect(@billman.indiv_invoice_ids).to eq([@invoice1.id, @invoice2.id])
       expect(@billman.indiv_invoice_ids).to_not eq([invoice3.id, invoice4.id])
     end
+
   end
 end
