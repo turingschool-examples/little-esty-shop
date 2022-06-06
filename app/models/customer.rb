@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
+  has_many :transactions, through: :invoices
 
   validates_presence_of :first_name, :last_name 
 
@@ -9,4 +10,17 @@ class Customer < ApplicationRecord
     successful_transactions = Invoice.joins(:transactions).where(id: customer_merchant_invoices).where(transactions: { result: "success" }).count
   end
   
+  def self.top_5_by_successful_transactions
+    joins(invoices: :transactions)
+            .where(transactions: {result: "success"})
+            .select('customers.*, count(transactions.*) AS successful_transactions')
+            .group('customers.id')
+            .order(successful_transactions: :desc)
+            .limit(5)
+  end
+
+  def successful_transactions
+    st = transactions.where(transactions: {result: "success"})
+    st.count
+  end
 end
