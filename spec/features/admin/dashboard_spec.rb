@@ -31,4 +31,5 @@ RSpec.describe 'merchants dashboard' do
     expect(current_path).to eq("/admin/invoices")
 
   end
+
 end
