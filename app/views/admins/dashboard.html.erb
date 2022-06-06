@@ -2,3 +2,13 @@
 <%= link_to "Admin Invoices Index", "/admin/invoices" %><br>
 
 <h1>Admin Dashboard</h1>
+
+<br>
+
+Incomplete Invoices:
+
+<br>
+
+<% @invoices.incomplete.each do |invoice| %>
+  <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %><br>
+<% end %>
