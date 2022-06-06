@@ -16,7 +16,7 @@ RSpec.describe Merchant, type: :model do
 
   let!(:merchants)  { create_list(:merchant, 6, status: 1) }
   let!(:merchants2) { create_list(:merchant, 2, status: 0)}
-  
+
   let!(:customer1) { create(:customer, first_name: 'Luke', last_name: 'Skywalker')}
   let!(:customer2) { create(:customer, first_name: 'Padme', last_name: 'Amidala')}
   let!(:customer3) { create(:customer, first_name: 'Boba', last_name: 'Fett')}
@@ -94,16 +94,16 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.disabled).to_not include(merchants[5])
     end
 
-    it 'returns top five merchants by revenue' do 
+    it 'returns top five merchants by revenue' do
       expect(Merchant.top_5).to eq([merchants[2], merchants[3], merchants[1], merchants[4], merchants[0]])
       expect(Merchant.top_5).to_not eq(merchants[6])
     end
 
     it "returns the top 5 customers that have made the most purchases with successful transactions" do
       expected = [
-        customer6, 
+        customer6,
         customer1,
-        customer4, 
+        customer4,
         customer5,
         customer2
       ]
@@ -113,7 +113,7 @@ RSpec.describe Merchant, type: :model do
 
   describe '#instance methods' do
     it 'returns top 5 customers' do
-      expect(merchants[2].top_5_customers).to eq([customer1, customer6, customer2, customer4, customer5])
+      expect(merchants[2].top_5_customers).to eq([customer1, customer6, customer4, customer5, customer2])
     end
 
     it 'returns item names ordered, not shipped' do
@@ -121,13 +121,13 @@ RSpec.describe Merchant, type: :model do
       expect(merchants[5].ordered_not_shipped).to eq([invoice_item11, invoice_item12])
     end
   end
-  
+
   xit "#best_day returns the merchants best selling day" do
     expect(merchant1.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
     expect(merchant2.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
     expect(merchant3.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
     expect(merchant4.best_day).to eq(invoice2.created_at.strftime("%m/%d/%y"))
-    expect(merchant5.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y")) 
+    expect(merchant5.best_day).to eq(invoice1.created_at.strftime("%m/%d/%y"))
   end
- 
+
 end

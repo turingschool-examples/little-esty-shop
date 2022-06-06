@@ -15,7 +15,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   let!(:invoice1) { create(:invoice, customer: customer, created_at: "2012-03-10 00:54:09 UTC") }
   let!(:invoice2) { create(:invoice, customer: customer, created_at: "2013-03-10 00:54:09 UTC") }
   let!(:invoice3) { create(:invoice, customer: customer, created_at: "2014-03-10 00:54:09 UTC") }
-  
+
   let!(:transaction1) { create(:transaction, invoice: invoice1, result: 0) }
   let!(:transaction2) { create(:transaction, invoice: invoice1, result: 0) }
   let!(:transaction3) { create(:transaction, invoice: invoice2, result: 1) }
@@ -112,10 +112,11 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe 'top five merchants by revenue' do
-    it 'lists the names of the top five merchants and their revenue' do 
+    it 'lists the names of the top five merchants and their revenue' do
       visit '/admin/merchants'
-      save_and_open_page
-      within "#topMerchants" do 
+
+
+      within "#topMerchants" do
         expect(merchants[2].name).to appear_before(merchants[3].name)
         expect(merchants[3].name).to appear_before(merchants[1].name)
         expect(merchants[1].name).to appear_before(merchants[4].name)

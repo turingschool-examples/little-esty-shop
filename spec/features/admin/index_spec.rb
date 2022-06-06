@@ -1,4 +1,4 @@
-require 'rails_helper'
+ require 'rails_helper'
 
 RSpec.describe "Admin Dashboard", type: :feature do
   let!(:customer) { create(:customer) }
@@ -106,24 +106,25 @@ RSpec.describe "Admin Dashboard", type: :feature do
     let!(:invoice_item5) { create(:invoice_item, item: item1, invoice: invoice5, status: 0) }
     let!(:invoice_item6) { create(:invoice_item, item: item2, invoice: invoice6, status: 1) }
 
-    # As an admin,
-    # When I visit the admin dashboard
-    # Then I see the names of the top 5 customers
-    # who have conducted the largest number of successful transactions
-    # And next to each customer name I see the number of successful transactions they have
-    # conducted
-    xit "displays the top 5 customers that have made the most purchases with successful transactions" do
+    it "displays the top 5 customers that have made the most purchases with successful transactions" do
       top_customer = customers[2]
       tied_customers = [customers[1], customers[3], customers[4], customers[5]]
       expected = tied_customers.sort_by(&:last_name).sort_by(&:first_name).unshift(top_customer)
 
       visit admin_index_path
 
-      expect(page).to have_content("1. #{expected[0].first_name} #{expected[0].last_name} - 2 purchases")
-      expect(page).to have_content("2. #{expected[1].first_name} #{expected[1].last_name} - 1 purchases")
-      expect(page).to have_content("3. #{expected[2].first_name} #{expected[2].last_name} - 1 purchases")
-      expect(page).to have_content("4. #{expected[3].first_name} #{expected[3].last_name} - 1 purchases")
-      expect(page).to have_content("5. #{expected[4].first_name} #{expected[4].last_name} - 1 purchases")
+      within "#rightSide2" do
+        expect(page).to have_content("#{expected[0].first_name} #{expected[0].last_name} - 2 purchases")
+        expect(page).to have_content("#{expected[1].first_name} #{expected[1].last_name} - 1 purchases")
+        expect(page).to have_content("#{expected[2].first_name} #{expected[2].last_name} - 1 purchases")
+        expect(page).to have_content("#{expected[3].first_name} #{expected[3].last_name} - 1 purchases")
+        expect(page).to have_content("#{expected[4].first_name} #{expected[4].last_name} - 1 purchases")
+
+        expect("#{expected[0].first_name} #{expected[0].last_name}").to appear_before("#{expected[1].first_name} #{expected[1].last_name}")
+        expect("#{expected[1].first_name} #{expected[1].last_name}").to appear_before("#{expected[2].first_name} #{expected[2].last_name}")
+        expect("#{expected[2].first_name} #{expected[2].last_name}").to appear_before("#{expected[3].first_name} #{expected[3].last_name}")
+        expect("#{expected[3].first_name} #{expected[3].last_name}").to appear_before("#{expected[4].first_name} #{expected[4].last_name}")
+      end
     end
   end
 
