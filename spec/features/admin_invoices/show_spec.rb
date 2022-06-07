@@ -45,7 +45,7 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
     expect(page).to have_content('Total Revenue: $55.35')
   end
 
-  it 'has a select field to update invoice status' do
+  it 'has a select field to update invoice status', :vcr do
     visit "/admin/invoices/#{invoice1.id}"
 
     expect(invoice1.status).to eq('in progress')
