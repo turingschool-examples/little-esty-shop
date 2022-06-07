@@ -5,8 +5,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/merchants/:merchant_id/items">Items Index</a> <%# TODO: links not working yet %>
-      <a class="nav-item nav-link" href="/merchants/#{@merchant.id}/invoices">Invoices Index</a>
+      <a class="nav-item nav-link" href=<%= merchant_items_path(@merchant) %>>Items Index</a>
+      <a class="nav-item nav-link" href=<%= merchant_invoices_path(@merchant) %>>Invoices Index</a>
     </div>
   </div>
 </nav>
