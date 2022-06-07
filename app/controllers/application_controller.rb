@@ -1,7 +1,7 @@
 require './app/facade/repo_search'
 class ApplicationController < ActionController::Base
   
-  before_action :repo_name
+  # before_action :repo_name
 
   def welcome
 
@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
     errors.full_messages.join(', ')
   end
 
-  def repo_name
-    repo_search = RepoSearch.new
-    @repo = repo_search.repo_information
-  end
+  # def repo_name
+  #   repo_search = RepoSearch.new
+  #   @repo = repo_search.repo_information
+  # end
 end
