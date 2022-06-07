@@ -89,6 +89,7 @@ RSpec.describe "Admin Merchant Index" do
           expect(page).to have_content("disabled")
         end
 
+
         it 'shows the enabled and disabled merchants' do
           visit "/admin/merchants"
 
@@ -102,6 +103,33 @@ RSpec.describe "Admin Merchant Index" do
             expect(page).to have_content('Blue Clues')
             expect(page).to have_content('Apple Bottom Jeans')
           end
+        end
+
+        it "has a button to enable/diable mechant next to each name" do
+            visit "/admin/merchants"
+            within "#merchant-#{@merch1.id}" do
+                expect(page).to have_content("Floopy Fopperations") 
+                expect(page).to have_content("Status: disabled")
+                expect(page).to_not have_content("Status: enabled")
+                click_button "Enable"
+                expect(current_path).to eq("/admin/merchants") 
+                expect(page).to have_content("Status: enabled") 
+                expect(page).to_not have_content("Status: disabled") 
+            end
+
+            within "#merchant-#{@merch2.id}" do
+                expect(page).to have_content("A-Team") 
+                expect(page).to have_content("Status: disabled")
+                expect(page).to_not have_content("Status: enabled")
+                click_button "Enable"
+                expect(current_path).to eq("/admin/merchants") 
+                expect(page).to have_content("Status: enabled") 
+                expect(page).to_not have_content("Status: disabled") 
+                click_button "Disable"
+                expect(current_path).to eq("/admin/merchants") 
+                expect(page).to have_content("Status: disabled") 
+                expect(page).to_not have_content("Status: enabled") 
+            end
         end
     end
 
