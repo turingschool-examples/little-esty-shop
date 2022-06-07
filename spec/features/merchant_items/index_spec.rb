@@ -11,7 +11,7 @@ RSpec.describe 'Merchant Items Index Page' do
   describe 'merchant items' do
     it 'has list of items for a specific merchant', :vcr do
       visit "/merchants/#{merchant.id}/items"
-      # save_and_open_page
+
       expect(page).to have_content(item.name)
       expect(page).to have_content(item2.name)
       expect(page).to_not have_content(item3.name)
@@ -37,7 +37,7 @@ RSpec.describe 'Merchant Items Index Page' do
   describe 'merchant item disable/enable' do
     it 'has a button to enable and a button to disable item', :vcr do
       visit "/merchants/#{merchant.id}/items"
-      # save_and_open_page
+
       within '.merchant-items-enabled' do
         expect(page).to have_button('Disable')
         expect(page).to_not have_button('Enable')
@@ -135,7 +135,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
     it "has the top 5 most popular items ranked by total revenue generated", :vcr do
       visit "/merchants/#{merchant.id}/items"
-      # save_and_open_page
+
       within "#rightSide2" do
         expect(page).to have_content("Top Items")
         expect(items[3].name).to appear_before(items[5].name)

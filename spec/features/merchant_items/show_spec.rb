@@ -50,4 +50,4 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(current_path).to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit")
     end
   end
-end 
+end

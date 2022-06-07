@@ -9,10 +9,19 @@ RSpec.describe 'New Merchant Form' do
     click_button 'Submit'
     expect(current_path).to eq("/admin/merchants")
 
-    within ".disabled-merchants" do 
+    within ".disabled-merchants" do
       expect(page).to have_content('Pop Rock Enterprises')
       expect(page).to have_button('Enable')
       expect(page).to_not have_button('Disable')
-    end 
+    end
+  end
+
+  it 'returns an error if required info is missing' do
+    visit new_merchant_path
+
+    click_button 'Submit'
+
+    expect(current_path).to eq("/admin/merchants")
+    expect(page).to have_content('A Required Field Was Missing; Merchant Not Created')
   end
 end

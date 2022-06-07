@@ -7,6 +7,11 @@
   <div class="page-defaults" id="leftSide">
     <h2>Admin Dashboard</h2>
     <%= link_to "Create New Merchant", new_merchant_path %>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
   </div>
 
   <div class="page-defaults" id="rightSide">
@@ -50,7 +55,7 @@
       <% @merchants.top_5.each_with_index do |merch, index| %>
       <div id="topMerchant-<%=index%>">
         <li><%= link_to "#{merch.name}", "/admin/merchants/#{merch.id}" %> - <%= number_to_currency(merch.revenue / 100.0) %> in sales</li>
-        <p><%= "Top selling date for #{merch.name} was #{merch.best_day}" %></p>          
+        <p><%= "Top selling date for #{merch.name} was #{merch.best_day}" %></p>
       </div>
       <% end %>
     </ol>
