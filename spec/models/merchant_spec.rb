@@ -153,5 +153,19 @@ RSpec.describe Merchant do
         it "gives me the top 5 merchants by revenue" do
             expect(Merchant.top_five_merchants_by_revenue).to eq([@merch1, @merch6, @merch5, @merch4, @merch3])
         end
+
+        describe "#enable / disable merchants" do
+            it "returns all merchants based on status, enabled or disabled" do
+                expect(Merchant.enabled_merchants).to eq([])
+                # require "pry"; binding.pry
+                expect(Merchant.disabled_merchants).to match_array([@merch1, @merch2, @merch3, @merch4, @merch5, @merch6, @merch7, @merch8])
+
+                @merch1.update(status: 1)
+                @merch2.update(status: 1)
+
+                expect(Merchant.enabled_merchants).to match_array([@merch1, @merch2])
+                expect(Merchant.disabled_merchants).to match_array([@merch3, @merch4, @merch5, @merch6, @merch7, @merch8])
+            end
+        end
   end
 end

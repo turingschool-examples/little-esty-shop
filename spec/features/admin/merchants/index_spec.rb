@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Admin Merchant Index" do
     before :each do
-        @merch1 = Merchant.create!(name: 'Floopy Fopperations')
-        @merch2 = Merchant.create!(name: 'A-Team')
-        @merch3 = Merchant.create!(name: 'Blue Clues')
-        @merch4 = Merchant.create!(name: 'Apple Bottom Jeans')
+        @merch1 = Merchant.create!(name: 'Floopy Fopperations', status: 1)
+        @merch2 = Merchant.create!(name: 'A-Team', status: 1)
+        @merch3 = Merchant.create!(name: 'Blue Clues', status: 0)
+        @merch4 = Merchant.create!(name: 'Apple Bottom Jeans', status: 0)
     end
 
     describe "Admin Merchant Index" do
@@ -75,43 +75,62 @@ RSpec.describe "Admin Merchant Index" do
         end
 
         it 'can create a new merchant and show its status' do
+
           visit "/admin/merchants"
           click_link "Create a New Merchant"
+
           expect(current_path).to eq("/admin/merchants/new")
+
           fill_in "Name", with: "Zachary's Coffee Grounds"
           click_on "Submit"
+
           expect(current_path).to eq("/admin/merchants")
           expect(page).to have_content("Zachary's Coffee Grounds")
           expect(page).to have_content("disabled")
         end
 
+
+        it 'shows the enabled and disabled merchants' do
+          visit "/admin/merchants"
+
+          expect(page).to have_content("Enabled Merchants:")
+          expect(page).to have_content("Disabled Merchants:")
+          within "#enabled-merchants" do
+            expect(page).to have_content('Floopy Fopperations')
+            expect(page).to have_content('A-Team')
+          end
+          within "#disabled-merchants" do
+            expect(page).to have_content('Blue Clues')
+            expect(page).to have_content('Apple Bottom Jeans')
+          end
+        end
+
         it "has a button to enable/diable mechant next to each name" do
             visit "/admin/merchants"
             within "#merchant-#{@merch1.id}" do
-                expect(page).to have_content("Floopy Fopperations") 
+                expect(page).to have_content("Floopy Fopperations")
+                expect(page).to have_content("Status: enabled")
+                expect(page).to_not have_content("Status: disabled")
+                click_button "Disable"
+                expect(current_path).to eq("/admin/merchants")
                 expect(page).to have_content("Status: disabled")
                 expect(page).to_not have_content("Status: enabled")
-                click_button "Enable"
-                expect(current_path).to eq("/admin/merchants") 
-                expect(page).to have_content("Status: enabled") 
-                expect(page).to_not have_content("Status: disabled") 
             end
 
             within "#merchant-#{@merch2.id}" do
-                expect(page).to have_content("A-Team") 
+                expect(page).to have_content("A-Team")
+                expect(page).to have_content("Status: enabled")
+                expect(page).to_not have_content("Status: disabled")
+                click_button "Disable"
+                expect(current_path).to eq("/admin/merchants")
                 expect(page).to have_content("Status: disabled")
                 expect(page).to_not have_content("Status: enabled")
                 click_button "Enable"
-                expect(current_path).to eq("/admin/merchants") 
-                expect(page).to have_content("Status: enabled") 
-                expect(page).to_not have_content("Status: disabled") 
-                click_button "Disable"
-                expect(current_path).to eq("/admin/merchants") 
-                expect(page).to have_content("Status: disabled") 
-                expect(page).to_not have_content("Status: enabled") 
+                expect(current_path).to eq("/admin/merchants")
+                expect(page).to have_content("Status: enabled")
+                expect(page).to_not have_content("Status: disabled")
             end
         end
-        
     end
 
 end

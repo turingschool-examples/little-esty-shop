@@ -7,6 +7,14 @@ class Merchant < ApplicationRecord
 
   enum status: %i[disabled enabled]
 
+  def self.enabled_merchants
+    where(status: 1)
+  end
+
+  def self.disabled_merchants
+    where(status: 0)
+  end
+
   def ready_items
     items.joins(:invoices).select('items.*')
          .where('invoice_items.status = 1')

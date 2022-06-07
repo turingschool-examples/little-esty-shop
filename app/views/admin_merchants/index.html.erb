@@ -9,16 +9,25 @@
   <% end %>
 </div>
 
-<h3>Merchants</h3>
-<% @merchants.each do |merchant| %>
-<div id="merchant-<%= merchant.id %>">
+
+<div id="enabled-merchants">
+  <h2>Enabled Merchants:</h2>
+  <% @merchants.enabled_merchants.each do |merchant| %>
+   <div id="merchant-<%= merchant.id %>">
     <p>Name: <%= merchant.name %></p>
     <p>Status: <%= merchant.status %></p>
-    <% if merchant.status == "disabled" %>
-      <%= button_to "Enable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %>
-    <% elsif merchant.status == "enabled" %>
-      <%= button_to "Disable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %>
-    <% end %>
-    <hr>
+    <p><%= button_to "Disable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %></p>
+    </div><hr>
+   <% end %>
 </div>
-<% end %>
+<div id="disabled-merchants">
+  <h2>Disabled Merchants:</h2>
+  <% @merchants.disabled_merchants.each do |merchant| %>
+  <div id="merchant-<%= merchant.id %>">
+    <p>Name: <%= merchant.name %></p>
+    <p>Status: <%= merchant.status %></p>
+    <p><%= button_to "Enable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %></p>
+    </div><hr>
+    <% end %>
+</div>
+
