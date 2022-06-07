@@ -10,7 +10,7 @@
         <% @merchant.items_ready_to_ship.each do |item| %>
         <div id="item-<%= item.id %>">
           <li><b> <%= "#{item.name}" %></b></li>
-          <p> <%= link_to "#{item.id}", "/merchants/invoices/#{item.id}" %> </p>
+          <p> <%= link_to "#{item.id}", merchant_item_path(@merchant, item.id) %> </p>
           <p> <%= item.created_at.strftime("Invoice Date %A, %B %d, %Y") %> </p>
         </div>
         <% end %>
