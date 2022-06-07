@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    Repo Name: <%= @data[:name] %><br>
+    Collaborators:  <%= @data2.pluck(:login).join(', ') %>
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
