@@ -17,11 +17,11 @@ RSpec.describe 'the admin dashboard', type: :feature do
   @jimbob = Customer.create!(first_name: "Jimbob", last_name: "Dudeguy")
   @casey = Customer.create!(first_name: "Casey", last_name: "Zafio")
 
-  @invoice1 = @brenda.invoices.create!(status: "In Progress")
-  @invoice2 = @brenda.invoices.create!(status: "Completed")
-  @invoice3 = @jimbob.invoices.create!(status: "Completed")
-  @invoice4 = @jimbob.invoices.create!(status: "Completed")
-  @invoice5 = @casey.invoices.create!(status: "Completed")
+  @invoice1 = @brenda.invoices.create!(status: "In Progress", created_at: Time.now - 1.days)
+  @invoice2 = @brenda.invoices.create!(status: "Completed", created_at: Time.now - 2.days)
+  @invoice3 = @jimbob.invoices.create!(status: "Completed", created_at: Time.now - 3.days)
+  @invoice4 = @jimbob.invoices.create!(status: "Completed", created_at: Time.now - 4.days)
+  @invoice5 = @casey.invoices.create!(status: "Completed", created_at: Time.now - 5.days)
 
   @order1 = @bracelet.invoice_items.create!(quantity: 1, unit_price: 1001, status: "pending", invoice_id: @invoice1.id)
   @order2 = @mood.invoice_items.create!(quantity: 1, unit_price: 2002, status: "packaged", invoice_id: @invoice1.id)

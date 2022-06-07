@@ -10,7 +10,7 @@ RSpec.describe Item, type: :model do
 
     visit "/merchants/#{@merchant1.id}/items"
   end
-  
+
   describe 'Merchant items index page content' do
     it 'shows all items for the merchant' do
       expect(page).to have_content("Item1")
@@ -18,49 +18,49 @@ RSpec.describe Item, type: :model do
       expect(page).to_not have_content("Item2")
     end
   end
-  
+
   describe "instance variable" do
     it "change the status of the item" do
       @merchant1 = Merchant.create!(name: 'Merchant1')
       @item1 = @merchant1.items.create!(name: 'Item1', description: 'Description1', unit_price: 111)
       visit "/merchants/#{@merchant1.id}/items"
-      
+
       within("#status-#{@item1.id}") do
         expect(page).to have_content("Status: enabled")
       end
-      
+
       click_button "Disable"
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
-      
+
       within("#status-#{@item1.id}") do
         expect(page).to have_content("Status: disabled")
-      end  
-      
+      end
+
       click_button "Enable"
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
-      
+
       within("#status-#{@item1.id}") do
         expect(page).to have_content("Status: enabled")
       end
     end
   end
-  
+
   describe "Index Page Content" do
     it "items are placed into the section, enabled or disabled, that matches their status" do
       item111 = @merchant1.items.create!(name: 'Item111', description: 'Description111', unit_price: 11111, status: 1)
       item1111 = @merchant1.items.create!(name: 'Item1111', description: 'Description1111', unit_price: 111111, status: 0)
-      
+
       visit "/merchants/#{@merchant1.id}/items"
 
       expect(page).to have_content("Enabled Items")
       expect(page).to have_content("Disabled Items")
-      
+
       within("#enabled_items") do
         expect(page).to have_content("Item1")
         expect(page).to have_content("Item1111")
         expect(page).to_not have_content("Item11 ")
       end
-      
+
       within("#disabled_items") do
         expect(page).to have_content("Item11")
         expect(page).to have_content("Item111")
@@ -76,7 +76,7 @@ RSpec.describe Item, type: :model do
         click_button "Create Item"
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
     end
-  
+
     it 'creates a new item after form completed' do
       visit "/merchants/#{@merchant1.id}/items"
         click_on "Create Item"
@@ -125,12 +125,11 @@ RSpec.describe Item, type: :model do
       @invoice_itemX = @invoiceX.invoice_items.create!(quantity: 1, unit_price: 1200, item_id: @itemX.id, status: "shipped")
       visit "merchants/#{@merchant1.id}/items"
       within("#top5items") do
-        save_and_open_page
         expect("itemA").to appear_before("itemB")
         expect("itemB").to appear_before("itemD")
         expect("itemD").to appear_before("itemC")
         expect("itemC").to appear_before("itemF")
-        expect(page).to_not have_content("itemZ") #6th highest total revenue 
+        expect(page).to_not have_content("itemZ") #6th highest total revenue
         expect(page).to_not have_content("itemX") #transactions result not success
       end
     end

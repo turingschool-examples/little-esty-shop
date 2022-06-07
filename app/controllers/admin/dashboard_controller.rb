@@ -1,7 +1,7 @@
 class Admin::DashboardController < ApplicationController
 
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.oldest_first
   end
 
 end
