@@ -1,8 +1,5 @@
 <h2>New Merchant</h2>
 
-<%= form_with url: admin_merchants_path(@merchant), method: :post, local: true do |form|%>
-  <%= form.label :name %><br/>
-  <%= form.text_field :name %><br/>
-
-  <%= form.submit 'Submit' %>
-<% end %>
+<%= render partial: 'form', locals: { url: admin_merchants_path,
+                                      class: 'merchant_form',
+                                      local: true} %>
