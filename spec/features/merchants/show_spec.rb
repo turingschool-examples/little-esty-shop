@@ -87,7 +87,7 @@ RSpec.describe 'Merchants show page', type: :feature do
         expect(page).to have_content("#{@items[0].name} - Invoice ##{invoice_item1.invoice_id}")
         click_link "Invoice ##{invoice_item1.invoice_id}"
       end
-      expect(current_path).to eq("/merchants/#{merchants[0].id}/invoices")
+      expect(current_path).to eq("/merchants/#{merchants[0].id}/invoices/#{invoice_item1.invoice_id}")
     end
   end
 

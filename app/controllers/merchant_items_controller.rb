@@ -5,7 +5,6 @@ class MerchantItemsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
   end
@@ -17,14 +16,14 @@ class MerchantItemsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:merchant_id])
-    # binding.pry
     item = Item.find(params[:id])
     if params[:item][:status]
       item.update(status: params[:item][:status])
       redirect_to "/merchants/#{merchant.id}/items"
-    else
-      item.update(item_params)
+    elsif item.update(item_params)
       redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: 'Item Successfully Updated'
+    else
+      redirect_to "/merchants/#{merchant.id}/items/#{item.id}", notice: 'A Required Field Was Missing; Item Not Updated'
     end
   end
 
@@ -34,7 +33,6 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-    # binding.pry
     merchant = Merchant.find(params[:merchant_id])
     @item = merchant.items.create!(item_params)
     redirect_to merchant_items_path(merchant.id)
@@ -43,7 +41,6 @@ class MerchantItemsController < ApplicationController
   private
 
   def item_params
-    # binding.pry
     params.require(:item).permit(
       :name,
       :description,
