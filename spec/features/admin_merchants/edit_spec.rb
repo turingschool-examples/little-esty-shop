@@ -23,7 +23,7 @@ RSpec.describe 'Admin Merchants Edit Page', type: :feature do
   end
 
   describe 'admin merchant update' do
-    it 'has a form to update the merchant name' do
+    it 'has a form to update the merchant name', :vcr do
       visit "/admin/merchants/#{merchants[0].id}"
       expect(page).to_not have_content('Crunch Wrap Industries')
 
@@ -36,7 +36,7 @@ RSpec.describe 'Admin Merchants Edit Page', type: :feature do
       expect(page).to have_content('Merchant Successfully Updated')
     end
 
-    it 'returns an error if required info is missing' do
+    it 'returns an error if required info is missing', :vcr do
       visit "/admin/merchants/#{merchants[0].id}/edit"
 
       fill_in 'Name', with: ''
