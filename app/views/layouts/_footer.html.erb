@@ -1,0 +1,7 @@
+<% if @repository.present? %>
+  <% if @repository.is_a?(Repository) %>
+    <p><%= @repository.name %></p>
+  <% else %>
+    <p><%= @repository[:message] %></p>
+  <% end %>
+<% end %>
