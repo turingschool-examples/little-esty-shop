@@ -14,21 +14,9 @@
       <p><%= message %></p>
     <% end %>
 
-<h4>Repo Name:</h4>
-  <p><%= @repo.name %></p>
-<h4>Repo Pull Request Total:</h4>
-  <p><%= @pull_request_count %></p>
-<h4>Contributors:</h4>
-  <% @contributors.contributor_data.each do |contributor| %>
-    <% if (contributor[:login] != "BrianZanti" &&
-           contributor[:login] != "timomitchel" &&
-           contributor[:login] != "scottalexandra" &&
-           contributor[:login] != "jamisonordway") %>
-    <p>Login: <%= contributor[:login] %></p>
-    <p>Contributions: <%= contributor[:contributions] %></p>
-    <% end %>
-  <% end %>
     <%= yield %>
+
+<%= render partial: "shared/github_footer" %> 
 
 
   </body>
