@@ -1,6 +1,6 @@
 
 <h1>Admin Merchant Index Page</h1>
-
+<%= link_to "Create a New Merchant", "/admin/merchants/new" %>
 <div id="top-5-merchants">
 <h2>Top 5 Merchants by Total Revenue Generated:</h2>
   <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
@@ -9,8 +9,16 @@
   <% end %>
 </div>
 
-<h3>Merchant Names</h3>
+<h3>Merchants</h3>
 <% @merchants.each do |merchant| %>
-    <p><%= merchant.name %></p>
+<div id="merchant-<%= merchant.id %>">
+    <p>Name: <%= merchant.name %></p>
+    <p>Status: <%= merchant.status %></p>
+    <% if merchant.status == "disabled" %>
+      <%= button_to "Enable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %>
+    <% elsif merchant.status == "enabled" %>
+      <%= button_to "Disable", "/admin/merchants?merchant_id=#{merchant.id}", method: :patch, local: true %>
+    <% end %>
     <hr>
+</div>
 <% end %>

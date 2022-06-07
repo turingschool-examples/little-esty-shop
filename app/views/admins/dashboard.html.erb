@@ -3,7 +3,6 @@
 
 <h1>Admin Dashboard</h1>
 
-
 <div id="top-5-customers">
 <h2>Top 5 Customers by Total Number of Transactions:</h2>
   <% @customers.top_five_by_transaction_count.each do |customer| %>
@@ -12,3 +11,14 @@
       <hr>
   <% end %>
 </div>
+
+<br>
+
+Incomplete Invoices:
+
+<br>
+
+<% @invoices.incomplete.each do |invoice| %>
+  <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %><br>
+<% end %>
+

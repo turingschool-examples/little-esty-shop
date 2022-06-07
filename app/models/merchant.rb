@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+  enum status: %i[disabled enabled]
+
   def ready_items
     items.joins(:invoices).select('items.*')
          .where('invoice_items.status = 1')
