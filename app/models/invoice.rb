@@ -23,7 +23,7 @@ class Invoice < ApplicationRecord
       .where.not(invoice_items: { status: 2 })
       .group(:id)
       .select('invoices.*')
-      .order(created_at: :desc)
+      .order(created_at: :asc)
   end
 
   def invoice_revenue
