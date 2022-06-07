@@ -15,8 +15,8 @@ describe "Admin Dashboad" do
   let!(:invoice2) { customer1.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
   let!(:invoice3) { customer1.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
   let!(:invoice4) { customer1.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
-  let!(:invoice5) { customer5.invoices.create!(status: 2) }
-  let!(:invoice6) { customer6.invoices.create!(status: 2) }
+  let!(:invoice5) { customer5.invoices.create!(status: 2, created_at: '2012-03-26 14:53:59') }
+  let!(:invoice6) { customer6.invoices.create!(status: 2, created_at: '2012-03-27 14:53:59') }
   let!(:invoice7) { customer2.invoices.create!(status: 2) }
   let!(:invoice8) { customer2.invoices.create!(status: 2) }
   let!(:invoice9) { customer3.invoices.create!(status: 2) }
@@ -102,9 +102,12 @@ describe "Admin Dashboad" do
   end
 
   it "orders incomplete invoices by oldest to newest" do
-    expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
-    expect("#{invoice2.id}").to appear_before("#{invoice4.id}") # TODO: found a flaky test: expected "440" to appear before "442"
-    ##this should probably be updated to include the added invoices from the top 5 customers method
+    within ".incomplete-invoices" do
+      expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
+      expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
+      expect("#{invoice4.id}").to appear_before("#{invoice5.id}")
+      expect("#{invoice5.id}").to appear_before("#{invoice6.id}")
+    end
   end
 
   it "lists the names of the top 5 customers with the largest number of successful transactions" do
