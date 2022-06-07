@@ -40,13 +40,13 @@ RSpec.describe 'Merchant Items Edit Page' do
       expect(page).to have_content('Tasty')
     end
 
-    it "returns an error if required information is missing" do
+    it "returns an error if required information is missing", :vcr do
       visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit"
 
       fill_in('item[name]', with: '')
       fill_in('item[description]', with: 'Tasty')
       click_on('Submit')
-      
+
       expect(current_path).to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}")
       expect(page).to have_content('A Required Field Was Missing; Item Not Updated')
       expect(page).to_not have_content('Tasty')

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'New Merchant Form' do 
-  it 'allows you to add merchant information and has a default status of disabled', :vcr do 
+RSpec.describe 'New Merchant Form' do
+  it 'allows you to add merchant information and has a default status of disabled', :vcr do
     visit new_merchant_path
 
     expect(page).to have_content "New Merchant Form"
@@ -16,7 +16,7 @@ RSpec.describe 'New Merchant Form' do
     end
   end
 
-  it 'returns an error if required info is missing' do
+  it 'returns an error if required info is missing', :vcr do
     visit new_merchant_path
 
     click_button 'Submit'
