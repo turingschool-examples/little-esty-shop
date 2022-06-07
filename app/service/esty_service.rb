@@ -1,7 +1,11 @@
-class RepoSearch
-  def repo_information
-    response = HTTParty.get("https://api.github.com/repos/ColinReinhart/little-esty-shop")
-    parsed_repo = JSON.parse(response.body, symbolize_names: true)
-      Repo.new(parsed_repo)
+class EstyService  
+
+  def repo
+    get_url("https://api.github.com/repos/ColinReinhart/little-esty-shop")
+  end
+
+  def get_url(url)
+    response = HTTParty.get(url)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end

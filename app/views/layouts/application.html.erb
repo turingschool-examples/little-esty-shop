@@ -9,6 +9,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  
+  <br>Repo: <%= "#{@repo.name}" %>
   <body>
   <% flash.each do |type, msg| %>
       <div>
@@ -17,5 +19,4 @@
     <% end %>
     <%= yield %>
   </body>
-  <br>Repo: <%= "#{@repo_name}" %>
 </html>
