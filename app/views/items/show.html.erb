@@ -1,4 +1,6 @@
-<h1>Name: <%= @item.name %></h1>
+<%= render 'partials/navbar_merchant' %><br>
+
+<h2>Name: <%= @item.name %></h2>
 <p><b>Description:</b> <%= @item.description %></p>
 <p><b>Current Selling Price:</b> <%= number_to_currency(@item.unit_price) %></p>
 
