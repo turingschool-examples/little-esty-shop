@@ -8,6 +8,7 @@
       <hr><br>
       <ul>
         <% @invoices.incomplete_invoices.each do |invoice| %>
+
         <li> <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %> <i>Created on: <%= invoice.created_at.strftime("%A, %d %b %Y") %> </i></li>
         <% end %>
       </ul>
