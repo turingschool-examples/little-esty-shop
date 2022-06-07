@@ -25,6 +25,16 @@
         <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, params: { status: 'enabled' } %></li>
         </div>
       <% end %></ul>
-    </div>      
+    </div>
   </div>
+</div>
+
+<div id="top-five-merchants">
+  <h3 style="text-align:center;">Top 5 Merchants</h3>
+  <hr><br>
+  <ol>
+    <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
+    <h5><li> <%= "#{merchant.name}"%> Revenue: <%= number_to_currency(merchant.revenue)%> </li></h5><br>
+    <% end %>
+  </ol>
 </div>
