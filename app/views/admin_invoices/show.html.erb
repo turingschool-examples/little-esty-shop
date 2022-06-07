@@ -19,6 +19,10 @@
   <div class="page-defaults" id="leftSide2">
     <h2>Invoice #<%= "#{@invoice.id}" %> </h2>
     <p><%=  "Status: #{@invoice.status}" %> </p>
+    <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch do |form| %>
+              <%= form.select :status, ["in progress", "completed", "cancelled"], :selected => @invoice.status %>
+              <%= form.submit "Update Invoice Status" %>
+            <% end %>
     <p><%= "Created on: #{@invoice.created_at.strftime("%A, %B %d, %Y")}" %></p>
     <p><%= "Total Revenue: #{@invoice.total_revenue}" %></p>
     <h3>Customer:</h3>

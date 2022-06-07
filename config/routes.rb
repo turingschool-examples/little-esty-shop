@@ -16,4 +16,10 @@ Rails.application.routes.draw do
 
   patch '/merchants/:merchant_id/items', to: 'merchant_items#update'
 
+
+  scope '/admin' do
+    resources :merchants, controller: 'admin_merchants', except: %i[delete]
+    resources :invoices, controller: 'admin_invoices', only: %i[index show update]
+  end
+
 end
