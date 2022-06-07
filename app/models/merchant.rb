@@ -23,12 +23,13 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_customers
-    customers.joins(:transactions)
-         .where(transactions: {result: 0})
-         .group(:id) #item_id
-         .select("customers.*, count(transactions) as total_transactions")
-         .order(total_transactions: :desc)
-         .limit(5)
+     customers.select("customers.*, count(transactions) as total_transaction_count")
+        .where(transactions: {result: "success"})
+         .joins(:transactions)
+         .group("customers.id")
+        .order(total_transaction_count: :desc)
+        .distinct
+        .limit(5)
   end
 
   def self.top_five_merchants_by_revenue
