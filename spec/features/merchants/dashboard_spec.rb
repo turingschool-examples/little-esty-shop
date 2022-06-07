@@ -167,4 +167,23 @@ RSpec.describe 'merchants dashboard' do
     expect(page).to_not have_content("#{@cust6.first_name} #{@cust6.last_name}")
     expect(page).to_not have_content("#{@cust7.first_name} #{@cust7.last_name}")
   end
+
+  it 'displays repo name' do
+    visit "/merchants/#{@merch1.id}/dashboard"
+    expect(page).to have_content('little-esty-shop')
+  end
+
+  it 'displays repo logins' do
+    visit "/merchants/#{@merch1.id}/dashboard"
+
+    save_and_open_page
+
+    expect(page).to have_content('z-prince')
+
+    expect(page).to have_content('jimriddle1')
+
+    expect(page).to have_content('amsalmeron')
+
+    expect(page).to have_content('Deming-Matt')
+  end
 end

@@ -13,6 +13,11 @@
     <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
+
     <%= yield %>
+
+<%= render partial: "shared/github_footer" %> 
+
+
   </body>
 </html>
