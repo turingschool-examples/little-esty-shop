@@ -32,11 +32,13 @@ RSpec.describe Item do
             end
         end
 
-        # describe '#invoice_time' do
-        #   it 'finds invoice creation date of a specific item' do
-        #     expect(@item1.invoice_time).to eq(@invoice1.created_at.strftime('%A %B %e %Y'))
-        #   end
-        # end
+        describe '#invoice_time' do
+          it 'finds invoice creation dates of a specific item' do
+            expect(@item1.invoice_time[0].created_at.strftime('%A %B %e %Y')).to eq(@invoice1.created_at.strftime('%A %B %e %Y'))
+            expect(@item1.invoice_time[1].created_at.strftime('%A %B %e %Y')).to eq(@invoice2.created_at.strftime('%A %B %e %Y'))
+            expect(@item1.invoice_time[2].created_at.strftime('%A %B %e %Y')).to eq(@invoice1.created_at.strftime('%A %B %e %Y'))
+          end
+        end
 
          describe "#item_best_day" do
             it 'finds the items highest revenue day' do

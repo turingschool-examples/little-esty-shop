@@ -1,3 +1,14 @@
-<h2>Name: <%= @merchant.name %></h2><br>
+<h2>Merchant Name: <%= @merchant.name %></h2><br>
 
 <%= link_to 'Update Merchant', "/admin/merchants/#{@merchant.id}/edit" %>
+
+
+<h2>Top 5 Customers by Total Number of Transactions:</h2>
+  <% @merchant.top_five_customers.each do |customer| %>
+  <div id="customer-<%= customer.id %>">
+
+    <p>Name: <%= customer.first_name %> <%= customer.last_name %></p>
+    <p><%= customer.total_transaction_count %> successful transactions</p>
+    <hr>
+  </div>
+<% end %>

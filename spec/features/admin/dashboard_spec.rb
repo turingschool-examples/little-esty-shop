@@ -55,4 +55,5 @@ RSpec.describe 'admin dashboard' do
 
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
   end
+
 end
