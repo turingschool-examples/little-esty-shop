@@ -1,9 +1,9 @@
 #poros reports back what it finds in the data - reports behavior, not data
-class Repository
-  attr_reader :name
+class Contributor
+  attr_reader :login, :id
 
   def initialize(data)
-    @name = data[:name]
-
+    @login = data[:login]
+    @id = data[:id]
   end
 end
