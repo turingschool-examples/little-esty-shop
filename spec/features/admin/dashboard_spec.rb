@@ -58,17 +58,16 @@ RSpec.describe 'admin dashboard' do
 
   it 'shows incomplete invoices sorted by least recent' do
     visit '/admin'
-
     expect(page).to have_content('Incomplete Invoices:')
 
-    expect(@invoice3.id).to appear_before(@invoice1.id)
+    expect(@invoice3.id.to_s).to appear_before(@invoice1.id.to_s)
 
-    expect(@invoice1.id).to appear_before(@invoice2.id)
+    expect(@invoice1.id.to_s).to appear_before(@invoice2.id.to_s)
 
-    expect(page).to have_content(@invoice3.created_at.strftime('%A %B %e %Y'))
+    expect(page).to have_content(@invoice3.created_at.strftime('%A %B%e %Y'))
 
-    expect(page).to have_content(@invoice2.created_at.strftime('%A %B %e %Y'))
+    expect(page).to have_content(@invoice2.created_at.strftime('%A %B%e %Y'))
 
-    expect(page).to have_content(@invoice1.created_at.strftime('%A %B %e %Y'))
+    expect(page).to have_content(@invoice1.created_at.strftime('%A %B%e %Y'))
   end
 end
