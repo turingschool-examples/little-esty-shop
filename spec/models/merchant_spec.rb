@@ -37,16 +37,7 @@ RSpec.describe Merchant do
           expect(@merch1.ready_items).to eq([@item2, @item3])
         end
 
-
-        it 'returns the revenue of all items on the invoice' do
-          expect(@invoice1.total_revenue(@merch1.id)).to eq(90500)
-        end
-
-        it "list the top 5 items by revenue per a specific merchant" do
-          expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
-        end
-
-        it 'gives me the top 5 customers per a specific merchant' do
+        it 'gives me the top five customers of a merchant' do
           @merch1 = Merchant.create!(name: 'Floopy Fopperations')
           @item1 = @merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
           @item2 = @merch1.items.create!(name: 'A-Team Original', description: 'the better', unit_price: 950)
@@ -86,6 +77,7 @@ RSpec.describe Merchant do
           @inv3.transactions.create!(result: 0)
           @inv3.transactions.create!(result: 0)
           @inv3.transactions.create!(result: 0)
+          @inv3.transactions.create!(result: 0)
 
           @inv4.transactions.create!(result: 0)
           @inv4.transactions.create!(result: 0)
@@ -107,7 +99,17 @@ RSpec.describe Merchant do
           @inv6.transactions.create!(result: 1)
 
           @inv7.transactions.create!(result: 0)
-          expect(@merch1.top_five_customers).to eq([@cust5, @cust1, @cust2, @cust3, @cust4])
+
+          expect(@merch1.top_five_customers).to eq([@cust5, @cust3, @cust1, @cust2, @cust4])
+        end
+
+
+        it 'returns the revenue of all items on the invoice' do
+          expect(@invoice1.total_revenue(@merch1.id)).to eq(90500)
+        end
+
+        it "list the top 5 items by revenue per a specific merchant" do
+          expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
         end
     end
 

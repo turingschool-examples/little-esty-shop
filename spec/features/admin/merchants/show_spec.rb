@@ -33,13 +33,6 @@ RSpec.describe 'admin merchant show page' do
 
 
     it 'shows the top customers of my merchant' do
-      # As an admin,
-      # When I visit the admin dashboard
-      # Then I see the names of the top 5 customers
-      # who have conducted the largest number of successful transactions
-      # And next to each customer name I see the number of successful transactions they have
-      # conducted with my merchant
-
       @merch1 = Merchant.create!(name: 'Floopy Fopperations')
       @item1 = @merch1.items.create!(name: 'Floopy Original', description: 'the best', unit_price: 450)
       @item2 = @merch1.items.create!(name: 'A-Team Original', description: 'the better', unit_price: 950)
@@ -79,6 +72,7 @@ RSpec.describe 'admin merchant show page' do
       @inv3.transactions.create!(result: 0)
       @inv3.transactions.create!(result: 0)
       @inv3.transactions.create!(result: 0)
+      @inv3.transactions.create!(result: 0)
 
       @inv4.transactions.create!(result: 0)
       @inv4.transactions.create!(result: 0)
@@ -101,29 +95,37 @@ RSpec.describe 'admin merchant show page' do
 
       @inv7.transactions.create!(result: 0)
 
-      # binding.pry
-
-      #top 5 should be Hank Williams, then Mark, Jim, Bryan and Walter.  Sammy and Barry should not appear on this page
+      #top 5 should be Hank Williams, then Bryan, Jim, Mark and Walter.  Sammy and Barry should not appear on this page
 
       visit "/admin/merchants/#{@merch1.id}"
 
-      # save_and_open_page
-
-      within "#top-5-customers" do
+      within "#customer-#{@cust5.id}" do
         expect(page).to have_content("#{@cust5.first_name} #{@cust5.last_name}")
         expect(page).to have_content("5 successful transactions")
+      end
+
+      within "#customer-#{@cust1.id}" do
         expect(page).to have_content("#{@cust1.first_name} #{@cust1.last_name}")
         expect(page).to have_content("3 successful transactions")
+      end
+
+      within "#customer-#{@cust2.id}" do
         expect(page).to have_content("#{@cust2.first_name} #{@cust2.last_name}")
         expect(page).to have_content("3 successful transactions")
+      end
+
+      within "#customer-#{@cust3.id}" do
         expect(page).to have_content("#{@cust3.first_name} #{@cust3.last_name}")
-        expect(page).to have_content("3 successful transactions")
+        expect(page).to have_content("4 successful transactions")
+      end
+
+      within "#customer-#{@cust4.id}" do
         expect(page).to have_content("#{@cust4.first_name} #{@cust4.last_name}")
         expect(page).to have_content("3 successful transactions")
-
-        expect(page).to_not have_content("#{@cust6.first_name} #{@cust6.last_name}")
-        expect(page).to_not have_content("#{@cust7.first_name} #{@cust7.last_name}")
       end
+
+      expect(page).to_not have_content("#{@cust6.first_name} #{@cust6.last_name}")
+      expect(page).to_not have_content("#{@cust7.first_name} #{@cust7.last_name}")
 
     end
 end
