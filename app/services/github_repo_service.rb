@@ -12,6 +12,10 @@ class GithubRepoService
     get_url('https://api.github.com/repos/jimriddle1/little-esty-shop/contributors')
   end
 
+  def get_pull_requests
+    get_url('https://api.github.com/repos/jimriddle1/little-esty-shop/pulls?state=all')
+  end
+
   # def get_commits
   #   get_url('https://api.github.com/repos/turingschool-examples/little-esty-shop/commits{/sha}')
   # end
