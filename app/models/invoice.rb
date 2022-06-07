@@ -23,9 +23,10 @@ class Invoice < ApplicationRecord
       .where.not(invoice_items: { status: 2 })
       .group(:id)
       .select('invoices.*')
+      .order(created_at: :desc)
   end
 
   def invoice_revenue
-    invoice_items.joins(:item).sum("invoice_items.unit_price * invoice_items.quantity")
-  end 
+    invoice_items.joins(:item).sum('invoice_items.unit_price * invoice_items.quantity')
+  end
 end
