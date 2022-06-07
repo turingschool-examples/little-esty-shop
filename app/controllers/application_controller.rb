@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  before_filter :initialize
+
+  protected
+
   def initialize
     @repo = GithubRepoFacade.new.full_repo
     @contributors = GithubRepoFacade.new.user_info
