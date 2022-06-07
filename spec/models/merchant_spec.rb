@@ -134,10 +134,11 @@ RSpec.describe Merchant do
       end
     end
 
-    # describe '#top_date_by_revenue' do
-      #   it "returns the date with the most revenue for each merchant" do
-      #   end
-    # end
+  describe '#best_day' do
+      it "returns the date with the most revenue for each merchant" do
+        expect(merchant1.best_day).to eq('2012-03-21 14:53:59')
+      end
+  end
 
   describe '#items_ready_to_ship' do
     it 'returns an array of items ready to ship ordered by invoice date' do
