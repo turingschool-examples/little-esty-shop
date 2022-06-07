@@ -192,4 +192,14 @@ RSpec.describe "Admin Merchants Index Page" do
       expect(page).to_not have_content("Kmart")
     end
   end
+
+  it "lists the top selling date for each of the top 5 merchants" do
+    within "#top-five-merchants" do
+      expect(page).to have_content("Top selling date for REI was Wednesday, Mar 21")
+      expect(page).to have_content("Top selling date for Target was Tuesday, Jun 07")
+      expect(page).to have_content("Top selling date for Hot Topic was Wednesday, Mar 21")
+      expect(page).to have_content("Top selling date for Macys was Sunday, Mar 25")
+      expect(page).to have_content("Top selling date for Walgreens was Tuesday, Jun 07")
+    end
+  end
 end
