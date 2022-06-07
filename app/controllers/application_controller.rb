@@ -1,7 +1,4 @@
 class ApplicationController < ActionController::Base
-  # layout 'application'
-  # before_action :initialize, only
-  # before_filter :initialize
   before_action :repo_info
 
   def repo_info
