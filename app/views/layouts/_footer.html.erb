@@ -1,6 +1,10 @@
 <% if @repo.present? %>
   <% if @repo.is_a?(Repository) %>
     <p><%= @repo.name %></p>
+      <strong>Made with love by:</strong>
+      <% @contributor.each do |con| %>
+        | <%= con.login  %>
+      <% end %>|
     <% else %>
     <p><%= @repo[:message] %></p>
     <% end %>
