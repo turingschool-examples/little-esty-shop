@@ -101,7 +101,7 @@ describe "Admin Dashboad" do
     end
   end
 
-  it "orders incomplete invoices by oldest to newest" do
+  it "orders incomplete invoices by oldest to newest", :vcr do
     within ".incomplete-invoices" do
       expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
       expect("#{invoice2.id}").to appear_before("#{invoice4.id}")

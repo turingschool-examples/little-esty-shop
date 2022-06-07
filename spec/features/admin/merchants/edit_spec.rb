@@ -8,8 +8,8 @@ RSpec.describe "Admin Merchant Show" do
   end
 
   it "can click a link to update this merchant and shows a flash message stating the merchant has been successfully updated", :vcr do
-    fill_in :name, with: 'Black Diamond'
-    click_on "Submit"
+    fill_in 'merchant[name]', with: 'Black Diamond'
+    click_button
 
     expect(current_path).to eq(admin_merchant_path(merchant1))
     expect(page).to have_content('Black Diamond')
@@ -17,8 +17,8 @@ RSpec.describe "Admin Merchant Show" do
   end
 
   it "displays a message if fields aren't updated", :vcr do
-    fill_in :name, with: nil
-    click_on "Submit"
+    fill_in 'merchant[name]', with: nil
+    click_button
 
     expect(current_path).to eq(edit_admin_merchant_path(merchant1))
     expect(page).to have_content('Please fill out all fields to update this Merchant!')
