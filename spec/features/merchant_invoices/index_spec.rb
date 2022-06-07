@@ -39,7 +39,7 @@ RSpec.describe "Index page", type: :feature do
 
 
   describe 'Merchant invoices user story 1' do
-    it "can see all merchants invoices with items and a link to the invoice show page" do
+    it "can see all merchants invoices with items and a link to the invoice show page", :vcr do
 
       visit "/merchants/#{merchants[0].id}/invoices"
 

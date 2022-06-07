@@ -9,7 +9,7 @@ RSpec.describe 'Merchant Items Index Page' do
   let!(:item3) { create(:item, status: 0) }
 
   describe 'merchant items' do
-    it 'has list of items for a specific merchant' do
+    it 'has list of items for a specific merchant', :vcr do
       visit "/merchants/#{merchant.id}/items"
       # save_and_open_page
       expect(page).to have_content(item.name)
@@ -19,7 +19,7 @@ RSpec.describe 'Merchant Items Index Page' do
   end
 
   describe 'merchant items links on index page' do
-    it 'has links for the item names' do
+    it 'has links for the item names', :vcr do
       visit "/merchants/#{merchant.id}/items"
       within '.merchant-items-disabled' do
         click_link item2.name.to_s
@@ -35,7 +35,7 @@ RSpec.describe 'Merchant Items Index Page' do
   end
 
   describe 'merchant item disable/enable' do
-    it 'has a button to enable and a button to disable item' do
+    it 'has a button to enable and a button to disable item', :vcr do
       visit "/merchants/#{merchant.id}/items"
       # save_and_open_page
       within '.merchant-items-enabled' do
@@ -48,7 +48,7 @@ RSpec.describe 'Merchant Items Index Page' do
       end
     end
 
-    it 'redirects back to items index with changed status when clicked' do
+    it 'redirects back to items index with changed status when clicked', :vcr do
       visit "/merchants/#{merchant.id}/items"
 
       within '.merchant-items-enabled' do
@@ -78,7 +78,7 @@ RSpec.describe 'Merchant Items Index Page' do
       end
     end
 
-    it 'can group by status' do
+    it 'can group by status', :vcr do
       visit "/merchants/#{merchant.id}/items"
 
       within '.merchant-items-enabled' do
@@ -100,7 +100,7 @@ RSpec.describe 'Merchant Items Index Page' do
   end
 
   describe 'merchant item create' do
-    it 'has a link to create a new item' do
+    it 'has a link to create a new item', :vcr do
       visit "/merchants/#{merchant.id}/items"
 
       expect(page).to have_link('Create New Item')
@@ -133,7 +133,7 @@ RSpec.describe 'Merchant Items Index Page' do
     let!(:invoice_item11) { create(:invoice_item, item: items[4], invoice: invoices[1], quantity: 7, unit_price: 5) }
     let!(:invoice_item12) { create(:invoice_item, item: items[5], invoice: invoices[1], quantity: 9, unit_price: 6) }
 
-    it "has the top 5 most popular items ranked by total revenue generated" do
+    it "has the top 5 most popular items ranked by total revenue generated", :vcr do
       visit "/merchants/#{merchant.id}/items"
       # save_and_open_page
       within "#rightSide2" do
@@ -203,7 +203,7 @@ RSpec.describe 'Merchant Items Index Page' do
     let!(:invoice_item12) { create(:invoice_item, item: items[5], invoice: invoice2, quantity: 9, unit_price: 6) }
 
     # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
-    it "has the date with the most sales for each item" do
+    it "has the date with the most sales for each item", :vcr do
       visit "/merchants/#{merchant.id}/items"
 
       within "#topItem-#{items[1].id}" do
