@@ -38,12 +38,12 @@
           <th>Unit Price</th>
           <th>Status</th>
         </tr>
-        <%= @invoice.invoice_items.each do |invoice_item| %>
+        <% @invoice.invoice_items.each do |invoice_item| %>
           <div id="invoice-item-<%= invoice_item.id %>">
             <tr>
               <td><%= "#{invoice_item.item.name}" %></td>
               <td><%= "#{invoice_item.quantity}" %></td>
-              <td><%= "$#{invoice_item.unit_price * 0.01}" %></td>
+              <td><%= "$#{(invoice_item.unit_price * 0.01).round(2)}" %></td>
               <td><%= "#{invoice_item.status}" %></td>
             </tr>
           </div>

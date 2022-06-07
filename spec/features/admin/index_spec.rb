@@ -13,7 +13,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
   let!(:invoice_item5) { create(:invoice_item, invoice: invoices[3], status: 0) }
 
   describe "Admin User Story 1 - Admin Dashboard" do
-    it "can display a header" do
+    it "can display a header", :vcr do
       visit '/admin'
 
       within '#leftSide' do
@@ -22,7 +22,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
     end
   end
   describe "Admin User Story 2 - Admin Dashboard Links" do
-    it "has a admin merchants index link and admin invoices index link" do
+    it "has a admin merchants index link and admin invoices index link", :vcr do
       visit '/admin'
       click_link 'Merchants'
       expect(current_path).to eq('/admin/merchants')
@@ -34,7 +34,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
   end
 
   describe 'incomplete invoices' do
-    it 'has a section where you can see the ids of all invoices not yet shipped' do
+    it 'has a section where you can see the ids of all invoices not yet shipped', :vcr do
       visit admin_index_path
 
       within "#leftSide2" do
@@ -46,7 +46,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
       end
     end
 
-    it 'has each id as a link to a show page' do
+    it 'has each id as a link to a show page', :vcr do
       visit admin_index_path
 
       within "#leftSide2" do
@@ -60,7 +60,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
       expect(current_path).to eq invoice_path(invoices[2].id)
     end
 
-    it 'has a formatted date for invoices completed and is ordered from oldest to newest' do
+    it 'has a formatted date for invoices completed and is ordered from oldest to newest', :vcr do
       visit admin_index_path
       # save_and_open_page
       within "#leftSide2" do
@@ -106,7 +106,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
     let!(:invoice_item5) { create(:invoice_item, item: item1, invoice: invoice5, status: 0) }
     let!(:invoice_item6) { create(:invoice_item, item: item2, invoice: invoice6, status: 1) }
 
-    it "displays the top 5 customers that have made the most purchases with successful transactions" do
+    it "displays the top 5 customers that have made the most purchases with successful transactions", :vcr do
       top_customer = customers[2]
       tied_customers = [customers[1], customers[3], customers[4], customers[5]]
       expected = tied_customers.sort_by(&:last_name).sort_by(&:first_name).unshift(top_customer)
@@ -129,7 +129,7 @@ RSpec.describe "Admin Dashboard", type: :feature do
   end
 
   describe "wireframe link (no user story)" do
-    it "has a link that takes you back to the dashboard" do
+    it "has a link that takes you back to the dashboard", :vcr do
       visit admin_index_path
       click_link "Dashboard"
       expect(current_path).to eq(admin_index_path)

@@ -38,7 +38,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
 
   describe 'User Story 1 - Admin Merchants Index' do
 
-    it "can display all the merchants" do
+    it "can display all the merchants", :vcr do
       visit '/admin/merchants'
 
       expect(page).to have_content(merchants[0].name)
@@ -47,7 +47,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe "Admin Merchant Enable/Disable" do
-    it "has a button to disable or enable each merchant and updates status" do
+    it "has a button to disable or enable each merchant and updates status", :vcr do
       visit '/admin/merchants'
 
       expect(merchants[0].status).to eq("enabled")
@@ -58,10 +58,10 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       expect(current_path).to eq("/admin/merchants")
       merchants[0].reload
       expect(merchants[0].status).to eq("disabled")
-      within '#enabledMerchants' do
+      within '.enabled-merchants' do
         expect(page).to_not have_content(merchants[0].name)
       end
-      within '#disabledMerchants' do
+      within '.disabled-merchants' do
         expect(page).to have_content(merchants[0].name)
       end
       expect(merchants2[1].status).to eq("disabled")
@@ -72,27 +72,27 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       expect(current_path).to eq("/admin/merchants")
       merchants2[1].reload
       expect(merchants2[1].status).to eq("enabled")
-      within '#enabledMerchants' do
+      within '.enabled-merchants' do
         expect(page).to have_content(merchants2[1].name)
       end
-      within '#disabledMerchants' do
+      within '.disabled-merchants' do
         expect(page).to_not have_content(merchants2[1].name)
       end
     end
 
-    it 'is grouped into sections by status' do
+    it 'is grouped into sections by status', :vcr do
       visit '/admin/merchants'
       expect(page).to have_content("Enabled Merchants")
       expect(page).to have_content("Disabled Merchants")
 
-      within "#disabledMerchants" do
+      within ".disabled-merchants" do
         expect(page).to have_button('Enable')
         expect(page).to have_content(merchants2[0].name)
         expect(page).to have_content(merchants2[1].name)
         expect(page).to_not have_content(merchants[0].name)
       end
 
-      within "#enabledMerchants" do
+      within ".enabled-merchants" do
         expect(page).to have_button('Disable')
         expect(page).to have_content(merchants[0].name)
         expect(page).to have_content(merchants[1].name)
@@ -102,7 +102,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe 'admin merchant create' do
-    it 'has a link to create a new merchant' do
+    it 'has a link to create a new merchant', :vcr do
       visit "/admin/merchants"
 
       expect(page).to have_content("Create New Merchant")
@@ -112,33 +112,32 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe 'top five merchants by revenue' do
-    it 'lists the names of the top five merchants and their revenue' do
+    it 'lists the names of the top five merchants and their revenue', :vcr do
       visit '/admin/merchants'
 
-
-      within "#topMerchants" do
-        expect(merchants[2].name).to appear_before(merchants[3].name)
-        expect(merchants[3].name).to appear_before(merchants[1].name)
-        expect(merchants[1].name).to appear_before(merchants[4].name)
-        expect(merchants[4].name).to appear_before(merchants[0].name)
-
+      within "#topMerchant-0" do
+        expect(page).to have_link("#{merchants[2].name}")
         expect(page).to have_content("#{merchants[2].name} - $504.00 in sales")
+      end
+
+      within "#topMerchant-1" do
+        expect(page).to have_link("#{merchants[3].name}")
         expect(page).to have_content("#{merchants[3].name} - $80.00 in sales")
+      end
+
+      within "#topMerchant-2" do
+        expect(page).to have_link("#{merchants[1].name}")
         expect(page).to have_content("#{merchants[1].name} - $56.00 in sales")
-        expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
+      end
+
+      within "#topMerchant-4" do
+        expect(page).to have_link("#{merchants[0].name}")
         expect(page).to have_content("#{merchants[0].name} - $24.00 in sales")
       end
-    end
 
-    it 'has links for the merchant names' do 
-      visit '/admin/merchants'
-
-      within "#topMerchants" do
-        expect(page).to have_link("#{merchants[0].name}")
-        expect(page).to have_link("#{merchants[2].name}")
-        expect(page).to have_link("#{merchants[3].name}")
-        expect(page).to have_link("#{merchants[1].name}")
+      within "#topMerchant-3" do
         expect(page).to have_link("#{merchants[4].name}")
+        expect(page).to have_content("#{merchants[4].name} - $38.00 in sales")
         click_link "#{merchants[4].name}"
       end
       expect(current_path).to eq("/admin/merchants/#{merchants[4].id}")
@@ -146,7 +145,28 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe "Admin Merchants: Top Merchant's Best Day" do
-    xit "can calculate the date with the most sales" do
+    it "can calculate the date with the most sales", :vcr do
+      visit '/admin/merchants'
+
+      within '#topMerchant-0' do
+        expect(page).to have_content("Top selling date for #{merchants[2].name} was #{merchants[2].best_day}")
+      end
+
+      within '#topMerchant-1' do
+        expect(page).to have_content("Top selling date for #{merchants[3].name} was #{merchants[3].best_day}")
+      end
+
+      within '#topMerchant-2' do
+        expect(page).to have_content("Top selling date for #{merchants[1].name} was #{merchants[1].best_day}")
+      end
+
+      within '#topMerchant-4' do
+        expect(page).to have_content("Top selling date for #{merchants[0].name} was #{merchants[0].best_day}")
+      end
+
+      within '#topMerchant-3' do
+        expect(page).to have_content("Top selling date for #{merchants[4].name} was #{merchants[4].best_day}")
+      end
     end
   end
 end

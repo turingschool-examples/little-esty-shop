@@ -37,7 +37,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
   let!(:invoice_item13) { create(:invoice_item, item: @items[2], invoice: @invoices[0], status: 1) }
 
   describe 'Merchant_Invoices User Story 2' do
-    it "can display all information related to an invoice" do
+    it "can display all information related to an invoice", :vcr do
       visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
 
       expect(page).to have_content("Invoice: #{@invoices[0].id}")
@@ -50,7 +50,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
   end
 
   describe 'Merchant_Invoices User Story 3' do
-    it 'can display items attributes that belongs to an invoice' do
+    it 'can display items attributes that belongs to an invoice', :vcr do
       visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
 
       within '#itemtable' do
@@ -69,7 +69,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
   end
 
   describe "User Story 4 - Merchant Invoice Show Page: Total Revenue" do
-    it "shows the total revenue of all items on the invoice" do
+    it "shows the total revenue of all items on the invoice", :vcr do
       visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
 
       expect(page).to have_content("Total Revenue: #{@invoices[0].total_revenue}")
@@ -77,7 +77,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
   end
 
   describe "User Story 5 - Merchant Invoice Show Page: Update Item Status" do
-    it "has a select field button for invoice item's status and has a button to update the status" do
+    it "has a select field button for invoice item's status and has a button to update the status", :vcr do
       visit "/merchants/#{merchants[0].id}/invoices/#{@invoices[0].id}"
 
       expect(invoice_item1.status).to eq("pending")

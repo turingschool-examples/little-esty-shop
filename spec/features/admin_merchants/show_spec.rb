@@ -1,13 +1,5 @@
 require 'rails_helper'
 
-# Admin Merchant Show
-#
-# As an admin,
-# When I click on the name of a merchant from the admin merchants index page,
-# Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)
-# And I see the name of that merchant
-
-
 RSpec.describe 'Admin Merchants Show Page', type: :feature do
   let!(:merchants) { create_list(:merchant, 2) }
   let!(:customers) { create_list(:customer, 6) }
@@ -31,7 +23,7 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
   end
 
   describe 'User Story 2 - Admin Merchant Show' do
-    it "can display the merchants name" do
+    it "can display the merchants name", :vcr do
       visit "/admin/merchants"
 
       click_link "#{merchants[0].name}"
@@ -41,22 +33,11 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
   end
 
   describe 'admin merchant update' do
-    it 'has a link to update the merchants information' do 
+    it 'has a link to update the merchants information', :vcr do 
       visit "/admin/merchants/#{merchants[0].id}"
 
       click_link "Update Merchant"
       expect(current_path).to eq("/admin/merchants/#{merchants[0].id}/edit")
-    end
-
-    it 'has a form to update the merchant name' do 
-      visit "/admin/merchants/#{merchants[0].id}/edit"
-      # save_and_open_page
-    
-      fill_in 'Name', with: 'Crunch Wrap Industries'
-      click_on 'Submit'
-      expect(current_path).to eq("/admin/merchants/#{merchants[0].id}")
-      expect(page).to have_content('Crunch Wrap Industries')
-      expect(page).to have_content('Merchant Successfully Updated')
     end
   end
 end

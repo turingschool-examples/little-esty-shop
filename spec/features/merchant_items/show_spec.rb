@@ -23,7 +23,7 @@ RSpec.describe 'Merchant Items Show Page' do
   end
 
   describe 'basic attributes on show page' do 
-    it 'shows name, description, and current selling price for an item' do 
+    it 'shows name, description, and current selling price for an item', :vcr do 
       visit "/merchants/#{merchants[0].id}/items/#{@items[1].id}"
 
       expect(page).to have_content(@items[1].name)
@@ -43,11 +43,11 @@ RSpec.describe 'Merchant Items Show Page' do
   end
 
   describe 'merchant item update' do 
-    it 'has a link to update the item information' do 
+    it 'has a link to update the item information', :vcr do 
       visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
 
       click_link "Update Item"
       expect(current_path).to eq("/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit")
     end
   end
-end 
+end

@@ -31,7 +31,7 @@
     <h3>Top Customers</h3>
     <ol>
       <% @merchants.top_5_customers.each do |customer| %>
-        <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.transaction_count} purchases" %> - 672 purchases</li>
+        <li><%= "#{customer.first_name} #{customer.last_name} - #{customer.transaction_count} purchases" %></li>
       <% end %>
     </ol>
   </div>
