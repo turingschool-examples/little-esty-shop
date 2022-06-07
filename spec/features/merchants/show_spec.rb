@@ -93,13 +93,13 @@ RSpec.describe 'Merchant Show Dash' do
 
     within "#itemsReadyToShip" do
       expect(page).to have_content("Bracelet")
-      expect(page).to have_link(@invoice1.id)
-      expect(page).to have_link(@invoice2.id)
-      expect(page).to have_link(@invoice6.id)
-      expect(page).to have_link(@invoice8.id)
-      expect(page).to_not have_link(@invoice5.id)
-      expect(page).to_not have_link(@invoice9.id)
-      expect(page).to_not have_link(@invoice10.id)
+      expect(page).to have_link("#{@invoice1.id}")
+      expect(page).to have_link("#{@invoice2.id}")
+      expect(page).to have_link("#{@invoice6.id}")
+      expect(page).to have_link("#{@invoice8.id}")
+      expect(page).to_not have_link("#{@invoice5.id}")
+      expect(page).to_not have_link("#{@invoice9.id}")
+      expect(page).to_not have_link("#{@invoice10.id}")
     end
   end
 
