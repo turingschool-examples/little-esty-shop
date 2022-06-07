@@ -1,1 +1,28 @@
 <%= render 'partials/navbar_admin' %><br>
+
+<h1>Invoice #<%= @invoice.id %></h1>
+<b>Status:</b> <%= @invoice.status.titleize %><br>
+<b>Created at:</b> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
+<div class="customer">
+  <b>Customer Name:</b> <%= @invoice.invoice_customer %><br><br>
+</div>
+
+<h2>Invoice Items</h2>
+<div class="invoice_items">
+  <% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="<%= invoice_item.id %>">
+    <h4>Item Name: <%= invoice_item.item.name %></h4>
+    <p>Quantity Sold: <%= invoice_item.quantity %></p>
+    <p>Sold at: <%= number_to_currency(invoice_item.unit_price) %></p>
+    <p>Invoice Item Status: <%= invoice_item.status.titleize %></p>
+    <%= form_with url: admin_invoice_path(@invoice), method: :patch do |form| %>
+      <%= form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>
+      <%= hidden_field_tag "invoice_item_id", "#{invoice_item.id}" %>
+      <%= form.submit "Update Invoice Item Status" %>
+    <% end %>
+  </div>
+  <hr>
+  <% end %>
+</div>
+
+<p><b>Total Revenue:</b> <%= number_to_currency(@invoice.total_revenue) %></p>

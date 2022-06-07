@@ -7,20 +7,13 @@ RSpec.describe "Admin Merchant Show" do
     visit admin_merchant_path(merchant1)
   end
 
-  it "displays the name of a Merchant" do
+  it "displays the name of a Merchant", :vcr do
     expect(page).to have_content("REI's Admin Page")
   end
 
-  it "can click a link to update this merchant and shows a flash message stating the merchant has been successfully updated" do
+  it "can click a link to update this merchant and shows a flash message stating the merchant has been successfully updated", :vcr do
     click_link "Update Merchant"
 
     expect(current_path).to eq(edit_admin_merchant_path(merchant1))
-
-    fill_in :name, with: 'Black Diamond'
-    click_on "Submit"
-    
-    expect(current_path).to eq(admin_merchant_path(merchant1))
-    expect(page).to have_content('Black Diamond')
-    expect(page).to have_content('You have successfully updated this Merchant!')
   end
 end

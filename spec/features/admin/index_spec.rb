@@ -15,8 +15,8 @@ describe "Admin Dashboad" do
   let!(:invoice2) { customer1.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
   let!(:invoice3) { customer1.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
   let!(:invoice4) { customer1.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
-  let!(:invoice5) { customer5.invoices.create!(status: 2) }
-  let!(:invoice6) { customer6.invoices.create!(status: 2) }
+  let!(:invoice5) { customer5.invoices.create!(status: 2, created_at: '2012-03-26 14:53:59') }
+  let!(:invoice6) { customer6.invoices.create!(status: 2, created_at: '2012-03-27 14:53:59') }
   let!(:invoice7) { customer2.invoices.create!(status: 2) }
   let!(:invoice8) { customer2.invoices.create!(status: 2) }
   let!(:invoice9) { customer3.invoices.create!(status: 2) }
@@ -76,11 +76,11 @@ describe "Admin Dashboad" do
     visit admin_index_path
   end
 
-  it "displays a header indicating that the user is on the admin dashboard" do
+  it "displays a header indicating that the user is on the admin dashboard", :vcr do
     expect(page).to have_content("Welcome to the Admin Dashboard")
   end
 
-  it "displays links to the admin merchants index and admin invoices index" do
+  it "displays links to the admin merchants index and admin invoices index", :vcr do
     click_link("Merchants Index")
     expect(current_path).to eq(admin_merchants_path)
 
@@ -89,7 +89,7 @@ describe "Admin Dashboad" do
     expect(current_path).to eq(admin_invoices_path)
   end
 
-  it "displays incomplete invoices and links to that invoices admin show page" do
+  it "displays incomplete invoices and links to that invoices admin show page", :vcr do
     within ".incomplete-invoices" do
       expect(page).to have_link("#{invoice1.id}")
       expect(page).to have_link("#{invoice2.id}")
@@ -101,13 +101,16 @@ describe "Admin Dashboad" do
     end
   end
 
-  it "orders incomplete invoices by oldest to newest" do
-    expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
-    expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
-    ##this should probably be updated to include the added invoices from the top 5 customers method
+  it "orders incomplete invoices by oldest to newest", :vcr do
+    within ".incomplete-invoices" do
+      expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
+      expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
+      expect("#{invoice4.id}").to appear_before("#{invoice5.id}")
+      expect("#{invoice5.id}").to appear_before("#{invoice6.id}")
+    end
   end
 
-  it "lists the names of the top 5 customers with the largest number of successful transactions" do
+  it "lists the names of the top 5 customers with the largest number of successful transactions", :vcr do
     within ".top-five-customers" do
       expect("Leanne Braun").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")

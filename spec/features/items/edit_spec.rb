@@ -8,7 +8,7 @@ describe "merchant item edit page" do
     @item_2 = @merchant_1.items.create!(name: "Autem Minima", description: "Cumque consequuntur ad", unit_price: 67076)
   end
 
-  it "displays a form filled in with the items attributes" do
+  it "displays a form filled in with the items attributes", :vcr do
     visit edit_merchant_item_path(@merchant_1, @item_1)
 
     expect(find_field('Name').value).to eq("Qui Esse")
@@ -18,7 +18,7 @@ describe "merchant item edit page" do
     expect(find_field('Name').value).to_not eq("Autem Minima")
   end
 
-  it "can fill in form, submit, and redirect to the item's show page with updated info and a flash message" do
+  it "can fill in form, submit, and redirect to the item's show page with updated info and a flash message", :vcr do
     visit edit_merchant_item_path(@merchant_1, @item_1)
 
     fill_in 'Name', with: 'A non latin name'
@@ -26,7 +26,7 @@ describe "merchant item edit page" do
     fill_in 'Unit Price', with: '67070'
 
     click_button "Update"
-    
+
     expect(current_path).to eq(merchant_item_path(@merchant_1, @item_1))
 
     expect(page).to have_content('A non latin name')
@@ -37,7 +37,7 @@ describe "merchant item edit page" do
     expect(page).to have_content('You have successfully updated this item!')
   end
 
-  it "shows a different flash message if not all sections are filled in" do
+  it "shows a different flash message if not all sections are filled in", :vcr do
 
     visit edit_merchant_item_path(@merchant_1, @item_1)
 

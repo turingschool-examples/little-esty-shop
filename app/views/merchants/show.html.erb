@@ -1,29 +1,35 @@
-<h2>Merchant Dashboard of: <%= @merchant.name %></h2>
-<%= link_to "Items Index", merchant_items_path(@merchant) %>
-<%= link_to "Invoices Index", merchant_invoices_path(@merchant) %>
+<%= render '/partials/navbar_merchant' %><br>
+<%= render 'partials/two_columns' %>
 
-<div class= "favorite_customers">
-  <h3>Top 5 Favorite Customers:</h3>
-  <ol>
-  <% Customer.favorite_customers(5).each do |customer| %>
-    <div id="customer-<%= customer.id %>">
-      <li><b> <%= "#{customer.first_name} #{customer.last_name}" %></b>,
-      <%= Customer.count_successful_transactions(customer.id) %> Successful Transactions</li>
+<div class="row">
+  <div class="column";>
+    <div class= "items_ready_to_ship">
+      <h3 style="text-align:center;">Items Ready to Ship:</h3>
+      <hr><br>
+      <ol>
+        <% @merchant.items_ready_to_ship.each do |item| %>
+        <div id="item-<%= item.id %>">
+          <li><b> <%= "#{item.name}" %></b></li>
+          <p> <%= link_to "#{item.id}", "/merchants/invoices/#{item.id}" %> </p>
+          <p> <%= item.created_at.strftime("Invoice Date %A, %B %d, %Y") %> </p>
+        </div>
+        <% end %>
+      </ol>
     </div>
-  <% end %>
-  </ol>
-</div>
-
-
-<div class= "items_ready_to_ship">
-  <h3>Items Ready to Ship:</h3>
-  <ol>
-    <% @merchant.items_ready_to_ship.each do |item| %>
-    <div id="item-<%= item.id %>">
-      <li><b> <%= "#{item.name}" %></b></li>
-      <p> <%= link_to "#{item.id}", "/merchants/invoices/#{item.id}" %> </p>
-      <p> <%= item.created_at.strftime("Invoice Date %A, %B %d, %Y") %> </p>
-      </div>
-      <% end %>
-    </ol>
   </div>
+
+  <div class="column";>
+    <div class= "favorite_customers">
+      <h3 style="text-align:center;">Top 5 Favorite Customers:</h3>
+      <hr><br>
+      <ol>
+      <% @merchant.top_five_favorite_customers.each do |customer| %>
+        <div id="customer-<%= customer.id %>">
+          <h5><li><b> <%= "#{customer.first_name} #{customer.last_name}" %></b> -
+          <%= customer.transaction_count %> Successful Transactions</li></h5><br>
+        </div>
+      <% end %>
+      </ol>
+    </div>
+  </div>
+</div>

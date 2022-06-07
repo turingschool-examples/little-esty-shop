@@ -40,9 +40,9 @@ RSpec.describe 'merchant dashboard show' do
   let!(:invoice_item6) { InvoiceItem.create!(item_id: item3.id, invoice_id: invoice6.id, quantity: 3, unit_price: 52100, status: "packaged") }
   let!(:invoice_item7) { InvoiceItem.create!(item_id: item4.id, invoice_id: invoice7.id, quantity: 7, unit_price: 13635, status: "packaged") }
   let!(:invoice_item8) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice8.id, quantity: 2, unit_price: 23324, status: "pending") }
-  let!(:invoice_item9) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice9.id, quantity: 4, unit_price: 34873, status: "packaged") }
-  let!(:invoice_item10) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice10.id, quantity: 8, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item11) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice11.id, quantity: 8, unit_price: 2196, status: "packaged") }
+  let!(:invoice_item9) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice9.id, quantity: 4, unit_price: 34873, status: "packaged") }
+  let!(:invoice_item10) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice10.id, quantity: 8, unit_price: 2196, status: "packaged") }
+  let!(:invoice_item11) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice11.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item12) { InvoiceItem.create!(item_id: item3.id, invoice_id: invoice12.id, quantity: 3, unit_price: 52100, status: "packaged") }
   let!(:invoice_item13) { InvoiceItem.create!(item_id: item4.id, invoice_id: invoice13.id, quantity: 7, unit_price: 13635, status: "packaged") }
   let!(:invoice_item14) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice14.id, quantity: 2, unit_price: 23324, status: "pending") }
@@ -78,13 +78,13 @@ RSpec.describe 'merchant dashboard show' do
   let!(:transaction17) { Transaction.create!(invoice_id: invoice17.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
   let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
 
-  it "displays a merchant's name" do
+  it "displays a merchant's name",:vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Schroeder-Jerde")
   end
 
-  it "displays links to a merchant's items and invoices index pages" do
+  it "displays links to a merchant's items and invoices index pages", :vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     click_link("Items Index")
@@ -97,26 +97,26 @@ RSpec.describe 'merchant dashboard show' do
   end
 
 
-  it "displays the top 5 favorite customers in descending order of successful transactions" do
+  it "displays the top 5 favorite customers in descending order of successful transactions", :vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Top 5 Favorite Customers:")
 
     within ".favorite_customers" do
-      expect(page).to have_content("Mariah Toy, 5 Successful Transactions")
-      expect(page).to have_content("Carl Junior, 4 Successful Transactions")
-      expect(page).to have_content("Tony Bologna, 3 Successful Transactions")
-      expect(page).to have_content("Leanne Braun, 2 Successful Transactions")
-      expect(page).to have_content("Heber Kuhn, 1 Successful Transactions")
+      expect(page).to have_content("Tony Bologna - 9 Successful Transactions")
+      expect(page).to have_content("Mariah Toy - 5 Successful Transactions")
+      expect(page).to have_content("Carl Junior - 4 Successful Transactions")
+      expect(page).to have_content("Leanne Braun - 2 Successful Transactions")
+      expect(page).to have_content("Heber Kuhn - 1 Successful Transactions")
 
+      expect("Tony Bologna").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
-      expect("Carl Junior").to appear_before("Tony Bologna")
-      expect("Tony Bologna").to appear_before("Leanne Braun")
+      expect("Carl Junior").to appear_before("Leanne Braun")
       expect("Leanne Braun").to appear_before("Heber Kuhn")
     end
   end
 
-  it "displays all merchant items ready to ship" do
+  it "displays all merchant items ready to ship", :vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Items Ready to Ship:")
@@ -125,6 +125,5 @@ RSpec.describe 'merchant dashboard show' do
       expect(page).to have_link("#{invoice3.id}")
       expect(page).to have_link("#{invoice4.id}")
     end
-
   end
 end
