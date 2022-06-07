@@ -7,4 +7,8 @@ class GithubRepoService
   def repo_data
     get_url('https://api.github.com/repos/jimriddle1/little-esty-shop')
   end
+
+  def get_usernames
+    get_url('https://api.github.com/repos/jimriddle1/little-esty-shop/contributors')
+  end
 end
