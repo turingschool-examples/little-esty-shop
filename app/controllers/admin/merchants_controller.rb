@@ -31,17 +31,17 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
-
+    @merchant = Merchant.new
   end
 
   def create
-    @merchant = Merchant.create!(params.permit(:name))
+    @merchant = Merchant.create!(merchant_name_params)
     redirect_to admin_merchants_path
   end
 
 private
   def merchant_name_params
-    params.permit(:name)
+    params.require(:merchant).permit(:name)
   end
 
   def merchant_status_params

@@ -16,8 +16,8 @@ end
 
   context 'given valid data' do
     it "can submit an edit form and update the merchant", :vcr do
-      fill_in :name, with: 'Black Diamond'
-      click_on "Submit"
+      fill_in 'merchant[name]', with: 'Black Diamond'
+      click_on "Update Merchant"
 
       expect(current_path).to eq(admin_merchant_path(merchant1))
       expect(page).to have_content('Black Diamond')

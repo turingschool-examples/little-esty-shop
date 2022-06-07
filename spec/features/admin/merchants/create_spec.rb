@@ -20,8 +20,8 @@ RSpec.describe "new admin merchant creation" do
   describe 'the merchant create' do
     context 'given valid data' do
       it "can fill out a form to create a new merchant and display the default status of disabled", :vcr do
-        fill_in :name, with: 'Backcountry'
-        click_on "Submit"
+        fill_in 'merchant[name]', with: "Backcountry"
+        click_button
 
         expect(current_path).to eq(admin_merchants_path)
 

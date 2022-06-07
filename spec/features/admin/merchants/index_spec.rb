@@ -167,8 +167,8 @@ RSpec.describe "Admin Merchants Index Page" do
     click_link "Create a New Merchant"
     expect(current_path).to eq(new_admin_merchant_path)
 
-    fill_in :name, with: 'Backcountry'
-    click_on "Submit"
+    fill_in 'merchant[name]', with: 'Backcountry'
+    click_on "Create Merchant"
 
     expect(current_path).to eq(admin_merchants_path)
 
@@ -182,7 +182,7 @@ RSpec.describe "Admin Merchants Index Page" do
     expect(page).to have_link('New Merchant')
   end
 
-  it "lists top 5 merchants by revenue" do
+  it "lists top 5 merchants by revenue", :vcr do
     within "#top-five-merchants" do
       expect(page).to have_content("REI Revenue: $409,100.00")
       expect(page).to have_content("Target Revenue: $208.00")
@@ -193,7 +193,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "lists the top selling date for each of the top 5 merchants" do
+  it "lists the top selling date for each of the top 5 merchants", :vcr do
     within "#top-five-merchants" do
       expect(page).to have_content("Top selling date for REI was Wednesday, Mar 21")
       expect(page).to have_content("Top selling date for Target was Tuesday, Jun 07")
