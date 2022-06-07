@@ -103,7 +103,7 @@ describe "Admin Dashboad" do
 
   it "orders incomplete invoices by oldest to newest" do
     expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
-    expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
+    expect("#{invoice2.id}").to appear_before("#{invoice4.id}") # TODO: found a flaky test: expected "440" to appear before "442"
     ##this should probably be updated to include the added invoices from the top 5 customers method
   end
 
