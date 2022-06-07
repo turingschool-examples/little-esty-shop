@@ -103,11 +103,11 @@ RSpec.describe 'merchant dashboard show' do
     expect(page).to have_content("Top 5 Favorite Customers:")
 
     within ".favorite_customers" do
-      expect(page).to have_content("Tony Bologna, 9 Successful Transactions")
-      expect(page).to have_content("Mariah Toy, 5 Successful Transactions")
-      expect(page).to have_content("Carl Junior, 4 Successful Transactions")
-      expect(page).to have_content("Leanne Braun, 2 Successful Transactions")
-      expect(page).to have_content("Heber Kuhn, 1 Successful Transactions")
+      expect(page).to have_content("Tony Bologna - 9 Successful Transactions")
+      expect(page).to have_content("Mariah Toy - 5 Successful Transactions")
+      expect(page).to have_content("Carl Junior - 4 Successful Transactions")
+      expect(page).to have_content("Leanne Braun - 2 Successful Transactions")
+      expect(page).to have_content("Heber Kuhn - 1 Successful Transactions")
 
       expect("Tony Bologna").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
