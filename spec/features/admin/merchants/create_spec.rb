@@ -11,7 +11,7 @@ RSpec.describe "new admin merchant creation" do
   end
 
   describe 'the merchant new' do
-    it "renders the new merchant form" do
+    it "renders the new merchant form", :vcr do
       expect(page).to have_content('New Merchant')
       expect(find('form')).to have_content('Name')
     end
@@ -19,7 +19,7 @@ RSpec.describe "new admin merchant creation" do
 
   describe 'the merchant create' do
     context 'given valid data' do
-      it "can fill out a form to create a new merchant and display the default status of disabled" do
+      it "can fill out a form to create a new merchant and display the default status of disabled", :vcr do
         fill_in :name, with: 'Backcountry'
         click_on "Submit"
 

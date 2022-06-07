@@ -61,5 +61,4 @@ class Merchant < ApplicationRecord
     .first
     .created_at
   end
-
 end

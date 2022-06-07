@@ -8,14 +8,14 @@ before do
 end
 
   describe 'the merchant update' do
-    it "shows the merchant edit form has attributes" do
+    it "shows the merchant edit form has attributes", :vcr do
 
       expect(find('form')).to have_content('Name')
     end
   end
 
   context 'given valid data' do
-    it "can submit an edit form and update the merchant" do
+    it "can submit an edit form and update the merchant", :vcr do
       fill_in :name, with: 'Black Diamond'
       click_on "Submit"
 
@@ -24,6 +24,4 @@ end
       expect(page).to_not have_content('REI')
     end
   end
-
-  # add a context block 'given invalid data' if adding and flash[:error] message
 end

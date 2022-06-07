@@ -89,7 +89,7 @@ RSpec.describe "Admin Merchants Index Page" do
     visit admin_merchants_path
   end
 
-  it "displays the name of each merchant in the system" do
+  it "displays the name of each merchant in the system", :vcr do
     expect(page).to have_content("Welcome to the Admin Dashboard")
 
     within ".disabled-merchants" do
@@ -107,7 +107,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "has a link to each Merchant's Admin Show page" do
+  it "has a link to each Merchant's Admin Show page", :vcr do
     visit admin_merchants_path
 
     within "#enabled-merchants-#{merchant4.id}" do
@@ -129,7 +129,7 @@ RSpec.describe "Admin Merchants Index Page" do
     expect(current_path).to eq(admin_merchant_path(merchant1))
   end
 
-  it "has a button to enable/disable a merchant" do
+  it "has a button to enable/disable a merchant", :vcr do
     visit admin_merchants_path
 
     within "#enabled-merchants-#{merchant4.id}" do
@@ -161,7 +161,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "can fill out a form to create a new merchant and display the default status of disabled" do
+  it "can fill out a form to create a new merchant and display the default status of disabled", :vcr do
     expect(page).to_not have_content('Backcountry')
 
     click_link "Create a New Merchant"
@@ -178,7 +178,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "displays a link to create a new merchant" do
+  it "displays a link to create a new merchant", :vcr do
     expect(page).to have_link('New Merchant')
   end
 

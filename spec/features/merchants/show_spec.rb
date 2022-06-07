@@ -78,13 +78,13 @@ RSpec.describe 'merchant dashboard show' do
   let!(:transaction17) { Transaction.create!(invoice_id: invoice17.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
   let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
 
-  it "displays a merchant's name" do
+  it "displays a merchant's name",:vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Schroeder-Jerde")
   end
 
-  it "displays links to a merchant's items and invoices index pages" do
+  it "displays links to a merchant's items and invoices index pages", :vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     click_link("Items Index")
@@ -97,7 +97,7 @@ RSpec.describe 'merchant dashboard show' do
   end
 
 
-  it "displays the top 5 favorite customers in descending order of successful transactions" do
+  it "displays the top 5 favorite customers in descending order of successful transactions", :vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Top 5 Favorite Customers:")
@@ -116,7 +116,7 @@ RSpec.describe 'merchant dashboard show' do
     end
   end
 
-  it "displays all merchant items ready to ship" do
+  it "displays all merchant items ready to ship", :vcr do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Items Ready to Ship:")
@@ -125,6 +125,5 @@ RSpec.describe 'merchant dashboard show' do
       expect(page).to have_link("#{invoice3.id}")
       expect(page).to have_link("#{invoice4.id}")
     end
-
   end
 end
