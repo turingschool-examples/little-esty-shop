@@ -73,7 +73,7 @@ RSpec.describe 'Admin Merchant Index Page' do
 
     visit admin_merchants_path
     within '#top5' do
-      save_and_open_page
+
       expect(@billman.name).to appear_before(@mikedao.name)
       expect(@mikedao.name).to appear_before(@chris.name)
       expect(@chris.name).to appear_before(@hall.name)
