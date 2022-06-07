@@ -4,4 +4,5 @@ class Repo
   def initialize(parsed_repo)
     @name = parsed_repo[:name]
   end
+  
 end
