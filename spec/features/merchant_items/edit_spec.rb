@@ -23,7 +23,7 @@ RSpec.describe 'Merchant Items Edit Page' do
   end
 
   describe 'form to edit item' do
-    it 'is filled in with existing attribute information and displays success message' do
+    it 'is filled in with existing attribute information and displays success message', :vcr do
       visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
 
       expect(page).to_not have_content('Bow Tie Pasta')

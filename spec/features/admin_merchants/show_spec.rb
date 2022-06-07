@@ -23,7 +23,7 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
   end
 
   describe 'User Story 2 - Admin Merchant Show' do
-    it "can display the merchants name" do
+    it "can display the merchants name", :vcr do
       visit "/admin/merchants"
 
       click_link "#{merchants[0].name}"
@@ -33,7 +33,7 @@ RSpec.describe 'Admin Merchants Show Page', type: :feature do
   end
 
   describe 'admin merchant update' do
-    it 'has a link to update the merchants information' do
+    it 'has a link to update the merchants information', :vcr do 
       visit "/admin/merchants/#{merchants[0].id}"
 
       click_link "Update Merchant"
