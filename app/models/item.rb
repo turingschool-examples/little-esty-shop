@@ -23,6 +23,5 @@ class Item < ApplicationRecord
             .group('invoices.created_at')
             .pluck('invoices.created_at')
             .first
-            .strftime('%B %d, %Y')
   end
 end
