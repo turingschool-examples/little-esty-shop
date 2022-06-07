@@ -170,7 +170,20 @@ RSpec.describe 'merchants dashboard' do
 
   it 'displays repo name' do
     visit "/merchants/#{@merch1.id}/dashboard"
-    save_and_open_page
     expect(page).to have_content('little-esty-shop')
+  end
+
+  it 'displays repo logins' do
+    visit "/merchants/#{@merch1.id}/dashboard"
+
+    save_and_open_page
+
+    expect(page).to have_content('z-prince')
+
+    expect(page).to have_content('jimriddle1')
+
+    expect(page).to have_content('amsalmeron')
+
+    expect(page).to have_content('Deming-Matt')
   end
 end

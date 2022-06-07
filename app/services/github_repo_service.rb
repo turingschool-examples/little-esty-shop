@@ -8,7 +8,14 @@ class GithubRepoService
     get_url('https://api.github.com/repos/jimriddle1/little-esty-shop')
   end
 
-  def get_usernames
+  def get_user_info
     get_url('https://api.github.com/repos/jimriddle1/little-esty-shop/contributors')
   end
+
+  # def get_commits
+  #   get_url('https://api.github.com/repos/turingschool-examples/little-esty-shop/commits{/sha}')
+  # end
+
+  # "commits_url": "https://api.github.com/repos/turingschool-examples/little-esty-shop/commits{/sha}",
+  #   "git_commits_url": "https://api.github.com/repos/turingschool-examples/little-esty-shop/git/commits{/sha}"
 end

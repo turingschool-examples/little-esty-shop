@@ -23,4 +23,11 @@
   </div>
 <% end %>
 
-<%= @repo.name %>
+<h4>Repo Name:</h4>
+<p><%= @repo.name %></p>
+<h4>Repo Contributors:</h4>
+<% @contributors.contributor_data.each do |contributor| %>
+  <p>Login: <%= contributor[:login] %></p>
+  <p>Contributions: <%= contributor[:contributions] %></p>
+<% end %>
+
