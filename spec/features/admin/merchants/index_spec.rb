@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Admin Merchant Index" do
     before :each do
-        @merch1 = Merchant.create!(name: 'Floopy Fopperations')
-        @merch2 = Merchant.create!(name: 'A-Team')
-        @merch3 = Merchant.create!(name: 'Blue Clues')
-        @merch4 = Merchant.create!(name: 'Apple Bottom Jeans')
+        @merch1 = Merchant.create!(name: 'Floopy Fopperations', status: 1)
+        @merch2 = Merchant.create!(name: 'A-Team', status: 1)
+        @merch3 = Merchant.create!(name: 'Blue Clues', status: 0)
+        @merch4 = Merchant.create!(name: 'Apple Bottom Jeans', status: 0)
     end
 
     describe "Admin Merchant Index" do
@@ -75,24 +75,33 @@ RSpec.describe "Admin Merchant Index" do
         end
 
         it 'can create a new merchant and show its status' do
-          # As an admin,
-          # When I visit the admin merchants index
-          # I see a link to create a new merchant.
-          # When I click on the link,
-          # I am taken to a form that allows me to add merchant information.
-          # When I fill out the form I click ‘Submit’
-          # Then I am taken back to the admin merchants index page
-          # And I see the merchant I just created displayed
-          # And I see my merchant was created with a default status of disabled.
+
           visit "/admin/merchants"
           click_link "Create a New Merchant"
+
           expect(current_path).to eq("/admin/merchants/new")
+
           fill_in "Name", with: "Zachary's Coffee Grounds"
           click_on "Submit"
+
           expect(current_path).to eq("/admin/merchants")
-          save_and_open_page
           expect(page).to have_content("Zachary's Coffee Grounds")
           expect(page).to have_content("disabled")
+        end
+
+        it 'shows the enabled and disabled merchants' do
+          visit "/admin/merchants"
+
+          expect(page).to have_content("Enabled Merchants:")
+          expect(page).to have_content("Disabled Merchants:")
+          within "#enabled-merchants" do
+            expect(page).to have_content('Floopy Fopperations')
+            expect(page).to have_content('A-Team')
+          end
+          within "#disabled-merchants" do
+            expect(page).to have_content('Blue Clues')
+            expect(page).to have_content('Apple Bottom Jeans')
+          end
         end
     end
 

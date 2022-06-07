@@ -9,9 +9,21 @@
   <% end %>
 </div>
 
+<div id="enabled-merchants">
+  <h2>Enabled Merchants:</h2>
+  <% @merchants.enabled_merchants.each do |merchant| %>
+    <%= "#{merchant.name}" %>
+    <% end %>
+</div>
+<div id="disabled-merchants">
+  <h2>Disabled Merchants:</h2>
+  <% @merchants.disabled_merchants.each do |merchant| %>
+    <%= "#{merchant.name}" %>
+    <% end %>
+</div>
+
 <h3>Merchant Names</h3>
 <% @merchants.each do |merchant| %>
     <p><%= merchant.name %></p>
-    <p><%= merchant.status %></p>
-    <hr>
+    <p><%= merchant.status %></p><hr>
 <% end %>
