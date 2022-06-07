@@ -3,7 +3,7 @@ class GithubRepoFacade
     GithubRepoService.new
   end
 
-  def repo_name
+  def full_repo
     GithubRepo.new(service.repo_data)
   end
 end
