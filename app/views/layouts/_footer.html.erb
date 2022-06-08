@@ -1,5 +1,5 @@
 <% if @repo.present? %>
-  <% if @repo.is_a?(Repository) %>
+  <% if @repo.is_a?(Repository) && @merge.is_a?(Integer) && @commit.is_a?(Hash) && @contributor.is_a?(Array) %>
     <p><strong><%= @repo.name %></strong>
   | <strong>pull requests:</strong> <%= @merge %>
       | <strong>made with love by:</strong>
