@@ -9,8 +9,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  
- 
+
+ <%# @commits.each do |name, commit_number| %>
+ <%=# name %> submitted <%= commit_number %> commits. <br>
+ <%# end %>
   <body>
   <% flash.each do |type, msg| %>
       <div>
