@@ -11,3 +11,10 @@
     <% end %>
   <% end %>
 </section>
+<section id="topCustomers">
+  <ol><h4>Top Customers</h4>
+    <% @top_cust.each do |cust| %>
+    <li class="topCustomer"><%= "#{cust.first_name} #{cust.last_name}- #{cust.count} purchases" %></li>
+    <% end %>
+  </ol>
+</section>
