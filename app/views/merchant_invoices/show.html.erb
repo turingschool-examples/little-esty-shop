@@ -1,4 +1,5 @@
-<h1> Invoice ID: <%= @invoice.id %></h1>
+<%= render partial: "shared/merchant_header", object: @invoice.merchant_object(params[:merchant_id]), :as => :merchant %>
+<h1 align="center"> Invoice ID: <%= @invoice.id %></h1>
 <p>Status: <%= @invoice.status %></p>
 <p>Created: <%= @invoice.created_at.strftime( "%A, %b %e, %Y") %></p>
 <p>Customer: <%= @invoice.customer.first_name %> <%=  @invoice.customer.last_name %></p>
