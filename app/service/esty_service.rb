@@ -1,8 +1,13 @@
-class EstyService  
+require 'httparty'
+class EstyService
 
   def repo
     get_url("https://api.github.com/repos/ColinReinhart/little-esty-shop")
   end
+
+
+  def commits(url)
+    get_url(url)
 
   def prs
     get_url("https://api.github.com/repos/ColinReinhart/little-esty-shop/pulls?state=closed&per_page=100'")
