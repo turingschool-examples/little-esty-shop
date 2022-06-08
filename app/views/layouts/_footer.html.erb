@@ -5,7 +5,7 @@
       | <strong>made with love by:</strong>
       <% @contributor.each do |con| %>
         | <%= con.login  %>
-      contributed <%= @commit[con.login.to_sym].count %> commits
+      contributed <%= @commit[con.login.to_s].count %> commits
       <% end %>|
     </p>
     <% else %>
