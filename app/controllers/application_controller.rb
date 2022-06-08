@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
   def merge_info
     @merge = RepositoryFacade.merged_or_error
   end
+
+  def commit_info
+    @commit = RepositoryFacade.commit_or_error
+  end
 end
