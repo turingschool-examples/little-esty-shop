@@ -52,6 +52,10 @@ class RepositoryFacade
     json
   end
 
+  def self.commit_or_error
+    create_commits
+  end
+
   def self.service
     GithubService.new
   end
