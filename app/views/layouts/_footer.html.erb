@@ -5,3 +5,8 @@
     <p><%= @repository[:message] %></p>
   <% end %>
 <% end %>
+
+
+<% @contributors.each do |contributor| %>
+  <%= contributor.login %>
+<% end %>

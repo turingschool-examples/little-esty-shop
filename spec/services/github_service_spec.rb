@@ -7,4 +7,11 @@ RSpec.describe GithubService do
       expect(json).to have_key(:name)
     end
   end
+
+  describe "API contributors endpoint" do
+    it 'gets contributor data from Github endpoint', :vcr do
+      json = GithubService.get_contributor_data
+      expect(json).to have_key(:name)
+    end
+  end
 end
