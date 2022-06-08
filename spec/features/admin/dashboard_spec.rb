@@ -85,7 +85,7 @@ RSpec.describe 'the admin dashboard', type: :feature do
   end
 
   describe 'Top 5 customers' do
-    it 'can display the names of the top five customers with the most sucessful transactions, as well as the count' do
+    it 'can display the names of the top five customers with the most sucessful transactions, as well as the count', :vcr do
       billman = Merchant.create!(name: "Billman")
       parker = Merchant.create!(name: "Parker's Perfection Pagoda")
 

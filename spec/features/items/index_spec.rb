@@ -124,7 +124,7 @@ RSpec.describe Item, type: :model do
       @invoice_itemZ = @invoiceZ.invoice_items.create!(quantity: 1, unit_price: 100, item_id: @itemZ.id, status: "shipped")
       @invoice_itemX = @invoiceX.invoice_items.create!(quantity: 1, unit_price: 1200, item_id: @itemX.id, status: "shipped")
       visit "merchants/#{@merchant1.id}/items"
-      
+
       within("#top5items") do
         expect("itemA").to appear_before("itemB")
         expect("itemB").to appear_before("itemD")
@@ -135,7 +135,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    it "shows the top sales date for each of the top 5 items" do
+    it "shows the top sales date for each of the top 5 items", :vcr do
 
       @merchant1 = Merchant.create!(name: 'Merchant1')
       @customer1 = Customer.create!(first_name: "Cuss", last_name: "Tomer")
@@ -178,11 +178,11 @@ RSpec.describe Item, type: :model do
       @invoice_itemAA= @invoiceAA.invoice_items.create!(quantity: 19, unit_price: 41, item_id: @itemA.id, status: "shipped")
       visit "/merchants/#{@merchant1.id}/items"
 
-        expect(page).to have_content("Top selling date for itemA was 03-16-2012") 
-        expect(page).to have_content("Top selling date for itemB was 03-15-2012") 
-        expect(page).to have_content("Top selling date for itemC was 03-17-2012") 
-        expect(page).to have_content("Top selling date for itemD was 03-18-2012") 
-        expect(page).to have_content("Top selling date for itemF was 03-18-2012") 
+        expect(page).to have_content("Top selling date for itemA was 03-16-2012")
+        expect(page).to have_content("Top selling date for itemB was 03-15-2012")
+        expect(page).to have_content("Top selling date for itemC was 03-17-2012")
+        expect(page).to have_content("Top selling date for itemD was 03-18-2012")
+        expect(page).to have_content("Top selling date for itemF was 03-18-2012")
 
     end
   end

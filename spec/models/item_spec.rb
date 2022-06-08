@@ -63,7 +63,7 @@ RSpec.describe Item, type: :model do
       @invoice_itemX = @invoiceX.invoice_items.create!(quantity: 1, unit_price: 12, item_id: @itemX.id, status: "shipped")
 
       expect(@merchant1.top_5_items).to match_array([@itemA, @itemB, @itemD, @itemC, @itemF])
-    
+
     end
 ##########################################
 ### INTENTIONAL BREAK TO PREVENT ERRORS###
@@ -109,12 +109,11 @@ RSpec.describe Item, type: :model do
       @invoice_itemCC= @invoiceCC.invoice_items.create!(quantity: 23, unit_price: 7, item_id: @itemC.id, status: "shipped")
       @invoice_itemFF= @invoiceFF.invoice_items.create!(quantity: 17, unit_price: 13, item_id: @itemF.id, status: "shipped")
       @invoice_itemAA= @invoiceAA.invoice_items.create!(quantity: 19, unit_price: 41, item_id: @itemA.id, status: "shipped")
-      visit "/merchants/#{@merchant1.id}/items"
-      
+
     expect(@itemA.best_day).to eq('03-16-2012')
     expect(@itemB.best_day).to eq('03-15-2012')
     expect(@itemC.best_day).to eq('03-17-2012')
-    expect(@itemD.best_day).to eq('03-18-2012')       
+    expect(@itemD.best_day).to eq('03-18-2012')
     expect(@itemF.best_day).to eq('03-18-2012')
     end
   end
