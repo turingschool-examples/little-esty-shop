@@ -15,9 +15,8 @@ class RepositoryFacade
   def self.create_contributors
     json = GithubService.get_contributor_data
     current_contributors = json.map do |info|
-      Contributor.new(info) unless %w[BrianZanti timomitchel scottalexandra jamisonordway].include?(info[:login])
+      Contributor.new(info) unless (['BrianZanti', 'timomitchel', 'scottalexandra', 'jamisonordway']).include?(info[:login])
     end
-    current_contributors.delete(nil)
-    current_contributors
+    current_contributors.compact
   end
 end
