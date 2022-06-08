@@ -4,11 +4,11 @@ class AdminInvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:invoice_id])
+    @invoice = Invoice.find(params[:id])
   end
 
   def update
-    Invoice.update(params[:invoice_id], status: params[:status])
+    Invoice.update(params[:id], status: params[:status])
     redirect_to action: 'show'
   end
 end
