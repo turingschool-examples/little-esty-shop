@@ -43,24 +43,24 @@ RSpec.describe "Admin Merchants Index Page" do
   let!(:invoice2) { customer1.invoices.create!(status: 2, created_at: '2012-03-23 14:53:59') }
   let!(:invoice3) { customer1.invoices.create!(status: 2, created_at: '2012-03-24 14:53:59') }
   let!(:invoice4) { customer1.invoices.create!(status: 2, created_at: '2012-03-25 14:53:59') }
-  let!(:invoice5) { customer5.invoices.create!(status: 2) }
-  let!(:invoice6) { customer6.invoices.create!(status: 2) }
-  let!(:invoice7) { customer2.invoices.create!(status: 2) }
-  let!(:invoice8) { customer2.invoices.create!(status: 2) }
-  let!(:invoice9) { customer3.invoices.create!(status: 2) }
-  let!(:invoice10) { customer5.invoices.create!(status: 2) }
-  let!(:invoice11) { customer6.invoices.create!(status: 2) }
-  let!(:invoice12) { customer6.invoices.create!(status: 2) }
-  let!(:invoice13) { customer4.invoices.create!(status: 2) }
-  let!(:invoice14) { customer4.invoices.create!(status: 2) }
-  let!(:invoice15) { customer4.invoices.create!(status: 2) }
-  let!(:invoice16) { customer5.invoices.create!(status: 2) }
-  let!(:invoice17) { customer5.invoices.create!(status: 2) }
-  let!(:invoice18) { customer4.invoices.create!(status: 2) }
-  let!(:invoice19) { customer1.invoices.create!(status: 2) }
-  let!(:invoice20) { customer1.invoices.create!(status: 2) }
-  let!(:invoice21) { customer5.invoices.create!(status: 2) }
-  let!(:invoice22) { customer4.invoices.create!(status: 2) }
+  let!(:invoice5) { customer5.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice6) { customer6.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice7) { customer2.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice8) { customer2.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice9) { customer3.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice10) { customer5.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice11) { customer6.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice12) { customer6.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice13) { customer4.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice14) { customer4.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice15) { customer4.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice16) { customer5.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice17) { customer5.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice18) { customer4.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice19) { customer1.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice20) { customer1.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice21) { customer5.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
+  let!(:invoice22) { customer4.invoices.create!(status: 2, created_at: '2012-03-22 14:53:59') }
 
   let!(:transaction1) { Transaction.create!(invoice_id: invoice1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "2/22", result: "success") }
   let!(:transaction2) { Transaction.create!(invoice_id: invoice2.id, credit_card_number: 4580251236515201, credit_card_expiration_date: "1/22", result: "success") }
@@ -196,10 +196,10 @@ RSpec.describe "Admin Merchants Index Page" do
   it "lists the top selling date for each of the top 5 merchants", :vcr do
     within "#top-five-merchants" do
       expect(page).to have_content("Top selling date for REI was Wednesday, Mar 21")
-      expect(page).to have_content("Top selling date for Target was Tuesday, Jun 07")
+      expect(page).to have_content("Top selling date for Target was Thursday, Mar 22")
       expect(page).to have_content("Top selling date for Hot Topic was Wednesday, Mar 21")
       expect(page).to have_content("Top selling date for Macys was Sunday, Mar 25")
-      expect(page).to have_content("Top selling date for Walgreens was Tuesday, Jun 07")
+      expect(page).to have_content("Top selling date for Walgreens was Thursday, Mar 22")
     end
   end
 end
