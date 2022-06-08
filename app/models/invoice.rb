@@ -18,5 +18,4 @@ class Invoice < ApplicationRecord
   def self.oldest_first
     order(:created_at)
   end
-
 end
