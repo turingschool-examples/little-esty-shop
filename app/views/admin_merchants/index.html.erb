@@ -1,7 +1,8 @@
-<h1>Admin Merchant Index</h1>
+<%= render partial: "shared/admin_header" %>
+<%= link_to "New Merchant", "/admin/merchants/new" %>
 <ul>
-    <div id="top_5">
-        <h3>Top 5 Merchants:</h3>
+    <div align="right" id="top_5">
+        <h3>Top Merchants</h3>
         <% Merchant.top_5_merchants_by_revenue.each_with_index do |merchant, index| %>
             <div id="merchant-<%= index %>">
                     <%=link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
@@ -14,7 +15,7 @@
 </ul>
 <ul>
     <div id="disabled">
-        <h3>Disabled Merchants:</h3>
+        <h3>Disabled Merchants</h3>
         <% @merchants.each do |merchant| %>
             <div id="merchant-<%= merchant.id %>">
                 <% if merchant.status == "disabled" %>
@@ -28,7 +29,7 @@
 
 <ul>
     <div id='enabled'>
-    <h3>Enabled Merchants:</h3>
+    <h3>Enabled Merchants</h3>
     <% @merchants.each do |merchant| %>
         <div id="merchant-<%= merchant.id %>">
         <% if merchant.status == "enabled" %>
@@ -39,5 +40,3 @@
     <% end %>
     </div>
 </ul>
-
-<%= link_to "Create New Merchant", "/admin/merchants/new" %>

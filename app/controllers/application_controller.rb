@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   
   # before_action :repo_name
+  # before_action :usernames
   # before_action :pr_count
 
 
@@ -34,5 +35,10 @@ class ApplicationController < ActionController::Base
   #   prc = EstyService.new
   #   @count = prc.prs.count
 
+  # end
+
+  # def usernames
+  #   username_search = UserSearch.new
+  #   @usernames = username_search.repo_usernames
   # end
 end
