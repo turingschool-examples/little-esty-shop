@@ -91,7 +91,6 @@ RSpec.describe 'Merchant Show Dash' do
 
     expect(page).to have_content("Items Ready to Ship")
     within "#itemsReadyToShip" do
-      save_and_open_page
       expect(page).to have_content("Bracelet")
       expect(page).to have_link("#{@invoice1.id}")
       expect(page).to have_link("#{@invoice2.id}")
