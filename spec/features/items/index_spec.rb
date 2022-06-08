@@ -178,9 +178,12 @@ RSpec.describe Item, type: :model do
       @invoice_itemAA= @invoiceAA.invoice_items.create!(quantity: 19, unit_price: 41, item_id: @itemA.id, status: "shipped")
       visit "/merchants/#{@merchant1.id}/items"
 
-      within("top_day-#{@itemA.id}") do
-        expect(page).to have_content("Top selling date for itemA was 2012-03-06")
-      end
+        expect(page).to have_content("Top selling date for itemA was 03-16-2012") 
+        expect(page).to have_content("Top selling date for itemA was 03-15-2012") 
+        expect(page).to have_content("Top selling date for itemA was 03-17-2012") 
+        expect(page).to have_content("Top selling date for itemA was 03-18-2012") 
+        expect(page).to have_content("Top selling date for itemA was 03-18-2012") 
+
     end
   end
 end

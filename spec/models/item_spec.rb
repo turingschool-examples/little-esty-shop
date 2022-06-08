@@ -111,11 +111,11 @@ RSpec.describe Item, type: :model do
       @invoice_itemAA= @invoiceAA.invoice_items.create!(quantity: 19, unit_price: 41, item_id: @itemA.id, status: "shipped")
       visit "/merchants/#{@merchant1.id}/items"
       
-    expect(@itemA.best_day).to eq('2012-03-16')
-    expect(@itemB.best_day).to eq('2012-03-15')
-    expect(@itemC.best_day).to eq('2012-03-17')
-    expect(@itemD.best_day).to eq('2012-03-18')
-    expect(@itemF.best_day).to eq('2012-03-18')
+    expect(@itemA.best_day).to eq('03-16-2012')
+    expect(@itemB.best_day).to eq('03-15-2012')
+    expect(@itemC.best_day).to eq('03-17-2012')
+    expect(@itemD.best_day).to eq('03-18-2012')       
+    expect(@itemF.best_day).to eq('03-18-2012')
     end
   end
 end
