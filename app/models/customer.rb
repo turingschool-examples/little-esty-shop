@@ -2,6 +2,8 @@ class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
 
+  has_many :transactions, through: :invoices
+
   validates_presence_of :first_name, :last_name 
 
   def successful_transactions_with_merchant(merch)
@@ -23,4 +25,5 @@ class Customer < ApplicationRecord
     st = transactions.where(transactions: {result: "success"})
     st.count
   end
+
 end
