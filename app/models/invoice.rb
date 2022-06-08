@@ -4,6 +4,7 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items, dependent: :destroy
   has_many :merchants, through: :items
   has_many :transactions, dependent: :destroy
+  has_many :merchants, through: :items
 
   validates_presence_of :status
 
@@ -14,4 +15,9 @@ class Invoice < ApplicationRecord
   def incomplete?
     invoice_items.where.not(status: 'shipped').count > 0
   end
+
+  def self.oldest_first
+    order(:created_at)
+  end
+
 end

@@ -6,7 +6,15 @@
 <h4>Incomplete Invoices</h4>
 <% @invoices.each do |invoice| %>
   <% if invoice.incomplete? %>
-    <ol>Invoice: <%=link_to "#{invoice.id}", admin_invoice_path(invoice.id) %></ol>
+    <ol>Invoice: <%=link_to "#{invoice.id}", admin_invoice_path(invoice.id) %>
+    Created at: <%= invoice.created_at_format %> </ol>
     <% end %>
   <% end %>
+</section>
+<section id="topCustomers">
+  <ol><h4>Top Customers</h4>
+    <% @top_cust.each do |cust| %>
+    <li class="topCustomer"><%= "#{cust.first_name} #{cust.last_name}- #{cust.count} purchases" %></li>
+    <% end %>
+  </ol>
 </section>
