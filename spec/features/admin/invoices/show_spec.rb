@@ -18,7 +18,7 @@ RSpec.describe "Admin Invoice Show Page" do
     @invoice_items_3 = @necklace.invoice_items.create!(quantity: 1, unit_price: 3003, status: "Pending", invoice_id: @invoice_1.id)
   end
 
-  it "shows all attributes of an invoice" do
+  it "shows all attributes of an invoice", :vcr do
     visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
     expect(page).to have_content("Invoice Status: #{@invoice_1.status}")
@@ -27,7 +27,7 @@ RSpec.describe "Admin Invoice Show Page" do
     expect(page).to_not have_content("Invoice Status: #{@invoice_2.status}")
   end
 
-  it "shows item attributes for items on an invoice" do
+  it "shows item attributes for items on an invoice", :vcr do
     visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Item Name: Bracelet")
     expect(page).to have_content("Item Name: Necklace")
@@ -40,13 +40,13 @@ RSpec.describe "Admin Invoice Show Page" do
     expect(page).to_not have_content("Price Sold For: $20.02")
   end
 
-  it "shows total revenue in dollars for an invoice" do
+  it "shows total revenue in dollars for an invoice", :vcr do
     visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Total Revenue from this Invoice: $40.04")
     expect(page).to_not have_content("Total Revenue from this Invoice: $20.02")
   end
 
-  it "can update invoice status via a select form" do
+  it "can update invoice status via a select form", :vcr do
     visit admin_invoice_path(@invoice_1)
     expect(page).to have_content("Invoice Status: cancelled")
     select "in progress", from: :status

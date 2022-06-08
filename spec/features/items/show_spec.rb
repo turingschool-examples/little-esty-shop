@@ -11,7 +11,7 @@ RSpec.describe Item, type: :feature do
       visit "/merchants/#{@merchant1.id}/items"
    end
 
-    it 'is linked from item name on index page and shows all attributes of item' do
+    it 'is linked from item name on index page and shows all attributes of item', :vcr do
 
       click_on 'Item1'
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
@@ -21,7 +21,7 @@ RSpec.describe Item, type: :feature do
       expect(page).to have_content("Item1")
     end
 
-    it "has an update link to an edit page form with fields prepopulated with items current information" do
+    it "has an update link to an edit page form with fields prepopulated with items current information", :vcr do
 
       visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
 
@@ -32,7 +32,7 @@ RSpec.describe Item, type: :feature do
       expect(page).to have_field(:unit_price, with: "$1.11")
     end
 
-    it 'update button will change attribute values, has a success flash message' do
+    it 'update button will change attribute values, has a success flash message', :vcr do
       visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
 
       click_on "Update"
