@@ -1,4 +1,4 @@
-#poros reports back what it finds in the data - reports behavior, not data
+# poros reports back what it finds in the data - reports behavior, not data
 class Contributor
   attr_reader :login, :id
 
