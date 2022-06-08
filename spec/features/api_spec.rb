@@ -21,4 +21,14 @@ RSpec.describe 'tests for API service methods' do
     expect(page).to have_content("Repo: little-esty-shop")
 
   end
+
+  xit "displays each users amount of commits" do
+    visit '/'
+
+    expect(page).to have_content("devAndrewK has _ commits")
+    expect(page).to have_content("tjhaines-cap has _ commits")
+    expect(page).to have_content("CoryBethune has _ commits")
+    expect(page).to have_content("StephenWilkens has _ commits")
+    expect(page).to have_content("ColinReinhart has _ commits")
+  end
 end
