@@ -2,7 +2,7 @@ class Avatar
   attr_reader
 
   def initialize(parsed)
-
+    @avatar = parsed
   end
 end
 
