@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   # before_action :repo_name
   # before_action :pr_count
-  before_action :avatar
+  # before_action :avatar
 
   def welcome
 
@@ -25,8 +25,14 @@ class ApplicationController < ActionController::Base
   #   @count = prc.prs.count
   # end
 
-  def avatar
-    avatar_search = AvatarSearch.new
-    @avatars = avatar_search.repo_avatars
-  end
+  # def avatar
+  #   avatar_search = AvatarSearch.new
+  #   @avatar_urls = avatar_search.repo_avatars
+  # end
+
+
+  #add this to the layout to get the avatars to display
+  # <% @avatar_urls.each do |url| %>
+  #  <img src=<%= url %>>
+  # <% end %>
 end
