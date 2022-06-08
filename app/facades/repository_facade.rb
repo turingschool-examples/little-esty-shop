@@ -41,7 +41,7 @@ class RepositoryFacade
 
   def self.create_commits_or_error
   json = GithubService.get_commit_data
-  json.is_a?(Array) ? create_commit_requests : json # ternary operator
+  json.is_a?(Array) ? create_commits : json # ternary operator
   # if it is returning the pulls it is an array of hashes so  create the repo object,
   #else it is not an array and it is an error messagee and return the json error
   # this is all for the rate limit
