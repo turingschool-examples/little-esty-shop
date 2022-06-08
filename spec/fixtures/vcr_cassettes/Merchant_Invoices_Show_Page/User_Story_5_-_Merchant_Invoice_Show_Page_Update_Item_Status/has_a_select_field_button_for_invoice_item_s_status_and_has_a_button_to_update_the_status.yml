@@ -19,7 +19,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:18 GMT
+      - Wed, 08 Jun 2022 22:25:01 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -50,23 +50,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727427'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C656:48E2:1AC77B:1CDA17:62A11CE2
+      - D5FD:4881:29D387:53A94E:62A121BD
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:18 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:01 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop/contributors
@@ -86,7 +86,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:18 GMT
+      - Wed, 08 Jun 2022 22:25:01 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -117,23 +117,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727426'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C657:65E9:3B95A1:3E26B6:62A11CE2
+      - D5FE:6891:2956B7:549A42:62A121BD
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:18 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:01 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop/pulls?per_page=100&state=closed
@@ -153,7 +153,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:18 GMT
+      - Wed, 08 Jun 2022 22:25:02 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -184,23 +184,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727426'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C658:48E3:2C4FE7:2EA562:62A11CE2
+      - D5FF:3B3C:2B213F:54205B:62A121BE
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:18 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:02 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop/commits?author=sage-skaff&per_page=100
@@ -220,7 +220,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:19 GMT
+      - Wed, 08 Jun 2022 22:25:02 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -251,23 +251,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727427'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C659:2D7A:8E74F:AB88C:62A11CE3
+      - D600:437E:FFF54:28CCC7:62A121BE
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:19 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:02 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop
@@ -287,7 +287,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:19 GMT
+      - Wed, 08 Jun 2022 22:25:03 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -318,23 +318,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727427'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C65A:72FB:3B7825:3CEF19:62A11CE3
+      - D601:2AE5:21FF19:5DA4E7:62A121BF
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:19 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:03 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop/contributors
@@ -354,7 +354,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:19 GMT
+      - Wed, 08 Jun 2022 22:25:03 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -385,23 +385,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727427'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C65B:0F15:904A9:AD846:62A11CE3
+      - D602:4881:29D470:53AB4B:62A121BF
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:19 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:03 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop/pulls?per_page=100&state=closed
@@ -421,7 +421,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:19 GMT
+      - Wed, 08 Jun 2022 22:25:04 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -452,23 +452,23 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727427'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C65C:2D7C:1DFA6B:2011B3:62A11CE3
+      - D603:6BAA:1651F:CB127:62A121BF
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:19 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:04 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/LukeSwenson06/little-esty-shop/commits?author=sage-skaff&per_page=100
@@ -488,7 +488,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 08 Jun 2022 22:04:19 GMT
+      - Wed, 08 Jun 2022 22:25:04 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -519,21 +519,21 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1654727427'
+      - '1654729960'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
       - '60'
       Content-Length:
-      - '279'
+      - '278'
       X-Github-Request-Id:
-      - C65D:9114:1B530E:1C9C09:62A11CE3
+      - D604:5D31:1B5E3B:3C621A:62A121C0
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 70.252.16.199. (But here''s
+      string: '{"message":"API rate limit exceeded for 76.169.66.72. (But here''s
         the good news: Authenticated requests get a higher rate limit. Check out the
         documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 08 Jun 2022 22:04:19 GMT
+  recorded_at: Wed, 08 Jun 2022 22:25:04 GMT
 recorded_with: VCR 6.1.0
