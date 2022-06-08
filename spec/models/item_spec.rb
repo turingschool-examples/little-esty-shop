@@ -60,20 +60,20 @@ RSpec.describe Item do
       @cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
 
       @invoice_1 = @cust_1.invoices.create!(status: 1, created_at: "01/01/1990")
-      @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "01/02/1990")
-      @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "01/03/1990")
-      @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "01/04/1990")
-      @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "01/05/1990")
-      @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "01/06/1990")
-      @invoice_7 = @cust_3.invoices.create!(status: 1, created_at: "01/07/1990")
-      @invoice_8 = @cust_3.invoices.create!(status: 1, created_at: "01/08/1990")
-      @invoice_9 = @cust_4.invoices.create!(status: 1, created_at: "01/09/1990")
-      @invoice_10 = @cust_4.invoices.create!(status: 1, created_at: "01/10/1990")
-      @invoice_11 = @cust_5.invoices.create!(status: 1, created_at: "01/11/1990")
-      @invoice_12 = @cust_5.invoices.create!(status: 1, created_at: "01/12/1990")
-      @invoice_13 = @cust_6.invoices.create!(status: 1, created_at: "01/13/1990")
-      @invoice_14 = @cust_7.invoices.create!(status: 1, created_at: "01/14/1990")
-      @invoice_15 = @cust_7.invoices.create!(status: 2, created_at: "01/15/1990")
+      @invoice_2 = @cust_1.invoices.create!(status: 1, created_at: "02/01/1990")
+      @invoice_3 = @cust_1.invoices.create!(status: 1, created_at: "03/01/1990")
+      @invoice_4 = @cust_2.invoices.create!(status: 1, created_at: "04/01/1990")
+      @invoice_5 = @cust_2.invoices.create!(status: 1, created_at: "05/01/1990")
+      @invoice_6 = @cust_2.invoices.create!(status: 1, created_at: "06/01/1990")
+      @invoice_7 = @cust_3.invoices.create!(status: 1, created_at: "07/01/1990")
+      @invoice_8 = @cust_3.invoices.create!(status: 1, created_at: "08/01/1990")
+      @invoice_9 = @cust_4.invoices.create!(status: 1, created_at: "09/01/1990")
+      @invoice_10 = @cust_4.invoices.create!(status: 1, created_at: "10/01/1990")
+      @invoice_11 = @cust_5.invoices.create!(status: 1, created_at: "11/01/1990")
+      @invoice_12 = @cust_5.invoices.create!(status: 1, created_at: "12/01/1990")
+      @invoice_13 = @cust_6.invoices.create!(status: 1, created_at: "13/01/1990")
+      @invoice_14 = @cust_7.invoices.create!(status: 1, created_at: "14/01/1990")
+      @invoice_15 = @cust_7.invoices.create!(status: 2, created_at: "15/01/1990")
 
       @ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
       @ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -112,7 +112,7 @@ RSpec.describe Item do
       @transaction_14 = @invoice_14.transactions.create!(credit_card_number: 4023948573948293, result: "success")
       @transaction_15 = @invoice_15.transactions.create!(credit_card_number: 4023948573948293, result: "success")
 
-      expect(@item_5.best_date.strftime('%B %d, %Y')).to eq(Time.now.strftime('%B %d, %Y'))
+      expect(@item_5.best_date.strftime('%B %d, %Y')).to eq("January 15, 1990")
     end
   end
 end

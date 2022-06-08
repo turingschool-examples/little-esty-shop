@@ -10,4 +10,3 @@ class RepoSearch
     EstyService.new
   end
 end
-
