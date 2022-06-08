@@ -19,7 +19,7 @@ class RepositoryFacade
       Contributor.new(data)
     end
     json.map do |contributor|
-      contributor if [98_674_727, 98_676_136, 98_354_482, 99_838_997].include?(contributor.id)
+      contributor if [98674727, 98676136, 98354482, 99838997].include?(contributor.id)
     end.compact
   end
 
