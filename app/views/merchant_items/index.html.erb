@@ -8,7 +8,7 @@
     <div id="item-<%= item.id %>">
       <% if item.status == "disabled" %>
         <li><%= item.name %>
-        <%= button_to "Enable", "/merchants/#{@merchant.id}/items", method: :patch, params: {status: "enabled", item_id: "#{item.id}"} %>
+        <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "enabled", item_id: "#{item.id}"} %>
         </li>
       <% end %>
     </div>
@@ -22,7 +22,7 @@
     <div id="item-<%= item.id %>">
       <% if item.status == "enabled" %>
         <li><%= item.name %>
-        <%= button_to "Disable", "/merchants/#{@merchant.id}/items", method: :patch, params: {status: "disabled", item_id: "#{item.id}"} %>
+        <%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "disabled", item_id: "#{item.id}"} %>
         </li>
       <% end %>
     </div>
