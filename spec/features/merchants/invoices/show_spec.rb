@@ -48,7 +48,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       expect(page).to have_content('Total Revenue: 58000')
     end
 
-    it 'will be able to update item on a merchants invoice', :vcr do
+    it 'will be able to update item on a merchants invoice', vcr: :new_episodes do
       visit "/merchants/#{@merch1.id}/invoices/#{@invoice1.id}"
 
       expect(page).to have_content('Status:')
