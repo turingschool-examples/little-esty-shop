@@ -7,12 +7,15 @@
 <% end %>
 
 <% if @contributors.present? %>
-  <% if @contributors.is_a?(Contributor) %>
+  <% if @contributors[0].is_a?(Contributor) %>
+  <strong>Contributors: </strong>
     <% @contributors.each do |contributor| %>
-      <strong>Contributors: </strong><%= contributor.login %>
+    <%= contributor.login %>
     <% end %>
   <% else %>
     <p><%= @contributors[:message] %></p>
+  <% end %>
+<% end %>
 
 <% if @pulls.present? %>
   <% if @pulls.is_a?(PullRequest) %>
