@@ -5,10 +5,18 @@ class GithubService < BaseService
   end
 
   def repo
-    get_url("")
+    get_url('')
   end
 
   def contributor
     get_url('/contributors')
+  end
+
+  def merge
+    get_url('/pulls?state=closed&per_page=100')
+  end
+
+  def commit(author)
+    get_url("/commits?author=#{author}&per_page=100")
   end
 end
