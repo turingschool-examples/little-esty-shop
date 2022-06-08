@@ -10,9 +10,5 @@ class Avatar
       end
     end
     @avatar_urls = urls
-    # binding.pry
   end
 end
-
-
-#plain old ruby objects build the objects from the service here

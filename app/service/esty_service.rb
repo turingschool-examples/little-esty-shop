@@ -1,3 +1,5 @@
+require 'httparty'
+
 class EstyService
 
   def repo
