@@ -19,9 +19,9 @@ RSpec.describe Merchant do
             @item6 = @merch1.items.create!(name: 'Floopy Blue', description: 'the better', unit_price: 950)
             @item7 = @merch1.items.create!(name: 'Floopy Red', description: 'the OG', unit_price: 550)
             @item8 = @merch1.items.create!(name: 'Floopy Black', description: 'the OG', unit_price: 550)
-            @invoice1 = @customer1.invoices.create!(status: 2)
+            @invoice1 = @customer1.invoices.create!(status: 2, updated_at: Time.parse("2012-03-30 14:54:09 UTC"))
             @invoice1.transactions.create!(result: 0)
-            @invoice2 = @customer1.invoices.create!(status: 2)
+            @invoice2 = @customer1.invoices.create!(status: 2, updated_at: Time.parse("2012-04-30 14:54:09 UTC"))
             @invoice2.transactions.create!(result: 0)
             InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 1, unit_price: 10000, status: 0)
             InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 2, unit_price: 10000, status: 1)
@@ -110,6 +110,10 @@ RSpec.describe Merchant do
 
         it "list the top 5 items by revenue per a specific merchant" do
           expect(@merch1.top_five_items_by_revenue).to eq([@item8, @item6, @item5, @item4, @item3])
+        end
+
+        it "returns the date for the highest revenue" do
+          expect(@merch1.merchant_best_day).to eq("#{@invoice2.updated_at}")
         end
     end
 
