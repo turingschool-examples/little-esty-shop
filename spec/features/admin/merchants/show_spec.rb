@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchant show page' do
-  it 'shows the name of the merchant' do
+  it 'shows the name of the merchant', :vcr do
     @merch1 = Merchant.create!(name: 'Floopy Fopperations')
 
     visit "/admin/merchants/#{@merch1.id}"
@@ -9,7 +9,7 @@ RSpec.describe 'admin merchant show page' do
     expect(page).to have_content('Name: Floopy Fopperations')
   end
 
-  it 'can update the merchant' do
+  it 'can update the merchant', :vcr do
     @merch1 = Merchant.create!(name: 'Floopy Fopperations')
 
     visit "/admin/merchants/#{@merch1.id}"

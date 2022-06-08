@@ -21,13 +21,13 @@ RSpec.describe 'admin dashboard' do
     InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice4.id, quantity: 5, unit_price: 1000, status: 2,
                         created_at: '2022-06-03 21:08:15 UTC')
   end
-  it 'shows admin dashboard' do
+  it 'shows admin dashboard', :vcr do
     visit '/admin'
 
     expect(page).to have_content('Admin Dashboard')
   end
 
-  it 'shows the admin dashboard with links' do
+  it 'shows the admin dashboard with links', :vcr do
     visit '/admin'
 
     click_link('Admin Merchants Index')
@@ -39,7 +39,7 @@ RSpec.describe 'admin dashboard' do
     expect(current_path).to eq('/admin/invoices')
   end
 
-  it 'shows incomplete invoices' do
+  it 'shows incomplete invoices', :vcr do
     visit '/admin'
     expect(page).to have_content('Incomplete Invoices:')
 
@@ -56,7 +56,7 @@ RSpec.describe 'admin dashboard' do
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
   end
 
-  it 'shows incomplete invoices sorted by least recent' do
+  it 'shows incomplete invoices sorted by least recent', :vcr do
     visit '/admin'
     expect(page).to have_content('Incomplete Invoices:')
 
