@@ -179,10 +179,10 @@ RSpec.describe Item, type: :model do
       visit "/merchants/#{@merchant1.id}/items"
 
         expect(page).to have_content("Top selling date for itemA was 03-16-2012") 
-        expect(page).to have_content("Top selling date for itemA was 03-15-2012") 
-        expect(page).to have_content("Top selling date for itemA was 03-17-2012") 
-        expect(page).to have_content("Top selling date for itemA was 03-18-2012") 
-        expect(page).to have_content("Top selling date for itemA was 03-18-2012") 
+        expect(page).to have_content("Top selling date for itemB was 03-15-2012") 
+        expect(page).to have_content("Top selling date for itemC was 03-17-2012") 
+        expect(page).to have_content("Top selling date for itemD was 03-18-2012") 
+        expect(page).to have_content("Top selling date for itemF was 03-18-2012") 
 
     end
   end
