@@ -2,6 +2,7 @@ require './app/facade/repo_search'
 class ApplicationController < ActionController::Base
   
   # before_action :repo_name
+  # before_action :pr_count
 
   def welcome
 
@@ -16,5 +17,10 @@ class ApplicationController < ActionController::Base
   # def repo_name
   #   repo_search = RepoSearch.new
   #   @repo = repo_search.repo_information
+  # end
+
+  # def pr_count
+  #   prc = EstyService.new
+  #   @count = prc.prs.count
   # end
 end
