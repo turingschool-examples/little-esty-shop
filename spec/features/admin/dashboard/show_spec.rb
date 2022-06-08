@@ -76,7 +76,7 @@ RSpec.describe "Admin dashboard" do
 
   it "shows the admin dashboard" do
     visit '/admin'
-    
+    save_and_open_page
     expect(page).to have_content "Admin Dashboard"
   end
 

@@ -3,9 +3,8 @@ class ApplicationController < ActionController::Base
 
   # before_action :repo_name
   # before_action :pr_count
-  
-  # anytime a page loads do these
-  # make a avatar version
+  before_action :avatar
+
   def welcome
 
   end
@@ -25,4 +24,9 @@ class ApplicationController < ActionController::Base
   #   prc = EstyService.new
   #   @count = prc.prs.count
   # end
+
+  def avatar
+    avatar_search = AvatarSearch.new
+    @avatars = avatar_search.repo_avatars
+  end
 end
