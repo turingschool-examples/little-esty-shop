@@ -15,10 +15,15 @@ RSpec.describe RepositoryFacade do
       expect(contributor[0]).to be_a(Contributor)
     end
 
-    it 'can create pull requests merged poros', :vcr do
+    xit 'can create pull requests merged poros', :vcr do
       merge = RepositoryFacade.merged_or_error
 
       expect(merge[0]).to be_a(PullRequest)
+    end
+
+    it 'eeeeeees', :vcr do
+      commit = RepositoryFacade.commit_or_error
+      expect(commit).to be_a(Hash)
     end
   end
 end
