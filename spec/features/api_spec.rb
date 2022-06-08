@@ -14,4 +14,11 @@ RSpec.describe 'tests for API service methods' do
     expect(page).to have_content("StephenWilkens")
     expect(page).to have_content("ColinReinhart")
   end
+
+  xit "displays the repo name" do
+    visit "admin/merchants"
+
+    expect(page).to have_content("Repo: little-esty-shop")
+
+  end
 end
