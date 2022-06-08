@@ -11,8 +11,8 @@ RSpec.describe RepositoryFacade do
     end
 
     it "can create contributors poros", :vcr do
-      contributor = RepositoryFacade.contributor
-      # binding.pry
+      contributor = RepositoryFacade.contributor_or_error
+      
       expect(contributor[0]).to be_a(Contributor)
     end
   end

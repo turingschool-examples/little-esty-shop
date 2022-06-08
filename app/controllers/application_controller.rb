@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def contributor_info
-    @contributor = RepositoryFacade.contributor
+    @contributor = RepositoryFacade.contributor_or_error
   end
 end
