@@ -11,6 +11,7 @@
   <strong>Contributors: </strong>
     <% @contributors.each do |contributor| %>
     <%= contributor.login %>
+    <%= @commits.count(contributor) %>
     <% end %>
   <% else %>
     <p><%= @contributors[:message] %></p>
