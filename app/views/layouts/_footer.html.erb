@@ -1,7 +1,26 @@
 <% if @repository.present? %>
   <% if @repository.is_a?(Repository) %>
-    <p><%= @repository.name %></p>
+    <p><b>Repo:</b> <%= @repository.name %></p>
   <% else %>
     <p><%= @repository[:message] %></p>
+  <% end %>
+<% end %>
+
+<% if @contributors.present? %>
+  <% if @contributors[0].is_a?(Contributor) %>
+  <strong>Contributors: </strong>
+    <% @contributors.each do |contributor| %>
+    <%= contributor.login %>
+    <% end %>
+  <% else %>
+    <p><%= @contributors[:message] %></p>
+  <% end %>
+<% end %>
+
+<% if @pulls.present? %>
+  <% if @pulls.is_a?(PullRequest) %>
+    <p><b>Closed Pulls:</b> <%= @pulls.count %></p>
+  <% else %>
+    <p><%= @pulls[:message] %></p>
   <% end %>
 <% end %>

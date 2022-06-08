@@ -8,4 +8,5 @@ RSpec.describe RepositoryFacade do
       expect(repo).to be_an_instance_of(Repository)
     end
   end
+
 end
