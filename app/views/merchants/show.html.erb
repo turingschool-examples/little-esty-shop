@@ -1,9 +1,4 @@
-<h1><%= @merchant.name %></h1>
-<p align="right">
-    <%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
-    &nbsp
-    <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
-</p>
+<%= render partial: "shared/merchant_header", object: @merchant, :as => :merchant  %>
 <h3>Items Ready To Ship</h3>
 <% @merchant.items_ready_to_ship.each_with_index do |invoice_item, index| %>
     <div id="item-<%= index %>">

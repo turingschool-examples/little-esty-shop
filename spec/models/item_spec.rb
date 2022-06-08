@@ -26,19 +26,6 @@ RSpec.describe Item do
     end
   end
 
-  describe '#merchant_object' do
-    it 'can access merchant object through item' do
-      merch_1 = Merchant.create!(name: "Two-Legs Fashion")
-      merch_2 = Merchant.create!(name: "Two-Legs Fashion")
-      item_1 = merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 5086)
-      item_2 = merch_1.items.create!(name: "Two-Leg Shorts", description: "shorts built for people with two legs", unit_price: 2999)
-      item_3 = merch_2.items.create!(name: "Hat", description: "hat built for people with two legs and one head", unit_price: 6000)
-
-      expect(item_1.merchant_object).to eq(merch_1)
-      expect(item_2.merchant_object).to eq(merch_1)
-      expect(item_3.merchant_object).to eq(merch_2)
-    end
-  end
 
   describe '#best_date' do
     it "gets the date for the invoice with the most popular item" do

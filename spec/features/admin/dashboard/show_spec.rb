@@ -83,12 +83,12 @@ RSpec.describe "Admin dashboard" do
   it "has links to admin/merchants and admin/invoices" do
     visit '/admin'
 
-    click_link "Admin Merchant Index"
+    click_link "Merchants"
     expect(current_path).to eq "/admin/merchants"
 
     visit '/admin'
 
-    click_link "Admin Invoice Index"
+    click_link "Invoices"
     expect(current_path).to eq "/admin/invoices"
   end
 

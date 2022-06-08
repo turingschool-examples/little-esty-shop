@@ -1,4 +1,4 @@
-<h1><%= @item.merchant_object.name %></h1>
+<%= render partial: "shared/merchant_header", object: @item.merchant, :as => :merchant %>
 <p><b><%= @item.name %><b></p>
 <p>Description: <%= @item.description %></p>
 <p>Current Price: $<%= '%.2f' % @item.unit_price_to_dollars %></p>
