@@ -12,7 +12,7 @@
     <% @contributors.each do |contributor| %>
     <%= contributor.login %>
     <%= binding.pry %>
-    <%= @commit.usernames(contributor) %>
+    <%= @commit.count(contributor) %>
     <% end %>
   <% else %>
     <p><%= @contributors[:message] %></p>
