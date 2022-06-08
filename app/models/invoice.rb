@@ -4,8 +4,7 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items, dependent: :destroy
   has_many :merchants, through: :items
   has_many :transactions, dependent: :destroy
-  has_many :merchants, through: :items
-
+  
   validates_presence_of :status
 
   def total_revenue
