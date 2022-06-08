@@ -41,11 +41,11 @@ class RepositoryFacade
     json = {}
     # json = { user_name: '',
     #          commits: 0 }
-    service.create_contributors.each do |con|
+    create_contributors.each do |con|
       # json[:user_name] << con.login
-      json[con.login.to_sym] = []
-      service.commits(con.login).each do |data|
-        json[con.login.to_sym] << Commit.new(data)
+      json[con.login.to_s] = []
+      service.commit(con.login).each do
+        json[con.login.to_s] << Commit.new
         # json[:commits] += Commit.new(data, con.login)
       end
     end
