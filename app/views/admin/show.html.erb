@@ -1,6 +1,4 @@
-<h1>Admin Dashboard</h1>
-<%= link_to "Admin Merchant Index", "/admin/merchants" %>
-<%= link_to "Admin Invoice Index", "/admin/invoices" %>
+<%= render partial: "shared/admin_header" %>
 
 <h3>Incomplete Invoices</h3>
 <% @invoices.incomplete_invoices_ordered.each do |invoice| %>

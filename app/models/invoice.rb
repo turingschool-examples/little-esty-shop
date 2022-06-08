@@ -15,4 +15,8 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices_ordered
     Invoice.joins(:invoice_items).where(invoice_items: { status: [0, 1] }).order(:created_at).distinct
   end
+
+  def merchant_object(id)
+    Merchant.find(id)
+  end
 end

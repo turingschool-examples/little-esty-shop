@@ -1,6 +1,7 @@
-<h1><%= "#{@merchant.name}" %></h1>
+<%= render partial: "shared/merchant_header", object: @merchant, :as => :merchant %>
 
-<h3>Merchant's Items:</h3>
+
+<h3 align="center">My Items:</h3>
 <ul>
 <div id="disabled">
 <h3>Disabled:</h3>
