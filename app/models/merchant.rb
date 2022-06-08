@@ -34,7 +34,7 @@ class Merchant < ApplicationRecord
           .order(total_revenue: :desc)
           .limit(5)
   end
-  
+
   def best_day
     best_day_revenue = invoices.group("DATE(invoices.created_at)").sum("invoice_items.quantity * invoice_items.unit_price").sort_by { |day, revenue| revenue }.last
     best_day_revenue[0]
@@ -43,5 +43,4 @@ class Merchant < ApplicationRecord
   def top_5_items
     top_5_items = self.items.joins(invoice_items: [:invoice]).where(invoices: {status: 2}).select("items.*, sum(invoice_items.quantity * invoice_items.unit_price)").group(:id).order(sum: :desc).limit(5).to_a
   end
-
 end
