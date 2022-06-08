@@ -4,31 +4,19 @@ Rails.application.routes.draw do
 
   get "/merchants/:merchant_id/dashboard", to: 'merchants#show'
 
-  get "/merchants/:merchant_id/items", to: 'merchant_items#index'
-  patch "/merchants/:merchant_id/items", to: 'merchant_items#update'
-  get "/merchants/:merchant_id/items/new", to: 'merchant_items#new'
-  post "/merchants/:merchant_id/items", to: 'merchant_items#create'
+  resources :merchants, only: [:show] do
+    resources :items, controller: :merchant_items
+  end
 
-  get "/merchants/:merchant_id/items/:item_id", to: 'merchant_items#show'
-  get "/merchants/:merchant_id/items/:item_id/edit", to: 'merchant_items#edit'
-  patch "/merchants/:merchant_id/items/:item_id", to: 'merchant_items#update'
-
-  get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
-  get "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#show"
-
-  patch "/merchants/:merchant_id/invoices/:invoice_id", to: "invoice_items#update"
-
+  resources :merchants, only: [:show] do
+    resources :invoices, only: [:index, :show], controller: :merchant_invoices
+    resources :invoices, only: [:update], controller: :invoice_items
+  end
+ 
   get "/admin", to: "admin#show"
 
-  get '/admin/merchants/new', to: 'admin_merchants#new'
-  post 'admin/merchants/new', to: 'admin_merchants#create'
-  get "/admin/merchants/:merchant_id", to: 'admin_merchants#show'
-  get "/admin/merchants/:merchant_id/edit", to: 'admin_merchants#edit'
-  patch "/admin/merchants/:merchant_id", to: 'admin_merchants#update'
-
-  get "/admin/merchants", to: "admin_merchants#index"
-
-  get "/admin/invoices", to: "admin_invoices#index"
-  get "/admin/invoices/:invoice_id", to: "admin_invoices#show"
-  patch "/admin/invoices/:invoice_id", to: "admin_invoices#update"
+  scope :admin do
+    resources :invoices, only: [:index, :show, :update], controller: :admin_invoices
+    resources :merchants, only: [:new, :create, :show, :edit, :update, :index], param: :merchant_id, controller: :admin_merchants
+  end
 end

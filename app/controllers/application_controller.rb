@@ -2,7 +2,9 @@ require './app/facade/repo_search'
 class ApplicationController < ActionController::Base
   
   # before_action :repo_name
-  #  before_action :usernames
+  # before_action :usernames
+  # before_action :pr_count
+
 
   def welcome
 
