@@ -6,14 +6,19 @@ RSpec.describe RepositoryFacade do
     it 'does the thing', :vcr do
       repo = RepositoryFacade.create_repo
 
-
       expect(repo).to be_an_instance_of(Repository)
     end
 
-    it "can create contributors poros", :vcr do
+    it 'can create contributors poros', :vcr do
       contributor = RepositoryFacade.contributor_or_error
-      
+
       expect(contributor[0]).to be_a(Contributor)
+    end
+
+    it 'can create pull requests merged poros', :vcr do
+      merge = RepositoryFacade.merged_or_error
+
+      expect(merge[0]).to be_a(PullRequest)
     end
   end
 end
