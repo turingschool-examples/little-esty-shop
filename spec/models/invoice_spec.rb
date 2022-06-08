@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Invoice, type: :model do
   before :each do
     @billman = Merchant.create!(name: "Billman")
-  
+
     @bracelet = @billman.items.create!(name: "Bracelet", description: "shiny", unit_price: 1001)
     @mood = @billman.items.create!(name: "Mood Ring", description: "Moody", unit_price: 2002)
 

@@ -6,7 +6,7 @@ RSpec.describe "Admin Merchant Show Page" do
     @jacobs = Merchant.create!(name: "Jacobs")
   end
 
-  it "shows the name of merchant" do
+  it "shows the name of merchant", :vcr do
     visit admin_merchant_path(@jacobs.id)
     expect(page).to have_content("Merchant Name: Jacobs")
 

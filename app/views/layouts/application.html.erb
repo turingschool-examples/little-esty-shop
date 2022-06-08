@@ -10,6 +10,14 @@
   </head>
 
   <body>
+      <p>Repo Name: <%= @data[:name] %> </p>
+      <br>
+      Collaborators: <br> <%@data2.each do |contributor| %>
+      <p> <%= contributor[:login] %>, Commits: <%= contributor[:contributions] %> </p>
+      <% end %>
+      <br>
+      Merged Pull Requests: <%= @data3.count %>
+
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>

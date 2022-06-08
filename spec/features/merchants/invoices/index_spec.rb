@@ -32,7 +32,7 @@ RSpec.describe 'Merchant invoices index', type: :feature do
     @order7 = @beard.invoice_items.create!(quantity: 1, unit_price: 5099, status: "Packaged", invoice_id: @invoice4.id)
   end
 
-  it 'shows all invoices that a particular merchant appears on' do
+  it 'shows all invoices that a particular merchant appears on', :vcr do
 
     visit "/merchants/#{@billman.id}/invoices"
 
@@ -41,7 +41,7 @@ RSpec.describe 'Merchant invoices index', type: :feature do
     expect(page).to have_content(@invoice3.id)
   end
 
-  it 'has the invoice ids as links to that invoices show page' do
+  it 'has the invoice ids as links to that invoices show page', :vcr do
     visit "/merchants/#{@billman.id}/invoices"
 
     click_link("#{@invoice1.id}")

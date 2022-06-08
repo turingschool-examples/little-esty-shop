@@ -8,7 +8,7 @@ RSpec.describe 'Admin Invoice Index Page' do
   @invoice_3 = @customer_1.invoices.create!(status: "completed")
   end
 
-  it "lists all invoice ID's and links to their show page" do
+  it "lists all invoice ID's and links to their show page", :vcr do
     visit admin_invoices_path
     expect(page).to have_content("Invoice ID's:")
     expect(page).to have_content(@invoice_1.id)

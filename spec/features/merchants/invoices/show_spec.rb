@@ -32,7 +32,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     @order7 = @beard.invoice_items.create!(quantity: 1, unit_price: 5099, status: "Packaged", invoice_id: @invoice4.id)
   end
 
-  it 'displays all the information pertaining to an invoice' do
+  it 'displays all the information pertaining to an invoice', :vcr do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
 
     expect(page).to have_content(@invoice1.id)
@@ -50,7 +50,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     end
   end
 
-  it 'lists all the items on the invoice' do
+  it 'lists all the items on the invoice', :vcr do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
 
     expect(page).to have_content(@bracelet.name)
@@ -72,7 +72,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     end
   end
 
-  it 'lists all the items on the invoice from just the designated merchant' do
+  it 'lists all the items on the invoice from just the designated merchant', :vcr do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice3.id}"
 
     expect(page).to have_content(@necklace.name)
@@ -89,14 +89,14 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     end
   end
 
-  it 'can list total revenue for this merchant generated from the invoice' do
+  it 'can list total revenue for this merchant generated from the invoice', :vcr do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice3.id}"
     expect(page).to have_content("Total Revenue: 30.45")
 
     expect(page).to_not have_content("Total Revenue: 168.42")
   end
 
-  it 'has a drop down box for invoice item status that contains the current status' do
+  it 'has a drop down box for invoice item status that contains the current status', :vcr do
     visit "/merchants/#{@parker.id}/invoices/#{@invoice5.id}"
 
     expect(page).to have_select(:status, :with_options => ["Pending", "Packaged", "Shipped"])
@@ -105,7 +105,7 @@ RSpec.describe 'Merchant invoices show page', type: :feature do
     expect(page.has_select?(:status, selected: "Pending")).to eq(false)
   end
 
-  it 'can update the items status to selected status when entered' do
+  it 'can update the items status to selected status when entered', :vcr do
     visit "/merchants/#{@billman.id}/invoices/#{@invoice1.id}"
 
     within "#invoiceItem-#{@order1.id}" do
