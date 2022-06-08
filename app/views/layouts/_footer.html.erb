@@ -7,12 +7,12 @@
 <% end %>
 
 
-<% if @repository.present? %>
-  <% if @repository.is_a?(Repository) %>
+<% if @contributors.present? %>
+  <% if @contributors.is_a?(Contributor) %>
     <% @contributors.each do |contributor| %>
-      <%= contributor.login %>
+      <strong>Contributors: </strong><%= contributor.login %>
     <% end %>
   <% else %>
-    <p><%= @repository[:message] %></p>
+    <p><%= @contributors[:message] %></p>
   <% end %>
 <% end %>

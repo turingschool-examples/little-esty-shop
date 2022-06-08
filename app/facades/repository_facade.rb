@@ -14,6 +14,11 @@ class RepositoryFacade
 
   def self.create_contributors
     json = GithubService.get_contributor_data
+    json.is_a?(Array) ? create_new_contributor : json
+  end
+
+  def self.create_new_contributor
+    json = GithubService.get_contributor_data
     current_contributors = json.map do |info|
       Contributor.new(info) unless (['BrianZanti', 'timomitchel', 'scottalexandra', 'jamisonordway']).include?(info[:login])
     end
