@@ -13,6 +13,19 @@ class RepositoryFacade
     Repository.new(json)
   end
 
+  def self.create_contributors
+    json = GithubService.get_contributor_data
+    json.is_a?(Array) ? create_new_contributor : json
+  end
+
+  def self.create_new_contributor
+    json = GithubService.get_contributor_data
+    current_contributors = json.map do |info|
+      Contributor.new(info) unless (['BrianZanti', 'timomitchel', 'scottalexandra', 'jamisonordway']).include?(info[:login])
+    end
+    current_contributors.compact
+  end
+
   def self.create_pulls_or_error
     json = GithubService.get_pull_data
     json.is_a?(Array) ? create_pull_requests : json # ternary operator

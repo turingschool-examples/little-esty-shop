@@ -6,6 +6,14 @@
   <% end %>
 <% end %>
 
+<% if @contributors.present? %>
+  <% if @contributors.is_a?(Contributor) %>
+    <% @contributors.each do |contributor| %>
+      <strong>Contributors: </strong><%= contributor.login %>
+    <% end %>
+  <% else %>
+    <p><%= @contributors[:message] %></p>
+
 <% if @pulls.present? %>
   <% if @pulls.is_a?(PullRequest) %>
     <p><b>Closed Pulls:</b> <%= @pulls.count %></p>
