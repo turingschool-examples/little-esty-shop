@@ -29,3 +29,4 @@
 # Ignore simplecov coverage files
 /coverage/*
 /coverage/index.html
+/.DS_Store
