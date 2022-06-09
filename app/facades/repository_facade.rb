@@ -10,9 +10,10 @@ class RepositoryFacade
   end
 
   def self.contributor_or_error # this is the ternary operator - one liner for a condition
-    # json = service.contributor
-    # json[:message].nil? ? create_contributors : json # if json message is nil we're going to return the instance of the repo, otherwise we are  going to return the error message(json) - will call this in the view this whole thing is a conditional for the rate limit
-    create_contributors
+    json = service.contributor
+    if !json[0].nil? || json[:message].nil?
+      create_contributors
+    end
   end
 
   def self.create_contributors
@@ -26,7 +27,10 @@ class RepositoryFacade
 
   def self.merged_or_error
     json = service.merge
-    json[:message].nil? ? create_merges : json
+    # json[:message].nil? ? create_merges : json
+    if !json[0].nil? || json[:message].nil?
+      create_merges
+    end
   end
 
   def self.create_merges
@@ -53,7 +57,10 @@ class RepositoryFacade
 
   def self.commit_or_error
     json = service.commit('sage-skaff')
-    json[:message].nil? ? create_commits : json
+    # json[:message].nil? ? create_commits : json
+    if !json[0].nil? || json[:message].nil?
+      create_commits
+    end
   end
 
   def self.service
