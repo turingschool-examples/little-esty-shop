@@ -1,4 +1,4 @@
-# class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::Base
 #   before_action :repo_info, only: %i[index show new edit]
 #   # before_action :contributor_info, only: %i[index show new edit]
 #   # before_action :merge_info, only: %i[index show new edit]
@@ -19,4 +19,4 @@
 #
 #   def commit_info
 #   end
-# end
+end
