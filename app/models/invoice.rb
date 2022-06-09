@@ -4,6 +4,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
+  has_many :bulk_discounts, through: :merchants
 
   validates :status, presence: true
 
@@ -23,7 +24,7 @@ class Invoice < ApplicationRecord
     .distinct
     .order(:created_at)
   end
-  
+
   def self.invoices_with_merchant_items(merchant)
     merchant.invoices.distinct(:id)
   end

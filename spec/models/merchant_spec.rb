@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Merchant do
   describe 'relationships' do
+    it { should have_many(:bulk_discounts) }
     it { should have_many(:items) }
     it { should have_many(:invoice_items).through(:items) }
     it { should have_many(:invoices).through(:invoice_items) }
@@ -31,7 +32,6 @@ RSpec.describe Merchant do
   let!(:item9) { merchant3.items.create!(name: "Surf Board", description: "Shred the waves!!", unit_price: 1040) }
   let!(:item10) { merchant4.items.create!(name: "Shoes", description: "Bye split toes!", unit_price: 50) }
   let!(:item11) { merchant6.items.create!(name: "Shampoo", description: "Hair smells good!!", unit_price: 7) }
-
 
   let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 130, status: "shipped") }
   let!(:invoice_item2) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 10, unit_price: 130, status: "pending") }
