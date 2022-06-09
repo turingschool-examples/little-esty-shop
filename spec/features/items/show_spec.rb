@@ -12,7 +12,7 @@ RSpec.describe "Merchant Items Show Page" do
     @item_3 = @merchant_2.items.create!(name: "Ea Voluptatum", description: "Sunt officia", unit_price: 68723)
   end
 
-  it "all of an item's attributes, including name, description and selling price", :vcr do
+  it "all of an item's attributes, including name, description and selling price" do
 
     visit merchant_item_path(@merchant_1, @item_1)
 
@@ -24,7 +24,7 @@ RSpec.describe "Merchant Items Show Page" do
     expect(page).to_not have_content("Ea Voluptatum")
   end
 
-  it "has a link to update item info", :vcr do
+  it "has a link to update item info" do
     visit merchant_item_path(@merchant_1, @item_1)
 
     click_link "Update Item"

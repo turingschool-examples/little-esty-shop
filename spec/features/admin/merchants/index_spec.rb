@@ -89,7 +89,7 @@ RSpec.describe "Admin Merchants Index Page" do
     visit admin_merchants_path
   end
 
-  it "displays the name of each merchant in the system", :vcr do
+  it "displays the name of each merchant in the system" do
     expect(page).to have_content("Welcome to the Admin Dashboard")
 
     within ".disabled-merchants" do
@@ -107,7 +107,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "has a link to each Merchant's Admin Show page", :vcr do
+  it "has a link to each Merchant's Admin Show page" do
     visit admin_merchants_path
 
     within "#enabled-merchants-#{merchant4.id}" do
@@ -129,7 +129,7 @@ RSpec.describe "Admin Merchants Index Page" do
     expect(current_path).to eq(admin_merchant_path(merchant1))
   end
 
-  it "has a button to enable/disable a merchant", :vcr do
+  it "has a button to enable/disable a merchant" do
     visit admin_merchants_path
 
     within "#enabled-merchants-#{merchant4.id}" do
@@ -161,7 +161,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "can fill out a form to create a new merchant and display the default status of disabled", :vcr do
+  it "can fill out a form to create a new merchant and display the default status of disabled" do
     expect(page).to_not have_content('Backcountry')
 
     click_link "Create a New Merchant"
@@ -178,11 +178,11 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "displays a link to create a new merchant", :vcr do
+  it "displays a link to create a new merchant" do
     expect(page).to have_link('New Merchant')
   end
 
-  it "lists top 5 merchants by revenue", :vcr do
+  it "lists top 5 merchants by revenue" do
     within "#top-five-merchants" do
       expect(page).to have_content("REI Revenue: $409,100.00")
       expect(page).to have_content("Target Revenue: $208.00")
@@ -193,7 +193,7 @@ RSpec.describe "Admin Merchants Index Page" do
     end
   end
 
-  it "lists the top selling date for each of the top 5 merchants", :vcr do
+  it "lists the top selling date for each of the top 5 merchants" do
     within "#top-five-merchants" do
       expect(page).to have_content("Top selling date for REI was Wednesday, Mar 21")
       expect(page).to have_content("Top selling date for Target was Thursday, Mar 22")

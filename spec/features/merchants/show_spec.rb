@@ -84,7 +84,7 @@ RSpec.describe 'merchant dashboard show' do
     expect(page).to have_content("Schroeder-Jerde")
   end
 
-  it "displays links to a merchant's items and invoices index pages", :vcr do
+  it "displays links to a merchant's items and invoices index pages" do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     click_link("Items Index")
@@ -97,7 +97,7 @@ RSpec.describe 'merchant dashboard show' do
   end
 
 
-  it "displays the top 5 favorite customers in descending order of successful transactions", :vcr do
+  it "displays the top 5 favorite customers in descending order of successful transactions" do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Top 5 Favorite Customers:")
@@ -116,7 +116,7 @@ RSpec.describe 'merchant dashboard show' do
     end
   end
 
-  it "displays all merchant items ready to ship", :vcr do
+  it "displays all merchant items ready to ship" do
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content("Items Ready to Ship:")

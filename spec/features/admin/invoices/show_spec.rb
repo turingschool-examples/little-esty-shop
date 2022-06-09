@@ -18,7 +18,7 @@ RSpec.describe "Admin Invoice Show Page" do
   let!(:invoice_item2) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 9, unit_price: 23324, status: "pending") }
   let!(:invoice_item3) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 8, unit_price: 34873, status: "packaged") }
 
-  it "displays information related to the invoice", :vcr do
+  it "displays information related to the invoice" do
     visit admin_invoice_path(invoice1)
 
     expect(page).to have_content("Invoice ##{invoice1.id}")
@@ -49,13 +49,13 @@ RSpec.describe "Admin Invoice Show Page" do
     end
   end
 
-  it "displays the total revenue of sold items", :vcr do
+  it "displays the total revenue of sold items" do
     visit admin_invoice_path(invoice1)
 
     expect(page).to have_content("Total Revenue: $278,091.00")
   end
 
-  it "can update and Invoice Item's status via a selector", :vcr do
+  it "can update and Invoice Item's status via a selector" do
     visit admin_invoice_path(invoice1)
 
     within "##{invoice_item1.id}" do

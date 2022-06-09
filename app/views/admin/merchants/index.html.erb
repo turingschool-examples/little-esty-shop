@@ -34,7 +34,7 @@
       <ol>
         <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
         <h5><li> <%= "#{merchant.name}"%> Revenue: <%= number_to_currency(merchant.revenue)%> </li></h5><br>
-        <p> <i> Top selling date for <%= merchant.name %> was <%= merchant.best_day.strftime("%A, %b %d") %> </i> </p>
+        <p> <i> Top selling date for <%= merchant.name %> was <%= merchant.best_day.strftime("%A, %b %d") %> </i> </p> 
         <% end %>
       </ol>
     </div>

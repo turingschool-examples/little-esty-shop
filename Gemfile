@@ -50,10 +50,10 @@ group :development, :test do
   gem 'orderly'
   gem 'pry'
   gem 'simplecov'
-  gem 'json'
-  gem 'httparty'
-  gem 'vcr'
-  gem 'webmock'
+  # gem 'json'
+  # gem 'httparty'
+  # gem 'vcr'
+  # gem 'webmock'
 end
 
 group :development do
