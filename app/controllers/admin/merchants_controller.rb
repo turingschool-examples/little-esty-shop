@@ -3,7 +3,7 @@ class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
     @enabled_merchants = Merchant.enabled
-    @disabled_merchants = Merchant.disabled
+    @disabled_merchants = Merchant.disabled # call these in the view
   end
 
   def show
@@ -20,7 +20,7 @@ class Admin::MerchantsController < ApplicationController
       merchant.update(merchant_status_params)
       redirect_to admin_merchants_path
     else
-      if merchant.update(merchant_name_params)
+      if merchant.update(merchant_name_params) # make a merchant status controller for update to avoid nesting conditionals
         flash[:notice] = "You have successfully updated this Merchant!"
         redirect_to admin_merchant_path(merchant)
       else

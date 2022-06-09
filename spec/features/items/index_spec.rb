@@ -51,20 +51,20 @@ RSpec.describe "Merchant Items Index Page" do
     visit merchant_items_path(merchant_1)
   end
 
-  it "displays only a specified merchant's items", :vcr do
+  it "displays only a specified merchant's items" do
 
     expect(page).to have_content("Boots")
     expect(page).to have_content("Tent")
     expect(page).to_not have_content("Conditioner")
   end
 
-  it "has a link to create a new item", :vcr do
+  it "has a link to create a new item" do
     click_link "Create A New Item"
 
     expect(current_path).to eq(new_merchant_item_path(merchant_1))
   end
 
-  it "can click a button to disable or enable a specific item and it's status changes", :vcr do
+  it "can click a button to disable or enable a specific item and it's status changes" do
     within ".enabled-items" do
       expect(page).to_not have_content("Boots")
     end
@@ -90,7 +90,7 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the total revenue next to the item", :vcr do
+  it "displays the total revenue next to the item" do
     within(".top-5") do
       expect(page).to have_content("Total Revenue: $1,950.00")
       expect(page).to have_content("Total Revenue: $1,760.00")
@@ -100,7 +100,7 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the top 5 most popular items ordered by total revenue", :vcr do
+  it "displays the top 5 most popular items ordered by total revenue" do
     within(".top-5") do
       expect("Boots").to appear_before("Tent")
       expect("Tent").to appear_before("Fanny Pack")
@@ -109,7 +109,7 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 
-  it "displays the best selling day for each of the top 5 most popular items", :vcr do
+  it "displays the best selling day for each of the top 5 most popular items" do
     within(".top-5") do
       expect(page).to have_content("Top selling date for Boots was Fri, 23 Mar 2012")
       expect(page).to have_content("Top selling date for Tent was Sat, 24 Mar 2012")

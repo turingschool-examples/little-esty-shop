@@ -11,7 +11,7 @@ RSpec.describe "Merchant Items Index Page" do
   let!(:invoice5) { customer2.invoices.create!(status: 2, created_at: '2012-03-26 14:53:59') }
   let!(:invoice6) { customer2.invoices.create!(status: 2, created_at: '2012-03-27 14:53:59') }
 
-    it 'displays all invoices', :vcr do
+    it 'displays all invoices' do
       visit admin_invoices_path
       expect(page).to have_content("Invoice: #{invoice1.id}")
       expect(page).to have_link("#{invoice1.id}")

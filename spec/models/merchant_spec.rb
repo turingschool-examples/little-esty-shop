@@ -17,20 +17,20 @@ RSpec.describe Merchant do
   let!(:merchant2) { Merchant.create!(name: "Target") }
   let!(:merchant3) { Merchant.create!(name: "Walgreens") }
   let!(:merchant4) { Merchant.create!(name: "Hot Topic", status: 1) }
-  let!(:merchant5) {Merchant.create!(name: "Kmart")}
-  let!(:merchant6) {Merchant.create!(name: "Macys")}
+  let!(:merchant5) { Merchant.create!(name: "Kmart") }
+  let!(:merchant6) { Merchant.create!(name: "Macys") }
 
-  let!(:item1) {merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135)}
-  let!(:item2) {merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99)}
-  let!(:item3) {merchant1.items.create!(name: "Backpack", description: "Can carry all your hiking snacks", unit_price: 99)}
-  let!(:item4) {merchant1.items.create!(name: "Socks", description: "Oooooh, wool", unit_price: 15)}
-  let!(:item5) {merchant1.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12)}
-  let!(:item6) {merchant1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25)}
-  let!(:item7) {merchant2.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199)}
-  let!(:item8) {merchant2.items.create!(name: "Conditioner", description: "Bye split ends!", unit_price: 7)}
-  let!(:item9) {merchant3.items.create!(name: "Surf Board", description: "Shred the waves!!", unit_price: 1040)}
-  let!(:item10) {merchant4.items.create!(name: "Shoes", description: "Bye split toes!", unit_price: 50)}
-  let!(:item11) {merchant6.items.create!(name: "Shampoo", description: "Hair smells good!!", unit_price: 7)}
+  let!(:item1) { merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135) }
+  let!(:item2) { merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99) }
+  let!(:item3) { merchant1.items.create!(name: "Backpack", description: "Can carry all your hiking snacks", unit_price: 99) }
+  let!(:item4) { merchant1.items.create!(name: "Socks", description: "Oooooh, wool", unit_price: 15) }
+  let!(:item5) { merchant1.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12) }
+  let!(:item6) { merchant1.items.create!(name: "Fanny Pack", description: "Forget what the haters say, they're stylish", unit_price: 25) }
+  let!(:item7) { merchant2.items.create!(name: "Mountain Bike", description: "Shred the gnar!!", unit_price: 1199) }
+  let!(:item8) { merchant2.items.create!(name: "Conditioner", description: "Bye split ends!", unit_price: 7) }
+  let!(:item9) { merchant3.items.create!(name: "Surf Board", description: "Shred the waves!!", unit_price: 1040) }
+  let!(:item10) { merchant4.items.create!(name: "Shoes", description: "Bye split toes!", unit_price: 50) }
+  let!(:item11) { merchant6.items.create!(name: "Shampoo", description: "Hair smells good!!", unit_price: 7) }
 
 
   let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 130, status: "shipped") }

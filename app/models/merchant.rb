@@ -10,10 +10,10 @@ class Merchant < ApplicationRecord
   enum status: { 'disabled' => 0, 'enabled' => 1 }
 
   def items_ready_to_ship
-    Merchant.joins(invoice_items: [invoice: :transactions]).
-    where(merchants: {id: self.id}, invoice_items: {status: [0,2]}, invoices: {status: [1,2]}, transactions: {result: true}).
-    select("items.name, invoices.id, invoices.created_at").
-    order("invoices.created_at ASC")
+    Merchant.joins(invoice_items: [invoice: :transactions])
+    .where(merchants: {id: self.id}, invoice_items: {status: [0,2]}, invoices: {status: [1,2]}, transactions: {result: true})
+    .select("items.name, invoices.id, invoices.created_at")
+    .order("invoices.created_at ASC")
   end
 
   def top_five_items
@@ -44,11 +44,11 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_five_merchants_by_revenue
-    joins(:invoices, [:transactions, :invoice_items]).
-    select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue').
-    group(:id).
-    order(revenue: :desc).
-    limit(5)
+    joins(:invoices, [:transactions, :invoice_items])
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    .group(:id)
+    .order(revenue: :desc)
+    .limit(5)
   end
 
   def best_day

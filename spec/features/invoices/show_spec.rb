@@ -78,7 +78,7 @@ RSpec.describe "Merchant Invoices Show Page" do
   let!(:transaction17) { Transaction.create!(invoice_id: invoice17.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
   let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
 
-  it "displays an invoice's attributes", :vcr do
+  it "displays an invoice's attributes" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Invoice ##{invoice1.id}")
@@ -94,7 +94,7 @@ RSpec.describe "Merchant Invoices Show Page" do
     end
   end
 
-  it "displays a list of items on the invoice and their attributes", :vcr do
+  it "displays a list of items on the invoice and their attributes" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Invoice Items")
@@ -115,13 +115,13 @@ RSpec.describe "Merchant Invoices Show Page" do
     end
   end
 
-  it "displays the total reveue of items sold on the invoice", :vcr do
+  it "displays the total reveue of items sold on the invoice" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Total Revenue: $278,091.00")
   end
 
-  it "can update and Invoice Item's status via a selector", :vcr do
+  it "can update and Invoice Item's status via a selector" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     within "##{invoice_item1.id}" do

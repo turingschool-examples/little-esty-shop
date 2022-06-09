@@ -77,7 +77,7 @@ RSpec.describe "Merchant Invoices Index Page" do
   let!(:transaction17) { Transaction.create!(invoice_id: invoice17.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
   let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
 
-  it "displays invoices with a respective merchant's items, and a link to a show page", :vcr do
+  it "displays invoices with a respective merchant's items, and a link to a show page" do
     visit merchant_invoices_path(merchant1.id)
     # item1, item2
     # invoices 1-5 are what I want to see

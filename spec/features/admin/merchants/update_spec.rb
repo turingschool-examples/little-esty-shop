@@ -8,14 +8,14 @@ before do
 end
 
   describe 'the merchant update' do
-    it "shows the merchant edit form has attributes", :vcr do
+    it "shows the merchant edit form has attributes" do
 
       expect(find('form')).to have_content('Name')
     end
   end
 
   context 'given valid data' do
-    it "can submit an edit form and update the merchant", :vcr do
+    it "can submit an edit form and update the merchant" do
       fill_in 'merchant[name]', with: 'Black Diamond'
       click_on "Update Merchant"
 

@@ -76,11 +76,11 @@ describe "Admin Dashboad" do
     visit admin_index_path
   end
 
-  it "displays a header indicating that the user is on the admin dashboard", :vcr do
+  it "displays a header indicating that the user is on the admin dashboard" do
     expect(page).to have_content("Welcome to the Admin Dashboard")
   end
 
-  it "displays links to the admin merchants index and admin invoices index", :vcr do
+  it "displays links to the admin merchants index and admin invoices index" do
     click_link("Merchants Index")
     expect(current_path).to eq(admin_merchants_path)
 
@@ -89,7 +89,7 @@ describe "Admin Dashboad" do
     expect(current_path).to eq(admin_invoices_path)
   end
 
-  it "displays incomplete invoices and links to that invoices admin show page", :vcr do
+  it "displays incomplete invoices and links to that invoices admin show page" do
     within ".incomplete-invoices" do
       expect(page).to have_link("#{invoice1.id}")
       expect(page).to have_link("#{invoice2.id}")
@@ -101,7 +101,7 @@ describe "Admin Dashboad" do
     end
   end
 
-  it "orders incomplete invoices by oldest to newest", :vcr do
+  it "orders incomplete invoices by oldest to newest" do
     within ".incomplete-invoices" do
       expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
       expect("#{invoice2.id}").to appear_before("#{invoice4.id}")
@@ -110,7 +110,7 @@ describe "Admin Dashboad" do
     end
   end
 
-  it "lists the names of the top 5 customers with the largest number of successful transactions", :vcr do
+  it "lists the names of the top 5 customers with the largest number of successful transactions" do
     within ".top-five-customers" do
       expect("Leanne Braun").to appear_before("Mariah Toy")
       expect("Mariah Toy").to appear_before("Carl Junior")
