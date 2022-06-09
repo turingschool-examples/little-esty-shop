@@ -13,21 +13,20 @@
       <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
       <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
       <%= link_to "View All My Discounts", "/merchants/#{@merchant.id}/bulk_discounts" %>
+
     </ul>
   </div>
 
 </div>
 
-<div class="page-defaults" id="centerSide">
-  <p><%= @item.name %></p>
-</div>
-
-<p>Description: <%= @item.description %></p>
-<p>Current Price: <%= number_to_currency(@item.unit_price / 100.0) %></p>
-<p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
-
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
+<div class="page-defaults" id="splitSides">
+  <div class="page-defaults" id="leftSide2">
+  <% @merchant.bulk_discounts.each do |discount| %>
+    <div id="bulk-discount-<%= discount.id %>">
+      <%= link_to "ID: #{discount.id}", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}" %>
+      <p><strong>Threshold:</strong> <%= discount.threshold %></p>
+      <p><strong>Discount Percentage:</strong> <%= discount.discount_percentage %></p>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
