@@ -1,14 +1,14 @@
-<% if @repo.present? %>
-  <% if @repo.is_a?(Repository) && @merge.is_a?(Integer) && @commit.is_a?(Hash) && @contributor.is_a?(Array) %>
-    <p><strong><%= @repo.name %></strong>
-  | <strong>pull requests:</strong> <%= @merge %>
-      | <strong>made with love by:</strong>
-      <% @contributor.each do |con| %>
-        | <%= con.login  %>
-      contributed <%= @commit[con.login.to_s].count %> commits
-      <% end %>|
-    </p>
-    <% else %>
-    <p><%= @repo[:message] %></p>
-    <% end %>
-<% end # this accounts for the error message%>
+<!-- # <% if @repo.present? %>
+#   <% if @repo.is_a?(Repository) && @merge.is_a?(Integer) && @commit.is_a?(Hash) && @contributor.is_a?(Array) %>
+#     <p><strong><%= @repo.name %></strong>
+#   | <strong>pull requests:</strong> <%= @merge %>
+#       | <strong>made with love by:</strong>
+#       <% @contributor.each do |con| %>
+#         | <%= con.login  %>
+#       contributed <%= @commit[con.login.to_s].count %> commits
+#       <% end %>|
+#     </p>
+#     <% else %>
+#     <p><%= @repo[:message] %></p>
+#     <% end %>
+# <% end # this accounts for the error message%> -->
