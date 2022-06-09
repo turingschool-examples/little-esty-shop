@@ -1,8 +1,8 @@
-class CreateBulkDiscounts < ActiveRecord::Migration[5.2]
+class CreateDiscounts < ActiveRecord::Migration[5.2]
   def change
-    create_table :bulk_discounts do |t|
+    create_table :discounts do |t|
       t.decimal :discount
-      t.bigint :quantity
+      t.bigint :quantity_threshold
       t.references :merchant, foreign_key: true
 
       t.timestamps

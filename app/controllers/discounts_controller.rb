@@ -1,0 +1,3 @@
+class Discounts < ApplicationController
+
+end

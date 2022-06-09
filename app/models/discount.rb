@@ -1,4 +1,4 @@
-class BulkDiscount < ApplicationRecord
+class Discount < ApplicationRecord
   belongs_to :merchant
   has_many :merchants
   has_many :items, through: :merchants
@@ -7,5 +7,5 @@ class BulkDiscount < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
-  validates_presence_of :discount, :quantity
+  validates_presence_of :discount, :quantity_threshold
 end

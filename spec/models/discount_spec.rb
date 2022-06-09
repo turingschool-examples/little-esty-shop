@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BulkDiscount do
+RSpec.describe Discount do
   describe 'relationships' do
     it { should belong_to(:merchant) }
     it { should have_many(:items).through(:merchants) }
@@ -12,6 +12,6 @@ RSpec.describe BulkDiscount do
 
   describe 'validations' do
     it { should validate_presence_of(:discount) }
-    it { should validate_presence_of(:quantity) }
+    it { should validate_presence_of(:quantity_threshold) }
   end
 end

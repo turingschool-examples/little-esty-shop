@@ -1,3 +1,0 @@
-class BulkDiscounts < ApplicationController
-  
-end
