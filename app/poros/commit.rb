@@ -1,2 +1,2 @@
-class Commit
-end
+# class Commit
+# end

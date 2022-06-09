@@ -23,7 +23,7 @@ RSpec.describe 'Merchant Items Edit Page' do
   end
 
   describe 'form to edit item' do
-    it 'is filled in with existing attribute information and displays success message', :vcr do
+    it 'is filled in with existing attribute information and displays success message' do
       visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}"
 
       expect(page).to_not have_content('Bow Tie Pasta')
@@ -40,7 +40,7 @@ RSpec.describe 'Merchant Items Edit Page' do
       expect(page).to have_content('Tasty')
     end
 
-    it "returns an error if required information is missing", :vcr do
+    it "returns an error if required information is missing" do
       visit "/merchants/#{merchants[0].id}/items/#{@items[0].id}/edit"
 
       fill_in('item[name]', with: '')

@@ -42,7 +42,7 @@ RSpec.describe 'Merchants show page', type: :feature do
     # As a merchant,
     # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
     # Then I see the name of my merchant
-    it "has the merchant's name", :vcr do
+    it "has the merchant's name" do
       visit "/merchants/#{merchant1.id}/dashboard"
 
       # save_and_open_page # does not include CSS
@@ -52,7 +52,7 @@ RSpec.describe 'Merchants show page', type: :feature do
   end
 
   describe 'Dashboard Links' do
-    it 'links to merchant items and merchant invoices', :vcr do
+    it 'links to merchant items and merchant invoices' do
       visit "/merchants/#{merchant1.id}/dashboard"
       click_link 'My Items'
       expect(current_path).to eq("/merchants/#{merchant1.id}/items")
@@ -63,7 +63,7 @@ RSpec.describe 'Merchants show page', type: :feature do
       expect(current_path).to eq("/merchants/#{merchant1.id}/invoices")
     end
 
-    it "can display top 5 customers and their transaction count", :vcr do
+    it "can display top 5 customers and their transaction count" do
 
       visit "/merchants/#{merchants[0].id}/dashboard"
       tied_customers = [customers[1], customers[2], customers[3], customers[4], customers[5]]
@@ -79,7 +79,7 @@ RSpec.describe 'Merchants show page', type: :feature do
   end
 
   describe 'merchant dashboard items ready to ship' do
-    it 'has a section for items ready to ship', :vcr do
+    it 'has a section for items ready to ship' do
       visit "/merchants/#{merchants[0].id}/dashboard"
 
       expect(page).to have_content("Items Ready to Ship")
@@ -92,7 +92,7 @@ RSpec.describe 'Merchants show page', type: :feature do
   end
 
   describe 'merchant dashboard invoices sorted by least recent' do
-    it 'has a the invoices sorted by least recent', :vcr do
+    it 'has a the invoices sorted by least recent' do
       visit "/merchants/#{merchants[0].id}/dashboard"
 
       within "#leftSide2" do
