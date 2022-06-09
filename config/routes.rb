@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :merchants, only: [:show] do
     resources :items, controller: 'merchant_items'
     resources :invoices, controller: 'merchant_invoices', only: %i[index show update]
+    resources :bulk_discounts, controller: 'merchant_bulk_discounts'
   end
 
   patch '/merchants/:merchant_id/items', to: 'merchant_items#update'

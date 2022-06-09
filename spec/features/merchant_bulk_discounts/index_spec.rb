@@ -9,8 +9,8 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
      bulk_discount2 = merchant[0].bulk_discounts.create!(threshold: 15, discount_percentage: 15)
      bulk_discount3 = merchant[1].bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-     item1 =  create(:item, merchant: merchant)
-     item2 = create(:item, merchant: merchant)
+     item1 =  create(:item, merchant: merchant[0])
+     item2 = create(:item, merchant: merchant[1])
 
      customer1 =  create(:customer)
      customer2 =  create(:customer)
@@ -31,25 +31,21 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
       click_link("View All My Discounts")
     end
 
-    expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts/index")
+    expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts")
 
-    within '#leftSide2' do
-      within "#bulk-discount-#{@bulk_discount1.id}" do
+    within "#leftSide2" do
+      within "#bulk-discount-#{bulk_discount1.id}" do
         expect(page).to have_content("Threshold: #{bulk_discount1.threshold}")
-        expect(page).to have_content("Discount Percentage:#{bulk_discount1.discount_percentage}")
-        expect(page).to_not have_content("Threshold: #{bulk_discount3.threshold}")
-        expect(page).to_not have_content("Discount Percentage: #{bulk_discount3.discount_percentage}")
-        expect(page).to have_link("Id: #{bulk_discount1.id}")
+        expect(page).to have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
+        expect(page).to have_link("ID: #{bulk_discount1.id}")
       end
 
-      within "#bulk-discount-#{@bulk_discount2.id}" do
+      within "#bulk-discount-#{bulk_discount2.id}" do
         expect(page).to have_content("Threshold: #{bulk_discount2.threshold}")
         expect(page).to have_content("Discount Percentage: #{bulk_discount2.discount_percentage}")
-        expect(page).to_not have_content("Threshold: #{bulk_discount3.threshold}")
-        expect(page).to_not have_content("Discount Percentage: #{bulk_discount3.discount_percentage}")
-        expect(page).to have_link("Id: #{bulk_discount2.id}")
+        expect(page).to have_link("ID: #{bulk_discount2.id}")
 
-        click_link("Id: #{bulk_discount2.id}")
+        click_link("ID: #{bulk_discount2.id}")
       end
 
       expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount2.id}")
