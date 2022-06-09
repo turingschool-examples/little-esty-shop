@@ -14,7 +14,7 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
 
   let!(:invoice_item1) { create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011) }
   let!(:invoice_item2) { create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524) }
-  it 'lists invoice attributes', :vcr do
+  it 'lists invoice attributes' do
     visit "/admin/invoices/#{invoice1.id}"
     # expect(page).to have_content("Status: #{invoice1.status}")
     expect(page).to have_content("Invoice ##{invoice1.id}")
@@ -22,7 +22,7 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
     expect(page).to have_content("#{invoice1.customer.first_name} #{invoice1.customer.last_name}")
   end
 
-  it 'lists items on the invoice', :vcr do
+  it 'lists items on the invoice' do
     visit "/admin/invoices/#{invoice1.id}"
     within '#itemtable' do
       expect(page).to have_content('Item Name')
@@ -39,13 +39,13 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
     end
   end
 
-  it 'shows total revenue that will be generated from this invoice', :vcr do
+  it 'shows total revenue that will be generated from this invoice' do
     visit "/admin/invoices/#{invoice1.id}"
 
     expect(page).to have_content('Total Revenue: $55.35')
   end
 
-  it 'has a select field to update invoice status', :vcr do
+  it 'has a select field to update invoice status' do
     visit "/admin/invoices/#{invoice1.id}"
 
     expect(invoice1.status).to eq('in progress')

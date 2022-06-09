@@ -38,7 +38,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
 
   describe 'User Story 1 - Admin Merchants Index' do
 
-    it "can display all the merchants", :vcr do
+    it "can display all the merchants" do
       visit '/admin/merchants'
 
       expect(page).to have_content(merchants[0].name)
@@ -47,7 +47,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe "Admin Merchant Enable/Disable" do
-    it "has a button to disable or enable each merchant and updates status", :vcr do
+    it "has a button to disable or enable each merchant and updates status" do
       visit '/admin/merchants'
 
       expect(merchants[0].status).to eq("enabled")
@@ -80,7 +80,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
       end
     end
 
-    it 'is grouped into sections by status', :vcr do
+    it 'is grouped into sections by status' do
       visit '/admin/merchants'
       expect(page).to have_content("Enabled Merchants")
       expect(page).to have_content("Disabled Merchants")
@@ -102,7 +102,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe 'admin merchant create' do
-    it 'has a link to create a new merchant', :vcr do
+    it 'has a link to create a new merchant' do
       visit "/admin/merchants"
 
       expect(page).to have_content("Create New Merchant")
@@ -112,7 +112,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe 'top five merchants by revenue' do
-    it 'lists the names of the top five merchants and their revenue', :vcr do
+    it 'lists the names of the top five merchants and their revenue' do
       visit '/admin/merchants'
 
       within "#topMerchant-0" do
@@ -145,7 +145,7 @@ RSpec.describe "Admin Merchants Index Page ", type: :feature do
   end
 
   describe "Admin Merchants: Top Merchant's Best Day" do
-    it "can calculate the date with the most sales", :vcr do
+    it "can calculate the date with the most sales" do
       visit '/admin/merchants'
 
       within '#topMerchant-0' do
