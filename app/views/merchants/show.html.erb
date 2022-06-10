@@ -2,7 +2,7 @@
 <h3>Items Ready To Ship</h3>
 <% @merchant.items_ready_to_ship.each_with_index do |invoice_item, index| %>
     <div id="item-<%= index %>">
-        <%= invoice_item.item.name %> 
+        <%= invoice_item.item.name %>
         &nbsp
         <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %>
         - <%= invoice_item.created_at.strftime(" %A, %B %e, %Y") %>
@@ -15,3 +15,4 @@
     </div>
 <% end %>
 
+<%= link_to "View All Discounts", "/merchants/#{@merchant.id}/bulk_discounts" %>
