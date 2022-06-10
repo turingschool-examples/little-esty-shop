@@ -11,7 +11,8 @@ RSpec.describe Discount do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:discount) }
+    it { should validate_presence_of(:percentage) }
     it { should validate_presence_of(:quantity_threshold) }
+    it { should validate_numericality_of(:percentage) }
   end
 end

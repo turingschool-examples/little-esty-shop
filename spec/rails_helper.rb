@@ -71,8 +71,15 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+end
+
 # VCR.configure do |config|
 #   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
 #   config.hook_into :webmock
+  # config.filter_sensitive_data('<api_key>') { ENV['parks_api_key'] }
 #   config.configure_rspec_metadata!
 # end

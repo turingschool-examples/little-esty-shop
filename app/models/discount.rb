@@ -7,5 +7,6 @@ class Discount < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
-  validates_presence_of :discount, :quantity_threshold
+  validates_presence_of :percentage, :quantity_threshold
+  validates_numericality_of :percentage
 end
