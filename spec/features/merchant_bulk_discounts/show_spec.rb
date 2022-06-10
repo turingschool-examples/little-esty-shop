@@ -24,14 +24,14 @@ RSpec.describe "Merchant Bulk Discounts Show Page", type: :feature do
       invoice_item1 =  create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011)
       invoice_item2 =  create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524)
 
-      visit "/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount2.id}"
+      visit "/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount1.id}"
 
-      expect(page).to have_content(bulk_discount1.threshold)
-      expect(page).to have_content(bulk_discount1.discount_percentage)
-      expect(page).to_not have_content(bulk_discount2.threshold)
-      expect(page).to_not have_content(bulk_discount2.discount_percentage)
-      expect(page).to_not have_content(bulk_discount3.threshold)
-      expect(page).to_not have_content(bulk_discount3.discount_percentage)
+      expect(page).to have_content("Threshold: #{bulk_discount1.threshold}")
+      expect(page).to have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
+      expect(page).to_not have_content("Threshold: #{bulk_discount2.threshold}")
+      expect(page).to_not have_content("Discount Percentage: #{bulk_discount2.discount_percentage}")
+      expect(page).to_not have_content("Threshold: #{bulk_discount3.threshold}")
+      expect(page).to_not have_content("Discount Percentage: #{bulk_discount3.discount_percentage}")
     end
   end
 end
