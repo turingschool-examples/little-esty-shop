@@ -1,0 +1,27 @@
+<div class="page-defaults" id="shopId" >
+  <h1><span>Little Esty Shop</span></h1>
+</div>
+
+<div class="page-defaults" id="splitSides">
+
+  <div class="page-defaults" id="leftSide">
+  </div>
+
+  <div class="page-defaults" id="rightSide">
+    <ul>
+      <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+      <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+      <%= link_to "View All My Discounts", "/merchants/#{@merchant.id}/bulk_discounts" %>
+
+    </ul>
+  </div>
+
+</div>
+
+<div class="page-defaults" id="splitSides">
+  <div class="page-defaults" id="leftSide2">
+    <strong>Threshold:</strong> <%= @discount.threshold %>
+    <p><strong>Discount Percentage:</strong> <%= @discount.discount_percentage %></p>
+    </div>
+  </div>
+</div>
