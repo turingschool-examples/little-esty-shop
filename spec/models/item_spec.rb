@@ -4,6 +4,8 @@ RSpec.describe Item do
   describe 'associations' do
     it { should have_many :invoice_items}
     it { should have_many(:invoices).through(:invoice_items)}
+    it { should have_many(:bulk_discounts).through(:merchant)}
+    it {should belong_to (:merchant)}
   end
 
   describe 'validations' do
