@@ -26,7 +26,7 @@ RSpec.describe "merchant's invoice show page", type: :feature do
 
     expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
     expect(page).to have_content("Status: in progress")
-    expect(page).to have_content("#{@invoice_1.created_at.strftime( "%A, %b%e, %Y")}")
+    expect(page).to have_content("#{@invoice_1.created_at.strftime( "%A, %b %e, %Y")}")
     expect(page).to have_content("Debbie Twolegs")
 
     expect(page).to_not have_content("#{@invoice_2.id}")
