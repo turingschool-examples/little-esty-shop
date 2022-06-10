@@ -1,0 +1,5 @@
+<%= @merchant.name %>'s Bulk Discounts
+<% @bulk_discounts.each do |discount| %>
+<%=link_to discount.name, merchant_discount_path(@merchant, discount) %>
+Get <%= discount.percentage %>% off when you buy<%= discount.threshold %>
+<% end %>

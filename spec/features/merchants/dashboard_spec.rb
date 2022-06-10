@@ -31,7 +31,7 @@ RSpec.describe "merchant dashboard", type: :feature do
 
   it "has links to merchant items index and merchant invoices index" do
     visit "/merchants/#{@merch_1.id}/dashboard"
-    
+
     expect(page).to have_link("My Items", href: "/merchants/#{@merch_1.id}/items")
     expect(page).to have_link("My Invoices", href: "/merchants/#{@merch_1.id}/invoices")
     expect(page).to_not have_link("My Items", href: "/merchants/#{@merch_2.id}/items")
@@ -46,11 +46,11 @@ RSpec.describe "merchant dashboard", type: :feature do
     ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
     ii_6 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_2.unit_price, status: 1)
     ii_7 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_4.unit_price, status: 1)
-  
+
     visit "/merchants/#{@merch_1.id}/dashboard"
 
     expect(page).to have_content("Items Ready To Ship")
-    
+
     within("#item-0") do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_1.id)
@@ -97,7 +97,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_1.unit_price, status: 1, created_at: "2022-04-18 20:07:10")
     ii_6 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_4.id, quantity: 1, unit_price: @item_2.unit_price, status: 1, created_at: "2022-05-30 15:07:10")
     ii_7 = InvoiceItem.create!(item_id: @item_4.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_4.unit_price, status: 1, created_at: "2022-02-30 22:07:10")
- 
+
     visit "/merchants/#{@merch_1.id}/dashboard"
 
     within("#item-0") do
@@ -134,14 +134,14 @@ RSpec.describe "merchant dashboard", type: :feature do
     item_6 = @merch_1.items.create!(name: "String of Numbers", description: "54921752964273", unit_price: 100)
     item_7 = @merch_2.items.create!(name: "Shirt", description: "shirt for people", unit_price: 50000)
 
-    
+
     cust_3 = Customer.create!(first_name: "Brian", last_name: "Twinlegs")
     cust_4 = Customer.create!(first_name: "Jared", last_name: "Goffleg")
     cust_5 = Customer.create!(first_name: "Pistol", last_name: "Pete")
     cust_6 = Customer.create!(first_name: "Bronson", last_name: "Shmonson")
     cust_7 = Customer.create!(first_name: "Anten", last_name: "Branden")
     cust_8 = Customer.create!(first_name: "Anthony", last_name: "Smith")
-    
+
     invoice_7 = @cust_2.invoices.create!(status: 1)
     invoice_8 = cust_3.invoices.create!(status: 1)
     invoice_9 = cust_3.invoices.create!(status: 1)
@@ -153,7 +153,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     invoice_15 = cust_7.invoices.create!(status: 2)
     invoice_16 = cust_7.invoices.create!(status: 2)
     invoice_17 = cust_8.invoices.create!(status: 1)
-    
+
     ii_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     ii_2 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     ii_3 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_3.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -164,7 +164,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     ii_8 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: invoice_8.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     ii_9 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: invoice_9.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     ii_10 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: invoice_10.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
-    
+
     ii_11 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: invoice_11.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     ii_12 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: invoice_12.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     ii_13 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: invoice_13.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
@@ -176,7 +176,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     ii_19 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_15.id, quantity: 700, unit_price: item_5.unit_price, status: 2)
     ii_20 = InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_16.id, quantity: 700, unit_price: item_7.unit_price, status: 2)
     ii_21 = InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_17.id, quantity: 300, unit_price: item_7.unit_price, status: 2)
-    
+
     transaction_1 = @invoice_1.transactions.create!(credit_card_number: 4039485738495837, credit_card_expiration_date: "1", result: "success")
     transaction_2 = @invoice_2.transactions.create!(credit_card_number: 4039485738495837, credit_card_expiration_date: "1", result: "success")
     transaction_3 = @invoice_3.transactions.create!(credit_card_number: 4039485738495837, credit_card_expiration_date: "1", result: "success")
@@ -193,7 +193,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     transaction_14 = invoice_14.transactions.create!(credit_card_number: 4023948573948293, credit_card_expiration_date: "1", result: "failure")
     transaction_15 = invoice_15.transactions.create!(credit_card_number: 4023948573948293, credit_card_expiration_date: "1", result: "success")
     transaction_16 = invoice_17.transactions.create!(credit_card_number: 4023948573948394, credit_card_expiration_date: "1", result: "success")
-  
+
     visit "/merchants/#{@merch_1.id}/dashboard"
 
     expect(page).to have_content("Favorite Customers")
@@ -236,6 +236,14 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(page).to_not have_content("Bronson Shmonson - 3")
       expect(page).to_not have_content("Brian Twinlegs - 2")
     end
+  end
+
+  it "has a link to view discounts" do
+    visit "/merchants/#{@merch_1.id}/dashboard"
+
+    expect(page).to have_link("View All Discounts")
+    click_link "View All Discounts"
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/bulk_discounts")
   end
 
 end

@@ -6,6 +6,7 @@ RSpec.describe Invoice do
     it { should have_many :transactions}
     it { should have_many :invoice_items}
     it { should have_many(:items).through(:invoice_items)}
+    it { should have_many(:bulk_discounts).through(:invoice_items)}
   end
 
   describe 'validations' do
@@ -17,7 +18,7 @@ RSpec.describe Invoice do
       @merch_1 = Merchant.create!(name: "Two-Legs Fashion")
 
       @item_1 = @merch_1.items.create!(name: "Two-Leg Pantaloons", description: "pants built for people with two legs", unit_price: 5000)
-    
+
       @cust_1 = Customer.create!(first_name: "Debbie", last_name: "Twolegs")
       @cust_2 = Customer.create!(first_name: "Tommy", last_name: "Doubleleg")
 
@@ -35,7 +36,7 @@ RSpec.describe Invoice do
       @ii_5 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_5.id, quantity: 1, unit_price: @item_1.unit_price, status: 1)
       @ii_6 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     end
-    
+
     describe '#incomplete_invoices_ordered' do
       it 'returns incomplete invoices orderd from oldest to newest' do
         expect(Invoice.incomplete_invoices_ordered).to eq([@invoice_4, @invoice_5, @invoice_2, @invoice_1])
