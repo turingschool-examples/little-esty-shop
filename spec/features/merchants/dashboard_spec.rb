@@ -20,6 +20,7 @@ RSpec.describe "merchant dashboard", type: :feature do
     @invoice_5 = @cust_2.invoices.create!(status: 1)
     @invoice_6 = @cust_2.invoices.create!(status: 1)
 
+    @bulk_discount1 = BulkDiscount.create!(name: "%20 Off", percent_off: 0.1, threshold: 10, merchant_id: @merch_1.id)
   end
 
   it "shows name of merchant" do
@@ -244,6 +245,14 @@ RSpec.describe "merchant dashboard", type: :feature do
     expect(page).to have_link("View All Discounts")
     click_link "View All Discounts"
     expect(current_path).to eq("/merchants/#{@merch_1.id}/bulk_discounts")
+  end
+
+  it 'has links to each discounts show page' do
+    visit "/merchants/#{@merch_1.id}/bulk_discounts"
+
+    expect(page).to have_link(@bulk_discount1.name)
+    click_link "#{@bulk_discount1.name}"
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/bulk_discounts/#{@bulk_discount1.id}")
   end
 
 end
