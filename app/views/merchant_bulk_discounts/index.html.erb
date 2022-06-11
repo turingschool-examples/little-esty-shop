@@ -27,6 +27,7 @@
       <p><strong>Threshold:</strong> <%= discount.threshold %></p>
       <p><strong>Discount Percentage:</strong> <%= discount.discount_percentage %></p>
       <% end %>
+      <%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant) %>
     </div>
   </div>
 </div>
