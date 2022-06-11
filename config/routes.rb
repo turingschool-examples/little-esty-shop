@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/dashboard", to: 'merchants#show'
   get "/merchants/:merchant_id/bulk_discounts", to: "bulk_discounts#index"
 
+
+
   resources :merchants, only: [:show] do
     resources :items, controller: :merchant_items
+    resources :bulk_discounts, only: [:show]
   end
 
   resources :merchants, only: [:show] do
