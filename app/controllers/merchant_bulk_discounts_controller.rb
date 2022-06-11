@@ -14,13 +14,21 @@ class MerchantBulkDiscountsController < ApplicationController
 
 
   def create
-    @merchant = Merchant.find(params[:merchant_id])
+    merchant = Merchant.find(params[:merchant_id])
     discount = @merchant.bulk_discounts.new(discount_params)
     if discount.save
-      redirect_to merchant_bulk_discounts_path(@merchant)
+      redirect_to merchant_bulk_discounts_path(merchant)
     else
       flash[:alert] = "Error: All fields must be filled out"
-      redirect_to new_merchant_bulk_discount_path(@merchant)
+      redirect_to new_merchant_bulk_discount_path(merchant)
+    end
+  end
+    def destroy
+      merchant = Merchant.find(params[:merchant_id])
+      discount = BulkDiscount.find(params[:id])
+      discount.destroy
+      redirect_to merchant_bulk_discounts_path(merchant)
+
     end
   end
 
@@ -29,4 +37,3 @@ private
     params.permit(:threshold, :discount_percentage)
 
   end
-end
