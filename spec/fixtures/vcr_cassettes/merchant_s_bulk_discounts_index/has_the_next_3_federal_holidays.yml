@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 11 Jun 2022 00:17:07 GMT
+      - Sat, 11 Jun 2022 06:17:01 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,13 +33,13 @@ http_interactions:
       Cf-Cache-Status:
       - HIT
       Age:
-      - '28283'
+      - '17308'
       Last-Modified:
-      - Fri, 10 Jun 2022 16:25:44 GMT
+      - Sat, 11 Jun 2022 01:28:33 GMT
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=sjRn8Fz8LXFkCALG%2B2w6FGtzfGb0r%2BvESnGL6aHnVpYtk0WtMvvu%2FBB4SLsjgT1PAgryKBo%2FZvpdsZFJw7bYO69iv1FmJJSS8JPQgRJ9cndZ71iMpHjkofuz5TFdXOi7DvQfjbP6QgmtwL67"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=yxeMwZByUA6xvr4yRsCA76vJEodtPRpaKKKQVeCKrad%2BIpzC6xls4vOEOA3V%2FlaFdCKYOqfKXvYaTpITRy3b6LM8wilW652WLy1nFO7gYxtMyl7qgQMLM6Nceuhllk0Jz8Y0%2B76tuBtv%2BWKS"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Vary:
@@ -47,7 +47,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 71962973fdcb27f4-SLC
+      - 719838a6b90a27c8-SLC
       Alt-Svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400
     body:
@@ -64,7 +64,7 @@ http_interactions:
         Day","name":"Washington''s Birthday","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]},{"date":"2023-04-07","localName":"Good
         Friday","name":"Good Friday","countryCode":"US","fixed":false,"global":false,"counties":["US-CT","US-DE","US-HI","US-IN","US-KY","US-LA","US-NC","US-ND","US-NJ","US-TN"],"launchYear":null,"types":["Public"]},{"date":"2023-05-29","localName":"Memorial
         Day","name":"Memorial Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]}]'
-  recorded_at: Sat, 11 Jun 2022 00:17:07 GMT
+  recorded_at: Sat, 11 Jun 2022 06:17:01 GMT
 - request:
     method: get
     uri: https://date.nager.at/api/v3/NextPublicHolidays/us
@@ -84,7 +84,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 11 Jun 2022 00:17:07 GMT
+      - Sat, 11 Jun 2022 06:17:01 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -98,13 +98,13 @@ http_interactions:
       Cf-Cache-Status:
       - HIT
       Age:
-      - '28283'
+      - '17308'
       Last-Modified:
-      - Fri, 10 Jun 2022 16:25:44 GMT
+      - Sat, 11 Jun 2022 01:28:33 GMT
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=NZRSTooR23U8iebxvCs0JsxmRwVxqMXege7%2F0ncWnP4OCK6HXxmXR2Tg75dbiSf4x2AuY6agDO3iXGJ3DNT2R4aKhpluISCxAEM7MjsDY9NEvg401C71s1YHctn2I0Nz5TmGFhrheWwYDcId"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ZxVyFMQTFboqiXPHSa1m41AGF6OBYdylP0eeWeiIM0Ue0EnuTNPjpbayAq4hlbfYQBv4BXGIMduOW1XVCDUTwZSP7l%2Fc0yb5Q6zDWjTOHZq7vRzmmJzb040syuzgjnnr6nSOvuEp2b5pBl9i"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Vary:
@@ -112,7 +112,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 719629749a8a27e4-SLC
+      - 719838a81e0f27d4-SLC
       Alt-Svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400
     body:
@@ -129,5 +129,5 @@ http_interactions:
         Day","name":"Washington''s Birthday","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]},{"date":"2023-04-07","localName":"Good
         Friday","name":"Good Friday","countryCode":"US","fixed":false,"global":false,"counties":["US-CT","US-DE","US-HI","US-IN","US-KY","US-LA","US-NC","US-ND","US-NJ","US-TN"],"launchYear":null,"types":["Public"]},{"date":"2023-05-29","localName":"Memorial
         Day","name":"Memorial Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"types":["Public"]}]'
-  recorded_at: Sat, 11 Jun 2022 00:17:07 GMT
+  recorded_at: Sat, 11 Jun 2022 06:17:01 GMT
 recorded_with: VCR 6.1.0
