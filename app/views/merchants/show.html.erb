@@ -1,5 +1,7 @@
-<%= render '/partials/navbar_merchant' %><br>
+<%= render 'partials/navbar_merchant' %><br>
 <%= render 'partials/two_columns' %>
+
+<h5><%= link_to "Bulk Discounts Index", "/merchants/#{@merchant.id}/discounts" %></h5>
 
 <div class="row">
   <div class="column";>
