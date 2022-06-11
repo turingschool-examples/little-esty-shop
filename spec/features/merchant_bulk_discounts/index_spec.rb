@@ -9,21 +9,6 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
      bulk_discount2 = merchant[0].bulk_discounts.create!(threshold: 15, discount_percentage: 15)
      bulk_discount3 = merchant[1].bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-     item1 =  create(:item, merchant: merchant[0])
-     item2 = create(:item, merchant: merchant[1])
-
-     customer1 =  create(:customer)
-     customer2 =  create(:customer)
-
-     invoice1 =  create(:invoice, customer: customer1)
-     invoice2 =  create(:invoice, customer: customer2)
-
-     transaction1 =  create(:transaction, invoice: invoice1, result: 1)
-     transaction2 =  create(:transaction, invoice: invoice2, result: 1)
-
-     invoice_item1 =  create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011)
-     invoice_item2 =  create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524)
-
      visit "/merchants/#{merchant[0].id}/dashboard"
 
      within '#rightSide' do
@@ -49,6 +34,29 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
       end
 
       expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount2.id}")
+    end
+  end
+
+  describe "User Story 4 - Bulk Discounts Delete" do
+    it "can delete the discount" do
+      merchant = create_list(:merchant, 2)
+
+      bulk_discount1 = merchant[0].bulk_discounts.create!(threshold: 10, discount_percentage: 20)
+
+      visit "/merchants/#{merchant[0].id}/bulk_discounts"
+
+      within "#leftSide2" do
+        within "#bulk-discount-#{bulk_discount1.id}" do
+            expect(page).to have_content("Threshold: #{bulk_discount1.threshold}")
+            expect(page).to have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
+            expect(page).to have_link("Delete Discount")
+            click_link "Delete Discount"
+    end
+  end
+      expect(current_path).to eq("/merchants/#{merchant[0].id}/dashboard")
+      expect(page).to_not have_content("ID: #{bulk_discount1.id}")
+      expect(page).to_not have_content("Threshold: #{bulk_discount1.threshold}")
+      expect(page).to_not have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
     end
   end
 end
