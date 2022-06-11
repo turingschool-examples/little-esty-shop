@@ -7,6 +7,7 @@ RSpec.describe Customer do
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:merchants).through(:items) }
+    it { should have_many(:discounts).through(:merchants) }
   end
 
   describe 'validations' do

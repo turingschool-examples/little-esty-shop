@@ -9,7 +9,6 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
   end
 
-
   def update
     invoice = Invoice.find(params[:id])
     invoice_item = InvoiceItem.find(params[:invoice_item_id])

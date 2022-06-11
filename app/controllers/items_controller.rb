@@ -7,15 +7,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def new
-
   end
 
   def create
@@ -39,9 +36,7 @@ class ItemsController < ApplicationController
     end
   end
 
-
  private
-
   def item_params
     params.permit(:name, :description, :unit_price)
   end
@@ -49,5 +44,4 @@ class ItemsController < ApplicationController
   def item_status_params
     params.permit(:status)
   end
-
 end

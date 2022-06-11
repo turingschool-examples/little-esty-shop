@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-describe "Merchant Items New Page" do
-
+RSpec.describe "Merchant Items New Page" do
   it "displays a form to add a new item, when I submit the item I am redirected to my merchants item index page where the item has been added as disabled" do
     merchant_1 = Merchant.create!(name: "Schroeder-Jerde")
 

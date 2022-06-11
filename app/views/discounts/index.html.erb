@@ -1,0 +1,24 @@
+ß<%= render 'partials/navbar_merchant' %><br>
+
+<div class="padding-left">
+  <h5><%= link_to "Create a New Discount", new_merchant_discount_path(@merchant, @discount) %></h5><br>
+
+  <%= @discounts.each do |discount| %>
+  <div id="discount-<%= discount.id %>">
+    <h4><%= link_to "#{discount.percentage}% Discount", merchant_discount_path(@merchant, discount.id) %></h4>
+    <h5>Quantity: <%= discount.quantity_threshold %></h5>
+    <%= button_to "Remove Discount", merchant_discount_path(@merchant, discount.id), method: :delete %><br>
+  </div>
+  <% end %>
+
+  <br><hr><br>
+
+  <div class="next_holidays"><br>
+    <hr><h3>Upcoming Holidays</h3><hr>
+    <% @holidays.each do |holiday| %>
+    <ol>
+      <h5><%= holiday.name %></h5>
+    </ol>
+    <% end %>
+  </div>
+</div>

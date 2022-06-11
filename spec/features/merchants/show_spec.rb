@@ -31,7 +31,6 @@ RSpec.describe 'merchant dashboard show' do
   let!(:invoice17) { customer4.invoices.create!(status: "cancelled") }
   let!(:invoice18) { customer4.invoices.create!(status: "cancelled") }
 
-
   let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 13635, status: "packaged") }
   let!(:invoice_item2) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 9, unit_price: 23324, status: "pending") }
   let!(:invoice_item3) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice3.id, quantity: 8, unit_price: 34873, status: "packaged") }
@@ -50,7 +49,6 @@ RSpec.describe 'merchant dashboard show' do
   let!(:invoice_item16) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice16.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item17) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice17.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item18) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice18.id, quantity: 8, unit_price: 2196, status: "packaged") }
-
 
   let!(:customer1) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
   let!(:customer2) { Customer.create!(first_name: "Sylvester", last_name: "Nader") }
