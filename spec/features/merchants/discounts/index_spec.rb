@@ -28,6 +28,13 @@ RSpec.describe "Discounts Index" do
     expect(page).to have_content("Schroeder-Jerde")
     expect(page).to have_content("%20 Off")
     expect(page).to have_content("Get 20% off when you buy 10")
+  end
 
+  it "has link to create new discount" do
+    visit "/merchants/#{@merch_1.id}/bulk_discounts/#{@bulk_discount1.id}"
+
+    expect(page).to have_link("Create New Bulk Discount")
+    click_link "Create New Bulk Discount"
+    expect(current_path).to eq(new_merchant_discount_path(@merch_1))
   end
 end
