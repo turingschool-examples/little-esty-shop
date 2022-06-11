@@ -7,7 +7,7 @@ RSpec.describe "merchant's bulk discounts index" do
 
   it "a merchant's bulk discounts index page lists all discounts, percentage discount, and quantity thresholds" do
     visit "/merchants/#{merchant1.id}/dashboard"
-    allow(HolidayService).to receive(:find_holidays).and_return([{name: 'Juneteenth'}]) # could also add , :vcr instead of stubbing
+    allow(HolidayService).to receive(:find_holidays).and_return([{name: 'Juneteenth'}]) # example of stubbing instead of adding , :vcr
 
     click_link "Bulk Discounts Index"
     expect(current_path).to eq("/merchants/#{merchant1.id}/discounts")
@@ -50,6 +50,6 @@ RSpec.describe "merchant's bulk discounts index" do
 
     click_link "Create a New Discount"
 
-    expect(current_path).to eq(new_merchant_discount_path(merchant_1))
+    expect(current_path).to eq(new_merchant_discount_path(merchant1))
   end
 end
