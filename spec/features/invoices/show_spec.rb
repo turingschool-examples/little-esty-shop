@@ -5,6 +5,10 @@ RSpec.describe "Merchant Invoices Show Page" do
   let!(:merchant2) { Merchant.create!(name: "Klein, Rempel and Jones") }
   let!(:merchant3) { Merchant.create!(name: "Willms and Sons") }
 
+  let!(:discount1) { merchant1.discounts.create!(percentage: 20, quantity_threshold: 3) }
+  let!(:discount2) { merchant1.discounts.create!(percentage: 50, quantity_threshold: 5) }
+  let!(:discount3) { merchant2.discounts.create!(percentage: 60, quantity_threshold: 5) }
+
   let!(:item1) { merchant1.items.create!(name: "Qui Esse", description: "Nihil autem sit odio inventore deleniti", unit_price: 75107) }
   let!(:item2) { merchant1.items.create!(name: "Autem Minima", description: "Cumque consequuntur ad", unit_price: 67076) }
   let!(:item3) { merchant2.items.create!(name: "Ea Voluptatum", description: "Sunt officia", unit_price: 68723) }
@@ -95,10 +99,10 @@ RSpec.describe "Merchant Invoices Show Page" do
   # Then I see the total revenue for my merchant from this invoice (not including discounts)
   # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 
-  xit "displays the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation", :vcr do
+  it "displays the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation", :vcr do
     visit merchant_invoice_path(merchant1, invoice1)
 
     expect(page).to have_content("Total Revenue: $278,091.00")
-    expect(page).to have_content("Total Discounted Revenue: $0.00")
+    expect(page).to have_content("Total Discounted Revenue: $139,046.00")
   end
 end

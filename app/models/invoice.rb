@@ -30,7 +30,6 @@ class Invoice < ApplicationRecord
   end
 
   def discounted_revenue
-    # If the quantity of an item ordered meets or exceeds the quantity threshold, then the percentage discount should apply to that item only.
     discount =
     invoice_items
     .joins(:discounts)
