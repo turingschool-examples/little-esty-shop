@@ -5,44 +5,36 @@ RSpec.describe "merchant's bulk discounts index" do
   let!(:discount1) { merchant1.discounts.create!(percentage: 20, quantity_threshold: 10) }
   let!(:discount2) { merchant1.discounts.create!(percentage: 50, quantity_threshold: 20) }
 
-  # Merchant Bulk Discounts Index
-  #
-  # As a merchant
-  # When I visit my merchant dashboard
-  # Then I see a link to view all my discounts
-  # When I click this link
-  # Then I am taken to my bulk discounts index page
-  # Where I see all of my bulk discounts including their
-  # percentage discount and quantity thresholds
-  # And each bulk discount listed includes a link to its show page
-
   it "a merchant's bulk discounts index page lists all discounts, percentage discount, and quantity thresholds" do
-    visit "/merchants/#{merchant1.id}/"
+    visit "/merchants/#{merchant1.id}/dashboard"
+    allow(HolidayService).to receive(:find_holidays).and_return([{name: 'Juneteenth'}]) # could also add , :vcr instead of stubbing
 
     click_link "Bulk Discounts Index"
-
     expect(current_path).to eq("/merchants/#{merchant1.id}/discounts")
-    within "discount-#{discount1}" do
-      expect(page).to have_content('Percentage Discount: 20')
-      expect(page).to have_content('Quantity Threshold: 10')
+
+    within "#discount-#{discount1.id}" do
+      expect(page).to have_content('20% Discount')
+      expect(page).to have_content('Quantity: 10')
     end
 
-    within "discount-#{discount2}" do
-      expect(page).to have_content('Percentage Discount')
-      expect(page).to have_content('Quantity Threshold')
+    within "#discount-#{discount2.id}" do
+      expect(page).to have_content('50% Discount')
+      expect(page).to have_content('Quantity: 20')
     end
-
   end
 
+  it "each bulk discount listed includes a link that directs you its show page", :vcr do
+    visit "/merchants/#{merchant1.id}/discounts"
 
-  it "each bulk discount listed includes a link directs you its show page" do
+    click_link "20% Discount"
 
+    expect(current_path).to eq(merchant_discount_path(merchant1.id, discount1.id))
   end
 
   it "has the next 3 federal holidays", :vcr do
-    visit "/merchants/#{merchant1.id}/discounts"
-
     holidays = HolidayFacade.get_holidays
+
+    visit "/merchants/#{merchant1.id}/discounts"
 
     within ".next_holidays" do
       expect(page).to have_content("Upcoming Holidays")
@@ -51,5 +43,13 @@ RSpec.describe "merchant's bulk discounts index" do
       end
       expect(page).to_not have_content("Christmas")
     end
+  end
+
+  it "has a link to create a new discount", :vcr do
+    visit "/merchants/#{merchant1.id}/discounts"
+
+    click_link "Create a New Discount"
+
+    expect(current_path).to eq(new_merchant_discount_path(merchant_1))
   end
 end
