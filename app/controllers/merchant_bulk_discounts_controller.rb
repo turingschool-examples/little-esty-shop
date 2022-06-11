@@ -35,7 +35,7 @@ class MerchantBulkDiscountsController < ApplicationController
     if discount.update(discount_params)
       redirect_to merchant_bulk_discount_path(merchant, discount)
     else
-    flash[:alert] = "Error: All fields must be filled out"
+      flash[:alert] = "Error: All fields must be filled out"
       redirect_to edit_merchant_bulk_discount_path(merchant, discount)
     end
   end

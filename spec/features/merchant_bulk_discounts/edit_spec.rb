@@ -32,4 +32,18 @@ RSpec.describe "Bulk Discounts Edit Page", type: :feature do
 
       end
     end
+
+    it "return to edit page when form is not filled out correctly" do
+      merchant = create_list(:merchant, 2)
+      bulk_discount1 = merchant[0].bulk_discounts.create!(threshold: 10, discount_percentage: 20)
+
+      visit edit_merchant_bulk_discount_path(merchant[0], bulk_discount1)
+
+      fill_in :threshold, with: 50
+      fill_in :discount_percentage, with: 105
+      click_on "Submit"
+
+      expect(current_path).to eq edit_merchant_bulk_discount_path(merchant[0], bulk_discount1)
+
+    end
   end

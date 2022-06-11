@@ -1,3 +1,6 @@
+<% if flash.key? :alert %>
+<p><%= flash[:alert] %></p>
+<% end %>
 <%= form_with url: merchant_bulk_discount_path(@merchant, @discount), method: :patch, local: true do |form| %>
   <p><%= form.label :threshold, "Threshold" %></p>
   <%= form.number_field :threshold, min: 1, value: @discount.threshold %>
