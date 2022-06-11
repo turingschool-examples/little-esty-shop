@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Bulk Discounts Index Page", type: :feature
+RSpec.describe "Bulk Discounts Index Page", type: :feature do
   describe 'User Story 1 - Bulk Discounts Index' do
    it "visits the merchant dashboard and has a link that goes to the bulk discounts home page" do
      merchant = create_list(:merchant, 2)
@@ -34,6 +34,7 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
       end
 
       expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount2.id}")
+      end
     end
   end
 end
