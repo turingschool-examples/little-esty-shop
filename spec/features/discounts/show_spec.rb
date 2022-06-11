@@ -29,4 +29,26 @@ RSpec.describe "Discounts Show" do
     expect(page).to have_content("%20 Off")
     expect(page).to have_content("Get 20% off when you buy 10")
   end
+
+  it "Can edit the discount" do
+    visit "/merchants/#{@merch_1.id}/bulk_discounts/#{@bulk_discount1.id}"
+
+    expect(page).to have_link("Edit Discount")
+    click_link "Edit Discount"
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/bulk_discounts/#{@bulk_discount1.id}/edit")
+#pre-populate discount info
+    expect(page).to have_content("%20 Off")
+    expect(page).to have_content(0.2)
+    expect(page).to have_content(10)
+    
+    fill_in :name, with: "New Name"
+    fill_in :percent_off, with: ".5"
+    fill_in :threshold, with: 200
+    click "Submit"
+
+    expect(current_path).to eq("/merchants/#{@merch_1.id}/bulk_discounts/#{@bulk_discount1.id}")
+
+    expect(page).to have_content("New Name")
+    expect(page).to have_content("Get 50% off when you buy 200")
+  end
 end
