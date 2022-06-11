@@ -1,3 +1,7 @@
+<%= render 'partials/navbar_merchant' %><br>
+
+<h5><%= link_to "Create a New Discount", new_merchant_discount_path(@merchant, @discount) %></h5><br>
+
 <%= @discounts.each do |discount| %>
   <div id="discount-<%= discount.id %>">
     <h4><%= link_to "#{discount.percentage}% Discount", merchant_discount_path(@merchant, discount.id) %></h4>
