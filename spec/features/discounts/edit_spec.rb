@@ -19,7 +19,6 @@ RSpec.describe "Merchant Discount Edit Page" do
 
   it "displays a discount's pertentage and quantity threshold", :vcr do
     visit edit_merchant_discount_path(merchant1.id, discount1.id)
-    save_and_open_page
 
     expect(find_field('Percentage Discount:').value).to eq('20')
 
