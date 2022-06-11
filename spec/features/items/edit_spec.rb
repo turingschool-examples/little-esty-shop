@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-describe "merchant item edit page" do
+describe "Merchant Item Edit Page" do
   before do
     @merchant_1 = Merchant.create!(name: "Schroeder-Jerde")
-
     @item_1 = @merchant_1.items.create!(name: "Qui Esse", description: "Nihil autem sit odio inventore deleniti", unit_price: 75107)
     @item_2 = @merchant_1.items.create!(name: "Autem Minima", description: "Cumque consequuntur ad", unit_price: 67076)
   end

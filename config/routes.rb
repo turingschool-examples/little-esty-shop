@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :merchants, except: [:show] do
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show, :update]
-    resources :discounts, only: [:index, :show, :new, :create, :destroy]
+    resources :discounts, only: [:index, :show, :new, :create, :destroy, :update, :edit]
   end
 
   resources :admin, only: [:index]

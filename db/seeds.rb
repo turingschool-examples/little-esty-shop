@@ -7,3 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'csv'
+
+merchant1 = Merchant.create!(name: "REI")
+discount1 = Discount.create!(percentage: 20, quantity_threshold: 10, merchant_id: merchant1.id)
+discount2 = Discount.create!(percentage: 50, quantity_threshold: 20, merchant_id: merchant1.id)
