@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Bulk Discounts Index Page", type: :feature
+RSpec.describe "Bulk Discounts Index Page", type: :feature do
   describe 'User Story 2 - Merchant Bulk Discount Create' do
     it "visits the merchants bulk discount and can visit a link to create a new " do
       merchant = create(:merchant)
@@ -25,3 +25,4 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
     expect(page).to have_content(25)
     end
   end
+end
