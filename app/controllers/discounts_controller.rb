@@ -17,7 +17,8 @@ class DiscountsController < ApplicationController
   end
 
   def create
-    @merchant.items.create!(discount_params)
+    require "pry"; binding.pry
+    @merchant.discounts.create!(discount_params)
     redirect_to merchant_discounts_path(@merchant)
   end
 

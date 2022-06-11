@@ -15,11 +15,11 @@
     <p>Quantity Sold: <%= invoice_item.quantity %></p>
     <p>Sold at: <%= number_to_currency(invoice_item.unit_price) %></p>
     <p>Invoice Item Status: <%= invoice_item.status.titleize %></p>
-      <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch do |form| %>
-        <%= form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>
-        <%= hidden_field_tag "invoice_item_id", "#{invoice_item.id}" %>
-        <%= form.submit "Update Invoice Item Status" %>
-      <% end %>
+    <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch do |form| %>
+      <%= form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>
+      <%= hidden_field_tag "invoice_item_id", "#{invoice_item.id}" %>
+      <%= form.submit "Update Invoice Item Status" %>
+    <% end %>
   </div>
   <hr>
   <% end %>
