@@ -36,26 +36,4 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature
       expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount2.id}")
     end
   end
-
-  describe "User Story 4 - Bulk Discounts Delete" do
-    it "can delete the discount" do
-      merchant = create_list(:merchant, 2)
-
-      bulk_discount1 = merchant[0].bulk_discounts.create!(threshold: 10, discount_percentage: 20)
-
-      visit "/merchants/#{merchant[0].id}/bulk_discounts"
-      within "#leftSide2" do
-        within "#bulk-discount-#{bulk_discount1.id}" do
-            expect(page).to have_content("Threshold: #{bulk_discount1.threshold}")
-            expect(page).to have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
-            expect(page).to have_link("Delete Discount")
-            click_link "Delete Discount"
-    end
-  end
-      expect(current_path).to eq ("/merchants/#{merchant[0].id}/bulk_discounts")
-      expect(page).to_not have_content("ID: #{bulk_discount1.id}")
-      expect(page).to_not have_content("Threshold: #{bulk_discount1.threshold}")
-      expect(page).to_not have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
-    end
-  end
 end
