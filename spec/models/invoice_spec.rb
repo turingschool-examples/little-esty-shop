@@ -14,8 +14,12 @@ RSpec.describe Invoice do
     it { should validate_presence_of(:status) }
   end
 
-  let!(:merchant1) { Merchant.create!(name: "Schroeder-Jerde") }
-  let!(:merchant2) { Merchant.create!(name: "Klein, Rempel and Jones") }
+  let!(:merchant1) { Merchant.create!(name: "REI") }
+  let!(:merchant2) { Merchant.create!(name: "Target") }
+
+  let!(:discount1) { merchant1.discounts.create!(percentage: 20, quantity_threshold: 3) }
+  let!(:discount2) { merchant1.discounts.create!(percentage: 50, quantity_threshold: 5) }
+  let!(:discount3) { merchant2.discounts.create!(percentage: 50, quantity_threshold: 5) }
 
   let!(:item1) { merchant1.items.create!(name: "Qui Esse", description: "Nihil autem sit odio inventore deleniti", unit_price: 75107) }
   let!(:item2) { merchant1.items.create!(name: "Autem Minima", description: "Cumque consequuntur ad", unit_price: 67076) }
@@ -49,9 +53,8 @@ RSpec.describe Invoice do
   let!(:transaction5) { Transaction.create!(invoice_id: invoice5.id, credit_card_number: 4844518708741275, credit_card_expiration_date: "4/23", result: "success") }
   let!(:transaction6) { Transaction.create!(invoice_id: invoice6.id, credit_card_number: 4203696133194408, credit_card_expiration_date: "5/22", result: "success") }
 
-  describe "class methods" do
-
-    it ".invoices_with_merchant_items(merchant)" do
+  describe "::invoices_with_merchant_items" do
+    it "returns a merchant's distinct invoices" do
       expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice1)
       expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice2)
       expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice3)
@@ -59,23 +62,29 @@ RSpec.describe Invoice do
       expect(Invoice.invoices_with_merchant_items(merchant1)).to include(invoice5)
       expect(Invoice.invoices_with_merchant_items(merchant1)).to_not include(invoice6)
     end
+  end
 
-    describe '.incomplete_invoices' do
-      it 'returns the invoices with items that have not yet been shipped, ordered from oldest to newest' do
-        expect(Invoice.incomplete_invoices).to eq([invoice1, invoice2, invoice3, invoice6, invoice4])
-      end
+  describe '::incomplete_invoices' do
+    it 'returns the invoices with items that have not yet been shipped, ordered from oldest to newest' do
+      expect(Invoice.incomplete_invoices).to eq([invoice1, invoice2, invoice3, invoice6, invoice4])
     end
   end
 
-  describe "instance methods" do
-    it "#invoice_customer" do
+  describe '#invoice_customer' do
+    it "returns the customer name of an invoice" do
       expect(invoice1.invoice_customer).to eq("Leanne Braun")
     end
+  end
 
-    it "#total_revenue" do
+  describe '#total_revenue' do
+    it "calculates the total revenue for a merchant from an invoice" do
       expect(invoice1.total_revenue).to eq(68175)
     end
   end
 
-
+  describe '#discounted_revenue' do
+    it "calculates the total discounted revenue for a merchant from an invoice" do
+      expect(invoice1.discounted_revenue).to eq(34088)
+    end
+  end
 end

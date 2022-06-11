@@ -14,10 +14,6 @@ class Invoice < ApplicationRecord
     "#{customer.first_name} #{customer.last_name}"
   end
 
-  def total_revenue
-    invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
-  end
-
   def self.incomplete_invoices
     joins(:invoice_items)
     .where.not(invoice_items: {status: 1})
@@ -27,5 +23,22 @@ class Invoice < ApplicationRecord
 
   def self.invoices_with_merchant_items(merchant)
     merchant.invoices.distinct(:id)
+  end
+
+  def total_revenue
+    invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
+  end
+
+  def discounted_revenue
+    # If the quantity of an item ordered meets or exceeds the quantity threshold, then the percentage discount should apply to that item only.
+    discount =
+    invoice_items
+    .joins(:discounts)
+    .where('invoice_items.quantity >= discounts.quantity_threshold')
+    .select('invoice_items.id, max((discounts.percentage) * (invoice_items.quantity * invoice_items.unit_price)) as discounted')
+    .group('invoice_items.id')
+    .sum(&:discounted)/100
+
+    total_revenue - discount
   end
 end
