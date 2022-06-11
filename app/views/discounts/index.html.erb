@@ -1,4 +1,4 @@
-<%= render 'partials/navbar_merchant' %><br>
+ß<%= render 'partials/navbar_merchant' %><br>
 
 <div class="padding-left">
   <h5><%= link_to "Create a New Discount", new_merchant_discount_path(@merchant, @discount) %></h5><br>
@@ -7,6 +7,7 @@
   <div id="discount-<%= discount.id %>">
     <h4><%= link_to "#{discount.percentage}% Discount", merchant_discount_path(@merchant, discount.id) %></h4>
     <h5>Quantity: <%= discount.quantity_threshold %></h5><br>
+    <%= button_to "Remove Discount", merchant_discount_path(@merchant, discount.id), method: :delete %>
   </div>
   <% end %>
 
