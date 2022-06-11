@@ -150,4 +150,4 @@
   updated_at: Date.current
 )
 
-@bulk_discount1 = BulkDiscount.create!(name: "%20 Off", percent_off: 0.1, threshold: 10, merchant_id: @merch_1.id)
+@bulk_discount1 = BulkDiscount.create!(name: "%20 Off", percent_off: 0.2, threshold: 10, merchant_id: @merch_1.id)
