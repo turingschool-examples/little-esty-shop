@@ -22,7 +22,11 @@ class MerchantBulkDiscountsController < ApplicationController
       flash[:alert] = "Error: All fields must be filled out"
       redirect_to new_merchant_bulk_discount_path(@merchant)
     end
+
+  def edit
+    binding.pry
   end
+end
 
 private
   def discount_params
