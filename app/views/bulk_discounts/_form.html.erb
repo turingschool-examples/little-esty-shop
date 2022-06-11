@@ -1,0 +1,9 @@
+<%= form_with model: model, method: method, url: url, class: 'merchant_bulk_discount_form', local: true do |f| %>
+<%= f.label :name, 'Name' %>
+<%= f.text_field :name, value: @bulk_discount.name %><br>
+<%= f.label :percent_off, 'Discount percent as a decimal' %>
+<%= f.text_field :percent_off, value: @bulk_discount.percent_off %><br>
+<%= f.label :threshold, 'Threshold' %>
+<%= f.text_field :threshold, value: @bulk_discount.threshold %><br>
+<%= f.submit "Submit" %>
+<% end %>

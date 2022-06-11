@@ -1,2 +1,4 @@
 <h1> <%= @bulk_discount.merchant.name %>'s <%= @bulk_discount.name %> bulk discount</h1>
 Get <%= (@bulk_discount.percent_off * 100).to_i %>% off when you buy <%= @bulk_discount.threshold %>
+<br>
+<%= link_to "Edit Discount", edit_merchant_bulk_discount_path(@merchant, @bulk_discount), method: :get %>
