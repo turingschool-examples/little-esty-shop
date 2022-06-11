@@ -13,44 +13,10 @@ RSpec.describe "Merchant Invoices Show Page" do
 
   let!(:invoice1) { customer1.invoices.create!(status: "in progress") }
   let!(:invoice2) { customer2.invoices.create!(status: "completed") }
-  let!(:invoice3) { customer3.invoices.create!(status: "in progress") }
-  let!(:invoice4) { customer4.invoices.create!(status: "completed") }
-  let!(:invoice5) { customer5.invoices.create!(status: "completed") }
-  let!(:invoice6) { customer5.invoices.create!(status: "in progress") }
-  let!(:invoice7) { customer5.invoices.create!(status: "cancelled") }
-  let!(:invoice8) { customer5.invoices.create!(status: "completed") }
-  let!(:invoice9) { customer6.invoices.create!(status: "in progress") }
-  let!(:invoice10) { customer6.invoices.create!(status: "cancelled") }
-  let!(:invoice11) { customer6.invoices.create!(status: "cancelled") }
-  let!(:invoice12) { customer1.invoices.create!(status: "cancelled") }
-  let!(:invoice13) { customer4.invoices.create!(status: "cancelled") }
-  let!(:invoice14) { customer4.invoices.create!(status: "cancelled") }
-  let!(:invoice15) { customer5.invoices.create!(status: "cancelled") }
-  let!(:invoice16) { customer5.invoices.create!(status: "cancelled") }
-  let!(:invoice17) { customer4.invoices.create!(status: "cancelled") }
-  let!(:invoice18) { customer4.invoices.create!(status: "cancelled") }
-
 
   let!(:invoice_item1) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 13635, status: "packaged") }
   let!(:invoice_item2) { InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 9, unit_price: 23324, status: "pending") }
-  let!(:invoice_item3) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice3.id, quantity: 8, unit_price: 34873, status: "packaged") }
-  let!(:invoice_item4) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice4.id, quantity: 3, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item5) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice5.id, quantity: 7, unit_price: 79140, status: "shipped") }
-  let!(:invoice_item6) { InvoiceItem.create!(item_id: item3.id, invoice_id: invoice6.id, quantity: 3, unit_price: 52100, status: "packaged") }
-  let!(:invoice_item7) { InvoiceItem.create!(item_id: item4.id, invoice_id: invoice7.id, quantity: 7, unit_price: 13635, status: "packaged") }
-  let!(:invoice_item8) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice8.id, quantity: 2, unit_price: 23324, status: "pending") }
-  let!(:invoice_item9) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice9.id, quantity: 4, unit_price: 34873, status: "packaged") }
-  let!(:invoice_item10) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice10.id, quantity: 8, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item11) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice11.id, quantity: 8, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item12) { InvoiceItem.create!(item_id: item3.id, invoice_id: invoice12.id, quantity: 3, unit_price: 52100, status: "packaged") }
-  let!(:invoice_item13) { InvoiceItem.create!(item_id: item4.id, invoice_id: invoice13.id, quantity: 7, unit_price: 13635, status: "packaged") }
-  let!(:invoice_item14) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice14.id, quantity: 2, unit_price: 23324, status: "pending") }
-  let!(:invoice_item15) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice15.id, quantity: 4, unit_price: 34873, status: "packaged") }
-  let!(:invoice_item16) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice16.id, quantity: 8, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item17) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice17.id, quantity: 8, unit_price: 2196, status: "packaged") }
-  let!(:invoice_item18) { InvoiceItem.create!(item_id: item5.id, invoice_id: invoice18.id, quantity: 8, unit_price: 2196, status: "packaged") }
   let!(:invoice_item19) { InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 9, unit_price: 23324, status: "packaged") }
-    # invoice_item19 has a second item from the first merchant, so that an invoice would have more than one item - in this case, invoice1 now has items 1 and 2
 
   let!(:customer1) { Customer.create!(first_name: "Leanne", last_name: "Braun") }
   let!(:customer2) { Customer.create!(first_name: "Sylvester", last_name: "Nader") }
@@ -61,22 +27,6 @@ RSpec.describe "Merchant Invoices Show Page" do
 
   let!(:transaction1) { Transaction.create!(invoice_id: invoice1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "2/22", result: "success") }
   let!(:transaction2) { Transaction.create!(invoice_id: invoice2.id, credit_card_number: 4580251236515201, credit_card_expiration_date: "1/22", result: "failed") }
-  let!(:transaction3) { Transaction.create!(invoice_id: invoice3.id, credit_card_number: 4354495077693036, credit_card_expiration_date: "10/22", result: "success") }
-  let!(:transaction4) { Transaction.create!(invoice_id: invoice4.id, credit_card_number: 4515551623735607, credit_card_expiration_date: "4/25", result: "success") }
-  let!(:transaction5) { Transaction.create!(invoice_id: invoice5.id, credit_card_number: 4844518708741275, credit_card_expiration_date: "4/23", result: "success") }
-  let!(:transaction6) { Transaction.create!(invoice_id: invoice6.id, credit_card_number: 4203696133194408, credit_card_expiration_date: "5/22", result: "success") }
-  let!(:transaction7) { Transaction.create!(invoice_id: invoice7.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "failed") }
-  let!(:transaction8) { Transaction.create!(invoice_id: invoice8.id, credit_card_number: 4540842003561938, credit_card_expiration_date: "2/22", result: "failed") }
-  let!(:transaction9) { Transaction.create!(invoice_id: invoice9.id, credit_card_number: 4140149827486249, credit_card_expiration_date: "3/22", result: "success") }
-  let!(:transaction10) { Transaction.create!(invoice_id: invoice10.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
-  let!(:transaction11) { Transaction.create!(invoice_id: invoice11.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
-  let!(:transaction12) { Transaction.create!(invoice_id: invoice12.id, credit_card_number: 4801647818676136, credit_card_expiration_date: "5/23", result: "success") }
-  let!(:transaction13) { Transaction.create!(invoice_id: invoice13.id, credit_card_number: 4540842003561938, credit_card_expiration_date: "2/22", result: "success") }
-  let!(:transaction14) { Transaction.create!(invoice_id: invoice14.id, credit_card_number: 4140149827486249, credit_card_expiration_date: "3/22", result: "success") }
-  let!(:transaction15) { Transaction.create!(invoice_id: invoice15.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
-  let!(:transaction16) { Transaction.create!(invoice_id: invoice16.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
-  let!(:transaction17) { Transaction.create!(invoice_id: invoice17.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
-  let!(:transaction18) { Transaction.create!(invoice_id: invoice18.id, credit_card_number: 4923661117104166, credit_card_expiration_date: "2/23", result: "success") }
 
   it "displays an invoice's attributes" do
     visit merchant_invoice_path(merchant1, invoice1)
@@ -121,7 +71,7 @@ RSpec.describe "Merchant Invoices Show Page" do
     expect(page).to have_content("Total Revenue: $278,091.00")
   end
 
-  it "can update and Invoice Item's status via a selector" do
+  it "can update as invoice item's status via a selector" do
     visit merchant_invoice_path(merchant1, invoice1)
 
     within "##{invoice_item1.id}" do
@@ -136,5 +86,19 @@ RSpec.describe "Merchant Invoices Show Page" do
     end
 
     expect(current_path).to eq(merchant_invoice_path(merchant1, invoice1))
+  end
+
+  # Merchant Invoice Show Page: Total Revenue and Discounted Revenue
+  #
+  # As a merchant
+  # When I visit my merchant invoice show page
+  # Then I see the total revenue for my merchant from this invoice (not including discounts)
+  # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
+
+  xit "displays the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation", :vcr do
+    visit merchant_invoice_path(merchant1, invoice1)
+
+    expect(page).to have_content("Total Revenue: $278,091.00")
+    expect(page).to have_content("Total Discounted Revenue: $0.00")
   end
 end

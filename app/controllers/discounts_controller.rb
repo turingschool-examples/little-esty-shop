@@ -22,14 +22,29 @@ class DiscountsController < ApplicationController
   end
 
   def edit
-    @discount = Discount.find_by(merchant_id: params[:merchant_id], id: params[:id])
+    @discount = Discount.find(params[:id])
+    # @discount = Discount.find_by(merchant_id: params[:merchant_id], id: params[:id])
+    # require "pry"; binding.pry
   end
 
   def update
-    @discount = Discount.find_by(merchant_id: params[:merchant_id], id: params[:id])
-    @discount.update(discount_params)
-    redirect_to merchant_discount_path(@merchant, @discount)
+    discount = Discount.find_by(merchant_id: params[:merchant_id], id: params[:id])
+    discount.update(discount_params)
+    redirect_to merchant_discount_path(@merchant, discount)
   end
+  # if params[:status]
+  #   @item.update(item_status_params)
+  #   redirect_to merchant_items_path
+  # else
+  #   if @item.update(item_params)
+  #     flash[:message] = 'You have successfully updated this item!'
+  #     redirect_to merchant_item_path(@merchant, @item)
+  #   else
+  #     flash[:message] = 'Please fill out all fields to update this item!'
+  #     # render :new not sure why this doesn't work here
+  #     redirect_to edit_merchant_item_path(@merchant, @item)
+  #   end
+  # end
 
   def destroy
     Discount.find_by(merchant_id: params[:merchant_id], id: params[:id]).destroy
