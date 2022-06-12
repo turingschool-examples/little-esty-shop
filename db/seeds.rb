@@ -11,8 +11,11 @@ require 'csv'
 # merchant1 = Merchant.create!(name: "REI")
 # merchant2 = Merchant.create!(name: "Black Diamond")
 #
-# discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
-# discount2 = merchant1.discounts.create!(percentage: 30, quantity_threshold: 15)
+discount1 = Discount.create!(percentage: 20, quantity_threshold: 10, merchant_id: 1)
+discount2 = merchant1.discounts.create!(percentage: 30, quantity_threshold: 15, merchant_id: 1)
+discount3 = merchant2.discounts.create!(percentage: 10, quantity_threshold: 5, merchant_id: 2)
+discount4 = merchant3.discounts.create!(percentage: 50, quantity_threshold: 50, merchant_id: 3)
+discount5 = merchant4.discounts.create!(percentage: 75, quantity_threshold: 60, merchant_id: 4)
 #
 # customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
 #

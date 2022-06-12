@@ -2,12 +2,16 @@
 
 <div class="container">
 
-  <h1>Invoice #<%= @invoice.id %></h1>
+  <h1 style="text-align:center;">Invoice #<%= @invoice.id %></h1>
   <b>Status:</b> <%= @invoice.status.titleize %><br>
   <b>Created at:</b> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
   <div class="customer">
     <b>Customer Name:</b> <%= @invoice.invoice_customer %><br><br>
   </div>
+  
+  <h5>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></h5>
+  <h5>Total Discounted Revenue: <%= number_to_currency(@invoice.discounted_revenue) %></h5>
+  <hr>
 
   <h2>Invoice Items</h2>
   <div class="invoice_items">
@@ -28,5 +32,5 @@
   </div>
 
   <p><b>Total Revenue:</b> <%= number_to_currency(@invoice.total_revenue) %></p>
-  
+
 </div>

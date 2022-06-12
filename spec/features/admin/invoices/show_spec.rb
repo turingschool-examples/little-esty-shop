@@ -68,7 +68,23 @@ RSpec.describe "Admin Invoice Show Page" do
       expect(page).to_not have_select(selected: "packaged")
       expect(page).to_not have_select(selected: "pending")
     end
-
     expect(current_path).to eq(admin_invoice_path(invoice1))
+  end
+
+  it "displays the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation" do
+    merchant1 = Merchant.create!(name: "REI")
+    discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
+    discount2 = merchant1.discounts.create!(percentage: 30, quantity_threshold: 15)
+    customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
+    item1 = merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 100)
+    item2 = merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 150)
+    invoice1 = customer1.invoices.create!(status: 2)
+    invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 100, status: "shipped")
+    invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 5, unit_price: 150, status: "pending")
+
+    visit admin_invoice_path(invoice1)
+
+    expect(page).to have_content("Total Revenue: $1,750.00")
+    expect(page).to have_content("Total Discounted Revenue: $1,550.00")
   end
 end
