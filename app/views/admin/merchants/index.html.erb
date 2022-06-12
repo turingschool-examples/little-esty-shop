@@ -1,42 +1,46 @@
 <%= render 'partials/navbar_admin' %><br>
 <%= render 'partials/two_columns' %>
 
-<h5 style="padding-left: 20px"><%= link_to "Create a New Merchant", new_admin_merchant_path %></h5>
+<div class="container">
 
-<div class="row">
-  <div class="column";>
-    <div class="enabled-merchants">
-      <h3> Status: Enabled </h3>
-      <ul><% @enabled_merchants.each do |merchant| %>
-        <div id="enabled-merchants-<%= merchant.id %>">
-        <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
-        <%= button_to "Disable", admin_merchant_path(merchant), method: :patch, params: { status: 'disabled' } %></li>
-        </div>
-      <% end %></ul>
-    </div>
-    <hr><br>
+  <h5><%= link_to "Create a New Merchant", new_admin_merchant_path %></h5>
 
-    <div class="disabled-merchants">
-      <h3> Status: Disabled </h3>
-      <ul><% @disabled_merchants.each do |merchant| %>
-        <div id="disabled-merchants-<%= merchant.id %>">
-        <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
-        <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, params: { status: 'enabled' } %></li>
-        </div>
-      <% end %></ul>
-    </div>
-  </div>
-
-  <div class="column">
-    <div id="top-five-merchants">
-      <h3 style="text-align:center;">Top 5 Merchants</h3>
+  <div class="row">
+    <div class="column";>
+      <div class="enabled-merchants">
+        <h3> Status: Enabled </h3>
+        <ul><% @enabled_merchants.each do |merchant| %>
+          <div id="enabled-merchants-<%= merchant.id %>">
+          <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+          <%= button_to "Disable", admin_merchant_path(merchant), method: :patch, params: { status: 'disabled' } %></li>
+          </div>
+        <% end %></ul>
+      </div>
       <hr><br>
-      <ol>
-        <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
-        <h5><li> <%= "#{merchant.name}"%> Revenue: <%= number_to_currency(merchant.revenue)%> </li></h5><br>
-        <p> <i> Top selling date for <%= merchant.name %> was <%= merchant.best_day.strftime("%A, %b %d") %> </i> </p> 
-        <% end %>
-      </ol>
+
+      <div class="disabled-merchants">
+        <h3> Status: Disabled </h3>
+        <ul><% @disabled_merchants.each do |merchant| %>
+          <div id="disabled-merchants-<%= merchant.id %>">
+          <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+          <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, params: { status: 'enabled' } %></li>
+          </div>
+        <% end %></ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <div id="top-five-merchants">
+        <h3 style="text-align:center;">Top 5 Merchants</h3>
+        <hr><br>
+        <ol>
+          <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
+          <h5><li> <%= "#{merchant.name}"%> Revenue: <%= number_to_currency(merchant.revenue)%> </li></h5><br>
+          <p> <i> Top selling date for <%= merchant.name %> was <%= merchant.best_day.strftime("%A, %b %d") %> </i> </p>
+          <% end %>
+        </ol>
+      </div>
     </div>
   </div>
+
 </div>

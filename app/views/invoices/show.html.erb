@@ -1,6 +1,7 @@
 <%= render 'partials/navbar_merchant' %><br>
 
-<div class="padding-left">
+<div class="container">
+
   <h1 style="text-align:center;">Invoice #<%= @invoice.id %></h1>
   <b>Status:</b> <%= @invoice.status.titleize %><br>
   <b>Created at:</b> <%= @invoice.created_at.strftime("%A, %B %d, %Y") %><br>
@@ -21,7 +22,7 @@
       <p>Sold at: <%= number_to_currency(invoice_item.unit_price) %></p>
 
       <% if invoice_item.applied_discount != nil %>
-        <%= link_to "Discount Applied", merchant_discount_path(invoice_item., discount) %>
+        <%= link_to "#{invoice_item.applied_discount.percentage}% Discount Applied", merchant_discount_path(invoice_item.applied_discount.merchant_id, invoice_item.applied_discount.id) %>
       <% end %>
 
       <p>Invoice Item Status: <%= invoice_item.status.titleize %></p>
@@ -34,4 +35,5 @@
     <hr>
     <% end %>
   </div>
+  
 </div>

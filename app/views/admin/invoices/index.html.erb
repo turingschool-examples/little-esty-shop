@@ -1,11 +1,14 @@
 <%= render 'partials/navbar_admin' %><br>
 
-<h3 style="padding-left: 20px">Admin Invoices Index</h3><br>
+<div class="container">
 
-<h2 style="padding-left: 20px"> Invoices </h2>
+  <h2>Admin Invoices Index</h2><br>
+  <h3>Invoices</h3>
 
-<div class="invoice_index">
-  <% @invoices.each do |invoice| %>
-    <li style="padding-left: 20px">Invoice: <%= link_to invoice.id, admin_invoice_path(invoice.id) %></li>
-  <% end %>
+  <div class="invoice_index">
+    <% @invoices.each do |invoice| %>
+      <li style="padding-left: 20px">Invoice: <%= link_to invoice.id, admin_invoice_path(invoice.id) %></li>
+    <% end %>
+  </div>
+
 </div>

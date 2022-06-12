@@ -1,11 +1,15 @@
-<h2>Update <%= @item.name %></h2>
+<div class="container">
 
-<%= form_with url: merchant_item_path(@merchant, @item), method: :patch, local: true do |f| %>
-  <%= f.label :name, 'Name' %>
-  <%= f.text_field :name, value: @item.name %> <br>
-  <%= f.label :description, 'Description' %>
-  <%= f.text_field :description, value: @item.description %> <br>
-  <%= f.label :unit_price, 'Unit Price' %>
-  <%= f.text_field :unit_price, value: @item.unit_price %><br>
-  <%= f.submit 'Update' %>
-<% end %>
+  <h2>Update <%= @item.name %></h2><br>
+
+  <%= form_with url: merchant_item_path(@merchant, @item), method: :patch, local: true do |f| %>
+    <%= f.label :name, 'Name' %>
+    <%= f.text_field :name, value: @item.name %> <br>
+    <%= f.label :description, 'Description' %>
+    <%= f.text_field :description, value: @item.description %> <br>
+    <%= f.label :unit_price, 'Unit Price' %>
+    <%= f.text_field :unit_price, value: @item.unit_price %><br>
+    <%= f.submit 'Update' %>
+  <% end %>
+
+</div>

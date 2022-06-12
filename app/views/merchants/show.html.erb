@@ -1,37 +1,41 @@
 <%= render 'partials/navbar_merchant' %><br>
 <%= render 'partials/two_columns' %>
 
-<h5><%= link_to "Bulk Discounts Index", "/merchants/#{@merchant.id}/discounts" %></h5>
+<div class="container">
 
-<div class="row">
-  <div class="column";>
-    <div class= "items_ready_to_ship">
-      <h3 style="text-align:center;">Items Ready to Ship:</h3>
-      <hr><br>
-      <ol>
-        <% @merchant.items_ready_to_ship.each do |item| %>
-        <div id="item-<%= item.id %>">
-          <li><b> <%= "#{item.name}" %></b></li>
-          <p> <%= link_to "#{item.id}", merchant_item_path(@merchant, item.id) %> </p>
-          <p> <%= item.created_at.strftime("Invoice Date %A, %B %d, %Y") %> </p>
-        </div>
+  <h5><%= link_to "Bulk Discounts Index", "/merchants/#{@merchant.id}/discounts" %></h5>
+
+  <div class="row">
+    <div class="column";>
+      <div class= "items_ready_to_ship">
+        <h3 style="text-align:center;">Items Ready to Ship:</h3>
+        <hr><br>
+        <ol>
+          <% @merchant.items_ready_to_ship.each do |item| %>
+          <div id="item-<%= item.id %>">
+            <li><b> <%= "#{item.name}" %></b></li>
+            <p> <%= link_to "#{item.id}", merchant_item_path(@merchant, item.id) %> </p>
+            <p> <%= item.created_at.strftime("Invoice Date %A, %B %d, %Y") %> </p>
+          </div>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+
+    <div class="column";>
+      <div class= "favorite_customers">
+        <h3 style="text-align:center;">Top 5 Favorite Customers:</h3>
+        <hr><br>
+        <ol>
+        <% @merchant.top_five_favorite_customers.each do |customer| %>
+          <div id="customer-<%= customer.id %>">
+            <h5><li><b> <%= "#{customer.first_name} #{customer.last_name}" %></b> -
+            <%= customer.transaction_count %> Successful Transactions</li></h5><br>
+          </div>
         <% end %>
-      </ol>
+        </ol>
+      </div>
     </div>
   </div>
 
-  <div class="column";>
-    <div class= "favorite_customers">
-      <h3 style="text-align:center;">Top 5 Favorite Customers:</h3>
-      <hr><br>
-      <ol>
-      <% @merchant.top_five_favorite_customers.each do |customer| %>
-        <div id="customer-<%= customer.id %>">
-          <h5><li><b> <%= "#{customer.first_name} #{customer.last_name}" %></b> -
-          <%= customer.transaction_count %> Successful Transactions</li></h5><br>
-        </div>
-      <% end %>
-      </ol>
-    </div>
-  </div>
 </div>

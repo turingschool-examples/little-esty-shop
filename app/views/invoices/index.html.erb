@@ -1,10 +1,13 @@
-<%= render 'partials/navbar_merchant' %><br>
+<%= render 'partials/navbar_merchant' %><br><br>
 
-  <h1>Merchant Invoices Index</h1>
-  <h2><%= @merchant.name %>'s Invoices</h2>
+<div class="container">
+
+  <h2 style="text-align:center;">Invoices Index</h2><br>
 
   <div class="invoice_index">
     <% @invoices.each do |invoice| %>
-    <li>Invoice: <%= link_to invoice.id, merchant_invoice_path(@merchant, invoice.id) %></li>
+    <ol>Invoice: <%= link_to invoice.id, merchant_invoice_path(@merchant, invoice.id) %></ol>
     <% end %>
   </div>
+
+</div>

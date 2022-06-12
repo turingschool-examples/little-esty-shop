@@ -16,7 +16,7 @@ RSpec.describe "Merchant Items Show Page" do
 
     visit merchant_item_path(@merchant_1, @item_1)
 
-    expect(page).to have_content("Name: Qui Esse")
+    expect(page).to have_content("Item: Qui Esse")
     expect(page).to have_content("Description: Nihil autem sit odio inventore deleniti")
     expect(page).to have_content("Current Selling Price: $75,107.00")
 

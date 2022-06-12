@@ -1,8 +1,11 @@
 <%= render 'partials/navbar_merchant' %><br>
 
-<h2>Name: <%= @item.name %></h2>
-<p><b>Description:</b> <%= @item.description %></p>
-<p><b>Current Selling Price:</b> <%= number_to_currency(@item.unit_price) %></p>
+<div class="container">
 
+  <h2>Item: <%= @item.name %></h2>
+  <h5><b>Description:</b> <%= @item.description %></h5>
+  <h5><b>Current Selling Price:</b> <%= number_to_currency(@item.unit_price) %></h5>
 
-<%= link_to "Update Item", edit_merchant_item_path(@merchant, @item)%>
+  <%= link_to "Update Item", edit_merchant_item_path(@merchant, @item)%>
+
+</div>

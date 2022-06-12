@@ -13,10 +13,10 @@
  *= require_tree .
  *= require_self
  */
-.padding-left{
+.padding-left {
   padding-left: 20px;
 }
 
-.center{
+.center {
   text-align: center;
 }

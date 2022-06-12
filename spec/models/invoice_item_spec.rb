@@ -31,20 +31,4 @@ RSpec.describe InvoiceItem do
       expect(invoice_item1.applied_discount).to eq(discount2)
     end
   end
-
-  describe '#merchant_id' do
-    it "returns the merchant_id from an applied discount" do
-      merchant1 = Merchant.create!(name: "REI")
-      discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
-      discount2 = merchant1.discounts.create!(percentage: 30, quantity_threshold: 15)
-      customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
-      item1 = merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 100)
-      item2 = merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 150)
-      invoice1 = customer1.invoices.create!(status: 2)
-      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 15, unit_price: 100, status: "shipped")
-      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 20, unit_price: 150, status: "pending")
-
-      expect(invoice_item1.merchant_id).to eq(merchant1.id)
-    end
-  end
 end

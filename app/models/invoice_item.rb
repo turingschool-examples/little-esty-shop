@@ -16,8 +16,4 @@ class InvoiceItem < ApplicationRecord
     qualifying_discounts = discounts.map { |discount| discount if discount.quantity_threshold <= self.quantity }
     qualifying_discounts.compact.max_by(&:percentage)
   end
-
-  def merchant_id
-    applied_discount.merchant_id
-  end
 end

@@ -1,6 +1,7 @@
-ß<%= render 'partials/navbar_merchant' %><br>
+<%= render 'partials/navbar_merchant' %><br>
 
-<div class="padding-left">
+<div class="container">
+
   <h5><%= link_to "Create a New Discount", new_merchant_discount_path(@merchant, @discount) %></h5><br>
 
   <%= @discounts.each do |discount| %>
@@ -21,4 +22,5 @@
     </ol>
     <% end %>
   </div>
+
 </div>

@@ -8,8 +8,20 @@
 
 require 'csv'
 
-merchant1 = Merchant.create!(name: "REI")
-merchant2 = Merchant.create!(name: "Target")
-discount1 = Discount.create!(percentage: 20, quantity_threshold: 3, merchant_id: merchant1.id)
-discount2 = Discount.create!(percentage: 50, quantity_threshold: 5, merchant_id: merchant1.id)
-discount2 = Discount.create!(percentage: 50, quantity_threshold: 5, merchant_id: merchant2.id)
+# merchant1 = Merchant.create!(name: "REI")
+# merchant2 = Merchant.create!(name: "Black Diamond")
+#
+# discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
+# discount2 = merchant1.discounts.create!(percentage: 30, quantity_threshold: 15)
+#
+# customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
+#
+# item1 = merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 100)
+# item2 = merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 150)
+# item3 = merchant2.items.create!(name: "Nalgene", description: "Put all your cool stickers here", unit_price: 12)
+#
+# invoice1 = customer1.invoices.create!(status: 2)
+#
+# invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 12, unit_price: 100, status: "shipped")
+# invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 15, unit_price: 150, status: "pending")
+# invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice1.id, quantity: 15, unit_price: 12, status: "pending")

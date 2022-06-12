@@ -1,14 +1,18 @@
-<h3>Create a New Item | <%= @merchant.name %></h3><br>
+<div class="container">
 
-<%= form_with url: merchant_items_path(@merchant), method: :post, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br><br>
-  <%= f.label :description, 'Description' %>
-  <%= f.text_field :description %><br><br>
-  <%= f.label :unit_price, 'Unit Price' %>
-  <%= f.number_field :unit_price %><br><br>
-  <%= f.hidden_field :id, value: @merchant.id %>
-  <%= f.hidden_field :created_at, value: Time.now %>
-  <%= f.hidden_field :updated_at, value: Time.now %>
-  <%= f.submit 'Submit' %>
-<% end %>
+  <h3>Create a New Item | <%= @merchant.name %></h3><br>
+
+  <%= form_with url: merchant_items_path(@merchant), method: :post, local: true do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br><br>
+    <%= f.label :description, 'Description' %>
+    <%= f.text_field :description %><br><br>
+    <%= f.label :unit_price, 'Unit Price' %>
+    <%= f.number_field :unit_price %><br><br>
+    <%= f.hidden_field :id, value: @merchant.id %>
+    <%= f.hidden_field :created_at, value: Time.now %>
+    <%= f.hidden_field :updated_at, value: Time.now %>
+    <%= f.submit 'Submit' %>
+  <% end %>
+
+</div>
