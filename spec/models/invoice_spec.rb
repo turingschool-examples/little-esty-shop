@@ -16,14 +16,10 @@ RSpec.describe Invoice, type: :model do
     it '#total_revenue returns total revenue of an invoice' do
       merchant1 = create(:merchant)
       customer1 = create(:customer)
-
       item1 = create(:item, merchant: merchant1)
       item2 = create(:item, merchant: merchant1)
-
       invoices = create_list(:invoice, 4, customer: customer1, created_at: "2022-03-10 00:54:09 UTC")
-
       transaction1 = create(:transaction, invoice: invoices[0], result: 1)
-
       invoice_item1 = create(:invoice_item, item: item1, invoice: invoices[0], unit_price: 3011, status: 2)
       invoice_item2 = create(:invoice_item, item: item2, invoice: invoices[0], unit_price: 2524, status: 1)
       invoice_item3 = create(:invoice_item, item: item2, invoice: invoices[1], unit_price: 2524, status: 0)
@@ -36,14 +32,10 @@ RSpec.describe Invoice, type: :model do
     it 'formats the date correctly' do
       merchant1 = create(:merchant)
       customer1 = create(:customer)
-
       item1 = create(:item, merchant: merchant1)
       item2 = create(:item, merchant: merchant1)
-
       invoices = create_list(:invoice, 4, customer: customer1, created_at: "2022-03-10 00:54:09 UTC")
-
       transaction1 = create(:transaction, invoice: invoices[0], result: 1)
-
       invoice_item1 = create(:invoice_item, item: item1, invoice: invoices[0], unit_price: 3011, status: 2)
       invoice_item2 = create(:invoice_item, item: item2, invoice: invoices[0], unit_price: 2524, status: 1)
       invoice_item3 = create(:invoice_item, item: item2, invoice: invoices[1], unit_price: 2524, status: 0)
@@ -68,6 +60,7 @@ RSpec.describe Invoice, type: :model do
       bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
       bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
+      expect(invoice1.total_discounted_revenue).to eq(3060)
 
     end
   end
@@ -76,14 +69,10 @@ RSpec.describe Invoice, type: :model do
     it 'returns all invoices without a shipped status' do
       merchant1 = create(:merchant)
       customer1 = create(:customer)
-
       item1 = create(:item, merchant: merchant1)
       item2 = create(:item, merchant: merchant1)
-
       invoices = create_list(:invoice, 4, customer: customer1, created_at: "2022-03-10 00:54:09 UTC")
-
       transaction1 = create(:transaction, invoice: invoices[0], result: 1)
-
       invoice_item1 = create(:invoice_item, item: item1, invoice: invoices[0], unit_price: 3011, status: 2)
       invoice_item2 = create(:invoice_item, item: item2, invoice: invoices[0], unit_price: 2524, status: 1)
       invoice_item3 = create(:invoice_item, item: item2, invoice: invoices[1], unit_price: 2524, status: 0)
