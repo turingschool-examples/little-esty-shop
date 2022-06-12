@@ -2,6 +2,7 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
   belongs_to :customer
 
   enum status:["in progress", "completed", "cancelled"]
@@ -20,6 +21,11 @@ class Invoice < ApplicationRecord
 
   def formatted_date
     created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def total_discounted_revenue
+    binding.pry
+
   end
 
 private
