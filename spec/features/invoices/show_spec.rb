@@ -92,13 +92,6 @@ RSpec.describe "Merchant Invoices Show Page" do
     expect(current_path).to eq(merchant_invoice_path(merchant1, invoice1))
   end
 
-  # Merchant Invoice Show Page: Total Revenue and Discounted Revenue
-  #
-  # As a merchant
-  # When I visit my merchant invoice show page
-  # Then I see the total revenue for my merchant from this invoice (not including discounts)
-  # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
-
   it "displays the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation", :vcr do
     visit merchant_invoice_path(merchant1, invoice1)
 

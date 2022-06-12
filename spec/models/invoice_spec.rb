@@ -17,8 +17,8 @@ RSpec.describe Invoice do
   let!(:merchant1) { Merchant.create!(name: "REI") }
   let!(:merchant2) { Merchant.create!(name: "Target") }
 
-  let!(:discount1) { merchant1.discounts.create!(percentage: 20, quantity_threshold: 3) }
-  let!(:discount2) { merchant1.discounts.create!(percentage: 50, quantity_threshold: 5) }
+  let!(:discount1) { merchant1.discounts.create!(percentage: 20, quantity_threshold: 10) }
+  let!(:discount2) { merchant2.discounts.create!(percentage: 50, quantity_threshold: 5) }
   let!(:discount3) { merchant2.discounts.create!(percentage: 50, quantity_threshold: 5) }
 
   let!(:item1) { merchant1.items.create!(name: "Qui Esse", description: "Nihil autem sit odio inventore deleniti", unit_price: 75107) }
@@ -83,8 +83,34 @@ RSpec.describe Invoice do
   end
 
   describe '#discounted_revenue' do
-    it "calculates the total discounted revenue for a merchant from an invoice" do
-      expect(invoice1.discounted_revenue).to eq(34088)
+    context "calculates the total discounted revenue for a merchant from an invoice" do
+      it 'in this example, no bulk discounts should be applied' do
+        merchant1 = Merchant.create!(name: "REI")
+        discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
+        customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
+        item1 = merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 135)
+        item2 = merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 219.99)
+        invoice1 = customer1.invoices.create!(status: 2)
+        invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 100, status: "shipped")
+        invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 5, unit_price: 150, status: "pending")
+
+        expect(invoice1.total_revenue).to eq(1250)
+        expect(invoice1.discounted_revenue).to eq(1250)
+      end
+
+      it 'in this example, item1 should be discounted at 20% off, item2 should not be discounted' do
+        merchant1 = Merchant.create!(name: "REI")
+        discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
+        customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
+        item1 = merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 100)
+        item2 = merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 150)
+        invoice1 = customer1.invoices.create!(status: 2)
+        invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 100, status: "shipped")
+        invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 5, unit_price: 150, status: "pending")
+
+        expect(invoice1.total_revenue).to eq(1750)
+        expect(invoice1.discounted_revenue).to eq(1550)
+      end
     end
   end
 end
