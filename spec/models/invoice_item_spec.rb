@@ -15,4 +15,20 @@ RSpec.describe InvoiceItem do
     it { should validate_presence_of(:unit_price) }
     it { should validate_presence_of(:status) }
   end
+
+  describe '#discount_applied' do
+    it "returns the discount applied to an invoice item" do
+      merchant1 = Merchant.create!(name: "REI")
+      discount1 = merchant1.discounts.create!(percentage: 20, quantity_threshold: 10)
+      discount2 = merchant1.discounts.create!(percentage: 30, quantity_threshold: 15)
+      customer1 = Customer.create!(first_name: "Leanne", last_name: "Braun")
+      item1 = merchant1.items.create!(name: "Boots", description: "Never get blisters again!", unit_price: 100)
+      item2 = merchant1.items.create!(name: "Tent", description: "Will survive any storm", unit_price: 150)
+      invoice1 = customer1.invoices.create!(status: 2)
+      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 15, unit_price: 100, status: "shipped")
+      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 20, unit_price: 150, status: "pending")
+
+      expect(invoice_item1.discount_applied).to eq(discount2)
+    end
+  end
 end
