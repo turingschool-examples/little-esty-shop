@@ -7,6 +7,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many :invoice_items }
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:merchants).through(:items)}
+    it { should have_many(:bulk_discounts).through(:merchants)}
   end
 
   describe 'validations' do
@@ -64,7 +65,7 @@ RSpec.describe Invoice, type: :model do
       bulk_discount5 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
       bulk_discount6 = merchant2.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-      expect(invoice1.total_discounted_revenue(merchant1.id)).to eq()
+      expect(invoice1.total_discounted_revenue).to eq(5900)
 
     end
   end
