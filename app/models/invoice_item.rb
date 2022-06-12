@@ -11,4 +11,9 @@ class InvoiceItem < ApplicationRecord
   validates :status, presence: true
 
   enum status: {'pending' => 0, 'shipped' => 1, 'packaged' => 2}
+
+  def discount_applied
+    qualifying_discounts = discounts.map { |discount| discount if discount.quantity_threshold <= self.quantity }
+    qualifying_discounts.compact.max_by(&:percentage)
+  end
 end

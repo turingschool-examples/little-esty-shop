@@ -19,6 +19,11 @@
       <h4>Item Name: <%= invoice_item.item.name %></h4>
       <p>Quantity Sold: <%= invoice_item.quantity %></p>
       <p>Sold at: <%= number_to_currency(invoice_item.unit_price) %></p>
+
+      <% require "pry"; binding.pry %>
+      <% if invoice_item.discounted_revenue %>
+      <%#= link_to "Discount Applied",  %>
+
       <p>Invoice Item Status: <%= invoice_item.status.titleize %></p>
       <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch do |form| %>
         <%= form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>

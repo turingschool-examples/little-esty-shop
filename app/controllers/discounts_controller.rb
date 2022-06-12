@@ -3,6 +3,7 @@
 
 class DiscountsController < ApplicationController
   before_action :find_merchant, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :find_discount, only: [:show, :edit, :update]
 
   def index
     @discounts = Discount.all
@@ -10,7 +11,6 @@ class DiscountsController < ApplicationController
   end
 
   def show
-    @discount = Discount.find(params[:id])
   end
 
   def new
@@ -22,13 +22,11 @@ class DiscountsController < ApplicationController
   end
 
   def edit
-    @discount = Discount.find(params[:id])
   end
 
   def update
-    discount = Discount.find(params[:id])
-    discount.update(discount_params)
-    redirect_to merchant_discount_path(@merchant, discount)
+    @discount.update(discount_params)
+    redirect_to merchant_discount_path(@merchant, @discount)
   end
 
   def destroy
