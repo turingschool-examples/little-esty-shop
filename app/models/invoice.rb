@@ -18,10 +18,6 @@ class Invoice < ApplicationRecord
     .order(created_at: :desc)
   end
 
-  def total_discounted_revenue
-
-  end
-
   def formatted_date
     created_at.strftime("%A, %B %d, %Y")
   end
