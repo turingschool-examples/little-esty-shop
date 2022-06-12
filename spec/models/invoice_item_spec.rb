@@ -64,14 +64,14 @@ RSpec.describe InvoiceItem, type: :model do
     item2 = create(:item, merchant: merchant1, name: "Lightsaber")
     invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 15, unit_price: 100)
     invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 10, unit_price: 500)
-    bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
+    bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 20)
     bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
     bulk_discount3 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 40)
     bulk_discount4 = merchant1.bulk_discounts.create!(threshold: 20, discount_percentage: 30)
     bulk_discount5 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-    expect(invoice_item1.discounted_revenue).to eq(900)
-    expect(invoice_item2.discounted_revenue).to eq(5000)
+    expect(invoice_item1.discounted_revenue).to eq(900.0)
+    expect(invoice_item2.discounted_revenue).to eq(5000.0)
 
   end
 end

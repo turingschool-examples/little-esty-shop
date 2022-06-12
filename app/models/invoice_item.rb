@@ -17,10 +17,18 @@ class InvoiceItem < ApplicationRecord
   end
 
   def find_discount
-    x = item.merchant.bulk_discounts.select("bulk_discounts.*")
+    item.merchant.bulk_discounts.select("bulk_discounts.*")
     .where('bulk_discounts.threshold <= ?', quantity)
     .order('bulk_discounts.discount_percentage DESC')
     .first
+  end
+
+  def discounted_revenue
+    if find_discount.blank?
+      revenue_before_discount
+    else
+      revenue_before_discount - (find_discount.discount_percentage * revenue_before_discount.to_f / 100)
+    end
   end
 
 private
