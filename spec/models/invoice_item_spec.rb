@@ -27,38 +27,31 @@ RSpec.describe InvoiceItem, type: :model do
 
     it "calculates total revenue before discount is applied" do
       merchant1 = create(:merchant)
-      merchant2 = create(:merchant)
       customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
       invoice1 = create(:invoice, customer: customer1)
-      invoice2 = create(:invoice, customer: customer1)
-      transaction1 = create(:transaction, invoice: invoice1, result: 0)
-      transaction2 = create(:transaction, invoice: invoice1, result: 0)
       item1 = create(:item, merchant: merchant1)
-      item2 = create(:item, merchant: merchant1)
       invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
-      invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 15, unit_price: 200)
-      bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
-      bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
       expect(invoice_item1.revenue_before_discount).to eq(1200)
     end
 
     it "calculates total revenue with the bulk discount" do
-      merchant1 = create(:merchant)
-      merchant2 = create(:merchant)
+      merchant1 = create(:merchant, name: "Jimmy")
       customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
       invoice1 = create(:invoice, customer: customer1)
       invoice2 = create(:invoice, customer: customer1)
-      transaction1 = create(:transaction, invoice: invoice1, result: 0)
-      transaction2 = create(:transaction, invoice: invoice1, result: 0)
-      item1 = create(:item, merchant: merchant1)
-      item2 = create(:item, merchant: merchant1)
-      invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
-      invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 15, unit_price: 200)
+      item1 = create(:item, merchant: merchant1, name: "Toy")
+      item2 = create(:item, merchant: merchant1, name: "Lightsaber")
+      invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 15, unit_price: 100)
+      invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 10, unit_price: 500)
       bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
       bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
+      bulk_discount3 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 40)
+      bulk_discount4 = merchant1.bulk_discounts.create!(threshold: 20, discount_percentage: 30)
+      bulk_discount5 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 30)
 
-      expect(invoice_1).to eq(nil)
+      expect(invoice_item1.find_discount).to eq(bulk_discount3)
+      expect(invoice_item2.find_discount).to eq(bulk_discount5)
     end
   end
 end
