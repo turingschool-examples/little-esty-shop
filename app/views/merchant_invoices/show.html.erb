@@ -21,3 +21,4 @@
 <% end %>
 
 Total Revenue: $<%= ('%.2f' % @invoice.total_revenue.fdiv(100)) %>
+Total Revenue After Discounts: $<%=  ('%.2f' % (@invoice.total_revenue - @invoice.total_revenue_after_discount.to_i).fdiv(100)) %>
