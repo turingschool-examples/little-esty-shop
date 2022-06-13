@@ -91,6 +91,7 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
       merchant2 = create(:merchant, name: "Phillip")
       customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
       invoice1 = create(:invoice, customer: customer1)
+      invoice2 = create(:invoice, customer: customer1)
       item1 = create(:item, merchant: merchant1, name: "Toy")
       item2 = create(:item, merchant: merchant1, name: "Lightsaber")
       item3 = create(:item, merchant: merchant2, name: "Jetpack")
@@ -107,10 +108,11 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
 
       visit "/admin/invoices/#{invoice1.id}"
 
-      expect(page).to have_content("$15700.00")
+      expect(page).to have_content("Discounted Revenue: $15,700.00")
       expect(page).to_not have_content("$1.00")
+      expect(page).to have("Total Revenue: $20,500.00")
 
-      
+
     end
   end
 end
