@@ -16,10 +16,17 @@
 
     </ul>
   </div>
-
 </div>
 
 <div class="page-defaults" id="splitSides">
+  <div class="page-defaults" id='rightSide2'>
+    <h3>Holidays</h3>
+  <% @holidays.each do |holiday| %>
+    <strong><%= holiday.name %></strong>
+    <p><%= holiday.date %></p>
+  <% end %>
+  </div>
+
   <div class="page-defaults" id="leftSide2">
   <% @merchant.bulk_discounts.each do |discount| %>
     <div id="bulk-discount-<%= discount.id %>">
@@ -31,4 +38,3 @@
       <%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant) %>
     </div>
   </div>
-</div>
