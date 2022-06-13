@@ -22,6 +22,10 @@ class Invoice < ApplicationRecord
   end
 
   def amount_off
-    self.invoice_items.joins(:bulk_discounts).where('invoice_items.quantity >= threshold').select('invoice_items.*, percent_off').sum('((invoice_items.unit_price * quantity) * percent_off)')
+    self.invoice_items.joins(:bulk_discounts)
+                      .where('invoice_items.quantity >= threshold')
+                      .select('invoice_items.*, percent_off')
+                      .sum('((invoice_items.unit_price * quantity) * percent_off)')
   end
+
 end

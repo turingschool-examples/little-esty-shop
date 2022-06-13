@@ -101,13 +101,15 @@ RSpec.describe "merchant's invoice show page", type: :feature do
     visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
 
     within "#ii-#{@ii_1.id}" do
-      expect(page).to_not have_link("View Dicount")
+      expect(page).to_not have_link("View Discount")
     end
 
     within "#ii-#{@ii_4.id}" do
-      expect(page).to have_link("View Dicount")
+      expect(page).to have_link("View Discount")
       click_link "View Discount"
-      expect(current_path).to be(merchant_bulk_discount_path(@bulk_discount1))
+      expect(current_path).to eq("/merchants/#{@merch_1.id}/bulk_discounts/#{@bulk_discount1.id}")
     end
+
+    expect(page).to have_content("20% Off")
   end
 end
