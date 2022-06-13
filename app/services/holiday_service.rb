@@ -1,5 +1,4 @@
 class HolidayService
-
   def get_holidays
     get_url('https://date.nager.at/api/v2/NextPublicHolidays/US')
   end

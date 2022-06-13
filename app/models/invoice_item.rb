@@ -10,14 +10,14 @@ class InvoiceItem < ApplicationRecord
   end
 
   def display_price
-    cents = self.unit_price
-    '%.2f' % (cents / 100.0)
+    cents = unit_price
+    format('%.2f', (cents / 100.0))
   end
 
   def merchant_discount
-    bulk_discounts.where("bulk_discounts.quantity_threshold <= ?", quantity)
-    .order('bulk_discounts.quantity_threshold DESC')
-    .first
+    bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', quantity)
+                  .order('bulk_discounts.quantity_threshold DESC')
+                  .first
   end
 
   def calculate_discounted_renevue

@@ -1,5 +1,4 @@
 class Admin::MerchantsController < ApplicationController
-
   def index
     @merchants = Merchant.all
   end
@@ -35,7 +34,7 @@ class Admin::MerchantsController < ApplicationController
     redirect_to admin_merchants_path
   end
 
-private
+  private
 
   def set_merchant
     @merchant = Merchant.find(params[:id])

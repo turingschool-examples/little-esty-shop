@@ -1,4 +1,4 @@
-class  Admin::InvoicesController < ApplicationController
+class Admin::InvoicesController < ApplicationController
   def index
     @invoices = Invoice.all
   end
@@ -12,6 +12,6 @@ class  Admin::InvoicesController < ApplicationController
     invoice = Invoice.find(params[:invoice_id])
     invoice.update(status: params[:status])
     redirect_to admin_invoice_path(invoice)
-    flash[:notice] = "Invoice Status Has Been Updated!"
+    flash[:notice] = 'Invoice Status Has Been Updated!'
   end
 end

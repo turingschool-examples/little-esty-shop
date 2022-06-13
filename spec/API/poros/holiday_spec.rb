@@ -4,7 +4,6 @@ require 'json'
 
 RSpec.describe 'Holiday' do
   it 'can return the holidays' do
-
     holiday = HolidayService.new
     hash = holiday.get_holidays
     expected = HolidayFacade.find_holiday.count
@@ -12,12 +11,10 @@ RSpec.describe 'Holiday' do
   end
 
   it 'can return the next three holidays' do
-
     holidays = HolidayFacade.find_holiday[0..2]
 
-    expect(holidays[0].name).to eq('Good Friday')
-    expect(holidays[1].name).to eq('Memorial Day')
-    expect(holidays[2].name).to eq('Juneteenth')
-
+    expect(holidays[0].name).to eq('Juneteenth')
+    expect(holidays[1].name).to eq('Independence Day')
+    expect(holidays[2].name).to eq('Labor Day')
   end
 end

@@ -1,0 +1,29 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'coverage/**/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'project_requirements/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/environments/**/*'
+    - 'config/environment.rb'
+    - 'config/puma.rb'
+    - 'config/spring.rb'
+    - 'config/initializers/**/*'
+  NewCops: enable
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false

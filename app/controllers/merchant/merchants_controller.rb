@@ -6,5 +6,4 @@ class Merchant::MerchantsController < ApplicationController
   def display_discount
     percent_discount * 100
   end
-
 end

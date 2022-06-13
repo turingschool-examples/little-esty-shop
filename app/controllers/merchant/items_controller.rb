@@ -1,5 +1,4 @@
 class Merchant::ItemsController < ApplicationController
-
   def index
     @merchant = Merchant.find(params[:merchant_id])
   end
@@ -37,8 +36,10 @@ class Merchant::ItemsController < ApplicationController
       flash.alert = "#{@item.name} has been updated"
     end
   end
+
   private
-    def item_params
-      params.permit(:name, :description, :unit_price, :item_status, :merchant_id)
-    end
+
+  def item_params
+    params.permit(:name, :description, :unit_price, :item_status, :merchant_id)
+  end
 end

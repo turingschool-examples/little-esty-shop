@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchant Show Page' do
   before :each do
-    @merchant_1 = Merchant.create!(name: "Ana Maria")
-    @merchant_2 = Merchant.create!(name: "Juan Lopez")
+    @merchant_1 = Merchant.create!(name: 'Ana Maria')
+    @merchant_2 = Merchant.create!(name: 'Juan Lopez')
   end
 
   it 'Displays the merchants name' do

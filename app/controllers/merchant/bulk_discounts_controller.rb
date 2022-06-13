@@ -1,5 +1,4 @@
 class Merchant::BulkDiscountsController < ApplicationController
-
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @holidays = HolidayFacade.find_holiday[0..2]
@@ -39,10 +38,11 @@ class Merchant::BulkDiscountsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:merchant_id])
     BulkDiscount.find(params[:id]).destroy
     redirect_to merchant_bulk_discounts_path(@merchant.id)
-    flash[:alert] = "Your discount was deleted"
+    flash[:alert] = 'Your discount was deleted'
   end
 
   private
+
   def bulk_discount_create_params
     {
       name: params[:bulk_discount][:name],

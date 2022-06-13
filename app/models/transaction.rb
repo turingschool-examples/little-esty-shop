@@ -5,5 +5,5 @@ class Transaction < ApplicationRecord
   has_many :items, through: :invoice_items
   has_many :customers, through: :invoice
 
-  scope :successful_transactions, -> { where("transactions.result =?", 0) }
+  scope :successful_transactions, -> { where('transactions.result =?', 0) }
 end

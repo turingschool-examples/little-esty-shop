@@ -5,5 +5,4 @@ class Holiday
     @name = one_holiday[:localName]
     @date = one_holiday[:date]
   end
-
 end
