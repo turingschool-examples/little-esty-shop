@@ -65,8 +65,29 @@ RSpec.describe Invoice, type: :model do
       bulk_discount5 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
       bulk_discount6 = merchant2.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-      expect(invoice1.total_discounted_revenue).to eq(5900)
+      expect(invoice1.total_discounted_revenue(merchant1.id)).to eq(5900)
 
+    end
+
+    it "can calculate all of the invoices total revenue including discounted" do
+      merchant1 = create(:merchant, name: "Jimmy")
+      merchant2 = create(:merchant, name: "Phillip")
+      customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
+      invoice1 = create(:invoice, customer: customer1)
+      item1 = create(:item, merchant: merchant1, name: "Toy")
+      item2 = create(:item, merchant: merchant1, name: "Lightsaber")
+      item3 = create(:item, merchant: merchant2, name: "Jetpack")
+      invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 15, unit_price: 100)
+      invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 10, unit_price: 500)
+      invoice_item3 = create(:invoice_item, item: item3, invoice: invoice1, quantity: 20, unit_price: 700)
+      bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 20)
+      bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
+      bulk_discount3 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 40)
+      bulk_discount4 = merchant1.bulk_discounts.create!(threshold: 20, discount_percentage: 30)
+      bulk_discount5 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
+      bulk_discount6 = merchant2.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
+
+      expect(invoice1.all_invoice_revenue).to eq(15700)
     end
   end
 
