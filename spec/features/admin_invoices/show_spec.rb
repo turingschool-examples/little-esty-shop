@@ -49,11 +49,11 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
     customer1 = create(:customer)
     invoice1 = create(:invoice, customer: customer1, status: 0)
     transaction1 = create(:transaction, invoice: invoice1, result: 1)
-    invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011)
-    invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524)
+    invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011, quantity: 2)
+    invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524, quantity: 1)
     visit "/admin/invoices/#{invoice1.id}"
 
-    expect(page).to have_content('Total Revenue: $55.35')
+    expect(page).to have_content('Total Revenue: $8,546.00')
   end
 
   it 'has a select field to update invoice status' do
@@ -110,7 +110,7 @@ RSpec.describe 'Admin Invoice Show Page', type: :feature do
 
       expect(page).to have_content("Discounted Revenue: $15,700.00")
       expect(page).to_not have_content("$1.00")
-      expect(page).to have("Total Revenue: $20,500.00")
+      expect(page).to have_content("Total Revenue: $20,500.00")
 
 
     end
