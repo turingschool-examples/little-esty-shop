@@ -22,13 +22,13 @@ RSpec.describe Invoice, type: :model do
       item2 = create(:item, merchant: merchant1)
       invoices = create_list(:invoice, 4, customer: customer1, created_at: "2022-03-10 00:54:09 UTC")
       transaction1 = create(:transaction, invoice: invoices[0], result: 1)
-      invoice_item1 = create(:invoice_item, item: item1, invoice: invoices[0], unit_price: 3011, status: 2)
-      invoice_item2 = create(:invoice_item, item: item2, invoice: invoices[0], unit_price: 2524, status: 1)
+      invoice_item1 = create(:invoice_item, item: item1, invoice: invoices[0], unit_price: 3011, quantity: 2, status: 2)
+      invoice_item2 = create(:invoice_item, item: item2, invoice: invoices[0], unit_price: 2524, quantity: 1, status: 1)
       invoice_item3 = create(:invoice_item, item: item2, invoice: invoices[1], unit_price: 2524, status: 0)
       invoice_item4 = create(:invoice_item, item: item2, invoice: invoices[2], unit_price: 2524, status: 1)
       invoice_item5 = create(:invoice_item, item: item2, invoice: invoices[3], unit_price: 2524, status: 2)
 
-      expect(invoices[0].total_revenue).to eq('$55.35')
+      expect(invoices[0].total_revenue).to eq(8546)
     end
 
     it 'formats the date correctly' do
