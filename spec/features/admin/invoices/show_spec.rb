@@ -97,4 +97,5 @@ RSpec.describe 'Admin invoices show page' do
 
     expect(page).to have_select(:status, :selected => "completed")
   end
+
 end
