@@ -24,12 +24,6 @@ class Invoice < ApplicationRecord
     created_at.strftime("%A, %B %d, %Y")
   end
 
-  def total_discounted_revenue(merchant)
-    binding.pry
-    .select()
-    .where("invoice_items.merchant_id = ?, merchant")
-  end
-
   def all_invoice_revenue
     invoice_items.each.sum do |invoice_item|
       invoice_item.discounted_revenue
