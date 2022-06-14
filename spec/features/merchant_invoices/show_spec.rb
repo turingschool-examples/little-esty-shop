@@ -103,26 +103,33 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
     end
   end
 
-  # describe 'Merchant Invoice Show Page: Total Revenue and Discounted Revenue' do
-  #   it "can show total revenue for the merchant from the invoice including bulk discounts" do
-  #     merchant1 = create(:merchant)
-  #     merchant2 = create(:merchant)
-  #     customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
-  #     invoice1 = create(:invoice, customer: customer1)
-  #     invoice2 = create(:invoice, customer: customer1)
-  #     transaction1 = create(:transaction, invoice: invoice1, result: 0)
-  #     transaction2 = create(:transaction, invoice: invoice1, result: 0)
-  #     item1 = create(:item, merchant: merchant1)
-  #     item2 = create(:item, merchant: merchant1)
-  #     invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
-  #     invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 15, unit_price: 200)
-  #     bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
-  #     bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
-  #
-  #     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-  #
-  #     expect(page).to have_content("#{item1.name} Discounted Price 240")
-  #     expect(page).to have_content("#{item2.name} Discounted Price 900")
-  #   end
-  # end
+  describe 'Merchant Invoice Show Page: Link to Applied Discounts' do
+    it "can has links that go to bulk discount show page if applicable" do
+      merchant1 = create(:merchant)
+      customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
+      invoice1 = create(:invoice, customer: customer1)
+      transaction1 = create(:transaction, invoice: invoice1, result: 0)
+      item1 = create(:item, merchant: merchant1)
+      item2 = create(:item, merchant: merchant1)
+      invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
+      invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 5, unit_price: 200)
+      bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
+      bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
+
+      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+
+      within "#invoiceItem-#{invoice_item1.id}" do
+        expect(page).to have_link("Bulk_Discount ID: #{bulk_discount1.id}")
+        expect(page).to_not have_content("No Discount is Applied")
+        click_link "Bulk_Discount ID: #{bulk_discount1.id}"
+      end
+
+      expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount1.id}")
+
+      within "#invoiceItem-#{invoice_item2}" do
+        expect(page).to_not have_link("Bulk_Discount ID: #{bulk_discount2.id}")
+        expect(page).to have_content("No Discount is Applied")
+      end
+    end
+  end
 end
