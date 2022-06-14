@@ -119,15 +119,18 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
       visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
       within "#invoiceItem-#{invoice_item1.id}" do
-        expect(page).to have_link("Bulk_Discount ID: #{bulk_discount1.id}")
+        expect(page).to have_link("Bulk Discount ID: #{bulk_discount1.id}")
         expect(page).to_not have_content("No Discount is Applied")
-        click_link "Bulk_Discount ID: #{bulk_discount1.id}"
+        click_link "Bulk Discount ID: #{bulk_discount1.id}"
       end
 
-      expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount1.id}")
+      expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts/#{bulk_discount1.id}")
 
-      within "#invoiceItem-#{invoice_item2}" do
-        expect(page).to_not have_link("Bulk_Discount ID: #{bulk_discount2.id}")
+      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+
+      within "#invoiceItem-#{invoice_item2.id}" do
+        expect(page).to_not have_link("Bulk Discount ID: #{bulk_discount2.id}")
+        expect(page).to_not have_link("Bulk Discount ID: #{bulk_discount1.id}")
         expect(page).to have_content("No Discount is Applied")
       end
     end
