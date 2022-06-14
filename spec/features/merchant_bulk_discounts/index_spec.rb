@@ -11,6 +11,7 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
 
      visit "/merchants/#{merchant[0].id}/dashboard"
 
+
      within '#rightSide' do
       expect(page).to have_link("View All My Discounts")
       click_link("View All My Discounts")
