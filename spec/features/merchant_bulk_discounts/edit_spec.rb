@@ -13,7 +13,7 @@ RSpec.describe "Bulk Discounts Edit Page", type: :feature do
       expect(page).to have_link("Edit Discount")
       click_link "Edit Discount"
 
-      expect(current_path).to eq(edit_merchant_bulk_discount_path(merchant[0], bulk_discount1))
+      expect(current_path).to eq edit_merchant_bulk_discount_path(merchant[0], bulk_discount1)
 
       expect(page).to have_field(:threshold, with: 10)
       expect(page).to have_field(:discount_percentage, with: 20)
@@ -23,7 +23,7 @@ RSpec.describe "Bulk Discounts Edit Page", type: :feature do
       fill_in :discount_percentage, with: 50
       click_on "Submit"
 
-      expect(current_path).to eq(merchant_bulk_discount_path(merchant[0], bulk_discount1))
+      expect(current_path).to eq merchant_bulk_discount_path(merchant[0], bulk_discount1)
 
       expect(page).to have_content("Threshold: 25")
       expect(page).to have_content("Discount Percentage: 50")

@@ -9,15 +9,15 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
      bulk_discount2 = merchant[0].bulk_discounts.create!(threshold: 15, discount_percentage: 15)
      bulk_discount3 = merchant[1].bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-     visit "/merchants/#{merchant[0].id}/dashboard"
-
+     # visit "/merchants/#{merchant[0].id}/dashboard"
+     visit merchant_bulk_discounts_path(merchant[0])
 
      within '#rightSide' do
       expect(page).to have_link("View All My Discounts")
       click_link("View All My Discounts")
     end
 
-    expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts")
+    expect(current_path).to eq merchant_bulk_discounts_path(merchant[0])
 
     within "#leftSide2" do
       within "#bulk-discount-#{bulk_discount1.id}" do
@@ -34,8 +34,9 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
         click_link("ID: #{bulk_discount2.id}")
       end
 
-      expect(current_path).to eq("/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount2.id}")
-      end
+      expect(current_path).to eq merchant_bulk_discount_path(merchant[0], bulk_discount2)
+
+       end
     end
   end
 end

@@ -66,7 +66,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
 
       visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-      expect(page).to have_content("Total Revenue: #{invoice1.total_revenue}")
+      expect(page).to have_content("Total Revenue: $1,800.00")
     end
   end
 
@@ -116,7 +116,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
       bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
       bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+      visit merchant_invoice_path(merchant1, invoice1)
 
       within "#invoiceItem-#{invoice_item1.id}" do
         expect(page).to have_link("Bulk Discount ID: #{bulk_discount1.id}")
@@ -124,15 +124,35 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
         click_link "Bulk Discount ID: #{bulk_discount1.id}"
       end
 
-      expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts/#{bulk_discount1.id}")
+      expect(current_path).to eq merchant_bulk_discount_path(merchant1, bulk_discount1)
 
-      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+      visit merchant_invoice_path(merchant1, invoice1)
 
       within "#invoiceItem-#{invoice_item2.id}" do
         expect(page).to_not have_link("Bulk Discount ID: #{bulk_discount2.id}")
         expect(page).to_not have_link("Bulk Discount ID: #{bulk_discount1.id}")
         expect(page).to have_content("No Discount is Applied")
       end
+    end
+  end
+
+  it "can display merchants discounted revenue" do
+    merchant1 = create(:merchant)
+    customer1 = create(:customer, first_name: 'Luke', last_name: 'Skywalker')
+    invoice1 = create(:invoice, customer: customer1)
+    transaction1 = create(:transaction, invoice: invoice1, result: 0)
+    item1 = create(:item, merchant: merchant1)
+    item2 = create(:item, merchant: merchant1)
+    invoice_item1 = create(:invoice_item, item: item1, invoice: invoice1, quantity: 12, unit_price: 100)
+    invoice_item2 = create(:invoice_item, item: item2, invoice: invoice1, quantity: 5, unit_price: 200)
+    bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
+    bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
+
+    visit merchant_invoice_path(merchant1, invoice1)
+
+    within '#leftSide2' do
+      expect(page).to have_content("Discounted Revenue: $1,960.00")
+      expect(page).to have_content("Total Revenue: $2,200.00")
     end
   end
 end

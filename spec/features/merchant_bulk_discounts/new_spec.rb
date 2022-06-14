@@ -19,7 +19,7 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
     fill_in :discount_percentage, with: 25
     click_on 'Submit New Discount'
 
-    expect(current_path).to eq(merchant_bulk_discounts_path(merchant))
+    expect(current_path).to eq merchant_bulk_discounts_path(merchant)
 
     expect(page).to have_content(20)
     expect(page).to have_content(25)

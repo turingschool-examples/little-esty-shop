@@ -24,7 +24,7 @@ RSpec.describe "Merchant Bulk Discounts Show Page", type: :feature do
       invoice_item1 =  create(:invoice_item, item: item1, invoice: invoice1, unit_price: 3011)
       invoice_item2 =  create(:invoice_item, item: item2, invoice: invoice1, unit_price: 2524)
 
-      visit "/merchants/#{merchant[0].id}/bulk_discounts/#{bulk_discount1.id}"
+      visit merchant_bulk_discount_path(merchant[0], bulk_discount1)
 
       expect(page).to have_content("Threshold: #{bulk_discount1.threshold}")
       expect(page).to have_content("Discount Percentage: #{bulk_discount1.discount_percentage}")
