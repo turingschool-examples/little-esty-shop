@@ -116,7 +116,7 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
       bulk_discount1 = merchant1.bulk_discounts.create!(threshold: 10, discount_percentage: 20)
       bulk_discount2 = merchant1.bulk_discounts.create!(threshold: 15, discount_percentage: 30)
 
-      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+      visit merchant_invoice_path(merchant1, invoice1)
 
       within "#invoiceItem-#{invoice_item1.id}" do
         expect(page).to have_link("Bulk Discount ID: #{bulk_discount1.id}")
@@ -124,9 +124,9 @@ RSpec.describe 'Merchant_Invoices Show Page', type: :feature do
         click_link "Bulk Discount ID: #{bulk_discount1.id}"
       end
 
-      expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts/#{bulk_discount1.id}")
+      expect(current_path).to eq merchant_bulk_discount_path(merchant1, bulk_discount1)
 
-      visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+      visit merchant_invoice_path(merchant1, invoice1)
 
       within "#invoiceItem-#{invoice_item2.id}" do
         expect(page).to_not have_link("Bulk Discount ID: #{bulk_discount2.id}")
