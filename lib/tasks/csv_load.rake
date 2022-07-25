@@ -19,4 +19,15 @@ namespace :csv_load do
       p row
     end
   end
+
+  desc "imports items from a csv file"
+  task items: :environment do
+    CSV.foreach('db/data/invoices.csv') do |row|
+      name = row[0]
+      description = row[1]
+      unit_price = row[2]
+      Item.create(name: name, description: description, unit_price: unit_price)
+      p row
+    end
+  end
 end
