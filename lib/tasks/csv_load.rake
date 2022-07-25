@@ -48,4 +48,13 @@ namespace :csv_load do
       p row
     end
   end
+
+  desc "imports invoice_items from a csv file"
+  task invoice_items: :environment do
+    file = 'db/data/invoice_items.csv'
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
+      InvoiceItem.create(row.to_hash)
+      p row
+    end
+  end
 end
