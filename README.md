@@ -17,6 +17,8 @@
 - must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
 - must include a thorough README to describe the project
 - must deploy completed code to Heroku
+- Continuous Integration / Continuous Deployment is not allowed
+- Any gems added to the project must be approved by an instructor
 
 ## Setup
 
