@@ -4,4 +4,6 @@ class Invoice < ApplicationRecord
     validates_presence_of :status
     validates_presence_of :created_at
     validates_presence_of :updated_at
+
+    belongs_to :customer 
 end 
