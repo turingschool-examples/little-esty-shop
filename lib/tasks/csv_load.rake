@@ -30,4 +30,22 @@ namespace :csv_load do
       p row
     end
   end
+
+  desc "imports merchants from a csv file"
+  task merchants: :environment do
+    file = 'db/data/merchants.csv'
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
+      Merchant.create(row.to_hash)
+      p row
+    end
+  end
+
+  desc "imports transactions from a csv file"
+  task transactions: :environment do
+    file = 'db/data/transactions.csv'
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
+      Transaction.create(row.to_hash)
+      p row
+    end
+  end
 end
