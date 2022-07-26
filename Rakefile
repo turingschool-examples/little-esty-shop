@@ -21,6 +21,7 @@ namespace :csv_load do
       t.save
       puts "Customer #{t.first_name} #{t.last_name} is created"
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
   end
 
   desc 'Seed Items Table!'
@@ -38,6 +39,7 @@ namespace :csv_load do
       t.save
       puts "#{t.name} is created"
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
   
   desc 'Seed Invoices Table!'
@@ -54,6 +56,7 @@ namespace :csv_load do
       t.save
       puts "Invoice #{t.id} is created"
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
 
   desc 'Seed Invoice_Items Table!'
@@ -73,8 +76,8 @@ namespace :csv_load do
       t.save
       puts "Invoice_Item #{t.item_id} is created"
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
-
 
   desc 'Seed Merchant Table!'
   task :merchants => :environment do
@@ -89,5 +92,6 @@ namespace :csv_load do
       t.save
       puts "#{t.name} is created"
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
 end
