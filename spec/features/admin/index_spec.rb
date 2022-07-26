@@ -39,7 +39,28 @@ RSpec.describe 'admin index' do
         expect(page).to have_content("Incomplete Invoices")
     end 
 
-    xit 'sees a list of all the ids of all invoices that have items that have not been shipped' do 
+    it 'sees a list of all the ids of all invoices that have items that have not been shipped' do 
+        customer_1 = Customer.create!(first_name: "John", last_name: "Smith", created_at: Time.now, updated_at: Time.now)
+        customer_2 = Customer.create!(first_name: "Kyle", last_name: "Johnson", created_at: Time.now, updated_at: Time.now)
+        customer_3 = Customer.create!(first_name: "Bert", last_name: "Kyleson", created_at: Time.now, updated_at: Time.now)
+        customer_4 = Customer.create!(first_name: "Randall", last_name: "Bertson", created_at: Time.now, updated_at: Time.now)
+        customer_5 = Customer.create!(first_name: "Craig", last_name: "Randalson", created_at: Time.now, updated_at: Time.now)
+        customer_6 = Customer.create!(first_name: "Geoff", last_name: "Craigson", created_at: Time.now, updated_at: Time.now)
+
+        invoice_1 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_1.id )
+        invoice_2 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_2.id )
+        invoice_3 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_3.id )
+        invoice_4 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_4.id )
+        invoice_5 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_5.id )
+        invoice_6 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_6.id )
+
+        transaction_1 = Transaction.create!(credit_card_number:4444555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_1.id )
+        transaction_2 = Transaction.create!(credit_card_number:4445555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_2.id )
+        transaction_3 = Transaction.create!(credit_card_number:4446555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_3.id )
+        transaction_4 = Transaction.create!(credit_card_number:4447555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_4.id )
+        transaction_5 = Transaction.create!(credit_card_number:4448555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_5.id )
+        transaction_6 = Transaction.create!(credit_card_number:4449555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_6.id )
+
         visit '/admin'
         
         within ("#column2") do 
@@ -70,3 +91,24 @@ RSpec.describe 'admin index' do
         end 
     end 
 end 
+
+# customer_1 = Customer.create!(first_name: "John", last_name: "Smith", created_at: Time.now, updated_at: Time.now)
+# customer_2 = Customer.create!(first_name: "Kyle", last_name: "Johnson", created_at: Time.now, updated_at: Time.now)
+# customer_3 = Customer.create!(first_name: "Bert", last_name: "Kyleson", created_at: Time.now, updated_at: Time.now)
+# customer_4 = Customer.create!(first_name: "Randall", last_name: "Bertson", created_at: Time.now, updated_at: Time.now)
+# customer_5 = Customer.create!(first_name: "Craig", last_name: "Randalson", created_at: Time.now, updated_at: Time.now)
+# customer_6 = Customer.create!(first_name: "Geoff", last_name: "Craigson", created_at: Time.now, updated_at: Time.now)
+
+# invoice_1 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_1.id )
+# invoice_2 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_2.id )
+# invoice_3 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_3.id )
+# invoice_4 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_4.id )
+# invoice_5 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_5.id )
+# invoice_6 = Invoice.create!(status: :completed, created_at: Time.now, updated_at: Time.now, customer_id: customer_6.id )
+
+# transaction_1 = Transaction.create!(credit_card_number:4444555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_1.id )
+# transaction_2 = Transaction.create!(credit_card_number:4445555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_2.id )
+# transaction_3 = Transaction.create!(credit_card_number:4446555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_3.id )
+# transaction_4 = Transaction.create!(credit_card_number:4447555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_4.id )
+# transaction_5 = Transaction.create!(credit_card_number:4448555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_5.id )
+# transaction_6 = Transaction.create!(credit_card_number:4449555566667777, result: "succesful",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_6.id )
