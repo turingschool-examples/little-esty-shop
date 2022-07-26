@@ -58,7 +58,15 @@ namespace :csv_load do
 
     file = "db/data/transactions.csv"
     CSV.foreach(file, :headers => true) do |row|
+      row[4] = if row[4] == 'success'
+        0
+      elsif row[4] == 'failed'
+        1
+      else 
+        raise 'unknown result'
+      end
       Transaction.create(row.to_h)
+
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
     puts 'Transactions Created'
