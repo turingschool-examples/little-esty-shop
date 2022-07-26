@@ -34,6 +34,7 @@ namespace :csv_load do
       t.name = row['name']
       t.description = row['description']
       t.unit_price = row['unit_price']
+      t.merchant_id = row['merchant_id']
       t.created_at = row['created_at']
       t.updated_at = row['updated_at']
       t.save
@@ -47,10 +48,18 @@ namespace :csv_load do
     csv_text = File.read("db/data/invoices.csv")
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      t = Invoice_Item.new
+      t = Invoice.new
       t.id = row['id']
       t.customer_id = row['customer_id']
-      t.status = row['status']
+
+      if row['status'] == "cancelled"
+        t.status = 0
+      elsif row['status'] == "in progress"
+        t.status = 1
+      elsif row['status'] == "completed"
+        t.status = 2
+      end
+
       t.created_at = row['created_at']
       t.updated_at = row['updated_at']
       t.save
@@ -64,13 +73,21 @@ namespace :csv_load do
     csv_text = File.read("db/data/invoice_items.csv")
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      t = Invoice_Item.new
+      t = InvoiceItem.new
       t.id = row['id']
       t.item_id = row['item_id']
       t.invoice_id = row['invoice_id']
       t.quantity = row['quantity']
       t.unit_price = row['unit_price']
-      t.status = row['status']
+
+      if row['status'] == "packaged"
+        t.status = 0
+      elsif row['status'] == "pending"
+        t.status = 1
+      elsif row['status'] == "shipped"
+        t.status = 2
+      end
+
       t.created_at = row['created_at']
       t.updated_at = row['updated_at']
       t.save
@@ -91,6 +108,32 @@ namespace :csv_load do
       t.updated_at = row['updated_at']
       t.save
       puts "#{t.name} is created"
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+  end
+
+  desc 'Seed Transaction Table!'
+  task :transactions => :environment do
+    csv_text = File.read("db/data/transactions.csv")
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      t = Transaction.new
+      t.id = row['id']
+      t.invoice_id = row['invoice_id']
+      t.credit_card_number = row['credit_card_number']
+      t.credit_card_expitation_date = row['credit_card_expiration_date']
+
+      if row['result'] == "failed"
+        t.result = 0
+      elsif row['result'] == "success"
+        t.result = 1
+      end
+
+      t.created_at = row['created_at']
+      t.updated_at = row['updated_at']
+
+      t.save
+      puts "#{t.id} is created"
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
