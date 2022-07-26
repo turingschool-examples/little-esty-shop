@@ -8,7 +8,12 @@
         <p><%= customer.first_name %> <%= customer.last_name %> - <%= customer.total_transactions %></p>
     <% end %>
     </div>
-    <div class="column">
+    <div id="column2">
     <h2> Incomplete Invoices </h2>
+    <% InvoiceItem.incomplete_invoices_not_shipped.each do |id| %>
+        <div class="invoice">
+        <p>Id: <%= link_to id.invoice_id, "/admin/invoices/#{id.invoice_id}" %> </p>
+        </div>
+    <% end %>
     </div>
 </div>
