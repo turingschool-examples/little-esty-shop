@@ -84,11 +84,9 @@ namespace :csv_load do
     tasks.each do |task|
       Rake::Task[task].invoke
     end
-  end
 
-  # desc 'Get all tasks'
-  # task all: :environment do
-  #   puts 'All tasks:'
-  #   puts Rake.application.tasks
-  # end
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
+    end
+  end
 end
