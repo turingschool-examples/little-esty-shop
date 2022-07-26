@@ -10,6 +10,7 @@ RSpec.describe 'Merchant Dashboard' do
         merchant_2 = Merchant.create!(name: 'Dani Coleman')
 
         visit "merchants/#{merchant_1.id}/dashboard" 
+        save_and_open_page
 
         expect(page).to have_content('Mike Dao')
         expect(page).to_not have_content('Dani Coleman')
