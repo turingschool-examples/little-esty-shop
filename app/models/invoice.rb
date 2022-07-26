@@ -6,5 +6,9 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   belongs_to :customer
+
+  def formatted_date
+    created_at.strftime('%A, %B %d, %Y')
+  end
 end
 
