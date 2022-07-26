@@ -53,6 +53,8 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
 
     click_on "#{invoice_1.id}"
 
+    expect(current_path).to eq("/merchants/1/invoices/#{invoice_1.id}")
+
   end
 end
 
