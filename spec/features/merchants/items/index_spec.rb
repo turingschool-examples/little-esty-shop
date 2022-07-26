@@ -26,10 +26,16 @@ RSpec.describe 'Merchant Items Index' do
     @highlighter = Item.create!( name: "Highlighter",
                             description: "Highlight things and make them yellow!",
                             unit_price: 305,
-                            merchant_id: @walmart.id)
-
+                            merchant_id: @target.id)
   end
 
+  # User Story 1
+  # Merchant Items Index Page
+
+  # As a merchant,
+  # When I visit my merchant items index page ("merchants/merchant_id/items")
+  # I see a list of the names of all of my items
+  # And I do not see items for any other merchant
   it 'has a list of all of the items for a merchant' do
     visit "/merchants/#{@walmart.id}/items"
 
