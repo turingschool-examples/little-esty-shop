@@ -5,4 +5,8 @@ class Customer < ApplicationRecord
   validates_presence_of :updated_at
 
   has_many :invoices 
+
+  def self.top_five_customers
+      select('COUNT(*) AS total_transactions, customers.*').joins(invoices: :transactions).where(transactions: { result: 'success' }).group('customers.id').order('total_transactions desc').limit(5)
+  end 
 end
