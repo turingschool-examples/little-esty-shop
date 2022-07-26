@@ -8,6 +8,9 @@ namespace :csv_load do
       Customer.create(row.to_hash)
       p row
     end
+      table = 'customers'
+      ai_val = 1001
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{ai_val}")
   end
 
   desc "imports invoices from a csv file"
@@ -17,6 +20,9 @@ namespace :csv_load do
       Invoice.create(row.to_hash)
       p row
     end
+      table = 'invoices'
+      ai_val = 901
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{ai_val}")
   end
 
   desc "imports items from a csv file"
@@ -26,6 +32,9 @@ namespace :csv_load do
       Item.create(row.to_hash)
       p row
     end
+      table = 'items'
+      ai_val = 2484
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{ai_val}")
   end
 
   desc "imports merchants from a csv file"
@@ -35,6 +44,9 @@ namespace :csv_load do
       Merchant.create(row.to_hash)
       p row
     end
+      table = 'merchants'
+      ai_val = 101
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{ai_val}")
   end
 
   desc "imports transactions from a csv file"
@@ -44,6 +56,9 @@ namespace :csv_load do
       Transaction.create(row.to_hash)
       p row
     end
+      table = 'transactions'
+      ai_val = 1045
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{ai_val}")
   end
 
   desc "imports invoice_items from a csv file"
@@ -53,6 +68,9 @@ namespace :csv_load do
       InvoiceItem.create(row.to_hash)
       p row
     end
+      table = 'invoice_items'
+      ai_val = 4015
+      ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{ai_val}")
   end
 
   desc 'import all csv files'
