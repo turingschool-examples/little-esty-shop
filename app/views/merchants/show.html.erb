@@ -5,3 +5,7 @@
 <%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
 
+<div id="favorite-customers"><h5>Favorite Customers</h5>
+<ol><% @merchant.favorite_customers.each do |customer| %>
+  <li><%= customer.full_name %> - X purchases
+<% end %></ol></div>
