@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :merchants do
     resources :items, controller: 'items'
+    resources :invoices, controller: 'invoices'
     resources :dashboard, only: [:index]
   end
 
