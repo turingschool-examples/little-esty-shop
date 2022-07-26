@@ -46,14 +46,14 @@ RSpec.describe 'Invoice Show', type: :feature do
     within "#item_invoice-#{invoice_item_1.id}" do
       expect(page).to have_content("Charizard Rare")
       expect(page).to have_content("3")
-      expect(page).to have_content(13984)
+      expect(page).to have_content("$13,984.00")
       expect(page).to have_content("pending")
     end
 
     within "#item_invoice-#{invoice_item_2.id}" do
       expect(page).to have_content("Charizard Common")
       expect(page).to have_content("2")
-      expect(page).to have_content(3984)
+      expect(page).to have_content("$3,984.00")
       expect(page).to have_content("pending")
     end
 
@@ -65,7 +65,7 @@ RSpec.describe 'Invoice Show', type: :feature do
 
     item_1 = merchant_1.items.create!(id: 1, merchant_id: merchant_1.id, name: "Charizard Rare", description: "Mint Condition Charizard", unit_price: 13984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
     item_2 = merchant_1.items.create!(id: 2, merchant_id: merchant_1.id, name: "Charizard Common", description: "Average Condition Charizard", unit_price: 3984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
-    item_3 = merchant_1.items.create!(id: 3, merchant_id: merchant_1.id, name: "Charizard Poor", description: "Poor Condition Charizard", unit_price: 3984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
+    item_3 = merchant_1.items.create!(id: 3, merchant_id: merchant_1.id, name: "Charizard Poor", description: "Poor Condition Charizard", unit_price: 1230, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
 
     customer_1 = Customer.create!(id: 1, first_name: "John", last_name: "Doe", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
 
@@ -78,6 +78,7 @@ RSpec.describe 'Invoice Show', type: :feature do
 
     visit '/merchants/1/invoices/10'
 
-    expect(page).to have_content("Total Revenue: $13,984.00")
+    expect(page).to have_content("Total Revenue: $49,920.00")
+    expect(page).to have_no_content("Total Revenue: $12.30")
   end
 end
