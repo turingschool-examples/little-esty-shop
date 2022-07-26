@@ -284,6 +284,121 @@
           null
         ]
       },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/spec/features/invoices/show_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/invoice.rb": {
         "lines": [
           1,
@@ -315,7 +430,7 @@
           null
         ]
       },
-      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/invoice_item.rb": {
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -323,9 +438,6 @@
           1,
           1,
           1,
-          1,
-          1,
-          null,
           1,
           null
         ]
@@ -344,8 +456,12 @@
           null
         ]
       },
-      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/transaction.rb": {
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/customer.rb": {
         "lines": [
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           1,
@@ -354,8 +470,13 @@
           null
         ]
       },
-      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/customer.rb": {
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/invoice_item.rb": {
         "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
           1,
           1,
           1,
@@ -364,8 +485,33 @@
           null
         ]
       },
-      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/merchant.rb": {
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/controllers/invoices_controller.rb": {
         "lines": [
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
           1,
           1,
           1,
@@ -377,6 +523,6 @@
         ]
       }
     },
-    "timestamp": 1658871544
+    "timestamp": 1658871690
   }
 }
