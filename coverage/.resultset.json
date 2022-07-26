@@ -270,6 +270,9 @@
         "lines": [
           1,
           null,
+          null,
+          1,
+          null,
           null
         ]
       },
@@ -281,6 +284,10 @@
       },
       "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/merchant.rb": {
         "lines": [
+          1,
+          1,
+          1,
+          1,
           1,
           1,
           1,
@@ -304,6 +311,17 @@
           1,
           1,
           1,
+          null,
+          null
+        ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/customer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
           null
         ]
       },
@@ -318,16 +336,8 @@
           1,
           null,
           1,
-          null
-        ]
-      },
-      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/customer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
           null,
-          1,
+          null,
           null
         ]
       },
@@ -345,8 +355,26 @@
           1,
           null
         ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/controllers/invoices_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1658803507
+    "timestamp": 1658852891
   }
 }
