@@ -56,8 +56,8 @@ RSpec.describe 'Dashboard Page' do
         expect(page).to have_content('Copper Bracelet')
         expect(page).to have_content('Lemongrass Extract')
         expect(page).to_not have_content('Copper Ring')
-        expect("Invoice ##{invoice_item1.id}").to appear_before("Invoice ##{invoice_item4.id}")
-        expect("Invoice ##{invoice_item4.id}").to appear_before("Invoice ##{invoice_item2.id}")
+        expect(invoice_item1.id.to_s).to appear_before(invoice_item4.id.to_s)
+        expect(invoice_item4.id.to_s).to appear_before(invoice_item2.id.to_s)
       end
     end
 
@@ -79,18 +79,12 @@ RSpec.describe 'Dashboard Page' do
 
       visit "/merchants/#{@merch2.id}/dashboard"
 
-      within '#items-ready-to-ship' do
-        within "#invoice-item-#{invoice_item1.id}" do
-          expect(page).to have_content(invoice_item1.invoice.formatted_date)
-        end
+      within "#invoice-item-#{invoice_item1.id}" do
+        expect(page).to have_content(invoice_item1.invoice.formatted_date)
+      end
 
-        within "#invoice-item-#{invoice_item2.id}" do
-          expect(page).to have_content(invoice_item2.invoice.formatted_date)
-        end
-
-        within "#invoice-item-#{invoice_item4.id}" do
-          expect(page).to have_content(invoice_item4.invoice.formatted_date)
-        end
+      within "#invoice-item-#{invoice_item2.id}" do
+        expect(page).to have_content(invoice_item2.invoice.formatted_date)
       end
     end
   end
