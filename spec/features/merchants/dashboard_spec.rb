@@ -6,6 +6,7 @@ RSpec.describe 'Dashboard Page' do
     @merch2 = Merchant.create!(name: 'Molly Fine Arts')
     @merch3 = Merchant.create!(name: 'Treats and Things')
   end
+
   it 'shows the merchants name' do
     visit "/merchants/#{@merch1.id}/dashboard"
 
@@ -21,6 +22,7 @@ RSpec.describe 'Dashboard Page' do
       expect(page).to_not have_content('Treats and Things')
     end
   end
+
   it 'has a link to the merchants items index' do
     visit "/merchants/#{@merch1.id}/dashboard"
 
@@ -29,5 +31,7 @@ RSpec.describe 'Dashboard Page' do
       click_on('My Items')
       expect(current_path).to eq("/merchants/#{@merch1.id}/items")
     end
+
   end
+  
 end
