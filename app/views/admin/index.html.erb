@@ -10,9 +10,11 @@
     </div>
     <div id="column2">
     <h2> Incomplete Invoices </h2>
-    <% InvoiceItem.incomplete_invoices_not_shipped.each do |id| %>
+    <% Invoice.incomplete_invoices_not_shipped.each do |invoice| %>
         <div class="invoice">
-        <p>Id: <%= link_to id.invoice_id, "/admin/invoices/#{id.invoice_id}" %> </p>
+        <p>Id: <%= link_to invoice.id, "/admin/invoices/#{invoice.id}" %> </p>
+        <p>Date: <%= invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+
         </div>
     <% end %>
     </div>

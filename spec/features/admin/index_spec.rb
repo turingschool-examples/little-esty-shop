@@ -50,12 +50,23 @@ RSpec.describe 'admin index' do
         end 
     end 
 
-    it 'links to invoice admin show page' do 
+    xit 'links to invoice admin show page' do 
         visit '/admin'
         
         within ("#column2") do
             click_on("Id:")
         end 
         expect(current_path).to eq("/admin/invoices/#{id.id}")
+    end 
+
+    xit 'shows the date the incomplete invoice was created and in order from oldest to newest' do 
+        visit '/admin'
+        
+        within ("#column2") do 
+            expect(page.all('.invoice')[0]).to have_content("Date:")
+            expect(page.all('.invoice')[1]).to have_content("Date:")
+            expect(page.all('.invoice')[2]).to have_content("Date:")
+            expect(page.all('.invoice')[3]).to have_content("Date:")
+        end 
     end 
 end 
