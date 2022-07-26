@@ -22,8 +22,7 @@ RSpec.describe 'Dashboard Page' do
       expect(page).to_not have_content('Treats and Things')
     end
   end
-
-  it 'has a link to the merchants items index' do
+  it 'has a link to the merchants items page' do
     visit "/merchants/#{@merch1.id}/dashboard"
 
     within('#merchant-links') do
@@ -31,7 +30,14 @@ RSpec.describe 'Dashboard Page' do
       click_on('My Items')
       expect(current_path).to eq("/merchants/#{@merch1.id}/items")
     end
-
   end
-  
+  it 'has a link to the merchants invoices page' do
+    visit "/merchants/#{@merch1.id}/dashboard"
+
+    within('#merchant-links') do
+      expect(page).to have_link('My Invoices')
+      click_on('My Invoices')
+      expect(current_path).to eq("/merchants/#{@merch1.id}/invoices")
+    end
+  end
 end
