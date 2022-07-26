@@ -31,6 +31,8 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     expect(page).to have_content("#{invoice_1.id}")
     expect(page).to have_content("#{invoice_2.id}")
     expect(page).to have_content("#{invoice_3.id}")
+
+    expect(page).to have_no_content("Shoes Central")
     expect(page).to have_no_content("#{invoice_4.id}")
 
   end
