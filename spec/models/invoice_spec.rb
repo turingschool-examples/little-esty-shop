@@ -25,6 +25,7 @@ RSpec.describe Invoice do
     @invoice_1 = @customer_1.invoices.create!(status: "in progress", created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC", customer_id: @customer_1.id)
 
     @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, status: 'pending', quantity: 2, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
+    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_1.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
   end
 
   describe 'class methods' do
@@ -32,7 +33,7 @@ RSpec.describe Invoice do
 
   describe 'instance methods' do
     it '#total_revenue' do
-    expect(@invoice_1.total_revenue).to eq(27968)
+    expect(@invoice_1.total_revenue).to eq(31952)
     end
   end
     
