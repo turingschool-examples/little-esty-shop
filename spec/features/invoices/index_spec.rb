@@ -57,6 +57,8 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
 
     expect(current_path).to eq("/merchants/1/invoices/#{invoice_1.id}")
 
+    expect(page).to have_content("#{invoice_1.id}")
+    expect(page).to have_no_content("#{invoice_2.id}")
   end
 end
 
