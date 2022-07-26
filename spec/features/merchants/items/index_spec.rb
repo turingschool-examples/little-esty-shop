@@ -39,8 +39,6 @@ RSpec.describe 'Merchant Items Index' do
   it 'has a list of all of the items for a merchant' do
     visit "/merchants/#{@walmart.id}/items"
 
-    save_and_open_page
-
     expect(page).to have_content(@pencil.name)
     expect(page).to have_content(@marker.name)
     expect(page).to have_content(@eraser.name)
