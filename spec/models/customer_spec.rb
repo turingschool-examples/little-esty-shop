@@ -7,7 +7,8 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'relationships' do
-    
+    it { should have_many(:invoices) }
+
   end
 
   before :each do
@@ -16,10 +17,10 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'class methods' do
-    
+
   end
 
   describe 'instance methods' do
-    
+
   end
 end
