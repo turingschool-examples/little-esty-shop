@@ -26,9 +26,6 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
 
     visit '/merchants/1/invoices'
 
-    require 'pry'; binding.pry 
-
-  
     expect(page).to have_content("Invoices")
     expect(page).to have_content("#{invoice_1.id}")
     expect(page).to have_content("#{invoice_2.id}")
