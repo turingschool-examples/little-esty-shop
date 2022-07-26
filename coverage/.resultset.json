@@ -284,6 +284,36 @@
           null
         ]
       },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/spec/features/invoices/show_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
@@ -363,12 +393,12 @@
           1,
           null,
           1,
-          0,
-          0,
+          2,
+          2,
           null,
           null,
           1,
-          1,
+          2,
           null,
           null,
           null
@@ -381,6 +411,6 @@
         ]
       }
     },
-    "timestamp": 1658861729
+    "timestamp": 1658862468
   }
 }

@@ -17,10 +17,10 @@ RSpec.describe 'Invoice Show', type: :feature do
 
     visit '/merchants/1/invoices/10'
 
-    expect(page).to have_content("#{invoice_1.id}")
-    expect(page).to have_content("#{invoice_1.status}")
-    expect(page).to have_content("#{invoice_1.created_at}")
-    expect(page).to have_content("#{invoice_1.customer.first_name}")
-    expect(page).to have_content("#{invoice_1.customer.last_name}")
+    expect(page).to have_content("10")
+    expect(page).to have_content("in progress")
+    expect(page).to have_content("Wednesday, March, 27, 2013")
+    expect(page).to have_content("John")
+    expect(page).to have_content("Doe")
   end
 end
