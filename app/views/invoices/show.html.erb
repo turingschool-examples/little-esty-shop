@@ -7,7 +7,7 @@
 
 <p><b>Invoice Items</b></p>
 <% @invoice.invoice_items.each do |invoice_item|%>
-<div id="item_invoice-<%=invoice_item %>">
+<div id="item_invoice-<%=invoice_item.id %>">
 <p>Item name: <%=invoice_item.item.name %></p>
 <p>Price: <%=invoice_item.item.unit_price %></p>
 <p>Quantity: <%=invoice_item.quantity %></p>
