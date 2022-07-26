@@ -1,5 +1,3 @@
 class Transaction < ApplicationRecord
-
-  enum result:[success, failed]
-
+  enum result:[:success, :failed]
 end

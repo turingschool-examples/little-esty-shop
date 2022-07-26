@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'shoulda/matchers'
 SimpleCov.start do
   add_filter "spec/rails_helper.rb"
 end
