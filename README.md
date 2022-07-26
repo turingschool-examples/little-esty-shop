@@ -1,3 +1,10 @@
+heroku restart
+heroku pg:reset DATABASE
+heroku run rails db:migrate
+
+git push heroku main
+heroku open
+
 # Little Esty Shop
 
 ## Background and Description

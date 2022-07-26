@@ -54,4 +54,23 @@ namespace :csv_load do
       p row
     end
   end
+
+  desc 'import all csv files'
+  task all: :environment do
+    tasks = [ 'csv_load:customers',
+              'csv_load:invoice_items',
+              'csv_load:invoices',
+              'csv_load:items',
+              'csv_load:merchants',
+              'csv_load:transactions']
+    tasks.each do |task|
+      Rake::Task[task].invoke
+    end
+  end
+
+  # desc 'Get all tasks'
+  # task all: :environment do
+  #   puts 'All tasks:'
+  #   puts Rake.application.tasks
+  # end
 end
