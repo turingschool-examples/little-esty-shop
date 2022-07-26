@@ -31,6 +31,7 @@ RSpec.describe 'Dashboard Page' do
       expect(current_path).to eq("/merchants/#{@merch1.id}/items")
     end
   end
+  
   it 'has a link to the merchants invoices page' do
     visit "/merchants/#{@merch1.id}/dashboard"
 
@@ -38,6 +39,63 @@ RSpec.describe 'Dashboard Page' do
       expect(page).to have_link('My Invoices')
       click_on('My Invoices')
       expect(current_path).to eq("/merchants/#{@merch1.id}/invoices")
+    end
+    
+  end
+
+  describe 'Items Ready to Ship' do
+    it 'lists items that are ready to ship ordered oldest to newest' do
+      customer1 = Customer.create!(first_name: 'Theophania', last_name: 'Fenwick')
+      customer2 = Customer.create!(first_name: 'Vera', last_name: 'Wynn')
+
+      item1 = @merch2.items.create!(name: 'Copper Bracelet', description: 'Shiny, but not too shiny', unit_price: 20)
+      item2 = @merch2.items.create!(name: 'Copper Ring', description: 'Shiny, but not too shiny', unit_price: 10)
+      item3 = @merch2.items.create!(name: 'Lemongrass Extract', description: 'Smells citrus', unit_price: 6)
+
+      invoice1 = customer1.invoices.create!(status: 1)
+      invoice2 = customer2.invoices.create!(status: 1)
+
+      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 1, unit_price: 6, status: 1)
+      invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
+      invoice_item3 = InvoiceItem.create!(invoice: invoice2, item: item2, quantity: 1, unit_price: 10, status: 2)
+      invoice_item4 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 1, unit_price: 10, status: 1)
+
+      visit "/merchants/#{@merch2.id}/dashboard"
+
+      within '#items-ready-to-ship' do
+        expect(page).to have_content('Copper Bracelet')
+        expect(page).to have_content('Lemongrass Extract')
+        expect(page).to_not have_content('Copper Ring')
+        expect(invoice_item1.id.to_s).to appear_before(invoice_item4.id.to_s)
+        expect(invoice_item4.id.to_s).to appear_before(invoice_item2.id.to_s)
+      end
+    end
+
+    it 'lists the date the invoice was created next to the item name' do
+      customer1 = Customer.create!(first_name: 'Theophania', last_name: 'Fenwick')
+      customer2 = Customer.create!(first_name: 'Vera', last_name: 'Wynn')
+
+      item1 = @merch2.items.create!(name: 'Copper Bracelet', description: 'Shiny, but not too shiny', unit_price: 20)
+      item2 = @merch2.items.create!(name: 'Copper Ring', description: 'Shiny, but not too shiny', unit_price: 10)
+      item3 = @merch2.items.create!(name: 'Lemongrass Extract', description: 'Smells citrus', unit_price: 6)
+
+      invoice1 = customer1.invoices.create!(status: 1)
+      invoice2 = customer2.invoices.create!(status: 1)
+
+      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 1, unit_price: 6, status: 1)
+      invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
+      invoice_item3 = InvoiceItem.create!(invoice: invoice2, item: item2, quantity: 1, unit_price: 10, status: 2)
+      invoice_item4 = InvoiceItem.create!(invoice: invoice1, item: item2, quantity: 1, unit_price: 10, status: 2)
+
+      visit "/merchants/#{@merch2.id}/dashboard"
+
+      within "#invoice-item-#{invoice_item1.id}" do
+        expect(page).to have_content(invoice_item1.invoice.formatted_date)
+      end
+
+      within "#invoice-item-#{invoice_item2.id}" do
+        expect(page).to have_content(invoice_item2.invoice.formatted_date)
+      end
     end
   end
 end
