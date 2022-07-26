@@ -27,4 +27,11 @@ RSpec.describe 'admin index' do
 
         expect(current_path).to eq('/admin/invoices')
     end 
+
+      it 'see the names of top 5 customers' do 
+        visit '/admin'
+ save_and_open_page
+        expect(page).to have_content("Top 5 Customers")
+       
+    end 
 end 
