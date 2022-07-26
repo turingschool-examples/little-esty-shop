@@ -9,6 +9,7 @@ namespace :csv_load do
     CSV.foreach(file, :headers => true) do |row|
       Merchant.create(row.to_h)
     end
+    puts "Merchants Created"
   end
 
   task items: :environment do

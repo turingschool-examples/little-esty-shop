@@ -1,7 +1,84 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/spec/models/invoice_item_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/spec/models/invoice_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/spec/models/item_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/spec/models/merchant_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/config/environment.rb": {
+        "lines": [
+          null,
+          1,
+          null,
+          null,
+          0
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/config/application.rb": {
+        "lines": [
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/parkerthomson/2mod/group_project/little-esty-shop/config/boot.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1
+        ]
+      }
     },
-    "timestamp": 1658814371
+    "timestamp": 1658855204
   }
 }
