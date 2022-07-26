@@ -369,8 +369,22 @@
           1,
           null
         ]
+      },
+      "/Users/johnsantosuosso/little-etsy-shop/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1658874001
+    "timestamp": 1658875006
   }
 }
