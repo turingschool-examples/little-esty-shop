@@ -22,6 +22,6 @@ RSpec.describe 'Invoice Show', type: :feature do
     expect(page).to have_content("Wednesday, March, 27, 2013")
     expect(page).to have_content("John")
     expect(page).to have_content("Doe")
-    expect
+    expect(page).to have_no_content("11")
   end
 end
