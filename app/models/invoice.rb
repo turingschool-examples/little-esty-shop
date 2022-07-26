@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-    enum status: [:completed, :in_progress, :cancelled]
+    enum status: [:completed, "in progress", :cancelled]
 
     validates_presence_of :status
     validates_presence_of :created_at
