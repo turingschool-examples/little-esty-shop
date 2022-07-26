@@ -4,6 +4,8 @@
 <p>Created at: <%= @invoice.created_at.strftime( "%A, %B, %d, %Y") %></p>
 <p>Customer first name: <%= @invoice.customer.first_name %></p>
 <p>Customer last name: <%= @invoice.customer.last_name %></p>
+
+<p><b>Invoice Items</b></p>
 <% @invoice.invoice_items.each do |invoice_item|%>
 <div id="item_invoice-<%=invoice_item %>">
 <p>Item name: <%=invoice_item.item.name %></p>
