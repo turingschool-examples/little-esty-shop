@@ -9,4 +9,9 @@ RSpec.describe InvoiceItem, type: :model do
     it { should validate_presence_of :updated_at }
     it { should define_enum_for(:status).with_values([:packaged, :pending, :shipped]) }
   end
+
+  describe 'relationships' do
+    it { should belong_to :item }
+    it { should belong_to :invoice }
+  end
 end
