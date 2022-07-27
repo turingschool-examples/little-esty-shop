@@ -13,9 +13,13 @@ RSpec.describe 'admin merchant update page' do
             expect(page).to have_field('Name:', with: merchant_1.name)
         end 
 
+        fill_in("Name", with: "")
+        click_on("Update")
+        
+        expect(page).to have_content("Error: name can't be blank")
+
         fill_in("Name", with: "Batman")
         click_on("Update")
-                save_and_open_page
 
         expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
         expect(page).to have_content("Batman")

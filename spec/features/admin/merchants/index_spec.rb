@@ -51,4 +51,19 @@ RSpec.describe 'admin merchant index' do
         end 
     end 
 
+    it 'has two sections - enabled and disabled - with a button next to each merchant based on category' do 
+        merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now, status: "enabled")
+
+        visit '/admin/merchants'
+
+        within (page.all(".enabled_merchant_buttons")[0]) do 
+            click_button("Disable")
+        end 
+
+        within (page.all(".disabled_merchant_buttons")[0]) do 
+            expect(page).to have_button("Enable")
+            expect(page).to have_content("Schroeder-Jerde")
+        end 
+    end 
+
 end 

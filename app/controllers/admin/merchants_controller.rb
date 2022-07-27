@@ -14,12 +14,15 @@ class Admin::MerchantsController < ApplicationController
 
     def update 
         merchant = Merchant.find(params[:id])
-        if merchant.update(name: params[:name])
+        if params[:status] != nil 
+            merchant.update(status: params[:status])
+            redirect_to "/admin/merchants"
+        elsif params[:name] != nil && merchant.update(name: params[:name])
             redirect_to "/admin/merchants/#{merchant.id}"
             flash[:alert] = "Your merchant has been updated."
         else 
             redirect_to "/admin/merchants/#{merchant.id}/edit"
-            flash[:alert] = "error: #{error_message(merchant.errors)}"
+            flash[:alert] = "Error: name can't be blank"
         end 
     end 
 end 
