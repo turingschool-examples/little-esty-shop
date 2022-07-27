@@ -64,7 +64,7 @@ RSpec.describe 'merchant items index page' do
         end
 
         click_on('New Item')
-
+        save_and_open_page
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items/new")
     end
   end
