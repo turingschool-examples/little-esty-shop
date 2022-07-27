@@ -2,3 +2,20 @@
 
 <p> <%= link_to "Merchants", "/admin/merchants" %> </p>
 <p> <%= link_to "Invoices", "/admin/invoices" %> </p>
+
+<div id="top-customers"><h5>Top Customers</h5>
+  <% @customers.top_customers.each_with_index do |customer, index| %>
+  <p><%= "#{index + 1}. #{customer.full_name} - #{customer.transaction_count} purchases" %></p>
+  <% end %>
+</div>
+
+<div id="incomplete_invoices"><h5>Incomplete Invoices</h5>
+  <% @invoices.order_by_date.each do |invoice| %>
+    <% invoice.invoice_items.each do |invoiceitem| %>
+      <% if invoiceitem.status != "shipped" %>
+        <p> <%= link_to "Invoice #{invoiceitem.invoice_id}", "/admin/invoices/#{invoice.id}" %>
+        <%= invoice.created_at.strftime( "%A, %B, %d, %Y") %> </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
