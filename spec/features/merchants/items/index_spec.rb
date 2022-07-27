@@ -27,6 +27,8 @@ RSpec.describe 'Merchant Item Index' do
                 click_button 'Enable'
                 expect(current_path).to eq(merchant_items_path(@merchant1.id))
               end
+              save_and_open_page
+              
             end
         end
     end

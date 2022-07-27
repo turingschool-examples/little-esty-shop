@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index] do
     resources :items, only: [:index, :show, :edit, :update]
   end
+
+  get '/merchants/:merchant_id/invoices', to: 'merchant_invoices#index'
+  get '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#show'
 end
