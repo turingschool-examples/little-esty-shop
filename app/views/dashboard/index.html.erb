@@ -1,1 +1,3 @@
-<h1> <%= @merchants.name %>  </h1>
+<h1> <%= @merchant.name %>  </h1>
+ <p>  <%= link_to "My Items Index", merchant_items_path(@merchant) %>  </p>
+ <p>  <%= link_to "My Invoices Index", merchant_invoices_path(@merchant) %>  </p>

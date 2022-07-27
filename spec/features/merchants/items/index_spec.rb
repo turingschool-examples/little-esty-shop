@@ -18,6 +18,6 @@ RSpec.describe 'Merchant Items Index Page' do
     expect(page).to have_content("Name: Camera")
     expect(page).to_not have_content("Name: Bone")
 
-    save_and_open_page
   end 
 end
+

@@ -1,0 +1,24 @@
+<html>
+<head>
+<style>
+h1 {text-align: left;}
+h3 {text-align: center;}
+p {text-align: left;}
+body hr.solid {
+  border-top: 3px solid #bbb;
+}
+</style>
+</head>
+<body>
+
+<h1> <%= @merchant.name %> </h1>
+
+<hr class="solid">
+
+<h3> Name: <%= @item.name%> </h3>
+<p> Description: <%= @item.description%> </p>
+<p> Current Price: <%= number_to_currency(@item.unit_price / 100) %> </p>
+
+</body>
+</html>
+
