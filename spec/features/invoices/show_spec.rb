@@ -93,11 +93,16 @@ RSpec.describe 'Invoice Show', type: :feature do
     invoice_1 = customer_1.invoices.create!(id: 10, status: "in progress", created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC", customer_id: customer_1.id)
 
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 3, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
-    invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
+    invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'packaged', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
     visit '/merchants/1/invoices/10'
 
-    expect(page).to have_content("Total Revenue: $49,920.00")
-    expect(page).to have_no_content("Total Revenue: $12.30")
+    within("#item_invoice-#{invoice_item_1.id}") do
+      expect(page).to have_content("pending")
+    end
+
+    within("#item_invoice-#{invoice_item_2.id}") do
+      expect(page).to have_content("packaged")
+    end
   end
 end
