@@ -44,7 +44,7 @@ RSpec.describe 'Merchant invoice Show page' do
         within "#item-details" do
             expect(page).to have_content('pet rock')
             expect(page).to have_content("2121")
-            expect(page).to have_content("12345")
+            expect(page).to have_content("$123.45")
             expect(page).to have_content("shipped")
 
             expect(page).to_not have_content('bay blade')
@@ -59,13 +59,13 @@ RSpec.describe 'Merchant invoice Show page' do
         invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
 
 
-        InvoiceItem.create!(quantity: 20, unit_price: 10, status: 'shipped', item: item_1, invoice: invoice_1)
+        InvoiceItem.create!(quantity: 2, unit_price: 11, status: 'shipped', item: item_1, invoice: invoice_1)
         InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'packaged', item: item_2, invoice: invoice_1)
 
         visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
 
         within "#invoice-details" do
-            expect(page).to have_content("total Revenue: $52.00")
+            expect(page).to have_content("Total Revenue: $50.22")
         end
     end
 end

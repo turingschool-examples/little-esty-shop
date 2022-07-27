@@ -161,5 +161,19 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.get_invoice_items(invoice_1.id)).to eq([in_items_1,in_items_2])
       expect(merchant.get_invoice_items(invoice_1.id)).to_not eq([in_items_3])
     end
+
+    it 'should return total revenue from a invoice' do
+      merchant = Merchant.create!(name: 'amazon')
+      customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+      item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+      item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+      invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+
+      InvoiceItem.create!(quantity: 20, unit_price: 10, status: 'shipped', item: item_1, invoice: invoice_1)
+      InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'packaged', item: item_2, invoice: invoice_1)
+
+      expect(merchant.total_revenue(invoice_1.id)).to eq(5200)
+    end
   end
 end
