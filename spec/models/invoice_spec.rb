@@ -25,6 +25,12 @@ RSpec.describe Invoice do
 
       expect(invoice1.formatted_date).to eq('Tuesday, July 26, 2022')
     end
+    it 'can return a string of the customers full name' do
+      customer1 = Customer.create!(first_name: 'Theophania', last_name: 'Fenwick')
+      invoice1 = customer1.invoices.create!(status: 1, created_at: '2022-07-26 01:08:32 UTC')
+
+      expect(invoice1.customer_name).to eq('Theophania Fenwick')
+    end
   end
 end
 
