@@ -8,9 +8,11 @@ class Merchant < ApplicationRecord
 
   def favorite_customers
     customers
-    # .joins(:transactions)
-    .group(:id)
-    # .where('transactions.result = ?, success')
-    # .limit(5)
+    .joins(:transactions)
+    .where('transactions.result = ?', 'success')
+    .group('customers.id')
+    .select('customers.*, count(*) as transaction_count')
+    .order('transaction_count desc')
+    .limit(5)
   end
 end
