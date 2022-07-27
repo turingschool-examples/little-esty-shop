@@ -10,10 +10,11 @@
 </div>
 
 <div id="incomplete_invoices"><h5>Incomplete Invoices</h5>
-  <% @invoices.each do |invoice| %>
+  <% @invoices.order_by_date.each do |invoice| %>
     <% invoice.invoice_items.each do |invoiceitem| %>
       <% if invoiceitem.status != "shipped" %>
-        <p> <%= link_to "Invoice #{invoiceitem.invoice_id}", "/admin/invoices/#{invoice.id}" %> </p>
+        <p> <%= link_to "Invoice #{invoiceitem.invoice_id}", "/admin/invoices/#{invoice.id}" %>
+        <%= invoice.created_at.strftime( "%A, %B, %d, %Y") %> </p>
       <% end %>
     <% end %>
   <% end %>

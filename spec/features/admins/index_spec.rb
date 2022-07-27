@@ -117,16 +117,38 @@ RSpec.describe 'the admin index' do
       expect(page).to have_link("Invoice #{invoice_4.id}")
       expect(page).to have_link("Invoice #{invoice_5.id}")
       expect(page).to have_link("Invoice #{invoice_6.id}")
-      save_and_open_page
 
       click_link("Invoice #{invoice_4.id}")
       expect(current_path).to eq("/admin/invoices/#{invoice_4.id}")
     end
   end
-# As an admin,
-# When I visit the admin dashboard
-# Then I see a section for "Incomplete Invoices"
-# In that section I see a list of the ids of all invoices
-# That have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
+
+  it 'shows date and sorts by oldest to newest' do
+    customer_1 = Customer.create!(first_name: "A", last_name: "A")
+
+    invoice_1 = Invoice.create!(status: "completed", customer_id: customer_1.id, created_at: "2012-03-26 09:54:49 UTC")
+    invoice_2 = Invoice.create!(status: "in progress", customer_id: customer_1.id, created_at: "2012-03-27 05:54:50 UTC")
+    invoice_3 = Invoice.create!(status: "in progress", customer_id: customer_1.id, created_at: "2012-03-22 21:54:50 UTC")
+
+    merchant = Merchant.create!(name: "Wizards Chest")
+
+    item1 = Item.create!(name: "A", description: "A", unit_price: 100, merchant_id: merchant.id)
+    item2 = Item.create!(name: "B", description: "B", unit_price: 250, merchant_id: merchant.id)
+
+    invoice_item_1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice_1.id, status: "packaged", quantity: 5, unit_price: 100)
+    invoice_item_2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice_2.id, status: "pending", quantity: 5, unit_price: 100)
+    invoice_item_3 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice_3.id, status: "pending", quantity: 5, unit_price: 100)
+
+    visit "/admin"
+
+    within "#incomplete_invoices" do
+      expect(page).to have_content("Monday, March, 26, 2012")
+      expect(page).to have_content("Tuesday, March, 27, 2012")
+      expect(page).to have_content("Thursday, March, 22, 2012")
+
+      expect("Tuesday, March, 27, 2012").to appear_before("Monday, March, 26, 2012")
+      expect("Monday, March, 26, 2012").to appear_before("Thursday, March, 22, 2012")
+      expect("Tuesday, March, 27, 2012").to appear_before("Thursday, March, 22, 2012")
+    end
+  end
 end
