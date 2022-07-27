@@ -50,4 +50,22 @@ RSpec.describe 'Merchant invoice Show page' do
             expect(page).to_not have_content('bay blade')
         end
     end
+
+    it 'shows total revenue generated from all items on invoice' do
+        merchant = Merchant.create!(name: 'amazon')
+        customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+        item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+        item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+        invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+
+        InvoiceItem.create!(quantity: 20, unit_price: 10, status: 'shipped', item: item_1, invoice: invoice_1)
+        InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'packaged', item: item_2, invoice: invoice_1)
+
+        visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
+
+        within "#invoice-details" do
+            expect(page).to have_content("total Revenue: $52.00")
+        end
+    end
 end
