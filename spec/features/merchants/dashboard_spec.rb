@@ -8,14 +8,14 @@ RSpec.describe 'Dashboard Page' do
   end
 
   it 'shows the merchants name' do
-    visit "/merchants/#{@merch1.id}"
+    visit merchant_path(@merch1.id) 
 
     within('#merchant-details') do
       expect(page).to have_content('Jolly Roger Imports')
       expect(page).to_not have_content('Molly Fine Arts')
     end
 
-    visit "/merchants/#{@merch2.id}"
+    visit merchant_path(@merch2.id)
 
     within('#merchant-details') do
       expect(page).to have_content('Molly Fine Arts')
@@ -23,22 +23,22 @@ RSpec.describe 'Dashboard Page' do
     end
   end
   it 'has a link to the merchants items page' do
-    visit "/merchants/#{@merch1.id}"
+    visit merchant_path(@merch1.id)
 
     within('#merchant-links') do
       expect(page).to have_link('My Items')
       click_on('My Items')
-      expect(current_path).to eq("/merchants/#{@merch1.id}/items")
+      expect(current_path).to eq(merchant_items_path(@merch1.id))
     end
   end
 
   it 'has a link to the merchants invoices page' do
-    visit "/merchants/#{@merch1.id}"
+    visit merchant_path(@merch1.id)
 
     within('#merchant-links') do
       expect(page).to have_link('My Invoices')
       click_on('My Invoices')
-      expect(current_path).to eq("/merchants/#{@merch1.id}/invoices")
+      expect(current_path).to eq(merchant_invoices_path(@merch1.id))
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe 'Dashboard Page' do
       invoice_item3 = InvoiceItem.create!(invoice: invoice2, item: item2, quantity: 1, unit_price: 10, status: 2)
       invoice_item4 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 1, unit_price: 10, status: 1)
 
-      visit "/merchants/#{@merch2.id}"
+      visit merchant_path(@merch2.id)
 
       within '#items-ready-to-ship' do
         expect(page).to have_content('Copper Bracelet')
@@ -86,7 +86,7 @@ RSpec.describe 'Dashboard Page' do
       invoice_item3 = InvoiceItem.create!(invoice: invoice2, item: item2, quantity: 1, unit_price: 10, status: 2)
       invoice_item4 = InvoiceItem.create!(invoice: invoice1, item: item2, quantity: 1, unit_price: 10, status: 2)
 
-      visit "/merchants/#{@merch2.id}"
+      visit merchant_path(@merch2.id)
 
       within "#invoice-item-#{invoice_item1.id}" do
         expect(page).to have_content(invoice_item1.invoice.formatted_date)
@@ -109,7 +109,7 @@ RSpec.describe 'Dashboard Page' do
       invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 1, unit_price: 6, status: 1)
       invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
 
-      visit "/merchants/#{@merch2.id}"
+      visit merchant_path(@merch2.id)
 
       within "#invoice-item-#{invoice_item1.id}" do
         expect(page).to have_link("Invoice ##{invoice_item1.invoice.id}")
@@ -131,11 +131,11 @@ RSpec.describe 'Dashboard Page' do
       invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 1, unit_price: 6, status: 1)
       invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
 
-      visit "/merchants/#{@merch2.id}"
+      visit merchant_path(@merch2.id)
 
       within "#invoice-item-#{invoice_item1.id}" do
         click_on("Invoice ##{invoice_item1.invoice.id}")
-        expect(current_path).to eq("/merchants/#{@merch2.id}/invoices/#{invoice_item1.invoice.id}")
+        expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item1.invoice.id))
       end
 
       visit "/merchants/#{@merch2.id}"
