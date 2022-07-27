@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchand invoice Index page' do
+RSpec.describe 'Merchant invoice Index page' do
     it 'shows a list of all invoices associated with a merchant' do
         merchant = Merchant.create!(name: 'amazon')
         merchant_2 = Merchant.create!(name: 'amazon')
@@ -19,16 +19,18 @@ RSpec.describe 'Merchand invoice Index page' do
 
         visit "/merchants/#{merchant.id}/invoices"
 
-        within "invoice-#{invoice_1.id}" do
+        within "#invoice-#{invoice_1.id}" do
             expect(page).to have_content(invoice_1.id)
             expect(page).to_not have_content(invoice_2.id)
         end
 
-        within "invoice-#{invoice_2.id}" do
+        within "#invoice-#{invoice_2.id}" do
             expect(page).to have_content(invoice_2.id)
             expect(page).to_not have_content(invoice_1.id)
         end
 
         expect(page).to_not have_content(invoice_3.id)
     end
+
+    
 end
