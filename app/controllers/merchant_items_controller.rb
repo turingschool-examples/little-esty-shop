@@ -4,18 +4,18 @@ class MerchantItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
   end
 
   # Will need to update to handle edge case of improper unit_price entry
   # at a later date
   # e.g. Typing in as float (3.50) instead of integer (350)
   def update
-    item = Item.find(params[:item_id])
+    item = Item.find(params[:id])
     item.update(item_params)
     flash[:notice] = "Item successfully updated!"
     redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
