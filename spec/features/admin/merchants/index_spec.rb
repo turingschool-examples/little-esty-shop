@@ -63,6 +63,13 @@ RSpec.describe 'admin merchant index' do
         within (page.all(".disabled_merchant_buttons")[0]) do 
             expect(page).to have_button("Enable")
             expect(page).to have_content("Schroeder-Jerde")
+
+            click_button("Enable")
+        end 
+
+        within (page.all(".enabled_merchant_buttons")[0]) do 
+            expect(page).to have_button("Disable")
+            expect(page).to have_content("Schroeder-Jerde")
         end 
     end 
 
