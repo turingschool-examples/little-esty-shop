@@ -3,3 +3,6 @@
 <h1><%= @merchant.name %></h1>
 
 <h3>Items Ready to Ship: </h3>
+<% @merchants.items_ready_to_ship.each do |item| %>
+   <%= item.name %>
+<% end %>
