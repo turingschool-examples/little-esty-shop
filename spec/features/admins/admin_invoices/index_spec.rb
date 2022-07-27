@@ -19,7 +19,3 @@ RSpec.describe 'the admin_invoices index' do
     expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
   end
 end
-# As an admin,
-# When I visit the admin Invoices index ("/admin/invoices")
-# Then I see a list of all Invoice ids in the system
-# Each id links to the admin invoice show page
