@@ -11,4 +11,8 @@ class Merchant < ApplicationRecord
         select('merchants.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue').joins(:invoice_items, invoices: :transactions).group('merchants.id').where(transactions: { result: 'success' }).order('revenue desc').limit(5)
         # select('merchants.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue').joins(:invoice_items, invoices: :transactions).group('merchants.id').where(transactions: { result: 'success' }).where(merchants: { status: 'enabled'}).order('revenue desc').limit(5)
     end 
+
+    def top_earning_day
+        invoices.joins(:invoice_items).joins(:transactions).select('invoices.created_at AS date, SUM(invoice_items.unit_price * invoice_items.quantity) AS revenue').group('date').order('revenue desc, date desc').limit(1)
+    end 
 end 

@@ -29,6 +29,7 @@
         <% Merchant.top_five_merchants.each do |merchant|%>
         <div class="top_5_merchants">
             <p><%= merchant.name %> - <%= number_to_currency(merchant.revenue / 100) %></p>
+            <p>Top selling date for <%= merchant.name %> was <%=  merchant.top_earning_day[0].date.strftime("%A, %B %d, %Y")%></p>
         </div>
         <% end %>
     </div>
