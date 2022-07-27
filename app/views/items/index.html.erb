@@ -1,0 +1,9 @@
+<h1>Items Index</h1>
+
+<% @items.each_with_index do |item, index| %>
+<div id="item-<%= index %>">
+  <p>Name: <%= item.name %></p>
+  <p>Description: <%= item.description %></p>
+  <p>Price: <%= number_to_currency(item.unit_price, units: :centi) %></p>
+</div>
+<% end %>

@@ -9,13 +9,19 @@ RSpec.describe 'the merchant show page' do
     visit merchant_path(merchant1)
 
     expect(page).to have_content('Name: Fake Merchant')
+    expect(page).to_not have_content('Name: Another Fake Merchant')
+    expect(page).to_not have_content('Name: Faux Merchant')
 
     visit merchant_path(merchant2)
 
     expect(page).to have_content('Name: Another Fake Merchant')
+    expect(page).to_not have_content('Name: Fake Merchant')
+    expect(page).to_not have_content('Name: Faux Merchant')
 
     visit merchant_path(merchant3)
 
     expect(page).to have_content('Name: Faux Merchant')
+    expect(page).to_not have_content('Name: Fake Merchant')
+    expect(page).to_not have_content('Name: Another Fake Merchant')
   end
 end
