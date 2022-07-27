@@ -1,0 +1,19 @@
+<h1>Admin Invoice Information </h1>
+
+<p>Invoice ID: <%= @invoice.id %></p>
+<p>Invoice Status: <%= @invoice.status %></p>
+<p>Created at: <%= @invoice.created_at.strftime( "%A, %B, %d, %Y") %></p>
+<p>Customer first name: <%= @invoice.customer.first_name %></p>
+<p>Customer last name: <%= @invoice.customer.last_name %></p>
+
+<p><b>Invoice Items</b></p>
+<% @invoice.invoice_items.each do |invoice_item|%>
+<div id="item_invoice-<%=invoice_item.id %>">
+<p>Item name: <%=invoice_item.item.name %></p>
+<p>Price: <%=number_to_currency(invoice_item.item.unit_price) %></p>
+<p>Quantity: <%=invoice_item.quantity %></p>
+<p>Status: <%= @invoice_item.status %></p>
+</div>
+<% end %>
+
+<p>Total Revenue: <%=number_to_currency(@invoice.total_revenue)%></p>
