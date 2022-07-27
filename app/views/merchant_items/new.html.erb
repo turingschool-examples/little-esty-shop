@@ -1,5 +1,5 @@
 <h1>New Item</h1>
-<%= form_with url: "/shelters/#{@merchant.id}/items", method: :post, local: true do |f| %>
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
@@ -13,3 +13,4 @@
 
   <%= f.submit 'Submit' %>
 <% end %>
+
