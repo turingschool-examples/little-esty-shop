@@ -4,6 +4,6 @@
 <div id="item-<%= index %>">
   <p>Name: <%= item.name %></p>
   <p>Description: <%= item.description %></p>
-  <p>Price: <%= number_to_currency(item.unit_price, units: :centi) %></p>
+  <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
 </div>
 <% end %>
