@@ -9,5 +9,5 @@
 
 <h3>Top 5 Customers</h3>
 <% @merchant.top_5_customers.each do |customer| %>
-  <p><%= customer.first_name %> <%= customer.last_name %></p>
+  <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
 <% end %>
