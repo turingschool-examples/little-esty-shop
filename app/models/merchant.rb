@@ -16,7 +16,7 @@ class Merchant < ApplicationRecord
     .joins(:invoices, :transactions)
     .group("customers.id")
     .select("customers.*, count(transactions.id) as no_of_transactions")
-    .where(invoices: {status: 2}, transactions: {result: 1})
+    .where(invoices: {status: :completed}, transactions: {result: :success})
     .order("no_of_transactions desc, customers.last_name").limit(5)
   end
 
