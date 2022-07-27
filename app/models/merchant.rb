@@ -15,4 +15,11 @@ class Merchant < ApplicationRecord
     .order('transaction_count desc')
     .limit(5)
   end
+
+  def ready_to_ship
+    invoice_items
+    .joins(:invoice)
+    .where.not("invoice_items.status = ?", 2)
+    .order("invoices.created_at")
+  end
 end
