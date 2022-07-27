@@ -19,3 +19,12 @@
     </div>
     <% end %> 
 </div>
+
+<div id="favorite-customers">
+  <h3>Favorite Customers</h3>
+  <%= @merchant.favorite_customers.each do |customer| %>
+    <div id="customer-id-<%= customer.id %>">
+      <p><%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %></p>
+    </div>
+  <% end %> 
+</div>
