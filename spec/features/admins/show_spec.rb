@@ -81,4 +81,37 @@ RSpec.describe 'Admin Show Page', type: :feature do
     expect(page).to have_content("Total Revenue: $49,920.00")
     expect(page).to have_no_content("Total Revenue: $12.30")
   end
+
+  it "sees an invoice's current status as sa select field and when a new status is selected and submitted, it updates that status on the page" do
+    merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
+
+    item_1 = merchant_1.items.create!(id: 1, merchant_id: merchant_1.id, name: "Charizard Rare", description: "Mint Condition Charizard", unit_price: 13984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
+    item_2 = merchant_1.items.create!(id: 2, merchant_id: merchant_1.id, name: "Charizard Common", description: "Average Condition Charizard", unit_price: 3984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
+
+    customer_1 = Customer.create!(id: 1, first_name: "John", last_name: "Doe", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
+
+    invoice_1 = customer_1.invoices.create!(id: 10, status: "in progress", created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC", customer_id: customer_1.id)
+
+    invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 3, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
+    invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'packaged', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
+
+    visit 'admin/merchants/1/invoices/10'
+
+    within("#invoice-#{@invoice.id}") do
+      expect(page).to have_content("in progress")
+    end
+
+    within("#invoice-#{@invoice.id}") do
+      select("completed", from: "status")
+      click_button "Update Invoice Status"
+    end
+
+    within("#invoice-#{@invoice.id}") do
+      expect(page).to have_content("completed")
+    end
+
+    within("#invoice-#{@invoice.id}") do
+      expect(page).to have_no_content("in progress")
+    end
+  end
 end

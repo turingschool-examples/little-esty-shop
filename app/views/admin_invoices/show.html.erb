@@ -1,10 +1,15 @@
 <h1>Admin Invoice Information </h1>
 
+<div id="invoice-<%=@invoice.id %>">
 <p>Invoice ID: <%= @invoice.id %></p>
-<p>Invoice Status: <%= @invoice.status %></p>
+<p>Invoice Status: <%= form_with url: "admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+<%= f.select :status, ['in progress', 'cancelled', 'completed'], selected: @invoice.status %>
+   <%= hidden_field_tag "invoice_id", "#{@invoice.id}" %>
+  <%= f.submit "Update Invoice Status" %>
 <p>Created at: <%= @invoice.created_at.strftime( "%A, %B, %d, %Y") %></p>
 <p>Customer first name: <%= @invoice.customer.first_name %></p>
 <p>Customer last name: <%= @invoice.customer.last_name %></p>
+</div>
 
 <p><b>Invoice Items</b></p>
 <% @invoice.invoice_items.each do |invoice_item|%>
