@@ -2,3 +2,9 @@
 
 <p> <%= link_to "Merchants", "/admin/merchants" %> </p>
 <p> <%= link_to "Invoices", "/admin/invoices" %> </p>
+
+<div id="top-customers"><h5>Top Customers</h5>
+  <% @customers.top_customers.each_with_index do |customer, index| %>
+  <p><%= "#{index + 1}. #{customer.full_name} - #{customer.transaction_count} purchases" %></p>
+  <% end %>
+</div>
