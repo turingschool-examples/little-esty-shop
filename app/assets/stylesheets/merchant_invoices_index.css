@@ -1,7 +1,5 @@
 #padding {
   border-style: solid;
-  /* height: auto; */
-  /* width: auto; */
   padding-right: 50px; 
   padding-left: 50px;
 }
@@ -47,6 +45,8 @@ span.links {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+
 
 
 
