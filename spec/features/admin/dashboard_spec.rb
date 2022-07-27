@@ -15,4 +15,11 @@ RSpec.describe 'Admin Dashboard page' do
       expect(page).to have_link('Merchants')
     end
   end
+  it 'has a link to /admin/invoicess' do
+    visit admin_path
+
+    within('#admin-links') do
+      expect(page).to have_link('Invoices')
+    end
+  end
 end
