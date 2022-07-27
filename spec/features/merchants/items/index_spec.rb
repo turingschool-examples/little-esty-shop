@@ -18,18 +18,6 @@ RSpec.describe 'Merchant Item Index' do
                 expect(page).to have_content(@candlestick.name)
                 expect(page).to_not have_content(@bat.name)
             end
-            
-            it 'when I click on the name of an item from the merchan items index page, then I am taken to that merchants items show page' do
-                visit merchant_items_path(@merchant1.id)
-                
-                click_link "#{@hammer.name}"
-                
-                expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@hammer.id}")
-
-                expect(page).to have_content(@hammer.name)
-                expect(page).to have_content("Description: #{@hammer.description}")
-                expect(page).to have_content("Unit Price: #{@hammer.unit_price}")
-            end
         end
     end
 end
