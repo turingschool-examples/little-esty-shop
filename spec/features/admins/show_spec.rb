@@ -15,7 +15,7 @@ RSpec.describe 'Admin Show Page', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices/10'
+    visit 'admin/merchants/1/invoices/10'
 
     expect(page).to have_content("10")
     expect(page).to have_content("in progress")
