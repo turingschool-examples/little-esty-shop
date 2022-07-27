@@ -45,4 +45,3 @@ RSpec.describe 'the merchant dashboard' do
       expect(page).to_not have_content("#{item2.name}")
     end
   end
-
