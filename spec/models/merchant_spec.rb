@@ -52,5 +52,33 @@ RSpec.describe Merchant, type: :model do
 
       expect(merchant.favorite_customers).to eq([customer_6, customer_5, customer_4, customer_3, customer_2])
     end
+
+    it 'has item invoices ready to ship' do
+      customer_1 = Customer.create!(first_name: "A", last_name: "A")
+
+      invoice_1 = Invoice.create!(status: "completed", customer_id: customer_1.id)
+      invoice_2 = Invoice.create!(status: "completed", customer_id: customer_1.id)
+      invoice_3 = Invoice.create!(status: "completed", customer_id: customer_1.id)
+      invoice_4 = Invoice.create!(status: "completed", customer_id: customer_1.id)
+      invoice_5 = Invoice.create!(status: "completed", customer_id: customer_1.id)
+
+      merchant = Merchant.create!(name: "Wizards Chest")
+
+      item_1 = Item.create!(name: "A", description: "A", unit_price: 100, merchant_id: merchant.id)
+      item_2 = Item.create!(name: "B", description: "B", unit_price: 200, merchant_id: merchant.id)
+      item_3 = Item.create!(name: "C", description: "C", unit_price: 300, merchant_id: merchant.id)
+      item_4 = Item.create!(name: "D", description: "D", unit_price: 400, merchant_id: merchant.id)
+      item_5 = Item.create!(name: "E", description: "E", unit_price: 500, merchant_id: merchant.id)
+
+      invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: "packaged", quantity: 5, unit_price: 100)
+      invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: "pending", quantity: 5, unit_price: 100)
+      invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: "shipped", quantity: 5, unit_price: 100)
+      invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: "shipped", quantity: 5, unit_price: 100)
+      invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: "pending", quantity: 5, unit_price: 100)
+
+      expect(merchant.ready_to_ship).to eq([invoice_item_1, invoice_item_2, invoice_item_5])
+      expect(merchant.ready_to_ship.first.item).to eq(item_1)
+      expect(merchant.ready_to_ship.last.invoice).to eq(invoice_5)
+    end
   end
 end
