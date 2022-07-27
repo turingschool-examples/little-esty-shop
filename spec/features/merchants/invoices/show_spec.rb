@@ -59,5 +59,38 @@ RSpec.describe "merchants invoice show page" do
         expect(page).to_not have_content("Log")
       end
     end
+
+    it 'shows the quantity of the item ordered' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+      item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 0, item_id: item_2.id, invoice_id: invoice_1.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 500, status: 0, item_id: item_3.id, invoice_id: invoice_1.id)
+
+      visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+      within "#items-#{item_1.id}" do 
+        expect(page).to have_content("Quantity: 4")
+        expect(page).to_not have_content("Quantity: 2")
+      end
+
+      within "#items-#{item_2.id}" do 
+        expect(page).to have_content("Quantity: 2")
+        expect(page).to_not have_content("Quantity: 3")
+      end
+
+      within "#items-#{item_3.id}" do
+        expect(page).to have_content("Quantity: 3")
+        expect(page).to_not have_content("Quantity: 4")
+      end
+    end
   end
 end

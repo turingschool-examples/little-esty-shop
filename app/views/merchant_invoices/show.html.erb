@@ -6,6 +6,7 @@
 
 <% @invoice.items.each do |item| %>
 <div id="items-<%= item.id %>">
-  <h3><%= item.name %></h3><br>
+  <h3>Item: <%= item.name %></h3>
+  <p>Quantity: <%= item.quantity_ordered(@invoice) %><p><br>
 </div>
 <% end %>
