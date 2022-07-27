@@ -55,5 +55,25 @@ RSpec.describe 'merchant items index page' do
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items/new")
     end
+
+    it 'shows the 5 most popular items' do 
+      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+
+      spatula = Item.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3, merchant_id: merchant_1.id)
+      spoon = Item.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1, merchant_id: merchant_1.id)
+      knife = Item.create!(name: 'Knife', description: 'It is for slicing bread', unit_price: 5, merchant_id: merchant_1.id)
+      computer = Item.create!(name: 'Computer', description: 'It is for playing games', unit_price: 50, merchant_id: merchant_1.id)
+      table = Item.create!(name: 'Table', description: 'It is for eating at', unit_price: 70, merchant_id: merchant_1.id)
+      bag_of_money = Item.create!(name: 'Bag of Money', description: 'It is for whatever you want', unit_price: 999, merchant_id: merchant_1.id)
+    
+      within "#top-five-items" do 
+        expect('Bag of Money').to appear_before('Table')
+        expect('Table').to appear_before('Computer')
+        expect('Computer').to appear_before('Knife')
+        expect('Knife').to appear_before('Spatula')
+        expect(page).to have_content('Spatula')
+        expect(page).to_not have_content('Spoon')
+      end
+    end
   end
 end
