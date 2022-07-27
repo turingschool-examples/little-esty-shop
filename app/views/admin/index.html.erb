@@ -2,11 +2,13 @@
 <p><%= link_to 'Merchants', '/admin/merchants' %></p>
 <p><%= link_to 'Invoices', '/admin/invoices' %></p>
 <div class="row">
-    <div class="column">
+    <div id="column1">
     <h2>Top 5 Customers</h2>
     <% Customer.top_five_customers.each do |customer| %>
+        <div class="customer">
         <p><%= customer.first_name %> <%= customer.last_name %> - <%= customer.total_transactions %></p>
     <% end %>
+    </div>
     </div>
     <div id="column2">
     <h2> Incomplete Invoices </h2>
