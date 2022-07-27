@@ -1,5 +1,4 @@
 class InvoicesController < ApplicationController
-  
   def index
     @merchant = Merchant.find(params[:id])
   end
@@ -18,5 +17,4 @@ class InvoicesController < ApplicationController
   def invoice_item_params
     params.permit(:status)
   end
-
 end
