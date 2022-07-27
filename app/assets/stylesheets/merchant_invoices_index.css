@@ -1,0 +1,52 @@
+#padding {
+  border-style: solid;
+  padding-right: 50px; 
+  padding-left: 50px;
+}
+
+#myHeader {
+  background-color: lightgray;
+  color: black;
+  font-size: 40px;
+  width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+#merchantName { 
+  text-align: left;
+  font-size: 25px;
+  padding-left: 20px;
+}
+
+#merchantLinks {
+  width: 100%;
+  color: rgb(134, 129, 129);
+  display: inline-block;
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+span.links {
+  font-size: 20px;
+  color: rgb(134, 129, 129);
+  float: right;
+  padding: 10px 20px 10px 10px;
+}
+
+#myInvoices {
+  border-style: solid none none none;
+  color: black;
+  width: auto;
+  margin: auto;
+  text-align: center;
+  font-size: 25px;
+  background-color: lightgray;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+
+
+
