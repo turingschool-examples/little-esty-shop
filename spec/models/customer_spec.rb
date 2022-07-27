@@ -52,5 +52,10 @@ RSpec.describe Customer, type: :model do
 
       expect(Customer.all.top_customers).to eq([customer_6, customer_5, customer_4, customer_3, customer_2])
     end
+    
+    it 'has full name' do
+      customer = Customer.create!(first_name: "John", last_name: "Elway")
+      expect(customer.full_name).to eq("John Elway")
+    end
   end
 end
