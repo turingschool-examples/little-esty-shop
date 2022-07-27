@@ -21,18 +21,16 @@ RSpec.describe 'merchant items edit page' do
     visit "/merchants/#{merch1.id}/items/#{item1.id}/edit"
 
     within "#item-name-field" do
-      expect(page).to have_content("Shoe")
+      expect(page).to have_field('Item Name', with: item1.name)
     end
 
     within "#item-description-field" do
-      expect(page).to have_content("Just one shoe")
+      expect(page).to have_field('Item Description', with: item1.description)
     end
 
     within "#item-price-field" do
-      expect(page).to have_content("$500.00")
+      expect(page).to have_field('Item Price', with: item1.unit_price)
     end
-    # test is failing but appearing on the save_and_open_page? Requested help in code-help
-    # will fix when know more
   end
 
   it 'when user updates information in the form and clicks submit, they are redirected back to the item show page with the updated information' do
@@ -41,11 +39,21 @@ RSpec.describe 'merchant items edit page' do
 
     visit "/merchants/#{merch1.id}/items/#{item1.id}/edit"
 
-    fill_in 'name', with: "Another Shoe"
-    fill_in 'description', with: "A perfect match if you only have one shoe"
-    fill_in 'price', with: "6000"
+    fill_in 'Item Name', with: "Another Shoe"
+    fill_in 'Item Description', with: "A perfect match if you only have one shoe"
+    fill_in 'Item Price', with: 6000
 
-    save_and_open_page
+    within "#item-name-field" do
+      expect(page).to have_field('Item Name', with: "Another Shoe")
+    end
+
+    within "#item-description-field" do
+      expect(page).to have_field('Item Description', with: "A perfect match if you only have one shoe")
+    end
+
+    within "#item-price-field" do
+      expect(page).to have_field('Item Price', with: 6000)
+    end
   end
 
 end
