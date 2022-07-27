@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Show Dashboard' do 
-    it 'has the name of the merchant' do 
+    xit 'has the name of the merchant' do 
         merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
         merchant_2 = Merchant.create!(name: 'Jon Doe')
         
