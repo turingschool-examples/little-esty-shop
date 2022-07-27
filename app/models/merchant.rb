@@ -17,12 +17,5 @@ class Merchant < ApplicationRecord
     .select("customers.*, count(transactions.id) as no_of_transactions")
     .group("customers.id").where(transactions: {result: :success})
     .order("no_of_transactions desc, customers.last_name").limit(5)
-    # binding.pry
   end
-
-  # x = invoices
-  # .joins(:customer, :transactions)
-  # .select("customers.*, count(transactions.id) as no_of_transactions")
-  # .group("customers.id").where(transactions: {result: :success})
-  # .order("no_of_transactions desc, customers.last_name").limit(5)
 end

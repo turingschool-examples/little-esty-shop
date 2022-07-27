@@ -14,7 +14,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'methods' do
-    it 'has items ready to ship' do
+    it 'calculates top 5 customers' do
       merchant1 = Merchant.create!(name: 'Fake Merchant')
 
       item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
