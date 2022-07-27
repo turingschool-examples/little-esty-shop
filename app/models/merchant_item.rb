@@ -1,0 +1,3 @@
+class MerchantItem < ApplicationRecord
+    
+end
