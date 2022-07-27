@@ -62,7 +62,7 @@ namespace :csv_load do
         0
       elsif row[4] == 'failed'
         1
-      else 
+      else
         raise 'unknown result'
       end
       Transaction.create(row.to_h)
