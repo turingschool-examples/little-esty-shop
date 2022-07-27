@@ -1,0 +1,15 @@
+<h1> Merchant Item Show Page </h1>
+
+<p id="update-item-link">
+  <%= link_to "Update item", "/merchants/#{@merchant.id}/items/#{@item.id}"%>
+</p>
+
+<p id="item-name">
+  Item Name: <%= @item.name %>
+</p>
+<p id="item-description">
+  Item Description: <%= @item.description %>
+</p>
+<p id="item-name">
+  Item Price: <%= @item.unit_price %>
+</p>

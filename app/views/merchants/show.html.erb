@@ -10,9 +10,12 @@
 
 <div id="items-ready-to-ship">
   <h3>Items Ready To Ship</h3>
-  <%= @merchant.items_ready_to_ship.each do |invoice_item| %>
+  <% @merchant.items_ready_to_ship.each do |invoice_item| %>
     <div id="invoice-item-<%= invoice_item.id %>">
-      <p><%= invoice_item.id %>. <%= invoice_item.item.name %>, created at: <%= invoice_item.invoice.formatted_date %>  
+      <p><%= invoice_item.id %> - 
+        <%= invoice_item.item.name %> - 
+        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
+        <%= invoice_item.invoice.formatted_date %>  
     </div>
     <% end %> 
 </div>
