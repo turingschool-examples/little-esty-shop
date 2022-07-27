@@ -14,8 +14,17 @@
     <div id="invoice-item-<%= invoice_item.id %>">
       <p><%= invoice_item.id %> - 
         <%= invoice_item.item.name %> - 
-        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/#{invoice_item.invoice.id}" %> - 
+        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
         <%= invoice_item.invoice.formatted_date %>  
     </div>
     <% end %> 
+</div>
+
+<div id="favorite-customers">
+  <h3>Favorite Customers</h3>
+  <%= @merchant.favorite_customers.each do |customer| %>
+    <div id="customer-id-<%= customer.id %>">
+      <p><%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %></p>
+    </div>
+  <% end %> 
 </div>

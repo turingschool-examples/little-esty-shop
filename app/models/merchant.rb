@@ -9,12 +9,22 @@ class Merchant < ApplicationRecord
     invoice_items.joins(:invoice).where.not(status: 2).order('invoices.created_at')
   end
 
+  def favorite_customers
+    customers.joins(invoices: :transactions)
+             .where(transactions: { result: 1 })
+             .select('customers.*, count(transactions.result) as transaction_total')
+             .group(:id)
+             .order(transaction_total: :desc)
+             .distinct
+             .limit(5)      
+  end
   def enabled_items
     items.where(status: "Enabled")
   end
 
   def disabled_items
     items.where(status: "Disabled")
+
   end
 end
 
