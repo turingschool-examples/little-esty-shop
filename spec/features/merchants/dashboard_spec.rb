@@ -97,5 +97,27 @@ RSpec.describe 'Dashboard Page' do
         expect(page).to have_content(invoice_item2.invoice.formatted_date)
       end
     end
+    it 'each invoice id is a link to that invoices show page' do
+      customer1 = Customer.create!(first_name: 'Theophania', last_name: 'Fenwick')
+      customer2 = Customer.create!(first_name: 'Vera', last_name: 'Wynn')
+
+      item1 = @merch2.items.create!(name: 'Copper Bracelet', description: 'Shiny, but not too shiny', unit_price: 20)
+      item3 = @merch2.items.create!(name: 'Lemongrass Extract', description: 'Smells citrus', unit_price: 6)
+
+      invoice1 = customer1.invoices.create!(status: 1)
+      invoice2 = customer2.invoices.create!(status: 1)
+
+      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 1, unit_price: 6, status: 1)
+      invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
+    
+      visit "/merchants/#{@merch2.id}/dashboard"
+
+      within "#invoice-item-#{invoice_item1.id}" do
+        expect(page).to have_link("Invoice ##{invoice_item1.invoice.id}")
+      end
+      within "#invoice-item-#{invoice_item2.id}" do
+        expect(page).to have_link("Invoice ##{invoice_item2.invoice.id}")
+      end
+    end
   end
 end
