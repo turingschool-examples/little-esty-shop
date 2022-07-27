@@ -29,8 +29,6 @@ RSpec.describe 'merchant items index page' do
         spatula = Item.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3, merchant_id: merchant_1.id)
         spoon = Item.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1, merchant_id: merchant_1.id)
 
-        #  save_and_open_page 
-
         visit "/merchants/#{merchant_1.id}/items"
 
         expect(page).to have_link('Spatula')
@@ -39,6 +37,35 @@ RSpec.describe 'merchant items index page' do
         click_on('Spatula')
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{spatula.id}")
+    end
+
+    # Merchant Item Create
+
+    # As a merchant
+    # When I visit my items index page
+    # I see a link to create a new item.
+    # When I click on the link,
+    # I am taken to a form that allows me to add item information.
+    # When I fill out the form I click ‘Submit’
+    # Then I am taken back to the items index page
+    # And I see the item I just created displayed in the list of items.
+    # And I see my item was created with a default status of disabled.
+
+      it 'has a link to that brings you to a form to add an item' do 
+        merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+
+        spatula = Item.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3, merchant_id: merchant_1.id)
+        spoon = Item.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1, merchant_id: merchant_1.id)
+
+        visit "/merchants/#{merchant_1.id}/items"
+
+        within "#create-item" do
+          expect(page).to have_link("New Item")
+        end
+
+        click_on('New Item')
+
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/items/new")
     end
   end
 end
