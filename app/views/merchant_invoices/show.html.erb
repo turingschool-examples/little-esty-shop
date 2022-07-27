@@ -8,6 +8,7 @@
 <div id="items-<%= item.id %>">
   <h3>Item: <%= item.name %></h3>
   <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
-  <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p><br>
+  <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p>
+  <p>Status: <%= item.item_status(@invoice) %><p><br>
 </div>
 <% end %>
