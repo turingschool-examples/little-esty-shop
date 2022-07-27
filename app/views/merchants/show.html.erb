@@ -1,0 +1,20 @@
+<h1> Little Esty Shop </h1>
+
+<h3><%= @merchant.name %></h3>
+
+
+<p>Dashboard
+<%= link_to 'My Items', merchant_items_path(@merchant) %>
+<%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
+</p>
+
+<b>Favorite Customers</b>
+<div id='top-5' >
+<ol>
+<% @merchant.top_5.each_with_index do |customer, index| %>
+    <div id="top-5-<%=index%>">
+    <li><%= customer.first_name + " " + customer.last_name %> - <%= customer.transactions.count %> purchases</li>
+    </div>
+<% end %>
+</ol>
+</div>
