@@ -22,6 +22,21 @@ class MerchantItemsController < ApplicationController
       flash[:alert] = "Error: #{error_message(item.errors)}"
     end
   end
+  
+  def edit
+    @item = Item.find(params[:item_id])
+  end
+
+  def update
+    item = Item.find(params[:item_id])
+    if item.update(item_params)
+      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+      flash[:success] = "Update to #{item.name} was successful!"
+    else
+      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}/edit"
+      flash[:alert] = "Error: #{error_message(item.errors)}"
+    end
+  end
 
 
   private
