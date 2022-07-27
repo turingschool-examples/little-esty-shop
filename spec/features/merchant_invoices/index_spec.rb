@@ -9,12 +9,15 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
 			merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits")
 
 			item1 = Item.create!(name: "Pikachu pics", description: 'Cute pics with pikachu', unit_price: 1000, merchant_id: merchant1.id)
+      item2 = Item.create!(name: "Pokemon stuffy", description: 'Pikachu stuffed toy', unit_price: 2000, merchant_id: merchant1.id)
 			customer1 = Customer.create!(first_name: "Parker", last_name: "Thomson")
 			invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
 			transaction1 = Transaction.create!(credit_card_number: "123456789123456789", result: "success", invoice_id: invoice1.id)
 		  invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item1.id, invoice_id: invoice1.id)
+      invoice_item2 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item2.id, invoice_id: invoice1.id)
 
-      visit merchant_invoices_path(merchant1.id)
+      invoice1.merchant_invoice_by_id(merchant1.id)
+      visit "/merchants/#{merchant1.id}/invoices"
 
       within "div#merchant" do 
         expect(page).to have_content("#{merchant1.name}")
@@ -22,7 +25,7 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
         expect(page).to have_content(invoice1.id)
       end
 
-      visit merchant_invoices_path(merchant2.id)
+      visit "/merchants/#{merchant2.id}/invoices"
 
       within "div#merchant" do 
         expect(page).to have_content("#{merchant2.name}")
