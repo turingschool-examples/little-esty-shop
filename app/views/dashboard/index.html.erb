@@ -6,3 +6,8 @@
 <% @merchant.items_ready_to_ship.each do |item| %>
    <%= item.name %>
 <% end %>
+
+<h3>Top 5 Customers</h3>
+<% @merchant.top_5_customers.each do |customer| %>
+  <p><%= customer.first_name %> <%= customer.last_name %></p>
+<% end %>
