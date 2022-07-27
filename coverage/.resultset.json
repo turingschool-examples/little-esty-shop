@@ -272,6 +272,8 @@
           null,
           null,
           1,
+          1,
+          1,
           null
         ]
       },
@@ -294,8 +296,24 @@
           1,
           null
         ]
+      },
+      "/Users/maryturpin/turing/2Module/projects/little-esty-shop/app/controllers/admin_merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/maryturpin/turing/2Module/projects/little-esty-shop/app/controllers/admin_invoices_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1658883091
+    "timestamp": 1658884264
   }
 }

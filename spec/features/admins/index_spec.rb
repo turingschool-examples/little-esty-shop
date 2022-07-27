@@ -13,6 +13,13 @@ RSpec.describe 'the admin index' do
     expect(current_path).to eq('/admin')
 
     expect(page).to have_link('Merchants')
+    click_link('Merchants')
+    expect(current_path).to eq("/admin/merchants")
+
+    visit '/admin'
+
     expect(page).to have_link('Invoices')
+    click_link('Invoices')
+    expect(current_path).to eq("/admin/invoices")
   end
 end
