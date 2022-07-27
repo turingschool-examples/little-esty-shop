@@ -7,6 +7,7 @@
 <% @invoice.items.each do |item| %>
 <div id="items-<%= item.id %>">
   <h3>Item: <%= item.name %></h3>
-  <p>Quantity: <%= item.quantity_ordered(@invoice) %><p><br>
+  <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
+  <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p><br>
 </div>
 <% end %>

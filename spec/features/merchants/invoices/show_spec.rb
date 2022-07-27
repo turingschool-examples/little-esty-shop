@@ -92,5 +92,38 @@ RSpec.describe "merchants invoice show page" do
         expect(page).to_not have_content("Quantity: 4")
       end
     end
+
+    it 'shows the price of the ordered invoice items' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+      item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 200, merchant_id: merchant_1.id )
+
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 2000, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 600, status: 2, item_id: item_3.id, invoice_id: invoice_1.id)
+
+      visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+      within "#items-#{item_1.id}" do 
+        expect(page).to have_content("Price: $20.00")
+        expect(page).to_not have_content("Price: $14.00")
+      end
+
+      within "#items-#{item_2.id}" do 
+        expect(page).to have_content("Price: $14.00")
+        expect(page).to_not have_content("Price: $20.00")
+      end
+
+      within "#items-#{item_3.id}" do
+        expect(page).to have_content("Price: $6.00")
+        expect(page).to_not have_content("Price: $20.00")
+      end
+    end
   end
 end

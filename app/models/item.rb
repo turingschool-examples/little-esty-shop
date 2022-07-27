@@ -10,4 +10,9 @@ class Item < ApplicationRecord
   def quantity_ordered(invoice) 
     InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).quantity
   end
+
+  def price_sold(invoice)
+    InvoiceItem.find_by(item_id: self.id, invoice_id: invoice.id).unit_price
+  end
+
 end
