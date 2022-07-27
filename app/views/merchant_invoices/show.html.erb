@@ -6,3 +6,24 @@
     <h2> customer: </h2>
     <p>  <%= @invoice.customer.first_name  %> <%= @invoice.customer.last_name  %> </p>
 </div>
+<div id=item-details>
+    <h2> Items on this invoice: </h2>
+
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Status</th>
+        </tr>
+        <%# @invoice.invoice_items.each do |in_item| %>
+        <% @merchant.get_invoice_items(@invoice.id).each do |in_item| %>
+            <tr>
+                <td><%= in_item.item.name %></td>
+                <td><%= in_item.quantity %></td>
+                <td><%= in_item.unit_price %></td>
+                <td><%= in_item.status %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>
