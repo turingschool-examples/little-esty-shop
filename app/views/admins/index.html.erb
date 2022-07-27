@@ -8,3 +8,13 @@
   <p><%= "#{index + 1}. #{customer.full_name} - #{customer.transaction_count} purchases" %></p>
   <% end %>
 </div>
+
+<div id="incomplete_invoices"><h5>Incomplete Invoices</h5>
+  <% @invoices.each do |invoice| %>
+    <% invoice.invoice_items.each do |invoiceitem| %>
+      <% if invoiceitem.status != "shipped" %>
+        <p> <%= link_to "Invoice #{invoiceitem.invoice_id}", "/admin/invoices/#{invoice.id}" %> </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

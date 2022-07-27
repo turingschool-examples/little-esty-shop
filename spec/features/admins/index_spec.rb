@@ -80,7 +80,6 @@ RSpec.describe 'the admin index' do
     expect(page).to have_content("3. D D - 3 purchases")
     expect(page).to have_content("4. C C - 2 purchases")
     expect(page).to have_content("5. B B - 1 purchases")
-    #save_and_open_page
     end
   end
 
@@ -102,9 +101,9 @@ RSpec.describe 'the admin index' do
     invoice_item_1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice_1.id, status: "shipped", quantity: 5, unit_price: 100)
     invoice_item_2 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice_2.id, status: "packaged", quantity: 5, unit_price: 100)
     invoice_item_3 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice_3.id, status: "shipped", quantity: 5, unit_price: 100)
-    invoice_item_4 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_4.id, status: "pending", quantity: 5, unit_price: 100)
-    invoice_item_5 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_5.id, status: "pending", quantity: 5, unit_price: 100)
-    invoice_item_6 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_6.id, status: "pending", quantity: 5, unit_price: 100)
+    invoice_item_4 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice_4.id, status: "pending", quantity: 5, unit_price: 100)
+    invoice_item_5 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice_5.id, status: "pending", quantity: 5, unit_price: 100)
+    invoice_item_6 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice_6.id, status: "pending", quantity: 5, unit_price: 100)
 
     visit "/admin"
 
@@ -112,9 +111,9 @@ RSpec.describe 'the admin index' do
       expect(page).to have_content("Incomplete Invoices")
 
       expect(page).to_not have_link("Invoice #{invoice_1.id}")
-      expect(page).to_not have_link("Invoice #{invoice_2.id}")
       expect(page).to_not have_link("Invoice #{invoice_3.id}")
 
+      expect(page).to have_link("Invoice #{invoice_2.id}")
       expect(page).to have_link("Invoice #{invoice_4.id}")
       expect(page).to have_link("Invoice #{invoice_5.id}")
       expect(page).to have_link("Invoice #{invoice_6.id}")
