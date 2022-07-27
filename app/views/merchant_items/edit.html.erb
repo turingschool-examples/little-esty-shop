@@ -1,1 +1,26 @@
 <h1> Merchant/Item Edit Page </h1>
+
+<div id="item-update-form">
+
+  <%= form_with url: "/merchant_items", method: :patch, local: true do |form| %>
+
+    <p id="item-name-field">
+      <%= form.label :name, "Item Name:"%>
+      <%= form.text_field :name, value:"#{@item.name}" %>
+    </p>
+
+    <p id="item-description-field">
+      <%= form.label :description, "Item Description:"%>
+      <%= form.text_field :description, value:"#{@item.description}" %>
+    </p>
+
+    <p id="item-price-field">
+      <%= form.label :price, "Item Price:"%>
+      <%= form.number_field :price, value:"#{@item.unit_price}" %>
+    </p>
+
+  <% end %>
+
+</div>
+
+<%# {number_to_currency(@item.unit_price)} %>
