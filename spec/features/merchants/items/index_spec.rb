@@ -23,22 +23,20 @@ RSpec.describe 'merchant items index page' do
       end
     end
     
-      it 'can click on the name of an item and be redirected to that merchants items show page' do 
-        merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+    it 'can click on the name of an item and be redirected to that merchants items show page' do 
+      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
 
-        spatula = Item.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3, merchant_id: merchant_1.id)
-        spoon = Item.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1, merchant_id: merchant_1.id)
+      spatula = Item.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3, merchant_id: merchant_1.id)
+      spoon = Item.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1, merchant_id: merchant_1.id)
 
-        #  save_and_open_page 
+      visit "/merchants/#{merchant_1.id}/items"
 
-        visit "/merchants/#{merchant_1.id}/items"
+      expect(page).to have_link('Spatula')
+      expect(page).to have_link('Spoon')
 
-        expect(page).to have_link('Spatula')
-        expect(page).to have_link('Spoon')
+      click_on('Spatula')
 
-        click_on('Spatula')
-
-        expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{spatula.id}")
+      expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{spatula.id}")
     end
   end
 end
