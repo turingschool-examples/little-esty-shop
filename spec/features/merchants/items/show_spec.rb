@@ -36,7 +36,6 @@ RSpec.describe Item do
         expect(page).to have_content("Price: $80.00")
         expect(page).to_not have_content("Name: Teeth")
         expect(page).to_not have_content("Name: Bear")
-save_and_open_page
     end
   end
 end

@@ -11,7 +11,9 @@ RSpec.describe 'Merchant Items Index' do
       item_2 = Item.create!(name: "Saddle", description: "saddle for your horse", unit_price: 2, created_at: Time.now, updated_at: Time.now, merchant_id: merchant_1.id)
       item_3 = Item.create!(name: "Chaps", description: "protect your get up sticks", unit_price: 3, created_at: Time.now, updated_at: Time.now, merchant_id: merchant_2.id)
 
-      visit merchant_item_index_path(merchant_1)
+      visit merchant_items_path(merchant_1)
+
+      # click_on "My Items Index"
 
       expect(page).to have_content(Name: "Cowboy Hat")
       expect(page).to have_content(Name: "Saddle")
