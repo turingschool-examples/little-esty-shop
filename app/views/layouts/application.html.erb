@@ -7,6 +7,13 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% flash.each do |type, msg| %>
+    <div id="flash-message">
+      <%= msg %>
+    </div>
+
+<% end %>
   </head>
 
   <body>
