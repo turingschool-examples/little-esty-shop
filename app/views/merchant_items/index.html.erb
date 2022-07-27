@@ -1,7 +1,40 @@
-<h1><%%= @merchant.name %> Items</h1>
+<h1><%= @merchant.name %> Items</h1>
+
 <div id="items">
-  <% @items.each do |item| %>
-    <p><%= item.name %></p>
-  <% end %>
+
+  <div id="enabled-items">
+    <h2>Enabled Items</h2>
+
+    <% @enabled_items.each do |item| %>
+      <p id="enabled-item-<%=item.id%>">
+        <span class="item-name">
+          <%= item.name %>
+        </span>
+
+        <span class="item-status-button">
+          <%= item.status%>
+        </span>
+      </p>
+    <% end %>
+
+  </div>
+
+  <div id="disabled-items">
+    <h2>Disabled Items</h2>
+
+    <% @disabled_items.each do |item| %>
+      <p id="disabled-item-<%=item.id%>">
+        <span class="item-name">
+          <%= item.name %>
+        </span>
+
+        <span class="item-status-button">
+          <%= item.status%>
+        </span>
+      </p>
+    <% end %>
+
+  </div>
+
 </div>
 
