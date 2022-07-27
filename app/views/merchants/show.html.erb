@@ -1,3 +1,9 @@
-<h1>Merchant Show</h1>
+<h1><%= @merchant.name %></h1>
 
-<p><b>Name: <%= @merchant.name %></b></p>
+<% @merchant.items.each_with_index do |item, index| %>
+  <div id="item-<%= index %>">
+    <p><b>Name: <%= item.name %></b></p>
+    <p>Description: <%= item.description %></p>
+    <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
+  </div>
+<% end %>
