@@ -8,5 +8,7 @@ class Merchant < ApplicationRecord
 
   def items_ready_to_ship 
     ### Active Record Method to get the items based on the invoice item status == pending ### HALP
+    Merchant.joins(invoice_items: [invoice: :transactions]).where(merchants: {id: self.id}, invoice_items: {status: [0, 1]}, invoices: {status: [1, 2]}, transactions: {result: true}).select("items.name")
   end 
+  
 end
