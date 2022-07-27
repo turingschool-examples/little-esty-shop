@@ -40,11 +40,9 @@ RSpec.describe 'the merchant dashboard' do
 
       visit "/merchants/#{merchant1.id}/dashboard"
 
-      within “.ready_to_ship” do
-        expect(page).to have_content("Items Ready to Ship:")
-        expect(page).to have_content("#{item1.name}")
-        expect(page).to_not have_content("#{item2.name}")
-      end 
+      expect(page).to have_content("Items Ready to Ship:")
+      expect(page).to have_content("#{item1.name}")
+      expect(page).to_not have_content("#{item2.name}")
     end
   end
 
