@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Invoice do
+RSpec.describe Invoice, type: :model do
   describe 'relationships' do
     it { should have_many(:invoice_items) }
     it { should have_many(:items).through(:invoice_items)}
@@ -33,8 +33,16 @@ RSpec.describe Invoice do
 
   describe 'instance methods' do
     it '#total_revenue' do
-    expect(@invoice_1.total_revenue).to eq(31952)
+      expect(@invoice_1.total_revenue).to eq(31952)
+    end
+    
+    it 'can format time' do
+      customer = Customer.create!(first_name: "A", last_name: "A")
+      invoice = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-26 00:00:00 UTC")
+
+      expect(invoice.format_date).to eq("Tuesday, July 26, 2022")
     end
   end
     
+
 end
