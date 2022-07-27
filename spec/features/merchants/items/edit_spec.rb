@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Show Page' do
+RSpec.describe 'Merchant Items Edit Page' do
   before :each do
     @walmart = Merchant.create!(name: "Wal-Mart")
 
@@ -29,28 +29,6 @@ RSpec.describe 'Merchant Items Show Page' do
                             merchant_id: @target.id)
   end
 
-  # User Story 7
-  # Merchant Items Show Page
-
-  # As a merchant,
-  # When I click on the name of an item from the merchant items index page,
-  # Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
-  # And I see all of the item's attributes including:
-
-  # Name
-  # Description
-  # Current Selling Price
-  it 'has all of the attributes for a specific merchant item' do
-    visit "/merchants/#{@walmart.id}/items/#{@pencil.id}"
-
-    expect(page).to have_content(@pencil.name)
-    expect(page).to have_content(@pencil.description)
-    expect(page).to have_content(@pencil.unit_price)
-    expect(page).to_not have_content(@marker.name)
-    expect(page).to_not have_content(@eraser.name)
-    expect(page).to_not have_content(@highlighter.name)
-  end
-
   # User Story 8
   # Merchant Item Update
 
@@ -63,13 +41,46 @@ RSpec.describe 'Merchant Items Show Page' do
   # When I update the information in the form and I click ‘submit’
   # Then I am redirected back to the item show page where I see the updated information
   # And I see a flash message stating that the information has been successfully updated.
-  it 'has a link to update information for an item' do
-    visit "/merchants/#{@walmart.id}/items/#{@pencil.id}"
+  it 'has a form pre-filled with the existing attribute information for an item' do
+    visit "/merchants/#{@walmart.id}/items/#{@pencil.id}/edit"
 
-    expect(page).to have_link("Update Information", href: "/merchants/#{@walmart.id}/items/#{@pencil.id}/edit")
+    within '#name-field' do
+      expect(page).to have_field(:name, with: @pencil.name)
+    end
+    
+    within '#description-field' do
+      expect(page).to have_field(:description, with: @pencil.description)
+    end
 
-    click_link("Update Information")
+    within '#unit_price-field' do
+      expect(page).to have_field(:unit_price, with: @pencil.unit_price)
+    end
+  end
 
-    expect(current_path).to eq("/merchants/#{@walmart.id}/items/#{@pencil.id}/edit")
+  it 'can update the information for an item' do
+    visit "/merchants/#{@walmart.id}/items/#{@pencil.id}/edit"
+
+    within '#name-field' do
+      fill_in :name, with: "Mechanical Pencil"
+    end
+    
+    within '#description-field' do
+      fill_in :description, with: "You can refill it with lead!"
+    end
+
+    within '#unit_price-field' do
+      fill_in :unit_price, with: 299
+    end
+
+    click_button 'Update Item'
+
+    expect(current_path).to eq("/merchants/#{@walmart.id}/items/#{@pencil.id}")
+
+    expect(page).to have_content("Item successfully updated!")
+    expect(page).to have_content("Mechanical Pencil")
+    expect(page).to have_content("You can refill it with lead!")
+    expect(page).to have_content(299)
+    expect(page).to_not have_content("Sharpen it and write with it.")
+    expect(page).to_not have_content(199)
   end
 end

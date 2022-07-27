@@ -29,7 +29,7 @@ RSpec.describe 'Merchant Items Index' do
                             merchant_id: @target.id)
   end
 
-  # User Story 1
+  # User Story 6
   # Merchant Items Index Page
 
   # As a merchant,
@@ -47,7 +47,7 @@ RSpec.describe 'Merchant Items Index' do
     end
   end
 
-  # User Story 2
+  # User Story 7
   # Merchant Items Show Page
 
   # As a merchant,
