@@ -9,4 +9,10 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item 
   belongs_to :invoice 
+
+
+  def self.incomplete_invoices_not_shipped
+    # select(:invoice_id).distinct.where.not('status = ?', 2)
+    select('invoices.*').distinct.joins(:invoice_items).where.not(invoice_items: {status: 2})
+  end
 end

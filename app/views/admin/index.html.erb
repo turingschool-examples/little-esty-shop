@@ -8,6 +8,14 @@
         <p><%= customer.first_name %> <%= customer.last_name %> - <%= customer.total_transactions %></p>
     <% end %>
     </div>
-    <div class="column">
+    <div id="column2">
+    <h2> Incomplete Invoices </h2>
+    <% Invoice.incomplete_invoices_not_shipped.each do |invoice| %>
+        <div class="invoice">
+        <p>Id: <%= link_to invoice.id, "/admin/invoices/#{invoice.id}" %> </p>
+        <p>Date: <%= invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+
+        </div>
+    <% end %>
     </div>
 </div>
