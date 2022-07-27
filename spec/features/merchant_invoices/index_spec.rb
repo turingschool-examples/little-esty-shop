@@ -29,7 +29,6 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
         expect(page).to have_content(invoice1.id)
         expect(page).to_not have_content(invoice2.id)
         expect(page).to have_link(invoice1.id)
-        save_and_open_page
         click_on("#{invoice1.id}")
         expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")  
       end

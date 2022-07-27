@@ -8,7 +8,6 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
 
   def merchant_invoice_by_item_id
-    # require 'pry'; binding.pry
     InvoiceItem.all.where(item_id: items.ids).pluck(:invoice_id).uniq
   end
 end

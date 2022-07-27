@@ -13,7 +13,7 @@
   <div id = "merchant">
   <%= "#{@merchant.name}" %>
   <% @merchant.merchant_invoice_by_item_id.each do |id| %>
-    <%= link_to "#{id}", "/merchants/#{@merchant.id}/invoices/#{id}" %>
+  <br>Invoice ID: <%= link_to "#{id}", "/merchants/#{@merchant.id}/invoices/#{id}" %>
   </div>
   <% end %>
 </div>
