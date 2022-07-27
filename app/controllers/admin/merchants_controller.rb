@@ -25,4 +25,7 @@ class Admin::MerchantsController < ApplicationController
             flash[:alert] = "Error: name can't be blank"
         end 
     end 
+
+    def new 
+    end 
 end 

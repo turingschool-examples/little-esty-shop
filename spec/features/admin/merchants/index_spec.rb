@@ -73,4 +73,11 @@ RSpec.describe 'admin merchant index' do
         end 
     end 
 
+    it 'has a button to create a new merchant' do         
+        visit '/admin/merchants'
+
+        click_on("Create a new merchant")
+
+        expect(current_path).to eq("/admin/merchants/new")
+    end 
 end 
