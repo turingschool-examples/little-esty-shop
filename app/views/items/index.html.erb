@@ -1,1 +1,6 @@
-<h1>My Items Index</h1>
+<h1><%= @merchant.name %></h1>
+<% @merchant.items.each do |item| %>
+Name: <%= item.name %><br>
+<% end %>
+
+
