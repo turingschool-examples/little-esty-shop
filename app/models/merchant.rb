@@ -8,5 +8,13 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     invoice_items.joins(:invoice).where.not(status: 2).order('invoices.created_at')
   end
+
+  def enabled_items
+    items.where(status: "Enabled")
+  end
+
+  def disabled_items
+    items.where(status: "Disabled")
+  end
 end
 

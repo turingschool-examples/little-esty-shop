@@ -2,6 +2,8 @@ class MerchantItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
+    @enabled_items = @merchant.enabled_items
+    @disabled_items = @merchant.disabled_items
   end
 
   def show
@@ -17,9 +19,19 @@ class MerchantItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
 
-    @item.update(name: params[:item_name], description: params[:item_description], unit_price: params[:item_price])
+    if params[:status].present?
+      @item.update(status: params[:status])
 
-    redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:id]}", notice: 'Item information updated!'
+      redirect_to "/merchants/#{@item.merchant_id}/items"
+      #this block is for the toggle between enable/disable on the merchant/item/index page
+    else
+      @item.update(name: params[:item_name],description: params[:item_description],unit_price: params[:item_price])
+
+      redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}", notice: "Item information updated!"
+
+      #this block is for coming from the merchant/item/edit page
+    end
+
   end
 
   private
