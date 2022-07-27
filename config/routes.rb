@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :merchant_invoices, only: :index
+  get '/merchants/:merchant_id/invoices', to: 'merchant_invoices#index'
 end

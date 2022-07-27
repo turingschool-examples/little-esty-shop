@@ -20,6 +20,7 @@
           1,
           null,
           1,
+          0,
           null,
           0,
           0,
@@ -331,6 +332,17 @@
           0,
           null,
           null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -338,6 +350,14 @@
         "lines": [
           1,
           1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -359,6 +379,14 @@
           0,
           null,
           null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -366,17 +394,77 @@
         "lines": [
           1,
           1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
       "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/spec/models/item_spec.rb": {
         "lines": [
-
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null
         ]
       },
       "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/spec/models/merchant_spec.rb": {
         "lines": [
-
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
         ]
       },
       "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/spec/models/transaction_spec.rb": {
@@ -400,44 +488,14 @@
           null
         ]
       },
-      "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/models/merchant.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/models/item.rb": {
-        "lines": [
-          1,
-          null,
-          null
-        ]
-      },
       "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
           null,
           null
         ]
-      },
-      "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/controllers/merchant_invoices_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/Users/gwendolynruiz/turing/2module/group_project/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1658880063
+    "timestamp": 1658940835
   }
 }
