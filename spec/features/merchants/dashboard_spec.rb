@@ -201,7 +201,7 @@ RSpec.describe 'Merchant Dashboard' do
 
     # And next to each customer name I see the number of successful transactions they have
     # conducted with my merchant
-    xit 'displays the names of the top 5 customers' do 
+    it 'displays the number of successful transactions for each top customer' do 
         merchant_1 = Merchant.create!(name: 'Mike Dao')
 
         item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
@@ -295,6 +295,8 @@ RSpec.describe 'Merchant Dashboard' do
         transaction_6a_3 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
         transaction_6a_4 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
         transaction_6a_5 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
+        transaction_6a_6 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
+
 
         # customer_7
 
@@ -314,16 +316,18 @@ RSpec.describe 'Merchant Dashboard' do
         transaction_7a_4 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
         transaction_7a_5 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
         transaction_7a_6 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
+        transaction_7a_7 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
+
 
         visit "merchants/#{merchant_1.id}/dashboard" 
         # save_and_open_page
 
         within("#top-5-0") do 
-            expect(page).to have_content("6 purchases")
+            expect(page).to have_content("7 purchases")
         end
 
         within("#top-5-1") do 
-            expect(page).to have_content("5 purchases")
+            expect(page).to have_content("6 purchases")
         end
 
         within("#top-5-2") do 
@@ -338,5 +342,14 @@ RSpec.describe 'Merchant Dashboard' do
             expect(page).to have_content("3 purchases")
         end
     end
+
+    # Merchant Dashboard Items Ready to Ship
+    # As a merchant
+    # When I visit my merchant dashboard
+    # Then I see a section for "Items Ready to Ship"
+    # In that section I see a list of the names of all of my items that
+    # have been ordered and have not yet been shipped,
+    # And next to each Item I see the id of the invoice that ordered my item
+    # And each invoice id is a link to my merchant's invoice show page
 
 end
