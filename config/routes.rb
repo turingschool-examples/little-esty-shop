@@ -8,12 +8,14 @@ Rails.application.routes.draw do
     get '/invoices/:invoice_id', to: 'merchant_invoices#show'
   end
   
+  get '/merchants/:id/items/new', to: 'merchant_items#new'
   get "/merchants/:id/items", to: "merchant_items#index"
+  post 'merchants/:id/items', to: 'merchant_items#create'
   
   get '/merchants/:id/items/:item_id', to: 'merchant_items#show'
   get '/merchants/:id/items/:item_id/edit', to: 'merchant_items#edit'
   patch '/merchants/:id/items/:item_id', to: 'merchant_items#update'
   
-  get '/merchants/:merchant_id/dashboard', to: 'merchants#show'
+  get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
 
 end
