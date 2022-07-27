@@ -168,18 +168,18 @@ RSpec.describe "merchants invoice show page" do
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
       within "#items-#{item_1.id}" do 
-        expect(page).to have_content("Status: pending")
-        expect(page).to_not have_content("Status: packaged")
+        expect(page).to have_select(:update_status, selected: "pending")
+        expect(page).to_not have_select(:update_status, selected: "packaged")
       end
 
       within "#items-#{item_2.id}" do 
-        expect(page).to have_content("Status: packaged")
-        expect(page).to_not have_content("Status: pending")
+        expect(page).to have_select(:update_status, selected: "packaged")
+        expect(page).to_not have_select(:update_status, selected: "pending")
       end
 
       within "#items-#{item_3.id}" do
-        expect(page).to have_content("Status: shipped")
-        expect(page).to_not have_content("Status: packaged")
+        expect(page).to have_select(:update_status, selected: "shipped")
+        expect(page).to_not have_select(:update_status, selected: "pending")
       end
     end
 
@@ -194,13 +194,12 @@ RSpec.describe "merchants invoice show page" do
 
       within "#items-#{item_1.id}" do 
         expect(page).to have_select(:update_status, selected: "pending")
-
-        select 'packaged', :from => 'update_status'
-
+        select 'packaged', :from => :update_status
         click_on "Update Status" 
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
       end
 
-        expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
+      visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
       within "#items-#{item_1.id}" do 
         expect(page).to have_select(:update_status, selected: "packaged")
