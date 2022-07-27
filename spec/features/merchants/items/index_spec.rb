@@ -13,16 +13,10 @@ RSpec.describe 'Merchant Items Index Page' do
 
     visit merchant_items_path(merchant1)
 
-<<<<<<< HEAD
-      visit merchant_items_path(merchant_1)
-
-      # click_on "My Items Index"
-=======
     expect(page).to have_content("Josey Wales")
     expect(page).to_not have_content("Britches Eckles")
     expect(page).to have_content("Name: Camera")
     expect(page).to_not have_content("Name: Bone")
->>>>>>> 7a1362f9627cdde4fb1395ab4ea5889d93ba599f
 
   end 
 end
