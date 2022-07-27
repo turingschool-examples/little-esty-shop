@@ -11,7 +11,7 @@
 <b>Items Ready to Ship</b>
 <% @merchant.unshipped_items.each_with_index do |item, index| %>
     <div id = "item-<%= index %>">
-        <%= item.name %> - Invoice #<%= item.invoice_id %>
+        <%= item.name %> - <%= link_to "Invoice ##{item.invoice_id}", merchant_invoice_path(@merchant.id, item.invoice_id) %>
     </div>
 <% end %>
 <br>

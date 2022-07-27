@@ -27,6 +27,6 @@ class Merchant < ApplicationRecord
   end
 
   def unshipped_items
-    items.joins(:invoice_items).where(invoice_items: { status: 'packaged' }).select('items.*, invoice_items.invoice_id as invoice_id')
+    items.joins(:invoice_items).where(invoice_items: { status: 'packaged' }).select('items.*, invoice_items.invoice_id as invoice_id').order(:invoice_id)
   end
 end
