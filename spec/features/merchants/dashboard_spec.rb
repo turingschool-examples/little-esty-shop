@@ -349,7 +349,103 @@ RSpec.describe 'Merchant Dashboard' do
     # Then I see a section for "Items Ready to Ship"
     # In that section I see a list of the names of all of my items that
     # have been ordered and have not yet been shipped,
-    # And next to each Item I see the id of the invoice that ordered my item
-    # And each invoice id is a link to my merchant's invoice show page
+    it 'has a section with a list of items that have been ordered but not yet been shipped' do 
+        merchant_1 = Merchant.create!(name: 'Mike Dao')
 
+        item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
+        item_2 = merchant_1.items.create!(name: 'Dog Scratcher', description: 'scratches dogs', unit_price: 800)
+        item_3 = merchant_1.items.create!(name: 'Dog Water Bottle', description: 'dogs can drink from it', unit_price: 1600)
+        item_4 = merchant_1.items.create!(name: 'Turtle Stickers', description: 'stickers of turtles', unit_price: 400)
+
+        # customer_1 
+        customer_1 = Customer.create!(first_name: 'Anna Marie', last_name: 'Sterling')
+
+        invoice_1a = customer_1.invoices.create!(status: 1)
+
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'packaged', item: item_1, invoice: invoice_1a)
+        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1a)
+        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1a)
+
+        invoice_1b = customer_1.invoices.create!(status: 0)
+        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1b)
+        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1b)
+        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
+
+        visit "merchants/#{merchant_1.id}/dashboard" 
+        # save_and_open_page 
+
+        expect(page).to have_content('Items Ready to Ship')
+
+        within("#item-0") do 
+            expect(page).to have_content('Book of Rails')
+        end
+
+        within("#item-1") do 
+            expect(page).to have_content('Dog Scratcher')
+        end
+
+        within("#item-2") do 
+            expect(page).to have_content('Dog Scratcher')
+        end
+
+        within("#item-3") do 
+            expect(page).to have_content('Dog Water Bottle')
+        end
+
+        within("#item-4") do 
+            expect(page).to have_content('Dog Water Bottle')
+        end
+
+        expect(page).to_not have_content('Turtle Stickers')
+    end 
+
+    # And next to each Item I see the id of the invoice that ordered my item
+    it 'lists the invoice id next to the Item waiting to be shipped' do 
+        merchant_1 = Merchant.create!(name: 'Mike Dao')
+
+        item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
+        item_2 = merchant_1.items.create!(name: 'Dog Scratcher', description: 'scratches dogs', unit_price: 800)
+        item_3 = merchant_1.items.create!(name: 'Dog Water Bottle', description: 'dogs can drink from it', unit_price: 1600)
+        item_4 = merchant_1.items.create!(name: 'Turtle Stickers', description: 'stickers of turtles', unit_price: 400)
+
+        # customer_1 
+        customer_1 = Customer.create!(first_name: 'Anna Marie', last_name: 'Sterling')
+
+        invoice_1a = customer_1.invoices.create!(status: 1)
+
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'packaged', item: item_1, invoice: invoice_1a)
+        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1a)
+        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1a)
+
+        invoice_1b = customer_1.invoices.create!(status: 0)
+        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1b)
+        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1b)
+        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
+
+        visit "merchants/#{merchant_1.id}/dashboard" 
+        save_and_open_page 
+
+        expect(page).to have_content('Items Ready to Ship')
+
+        within("#item-0") do 
+            expect(page).to have_content(invoice_1a.id)
+        end
+
+        within("#item-1") do 
+            expect(page).to have_content(invoice_1a.id)
+        end
+
+        within("#item-2") do 
+            expect(page).to have_content(invoice_1b.id)
+        end
+
+        within("#item-3") do 
+            expect(page).to have_content(invoice_1a.id)
+        end
+
+        within("#item-4") do 
+            expect(page).to have_content(invoice_1b.id)
+        end
+    end 
+    # And each invoice id is a link to my merchant's invoice show page
 end

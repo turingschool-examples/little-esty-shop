@@ -17,12 +17,16 @@ class Merchant < ApplicationRecord
     
     # binding.pry 
     
-    test = customers
+    customers
     .joins(:transactions)
     .where(transactions: { result: 'success' })
     .group(:id)
     .select('customers.*, count(*) as success_count')
     .order('success_count desc')
     .limit(5)
+  end
+
+  def unshipped_items
+    items.joins(:invoice_items).where(invoice_items: { status: 'packaged' }).select('items.*, invoice_items.invoice_id as invoice_id')
   end
 end
