@@ -127,7 +127,7 @@ RSpec.describe 'the merchant dashboard' do
       visit "/merchants/#{merchant1.id}/dashboard"
 
       expect(current_path).to eq("/merchants/#{merchant1.id}/dashboard")
-      expect(page).to have_content("Top 5 Customers")
+      expect(page).to have_content("Favorite Customers")
       expect(page).to have_content("Bob Smith with 6 transactions")
       expect("Bob Smith").to appear_before("Suzie Hill with 5 transactions")
       expect("Suzie Hill").to appear_before("Roger Mathis with 4 transactions")

@@ -2,12 +2,7 @@
 <%= link_to "Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
 <h1><%= @merchant.name %></h1>
 
-<h3>Items Ready to Ship: </h3>
-<% @merchant.items_ready_to_ship.each do |item| %>
-   <%= item.name %>
-<% end %>
-
-<h3>Top 5 Customers</h3>
+<h3>Favorite Customers</h3>
 <% @merchant.top_5_customers.each do |customer| %>
   <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
 <% end %>
