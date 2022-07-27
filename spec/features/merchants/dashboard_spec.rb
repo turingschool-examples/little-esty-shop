@@ -55,9 +55,59 @@ RSpec.describe 'Merchant Dashboard' do
         invoice_item_3a = InvoiceItem.create!(quantity: 1, unit_price: item_3.unit_price, status: 2,item_id: item_3.id, invoice_id: invoice_3.id)
 
         visit "merchants/#{merchant_1.id}/dashboard" 
+        # save_and_open_page
 
         click_link "My Invoices" 
 
         expect(current_path).to eq "/merchants/#{merchant_1.id}/invoices" 
     end
+
+    # Merchant Dashboard Statistics - Favorite Customers
+    # As a merchant,
+    # When I visit my merchant dashboard
+    # Then I see the names of the top 5 customers
+    # who have conducted the largest number of successful transactions with my merchant
+    xit 'displays the names of the top 5 customers' do 
+        merchant_1 = Merchant.create!(name: 'Mike Dao')
+
+        item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
+        item_2 = merchant_1.items.create!(name: 'Dog Scratcher', description: 'scratches dogs', unit_price: 800)
+        item_3 = merchant_1.items.create!(name: 'Dog Water Bottle', description: 'dogs can drink from it', unit_price: 1600)
+        item_3 = merchant_1.items.create!(name: 'Turtle Stickers', description: 'stickers of turtles', unit_price: 400)
+
+        customer_1 = Customer.create!(first_name: 'Anna Marie', last_name: 'Sterling')
+
+        invoice_1a = customer_1.invoices.create!(status: 1)
+        transaction_1a_1 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a_2 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a_3 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a_5 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1b = customer_1.invoices.create!(status: 1)
+        transaction_1b_1 = invoice_1b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        customer_2 = Customer.create!(first_name: 'Carlos', last_name: 'Stich')
+
+        invoice_2a = custumer_2.invoices.create!(status: 1) 
+        transaction_2a_1 = invoice_2a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a_2 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a_3 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a_5 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+
+
+
+
+
+
+
+
+
+
+
+
+
+    end
+
+    # And next to each customer name I see the number of successful transactions they have
+    # conducted with my merchant
 end
