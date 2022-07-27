@@ -4,7 +4,7 @@
     <h3> Invoices </h3>
     <% @merchant.invoices.distinct.each do |invoice| %>
         <div id="invoice-<%= invoice.id %>" >
-            <p> <%= invoice.id %> </p>
+           <%= link_to "Invoice ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
         </div>
     <% end %>
 </div>
