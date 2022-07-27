@@ -267,6 +267,21 @@ RSpec.describe Merchant, type: :model do
 
         expect(merchant_1.top_5).to eq([customer_7, customer_6, customer_1, customer_2, customer_4])
       end
+    it 'should return invoice_items associated with a merchant' do
+      merchant = Merchant.create!(name: 'amazon')
+      merchant_2 = Merchant.create!(name: 'Gucci')
+      customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+      item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+      item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+      item_3 = Item.create!(name: 'bay blade', description: 'let it rip!', unit_price: 23400, merchant_id: merchant_2.id)
+      invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+      in_items_1 = InvoiceItem.create!(quantity: 2121, unit_price: 12345, status: 'shipped', item: item_1, invoice: invoice_1)
+      in_items_2 = InvoiceItem.create!(quantity: 234, unit_price: 2353456, status: 'packaged', item: item_2, invoice: invoice_1)
+      in_items_3 = InvoiceItem.create!(quantity: 2345, unit_price: 2353, status: 'packaged', item: item_3, invoice: invoice_1)
+
+      expect(merchant.get_invoice_items(invoice_1.id)).to eq([in_items_1,in_items_2])
+      expect(merchant.get_invoice_items(invoice_1.id)).to_not eq([in_items_3])
     end
   end
 end
