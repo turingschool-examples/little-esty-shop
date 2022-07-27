@@ -7,8 +7,10 @@ RSpec.describe Merchant, type: :model do
 
   describe 'relationships' do
     it { should have_many :items }
-    it { should have_many(:invoices).through(:items)}
+    it { should have_many(:invoice_items).through (:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices)}
+    it { should have_many(:customers).through(:invoices)}
   end
 
   before :each do
@@ -115,6 +117,7 @@ RSpec.describe Merchant, type: :model do
         transaction_6a_3 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
         transaction_6a_4 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
         transaction_6a_5 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
+        transaction_6a_6 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
 
         # customer_7
 
@@ -134,6 +137,7 @@ RSpec.describe Merchant, type: :model do
         transaction_7a_4 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
         transaction_7a_5 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
         transaction_7a_6 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
+        transaction_7a_7 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
 
         # binding.pry 
 
