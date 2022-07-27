@@ -1,33 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Dashboard' do
-  it 'has the name of the merchant' do
-    merchant = Merchant.create!(name: "Wizards Chest")
-    merchant_2 = Merchant.create!(name: "REI")
-    
-    visit "/merchants/#{merchant.id}/dashboard"
-
-    expect(page).to have_content("Wizards Chest")
-    expect(page).to_not have_content("REI")
-  end
-
-  it 'has links to merchant items index and merchant invoices index' do
-    merchant = Merchant.create!(name: "Wizards Chest")
-
-    visit "/merchants/#{merchant.id}/dashboard"
-
-    expect(page).to have_link("My Items")
-    click_link("My Items")
-    expect(current_path).to eq("/merchants/#{merchant.id}/items")
-
-    visit "/merchants/#{merchant.id}/dashboard"
-
-    expect(page).to have_link("My Invoices")
-    click_link("My Invoices")
-    expect(current_path).to eq("/merchants/#{merchant.id}/invoices")
-  end
-
-  it 'shows fav customers names - top 5 by number of successful transactions' do
+RSpec.describe Merchant, type: :model do
+  describe 'instance methods' do
+    it 'has favorite customers' do
       customer_1 = Customer.create!(first_name: "A", last_name: "A")
       customer_2 = Customer.create!(first_name: "B", last_name: "B")
       customer_3 = Customer.create!(first_name: "C", last_name: "C")
@@ -75,15 +50,7 @@ RSpec.describe 'Merchant Dashboard' do
       invoice_item_5 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_5.id, status: "shipped", quantity: 5, unit_price: 100)
       invoice_item_6 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_6.id, status: "shipped", quantity: 5, unit_price: 100)
 
-    visit "/merchants/#{merchant.id}/dashboard"
-
-    within "#favorite-customers" do
-      expect(page).to have_content("Favorite Customers")
-      expect(page).to have_content("1. F F - 5 purchases")
-      expect(page).to have_content("2. E E - 4 purchases")
-      expect(page).to have_content("3. D D - 3 purchases")
-      expect(page).to have_content("4. C C - 2 purchases")
-      expect(page).to have_content("5. B B - 1 purchases")
+      expect(merchant.favorite_customers).to eq([customer_6, customer_5, customer_4, customer_3, customer_2])
     end
   end
 end
