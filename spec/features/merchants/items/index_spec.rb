@@ -17,7 +17,23 @@ RSpec.describe 'Merchant Items Index Page' do
     expect(page).to_not have_content("Britches Eckles")
     expect(page).to have_content("Name: Camera")
     expect(page).to_not have_content("Name: Bone")
-
   end 
+
+  it 'items are links' do
+    merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
+    merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
+
+    item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
+    item4 = Item.create!(name: "Bone", description: "dog treat", unit_price: 200, created_at: Time.now, updated_at: Time.now, merchant_id: merchant2.id )
+    item5 = Item.create!(name: "Kong", description: "dog toy", unit_price: 100, created_at: Time.now, updated_at: Time.now, merchant_id: merchant2.id )
+    
+    visit merchant_items_path(merchant1)
+
+    expect(page).to have_link('Camera')
+
+    click_on "Camera"
+
+    expect(current_path).to eq(merchant_items_path(merchant1, item1))
+  end
 end
 
