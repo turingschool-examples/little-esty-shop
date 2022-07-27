@@ -32,5 +32,27 @@ RSpec.describe 'Merchant invoice Index page' do
         expect(page).to_not have_content(invoice_3.id)
     end
 
-    
+    it 'invoice ids are links to the invoice show page' do
+        merchant = Merchant.create!(name: 'amazon')
+        customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+        item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+        invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+        invoice_2 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+        InvoiceItem.create!(quantity: 2, unit_price: 12345, status: 'shipped', item: item_1, invoice: invoice_1)
+        InvoiceItem.create!(quantity: 2, unit_price: 12345, status: 'shipped', item: item_1, invoice: invoice_2)
+
+        visit "/merchants/#{merchant.id}/invoices"
+
+        within "#invoice-#{invoice_1.id}" do
+            expect(page).to have_link(invoice_1.id)
+        end
+
+        within "#invoice-#{invoice_2.id}" do
+            expect(page).to have_link(invoice_2.id)
+            click_on(invoice_2.id)
+        end
+
+        expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_2.id}")
+    end
 end
