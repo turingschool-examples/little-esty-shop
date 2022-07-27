@@ -66,13 +66,13 @@ RSpec.describe 'the merchant dashboard' do
         merchant1 = Merchant.create!(name: 'Fake Merchant')
         merchant2 = Merchant.create!(name: 'Also fake Merchant')
 
-        item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
-        item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
-        item3 = merchant1.items.create!(name: 'knife', description: 'kitchen essential', unit_price: 28839)
-        item4 = merchant1.items.create!(name: 'football', description: 'sports', unit_price: 299839)
-        item5 = merchant1.items.create!(name: 'glasses', description: 'glassware', unit_price: 134634)
-        item6 = merchant1.items.create!(name: 'fridge', description: 'applicance', unit_price: 288391234)
-        item7 = merchant2.items.create!(name: 'chair', description: 'furniture', unit_price: 29)
+        item1 = Item.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344, merchant_id: merchant1.id)
+        item2 = Item.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334, merchant_id: merchant1.id)
+        item3 = Item.create!(name: 'knife', description: 'kitchen essential', unit_price: 28839, merchant_id: merchant1.id)
+        item4 = Item.create!(name: 'football', description: 'sports', unit_price: 299839, merchant_id: merchant1.id)
+        item5 = Item.create!(name: 'glasses', description: 'glassware', unit_price: 134634, merchant_id: merchant1.id)
+        item6 = Item.create!(name: 'fridge', description: 'applicance', unit_price: 288391234, merchant_id: merchant1.id)
+        item7 = Item.create!(name: 'chair', description: 'furniture', unit_price: 29, merchant_id: merchant2.id)
 
         customer1 = Customer.create!(first_name: 'Bob', last_name: 'Smith')
         customer2 = Customer.create!(first_name: 'Suzie', last_name: 'Hill')
@@ -95,7 +95,7 @@ RSpec.describe 'the merchant dashboard' do
         invoice_item4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, quantity: 7, unit_price: 65666, status: 2)
         invoice_item5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id, quantity: 8, unit_price: 65666, status: 2)
         invoice_item6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id, quantity: 9, unit_price: 65666, status: 2)
-        invoice_item7 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice7.id, quantity: 10, unit_price: 61236, status: 1)
+        invoice_item7 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice7.id, quantity: 10, unit_price: 61236, status: 0)
 
         transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 1234, credit_card_expiration_date: 1234, result: 1 )
         transaction2 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 2873, credit_card_expiration_date: 1211, result: 1 )
@@ -128,7 +128,7 @@ RSpec.describe 'the merchant dashboard' do
 
         expect(current_path).to eq("/merchants/#{merchant1.id}/dashboard")
         expect(page).to have_content("Top 5 Customers")
-        expect(page).to have_content("Bob Smith with 12 transactions")
+        expect(page).to have_content("Bob Smith with 6 transactions")
         expect("Bob Smith").to appear_before("Suzie Hill with 5 transactions")
         expect("Suzie Hill").to appear_before("Roger Mathis with 4 transactions")
         expect("Roger Mathis").to appear_before("Jim Bob with 3 transactions")
