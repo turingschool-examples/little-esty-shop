@@ -1,7 +1,8 @@
 <h1>Admin Dashboard</h1>
 <p><%= link_to 'Merchants', '/admin/merchants' %></p>
 <p><%= link_to 'Invoices', '/admin/invoices' %></p>
-<div class="row">
+<div class="columns">
+    <div class="column">
     <div id="column1">
     <h2>Top 5 Customers</h2>
     <% Customer.top_five_customers.each do |customer| %>
@@ -10,6 +11,8 @@
     <% end %>
     </div>
     </div>
+    </div>
+    <div class="column">
     <div id="column2">
     <h2> Incomplete Invoices </h2>
     <% Invoice.incomplete_invoices_not_shipped.each do |invoice| %>
@@ -20,4 +23,5 @@
         </div>
     <% end %>
     </div>
+</div>
 </div>
