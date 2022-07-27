@@ -28,14 +28,32 @@ RSpec.describe 'merchant items index' do
 
     visit "/merchants/#{merch1.id}/items"
 
-    save_and_open_page
-
     within "#enabled-items" do
       expect(page).to have_content("Shoe")
     end
 
     within "#disabled-items" do
       expect(page).to have_content("Sock")
+      expect(page).to have_content("Jerky")
+    end
+
+    within "#enabled-item-#{item1.id}" do
+      click_on "Disable"
+    end
+
+    expect(current_path).to eq("/merchants/#{merch1.id}/items")
+    
+    within "#disabled-items" do
+      expect(page).to have_content("Shoe")
+    end
+    
+    within "#disabled-item-#{item3.id}" do
+      click_on "Enable"
+    end
+
+    expect(current_path).to eq("/merchants/#{merch1.id}/items")
+
+    within "#enabled-items" do
       expect(page).to have_content("Jerky")
     end
   end
