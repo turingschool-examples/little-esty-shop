@@ -28,6 +28,10 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
         expect(page).to have_content("#{merchant1.name}")
         expect(page).to have_content(invoice1.id)
         expect(page).to_not have_content(invoice2.id)
+        expect(page).to have_link(invoice1.id)
+        save_and_open_page
+        click_on("#{invoice1.id}")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")  
       end
 
       visit "/merchants/#{merchant2.id}/invoices"
@@ -36,14 +40,13 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
         expect(page).to have_content("#{merchant2.name}")
         expect(page).to have_content(invoice2.id)
         expect(page).to_not have_content(invoice1.id)
+        expect(page).to have_link(invoice2.id)
+        click_on("#{invoice2.id}")
+        expect(current_path).to eq("/merchants/#{merchant2.id}/invoices/#{invoice2.id}") 
       end
     end
   end
 end
 
-# As a merchant,
-# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
-# Then I see all of the invoices that include at least one of my merchant's items
-# And for each invoice I see its id
-# And each id links to the merchant invoice show page
+
 
