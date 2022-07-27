@@ -1,0 +1,6 @@
+<h1>Edit <%"#{@merchant.name}"%></h1>
+<%= form_with url: "/admin/merchants/#{@merchant.id}", method: :path, local: true do |f| %>
+    <p><%= f.label :name, "Name: " %> 
+     <%= f.text_field :name, value:@merchant.name %></p>
+     <% f.submit %>
+<% end %>
