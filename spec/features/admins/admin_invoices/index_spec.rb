@@ -14,7 +14,6 @@ RSpec.describe 'the admin_invoices index' do
     expect(page).to have_link("Invoice #{invoice_1.id}")
     expect(page).to have_link("Invoice #{invoice_2.id}")
     expect(page).to have_link("Invoice #{invoice_3.id}")
-    save_and_open_page
 
     click_link("Invoice #{invoice_1.id}")
     expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
