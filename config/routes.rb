@@ -14,9 +14,11 @@ Rails.application.routes.draw do
     resources :items, controller: 'merchant_items', only: %i[index edit show update]
     resources :invoices, controller: 'merchant_invoices', only: %i[index show]
   end
-  # resources :admin, only: [:index] do
-  #   resources :merchants, only: [:index]
-  # end
-  get '/admin', to: 'admin#index'
-  get '/admin/merchants', to: 'admin/merchants#index'
+
+  resources :admin, only: [:index]
+
+  namespace :admin do
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
+  end
 end
