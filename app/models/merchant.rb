@@ -15,4 +15,12 @@ class Merchant < ApplicationRecord
     .order("no_of_transactions desc, customers.last_name").limit(5)
   end
 
+  def ready_to_ship
+    # require 'pry'; binding.pry 
+    Item.joins(:invoices)
+    .select("items.name, invoice_items.id as inv_item, invoices.id as inv_id, invoices.created_at as invoice_date")
+    .where(invoice_items: {status: :packaged }, items: {merchant_id: id})
+    .order("invoices.created_at")
+  end
+
 end

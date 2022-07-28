@@ -19,48 +19,31 @@ RSpec.describe 'the merchant dashboard' do
     expect(page).to have_link("Merchant Invoices Index")
   end
 
-    xit 'has a section for items ready to ship' do
+    it 'has a section for items ready to ship' do
       merchant1 = Merchant.create!(name: 'Fake Merchant')
-      merchant2 = Merchant.create!(name: 'Also fake Merchant')
-
-      item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
-      item2 = merchant2.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
-      item3 = merchant2.items.create!(name: 'Cutting board', description: 'kitchen essential', unit_price: 28839)
-      customer1 = Customer.create!(first_name: 'Bob', last_name: 'Smith')
-      customer2 = Customer.create!(first_name: 'Suzie', last_name: 'Hill')
-      customer3 = Customer.create!(first_name: 'Roger', last_name: 'Mathis')
-
-      invoice1 = customer1.invoices.create!(status: 'cancelled')
-      invoice2 = customer1.invoices.create!(status: 'completed')
-      invoice3 = customer1.invoices.create!(status: 'in progress')
-
-      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 4, unit_price: 43434, status: 'pending')
-      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 5, unit_price: 87654, status: 'shipped')
-      invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 6, unit_price: 65666, status: 'packaged')
-
-      visit "/merchants/#{merchant1.id}/dashboard"
-
-      expect(page).to have_content("Items Ready to Ship:")
-      expect(page).to have_content("#{item1.name}")
-      expect(page).to_not have_content("#{item2.name}")
-    end
-
-    xit 'shows the names of the top 5 customers, and the amount of successful transactions for these customers' do
-      merchant1 = Merchant.create!(name: 'Fake Merchant')
+      merchant2 = Merchant.create!(name: 'Dumb')
 
       item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
       item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
+      item3 = merchant1.items.create!(name: 'Blah', description: 'bs', unit_price: 98324)
 
       customer1 = Customer.create!(first_name: 'Bob', last_name: 'Smith')
 
-      invoice1 = customer1.invoices.create!(status: 'in progress')
-      invoice2 = customer1.invoices.create!(status: 'completed')
+      invoice1 = customer1.invoices.create!(status: 2)
+      invoice2 = customer1.invoices.create!(status: 2)
+      invoice3 = customer1.invoices.create!(status: 0)
 
-      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 4, unit_price: 43434, status: 'pending')
-      invoice_item2 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice2.id, quantity: 4, unit_price: 43434, status: 'shipped')
+      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 4, unit_price: 43434, status: 1)
+      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 4, unit_price: 43434, status: 1)
+      invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 0)
+      invoice_item4 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 2)
 
-      expect(merchant1.items_ready_to_ship.name).to eq(item1.name)
-    end
+      visit "/merchants/#{merchant1.id}/dashboard"
+
+      expect(page).to have_content("Items Ready to Ship")
+      expect(page).to have_content("Coaster - Invoice ##{invoice1.id} - #{invoice1.created_at.strftime('%A, %B %d, %Y')}")
+      expect(page).to have_content("Tongs - Invoice ##{invoice2.id} - #{invoice2.created_at.strftime('%A, %B %d, %Y')}")    
+  end
 
     it 'has the top 5 customers, and the number of successful transactions they have' do
       merchant1 = Merchant.create!(name: 'Fake Merchant')

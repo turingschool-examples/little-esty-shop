@@ -8,10 +8,10 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
-  def self.ready_to_ship(merchant_id)
-    Item.joins(:invoices)
-    .select("items.name, invoice_items.id, invoices.id, invoices.created_at")
-    .where(invoice_items: {status: :packaged }, items: {merchant_id: merchant_id})
-    .order("invoices.created_at")
-  end
+  # def self.ready_to_ship(merchant_id)
+  #   Item.joins(:invoices)
+  #   .select("items.name, invoice_items.id, invoices.id, invoices.created_at")
+  #   .where(invoice_items: {status: :packaged }, items: {merchant_id: merchant_id})
+  #   .order("invoices.created_at")
+  # end
 end
