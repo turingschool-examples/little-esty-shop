@@ -29,7 +29,7 @@ RSpec.describe Invoice, type: :model do
 
       invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
       invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
-      
+
       expect(invoice_1.total_revenue).to eq(31952)
     end
 
@@ -56,7 +56,7 @@ RSpec.describe Invoice, type: :model do
       invoice_item_2 = InvoiceItem.create!(item_id: item2.id, invoice_id: i2.id, status: "pending", quantity: 5, unit_price: 100)
       invoice_item_3 = InvoiceItem.create!(item_id: item2.id, invoice_id: i3.id, status: "pending", quantity: 5, unit_price: 100)
 
-      expect(Invoice.all.order_by_date).to eq([@invoice_1, i2, i1, i3])
+      expect(Invoice.all.order_by_date).to eq([i2, i1, i3])
     end
   end
 end
