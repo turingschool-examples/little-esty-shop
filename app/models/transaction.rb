@@ -6,4 +6,5 @@ class Transaction < ApplicationRecord
     validates_presence_of :updated_at
 
     belongs_to :invoice 
+    has_many :invoice_items, through: :invoices 
 end 
