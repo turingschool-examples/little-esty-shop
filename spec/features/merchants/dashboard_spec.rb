@@ -71,119 +71,141 @@ RSpec.describe 'Merchant Dashboard' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
 
         item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
-        item_2 = merchant_1.items.create!(name: 'Dog Scratcher', description: 'scratches dogs', unit_price: 800)
-        item_3 = merchant_1.items.create!(name: 'Dog Water Bottle', description: 'dogs can drink from it', unit_price: 1600)
-        item_4 = merchant_1.items.create!(name: 'Turtle Stickers', description: 'stickers of turtles', unit_price: 400)
 
         # customer_1 
         customer_1 = Customer.create!(first_name: 'Anna Marie', last_name: 'Sterling')
 
         invoice_1a = customer_1.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1a)
-
-        # transaction_1a_1 = Transaction.create!(credit_card_number: '1234', result: 'success', invoice_id: invoice_1a.id)
-
-        transaction_1a_1 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
-        transaction_1a_2 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
-        transaction_1a_3 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
-        transaction_1a_4 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
 
         invoice_1b = customer_1.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1b)
-        
-        transaction_1b_1 = invoice_1b.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1b = invoice_1b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1c = customer_1.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1c)
+        transaction_1c = invoice_1c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1d = customer_1.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1d)
+        transaction_1d = invoice_1d.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1e = customer_1.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1e)
+        transaction_1e = invoice_1e.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_2 
 
         customer_2 = Customer.create!(first_name: 'Carlos', last_name: 'Stich')
 
-        invoice_2a = customer_2.invoices.create!(status: 1) 
-
+        invoice_2a = customer_2.invoices.create!(status: 1)
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_2a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_2a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_2a)
+        transaction_2a = invoice_2a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_2a_1 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
-        transaction_2a_2 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
-        transaction_2a_3 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
-        transaction_2a_4 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
+        invoice_2b = customer_2.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2b)
+        transaction_2b = invoice_2b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_2c = customer_2.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2c)
+        transaction_2c = invoice_2c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_2d = customer_2.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2d)
+        transaction_2d = invoice_2d.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_3
 
         customer_3 = Customer.create!(first_name: 'Bob', last_name: 'Builder')
 
         invoice_3a = customer_3.invoices.create!(status: 2)
-
-        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_3a)
-
-        transaction_3a_1 = invoice_3a.transactions.create!(credit_card_number: '3456', result: 'failed')
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'pending', item: item_1, invoice: invoice_3a)
+        transaction_3a = invoice_3a.transactions.create!(credit_card_number: '1234', result: 'failed')
 
         # customer_4 
 
         customer_4 = Customer.create!(first_name: 'Cindy', last_name: 'Crawford')
 
         invoice_4a = customer_4.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_4a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_4a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_4a)
+        transaction_4a = invoice_4a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_4a_1 = invoice_4a.transactions.create!(credit_card_number: '5678', result: 'success')
-        transaction_4a_2 = invoice_4a.transactions.create!(credit_card_number: '5678', result: 'success')
-        transaction_4a_3 = invoice_4a.transactions.create!(credit_card_number: '5678', result: 'success')
+        invoice_4b = customer_4.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_4b)
+        transaction_4b = invoice_4b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_4c = customer_4.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_4c)
+        transaction_4c = invoice_4c.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_5
 
         customer_5 = Customer.create!(first_name: 'Gigi', last_name: 'Hadid')
+
         invoice_5a = customer_5.invoices.create!(status: 1)
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_5a)
-        transaction_5a_1 = invoice_5a.transactions.create!(credit_card_number: '6789', result: 'success')
+        transaction_5a = invoice_5a.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_6
 
         customer_6 = Customer.create!(first_name: 'Jessie', last_name: 'J')
+
         invoice_6a = customer_6.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 3, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6a)
+        transaction_6a = invoice_6a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_6a_1 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_2 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_3 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_4 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_5 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_6 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
+        invoice_6b = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6b)
+        transaction_6b = invoice_6b.transactions.create!(credit_card_number: '1234', result: 'success')
 
+        invoice_6c = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6c)
+        transaction_6c = invoice_6c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_6d = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6d)
+        transaction_6d = invoice_6d.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_6e = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6e)
+        transaction_6e = invoice_6e.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_6f = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6f)
+        transaction_6f = invoice_6f.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_7
 
         customer_7 = Customer.create!(first_name: 'Channing', last_name: 'Tatum')
+
         invoice_7a = customer_7.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 3, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 3, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_7a)
+        transaction_7a = invoice_7a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_7a_1 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_2 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_3 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_4 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_5 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_6 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_7 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
+        invoice_7b = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7b)
+        transaction_7b = invoice_7b.transactions.create!(credit_card_number: '1234', result: 'success')
 
+        invoice_7c = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7c)
+        transaction_7c = invoice_7c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7d = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7d)
+        transaction_7d = invoice_7d.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7e = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7e)
+        transaction_7e = invoice_7e.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7f = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7f)
+        transaction_7f = invoice_7f.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7g = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7g)
+        transaction_7g = invoice_7g.transactions.create!(credit_card_number: '1234', result: 'success')
 
         visit "merchants/#{merchant_1.id}/dashboard" 
         # save_and_open_page
@@ -205,118 +227,141 @@ RSpec.describe 'Merchant Dashboard' do
         merchant_1 = Merchant.create!(name: 'Mike Dao')
 
         item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
-        item_2 = merchant_1.items.create!(name: 'Dog Scratcher', description: 'scratches dogs', unit_price: 800)
-        item_3 = merchant_1.items.create!(name: 'Dog Water Bottle', description: 'dogs can drink from it', unit_price: 1600)
-        item_4 = merchant_1.items.create!(name: 'Turtle Stickers', description: 'stickers of turtles', unit_price: 400)
 
         # customer_1 
         customer_1 = Customer.create!(first_name: 'Anna Marie', last_name: 'Sterling')
 
         invoice_1a = customer_1.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1a)
-
-        # transaction_1a_1 = Transaction.create!(credit_card_number: '1234', result: 'success', invoice_id: invoice_1a.id)
-
-        transaction_1a_1 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
-        transaction_1a_2 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
-        transaction_1a_3 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
-        transaction_1a_4 = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1a = invoice_1a.transactions.create!(credit_card_number: '1234', result: 'success')
 
         invoice_1b = customer_1.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1b)
-        
-        transaction_1b_1 = invoice_1b.transactions.create!(credit_card_number: '1234', result: 'success')
+        transaction_1b = invoice_1b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1c = customer_1.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1c)
+        transaction_1c = invoice_1c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1d = customer_1.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1d)
+        transaction_1d = invoice_1d.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_1e = customer_1.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_1e)
+        transaction_1e = invoice_1e.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_2 
 
         customer_2 = Customer.create!(first_name: 'Carlos', last_name: 'Stich')
 
-        invoice_2a = customer_2.invoices.create!(status: 1) 
-
+        invoice_2a = customer_2.invoices.create!(status: 1)
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_2a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_2a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_2a)
+        transaction_2a = invoice_2a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_2a_1 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
-        transaction_2a_2 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
-        transaction_2a_3 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
-        transaction_2a_4 = invoice_2a.transactions.create!(credit_card_number: '2345', result: 'success')
+        invoice_2b = customer_2.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2b)
+        transaction_2b = invoice_2b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_2c = customer_2.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2c)
+        transaction_2c = invoice_2c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_2d = customer_2.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_2d)
+        transaction_2d = invoice_2d.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_3
 
         customer_3 = Customer.create!(first_name: 'Bob', last_name: 'Builder')
 
         invoice_3a = customer_3.invoices.create!(status: 2)
-
-        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_3a)
-
-        transaction_3a_1 = invoice_3a.transactions.create!(credit_card_number: '3456', result: 'failed')
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'pending', item: item_1, invoice: invoice_3a)
+        transaction_3a = invoice_3a.transactions.create!(credit_card_number: '1234', result: 'failed')
 
         # customer_4 
 
         customer_4 = Customer.create!(first_name: 'Cindy', last_name: 'Crawford')
 
         invoice_4a = customer_4.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_4a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_4a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_4a)
+        transaction_4a = invoice_4a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_4a_1 = invoice_4a.transactions.create!(credit_card_number: '5678', result: 'success')
-        transaction_4a_2 = invoice_4a.transactions.create!(credit_card_number: '5678', result: 'success')
-        transaction_4a_3 = invoice_4a.transactions.create!(credit_card_number: '5678', result: 'success')
+        invoice_4b = customer_4.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_4b)
+        transaction_4b = invoice_4b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_4c = customer_4.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_4c)
+        transaction_4c = invoice_4c.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_5
 
         customer_5 = Customer.create!(first_name: 'Gigi', last_name: 'Hadid')
+
         invoice_5a = customer_5.invoices.create!(status: 1)
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_5a)
-        transaction_5a_1 = invoice_5a.transactions.create!(credit_card_number: '6789', result: 'success')
+        transaction_5a = invoice_5a.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_6
 
         customer_6 = Customer.create!(first_name: 'Jessie', last_name: 'J')
+
         invoice_6a = customer_6.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_6a)
-        InvoiceItem.create!(quantity: 3, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6a)
+        transaction_6a = invoice_6a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_6a_1 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_2 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_3 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_4 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_5 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
-        transaction_6a_6 = invoice_6a.transactions.create!(credit_card_number: '7890', result: 'success')
+        invoice_6b = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6b)
+        transaction_6b = invoice_6b.transactions.create!(credit_card_number: '1234', result: 'success')
 
+        invoice_6c = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6c)
+        transaction_6c = invoice_6c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_6d = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6d)
+        transaction_6d = invoice_6d.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_6e = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6e)
+        transaction_6e = invoice_6e.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_6f = customer_6.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_6f)
+        transaction_6f = invoice_6f.transactions.create!(credit_card_number: '1234', result: 'success')
 
         # customer_7
 
         customer_7 = Customer.create!(first_name: 'Channing', last_name: 'Tatum')
+
         invoice_7a = customer_7.invoices.create!(status: 1)
-
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'shipped', item: item_3, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 3, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7a)
-        InvoiceItem.create!(quantity: 3, unit_price: item_2.unit_price, status: 'shipped', item: item_2, invoice: invoice_7a)
+        transaction_7a = invoice_7a.transactions.create!(credit_card_number: '1234', result: 'success')
 
-        transaction_7a_1 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_2 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_3 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_4 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_5 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_6 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
-        transaction_7a_7 = invoice_7a.transactions.create!(credit_card_number: '8901', result: 'success')
+        invoice_7b = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7b)
+        transaction_7b = invoice_7b.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7c = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7c)
+        transaction_7c = invoice_7c.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7d = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7d)
+        transaction_7d = invoice_7d.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7e = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7e)
+        transaction_7e = invoice_7e.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7f = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7f)
+        transaction_7f = invoice_7f.transactions.create!(credit_card_number: '1234', result: 'success')
+
+        invoice_7g = customer_7.invoices.create!(status: 1)
+        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'shipped', item: item_1, invoice: invoice_7g)
+        transaction_7g = invoice_7g.transactions.create!(credit_card_number: '1234', result: 'success')
 
         visit "merchants/#{merchant_1.id}/dashboard" 
         # save_and_open_page
