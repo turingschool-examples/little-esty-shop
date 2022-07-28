@@ -29,7 +29,7 @@ RSpec.describe 'merchant items edit page' do
     end
 
     within "#item-price-field" do
-      expect(page).to have_field('Item Price', with: item1.unit_price)
+      expect(page).to have_field('Unit Price', with: item1.unit_price)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe 'merchant items edit page' do
 
     fill_in 'Item Name', with: "Another Shoe"
     fill_in 'Item Description', with: "A perfect match if you only have one shoe"
-    fill_in 'Item Price', with: 6000
+    fill_in 'Unit Price', with: 6000
 
     within "#item-name-field" do
       expect(page).to have_field('Item Name', with: "Another Shoe")
@@ -52,8 +52,10 @@ RSpec.describe 'merchant items edit page' do
     end
 
     within "#item-price-field" do
-      expect(page).to have_field('Item Price', with: 6000)
+      expect(page).to have_field('Unit Price', with: 6000)
     end
+
+    # save_and_open_page
 
     click_on "Submit"
 

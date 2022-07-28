@@ -5,18 +5,18 @@
   <%= form_with url: "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true do |form| %>
 
     <p id="item-name-field">
-      <%= form.label :item_name, "Item Name"%>
-      <%= form.text_field :item_name, value:"#{@item.name}" %>
+      <%= form.label :name, "Item Name"%>
+      <%= form.text_field :name, value:"#{@item.name}" %>
     </p>
 
     <p id="item-description-field">
-      <%= form.label :item_description, "Item Description"%>
-      <%= form.text_field :item_description, value:"#{@item.description}" %>
+      <%= form.label :description, "Item Description"%>
+      <%= form.text_field :description, value:"#{@item.description}" %>
     </p>
 
     <p id="item-price-field">
-      <%= form.label :item_price, "Item Price"%>
-      <%= form.number_field :item_price, value:"#{@item.unit_price}" %>
+      <%= form.label :unit_price, "Unit Price"%>
+      <%= form.number_field :unit_price, value:"#{@item.unit_price}" %>
     </p>
 
     <p id="submit-button">
