@@ -39,7 +39,7 @@ RSpec.describe 'Merchant Items Index' do
   it 'has a list of all of the items for a merchant' do
     visit "/merchants/#{@walmart.id}/items"
 
-    within '#items-section' do
+    within '#disabled-items-section' do
       expect(page).to have_content(@pencil.name)
       expect(page).to have_content(@marker.name)
       expect(page).to have_content(@eraser.name)
@@ -61,7 +61,7 @@ RSpec.describe 'Merchant Items Index' do
   it 'has links to show pages of merchant items' do
     visit "/merchants/#{@walmart.id}/items"
 
-    within '#items-section' do
+    within '#disabled-items-section' do
       expect(page).to_not have_content(@highlighter.name)
 
       within "#item-#{@pencil.id}" do
@@ -84,5 +84,82 @@ RSpec.describe 'Merchant Items Index' do
     click_link "#{@pencil.name}"
 
     expect(current_path).to eq("/merchants/#{@walmart.id}/items/#{@pencil.id}")
+  end
+
+  it 'has a button to enable/disable an item' do
+    visit "/merchants/#{@walmart.id}/items"
+
+    within '#disabled-items-section' do
+      within "#item-#{@pencil.id}" do
+        expect(page).to have_button("Enable")
+      end
+    end
+  end
+
+  it 'can change the status to enabled' do
+    visit "/merchants/#{@walmart.id}/items"
+
+    within '#disabled-items-section' do
+      within "#item-#{@pencil.id}" do
+        click_button 'Enable'
+      end
+    end
+
+    expect(current_path).to eq("/merchants/#{@walmart.id}/items")
+
+    within '#enabled-items-section' do
+      within "#item-#{@pencil.id}" do
+        expect(page).to have_content(@pencil.name)
+        expect(page).to have_button("Disable")
+      end
+      expect(page).to_not have_content(@marker.name)
+    end
+  end
+
+  it 'can change the status to disabled' do
+    @pen = Item.create!( name: "pen",
+                         description: "Never needs to be sharpened.",
+                         unit_price: 150,
+                         merchant_id: @walmart.id,
+                         status: 'enabled')
+    visit "/merchants/#{@walmart.id}/items"
+    within '#enabled-items-section' do
+      within "#item-#{@pen.id}" do
+        click_button 'Disable'
+      end
+    end
+
+    expect(current_path).to eq("/merchants/#{@walmart.id}/items")
+
+    within '#disabled-items-section' do
+      within "#item-#{@pen.id}" do
+        expect(page).to have_content(@pen.name)
+        expect(page).to have_button("Enable")
+      end
+    end
+  end
+
+  it 'has a enabled section and a disabled section' do
+    @pen = Item.create!( name: "pen",
+                         description: "Never needs to be sharpened.",
+                         unit_price: 150,
+                         merchant_id: @walmart.id,
+                         status: 'enabled')
+    visit "/merchants/#{@walmart.id}/items"
+
+    within '#enabled-items-section' do
+      within "#item-#{@pen.id}" do
+        expect(page).to have_content(@pen.name)
+        expect(page).to_not have_content(@marker.name)
+      end
+    end
+
+    within '#disabled-items-section' do
+      within "#item-#{@pencil.id}" do
+        expect(page).to have_content(@pencil.name)
+        expect(page).to_not have_content(@pen.name)
+      end
+    end
+
   end
 end

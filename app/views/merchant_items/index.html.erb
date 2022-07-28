@@ -1,10 +1,36 @@
 <h1><%= @merchant.name %></h1>
 
-<div id="items-section">
+<h2><%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %></h2>
+
+<div id="enabled-items-section">
+  <h3>Enabled Items</h3>
   <ul>
-  <% @merchant.items.each do |item| %>
+  <% @merchant.items.enabled.each do |item| %>
     <li id="item-<%= item.id %>">
       <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |form| %>
+        <div id="disable-field">
+          <%= form.hidden_field(:status, value: "disabled") %>
+        </div>
+        <%= form.submit 'Disable' %>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
+<div id="disabled-items-section">
+  <h3>Disabled Items</h3>
+  <ul>
+  <% @merchant.items.disabled.each do |item| %>
+    <li id="item-<%= item.id %>">
+      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |form| %>
+        <div id="enable-field">
+          <%= form.hidden_field(:status, value: "enabled") %>
+        </div>
+        <%= form.submit 'Enable' %>
+      <% end %>
     </li>
   <% end %>
   </ul>
