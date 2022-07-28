@@ -19,7 +19,7 @@ RSpec.describe 'Merchant Item Index' do
                 expect(page).to_not have_content(@bat.name)
             end
 
-            it "is able to enable and disable a item and take you back to the index page" do
+            xit "is able to enable and disable a item and take you back to the index page" do
               visit merchant_items_path(@merchant1.id)
 
               within("#item-#{@hammer.name}") do
