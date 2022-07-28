@@ -98,11 +98,11 @@ RSpec.describe 'Invoice Show', type: :feature do
     visit '/merchants/1/invoices/10'
 
     within("#item_invoice-#{invoice_item_1.id}") do
-      expect(page).to have_content("pending")
+      expect(page).to have_select(:status, selected: "pending")
     end
 
     within("#item_invoice-#{invoice_item_2.id}") do
-      expect(page).to have_content("packaged")
+      expect(page).to have_select(:status, selected: "packaged")
     end
   end
 
@@ -122,11 +122,11 @@ RSpec.describe 'Invoice Show', type: :feature do
     visit '/merchants/1/invoices/10'
 
     within("#item_invoice-#{invoice_item_1.id}") do
-      expect(page).to have_content("pending")
+      expect(page).to have_select(:status, selected: "pending")
     end
 
     within("#item_invoice-#{invoice_item_2.id}") do
-      expect(page).to have_content("packaged")
+      expect(page).to have_select(:status, selected: "packaged")
     end
 
     within("#item_invoice-#{invoice_item_1.id}") do
@@ -135,7 +135,7 @@ RSpec.describe 'Invoice Show', type: :feature do
     end
 
     within("#item_invoice-#{invoice_item_1.id}") do
-      expect(page).to have_content("shipped")
+      expect(page).to have_select(:status, selected: "shipped")
     end
 
     within("#item_invoice-#{invoice_item_2.id}") do
