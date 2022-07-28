@@ -1,7 +1,7 @@
 require 'rails_helper'
 
+RSpec.describe 'merchants invoice show page', type: :feature do
 
-RSpec.describe 'merchants invoice show page' do
   it "has all of the item info from an invoice" do
     merchant1 = Merchant.create!(name: "Poke Retirement homes")
     merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
@@ -72,10 +72,8 @@ RSpec.describe 'merchants invoice show page' do
     end
   end
 
-  #   As a merchant
-  #  `When I visit my merchant invoice show page
-  # ``Then I see the total revenue that will be generated from all of my items on the invoice
-  it "can get the total revenue from all items on the invoice" do
+  it "can list information related to an invoice" do 
+
     merchant1 = Merchant.create!(name: "Poke Retirement homes")
     merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
     merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits")
@@ -87,6 +85,11 @@ RSpec.describe 'merchants invoice show page' do
     customer1 = Customer.create!(first_name: "Parker", last_name: "Thomson")
     invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
     invoice2 = Invoice.create!(status: "cancelled", customer_id: customer1.id)
+
+    customer2 = Customer.create!(first_name: "Shirley", last_name: "DeCesari")
+    invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
+    invoice2 = Invoice.create!(status: "cancelled", customer_id: customer2.id)
+
     invoice3 = Invoice.create!(status: "in progress", customer_id: customer1.id)
     transaction1 = Transaction.create!(credit_card_number: "123456789123456789", result: "success", invoice_id: invoice1.id)
     invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item1.id, invoice_id: invoice1.id)
@@ -94,7 +97,7 @@ RSpec.describe 'merchants invoice show page' do
     invoice_item3 = InvoiceItem.create!(quantity: 3, unit_price: item3.unit_price, status: "packaged", item_id: item3.id, invoice_id: invoice3.id)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-# save_and_open_page
+
     within "div#revenue" do
       expect(page).to have_content("Total Revenue: 1000")
       expect(page).to_not have_content("2000")
@@ -115,5 +118,52 @@ RSpec.describe 'merchants invoice show page' do
       expect(page).to_not have_content("4000")
     end
 
+    visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+
+     within "#invoices-#{invoice1.id}" do
+      expect(page).to have_content("Invoice id: #{invoice1.id}")
+      expect(page).to have_content("Status: #{invoice1.status}")
+      expect(page).to have_content("Created on: #{invoice1.created_at}")
+      expect(page).to have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
+      expect(page).to_not have_content("#{invoice3.id}")
+      expect(page).to_not have_content("#{invoice3.status}")
+      expect(page).to_not have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
+    end
+    
+    visit "/merchants/#{merchant2.id}/invoices/#{invoice2.id}"
+     
+    within "#invoices-#{invoice2.id}" do
+      expect(page).to have_content(invoice2.id)
+      expect(page).to have_content("Status: #{invoice2.status}")
+      expect(page).to have_content("Created on: #{invoice2.created_at}")
+      expect(page).to have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
+      expect(page).to_not have_content("#{invoice1.id}")
+      expect(page).to_not have_content("#{invoice1.status}")
+      expect(page).to_not have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
+    end
+
+    visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
+
+    within "#invoices-#{invoice3.id}" do
+      expect(page).to have_content(invoice3.id)
+      expect(page).to have_content("Status: #{invoice3.status}")
+      expect(page).to have_content("Created on: #{invoice3.created_at}")
+      expect(page).to have_content("Customer: #{invoice3.customer.first_name} #{invoice3.customer.last_name}")
+      expect(page).to_not have_content("#{invoice2.id}")
+      expect(page).to_not have_content("#{invoice2.status}")
+      expect(page).to_not have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
+    end
   end
 end
+
+
+# Merchant Invoice Show Page
+
+# As a merchant
+# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+# Then I see information related to that invoice including:
+
+# Invoice id
+# Invoice status
+# Invoice created_at date in the format "Monday, July 18, 2019"
+# Customer first and last name

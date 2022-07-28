@@ -1,6 +1,6 @@
 class Invoice < ApplicationRecord
     enum status:[:'in progress', :cancelled, :completed]
-
+  belongs_to :customer
   has_many :invoice_items, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_many :items, through: :invoice_items
