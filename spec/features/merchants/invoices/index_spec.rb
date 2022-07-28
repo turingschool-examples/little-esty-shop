@@ -141,7 +141,7 @@ RSpec.describe 'Merchant Invoices Index' do
       transaction21 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 2222, credit_card_expiration_date: 1024, result: 1 )
 
       visit "/merchants/#{merchant1.id}/invoices"
-
+      # save_and_open_page
       click_link("#{invoice1.id}", match: :first)
       expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
    end

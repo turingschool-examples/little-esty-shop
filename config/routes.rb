@@ -6,7 +6,8 @@ resources :merchants, only:[:show] do
 
 get '/', to: 'application#welcome'
 
+get '/merchants/:id/invoices', to: 'merchants#show'
 get '/merchants/:id/items', to: 'merchants#show'
 get '/merchants/:id/invoices/:id', to: 'invoices#show'
-get '/merchants/:id/invoices', to: 'merchants#show'
+
 end
