@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_07_28_002433) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.bigint "merchant_id"
+    t.integer "status", default: 0
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
