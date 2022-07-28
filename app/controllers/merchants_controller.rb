@@ -1,6 +1,6 @@
 class MerchantsController < ApplicationController
+  before_action :find_merchant
 
   def show
-    @merchant = Merchant.find(params[:id])
   end
 end
