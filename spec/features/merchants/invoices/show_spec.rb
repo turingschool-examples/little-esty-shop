@@ -168,18 +168,39 @@ RSpec.describe "merchants invoice show page" do
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
       within "#items-#{item_1.id}" do 
-        expect(page).to have_content("Status: pending")
-        expect(page).to_not have_content("Status: packaged")
+        expect(page).to have_select(:update_status, selected: "pending")
+        expect(page).to_not have_select(:update_status, selected: "packaged")
       end
 
       within "#items-#{item_2.id}" do 
-        expect(page).to have_content("Status: packaged")
-        expect(page).to_not have_content("Status: pending")
+        expect(page).to have_select(:update_status, selected: "packaged")
+        expect(page).to_not have_select(:update_status, selected: "pending")
       end
 
       within "#items-#{item_3.id}" do
-        expect(page).to have_content("Status: shipped")
-        expect(page).to_not have_content("Status: packaged")
+        expect(page).to have_select(:update_status, selected: "shipped")
+        expect(page).to_not have_select(:update_status, selected: "pending")
+      end
+    end
+
+    it 'update invoice item status' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 2000, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+
+      visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+
+      within "#items-#{item_1.id}" do 
+        expect(page).to have_select(:update_status, selected: "pending")
+        select 'packaged', :from => :update_status
+        click_on "Update Status" 
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
+      end
+
+      within "#items-#{item_1.id}" do 
+        expect(page).to have_select(:update_status, selected: "packaged")
       end
     end
   end
