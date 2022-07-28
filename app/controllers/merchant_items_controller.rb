@@ -19,17 +19,37 @@ class MerchantItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
 
-    if params[:status].present?
-      @item.update(status: params[:status])
-
+    if merchant_item_params[:commit] == "Disable"
+      @item.update(status: merchant_item_params[:status])
       redirect_to "/merchants/#{@item.merchant_id}/items"
-      #this block is for the toggle between enable/disable on the merchant/item/index page
+    elsif merchant_item_params[:commit] == "Enable"
+      @item.update(status: merchant_item_params[:status])
+      redirect_to "/merchants/#{@item.merchant_id}/items"
     else
-      @item.update(name: params[:item_name],description: params[:item_description],unit_price: params[:item_price])
+      @item.update(name: merchant_item_params[:item_name],description: merchant_item_params[:item_description],unit_price: merchant_item_params[:unit_price])
 
-      redirect_to "/merchants/#{params[:merchant_id]}/items/#{params[:item_id]}", notice: "Item information updated!"
+      redirect_to "/merchants/#{merchant_item_params[:merchant_id]}/items/#{params[:id]}", notice: "Item information updated!"
+    end
 
-      #this block is for coming from the merchant/item/edit page
+  end
+
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    merchant = Merchant.find(params[:merchant_id])
+
+    item = merchant.items.create(name: merchant_item_params[:item_name], description: merchant_item_params[:item_description], unit_price: merchant_item_params[:unit_price])
+
+    if item.save
+      # this should be HAPPY path
+      # but right now BOTH happy and sad paths hit this
+      redirect_to "/merchants/#{merchant.id}/items", notice: "#{merchant_item_params[:item_name]} created!"
+    else
+      # this should be SAD path
+      # but right now NEITHER happy nor sad paths hit this
+      redirect_to "/merchants/#{merchant.id}/items/new", notice: "Error - please complete all fields"
     end
 
   end
@@ -37,8 +57,6 @@ class MerchantItemsController < ApplicationController
   private
 
   def merchant_item_params
-    params.require(:item_name, :item_description, :item_price)
+    params.permit(:item_name, :item_description, :unit_price, :merchant_id, :commit, :status, :item_id)
   end
 end
-
-# {"utf8"=>"✓", "_method"=>"patch", "name"=>"Another Shoe", "description"=>"A perfect match if you only have one shoe", "price"=>"6000", "commit"=>"Submit", "controller"=>"merchant_items", "action"=>"update", "merchant_id"=>"1754", "item_id"=>"1491"} permitted: false>
