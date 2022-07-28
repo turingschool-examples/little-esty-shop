@@ -145,6 +145,34 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe '#unshipped_items' do 
+      it 'returns a list of items that have been ordered and not yet shipped' do 
+        Item.destroy_all
+        merchant_1 = Merchant.create!(name: 'Mike Dao')
+
+        item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
+        item_2 = merchant_1.items.create!(name: 'Dog Scratcher', description: 'scratches dogs', unit_price: 800)
+        item_3 = merchant_1.items.create!(name: 'Dog Water Bottle', description: 'dogs can drink from it', unit_price: 1600)
+        item_4 = merchant_1.items.create!(name: 'Turtle Stickers', description: 'stickers of turtles', unit_price: 400)
+
+        # customer_1 
+        customer_1 = Customer.create!(first_name: 'Anna Marie', last_name: 'Sterling')
+
+        invoice_1a = customer_1.invoices.create!(status: 1)
+
+        ii1 = InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'packaged', item: item_1, invoice: invoice_1a)
+        ii2 = InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1a)
+        ii3 = InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1a)
+
+
+        invoice_1b = customer_1.invoices.create!(status: 0)
+        ii4 = InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1b)
+        ii5 = InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1b)
+        ii6 = InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
+
+        expect(merchant_1.unshipped_items).to contain_exactly(ii1, ii2, ii3, ii4, ii5)
+      end 
+
     it 'should return invoice_items associated with a merchant' do
       merchant = Merchant.create!(name: 'amazon')
       merchant_2 = Merchant.create!(name: 'Gucci')

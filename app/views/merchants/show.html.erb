@@ -8,6 +8,14 @@
 <%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
 </p>
 
+<b>Items Ready to Ship</b>
+<% @merchant.unshipped_items.each_with_index do |invoice_item, index| %>
+    <div id = "item-<%= index %>">
+        <%= invoice_item.item.name %> - <%= link_to "Invoice ##{invoice_item.invoice_id}", merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %e, %Y") %>
+    </div>
+<% end %>
+<br>
+
 <b>Favorite Customers</b>
 <div id='top-5' >
 <ol>
