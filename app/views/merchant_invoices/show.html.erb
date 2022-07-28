@@ -9,6 +9,10 @@
     <span class="links">My Invoices</span>
 </div>
 
+<div id="revenue">
+  <h3>Total Revenue: <%="#{@invoice.total_revenue(@merchant.id)}" %></h3>
+</div>
+
 <div id="invoice">
   <% @invoice.invoice_items.each do |invoice| %>
   <%= invoice.item.id %>
