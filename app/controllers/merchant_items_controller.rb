@@ -38,6 +38,14 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
+    if params[:item_name] == ""
+      params[:item_name] = nil
+    end
+
+    if params[:item_description] == ""
+      params[:item_description] = nil
+    end
+
     item = Item.new(
       name: params[:item_name],
       description: params[:item_description],

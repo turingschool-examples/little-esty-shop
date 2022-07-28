@@ -27,7 +27,7 @@ RSpec.describe 'merchant item new page' do
 
   end
 
-  xit 'redirects back to merchant/item/new if form entry not valid' do
+  it 'redirects back to merchant/item/new if form entry not valid' do
     merch1 = Merchant.create!(name: 'Jolly Roger Imports')
     merch2 = Merchant.create!(name: 'Molly Fine Arts')
 
