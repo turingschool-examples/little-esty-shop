@@ -35,5 +35,21 @@ RSpec.describe Item do
         expect(page).to_not have_content("Name: Teeth")
         expect(page).to_not have_content("Name: Bear")
     end
+    
+    it "has a link to update item information" do 
+       merchant = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+
+      item = Item.create!(name: 'Bear', description: 'This fluffy creature will rock your world', unit_price: 13020, merchant_id: merchant.id,  created_at: Time.now, updated_at: Time.now)
+      item1 = Item.create!(name: 'Teeth', description: 'Keep on munchin', unit_price: 10020, merchant_id: merchant.id,  created_at: Time.now, updated_at: Time.now)
+      item2 = Item.create!(name: 'Chicken-toy', description: 'Bok-Bok all your problems away', unit_price: 8020, merchant_id: merchant.id,  created_at: Time.now, updated_at: Time.now)
+
+      visit merchant_item_path(merchant,item)
+
+      expect(page).to have_link("Update Item Information")
+
+      click_link "Update Item Information"
+
+      expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item.id}/edit")
+    end 
   end
 end
