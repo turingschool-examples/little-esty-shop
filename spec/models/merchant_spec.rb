@@ -173,35 +173,162 @@ RSpec.describe Merchant, type: :model do
         expect(merchant_1.unshipped_items).to contain_exactly(ii1, ii2, ii3, ii4, ii5)
       end 
 
-    it 'should return invoice_items associated with a merchant' do
-      merchant = Merchant.create!(name: 'amazon')
-      merchant_2 = Merchant.create!(name: 'Gucci')
-      customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
-      item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
-      item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
-      item_3 = Item.create!(name: 'bay blade', description: 'let it rip!', unit_price: 23400, merchant_id: merchant_2.id)
-      invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+      it 'should return invoice_items associated with a merchant' do
+        merchant = Merchant.create!(name: 'amazon')
+        merchant_2 = Merchant.create!(name: 'Gucci')
+        customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+        item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+        item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+        item_3 = Item.create!(name: 'bay blade', description: 'let it rip!', unit_price: 23400, merchant_id: merchant_2.id)
+        invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
 
-      in_items_1 = InvoiceItem.create!(quantity: 2121, unit_price: 12345, status: 'shipped', item: item_1, invoice: invoice_1)
-      in_items_2 = InvoiceItem.create!(quantity: 234, unit_price: 2353456, status: 'packaged', item: item_2, invoice: invoice_1)
-      in_items_3 = InvoiceItem.create!(quantity: 2345, unit_price: 2353, status: 'packaged', item: item_3, invoice: invoice_1)
+        in_items_1 = InvoiceItem.create!(quantity: 2121, unit_price: 12345, status: 'shipped', item: item_1, invoice: invoice_1)
+        in_items_2 = InvoiceItem.create!(quantity: 234, unit_price: 2353456, status: 'packaged', item: item_2, invoice: invoice_1)
+        in_items_3 = InvoiceItem.create!(quantity: 2345, unit_price: 2353, status: 'packaged', item: item_3, invoice: invoice_1)
 
-      expect(merchant.get_invoice_items(invoice_1.id)).to eq([in_items_1,in_items_2])
-      expect(merchant.get_invoice_items(invoice_1.id)).to_not eq([in_items_3])
+        expect(merchant.get_invoice_items(invoice_1.id)).to eq([in_items_1,in_items_2])
+        expect(merchant.get_invoice_items(invoice_1.id)).to_not eq([in_items_3])
+      end
+
+      it 'should return total revenue from a invoice' do
+        merchant = Merchant.create!(name: 'amazon')
+        customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+        item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+        item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+        invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+
+        InvoiceItem.create!(quantity: 20, unit_price: 10, status: 'shipped', item: item_1, invoice: invoice_1)
+        InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'packaged', item: item_2, invoice: invoice_1)
+
+        expect(merchant.total_revenue(invoice_1.id)).to eq(5200)
+      end
     end
 
-    it 'should return total revenue from a invoice' do
-      merchant = Merchant.create!(name: 'amazon')
-      customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
-      item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
-      item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
-      invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+    describe '#top_5_revenue_generated' do
+      it 'returns the top 5 revenue generating items for a merchant' do
+        @walmart = Merchant.create!(name: "Wal-Mart")
 
+        @pencil = Item.create!( name: "Pencil",
+                                description: "Sharpen it and write with it.",
+                                unit_price: 199,
+                                merchant_id: @walmart.id)
 
-      InvoiceItem.create!(quantity: 20, unit_price: 10, status: 'shipped', item: item_1, invoice: invoice_1)
-      InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'packaged', item: item_2, invoice: invoice_1)
+        @marker = Item.create!( name: "Marker",
+                                description: "Washable!",
+                                unit_price: 159,
+                                merchant_id: @walmart.id)
 
-      expect(merchant.total_revenue(invoice_1.id)).to eq(5200)
+        @eraser = Item.create!( name: "Eraser",
+                                description: "Use it to fix mistakes.",
+                                unit_price: 205,
+                                merchant_id: @walmart.id)
+
+        @ruler = Item.create!(name: "Ruler",
+                              description: "It measures things.",
+                              unit_price: 105,
+                              merchant_id: @walmart.id)
+
+        @folder = Item.create!( name: "Folder",
+                                description: "Store stuff in it.",
+                                unit_price: 250,
+                                merchant_id: @walmart.id)
+
+        @raincoat = Item.create!( name: "Raincoat",
+                                  description: "Wear it so you don't get wet.",
+                                  unit_price: 5000,
+                                  merchant_id: @walmart.id)
+
+        blake = Customer.create!( first_name: "Blake",
+                                  last_name: "Saylor")
+
+        invoice_1 = Invoice.create!(status: 1,
+                                    customer_id: blake.id)
+
+        invoice_2 = Invoice.create!(status: 1,
+                                    customer_id: blake.id)
+
+        invoice_3 = Invoice.create!(status: 1,
+                                    customer_id: blake.id)
+
+        invoice_4 = Invoice.create!(status: 1,
+                                    customer_id: blake.id)
+
+        invoice_5 = Invoice.create!(status: 1,
+                                    customer_id: blake.id)
+
+        invoice_6 = Invoice.create!(status: 1,
+                                    customer_id: blake.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 1,
+                                              unit_price: 200,
+                                              status: 'shipped',
+                                              item_id: @pencil.id,
+                                              invoice_id: invoice_1.id)
+
+        invoice_item_2 = InvoiceItem.create!(quantity: 2,
+                                              unit_price: 300,
+                                              status: 'shipped',
+                                              item_id: @marker.id,
+                                              invoice_id: invoice_2.id)
+
+        invoice_item_3 = InvoiceItem.create!(quantity: 3,
+                                              unit_price: 400,
+                                              status: 'shipped',
+                                              item_id: @eraser.id,
+                                              invoice_id: invoice_3.id)
+
+        invoice_item_4 = InvoiceItem.create!(quantity: 4,
+                                              unit_price: 500,
+                                              status: 'shipped',
+                                              item_id: @ruler.id,
+                                              invoice_id: invoice_4.id)
+
+        invoice_item_5 = InvoiceItem.create!(quantity: 5,
+                                              unit_price: 600,
+                                              status: 'shipped',
+                                              item_id: @folder.id,
+                                              invoice_id: invoice_5.id)
+
+        invoice_item_6 = InvoiceItem.create!(quantity: 6,
+                                              unit_price: 700,
+                                              status: 'shipped',
+                                              item_id: @raincoat.id,
+                                              invoice_id: invoice_6.id)
+
+        transaction_1 = Transaction.create!( credit_card_number: '1234',
+                                              credit_card_expiration_date: 'never',
+                                              result: 'success',
+                                              invoice_id: invoice_1.id)
+
+        transaction_2 = Transaction.create!( credit_card_number: '1234',
+                                              credit_card_expiration_date: 'never',
+                                              result: 'success',
+                                              invoice_id: invoice_2.id)
+
+        transaction_3 = Transaction.create!( credit_card_number: '1234',
+                                              credit_card_expiration_date: 'never',
+                                              result: 'success',
+                                              invoice_id: invoice_3.id)
+
+        transaction_4 = Transaction.create!( credit_card_number: '1234',
+                                              credit_card_expiration_date: 'never',
+                                              result: 'success',
+                                              invoice_id: invoice_4.id)
+
+        transaction_5 = Transaction.create!( credit_card_number: '1234',
+                                              credit_card_expiration_date: 'never',
+                                              result: 'success',
+                                              invoice_id: invoice_5.id)
+
+        transaction_6 = Transaction.create!( credit_card_number: '1234',
+                                              credit_card_expiration_date: 'never',
+                                              result: 'success',
+                                              invoice_id: invoice_6.id)
+        
+        expect(@walmart.items).to eq([@pencil, @marker, @eraser, @ruler, @folder, @raincoat])
+        expect(@walmart.top_5_revenue_generated).to eq([@raincoat, @folder, @ruler, @eraser, @marker])
+      end
     end
   end
 end
