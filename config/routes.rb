@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # get '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#show'
 
   # patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
+
+  root to: 'welcome#index'
+
   resources :merchants, only: [:show] do
     resources :invoices, controller: 'merchant_invoices', only: %i[index show]
     resources :items, controller: 'merchant_items', only: %i[index edit show update]
