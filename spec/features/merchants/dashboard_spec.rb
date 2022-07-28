@@ -157,8 +157,8 @@ RSpec.describe "merchant dashboard", type: :feature do
     invoice_item_6 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_4.id, quantity: 1, unit_price: item_2.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_item_7 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_6.id, quantity: 1, unit_price: item_4.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
 
-    visit "/merchants/#{merchant_2.id}/dashboard"
-    
+    visit "/merchants/#{merchant_1.id}/dashboard"
+
     within("#invoice-item") do
 
       expect(page).to have_content("Watch")
@@ -166,6 +166,44 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(page).to_not have_content("Crocs")
       expect(invoice_item_1.id.to_s).to appear_before(invoice_item_4.id.to_s)
       expect(invoice_item_4.id.to_s).to appear_before(invoice_item_2.id.to_s)
+      expect(page).to have_link("Invoice #{invoice_item.invoice.id}", href: "/merchants/#{merchant_1.id}/invoices/#{invoice_item.invoice.id}")
     end
   end
+
+  it 'displays the invoices that have not been shipped from oldest to newest' do
+    merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+    item_1 = Item.create!(name: "Watch", description: "Always a need to tell time", unit_price: 3000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_2 = Item.create!(name: "Crocs", description: "Worst and Best Shoes", unit_price: 4000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_3 = Item.create!(name: "Beanie", description: "Perfect for a cold day", unit_price: 5000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_4 = Item.create!(name: "Coat", description: "Perfect for a rainy day", unit_price: 6000, merchant_id: merchant_2.id, created_at: Time.now, updated_at: Time.now)
+
+    customer_1 = Customer.create!(first_name: "Zoe", last_name: "Atkins", created_at: Time.now, updated_at: Time.now)
+    customer_2 = Customer.create!(first_name: "Frank", last_name: "Jameson", created_at: Time.now, updated_at: Time.now)
+
+    invoice_1 = customer_1.invoices.create!(status: 1, created_at: "2012-03-25 09:54:09 UTC", updated_at: Time.now)
+    invoice_2 = customer_1.invoices.create!(status: 1, created_at: "2012-03-26 06:54:10 UTC", updated_at: Time.now)
+    invoice_3 = customer_1.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_4 = customer_2.invoices.create!(status: 1, created_at: "2012-03-17 08:54:11 UTC", updated_at: Time.now)
+    invoice_5 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_6 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+
+    invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 0, created_at: Time.now, updated_at: Time.now)
+    invoice_item_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_1.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_item_3 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_2.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_4 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_3.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_5 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_4.id, quantity: 1, unit_price: item_1.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_item_6 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_4.id, quantity: 1, unit_price: item_2.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_item_7 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_6.id, quantity: 1, unit_price: item_4.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+
+    visit "/merchants/#{merchant_1.id}/dashboard"
+
+    within("#invoice-item") do
+
+      expect(page).to have_content("Saturday, March 17, 2012")
+      expect(page).to have_content("Sunday, March 25, 2012")
+      expect(page).to have_content("Monday, March 26, 2012")
+    end
+  end
+
 end
