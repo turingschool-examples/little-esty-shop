@@ -172,6 +172,36 @@ RSpec.describe Merchant, type: :model do
 
         expect(merchant_1.unshipped_items).to contain_exactly(ii1, ii2, ii3, ii4, ii5)
       end 
+
+    it 'should return invoice_items associated with a merchant' do
+      merchant = Merchant.create!(name: 'amazon')
+      merchant_2 = Merchant.create!(name: 'Gucci')
+      customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+      item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+      item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+      item_3 = Item.create!(name: 'bay blade', description: 'let it rip!', unit_price: 23400, merchant_id: merchant_2.id)
+      invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+      in_items_1 = InvoiceItem.create!(quantity: 2121, unit_price: 12345, status: 'shipped', item: item_1, invoice: invoice_1)
+      in_items_2 = InvoiceItem.create!(quantity: 234, unit_price: 2353456, status: 'packaged', item: item_2, invoice: invoice_1)
+      in_items_3 = InvoiceItem.create!(quantity: 2345, unit_price: 2353, status: 'packaged', item: item_3, invoice: invoice_1)
+
+      expect(merchant.get_invoice_items(invoice_1.id)).to eq([in_items_1,in_items_2])
+      expect(merchant.get_invoice_items(invoice_1.id)).to_not eq([in_items_3])
+    end
+
+    it 'should return total revenue from a invoice' do
+      merchant = Merchant.create!(name: 'amazon')
+      customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+      item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+      item_2 = Item.create!(name: 'ferbie', description: 'monster toy', unit_price: 66600, merchant_id: merchant.id)
+      invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+
+      InvoiceItem.create!(quantity: 20, unit_price: 10, status: 'shipped', item: item_1, invoice: invoice_1)
+      InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'packaged', item: item_2, invoice: invoice_1)
+
+      expect(merchant.total_revenue(invoice_1.id)).to eq(5200)
     end
   end
 end
