@@ -3,4 +3,14 @@
 <p>Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
 <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </p>
 
+<div id= "items">
+    <% @invoice.items.each do |item| %>
+        <div class = "item">
+        <p> Item: <%= item.name %> </p>
+        <p> Quantity: <%= item.invoice_quantity(@invoice.id).first.quantity %> </p>
+        <p> Price: <%= number_to_currency(item.invoice_quantity(@invoice.id).first.unit_price / 100) %> </p>
+        <p> Status: <%= item.invoice_quantity(@invoice.id).first.status%> </p>
+        </div>
+    <% end %>
 
+</div>
