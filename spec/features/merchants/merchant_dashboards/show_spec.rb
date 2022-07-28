@@ -49,7 +49,6 @@ RSpec.describe 'Merchant Show Dashboard' do
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         click_link ('Spongebob The Merchant Invoice Index')
-
         expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices")
     end
 end 
