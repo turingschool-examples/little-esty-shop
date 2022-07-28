@@ -1,26 +1,32 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
-  describe 'validations' do
-    it { should validate_presence_of :name }
-    it { should validate_presence_of :created_at }
-    it { should validate_presence_of :updated_at }
-  end
-
-  describe 'relationships' do
-    it { should have_many :items }
-    it { should have_many(:invoice_items).through(:items)}
-    it { should have_many(:invoices).through(:invoice_items)}
-    it { should have_many(:customers).through(:invoices)}
-    it { should have_many(:transactions).through(:invoices)}
-
-
-  end
-
-  describe '#top_5_customers' do
-    it 'displays top 5 customers by transaction volume' do
+RSpec.describe "merchant dashboard", type: :feature do
+  it 'shows the merchants name' do
     merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
-    # merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+    merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+
+    visit "/merchants/#{merchant_1.id}/dashboard"
+
+    within('#merchant-details') do
+      expect(page).to have_content('Schroeder-Jerde')
+      expect(page).to_not have_content('Klein, Rempel and Jones')
+    end
+  end
+
+  it "has links to merchant items index and merchant invoices index" do
+    merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+
+    visit "/merchants/#{merchant_1.id}/dashboard"
+    expect(page).to have_link("Items", href: "/merchants/#{merchant_1.id}/items")
+    expect(page).to have_link("Invoices", href: "/merchants/#{merchant_1.id}/invoices")
+    expect(page).to_not have_link("Items", href: "/merchants/#{merchant_2.id}/items")
+    expect(page).to_not have_link("Invoices", href: "/merchants/#{merchant_2.id}/invoices")
+  end
+
+  it 'lists top 5 customers and number of successful transactions for each customer' do
+    merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
     item_1 = Item.create!(name: "Watch", description: "Always a need to tell time", unit_price: 3000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
     item_2 = Item.create!(name: "Crocs", description: "Worst and Best Shoes", unit_price: 4000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
     item_3 = Item.create!(name: "Beanie", description: "Perfect for a cold day", unit_price: 5000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
@@ -92,12 +98,77 @@ RSpec.describe Merchant, type: :model do
     transaction_15 = Transaction.create!(invoice_id: invoice_15.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     # transaction_16 = Transaction.create!(invoice_id: invoice_16.id, credit_card_number: '4023948573948394', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
 
-      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2, customer_4, customer_6, customer_8]) 
 
-      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2]) 
-      expect(merchant_1.top_5_customers).to eq([customer_6, customer_3, customer_5, customer_2, customer_7])
-      # expect(merchant_2.top_5_customers).to eq([customer_7])
-      
+    visit "/merchants/#{merchant_1.id}/dashboard"
+
+    expect(page).to have_content("Favorite Customers")
+    expect("Zoe Atkins").to appear_before("John Smith")
+    expect("John Smith").to appear_before("Chloe Wheeler")
+    expect("Chloe Wheeler").to appear_before("Frank Jameson")
+    expect("Frank Jameson").to appear_before("Mike Dao")
+    within("#customer-0") do
+      expect(page).to have_content("Zoe Atkins - 5")
+      expect(page).to_not have_content("James Franco - 3")
+      expect(page).to_not have_content("John Smith - 4")
+      expect(page).to_not have_content("Chloe Wheeler - 3")
+      expect(page).to_not have_content("Frank Jameson - 2")
+    end
+    within("#customer-1") do
+      expect(page).to have_content("John Smith - 4")
+      expect(page).to_not have_content("Zoe Atkins - 5")
+      expect(page).to_not have_content("Frank Jameson - 2")
+      expect(page).to_not have_content("Chloe Wheeler - 3")
+      expect(page).to_not have_content("James Franco - 2")
+    end
+    within("#customer-2") do
+      expect(page).to have_content("Chloe Wheeler- 3")
+      expect(page).to_not have_content("James Franco- 4")
+      expect(page).to_not have_content("John Smith - 4")
+      expect(page).to_not have_content("Zoe Atkins - 2")
+      expect(page).to_not have_content("Frank Jameson- 2")
+    end
+    within("#customer-3") do
+      expect(page).to have_content("Frank Jameson - 2")
+      expect(page).to_not have_content("Chloe Wheeler - 3")
+      expect(page).to_not have_content("Zoe Atkins - 5")
+      expect(page).to_not have_content("James Franco - 3")
+      expect(page).to_not have_content("John Smith - 4")
+    end
+    within("#customer-4") do
+      expect(page).to have_content("Mike Dao - 1")
+      expect(page).to_not have_content("Zoe Atkins - 5")
+      expect(page).to_not have_content("Frank Jameson - 2")
+      expect(page).to_not have_content("James Franco - 3")
+      expect(page).to_not have_content("John Smith - 4")
+    end
+  end
+
+  it "shows list of items ready to ship with their invoice id" do
+    merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+    item_1 = Item.create!(name: "Watch", description: "Always a need to tell time", unit_price: 3000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_2 = Item.create!(name: "Crocs", description: "Worst and Best Shoes", unit_price: 4000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_3 = Item.create!(name: "Beanie", description: "Perfect for a cold day", unit_price: 5000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+
+    customer_6 = Customer.create!(first_name: "Zoe", last_name: "Atkins", created_at: Time.now, updated_at: Time.now)
+    customer_2 = Customer.create!(first_name: "Frank", last_name: "Jameson", created_at: Time.now, updated_at: Time.now)
+
+    invoice_1 = customer_6.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_14 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+    
+    invoice_item_1 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_14.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_3 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_14.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_4 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+   
+    visit "/merchants/#{merchant_2.id}/dashboard"
+
+    within '#items-ready-to-ship' do
+      expect(page).to have_content("Watch")
+      expect(page).to have_content("Beanie")
+      expect(page).to_not have_content("Crocs")
+      expect(invoice_item_1.id.to_s).to appear_before(invoice_item_4.id.to_s)
+      expect(invoice_item_4.id.to_s).to appear_before(invoice_item_2.id.to_s)
     end
   end
 end

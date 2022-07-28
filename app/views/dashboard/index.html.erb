@@ -1,0 +1,29 @@
+<h1>Merchant Dashboard</h1>
+<div id="merchant-links">
+  <%= link_to "Items", "/merchants/#{@merchant.id}/items" %>
+  <%= link_to "Invoices", "/merchants/#{@merchant.id}/invoices" %>
+</div>
+<div id ="merchant-details">
+  <p><%= @merchant.name %></p>
+</div>
+
+<h1> Favorite Customers </h1>
+  <ol>
+    <% @merchant.top_5_customers.each_with_index do |customer, index| %>
+    <div id="customer-<%= index %>">
+      <li><%= customer.name %> - <%= customer.trans_count %></li>
+    <% end %>
+  </ol>
+</div>
+
+<h3>Items Ready To Ship</h3>
+<div id="items-ready-to-ship">
+  <% @merchant.items_ready_to_ship.each do |invoice_item| %>
+    <div id="invoice-item-<%= invoice_item.id %>">
+      <p><%= invoice_item.id %> 
+        <%= invoice_item.item.name %>  
+        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
+        <%= invoice_item.invoice.formatted_date %>  
+    </div>
+    <% end %> 
+</div>
