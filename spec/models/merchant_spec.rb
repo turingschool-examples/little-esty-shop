@@ -146,7 +146,8 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '#unshipped_items' do 
-      it 'returns a list of items that have been ordered and not yet hsipped' do 
+      it 'returns a list of items that have been ordered and not yet shipped' do 
+        Item.destroy_all
         merchant_1 = Merchant.create!(name: 'Mike Dao')
 
         item_1 = merchant_1.items.create!(name: 'Book of Rails', description: 'book on rails', unit_price: 2000)
@@ -159,17 +160,17 @@ RSpec.describe Merchant, type: :model do
 
         invoice_1a = customer_1.invoices.create!(status: 1)
 
-        InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'packaged', item: item_1, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1a)
+        ii1 = InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'packaged', item: item_1, invoice: invoice_1a)
+        ii2 = InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1a)
+        ii3 = InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1a)
 
 
         invoice_1b = customer_1.invoices.create!(status: 0)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1b)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1b)
-        InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
+        ii4 = InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1b)
+        ii5 = InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1b)
+        ii6 = InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
 
-        expect(merchant_1.unshipped_items).to contain_exactly(item_1, item_2, item_3, item_2, item_3)
+        expect(merchant_1.unshipped_items).to contain_exactly(ii1, ii2, ii3, ii4, ii5)
       end 
     end
   end

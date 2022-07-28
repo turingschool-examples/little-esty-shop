@@ -15,8 +15,6 @@ class Merchant < ApplicationRecord
     # .select('customers.*, count(transactions.result) as transaction_total')
     # .group(:id)
     
-    # binding.pry 
-    
     customers
     .joins(:transactions)
     .where(transactions: { result: 'success' })
@@ -27,6 +25,7 @@ class Merchant < ApplicationRecord
   end
 
   def unshipped_items
-    items.joins(:invoice_items).where(invoice_items: { status: 'packaged' }).select('items.*, invoice_items.invoice_id as invoice_id').order(:invoice_id)
+    # items.joins(:invoice_items).where(invoice_items: { status: 'packaged' }).select('items.*, invoice_items.invoice_id as invoice_id').order(:invoice_id)
+    invoice_items.joins(:invoice).where(status: 1).order("invoices.created_at")
   end
 end
