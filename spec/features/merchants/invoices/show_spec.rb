@@ -82,7 +82,7 @@ RSpec.describe 'Merchant invoice Show page' do
 
         within "#item-details" do
             expect(page).to have_content("shipped")
-            select "packaged", :from => "status_select"
+            select "packaged", :from => "status"
             click_on("Update Item Status")
             expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_1.id}")
             expect(page).to have_content("packaged")

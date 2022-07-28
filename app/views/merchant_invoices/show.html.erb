@@ -17,12 +17,16 @@
             <th>Unit Price</th>
             <th>Status</th>
         </tr>
-        <% @merchant.get_invoice_items(@invoice.id).each do |in_item| %>
+        <% @merchant.get_invoice_items(@invoice.id).each do |invoice_item| %>
             <tr>
-                <td><%= in_item.item.name %></td>
-                <td><%= in_item.quantity %></td>
-                <td><%= number_to_currency(in_item.unit_price.to_f/100 ) %></td>
-                <td><%= in_item.status %></td>
+                <td><%= invoice_item.item.name %></td>
+                <td><%= invoice_item.quantity %></td>
+                <td><%= number_to_currency(invoice_item.unit_price.to_f/100 ) %></td>
+                <td><%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}/?invoice_item_id=#{invoice_item.id}", method: :patch, local: true do |f| %>
+                    <%= f.select :status, options_for_select(['pending', 'packaged', 'shipped'], invoice_item.status) %>
+                    <%= f.submit "Update Item Status"%>
+                    <% end %>
+                    </td>
             </tr>
         <% end %>
     </table>
