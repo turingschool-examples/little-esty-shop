@@ -1,5 +1,7 @@
 <h1><%= @merchant.name %></h1>
 
+<h2><%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %></h2>
+
 <div id="enabled-items-section">
   <h3>Enabled Items</h3>
   <ul>
