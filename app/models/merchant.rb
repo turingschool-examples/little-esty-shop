@@ -25,4 +25,12 @@ class Merchant < ApplicationRecord
     .order('success_count desc')
     .limit(5)
   end
+
+  def get_invoice_items(invoice_id)
+    in_items = InvoiceItem.where(item_id: items.pluck(:id), invoice_id: invoice_id)
+  end
+
+  def total_revenue(invoice_id)
+    get_invoice_items(invoice_id).sum("quantity * unit_price")
+  end
 end
