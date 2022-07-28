@@ -8,3 +8,15 @@
     <span class="links">My Items</span>
     <span class="links">My Invoices</span>
 </div>
+
+<div id="invoice">
+  <% @invoice.invoice_items.each do |invoice| %>
+  <%= invoice.item.id %>
+    <% if @merchant.items.include?(invoice.item) %>
+      <p>Name: <%= invoice.item.name %></p>
+      <p>Quantity: <%= invoice.quantity %></p>
+      <p>Price: <%= invoice.unit_price %></p>
+      <p>Status: <%= invoice.status %></p>
+    <% end %>
+  <% end %>
+</div>
