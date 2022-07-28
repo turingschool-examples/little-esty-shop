@@ -26,11 +26,11 @@ class ItemsController < ApplicationController
   def status
     item = Item.find(params[:id])
       if item.status == "enabled"
-        item.status = "disabled"
+        item.update(status: "disabled")
         redirect_to "/merchants/#{item.merchant.id}/items"
         flash[:alert] = "#{item.name} has been disabled."
       else
-        item.status = "enabled"
+        item.update(status: "enabled")
         redirect_to "/merchants/#{item.merchant.id}/items"
         flash[:alert] = "#{item.name} has been enabled."
       end 

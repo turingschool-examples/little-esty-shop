@@ -37,7 +37,7 @@ RSpec.describe 'Merchant Items Index' do
       it 'i see a button next to each item name that will disable or enable that item. When I click this button then i am redirected back to the items index and i see that the items status has changed' do
         
         visit "/merchants/#{@merchant1.id}/items"
-
+     
         within "#item-#{@item1.id}" do
           expect(page).to have_button("Enable Item")
         end
