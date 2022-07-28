@@ -11,6 +11,16 @@ class MerchantItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:merchant_id])
+    @merchant.items.create(item_params)
+    redirect_to "/merchants/#{@merchant.id}/items"
+  end
+
   # Will need to update to handle edge case of improper unit_price entry
   # at a later date
   # e.g. Typing in as float (3.50) instead of integer (350)
