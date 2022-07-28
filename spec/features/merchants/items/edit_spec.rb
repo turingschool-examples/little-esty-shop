@@ -55,6 +55,8 @@ RSpec.describe 'merchant items edit page' do
       expect(page).to have_field('Unit Price', with: 6000)
     end
 
+    # save_and_open_page
+
     click_on "Submit"
 
     expect(current_path).to eq("/merchants/#{merch1.id}/items/#{item1.id}")
