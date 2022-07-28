@@ -14,7 +14,7 @@ RSpec.describe 'Admin Merchants Index' do
         merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
         merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
 
-        visit '/admin/merchants' 
+        visit admin_merchants_path
         # save_and_open_page
 
         within('#merchant-0') do 
@@ -46,7 +46,7 @@ RSpec.describe 'Admin Merchants Index' do
         merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
         merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
 
-        visit '/admin/merchants' 
+        visit admin_merchants_path
 
         within('#merchant-0') do 
             expect(page).to have_link(merchant_1.name)
