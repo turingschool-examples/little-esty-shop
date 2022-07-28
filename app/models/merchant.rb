@@ -17,7 +17,6 @@ class Merchant < ApplicationRecord
              .group("customers.id")
              .order(trans_count: :desc)
              .limit(5)
-
   end
 
   def items_ready_to_ship
