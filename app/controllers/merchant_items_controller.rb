@@ -38,26 +38,20 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-    if params[:item_name] == ""
-      params[:item_name] = nil
-    end
+    if params[:item_description] != "" && params[:item_name] != "" && params[:unit_price] != nil
+      
+      item = Item.create(
+        name: params[:item_name],
+        description: params[:item_description],
+        unit_price: params[:unit_price],
+        merchant_id: params[:merchant_id]
+      )
 
-    if params[:item_description] == ""
-      params[:item_description] = nil
-    end
-
-    item = Item.new(
-      name: params[:item_name],
-      description: params[:item_description],
-      unit_price: params[:unit_price],
-      merchant_id: params[:merchant_id]
-    )
-
-    if item.save
       redirect_to "/merchants/#{params[:merchant_id]}/items", notice: "#{params[:item_name]} created!"
     else
       flash[:notice] = "Error - please complete all fields"
-      render :new
+      
+      redirect_to "/merchants/#{params[:merchant_id]}/items/new"
     end
 
   end
