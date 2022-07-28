@@ -9,3 +9,8 @@
 <% @merchant.favorite_customers.each_with_index do |customer, index| %>
   <p><%= "#{index + 1}. #{customer.full_name} - #{customer.transaction_count} purchases" %></p>
 <% end %></div>
+
+<div id="ready-to-ship"><h5>Items Ready to Ship</h5>
+<% @merchant.ready_to_ship.each do |invoice_item| %>
+  <p><%= invoice_item.item.name %> - <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - <%= invoice_item.invoice.format_date %></p>
+<% end %></div>
