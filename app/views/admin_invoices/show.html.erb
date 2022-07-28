@@ -1,0 +1,27 @@
+<h1>Admin Invoice Information </h1>
+
+<div id="invoice-<%=@invoice.id %>">
+<p>Invoice ID: <%= @invoice.id %></p>
+<p>Created at: <%= @invoice.created_at.strftime( "%A, %B, %d, %Y") %></p>
+<p>Customer first name: <%= @invoice.customer.first_name %></p>
+<p>Customer last name: <%= @invoice.customer.last_name %></p>
+<p>Invoice Status: <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+<%= f.select :status, ['in progress', 'cancelled', 'completed'], selected: @invoice.status %>
+   <%= hidden_field_tag "invoice_id", "#{@invoice.id}" %>
+  <%= f.submit "Update Invoice Status" %>
+<% end %>
+</div>
+
+
+
+<p><b>Invoice Items</b></p>
+<% @invoice.invoice_items.each do |invoice_item|%>
+<div id="item_invoice-<%=invoice_item.id %>">
+<p>Item name: <%=invoice_item.item.name %></p>
+<p>Price: <%=number_to_currency(invoice_item.item.unit_price) %></p>
+<p>Quantity: <%=invoice_item.quantity %></p>
+<p>Status: <%= invoice_item.status %></p>
+</div>
+<% end %>
+
+<p>Total Revenue: <%=number_to_currency(@invoice.total_revenue)%></p>
