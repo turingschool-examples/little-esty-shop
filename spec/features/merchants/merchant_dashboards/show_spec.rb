@@ -31,4 +31,14 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
     end
+
+    it 'on the merchant dashboard I see a link to my invoice index page' do 
+        merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+        merchant_2 = Merchant.create!(name: 'Jon Doe')
+        
+        visit "/merchants/#{merchant_1.id}/dashboard"
+
+        expect(page).to have_link('Spongebob The Merchant Invoice Index')
+        expect(page).to_not have_content('Jon Doe Invoice Index')
+    end
 end 
