@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  namespace :admin do 
+    resources :merchants, only: [:index]
+  end
+
   resources :merchants, only: [:index]  do
     resources :items, only: [:index, :show, :new, :create, :edit, :update], :controller => 'merchant_items'
     resources :invoices, only: [:index, :show, :update], :controller => 'merchant_invoices'
