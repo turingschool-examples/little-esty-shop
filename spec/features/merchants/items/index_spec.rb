@@ -19,21 +19,35 @@ RSpec.describe 'Merchant Item Index' do
                 expect(page).to_not have_content(@bat.name)
             end
 
-            it "is able to enable and disable a item and take you back to the index page and see that the status has changed" do
-              visit merchant_items_path(@merchant1.id)
+            it "is able to enable and disable a item and take you back to the index page and see that the status has changed
+            by grouping into one of two sections, enabled and disabled" do
+                visit merchant_items_path(@merchant1.id)
 
-              within("#item-#{@hammer.name}") do
-                expect(page).to have_content("Status: disabled")
-                expect(page).to_not have_content("Status: enabled")
-                click_button 'Enable'
-                expect(current_path).to eq(merchant_items_path(@merchant1.id))
-                expect(page).to have_content("Status: enabled")
-                expect(page).to_not have_content("Status: disabled")
-                click_button 'Disable'
-                expect(current_path).to eq(merchant_items_path(@merchant1.id))
-                expect(page).to have_content("Status: disabled")
-                expect(page).to_not have_content("Status: enabled")
-              end              
+                within("#disabled") do
+                    expect(page).to have_content(@hammer.name)
+                    expect(page).to have_content(@candlestick.name)
+                    within("#item-#{@hammer.id}") do
+                        click_button 'Enable'
+                    end
+                    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items")
+                    expect(page).to_not have_content(@hammer.name)
+                    expect(page).to have_content(@candlestick.name)
+                end
+
+                within("#enabled") do
+                    expect(page).to have_content(@hammer.name)
+                    expect(page).to_not have_content(@candlestick.name)
+                    within("#item-#{@hammer.id}") do
+                        click_button 'Disable'
+                    end
+                    expect(page).to have_current_path("/merchants/#{@merchant1.id}/items")
+                    expect(page).to_not have_content(@hammer.name)
+                end
+
+                within("#disabled") do
+                    expect(page).to have_content(@hammer.name)
+                    expect(page).to have_content(@candlestick.name)
+                end
             end
         end
     end
