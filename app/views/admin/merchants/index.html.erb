@@ -1,0 +1,8 @@
+<h4>Enabled Merchants</h4>
+
+<% @merchants.each_with_index do |merchant, index| %>
+    <div id = "merchant-<%=index %>">
+        <%= merchant.name %>
+        <br>
+    </div>
+<% end %>

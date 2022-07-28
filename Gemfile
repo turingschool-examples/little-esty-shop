@@ -46,6 +46,7 @@ group :development, :test do
   gem 'orderly'
   gem 'launchy'
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 group :development do
