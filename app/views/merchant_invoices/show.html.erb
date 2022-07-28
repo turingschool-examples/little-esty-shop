@@ -15,3 +15,6 @@
   <% end %>
 </div>
 <% end %>
+
+<h3>Total Revenue</h3>
+<%= "Total Revenue: $#{@invoice.invoice_items.map{|invoice_item|invoice_item.unit_price}.sum.fdiv(100)}" %>

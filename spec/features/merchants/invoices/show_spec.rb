@@ -50,7 +50,7 @@ RSpec.describe "merchants invoice show page" do
       expect(page).to have_content(invoice_1.created_at.strftime("%A, %B %e, %Y"))
       expect(page).to have_content("David Smith")
     end
-    
+
     it 'shows all item names' do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
@@ -68,12 +68,12 @@ RSpec.describe "merchants invoice show page" do
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      within "#items-#{item_1.id}" do 
+      within "#items-#{item_1.id}" do
         expect(page).to have_content("Log")
         expect(page).to_not have_content("Saw")
       end
 
-      within "#items-#{item_2.id}" do 
+      within "#items-#{item_2.id}" do
         expect(page).to have_content("Saw")
         expect(page).to_not have_content("Log")
       end
@@ -101,12 +101,12 @@ RSpec.describe "merchants invoice show page" do
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      within "#items-#{item_1.id}" do 
+      within "#items-#{item_1.id}" do
         expect(page).to have_content("Quantity: 4")
         expect(page).to_not have_content("Quantity: 2")
       end
 
-      within "#items-#{item_2.id}" do 
+      within "#items-#{item_2.id}" do
         expect(page).to have_content("Quantity: 2")
         expect(page).to_not have_content("Quantity: 3")
       end
@@ -134,12 +134,12 @@ RSpec.describe "merchants invoice show page" do
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      within "#items-#{item_1.id}" do 
+      within "#items-#{item_1.id}" do
         expect(page).to have_content("Price: $20.00")
         expect(page).to_not have_content("Price: $14.00")
       end
 
-      within "#items-#{item_2.id}" do 
+      within "#items-#{item_2.id}" do
         expect(page).to have_content("Price: $14.00")
         expect(page).to_not have_content("Price: $20.00")
       end
@@ -167,12 +167,12 @@ RSpec.describe "merchants invoice show page" do
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      within "#items-#{item_1.id}" do 
+      within "#items-#{item_1.id}" do
         expect(page).to have_select(:update_status, selected: "pending")
         expect(page).to_not have_select(:update_status, selected: "packaged")
       end
 
-      within "#items-#{item_2.id}" do 
+      within "#items-#{item_2.id}" do
         expect(page).to have_select(:update_status, selected: "packaged")
         expect(page).to_not have_select(:update_status, selected: "pending")
       end
@@ -192,16 +192,38 @@ RSpec.describe "merchants invoice show page" do
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      within "#items-#{item_1.id}" do 
+      within "#items-#{item_1.id}" do
         expect(page).to have_select(:update_status, selected: "pending")
         select 'packaged', :from => :update_status
-        click_on "Update Status" 
+        click_on "Update Status"
         expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
       end
 
-      within "#items-#{item_1.id}" do 
+      within "#items-#{item_1.id}" do
         expect(page).to have_select(:update_status, selected: "packaged")
       end
     end
+
+    it 'shows the total revenue that will be generated from all items on the invoice' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+      item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+      invoice_2 = Invoice.create!(status: 0, customer_id: customer_1.id)
+      invoice_3 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+
+      visit "/merchants/#{merchant_1.id}/invoices/#{invoice_3.id}"
+      expect(page).to have_content("Total Revenue: $14.66")
+    end
+
   end
 end
