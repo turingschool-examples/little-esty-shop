@@ -28,7 +28,6 @@ class Merchant < ApplicationRecord
   end
 
   def five_most_popular_items
-    # require 'pry'; binding.pry
     items
     .joins(:invoice_items, :transactions)
     .where('transactions.result = ?', 'success')
