@@ -199,8 +199,6 @@ RSpec.describe "merchants invoice show page" do
         expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
       end
 
-      visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
-
       within "#items-#{item_1.id}" do 
         expect(page).to have_select(:update_status, selected: "packaged")
       end
