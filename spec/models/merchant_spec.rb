@@ -123,7 +123,6 @@ RSpec.describe Merchant, type: :model do
       invoice_item_9 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: "shipped", quantity: 5, unit_price: 500) #2500
       invoice_item_10 = InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, status: "shipped", quantity: 6, unit_price: 600) #3600 failed
 
-      # require 'pry'; binding.pry
       expect(merchant.five_most_popular_items).to eq([item_4, item_2, item_5, item_1, item_3])
     end
   end
