@@ -8,8 +8,4 @@ class Item < ApplicationRecord
     has_many :invoices, through: :invoice_items
 
     enum status: [ :disabled, :enabled ]
-
-    def change_status
-
-    end
 end
