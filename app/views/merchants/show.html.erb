@@ -1,30 +1,59 @@
-<h1>Merchant Dashboard</h1>
-<div id="merchant-links">
-  <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
-  <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+<div id="page-banner">
+
+  <div id ="merchant-details">
+    <%= @merchant.name %>
+  </div>
+
+  <div id="merchant-links">
+    <%= link_to "Dashboard", "/merchants/#{@merchant.id}", class: "dashboard-link"%>
+    <%= link_to 'My Items', "/merchants/#{@merchant.id}/items",class: "items-link" %>
+    <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices",class: "invoices-link" %>
+  </div>
+
 </div>
 
-<div id ="merchant-details">
-  <p><%= @merchant.name %></p>
-</div>
 
-<div id="items-ready-to-ship">
-  <h3>Items Ready To Ship</h3>
-  <% @merchant.items_ready_to_ship.each do |invoice_item| %>
-    <div id="invoice-item-<%= invoice_item.id %>">
-      <p><%= invoice_item.id %> - 
-        <%= invoice_item.item.name %> - 
-        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
-        <%= invoice_item.invoice.formatted_date %>  
+<div id="dashboard-content">
+  <div id="dashboard-content-left">
+    <div class="content-column-title">
+      Items Ready to Ship
     </div>
-    <% end %> 
-</div>
+    <div class="content-column-main">
+      <div id="items-ready-to-ship">
+        <% @merchant.items_ready_to_ship.each do |invoice_item| %>
+          <div id="invoice-item-<%= invoice_item.id %>">
+            <p class="item-ready-to-ship">
+              <%= invoice_item.id %> - 
+              <%= invoice_item.item.name %> - 
+              <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
+              <%= invoice_item.invoice.formatted_date %>  
+            </p>
+          </div>
+        <% end %>
+      </div>
 
-<div id="favorite-customers">
-  <h3>Favorite Customers</h3>
-  <%= @merchant.favorite_customers.each do |customer| %>
-    <div id="customer-id-<%= customer.id %>">
-      <p><%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %></p>
     </div>
-  <% end %> 
+  </div>
+  <div id="dashboard-content-right">
+    <div class="content-column-title">
+      Favorite Customers
+    </div>
+    <div class="content-column-main">
+
+      <div id="favorite-customers">
+
+        <ol>
+          <% @merchant.favorite_customers.each do |customer| %>
+            <div id="customer-id-<%= customer.id %>">
+              <li class="favorite-customer">
+                <%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %>
+              </li>
+            </div>
+          <% end %>
+        </ol>
+
+      </div>
+
+    </div>
+  </div>
 </div>

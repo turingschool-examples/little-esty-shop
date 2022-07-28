@@ -9,13 +9,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <% flash.each do |type, msg| %>
-    <div>
-      <%= msg %>
+    <div id="page-header">
+      <span id="app-title"> Little Esty Shop </span>
     </div>
-  <% end %>
 
-  <body>
-    <%= yield %>
-  </body>
+    <% flash.each do |type, msg| %>
+      <div class="flash-notice">
+        <%= msg %>
+      </div>
+    <% end %>
+
+    <div id="main-content">
+      <%= yield %>
+    </div>
 </html>
