@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Item do
   describe 'show#page' do
-    it 'has a link on the index page to the item show page'
-    
     it 'shows the items attributes' do
       merchant = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
 
