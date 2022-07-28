@@ -17,4 +17,4 @@
 <% end %>
 
 <h3>Total Revenue</h3>
-<%= "Total Revenue: $#{@invoice.invoice_items.map{|invoice_item|invoice_item.unit_price}.sum.fdiv(100)}" %>
+<%= "Total Revenue: #{number_to_currency(@invoice.invoice_items.sum{|ii|ii.quantity*ii.unit_price}.fdiv(100))}"%>
