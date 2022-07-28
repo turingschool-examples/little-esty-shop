@@ -13,8 +13,13 @@ class InvoicesController < ApplicationController
     redirect_to "/merchants/#{params[:merchant_id]}/invoices/#{params[:invoice_id]}"
   end
 
-  private 
+  private
   def invoice_item_params
     params.permit(:status)
   end
+<<<<<<< HEAD
 end
+=======
+
+end
+>>>>>>> main
