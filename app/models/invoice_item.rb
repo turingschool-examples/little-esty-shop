@@ -1,5 +1,5 @@
 class InvoiceItem < ApplicationRecord
-  enum status: { pending: 0, shipped: 1, packaged: 2}
+  enum status: { packaged: 0, pending: 1, shipped: 2}
   # default: :pending
 
   validates_presence_of :quantity
