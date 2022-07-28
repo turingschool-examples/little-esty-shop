@@ -11,14 +11,6 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def top_5_customers
-    #                         customers.joins(:transactions).distinct
-    #                        .where(transactions: {result: "success"})
-    #                        .select("customers.*, COUNT(transactions.*) AS trans_count")
-    #                        .group(:id).count(:transactions)
-    #                        .sort_by { |id, count| [count, -id] }.reverse
-    #                        .first(5)
-    #                        .map { |customer_count| customer_count[0] }
-    # Customer.find(customer_ids)
     customers.joins(invoices: :transactions)
              .where(transactions:{result: "success"})
              .select("customers.*, COUNT(transactions.*) AS trans_count")
@@ -26,6 +18,9 @@ class Merchant < ApplicationRecord
              .order(trans_count: :desc)
              .limit(5)
             
+  end
+  def items_ready_to_ship
+    invoice_items.joins(:invoice).where.not(status: 2).order('invoices.created_at')
   end
 
   
