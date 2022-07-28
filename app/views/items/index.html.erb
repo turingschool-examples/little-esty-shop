@@ -12,3 +12,10 @@
   </li></ul>
   </div>
 <% end %>
+
+<h3>Top Items</h3>
+<div id="five-most-popular-items"><% @merchant.five_most_popular_items.each_with_index do |item, index| %>
+  <div id="topitems-<%= index %>"><p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>
+   - <%= number_to_currency(item.revenue / 100) %> in sales</p></div>
+<% end %>
+</div>
