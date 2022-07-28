@@ -50,7 +50,7 @@ RSpec.describe Merchant, type: :model do
     invoice_12 = customer_5.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_13 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_14 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
-    invoice_15 = customer_7.invoices.create!(status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_15 = customer_7.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     # invoice_16 = customer_7.invoices.create!(status: 2, created_at: Time.now, updated_at: Time.now)
     # invoice_17 = customer_8.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
@@ -88,16 +88,46 @@ RSpec.describe Merchant, type: :model do
     transaction_11 = Transaction.create!(invoice_id: invoice_11.id, credit_card_number: '4738473664751832', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     transaction_12 = Transaction.create!(invoice_id: invoice_12.id, credit_card_number: '4738473664751832', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     transaction_13 = Transaction.create!(invoice_id: invoice_13.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
-    transaction_14 = Transaction.create!(invoice_id: invoice_14.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "failure", created_at: Time.now, updated_at: Time.now)
+    transaction_14 = Transaction.create!(invoice_id: invoice_14.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     transaction_15 = Transaction.create!(invoice_id: invoice_15.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     # transaction_16 = Transaction.create!(invoice_id: invoice_16.id, credit_card_number: '4023948573948394', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
 
-      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2, customer_4, customer_6, customer_8]) 
+      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2, customer_4, customer_6, customer_8])
 
-      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2]) 
+      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2])
       expect(merchant_1.top_5_customers).to eq([customer_6, customer_3, customer_5, customer_2, customer_7])
       # expect(merchant_2.top_5_customers).to eq([customer_7])
-      
+
     end
   end
+
+    it 'displays status of items ready to ship' do
+      merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+      merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+      item_1 = Item.create!(name: "Watch", description: "Always a need to tell time", unit_price: 3000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+      item_2 = Item.create!(name: "Crocs", description: "Worst and Best Shoes", unit_price: 4000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+      item_3 = Item.create!(name: "Beanie", description: "Perfect for a cold day", unit_price: 5000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+      item_4 = Item.create!(name: "Coat", description: "Perfect for a rainy day", unit_price: 6000, merchant_id: merchant_2.id, created_at: Time.now, updated_at: Time.now)
+
+      customer_1 = Customer.create!(first_name: "Zoe", last_name: "Atkins", created_at: Time.now, updated_at: Time.now)
+      customer_2 = Customer.create!(first_name: "Frank", last_name: "Jameson", created_at: Time.now, updated_at: Time.now)
+
+      invoice_1 = customer_1.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_2 = customer_1.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_3 = customer_1.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_4 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_5 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_6 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+
+      invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 0, created_at: Time.now, updated_at: Time.now)
+      invoice_item_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_1.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_item_3 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_2.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+      invoice_item_4 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_3.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+      invoice_item_5 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_4.id, quantity: 1, unit_price: item_1.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_item_6 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_4.id, quantity: 1, unit_price: item_2.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+      invoice_item_7 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_6.id, quantity: 1, unit_price: item_4.unit_price, status: 1, created_at: Time.now, updated_at: Time.now)
+
+      expect(merchant_1.items_ready_to_ship).to eq([invoice_item_1, invoice_item_2, invoice_item_5, invoice_item_6])
+    end
+
 end

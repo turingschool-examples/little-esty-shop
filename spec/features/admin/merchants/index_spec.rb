@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'admin merchant index' do 
-    it 'shows the name of each merchant in the system' do 
+RSpec.describe 'admin merchant index' do
+    it 'shows the name of each merchant in the system' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
         merchant_2 = Merchant.create!(name: "Bobs Cranes", created_at: Time.now, updated_at: Time.now)
         merchant_3 = Merchant.create!(name: "Joe-Schmo Railroads", created_at: Time.now, updated_at: Time.now)
@@ -15,20 +15,20 @@ RSpec.describe 'admin merchant index' do
         expect(page).to have_content("#{merchant_3.name}")
         expect(page).to have_content("#{merchant_4.name}")
         expect(page).to have_content("#{merchant_5.name}")
-    end 
+    end
 
-     it 'has an admin merchant show page when you click on the merchant name' do 
+     it 'has an admin merchant show page when you click on the merchant name' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
-        
+
         visit '/admin/merchants'
 
         click_on("#{merchant_1.name}")
 
         expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
         expect(page).to have_content("#{merchant_1.name}")
-    end 
+    end
 
-    it 'has two sections - enabled and disabled - with a button next to each merchant based on category' do 
+    it 'has two sections - enabled and disabled - with a button next to each merchant based on category' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now, status: "enabled")
         merchant_2 = Merchant.create!(name: "Bobs Cranes", created_at: Time.now, updated_at: Time.now)
         merchant_3 = Merchant.create!(name: "Joe-Schmo Railroads", created_at: Time.now, updated_at: Time.now)
@@ -37,51 +37,51 @@ RSpec.describe 'admin merchant index' do
 
         visit '/admin/merchants'
 
-        within (".disabled_merchants") do 
+        within (".disabled_merchants") do
             expect(page).to have_button("Enable")
             expect(page).to have_content("Bobs Cranes")
             expect(page).to have_content("Joe-Schmo Railroads")
             expect(page).to have_content("Allison Bugaboo")
-        end 
-        
-          within (".enabled_merchants") do 
+        end
+
+          within (".enabled_merchants") do
             expect(page).to have_button("Disable")
             expect(page).to have_content("Schroeder-Jerde")
             expect(page).to have_content("Castanza George")
-        end 
-    end 
+        end
+    end
 
-    it 'has two sections - enabled and disabled - with a button next to each merchant based on category' do 
+    it 'has two sections - enabled and disabled - with a button next to each merchant based on category' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now, status: "enabled")
 
         visit '/admin/merchants'
 
-        within (page.all(".enabled_merchant_buttons")[0]) do 
+        within (page.all(".enabled_merchant_buttons")[0]) do
             click_button("Disable")
-        end 
+        end
 
-        within (page.all(".disabled_merchant_buttons")[0]) do 
+        within (page.all(".disabled_merchant_buttons")[0]) do
             expect(page).to have_button("Enable")
             expect(page).to have_content("Schroeder-Jerde")
 
             click_button("Enable")
-        end 
+        end
 
-        within (page.all(".enabled_merchant_buttons")[0]) do 
+        within (page.all(".enabled_merchant_buttons")[0]) do
             expect(page).to have_button("Disable")
             expect(page).to have_content("Schroeder-Jerde")
-        end 
-    end 
+        end
+    end
 
-    it 'has a button to create a new merchant' do         
+    it 'has a button to create a new merchant' do
         visit '/admin/merchants'
 
         click_on("Create a new merchant")
 
         expect(current_path).to eq("/admin/merchants/new")
-    end 
+    end
 
-    it 'has the top 5 merchants' do 
+    it 'has the top 5 merchants' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now, status: "enabled")
         merchant_2 = Merchant.create!(name: "Bobs Cranes", created_at: Time.now, updated_at: Time.now, status: "enabled")
         merchant_3 = Merchant.create!(name: "Joe-Schmo Railroads", created_at: Time.now, updated_at: Time.now, status: "enabled")
@@ -156,16 +156,16 @@ RSpec.describe 'admin merchant index' do
 
         expect(page).to have_content("Top 5 Merchants:")
 
-        within ("#column2") do 
+        within ("#column2") do
             expect(page.all('.top_5_merchants')[0]).to have_content("Ali Baba - $8,000.00")
             expect(page.all('.top_5_merchants')[1]).to have_content("Castanza George - $70.00")
             expect(page.all('.top_5_merchants')[2]).to have_content("Allison Bugaboo - $60.00")
             expect(page.all('.top_5_merchants')[3]).to have_content("Joe-Schmo Railroads - $50.00")
             expect(page.all('.top_5_merchants')[4]).to have_content("Bobs Cranes - $40.00")
-        end 
-    end 
+        end
+    end
 
-    it 'has the top earning days for each merchant in the top 5 days' do 
+    it 'has the top earning days for each merchant in the top 5 days' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now, status: "enabled")
         merchant_2 = Merchant.create!(name: "Bobs Cranes", created_at: Time.now, updated_at: Time.now, status: "enabled")
         merchant_3 = Merchant.create!(name: "Joe-Schmo Railroads", created_at: Time.now, updated_at: Time.now, status: "enabled")
@@ -237,14 +237,12 @@ RSpec.describe 'admin merchant index' do
 
         visit '/admin/merchants'
 
-        save_and_open_page 
-
-        within ("#column2") do 
+        within ("#column2") do
             expect(page.all('.top_5_merchants')[0]).to have_content("Top selling date for Ali Baba was Saturday, March 17, 2012")
             expect(page.all('.top_5_merchants')[1]).to have_content("Top selling date for Castanza George was Monday, March 26, 2012")
             expect(page.all('.top_5_merchants')[2]).to have_content("Top selling date for Allison Bugaboo was Sunday, March 25, 2012")
             expect(page.all('.top_5_merchants')[3]).to have_content("Top selling date for Joe-Schmo Railroads was Sunday, March 25, 2012")
             expect(page.all('.top_5_merchants')[4]).to have_content("Top selling date for Bobs Cranes was Sunday, March 25, 2012")
-        end 
-    end 
-end 
+        end
+    end
+end

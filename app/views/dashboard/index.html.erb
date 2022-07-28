@@ -16,14 +16,13 @@
   </ol>
 </div>
 
+<div id="invoice-item">
 <h3>Items Ready To Ship</h3>
-<div id="items-ready-to-ship">
   <% @merchant.items_ready_to_ship.each do |invoice_item| %>
-    <div id="invoice-item-<%= invoice_item.id %>">
-      <p><%= invoice_item.id %> 
-        <%= invoice_item.item.name %>  
-        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
-        <%= invoice_item.invoice.formatted_date %>  
-    </div>
-    <% end %> 
+  <div class="invoice-items">
+      <%= invoice_item.item.name %> -
+        <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> -
+        <%= invoice_item.invoice.created_at.strftime('%A, %B %d, %Y') %>
+        </div>
+  <% end %>
 </div>
