@@ -27,8 +27,22 @@ RSpec.describe 'Merchant Item Index' do
                 click_button 'Enable'
                 expect(current_path).to eq(merchant_items_path(@merchant1.id))
               end
-              save_and_open_page
-              
+            end
+
+            it "is able to create a new item" do
+              visit merchant_items_path(@merchant1.id)
+
+              click_link 'Create New Item'
+
+              fill_in 'Name', with: 'bricks'
+              fill_in 'description', with: 'use to create buildings and create things'
+              fill_in 'unit_price', with: '500'
+
+              click_on ("Submit")
+
+              expect(current_path).to eq(merchant_items_path(@merchant1.id))
+
+              expect(page).to have_content('bricks')
             end
         end
     end
