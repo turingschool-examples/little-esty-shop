@@ -30,7 +30,7 @@ class Merchant < ApplicationRecord
   end
   
   def get_invoice_items(invoice_id)
-    in_items = InvoiceItem.where(item_id: items.pluck(:id), invoice_id: invoice_id)
+    InvoiceItem.where(item_id: items.pluck(:id), invoice_id: invoice_id)
   end
 
   def total_revenue(invoice_id)

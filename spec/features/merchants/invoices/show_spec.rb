@@ -68,4 +68,24 @@ RSpec.describe 'Merchant invoice Show page' do
             expect(page).to have_content("Total Revenue: $50.22")
         end
     end
+
+    it 'has a select field to update the item status ' do
+        merchant = Merchant.create!(name: 'amazon')
+        customer = Customer.create!(first_name: 'Billy', last_name: 'Bob')
+        item_1 = Item.create!(name: 'pet rock', description: 'a rock you pet', unit_price: 10000, merchant_id: merchant.id)
+        invoice_1 = Invoice.create!(status: 'completed', customer_id: customer.id)
+
+
+        InvoiceItem.create!(quantity: 2, unit_price: 11, status: 'shipped', item: item_1, invoice: invoice_1)
+
+        visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
+
+        within "#item-details" do
+            expect(page).to have_content("shipped")
+            select "packaged", :from => "status"
+            click_on("Update Item Status")
+            expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_1.id}")
+            expect(page).to have_content("packaged")
+        end
+    end
 end
