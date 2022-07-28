@@ -15,7 +15,7 @@ RSpec.describe 'Admin Show Page', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit 'admin/merchants/1/invoices/10'
+    visit 'admin/invoices/10'
 
     expect(page).to have_content("10")
     expect(page).to have_content("in progress")
@@ -41,7 +41,7 @@ RSpec.describe 'Admin Show Page', type: :feature do
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_3 = InvoiceItem.create!(id: 3, item_id: item_3.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit 'admin/merchants/1/invoices/10'
+    visit 'admin/invoices/10'
 
     within "#item_invoice-#{invoice_item_1.id}" do
       expect(page).to have_content("Charizard Rare")
@@ -76,13 +76,13 @@ RSpec.describe 'Admin Show Page', type: :feature do
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_3 = InvoiceItem.create!(id: 3, item_id: item_3.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit 'admin/merchants/1/invoices/10'
+    visit 'admin/invoices/10'
 
     expect(page).to have_content("Total Revenue: $49,920.00")
     expect(page).to have_no_content("Total Revenue: $12.30")
   end
 
-  it "sees an invoice's current status as sa select field and when a new status is selected and submitted, it updates that status on the page" do
+  it "sees an invoice's current status as a select field and when a new status is selected and submitted, it updates that status on the page" do
     merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
 
     item_1 = merchant_1.items.create!(id: 1, merchant_id: merchant_1.id, name: "Charizard Rare", description: "Mint Condition Charizard", unit_price: 13984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
@@ -95,22 +95,22 @@ RSpec.describe 'Admin Show Page', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 3, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'packaged', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit 'admin/merchants/1/invoices/10'
+    visit 'admin/invoices/10'
 
-    within("#invoice-#{@invoice.id}") do
+    within("#invoice-#{invoice_1.id}") do
       expect(page).to have_content("in progress")
     end
 
-    within("#invoice-#{@invoice.id}") do
+    within("#invoice-#{invoice_1.id}") do
       select("completed", from: "status")
       click_button "Update Invoice Status"
     end
 
-    within("#invoice-#{@invoice.id}") do
+    within("#invoice-#{invoice_1.id}") do
       expect(page).to have_content("completed")
     end
 
-    within("#invoice-#{@invoice.id}") do
+    within("#invoice-#{invoice_1.id}") do
       expect(page).to have_no_content("in progress")
     end
   end
