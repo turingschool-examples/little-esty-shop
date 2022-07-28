@@ -217,12 +217,12 @@ RSpec.describe "merchants invoice show page" do
       invoice_2 = Invoice.create!(status: 0, customer_id: customer_1.id)
       invoice_3 = Invoice.create!(status: 0, customer_id: customer_1.id)
 
-      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 100, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
       invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
-      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 150, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_3.id}"
-      expect(page).to have_content("Total Revenue: $14.66")
+      expect(page).to have_content("Total Revenue: $8.50")
     end
 
   end
