@@ -1,3 +1,5 @@
 <h1><%= @item.name %></h1>
 <p>Description: <%= @item.description %></p>
-<p>Current Selling Price: <%= @item.unit_price %></p>
+<p>Current Selling Price: <%= number_to_currency(@item.unit_price) %></p>
+
+<%= link_to "Update Item Information", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit"  %>
