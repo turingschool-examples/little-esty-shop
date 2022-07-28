@@ -98,7 +98,7 @@ RSpec.describe 'Admin Show Page', type: :feature do
     visit 'admin/invoices/10'
 
     within("#invoice-#{invoice_1.id}") do
-      expect(page).to have_content("in progress")
+      expect(page).to have_select(:status, selected: "in progress")
     end
 
     within("#invoice-#{invoice_1.id}") do
@@ -107,11 +107,7 @@ RSpec.describe 'Admin Show Page', type: :feature do
     end
 
     within("#invoice-#{invoice_1.id}") do
-      expect(page).to have_content("completed")
-    end
-
-    within("#invoice-#{invoice_1.id}") do
-      expect(page).to have_no_content("in progress")
+      expect(page).to have_select(:status, selected: "completed")
     end
   end
 end
