@@ -142,4 +142,33 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(page).to_not have_content("John Smith - 4")
     end
   end
+
+  it "shows list of items ready to ship with their invoice id" do
+    merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
+    item_1 = Item.create!(name: "Watch", description: "Always a need to tell time", unit_price: 3000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_2 = Item.create!(name: "Crocs", description: "Worst and Best Shoes", unit_price: 4000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+    item_3 = Item.create!(name: "Beanie", description: "Perfect for a cold day", unit_price: 5000, merchant_id: merchant_1.id, created_at: Time.now, updated_at: Time.now)
+
+    customer_6 = Customer.create!(first_name: "Zoe", last_name: "Atkins", created_at: Time.now, updated_at: Time.now)
+    customer_2 = Customer.create!(first_name: "Frank", last_name: "Jameson", created_at: Time.now, updated_at: Time.now)
+
+    invoice_1 = customer_6.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+    invoice_14 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
+    
+    invoice_item_1 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_14.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_3 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_14.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_item_4 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
+   
+    visit "/merchants/#{merchant_2.id}/dashboard"
+
+    within '#items-ready-to-ship' do
+      expect(page).to have_content("Watch")
+      expect(page).to have_content("Beanie")
+      expect(page).to_not have_content("Crocs")
+      expect(invoice_item_1.id.to_s).to appear_before(invoice_item_4.id.to_s)
+      expect(invoice_item_4.id.to_s).to appear_before(invoice_item_2.id.to_s)
+    end
+  end
 end
