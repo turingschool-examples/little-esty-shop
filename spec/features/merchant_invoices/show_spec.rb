@@ -115,7 +115,7 @@ RSpec.describe 'merchants invoice show page', type: :feature do
       expect(page).to_not have_content("#{invoice1.status}")
       expect(page).to_not have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
     end
-
+     
     visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
 
     within "#invoices-#{invoice3.id}" do
