@@ -6,4 +6,12 @@
     <p>Description: <%= item.description %></p>
     <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
   </div>
+  
+<h3>Invoice</h3>
+  <p><%= @merchant.name%> </p>
+
+<% @merchant.invoices.each_with_index do |invoice, index| %>
+<div id="invoice-<%= index %>">
+    <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+<% end %>
 <% end %>
