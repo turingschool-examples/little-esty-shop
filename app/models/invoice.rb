@@ -22,7 +22,7 @@ class Invoice < ApplicationRecord
   end
 
   def self.find_with_merchant(merchant)
-    merchant.invoices
+    merchant.invoices.distinct(:id)
   end
 
 end

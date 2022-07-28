@@ -1,6 +1,6 @@
-<h1>Invoices: <%=@merchant.name%> </h1>
+<h1>Invoices</h1>
 <ul>
-  <% @merchant.invoices.uniq.each do |invoice| %>
-    <li><%=link_to "Invoice #{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li>
+  <% @invoices.each do |invoice| %>
+    <li><%=link_to "Invoice #{invoice.id}", merchant_invoice_path(@merchant, invoice.id) %></li>
   <% end %>
 </ul>
