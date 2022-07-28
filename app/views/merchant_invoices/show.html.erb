@@ -24,6 +24,6 @@
 <div id="invoices-<%= @invoice.id %>">
   <p>Invoice id: <%= @invoice.id %></p>
   <p>Status: <%= @invoice.status %></p>
-  <p>Created on: <%= @invoice.created_at %></p>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
   <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </div>
