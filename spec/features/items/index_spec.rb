@@ -127,27 +127,27 @@ RSpec.describe 'Merchant Items Index' do
     within "#five-most-popular-items" do
       within "#topitems-0" do
         expect(page).to have_link("#{item_4.name}")
-        expect(page).to have_content(" - $4,000.00 in sales")
+        expect(page).to have_content(" - $40.00 in sales")
       end
 
       within "#topitems-1" do
         expect(page).to have_link("#{item_2.name}")
-        expect(page).to have_content(" - $3,000.00 in sales")
+        expect(page).to have_content(" - $30.00 in sales")
       end
 
       within "#topitems-2" do
         expect(page).to have_link("#{item_5.name}")
-        expect(page).to have_content(" - $2,500.00 in sales")
+        expect(page).to have_content(" - $25.00 in sales")
       end
 
       within "#topitems-3" do
         expect(page).to have_link("#{item_1.name}")
-        expect(page).to have_content(" - $2,000.00 in sales")
+        expect(page).to have_content(" - $20.00 in sales")
       end
 
       within "#topitems-4" do
         expect(page).to have_link("#{item_3.name}")
-        expect(page).to have_content(" - $1,500.00 in sales")
+        expect(page).to have_content(" - $15.00 in sales")
       end
     end
   end
