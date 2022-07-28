@@ -1,0 +1,14 @@
+<h1>Update Item Information</h1>
+<%= form_with url: "/merchants/#{@item.merchant.id}/items/#{@item.id}", method: :patch, local: true do |f| %>
+<%= f.label :name, "Name"%>
+<%= f.text_field :name, :value => "#{@item.name}" %>
+
+<%= f.label :description, "Description" %>
+<%= f.text_field :description, :value => "#{@item.description}" %>
+
+<%= f.label :unit_price, "Price" %>
+<%= f.text_field :unit_price, :value => "#{number_to_currency(@item.unit_price)}" %>
+
+<%= f.submit 'Submit' %>
+
+<% end %>
