@@ -19,16 +19,21 @@ RSpec.describe 'Merchant Item Index' do
                 expect(page).to_not have_content(@bat.name)
             end
 
-            it "is able to enable and disable a item and take you back to the index page" do
+            it "is able to enable and disable a item and take you back to the index page and see that the status has changed" do
               visit merchant_items_path(@merchant1.id)
 
               within("#item-#{@hammer.name}") do
-                expect(page).to have_content("Status: #{@hammer.status}")
+                expect(page).to have_content("Status: disabled")
+                expect(page).to_not have_content("Status: enabled")
                 click_button 'Enable'
                 expect(current_path).to eq(merchant_items_path(@merchant1.id))
-              end
-              save_and_open_page
-              
+                expect(page).to have_content("Status: enabled")
+                expect(page).to_not have_content("Status: disabled")
+                click_button 'Disable'
+                expect(current_path).to eq(merchant_items_path(@merchant1.id))
+                expect(page).to have_content("Status: disabled")
+                expect(page).to_not have_content("Status: enabled")
+              end              
             end
         end
     end

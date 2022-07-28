@@ -68,7 +68,7 @@ RSpec.describe 'Merchant Item Show' do
                 expect(page).to have_content("Mallet")
 
                 within("#flash-message") do
-                    expect(page).to have_content("Item has been successfully updated")
+                    expect(page).to have_content("Mallet has been successfully updated")
                 end
             end
         end

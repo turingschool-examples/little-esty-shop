@@ -10,23 +10,26 @@ class ItemsController < ApplicationController
     def edit
         @item = Item.find(params[:id])
     end
-
+    
     def update
         item = Item.find(params[:id])
-        item.update(item_params)
-        redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
-        flash.notice = "Item has been successfully updated"
+        if params[:status] == 'enabled'
+            item.enabled!
+            redirect_to request.referrer
+            flash.notice = "#{item.name} has been enabled"
+        elsif params[:status] == 'disabled'
+            item.disabled!
+            redirect_to request.referrer
+            flash.notice = "#{item.name} has been disabled"
+        else
+            item.update(item_params)
+            redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+            flash.notice = "#{item.name} has been successfully updated"
+        end
     end
-    
-    # def update_status
-    #     item = Item.find(params[:id])
-    #     item.update_status(item_params)
-    #     redirect_to request.referrer
-    #     flash.notice = "Item status has been successfully updated"
-    # end
 
     private
     def item_params
-        params.permit(:name, :unit_price, :description)
+        params.permit(:name, :unit_price, :description, :status)
     end
 end
