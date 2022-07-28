@@ -13,14 +13,28 @@
  *= require_tree .
  *= require_self
  */
-
-.columns {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.column {
-  flex: 50%;
-}
+ *  {
+    box-sizing: border-box;
+    }
+  
+  /* Create two equal columns that floats next to each other */
+    #column1 {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    /* Should be removed. Only for demonstration */
+    }
+  
+    #column2 {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    /* Should be removed. Only for demonstration */
+    }
+  
+  /* Clear floats after the columns */
+    .columns:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
