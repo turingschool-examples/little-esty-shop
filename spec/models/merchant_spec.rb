@@ -50,7 +50,7 @@ RSpec.describe Merchant, type: :model do
     invoice_12 = customer_5.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_13 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_14 = customer_2.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
-    invoice_15 = customer_7.invoices.create!(status: 2, created_at: Time.now, updated_at: Time.now)
+    invoice_15 = customer_7.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     # invoice_16 = customer_7.invoices.create!(status: 2, created_at: Time.now, updated_at: Time.now)
     # invoice_17 = customer_8.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
     invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
@@ -88,16 +88,16 @@ RSpec.describe Merchant, type: :model do
     transaction_11 = Transaction.create!(invoice_id: invoice_11.id, credit_card_number: '4738473664751832', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     transaction_12 = Transaction.create!(invoice_id: invoice_12.id, credit_card_number: '4738473664751832', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     transaction_13 = Transaction.create!(invoice_id: invoice_13.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
-    transaction_14 = Transaction.create!(invoice_id: invoice_14.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "failure", created_at: Time.now, updated_at: Time.now)
+    transaction_14 = Transaction.create!(invoice_id: invoice_14.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     transaction_15 = Transaction.create!(invoice_id: invoice_15.id, credit_card_number: '4023948573948293', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
     # transaction_16 = Transaction.create!(invoice_id: invoice_16.id, credit_card_number: '4023948573948394', credit_card_expiration_date: "1", result: "success", created_at: Time.now, updated_at: Time.now)
 
-      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2, customer_4, customer_6, customer_8]) 
+      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2, customer_4, customer_6, customer_8])
 
-      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2]) 
+      # expect(merchant_1.top_5_customers).to eq([customer_1, customer_2])
       expect(merchant_1.top_5_customers).to eq([customer_6, customer_3, customer_5, customer_2, customer_7])
       # expect(merchant_2.top_5_customers).to eq([customer_7])
-      
+
     end
   end
 end
