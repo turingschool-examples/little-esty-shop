@@ -83,8 +83,9 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     item3 = Item.create!(name: "Junk", description: 'junk you should want', unit_price: 500, merchant_id: merchant3.id)
 
     customer1 = Customer.create!(first_name: "Parker", last_name: "Thomson")
+    customer2 = Customer.create!(first_name: "Shirley", last_name: "DeCesari")
     invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
-    invoice2 = Invoice.create!(status: "cancelled", customer_id: customer1.id)
+    invoice2 = Invoice.create!(status: "cancelled", customer_id: customer2.id)
     invoice3 = Invoice.create!(status: "in progress", customer_id: customer1.id)
     transaction1 = Transaction.create!(credit_card_number: "123456789123456789", result: "success", invoice_id: invoice1.id)
     invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item1.id, invoice_id: invoice1.id)
@@ -97,26 +98,35 @@ RSpec.describe 'merchants invoice show page', type: :feature do
       expect(page).to have_content("Invoice id: #{invoice1.id}")
       expect(page).to have_content("Status: #{invoice1.status}")
       expect(page).to have_content("Created on: #{invoice1.created_at}")
-      # expect(page).to have_content("Customer: #{invoice1.customer}")
+      expect(page).to have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
+      expect(page).to_not have_content("#{invoice3.id}")
+      expect(page).to_not have_content("#{invoice3.status}")
+      expect(page).to_not have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
     end
     
-    # visit "/merchants/#{merchant2.id}/invoices/#{invoice2.id}"
+    visit "/merchants/#{merchant2.id}/invoices/#{invoice2.id}"
      
-    # within "#invoices-#{invoice2.id}" do
-    #   # expect(page).to have_content(invoice2.id)
-    #   # expect(page).to have_content("Status: #{invoice2.status}")
-    #   # expect(page).to have_content("Created on: #{invoice2.created_at}")
-    #   # expect(page).to have_content("Customer: #{invoice2.customer}")
-    # end
+    within "#invoices-#{invoice2.id}" do
+      expect(page).to have_content(invoice2.id)
+      expect(page).to have_content("Status: #{invoice2.status}")
+      expect(page).to have_content("Created on: #{invoice2.created_at}")
+      expect(page).to have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
+      expect(page).to_not have_content("#{invoice1.id}")
+      expect(page).to_not have_content("#{invoice1.status}")
+      expect(page).to_not have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
+    end
 
-    # visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
+    visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
 
-    # within "#invoices-#{invoice3.id}" do
-    #   expect(page).to have_content(invoice3.id)
-    #   expect(page).to have_content("Status: #{invoice3.status}")
-    #   # expect(page).to have_content("Created on: #{invoice3.created_at}")
-    #   # expect(page).to have_content("Customer: #{invoice3.customer}")
-    # end
+    within "#invoices-#{invoice3.id}" do
+      expect(page).to have_content(invoice3.id)
+      expect(page).to have_content("Status: #{invoice3.status}")
+      expect(page).to have_content("Created on: #{invoice3.created_at}")
+      expect(page).to have_content("Customer: #{invoice3.customer.first_name} #{invoice3.customer.last_name}")
+      expect(page).to_not have_content("#{invoice2.id}")
+      expect(page).to_not have_content("#{invoice2.status}")
+      expect(page).to_not have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
+    end
   end
 end
 
