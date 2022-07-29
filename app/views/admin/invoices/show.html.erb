@@ -1,7 +1,28 @@
-<div id=invoice-details>
+<div id='invoice-details'>
     <h1>Invoice #<%= @invoice.id %> </h1>
     <p>Status: <%= @invoice.status.titlecase %> </p>
     <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
     <h2>Customer: </h2>
     <p><%= @invoice.customer.first_name.titlecase  %> <%= @invoice.customer.last_name.titlecase  %> </p>
+</div>
+
+<div id="invoice-item-details">
+    <h2>Items on this Invoice:</h2>
+
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+        <% @invoice.invoice_items.each do |invoice_item| %>
+            <tr id="invoice-item-<%= invoice_item.id %>">
+                <td><%= invoice_item.item.name.titlecase %></td>
+                <td><%= invoice_item.quantity %></td>
+                <td><%= number_to_currency(invoice_item.unit_price.to_f/100) %></td>
+                <td><%= invoice_item.status.titlecase %></td>
+            </tr>
+        <% end %>
+    </table>
 </div>
