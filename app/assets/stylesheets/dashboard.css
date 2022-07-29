@@ -1,0 +1,16 @@
+.navbar ul {
+  text-align: right;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.navbar ul li {
+ list-style: none;
+ display: inline-block;
+}
+
+.column h2 p{
+  width: 50%;
+  padding: 12px;
+  align-content: center;
+}

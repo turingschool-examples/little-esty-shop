@@ -1,14 +1,24 @@
-<%= link_to "Merchant Items Index", "/merchants/#{@merchant.id}/items" %>
-<%= link_to "Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
-<h1><%= @merchant.name %></h1>
+<%= stylesheet_link_tag "dashboard" %>
+<div id="navbar">
+<div class="navbar">
+  <ul>
+    <li><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></li>
+    <li><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></li>
+  </ul>
+</div>
+</div>
 
-<h3>Favorite Customers</h3>
-<% @merchant.top_5_customers.each do |customer| %>
-  <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
-<% end %>
+  <h1><center><%= @merchant.name %></center></h1>
 
-<h3>Items Ready to Ship</h3>
+<div class="column">
+  <h2>Favorite Customers</h2>
+  <% @merchant.top_5_customers.each do |customer| %>
+    <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
+  <% end %>
+</div>
+<div class="column">
+<h2>Items Ready to Ship</h2>
 <% @merchant.ready_to_ship.each do |item| %>
 <p><%= item.name %> - Invoice #<%= item.inv_id %> - <%= item.invoice_date.strftime('%A, %B %d, %Y') %></p>
 <% end %>
-
+</div>
