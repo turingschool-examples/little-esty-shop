@@ -7,6 +7,7 @@
   <div id="merchants_revenue-<%= merchant.id %>">
   <p>Merchant Name: <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
   <p>Total Revenue: <%= merchant.merchant_total_revenue %></p>
+  <p><%= "Top day for #{merchant.name} was #{merchant.best_revenue_day}" %></p>
   </div>
 <% end %>
 </div>
