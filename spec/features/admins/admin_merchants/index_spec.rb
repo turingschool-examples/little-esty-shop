@@ -161,23 +161,25 @@ RSpec.describe 'the admin_merchants index' do
       expect(merchant_1.name).to appear_before(merchant_3.name)
     end
 
+    within "#merchants_revenue-#{merchant_1.id}" do
+      expect(page).to have_content(merchant_1.name)
+    end
 
-    
+    within "#merchants_revenue-#{merchant_2.id}" do
+      expect(page).to have_content(merchant_2.name)
+    end
 
-    # within "#merchant_disabled-#{merchant_2.id}" do
-    # expect(page).to_not have_content("Cats!")
-    # expect(page).to_not have_button("Enable Cats!")
+    within "#merchants_revenue-#{merchant_3.id}" do
+      expect(page).to have_content(merchant_3.name)
+    end
 
-    # expect(page).to have_link("Create Merchant")
-    # click_link("Create Merchant")
-    # expect(current_path).to eq("/admin/merchants/new")
+    within "#merchants_revenue-#{merchant_4.id}" do
+      expect(page).to have_content(merchant_4.name)
+    end
 
-    # fill_in 'name', with: 'Cats!'
+    within "#merchants_revenue-#{merchant_5.id}" do
+      expect(page).to have_content(merchant_5.name)
+    end
 
-    # click_on 'Submit'
-    # expect(current_path).to eq("/admin/merchants")
-
-    # expect(page).to have_content("Cats!")
-    # expect(page).to have_button("Enable Cats!")
   end
 end
