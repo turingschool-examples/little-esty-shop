@@ -186,5 +186,10 @@ RSpec.describe 'the admin_merchants index' do
       expect(page).to have_content("2500")
     end
 
+    within "#merchants_revenue-#{merchant_5.id}" do
+      click_on "#{merchant_5.name}"
+
+      expect(current_path).to eq("/admin/merchants/#{merchant_5.id}")
+    end
   end
 end
