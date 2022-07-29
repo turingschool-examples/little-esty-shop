@@ -16,6 +16,8 @@ class Admin::MerchantsController < ApplicationController
         merchant.update(merchant_params)
         if params[:status]
             redirect_to admin_merchants_path
+        elsif params[:name].blank? 
+            redirect_to edit_admin_merchant_path(params[:id]), alert: "Please enter a name."
         else 
             redirect_to admin_merchant_path(merchant), notice: "Merchant information was successfully updated!"
         end
