@@ -27,4 +27,29 @@ RSpec.describe 'Admin Dashboard' do
             # expect(current_path).to eq('/admin/invoices')
         end
     end  
+
+    it 'lists top 5 customers by successful transaction' do
+        8.times do
+            Customer.create!(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name)
+        end
+        Customer.all.each.with_index do |customer, index|
+            index.times do 
+                customer.invoices.create!(status: Faker::Number.between(from: 0, to: 2) )
+            end
+        end
+        Invoice.all.each do |invoice|
+            invoice.transactions.create!(result: "success", credit_card_number: Faker::Business.credit_card_number, credit_card_expiration_date: Faker::Business.credit_card_expiry_date)
+        end
+        20.times do
+            Transaction.create!(result: "failed",invoice_id: Faker::Number.between(from: Invoice.first.id, to: Invoice.last.id), credit_card_number: Faker::Business.credit_card_number, credit_card_expiration_date: Faker::Business.credit_card_expiry_date)
+        end
+
+        visit '/admin'
+
+        within "#top-customers" do
+            expect("#{Customer.last.first_name} #{Customer.last.last_name}").to appear_before("#{Customer.fifth.first_name} #{Customer.fifth.last_name}")
+            expect("#{Customer.fifth.first_name} #{Customer.fifth.last_name}").to appear_before("#{Customer.third.first_name} #{Customer.third.last_name}")
+            expect(page).to_not have_content("#{Customer.first.first_name} #{Customer.first.last_name}")
+        end
+    end
 end
