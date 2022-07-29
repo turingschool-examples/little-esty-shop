@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
   get '/merchants/:id/items', to: 'items#index'
   patch '/merchants/:id/items', to: 'items#status'
+  get '/merchants/:id/items/new', to: 'items#new'
   get '/merchants/:id/items/:id', to: 'items#show'
   get '/merchants/:id/items/:id/edit', to: 'items#edit'
   patch '/merchants/:id/items/:id', to: 'items#update'
+  
   
 
   get '/admin', to: 'admins#index'

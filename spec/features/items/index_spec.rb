@@ -82,8 +82,17 @@ RSpec.describe 'Merchant Items Index' do
           expect(page).to have_content(@item1.name)
           expect(page).to have_content(@item8.name)
         end
-        save_and_open_page 
       end
+
+      it 'will have a link to create a new item, when I click on the link, i am taken to a form that allows me to add item information' do
+        
+        visit "/merchants/#{@merchant1.id}/items"
+
+        click_link "New Item"
+
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+      end
+      
     end
     describe 'when i click on the name of an item from the merchant items index page' do
       it 'I am taken to that merchant items show page and i see all of the items attributes' do

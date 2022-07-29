@@ -1,5 +1,7 @@
 <h2><%= @merchant.name %> My Items</h2>
 
+<%= link_to 'New Item', "/merchants/#{@merchant.id}/items/new" %>
+
 <h3> Enabled Items </h3>
 <div id = "enabled-items">
 <% @merchant.find_all_by_status(0).each do |item| %>
