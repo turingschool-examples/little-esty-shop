@@ -17,9 +17,7 @@
   <h3>Top Items</h3>
   <% @merchant.top_five_items.each do |item| %>
     <ul>
-      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue) %> in sales </li>
+      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue.fdiv(100)) %> in sales </li>
     </ul>
   <% end %>
 </div>
-
-

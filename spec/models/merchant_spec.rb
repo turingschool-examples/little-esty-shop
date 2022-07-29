@@ -66,7 +66,6 @@ RSpec.describe Merchant do
         expect(merchant_1.top_five_items).to eq([spatula, table, spoon, computer, knife])
       end
     end
-  end
 
   describe '#methods' do
     it 'returns the top five customers with most transactions' do
