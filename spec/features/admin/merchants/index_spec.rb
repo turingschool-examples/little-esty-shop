@@ -171,4 +171,33 @@ RSpec.describe 'Admin Merchants Index' do
             expect(page).to_not have_content merchant_3
         end
     end
+
+    # Admin Merchants Grouped by Status
+    # As an admin,
+    # When I visit the admin merchants index
+    # Then I see two sections, one for "Enabled Merchants" and one for "Disabled Merchants"
+    # And I see that each Merchant is listed in the appropriate section
+    it 'groups merchants by status' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+
+        visit admin_merchants_path
+
+        within("#enabled") do 
+            expect(page).to have_content merchant_2.name 
+            expect(page).to have_content merchant_4.name 
+            expect(page).to_not have_content merchant_1.name 
+            expect(page).to_not have_content merchant_3.name
+        end
+
+        within("#disabled") do 
+            expect(page).to have_content merchant_1.name 
+            expect(page).to have_content merchant_3.name 
+            expect(page).to_not have_content merchant_2
+            expect(page).to_not have_content merchant_4
+        end
+    end
 end
