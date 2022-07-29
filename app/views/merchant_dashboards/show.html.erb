@@ -1,1 +1,10 @@
-<h1><%= @merchant.name %>'s Dashboard</h1>
+<h1><%= @merchant.name %>'s Dashboard</h1><br>
+<p><%= link_to "#{@merchant.name} Item Index", "/merchants/#{@merchant.id}/items" %> </p>
+<p><%= link_to "#{@merchant.name} Invoice Index", "/merchants/#{@merchant.id}/invoices" %></p><br>
+<h2>Top Customers</h2>
+<% @merchant.favorite_customers.each_with_index do |customer, index| %>
+  <div id="customers<%= index %>">
+    <h3><%= "#{customer.first_name} #{customer.last_name}" %></h3>
+    <p>Transactions: <%= customer.transactions_count %></p><br>
+  </div>
+<% end %>

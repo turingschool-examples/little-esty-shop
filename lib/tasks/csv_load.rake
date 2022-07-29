@@ -68,9 +68,10 @@ namespace :load_csv do
   task all: [:merchants, :items, :customers, :invoices, :invoice_items, :transactions]
 
   desc 'reset all table primary keys'
-    task reset_keys: :environment do
-      ActiveRecord::Base.connection.tables.each do |table_name|
-        ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
-      end
+  task reset_keys: :environment do
+    ActiveRecord::Base.connection.tables.each do |table_name|
+      ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
+      puts "'Reset Keys' Complete"
+    end
   end
 end
