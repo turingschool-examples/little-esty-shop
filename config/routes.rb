@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get '/', to: "welcome#index"
   get "/merchants/:id/dashboard", to: "merchants#show"
@@ -15,13 +14,9 @@ Rails.application.routes.draw do
   #get '/merchants/:id/items/:id/edit', to: 'items#edit'
   #patch '/merchants/:id/items/:id', to: 'items#update'
 
-
-
   #get '/merchants/:id/invoices', to: "invoices#index"
   #get '/merchants/:id/invoices/:id', to: 'invoices#show'
   #patch '/merchants/:id/invoices/:id', to: 'invoices#update'
-  
-  
   
   get '/admin', to: 'admins#index'
   get '/admin/merchants', to: 'admin_merchants#index'
