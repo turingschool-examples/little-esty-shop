@@ -17,19 +17,19 @@ RSpec.describe 'Admin Merchants Index' do
         visit admin_merchants_path
         # save_and_open_page
 
-        within('#merchant-0') do 
+        within('#e-merchant-0') do 
             expect(page).to have_content(merchant_1.name)
         end
 
-        within('#merchant-1') do 
+        within('#e-merchant-1') do 
             expect(page).to have_content(merchant_2.name)
         end
 
-        within('#merchant-2') do 
+        within('#e-merchant-2') do 
             expect(page).to have_content(merchant_3.name)
         end
 
-        within('#merchant-3') do 
+        within('#e-merchant-3') do 
             expect(page).to have_content(merchant_4.name)
         end
     end
@@ -48,19 +48,19 @@ RSpec.describe 'Admin Merchants Index' do
 
         visit admin_merchants_path
 
-        within('#merchant-0') do 
+        within('#e-merchant-0') do 
             expect(page).to have_link(merchant_1.name)
         end
 
-        within('#merchant-1') do 
+        within('#e-merchant-1') do 
             expect(page).to have_link(merchant_2.name)
         end
 
-        within('#merchant-2') do 
+        within('#e-merchant-2') do 
             expect(page).to have_link(merchant_3.name)
         end
 
-        within('#merchant-3') do 
+        within('#e-merchant-3') do 
             expect(page).to have_link(merchant_4.name)
             click_link(merchant_4.name)
         end
@@ -83,6 +83,7 @@ RSpec.describe 'Admin Merchants Index' do
         merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
 
         visit admin_merchants_path
+        save_and_open_page
 
         within("#enabled") do 
             expect(page).to have_content merchant_1.name 
@@ -96,6 +97,26 @@ RSpec.describe 'Admin Merchants Index' do
             expect(page).to_not have_content merchant_1
             expect(page).to_not have_content merchant_2
             expect(page).to_not have_content merchant_4
+        end
+
+        within("#e-merchant-0") do 
+            expect(page).to have_content merchant_1.name 
+            expect(page).to have_button "Disable"
+        end
+
+        within("#e-merchant-1") do 
+            expect(page).to have_content merchant_2.name 
+            expect(page).to have_button "Disable"
+        end
+
+        within("#e-merchant-2") do 
+            expect(page).to have_content merchant_4.name 
+            expect(page).to have_button "Disable"
+        end
+
+        within("#d-merchant-0") do 
+            expect(page).to have_content merchant_3.name 
+            expect(page).to have_button "Enable"
         end
     end
 
