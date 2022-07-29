@@ -27,7 +27,7 @@ RSpec.describe 'Admin Invoices Item Index' do
               expect(page).to have_content("Pikachu pics")
               expect(page).to have_content(1)
               expect(page).to have_content(1000)
-              expect(page).to have_content("shipped")
+              expect(page).to have_content("shipped") 
 
             end
 

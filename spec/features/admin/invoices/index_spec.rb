@@ -30,7 +30,6 @@ RSpec.describe 'Admin Invoices Item Index' do
             end
 
         end
-
     end
 
 end
