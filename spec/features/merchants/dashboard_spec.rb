@@ -203,7 +203,7 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(page).to have_content("Saturday, March 17, 2012")
       expect(page).to have_content("Sunday, March 25, 2012")
       expect(page).to have_content("Monday, March 26, 2012")
-      save_and_open_page
+
     end
   end
 
