@@ -1,30 +1,30 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Show Dashboard' do 
-    it 'has the name of the merchant' do 
+RSpec.describe 'Merchant Show Dashboard' do
+    it 'has the name of the merchant' do
         merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
         merchant_2 = Merchant.create!(name: 'Jon Doe')
-        
+
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         expect(page).to have_content('Spongebob The Merchant')
         expect(page).to_not have_content('Jon Doe')
     end
 
-    it 'on the merchant dashboard I see a link to my items index page' do 
+    it 'on the merchant dashboard I see a link to my items index page' do
         merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
         merchant_2 = Merchant.create!(name: 'Jon Doe')
-        
+
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         expect(page).to have_link('Spongebob The Merchant Item Index')
         expect(page).to_not have_content('Jon Doe Item Index')
     end
 
-    it 'on the merchant dashboard I can click on the link and be sent to items index page' do 
+    it 'on the merchant dashboard I can click on the link and be sent to items index page' do
         merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
         merchant_2 = Merchant.create!(name: 'Jon Doe')
-        
+
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         click_link ('Spongebob The Merchant Item Index')
@@ -32,27 +32,27 @@ RSpec.describe 'Merchant Show Dashboard' do
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
     end
 
-    it 'on the merchant dashboard I see a link to my invoice index page' do 
+    it 'on the merchant dashboard I see a link to my invoice index page' do
         merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
         merchant_2 = Merchant.create!(name: 'Jon Doe')
-        
+
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         expect(page).to have_link('Spongebob The Merchant Invoice Index')
         expect(page).to_not have_content('Jon Doe Invoice Index')
     end
 
-    it 'on the merchant dashboard I can click on the link and be sent to invoices index page' do 
+    it 'on the merchant dashboard I can click on the link and be sent to invoices index page' do
         merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
         merchant_2 = Merchant.create!(name: 'Jon Doe')
-        
+
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         click_link ('Spongebob The Merchant Invoice Index')
         expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices")
     end
-    
-    it 'shows the name of the top five customers ordered by most successful transactions' do 
+
+    it 'shows the name of the top five customers ordered by most successful transactions' do
         merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
         item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
@@ -81,18 +81,18 @@ RSpec.describe 'Merchant Show Dashboard' do
         transaction_4 = Transaction.create!(result: 0, invoice_id: invoice_1.id, credit_card_number: "154897654")
         transaction_5 = Transaction.create!(result: 0, invoice_id: invoice_1.id, credit_card_number: "154897654")
         transaction_6 = Transaction.create!(result: 0, invoice_id: invoice_1.id, credit_card_number: "154897654")
-        
+
         transaction_7 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_8 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_9 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_10 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_11 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
-        
+
         transaction_12 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
         transaction_13 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
         transaction_14 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
         transaction_15 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
-        
+
         transaction_16 = Transaction.create!(result: 0, invoice_id: invoice_4.id, credit_card_number: "347895421")
         transaction_17 = Transaction.create!(result: 0, invoice_id: invoice_4.id, credit_card_number: "347895421")
         transaction_18 = Transaction.create!(result: 0, invoice_id: invoice_4.id, credit_card_number: "347895421")
@@ -138,7 +138,7 @@ RSpec.describe 'Merchant Show Dashboard' do
         end
     end
 
-    it 'next to each top customers name is their amount of successful transactions' do 
+    it 'next to each top customers name is their amount of successful transactions' do
         merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
         item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
@@ -167,18 +167,18 @@ RSpec.describe 'Merchant Show Dashboard' do
         transaction_4 = Transaction.create!(result: 0, invoice_id: invoice_1.id, credit_card_number: "154897654")
         transaction_5 = Transaction.create!(result: 0, invoice_id: invoice_1.id, credit_card_number: "154897654")
         transaction_6 = Transaction.create!(result: 0, invoice_id: invoice_1.id, credit_card_number: "154897654")
-        
+
         transaction_7 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_8 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_9 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_10 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
         transaction_11 = Transaction.create!(result: 0, invoice_id: invoice_2.id, credit_card_number: "547896542")
-        
+
         transaction_12 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
         transaction_13 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
         transaction_14 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
         transaction_15 = Transaction.create!(result: 0, invoice_id: invoice_3.id, credit_card_number: "487956542")
-        
+
         transaction_16 = Transaction.create!(result: 0, invoice_id: invoice_4.id, credit_card_number: "347895421")
         transaction_17 = Transaction.create!(result: 0, invoice_id: invoice_4.id, credit_card_number: "347895421")
         transaction_18 = Transaction.create!(result: 0, invoice_id: invoice_4.id, credit_card_number: "347895421")
@@ -223,4 +223,69 @@ RSpec.describe 'Merchant Show Dashboard' do
             expect(page).to_not have_content("Transactions: 3")
         end
     end
-end 
+#     Merchant Dashboard Items Ready to Ship
+#
+# As a merchant
+# When I visit my merchant dashboard
+# Then I see a section for "Items Ready to Ship"
+# In that section I see a list of the names of all of my items that
+# have been ordered and have not yet been shipped,
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
+#
+    it 'shows a list of items that have been ordered but not shipped' do
+        merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+        item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+        item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+        item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+        item_4 = Item.create!(name: "Axe", description: "Big Axe", unit_price: 1000, merchant_id: merchant_1.id )
+        item_5 = Item.create!(name: "Table Saw", description: "Steel, hand held", unit_price: 900, merchant_id: merchant_1.id )
+
+        customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+        customer_2 = Customer.create!(first_name: "Cindy", last_name: "Lou")
+        customer_3 = Customer.create!(first_name: "John", last_name: "Johnson")
+        customer_4 = Customer.create!(first_name: "Mary", last_name: "Vale")
+
+        invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_2 = Invoice.create!(status: 1, customer_id: customer_2.id)
+        invoice_3 = Invoice.create!(status: 1, customer_id: customer_3.id)
+        invoice_4 = Invoice.create!(status: 2, customer_id: customer_4.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 1, item_id: item_1.id, invoice_id: invoice_1.id)
+        invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
+        invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_3.id, invoice_id: invoice_1.id)
+        invoice_item_4 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_4.id, invoice_id: invoice_2.id)
+        invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+        invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+
+        visit "/merchants/#{merchant_1.id}/dashboard"
+
+        expect(page).to have_content("Items Ready to Ship")
+
+        within '#item0' do
+            expect(page).to have_content("Log")
+            expect(page).to have_content(invoice_1.id)
+            expect(page).to_not have_content("Saw")
+            expect(page).to have_content(invoice_2.id)
+
+            # click_on(invoice_1.id)
+
+            # expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
+        end
+
+        within '#item1' do
+          expect(page).to have_content("Saw")
+          expect(page).to have_content(invoice_1.id)
+          expect(page).to_not have_content("Log")
+          expect(page).to have_content(invoice_2.id)
+        end
+
+        within '#item2' do
+          expect(page).to have_content("Bench")
+          expect(page).to have_content(invoice_1.id)
+          expect(page).to_not have_content("Axe")
+          expect(page).to have_content(invoice_2.id)
+        end
+    end
+end

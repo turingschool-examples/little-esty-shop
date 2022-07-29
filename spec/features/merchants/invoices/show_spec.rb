@@ -224,6 +224,6 @@ RSpec.describe "merchants invoice show page" do
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_3.id}"
       expect(page).to have_content("Total Revenue: $8.50")
     end
-
   end
+
 end
