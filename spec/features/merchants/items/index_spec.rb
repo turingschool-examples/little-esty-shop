@@ -403,10 +403,25 @@ RSpec.describe 'Merchant Items Index' do
                                           invoice_id: invoice_6.id)
 
     visit "/merchants/#{@walmart.id}/items"
-    
+
     within '#number-1-revenue-earner' do
       expect(page).to have_content(invoice_item_6.created_at.to_date.strftime("%m/%d/%Y"))
     end
 
+    within '#number-2-revenue-earner' do
+      expect(page).to have_content(invoice_item_5.created_at.to_date.strftime("%m/%d/%Y"))
+    end
+
+    within '#number-3-revenue-earner' do
+      expect(page).to have_content(invoice_item_4.created_at.to_date.strftime("%m/%d/%Y"))
+    end
+
+    within '#number-4-revenue-earner' do
+      expect(page).to have_content(invoice_item_3.created_at.to_date.strftime("%m/%d/%Y"))
+    end
+
+    within '#number-5-revenue-earner' do
+      expect(page).to have_content(invoice_item_2.created_at.to_date.strftime("%m/%d/%Y"))
+    end
   end
 end
