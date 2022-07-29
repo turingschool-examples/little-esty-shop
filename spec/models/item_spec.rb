@@ -151,11 +151,7 @@ RSpec.describe Item, type: :model do
                                             result: 'success',
                                             invoice_id: invoice_6.id)
 
-      visit "/merchants/#{@walmart.id}/items"
-
-      within '#number-1-revenue-earner' do
-        expect(page).to have_content(invoice_item_6.created_at.to_date.strftime("%m/%d/%Y"))
-      end
+      expect(@marker.best_day(@marker.id)).to eq(invoice_item_2.created_at.to_date.strftime("%m/%d/%Y"))
     end
   end
 end
