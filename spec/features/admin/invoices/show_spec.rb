@@ -27,18 +27,12 @@ RSpec.describe 'Admin Invoices Show Page' do
 
     @invoice_1 = Invoice.create!( status: 'completed', 
                                   customer_id: @customer_1.id)
-    @invoice_1.id = 30
-    @invoice_1.save!
 
     @invoice_2 = Invoice.create!( status: 'cancelled', 
                                   customer_id: @customer_1.id)
-    @invoice_2.id = 20
-    @invoice_2.save!
     
     @invoice_3 = Invoice.create!( status: 'in progress', 
                                   customer_id: @customer_1.id)
-    @invoice_3.id = 40
-    @invoice_3.save!
 
     @invoice_item_1 = InvoiceItem.create!(quantity: 1, 
                                           unit_price: 5000, 
@@ -129,6 +123,31 @@ RSpec.describe 'Admin Invoices Show Page' do
 
     within '#invoice-details' do
       expect(page).to have_content('$550.00')
+    end
+  end
+
+  # User Story 36
+  # Admin Invoice Show Page: Update Invoice Status
+
+  # As an admin
+  # When I visit an admin invoice show page
+  # I see the invoice status is a select field
+  # And I see that the invoice's current status is selected
+  # When I click this select field,
+  # Then I can select a new status for the Invoice,
+  # And next to the select field I see a button to "Update Invoice Status"
+  # When I click this button
+  # I am taken back to the admin invoice show page
+  # And I see that my Invoice's status has now been updated
+  it 'has a select field for invoice status that can update the status and redirect the user' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    within "#invoice-details" do
+      expect(page).to have_content("#{@invoice_1.status.titlecase}")
+      select "completed", :from => "status"
+      click_on("Update Invoice Status")
+      expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+      expect(page).to have_content("completed")
     end
   end
 end
