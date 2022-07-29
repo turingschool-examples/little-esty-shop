@@ -35,3 +35,16 @@
   <% end %>
   </ul>
 </div>
+
+<div id="top-5-revenue-generated">
+  <h3>Top 5 Revenue Generators</h3>
+  <ol>
+  <% @merchant.top_5_revenue_generated.each_with_index do |item, index| %>
+    <div id="number-<%="#{index + 1}"%>-revenue-earner">
+      <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue.to_f/100) %> in sales
+        <p>Top day for <%= "#{item.name}" %> was <%= "#{item.best_day(item.id)}" %></p>
+      </li>
+    </div>
+  <% end %>
+  </ol>
+</div>
