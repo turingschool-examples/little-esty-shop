@@ -73,8 +73,6 @@ RSpec.describe 'Admin Merchants Invoices Index' do
   it 'has a list of all invoice IDs in the system with links to the admin invoice show page' do
     visit "/admin/invoices"
 
-    save_and_open_page
-
     within '#invoices-list' do
       expect(page).to have_content("Invoice #" + @invoice_1.id.to_s)
       expect(page).to have_link("Invoice ##{@invoice_1.id}", href: "/admin/invoices/#{@invoice_1.id}")
