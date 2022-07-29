@@ -26,4 +26,8 @@ class Merchant < ApplicationRecord
     .where.not("invoice_items.status = ?", 2)
     .order("invoices.created_at")
   end
+
+  def find_all_by_status(num)
+    items.where(status: num)
+  end
 end
