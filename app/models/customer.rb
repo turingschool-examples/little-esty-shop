@@ -6,9 +6,7 @@ class Customer < ApplicationRecord
 
     has_many :invoices
 
-
-    def self.top_five_customers(merchant_id)
-      require "pry"; binding.pry
+    def self.top_five_customers_by_transaction(merchant_id)
       joins(invoices: [:transactions, :items])
       .where('result = ? and merchant_id = ?', "success", merchant_id)
       .select("customers.*, count('transactions.result') AS successful_transactions")
