@@ -79,7 +79,6 @@ RSpec.describe Customer, type: :model do
       transaction_14 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_14.id )
       transaction_15 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_15.id )
       
-      expect(Customer.top_five_customers.count).to eq(5)
       expect(Customer.top_five_customers[0]).to eq(customer_5)
       expect(Customer.top_five_customers[4]).to eq(customer_1)
 
