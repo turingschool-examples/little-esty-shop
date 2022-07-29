@@ -7,6 +7,7 @@ RSpec.describe 'admin merchant new page' do
         expect(page).to_not have_content('Batman')
         
         visit '/admin/merchants/new'
+        save_and_open_page
 
         fill_in("Name", with: "Batman")
         click_on("Create")

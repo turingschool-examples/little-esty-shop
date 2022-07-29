@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'admin merchant index' do 
-    let(:first) {'<a href="/admin/merchants/988">Schroeder-Jerde</a>'} 
-    let(:second) {'<a href="/admin/merchants/989">Bobs Cranes</a>'}
+    let(:first) {'Schroeder-Jerde</a>'} 
+    let(:second) {'Bobs Cranes</a>'}
     it 'shows the name of each merchant in the system' do 
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
         merchant_2 = Merchant.create!(name: "Bobs Cranes", created_at: Time.now, updated_at: Time.now)

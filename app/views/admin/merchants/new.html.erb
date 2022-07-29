@@ -1,9 +1,6 @@
 <h1>Create a new merchant:</h1>
-<%= form_with url: "/admin/merchants", method: :post, local: true do |f| %>
-    <p><%= f.label :name, "Name: "%> 
-    <%= f.text_field :name %></p>
-    <%= f.submit "Create" %>
-<% end %>
+<%= render partial: 'form', locals: { path: '/admin/merchants', method: :post, button_text: 'Create'} %>
+
 
 
 <%# <%= form_with url: "/admin/merchants", method: :post, local: true do |f| %> 
