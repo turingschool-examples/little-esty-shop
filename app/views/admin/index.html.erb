@@ -1,0 +1,15 @@
+<header id="admin-header"><h1>Admin Dashboard</h1></header> 
+
+<div id="admin-links">
+  <p><%= link_to 'Merchants', '/admin/merchants' %></p>
+  <p><%= link_to 'Invoices', '/admin/invoices' %></p>
+</div>
+
+<div id="top-customers">
+<h2>Top Customers</h2>
+  <% Customer.top_customers.each_with_index do |customer, index| %>
+    <div id="customer-<%= index + 1%>">
+        <p><%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %></p>
+    </div>
+  <% end %>
+</div>

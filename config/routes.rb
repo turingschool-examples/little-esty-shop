@@ -17,4 +17,11 @@ Rails.application.routes.draw do
     resources :invoices, controller: 'merchant_invoices', only: %i[index show]
     resources :items, controller: 'merchant_items', only: %i[index edit show update new create]
   end
+
+  resources :admin, only: [:index]
+
+  namespace :admin do
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
+  end
 end
