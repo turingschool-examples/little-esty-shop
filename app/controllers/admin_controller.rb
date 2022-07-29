@@ -4,4 +4,8 @@ class AdminController < ApplicationController
     @invoices = Invoice.all
   end
 
+  def show
+    @invoice = Invoice.find(params[:id])
+  end
+
 end

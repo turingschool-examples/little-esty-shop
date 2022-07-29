@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#show'
 
   get '/admin/invoices', to: 'admin#index'
+  get '/admin/invoices/:id', to: 'admin#show'
 
 end
