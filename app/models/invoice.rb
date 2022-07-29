@@ -18,7 +18,6 @@ class Invoice < ApplicationRecord
     end
 
     def total_revenue
-    
         invoice_items
         .select('sum(invoice_items.unit_price * invoice_items.quantity)as total')
         .where(invoice_items:{invoice_id: id})

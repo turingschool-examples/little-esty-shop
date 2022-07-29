@@ -77,9 +77,13 @@ RSpec.describe 'admin invoice show page' do
 
 
         visit "admin/invoices/#{invoice_1.id}"
-
         expect(page).to have_content("Total Revenue: $1,330.00")
     
+    end
+
+
+    it " shows a select field for invoice status" do 
+
     end
 end
 
