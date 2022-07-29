@@ -3,7 +3,7 @@
     <% @merchants.enabled_merchants.each_with_index do |merchant, index| %>
         <div id = "e-merchant-<%=index %>">
             <%= link_to merchant.name, admin_merchant_path(merchant) %>
-            <%= button_to 'Disable', admin_merchant_path(merchant), method: :patch, form: {style: 'display:inline-block;'} %>
+            <%= button_to 'Disable', admin_merchant_path(merchant), method: :patch, params: { status: "disabled" }, form: {style: 'display:inline-block;'} %>
             <br>
             <br>
         </div>
@@ -15,7 +15,7 @@
     <% @merchants.disabled_merchants.each_with_index do |merchant, index| %>
         <div id = "d-merchant-<%=index %>">
             <%= link_to merchant.name, admin_merchant_path(merchant) %>
-            <%= button_to 'Enable', admin_merchant_path(merchant), method: :patch, form: {style: 'display:inline-block;'} %>
+            <%= button_to 'Enable', admin_merchant_path(merchant), method: :patch, params: { status: "enabled" }, form: {style: 'display:inline-block;'} %>
             <br>
             <br>
         </div>
