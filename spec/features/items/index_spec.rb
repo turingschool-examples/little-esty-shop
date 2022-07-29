@@ -7,11 +7,15 @@ RSpec.describe 'Merchant Items Index' do
     @merchant3 = Merchant.create!(name: "Yves Saint Laurent")
 
     @item1 = Item.create!(name: "T-shirts", description: "Blue" , unit_price: 12 , merchant_id: @merchant1.id, status: 1)
-    @item2 = Item.create!(name: "Shorts", description: "Green", unit_price: 45, merchant_id: @merchant2.id)
-    @item3 = Item.create!(name: "Chinos", description: "White", unit_price: 67, merchant_id: @merchant1.id)
-    @item4 = Item.create!(name: "Hat", description: "Multicolor", unit_price: 84, merchant_id: @merchant2.id)
-    @item5 = Item.create!(name:"Socks", description: "Grey", unit_price: 9, merchant_id: @merchant3.id)
-    @item6 = Item.create!(name: "Sneakers", description: "Bone", unit_price: 122 , merchant_id: @merchant3.id)
+    @item2 = Item.create!(name: "Shorts", description: "Green", unit_price: 45, merchant_id: @merchant2.id, status: 1)
+    @item3 = Item.create!(name: "Chinos", description: "White", unit_price: 67, merchant_id: @merchant1.id, status: 0)
+    @item4 = Item.create!(name: "Hat", description: "Multicolor", unit_price: 84, merchant_id: @merchant2.id, status: 0)
+    @item5 = Item.create!(name:"Socks", description: "Grey", unit_price: 9, merchant_id: @merchant3.id, status: 1)
+    @item6 = Item.create!(name: "Sneakers", description: "Bone", unit_price: 122 , merchant_id: @merchant3.id, status: 0)
+    @item7 = Item.create!(name: "Bolo Tie", description: "Turqoise", unit_price: 122 , merchant_id: @merchant1.id, status: 0)
+    @item8 = Item.create!(name: "Skinny Tie", description: "Black", unit_price: 122 , merchant_id: @merchant1.id, status: 1)
+    @item9 = Item.create!(name: "Pocket Square", description: "Orange", unit_price: 122 , merchant_id: @merchant1.id, status: 0)
+
   end
 
   describe 'As a merchant' do
@@ -60,6 +64,25 @@ RSpec.describe 'Merchant Items Index' do
         expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
         expect(page).to have_content("Chinos has been disabled.")
        
+      end
+
+      it 'will have a section for enabled items and a section for disabled items and I see each item is listed in the appropriate section' do
+         
+        visit "/merchants/#{@merchant1.id}/items"
+
+        expect(page).to have_content("Enabled Items")
+        
+        within "#enabled-items" do
+          expect(page).to have_content(@item3.name)
+          expect(page).to have_content(@item7.name)
+          expect(page).to have_content(@item9.name)
+        end
+
+        within "#disabled-items" do
+          expect(page).to have_content(@item1.name)
+          expect(page).to have_content(@item8.name)
+        end
+        save_and_open_page 
       end
     end
     describe 'when i click on the name of an item from the merchant items index page' do
