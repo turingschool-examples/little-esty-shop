@@ -113,28 +113,28 @@ RSpec.describe 'Merchant Show Dashboard' do
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         within '#customers0' do
-            expect(page).to have_content(customer_1.name)
-            expect(page).to_not have_content(customer_6.name)
+            expect(page).to have_content("David Smith")
+            expect(page).to_not have_content("Mark Dole")
         end
 
         within '#customers1' do
-            expect(page).to have_content(customer_2.name)
-            expect(page).to_not have_content(customer_6.name)
+            expect(page).to have_content("Cindy Lou")
+            expect(page).to_not have_content("David Smith")
         end
 
         within '#customers2' do
-            expect(page).to have_content(customer_3.name)
-            expect(page).to_not have_content(customer_6.name)
+            expect(page).to have_content("John Johnson")
+            expect(page).to_not have_content("Cindy Lou")
         end
 
         within '#customers3' do
-            expect(page).to have_content(customer_4.name)
-            expect(page).to_not have_content(customer_6.name)
+            expect(page).to have_content("Mary Vale")
+            expect(page).to_not have_content("John Johnson")
         end
 
         within '#customers4' do
-            expect(page).to have_content(customer_5.name)
-            expect(page).to_not have_content(customer_6.name)
+            expect(page).to have_content("Brian Long")
+            expect(page).to_not have_content("Mark Dole")
         end
     end
 end 
