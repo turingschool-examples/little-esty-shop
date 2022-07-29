@@ -162,11 +162,11 @@ RSpec.describe "merchant dashboard", type: :feature do
     within("#invoice-item") do
 
       expect(page).to have_content("Watch")
-      expect(page).to have_content("Beanie")
-      expect(page).to_not have_content("Crocs")
-      expect(invoice_item_1.id.to_s).to appear_before(invoice_item_4.id.to_s)
-      expect(invoice_item_4.id.to_s).to appear_before(invoice_item_2.id.to_s)
-      expect(page).to have_link("Invoice #{invoice_item.invoice.id}", href: "/merchants/#{merchant_1.id}/invoices/#{invoice_item.invoice.id}")
+      expect(page).to_not have_content("Beanie")
+      expect(page).to have_content("Crocs")
+      expect(page).to have_link("Invoice ##{invoice_item_1.invoice.id}", href: "/merchants/#{merchant_1.id}/invoices/#{invoice_item_1.invoice.id}")
+      expect(page).to have_link("Invoice ##{invoice_item_2.invoice.id}", href: "/merchants/#{merchant_1.id}/invoices/#{invoice_item_2.invoice.id}")
+
     end
   end
 
@@ -203,6 +203,7 @@ RSpec.describe "merchant dashboard", type: :feature do
       expect(page).to have_content("Saturday, March 17, 2012")
       expect(page).to have_content("Sunday, March 25, 2012")
       expect(page).to have_content("Monday, March 26, 2012")
+      save_and_open_page
     end
   end
 
