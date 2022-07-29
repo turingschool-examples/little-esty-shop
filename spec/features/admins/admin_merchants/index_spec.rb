@@ -192,4 +192,60 @@ RSpec.describe 'the admin_merchants index' do
       expect(current_path).to eq("/admin/merchants/#{merchant_5.id}")
     end
   end
+
+  it 'shows top merchants best day' do
+    customer = Customer.create!(first_name: "A", last_name: "A")
+
+    invoice_1 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-22 00:00:00 UTC") #failed
+    invoice_2 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-22 00:00:00 UTC")
+    invoice_3 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-25 00:00:00 UTC") #best day 7/25
+    invoice_4 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-25 00:00:00 UTC")
+    invoice_5 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-26 00:00:00 UTC")
+    invoice_6 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-28 00:00:00 UTC") #failed
+    invoice_7 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-25 00:00:00 UTC") #failed
+    invoice_8 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-25 00:00:00 UTC")
+    invoice_9 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-26 00:00:00 UTC") # m2 best day 7/26
+
+    transaction_1 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_1.id)
+    transaction_2 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_2.id)
+    transaction_3 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_3.id)
+    transaction_4 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
+    transaction_5 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_5.id)
+    transaction_6 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id)
+    transaction_7 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_7.id)
+    transaction_8 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_8.id)
+    transaction_9 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_9.id)
+      
+    merchant_1 = Merchant.create!(name: "Wizards Chest")
+    merchant_2 = Merchant.create!(name: "Pirates Chest")
+
+    item_1 = Item.create!(name: "A", description: "A", unit_price: 200, merchant_id: merchant_1.id)
+    item_2 = Item.create!(name: "B", description: "B", unit_price: 300, merchant_id: merchant_2.id)
+
+    invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: "pending", quantity: 90, unit_price: 100) # 9000 fail
+    invoice_item_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: "pending", quantity: 21, unit_price: 100) # 2100
+    invoice_item_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_3.id, status: "pending", quantity: 15, unit_price: 100) # 2500
+    invoice_item_4 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_4.id, status: "pending", quantity: 10, unit_price: 100) # ^
+    invoice_item_5 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_5.id, status: "pending", quantity: 20, unit_price: 100) # 2000
+    invoice_item_6 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_6.id, status: "pending", quantity: 90, unit_price: 100) # 9000 fail
+    invoice_item_7 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_7.id, status: "pending", quantity: 90, unit_price: 100) # 9000 fail
+    invoice_item_8 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_8.id, status: "pending", quantity: 40, unit_price: 100) # 4000
+    invoice_item_9 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_9.id, status: "pending", quantity: 5000, unit_price: 100) # 500000
+
+    visit '/admin/merchants'
+
+    within "#merchants_by_revenue" do
+      expect(merchant_2.name).to appear_before(merchant_1.name)
+    end
+
+    within "#merchants_revenue-#{merchant_1.id}" do
+      expect(page).to have_content(invoice_3.created_at.strftime("%m/%d/%y"))
+      expect(page).to have_content("Top day for")
+    end
+
+    within "#merchants_revenue-#{merchant_2.id}" do
+      expect(page).to have_content(invoice_9.created_at.strftime("%m/%d/%y"))
+      expect(page).to have_content("Top day for")
+    end
+  end
 end
