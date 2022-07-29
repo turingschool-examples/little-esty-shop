@@ -82,4 +82,23 @@ RSpec.describe 'the admin_merchants index' do
       expect(page).to_not have_button("Enable #{merchant_2.name}")
     end
   end
+
+  it 'can create new merchants' do
+    visit '/admin/merchants'
+
+    expect(page).to_not have_content("Cats!")
+    expect(page).to_not have_button("Enable Cats!")
+
+    expect(page).to have_link("Create Merchant")
+    click_link("Create Merchant")
+    expect(current_path).to eq("/admin/merchants/new")
+
+    fill_in 'name', with: 'Cats!'
+
+    click_on 'Submit'
+    expect(current_path).to eq("/admin/merchants")
+
+    expect(page).to have_content("Cats!")
+    expect(page).to have_button("Enable Cats!")
+  end
 end
