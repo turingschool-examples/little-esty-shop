@@ -24,10 +24,9 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     invoice_item_3 = InvoiceItem.create!(id: 3, item_id: item_3.id, invoice_id: invoice_3.id, status: 'pending', quantity: 1, unit_price: 984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_4 = InvoiceItem.create!(id: 4, item_id: item_4.id, invoice_id: invoice_4.id, status: 'pending', quantity: 1, unit_price: 84343, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices'
+    visit merchant_invoices_path(merchant_1.id)
 
     expect(page).to have_content("Invoices")
-    expect(page).to have_content("Pokemon Card Shop")
     expect(page).to have_content("#{invoice_1.id}")
     expect(page).to have_content("#{invoice_2.id}")
     expect(page).to have_content("#{invoice_3.id}")
@@ -51,11 +50,12 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices'
+    visit merchant_invoices_path(merchant_1.id)
 
     click_on "#{invoice_1.id}"
 
-    expect(current_path).to eq("/merchants/1/invoices/#{invoice_1.id}")
+
+    expect(current_path).to eq(merchant_invoice_path(merchant_1, invoice_1))
 
     expect(page).to have_content("10")
     expect(page).to have_content("in progress")
