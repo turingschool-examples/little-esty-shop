@@ -91,5 +91,6 @@ RSpec.describe Invoice, type: :model do
 
       expect(invoice_1.total_revenue[0].total).to eq(133000)
     end
+    
   end
 end
