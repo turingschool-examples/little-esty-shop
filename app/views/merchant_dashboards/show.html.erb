@@ -5,5 +5,6 @@
 <% @merchant.favorite_customers.each_with_index do |customer, index| %>
   <div id="customers<%= index %>">
     <h3><%= "#{customer.first_name} #{customer.last_name}" %></h3>
+    <p>Transactions: <%= customer.transactions_count %></p><br>
   </div>
 <% end %>

@@ -8,10 +8,10 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def favorite_customers
-    Customer.joins(invoices: :transactions)
+    customers.joins(invoices: :transactions)
     .select("customers.*, count(transactions.id) as transactions_count")
     .group("customers.id")
-    .where(transactions: {result: 0})
+    .where(transactions: {result: 0}, invoices:{status: 2})
     .order(transactions_count: :desc)
     .limit(5)
   end
