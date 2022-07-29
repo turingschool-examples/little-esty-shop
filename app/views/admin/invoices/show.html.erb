@@ -2,6 +2,7 @@
     <h1>Invoice #<%= @invoice.id %> </h1>
     <p>Status: <%= @invoice.status.titlecase %> </p>
     <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100)%></p>
     <h2>Customer: </h2>
     <p><%= @invoice.customer.first_name.titlecase  %> <%= @invoice.customer.last_name.titlecase  %> </p>
 </div>
