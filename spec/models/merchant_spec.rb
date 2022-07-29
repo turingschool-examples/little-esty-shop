@@ -135,5 +135,37 @@ RSpec.describe Merchant, type: :model do
 
       expect(merchant.five_most_popular_items).to eq([item_4, item_2, item_5, item_1, item_3])
     end
+
+    it 'has best revenue day' do
+      customer = Customer.create!(first_name: "A", last_name: "A")
+
+      invoice_1 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-22 00:00:00 UTC") #failed
+      invoice_2 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-22 00:00:00 UTC")
+      invoice_3 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-25 00:00:00 UTC") #best day 7/25
+      invoice_4 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-25 00:00:00 UTC")
+      invoice_5 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-26 00:00:00 UTC")
+      invoice_6 = Invoice.create!(status: "completed", customer_id: customer.id, created_at: "2022-07-28 00:00:00 UTC") #failed
+
+      transaction_1 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_1.id)
+      transaction_2 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_2.id)
+      transaction_3 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_3.id)
+      transaction_4 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
+      transaction_5 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_5.id)
+      transaction_6 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id)
+
+      merchant = Merchant.create!(name: "Wizards Chest")
+
+      item = Item.create!(name: "A", description: "A", unit_price: 200, merchant_id: merchant.id)
+
+      invoice_item_1 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_1.id, status: "pending", quantity: 90, unit_price: 100) # 9000 fail
+      invoice_item_2 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_2.id, status: "pending", quantity: 21, unit_price: 100) # 2100
+      invoice_item_3 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_3.id, status: "pending", quantity: 15, unit_price: 100) # 2500
+      invoice_item_4 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_4.id, status: "pending", quantity: 10, unit_price: 100) # ^
+      invoice_item_5 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_5.id, status: "pending", quantity: 20, unit_price: 100) # 2000
+      invoice_item_6 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_6.id, status: "pending", quantity: 90, unit_price: 100) # 9000 fail
+
+      expect(merchant.best_revenue_day).to eq(invoice_3.created_at.strftime("%m/%d/%y"))
+      expect(merchant.best_revenue_day).to eq(invoice_4.created_at.strftime("%m/%d/%y"))
+    end
   end
 end
