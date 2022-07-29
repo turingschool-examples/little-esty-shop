@@ -14,7 +14,7 @@
   <h3>Top Items</h3>
   <% @merchant.top_five_items.each do |item| %>
     <ul>
-      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - XXXXX in sales </li>
+      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%=  %> in sales </li>
     </ul>
   <% end %>
 </div>

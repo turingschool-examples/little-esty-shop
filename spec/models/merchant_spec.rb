@@ -62,7 +62,7 @@ RSpec.describe Merchant do
         invoice_item_11 = InvoiceItem.create!(item_id: table.id, invoice_id: invoice_6.id, quantity: 4, unit_price: 1, status: 2)
         invoice_item_12 = InvoiceItem.create!(item_id: table.id, invoice_id: invoice_7.id, quantity: 2, unit_price: 3, status: 2)
         invoice_item_13 = InvoiceItem.create!(item_id: jacks.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
-
+        binding.pry
         expect(merchant_1.top_five_items).to eq([spatula, table, spoon, computer, knife])
       end
     end
