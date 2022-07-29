@@ -1,0 +1,12 @@
+<h2>Create New Merchant</h2>
+
+<% flash.each do |type, msg| %>
+    <%= msg %>
+<% end %>
+
+<%= form_with url: admin_merchants_path, method: :post, local: true do |f| %>
+    <%= f.label :name, 'New Merchant Name' %>
+    <%= f.text_field :name %>
+
+    <%= f.submit 'Create New Merchant' %>
+<% end %>

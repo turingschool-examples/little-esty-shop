@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   namespace :admin do 
-    resources :merchants, only: [:index, :show, :edit, :update, :new]
+    resources :merchants, only: [:index, :show, :edit, :update, :new, :create]
   end
 
   resources :merchants, only: [:index]  do
