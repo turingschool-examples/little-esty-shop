@@ -1,0 +1,4 @@
+<% @invoices.each_with_index do |invoice, index| %>
+<div id="invoice-<%= index %>">
+   <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+<% end %>
