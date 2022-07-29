@@ -1,7 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'admin merchant index' do
-    it 'shows the name of each merchant in the system' do
+
+RSpec.describe 'admin merchant index' do 
+    let(:first) {'Schroeder-Jerde</a>'} 
+    let(:second) {'Bobs Cranes</a>'}
+    it 'shows the name of each merchant in the system' do 
+
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
         merchant_2 = Merchant.create!(name: "Bobs Cranes", created_at: Time.now, updated_at: Time.now)
         merchant_3 = Merchant.create!(name: "Joe-Schmo Railroads", created_at: Time.now, updated_at: Time.now)
@@ -153,8 +157,12 @@ RSpec.describe 'admin merchant index' do
         transaction_15 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_15.id )
 
         visit '/admin/merchants'
-
+        
         expect(page).to have_content("Top 5 Merchants:")
+    
+
+        expect(first).to appear_before(second)
+
 
         within ("#column2") do
             expect(page.all('.top_5_merchants')[0]).to have_content("Ali Baba - $8,000.00")
@@ -237,7 +245,10 @@ RSpec.describe 'admin merchant index' do
 
         visit '/admin/merchants'
 
-        within ("#column2") do
+
+
+        within ("#column2") do 
+
             expect(page.all('.top_5_merchants')[0]).to have_content("Top selling date for Ali Baba was Saturday, March 17, 2012")
             expect(page.all('.top_5_merchants')[1]).to have_content("Top selling date for Castanza George was Monday, March 26, 2012")
             expect(page.all('.top_5_merchants')[2]).to have_content("Top selling date for Allison Bugaboo was Sunday, March 25, 2012")

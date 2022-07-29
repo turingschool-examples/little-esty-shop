@@ -17,7 +17,7 @@ class Admin::MerchantsController < ApplicationController
         if params[:status] != nil 
             merchant.update(status: params[:status])
             redirect_to "/admin/merchants"
-        elsif params[:name] != nil && merchant.update(name: params[:name])
+        elsif merchant_params[:name] != nil && merchant.update(merchant_params)
             redirect_to "/admin/merchants/#{merchant.id}"
             flash[:alert] = "Your merchant has been updated."
         else 
@@ -33,4 +33,9 @@ class Admin::MerchantsController < ApplicationController
         merchant = Merchant.create(name: params[:name], created_at: Time.now, updated_at: Time.now)
         redirect_to "/admin/merchants"
     end 
+
+    private 
+    def merchant_params 
+        params.require(:merchant).permit(:name)
+    end
 end 

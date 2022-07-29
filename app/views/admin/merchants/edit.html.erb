@@ -1,8 +1,15 @@
 <h1>Edit <%= "#{@merchant.name}" %></h1>
-<%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f| %>
-    <div id="merchant_edit_name">
+<div id="merchant_edit_name">
+<%= render partial: 'form', locals: { path: "/admin/merchants/#{@merchant.id}", method: :patch, button_text: 'Update'} %>
+</div> 
+
+
+<%# <%= render partial: 'form', locals: { path: '/admin/merchants', method: :post, button_text: 'Create'} %> 
+
+<%# <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f| %>
+    <%# <div id="merchant_edit_name">
         <p><%= f.label :name, "Name: "%> 
-        <%= f.text_field :name, value:@merchant.name %></p>
-    </div>
-     <%= f.submit "Update" %>
-<% end %>
+        <%# <%= f.text_field :name, value:@merchant.name %></p>
+    <%# </div> %>
+     <%# <%= f.submit "Update" %> 
+<%# <% end %> 
