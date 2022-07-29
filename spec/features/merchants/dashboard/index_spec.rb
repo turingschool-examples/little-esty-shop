@@ -75,23 +75,23 @@ RSpec.describe 'Merchant Dashboard' do
     it 'displays the the top 5 customers that completed successful transactions for the merchant' do
       expect(page).to have_content(@customer_1.first_name)
       expect(page).to have_content(@customer_1.last_name)
-      expect(page).to have_content("Successful Transactions: 5")
+      expect(page).to have_content("Number of Purchases: 5")
 
       expect(page).to have_content(@customer_2.first_name)
       expect(page).to have_content(@customer_2.last_name)
-      expect(page).to have_content("Successful Transactions: 4")
+      expect(page).to have_content("Number of Purchases: 4")
 
       expect(page).to have_content(@customer_3.first_name)
       expect(page).to have_content(@customer_3.last_name)
-      expect(page).to have_content("Successful Transactions: 3")
+      expect(page).to have_content("Number of Purchases: 3")
 
       expect(page).to have_content(@customer_4.first_name)
       expect(page).to have_content(@customer_4.last_name)
-      expect(page).to have_content("Successful Transactions: 2")
+      expect(page).to have_content("Number of Purchases: 2")
 
       expect(page).to have_content(@customer_5.first_name)
       expect(page).to have_content(@customer_5.last_name)
-      expect(page).to have_content("Successful Transactions: 1")
+      expect(page).to have_content("Number of Purchases: 1")
 
       expect(page).to_not have_content(@customer_6.first_name)
       expect(page).to_not have_content(@customer_6.last_name)
