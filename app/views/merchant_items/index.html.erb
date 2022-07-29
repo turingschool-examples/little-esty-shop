@@ -12,5 +12,11 @@
 
 <div id="top-five-items">
   <h3>Top Items</h3>
-
+  <% @merchant.top_five_items.each do |item| %>
+    <ul>
+      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - XXXXX in sales </li>
+    </ul>
+  <% end %>
 </div>
+
+

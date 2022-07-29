@@ -121,12 +121,12 @@ RSpec.describe 'merchant items index page' do
       visit "/merchants/#{merchant_1.id}/items"
 
       within "#top-five-items" do 
-        expect('Bag of Money').to appear_before('Table')
-        expect('Table').to appear_before('Computer')
+        expect('Spatula').to appear_before('Table')
+        expect('Table').to appear_before('Spoon')
+        expect('Spoon').to appear_before('Computer')
         expect('Computer').to appear_before('Knife')
-        expect('Knife').to appear_before('Spatula')
-        expect(page).to have_content('Spatula')
-        expect(page).to_not have_content('Spoon')
+        expect(page).to have_content('Knife')
+        expect(page).to_not have_content('Bag of Money')
       end
     end
   end
