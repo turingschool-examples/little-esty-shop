@@ -1,5 +1,7 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
+  validates_presence_of :status 
+  enum status: [:enabled, :disabled]
 
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items 
