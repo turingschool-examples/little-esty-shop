@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe 'merchants invoice show page', type: :feature do
 
   it "has all of the item info from an invoice" do
@@ -83,14 +82,38 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     item3 = Item.create!(name: "Junk", description: 'junk you should want', unit_price: 500, merchant_id: merchant3.id)
 
     customer1 = Customer.create!(first_name: "Parker", last_name: "Thomson")
+    invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
+    invoice2 = Invoice.create!(status: "cancelled", customer_id: customer1.id)
+
     customer2 = Customer.create!(first_name: "Shirley", last_name: "DeCesari")
     invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
     invoice2 = Invoice.create!(status: "cancelled", customer_id: customer2.id)
+
     invoice3 = Invoice.create!(status: "in progress", customer_id: customer1.id)
     transaction1 = Transaction.create!(credit_card_number: "123456789123456789", result: "success", invoice_id: invoice1.id)
     invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item1.id, invoice_id: invoice1.id)
     invoice_item2 = InvoiceItem.create!(quantity: 2, unit_price: item2.unit_price, status: "pending", item_id: item2.id, invoice_id: invoice2.id)
     invoice_item3 = InvoiceItem.create!(quantity: 3, unit_price: item3.unit_price, status: "packaged", item_id: item3.id, invoice_id: invoice3.id)
+
+    visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
+
+    within "div#revenue" do
+      expect(page).to have_content("Total Revenue: 1000")
+      expect(page).to_not have_content("2000")
+    end
+
+    visit "/merchants/#{merchant2.id}/invoices/#{invoice2.id}"
+    within "div#revenue" do
+      expect(page).to have_content("Total Revenue: 4000")
+      expect(page).to_not have_content("1000")
+    end
+
+    visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
+    within "div#revenue" do
+      expect(page).to have_content("Total Revenue: 1500")
+      expect(page).to_not have_content("1000")
+      expect(page).to_not have_content("4000")
+    end
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
