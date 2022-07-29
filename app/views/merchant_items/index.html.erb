@@ -4,6 +4,28 @@
   <p><%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %></p>
 </div>
 
+<h3>Enabled Items for <%= @merchant.name %></h3>
+
+<div id="enabled_items">
+  <% @merchant.items.each do |item| %>
+    <% if item.status == "Enabled" %>
+      <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<h3>Disabled Items for <%= @merchant.name %></h3>
+
+<div id="disabled_items">
+  <% @merchant.items.each do |item| %>
+    <% if item.status == "Disabled" %>
+      <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<h3>Current Stock Overall</h3>
+
 <% @merchant.items.each do |item| %>
   <div id="item-<%= item.id %>">
     <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>&emsp; Status: <%= item.status %>
