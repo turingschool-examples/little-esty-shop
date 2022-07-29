@@ -228,7 +228,7 @@ RSpec.describe 'merchant items index page' do
       within "#top-five-items" do 
         click_on 'Spatula'
 
-        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{spatula.id}")
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{spatula.id}")
       end
     end
   end
