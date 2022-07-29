@@ -41,4 +41,12 @@ class Merchant < ApplicationRecord
   def total_revenue(invoice_id)
     get_invoice_items(invoice_id).sum("quantity * unit_price")
   end
+
+  def self.enabled_merchants
+    Merchant.where("status = ?", 0)
+  end
+
+  def self.disabled_merchants
+    Merchant.where("status = ?", 1)
+  end
 end
