@@ -237,7 +237,6 @@ RSpec.describe 'admin merchant index' do
 
         visit '/admin/merchants'
 
-        save_and_open_page 
 
         within ("#column2") do 
             expect(page.all('.top_5_merchants')[0]).to have_content("Top selling date for Ali Baba was Saturday, March 17, 2012")

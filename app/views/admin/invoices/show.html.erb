@@ -1,5 +1,11 @@
 <h1>Invoice ID: <%= @invoice.id %></h1>
 <h3>Total Revenue: <%= number_to_currency(@invoice.total_revenue[0].total / 100) %> </h3>
+
+<%= form_with model: @invoice, url:"/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+    <%= f.select :status, [['completed'], ['in progress'], ['cancelled']] %>
+    <%= f.submit 'Update invoice status' %>
+<% end %>
+
 <p>Invoice status: <%= @invoice.status %> </p>
 <p>Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
 <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </p>
