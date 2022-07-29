@@ -2,7 +2,7 @@
 
 <h1 id="myHeader">Little Esty Shop</h1>
 
-<div id="merchantLinks">
+<div id="links">
   <span id="merchantName">Poke Retirement homes</span>
     <span class="links">Dashboard</span>
     <span class="links">My Items</span>
@@ -12,10 +12,11 @@
 <h3 id="myInvoices">My Invoices</h3>
   <div id = "merchant">
   <%= "#{@merchant.name}" %>
-  <% @merchant.merchant_invoice_by_item_id.each do |id| %>
+  <% @merchant.merchant_invoice_by_item_id.each do |id| %><br>
   <br>Invoice ID: <%= link_to "#{id}", "/merchants/#{@merchant.id}/invoices/#{id}" %>
   </div>
+  </div>
   <% end %>
-</div>
+
 
 
