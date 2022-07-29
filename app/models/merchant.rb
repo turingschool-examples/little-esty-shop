@@ -26,6 +26,14 @@ class Merchant < ApplicationRecord
     .order("invoices.created_at")
   end
 
+  def self.return_by_status_enabled
+    where("status = ?", 0)
+  end
+
+  def self.return_by_status_disabled
+    where("status = ?", 1)
+  end
+
   def five_most_popular_items
     items
     .joins(:invoice_items, :transactions)

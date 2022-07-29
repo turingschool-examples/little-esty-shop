@@ -72,7 +72,7 @@ RSpec.describe 'the admin index' do
     invoice_item_6 = InvoiceItem.create!(item_id: item.id, invoice_id: invoice_6.id, status: "shipped", quantity: 5, unit_price: 100)
 
   visit "/admin"
-
+  
   within "#top-customers" do
     expect(page).to have_content("Top Customers")
     expect(page).to have_content("1. F F - 5 purchases")

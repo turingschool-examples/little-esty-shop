@@ -32,33 +32,18 @@ RSpec.describe 'the admin_merchants index' do
     expect(page).to_not have_content("Powell's City of Books")
   end
 
-  it 'shows status' do
-    merchant_1 = Merchant.create!(name: "Wizards Chest")
-    merchant_2 = Merchant.create!(name: "Tattered Cover", status: "disabled")
-
-    visit '/admin/merchants'
-
-    within "#merchant-#{merchant_1.id}" do
-      expect(page).to have_content("Status: enabled")
-    end
-
-    within "#merchant-#{merchant_2.id}" do
-      expect(page).to have_content("Status: disabled")
-    end
-  end
-
   it "has button to enable/disable status" do
     merchant_1 = Merchant.create!(name: "Wizards Chest", status: "disabled")
     merchant_2 = Merchant.create!(name: "Tattered Cover")
 
     visit '/admin/merchants'
 
-    within "#merchant-#{merchant_1.id}" do
+    within "#merchant_disabled-#{merchant_1.id}" do
       expect(page).to have_button("Enable #{merchant_1.name}")
       expect(page).to_not have_button("Disable #{merchant_1.name}")
     end
 
-    within "#merchant-#{merchant_2.id}" do
+    within "#merchant_enabled-#{merchant_2.id}" do
       expect(page).to have_button("Disable #{merchant_2.name}")
       expect(page).to_not have_button("Enable #{merchant_2.name}")
     end
@@ -69,23 +54,51 @@ RSpec.describe 'the admin_merchants index' do
 
     visit '/admin/merchants'
 
-    within "#merchant-#{merchant_1.id}" do
+    within "#merchant_disabled-#{merchant_1.id}" do
       expect(page).to have_button("Enable #{merchant_1.name}")
-      expect(page).to have_content("Status: disabled")
     end
 
     click_button("Enable #{merchant_1.name}")
     expect(current_path).to eq('/admin/merchants')
 
-    within "#merchant-#{merchant_1.id}" do
+    within "#merchant_enabled-#{merchant_1.id}" do
       expect(page).to have_button("Disable #{merchant_1.name}")
-      expect(page).to have_content("Status: enabled")
     end
   end
-# As an admin,
-# When I visit the admin merchants index
-# Then next to each merchant name I see a button to disable or enable that merchant.
-# When I click this button
-# Then I am redirected back to the admin merchants index
-# And I see that the merchant's status has changed
+
+  it 'sort merchants into groups by status' do
+    merchant_1 = Merchant.create!(name: "Wizards Chest")
+    merchant_2 = Merchant.create!(name: "Powell's City of Books", status: "disabled")
+
+    visit '/admin/merchants'
+
+    within "#merchant_disabled-#{merchant_2.id}" do
+      expect(page).to have_button("Enable #{merchant_2.name}")
+      expect(page).to_not have_button("Enable #{merchant_1.name}")
+    end
+
+    within "#merchant_enabled-#{merchant_1.id}" do
+      expect(page).to have_button("Disable #{merchant_1.name}")
+      expect(page).to_not have_button("Enable #{merchant_2.name}")
+    end
+  end
+
+  it 'can create new merchants' do
+    visit '/admin/merchants'
+
+    expect(page).to_not have_content("Cats!")
+    expect(page).to_not have_button("Enable Cats!")
+
+    expect(page).to have_link("Create Merchant")
+    click_link("Create Merchant")
+    expect(current_path).to eq("/admin/merchants/new")
+
+    fill_in 'name', with: 'Cats!'
+
+    click_on 'Submit'
+    expect(current_path).to eq("/admin/merchants")
+
+    expect(page).to have_content("Cats!")
+    expect(page).to have_button("Enable Cats!")
+  end
 end
