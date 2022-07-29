@@ -1,22 +1,19 @@
 <h1>Merchants</h1>
 
-<% @merchants.each do |merchant| %>
-  <div id="merchant-<%=merchant.id%>">
+<p> <%= link_to "Create Merchant", "/admin/merchants/new" %> </p>
 
-    <% if merchant.status == "enabled" %>
+<h2>Enabled Merchants</h2>
+<% @merchants.return_by_status_enabled.each do |merchant| %>
+  <div id="merchant_enabled-<%=merchant.id%>">
+    <p><%= link_to "#{merchant.name}" , "/admin/merchants/#{merchant.id}"%>
+      <%= button_to "Disable #{merchant.name}", "/admin/merchants?disable=#{params[:disable]}", method: :patch, local: true, params: {id: merchant.id}%> </p>
+  </div>
+<% end %>
 
-      <p><%= link_to "#{merchant.name}" , "/admin/merchants/#{merchant.id}"%>
-        <%= button_to "Disable #{merchant.name}", "/admin/merchants?disable=#{params[:disable]}", method: :patch, local: true, params: {id: merchant.id}%> </p>
-
-      <p>Status: <%="#{merchant.status}"%></p>
-
-    <% elsif merchant.status == "disabled" %>
-
+<h2>Disabled Merchants</h2>
+<% @merchants.return_by_status_disabled.each do |merchant| %>
+  <div id="merchant_disabled-<%=merchant.id%>">
     <p><%= link_to "#{merchant.name}" , "/admin/merchants/#{merchant.id}"%>
       <%= button_to "Enable #{merchant.name}", "/admin/merchants?enable=#{params[:enable]}", method: :patch, local: true, params: {id: merchant.id}%> </p>
-
-    <p>Status: <%="#{merchant.status}"%></p>
-
-    <% end %>
-  </div>
+    </div>
 <% end %>

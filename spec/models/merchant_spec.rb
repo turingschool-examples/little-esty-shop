@@ -38,7 +38,7 @@ RSpec.describe Merchant, type: :model do
       transaction_19 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
       transaction_20 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
       transaction_21 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
-      
+
       merchant = Merchant.create!(name: "Wizards Chest")
 
       item = Item.create!(name: "A", description: "A", unit_price: 100, merchant_id: merchant.id)
@@ -79,6 +79,24 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.ready_to_ship).to eq([invoice_item_1, invoice_item_2, invoice_item_5])
       expect(merchant.ready_to_ship.first.item).to eq(item_1)
       expect(merchant.ready_to_ship.last.invoice).to eq(invoice_5)
+    end
+
+    it 'can return_by_status_enabled' do
+      merchant_1 = Merchant.create!(name: "Wizards Chest")
+      merchant_2 = Merchant.create!(name: "Tattered Cover")
+      merchant_3 = Merchant.create!(name: "Powell's City of Books", status: 'disabled')
+
+      expect(Merchant.all.return_by_status_enabled).to eq([merchant_1, merchant_2])
+      expect(Merchant.all.return_by_status_enabled).to_not eq([merchant_3])
+    end
+
+    it 'can return_by_status_disabled' do
+      merchant_1 = Merchant.create!(name: "Wizards Chest")
+      merchant_2 = Merchant.create!(name: "Tattered Cover", status: 'disabled')
+      merchant_3 = Merchant.create!(name: "Powell's City of Books", status: 'disabled')
+
+      expect(Merchant.all.return_by_status_disabled).to eq([merchant_2, merchant_3])
+      expect(Merchant.all.return_by_status_disabled).to_not eq([merchant_1])
     end
 
     it 'has five_most_popular_items' do
