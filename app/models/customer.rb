@@ -5,4 +5,15 @@ class Customer < ApplicationRecord
     validates_presence_of :updated_at
 
     has_many :invoices
+
+
+    def self.top_five_customers(merchant_id)
+      require "pry"; binding.pry
+      joins(invoices: [:transactions, :items])
+      .where('result = ? and merchant_id = ?', "success", merchant_id)
+      .select("customers.*, count('transactions.result') AS successful_transactions")
+      .group("customers.id")
+      .order(successful_transactions: :desc)
+      .limit(5)
+    end
 end
