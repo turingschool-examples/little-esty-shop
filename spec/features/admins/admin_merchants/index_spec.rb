@@ -151,7 +151,18 @@ RSpec.describe 'the admin_merchants index' do
       expect(page).to have_content(merchant_3.name)
       expect(page).to have_content(merchant_4.name)
       expect(page).to have_content(merchant_5.name)
+      expect(page).to have_no_content(merchant_6.name)
     end
+
+    within "#merchants_by_revenue" do
+      expect(merchant_4.name).to appear_before(merchant_2.name)
+      expect(merchant_2.name).to appear_before(merchant_5.name)
+      expect(merchant_5.name).to appear_before(merchant_1.name)
+      expect(merchant_1.name).to appear_before(merchant_3.name)
+    end
+
+
+    
 
     # within "#merchant_disabled-#{merchant_2.id}" do
     # expect(page).to_not have_content("Cats!")
