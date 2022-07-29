@@ -349,7 +349,7 @@ RSpec.describe 'merchant items index page' do
       end
     end
 
-    xit 'shows the top selling date for each item' do 
+    it 'shows the top selling date for each item' do 
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
 
@@ -398,9 +398,9 @@ RSpec.describe 'merchant items index page' do
       invoice_item_13 = InvoiceItem.create!(item_id: jacks.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
 
       visit "/merchants/#{merchant_1.id}/items"
-
+      save_and_open_page
       within "#top-five-items" do 
-        expect(page).to have_content("Top selling date for #{spatula.name} was <date with most sales>")
+        expect(page).to have_content("Top selling date for #{spatula.name} was [])
       end
     end
   end
