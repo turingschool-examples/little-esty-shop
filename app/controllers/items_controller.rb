@@ -1,15 +1,18 @@
 class ItemsController < ApplicationController
+  before_action :find_merchant, only: [:index, :edit, :show, :update]
+  before_action :find_item, only: [:edit, :show, :update]
+
 
   def index
-    @merchant = Merchant.find(params[:id])
+    @items = @merchant.items
   end
 
   def show
-    @item = Item.find(params[:id])
+    
   end
 
   def edit
-    @item = Item.find(params[:id])
+   
   end
 
   def update

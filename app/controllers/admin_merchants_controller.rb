@@ -11,7 +11,6 @@ class AdminMerchantsController < ApplicationController
       merchant.save
     end
   end
-
   def show
     @merchant = Merchant.find(params[:id])
   end

@@ -15,7 +15,7 @@ RSpec.describe 'Invoice Show', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices/10'
+    visit merchant_invoice_path(merchant_1, invoice_1)
 
     expect(page).to have_content("10")
     expect(page).to have_content("in progress")
@@ -41,7 +41,7 @@ RSpec.describe 'Invoice Show', type: :feature do
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_3 = InvoiceItem.create!(id: 3, item_id: item_3.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices/10'
+    visit merchant_invoice_path(merchant_1, invoice_1)
 
     within "#item_invoice-#{invoice_item_1.id}" do
       expect(page).to have_content("Charizard Rare")
@@ -76,7 +76,7 @@ RSpec.describe 'Invoice Show', type: :feature do
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'pending', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_3 = InvoiceItem.create!(id: 3, item_id: item_3.id, invoice_id: invoice_2.id, status: 'pending', quantity: 1, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices/10'
+    visit merchant_invoice_path(merchant_1, invoice_1)
 
     expect(page).to have_content("Total Revenue: $49,920.00")
     expect(page).to have_no_content("Total Revenue: $12.30")
@@ -95,7 +95,7 @@ RSpec.describe 'Invoice Show', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 3, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'packaged', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices/10'
+    visit merchant_invoice_path(merchant_1, invoice_1)
 
     within("#item_invoice-#{invoice_item_1.id}") do
       expect(page).to have_select(:status, selected: "pending")
@@ -119,7 +119,7 @@ RSpec.describe 'Invoice Show', type: :feature do
     invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 3, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'packaged', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
-    visit '/merchants/1/invoices/10'
+    visit merchant_invoice_path(merchant_1, invoice_1)
 
     within("#item_invoice-#{invoice_item_1.id}") do
       expect(page).to have_select(:status, selected: "pending")
