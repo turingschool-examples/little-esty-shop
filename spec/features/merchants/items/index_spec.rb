@@ -313,4 +313,100 @@ RSpec.describe 'Merchant Items Index' do
       end
     end
   end
+
+  it 'next to each of the 5 most popular items I see the date with the most sales for each item' do
+    blake = Customer.create!( first_name: "Blake",
+                                  last_name: "Saylor")
+
+    invoice_1 = Invoice.create!(status: 1,
+                                customer_id: blake.id)
+
+    invoice_2 = Invoice.create!(status: 1,
+                                customer_id: blake.id)
+
+    invoice_3 = Invoice.create!(status: 1,
+                                customer_id: blake.id)
+
+    invoice_4 = Invoice.create!(status: 1,
+                                customer_id: blake.id)
+
+    invoice_5 = Invoice.create!(status: 1,
+                                customer_id: blake.id)
+
+    invoice_6 = Invoice.create!(status: 1,
+                                customer_id: blake.id)
+
+    invoice_item_1 = InvoiceItem.create!(quantity: 1,
+                                          unit_price: 200,
+                                          status: 'shipped',
+                                          item_id: @pencil.id,
+                                          invoice_id: invoice_1.id)
+
+    invoice_item_2 = InvoiceItem.create!(quantity: 2,
+                                          unit_price: 300,
+                                          status: 'shipped',
+                                          item_id: @marker.id,
+                                          invoice_id: invoice_2.id)
+
+    invoice_item_3 = InvoiceItem.create!(quantity: 3,
+                                          unit_price: 400,
+                                          status: 'shipped',
+                                          item_id: @eraser.id,
+                                          invoice_id: invoice_3.id)
+
+    invoice_item_4 = InvoiceItem.create!(quantity: 4,
+                                          unit_price: 500,
+                                          status: 'shipped',
+                                          item_id: @ruler.id,
+                                          invoice_id: invoice_4.id)
+
+    invoice_item_5 = InvoiceItem.create!(quantity: 5,
+                                          unit_price: 600,
+                                          status: 'shipped',
+                                          item_id: @folder.id,
+                                          invoice_id: invoice_5.id)
+
+    invoice_item_6 = InvoiceItem.create!(quantity: 6,
+                                          unit_price: 700,
+                                          status: 'shipped',
+                                          item_id: @raincoat.id,
+                                          invoice_id: invoice_6.id)
+
+    transaction_1 = Transaction.create!( credit_card_number: '1234',
+                                          credit_card_expiration_date: 'never',
+                                          result: 'success',
+                                          invoice_id: invoice_1.id)
+
+    transaction_2 = Transaction.create!( credit_card_number: '1234',
+                                          credit_card_expiration_date: 'never',
+                                          result: 'success',
+                                          invoice_id: invoice_2.id)
+
+    transaction_3 = Transaction.create!( credit_card_number: '1234',
+                                          credit_card_expiration_date: 'never',
+                                          result: 'success',
+                                          invoice_id: invoice_3.id)
+
+    transaction_4 = Transaction.create!( credit_card_number: '1234',
+                                          credit_card_expiration_date: 'never',
+                                          result: 'success',
+                                          invoice_id: invoice_4.id)
+
+    transaction_5 = Transaction.create!( credit_card_number: '1234',
+                                          credit_card_expiration_date: 'never',
+                                          result: 'success',
+                                          invoice_id: invoice_5.id)
+
+    transaction_6 = Transaction.create!( credit_card_number: '1234',
+                                          credit_card_expiration_date: 'never',
+                                          result: 'success',
+                                          invoice_id: invoice_6.id)
+
+    visit "/merchants/#{@walmart.id}/items"
+    
+    within '#number-1-revenue-earner' do
+      expect(page).to have_content(invoice_item_6.created_at.to_date.strftime("%m/%d/%Y"))
+    end
+
+  end
 end
