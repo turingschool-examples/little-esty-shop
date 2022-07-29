@@ -21,5 +21,4 @@ class Merchant < ApplicationRecord
     .where(invoice_items: {status: :packaged }, items: {merchant_id: id})
     .order("invoices.created_at")
   end
-
 end

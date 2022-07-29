@@ -1,3 +1,8 @@
+/*
+*= require_tree .
+*= require_self
+*/
+
 .navbar ul {
   text-align: right;
   margin-left: 0;

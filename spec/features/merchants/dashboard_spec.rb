@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.describe 'the merchant dashboard' do
   it 'shows the name of the merchant' do
     merchant1 = Merchant.create!(name: 'Fake Merchant')
+    merchant2 = Merchant.create!(name: 'Another Merchant')
 
     visit "/merchants/#{merchant1.id}/dashboard"
 
     expect(page).to have_content('Fake Merchant')
+    expect(page).to_not have_content('Another Merchant')
   end
 
   it 'has links to the merchants items index and merchant invoices index' do
@@ -25,7 +27,7 @@ RSpec.describe 'the merchant dashboard' do
 
     item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
     item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
-    item3 = merchant1.items.create!(name: 'Blah', description: 'bs', unit_price: 98324)
+    item3 = merchant2.items.create!(name: 'Blah', description: 'bs', unit_price: 98324)
 
     customer1 = Customer.create!(first_name: 'Bob', last_name: 'Smith')
 
@@ -37,6 +39,7 @@ RSpec.describe 'the merchant dashboard' do
     invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 4, unit_price: 43434, status: 1)
     invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 0)
     invoice_item4 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 2)
+    invoice_item5 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 1)
 
     visit "/merchants/#{merchant1.id}/dashboard"
 
@@ -120,7 +123,7 @@ RSpec.describe 'the merchant dashboard' do
     transaction27 = Transaction.create!(invoice_id: invoice8.id, credit_card_number: 2629, credit_card_expiration_date: 1127, result: 1 )
 
     visit "/merchants/#{merchant1.id}/dashboard"
-
+    
     expect(current_path).to eq("/merchants/#{merchant1.id}/dashboard")
     expect(page).to have_content("Favorite Customers")
     expect(page).to have_content("Robert Smith with 6 transactions")
