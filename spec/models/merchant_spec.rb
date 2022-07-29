@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:status) }
+    it { should define_enum_for(:status) }
   end
 
   describe 'relationships' do
@@ -17,7 +19,29 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'class methods' do
-    
+    describe '#enabled_merchants' do 
+      it 'returns only the enabled merchants' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+
+        expect(Merchant.enabled_merchants).to eq([merchant_1, merchant_2, merchant_4])
+      end
+    end
+
+    describe '#disabled_merchants' do 
+      it 'returns only the disabled merchants' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+
+        expect(Merchant.disabled_merchants).to eq([merchant_3])
+      end
+    end
   end
 
   describe 'instance methods' do
