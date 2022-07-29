@@ -71,4 +71,35 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to_not have_content(merchant_2.name)
         expect(page).to_not have_content(merchant_3.name)
     end
+
+    # As an admin,
+    # When I visit the admin merchants index
+    # Then next to each merchant name I see a button to disable or enable that merchant.
+    it 'has buttons to disable or enable Merchants' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+
+        visit admin_merchants_path
+
+        within("#enabled") do 
+            expect(page).to have_content merchant_1.name 
+            expect(page).to have_content merchant_2.name 
+            expect(page).to have_content merchant_4.name 
+            expect(page).to_not have_content merchant_3.name
+        end
+
+        within("#disabled") do 
+            expect(page).to have_content merchant_3.name 
+            expect(page).to_not have_content merchant_1
+            expect(page).to_not have_content merchant_2
+            expect(page).to_not have_content merchant_4
+        end
+    end
+
+    # When I click this button
+    # Then I am redirected back to the admin merchants index
+    # And I see that the merchant's status has changed
 end

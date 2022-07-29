@@ -1,8 +1,16 @@
-<h4>Enabled Merchants</h4>
 
-<% @merchants.each_with_index do |merchant, index| %>
-    <div id = "merchant-<%=index %>">
-        <%= link_to merchant.name, admin_merchant_path(merchant) %>
-        <br>
-    </div>
-<% end %>
+
+<div id = 'enabled'>
+<h4>Enabled Merchants</h4>
+    <% @merchants.each_with_index do |merchant, index| %>
+        <div id = "merchant-<%=index %>">
+            <%= link_to merchant.name, admin_merchant_path(merchant) %>
+            <br>
+        </div>
+    <% end %>
+</div>
+
+<div id = 'disabled'>
+<h4>Disabled Merchants</h4>
+
+</div>
