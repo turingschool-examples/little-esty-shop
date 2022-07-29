@@ -19,15 +19,15 @@ RSpec.describe 'Merchant Item Index' do
                 expect(page).to_not have_content(@bat.name)
             end
 
-            it "is able to enable and disable a item and take you back to the index page" do
-              visit merchant_items_path(@merchant1.id)
-
-              within("#item-#{@hammer.name}") do
-                expect(page).to have_content("Status: #{@hammer.status}")
-                click_button 'Enable'
-                expect(current_path).to eq(merchant_items_path(@merchant1.id))
-              end
-            end
+            # it "is able to enable and disable a item and take you back to the index page" do
+            #   visit merchant_items_path(@merchant1.id)
+            #
+            #   within("#item-#{@hammer.name}") do
+            #     expect(page).to have_content("Status: #{@hammer.status}")
+            #     click_button 'Enable'
+            #     expect(current_path).to eq(merchant_items_path(@merchant1.id))
+            #   end
+            # end
 
             it "is able to create a new item" do
               visit merchant_items_path(@merchant1.id)

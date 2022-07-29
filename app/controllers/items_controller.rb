@@ -17,16 +17,24 @@ class ItemsController < ApplicationController
         redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
         flash.notice = "Item has been successfully updated"
     end
-    
-    # def update_status
-    #     item = Item.find(params[:id])
-    #     item.update_status(item_params)
-    #     redirect_to request.referrer
-    #     flash.notice = "Item status has been successfully updated"
-    # end
+
+    def new
+
+    end
+
+    def create
+      merchant = Merchant.find(params[:merchant_id])
+      item = merchant.items.new(item_params)
+      if item.save
+        redirect_to merchant_items_path
+      else
+        redirect_to new_merchant_items_path
+        flash[:error] = "Unable to create items."
+      end
+    end
 
     private
     def item_params
-        params.permit(:name, :unit_price, :description)
+        params.permit(:name, :unit_price, :description, )
     end
 end
