@@ -94,20 +94,41 @@ RSpec.describe Merchant, type: :model do
 
   it 'calculates items ready to ship' do
     merchant1 = Merchant.create!(name: 'Fake Merchant')
+    merchant2 = Merchant.create!(name: 'Another Merchant')
 
     item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
     item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
+    item3 = merchant1.items.create!(name: 'knife', description: 'kitchen essential', unit_price: 28839)
+    item4 = merchant1.items.create!(name: 'football', description: 'sports', unit_price: 299839)
+    item5 = merchant1.items.create!(name: 'glasses', description: 'glassware', unit_price: 134634)
+    item6 = merchant1.items.create!(name: 'fridge', description: 'applicance', unit_price: 288391234)
+    item7 = merchant2.items.create!(name: 'chair', description: 'furniture', unit_price: 29)
 
-    customer1 = Customer.create!(first_name: 'Bob', last_name: 'Smith')
+    customer1 = Customer.create!(first_name: 'Robert', last_name: 'Smith')
+    customer2 = Customer.create!(first_name: 'Suzie', last_name: 'Hill')
+    customer3 = Customer.create!(first_name: 'Roger', last_name: 'Mathis')
+    customer4 = Customer.create!(first_name: 'Jimmy', last_name: 'Ray')
+    customer5 = Customer.create!(first_name: 'Molly', last_name: 'Dolly')
+    customer6 = Customer.create!(first_name: 'Sara', last_name: 'Nohaira')
+    customer7 = Customer.create!(first_name: 'Murray', last_name: 'Brandt')
 
     invoice1 = customer1.invoices.create!(status: 2)
-    invoice2 = customer1.invoices.create!(status: 2)
-    invoice3 = customer1.invoices.create!(status: 0)
+    invoice2 = customer2.invoices.create!(status: 2)
+    invoice3 = customer3.invoices.create!(status: 2)
+    invoice4 = customer4.invoices.create!(status: 2)
+    invoice5 = customer5.invoices.create!(status: 2)
+    invoice6 = customer6.invoices.create!(status: 2)
+    invoice7 = customer1.invoices.create!(status: 1)
+    invoice8 = customer7.invoices.create!(status: 2)
 
     invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 4, unit_price: 43434, status: 1)
-    invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 4, unit_price: 43434, status: 1)
-    invoice_item3 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 0)
-    invoice_item4 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice3.id, quantity: 4, unit_price: 43434, status: 2)
+    invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 5, unit_price: 87654, status: 1)
+    invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, quantity: 6, unit_price: 65666, status: 0)
+    invoice_item4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, quantity: 7, unit_price: 65666, status: 2)
+    invoice_item5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id, quantity: 8, unit_price: 65666, status: 2)
+    invoice_item6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id, quantity: 9, unit_price: 65666, status: 2)
+    invoice_item7 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice7.id, quantity: 10, unit_price: 61236, status: 0)
+    invoice_item8 = InvoiceItem.create!(item_id: item7.id, invoice_id: invoice8.id, quantity: 10, unit_price: 61299, status: 1)
 
     expect(merchant1.ready_to_ship.pluck(:name)).to eq([item1.name, item2.name])
   end

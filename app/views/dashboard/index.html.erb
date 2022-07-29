@@ -8,17 +8,19 @@
 </div>
 </div>
 
-  <h1><center><%= @merchant.name %></center></h1>
+<h1><center><%= @merchant.name %></center></h1>
 
-<div class="column">
-  <h2>Favorite Customers</h2>
+<table>
+  <tr>
+    <th><h2>Favorite Customers</h2></th>  
   <% @merchant.top_5_customers.each do |customer| %>
     <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
   <% end %>
-</div>
-<div class="column">
+</section>
+
+<section class="column">
 <h2>Items Ready to Ship</h2>
 <% @merchant.ready_to_ship.each do |item| %>
 <p><%= item.name %> - Invoice #<%= item.inv_id %> - <%= item.invoice_date.strftime('%A, %B %d, %Y') %></p>
 <% end %>
-</div>
+</section>
