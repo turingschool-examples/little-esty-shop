@@ -2,7 +2,7 @@
 
 <% @merchants.each_with_index do |merchant, index| %>
     <div id = "merchant-<%=index %>">
-        <%= merchant.name %>
+        <%= link_to merchant.name, admin_merchant_path(merchant) %>
         <br>
     </div>
 <% end %>
