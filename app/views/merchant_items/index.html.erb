@@ -16,8 +16,9 @@
 <div id="top-five-items">
   <h3>Top Items</h3>
   <% @merchant.top_five_items.each do |item| %>
-    <ul>
+    <ol>
       <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue.fdiv(100)) %> in sales </li>
-    </ul>
+      <p> Top selling date for <%= item.name %> was <%= item.top_day.strftime("%A, %B %e, %Y") %> </p>
+    </ol>
   <% end %>
 </div>

@@ -400,7 +400,7 @@ RSpec.describe 'merchant items index page' do
       visit "/merchants/#{merchant_1.id}/items"
       save_and_open_page
       within "#top-five-items" do 
-        expect(page).to have_content("Top selling date for #{spatula.name} was [])
+        expect(page).to have_content("Top selling date for #{spatula.name} was []")
       end
     end
   end

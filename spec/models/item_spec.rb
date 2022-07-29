@@ -45,5 +45,20 @@ RSpec.describe Item do
 
       expect(item_1.item_status(invoice_1)).to eq("pending")
     end
+
+    it 'returns the date with the most sales for that item' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+      
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+      customer_2 = Customer.create!(first_name: "Harold", last_name: "Johnson")
+      
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+
+      expect(item_1.top_day).to eq("[]")
+    end
   end
 end
