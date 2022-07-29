@@ -7,11 +7,13 @@ class Item < ApplicationRecord
 
     has_many :invoice_items
     has_many :invoices, through: :invoice_items
-    belongs_to :merchant 
+    belongs_to :merchant
     has_many :transactions, through: :invoices
     has_many :customers, through: :invoices
+
 
     def invoice_quantity(invoice_id)
         invoice_items.where(invoice_items:{invoice_id: invoice_id})
     end
 end 
+
