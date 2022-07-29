@@ -264,28 +264,32 @@ RSpec.describe 'Merchant Show Dashboard' do
         expect(page).to have_content("Items Ready to Ship")
 
         within '#item0' do
+          save_and_open_page
             expect(page).to have_content("Log")
             expect(page).to have_content(invoice_1.id)
             expect(page).to_not have_content("Saw")
-            expect(page).to have_content(invoice_2.id)
+            expect(page).to_not have_content(invoice_2.id)
 
-            # click_on(invoice_1.id)
+            click_on(invoice_1.id)
 
-            # expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
+            expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
         end
 
+        visit "/merchants/#{merchant_1.id}/dashboard"
         within '#item1' do
+
           expect(page).to have_content("Saw")
           expect(page).to have_content(invoice_1.id)
           expect(page).to_not have_content("Log")
-          expect(page).to have_content(invoice_2.id)
+          expect(page).to_not have_content(invoice_2.id)
         end
 
+        visit "/merchants/#{merchant_1.id}/dashboard"
         within '#item2' do
-          expect(page).to have_content("Bench")
-          expect(page).to have_content(invoice_1.id)
-          expect(page).to_not have_content("Axe")
+          expect(page).to have_content("Axe")
           expect(page).to have_content(invoice_2.id)
+          expect(page).to_not have_content("Bench")
+          expect(page).to_not have_content(invoice_1.id)
         end
     end
 end
