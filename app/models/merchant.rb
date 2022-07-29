@@ -43,4 +43,21 @@ class Merchant < ApplicationRecord
     .order('revenue desc')
     .limit(5)
   end
+
+  def self.five_top_merchants_by_revenue
+    joins(:invoice_items, :transactions)
+    .where('transactions.result = ?', 'success')
+    .group('merchants.id')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .order('revenue desc')
+    .limit(5)
+  end
+
+  def merchant_total_revenue
+    items
+    .joins(:invoice_items, :transactions)
+    .where('transactions.result = ?', 'success')
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
 end

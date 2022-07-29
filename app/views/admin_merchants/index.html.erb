@@ -2,6 +2,16 @@
 
 <p> <%= link_to "Create Merchant", "/admin/merchants/new" %> </p>
 
+<div id="merchants_by_revenue">
+<p> Top 5 Merchants By Revenue <%@merchants.five_top_merchants_by_revenue.each do |merchant| %></p> 
+  <div id="merchants_revenue-<%= merchant.id %>">
+  <p>Merchant Name: <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
+  <p>Total Revenue: <%= merchant.merchant_total_revenue %></p>
+  </div>
+<% end %>
+</div>
+
+
 <h2>Enabled Merchants</h2>
 <% @merchants.return_by_status_enabled.each do |merchant| %>
   <div id="merchant_enabled-<%=merchant.id%>">
