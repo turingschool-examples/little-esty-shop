@@ -34,7 +34,9 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_link('Spatula')
       expect(page).to have_link('Spoon')
 
-      click_on('Spatula')
+      within "#item-#{spatula.id}" do
+        click_on('Spatula')
+      end
 
       expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{spatula.id}")
     end
@@ -349,4 +351,44 @@ RSpec.describe 'merchant items index page' do
       end
     end
   end
+
+  describe 'group by status' do
+    context ' enable / disable' do
+      it 'groups by Enabled Items / Disabled Items' do
+        bob = Merchant.create!(name: "Bob The Burgerman")
+
+        item_1 = bob.items.create!(name: "Burgers", description: "Best Burgers in Town!", unit_price: 599)
+        item_2 = bob.items.create!(name: "Fries", description: "Gene stop eating the fries, they`re for customers", unit_price: 250)
+        item_3 = bob.items.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3)
+        item_4 = bob.items.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1)
+
+        visit "/merchants/#{bob.id}/items"
+
+        click_on "Enable Burgers"
+        click_on "Enable Fries"
+
+        click_on "Disable Spatula"
+        click_on "Disable Spoon"
+
+        within "#enabled_items" do
+          expect(page).to have_content("Burgers")
+          expect(page).to have_content("Fries")
+          expect(page).to_not have_content("Spatula")
+          expect(page).to_not have_content("Spoon")
+        end
+
+        within "#disabled_items" do
+          expect(page).to have_content("Spatula")
+          expect(page).to have_content("Spoon")
+          expect(page).to_not have_content("Burgers")
+          expect(page).to_not have_content("Fries")
+        end
+      end
+    end
+  end
 end
+
+# Merchant Items Grouped by Status::: 
+# As a merchant, When I visit my merchant items index page 
+# Then I see two sections, one for "Enabled Items" and one for "Disabled Items" 
+# And I see that each Item is listed in the appropriate section
