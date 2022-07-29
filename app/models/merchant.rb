@@ -15,7 +15,7 @@ class Merchant < ApplicationRecord
     .where('transactions.result = ?', 'success')
     .group('customers.id')
     .select('customers.*, count(*) as transaction_count')
-    .order('transaction_count desc')
+    .order('transaction_count desc, last_name, first_name')
     .limit(5)
   end
 

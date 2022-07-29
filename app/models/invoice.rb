@@ -1,6 +1,7 @@
 class Invoice < ApplicationRecord
   validates :status, presence: true
   validates :customer_id, presence: true
+  
   has_many :invoice_items, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_many :items, through: :invoice_items

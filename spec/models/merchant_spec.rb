@@ -101,7 +101,6 @@ RSpec.describe Merchant, type: :model do
 
     it 'has five_most_popular_items' do
       customer_1 = Customer.create!(first_name: "A", last_name: "A")
-      # customer_2 = Customer.create!(first_name: "B", last_name: "B")
 
       invoice_1 = Invoice.create!(status: "completed", customer_id: customer_1.id)
       invoice_2 = Invoice.create!(status: "completed", customer_id: customer_1.id)
@@ -117,9 +116,6 @@ RSpec.describe Merchant, type: :model do
       transaction_5 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_5.id)
       transaction_6 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id)
       transaction_7 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id) #both failed
-      # transaction_8 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_1.id)
-      # transaction_9 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_1.id)
-      # transaction_10 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_2.id)
         
       merchant = Merchant.create!(name: "Wizards Chest")
 
@@ -130,16 +126,12 @@ RSpec.describe Merchant, type: :model do
       item_5 = Item.create!(name: "E", description: "E", unit_price: 300, merchant_id: merchant.id)
       item_6 = Item.create!(name: "F", description: "F", unit_price: 600, merchant_id: merchant.id) #absent
 
-      # invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: "shipped", quantity: 10, unit_price: 100)
-      invoice_item_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: "shipped", quantity: 20, unit_price: 100) #2000
-      # invoice_item_3 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: "shipped", quantity: 5, unit_price: 200)
-      # invoice_item_4 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: "shipped", quantity: 5, unit_price: 200)
-      invoice_item_5 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: "shipped", quantity: 15, unit_price: 200) #3000
-      invoice_item_6 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: "shipped", quantity: 5, unit_price: 300) #1500
-      # invoice_item_7 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: "shipped", quantity: 5, unit_price: 300)
-      invoice_item_8 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: "shipped", quantity: 10, unit_price: 400) #4000
-      invoice_item_9 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: "shipped", quantity: 5, unit_price: 500) #2500
-      invoice_item_10 = InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, status: "shipped", quantity: 6, unit_price: 600) #3600 failed
+      invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: "shipped", quantity: 20, unit_price: 100) #2000 4
+      invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: "shipped", quantity: 15, unit_price: 200) #3000 2
+      invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: "shipped", quantity: 5, unit_price: 300) #1500 5
+      invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: "shipped", quantity: 10, unit_price: 400) #4000 1
+      invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: "shipped", quantity: 5, unit_price: 500) #2500 3
+      invoice_item_6 = InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, status: "shipped", quantity: 6, unit_price: 600) #3600 failed
 
       expect(merchant.five_most_popular_items).to eq([item_4, item_2, item_5, item_1, item_3])
     end
