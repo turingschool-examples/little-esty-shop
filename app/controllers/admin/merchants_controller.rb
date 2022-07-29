@@ -14,7 +14,7 @@ class Admin::MerchantsController < ApplicationController
     def update 
         merchant = Merchant.find(params[:id])
         merchant.update(merchant_params)
-        redirect_to admin_merchant_path(merchant)
+        redirect_to admin_merchant_path(merchant), notice: "Merchant information was successfully updated!"
     end
 
     private 

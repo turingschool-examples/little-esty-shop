@@ -29,6 +29,19 @@ RSpec.describe 'Admin Merchants Edit page' do
     end
 
     # And I see a flash message stating that the information has been successfully updated.
+    it 'redirects to the Admin Merchant Show page with a flash message saying information has been successfully updated' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
+
+        visit admin_merchant_path(merchant_1)
+        click_link("Update Merchant Info")
+
+        new_name = Faker::Name.unique.name
+        fill_in "Name", with: new_name 
+        click_on("Update Information")
+
+        expect(page).to have_content("Merchant information was successfully updated!")
+    end
 end
 
 
