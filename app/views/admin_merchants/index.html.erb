@@ -6,6 +6,7 @@
 <p> Top 5 Merchants By Revenue <%@merchants.five_top_merchants_by_revenue.each do |merchant| %></p> 
   <div id="merchants_revenue-<%= merchant.id %>">
   <p>Merchant Name: <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
+  <p>Total Revenue: <%= merchant.merchant_total_revenue %></p>
   </div>
 <% end %>
 </div>

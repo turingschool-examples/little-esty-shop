@@ -163,22 +163,27 @@ RSpec.describe 'the admin_merchants index' do
 
     within "#merchants_revenue-#{merchant_1.id}" do
       expect(page).to have_content(merchant_1.name)
+      expect(page).to have_content("2000")
     end
 
     within "#merchants_revenue-#{merchant_2.id}" do
       expect(page).to have_content(merchant_2.name)
+      expect(page).to have_content("3000")
     end
 
     within "#merchants_revenue-#{merchant_3.id}" do
       expect(page).to have_content(merchant_3.name)
+      expect(page).to have_content("1500")
     end
 
     within "#merchants_revenue-#{merchant_4.id}" do
       expect(page).to have_content(merchant_4.name)
+      expect(page).to have_content("4000")
     end
 
     within "#merchants_revenue-#{merchant_5.id}" do
       expect(page).to have_content(merchant_5.name)
+      expect(page).to have_content("2500")
     end
 
   end

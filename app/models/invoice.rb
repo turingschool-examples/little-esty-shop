@@ -14,6 +14,7 @@ class Invoice < ApplicationRecord
     order("created_at DESC")
   end
 
+
   def format_date
     created_at.strftime("%A, %B %d, %Y")
   end
