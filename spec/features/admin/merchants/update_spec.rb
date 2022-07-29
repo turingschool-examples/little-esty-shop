@@ -6,11 +6,10 @@ RSpec.describe 'admin merchant update page' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
         
         visit "/admin/merchants/#{merchant_1.id}/edit" 
-
         expect(page).to have_content("#{merchant_1.name}")
 
         within "#merchant_edit_name" do 
-            expect(page).to have_field('Name:', with: merchant_1.name)
+            expect(page).to have_field('merchant[name]', with: merchant_1.name)
         end 
 
         fill_in("Name", with: "")
