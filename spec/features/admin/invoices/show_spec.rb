@@ -5,6 +5,8 @@ RSpec.describe 'Admin Invoices Show Page' do
     Faker::UniqueGenerator.clear 
     @merchant_1 = Merchant.create!(name: Faker::Company.unique.name)
     @merchant_2 = Merchant.create!(name: Faker::Company.unique.name)
+
+    
     
     @customer_1 = Customer.create!(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name)
     
@@ -38,13 +40,13 @@ RSpec.describe 'Admin Invoices Show Page' do
     @invoice_3.id = 40
     @invoice_3.save!
 
-    @invoice_item_1 = InvoiceItem.create!(quantity: rand(1..10), 
+    @invoice_item_1 = InvoiceItem.create!(quantity: 1, 
                                           unit_price: 5000, 
                                           status: 'shipped', 
                                           item_id: @item_1.id, 
                                           invoice_id: @invoice_1.id)
 
-    @invoice_item_2 = InvoiceItem.create!(quantity: rand(1..10), 
+    @invoice_item_2 = InvoiceItem.create!(quantity: 5, 
                                           unit_price: 10000, 
                                           status: 'shipped', 
                                           item_id: @item_2.id, 
@@ -113,6 +115,20 @@ RSpec.describe 'Admin Invoices Show Page' do
       end
 
       expect(page).to_not have_content(@invoice_item_4.item.name)
+    end
+  end
+  
+  # User Story 35
+  # Admin Invoice Show Page: Total Revenue
+
+  # As an admin
+  # When I visit an admin invoice show page
+  # Then I see the total revenue that will be generated from this invoice
+  it 'shows the total revenue that will be generated for the invoice' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    within '#invoice-details' do
+      expect(page).to have_content('$550.00')
     end
   end
 end
