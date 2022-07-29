@@ -28,7 +28,7 @@ RSpec.describe 'Admin Dashboard page' do
     # wand2 = wizmart.items.create!(name: 'Unicorn Horn Wand', description: 'No unicorns were harmed', unit_price: 500)
     # wand3 = wizmart.items.create!(name: 'Manticore Claw Wand', description: 'For the bravest wizards', unit_price: 800)
 
-    # Customer1 has 5 successful transactions
+    # Customer1 has 6 successful transactions
     customer1 = Customer.create!(first_name: 'Harry', last_name: 'Potter')
     c1_invoice1 = customer1.invoices.create!(status: 2)
     # invoice_item1 = InvoiceItem.create!(invoice: c1_invoice1, item: wand1, quantity: 6, unit_price: 8, status: 0)
@@ -42,6 +42,8 @@ RSpec.describe 'Admin Dashboard page' do
     c1_invoice4.transactions.create!(credit_card_number: 3395123433951234, result: 1)
     c1_invoice5 = customer1.invoices.create!(status: 2)
     c1_invoice5.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+    c1_invoice6 = customer1.invoices.create!(status: 2)
+    c1_invoice6.transactions.create!(credit_card_number: 3395123433951234, result: 1)
     
     # Customer 2 has 5 successful and 1 unsuccessful transaction
     customer2 = Customer.create!(first_name: 'Ron', last_name: 'Weasley')
@@ -89,11 +91,11 @@ RSpec.describe 'Admin Dashboard page' do
     c4_invoice3.transactions.create!(credit_card_number: 7795123477951234, result: 1)
 
     # Customer 5 has 2 successful transactions
-    customer5 = Customer.create!(first_name: 'Albus', last_name: 'Dumbledor')
+    customer5 = Customer.create!(first_name: 'Luna', last_name: 'Lovegood')
     c5_invoice1 = customer5.invoices.create!(status: 2)
     # invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: super_potion, quantity: 2, unit_price: 5, status: 0)
     c5_invoice1.transactions.create!(credit_card_number: 7795123477951234, result: 1)
-    c5_invoice2 = customer4.invoices.create!(status: 2)
+    c5_invoice2 = customer5.invoices.create!(status: 2)
     c5_invoice2.transactions.create!(credit_card_number: 7795123477951234, result: 1)
     
 
@@ -104,12 +106,11 @@ RSpec.describe 'Admin Dashboard page' do
     c6_invoice1.transactions.create!(credit_card_number: 7795123477951234, result: 1)
     
     visit admin_index_path
-binding.pry
-
+save_and_open_page
     within "#customer-1" do
       expect(page).to have_content(customer1.first_name)
       expect(page).to have_content(customer1.last_name)
-      expect(page).to have_content("Successful Transactions: 5")
+      expect(page).to have_content("Successful Transactions: 6")
       expect(page).to_not have_content(customer2.first_name)
       expect(page).to_not have_content(customer6.first_name)
     end
