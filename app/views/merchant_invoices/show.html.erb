@@ -16,7 +16,11 @@
       <p>Name: <%= invoice.item.name %></p>
       <p>Quantity: <%= invoice.quantity %></p>
       <p>Price: <%= invoice.unit_price %></p>
+      <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :post, local: true do |form| %>
       <p>Status: <%= invoice.status %></p>
+      <%= form.select :status, options_for_select(InvoiceItem.statuses.map {|k, v| [k.capitalize, k.capitalize] }, selected: "#{invoice.status.capitalize}" ) %> 
+      <%= form.submit 'Update Item Status' %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
@@ -24,6 +28,10 @@
 <div id="invoices-<%= @invoice.id %>">
   <p>Invoice id: <%= @invoice.id %></p>
   <p>Status: <%= @invoice.status %></p>
-  <p>Created on: <%= @invoice.created_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
   <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </div>
+
+</div>
+
+
