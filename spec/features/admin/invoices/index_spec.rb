@@ -85,6 +85,9 @@ RSpec.describe 'Admin Merchants Invoices Index' do
       expect(page).to have_content("Invoice #" + @invoice_3.id.to_s)
       expect(page).to have_link("Invoice ##{@invoice_3.id}", href: "/admin/invoices/#{@invoice_3.id}")
     end
+
+    click_link "Invoice ##{@invoice_1.id}"
+    expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
   end
 
   it 'has invoices ordered based on ascending invoice id' do
