@@ -22,6 +22,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :merchants, only: [:index]
-    resources :invoices, only: [:index]
+    resources :invoices, only: %i[index show]
   end
 end
