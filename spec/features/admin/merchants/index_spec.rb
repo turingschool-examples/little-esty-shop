@@ -24,5 +24,26 @@ RSpec.describe 'admin merchant index page' do
       expect(page).to_not have_content('Spongebob The Merchant')
       end
     end
+
+    it 'each merchants name is a link that directs to that merchants admin show page'  do
+      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+      merchant_2 = Merchant.create!(name: 'Jon Doe Dough')
+      merchant_3 = Merchant.create!(name: 'Mary Shelley Books')
+
+      visit '/admin/merchants'
+
+      within "#merchants0" do
+        click_link('Spongebob The Merchant')
+
+        expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")      
+      end
+
+      visit '/admin/merchants'
+
+      within "#merchants1" do
+        click_link('Jon Doe Dough')
+        expect(current_path).to eq("/admin/merchants/#{merchant_2.id}")  
+      end
+    end
   end
 end
