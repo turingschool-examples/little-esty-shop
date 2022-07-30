@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   #get '/merchants/:id/items', to: 'items#index'
   patch '/merchants/:id/items', to: 'items#status'
 
+  get '/merchants/:id/items/new', to: 'items#new'
+  post '/merchants/:id/items', to: 'items#create'
+  get '/merchants/:id/items/:id', to: 'items#show'
+  get '/merchants/:id/items/:id/edit', to: 'items#edit'
+  patch '/merchants/:id/items/:id', to: 'items#update'
+
   #get '/merchants/:id/items/:id', to: 'items#show'
   #get '/merchants/:id/items/:id/edit', to: 'items#edit'
   #patch '/merchants/:id/items/:id', to: 'items#update'
@@ -21,7 +27,7 @@ Rails.application.routes.draw do
   
   get '/admin', to: 'admins#index'
 
-  get 'admin/merchants/new', to: 'admin_merchants#new'
+  get '/admin/merchants/new', to: 'admin_merchants#new'
   get '/admin/merchants', to: 'admin_merchants#index'
   get '/admin/merchants/:id', to: 'admin_merchants#show'
   get '/admin/merchants/:id/edit', to: 'admin_merchants#edit'

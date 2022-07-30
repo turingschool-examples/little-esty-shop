@@ -11,6 +11,20 @@ class ItemsController < ApplicationController
     
   end
 
+  def new
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def create
+    item = Item.new(name: params[:name], description: params[:description],unit_price: params[:unit_price], merchant_id: params[:id], status: 1)
+    if item.save
+      redirect_to "/merchants/#{item.merchant_id}/items"
+    else
+      redirect_to "/merchants/#{item.merchant.id}/items/new"
+      flash[:alert] = "Error: #{error_message(item.errors)}" 
+    end
+  end
+
   def edit
    
   end
@@ -29,11 +43,11 @@ class ItemsController < ApplicationController
   def status
     item = Item.find(params[:id])
       if item.status == "enabled"
-        item.status = "disabled"
+        item.update(status: "disabled")
         redirect_to "/merchants/#{item.merchant.id}/items"
         flash[:alert] = "#{item.name} has been disabled."
       else
-        item.status = "enabled"
+        item.update(status: "enabled")
         redirect_to "/merchants/#{item.merchant.id}/items"
         flash[:alert] = "#{item.name} has been enabled."
       end 

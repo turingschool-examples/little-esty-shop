@@ -26,6 +26,10 @@ class Merchant < ApplicationRecord
     .order("invoices.created_at")
   end
 
+  def find_all_by_status(num)
+    items.where(status: num)
+  end
+
   def self.return_by_status_enabled
     where("status = ?", 0)
   end

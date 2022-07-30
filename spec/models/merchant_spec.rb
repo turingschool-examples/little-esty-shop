@@ -81,6 +81,19 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.ready_to_ship.last.invoice).to eq(invoice_5)
     end
 
+      it 'find_all_by_status will return all enabled items' do
+        @merchant1 = Merchant.create!(name: "Calvin Klein")
+
+        @item1 = Item.create!(name: "T-shirts", description: "Blue" , unit_price: 12 , merchant_id: @merchant1.id, status: 1)
+        @item2 = Item.create!(name: "Shorts", description: "Green", unit_price: 45, merchant_id: @merchant1.id, status: 0)
+        @item3 = Item.create!(name: "Chinos", description: "White", unit_price: 67, merchant_id: @merchant1.id, status: 1)
+        @item4 = Item.create!(name: "Hat", description: "Multicolor", unit_price: 84, merchant_id: @merchant1.id, status: 0)
+        @item5 = Item.create!(name:"Socks", description: "Grey", unit_price: 9, merchant_id: @merchant1.id, status: 1)
+        @item6 = Item.create!(name: "Sneakers", description: "Bone", unit_price: 122 , merchant_id: @merchant1.id, status: 0)
+
+        expect(@merchant1.find_all_by_status(0)).to eq([@item2, @item4, @item6])
+      end
+
     it 'can return_by_status_enabled' do
       merchant_1 = Merchant.create!(name: "Wizards Chest")
       merchant_2 = Merchant.create!(name: "Tattered Cover")
