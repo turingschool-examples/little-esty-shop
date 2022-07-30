@@ -1,9 +1,29 @@
-<h1><%= @merchant.name %></h1>
+<html>
+<head>
+<style>
+h1 {text-align: center}
+h2 {text-align: left}
+</style>
+</head>
+<body>
 
+<h1>Little Esty Shop</h1>
 <p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
 
-<% @merchant.items.each do |item| %>
-  <p><%= link_to "#{item.name}", merchant_items_path(@merchant, item)%></p>
+<h2><%= @merchant.name %></h2>
+  <% @merchant.items.each do |item| %>
+  <div class="merchant_item-<%=item.id%>">
+  <%= link_to "Name: #{item.name}", merchant_items_path(@merchant, item)%> 
+  <%if item.availability == "enable" %>
+    <%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { availability: "disable" }  %>
+  <%else item.availability == "disable" %>
+     <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { availability: "enable" }  %>
+  <% end %>
+  </div>
+
 <% end %>
+
+</body>
+</html>
 
 

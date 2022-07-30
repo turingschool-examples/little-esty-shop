@@ -7,4 +7,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index]
   end
 
+  resources :admin do
+  end
+
 end
