@@ -11,22 +11,24 @@ RSpec.describe 'Admins Invoice Index page' do
 
       visit invoices_path
 
+      save_and_open_page
+
       within "#inv-#{invoice_1.id}" do
-        expect(page).to have_content(invoice_1.id)
-        expect(page).to_not have_content(invoice_2.id)
-        expect(page).to_not have_content(invoice_3.id)
+        expect(page).to have_content("Invoice # #{invoice_1.id}")
+        expect(page).to_not have_content("Invoice # #{invoice_2.id}")
+        expect(page).to_not have_content("Invoice # #{invoice_3.id}")
       end
 
       within "#inv-#{invoice_2.id}" do
-        expect(page).to have_content(invoice_2.id)
-        expect(page).to_not have_content(invoice_1.id)
-        expect(page).to_not have_content(invoice_3.id)
+        expect(page).to have_content("Invoice # #{invoice_2.id}")
+        expect(page).to_not have_content("Invoice # #{invoice_3.id}")
+        expect(page).to_not have_content("Invoice # #{invoice_1.id}")
       end
 
       within "#inv-#{invoice_3.id}" do
-        expect(page).to have_content(invoice_3.id)
-        expect(page).to_not have_content(invoice_2.id)
-        expect(page).to_not have_content(invoice_1.id)
+        expect(page).to have_content("Invoice # #{invoice_3.id}")
+        expect(page).to_not have_content("Invoice # #{invoice_2.id}")
+        expect(page).to_not have_content("Invoice # #{invoice_1.id}")
       end
     end
   end
