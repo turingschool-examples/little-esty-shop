@@ -18,8 +18,8 @@ class ItemsController < ApplicationController
       if item.update(item_params)
 
         if params[:status].present?
-           redirect_to merchant_items_path(item.merchant)
-           flash[:success] = "Item successfully updated!"
+          redirect_to merchant_items_path(item.merchant)
+          flash[:success] = "Item successfully updated!"
         else
           redirect_to merchant_item_path(item.merchant, item)
           flash[:success] = "Item successfully updated!"
@@ -30,6 +30,25 @@ class ItemsController < ApplicationController
           flash[:alert] = "Error: #{error_message(item.errors)}"
         end
   end
+  
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+      @merchant = Merchant.find(params[:merchant_id])
+      item = @merchant.items.create(item_params)
+      if item.save
+        flash.clear
+          redirect_to merchant_items_path(@merchant)
+      else
+          # redirect_to new_merchant_item_path(@merchant)
+          flash[:alert] = "Error: Please fill out all required fields!"
+          render :new
+      end
+
+  end
+
 
   private
   def item_params
