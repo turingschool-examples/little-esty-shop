@@ -1,5 +1,5 @@
 #padding {
-  border-style: solid;
+  /* border-style: solid; */
   padding-right: 50px; 
   padding-left: 50px;
 }
@@ -19,7 +19,7 @@
   padding-left: 20px;
 }
 
-#merchantLinks {
+#links {
   width: 100%;
   color: rgb(134, 129, 129);
   display: inline-block;
