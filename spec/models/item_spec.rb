@@ -129,12 +129,12 @@ RSpec.describe Item do
       invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_18.id)
       invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_19.id)
 
-      expect(item_1.top_day).to eq("7/30/22")
-      expect(item_2.top_day).to eq("7/29/22")
-      expect(item_3.top_day).to eq("7/30/22")
-      expect(item_4.top_day).to eq("7/29/22")
-      expect(item_5.top_day).to eq("7/30/22")
-      expect(item_6.top_day).to eq("7/29/22")
+      expect(item_1.top_day).to eq("2022-07-30 16:04:49.000000000 +0000")
+      expect(item_2.top_day).to eq("2022-07-29 16:04:49.000000000 +0000")
+      expect(item_3.top_day).to eq("2022-07-30 16:04:49.000000000 +0000")
+      expect(item_4.top_day).to eq("2022-07-29 16:04:49.000000000 +0000")
+      expect(item_5.top_day).to eq("2022-07-30 16:04:49.000000000 +0000")
+      expect(item_6.top_day).to eq("2022-07-29 16:04:49.000000000 +0000")
     end
   end
 end
