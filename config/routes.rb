@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :merchants, only: [:index, :create] do
     resources :items, only: [:index, :show, :edit, :update, :new, :create]
   end
@@ -13,6 +12,6 @@ Rails.application.routes.draw do
   
   get '/admin/invoices', to: 'admin#index'
   get '/admin/invoices/:id', to: 'admin#show'
-  get '/admin/merchants', to: 'admin#index'
 
+  get '/admin/merchants', to: 'admin#index'
 end
