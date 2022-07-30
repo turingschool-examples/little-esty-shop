@@ -86,7 +86,6 @@ RSpec.describe 'Merchant Item Index' do
 
             it 'and I see that each item name links to my merchant item show page for that item' do
                 visit merchant_items_path(@merchant1.id)
-                save_and_open_page
                 within("#top-items") do
                     expect(page).to have_link(@hammer.name)
                     expect(page).to have_link(@item5.name)
@@ -100,7 +99,16 @@ RSpec.describe 'Merchant Item Index' do
             end
 
             it 'and I see the total revenue generated next to each item name' do 
-
+                visit merchant_items_path(@merchant1.id)
+                save_and_open_page
+                within("#top-items") do
+                    within("#top-item-#{@hammer.id}") do
+                        expect(page).to have_content("$250.00 in sales")
+                    end
+                    within("#top-item-#{@item1.id}") do
+                        expect(page).to have_content("$10.00 in sales")
+                    end
+                end
             end
         end
     end

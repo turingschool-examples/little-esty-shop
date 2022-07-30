@@ -24,4 +24,15 @@ class Item < ApplicationRecord
       .sum('invoice_items.quantity * invoice_items.unit_price')
       .fdiv(100)
   end
+
+    def top_day
+    invoices
+      .joins(:invoice_items)
+      .select('invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
+      .group('invoices.created_at')
+      .order('total_revenue desc, invoices.created_at desc')
+      .first
+      .created_at
+      .strftime("%Y-%m-%d")
+  end
 end
