@@ -1,6 +1,6 @@
 #padding {
   /* border-style: solid; */
-  padding-right: 50px; 
+  padding-right: 50px;
   padding-left: 50px;
 }
 
@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-#merchantName { 
+#merchantName {
   text-align: left;
   font-size: 25px;
   padding-left: 20px;
@@ -34,7 +34,7 @@ span.links {
   padding: 10px 20px 10px 10px;
 }
 
-#myInvoices {
+#invoices {
   border-style: solid none none none;
   color: black;
   width: auto;
@@ -45,6 +45,8 @@ span.links {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+
 
 
 
