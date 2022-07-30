@@ -12,8 +12,8 @@ RSpec.describe Customer, type: :model do
   end
 
   before :each do
-    @customer_1 = Customer.create!( first_name: "Blake",
-                                    last_name: "Saylor")
+    # @customer_1 = Customer.create!( first_name: "Blake",
+                                    # last_name: "Saylor")
   end
 
   describe 'class methods' do
@@ -35,9 +35,9 @@ RSpec.describe Customer, type: :model do
 
       customers = Customer.top_5_by_transaction
 
-          expect(customers.first).to eq(Customer.all.last)
-          expect(customers.last).to eq(Customer.all.third)
-          expect(customers).to_not include_content(Customer.all.first)
+      expect(customers.first).to eq(Customer.all.last)
+      expect(customers.last).to eq(Customer.all.fourth)
+      expect(customers).to_not including(Customer.all.first)
       end
   end
 

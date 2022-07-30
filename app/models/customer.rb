@@ -5,4 +5,12 @@ class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
 
+  def self.top_5_by_transaction
+    joins(:transactions)
+    .where(transactions: {result: 'success'})
+    .group(:id)
+    .select('customers.*, count(*)')
+    .order('count desc')
+    .limit(5)
+  end
 end

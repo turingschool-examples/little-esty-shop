@@ -48,7 +48,7 @@ RSpec.describe 'Admin Dashboard' do
 
         within "#top-customers" do
             expect("#{Customer.last.first_name} #{Customer.last.last_name}").to appear_before("#{Customer.fifth.first_name} #{Customer.fifth.last_name}")
-            expect("#{Customer.fifth.first_name} #{Customer.fifth.last_name}").to appear_before("#{Customer.third.first_name} #{Customer.third.last_name}")
+            expect("#{Customer.fifth.first_name} #{Customer.fifth.last_name}").to appear_before("#{Customer.fourth.first_name} #{Customer.fourth.last_name}")
             expect(page).to_not have_content("#{Customer.first.first_name} #{Customer.first.last_name}")
         end
     end
