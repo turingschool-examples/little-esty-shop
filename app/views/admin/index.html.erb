@@ -1,3 +1,9 @@
+<h1>Little Esty Shop</h1>
+
+<% @merchants.each do |merchant| %>
+  <p><h3><%= merchant.name %></h3></p>
+<% end %><br>
+
 <% @invoices.each do |invoice| %>
   <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> </p>
 <% end %>

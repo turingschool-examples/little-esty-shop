@@ -89,7 +89,7 @@ RSpec.describe 'Merchant Item Index' do
 
             it 'shows the names of the top 5 most popular items ranked by total revenue generated' do
                 visit merchant_items_path(@merchant1.id)
-                save_and_open_page
+
                 within("#top-items") do
                     expect(@hammer.name).to appear_before(@item5.name)
                     expect(@item5.name).to appear_before(@item4.name)
@@ -116,7 +116,7 @@ RSpec.describe 'Merchant Item Index' do
 
             it 'and I see the total revenue generated next to each item name' do 
                 visit merchant_items_path(@merchant1.id)
-                save_and_open_page
+
                 within("#top-items") do
                     within("#top-item-#{@hammer.id}") do
                         expect(page).to have_content("$250.00 in sales")
@@ -130,7 +130,7 @@ RSpec.describe 'Merchant Item Index' do
             it "next to each of the 5 most popular items I see the date with the most sales for each item.
             and I see a label 'Top Selling date for <item name> was <date>" do
                 visit merchant_items_path(@merchant1.id)
-                save_and_open_page
+
                 within("#top-items") do
                     within("#top-item-#{@hammer.id}") do
                         expect(page).to have_content("Top selling day for hammer was 2022-04-25")
