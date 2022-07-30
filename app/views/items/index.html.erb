@@ -1,13 +1,36 @@
 <h1>Merchant Items</h1>
 
-<% @items.each do |item| %>
-  <div id="item-<%= item.name %>">
-    <h4><%= link_to "#{item.name}", "/merchants/#{item.merchant_id}/items/#{item.id}" %></h4>
-    <h5>Status: <%= item.status %></h5>
-    <% if item.status == "disabled" %>
-      <%= button_to "Enable", "/merchants/#{item.merchant_id}/items/#{item.id}", action: :update, parmas: {status: :enabled}, method: :patch %>
-    <% elsif item.status == "enabled" %>
-      <%= button_to "Disable", "/merchants/#{item.merchant_id}/items/#{item.id}", action: :update, parmas: {status: :disabled}, method: :patch %>
-    <% end %>
-  </div>
-<% end %>
+<div id='enabled'>
+  <h2>Enabled Items</h2>
+  <% @items.enabled.each do |item| %>
+    <div id="item-<%= item.id %>">
+      <h4><%= link_to "#{item.name}", "/merchants/#{item.merchant_id}/items/#{item.id}" %></h4>
+      <%= button_to "Disable", "/merchants/#{item.merchant_id}/items/#{item.id}", action: :update, params: {status: :disabled}, method: :patch %>
+    </div>
+  <% end %>
+</div>
+
+<div id='disabled'>
+  <h2>Disabled Items</h2>
+  <% @items.disabled.each do |item| %>
+    <div id="item-<%= item.id %>">
+      <h4><%= link_to "#{item.name}", "/merchants/#{item.merchant_id}/items/#{item.id}" %></h4>
+      <%= button_to "Enable", "/merchants/#{item.merchant_id}/items/#{item.id}", action: :update, params: {status: :enabled}, method: :patch %>    
+    </div>
+  <% end %>
+</div>
+
+<div id='top-items'>
+  <h2>Top Items</h2>
+  <ol><% Item.top_5_by_rev(@merchant).each do |item| %>
+    <div id="top-item-<%= item.id %>">
+    <li>
+      <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>- <%= "#{number_to_currency(item.total_sales)}" %> in sales
+      <br>
+      Top selling day for <%= "#{item.name}" %> was <%= "#{item.top_day}" %>
+      <% end %>
+    </li>
+    </div>
+  </ol>
+</div>
+
