@@ -10,7 +10,7 @@
 <% end %>
 <h2>Items Ready to Ship</h2>
 <% @merchant.ready_to_ship.each_with_index do |item, index| %>
-  <div id="item<%= index %>">
-    <%= "#{item.name} -" "Invoice #"%> <%=link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %>
+  <div id="item<%=index%>">
+    <%= "#{item.name} -" "Invoice #"%> <%=link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %> <%= "#{item.date_created.strftime("%A, %B %e, %Y")}" %>
   </div>
 <% end %>
