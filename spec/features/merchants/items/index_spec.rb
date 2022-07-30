@@ -11,7 +11,7 @@ RSpec.describe 'the merchants items' do
     item3 = Item.create!(name: 'BS', description: 'Filling the void in your life', unit_price: 11999, merchant_id: merchant1.id)
     merch2item = Item.create!(name: 'Impracticality', description: 'Underselling the other guy', unit_price: 11998, merchant_id: merchant2.id)
 
-    visit "/merchants/#{merchant1.id}/items"
+    visit merchant_path(merchant1)
 
     expect(page).to have_content('Name: Crap')
     expect(page).to have_content('Description: Because you buy stuff for no reason')

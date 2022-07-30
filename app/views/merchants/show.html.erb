@@ -2,11 +2,11 @@
 
 <% @merchant.items.each_with_index do |item, index| %>
   <div id="item-<%= index %>">
-    <p><b>Name: <%= item.name %></b></p>
+    <p>Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
     <p>Description: <%= item.description %></p>
     <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
   </div>
-  
+
 <h3>Invoice</h3>
   <p><%= @merchant.name%> </p>
 
