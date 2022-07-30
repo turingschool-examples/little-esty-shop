@@ -33,7 +33,7 @@ RSpec.describe Invoice, type: :model do
       InvoiceItem.create!(invoice_id: invoice.id,quantity: Faker::Number.digit, unit_price: Faker::Number.digit, status: 'shipped', item_id: Faker::Number.between(from: Item.first.id, to: Item.last.id))
 
       expect(Invoice.incomplete_invoices.all.count).to eq(10)
-      expect(Invoice.incomplete_invoices.all).to_not includes(invoice)
+      expect(Invoice.incomplete_invoices.all).to_not include(invoice)
     end
   end
 

@@ -8,3 +8,10 @@
         <p> <%= "#{i}. #{customer.first_name} #{customer.last_name} - #{customer.count} purchases" %> </p>
     <% end %>
 </div>
+
+<div id="incomplete-invoices">
+    <h3> Incomplete Invoices</h3>
+    <% Invoice.incomplete_invoices.each do |invoice| %>
+        <p> <%= "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}" %> </p>
+    <% end %>
+</div>
