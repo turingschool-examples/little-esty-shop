@@ -27,8 +27,8 @@ class Merchant < ApplicationRecord
 
   def ready_to_ship
     items.joins(invoices: :invoice_items)
-    .select("items.*")
-    .group("items.id")
     .where(invoice_items: {status: 1})
+    .select("items.*, invoices.created_at as date_created")
+    .order("invoices.created_at ASC").distinct
   end
 end
