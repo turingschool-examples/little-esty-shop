@@ -35,7 +35,6 @@ RSpec.describe Invoice do
       # (invoice status 1,2...invoice_item status 0,1)
       merch1 = Merchant.create!(name: 'Potions and Things')
       item1 = merch1.items.create!(name: 'Love Potion', description: 'Wanna smooch you', unit_price: 1350)
-      item2 = merch1.items.create!(name: 'Hair of Newt', description: 'Yes, they have hair', unit_price: 350)
       item3 = merch1.items.create!(name: 'Hair of Newt', description: 'Yes, they have hair', unit_price: 350)
       customer1 = Customer.create!(first_name: 'Harry', last_name: 'Potter')
       invoice1 = customer1.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
@@ -49,15 +48,15 @@ RSpec.describe Invoice do
       item3 = merch2.items.create!(name: 'Potion of Haste', description: 'Gotta catch em all!', unit_price: 150)
       item4 = merch2.items.create!(name: 'Veritaserum', description: 'I cannot tell a lie', unit_price: 3450)
       customer2 = Customer.create!(first_name: 'Luna', last_name: 'Lovegood')
-      invoice4 = customer2.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
-      invoice5 = customer2.invoices.create!(status: 2,created_at: '2022-07-27 08:08:32 UTC')
-      invoice6 = customer2.invoices.create!(status: 0,created_at: '2022-07-27 08:08:32 UTC')
+      invoice4 = customer2.invoices.create!(status: 1, created_at: '2022-07-26 01:08:32 UTC')
+      invoice5 = customer2.invoices.create!(status: 2, created_at: '2022-07-27 08:08:32 UTC')
+      invoice6 = customer2.invoices.create!(status: 0, created_at: '2022-07-27 08:08:32 UTC')
       invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: item3, quantity: 3, unit_price: 750, status: 1)
       invoice_item5 = InvoiceItem.create!(invoice: invoice5, item: item3, quantity: 1, unit_price: 150, status: 2)
       invoice_item6 = InvoiceItem.create!(invoice: invoice6, item: item4, quantity: 5, unit_price: 50, status: 0)
       
       invoices = Invoice.invoices_with_items_not_shipped
-      # binding.pry
+
       # Invoice succeeds, invoice_item succeeds
       expect(invoices.include?(invoice1)).to be(true)
       # Invoice succeeds, invoice_item fails
