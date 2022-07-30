@@ -16,5 +16,40 @@ RSpec.describe 'Admin Invoices Show page' do
       expect(page).to have_content("Created at: #{created_at}")
       expect(page).to have_content("David Smith")
     end
+
+    it 'shows information + total revenue of all items under an invoice' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+      invoice_1 = Invoice.create!(status: 1, customer_id: customer_1.id)
+
+      item_1 = merchant_1.items.create!(name: "Log", description: "Wood, maple", unit_price: 500)
+      item_2 = merchant_1.items.create!(name: "Saw", description: "Metal, sharp", unit_price: 700)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
+
+      visit "/admin/invoices/#{invoice_1.id}"
+      
+      expect(page).to have_content("Total Revenue: $60.00")
+
+      within "#items-#{item_1.id}" do
+        expect(page).to have_content("Item: Log")
+        expect(page).to have_content("Quantity: #{invoice_item_1.quantity}")
+        expect(page).to have_content("Price: $8.00")
+        expect(page).to have_content("Status: pending")
+        expect(page).to_not have_content("Status: packaged")
+        expect(page).to_not have_content("item: Saw")
+      end
+
+      within "#items-#{item_2.id}" do
+        expect(page).to have_content("Item: Saw")
+        expect(page).to have_content("Quantity: #{invoice_item_2.quantity}")
+        expect(page).to have_content("Price: $14.00")
+        expect(page).to have_content("Status: packaged")
+        expect(page).to_not have_content("Status: pending")
+        expect(page).to_not have_content("Item: Log")
+      end
+    end
   end
 end
