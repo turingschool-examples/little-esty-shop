@@ -1,17 +1,13 @@
 <div id="page-banner">
-
   <div id ="merchant-details">
     <%= @merchant.name %>
   </div>
-
   <div id="merchant-links">
     <%= link_to "Dashboard", "/merchants/#{@merchant.id}", class: "dashboard-link"%>
     <%= link_to 'My Items', "/merchants/#{@merchant.id}/items",class: "items-link" %>
     <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices",class: "invoices-link" %>
   </div>
-
 </div>
-
 
 <div id="dashboard-content">
   <div id="dashboard-content-left">
@@ -31,17 +27,15 @@
           </div>
         <% end %>
       </div>
-
     </div>
   </div>
+  
   <div id="dashboard-content-right">
     <div class="content-column-title">
       Favorite Customers
     </div>
     <div class="content-column-main">
-
       <div id="favorite-customers">
-
         <ol>
           <% @merchant.favorite_customers.each do |customer| %>
             <div id="customer-id-<%= customer.id %>">
@@ -51,9 +45,7 @@
             </div>
           <% end %>
         </ol>
-
       </div>
-
     </div>
   </div>
 </div>
