@@ -154,30 +154,53 @@ RSpec.describe 'Admin Dashboard page' do
   end
   it 'incomplete invoices has a list of all invoices with items not shipped' do
     # (invoice status 1,2...invoice_item status 0,1)
-      merch1 = Merchant.create!(name: 'Potions and Things')
-      item1 = merch1.items.create!(name: 'Love Potion', description: 'Wanna smooch you', unit_price: 1350)
-      item3 = merch1.items.create!(name: 'Hair of Newt', description: 'Yes, they have hair', unit_price: 350)
-      customer1 = Customer.create!(first_name: 'Harry', last_name: 'Potter')
-      invoice1 = customer1.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
-      invoice2 = customer1.invoices.create!(status: 2,created_at: '2022-07-27 08:08:32 UTC')
-      invoice3 = customer1.invoices.create!(status: 0,created_at: '2022-07-20 02:08:32 UTC')
-      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 3, unit_price: 750, status: 0)
-      invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 150, status: 2)
-      invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 1)
-  
-      merch2 = Merchant.create!(name: 'Needful Things')
-      item3 = merch2.items.create!(name: 'Potion of Haste', description: 'Gotta catch em all!', unit_price: 150)
-      customer2 = Customer.create!(first_name: 'Luna', last_name: 'Lovegood')
-      invoice4 = customer2.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
-      invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: item3, quantity: 3, unit_price: 750, status: 1)
-      
-      visit admin_index_path
+    merch1 = Merchant.create!(name: 'Potions and Things')
+    item1 = merch1.items.create!(name: 'Love Potion', description: 'Wanna smooch you', unit_price: 1350)
+    item2 = merch1.items.create!(name: 'Potion of Haste', description: 'Gotta catch em all!', unit_price: 350)
+    item3 = merch1.items.create!(name: 'Hair of Newt', description: 'Yes, they have hair', unit_price: 450)
+    customer1 = Customer.create!(first_name: 'Harry', last_name: 'Potter')
+    invoice1 = customer1.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
+    invoice2 = customer1.invoices.create!(status: 2,created_at: '2022-07-27 08:08:32 UTC')
+    invoice3 = customer1.invoices.create!(status: 0,created_at: '2022-07-20 02:08:32 UTC')
+    invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 3, unit_price: 750, status: 0)
+    invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item2, quantity: 1, unit_price: 150, status: 2)
+    invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 1)
 
-      within('#incomplete-invoices') do
-        expect(page).to have_content("Invoice #{invoice1.id}")
-        expect(page).to have_content("Invoice #{invoice4.id}")
-        expect(page).to_not have_content("Invoice #{invoice2.id}")
-        expect(page).to_not have_content("Invoice #{invoice3.id}")
-      end
+    merch2 = Merchant.create!(name: 'Needful Things')
+    item3 = merch2.items.create!(name: 'Potion of Haste', description: 'Gotta catch em all!', unit_price: 150)
+    customer2 = Customer.create!(first_name: 'Luna', last_name: 'Lovegood')
+    invoice4 = customer2.invoices.create!(status: 1,created_at: '2022-07-29 01:08:32 UTC')
+    invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: item3, quantity: 3, unit_price: 750, status: 1)
+    
+    visit admin_index_path
+# save_and_open_page
+    within('#incomplete-invoices') do
+      expect(page).to have_content("Invoice ##{invoice1.id}")
+      expect(page).to have_content("Invoice ##{invoice4.id}")
+      expect(page).to_not have_content("Invoice ##{invoice2.id}")
+      expect(page).to_not have_content("Invoice ##{invoice3.id}")
     end
+  end
+  it 'each invoice id links to admin/invoices#show for that invoice' do
+    # (invoice status 1,2...invoice_item status 0,1)
+    merch1 = Merchant.create!(name: 'Potions and Things')
+    item1 = merch1.items.create!(name: 'Love Potion', description: 'Wanna smooch you', unit_price: 1350)
+    item3 = merch1.items.create!(name: 'Hair of Newt', description: 'Yes, they have hair', unit_price: 350)
+    customer1 = Customer.create!(first_name: 'Harry', last_name: 'Potter')
+    invoice1 = customer1.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
+    invoice2 = customer1.invoices.create!(status: 2,created_at: '2022-07-27 08:08:32 UTC')
+    invoice3 = customer1.invoices.create!(status: 0,created_at: '2022-07-20 02:08:32 UTC')
+    invoice4 = customer1.invoices.create!(status: 0,created_at: '2022-07-20 02:08:32 UTC')
+    invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 3, unit_price: 750, status: 0)
+    invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 150, status: 2)
+    invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 1)
+    
+    visit admin_index_path
+ save_and_open_page
+    within('#incomplete-invoices') do
+      expect(page).to have_link("Invoice ##{invoice1.id}")
+      click_on("Invoice ##{invoice1.id}")
+      expect(current_path).to eq(admin_invoice_path(invoice1))
+    end
+  end
 end
