@@ -1,4 +1,4 @@
-<h1>Administrator Invoice # <%= @invoice.id %> Page</h1>
+<h1>Administrator Invoice # <%= @invoice.id %></h1>
 
 <%= render "invoice_show/show" %>
 
@@ -8,5 +8,9 @@
   <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
   <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p>
   <p>Status: <%= item.item_status(@invoice) %><br>
+  <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %></p><br>
+  <%= f.select :update_status, ['pending', 'packaged', 'shipped'], selected: item.item_status(@invoice) %><br>
+  <%= f.submit 'Update Status' %>
+  <% end %>
 </div>
 <% end %>
