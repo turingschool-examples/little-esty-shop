@@ -15,7 +15,6 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:customer_id) }
   end
 
-
   describe 'instance methods' do
     it '#total_revenue' do
       merchant_1 = Merchant.create!(name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")

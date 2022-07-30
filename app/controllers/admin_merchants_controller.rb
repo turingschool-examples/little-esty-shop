@@ -11,7 +11,6 @@ class AdminMerchantsController < ApplicationController
       merchant.save
     end
   end
-
   def show
     @merchant = Merchant.find(params[:id])
   end
@@ -26,5 +25,14 @@ class AdminMerchantsController < ApplicationController
     merchant.save
     flash[:notice] = "Merchant successfully updated!"
     redirect_to "/admin/merchants/#{merchant.id}"
+  end
+
+  def new
+    @merchant_create = Merchant.new
+  end
+
+  def create
+    Merchant.create(name: params[:name], status: 1)
+    redirect_to "/admin/merchants"
   end
 end

@@ -1,6 +1,7 @@
 class Invoice < ApplicationRecord
   validates :status, presence: true
   validates :customer_id, presence: true
+  
   has_many :invoice_items, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_many :items, through: :invoice_items
@@ -13,6 +14,7 @@ class Invoice < ApplicationRecord
     order("created_at DESC")
   end
 
+
   def format_date
     created_at.strftime("%A, %B %d, %Y")
   end
@@ -20,4 +22,9 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("quantity * unit_price")
   end
+
+  def self.find_with_merchant(merchant)
+    merchant.invoices
+  end
+
 end
