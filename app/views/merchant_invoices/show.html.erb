@@ -1,8 +1,6 @@
 <h1>Merchant Invoice Show Page</h1>
-<%= "Invoice ID: #{@invoice.id} "%><br>
-<%= "Invoice Status: #{@invoice.status}"%><br>
-<%= "Invoice Created at: #{@invoice.created_at.strftime("%A, %B %e, %Y")}" %><br>
-<%= "Customer Name: #{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br>
+
+<%= render "invoice_show/show" %>
 
 <% @invoice.items.each do |item| %>
 <div id="items-<%= item.id %>">

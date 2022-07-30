@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   
   get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
 
+  scope :admin, module: :admin do
+    get '/invoices', to: 'invoices#index'
+    get 'invoices/:id', to: 'invoices#show'
+  end
+
 end

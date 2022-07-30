@@ -1,0 +1,7 @@
+<h1>Administrator Invoices Index</h1>
+
+<% @invoices.each do |inv| %>
+  <div id="inv-<%= inv.id %>">
+    <p>Invoice # <%= inv.id %></p>
+  </div>
+<% end %>
