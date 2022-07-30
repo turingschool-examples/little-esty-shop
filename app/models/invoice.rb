@@ -14,5 +14,12 @@ class Invoice < ApplicationRecord
   def customer_name
     "#{customer.first_name} #{customer.last_name}"
   end
+
+  # invoice status 1 or 2, invoice_item status 0 or 1
+  def self.invoices_with_items_not_shipped
+    temp = self.where.not(status: 0)
+    valid_invoices =  temp.distinct.joins(:invoice_items)
+                          .where.not("invoice_items.status = 2")
+  end
 end
 
