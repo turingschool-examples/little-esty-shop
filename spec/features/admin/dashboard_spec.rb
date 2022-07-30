@@ -78,7 +78,7 @@ RSpec.describe 'Admin Dashboard' do
         end
     end
 
-    it 'shows incomplete invoices which have items that havent shipped' do
+    it 'shows links to incomplete invoices which have items that havent shipped' do
         merchant = Merchant.create!(name: 'Mike Dao')
         customer = Customer.create!(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name)
         8.times do
@@ -95,9 +95,12 @@ RSpec.describe 'Admin Dashboard' do
         visit '/admin'
 
         within "#incomplete-invoices" do
-            expect(page).to have_content("Invoice ##{Invoice.first.id}")
-            expect(page).to have_content("Invoice ##{Invoice.fifth.id}")
+            expect(page).to have_link("Invoice ##{Invoice.first.id}")
+            expect(page).to have_link("Invoice ##{Invoice.fifth.id}")
             expect(page).to_not have_content("Invoice ##{Invoice.last.id}")
         end
+
+        click_on("Invoice ##{Invoice.first.id}")
+        expect(current_path).to eq("admin/invoices/#{Invoice.first.id}")
     end
 end
