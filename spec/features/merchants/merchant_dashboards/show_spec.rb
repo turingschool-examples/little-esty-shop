@@ -282,14 +282,7 @@ RSpec.describe 'Merchant Show Dashboard' do
           expect(page).to_not have_content(invoice_1.id)
         end
     end
-#     Merchant Dashboard Invoices sorted by least recent
-#
-# As a merchant
-# When I visit my merchant dashboard
-# In the section for "Items Ready to Ship",
-# Next to each Item name I see the date that the invoice was created
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
+
     it 'shows a list of items that have been ordered but not shipped' do
         merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
