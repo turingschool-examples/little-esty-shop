@@ -11,11 +11,10 @@ RSpec.describe 'merchant items index' do
 
     visit "/merchants/#{merch1.id}/items"
     expect(current_path).to eq("/merchants/#{merch1.id}/items")
-    within('#items') do
-      expect(page).to have_content('Shoe')
-      expect(page).to have_content('Sock')
-      expect(page).to_not have_content('Jerky')
-    end
+
+    expect(page).to have_content('Shoe')
+    expect(page).to have_content('Sock')
+    expect(page).to_not have_content('Jerky')
   end
 
   it 'has a button next to each item name to disable or enable that item. When clicked, user is redirected to item index and sees item status has changed' do
