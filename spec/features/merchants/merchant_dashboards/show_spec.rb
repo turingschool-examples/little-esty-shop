@@ -223,16 +223,7 @@ RSpec.describe 'Merchant Show Dashboard' do
             expect(page).to_not have_content("Transactions: 3")
         end
     end
-#     Merchant Dashboard Items Ready to Ship
-#
-# As a merchant
-# When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
-#
+
     it 'shows a list of items that have been ordered but not shipped' do
         merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
@@ -264,13 +255,12 @@ RSpec.describe 'Merchant Show Dashboard' do
         expect(page).to have_content("Items Ready to Ship")
 
         within '#item0' do
-          save_and_open_page
             expect(page).to have_content("Log")
             expect(page).to have_content(invoice_1.id)
             expect(page).to_not have_content("Saw")
             expect(page).to_not have_content(invoice_2.id)
 
-            click_on(invoice_1.id)
+            click_link("#{invoice_1.id}")
 
             expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}")
         end
@@ -290,6 +280,58 @@ RSpec.describe 'Merchant Show Dashboard' do
           expect(page).to have_content(invoice_2.id)
           expect(page).to_not have_content("Bench")
           expect(page).to_not have_content(invoice_1.id)
+        end
+    end
+#     Merchant Dashboard Invoices sorted by least recent
+#
+# As a merchant
+# When I visit my merchant dashboard
+# In the section for "Items Ready to Ship",
+# Next to each Item name I see the date that the invoice was created
+# And I see the date formatted like "Monday, July 18, 2019"
+# And I see that the list is ordered from oldest to newest
+    it 'shows a list of items that have been ordered but not shipped' do
+        merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+        item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+        item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+        item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+        item_4 = Item.create!(name: "Axe", description: "Big Axe", unit_price: 1000, merchant_id: merchant_1.id )
+        item_5 = Item.create!(name: "Table Saw", description: "Steel, hand held", unit_price: 900, merchant_id: merchant_1.id )
+
+        customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+        customer_2 = Customer.create!(first_name: "Cindy", last_name: "Lou")
+        customer_3 = Customer.create!(first_name: "John", last_name: "Johnson")
+        customer_4 = Customer.create!(first_name: "Mary", last_name: "Vale")
+
+        invoice_1 = Invoice.create!(status: 0, created_at: Time.new(2000), customer_id: customer_1.id)
+        invoice_2 = Invoice.create!(status: 1, created_at: Time.new(2001), customer_id: customer_2.id)
+        invoice_3 = Invoice.create!(status: 1, created_at: Time.new(2002), customer_id: customer_3.id)
+        invoice_4 = Invoice.create!(status: 2, created_at: Time.new(2003), customer_id: customer_4.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 1, item_id: item_1.id, invoice_id: invoice_1.id)
+        invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
+        invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_3.id, invoice_id: invoice_1.id)
+        invoice_item_4 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_4.id, invoice_id: invoice_2.id)
+        invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+        invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+
+        visit "/merchants/#{merchant_1.id}/dashboard"
+        within '#item0' do
+
+            expect(page).to have_content("Saturday, January 1, 2000")
+            expect(page).to_not have_content(invoice_2.created_at.strftime("%A, %B %e, %Y"))
+        end
+
+        within '#item1' do
+
+          expect(page).to have_content("Saturday, January 1, 2000")
+          expect(page).to_not have_content(invoice_2.created_at)
+        end
+
+        within '#item2' do
+          expect(page).to have_content("Monday, January 1, 2001")
+          expect(page).to_not have_content(invoice_1.created_at)
         end
     end
 end
