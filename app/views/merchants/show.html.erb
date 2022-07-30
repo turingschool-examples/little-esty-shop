@@ -3,3 +3,8 @@
 <div id = "merchant">
 <%=@merchant.name %>
 </div>
+
+<h2>Top 5 Customers by Total Number of Succesful Transactions:</h2>
+  <% @merchant.customers.top_five_by_transaction_count.each do |customer| %>
+    <p> Name: <%= customer.first_name %> <%= customer.last_name %> <%= customer.transactions.count %></p>
+  <% end %>
