@@ -87,6 +87,7 @@ RSpec.describe 'Admin Dashboard' do
         10.times do
             invoice = Invoice.create!(status: Faker::Number.between(from: 0, to: 2), customer_id: customer.id)
             InvoiceItem.create!(invoice_id: invoice.id,quantity: Faker::Number.digit, unit_price: Faker::Number.digit, status: 'pending', item_id: Faker::Number.between(from: Item.first.id, to: Item.last.id))
+            InvoiceItem.create!(invoice_id: invoice.id,quantity: Faker::Number.digit, unit_price: Faker::Number.digit, status: 'pending', item_id: Faker::Number.between(from: Item.first.id, to: Item.last.id))
         end
         invoice = Invoice.create!(status: Faker::Number.between(from: 0, to: 2), customer_id: customer.id)
         InvoiceItem.create!(invoice_id: invoice.id,quantity: Faker::Number.digit, unit_price: Faker::Number.digit, status: 'shipped', item_id: Faker::Number.between(from: Item.first.id, to: Item.last.id))
