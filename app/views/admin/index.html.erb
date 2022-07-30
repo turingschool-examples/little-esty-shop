@@ -1,0 +1,3 @@
+<% @invoices.each do |invoice| %>
+  <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> </p>
+<% end %>
