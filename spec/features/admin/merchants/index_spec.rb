@@ -20,8 +20,3 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
     expect(page).to have_content("Mlex Aora rods and reels")
   end
 end
-
-# Admin Merchants Index
-# As an admin,
-# When I visit the admin merchants index (/admin/merchants)
-# Then I see the name of each merchant in the system
