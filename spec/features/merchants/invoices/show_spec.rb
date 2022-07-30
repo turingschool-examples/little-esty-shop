@@ -45,6 +45,7 @@ RSpec.describe "merchants invoice show page" do
       invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
+      
       expect(page).to have_content(invoice_1.id)
       expect(page).to have_content(invoice_1.status)
       expect(page).to have_content(invoice_1.created_at.strftime("%A, %B %e, %Y"))
