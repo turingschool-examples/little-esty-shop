@@ -11,7 +11,15 @@ class Item < ApplicationRecord
     has_many :transactions, through: :invoices
     has_many :customers, through: :invoices
 
+
     def total_revenue
-    invoice_items.sum("quantity * unit_price")
-  end
-end
+        invoice_items.sum("quantity * unit_price")
+    end
+
+
+    def invoice_quantity(invoice_id)
+        invoice_items.where(invoice_items:{invoice_id: invoice_id})
+    end
+end 
+
+

@@ -18,4 +18,14 @@ class Invoice < ApplicationRecord
         select('invoices.*').distinct.joins(:invoice_items).where.not(invoice_items: {status: 2}).order('created_at ASC')
     end
 
-end
+
+    def total_revenue
+        invoice_items
+        .select('sum(invoice_items.unit_price * invoice_items.quantity)as total')
+        .where(invoice_items:{invoice_id: id})
+        # select('sum(invoice_items.unit_price * invoice_items.quantity)as total').transactions.joins(:invoice_items).where(invoice_items:{invoice_id: id}).where(transactions: {result: 'success'})
+
+    end
+
+end 
+
