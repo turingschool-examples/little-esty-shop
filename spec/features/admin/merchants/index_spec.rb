@@ -9,9 +9,20 @@ RSpec.describe 'admin merchant index page' do
 
       visit '/admin/merchants'
 
+      within "#merchants0" do
       expect(page).to have_content('Spongebob The Merchant')
-      expect(page).to have_content('Jon Doe Dough')
-      expect(page).to have_content('Mary Shelley Books')
+      expect(page).to_not have_content('Jon Doe Dough')   
+      end
+
+      within "#merchants1" do
+        expect(page).to have_content('Jon Doe Dough')
+        expect(page).to_not have_content('Mary Shelley Books')  
+      end
+
+      within "#merchants2" do
+      expect(page).to have_content('Mary Shelley Books')   
+      expect(page).to_not have_content('Spongebob The Merchant')
+      end
     end
   end
 end

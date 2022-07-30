@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   scope :admin, module: :admin do
     get '/invoices', to: 'invoices#index'
     get 'invoices/:id', to: 'invoices#show'
+    get '/merchants', to: 'merchants#index'
   end
 
 end
