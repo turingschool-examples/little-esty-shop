@@ -2,28 +2,16 @@ Rails.application.routes.draw do
 
   get '/', to: "welcome#index"
   get "/merchants/:id/dashboard", to: "merchants#show"
+  get '/merchants/:id/items/new', to: 'items#new'
 
   resources :merchants, except: [:show] do
     resources :items, only: [:index, :show, :edit, :update]
     resources :invoices, only: [:index, :show, :update]
   end
 
-  #get '/merchants/:id/items', to: 'items#index'
   patch '/merchants/:id/items', to: 'items#status'
 
-  get '/merchants/:id/items/new', to: 'items#new'
   post '/merchants/:id/items', to: 'items#create'
-  get '/merchants/:id/items/:id', to: 'items#show'
-  get '/merchants/:id/items/:id/edit', to: 'items#edit'
-  patch '/merchants/:id/items/:id', to: 'items#update'
-
-  #get '/merchants/:id/items/:id', to: 'items#show'
-  #get '/merchants/:id/items/:id/edit', to: 'items#edit'
-  #patch '/merchants/:id/items/:id', to: 'items#update'
-
-  #get '/merchants/:id/invoices', to: "invoices#index"
-  #get '/merchants/:id/invoices/:id', to: 'invoices#show'
-  #patch '/merchants/:id/invoices/:id', to: 'invoices#update'
   
   get '/admin', to: 'admins#index'
 
