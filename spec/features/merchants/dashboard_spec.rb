@@ -197,7 +197,7 @@ RSpec.describe 'Dashboard Page' do
     invoice6.transactions.create!(credit_card_number: 2295123422951234, result: 0)
 
     visit "/merchants/#{pokemart.id}/dashboard"
-
+save_and_open_page
     within "#customer-id-#{trainer_red.id}" do
       expect(page).to have_content(trainer_red.first_name)
       expect(page).to have_content(trainer_red.last_name)
