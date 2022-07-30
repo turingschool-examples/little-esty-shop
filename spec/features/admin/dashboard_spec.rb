@@ -196,7 +196,7 @@ RSpec.describe 'Admin Dashboard page' do
     invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 1)
     
     visit admin_index_path
- save_and_open_page
+ 
     within('#incomplete-invoices') do
       expect(page).to have_link("Invoice ##{invoice1.id}")
       click_on("Invoice ##{invoice1.id}")
