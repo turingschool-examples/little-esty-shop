@@ -192,7 +192,7 @@ RSpec.describe 'admin merchant index page' do
       end
     end
 
-    xit 'the top 5 merchants link will take you to the merchant show page' do 
+    it 'the top 5 merchants link will take you to the merchant show page' do 
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -256,9 +256,9 @@ RSpec.describe 'admin merchant index page' do
       visit '/admin/merchants'
 
       within "#top-five-merchants" do 
-        click_on 'XXX'
+        click_on 'Spongebob The Merchant'
 
-        expect(current_path).to eq("XXXX")
+        expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
       end
     end
 
