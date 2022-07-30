@@ -40,6 +40,22 @@ RSpec.describe 'Merchant Item Index' do
                 expect(page).to_not have_content(@bat.name)
             end
 
+            it "is able to create a new item" do
+              visit merchant_items_path(@merchant1.id)
+
+              click_link 'Create New Item'
+
+              fill_in 'Name', with: 'bricks'
+              fill_in 'description', with: 'use to create buildings and create things'
+              fill_in 'unit_price', with: '500'
+
+              click_on ("Submit")
+
+              expect(current_path).to eq(merchant_items_path(@merchant1.id))
+
+              expect(page).to have_content('bricks')
+            end
+
             it "is able to enable and disable a item and take you back to the index page and see that the status has changed
             by grouping into one of two sections, enabled and disabled" do
                 visit merchant_items_path(@merchant1.id)

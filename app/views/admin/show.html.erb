@@ -1,0 +1,10 @@
+<div id="invoice">
+  <% @invoice.invoice_items.each do |invoice| %>
+  <%= invoice.item.id %>
+      <p>Name: <%= invoice.item.name %></p>
+      <p>Quantity: <%= invoice.quantity %></p>
+      <p>Price: <%= invoice.unit_price %></p>
+      <p>Status: <%= invoice.status %></p>
+  <% end %>
+</div>
+ 

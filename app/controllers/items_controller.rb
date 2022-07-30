@@ -29,6 +29,21 @@ class ItemsController < ApplicationController
         end
     end
 
+    def new
+
+    end
+
+    def create
+      merchant = Merchant.find(params[:merchant_id])
+      item = merchant.items.new(item_params)
+      if item.save
+        redirect_to merchant_items_path
+      else
+        redirect_to new_merchant_items_path
+        flash[:error] = "Unable to create items."
+      end
+    end
+
     private
     def item_params
         params.permit(:name, :unit_price, :description, :status)

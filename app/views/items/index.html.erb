@@ -1,5 +1,7 @@
 <h1>Merchant Items</h1>
 
+<p><%= link_to "Create New Item", new_merchant_item_path %></p>
+
 <div id='enabled'>
   <h2>Enabled Items</h2>
   <% @items.enabled.each do |item| %>
@@ -33,4 +35,3 @@
     </div>
   </ol>
 </div>
-
