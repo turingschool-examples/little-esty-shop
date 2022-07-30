@@ -17,7 +17,7 @@ RSpec.describe 'Admin Invoices Show page' do
       expect(page).to have_content("David Smith")
     end
 
-    it 'shows information of all items under an invoice' do
+    it 'shows information + total revenue of all items under an invoice' do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
       customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
 
@@ -30,6 +30,8 @@ RSpec.describe 'Admin Invoices Show page' do
       invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
 
       visit "/admin/invoices/#{invoice_1.id}"
+      
+      expect(page).to have_content("Total Revenue: $60.00")
 
       within "#items-#{item_1.id}" do
         expect(page).to have_content("Item: Log")
@@ -48,10 +50,6 @@ RSpec.describe 'Admin Invoices Show page' do
         expect(page).to_not have_content("Status: pending")
         expect(page).to_not have_content("Item: Log")
       end
-    end
-
-    it 'shows total revenue from an invoice' do
-      
     end
   end
 end
