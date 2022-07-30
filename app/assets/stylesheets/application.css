@@ -63,10 +63,32 @@ html, body{
   border-top: 2px solid black;    
 }
 
+#dashboard-content-right-merchant-item-index {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard-content-left-merchant-item-index {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 #dashboard-content-right {
   flex: 1;
   display: flex;
   flex-direction: column;
+  border-top: 2px solid black;
+}
+
+#content-center-title {
+  text-align: center;
+  background-color: rgb(221, 217, 217);
+  min-height: 40px;
+  font-weight: bolder;
+  line-height: 40px;
+  margin-bottom: 20px;
   border-top: 2px solid black;
 }
 
@@ -133,3 +155,46 @@ html, body{
   background-color: #bc43cc;
 }
 
+.dashboard-content-left-subtitle {
+  font-size: large;
+  font-weight: bold;
+}
+
+.content-column-title-merch-item-index {
+  text-align: center;
+  min-height: 40px;
+  font-weight: bolder;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+
+.top-items-item {
+  padding-bottom: 5px;
+}
+
+.new-item-button {
+  background-color: #038596;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  max-width: fit-content;
+  margin: 5px;
+  margin-bottom: 30px;
+}
+
+.new-item-button:hover {
+  background-color: #259eae;
+}
+
+.item-disable-button {
+  background-color: #6668d0;
+}
+
+.enabled-item {
+  margin-left: 20px;
+}
+
+.disabled-item {
+  margin-left: 20px;
+}
