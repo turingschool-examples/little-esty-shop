@@ -24,3 +24,13 @@
         </div>
     <% end %>
 </div>
+
+<h3>Top Merchants</h3>
+<ol type = "1">
+<% @merchants.top_5_merchants.each_with_index do |merchant, index| %>
+    <div id = "top-merchants-<%=index %>">
+    <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.revenue) %> in total sales</li>
+    </div>
+<% end %>
+</ol>
+

@@ -42,6 +42,78 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.disabled_merchants).to eq([merchant_3])
       end
     end
+
+    describe '#top_5_merchants' do 
+      it 'returns the top 5 merchants by total revenue' do
+        Faker::UniqueGenerator.clear 
+
+        # merchant_1 with $20 revenue 
+        merchant_1 = Merchant.create!(name: Faker::Company.name)
+        item_1 = merchant_1.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 5)
+        customer_1 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_1 = customer_1.invoices.create!(status: 1)
+        ii_1a = invoice_1.invoice_items.create!(quantity: 4, unit_price: 5, status: 2, item_id: item_1.id)
+        transaction_1 = invoice_1.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # merchant_2 with $44 revenue 
+        merchant_2 = Merchant.create!(name: Faker::Company.name)
+        item_2a = merchant_2.items.create!(name: 'water bottle2a', description: 'bottle of water', unit_price: 10)
+        item_2b = merchant_2.items.create!(name: 'water bottle2b', description: 'bottle of water', unit_price: 1)
+        customer_2 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_2 = customer_2.invoices.create!(status: 1)
+        ii_2a = invoice_2.invoice_items.create!(quantity: 4, unit_price: 10, status: 2, item_id: item_2a.id)
+        ii_2b = invoice_2.invoice_items.create!(quantity: 4, unit_price: 1, status: 2, item_id: item_2b.id)
+        transaction_2 = invoice_2.transactions.create!(credit_card_number: "1234", result: "success")
+        
+        # merchant_3 with $4 revenue 
+        merchant_3 = Merchant.create!(name: Faker::Company.name)
+        item_3 = merchant_3.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 1)
+        customer_3 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_3 = customer_3.invoices.create!(status: 1)
+        ii_3a = invoice_3.invoice_items.create!(quantity: 4, unit_price: 1, status: 2, item_id: item_3.id)
+        transaction_3 = invoice_3.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # merchant_4 with $30 revenue 
+        merchant_4 = Merchant.create!(name: Faker::Company.name)
+        item_4 = merchant_4.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 10)
+        customer_4 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_4 = customer_4.invoices.create!(status: 1)
+        ii_4a = invoice_4.invoice_items.create!(quantity: 3, unit_price: 10, status: 2, item_id: item_4.id)
+        transaction_4 = invoice_4.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # merchant_5 with $70 revenue 
+        merchant_5 = Merchant.create!(name: Faker::Company.name)
+        item_5a = merchant_5.items.create!(name: 'water bottle5a', description: 'bottle of water', unit_price: 10)
+        item_5b = merchant_5.items.create!(name: 'water bottle5b', description: 'bottle of water', unit_price: 5)
+        customer_5 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_5 = customer_5.invoices.create!(status: 1)
+        ii_5a = invoice_5.invoice_items.create!(quantity: 4, unit_price: 10, status: 2, item_id: item_5a.id)
+        ii_5b = invoice_5.invoice_items.create!(quantity: 6, unit_price: 5, status: 2, item_id: item_5b.id)
+        transaction_5 = invoice_5.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # merchant_6 with $15 revenue 
+        merchant_6 = Merchant.create!(name: Faker::Company.name)
+        item_6a = merchant_6.items.create!(name: 'water bottle6a', description: 'bottle of water', unit_price: 1)
+        item_6b = merchant_6.items.create!(name: 'water bottle6b', description: 'bottle of water', unit_price: 5)
+        item_6c = merchant_6.items.create!(name: 'water bottle6c', description: 'bottle of water', unit_price: 7)
+        customer_6 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_6 = customer_6.invoices.create!(status: 1)
+        ii_6a = invoice_6.invoice_items.create!(quantity: 3, unit_price: 1, status: 2, item_id: item_6a.id)
+        ii_6b = invoice_6.invoice_items.create!(quantity: 1, unit_price: 5, status: 2, item_id: item_6b.id)
+        ii_6c = invoice_6.invoice_items.create!(quantity: 1, unit_price: 7, status: 2, item_id: item_6c.id)
+        transaction_6 = invoice_6.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # merchant_7 with $0 revenue 
+        merchant_7 = Merchant.create!(name: Faker::Company.name)
+        item_7a = merchant_7.items.create!(name: 'water bottle6a', description: 'bottle of water', unit_price: 1)
+        customer_7 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        invoice_7 = customer_7.invoices.create!(status: 1)
+        ii_7a = invoice_7.invoice_items.create!(quantity: 100, unit_price: 1, status: 2, item_id: item_6a.id)
+        transaction_7 = invoice_7.transactions.create!(credit_card_number: "1234", result: "failed")
+
+        expect(Merchant.top_5_merchants).to eq([merchant_5, merchant_2, merchant_4, merchant_1, merchant_6])
+      end
+    end
   end
 
   describe 'instance methods' do
