@@ -106,7 +106,6 @@ RSpec.describe 'Admin Dashboard page' do
     c6_invoice1.transactions.create!(credit_card_number: 7795123477951234, result: 1)
     
     visit admin_index_path
-
     within "#customer-1" do
       expect(page).to have_content(customer1.first_name)
       expect(page).to have_content(customer1.last_name)

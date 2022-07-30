@@ -26,4 +26,30 @@ RSpec.describe 'merchant_invoices show page' do
         expect(page).to_not have_content("ID: #{invoice2.id}")
       end
   end
+
+  it 'displays items within invoice with their name, qty, price, and status' do
+      merch1 = Merchant.create!(name: 'Needful Things Imports')
+
+      customer1 = Customer.create!(first_name: 'Bob', last_name: 'Schneider')
+      customer2 = Customer.create!(first_name: 'Veruca', last_name: 'Salt')
+
+      item1 = merch1.items.create!(name: 'Phoenix Feather Wand', description: 'Ergonomic grip', unit_price: 20)
+      item2 = merch1.items.create!(name: 'Harmonica', description: 'Makes pretty noise', unit_price: 6)
+
+      invoice1 = customer1.invoices.create!(status: 1)
+      invoice2 = customer2.invoices.create!(status: 1)
+
+      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item2, quantity: 1, unit_price: 6, status: 1)
+      invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
+
+      visit merchant_invoice_path(merch1.id, invoice1.id)
+
+      within('#invoice-item-information') do
+        expect(page).to have_content("Item Name: #{invoice_item1.item.name}")
+        expect(page).to have_content("Quantity Ordered: #{invoice_item1.quantity}")
+        expect(page).to have_content("Price: #{invoice_item1.unit_price}")
+        expect(page).to have_content("Status: #{invoice_item1.status}")
+        expect(page).to_not have_content("Item Name: #{invoice_item2.item.name}")
+      end
+  end
 end
