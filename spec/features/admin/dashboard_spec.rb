@@ -22,7 +22,7 @@ RSpec.describe 'Admin Dashboard page' do
       expect(page).to have_link('Invoices')
     end
   end
-  it 'shows the top 5 customers(largest # of successful transactions, and the total # of transactions per customer' do
+  it 'shows the top 5 customers(largest # of successful transactions), and the total # of transactions per customer' do
     # wizmart = Merchant.create!(name: 'Wally Wands')
     # wand1 = wizmart.items.create!(name: 'Phoenix Feather Wand', description: 'Rare and powerful', unit_price: 200)
     # wand2 = wizmart.items.create!(name: 'Unicorn Horn Wand', description: 'No unicorns were harmed', unit_price: 500)
@@ -106,7 +106,7 @@ RSpec.describe 'Admin Dashboard page' do
     c6_invoice1.transactions.create!(credit_card_number: 7795123477951234, result: 1)
     
     visit admin_index_path
-save_and_open_page
+
     within "#customer-1" do
       expect(page).to have_content(customer1.first_name)
       expect(page).to have_content(customer1.last_name)
@@ -146,5 +146,10 @@ save_and_open_page
       expect(page).to_not have_content(customer1.first_name)
       expect(page).to_not have_content(customer6.first_name)
     end
+  end
+  it 'has a section for incomplete invoices' do
+    visit admin_index_path
+
+    expect(page).to have_content('Incomplete Invoices')
   end
 end
