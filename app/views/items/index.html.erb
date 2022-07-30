@@ -8,7 +8,7 @@ h2 {text-align: left}
 <body>
 
 <h1>Little Esty Shop</h1>
-
+<p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
 
 <h2><%= @merchant.name %></h2>
   <% @merchant.items.each do |item| %>
@@ -20,6 +20,7 @@ h2 {text-align: left}
      <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { availability: "enable" }  %>
   <% end %>
   </div>
+
 <% end %>
 
 </body>

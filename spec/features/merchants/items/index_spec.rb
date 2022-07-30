@@ -15,8 +15,8 @@ RSpec.describe 'Merchant Items Index Page' do
 
     expect(page).to have_content("Josey Wales")
     expect(page).to_not have_content("Britches Eckles")
-    expect(page).to have_content("Name: Camera")
-    expect(page).to_not have_content("Name: Bone")
+    expect(page).to have_content("Camera")
+    expect(page).to_not have_content("Bone")
   end 
 
   it 'items are links' do
@@ -35,6 +35,18 @@ RSpec.describe 'Merchant Items Index Page' do
 
     expect(current_path).to eq(merchant_items_path(merchant1, item1))
   end
+
+  it "has a link to create a new item" do 
+    merchant = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
+
+    visit merchant_items_path(merchant)
+
+    expect(page).to have_link('Create New Item')
+
+    click_on "Create New Item"
+
+    expect(current_path).to eq(new_merchant_item_path(merchant))
+  end 
 
   describe 'Disable/Enable' do
     it 'shows the items availiblity' do
@@ -67,5 +79,6 @@ RSpec.describe 'Merchant Items Index Page' do
       end
     end
   end
+
 end
 
