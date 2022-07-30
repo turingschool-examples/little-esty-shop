@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   
   get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
 
+
 end
