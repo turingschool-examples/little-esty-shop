@@ -11,8 +11,6 @@ RSpec.describe 'Admins Invoice Index page' do
 
       visit invoices_path
 
-      save_and_open_page
-
       within "#inv-#{invoice_1.id}" do
         expect(page).to have_content("Invoice # #{invoice_1.id}")
         expect(page).to_not have_content("Invoice # #{invoice_2.id}")
@@ -33,8 +31,3 @@ RSpec.describe 'Admins Invoice Index page' do
     end
   end
 end
-
-
-# Admin Invoices Index Page::: As an admin, When I visit the admin Invoices index ("/admin/invoices") 
-# Then I see a list of all Invoice ids in the system
-# Each id links to the admin invoice show page
