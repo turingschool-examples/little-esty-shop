@@ -398,9 +398,9 @@ RSpec.describe 'merchant items index page' do
       invoice_item_13 = InvoiceItem.create!(item_id: jacks.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
 
       visit "/merchants/#{merchant_1.id}/items"
-      save_and_open_page
+  save_and_open_page
       within "#top-five-items" do 
-        expect(page).to have_content("Top selling date for #{spatula.name} was []")
+        expect(page).to have_content("Top selling date for Spatula was #{spatula.top_day.strftime("%-m/%d/%y")}")
       end
     end
   end
