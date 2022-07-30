@@ -1,5 +1,16 @@
-<h1>Merchant Invoices</h1>
+<h1>Merchant Invoice</h1>
 <P>ID: <%= @invoice.id %></p>
 <p>Status: <%= @invoice.status %></p>
 <p>Created: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
 <p>Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+
+<h2>Item Information</h2>
+<% @invoice.items.each do |item| %>
+<% item.invoice_items.each do |invoice_item| %>
+  <p>Name: <%= item.name %></p>
+  <p>Quantity: <%= invoice_item.quantity %></p>
+  <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %>
+  <p>Status: <%= invoice_item.status %></p>
+  <br><br><br><br>
+  <% end %>
+<% end %>
