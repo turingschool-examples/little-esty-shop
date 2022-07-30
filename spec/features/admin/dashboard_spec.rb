@@ -57,7 +57,7 @@ RSpec.describe 'Admin Dashboard' do
         8.times do
             Customer.create!(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name)
         end
-        Customer.all.each.with_index do |customer, index|
+        Customer.all.each.with_index(1) do |customer, index|
             index.times do 
                 customer.invoices.create!(status: Faker::Number.between(from: 0, to: 2) )
             end

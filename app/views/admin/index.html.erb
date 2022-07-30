@@ -5,6 +5,6 @@
 <div id="top-customers">
     <h3> Top Customer </h3>
     <% Customer.top_5_by_transaction.each.with_index(1) do |customer, i| %>
-        <p> <%= "#{i}. #{customer.first_name} #{customer.last_name}" %> </p>
+        <p> <%= "#{i}. #{customer.first_name} #{customer.last_name} - #{customer.count} purchases" %> </p>
     <% end %>
 </div>
