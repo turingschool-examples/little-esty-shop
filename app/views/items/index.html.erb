@@ -19,4 +19,14 @@
     </div>
   <% end %>
 </div>
+<div id='top-items'>
+  <h2>Top Items</h2>
+  <ol><% Item.top_5_by_rev(@merchant).each do |item| %>
+    <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>- <%= "#{number_to_currency(item.total_sales)}" %> in sales
+      <br>
+      Top day for <%= "#{item.name}" %> was <%= "#{item.top_day}" %>
+      <% end %>
+    </li>
+  </ol>
+</div>
 
