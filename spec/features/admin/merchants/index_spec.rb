@@ -262,7 +262,7 @@ RSpec.describe 'admin merchant index page' do
       end
     end
 
-    xit 'shows the revenue for each of the top 5 merchants' do 
+    it 'shows the revenue for each of the top 5 merchants' do 
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -326,7 +326,11 @@ RSpec.describe 'admin merchant index page' do
       visit "/admin/merchants"
 
       within "#top-five-merchants" do 
-        
+        expect(page).to have_content('$0.42')
+        expect(page).to have_content('$0.12')
+        expect(page).to have_content('$0.08')
+        expect(page).to have_content('$0.06')
+        expect(page).to have_content('$0.04')
       end
     end
   end
