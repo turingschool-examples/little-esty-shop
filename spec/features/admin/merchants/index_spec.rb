@@ -108,13 +108,18 @@ RSpec.describe 'admin merchant index page' do
       invoice_item_13 = InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
 
       visit "/admin/merchants"
-      save_and_open_page
+
       within "#top-five-merchants" do 
-        expect(page).to have_content([])
+        expect('Spongebob The Merchant').to appear_before('Patrick The Starfish')
+        expect('Patrick The Starfish').to appear_before('Sandy The Squirrel Merchant')
+        expect('Sandy The Squirrel Merchant').to appear_before('Barnacle Boy The Sidekick')
+        expect('Barnacle Boy The Sidekick').to appear_before('Mr. Krabs The Boss')
+        expect(page).to have_content('Mr. Krabs The Boss')
+        expect(page).to_not have_content('Mermaid Man The Hero')
       end
     end
 
-    xit 'the top 5 merchants have a link to each merchant show page' do 
+    it 'the top 5 merchants have a link to each merchant show page' do 
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -179,11 +184,15 @@ RSpec.describe 'admin merchant index page' do
       visit '/admin/merchants'
 
       within "#top-five-merchants" do 
-        
+        expect(page).to have_link('Spongebob The Merchant')
+        expect(page).to have_link('Patrick The Starfish')
+        expect(page).to have_link('Sandy The Squirrel Merchant')
+        expect(page).to have_link('Barnacle Boy The Sidekick')
+        expect(page).to have_link('Mr. Krabs The Boss')
       end
     end
 
-    it 'the top 5 merchants link will take you to the merchant show page' do 
+    xit 'the top 5 merchants link will take you to the merchant show page' do 
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
