@@ -41,9 +41,9 @@ RSpec.describe Invoice do
       invoice1 = customer1.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
       invoice2 = customer1.invoices.create!(status: 2,created_at: '2022-07-27 08:08:32 UTC')
       invoice3 = customer1.invoices.create!(status: 0,created_at: '2022-07-20 02:08:32 UTC')
-      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 3, unit_price: 750, status: 1)
+      invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 3, unit_price: 750, status: 0)
       invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 150, status: 2)
-      invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 0)
+      invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 1)
       
       merch2 = Merchant.create!(name: 'Needful Things')
       item3 = merch2.items.create!(name: 'Potion of Haste', description: 'Gotta catch em all!', unit_price: 150)
@@ -55,15 +55,19 @@ RSpec.describe Invoice do
       invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: item3, quantity: 3, unit_price: 750, status: 1)
       invoice_item5 = InvoiceItem.create!(invoice: invoice5, item: item3, quantity: 1, unit_price: 150, status: 2)
       invoice_item6 = InvoiceItem.create!(invoice: invoice6, item: item4, quantity: 5, unit_price: 50, status: 0)
-      # Invoices succeed,One invoice where invoice fail, invoice_item fail
-      invoices = invoices_with_items_not_shipped
+      
+      invoices = Invoice.invoices_with_items_not_shipped
+      # binding.pry
+      # Invoice succeeds, invoice_item succeeds
       expect(invoices.include?(invoice1)).to be(true)
-      expect(invoices.include?(invoice2)).to be(true)
+      # Invoice succeeds, invoice_item fails
+      expect(invoices.include?(invoice2)).to be(false)
+      # Invoice fails, invoice_item succeeds
       expect(invoices.include?(invoice3)).to be(false)
 
       # invoices succeed, one invoice where invoice succeed, invoice_item fail
       expect(invoices.include?(invoice4)).to be(true)
-      expect(invoices.include?(invoice5)).to be(true)
+      expect(invoices.include?(invoice5)).to be(false)
       expect(invoices.include?(invoice6)).to be(false)
     end
   end
