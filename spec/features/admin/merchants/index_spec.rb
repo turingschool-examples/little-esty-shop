@@ -385,7 +385,6 @@ RSpec.describe 'Admin Merchants Index' do
         transaction_7 = invoice_7.transactions.create!(credit_card_number: "1234", result: "failed")
 
         visit admin_merchants_path 
-        save_and_open_page
 
         within('#top-merchants-0') do 
             expect(page).to have_content("$70.00 in total sales")
