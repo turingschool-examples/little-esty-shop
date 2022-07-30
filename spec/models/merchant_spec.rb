@@ -69,8 +69,7 @@ RSpec.describe Merchant do
 
     describe 'class methods' do
       it 'calculates the top 5 merchants by revenue' do
-
-        merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
       merchant_4 = Merchant.create!(name: 'Mr. Krabs The Boss')
@@ -130,7 +129,11 @@ RSpec.describe Merchant do
       invoice_item_13 = InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
       invoice_item_13 = InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
 
-        expect(Merchant.top_five_merchants).to eq([])
+        expect(Merchant.top_five_merchants.first).to eq(merchant_1)
+        expect(Merchant.top_five_merchants[1]).to eq(merchant_3)
+        expect(Merchant.top_five_merchants[2]).to eq(merchant_2)
+        expect(Merchant.top_five_merchants[3]).to eq(merchant_5)
+        expect(Merchant.top_five_merchants.last).to eq(merchant_4)
       end
     end
 
