@@ -1,6 +1,9 @@
 <h1><%= @merchant.name %></h1>
-  <% @merchant.items.each do |item| %>
-  <%= link_to "Name: #{item.name}", merchant_items_path(@merchant, item)%> <br>
+
+<p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
+
+<% @merchant.items.each do |item| %>
+  <p><%= link_to "#{item.name}", merchant_items_path(@merchant, item)%></p>
 <% end %>
 
 

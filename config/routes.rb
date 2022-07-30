@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
   resources :merchants do
     resources :dashboard, only: [:index]
-    resources :items, only: [:index, :show, :edit, :update]
+    resources :items, only: [:index, :create, :new, :edit, :show, :update]
     resources :invoices, only: [:index]
   end
 
