@@ -6,8 +6,8 @@ resources :merchants, only:[:show] do
   resources :dashboard, only:[:index]
   end
 
-get '/merchants/:id/invoices', to: 'merchants#show'
 get '/merchants/:id/items', to: 'merchants#show'
+get '/merchants/:id/invoices', to: 'merchants#show'
 get '/merchants/:id/invoices/:id', to: 'invoices#show'
-
+get 'merchants/:id/items/:id', to: 'merchant_items#show'
 end
