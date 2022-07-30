@@ -1,3 +1,12 @@
 <h1>Administrator Invoice # <%= @invoice.id %> Page</h1>
 
 <%= render "invoice_show/show" %>
+
+<% @invoice.items.each do |item| %>
+<div id="items-<%= item.id %>">
+  <h3>Item: <%= item.name %></h3>
+  <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
+  <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p>
+  <p>Status: <%= item.item_status(@invoice) %><br>
+</div>
+<% end %>

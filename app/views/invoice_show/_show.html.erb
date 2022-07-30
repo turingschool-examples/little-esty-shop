@@ -2,3 +2,6 @@
 <%= "Invoice Status: #{@invoice.status}"%><br>
 <%= "Invoice Created at: #{@invoice.created_at.strftime("%A, %B %e, %Y")}" %><br>
 <%= "Customer Name: #{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br>
+
+<h3>Total Revenue</h3>
+<%= "Total Revenue: #{number_to_currency(@invoice.invoice_items.sum{|ii|ii.quantity*ii.unit_price}.fdiv(100))}"%>
