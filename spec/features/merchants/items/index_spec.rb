@@ -110,6 +110,20 @@ RSpec.describe 'Merchant Item Index' do
                     end
                 end
             end
+
+            it "next to each of the 5 most popular items I see the date with the most sales for each item.
+            and I see a label 'Top Selling date for <item name> was <date>" do
+                visit merchant_items_path(@merchant1.id)
+                save_and_open_page
+                within("#top-items") do
+                    within("#top-item-#{@hammer.id}") do
+                        expect(page).to have_content("Top selling day for hammer was 2022-04-25")
+                    end
+                    within("#top-item-#{@item1.id}") do
+                        expect(page).to have_content("Top selling day for screwdriver was 2022-03-25")
+                    end
+                end
+            end
         end
     end
 end
