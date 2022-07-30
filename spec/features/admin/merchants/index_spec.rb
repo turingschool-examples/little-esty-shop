@@ -108,7 +108,7 @@ RSpec.describe 'admin merchant index page' do
       invoice_item_13 = InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
 
       visit "/admin/merchants"
-
+      save_and_open_page
       within "#top-five-merchants" do 
         expect(page).to have_content([])
       end
