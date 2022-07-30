@@ -26,6 +26,9 @@
     <div id="top-item-<%= item.id %>">
     <li>
       <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>- <%= "#{number_to_currency(item.total_sales)}" %> in sales
+      <br>
+      Top selling day for <%= "#{item.name}" %> was <%= "#{item.top_day}" %>
+      <% end %>
     </li>
     </div>
   </ol>
