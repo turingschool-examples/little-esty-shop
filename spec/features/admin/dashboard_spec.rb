@@ -77,4 +77,26 @@ RSpec.describe 'Admin Dashboard' do
             expect(page).to have_content("2. #{customers.second.first_name} #{customers.second.last_name} - 7 purchases")
         end
     end
+
+    it 'shows incomplete invoices which have items that havent shipped' do
+        merchant = Merchant.create!(name: 'Mike Dao')
+        customer = Customer.create!(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name)
+        8.times do
+            Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: Faker::Number.digit, merchant_id: merchant.id )
+        end
+        10.times do
+            invoice = Invoice.create!(status: Faker::Number.between(from: 0, to: 2), customer_id: customer.id)
+            InvoiceItem.create!(invoice_id: invoice.id,quantity: Faker::Number.digit, unit_price: Faker::Number.digit, status: 'pending', item_id: Faker::Number.between(from: Item.first.id, to: Item.last.id))
+        end
+        invoice = Invoice.create!(status: Faker::Number.between(from: 0, to: 2), customer_id: customer.id)
+        InvoiceItem.create!(invoice_id: invoice.id,quantity: Faker::Number.digit, unit_price: Faker::Number.digit, status: 'shipped', item_id: Faker::Number.between(from: Item.first.id, to: Item.last.id))
+
+        visit '/admin'
+
+        within "#incomplete-invoices" do
+            expect(page).to have_content("Invoice ##{Invoice.first.id}")
+            expect(page).to have_content("Invoice ##{Invoice.fifth.id}")
+            expect(page).to_not have_content("Invoice ##{Invoice.last.id}")
+        end
+    end
 end
