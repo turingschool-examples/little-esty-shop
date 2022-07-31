@@ -4,3 +4,12 @@
   <h3> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3>
   </div>
 <% end %>
+
+<div id="top-five-merchants">
+  <h3>Top Merchants</h3>
+  <ol>
+  <% @merchants.top_five_merchants.each do |merchant| %>
+      <li><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %> - <%= number_to_currency(merchant.revenue.fdiv(100)) %> in sales </li>
+  <% end %>
+  </ol>
+</div>
