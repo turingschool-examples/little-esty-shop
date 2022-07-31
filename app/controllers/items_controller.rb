@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
           flash[:alert] = "Error: #{error_message(item.errors)}"
         end
   end
-  
+
   def new
     @merchant = Merchant.find(params[:merchant_id])
   end
@@ -55,4 +55,3 @@ class ItemsController < ApplicationController
     params.permit(:name, :description, :unit_price, :status)
   end
 end
-
