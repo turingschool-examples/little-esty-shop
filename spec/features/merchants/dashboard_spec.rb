@@ -123,7 +123,7 @@ RSpec.describe 'the merchant dashboard' do
     transaction27 = Transaction.create!(invoice_id: invoice8.id, credit_card_number: 2629, credit_card_expiration_date: 1127, result: 1 )
 
     visit "/merchants/#{merchant1.id}/dashboard"
-    
+
     expect(current_path).to eq("/merchants/#{merchant1.id}/dashboard")
     expect(page).to have_content("Favorite Customers")
     expect(page).to have_content("Robert Smith with 6 transactions")
