@@ -355,7 +355,7 @@ RSpec.describe 'admin merchant index page' do
 
       expect(current_path).to eq("/admin/merchants/new")
     end
-    
+
     it 'shows a button to Enable / Disable merchants' do
       merchant_1 = Merchant.create!(name: "Bob The Burgerman")
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
@@ -391,20 +391,50 @@ RSpec.describe 'admin merchant index page' do
 
       visit "/admin/merchants"
 
-      click_on "Enable Bob The Burgerman"
+      click_on "Disable Bob The Burgerman"
 
       within "#merchants0" do
+        expect(page).to have_current_path("/admin/merchants")
+        expect(page).to have_content("Status: Disabled")
+        expect(page).to_not have_content("Status: Enabled")
+      end
+
+      click_on "Enable Sandy The Squirrel Merchant"
+
+      within "#merchants1" do
         expect(page).to have_current_path("/admin/merchants")
         expect(page).to have_content("Status: Enabled")
         expect(page).to_not have_content("Status: Disabled")
       end
+    end
 
-      click_on "Disable Sandy The Squirrel Merchant"
+    it 'groups by the merchants Enabled / Disabled  status' do
+      merchant_1 = Merchant.create!(name: "Bob The Burgerman")
+      merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
+      merchant_2 = Merchant.create!(name: 'Patrick The Star')
+      merchant_2 = Merchant.create!(name: 'Squidward')
 
-      within "#merchants1" do
+      visit "/admin/merchants"
+
+      click_on "Enable Bob The Burgerman"
+      click_on "Enable Sandy The Squirrel Merchant"
+      click_on "Disable Patrick The Star"
+      click_on "Disable Squidward"
+
+      within "#enabled_merchants" do
         expect(page).to have_current_path("/admin/merchants")
-        expect(page).to have_content("Status: Disabled")
-        expect(page).to_not have_content("Status: Enabled")
+        expect(page).to have_content("Bob The Burgerman")
+        expect(page).to have_content("Sandy The Squirrel Merchant")
+        expect(page).to_not have_content("Patrick The Star")
+        expect(page).to_not have_content("Squidward")
+      end
+
+      within "#disabled_merchants" do
+        expect(page).to have_current_path("/admin/merchants")
+        expect(page).to have_content("Patrick The Star")
+        expect(page).to have_content("Squidward")
+        expect(page).to_not have_content("Bob The Burgerman")
+        expect(page).to_not have_content("Sandy The Squirrel Merchant")
       end
     end
   end
