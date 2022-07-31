@@ -30,7 +30,7 @@ RSpec.describe 'Merchant Invoices Show Page' do
   expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
   expect(page).to have_content("#{invoice1.id}")
   expect(page).to have_content("completed")
-  expect(page).to have_content("Saturday, July 30, 2022")
+  expect(page).to have_content("#{invoice1.created_at.strftime('%A, %B %d, %Y')}")
   expect(page).to have_content("Bob Smith")
   end
 
@@ -60,7 +60,7 @@ RSpec.describe 'Merchant Invoices Show Page' do
     invoice_item4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, quantity: 7, unit_price: 65666, status: 2)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-save_and_open_page
+
     expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
     expect(page).to have_content("Name: Coaster")
     expect(page).to have_content("Quantity: 4")
