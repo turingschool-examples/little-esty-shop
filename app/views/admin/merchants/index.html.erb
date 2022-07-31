@@ -1,7 +1,26 @@
 <h1>Admin Merchants</h1><br>
+
+<h3>Enabled Merchants</h3>
+
+ <div id="enabled_merchants">
+    <% @merchants.each do |merc| %>
+    <% if merc.status == "Enabled" %>
+      <%= link_to "#{merc.name}", "/admin/merchants/#{merc.id}" %>
+    <% end %>
+  <% end %>
+</div><br><br>
+
+ <div id="disabled_merchants">
+    <% @merchants.each do |merc| %>
+    <% if merc.status == "Disabled" %>
+      <%= link_to "#{merc.name}", "/admin/merchants/#{merc.id}" %>
+    <% end %>
+  <% end %>
+</div><br><br>
+
 <% @merchants.each_with_index do |merchant, index| %>
   <div id="merchants<%= index %>">
-  <h3> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3><p> Status: <%= merchant.status %></p>
+  <h3> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3><p> =Status: <%= merchant.status %></p>
   <%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}?enabled=true", method: :patch, local: true %>&emsp;
   <%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}?disabled=true", method: :patch, local: true %>
   </div>
