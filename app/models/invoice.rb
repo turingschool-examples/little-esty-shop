@@ -27,5 +27,8 @@ class Invoice < ApplicationRecord
 
     end
 
-end 
+    def full_name
+      customer.first_name + " " + customer.last_name
+    end
 
+end
