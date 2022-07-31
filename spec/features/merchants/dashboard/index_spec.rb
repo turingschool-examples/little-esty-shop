@@ -16,9 +16,9 @@ RSpec.describe 'Merchant Dashboard' do
     @customer_6 = Customer.create!(first_name: "Freddy", last_name: "McCoy", created_at: Time.now, updated_at: Time.now)
     @customer_7 = Customer.create!(first_name: "Ted", last_name: "Williams", created_at: Time.now, updated_at: Time.now)
 
-    @invoice_1 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_1.id)
-    @invoice_2 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_2.id)
-    @invoice_3 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_3.id)
+    @invoice_1 = Invoice.create!(status: 0, created_at: '2022-07-30 00:00:00 UTC', updated_at: Time.now, customer_id: @customer_1.id)
+    @invoice_2 = Invoice.create!(status: 0, created_at: '2022-07-29 00:00:00 UTC', updated_at: Time.now, customer_id: @customer_2.id)
+    @invoice_3 = Invoice.create!(status: 0, created_at: '2022-07-28 00:00:00 UTC', updated_at: Time.now, customer_id: @customer_3.id)
     @invoice_4 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_4.id)
     @invoice_5 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_5.id)
     @invoice_6 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_6.id)
@@ -140,5 +140,15 @@ RSpec.describe 'Merchant Dashboard' do
           expect(current_path).to eq(merchant_invoices_path(@merchant, @invoice_1))
         end
       end
+    end
+
+    it 'displays the invoice date next to the item and is sorted by least recent' do
+      expect(page).to have_content('Saturday, July 30, 2022')
+      expect(page).to have_content('Friday, July 29, 2022')
+      expect(page).to have_content('Thursday, July 28, 2022')
+
+
+      expect('Thursday, July 28, 2022').to appear_before('Friday, July 29, 2022')
+      expect('Friday, July 29, 2022').to appear_before('Saturday, July 30, 2022')
     end
 end
