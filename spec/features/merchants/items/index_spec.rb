@@ -129,11 +129,12 @@ RSpec.describe 'items index page' do
       visit merchant_items_path(merchant_1)
 
       within "#top_5_items" do
-      expect(page).to have_content("Top day for #{item_6.top_earning_day.strftime("%-m/%d/%y")}")
-      expect(page).to have_content("Top day for #{item_5.top_earning_day.strftime("%-m/%d/%y")}")
-      expect(page).to have_content("Top day for #{item_4.top_earning_day.strftime("%-m/%d/%y")}")
-      expect(page).to have_content("Top day for #{item_3.top_earning_day.strftime("%-m/%d/%y")}")
-      expect(page).to have_content("Top day for #{item_2.top_earning_day.strftime("%-m/%d/%y")}")
+      expect(page).to have_content("Top selling date for #{item_6.name} was #{item_6.best_revenue_day[0].date.strftime("%-m/%d/%y")}")
+      expect(page).to have_content("Top selling date for #{item_5.name} was #{item_5.best_revenue_day[0].date.strftime("%-m/%d/%y")}")
+      expect(page).to have_content("Top selling date for #{item_4.name} was #{item_4.best_revenue_day[0].date.strftime("%-m/%d/%y")}")
+      expect(page).to have_content("Top selling date for #{item_3.name} was #{item_3.best_revenue_day[0].date.strftime("%-m/%d/%y")}")
+      expect(page).to have_content("Top selling date for #{item_2.name} was #{item_2.best_revenue_day[0].date.strftime("%-m/%d/%y")}")
+      save_and_open_page
     end
   end
 
