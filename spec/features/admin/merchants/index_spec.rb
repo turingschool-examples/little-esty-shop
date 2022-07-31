@@ -333,5 +333,57 @@ RSpec.describe 'admin merchant index page' do
         expect(page).to have_content('$0.04')
       end
     end
+
+    it 'shows a button to Enable / Disable merchants' do
+      merchant_1 = Merchant.create!(name: "Bob The Burgerman")
+      merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
+      merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
+
+      visit "/admin/merchants"
+
+      within "#merchants0" do
+        expect(page).to have_selector(:link_or_button, "Enable Bob The Burgerman")
+        expect(page).to have_selector(:link_or_button, "Disable Bob The Burgerman")
+        expect(page).to_not have_selector(:link_or_button, "Enable Sandy The Squirrel Merchant")
+        expect(page).to_not have_selector(:link_or_button, "Disable Sandy The Squirrel Merchant")
+      end
+
+      within "#merchants1" do
+        expect(page).to have_selector(:link_or_button, "Enable Sandy The Squirrel Merchant")
+        expect(page).to have_selector(:link_or_button, "Disable Sandy The Squirrel Merchant")
+        expect(page).to_not have_selector(:link_or_button, "Enable Patrick The Starfish")
+        expect(page).to_not have_selector(:link_or_button, "Disable Patrick The Starfish")
+      end
+
+      within "#merchants2" do
+        expect(page).to have_selector(:link_or_button, "Enable Patrick The Starfish")
+        expect(page).to have_selector(:link_or_button, "Disable Patrick The Starfish")
+        expect(page).to_not have_selector(:link_or_button, "Bob The Burgerman")
+        expect(page).to_not have_selector(:link_or_button, "Bob The Burgerman")
+      end
+    end
+
+    it 'changes the merchants Enabled / Disabled  status' do
+      merchant_1 = Merchant.create!(name: "Bob The Burgerman")
+      merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
+
+      visit "/admin/merchants"
+
+      click_on "Enable Bob The Burgerman"
+
+      within "#merchants0" do
+        expect(page).to have_current_path("/admin/merchants")
+        expect(page).to have_content("Status: Enabled")
+        expect(page).to_not have_content("Status: Disabled")
+      end
+
+      click_on "Disable Sandy The Squirrel Merchant"
+
+      within "#merchants1" do
+        expect(page).to have_current_path("/admin/merchants")
+        expect(page).to have_content("Status: Disabled")
+        expect(page).to_not have_content("Status: Enabled")
+      end
+    end
   end
 end
