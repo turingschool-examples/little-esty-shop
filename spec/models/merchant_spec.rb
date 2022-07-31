@@ -245,7 +245,7 @@ RSpec.describe Merchant, type: :model do
       transaction_13 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_13.id )
       transaction_14 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_14.id )
       transaction_15 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_15.id )
-      binding.pry
+
       expect(merchant_6.top_earning_day.date.strftime).to eq(merchant_6)
       expect(merchant_5.top_earning_day).to eq(merchant_5)
     end
@@ -308,8 +308,8 @@ RSpec.describe Merchant, type: :model do
           invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 2, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
           invoice_item_6 = InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
           expect(merchant_1.top_5_items).to eq([item_1, item_2, item_3, item_4, item_5])
-        
+
         end
       end
-    
+
 end
