@@ -124,14 +124,20 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     visit "/merchants/#{merchant1.id}/dashboard"
       expect(page).to have_link("#{merchant1.name}'s Item Index")
       expect(page).to have_link("#{merchant1.name}'s Invoice Index")
+      expect(page).to_not have_link("#{merchant2.name}'s Item Index")
+      expect(page).to_not have_link("#{merchant2.name}'s Invoice Index")
 
     visit "/merchants/#{merchant2.id}/dashboard"
       expect(page).to have_link("#{merchant2.name}'s Item Index")
       expect(page).to have_link("#{merchant2.name}'s Invoice Index")
+      expect(page).to_not have_link("#{merchant1.name}'s Item Index")
+      expect(page).to_not have_link("#{merchant1.name}'s Invoice Index")
  
     visit "/merchants/#{merchant3.id}/dashboard"
       expect(page).to have_link("#{merchant3.name}'s Item Index")
       expect(page).to have_link("#{merchant3.name}'s Invoice Index")
+      expect(page).to_not have_link("#{merchant2.name}'s Item Index")
+      expect(page).to_not have_link("#{merchant2.name}'s Invoice Index")
   end
 end
 
