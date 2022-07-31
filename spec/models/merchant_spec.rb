@@ -246,8 +246,8 @@ RSpec.describe Merchant, type: :model do
       transaction_14 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_14.id )
       transaction_15 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_15.id )
 
-      expect(merchant_6.top_earning_day.date.strftime).to eq(merchant_6)
-      expect(merchant_5.top_earning_day).to eq(merchant_5)
+      expect(merchant_6.top_earning_day[0].date).to eq("2012-03-17 08:54:11 UTC")
+      expect(merchant_5.top_earning_day[0].date).to eq("2012-03-26 06:54:10 UTC")
     end
   end
 
@@ -311,5 +311,4 @@ RSpec.describe Merchant, type: :model do
 
         end
       end
-
 end
