@@ -15,6 +15,11 @@ class Admin::MerchantsController < ApplicationController
   def new
   end
 
+  def create
+    merchant = Merchant.new(merchant_params)
+    merchant.save
+  end
+
   def update
     merchant = Merchant.find(params[:id])
     if merchant.update(merchant_params)
