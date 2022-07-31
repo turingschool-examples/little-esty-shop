@@ -4,7 +4,7 @@ RSpec.describe 'Admin Invoices Item Index' do
     describe 'As a Invoice' do
         describe 'When I visit the admin Invoices Show page' do
 
-            it "is able to list all of the invoices atrributes " do
+            it "is able to list all of the invoices attributes " do
 
               merchant1 = Merchant.create!(name: "Poke Retirement homes")
         			merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
@@ -27,7 +27,7 @@ RSpec.describe 'Admin Invoices Item Index' do
               expect(page).to have_content("Pikachu pics")
               expect(page).to have_content(1)
               expect(page).to have_content(1000)
-              expect(page).to have_content("shipped") 
+              expect(page).to have_content("shipped")
 
             end
 
