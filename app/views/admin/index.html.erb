@@ -1,5 +1,7 @@
 <h1>Little Esty Shop</h1>
 
+<%= link_to 'Create Merchant', "/admin/merchants/new"%>
+
 <div id="admin_merchant">
   <% @merchants.each do |merchant| %>
     <p><h3><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %></h3></p>
