@@ -20,6 +20,7 @@ class Invoice < ApplicationRecord
     temp = self.where.not(status: 0)
     valid_invoices =  temp.distinct.joins(:invoice_items)
                           .where.not("invoice_items.status = 2")
+                          .order(created_at: :desc)
   end
 end
 

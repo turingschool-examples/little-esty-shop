@@ -219,12 +219,10 @@ RSpec.describe 'Admin Dashboard page' do
     visit admin_index_path
  
     within('#incomplete-invoices') do
-      expect(page).to have_content("Invoice ##{invoice1.id} 2022-07-26 01:08:32 UTC")
-      expect(invoice2.id).to appear_before(invoice1.id)
-      expect(invoice1.id).to appear_before(invoice4.id)
-      expect(invoice4.id).to appear_before(invoice3.id)
-      
-      expect(current_path).to eq(admin_invoice_path(invoice1))
+      expect(page).to have_content("Invoice ##{invoice1.id} Tuesday, July 26, 2022")
+      expect("Invoice ##{invoice2.id}").to appear_before("Invoice ##{invoice1.id}")
+      expect("Invoice ##{invoice1.id}").to appear_before("Invoice ##{invoice4.id}")
+      expect("Invoice ##{invoice4.id}").to appear_before("Invoice ##{invoice3.id}")
     end
   end
 end
