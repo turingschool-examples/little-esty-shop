@@ -15,3 +15,7 @@
  */
 
  /* @import dashboard; */
+ @font-face {
+    font-family: 'Ibarra Real Nova', serif;
+    src: url('Montserrat-Regular.ttf');
+ }
