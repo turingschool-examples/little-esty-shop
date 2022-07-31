@@ -11,16 +11,16 @@ RSpec.describe 'admin merchant index page' do
 
       within "#merchants0" do
       expect(page).to have_content('Spongebob The Merchant')
-      expect(page).to_not have_content('Jon Doe Dough')   
+      expect(page).to_not have_content('Jon Doe Dough')
       end
 
       within "#merchants1" do
         expect(page).to have_content('Jon Doe Dough')
-        expect(page).to_not have_content('Mary Shelley Books')  
+        expect(page).to_not have_content('Mary Shelley Books')
       end
 
       within "#merchants2" do
-      expect(page).to have_content('Mary Shelley Books')   
+      expect(page).to have_content('Mary Shelley Books')
       expect(page).to_not have_content('Spongebob The Merchant')
       end
     end
@@ -35,18 +35,18 @@ RSpec.describe 'admin merchant index page' do
       within "#merchants0" do
         click_link('Spongebob The Merchant')
 
-        expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")      
+        expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
       end
 
       visit '/admin/merchants'
 
       within "#merchants1" do
         click_link('Jon Doe Dough')
-        expect(current_path).to eq("/admin/merchants/#{merchant_2.id}")  
+        expect(current_path).to eq("/admin/merchants/#{merchant_2.id}")
       end
     end
 
-    it 'shows the top 5 merchants by revenue' do 
+    it 'shows the top 5 merchants by revenue' do
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -109,7 +109,7 @@ RSpec.describe 'admin merchant index page' do
 
       visit "/admin/merchants"
 
-      within "#top-five-merchants" do 
+      within "#top-five-merchants" do
         expect('Spongebob The Merchant').to appear_before('Patrick The Starfish')
         expect('Patrick The Starfish').to appear_before('Sandy The Squirrel Merchant')
         expect('Sandy The Squirrel Merchant').to appear_before('Barnacle Boy The Sidekick')
@@ -119,7 +119,7 @@ RSpec.describe 'admin merchant index page' do
       end
     end
 
-    it 'the top 5 merchants have a link to each merchant show page' do 
+    it 'the top 5 merchants have a link to each merchant show page' do
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -183,7 +183,7 @@ RSpec.describe 'admin merchant index page' do
 
       visit '/admin/merchants'
 
-      within "#top-five-merchants" do 
+      within "#top-five-merchants" do
         expect(page).to have_link('Spongebob The Merchant')
         expect(page).to have_link('Patrick The Starfish')
         expect(page).to have_link('Sandy The Squirrel Merchant')
@@ -192,7 +192,7 @@ RSpec.describe 'admin merchant index page' do
       end
     end
 
-    it 'the top 5 merchants link will take you to the merchant show page' do 
+    it 'the top 5 merchants link will take you to the merchant show page' do
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -255,14 +255,14 @@ RSpec.describe 'admin merchant index page' do
 
       visit '/admin/merchants'
 
-      within "#top-five-merchants" do 
+      within "#top-five-merchants" do
         click_on 'Spongebob The Merchant'
 
         expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
       end
     end
 
-    it 'shows the revenue for each of the top 5 merchants' do 
+    it 'shows the revenue for each of the top 5 merchants' do
       merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
       merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
@@ -325,7 +325,7 @@ RSpec.describe 'admin merchant index page' do
 
       visit "/admin/merchants"
 
-      within "#top-five-merchants" do 
+      within "#top-five-merchants" do
         expect(page).to have_content('$0.42')
         expect(page).to have_content('$0.12')
         expect(page).to have_content('$0.08')
@@ -355,7 +355,7 @@ RSpec.describe 'admin merchant index page' do
 
       expect(current_path).to eq("/admin/merchants/new")
     end
-      
+
     it 'shows a button to Enable / Disable merchants' do
       merchant_1 = Merchant.create!(name: "Bob The Burgerman")
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
