@@ -3,13 +3,14 @@
 <%= render "invoice_show/show" %>
 
 <% @invoice.items.each do |item| %>
-<div id="items-<%= item.id %>">
-  <h3>Item: <%= item.name %></h3>
-  <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
-  <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p>
-  <p>Status: <%= form_with url: "/merchants/#{item.merchant_id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %></p><br>
-  <%= f.select :update_status, ['pending', 'packaged', 'shipped'], selected: item.item_status(@invoice) %><br>
-  <%= f.submit 'Update Status' %>
-  <% end %>
-</div>
+  <div id="items-<%= item.id %>">
+    <h3>Item: <%= item.name %></h3>
+    <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
+    <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p>
+    <p>Status: <%= form_with url: "/merchants/#{item.merchant_id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %></p><br>
+    <%= f.select :update_status, ['pending', 'packaged', 'shipped'], selected: item.item_status(@invoice) %><br>
+    <%= f.submit 'Update Status' %>
+    <% end %>
+  </div>
 <% end %>
+
