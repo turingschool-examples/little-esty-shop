@@ -38,6 +38,6 @@
 <h3>Best Selling Items</h3>
   <ol id="top_5_items">
   <% @merchant.top_5_items.each do |best_seller| %>
-    <li><%= link_to "#{best_seller.name}", merchant_item_path(@merchant, best_seller) %> - Total Revenue: $<%= best_seller.total_revenue %>. Top selling date for <%= best_seller.name %>.</li>
+    <li><%= link_to "#{best_seller.name}", merchant_item_path(@merchant, best_seller) %> - Total Revenue: $<%= best_seller.total_revenue %>. Top selling date for <%= best_seller.name %> was <%= best_seller.best_revenue_day[0].date.strftime("%-m/%d/%y")%>.</li>
   <% end %>
 </ol>
