@@ -334,6 +334,27 @@ RSpec.describe 'admin merchant index page' do
       end
     end
 
+    it 'has button to create a new merchant' do
+      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+      merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
+      merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
+
+      visit '/admin/merchants'
+
+      expect(page).to have_link('Create New Merchant')
+    end
+
+    it 'when create new merchant button is clicked it directs to page to create a new merchant' do
+      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
+      merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
+      merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
+
+      visit '/admin/merchants'
+
+      click_link('Create New Merchant')
+
+      expect(current_path).to eq("/admin/merchants/new")
+      
     it 'shows a button to Enable / Disable merchants' do
       merchant_1 = Merchant.create!(name: "Bob The Burgerman")
       merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
