@@ -13,5 +13,15 @@ RSpec.describe 'admin merchant new page' do
 
       expect(page).to have_content('Curious Imports')
     end
+
+    it 'gives error message when field is left blank' do
+
+      visit "admin/merchants/new"
+
+      fill_in('Name', with: '')
+      click_button('Create')
+
+      expect(page).to have_content("Error: Field Cannot Be Blank")
+    end
   end
 end

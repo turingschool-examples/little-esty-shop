@@ -17,7 +17,13 @@ class Admin::MerchantsController < ApplicationController
 
   def create
     merchant = Merchant.new(merchant_params)
-    merchant.save
+    if merchant.save
+      redirect_to "/admin/merchants"
+      flash.clear
+    else
+      redirect_to "/admin/merchants/new"
+      flash[:alert] = "Error: Field Cannot Be Blank"
+    end
   end
 
   def update
