@@ -29,7 +29,7 @@ RSpec.describe 'admin merchants index page' do
       click_link "Trader Joes"
     end
 
-    expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+    expect(current_path).to eq(admin_merchant_path(merchant1.id))
 
     expect(page).to have_content("Trader Joes")
   end
