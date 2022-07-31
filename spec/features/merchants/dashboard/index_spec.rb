@@ -3,13 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Merchant Dashboard' do
 
   before :each do
-    @merchant = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
+    @merchant = Merchant.create!(name: "Al Capone", created_at: Time.now, updated_at: Time.now)
 
     @item_1 = Item.create!(name: "Moonshine", description: "alcohol", unit_price: 2, created_at: Time.now, updated_at: Time.now, merchant_id: @merchant.id)
+    @item_2 = Item.create!(name: "Hat", description: "hat", unit_price: 2, created_at: Time.now, updated_at: Time.now, merchant_id: @merchant.id)
 
     @customer_1 = Customer.create!(first_name: "Babe", last_name: "Ruth", created_at: Time.now, updated_at: Time.now)
     @customer_2 = Customer.create!(first_name: "Charles", last_name: "Bukowski", created_at: Time.now, updated_at: Time.now)
-    @customer_3 = Customer.create!(first_name: "Al", last_name: "Capone", created_at: Time.now, updated_at: Time.now)
+    @customer_3 = Customer.create!(first_name: "Josey", last_name: "Wales", created_at: Time.now, updated_at: Time.now)
     @customer_4 = Customer.create!(first_name: "Popcorn", last_name: "Sutton", created_at: Time.now, updated_at: Time.now)
     @customer_5 = Customer.create!(first_name: "Nucky", last_name: "Johnson", created_at: Time.now, updated_at: Time.now)
     @customer_6 = Customer.create!(first_name: "Freddy", last_name: "McCoy", created_at: Time.now, updated_at: Time.now)
@@ -105,5 +106,39 @@ RSpec.describe 'Merchant Dashboard' do
       expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
       expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
       expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
+    end
+
+#When I visit my merchant dashboard
+# Then I see a section for "Items Ready to Ship"
+# In that section I see a list of the names of all of my items that
+# have been ordered and have not yet been shipped,
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
+
+    describe 'Items Ready to Ship' do
+      it 'displays items that have been ordered but not yet shipped and has link to the invoice' do
+        within(".ready_to_ship") do
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_1.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_2.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_3.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_5.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_6.id)
+
+          expect(page).to_not have_content(@invoice_4.id)
+
+          click_link("#{@invoice_1.id}")
+
+          expect(current_path).to eq(merchant_invoices_path(@merchant, @invoice_1))
+        end
+      end
     end
 end
