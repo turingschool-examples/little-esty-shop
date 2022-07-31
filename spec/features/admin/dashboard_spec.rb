@@ -106,7 +106,6 @@ RSpec.describe 'Admin Dashboard page' do
     c6_invoice1.transactions.create!(credit_card_number: 7795123477951234, result: 1)
     
     visit admin_index_path
-
     within "#customer-1" do
       expect(page).to have_content(customer1.first_name)
       expect(page).to have_content(customer1.last_name)
@@ -173,7 +172,7 @@ RSpec.describe 'Admin Dashboard page' do
     invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: item3, quantity: 3, unit_price: 750, status: 1)
     
     visit admin_index_path
-# save_and_open_page
+
     within('#incomplete-invoices') do
       expect(page).to have_content("Invoice ##{invoice1.id}")
       expect(page).to have_content("Invoice ##{invoice4.id}")
@@ -201,6 +200,29 @@ RSpec.describe 'Admin Dashboard page' do
       expect(page).to have_link("Invoice ##{invoice1.id}")
       click_on("Invoice ##{invoice1.id}")
       expect(current_path).to eq(admin_invoice_path(invoice1))
+    end
+  end
+  it 'next to each invoice is the date it was created, and they are from oldest to newest' do
+    merch1 = Merchant.create!(name: 'Potions and Things')
+    item1 = merch1.items.create!(name: 'Love Potion', description: 'Wanna smooch you', unit_price: 1350)
+    item3 = merch1.items.create!(name: 'Hair of Newt', description: 'Yes, they have hair', unit_price: 350)
+    customer1 = Customer.create!(first_name: 'Harry', last_name: 'Potter')
+    invoice1 = customer1.invoices.create!(status: 1,created_at: '2022-07-26 01:08:32 UTC')
+    invoice2 = customer1.invoices.create!(status: 2,created_at: '2022-07-27 08:08:32 UTC')
+    invoice3 = customer1.invoices.create!(status: 1,created_at: '2022-07-20 02:08:32 UTC')
+    invoice4 = customer1.invoices.create!(status: 2,created_at: '2022-07-21 02:08:32 UTC')
+    invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 3, unit_price: 750, status: 0)
+    invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 150, status: 0)
+    invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: item3, quantity: 5, unit_price: 50, status: 1)
+    invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: item3, quantity: 5, unit_price: 50, status: 1)
+
+    visit admin_index_path
+ 
+    within('#incomplete-invoices') do
+      expect(page).to have_content("Invoice ##{invoice1.id} Tuesday, July 26, 2022")
+      expect("Invoice ##{invoice2.id}").to appear_before("Invoice ##{invoice1.id}")
+      expect("Invoice ##{invoice1.id}").to appear_before("Invoice ##{invoice4.id}")
+      expect("Invoice ##{invoice4.id}").to appear_before("Invoice ##{invoice3.id}")
     end
   end
 end

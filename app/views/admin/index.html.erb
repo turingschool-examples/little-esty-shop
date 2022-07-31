@@ -17,6 +17,9 @@
 <div id="incomplete-invoices">
   <h2>Incomplete Invoices</h2>
   <% Invoice.invoices_with_items_not_shipped.each do |invoice| %>
-    <p><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %></p>
+    <p>
+      <%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %>
+      <%= invoice.formatted_date %>
+    </p>
   <% end %>
 </div>

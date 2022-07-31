@@ -28,8 +28,11 @@ RSpec.describe Invoice do
     it 'can return a string of the customers full name' do
       customer1 = Customer.create!(first_name: 'Theophania', last_name: 'Fenwick')
       invoice1 = customer1.invoices.create!(status: 1, created_at: '2022-07-26 01:08:32 UTC')
+      customer2 = Customer.create!(first_name: 'Bob', last_name: 'Schneider')
+      invoice2 = customer2.invoices.create!(status: 1, created_at: '2022-07-26 01:08:32 UTC')
 
       expect(invoice1.customer_name).to eq('Theophania Fenwick')
+      expect(invoice2.customer_name).to eq('Bob Schneider')
     end
     it 'can return a list of invoices that have not shipped' do
       # (invoice status 1,2...invoice_item status 0,1)
