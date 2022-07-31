@@ -109,7 +109,8 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     expect('Fasey').to appear_before('Pach')
     expect('Pach').to appear_before('Tarker')
     expect('Tarker').to_not appear_before('Gesley')
-
+  end
+  
   it "can list a link to merchant items and invoices indexes" do
     merchant1 = Merchant.create!(name: "Poke Retirement homes")
 		merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
@@ -121,24 +122,22 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
     item4 = Item.create!(name: "macrame runner", description: 'handmade macrame runner', unit_price: 2500, merchant_id: merchant3.id)
 
     visit "/merchants/#{merchant1.id}/dashboard"
-
-    within "div#merchants" do
       expect(page).to have_link("#{merchant1.name}'s Item Index")
       expect(page).to have_link("#{merchant1.name}'s Invoice Index")
-    end
+      expect(page).to_not have_link("#{merchant2.name}'s Item Index")
+      expect(page).to_not have_link("#{merchant2.name}'s Invoice Index")
 
     visit "/merchants/#{merchant2.id}/dashboard"
-
-    within "div#merchants" do
       expect(page).to have_link("#{merchant2.name}'s Item Index")
       expect(page).to have_link("#{merchant2.name}'s Invoice Index")
-    end
-
+      expect(page).to_not have_link("#{merchant1.name}'s Item Index")
+      expect(page).to_not have_link("#{merchant1.name}'s Invoice Index")
+ 
     visit "/merchants/#{merchant3.id}/dashboard"
-
-    within "div#merchants" do
       expect(page).to have_link("#{merchant3.name}'s Item Index")
       expect(page).to have_link("#{merchant3.name}'s Invoice Index")
-    end
+      expect(page).to_not have_link("#{merchant2.name}'s Item Index")
+      expect(page).to_not have_link("#{merchant2.name}'s Invoice Index")
   end
 end
+

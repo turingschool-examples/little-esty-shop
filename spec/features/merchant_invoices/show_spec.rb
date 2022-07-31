@@ -103,14 +103,12 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     end
 
     visit "/merchants/#{merchant2.id}/invoices/#{invoice2.id}"
-    # save_and_open_page
     within "div#revenue" do
       expect(page).to have_content("Total Revenue: 4000")
       expect(page).to_not have_content("1000")
     end
 
     visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
-    # save_and_open_page
     within "div#revenue" do
       expect(page).to have_content("Total Revenue: 1500")
       expect(page).to_not have_content("1000")
