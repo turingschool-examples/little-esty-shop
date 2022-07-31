@@ -21,5 +21,9 @@ class Invoice < ApplicationRecord
     valid_invoices =  temp.distinct.joins(:invoice_items)
                           .where.not("invoice_items.status = 2")
   end
+
+  def total_revenue
+    invoice_items.sum('quantity * unit_price')
+  end
 end
 
