@@ -29,7 +29,8 @@
 <ol type = "1">
 <% @merchants.top_5_merchants.each_with_index do |merchant, index| %>
     <div id = "top-merchants-<%=index %>">
-    <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.revenue) %> in total sales</li>
+    <li><%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.total) %> in total sales</li>
+    Top day for <%= merchant.name %> was <%= merchant.best_day.strftime("%-m/%-e/%y") %>
     </div>
 <% end %>
 </ol>

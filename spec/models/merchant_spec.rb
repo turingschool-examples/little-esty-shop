@@ -445,13 +445,11 @@ RSpec.describe Merchant, type: :model do
         ii_1a = invoice_1.invoice_items.create!(quantity: 4, unit_price: 5, status: 2, item_id: item_1.id)
         transaction_1 = invoice_1.transactions.create!(credit_card_number: "1234", result: "success")
 
-        expect(Merchant.top_5_merchants).to eq([merchant_5, merchant_2, merchant_4, merchant_1, merchant_6])
-
         # invoice 2: $44 revenue, 9/22/2020
         item_2a = merchant_1.items.create!(name: 'water bottle2a', description: 'bottle of water', unit_price: 10)
         item_2b = merchant_1.items.create!(name: 'water bottle2b', description: 'bottle of water', unit_price: 1)
         customer_2 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
-        travel_to Time.zone.local(2020, 09, 22, 1, 4, 44)
+        travel_to Time.zone.local(2020, 9, 22, 1, 4, 44)
         time_2020 = Time.current
         invoice_2 = customer_2.invoices.create!(status: 1, created_at: time_2020)
         ii_2a = invoice_2.invoice_items.create!(quantity: 4, unit_price: 10, status: 2, item_id: item_2a.id)
@@ -461,7 +459,7 @@ RSpec.describe Merchant, type: :model do
         # invoice 3: $4 revenue, 1/1/2019
         item_3 = merchant_1.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 1)
         customer_3 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
-        trave_to Time.zone.local(2019, 01, 01, 1, 4, 44)
+        travel_to Time.zone.local(2019, 1, 1, 1, 4, 44)
         time_2019 = Time.current
         invoice_3 = customer_3.invoices.create!(status: 1, created_at: time_2019)
         ii_3a = invoice_3.invoice_items.create!(quantity: 4, unit_price: 1, status: 2, item_id: item_3.id)
@@ -470,13 +468,13 @@ RSpec.describe Merchant, type: :model do
         # invoice 4: $30 revenue, 4/5/2018
         item_4 = merchant_1.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 10)
         customer_4 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
-        trave_to Time.zone.local(2018, 04, 05, 1, 4, 44)
+        travel_to Time.zone.local(2018, 4, 5, 1, 4, 44)
         time_2018 = Time.current
         invoice_4 = customer_4.invoices.create!(status: 1, created_at: time_2018)
         ii_4a = invoice_4.invoice_items.create!(quantity: 3, unit_price: 10, status: 2, item_id: item_4.id)
         transaction_4 = invoice_4.transactions.create!(credit_card_number: "1234", result: "success")
 
-        expect(merchant_1.best_day).to eq 9/22/20
+        expect(merchant_1.best_day).to eq time_2020
       end
     end
   end
