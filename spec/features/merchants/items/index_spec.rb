@@ -38,7 +38,8 @@ RSpec.describe 'Merchant Items Index Page' do
         end
       end
       
-    expect(current_path).to eq(merchant_item_path(merchant1, item1))
+    expect(current_path).to eq(merchant_items_path(merchant1, item1))
+    end
   end
 
   it "has a link to create a new item" do 
@@ -188,31 +189,7 @@ RSpec.describe 'Merchant Items Index Page' do
         expect(page).to_not have_content("Bone")
         expect(page).to_not have_content("Kong")
       end
-      save_and_open_page
     end
   end
-
 end
-
-# within ".merchant_item-#{item1.id}" do
-  # expect(item1.availability).to eq("enable")
-
-  # click_button "Disable"
-
-  # expect(current_path).to eq(merchant_items_path(merchant1))
-  # expect(item1.availability).to eq("disable")
-  # expect(item1.availability).to_not eq("enable")
-# end
-
-# <% @merchant.items.each do |item| %>
-#   <div class="merchant_item-<%=item.id%>">
-#     <%if item.availability == "enable" %>
-#       <%= link_to "Name: #{item.name}", merchant_items_path(@merchant, item)%> 
-#       <%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { availability: "disable" }  %>
-#     <%else item.availability == "disable" %>
-#       <%= link_to "Name: #{item.name}", merchant_items_path(@merchant, item)%> 
-#       <%= button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { availability: "enable" }  %>
-#     <% end %>
-#   </div>
-# <% end %>
 
