@@ -13,7 +13,7 @@ RSpec.describe 'Admin Invoices Show page' do
 
       expect(page).to have_content(invoice_1.id)
       expect(page).to have_content("Status: cancelled")
-      expect(page).to have_content("Created at: #{created_at}")
+      expect(page).to have_content("Created at: #{invoice_1.created_at.strftime("%A, %B%e, %Y")}")
       expect(page).to have_content("David Smith")
     end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Admin Invoices Show page' do
       invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
 
       visit "/admin/invoices/#{invoice_1.id}"
-      
+
       expect(page).to have_content("Total Revenue: $60.00")
 
       within "#items-#{item_1.id}" do
