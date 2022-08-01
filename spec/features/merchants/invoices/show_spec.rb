@@ -72,7 +72,7 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     end
   end
 
-  it "can list information related to a merchant's invoice" do 
+  it "can list information related to a merchant's invoice" do
     merchant1 = Merchant.create!(name: "Poke Retirement homes")
     merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
     merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits")
@@ -126,9 +126,9 @@ RSpec.describe 'merchants invoice show page', type: :feature do
       expect(page).to_not have_content("#{invoice3.status}")
       expect(page).to_not have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
     end
-   
+
     visit "/merchants/#{merchant2.id}/invoices/#{invoice2.id}"
-     
+
     within "#invoices-#{invoice2.id}" do
       expect(page).to have_content(invoice2.id)
       expect(page).to have_content("Status: #{invoice2.status}")
@@ -138,7 +138,7 @@ RSpec.describe 'merchants invoice show page', type: :feature do
       expect(page).to_not have_content("#{invoice1.status}")
       expect(page).to_not have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
     end
-     
+
     visit "/merchants/#{merchant3.id}/invoices/#{invoice3.id}"
 
     within "#invoices-#{invoice3.id}" do
@@ -152,20 +152,20 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     end
   end
 
-  it "can update an item's status" do 
+  it "can update an item's status" do
     merchant1 = Merchant.create!(name: "Poke Retirement homes")
     item1 = Item.create!(name: "Pikachu pics", description: 'Cute pics with pikachu', unit_price: 1000, merchant_id: merchant1.id)
     customer1 = Customer.create!(first_name: "Parker", last_name: "Thomson")
     invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id)
     invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
-   
+
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
     expect(page).to have_field(:status, with: "Pending")
     select 'Packaged', from: :status
     click_on "Update Item Status"
     expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice1.id}")
-    
+
     expect(page).to have_field(:status, with: "Packaged")
     select 'Shipped', from: :status
     click_on "Update Item Status"
@@ -173,7 +173,3 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     expect(page).to have_field(:status, with: "Shipped")
   end
 end
-
-
-
-
