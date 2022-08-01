@@ -5,8 +5,8 @@ class Customer < ApplicationRecord
   has_many :invoices
 
   def self.top_five_customers
-    select("customers.*, count(transactions.id) as transactions_count")
-    .joins(invoices: :transactions)
+    joins(invoices: :transactions)
+    .select("customers.*, count(transactions.id) as transactions_count")
     .where(transactions: {result: 0})
     .group("customers.id")
     .order(transactions_count: :desc)
