@@ -9,17 +9,17 @@ RSpec.describe 'admin merchant index page' do
 
       visit '/admin/merchants'
 
-      within "#merchants0" do
+      within "#merchants-#{merchant_1.id}" do
       expect(page).to have_content('Spongebob The Merchant')
       expect(page).to_not have_content('Jon Doe Dough')
       end
 
-      within "#merchants1" do
+      within "#merchants-#{merchant_2.id}" do
         expect(page).to have_content('Jon Doe Dough')
         expect(page).to_not have_content('Mary Shelley Books')
       end
 
-      within "#merchants2" do
+      within "#merchants-#{merchant_3.id}" do
       expect(page).to have_content('Mary Shelley Books')
       expect(page).to_not have_content('Spongebob The Merchant')
       end
@@ -32,7 +32,7 @@ RSpec.describe 'admin merchant index page' do
 
       visit '/admin/merchants'
 
-      within "#merchants0" do
+      within "#merchants-#{merchant_1.id}" do
         click_link('Spongebob The Merchant')
 
         expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
@@ -40,7 +40,7 @@ RSpec.describe 'admin merchant index page' do
 
       visit '/admin/merchants'
 
-      within "#merchants1" do
+      within "#merchants-#{merchant_2.id}" do
         click_link('Jon Doe Dough')
         expect(current_path).to eq("/admin/merchants/#{merchant_2.id}")
       end
@@ -363,21 +363,21 @@ RSpec.describe 'admin merchant index page' do
 
       visit "/admin/merchants"
 
-      within "#merchants0" do
+      within "#merchants-#{merchant_1.id}" do
         expect(page).to have_selector(:link_or_button, "Enable Bob The Burgerman")
         expect(page).to have_selector(:link_or_button, "Disable Bob The Burgerman")
         expect(page).to_not have_selector(:link_or_button, "Enable Sandy The Squirrel Merchant")
         expect(page).to_not have_selector(:link_or_button, "Disable Sandy The Squirrel Merchant")
       end
 
-      within "#merchants1" do
+      within "#merchants-#{merchant_2.id}" do
         expect(page).to have_selector(:link_or_button, "Enable Sandy The Squirrel Merchant")
         expect(page).to have_selector(:link_or_button, "Disable Sandy The Squirrel Merchant")
         expect(page).to_not have_selector(:link_or_button, "Enable Patrick The Starfish")
         expect(page).to_not have_selector(:link_or_button, "Disable Patrick The Starfish")
       end
 
-      within "#merchants2" do
+      within "#merchants-#{merchant_3.id}" do
         expect(page).to have_selector(:link_or_button, "Enable Patrick The Starfish")
         expect(page).to have_selector(:link_or_button, "Disable Patrick The Starfish")
         expect(page).to_not have_selector(:link_or_button, "Bob The Burgerman")
