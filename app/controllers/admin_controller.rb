@@ -9,7 +9,7 @@ class AdminController < ApplicationController
     @invoice = Invoice.find(params[:id])
   end
 
-  def show_2 
+  def show_2
     @merchant = Merchant.find(params[:merchant_id])
   end
 
@@ -17,10 +17,27 @@ class AdminController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
-  def update 
-    merchant = Merchant.find(params[:merchant_id]) 
+  def update
+    merchant = Merchant.find(params[:merchant_id])
     merchant.update(name: params[:name])
     redirect_to "/admin/merchants/#{merchant.id}"
     flash.notice = 'The information has been successfully updated'
   end
+
+  def new
+
+  end
+
+  def create
+    merchant = Merchant.create!(merchant_params)
+    redirect_to "/admin/merchants"
+  end
+
+  private
+  def merchant_params
+    params.permit(:name, :id)
+  end
+
+
+
 end
