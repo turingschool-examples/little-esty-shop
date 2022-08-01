@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   namespace :admin do 
-    resources :merchants, only: [:index, :show, :edit, :update]
+    resources :merchants, only: [:index, :show, :edit, :update, :new, :create]
     resources :invoices, only: [:index, :show, :edit, :update]
   end
 
@@ -14,5 +14,4 @@ Rails.application.routes.draw do
   end
 
   get "/merchants/:id/dashboard", to: "merchants#show"
-
 end

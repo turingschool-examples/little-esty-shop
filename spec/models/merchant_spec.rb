@@ -22,10 +22,10 @@ RSpec.describe Merchant, type: :model do
     describe '#enabled_merchants' do 
       it 'returns only the enabled merchants' do 
         Faker::UniqueGenerator.clear 
-        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
-        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         expect(Merchant.enabled_merchants).to eq([merchant_1, merchant_2, merchant_4])
       end
@@ -34,10 +34,10 @@ RSpec.describe Merchant, type: :model do
     describe '#disabled_merchants' do 
       it 'returns only the disabled merchants' do 
         Faker::UniqueGenerator.clear 
-        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
-        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         expect(Merchant.disabled_merchants).to eq([merchant_3])
       end

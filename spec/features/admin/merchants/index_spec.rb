@@ -9,10 +9,10 @@ RSpec.describe 'Admin Merchants Index' do
     # Then I see the name of each merchant in the system
     it 'shows the name of each merchant in the system' do 
         Faker::UniqueGenerator.clear 
-        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         visit admin_merchants_path
         # save_and_open_page
@@ -41,10 +41,10 @@ RSpec.describe 'Admin Merchants Index' do
     # And I see the name of that merchant
     it 'has links to the merchants admin show page' do 
         Faker::UniqueGenerator.clear 
-        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         visit admin_merchants_path
 
@@ -84,38 +84,38 @@ RSpec.describe 'Admin Merchants Index' do
 
         visit admin_merchants_path
 
-        within("#enabled") do 
+        within("#disabled") do 
             expect(page).to have_content merchant_1.name 
             expect(page).to have_content merchant_2.name 
             expect(page).to have_content merchant_4.name 
             expect(page).to_not have_content merchant_3.name
         end
 
-        within("#disabled") do 
+        within("#enabled") do 
             expect(page).to have_content merchant_3.name 
             expect(page).to_not have_content merchant_1
             expect(page).to_not have_content merchant_2
             expect(page).to_not have_content merchant_4
         end
 
-        within("#e-merchant-0") do 
-            expect(page).to have_content merchant_1.name 
-            expect(page).to have_button "Disable"
-        end
-
-        within("#e-merchant-1") do 
-            expect(page).to have_content merchant_2.name 
-            expect(page).to have_button "Disable"
-        end
-
-        within("#e-merchant-2") do 
-            expect(page).to have_content merchant_4.name 
-            expect(page).to have_button "Disable"
-        end
-
         within("#d-merchant-0") do 
-            expect(page).to have_content merchant_3.name 
+            expect(page).to have_content merchant_1.name 
             expect(page).to have_button "Enable"
+        end
+
+        within("#d-merchant-1") do 
+            expect(page).to have_content merchant_2.name 
+            expect(page).to have_button "Enable"
+        end
+
+        within("#d-merchant-2") do 
+            expect(page).to have_content merchant_4.name 
+            expect(page).to have_button "Enable"
+        end
+
+        within("#e-merchant-0") do 
+            expect(page).to have_content merchant_3.name 
+            expect(page).to have_button "Disable"
         end
     end
 
@@ -124,10 +124,10 @@ RSpec.describe 'Admin Merchants Index' do
     # And I see that the merchant's status has changed
     it 'has buttons that changes the merchants status' do 
         Faker::UniqueGenerator.clear 
-        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
-        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         visit admin_merchants_path
 
@@ -179,10 +179,10 @@ RSpec.describe 'Admin Merchants Index' do
     # And I see that each Merchant is listed in the appropriate section
     it 'groups merchants by status' do 
         Faker::UniqueGenerator.clear 
-        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
-        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
-        merchant_3 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
-        merchant_4 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_3 = Merchant.create!(name: Faker::Name.unique.name)
+        merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         visit admin_merchants_path
 
@@ -199,5 +199,22 @@ RSpec.describe 'Admin Merchants Index' do
             expect(page).to_not have_content merchant_2
             expect(page).to_not have_content merchant_4
         end
+    end
+
+    # Admin Merchant Create
+    # As an admin,
+    # When I visit the admin merchants index
+    # I see a link to create a new merchant.
+    # When I click on the link,
+    # I am taken to a form that allows me to add merchant information.
+    it 'has a link to create a new merchant that directs to merchant#new' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
+        merchant_2 = Merchant.create!(name: Faker::Name.unique.name)
+
+        visit admin_merchants_path
+        click_link 'New Merchant' 
+
+        expect(current_path).to eq '/admin/merchants/new'
     end
 end
