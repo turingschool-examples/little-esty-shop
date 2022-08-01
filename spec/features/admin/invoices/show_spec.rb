@@ -13,7 +13,7 @@ RSpec.describe 'admin invoices show page' do
     @invoice2 = @trainer_red.invoices.create!(status: 2)
     @invoice_item1 = InvoiceItem.create!(invoice: @invoice1, item: @ultra_ball, quantity: 2, unit_price: 8,
                                          status: 0)
-    @invoice_item2 = InvoiceItem.create!(invoice: @invoice2, item: @super_potion, quantity: 2, unit_price: 5,
+    @invoice_item2 = InvoiceItem.create!(invoice: @invoice1, item: @super_potion, quantity: 2, unit_price: 5,
                                          status: 0)
     @invoice1.transactions.create!(credit_card_number: 3_395_123_433_951_234, result: 1)
     @invoice1.transactions.create!(credit_card_number: 3_395_123_433_951_234, result: 1)
@@ -49,6 +49,24 @@ RSpec.describe 'admin invoices show page' do
       expect(page).to have_content("Invoice Status: #{@invoice1.status}")
       expect(page).to have_content('Created At: Tuesday, July 26, 2022')
       expect(page).to have_content('Customer Name: Red Trainer')
+    end
+  end
+
+  it 'displays invoice item information' do
+    visit "/admin/invoices/#{@invoice1.id}"
+
+    within "#invoice-item-#{@invoice_item1.id}" do
+      expect(page).to have_content("Item Name: #{@invoice_item1.item.name}")
+      expect(page).to have_content("Quantity: #{@invoice_item1.quantity}")
+      expect(page).to have_content("Price: #{@invoice_item1.unit_price}")
+      expect(page).to have_content("Status: #{@invoice_item1.status}")
+    end
+
+    within "#invoice-item-#{@invoice_item2.id}" do
+      expect(page).to have_content("Item Name: #{@invoice_item2.item.name}")
+      expect(page).to have_content("Quantity: #{@invoice_item2.quantity}")
+      expect(page).to have_content("Price: #{@invoice_item2.unit_price}")
+      expect(page).to have_content("Status: #{@invoice_item2.status}")
     end
   end
 end
