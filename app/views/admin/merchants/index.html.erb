@@ -3,18 +3,24 @@
 <h3>Enabled Merchants</h3>
 
  <div id="enabled_merchants">
-    <% @merchants.each do |merc| %>
-    <% if merc.status == "Enabled" %>
-      <%= link_to "#{merc.name}", "/admin/merchants/#{merc.id}" %>
-    <% end %>
+  <% @merchants.each do |merc| %>
+    <div id="enabled-<%= merc.id %>">
+      <% if merc.status == "Enabled" %>
+        <%= link_to "#{merc.name}", "/admin/merchants/#{merc.id}" %>&emsp;
+      <% end %>
+    </div>
   <% end %>
 </div><br><br>
 
+<h3>Disabled Merchants</h3>
+
  <div id="disabled_merchants">
     <% @merchants.each do |merc| %>
-    <% if merc.status == "Disabled" %>
-      <%= link_to "#{merc.name}", "/admin/merchants/#{merc.id}" %>
-    <% end %>
+      <div id="disabled- <%= merc.id %>">
+        <% if merc.status == "Disabled" %>
+          <%= link_to "#{merc.name}", "/admin/merchants/#{merc.id}" %>&emsp;
+        <% end %>
+      </div>
   <% end %>
 </div><br><br>
 
@@ -32,7 +38,10 @@
   <h3>Top Merchants</h3>
   <ol>
   <% @merchants.top_five_merchants.each do |merchant| %>
+    <div id="top-five-<%= merchant.id %>">
       <li><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %> - <%= number_to_currency(merchant.revenue.fdiv(100)) %> in sales </li>
+      <p><%= merchant.name %>'s Top Sale Date: <%= merchant.top_day.strftime("%-m/%d/%y") %></p>
+    </div>
   <% end %>
   </ol>
 </div>
