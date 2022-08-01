@@ -24,8 +24,8 @@
   <% end %>
 </div><br><br>
 
-<% @merchants.each_with_index do |merchant, index| %>
-  <div id="merchants<%= index %>">
+<% @merchants.each do |merchant| %>
+  <div id="merchants-<%= merchant.id %>">
   <h3> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3><p> =Status: <%= merchant.status %></p>
   <%= button_to "Enable #{merchant.name}", "/admin/merchants/#{merchant.id}?enabled=true", method: :patch, local: true %>&emsp;
   <%= button_to "Disable #{merchant.name}", "/admin/merchants/#{merchant.id}?disabled=true", method: :patch, local: true %>
@@ -38,7 +38,10 @@
   <h3>Top Merchants</h3>
   <ol>
   <% @merchants.top_five_merchants.each do |merchant| %>
+    <div id="top-five-<%= merchant.id %>">
       <li><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %> - <%= number_to_currency(merchant.revenue.fdiv(100)) %> in sales </li>
+      <p><%= merchant.name %>'s Top Sale Date: <%= merchant.top_day.strftime("%-m/%d/%y") %></p>
+    </div>
   <% end %>
   </ol>
 </div>
