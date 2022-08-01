@@ -123,7 +123,6 @@ RSpec.describe 'admin merchant index' do
         item_5 = Item.create!(name: "Necklace", description: "Who even wears these anymore", unit_price: 7000, merchant_id: merchant_5.id, created_at: Time.now, updated_at: Time.now)
         item_6 = Item.create!(name: "Wallet", description: "Money pocket for your pocket", unit_price: 8000, merchant_id: merchant_6.id, created_at: Time.now, updated_at: Time.now)
 
-
         invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
         invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_2.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
         invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, quantity: 1, unit_price: item_3.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
@@ -160,9 +159,7 @@ RSpec.describe 'admin merchant index' do
         
         expect(page).to have_content("Top 5 Merchants:")
     
-
         expect(first).to appear_before(second)
-
 
         within ("#column2") do
             expect(page.all('.top_5_merchants')[0]).to have_content("Ali Baba - $8,000.00")
@@ -244,8 +241,6 @@ RSpec.describe 'admin merchant index' do
         transaction_15 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_15.id )
 
         visit '/admin/merchants'
-
-
 
         within ("#column2") do 
 

@@ -76,8 +76,6 @@ RSpec.describe 'admin invoice index' do
         expect(page).to have_content("Date: Thursday, July 28, 2022")
         expect(page).to have_content("Customer: John Smith")
     end
-
-
 end
 
 
