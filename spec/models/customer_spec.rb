@@ -12,10 +12,4 @@ RSpec.describe Customer do
     it { should have_many(:items).through(:invoice_items)}
     it { should have_many(:merchants).through(:items)}
   end
-
-  describe '#instance methods' do
-    xit 'returns top 5 merchants for customer' do
-
-    end
-  end
 end

@@ -242,10 +242,9 @@ RSpec.describe Merchant do
       item_7 = Item.create!(name: 'Seaweed', description: 'It is big ball of seaweed', unit_price: 450, merchant_id: merchant_2.id)
       item_8 = Item.create!(name: 'Boxing Gloves', description: 'It is for kara-tay', unit_price: 2000, merchant_id: merchant_2.id)
       item_9 = Item.create!(name: 'Jelly', description: 'It is yummy', unit_price: 300, merchant_id: merchant_2.id)
-      item_10 = Item.create!(name: 'Keyrings', description: 'It is for keys', unit_price: 275, merchant_id: merchant_2.id)
       
       customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
-      customer_2 Customer.create!(first_name: "Trill", last_name: "Pickles")
+      customer_2 = Customer.create!(first_name: "Trill", last_name: "Pickles")
       
       invoice_1 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
       invoice_2 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
@@ -274,6 +273,10 @@ RSpec.describe Merchant do
 
       invoice_20 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
       invoice_21 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+      invoice_22 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Sun, 31 Jul 2022 16:04:49 UTC +00:00")
+      invoice_23 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Sun, 31 Jul 2022 16:04:49 UTC +00:00")
+      invoice_24 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Sun, 31 Jul 2022 16:04:49 UTC +00:00")
+      invoice_25 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Sun, 31 Jul 2022 16:04:49 UTC +00:00")
 
 
       transaction_1 = Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 234, credit_card_expiration_date: nil, result: 0)
@@ -299,6 +302,10 @@ RSpec.describe Merchant do
 
       transaction_21 = Transaction.create!(invoice_id: invoice_20.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
       transaction_22 = Transaction.create!(invoice_id: invoice_21.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
+      transaction_23 = Transaction.create!(invoice_id: invoice_22.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
+      transaction_24 = Transaction.create!(invoice_id: invoice_23.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
+      transaction_25 = Transaction.create!(invoice_id: invoice_24.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
+      transaction_26 = Transaction.create!(invoice_id: invoice_25.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
 
       invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 2, item_id: item_1.id, invoice_id: invoice_1.id)
       invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_1.id, invoice_id: invoice_2.id)
@@ -325,9 +332,17 @@ RSpec.describe Merchant do
       invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_18.id)
       invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_19.id)
 
-      invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 450, status: 2, item_id: item_6.id, invoice_id: invoice_9.id)
+      invoice_item_12 = InvoiceItem.create!(quantity: 3, unit_price: 450, status: 2, item_id: item_7.id, invoice_id: invoice_20.id)
+      invoice_item_12 = InvoiceItem.create!(quantity: 3, unit_price: 450, status: 2, item_id: item_7.id, invoice_id: invoice_21.id)
+
+      invoice_item_13 = InvoiceItem.create!(quantity: 2, unit_price: 2000, status: 2, item_id: item_8.id, invoice_id: invoice_22.id)
+      invoice_item_13 = InvoiceItem.create!(quantity: 2, unit_price: 2000, status: 2, item_id: item_8.id, invoice_id: invoice_23.id)
+
+      invoice_item_14 = InvoiceItem.create!(quantity: 5, unit_price: 300, status: 2, item_id: item_9.id, invoice_id: invoice_24.id)
+      invoice_item_14 = InvoiceItem.create!(quantity: 5, unit_price: 300, status: 2, item_id: item_9.id, invoice_id: invoice_25.id)
 
       expect(merchant_1.top_day).to eq("2022-07-30 16:04:49.000000000 +0000")
+      expect(merchant_2.top_day).to eq("2022-07-31 16:04:49 UTC +00:00")
     end
   end
 end
