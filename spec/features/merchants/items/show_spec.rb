@@ -26,7 +26,7 @@ RSpec.describe Item do
         expect(page).to_not have_content("Name: Bear")
         expect(page).to_not have_content("Name: Chicken-toy")
     
-      visit merchant_item_path(merchant,item2)
+       visit merchant_item_path(merchant,item2)
 
 
         expect(page).to have_content("Name: Chicken-toy")
@@ -45,9 +45,9 @@ RSpec.describe Item do
 
       visit merchant_item_path(merchant,item)
 
-      expect(page).to have_link("Update Item Information")
+      expect(page).to have_link("Update Item")
 
-      click_link "Update Item Information"
+      click_link "Update Item"
 
       expect(current_path).to eq("/merchants/#{merchant.id}/items/#{item.id}/edit")
     end 

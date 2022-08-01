@@ -1,6 +1,6 @@
 <h1>Update Item Information</h1>
 
-<%= form_with url: merchant_item_path, method: :patch, local: true do |f| %>
+<%= form_with url: merchant_item_path(@merchant, @item), method: :patch, local: true do |f| %>
   <p><%= f.label :name %>
   <%= f.text_field :name, value: "#{@item.name}" %></p>
   <p><%= f.label :description %>
