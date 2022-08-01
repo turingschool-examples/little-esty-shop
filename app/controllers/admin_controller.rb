@@ -33,16 +33,4 @@ class AdminController < ApplicationController
   end
 end
 
-#  if params[:status].present?
-#       merchant.update_status(params[:status])
-#       redirect_to admin_merchants_path
 
-
-#      if merchant_params[:status]
-#       merchant.update(merchant_params)
-#       redirect_to "/admin/merchants"
-#  private
-
-#   def merchant_params
-#     params.permit(:name, :status)
-#   end
