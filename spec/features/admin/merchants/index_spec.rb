@@ -3,6 +3,8 @@ require 'faker'
 require 'pry'
 
 RSpec.describe 'Admin Merchants Index' do 
+    include ActiveSupport:: Testing::TimeHelpers 
+
     # Admin Merchants Index
     # As an admin,
     # When I visit the admin merchants index (/admin/merchants)
@@ -317,6 +319,10 @@ RSpec.describe 'Admin Merchants Index' do
     end
 
     # And I see the total revenue generated next to each merchant name
+    # Notes on Revenue Calculation:
+    # - Only invoices with at least one successful transaction should count towards revenue
+    # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+    # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
     it 'shows total revenue next to each top merchant' do 
         Faker::UniqueGenerator.clear 
 
@@ -407,8 +413,85 @@ RSpec.describe 'Admin Merchants Index' do
         end
     end
 
-    # Notes on Revenue Calculation:
-    # - Only invoices with at least one successful transaction should count towards revenue
-    # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-    # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+    # Admin Merchants: Top Merchant's Best Day
+    # As an admin,
+    # When I visit the admin merchants index
+    # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
+    # And I see a label “Top selling date for <merchant name> was <date with most sales>"
+    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+    it 'displays the top selling date for each top merchant' do 
+        Faker::UniqueGenerator.clear 
+
+        # merchant_1 
+        merchant_1 = Merchant.create!(name: Faker::Company.name)
+
+        # invoice 1: $20 revenue, 11/24/2004 
+        item_1 = merchant_1.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 5)
+        customer_1a = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        travel_to Time.zone.local(2004, 11, 24, 1, 4, 44)
+        time_2004 = Time.current 
+        invoice_1a = customer_1a.invoices.create!(status: 1, created_at: time_2004)
+        ii_1a = invoice_1a.invoice_items.create!(quantity: 4, unit_price: 5, status: 2, item_id: item_1.id)
+        transaction_1a = invoice_1a.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # invoice 2: $44 revenue, 9/22/2020
+        item_1b = merchant_1.items.create!(name: 'water bottle2a', description: 'bottle of water', unit_price: 10)
+        item_1c = merchant_1.items.create!(name: 'water bottle2b', description: 'bottle of water', unit_price: 1)
+        customer_1b = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        travel_to Time.zone.local(2020, 9, 22, 1, 4, 44)
+        time_2020 = Time.current
+        invoice_1b = customer_1b.invoices.create!(status: 1, created_at: time_2020)
+        ii_1b = invoice_1b.invoice_items.create!(quantity: 4, unit_price: 10, status: 2, item_id: item_1b.id)
+        ii_1c = invoice_1b.invoice_items.create!(quantity: 4, unit_price: 1, status: 2, item_id: item_1c.id)
+        transaction_1b = invoice_1b.transactions.create!(credit_card_number: "1234", result: "success")
+        
+        # invoice 3: $4 revenue, 1/1/2019
+        item_1d = merchant_1.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 1)
+        customer_1c = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        travel_to Time.zone.local(2019, 1, 1, 1, 4, 44)
+        time_2019 = Time.current
+        invoice_1c = customer_1c.invoices.create!(status: 1, created_at: time_2019)
+        ii_1d = invoice_1c.invoice_items.create!(quantity: 4, unit_price: 1, status: 2, item_id: item_1d.id)
+        transaction_1c = invoice_1c.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # invoice 4: $30 revenue, 4/5/2018
+        item_1e = merchant_1.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 10)
+        customer_1d = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        travel_to Time.zone.local(2018, 4, 5, 1, 4, 44)
+        time_2018 = Time.current
+        invoice_1d = customer_1d.invoices.create!(status: 1, created_at: time_2018)
+        ii_1e = invoice_1d.invoice_items.create!(quantity: 3, unit_price: 10, status: 2, item_id: item_1e.id)
+        transaction_1d = invoice_1d.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # merchant_2
+        merchant_2 = Merchant.create!(name: Faker::Company.name)
+
+        # invoice 1: $80 revenue, 1/1/2022 
+        item_2a = merchant_2.items.create!(name: 'water bottle', description: 'bottle of water', unit_price: 8)
+        customer_2a = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        travel_to Time.zone.local(2022, 1, 1, 1, 4, 44)
+        time_2022 = Time.current 
+        invoice_2a = customer_2a.invoices.create!(status: 1, created_at: time_2022)
+        ii_2a = invoice_2a.invoice_items.create!(quantity: 10, unit_price: 8, status: 2, item_id: item_2a.id)
+        transaction_2a = invoice_2a.transactions.create!(credit_card_number: "1234", result: "success")
+
+        # invoice 2: $5 revenue, 1/1/2015
+        item_2b = merchant_2.items.create!(name: 'water bottle2a', description: 'bottle of water', unit_price: 5)
+        customer_2b = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
+        travel_to Time.zone.local(2015, 1, 1, 1, 4, 44)
+        time_2015 = Time.current
+        invoice_2b = customer_2b.invoices.create!(status: 1, created_at: time_2015)
+        ii_2b = invoice_2b.invoice_items.create!(quantity: 1, unit_price: 5, status: 2, item_id: item_2b.id)
+        transaction_2b = invoice_2b.transactions.create!(credit_card_number: "1234", result: "success")
+
+        visit admin_merchants_path 
+
+        within('#top-merchants-0') do 
+            expect(page).to have_content("Top day for #{merchant_1.name} was 9/22/20")
+        end
+
+        within('#top-merchants-1') do 
+            expect(page).to have_content("Top day for #{merchant_2.name} was 1/1/22")
+        end
+    end
 end

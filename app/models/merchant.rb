@@ -65,8 +65,18 @@ class Merchant < ApplicationRecord
     .joins(:transactions)
     .where(transactions: {result: 'success'})
     .group(:id)
-    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-    .order('revenue desc')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as total')
+    .order('total desc')
     .limit(5)
+  end
+
+  def best_day
+    self.invoices
+    .select("invoices.id, invoices.created_at as date, sum(invoice_items.quantity * invoice_items.unit_price) as invoice_revenue")
+    .group(:id)
+    .order("invoice_revenue desc")
+    .limit(1)
+    .first
+    .date 
   end
 end
