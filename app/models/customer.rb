@@ -15,13 +15,4 @@ class Customer < ApplicationRecord
     .order(transactions_count: :desc)
     .limit(5)
   end
-
-  def top_5_merchants
-    merchants.joins(:transactions)
-             .where(transactions: {result: 0})
-             .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-             .group('merchants.id')
-             .order(revenue: :desc)
-             .limit(5)
-  end
 end
