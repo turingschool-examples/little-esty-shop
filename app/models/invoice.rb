@@ -31,4 +31,8 @@ class Invoice < ApplicationRecord
       customer.first_name + " " + customer.last_name
     end
 
+    def total_price
+      invoice_items.sum('unit_price * quantity')
+    end
+
 end
