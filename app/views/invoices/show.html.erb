@@ -1,0 +1,26 @@
+<h3>Invoice ID: <%= @invoice.id %></h3><br>
+
+<p>Status: <%= @invoice.status %></p><br>
+<p>Created At: <%= @invoice.created_at.strftime("%-m/%d/%y") %></p><br>
+<p>Customer Name: <%= @invoice.full_name %></p><br><br>
+
+<h3>Items on This Invoice:</h3><br>
+
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <id="invoice_item-<%= invoice_item.id %>">
+
+<p>Item Name: <%= invoice_item.item.name %></p><br>
+<p>Quantity Ordered: <%= invoice_item.quantity %></p><br>
+<p>Item Price: <%= invoice_item.unit_price %></p><br>
+<p>Invoice Item Status: <%= invoice_item.status %></p><br><br>
+
+
+<%= form_with url: "/merchants/#{invoice_item.item.merchant_id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+      <%= form.select :status, [["packaged"], ["pending"], ["shipped"]] %>
+      <%= form.submit "Update Invoice" %>
+      <% end %>
+    <br><br>
+  <% end %>
+
+
+Total Revenue: $<%=@invoice.total_price %>

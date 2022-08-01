@@ -78,12 +78,16 @@ RSpec.describe Customer, type: :model do
       transaction_13 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_13.id )
       transaction_14 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_14.id )
       transaction_15 = Transaction.create!(credit_card_number:4449555566667777, result: "success",created_at: Time.now, updated_at: Time.now, invoice_id:invoice_15.id )
-      
+
       expect(Customer.top_five_customers[0]).to eq(customer_5)
       expect(Customer.top_five_customers[4]).to eq(customer_1)
 
     end
   end
 
-  
+    it 'shows the first name and last name of the customer' do
+      customer_1 = Customer.create!(first_name: "John", last_name: "Smith", created_at: Time.now, updated_at: Time.now)
+
+      expect(customer_1.name).to eq("John Smith")
+    end
 end
