@@ -2,3 +2,9 @@
 
 <%= link_to "Admin Merchants Index", "/admin/merchants" %>
 <%= link_to "Admin Invoices Index", "/admin/invoices" %>
+
+<h3>Top 5 Customers</h3>
+
+<% @customers.top_five.each do |customer| %>
+<%= "#{customer.first_name} #{customer.last_name} #{customer.trans_count}" %>
+<% end %>
