@@ -134,12 +134,12 @@ RSpec.describe "admin dashboard" do
       customer_3 = Customer.create!(first_name: "John", last_name: "Johnson")
       customer_4 = Customer.create!(first_name: "Mary", last_name: "Vale")
 
-      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
-      invoice_2 = Invoice.create!(status: 0, customer_id: customer_2.id)
-      invoice_3 = Invoice.create!(status: 0, customer_id: customer_3.id)
-      invoice_4 = Invoice.create!(status: 2, customer_id: customer_4.id)
-      invoice_5 = Invoice.create!(status: 1, customer_id: customer_4.id)
-      invoice_6 = Invoice.create!(status: 2, customer_id: customer_4.id)
+      invoice_1 = Invoice.create!(status: 0, created_at: Time.new(2001), customer_id: customer_1.id)
+      invoice_2 = Invoice.create!(status: 0, created_at: Time.new(2002),customer_id: customer_2.id)
+      invoice_3 = Invoice.create!(status: 0, created_at: Time.new(2003),customer_id: customer_3.id)
+      invoice_4 = Invoice.create!(status: 2, created_at: Time.new(2004),customer_id: customer_4.id)
+      invoice_5 = Invoice.create!(status: 1, created_at: Time.new(2005),customer_id: customer_4.id)
+      invoice_6 = Invoice.create!(status: 2, created_at: Time.new(2000),customer_id: customer_4.id)
 
       invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 200, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
       invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 300, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
@@ -157,21 +157,28 @@ RSpec.describe "admin dashboard" do
       visit("/admin")
 
       expect(page).to have_content("Incomplete Invoices")
-      
+
       within '#invoice0' do
-        expect(page).to have_content("Invoice ##{invoice_1.id}")
+        expect(page).to have_content("Invoice ##{invoice_6.id}")
+        expect(page).to have_content("#{invoice_6.created_at.strftime("%A, %B%e, %Y")}")
       end
       within '#invoice1' do
-        expect(page).to have_content("Invoice ##{invoice_2.id}")
+        expect(page).to have_content("Invoice ##{invoice_1.id}")
+        expect(page).to have_content("#{invoice_1.created_at.strftime("%A, %B%e, %Y")}")
       end
       within '#invoice2' do
-        expect(page).to have_content("Invoice ##{invoice_3.id}")
+        expect(page).to have_content("Invoice ##{invoice_2.id}")
+        expect(page).to have_content("#{invoice_2.created_at.strftime("%A, %B%e, %Y")}")
       end
       within '#invoice3' do
-        expect(page).to have_content("Invoice ##{invoice_5.id}")
+        expect(page).to have_content("Invoice ##{invoice_3.id}")
+        expect(page).to have_content("#{invoice_3.created_at.strftime("%A, %B%e, %Y")}")
+
       end
       within '#invoice4' do
-        expect(page).to have_content("Invoice ##{invoice_6.id}")
+        save_and_open_page
+        expect(page).to have_content("Invoice ##{invoice_5.id}")
+        expect(page).to have_content("#{invoice_5.created_at.strftime("%A, %B%e, %Y")}")
       end
     end
 
