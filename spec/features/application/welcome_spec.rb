@@ -12,10 +12,13 @@ RSpec.describe 'Welcome page' do
     visit '/'
     click_link ("Merchants Index")
     expect(page).to have_content("Merchants")
-    visit '/'
+    
+  end
+  it "can visit Admin Index" do 
+  visit '/'
     click_link ("Admin Index")
     expect(page).to have_content("Admin")
-  end
+  end 
 
 
 end

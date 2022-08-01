@@ -11,9 +11,10 @@ h2 {text-align: left}
 <p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
 
 <h2><%= @merchant.name %></h2>
+
   <% @merchant.items.each do |item| %>
   <div class="merchant_item-<%=item.id%>">
-  <%= link_to "Name: #{item.name}", merchant_items_path(@merchant, item)%> 
+  <%= link_to "Name: #{item.name}", merchant_item_path(@merchant, item)%> 
   <%if item.availability == "enable" %>
     <%= button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: { availability: "disable" }  %>
   <%else item.availability == "disable" %>

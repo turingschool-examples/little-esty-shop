@@ -29,7 +29,7 @@ RSpec.describe 'Admin Dashboard/Index page' do
   end
 
   it 'displays admin dashboard header' do
-    visit admin_index_path
+    visit admin_dashboard_index_path
     expect(page).to have_content("Welcome to the Admin Dashboard")
   end
 

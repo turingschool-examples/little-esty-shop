@@ -10,15 +10,21 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = @merchant.items.find(params[:id])
   end
 
   def update
     item = Item.find(params[:id])
     merchant = Merchant.find(params[:merchant_id])
-    item.update(availability: params[:availability])
-    redirect_to merchant_items_path(merchant)   
-    flash.notice = "Item has been successfully update"
+    if params[:availability].present?
+      item.update(availability: params[:availability])
+      redirect_to merchant_items_path(merchant)
+    else
+      item.update(item_params)
+      redirect_to merchant_item_path(merchant, item)
+      flash[:success] = "Item has been successfully update"
+    end 
   end
 
   def new
@@ -26,9 +32,9 @@ class ItemsController < ApplicationController
   end
 
   def create 
-    @merchant = Merchant.find(params[:merchant_id])
-    @merchant.items.create(item_params)
-    redirect_to merchant_items_path(@merchant)
+    merchant = Merchant.find(params[:merchant_id])
+    merchant.items.create(item_params)
+    redirect_to merchant_items_path(merchant)
   end 
 
   private 

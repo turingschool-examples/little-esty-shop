@@ -33,7 +33,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
     click_on "Camera"
 
-    expect(current_path).to eq(merchant_items_path(merchant1, item1))
+    expect(current_path).to eq(merchant_item_path(merchant1, item1))
   end
 
   it "has a link to create a new item" do 
