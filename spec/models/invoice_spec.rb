@@ -13,6 +13,44 @@ RSpec.describe Invoice do
   end
 
   describe 'model methods' do
+    it "#total_revenue" do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+      merchant_2 = Merchant.create!(name: "Roberts Loggings")
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 200, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 300, merchant_id: merchant_1.id )
+      item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 400, merchant_id: merchant_1.id )
+      item_4 = Item.create!(name: "Axe", description: "Big Axe", unit_price: 500, merchant_id: merchant_1.id )
+      item_5 = Item.create!(name: "Hammer", description: "Carpenter's hammer, wood handle", unit_price: 600, merchant_id: merchant_2.id )
+      item_6 = Item.create!(name: "Speed Square", description: "Metal w/ level", unit_price: 700, merchant_id: merchant_2.id )
+      item_7 = Item.create!(name: "Mallet", description: "Wooden carpenter's mallet", unit_price: 800, merchant_id: merchant_2.id )
+      item_8 = Item.create!(name: "Reciprocating Saw", description: "Electric reciprocating saw", unit_price: 900, merchant_id: merchant_2.id )
+
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+      customer_2 = Customer.create!(first_name: "Cindy", last_name: "Lou")
+      customer_3 = Customer.create!(first_name: "John", last_name: "Johnson")
+      customer_4 = Customer.create!(first_name: "Mary", last_name: "Vale")
+
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+      invoice_2 = Invoice.create!(status: 0, customer_id: customer_2.id)
+      invoice_3 = Invoice.create!(status: 2, customer_id: customer_3.id)
+      invoice_4 = Invoice.create!(status: 2, customer_id: customer_4.id)
+      invoice_5 = Invoice.create!(status: 0, customer_id: customer_4.id)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 200, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 300, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 400, status: 2, item_id: item_3.id, invoice_id: invoice_2.id)
+      invoice_item_4 = InvoiceItem.create!(quantity: 2, unit_price: 500, status: 1, item_id: item_4.id, invoice_id: invoice_2.id)
+      invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 600, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+      invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 700, status: 0, item_id: item_6.id, invoice_id: invoice_3.id)
+      invoice_item_7 = InvoiceItem.create!(quantity: 3, unit_price: 800, status: 2, item_id: item_7.id, invoice_id: invoice_4.id)
+      invoice_item_8 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 2, item_id: item_8.id, invoice_id: invoice_4.id)
+      invoice_item_9 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 1, item_id: item_8.id, invoice_id: invoice_5.id)
+      invoice_item_10 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 1, item_id: item_8.id, invoice_id: invoice_5.id)
+
+      expect(invoice_1.total_revenue).to eq(1400)
+      expect(invoice_2.total_revenue).to eq(2200)
+    end
+
     it "#incomplete_invoices" do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
       merchant_2 = Merchant.create!(name: "Roberts Loggings")

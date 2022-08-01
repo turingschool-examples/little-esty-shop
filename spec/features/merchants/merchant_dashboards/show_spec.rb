@@ -17,8 +17,8 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         visit "/merchants/#{merchant_1.id}/dashboard"
 
-        expect(page).to have_link('Spongebob The Merchant Item Index')
-        expect(page).to_not have_content('Jon Doe Item Index')
+        expect(page).to have_link('My Invoices')
+        expect(page).to_not have_content('Spongebob Items')
     end
 
     it 'on the merchant dashboard I can click on the link and be sent to items index page' do
@@ -27,7 +27,7 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         visit "/merchants/#{merchant_1.id}/dashboard"
 
-        click_link ('Spongebob The Merchant Item Index')
+        click_link ('My Items')
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
     end
@@ -38,7 +38,7 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         visit "/merchants/#{merchant_1.id}/dashboard"
 
-        expect(page).to have_link('Spongebob The Merchant Invoice Index')
+        expect(page).to have_link('My Invoices')
         expect(page).to_not have_content('Jon Doe Invoice Index')
     end
 
@@ -48,7 +48,7 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         visit "/merchants/#{merchant_1.id}/dashboard"
 
-        click_link ('Spongebob The Merchant Invoice Index')
+        click_link ('My Invoices')
         expect(current_path).to eq("/merchants/#{merchant_1.id}/invoices")
     end
 
