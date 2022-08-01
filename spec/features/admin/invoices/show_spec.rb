@@ -5,8 +5,6 @@ RSpec.describe 'Admin Invoices Show Page' do
     Faker::UniqueGenerator.clear 
     @merchant_1 = Merchant.create!(name: Faker::Company.unique.name)
     @merchant_2 = Merchant.create!(name: Faker::Company.unique.name)
-
-    
     
     @customer_1 = Customer.create!(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name)
     
@@ -73,7 +71,7 @@ RSpec.describe 'Admin Invoices Show Page' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     expect(page).to have_content(@invoice_1.id)
-    expect(page).to have_content(@invoice_1.status.titlecase)
+    expect(page).to have_content(@invoice_1.status)
     expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
     expect(page).to have_content(@invoice_1.customer.first_name.titlecase)
     expect(page).to have_content(@invoice_1.customer.last_name.titlecase)
@@ -143,7 +141,7 @@ RSpec.describe 'Admin Invoices Show Page' do
     visit "/admin/invoices/#{@invoice_1.id}"
 
     within "#invoice-details" do
-      expect(page).to have_content("#{@invoice_1.status.titlecase}")
+      expect(page).to have_content("#{@invoice_1.status}")
       select "completed", :from => "status"
       click_on("Update Invoice Status")
       expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
