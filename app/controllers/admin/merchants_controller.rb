@@ -9,6 +9,10 @@ class Admin::MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
   end
+  
+  def edit
+    @merchant = Merchant.find(params[:id])
+  end
 
   def update
     @merchant = Merchant.find(params[:id])
@@ -23,6 +27,7 @@ class Admin::MerchantsController < ApplicationController
       redirect_to admin_merchants_path, notice: "ERROR PROCESSING REQUEST!"
     end
   end
+  
 private
   def merchant__params
     params.permit(:status)

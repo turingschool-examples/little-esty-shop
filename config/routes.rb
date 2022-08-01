@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   get '/merchants/:id/dashboard', to: 'merchants#show'
-  resources :merchants, only: [:show] do
+
+  # patch '/merchants/:id/'
+
+  resources :merchants, only: %i[show update] do
     resources :invoices, controller: 'merchant_invoices', only: %i[index show]
     resources :items, controller: 'merchant_items', only: %i[index edit show update new create]
   end
@@ -22,7 +25,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
-    resources :merchants, only: %i[index show update]
+    resources :merchants, only: %i[index show edit update]
     resources :invoices, only: %i[index show]
   end
 end
