@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show, :update], :controller => 'merchant_invoices'
   end
 
+  resources :admin, only: [:index]
+
   get "/merchants/:id/dashboard", to: "merchants#show"
 end

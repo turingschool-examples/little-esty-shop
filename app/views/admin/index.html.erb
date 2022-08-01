@@ -1,0 +1,17 @@
+<div id="header">
+    <%= render "shared/admin_header" %>
+</div>
+
+<div id="top-customers">
+    <h3> Top Customer </h3>
+    <% Customer.top_5_by_transaction.each.with_index(1) do |customer, i| %>
+        <p> <%= "#{i}. #{customer.first_name} #{customer.last_name} - #{customer.count} purchases" %> </p>
+    <% end %>
+</div>
+
+<div id="incomplete-invoices">
+    <h3> Incomplete Invoices</h3>
+    <% Invoice.incomplete_invoices.each do |invoice| %>
+        <p> <%=link_to( "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}", "admin/invoices/#{invoice.id}") %> </p>
+    <% end %>
+</div>
