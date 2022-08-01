@@ -9,7 +9,7 @@ RSpec.describe 'Admin Invoices Show page' do
 
       visit "/admin/invoices/#{invoice_1.id}"
 
-      created_at = invoice_1.created_at.strftime("%A, %B %e, %Y")
+      created_at = invoice_1.created_at.strftime("%A, %B%e, %Y")
 
       expect(page).to have_content(invoice_1.id)
       expect(page).to have_content("Status: cancelled")

@@ -48,7 +48,7 @@ RSpec.describe "merchants invoice show page" do
       
       expect(page).to have_content(invoice_1.id)
       expect(page).to have_content(invoice_1.status)
-      expect(page).to have_content(invoice_1.created_at.strftime("%A, %B %e, %Y"))
+      expect(page).to have_content(invoice_1.created_at.strftime("%A, %B%e, %Y"))
       expect(page).to have_content("David Smith")
     end
 

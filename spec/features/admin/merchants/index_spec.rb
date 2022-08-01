@@ -439,3 +439,8 @@ RSpec.describe 'admin merchant index page' do
     end
   end
 end
+
+# Admin Merchants: Top Merchant's Best Day::: As an admin, When I visit the admin merchants index 
+# Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
+# And I see a label “Top selling date for was " Note: use the invoice date.
+# If there are multiple days with equal number of sales, return the most recent day.
