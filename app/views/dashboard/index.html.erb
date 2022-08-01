@@ -1,3 +1,18 @@
-<h1> <%= @merchant.name %>  </h1>
+<h1> <%= @merchant.name %> </h1>
  <p>  <%= link_to "My Items Index", merchant_items_path(@merchant) %>  </p>
  <p>  <%= link_to "My Invoices Index", merchant_invoices_path(@merchant) %>  </p>
+
+<h2>Top 5 Customers</h2>
+<% @top_five_customers.each do |customer| %>
+    <p> <%= customer.first_name %> <%= customer.last_name %> |
+      Number of Purchases: <%= customer.successful_transactions %></p>
+<% end %>
+
+<div class="ready_to_ship">
+<h3>Items Ready to Ship</h3>
+  <% @merchant.ready_to_ship.each do |invoice_item| %>
+    <p><%= invoice_item.item.name %> </p>
+    <p> <%= invoice_item.invoice.created_at.strftime('%A, %B %-d, %Y') %>   </p>
+    <p> <%= link_to "Invoice #{invoice_item.invoice.id}", merchant_invoices_path(@merchant, invoice_item.invoice_id) %></p>
+  <% end %>
+</div>

@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  enum availability: { enable:0, disable:1 }
+
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :unit_price

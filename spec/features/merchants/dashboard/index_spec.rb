@@ -3,21 +3,22 @@ require 'rails_helper'
 RSpec.describe 'Merchant Dashboard' do
 
   before :each do
-    @merchant = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
+    @merchant = Merchant.create!(name: "Al Capone", created_at: Time.now, updated_at: Time.now)
 
     @item_1 = Item.create!(name: "Moonshine", description: "alcohol", unit_price: 2, created_at: Time.now, updated_at: Time.now, merchant_id: @merchant.id)
+    @item_2 = Item.create!(name: "Hat", description: "hat", unit_price: 2, created_at: Time.now, updated_at: Time.now, merchant_id: @merchant.id)
 
     @customer_1 = Customer.create!(first_name: "Babe", last_name: "Ruth", created_at: Time.now, updated_at: Time.now)
     @customer_2 = Customer.create!(first_name: "Charles", last_name: "Bukowski", created_at: Time.now, updated_at: Time.now)
-    @customer_3 = Customer.create!(first_name: "Al", last_name: "Capone", created_at: Time.now, updated_at: Time.now)
+    @customer_3 = Customer.create!(first_name: "Josey", last_name: "Wales", created_at: Time.now, updated_at: Time.now)
     @customer_4 = Customer.create!(first_name: "Popcorn", last_name: "Sutton", created_at: Time.now, updated_at: Time.now)
     @customer_5 = Customer.create!(first_name: "Nucky", last_name: "Johnson", created_at: Time.now, updated_at: Time.now)
     @customer_6 = Customer.create!(first_name: "Freddy", last_name: "McCoy", created_at: Time.now, updated_at: Time.now)
     @customer_7 = Customer.create!(first_name: "Ted", last_name: "Williams", created_at: Time.now, updated_at: Time.now)
 
-    @invoice_1 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_1.id)
-    @invoice_2 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_2.id)
-    @invoice_3 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_3.id)
+    @invoice_1 = Invoice.create!(status: 0, created_at: '2022-07-30 00:00:00 UTC', updated_at: Time.now, customer_id: @customer_1.id)
+    @invoice_2 = Invoice.create!(status: 0, created_at: '2022-07-29 00:00:00 UTC', updated_at: Time.now, customer_id: @customer_2.id)
+    @invoice_3 = Invoice.create!(status: 0, created_at: '2022-07-28 00:00:00 UTC', updated_at: Time.now, customer_id: @customer_3.id)
     @invoice_4 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_4.id)
     @invoice_5 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_5.id)
     @invoice_6 = Invoice.create!(status: 0, created_at: Time.now, updated_at: Time.now, customer_id: @customer_6.id)
@@ -75,23 +76,23 @@ RSpec.describe 'Merchant Dashboard' do
     it 'displays the the top 5 customers that completed successful transactions for the merchant' do
       expect(page).to have_content(@customer_1.first_name)
       expect(page).to have_content(@customer_1.last_name)
-      expect(page).to have_content("Successful Transactions: 5")
+      expect(page).to have_content("Number of Purchases: 5")
 
       expect(page).to have_content(@customer_2.first_name)
       expect(page).to have_content(@customer_2.last_name)
-      expect(page).to have_content("Successful Transactions: 4")
+      expect(page).to have_content("Number of Purchases: 4")
 
       expect(page).to have_content(@customer_3.first_name)
       expect(page).to have_content(@customer_3.last_name)
-      expect(page).to have_content("Successful Transactions: 3")
+      expect(page).to have_content("Number of Purchases: 3")
 
       expect(page).to have_content(@customer_4.first_name)
       expect(page).to have_content(@customer_4.last_name)
-      expect(page).to have_content("Successful Transactions: 2")
+      expect(page).to have_content("Number of Purchases: 2")
 
       expect(page).to have_content(@customer_5.first_name)
       expect(page).to have_content(@customer_5.last_name)
-      expect(page).to have_content("Successful Transactions: 1")
+      expect(page).to have_content("Number of Purchases: 1")
 
       expect(page).to_not have_content(@customer_6.first_name)
       expect(page).to_not have_content(@customer_6.last_name)
@@ -105,5 +106,49 @@ RSpec.describe 'Merchant Dashboard' do
       expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
       expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
       expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
+    end
+
+#When I visit my merchant dashboard
+# Then I see a section for "Items Ready to Ship"
+# In that section I see a list of the names of all of my items that
+# have been ordered and have not yet been shipped,
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
+
+    describe 'Items Ready to Ship' do
+      it 'displays items that have been ordered but not yet shipped and has link to the invoice' do
+        within(".ready_to_ship") do
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_1.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_2.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_3.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_5.id)
+
+          expect(page).to have_content(@item_1.name)
+          expect(page).to have_content(@invoice_6.id)
+
+          expect(page).to_not have_content(@invoice_4.id)
+
+          click_link("#{@invoice_1.id}")
+
+          expect(current_path).to eq(merchant_invoices_path(@merchant, @invoice_1))
+        end
+      end
+    end
+
+    it 'displays the invoice date next to the item and is sorted by least recent' do
+      expect(page).to have_content('Saturday, July 30, 2022')
+      expect(page).to have_content('Friday, July 29, 2022')
+      expect(page).to have_content('Thursday, July 28, 2022')
+
+
+      expect('Thursday, July 28, 2022').to appear_before('Friday, July 29, 2022')
+      expect('Friday, July 29, 2022').to appear_before('Saturday, July 30, 2022')
     end
 end

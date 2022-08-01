@@ -1,7 +1,8 @@
 <html>
 <head>
 <style>
-h1 {text-align: left;}
+h1 {text-align: center;}
+h2 {text-align: left;}
 h3 {text-align: center;}
 p {text-align: left;}
 body hr.solid {
@@ -11,7 +12,9 @@ body hr.solid {
 </head>
 <body>
 
-<h1> <%= @merchant.name %> </h1>
+<h1>Little Esty Shop</h1>
+
+<h2> <%= @merchant.name %> </h2>
 
 <hr class="solid">
 
@@ -19,11 +22,7 @@ body hr.solid {
 <p> Description: <%= @item.description%> </p>
 <p> Current Price: <%= number_to_currency(@item.unit_price / 100) %> </p>
 
-<%= link_to "Update Item Information", edit_merchant_item_path(@merchant, @item) %>
-
-<p><% flash.each do |type, msg| %>
-  <%= msg %>
-<% end %></p>
+<%= link_to "Update Item", edit_merchant_item_path(@merchant, @item) %>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index Page' do
+RSpec.describe 'Merchant Items Edit Page' do
   it "can update information in a form" do
     merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
     merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
