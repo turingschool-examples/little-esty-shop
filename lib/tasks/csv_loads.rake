@@ -48,6 +48,8 @@ task "csv_load:invoice_items" => [ :environment ] do
   end
 end
 
+
+
 desc "Creates all from a CSV."
 task "csv_load:all" do
   Rake::Task["csv_load:customers"].invoke
@@ -56,6 +58,9 @@ task "csv_load:all" do
   Rake::Task["csv_load:invoices"].invoke
   Rake::Task["csv_load:transactions"].invoke
   Rake::Task["csv_load:invoice_items"].invoke
+  ActiveRecord::Base.connection.tables.each do |table_name| 
+    ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
+  end
 end
 
 
