@@ -2,8 +2,20 @@
 
 <div id="merchant-list">
   <% @merchants.each do |merchant| %>
-    <p id="merchant-<%=merchant.id%>">
-      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-    </p>
+    <div id="merchant-<%=merchant.id%>"> 
+      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+      <%= merchant.status %>
+      <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
+        <% if merchant.status == 'Enabled' %>
+                  <%= form.hidden_field :status, value: "Disabled" %>
+                  <%= form.submit "Disable"%> 
+        <% elsif merchant.status == 'Disabled' %>
+                  <%= form.hidden_field :status, value: "Enabled" %>
+                  <%= form.submit "Enable"%>
+        <% end %>
+      <% end %> 
+
+      <%# binding.pry %>
+    </div>
   <% end %>
 </div>
