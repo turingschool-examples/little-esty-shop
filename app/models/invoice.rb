@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-    enum status: {"in progress" => 0, cancelled: 1, completed: 2}
+    enum status: {in_progress: 0, cancelled: 1, completed: 2}
 
         validates_presence_of :status
 
