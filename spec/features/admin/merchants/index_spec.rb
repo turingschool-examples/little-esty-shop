@@ -38,7 +38,7 @@ RSpec.describe 'admin merchants index page' do
     merchant2 = Merchant.create!(name: 'Whole Foods', status: 'Disabled')
 
     visit admin_merchants_path
-    save_and_open_page
+    
     within "#merchant-#{merchant1.id}" do
       expect(page).to have_button('Disable')
     end
@@ -59,7 +59,6 @@ RSpec.describe 'admin merchants index page' do
       expect(current_path).to eq(admin_merchants_path)
       expect(page).to have_button('Enable')
       expect(page).to have_content('Disabled')
-
     end
     within "#merchant-#{merchant2.id}" do
       expect(page).to have_content('Disabled')
@@ -68,6 +67,24 @@ RSpec.describe 'admin merchants index page' do
       expect(current_path).to eq(admin_merchants_path)
       expect(page).to have_button('Disable')
       expect(page).to have_content('Enabled')
+    end
+  end
+  it 'Each merchant is listed in either the enabled or disabled section' do
+    merchant1 = Merchant.create!(name: 'Trader Joes')
+    merchant2 = Merchant.create!(name: 'Whole Foods', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'New Seasons', status: 'Disabled')
+    merchant4 = Merchant.create!(name: 'Peoples Co-op')
+
+    visit admin_merchants_path
+
+    within "#enabled-merchants" do
+      expect(page).to have_content('Trader Joes')
+      expect(page).to have_content('Peoples Co-op')
+    end
+    within "#disabled-merchants" do
+      expect(page).to have_content('Whole Foods')
+      expect(page).to have_content('New Seasons')
+      save_and_open_page
     end
   end
 end
