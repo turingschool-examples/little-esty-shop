@@ -1,5 +1,16 @@
 <h3>Invoice ID: <%= @invoice.id %></h3><br>
 
-<a>Status: <%= @invoice.status %></a><br>
-<a>Created At: <%= @invoice.created_at.strftime("%-m/%d/%y") %></a><br>
-<a>Customer Name: <%= @invoice.full_name %></a><br><br>
+<p>Status: <%= @invoice.status %></p><br>
+<p>Created At: <%= @invoice.created_at.strftime("%-m/%d/%y") %></p><br>
+<p>Customer Name: <%= @invoice.full_name %></p><br><br>
+
+<h3>Items on This Invoice:</h3><br>
+
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <id="invoice_item-<%= invoice_item.id %>">
+
+<p>Item Name: <%= invoice_item.item.name %></p><br>
+<p>Quantity Ordered: <%= invoice_item.quantity %></p><br>
+<p>Item Price: <%= invoice_item.unit_price %></p><br>
+<p>Invoice Item Status: <%= invoice_item.status %></p><br><br>
+<% end %>
