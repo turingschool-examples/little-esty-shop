@@ -227,5 +227,107 @@ RSpec.describe Merchant do
 
       expect(merchant_1.ready_to_ship).to eq([item_1, item_2, item_4])
     end
+
+    it 'gets the best day for a merchant' do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+      merchant_2 = Merchant.create!(name: "Spongebob The Merchant")
+
+      item_1 = Item.create!(name: 'Spatula', description: 'It is for cooking', unit_price: 3, merchant_id: merchant_1.id)
+      item_2 = Item.create!(name: 'Spoon', description: 'It is for eating ice cream', unit_price: 1, merchant_id: merchant_1.id)
+      item_3 = Item.create!(name: 'Knife', description: 'It is for slicing bread', unit_price: 5, merchant_id: merchant_1.id)
+      item_4 = Item.create!(name: 'Computer', description: 'It is for playing games', unit_price: 50, merchant_id: merchant_1.id)
+      item_5 = Item.create!(name: 'Table', description: 'It is for eating at', unit_price: 70, merchant_id: merchant_1.id)
+      item_6 = Item.create!(name: 'Bag of Money', description: 'It is for whatever you want', unit_price: 999, merchant_id: merchant_1.id)
+
+      item_7 = Item.create!(name: 'Seaweed', description: 'It is big ball of seaweed', unit_price: 450, merchant_id: merchant_2.id)
+      item_8 = Item.create!(name: 'Boxing Gloves', description: 'It is for kara-tay', unit_price: 2000, merchant_id: merchant_2.id)
+      item_9 = Item.create!(name: 'Jelly', description: 'It is yummy', unit_price: 300, merchant_id: merchant_2.id)
+      item_10 = Item.create!(name: 'Keyrings', description: 'It is for keys', unit_price: 275, merchant_id: merchant_2.id)
+      
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+      customer_2 Customer.create!(first_name: "Trill", last_name: "Pickles")
+      
+      invoice_1 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_2 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_3 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_10 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+
+      invoice_4 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+      invoice_5 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+      invoice_11 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+
+      invoice_6 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_12 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_13 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+
+      invoice_7 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_14 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+      invoice_15 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+
+      invoice_8 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_16 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_17 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+
+      invoice_9 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Sat, 30 Jul 2022 16:04:49 UTC +00:00")
+      invoice_18 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+      invoice_19 = Invoice.create!(status: 2, customer_id: customer_1.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+
+      invoice_20 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+      invoice_21 = Invoice.create!(status: 2, customer_id: customer_2.id, created_at: "Fri, 29 Jul 2022 16:04:49 UTC +00:00")
+
+
+      transaction_1 = Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 234, credit_card_expiration_date: nil, result: 0)
+      transaction_2 = Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 3456, credit_card_expiration_date: nil, result: 0)
+      transaction_3 = Transaction.create!(invoice_id: invoice_2.id, credit_card_number: 876, credit_card_expiration_date: nil, result: 0)
+      transaction_4 = Transaction.create!(invoice_id: invoice_3.id, credit_card_number: 5678, credit_card_expiration_date: nil, result: 0)
+      transaction_5 = Transaction.create!(invoice_id: invoice_4.id, credit_card_number: 2345, credit_card_expiration_date: nil, result: 0)
+      transaction_6 = Transaction.create!(invoice_id: invoice_5.id, credit_card_number: 567, credit_card_expiration_date: nil, result: 0)
+      transaction_7 = Transaction.create!(invoice_id: invoice_6.id, credit_card_number: 234444, credit_card_expiration_date: nil, result: 0)
+      transaction_8 = Transaction.create!(invoice_id: invoice_7.id, credit_card_number: 23675744, credit_card_expiration_date: nil, result: 0)
+      transaction_9 = Transaction.create!(invoice_id: invoice_8.id, credit_card_number: 67, credit_card_expiration_date: nil, result: 0)
+      transaction_10 = Transaction.create!(invoice_id: invoice_9.id, credit_card_number: 233444, credit_card_expiration_date: nil, result: 0)
+      transaction_11 = Transaction.create!(invoice_id: invoice_10.id, credit_card_number: 5324, credit_card_expiration_date: nil, result: 0)
+      transaction_12 = Transaction.create!(invoice_id: invoice_11.id, credit_card_number: 242244, credit_card_expiration_date: nil, result: 0)
+      transaction_13 = Transaction.create!(invoice_id: invoice_12.id, credit_card_number: 445, credit_card_expiration_date: nil, result: 0)
+      transaction_14 = Transaction.create!(invoice_id: invoice_13.id, credit_card_number: 234234, credit_card_expiration_date: nil, result: 0)
+      transaction_15 = Transaction.create!(invoice_id: invoice_14.id, credit_card_number: 657, credit_card_expiration_date: nil, result: 0)
+      transaction_16 = Transaction.create!(invoice_id: invoice_15.id, credit_card_number: 6787890, credit_card_expiration_date: nil, result: 0)
+      transaction_17 = Transaction.create!(invoice_id: invoice_16.id, credit_card_number: 345435, credit_card_expiration_date: nil, result: 0)
+      transaction_18 = Transaction.create!(invoice_id: invoice_17.id, credit_card_number: 2342356, credit_card_expiration_date: nil, result: 0)
+      transaction_19 = Transaction.create!(invoice_id: invoice_18.id, credit_card_number: 54364567, credit_card_expiration_date: nil, result: 0)
+      transaction_20 = Transaction.create!(invoice_id: invoice_19.id, credit_card_number: 435345, credit_card_expiration_date: nil, result: 1)
+
+      transaction_21 = Transaction.create!(invoice_id: invoice_20.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
+      transaction_22 = Transaction.create!(invoice_id: invoice_21.id, credit_card_number: 4967577, credit_card_expiration_date: nil, result: 0)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 800, status: 2, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_1.id, invoice_id: invoice_2.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_1.id, invoice_id: invoice_3.id)
+      invoice_item_4 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_1.id, invoice_id: invoice_10.id)
+
+      invoice_item_5 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_2.id, invoice_id: invoice_4.id)
+      invoice_item_6 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_2.id, invoice_id: invoice_5.id)
+      invoice_item_7 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_2.id, invoice_id: invoice_11.id)
+
+      invoice_item_8 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_3.id, invoice_id: invoice_6.id)
+      invoice_item_8 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_3.id, invoice_id: invoice_12.id)
+      invoice_item_8 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_3.id, invoice_id: invoice_13.id)
+
+      invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_4.id, invoice_id: invoice_7.id)
+      invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_4.id, invoice_id: invoice_14.id)
+      invoice_item_9 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_4.id, invoice_id: invoice_15.id)
+
+      invoice_item_10 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_5.id, invoice_id: invoice_8.id)
+      invoice_item_10 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_5.id, invoice_id: invoice_16.id)
+      invoice_item_10 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_5.id, invoice_id: invoice_17.id)
+
+      invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_9.id)
+      invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_18.id)
+      invoice_item_11 = InvoiceItem.create!(quantity: 5, unit_price: 900, status: 2, item_id: item_6.id, invoice_id: invoice_19.id)
+
+      invoice_item_12 = InvoiceItem.create!(quantity: 5, unit_price: 450, status: 2, item_id: item_6.id, invoice_id: invoice_9.id)
+
+      expect(merchant_1.top_day).to eq("2022-07-30 16:04:49.000000000 +0000")
+    end
   end
 end
