@@ -17,7 +17,8 @@
 
 <%= form_with url: "/merchants/#{invoice_item.item.merchant_id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
       <%= form.select :status, [["packaged"], ["pending"], ["shipped"]] %>
-      <%= form.submit "Update Invoice" %>
+      <%= form.submit "Update Item Status" %>
+      <%= form.hidden_field :invoice_item_id, value: invoice_item.id %>
       <% end %>
     <br><br>
   <% end %>
