@@ -1,0 +1,8 @@
+<%= form_with url: "/merchants/#{@merchant.id}/items/#{@item.id}" method: :patch, local: true do |form| %>
+<%= form.label :name %>
+<%= form.text_field :name, value: item.name %>
+<%= form.label :description %>
+<%= form.text_area :description, size: "55x5", value: item.description %>
+<%= form.label :unit_price%>
+<%= for,number_field :unit_price, value: item.unit_price %>
+<%= form.submit "Submit" %>

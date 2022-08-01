@@ -10,9 +10,8 @@
 
 <h1><center><%= @merchant.name %></center></h1>
 
-<table>
-  <tr>
-    <th><h2>Favorite Customers</h2></th>  
+<section class="column">
+    <h2>Favorite Customers</h2>
   <% @merchant.top_5_customers.each do |customer| %>
     <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
   <% end %>

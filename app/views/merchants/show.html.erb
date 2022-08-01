@@ -1,5 +1,4 @@
 <h1><%= @merchant.name %></h1>
-
 <% @merchant.items.each_with_index do |item, index| %>
   <div id="item-<%= index %>">
     <p>Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
