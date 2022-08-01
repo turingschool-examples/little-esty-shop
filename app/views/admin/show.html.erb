@@ -1,3 +1,7 @@
+<div id="revenue">
+  <h3>Total Revenue: <%="#{@invoice.total_revenue(@invoice.merchants.ids)}" %></h3>
+</div>
+
 <div id="invoice">
   <% @invoice.invoice_items.each do |invoice| %>
   <%= invoice.item.id %>
@@ -7,4 +11,3 @@
       <p>Status: <%= invoice.status %></p>
   <% end %>
 </div>
- 
