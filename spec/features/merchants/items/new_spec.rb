@@ -22,7 +22,7 @@ RSpec.describe 'new page merchant items' do
         
         fill_in "name", with: "Aviators"
         fill_in "description", with: "Top Gun is the reason why you're looking at these, huh?"
-        fill_in "unit_price", with: 1000
+        fill_in "unit_price", with: "1000"
         click_button 'Save'
         expect(current_path).to eq("/merchants/#{merchant_1.id}/items")
         expect(page).to have_content("Aviators")

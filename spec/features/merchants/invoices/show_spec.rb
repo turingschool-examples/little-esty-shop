@@ -90,7 +90,7 @@ RSpec.describe 'invoices show page' do
 
       # within "#invoice_item-#{invoice_item_1.id}" do
        expect(invoice_item_1.status).to eq("packaged")
-       select("packaged", from: "invoice[status]")
+       select("packaged", from: "status")
        # select('cancelled', from: 'invoice[status]')
        click_button "Update Invoice"
        expect(current_path).to eq(merchant_invoice_path(merchant_1, invoice_1))
