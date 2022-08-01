@@ -1,4 +1,4 @@
 <h1><center><%= @item.name %></center></h1>
 <p>Description: <%= @item.description %></p>
 <p>Price: <%= number_to_currency(@item.unit_price.fdiv(100)) %></p>
-<%= button_to "Update #{@item.name}", "/merchants/#{@merchant_id}/items/#{@item.id}/edit", method: :get %>
+<%= button_to "Update #{@item.name}", "/merchants/#{@merchant.id}/items/#{@item.id}/edit", method: :get %>
