@@ -3,8 +3,9 @@
     <h3><%= @merchant.name %>'s Dashboard</h3>
   </div>
   <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th> &emsp;
     <th><%= link_to "#{@merchant.name} Item Index", "/merchants/#{@merchant.id}/items" %> </th> &emsp;
-    <th><%= link_to "#{@merchant.name} Invoice Index", "/merchants/#{@merchant.id}/invoices" %></th>
+    <th><%= link_to "#{@merchant.name} Invoice Index", "/merchants/#{@merchant.id}/invoices" %></th> 
   </div>
 </div>
 
