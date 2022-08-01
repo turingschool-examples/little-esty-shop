@@ -112,27 +112,27 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         visit "/merchants/#{merchant_1.id}/dashboard"
 
-        within '#customers0' do
+        within "#customers#{customer_1.id}" do
             expect(page).to have_content("David Smith")
             expect(page).to_not have_content("Mark Dole")
         end
 
-        within '#customers1' do
+        within "#customers#{customer_2.id}" do
             expect(page).to have_content("Cindy Lou")
             expect(page).to_not have_content("David Smith")
         end
 
-        within '#customers2' do
+        within "#customers#{customer_3.id}" do
             expect(page).to have_content("John Johnson")
             expect(page).to_not have_content("Cindy Lou")
         end
 
-        within '#customers3' do
+        within "#customers#{customer_4.id}" do
             expect(page).to have_content("Mary Vale")
             expect(page).to_not have_content("John Johnson")
         end
 
-        within '#customers4' do
+        within "#customers#{customer_5.id}" do
             expect(page).to have_content("Brian Long")
             expect(page).to_not have_content("Mark Dole")
         end
@@ -198,27 +198,27 @@ RSpec.describe 'Merchant Show Dashboard' do
 
         visit "/merchants/#{merchant_1.id}/dashboard"
 
-        within '#customers0' do
+        within "#customers#{customer_1.id}" do
             expect(page).to have_content("Transactions: 6")
             expect(page).to_not have_content("Transactions: 5")
         end
 
-        within '#customers1' do
+        within "#customers#{customer_2.id}" do
             expect(page).to have_content("Transactions: 5")
             expect(page).to_not have_content("Transactions: 6")
         end
 
-        within '#customers2' do
+        within "#customers#{customer_3.id}" do
             expect(page).to have_content("Transactions: 4")
             expect(page).to_not have_content("Transactions: 5")
         end
 
-        within '#customers3' do
+        within "#customers#{customer_4.id}" do
             expect(page).to have_content("Transactions: 3")
             expect(page).to_not have_content("Transactions: 5")
         end
 
-        within '#customers4' do
+        within "#customers#{customer_5.id}" do
             expect(page).to have_content("Transactions: 2")
             expect(page).to_not have_content("Transactions: 3")
         end
