@@ -2,6 +2,6 @@
 
 <% @invoices.each do |inv| %>
   <div id="inv-<%= inv.id %>">
-    <p>Invoice # <%= inv.id %></p>
+    <p>Invoice # <%=link_to "#{inv.id}", "/admin/invoices/#{inv.id}" %></p>
   </div>
 <% end %>

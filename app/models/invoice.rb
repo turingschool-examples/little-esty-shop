@@ -14,4 +14,8 @@ class Invoice < ApplicationRecord
   .order(:created_at)
   .distinct
   end
+
+  def total_revenue
+   invoice_items.sum("unit_price * quantity")
+  end
 end
