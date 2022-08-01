@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get 'admin/merchants/:merchant_id', to: 'admin#show_2'
   get 'admin/merchants/:merchant_id/edit', to: 'admin#edit'
   patch 'admin/merchants/:merchant_id/update', to: 'admin#update'
+  patch 'admin/merchants/:merchant_id/update-status', to: 'admin#update'
 end

@@ -10,4 +10,8 @@ class Merchant < ApplicationRecord
   def merchant_invoice_by_item_id
     InvoiceItem.all.where(item_id: items.ids).pluck(:invoice_id).uniq
   end
+
+  def update_status(new_status)
+    update(status: new_status)
+  end
 end

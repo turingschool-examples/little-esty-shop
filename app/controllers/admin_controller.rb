@@ -17,10 +17,32 @@ class AdminController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
-  def update 
+  def update
     merchant = Merchant.find(params[:merchant_id]) 
-    merchant.update(name: params[:name])
-    redirect_to "/admin/merchants/#{merchant.id}"
-    flash.notice = 'The information has been successfully updated'
+    if params[:status] == 'enabled'
+      merchant.update(status: params[:status])
+      redirect_to "/admin/merchants"
+    elsif params[:status] == 'disabled'
+      merchant.update(status: params[:status])
+      redirect_to "/admin/merchants"
+    else
+      merchant.update(name: params[:name])
+      redirect_to "/admin/merchants/#{merchant.id}"
+      flash.notice = 'The information has been successfully updated'
+    end   
   end
 end
+
+#  if params[:status].present?
+#       merchant.update_status(params[:status])
+#       redirect_to admin_merchants_path
+
+
+#      if merchant_params[:status]
+#       merchant.update(merchant_params)
+#       redirect_to "/admin/merchants"
+#  private
+
+#   def merchant_params
+#     params.permit(:name, :status)
+#   end
