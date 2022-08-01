@@ -14,8 +14,8 @@ RSpec.describe Customer, type: :model do
     it { should have_many(:merchants).through(:items) }
   end
 
-  describe 'class methods' do  
-    it 'has top five customers' do 
+  describe 'class methods' do
+    it 'has top five customers' do
       merchant1 = Merchant.create!(name: 'Fake Merchant')
       merchant2 = Merchant.create!(name: 'Another Merchant')
 
@@ -51,9 +51,9 @@ RSpec.describe Customer, type: :model do
       invoice16 = customer5.invoices.create!(status: 2)
 
       invoice17 = customer6.invoices.create!(status: 2) #cust6 - 4 purchases
-      invoice18 = customer6.invoices.create!(status: 2) 
-      invoice19 = customer6.invoices.create!(status: 2) 
-      invoice20 = customer6.invoices.create!(status: 2) 
+      invoice18 = customer6.invoices.create!(status: 2)
+      invoice19 = customer6.invoices.create!(status: 2)
+      invoice20 = customer6.invoices.create!(status: 2)
 
       invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 4, unit_price: 43434, status: 2)
       invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, quantity: 5, unit_price: 87654, status: 2)
@@ -80,34 +80,34 @@ RSpec.describe Customer, type: :model do
       invoice_item19 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice20.id, quantity: 10, unit_price: 61299, status: 2)
       #customer 6 ^
 
-      transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 1234, credit_card_expiration_date: 1234, result: 1 )
-      transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 2873, credit_card_expiration_date: 1211, result: 1 )
-      transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 3475, credit_card_expiration_date: 1222, result: 1 )
-      transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 1173, credit_card_expiration_date: 1233, result: 1 )
-      transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 2273, credit_card_expiration_date: 1244, result: 1 )
-      transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 3373, credit_card_expiration_date: 1255, result: 1 )
-      transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 4473, credit_card_expiration_date: 1266, result: 1 )
-      transaction8 = Transaction.create!(invoice_id: invoice8.id, credit_card_number: 5573, credit_card_expiration_date: 1277, result: 1 )
-      transaction9 = Transaction.create!(invoice_id: invoice9.id, credit_card_number: 6673, credit_card_expiration_date: 1288, result: 1 )
-      transaction10 = Transaction.create!(invoice_id: invoice10.id, credit_card_number: 7773, credit_card_expiration_date: 1299, result: 1 )
-      transaction11 = Transaction.create!(invoice_id: invoice11.id, credit_card_number: 8873, credit_card_expiration_date: 1210, result: 1 )
+      transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: '5549140968721234', result: 1 )
+      transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: '5549140968722873', result: 1 )
+      transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: '5549140968723475', result: 1 )
+      transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: '5549140968721173', result: 1 )
+      transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: '5549140968722273', result: 1 )
+      transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: '5549140968723373', result: 1 )
+      transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: '5549140968724473', result: 1 )
+      transaction8 = Transaction.create!(invoice_id: invoice8.id, credit_card_number: '5549140968725573', result: 1 )
+      transaction9 = Transaction.create!(invoice_id: invoice9.id, credit_card_number: '5549140968726673', result: 1 )
+      transaction10 = Transaction.create!(invoice_id: invoice10.id, credit_card_number: '5549140968727773', result: 1 )
+      transaction11 = Transaction.create!(invoice_id: invoice11.id, credit_card_number: '5549140968728873', result: 1 )
 
-      transaction12 = Transaction.create!(invoice_id: invoice12.id, credit_card_number: 8874, credit_card_expiration_date: 1210, result: 1 )
-      transaction13 = Transaction.create!(invoice_id: invoice13.id, credit_card_number: 8878, credit_card_expiration_date: 1220, result: 1 )
-      transaction14 = Transaction.create!(invoice_id: invoice14.id, credit_card_number: 9999, credit_card_expiration_date: 1230, result: 1 )
-      transaction15 = Transaction.create!(invoice_id: invoice15.id, credit_card_number: 8888, credit_card_expiration_date: 1240, result: 1 )
+      transaction12 = Transaction.create!(invoice_id: invoice12.id, credit_card_number: '5549140968728874', result: 1 )
+      transaction13 = Transaction.create!(invoice_id: invoice13.id, credit_card_number: '5549140968728878', result: 1 )
+      transaction14 = Transaction.create!(invoice_id: invoice14.id, credit_card_number: '5549140968729999', result: 1 )
+      transaction15 = Transaction.create!(invoice_id: invoice15.id, credit_card_number: '5549140968728888', result: 1 )
 
-      transaction16 = Transaction.create!(invoice_id: invoice16.id, credit_card_number: 7777, credit_card_expiration_date: 1223, result: 1 )
-      transaction17 = Transaction.create!(invoice_id: invoice17.id, credit_card_number: 6666, credit_card_expiration_date: 1110, result: 1 )
-      transaction18 = Transaction.create!(invoice_id: invoice18.id, credit_card_number: 5555, credit_card_expiration_date: 1111, result: 1 )
+      transaction16 = Transaction.create!(invoice_id: invoice16.id, credit_card_number: '5549140968727777', result: 1 )
+      transaction17 = Transaction.create!(invoice_id: invoice17.id, credit_card_number: '5549140968726666', result: 1 )
+      transaction18 = Transaction.create!(invoice_id: invoice18.id, credit_card_number: '5549140968725555', result: 1 )
 
-      transaction19 = Transaction.create!(invoice_id: invoice19.id, credit_card_number: 4444, credit_card_expiration_date: 1023, result: 1 )
-      transaction20 = Transaction.create!(invoice_id: invoice20.id, credit_card_number: 3333, credit_card_expiration_date: 1012, result: 1 )
+      transaction19 = Transaction.create!(invoice_id: invoice19.id, credit_card_number: '5549140968724444', result: 1 )
+      transaction20 = Transaction.create!(invoice_id: invoice20.id, credit_card_number: '5549140968723333', result: 1 )
 
       # transaction21 = Transaction.create!(invoice_id: invoice21.id, credit_card_number: 2222, credit_card_expiration_date: 1024, result: 1 )
 
       # transaction22 = Transaction.create!(invoice_id: invoice8.id, credit_card_number: 2629, credit_card_expiration_date: 1127, result: 1 )
-      
+
       expect(Customer.top_five).to eq([customer4, customer5, customer6, customer2, customer1])
     end
   end

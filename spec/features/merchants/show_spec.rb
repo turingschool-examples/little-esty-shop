@@ -123,6 +123,8 @@ RSpec.describe 'the merchant show page' do
       click_button("Update #{m1i1.name}")
 
       expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{m1i1.id}/edit")
+
+      
     end
   end
   # As a merchant,
