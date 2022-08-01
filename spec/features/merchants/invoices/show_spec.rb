@@ -82,23 +82,14 @@ RSpec.describe 'invoices show page' do
       invoice_1 = customer_1.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
       invoice_2 = customer_1.invoices.create!(status: 1, created_at: Time.now, updated_at: Time.now)
       invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_1.unit_price, status: 0, created_at: Time.now, updated_at: Time.now)
-      invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_2.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
-      invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, quantity: 1, unit_price: item_3.unit_price, status: 2, created_at: Time.now, updated_at: Time.now)
-      invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_2.id, quantity: 1, unit_price: item_1.unit_price, status: 0, created_at: Time.now, updated_at: Time.now)
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      # within "#invoice_item-#{invoice_item_1.id}" do
        expect(invoice_item_1.status).to eq("packaged")
-       select("packaged", from: "status")
-       # select('cancelled', from: 'invoice[status]')
-       click_button "Update Invoice"
+       select("pending", from: "status")
+       click_button "Update Item Status"
        expect(current_path).to eq(merchant_invoice_path(merchant_1, invoice_1))
        expect(page).to have_content("pending")
-      # end
-      # within "#invoice_item-#{invoice_item_2.id}" do
-      #   expect(page).to have_content("packaged")
-      # end
-   end
+     end
 
 end
