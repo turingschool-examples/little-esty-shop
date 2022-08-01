@@ -36,15 +36,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-      @merchant = Merchant.find(params[:merchant_id])
-      item = @merchant.items.create(item_params)
+      merchant = Merchant.find(params[:merchant_id])
+      item = merchant.items.new(name: params[:name], description: params[:description], unit_price: params[:unit_price], created_at: Time.now, updated_at: Time.now)
       if item.save
-        flash.clear
-          redirect_to merchant_items_path(@merchant)
+          redirect_to "/merchants/#{merchant.id}/items"
       else
-          # redirect_to new_merchant_item_path(@merchant)
+          redirect_to "/merchants/#{merchant.id}/items/new"
           flash[:alert] = "Error: Please fill out all required fields!"
-          render :new
       end
 
   end
