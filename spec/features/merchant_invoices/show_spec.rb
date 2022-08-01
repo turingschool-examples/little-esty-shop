@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'merchants invoice show page', type: :feature do
 
   it "has all of the item info from an invoice" do
-    merchant1 = Merchant.create!(name: "Poke Retirement homes")
-    merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
-    merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits")
+    merchant1 = Merchant.create!(name: "Poke Retirement homes", status: "enabled")
+    merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops", status: "enabled")
+    merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits", status: "enabled")
 
     item1 = Item.create!(name: "Pikachu pics", description: 'Cute pics with pikachu', unit_price: 1000, merchant_id: merchant1.id)
     item2 = Item.create!(name: "Pokemon stuffy", description: 'Pikachu stuffed toy', unit_price: 2000, merchant_id: merchant2.id)
@@ -73,9 +73,9 @@ RSpec.describe 'merchants invoice show page', type: :feature do
   end
 
   it "can list information related to an invoice" do
-    merchant1 = Merchant.create!(name: "Poke Retirement homes")
-    merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops")
-    merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits")
+    merchant1 = Merchant.create!(name: "Poke Retirement homes", status: "disabled")
+    merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops", status: "enabled")
+    merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits", status: "enabled")
 
     item1 = Item.create!(name: "Pikachu pics", description: 'Cute pics with pikachu', unit_price: 1000, merchant_id: merchant1.id)
     item2 = Item.create!(name: "Pokemon stuffy", description: 'Pikachu stuffed toy', unit_price: 2000, merchant_id: merchant2.id)
@@ -120,7 +120,6 @@ RSpec.describe 'merchants invoice show page', type: :feature do
      within "#invoices-#{invoice1.id}" do
       expect(page).to have_content("Invoice id: #{invoice1.id}")
       expect(page).to have_content("Status: #{invoice1.status}")
-      expect(page).to have_content("Created on: #{invoice1.created_at}")
       expect(page).to have_content("Customer: #{invoice1.customer.first_name} #{invoice1.customer.last_name}")
       expect(page).to_not have_content("#{invoice3.id}")
       expect(page).to_not have_content("#{invoice3.status}")
@@ -132,7 +131,6 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     within "#invoices-#{invoice2.id}" do
       expect(page).to have_content(invoice2.id)
       expect(page).to have_content("Status: #{invoice2.status}")
-      expect(page).to have_content("Created on: #{invoice2.created_at}")
       expect(page).to have_content("Customer: #{invoice2.customer.first_name} #{invoice2.customer.last_name}")
       expect(page).to_not have_content("#{invoice1.id}")
       expect(page).to_not have_content("#{invoice1.status}")
@@ -144,7 +142,6 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     within "#invoices-#{invoice3.id}" do
       expect(page).to have_content(invoice3.id)
       expect(page).to have_content("Status: #{invoice3.status}")
-      expect(page).to have_content("Created on: #{invoice3.created_at}")
       expect(page).to have_content("Customer: #{invoice3.customer.first_name} #{invoice3.customer.last_name}")
       expect(page).to_not have_content("#{invoice2.id}")
       expect(page).to_not have_content("#{invoice2.status}")
