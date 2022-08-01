@@ -3,6 +3,7 @@
 
 <h3><%= link_to "Merchants", "/admin/merchants" %></h3>
 <h3><%= link_to "Invoices", "/admin/invoices" %></h3>
+<h2>Top Customers</h2>
 <% Customer.top_five_customers.each_with_index do |customer, index| %>
   <div id="customer<%= index %>">
     <%= "#{index + 1}. #{customer.first_name} #{customer.last_name} - #{customer.transactions_count} Purchases" %>
@@ -12,6 +13,6 @@
 <h2>Incomplete Invoices</h2>
 <% Invoice.incomplete_invoices.each_with_index do |invoice, index| %>
   <div id="invoice<%= index %>">
-    <%= "Invoice ##{invoice.id} - "%>
+    <%= "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B%e, %Y")}"%>
   </div>
 <% end %>
