@@ -393,7 +393,7 @@ RSpec.describe 'admin merchant index page' do
 
       click_on "Disable Bob The Burgerman"
       
-      within "#merchants1" do
+      within "#merchants-#{merchant_1.id}" do
         expect(page).to have_current_path("/admin/merchants")
         expect(page).to have_content("Status: Disabled")
         expect(page).to_not have_content("Status: Enabled")
@@ -401,7 +401,7 @@ RSpec.describe 'admin merchant index page' do
 
       click_on "Enable Sandy The Squirrel Merchant"
 
-      within "#merchants0" do
+      within "#merchants-#{merchant_2.id}" do
         expect(page).to have_current_path("/admin/merchants")
         expect(page).to have_content("Status: Enabled")
         expect(page).to_not have_content("Status: Disabled")
