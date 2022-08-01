@@ -1,3 +1,7 @@
+<div class="flex-container">
+  <div id='title'>
+    <h3><%= @merchant.name %>'s Dashboard</h3>
+
 <h1><%= @merchant.name %>'s Dashboard</h1><br>
 <p><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %> </p>
 <p><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></p><br>
@@ -6,11 +10,34 @@
   <div id="customers<%= index %>">
     <h3><%= "#{customer.first_name} #{customer.last_name}" %></h3>
     <p>Transactions: <%= customer.transactions_count %></p><br>
+
   </div>
-<% end %>
-<h2>Items Ready to Ship</h2>
-<% @merchant.ready_to_ship.each_with_index do |item, index| %>
-  <div id="item<%=index%>">
-    <%= "#{item.name} -" "Invoice #"%> <%=link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %> <%= "#{item.date_created.strftime("%A, %B %e, %Y")}" %>
+  <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th> &emsp;
+    <th><%= link_to "#{@merchant.name} Item Index", "/merchants/#{@merchant.id}/items" %> </th> &emsp;
+    <th><%= link_to "#{@merchant.name} Invoice Index", "/merchants/#{@merchant.id}/invoices" %></th> 
   </div>
-<% end %>
+</div>
+
+<div class="flex-container">
+
+  <div class='body-left'>
+    <center><h2 style='background-color: #f1f1f1;'>Items Ready to Ship</h2></center>
+    <% @merchant.ready_to_ship.each_with_index do |item, index| %>
+      <div id="item<%=index%>">
+        <%= "#{item.name} -" "Invoice #"%> <%=link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %> <%= "#{item.date_created.strftime("%A, %B %e, %Y")}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='body-right'>
+    <center><h2 style='background-color: #f1f1f1;'>Top Customers</h2></center>
+    <ol>
+      <% @merchant.favorite_customers.each_with_index do |customer, index| %>
+        <div id="customers<%= index %>">
+          <li><%= "#{customer.first_name} #{customer.last_name} - Transactions: #{customer.transactions_count}" %></li>
+        </div>
+      <% end %>
+    </ol>
+  </div>
+</div>

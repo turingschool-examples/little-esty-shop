@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+ .header    {
+    font-size: 38pt;
+ }
+
+ .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px;
+  }
+  
+  .flex-container > div {
+    margin: 10px;
+    font-size: 30px;
+  }
+
+  .body-left    {
+    padding-left: 50px;
+  }
+
+  .body-right    {
+    padding-right: 50px;
+  }
