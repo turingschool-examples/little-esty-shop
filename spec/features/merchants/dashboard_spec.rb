@@ -408,37 +408,20 @@ RSpec.describe 'Merchant Dashboard' do
 
         InvoiceItem.create!(quantity: 2, unit_price: item_1.unit_price, status: 'packaged', item: item_1, invoice: invoice_1a)
         InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1a)
-        InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1a)
 
         invoice_1b = customer_1.invoices.create!(status: 0)
-        InvoiceItem.create!(quantity: 2, unit_price: item_2.unit_price, status: 'packaged', item: item_2, invoice: invoice_1b)
         InvoiceItem.create!(quantity: 2, unit_price: item_3.unit_price, status: 'packaged', item: item_3, invoice: invoice_1b)
         InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
 
         visit "merchants/#{merchant_1.id}/dashboard" 
-        # save_and_open_page 
 
         expect(page).to have_content('Items Ready to Ship')
 
-        within("#item-0") do 
-            expect(page).to have_content('Dog Water Bottle')
-        end
+        expect(item_1.name).to appear_before(item_3.name)
 
-        within("#item-1") do 
-            expect(page).to have_content('Dog Scratcher')
-        end
-
-        within("#item-2") do 
-            expect(page).to have_content('Book of Rails')
-        end
-
-        within("#item-3") do 
-            expect(page).to have_content('Dog Water Bottle')
-        end
-
-        within("#item-4") do 
-            expect(page).to have_content('Dog Scratcher')
-        end
+        expect(page).to have_content(item_1.name)
+        expect(page).to have_content(item_2.name)
+        expect(page).to have_content(item_3.name)
 
         expect(page).to_not have_content('Turtle Stickers')
     end 
@@ -574,10 +557,10 @@ RSpec.describe 'Merchant Dashboard' do
         InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
 
         visit "merchants/#{merchant_1.id}/dashboard" 
-        # save_and_open_page 
+        save_and_open_page 
 
-        invoice_1a_date = invoice_1a.created_at.strftime("%A, %B %e, %Y")
-        invoice_1b_date = invoice_1b.created_at.strftime("%A, %B %e, %Y")
+        invoice_1a_date = invoice_1a.created_at.strftime("%A, %B%e, %Y")
+        invoice_1b_date = invoice_1b.created_at.strftime("%A, %B%e, %Y")
 
         within("#item-0") do 
             expect(page).to have_content(invoice_1a_date)
