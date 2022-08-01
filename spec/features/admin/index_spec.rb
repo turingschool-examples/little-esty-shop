@@ -176,7 +176,6 @@ RSpec.describe "admin dashboard" do
 
       end
       within '#invoice4' do
-        save_and_open_page
         expect(page).to have_content("Invoice ##{invoice_5.id}")
         expect(page).to have_content("#{invoice_5.created_at.strftime("%A, %B%e, %Y")}")
       end
