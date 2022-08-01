@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :status 
-  enum status: {"enabled": 0, "disabled": 1}
+  enum status: {"disabled": 0, "enabled": 1}
 
   has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items 
@@ -43,11 +43,11 @@ class Merchant < ApplicationRecord
   end
 
   def self.enabled_merchants
-    Merchant.where("status = ?", 0).order(:created_at)
+    Merchant.where("status = ?", 1).order(:created_at)
   end
 
   def self.disabled_merchants
-    Merchant.where("status = ?", 1).order(:created_at)
+    Merchant.where("status = ?", 0).order(:created_at)
   end
 
   def top_5_revenue_generated
@@ -56,6 +56,16 @@ class Merchant < ApplicationRecord
     .where(transactions: {result: 'success'})
     .group(:id)
     .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .order('revenue desc')
+    .limit(5)
+  end
+
+  def self.top_5_merchants
+    self.all
+    .joins(:transactions)
+    .where(transactions: {result: 'success'})
+    .group(:id)
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
     .order('revenue desc')
     .limit(5)
   end

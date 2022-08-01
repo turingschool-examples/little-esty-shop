@@ -1,0 +1,9 @@
+<h4>Invoices</h4>
+
+<div id="invoices-list">
+  <% @invoices.sort.each do |invoice| %>
+    <div id="invoice-<%="#{invoice.id}"%>">
+      <%= link_to "Invoice ##{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+    </div>
+  <% end %>
+</div>

@@ -18,6 +18,7 @@ RSpec.describe 'Admin Merchants Edit page' do
         old_name = merchant_1.name 
         new_name = Faker::Name.unique.name
 
+        expect(current_path).to eq "/admin/merchants/#{merchant_1.id}/edit"
         expect(page).to have_field('Updated Merchant Name', with: old_name)
 
         fill_in "Name", with: new_name 
@@ -41,6 +42,21 @@ RSpec.describe 'Admin Merchants Edit page' do
         click_on("Update Information")
 
         expect(page).to have_content("Merchant information was successfully updated!")
+    end
+
+    it 'redirects to the edit form if no name is entered' do 
+        Faker::UniqueGenerator.clear 
+        merchant_1 = Merchant.create!(name: Faker::Name.unique.name)
+
+        visit admin_merchant_path(merchant_1)
+
+        click_link("Update Merchant Info")
+
+        fill_in "Name", with: ""
+        click_on("Update Information")
+
+        expect(current_path).to eq "/admin/merchants/#{merchant_1.id}/edit"
+        expect(page).to have_content('Please enter a name.')
     end
 end
 
