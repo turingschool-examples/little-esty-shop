@@ -557,7 +557,6 @@ RSpec.describe 'Merchant Dashboard' do
         InvoiceItem.create!(quantity: 2, unit_price: item_4.unit_price, status: 'shipped', item: item_4, invoice: invoice_1b)
 
         visit "merchants/#{merchant_1.id}/dashboard" 
-        save_and_open_page 
 
         invoice_1a_date = invoice_1a.created_at.strftime("%A, %B%e, %Y")
         invoice_1b_date = invoice_1b.created_at.strftime("%A, %B%e, %Y")
