@@ -21,7 +21,7 @@ RSpec.describe "admin dashboard" do
       expect(current_path).to eq("/admin/invoices")
     end
 
-    it "displays the top 5 customer with transacitons" do
+    it "displays the top 5 customers with transacitons" do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
 
       item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
@@ -114,6 +114,64 @@ RSpec.describe "admin dashboard" do
         expect(page).to_not have_content("Cindy Lou")
         expect(page).to have_content("2 Purchases")
         expect(page).to_not have_content("3 Purchases")
+      end
+    end
+
+    it "displays incomplete invoices" do
+      merchant_1 = Merchant.create!(name: "Bobs Loggers")
+      merchant_2 = Merchant.create!(name: "Roberts Loggings")
+      item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 200, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 300, merchant_id: merchant_1.id )
+      item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 400, merchant_id: merchant_1.id )
+      item_4 = Item.create!(name: "Axe", description: "Big Axe", unit_price: 500, merchant_id: merchant_1.id )
+      item_5 = Item.create!(name: "Hammer", description: "Carpenter's hammer, wood handle", unit_price: 600, merchant_id: merchant_2.id )
+      item_6 = Item.create!(name: "Speed Square", description: "Metal w/ level", unit_price: 700, merchant_id: merchant_2.id )
+      item_7 = Item.create!(name: "Mallet", description: "Wooden carpenter's mallet", unit_price: 800, merchant_id: merchant_2.id )
+      item_8 = Item.create!(name: "Reciprocating Saw", description: "Electric reciprocating saw", unit_price: 900, merchant_id: merchant_2.id )
+
+      customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+      customer_2 = Customer.create!(first_name: "Cindy", last_name: "Lou")
+      customer_3 = Customer.create!(first_name: "John", last_name: "Johnson")
+      customer_4 = Customer.create!(first_name: "Mary", last_name: "Vale")
+
+      invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+      invoice_2 = Invoice.create!(status: 0, customer_id: customer_2.id)
+      invoice_3 = Invoice.create!(status: 0, customer_id: customer_3.id)
+      invoice_4 = Invoice.create!(status: 2, customer_id: customer_4.id)
+      invoice_5 = Invoice.create!(status: 1, customer_id: customer_4.id)
+      invoice_6 = Invoice.create!(status: 2, customer_id: customer_4.id)
+
+      invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 200, status: 0, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 300, status: 1, item_id: item_2.id, invoice_id: invoice_1.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 400, status: 2, item_id: item_3.id, invoice_id: invoice_2.id)
+      invoice_item_4 = InvoiceItem.create!(quantity: 2, unit_price: 500, status: 1, item_id: item_4.id, invoice_id: invoice_2.id)
+      invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 600, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+      invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 700, status: 0, item_id: item_6.id, invoice_id: invoice_3.id)
+      invoice_item_7 = InvoiceItem.create!(quantity: 3, unit_price: 800, status: 2, item_id: item_7.id, invoice_id: invoice_4.id)
+      invoice_item_8 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 2, item_id: item_8.id, invoice_id: invoice_4.id)
+      invoice_item_9 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 0, item_id: item_8.id, invoice_id: invoice_5.id)
+      invoice_item_10 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 0, item_id: item_8.id, invoice_id: invoice_5.id)
+      invoice_item_11 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 1, item_id: item_8.id, invoice_id: invoice_6.id)
+      invoice_item_12 = InvoiceItem.create!(quantity: 3, unit_price: 900, status: 1, item_id: item_8.id, invoice_id: invoice_6.id)
+
+      visit("/admin")
+
+      expect(page).to have_content("Incomplete Invoices")
+      
+      within '#invoice0' do
+        expect(page).to have_content("Invoice ##{invoice_1.id}")
+      end
+      within '#invoice1' do
+        expect(page).to have_content("Invoice ##{invoice_2.id}")
+      end
+      within '#invoice2' do
+        expect(page).to have_content("Invoice ##{invoice_3.id}")
+      end
+      within '#invoice3' do
+        expect(page).to have_content("Invoice ##{invoice_5.id}")
+      end
+      within '#invoice4' do
+        expect(page).to have_content("Invoice ##{invoice_6.id}")
       end
     end
 
