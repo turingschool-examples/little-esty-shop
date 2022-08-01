@@ -6,3 +6,14 @@
   <p>Created At: <%= @invoice.formatted_date %></p>
   <p>Customer Name: <%= @invoice.customer_name %></p>
 </div>
+
+<h3> Invoice Item Information </h3>
+
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="invoice-item-<%= invoice_item.id %>">
+    <p>Item Name: <%= invoice_item.item.name %></p>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Price: <%= invoice_item.unit_price %></p>
+    <p>Status: <%= invoice_item.status %></p>
+  </div>
+<% end %>
