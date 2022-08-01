@@ -8,9 +8,9 @@ h2 {text-align: left}
 <body>
 
 <h1>Little Esty Shop</h1>
+<p><%= link_to "Create New Item", new_merchant_item_path(@merchant) %></p>
 
-
-<h2> <%= @merchant.name %> </h2>
+<h2><%= @merchant.name %></h2>
 
 <h4> Enabled Items </h4>
 
