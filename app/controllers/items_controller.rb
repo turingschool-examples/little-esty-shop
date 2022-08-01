@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:merchant_id])
+    @enabled_items = @merchant.items.where(availability: 0)
+    @disabled_items = @merchant.items.where(availability: 1)
   end
 
   def show
@@ -16,7 +18,7 @@ class ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     merchant = Merchant.find(params[:merchant_id])
-    item.update(availability: params[:availability])
+    item.update( availability: params[:availability] )
     redirect_to merchant_items_path(merchant)   
     flash.notice = "Item has been successfully update"
   end
