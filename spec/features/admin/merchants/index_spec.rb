@@ -204,22 +204,50 @@ RSpec.describe 'admin merchants index page' do
     
     customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
 
+# MERCHANT 1 START
 
-    # test - set up multiple transactions for each merchant
-    # group the (successful) transactions by date - WHERE(transactions: {result: 1})
-    # SELECT ('transactions.*', sum(invoice_items.quantity * invoice_items.unit_price) AS revenue) - need a date method in transactions maybe?
-    # GROUP('transactions.date')
-    # order by revenue descending - ORDER(revenue: :desc)
-    # get the first one - LIMIT(1)
+    invoice1 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1992,5,3)) # merchant 1 best day == "May 3, 1992"
 
-    # probably need some sort of max_by situation?
+      invoiceitem1_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 100, unit_price: 100, status: 0) 
+      # Merchant 1: 10_000 on "May 3, 1992" 
+      invoiceitem2_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 100, unit_price: 100, status: 0) 
+      # Merchant 1: 10_000 on "May 3, 1992"
 
+      transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+
+    invoice2 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1995,12,6)) # december 6 1995
+      invoiceitem1_item1_invoice2 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice2.id, quantity: 1000, unit_price: 1000, status: 0) # 1_000_000 but fail
+
+      transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 0) # failed transaction
+
+    invoice3 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1998,6,12)) # june 12 1998
+      invoiceitem1_item1_invoice3 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice3.id, quantity: 100, unit_price: 100, status: 0)
+
+      transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+# MERCHANT 2 START
+
+    invoice4 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(2001,5,19)) #500 on may 19 2001
+      invoiceitem1_item1_invoice4 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice4.id, quantity: 50, unit_price: 50, status: 0) # 250
+      invoiceitem1_item1_invoice4 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice4.id, quantity: 50, unit_price: 50, status: 0) # 250
+
+      transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful 
+
+    invoice5 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(2012,12,12)) #december 12 2012
+      invoiceitem1_item1_invoice5 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice5.id, quantity: 50, unit_price: 50, status: 0)
+
+      transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # 250
+
+    visit admin_merchants_path
+
+    within '#top-merchant-1' do
+      expect(page).to have_content("Top selling date for #{merchant1.name} was Sunday, May 03, 1992")
+    end
+
+    within '#top-merchant-2' do
+      expect(page).to have_content("Top selling date for #{merchant2.name} was Saturday, May 19, 2001")
+    end
   end
-# As an admin,
-# When I visit the admin merchants index
-# Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
-# And I see a label “Top selling date for was "
-
-# Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
 end
 
