@@ -127,7 +127,7 @@ RSpec.describe "admin dashboard" do
       expect(page).to have_content("Incomplete Invoices")
    end
 
-   it "has invoice ids (As links) of those invoices that have items that have not been shipped" do 
+   it "has invoice ids (As links) of those invoices that have items that have not been shipped, with the date they  were created oldest to newest" do 
       merchant1 = Merchant.create!(name: 'Fake Merchant')
       merchant2 = Merchant.create!(name: 'Another Merchant')
 
@@ -214,6 +214,8 @@ RSpec.describe "admin dashboard" do
    end
 end
 # Admin Dashboard Incomplete Invoices
-# In that section I see a list of the ids of all invoices
-# that have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
+
+# Next to each invoice id I see the date that the invoice was created
+# And I see the date formatted like "Monday, July 18, 2019"
+# And I see that the list is ordered from oldest to newest
+

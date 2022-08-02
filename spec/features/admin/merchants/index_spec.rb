@@ -10,14 +10,14 @@ RSpec.describe 'admin index' do
 
     expect(current_path).to eq("/admin/merchants")
 
-    within "#merchant-#{merchant1.id}" do
-      expect(page).to have_content("Fake Merchant")
-    end
     within "#merchant-#{merchant2.id}" do
       expect(page).to have_content("Another Merchant")
     end
-
-    click_link "#{merchant1.name}"
-    expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+    
+    within "#merchant-#{merchant1.id}" do
+      expect(page).to have_content("Fake Merchant")
+      click_link "#{merchant1.name}"
+      expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+    end
   end
 end
