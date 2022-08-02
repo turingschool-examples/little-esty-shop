@@ -112,11 +112,11 @@ RSpec.describe "admin dashboard" do
       expect("Sara Nohaira").to appear_before("Suzie Hill")
       expect("Suzie Hill").to appear_before("Robert Smith")
 
-      expect(page).to have_content("Jimmy Ray 6")
-      expect(page).to have_content("Molly Dolly 5")
-      expect(page).to have_content("Sara Nohaira 4")
-      expect(page).to have_content("Suzie Hill 3")
-      expect(page).to have_content("Robert Smith 2")
+      expect(page).to have_content("Jimmy Ray - 6")
+      expect(page).to have_content("Molly Dolly - 5")
+      expect(page).to have_content("Sara Nohaira - 4")
+      expect(page).to have_content("Suzie Hill - 3")
+      expect(page).to have_content("Robert Smith - 2")
       expect(page).to_not have_content("Not Goodenough")
    end
 
@@ -127,7 +127,7 @@ RSpec.describe "admin dashboard" do
       expect(page).to have_content("Incomplete Invoices")
    end
 
-   it "has invoice ids (As links) of those invoices that have items that have not been shipped" do 
+   it "has invoice ids (As links) of those invoices that have items that have not been shipped, with the date they were created oldest to newest" do 
       merchant1 = Merchant.create!(name: 'Fake Merchant')
       merchant2 = Merchant.create!(name: 'Another Merchant')
 
@@ -208,12 +208,25 @@ RSpec.describe "admin dashboard" do
 
       visit "/admin"
 
-      expect(page).to have_link("#{invoice1.id}")
-      expect(page).to have_link("#{invoice2.id}")
-      expect(page).to have_link("#{invoice3.id}")
+      within "#invoice-#{invoice1.id}" do 
+         expect(page).to have_link("#{invoice1.id}")
+         expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B, %d, %Y")}")
+      end
+
+      within "#invoice-#{invoice2.id}" do 
+         expect(page).to have_link("#{invoice2.id}")
+         expect(page).to have_content("#{invoice2.created_at.strftime("%A, %B, %d, %Y")}")
+      end
+      
+      within "#invoice-#{invoice3.id}" do
+         expect(page).to have_link("#{invoice3.id}")
+         expect(page).to have_content("#{invoice3.created_at.strftime("%A, %B, %d, %Y")}")
+      end
+
+      # expect(invoice2.created_at.strftime("%A, %B, %d, %Y")).to appear_before(invoice1.created_at.strftime("%A, %B, %d, %Y"))
    end
 end
 # Admin Dashboard Incomplete Invoices
-# In that section I see a list of the ids of all invoices
-# that have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
+# And I see that the list is ordered from oldest to newest:
+# how do i feature test the order when they were created at the same time?
+

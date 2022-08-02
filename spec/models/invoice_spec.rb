@@ -94,7 +94,7 @@ RSpec.describe Invoice, type: :model do
       transaction19 = Transaction.create!(invoice_id: invoice19.id, credit_card_number: '5591140988754444', result: 1 )
       transaction20 = Transaction.create!(invoice_id: invoice20.id, credit_card_number: '5591140988753333', result: 1 )
 
-      expect(Invoice.incomplete_invoices).to eq([invoice1, invoice2, invoice3])
+      expect(Invoice.incomplete_invoices).to eq([invoice3, invoice2, invoice1])
     end
 
     it 'calculates total revenue of merchant invoice' do
