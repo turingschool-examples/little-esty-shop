@@ -51,7 +51,7 @@ RSpec.describe Merchant do
       invoice2 = ash.invoices.create!(status: 1)
       invoice_item5 = InvoiceItem.create!(invoice: invoice2, item: great_ball, quantity: 4, unit_price: 6, status: 0)
 
-      expect(pokemart.top_five_most_popular_items).to eq([ultra_ball, max_revive, super_potion, potion, antidote])
+      expect(pokemart.top_five_most_popular_items).to eq([max_revive, ultra_ball, super_potion, potion, antidote])
     end
 
     it 'displays #favorite_customers of a merchant' do
