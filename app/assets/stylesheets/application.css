@@ -42,3 +42,10 @@
     padding-left: 10%;
   }
 
+  .box {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
