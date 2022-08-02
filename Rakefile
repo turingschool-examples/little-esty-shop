@@ -121,7 +121,7 @@ namespace :csv_load do
       t.id = row['id']
       t.invoice_id = row['invoice_id']
       t.credit_card_number = row['credit_card_number']
-      t.credit_card_expitation_date = row['credit_card_expiration_date']
+      t.credit_card_expiration_date = row['credit_card_expiration_date']
 
       if row['result'] == "failed"
         t.result = 0

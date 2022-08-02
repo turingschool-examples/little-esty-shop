@@ -29,9 +29,31 @@ class Merchant < ApplicationRecord
     items.where(status: "Disabled")
   end
 
+  def best_date
+    self.invoices
+        .joins(:transactions)
+        .where(transactions: {result: 1})
+        .select('invoices.id, invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+        .group(:id)
+        .order(revenue: :desc)
+        .limit(1)
+        .first
+        .formatted_date
+  end
+
+  def self.top_5_merchants
+        joins(invoices: :transactions)
+            .where(transactions: {result: 1})
+            .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+            .group('merchants.id')
+            .order(revenue: :desc)
+            .limit(5)
+  end
+
   def self.enabled_merchants
     where(status: 'Enabled')
   end
+  
   def self.disabled_merchants
     where(status: 'Disabled')
   end

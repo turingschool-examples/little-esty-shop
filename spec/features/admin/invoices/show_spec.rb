@@ -77,4 +77,17 @@ RSpec.describe 'admin invoices show page' do
       expect(page).to have_content('Total Revenue: 26')
     end
   end
+
+  it 'has a select field to update invoice status' do
+    visit "/admin/invoices/#{@invoice1.id}"
+
+    within '#update-status' do
+      expect(page).to have_content('completed')
+
+      select 'cancelled', from: 'Status'
+      click_on 'Update Status'
+
+      expect(page).to have_content('cancelled')
+    end
+  end
 end
