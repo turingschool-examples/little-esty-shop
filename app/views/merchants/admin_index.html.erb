@@ -1,6 +1,6 @@
 <h1>Admin Merchants Index</h1>
 <% @merchants.each do |merchant| %>
 <div id="merchant-<%= merchant.id %>">
-  <p><%= merchant.name %></p>
+  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
 </div>
 <% end %>

@@ -6,4 +6,8 @@ class MerchantsController < ApplicationController
   def admin_index
     @merchants = Merchant.all
   end
+
+  def admin_show
+    @merchant = Merchant.find(params[:id])
+  end
 end

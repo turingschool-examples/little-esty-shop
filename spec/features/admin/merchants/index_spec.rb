@@ -16,5 +16,8 @@ RSpec.describe 'admin index' do
     within "#merchant-#{merchant2.id}" do
       expect(page).to have_content("Another Merchant")
     end
+
+    click_link "#{merchant1.name}"
+    expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
   end
 end
