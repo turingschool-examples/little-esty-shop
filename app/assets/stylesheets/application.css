@@ -13,3 +13,188 @@
  *= require_tree .
  *= require_self
  */
+
+html, body{
+  margin: 0px;
+  padding: 15px;
+}
+
+/* * {
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+} */
+
+#page-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#app-title {
+  font-size: xx-large;
+  /* padding: 10px; */
+}
+
+#page-banner {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+#merchant-links {
+  display: flex;
+}
+
+#merchant-details {
+  font-size: x-large;
+}
+
+#dashboard-content {
+  display: flex;
+  gap: 50px;
+}
+
+#dashboard-content-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid black;    
+}
+
+#dashboard-content-right-merchant-item-index {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard-content-left-merchant-item-index {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard-content-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid black;
+}
+
+#content-center-title {
+  text-align: center;
+  background-color: rgb(221, 217, 217);
+  min-height: 40px;
+  font-weight: bolder;
+  line-height: 40px;
+  margin-bottom: 20px;
+  border-top: 2px solid black;
+}
+
+.content-column-title {
+  text-align: center;
+  background-color: rgb(221, 217, 217);
+  min-height: 40px;
+  font-weight: bolder;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+
+.content-column-main {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.item-ready-to-ship {
+
+}
+
+.favorite-customer {
+  padding: 10px;
+  font-size: x-large;
+}
+
+.dashboard-link {
+  background-color: #00186F;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+}
+
+.dashboard-link:hover {
+  background-color: #6668d0;
+}
+
+.items-link {
+  background-color: #006f41;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+}
+
+.items-link:hover {
+  background-color: #03a05f;
+}
+
+.invoices-link {
+  background-color: #900ba1;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+}
+
+.invoices-link:hover {
+  background-color: #bc43cc;
+}
+
+.dashboard-content-left-subtitle {
+  font-size: large;
+  font-weight: bold;
+}
+
+.content-column-title-merch-item-index {
+  text-align: center;
+  min-height: 40px;
+  font-weight: bolder;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+
+.top-items-item {
+  padding-bottom: 5px;
+}
+
+.new-item-button {
+  background-color: #038596;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  max-width: fit-content;
+  margin: 5px;
+  margin-bottom: 30px;
+}
+
+.new-item-button:hover {
+  background-color: #259eae;
+}
+
+.item-disable-button {
+  background-color: #6668d0;
+}
+
+.enabled-item {
+  margin-left: 20px;
+}
+
+.disabled-item {
+  margin-left: 20px;
+}

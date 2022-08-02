@@ -1,7 +1,22 @@
 <h1>Invoice Show Page</h1>
+
 <div id="invoice-details">
     <p>ID: <%= @invoice.id %></p>
     <p>Status: <%= @invoice.status %></p>
     <p>Created: <%= @invoice.formatted_date %></p>  
-    <p>Customer: <%= @invoice.customer_name %></p>  
+    <p>Customer: <%= @invoice.customer_name %></p><br>
 </div>
+
+<div id="invoice-item-information">
+    <%= @invoice.invoice_items.each do |invoice_item|%>
+        <h3><%="Item Name: #{invoice_item.item.name}"%></h3>
+        <p><%="Quantity Ordered: #{invoice_item.quantity}"%></p>
+        <p><%="Price: #{number_to_currency(invoice_item.unit_price)}"%></p>
+        <p><%="Status: #{invoice_item.status}"%></p>
+    <% end %>
+</div>
+
+<div id="invoice-item-total-revenue">
+   <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p><br>
+</div>
+

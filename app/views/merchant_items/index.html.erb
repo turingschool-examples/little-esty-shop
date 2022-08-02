@@ -1,50 +1,102 @@
-<h1><%= @merchant.name %> Items</h1>
-
-<div id="items">
-
-  <div id="enabled-items">
-    <h2>Enabled Items</h2>
-
-    <% @enabled_items.each do |item| %>
-      <% if item.name != nil %>
-        <p id="enabled-item-<%=item.id%>">
-          <span class="item-name">
-            <%= item.name %>
-          </span>
-
-          <span class="item-disable-button">
-            <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local:true do |form| %>
-              <%= form.hidden_field :status, value: "Disabled" %>
-              <%= form.submit "Disable"%>
-            <% end%>
-          </span>
-        </p>
-      <% end %>
-    <% end %>
-
+<div id="page-banner">
+  <div id ="merchant-details">
+    <%= @merchant.name %>
   </div>
-
-  <div id="disabled-items">
-    <h2>Disabled Items</h2>
-
-    <% @disabled_items.each do |item| %>
-      <% if item.name != nil %>
-        <p id="disabled-item-<%=item.id%>">
-          <span class="item-name">
-            <%= item.name %>
-          </span>
-
-          <span class="item-enable-button">
-            <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local:true do |form| %>
-              <%= form.hidden_field :status, value: "Enabled" %>
-              <%= form.submit "Enable"%>
-            <% end%>
-          </span>
-        </p>
-      <% end %>
-    <% end %>
-
+  <div id="merchant-links">
+    <%= link_to "Dashboard", "/merchants/#{@merchant.id}", class: "dashboard-link"%>
+    <%= link_to 'My Items', "/merchants/#{@merchant.id}/items",class: "items-link" %>
+    <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices",class: "invoices-link" %>
   </div>
-
 </div>
 
+<div id="content-center-title">
+  My Items
+</div>
+
+<div id="dashboard-content">
+  <div id="dashboard-content-left-merchant-item-index">
+    
+    <%= link_to "New Item", "/merchants/#{@merchant.id}/items/new", class: "new-item-button" %>
+
+    <div class="dashboard-content-left-subtitle">
+      Enabled Items
+    </div>
+
+    <div id="enabled-items">
+      <% @enabled_items.each do |item| %>
+        <% if item.name != nil %>
+          <div class="enabled-item">
+            <p id="enabled-item-<%=item.id%>">
+              <span class="item-name">
+                <%= item.name %>
+              </span>
+
+              <span class="item-disable-button">
+                <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local:true do |form| %>
+                  <%= form.hidden_field :status, value: "Disabled" %>
+                  <%= form.submit "Disable"%>
+                <% end%>
+              </span>
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="dashboard-content-left-subtitle">
+      Disabled Items
+    </div>
+
+    <div id="disabled-items">
+      <% @disabled_items.each do |item| %>
+        <% if item.name != nil %>
+          <div class="disabled-item">
+            <p id="disabled-item-<%=item.id%>">
+              <span class="item-name">
+                <%= item.name %>
+              </span>
+
+              <span class="item-enable-button">
+                <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local:true do |form| %>
+                  <%= form.hidden_field :status, value: "Enabled" %>
+                  <%= form.submit "Enable"%>
+                <% end%>
+              </span>
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="dashboard-content-right-merchant-item-index">
+    <div class="content-column-title-merch-item-index">
+        Top Items
+    </div>
+
+    <div id="top-items-list">
+      <ol>
+        <li class="top-items-item">
+          <p>Gold Ring - $1234 in sales</p>
+          <p>Top day for gold ring was 12/12/12</p>
+        </li>
+        <li class="top-items-item">
+          <p>Gold Ring - $1234 in sales</p>
+          <p>Top day for gold ring was 12/12/12</p>
+        </li>
+        <li class="top-items-item">
+          <p>Gold Ring - $1234 in sales</p>
+          <p>Top day for gold ring was 12/12/12</p>
+        </li>
+        <li class="top-items-item">
+          <p>Gold Ring - $1234 in sales</p>
+          <p>Top day for gold ring was 12/12/12</p>
+        </li>
+        <li class="top-items-item">
+          <p>Gold Ring - $1234 in sales</p>
+          <p>Top day for gold ring was 12/12/12</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

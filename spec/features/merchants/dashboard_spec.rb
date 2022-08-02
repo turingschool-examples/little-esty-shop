@@ -145,5 +145,98 @@ RSpec.describe 'Dashboard Page' do
       end
     end
   end
+
+  it 'displays top 5 customers and number of successful transactions for each' do
+    pokemart = Merchant.create!(name: 'PokeMart')
+    potion = pokemart.items.create!(name: 'Potion', description: 'Recovers 10 HP', unit_price: 2)
+    super_potion = pokemart.items.create!(name: 'Super Potion', description: 'Recovers 25 HP', unit_price: 5)
+    ultra_ball = pokemart.items.create!(name: 'Ultra Ball', description: 'High chance of catching a Pokemon', unit_price: 8)
+
+    trainer_red = Customer.create!(first_name: 'Red', last_name: 'Trainer')
+    invoice1 = trainer_red.invoices.create!(status: 2)
+    invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: ultra_ball, quantity: 6, unit_price: 8, status: 0)
+    invoice1.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+    invoice1.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+    invoice1.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+    invoice1.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+    invoice1.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+    invoice1.transactions.create!(credit_card_number: 3395123433951234, result: 1)
+
+    trainer_blue = Customer.create!(first_name: 'Blue', last_name: 'Trainer')
+    invoice2 = trainer_blue.invoices.create!(status: 2)
+    invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: potion, quantity: 5, unit_price: 2, status: 0)
+    invoice2.transactions.create!(credit_card_number: 6695123466951234, result: 1)
+    invoice2.transactions.create!(credit_card_number: 6695123466951234, result: 1)
+    invoice2.transactions.create!(credit_card_number: 6695123466951234, result: 1)
+    invoice2.transactions.create!(credit_card_number: 6695123466951234, result: 1)
+    invoice2.transactions.create!(credit_card_number: 6695123466951234, result: 1)
+
+    misty = Customer.create!(first_name: 'Misty', last_name: 'Trainer')
+    invoice3 = misty.invoices.create!(status: 2)
+    invoice_item3 = InvoiceItem.create!(invoice: invoice3, item: ultra_ball, quantity: 2, unit_price: 8, status: 0)
+    invoice3.transactions.create!(credit_card_number: 9995123499951234, result: 1)
+    invoice3.transactions.create!(credit_card_number: 9995123499951234, result: 1)
+
+    brock = Customer.create!(first_name: 'Brock', last_name: 'Trainer')
+    invoice4 = brock.invoices.create!(status: 2)
+    invoice_item4 = InvoiceItem.create!(invoice: invoice4, item: super_potion, quantity: 2, unit_price: 5, status: 0)
+    invoice4.transactions.create!(credit_card_number: 7795123477951234, result: 1)
+    invoice4.transactions.create!(credit_card_number: 7795123477951234, result: 1)
+
+    lance = Customer.create!(first_name: 'Lance', last_name: 'Elite')
+    invoice5 = lance.invoices.create!(status: 2)
+    invoice_item5 = InvoiceItem.create!(invoice: invoice5, item: potion, quantity: 3, unit_price: 2, status: 0)
+    invoice5.transactions.create!(credit_card_number: 1195123411951234, result: 1)
+    invoice5.transactions.create!(credit_card_number: 1195123411951234, result: 1)
+    invoice5.transactions.create!(credit_card_number: 1195123411951234, result: 1)
+
+    giovanni = Customer.create!(first_name: 'Giovanni', last_name: 'Gym Trainer')
+    invoice6 = giovanni.invoices.create!(status: 1)
+    invoice_item6 = InvoiceItem.create!(invoice: invoice6, item: ultra_ball, quantity: 99, unit_price: 8, status: 1)
+    invoice6.transactions.create!(credit_card_number: 2295123422951234, result: 0)
+    invoice6.transactions.create!(credit_card_number: 2295123422951234, result: 0)
+
+    visit merchant_path(pokemart.id)
+
+    within "#customer-id-#{trainer_red.id}" do
+      expect(page).to have_content(trainer_red.first_name)
+      expect(page).to have_content(trainer_red.last_name)
+      expect(page).to have_content("Successful Transactions: 6")
+      expect(page).to_not have_content(trainer_blue.first_name)
+      expect(page).to_not have_content(giovanni.first_name)
+    end
+
+    within "#customer-id-#{trainer_blue.id}" do
+      expect(page).to have_content(trainer_blue.first_name)
+      expect(page).to have_content(trainer_blue.last_name)
+      expect(page).to have_content("Successful Transactions: 5")
+      expect(page).to_not have_content(trainer_red.first_name)
+      expect(page).to_not have_content(giovanni.first_name) 
+    end
+
+    within "#customer-id-#{lance.id}" do
+      expect(page).to have_content(lance.first_name)
+      expect(page).to have_content(lance.last_name)
+      expect(page).to have_content("Successful Transactions: 3")
+      expect(page).to_not have_content(misty.first_name)
+      expect(page).to_not have_content(giovanni.first_name)
+    end
+
+    within "#customer-id-#{misty.id}" do
+      expect(page).to have_content(misty.first_name)
+      expect(page).to have_content(misty.last_name)
+      expect(page).to have_content("Successful Transactions: 2")
+      expect(page).to_not have_content(lance.first_name)
+      expect(page).to_not have_content(giovanni.first_name)
+    end
+
+    within "#customer-id-#{brock.id}" do
+      expect(page).to have_content(brock.first_name)
+      expect(page).to have_content(brock.last_name)
+      expect(page).to have_content("Successful Transactions: 2")
+      expect(page).to_not have_content(misty.first_name)
+      expect(page).to_not have_content(giovanni.first_name)
+    end
+  end
 end
 

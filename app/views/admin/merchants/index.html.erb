@@ -1,0 +1,29 @@
+<h1> Admin merchants index page </h1>
+
+<div id="merchant-list">
+  <div id="enabled-merchants">
+  <h2>Enabled Merchants</h2>
+    <% @enabled_merchants.each do |merchant| %>
+      <div id="merchant-<%=merchant.id%>"> 
+        <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+        <%= merchant.status %>
+        <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
+          <%= form.hidden_field :status, value: "Disabled" %>
+          <%= form.submit "Disable"%>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div id="disabled-merchants">
+  <h2>Disabled Merchants</h2>
+    <% @disabled_merchants.each do |merchant| %>
+      <div id="merchant-<%=merchant.id%>"> 
+        <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+        <%= merchant.status %>
+        <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
+          <%= form.hidden_field :status, value: "Enabled" %>
+          <%= form.submit "Enable"%>
+        <% end %>
+    <% end %>
+  </div>
+</div>

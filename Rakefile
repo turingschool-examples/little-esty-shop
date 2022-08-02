@@ -7,6 +7,41 @@ require 'csv'
 Rails.application.load_tasks
 
 namespace :csv_load do
+  desc 'Seed Merchant Table!'
+  task :merchants => :environment do
+    csv_text = File.read("db/data/merchants.csv")
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      t = Merchant.new
+      t.id = row['id']
+      t.name = row['name']
+      t.created_at = row['created_at']
+      t.updated_at = row['updated_at']
+      t.save
+      puts "Merchant #{t.name} is created"
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+  end
+
+  desc 'Seed Items Table!'
+  task :items => :environment do
+    csv_text = File.read("db/data/items.csv")
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      t = Item.new
+      t.id = row['id']
+      t.name = row['name']
+      t.description = row['description']
+      t.unit_price = row['unit_price']
+      t.merchant_id = row['merchant_id']
+      t.created_at = row['created_at']
+      t.updated_at = row['updated_at']
+      t.save
+      puts "Item #{t.name} is created"
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+  end
+
   desc 'Seed Customers Table!'
   task :customers => :environment do
     csv_text = File.read("db/data/customers.csv")
@@ -24,25 +59,6 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('customers')
   end
 
-  desc 'Seed Items Table!'
-  task :items => :environment do
-    csv_text = File.read("db/data/items.csv")
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      t = Item.new
-      t.id = row['id']
-      t.name = row['name']
-      t.description = row['description']
-      t.unit_price = row['unit_price']
-      t.merchant_id = row['merchant_id']
-      t.created_at = row['created_at']
-      t.updated_at = row['updated_at']
-      t.save
-      puts "#{t.name} is created"
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('items')
-  end
-  
   desc 'Seed Invoices Table!'
   task :invoices => :environment do
     csv_text = File.read("db/data/invoices.csv")
@@ -96,22 +112,6 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
-  desc 'Seed Merchant Table!'
-  task :merchants => :environment do
-    csv_text = File.read("db/data/merchants.csv")
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      t = Merchant.new
-      t.id = row['id']
-      t.name = row['name']
-      t.created_at = row['created_at']
-      t.updated_at = row['updated_at']
-      t.save
-      puts "#{t.name} is created"
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
-  end
-
   desc 'Seed Transaction Table!'
   task :transactions => :environment do
     csv_text = File.read("db/data/transactions.csv")
@@ -137,4 +137,17 @@ namespace :csv_load do
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
+
+  task delete_all: :environment do
+    Merchant.destroy_all
+    Item.destroy_all
+    Customer.destroy_all
+    Invoice.destroy_all
+    InvoiceItem.destroy_all
+    Transaction.destroy_all
+    puts "'Delete All' Complete"
+  end
+
+  task create_all: [:merchants, :items, :customers, :invoices, :invoice_items, :transactions]
+    
 end
