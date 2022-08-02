@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2022_07_27_161627) do
   create_table "transactions", force: :cascade do |t|
     t.integer "invoice_id"
     t.bigint "credit_card_number"
-    t.datetime "credit_card_expitation_date"
-    t.string "result"
+    t.datetime "credit_card_expiration_date"
+    t.integer "result"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["invoice_id"], name: "index_transactions_on_invoice_id"

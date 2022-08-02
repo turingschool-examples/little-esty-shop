@@ -33,11 +33,87 @@ RSpec.describe 'admin merchants index page' do
 
     expect(page).to have_content("Trader Joes")
   end
+
+  it 'has names of the top 5 merchants by total revenue generated' do
+    merchant1 = Merchant.create!(name: "Snake Shop")
+    merchant2 = Merchant.create!(name: "Fish Foods")
+    merchant3 = Merchant.create!(name: "Cat Cafe")
+    merchant4 = Merchant.create!(name: "Dog Diner")
+    merchant5 = Merchant.create!(name: "Aardvark Accessories")
+    merchant6 = Merchant.create!(name: "Elephant Earmuffs")
+
+    customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
+
+    item1_merchant1 = Item.create!(name: "Snake Pants", description: "It is just a sock.", unit_price: 400, merchant_id: merchant1.id)
+    item1_merchant2 = Item.create!(name: "Stinky Bits", description: "Nondescript floaty chunks.", unit_price: 200, merchant_id: merchant2.id)
+    item1_merchant3 = Item.create!(name: "Fur Ball", description: "Ew pretty nasty!", unit_price: 1000, merchant_id: merchant3.id)
+    item1_merchant4 = Item.create!(name: "Milkbone", description: "Is it dairy or is it meat?", unit_price: 50, merchant_id: merchant4.id)
+    item1_merchant5 = Item.create!(name: "Library Card", description: "This should be free", unit_price: 5000, merchant_id: merchant5.id)
+    item1_merchant6 = Item.create!(name: "Big Earmuffs", description: "You could wear one like a hat", unit_price: 1000, merchant_id: merchant6.id)
+
+    invoice1 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 1, status: 0) # 10 revenue for merchant 1
+      invoiceitem2_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 1, status: 0) # 10 revenue for merchant 1
+      invoiceitem3_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 1, status: 0) # 10 revenue for merchant 1
+
+      transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+    # 30 revenue for merchant 1
+
+    invoice2 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice2 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice2.id, quantity: 100_000, unit_price: 1, status: 0) # 100_000 revenue for merchant 1 but it should not count
+
+      transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 0) #failed transaction
+
+    invoice3 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice3 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice3.id, quantity: 10, unit_price: 1, status: 0) # 10 revenue for merchant 2
+      invoiceitem2_item1_invoice3 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice3.id, quantity: 10, unit_price: 1, status: 0) # 10 revenue for merchant 2
+
+      transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+
+    invoice4 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice4 = InvoiceItem.create!(item_id: item1_merchant3.id, invoice_id: invoice4.id, quantity: 50, unit_price: 1, status: 0) # 50 revenue for merchant 3
+
+      transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+    invoice5 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice5 = InvoiceItem.create!(item_id: item1_merchant4.id, invoice_id: invoice5.id, quantity: 3, unit_price: 1, status: 0) # 3 revenue for merchant 4
+      invoiceitem2_item1_invoice5 = InvoiceItem.create!(item_id: item1_merchant4.id, invoice_id: invoice5.id, quantity: 2, unit_price: 1, status: 0) # 2 revenue for merchant 4
+
+      transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+    invoice6 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice6 = InvoiceItem.create!(item_id: item1_merchant5.id, invoice_id: invoice6.id, quantity: 555_555, unit_price: 1, status: 0) # 555_555 revenue for merchant 5 but should fail
+
+      transaction6 = Transaction.create!(invoice_id: invoice6.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 0) # failed transaction
+
+    invoice7 = Invoice.create!(customer_id: customer.id, status: 2)
+      invoiceitem1_item1_invoice7 = InvoiceItem.create!(item_id: item1_merchant6.id, invoice_id: invoice7.id, quantity: 100, unit_price: 100, status: 0) # 100 revenue for merchant 6
+      invoiceitem2_item1_invoice7 = InvoiceItem.create!(item_id: item1_merchant6.id, invoice_id: invoice7.id, quantity: 100, unit_price: 100, status: 0) # 100 revenue for merchant 6
+
+      transaction7 = Transaction.create!(invoice_id: invoice7.id, credit_card_number: 1111_2222_3333_4444, credit_card_expiration_date: "12-12-1930", result: 1) # successful transaction
+
+    visit admin_merchants_path
+
+    within "#top-merchants" do
+      expect(merchant6.name).to appear_before(merchant3.name)
+      expect(merchant3.name).to appear_before(merchant1.name)
+      expect(merchant1.name).to appear_before(merchant2.name)
+      expect(merchant2.name).to appear_before(merchant4.name)
+      expect(page).to have_content(merchant4.name)
+      expect(page).to_not have_content(merchant5.name)
+    end
+  end
 end
 
-# Admin Merchant Show
-
 # As an admin,
-# When I click on the name of a merchant from the admin merchants index page,
-# Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)
-# And I see the name of that merchant
+# When I visit the admin merchants index
+# Then I see the names of the top 5 merchants by total revenue generated
+# And I see that each merchant name links to the admin merchant show page for that merchant
+# And I see the total revenue generated next to each merchant name
+
+# Notes on Revenue Calculation:
+
+# Only invoices with at least one successful transaction should count towards revenue
+# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
