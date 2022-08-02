@@ -6,7 +6,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
     file = 'db/data/merchants.csv'
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      Merchant.create(row.to_hash)
+      Merchant.create!(row.to_hash)
       ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
       # p row
     end
@@ -21,7 +21,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('items')
     file = 'db/data/items.csv'
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      Item.create(row.to_hash)
+      Item.create!(row.to_hash)
       ActiveRecord::Base.connection.reset_pk_sequence!('items')
       # p row
     end
@@ -36,7 +36,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('customers')
     file = 'db/data/customers.csv'
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      Customer.create(row.to_hash)
+      Customer.create!(row.to_hash)
       ActiveRecord::Base.connection.reset_pk_sequence!('customers')
       # p row
     end
@@ -51,7 +51,7 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
     file = 'db/data/invoices.csv'
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      Invoice.create(row.to_hash)
+      Invoice.create!(row.to_hash)
       ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
       # p row
     end
@@ -67,7 +67,7 @@ namespace :csv_load do
 
     file = 'db/data/invoice_items.csv'
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      InvoiceItem.create(row.to_hash)
+      InvoiceItem.create!(row.to_hash)
       ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
       # p row
     end
