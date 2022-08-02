@@ -34,5 +34,12 @@ h2 {text-align: left}
       <% end %>
   </section>
 
+<h4> Top 5 Items </h4>
+  <section id="top_5" >
+    <% @merchant.top_5_items.each do |item| %>
+      <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>: <%= number_to_currency(item.revenue) %></p>
+    <% end %>
+  </section>
+
 </body>
 </html>

@@ -10,7 +10,6 @@ RSpec.describe Item do
       item2 = Item.create!(name: 'Chicken-toy', description: 'Bok-Bok all your problems away', unit_price: 8020, merchant_id: merchant.id,  created_at: Time.now, updated_at: Time.now)
 
       visit merchant_item_path(merchant,item)
-      # visit "/merchants/#{merchant.id}/items/#{item.id}"
 
         expect(page).to have_content("Name: Bear")
         expect(page).to have_content("Description: This fluffy creature will rock your world")
