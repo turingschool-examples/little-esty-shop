@@ -223,11 +223,14 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
     transaction6 = Transaction.create!(result: 'success', invoice_id: invoice6.id)
 
     visit 'admin/merchants'
-save_and_open_page
+# save_and_open_page
     within "div#revenue" do
-      expect(page).to have_content("Top selling date for #{merchant1.name} was May 25,2012")
-      expect(page).to have_content("Top selling date for #{merchant2.name} was July 25,2012")
-      expect(page).to have_content("Top selling date for #{merchant3.name} was April 25, 2012")
+      expect(page).to have_content("Top selling date for #{merchant1.name} was #{invoice2.updated_at.strftime('%B %e, %Y')}")
+      expect(page).to have_content("Top selling date for #{merchant2.name} was #{invoice3.updated_at.strftime('%B %e, %Y')}")
+      expect(page).to have_content("Top selling date for #{merchant3.name} was #{invoice5.updated_at.strftime('%B %e, %Y')}")
+      expect('Daily Dungeons').to appear_before('One item')
+      expect('One item').to appear_before('Poke pics')
+      expect('Poke pics').to_not appear_before('Daily Dungeons')
     end
   end
 end
