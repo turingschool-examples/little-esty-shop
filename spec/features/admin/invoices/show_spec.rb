@@ -50,7 +50,7 @@ RSpec.describe 'Admin Invoices Item Index' do
               invoice_item3 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item3.id, invoice_id: invoice2.id)
 
               visit "/admin/invoices/#{invoice2.id}"
-              save_and_open_page
+
               expect(page).to have_content("Junk")
               expect(page).to have_content(1)
               expect(page).to have_content(1000)
