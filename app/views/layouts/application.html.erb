@@ -12,6 +12,14 @@
   <body>
     <h1>Little Esty Shop</h1>
     <%= yield %>
-    <footer><%= @search.repo_information.name %></footer>
+    <footer>
+      GitHub Repository Name: <%= @search.repo_information.name %><br>
+      GitHub Usernames of Team Members: 
+      <ul>
+      <% @search.contributors.each do |contributor| %>
+        <li><%= contributor.username %>, commit count: </li>
+      <% end %>
+      </ul>
+    </footer>
   </body>
 </html>

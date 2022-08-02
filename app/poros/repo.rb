@@ -9,7 +9,6 @@ class Repo
               :pushed_at
 
   def initialize(data)
-    # binding.pry
   	@name = data[:name]
 	  @language = data[:language]
 	  @forks_count = data[:forks_count]

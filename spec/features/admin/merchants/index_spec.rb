@@ -5,6 +5,32 @@ require 'pry'
 RSpec.describe 'Admin Merchants Index' do 
     include ActiveSupport:: Testing::TimeHelpers 
 
+    before :each do 
+        json_response_repo = File.read('spec/fixtures/repo.json')
+        stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop").
+            to_return(status: 200, body: json_response_repo)
+
+        json_response_contributors = File.read('spec/fixtures/repo_contributors.json')
+        stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/contributors").
+            to_return(status: 200, body: json_response_contributors)
+
+        json_response_commits_blake = File.read('spec/fixtures/repo_commits_blake.json')
+        stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=blakesaylor&per_page=100").
+            to_return(status: 200, body: json_response_commits_blake)
+
+        json_response_commits_mayu = File.read('spec/fixtures/repo_commits_mayu.json')
+        stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=okayama-mayu&per_page=100").
+            to_return(status: 200, body: json_response_commits_mayu)
+
+        json_response_commits_mike = File.read('spec/fixtures/repo_commits_mike.json')
+        stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=mkbonini&per_page=100").
+            to_return(status: 200, body: json_response_commits_mike)
+
+        json_response_commits_thomas = File.read('spec/fixtures/repo_commits_thomas.json')
+        stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=EagleEye5085&per_page=100").
+            to_return(status: 200, body: json_response_commits_thomas)
+    end
+
     # Admin Merchants Index
     # As an admin,
     # When I visit the admin merchants index (/admin/merchants)
@@ -17,7 +43,7 @@ RSpec.describe 'Admin Merchants Index' do
         merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         visit admin_merchants_path
-        # save_and_open_page
+        save_and_open_page
 
         within('#e-merchant-0') do 
             expect(page).to have_content(merchant_1.name)
