@@ -8,3 +8,9 @@
 <% @customers.top_five.each do |customer| %>
 <%= "#{customer.first_name} #{customer.last_name} #{customer.trans_count}" %>
 <% end %>
+
+<h3>Incomplete Invoices</h3>
+
+<% @invoices.incomplete_invoices.each do |invoice| %>
+<%= link_to "#{invoice.id}", "/admin/invoices/:id" %>
+<% end %>
