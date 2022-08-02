@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe Invoice do
   describe 'invoice#index' do
     it 'shows all the invoices in the system' do
-      merchant = Merchant.create!(name: "Al Capone")
+      merchant = Merchant.create!(name: "Al Capone", created_at: Time.now, updated_at: Time.now)
 
-      customer1 = Customer.create!(first_name: "Babe", last_name: "Ruth")
-      customer2 = Customer.create!(first_name: "Charles", last_name: "Bukowski")
-      customer3 = Customer.create!(first_name: "Josey", last_name: "Wales")
+      customer1 = Customer.create!(first_name: "Babe", last_name: "Ruth", created_at: Time.now, updated_at: Time.now)
+      customer2 = Customer.create!(first_name: "Charles", last_name: "Bukowski", created_at: Time.now, updated_at: Time.now)
+      customer3 = Customer.create!(first_name: "Josey", last_name: "Wales", created_at: Time.now, updated_at: Time.now)
 
-      invoice1 = Invoice.create!(status: 0, customer_id: customer1.id)
-      invoice2 = Invoice.create!(status: 0, customer_id: customer2.id)
-      invoice3 = Invoice.create!(status: 0, customer_id: customer3.id)
+      invoice1 = Invoice.create!(status: 0, customer_id: customer1.id, created_at: Time.now, updated_at: Time.now)
+      invoice2 = Invoice.create!(status: 0, customer_id: customer2.id, created_at: Time.now, updated_at: Time.now)
+      invoice3 = Invoice.create!(status: 0, customer_id: customer3.id, created_at: Time.now, updated_at: Time.now)
 
       visit admin_invoices_path
 
@@ -27,7 +27,5 @@ RSpec.describe Invoice do
         expect(page).to have_link(invoice3.id)
       end
     end
-
-    it 'each invoice is a link to an invoice show page'
   end
 end
