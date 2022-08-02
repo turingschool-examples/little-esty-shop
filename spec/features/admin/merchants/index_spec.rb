@@ -183,8 +183,5 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
       click_on("#{merchant7.name}")
       expect(current_path).to eq("/admin/merchants/#{merchant7.id}")
     end
-
-    # within "div#revenue" do
-    # end
   end
 end
