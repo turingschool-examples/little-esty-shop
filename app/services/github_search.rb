@@ -9,6 +9,11 @@ class GithubSearch
         end 
     end 
 
+     def github_repo 
+        data = service.repo_name
+        GithubRepo.new(data)
+    end 
+
     def service 
         GithubService.new 
     end 
