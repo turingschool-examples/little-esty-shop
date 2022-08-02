@@ -127,7 +127,7 @@ RSpec.describe "admin dashboard" do
       expect(page).to have_content("Incomplete Invoices")
    end
 
-   it "has invoice ids (As links) of those invoices that have items that have not been shipped, with the date they  were created oldest to newest" do 
+   it "has invoice ids (As links) of those invoices that have items that have not been shipped, with the date they were created oldest to newest" do 
       merchant1 = Merchant.create!(name: 'Fake Merchant')
       merchant2 = Merchant.create!(name: 'Another Merchant')
 
@@ -208,9 +208,20 @@ RSpec.describe "admin dashboard" do
 
       visit "/admin"
 
-      expect(page).to have_link("#{invoice1.id}")
-      expect(page).to have_link("#{invoice2.id}")
-      expect(page).to have_link("#{invoice3.id}")
+      within "#invoice-#{invoice1.id}" do 
+         expect(page).to have_link("#{invoice1.id}")
+         expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B, %d, %Y")}")
+      end
+
+      within "#invoice-#{invoice2.id}" do 
+         expect(page).to have_link("#{invoice2.id}")
+         expect(page).to have_content("#{invoice2.created_at.strftime("%A, %B, %d, %Y")}")
+      end
+
+      within "#invoice-#{invoice3.id}" do
+         expect(page).to have_link("#{invoice3.id}")
+         expect(page).to have_content("#{invoice3.created_at.strftime("%A, %B, %d, %Y")}")
+      end
    end
 end
 # Admin Dashboard Incomplete Invoices
