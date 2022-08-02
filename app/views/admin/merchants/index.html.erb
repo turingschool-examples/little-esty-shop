@@ -23,7 +23,7 @@
 <div id="enabled-merchants">
 <h2>Enabled Merchants</h2>
   <% @enabled_merchants.each do |merchant| %>
-    <div id="merchant-<%=merchant.id%>"> 
+    <div id="enabled-merchant-<%=merchant.id%>"> 
       <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
       <%= merchant.status %>
       <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
@@ -36,7 +36,7 @@
 <div id="disabled-merchants">
 <h2>Disabled Merchants</h2>
   <% @disabled_merchants.each do |merchant| %>
-    <div id="merchant-<%=merchant.id%>"> 
+    <div id="disabled-merchant-<%=merchant.id%>"> 
       <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
       <%= merchant.status %>
       <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
