@@ -27,11 +27,6 @@ class Merchant < ApplicationRecord
     items.where(status: "Disabled")
   end
 
-  def total_revenue
-    # ??? what da hell
-  end
-  # this is not working
-
   def self.top_5_merchants
         joins(invoices: :transactions)
             .where(transactions: {result: 1})

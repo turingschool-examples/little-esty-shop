@@ -14,9 +14,8 @@
   <% @top_5_merchants.each_with_index do |merchant,index|%>
     <p id="top-merchant-<%=index+1%>">
       <%= merchant.name %>
-    </p>
-    <p>
-      Total Revenue: 
+      <br>
+      Total Revenue: <%= merchant.revenue %>
     </p>
   <% end %>
 </div>
