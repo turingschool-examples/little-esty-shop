@@ -13,7 +13,7 @@
 
 <% @invoices.incomplete_invoices.each do |invoice| %>
 <div id="invoice-<%= invoice.id %>">
-<%= link_to "#{invoice.id}", "/admin/invoices/:id" %> 
+<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> 
 Date Created: <%= invoice.created_at.strftime("%A, %B, %d, %Y") %>
 </div>
 <% end %>
