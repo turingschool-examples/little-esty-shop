@@ -17,7 +17,7 @@
       GitHub Usernames of Team Members: 
       <ul>
       <% @search.contributors.each do |contributor| %>
-        <li><%= contributor.username %>, commit count: </li>
+        <li><%= contributor.username %>, commit count: <%= @search.commit_count(username) %></li>
       <% end %>
       </ul>
     </footer>
