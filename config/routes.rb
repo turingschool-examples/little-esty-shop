@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/merchants/:merchant_id/invoices/:id', to: 'merchant_invoices#update'
   get '/merchants/:merchant_id/dashboard', to: 'merchants#show'
 
-  get '/admin', to: 'admin#index'
+  get '/admin', to: 'admin#dashboard'
 
   get '/admin/invoices', to: 'admin#index'
   get '/admin/invoices/:id', to: 'admin#show'

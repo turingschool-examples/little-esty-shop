@@ -8,4 +8,8 @@ class AdminController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
   end
+
+  def dashboard 
+    
+  end
 end
