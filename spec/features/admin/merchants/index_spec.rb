@@ -183,5 +183,43 @@ RSpec.describe 'admin merchants index page' do
       expect(page).to have_content('New Seasons')
     end
   end
+
+  it 'next to each of the top 5 merchants by revenue, it dsiplays the date with the most revenue for each merchant' do
+
+    merchant1 = Merchant.create!(name: "Snake Shop")
+    merchant2 = Merchant.create!(name: "Fish Foods")
+    merchant3 = Merchant.create!(name: "Cat Cafe")
+    merchant4 = Merchant.create!(name: "Dog Diner")
+    merchant5 = Merchant.create!(name: "Aardvark Accessories")
+    merchant6 = Merchant.create!(name: "Elephant Earmuffs")
+
+    customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
+
+    item1_merchant1 = Item.create!(name: "Snake Pants", description: "It is just a sock.", unit_price: 400, merchant_id: merchant1.id)
+    item1_merchant2 = Item.create!(name: "Stinky Bits", description: "Nondescript floaty chunks.", unit_price: 200, merchant_id: merchant2.id)
+    item1_merchant3 = Item.create!(name: "Fur Ball", description: "Ew pretty nasty!", unit_price: 1000, merchant_id: merchant3.id)
+    item1_merchant4 = Item.create!(name: "Milkbone", description: "Is it dairy or is it meat?", unit_price: 50, merchant_id: merchant4.id)
+    item1_merchant5 = Item.create!(name: "Library Card", description: "This should be free", unit_price: 5000, merchant_id: merchant5.id)
+    item1_merchant6 = Item.create!(name: "Big Earmuffs", description: "You could wear one like a hat", unit_price: 1000, merchant_id: merchant6.id)
+    
+    customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
+
+
+    # test - set up multiple transactions for each merchant
+    # group the (successful) transactions by date - WHERE(transactions: {result: 1})
+    # SELECT ('transactions.*', sum(invoice_items.quantity * invoice_items.unit_price) AS revenue) - need a date method in transactions maybe?
+    # GROUP('transactions.date')
+    # order by revenue descending - ORDER(revenue: :desc)
+    # get the first one - LIMIT(1)
+
+    # probably need some sort of max_by situation?
+
+  end
+# As an admin,
+# When I visit the admin merchants index
+# Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
+# And I see a label “Top selling date for was "
+
+# Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
 end
 
