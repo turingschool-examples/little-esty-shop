@@ -26,5 +26,4 @@ class Merchant < ApplicationRecord
     .where(items: { merchant_id: merchant_id })
     .sum('invoice_items.unit_price * invoice_items.quantity')
   end
-
 end

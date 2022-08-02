@@ -170,7 +170,7 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
     expect(page).to have_content("Top 5 Merchants by Revenue:")
 
     within "div#revenue" do
-  save_and_open_page
+  # save_and_open_page
       expect('Malwart').to appear_before('5 above')
       expect('5 above').to appear_before('2 doller store')
       expect('2 doller store').to appear_before('More than one item')
@@ -178,12 +178,13 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
       expect('One item').to_not appear_before('Malwart')
       expect(page).to_not have_content('Daily Dungeons')
       expect(page).to_not have_content('Poke pics')
+      expect(page).to have_link("#{merchant7.name}")
+      expect(page).to_not have_link("#{merchant1.name}")
+      click_on("#{merchant7.name}")
+      expect(current_path).to eq("/admin/merchants/#{merchant7.id}")
     end
 
-    within "div#revenue" do
-      expect(page).to have_link("#{merchant1.name}")
-      click_on("#{merchant1.name}")
-      expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
-    end
+    # within "div#revenue" do
+    # end
   end
 end
