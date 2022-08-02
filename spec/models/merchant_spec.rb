@@ -66,7 +66,7 @@ RSpec.describe Merchant, type: :model do
       invoice_item_6 = InvoiceItem.create!(quantity: 1, unit_price: 2, status: 1, created_at: Time.now, updated_at: Time.now, item_id: item_1.id, invoice_id: invoice_6.id)
 
       expect(merchant.ready_to_ship).to eq([invoice_item_1, invoice_item_2, invoice_item_6])
-
+    end
     end
   end
 end
