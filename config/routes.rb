@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get '/merchants/:id/invoices/:id', to: 'merchant_invoices#show'
 
   get '/admin/merchants', to: 'merchants#admin_index'
+  get '/admin/merchants/:id', to: 'merchants#admin_show'
 end
