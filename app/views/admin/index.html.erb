@@ -1,4 +1,7 @@
-<h1>Little Esty Shop</h1>
+<h1>Admin Dashboard</h1>
+
+<%= link_to 'Admin Merchants Index', '/admin/merchants' %>
+<%= link_to 'Admin Invoices Index', '/admin/invoices' %>
 
 <% @invoices.each do |invoice| %>
   <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> </p>
@@ -8,7 +11,3 @@
 
 
 
-<h1>Admin Dashboard</h1>
-
-<%= link_to 'Admin Merchants Index', '/admin/merchants' %>
-<%= link_to 'Admin Invoices Index', '/admin/invoices' %>
