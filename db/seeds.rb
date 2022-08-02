@@ -8,3 +8,4 @@
 
 
 merchant1 = Merchant.create!(name: 'Fake Merchant')
+merchant2 = Merchant.create!(name: 'Another Merchant')
