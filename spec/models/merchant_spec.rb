@@ -77,5 +77,37 @@ RSpec.describe Merchant do
       expect(pokemart.favorite_customers).to eq([trainer_red, trainer_blue, lance, misty, brock])
     end
   end
+  describe 'class methods' do
+    it 'enabled_merchants returns all merchants with status 1 (Enabled)' do
+      merchant1 = Merchant.create!(name: 'Potions and Things', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Wands and Wigs', status: 'Enabled')
+      merchant3 = Merchant.create!(name: 'Berties Beans', status: 'Enabled')
+      merchant4 = Merchant.create!(name: 'Butterbeer Superstore', status: 'Disabled')
+
+      actual = Merchant.enabled_merchants.map do |merchant|
+        merchant.name
+      end
+      expected = [merchant1, merchant2, merchant3].map do |merchant|
+        merchant.name
+      end
+     
+      expect(actual).to eq(expected)
+    end
+    it 'disabled_merchants returns all merchants with status 0 (Disabled)' do
+      merchant1 = Merchant.create!(name: 'Potions and Things', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Wands and Wigs', status: 'Disabled')
+      merchant3 = Merchant.create!(name: 'Berties Beans', status: 'Disabled')
+      merchant4 = Merchant.create!(name: 'Butterbeer Superstore', status: 'Disabled')
+
+      actual = Merchant.disabled_merchants.map do |merchant|
+        merchant.name
+      end
+      expected = [merchant2, merchant3, merchant4].map do |merchant|
+        merchant.name
+      end
+     
+      expect(actual).to eq(expected)
+    end
+  end
 end
 
