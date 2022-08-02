@@ -11,4 +11,9 @@ class Invoice < ApplicationRecord
   def total_rev 
     invoice_items.sum('invoice_items.quantity * invoice_items.unit_price')
   end
+
+  def self.incomplete_invoices
+    joins(:invoice_items)
+    .where.not(invoice_items:{status: 2} )
+  end
 end
