@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  before_action :repo_name
+  before_action :api_request
 
-  def repo_name
+  def api_request
     @search = RepoSearch.new
   end
 end

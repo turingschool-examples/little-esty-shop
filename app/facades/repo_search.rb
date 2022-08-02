@@ -1,6 +1,3 @@
-require './app/services/repo'
-require './app/services/github_service'
-
 class RepoSearch
   # memoization
   def repo_information

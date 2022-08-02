@@ -1,5 +1,3 @@
-require 'pry'
-
 class Repo
   attr_reader :name,
               :language,
