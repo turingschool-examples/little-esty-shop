@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
 
   resources :admin, only:[:index]
+
+  namespace :admin do 
+    resources :invoices, only: [:index]
+  end
   # resources :merchants, only:[:show] do
   #   resources :merchant_items, only:[:index]
   #   resources :dashboard, only:[:index]
@@ -26,4 +30,6 @@ Rails.application.routes.draw do
   get '/admin/merchants/:id', to: 'merchants#admin_show'
   get '/admin/merchants/:id/edit', to: 'merchants#edit'
   patch '/admin/merchants/:id', to: 'merchants#update'
+
+  # get '/admin/invoices', to: 'invoices#admin_index'
 end
