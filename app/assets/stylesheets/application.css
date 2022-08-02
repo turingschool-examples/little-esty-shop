@@ -43,7 +43,6 @@
     padding-left: 10%;
   }
 
-<<<<<<< HEAD
   .body_description-left {
     padding-left: 50px;
     font-size: 20px;
@@ -69,19 +68,10 @@
     font-size: 30px;
     padding-left: 50px;
   }
-  
-  .box {
-    display: flex;
-    font-size: 30px;
-    align-items: center;
-    justify-content: center;
-  }
-=======
-  .box {
-    display: flex;
-    font-size: 30px;
-    align-items: center;
-    justify-content: center;
-  }
 
->>>>>>> a43fc35701444e17940bdad0cd084118ec5768e2
+  .box {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+  }
