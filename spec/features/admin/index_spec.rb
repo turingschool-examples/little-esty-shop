@@ -112,11 +112,11 @@ RSpec.describe "admin dashboard" do
       expect("Sara Nohaira").to appear_before("Suzie Hill")
       expect("Suzie Hill").to appear_before("Robert Smith")
 
-      expect(page).to have_content("Jimmy Ray 6")
-      expect(page).to have_content("Molly Dolly 5")
-      expect(page).to have_content("Sara Nohaira 4")
-      expect(page).to have_content("Suzie Hill 3")
-      expect(page).to have_content("Robert Smith 2")
+      expect(page).to have_content("Jimmy Ray - 6")
+      expect(page).to have_content("Molly Dolly - 5")
+      expect(page).to have_content("Sara Nohaira - 4")
+      expect(page).to have_content("Suzie Hill - 3")
+      expect(page).to have_content("Robert Smith - 2")
       expect(page).to_not have_content("Not Goodenough")
    end
 
@@ -217,16 +217,16 @@ RSpec.describe "admin dashboard" do
          expect(page).to have_link("#{invoice2.id}")
          expect(page).to have_content("#{invoice2.created_at.strftime("%A, %B, %d, %Y")}")
       end
-
+      
       within "#invoice-#{invoice3.id}" do
          expect(page).to have_link("#{invoice3.id}")
          expect(page).to have_content("#{invoice3.created_at.strftime("%A, %B, %d, %Y")}")
       end
+
+      # expect(invoice2.created_at.strftime("%A, %B, %d, %Y")).to appear_before(invoice1.created_at.strftime("%A, %B, %d, %Y"))
    end
 end
 # Admin Dashboard Incomplete Invoices
-
-# Next to each invoice id I see the date that the invoice was created
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
+# And I see that the list is ordered from oldest to newest:
+# how do i feature test the order when they were created at the same time?
 

@@ -6,14 +6,14 @@
 <h3>Top 5 Customers</h3>
 
 <% @customers.top_five.each do |customer| %>
-<%= "#{customer.first_name} #{customer.last_name} #{customer.trans_count}" %>
+<%= "| #{customer.first_name} #{customer.last_name} - #{customer.trans_count} purchases | " %>
 <% end %>
 
 <h3>Incomplete Invoices</h3>
 
 <% @invoices.incomplete_invoices.each do |invoice| %>
 <div id="invoice-<%= invoice.id %>">
-<%= invoice.created_at.strftime("%A, %B, %d, %Y") %>
 <%= link_to "#{invoice.id}", "/admin/invoices/:id" %> 
+Date Created: <%= invoice.created_at.strftime("%A, %B, %d, %Y") %>
 </div>
 <% end %>
