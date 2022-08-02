@@ -1,7 +1,22 @@
-<h1>Administrator Invoices Index</h1>
-
-<% @invoices.each do |inv| %>
-  <div id="inv-<%= inv.id %>">
-    <p>Invoice # <%=link_to "#{inv.id}", "/admin/invoices/#{inv.id}" %></p>
+<div class="flex-container">
+  <div id='title'>
+    <h3>Administrator Invoices Index</h3>
   </div>
-<% end %>
+  <div id='nav'>
+    <th><%= link_to "Dashboard", "/admin/dashboard" %></th> &emsp;
+    <th><%= link_to "Merchants", "/admin/merchants" %> </th> &emsp;
+    <th><%= link_to "Invoices", invoices_path %></th>
+  </div>
+</div>
+
+
+
+  <center><h2 style='background-color: #f1f1f1;'>Invoices</h2></center>
+
+  <div class='invoices'>
+    <% @invoices.each do |inv| %>
+      <div id="inv-<%= inv.id %>">
+        <p>Invoice # <%=link_to "#{inv.id}", "/admin/invoices/#{inv.id}" %></p>
+      </div>
+    <% end %>
+  </div>
