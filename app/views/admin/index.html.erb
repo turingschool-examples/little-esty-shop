@@ -12,7 +12,7 @@
 <div class="flex-container">
 
   <div class='body-left'>
-    <center><h2 style='background-color: #f1f1f1;'><h2>Incomplete Invoices</h2></center>
+    <center><h2 style='background-color: #f1f1f1;'>Incomplete Invoices</h2></center>
     <% @invoices.incomplete_invoices.each_with_index do |invoice, index| %>
       <div id="invoice<%= index %>">
         <%= "Invoice #" %><%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}"%><%= "- #{invoice.created_at.strftime("%A, %B%e, %Y")}"%>
@@ -21,7 +21,7 @@
   </div>
 
   <div class='body-right'>
-    <center><h2 style='background-color: #f1f1f1;'><h2>Top Customers</h2></center>
+    <center><h2 style='background-color: #f1f1f1;'>Top Customers</h2></center>
       <% @customers.top_five_customers.each_with_index do |customer, index| %>
         <div id="customer<%= index %>">
           <%= "#{index + 1}. #{customer.first_name} #{customer.last_name} - #{customer.transactions_count} Purchases" %>
