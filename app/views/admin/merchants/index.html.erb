@@ -7,3 +7,16 @@
     </p>
   <% end %>
 </div>
+
+<h1> Top 5 Merchants By Revenue </h1>
+
+<div id="top-merchants">
+  <% @top_5_merchants.each_with_index do |merchant,index|%>
+    <p id="top-merchant-<%=index+1%>">
+      <%= merchant.name %>
+    </p>
+    <p>
+      Total Revenue: 
+    </p>
+  <% end %>
+</div>

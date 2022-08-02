@@ -95,6 +95,8 @@ RSpec.describe 'admin merchants index page' do
 
     visit admin_merchants_path
 
+    require 'pry'; binding.pry 
+
     within "#top-merchants" do
       expect(merchant6.name).to appear_before(merchant3.name)
       expect(merchant3.name).to appear_before(merchant1.name)
