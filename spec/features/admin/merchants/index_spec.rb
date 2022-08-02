@@ -183,5 +183,71 @@ RSpec.describe 'admin merchants index page' do
       expect(page).to have_content('New Seasons')
     end
   end
+
+  it 'next to each of the top 5 merchants by revenue, it dsiplays the date with the most revenue for each merchant' do
+
+    merchant1 = Merchant.create!(name: "Snake Shop")
+    merchant2 = Merchant.create!(name: "Fish Foods")
+    merchant3 = Merchant.create!(name: "Cat Cafe")
+    merchant4 = Merchant.create!(name: "Dog Diner")
+    merchant5 = Merchant.create!(name: "Aardvark Accessories")
+    merchant6 = Merchant.create!(name: "Elephant Earmuffs")
+
+    customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
+
+    item1_merchant1 = Item.create!(name: "Snake Pants", description: "It is just a sock.", unit_price: 400, merchant_id: merchant1.id)
+    item1_merchant2 = Item.create!(name: "Stinky Bits", description: "Nondescript floaty chunks.", unit_price: 200, merchant_id: merchant2.id)
+    item1_merchant3 = Item.create!(name: "Fur Ball", description: "Ew pretty nasty!", unit_price: 1000, merchant_id: merchant3.id)
+    item1_merchant4 = Item.create!(name: "Milkbone", description: "Is it dairy or is it meat?", unit_price: 50, merchant_id: merchant4.id)
+    item1_merchant5 = Item.create!(name: "Library Card", description: "This should be free", unit_price: 5000, merchant_id: merchant5.id)
+    item1_merchant6 = Item.create!(name: "Big Earmuffs", description: "You could wear one like a hat", unit_price: 1000, merchant_id: merchant6.id)
+    
+    customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
+
+# MERCHANT 1 START
+
+    invoice1 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1992,5,3)) # merchant 1 best day == "May 3, 1992"
+
+      invoiceitem1_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 100, unit_price: 100, status: 0) 
+      # Merchant 1: 10_000 on "May 3, 1992" 
+      invoiceitem2_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 100, unit_price: 100, status: 0) 
+      # Merchant 1: 10_000 on "May 3, 1992"
+
+      transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+
+    invoice2 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1995,12,6)) # december 6 1995
+      invoiceitem1_item1_invoice2 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice2.id, quantity: 1000, unit_price: 1000, status: 0) # 1_000_000 but fail
+
+      transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 0) # failed transaction
+
+    invoice3 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1998,6,12)) # june 12 1998
+      invoiceitem1_item1_invoice3 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice3.id, quantity: 100, unit_price: 100, status: 0)
+
+      transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful transaction
+
+# MERCHANT 2 START
+
+    invoice4 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(2001,5,19)) #500 on may 19 2001
+      invoiceitem1_item1_invoice4 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice4.id, quantity: 50, unit_price: 50, status: 0) # 250
+      invoiceitem1_item1_invoice4 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice4.id, quantity: 50, unit_price: 50, status: 0) # 250
+
+      transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # successful 
+
+    invoice5 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(2012,12,12)) #december 12 2012
+      invoiceitem1_item1_invoice5 = InvoiceItem.create!(item_id: item1_merchant2.id, invoice_id: invoice5.id, quantity: 50, unit_price: 50, status: 0)
+
+      transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1) # 250
+
+    visit admin_merchants_path
+
+    within '#top-merchant-1' do
+      expect(page).to have_content("Top selling date for #{merchant1.name} was Sunday, May 03, 1992")
+    end
+
+    within '#top-merchant-2' do
+      expect(page).to have_content("Top selling date for #{merchant2.name} was Saturday, May 19, 2001")
+    end
+  end
 end
 
