@@ -1,2 +1,7 @@
 <h1>Admin Merchant Show</h1>
+
+<%  if flash[:alert] %>
+<div class="notice"><%= flash[:alert] %></div>
+<% end %>
 <%= @merchant.name %>
+<%= link_to "Update Merchant", "/admin/merchants/#{@merchant.id}/edit" %>
