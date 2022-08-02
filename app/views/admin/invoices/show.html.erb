@@ -22,3 +22,11 @@
 <div id="total-revenue">
   <h3>Total Revenue: <%= @invoice.total_revenue %></h3>
 </div>
+
+<div id="update-status">
+  <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+    <%= f.label :status %>
+    <%= f.select :status, ['cancelled', 'in progress', 'completed'] %>
+    <%= f.submit "Update Status" %>
+  <% end %>
+</div>
