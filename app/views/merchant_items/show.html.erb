@@ -1,6 +1,19 @@
-<h1><%= @item.name %>'s Show Page</h1>
-<%= link_to "Edit #{@item.name}", "/merchants/#{@item.merchant_id}/items/#{@item.id}" %>
-<ul>
-    <li>Item Description: <%= @item.description %></li>
-    <li>Current selling price is: <%= number_to_currency(@item.unit_price) %></li>
-</ul>
+<div class="flex-container">
+  <div id='title'>
+    <h3><%= @merchant.name %></h3>
+  </div>
+
+  <div id='nav'>
+    <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th> &emsp;
+    <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th> &emsp;
+    <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>
+  </div>
+</div>
+<div class="sub-header">
+  <center><h3 style='background-color: #f1f1f1;'><%="#{@item.name}: Show Page"%></h3></center>
+</div>
+<div class='body_description-left'>
+    <p>Item Description: <%= @item.description %></p>
+    <p>Current selling price is: <%= number_to_currency(@item.unit_price) %></p>
+    <%= link_to "Edit #{@item.name}", "/merchants/#{@item.merchant_id}/items/#{@item.id}" %>
+</div>

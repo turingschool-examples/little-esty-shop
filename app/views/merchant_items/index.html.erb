@@ -1,21 +1,52 @@
-<h1> <%= @merchant.name %>'s Current Stock</h1>
-
-<div id="create-item">
-  <p><%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %></p>
+<div class="flex-container">
+  <div id='title'>
+    <h3> <%= @merchant.name %>'s Current Stock</h3>
+  </div>
+  <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th> &emsp;
+    <th><%= link_to "#{@merchant.name} My Items", "/merchants/#{@merchant.id}/items" %> </th> &emsp;
+    <th><%= link_to "#{@merchant.name} My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>
+  </div>
 </div>
 
-<h3>Enabled Items for <%= @merchant.name %></h3>
+<div class="sub-header">
+  <h3>My Items</h3>
+</div>
 
-<div id="enabled_items">
-  <% @merchant.items.each do |item| %>
-    <% if item.status == "Enabled" %>
-      <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+<div class ="sub-header-left">
+  <div id="create-item">
+    <p><%= link_to "New Item", "/merchants/#{@merchant.id}/items/new" %></p>
+  </div>
+</div>
+
+<div class="flex-container">
+  <div id="enabled_items">
+    <div class="sub-header2">
+      <h3>Enabled Items for <%= @merchant.name %></h3>
+    </div>
+    <% @merchant.items.each do |item| %>
+      <% if item.status == "Enabled" %>
+        <div class="body-left-links">
+          <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%></p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+
+    <div id="top-five-items">
+      <h3>Top Items</h3>
+      <ol>
+      <% @merchant.top_five_items.each do |item| %>
+        <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue.fdiv(100)) %> in sales </li>
+        <p> Top selling date for <%= item.name %> was <%= item.top_day.strftime("%-m/%d/%y") %> </p>
+      <% end %>
+    </ol>
+    </div>
 </div>
 
-<h3>Disabled Items for <%= @merchant.name %></h3>
-
+<div class="sub-header2">
+  <h3>Disabled Items for <%= @merchant.name %></h3>
+</div>
 <div id="disabled_items">
   <% @merchant.items.each do |item| %>
     <% if item.status == "Disabled" %>
@@ -24,23 +55,21 @@
   <% end %>
 </div>
 
+
+
+
+<div class="sub-header2">
+
 <h3>Current Stock Overall</h3>
+</div>
 
 <% @merchant.items.each do |item| %>
-  <div id="item-<%= item.id %>">
-    <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>&emsp; Status: <%= item.status %>
-    <%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?enabled=true", method: :patch, local: true %>&emsp;
-    <%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?disabled=true", method: :patch, local: true %><br>
-    </p>
+  <div class="body-left">
+    <div id="item-<%= item.id %>">
+      <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>&emsp; Status: <%= item.status %>
+      <%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?enabled=true", method: :patch, local: true %>&emsp;
+      <%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?disabled=true", method: :patch, local: true %><br>
+      </p>
+    </div>
   </div>
 <% end %>
-
-<div id="top-five-items">
-  <h3>Top Items</h3>
-  <% @merchant.top_five_items.each do |item| %>
-    <ol>
-      <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue.fdiv(100)) %> in sales </li>
-      <p> Top selling date for <%= item.name %> was <%= item.top_day.strftime("%-m/%d/%y") %> </p>
-    </ol>
-  <% end %>
-</div>

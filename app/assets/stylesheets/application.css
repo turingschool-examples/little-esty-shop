@@ -24,7 +24,7 @@
     align-items: baseline;
     padding: 20px;
   }
-  
+
   .flex-container > div {
     margin: 10px;
     font-size: 30px;
@@ -32,6 +32,7 @@
 
   .body-left    {
     padding-left: 50px;
+    font-size: 20px
   }
 
   .body-right    {
@@ -42,3 +43,28 @@
     padding-left: 10%;
   }
 
+  .body_description-left {
+    padding-left: 50px;
+    font-size: 20px;
+    word-wrap: normal;
+    width: 600px
+  }
+  .body-left-links   {
+    padding-left: 50px;
+    font-size: 25px
+  }
+
+  .sub-header{
+    text-align: center;
+    font-size: 25px;
+    background-color: #f1f1f1
+  }
+  .sub-header-left {
+    text-align: left;
+    font-size: 25px;
+    padding-left: 50px;
+  }
+  .sub-header2{
+    font-size: 30px;
+    padding-left: 50px;
+  }
