@@ -1,0 +1,8 @@
+<span>
+    <h3><%= @merchant.name %></h3>
+    <div class='nav-links'>
+        <%= link_to("Dashboard", "/merchants/#{@merchant.id}/dashboard") %>
+        <%= link_to("My Items", "/merchants/#{@merchant.id}/items") %>
+        <%= link_to("My Invoices", "/merchants/#{@merchant.id}/invoices") %>
+    </div>
+</span>

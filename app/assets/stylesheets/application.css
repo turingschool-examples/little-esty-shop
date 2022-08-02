@@ -13,3 +13,44 @@
  *= require_tree .
  *= require_self
  */
+
+.content {
+    display: flex;
+    justify-content: center;
+}
+
+.section-title {
+    background-color: rgb(238, 238, 238);
+    font-weight: bold;
+    text-align: center;
+}
+
+.nav-links{
+    float: right;
+}
+
+.active {
+    color: red;
+}
+
+#incomplete-invoices {
+    margin: 0 25px 0 25px;
+    width: 30%;
+}
+
+#top-customers {
+    margin: 0 25px 0 25px;
+    width: 30%;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+
+}
+
+h3 {
+    display: inline-block;
+}
