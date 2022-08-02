@@ -1,5 +1,15 @@
 <h1>Little Esty Shop</h1>
 
+<%= link_to 'Create Merchant', "/admin/merchants/new" %>
+
+<h2>Top 5 Merchants by Revenue:</h2>
+<div id="revenue">
+  <% @merchants.merchant_revenue.each do |merchant| %>
+    <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+    <%= merchant.invoice_rev(merchant.id) %>
+  <% end %>
+</div>
+
 <h2>Enabled Merchants</h2>
 <div id="admin_merchant">
   <div id="merchant-enabled">
@@ -23,14 +33,7 @@
         <p>Status: <%= merchant.status %></p>
       <%= button_to "Enable/Disable", "/admin/merchants/#{merchant.id}/update", action: :update, params: { status: :enabled}, method: :patch %>
       </div>
-      <% end %> 
+      <% end %>
     <% end %>
     </div>
 </div>
-
-
-
-
-
-
-

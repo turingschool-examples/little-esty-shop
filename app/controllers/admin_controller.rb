@@ -9,5 +9,3 @@ class AdminController < ApplicationController
     @invoice = Invoice.find(params[:id])
   end
 end
-
-
