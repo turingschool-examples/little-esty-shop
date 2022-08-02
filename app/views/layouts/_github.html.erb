@@ -1,5 +1,6 @@
 <% search = GithubSearch.new %>
 <p>Repo name: <%= search.github_repo.name %></p>
+<p>Merged PR's: <%= search.github_pulls.count %></p>
 <p>Contributors: </p>
 <% search.github_info.each do |contributor| %>
     <p><%= contributor.login %> - <%= contributor.commits %></p>
