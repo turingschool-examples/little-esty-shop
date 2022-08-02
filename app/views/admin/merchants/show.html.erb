@@ -1,2 +1,18 @@
-<h1><%= @merchant.name %> Admin Show Page</h1>
+<div class="flex-container">
+ 
+  <div id='title'>
+  <h2>Admin Dashboard</h2>
+  </div>
+  <div id='nav'>
+    <th><%= link_to "Dashboard", "/admin" %></th>&emsp;
+    <th><%= link_to "Merchants", "/admin/merchants" %></th>&emsp;
+    <th><%= link_to "Invoices", "/admin/invoices" %></th>
+  </div>
+</div>
+
+<div class="box">
+  <div>
+    <h3 style='background-color: #f1f1f1;'><%= @merchant.name %></h3>
+  </div>
+</div>
 <h3><%= link_to 'Update Merchant', "/admin/merchants/#{@merchant.id}/edit" %>
