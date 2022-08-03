@@ -3,7 +3,7 @@
 <div id="invoices-list">
   <% @invoices.sort.each do |invoice| %>
     <div id="invoice-<%="#{invoice.id}"%>">
-      <%= link_to "Invoice ##{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+      <%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice) %>
     </div>
   <% end %>
 </div>

@@ -12,4 +12,4 @@
   </ul>
 </div>
 
-<%= link_to "Update Information", "/merchants/#{@item.merchant_id}/items/#{@item.id}/edit" %>
+<%= link_to "Update Information", edit_merchant_item_path(@item.merchant_id, @item) %>

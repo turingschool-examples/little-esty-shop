@@ -1,7 +1,7 @@
 <h1>Edit Item</h1>
 
 <div id="update-form">
-  <%= form_with url: "/merchants/#{@item.merchant_id}/items/#{@item.id}", method: :patch, local: true do |form| %>
+  <%= form_with url: merchant_item_path(@item.merchant_id, @item), method: :patch, local: true do |form| %>
     <div id="name-field">
       <%= form.label :name, "Item Name: " %>
       <%= form.text_field :name, value: @item.name %>
