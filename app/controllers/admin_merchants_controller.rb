@@ -3,8 +3,8 @@ class AdminMerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
     @invoices = Invoice.all
-  end 
-  
+  end
+
   def show
     @merchant = Merchant.find(params[:merchant_id])
   end
@@ -14,7 +14,7 @@ class AdminMerchantsController < ApplicationController
   end
 
   def update
-    merchant = Merchant.find(params[:merchant_id]) 
+    merchant = Merchant.find(params[:merchant_id])
     if params[:status] == 'enabled'
       merchant.update(status: params[:status])
       redirect_to "/admin/merchants"
@@ -25,6 +25,20 @@ class AdminMerchantsController < ApplicationController
       merchant.update(name: params[:name])
       redirect_to "/admin/merchants/#{merchant.id}"
       flash.notice = 'The information has been successfully updated'
-    end   
+    end
   end
+
+  def new
+
+  end
+
+  def create
+    merchant = Merchant.create!(merchant_params)
+    redirect_to "/admin/merchants"
+  end
+
+  private
+    def merchant_params
+      params.permit(:name, :id, :status).with_defaults(status: 'disabled')
+    end
 end
