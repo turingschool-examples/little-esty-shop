@@ -1,6 +1,11 @@
-<h4>Invoices</h4>
+<div id="header">
+    <%= render "shared/admin_header" %>
+</div>
 
-<div id="invoices-list">
+<div class='section-title' style="font-size:130%">Invoices</div>
+
+<div id="invoices-list" >
+  <br>
   <% @invoices.sort.each do |invoice| %>
     <div id="invoice-<%="#{invoice.id}"%>">
       <%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice) %>

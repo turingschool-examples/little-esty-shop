@@ -1,15 +1,26 @@
-<div id='invoice-details'>
-    <h1>Invoice #<%= @invoice.id %> </h1>
+<div id="header">
+    <%= render "shared/admin_header" %>
+</div>
 
-    <%= form_with url: admin_invoice_path(@invoice), method: :patch, local: true, form: {style: 'display:inline-block;'} do |f| %>
+<div class='section-title' style="font-size:130%">Invoice #<%= @invoice.id %></div>
+
+<div id='invoice-details'>
+  <br>
+  <div >
+    <p style= 'float:left; padding-right:10px'>Status: </p>
+    <br>
+    <%= form_with url: admin_invoice_path(@invoice), method: :patch, local: true do |f| %>
       <%= f.select :status, options_for_select(['in progress', 'completed', 'cancelled'], @invoice.status) %>
       <%= f.submit "Update Invoice Status"%>
     <% end %>
+    <br>
+  </div>
+  
 
-    <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
-    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100)%></p>
-    <h2>Customer: </h2>
-    <p><%= @invoice.customer.first_name.titlecase  %> <%= @invoice.customer.last_name.titlecase  %> </p>
+  <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f/100)%></p>
+  <h2>Customer: </h2>
+  <p><%= @invoice.customer.first_name.titlecase  %> <%= @invoice.customer.last_name.titlecase  %> </p>
 </div>
 
 <div id="invoice-item-details">
