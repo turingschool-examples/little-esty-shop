@@ -7,7 +7,10 @@
   
   <div id="incomplete_invoices">
   <% @invoices.incomplete_invoices.each do |invoice| %>
-    <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %></p>
+    <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+    <br>
+    <%= invoice.created_at.strftime("Date invoice created: %A, %B %d, %Y") %>
+    </p>
   <% end %>
   </div>
  
@@ -15,5 +18,6 @@
   <% Customer.top_five_by_transaction_count.each do |customer| %>
     <p> Name: <%= customer.first_name %> <%= customer.last_name %>
     <br>
-    Number of transactions: <%= customer.transactions.count %></p>
+    Number of transactions: <%= customer.transactions.count %>
+    </p>
 <% end %>
