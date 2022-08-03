@@ -1,6 +1,11 @@
 <div id="revenue">
   <h3>Total Revenue: <%="#{@invoice.total_revenue(@invoice.merchants.ids)}" %></h3>
 </div>
+<%= form_with url: "/admin/invoices/#{@invoice.id}/update", method: :patch, local: true do |form| %>
+<strong><%= form.label :status %></strong>
+<%= form.select :status, options_for_select(["in progress", "cancelled", "completed"], default = @invoice.status.to_s)%>
+<%= form.submit "Update Invoice" %>
+<% end %>
 
 <div id="invoice">
   <% @invoice.invoice_items.each do |invoice| %>
@@ -10,4 +15,5 @@
       <p>Price: <%= invoice.unit_price %></p>
       <p>Status: <%= invoice.status %></p>
   <% end %>
+
 </div>
