@@ -1,0 +1,20 @@
+<span>
+    <h3><%= @merchant.name %></h3>
+    <div class='nav-links'>
+        <span id='1' class='top-links'> <%= link_to("Dashboard", "/merchants/#{@merchant.id}/dashboard/") %></span>
+        <span id='2' class='top-links'> <%= link_to("My Items", "/merchants/#{@merchant.id}/items/") %></span>
+        <span id='3' class='top-links'><%= link_to("My Invoices", "/merchants/#{@merchant.id}/invoices/") %></span>
+    </div>
+</span>
+
+<script>
+    var pathArray = window.location.pathname.split('/');
+    console.log(pathArray)
+    if (pathArray[pathArray.length-2] == 'items') {
+        document.getElementById('2').classList.add("active")
+    } else if (pathArray[pathArray.length-2] == 'invoices') {
+       document.getElementById('3').classList.add("active")
+    } else {
+        document.getElementById('1').classList.add("active")
+    }
+</script>

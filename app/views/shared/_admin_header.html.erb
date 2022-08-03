@@ -1,4 +1,18 @@
 <h3>Admin Dashboard</h3>
-<%= link_to("Dashboard", "/admin") %>
-<%= link_to("Merchants", "/admin/merchants") %>
-<%= link_to("Invoices", "/admin/invoices") %>
+<div class='nav-links'>
+    <span id='1' class='top-links'><%= link_to("Dashboard", "/admin/") %></span>
+    <span id='2' class='top-links'><%= link_to("Merchants", "/admin/merchants/") %></span>
+    <span id='3' class='top-links'><%= link_to("Invoices", "/admin/invoices/") %></span>
+</div>
+
+<script>
+    var pathArray = window.location.pathname.split('/');
+    console.log(pathArray)
+    if (pathArray[pathArray.length-1] == 'merchants') {
+        document.getElementById('2').classList.add("active")
+    } else if (pathArray[pathArray.length-1] == 'invoices') {
+       document.getElementById('3').classList.add("active")
+    } else {
+        document.getElementById('1').classList.add("active")
+    }
+</script>
