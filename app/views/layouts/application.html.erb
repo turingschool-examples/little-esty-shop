@@ -12,6 +12,6 @@
   <body>
     <h1>Little Esty Shop</h1>
     <%= yield %>
-    <footer><%= @search.repo_information.name %></footer>
+    <footer><strong>Repository Name: </strong><%= @search.repo_information.name %> | <strong>Count of Pull Requests: </strong><%= @search.pull_requests.total_pull_requests %></footer>
   </body>
 </html>
