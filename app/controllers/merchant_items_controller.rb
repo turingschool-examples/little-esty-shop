@@ -5,6 +5,7 @@ class MerchantItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @merchant = @item.merchant
   end
 
   def edit
