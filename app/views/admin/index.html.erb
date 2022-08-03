@@ -1,4 +1,4 @@
-<h1>Admin Dashboard</h1>
+<h1><center>Admin Dashboard</center></h1>
 
 <%= link_to "Admin Merchants Index", "/admin/merchants" %>
 <%= link_to "Admin Invoices Index", "/admin/invoices" %>
@@ -13,7 +13,7 @@
 
 <% @invoices.incomplete_invoices.each do |invoice| %>
 <div id="invoice-<%= invoice.id %>">
-<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> 
+<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
 Date Created: <%= invoice.created_at.strftime("%A, %B, %d, %Y") %>
 </div>
 <% end %>

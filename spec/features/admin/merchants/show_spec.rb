@@ -31,7 +31,7 @@ RSpec.describe 'admin merchants show' do
     fill_in "Name", with: "Toby"
 
     click_button "Update"
-    expect(page).to have_current_path("/admin/merchants/#{merchant1.id}")
+    expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
     expect(page).to have_content("Toby")
     expect(page).to_not have_content("Fake Merchant")
     expect(page).to have_content("Successfully Updated")

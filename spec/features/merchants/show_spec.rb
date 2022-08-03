@@ -160,7 +160,7 @@ RSpec.describe 'the merchant show page' do
 
     it 'has a link to update the information' do
       merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
-      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Enabled')
       merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
       item1 = Item.create!(name: 'Crap', description: 'Because you buy stuff for no reason', unit_price: 9999, merchant_id: merchant1.id)
@@ -185,5 +185,54 @@ RSpec.describe 'the merchant show page' do
       expect(page).to have_content('Successfully Updated')
       expect(page).to have_content('Frivilous')
     end
+
+    it 'has buttons to enable or disable the item' do
+      merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Enabled')
+      merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
+
+      item1 = Item.create!(name: 'Crap', description: 'Because you buy stuff for no reason', unit_price: 9999, merchant_id: merchant1.id, status: 1)
+      item2 = Item.create!(name: 'Junk', description: 'You have room', unit_price: 10999, merchant_id: merchant1.id, status: 0)
+      item3 = Item.create!(name: 'BS', description: 'Filling the void in your life', unit_price: 11999, merchant_id: merchant1.id, status: 1)
+      merch2item = Item.create!(name: 'Impracticality', description: 'Underselling the other guy', unit_price: 11998, merchant_id: merchant2.id, status: 1)
+
+      visit "/merchants/#{merchant1.id}/items"
+
+      within "#item-0" do
+        expect(page).to have_content('Name: Crap')
+        expect(page).to have_button('Disable')
+      end
+
+      within "#item-1" do
+        expect(page).to have_content('Name: Junk')
+        expect(page).to have_button('Enable')
+      end
+
+      within "#item-2" do
+        expect(page).to have_content('Name: BS')
+        expect(page).to have_button('Disable')
+
+        click_button('Disable')
+        expect(current_path).to eq("/merchants/#{merchant1.id}/items")
+        expect(page).to have_button('Enable')
+      end
+
+      expect(page).to_not have_content('Impracticality')
+
+      visit "/merchants/#{merchant2.id}/items"
+
+      within "#item-0" do
+        expect(page).to have_content('Impracticality')
+        expect(page).to have_button('Disable')
+      end
+    end
   end
 end
+# Merchant Item Disable/Enable
+#
+# As a merchant
+# When I visit my items index page
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed

@@ -22,7 +22,6 @@ class MerchantsController < ApplicationController
       end
     end
 
-
   private
   def merchant_params
     params.permit(:id, :name, :status)

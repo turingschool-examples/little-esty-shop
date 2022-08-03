@@ -1,17 +1,19 @@
 <%= render partial: 'shared/merchant_links', locals: {path: "/merchants/#{@merchant.id}"} %>
-
+<%= stylesheet_link_tag "dashboard" %>
 <h1><center><%= @merchant.name %></center></h1>
 
-<section class="column">
-    <h2>Favorite Customers</h2>
-  <% @merchant.top_5_customers.each do |customer| %>
+<div class="row">
+<div class="column">
+  <h2><center>Favorite Customers</center></h2>
+    <% @merchant.top_5_customers.each do |customer| %>
     <p><%= customer.first_name %> <%= customer.last_name %> with <%= customer.no_of_transactions %> transactions</p>
   <% end %>
-</section>
+</div>
 
-<section class="column">
-<h2>Items Ready to Ship</h2>
-<% @merchant.ready_to_ship.each do |item| %>
-<p><%= item.name %> - Invoice #<%= item.inv_id %> - <%= item.invoice_date.strftime('%A, %B %d, %Y') %></p>
+<div class="column">
+  <h2><center>Items Ready to Ship</center></h2>
+    <% @merchant.ready_to_ship.each do |item| %>
+    <p><%= item.name %> - Invoice #<%= item.inv_id %> - <%= item.invoice_date.strftime('%A, %B %d, %Y') %></p>
 <% end %>
-</section>
+</div>
+</div>
