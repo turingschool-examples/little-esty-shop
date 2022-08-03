@@ -5,4 +5,11 @@ class GithubFacade
             Contributor.new(contributor_data)
         end
     end
+
+    def self.pull_requests
+        parsed = GithubService.pull_requests_of_project
+        @githubs = parsed.map do |pulls_data|
+            Pulls.new(pulls_data)
+        end
+    end
 end
