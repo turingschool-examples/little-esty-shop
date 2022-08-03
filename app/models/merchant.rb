@@ -10,4 +10,11 @@ class Merchant < ApplicationRecord
   def merchant_invoice_by_item_id
     InvoiceItem.all.where(item_id: items.ids).pluck(:invoice_id).uniq
   end
+
+  def items_ready_to_ship
+    invoice_items.joins(:invoice)
+    .where(status: "pending")
+    .order("invoices.created_at")
+  end
+
 end
