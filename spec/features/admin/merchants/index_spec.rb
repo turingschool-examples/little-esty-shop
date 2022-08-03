@@ -27,7 +27,6 @@ RSpec.describe 'admin index' do
     merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     visit "/admin/merchants"
-# save_and_open_page
 
   within "#merchant-#{merchant1.id}" do
     expect(page).to have_button("Disable")

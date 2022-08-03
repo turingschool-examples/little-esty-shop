@@ -1,0 +1,11 @@
+<%= form_with url: "/merchants/", method: :get, local: true do |f| %>
+  <%= f.label :search %>
+  <%= f.text_field :search %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<% @merchants.each_with_index do |merchant, index|%>
+<div id="merchant-<%= index %>">
+  <p><%= link_to "#{merchant.name}", "/merchants/#{merchant.id}/dashboard" %></p>
+</div>
+<% end %>

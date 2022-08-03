@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :invoices, only: [:index, :show]
+    resources :merchants, only: [:index, :show]
+    get '', to: 'dashboard#index', as: '/'
   end
   # resources :merchants, only:[:show] do
   #   resources :merchant_items, only:[:index]
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   #   resources :items
   #   resources :items, controller: 'merchant_items', only:[:index, :show, :update, :edit]
   # end
-
+  get '/merchants', to: 'merchants#index'
   get '/merchants/:merchant_id/dashboard', to: 'dashboard#index'
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:merchant_id/items', to: 'merchant_items#index'

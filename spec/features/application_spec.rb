@@ -15,7 +15,7 @@ RSpec.describe 'welcome page' do
     expect(current_path).to eq('/')
   end
 
-  it 'has a links to merchants and items' do
+  it 'has a links to merchants' do
     merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
     merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
     merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
@@ -26,11 +26,10 @@ RSpec.describe 'welcome page' do
 
     visit '/'
 
-    expect(page).to have_link("Merchants")
-    expect(page).to have_link("Items")
+    expect(page).to have_link("Merchants Index")
 
-    # click_link("Merchants")
-    #
-    # expect(current_path).to eq('/merchants')
+    click_link('Merchants Index')
+
+    expect(current_path).to eq('/merchants')
   end
 end
