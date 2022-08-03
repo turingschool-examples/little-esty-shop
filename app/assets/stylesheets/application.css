@@ -47,7 +47,15 @@ html, body{
   display: flex;
 }
 
+#admin-links {
+  display: flex;
+}
+
 #merchant-details {
+  font-size: x-large;
+}
+
+#page-details {
   font-size: x-large;
 }
 
@@ -70,6 +78,17 @@ html, body{
 }
 
 #dashboard-content-left-merchant-item-index {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#dashboard-content-right-admin-merchant-index {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard-content-left-admin-merchant-index {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -142,6 +161,19 @@ html, body{
   background-color: #03a05f;
 }
 
+.merchants-link {
+  background-color: #006f41;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+}
+
+.merchants-link:hover {
+  background-color: #03a05f;
+}
+
 .invoices-link {
   background-color: #900ba1;
   color: #E1E2E1;
@@ -166,6 +198,17 @@ html, body{
   font-weight: bolder;
   line-height: 40px;
   margin-bottom: 20px;
+}
+.content-column-title-admin-merchant-index {
+  text-align: center;
+  min-height: 40px;
+  font-weight: bolder;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+
+.top-merchants-merchant {
+  padding-bottom: 5px;
 }
 
 .top-items-item {
@@ -197,4 +240,14 @@ html, body{
 
 .disabled-item {
   margin-left: 20px;
+}
+
+.enabled-merchant {
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.disabled-merchant {
+  margin-left: 20px;
+  margin-bottom: 5px;
 }

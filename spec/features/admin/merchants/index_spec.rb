@@ -9,12 +9,10 @@ RSpec.describe 'admin merchants index page' do
 
     visit admin_merchants_path
 
-    within '#merchant-list' do
-      expect(page).to have_content('Trader Joes')
-      expect(page).to have_content('Whole Foods')
-      expect(page).to have_content('Yes Market')
-      expect(page).to have_content('Pasta Emporium')
-    end
+    expect(page).to have_content('Trader Joes')
+    expect(page).to have_content('Whole Foods')
+    expect(page).to have_content('Yes Market')
+    expect(page).to have_content('Pasta Emporium')
   end
 
   it 'when user clicks name of merchant, taken to that merchants admin show page, and shows the name of that merchant' do
@@ -25,9 +23,7 @@ RSpec.describe 'admin merchants index page' do
 
     visit admin_merchants_path
 
-    within "#merchant-#{merchant1.id}" do
-      click_link 'Trader Joes'
-    end
+    click_link 'Trader Joes'
 
     expect(current_path).to eq(admin_merchant_path(merchant1.id))
 
@@ -136,12 +132,11 @@ RSpec.describe 'admin merchants index page' do
   end
 
   it 'clicking on enable/disable will update the merchant status and redirect to admin/merchants status and button will change' do
-    merchant1 = Merchant.create!(name: 'Trader Joes')
-    merchant2 = Merchant.create!(name: 'Whole Foods', status: 'Disabled')
+    merchant1 = Merchant.create!(name: 'Trader Joes', status: 'Enabled')
 
     visit admin_merchants_path
     
-    within "#enabled-merchant-#{merchant1.id}" do
+    within "#enabled-merchants" do
       expect(page).to have_content('Trader Joes')
       expect(page).to have_content('Enabled')
       expect(page).to have_button('Disable')
@@ -150,7 +145,7 @@ RSpec.describe 'admin merchants index page' do
 
     expect(current_path).to eq(admin_merchants_path) 
 
-    within "#disabled-merchant-#{merchant1.id}" do
+    within "#disabled-merchants" do
       expect(page).to have_content('Trader Joes')
       expect(page).to have_content('Disabled')
       expect(page).to have_button('Enable')
@@ -158,12 +153,6 @@ RSpec.describe 'admin merchants index page' do
     end
 
     expect(current_path).to eq(admin_merchants_path)
-
-    within "#enabled-merchant-#{merchant1.id}" do
-      expect(page).to have_content('Trader Joes')
-      expect(page).to have_content('Enabled')
-      expect(page).to have_button('Disable')
-    end
   end
   
   it 'Each merchant is listed in either the enabled or disabled section' do
