@@ -1,49 +1,83 @@
-<h1> Admin merchants index page </h1>
-
-<div id="merchant-list">
-  <% @merchants.each do |merchant| %>
-    <p id="merchant-<%=merchant.id%>">
-      <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+<div id="page-banner">
+  <div id="page-details">
+    <p>
+      Admin Dashboard
     </p>
-  <% end %>
-</div>
-
-<h1> Top 5 Merchants By Revenue </h1>
-
-<div id="top-merchants">
-  <% @top_5_merchants.each_with_index do |merchant,index|%>
-    <p id="top-merchant-<%=index+1%>">
-      <%= merchant.name %>
-      <br>
-      Total Revenue: <%= merchant.revenue %>
-      <br>
-      Top selling date for <%= merchant.name %> was <%= merchant.best_date %>
+    <p>
+      <%= link_to "New Merchant", new_admin_merchant_path, class: "new-merchant-button" %>
     </p>
-  <% end %>
+  </div>
+
+  <div id="admin-links">
+    <%= link_to "Dashboard", "/admin", class: "dashboard-link"%>
+    <%= link_to 'Merchants', "/admin/merchants",class: "merchants-link" %>
+    <%= link_to 'My Invoices', "/admin/invoices",class: "invoices-link" %>
+  </div>
 </div>
 
-<div id="enabled-merchants">
-<h2>Enabled Merchants</h2>
-  <% @enabled_merchants.each do |merchant| %>
-    <div id="enabled-merchant-<%=merchant.id%>"> 
-      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-      <%= merchant.status %>
-      <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
-        <%= form.hidden_field :status, value: "Disabled" %>
-        <%= form.submit "Disable"%>
-      <% end %>
-  <% end %>
-</div>
+<div id="dashboard-content">
+  <div id="dashboard-content-left-admin-merchant-index">
 
-<div id="disabled-merchants">
-<h2>Disabled Merchants</h2>
-  <% @disabled_merchants.each do |merchant| %>
-    <div id="disabled-merchant-<%=merchant.id%>"> 
-      <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-      <%= merchant.status %>
-      <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
-        <%= form.hidden_field :status, value: "Enabled" %>
-        <%= form.submit "Enable"%>
+    <div class="dashboard-content-left-subtitle">
+      Enabled Merchants
+    </div>
+
+    <div id="enabled-merchants">
+      <% @enabled_merchants.each do |merchant| %>
+        <div class="enabled-merchant">
+          <div id="enabled-merchant-<%=merchant.id%>">
+            <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+            <%= merchant.status %>
+            <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
+              <%= form.hidden_field :status, value: "Disabled" %>
+              <%= form.submit "Disable"%>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-  <% end %>
+    </div>
+
+    <div class="dashboard-content-left-subtitle">
+      Disabled Merchants
+    </div>
+
+    <div id="disabled-merchants">
+      <% @disabled_merchants.each do |merchant| %>
+        <div class="disabled-merchant">
+          <div id="disabled-merchant-<%=merchant.id%>">
+            <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+            <%= merchant.status %>
+            <%= form_with url: admin_merchant_path(merchant.id), method: :patch, local:true do |form| %>
+              <%= form.hidden_field :status, value: "Disabled" %>
+              <%= form.submit "Enable"%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div id="dashboard-content-right-admin-merchant-index">
+    <div class="content-column-title-admin-merchant-index">
+        Top Merchants
+    </div>
+    <div id="top-merchants">
+      <ol>
+      <% @top_5_merchants.each_with_index do |merchant,index|%>
+        <div class="top-merchants-merchant">
+          <li id="top-merchant-<%=index+1%>">
+            <%= merchant.name %>
+            <br>
+            - Total Revenue: <%= merchant.revenue %>
+            <br>
+            - Top selling date for <%= merchant.name %> was <%= merchant.best_date %>
+          </li>
+        </div>
+      <% end %>
+      </ol>
+    </div>
+
+  </div>
+
 </div>
