@@ -7,6 +7,10 @@ class ApiSearch
     PullRequests.new(@_pull_request_information ||= service.pull_requests)
   end
 
+  def commit_count(username)
+    service.commits(username).count
+  end
+
   def service
     GithubService.new
   end
