@@ -27,7 +27,7 @@ For our Enterprise clients, you can manage all of your merchants and invoices in
 - Top Customers: These are your customers who shop the most across all of your merchants. Don't let this resource go to waste!
 - Navigate to your Merchants and Invoices pages to stay on top of these essensial e-commerce assets!
 
-# Admin: Merchants
+### Admin: Merchants
 See those KPIs in action!  Add new Merchants to boost your bottom line, or get rid of underperforming merchants dragging it down.  Features of your Admin:Merchants view:
 * Enable/Disable Merchant: For whatever reason you may need to disable a merchant:
   * Non-payment
@@ -36,5 +36,5 @@ See those KPIs in action!  Add new Merchants to boost your bottom line, or get r
 * Top Merchants: These are the merchants that drive profits, all day every day!
 * Add New Merchants: Keep your platform fresh by bringing new merchants with new items
 
-# Admin: Invoices
+### Admin: Invoices
 See every invoice of every merchant of every kind at ANY TIME.  The POOOOWWEEEER!
