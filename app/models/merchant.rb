@@ -20,6 +20,6 @@ class Merchant < ApplicationRecord
       .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
       .group(:id)
       .order(revenue: :desc)
-      .limit(5)   
+      .limit(5)
   end
 end

@@ -36,7 +36,7 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  
+
 
   describe '.ready_to_ship' do
     it 'returns all items with invoice status pending or packaged' do
@@ -71,8 +71,8 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe '.top_5' do 
-  it 'returns the top 5 items be revenue' do 
+  describe '.top_5' do
+  it 'returns the top 5 items be revenue' do
     merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
     merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
 
@@ -104,12 +104,12 @@ RSpec.describe Merchant, type: :model do
     invoice_items5 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item5.id, quantity: 2, unit_price: 400, status: 2) #800
     invoice_items6 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item6.id, quantity: 2, unit_price: 600, status: 2) #1200
 
-    transaction1 = Transaction.create!(credit_card_number: 2325994, result: 1, invoice_id: invoice1.id)
-    transaction2 = Transaction.create!(credit_card_number: 8203839, result: 1, invoice_id: invoice2.id)
-    transaction3 = Transaction.create!(credit_card_number: 9348031, result: 1, invoice_id: invoice3.id)
-    transaction4 = Transaction.create!(credit_card_number: 9397282, result: 1, invoice_id: invoice4.id)
-    transaction5 = Transaction.create!(credit_card_number: 2994421, result: 1, invoice_id: invoice5.id)
-    transaction6 = Transaction.create!(credit_card_number: 5929135, result: 1, invoice_id: invoice6.id)
+    transaction1 = Transaction.create!(credit_card_number: 2325994, result: "success", invoice_id: invoice1.id)
+    transaction2 = Transaction.create!(credit_card_number: 8203839, result: "success", invoice_id: invoice2.id)
+    transaction3 = Transaction.create!(credit_card_number: 9348031, result: "success", invoice_id: invoice3.id)
+    transaction4 = Transaction.create!(credit_card_number: 9397282, result: "success", invoice_id: invoice4.id)
+    transaction5 = Transaction.create!(credit_card_number: 2994421, result: "success", invoice_id: invoice5.id)
+    transaction6 = Transaction.create!(credit_card_number: 5929135, result: "success", invoice_id: invoice6.id)
 
     expect(merchant1.top_5_items).to eq([item6, item5, item1, item2, item3])
   end 
