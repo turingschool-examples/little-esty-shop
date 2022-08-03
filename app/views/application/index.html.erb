@@ -1,0 +1,8 @@
+<h1>Welcome!</h1>
+
+    <% @contributors.each do |contributor| %>
+    <ul>
+       <li>Github username: <%= contributor.login %></li>
+       <li>Github commits: <%= contributor.contributions %></li>
+     </ul>
+    <% end %>
