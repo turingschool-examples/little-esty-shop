@@ -19,5 +19,6 @@
   <body>
     
     <%= yield %>
+   <h4> Repo name: <%= GitApi.make_request[:name] %></h4>
   </body>
 </html>
