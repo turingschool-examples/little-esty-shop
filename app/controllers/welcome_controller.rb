@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
 
-  def index 
+  def index
     @merchants = Merchant.all
   end
 end
