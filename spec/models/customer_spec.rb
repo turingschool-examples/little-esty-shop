@@ -57,7 +57,7 @@ RSpec.describe Customer, type: :model do
     invoice_item_5 = InvoiceItem.create!(quantity: 1, unit_price: 2, status: 0, item_id: item_1.id, invoice_id: invoice_5.id)
 
     expected_top_5_customers = [customer_1, customer_2, customer_3, customer_4, customer_5]
-    
+
     expect(Customer.top_five_customers_by_transaction(merchant.id)).to eq(expected_top_5_customers)
   end
 end
