@@ -256,10 +256,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   database_cleaner (~> 2.0, >= 2.0.1)
   faker!
-<<<<<<< HEAD
-=======
-  faraday
->>>>>>> a9dc05e (feat: basic styling)
   httparty
   jbuilder (~> 2.5)
   launchy
