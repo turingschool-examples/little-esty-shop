@@ -107,4 +107,36 @@ RSpec.describe 'merchant items index' do
       expect(page).to_not have_content('Great Ball')
     end
   end
+
+  it 'top items link to the merchant item show page for that item' do
+    pokemart = Merchant.create!(name: 'PokeMart')
+    potion = pokemart.items.create!(name: 'Potion', description: 'Recovers 10 HP', unit_price: 2)
+    super_potion = pokemart.items.create!(name: 'Super Potion', description: 'Recovers 25 HP', unit_price: 5)
+    max_revive = pokemart.items.create!(name: 'Max Revive', description: 'Recovers all HP', unit_price: 10)
+    great_ball = pokemart.items.create!(name: 'Great Ball', description: 'Medium chance of catching a Pokemon',
+                                        unit_price: 6)
+    ultra_ball = pokemart.items.create!(name: 'Ultra Ball', description: 'High chance of catching a Pokemon',
+                                        unit_price: 8)
+    antidote = pokemart.items.create!(name: 'Antidote', description: 'Removes poison', unit_price: 2)
+
+    ash = Customer.create!(first_name: 'Ash', last_name: 'Trainer')
+
+    invoice = ash.invoices.create!(status: 2)
+    invoice_item1 = InvoiceItem.create!(invoice: invoice, item: ultra_ball, quantity: 4, unit_price: 8, status: 0)
+    invoice_item2 = InvoiceItem.create!(invoice: invoice, item: potion, quantity: 5, unit_price: 2, status: 0)
+    invoice_item3 = InvoiceItem.create!(invoice: invoice, item: antidote, quantity: 2, unit_price: 2, status: 0)
+    invoice_item4 = InvoiceItem.create!(invoice: invoice, item: max_revive, quantity: 4, unit_price: 10, status: 0)
+    invoice_item5 = InvoiceItem.create!(invoice: invoice, item: super_potion, quantity: 5, unit_price: 5, status: 0)
+    invoice.transactions.create!(credit_card_number: 4_173_732_636_201_894, result: 1)
+
+    invoice2 = ash.invoices.create!(status: 1)
+    invoice_item5 = InvoiceItem.create!(invoice: invoice2, item: great_ball, quantity: 4, unit_price: 6, status: 0)
+
+    visit "/merchants/#{pokemart.id}/items"
+
+    within "#top-items-item-#{max_revive.id}" do
+      click_link 'Max Revive'
+    end
+    expect(current_path).to eq("/merchants/#{pokemart.id}/items/#{max_revive.id}")
+  end
 end
