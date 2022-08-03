@@ -1,4 +1,10 @@
 <h3> Invoice <%= @invoice.id %> </h3>
-<p> <%= @invoice.status %> </p>
-<p> <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %> </p>
-<p> <%= "#{@invoice.invoice_customers.first_name} #{@invoice.invoice_customers.last_name}" %> </p>
+<h3> <%= @invoice.status %> </h3>
+<h3> <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %> </h3>
+<h3> <%= "#{@invoice.invoice_customers.first_name} #{@invoice.invoice_customers.last_name}" %> </h3>
+  <% @invoice.items.each do |item| %>
+    <h4> <%= item.name %> </h4>
+    <p> <%= "quantity: #{@invoice.invoice_items[0].quantity}" %> </p>
+    <p> <%= "price: #{item.unit_price}" %> </p>
+    <p> <%= "order status: #{@invoice.invoice_items[0].status}" %> </p>
+  <% end %>
