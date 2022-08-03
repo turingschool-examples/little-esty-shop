@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   resources :admin, only:[:index]
 
-  namespace :admin do
-    resources :invoices, only: [:index]
+
+  namespace :admin do 
+    resources :invoices, only: [:index, :show]
   end
   # resources :merchants, only:[:show] do
   #   resources :merchant_items, only:[:index]
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:merchant_id/items', to: 'merchant_items#index'
   get 'merchants/:merchant_id/items/:id/edit', to: 'items#edit'
-  patch '/merchants/:id/items/:id/update', to: 'items#update'
+  patch '/merchants/:id/items/:id/', to: 'items#update'
   get 'merchants/:merchant_id/items/:id', to: 'items#show'
   get '/merchants/:id/invoices', to: 'merchants#show'
   get '/merchants/:id/invoices/:id', to: 'merchant_invoices#show'
