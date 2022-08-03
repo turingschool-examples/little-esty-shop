@@ -1,4 +1,15 @@
-<h1>Merchant Invoice Show Page</h1>
+<div class="flex-container">
+  <div id='title'>
+    <h3><%= @merchant.name %></h3>
+  </div>
+    <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th>&emsp;
+      <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th>&emsp;
+      <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>
+    </div>
+</div>
+
+  <center><h2 style='background-color: #f1f1f1;'>Invoice #<%= @invoice.id %></h2></center>
 
 <%= render "invoice_show/show" %>
 
@@ -13,4 +24,5 @@
     <% end %>
   </div>
 <% end %>
+
 
