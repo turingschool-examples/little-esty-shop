@@ -18,7 +18,7 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(page).to_not have_content("Britches Eckles")
       expect(page).to have_content("Camera")
       expect(page).to_not have_content("Bone")
-    end 
+    end
 
     it 'items are links' do
       merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
@@ -27,7 +27,7 @@ RSpec.describe 'Merchant Items Index Page' do
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item4 = Item.create!(name: "Bone", description: "dog treat", unit_price: 200, created_at: Time.now, updated_at: Time.now, merchant_id: merchant2.id )
       item5 = Item.create!(name: "Kong", description: "dog toy", unit_price: 100, created_at: Time.now, updated_at: Time.now, merchant_id: merchant2.id )
-      
+
       visit merchant_items_path(merchant1)
 
       expect(page).to have_link('Camera')
@@ -37,12 +37,12 @@ RSpec.describe 'Merchant Items Index Page' do
           click_link "Camera"
         end
       end
-      
+
     expect(current_path).to eq(merchant_items_path(merchant1, item1))
     end
   end
 
-  it "has a link to create a new item" do 
+  it "has a link to create a new item" do
     merchant = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
 
     visit merchant_items_path(merchant)
@@ -52,13 +52,13 @@ RSpec.describe 'Merchant Items Index Page' do
     click_on "Create New Item"
 
     expect(current_path).to eq(new_merchant_item_path(merchant))
-  end 
+  end
 
   describe 'Disable/Enable' do
     it 'shows/changes the items availiblity' do
       merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
       merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
-  
+
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item2 = Item.create!(name: "Bone", description: "dog treat", unit_price: 200, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item3 = Item.create!(name: "Kong", description: "dog toy", unit_price: 100, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
@@ -83,7 +83,7 @@ RSpec.describe 'Merchant Items Index Page' do
         within ".merchant_item-#{item2.id}" do
           item = Item.find(item2.id)
           expect(item.availability).to eq("enable")
-          
+
           expect(page).to have_button("Disable")
           expect(page).to_not have_button("Enable" )
 
@@ -97,7 +97,7 @@ RSpec.describe 'Merchant Items Index Page' do
         within ".merchant_item-#{item3.id}" do
           item = Item.find(item3.id)
           expect(item.availability).to eq("enable")
-          
+
           expect(page).to have_button("Disable")
           expect(page).to_not have_button("Enable" )
 
@@ -106,13 +106,13 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(item.availability).to eq("disable")
         end
       end
-      
+
     end
 
     it 'has sections for enabled' do
       merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
       merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
-  
+
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item2 = Item.create!(name: "Bone", description: "dog treat", unit_price: 200, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item3 = Item.create!(name: "Kong", description: "dog toy", unit_price: 100, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
@@ -129,7 +129,7 @@ RSpec.describe 'Merchant Items Index Page' do
     it 'has section for disabled' do
       merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
       merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
-  
+
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item2 = Item.create!(name: "Bone", description: "dog treat", unit_price: 200, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item3 = Item.create!(name: "Kong", description: "dog toy", unit_price: 100, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
@@ -163,7 +163,7 @@ RSpec.describe 'Merchant Items Index Page' do
     it 'groups by item availability status' do
       merchant1 = Merchant.create!(name: "Josey Wales", created_at: Time.now, updated_at: Time.now)
       merchant2 = Merchant.create!(name: "Britches Eckles", created_at: Time.now, updated_at: Time.now)
-  
+
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item2 = Item.create!(name: "Bone", description: "dog treat", unit_price: 200, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
       item3 = Item.create!(name: "Kong", description: "dog toy", unit_price: 100, created_at: Time.now, updated_at: Time.now, merchant_id: merchant1.id )
@@ -192,10 +192,10 @@ RSpec.describe 'Merchant Items Index Page' do
     end
   end
 
-  describe 'Most Popular Items' do 
-    it "can see the top 5 most popular items ranked by revenue" do 
+  describe 'Most Popular Items' do
+    it "can see the top 5 most popular items ranked by revenue" do
       merchant1 = Merchant.create!(name: "Josey Wales")
-      merchant1 = Merchant.create!(name: "Britches Eckles")
+      merchant2 = Merchant.create!(name: "Britches Eckles")
 
       customer1 = Customer.create!(first_name: "Pipper", last_name: "Pots")
 
@@ -219,19 +219,19 @@ RSpec.describe 'Merchant Items Index Page' do
       invoice_items5 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item5.id, quantity: 2, unit_price: 400, status: 2) #800
       invoice_items6 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item6.id, quantity: 2, unit_price: 600, status: 2) #1200
 
-      visit merchant_items_path(merchant1) 
+      visit merchant_items_path(merchant1)
 
-      within("#top_5") do 
+      within("#top_5") do
         expect(item6.name).to appear_before(item5.name)
         expect(item5.name).to appear_before(item1.name)
         expect(item1.name).to appear_before(item2.name)
         expect(item2.name).to appear_before(item3.name)
         expect(page).to_not have_content(item4.name)
-      end 
+      end
     end
 
-    it "can link top 5 items to the item show page" do 
-      merchant1 = Merchant.create!(name: "Josey Wales")
+    it "can link top 5 items to the item show page" do
+       merchant1 = Merchant.create!(name: "Josey Wales")
       merchant1 = Merchant.create!(name: "Britches Eckles")
 
       customer1 = Customer.create!(first_name: "Pipper", last_name: "Pots")
@@ -256,18 +256,17 @@ RSpec.describe 'Merchant Items Index Page' do
       invoice_items5 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item5.id, quantity: 2, unit_price: 400, status: 2) #800
       invoice_items6 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item6.id, quantity: 2, unit_price: 600, status: 2) #1200
 
-      visit merchant_items_path(merchant1) 
-      within("#top_5") do 
+      visit merchant_items_path(merchant1)
+      within("#top_5") do
         expect(page).to have_link(item5.name)
         expect(page).to have_link(item1.name)
         expect(page).to have_link(item2.name)
         expect(page).to have_link(item3.name)
-        
-        click_link "#{item1.name}"
-        
-        expect(current_path).to eq(merchant_item_path(merchant1, item1))
-      end 
-    end
-  end 
-end
 
+        click_link "#{item1.name}"
+
+        expect(current_path).to eq(merchant_item_path(merchant1, item1))
+      end
+    end
+  end
+end

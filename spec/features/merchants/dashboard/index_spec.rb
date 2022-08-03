@@ -73,10 +73,11 @@ RSpec.describe 'Merchant Dashboard' do
   end
 
     it 'displays the the top 5 customers that completed successful transactions for the merchant' do
+
       expect(page).to have_content(@customer_1.first_name)
       expect(page).to have_content(@customer_1.last_name)
       expect(page).to have_content("Number of Purchases: 5")
-
+      save_and_open_page
       expect(page).to have_content(@customer_2.first_name)
       expect(page).to have_content(@customer_2.last_name)
       expect(page).to have_content("Number of Purchases: 4")
