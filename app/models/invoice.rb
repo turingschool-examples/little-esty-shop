@@ -21,5 +21,6 @@ class Invoice < ApplicationRecord
     joins(:invoice_items)
     .where.not('invoice_items.status = ?', 2)
     .distinct
+    .order(:created_at)
   end
 end

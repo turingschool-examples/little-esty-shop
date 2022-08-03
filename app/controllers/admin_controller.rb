@@ -11,7 +11,7 @@ class AdminController < ApplicationController
   def dashboard
     @invoices = Invoice.all
   end
-  
+
   def update
       invoice = Invoice.find(params[:id])
       invoice.update(status: params[:status])
