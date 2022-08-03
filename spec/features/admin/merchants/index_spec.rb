@@ -184,4 +184,53 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
       expect(current_path).to eq("/admin/merchants/#{merchant7.id}")
     end
   end
+
+  it "shows a merchants top day" do
+    merchant1 = Merchant.create!(name: 'Poke pics', status: 'enabled')
+    merchant2 = Merchant.create!(name: 'Daily Dungeons', status: 'enabled')
+    merchant3 = Merchant.create!(name: 'One item', status: 'enabled')
+
+    item1 = Item.create!(name: 'Pikachu Pics', description: 'Pics with PIKACHU', unit_price: 1500, merchant_id: merchant1.id)
+    item2 = Item.create!(name: 'Dragontie Pics', description: 'Pics with Dragontie', unit_price: 2500, merchant_id: merchant2.id)
+    item3 = Item.create!(name: 'Blastoise Pics', description: 'Pics with Blastoise', unit_price: 3500, merchant_id: merchant3.id)
+
+    customer1 = Customer.create!(first_name: 'Beannah', last_name: 'Durke')
+    customer2 = Customer.create!(first_name: 'Tarker', last_name: 'Phomson')
+    customer3 = Customer.create!(first_name: 'Hai', last_name: 'Sall')
+    customer4 = Customer.create!(first_name: 'Pach', last_name: 'Zrince')
+    customer5 = Customer.create!(first_name: 'Fasey', last_name: 'Cazio')
+    customer6 = Customer.create!(first_name: 'Rendolyn', last_name: 'Guiz')
+
+    invoice1 = Invoice.create!(status: 'completed', customer_id: customer1.id, updated_at: Time.parse('2012-03-25 09:54:09 UTC'))
+    invoice2 = Invoice.create!(status: 'completed', customer_id: customer2.id, updated_at: Time.parse('2012-04-25 09:54:09 UTC'))
+    invoice3 = Invoice.create!(status: 'completed', customer_id: customer3.id, updated_at: Time.parse('2012-05-25 09:54:09 UTC'))
+    invoice4 = Invoice.create!(status: 'completed', customer_id: customer4.id, updated_at: Time.parse('2012-06-25 09:54:09 UTC'))
+    invoice5 = Invoice.create!(status: 'completed', customer_id: customer5.id, updated_at: Time.parse('2012-07-25 09:54:09 UTC'))
+    invoice6 = Invoice.create!(status: 'completed', customer_id: customer6.id, updated_at: Time.parse('2012-08-25 09:54:09 UTC'))
+
+    invoice_item1 = InvoiceItem.create!(quantity: 100, unit_price: 1000, status: 'shipped', item_id: item1.id, invoice_id: invoice1.id)
+    invoice_item2 = InvoiceItem.create!(quantity: 100, unit_price: 2000, status: 'shipped', item_id: item1.id, invoice_id: invoice2.id)
+    invoice_item3 = InvoiceItem.create!(quantity: 100, unit_price: 6000, status: 'shipped', item_id: item2.id, invoice_id: invoice3.id)
+    invoice_item4 = InvoiceItem.create!(quantity: 100, unit_price: 4000, status: 'shipped', item_id: item2.id, invoice_id: invoice4.id)
+    invoice_item5 = InvoiceItem.create!(quantity: 100, unit_price: 5000, status: 'shipped', item_id: item3.id, invoice_id: invoice5.id)
+    invoice_item6 = InvoiceItem.create!(quantity: 100, unit_price: 5000, status: 'shipped', item_id: item3.id, invoice_id: invoice6.id)
+
+    transaction1 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+    transaction2 = Transaction.create!(result: 'success', invoice_id: invoice2.id)
+    transaction3 = Transaction.create!(result: 'success', invoice_id: invoice3.id)
+    transaction4 = Transaction.create!(result: 'success', invoice_id: invoice4.id)
+    transaction5 = Transaction.create!(result: 'success', invoice_id: invoice5.id)
+    transaction6 = Transaction.create!(result: 'success', invoice_id: invoice6.id)
+
+    visit 'admin/merchants'
+# save_and_open_page
+    within "div#revenue" do
+      expect(page).to have_content("Top selling date for #{merchant1.name} was #{invoice2.updated_at.strftime('%B %e, %Y')}")
+      expect(page).to have_content("Top selling date for #{merchant2.name} was #{invoice3.updated_at.strftime('%B %e, %Y')}")
+      expect(page).to have_content("Top selling date for #{merchant3.name} was #{invoice5.updated_at.strftime('%B %e, %Y')}")
+      expect('Daily Dungeons').to appear_before('One item')
+      expect('One item').to appear_before('Poke pics')
+      expect('Poke pics').to_not appear_before('Daily Dungeons')
+    end
+  end
 end

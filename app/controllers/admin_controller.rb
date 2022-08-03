@@ -1,7 +1,6 @@
 class AdminController < ApplicationController
 
   def index
-    @merchants = Merchant.all
     @invoices = Invoice.all
   end
 
@@ -11,5 +10,15 @@ class AdminController < ApplicationController
 
   def dashboard 
     @invoices = Invoice.all
+
+  def update
+      invoice = Invoice.find(params[:id])
+      invoice.update(status: params[:status])
+      redirect_to "/admin/invoices/#{invoice.id}"
+  end
+
+  private
+  def invoice_params
+      params.permit(:status, :customer_id)
   end
 end

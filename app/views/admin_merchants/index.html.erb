@@ -6,7 +6,8 @@
 <div id="revenue">
   <% @merchants.merchant_revenue.each do |merchant| %>
     <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
-    <%= merchant.invoice_rev(merchant.id) %>
+    <p><%= merchant.invoice_rev(merchant.id) %>
+    <%= "Top selling date for #{merchant.name} was #{merchant.merchant_best_day.strftime('%B %e, %Y')}" %></p>
   <% end %>
 </div>
 
