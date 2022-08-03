@@ -15,16 +15,16 @@ RSpec.describe 'Admin Dashboard' do
         within "#header" do
             expect(page).to have_link("Dashboard")
             expect(page).to have_link("Merchants")
-            # click_on("Merchants")
-            # expect(current_path).to eq('/admin/merchants')
+            click_on("Merchants")
+            expect(current_path).to eq('/admin/merchants')
         end
 
         visit '/admin'
 
         within "#header" do
             expect(page).to have_link("Invoices")
-            # click_on("Invoices")
-            # expect(current_path).to eq('/admin/invoices')
+            click_on("Invoices")
+            expect(current_path).to eq('/admin/invoices')
         end
     end  
 
@@ -100,8 +100,8 @@ RSpec.describe 'Admin Dashboard' do
             expect(page).to_not have_content("Invoice ##{Invoice.last.id}")
         end
 
-        # click_on("Invoice ##{Invoice.first.id}")
-        # expect(current_path).to eq("/admin/invoices/#{Invoice.first.id}")
+        click_on("Invoice ##{Invoice.first.id}")
+        expect(current_path).to eq("/admin/invoices/#{Invoice.first.id}")
     end
 
     it 'orders incomplete invoices oldest first and shows date' do

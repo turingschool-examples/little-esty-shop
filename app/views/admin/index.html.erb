@@ -8,7 +8,7 @@
             <h3> Incomplete Invoices</h3>
         </div>
         <% Invoice.incomplete_invoices.each do |invoice| %>
-            <p> <%=link_to( "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}", "admin/invoices/#{invoice.id}") %> </p>
+            <p> <%=link_to( "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}", admin_invoice_path(invoice)) %> </p>
         <% end %>
     </div>
 
