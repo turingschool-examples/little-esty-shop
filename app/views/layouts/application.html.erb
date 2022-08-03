@@ -15,13 +15,13 @@
     <%= yield %>
 
     <footer>
-     <strong> GitHub Repository Name: </strong><%# @search.repo_information.name %><br>
-     <strong>Count of Pull Requests: </strong><%# @search.pull_requests.total_pull_requests %><br>
+     <strong> GitHub Repository Name: </strong><%= @search.repo_information.name %><br>
+     <strong>Count of Pull Requests: </strong><%= @search.pull_requests.total_pull_requests %><br>
      <strong>GitHub Usernames of Team Members: </strong>
      <ul>
-      <%# @search.contributors.each do |contributor| %>
-        <li><%# contributor.username %>, commit count: <%# @search.commit_count(contributor.username) %></li>
-      <%# end %>
+      <% @search.contributors.each do |contributor| %>
+        <li><%= contributor.username %>, commit count: <%= @search.commit_count(contributor.username) %></li>
+      <% end %>
       </ul>
     </footer>
   </body>
