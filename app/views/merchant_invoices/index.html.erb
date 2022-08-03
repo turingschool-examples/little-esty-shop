@@ -6,7 +6,7 @@
     <h3> Invoices </h3>
     <% @merchant.invoices.distinct.each do |invoice| %>
         <div id="invoice-<%= invoice.id %>" >
-           <%= link_to "Invoice ##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+           <%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant, invoice) %>
         </div>
     <% end %>
 </div>
