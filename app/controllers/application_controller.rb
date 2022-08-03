@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
+# before_action :before_anything_else
 
-  def welcome
+  def before_anything_else
+    @contributors = GithubFacade.contributors
+  end
+
+  def index
   end
   
   private

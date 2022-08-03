@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get '/', to: 'application#welcome'
+  get '/', to: 'application#index'
 
   resources :merchants do
     get '/invoices', to: 'merchant_invoices#index'
@@ -33,5 +33,4 @@ Rails.application.routes.draw do
     get '/merchants/:id/edit', to: 'merchants#edit'
     patch '/merchants/:id', to: 'merchants#update'
   end
-
 end
