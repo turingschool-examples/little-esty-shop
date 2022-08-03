@@ -126,12 +126,5 @@ RSpec.describe 'Merchant Invoices Show Page' do
     invoice_item4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, quantity: 7, unit_price: 65666, status: 0)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-    # save_and_open_page
-    # within "#invoice_item-#{invoice_item1.id}" do
-    #   expect(page).to have_content("Status: pending packaged shipped")
-    # end
-    # within "invoice_item-#{invoice_item2.id}" do
-    #   expect(page).to have_content("Status: pending packaged shipped")
-    # end
   end
 end

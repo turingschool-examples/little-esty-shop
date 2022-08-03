@@ -1,12 +1,4 @@
-<%= stylesheet_link_tag "dashboard" %>
-<div id="navbar">
-<div class="navbar">
-  <ul>
-    <li><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></li>
-    <li><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></li>
-  </ul>
-</div>
-</div>
+<%= render partial: 'shared/merchant_links', locals: {path: "/merchants/#{@merchant.id}"} %>
 
 <h1><center><%= @merchant.name %></center></h1>
 

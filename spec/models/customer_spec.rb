@@ -105,10 +105,6 @@ RSpec.describe Customer, type: :model do
       transaction19 = Transaction.create!(invoice_id: invoice19.id, credit_card_number: '5549140968724444', result: 1 )
       transaction20 = Transaction.create!(invoice_id: invoice20.id, credit_card_number: '5549140968723333', result: 1 )
 
-      # transaction21 = Transaction.create!(invoice_id: invoice21.id, credit_card_number: 2222, credit_card_expiration_date: 1024, result: 1 )
-
-      # transaction22 = Transaction.create!(invoice_id: invoice8.id, credit_card_number: 2629, credit_card_expiration_date: 1127, result: 1 )
-
       expect(Customer.top_five).to eq([customer4, customer5, customer6, customer2, customer1])
     end
   end

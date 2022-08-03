@@ -1,13 +1,9 @@
 class MerchantsController < ApplicationController
-  def show
-    @merchant = Merchant.find(params[:id])
-  end
-
-  def admin_index
+  def index
     @merchants = Merchant.all
   end
 
-  def admin_show
+  def show
     @merchant = Merchant.find(params[:id])
   end
 
@@ -25,17 +21,7 @@ class MerchantsController < ApplicationController
           flash[:alert] = "Successfully Updated"
       end
     end
-  #   @merchant = Merchant.find(params[:id])
-  #   @merchant.update(merchant_params)
-  #   redirect_to "/admin/merchants/#{@merchant.id}"
-  #   flash[:alert] = "Sucessfully Updated"
-  # end
-  #
-  # def update
-  #   @merchant = Merchant.find(params[:id])
-  #   @merchant.update(merchant_params)
-  #   redirect_to "/admin/merchants"
-  # end
+
 
   private
   def merchant_params

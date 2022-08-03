@@ -224,10 +224,5 @@ RSpec.describe "admin dashboard" do
          expect(page).to have_link("#{invoice3.id}")
          expect(page).to have_content("#{invoice3.created_at.strftime("%A, %B, %d, %Y")}")
       end
-
-      # expect(invoice2.created_at.strftime("%A, %B, %d, %Y")).to appear_before(invoice1.created_at.strftime("%A, %B, %d, %Y"))
    end
 end
-# Admin Dashboard Incomplete Invoices
-# And I see that the list is ordered from oldest to newest:
-# how do i feature test the order when they were created at the same time?

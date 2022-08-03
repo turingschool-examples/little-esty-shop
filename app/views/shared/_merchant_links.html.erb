@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag "dashboard" %>
+<div class="navbar">
+  <ul>
+    <li><%= link_to "My Dashboard", "/merchants/#{@merchant.id}/dashboard" %></li>
+    <li><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></li>
+    <li><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></li>
+  </ul>
+</div>

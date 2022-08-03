@@ -1,3 +1,5 @@
+<%= render partial: 'shared/merchant_links', locals: {path: "/merchants/#{@merchant.id}"} %>
+
 <h1><%= @merchant.name %> Items Index</h1>
 
 <% @items.each_with_index do |item, index| %>
