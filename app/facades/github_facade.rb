@@ -12,4 +12,11 @@ class GithubFacade
             Pull.new(pull_data)
         end
     end
+
+    def self.repo_name
+      parsed = GithubService.repo_name
+      @githubs = parsed.map do |repo_data|
+        Repo.new(repo_data)
+      end
+    end
 end
