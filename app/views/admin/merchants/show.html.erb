@@ -1,7 +1,11 @@
+<div id="header">
+    <%= render "shared/admin_header" %>
+</div>
+
 <% flash.each do |type, msg| %>
-    <%= msg %>
+    <div class='flash_green'><%= msg %></div>
 <% end %>
 
-<h1><%= @merchant.name %></h1>
+<div class='section-title'><h1><%= @merchant.name %></h1></div>
 
 <%= link_to "Update Merchant Info", edit_admin_merchant_path(@merchant) %>

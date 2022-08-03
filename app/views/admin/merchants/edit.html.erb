@@ -1,7 +1,11 @@
-<h1>Edit Merchant Information</h1>
+<div id="header">
+    <%= render "shared/admin_header" %>
+</div>
 
+<div class='section-title'><h1>Edit Merchant Information</h1></div>
+    
 <% flash.each do |type, msg| %>
-    <%= msg %>
+    <div class='flash_red'><%= msg %></div>
 <% end %>
 
 <%= form_with url: admin_merchant_path(@merchant), method: :patch, local: true do |form| %>
