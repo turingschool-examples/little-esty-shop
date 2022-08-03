@@ -77,7 +77,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_content(@customer_1.first_name)
       expect(page).to have_content(@customer_1.last_name)
       expect(page).to have_content("Number of Purchases: 5")
-      save_and_open_page
+    
       expect(page).to have_content(@customer_2.first_name)
       expect(page).to have_content(@customer_2.last_name)
       expect(page).to have_content("Number of Purchases: 4")
