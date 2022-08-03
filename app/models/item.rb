@@ -1,9 +1,10 @@
 class Item < ApplicationRecord
-  enum status: {Disabled: 0, Enabled: 1}
+  enum status: { Disabled: 0, Enabled: 1 }
 
   belongs_to :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
 
   def best_date
     self.invoices
@@ -16,5 +17,5 @@ class Item < ApplicationRecord
         .first
         .formatted_date
   end
-end
 
+end
