@@ -75,28 +75,12 @@
     </div>
 
     <div id="top-items-list">
-      <ol>
-        <li class="top-items-item">
-          <p>Gold Ring - $1234 in sales</p>
-          <p>Top day for gold ring was 12/12/12</p>
-        </li>
-        <li class="top-items-item">
-          <p>Gold Ring - $1234 in sales</p>
-          <p>Top day for gold ring was 12/12/12</p>
-        </li>
-        <li class="top-items-item">
-          <p>Gold Ring - $1234 in sales</p>
-          <p>Top day for gold ring was 12/12/12</p>
-        </li>
-        <li class="top-items-item">
-          <p>Gold Ring - $1234 in sales</p>
-          <p>Top day for gold ring was 12/12/12</p>
-        </li>
-        <li class="top-items-item">
-          <p>Gold Ring - $1234 in sales</p>
-          <p>Top day for gold ring was 12/12/12</p>
-        </li>
-      </ol>
+      <% @merchant.top_five_most_popular_items.each do |item| %>
+        <div id="top-items-item-<%= item.id %>">
+          <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %> - $<%= item.revenue %> in sales</p>
+          <p>Top day for <%= item.name %> was 12/12/12</p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
