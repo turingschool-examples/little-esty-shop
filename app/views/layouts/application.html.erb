@@ -21,3 +21,11 @@
     <%= yield %>
   </body>
 </html>
+
+<footer>
+  <% merged_prs = MergedPrs.new %>
+  <% merged_prs.count.each do |user, pr_count| %>
+    <%= user %>'s PR count: <%= pr_count %>
+    <br>
+  <% end %>
+</footer>
