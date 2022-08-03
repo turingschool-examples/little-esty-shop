@@ -15,6 +15,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe "model methods" do
+  
     it 'has items that have not been shipped yet' do
       merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
       merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
