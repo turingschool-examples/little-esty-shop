@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>LittleEtsyShop</title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -17,11 +18,14 @@
   </head>
 
   <body>
-    
     <%= yield %>
+
+    <%= render partial: "layouts/github2" %>
+
     <% if  ENV["RAILS_ENV"] == "development" || ENV["RAILS_ENV"] == "production"  %>
      <h4> Repo name: <%= GitApi.make_request[:name]%></h4>
     <% end %>
+
   </body>
 </html>
 
