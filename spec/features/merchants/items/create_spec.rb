@@ -41,4 +41,13 @@ RSpec.describe 'Merchant Items Create' do
       expect(page).to_not have_content("Mechanical Pencil")
     end
   end
+
+  it 'goes back to form with an error message if not all fields are filled' do
+    visit new_merchant_item_path(@walmart)
+
+    fill_in('Item Name', with: "")
+    click_on 'Create Item'
+
+    expect(page).to have_content 'Error: Please fill in all fields.'
+  end
 end

@@ -1,5 +1,10 @@
 <h1>Edit Item</h1>
 
+<% flash.each do |type, msg| %>
+    <div class='flash_red'><%= msg %></div>
+    <br>
+<% end %>
+
 <div id="update-form">
   <%= form_with url: merchant_item_path(@item.merchant_id, @item), method: :patch, local: true do |form| %>
     <div id="name-field">

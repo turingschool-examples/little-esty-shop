@@ -2,6 +2,11 @@
     <%= render "shared/merchant_header" %>
 </div>
 
+<% flash.each do |type, msg| %>
+    <div class='flash_green'><%= msg %></div>
+    <br>
+<% end %>
+
 <div class='section-title' style="font-size:130%">My Items</div>
 
 <div class='content'>

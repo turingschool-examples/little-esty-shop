@@ -83,4 +83,16 @@ RSpec.describe 'Merchant Items Edit Page' do
     expect(page).to_not have_content("Sharpen it and write with it.")
     expect(page).to_not have_content(199)
   end
+
+  it 'redirects to the edit form if not all fields are filled in' do 
+    visit merchant_item_path(@walmart, @pencil)
+
+    click_link("Update Information")
+    fill_in "Item Description", with: ""
+
+    click_on("Update Item")
+
+    expect(current_path).to eq edit_merchant_item_path(@walmart, @pencil)
+    expect(page).to have_content('Error: Please fill in all fields.')
+  end
 end
