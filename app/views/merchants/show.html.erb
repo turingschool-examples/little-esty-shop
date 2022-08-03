@@ -1,28 +1,33 @@
-<h1> Little Esty Shop </h1>
+<div id="header">
+    <%= render "shared/merchant_header" %>
+</div>
 
-<h3><%= @merchant.name %></h3>
 
-
-<p>Dashboard
-<%= link_to 'My Items', merchant_items_path(@merchant) %>
-<%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
-</p>
-
-<b>Items Ready to Ship</b>
-<% @merchant.unshipped_items.each_with_index do |invoice_item, index| %>
-    <div id = "item-<%= index %>">
-        <%= invoice_item.item.name %> - <%= link_to "Invoice ##{invoice_item.invoice_id}", merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %e, %Y") %>
+<div class="content">
+    <div id="top-customers">
+        <div class="section-title">
+            <h3>Items Ready to Ship</h3>
+        </div><br>
+        <% @merchant.unshipped_items.each_with_index do |invoice_item, index| %>
+            <div id = "item-<%= index %>">
+                <%= invoice_item.item.name %> - <%= link_to "Invoice ##{invoice_item.invoice_id}", merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %> - <%= invoice_item.invoice.created_at.strftime("%A, %B %e, %Y") %>
+            </div>
+        <% end %>
+        <br>
     </div>
-<% end %>
-<br>
 
-<b>Favorite Customers</b>
-<div id='top-5' >
-<ol>
-<% @merchant.top_5.each_with_index do |customer, index| %>
-    <div id="top-5-<%=index%>">
-    <li><%= customer.first_name + " " + customer.last_name %> - <%= customer.transactions.count %> purchases</li>
+    <div id="top-customers">
+        <div class="section-title">
+            <h3>Favorite Customers</h3>
+        </div><br>
+        <div id='top-5' >
+        <ol>
+        <% @merchant.top_5.each_with_index do |customer, index| %>
+            <div id="top-5-<%=index%>">
+            <li><%= customer.first_name + " " + customer.last_name %> - <%= customer.transactions.count %> purchases</li>
+            </div>
+        <% end %>
+        </ol>
+        </div>
     </div>
-<% end %>
-</ol>
 </div>

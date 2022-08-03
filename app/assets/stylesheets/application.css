@@ -38,14 +38,36 @@
     padding:10px 5px 10px 5px
 }
 
+.enabled_disabled {
+    margin: 0 50px 0 25px;
+    width: 40%;
+}
+
+.top_x {
+    margin: 0 25px 0 50px;
+    width: 40%;
+}
+
+.centered_h3{
+    text-align: center
+}
+
+.flash_red{
+    color: red
+}
+
+.flash_green {
+    color: green
+}
+
 #incomplete-invoices {
     margin: 0 25px 0 25px;
-    width: 30%;
+    width: 40%;
 }
 
 #top-customers {
     margin: 0 25px 0 25px;
-    width: 30%;
+    width: 40%;
 }
 
 #title {
