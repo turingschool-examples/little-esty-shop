@@ -7,7 +7,6 @@ class GithubService
         body = response.body
 
         parsed = JSON.parse(body, symbolize_names: true)
-        require "pry"; binding.pry
     end
 
     def self.pull_requests_of_project
