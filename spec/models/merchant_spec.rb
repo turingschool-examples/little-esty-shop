@@ -113,5 +113,4 @@ RSpec.describe Merchant, type: :model do
 
     expect(merchant1.top_5_items).to eq([item6, item5, item1, item2, item3])
   end 
- end 
 end

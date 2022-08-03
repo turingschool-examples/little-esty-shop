@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-
+  
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = @merchant.items.where(availability: "enable")
@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
     else
       item.update(item_params)
       redirect_to merchant_item_path(merchant, item)
-      flash[:success] = "Item has been successfully update"
+      flash[:success] = "Item has been successfully updated"
     end 
   end
 

@@ -1,7 +1,5 @@
 class Merchant < ApplicationRecord
     validates_presence_of :name
-    validates_presence_of :created_at
-    validates_presence_of :updated_at
     has_many :items
     has_many :invoice_items, through: :items
     has_many :invoices, through: :invoice_items
