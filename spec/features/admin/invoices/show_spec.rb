@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "admin invoice show page" do 
    it "shows information related to that invoice - id, status, created_at, customer first/last name" do 
-         merchant1 = Merchant.create!(name: 'Fake Merchant')
-         merchant2 = Merchant.create!(name: 'Another Merchant')
+         merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+         merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
 
          item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
          item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
