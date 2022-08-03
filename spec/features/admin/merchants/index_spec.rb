@@ -118,7 +118,7 @@ RSpec.describe 'admin merchants index page' do
   end
 
   it 'has a button to enable or disable each merchant' do
-    merchant1 = Merchant.create!(name: 'Trader Joes')
+    merchant1 = Merchant.create!(name: 'Trader Joes', status: 'Enabled')
     merchant2 = Merchant.create!(name: 'Whole Foods', status: 'Disabled')
 
     visit admin_merchants_path
@@ -156,10 +156,10 @@ RSpec.describe 'admin merchants index page' do
   end
   
   it 'Each merchant is listed in either the enabled or disabled section' do
-    merchant1 = Merchant.create!(name: 'Trader Joes')
+    merchant1 = Merchant.create!(name: 'Trader Joes', status: "Enabled")
     merchant2 = Merchant.create!(name: 'Whole Foods', status: 'Disabled')
     merchant3 = Merchant.create!(name: 'New Seasons', status: 'Disabled')
-    merchant4 = Merchant.create!(name: 'Peoples Co-op')
+    merchant4 = Merchant.create!(name: 'Peoples Co-op', status: 'Enabled')
 
     visit admin_merchants_path
 
@@ -237,6 +237,29 @@ RSpec.describe 'admin merchants index page' do
     within '#top-merchant-2' do
       expect(page).to have_content("Top selling date for #{merchant2.name} was Saturday, May 19, 2001")
     end
+  end
+
+  it 'has a link to create a new merchant that takes user to the admin/merchant/create form' do
+    merchant1 = Merchant.create!(name: "Snake Shop")
+
+    customer = Customer.create!(first_name: "Alep", last_name: "Bloyd")
+
+    item1_merchant1 = Item.create!(name: "Snake Pants", description: "It is just a sock.", unit_price: 400, merchant_id: merchant1.id)
+
+    invoice1 = Invoice.create!(customer_id: customer.id, status: 2, created_at: DateTime.new(1992,5,3))
+
+    invoiceitem1_item1_invoice1 = InvoiceItem.create!(item_id: item1_merchant1.id, invoice_id: invoice1.id, quantity: 100, unit_price: 100, status: 0) 
+
+    transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 1)
+
+    visit admin_merchants_path
+
+    expect(page).to have_content("New Merchant")
+
+    # require 'pry'; binding.pry 
+    click_link "New Merchant"
+
+    expect(current_path).to eq(new_admin_merchant_path)
   end
 end
 
