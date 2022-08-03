@@ -45,7 +45,7 @@ RSpec.describe 'Merchant Items Show Page' do
 
     expect(page).to have_content(@pencil.name)
     expect(page).to have_content(@pencil.description)
-    expect(page).to have_content(@pencil.unit_price)
+    expect(page).to have_content('$1.99')
     expect(page).to_not have_content(@marker.name)
     expect(page).to_not have_content(@eraser.name)
     expect(page).to_not have_content(@highlighter.name)
