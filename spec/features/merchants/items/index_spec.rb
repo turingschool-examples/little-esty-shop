@@ -195,15 +195,15 @@ RSpec.describe 'Merchant Items Index Page' do
   describe 'Most Popular Items' do
     it "can see the top 5 most popular items ranked by revenue" do
       merchant1 = Merchant.create!(name: "Josey Wales")
-      merchant2 = Merchant.create!(name: "Britches Eckles")
+      merchant1 = Merchant.create!(name: "Britches Eckles")
 
       customer1 = Customer.create!(first_name: "Pipper", last_name: "Pots")
 
       invoice1 = Invoice.create!(customer_id: customer1.id, status: 1)
       invoice1 = Invoice.create!(customer_id: customer1.id, status: 1)
 
-      transaction1 = Transaction.create!(credit_card_number: 948756, result: "success", invoice_id: invoice1.id)
-      transaction2 = Transaction.create!(credit_card_number: 287502, result: "success", invoice_id: invoice1.id)
+      transaction1 = Transaction.create!(credit_card_number: 948756, result: 1, invoice_id: invoice1.id)
+      transaction2 = Transaction.create!(credit_card_number: 287502, result: 1, invoice_id: invoice1.id)
 
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, merchant_id: merchant1.id)
       item2 = Item.create!(name: "Bone", description: "pet treats", unit_price: 200, merchant_id: merchant1.id)
@@ -231,7 +231,7 @@ RSpec.describe 'Merchant Items Index Page' do
     end
 
     it "can link top 5 items to the item show page" do
-       merchant1 = Merchant.create!(name: "Josey Wales")
+      merchant1 = Merchant.create!(name: "Josey Wales")
       merchant1 = Merchant.create!(name: "Britches Eckles")
 
       customer1 = Customer.create!(first_name: "Pipper", last_name: "Pots")
@@ -239,8 +239,8 @@ RSpec.describe 'Merchant Items Index Page' do
       invoice1 = Invoice.create!(customer_id: customer1.id, status: 1)
       invoice1 = Invoice.create!(customer_id: customer1.id, status: 1)
 
-      transaction1 = Transaction.create!(credit_card_number: 948756, result: "success", invoice_id: invoice1.id)
-      transaction2 = Transaction.create!(credit_card_number: 287502, result: "success", invoice_id: invoice1.id)
+      transaction1 = Transaction.create!(credit_card_number: 948756, result: 1, invoice_id: invoice1.id)
+      transaction2 = Transaction.create!(credit_card_number: 287502, result: 1, invoice_id: invoice1.id)
 
       item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, merchant_id: merchant1.id)
       item2 = Item.create!(name: "Bone", description: "pet treats", unit_price: 200, merchant_id: merchant1.id)
