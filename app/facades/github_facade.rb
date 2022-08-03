@@ -8,8 +8,8 @@ class GithubFacade
 
     def self.pull_requests
         parsed = GithubService.pull_requests_of_project
-        @githubs = parsed.map do |pulls_data|
-            Pulls.new(pulls_data)
+        @githubs = parsed.map do |pull_data|
+            Pull.new(pull_data)
         end
     end
 end
