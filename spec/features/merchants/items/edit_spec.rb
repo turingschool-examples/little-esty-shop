@@ -34,7 +34,7 @@ RSpec.describe 'Merchant Items Edit Page' do
     fill_in "Description", with: "electronic"
     fill_in "Unit price", with: "500"
 
-    click_button "Update Item"
+    click_button "Submit"
 
     expect(current_path).to eq(merchant_item_path(merchant1, item1))
     expect(page).to have_content("Camera")

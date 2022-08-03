@@ -112,5 +112,5 @@ RSpec.describe Merchant, type: :model do
     transaction6 = Transaction.create!(credit_card_number: 5929135, result: "success", invoice_id: invoice6.id)
 
     expect(merchant1.top_5_items).to eq([item6, item5, item1, item2, item3])
-  end
- end
+  end 
+end
