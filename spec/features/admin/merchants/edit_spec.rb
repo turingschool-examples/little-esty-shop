@@ -10,7 +10,7 @@ RSpec.describe 'admin merchant update page' do
       fill_in "Name", with: "Al Capone"
       within "#edit_merchant_name" do
       expect(page).to have_field("Name", with: "Al Capone")
-    
+
       click_on 'Update Merchant'
       expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
     end

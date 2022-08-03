@@ -57,11 +57,5 @@ RSpec.describe Customer, type: :model do
     expected_top_5_customers = [@customer_1, @customer_2, @customer_3, @customer_4, @customer_5]
 
     expect(Customer.top_five_customers_by_transaction(@merchant.id)).to eq(expected_top_5_customers)
-
-    # When I visit my merchant dashboard
-    # Then I see the names of the top 5 customers
-    # who have conducted the largest number of successful transactions with my merchant
-    # And next to each customer name I see the number of successful transactions they have
-    # conducted with my merchant
   end
 end
