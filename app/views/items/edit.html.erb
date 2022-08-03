@@ -1,11 +1,3 @@
 <h1>Update Item Information</h1>
 
-<%= form_with url: merchant_item_path(@merchant, @item), method: :patch, local: true do |f| %>
-  <p><%= f.label :name %>
-  <%= f.text_field :name, value: "#{@item.name}" %></p>
-  <p><%= f.label :description %>
-  <%= f.text_field :description, value: "#{@item.description}" %></p>
- <p> <%= f.label :unit_price %>
-  <%= f.text_field :unit_price, value: "#{@item.unit_price}" %></p>
-  <%= f.submit "Update Item" %>
-<% end %>
+<%= render partial: 'form', locals: { method: :patch, url: merchant_item_path(@merchant, @item), class: 'merchant_item_form', local: true, model: @item} %>

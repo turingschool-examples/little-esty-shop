@@ -21,8 +21,7 @@ RSpec.describe "invoice showpage" do
       invoiceitem3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice2.id, created_at: Time.now, updated_at: Time.now, quantity: 1, unit_price: 2, status: 1)
 
       visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-      # binding.pry
-      # save_and_open_page
+    
       expect(page).to have_content("Invoice #{invoice1.id}")
       expect(page).to have_content("#{invoice1.status}")
       expect(page).to have_content("#{invoice1.created_at.strftime('%A, %B %-d, %Y')}")

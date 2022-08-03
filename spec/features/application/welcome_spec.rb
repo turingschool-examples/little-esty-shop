@@ -19,6 +19,4 @@ RSpec.describe 'Welcome page' do
     click_link ("Admin Index")
     expect(page).to have_content("Admin")
   end 
-
-
 end

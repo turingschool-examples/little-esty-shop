@@ -47,7 +47,6 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_5 = InvoiceItem.create!(quantity: 1, unit_price: 2, status: 0, created_at: Time.now, updated_at: Time.now, item_id: @item_1.id, invoice_id: @invoice_5.id)
     @invoice_item_6 = InvoiceItem.create!(quantity: 1, unit_price: 2, status: 1, created_at: Time.now, updated_at: Time.now, item_id: @item_1.id, invoice_id: @invoice_6.id)
 
-
     visit merchant_dashboard_index_path(@merchant)
   end
 
@@ -74,10 +73,11 @@ RSpec.describe 'Merchant Dashboard' do
   end
 
     it 'displays the the top 5 customers that completed successful transactions for the merchant' do
+
       expect(page).to have_content(@customer_1.first_name)
       expect(page).to have_content(@customer_1.last_name)
       expect(page).to have_content("Number of Purchases: 5")
-
+    
       expect(page).to have_content(@customer_2.first_name)
       expect(page).to have_content(@customer_2.last_name)
       expect(page).to have_content("Number of Purchases: 4")
@@ -108,13 +108,6 @@ RSpec.describe 'Merchant Dashboard' do
       expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
     end
 
-#When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
-
     describe 'Items Ready to Ship' do
       it 'displays items that have been ordered but not yet shipped and has link to the invoice' do
         within(".ready_to_ship") do
@@ -142,13 +135,12 @@ RSpec.describe 'Merchant Dashboard' do
       end
     end
 
-    it 'displays the invoice date next to the item and is sorted by least recent' do
-      expect(page).to have_content('Saturday, July 30, 2022')
-      expect(page).to have_content('Friday, July 29, 2022')
-      expect(page).to have_content('Thursday, July 28, 2022')
+  it 'displays the invoice date next to the item and is sorted by least recent' do
+    expect(page).to have_content('Saturday, July 30, 2022')
+    expect(page).to have_content('Friday, July 29, 2022')
+    expect(page).to have_content('Thursday, July 28, 2022')
 
-
-      expect('Thursday, July 28, 2022').to appear_before('Friday, July 29, 2022')
-      expect('Friday, July 29, 2022').to appear_before('Saturday, July 30, 2022')
-    end
+    expect('Thursday, July 28, 2022').to appear_before('Friday, July 29, 2022')
+    expect('Friday, July 29, 2022').to appear_before('Saturday, July 30, 2022')
+  end
 end
