@@ -16,8 +16,9 @@ RSpec.describe "admin dashboard" do
    end
 
    it "has the NAMES of the top 5 customers who have conducted the largest number of successful transactions" do
-      merchant1 = Merchant.create!(name: 'Fake Merchant')
-      merchant2 = Merchant.create!(name: 'Another Merchant')
+      merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+      merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
       item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
       item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
@@ -120,16 +121,17 @@ RSpec.describe "admin dashboard" do
       expect(page).to_not have_content("Not Goodenough")
    end
 
-   it "has a section for Incomplete Invoices" do 
-      
+   it "has a section for Incomplete Invoices" do
+
       visit "/admin"
 
       expect(page).to have_content("Incomplete Invoices")
    end
 
-   it "has invoice ids (As links) of those invoices that have items that have not been shipped, with the date they were created oldest to newest" do 
-      merchant1 = Merchant.create!(name: 'Fake Merchant')
-      merchant2 = Merchant.create!(name: 'Another Merchant')
+   it "has invoice ids (As links) of those invoices that have items that have not been shipped, with the date they were created oldest to newest" do
+      merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+      merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
       item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
       item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
@@ -145,21 +147,21 @@ RSpec.describe "admin dashboard" do
 
       invoice1 = customer1.invoices.create!(status: 2)
       invoice2 = customer1.invoices.create!(status: 2)
-      invoice3 = customer2.invoices.create!(status: 2) 
+      invoice3 = customer2.invoices.create!(status: 2)
       invoice4 = customer2.invoices.create!(status: 2)
       invoice5 = customer2.invoices.create!(status: 2)
-      invoice6 = customer4.invoices.create!(status: 2) 
+      invoice6 = customer4.invoices.create!(status: 2)
       invoice7 = customer4.invoices.create!(status: 2)
       invoice8 = customer4.invoices.create!(status: 2)
       invoice9 = customer4.invoices.create!(status: 2)
       invoice10 = customer4.invoices.create!(status: 2)
       invoice11 = customer4.invoices.create!(status: 2)
-      invoice12 = customer5.invoices.create!(status: 2) 
+      invoice12 = customer5.invoices.create!(status: 2)
       invoice13 = customer5.invoices.create!(status: 2)
       invoice14 = customer5.invoices.create!(status: 2)
       invoice15 = customer5.invoices.create!(status: 2)
       invoice16 = customer5.invoices.create!(status: 2)
-      invoice17 = customer6.invoices.create!(status: 2) 
+      invoice17 = customer6.invoices.create!(status: 2)
       invoice18 = customer6.invoices.create!(status: 2)
       invoice19 = customer6.invoices.create!(status: 2)
       invoice20 = customer6.invoices.create!(status: 2)
@@ -208,16 +210,16 @@ RSpec.describe "admin dashboard" do
 
       visit "/admin"
 
-      within "#invoice-#{invoice1.id}" do 
+      within "#invoice-#{invoice1.id}" do
          expect(page).to have_link("#{invoice1.id}")
          expect(page).to have_content("#{invoice1.created_at.strftime("%A, %B, %d, %Y")}")
       end
 
-      within "#invoice-#{invoice2.id}" do 
+      within "#invoice-#{invoice2.id}" do
          expect(page).to have_link("#{invoice2.id}")
          expect(page).to have_content("#{invoice2.created_at.strftime("%A, %B, %d, %Y")}")
       end
-      
+
       within "#invoice-#{invoice3.id}" do
          expect(page).to have_link("#{invoice3.id}")
          expect(page).to have_content("#{invoice3.created_at.strftime("%A, %B, %d, %Y")}")
@@ -229,4 +231,3 @@ end
 # Admin Dashboard Incomplete Invoices
 # And I see that the list is ordered from oldest to newest:
 # how do i feature test the order when they were created at the same time?
-

@@ -7,5 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-merchant1 = Merchant.create!(name: 'Fake Merchant')
-merchant2 = Merchant.create!(name: 'Another Merchant')
+merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')

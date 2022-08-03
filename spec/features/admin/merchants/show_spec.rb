@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'admin merchants show' do
   it 'displays the name of the merchant' do
 
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Another Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     visit "/admin/merchants/#{merchant1.id}"
 
@@ -14,8 +15,9 @@ RSpec.describe 'admin merchants show' do
   end
 
   it 'has a link to update the merchant, once updated, a flash message will appear stating the information was sucessfully updated' do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Another Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     visit "/admin/merchants/#{merchant1.id}"
 
@@ -32,6 +34,6 @@ RSpec.describe 'admin merchants show' do
     expect(page).to have_current_path("/admin/merchants/#{merchant1.id}")
     expect(page).to have_content("Toby")
     expect(page).to_not have_content("Fake Merchant")
-    expect(page).to have_content("Sucessfully Updated")
+    expect(page).to have_content("Sucessfully Updated") 
   end
 end

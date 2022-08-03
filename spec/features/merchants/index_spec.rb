@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'the merchants items' do
   it 'is a list of all of the items that belong to a merchant' do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Another Merchant')
-    merchant3 = Merchant.create!(name: 'Faux Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = Item.create!(name: 'Crap', description: 'Because you buy stuff for no reason', unit_price: 9999, merchant_id: merchant1.id)
     item2 = Item.create!(name: 'Junk', description: 'You have room', unit_price: 10999, merchant_id: merchant1.id)

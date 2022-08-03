@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'the merchant dashboard' do
   it 'shows the name of the merchant' do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Another Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     visit "/merchants/#{merchant1.id}/dashboard"
 
@@ -12,7 +13,9 @@ RSpec.describe 'the merchant dashboard' do
   end
 
   it 'has links to the merchants items index and merchant invoices index' do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     visit "/merchants/#{merchant1.id}/dashboard"
 
@@ -22,8 +25,9 @@ RSpec.describe 'the merchant dashboard' do
   end
 
   it 'has a section for items ready to ship' do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Dumb')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
     item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
@@ -49,8 +53,9 @@ RSpec.describe 'the merchant dashboard' do
   end
 
   it 'has the top 5 customers, and the number of successful transactions they have' do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Another Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
     item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)

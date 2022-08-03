@@ -18,13 +18,27 @@ class MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     @merchant.update(merchant_params)
-    redirect_to "/admin/merchants/#{@merchant.id}"
-    flash[:alert] = "Sucessfully Updated"
-  end
+       if params[:status]
+         redirect_to "/admin/merchants"
+      elsif @merchant.update(merchant_params)
+        redirect_to "/admin/merchants/#{@merchant.id}"
+          flash[:alert] = "Sucessfully Updated"
+      end
+    end
+  #   @merchant = Merchant.find(params[:id])
+  #   @merchant.update(merchant_params)
+  #   redirect_to "/admin/merchants/#{@merchant.id}"
+  #   flash[:alert] = "Sucessfully Updated"
+  # end
+  #
+  # def update
+  #   @merchant = Merchant.find(params[:id])
+  #   @merchant.update(merchant_params)
+  #   redirect_to "/admin/merchants"
+  # end
 
   private
-
   def merchant_params
-    params.permit(:id, :name)
+    params.permit(:id, :name, :status)
   end
 end

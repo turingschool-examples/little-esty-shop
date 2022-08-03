@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Invoices Index' do
   it "has all the invoices (as links) that include the merchant's items" do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Also fake Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = Item.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344, merchant_id: merchant1.id)
     item2 = Item.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334, merchant_id: merchant1.id)
@@ -79,8 +80,9 @@ RSpec.describe 'Merchant Invoices Index' do
   end
 
   it "links to the invoice show page" do
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Also fake Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = Item.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344, merchant_id: merchant1.id)
     item2 = Item.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334, merchant_id: merchant1.id)
