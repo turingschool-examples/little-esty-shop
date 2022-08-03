@@ -1,0 +1,13 @@
+
+
+Invoice ID: <%= @invoice.id %> <br>
+Invoice Status: <% if @invoice.status == "in_progress"%> <br>
+                    <%= "In Progress" %>
+                <% elsif @invoice.status == "cancelled" %>
+                    <%= "Cancelled" %>
+                <% elsif @invoice.status == "completed" %>
+                    <%= "Completed" %>
+                <% end %>
+Invoice <%= @invoice.created_at.strftime("Created On: %m/%d/%Y") %> <br>
+Customer Name: <%= @customer.first_name + " " + @customer.last_name %> <br>
+

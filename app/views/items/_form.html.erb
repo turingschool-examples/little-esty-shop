@@ -1,0 +1,9 @@
+<%= form_with model: model, method: method, url: url, class: 'merchant_item_form', local: true do |f| %>
+  <p><%= f.label :name %>
+  <%= f.text_field :name %></p>
+  <p><%= f.label :description %>
+  <%= f.text_field :description %></p>
+  <p><%= f.label :unit_price %>
+  <%= f.text_field :unit_price %></p>
+  <%= f.submit 'Submit' %>
+<% end %>
