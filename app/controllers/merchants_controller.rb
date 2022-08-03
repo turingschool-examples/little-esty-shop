@@ -22,7 +22,7 @@ class MerchantsController < ApplicationController
          redirect_to "/admin/merchants"
       elsif @merchant.update(merchant_params)
         redirect_to "/admin/merchants/#{@merchant.id}"
-          flash[:alert] = "Sucessfully Updated"
+          flash[:alert] = "Successfully Updated"
       end
     end
   #   @merchant = Merchant.find(params[:id])
