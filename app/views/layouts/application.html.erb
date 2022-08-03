@@ -19,6 +19,8 @@
   <body>
     
     <%= yield %>
-   <h4> Repo name: <%= GitApi.make_request[:name] %></h4>
+    <% if  ENV["RAILS_ENV"] == "development" || ENV["RAILS_ENV"] == "production"  %>
+     <h4> Repo name: <%= GitApi.make_request[:name]%></h4>
+    <% end %>
   </body>
 </html>
