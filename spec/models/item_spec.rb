@@ -31,7 +31,7 @@ RSpec.describe Item do
 
           transaction2 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 2222_3333_4444_5555, credit_card_expiration_date: "05-19-1992", result: 0) #failed transaction
 
-      expect(item1_merchant1.best_date).to eq("December 12, 1998")
+      expect(item1_merchant1.best_date).to eq("Saturday, December 12, 1998")
     end
   end
 end
