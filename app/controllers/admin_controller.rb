@@ -10,6 +10,6 @@ class AdminController < ApplicationController
   end
 
   def dashboard 
-    
+    @invoices = Invoice.all
   end
 end
