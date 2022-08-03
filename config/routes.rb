@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :admin, only:[:index]
 
-  namespace :admin do 
+  namespace :admin do
     resources :invoices, only: [:index]
   end
   # resources :merchants, only:[:show] do
@@ -28,8 +28,9 @@ Rails.application.routes.draw do
 
   get '/admin/merchants', to: 'merchants#admin_index'
   get '/admin/merchants/:id', to: 'merchants#admin_show'
-  get '/admin/merchants/:id/edit', to: 'merchants#edit'
   patch '/admin/merchants/:id', to: 'merchants#update'
+  # patch '/admin/merchants/:id', to: 'adminmerchants#update'
+  get '/admin/merchants/:id/edit', to: 'merchants#edit'
 
   # get '/admin/invoices', to: 'invoices#admin_index'
 end

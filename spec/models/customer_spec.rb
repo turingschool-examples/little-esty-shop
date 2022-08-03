@@ -16,8 +16,9 @@ RSpec.describe Customer, type: :model do
 
   describe 'class methods' do
     it 'has top five customers' do
-      merchant1 = Merchant.create!(name: 'Fake Merchant')
-      merchant2 = Merchant.create!(name: 'Another Merchant')
+      merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+      merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
       item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
       item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)

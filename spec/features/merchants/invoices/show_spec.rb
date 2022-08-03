@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Invoices Show Page' do
   it 'has displays invoice id, invoice status, invoice_created at, and customers first and last name' do
-  merchant1 = Merchant.create!(name: 'Fake Merchant')
-  merchant2 = Merchant.create!(name: 'Also fake Merchant')
+  merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+  merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+  merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
   item1 = Item.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344, merchant_id: merchant1.id)
   item2 = Item.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334, merchant_id: merchant1.id)
@@ -36,8 +37,9 @@ RSpec.describe 'Merchant Invoices Show Page' do
 
   it 'has provides item information' do
 
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Also fake Merchant')
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = Item.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344, merchant_id: merchant1.id)
     item2 = Item.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334, merchant_id: merchant1.id)
@@ -69,9 +71,10 @@ RSpec.describe 'Merchant Invoices Show Page' do
     expect(page).to_not have_content("knife")
   end
 
-  it 'has a total revenue generated from all items on the invoice' do 
-    merchant1 = Merchant.create!(name: 'Fake Merchant')
-    merchant2 = Merchant.create!(name: 'Also fake Merchant')
+  it 'has a total revenue generated from all items on the invoice' do
+    merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+    merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+    merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
     item1 = Item.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344, merchant_id: merchant1.id)
     item2 = Item.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334, merchant_id: merchant1.id)
@@ -95,7 +98,7 @@ RSpec.describe 'Merchant Invoices Show Page' do
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    expect(page).to have_content("612006") 
+    expect(page).to have_content("612006")
   end
     #invoice1 has 2 items - item1 and item2
     #item1 quant: 4, price: 43434

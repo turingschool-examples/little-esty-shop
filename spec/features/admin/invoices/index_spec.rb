@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Invoice Index' do 
+RSpec.describe 'Admin Invoice Index' do
    it "has a list of all invoice ids (As links) in the system" do
-      merchant1 = Merchant.create!(name: 'Fake Merchant')
-      merchant2 = Merchant.create!(name: 'Another Merchant')
+      merchant1 = Merchant.create!(name: 'Fake Merchant', status: 'Enabled')
+      merchant2 = Merchant.create!(name: 'Another Merchant', status: 'Disabled')
+      merchant3 = Merchant.create!(name: 'Faux Merchant', status: 'Enabled')
 
       item1 = merchant1.items.create!(name: 'Coaster', description: 'For day drinking', unit_price: 74344)
       item2 = merchant1.items.create!(name: 'Tongs', description: 'For ice buckets', unit_price: 98334)
@@ -19,29 +20,29 @@ RSpec.describe 'Admin Invoice Index' do
 
       invoice1 = customer1.invoices.create!(status: 2)
       invoice2 = customer1.invoices.create!(status: 2)
-      invoice3 = customer2.invoices.create!(status: 2) 
+      invoice3 = customer2.invoices.create!(status: 2)
       invoice4 = customer2.invoices.create!(status: 2)
-      invoice5 = customer2.invoices.create!(status: 2) 
-      
+      invoice5 = customer2.invoices.create!(status: 2)
+
       visit "/admin/invoices"
 
-      within "#invoice-#{invoice1.id}" do 
+      within "#invoice-#{invoice1.id}" do
          expect(page).to have_link("#{invoice1.id}")
       end
 
-      within "#invoice-#{invoice2.id}" do 
+      within "#invoice-#{invoice2.id}" do
          expect(page).to have_link("#{invoice2.id}")
       end
 
-      within "#invoice-#{invoice3.id}" do 
+      within "#invoice-#{invoice3.id}" do
          expect(page).to have_link("#{invoice3.id}")
       end
 
-      within "#invoice-#{invoice4.id}" do 
+      within "#invoice-#{invoice4.id}" do
          expect(page).to have_link("#{invoice4.id}")
       end
 
-      within "#invoice-#{invoice5.id}" do 
+      within "#invoice-#{invoice5.id}" do
          expect(page).to have_link("#{invoice5.id}")
          click_link("#{invoice5.id}")
          expect(current_path).to eq(admin_invoices_path(invoice5.id))
