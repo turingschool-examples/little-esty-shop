@@ -26,4 +26,13 @@ class Merchant < ApplicationRecord
     .where(items: { merchant_id: merchant_id })
     .sum('invoice_items.unit_price * invoice_items.quantity')
   end
+
+  def merchant_best_day
+    invoices.joins(:transactions)
+    .where(transactions: {result: 'success'})
+    .group(:id)
+    .select('invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
+    .order(revenue: :desc)
+    .first.updated_at
+  end
 end
