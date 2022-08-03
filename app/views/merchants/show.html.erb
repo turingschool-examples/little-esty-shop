@@ -12,8 +12,12 @@
     <p> Name: <%= customer.first_name %> <%= customer.last_name %> <%= customer.transactions.count %></p>
 <% end %>
 
+<div id="items-ready-to-ship">
 <h2>Items ready to ship</h2>
-  <% @merchant.items_ready_to_ship.each do |item| %>
-  <% binding.pry %>
-    <p><%= item.name %> </p>
-<% end %>
+  <% @merchant.items_ready_to_ship.each do |invoice_item| %>
+    <p><%= invoice_item.item.name %> 
+    <br>
+    <%= invoice_item.invoice.created_at.strftime("Date invoice created: %A, %B %d, %Y") %>
+    </p>
+  <% end %>
+</div>
