@@ -1,0 +1,2693 @@
+[
+  {
+    "sha": "0a1af36cb5f25b63b96faf3fddc9fd1f28b3dd66",
+    "node_id": "C_kwDOHt0fmNoAKDBhMWFmMzZjYjVmMjViNjNiOTZmYWYzZmRkYzlmZDFmMjhiM2RkNjY",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-31T14:41:41Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-31T14:41:41Z"
+      },
+      "message": "feature: add top selling day for top merchants in admin merchants index",
+      "tree": {
+        "sha": "330aa46c4145afc1dc8a1e7869e7fc3c2551a467",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/330aa46c4145afc1dc8a1e7869e7fc3c2551a467"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/0a1af36cb5f25b63b96faf3fddc9fd1f28b3dd66",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0a1af36cb5f25b63b96faf3fddc9fd1f28b3dd66",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0a1af36cb5f25b63b96faf3fddc9fd1f28b3dd66",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0a1af36cb5f25b63b96faf3fddc9fd1f28b3dd66/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b1b286b56c785de86b9d6353c714fb27da655be0",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b1b286b56c785de86b9d6353c714fb27da655be0",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/b1b286b56c785de86b9d6353c714fb27da655be0"
+      }
+    ]
+  },
+  {
+    "sha": "b1b286b56c785de86b9d6353c714fb27da655be0",
+    "node_id": "C_kwDOHt0fmNoAKGIxYjI4NmI1NmM3ODVkZTg2YjlkNjM1M2M3MTRmYjI3ZGE2NTViZTA",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-31T01:37:51Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-31T01:37:51Z"
+      },
+      "message": "test: model test for merchant#best_day",
+      "tree": {
+        "sha": "e20aec875ffbaec58163955305e41cb3ff14982c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/e20aec875ffbaec58163955305e41cb3ff14982c"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/b1b286b56c785de86b9d6353c714fb27da655be0",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b1b286b56c785de86b9d6353c714fb27da655be0",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/b1b286b56c785de86b9d6353c714fb27da655be0",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b1b286b56c785de86b9d6353c714fb27da655be0/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a5dcc50be1ac3654a35cd396d7832aa956d44225",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a5dcc50be1ac3654a35cd396d7832aa956d44225",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/a5dcc50be1ac3654a35cd396d7832aa956d44225"
+      }
+    ]
+  },
+  {
+    "sha": "a5dcc50be1ac3654a35cd396d7832aa956d44225",
+    "node_id": "C_kwDOHt0fmNoAKGE1ZGNjNTBiZTFhYzM2NTRhMzVjZDM5NmQ3ODMyYWE5NTZkNDQyMjU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-30T13:40:29Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-30T13:40:29Z"
+      },
+      "message": "remove save and open page",
+      "tree": {
+        "sha": "6ced879d57da3e820d5ed92bdbf2df089cdbc725",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/6ced879d57da3e820d5ed92bdbf2df089cdbc725"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/a5dcc50be1ac3654a35cd396d7832aa956d44225",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a5dcc50be1ac3654a35cd396d7832aa956d44225",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/a5dcc50be1ac3654a35cd396d7832aa956d44225",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a5dcc50be1ac3654a35cd396d7832aa956d44225/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b582bcf200bd87a0b6e86aae68214ad4ecdf4213",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b582bcf200bd87a0b6e86aae68214ad4ecdf4213",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/b582bcf200bd87a0b6e86aae68214ad4ecdf4213"
+      }
+    ]
+  },
+  {
+    "sha": "b582bcf200bd87a0b6e86aae68214ad4ecdf4213",
+    "node_id": "C_kwDOHt0fmNoAKGI1ODJiY2YyMDBiZDg3YTBiNmU4NmFhZTY4MjE0YWQ0ZWNkZjQyMTM",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-30T00:35:17Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-30T00:35:17Z"
+      },
+      "message": "feature: add top 5 merchants with total revenue to admin merchant index page",
+      "tree": {
+        "sha": "a9d8219921a810b3e9f566c4fb91ee68a24a634d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/a9d8219921a810b3e9f566c4fb91ee68a24a634d"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/b582bcf200bd87a0b6e86aae68214ad4ecdf4213",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b582bcf200bd87a0b6e86aae68214ad4ecdf4213",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/b582bcf200bd87a0b6e86aae68214ad4ecdf4213",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b582bcf200bd87a0b6e86aae68214ad4ecdf4213/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ae2efc3ae381f4ed9bcb84bd18974b087bd9877f",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/ae2efc3ae381f4ed9bcb84bd18974b087bd9877f",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/ae2efc3ae381f4ed9bcb84bd18974b087bd9877f"
+      }
+    ]
+  },
+  {
+    "sha": "ae2efc3ae381f4ed9bcb84bd18974b087bd9877f",
+    "node_id": "C_kwDOHt0fmNoAKGFlMmVmYzNhZTM4MWY0ZWQ5YmNiODRiZDE4OTc0YjA4N2JkOTg3N2Y",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T19:48:30Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T19:48:30Z"
+      },
+      "message": "test: add sad path for empty name for new merchant form",
+      "tree": {
+        "sha": "6b5bacbe55acb9ee1deac335b3cab98857b99ac9",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/6b5bacbe55acb9ee1deac335b3cab98857b99ac9"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/ae2efc3ae381f4ed9bcb84bd18974b087bd9877f",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/ae2efc3ae381f4ed9bcb84bd18974b087bd9877f",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/ae2efc3ae381f4ed9bcb84bd18974b087bd9877f",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/ae2efc3ae381f4ed9bcb84bd18974b087bd9877f/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9b2850bfa028e25f86ab5cfad0b7608caee2de03",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/9b2850bfa028e25f86ab5cfad0b7608caee2de03",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/9b2850bfa028e25f86ab5cfad0b7608caee2de03"
+      }
+    ]
+  },
+  {
+    "sha": "9b2850bfa028e25f86ab5cfad0b7608caee2de03",
+    "node_id": "C_kwDOHt0fmNoAKDliMjg1MGJmYTAyOGUyNWY4NmFiNWNmYWQwYjc2MDhjYWVlMmRlMDM",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T19:16:03Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T19:16:03Z"
+      },
+      "message": "test: add test for new Merchant creation with default status of disabled",
+      "tree": {
+        "sha": "cd16c5fc2663589beb52d6bde2ed590207a81904",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/cd16c5fc2663589beb52d6bde2ed590207a81904"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/9b2850bfa028e25f86ab5cfad0b7608caee2de03",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/9b2850bfa028e25f86ab5cfad0b7608caee2de03",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/9b2850bfa028e25f86ab5cfad0b7608caee2de03",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/9b2850bfa028e25f86ab5cfad0b7608caee2de03/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e54985740c96a8eb73a7e607d8a7f69554268ff1",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/e54985740c96a8eb73a7e607d8a7f69554268ff1",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/e54985740c96a8eb73a7e607d8a7f69554268ff1"
+      }
+    ]
+  },
+  {
+    "sha": "e54985740c96a8eb73a7e607d8a7f69554268ff1",
+    "node_id": "C_kwDOHt0fmNoAKGU1NDk4NTc0MGM5NmE4ZWI3M2E3ZTYwN2Q4YTdmNjk1NTQyNjhmZjE",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T19:13:04Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T19:13:04Z"
+      },
+      "message": "switch default merchant status to disabled",
+      "tree": {
+        "sha": "c649e7f98c88b815f8098e7cbdb7bbbfc1d76258",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/c649e7f98c88b815f8098e7cbdb7bbbfc1d76258"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/e54985740c96a8eb73a7e607d8a7f69554268ff1",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/e54985740c96a8eb73a7e607d8a7f69554268ff1",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/e54985740c96a8eb73a7e607d8a7f69554268ff1",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/e54985740c96a8eb73a7e607d8a7f69554268ff1/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f46a14f5022338debb2ad532bb22b8f5252df1ab",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f46a14f5022338debb2ad532bb22b8f5252df1ab",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f46a14f5022338debb2ad532bb22b8f5252df1ab"
+      }
+    ]
+  },
+  {
+    "sha": "f46a14f5022338debb2ad532bb22b8f5252df1ab",
+    "node_id": "C_kwDOHt0fmNoAKGY0NmExNGY1MDIyMzM4ZGViYjJhZDUzMmJiMjJiOGY1MjUyZGYxYWI",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T18:55:15Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T18:55:15Z"
+      },
+      "message": "test: add sad path test for admin merchant edit form",
+      "tree": {
+        "sha": "9367cdb47bb4df65e152a96c653c4196d36ab784",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/9367cdb47bb4df65e152a96c653c4196d36ab784"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/f46a14f5022338debb2ad532bb22b8f5252df1ab",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f46a14f5022338debb2ad532bb22b8f5252df1ab",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f46a14f5022338debb2ad532bb22b8f5252df1ab",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f46a14f5022338debb2ad532bb22b8f5252df1ab/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "142045891eb09b2811dec728d08de1b32917890d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/142045891eb09b2811dec728d08de1b32917890d",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/142045891eb09b2811dec728d08de1b32917890d"
+      }
+    ]
+  },
+  {
+    "sha": "142045891eb09b2811dec728d08de1b32917890d",
+    "node_id": "C_kwDOHt0fmNoAKDE0MjA0NTg5MWViMDliMjgxMWRlYzcyOGQwOGRlMWIzMjkxNzg5MGQ",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T14:26:06Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T18:36:20Z"
+      },
+      "message": "feat: add link to add new merchant",
+      "tree": {
+        "sha": "527ccc14fd3e47646eacc9220a51d939aa2ee9d8",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/527ccc14fd3e47646eacc9220a51d939aa2ee9d8"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/142045891eb09b2811dec728d08de1b32917890d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/142045891eb09b2811dec728d08de1b32917890d",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/142045891eb09b2811dec728d08de1b32917890d",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/142045891eb09b2811dec728d08de1b32917890d/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8d77f1e815052dac30382b7df9e4a014b533c34c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8d77f1e815052dac30382b7df9e4a014b533c34c",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8d77f1e815052dac30382b7df9e4a014b533c34c"
+      }
+    ]
+  },
+  {
+    "sha": "2a2764e1e7063d6dc20de9f8945fa2c83dc0266e",
+    "node_id": "C_kwDOHt0fmNoAKDJhMjc2NGUxZTcwNjNkNmRjMjBkZTlmODk0NWZhMmM4M2RjMDI2NmU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T12:54:28Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T12:54:28Z"
+      },
+      "message": "test: add test for grouping merchants by status on admin merchant index",
+      "tree": {
+        "sha": "16e273e2006e487da9e07efcc6c06df2b02d0f88",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/16e273e2006e487da9e07efcc6c06df2b02d0f88"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/2a2764e1e7063d6dc20de9f8945fa2c83dc0266e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/2a2764e1e7063d6dc20de9f8945fa2c83dc0266e",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/2a2764e1e7063d6dc20de9f8945fa2c83dc0266e",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/2a2764e1e7063d6dc20de9f8945fa2c83dc0266e/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "06084580ddb5ab7de175b95d1086b0a888b8e669",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/06084580ddb5ab7de175b95d1086b0a888b8e669",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/06084580ddb5ab7de175b95d1086b0a888b8e669"
+      }
+    ]
+  },
+  {
+    "sha": "06084580ddb5ab7de175b95d1086b0a888b8e669",
+    "node_id": "C_kwDOHt0fmNoAKDA2MDg0NTgwZGRiNWFiN2RlMTc1Yjk1ZDEwODZiMGE4ODhiOGU2Njk",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T03:15:50Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T03:15:50Z"
+      },
+      "message": "feature: add enable disable button to update merchant status in Admin Merchant Index page",
+      "tree": {
+        "sha": "ad9717048089fcdea281502ff08f6544a522be38",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/ad9717048089fcdea281502ff08f6544a522be38"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/06084580ddb5ab7de175b95d1086b0a888b8e669",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/06084580ddb5ab7de175b95d1086b0a888b8e669",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/06084580ddb5ab7de175b95d1086b0a888b8e669",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/06084580ddb5ab7de175b95d1086b0a888b8e669/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68"
+      }
+    ]
+  },
+  {
+    "sha": "11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68",
+    "node_id": "C_kwDOHt0fmNoAKDExYTUwMWI3YWQ2YWE0MzU5N2ZjN2U3N2JhMmE1YTZmZjBiY2FkNjg",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T02:38:00Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T02:38:00Z"
+      },
+      "message": "feature: add buttons to disable or enable merchant in Admin Merchant Index",
+      "tree": {
+        "sha": "eaee6824f5dde182c47ba911c131d826990df24a",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/eaee6824f5dde182c47ba911c131d826990df24a"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11a501b7ad6aa43597fc7e77ba2a5a6ff0bcad68/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "69953294ec2a2cfbd6f3e18836b99cb0e05e4f44",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/69953294ec2a2cfbd6f3e18836b99cb0e05e4f44",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/69953294ec2a2cfbd6f3e18836b99cb0e05e4f44"
+      }
+    ]
+  },
+  {
+    "sha": "69953294ec2a2cfbd6f3e18836b99cb0e05e4f44",
+    "node_id": "C_kwDOHt0fmNoAKDY5OTUzMjk0ZWMyYTJjZmJkNmYzZTE4ODM2Yjk5Y2IwZTA1ZTRmNDQ",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:57:31Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:57:31Z"
+      },
+      "message": "model: add test and code for self.enabled_merchants and self.disabled_merchants",
+      "tree": {
+        "sha": "1b5597bfbe796d5d956146904d7ea7fe53e7e586",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/1b5597bfbe796d5d956146904d7ea7fe53e7e586"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/69953294ec2a2cfbd6f3e18836b99cb0e05e4f44",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/69953294ec2a2cfbd6f3e18836b99cb0e05e4f44",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/69953294ec2a2cfbd6f3e18836b99cb0e05e4f44",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/69953294ec2a2cfbd6f3e18836b99cb0e05e4f44/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "80653257afc2d913a6e97132a86ffd53191dedef",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/80653257afc2d913a6e97132a86ffd53191dedef",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/80653257afc2d913a6e97132a86ffd53191dedef"
+      }
+    ]
+  },
+  {
+    "sha": "80653257afc2d913a6e97132a86ffd53191dedef",
+    "node_id": "C_kwDOHt0fmNoAKDgwNjUzMjU3YWZjMmQ5MTNhNmU5NzEzMmE4NmZmZDUzMTkxZGVkZWY",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:48:15Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:48:15Z"
+      },
+      "message": "add tests for enabling and disabling merchants from admin merchants index page",
+      "tree": {
+        "sha": "2b24fc08f3d64c778f633dbaf7c330c8b62c886c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/2b24fc08f3d64c778f633dbaf7c330c8b62c886c"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/80653257afc2d913a6e97132a86ffd53191dedef",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/80653257afc2d913a6e97132a86ffd53191dedef",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/80653257afc2d913a6e97132a86ffd53191dedef",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/80653257afc2d913a6e97132a86ffd53191dedef/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d349bf074a41f3f7c945bcc89f2cedef356576af",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/d349bf074a41f3f7c945bcc89f2cedef356576af",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/d349bf074a41f3f7c945bcc89f2cedef356576af"
+      }
+    ]
+  },
+  {
+    "sha": "d349bf074a41f3f7c945bcc89f2cedef356576af",
+    "node_id": "C_kwDOHt0fmNoAKGQzNDliZjA3NGE0MWYzZjdjOTQ1YmNjODlmMmNlZGVmMzU2NTc2YWY",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:40:21Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:40:21Z"
+      },
+      "message": "add tests and validations for merchant status",
+      "tree": {
+        "sha": "7eb07d21842d3c46477ab9ec37e32f2a2e973c24",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/7eb07d21842d3c46477ab9ec37e32f2a2e973c24"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/d349bf074a41f3f7c945bcc89f2cedef356576af",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/d349bf074a41f3f7c945bcc89f2cedef356576af",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/d349bf074a41f3f7c945bcc89f2cedef356576af",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/d349bf074a41f3f7c945bcc89f2cedef356576af/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8d7b4ebb912d43ecfda90e92053beb259af342b8",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8d7b4ebb912d43ecfda90e92053beb259af342b8",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8d7b4ebb912d43ecfda90e92053beb259af342b8"
+      }
+    ]
+  },
+  {
+    "sha": "8d7b4ebb912d43ecfda90e92053beb259af342b8",
+    "node_id": "C_kwDOHt0fmNoAKDhkN2I0ZWJiOTEyZDQzZWNmZGE5MGU5MjA1M2JlYjI1OWFmMzQyYjg",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:31:38Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:31:38Z"
+      },
+      "message": "database: add status column to Merchants",
+      "tree": {
+        "sha": "22ce82efb397af476500634b1b19cd74bfb4ed27",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/22ce82efb397af476500634b1b19cd74bfb4ed27"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/8d7b4ebb912d43ecfda90e92053beb259af342b8",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8d7b4ebb912d43ecfda90e92053beb259af342b8",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8d7b4ebb912d43ecfda90e92053beb259af342b8",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8d7b4ebb912d43ecfda90e92053beb259af342b8/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "764965664d3a0639f7f4039d252fb15d64d90f07",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/764965664d3a0639f7f4039d252fb15d64d90f07",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/764965664d3a0639f7f4039d252fb15d64d90f07"
+      }
+    ]
+  },
+  {
+    "sha": "764965664d3a0639f7f4039d252fb15d64d90f07",
+    "node_id": "C_kwDOHt0fmNoAKDc2NDk2NTY2NGQzYTA2MzlmN2Y0MDM5ZDI1MmZiMTVkNjRkOTBmMDc",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:17:50Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T01:17:50Z"
+      },
+      "message": "feature: add flash message for successful update to merchant info on Admin Merchant Show page",
+      "tree": {
+        "sha": "f1e126d6b24d2000d68d6b0130c69a737bcc0407",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/f1e126d6b24d2000d68d6b0130c69a737bcc0407"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/764965664d3a0639f7f4039d252fb15d64d90f07",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/764965664d3a0639f7f4039d252fb15d64d90f07",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/764965664d3a0639f7f4039d252fb15d64d90f07",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/764965664d3a0639f7f4039d252fb15d64d90f07/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5"
+      }
+    ]
+  },
+  {
+    "sha": "bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5",
+    "node_id": "C_kwDOHt0fmNoAKGJiZTVkZGY0YTE4MzI2N2I3Y2JmYWViN2JlNDY0ZTYzOGY1NGE3ZjU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T00:58:51Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T00:58:51Z"
+      },
+      "message": "feature: add edit form for merchant that redirects to admin merchant show page",
+      "tree": {
+        "sha": "795910529cb9169be0aa7147c3e4b133498761f2",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/795910529cb9169be0aa7147c3e4b133498761f2"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/bbe5ddf4a183267b7cbfaeb7be464e638f54a7f5/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e"
+      }
+    ]
+  },
+  {
+    "sha": "75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e",
+    "node_id": "C_kwDOHt0fmNoAKDc1YjdhYzViZTQ4NzRhY2VmMzZjYjFiYWU5N2IwZjZlYjNhMTRkN2U",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T00:16:51Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-29T00:16:51Z"
+      },
+      "message": "feature: add link to update merchant info in admin merchant show page",
+      "tree": {
+        "sha": "0577c1476c7ffc098b9a51db6f99eaa3c4321749",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/0577c1476c7ffc098b9a51db6f99eaa3c4321749"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/75b7ac5be4874acef36cb1bae97b0f6eb3a14d7e/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0299aa95ab94671271d2e45cdd7863ecb171f0c1",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0299aa95ab94671271d2e45cdd7863ecb171f0c1",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0299aa95ab94671271d2e45cdd7863ecb171f0c1"
+      }
+    ]
+  },
+  {
+    "sha": "0299aa95ab94671271d2e45cdd7863ecb171f0c1",
+    "node_id": "C_kwDOHt0fmNoAKDAyOTlhYTk1YWI5NDY3MTI3MWQyZTQ1Y2RkNzg2M2VjYjE3MWYwYzE",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T22:36:00Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T22:36:00Z"
+      },
+      "message": "feature: add hyperlinks of merchant names that go to admin merchant show page in the admin merchant index",
+      "tree": {
+        "sha": "08e54912f5aa2711353b15b4f8d70fc35005f130",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/08e54912f5aa2711353b15b4f8d70fc35005f130"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/0299aa95ab94671271d2e45cdd7863ecb171f0c1",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0299aa95ab94671271d2e45cdd7863ecb171f0c1",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0299aa95ab94671271d2e45cdd7863ecb171f0c1",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0299aa95ab94671271d2e45cdd7863ecb171f0c1/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "06f476178abf195875b39fbed9e6e6d8b111d662",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/06f476178abf195875b39fbed9e6e6d8b111d662",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/06f476178abf195875b39fbed9e6e6d8b111d662"
+      }
+    ]
+  },
+  {
+    "sha": "06f476178abf195875b39fbed9e6e6d8b111d662",
+    "node_id": "C_kwDOHt0fmNoAKDA2ZjQ3NjE3OGFiZjE5NTg3NWIzOWZiZWQ5ZTZlNmQ4YjExMWQ2NjI",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T22:25:33Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T22:26:08Z"
+      },
+      "message": "add test for links to admin merchant show in merchant admin show page",
+      "tree": {
+        "sha": "b17f9f8441154dd7e225b5b92f4d4f16c3661a9e",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/b17f9f8441154dd7e225b5b92f4d4f16c3661a9e"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/06f476178abf195875b39fbed9e6e6d8b111d662",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/06f476178abf195875b39fbed9e6e6d8b111d662",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/06f476178abf195875b39fbed9e6e6d8b111d662",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/06f476178abf195875b39fbed9e6e6d8b111d662/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5ca2bfe7353d9456f7b54267ccae4c28b807c32c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5ca2bfe7353d9456f7b54267ccae4c28b807c32c",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/5ca2bfe7353d9456f7b54267ccae4c28b807c32c"
+      }
+    ]
+  },
+  {
+    "sha": "2af8a23425a6145a8eaa9ca00dbf46b6162bf50e",
+    "node_id": "C_kwDOHt0fmNoAKDJhZjhhMjM0MjVhNjE0NWE4ZWFhOWNhMDBkYmY0NmI2MTYyYmY1MGU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T18:34:41Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T18:34:41Z"
+      },
+      "message": "add faker gem and merchant names to admin merchants index",
+      "tree": {
+        "sha": "09754f7c5e90b139fcb66807efd6bfeb86915c93",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/09754f7c5e90b139fcb66807efd6bfeb86915c93"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/2af8a23425a6145a8eaa9ca00dbf46b6162bf50e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/2af8a23425a6145a8eaa9ca00dbf46b6162bf50e",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/2af8a23425a6145a8eaa9ca00dbf46b6162bf50e",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/2af8a23425a6145a8eaa9ca00dbf46b6162bf50e/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6e7dcde6e12d7ee651d1e3e8b45e70bad1d77c97",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/6e7dcde6e12d7ee651d1e3e8b45e70bad1d77c97",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/6e7dcde6e12d7ee651d1e3e8b45e70bad1d77c97"
+      }
+    ]
+  },
+  {
+    "sha": "690a6067a0842c2fc8c039b724567aa89cc7dd7d",
+    "node_id": "C_kwDOHt0fmNoAKDY5MGE2MDY3YTA4NDJjMmZjOGMwMzliNzI0NTY3YWE4OWNjN2RkN2Q",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T18:09:52Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T18:09:52Z"
+      },
+      "message": "tried to fix database duplication but did not work",
+      "tree": {
+        "sha": "d5cf1a981053458340a91dca886b07bed4d1fce6",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/d5cf1a981053458340a91dca886b07bed4d1fce6"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/690a6067a0842c2fc8c039b724567aa89cc7dd7d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/690a6067a0842c2fc8c039b724567aa89cc7dd7d",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/690a6067a0842c2fc8c039b724567aa89cc7dd7d",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/690a6067a0842c2fc8c039b724567aa89cc7dd7d/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f51e9b6d543979b087259214a8e3a74c002cf564",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f51e9b6d543979b087259214a8e3a74c002cf564",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f51e9b6d543979b087259214a8e3a74c002cf564"
+      }
+    ]
+  },
+  {
+    "sha": "f51e9b6d543979b087259214a8e3a74c002cf564",
+    "node_id": "C_kwDOHt0fmNoAKGY1MWU5YjZkNTQzOTc5YjA4NzI1OTIxNGE4ZTNhNzRjMDAyY2Y1NjQ",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T02:24:54Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-28T02:24:54Z"
+      },
+      "message": "Merchant Dashboard Invoices sorted by least recent",
+      "tree": {
+        "sha": "be1aae6981a0530aa733eb5e4770ebe566925b81",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/be1aae6981a0530aa733eb5e4770ebe566925b81"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/f51e9b6d543979b087259214a8e3a74c002cf564",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f51e9b6d543979b087259214a8e3a74c002cf564",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f51e9b6d543979b087259214a8e3a74c002cf564",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f51e9b6d543979b087259214a8e3a74c002cf564/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8cb057db6b52dac42e20ae389d00e15ff8208a6e",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8cb057db6b52dac42e20ae389d00e15ff8208a6e",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8cb057db6b52dac42e20ae389d00e15ff8208a6e"
+      }
+    ]
+  },
+  {
+    "sha": "8cb057db6b52dac42e20ae389d00e15ff8208a6e",
+    "node_id": "C_kwDOHt0fmNoAKDhjYjA1N2RiNmI1MmRhYzQyZTIwYWUzODlkMDBlMTVmZjgyMDhhNmU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T22:38:30Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T22:38:30Z"
+      },
+      "message": "add hyperlinks to merchant invoice show pages in ready to ship section",
+      "tree": {
+        "sha": "81ddbedd5708eca15eab364415647eaec1664df5",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/81ddbedd5708eca15eab364415647eaec1664df5"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/8cb057db6b52dac42e20ae389d00e15ff8208a6e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8cb057db6b52dac42e20ae389d00e15ff8208a6e",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8cb057db6b52dac42e20ae389d00e15ff8208a6e",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8cb057db6b52dac42e20ae389d00e15ff8208a6e/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a"
+      }
+    ]
+  },
+  {
+    "sha": "0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a",
+    "node_id": "C_kwDOHt0fmNoAKDBjZDY1YzdjYzNjMmZhZWRjNzFjNjczYTgyN2UzYWI4NWI5YmVkNmE",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T21:51:22Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T21:51:49Z"
+      },
+      "message": "add unshipped items to merchant dashboard",
+      "tree": {
+        "sha": "c49d8ae3856721a5570372a05b73c83249a67eaa",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/c49d8ae3856721a5570372a05b73c83249a67eaa"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0cd65c7cc3c2faedc71c673a827e3ab85b9bed6a/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ead1947f05c169c48a89ff8ff31f9159957b3f7a",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/ead1947f05c169c48a89ff8ff31f9159957b3f7a",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/ead1947f05c169c48a89ff8ff31f9159957b3f7a"
+      }
+    ]
+  },
+  {
+    "sha": "f803b37b99512b40e46168604ac7fde8a1e27dc0",
+    "node_id": "C_kwDOHt0fmNoAKGY4MDNiMzdiOTk1MTJiNDBlNDYxNjg2MDRhYzdmZGU4YTFlMjdkYzA",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T19:02:03Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T19:02:03Z"
+      },
+      "message": "add favorite customers to merchant dash",
+      "tree": {
+        "sha": "13646d41d8f2e5108b725a2a4d53def5c7bf7e02",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/13646d41d8f2e5108b725a2a4d53def5c7bf7e02"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/f803b37b99512b40e46168604ac7fde8a1e27dc0",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f803b37b99512b40e46168604ac7fde8a1e27dc0",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f803b37b99512b40e46168604ac7fde8a1e27dc0",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f803b37b99512b40e46168604ac7fde8a1e27dc0/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "36092bc056b9202bd392a565c2c70a48b7055ca6",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/36092bc056b9202bd392a565c2c70a48b7055ca6",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/36092bc056b9202bd392a565c2c70a48b7055ca6"
+      }
+    ]
+  },
+  {
+    "sha": "36092bc056b9202bd392a565c2c70a48b7055ca6",
+    "node_id": "C_kwDOHt0fmNoAKDM2MDkyYmMwNTZiOTIwMmJkMzkyYTU2NWMyYzcwYTQ4YjcwNTVjYTY",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T18:28:42Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T18:28:42Z"
+      },
+      "message": "refactor top 5 method",
+      "tree": {
+        "sha": "5baf0a56dee9ec6173eb137c177a0b8d1818a19d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/5baf0a56dee9ec6173eb137c177a0b8d1818a19d"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/36092bc056b9202bd392a565c2c70a48b7055ca6",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/36092bc056b9202bd392a565c2c70a48b7055ca6",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/36092bc056b9202bd392a565c2c70a48b7055ca6",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/36092bc056b9202bd392a565c2c70a48b7055ca6/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0e73a0e9a0c81ef9106725799fca68512e16755d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0e73a0e9a0c81ef9106725799fca68512e16755d",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0e73a0e9a0c81ef9106725799fca68512e16755d"
+      }
+    ]
+  },
+  {
+    "sha": "0e73a0e9a0c81ef9106725799fca68512e16755d",
+    "node_id": "C_kwDOHt0fmNoAKDBlNzNhMGU5YTBjODFlZjkxMDY3MjU3OTlmY2E2ODUxMmUxNjc1NWQ",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T17:53:52Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T17:53:52Z"
+      },
+      "message": "add top 5 customers to merchant dashboard",
+      "tree": {
+        "sha": "eb5082bd4bd0637a788aa0cc88a4b037cc6a07d1",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/eb5082bd4bd0637a788aa0cc88a4b037cc6a07d1"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/0e73a0e9a0c81ef9106725799fca68512e16755d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0e73a0e9a0c81ef9106725799fca68512e16755d",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0e73a0e9a0c81ef9106725799fca68512e16755d",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0e73a0e9a0c81ef9106725799fca68512e16755d/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7"
+      }
+    ]
+  },
+  {
+    "sha": "a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7",
+    "node_id": "C_kwDOHt0fmNoAKGEwYWQ4Y2ZlOGM4ZmQxZmE4ODhlYjJiYWI4ZTdlZDEyZjMxMTUzYjc",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T01:00:15Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T01:00:15Z"
+      },
+      "message": "change merchant#dashboard to merchant#show",
+      "tree": {
+        "sha": "2cb691ae19519362eea7fbd8783527d4eb1c9b01",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/2cb691ae19519362eea7fbd8783527d4eb1c9b01"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a0ad8cfe8c8fd1fa888eb2bab8e7ed12f31153b7/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "11559c98d9ef428e34b805409a9d47b9bc457e94",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11559c98d9ef428e34b805409a9d47b9bc457e94",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/11559c98d9ef428e34b805409a9d47b9bc457e94"
+      }
+    ]
+  },
+  {
+    "sha": "11559c98d9ef428e34b805409a9d47b9bc457e94",
+    "node_id": "C_kwDOHt0fmNoAKDExNTU5Yzk4ZDllZjQyOGUzNGI4MDU0MDlhOWQ0N2I5YmM0NTdlOTQ",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T00:09:51Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-27T00:09:51Z"
+      },
+      "message": "add merchant dashboard links",
+      "tree": {
+        "sha": "12cea6a1d85a6d280e4a8734eb7becdd1e9c9196",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/12cea6a1d85a6d280e4a8734eb7becdd1e9c9196"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/11559c98d9ef428e34b805409a9d47b9bc457e94",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11559c98d9ef428e34b805409a9d47b9bc457e94",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/11559c98d9ef428e34b805409a9d47b9bc457e94",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11559c98d9ef428e34b805409a9d47b9bc457e94/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "89352ef116493711ef147cfb6c93ebed0358d69e",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/89352ef116493711ef147cfb6c93ebed0358d69e",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/89352ef116493711ef147cfb6c93ebed0358d69e"
+      }
+    ]
+  },
+  {
+    "sha": "89352ef116493711ef147cfb6c93ebed0358d69e",
+    "node_id": "C_kwDOHt0fmNoAKDg5MzUyZWYxMTY0OTM3MTFlZjE0N2NmYjZjOTNlYmVkMDM1OGQ2OWU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-26T18:03:56Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-26T18:03:56Z"
+      },
+      "message": "add merchant name to dashboard",
+      "tree": {
+        "sha": "95f0eaf6c488055a04bf24f429844b2e95e8eb14",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/95f0eaf6c488055a04bf24f429844b2e95e8eb14"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/89352ef116493711ef147cfb6c93ebed0358d69e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/89352ef116493711ef147cfb6c93ebed0358d69e",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/89352ef116493711ef147cfb6c93ebed0358d69e",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/89352ef116493711ef147cfb6c93ebed0358d69e/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "066652be4d0ce1641f0e38ba29b71e86a8fc9f43",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/066652be4d0ce1641f0e38ba29b71e86a8fc9f43",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/066652be4d0ce1641f0e38ba29b71e86a8fc9f43"
+      }
+    ]
+  },
+  {
+    "sha": "066652be4d0ce1641f0e38ba29b71e86a8fc9f43",
+    "node_id": "C_kwDOHt0fmNoAKDA2NjY1MmJlNGQwY2UxNjQxZjBlMzhiYTI5YjcxZTg2YThmYzlmNDM",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-26T17:56:44Z"
+      },
+      "committer": {
+        "name": "Mayu Takeda",
+        "email": "mayu.takeda.utd@gmail.com",
+        "date": "2022-07-26T17:56:44Z"
+      },
+      "message": "add test for merchant dashboard name",
+      "tree": {
+        "sha": "9ab88b49f2c8471cd9fce3c710bd7e212bf5164a",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/9ab88b49f2c8471cd9fce3c710bd7e212bf5164a"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/066652be4d0ce1641f0e38ba29b71e86a8fc9f43",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/066652be4d0ce1641f0e38ba29b71e86a8fc9f43",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/066652be4d0ce1641f0e38ba29b71e86a8fc9f43",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/066652be4d0ce1641f0e38ba29b71e86a8fc9f43/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "800e32dfa49f772c8bc385abe6deef5eced2b335",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/800e32dfa49f772c8bc385abe6deef5eced2b335",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/800e32dfa49f772c8bc385abe6deef5eced2b335"
+      }
+    ]
+  },
+  {
+    "sha": "800e32dfa49f772c8bc385abe6deef5eced2b335",
+    "node_id": "C_kwDOHt0fmNoAKDgwMGUzMmRmYTQ5Zjc3MmM4YmMzODVhYmU2ZGVlZjVlY2VkMmIzMzU",
+    "commit": {
+      "author": {
+        "name": "Mayu Takeda",
+        "email": "102258223+okayama-mayu@users.noreply.github.com",
+        "date": "2022-07-26T17:02:03Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2022-07-26T17:02:03Z"
+      },
+      "message": "Merge pull request #4 from okayama-mayu/feat/enum_testing_2\n\nFeat/enum testing 2",
+      "tree": {
+        "sha": "21f1f618643c06a6ef89a5cbd86c4c99e4959717",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/21f1f618643c06a6ef89a5cbd86c4c99e4959717"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/800e32dfa49f772c8bc385abe6deef5eced2b335",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJi4B4LCRBK7hj4Ov3rIwAAcOMIAGCKbtESyGx1pr75qnGpFOZ6\nRoz7SerNyosNZO8CnSQAOGdpTbpAIMXeFfx7BLS1Ns7sZM9pSYgZrTSms5ZL0o7S\n7xWYCXrX21BEB9o3gDnRBEHVLmudBypCSDJaYEgAmv+BHWC3V9ZqLFxKZD1+IDja\nPFowT8w21LZy126u5srCQpi4OSO+fD22s/7QfUK+6CYqN4q26+KgJDkqqSGciPL0\nEFVHjCsZD87uh6Ld49de+Y5jq7pIPt4u4Li3KSZtgT+7ibCU1V3XPL+D0v1COJ2W\nI3IdrskP7q6/PRbwF/fRbDhL3eCScOCRjX36zYWf9xp9+mAdjM+Hx1R5Vz4pZh8=\n=KOv4\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 21f1f618643c06a6ef89a5cbd86c4c99e4959717\nparent 20d720bd5d9bc2d454510fd84973cd5164596086\nparent cb11b5a849198cdc44fb9a6ddc8d0a04f71a7d44\nauthor Mayu Takeda <102258223+okayama-mayu@users.noreply.github.com> 1658854923 -0500\ncommitter GitHub <noreply@github.com> 1658854923 -0500\n\nMerge pull request #4 from okayama-mayu/feat/enum_testing_2\n\nFeat/enum testing 2"
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/800e32dfa49f772c8bc385abe6deef5eced2b335",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/800e32dfa49f772c8bc385abe6deef5eced2b335",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/800e32dfa49f772c8bc385abe6deef5eced2b335/comments",
+    "author": {
+      "login": "okayama-mayu",
+      "id": 102258223,
+      "node_id": "U_kgDOBhhWLw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102258223?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/okayama-mayu",
+      "html_url": "https://github.com/okayama-mayu",
+      "followers_url": "https://api.github.com/users/okayama-mayu/followers",
+      "following_url": "https://api.github.com/users/okayama-mayu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/okayama-mayu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/okayama-mayu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/okayama-mayu/subscriptions",
+      "organizations_url": "https://api.github.com/users/okayama-mayu/orgs",
+      "repos_url": "https://api.github.com/users/okayama-mayu/repos",
+      "events_url": "https://api.github.com/users/okayama-mayu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/okayama-mayu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "20d720bd5d9bc2d454510fd84973cd5164596086",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/20d720bd5d9bc2d454510fd84973cd5164596086",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/20d720bd5d9bc2d454510fd84973cd5164596086"
+      },
+      {
+        "sha": "cb11b5a849198cdc44fb9a6ddc8d0a04f71a7d44",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/cb11b5a849198cdc44fb9a6ddc8d0a04f71a7d44",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/cb11b5a849198cdc44fb9a6ddc8d0a04f71a7d44"
+      }
+    ]
+  }
+]

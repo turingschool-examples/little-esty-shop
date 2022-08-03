@@ -17,7 +17,7 @@ RSpec.describe 'Admin Merchants Index' do
         merchant_4 = Merchant.create!(name: Faker::Name.unique.name, status: 1)
 
         visit admin_merchants_path
-        # save_and_open_page
+        save_and_open_page
 
         within('#e-merchant-0') do 
             expect(page).to have_content(merchant_1.name)

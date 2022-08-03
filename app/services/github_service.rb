@@ -3,6 +3,10 @@ class GithubService
     get_url("")
   end
 
+  def usernames 
+    get_url("/contributors")
+  end
+
   def commits(username)
     get_url("/commits?author=#{username}&per_page=100")
   end

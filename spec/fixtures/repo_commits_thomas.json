@@ -1,0 +1,1607 @@
+[
+  {
+    "sha": "45f3506b3fa49ac720a0cbcbd50df8d5afa96841",
+    "node_id": "C_kwDOHt0fmNoAKDQ1ZjM1MDZiM2ZhNDlhYzcyMGEwY2JjYmQ1MGRmOGQ1YWZhOTY4NDE",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-08-02T21:30:02Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-08-02T21:30:02Z"
+      },
+      "message": "canged api file locations",
+      "tree": {
+        "sha": "9d07c712014f706280bf867ff244a99263569a3c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/9d07c712014f706280bf867ff244a99263569a3c"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/45f3506b3fa49ac720a0cbcbd50df8d5afa96841",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/45f3506b3fa49ac720a0cbcbd50df8d5afa96841",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/45f3506b3fa49ac720a0cbcbd50df8d5afa96841",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/45f3506b3fa49ac720a0cbcbd50df8d5afa96841/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a94069c1fb951b470182dadede509f274c01acd0",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a94069c1fb951b470182dadede509f274c01acd0",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/a94069c1fb951b470182dadede509f274c01acd0"
+      }
+    ]
+  },
+  {
+    "sha": "a94069c1fb951b470182dadede509f274c01acd0",
+    "node_id": "C_kwDOHt0fmNoAKGE5NDA2OWMxZmI5NTFiNDcwMTgyZGFkZWRlNTA5ZjI3NGMwMWFjZDA",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-08-02T19:33:35Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-08-02T19:33:35Z"
+      },
+      "message": "repo name api",
+      "tree": {
+        "sha": "70da7d47eea99dc64ccbee63bfc48e78158c0a3f",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/70da7d47eea99dc64ccbee63bfc48e78158c0a3f"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/a94069c1fb951b470182dadede509f274c01acd0",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a94069c1fb951b470182dadede509f274c01acd0",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/a94069c1fb951b470182dadede509f274c01acd0",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/a94069c1fb951b470182dadede509f274c01acd0/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "cce0d3f70585ce01396821f99e127bc5799cbf7f",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/cce0d3f70585ce01396821f99e127bc5799cbf7f",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/cce0d3f70585ce01396821f99e127bc5799cbf7f"
+      }
+    ]
+  },
+  {
+    "sha": "bfa038a702bf84a901185a911f35b642f2a2712a",
+    "node_id": "C_kwDOHt0fmNoAKGJmYTAzOGE3MDJiZjg0YTkwMTE4NWE5MTFmMzViNjQyZjJhMjcxMmE",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-29T01:18:55Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-29T01:18:55Z"
+      },
+      "message": "user story 13 test model test",
+      "tree": {
+        "sha": "4365d28e403d97d0d0305003c9d1c7a2378a72bb",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/4365d28e403d97d0d0305003c9d1c7a2378a72bb"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/bfa038a702bf84a901185a911f35b642f2a2712a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/bfa038a702bf84a901185a911f35b642f2a2712a",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/bfa038a702bf84a901185a911f35b642f2a2712a",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/bfa038a702bf84a901185a911f35b642f2a2712a/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f6eb84d05cd96f5740636f5defbcda09995f680a",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f6eb84d05cd96f5740636f5defbcda09995f680a",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f6eb84d05cd96f5740636f5defbcda09995f680a"
+      }
+    ]
+  },
+  {
+    "sha": "f6eb84d05cd96f5740636f5defbcda09995f680a",
+    "node_id": "C_kwDOHt0fmNoAKGY2ZWI4NGQwNWNkOTZmNTc0MDYzNmY1ZGVmYmNkYTA5OTk1ZjY4MGE",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-29T00:59:24Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-29T00:59:24Z"
+      },
+      "message": "user story 13 test more robust",
+      "tree": {
+        "sha": "0ddb92e93f1203e258aef738964c66ce9f9c69fa",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/0ddb92e93f1203e258aef738964c66ce9f9c69fa"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/f6eb84d05cd96f5740636f5defbcda09995f680a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f6eb84d05cd96f5740636f5defbcda09995f680a",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/f6eb84d05cd96f5740636f5defbcda09995f680a",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/f6eb84d05cd96f5740636f5defbcda09995f680a/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9560a2834f2ab9cafbf69fa9f53aa940468caf92",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/9560a2834f2ab9cafbf69fa9f53aa940468caf92",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/9560a2834f2ab9cafbf69fa9f53aa940468caf92"
+      }
+    ]
+  },
+  {
+    "sha": "9560a2834f2ab9cafbf69fa9f53aa940468caf92",
+    "node_id": "C_kwDOHt0fmNoAKDk1NjBhMjgzNGYyYWI5Y2FmYmY2OWZhOWY1M2FhOTQwNDY4Y2FmOTI",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-29T00:55:46Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-29T00:55:46Z"
+      },
+      "message": "user story 13 working",
+      "tree": {
+        "sha": "1ec2baff5685798c14163481c26bd32ded0cec6d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/1ec2baff5685798c14163481c26bd32ded0cec6d"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/9560a2834f2ab9cafbf69fa9f53aa940468caf92",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/9560a2834f2ab9cafbf69fa9f53aa940468caf92",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/9560a2834f2ab9cafbf69fa9f53aa940468caf92",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/9560a2834f2ab9cafbf69fa9f53aa940468caf92/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5c789627edc07ee25ad60e46733358187d405b50",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5c789627edc07ee25ad60e46733358187d405b50",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/5c789627edc07ee25ad60e46733358187d405b50"
+      }
+    ]
+  },
+  {
+    "sha": "5ca2bfe7353d9456f7b54267ccae4c28b807c32c",
+    "node_id": "C_kwDOHt0fmNoAKDVjYTJiZmU3MzUzZDk0NTZmN2I1NDI2N2NjYWU0YzI4YjgwN2MzMmM",
+    "commit": {
+      "author": {
+        "name": "thomas turner",
+        "email": "103777621+EagleEye5085@users.noreply.github.com",
+        "date": "2022-07-28T21:50:34Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2022-07-28T21:50:34Z"
+      },
+      "message": "Merge pull request #16 from okayama-mayu/fix/test-rewrite-for-top-5-customers\n\ntried to fix database duplication but did not work",
+      "tree": {
+        "sha": "1a087bb0debcab39c93846c0884a3f197ac2798c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/1a087bb0debcab39c93846c0884a3f197ac2798c"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/5ca2bfe7353d9456f7b54267ccae4c28b807c32c",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJi4wSqCRBK7hj4Ov3rIwAAvd4IAJDNCfrC90Iaio+bLbejzTvc\nERnMO9nLfUQW1qyyj75poubrfz4QNmj39crapWoqNck450er9XZLEGYwW+B9h4N5\n06+XEcoXItxNcfixDZdlxnNuurisYWr9b+3BHaPXFOezVNin1w7WO1JpwCdo1Cin\nbGgFabKtz/6Qu2/vZCiC8+UbfA4A00FIOIlqkNO56rsuWstISEriuzDmqseK6155\nRhIxPB54oKUstGweEGcduOapQ0FMHSvSlMUqtuEUyxvFchpnO1DlsF31dEmb9jp8\ndU7dTdYxCE+8Ud+cEH7mwWPHnqtu39ueIDbZ/0/k4ABM970v5KLgx50djxjT1T0=\n=3XdO\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 1a087bb0debcab39c93846c0884a3f197ac2798c\nparent 39138c45457dbf99e1fafcca203b5e43e8033f34\nparent 690a6067a0842c2fc8c039b724567aa89cc7dd7d\nauthor thomas turner <103777621+EagleEye5085@users.noreply.github.com> 1659045034 -0500\ncommitter GitHub <noreply@github.com> 1659045034 -0500\n\nMerge pull request #16 from okayama-mayu/fix/test-rewrite-for-top-5-customers\n\ntried to fix database duplication but did not work"
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5ca2bfe7353d9456f7b54267ccae4c28b807c32c",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/5ca2bfe7353d9456f7b54267ccae4c28b807c32c",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5ca2bfe7353d9456f7b54267ccae4c28b807c32c/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "39138c45457dbf99e1fafcca203b5e43e8033f34",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/39138c45457dbf99e1fafcca203b5e43e8033f34",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/39138c45457dbf99e1fafcca203b5e43e8033f34"
+      },
+      {
+        "sha": "690a6067a0842c2fc8c039b724567aa89cc7dd7d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/690a6067a0842c2fc8c039b724567aa89cc7dd7d",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/690a6067a0842c2fc8c039b724567aa89cc7dd7d"
+      }
+    ]
+  },
+  {
+    "sha": "b276e7ce00cdbc615df914f279cec0b4a4e29202",
+    "node_id": "C_kwDOHt0fmNoAKGIyNzZlN2NlMDBjZGJjNjE1ZGY5MTRmMjc5Y2VjMGI0YTRlMjkyMDI",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:35:40Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:35:40Z"
+      },
+      "message": "add routes for user story 11",
+      "tree": {
+        "sha": "0214849ed1266a63569e4c16e343990e3c8ebc5f",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/0214849ed1266a63569e4c16e343990e3c8ebc5f"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/b276e7ce00cdbc615df914f279cec0b4a4e29202",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b276e7ce00cdbc615df914f279cec0b4a4e29202",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/b276e7ce00cdbc615df914f279cec0b4a4e29202",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/b276e7ce00cdbc615df914f279cec0b4a4e29202/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0bceb32d13a9898d13423f8b008d4fd74b301be9",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0bceb32d13a9898d13423f8b008d4fd74b301be9",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0bceb32d13a9898d13423f8b008d4fd74b301be9"
+      }
+    ]
+  },
+  {
+    "sha": "0bceb32d13a9898d13423f8b008d4fd74b301be9",
+    "node_id": "C_kwDOHt0fmNoAKDBiY2ViMzJkMTNhOTg5OGQxMzQyM2Y4YjAwOGQ0ZmQ3NGIzMDFiZTk",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:32:16Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:32:16Z"
+      },
+      "message": "add views for user story 11",
+      "tree": {
+        "sha": "defd4b5e6aadd5a4e47464d7091156d5682da219",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/defd4b5e6aadd5a4e47464d7091156d5682da219"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/0bceb32d13a9898d13423f8b008d4fd74b301be9",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0bceb32d13a9898d13423f8b008d4fd74b301be9",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/0bceb32d13a9898d13423f8b008d4fd74b301be9",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/0bceb32d13a9898d13423f8b008d4fd74b301be9/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6155b7384497428f0c0360724fae3e9e5cb6623b",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/6155b7384497428f0c0360724fae3e9e5cb6623b",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/6155b7384497428f0c0360724fae3e9e5cb6623b"
+      }
+    ]
+  },
+  {
+    "sha": "6155b7384497428f0c0360724fae3e9e5cb6623b",
+    "node_id": "C_kwDOHt0fmNoAKDYxNTViNzM4NDQ5NzQyOGYwYzAzNjA3MjRmYWUzZTllNWNiNjYyM2I",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:31:44Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:31:44Z"
+      },
+      "message": "add controllers for user story 11",
+      "tree": {
+        "sha": "b456316191c8b1e884d0074072ac1149aabf4ae5",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/b456316191c8b1e884d0074072ac1149aabf4ae5"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/6155b7384497428f0c0360724fae3e9e5cb6623b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/6155b7384497428f0c0360724fae3e9e5cb6623b",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/6155b7384497428f0c0360724fae3e9e5cb6623b",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/6155b7384497428f0c0360724fae3e9e5cb6623b/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "41be495689bb53c3523601bf5bafa9f610062859",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/41be495689bb53c3523601bf5bafa9f610062859",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/41be495689bb53c3523601bf5bafa9f610062859"
+      }
+    ]
+  },
+  {
+    "sha": "41be495689bb53c3523601bf5bafa9f610062859",
+    "node_id": "C_kwDOHt0fmNoAKDQxYmU0OTU2ODliYjUzYzM1MjM2MDFiZjViYWZhOWY2MTAwNjI4NTk",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:31:05Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-28T00:31:05Z"
+      },
+      "message": "add tests for user story 11",
+      "tree": {
+        "sha": "db130c7f5db8ae1446d8f26f0fe4bf30ec8ace9c",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/db130c7f5db8ae1446d8f26f0fe4bf30ec8ace9c"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/41be495689bb53c3523601bf5bafa9f610062859",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/41be495689bb53c3523601bf5bafa9f610062859",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/41be495689bb53c3523601bf5bafa9f610062859",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/41be495689bb53c3523601bf5bafa9f610062859/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "dffc1d7409f8710322a5d97a03829b7cafb09f9e",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/dffc1d7409f8710322a5d97a03829b7cafb09f9e",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/dffc1d7409f8710322a5d97a03829b7cafb09f9e"
+      }
+    ]
+  },
+  {
+    "sha": "dffc1d7409f8710322a5d97a03829b7cafb09f9e",
+    "node_id": "C_kwDOHt0fmNoAKGRmZmMxZDc0MDlmODcxMDMyMmE1ZDk3YTAzODI5YjdjYWZiMDlmOWU",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:49:40Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:49:40Z"
+      },
+      "message": "add models for user stories 9 and 10",
+      "tree": {
+        "sha": "c19eeb41122974e3439826c90395d7564b617f09",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/c19eeb41122974e3439826c90395d7564b617f09"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/dffc1d7409f8710322a5d97a03829b7cafb09f9e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/dffc1d7409f8710322a5d97a03829b7cafb09f9e",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/dffc1d7409f8710322a5d97a03829b7cafb09f9e",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/dffc1d7409f8710322a5d97a03829b7cafb09f9e/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8198034ec00224686799366ff31b909e2a4cd753",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8198034ec00224686799366ff31b909e2a4cd753",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8198034ec00224686799366ff31b909e2a4cd753"
+      }
+    ]
+  },
+  {
+    "sha": "8198034ec00224686799366ff31b909e2a4cd753",
+    "node_id": "C_kwDOHt0fmNoAKDgxOTgwMzRlYzAwMjI0Njg2Nzk5MzY2ZmYzMWI5MDllMmE0Y2Q3NTM",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:49:03Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:49:03Z"
+      },
+      "message": "add controllers for user stories 9 and 10",
+      "tree": {
+        "sha": "82b0dc483a04386d5961c9ede2b8ae6507ae17ea",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/82b0dc483a04386d5961c9ede2b8ae6507ae17ea"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/8198034ec00224686799366ff31b909e2a4cd753",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8198034ec00224686799366ff31b909e2a4cd753",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/8198034ec00224686799366ff31b909e2a4cd753",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/8198034ec00224686799366ff31b909e2a4cd753/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0"
+      }
+    ]
+  },
+  {
+    "sha": "80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0",
+    "node_id": "C_kwDOHt0fmNoAKDgwYzA4NWY5MTc5YjNhZDI4OWQxZmIyYjZmOTZjZDljOGY1OWRhYTA",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:48:14Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:48:14Z"
+      },
+      "message": "add views for user stories 9 and 10",
+      "tree": {
+        "sha": "64c942f7b89f8ec300032bc06814ef14c4d054fb",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/64c942f7b89f8ec300032bc06814ef14c4d054fb"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/80c085f9179b3ad289d1fb2b6f96cd9c8f59daa0/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "896b39053ecb4de5985af88db066d1086a200b8d",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/896b39053ecb4de5985af88db066d1086a200b8d",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/896b39053ecb4de5985af88db066d1086a200b8d"
+      }
+    ]
+  },
+  {
+    "sha": "896b39053ecb4de5985af88db066d1086a200b8d",
+    "node_id": "C_kwDOHt0fmNoAKDg5NmIzOTA1M2VjYjRkZTU5ODVhZjg4ZGIwNjZkMTA4NmEyMDBiOGQ",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:47:28Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T22:47:28Z"
+      },
+      "message": "add tests for user stories 9 and 10",
+      "tree": {
+        "sha": "7791bb7c469bb6bbcb151c6f799e796f8a060077",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/7791bb7c469bb6bbcb151c6f799e796f8a060077"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/896b39053ecb4de5985af88db066d1086a200b8d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/896b39053ecb4de5985af88db066d1086a200b8d",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/896b39053ecb4de5985af88db066d1086a200b8d",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/896b39053ecb4de5985af88db066d1086a200b8d/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "deb4ca8c449b49dec8a77a0709934969e37deaa3",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/deb4ca8c449b49dec8a77a0709934969e37deaa3",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/deb4ca8c449b49dec8a77a0709934969e37deaa3"
+      }
+    ]
+  },
+  {
+    "sha": "deb4ca8c449b49dec8a77a0709934969e37deaa3",
+    "node_id": "C_kwDOHt0fmNoAKGRlYjRjYThjNDQ5YjQ5ZGVjOGE3N2EwNzA5OTM0OTY5ZTM3ZGVhYTM",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T21:27:13Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-27T21:27:13Z"
+      },
+      "message": "Merge branch 'main' of github.com:okayama-mayu/little-esty-shop",
+      "tree": {
+        "sha": "e79ad4e9ca8354536efef3a8cc9e94a31383b5ec",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/e79ad4e9ca8354536efef3a8cc9e94a31383b5ec"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/deb4ca8c449b49dec8a77a0709934969e37deaa3",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/deb4ca8c449b49dec8a77a0709934969e37deaa3",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/deb4ca8c449b49dec8a77a0709934969e37deaa3",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/deb4ca8c449b49dec8a77a0709934969e37deaa3/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c3c59e73bdc20f20abbbfbed25f99bb1436ea4de",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/c3c59e73bdc20f20abbbfbed25f99bb1436ea4de",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/c3c59e73bdc20f20abbbfbed25f99bb1436ea4de"
+      },
+      {
+        "sha": "ead1947f05c169c48a89ff8ff31f9159957b3f7a",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/ead1947f05c169c48a89ff8ff31f9159957b3f7a",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/ead1947f05c169c48a89ff8ff31f9159957b3f7a"
+      }
+    ]
+  },
+  {
+    "sha": "1a29924dc98585ee2a3e64fec4a298d7d29580d7",
+    "node_id": "C_kwDOHt0fmNoAKDFhMjk5MjRkYzk4NTg1ZWUyYTNlNjRmZWM0YTI5OGQ3ZDI5NTgwZDc",
+    "commit": {
+      "author": {
+        "name": "thomas turner",
+        "email": "103777621+EagleEye5085@users.noreply.github.com",
+        "date": "2022-07-27T17:19:03Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2022-07-27T17:19:03Z"
+      },
+      "message": "Merge pull request #6 from okayama-mayu/us2-merchant-dashboard-links\n\nUs2 merchant dashboard links",
+      "tree": {
+        "sha": "12cea6a1d85a6d280e4a8734eb7becdd1e9c9196",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/12cea6a1d85a6d280e4a8734eb7becdd1e9c9196"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/1a29924dc98585ee2a3e64fec4a298d7d29580d7",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJi4XOHCRBK7hj4Ov3rIwAAzI0IADpg6LsJxE0UUpCQgEPL7Xok\n9VyrpWba9IpvCcxR9UDwdzMGc7DM2E8yeeMhSBYjAY4HZOQSzmHCSsTdG53TlzD6\nkLmOvzwzRNlxnDQ1LzlxQxpdO7K2zB1DiCPAwtji7IN+EZp00ZVvmf92GLTpaOqb\nFqIwWIEesOGtpFT5VAOt7FdbgQepjjrkWN/AQs5eEY961+d4dVw/qvWqEfheLEnI\nS4dr0/dYNsYnjv7xnKO8N4DKvikfwbwv4JcsBLv+f7kD5wkyKO8hH1ERFgQM0rq5\nuBQ3qKKpcdtgp7NdgQ33czE7uwK25zo/+4natmew/wGLlkCLTRFcQOITQPK4b6Q=\n=ZyhH\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 12cea6a1d85a6d280e4a8734eb7becdd1e9c9196\nparent 5aa385e00ddd59147fbb78d893f6e2535d682913\nparent 11559c98d9ef428e34b805409a9d47b9bc457e94\nauthor thomas turner <103777621+EagleEye5085@users.noreply.github.com> 1658942343 -0500\ncommitter GitHub <noreply@github.com> 1658942343 -0500\n\nMerge pull request #6 from okayama-mayu/us2-merchant-dashboard-links\n\nUs2 merchant dashboard links"
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/1a29924dc98585ee2a3e64fec4a298d7d29580d7",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/1a29924dc98585ee2a3e64fec4a298d7d29580d7",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/1a29924dc98585ee2a3e64fec4a298d7d29580d7/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5aa385e00ddd59147fbb78d893f6e2535d682913",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5aa385e00ddd59147fbb78d893f6e2535d682913",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/5aa385e00ddd59147fbb78d893f6e2535d682913"
+      },
+      {
+        "sha": "11559c98d9ef428e34b805409a9d47b9bc457e94",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/11559c98d9ef428e34b805409a9d47b9bc457e94",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/11559c98d9ef428e34b805409a9d47b9bc457e94"
+      }
+    ]
+  },
+  {
+    "sha": "5aa385e00ddd59147fbb78d893f6e2535d682913",
+    "node_id": "C_kwDOHt0fmNoAKDVhYTM4NWUwMGRkZDU5MTQ3ZmJiNzhkODkzZjZlMjUzNWQ2ODI5MTM",
+    "commit": {
+      "author": {
+        "name": "thomas turner",
+        "email": "103777621+EagleEye5085@users.noreply.github.com",
+        "date": "2022-07-27T17:15:17Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2022-07-27T17:15:17Z"
+      },
+      "message": "Merge pull request #5 from okayama-mayu/us1-merchant-dashboard-name\n\nUs1 merchant dashboard name",
+      "tree": {
+        "sha": "95f0eaf6c488055a04bf24f429844b2e95e8eb14",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/95f0eaf6c488055a04bf24f429844b2e95e8eb14"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/5aa385e00ddd59147fbb78d893f6e2535d682913",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJi4XKmCRBK7hj4Ov3rIwAA040IAAa80I7MlmBVlHx5p25DCk/h\nv49UQDBpPl0BDZyyQt2ahGtd2+4DuYTXh4pw9nIFkYEYKdqWAr1GPDi1zXfcAOnF\n13N9Bs0N74AWKNQ4cgoL5murhGbUXOXb2YAmlUKqa4S/pIs725SLEwEUTtkIcEoB\nQV7xcMfloOPQCfmP/AhrjgzpPAO98dXr00Tzm5yPTFpDRzUpDGgoBv36p0/Di8cg\nANTBNAiQvm4fs/YmbjxdGG9Bq/JgmedZ6SJ2bNog6xaFdAbNGZgoZvEWp36i/u0H\nDKwKPI1ZsYXfhb0m6blF47mX3Kde0pNYkBY8SykpFfk0npWECq8LhkcE1bpXWeI=\n=qPC1\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 95f0eaf6c488055a04bf24f429844b2e95e8eb14\nparent 800e32dfa49f772c8bc385abe6deef5eced2b335\nparent 89352ef116493711ef147cfb6c93ebed0358d69e\nauthor thomas turner <103777621+EagleEye5085@users.noreply.github.com> 1658942117 -0500\ncommitter GitHub <noreply@github.com> 1658942117 -0500\n\nMerge pull request #5 from okayama-mayu/us1-merchant-dashboard-name\n\nUs1 merchant dashboard name"
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5aa385e00ddd59147fbb78d893f6e2535d682913",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/5aa385e00ddd59147fbb78d893f6e2535d682913",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/5aa385e00ddd59147fbb78d893f6e2535d682913/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "800e32dfa49f772c8bc385abe6deef5eced2b335",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/800e32dfa49f772c8bc385abe6deef5eced2b335",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/800e32dfa49f772c8bc385abe6deef5eced2b335"
+      },
+      {
+        "sha": "89352ef116493711ef147cfb6c93ebed0358d69e",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/89352ef116493711ef147cfb6c93ebed0358d69e",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/89352ef116493711ef147cfb6c93ebed0358d69e"
+      }
+    ]
+  },
+  {
+    "sha": "c3c59e73bdc20f20abbbfbed25f99bb1436ea4de",
+    "node_id": "C_kwDOHt0fmNoAKGMzYzU5ZTczYmRjMjBmMjBhYmJiZmJlZDI1Zjk5YmIxNDM2ZWE0ZGU",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-26T16:40:32Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-26T16:40:32Z"
+      },
+      "message": "Merge branch 'main' of github.com:okayama-mayu/little-esty-shop",
+      "tree": {
+        "sha": "97c9e40b75d84520bd51946ac37c0e709f6c0a1b",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/97c9e40b75d84520bd51946ac37c0e709f6c0a1b"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/c3c59e73bdc20f20abbbfbed25f99bb1436ea4de",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/c3c59e73bdc20f20abbbfbed25f99bb1436ea4de",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/c3c59e73bdc20f20abbbfbed25f99bb1436ea4de",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/c3c59e73bdc20f20abbbfbed25f99bb1436ea4de/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "936f2de67d5ed92b7855f40a5fa1e5959fca5aa4",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/936f2de67d5ed92b7855f40a5fa1e5959fca5aa4",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/936f2de67d5ed92b7855f40a5fa1e5959fca5aa4"
+      },
+      {
+        "sha": "20d720bd5d9bc2d454510fd84973cd5164596086",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/20d720bd5d9bc2d454510fd84973cd5164596086",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/20d720bd5d9bc2d454510fd84973cd5164596086"
+      }
+    ]
+  },
+  {
+    "sha": "936f2de67d5ed92b7855f40a5fa1e5959fca5aa4",
+    "node_id": "C_kwDOHt0fmNoAKDkzNmYyZGU2N2Q1ZWQ5MmI3ODU1ZjQwYTVmYTFlNTk1OWZjYTVhYTQ",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-26T16:40:08Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-26T16:40:08Z"
+      },
+      "message": "gemfile update",
+      "tree": {
+        "sha": "6823a6d06229c5be81ef209e97c7678cbd1445e9",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/6823a6d06229c5be81ef209e97c7678cbd1445e9"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/936f2de67d5ed92b7855f40a5fa1e5959fca5aa4",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/936f2de67d5ed92b7855f40a5fa1e5959fca5aa4",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/936f2de67d5ed92b7855f40a5fa1e5959fca5aa4",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/936f2de67d5ed92b7855f40a5fa1e5959fca5aa4/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "17da7488a65deed05828ec16cd5685442991dcce",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/17da7488a65deed05828ec16cd5685442991dcce",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/17da7488a65deed05828ec16cd5685442991dcce"
+      }
+    ]
+  },
+  {
+    "sha": "abc9b5c18260957a7b400907294a7d6b77d3729d",
+    "node_id": "C_kwDOHt0fmNoAKGFiYzliNWMxODI2MDk1N2E3YjQwMDkwNzI5NGE3ZDZiNzdkMzcyOWQ",
+    "commit": {
+      "author": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-25T23:49:26Z"
+      },
+      "committer": {
+        "name": "Thomas Turner",
+        "email": "thomasturner482@yahoo.com",
+        "date": "2022-07-25T23:49:26Z"
+      },
+      "message": "add relationships and tests for customer, invoice_item, incoice",
+      "tree": {
+        "sha": "10eb7a36659882a6fde23cfbf81c7d32d9874bd4",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/trees/10eb7a36659882a6fde23cfbf81c7d32d9874bd4"
+      },
+      "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/git/commits/abc9b5c18260957a7b400907294a7d6b77d3729d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/abc9b5c18260957a7b400907294a7d6b77d3729d",
+    "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/abc9b5c18260957a7b400907294a7d6b77d3729d",
+    "comments_url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/abc9b5c18260957a7b400907294a7d6b77d3729d/comments",
+    "author": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "EagleEye5085",
+      "id": 103777621,
+      "node_id": "U_kgDOBi-FVQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103777621?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EagleEye5085",
+      "html_url": "https://github.com/EagleEye5085",
+      "followers_url": "https://api.github.com/users/EagleEye5085/followers",
+      "following_url": "https://api.github.com/users/EagleEye5085/following{/other_user}",
+      "gists_url": "https://api.github.com/users/EagleEye5085/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/EagleEye5085/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/EagleEye5085/subscriptions",
+      "organizations_url": "https://api.github.com/users/EagleEye5085/orgs",
+      "repos_url": "https://api.github.com/users/EagleEye5085/repos",
+      "events_url": "https://api.github.com/users/EagleEye5085/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/EagleEye5085/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "17da7488a65deed05828ec16cd5685442991dcce",
+        "url": "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits/17da7488a65deed05828ec16cd5685442991dcce",
+        "html_url": "https://github.com/okayama-mayu/little-esty-shop/commit/17da7488a65deed05828ec16cd5685442991dcce"
+      }
+    ]
+  }
+]

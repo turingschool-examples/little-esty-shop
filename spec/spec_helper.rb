@@ -16,8 +16,41 @@
 require 'simplecov'
 SimpleCov.start
 
+require 'webmock/rspec'
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+  config.before(:each) do
+    json_response_repo = File.read('spec/fixtures/repo.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop").
+        to_return(status: 200, body: json_response_repo)
+
+    json_response_contributors = File.read('spec/fixtures/repo_contributors.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/contributors").
+        to_return(status: 200, body: json_response_contributors)
+
+    json_response_commits_blake = File.read('spec/fixtures/repo_commits_blake.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=blakesaylor&per_page=100").
+        to_return(status: 200, body: json_response_commits_blake)
+
+    json_response_commits_mayu = File.read('spec/fixtures/repo_commits_mayu.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=okayama-mayu&per_page=100").
+        to_return(status: 200, body: json_response_commits_mayu)
+
+    json_response_commits_mike = File.read('spec/fixtures/repo_commits_mike.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=mkbonini&per_page=100").
+        to_return(status: 200, body: json_response_commits_mike)
+
+    json_response_commits_thomas = File.read('spec/fixtures/repo_commits_thomas.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/commits?author=EagleEye5085&per_page=100").
+        to_return(status: 200, body: json_response_commits_thomas)
+
+    json_response_pull_requests = File.read('spec/fixtures/repo_pull_requests.json')
+    stub_request(:get, "https://api.github.com/repos/okayama-mayu/little-esty-shop/pulls?state=all").
+        to_return(status: 200, body: json_response_pull_requests)
+  end
+  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
