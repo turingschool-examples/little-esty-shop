@@ -17,7 +17,16 @@
   </head>
 
   <body>
-    
+
     <%= yield %>
+    <h4>Contributors: </h4>
+    <% @search = CommitSearch.new %>
+
+    <% @search.commit_information.each do |commit| %>
+      <%= commit.name %>
+      <%= commit.contributions %>
+    <% end %>
+
+
   </body>
 </html>
