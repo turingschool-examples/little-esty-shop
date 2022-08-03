@@ -139,5 +139,43 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
       expect(page).to_not have_link("#{merchant2.name}'s Item Index")
       expect(page).to_not have_link("#{merchant2.name}'s Invoice Index")
   end
-end
 
+  it "in the section for 'items ready to ship', next to each item name I see the date that the invoice
+  was created, and I see the date formatted like 'Monday, July 18, 2019', and I see that the list is ordered
+  from oldest to newest" do
+    merchant1 = Merchant.create!(name: "Poke Retirement homes")
+
+    customer1 = Customer.create!(first_name: 'Beannah', last_name: 'Durke')
+
+    item1 = Item.create!(name: "Pikachu pics", description: 'Cute pics with pikachu', unit_price: 1000, merchant_id: merchant1.id)
+    item2 = Item.create!(name: "Pokemon stuffy", description: 'Pikachu stuffed toy', unit_price: 2000, merchant_id: merchant1.id)
+    item3 = Item.create!(name: "Junk", description: 'junk you should want', unit_price: 500, merchant_id: merchant1.id)
+    item4 = Item.create!(name: "macrame runner", description: 'handmade macrame runner', unit_price: 2500, merchant_id: merchant1.id)
+    item5 = Item.create!(name: "hotdog", description: 'handmade hotdog', unit_price: 500, merchant_id: merchant1.id)
+
+    invoice1 = Invoice.create!(status: 'completed', customer_id: customer1.id, created_at: "2022-07-01 20:00:00 UTC -05:00")
+    invoice2 = Invoice.create!(status: 'completed', customer_id: customer1.id, created_at: "2022-07-02 20:00:00 UTC")
+    invoice3 = Invoice.create!(status: 'completed', customer_id: customer1.id, created_at: "2022-07-03 20:00:00 UTC")
+    invoice4 = Invoice.create!(status: 'completed', customer_id: customer1.id, created_at: "2022-06-01 20:00:00 UTC")
+    invoice5 = Invoice.create!(status: 'completed', customer_id: customer1.id, created_at: "2022-06-05 20:00:00 UTC")
+
+    invoice_item1 = InvoiceItem.create!(quantity: 100, unit_price: 1000, status: 'pending', item_id: item1.id, invoice_id: invoice1.id)
+    invoice_item2 = InvoiceItem.create!(quantity: 100, unit_price: 1000, status: 'pending', item_id: item2.id, invoice_id: invoice2.id)
+    invoice_item3 = InvoiceItem.create!(quantity: 100, unit_price: 1000, status: 'pending', item_id: item3.id, invoice_id: invoice3.id)
+    invoice_item4 = InvoiceItem.create!(quantity: 100, unit_price: 1000, status: 'pending', item_id: item4.id, invoice_id: invoice4.id)
+    invoice_item5 = InvoiceItem.create!(quantity: 100, unit_price: 1000, status: 'shipped', item_id: item5.id, invoice_id: invoice5.id)
+
+    visit "/merchants/#{merchant1.id}/dashboard"
+    
+    within("#items-ready-to-ship") do
+      expect(page).to have_content("#{item1.name} Date invoice created: Friday, July 01, 2022")
+      expect(page).to have_content("#{item2.name} Date invoice created: Saturday, July 02, 2022")
+      expect(page).to have_content("#{item3.name} Date invoice created: Sunday, July 03, 2022")
+      expect(page).to have_content("#{item4.name} Date invoice created: Wednesday, June 01, 2022")
+      expect(page).to_not have_content("#{item5.name}")
+      expect(item4.name).to appear_before(item1.name)
+      expect(item1.name).to appear_before(item2.name)
+      expect(item2.name).to appear_before(item3.name)
+    end
+  end
+end
