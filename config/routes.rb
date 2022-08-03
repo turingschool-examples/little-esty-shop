@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get '/merchants/:id', to: 'merchants#show'
   get '/merchants/:merchant_id/items', to: 'merchant_items#index'
   get 'merchants/:merchant_id/items/:id/edit', to: 'items#edit'
-  patch '/merchants/:id/items/:id/update', to: 'items#update'
+  patch '/merchants/:id/items/:id/', to: 'items#update'
   get 'merchants/:merchant_id/items/:id', to: 'items#show'
   get '/merchants/:id/invoices', to: 'merchants#show'
   get '/merchants/:id/invoices/:id', to: 'merchant_invoices#show'
