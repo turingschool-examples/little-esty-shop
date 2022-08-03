@@ -13,7 +13,7 @@ RSpec.describe 'Merchant Items Create' do
   it 'can create an item' do
     visit "/merchants/#{@walmart.id}/items"
 
-    click_link 'Create a new item'
+    click_link 'Create a New Item'
 
     expect(current_path).to eq("/merchants/#{@walmart.id}/items/new")
 

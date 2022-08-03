@@ -43,7 +43,7 @@ RSpec.describe 'Merchant Items Edit Page' do
   # And I see a flash message stating that the information has been successfully updated.
   it 'has a form pre-filled with the existing attribute information for an item' do
     visit "/merchants/#{@walmart.id}/items/#{@pencil.id}/edit"
-
+  
     within '#name-field' do
       expect(page).to have_field(:name, with: @pencil.name)
     end
@@ -53,7 +53,7 @@ RSpec.describe 'Merchant Items Edit Page' do
     end
 
     within '#unit_price-field' do
-      expect(page).to have_field(:unit_price, with: @pencil.unit_price)
+      expect(page).to have_field(:unit_price, with: 199)
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe 'Merchant Items Edit Page' do
     expect(page).to have_content("Item successfully updated!")
     expect(page).to have_content("Mechanical Pencil")
     expect(page).to have_content("You can refill it with lead!")
-    expect(page).to have_content(299)
+    expect(page).to have_content('$2.99')
     expect(page).to_not have_content("Sharpen it and write with it.")
     expect(page).to_not have_content(199)
   end

@@ -1,50 +1,45 @@
-<h1><%= @merchant.name %></h1>
-
-<h2><%= link_to "Create a new item", "/merchants/#{@merchant.id}/items/new" %></h2>
-
-<div id="enabled-items-section">
-  <h3>Enabled Items</h3>
-  <ul>
-  <% @merchant.items.enabled.each do |item| %>
-    <li id="item-<%= item.id %>">
-      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |form| %>
-        <div id="disable-field">
-          <%= form.hidden_field(:status, value: "disabled") %>
-        </div>
-        <%= form.submit 'Disable' %>
-      <% end %>
-    </li>
-  <% end %>
-  </ul>
+<div id="header">
+    <%= render "shared/merchant_header" %>
 </div>
 
-<div id="disabled-items-section">
-  <h3>Disabled Items</h3>
-  <ul>
-  <% @merchant.items.disabled.each do |item| %>
-    <li id="item-<%= item.id %>">
-      <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, local: true do |form| %>
-        <div id="enable-field">
-          <%= form.hidden_field(:status, value: "enabled") %>
-        </div>
-        <%= form.submit 'Enable' %>
-      <% end %>
-    </li>
-  <% end %>
-  </ul>
-</div>
+<div class='section-title' style="font-size:130%">My Items</div>
 
-<div id="top-5-revenue-generated">
-  <h3>Top 5 Revenue Generators</h3>
-  <ol>
-  <% @merchant.top_5_revenue_generated.each_with_index do |item, index| %>
-    <div id="number-<%="#{index + 1}"%>-revenue-earner">
-      <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> - <%= number_to_currency(item.revenue.to_f/100) %> in sales
-        <p>Top day for <%= "#{item.name}" %> was <%= "#{item.best_day(item.id)}" %></p>
-      </li>
+<div class='content'>
+  <div id="all-items-section">
+  <h4><%= link_to "Create a New Item", new_merchant_item_path(@merchant) %></h4>
+    <div id="enabled-items-section">
+      <h3>Enabled Items</h3>
+      <% @merchant.items.enabled.each do |item| %>
+        <div id="item-<%= item.id %>">
+          <%= link_to item.name, merchant_item_path(@merchant, item) %>
+          <%= button_to 'Disable', merchant_item_path(@merchant, item), method: :patch, params: { status: "disabled" }, form: {style: 'display:inline-block;'} %>
+          <br><br>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  </ol>
+
+    <div id="disabled-items-section">
+      <h3>Disabled Items</h3>
+      <% @merchant.items.disabled.each do |item| %>
+        <div id="item-<%= item.id %>">
+          <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+          <%= button_to 'Enable', merchant_item_path(@merchant, item), method: :patch, params: { status: "enabled" }, form: {style: 'display:inline-block;'} %>
+          <br><br>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="top-5-revenue-generated">
+    <h3>Top 5 Revenue Generators</h3>
+    <ol>
+    <% @merchant.top_5_revenue_generated.each_with_index do |item, index| %>
+      <div id="number-<%="#{index + 1}"%>-revenue-earner">
+        <li><%= link_to item.name, merchant_item_path(@merchant, item) %> - <%= number_to_currency(item.revenue.to_f/100) %> in sales
+          <p>Top day for <%= "#{item.name}" %> was <%= "#{item.best_day(item.id)}" %></p>
+        </li>
+      </div>
+    <% end %>
+    </ol>
+  </div>
 </div>

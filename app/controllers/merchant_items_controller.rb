@@ -5,6 +5,7 @@ class MerchantItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @merchant = @item.merchant
   end
 
   def edit
@@ -18,7 +19,7 @@ class MerchantItemsController < ApplicationController
   def create
     @merchant = Merchant.find(params[:merchant_id])
     @merchant.items.create(item_params)
-    redirect_to "/merchants/#{@merchant.id}/items"
+    redirect_to merchant_items_path(@merchant)
   end
 
   # Will need to update to handle edge case of improper unit_price entry
@@ -29,9 +30,9 @@ class MerchantItemsController < ApplicationController
     item.update(item_params)
     flash[:notice] = "Item successfully updated!"
     if params[:status].nil?
-      redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
+      redirect_to merchant_item_path(item.merchant, item)
     else
-      redirect_to "/merchants/#{item.merchant_id}/items"
+      redirect_to merchant_items_path(item.merchant)
     end
   end
 
