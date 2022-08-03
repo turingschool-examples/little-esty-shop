@@ -11,3 +11,9 @@
   <% end %>
   </div>
  
+<h2>Top 5 Customers by Total Number of Succesful Transactions:</h2>
+  <% Customer.top_five_by_transaction_count.each do |customer| %>
+    <p> Name: <%= customer.first_name %> <%= customer.last_name %>
+    <br>
+    Number of transactions: <%= customer.transactions.count %></p>
+<% end %>
