@@ -8,7 +8,8 @@ class Merchant < ApplicationRecord
 
     def merchant_invoices
       invoices.distinct
-
+    end
+    
     def ready_to_ship
       invoice_items.joins(:invoice).where.not("invoice_items.status = ?", 2).order('invoices.created_at')
     end

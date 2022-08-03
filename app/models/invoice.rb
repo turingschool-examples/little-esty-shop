@@ -11,4 +11,5 @@ class Invoice < ApplicationRecord
   def invoice_customers
     customer
   end
+
 end

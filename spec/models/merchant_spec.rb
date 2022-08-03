@@ -27,8 +27,9 @@ RSpec.describe Merchant, type: :model do
 
       expect(merchant1.merchant_invoices).to eq([invoice1])
       expect(merchant2.merchant_invoices).to eq([invoice2])
+    end
+  end
 
- end
 
   describe 'relationships' do
     it { should have_many(:invoice_items).through(:items) }
