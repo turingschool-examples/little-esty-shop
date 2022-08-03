@@ -2,6 +2,9 @@
 *= require_tree .
 *= require_self
 */
+.main {
+  padding: 12px 20px;
+}
 
 .navbar ul {
   text-align: right;
@@ -15,8 +18,15 @@
  padding: 10px;
 }
 
+.row {
+  width: 100%;
+  padding: 20px;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
 .column h2 p{
   width: 50%;
-  padding: 12px;
+  padding: 20px;
   align-content: center;
 }

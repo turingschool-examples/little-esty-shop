@@ -1,7 +1,7 @@
 <%= form_with url: "/merchants/", method: :get, local: true do |f| %>
-  <%= f.label :search %>
-  <%= f.text_field :search %>
-  <%= f.submit "Search" %>
+<%= f.label :search %>
+<%= f.text_field :search %>
+<%= f.submit "Search" %>
 <% end %>
 
 <% @merchants.each_with_index do |merchant, index|%>

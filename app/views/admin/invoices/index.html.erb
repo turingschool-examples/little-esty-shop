@@ -1,8 +1,7 @@
-<h1>Admin Invoices Index</h1>
+<h1><center>Admin Invoices Index</center></h1>
 
 <% @invoices.each do |invoice| %>
    <div id="invoice-<%= invoice.id %>">
       <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
-      
    </div>
 <% end %>

@@ -5,7 +5,14 @@
 <% @items.each_with_index do |item, index| %>
 <div id="item-<%= index %>">
   <p>Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <%= item.status %>
+    <% if item.status == "Enabled" %>
+      <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Disabled"} %>
+    <% elsif item.status == "Disabled" %>
+      <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Enabled"} %>
+    <% end %>
   <p>Description: <%= item.description %></p>
   <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
+  <br/>
 </div>
 <% end %>

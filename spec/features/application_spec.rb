@@ -31,5 +31,6 @@ RSpec.describe 'welcome page' do
     click_link('Merchants Index')
 
     expect(current_path).to eq('/merchants')
+    expect(page).to have_link('Fake Merchant')
   end
 end

@@ -19,3 +19,6 @@
     font-family: 'Ibarra Real Nova', serif;
     src: url('Montserrat-Regular.ttf');
  }
+  @myButton {
+    display: inline;
+  }
