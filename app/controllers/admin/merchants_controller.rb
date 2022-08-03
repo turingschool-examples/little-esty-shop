@@ -7,6 +7,19 @@ class Admin::MerchantsController < ApplicationController
     @disabled_merchants = Merchant.disabled_merchants
   end
 
+  def new
+  end
+
+  def create
+    if merchant_params[:merchant_name] != ""
+      merchant = Merchant.create(name: merchant_params[:merchant_name])
+
+      redirect_to admin_merchants_path, notice: "#{merchant.name} created!"
+    else
+      redirect_to new_admin_merchant_path, notice: "Error, please complete all fields"
+    end
+  end
+
   def show
     @merchant = Merchant.find(params[:id])
   end
@@ -30,7 +43,7 @@ class Admin::MerchantsController < ApplicationController
   end
   
 private
-  def merchant__params
-    params.permit(:status)
+  def merchant_params
+    params.permit(:status, :merchant_name)
   end
 end
