@@ -177,7 +177,5 @@ RSpec.describe 'Merchant Dashboard Page', type: :feature do
       expect(item1.name).to appear_before(item2.name)
       expect(item2.name).to appear_before(item3.name)
     end
-    save_and_open_page
   end
 end
-
