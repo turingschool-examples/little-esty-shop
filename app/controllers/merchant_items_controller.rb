@@ -22,6 +22,7 @@ class MerchantItemsController < ApplicationController
 
     if merchant.save
       redirect_to merchant_items_path(merchant)
+      flash[:notice] = "Item successfully created!"
     else
       redirect_to new_merchant_item_path(merchant)
       flash[:alert] = "Error: Please fill in all fields."
