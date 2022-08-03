@@ -5,4 +5,4 @@ class Username
     @data = data
   	@login = data[:login]
   end
-end
+end  
