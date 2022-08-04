@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # patch '/merchants/:id/'
 
   resources :merchants, only: %i[show update new] do
-    resources :invoices, controller: 'merchant_invoices', only: %i[index show]
+    resources :invoices, controller: 'merchant_invoices', only: %i[index show update]
     resources :items, controller: 'merchant_items', only: %i[index edit show update new create]
   end
 

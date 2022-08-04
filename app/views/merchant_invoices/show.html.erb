@@ -13,6 +13,13 @@
         <p><%="Quantity Ordered: #{invoice_item.quantity}"%></p>
         <p><%="Price: #{number_to_currency(invoice_item.unit_price)}"%></p>
         <p><%="Status: #{invoice_item.status}"%></p>
+
+        <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+            <%= form.label :status %>
+            <%= form.select :status, ['pending', 'packaged', 'shipped'] %>
+            <%= form.hidden_field :invoice_item_id, value: invoice_item.id  %>
+            <%= form.submit "Update Item Status" %>
+        <% end %>
     <% end %>
 </div>
 
