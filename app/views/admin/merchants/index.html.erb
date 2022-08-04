@@ -1,7 +1,11 @@
-<h1><center>Admin Merchants Index</center></h1>
+<%= render partial: 'shared/home_link', locals: {path: "/"} %>
+<%= render partial: 'shared/admin_links', locals: {path: "/admin"} %>
+
+<h1>Admin Merchants Index</h1>
+
 <% @merchants.each do |merchant| %>
 <div id="merchant-<%= merchant.id %>">
-  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
+  <h2><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h2>
   <p><%= merchant.status %></p>
   <% if merchant.status == "Enabled" %>
   <%= button_to 'Disable', "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Disabled"}%>

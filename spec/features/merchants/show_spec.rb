@@ -170,13 +170,12 @@ RSpec.describe 'the merchant show page' do
 
       visit "/merchants/#{merchant1.id}/items/#{item1.id}"
       # visit merchant_items_path(merchant1, m1i1)
-
-      expect(page).to have_button("Update #{item1.name}")
-      click_button("Update #{item1.name}")
+      expect(page).to have_content('Crap')
+      expect(page).to have_button('Update')
+      click_button('Update')
 
       expect(current_path).to eq("/merchants/#{merchant1.id}/items/#{item1.id}/edit")
 
-      fill_in 'Name', with: ""
       fill_in 'Name', with: 'Frivilous'
       click_on 'Submit'
 
@@ -184,6 +183,7 @@ RSpec.describe 'the merchant show page' do
 
       expect(page).to have_content('Successfully Updated')
       expect(page).to have_content('Frivilous')
+      expect(page).to_not have_content('Crap')
     end
 
     it 'has buttons to enable or disable the item' do
@@ -199,17 +199,17 @@ RSpec.describe 'the merchant show page' do
       visit "/merchants/#{merchant1.id}/items"
 
       within "#item-0" do
-        expect(page).to have_content('Name: Crap')
+        expect(page).to have_content('Item Name: Crap')
         expect(page).to have_button('Disable')
       end
 
       within "#item-1" do
-        expect(page).to have_content('Name: Junk')
+        expect(page).to have_content('Item Name: Junk')
         expect(page).to have_button('Enable')
       end
 
       within "#item-2" do
-        expect(page).to have_content('Name: BS')
+        expect(page).to have_content('Item Name: BS')
         expect(page).to have_button('Disable')
 
         click_button('Disable')
@@ -222,17 +222,9 @@ RSpec.describe 'the merchant show page' do
       visit "/merchants/#{merchant2.id}/items"
 
       within "#item-0" do
-        expect(page).to have_content('Impracticality')
+        expect(page).to have_content('Item Name: Impracticality')
         expect(page).to have_button('Disable')
       end
     end
   end
 end
-# Merchant Item Disable/Enable
-#
-# As a merchant
-# When I visit my items index page
-# Next to each item name I see a button to disable or enable that item.
-# When I click this button
-# Then I am redirected back to the items index
-# And I see that the items status has changed

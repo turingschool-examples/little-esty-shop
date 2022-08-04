@@ -1,19 +1,25 @@
-<h1><center>Admin Dashboard</center></h1>
+<%= render partial: 'shared/home_link', locals: {path: "/"} %>
+<%= render partial: 'shared/admin_links', locals: {path: "/admin"} %>
 
-<%= link_to "Admin Merchants Index", "/admin/merchants" %>
-<%= link_to "Admin Invoices Index", "/admin/invoices" %>
+<h1>Admin Dashboard</h1>
 
-<h3>Top 5 Customers</h3>
+<div class="row">
+<section class="column">
+  <h2>Top 5 Customers</h2>
 
-<% @customers.top_five.each do |customer| %>
-<%= "| #{customer.first_name} #{customer.last_name} - #{customer.trans_count} purchases | " %>
+  <% @customers.top_five.each do |customer| %>
+  <p><%= "| #{customer.first_name} #{customer.last_name} - #{customer.trans_count} purchases | " %></p>
+  <% end %>
+</section>
+
+<section class="column">
+  <h2>Incomplete Invoices</h2>
+
+  <% @invoices.incomplete_invoices.each do |invoice| %>
+    <div id="invoice-<%= invoice.id %>">
+    <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+    Date Created: <%= invoice.created_at.strftime("%A, %B, %d, %Y") %>
+  </div>
 <% end %>
-
-<h3>Incomplete Invoices</h3>
-
-<% @invoices.incomplete_invoices.each do |invoice| %>
-<div id="invoice-<%= invoice.id %>">
-<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
-Date Created: <%= invoice.created_at.strftime("%A, %B, %d, %Y") %>
+</section>
 </div>
-<% end %>

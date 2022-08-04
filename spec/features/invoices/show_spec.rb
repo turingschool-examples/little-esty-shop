@@ -98,7 +98,7 @@ RSpec.describe 'Merchant Invoices Show Page' do
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
 
-    expect(page).to have_content("612006")
+    expect(page).to have_content('$6,120.06')
   end
 
   it 'has a select field for item status, and it can updated. then redirected to the merchant invoice show page with updated status' do

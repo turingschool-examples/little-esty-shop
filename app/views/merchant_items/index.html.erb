@@ -1,18 +1,19 @@
+<%= render partial: 'shared/home_link', locals: {path: "/"} %>
 <%= render partial: 'shared/merchant_links', locals: {path: "/merchants/#{@merchant.id}"} %>
 
 <h1><%= @merchant.name %> Items Index</h1>
 
 <% @items.each_with_index do |item, index| %>
 <div id="item-<%= index %>">
-  <p>Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
-    <%= item.status %>
+  <h2>Item Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h2>
+  <p>Description: <%= item.description %></p>
+  <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
+  <h3>Status: <%= item.status %></h3>
     <% if item.status == "Enabled" %>
       <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Disabled"} %>
     <% elsif item.status == "Disabled" %>
       <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Enabled"} %>
     <% end %>
-  <p>Description: <%= item.description %></p>
-  <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
   <br/>
 </div>
 <% end %>
