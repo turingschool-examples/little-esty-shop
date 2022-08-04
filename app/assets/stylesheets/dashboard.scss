@@ -2,8 +2,23 @@
 *= require_tree .
 *= require_self
 */
-.main {
-  padding: 12px 20px;
+@import url('https://fonts.googleapis.com/css2?family=Petrona&family=Quicksand:wght@300&family=Tinos&display=swap');
+body {
+  text-align: center;
+  font-family: 'Petrona', serif;
+}
+
+body h1 {
+  font-size: 36px;
+  font-family: 'Tinos', serif;
+}
+
+body h2 h3 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.search {
+  text-align: left;
 }
 
 .navbar ul {
@@ -16,6 +31,7 @@
  list-style: none;
  display: inline-block;
  padding: 10px;
+ font-family: 'Petrona', serif;
 }
 
 .row {

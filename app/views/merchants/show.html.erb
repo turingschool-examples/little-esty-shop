@@ -1,18 +1,17 @@
+<%= render partial: 'shared/home_link', locals: {path: "/"} %>
 <%= render partial: 'shared/merchant_links', locals: {path: "/merchants/#{@merchant.id}"} %>
 
-<h1><%= @merchant.name %></h1>
+<h1><%= @merchant.name %> Item Invoices</h1>
 <% @merchant.items.each_with_index do |item, index| %>
   <div id="item-<%= index %>">
-    <p>Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+    <h2>Name: <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h2>
     <p>Description: <%= item.description %></p>
     <p>Price: <%= number_to_currency(item.unit_price.fdiv(100)) %></p>
+  <h3>Invoices</h3>
+    <% item.invoices.each_with_index do |invoice, index| %>
+      <div id="invoice-<%= index %>">
+        <li># <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li>
+      </div>
+    <% end %>
   </div>
-
-<h3>Invoice</h3>
-  <p><%= @merchant.name%> </p>
-
-<% @merchant.invoices.each_with_index do |invoice, index| %>
-<div id="invoice-<%= index %>">
-    <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
-<% end %>
 <% end %>
