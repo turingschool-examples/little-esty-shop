@@ -170,7 +170,7 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
     expect(page).to have_content("Top 5 Merchants by Revenue:")
 
     within "div#revenue" do
- 
+
       expect('Malwart').to appear_before('5 above')
       expect('5 above').to appear_before('2 doller store')
       expect('2 doller store').to appear_before('More than one item')
@@ -223,7 +223,7 @@ RSpec.describe 'Admin Merchants Index Page', type: :feature do
     transaction6 = Transaction.create!(result: 'success', invoice_id: invoice6.id)
 
     visit 'admin/merchants'
-# save_and_open_page
+
     within "div#revenue" do
       expect(page).to have_content("Top selling date for #{merchant1.name} was #{invoice2.updated_at.strftime('%B %e, %Y')}")
       expect(page).to have_content("Top selling date for #{merchant2.name} was #{invoice3.updated_at.strftime('%B %e, %Y')}")

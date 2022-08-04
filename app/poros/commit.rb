@@ -4,7 +4,6 @@ class Commit
               :contributions
 
   def initialize(data)
-    binding.pry
     @name = data["login"]
     @contributions = data["contributions"]
   end

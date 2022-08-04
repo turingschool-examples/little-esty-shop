@@ -21,7 +21,7 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     invoice_item3 = InvoiceItem.create!(quantity: 3, unit_price: item3.unit_price, status: "packaged", item_id: item3.id, invoice_id: invoice3.id)
 
     visit "/merchants/#{merchant1.id}/invoices/#{invoice1.id}"
-save_and_open_page
+
     within "div#invoice" do
       expect(page).to have_content("Pikachu pics")
       expect(page).to have_content("shipped")

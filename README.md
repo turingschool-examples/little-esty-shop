@@ -38,3 +38,30 @@ This project requires Ruby 2.7.4.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
+
+
+
+<h4>Contributors: </h4>
+<% @search = CommitSearch.new %>
+
+<% @search.commit_information.each do |commit| %>
+  <%= commit.name %>
+  <%= commit.contributions %>
+<% end %>
+
+<%= render partial: "layouts/github2" %>
+
+<% if  ENV["RAILS_ENV"] == "development" || ENV["RAILS_ENV"] == "production"  %>
+ <h4> Repo name: <%= GitApi.make_request[:name]%></h4>
+<% end %>
+
+</body>
+</html>
+
+<footer>
+<% merged_prs = MergedPrs.new %>
+<% merged_prs.count.each do |user, pr_count| %>
+<%= user %>'s PR count: <%= pr_count %>
+<br>
+<% end %>
+</footer>

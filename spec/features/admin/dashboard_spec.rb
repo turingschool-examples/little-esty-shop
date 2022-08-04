@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Dashboard', type: :feature do 
+RSpec.describe 'Admin Dashboard', type: :feature do
 
- it "has a header indicating this is the admin dashboard" do 
+ it "has a header indicating this is the admin dashboard" do
 
   visit '/admin'
 
   expect(page).to have_content('Admin Dashboard')
  end
 
- it "has links to the admin merchants and invoices indexes" do 
+ it "has links to the admin merchants and invoices indexes" do
 
   visit '/admin'
 
@@ -27,7 +27,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
 # conducted
 
   it "shows the names of the top 5 customers who have conducted the largest number of successful
-  transactions and next to each customer name I see the number of successful transactions they 
+  transactions and next to each customer name I see the number of successful transactions they
   have conducted" do
     merchant1 = Merchant.create!(name: 'Poke pics')
 
@@ -108,7 +108,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     expect('Tarker').to_not appear_before('Gesley')
   end
 
- it "can list incomplete invoices and link to the invoice's admin show page" do 
+ it "can list incomplete invoices and link to the invoice's admin show page" do
     merchant1 = Merchant.create!(name: "Poke Retirement homes", status: "enabled")
     merchant2 = Merchant.create!(name: "Rendolyn Guizs poke stops", status: "enabled")
     merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits", status: "enabled")
@@ -139,7 +139,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     invoice_item6 = InvoiceItem.create!(quantity: 1, unit_price: item6.unit_price, status: "packaged", item_id: item6.id, invoice_id: invoice6.id)
     invoice_item7 = InvoiceItem.create!(quantity: 1, unit_price: item7.unit_price, status: "shipped", item_id: item7.id, invoice_id: invoice7.id)
     invoice_item8 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item7.id, invoice_id: invoice8.id)
-      
+
     visit '/admin'
     expect(page).to have_content("Incomplete Invoices")
 
@@ -153,7 +153,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
 
       expect(page).to_not have_content("#{invoice7.id}")
       expect(page).to_not have_content("#{invoice8.id}")
-      save_and_open_page
+
       expect(page).to have_link("#{invoice2.id}")
       click_on("#{invoice2.id}")
       expect(current_path).to eq("/admin/invoices/#{invoice2.id}")
@@ -193,7 +193,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     invoice_item6 = InvoiceItem.create!(quantity: 1, unit_price: item6.unit_price, status: "packaged", item_id: item6.id, invoice_id: invoice6.id)
     invoice_item7 = InvoiceItem.create!(quantity: 1, unit_price: item7.unit_price, status: "shipped", item_id: item7.id, invoice_id: invoice7.id)
     invoice_item8 = InvoiceItem.create!(quantity: 1, unit_price: item1.unit_price, status: "shipped", item_id: item7.id, invoice_id: invoice8.id)
-      
+
     visit '/admin'
 
     within '#incomplete_invoices' do
