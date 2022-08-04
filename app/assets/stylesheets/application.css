@@ -68,7 +68,7 @@ body li {
 }
 
 .navbar ul li {
- float: : right;
+ text-align: : right;
  list-style: none;
  display: inline-block;
  padding: 0px 10px;
