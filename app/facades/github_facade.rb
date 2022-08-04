@@ -16,8 +16,5 @@ class GithubFacade
     def self.repo_name
       parsed = GithubService.repo_name
       @repo_name = Repo.new(parsed[:name])
-      # @githubs = parsed.map do |repo_data|
-      #   require "pry"; binding.pry
-      #   Repo.new(repo_data)
     end
 end
