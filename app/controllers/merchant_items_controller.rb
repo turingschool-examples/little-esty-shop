@@ -1,20 +1,20 @@
 class MerchantItemsController < ApplicationController
 
   def index
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def show
     @item = Item.find(params[:item_id])
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def new
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
-    merchant = Merchant.find(params[:id])
+    merchant = Merchant.find(params[:merchant_id])
     item = merchant.items.new(item_params)
 
     if item.save
