@@ -1,7 +1,7 @@
 <div id="page-banner">
   <div id="page-details">
     <p>
-      Admin Dashboard
+      Admin Merchants
     </p>
     <p>
       <%= link_to "New Merchant", new_admin_merchant_path, class: "new-merchant-button" %>
@@ -9,9 +9,11 @@
   </div>
 
   <div id="admin-links">
-    <%= link_to "Dashboard", "/admin", class: "dashboard-link"%>
-    <%= link_to 'Merchants', "/admin/merchants",class: "merchants-link" %>
-    <%= link_to 'My Invoices', "/admin/invoices",class: "invoices-link" %>
+    <p>
+      <%= link_to "Dashboard", "/admin", class: "dashboard-link"%>
+      <%= link_to 'Merchants', "/admin/merchants",class: "merchants-link" %>
+      <%= link_to 'My Invoices', "/admin/invoices",class: "invoices-link" %>
+    </p>
   </div>
 </div>
 
