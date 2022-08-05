@@ -11,12 +11,12 @@ RSpec.describe 'admin merchant new page' do
       fill_in "Merchant Name", with: "Chips R Us"
 
       click_on "Submit"
-
+save_and_open_page
       expect(current_path).to eq(admin_merchants_path)
 
       expect(page).to have_content("Chips R Us created!")
 
-      within "#disabled-merchants" do
+      within "#enabled-merchants" do
         expect(page).to have_content("Chips R Us")
       end
     end
