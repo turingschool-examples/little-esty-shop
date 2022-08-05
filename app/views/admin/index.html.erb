@@ -1,25 +1,36 @@
-<header id="admin-header"><h1>Admin Dashboard</h1></header> 
-
-<div id="admin-links">
-  <p><%= link_to 'Merchants', '/admin/merchants' %></p>
-  <p><%= link_to 'Invoices', '/admin/invoices' %></p>
-</div>
-
-<div id="top-customers">
-  <h2>Top Customers</h2>
-  <% Customer.top_customers.each_with_index do |customer, index| %>
-    <div id="customer-<%= index + 1%>">
-        <p><%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %></p>
-    </div>
-  <% end %>
-</div>
-
-<div id="incomplete-invoices">
-  <h2>Incomplete Invoices</h2>
-  <% Invoice.invoices_with_items_not_shipped.each do |invoice| %>
+<div id="page-banner">
+  <div id="page-details">
+      <header id="admin-header"><h1>Admin Dashboard</h1></header> 
+  </div>
+  <div id="admin-links" >
     <p>
-      <%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %>
-      <%= invoice.formatted_date %>
+      <%= link_to 'Dashboard', admin_index_path, class: "dashboard-link" %>
+      <%= link_to 'Merchants', admin_merchants_path, class: "merchants-link" %>
+      <%= link_to 'Invoices', admin_invoices_path, class: "invoices-link" %>
     </p>
-  <% end %>
+  </div>
+</div>
+  <div class='row'>
+    <div class='col-lg-6'>
+      <div id="top-customers">
+        <h2>Top Customers</h2>
+        <% Customer.top_customers.each_with_index do |customer, index| %>
+          <div id="customer-<%= index + 1%>">
+              <p><%= customer.first_name %> <%= customer.last_name %>, Successful Transactions: <%= customer.transaction_total %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class='col-lg-6'>
+      <div id="incomplete-invoices">
+        <h2>Incomplete Invoices</h2>
+        <% Invoice.invoices_with_items_not_shipped.each do |invoice| %>
+          <p>
+            <%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %>
+            <%= invoice.formatted_date %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

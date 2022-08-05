@@ -1,5 +1,20 @@
-<h1>Admin Invoices</h1>
+<div id="page-banner">
+  <div id="page-details">
+      <header id="admin-header"><h1>Admin Invoices</h1></header> 
+  </div>
 
-<% @invoices.each do |invoice| %>
-<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
-<% end %>
+  <div id="admin-links">
+      <p>
+        <%= link_to 'Dashboard', admin_index_path, class: "dashboard-link" %>
+        <%= link_to 'Merchants', admin_merchants_path, class: "merchants-link" %>
+        <%= link_to 'Invoices', admin_invoices_path, class: "invoices-link" %>
+      </p>
+  </div>
+</div>
+<div class='row'>
+  <div class ='col-lg-12'>
+    <% @invoices.each do |invoice| %>
+      <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %>
+    <% end %>
+  </div>
+</div>
