@@ -132,16 +132,16 @@ RSpec.describe 'Dashboard Page' do
       invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
 
       visit merchant_path(@merch2.id)
-
+save_and_open_page
       within "#invoice-item-#{invoice_item1.id}" do
-        click_on("Invoice ##{invoice_item1.invoice.id}")
-        expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item1.invoice.id))
+        click_on("Invoice ##{invoice_item1.invoice_id}")
+        expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item1.invoice_id))
       end
 
-      visit "/merchants/#{@merch2.id}"
+      visit merchant_path(@merch2.id)
       within "#invoice-item-#{invoice_item2.id}" do
         click_on("Invoice ##{invoice_item2.invoice.id}")
-        expect(current_path).to eq("/merchants/#{@merch2.id}/invoices/#{invoice_item2.invoice.id}")
+        expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item2.invoice.id)
       end
     end
   end
@@ -236,6 +236,17 @@ RSpec.describe 'Dashboard Page' do
       expect(page).to have_content("Successful Transactions: 2")
       expect(page).to_not have_content(misty.first_name)
       expect(page).to_not have_content(giovanni.first_name)
+    end
+  end
+  describe 'Bulk discounts' do
+    it 'has a link to My Discounts' do
+      visit merchant_path(@merch1.id)
+
+    within('#merchant-links') do
+      expect(page).to have_link('My Discounts')
+      click_on('My Discounts')
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merch1.id))
+    end
     end
   end
 end
