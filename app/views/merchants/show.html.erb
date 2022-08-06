@@ -3,9 +3,10 @@
     <%= @merchant.name %>
   </div>
   <div id="merchant-links">
-    <%= link_to "Dashboard", "/merchants/#{@merchant.id}", class: "dashboard-link"%>
-    <%= link_to 'My Items', "/merchants/#{@merchant.id}/items", class: "items-link" %>
-    <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices", class: "invoices-link" %>
+    <%= link_to "Dashboard", merchant_path(@merchant.id), class: "dashboard-link"%>
+    <%= link_to 'My Items', merchant_items_path(@merchant.id), class: "items-link" %>
+    <%= link_to 'My Invoices', merchant_invoices_path(@merchant.id), class: "invoices-link" %>
+    <%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant.id), class: "discounts-link" %>
   </div>
 </div>
 
@@ -21,7 +22,7 @@
             <p class="item-ready-to-ship">
               <%= invoice_item.id %> - 
               <%= invoice_item.item.name %> - 
-              <%= link_to "Invoice ##{invoice_item.invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice.id}" %> - 
+              <%= link_to "Invoice ##{invoice_item.invoice.id}", merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %> - 
               <%= invoice_item.invoice.formatted_date %>  
             </p>
           </div>

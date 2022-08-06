@@ -1,0 +1,21 @@
+<div id="page-banner">
+  <div id ="merchant-details">
+    <%= @merchant.name %>
+  </div>
+  <div id="merchant-links">
+    <%= link_to "Dashboard", merchant_path(@merchant.id), class: "dashboard-link"%>
+    <%= link_to 'My Items', merchant_items_path(@merchant.id), class: "items-link" %>
+    <%= link_to 'My Invoices', merchant_invoices_path(@merchant.id), class: "invoices-link" %>
+    <%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant.id), class: "discounts-link" %>
+  </div>
+</div>
+<div id="dashboard-content">
+  <div id='discount-list'>
+    
+      <p>ID: <%= @discount.id %></p>
+      <p>Discount: <%= @discount.percentage %>%</p>
+      <p>Quantity Threshold: <%= @discount.quantity_threshold %> Items</p>
+
+
+  </div>
+</div>

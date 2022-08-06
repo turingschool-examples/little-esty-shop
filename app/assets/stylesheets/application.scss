@@ -189,6 +189,19 @@ html, body{
   background-color: #bc43cc;
 }
 
+.discounts-link {
+  background-color: #0b76a1;
+  color: #E1E2E1;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+}
+
+.discounts-link:hover {
+  background-color: #43aacc;
+}
+
 .dashboard-content-left-subtitle {
   font-size: large;
   font-weight: bold;
