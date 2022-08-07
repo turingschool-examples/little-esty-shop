@@ -1,0 +1,25 @@
+<div id="page-banner">
+  <div id ="merchant-details">
+    <%= @merchant.name %>
+  </div>
+  <div id="merchant-links">
+    <%= link_to "Dashboard", merchant_path(@merchant.id), class: "dashboard-link"%>
+    <%= link_to 'My Items', merchant_items_path(@merchant.id), class: "items-link" %>
+    <%= link_to 'My Invoices', merchant_invoices_path(@merchant.id), class: "invoices-link" %>
+    <%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant.id), class: "discounts-link" %>
+  </div>
+</div>
+
+<h3> Create New Item </h3>
+
+<%= form_with url: merchant_bulk_discounts_path(@merchant.id), method: :post, local: true do |form| %>
+  <p>
+    <%= form.label :percentage, "Discount Percentage" %>
+    <%= form.text_field :percentage %>
+  </p>
+  <p>
+    <%= form.label :quantity_threshold, "Quantity Threshold" %>
+    <%= form.text_field :quantity_threshold %>
+  </p>
+    <p><%= form.submit "Submit"%></p>
+<% end %>
