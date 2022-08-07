@@ -9,12 +9,13 @@
     <%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant.id), class: "discounts-link" %>
   </div>
 </div>
+
 <h3> Create New Item </h3>
 
 <%= form_with url: merchant_bulk_discounts_path(@merchant.id), method: :post, local: true do |form| %>
   <p>
-    <%= form.label :discount_percentage, "Discount Percentage" %>
-    <%= form.text_field :discount_percentage %>
+    <%= form.label :percentage, "Discount Percentage" %>
+    <%= form.text_field :percentage %>
   </p>
   <p>
     <%= form.label :quantity_threshold, "Quantity Threshold" %>
