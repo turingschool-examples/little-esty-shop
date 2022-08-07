@@ -13,13 +13,12 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_most_popular_items
-    items
-      .joins(:transactions)
-      .where(transactions: { result: 1 })
-      .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-      .group(:id)
-      .order(revenue: :desc)
-      .limit(5)
+    items.joins(:transactions)
+          .where(transactions: { result: 1 })
+          .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+          .group(:id)
+          .order(revenue: :desc)
+          .limit(5)
   end
 
   def favorite_customers
@@ -41,15 +40,14 @@ class Merchant < ApplicationRecord
   end
 
   def best_date
-    invoices
-      .joins(:transactions)
-      .where(transactions: { result: 1 })
-      .select('invoices.id, invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
-      .group(:id)
-      .order(revenue: :desc)
-      .limit(1)
-      .first
-      .formatted_date
+    invoices.joins(:transactions)
+            .where(transactions: { result: 1 })
+            .select('invoices.id, invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+            .group(:id)
+            .order(revenue: :desc)
+            .limit(1)
+            .first
+            .formatted_date
   end
 
   def self.top_5_merchants

@@ -4,7 +4,7 @@ RSpec.describe 'Bulk Discount Index Page' do
   it 'shows all merchant bulk discounts with attributes' do
     merch1 = Merchant.create!(name: 'Jolly Roger Imports')
     merch2 = Merchant.create!(name: 'Molly Fine Arts')
-    merch3 = Merchant.create!(name: 'Treats and Things')
+    # merch3 = Merchant.create!(name: 'Treats and Things')
 
     merch1.bulk_discounts.create!(percentage: 20, quantity_threshold: 10)
     merch1.bulk_discounts.create!(percentage: 10, quantity_threshold: 5)
@@ -27,6 +27,6 @@ RSpec.describe 'Bulk Discount Index Page' do
     visit merchant_bulk_discounts_path(merch1.id)
     click_on('View Details')
     expect(current_path).to eq(merchant_bulk_discount_path(merch1.id, discount1.id))
-    save_and_open_page
+    # save_and_open_page
   end
 end
