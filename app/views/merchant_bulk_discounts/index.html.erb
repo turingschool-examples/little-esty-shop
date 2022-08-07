@@ -8,6 +8,9 @@
     <%= link_to 'My Invoices', merchant_invoices_path(@merchant.id), class: "invoices-link" %>
     <%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant.id), class: "discounts-link" %>
   </div>
+  <div id ="discount-links">
+    <%= link_to 'Create New Discount', new_merchant_bulk_discount_path(@merchant.id), class: "discounts-link" %>
+  </div>
 </div>
 <div id="dashboard-content">
   <div id='discount-list'>
