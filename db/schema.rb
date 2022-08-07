@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2022_08_05_224806) do
   enable_extension "plpgsql"
 
   create_table "bulk_discounts", force: :cascade do |t|
-    t.integer "percentage"
-    t.integer "quantity_threshold"
+    t.integer "percentage", null: false
+    t.integer "quantity_threshold", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "merchant_id"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 2022_08_05_224806) do
     t.string "name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "status", default: 1
   end
 
   create_table "transactions", force: :cascade do |t|
