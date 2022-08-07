@@ -2,6 +2,10 @@
   <div id ="merchant-details">
     <%= @merchant.name %>
   </div>
+  <div id='discount-links'>
+    <%= link_to 'Edit Discount', edit_merchant_bulk_discount_path(@merchant.id, @discount.id) %>
+  
+  </div>
   <div id="merchant-links">
     <%= link_to "Dashboard", merchant_path(@merchant.id), class: "dashboard-link"%>
     <%= link_to 'My Items', merchant_items_path(@merchant.id), class: "items-link" %>

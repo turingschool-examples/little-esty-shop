@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :merchants, only: %i[show update new] do
     resources :invoices, controller: 'merchant_invoices', only: %i[index show update]
     resources :items, controller: 'merchant_items', only: %i[index edit show update new create]
-    resources :bulk_discounts, controller: 'merchant_bulk_discounts', only: %i[index show new create]
+    resources :bulk_discounts, controller: 'merchant_bulk_discounts', only: %i[index show new create edit update]
   end
 
   resources :admin, only: [:index]

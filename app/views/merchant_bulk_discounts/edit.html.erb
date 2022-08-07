@@ -10,9 +10,9 @@
   </div>
 </div>
 
-<h3> Create New Discount </h3>
+<h3> Edit Discount </h3>
 
-<%= form_with url: merchant_bulk_discounts_path(@merchant.id), method: :post, local: true do |form| %>
+<%= form_with url: merchant_bulk_discounts_path(@merchant.id), method: :patch, local: true do |form| %>
   <p>
     <%= form.label :percentage, "Discount Percentage" %>
     <%= form.text_field :percentage %>
