@@ -132,7 +132,7 @@ RSpec.describe 'Dashboard Page' do
       invoice_item2 = InvoiceItem.create!(invoice: invoice2, item: item1, quantity: 1, unit_price: 20, status: 1)
 
       visit merchant_path(@merch2.id)
-save_and_open_page
+
       within "#invoice-item-#{invoice_item1.id}" do
         click_on("Invoice ##{invoice_item1.invoice_id}")
         expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item1.invoice_id))
@@ -141,7 +141,7 @@ save_and_open_page
       visit merchant_path(@merch2.id)
       within "#invoice-item-#{invoice_item2.id}" do
         click_on("Invoice ##{invoice_item2.invoice.id}")
-        expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item2.invoice.id)
+        expect(current_path).to eq(merchant_invoice_path(@merch2.id, invoice_item2.invoice.id))
       end
     end
   end
