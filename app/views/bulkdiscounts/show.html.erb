@@ -2,3 +2,4 @@
 <h3>Discount Info</h3>
 <%= "Discount Percentage: #{@bulkdiscount.percentage}%" %><br>
 <%= "Discount Threshold: #{@bulkdiscount.threshold}" %><br>
+<%=link_to "Edit Discount", "/merchants/#{@merchant.id}/bulkdiscounts/#{@bulkdiscount.id}/edit", method: :get, local: true %>

@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.describe 'Merchant Bulk Discount Show Page' do
 
-  describe 'Viewing all of a merchants discounts' do
-    it "has a link to the merchant's discounts" do
+  describe 'Shows the percentage and threshold of a discount' do
+    it "shows the the discount attributes" do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
       merchant_2 = Merchant.create!(name: "Greg's Leggings")
 
@@ -16,7 +16,13 @@ RSpec.describe 'Merchant Bulk Discount Show Page' do
       expect(page).to have_content("#{discount_a.name}")
       expect(page).to have_content("#{discount_a.percentage}")
       expect(page).to have_content("#{discount_a.threshold}")
-      save_and_open_page
+      #sad path
+      expect(page).to_not have_content("#{discount_b.name}")
+      expect(page).to_not have_content("#{discount_b.percentage}")
+      expect(page).to_not have_content("#{discount_b.threshold}")
+      expect(page).to_not have_content("#{discount_a2.name}")
+      expect(page).to_not have_content("#{discount_a2.percentage}")
+      expect(page).to_not have_content("#{discount_a2.threshold}")
     end
   end
 end
