@@ -37,4 +37,29 @@ RSpec.describe 'Bulk Discount Index Page' do
     click_on('Create New Discount')
     expect(current_path).to eq(new_merchant_bulk_discount_path(merch1.id))
   end
+  it 'has a link to delete each discount' do
+    merch1 = Merchant.create!(name: 'Jolly Roger Imports')
+    discount1 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 20, quantity_threshold: 10)
+    discount2 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 30, quantity_threshold: 3)
+
+    visit merchant_bulk_discounts_path(merch1.id)
+    within("#discount-#{discount1.id}") do
+      expect(page).to have_link('Delete Discount')
+    end
+  end
+  it 'clicking delete redirects me back to index and that discount is no longer there' do
+    merch1 = Merchant.create!(name: 'Jolly Roger Imports')
+    discount1 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 20, quantity_threshold: 10)
+    discount2 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 30, quantity_threshold: 3)
+
+    visit merchant_bulk_discounts_path(merch1.id)
+    
+    within("#discount-#{discount2.id}") do
+      click_on('Delete Discount')  
+      save_and_open_page
+    end
+    expect(current_path).to eq(merchant_bulk_discounts_path(merch1.id))
+    expect(page).to_not have_content('Discount Percentage: 30%')
+    expect(page).to_not have_content('Quantity Threshold: 3 Items')
+  end
 end
