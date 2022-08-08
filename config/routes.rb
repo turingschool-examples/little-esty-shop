@@ -7,16 +7,16 @@ Rails.application.routes.draw do
     get '/invoices', to: 'merchant_invoices#index'
     get '/invoices/:invoice_id', to: 'merchant_invoices#show'
     patch '/invoices/:invoice_id', to: 'merchant_invoices#update'
-    
+
     get "/items", to: "merchant_items#index"
     get '/items/new', to: 'merchant_items#new'
     post 'items', to: 'merchant_items#create'
-    
+
     get '/items/:item_id', to: 'merchant_items#show'
     get '/items/:item_id/edit', to: 'merchant_items#edit'
     patch '/items/:item_id', to: 'merchant_items#update'
   end
-  
+
   get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
 
   resources :admin, only: :index
@@ -33,4 +33,7 @@ Rails.application.routes.draw do
     get '/merchants/:id/edit', to: 'merchants#edit'
     patch '/merchants/:id', to: 'merchants#update'
   end
+
+  #BULK DISCOUNTS
+  get 'merchants/:merchant_id/bulk_discounts', to: 'bulk_discounts#index'
 end
