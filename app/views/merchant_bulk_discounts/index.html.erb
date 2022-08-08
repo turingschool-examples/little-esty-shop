@@ -15,10 +15,14 @@
 <div id="dashboard-content">
   <div id='discount-list'>
     <% @merchant.bulk_discounts.each do |discount| %>
-      <p>ID: <%= discount.id %></p>
-      <p>Discount: <%= discount.percentage %>%</p>
-      <p>Quantity Threshold: <%= discount.quantity_threshold %> Items</p>
-      <%= link_to 'View Details', merchant_bulk_discount_path(@merchant.id, discount.id) %>
+      <div id="discount-<%= discount.id%>">
+        <p>ID: <%= discount.id %></p>
+        <p>Discount: <%= discount.percentage %>%</p>
+        <p>Quantity Threshold: <%= discount.quantity_threshold %> Items</p>
+        <%= link_to 'View Details', merchant_bulk_discount_path(@merchant.id, discount.id) %>
+        <%= link_to 'Delete Discount', merchant_bulk_discount_path(@merchant.id, discount.id), method: :delete %>
+      </div>
+
     <% end %>
   </div>
 </div>
