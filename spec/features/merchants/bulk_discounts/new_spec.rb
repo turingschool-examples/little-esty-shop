@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 
-RSpec.describe 'Merchant Bulk Discount Index Page' do
+RSpec.describe 'Merchant Bulk Discount New Page' do
 
   describe 'Creating a new discount' do
     it "has a link that redirects me to a form to add a new bulk discount" do

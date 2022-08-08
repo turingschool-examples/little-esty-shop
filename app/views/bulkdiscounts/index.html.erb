@@ -2,7 +2,9 @@
 
 <% @bulkdiscounts.each_with_index do |discount, i| %>
 <div id="bulk_discount<%= i %>">
-  <%= "Discount Name: #{discount.name}" %><%=link_to "#{discount.name} Show Page", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}" %>
+  <%= "Discount Name: #{discount.name}" %>
+  <%=link_to "#{discount.name} Show Page", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}" %>
+  <%=link_to "Delete Discount", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}", method: :delete, local: true %>
   <ul>
     <li><%= "Discount Percentage: #{discount.percentage}%" %></li>
     <li><%= "Discount Threshold: #{discount.threshold}%" %></li>

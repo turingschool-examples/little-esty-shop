@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/bulkdiscounts/new', to: 'bulkdiscounts#new'
   get '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#show'
   post '/merchants/:merchant_id/bulkdiscounts', to: 'bulkdiscounts#create'
+  delete '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#destroy'
 
   get '/', to: 'application#index'
 
