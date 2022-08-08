@@ -1,0 +1,13 @@
+<h1>Bulk Discounts Index</h1>
+
+<% @bulkdiscounts.each_with_index do |discount, i| %>
+<div id="bulk_discount<%= i %>">
+  <%= "Discount Name: #{discount.name}" %><%=link_to "#{discount.name} Show Page", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}" %>
+  <ul>
+    <li><%= "Discount Percentage: #{discount.percentage}%" %></li>
+    <li><%= "Discount Threshold: #{discount.threshold}%" %></li>
+  </ul>
+</div>
+<% end %>
+
+<%= link_to "Create New Bulk Discount", "/merchants/#{@merchant.id}/bulkdiscounts/new" %>

@@ -1,6 +1,6 @@
-class CreateBulkDiscounts < ActiveRecord::Migration[5.2]
+class CreateBulkdiscounts < ActiveRecord::Migration[5.2]
   def change
-    create_table :bulk_discounts do |t|
+    create_table :bulkdiscounts do |t|
       t.string :name
       t.integer :percentage
       t.integer :threshold
