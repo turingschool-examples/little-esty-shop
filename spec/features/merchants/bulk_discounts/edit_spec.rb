@@ -27,19 +27,8 @@ RSpec.describe 'Merchant Bulk Discount Edit Page' do
       click_on "Edit Discount"
 
       expect(current_path).to eq("/merchants/#{merchant_1.id}/bulkdiscounts/#{discount_a.id}/edit")
-
-
-      # expect(page).to have_content("#{discount_a.name}")
-      # expect(page).to have_content("#{discount_a.percentage}")
-      # expect(page).to have_content("#{discount_a.threshold}")
-      # #sad path
-      # expect(page).to_not have_content("#{discount_b.name}")
-      # expect(page).to_not have_content("#{discount_b.percentage}")
-      # expect(page).to_not have_content("#{discount_b.threshold}")
-      # expect(page).to_not have_content("#{discount_a2.name}")
-      # expect(page).to_not have_content("#{discount_a2.percentage}")
-      # expect(page).to_not have_content("#{discount_a2.threshold}")
     end
+
     it "has a link to let a merchant edit the discount attributes" do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
       merchant_2 = Merchant.create!(name: "Greg's Leggings")
@@ -54,23 +43,11 @@ RSpec.describe 'Merchant Bulk Discount Edit Page' do
       click_on "Edit Discount"
 
       expect(current_path).to eq("/merchants/#{merchant_1.id}/bulkdiscounts/#{discount_a.id}/edit")
-
-
-      # expect(page).to have_content("#{discount_a.name}")
-      # expect(page).to have_content("#{discount_a.percentage}")
-      # expect(page).to have_content("#{discount_a.threshold}")
-      # #sad path
-      # expect(page).to_not have_content("#{discount_b.name}")
-      # expect(page).to_not have_content("#{discount_b.percentage}")
-      # expect(page).to_not have_content("#{discount_b.threshold}")
-      # expect(page).to_not have_content("#{discount_a2.name}")
-      # expect(page).to_not have_content("#{discount_a2.percentage}")
-      # expect(page).to_not have_content("#{discount_a2.threshold}")
     end
-    
-    it "has a link to let a merchant edit the discount attributes" do
+
+    it "lets a merchant edit the attributes of a discount" do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
-      merchant_2 = Merchant.create!(name: "Greg's Leggings")
+      merchant_2= Merchant.create!(name: "Bobs Loggers")
 
       discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 10, threshold: 10)
       discount_b = merchant_1.bulkdiscounts.create!(name: "Discount B", percentage: 15, threshold: 15)
@@ -79,9 +56,24 @@ RSpec.describe 'Merchant Bulk Discount Edit Page' do
 
       visit "/merchants/#{merchant_1.id}/bulkdiscounts/#{discount_a.id}"
 
+      expect(page).to have_content("#{discount_a.name}")
+      expect(page).to have_content("#{discount_a.percentage}")
+      expect(page).to have_content("#{discount_a.threshold}")
+
       click_on "Edit Discount"
 
-      expect(current_path).to eq("/merchants/#{merchant_1.id}/bulkdiscounts/#{discount_a.id}/edit")
+      fill_in "Name", with: "Discount A1"
+      fill_in "Percentage", with: 5
+      fill_in "Threshold", with: 6
+
+      click_on "Update"
+
+      expect(current_path).to eq("/merchants/#{merchant_1.id}/bulkdiscounts/#{discount_a.id}")
+      expect(page).to have_content("Discount A1")
+      expect(page).to have_content(5)
+      expect(page).to have_content(6)
+
+      # expect(page)
 
 
       # expect(page).to have_content("#{discount_a.name}")

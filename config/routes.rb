@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/merchants/:merchant_id/bulkdiscounts', to: 'bulkdiscounts#create'
   delete '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#destroy'
   get '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id/edit', to: 'bulkdiscounts#edit'
+  patch '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#update'
 
 
   resources :merchants do
