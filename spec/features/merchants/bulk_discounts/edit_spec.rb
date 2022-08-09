@@ -38,7 +38,7 @@ RSpec.describe 'Merchant Bulk Discount Edit Page' do
       merchant_1 = Merchant.create!(name: "Bobs Loggers")
       merchant_2= Merchant.create!(name: "Bobs Loggers")
 
-      discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 10, threshold: 10)
+      discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 10, threshold: 11)
       discount_b = merchant_1.bulkdiscounts.create!(name: "Discount B", percentage: 15, threshold: 15)
       discount_c = merchant_1.bulkdiscounts.create!(name: "Discount C", percentage: 20, threshold: 20)
       discount_a2 = merchant_2.bulkdiscounts.create!(name: "Discount A2", percentage: 25, threshold: 25)
@@ -50,7 +50,7 @@ RSpec.describe 'Merchant Bulk Discount Edit Page' do
       expect(page).to have_content("#{discount_a.threshold}")
 
       click_on "Edit Discount"
-      
+
       fill_in "Name", with: "Discount A1"
       fill_in "Percentage", with: 5
       fill_in "Threshold", with: 6
@@ -62,6 +62,8 @@ RSpec.describe 'Merchant Bulk Discount Edit Page' do
       expect(page).to have_content(5)
       expect(page).to have_content(6)
 
+      expect(page).to_not have_content(10)
+      expect(page).to_not have_content(11)
     end
   end
 end
