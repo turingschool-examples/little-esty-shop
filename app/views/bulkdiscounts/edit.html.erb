@@ -1,0 +1,10 @@
+<h1>Discount Edit Page</h1>
+<%= form_with url: "/merchants/#{@merchant.id}/bulkdiscounts/#{@bulkdiscount.id}", method: :patch, local: true do |f| %>
+    <p><%= f.label :name, "Name: "%></p>
+    <%= f.text_field :name %>
+    <p><%= f.label :percentage, "Percentage: "%></p>
+    <%= f.number_field :percentage %>
+    <p><%= f.label :threshold, "Threshold of Items: "%></p>
+    <%= f.number_field :threshold %>
+    <%= f.submit "Update" %>
+    <% end %>

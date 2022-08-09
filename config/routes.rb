@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  get '/', to: 'application#index'
   #BULK DISCOUNTS
   get '/merchants/:merchant_id/bulkdiscounts', to: 'bulkdiscounts#index'
   get '/merchants/:merchant_id/bulkdiscounts/new', to: 'bulkdiscounts#new'
   get '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#show'
   post '/merchants/:merchant_id/bulkdiscounts', to: 'bulkdiscounts#create'
   delete '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#destroy'
-
-  get '/', to: 'application#index'
+  get '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id/edit', to: 'bulkdiscounts#edit'
+  patch '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#update'
 
 
   resources :merchants do
