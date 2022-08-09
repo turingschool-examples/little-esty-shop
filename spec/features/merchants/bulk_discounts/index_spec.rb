@@ -1,4 +1,5 @@
 require 'rails_helper'
+require './lib/holiday_search'
 
 RSpec.describe 'Bulk Discount Index Page' do
   it 'shows all merchant bulk discounts with attributes' do
@@ -56,10 +57,22 @@ RSpec.describe 'Bulk Discount Index Page' do
     
     within("#discount-#{discount2.id}") do
       click_on('Delete Discount')  
-      save_and_open_page
     end
     expect(current_path).to eq(merchant_bulk_discounts_path(merch1.id))
     expect(page).to_not have_content('Discount Percentage: 30%')
     expect(page).to_not have_content('Quantity Threshold: 3 Items')
+  end
+  it 'has a section for Upcoming Holidays with next 3 holidays' do
+    merch1 = Merchant.create!(name: 'Jolly Roger Imports')
+    discount1 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 20, quantity_threshold: 10)
+    discount2 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 30, quantity_threshold: 3)
+    visit merchant_bulk_discounts_path(merch1.id)
+save_and_open_page
+    within("#upcoming-holidays") do
+      expect(page).to have_content('Upcoming Holidays')
+      expect(page).to have_content('Labour Day')
+      expect(page).to have_content('Columbus Day')
+      expect(page).to have_content('Veterans Day')
+    end
   end
 end
