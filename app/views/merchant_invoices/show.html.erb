@@ -25,4 +25,11 @@
   </div>
 <% end %>
 
-
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <% @bulkdiscounts.each do |discount| %>
+  <% if invoice_item.quantity >= discount.threshold %>
+    <%= link_to "Discounts", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}" %>
+    <% else %>
+    <% end %>
+    <% end %>
+  <% end %>

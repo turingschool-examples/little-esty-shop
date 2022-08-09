@@ -7,6 +7,7 @@ class MerchantInvoicesController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:invoice_id])
+    @bulkdiscounts = @merchant.bulkdiscounts
   end
 
   def update
@@ -17,5 +18,5 @@ class MerchantInvoicesController < ApplicationController
 
     redirect_to "/merchants/#{merchant.id}/invoices/#{invoice.id}"
   end
-  
+
 end
