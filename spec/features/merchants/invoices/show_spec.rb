@@ -136,4 +136,36 @@ RSpec.describe 'merchant_invoices show page' do
         expect(page).to_not have_content("Total Discounted Revenue: $408.60")
     end
   end
+  it 'next to each invoice item is a link to the discount show page (if one was applied)' do
+    merch1 = Merchant.create!(name: 'Needful Things Imports')
+    discount1 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 10, quantity_threshold: 10)
+    customer1 = Customer.create!(first_name: 'Bob', last_name: 'Schneider')
+    customer2 = Customer.create!(first_name: 'Veruca', last_name: 'Salt')
+
+    item1 = merch1.items.create!(name: 'Phoenix Feather Wand', description: 'Ergonomic grip', unit_price: 2000)
+    item2 = merch1.items.create!(name: 'Harmonica', description: 'Makes pretty noise', unit_price: 600)
+    item3 = merch1.items.create!(name: 'Bag of Holding', description: 'This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep.', unit_price: 1000)
+    item4 = merch1.items.create!(name: 'Ring of Resonance', description: 'A ring that resonates with the Ring of Flame Lord', unit_price: 1500)
+    item5 = merch1.items.create!(name: 'Phreeoni Card', description: 'HIT + 100', unit_price: 2000)
+
+    invoice1 = customer1.invoices.create!(status: 1)
+    invoice2 = customer2.invoices.create!(status: 1)
+
+    invoice_item1 = InvoiceItem.create!(invoice: invoice1, item: item1, quantity: 10, unit_price: 2000, status: 1)
+    invoice_item2 = InvoiceItem.create!(invoice: invoice1, item: item2, quantity: 9, unit_price: 600, status: 1)
+    invoice_item3 = InvoiceItem.create!(invoice: invoice1, item: item3, quantity: 20, unit_price: 1000, status: 1)
+    invoice_item4 = InvoiceItem.create!(invoice: invoice2, item: item4, quantity: 2, unit_price: 1500, status: 1)
+    invoice_item5 = InvoiceItem.create!(invoice: invoice2, item: item5, quantity: 1, unit_price: 2000, status: 1)
+
+    visit merchant_invoice_path(merch1.id, invoice1.id)
+
+    within "#invoice-item-#{invoice_item2.id}" do
+        expect(page).to_not have_link('View Discount')
+    end
+    within "#invoice-item-#{invoice_item1.id}" do
+        expect(page).to have_link('View Discount')
+        click_on('View Discount')
+    end
+    expect(current_path).to eq(merchant_bulk_discount_path(merch1.id, discount1.id))
+  end
 end

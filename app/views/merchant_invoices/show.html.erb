@@ -8,25 +8,29 @@
 </div>
 
 <div id="invoice-item-total-revenue">
-    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %></p><br>
+    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %></p>
 </div>
 <div id="invoice-item-discounted-revenue">
-    <p>Total Discounted Revenue: <%= number_to_currency(@invoice.total_discounted_revenue/100) %></p><br>
+    <p>Total Discounted Revenue: <%= number_to_currency(@invoice.total_discounted_revenue/100) %></p>
 </div>
 
 <div id="invoice-item-information">
     <% @invoice.invoice_items.each do |invoice_item|%>
-        <h3><%="Item Name: #{invoice_item.item.name}"%></h3>
-        <p><%="Quantity Ordered: #{invoice_item.quantity}"%></p>
-        <p><%="Price: #{number_to_currency(invoice_item.unit_price/100)}"%></p>
-        <p><%="Status: #{invoice_item.status}"%></p>
-
-        <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
-            <%= form.label :status %>
-            <%= form.select :status, ['pending', 'packaged', 'shipped'] %>
-            <%= form.hidden_field :invoice_item_id, value: invoice_item.id  %>
-            <%= form.submit "Update Item Status" %>
-        <% end %>
+        <div id="invoice-item-<%=invoice_item.id %>">
+            <h3><%="Item Name: #{invoice_item.item.name}"%></h3>
+            <p><%="Quantity Ordered: #{invoice_item.quantity}"%></p>
+            <p><%="Price: #{number_to_currency(invoice_item.unit_price/100)}"%></p>
+            <p><%="Status: #{invoice_item.status}"%></p>
+            <% if (!invoice_item.bulk_discount_percentage.nil?)  %>
+                <p><%= link_to 'View Discount', merchant_bulk_discount_path(@merchant.id, invoice_item.bulk_discount_percentage) %></p>
+            <% end %>
+            <%= form_with url: merchant_invoice_path(@merchant.id,@invoice.id), method: :patch, local: true do |form| %>
+                <%= form.label :status %>
+                <%= form.select :status, ['pending', 'packaged', 'shipped'] %>
+                <%= form.hidden_field :invoice_item_id, value: invoice_item.id  %>
+                <%= form.submit "Update Item Status" %>
+            <% end %>
+        </div>
     <% end %>
 </div>
 
