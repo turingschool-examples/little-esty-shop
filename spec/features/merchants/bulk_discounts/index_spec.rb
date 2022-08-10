@@ -56,7 +56,7 @@ RSpec.describe 'Bulk Discount Index Page' do
     visit merchant_bulk_discounts_path(merch1.id)
     
     within("#discount-#{discount2.id}") do
-      click_on('Delete Discount')  
+      click_on('Delete Discount')
     end
     expect(current_path).to eq(merchant_bulk_discounts_path(merch1.id))
     expect(page).to_not have_content('Discount Percentage: 30%')
@@ -67,7 +67,7 @@ RSpec.describe 'Bulk Discount Index Page' do
     discount1 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 20, quantity_threshold: 10)
     discount2 = BulkDiscount.create!(merchant_id: merch1.id, percentage: 30, quantity_threshold: 3)
     visit merchant_bulk_discounts_path(merch1.id)
-save_and_open_page
+# save_and_open_page
     within("#upcoming-holidays") do
       expect(page).to have_content('Upcoming Holidays')
       expect(page).to have_content('Labour Day')

@@ -7,11 +7,18 @@
     <p>Customer: <%= @invoice.customer_name %></p><br>
 </div>
 
+<div id="invoice-item-total-revenue">
+    <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %></p><br>
+</div>
+<div id="invoice-item-discounted-revenue">
+    <p>Total Discounted Revenue: <%= number_to_currency(@invoice.total_discounted_revenue/100) %></p><br>
+</div>
+
 <div id="invoice-item-information">
-    <%= @invoice.invoice_items.each do |invoice_item|%>
+    <% @invoice.invoice_items.each do |invoice_item|%>
         <h3><%="Item Name: #{invoice_item.item.name}"%></h3>
         <p><%="Quantity Ordered: #{invoice_item.quantity}"%></p>
-        <p><%="Price: #{number_to_currency(invoice_item.unit_price)}"%></p>
+        <p><%="Price: #{number_to_currency(invoice_item.unit_price/100)}"%></p>
         <p><%="Status: #{invoice_item.status}"%></p>
 
         <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
@@ -23,7 +30,5 @@
     <% end %>
 </div>
 
-<div id="invoice-item-total-revenue">
-   <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></p><br>
-</div>
+
 

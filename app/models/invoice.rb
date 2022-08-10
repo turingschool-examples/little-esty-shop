@@ -4,7 +4,8 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
-
+  has_many :merchants, through: :items
+  has_many :bulk_discounts, through: :merchants
   belongs_to :customer
 
   def formatted_date
@@ -25,6 +26,10 @@ class Invoice < ApplicationRecord
 
   def total_revenue
     invoice_items.sum('quantity * unit_price')
+  end
+
+  def total_discounted_revenue
+    invoice_items.sum(&:discounted_revenue)
   end
 end
 

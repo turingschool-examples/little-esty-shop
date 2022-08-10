@@ -7,8 +7,6 @@ RSpec.describe 'admin merchant edit page' do
 
     visit edit_admin_merchant_path(merchant1)
 
-    # save_and_open_page
-
     expect(page).to have_field('Name', with: "Trader Joes")
   end
 

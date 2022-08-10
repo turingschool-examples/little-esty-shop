@@ -84,6 +84,9 @@ GEM
     ffi (1.15.5-x86-mingw32)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    httparty (0.20.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -107,11 +110,15 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.16.2)
     msgpack (1.5.4)
     msgpack (1.5.4-java)
+    multi_xml (0.6.0)
     nio4r (2.5.8)
     nio4r (2.5.8-java)
     nokogiri (1.13.8)
@@ -276,6 +283,7 @@ DEPENDENCIES
   bootstrap (~> 5.2)
   capybara
   coffee-rails (~> 4.2)
+  httparty
   jbuilder (~> 2.5)
   jquery-rails
   launchy
