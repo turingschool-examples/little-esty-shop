@@ -1,4 +1,12 @@
-<h1><%= "#{@bulkdiscount.name} Show Page" %> </h1>
+<div class="flex-container">
+  <h1><%= "#{@bulkdiscount.name} Show Page" %> </h1>
+  <div id='nav'>
+    <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th>&emsp;
+    <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th>&emsp;
+    <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>&emsp;
+    <th><%= link_to "My Discounts", "/merchants/#{@merchant.id}/bulkdiscounts" %></th>
+  </div>
+</div>
 <h3>Discount Info</h3>
 <%= "Discount Percentage: #{@bulkdiscount.percentage}%" %><br>
 <%= "Discount Threshold: #{@bulkdiscount.threshold}" %><br>

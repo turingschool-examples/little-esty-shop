@@ -5,7 +5,8 @@
     <div id='nav'>
       <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th>&emsp;
       <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th>&emsp;
-      <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>
+      <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>&emsp;
+      <th><%= link_to "My Discounts", "/merchants/#{@merchant.id}/bulkdiscounts" %></th>
     </div>
 </div>
 
@@ -14,6 +15,7 @@
 <%= render "invoice_show/show" %>
 
 <% @invoice.items.each do |item| %>
+
   <div id="items-<%= item.id %>">
     <h3>Item: <%= item.name %></h3>
     <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>

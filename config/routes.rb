@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   delete '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#destroy'
   get '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id/edit', to: 'bulkdiscounts#edit'
   patch '/merchants/:merchant_id/bulkdiscounts/:bulkdiscount_id', to: 'bulkdiscounts#update'
-
+  get '/merchants', to: 'merchants#index'
 
   resources :merchants do
     get '/invoices', to: 'merchant_invoices#index'

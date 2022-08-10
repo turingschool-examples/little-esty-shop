@@ -88,5 +88,98 @@ RSpec.describe Invoice do
       expect(Invoice.incomplete_invoices.count).to eq(4)
       expect(Invoice.incomplete_invoices).to eq([invoice_1, invoice_2, invoice_3, invoice_5])
     end
+    describe '#discounted' do
+      it "selects the only applicable discount" do
+        merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+        item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+        item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+        item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+
+        customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+        invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_2 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_3 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
+        invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
+        invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 150, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+
+        discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 10, threshold: 10)
+        discount_b = merchant_1.bulkdiscounts.create!(name: "Discount B", percentage: 15, threshold: 15)
+
+        expect(invoice_3.discounted.to_i).to eq(100)
+      end
+
+      it "selects the best discount and only applies that discount" do
+        merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+        item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+        item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+        item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+
+        customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+        invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_2 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_3 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 15, unit_price: 100, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
+        invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1400, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
+        invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 150, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+
+        discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 10, threshold: 10)
+        discount_b = merchant_1.bulkdiscounts.create!(name: "Discount B", percentage: 20, threshold: 15)
+
+        expect(invoice_3.discounted.to_i).to eq(300)
+      end
+
+      it "can apply the same discount to different items" do
+        merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+        item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+        item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+        item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+
+        customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+        invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_2 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_3 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
+        invoice_item_2 = InvoiceItem.create!(quantity: 3, unit_price: 150, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
+        invoice_item_3 = InvoiceItem.create!(quantity: 10, unit_price: 1000, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+
+        discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 10, threshold: 10)
+        discount_b = merchant_1.bulkdiscounts.create!(name: "Discount B", percentage: 20, threshold: 20)
+
+        expect(invoice_3.discounted.to_i).to eq(1100)
+      end
+
+      it "can apply different discounts to different items" do
+        merchant_1 = Merchant.create!(name: "Bobs Loggers")
+
+        item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
+        item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
+        item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
+
+        customer_1 = Customer.create!(first_name: "David", last_name: "Smith")
+
+        invoice_1 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_2 = Invoice.create!(status: 0, customer_id: customer_1.id)
+        invoice_3 = Invoice.create!(status: 0, customer_id: customer_1.id)
+
+        invoice_item_1 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 0, item_id: item_1.id, invoice_id: invoice_3.id)
+        invoice_item_2 = InvoiceItem.create!(quantity: 3, unit_price: 150, status: 0, item_id: item_2.id, invoice_id: invoice_2.id)
+        invoice_item_3 = InvoiceItem.create!(quantity: 5, unit_price: 1000, status: 0, item_id: item_3.id, invoice_id: invoice_3.id)
+
+        discount_a = merchant_1.bulkdiscounts.create!(name: "Discount A", percentage: 5, threshold: 5)
+        discount_b = merchant_1.bulkdiscounts.create!(name: "Discount B", percentage: 10, threshold: 10)
+
+        expect(invoice_3.discounted.to_i).to eq(350)
+      end
+    end
   end
 end

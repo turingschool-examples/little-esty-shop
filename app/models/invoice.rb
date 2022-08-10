@@ -10,10 +10,10 @@ class Invoice < ApplicationRecord
   enum status: { "in progress" => 0, "cancelled" => 1, "completed" => 2 }
 
   def self.incomplete_invoices
-  joins(:invoice_items)
-  .where.not(invoice_items: { status: 2 })
-  .order(:created_at)
-  .distinct
+    joins(:invoice_items)
+    .where.not(invoice_items: { status: 2 })
+    .order(:created_at)
+    .distinct
   end
 
   def total_revenue
@@ -23,7 +23,7 @@ class Invoice < ApplicationRecord
   def discounted
     invoice_items.joins(merchants: :bulkdiscounts)
     .where('invoice_items.quantity >= bulkdiscounts.threshold')
-    .select('invoice_items.id, sum(invoice_items.quantity * invoice_items.unit_price * (bulkdiscounts.percentage / 100.0)) as total_discount')
+    .select('invoice_items.id, max(invoice_items.quantity * invoice_items.unit_price * (bulkdiscounts.percentage / 100.0)) as total_discount')
     .group('invoice_items.id')
     .sum(&:total_discount)
   end

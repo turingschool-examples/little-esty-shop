@@ -1,0 +1,7 @@
+<h1>Merchant Index Page</h1>
+
+This page shows all the merchants in the database, with a link to their dashboard.
+
+<% @merchants.each do |merchant| %>
+  <%=link_to "#{merchant.name} - ##{merchant.id}", "/merchants/#{merchant.id}/dashboard" %><br>
+<% end %>
