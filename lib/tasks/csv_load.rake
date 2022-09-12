@@ -9,6 +9,7 @@ namespace :csv_load do
         Merchant.create!(row.to_hash)
       end
       ActiveRecord::Base.connection.reset_pk_sequence!(:merchants)
+      puts "'Merchants' Complete"
     end
 
     task :items => :environment do
@@ -17,6 +18,7 @@ namespace :csv_load do
         Item.create!(row.to_hash)
       end
       ActiveRecord::Base.connection.reset_pk_sequence!(:items)
+      puts "'Items' Complete"
     end
 
     task :customers => :environment do
@@ -25,30 +27,37 @@ namespace :csv_load do
         Customer.create!(row.to_hash)
       end
       ActiveRecord::Base.connection.reset_pk_sequence!(:customers)
+      puts "'Customers' Complete"
     end
 
     task :invoices => :environment do
       file = './db/data/invoices.csv'
       CSV.foreach(file, :headers => true) do |row|
-        Invoice.create!(row.to_hash)
+        row["status"] = row["status"].titleize
+          Invoice.create!(row.to_hash)
       end
       ActiveRecord::Base.connection.reset_pk_sequence!(:invoices)
+      puts "'Invoices' Complete"
     end
 
     task :invoice_items => :environment do
       file = './db/data/invoice_items.csv'
       CSV.foreach(file, :headers => true) do |row|
+        row["status"] = row["status"].titleize
         InvoiceItem.create!(row.to_hash)
       end
       ActiveRecord::Base.connection.reset_pk_sequence!(:invoice_items)
+      puts "'Invoice Items' Complete"
     end
 
     task :transactions => :environment do
       file = './db/data/transactions.csv'
       CSV.foreach(file, :headers => true) do |row|
+        row["result"] = row["result"].titleize
         Transaction.create!(row.to_hash)
       end
       ActiveRecord::Base.connection.reset_pk_sequence!(:transactions)
+      puts "'Transactions' Complete"
     end
 
     task delete_all: :environment do
