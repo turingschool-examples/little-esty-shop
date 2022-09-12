@@ -1,5 +1,7 @@
 # Little Esty Shop
 
+### Group Project with Sandy, Aleisha, Erik, and Ken
+
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
