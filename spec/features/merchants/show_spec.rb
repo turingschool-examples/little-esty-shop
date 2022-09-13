@@ -7,7 +7,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it 'Then I see the name of my merchant' do
         @earring_city = Merchant.create!(name: "Earring City" )
 
-        visit "/merchants/#{@earring_city}/dashboard"
+        visit "/merchants/#{@earring_city.id}/dashboard"
         expect(page).to have_content('Earring City')
       end
 

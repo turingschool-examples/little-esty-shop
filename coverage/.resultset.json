@@ -13,7 +13,7 @@
           1,
           null,
           1,
-          0,
+          1,
           null,
           null,
           null,
@@ -365,6 +365,11 @@
         "lines": [
           1,
           null,
+          1,
+          1,
+          null,
+          null,
+          1,
           null
         ]
       },
@@ -388,8 +393,30 @@
           1,
           null
         ]
+      },
+      "/Users/akneiling/Turing/2module/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/akneiling/Turing/2module/projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1663104551
+    "timestamp": 1663105127
   }
 }
