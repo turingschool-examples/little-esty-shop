@@ -45,6 +45,7 @@ group :development, :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'launchy'
+  gem 'faker'
 end
 
 group :development do
