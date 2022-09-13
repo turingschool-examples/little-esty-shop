@@ -9,6 +9,7 @@ RSpec.describe(InvoiceItem, type: :model) do
   end
 
   it 'has an enum for status' do
-    expect(invoice_item.status).to eq(1)
+    expect(invoice_item.status).to be_a(String)
+    expect(invoice_item.status).to_not eq(nil)
   end
 end
