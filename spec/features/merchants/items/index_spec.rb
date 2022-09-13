@@ -37,6 +37,7 @@ RSpec.describe 'Merchant Items Index' do
 
     #   expect(current_path).to eq(merchant_item_path(carly, licorice))
     # end
+
   end
 end
 
