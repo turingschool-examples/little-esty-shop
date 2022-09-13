@@ -90,6 +90,14 @@ namespace :csv_load do
     end
   end
 
+  desc "Scorched Earth" 
+  task :pk_reset => :environment do
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
+    end
+  end
+
   desc "csv load all"
-  task :all => [:customers, :invoice_items, :invoices, :items, :merchants, :transactions]
+  task :all => [:customers, :invoices, :merchants, :items, :transactions, :invoice_items, :pk_reset]
 end
+
