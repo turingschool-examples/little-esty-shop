@@ -22,15 +22,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_034244) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "invoices", force: :cascade do |t|
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "customer_id"
-    t.index ["customer_id"], name: "index_invoices_on_customer_id"
-  end
-
-  create_table "invoices_items", force: :cascade do |t|
+  create_table "invoice_items", force: :cascade do |t|
     t.bigint "item_id"
     t.bigint "invoice_id"
     t.integer "quantity"
@@ -38,8 +30,16 @@ ActiveRecord::Schema.define(version: 2022_09_13_034244) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["invoice_id"], name: "index_invoices_items_on_invoice_id"
-    t.index ["item_id"], name: "index_invoices_items_on_item_id"
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+    t.index ["item_id"], name: "index_invoice_items_on_item_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_invoices_on_customer_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 2022_09_13_034244) do
     t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
   end
 
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoice_items", "items"
   add_foreign_key "invoices", "customers"
-  add_foreign_key "invoices_items", "invoices"
-  add_foreign_key "invoices_items", "items"
   add_foreign_key "items", "merchants"
   add_foreign_key "transactions", "invoices"
 end
