@@ -9,4 +9,5 @@ class Invoice < ApplicationRecord
 
   validates_presence_of :customer_id
   validates_presence_of :status
+  validates_numericality_of :customer_id
 end
