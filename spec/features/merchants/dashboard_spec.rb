@@ -187,6 +187,72 @@ RSpec.describe 'Merchant dashboard' do
           expect(page).to_not have_content(item_3)
         end
       end
+
+      it 'next to each items name is the id of the invoice that ordered that item as a link to that invoice show page ' do
+        merch_1 = Merchant.create!(name: "Bing Crosby")
+        item_1 = merch_1.items.create!(name: "Greatest Hits", description: "A CD", unit_price: 1500)
+        item_2 = merch_1.items.create!(name: "Christmas Hits", description: "A CD", unit_price: 1500)
+        item_3 = merch_1.items.create!(name: "Easter Hits", description: "A CD", unit_price: 1500)
+        cust_1 = Customer.create!(first_name: "Joe", last_name: "Ives")
+        inv_1 = cust_1.invoices.create!(status: 1)
+        inv_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: inv_1.id, quantity: 1, unit_price: 1500, status: 0)
+        cust_2 = Customer.create!(first_name: "Fred", last_name: "Pot")
+        inv_2 = cust_2.invoices.create!(status: 1)
+        inv_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: inv_2.id, quantity: 1, unit_price: 1500, status: 1)
+        cust_3 = Customer.create!(first_name: "Jane", last_name: "Kettle")
+        inv_3 = cust_3.invoices.create!(status: 1)
+        inv_item_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: inv_3.id, quantity: 1, unit_price: 1500, status: 2)
+        #ordered means invoice has been made, and therefore a record in invoice_items exists
+        #not yet been shipped means invoice_item status is NOT 2
+
+        visit "/merchants/#{merch_1.id}/dashboard"
+
+        items_to_ship = [item_1, item_2]
+        within "#items_to_ship" do
+          items_to_ship.each do |item|
+            within "#item_#{item.id}" do
+              item_invoice_id = item.invoices.where.not(status: 2).first.id
+              expect(page).to have_link("invoice #{item_invoice_id}")
+              #possibly add click link test once merchant invoice show page has been added
+            end
+          end
+          expect(page).to_not have_link("invoice #{inv_3.id}")
+        end
+      end
+
+      it 'has the date that the invoice was created next to the item name' do
+        merch_1 = Merchant.create!(name: "Bing Crosby")
+        item_1 = merch_1.items.create!(name: "Greatest Hits", description: "A CD", unit_price: 1500)
+        item_2 = merch_1.items.create!(name: "Christmas Hits", description: "A CD", unit_price: 1500)
+        item_3 = merch_1.items.create!(name: "Easter Hits", description: "A CD", unit_price: 1500)
+        cust_1 = Customer.create!(first_name: "Joe", last_name: "Ives")
+        inv_1 = cust_1.invoices.create!(status: 1)
+        inv_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: inv_1.id, quantity: 1, unit_price: 1500, status: 0)
+        cust_2 = Customer.create!(first_name: "Fred", last_name: "Pot")
+        inv_2 = cust_2.invoices.create!(status: 1)
+        inv_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: inv_2.id, quantity: 1, unit_price: 1500, status: 1)
+        cust_3 = Customer.create!(first_name: "Jane", last_name: "Kettle")
+        inv_3 = cust_3.invoices.create!(status: 1)
+        inv_item_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: inv_3.id, quantity: 1, unit_price: 1500, status: 2)
+        #ordered means invoice has been made, and therefore a record in invoice_items exists
+        #not yet been shipped means invoice_item status is NOT 2
+
+        visit "/merchants/#{merch_1.id}/dashboard"
+
+        items_to_ship = [item_1, item_2]
+        within "#items_to_ship" do
+          items_to_ship.each do |item|
+            within "#item_#{item.id}" do
+              expect(page).to have_content(item.name)
+            end
+          end
+          expect(page).to_not have_content(item_3)
+        end
+      end
+      
+      it 'has the invoices sorted by least recently created first' do
+
+      end
     end
   end
 end
