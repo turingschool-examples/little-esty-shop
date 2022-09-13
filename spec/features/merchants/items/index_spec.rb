@@ -28,6 +28,16 @@ RSpec.describe 'Merchant Items Index' do
       expect(page).to_not have_content(skooter.name)
       expect(page).to_not have_content(rider.name)
     end
+
+    # commented out because merchant items show tests this exactly. up to interpretation which spec it belongs in!
+    # it 'items link to merchant item show page' do
+    #   visit merchant_items_path(carly)
+
+    #   click_on licorice.name
+
+    #   expect(current_path).to eq(merchant_item_path(carly, licorice))
+    # end
+
   end
 end
 

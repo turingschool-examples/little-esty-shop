@@ -5,7 +5,7 @@
 <ul>
   <% @merchant.items.each do |item| %>
     <li>
-      <%= item.name %>
+      <%= link_to item.name, merchant_item_path(@merchant, item) %>
     </li>
   <% end %>
 </ul>
