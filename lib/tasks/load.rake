@@ -1,10 +1,9 @@
 require "csv"
 
-
 namespace(:csv_load) do
   desc("This task loads a customers csv to the seed file")
 
-  task(  customers: :environment) do
+  task(customers: :environment) do
     CSV.foreach(Rails.root.join("db/data/customers.csv"),     headers: true) do |row|
       Customer.create!({id: row[0], first_name: row[1], last_name: row[2]})
     end
@@ -51,6 +50,14 @@ namespace(:csv_load) do
         unit_price: row[3],
         merchant_id: row[5],
       })
+    end
+  end
+
+  desc("This task loads a merchant csv to the seed file")
+  task(merchants: :environment) do
+    CSV.foreach(Rails.root.join("db/data/merchants.csv"), headers: true) do |row|
+      # ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+      Merchant.create!({id: row[0], name: row[1]})
     end
   end
 end
