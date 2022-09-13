@@ -11,20 +11,21 @@ RSpec.describe "Admin Dashboard" do
 
       it "will show a link to the admin merchants index (/admin/merchants)and invoices index (/admin/invoices)" do
         visit admins_path
-        expect(page).to have_link("Merchants Index")
+        
+        expect(page).to have_link("Merchant Index")
         expect(page).to have_link("Invoice Index")
       end
 
       it "will have working links to the merchants" do
         visit admins_path
-        click_on "Merchants Index"
-        expect(current_path).to be("/admins/merchants")
+        click_on "Merchant Index"
+        expect(current_path).to eq("/admins/merchants")
       end
 
       it "will have working links to the invoice indexs" do
         visit admins_path
         click_on "Invoice Index"
-        expect(current_path).to be("/admins/invoices")
+        expect(current_path).to eq("/admins/invoices")
       end
     end
   end

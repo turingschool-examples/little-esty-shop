@@ -4,4 +4,8 @@ class AdminsController < ApplicationController
     
   end
 
+  def show
+    
+  end
+
 end
