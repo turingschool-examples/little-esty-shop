@@ -6,6 +6,5 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
             visit("/admin")
             expect(page).to have_content("Admin Dashboard")
         end
-        
     end
 end
