@@ -1,0 +1,25 @@
+<html>
+<head>
+<style>
+p.groove {border-style: groove;}
+</style>
+</head>
+<body>
+
+<h1> Little Esty Shop </h1> <br>
+<br>
+<br>
+<h3> <%= @merchant.name %> Jewlery </h3>
+<br>
+<br>
+<br>
+<p class="groove">My Items</p>
+<br>
+<br>
+<h5> Items </h5>
+
+<div class="items">
+  <% @merchant.items.each do |item| %>
+    <%= item.name %>
+  <% end %>
+</div>
