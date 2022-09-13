@@ -40,9 +40,16 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         expect(current_path).to eq(merchant_invoices_path("#{carly.id}"))
       end
 
+      it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+
+      end
+
+      it 'And next to each customer name I see the number of successful transactions they have
+      conducted with my merchant' do
+      
+      end
+
     end
   end
 end
-
-
 
