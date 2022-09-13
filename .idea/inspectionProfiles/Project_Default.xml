@@ -1,0 +1,9 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Rubocop" enabled="false" level="WARNING" enabled_by_default="false" editorAttributes="INFO_ATTRIBUTES">
+      <option name="myRunRubocopOnSave" value="true" />
+    </inspection_tool>
+    <inspection_tool class="RubyStringKeysInHashInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+  </profile>
+</component>
