@@ -25,19 +25,19 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it 'Then I see link to my merchant items index (/merchants/merchant_id/items)' do
 
         visit "/merchants/#{carly.id}/dashboard"
-        # save_and_open_page
+
         expect(page).to have_content("#{carly.name}'s Items")
         click_on("#{carly.name}'s Items")
         expect(current_path).to eq(merchant_items_path("#{carly.id}"))
       end
 
-      xit 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
+      it 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
 
-        visit "/merchants/#{@earring_city.id}/dashboard"
+        visit "/merchants/#{carly.id}/dashboard"
 
         expect(page).to have_content("#{carly.name}'s Invoices")
-        click_on("#{carly.name} Items")
-        expect(current_path).to eq(merchant_invoices)
+        click_on("#{carly.name}'s Invoices")
+        expect(current_path).to eq(merchant_invoices_path("#{carly.id}"))
       end
 
     end
