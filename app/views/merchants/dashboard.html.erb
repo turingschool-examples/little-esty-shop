@@ -10,3 +10,11 @@
       <li id="customer_<%=customer.id%>"><%=customer.first_name%> <%=customer.last_name%>, Successful Transactions: <%= customer.transac_count %></li>
     <% end %>
 </div>  
+
+<div id="items_to_ship">
+  <h2>Items Ready to Ship</h2>
+  <ul>
+    <% @items_to_ship.each do |item| %>
+      <li id="item_<%=item.id%>"><%=item.name%> ordered by invoice </li>
+    <% end %>
+</div>  
