@@ -15,10 +15,10 @@ RSpec.describe Invoice, type: :model do
     it { should have_many :transactions }
   end
     
-  it 'works' do
-      customer = Customer.create!(first_name: "Jim", last_name: "Lahey")
-      x = customer.invoices.create(attributes_for(:invoice))
-      binding.pry
+  it 'instantiates with factorybot' do
+      customer = create(:customer)
+      invoice = customer.invoices.create(attributes_for(:invoice))
+      
   end
 
   end
