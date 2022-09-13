@@ -33,7 +33,24 @@ namespace(:csv_load) do
     CSV.foreach(Rails.root.join("db/data/invoices.csv"),     headers: true) do |row|
 
       # ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
-      Invoice.create!({id: row[0], customer_id: row[1], status: row[2]})
+      Invoice.create!({
+        id: row[0], 
+        customer_id: row[1], 
+        status: row[2]})
+    end
+  end
+
+  task items: :environment do
+    CSV.foreach Rails.root.join("db/data/items.csv"), headers: true do |row|
+
+      # ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+      Item.create!({
+        id: row[0],
+        name: row[1],
+        description: row[2],
+        unit_price: row[3],
+        merchant_id: row[5],
+      })
     end
   end
 end
