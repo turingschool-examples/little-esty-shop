@@ -11,5 +11,21 @@ RSpec.describe "merchant dashboard" do
       expect(page).to have_content(bob.name)
       expect(page).to_not have_content(sue.name)
     end
+
+    it 'I see link to my merchant items index' do
+      bob = Merchant.create!(name: "Bob's Soaps")
+      
+      visit merchant_dashboards_path(bob)
+
+      expect(page).to have_link("Merchant Items")
+    end
+
+    it 'I see link to my merchant invoices index' do
+      bob = Merchant.create!(name: "Bob's Soaps")
+
+      visit merchant_dashboards_path(bob)
+
+      expect(page).to have_link("Merchant Invoices")
+    end
   end
 end
