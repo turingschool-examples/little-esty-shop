@@ -24,4 +24,15 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
       expect(page).to have_link("Invoices")
     end
   end
+
+  it "Then I see the names of the top 5 customers who have conducted the largest number of successful transactions" do
+    visit admin_index_path
+
+    expect(page).to have_content()
+
+  end
+
+  it "And next to each customer name I see the number of successful transactions they have conducted" do
+
+  end
 end
