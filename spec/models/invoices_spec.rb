@@ -7,4 +7,8 @@ RSpec.describe(Invoice, type: :model) do
   it("is an instance of invoice") do
     expect(invoice).to(be_instance_of(Invoice))
   end
+
+  describe 'relationships' do
+    it { should have_many :transactions }
+  end
 end
