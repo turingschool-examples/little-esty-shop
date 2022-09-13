@@ -1,7 +1,7 @@
 class MerchantsController < ApplicationController
   def dashboard
     @merchant = Merchant.find(params[:id])
-    @favorite_customers = @merchant.items.favorite_customers
+    @favorite_customers = Customer.favorite_customers(params[:id])
   end
 
   private
