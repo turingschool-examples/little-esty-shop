@@ -11,6 +11,11 @@ RSpec.describe(Invoice, type: :model) do
     it {should have_many(:items).through(:invoice_items)}
   end
 
+  describe 'validations' do
+    it {should validate_presence_of(:customer_id)}
+    it {should validate_presence_of(:status)}
+  end
+
   it("is an instance of invoice") do
     expect(invoice).to(be_instance_of(Invoice))
   end
