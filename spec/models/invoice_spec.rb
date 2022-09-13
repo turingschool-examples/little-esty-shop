@@ -14,4 +14,11 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many :transactions }
   end
-end
+    
+  it 'works' do
+      customer = Customer.create!(first_name: "Jim", last_name: "Lahey")
+      x = customer.invoices.create(attributes_for(:invoice))
+      binding.pry
+  end
+
+  end
