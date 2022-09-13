@@ -1,1 +1,4 @@
 <div id="merchant_name"><%=@merchant.name%></div>
+
+<%= link_to "Go To Merchant Items Index", "/merchants/#{@merchant.id}/items"%>
+<%= link_to "Go To Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices"%>
