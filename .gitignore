@@ -31,3 +31,6 @@
 
 # Ignore MacOS
 .DS_Store
+
+# Dom's crap
+.idea
