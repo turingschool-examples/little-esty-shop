@@ -1,5 +1,8 @@
 <h1>Merchant Item Show Page</h1>
 
+<p><%= flash.notice %></p>
+
 <h2><%= @item.name %></h2>
 <p>Description: <%= @item.description %></p>
 <p>Current Price: <%= @item.unit_price %></p>
+<p><%= link_to "Update", edit_merchant_item_path(@item.merchant, @item) %></p>
