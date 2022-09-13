@@ -2,7 +2,7 @@ require 'csv'
 namespace :csv_load do
   desc 'customers'
   task :customers => :environment do
-    
+
     CSV.foreach('./db/data/customers.csv', headers: true) do |row|
       Customer.create!({
         id:  row[0],
@@ -16,7 +16,7 @@ namespace :csv_load do
 
   desc 'invoice items'
   task :invoice_items => :environment do
-    
+
     CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
       InvoiceItem.create!({
         id:  row[0],
@@ -33,7 +33,7 @@ namespace :csv_load do
 
   desc 'invoices'
   task :invoices => :environment do
-    
+
     CSV.foreach('./db/data/invoices.csv', headers: true) do |row|
       Invoice.create!({
         id:  row[0],
@@ -76,7 +76,7 @@ namespace :csv_load do
 
   desc 'transactions'
   task :transactions => :environment do
-    
+
     CSV.foreach('./db/data/transactions.csv', headers: true) do |row|
       Transaction.create!({
         id:  row[0],
@@ -90,7 +90,7 @@ namespace :csv_load do
     end
   end
 
-  desc "Scorched Earth" 
+  desc "Scorched Earth"
   task :pk_reset => :environment do
     ActiveRecord::Base.connection.tables.each do |t|
       ActiveRecord::Base.connection.reset_pk_sequence!(t)
@@ -100,4 +100,3 @@ namespace :csv_load do
   desc "csv load all"
   task :all => [:customers, :invoices, :merchants, :items, :transactions, :invoice_items, :pk_reset]
 end
-
