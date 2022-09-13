@@ -27,7 +27,10 @@
 /config/master.key
 
 # Ignore Coverage
-.coverage
+coverage
 
 # Ignore MacOS
 .DS_Store
+
+# Dom's crap
+.idea
