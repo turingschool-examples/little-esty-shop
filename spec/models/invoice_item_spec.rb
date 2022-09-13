@@ -7,4 +7,8 @@ RSpec.describe(InvoiceItem, type: :model) do
   it("is an instance of invoice_item") do
     expect(invoice_item).to(be_instance_of(InvoiceItem))
   end
+
+  it 'has an enum for status' do
+    expect(invoice_item.status).to eq(1)
+  end
 end
