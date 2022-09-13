@@ -2,3 +2,11 @@
 
 <%= link_to "Go To Merchant Items Index", "/merchants/#{@merchant.id}/items"%>
 <%= link_to "Go To Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices"%>
+
+<div id=" favorite_customers">
+  <h2>Favorite Customers</h2>
+  <ol>
+    <% @favorite_customers.each do |customer| %>
+      <li><%=customer.first_name%> <%=customer.last_name%></li>
+    <% end %>
+</div>  
