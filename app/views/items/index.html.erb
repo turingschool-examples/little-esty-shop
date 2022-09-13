@@ -1,0 +1,11 @@
+<h1>Merchant Items Index</h1>
+
+<h2><%= @merchant.name %></h2>
+<h3>Items</h3>
+<ul>
+  <% @merchant.items.each do |item| %>
+    <li>
+      <%= link_to item.name, merchant_item_path(@merchant, item) %>
+    </li>
+  <% end %>
+</ul>
