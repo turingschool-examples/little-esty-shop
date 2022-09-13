@@ -1,7 +1,7 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-Rails.application.load_tasks
+# # Rails.application.load_tasks
 
-# Rake::Task[task_name].invoke
+# # Rake::Task[task_name].invoke
 
-# Rake::Task[csv_load:customers].invoke
+# # Rake::Task[csv_load:customers].invoke
