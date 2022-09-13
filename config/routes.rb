@@ -6,4 +6,7 @@ Rails.application.routes.draw do
     resources :invoices
   end
 
+  get '/merchants/:id/dashboard', to: 'merchants#show'
+
+
 end
