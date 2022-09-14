@@ -106,7 +106,7 @@ RSpec.describe Merchant, type: :model do
     describe '#transactions_top_5' do
      it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
 
-      expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Whitney", "Alaina", "Eddie", "Ryan", "Leah"])
+      expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Whitney", "Alaina", "Eddie", "Polina", "Ryan"])
      end
     end
   end
