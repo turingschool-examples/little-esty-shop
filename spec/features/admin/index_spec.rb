@@ -7,7 +7,8 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
     let!(:invoice2) { joey.invoices.create!(status: 1) }
     let!(:invoice3) { joey.invoices.create!(status: 0) }
     let!(:invoice4) { joey.invoices.create!(status: 2) }
-
+    # let!(:item1) { invoice1.items.create!(status: 2) }
+    # let!(:item2) { invoice4.items.create!(status: 2) }
     describe 'Header' do
         it 'indicates admin is on the dashboard' do
             visit("/admin")
