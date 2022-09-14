@@ -16,4 +16,7 @@ class Customer < ApplicationRecord
     .limit(5)
   end
 
+  def successful_transactions
+    transactions.count{|transaction| transaction.result == "success"}
+  end
 end
