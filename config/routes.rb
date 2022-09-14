@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   
   get '/merchants/:id/dashboard', to: 'merchants#dashboard'
   get '/merchants/:id/items', to: 'merchants#items_index'
-  get '/merchants/:id/items/:id', to: 'merchants#items_show'
+  get '/merchants/:merchant_id/items/:merchant_item_id', to: 'merchants#items_show'
   get '/merchants/:merchant_id/items/:merchant_item_id/edit', to: 'merchants#items_edit'
-  patch '/merchants/:id/items/:id', to: 'merchants#items_update'
+  patch '/merchants/:merchant_id/items/:merchant_item_id', to: 'merchants#items_update'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
-   resources :invoices, only: %i[:index, :show, :update]
+   resources :invoices, only: [:index, :show, :update]
    resources :merchants, only: [:index, :show, :edit, :update]
  end
 
