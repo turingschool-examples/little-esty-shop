@@ -4,5 +4,9 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
-  enum status: [ :in_progress, :completed, :cancelled ]
+  enum status: ["in progress", "completed", "cancelled"]
+
+  def customer_name
+    customer.first_name + ' ' + customer.last_name
+  end
 end
