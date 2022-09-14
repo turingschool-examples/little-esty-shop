@@ -41,5 +41,16 @@ RSpec.describe 'Merchant_Dashboard' do
 
       end
     end
+
+    describe 'US 3' do
+      describe 'Merchant Dashboard Statistic- Favorite customers' do
+        it 'As merchant in dashboard, I see names of top 5 customers who have largests number of 
+            transaction with merchant' do
+
+            
+            end
+      end
+    end
+
   end
 end
