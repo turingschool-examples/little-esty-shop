@@ -4,6 +4,6 @@ class Customer < ApplicationRecord
   validates :last_name, presence: true
 
   def number_of_purchases 
-    require 'pry' ; binding.pry
+    # require 'pry' ; binding.pry
   end
 end
