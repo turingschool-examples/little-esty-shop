@@ -31,6 +31,11 @@ RSpec.describe Item, type: :model do
     merch = create(:merchant)
     item = merch.items.create(attributes_for(:item))
   end
+
+  it 'instantiates with factorybot without a parent' do
+    item = create(:item)
+    #calling parents: item.merchant
+  end
   
   describe "class methods" do
     describe "#find_items_to_ship" do

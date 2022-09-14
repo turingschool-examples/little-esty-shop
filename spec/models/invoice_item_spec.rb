@@ -25,4 +25,10 @@ RSpec.describe InvoiceItem, type: :model do
     inv_item = create(:invoice_item, invoice_id: invoice.id, item_id: item.id)
   end
 
+  it 'instantiates without parents' do
+    inv_item = create(:invoice_item)
+    #calling parents: inv_item.invoice.customer
+    #calling parents: inv_item.item.merchant
+  end
+
 end

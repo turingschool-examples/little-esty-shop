@@ -17,4 +17,10 @@ RSpec.describe Transaction, type: :model do
     invoice = customer.invoices.create(attributes_for(:invoice))
     transaction = invoice.transactions.create(attributes_for(:transaction))
   end
+
+  it 'instantiates without creating parents' do
+    transaction = create(:transaction)
+    #calling parents: transaction.invoice.customer
+  end
+
 end
