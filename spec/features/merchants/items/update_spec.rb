@@ -5,7 +5,16 @@ RSpec.describe 'merchant item edit page' do
     @merchant = Merchant.create!(name: 'George Smith')
     @item = @merchant.items.create!(name: 'Super Ball', description: 'A bouncy rubber ball.', unit_price: 300)
   end
-  describe 'page content' do
+  describe 'item show page' do
+    it 'has a link to update the item that redirects to the edit page' do
+      visit merchant_item_path(@merchant, @item)
+
+      click_link 'Update'
+
+      expect(page).to have_current_path(edit_merchant_item_path(@merchant, @item))
+    end
+  end
+  describe 'edit page content' do
     it 'shows a form to edit the item' do
       visit edit_merchant_item_path(@merchant, @item)
 
