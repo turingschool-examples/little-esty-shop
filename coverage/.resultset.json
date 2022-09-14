@@ -270,12 +270,36 @@
         "lines": [
           1,
           null,
+          1,
           null
         ]
       },
       "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
+          null
+        ]
+      },
+      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/spec/models/customer_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -325,6 +349,7 @@
         "lines": [
           1,
           1,
+          1,
           null,
           1,
           1,
@@ -356,6 +381,7 @@
       },
       "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
+          1,
           1,
           1,
           null,
@@ -463,8 +489,23 @@
           1,
           null
         ]
+      },
+      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/controllers/admin_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1663110987
+    "timestamp": 1663178776
   }
 }
