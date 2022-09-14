@@ -3,7 +3,7 @@
 <ul>
   <% @items.each do |item| %>
     <div id="item_<%= item.id %>">
-      <h3><li><%= item.name %></li></h3>
+      <h3><li><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %></li></h3>
     </div>
   <% end %>
 </ul>
