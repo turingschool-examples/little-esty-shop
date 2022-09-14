@@ -28,8 +28,14 @@ RSpec.describe "merchant dashboard" do
       expect(page).to have_link("My Invoices")
     end
 
-    xit 'I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+    it 'I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
       visit merchant_dashboards_path(Merchant.first)
+
+      binding.pry
+
+      within ("#top_customers") do
+        expect()
+      end
     end
 
     xit 'next to each customer name I see the number of successful transactions they have conducted with my merchant' do
