@@ -1,11 +1,21 @@
 <h1>Merchant Items Index</h1>
 
 <h2><%= @merchant.name %></h2>
-<h3>Items</h3>
-<ul>
-  <% @merchant.items.each do |item| %>
-    <li>
+<h3>Enabled Items</h3>
+<ul id="enabled_items">
+  <% @merchant.enabled_items.each do |item| %>
+    <li id="item-<%= item.id %>">
       <%= link_to item.name, merchant_item_path(@merchant, item) %>
+      <%= button_to "Disable", merchant_item_path(@merchant, item), method: :patch, params: { enabled: false } %>
+    </li>
+  <% end %>
+</ul>
+<h3>Disabled Items</h3>
+<ul id="disabled_items">
+  <% @merchant.disabled_items.each do |item| %>
+    <li id="item-<%= item.id %>">
+      <%= link_to item.name, merchant_item_path(@merchant, item) %>
+      <%= button_to "Enable", merchant_item_path(@merchant, item), method: :patch, params: { enabled: true } %>
     </li>
   <% end %>
 </ul>
