@@ -12,4 +12,13 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:customer_id) }
     it { should validate_presence_of(:status) }
   end
+
+  describe '.not_shipped_invoices' do
+    it "Should return invoice id's" do
+      invoice_ids = [1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 5, 6, 6]
+
+      expect(Invoice.not_shipped_invoices.ids).to eq invoice_ids
+      expect(Invoice.not_shipped_invoices.ids.count).to eq 19
+    end
+  end
 end
