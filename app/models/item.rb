@@ -9,6 +9,11 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
 
   def self.find_items_to_ship(merchant_id)
-    Item.select(:id, :name, "invoices.created_at as invoice_create_date", "invoice_items.invoice_id as invoice_id").joins(:invoice_items, :invoices).where.not("invoice_items.status = ?", 2).where(merchant_id: merchant_id).distinct.order("invoice_create_date")
+    Item.select(:id, :name, "invoices.created_at as invoice_create_date", "invoice_items.invoice_id as invoice_id")
+      .joins(:invoices, :invoice_items)
+      .distinct
+      .where.not("invoice_items.status = ?", 2)
+      .where(merchant_id: merchant_id)
+      .order("invoice_create_date")
   end
 end

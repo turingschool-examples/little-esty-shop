@@ -238,14 +238,13 @@ RSpec.describe 'Merchant dashboard' do
         #not yet been shipped means invoice_item status is NOT 2
 
         visit "/merchants/#{merch_1.id}/dashboard"
-save_and_open_page
-require 'pry'; binding.pry
+
         items_to_ship = [item_1, item_2]
         within "#items_to_ship" do
           items_to_ship.each do |item|
             within "#item_#{item.id}" do
               invoice_created_date = item.invoices.where.not(status: 2).first.created_at
-              expect(page).to have_content(item.invoice_created_date)
+              expect(page).to have_content(invoice_created_date)
             end
           end
           expect(page).to_not have_content(inv_3.created_at)
@@ -258,10 +257,10 @@ require 'pry'; binding.pry
         item_2 = merch_1.items.create!(name: "Christmas Hits", description: "A CD", unit_price: 1500)
         item_3 = merch_1.items.create!(name: "Easter Hits", description: "A CD", unit_price: 1500)
         cust_1 = Customer.create!(first_name: "Joe", last_name: "Ives")
-        inv_1 = cust_1.invoices.create!(status: 1, created_at: 2.day.ago)
+        inv_1 = cust_1.invoices.create!(status: 1, created_at: 1.day.ago)
         inv_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: inv_1.id, quantity: 1, unit_price: 1500, status: 0)
         cust_2 = Customer.create!(first_name: "Fred", last_name: "Pot")
-        inv_2 = cust_2.invoices.create!(status: 1, created_at: 1.day.ago)
+        inv_2 = cust_2.invoices.create!(status: 1, created_at: 2.day.ago)
         inv_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: inv_2.id, quantity: 1, unit_price: 1500, status: 1)
         cust_3 = Customer.create!(first_name: "Jane", last_name: "Kettle")
         inv_3 = cust_3.invoices.create!(status: 1)
@@ -274,7 +273,9 @@ require 'pry'; binding.pry
         items_to_ship = [item_1, item_2]
         within "#items_to_ship" do
           expect(item_2.name).to appear_before(item_1.name)
+          expect(item_1.name).to_not appear_before(item_2.name)
         end
+        #these tests might need to be more robust, might need to work on format for that
       end
     end
   end
