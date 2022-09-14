@@ -1,20 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index' do
-  let!(:carly) { Merchant.create!(name: "Carly Simon's Candy Silo")}
+  let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
   let!(:bmv) { Merchant.create!(name: "Bavarian Motor Velocycles")}
 
-  let!(:licorice) { carly.items.create!(name: "Licorice Funnels", description: "Some stuff", unit_price: 1200, enabled: true) }
-  let!(:peanut) { carly.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500, enabled: true) }
-  let!(:choco_waffle) { carly.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900, enabled: false) }
-  let!(:hummus) { carly.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1200, enabled: false) }
+  let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Some stuff", unit_price: 1200, enabled: true) }
+  let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500, enabled: true) }
+  let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900, enabled: false) }
+  let!(:hummus) { carly_silo.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1200, enabled: false) }
 
   let!(:skooter) { bmv.items.create!(name: "Hollenskooter", description: "Some stuff", unit_price: 12000, enabled: true) }
   let!(:rider) { bmv.items.create!(name: "Hosenpfloofer", description: "Some stuff", unit_price: 220000, enabled: true) }
 
   describe 'merchant items index page' do
     it 'lists the names of all items' do
-      visit merchant_items_path(carly)
+      visit merchant_items_path(carly_silo)
 
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(peanut.name)
@@ -23,14 +23,14 @@ RSpec.describe 'Merchant Items Index' do
     end
 
     it 'does not list the names of other merchant items' do
-      visit merchant_items_path(carly)
+      visit merchant_items_path(carly_silo)
       
       expect(page).to_not have_content(skooter.name)
       expect(page).to_not have_content(rider.name)
     end
 
     it 'has sections for enabled and disabled items' do
-      visit merchant_items_path(carly)
+      visit merchant_items_path(carly_silo)
 
       within("#enabled_items") do
         expect(page).to have_content(licorice.name)
@@ -45,7 +45,7 @@ RSpec.describe 'Merchant Items Index' do
     
     describe 'for each enabled item' do
       it 'has a button to disable item' do
-        visit merchant_items_path(carly)
+        visit merchant_items_path(carly_silo)
 
         within("#enabled_items") do
           expect(page).to have_content(licorice.name)
@@ -59,7 +59,7 @@ RSpec.describe 'Merchant Items Index' do
           click_on "Disable"
         end
 
-        expect(current_path).to eq(merchant_items_path(carly))
+        expect(current_path).to eq(merchant_items_path(carly_silo))
 
         within("#enabled_items") do
           expect(page).to_not have_content(licorice.name)
@@ -73,7 +73,7 @@ RSpec.describe 'Merchant Items Index' do
 
     describe 'for each disabled item' do
       it 'has a button to enable item' do
-        visit merchant_items_path(carly)
+        visit merchant_items_path(carly_silo)
 
         within("#disabled_items") do
           expect(page).to have_content(hummus.name)
@@ -87,7 +87,7 @@ RSpec.describe 'Merchant Items Index' do
           click_on "Enable"
         end
 
-        expect(current_path).to eq(merchant_items_path(carly))
+        expect(current_path).to eq(merchant_items_path(carly_silo))
 
         within("#disabled_items") do
           expect(page).to_not have_content(hummus.name)
@@ -101,13 +101,13 @@ RSpec.describe 'Merchant Items Index' do
 
     describe 'creating a new item' do
       it 'has a link to create a new item' do
-        visit merchant_items_path(carly)
+        visit merchant_items_path(carly_silo)
         
         expect(page).to have_link("Create New Item")
 
         click_link "Create New Item"
 
-        expect(current_path).to eq(new_merchant_item_path(carly))
+        expect(current_path).to eq(new_merchant_item_path(carly_silo))
       end
     end
   end
