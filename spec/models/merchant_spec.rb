@@ -1,12 +1,5 @@
 require 'rails_helper'
 RSpec.describe Merchant, type: :model do
-  let!(:carly) { Merchant.create!(name: "Carly Simon's Candy Silo")}
-
-  let!(:licorice) { carly.items.create!(name: "Licorice Funnels", description: "Some stuff", unit_price: 1200, enabled: true) }
-  let!(:peanut) { carly.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500, enabled: true) }
-  let!(:choco_waffle) { carly.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900, enabled: false) }
-  let!(:hummus) { carly.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1200, enabled: false) }
-  
   describe 'relationships' do
     it { should have_many :items }
   end
@@ -18,10 +11,10 @@ RSpec.describe Merchant, type: :model do
   let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
   let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
 
-  let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200) }
-  let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500) }
-  let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Cholately Waffles of Deliciousness", unit_price: 900) }
-  let!(:hummus) { carly_silo.items.create!(name: "Hummus", description: "Creamy Hummus", unit_price: 1200) }
+  let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
+  let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500, enabled: true) }
+  let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Cholately Waffles of Deliciousness", unit_price: 900, enabled: false) }
+  let!(:hummus) { carly_silo.items.create!(name: "Hummus", description: "Creamy Hummus", unit_price: 1200, enabled: false) }
 
   let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
   let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
@@ -110,13 +103,13 @@ RSpec.describe Merchant, type: :model do
 
     describe '#enabled_items' do
       it 'returns an array of enabled items' do
-        expect(carly.enabled_items).to eq([licorice, peanut])
+        expect(carly_silo.enabled_items).to eq([licorice, peanut])
       end
     end
 
     describe '#disabled_items' do
       it 'returns an array of enabled items' do
-        expect(carly.disabled_items).to eq([choco_waffle, hummus])
+        expect(carly_silo.disabled_items).to eq([choco_waffle, hummus])
       end
     end
   end
