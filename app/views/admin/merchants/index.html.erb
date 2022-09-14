@@ -1,5 +1,10 @@
 <h1>Merchants</h1>
 
 <% @merchants.each do |merchant| %>
-  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> </p>
+  <div class="merchant_<%=merchant.id%>">
+
+    <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+    <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %></p>
+
+  </div>
 <% end %>

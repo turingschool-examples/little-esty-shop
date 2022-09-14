@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'admin merchant index page' do
 
   before :each do
@@ -5,8 +7,12 @@ RSpec.describe 'admin merchant index page' do
   end
 
   it 'can redirect to edit page from admin index' do
+    # require "pry"; binding.pry
     visit '/admin/merchants'
-    click_on 'Edit'
+
+    within(".merchant_#{@merchant1.id}") do
+      click_on 'Edit'
+    end
 
     expect(current_path).to eq("/admin/merchants/#{@merchant1.id}/edit")
   end
