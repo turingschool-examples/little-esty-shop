@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  def index
+  def index 
     @incomplete_invoice_items = InvoiceItem.incomplete_invoices
   end
 end

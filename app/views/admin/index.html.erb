@@ -3,16 +3,12 @@
 
 <%= link_to 'Admin merchants page', '/admin/merchants'  %>
 <%= link_to 'Admin invoices page', '/admin/invoices'  %>
-
+<h3>Incomplete Invoices</h3>
 <table>
   <tr>
-    <th>Incomplete Invoices</th>  
-  </tr>
-  <tr>
-    <td>Invoice #
     <% @incomplete_invoice_items.each do |id| %>
-      <%= id %>
+      <td>Invoice # <%= id %></td>
     <% end %>
-    </td>
+    </tr>
   </tr>
 </table>
