@@ -3,3 +3,8 @@
   <li><%= link_to "Merchants" %></li>
   <li><%= link_to "Invoices" %></li>
 </ul>
+<ol id="top_customers">
+  <% @top_five_customers.each do |key, value| %>
+    <li id="<%= key %>"><%= key %> - <%= value %></li>
+  <% end %>
+</ol>

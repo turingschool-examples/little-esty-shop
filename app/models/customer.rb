@@ -4,4 +4,8 @@ class Customer < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def self.five_top_customers
+    Customer.joins(:transactions).where('result = 0').group(:first_name).order(count: :desc).limit(5).count
+  end
 end
