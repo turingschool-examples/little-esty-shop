@@ -5,7 +5,7 @@ RSpec.describe Item, type: :model do
     it {should belong_to(:merchant)}
   end
 
-  before do
+  before :each do
     @item1 = create(:item, unit_price: 5700)
     @item2 = create(:item)
   end
