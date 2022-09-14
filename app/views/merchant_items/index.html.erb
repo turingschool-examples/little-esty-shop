@@ -1,0 +1,9 @@
+<h1>Welcome, <%= @merchant.name %>. Your items are listed below</h1>
+
+<ul>
+  <% @items.each do |item| %>
+    <div id="item_<%= item.id %>">
+      <h3><li><%= item.name %></li></h3>
+    </div>
+  <% end %>
+</ul>
