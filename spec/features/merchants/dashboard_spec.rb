@@ -243,11 +243,11 @@ RSpec.describe 'Merchant dashboard' do
         within "#items_to_ship" do
           items_to_ship.each do |item|
             within "#item_#{item.id}" do
-              invoice_created_date = item.invoices.where.not(status: 2).first.created_at
+              invoice_created_date = item.invoices.where.not(status: 2).first.created_at.to_date
               expect(page).to have_content(invoice_created_date)
             end
           end
-          expect(page).to_not have_content(inv_3.created_at)
+          expect(page).to_not have_content(inv_3.created_at.to_date)
         end
       end
       
