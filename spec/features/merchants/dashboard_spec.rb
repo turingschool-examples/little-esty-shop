@@ -52,5 +52,24 @@ RSpec.describe 'Merchant Dashboard' do
         expect(find_link('Invoices Index')[:href].should == "/merchants/#{merchant_2.id}/invoices")
       end
     end
+
+    describe 'User Story 3' do
+      # As a merchant,
+      # When I visit my merchant dashboard
+      # Then I see the names of the top 5 customers
+      # who have conducted the largest number of successful transactions with my merchant
+      # And next to each customer name I see the number of successful transactions they have
+      # conducted with my merchant
+
+      it 'Then I see the names of the top 5 customers that have conducted transactions with merchant' do
+        visit "/merchants/#{merchant_1.id}/dashboard"
+
+        expect(page).to have_content 
+      end
+
+      it 'And next to each customer name I see the number of successful transactions they have with merchant' do
+
+      end
+    end 
   end
 end
