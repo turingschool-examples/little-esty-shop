@@ -3,7 +3,7 @@ valid_status = ["In Progress", "Completed", "Cancelled"]
 
 FactoryBot.define do
   factory :invoice do
-    customer_id { valid_ids.sample }
+    # customer_id { valid_ids.sample }
     status { valid_status.sample }
   end
 end 
