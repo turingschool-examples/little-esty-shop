@@ -1,11 +1,12 @@
 require 'rails_helper'
-RSpec.describe Merchant, type: :model do
+RSpec.describe Customer, type: :model do
   describe 'relationships' do
-    it { should have_many :items }
+    it { should have_many(:invoices) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
   end
 
   let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
@@ -93,20 +94,21 @@ RSpec.describe Merchant, type: :model do
   let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"shipped" )}
   let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
 
-
   describe 'class methods' do
     describe '#search' do
-      xit 'returns partial matches' do
+      it 'returns partial matches' do
        #method goes here
       end
     end
   end
 
   describe 'instance methods' do
-    describe '#transactions_top_5' do
-     xit 'finds the top 5 customers with the most successful transactions with a particular merchant' do
+    describe '#number_of_purchases' do
+     xit 'can find the number of successful purchases a customer has' do
 
-      expect(jewlery_city.transactions_top_5).to eq([whitney, alaina, eddie, polina, ryan])
+      expect(alaina.number_of_purchases).to eq(124)
+      expect(eddit.number_of_purchases).to eq(124)
+      #expect statement here
      end
     end
   end
