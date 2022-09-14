@@ -296,8 +296,17 @@
           1,
           null
         ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/controllers/admin_merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1663181723
+    "timestamp": 1663182071
   }
 }
