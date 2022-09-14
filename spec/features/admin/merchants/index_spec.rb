@@ -14,4 +14,11 @@ RSpec.describe 'admin merchant index page' do
     expect(page).to have_content("BFranklin")
   end
 
+  it 'can click on merchant name and be redirected to that merchants show page' do
+    visit '/admin/merchants'
+    click_on 'Robespierre'
+
+    expect(current_path).to eq("/admin/merchant/#{@merchant1.id}")
+  end
+
 end
