@@ -26,9 +26,11 @@ namespace :csv_load do
     csv_text = File.read('db/data/invoices.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
+      # require 'pry'; binding.pry
       Invoice.create!(row.to_hash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
+    
   end
 
   desc "Load items from CSV"
