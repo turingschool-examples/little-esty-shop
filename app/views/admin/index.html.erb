@@ -5,10 +5,9 @@
 <%= link_to 'Admin invoices page', '/admin/invoices'  %>
 <h3>Incomplete Invoices</h3>
 <table>
-  <tr>
     <% @incomplete_invoice_items.each do |id| %>
+      <tr>  
       <td>Invoice # <%= link_to "#{id}", "/admin/invoices/#{id}" %></td>
+      </tr>
     <% end %>
-    </tr>
-  </tr>
 </table>
