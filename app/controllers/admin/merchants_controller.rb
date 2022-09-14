@@ -1,8 +1,9 @@
 class Admin::MerchantsController < ApplicationController
 
-  def
+  def index
+    @merchants = Merchant.all
+  end
 
 
 
-
-end 
+end
