@@ -4,9 +4,9 @@ RSpec.describe 'Admin Invoices Index Page' do
   describe 'When I visit the admin Invoices index' do
     before :each do
       customer = Customer.create!(first_name: 'Jeff', last_name: 'Bridges')
-      @invoice_1 = customer.invoices.create!(status: :in_progress)
-      @invoice_2 = customer.invoices.create!(status: :completed)
-      @invoice_3 = customer.invoices.create!(status: :cancelled)
+      @invoice_1 = customer.invoices.create!(status: 'in progress')
+      @invoice_2 = customer.invoices.create!(status: 'completed')
+      @invoice_3 = customer.invoices.create!(status: 'cancelled')
     end
 
     it 'I see a list of all invoice ids in the system' do
