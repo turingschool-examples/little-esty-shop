@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   get '/merchants/:id/items', to: 'merchants#items_index'
   get '/merchants/:id/items/:id', to: 'merchants#items_show'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/merchants/:id/dashboard', to: 'merchants#dashboard'
 end
