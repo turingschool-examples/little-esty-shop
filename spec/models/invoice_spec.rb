@@ -18,7 +18,7 @@ RSpec.describe Invoice, type: :model do
   it 'instantiates with factorybot' do
       customer = create(:customer)
       invoice = customer.invoices.create(attributes_for(:invoice))
-      
+     
   end
 
   end

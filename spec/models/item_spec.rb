@@ -25,4 +25,9 @@ RSpec.describe Item, type: :model do
       end
     end
   end
+
+  it 'instantiates with factorybot' do
+    merch = create(:merchant)
+    item = merch.items.create(attributes_for(:item))
+  end
 end
