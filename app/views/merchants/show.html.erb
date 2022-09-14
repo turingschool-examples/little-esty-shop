@@ -7,7 +7,7 @@
   <h3>Top 5 Customers<h3>
 <p><% @customers.transactions_top_5.each do |customer| %></p>
 <% i = 1 %>
-<p><%= i%>.<%= customer.first_name %> <%= customer.last_name %> <%= customer.number_of_purchases %></p>
+<p><%= i%>.<%= customer.first_name %> <%= customer.last_name %> <%= customer.num_succesful_transactions %></p>
 <% i += 1 %>
 <% end %>
 

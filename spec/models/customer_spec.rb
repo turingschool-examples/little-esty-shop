@@ -106,8 +106,8 @@ RSpec.describe Customer, type: :model do
     describe '#number_of_purchases' do
      it 'can find the number of successful purchases a customer has' do
 
-      expect(alaina.number_of_purchases).to eq(124)
-      expect(eddit.number_of_purchases).to eq(124)
+      expect(alaina.num_succesful_transactions).to eq(5)
+      expect(eddie.num_succesful_transactions).to eq(3)
       #expect statement here
      end
     end

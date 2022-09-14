@@ -3,7 +3,7 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def number_of_purchases 
-    # require 'pry' ; binding.pry
+  def num_succesful_transactions
+    invoices.joins(:transactions).count
   end
 end
