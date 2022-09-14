@@ -1,5 +1,10 @@
 <h1> Merchant Items Index Page </h1>
 
 <% @merchant.items.each do |merchant_item| %>
-  <p><%= merchant_item.name %></p>
+
+    <%= form_with url: "/merchants/#{@merchant.id}/items/#{merchant_item.id}", method: :get, local: true do |form| %>
+        <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
+        <%= form.hidden_field :merchant_item_id, value: "#{merchant_item.id}" %>
+         <%= form.submit "#{merchant_item.name}" %>
+      <% end %>
 <% end %>
