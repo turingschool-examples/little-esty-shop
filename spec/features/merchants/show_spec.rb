@@ -120,25 +120,26 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
 
         visit "/merchants/#{jewlery_city.id}/dashboard"
+
         expect(page).to have_content("Top 5 Customers")
         expect(whitney.first_name).to appear_before(alaina.first_name)
         expect(alaina.first_name).to appear_before(eddie.first_name)
         expect(eddie.first_name).to appear_before(polina.first_name)
         expect(polina.first_name).to appear_before(ryan.first_name)
         expect(page).to_not have_content(leah.first_name)
-
       end
 
-      it 'And next to each customer name I see the number of successful transactions they have
+      xit 'And next to each customer name I see the number of successful transactions they have
       conducted with my merchant' do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
-      expect(page).to have_content("Top 5 Customers")
-      expect(page).to have_content("1. #{whitney.first_name} #{whitney.last_name} x purchases")
-      expect(page).to have_content("2. #{alaina.first_name} #{alaina.last_name} x purchases")
-      expect(page).to have_content("3. #{eddie.first_name} #{eddie.last_name} x purchases")
-      expect(page).to have_content("4. #{polina.first_name} #{polina.last_name} x purchases")
-      expect(page).to have_content("5. #{ryan.first_name} #{ryan.last_name} x purchases")
+      
+        expect(page).to have_content("Top 5 Customers")
+        expect(page).to have_content("1. #{whitney.first_name} #{whitney.last_name} x purchases")
+        expect(page).to have_content("2. #{alaina.first_name} #{alaina.last_name} x purchases")
+        expect(page).to have_content("3. #{eddie.first_name} #{eddie.last_name} x purchases")
+        expect(page).to have_content("4. #{polina.first_name} #{polina.last_name} x purchases")
+        expect(page).to have_content("5. #{ryan.first_name} #{ryan.last_name} x purchases")
       end
 
     end
