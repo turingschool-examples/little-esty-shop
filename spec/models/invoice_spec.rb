@@ -14,4 +14,11 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many :transactions }
   end
-end
+    
+  it 'instantiates with factorybot' do
+      customer = create(:customer)
+      invoice = customer.invoices.create(attributes_for(:invoice))
+      
+  end
+
+  end

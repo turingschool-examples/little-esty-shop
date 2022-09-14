@@ -1,0 +1,24 @@
+<html>
+<head>
+<style>
+p.groove {border-style: groove;}
+</style>
+</head>
+<body>
+
+<h1> Little Esty Shop </h1> <br>
+<br>
+<br>
+<h3> <%= @item.merchant.name %> Jewlery </h3>
+<br>
+<br>
+<br>
+<div id="item-<%=@item.id%>">
+  <p class="groove"><%= @item.name %></p>
+  <br>
+  <br>
+  Description: <%= @item.description %>
+  <br>
+  <br>
+  Current Price: $<%= @item.current_price %>
+</div>
