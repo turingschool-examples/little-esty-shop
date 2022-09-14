@@ -23,12 +23,12 @@ RSpec.describe 'merchant item edit page' do
   end
   context 'valid data was submitted' do
     it 'updates the item when the form is submitted and redirects to the item show page' do
-      visit "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
+      visit edit_merchant_item_path(@merchant.id, @item.id)
 
       fill_in 'Name', with: 'Rocket Ball'
       click_button 'Save'
 
-      expect(page).to have_current_path("/merchants/#{@merchant.id}/items/#{@item.id}")
+      expect(page).to have_current_path(merchant_item_path(@merchant.id, @item.id))
       expect(page).to have_content('Rocket Ball')
       expect(page).to_not have_content('Super Ball')
       expect(page).to have_content('Item updated successfully')
@@ -36,12 +36,12 @@ RSpec.describe 'merchant item edit page' do
   end
   context 'invalid data was submitted' do
     it 'redirects to the edit page and displays an error message' do
-      visit "/merchants/#{@merchant.id}/items/#{@item.id}/edit"
+      visit edit_merchant_item_path(@merchant.id, @item.id)
 
       fill_in 'Name', with: ''
       click_button 'Save'
 
-      expect(page).to have_current_path("/merchants/#{@merchant.id}/items/#{@item.id}/edit")
+      expect(page).to have_current_path(visit edit_merchant_item_path(@merchant.id, @item.id))
       expect(page).to have_content("Error: Name can't be blank")
     end
   end
