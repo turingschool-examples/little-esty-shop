@@ -14,14 +14,19 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params)
-    flash.notice = "Item Successfully Updated"
-    redirect_to merchant_item_path(@item.merchant, @item)
+    if params[:enabled].present?
+      @item.update(item_params)
+      redirect_to merchant_items_path(@item.merchant)
+    else
+      @item.update(item_params)
+      flash.notice = "Item Successfully Updated"
+      redirect_to merchant_item_path(@item.merchant, @item)
+    end
   end
 
   private
     def item_params
-      params.permit(:name, :description, :unit_price)
+      params.permit(:name, :description, :unit_price, :enabled)
     end
 
     def set_item
