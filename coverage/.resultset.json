@@ -272,6 +272,7 @@
           null,
           1,
           1,
+          1,
           null,
           null
         ]
@@ -305,8 +306,17 @@
           null,
           null
         ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/controllers/admin_invoices_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1663182071
+    "timestamp": 1663182384
   }
 }
