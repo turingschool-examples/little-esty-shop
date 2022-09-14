@@ -1,0 +1,7 @@
+<h1>Admin Merchants Index page</h1>
+
+<% @merchants.each do |merchant| %>
+  <div id="merchant-<%=merchant.id%>">
+    <p><%=merchant.name%></p>
+  </div>
+<% end %>
