@@ -23,6 +23,24 @@
           1,
           null,
           null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
@@ -296,6 +314,8 @@
           null,
           1,
           1,
+          1,
+          1,
           null
         ]
       },
@@ -328,7 +348,7 @@
           null,
           null,
           1,
-          2,
+          4,
           null,
           null
         ]
@@ -338,8 +358,54 @@
           1,
           null
         ]
+      },
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/controllers/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/controllers/invoices_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1663124795
+    "timestamp": 1663125901
   }
 }
