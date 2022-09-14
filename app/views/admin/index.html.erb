@@ -1,4 +1,18 @@
-<h1>Welcome to the Admin Dashboard</h1>
+<h1>Little Esty Shop</h1>
+<h2>Admin Dashboard</h2>
 
 <%= link_to 'Admin merchants page', '/admin/merchants'  %>
 <%= link_to 'Admin invoices page', '/admin/invoices'  %>
+
+<table>
+  <tr>
+    <th>Incomplete Invoices</th>  
+  </tr>
+  <tr>
+    <td>Invoice #
+    <% @incomplete_invoice_items.each do |id| %>
+      <%= id %>
+    <% end %>
+    </td>
+  </tr>
+</table>
