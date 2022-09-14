@@ -18,7 +18,7 @@ RSpec.describe 'admin merchant index page' do
     visit '/admin/merchants'
     click_on 'Robespierre'
 
-    expect(current_path).to eq("/admin/merchant/#{@merchant1.id}")
+    expect(current_path).to eq("/admin/merchants/#{@merchant1.id}")
   end
 
 end
