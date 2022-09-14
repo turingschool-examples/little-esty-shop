@@ -26,6 +26,12 @@ RSpec.describe Item, type: :model do
     end
   end
 
+
+  it 'instantiates with factorybot' do
+    merch = create(:merchant)
+    item = merch.items.create(attributes_for(:item))
+  end
+  
   describe "class methods" do
     describe "#find_items_to_ship" do
       it 'should find the items for a merchant which have related invoices that have not been shipped' do
