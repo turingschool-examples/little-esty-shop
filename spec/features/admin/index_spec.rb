@@ -128,4 +128,17 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
       end
     end
   end
+
+  it "Next to each invoice id I see the date that the invoice was created, I see the date formatted like 'Monday, July 18, 2019'"
+  # Coming back to this test
+
+  it "I see that the list is ordered from oldest to newest" do
+    visit admin_index_path
+    # Coming back to this test
+
+    # expect("Wednesday, March 7, 2012").to appear_before("Saturday, March 10, 2012")
+    # expect("Wednesday, March 10, 2012").to appear_before("Saturday, March 12, 2012")
+    # expect("Wednesday, March 12, 2012").to appear_before("Saturday, March 24, 2012")
+    # expect("Wednesday, March 24, 2012").to appear_before("Saturday, March 25, 2012")
+  end
 end
