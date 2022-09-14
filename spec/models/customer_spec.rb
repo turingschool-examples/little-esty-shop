@@ -104,7 +104,7 @@ RSpec.describe Customer, type: :model do
 
   describe 'instance methods' do
     describe '#number_of_purchases' do
-     xit 'can find the number of successful purchases a customer has' do
+     it 'can find the number of successful purchases a customer has' do
 
       expect(alaina.number_of_purchases).to eq(124)
       expect(eddit.number_of_purchases).to eq(124)
