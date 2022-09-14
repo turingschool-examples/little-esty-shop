@@ -7,4 +7,8 @@ class Invoice < ApplicationRecord
   validates :customer_id, presence: true
   validates :status, presence: true
   enum status: [ :in_progress, :completed, :cancelled]
+
+  def self.not_shipped_invoices
+    joins(:invoice_items, :customer).where('invoice_items.status != 2')
+  end
 end

@@ -8,3 +8,11 @@
     <li id="<%= key %>"><%= key %> - <%= value %></li>
   <% end %>
 </ol>
+<section id="incomplete_invoices">
+  <h1>Incomplete Invoices</h1>
+  <ul id="invoice_id_not_shipped">
+    <% @not_shipped_invoices.each do |invoice| %>
+      <li id="<%= invoice.id %>"><%= link_to "Invoice ##{invoice.id}" %></li>
+    <% end %>
+  </ul>
+</section>
