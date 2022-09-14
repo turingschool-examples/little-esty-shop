@@ -8,7 +8,7 @@ RSpec.describe 'admin merchant index page' do
   end
 
   it 'can display merchant name on show page' do
-    visit"/admin/merchant/#{@merchant1.id}"
+    visit"/admin/merchants/#{@merchant1.id}"
 
     expect(page).to have_content("Robespierre")
   end
