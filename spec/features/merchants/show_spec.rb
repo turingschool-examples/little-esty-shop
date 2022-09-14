@@ -146,6 +146,15 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         end
       end
 
+      it "Then I see a section for Items Ready to Ship" 
+
+      it " In that section I see a list of the names of all of my items that
+      have been ordered and have not yet been shipped"
+
+      it "And next to each Item I see the id of the invoice that ordered my item
+      And each invoice id is a link to my merchant's invoice show page'"
+
+
     end
   end
 end
