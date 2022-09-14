@@ -4,18 +4,18 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
   describe 'As a merchant' do
     describe 'When I visit the merchant dashboard /merchants/merchant_id/dashboard' do
       let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
-      let!(:jewlery_ciry) { Merchant.create!(name: "Jewlery City Merchant")}
+      let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
     
       let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200) }
       let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500) }
       let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Cholately Waffles of Deliciousness", unit_price: 900) }
       let!(:hummus) { carly_silo.items.create!(name: "Hummus", description: "Creamy Hummus", unit_price: 1200) }
     
-      let!(:gold_earrings) { jewlery_ciry.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
-      let!(:silver_necklace) { jewlery_ciry.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
-      let!(:studded_bracelet) { jewlery_ciry.items.create!(name: "Gold Studded Bracelet", description: "A bracet to make others jealous", unit_price: 2900) }
-      let!(:dainty_anklet) { jewlery_ciry.items.create!(name: "Dainty Ankley", description: "An everyday ankley", unit_price: 2299) }
-      let!(:stackable_rings) { jewlery_ciry.items.create!(name: "Stackable Gold Rings", description: "Small rings to be mixed and matched", unit_price: 1299) }
+      let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
+      let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
+      let!(:studded_bracelet) { jewlery_city.items.create!(name: "Gold Studded Bracelet", description: "A bracet to make others jealous", unit_price: 2900) }
+      let!(:dainty_anklet) { jewlery_city.items.create!(name: "Dainty Ankley", description: "An everyday ankley", unit_price: 2299) }
+      let!(:stackable_rings) { jewlery_city.items.create!(name: "Stackable Gold Rings", description: "Small rings to be mixed and matched", unit_price: 1299) }
 
       let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
       let!(:whitney) { Customer.create!(first_name: "Whitney", last_name: "Gains")}
@@ -118,17 +118,27 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       end
 
       it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
-require 'pry' ; binding.pry
-        visit "/merchants/#{carly_silo.id}/dashboard"
-        # expect(page).to have_content("Top 5 Customers")
 
-
+        visit "/merchants/#{jewlery_city.id}/dashboard"
+        expect(page).to have_content("Top 5 Customers")
+        expect(whitney.first_name).to appear_before(alaina.first_name)
+        expect(alaina.first_name).to appear_before(eddie.first_name)
+        expect(eddie.first_name).to appear_before(polina.first_name)
+        expect(polina.first_name).to appear_before(ryan.first_name)
+        expect(page).to_not have_content(leah.first_name)
 
       end
 
       it 'And next to each customer name I see the number of successful transactions they have
       conducted with my merchant' do
 
+      visit "/merchants/#{jewlery_city.id}/dashboard"
+      expect(page).to have_content("Top 5 Customers")
+      expect(page).to have_content("1. #{whitney.first_name} #{whitney.last_name} x purchases")
+      expect(page).to have_content("2. #{alaina.first_name} #{alaina.last_name} x purchases")
+      expect(page).to have_content("3. #{eddie.first_name} #{eddie.last_name} x purchases")
+      expect(page).to have_content("4. #{polina.first_name} #{polina.last_name} x purchases")
+      expect(page).to have_content("5. #{ryan.first_name} #{ryan.last_name} x purchases")
       end
 
     end
