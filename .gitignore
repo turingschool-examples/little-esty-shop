@@ -27,4 +27,4 @@
 /config/master.key
 
 /coverage.data
-/coverage/
+.coverage
