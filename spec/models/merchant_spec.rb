@@ -121,6 +121,13 @@ RSpec.describe Merchant, type: :model do
       expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Whitney", "Alaina", "Eddie", "Polina", "Ryan"])
      end
     end
+
+    describe '#ready_to_ship_items' do
+      it 'finds all items that are ready to ship for a particular merchant' do
+ 
+       expect(jewlery_city.ready_to_ship_items.pluck(:name)).to eq(["Whitney", "Alaina", "Eddie", "Polina", "Ryan"])
+      end
+     end
   end
 
 end
