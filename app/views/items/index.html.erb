@@ -9,7 +9,7 @@ p.groove {border-style: groove;}
 <h1> Little Esty Shop </h1> <br>
 <br>
 <br>
-<h3> <%= @merchant.name %> Jewlery </h3>
+<h3> <%= @merchant.name %> </h3>
 <br>
 <br>
 <br>
@@ -18,8 +18,16 @@ p.groove {border-style: groove;}
 <br>
 <h5> Items </h5>
 
+<div class="top_5_items">
+  <% @merchant.top_five_items.each do |item| %>
+    <div id="top_5_item-<%=item.id%>">
+     <ol> <li> <%= item.name %> </li> </ol>
+    </div>
+  <% end %>
+</div>
+
 <div class="items">
   <% @merchant.items.each do |item| %>
-    <%= item.name %>
+    <%= item.name %> <br>
   <% end %>
 </div>
