@@ -33,18 +33,41 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:whitney_invoice6) { whitney.invoices.create!(status: "completed")}
       let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
       let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress")}
+      let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed")}
       let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed")}
       let!(:alaina_invoice5) { alaina.invoices.create!(status: "completed")}
-      let!(:alaina_invoice6) { alaina.invoices.create!(status: "completed")}
       let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed")}
       let!(:eddie_invoice2) { eddie.invoices.create!(status: "completed")}
       let!(:eddie_invoice3) { eddie.invoices.create!(status: "completed")}
       let!(:ryan_invoice1) { ryan.invoices.create!(status: "completed")}
       let!(:ryan_invoice2) { ryan.invoices.create!(status: "completed")}
       let!(:polina_invoice1) { polina.invoices.create!(status: "completed")}
-      let!(:polina_invoice1) { polina.invoices.create!(status: "cancelled")}
+      let!(:polina_invoice2) { polina.invoices.create!(status: "cancelled")}
       let!(:leah_invoice1) { leah.invoices.create!(status: "cancelled")}
       let!(:leah_invoice2) { leah.invoices.create!(status: "in_progress")}
+
+      let!(:whitney_invoice1_transaction) { whitney_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:whitney_invoice2_transaction) { whitney_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:whitney_invoice3_transaction) { whitney_invoice3.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:whitney_invoice4_transaction) { whitney_invoice4.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:whitney_invoice5_transaction) { whitney_invoice5.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:whitney_invoice6_transaction) { whitney_invoice6.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:alaina_invoice1_transaction) { alaina_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:alaina_invoice2_transaction) { alaina_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:alaina_invoice3_transaction) { alaina_invoice3.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:alaina_invoice4_transaction) { alaina_invoice4.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:alaina_invoice5_transaction) { alaina_invoice5.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:eddie_invoice1_transaction) { eddie_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:eddie_invoice2_transaction) { eddie_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:eddie_invoice3_transaction) { eddie_invoice3.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:polina_invoice1_transaction) { polina_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:polina_invoice2_transaction) { polina_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:ryan_invoice1_transaction) { ryan_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+      let!(:ryan_invoice2_transaction) { ryan_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed")}
+      let!(:leah_invoice1_transaction) { leah_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed")}
+      let!(:leah_invoice2_transaction) { leah_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed")}
+
+
 
 
 
