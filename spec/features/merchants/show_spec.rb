@@ -146,7 +146,11 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         end
       end
 
-      it "Then I see a section for Items Ready to Ship" 
+      it "Then I see a section for Items Ready to Ship" do
+        visit "/merchants/#{jewlery_city.id}/dashboard"
+
+        expect(page).to have_content("Items Ready to Ship")
+      end
 
       it " In that section I see a list of the names of all of my items that
       have been ordered and have not yet been shipped"
