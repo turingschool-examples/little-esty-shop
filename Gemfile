@@ -45,6 +45,7 @@ group :development, :test do
   gem 'orderly'
   gem 'simplecov'
   gem 'launchy'
+  gem 'solargraph'
 end
 
 group :development do
