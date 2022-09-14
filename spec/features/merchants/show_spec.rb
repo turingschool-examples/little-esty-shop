@@ -88,9 +88,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"shipped" )}
       let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
 
-
-
-
       it 'Then I see the name of my merchant' do
 
         visit "/merchants/#{carly_silo.id}/dashboard"
