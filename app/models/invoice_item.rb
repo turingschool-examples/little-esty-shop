@@ -17,6 +17,6 @@ class InvoiceItem < ApplicationRecord
   validates_presence_of :status
 
   def self.incomplete_invoices
-    select(:invoice_id).distinct.where.not(status: :shipped).pluck(:invoice_id)
+    select(:invoice_id).distinct.where.not(status: :shipped).order(:invoice_id).pluck(:invoice_id)
   end
 end
