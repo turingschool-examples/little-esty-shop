@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   resources :invoices
   resources :customers
 
+
   namespace :admin do
     resources :invoices, only: %i[index show update]
   end 
 
-  get 'merchants/:id/items', to: 'merchants#items_index'
+  get '/merchants/:id/dashboard', to: 'merchants#dashboard'
+  get '/merchants/:id/items', to: 'merchant#items_index'
+
 end
