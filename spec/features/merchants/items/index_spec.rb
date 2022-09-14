@@ -15,7 +15,7 @@ RSpec.describe 'Merchant Items Index' do
   describe 'merchant items index page' do
     it 'lists the names of all items' do
       visit merchant_items_path(carly)
-      save_and_open_page
+
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(peanut.name)
       expect(page).to have_content(choco_waffle.name)
