@@ -1,15 +1,24 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/spec/features/merchant.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/spec/features/merchant_spec.rb": {
         "lines": [
           1,
           null,
+          1,
+          1,
+          1,
+          1,
           null,
           1,
           1,
+          null,
+          null,
           1,
           1,
+          null,
+          1,
+          null,
           1,
           1,
           null,
@@ -17,7 +26,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/environment.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -26,7 +35,7 @@
           1
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/application.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -49,7 +58,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/boot.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -57,7 +66,7 @@
           1
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/environments/test.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -107,7 +116,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -119,7 +128,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/assets.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -137,7 +146,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -148,7 +157,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -177,7 +186,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -186,7 +195,7 @@
           1
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -194,7 +203,7 @@
           1
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/inflections.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -214,7 +223,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/mime_types.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -222,7 +231,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
         "lines": [
           null,
           null,
@@ -264,7 +273,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -282,7 +291,7 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/config/routes.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/config/routes.rb": {
         "lines": [
           null,
           1,
@@ -290,13 +299,13 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/app/helpers/application_helper.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/app/models/merchant.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -304,14 +313,14 @@
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/app/models/application_record.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
         "lines": [
           1,
           1,
@@ -319,18 +328,18 @@
           null,
           null,
           1,
-          1,
+          2,
           null,
           null
         ]
       },
-      "/Users/alexmorareyes/turing/2mod/projects/little-esty-shop/app/controllers/application_controller.rb": {
+      "/Users/kaelinsleevi/turing/2module/projects/little-esty-shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null
         ]
       }
     },
-    "timestamp": 1663123139
+    "timestamp": 1663124795
   }
 }
