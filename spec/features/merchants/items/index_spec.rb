@@ -15,7 +15,7 @@ RSpec.describe 'Merchant Items Index' do
   describe 'merchant items index page' do
     it 'lists the names of all items' do
       visit merchant_items_path(carly)
-      save_and_open_page
+
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(peanut.name)
       expect(page).to have_content(choco_waffle.name)
@@ -96,6 +96,18 @@ RSpec.describe 'Merchant Items Index' do
         within("#enabled_items") do
           expect(page).to have_content(hummus.name)
         end
+      end
+    end
+
+    describe 'creating a new item' do
+      it 'has a link to create a new item' do
+        visit merchant_items_path(carly)
+        
+        expect(page).to have_link("Create New Item")
+
+        click_link "Create New Item"
+
+        expect(current_path).to eq(new_merchant_item_path(carly))
       end
     end
   end
