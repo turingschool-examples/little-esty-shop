@@ -1,5 +1,5 @@
 <div id="merchants">
   <% @all_merchants.each do |merchant| %>
-    <h4 id="merchant_<%=merchant.id%>"><%=merchant.name%></h4>
+    <h4 id="merchant_<%=merchant.id%>"><%=link_to merchant.name, admin_merchant_path(merchant)%></h4>
   <% end %>
 </div>
