@@ -19,11 +19,13 @@ p.groove {border-style: groove;}
 <h5> Items </h5>
 
 <div class="top_5_items">
+<ol>
   <% @merchant.top_five_items.each do |item| %>
     <div id="top_5_item-<%=item.id%>">
-     <ol> <li> <%= item.name %> </li> </ol>
+     <p> <li> <%= item.name %> </li> </p>
     </div>
   <% end %>
+</ol>
 </div>
 
 <div class="items">
