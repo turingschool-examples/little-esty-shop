@@ -1,3 +1,5 @@
 <p>Name: <%= @merchant_item.name %></p>
 <p>Description: <%= @merchant_item.description %></p
 <p>Current Selling Price: $<%= '%.2f' % (@merchant_item.unit_price/100.to_f) %></p>
+
+  <p><%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@merchant_item.id}/edit", method: :get %></p>

@@ -31,4 +31,49 @@ RSpec.describe 'Merchant Items Show Page Feature' do
       end
     end
   end
+
+
+  describe 'Merchant Item Update' do
+    describe 'When I visit the merchant show page of an item' do
+      describe 'I see a link to update the item information' do
+        describe 'When I click the link I am taken to a page to edit this item' do
+          describe 'And I see a form filled in with the existing item attribute information' do
+            describe 'When I update the information in the form and I click ‘submit’,redirected to item show page' do
+              describe 'I see the updated information' do
+                it 'And I see a flash message stating that the information has been successfully updated' do
+
+                  merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
+                  merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
+
+                  item_toothpaste = merchant_stephen.items.create!(name: "Toothpaste", description: "The worst toothpaste you can find", unit_price: 4000 )
+                  item_rock = merchant_stephen.items.create!(name: "Rock", description: "Decently cool rock", unit_price: 4000 )
+
+                  item_lamp = merchant_roger.items.create!(name: "Lamp", description: "You bet, it's a lamp", unit_price: 500 )
+
+                  visit "merchants/#{merchant_stephen.id}/items"
+                  click_button(item_toothpaste.name)
+                  expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}")
+                  expect(page).to have_link("Update Item")
+                  click_link("Update Item")
+
+                  expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}/edit")
+                  # save_and_open_page
+                  fill_in "Name", with: "Mint Toothpaste"
+                  fill_in "Description", with: "very minty toothpaste"
+                  fill_in "Unit price", with: "4000"
+                  click_button("Submit")
+
+                  expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}")
+                  expect(page).to have_content("Name: Mint Toothpaste")
+                  expect(page).to have_content("Description: very minty toothpaste")
+                  expect(page).to have_content("Current Selling Price: $#{'%.2f' % (4000/100.to_f)}")
+                  expect(page).to have_content("Current Selling Price: $40.00")
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end
