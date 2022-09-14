@@ -10,6 +10,7 @@ RSpec.describe 'Admin Invoices Index Page' do
     end
 
     it 'I see a list of all invoice ids in the system' do
+      require 'pry';binding.pry
       visit admin_invoices_path
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@invoice_2.id)
