@@ -21,7 +21,7 @@ p.groove {border-style: groove;}
 <div class="items">
   <% @merchant.items.each do |item| %>
     <div id="item-<%=item.id%>">
-      <%= link_to item.name, merchant_item_path(item) %> <br>
+      <%= link_to item.name, merchant_item_path(@merchant, item) %> <br>
     </div>
   <% end %>
 </div>
