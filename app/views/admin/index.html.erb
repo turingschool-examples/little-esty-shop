@@ -2,4 +2,9 @@
     <h1>Admin Dashboard</h1>
 </header>
 
-<h2></h2>
+<div id="incomplete_invoices">
+    <h2>Incomplete Invoices</h2>
+    <% @incomplete_invoices.each do |invoice| %>
+    <p>Invoice #<%= invoice.id %></p>
+  <% end %>
+</div>
