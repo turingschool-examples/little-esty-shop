@@ -6,11 +6,11 @@ RSpec.describe 'Merchants Items Index' do
       merch1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
       merch2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
 
-      item1 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item2 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item3 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
-      item4 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item5 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
+      item1 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item2 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item3 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
+      item4 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item5 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
 
       visit merchant_items_path(merch1)
 
@@ -30,11 +30,11 @@ RSpec.describe 'Merchants Items Index' do
       merch1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
       merch2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
 
-      item1 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item2 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item3 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item4 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
-      item5 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item1 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item2 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item3 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
+      item4 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
+      item5 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
 
       visit merchant_items_path(merch1)
 
@@ -103,10 +103,30 @@ RSpec.describe 'Merchants Items Index' do
         end
       end
 
-      expect(current_path).to eq(merchant_item(@merchant1, @item1))
+      expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
     end
     
-    it 'next to the name there is the total revenue of that item'
-    it 'ranks the popular items in desc order'
+    it 'next to the name there is the total revenue of that item' do
+      visit merchant_items_path(@merchant1)
+
+      within ".top_5_items" do
+        within "#top_5_item-#{@item1.id}" do
+          expect(page).to have_content("$5.00")
+        end
+      end
+    end
+
+    it 'ranks the popular items in desc order' do
+      visit merchant_items_path(@merchant1)
+
+      within ".top_5_items" do
+        expect(@item6.name).to appear_before(@item5.name)
+        expect(@item5.name).to appear_before(@item1.name)
+        expect(@item1.name).to appear_before(@item2.name)
+        expect(@item2.name).to appear_before(@item3.name)
+        expect(@item3.name).to_not appear_before(@item6.name)
+        expect(page).to_not have_content(@item4.name)
+      end
+    end
   end
 end

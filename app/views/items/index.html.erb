@@ -19,13 +19,13 @@ p.groove {border-style: groove;}
 <h5> Items </h5>
 
 <div class="top_5_items">
-<ol>
-  <% @merchant.top_five_items.each do |item| %>
-    <div id="top_5_item-<%=item.id%>">
-     <p> <li> <%= item.name %> </li> </p>
-    </div>
-  <% end %>
-</ol>
+  <ol>
+    <% @merchant.top_five_items.each do |item| %>
+      <div id="top_5_item-<%=item.id%>">
+      <p> <li> <%= link_to item.name, merchant_item_path(@merchant, item) %>, Total Revenue: $<%= number_with_precision ((item.revenue).to_f / 100), precision: 2 %> </li> </p>
+      </div>
+    <% end %>
+  </ol>
 </div>
 
 <div class="items">
