@@ -5,8 +5,6 @@ RSpec.describe 'Merchant Items Show Page' do
 
   let!(:licorice) { carly.items.create!(name: "Licorice Funnels", description: "Some stuff", unit_price: 1200) }
   let!(:peanut) { carly.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500) }
-  let!(:choco_waffle) { carly.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900) }
-  let!(:hummus) { carly.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1200) }
 
   describe 'when I click on an item from the merchant items index' do
     it 'takes me to that items show page' do
@@ -23,6 +21,17 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(licorice.description)
       expect(page).to have_content(licorice.unit_price)
+      expect(page).to_not have_content(peanut.name)
+    end
+  end
+
+  describe 'the item show page' do
+    it 'has a link to update item info' do
+      visit merchant_item_path(carly, licorice)
+      
+      click_on "Update"
+
+      expect(current_path).to eq(edit_merchant_item_path(carly, licorice))
     end
   end
 end
