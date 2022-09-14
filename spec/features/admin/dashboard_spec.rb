@@ -25,7 +25,7 @@ RSpec.describe "Admin Dashboard" do
       it "will have working links to the invoice indexs" do
         visit admin_path
         click_on "Invoice Index"
-        expect(current_path).to eq(admin_invoice_path)
+        expect(current_path).to eq(admin_invoices_path)
       end
     end
   end
