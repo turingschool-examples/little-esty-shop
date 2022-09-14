@@ -25,9 +25,18 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
   it 'lists the invoices that contain an item sold by the merchant' do
     visit merchant_invoices_path(@merchant_1.id)
     expect(page).to have_content("My Invoices")
-    expect(page).to have_content("Invoice ##{@invoice_1.id}")
-    expect(page).to have_content("Invoice ##{@invoice_3.id}")
-    expect(page).to have_content("Invoice ##{@invoice_4.id}")
+    within("li#invoice_#{@invoice_1.id}") { expect(page).to have_content("Invoice ##{@invoice_1.id}") }
+    within("li#invoice_#{@invoice_3.id}") { expect(page).to have_content("Invoice ##{@invoice_3.id}") }
+    within("li#invoice_#{@invoice_4.id}") { expect(page).to have_content("Invoice ##{@invoice_4.id}") }
+  end
+
+  it 'has invoice numbers that are links to an invoice show page' do
+    visit merchant_invoices_path(@merchant_1.id)
+    within("li#invoice_#{@invoice_1.id}") do
+      expect(page).to have_link("#{@invoice_1.id}")
+      click_link("#{@invoice_1.id}")
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+    end
   end
 
 end
