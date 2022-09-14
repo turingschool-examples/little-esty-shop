@@ -7,7 +7,7 @@
 <table>
   <tr>
     <% @incomplete_invoice_items.each do |id| %>
-      <td>Invoice # <%= id %></td>
+      <td>Invoice # <%= link_to "#{id}", "/admin/invoices/#{id}" %></td>
     <% end %>
     </tr>
   </tr>

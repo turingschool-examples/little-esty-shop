@@ -60,7 +60,7 @@ RSpec.describe(InvoiceItem, type: :model) do
         invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, quantity: 30, unit_price: 1335, status: 'pending')
         invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 12, unit_price: 1365, status: 'packaged')
 
-        expect(InvoiceItem.incomplete_invoices).to eq([invoice_2.id,  invoice_4.id, invoice_5.id].sort)
+        expect(InvoiceItem.incomplete_invoices.sort).to eq([invoice_2.id,  invoice_4.id, invoice_5.id])
       end
     end
   end
