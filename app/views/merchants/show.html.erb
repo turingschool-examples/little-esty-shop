@@ -5,9 +5,11 @@
   <%= link_to "#{@merchant.name}'s Invoices", merchant_invoices_path(@merchant) %>
 
   <h3>Top 5 Customers<h3>
+<div id='top_5_customers'>
 <% i = 1 %>
 <p><% @merchant.transactions_top_5.each do |customer| %></p>
 <p><%= i%>.<%= customer.first_name %> <%= customer.last_name %> <%= customer.num_succesful_transactions %> purchases</p>
 <% i += 1 %>
 <% end %>
+</div>
 
