@@ -26,7 +26,7 @@ FactoryBot.define do
     unit_price { rand(100..15000) }
   end
 
-  factory :custoemr do
+  factory :customer do
     sequence(:first_name) {|n| "Firstname#{n}"}
     sequence(:last_name) {|n| "Lastname#{n}"}
   end
