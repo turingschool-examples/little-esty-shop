@@ -119,11 +119,15 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         visit "/merchants/#{jewlery_city.id}/dashboard"
 
         expect(page).to have_content("Top 5 Customers")
+
+        within('#top_5_customers') do 
         expect(whitney.first_name).to appear_before(alaina.first_name)
         expect(alaina.first_name).to appear_before(eddie.first_name)
         expect(eddie.first_name).to appear_before(polina.first_name)
         expect(polina.first_name).to appear_before(ryan.first_name)
         expect(page).to_not have_content(leah.first_name)
+      end
+
       end
 
       it 'And next to each customer name I see the number of successful transactions they have
@@ -132,6 +136,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       visit "/merchants/#{jewlery_city.id}/dashboard"
       
         expect(page).to have_content("Top 5 Customers")
+        
         within('#top_5_customers') do 
           expect(page).to have_content("1.#{whitney.first_name} #{whitney.last_name} #{whitney.num_succesful_transactions} purchases")
           expect(page).to have_content("2.#{alaina.first_name} #{alaina.last_name} #{alaina.num_succesful_transactions} purchases")
