@@ -1,0 +1,24 @@
+<h3> Invoice #<%= @invoice.id %> </h3>
+<p> Status: <%= @invoice.status %> </p>
+<p> Created on: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %>
+<h4> Customer: </h4>
+
+<%= @invoice.customer_name %>
+
+<h4> Items on this invoice: </h4>
+<table>
+  <tr>
+    <th> Item Name </th>
+    <th> Quantity </th>
+    <th> Unit Price </th>
+    <th> Status </th>
+  </tr>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <tr>
+    <th> <%= invoice_item.item_name %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-quantity"> <%= invoice_item.quantity %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-price"> $<%= invoice_item.unit_price.to_s.insert(-3, '.') %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-status"> <%= invoice_item.status.capitalize %> </th>
+  </tr>
+<% end %>
+</table>
