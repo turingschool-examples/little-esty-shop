@@ -7,10 +7,9 @@ RSpec.describe 'Admin invoices show page' do
       @invoice = @customer.invoices.create!(status: 'in progress')
     end
 
-    it 'I see the invoice ID and status' do
+    it 'I see the invoice ID' do
       visit admin_invoice_path(@invoice.id)
       expect(page).to have_content(@invoice.id)
-      expect(page).to have_content(@invoice.status)
     end
 
     it 'I see the created_at date in the format "Thursday, July 18, 2019"' do
@@ -69,7 +68,6 @@ RSpec.describe 'Admin invoices show page' do
 
       it 'as the price the item sold for' do
         visit admin_invoice_path(@invoice.id)
-        save_and_open_page
         within "#invoice_item-#{@invoice_toothpaste.id}-price" do
           expect(page).to have_content('$60.00')
         end
@@ -97,10 +95,19 @@ RSpec.describe 'Admin invoices show page' do
     end
 
     it 'US 36 Total revenue generated from an invoice' do
-      allow_any_instance_of(Invoice).to receive(:total_revenue).and_return(1299)
+      allow_any_instance_of(Invoice).to receive(:total_revenue).and_return(1299.to_f)
       invoice = @customer.invoices.create!(status: 'in progress')
       visit admin_invoice_path(invoice.id)
       expect(page).to have_content('Total Revenue: $12.99')
+    end
+
+    it 'US 37 Update Invoice Status' do
+      visit admin_invoice_path(@invoice.id)
+      expect(@invoice.status).to eq('in progress')
+      select('Completed', from: 'Status')
+      click_button 'Update Invoice Status'
+      expect(current_path).to eq(admin_invoice_path(@invoice.id))
+      expect(@invoice.status).to eq('completed')
     end
   end
 end
