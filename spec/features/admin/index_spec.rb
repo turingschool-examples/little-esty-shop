@@ -15,6 +15,22 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
         end
     end
 
+    describe 'Dashboard Links' do 
+        it 'links to the merchants index' do
+            visit admin_index_path
+            expect(page).to have_link("Merchants")
+            # click_on("Merchants")
+            # expect(current_path).to be("/admin/merchants")
+        end
+
+        it 'links to the admin invoices index' do
+            visit admin_index_path
+            expect(page).to have_link("Invoices")
+            # click_on("Invoices")
+            # expect(current_path).to be("/admin/invoices")
+        end
+    end
+
     describe 'Incomplete Invoices' do
         it 'has a section for incomplete invoices' do
             visit admin_index_path
