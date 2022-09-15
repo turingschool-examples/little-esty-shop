@@ -42,7 +42,7 @@ RSpec.describe 'Merchant Item Update Page: ' do
         fill_in 'Update Name:', with: 'New Name'
         fill_in 'Update Description:', with: 'Description new'
         fill_in 'Update Unit Price:', with: 69575
-
+save_and_open_page
         click_button "Submit Changes"
 
         expect(current_path).to eq(merchant_item_path(@merch1.id, @item2.id))

@@ -29,7 +29,7 @@ RSpec.describe 'Merchant Item Show Page: ' do
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item1.description)
         expect(page).to have_content("Current Selling Price: $57.00")
-
+save_and_open_page
         expect(page).to_not have_content(@item2.name)
         expect(page).to_not have_content(@item3.name)
         expect(page).to_not have_content(@item4.name)
