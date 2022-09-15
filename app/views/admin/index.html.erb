@@ -3,11 +3,26 @@
 
 <%= link_to 'Admin merchants page', '/admin/merchants'  %>
 <%= link_to 'Admin invoices page', '/admin/invoices'  %>
-<h3>Incomplete Invoices</h3>
-<table>
-    <% @incomplete_invoice_items.each do |id| %>
-      <tr>  
-      <td>Invoice # <%= link_to "#{id}", "/admin/invoices/#{id}" %></td>
-      </tr>
+<div class="float-container">
+  <div class="float-child">
+    <h3>Incomplete Invoices</h3>
+    <table>
+      <% @incomplete_invoice_items.each do |id| %>
+        <tr>  
+        <td>Invoice # <%= link_to "#{id}", "/admin/invoices/#{id}" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <h3>Top Customers</h3>
+
+  <% @top_customers.each do |customer| %>
+  <div class="float child">
+    <div id="customer-<%=customer.id%>">
+    <ul>
+      <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.count %> purchases</li>
+    </div>
+    </ul>
     <% end %>
-</table>
+  </div>
+</div>
