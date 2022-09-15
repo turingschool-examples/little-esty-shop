@@ -47,6 +47,7 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         expect(current_path).to eq(merchant_item_path(@merch1.id, @item2.id))
       end
+
       it 'I see the updated information' do
         visit edit_merchant_item_path(@merch2.id, @item5.id)
 
@@ -60,7 +61,8 @@ RSpec.describe 'Merchant Item Update Page: ' do
         expect(page).to have_content('Description new')
         expect(page).to have_content('Current Selling Price: $695.75')
       end
-      xit 'I see a flash message stating that the information has been successfully updated' do
+
+      it 'I see a flash message stating that the information has been successfully updated' do
         visit edit_merchant_item_path(@merch2.id, @item5.id)
 
         fill_in "Update Name:", with: 'New Name'
@@ -69,7 +71,7 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         click_button "Submit Changes"
 
-        expect(page).to have_content("#{@item5.name} has been successfully updated.")
+        expect(page).to have_content("New Name has been successfully updated.")
       end
     end
   end
