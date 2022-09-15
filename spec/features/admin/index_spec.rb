@@ -30,24 +30,24 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
 
     within("#top_customers") do
       within("#Parker") do
-        expect(page).to have_content("Parker")
-        expect(page).to_not have_content("Joey")
+        expect(page).to have_content("Daugherty, Parker")
+        expect(page).to_not have_content("Ondricka, Joey")
       end
       within("#Joey") do
-        expect(page).to have_content("Joey")
-        expect(page).to_not have_content("Parker")
+        expect(page).to have_content("Ondricka, Joey")
+        expect(page).to_not have_content("Daugherty, Parker")
       end
       within("#Leanne") do
-        expect(page).to have_content("Leanne")
-        expect(page).to_not have_content("Joey")
+        expect(page).to have_content("Braun, Leanne")
+        expect(page).to_not have_content("Ondricka, Joey")
       end
       within("#Mariah") do
-        expect(page).to have_content("Mariah")
-        expect(page).to_not have_content("Parker")
+        expect(page).to have_content("Toy, Mariah")
+        expect(page).to_not have_content("Daugherty, Parker")
       end
       within("#Cecelia") do
-        expect(page).to have_content("Cecelia")
-        expect(page).to_not have_content("Mariah")
+        expect(page).to have_content("Osinski, Cecelia")
+        expect(page).to_not have_content("Toy, Mariah")
       end
     end
   end
@@ -129,10 +129,10 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
     end
   end
 
-  it "Next to each invoice id I see the date that the invoice was created, I see the date formatted like 'Monday, July 18, 2019'"
+  xit "Next to each invoice id I see the date that the invoice was created, I see the date formatted like 'Monday, July 18, 2019'"
   # Coming back to this test
 
-  it "I see that the list is ordered from oldest to newest" do
+  xit "I see that the list is ordered from oldest to newest" do
     visit admin_index_path
     # Coming back to this test
 
