@@ -47,7 +47,7 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         expect(current_path).to eq(merchant_item_path(@merch1.id, @item2.id))
       end
-      xit 'I see the updated information' do
+      it 'I see the updated information' do
         visit edit_merchant_item_path(@merch2.id, @item5.id)
 
         fill_in "Update Name:", with: 'New Name'
