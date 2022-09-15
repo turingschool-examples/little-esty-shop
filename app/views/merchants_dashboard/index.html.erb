@@ -1,0 +1,11 @@
+<h1> <%= @merchant.name %> </h1>
+
+<%= link_to "#{@merchant.name}'s Item index", "/merchants/merchant_id/items" %>
+<%= link_to "#{@merchant.name}'s Invoice index", "/merchants/merchant_id/invoices" %>
+
+<h3>Items Ready to Ship</h3>
+<%@merchant.not_shipped.each do |item| %>
+<div id=“item<%= item.id %>“>
+   <li><%= item.name %> || invoice # <%= item.invoice_id %>
+   </div>
+<%end %>

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :customers
 
 
-  get '/merchants/:id/dashboard', to: 'merchants#dashboard'
+  get '/merchants/:id/dashboard', to: 'merchants_dashboard#index'
   get '/merchants/:id/items', to: 'merchant#items_index'
+  
+
+
 end
