@@ -113,6 +113,22 @@ RSpec.describe 'admin dashboard' do
         end
       end
     end
-  end
+    describe 'US4' do
+      describe 'when I visit the Incomplete Invoices on Admin Dashboard' do
+        it 'displays a section for Incomplete Invoices' do
+          item_7 = Item.create!(name: "Garlic Bread", description: "Garlicky, goodness", unit_price: 566, merchant_id: @merchant_1.id)
+          invoice_7 = Invoice.create!(status: 0, customer_id: @customer_1.id)
+          invoice_item_7 = InvoiceItem.create!(quantity: 4, unit_price: 434, status: 0, item_id: item_7.id, invoice_id: invoice_7.id)
 
+          visit "/admin"
+
+          within("#incompleteInvoices") do
+          expect(page).to have_content("Incomplete Invoices")
+          expect(page).to have_content("Invoice ID number: #{invoice_7.id}")
+          expect(page).to_not have_content("Invoice ID number: #{@invoice_6.id}")
+          end
+        end
+      end
+    end
+  end
 end

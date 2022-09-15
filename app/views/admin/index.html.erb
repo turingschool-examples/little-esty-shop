@@ -10,3 +10,10 @@
     </li>
   <% end %>
 </ol>
+
+<div id="incompleteInvoices">
+  <h3>Incomplete Invoices</h3>
+  <% @inc_invoices.each do |invoice| %>
+    <p>Invoice ID number: <%= invoice %></p>
+  <% end %>
+</div>
