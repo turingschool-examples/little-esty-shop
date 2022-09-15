@@ -30,18 +30,18 @@ RSpec.describe 'Merchant Item Update Page: ' do
         expect(page).to have_content("Update Unit Price")
       end
 
-      xit "When I update the information in the form and I click 'submit'" do
+      it "When I update the information in the form and I click 'submit'" do
         visit edit_merchant_item_path(@merch1.id, @item2.id)
 
-        expect(page).to have_button("Sumbit Changes")
+        expect(page).to have_button("Submit Changes")
       end
 
-      xit 'I am redirected back to the item show page' do
+      it 'I am redirected back to the item show page' do
         visit edit_merchant_item_path(@merch1.id, @item2.id)
 
-        fill_in "Update Name: ", with: 'New Name'
-        fill_in "Update Description: ", with: "Description new"
-        fill_in "Update Unit Price: ", with: 69575
+        fill_in 'Update Name:', with: 'New Name'
+        fill_in 'Update Description:', with: 'Description new'
+        fill_in 'Update Unit Price:', with: 69575
 
         click_button "Submit Changes"
 
@@ -50,9 +50,9 @@ RSpec.describe 'Merchant Item Update Page: ' do
       xit 'I see the updated information' do
         visit edit_merchant_item_path(@merch2.id, @item5.id)
 
-        fill_in "Update Name: ", with: 'New Name'
-        fill_in "Update Description: ", with: 'Description new'
-        fill_in "Update Unit Price: ", with: 69575
+        fill_in "Update Name:", with: 'New Name'
+        fill_in "Update Description:", with: 'Description new'
+        fill_in "Update Unit Price:", with: 69575
 
         click_button "Submit Changes"
 
@@ -63,9 +63,9 @@ RSpec.describe 'Merchant Item Update Page: ' do
       xit 'I see a flash message stating that the information has been successfully updated' do
         visit edit_merchant_item_path(@merch2.id, @item5.id)
 
-        fill_in "Update Name: ", with: 'New Name'
-        fill_in "Update Description: ", with: 'Description new'
-        fill_in "Update Unit Price: ", with: 69575
+        fill_in "Update Name:", with: 'New Name'
+        fill_in "Update Description:", with: 'Description new'
+        fill_in "Update Unit Price:", with: 69575
 
         click_button "Submit Changes"
 
