@@ -155,6 +155,16 @@ RSpec.describe 'Merchant Items Index' do
             expect(page).to have_content("Total Revenue: 28500")
           end
         end
+
+    describe 'creating a new item' do
+      it 'has a link to create a new item' do
+        visit merchant_items_path(carly)
+        
+        expect(page).to have_link("Create New Item")
+
+        click_link "Create New Item"
+
+        expect(current_path).to eq(new_merchant_item_path(carly))
       end
     end
   end

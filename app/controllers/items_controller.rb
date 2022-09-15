@@ -1,12 +1,24 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_merchant, only: [:index, :create]
 
   def index
-    @merchant = Merchant.find(params[:merchant_id])
+
   end
 
   def show
 
+  end
+
+  def new
+
+  end
+
+  def create
+    @item = @merchant.items.new(item_params)
+    @item.save
+    flash.notice = "New Item #{@item.name} Created"
+    redirect_to merchant_items_path(@merchant)
   end
 
   def edit
@@ -31,5 +43,9 @@ class ItemsController < ApplicationController
 
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def set_merchant
+      @merchant = Merchant.find(params[:merchant_id])
     end
 end
