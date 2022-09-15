@@ -19,14 +19,14 @@ RSpec.describe Customer, type: :model do
     let!(:customer_7) { Customer.create!(first_name: "Molly", last_name: "McMann") }
     let!(:customer_8) { Customer.create!(first_name: "Gary", last_name: "Jone") }
 
-    let!(:invoice_1) { customer_1.invoices.create!(status: "1") }
-    let!(:invoice_2) { customer_2.invoices.create!(status: "1") }
-    let!(:invoice_3) { customer_3.invoices.create!(status: "1") }
-    let!(:invoice_4) { customer_4.invoices.create!(status: "1") }
-    let!(:invoice_5) { customer_5.invoices.create!(status: "1") }
-    let!(:invoice_6) { customer_6.invoices.create!(status: "1") }
-    let!(:invoice_7) { customer_7.invoices.create!(status: "1") }
-    let!(:invoice_8) { customer_8.invoices.create!(status: "1") }
+    let!(:invoice_1) { customer_1.invoices.create!(status: 1) }
+    let!(:invoice_2) { customer_2.invoices.create!(status: 1) }
+    let!(:invoice_3) { customer_3.invoices.create!(status: 1) }
+    let!(:invoice_4) { customer_4.invoices.create!(status: 1) }
+    let!(:invoice_5) { customer_5.invoices.create!(status: 1) }
+    let!(:invoice_6) { customer_6.invoices.create!(status: 1) }
+    let!(:invoice_7) { customer_7.invoices.create!(status: 1) }
+    let!(:invoice_8) { customer_8.invoices.create!(status: 1) }
     # customer_1 transactions
     let!(:transaction_1) { invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: 1) }
     let!(:transaction_2) { invoice_1.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: 1) }
