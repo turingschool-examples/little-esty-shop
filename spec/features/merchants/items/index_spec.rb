@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index Page' do
+RSpec.describe 'Merchant Items Index Page: ' do
   before :each do
     @merch1 = create(:merchant)
     @item1 = create(:item, merchant: @merch1, unit_price: 5700)
@@ -42,29 +42,6 @@ RSpec.describe 'Merchant Items Index Page' do
         end
 
         expect(page).to have_link("#{@item5.name}")
-      end
-
-      it 'when item link is clicked, merchant is taken to item index page' do
-        visit merchant_items_path(@merch1.id)
-
-        click_link "#{@item2.name}"
-
-        expect(current_path).to eq(merchant_item_path(@merch1.id, @item2.id))
-      end
-
-      it 'item index page lists item attributes' do
-        visit merchant_items_path(@merch1.id)
-
-        click_link "#{@item1.name}"
-
-        expect(page).to have_content(@item1.name)
-        expect(page).to have_content(@item1.description)
-        expect(page).to have_content("Current Selling Price: $57.00")
-
-        expect(page).to_not have_content(@item2.name)
-        expect(page).to_not have_content(@item3.name)
-        expect(page).to_not have_content(@item4.name)
-        expect(page).to_not have_content(@item5.name)
       end
     end
   end
