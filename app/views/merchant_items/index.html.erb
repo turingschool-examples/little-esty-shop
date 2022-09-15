@@ -5,7 +5,8 @@
   <% @items.each do |item| %>
     <div id="item_<%= item.id %>">
       <p><li><%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
-              <%= button_to "Disable" %></li></p>
+             <%= button_to "Disable", edit_merchant_item_path(@merchant.id, item.id), method: :get, params:[status: "pass"]%>
+      </li></p>
     </div>
   <% end %>
 </ul>

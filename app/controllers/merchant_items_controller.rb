@@ -12,8 +12,14 @@ class MerchantItemsController < ApplicationController
   end
 
   def edit
+    # binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
+
+    if params.has_key?(:status)
+      @item = @item.update(item_params)
+      redirect_to merchant_items_path(@merchant.id)
+    end
   end
 
   def update
@@ -30,7 +36,8 @@ class MerchantItemsController < ApplicationController
     params.permit(
       :name,
       :description,
-      :unit_price
+      :unit_price,
+      :status
     )
   end
 end

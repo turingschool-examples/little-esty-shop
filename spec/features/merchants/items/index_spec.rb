@@ -65,7 +65,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
         end
       end
 
-      xit 'when clicked, redirected back to item/index page' do
+      it 'when clicked, redirected back to item/index page' do
         visit merchant_items_path(@merch1.id)
 
         within("#item_#{@item1.id}") do
