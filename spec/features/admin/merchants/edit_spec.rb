@@ -13,6 +13,9 @@ RSpec.describe "Merchants Edit Page" do
     fill_in :name, with: "Roses Roses"
     click_on "Update merchant"
 
-    expect(page).to have_content("#{merchant2.name} Show Page")
+    expect(current_path).to eq("/admin/merchants/#{merchant2.id}")
+    expect(page).to have_content("You've successfully updated your information")
+    expect(page).to have_content("Roses Roses Show Page")
+    expect(page).to_not have_content("Darnelles Daysies Show Page")
   end
 end
