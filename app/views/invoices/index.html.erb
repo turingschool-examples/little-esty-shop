@@ -1,4 +1,6 @@
+<h1> All <%= @merchant.name %>'s Invoices </h1>
+
 <% @invoices.each do |invoice| %>
-  <%=invoice.id %>
+  <p> Invoice ID: <%= link_to invoice.id, merchant_invoice_path(invoice, @merchant) %> </p>
 
 <%end%>
