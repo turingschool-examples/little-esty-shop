@@ -7,7 +7,9 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items
-    items.joins(:invoice_items).where.not( invoice_items: {status: 2}).distinct
+    # items.joins(:invoice_items).where.not( invoice_items: {status: 2})
+    
+    items.joins(:invoice_items).select("invoice_id, items.name as item_name").where.not(invoice_items: {status: 2})
   end
 
   #though methods are supposed to be public by default, for some reason these are private unless specified public. not sure why that is.

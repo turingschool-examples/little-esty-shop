@@ -163,12 +163,24 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         expect(page).to have_content("Dainty Ankley")
         expect(page).to_not have_content("Stackable Gold Rings")
         expect(page).to_not have_content("Silver Necklace")
-        save_and_open_page
         end
       end
 
-      it "And next to each Item I see the id of the invoice that ordered my item
-      And each invoice id is a link to my merchant's invoice show page'"
+      it "And next to each Item I see the id of the invoice that ordered my item" do
+
+      visit "/merchants/#{jewlery_city.id}/dashboard"
+
+      within('#ready_to_ship') do
+        save_and_open_page
+        expect(page).to have_content("Gold Earrings - Invoice #3147")
+        # expect(page).to have_content("Gold Studded Bracelet")
+        # expect(page).to have_content("Dainty Ankley")
+        # expect(page).to_not have_content("Stackable Gold Rings")
+        # expect(page).to_not have_content("Silver Necklace")
+        end
+      end
+
+      it "And each invoice id is a link to my merchant's invoice show page"
 
 
     end
