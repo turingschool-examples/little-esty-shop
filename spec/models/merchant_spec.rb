@@ -32,6 +32,6 @@ RSpec.describe Merchant, type: :model do
     @inv_item_4 = create(:invoice_item, invoice: @invs_1[0], item: @items_1.sample) #this will always belong to @merchants[1]
     @inv_item_5 = create(:invoice_item, invoice: @invs_1[1], item: @items_1.sample) #this will 
     
-    expect(@merchants[0].merchant_invoices).to eq([@invs_0[0], invs_0[1], invs_0[2]])
+    expect(@merchants[0].merchant_invoices).to eq([@invs_0[0], @invs_0[1], @invs_0[2]])
   end
 end

@@ -4,9 +4,9 @@ class Merchant < ApplicationRecord
   has_many :items
 
   def merchant_invoices
-    binding.pry
-    Invoice.joins(:invoice_items)
+    Invoice.joins(:items).where("items.merchant_id = ?", id)
   end
 end
 
-# .joins(items: :merchant).where
+
+

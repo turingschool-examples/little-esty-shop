@@ -11,6 +11,7 @@ RSpec.describe 'the Merchant Invoices Index' do
 
     @invs_0 = create_list(:invoice, 3, customer: @customers[0]) #
     @invs_1 = create_list(:invoice, 2, customer: @customers[1])
+    @invs_3 - create_list(:invoice, 3)
 
     @inv_item_1 = create(:invoice_item, invoice: @invs_0[0], item: @items_0[0]) #this will always belong to @merchants[0]
     @inv_item_2 = create(:invoice_item, invoice: @invs_0[1], item: @items_0[1]) #this will always belong to @merchants[0]
