@@ -116,10 +116,12 @@ RSpec.describe 'Merchant_Dashboard' do
 
         invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
         invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+        invoice3 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
         
         invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
         invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
         invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice2.id)
+        invoice_item4 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "packaged", item_id: item1.id, invoice_id: invoice3.id)
 
         visit "/merchants/#{steph_merchant.id}/dashboard"
         save_and_open_page
