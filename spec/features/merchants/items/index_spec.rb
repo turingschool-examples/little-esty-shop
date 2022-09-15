@@ -155,6 +155,16 @@ RSpec.describe 'Merchant Items Index' do
             expect(page).to have_content("Total Revenue: 28500")
           end
         end
+
+        it 'also lists each top 5 item best day of sales' do
+          visit merchant_items_path(carly)
+
+          within("#top-item-#{grobles.id}") do
+            expect(page).to have_content(
+              "Top selling date for #{grobles.name} was #{grobles.best_sales_date}"
+            )
+          end
+        end
       end
     end
 
