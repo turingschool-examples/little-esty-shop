@@ -54,13 +54,5 @@ RSpec.describe 'As an admin, when I visit an admin merchant show page' do
     end
   end
 
-    it 'when I clock do
-
-
-
-
+    it 'when I clock do'
 end
-
-
-
-
