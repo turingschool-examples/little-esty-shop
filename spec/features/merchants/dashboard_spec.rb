@@ -1,12 +1,5 @@
 require 'rails_helper'
 
-# As a merchant,
-# When I visit my merchant dashboard
-# Then I see the names of the top 5 customers
-# who have conducted the largest number of successful transactions with my merchant
-# And next to each customer name I see the number of successful transactions they have
-# conducted with my merchant
-
 RSpec.describe "merchant dashboard" do
   describe 'As a merchant, When I visit my merchant dashboard' do
     it 'I see the name of my merchant' do
@@ -28,7 +21,8 @@ RSpec.describe "merchant dashboard" do
       expect(page).to have_link("My Invoices")
     end
 
-    it 'I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+    #User story 3: Top 5 Customers
+    xit 'I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
       visit merchant_dashboards_path(Merchant.first)
 
       within ("#favorite_customers") do
@@ -36,9 +30,11 @@ RSpec.describe "merchant dashboard" do
       end
     end
 
-    it 'next to each customer name I see the number of successful transactions they have conducted with my merchant' do
+
+    xit 'next to each customer name I see the number of successful transactions they have conducted with my merchant' do
       visit merchant_dashboards_path(Merchant.first)
-      
+
+      # Merchant.first.customers.joins(:transactions).where('result = 0').group(:id).order(count: :desc).limit(5).count
     end
   end
 end

@@ -1,11 +1,16 @@
 <h1>Merchant Dashboard</h1>
 
-<h3><%= @merchant.name %></h3>
+<h2><%= @merchant.name %></h2>
 
 <%= link_to "My Items", merchant_items_path(@merchant) %>
 
 <%= link_to "My Invoices", merchant_invoices_path(@merchant) %>
 
 <div id="top_customers">
-  
+  <h2>Top Customers: </h2>
+  <ol>
+    <% @customers.each do |customer| %> <!-- insert top_five method here -->
+     <li> <%= customer.first_name %><%= customer.last_name %>  </li>
+    <% end %>
+  </ol>
 </div>
