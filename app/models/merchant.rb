@@ -17,7 +17,11 @@ class Merchant < ApplicationRecord
 
   #could this also be a class method?
   def top_5_items
-    items = Item.joins(invoices: :transactions).group(:id, :name).where( transactions: {result: 1}, merchant_id: self.id).sum("invoice_items.unit_price*quantity")
-    items.sort_by { |item, revenue| revenue }.first(5).reverse.to_h
+    Item.joins(invoices: :transactions)
+      .group(:id, :name)
+      .where( transactions: {result: 1}, merchant_id: self.id)
+      .select(:name, :id, "sum(invoice_items.unit_price*quantity) as revenue")
+      .order(revenue: :desc)
+      .limit(5)
   end
 end

@@ -139,16 +139,8 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '#top_5_items' do
-      it 'returns a sorted hash of the top 5 items with [:id, :name] as key and revenue as value' do
-        expect(jewlery_city.top_5_items).to eq(
-            {
-              [banana_earrings.id, "Banana Earrings"]=>151524,
-              [gold_earrings.id, "Gold Earrings"]=>94000,
-              [studded_bracelet.id, "Gold Studded Bracelet"]=>45594,
-              [silver_necklace.id, "Silver Necklace"]=>13230,
-              [dainty_anklet.id, "Dainty Ankley"]=>1890
-            }
-          )
+      it 'an array of the top 5 items by revenue' do
+        expect(jewlery_city.top_5_items).to eq([conch_shell, nose_ring, spiked_wallet_chain, banana_earrings, gold_earrings])
       end
     end
   end
