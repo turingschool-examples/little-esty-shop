@@ -7,7 +7,6 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items
-    require 'pry' ; binding.pry
     items.joins(:invoice_items).where.not( invoice_items: {status: 2})
   end
 
