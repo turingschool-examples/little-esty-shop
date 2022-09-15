@@ -75,7 +75,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
         expect(current_path).to eq(merchant_items_path(@merch1.id))
       end
 
-      xit 'item status has changed from enabled to disabled' do
+      it 'item status has changed from enabled to disabled' do
         visit merchant_items_path(@merch1.id)
 
         within("#item_#{@item1.id}") do
