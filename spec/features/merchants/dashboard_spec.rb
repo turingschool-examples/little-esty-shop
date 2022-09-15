@@ -28,7 +28,9 @@ RSpec.describe("1.Merchant dashboard") do
 
       #transaction1 = invoice1.transactions.create!(      result: "success")
       visit("/merchants/#{merchant1.id}/dashboard")
-      expect(page).to(have_content("Items Ready to Ship:#{item1.name}"))
+      save_and_open_page
+      expect(page).to(have_content("Items Ready to Ship"))
+      expect(page).to(have_content("#{item1.name}"))
     end
   end
 end
