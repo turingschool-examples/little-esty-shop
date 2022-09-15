@@ -1,15 +1,16 @@
-<h3>Dashboard</h3>
+<h1>Dashboard</h1>
 <%= @merchant.name %>
 
 <%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %>
-
+<br>
 <%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
 
-<h5>Top 5 Customers</h5>
-
+<div id="top-5-customers">
+<h2>Top 5 Customers:</h2>
 <% @best_customers.each do |customer| %>
-  <p><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
+  <p id=""<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
 <% end %>
+</div>
 
 <h3>Items Ready to Ship:</h3>
 
