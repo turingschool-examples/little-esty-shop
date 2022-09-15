@@ -10,3 +10,11 @@
 <% @best_customers.each do |customer| %>
   <p><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
 <% end %>
+
+<h3>Items Ready to Ship:</h3>
+
+<div id="items-not-shipped">
+  <% @merchant.items_not_shipped.each do |item| %>
+    <p id="#item.id"><%= item.name %> - <%= link_to "#{item.id}", "/merchants/#{@merchant.id}" %> </p>
+  <% end %>
+</div>

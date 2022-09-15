@@ -6,11 +6,14 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'Instance Methods' do
+    let!(:merchant_1) { Merchant.create!(name: "Johns Tools") }
+    let!(:merchant_2) { Merchant.create!(name: "Hannas Hammocks") }
     let!(:pretty_plumbing) { Merchant.create!(name: "Pretty Plumbing") }
     let!(:sink) { pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.") }
-
-    # let!(:radical_rugs) { Merchant.create!(name: "Radical Rugs") }
-    # let!(:hall_rug) {  radical_rugs.items.create!(name: "Hall Rug", description: "Hall Rug for hallways, breezeways, alleyways.") }
+    let!(:rug) { pretty_plumbing.items.create!(name: "Hall Rug", description: "It's a rug.") }
+    let!(:chair) { pretty_plumbing.items.create!(name: "Great Chair", description: "It's an okay chair.") }
+    let!(:lamp) { pretty_plumbing.items.create!(name: "Table Lamp", description: "Lamp for tables.") }
+    let!(:toilet) { pretty_plumbing.items.create!(name: "XL-Toilet", description: "Big Toilet.") }
 
     let!(:customer_1) { Customer.create!(first_name: "Larry", last_name: "Smith") }
     let!(:customer_2) { Customer.create!(first_name: "Susan", last_name: "Field") }
@@ -21,14 +24,26 @@ RSpec.describe Merchant, type: :model do
     let!(:customer_7) { Customer.create!(first_name: "Molly", last_name: "McMann") }
     let!(:customer_8) { Customer.create!(first_name: "Gary", last_name: "Jone") }
 
-    let!(:invoice_1) { customer_1.invoices.create!(status: "1") }
-    let!(:invoice_2) { customer_2.invoices.create!(status: "1") }
-    let!(:invoice_3) { customer_3.invoices.create!(status: "1") }
-    let!(:invoice_4) { customer_4.invoices.create!(status: "1") }
-    let!(:invoice_5) { customer_5.invoices.create!(status: "1") }
-    let!(:invoice_6) { customer_6.invoices.create!(status: "1") }
-    let!(:invoice_7) { customer_7.invoices.create!(status: "1") }
-    let!(:invoice_8) { customer_8.invoices.create!(status: "1") }
+    let!(:invoice_1) { customer_1.invoices.create!(status: 1) }
+    let!(:invoice_2) { customer_2.invoices.create!(status: 1) }
+    let!(:invoice_3) { customer_3.invoices.create!(status: 1) }
+    let!(:invoice_4) { customer_4.invoices.create!(status: 1) }
+    let!(:invoice_5) { customer_5.invoices.create!(status: 1) }
+    let!(:invoice_6) { customer_6.invoices.create!(status: 1) }
+    let!(:invoice_7) { customer_7.invoices.create!(status: 1) }
+    let!(:invoice_8) { customer_8.invoices.create!(status: 1) }
+
+    let!(:invoice_item_1) { InvoiceItem.create!(item_id: "#{sink.id}", invoice_id: "#{invoice_1.id}", status: 2) }
+    let!(:invoice_item_2) { InvoiceItem.create!(item_id: "#{rug.id}", invoice_id: "#{invoice_1.id}", status: 2) }
+    let!(:invoice_item_3) { InvoiceItem.create!(item_id: "#{chair.id}", invoice_id: "#{invoice_1.id}", status: 2) }
+    let!(:invoice_item_4) { InvoiceItem.create!(item_id: "#{lamp.id}", invoice_id: "#{invoice_1.id}", status: 0) }
+    let!(:invoice_item_5) { InvoiceItem.create!(item_id: "#{toilet.id}", invoice_id: "#{invoice_1.id}", status: 0) }
+
+    let!(:invoice_item_6) { InvoiceItem.create!(item_id: "#{sink.id}", invoice_id: "#{invoice_2.id}", status: 0) }
+    let!(:invoice_item_7) { InvoiceItem.create!(item_id: "#{rug.id}", invoice_id: "#{invoice_2.id}", status: 1) }
+    let!(:invoice_item_8) { InvoiceItem.create!(item_id: "#{chair.id}", invoice_id: "#{invoice_2.id}", status: 2) }
+    let!(:invoice_item_9) { InvoiceItem.create!(item_id: "#{lamp.id}", invoice_id: "#{invoice_2.id}", status: 2) }
+    let!(:invoice_item_10) { InvoiceItem.create!(item_id: "#{toilet.id}", invoice_id: "#{invoice_2.id}", status: 2) }
 
     # customer_1 transactions
     let!(:transaction_1) { invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: 1) }
@@ -86,5 +101,11 @@ RSpec.describe Merchant, type: :model do
     let!(:transaction_46) { invoice_8.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: 0) }
     let!(:transaction_47) { invoice_8.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: 0) }
     let!(:transaction_48) { invoice_8.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: 0) }
+
+    it 'has items_not_shipped method' do
+
+      expect(pretty_plumbing.items_not_shipped).to eq([sink, rug, lamp, toilet])
+
+    end
   end
 end
