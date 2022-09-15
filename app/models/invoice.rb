@@ -7,6 +7,6 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   def self.incomplete_invoices
-    where("status = 2")
+    where("status = 2").order(:created_at)
   end
 end
