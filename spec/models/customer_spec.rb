@@ -6,12 +6,9 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'class methods' do
-    # let!(:pretty_plumbing) { Merchant.create!(name: "Pretty Plumbing") }
-    # let!(:radical_rugs) { Merchant.create!(name: "Radical Rugs") }
-    # let!(:sink) { pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.") }
-    # let!(:faucet) {  pretty_plumbing.items.create!(name: "Fancy Faucet", description: "Fancy faucet fit for Friends.") }
-    # let!(:entry_rug) {  radical_rugs.items.create!(name: "Entry Rug", description: "Entry Rug for your Entry Spaces.") }
-    # let!(:hall_rug) {  radical_rugs.items.create!(name: "Hall Rug", description: "Hall Rug for hallways, breezeways, alleyways.") }
+    let!(:pretty_plumbing) { Merchant.create!(name: "Pretty Plumbing") }
+    let!(:sink) { pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.") }
+
 
     let!(:customer_1) { Customer.create!(first_name: "Larry", last_name: "Smith") }
     let!(:customer_2) { Customer.create!(first_name: "Susan", last_name: "Field") }
@@ -89,6 +86,20 @@ RSpec.describe Customer, type: :model do
 
     it 'has top_5_customers method' do
       expect(Customer.top_5_customers).to eq([customer_4, customer_2, customer_3, customer_1, customer_8])
+    end
+
+    it 'the top_5_cust_by_merch method' do
+
+      sink.invoices << invoice_1
+      sink.invoices << invoice_2
+      sink.invoices << invoice_3
+      sink.invoices << invoice_4
+      sink.invoices << invoice_5
+      sink.invoices << invoice_6
+      sink.invoices << invoice_7
+      sink.invoices << invoice_8
+
+      expect(Customer.top_5_cust_by_merch(pretty_plumbing.id)).to eq([customer_4, customer_2, customer_3, customer_1, customer_8])
     end
   end
 end
