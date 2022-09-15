@@ -11,16 +11,27 @@ RSpec.describe Customer, type: :model do
     it { should validate_presence_of(:last_name) }
   end
 
-  describe 'five_top_customers' do
-    it 'Should return the top five customers in a hash with the customer name and amount of successful transactions' do
-      expected_hash = {
-        "Parker" => 8,
-        "Joey" => 7,
-        "Leanne" => 7,
-        "Mariah" => 3,
-        "Cecelia" => 1
-      }
-      expect(Customer.five_top_customers).to eq expected_hash
+
+  describe '.class methods' do
+    describe 'top_five_customers_by_merchant' do
+      xit 'can find the top five customers with the most transactions for a specific merchant' do
+        expected_hash = {}
+
+        expect(Customer.top_five_customers).to eq(expected_hash)
+      end
+    end 
+    
+    describe 'top_five_customers_admin' do
+      it 'Should return the top five customers in a hash with the customer name and amount of successful transactions' do
+        expected_hash = {
+          "Parker" => 8,
+          "Joey" => 7,
+          "Leanne" => 7,
+          "Mariah" => 3,
+          "Cecelia" => 1
+        }
+        expect(Customer.five_top_customers).to eq expected_hash
+      end 
     end
   end
 end
