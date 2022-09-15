@@ -3,4 +3,12 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :status, inclusion: ["Enabled", "Disabled"]
   has_many :items
+
+  def self.enabled_merchants
+    Merchant.where(status: 0)
+  end
+
+  def self.disabled_merchants
+    Merchant.where(status: 1)
+  end
 end
