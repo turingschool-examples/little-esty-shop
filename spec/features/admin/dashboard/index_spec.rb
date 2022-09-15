@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :feature do
   it "I see a header indicating that I am on the admin dashboard" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#admin_title") do
       expect(page).to have_content "Admin Dashboard"
@@ -10,7 +10,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "I see a link to the admin merchants index (/admin/merchants)" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#admin_links") do
       expect(page).to have_link("Merchants")
@@ -18,7 +18,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "I see a link to the admin invoices index (/admin/invoices)" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#admin_links") do
       expect(page).to have_link("Invoices")
@@ -26,7 +26,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "I see the names of the top 5 customers who have conducted the largest number of successful transactions" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#top_customers") do
       within("#Parker") do
@@ -53,7 +53,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "Next to each customer name I see the number of successful transactions they have conducted" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#top_customers") do
       within("#Parker") do
@@ -80,7 +80,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "I see a section for 'Incomplete Invoices'" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#incomplete_invoices") do
       within("h1") do
@@ -90,7 +90,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "In that section I see a list of the ids of all invoices and each have items that have not yet been shipped" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#incomplete_invoices") do
       within("#invoice_id_not_shipped") do
@@ -120,7 +120,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   end
 
   it "each invoice id links to that invoice's admin show page" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
 
     within("#incomplete_invoices") do
       within("#invoice_id_not_shipped") do
@@ -133,7 +133,7 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
   # Coming back to this test
 
   it "I see that the list is ordered from oldest to newest" do
-    visit admin_index_path
+    visit admin_dashboard_index_path
     # Coming back to this test
 
 

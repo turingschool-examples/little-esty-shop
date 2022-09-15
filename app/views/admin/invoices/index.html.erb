@@ -1,0 +1,14 @@
+<h1> Admin Dashboard </h1>
+
+<ul>
+  <li> <%= link_to 'Dashboard'  %></li>
+  <li> <%= link_to 'Merchants' %></li>
+  <li> <%= link_to 'Invoices' %></li>
+</ul>
+
+<h3> Invoices </h3>
+
+<% @invoices.each do |invoice| %>
+  <li> <%= link_to "Invoice #{invoice.id}" %> </li>
+
+<% end %>
