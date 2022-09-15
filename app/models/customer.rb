@@ -9,14 +9,10 @@ class Customer < ApplicationRecord
 
   def self.top_five_customers
     joins(invoices: :transactions)
-    .select("customers.*, count(transactions.id) as transactions_count")
-    .where(transactions: {result: 0})
-    .group("customers.id")
-    .order(transactions_count: :desc)
+    .group(:id).where(transactions: {result: 0})
+    .select('customers.*, count(result) as success_count')
+    .order(success_count: :desc)
     .limit(5)
   end
 
-  def successful_transactions
-    transactions.count{|transaction| transaction.result == "success"}
-  end
 end
