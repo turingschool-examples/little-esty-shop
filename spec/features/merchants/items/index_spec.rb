@@ -155,6 +155,8 @@ RSpec.describe 'Merchant Items Index' do
             expect(page).to have_content("Total Revenue: 28500")
           end
         end
+      end
+    end
 
     describe 'creating a new item' do
       it 'has a link to create a new item' do
