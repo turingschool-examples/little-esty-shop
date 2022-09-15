@@ -13,6 +13,8 @@
 
 <h3>Items Ready to Ship:</h3>
 
-<% @merchant.items_not_shipped.each do |item| %>
-  <p><%= item %></p> 
-<% end %>
+<div id="items-not-shipped">
+  <% @merchant.items_not_shipped.each do |item| %>
+    <p id="#item.id"><%= item.name %> - <%= link_to "#{item.id}", "/merchants/#{@merchant.id}" %> </p>
+  <% end %>
+</div>
