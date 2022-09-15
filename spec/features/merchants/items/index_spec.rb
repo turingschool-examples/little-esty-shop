@@ -43,6 +43,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
         expect(page).to have_link("#{@item5.name}")
       end
+
     end
   end
 end
