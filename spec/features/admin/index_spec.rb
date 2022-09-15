@@ -11,20 +11,20 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
     # let!(:item2) { invoice4.items.create!(status: 2) }
     describe 'Header' do
         it 'indicates admin is on the dashboard' do
-            visit("/admin")
+            visit admin_index_path
             expect(page).to have_content("Admin Dashboard")
         end
     end
 
     describe 'Incomplete Invoices' do
         it 'has a section for incomplete invoices' do
-            visit("/admin")
+            visit admin_index_path
             within("#incomplete_invoices") do
                 expect(page).to have_content("Invoice ##{invoice1.id}")
                 expect(page).to have_content("Invoice ##{invoice4.id}")
                 expect(page).to_not have_content("Invoice ##{invoice2.id}")
 
-                click_on "Invoice ##{invoice1.id}"
+                click_on invoice1.id
                 expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
             end
         end
