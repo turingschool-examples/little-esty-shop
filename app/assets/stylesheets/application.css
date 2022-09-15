@@ -40,14 +40,26 @@
   margin: 10px;
 }
 
-#inv_cust_info {
-  display :flex;
-  flex-direction: row;
-  justify-content: flex-start;
+#merchant_invoice_items {
+  margin: auto;
+  width: calc(100% - 20px);
+  border-collapse: collapse;
 }
 
-#inv_cust_info div {
-  padding-right: 5px;
+#merchant_invoice_items th {
+  background-color: darkgray;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid black;
+}
+
+#merchant_invoice_items td {
+  background-color: lightgray;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid black;
 }
 
 .invoice_links {
