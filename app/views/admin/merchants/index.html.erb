@@ -1,1 +1,5 @@
 <h1>Admin Merchants</h1>
+
+<ul> <% @merchants.each do |merchant| %>
+  <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %> </li>
+<% end %> </ul>
