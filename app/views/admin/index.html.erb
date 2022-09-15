@@ -5,5 +5,5 @@
 <ol><% @top_customers.each do |customer| %>
   <section id="customer-<%= customer.id %>">
   <li><%= "#{customer.first_name} #{customer.last_name}" %> -
-  <%= customer.successful_transactions %> transactions</li>
+  <%= customer.success_count %> transactions</li>
 <% end %></ol></section>
