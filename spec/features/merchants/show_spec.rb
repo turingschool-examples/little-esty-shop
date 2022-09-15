@@ -81,12 +81,12 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:whitneyinvoice6_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice6.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"shipped" )}
 
 
-      let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status:"in_progress" )}
-      let!(:eddie_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice2.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2700, status:"in_progress" )}
-      let!(:eddie_invoice3_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice3.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 10299, status:"in_progress" )}
+      let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status: 0 )}
+      let!(:eddie_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice2.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2700, status: 0 )}
+      let!(:eddie_invoice3_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice3.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 10299, status:0)}
 
-      let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"packaged" )}
-      let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"packaged" )}
+      let!(:polina_invoice1_itemdainty_anklet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:1)}
+      let!(:polina_invoice2_itemdainty_anklet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:1 )}
 
       it 'Then I see the name of my merchant' do
 
@@ -157,12 +157,12 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
 
-      within('ready_to_ship') do
+      within('#ready_to_ship') do
         expect(page).to have_content("Gold Earrings")
         expect(page).to have_content("Gold Studded Bracelet")
-        expect(page).to have_content("Stackable Gold Rings")
+        expect(page).to have_content("Dainty Ankley")
+        expect(page).to_not have_content("Stackable Gold Rings")
         expect(page).to_not have_content("Silver Necklace")
-        expect(page).to_not have_content("Dainty Ankley")
         end
       end
 
