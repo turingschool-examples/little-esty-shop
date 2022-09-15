@@ -7,7 +7,7 @@
   <h1>Top Customers</h1>
   <ol id="top_customers">
     <% @five_top_customers.each do |key, value| %>
-      <li id="<%= key %>"><%= key[0] %>, <%= key[1] %> - <%= value %></li>
+      <li id="<%= key[1] %>"><%= key[0] %>, <%= key[1] %> - <%= value %></li>
     <% end %>
   </ol>
 </section>
