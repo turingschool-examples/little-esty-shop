@@ -62,6 +62,17 @@
   border: 1px solid black;
 }
 
+#flash_messages {
+  display: flex;
+  justify-content: center;
+}
+
+.flash_message {
+  background-color: lightgray;
+  padding: 5px;
+  border: 1px solid lightcoral;
+}
+
 .invoice_links {
   list-style: none;
 }
