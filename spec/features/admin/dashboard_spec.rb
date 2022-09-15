@@ -163,10 +163,6 @@ RSpec.describe "Admin Dashboard" do
         end
       end
 
-# Then I see a section for "Incomplete Invoices"
-# In that section I see a list of the ids of all invoices# That have items that have not yet been shipped
-# And each invoice id links to that invoice's admin show page
-
       it "will show a section for 'Incomplete Invoices' with a list of the id of all invoices that have items that have not yet shipped" do
         visit admin_path
 
@@ -180,7 +176,27 @@ RSpec.describe "Admin Dashboard" do
         end
       end
 
-      it "will have incomplete invoice id links to the invoices admin show page"
+      it "will have incomplete invoice id links to the invoices admin show page" do
+        visit admin_path
+
+        within("#incomplete-invoices") do
+          click_link "#{invoice_1.id}"
+        end
+
+        expect(current_path).to eq(admin_invoice_path(invoice_1))
+
+        visit admin_path
+
+        within("#incomplete-invoices") do
+          click_link "#{invoice_4.id}"
+        end
+
+        expect(current_path).to eq(admin_invoice_path(invoice_4))
+
+        visit admin_path
+        expect(page).to_not have_link("#{invoice_5.id}")
+
+      end
     end
   end
 end

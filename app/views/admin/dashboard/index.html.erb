@@ -15,7 +15,7 @@
   <h2>Incomplete Invoices</h2>
   <ul> 
     <% @invoices.unshipped_invoices.each do |invoice| %>
-      <li><%= invoice.id %></li>
+      <li><%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %></li>
     <% end %>
   </ul>
 </div>
