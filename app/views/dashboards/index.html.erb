@@ -9,7 +9,7 @@
 <div id="top_customers">
   <h2>Top Customers: </h2>
   <ol>
-    <% @merchant.customers.top_five_customers.each do |customer, transactions| %>
+    <% @merchant.customers.top_five_customers_by_merchant.each do |customer, transactions| %>
      <li> <%= customer[1] %> <%= customer[0] %> - <%= transactions %> purchases </li>
     <% end %>
   </ol>
