@@ -103,6 +103,7 @@ RSpec.describe Merchant, type: :model do
     let!(:transaction_48) { invoice_8.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: 0) }
 
     it 'has items_not_shipped method' do
+      
       expect(pretty_plumbing.items_not_shipped).to eq([sink.name, rug.name, lamp.name, toilet.name])
 
     end

@@ -29,18 +29,6 @@ RSpec.describe 'Merchant Dashboard' do
     let!(:invoice_7) { customer_7.invoices.create!(status: 1) }
     let!(:invoice_8) { customer_8.invoices.create!(status: 1) }
 
-    let!(:invoice_item_1) { InvoiceItem.create!(item_id: "#{sink.id}", invoice_id: "#{invoice_1.id}", status: 2) }
-    let!(:invoice_item_2) { InvoiceItem.create!(item_id: "#{rug.id}", invoice_id: "#{invoice_1.id}", status: 2) }
-    let!(:invoice_item_3) { InvoiceItem.create!(item_id: "#{chair.id}", invoice_id: "#{invoice_1.id}", status: 2) }
-    let!(:invoice_item_4) { InvoiceItem.create!(item_id: "#{lamp.id}", invoice_id: "#{invoice_1.id}", status: 0) }
-    let!(:invoice_item_5) { InvoiceItem.create!(item_id: "#{toilet.id}", invoice_id: "#{invoice_1.id}", status: 0) }
-
-    let!(:invoice_item_6) { InvoiceItem.create!(item_id: "#{sink.id}", invoice_id: "#{invoice_2.id}", status: 0) }
-    let!(:invoice_item_7) { InvoiceItem.create!(item_id: "#{rug.id}", invoice_id: "#{invoice_2.id}", status: 1) }
-    let!(:invoice_item_8) { InvoiceItem.create!(item_id: "#{chair.id}", invoice_id: "#{invoice_2.id}", status: 2) }
-    let!(:invoice_item_9) { InvoiceItem.create!(item_id: "#{lamp.id}", invoice_id: "#{invoice_2.id}", status: 2) }
-    let!(:invoice_item_10) { InvoiceItem.create!(item_id: "#{toilet.id}", invoice_id: "#{invoice_2.id}", status: 2) }
-
     # customer_1 transactions
     let!(:transaction_1) { invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: 1) }
     let!(:transaction_2) { invoice_1.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: 1) }
@@ -98,6 +86,17 @@ RSpec.describe 'Merchant Dashboard' do
     let!(:transaction_47) { invoice_8.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: 0) }
     let!(:transaction_48) { invoice_8.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: 0) }
 
+    let!(:invoice_item_1) { InvoiceItem.create!(item_id: "#{sink.id}", invoice_id: "#{invoice_1.id}", status: 2) }
+    let!(:invoice_item_2) { InvoiceItem.create!(item_id: "#{rug.id}", invoice_id: "#{invoice_1.id}", status: 2) }
+    let!(:invoice_item_3) { InvoiceItem.create!(item_id: "#{chair.id}", invoice_id: "#{invoice_1.id}", status: 2) }
+    let!(:invoice_item_4) { InvoiceItem.create!(item_id: "#{lamp.id}", invoice_id: "#{invoice_1.id}", status: 0) }
+    let!(:invoice_item_5) { InvoiceItem.create!(item_id: "#{toilet.id}", invoice_id: "#{invoice_1.id}", status: 0) }
+
+    let!(:invoice_item_6) { InvoiceItem.create!(item_id: "#{sink.id}", invoice_id: "#{invoice_2.id}", status: 0) }
+    let!(:invoice_item_7) { InvoiceItem.create!(item_id: "#{rug.id}", invoice_id: "#{invoice_2.id}", status: 1) }
+    let!(:invoice_item_8) { InvoiceItem.create!(item_id: "#{chair.id}", invoice_id: "#{invoice_2.id}", status: 2) }
+    let!(:invoice_item_9) { InvoiceItem.create!(item_id: "#{lamp.id}", invoice_id: "#{invoice_2.id}", status: 2) }
+    let!(:invoice_item_10) { InvoiceItem.create!(item_id: "#{toilet.id}", invoice_id: "#{invoice_2.id}", status: 2) }
 
     describe 'User Story 1' do
 
@@ -167,7 +166,7 @@ RSpec.describe 'Merchant Dashboard' do
         sink.invoices << invoice_8
     
         visit "/merchants/#{pretty_plumbing.id}/dashboard"
-
+        save_and_open_page
         expect(page).to have_content(customer_4.first_name)
         expect(page).to have_content(customer_2.first_name)
         expect(page).to have_content(customer_3.first_name)
@@ -200,10 +199,10 @@ RSpec.describe 'Merchant Dashboard' do
 
         visit "/merchants/#{pretty_plumbing.id}/dashboard"
 
+        expect(page).to have_content("Successful Transactions: 42")
+        expect(page).to have_content("Successful Transactions: 30")
         expect(page).to have_content("Successful Transactions: 8")
-        expect(page).to have_content("Successful Transactions: 7")
         expect(page).to have_content("Successful Transactions: 6")
-        expect(page).to have_content("Successful Transactions: 5")
         expect(page).to have_content("Successful Transactions: 4")
         expect(page).to_not have_content("Successful Transactions: 10")
       end
@@ -237,7 +236,7 @@ RSpec.describe 'Merchant Dashboard' do
 
       it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
         visit "/merchants/#{pretty_plumbing.id}/dashboard"
-
+        
         expect(page).to have_content(lamp.name)
         expect(page).to have_content(toilet.name)
         expect(page).to have_content(sink.name)
