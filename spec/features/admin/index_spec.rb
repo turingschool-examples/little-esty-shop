@@ -28,13 +28,12 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
             end
         end
 
-        it 'shows the invoice date' do
+        it 'shows the invoice dates ordered by date' do
             visit admin_index_path
             within("#incomplete_invoices") do
-                expect(page).to have_content("Invoice ##{invoice1.id}")
-                expect(page).to have_content("Invoice ##{invoice4.id}")
-                expect(page).to_not have_content("Invoice ##{invoice2.id}")
-                save_and_open_page
+                expect(page).to have_content("Wednesday, September 01, 2021")
+                expect(page).to have_content("Thursday, September 08, 2022")
+                expect("Wednesday, September 01, 2021").to appear_before("Thursday, September 08, 2022")
             end
         end
 
