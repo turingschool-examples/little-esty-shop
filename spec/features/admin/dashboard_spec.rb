@@ -139,29 +139,29 @@ RSpec.describe "Admin Dashboard" do
 
         within("#top-5-customers") do
           within("##{@customer_4.id}") do
-            expect(page).to have_content("#{@customer_4.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-            expect(page).to_not have_content("#{@customer_3.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
+            expect(page).to have_content("#{@customer_4.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_3.invoices.successful_transactions}")
           end
           within("##{@customer_2.id}") do
-            expect(page).to have_content("#{@customer_2.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-            expect(page).to_not have_content("#{@customer_3.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
+            expect(page).to have_content("#{@customer_2.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_3.invoices.successful_transactions}")
           end
           within("##{@customer_3.id}") do
-            expect(page).to have_content("#{@customer_3.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-            expect(page).to_not have_content("#{@customer_1.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
+            expect(page).to have_content("#{@customer_3.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_1.invoices.successful_transactions}")
           end
           within("##{@customer_1.id}") do
-            expect(page).to have_content("#{@customer_1.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-            expect(page).to_not have_content("#{@customer_8.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
+            expect(page).to have_content("#{@customer_1.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_8.invoices.successful_transactions}")
           end
           within("##{@customer_8.id}") do
-            expect(page).to have_content("#{@customer_8.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-            expect(page).to_not have_content("#{@customer_4.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
+            expect(page).to have_content("#{@customer_8.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_4.invoices.successful_transactions}")
           end
 
-          expect(page).to_not have_content("#{@customer_5.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-          expect(page).to_not have_content("#{@customer_6.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
-          expect(page).to_not have_content("#{@customer_7.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
+          expect(page).to_not have_content("#{@customer_5.invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customer_6.invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customer_7.invoices.successful_transactions}")
         end
       end
 
