@@ -158,35 +158,49 @@ RSpec.describe 'Merchant Dashboard' do
 
         visit "/merchants/#{@pretty_plumbing.id}/dashboard"
 
-        expect(page).to have_content(@customer_4.first_name)
-        expect(page).to have_content(@customer_2.first_name)
-        expect(page).to have_content(@customer_3.first_name)
-        expect(page).to have_content(@customer_1.first_name)
-        expect(page).to have_content(@customer_8.first_name)
-        expect(page).to have_content(@customer_4.last_name)
-        expect(page).to have_content(@customer_2.last_name)
-        expect(page).to have_content(@customer_3.last_name)
-        expect(page).to have_content(@customer_1.last_name)
-        expect(page).to have_content(@customer_8.last_name)
-        expect(page).to_not have_content(@customer_5.first_name)
-        expect(page).to_not have_content(@customer_6.first_name)
-        expect(page).to_not have_content(@customer_7.first_name)
-        expect(page).to_not have_content(@customer_5.last_name)
-        expect(page).to_not have_content(@customer_6.last_name)
-        expect(page).to_not have_content(@customer_7.last_name)
+        within("#top-5-customers") do
+          expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
+          expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
+          expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")
+          expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
+          expect(page).to have_content("#{@customer_8.first_name} #{@customer_8.last_name}")
+        end
 
+        expect(page).to_not have_content("#{@customer_5.first_name} #{@customer_5.last_name}")
+        expect(page).to_not have_content("#{@customer_6.first_name} #{@customer_6.last_name}")
+        expect(page).to_not have_content("#{@customer_7.first_name} #{@customer_7.last_name}")
       end
 
       it 'And next to each customer name I see the number of successful transactions they have with merchant' do
 
         visit "/merchants/#{@pretty_plumbing.id}/dashboard"
 
-        expect(page).to have_content("Successful Transactions: 7")
-        expect(page).to have_content("Successful Transactions: 5")
-        expect(page).to have_content("Successful Transactions: 8")
-        expect(page).to have_content("Successful Transactions: 6")
-        expect(page).to have_content("Successful Transactions: 4")
-        expect(page).to_not have_content("Successful Transactions: 10")
+        within("#top-5-customers") do
+          within("##{@customer_4.id}") do
+            expect(page).to have_content("#{@customer_4.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_3.invoices.successful_transactions}")
+          end
+          within("##{@customer_2.id}") do
+            expect(page).to have_content("#{@customer_2.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_3.invoices.successful_transactions}")
+          end
+          within("##{@customer_3.id}") do
+            expect(page).to have_content("#{@customer_3.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_1.invoices.successful_transactions}")
+          end
+          within("##{@customer_1.id}") do
+            expect(page).to have_content("#{@customer_1.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_8.invoices.successful_transactions}")
+          end
+          within("##{@customer_8.id}") do
+            expect(page).to have_content("#{@customer_8.invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customer_4.invoices.successful_transactions}")
+          end
+
+          expect(page).to_not have_content("#{@customer_5.invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customer_6.invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customer_7.invoices.successful_transactions}")
+        end
       end
     end
 
@@ -200,15 +214,6 @@ RSpec.describe 'Merchant Dashboard' do
 
     describe 'User Story 4' do
       it 'Then I see a section for Items Ready to Ship' do
-
-        # sink.invoices << invoice_1
-        # sink.invoices << invoice_2
-        # sink.invoices << invoice_3
-        # sink.invoices << invoice_4
-        # sink.invoices << invoice_5
-        # sink.invoices << invoice_6
-        # sink.invoices << invoice_7
-        # sink.invoices << invoice_8
 
         visit "/merchants/#{@pretty_plumbing.id}/dashboard"
 
