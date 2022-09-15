@@ -145,11 +145,14 @@ RSpec.describe 'Merchant Items Index' do
           visit merchant_items_path(carly)
 
           within("#top-five") do
-            expect(item).to appear_before(item)
-            expect(item).to appear_before(item)
-            expect(item).to appear_before(item)
-            expect(item).to appear_before(item)
-            expect(item).to appear_before(item)
+            expect(grobles.name).to appear_before(licorice.name)
+            expect(licorice.name).to appear_before(grongos.name)
+            expect(grongos.name).to appear_before(peanut.name)
+            expect(peanut.name).to appear_before(knutels.name)
+          end
+
+          within("#top-item-#{grobles.id}") do
+            expect(page).to have_content("Total Revenue: 28500")
           end
         end
       end

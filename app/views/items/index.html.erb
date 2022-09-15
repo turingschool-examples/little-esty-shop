@@ -21,10 +21,10 @@
 </ul>
 <h3>Top 5 Items By Revenue</h3>
 <ol id="top-five">
-  <% @merchant.top_5_items.each do |item| %>
-    <li id="top-item-<%= item.id %>">
-      <%= item.name %>
-      <%= item.revenue %>
+  <% @merchant.top_5_items.each do |item, revenue| %>
+    <li id="top-item-<%= item[0] %>">
+      <%= link_to item[1], merchant_item_path(@merchant, item[0]) %>
+      <p>Total Revenue: <%= revenue %></p>
     </li>
   <% end %>
 </ol>
