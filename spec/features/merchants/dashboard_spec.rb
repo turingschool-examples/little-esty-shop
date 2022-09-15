@@ -32,7 +32,7 @@ RSpec.describe "merchant dashboard" do
       xwithin ("#top_customers") do
         expected_hash = {}
 
-        expect(Merchant.first.top_five_customers).to eq(expected_hash)
+        expect(Merchant.first.top_five_customers_by_merchant).to eq(expected_hash)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe "merchant dashboard" do
       visit merchant_dashboards_path(Merchant.first)
 
       expected_hash = {}
-      
+
       expect(page).to have_content(expected_hash)
     end
   end
