@@ -71,4 +71,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
   end
+  it 'instantiates with Factorybot' do
+    merchant = create(:merchant)
+  end
 end

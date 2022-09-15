@@ -13,7 +13,7 @@ RSpec.describe 'Merchants Items Index' do
       item5 = Item.create!(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(sentence_count: 2), unit_price:Faker::Number.number(digits: 5), merchant_id: merch2.id)
 
       visit merchant_items_path(merch1)
-
+      
       within '.items' do
         expect(page).to have_content("#{item1.name}")
         expect(page).to have_content("#{item2.name}")
