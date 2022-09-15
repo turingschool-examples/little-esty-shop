@@ -17,4 +17,19 @@ RSpec.describe 'Admin Merchants Index' do
       expect(page).to_not have_content("Meat Loaf") #customer name
     end
   end
+
+  describe 'US7' do
+    it 'has a link on each merchants name taking you to their individual show page with their name' do
+      merchant_1 = Merchant.create!(name: "Bread Pitt")
+      merchant_2 = Merchant.create!(name: "Carrie Breadshaw")
+
+      visit "/admin/merchants"
+      click_link "#{merchant_1.name}"
+
+      expect(current_path).to eq("/admin/merchants/#{merchant_1.id}")
+      expect(page).to have_content("Bread Pitt")
+      expect(page).to_not have_content("Carrie Breadshaw")
+    end
+  end
+
 end
