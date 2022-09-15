@@ -6,8 +6,4 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates :name, presence: true
-
-  # def top_customers
-  #   customers.joins(:transactions).where('result = 0').group(:first_name).order(count: :desc).limit(5).count
-  # end
 end

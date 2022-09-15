@@ -9,8 +9,8 @@
 <div id="top_customers">
   <h2>Top Customers: </h2>
   <ol>
-    <% @customers.each do |customer| %> <!-- insert top_five method here -->
-     <li> <%= customer.first_name %><%= customer.last_name %>  </li>
+    <% @merchant.customers.top_five.each do |customer, transactions| %> 
+     <li> <%= customer[1] %> <%= customer[0] %> - <%= transactions %> purchases </li>
     <% end %>
   </ol>
 </div>
