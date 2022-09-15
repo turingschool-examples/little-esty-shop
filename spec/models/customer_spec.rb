@@ -21,16 +21,8 @@ RSpec.describe Customer, type: :model do
     describe 'top_customers' do
       it 'returns the top 5 customers with most succesfully completed transactions' do
         8.times do
-        Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+          Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
         end
-        # require 'pry' ; binding.pry
-        # customer_2 = Customer.create!(first_name: 'Josh', last_name: 'Mann')
-        # customer_3 = Customer.create!(first_name: 'Miya', last_name: 'Yang')
-        # customer_4 = Customer.create!(first_name: 'Angel', last_name: 'Olsen')
-        # customer_5 = Customer.create!(first_name: 'Max', last_name: 'Smelter')
-        # customer_6 = Customer.create!(first_name: 'Bobby', last_name: 'Brown')
-        # customer_7 = Customer.create!(first_name: 'Jessica', last_name: 'Alba') 
-        # customer_8 = Customer.create!(first_name: 'Jamie', last_name: 'Lynn') 
 
         invoice_1 = Invoice.create!(customer_id: Customer.all[0].id, status: 'completed')
         invoice_8 = Invoice.create!(customer_id: Customer.all[0].id, status: 'completed')
