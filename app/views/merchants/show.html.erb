@@ -8,7 +8,7 @@
 <div id="top-5-customers">
 <h2>Top 5 Customers:</h2>
 <% @best_customers.each do |customer| %>
-  <p id=""<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
+  <p id="<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
 <% end %>
 </div>
 
