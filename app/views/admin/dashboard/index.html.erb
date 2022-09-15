@@ -3,3 +3,10 @@
 <%= link_to "Merchant Index", "/admin/merchants" %>
 <br>
 <%= link_to "Invoice Index", "/admin/invoices" %>
+
+<div id="top-5-customers">
+<h2>Top 5 Customers:</h2>
+<% @customers.top_5_customers.each do |customer| %>
+  <p id="<%= customer.id %>"> <%= customer.first_name %> <%= customer.last_name %> - Number of transactions: <%= customer.success_count %></p>
+<% end %>
+</div>
