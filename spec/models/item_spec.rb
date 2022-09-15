@@ -13,4 +13,49 @@ RSpec.describe Item, type: :model do
     it { should have_many :invoice_items }
     it { should have_many(:invoices).through(:invoice_items) }
   end
+
+  describe 'class methods' do
+    
+    describe '.successful_transactions' do
+
+      it 'sorts items by success transactions' do
+        Merchant.delete_all
+        Customer.delete_all
+        Invoice.delete_all
+        Transaction.delete_all
+        Item.delete_all
+        Item.delete_all
+        InvoiceItem.delete_all
+        merchant1 = Merchant.create!(name: "Mia")
+
+        customer1 = Customer.create!(first_name: "Iron", last_name: "Man")
+  
+        invoice1 = Invoice.create!(customer_id: customer1.id, status: 1) #completed
+        invoice2 = Invoice.create!(customer_id: customer1.id, status: 1) # completed
+        invoice3 = Invoice.create!(customer_id: customer1.id, status: 1) # completed
+  
+        transaction1 = Transaction.create!(credit_card_number: 948756, result: 0, invoice_id: invoice1.id) #result succesful
+        transaction2 = Transaction.create!(credit_card_number: 287502, result: 0, invoice_id: invoice2.id) #result succesful
+        transaction3 = Transaction.create!(credit_card_number: 287502, result: 1, invoice_id: invoice3.id) #result failure
+  
+        item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, merchant_id: merchant1.id) # 3.
+        item2 = Item.create!(name: "Bone", description: "pet treats", unit_price: 200, merchant_id: merchant1.id) # 4.
+        item3 = Item.create!(name: "Kong", description: "pet toys", unit_price: 100, merchant_id: merchant1.id) # 5.
+        item4 = Item.create!(name: "Collar", description: "pet collar", unit_price: 300, merchant_id: merchant1.id) # 6.
+        item5 = Item.create!(name: "Leash", description: "pet leash", unit_price: 400, merchant_id: merchant1.id) # 2.
+        item6 = Item.create!(name: "Kibble", description: "pet food", unit_price: 600, merchant_id: merchant1.id) # 1.
+        item7 = Item.create!(name: "Failed", description: "Failed", unit_price: 600, merchant_id: merchant1.id) # 1.
+  
+        invoice_items1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 1, unit_price: 500, status: 0) #revenue = 500
+        invoice_items2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 2, unit_price: 200, status: 0) #revenue = 400
+        invoice_items3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 3, unit_price: 100, status: 1) #revenue = 300
+        invoice_items4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item4.id, quantity: 2, unit_price: 100, status: 1) #revenue = 200
+        invoice_items5 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item5.id, quantity: 2, unit_price: 400, status: 2) #revenue = 800
+        invoice_items6 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item6.id, quantity: 2, unit_price: 600, status: 2) #revenue = 1200
+        invoice_items7 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item7.id, quantity: 2, unit_price: 600, status: 2) #revenue = 1200
+
+        expect(Item.successful_transactions).to eq [item1, item2, item3, item4, item5, item6]
+      end
+    end
+  end
 end

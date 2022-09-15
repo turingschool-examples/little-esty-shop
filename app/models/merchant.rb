@@ -12,6 +12,6 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_items
-    items_sorted_by_revenue.limit(5)
+    items_sorted_by_revenue.successful_transactions.limit(5)
   end
 end

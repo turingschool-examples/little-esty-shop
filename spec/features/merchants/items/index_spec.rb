@@ -55,7 +55,7 @@ RSpec.describe 'Merchants Items Index' do
       @invoice1 = Invoice.create!(customer_id: @customer1.id, status: 1) #completed
       @invoice2 = Invoice.create!(customer_id: @customer1.id, status: 1) # completed
 
-      @transaction1 = Transaction.create!(credit_card_number: 948756, result: 1, invoice_id: @invoice1.id) #result succesful
+      @transaction1 = Transaction.create!(credit_card_number: 948756, result: 1, invoice_id: @invoice1.id) #result failure
       @transaction2 = Transaction.create!(credit_card_number: 287502, result: 1, invoice_id: @invoice2.id) #result succesful
 
       @item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, merchant_id: @merchant1.id) # 3.
