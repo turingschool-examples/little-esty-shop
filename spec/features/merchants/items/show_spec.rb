@@ -57,7 +57,7 @@ RSpec.describe 'Merchant Items Show Page Feature' do
                   click_link("Update Item")
 
                   expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}/edit")
-                  # save_and_open_page
+                  save_and_open_page
                   fill_in "Name", with: "Mint Toothpaste"
                   fill_in "Description", with: "very minty toothpaste"
                   fill_in "Unit price", with: "4000"
@@ -68,7 +68,7 @@ RSpec.describe 'Merchant Items Show Page Feature' do
                   expect(page).to have_content("Description: very minty toothpaste")
                   expect(page).to have_content("Current Selling Price: $#{'%.2f' % (4000/100.to_f)}")
                   expect(page).to have_content("Current Selling Price: $40.00")
-                  save_and_open_page
+                  # save_and_open_page
                   expect(page).to have_content("***NOTICE: Merchant Item attribute information has been successfullly updated***")
                 end
               end
