@@ -1,1 +1,4 @@
 <h1><%=@merchant.name%> Show Page</h1>
+
+
+<p><%= link_to "Update #{@merchant.name} information", "/admin/merchants/#{@merchant.id}/edit"%></p>
