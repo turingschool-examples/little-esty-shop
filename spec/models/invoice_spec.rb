@@ -46,5 +46,9 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.unshipped_invoices).to eq([invoice_1, invoice_2, invoice_4, invoice_5])
     end
 
+    it '#successful_transactions' do
+      expect(Invoice.successful_transactions).to eq(0)
+    end
+
   end
 end
