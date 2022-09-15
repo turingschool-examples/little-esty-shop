@@ -272,8 +272,15 @@
           null,
           1,
           1,
+          null,
           1,
           1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
           null,
           null
         ]
@@ -284,7 +291,9 @@
           null
         ]
       },
-      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/models/customer.rb": {
+
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/models/customer.rb": {
+
         "lines": [
           1,
           1,
@@ -313,11 +322,134 @@
           null
         ]
       },
-      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/models/invoice.rb": {
+
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
         "lines": [
           1,
           1,
           1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/spec/models/merchant_spec.rb": {
+
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+
           null,
           1,
           1,
@@ -333,25 +465,10 @@
           1,
           1,
           null,
-          1,
-          1,
-          1,
-          1,
-          1,
           null
         ]
       },
-      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/models/transaction.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/models/item.rb": {
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -361,25 +478,44 @@
           1,
           1,
           1,
-          null,
-          null,
           null
         ]
       },
-      "/Users/maryballantyne/Turing/mod2/projects/little-esty-shop/app/models/merchant.rb": {
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/spec/models/transaction_spec.rb": {
         "lines": [
-          1,
           1,
           null,
           1,
           1,
+          2,
+          2,
+          null,
+          null,
+          1,
+
+          2,
+          null,
+
+          null,
+          1,
+          null
+        ]
+      },
+
+      "/Users/ryansmith/Turing/2mod/projects/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
           1,
           1,
+          1,
+          null,
+
           1,
           null
         ]
       }
     },
-    "timestamp": 1663258427
+
+    "timestamp": 1663257174
+
   }
 }
