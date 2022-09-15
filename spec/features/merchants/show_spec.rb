@@ -80,7 +80,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:whitneyinvoice5_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice5.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
       let!(:whitneyinvoice6_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice6.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"shipped" )}
 
-
       let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status: 0 )}
       let!(:eddie_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice2.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2700, status: 0 )}
       let!(:eddie_invoice3_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice3.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 10299, status:0)}
@@ -172,7 +171,15 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
 
       within('#ready_to_ship') do
         save_and_open_page
-        expect(page).to have_content("Gold Earrings - Invoice #3147")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice1.id}")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice2.id}")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice3.id}")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice4.id}")
+        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice1.id}")
+        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice2.id}")
+        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice3.id}")
+        expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice1.id}")
+        expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice2.id}")
         # expect(page).to have_content("Gold Studded Bracelet")
         # expect(page).to have_content("Dainty Ankley")
         # expect(page).to_not have_content("Stackable Gold Rings")
