@@ -115,18 +115,32 @@ RSpec.describe 'admin dashboard' do
     end
     describe 'US4' do
       describe 'when I visit the Incomplete Invoices on Admin Dashboard' do
-        it 'displays a section for Incomplete Invoices' do
-          item_7 = Item.create!(name: "Garlic Bread", description: "Garlicky, goodness", unit_price: 566, merchant_id: @merchant_1.id)
-          invoice_7 = Invoice.create!(status: 0, customer_id: @customer_1.id)
-          invoice_item_7 = InvoiceItem.create!(quantity: 4, unit_price: 434, status: 0, item_id: item_7.id, invoice_id: invoice_7.id)
-
+        before :each do
+          @item_7 = Item.create!(name: "Garlic Bread", description: "Garlicky, goodness", unit_price: 566, merchant_id: @merchant_1.id)
+          @invoice_7 = Invoice.create!(status: 0, customer_id: @customer_1.id)
+          @invoice_item_7 = InvoiceItem.create!(quantity: 4, unit_price: 434, status: 0, item_id: @item_7.id, invoice_id: @invoice_7.id)
+        end
+        it 'displays a section for Incomplete Invoices and links the id' do
           visit "/admin"
 
           within("#incompleteInvoices") do
-          expect(page).to have_content("Incomplete Invoices")
-          expect(page).to have_content("Invoice ID number: #{invoice_7.id}")
-          expect(page).to_not have_content("Invoice ID number: #{@invoice_6.id}")
+            expect(page).to have_content("Incomplete Invoices")
+            expect(page).to have_content("Invoice ID number: #{@invoice_7.id}")
+            expect(page).to_not have_content("Invoice ID number: #{@invoice_6.id}")
           end
+        end
+        it 'links the incomplete id to the admin invoice show page' do
+          visit "/admin"
+          click_link("Invoice ID number: #{@invoice_7.id}")
+          expect(current_path).to eq("/admin/invoices/#{@invoice_7.id}")
+        end
+      end
+    end
+
+    describe 'US5' do
+      describe 'Incomplete Invoices section continued' do
+        xit 'displays the date of creation next to each invoice and lists oldest to newest' do
+
         end
       end
     end
