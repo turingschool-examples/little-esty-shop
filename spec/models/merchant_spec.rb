@@ -1,5 +1,6 @@
 require 'rails_helper'
-RSpec.describe Merchant, type: :model do  
+
+RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many :items }
   end
@@ -21,6 +22,10 @@ RSpec.describe Merchant, type: :model do
   let!(:studded_bracelet) { jewlery_city.items.create!(name: "Gold Studded Bracelet", description: "A bracet to make others jealous", unit_price: 2900) }
   let!(:dainty_anklet) { jewlery_city.items.create!(name: "Dainty Ankley", description: "An everyday ankley", unit_price: 2299) }
   let!(:stackable_rings) { jewlery_city.items.create!(name: "Stackable Gold Rings", description: "Small rings to be mixed and matched", unit_price: 1299) }
+  let!(:conch_shell) { jewlery_city.items.create!(name: "Conch Shell Headdress", description: "A beach-ready, waterproof shell hat", unit_price: 5099) }
+  let!(:banana_earrings) { jewlery_city.items.create!(name: "Banana Earrings", description: "A fruit salad for your earlobes", unit_price: 2399) }
+  let!(:nose_ring) { jewlery_city.items.create!(name: "Platinum Nose Ring", description: "They'll never know it's platinum!", unit_price: 4299) }
+  let!(:spiked_wallet_chain) { jewlery_city.items.create!(name: "Spiked Wallet Chain", description: "Keep it close, keep it safe", unit_price: 1599) }
 
   let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
   let!(:whitney) { Customer.create!(first_name: "Whitney", last_name: "Gains")}
@@ -41,6 +46,10 @@ RSpec.describe Merchant, type: :model do
   let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice5) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice6) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice7) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice8) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice9) { alaina.invoices.create!(status: "completed")}
   let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed")}
   let!(:eddie_invoice2) { eddie.invoices.create!(status: "completed")}
   let!(:eddie_invoice3) { eddie.invoices.create!(status: "completed")}
@@ -62,6 +71,10 @@ RSpec.describe Merchant, type: :model do
   let!(:alaina_invoice3_transaction) { alaina_invoice3.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:alaina_invoice4_transaction) { alaina_invoice4.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:alaina_invoice5_transaction) { alaina_invoice5.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+  let!(:alaina_invoice6_transaction) { alaina_invoice6.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+  let!(:alaina_invoice7_transaction) { alaina_invoice7.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+  let!(:alaina_invoice8_transaction) { alaina_invoice8.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
+  let!(:alaina_invoice9_transaction) { alaina_invoice9.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:eddie_invoice1_transaction) { eddie_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:eddie_invoice2_transaction) { eddie_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:eddie_invoice3_transaction) { eddie_invoice3.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
@@ -77,6 +90,10 @@ RSpec.describe Merchant, type: :model do
   let!(:alainainvoice3_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice3.id, item_id: gold_earrings.id, quantity: 12, unit_price: 1600, status:"shipped" )}
   let!(:alainainvoice4_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice4.id, item_id: gold_earrings.id, quantity: 4, unit_price: 2400, status:"shipped" )}
   let!(:alainainvoice5_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice5.id, item_id: gold_earrings.id, quantity: 243, unit_price: 27000, status:"shipped" )}
+  let!(:alainainvoice6_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice6.id, item_id: conch_shell.id, quantity: 1412, unit_price: 12421, status:"shipped" )}
+  let!(:alainainvoice7_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice7.id, item_id: banana_earrings.id, quantity: 122, unit_price: 1242, status:"shipped" )}
+  let!(:alainainvoice8_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice8.id, item_id: nose_ring.id, quantity: 2881, unit_price: 4599, status:"shipped" )}
+  let!(:alainainvoice5_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice9.id, item_id: spiked_wallet_chain.id, quantity: 827, unit_price: 3499, status:"shipped" )}
 
   let!(:whitneyinvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice1.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"shipped" )}
   let!(:whitneyinvoice2_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice2.id, item_id: silver_necklace.id, quantity: 31, unit_price: 270, status:"shipped" )}
@@ -95,11 +112,11 @@ RSpec.describe Merchant, type: :model do
 
 
   describe 'class methods' do
-    describe '#search' do
-      xit 'returns partial matches' do
-       #method goes here
-      end
-    end
+    # describe '#search' do
+    #   xit 'returns partial matches' do
+    #    #method goes here
+    #   end
+    # end
 
     describe '#enabled_items' do
       it 'returns an array of enabled items' do
@@ -116,11 +133,16 @@ RSpec.describe Merchant, type: :model do
 
   describe 'instance methods' do
     describe '#transactions_top_5' do
-     it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
+      it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
 
-      expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Whitney", "Alaina", "Eddie", "Polina", "Ryan"])
-     end
+        expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Alaina", "Whitney", "Eddie", "Polina", "Ryan"])
+      end
+    end
+
+    describe '#top_5_items' do
+      it 'an array of the top 5 items by revenue' do
+        expect(jewlery_city.top_5_items).to eq([conch_shell, nose_ring, spiked_wallet_chain, banana_earrings, gold_earrings])
+      end
     end
   end
-
 end
