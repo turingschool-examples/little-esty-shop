@@ -150,7 +150,7 @@ RSpec.describe 'Merchant Dashboard' do
         sink.invoices << invoice_8
 
         visit "/merchants/#{pretty_plumbing.id}/dashboard"
-        
+
         expect(page).to have_content(customer_4.first_name)
         expect(page).to have_content(customer_2.first_name)
         expect(page).to have_content(customer_3.first_name)
@@ -170,9 +170,26 @@ RSpec.describe 'Merchant Dashboard' do
 
       end
 
-      it 'And next to each customer name I see the number of successful transactions they have with merchant'
+      it 'And next to each customer name I see the number of successful transactions they have with merchant' do
 
+        sink.invoices << invoice_1
+        sink.invoices << invoice_2
+        sink.invoices << invoice_3
+        sink.invoices << invoice_4
+        sink.invoices << invoice_5
+        sink.invoices << invoice_6
+        sink.invoices << invoice_7
+        sink.invoices << invoice_8
 
+        visit "/merchants/#{pretty_plumbing.id}/dashboard"
+
+        expect(page).to have_content("Successful Transactions: 8")
+        expect(page).to have_content("Successful Transactions: 7")
+        expect(page).to have_content("Successful Transactions: 6")
+        expect(page).to have_content("Successful Transactions: 5")
+        expect(page).to have_content("Successful Transactions: 4")
+        expect(page).to_not have_content("Successful Transactions: 10")
+      end
     end
   end
 end
