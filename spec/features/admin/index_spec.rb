@@ -19,13 +19,16 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
     describe 'Incomplete Invoices' do
         it 'has a section for incomplete invoices' do
             visit("/admin")
-            save_and_open_page
             within("#incomplete_invoices") do
                 expect(page).to have_content("Invoice ##{invoice1.id}")
                 expect(page).to have_content("Invoice ##{invoice4.id}")
                 expect(page).to_not have_content("Invoice ##{invoice2.id}")
+
+                click_on "Invoice ##{invoice1.id}"
+                # save_and_open_page
+                # expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
             end
         end
-        
+
     end
 end
