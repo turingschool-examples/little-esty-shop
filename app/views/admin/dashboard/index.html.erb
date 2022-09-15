@@ -14,6 +14,8 @@
 <div id="incomplete-invoices")>
   <h2>Incomplete Invoices</h2>
   <ul> 
-    
+    <% @invoices.unshipped_invoices.each do |invoice| %>
+      <li><%= invoice.id %></li>
+    <% end %>
   </ul>
 </div>

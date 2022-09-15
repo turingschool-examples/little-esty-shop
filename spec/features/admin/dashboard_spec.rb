@@ -172,11 +172,11 @@ RSpec.describe "Admin Dashboard" do
 
         within("#incomplete-invoices") do
           expect(page).to have_content("Incomplete Invoices")
-          expect(page).to have_content(invoice_item1.id)
-          expect(page).to have_content(invoice_item2.id) 
-          expect(page).to have_content(invoice_item3.id) 
-          expect(page).to have_content(invoice_item4.id)
-          expect(page).to_not have_content(invoice_item5.id)
+          expect(page).to have_content(invoice_1.id)
+          expect(page).to have_content(invoice_2.id) 
+          expect(page).to have_content(invoice_3.id) 
+          expect(page).to have_content(invoice_4.id)
+          expect(page).to_not have_content(invoice_5.id)
         end
       end
 
