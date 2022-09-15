@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Admin Dashboard" do
   describe "As an admin" do
+    let!(:merchant_1) { Merchant.create!(name: "Johns Tools") }
+    let!(:merchant_2) { Merchant.create!(name: "Hannas Hammocks") }
+    let!(:merchant_3) { Merchant.create!(name: "Pretty Plumbing") }
+
     let!(:customer_1) { Customer.create!(first_name: "Larry", last_name: "Smith") }
     let!(:customer_2) { Customer.create!(first_name: "Susan", last_name: "Field") }
     let!(:customer_3) { Customer.create!(first_name: "Barry", last_name: "Roger") }
@@ -76,6 +80,16 @@ RSpec.describe "Admin Dashboard" do
     let!(:transaction_47) { invoice_8.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: 0) }
     let!(:transaction_48) { invoice_8.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: 0) }
 
+    let!(:item_1) { merchant_1.items.create!(name: "Mega Tool Box", description: "Huge Toolbox with lots of options") }
+    let!(:item_2) { merchant_2.items.create!(name: "Blue Hammock", description: "Large blue hammock for all your outdoor adventures") }
+    let!(:item_3) { merchant_3.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.") }
+
+    let!(:invoice_item1) { InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 5, unit_price: 2000, status: 1)}
+    let!(:invoice_item2) { InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 1, unit_price: 1000, status: 0)}
+    let!(:invoice_item3) { InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_3.id, quantity: 4, unit_price: 1000, status: 1)}
+    let!(:invoice_item4) { InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_4.id, quantity: 2, unit_price: 2500, status: 0)}
+    let!(:invoice_item5) { InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 2500, status: 2)}
+
     describe "I visit the admin dashboard" do
       it "I see a header indicating that I am on the admin dashboard" do
         visit admin_path
@@ -148,6 +162,25 @@ RSpec.describe "Admin Dashboard" do
           expect(page).to_not have_content("#{customer_7.invoices.sum{|invoice| invoice.transactions.where(result: 0).count}}")
         end
       end
+
+# Then I see a section for "Incomplete Invoices"
+# In that section I see a list of the ids of all invoices# That have items that have not yet been shipped
+# And each invoice id links to that invoice's admin show page
+
+      it "will show a section for 'Incomplete Invoices' with a list of the id of all invoices that have items that have not yet shipped" do
+        visit admin_path
+
+        within("#incomplete-invoices") do
+          expect(page).to have_content("Incomplete Invoices")
+          expect(page).to have_content(invoice_item1.id)
+          expect(page).to have_content(invoice_item2.id) 
+          expect(page).to have_content(invoice_item3.id) 
+          expect(page).to have_content(invoice_item4.id)
+          expect(page).to_not have_content(invoice_item5.id)
+        end
+      end
+
+      it "will have incomplete invoice id links to the invoices admin show page"
     end
   end
 end
