@@ -1,66 +1,43 @@
 require 'csv'
 
+def load_from_csv(table_name, model)
+  csv_text = File.read("db/data/#{table_name}.csv")
+  csv = CSV.parse(csv_text, headers: true)
+  csv.each do |row|
+    model.create!(row.to_hash)
+  end
+  ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
+end
+
 namespace :csv_load do
   desc "Load customers from CSV"
-  task customers: :environment do 
-    csv_text = File.read('db/data/customers.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Customer.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
+  task customers: :environment do
+    load_from_csv('customers', Customer)
   end
 
   desc "Load invoice_items from CSV"
   task invoice_items: :environment do
-    csv_text = File.read('db/data/invoice_items.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      InvoiceItem.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+    load_from_csv('invoice_items', InvoiceItem)
   end
 
   desc "Load invoices from CSV"
   task invoices: :environment do
-    csv_text = File.read('db/data/invoices.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      # require 'pry'; binding.pry
-      Invoice.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
-    
+    load_from_csv('invoices', Invoice)
   end
 
   desc "Load items from CSV"
   task items: :environment do
-    csv_text = File.read('db/data/items.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Item.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+    load_from_csv('items', Item)
   end
 
   desc "Load merchants from CSV"
   task merchants: :environment do
-    csv_text = File.read('db/data/merchants.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Merchant.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+    load_from_csv('merchants', Merchant)
   end
 
   desc "Load transactions from CSV"
   task transactions: :environment do
-    csv_text = File.read('db/data/transactions.csv')
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      Transaction.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
+    load_from_csv('transactions', Transaction)
   end
 
   desc "Load all from CSV"
