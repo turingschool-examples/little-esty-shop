@@ -80,9 +80,9 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:whitneyinvoice5_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice5.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
       let!(:whitneyinvoice6_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice6.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"shipped" )}
 
-      let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status: 0 )}
-      let!(:eddie_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice2.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2700, status: 0 )}
-      let!(:eddie_invoice3_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice3.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 10299, status:0)}
+      let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status: "packaged" )}
+      let!(:eddie_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice2.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2700, status: "packaged" )}
+      let!(:eddie_invoice3_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice3.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 10299, status:"packaged")}
 
       let!(:polina_invoice1_itemdainty_anklet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:1)}
       let!(:polina_invoice2_itemdainty_anklet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:1 )}
@@ -184,7 +184,25 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         end
       end
 
-      it "And each invoice id is a link to my merchant's invoice show page"
+      it "And each invoice id is a link to my merchant's invoice show page" do
+        visit "/merchants/#{jewlery_city.id}/dashboard"
+
+        within('#ready_to_ship') do
+
+        save_and_open_page
+          expect(page).to have_link("#{alaina_invoice1.id}")
+          expect(page).to have_link("#{alaina_invoice2.id}")
+          expect(page).to have_link("#{alaina_invoice3.id}")
+          expect(page).to have_link("#{alaina_invoice4.id}")
+          expect(page).to have_link("#{eddie_invoice1.id}")
+          expect(page).to have_link("#{eddie_invoice2.id}")
+          expect(page).to have_link("#{polina_invoice1.id}")
+          expect(page).to have_link("#{polina_invoice2.id}")
+          expect(page).to have_link("#{alaina_invoice4.id}")
+          expect(page).to_not have_link("#{ryan_invoice1.id}")
+          end
+
+      end
 
 
     end
