@@ -24,14 +24,15 @@ RSpec.describe Customer, type: :model do
     describe 'top_five_customers_admin' do
       it 'Should return the top five customers in a hash with the customer name and amount of successful transactions' do
         expected_hash = {
-          "Parker" => 8,
-          "Joey" => 7,
-          "Leanne" => 7,
-          "Mariah" => 3,
-          "Cecelia" => 1
+          %w[Daugherty Parker] => 8,
+          %w[Ondricka Joey] => 7,
+          %w[Braun Leanne] => 7,
+          %w[Toy Mariah] => 3,
+          %w[Osinski Cecelia] => 1
         }
-        expect(Customer.five_top_customers).to eq expected_hash
-      end
+        
+        expect(Customer.top_five_customers_admin).to eq expected_hash
+      end 
     end
   end
 end
