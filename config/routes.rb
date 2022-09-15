@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/items/:merchant_item_id/edit', to: 'merchants#items_edit'
   patch '/merchants/:merchant_id/items/:merchant_item_id', to: 'merchants#items_update'
 
+  patch '/merchants/:merchant_id/items/:merchant_item_id/disable', to: 'merchants#is_enabled?'
+  patch '/merchants/:merchant_id/items/:merchant_item_id/enable', to: 'merchants#is_enabled?'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do

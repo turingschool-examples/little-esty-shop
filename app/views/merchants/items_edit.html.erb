@@ -1,10 +1,9 @@
-
-   <%= form_with url: "/merchants/#{@merchant.id}/items/#{@merchant_item.id}", method: :patch, local: true do |form| %>
-        <%= form.label :name %>
-        <%= form.text_field :name, value: @merchant_item.name %>
-        <%= form.label :description %>
-        <%= form.text_field :description, value: @merchant_item.description %>
-        <%= form.label :unit_price %>
-        <%= form.text_field :unit_price, value: @merchant_item.unit_price %>
-        <%= form.submit "Submit" %>
-      <% end %>
+<%= form_with url: "/merchants/#{@merchant.id}/items/#{@merchant_item.id}", method: :patch, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name, value: @merchant_item.name %>
+  <%= form.label :description %>
+  <%= form.text_field :description, value: @merchant_item.description %>
+  <%= form.label :unit_price %>
+  <%= form.text_field :unit_price, value: @merchant_item.unit_price %>
+  <%= form.submit "Submit" %>
+<% end %>

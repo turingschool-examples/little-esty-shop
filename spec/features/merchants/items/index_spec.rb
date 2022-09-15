@@ -37,6 +37,7 @@ RSpec.describe 'Merchant Items Index Page' do
             item_lamp = merchant_roger.items.create!(name: "Item Lamp", description: "You bet, it's a lamp", unit_price: 4000 )
 
             visit "/merchants/#{merchant_stephen.id}/items"
+            save_and_open page
             click_button  
           
           end

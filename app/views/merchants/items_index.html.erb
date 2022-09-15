@@ -1,10 +1,29 @@
 <h1> Merchant Items Index Page </h1>
 
-<% @merchant.items.each do |merchant_item| %>
+<h3> Enabled Items </h3>
 
-    <%= form_with url: "/merchants/#{@merchant.id}/items/#{merchant_item.id}", method: :get, local: true do |form| %>
-        <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
-        <%= form.hidden_field :merchant_item_id, value: "#{merchant_item.id}" %>
-         <%= form.submit "#{merchant_item.name}" %>
-      <% end %>
-<% end %>
+    <% @merchant.enabled_items.each do |merchant_item| %>
+
+        <%= form_with url: "/merchants/#{@merchant.id}/items/#{merchant_item.id}", method: :get, local: true do |form| %>
+            <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
+            <%= form.hidden_field :merchant_item_id, value: "#{merchant_item.id}" %>
+            <%= form.submit "#{merchant_item.name}" %>
+        <% end %>
+
+        <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{merchant_item.id}", method: :patch, params: {enabled: false} %>
+    <% end %>
+
+<h3> Disabled Items </h3>
+    <% @merchant.disabled_items.each do |merchant_item| %>
+
+        <%= form_with url: "/merchants/#{@merchant.id}/items/#{merchant_item.id}", method: :get, local: true do |form| %>
+            <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
+            <%= form.hidden_field :merchant_item_id, value: "#{merchant_item.id}" %>
+            <%= form.submit "#{merchant_item.name}" %>
+        <% end %>
+
+        <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{merchant_item.id}", method: :patch, params: {enabled: true} %>
+    <% end %>
+
+
+

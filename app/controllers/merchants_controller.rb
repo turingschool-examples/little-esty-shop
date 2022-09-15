@@ -25,4 +25,5 @@ class MerchantsController < ApplicationController
     redirect_to "/merchants/#{@merchant.id}/items/#{@merchant_item.id}"
     flash[:notice] = "***NOTICE: Merchant Item attribute information has been successfullly updated***"
   end
+
 end
