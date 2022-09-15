@@ -68,6 +68,8 @@ RSpec.describe 'Merchant Items Show Page Feature' do
                   expect(page).to have_content("Description: very minty toothpaste")
                   expect(page).to have_content("Current Selling Price: $#{'%.2f' % (4000/100.to_f)}")
                   expect(page).to have_content("Current Selling Price: $40.00")
+                  save_and_open_page
+                  expect(page).to have_content("***NOTICE: Merchant Item attribute information has been successfullly updated***")
                 end
               end
             end
