@@ -1,3 +1,5 @@
+
+
 class Invoice < ApplicationRecord
 
   belongs_to :customer
@@ -7,9 +9,10 @@ class Invoice < ApplicationRecord
   enum status: [:in_progress, :completed, :cancelled]
 
   def merchant_items(merchant)
-    items
-      .where(merchant: merchant)
-      .select('items.name, invoice_items.*')
+    invoice_items
+      .joins(:item)
+      .select('invoice_items.*, items.name, items.merchant_id')
+      .where('items.merchant_id = ?', merchant.id)
   end
 
 end

@@ -20,6 +20,10 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     @invoice_2.items << [@item_3, @item_4]
     @invoice_3.items << [@item_1, @item_4]
     @invoice_4.items << @item_2
+
+    @invoice_1.invoice_items.each do |invoice_item|
+      invoice_item.update!(status: :pending)
+    end
   end
 
   it 'lists the invoices that contain an item sold by the merchant' do
@@ -35,7 +39,7 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
     within("li#invoice_#{@invoice_1.id}") do
       expect(page).to have_link("#{@invoice_1.id}")
       click_link("#{@invoice_1.id}")
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1.id, @invoice_1.id))
     end
   end
 
