@@ -21,14 +21,14 @@ RSpec.describe 'Merchants Items Show' do
         end
       end
 
-      expect(current_path).to eq item_path(item1)
+      expect(current_path).to eq merchant_item_path(merch1, item1)
     end
     it 'shows the name, description, and current selling price' do
       merch1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
 
       item1 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price:Faker::Number.number(digits: 5), merchant_id: merch1.id)
 
-      visit item_path(item1)
+      visit merchant_item_path(merch1, item1)
 
       within "#item-#{item1.id}" do
         expect(page).to have_content("#{item1.name}")
