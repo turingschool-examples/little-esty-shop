@@ -64,8 +64,8 @@ RSpec.describe Customer, type: :model do
         transaction_19 = Transaction.create!(result: 0, invoice_id: invoice_5.id, credit_card_number: "987654321")
         transaction_20 = Transaction.create!(result: 0, invoice_id: invoice_5.id, credit_card_number: "987654321")
 
-        transaction_21 = Transaction.create!(result: 0, invoice_id: invoice_6.id, credit_card_number: "654498711")
-        transaction_22 = Transaction.create!(result: 1, invoice_id: invoice_6.id, credit_card_number: "654498711")
+        transaction_21 = Transaction.create!(result: :success, invoice_id: invoice_6.id, credit_card_number: "654498711")
+        transaction_22 = Transaction.create!(result: :failed, invoice_id: invoice_6.id, credit_card_number: "654498711")
 
         invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 850, status: 2, item_id: item_1.id, invoice_id: invoice_1.id)
         invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1300, status: 2, item_id: item_2.id, invoice_id: invoice_2.id)
