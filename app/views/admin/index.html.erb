@@ -1,3 +1,10 @@
 <header>
     <h1>Admin Dashboard</h1>
 </header>
+
+<div id="incomplete_invoices">
+    <h2>Incomplete Invoices</h2>
+    <% @incomplete_invoices.each do |invoice| %>
+    <p><%= link_to "Invoice ##{invoice.id}", "/admin/invoices/#{invoice.id}" %></p>
+  <% end %>
+</div>
