@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Admin Merchants Edit' do
   describe "Can update merchant attributes" do
     it 'has a link to update merchant info' do
-      merch_1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
-      merch_2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
+      merch_1 = Merchant.create!(name: Faker::Name.name)
+      merch_2 = Merchant.create!(name: Faker::Name.name)
 
       visit "/admin/merchants/#{merch_1.id}"
 
@@ -15,8 +15,8 @@ RSpec.describe 'Admin Merchants Edit' do
 
   describe "on page, the name field is already filled in with the merchants name" do
     it 'name field is prefilled with merchants name' do
-      merch_1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
-      merch_2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
+      merch_1 = Merchant.create!(name: Faker::Name.name)
+      merch_2 = Merchant.create!(name: Faker::Name.name)
       visit "/admin/merchants/#{merch_1.id}"
       expect(page).to have_content(merch_1.name)
       click_link("Edit Merchant")
@@ -30,8 +30,8 @@ RSpec.describe 'Admin Merchants Edit' do
 
   describe 'when info is updated and form submitted, returned back to show page to see changes' do
     it 'filling form out and submitting returns back to show page with changes visible' do
-      merch_1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
-      merch_2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
+      merch_1 = Merchant.create!(name: Faker::Name.name)
+      merch_2 = Merchant.create!(name: Faker::Name.name)
       visit "/admin/merchants/#{merch_1.id}"
       expect(page).to have_content(merch_1.name)
       click_link("Edit Merchant")
@@ -47,8 +47,8 @@ RSpec.describe 'Admin Merchants Edit' do
 
   describe 'returning back to show page after edit also triggers a flash message stating things have been updated' do
     it 'filling form out and submitting returns back to show page with changes visible' do
-      merch_1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
-      merch_2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
+      merch_1 = Merchant.create!(name: Faker::Name.name)
+      merch_2 = Merchant.create!(name: Faker::Name.name)
       visit "/admin/merchants/#{merch_1.id}"
       expect(page).to_not have_content("Merchant successfully updated")
       click_link("Edit Merchant")
@@ -58,10 +58,9 @@ RSpec.describe 'Admin Merchants Edit' do
     end
 
     it 'not filling in fields properly returns back to edit page with error message' do
-      merch_1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
-      merch_2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
+      merch_1 = Merchant.create!(name: Faker::Name.name)
+      merch_2 = Merchant.create!(name: Faker::Name.name)
       visit "/admin/merchants/#{merch_1.id}"
-      expect(page).to_not have_content("Merchant successfully updated")
       click_link("Edit Merchant")
       fill_in 'Name', with: ''
       click_button("Submit")

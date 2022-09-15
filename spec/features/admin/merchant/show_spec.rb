@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Admin Merchants Show' do
   describe "Has the merchant's name" do
     it 'shows the name of the merchant' do
-      merch_1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
-      merch_2 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
+      merch_1 = Merchant.create!(name: Faker::Name.name)
+      merch_2 = Merchant.create!(name: Faker::Name.name)
 
       visit "/admin/merchants/#{merch_1.id}"
 
