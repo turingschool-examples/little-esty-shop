@@ -1,11 +1,15 @@
+
 <h1> Merchant show page</h1>
 
-<h3><%=@merchant.name%></h3>
+<h3>Merchant Name:</h3>
+<h4><%=@merchant.name%></h4>
 
 
 <h3>Items Ready to Ship</h3>
 <%@merchant.ready_to_ship.each do |item| %>
 <div id="item<%=item.id%>">
-   <li><%= item.name %></li>
+   <li><%= item.name %> || invoice # <%= form_with url: "/merchants/placeholder", method: :get do |form| %><%= form.label :query, "Invoice id:" %>
+
+<% end %>
    </div>
 <%end %>
