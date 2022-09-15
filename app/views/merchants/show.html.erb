@@ -4,3 +4,12 @@
 
 <p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items"%></p>
 <p><%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices"%></p>
+
+<h3>Items Ready to Ship</h3>
+<%@merchant.ready_to_ship.each do |item| %>
+<div id="item<%=item.id%>">
+   <li><%= item.name %> || invoice # <%= form_with url: "/merchants/placeholder", method: :get do |form| %><%= form.label :query, "Invoice id:" %>
+
+<% end %>
+   </div>
+<%end %>
