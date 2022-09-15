@@ -39,7 +39,7 @@ RSpec.describe 'Admin invoices show page' do
                                                              status: :pending)
         @invoice_lamp = @invoice.invoice_items.create!(item_id: @item_lamp.id,
                                                        quantity: 2,
-                                                       unit_price: 700,
+                                                       unit_price: 6,
                                                        status: :packaged)
         @invoice_rock = @invoice.invoice_items.create!(item_id: @item_rock.id,
                                                        quantity: 3,
@@ -69,6 +69,7 @@ RSpec.describe 'Admin invoices show page' do
 
       it 'as the price the item sold for' do
         visit admin_invoice_path(@invoice.id)
+        save_and_open_page
         within "#invoice_item-#{@invoice_toothpaste.id}-price" do
           expect(page).to have_content('$60.00')
         end
@@ -76,8 +77,9 @@ RSpec.describe 'Admin invoices show page' do
           expect(page).to have_content('$120.00')
         end
         within "#invoice_item-#{@invoice_lamp.id}-price" do
-          expect(page).to have_content('$7.00')
+          expect(page).to have_content('$0.06')
         end
+        
       end
 
       it 'has the invoice item status' do
@@ -92,6 +94,13 @@ RSpec.describe 'Admin invoices show page' do
           expect(page).to have_content(@invoice_lamp.status.capitalize)
         end
       end
+    end
+
+    it 'US 36 Total revenue generated from an invoice' do
+      allow_any_instance_of(Invoice).to receive(:total_revenue).and_return(1299)
+      invoice = @customer.invoices.create!(status: 'in progress')
+      visit admin_invoice_path(invoice.id)
+      expect(page).to have_content('Total Revenue: $12.99')
     end
   end
 end

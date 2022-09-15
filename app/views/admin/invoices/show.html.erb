@@ -4,7 +4,7 @@
 <h4> Customer: </h4>
 
 <%= @invoice.customer_name %>
-
+<% #binding.pry %>
 <h4> Items on this invoice: </h4>
 <table>
   <tr>
@@ -17,8 +17,9 @@
   <tr>
     <th> <%= invoice_item.item_name %> </th>
     <th id="invoice_item-<%= invoice_item.id %>-quantity"> <%= invoice_item.quantity %> </th>
-    <th id="invoice_item-<%= invoice_item.id %>-price"> $<%= invoice_item.unit_price.to_s.insert(-3, '.') %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-price"> <%= number_to_currency(invoice_item.unit_price.to_f/100) %> </th>
     <th id="invoice_item-<%= invoice_item.id %>-status"> <%= invoice_item.status.capitalize %> </th>
   </tr>
 <% end %>
 </table>
+<p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %> </p>
