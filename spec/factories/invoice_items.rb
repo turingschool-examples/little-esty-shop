@@ -6,5 +6,7 @@ FactoryBot.define do
     quantity { rand(150) }
     unit_price { rand(50..20000)}
     status { valid_status.sample }
+    invoice
+    item
   end
 end 
