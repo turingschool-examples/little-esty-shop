@@ -54,9 +54,11 @@ RSpec.describe 'Merchants Items Index' do
 
       @invoice1 = Invoice.create!(customer_id: @customer1.id, status: 1) #completed
       @invoice2 = Invoice.create!(customer_id: @customer1.id, status: 1) # completed
+      @invoice3 = Invoice.create!(customer_id: @customer1.id, status: 1) # completed
 
-      @transaction1 = Transaction.create!(credit_card_number: 948756, result: 1, invoice_id: @invoice1.id) #result failure
-      @transaction2 = Transaction.create!(credit_card_number: 287502, result: 1, invoice_id: @invoice2.id) #result succesful
+      @transaction1 = Transaction.create!(credit_card_number: 948756, result: 0, invoice_id: @invoice1.id) #result succesful
+      @transaction2 = Transaction.create!(credit_card_number: 287502, result: 0, invoice_id: @invoice2.id) #result succesful
+      @transaction3 = Transaction.create!(credit_card_number: 287502, result: 1, invoice_id: @invoice3.id) #result failure
 
       @item1 = Item.create!(name: "Camera", description: "electronic", unit_price: 500, merchant_id: @merchant1.id) # 3.
       @item2 = Item.create!(name: "Bone", description: "pet treats", unit_price: 200, merchant_id: @merchant1.id) # 4.
@@ -64,6 +66,7 @@ RSpec.describe 'Merchants Items Index' do
       @item4 = Item.create!(name: "Collar", description: "pet collar", unit_price: 300, merchant_id: @merchant1.id) # 6.
       @item5 = Item.create!(name: "Leash", description: "pet leash", unit_price: 400, merchant_id: @merchant1.id) # 2.
       @item6 = Item.create!(name: "Kibble", description: "pet food", unit_price: 600, merchant_id: @merchant1.id) # 1.
+      @item7 = Item.create!(name: "Failed", description: "Failed", unit_price: 600, merchant_id: @merchant1.id) # 1.
 
       @invoice_items1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 1, unit_price: 500, status: 0) #revenue = 500
       @invoice_items2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, quantity: 2, unit_price: 200, status: 0) #revenue = 400
@@ -71,6 +74,7 @@ RSpec.describe 'Merchants Items Index' do
       @invoice_items4 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item4.id, quantity: 2, unit_price: 100, status: 1) #revenue = 200
       @invoice_items5 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item5.id, quantity: 2, unit_price: 400, status: 2) #revenue = 800
       @invoice_items6 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item6.id, quantity: 2, unit_price: 600, status: 2) #revenue = 1200
+      @invoice_items7 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item7.id, quantity: 2, unit_price: 600, status: 2) #revenue = 1200
     end
 
     it 'shows the 5 most popular items by name' do
@@ -83,6 +87,7 @@ RSpec.describe 'Merchants Items Index' do
         expect(page).to have_content("#{@item3.name}")
         expect(page).to have_content("#{@item5.name}")
         expect(page).to have_content("#{@item6.name}")
+        expect(page).to_not have_content("#{@item7.name}")
       end
     
       within ".top_5_items" do

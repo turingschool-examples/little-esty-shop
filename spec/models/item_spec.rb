@@ -19,13 +19,6 @@ RSpec.describe Item, type: :model do
     describe '.successful_transactions' do
 
       it 'sorts items by success transactions' do
-        Merchant.delete_all
-        Customer.delete_all
-        Invoice.delete_all
-        Transaction.delete_all
-        Item.delete_all
-        Item.delete_all
-        InvoiceItem.delete_all
         merchant1 = Merchant.create!(name: "Mia")
 
         customer1 = Customer.create!(first_name: "Iron", last_name: "Man")
