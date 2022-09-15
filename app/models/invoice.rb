@@ -6,4 +6,10 @@ class Invoice < ApplicationRecord
 
   enum status: [:in_progress, :completed, :cancelled]
 
+  def merchant_items(merchant)
+    items
+      .where(merchant: merchant)
+      .select('items.name, invoice_items.*')
+  end
+
 end
