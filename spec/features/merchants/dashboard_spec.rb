@@ -22,18 +22,23 @@ RSpec.describe "merchant dashboard" do
     end
 
     #User story 3: Top 5 Customers
-    it 'I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+    xit 'I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
       visit merchant_dashboards_path(Merchant.first)
 
-      within ("#top_customers") do
-        expect(Merchant.find(1).top_five).to eq()
+      xwithin ("#top_customers") do
+        expected_hash = {}
+
+        expect(Merchant.first.top_five_customers).to eq(expected_hash)
       end
     end
 
 
-    it 'next to each customer name I see the number of successful transactions they have conducted with my merchant' do
+    xit 'next to each customer name I see the number of successful transactions they have conducted with my merchant' do
       visit merchant_dashboards_path(Merchant.first)
 
+      expected_hash = {}
+      
+      expect(page).to have_content(expected_hash)
     end
   end
 end

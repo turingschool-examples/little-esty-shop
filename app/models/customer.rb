@@ -8,7 +8,7 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def self.top_five
-    top_five_hash = joins(:transactions).where('transactions.result = 0').group(:last_name, :first_name).order(count: :desc).limit(5).count
+  def self.top_five_customers
+    joins(:transactions).where('transactions.result = 0').group(:last_name, :first_name).order(count: :desc).limit(5).count
   end
 end
