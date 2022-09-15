@@ -95,11 +95,11 @@ RSpec.describe Merchant, type: :model do
 
 
   describe 'class methods' do
-    describe '#search' do
-      xit 'returns partial matches' do
-       #method goes here
-      end
-    end
+    # describe '#search' do
+    #   xit 'returns partial matches' do
+    #    #method goes here
+    #   end
+    # end
 
     describe '#enabled_items' do
       it 'returns an array of enabled items' do
@@ -116,11 +116,16 @@ RSpec.describe Merchant, type: :model do
 
   describe 'instance methods' do
     describe '#transactions_top_5' do
-     it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
+      it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
 
-      expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Whitney", "Alaina", "Eddie", "Polina", "Ryan"])
-     end
+        expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Whitney", "Alaina", "Eddie", "Polina", "Ryan"])
+      end
+    end
+
+    describe '#top_5_items' do
+      it 'returns an array of the top 5 items by revenue' do
+        expect(jewlery_city.top_5_items).to eq([])
+      end
     end
   end
-
 end

@@ -19,3 +19,12 @@
     </li>
   <% end %>
 </ul>
+<h3>Top 5 Items By Revenue</h3>
+<ol id="top-five">
+  <% @merchant.top_5_items.each do |item| %>
+    <li id="top-item-<%= item.id %>">
+      <%= item.name %>
+      <%= item.revenue %>
+    </li>
+  <% end %>
+</ol>

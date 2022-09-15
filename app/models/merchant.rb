@@ -14,4 +14,8 @@ class Merchant < ApplicationRecord
   def disabled_items
     items.where(enabled: false)
   end
+
+  def top_5_items
+    require 'pry'; binding.pry
+  end
 end
