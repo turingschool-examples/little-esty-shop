@@ -21,7 +21,7 @@ class MerchantItemsController < ApplicationController
     item = Item.find(params[:id])
 
     if params.has_key?(:status)
-      item = item.update(item_params)
+      item.update(item_params)
       redirect_to merchant_items_path(merchant.id)
     else
       item.update(item_params)
