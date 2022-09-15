@@ -10,7 +10,7 @@ RSpec.describe Transaction, type: :model do
   describe 'enums' do
     it 'responds to status updates' do
       customer = Customer.create!(first_name: "Gunther", last_name: "Guyman")
-      invoice = Invoice.create!(customer_id: customer.id, status: 0)
+      invoice = Invoice.create!(customer_id: customer.id, status: :in_progress)
       transaction = Transaction.create!(invoice_id: invoice.id, credit_card_number: "59829292157329", result: 0)
 
       expect(transaction.failed?).to eq(true)

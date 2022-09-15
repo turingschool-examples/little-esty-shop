@@ -1,4 +1,4 @@
-<h1>Update information for <%= @item.name %><h1>
+<h2>Update information for <%= @item.name %><h2>
 
 <h3><%= form_with url: merchant_item_path(@merchant.id, @item.id), method: :patch, local: true do |f| %>
   <p><%= f.label :name, "Update Name:" %>
@@ -10,6 +10,6 @@
   <p><%= f.label :unit_price, "Update Unit Price:" %>
      <%= f.text_field :unit_price, value: @item.unit_price %></p>
 
-  <%= f.submit "Submit Changes"%>
+     <%= f.submit "Submit Changes"%>
 
-<% end %></h3>
+    <% end %></h3>
