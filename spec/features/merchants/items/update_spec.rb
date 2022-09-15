@@ -22,12 +22,12 @@ RSpec.describe 'Merchant Item Update Page: ' do
         expect(current_path).to eq(edit_merchant_item_path(@merch2.id, @item4.id))
       end
 
-      xit 'there is a form with the existing item attribute information' do
+      it 'there is a form with the existing item attribute information' do
         visit edit_merchant_item_path(@merch1.id, @item2.id)
 
-        expect(page).to have_content("Update #{@item2.name}")
-        expect(page).to have_content("Update #{@item2.description}")
-        expect(page).to have_content("Update #{@item2.unit_price}")
+        expect(page).to have_content("Update Name")
+        expect(page).to have_content("Update Description")
+        expect(page).to have_content("Update Unit Price")
       end
 
       xit "When I update the information in the form and I click 'submit'" do

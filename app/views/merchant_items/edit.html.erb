@@ -1,1 +1,15 @@
 <h1>Update information for <%= @item.name %><h1>
+
+<h3><%= form_with url: merchant_item_path(@merchant.id, @item.id), method: :post, local: true do |f| %>
+  <p><%= f.label :name, "Update Name: " %>
+     <%= f.text_field :name, value: @item.name %></p>
+
+  <p><%= f.label :description, "Update Description: " %>
+     <%= f.text_field :description, value: @item.description %></p>
+
+  <p><%= f.label :unit_price, "Update Unit Price: " %>
+     <%= f.text_field :unit_price, value: @item.unit_price %></p>
+
+  <%= f.submit "Submit Changes" %>
+
+<% end %></h3>
