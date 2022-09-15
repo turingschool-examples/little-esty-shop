@@ -19,53 +19,57 @@ RSpec.describe 'Merchant Item Update Page: ' do
 
         click_link "Update #{@item4.name}"
 
-        expect(current_path).to eq("the path goes here")
+        expect(current_path).to eq(edit_merchant_item_path(@merch2.id, @item4.id))
       end
 
-      it 'there is a form with the existing item attribute information' do
-        visit "the path goes here"
+      xit 'there is a form with the existing item attribute information' do
+        visit edit_merchant_item_path(@merch1.id, @item2.id)
 
-        expect(page).to have_content("Update #{item.name}")
-        expect(page).to have_content("Update #{item.description}")
-        expect(page).to have_content("Update #{item.unit_price}")
+        expect(page).to have_content("Update #{@item2.name}")
+        expect(page).to have_content("Update #{@item2.description}")
+        expect(page).to have_content("Update #{@item2.unit_price}")
       end
 
-      it "When I update the information in the form and I click 'submit'" do
-        visit "the path goes here"
+      xit "When I update the information in the form and I click 'submit'" do
+        visit edit_merchant_item_path(@merch1.id, @item2.id)
 
         expect(page).to have_button("Sumbit Changes")
       end
 
-      it 'I am redirected back to the item show page' do
-        visit "the path goes here"
+      xit 'I am redirected back to the item show page' do
+        visit edit_merchant_item_path(@merch1.id, @item2.id)
 
-        fill_in "Update #{item.name}"
-        fill_in "Update #{item.description}"
-        fill_in "Update #{item.unit_price}"
+        fill_in "Update Name: ", with: 'New Name'
+        fill_in "Update Description: ", with: "Description new"
+        fill_in "Update Unit Price: ", with: 69575
 
         click_button "Submit Changes"
 
-        expect(current_path).to eq("new path")
+        expect(current_path).to eq(merchant_item_path(@merch1.id, @item2.id))
       end
-      it 'I see the updated information' do
-        visit "the path goes here"
+      xit 'I see the updated information' do
+        visit edit_merchant_item_path(@merch2.id, @item5.id)
 
-        fill_in "Update #{item.name}"
-        fill_in "Update #{item.description}"
-        fill_in "Update #{item.unit_price}"
+        fill_in "Update Name: ", with: 'New Name'
+        fill_in "Update Description: ", with: 'Description new'
+        fill_in "Update Unit Price: ", with: 69575
 
-        expect(page).to have_content("item.name")
-        expect(page).to have_content("item.description")
-        expect(page).to have_content("Updated sale price")
+        click_button "Submit Changes"
+
+        expect(page).to have_content('New Name')
+        expect(page).to have_content('Description new')
+        expect(page).to have_content('Current Selling Price: $695.75')
       end
-      it 'I see a flash message stating that the information has been successfully updated' do
-        visit "the path goes here"
+      xit 'I see a flash message stating that the information has been successfully updated' do
+        visit edit_merchant_item_path(@merch2.id, @item5.id)
 
-        fill_in "Update #{item.name}"
-        fill_in "Update #{item.description}"
-        fill_in "Update #{item.unit_price}"
+        fill_in "Update Name: ", with: 'New Name'
+        fill_in "Update Description: ", with: 'Description new'
+        fill_in "Update Unit Price: ", with: 69575
 
-        expect(page).to have_content("#{item.name} has been successfully updated.")
+        click_button "Submit Changes"
+
+        expect(page).to have_content("#{@item5.name} has been successfully updated.")
       end
     end
   end
