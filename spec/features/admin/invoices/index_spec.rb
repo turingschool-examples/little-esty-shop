@@ -5,8 +5,6 @@ RSpec.describe 'As an admin,' do
     it 'Then I see a list of all Invoice ids in the system' do
       visit admin_invoices_path
 
-      save_and_open_page
-
       expect(page).to have_content("Invoice #1")
       expect(page).to have_content("Invoice #2")
       expect(page).to have_content("Invoice #3")
@@ -14,6 +12,8 @@ RSpec.describe 'As an admin,' do
     end
 
     it 'Each id links to the admin invoice show page' do
+      visit admin_invoices_path
+
       expect(page).to have_link("Invoice #1")
       expect(page).to have_link("Invoice #2")
       expect(page).to have_link("Invoice #3")
