@@ -163,6 +163,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         expect(page).to have_content("Dainty Ankley")
         expect(page).to_not have_content("Stackable Gold Rings")
         expect(page).to_not have_content("Silver Necklace")
+        save_and_open_page
         end
       end
 
