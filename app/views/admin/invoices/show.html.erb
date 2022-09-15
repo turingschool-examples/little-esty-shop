@@ -1,0 +1,28 @@
+<h3> Invoice #<%= @invoice.id %> </h3>
+<%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true  do |form| %>
+  <%= form.label :status %>
+  <%= form.select :status, [["In progress", "in progress"], ["Completed", "completed"], ["Cancelled", "cancelled"]] %> 
+  <%= form.submit "Update Invoice Status"%>
+<% end %>
+
+<p> Created on: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %>
+<p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %> </p>
+<h4> Customer: </h4>
+<p><%= @invoice.customer_name %></p>
+<h4> Items on this invoice: </h4>
+<table>
+  <tr>
+    <th> Item Name </th>
+    <th> Quantity </th>
+    <th> Unit Price </th>
+    <th> Status </th>
+  </tr>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <tr>
+    <th> <%= invoice_item.item_name %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-quantity"> <%= invoice_item.quantity %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-price"> <%= number_to_currency(invoice_item.unit_price.to_f/100) %> </th>
+    <th id="invoice_item-<%= invoice_item.id %>-status"> <%= invoice_item.status.capitalize %> </th>
+  </tr>
+<% end %>
+</table>

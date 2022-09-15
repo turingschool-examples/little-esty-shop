@@ -1,0 +1,4 @@
+<h4> Invoices </h4>
+<ul><% @invoices.each do |invoice| %>
+  <li> <%=link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %></li>
+<% end %> </ul>

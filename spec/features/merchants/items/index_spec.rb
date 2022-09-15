@@ -14,7 +14,10 @@ RSpec.describe 'Merchant Items Index Page' do
         item_lamp = merchant_roger.items.create!(name: "Item Lamp", description: "You bet, it's a lamp", unit_price: 4000 )
 
         visit "/merchants/#{merchant_stephen.id}/items"
+<<<<<<< HEAD
         
+=======
+>>>>>>> 2c14a14b8b8fef53b8ff6a7ce4cc44d8f4fde640
         expect(page).to have_content("Merchant Items Index Page")
         expect(page).to have_content(item_toothpaste.name)
         expect(page).to have_content(item_rock.name)
