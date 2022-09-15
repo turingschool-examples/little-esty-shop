@@ -11,12 +11,16 @@
 
   <body>
     <h1 id="page_title">Little Esty Shop</h1>
-
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
+    <% if flash.count > 0 %>
+      <div id="flash_messages">
+        <div class='flash_message'>
+          <% flash.each do |type, msg| %>
+              <%= msg %><br>
+          <% end %>
+        </div>
       </div>
     <% end %>
+
 
     <%= yield %>
   </body>
