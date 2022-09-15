@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+ .float-container {
+  border: 3px solid #fff;
+  padding: 2px;
+}
+
+.float-child {
+  width: 40%;
+  float: left;
+  padding: 20px;
+  border: 2px solid #fff;
+}  
