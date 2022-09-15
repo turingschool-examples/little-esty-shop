@@ -1,3 +1,15 @@
 <header>
     <h1>Admin Dashboard</h1>
+    <nav>
+    <%= link_to 'Dashboard', '/admin'%>
+    <%= link_to 'Merchants', '/admin/merchants'%>
+    <%= link_to 'Invoices', '/admin/invoices'%>
+    </nav>
 </header>
+
+<div id="incomplete_invoices">
+    <h2>Incomplete Invoices</h2>
+    <% @incomplete_invoices.each do |invoice| %>
+    <p><%= link_to "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}", "/admin/invoices/#{invoice.id}" %></p>
+  <% end %>
+</div>
