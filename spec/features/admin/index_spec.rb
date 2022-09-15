@@ -129,10 +129,10 @@ RSpec.describe "As an admin, when I visit the admin dashboard (/admin)", type: :
     end
   end
 
-  it "Next to each invoice id I see the date that the invoice was created, I see the date formatted like 'Monday, July 18, 2019'"
+  xit "Next to each invoice id I see the date that the invoice was created, I see the date formatted like 'Monday, July 18, 2019'"
   # Coming back to this test
 
-  it "I see that the list is ordered from oldest to newest" do
+  xit "I see that the list is ordered from oldest to newest" do
     visit admin_index_path
     # Coming back to this test
 
