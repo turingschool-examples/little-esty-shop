@@ -21,7 +21,7 @@ RSpec.describe 'Admin Merchants Edit page' do
       # Then I am redirected back to the merchant's admin show page where I see the updated information
       expect(current_path).to eq("/admin/merchants/#{merchant_2.id}")
       expect(page).to have_content("Carrie Loves Breadshaw")
-      save_and_open_page
+
       # And I see a flash message stating that the information has been successfully updated.
       # expect(page).to have_content("Update to Carrie Loves Breadshaw was successful!")
     end
