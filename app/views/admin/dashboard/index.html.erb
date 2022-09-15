@@ -10,3 +10,12 @@
   <p id="<%= customer.id %>"> <%= customer.first_name %> <%= customer.last_name %> - Number of transactions: <%= customer.success_count %></p>
 <% end %>
 </div>
+
+<div id="incomplete-invoices")>
+  <h2>Incomplete Invoices</h2>
+  <ul> 
+    <% @invoices.unshipped_invoices.each do |invoice| %>
+      <li><%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %></li>
+    <% end %>
+  </ul>
+</div>
