@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'faker'
 
 RSpec.describe Customer, type: :model do
   let(:customer) { Customer.new(first_name: "Joey", last_name: "T") }
