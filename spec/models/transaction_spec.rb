@@ -11,4 +11,10 @@ RSpec.describe Transaction, type: :model do
   describe 'relationships' do
     it {should belong_to :invoice }
   end
+
+  it 'instantiates with faker' do
+    customer = create(:customer)
+    invoice = customer.invoices.create(attributes_for(:invoice))
+    transaction = invoice.transactions.create(attributes_for(:transaction))
+  end
 end

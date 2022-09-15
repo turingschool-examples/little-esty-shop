@@ -11,6 +11,7 @@ RSpec.describe Merchant, type: :model do
     it { should have_many :items}
   end
 
+
   describe 'class methods' do
     describe '#enabled_merchants' do
       it 'sorts merchants by if their status is enabled' do
@@ -39,5 +40,9 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.disabled_merchants).to eq(disabled_merchants)
       end
     end
+  end
+  
+  it 'instantiates with Factorybot' do
+    merchant = create(:merchant)
   end
 end

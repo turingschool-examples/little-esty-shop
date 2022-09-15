@@ -1,0 +1,20 @@
+<div id="merchant_name"><%=@merchant.name%></div>
+
+<%= link_to "Go To Merchant Items Index", "/merchants/#{@merchant.id}/items"%>
+<%= link_to "Go To Merchant Invoices Index", "/merchants/#{@merchant.id}/invoices"%>
+
+<div id="favorite_customers">
+  <h2>Favorite Customers</h2>
+  <ol>
+    <% @favorite_customers.each do |customer| %>
+      <li id="customer_<%=customer.id%>"><%=customer.first_name%> <%=customer.last_name%>, Successful Transactions: <%= customer.transac_count %></li>
+    <% end %>
+</div>  
+
+<div id="items_to_ship">
+  <h2>Items Ready to Ship</h2>
+  <ul>
+    <% @items_to_ship.each do |item| %>
+      <li id="item_<%=item.id%>"><%=item.name%> ordered by <%= link_to "invoice #{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}"%> on <%= item.invoice_create_date.to_date %></li>
+    <% end %>
+</div>  
