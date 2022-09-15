@@ -19,11 +19,11 @@ RSpec.describe 'the Merchant Invoices Index' do
     @inv_item_4 = create(:invoice_item, invoice: @invs_1[0], item: @items_1.sample) #this will always belong to @merchants[1]
     @inv_item_5 = create(:invoice_item, invoice: @invs_1[1], item: @items_1.sample) #this will always belong to @merchants[1]
     
-    visit "/merchants/#{@merchants[0].id}/invoices"
+    # visit "/merchants/#{@merchants[0].id}/invoices"
   end
   
   describe 'as a merchant' do
-    it 'shows all invoices that include the merchants items' do
+    xit 'shows all invoices that include the merchants items' do
       expect(page).to have_content(@invs_0[0].id)
       expect(page).to have_content(@invs_0[1].id)
       expect(page).to have_content(@invs_0[2].id)
