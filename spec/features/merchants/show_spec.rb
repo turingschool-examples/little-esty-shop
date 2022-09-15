@@ -188,8 +188,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         visit "/merchants/#{jewlery_city.id}/dashboard"
 
         within('#ready_to_ship') do
-
-        save_and_open_page
           expect(page).to have_link("#{alaina_invoice1.id}")
           expect(page).to have_link("#{alaina_invoice2.id}")
           expect(page).to have_link("#{alaina_invoice3.id}")
@@ -200,8 +198,10 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
           expect(page).to have_link("#{polina_invoice2.id}")
           expect(page).to have_link("#{alaina_invoice4.id}")
           expect(page).to_not have_link("#{ryan_invoice1.id}")
+          
+          click_on("#{alaina_invoice1.id}")
+          expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
           end
-
       end
 
 
