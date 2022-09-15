@@ -8,6 +8,9 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def update
-    require 'pry';binding.pry
+    invoice = Invoice.find(params[:id])
+    invoice.update(status: params[:invoice][:status])
+    invoice.save
+    redirect_to admin_invoice_path
   end
 end

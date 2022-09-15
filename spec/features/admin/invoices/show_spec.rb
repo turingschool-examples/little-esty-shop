@@ -102,12 +102,13 @@ RSpec.describe 'Admin invoices show page' do
     end
 
     it 'US 37 Update Invoice Status' do
-      visit admin_invoice_path(@invoice.id)
-      expect(@invoice.status).to eq('in progress')
+      invoice = @customer.invoices.create!(status: 'in progress')
+      visit admin_invoice_path(invoice.id)
+      expect(invoice.status).to eq('in progress')
       select('Completed', from: 'Status')
       click_button 'Update Invoice Status'
-      expect(current_path).to eq(admin_invoice_path(@invoice.id))
-      expect(@invoice.status).to eq('completed')
+      expect(current_path).to eq(admin_invoice_path(invoice.id))
+      expect(invoice.reload.status).to eq('completed')
     end
   end
 end
