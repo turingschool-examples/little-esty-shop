@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   resources :invoice_items
   resources :customers
   resources :admin, only: [:index]
+  namespace :admin do
+    # resources :dashboard, only: [:index]
+    resources :invoices, only: [:index]
+  end
 end
