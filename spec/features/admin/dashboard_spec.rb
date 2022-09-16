@@ -24,4 +24,24 @@ RSpec.describe 'admin dashboard page' do
     expect(current_path).to eq(admin_invoices_path)
   end
 
+  describe 'dashboard statistics' do
+    before :each do
+
+      create_list(:invoice, 6)
+      @customer1 = create(:customer)
+      create_list(:invoice, 2, customer_id: @customer1.id)
+
+
+      require "pry"; binding.pry
+    end
+
+    it '' do
+      visit admin_path
+    end
+
+
+
+
+  end
+
 end
