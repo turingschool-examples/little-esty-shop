@@ -8,14 +8,14 @@ RSpec.describe 'Merchant Items Index' do
   let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500, enabled: true) }
   let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900, enabled: false) }
   let!(:hummus) { carly_silo.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1200, enabled: false) }
-  let!(:licorice) { carly.items.create!(name: "Licorice Funnels", description: "Some stuff", unit_price: 1200, enabled: true) }
-  let!(:peanut) { carly.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500, enabled: true) }
-  let!(:choco_waffle) { carly.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900, enabled: false) }
-  let!(:hummus) { carly.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1300, enabled: false) }
-  let!(:grobles) { carly.items.create!(name: "Kasegrobles", description: "Some stuff", unit_price: 1400, enabled: true) }
-  let!(:knutels) { carly.items.create!(name: "Schmooknutels", description: "Some stuff", unit_price: 800, enabled: true) }
-  let!(:brontos) { carly.items.create!(name: "Walder Brontos", description: "Some stuff", unit_price: 700, enabled: true) }
-  let!(:grongos) { carly.items.create!(name: "Funky Grongos", description: "Some stuff", unit_price: 600, enabled: true) }
+  let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Some stuff", unit_price: 1200, enabled: true) }
+  let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Some stuff", unit_price: 1500, enabled: true) }
+  let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Some stuff", unit_price: 900, enabled: false) }
+  let!(:hummus) { carly_silo.items.create!(name: "Hummus Snocones", description: "Some stuff", unit_price: 1300, enabled: false) }
+  let!(:grobles) { carly_silo.items.create!(name: "Kasegrobles", description: "Some stuff", unit_price: 1400, enabled: true) }
+  let!(:knutels) { carly_silo.items.create!(name: "Schmooknutels", description: "Some stuff", unit_price: 800, enabled: true) }
+  let!(:brontos) { carly_silo.items.create!(name: "Walder Brontos", description: "Some stuff", unit_price: 700, enabled: true) }
+  let!(:grongos) { carly_silo.items.create!(name: "Funky Grongos", description: "Some stuff", unit_price: 600, enabled: true) }
 
   let!(:skooter) { bmv.items.create!(name: "Hollenskooter", description: "Some stuff", unit_price: 12000, enabled: true) }
   let!(:rider) { bmv.items.create!(name: "Hosenpfloofer", description: "Some stuff", unit_price: 220000, enabled: true) }
@@ -146,7 +146,7 @@ RSpec.describe 'Merchant Items Index' do
     describe 'it lists the 5 most popular items' do
       describe 'and the total revenue each item generates' do
         it 'lists the top 5 items by revenue generated' do
-          visit merchant_items_path(carly)
+          visit merchant_items_path(carly_silo)
 
           within("#top-five") do
             expect(grobles.name).to appear_before(licorice.name)

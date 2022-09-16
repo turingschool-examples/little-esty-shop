@@ -204,6 +204,8 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
           end
       end
 
+      it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest"
+
 
     end
   end
