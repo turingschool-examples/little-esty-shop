@@ -7,6 +7,10 @@ class Merchant < ApplicationRecord
       Customer.joins(invoices: :transactions).where( transactions: {result: 1}).group(:id).order("transactions.count desc").limit(5)
   end
 
+  def ready_to_ship_items
+    items.joins(:invoice_items).select("invoice_id, items.name as item_name").where.not(invoice_items: {status: 2})
+  end
+  
   def enabled_items
     items.where(enabled: true)
   end
@@ -15,7 +19,6 @@ class Merchant < ApplicationRecord
     items.where(enabled: false)
   end
 
-  #could this also be a class method?
   def top_5_items
     Item.joins(invoices: :transactions)
       .group(:id, :name)

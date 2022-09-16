@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
+RSpec.describe Merchant, type: :model do  
   describe 'relationships' do
     it { should have_many :items }
   end
@@ -95,7 +95,7 @@ RSpec.describe Merchant, type: :model do
   let!(:alainainvoice8_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice8.id, item_id: nose_ring.id, quantity: 2881, unit_price: 4599, status:"shipped" )}
   let!(:alainainvoice5_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice9.id, item_id: spiked_wallet_chain.id, quantity: 827, unit_price: 3499, status:"shipped" )}
 
-  let!(:whitneyinvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice1.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"shipped" )}
+  let!(:whitneyinvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice1.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"packaged" )}
   let!(:whitneyinvoice2_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice2.id, item_id: silver_necklace.id, quantity: 31, unit_price: 270, status:"shipped" )}
   let!(:whitneyinvoice3_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice3.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
   let!(:whitneyinvoice4_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice4.id, item_id: silver_necklace.id, quantity: 10, unit_price: 270, status:"shipped" )}
@@ -103,7 +103,7 @@ RSpec.describe Merchant, type: :model do
   let!(:whitneyinvoice6_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice6.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"shipped" )}
 
 
-  let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status:"shipped" )}
+  let!(:eddie_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice1.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2199, status:"pending" )}
   let!(:eddie_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice2.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 2700, status:"shipped" )}
   let!(:eddie_invoice3_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: eddie_invoice3.id, item_id: studded_bracelet.id, quantity: 3, unit_price: 10299, status:"shipped" )}
 
@@ -138,6 +138,14 @@ RSpec.describe Merchant, type: :model do
         expect(jewlery_city.transactions_top_5.pluck(:first_name)).to eq(["Alaina", "Whitney", "Eddie", "Polina", "Ryan"])
       end
     end
+
+
+    describe '#ready_to_ship_items' do
+      it 'finds all items that are ready to ship for a particular merchant' do
+       expect(jewlery_city.ready_to_ship_items.pluck(:name)).to eq(["Gold Earrings", "Silver Necklace", "Gold Studded Bracelet"])
+       expect(jewlery_city.ready_to_ship_items.pluck(:invoice_id)).to eq([alaina_invoice1.id, whitney_invoice1.id, eddie_invoice1.id])
+      end
+     end
 
     describe '#top_5_items' do
       it 'an array of the top 5 items by revenue' do
