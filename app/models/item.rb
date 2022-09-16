@@ -10,8 +10,8 @@ class Item < ApplicationRecord
 
 
   def self.successful_transactions
-    joins(invoices: :transactions).
-    where(transactions: { result: 0 })
+    joins(invoices: :transactions)
+    .where(transactions: { result: 0 })
   end
 
   def self.find_items_to_ship(merchant_id)
@@ -26,4 +26,16 @@ class Item < ApplicationRecord
   def current_price
     unit_price.to_f / 100
   end
+
+  def best_day
+    invoices
+    .joins(:transactions)
+    .select('invoices.*, count(invoices) as invoice_count')
+    .group('invoices.id')
+    .where(transactions: {result: 0})
+    .order('invoice_count desc')
+    .first
+    .created_at
+  end
+
 end

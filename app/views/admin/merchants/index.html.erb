@@ -7,7 +7,7 @@
       <li id="merchant_<%=merchant.id%>">
         <%=link_to merchant.name, "/admin/merchants/#{merchant.id}"%>
         <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch do |f| %>
-          <%= f.hidden_field :status, value: "Disabled"%>
+          <%= f.hidden_field :status, value: 1%>
           <%= f.submit 'Disable'%>
         <% end %>
       </li>
@@ -20,7 +20,7 @@
         <li id="merchant_<%=merchant.id%>">
           <%=link_to merchant.name, "/admin/merchants/#{merchant.id}"%>
           <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch do |f| %>
-            <%= f.hidden_field :status, value: "Enabled"%>
+            <%= f.hidden_field :status, value: 0%>
             <%= f.submit 'Enable'%>
           <% end %>
         </li>

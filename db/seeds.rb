@@ -47,3 +47,5 @@
 # transact_16 = inv_6.transactions.create!(credit_card_number: 4354495077693036, result: 1)
 # transact_17 = inv_6.transactions.create!(credit_card_number: 3354495077694036, result: 1)
 # transact_18 = inv_6.transactions.create!(credit_card_number: 2354495077693036, result: 1)
+
+puts "Seeding Complete"

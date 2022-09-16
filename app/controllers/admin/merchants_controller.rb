@@ -43,6 +43,11 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def admin_merchant_params
+    if params[:status] == "0"
+      params[:status] = 0
+    elsif params[:status] == "1"
+      params[:status] = 1
+    end
     params.permit(:name, :status)
   end
 end

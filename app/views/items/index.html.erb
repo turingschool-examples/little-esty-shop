@@ -22,7 +22,8 @@ p.groove {border-style: groove;}
   <ol>
     <% @merchant.top_five_items.each do |item| %>
       <div id="top_5_item-<%=item.id%>">
-      <p> <li> <%= link_to item.name, merchant_item_path(@merchant, item) %>, Total Revenue: $<%= number_with_precision ((item.revenue).to_f / 100), precision: 2 %> </li> </p>
+      <p> <li> <%= link_to item.name, merchant_item_path(@merchant, item) %>, Total Revenue: $<%= number_with_precision ((item.revenue).to_f / 100), precision: 2, delimiter: ',' %> </li> </p>
+      <p> Top Selling Date <%=item.name%> was <%= item.best_day.strftime("%-m/%-d/%Y")%> </p>
       </div>
     <% end %>
   </ol>
