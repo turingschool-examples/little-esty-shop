@@ -186,17 +186,17 @@ RSpec.describe 'the admin dashboard' do
           expect('Thursday, September 15, 2022').to appear_before('Friday, September 16, 2022')
           expect('Thursday, September 15, 2022').to_not appear_before('Monday, September 12, 2022')
           
-          # within "#invoice-#{invoice_1.id}" do
-          #   expect(page).to have_content('Monday, September 12, 2022')
-          # end
+          within "#invoice-#{invoice_2.id}" do
+            expect(page).to have_content('Thursday, September 15, 2022')
+          end
 
-          # within "#invoice-#{invoice_2.id}" do
-          #   expect(page).to have_content('Thursday, September 15, 2022')
-          # end
+          within "#invoice-#{invoice_4.id}" do
+            expect(page).to have_content('Friday, September 16, 2022')
+          end
 
-          # within "#invoice-#{invoice_3.id}" do
-          #   expect(page).to have_content('Friday, September 16, 2022')
-          # end
+          within "#invoice-#{invoice_5.id}" do
+            expect(page).to have_content('Monday, September 12, 2022')
+          end
         end
       end
     end

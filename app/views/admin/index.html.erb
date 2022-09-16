@@ -7,7 +7,7 @@
   <div class="float-child">
     <h3>Incomplete Invoices</h3>
     <table>
-      <% @incomplete_invoice_items.each do |invoice| %>
+      <% @incomplete_invoices.each do |invoice| %>
         <div id="invoice-<%= invoice.id %>">
           <tr>  
           <td>Invoice # <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> - <%= invoice.created_at.strftime('%A, %B %d, %Y') %></td>
