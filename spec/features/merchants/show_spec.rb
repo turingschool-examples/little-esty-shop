@@ -214,7 +214,17 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         end
       end
 
-      it "invoices are ordered from oldest to newest" 
+      it "invoices are ordered from oldest to newest"  do
+        visit "/merchants/#{jewlery_city.id}/dashboard"
+        within('#ready_to_ship') do
+          expect(eddie_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(polina_invoice1.created_at.strftime("%A, %B %d, %Y"))
+          expect(polina_invoice1.created_at.strftime("%A, %B %d, %Y")).to appear_before(polina_invoice2.created_at.strftime("%A, %B %d, %Y"))
+          expect(polina_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(alaina_invoice4.created_at.strftime("%A, %B %d, %Y"))
+          expect(alaina_invoice4.created_at.strftime("%A, %B %d, %Y")).to appear_before(alaina_invoice1.created_at.strftime("%A, %B %d, %Y"))
+          expect(alaina_invoice1.created_at.strftime("%A, %B %d, %Y")).to appear_before(alaina_invoice2.created_at.strftime("%A, %B %d, %Y"))
+          expect(alaina_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(alaina_invoice3.created_at.strftime("%A, %B %d, %Y"))
+        end
+      end
 
 
     end
