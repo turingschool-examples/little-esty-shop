@@ -17,9 +17,9 @@ RSpec.describe 'New Merchant' do
     fill_in "Name", with: "Bobbies Burgers"
 
     click_on 'Submit'
-    save_and_open_page
 
     expect(current_path).to eq("/admin/merchants")
     expect(page).to have_content('Bobbies Burgers')
+    expect(page).to have_button('Disable')
   end
 end

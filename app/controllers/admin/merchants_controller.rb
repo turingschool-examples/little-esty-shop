@@ -18,23 +18,22 @@ class Admin::MerchantsController < ApplicationController
   def create
     merchant = Merchant.new(merchant_params)
 
-    if merchant.save 
+    if merchant.save
       redirect_to  "/admin/merchants"
     end
   end
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
-    redirect_to admin_merchant_path(merchant.id)
-    flash[:message] = "You've successfully updated your information"
 
-    if params[:status] = false
+
+    if params.has_key?(:status)
       merchant.update(merchant_params)
-      redirect_to admin_merchant_path(merchant.id)
+      redirect_to admin_merchants_path
     else
       merchant.update(merchant_params)
-      redirect_to "/admin/merchants/#{me}"
+      redirect_to "/admin/merchants/#{merchant.id}"
+      flash[:message] = "You've successfully updated your information"
     end
   end
 
@@ -42,7 +41,7 @@ class Admin::MerchantsController < ApplicationController
 private
 
   def merchant_params
-    params.permit(:name, :created_at, :updated_at)
+    params.permit(:name, :created_at, :updated_at, :status)
   end
 
 end
