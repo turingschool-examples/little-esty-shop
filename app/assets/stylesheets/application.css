@@ -77,8 +77,9 @@ body {
 
 .flash_message {
   background-color: lightgray;
-  padding: 5px;
+  padding: 10px;
   border: 1px solid lightcoral;
+  border-radius: 20px;
 }
 
 .invoice_links {

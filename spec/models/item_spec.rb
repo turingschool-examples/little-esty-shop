@@ -10,9 +10,4 @@ RSpec.describe Item, type: :model do
     @item2 = create(:item)
   end
 
-  describe 'instance methods' do
-    it '#price_convert' do
-      expect(@item1.price_convert).to eq("57.00")
-    end
-  end
 end

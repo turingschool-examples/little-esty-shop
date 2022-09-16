@@ -4,6 +4,7 @@
   <div class="inv_info"><strong>Status:</strong> <%= @invoice.status.gsub("_", " ").titleize %></div>
   <div class="inv_info"><strong>Created On:</strong> <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></div>
   <div class="inv_info"><strong>Customer:</strong> <%= "#{@customer.first_name} #{@customer.last_name}" %></div>
+  <div class="inv_info"><strong>Total Revenue:</strong> <%= price_convert(@invoice_items.total_revenue) %></div>
   <div class="inv_info"><strong>Items on this Invoice:</strong></div>
   <table id="merchant_invoice_items">
     <tr>
@@ -16,7 +17,7 @@
       <tr id="invoice_item_<%= invoice_item.id %>">
         <td><%= invoice_item.name %></td>
         <td><%= invoice_item.quantity %></td>
-        <td>$<%= invoice_item.price_convert %></td>
+        <td><%= price_convert(invoice_item.unit_price) %></td>
         <td>
           <%= form_with model: invoice_item, local: true do |f| %>
             <%= f.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]] %>
