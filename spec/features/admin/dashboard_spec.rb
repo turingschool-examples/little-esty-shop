@@ -17,14 +17,15 @@ RSpec.describe "Admin Dashboard" do
         @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann")
         @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone") 
     
-        @invoice_1 = @customer_1.invoices.create!(status: :completed)
-        @invoice_2 = @customer_2.invoices.create!(status: :completed)
-        @invoice_3 = @customer_3.invoices.create!(status: :completed)
-        @invoice_4 = @customer_4.invoices.create!(status: :completed)
-        @invoice_5 = @customer_5.invoices.create!(status: :completed)
-        @invoice_6 = @customer_6.invoices.create!(status: :completed)
-        @invoice_7 = @customer_7.invoices.create!(status: :completed)
-        @invoice_8 = @customer_8.invoices.create!(status: :completed)
+        @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
+        @invoice_2 = @customer_2.invoices.create!(status: :completed, created_at: "09-10-2022")
+        @invoice_3 = @customer_3.invoices.create!(status: :completed, created_at: "10-08-2022")
+        @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-06-2022")
+        @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-10-2022")
+        @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
+        @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "10-09-2022")
+        @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "10-11-2022")
+
         # customer_1 transactions
         @transaction_1 = @invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
         @transaction_2 = @invoice_1.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
@@ -97,7 +98,7 @@ RSpec.describe "Admin Dashboard" do
 
         it "I see a header indicating that I am on the admin dashboard" do
           visit admin_path
-          
+
           expect(page).to have_content("Admin Dashboard")
         end
 
@@ -207,12 +208,29 @@ RSpec.describe "Admin Dashboard" do
           expect(page).to_not have_link("#{@invoice_5.id}")
         end
 
-        # As an admin,
-        # When I visit the admin dashboard
-        # In the section for "Incomplete Invoices",
-        # Next to each invoice id I see the date that the invoice was created
-        # And I see the date formatted like "Monday, July 18, 2019"
-        # And I see that the list is ordered from oldest to newest
+        it "Next to each invoice id I see the date that the invoice was created formatted like 'Monday, July 18, 2019'" do
+          visit admin_path
+
+          within("#incomplete-invoices") do
+            expect(page).to have_content("Saturday, October 08, 2022")
+            expect(page).to have_content("Sunday, October 09, 2022")
+            expect(page).to have_content("Wednesday, August 10, 2022")
+            expect(page).to have_content("Friday, June 10, 2022")
+          end
+        end 
+
+        it "I see that the list is ordered from oldest to newest" do
+          visit admin_path
+          # save_and_open_page
+          within("#incomplete-invoices") do
+            expect("Friday, June 10, 2022").to appear_before("Saturday, October 08, 2022")
+            expect("Friday, June 10, 2022").to appear_before("Sunday, October 09, 2022")
+            expect("Friday, June 10, 2022").to appear_before("Wednesday, August 10, 2022")
+            expect("Wednesday, August 10, 2022").to appear_before("Saturday, October 08, 2022")
+            expect("Wednesday, August 10, 2022").to appear_before("Saturday, October 09, 2022")
+            expect("Saturday, October 08, 2022").to appear_before("Sunday, October 09, 2022")
+          end
+        end
       end
     end
   end
