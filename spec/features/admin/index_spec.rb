@@ -119,15 +119,17 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
         let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
 
         it 'has the name of the top 5 customers in order of number of successful transactions' do
+            visit admin_index_path
             within "#top-customers" do
                 expect(whitney.name).to appear_before(alaina.name)
                 expect(alaina.name).to appear_before(eddie.name)
-                expect(eddie.name).to appear_before(leah.name)
-                expect(leah.name).to appear_before(polina.name)
+                expect(eddie.name).to appear_before(polina.name)
+                expect(polina.name).to appear_before(ryan.name)
             end
         end
 
         it 'has the number of transactions for each customer' do
+            visit admin_index_path
             within "#transactions-#{whitney.id}" do 
                 expect(page).to have_content("#{whitney.num_succesful_transactions} purchases")
             end
@@ -140,18 +142,20 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
                 expect(page).to have_content("#{eddie.num_succesful_transactions} purchases")
             end
 
-            within "#transactions-#{leah.id}" do 
-                expect(page).to have_content("#{leah.num_succesful_transactions} purchases")
-            end
-
+            
             within "#transactions-#{polina.id}" do 
                 expect(page).to have_content("#{polina.num_succesful_transactions} purchases")
             end
+
+            within "#transactions-#{ryan.id}" do 
+                expect(page).to have_content("#{ryan.num_succesful_transactions} purchases")
+            end
         end
 
-        it "doesn't show any names or transaction counts below #5" do 
+        it "doesn't show any names or transaction counts below #5" do
+            visit admin_index_path
             within "#top-customers" do
-                expect(page).to_not have_content(ryan.name)
+                expect(page).to_not have_content(leah.name)
             end
         end
     end

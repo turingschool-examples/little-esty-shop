@@ -102,31 +102,31 @@ RSpec.describe Customer, type: :model do
     end
 
     describe '#top_five_buyers' do
-      let!(:top_5) {Customer.top_5_customers.to_a}
+      let!(:top_5) {Customer.top_5_customers}
       it 'returns 5 customers' do
-        expect(top_5.count).to eq(5)
+        expect(top_5.to_a.count).to eq(5)
       end
 
       it 'returns names' do
-        expect(top_5[0][0]).to eq(whitney.id)
-        expect(top_5[1][0]).to eq(alaina.id)
-        expect(top_5[2][0]).to eq(eddie.id)
-        expect(top_5[3][0]).to eq(ryan.id)
-        expect(top_5[4][0]).to eq(polina.id)
+        expect(top_5[0].name).to eq(whitney.name)
+        expect(top_5[1].name).to eq(alaina.name)
+        expect(top_5[2].name).to eq(eddie.name)
+        expect(top_5[3].name).to eq(ryan.name)
+        expect(top_5[4].name).to eq(polina.name)
       end
 
       it 'returns successful transaction count' do
-        expect(top_5[0][1]).to eq(6)
-        expect(top_5[1][1]).to eq(5)
-        expect(top_5[2][1]).to eq(3)
-        expect(top_5[3][1]).to eq(2)
-        expect(top_5[4][1]).to eq(2)
+        expect(top_5[0].num_succesful_transactions).to eq(6)
+        expect(top_5[1].num_succesful_transactions).to eq(5)
+        expect(top_5[2].num_succesful_transactions).to eq(3)
+        expect(top_5[3].num_succesful_transactions).to eq(2)
+        expect(top_5[4].num_succesful_transactions).to eq(2)
       end
 
       it 'sorts by first added if two customers tie' do
-        expect(top_5[3][0]).to eq(ryan.id)
-        expect(top_5[4][0]).to eq(polina.id)
-        expect(top_5.map { |k,_v| k }.include?(leah.id)).to be(false)
+        expect(top_5[3].name).to eq(ryan.name)
+        expect(top_5[4].name).to eq(polina.name)
+        expect(top_5.map(&:name).include?(leah.name)).to be(false)
       end
     end
   end
