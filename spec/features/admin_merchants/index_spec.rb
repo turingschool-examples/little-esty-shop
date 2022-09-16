@@ -96,4 +96,21 @@ RSpec.describe 'Admin Merchants Index' do
     end
   end
 
+  describe 'US11' do
+    it 'admin merchant create' do
+      # As an admin,
+      # When I visit the admin merchants index
+      visit "/admin/merchants"
+      # I see a link to create a new merchant.
+      click_link("New Merchant")
+      # When I click on the link,
+      # I am taken to a form that allows me to add merchant information.
+      expect(current_path).to eq("/admin/merchants/new")
+      # When I fill out the form I click ‘Submit’
+      # Then I am taken back to the admin merchants index page
+      # And I see the merchant I just created displayed
+      # And I see my merchant was created with a default status of disabled.
+    end
+  end
+
 end
