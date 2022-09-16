@@ -27,13 +27,13 @@ require 'rspec/rails'
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
-  exit 1
+  # puts e.to_s.strip
+  # exit 1
 end
 RSpec.configure do |config|
-  def load_test_data
-    @aj = Customer.create!(first_name: "AJ", last_name: "Krumholz")
-  end
+  # def load_test_data
+  #   @aj = Customer.create!(first_name: "AJ", last_name: "Krumholz")
+  # end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

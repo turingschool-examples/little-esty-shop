@@ -2,7 +2,6 @@ class Merchant < ApplicationRecord
   has_many :items
   validates :name, presence: true
 
-  #looking at this now, would this also work as a class method in the customer model?
   def transactions_top_5
       Customer.joins(invoices: :transactions)
       .where( transactions: {result: 1})
@@ -12,9 +11,10 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items_ordered
-    Invoice.select("items.*, invoices.created_at as creation_time, invoices.id as invoice_id").joins(:items).where.not(invoice_items: {status: 2}).order(:created_at)
-    # require 'pry' ; binding.pry
-    # items.joins(invoice_items: :invoice).select("items.*, invoices.created_at as creation_time").where.not(invoice_items: {status: 2}).order("invoices.created_at")
+    Invoice.select("items.*, invoices.created_at as creation_time, invoices.id as invoice_id")
+    .joins(:items)
+    .where.not(invoice_items: {status: 2})
+    .order(:created_at)
   end
   
   def enabled_items
