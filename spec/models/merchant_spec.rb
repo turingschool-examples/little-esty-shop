@@ -35,13 +35,13 @@ RSpec.describe Merchant, type: :model do
   let!(:leah) { Customer.create!(first_name: "Leah", last_name: "Anderson")}
   let!(:polina) { Customer.create!(first_name: "Polina", last_name: "Eisenberg")}
 
-  let!(:whitney_invoice1) { whitney.invoices.create!(status: "completed")}
+  let!(:whitney_invoice1) { whitney.invoices.create!(status: "completed", created_at: "2012-01-30 14:54:09" )}
   let!(:whitney_invoice2) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice3) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice4) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice5) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice6) { whitney.invoices.create!(status: "completed")}
-  let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed", created_at: "2020-01-30 14:54:09")}
   let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress")}
   let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed")}
@@ -50,7 +50,7 @@ RSpec.describe Merchant, type: :model do
   let!(:alaina_invoice7) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice8) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice9) { alaina.invoices.create!(status: "completed")}
-  let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed")}
+  let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed", created_at: "2000-01-30 14:54:09")}
   let!(:eddie_invoice2) { eddie.invoices.create!(status: "completed")}
   let!(:eddie_invoice3) { eddie.invoices.create!(status: "completed")}
   let!(:ryan_invoice1) { ryan.invoices.create!(status: "completed")}
@@ -133,12 +133,12 @@ RSpec.describe Merchant, type: :model do
 
     describe '#ready_to_ship_items_ordered' do
       it 'finds all items that are ready to ship for a particular merchant' do
-        expect(jewlery_city.ready_to_ship_items_ordered).to eq([silver_necklace, gold_earrings, studded_bracelet ])
+        expect(jewlery_city.ready_to_ship_items_ordered).to eq([studded_bracelet, silver_necklace, gold_earrings])
 
-        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.id") ).to eq([whitney_invoice1.id, alaina_invoice1.id, eddie_invoice1.id])
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.id") ).to eq([eddie_invoice1.id, whitney_invoice1.id, alaina_invoice1.id])
         
 
-        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at").first.class).to eq(ActiveSupport::TimeWithZone) #give specific created at
+      #   expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at").first.class).to eq(ActiveSupport::TimeWithZone) #give specific created at
       end
     end
 
