@@ -25,14 +25,14 @@ RSpec.describe Merchant, type: :model do
       @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann") 
       @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone") 
 
-      @invoice_1 = @customer_1.invoices.create!(status: :completed) 
-      @invoice_2 = @customer_2.invoices.create!(status: :completed) 
-      @invoice_3 = @customer_3.invoices.create!(status: :completed) 
-      @invoice_4 = @customer_4.invoices.create!(status: :completed) 
-      @invoice_5 = @customer_5.invoices.create!(status: :completed) 
-      @invoice_6 = @customer_6.invoices.create!(status: :completed) 
-      @invoice_7 = @customer_7.invoices.create!(status: :completed) 
-      @invoice_8 = @customer_8.invoices.create!(status: :completed) 
+      @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
+      @invoice_2 = @customer_2.invoices.create!(status: :completed, created_at: "09-10-2022")
+      @invoice_3 = @customer_3.invoices.create!(status: :completed, created_at: "10-08-2022")
+      @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-06-2022")
+      @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-10-2022")
+      @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
+      @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "10-09-2022")
+      @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "10-11-2022")
 
       @invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped) 
       @invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_1.id}", status: :shipped) 
@@ -105,7 +105,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'has items_not_shipped method' do
-      expect(@pretty_plumbing.items_not_shipped).to eq([@sink, @rug, @lamp, @toilet])
+      expect(@pretty_plumbing.items_not_shipped_sorted_by_date).to eq([@sink, @rug, @lamp, @toilet])
     end
   end
 end
