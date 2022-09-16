@@ -21,13 +21,14 @@ RSpec.describe Invoice, type: :model do
   let!(:leah_invoice2) { leah.invoices.create!(status: "in_progress")}
 
 
-  describe 'instance methods' do
+  describe 'class methods' do
     describe '#incomplete_invoices' do
      it 'can return the invoices that have a status of in progress' do 
 
       expect(Invoice.incomplete_invoices).to eq([alaina_invoice2, leah_invoice2])
      end
     end
+    
   end
 
 end
