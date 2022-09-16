@@ -10,6 +10,6 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   def self.incomplete_invoices
-    
+    where(status: 0)
   end
 end
