@@ -1,4 +1,4 @@
-<h1> Merchant show page</h1>
+<h1>Merchant</h1>
 
 <h3><%=@merchant.name%></h3>
 
@@ -13,3 +13,10 @@
 <% end %>
    </div>
 <%end %>
+
+<h3>Favorite Customers</h3>
+<% @merchant.favorite_customers.each do |favorite_customer| %>
+   <div id="favorite_customer_<%= favorite_customer.id %>">
+      <li><%= favorite_customer.first_name %> <%= favorite_customer.last_name %> - <%= favorite_customer.transaction_count %> purchases</li>
+   </div>
+<% end %>

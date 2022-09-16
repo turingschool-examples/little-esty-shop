@@ -7,13 +7,16 @@
   <div class="float-child">
     <h3>Incomplete Invoices</h3>
     <table>
-      <% @incomplete_invoice_items.each do |id| %>
-        <tr>  
-        <td>Invoice # <%= link_to "#{id}", "/admin/invoices/#{id}" %></td>
-        </tr>
-      <% end %>
+      <% @incomplete_invoices.each do |invoice| %>
+        <div id="invoice-<%= invoice.id %>">
+          <tr>  
+          <td>Invoice # <%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %> - <%= invoice.created_at.strftime('%A, %B %d, %Y') %></td>
+          </tr>
+        </div>
+        <% end %>
     </table>
   </div>
+</div>
   <h3>Top Customers</h3>
 
   <% @top_customers.each do |customer| %>
