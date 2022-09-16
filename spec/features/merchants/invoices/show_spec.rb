@@ -11,8 +11,8 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
     @item_3 = create(:item, merchant: @merchant_2)
 
     @invoice_1 = create(:invoice, status: :in_progress)
-    @inv_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1)
-    @inv_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2)
+    @inv_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, status: :packaged)
+    @inv_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, status: :packaged)
     @inv_item_3 = create(:invoice_item, invoice: @invoice_1, item: @item_3)
 
     visit merchant_invoice_path(@merchant_1.id, @invoice_1.id)
@@ -47,6 +47,23 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
 
     expect(page).to_not have_content(@item_3.name)
     expect(page).to_not have_content(@inv_item_3.quantity)
+  end
+
+  it 'each invoice item has status dropdown with update button' do
+    within("tr#invoice_item_#{@inv_item_1.id}") do
+      select "Shipped", from: "invoice_item_status"
+      click_button "Update Status"
+      
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1.id, @invoice_1.id))
+      expect(@inv_item_1.reload.status).to eq("shipped")
+    end
+    within("tr#invoice_item_#{@inv_item_2.id}") do
+      select "Pending", from: "invoice_item_status"
+      click_button "Update Status"
+      
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1.id, @invoice_1.id))
+      expect(@inv_item_2.reload.status).to eq("pending")
+    end
   end
 
 end
