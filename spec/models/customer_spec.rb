@@ -69,7 +69,7 @@ RSpec.describe Customer, type: :model do
   let!(:polina_invoice1_transaction) { polina_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:polina_invoice2_transaction) { polina_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:ryan_invoice1_transaction) { ryan_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
-  let!(:ryan_invoice2_transaction) { ryan_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed")}
+  let!(:ryan_invoice2_transaction) { ryan_invoice2.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "success")}
   let!(:leah_invoice1_transaction) { leah_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed")}
   let!(:leah_invoice2_transaction) { leah_invoice1.transactions.create!(credit_card_number: "4654405418249632", credit_card_expiration_date: nil, result: "failed")}
 
@@ -100,17 +100,54 @@ RSpec.describe Customer, type: :model do
        #method goes here
       end
     end
+
+    describe '#top_five_buyers' do
+      let!(:top_5) {Customer.top_5_customers}
+      it 'returns 5 customers' do
+        expect(top_5.to_a.count).to eq(5)
+      end
+
+      it 'returns names' do
+        expect(top_5[0].name).to eq(whitney.name)
+        expect(top_5[1].name).to eq(alaina.name)
+        expect(top_5[2].name).to eq(eddie.name)
+        expect(top_5[3].name).to eq(ryan.name)
+        expect(top_5[4].name).to eq(polina.name)
+      end
+
+      it 'returns successful transaction count' do
+        expect(top_5[0].num_succesful_transactions).to eq(6)
+        expect(top_5[1].num_succesful_transactions).to eq(5)
+        expect(top_5[2].num_succesful_transactions).to eq(3)
+        expect(top_5[3].num_succesful_transactions).to eq(2)
+        expect(top_5[4].num_succesful_transactions).to eq(2)
+      end
+
+      it 'sorts by first added if two customers tie' do
+        expect(top_5[3].name).to eq(ryan.name)
+        expect(top_5[4].name).to eq(polina.name)
+        expect(top_5.map(&:name).include?(leah.name)).to be(false)
+      end
+    end
   end
 
   describe 'instance methods' do
     describe '#number_of_purchases' do
-     it 'can find the number of successful purchases a customer has' do
+      it 'can find the number of successful purchases a customer has' do
+        expect(alaina.num_succesful_transactions).to eq(5)
+        expect(eddie.num_succesful_transactions).to eq(3)
+        #expect statement here
+      end
+    end
 
-      expect(alaina.num_succesful_transactions).to eq(5)
-      expect(eddie.num_succesful_transactions).to eq(3)
-      #expect statement here
-     end
+    describe '#name' do
+      it 'returns the combined first and last names of the customer' do
+        expect(whitney.name).to eq("Whitney Gains")
+        expect(alaina.name).to eq("Alaina Kneiling")
+        expect(eddie.name).to eq("Eddie Young")
+        expect(leah.name).to eq("Leah Anderson")
+        expect(polina.name).to eq("Polina Eisenberg")
+      end
     end
   end
-
 end
