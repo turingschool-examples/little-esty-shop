@@ -2,7 +2,7 @@
 <h2 class="subtitle">My Items</h2>
 
 <section id="enabled">
-<h3>Enabled</h3>
+<h3>Enabled Items</h3>
 <ul>
   <% @items.each do |item| %>
     <% if item.status == true %>
@@ -17,7 +17,7 @@
 </section>
 
 <section id="disabled">
-<h3>Disabled</h3>
+<h3>Disabled Items</h3>
 <ul>
   <% @items.each do |item| %> 
     <% if item.status == false %>
