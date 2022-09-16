@@ -9,4 +9,6 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     where("status = 2").order(:created_at)
   end
+
+  
 end

@@ -24,8 +24,8 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'instance methods' do
-    describe '#method_name' do
-     it 'description of method' do
+    describe '#format_' do
+     it 'description of method' do #make a method to format date and time
       #expect statement here
      end
     end

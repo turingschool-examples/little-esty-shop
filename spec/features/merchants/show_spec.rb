@@ -31,18 +31,18 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:whitney_invoice4) { whitney.invoices.create!(status: "completed")}
       let!(:whitney_invoice5) { whitney.invoices.create!(status: "completed")}
       let!(:whitney_invoice6) { whitney.invoices.create!(status: "completed")}
-      let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
-      let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress")}
-      let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed")}
-      let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed")}
-      let!(:alaina_invoice5) { alaina.invoices.create!(status: "completed")}
-      let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed")}
-      let!(:eddie_invoice2) { eddie.invoices.create!(status: "completed")}
-      let!(:eddie_invoice3) { eddie.invoices.create!(status: "completed")}
-      let!(:ryan_invoice1) { ryan.invoices.create!(status: "completed")}
-      let!(:ryan_invoice2) { ryan.invoices.create!(status: "completed")}
-      let!(:polina_invoice1) { polina.invoices.create!(status: "completed")}
-      let!(:polina_invoice2) { polina.invoices.create!(status: "cancelled")}
+      let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed", created_at: "2012-01-30 14:54:09")}
+      let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress", created_at: "2012-04-30 14:54:09")}
+      let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed", created_at: "2012-10-30 14:54:09")}
+      let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed", created_at: "2000-04-30 14:54:09")}
+      let!(:alaina_invoice5) { alaina.invoices.create!(status: "completed", created_at: "2023-02-30 14:54:09")}
+      let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed", created_at: "2022-04-30 14:54:09")}
+      let!(:eddie_invoice2) { eddie.invoices.create!(status: "completed", created_at: "1989-04-30 14:54:09")}
+      let!(:eddie_invoice3) { eddie.invoices.create!(status: "completed", created_at: "1991-04-30 14:54:09")}
+      let!(:ryan_invoice1) { ryan.invoices.create!(status: "completed", created_at: "1994-04-30 14:54:09")}
+      let!(:ryan_invoice2) { ryan.invoices.create!(status: "completed", created_at: "1995-04-30 14:54:09")}
+      let!(:polina_invoice1) { polina.invoices.create!(status: "completed", created_at: "1996-04-30 14:54:09")}
+      let!(:polina_invoice2) { polina.invoices.create!(status: "cancelled", created_at: "1997-04-30 14:54:09")}
       let!(:leah_invoice1) { leah.invoices.create!(status: "cancelled")}
       let!(:leah_invoice2) { leah.invoices.create!(status: "in_progress")}
 
@@ -204,7 +204,16 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
           end
       end
 
-      it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest"
+      it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest" do
+        visit "/merchants/#{jewlery_city.id}/dashboard"
+
+        within('#ready_to_ship') do
+          require 'pry' ; binding.pry
+          expect(page).to have_content("Monday, July 18, 2019")
+        end
+      end
+
+      it "invoices are ordered from oldest to newest" 
 
 
     end
