@@ -1,12 +1,3 @@
-# Admin Invoice Show Page
-
-# As an admin,
-# When I visit an admin invoice show page
-# Then I see information related to that invoice including:
-# - Invoice id
-# - Invoice status
-# - Invoice created_at date in the format "Monday, July 18, 2019"
-# - Customer first and last name
 require 'rails_helper'
 
 describe 'the admin invoices show page' do
@@ -20,9 +11,9 @@ describe 'the admin invoices show page' do
 
       visit admin_invoice_path(invoice_1)
 
-      expect(page).to have_content(invoice_2.id)
-      expect(page).to have_content(invoice_2.status)
-      expect(page).to have_content(invoice_2.created_at.strftime('%A, %B %d, %Y'))
+      expect(page).to have_content(invoice_1.id)
+      expect(page).to have_content(invoice_1.status)
+      expect(page).to have_content(invoice_1.created_at.strftime('%A, %B %d, %Y'))
       expect(page).to have_content(customer_1.first_name)
       expect(page).to have_content(customer_1.last_name)
       expect(page).to_not have_content(invoice_2.id)
