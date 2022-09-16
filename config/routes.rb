@@ -14,4 +14,6 @@ get "/admin/invoices", to: 'admin_invoices#index'
   #   resources :merchants
   #   resources :invoices
   # end
+
+  get "/merchants/merchant_id/dashboard", to: 'merchant_dashboard#dashboard'
 end
