@@ -23,20 +23,21 @@ RSpec.describe 'Merchant New Item page' do
         expect(page).to have_content('Create a New Item')
       end
 
-      xit 'there is a form to add an item' do
+      it 'there is a form to add an item' do
         visit (new_merchant_item_path(@merch2.id))
 
         expect(page).to have_content('Enter Item Name')
         expect(page).to have_content('Enter Item Description')
         expect(page).to have_content('Enter Item Price')
+        expect(page).to have_button('Submit')
       end
 
       xit "filling out form and clicking 'Submit' redirects to merchant index page" do
         visit (new_merchant_item_path(@merch2.id))
 
-        fill_in 'Enter Item Name', with: 'Gadget'
-        fill_in 'Item Description', with: 'Does a thing'
-        fill_in 'Item Price', with: '42.95'
+        fill_in 'Enter Item Description', with: 'Gadget'
+        fill_in 'Enter Item Description', with: 'Does a thing'
+        fill_in 'Enter Item Price', with: '42.95'
 
         click_button 'Submit'
 
@@ -46,9 +47,9 @@ RSpec.describe 'Merchant New Item page' do
       xit "new item is displayed on merchant index page and by default set to 'disabled'" do
         visit (new_merchant_item_path(@merch1.id))
 
-        fill_in 'Enter Item Name', with: 'Gadget'
-        fill_in 'Item Description', with: 'Does a thing'
-        fill_in 'Item Price', with: '42.95'
+        fill_in 'Enter Item Description', with: 'Gadget'
+        fill_in 'Enter Item Description', with: 'Does a thing'
+        fill_in 'Enter Item Price', with: '42.95'
 
         click_button 'Submit'
 
