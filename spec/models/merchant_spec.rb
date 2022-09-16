@@ -29,8 +29,8 @@ RSpec.describe Merchant, type: :model do
 
       describe '.invoices' do
         it 'returns a list of invoices which contain an item from the merchant' do
-          expect(@merchant_1.invoices).to eq([@invoice_1, @invoice_3, @invoice_4])
-          expect(@merchant_2.invoices).to eq([@invoice_1, @invoice_2, @invoice_3])
+          expect(@merchant_1.distinct_invoices).to match_array([@invoice_1, @invoice_3, @invoice_4])
+          expect(@merchant_2.distinct_invoices).to match_array([@invoice_1, @invoice_2, @invoice_3])
         end
       end
     end

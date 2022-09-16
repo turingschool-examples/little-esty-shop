@@ -1,5 +1,6 @@
-<h3>My Invoices</h3>
-<ul>
+<%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
+<h2 class="subtitle">My Invoices</h2>
+<ul class="invoice_links">
   <% @invoices.each do |invoice| %>
     <li id="invoice_<%= invoice.id %>">Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></li>
   <% end %>

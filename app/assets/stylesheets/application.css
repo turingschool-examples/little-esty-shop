@@ -13,3 +13,139 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#page_title {
+  color: black;
+  text-align: center;
+  font-weight: 900;
+  font-size: 3rem;
+  text-shadow: 1px 1px 0px gray, 2px 2px 0px darkgray, 5px 5px 3px lightgray;
+}
+
+
+#merchants_nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#nav_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-self: center;
+  list-style: none;
+  margin:10px;
+}
+
+#merchant_name {
+  font-weight: bold;
+  font-size: 24px;
+  align-self: center;
+  margin: 10px;
+}
+
+#merchant_invoice_items {
+  margin: auto;
+  width: calc(100% - 20px);
+  border-collapse: collapse;
+}
+
+#merchant_invoice_items th {
+  background-color: darkgray;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid black;
+}
+
+#merchant_invoice_items td {
+  background-color: lightgray;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid black;
+}
+
+#flash_messages {
+  display: flex;
+  justify-content: center;
+}
+
+.flash_message {
+  background-color: lightgray;
+  padding: 10px;
+  border: 1px solid lightcoral;
+  border-radius: 20px;
+}
+
+.invoice_links {
+  list-style: none;
+}
+
+.invoice_links li {
+  margin: 5px;
+}
+
+.nav_button {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid white;
+  margin-left: 2px;
+  transition: all 0.5s;
+}
+
+.nav_button:hover {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid lightgray;
+  margin-left: 2px;
+  background-color: lightgray;
+}
+
+.list_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.item_link {
+  padding-right: 15px;
+}
+
+a:visited {
+  color: blue;
+}
+
+#merchants_nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.selected_nav_button {
+  padding: 10px;
+  border-radius: 20px;
+  margin-left: 2px;
+  background-color: lightgray;
+  border: 1px solid lightgray;
+}
+
+.subtitle {
+  text-align: center;
+  border-top: 2px solid black;
+  background-color: lightgray;
+}
+
+.inv_info {
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
