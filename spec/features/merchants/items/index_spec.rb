@@ -99,6 +99,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
             end
           end
         end
+
         it 'items are listed in appropriate sections' do
           visit merchant_items_path(@merch1.id)
 
@@ -108,7 +109,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
           end
 
           within("#enabled") do
-            within("#item_#{@item1.id}") dgit o
+            within("#item_#{@item1.id}") do
               click_button 'Disable'
             end
           end
@@ -124,7 +125,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
           within("#disabled") do
             within("#item_#{@item1.id}") do
               expect(page).to have_link(@item1.name)
-              expect(page).to have_button("Disable")
+              expect(page).to have_button("Enable")
             end
           end
         end
