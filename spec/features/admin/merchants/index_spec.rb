@@ -16,6 +16,10 @@ RSpec.describe "Admin Merchants" do
                 expect(page).to have_content(@merchant_3.name)
 
             end
+
+            it 'us#25 When I click on the name of a merchant from the admin merchants index page'
+
+            it "Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)"
         end
     end
 end
