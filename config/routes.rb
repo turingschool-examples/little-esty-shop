@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show, :edit]
   end
 
-  patch '/merchants/:merchant_id/items/:id', to: 'items#update'
+  namespace :admin do
+    resources :merchants, only: [:index, :show, :edit, :update, :new, :create]
+  end
+
 
 end

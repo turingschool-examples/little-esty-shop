@@ -1,8 +1,18 @@
 class Merchant < ApplicationRecord
+  enum status: ["Enabled", "Disabled"]
   validates_presence_of :name
-
+  validates_presence_of :status, inclusion: ["Enabled", "Disabled"]
   has_many :items
 
+
+  def self.enabled_merchants
+    Merchant.where(status: 0)
+  end
+
+  def self.disabled_merchants
+    Merchant.where(status: 1)
+  end
+  
   def items_sorted_by_revenue
     items.
     joins(:invoice_items).
