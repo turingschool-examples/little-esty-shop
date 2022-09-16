@@ -29,8 +29,10 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     if params[:status]
+      require 'pry'; binding.pry
       @merchant.update(admin_merchant_params)
       redirect_to admin_merchants_path
+      require 'pry'; binding.pry
     elsif @merchant.update(admin_merchant_params)
       redirect_to admin_merchant_path(@merchant)
       flash[:alert] = "Merchant successfully updated"
@@ -43,6 +45,11 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def admin_merchant_params
+    if params[:status] == "0"
+      params[:status] = 0
+    elsif params[:status] == "1"
+      params[:status] = 1
+    end
     params.permit(:name, :status)
   end
 end
