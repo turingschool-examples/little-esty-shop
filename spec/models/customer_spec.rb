@@ -103,7 +103,7 @@ RSpec.describe Customer, type: :model do
 
     describe '#top_five_buyers' do
       top_5 = Customer.top_5_customers
-      xit 'returns 5 customers' do
+      it 'returns 5 customers' do
         expect(top_5.count).to eq(5)
       end
 
