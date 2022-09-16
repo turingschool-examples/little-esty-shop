@@ -142,7 +142,6 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
                 expect(page).to have_content("#{eddie.num_succesful_transactions} purchases")
             end
 
-            
             within "#transactions-#{polina.id}" do 
                 expect(page).to have_content("#{polina.num_succesful_transactions} purchases")
             end
