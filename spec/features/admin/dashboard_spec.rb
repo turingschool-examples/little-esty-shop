@@ -221,13 +221,13 @@ RSpec.describe "Admin Dashboard" do
 
         it "I see that the list is ordered from oldest to newest" do
           visit admin_path
-          # save_and_open_page
+          save_and_open_page
           within("#incomplete-invoices") do
             expect("Friday, June 10, 2022").to appear_before("Saturday, October 08, 2022")
             expect("Friday, June 10, 2022").to appear_before("Sunday, October 09, 2022")
             expect("Friday, June 10, 2022").to appear_before("Wednesday, August 10, 2022")
             expect("Wednesday, August 10, 2022").to appear_before("Saturday, October 08, 2022")
-            expect("Wednesday, August 10, 2022").to appear_before("Saturday, October 09, 2022")
+            expect("Wednesday, August 10, 2022").to appear_before("Sunday, October 09, 2022")
             expect("Saturday, October 08, 2022").to appear_before("Sunday, October 09, 2022")
           end
         end

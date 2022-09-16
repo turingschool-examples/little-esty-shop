@@ -15,4 +15,8 @@ class Invoice < ApplicationRecord
       invoice.transactions.where(result: 0).count
     end
   end
+
+  def self.sort_by_date
+    order(:created_at)
+  end
 end
