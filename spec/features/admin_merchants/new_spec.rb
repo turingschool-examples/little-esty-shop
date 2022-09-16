@@ -4,7 +4,7 @@ RSpec.describe 'Admin Merchant Create' do
   describe 'part 2 of US11' do
     it 'admin merchant create' do
 
-      visit new_admin_merchant_path
+      visit "/admin/merchants/new"
       # When I fill out the form I click ‘Submit’
       fill_in "Name", with: "No Pain No Grain"
       click_button "Submit"
@@ -15,7 +15,6 @@ RSpec.describe 'Admin Merchant Create' do
         expect(page).to have_content("No Pain No Grain")
         # And I see my merchant was created with a default status of disabled.
       end
-
       within '.enabled' do
         expect(page).to_not have_content("No Pain No Grain")
       end
