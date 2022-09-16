@@ -37,4 +37,40 @@ RSpec.describe 'Admin Merchants Index' do
     expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
   end
 
+  xit 'has a button to disable or enable next to each merchant, when I click it I am stay on the index page but the merchant status has changed' do
+    merchant1 = Merchant.create!(name: "Bobbis Bees")
+    merchant2 = Merchant.create!(name: "Darnelles Daysies")
+    merchant3 = Merchant.create!(name: "Alans Art")
+
+    visit '/admin/merchants'
+
+    within "#merchant-#{merchant1.id}" do
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enabled")
+    end
+
+    within "#merchant-#{merchant2.id}" do
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enabled")
+    end
+
+    within "#merchant-#{merchant3.id}" do
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enabled")
+    end
+  end
+
+  it 'has a link to create a new merchant' do
+    merchant1 = Merchant.create!(name: "Bobbis Bees")
+    merchant2 = Merchant.create!(name: "Darnelles Daysies")
+    merchant3 = Merchant.create!(name: "Alans Art")
+
+    visit '/admin/merchants'
+
+    expect(page).to have_content("Create a new merchant")
+
+    click_link 'Create a new merchant'
+
+    expect(current_path).to eq('/admin/merchants/new')
+  end
 end
