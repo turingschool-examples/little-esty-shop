@@ -9,7 +9,7 @@
         <%= form_with url: "/admin/merchants/#{merchant.id}", method: :patch do |f| %>
           <%= f.hidden_field :status, value: "Disabled"%>
           <%= f.submit 'Disable'%>
-        <% end %> %>
+        <% end %>
       </li>
     <% end %>
   </ul>
