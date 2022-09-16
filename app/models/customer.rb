@@ -13,4 +13,9 @@ class Customer < ApplicationRecord
       .order("transac_count DESC")
       .limit(5)
   end
+
+  def self.top_five_overall
+    
+  end
+
 end
