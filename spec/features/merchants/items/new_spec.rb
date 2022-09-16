@@ -35,7 +35,7 @@ RSpec.describe 'Merchant New Item page' do
       it "filling out form and clicking 'Submit' redirects to merchant index page" do
         visit (new_merchant_item_path(@merch2.id))
 
-        fill_in 'Enter Item Description', with: 'Gadget'
+        fill_in 'Enter Item Name', with: 'Gadget'
         fill_in 'Enter Item Description', with: 'Does a thing'
         fill_in 'Enter Item Price', with: '42.95'
 
@@ -44,16 +44,19 @@ RSpec.describe 'Merchant New Item page' do
         expect(current_path).to eq(merchant_items_path(@merch2.id))
       end
 
-      xit "new item is displayed on merchant index page and by default set to 'disabled'" do
+      it "new item is displayed on merchant index page and by default set to 'disabled'" do
         visit (new_merchant_item_path(@merch1.id))
 
-        fill_in 'Enter Item Description', with: 'Gadget'
+        fill_in 'Enter Item Name', with: 'Gadget'
         fill_in 'Enter Item Description', with: 'Does a thing'
         fill_in 'Enter Item Price', with: '42.95'
 
         click_button 'Submit'
 
+        expect(current_path).to eq(merchant_items_path(@merch1.id))
+        
         within("#enabled") do
+          expect(page).to have_link(@item2.name)
           expect(page).to_not have_link('Gadget')
         end
 

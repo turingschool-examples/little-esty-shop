@@ -35,7 +35,9 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-
+    params[:unit_price] = (params[:unit_price].to_f*100).to_i
+    item = Item.create!(item_params)
+    redirect_to merchant_items_path(params[:merchant_id])
   end
 
   private
@@ -45,6 +47,7 @@ class MerchantItemsController < ApplicationController
       :name,
       :description,
       :unit_price,
+      :merchant_id,
       :status
     )
   end
