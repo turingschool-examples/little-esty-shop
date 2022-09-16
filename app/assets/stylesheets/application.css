@@ -14,9 +14,17 @@
  *= require_self
  */
 
-#page_title {
-  text-align: center;
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+#page_title {
+  color: black;
+  text-align: center;
+  font-weight: 900;
+  font-size: 3rem;
+  text-shadow: 1px 1px 0px gray, 2px 2px 0px darkgray, 5px 5px 3px lightgray;
+}
+
 
 #merchants_nav {
   display: flex;
@@ -82,15 +90,45 @@
 }
 
 .nav_button {
-  padding: 5px;
-  border: 1px solid black;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid white;
   margin-left: 2px;
+  transition: all 0.5s;
+}
+
+.nav_button:hover {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid lightgray;
+  margin-left: 2px;
+  background-color: lightgray;
+}
+
+.list_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.item_link {
+  padding-right: 15px;
+}
+
+a:visited {
+  color: blue;
+}
+
+#merchants_nav a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .selected_nav_button {
-  padding: 5px;
+  padding: 10px;
+  border-radius: 20px;
   margin-left: 2px;
-  border: 2px solid black;
+  background-color: lightgray;
+  border: 1px solid lightgray;
 }
 
 .subtitle {
