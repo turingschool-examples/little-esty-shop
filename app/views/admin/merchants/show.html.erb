@@ -1,2 +1,4 @@
 <%= render partial: 'admin/header' %>
 <p> <%= @merchant.name %> </p>
+
+<%= link_to "Update", edit_admin_merchant_path(@merchant) %>
