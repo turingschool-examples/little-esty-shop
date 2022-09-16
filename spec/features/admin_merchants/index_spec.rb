@@ -37,29 +37,63 @@ RSpec.describe 'Admin Merchants Index' do
       # When I visit the admin merchants index
       visit "/admin/merchants"
       # Then next to each merchant name I see a button to disable or enable that merchant.
-      within("#merchant-#{@merchant_1.id}") do
+      within("#enabled_merchant-#{@merchant_1.id}") do
         expect(page).to have_button("Disable")
         # click_button("Disable")
         click_button("Disable")
-
         # Then I am redirected back to the admin merchants index
         expect(current_path).to eq("/admin/merchants")
+      end
+
+      within("#disabled_merchant-#{@merchant_1.id}") do
         # And I see that the merchant's status has changed
         expect(page).to have_button("Enable")
       end
     end
 
     it 'can enable merchants' do
-     visit "/admin/merchants"
-     within("#merchant-#{@merchant_2.id}") do
-     click_button("Disable")
-     expect(page).to have_button("Enable")
-     click_button("Enable")
-     expect(current_path).to eq("/admin/merchants")
-     expect(page).to have_button("Disable")
-     end
+      yeasty = Merchant.create!(name: "The Yeasty Boys", status: :Disabled)
+
+      visit "/admin/merchants"
+
+      within("#disabled_merchant-#{yeasty.id}") do
+        expect(page).to have_button("Enable")
+        click_button("Enable")
+        expect(current_path).to eq("/admin/merchants")
+      end
+
+      within("#enabled_merchant-#{yeasty.id}") do
+        expect(page).to have_button("Disable")
+      end
    end
 
+  end
+
+  describe 'US10' do
+    it 'can sort between currently enabled and disabled merchants' do
+      Merchant.create!(name: "The Yeasty Boys", status: :Disabled)
+      Merchant.create!(name: "Cake Me Home Tonight", status: :Disabled)
+      Merchant.create!(name: "Bake That", status: :Enabled)
+      Merchant.create!(name: "Nutty Baker", status: :Enabled)
+      # As an admin,
+      visit "/admin/merchants"
+      # When I visit the admin merchants index
+      # Then I see two sections, one for "Enabled Merchants" and one for "Disabled Merchants"
+      expect(page).to have_content("Enabled Merchants")
+      expect(page).to have_content("Disabled Merchants")
+      # And I see that each Merchant is listed in the appropriate section
+      within '.enabled' do
+        expect(page).to have_content("Bake That")
+        expect(page).to have_content("Nutty Baker")
+        expect(page).to_not have_content("The Yeasty Boys")
+      end
+
+      within '.disabled' do
+        expect(page).to have_content("The Yeasty Boys")
+        expect(page).to have_content("Cake Me Home Tonight")
+        expect(page).to_not have_content("Bake That")
+      end
+    end
   end
 
 end
