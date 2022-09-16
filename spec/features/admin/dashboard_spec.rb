@@ -41,14 +41,14 @@ RSpec.describe 'admin dashboard page' do
       @invoice_list_6 = create_list(:invoice, 6, customer_id: @customer6.id)
     end
 
-    it 'can return list of top 5 customers in desending order of completed invoices' do
+    it 'can return list of top 5 customers in descending order of completed invoices' do
       invoices = [@invoice_list_1, @invoice_list_2, @invoice_list_3, @invoice_list_4, @invoice_list_5, @invoice_list_6].flatten
 
       invoices.each do |invoice|
         create(:transaction, invoice_id: invoice.id, result: :success)
       end
-      @failed_invoices.each do |invoice|
-        create(:transaction, invoice_id: invoice.id, result: :failure)
+      @failed_invoices_1.each do |invoice|
+        create(:transaction, invoice_id: invoice.id, result: :failed)
       end
 
       visit admin_path
