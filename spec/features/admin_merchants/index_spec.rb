@@ -32,22 +32,33 @@ RSpec.describe 'Admin Merchants Index' do
   end
 
   describe 'US9' do
-    it 'can enable/disable merchants' do
+    it 'can disable merchants' do
        # As an admin,
       # When I visit the admin merchants index
       visit "/admin/merchants"
       # Then next to each merchant name I see a button to disable or enable that merchant.
       within("#merchant-#{@merchant_1.id}") do
-        expect(page).to have_button("Enable")
         expect(page).to have_button("Disable")
-        # When I click this button
-        click_button("Enable")
+        # click_button("Disable")
+        click_button("Disable")
+
         # Then I am redirected back to the admin merchants index
         expect(current_path).to eq("/admin/merchants")
         # And I see that the merchant's status has changed
-        expect(page).to have_content("Status - Enabled")
+        expect(page).to have_button("Enable")
       end
     end
+
+    it 'can enable merchants' do
+     visit "/admin/merchants"
+     within("#merchant-#{@merchant_2.id}") do
+     click_button("Disable")
+     expect(page).to have_button("Enable")
+     click_button("Enable")
+     expect(current_path).to eq("/admin/merchants")
+     expect(page).to have_button("Disable")
+     end
+   end
 
   end
 
