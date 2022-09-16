@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
   has_many :items
 
   def merchant_invoices
-    Invoice.joins(:items).where("items.merchant_id = ?", id)
+    Invoice.joins(:items).where("items.merchant_id = ?", id).distinct
   end
 
   def self.enabled_merchants
