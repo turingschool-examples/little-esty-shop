@@ -1,4 +1,4 @@
-class AddStatustoMerchants < ActiveRecord::Migration[5.2]
+class AddMerchantStatus < ActiveRecord::Migration[5.2]
   def change
      add_column :merchants, :status, :boolean, default: true
   end
