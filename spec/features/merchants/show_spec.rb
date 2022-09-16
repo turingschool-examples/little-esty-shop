@@ -107,8 +107,8 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
 
         visit "/merchants/#{carly_silo.id}/dashboard"
-
         expect(page).to have_content("#{carly_silo.name}'s Invoices")
+
         click_on("#{carly_silo.name}'s Invoices")
         expect(current_path).to eq(merchant_invoices_path("#{carly_silo.id}"))
       end
@@ -116,7 +116,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
 
         visit "/merchants/#{jewlery_city.id}/dashboard"
-
         expect(page).to have_content("Top 5 Customers")
 
         within('#top_5_customers') do 
@@ -133,7 +132,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       conducted with my merchant' do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
-      
         expect(page).to have_content("Top 5 Customers")
         
         within('#top_5_customers') do 
@@ -168,6 +166,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it "And next to each Item I see the id of the invoice that ordered my item" do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
+
       within('#ready_to_ship') do
         expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice1.id}")
         expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice2.id}")
@@ -184,6 +183,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       end
 
       it "And each invoice id is a link to my merchant's invoice show page" do
+
         visit "/merchants/#{jewlery_city.id}/dashboard"
 
         within('#ready_to_ship') do
@@ -204,7 +204,9 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       end
 
       it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest" do
+
         visit "/merchants/#{jewlery_city.id}/dashboard"
+
         within('#ready_to_ship') do
           expect(page).to have_content(alaina_invoice1.created_at.strftime("%A, %B %d, %Y"))
           expect(page).to have_content(alaina_invoice2.created_at.strftime("%A, %B %d, %Y"))
@@ -214,7 +216,9 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       end
 
       it "invoices are ordered from oldest to newest"  do
+
         visit "/merchants/#{jewlery_city.id}/dashboard"
+
         within('#ready_to_ship') do
           expect(eddie_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(polina_invoice1.created_at.strftime("%A, %B %d, %Y"))
           expect(polina_invoice1.created_at.strftime("%A, %B %d, %Y")).to appear_before(polina_invoice2.created_at.strftime("%A, %B %d, %Y"))
@@ -224,8 +228,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
           expect(alaina_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(alaina_invoice3.created_at.strftime("%A, %B %d, %Y"))
         end
       end
-
-
     end
   end
 end
