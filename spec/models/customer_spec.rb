@@ -100,12 +100,40 @@ RSpec.describe Customer, type: :model do
        #method goes here
       end
     end
+
+    describe '#top_five_buyers' do
+      # top_5 = Customer.top_5_buyers.count
+      xit 'returns 5 customers' do
+        expect(top_5).to eq(5)
+      end
+
+      it 'returns names' do
+        expect(top_5[0].name).to eq("Whitney Gains")
+        expect(top_5[1].name).to eq("Alaina Kneiling")
+        expect(top_5[2].name).to eq("Eddie Young")
+        expect(top_5[3].name).to eq("Leah Anderson")
+        expect(top_5[4].name).to eq("Polina Eisenberg")
+      end
+
+      it 'returns successful transaction count' do
+        expect(top_5[0].cleared_transactions).to eq(6)
+        expect(top_5[1].cleared_transactions).to eq(5)
+        expect(top_5[2].cleared_transactions).to eq(3)
+        expect(top_5[3].cleared_transactions).to eq(2)
+        expect(top_5[4].cleared_transactions).to eq(2)
+      end
+
+      it 'sorts alphabetically if two customers tie' do
+        expect(top_5[3].name).to eq("Leah Anderson")
+        expect(top_5[4].name).to eq("Polina Eisenberg")
+        expect(top_5.map { |cust| cust.name}.include?("Ryan Vergeront")).to be_false
+      end
+    end
   end
 
   describe 'instance methods' do
     describe '#number_of_purchases' do
      it 'can find the number of successful purchases a customer has' do
-
       expect(alaina.num_succesful_transactions).to eq(5)
       expect(eddie.num_succesful_transactions).to eq(3)
       #expect statement here
