@@ -17,9 +17,15 @@ RSpec.describe "Admin Merchants" do
 
             end
 
-            it 'us#25 When I click on the name of a merchant from the admin merchants index page'
+            it "us#25 When I click on the name of a merchant then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)" do
+                visit admin_merchants_path
 
-            it "Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)"
+                click_link "#{@merchant_1.name}"
+
+                expect(current_path).to eq(admin_merchant_path(@merchant_1.id))
+            end
+
+
         end
     end
 end
