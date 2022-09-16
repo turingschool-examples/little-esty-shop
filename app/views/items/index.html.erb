@@ -1,5 +1,7 @@
 <h1> Merchant Items Index Page </h1>
 
+<%= link_to "Create a New Item", new_merchant_item_path(@merchant), method: :get %>
+
 <h3> Enabled Items </h3>
 
 <% @merchant.enabled_items.each do |merchant_item| %>
@@ -10,11 +12,10 @@
     <% end %>
 
 <h3> Disabled Items </h3>
-<div "Disabled Items" >
     <% @merchant.disabled_items.each do |merchant_item| %>
     <div id= "item_<%= merchant_item.id %>">
         <%= link_to "#{merchant_item.name}", merchant_item_path(@merchant, merchant_item), method: :get %>
         <%= button_to "Enable", merchant_item_path(@merchant, merchant_item), method: :patch, params: { enabled: true } %>
     </div>
     <% end %>
-</div>
+

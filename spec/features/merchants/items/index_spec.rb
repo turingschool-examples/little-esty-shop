@@ -85,4 +85,45 @@ RSpec.describe 'Merchant Items Index Page' do
         end
       end
     end
+
+  describe 'User Story 11 - Merchant Item Create' do
+    describe 'When I visit my items index page I see a link to create a new item' do
+      describe 'When I click link, Im taken to a form that allows me to add item information' do
+        describe 'When I fill out the form I click Submit Im taken back to items index page' do
+          describe 'And I see the item I just created displayed in the list of items' do
+            it 'And I see my item was created with a default status of disabled' do
+
+              merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
+              merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
+
+              item_toothpaste = merchant_stephen.items.create!(name: "Item Toothpaste", description: "The worst toothpaste you can find", unit_price: 4000 )
+              item_lamp = merchant_roger.items.create!(name: "Item Lamp", description: "You bet, it's a lamp", unit_price: 4000)
+
+              visit merchant_items_path(merchant_stephen)
+
+              expect(page).to have_link("Create a New Item")
+
+              click_link("Create a New Item")
+
+              expect(current_path).to eq(new_merchant_item_path(merchant_stephen))
+              
+              fill_in "Name", with: "Sword"
+              fill_in "Description", with: "A big sword"
+              fill_in "Unit price", with: "1000"
+              click_button("Submit")
+
+              expect(current_path).to eq(merchant_items_path(merchant_stephen))
+              expect(page).to have_content("Sword")
+              save_and_open_page
+              expect(page).to have_link(item_toothpaste.name)
+
+              the_new_item = Item.find_by(name: "Sword")
+              expect(the_new_item.enabled).to eq(false)
+              
+            end
+          end
+        end
+      end
+    end
+  end
 end
