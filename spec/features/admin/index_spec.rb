@@ -12,6 +12,17 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_content("Admin Dashboard")
     end
 
+  describe 'top 5 customers section' do
+    it 'exists' do
+      within("#favorite_customers") do
+        expect(page).to have_content("Top 5 Customers Overall")
+      end
+    end
+    
+    
+    
+    end
+
   describe 'incomplete invoices section'
     it 'exists' do
       within("#incInvoices") do
