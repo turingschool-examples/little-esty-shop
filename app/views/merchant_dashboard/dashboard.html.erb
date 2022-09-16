@@ -1,6 +1,8 @@
-<p> <%= link_to "Merchant items", "/merchants/merchant_id/items" %> </p>
-<p> <%= link_to "Merchant invoices", "/merchants/merchant_id/invoices"%> </p>
+<p> <%= link_to "Merchant items", "/merchants/:merchant_id/items" %> </p>
+<p> <%= link_to "Merchant invoices", "/merchants/:merchant_id/invoices"%> </p>
 
 <% @merchants.each do |merchant| %>
-<%= merchant.name %>
+<h1> <%= merchant.name %></h1>
 <% end %>
+
+<h2> Top 5 customers </h2>

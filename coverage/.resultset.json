@@ -330,8 +330,9 @@
           null
         ]
       },
-      "/Users/s.lee/turing/mod2/projects/little-esty-shop/app/models/customer.rb": {
+      "/Users/s.lee/turing/mod2/projects/little-esty-shop/app/models/invoice_item.rb": {
         "lines": [
+          1,
           1,
           1,
           null,
@@ -343,10 +344,7 @@
           null,
           1,
           0,
-          null,
-          null,
-          null,
-          null,
+          0,
           null,
           null,
           null
@@ -376,11 +374,10 @@
           null
         ]
       },
-      "/Users/s.lee/turing/mod2/projects/little-esty-shop/app/models/invoice_item.rb": {
+      "/Users/s.lee/turing/mod2/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
           1,
-          1,
           null,
           1,
           1,
@@ -389,29 +386,17 @@
           1,
           null,
           1,
-          0,
-          0,
+          1,
           null,
           null,
-          null
-        ]
-      },
-      "/Users/s.lee/turing/mod2/projects/little-esty-shop/app/controllers/merchant_dashboard_controller.rb": {
-        "lines": [
-          1,
-          1,
-          2,
           null,
-          null
-        ]
-      },
-      "/Users/s.lee/turing/mod2/projects/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
+          null,
+          null,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1663292354
+    "timestamp": 1663303521
   }
 }
