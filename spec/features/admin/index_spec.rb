@@ -145,5 +145,69 @@ RSpec.describe 'the admin dashboard' do
         end
       end
     end
+
+    describe 'Next to each invoice id I see the date the invoice was created' do
+      describe 'The list is ordered from oldest to newest' do
+        it 'lists the date the invoice was created ordered from oldest to newest' do
+          Customer.destroy_all
+          Invoice.destroy_all
+          Merchant.destroy_all
+          InvoiceItem.destroy_all
+          Item.destroy_all
+
+          5.times do
+            Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+          end
+
+          invoice_1 = Invoice.create!(customer_id: Customer.all[0].id, status: 'completed', created_at: Time.now - 3.days)
+          invoice_2 = Invoice.create!(customer_id: Customer.all[1].id, status: 'completed', created_at: Time.now - 1.days)
+          invoice_3 = Invoice.create!(customer_id: Customer.all[2].id, status: 'completed', created_at: Time.now - 2.days)
+          invoice_4 = Invoice.create!(customer_id: Customer.all[3].id, status: 'completed', created_at: Time.now)
+          invoice_5 = Invoice.create!(customer_id: Customer.all[4].id, status: 'completed', created_at: Time.now - 4.days)
+
+          merchant_1 = Merchant.create!(name: 'Schroder-Jerde')
+          merchant_2 = Merchant.create!(name: 'Bradley and Sons')
+
+          item_1 = Item.create!(name: 'Toe Ring', description: 'Ring for your toes', unit_price: Faker::Number.number(digits: 5), merchant_id: merchant_1.id)
+          item_2 = Item.create!(name: 'Strawberry Painting', description: 'Beautiful art', unit_price: Faker::Number.number(digits: 4), merchant_id: merchant_1.id)
+          item_3 = Item.create!(name: 'Gold ring', description: 'Its gold!', unit_price: Faker::Number.number(digits: 5), merchant_id: merchant_1.id)
+          item_4 = Item.create!(name: 'Silver Necklace', description: 'Its silver!', unit_price: Faker::Number.number(digits: 6), merchant_id: merchant_2.id)
+          item_5 = Item.create!(name: 'Wooden spoon', description: 'Made o wood', unit_price: Faker::Number.number(digits: 4), merchant_id: merchant_2.id)
+
+          invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 3, unit_price: 3635, status: 'shipped')
+          invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 31, unit_price: 13635, status: 'packaged')
+          invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, quantity: 13, unit_price: 1335, status: 'shipped')
+          invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, quantity: 30, unit_price: 1335, status: 'pending')
+          invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 12, unit_price: 1365, status: 'packaged')
+
+          visit admin_index_path
+          
+          expect('Monday, September 12, 2022').to appear_before('Thursday, September 15, 2022')
+          expect('Thursday, September 15, 2022').to appear_before('Friday, September 16, 2022')
+          expect('Thursday, September 15, 2022').to_not appear_before('Monday, September 12, 2022')
+          
+          within "#invoice-#{invoice_2.id}" do
+            expect(page).to have_content('Thursday, September 15, 2022')
+          end
+
+          within "#invoice-#{invoice_4.id}" do
+            expect(page).to have_content('Friday, September 16, 2022')
+          end
+
+          within "#invoice-#{invoice_5.id}" do
+            expect(page).to have_content('Monday, September 12, 2022')
+          end
+        end
+      end
+    end
+# Admin Dashboard Invoices sorted by least recent
+
+# As an admin,
+# When I visit the admin dashboard
+# In the section for "Incomplete Invoices",
+# Next to each invoice id I see the date that the invoice was created
+# And I see the date formatted like "Monday, July 18, 2019"
+# And I see that the list is ordered from oldest to newest
   end
 end
+
