@@ -1,8 +1,22 @@
 <h1>Admin Merchants Index page</h1>
 
-<% @merchants.each do |merchant| %>
-  <div id="merchant-<%=merchant.id%>">
-    <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}"%></p>
 
-  </div>
-<% end %>
+
+<ul>
+  <% @merchants.each do |merchant| %>
+
+    <% if merchant.status == true %>
+      <div id="merchant-<%= merchant.id %>">
+        <p><li><%= link_to "#{merchant.name}", admin_merchants_path( merchant.id) %>
+              <%= button_to "Disable", admin_merchant_path(merchant.id), method: :patch, params:[status: false]%>
+        </li></p>
+      </div>
+    <% else %>
+      <div id="merchant-<%= merchant.id %>">
+      <p><li><%= link_to "#{merchant.name}", admin_merchants_path(merchant.id) %>
+             <%= button_to "Enable", admin_merchant_path(merchant.id), method: :patch, params:[status: true]%>
+      </li></p>
+      </div>
+    <% end %>
+    <% end %>
+</ul>
