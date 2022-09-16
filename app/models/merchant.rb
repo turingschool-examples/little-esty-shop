@@ -4,6 +4,9 @@ class Merchant < ApplicationRecord
   validates_presence_of :status, inclusion: ["Enabled", "Disabled"]
   has_many :items
 
+  def merchant_invoices
+    Invoice.joins(:items).where("items.merchant_id = ?", id)
+  end
 
   def self.enabled_merchants
     Merchant.where(status: 0)
@@ -25,3 +28,4 @@ class Merchant < ApplicationRecord
     items_sorted_by_revenue.successful_transactions.limit(5)
   end
 end
+
