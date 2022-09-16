@@ -130,6 +130,13 @@ RSpec.describe 'Merchant Items Index Page: ' do
           end
         end
       end
+
+      describe 'there is a link to create a new item' do
+        it 'the link exists on the page' do
+        visit merchant_items_path(@merch1.id)
+        expect(page).to have_link("New Item")
+        end
+      end
     end
   end
 end
