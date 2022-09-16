@@ -8,7 +8,9 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items
-    items.joins(:invoice_items).select("invoice.created_at, invoice_id, items.name as item_name").where.not(invoice_items: {status: 2})
+    items.joins(invoice_items: :invoice)
+    .select("invoices.created_at as creation_time, invoice_id, items.name as item_name")
+    .where.not(invoice_items: {status: 2})
   end
   
   def enabled_items
@@ -27,4 +29,5 @@ class Merchant < ApplicationRecord
       .order(revenue: :desc)
       .limit(5)
   end
+
 end
