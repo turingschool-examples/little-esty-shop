@@ -19,16 +19,16 @@ RSpec.describe 'Merchant Items Index' do
   let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
   let!(:whitney) { Customer.create!(first_name: "Whitney", last_name: "Gains")}
   
-  let!(:invoice1) { alaina.invoices.create!(status: "completed")}
-  let!(:invoice2) { alaina.invoices.create!(status: "in_progress")}
-  let!(:invoice3) { alaina.invoices.create!(status: "completed")}
-  let!(:invoice4) { alaina.invoices.create!(status: "completed")}
-  let!(:invoice5) { alaina.invoices.create!(status: "completed")}
-  let!(:invoice6) { alaina.invoices.create!(status: "completed")}
-  let!(:invoice7) { whitney.invoices.create!(status: "completed")}
-  let!(:invoice8) { whitney.invoices.create!(status: "completed")}
-  let!(:invoice9) { whitney.invoices.create!(status: "completed")}
-  let!(:invoice10) { whitney.invoices.create!(status: "completed")}
+  let!(:invoice1) { alaina.invoices.create!(status: "completed", created_at: "2012-04-30 14:54:09")}
+  let!(:invoice2) { alaina.invoices.create!(status: "in_progress", created_at: "2012-01-30 14:54:09")}
+  let!(:invoice3) { alaina.invoices.create!(status: "completed", created_at: "2012-01-24 14:54:09")}
+  let!(:invoice4) { alaina.invoices.create!(status: "completed", created_at: "2012-05-23 14:54:09")}
+  let!(:invoice5) { alaina.invoices.create!(status: "completed", created_at: "2012-03-12 14:54:09")}
+  let!(:invoice6) { alaina.invoices.create!(status: "completed", created_at: "2012-02-12 14:54:09")}
+  let!(:invoice7) { whitney.invoices.create!(status: "completed", created_at: "2012-06-30 14:54:09")}
+  let!(:invoice8) { whitney.invoices.create!(status: "completed", created_at: "2012-04-11 14:54:09")}
+  let!(:invoice9) { whitney.invoices.create!(status: "completed", created_at: "2012-04-22 14:54:09")}
+  let!(:invoice10) { whitney.invoices.create!(status: "completed", created_at: "2012-04-02 14:54:09")}
 
   let!(:transaction1) { invoice1.transactions.create!(credit_card_number: "4654405418249632", result: "success")}
   let!(:transaction2) { invoice2.transactions.create!(credit_card_number: "4654405418249632", result: "success")}
@@ -164,6 +164,7 @@ RSpec.describe 'Merchant Items Index' do
               "Top selling date for #{grobles.name} was #{grobles.best_sales_date}"
             )
           end
+          save_and_open_page
         end
       end
     end

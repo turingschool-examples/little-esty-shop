@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
 
   def best_sales_date
-    self.invoices.select(:created_at, "invoice_items.unit_price*quantity as revenue").order("revenue desc", "invoices.created_at desc").first.created_at
+    date = self.invoices.select(:created_at, "invoice_items.unit_price*quantity as revenue").order("revenue desc", "invoices.created_at desc").first.created_at
+    date.strftime("%B %d, %Y")
   end
 end

@@ -19,8 +19,6 @@ RSpec.describe Item, type: :model do
   let!(:item_inv3) { InvoiceItem.create!(invoice_id: gordy_inv3.id, item_id: rocker.id, quantity: 10, unit_price: 1600, status:"packaged" )}
   let!(:item_inv4) { InvoiceItem.create!(invoice_id: gordy_inv4.id, item_id: rocker.id, quantity: 10, unit_price: 1600, status:"packaged" )}
 
-
-
   describe 'relationships' do
     it { should belong_to(:merchant) }
     it { should have_many :invoice_items }
@@ -54,8 +52,8 @@ RSpec.describe Item, type: :model do
 
     describe '#best_sales_date' do
       it 'returns the date with most sales for an item' do
-        expect(rocker.best_sales_date).to eq("2012-06-28 14:54:09")
-        expect(rocker.best_sales_date).to_not eq("2012-05-25 14:54:09")
+        expect(rocker.best_sales_date).to eq("June 28, 2012")
+        expect(rocker.best_sales_date).to_not eq("May 25, 2012")
       end
     end
   end
