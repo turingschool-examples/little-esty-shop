@@ -25,6 +25,7 @@
     <li id="top-item-<%= item.id %>">
       <%= link_to item.name, merchant_item_path(@merchant, item) %>
       <p>Total Revenue: <%= item.revenue %></p>
+      <p>Top selling date for <%= item.name %> was <%= item.best_sales_date %></p>
     </li>
   <% end %>
 </ol>
