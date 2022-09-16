@@ -104,12 +104,12 @@ RSpec.describe 'Merchant Dashboard' do
 
       it 'then I see the name of the merchant' do
 
-        visit "/merchants/#{@merchant_1.id}/dashboard"
+        visit merchant_dashboard_path(@merchant_1)
 
         expect(page).to have_content(@merchant_1.name)
         expect(page).to_not have_content(@merchant_2.name)
 
-        visit "/merchants/#{@merchant_2.id}/dashboard"
+        visit merchant_dashboard_path(@merchant_2)
 
         expect(page).to have_content(@merchant_2.name)
         expect(page).to_not have_content(@merchant_1.name)
@@ -124,21 +124,21 @@ RSpec.describe 'Merchant Dashboard' do
       # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
 
       it 'Then I see link to my merchant items index (/merchants/merchant_id/items)' do
-        visit "/merchants/#{@merchant_1.id}/dashboard"
+        visit merchant_dashboard_path(@merchant_1)
 
         find_link({text: "Items Index", href: "/merchants/#{@merchant_1.id}/items"}).visible?
 
-        visit "/merchants/#{@merchant_2.id}/dashboard"
+        visit merchant_dashboard_path(@merchant_2)
 
         find_link({text: "Items Index", href: "/merchants/#{@merchant_2.id}/items"}).visible?
       end
 
       it 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
-        visit "/merchants/#{@merchant_1.id}/dashboard"
+        visit merchant_dashboard_path(@merchant_1)
 
         find_link({text: "Invoices Index", href: "/merchants/#{@merchant_1.id}/invoices"}).visible?
 
-        visit "/merchants/#{@merchant_2.id}/dashboard"
+        visit merchant_dashboard_path(@merchant_2)
 
         find_link({text: "Invoices Index", href: "/merchants/#{@merchant_2.id}/invoices"}).visible?
       end
@@ -164,7 +164,7 @@ RSpec.describe 'Merchant Dashboard' do
 
       it 'Then I see the names of the top 5 customers that have conducted transactions with merchant' do
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
         within("#top-5-customers") do
           expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
@@ -181,7 +181,7 @@ RSpec.describe 'Merchant Dashboard' do
 
       it 'And next to each customer name I see the number of successful transactions they have with merchant' do
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
         within("#top-5-customers") do
           within("##{@customer_4.id}") do
@@ -223,7 +223,7 @@ RSpec.describe 'Merchant Dashboard' do
     describe 'User Story 4' do
       it 'Then I see a section for Items Ready to Ship' do
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
         expect(page).to have_content("Items Ready to Ship:")
       end
@@ -242,7 +242,7 @@ RSpec.describe 'Merchant Dashboard' do
         invoice_item_9 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
         invoice_item_10 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
         expect(page).to have_content(@lamp.name)
         expect(page).to have_content(@toilet.name)
@@ -258,7 +258,7 @@ RSpec.describe 'Merchant Dashboard' do
         invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
         invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
         within("##{@chair.id}") do
           expect(page).to have_content("#{@invoice_3.id}")
@@ -286,7 +286,7 @@ RSpec.describe 'Merchant Dashboard' do
         invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
         invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard" 
+        visit merchant_dashboard_path(@pretty_plumbing) 
 
         within("##{@chair.id}") do
           find_link({text: "#{@invoice_3.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_3.id}"}).visible?
