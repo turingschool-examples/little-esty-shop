@@ -149,7 +149,11 @@ RSpec.describe 'the admin dashboard' do
     describe 'Next to each invoice id I see the date the invoice was created' do
       describe 'The list is ordered from oldest to newest' do
         it 'lists the date the invoice was created ordered from oldest to newest' do
-          visit admin_index_path
+          Customer.destroy_all
+          Invoice.destroy_all
+          Merchant.destroy_all
+          InvoiceItem.destroy_all
+          Item.destroy_all
 
           5.times do
             Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
@@ -176,22 +180,23 @@ RSpec.describe 'the admin dashboard' do
           invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, quantity: 30, unit_price: 1335, status: 'pending')
           invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 12, unit_price: 1365, status: 'packaged')
 
-          expect(invoice_5).to appear_before(invoice_1)
-          expect(invoice_1).to appear_before(invoice_3)
-          expect(invoice_3).to appear_before(invoice_4)
-          expect(invoice_4).to_not appear_before(invoice_5)
+          visit admin_index_path
+          
+          expect('Monday, September 12, 2022').to appear_before('Thursday, September 15, 2022')
+          expect('Thursday, September 15, 2022').to appear_before('Friday, September 16, 2022')
+          expect('Thursday, September 15, 2022').to_not appear_before('Monday, September 12, 2022')
+          
+          # within "#invoice-#{invoice_1.id}" do
+          #   expect(page).to have_content('Monday, September 12, 2022')
+          # end
 
-          within "#invoice-#{invoice_1.id}" do
-            expect(page).to have_content(Time.now - 3.days)
-          end
+          # within "#invoice-#{invoice_2.id}" do
+          #   expect(page).to have_content('Thursday, September 15, 2022')
+          # end
 
-          within "#invoice-#{invoice_2.id}" do
-            expect(page).to have_content(Time.now - 1.days)
-          end
-
-          within "#invoice-#{invoice_3.id}" do
-            expect(page).to have_content(Time.now - 2.days)
-          end
+          # within "#invoice-#{invoice_3.id}" do
+          #   expect(page).to have_content('Friday, September 16, 2022')
+          # end
         end
       end
     end

@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   validates_presence_of :customer_id
   validates_presence_of :status
   validates_numericality_of :customer_id
+
+  def self.incomplete_invoices
+    select('invoices.*').distinct.joins(:invoice_items).where.not(invoice_items: {status: :shipped}).order(:created_at)
+  end
 end
