@@ -30,12 +30,8 @@ RSpec.describe 'the Merchant Invoices Index' do
 
       expect(page).to_not have_content(@invs_1[0].id)
       expect(page).to_not have_content(@invs_1[1].id)
+      expect(page).to have_link(@invs_0[0].id)
     end
-  
-    xit 'item ids link to merchant invoice show page' do
-      click_on "#{@invs_0[0].id}"
-    end
-
   end
 
 
