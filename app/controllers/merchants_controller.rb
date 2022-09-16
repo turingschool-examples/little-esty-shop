@@ -5,8 +5,8 @@ class MerchantsController < ApplicationController
     @items_to_ship = Item.find_items_to_ship(params[:id])
   end
 
-  private
-  def merchant_params
-    params.permit(:name)
-  end
+  # private
+  # def merchant_params
+  #   params.permit(:name)
+  # end
 end
