@@ -12,10 +12,7 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items_ordered
-    require 'pry' ; binding.pry
-    items.joins(invoice_items: :invoice)
-    .select("invoices.created_at as creation_time, invoice_id, items.name as item_name")
-    .where.not(invoice_items: {status: 2}).order(:creation_time)
+    items.joins(invoice_items: :invoice).select("items.*").where.not(invoice_items: {status: 2}).order("invoices.created_at")
   end
   
   def enabled_items

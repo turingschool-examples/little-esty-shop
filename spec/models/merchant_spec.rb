@@ -133,9 +133,12 @@ RSpec.describe Merchant, type: :model do
 
     describe '#ready_to_ship_items_ordered' do
       it 'finds all items that are ready to ship for a particular merchant' do
-        expect(jewlery_city.ready_to_ship_items_ordered.pluck(:name)).to eq(["Gold Earrings", "Silver Necklace", "Gold Studded Bracelet"])
-        expect(jewlery_city.ready_to_ship_items_ordered.pluck(:invoice_id)).to eq([alaina_invoice1.id, whitney_invoice1.id, eddie_invoice1.id])
-        expect(jewlery_city.ready_to_ship_items_ordered.pluck(:created_at).first.class).to eq(ActiveSupport::TimeWithZone)
+        expect(jewlery_city.ready_to_ship_items_ordered).to eq([silver_necklace, gold_earrings, studded_bracelet ])
+
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.id") ).to eq([whitney_invoice1.id, alaina_invoice1.id, eddie_invoice1.id])
+        
+
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at").first.class).to eq(ActiveSupport::TimeWithZone) #give specific created at
       end
     end
 
