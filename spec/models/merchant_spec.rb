@@ -25,5 +25,10 @@ RSpec.describe(Merchant, type: :model) do
       invoice_item1 = InvoiceItem.create!(      item_id: item1.id,       invoice_id: invoice1.id,       unit_price: item1.unit_price,       quantity: 2,       status: 0)
       expect(merchant1.ready_to_ship).to(eq([item1]))
     end
+
+    it 'favorite_customers' do
+      merchant1 = Merchant.create!(name: "Bob")
+      
+    end
   end
 end

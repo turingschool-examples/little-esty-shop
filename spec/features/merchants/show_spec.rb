@@ -40,7 +40,7 @@ RSpec.describe("the merchant dashboard") do
 
     it 'I can see the top 5 favorite customers' do
       merchant1 = Merchant.create!(name: "Bob")
-      
+
       7.times do
         Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
       end
@@ -86,6 +86,7 @@ RSpec.describe("the merchant dashboard") do
       visit("/merchants/#{merchant1.id}/dashboard")
       
       expect(page).to have_content('Favorite Customers')
+
       expect(page).to have_content()
     end
   end
