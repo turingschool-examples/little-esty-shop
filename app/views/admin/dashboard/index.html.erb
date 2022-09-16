@@ -1,21 +1,25 @@
-<h1>Admin Dashboard</h1>
+<h2>Admin Dashboard</h2>
 
-<%= link_to "Merchant Index", "/admin/merchants" %>
-<br>
-<%= link_to "Invoice Index", "/admin/invoices" %>
+<div style="font-size:15px; text-align:right;">
+<span style="padding:10px; padding:10px;"><%= link_to "Dashboard", "/admin/" %></span>
+<span style="padding:10px; padding:10px;"><%= link_to "Merchant Index", "/admin/merchants" %></span>
+<span style="padding:10px; padding:10px;"><%= link_to "Invoice Index", "/admin/invoices" %></span>
+</div>
 
 <div id="top-5-customers">
-<h2>Top 5 Customers:</h2>
-<% @customers.top_5_customers.each do |customer| %>
-  <p id="<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - Number of transactions: <%= customer.success_count %></p>
-<% end %>
+<h3>Top 5 Customers:</h3>
+<ol>
+  <% @customers.top_5_customers.each do |customer| %>
+    <li id="<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - <%= customer.success_count %> purchases</li>
+  <% end %>
+</ol>
 </div>
 
 <div id="incomplete-invoices")>
-  <h2>Incomplete Invoices</h2>
+  <h3>Incomplete Invoices</h3>
   <ul> 
-    <% @invoices.unshipped_invoices.each do |invoice| %>
-      <li><%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %></li>
+    <% @invoices.unshipped_invoices.sort_by_date.each do |invoice| %>
+      <li><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %></li>
     <% end %>
   </ul>
 </div>
