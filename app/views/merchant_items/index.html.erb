@@ -1,6 +1,8 @@
 <%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
 <h2 class="subtitle">My Items</h2>
 
+<p><%= link_to "New Item", new_merchant_item_path(@merchant.id) %></p>
+
 <section id="enabled">
 <h3>Enabled Items</h3>
 <ul>
