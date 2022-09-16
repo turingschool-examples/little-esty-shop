@@ -24,13 +24,14 @@ RSpec.describe 'the Merchant Invoices Index' do
   
   describe 'as a merchant' do
     it 'shows all invoices that include the merchants items' do
+
       expect(page).to have_content(@invs_0[0].id)
       expect(page).to have_content(@invs_0[1].id)
       expect(page).to have_content(@invs_0[2].id)
 
       expect(page).to_not have_content(@invs_1[0].id)
       expect(page).to_not have_content(@invs_1[1].id)
-      expect(page).to have_link(@invs_0[0].id)
+      expect(page).to have_link("#{@invs_0[0].id}")
     end
   end
 
