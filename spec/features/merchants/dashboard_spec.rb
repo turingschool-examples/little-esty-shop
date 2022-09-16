@@ -218,22 +218,21 @@ RSpec.describe 'Merchant Dashboard' do
         visit "/merchants/#{@pretty_plumbing.id}/dashboard"
 
         expect(page).to have_content("Items Ready to Ship:")
-
       end
-
+      
       it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
-
-        @invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        @invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        @invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        @invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_1.id}", status: :pending)
-        @invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_1.id}", status: :pending)
-
-        @invoice_item_6 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_2.id}", status: :pending)
-        @invoice_item_7 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :packaged)
-        @invoice_item_8 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        @invoice_item_9 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        @invoice_item_10 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        
+        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
+        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
+        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
+        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_1.id}", status: :pending)
+        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_1.id}", status: :pending)
+        
+        invoice_item_6 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_2.id}", status: :pending)
+        invoice_item_7 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :packaged)
+        invoice_item_8 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        invoice_item_9 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        invoice_item_10 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
 
         visit "/merchants/#{@pretty_plumbing.id}/dashboard"
 
@@ -244,12 +243,54 @@ RSpec.describe 'Merchant Dashboard' do
         expect(page).to_not have_content(@chair.name)
       end
 
-      it '' do
+      it 'And next to each Item I see the id of the invoice that ordered my item' do
+        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
+        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
+        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
+        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
 
+        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+
+        within("##{@chair.id}") do
+          expect(page).to have_content("#{@invoice_3.id}")
+          expect(page).to_not have_content("#{@invoice_1.id}")
+          expect(page).to_not have_content("#{@invoice_5.id}")
+        end
+
+        within("##{@lamp.id}") do
+          expect(page).to have_content("#{@invoice_4.id}")
+          expect(page).to_not have_content("#{@invoice_2.id}")
+          expect(page).to_not have_content("#{@invoice_3.id}")
+        end
+
+        within("##{@toilet.id}") do
+          expect(page).to have_content("#{@invoice_5.id}")
+          expect(page).to_not have_content("#{@invoice_2.id}")
+          expect(page).to_not have_content("#{@invoice_3.id}")
+        end
       end
 
-      it '' do
+      it 'And each invoice id is a link to my merchants invoice show page' do
+        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
+        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
+        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
+        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
 
+        visit "/merchants/#{@pretty_plumbing.id}/dashboard" 
+
+        within("##{@chair.id}") do
+          expect(find_link("#{@invoice_3.id}")[:href].should == "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_3.id}")
+        end
+
+        within("##{@lamp.id}") do
+          expect(find_link("#{@invoice_4.id}")[:href].should == "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_4.id}")
+        end
+
+        within("##{@toilet.id}") do
+          expect(find_link("#{@invoice_5.id}")[:href].should == "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_5.id}")
+        end
       end
     end
   end
