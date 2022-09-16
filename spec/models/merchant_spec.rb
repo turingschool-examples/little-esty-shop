@@ -144,6 +144,7 @@ RSpec.describe Merchant, type: :model do
       it 'finds all items that are ready to ship for a particular merchant' do
        expect(jewlery_city.ready_to_ship_items.pluck(:name)).to eq(["Gold Earrings", "Silver Necklace", "Gold Studded Bracelet"])
        expect(jewlery_city.ready_to_ship_items.pluck(:invoice_id)).to eq([alaina_invoice1.id, whitney_invoice1.id, eddie_invoice1.id])
+       expect(jewlery_city.ready_to_ship_items.pluck(:created_at).first.class).to eq(ActiveSupport::TimeWithZone)
       end
      end
 
