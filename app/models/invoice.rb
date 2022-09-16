@@ -10,6 +10,6 @@ class Invoice < ApplicationRecord
   validates_numericality_of :customer_id
 
   def self.incomplete_invoices
-    select(:invoice_id).distinct.where.not(status: :shipped).pluck(:invoice_id)
+    joins(:invoice_items).distinct.where("invoice_items.status != ?", 2).order(:created_at)
   end
 end
