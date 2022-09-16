@@ -87,6 +87,49 @@ RSpec.describe 'Merchant Items Index Page: ' do
           expect(page).to have_button('Enable')
         end
       end
+
+      describe 'I see two sections, Enabled and Disabled' do
+        it 'has Enabled and Disabled sections' do
+          visit merchant_items_path(@merch1.id)
+
+          within("#enabled") do
+            within("#item_#{@item1.id}") do
+              expect(page).to have_link(@item1.name)
+              expect(page).to have_button("Disable")
+            end
+          end
+        end
+
+        it 'items are listed in appropriate sections' do
+          visit merchant_items_path(@merch1.id)
+
+          within("#enabled") do
+            expect(page).to have_link(@item1.name)
+            expect(page).to have_link(@item2.name)
+          end
+
+          within("#enabled") do
+            within("#item_#{@item1.id}") do
+              click_button 'Disable'
+            end
+          end
+
+          within("#enabled") do
+            expect(page).to_not have_link(@item1.name)
+            within("#item_#{@item2.id}") do
+              expect(page).to have_link(@item2.name)
+              expect(page).to have_button("Disable")
+            end
+          end
+  
+          within("#disabled") do
+            within("#item_#{@item1.id}") do
+              expect(page).to have_link(@item1.name)
+              expect(page).to have_button("Enable")
+            end
+          end
+        end
+      end
     end
   end
 end
