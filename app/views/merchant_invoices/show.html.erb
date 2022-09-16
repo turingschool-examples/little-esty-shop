@@ -17,7 +17,12 @@
         <td><%= invoice_item.name %></td>
         <td><%= invoice_item.quantity %></td>
         <td>$<%= invoice_item.price_convert %></td>
-        <td><%= invoice_item.status.titleize %></td>
+        <td>
+          <%= form_with model: invoice_item, local: true do |f| %>
+            <%= f.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]] %>
+            <%= f.submit "Update Status" %>
+          <% end %>   
+        </td>
       </tr>
     <% end %>
   </table>
