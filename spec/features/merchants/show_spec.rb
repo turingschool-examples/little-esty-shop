@@ -87,7 +87,25 @@ RSpec.describe("the merchant dashboard") do
       
       expect(page).to have_content('Favorite Customers')
 
-      expect(page).to have_content([Customer.all[2], Customer.all[1], Customer.all[0], Customer.all[4], Customer.all[3]])
+      within "#favorite_customer_#{Customer.all[2].id}" do
+        expect(page).to have_content("#{Customer.all[2].first_name} #{Customer.all[2].last_name} - 3 purchases")
+      end
+
+      within "#favorite_customer_#{Customer.all[1].id}" do
+        expect(page).to have_content("#{Customer.all[1].first_name} #{Customer.all[1].last_name} - 2 purchases")
+      end
+
+      within "#favorite_customer_#{Customer.all[0].id}" do
+        expect(page).to have_content("#{Customer.all[0].first_name} #{Customer.all[0].last_name} - 2 purchases")
+      end
+
+      within "#favorite_customer_#{Customer.all[4].id}" do
+        expect(page).to have_content("#{Customer.all[4].first_name} #{Customer.all[4].last_name} - 2 purchases")
+      end
+   
+      within "#favorite_customer_#{Customer.all[3].id}" do
+        expect(page).to have_content("#{Customer.all[3].first_name} #{Customer.all[3].last_name} - 2 purchases")
+      end
     end
   end
 
