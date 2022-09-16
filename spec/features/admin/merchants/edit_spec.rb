@@ -40,7 +40,7 @@ RSpec.describe "Admin Merchant Edit Page" do
 
       it "When I update the information in the form and I click ‘submit’, I am redirected back to the merchant's admin show page where I see the updated information and I see a flash message stating that the information has been successfully updated" do
         visit edit_admin_merchant_path(@merchant_1)
-        save_and_open_page
+
         fill_in "Name",	with: "Billy John Tools"
         click_button"Update Merchant"
 
