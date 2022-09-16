@@ -134,10 +134,7 @@ RSpec.describe Merchant, type: :model do
     describe '#ready_to_ship_items_ordered' do
       it 'finds all items that are ready to ship for a particular merchant' do
         expect(jewlery_city.ready_to_ship_items_ordered).to eq([studded_bracelet, silver_necklace, gold_earrings])
-
         expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.id") ).to eq([eddie_invoice1.id, whitney_invoice1.id, alaina_invoice1.id])
-        
-
         expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at")).to eq(["2000-01-30 14:54:09.000000000 +0000", "2012-01-30 14:54:09.000000000 +0000","2020-01-30 14:54:09.000000000 +0000"])
       end
     end
