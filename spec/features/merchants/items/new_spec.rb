@@ -32,7 +32,7 @@ RSpec.describe 'Merchant New Item page' do
         expect(page).to have_button('Submit')
       end
 
-      xit "filling out form and clicking 'Submit' redirects to merchant index page" do
+      it "filling out form and clicking 'Submit' redirects to merchant index page" do
         visit (new_merchant_item_path(@merch2.id))
 
         fill_in 'Enter Item Description', with: 'Gadget'

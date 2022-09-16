@@ -1,6 +1,6 @@
 <h2>Create a New Item %><h2>
 
-<h3><%= form_with url: merchant_items_path(@merchant.id), method: :post, local: true do |f| %>
+<strong><%= form_with url: merchant_items_path(@merchant.id), method: :post, local: true do |f| %>
   <p><%= f.label :name, "Enter Item Name" %>
      <%= f.text_field :name %></p>
 
@@ -12,4 +12,4 @@
 
      <%= f.submit "Submit" %>
 
-    <% end %></h3>
+    <% end %></strong>
