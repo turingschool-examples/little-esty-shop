@@ -49,6 +49,7 @@ group(:development, :test) do
   gem("simplecov")
   gem("capybara")
   gem("launchy")
+  gem("faker")
 end
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
