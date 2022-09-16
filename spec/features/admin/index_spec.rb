@@ -27,3 +27,5 @@ RSpec.describe 'admin dashboard' do
     xit 'has a link to the Admin Invoice Index' do
       click_link("Invoice Index")
     end
+
+  end
