@@ -1,6 +1,6 @@
 class MerchantDashboardController < ApplicationController
   def dashboard
     @merchants = Merchant.all
-    require "pry"; binding.pry
+    @top_customers = Customer.top_five_customers
   end
 end

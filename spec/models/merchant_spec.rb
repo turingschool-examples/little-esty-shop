@@ -73,8 +73,8 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
     end
 
-    xit "top 5 customers" do
-      expect(Customer.top_five_customers_by_merchant).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
+    it "top 5 customers" do
+      expect(Customer.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
     end
   end
 end
