@@ -110,14 +110,8 @@ RSpec.describe Merchant, type: :model do
   let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"shipped" )}
   let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
 
-
-  describe 'class methods' do
-    # describe '#search' do
-    #   xit 'returns partial matches' do
-    #    #method goes here
-    #   end
-    # end
-
+    
+  describe 'instance methods' do
     describe '#enabled_items' do
       it 'returns an array of enabled items' do
         expect(carly_silo.enabled_items).to eq([licorice, peanut])
@@ -129,9 +123,7 @@ RSpec.describe Merchant, type: :model do
         expect(carly_silo.disabled_items).to eq([choco_waffle, hummus])
       end
     end
-  end
 
-  describe 'instance methods' do
     describe '#transactions_top_5' do
       it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
 
@@ -139,20 +131,18 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-
     describe '#ready_to_ship_items' do
       it 'finds all items that are ready to ship for a particular merchant' do
-       expect(jewlery_city.ready_to_ship_items.pluck(:name)).to eq(["Gold Earrings", "Silver Necklace", "Gold Studded Bracelet"])
-       expect(jewlery_city.ready_to_ship_items.pluck(:invoice_id)).to eq([alaina_invoice1.id, whitney_invoice1.id, eddie_invoice1.id])
-       expect(jewlery_city.ready_to_ship_items.pluck(:created_at).first.class).to eq(ActiveSupport::TimeWithZone)
+        expect(jewlery_city.ready_to_ship_items.pluck(:name)).to eq(["Gold Earrings", "Silver Necklace", "Gold Studded Bracelet"])
+        expect(jewlery_city.ready_to_ship_items.pluck(:invoice_id)).to eq([alaina_invoice1.id, whitney_invoice1.id, eddie_invoice1.id])
+        expect(jewlery_city.ready_to_ship_items.pluck(:created_at).first.class).to eq(ActiveSupport::TimeWithZone)
       end
-     end
+    end
 
     describe '#top_5_items' do
       it 'an array of the top 5 items by revenue' do
         expect(jewlery_city.top_5_items).to eq([conch_shell, nose_ring, spiked_wallet_chain, banana_earrings, gold_earrings])
       end
     end
-
   end
 end
