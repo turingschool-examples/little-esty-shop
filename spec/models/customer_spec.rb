@@ -149,11 +149,11 @@ RSpec.describe Customer, type: :model do
       transacts_6 = create_list(:transaction, 9, invoice: inv_6, result: 0)
       unsuc_transacts_6 = create_list(:transaction, 9, invoice: inv_6, result: 1)
 
-      inv_7 = create(:invoice, customer: customers[6], status: 1)
+      inv_7 = create(:invoice, customer: customers[7], status: 1)
       transacts_7 = create_list(:transaction, 8, invoice: inv_7, result: 0)
       unsuc_transacts_7 = create_list(:transaction, 8, invoice: inv_7, result: 1)
       
-      expect(Customer.top_five_overall).to eq([customers[0], customers[1], customers[2], customers[3], customers[4]])
+      expect(Customer.top_five_overall_cust).to eq([customers[0], customers[1], customers[2], customers[3], customers[4]])
     end
   end
 end
