@@ -1,4 +1,4 @@
 <%= render partial: 'admin/header' %>
 <% @merchants.each do |merchant| %>
-<p><%= merchant.name %></p>
+<p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></p>
 <% end %>
