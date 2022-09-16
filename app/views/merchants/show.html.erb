@@ -15,8 +15,8 @@
 <h3>Items Ready to Ship:</h3>
 
 <div id="items-not-shipped">
-  <% @merchant.items_not_shipped_sorted_by_date.each do |item| %>
-    <% item.invoices.each do |invoice| %>
+  <% @merchant.items_not_shipped_sorted_by_date.each do |invoice| %>
+    <% invoice.items.each do |item| %>
       <p id="<%= item.id %>"> <%= item.name %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %> - Invoice ID: <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> </p>
     <% end %>
   <% end %>
