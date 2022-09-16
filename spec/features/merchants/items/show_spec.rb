@@ -14,10 +14,12 @@ RSpec.describe 'Merchant Items Show Page Feature' do
 
           item_lamp = merchant_roger.items.create!(name: "Lamp", description: "You bet, it's a lamp", unit_price: 500 )
 
-          visit "merchants/#{merchant_stephen.id}/items"
-          click_button(item_toothpaste.name)
+          # visit "merchants/#{merchant_stephen.id}/items"
+          visit merchant_items_path(merchant_stephen)
+          click_link(item_toothpaste.name)
 
-          expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}")
+          # expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}")
+          expect(current_path).to eq(merchant_item_path(merchant_stephen, item_toothpaste))
           expect(page).to have_content("Name: #{item_toothpaste.name}")
           expect(page).to have_content("Description: #{item_toothpaste.description}")
           expect(page).to have_content("Current Selling Price: $#{'%.2f' % (item_toothpaste.unit_price/100.to_f)}")
@@ -51,7 +53,7 @@ RSpec.describe 'Merchant Items Show Page Feature' do
                   item_lamp = merchant_roger.items.create!(name: "Lamp", description: "You bet, it's a lamp", unit_price: 500 )
 
                   visit "merchants/#{merchant_stephen.id}/items"
-                  click_button(item_toothpaste.name)
+                  click_link(item_toothpaste.name)
                   expect(current_path).to eq("/merchants/#{merchant_stephen.id}/items/#{item_toothpaste.id}")
                   expect(page).to have_link("Update Item")
                   click_link("Update Item")
