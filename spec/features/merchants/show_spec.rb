@@ -87,7 +87,7 @@ RSpec.describe("the merchant dashboard") do
       
       expect(page).to have_content('Favorite Customers')
 
-      expect(page).to have_content()
+      expect(page).to have_content([Customer.all[2], Customer.all[1], Customer.all[0], Customer.all[4], Customer.all[3]])
     end
   end
 
