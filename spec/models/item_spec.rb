@@ -53,6 +53,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe "instance methods" do
+
     describe "#current_price" do
       it 'should divide the unit_price by 100' do
         merch1 = Merchant.create!(name: Faker::Movies::VForVendetta.character)
@@ -60,6 +61,55 @@ RSpec.describe Item, type: :model do
         item1 = Item.create!(name: Faker::Games::Minecraft.item, description: Faker::Games::Minecraft.block, unit_price: 1550, merchant_id: merch1.id)
 
         expect(item1.current_price).to eq 15.50
+      end
+    end
+
+    describe "#best_day" do
+
+      before :each do
+        @merchant = create(:merchant)
+        @customers = create_list(:customer, 3)
+  
+        @cus1_invoice = @customers[0].invoices.create(attributes_for(:invoice))
+        @cus2_invoice = @customers[1].invoices.create(attributes_for(:invoice))
+        @cus3_invoice = @customers[2].invoices.create(attributes_for(:invoice, created_at: Date.current.yesterday))
+       
+        @inv1_trans = @cus1_invoice.transactions.create(attributes_for(:transaction, result: 0))
+        @inv2_trans = @cus2_invoice.transactions.create(attributes_for(:transaction, result: 0))
+        @inv3_trans = @cus3_invoice.transactions.create(attributes_for(:transaction, result: 0))
+  
+        @item1 = @merchant.items.create(attributes_for(:item))
+        @item2 = @merchant.items.create(attributes_for(:item))
+        @item3 = @merchant.items.create(attributes_for(:item))
+        @item4 = @merchant.items.create(attributes_for(:item))
+        @item5 = @merchant.items.create(attributes_for(:item))
+        @item6 = @merchant.items.create(attributes_for(:item))
+        @item7 = @merchant.items.create(attributes_for(:item))
+        @item8 = @merchant.items.create(attributes_for(:item))
+        @item9 = @merchant.items.create(attributes_for(:item))
+        @item10 = @merchant.items.create(attributes_for(:item))
+  
+        @inv_item1 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+        @inv_item2 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+        @inv_item3 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item3.unit_price)
+        @inv_item4 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item4.unit_price)
+        @inv_item5 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price)
+  
+        @inv_item6 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item5.id, quantity: 1, unit_price: @item6.unit_price)
+        @inv_item7 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item5.id, quantity: 1, unit_price: @item7.unit_price)
+        @inv_item8 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item3.id, quantity: 1, unit_price: @item1.unit_price)
+        @inv_item9 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item3.id, quantity: 1, unit_price: @item1.unit_price)
+        @inv_item10 = create(:invoice_item, invoice_id:@cus2_invoice.id, item_id: @item10.id, quantity: 1, unit_price: @item10.unit_price)
+  
+        @inv_item11 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+        @inv_item12 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+        @inv_item13 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+        @inv_item14 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+        @inv_item15 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+      end
+
+      it 'lists an items most recent successful transaction invoice date' do
+        expect(@item1.best_day).to eq @cus1_invoice.created_at
       end
     end
   end

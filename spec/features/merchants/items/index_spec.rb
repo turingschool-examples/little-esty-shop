@@ -134,4 +134,62 @@ RSpec.describe 'Merchants Items Index' do
       end
     end
   end
+
+  describe 'top items best day' do
+
+    before :each do
+      @merchant = create(:merchant)
+      @customers = create_list(:customer, 3)
+
+      @cus1_invoice = @customers[0].invoices.create(attributes_for(:invoice))
+      @cus2_invoice = @customers[1].invoices.create(attributes_for(:invoice))
+      @cus3_invoice = @customers[2].invoices.create(attributes_for(:invoice))
+     
+      @inv1_trans = @cus1_invoice.transactions.create(attributes_for(:transaction, result: 0))
+      @inv2_trans = @cus2_invoice.transactions.create(attributes_for(:transaction, result: 0))
+      @inv3_trans = @cus3_invoice.transactions.create(attributes_for(:transaction, result: 0))
+
+      @item1 = @merchant.items.create(attributes_for(:item))
+      @item2 = @merchant.items.create(attributes_for(:item))
+      @item3 = @merchant.items.create(attributes_for(:item))
+      @item4 = @merchant.items.create(attributes_for(:item))
+      @item5 = @merchant.items.create(attributes_for(:item))
+      @item6 = @merchant.items.create(attributes_for(:item))
+      @item7 = @merchant.items.create(attributes_for(:item))
+      # @item8 = @merchant.items.create(attributes_for(:item))
+      # @item9 = @merchant.items.create(attributes_for(:item))
+      @item10 = @merchant.items.create(attributes_for(:item))
+
+      @inv_item1 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+      @inv_item2 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+      @inv_item3 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item3.id, quantity: 1, unit_price: @item3.unit_price)
+      @inv_item4 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item4.id, quantity: 1, unit_price: @item4.unit_price)
+      @inv_item5 = create(:invoice_item, invoice_id: @cus1_invoice.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price)
+
+      @inv_item6 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item6.id, quantity: 1, unit_price: @item6.unit_price)
+      @inv_item7 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item7.id, quantity: 1, unit_price: @item7.unit_price)
+      @inv_item8 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+      @inv_item9 = create(:invoice_item, invoice_id: @cus2_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+      @inv_item10 = create(:invoice_item, invoice_id:@cus2_invoice.id, item_id: @item10.id, quantity: 1, unit_price: @item10.unit_price)
+
+      @inv_item11 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+      @inv_item12 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item1.id, quantity: 1, unit_price: @item1.unit_price)
+      @inv_item13 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+      @inv_item14 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+      @inv_item15 = create(:invoice_item, invoice_id: @cus3_invoice.id, item_id: @item2.id, quantity: 1, unit_price: @item2.unit_price)
+    end
+
+    it 'shows the best/most recent day item sold' do
+      visit merchant_items_path(@merchant)
+
+      date = @cus3_invoice.created_at.strftime("%-m/%-d/%Y")
+
+      within ".top_5_items" do
+        within "#top_5_item-#{@item1.id}" do
+          expect(page).to have_content("Top Selling Date #{@item1.name} was #{date}")
+        end
+      end
+    end
+
+  end
 end
