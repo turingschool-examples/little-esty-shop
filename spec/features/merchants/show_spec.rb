@@ -207,8 +207,10 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest" do
         visit "/merchants/#{jewlery_city.id}/dashboard"
         within('#ready_to_ship') do
-save_and_open_page
-          expect(page).to have_content("Monday, July 18, 2019")
+          expect(page).to have_content(alaina_invoice1.created_at.strftime("%A, %B %d, %Y"))
+          expect(page).to have_content(alaina_invoice2.created_at.strftime("%A, %B %d, %Y"))
+          expect(page).to have_content(alaina_invoice3.created_at.strftime("%A, %B %d, %Y"))
+          expect(page).to have_content(alaina_invoice4.created_at.strftime("%A, %B %d, %Y"))
         end
       end
 

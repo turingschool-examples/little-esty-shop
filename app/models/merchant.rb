@@ -4,7 +4,11 @@ class Merchant < ApplicationRecord
 
   #looking at this now, would this also work as a class method in the customer model?
   def transactions_top_5
-      Customer.joins(invoices: :transactions).where( transactions: {result: 1}).group(:id).order("transactions.count desc").limit(5)
+      Customer.joins(invoices: :transactions)
+      .where( transactions: {result: 1})
+      .group(:id)
+      .order("transactions.count desc")
+      .limit(5)
   end
 
   def ready_to_ship_items
