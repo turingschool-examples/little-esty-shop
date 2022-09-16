@@ -27,16 +27,40 @@ RSpec.describe 'admin dashboard page' do
   describe 'dashboard statistics' do
     before :each do
 
-      create_list(:invoice, 6)
+      # create_list(:invoice, 6)
+      # @customer1 = create(:customer)
+      # create_list(:invoice, 2, customer_id: @customer1.id)
+
+      # FactoryBot.create_list(:invoice, 6)
+      # @customer1 = FactoryBot.create(:customer, )
+      # FactoryBot.create_list(:invoice, 2, customer_id: @customer1.id)
+
       @customer1 = create(:customer)
-      create_list(:invoice, 2, customer_id: @customer1.id)
+      @customer2 = create(:customer)
+      @customer3 = create(:customer)
+      @customer4 = FactoryBot.create(:customer)
+      @customer5 = FactoryBot.create(:customer)
+      @customer6 = FactoryBot.create(:customer)
+      @invoice1 = create_list(:invoice, 1, customer_id: @customer1.id)
+      @invoice2 = create_list(:invoice, 2, customer_id: @customer2.id)
+      @invoice3 = create_list(:invoice, 3, customer_id: @customer3.id)
+      @invoice4 = FactoryBot.create_list(:invoice, 4, customer_id: @customer4.id)
+      @invoice5 = FactoryBot.create_list(:invoice, 5, customer_id: @customer5.id)
+      @invoice6 = FactoryBot.create_list(:invoice, 6, customer_id: @customer6.id)
+      @invoices = [@invoice1, @invoice2, @invoice3, @invoice4, @invoice5, @invoice6].flatten
 
+        @invoices.each do |invoice|
+          require "pry"; binding.pry
+          create(:transaction, invoice_id: invoice.id)
+        end
 
-      require "pry"; binding.pry
     end
 
-    it '' do
+    it 'can return list of top 5 customers in desending order of completed invoices' do
       visit admin_path
+require "pry"; binding.pry
+      expect(page).to_not have_content("#{customer1.name}")
+
     end
 
 
