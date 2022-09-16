@@ -45,15 +45,18 @@ RSpec.describe 'Admin Merchants Index' do
     visit '/admin/merchants'
 
     within "#merchant-#{merchant1.id}" do
-      expect(page).to have_content("Enabled")
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enabled")
     end
 
     within "#merchant-#{merchant2.id}" do
-      expect(page).to have_content("Enabled")
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enabled")
     end
 
     within "#merchant-#{merchant3.id}" do
-      expect(page).to have_content("Enabled")
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("Enabled")
     end
   end
 
