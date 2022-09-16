@@ -35,7 +35,8 @@ RSpec.describe Customer, type: :model do
       create(:transaction, invoice_id: invoice.id, result: :failed)
     end
 
-    expect(Customer.top_five_cust).to eq({ @customer6 => 6, @customer5 => 5, @customer4 => 4, @customer3 => 3, @customer2 => 2 }) 
+    expect(Customer.top_five_cust).to eq([ @customer6, @customer5, @customer4, @customer3, @customer2])
+    expect(Customer.top_five_cust.first.transaction_count).to eq(6)
     end
   end
 end

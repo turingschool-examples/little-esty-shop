@@ -6,12 +6,11 @@ class Customer < ApplicationRecord
   end
 
   def self.top_five_cust
-    top_5 = Customer.joins(invoices: [:transactions])
-                    .where('transactions.result = 0')
-                    .limit(5)
-                    .group(:customer_id)
-                    .order('count_transactions_id desc')
-                    .count('transactions.id')
-    top_5.transform_keys { |id| Customer.find(id) }
+    Customer.joins(invoices: [:transactions])
+            .select('customers.*, count(transactions.id) as transaction_count')
+            .where('transactions.result = 0')
+            .group(:id)
+            .order('transaction_count desc')
+            .limit(5)
   end
 end
