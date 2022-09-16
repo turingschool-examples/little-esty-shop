@@ -13,10 +13,5 @@ class InvoiceItem < ApplicationRecord
   validates_presence_of :unit_price
   validates_numericality_of :unit_price
   validates_presence_of :status
-
-
-  def self.incomplete_invoices
-    select(:invoice_id).distinct.where.not(status: :shipped).pluck(:invoice_id)
-  end
 end
 
