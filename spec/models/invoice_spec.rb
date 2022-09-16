@@ -23,14 +23,14 @@ RSpec.describe Invoice, type: :model do
     @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann")
     @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone") 
 
-    @invoice_1 = @customer_1.invoices.create!(status: :completed) 
-    @invoice_2 = @customer_2.invoices.create!(status: :completed) 
-    @invoice_3 = @customer_3.invoices.create!(status: :completed) 
-    @invoice_4 = @customer_4.invoices.create!(status: :completed) 
-    @invoice_5 = @customer_5.invoices.create!(status: :completed) 
-    @invoice_6 = @customer_6.invoices.create!(status: :completed) 
-    @invoice_7 = @customer_7.invoices.create!(status: :completed) 
-    @invoice_8 = @customer_8.invoices.create!(status: :completed) 
+    @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
+    @invoice_2 = @customer_2.invoices.create!(status: :completed, created_at: "09-10-2022")
+    @invoice_3 = @customer_3.invoices.create!(status: :completed, created_at: "10-08-2022")
+    @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-06-2022")
+    @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-10-2022")
+    @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
+    @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "10-09-2022")
+    @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "10-11-2022")
 
     @item_1 = @merchant_1.items.create!(name: "Mega Tool Box", description: "Huge Toolbox with lots of options") 
     @item_2 = @merchant_2.items.create!(name: "Blue Hammock", description: "Large blue hammock for all your outdoor adventures")
@@ -63,13 +63,18 @@ RSpec.describe Invoice, type: :model do
     @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success) 
   end
 
-  describe '#class methods' do
+  describe "class methods" do
+
     it '#unshipped_invoices' do
       expect(Invoice.unshipped_invoices).to eq([@invoice_1, @invoice_2, @invoice_4, @invoice_5])
     end
 
     it '#successful_transactions' do
       expect(Invoice.successful_transactions).to eq(12)
+    end
+
+    it "#sort_by_date" do
+      expect(Invoice.sort_by_date).to eq([@invoice_4, @invoice_6, @invoice_3, @invoice_7, @invoice_1, @invoice_2, @invoice_5, @invoice_8])
     end
   end
 end

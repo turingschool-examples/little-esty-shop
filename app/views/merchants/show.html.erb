@@ -16,6 +16,6 @@
 
 <div id="items-not-shipped">
   <% @merchant.items_not_shipped.each do |item| %>
-    <p id="<%= item.id %>"> <%= item.name %> - Invoice ID: <%= link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %> </p>
+    <p id="<%= item.id %>"> <%= item.name %> <%= item.invoices.first.created_at.strftime("%A, %B %d, %Y") %> - Invoice ID: <%= link_to "#{item.invoices.first.id}", "/merchants/#{@merchant.id}/invoices/#{item.invoices.first.id}" %> </p>
   <% end %>
 </div>
