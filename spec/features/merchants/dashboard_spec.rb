@@ -118,21 +118,21 @@ RSpec.describe 'Merchant Dashboard' do
       it 'Then I see link to my merchant items index (/merchants/merchant_id/items)' do
         visit "/merchants/#{@merchant_1.id}/dashboard"
 
-        expect(find_link('Items Index')[:href].should == "/merchants/#{@merchant_1.id}/items")
+        find_link({text: "Items Index", href: "/merchants/#{@merchant_1.id}/items"}).visible?
 
         visit "/merchants/#{@merchant_2.id}/dashboard"
 
-        expect(find_link('Items Index')[:href].should == "/merchants/#{@merchant_2.id}/items")
+        find_link({text: "Items Index", href: "/merchants/#{@merchant_2.id}/items"}).visible?
       end
 
       it 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
         visit "/merchants/#{@merchant_1.id}/dashboard"
 
-        expect(find_link('Invoices Index')[:href].should == "/merchants/#{@merchant_1.id}/invoices")
+        find_link({text: "Invoices Index", href: "/merchants/#{@merchant_1.id}/invoices"}).visible?
 
         visit "/merchants/#{@merchant_2.id}/dashboard"
 
-        expect(find_link('Invoices Index')[:href].should == "/merchants/#{@merchant_2.id}/invoices")
+        find_link({text: "Invoices Index", href: "/merchants/#{@merchant_2.id}/invoices"}).visible?
       end
     end
 
@@ -281,15 +281,49 @@ RSpec.describe 'Merchant Dashboard' do
         visit "/merchants/#{@pretty_plumbing.id}/dashboard" 
 
         within("##{@chair.id}") do
-          expect(find_link("#{@invoice_3.id}")[:href].should == "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_3.id}")
+          find_link({text: "#{@invoice_3.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_3.id}"}).visible?
         end
 
         within("##{@lamp.id}") do
-          expect(find_link("#{@invoice_4.id}")[:href].should == "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_4.id}")
+          find_link({text: "#{@invoice_4.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_4.id}"}).visible?
         end
 
         within("##{@toilet.id}") do
-          expect(find_link("#{@invoice_5.id}")[:href].should == "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_5.id}")
+          find_link({text: "#{@invoice_5.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_5.id}"}).visible?
+        end
+      end
+    end
+
+    # As a merchant
+    # When I visit my merchant dashboard
+    # In the section for "Items Ready to Ship",
+    # Next to each Item name I see the date that the invoice was created
+    # And I see the date formatted like "Monday, July 18, 2019"
+    # And I see that the list is ordered from oldest to newest
+
+    describe 'User Story 5' do
+
+      it 'Next to each Item name I see the date that the invoice was created' do
+
+        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
+        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
+        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
+        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
+
+        within("##{@chair.id}") do
+          expect(page).to have_content(@invoice_3.created_at.strftime("%A, %B %d, %Y"))
+          expect(page).to_not have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))
+        end
+
+        within("##{@lamp.id}") do
+          expect(page).to have_content(@invoice_4..created_at.strftime("%A, %B %d, %Y"))
+          expect(page).to_not have_content(@invoice_3.created_at.strftime("%A, %B %d, %Y"))
+        end
+
+        within("##{@toilet.id}") do
+          expect(page).to have_content(@invoice_5..created_at.strftime("%A, %B %d, %Y"))
+          expect(page).to_not have_content(@invoice_2.created_at.strftime("%A, %B %d, %Y"))
         end
       end
     end

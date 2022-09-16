@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+
+  describe 'relationships' do
+    it { should belong_to(:customer) }
+    it { should have_many(:transactions) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:items).through(:invoice_items) }
+  end
+
   before :each do
     @merchant_1 = Merchant.create!(name: "Johns Tools")
     @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
@@ -55,18 +63,13 @@ RSpec.describe Invoice, type: :model do
     @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success) 
   end
 
-  describe 'relationships' do
-    it { should belong_to(:customer) }
-    it { should have_many(:transactions) }
-    it { should have_many(:invoice_items) }
-    it { should have_many(:items).through(:invoice_items) }
-  end
+  describe '#class methods' do
+    it '#unshipped_invoices' do
+      expect(Invoice.unshipped_invoices).to eq([@invoice_1, @invoice_2, @invoice_4, @invoice_5])
+    end
 
-  it '#unshipped_invoices' do
-    expect(Invoice.unshipped_invoices).to eq([@invoice_1, @invoice_2, @invoice_4, @invoice_5])
-  end
-
-  it '#successful_transactions' do
+    it '#successful_transactions' do
       expect(Invoice.successful_transactions).to eq(12)
     end
+  end
 end
