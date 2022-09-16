@@ -4,7 +4,7 @@
 <h2> Top 5 Customers Overall </h2>
 
 <% @top_5_customers.each do |cust| %>
-  <%= cust.first_name cust.last_name %>
+  <li> <%= cust.first_name %> <%= cust.last_name %>, Successful Transactions: <%= cust.transac_count %> </li>
 <% end %>
 
 </section>
