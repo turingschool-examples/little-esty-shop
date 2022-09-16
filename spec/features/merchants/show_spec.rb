@@ -199,11 +199,11 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
           expect(page).to_not have_link("#{ryan_invoice1.id}")
           
           click_on("#{alaina_invoice1.id}")
-          # expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
+          expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
           end
       end
 
-      xit "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest" do
+      it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest" do
         visit "/merchants/#{jewlery_city.id}/dashboard"
         within('#ready_to_ship') do
           expect(page).to have_content(alaina_invoice1.created_at.strftime("%A, %B %d, %Y"))
@@ -213,7 +213,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         end
       end
 
-      xit "invoices are ordered from oldest to newest"  do
+      it "invoices are ordered from oldest to newest"  do
         visit "/merchants/#{jewlery_city.id}/dashboard"
         within('#ready_to_ship') do
           expect(eddie_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(polina_invoice1.created_at.strftime("%A, %B %d, %Y"))
