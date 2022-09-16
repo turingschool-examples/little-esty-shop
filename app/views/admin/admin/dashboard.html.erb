@@ -2,3 +2,10 @@
 
 <p><%= link_to "Merchants", admin_merchants_path %>
 <%= link_to "Invoices", admin_invoices_path %></p>
+
+<h2> Top Customers </h2>
+<ol>
+<% @top_five_cust.each do |customer, trans_count| %>
+  <li class="customer"><%= customer.name %>- <%= trans_count %> purchases</li>
+<% end %>
+</ol>

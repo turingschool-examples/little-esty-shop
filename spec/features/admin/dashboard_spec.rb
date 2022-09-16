@@ -53,11 +53,11 @@ RSpec.describe 'admin dashboard page' do
 
       visit admin_path
       expect(page).to_not have_content(@customer1.name)
-      expect(all('.customer')[0].text).to eq(@customer6.name)
-      expect(all('.customer')[1].text).to eq(@customer5.name)
-      expect(all('.customer')[2].text).to eq(@customer4.name)
-      expect(all('.customer')[3].text).to eq(@customer3.name)
-      expect(all('.customer')[4].text).to eq(@customer2.name)
+      expect(all('.customer')[0].text).to eq("#{@customer6.name}- 6 purchases")
+      expect(all('.customer')[1].text).to eq("#{@customer5.name}- 5 purchases")
+      expect(all('.customer')[2].text).to eq("#{@customer4.name}- 4 purchases")
+      expect(all('.customer')[3].text).to eq("#{@customer3.name}- 3 purchases")
+      expect(all('.customer')[4].text).to eq("#{@customer2.name}- 2 purchases")
     end
   end
 end
