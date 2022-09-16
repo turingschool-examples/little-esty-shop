@@ -22,3 +22,5 @@ p.groove {border-style: groove;}
   <br>
   Current Price: $<%= @item.current_price %>
 </div>
+<br>
+<%= link_to 'Update', edit_merchant_item_path(@merchant, @item) %>

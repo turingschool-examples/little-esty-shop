@@ -9,6 +9,11 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
 
 
+  def self.successful_transactions
+    joins(invoices: :transactions).
+    where(transactions: { result: 0 })
+  end
+
   def self.find_items_to_ship(merchant_id)
     Item.select(:id, :name, "invoices.created_at as invoice_create_date", "invoice_items.invoice_id as invoice_id")
       .joins(:invoices, :invoice_items)

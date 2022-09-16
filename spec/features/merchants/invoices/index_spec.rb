@@ -36,5 +36,4 @@ RSpec.describe 'the Merchant Invoices Index' do
 
 
 
-
 end
