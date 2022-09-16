@@ -138,7 +138,7 @@ RSpec.describe Merchant, type: :model do
         expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.id") ).to eq([eddie_invoice1.id, whitney_invoice1.id, alaina_invoice1.id])
         
 
-      #   expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at").first.class).to eq(ActiveSupport::TimeWithZone) #give specific created at
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at")).to eq(["2000-01-30 14:54:09.000000000 +0000", "2012-01-30 14:54:09.000000000 +0000","2020-01-30 14:54:09.000000000 +0000"])
       end
     end
 
