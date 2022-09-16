@@ -3,6 +3,9 @@
 <section id = "favorite_customers" >
 <h2> Top 5 Customers Overall </h2>
 
+<% @top_5_customers.each do |cust| %>
+  <%= cust.first_name cust.last_name %>
+<% end %>
 
 </section>
 
@@ -17,4 +20,4 @@
 
 
 <%= link_to "Merchant Index", admin_merchants_path %>
-<%# <%= link_to "Invoice Index", admin_invoices_path %> %>
+<%# <%= link_to "Invoice Index", admin_invoices_path %> 
