@@ -29,36 +29,4 @@ RSpec.describe(InvoiceItem, type: :model) do
     expect(invoice_item.status).to(be_a(String))
     expect(invoice_item.status).to_not(eq(nil))
   end
-
-  describe 'class methods' do
-    describe 'incomplete_invoices' do
-      it 'returns invoice id for all invoices that have items that have not been shipped' do
-        5.times do
-          create(:random_customer)
-        end
-
-        invoice_1 = create(:random_invoice, customer: Customer.all[0])
-        invoice_2 = create(:random_invoice, customer: Customer.all[1])
-        invoice_3 = create(:random_invoice, customer: Customer.all[2])
-        invoice_4 = create(:random_invoice, customer: Customer.all[3])
-        invoice_5 = create(:random_invoice, customer: Customer.all[4])
-
-        merchant_1 = create(:random_merchant)
-        merchant_2 = create(:random_merchant)
-
-        item_1 = create(:random_item, merchant_id: merchant_1.id)
-        item_2 = create(:random_item, merchant_id: merchant_1.id)
-        item_3 = create(:random_item, merchant_id: merchant_1.id)
-        item_4 = create(:random_item, merchant_id: merchant_2.id)
-        item_5 = create(:random_item, merchant_id: merchant_2.id)
-
-        invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 3, unit_price: 3635, status: 'shipped')
-        invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, quantity: 31, unit_price: 13635, status: 'packaged')
-        invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, quantity: 13, unit_price: 1335, status: 'shipped')
-        invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, quantity: 30, unit_price: 1335, status: 'pending')
-        invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 12, unit_price: 1365, status: 'packaged')
-        expect(InvoiceItem.incomplete_invoices.sort).to eq([invoice_2.id,  invoice_4.id, invoice_5.id])
-      end
-    end
-  end
 end
