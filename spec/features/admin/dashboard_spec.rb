@@ -97,7 +97,7 @@ RSpec.describe "Admin Dashboard" do
 
         it "I see a header indicating that I am on the admin dashboard" do
           visit admin_path
-
+          
           expect(page).to have_content("Admin Dashboard")
         end
 
@@ -207,12 +207,12 @@ RSpec.describe "Admin Dashboard" do
           expect(page).to_not have_link("#{@invoice_5.id}")
         end
 
-        As an admin,
-        When I visit the admin dashboard
-        In the section for "Incomplete Invoices",
-        Next to each invoice id I see the date that the invoice was created
-        And I see the date formatted like "Monday, July 18, 2019"
-        And I see that the list is ordered from oldest to newest
+        # As an admin,
+        # When I visit the admin dashboard
+        # In the section for "Incomplete Invoices",
+        # Next to each invoice id I see the date that the invoice was created
+        # And I see the date formatted like "Monday, July 18, 2019"
+        # And I see that the list is ordered from oldest to newest
       end
     end
   end
