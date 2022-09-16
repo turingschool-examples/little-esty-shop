@@ -6,6 +6,7 @@ RSpec.describe 'admin dashboard' do
       
     @inv_0 = create(:invoice, customer: @customers[0], status: 1)
     @transacts_0 = create_list(:transaction, 15, invoice: @inv_0, result: 0)
+    @unsuc_transacts_0 = create_list(:transaction, 2, invoice: @inv_0, result: 1)
 
     @inv_1 = create(:invoice, customer: @customers[1], status: 1)
     @transacts_1 = create_list(:transaction, 14, invoice: @inv_1, result: 0)
@@ -39,7 +40,6 @@ RSpec.describe 'admin dashboard' do
     end
 
   describe 'top 5 customers section' do
-    
     it 'exists' do
       within("#favorite_customers") do
         expect(page).to have_content("Top 5 Customers Overall")
@@ -48,7 +48,6 @@ RSpec.describe 'admin dashboard' do
 
     it 'has the names of the top 5 customers by successful transaction count' do
       within("#favorite_customers") do
-        
         expect(page).to have_content(@customers[0].first_name)
         expect(page).to have_content(@customers[0].last_name)
         
@@ -56,17 +55,29 @@ RSpec.describe 'admin dashboard' do
         expect(page).to_not have_content(@customers[5].last_name)
       end
     end
-    
-    
-    
+
+    it 'has the transaction count for the top 5 customers' do
+      within("#cust_#{@customers[0].id}") do
+        expect(page).to have_content(@customers[0].invoices[0].transactions.where(result: 0).count)
+        
+        expect(page).to_not have_content(@customers[1].invoices[0].transactions.where(result: 0).count)
+      end
+      within("#cust_#{@customers[3].id}") do
+        expect(page).to have_content(@customers[3].invoices[0].transactions.where(result: 0).count)
+
+        expect(page).to_not have_content(@customers[0].invoices[0].transactions.where(result: 0).count)
+      end
     end
+  end
 
   describe 'incomplete invoices section'
     it 'exists' do
-      within("#incInvoices") do
+      within("#incomplete_invoices") do
         expect(page).to have_content("Incomplete Invoices")
       end
     end
+
+    
 
   describe 'links'
     it 'has a link to the Admin Merchant Index' do
@@ -74,8 +85,8 @@ RSpec.describe 'admin dashboard' do
       expect(current_path).to eq(admin_merchants_path)
     end
 
-    xit 'has a link to the Admin Invoice Index' do
-      click_link("Invoice Index")
+    it 'has a link to the Admin Invoice Index' do
+      expect(page).to have_content("Invoice Index")
     end
 
   end

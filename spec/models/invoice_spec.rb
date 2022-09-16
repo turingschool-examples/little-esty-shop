@@ -36,8 +36,18 @@ RSpec.describe Invoice, type: :model do
     customers = create_list(:customer, 10)
   end
 
+  it 'can return only invoices with a status of in progress' do
+    completed_invoices = create_list(:invoice, 10, status: 1)
+    cancelled_invoices = create_list(:invoice, 10, status: 2)
+    incomplete_invoices = create_list(:invoice, 10, status: 0)
 
-
-
-
+    expect(Invoice.incomplete_invoices).to eq(incomplete_invoices)
   end
+
+  
+
+
+
+
+
+end

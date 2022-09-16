@@ -4,13 +4,13 @@
 <h2> Top 5 Customers Overall </h2>
 
 <% @top_5_customers.each do |cust| %>
-  <li> <%= cust.first_name %> <%= cust.last_name %>, Successful Transactions: <%= cust.transac_count %> </li>
+  <li id ="cust_<%=cust.id%>" > <%= cust.first_name %> <%= cust.last_name %>, Successful Transactions: <%= cust.transac_count %> </li>
 <% end %>
 
 </section>
 
 
-<section id = "incInvoices" >
+<section id = "incomplete_invoices" >
 <h2> Incomplete Invoices </h2>
 
 
@@ -20,4 +20,4 @@
 
 
 <%= link_to "Merchant Index", admin_merchants_path %>
-<%# <%= link_to "Invoice Index", admin_invoices_path %> 
+<%= "Invoice Index"  %> 
