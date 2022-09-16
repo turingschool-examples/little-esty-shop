@@ -168,23 +168,22 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it "And next to each Item I see the id of the invoice that ordered my item" do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
-save_and_open_page
-      # within('#ready_to_ship') do
-      #   expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice1.id}")
-      #   expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice2.id}")
-      #   expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice3.id}")
-      #   expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice4.id}")
-      #   expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice1.id}")
-      #   expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice2.id}")
-      #   expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice3.id}")
-      #   expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice1.id}")
-      #   expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice2.id}")
-      #   expect(page).to_not have_content("Dainty Ankley - Invoice ##{alaina_invoice1.id}")
-      #   expect(page).to_not have_content("Dainty Ankley - Invoice ##{ryan_invoice1.id}")
-      #   end
+      within('#ready_to_ship') do
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice1.id}")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice2.id}")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice3.id}")
+        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice4.id}")
+        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice1.id}")
+        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice2.id}")
+        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice3.id}")
+        expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice1.id}")
+        expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice2.id}")
+        expect(page).to_not have_content("Dainty Ankley - Invoice ##{alaina_invoice1.id}")
+        expect(page).to_not have_content("Dainty Ankley - Invoice ##{ryan_invoice1.id}")
+      end
       end
 
-      xit "And each invoice id is a link to my merchant's invoice show page" do
+      it "And each invoice id is a link to my merchant's invoice show page" do
         visit "/merchants/#{jewlery_city.id}/dashboard"
 
         within('#ready_to_ship') do
@@ -200,7 +199,7 @@ save_and_open_page
           expect(page).to_not have_link("#{ryan_invoice1.id}")
           
           click_on("#{alaina_invoice1.id}")
-          expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
+          # expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
           end
       end
 
