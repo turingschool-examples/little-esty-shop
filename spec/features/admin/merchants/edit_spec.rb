@@ -7,7 +7,7 @@ RSpec.shared_context 'merchant edit' do
   end
 end
 
-RSpec.describe 'Admin Merchant Show', type: :feature do
+RSpec.describe 'Admin Merchant Edit', type: :feature do
 
   let!(:carly) { Merchant.create!(name: "Carly Simon's Candy Silo") }
 
@@ -39,7 +39,23 @@ RSpec.describe 'Admin Merchant Show', type: :feature do
     it 'And I see a flash message stating that the information has been successfully updated.' do
       name_update
 
-      expect(flash[:success]).to eq('Merchant has been successfully updated')
+      expect(page).to have_content('Merchant has been successfully updated.')
+    end
+
+    it 'and if I leave it blank it refreshes the page and flashes an error' do
+      fill_in 'Name', with: ""
+      click_on 'Submit'
+
+      expect(current_path).to eq(edit_admin_merchant_path(carly))
+      expect(page).to have_content('Empty name not permitted. Please try again.')
+    end
+
+    it 'and if I fill it with nothing but spaces but it refreshes the page and flashes an error' do
+      fill_in 'Name', with: "   "
+      click_on 'Submit'
+
+      expect(current_path).to eq(edit_admin_merchant_path(carly))
+      expect(page).to have_content('Empty name not permitted. Please try again.')
     end
   end
 end
