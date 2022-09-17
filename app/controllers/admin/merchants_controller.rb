@@ -13,14 +13,18 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
-    # require "pry"; binding.pry
     merchant.update(merchant_params)
-    redirect_to(admin_merchant_path(merchant))
+    if params[:merchant].include?(:name)
+      redirect_to(admin_merchant_path(merchant))
+    else
+      redirect_to(admin_merchants_path)      
+    end
+    
   end
 
   private 
 
   def merchant_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:name, :active_status)
   end
 end
