@@ -4,11 +4,11 @@ RSpec.describe "Admin Merchants" do
   describe "As an admin" do
     describe "I visit the admin merchants index (/admin/merchants)" do
       before :each do
-        @merchant_1 = Merchant.create!(name: "Johns Tools")
-        @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
-        @merchant_3 = Merchant.create!(name: "Pretty Plumbing", active_status: :disabled)
-        @merchant_4 = Merchant.create!(name: "Jenna's Jewlery")
-        @merchant_5 = Merchant.create!(name: "Sassy Soap", active_status: :disabled)
+        @merchant_1 = Merchant.create!(name: "Johns Tools", active_status: :enabled)
+        @merchant_2 = Merchant.create!(name: "Hannas Hammocks", active_status: :enabled)
+        @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
+        @merchant_4 = Merchant.create!(name: "Jenna's Jewlery", active_status: :enabled)
+        @merchant_5 = Merchant.create!(name: "Sassy Soap")
       end
   
       it 'can see the name of each merchant in the system' do
@@ -111,23 +111,6 @@ RSpec.describe "Admin Merchants" do
         end
       end
 
-#       Admin Merchant Create
-
-# As an admin,
-# When I visit the admin merchants index
-# I see a link to create a new merchant.
-# When I click on the link,
-# I am taken to a form that allows me to add merchant information.
-# When I fill out the form I click ‘Submit’
-# Then I am taken back to the admin merchants index page
-# And I see the merchant I just created displayed
-# And I see my merchant was created with a default status of disabled.
-
-      it 'US#29 - Admin Merchant Create' do
-        visit admin_merchants_path
-
-      end
-      
     end
   end
 end
