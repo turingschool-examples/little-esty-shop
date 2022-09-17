@@ -10,6 +10,9 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   def self.incomplete_invoices_sorted
-    where(status: 0).order(created_at: :asc)
+     joins(:invoice_items)
+    .distinct
+    .where.not("invoice_items.status = ?", 2)
+    .order(:created_at)
   end
 end

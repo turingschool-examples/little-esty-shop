@@ -32,7 +32,7 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe "class methods" do
-    describe "unshipped inv items" do
+    describe "#unshipped_invoice_items" do
       it 'returns all invoice items with a status of pending or packaged' do
         inv_items_pending = create_list(:invoice_item, 5, status: 0)
         inv_items_packaged = create_list(:invoice_item, 5, status: 1)
@@ -46,5 +46,4 @@ RSpec.describe InvoiceItem, type: :model do
       end
     end
   end
-
 end

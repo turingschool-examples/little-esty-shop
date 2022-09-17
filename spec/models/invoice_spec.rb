@@ -40,9 +40,12 @@ RSpec.describe Invoice, type: :model do
     describe '#incomplete_invoices_sorted' do
       it 'finds invoices that have invoice items that have not been shipped' do
         invoices = create_list(:invoice, 5)
-
-        inv_items_0s = create_list(:invoice_item, 5, invoice: invoices[0], status: 2)
-      
+        
+        inv_items_0_shipped = create_list(:invoice_item, 5, invoice: invoices[0], status: 2)
+        inv_items_1_shipped = create_list(:invoice_item, 5, invoice: invoices[1], status: 2)
+        inv_items_1_unshipped = create_list(:invoice_item, 2, invoice: invoices[1], status: 0)
+        
+        expect(Invoice.incomplete_invoices_sorted).to eq([invoices[1]])
       end
     end
   end

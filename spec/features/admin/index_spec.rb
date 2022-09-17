@@ -38,18 +38,18 @@ RSpec.describe 'admin dashboard' do
   end
   
   describe 'as an admin visiting'
-    it 'has as a header indicating I am on admin dashboard' do
+    xit 'has as a header indicating I am on admin dashboard' do
       expect(page).to have_content("Admin Dashboard")
     end
 
   describe 'top 5 customers section' do
-    it 'exists' do
+    xit 'exists' do
       within("#favorite_customers") do
         expect(page).to have_content("Top 5 Customers Overall")
       end
     end
 
-    it 'has the names of the top 5 customers by successful transaction count' do
+    xit 'has the names of the top 5 customers by successful transaction count' do
       within("#favorite_customers") do
         expect(page).to have_content(@customers[0].first_name)
         expect(page).to have_content(@customers[0].last_name)
@@ -59,7 +59,7 @@ RSpec.describe 'admin dashboard' do
       end
     end
 
-    it 'has the transaction count for the top 5 customers' do
+    xit 'has the transaction count for the top 5 customers' do
       within("#cust_#{@customers[0].id}") do
         expect(page).to have_content(@customers[0].invoices[0].transactions.where(result: 0).count)
         
@@ -74,13 +74,13 @@ RSpec.describe 'admin dashboard' do
   end
 
   describe 'incomplete invoices section'
-    it 'exists' do
+    xit 'exists' do
       within("#incomplete_invoices") do
         expect(page).to have_content("Incomplete Invoices")
       end
     end
 
-    it 'includes the ids all invoices that have a status of 0/in progress' do
+    xit 'includes the ids all invoices that have a status of 0/in progress' do
       
       within("#incomplete_invoices") do
         expect(page).to have_content(@in_progress_invoices[1].id)
@@ -96,12 +96,12 @@ RSpec.describe 'admin dashboard' do
 
 
   describe 'links'
-    it 'has a link to the Admin Merchant Index' do
+    xit 'has a link to the Admin Merchant Index' do
       click_link("Merchant Index")
       expect(current_path).to eq(admin_merchants_path)
     end
 
-    it 'has a link to the Admin Invoice Index' do
+    xit 'has a link to the Admin Invoice Index' do
       expect(page).to have_content("Invoice Index")
     end
 
