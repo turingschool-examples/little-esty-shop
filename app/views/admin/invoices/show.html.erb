@@ -4,8 +4,9 @@
 </div>
 <p>Status: <%= @invoice.status %></p>
 <p>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-<h3>Customer <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name %></h3>
-<h4>Items on this Invoice:</h4>
+<p>Customer <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name %></p>
+<p>Total Revenue: $<%= @invoice.total_revenue.to_f/100 %></p>
+<h3>Items on this Invoice:</h3>
 <style>
 
 table, th, td {

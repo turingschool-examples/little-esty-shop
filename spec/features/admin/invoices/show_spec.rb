@@ -46,7 +46,7 @@ describe 'the admin invoices show page' do
 
         #invoice_items_1 has 3 items, all for customer_1
         visit admin_invoice_path(invoice_1)
-
+        
         expect(page).to have_content(item_1.name)
         expect(page).to have_content(item_2.name)
         expect(page).to have_content(item_3.name)
@@ -75,12 +75,12 @@ describe 'the admin invoices show page' do
         item_3 = create(:random_item, merchant_id: merchant_1.id)
 
         invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 2, unit_price: 4999, status: 'shipped')
-        invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2000, status: 'shipped')
+        invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2001, status: 'shipped')
         invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, quantity: 4, unit_price: 4575, status: 'shipped')
 
         visit admin_invoice_path(invoice_1)
 
-        expect(page).to have_content('Total Revenue: $302.98')
+        expect(page).to have_content('Total Revenue: $302.99')
         #I want invoice items price, the price the item sold at
       end
     end
