@@ -1,0 +1,8 @@
+<h1>Merchant Invoices Index Page</h1>
+
+<p>Here we see all invoices that have at least one of the merchant's items</p>
+<div id="relevant_invoices">
+<% @merchant.find_relevant_invoices.each do |invoice| %>
+<%= link_to "#{invoice.id}", merchant_invoice_path(@merchant, invoice)%>
+<% end %>
+</div>

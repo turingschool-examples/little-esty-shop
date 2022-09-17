@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_merchant, only: [:index, :create]
 
   def index
-
+  
   end
 
   def show
