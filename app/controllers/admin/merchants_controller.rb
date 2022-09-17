@@ -15,6 +15,7 @@ class Admin::MerchantsController < ApplicationController
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
     if params[:merchant].include?(:name)
+      flash.notice = "Merchant was successfully updated!" 
       redirect_to(admin_merchant_path(merchant))
     else
       redirect_to(admin_merchants_path)      

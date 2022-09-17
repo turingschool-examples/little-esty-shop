@@ -47,6 +47,7 @@ RSpec.describe "Admin Merchant Edit Page" do
         expect(current_path).to eq(admin_merchant_path(@merchant_1))
         expect(page).to have_content("Billy John Tools")
         expect(page).to_not have_content("Johns Tools")
+        expect(page).to have_content ("Merchant was successfully updated!")
       end
     end
   end
