@@ -17,3 +17,7 @@
     </li>
   <% end %>
 </ul>
+
+<div id="total_invoice_revenue">
+<p>Total Revenue From This Invoice: $<%= @invoice.calculate_invoice_revenue.to_f.round(2) %></p>
+</div>
