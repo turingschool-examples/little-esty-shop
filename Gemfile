@@ -45,6 +45,8 @@ group :development, :test do
   gem 'orderly'
   gem 'launchy'
   gem 'simplecov'
+  gem 'factory_bot'
+  gem 'faker'
 end
 
 group :development do
