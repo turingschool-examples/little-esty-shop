@@ -18,4 +18,13 @@ RSpec.describe 'Merchant Items Show' do
         expect(page).to have_content(@item_1.unit_price)
         expect(page).to_not have_content(@item_2.name)
     end
+
+    it 'has link to update item' do
+        visit "/merchant/#{@merchant_2.id}/items/#{@item_1.id}"
+
+        expect(page).to have_link("Update #{@item_1.name}")
+        click_link "Update #{@item_1.name}"
+
+        expect(current_path).to eq("/merchant/#{@merchant_2.id}/items/#{@item_1.id}/edit")
+    end
 end
