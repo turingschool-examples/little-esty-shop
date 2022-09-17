@@ -5,6 +5,27 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:items) }
   end
 
+  describe 'Class Methods' do
+    before :each do
+      @merchant_1 = Merchant.create!(name: "Johns Tools", active_status: :enabled) 
+      @merchant_2 = Merchant.create!(name: "Hannas Hammocks", active_status: :disabled) 
+      @pretty_plumbing = Merchant.create!(name: "Pretty Plumbing", active_status: :enabled) 
+      @sink = @pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.", active_status: :disabled) 
+      @rug = @pretty_plumbing.items.create!(name: "Hall Rug", description: "It's a rug.", active_status: :enabled) 
+      @chair = @pretty_plumbing.items.create!(name: "Great Chair", description: "It's an okay chair.", active_status: :disabled) 
+      @lamp = @pretty_plumbing.items.create!(name: "Table Lamp", description: "Lamp for tables.", active_status: :enabled) 
+      @toilet = @pretty_plumbing.items.create!(name: "XL-Toilet", description: "Big Toilet.", active_status: :disabled) 
+    end
+
+    it "#active" do
+      expect(Merchant.active).to eq([@merchant_1, @pretty_plumbing, @rug, @lamp])      
+    end
+
+    it "#inactive" do
+      expect(Merchant.active).to eq([@merchant_2, @sink, @chair, @toilet])      
+    end
+  end
+
   describe 'Instance Methods' do
     before :each do
       @merchant_1 = Merchant.create!(name: "Johns Tools") 
