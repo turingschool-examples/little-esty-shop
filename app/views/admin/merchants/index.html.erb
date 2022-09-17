@@ -1,14 +1,27 @@
 <%= render partial: 'admin/header' %>
 
-<% @merchants.each do |merchant| %>
+<span id="enabled-merchants" style="float:left; padding:10px 60px 60px 60px;">
+<h3>Enabled Merchants</h3>
+
+<% @merchants.active.each do |merchant| %>
+  <div id="merchant-<%= merchant.id %>" >
+  <p>
+    <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+    <%= button_to "Disable", admin_merchant_path(merchant.id) , method: :patch, params: {merchant: {active_status: :disabled}}%>
+  </p>
+  </div>
+<% end %>
+</span>
+
+<span id="disabled-merchants" style="float:left; padding:10px 60px 60px 60px;">
+<h3>Disabled Merchants</h3>
+
+<% @merchants.inactive.each do |merchant| %>
 <div id="merchant-<%= merchant.id %>" >
   <p>
   <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-  <% if merchant.active_status == "enabled" %>
-    <%= button_to "Disable", admin_merchant_path(merchant.id) , method: :patch, params: {merchant: {active_status: :disabled}}%>
-  <% else %>
-    <%= button_to "Enable", admin_merchant_path(merchant.id) , method: :patch, params: {active_status: :enabled}%>
-  <% end %>
+  <%= button_to "Enable", admin_merchant_path(merchant.id) , method: :patch, params: {active_status: :enabled}%>
   </p>
 </div>
 <% end %>
+</span>
