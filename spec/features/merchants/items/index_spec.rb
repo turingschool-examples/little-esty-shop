@@ -60,7 +60,26 @@ RSpec.describe 'Mechants Item Index' do
         expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@items_2[6].id}")
       end
     end
-  end
 
-    it 'I see all of the items attributes' 
+    it 'I see all of the items attributes' do
+
+      @items_1.each do |item|
+        visit merchant_item_path(@merchant_1, item)
+        within("#item-attributes") do
+          expect(page).to have_content(item.name)
+          expect(page).to have_content(item.description)
+          expect(page).to have_content(item.unit_price)
+        end
+      end
+
+      @items_2.each do |item|
+        visit merchant_item_path(@merchant_2, item)
+        within("#item-attributes") do
+          expect(page).to have_content(item.name)
+          expect(page).to have_content(item.description)
+          expect(page).to have_content(item.unit_price)
+        end
+      end
+    end
+  end
 end
