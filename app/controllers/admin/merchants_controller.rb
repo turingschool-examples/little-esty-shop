@@ -26,7 +26,6 @@ class Admin::MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
 
-
     if params.has_key?(:status)
       merchant.update(merchant_params)
       redirect_to admin_merchants_path

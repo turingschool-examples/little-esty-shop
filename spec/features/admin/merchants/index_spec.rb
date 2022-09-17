@@ -34,7 +34,7 @@ RSpec.describe 'Admin Merchants Index' do
 
     click_link "Bobbis Bees"
 
-    expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+    expect(current_path).to eq(admin_merchants_path(merchant1.id))
   end
 
   it 'has a button to disable or enable next to each merchant, when I click it I am stay on the index page but the merchant status has changed' do

@@ -1,9 +1,10 @@
 class Merchant < ApplicationRecord
 
   has_many :items
+  has_many :invoices, through: :items
 
-  def invoices
-    Invoice.joins(:items).where("items.merchant_id = #{id}").distinct
+  def distinct_invoices
+    invoices.distinct
   end
 
 end

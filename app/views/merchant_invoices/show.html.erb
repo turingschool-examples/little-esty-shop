@@ -3,8 +3,28 @@
 <div id="inv_info_container">
   <div class="inv_info"><strong>Status:</strong> <%= @invoice.status.gsub("_", " ").titleize %></div>
   <div class="inv_info"><strong>Created On:</strong> <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></div>
-  <div class="inv_info" id="inv_cust_info">
-    <div><strong>Customer:</strong></div>
-    <div><%= "#{@customer.first_name} #{@customer.last_name}" %></div>
-  </div>
+  <div class="inv_info"><strong>Customer:</strong> <%= "#{@customer.first_name} #{@customer.last_name}" %></div>
+  <div class="inv_info"><strong>Total Revenue:</strong> <%= price_convert(@invoice_items.total_revenue) %></div>
+  <div class="inv_info"><strong>Items on this Invoice:</strong></div>
+  <table id="merchant_invoice_items">
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Status</th>
+    </tr>
+    <% @invoice_items.each do |invoice_item| %>
+      <tr id="invoice_item_<%= invoice_item.id %>">
+        <td><%= invoice_item.name %></td>
+        <td><%= invoice_item.quantity %></td>
+        <td><%= price_convert(invoice_item.unit_price) %></td>
+        <td>
+          <%= form_with model: invoice_item, local: true do |f| %>
+            <%= f.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]] %>
+            <%= f.submit "Update Status" %>
+          <% end %>   
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
