@@ -4,9 +4,8 @@
 <h2> Top 5 Customers Overall </h2>
 
 <% @top_5_customers.each do |cust| %>
-  <li id ="cust_<%=cust.id%>" > <%= cust.first_name %> <%= cust.last_name %>, Purchases: <%= cust.transac_count %> </li>
+  <li id ="cust_<%=cust.id%>" > <%= cust.first_name %> <%= cust.last_name %>, Purchase Count: <%= cust.transac_count %> </li>
 <% end %>
-
 </section>
 
 
@@ -17,11 +16,7 @@
  <li id ="inc_inv_<%=inv.id%>" > Invoice ID: <%= inv.id %> Invoice Date: <%= inv.created_at.strftime("%A, %B %d, %Y") %> </li>
 
 <% end %>
-
 </section>
 
-
-
-
 <%= link_to "Merchant Index", admin_merchants_path %>
-<%= "Invoice Index"  %> 
+<%= link_to "Invoice Index", admin_invoices_path  %> 
