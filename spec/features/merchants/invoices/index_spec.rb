@@ -34,8 +34,7 @@ RSpec.describe "merchant's invoices index", type: :feature do
       
 
 
-      it "Then I see all of the invoices that include at least one of my merchant's items And for each invoice I see its id
-      And each id links to the merchant invoice show page" do
+      it "Then I see all of the invoices that include at least one of my merchant's items And for each invoice I see its id And each id links to the merchant invoice show page" do
         visit merchant_invoices_path(jewlery_city)
         within('#relevant_invoices') do 
           expect(page).to_not have_link(alaina_invoice4.id.to_s)
