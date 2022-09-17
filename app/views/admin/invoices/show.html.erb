@@ -1,0 +1,10 @@
+<%= render partial: 'admin/header' %>
+
+
+<div id="invoice-details-<%= @invoice.id %>">
+  <p>Invoice #<%= @invoice.id %></p>
+  <p>Status: <%= @invoice.status %> </p>
+  <p>Created On: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+  <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p> 
+</div>
+

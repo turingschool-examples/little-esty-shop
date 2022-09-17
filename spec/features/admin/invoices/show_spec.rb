@@ -16,13 +16,12 @@ RSpec.describe "Admin Invoice Show Page" do
         within("#invoice-details-#{@invoice_1.id}") do
           expect(page).to have_content("Invoice ##{@invoice_1.id}")
           expect(page).to have_content("Status: #{@invoice_1.status}")
-          expect(page).to have_content("Created On: #{@invoice_1.created_at}")
+          expect(page).to have_content("Created On: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
           expect(page).to have_content("#{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
         end
         
-        expect(page).to_not have_content("Invoice ##{@invoice_2.id}")
-        expect(page).to_not have_content("Status: #{@invoice_2.status}")
-        expect(page).to_not have_content("#{@invoice_2.customer.first_name} #{@invoice_2.customer.last_name}")
+        expect(page).to_not have_content("Invoice ##{@invoice_3.id}")
+        expect(page).to_not have_content("#{@invoice_3.customer.first_name} #{@invoice_3.customer.last_name}")
       end
 
     end
