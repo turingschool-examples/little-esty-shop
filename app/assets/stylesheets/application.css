@@ -142,6 +142,29 @@ a:visited {
   padding: 10px;
 }
 
+#dashboard_body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dashboard_column {
+  align-self: flex-start;
+  width: calc(50% - 30px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.index_invoice {
+  padding: 5px;
+  font-size: 18px;
+}
+
+.top_five_customer {
+  font-size: 22px;
+  padding: 5px;
+}
+
 
 
 
