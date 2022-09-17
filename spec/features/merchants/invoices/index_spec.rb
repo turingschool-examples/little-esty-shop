@@ -38,13 +38,16 @@ RSpec.describe "merchant's invoices index", type: :feature do
       And each id links to the merchant invoice show page" do
         visit merchant_invoices_path(jewlery_city)
         within('#relevant_invoices') do 
-          expect(page).to_not have_content(alaina_invoice4.id)
-          expect(page).to have_content(alaina_invoice1.id)
-          expect(page).to have_content(alaina_invoice2.id)
-          expect(page).to have_content(alaina_invoice3.id)
-          expect(page).to have_content(whitney_invoice1.id)
-          expect(page).to have_content(whitney_invoice2.id)
-          expect(page).to have_content(whitney_invoice3.id)
+          expect(page).to_not have_link(alaina_invoice4.id.to_s)
+          expect(page).to have_link(alaina_invoice1.id.to_s)
+          expect(page).to have_link(alaina_invoice2.id.to_s)
+          expect(page).to have_link(alaina_invoice3.id.to_s)
+          expect(page).to have_link(whitney_invoice1.id.to_s)
+          expect(page).to have_link(whitney_invoice2.id.to_s)
+          expect(page).to have_link(whitney_invoice3.id.to_s)
+
+          click_link("#{alaina_invoice1.id}")
+          expect(current_path).to be(merchant_invoice_path(jewlery_city, alaina_invoice1))
         end
 
       end
