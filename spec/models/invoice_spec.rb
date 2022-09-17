@@ -57,4 +57,28 @@ RSpec.describe(Invoice, type: :model) do
       end
     end
   end
+
+  describe 'instance methods' do
+    describe 'total_revenue' do
+      it 'calculates the total revenue for each invoice' do
+        customer_1 = create(:random_customer)
+
+        invoice_1 = create(:random_invoice, customer: Customer.all[0])
+        invoice_2 = create(:random_invoice, customer: Customer.all[0])
+
+        merchant_1 = create(:random_merchant)
+
+        item_1 = create(:random_item, merchant_id: merchant_1.id)
+        item_2 = create(:random_item, merchant_id: merchant_1.id)
+        item_3 = create(:random_item, merchant_id: merchant_1.id)
+
+        invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 2, unit_price: 4999, status: 'shipped')
+        invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2000, status: 'shipped')
+        invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, quantity: 4, unit_price: 4575, status: 'shipped')
+
+        expect(invoice_1.total_revenue).to eq(30298)
+        expect(invoice_2.total_revenue).to eq(0)
+      end
+    end
+  end
 end

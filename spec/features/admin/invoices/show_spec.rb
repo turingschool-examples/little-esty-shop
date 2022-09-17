@@ -63,14 +63,31 @@ describe 'the admin invoices show page' do
         expect(page).to_not have_content(item_4.name)
       end
     end
+
+    describe 'I see the total revenue that will be generated from this invoice' do
+      it 'displays total revenue generated for each invoice' do
+        customer_1 = create(:random_customer)
+        invoice_1 = create(:random_invoice, customer: Customer.all[0])
+        merchant_1 = create(:random_merchant)
+
+        item_1 = create(:random_item, merchant_id: merchant_1.id)
+        item_2 = create(:random_item, merchant_id: merchant_1.id)
+        item_3 = create(:random_item, merchant_id: merchant_1.id)
+
+        invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 2, unit_price: 4999, status: 'shipped')
+        invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 1, unit_price: 2000, status: 'shipped')
+        invoice_item_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_1.id, quantity: 4, unit_price: 4575, status: 'shipped')
+
+        visit admin_invoice_path(invoice_1)
+
+        expect(page).to have_content('Total Revenue: $302.98')
+        #I want invoice items price, the price the item sold at
+      end
+    end
   end
 end
-# Admin Invoice Show Page: Invoice Item Information
+# Admin Invoice Show Page: Total Revenue
 
 # As an admin
 # When I visit an admin invoice show page
-# Then I see all of the items on the invoice including:
-# - Item name
-# - The quantity of the item ordered
-# - The price the Item sold for
-# - The Invoice Item status
+# Then I see the total revenue that will be generated from this invoice
