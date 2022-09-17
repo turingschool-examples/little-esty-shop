@@ -131,7 +131,23 @@ RSpec.describe 'Mechants Item Index' do
     end
 
 
-    it "I see the items status has changed"
+    it "I see the items status has changed" do
 
+      visit merchant_items_path(@merchant_1)
+
+      within("#merchant-items") do
+        expect(page).to have_button("Disable #{@items_1[0].name}")
+        click_button "Disable #{@items_1[0].name}"
+        expect(page).to have_button("Enable #{@items_1[0].name}")
+      end
+
+      visit merchant_items_path(@merchant_2)
+      
+      within("#merchant-items") do
+        expect(page).to have_button("Enable #{@items_4[1].name}")
+        click_button "Enable #{@items_4[1].name}"
+        expect(page).to have_button("Disable #{@items_4[1].name}")
+      end
+    end
   end
 end
