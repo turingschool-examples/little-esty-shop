@@ -95,7 +95,7 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
     # shared_examples 'name shows on page' do 
 
     it 'shows the name of each merchant in the system' do 
-      merchants = Merchant.all.map(&:name).uniq
+      merchants = Merchant.all
       merchants.each do |merchant|
         within "#merchant-#{merchant.id}" do
           expect(page).to have_content(merchant.name)
