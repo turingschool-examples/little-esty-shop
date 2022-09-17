@@ -18,4 +18,9 @@
       <% end %></section>
     <% end  %></div>
 
-
+<div class="top_merchants"><h2>Top Merchants</h2>
+  <ol><% @merchants.top_five_merchants.each do |merchant| %>
+  <section id="top_merchant-<%= merchant.id %>">
+    <li><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> : <%= number_to_currency(merchant.revenue) %></li>
+    </section>
+    <% end %></ol>
