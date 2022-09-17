@@ -6,6 +6,9 @@ RSpec.describe 'Mechants Item Index' do
     @merchant_2 = create(:merchant)
     @items_1 = create_list(:item, 10, merchant: @merchant_1)
     @items_2 = create_list(:item, 10, merchant: @merchant_2)
+    @items_3 = create_list(:item, 2, merchant: @merchant_1, active_status: :disabled)
+    @items_4 = create_list(:item, 2, merchant: @merchant_2, active_status: :disabled)
+
   end
 
   # When I visit my merchant items index page ("merchants/merchant_id/items")
@@ -78,6 +81,72 @@ RSpec.describe 'Mechants Item Index' do
           expect(page).to have_content(item.description)
           expect(page).to have_content(item.unit_price)
         end
+      end
+    end
+  end
+
+  # As a merchant
+  # When I visit my items index page
+  # Next to each item name I see a button to disable or enable that item.
+  # When I click this button
+  # Then I am redirected back to the items index
+  # And I see that the items status has changed
+  describe 'user story 9' do
+    it 'Next to each item name I see a button to disable or enable that item' do
+
+      visit merchant_items_path(@merchant_1)
+
+      within("#merchant-items") do
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-items") do
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-items") do
+        expect(page).to have_button("Enable")
+      end
+
+      within("#merchant-items") do
+        expect(page).to have_button("Enable")
+      end
+
+      visit merchant_items_path(@merchant_2)
+
+      within("#merchant-items") do
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-items") do
+        expect(page).to have_button("Enable")
+      end
+    end
+
+    it "When I click this button I am redirected back to the items index" do
+      visit merchant_items_path(@merchant_1)
+
+      click_button "Disable #{@items_1[0].name}"
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+    end
+
+
+    it "I see the items status has changed" do
+
+      visit merchant_items_path(@merchant_1)
+
+      within("#merchant-items") do
+        expect(page).to have_button("Disable #{@items_1[0].name}")
+        click_button "Disable #{@items_1[0].name}"
+        expect(page).to have_button("Enable #{@items_1[0].name}")
+      end
+
+      visit merchant_items_path(@merchant_2)
+      
+      within("#merchant-items") do
+        expect(page).to have_button("Enable #{@items_4[1].name}")
+        click_button "Enable #{@items_4[1].name}"
+        expect(page).to have_button("Disable #{@items_4[1].name}")
       end
     end
   end
