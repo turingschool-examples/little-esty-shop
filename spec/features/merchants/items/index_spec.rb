@@ -96,7 +96,6 @@ RSpec.describe 'Mechants Item Index' do
 
       visit merchant_items_path(@merchant_1)
 
-      save_and_open_page
       within("#merchant-items") do
         expect(page).to have_button("Disable")
       end
@@ -120,18 +119,19 @@ RSpec.describe 'Mechants Item Index' do
       end
 
       within("#merchant-items") do
-        expect(page).to have_button("Disable")
-      end
-
-      within("#merchant-items") do
         expect(page).to have_button("Enable")
       end
-
-      within("#merchant-items") do
-        expect(page).to have_button("Enable")
-      end
-
-
     end
+
+    it "When I click this button I am redirected back to the items index" do
+      visit merchant_items_path(@merchant_1)
+
+      click_button "Disable #{@items_1[0].name}"
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+    end
+
+
+    it "I see the items status has changed"
+
   end
 end
