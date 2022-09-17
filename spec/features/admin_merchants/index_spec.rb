@@ -182,12 +182,11 @@ RSpec.describe 'Admin Merchants Index' do
       @invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 999, status: 2, item_id: @item_3.id, invoice_id: @invoice_3.id)
       @invoice_item_4 = InvoiceItem.create!(quantity: 2, unit_price: 1200, status: 2, item_id: @item_4.id, invoice_id: @invoice_4.id)
       @invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 500, status: 2, item_id: @item_5.id, invoice_id: @invoice_5.id)
-      @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_6.id, invoice_id: @invoice_6.id)
+      @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
     end
 
     it 'will show the top 5 merchants by revenue' do
       visit "/admin/merchants"
-      require 'pry' ; binding.pry
       # When I visit the admin merchants index
       expect(page).to have_content("Top Merchants")
       # Then I see the names of the top 5 merchants by total revenue generated
