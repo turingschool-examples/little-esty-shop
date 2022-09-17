@@ -13,7 +13,7 @@ class Merchant < ApplicationRecord
       .joins(:transactions)
       .select('count(transactions.id), customers.*')
       .where('transactions.result = 1')
-      .order('count')
+      .order('count desc')
       .group('customers.id')
       .limit(5)
   end
