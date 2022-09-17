@@ -8,11 +8,9 @@
 </header>
 
 <h2>Merchants</h2>
-<div id='merchant-index'>
-  <table>
+  <table id='merchant-index'>
     <tr><th><h3>Name</h3></th></tr>
     <% @merchants.each do |merchant| %>
-    <tr><td id='merchant-<%= merchant.id %>'> <%= merchant.name %> </td></tr>
+    <tr><td id='merchant-<%= merchant.id %>'> <%= link_to merchant.name, admin_merchant_path(merchant) %> </td></tr>
     <%end%>
   </table>
-</div>
