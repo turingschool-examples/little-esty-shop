@@ -39,9 +39,13 @@ RSpec.describe 'admin invoice show' do
     describe 'invoice items' do
         it 'shows all invoice items' do
             visit admin_invoice_path(alaina_invoice1)
-            expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
-            expect(page).to have_content(alainainvoice1_itemsilver_necklace.item.name)
-            expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.item.name)
+            within "#invoice_info" do
+                expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
+                expect(page).to have_content(alainainvoice1_itemsilver_necklace.item.name)
+                expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.item.name)
+
+                # expect(page).to have_content("Total Revenue: #{alaina_invoice1.total_revnue}")
+            end
         end
 
         it 'shows all item info' do
