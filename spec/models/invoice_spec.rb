@@ -36,21 +36,18 @@ RSpec.describe Invoice, type: :model do
     customers = create_list(:customer, 10)
   end
 
-  it 'can return only invoices with a status of in progress' do
-    completed_invoices = create_list(:invoice, 10, status: 1)
-    cancelled_invoices = create_list(:invoice, 10, status: 2)
-    
-    inc_inv_oldest = create(:invoice, status: 0, created_at: Date.yesterday)
-    inc_inv_middle = create(:invoice, status: 0, created_at: Date.today)
-    inc_inv_newest = create(:invoice, status: 0, created_at: Date.tomorrow)
-    
-    expect(Invoice.incomplete_invoices_sorted).to eq([inc_inv_oldest, inc_inv_middle, inc_inv_newest])
+  describe 'class methods' do
+    describe '#incomplete_invoices_sorted' do
+      it 'can return only invoices with a status of in progress by oldest to newest' do
+        completed_invoices = create_list(:invoice, 10, status: 1)
+        cancelled_invoices = create_list(:invoice, 10, status: 2)
+        
+        inc_inv_oldest = create(:invoice, status: 0, created_at: Date.yesterday)
+        inc_inv_middle = create(:invoice, status: 0, created_at: Date.today)
+        inc_inv_newest = create(:invoice, status: 0, created_at: Date.tomorrow)
+        
+        expect(Invoice.incomplete_invoices_sorted).to eq([inc_inv_oldest, inc_inv_middle, inc_inv_newest])
+      end
+    end
   end
-
-  
-
-
-
-
-
 end
