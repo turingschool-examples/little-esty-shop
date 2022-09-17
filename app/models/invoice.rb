@@ -13,4 +13,10 @@ class Invoice < ApplicationRecord
   def merchant_items(merchant)
     self.items.where(items: { merchant_id: merchant.id } ).distinct
   end
+
+  def total_revenue
+    
+  end
+
+  
 end
