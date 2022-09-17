@@ -9,7 +9,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
-  def self.incomplete_invoices
-    where(status: 0)
+  def self.incomplete_invoices_sorted
+    where(status: 0).order(created_at: :asc)
   end
 end
