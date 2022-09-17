@@ -97,5 +97,13 @@ RSpec.describe 'Admin Merchant Show', type: :feature do
         expect(page).to have_content(carly.name)
       end
     end
+
+    describe 'it has a link to update merchants information' do 
+      it 'when I click the link then I am taken to a page to edit this merchant' do
+        expect(page).to have_link("Update Merchant")
+        click_on "Update Merchant"
+        expect(current_path).to eq("/admin/#{carly.id}/edit")
+      end
+    end
   end
 end
