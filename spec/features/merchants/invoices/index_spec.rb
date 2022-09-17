@@ -47,7 +47,7 @@ RSpec.describe "merchant's invoices index", type: :feature do
           expect(page).to have_link(whitney_invoice3.id.to_s)
 
           click_link("#{alaina_invoice1.id}")
-          expect(current_path).to be(merchant_invoice_path(jewlery_city, alaina_invoice1))
+          expect(current_path).to eq(merchant_invoice_path(jewlery_city, alaina_invoice1))
         end
 
       end
