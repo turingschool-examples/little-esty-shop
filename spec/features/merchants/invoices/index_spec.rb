@@ -35,7 +35,7 @@ RSpec.describe "the merchant items index"  do
         invoice_item6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice_6.id, unit_price: item6.unit_price, quantity: 3, status: 0)
 
         visit "/merchants/#{merchant1.id}/invoices"
-        save_and_open_page
+
         expect(page).to have_content("Invoice: #{invoice_1.id}")
         expect(page).to have_content("Invoice: #{invoice_2.id}")
         expect(page).to have_content("Invoice: #{invoice_3.id}")
