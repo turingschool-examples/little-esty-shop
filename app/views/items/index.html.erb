@@ -29,7 +29,11 @@
    <% @merchant.top_items.each do |merchant_item| %>
     <li>
         <div id="top_items_id_<%= merchant_item.id %>">
-            <%= link_to "#{merchant_item.name}", merchant_item_path(@merchant, merchant_item), method: :get %><h3> $<%= '%.2f' % (merchant_item.revenue/100.to_f) %> in sales </h3>
+            <%= link_to "#{merchant_item.name}", merchant_item_path(@merchant, merchant_item), method: :get %>
+            <p> $<%= '%.2f' % (merchant_item.revenue/100.to_f) %> in sales </p>
+            
+            <p> Top selling date for <%= merchant_item.name %> was <%= merchant_item.item_best_day %> </p>
+
         </div>
     </li>
     <% end %>
