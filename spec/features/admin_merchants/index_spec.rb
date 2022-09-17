@@ -191,21 +191,25 @@ RSpec.describe 'Admin Merchants Index' do
       expect(page).to have_content("Top Merchants")
       # Then I see the names of the top 5 merchants by total revenue generated
       within '.top_merchants' do
-        expect("Bread Pitt").to appear_before("Carrie Breadshaw")
-        expect("Carrie Breadshaw").to appear_before("Sheana Yeaston")
-        expect("Sheana Yeaston").to appear_before("Taylor Sift")
-        expect("Taylor Sift").to appear_before("Rye-n Rye-nolds")
-        expect(page).to_not have_content("Bread Paisley")
+        expect("Bread Paisley").to appear_before("Rye-n Rye-nolds")
+        expect("Rye-n Rye-nolds").to appear_before("Taylor Sift")
+        expect("Taylor Sift").to appear_before("Sheena Yeaston")
+        expect("Sheena Yeaston").to appear_before("Bread Pitt")
+        expect(page).to_not have_content("Carrie Breadshaw")
         # And I see that each merchant name links to the admin merchant show page for that merchant
         click_on("Rye-n Rye-nolds")
         expect(current_path).to eq("/admin/merchants/#{@merchant_5.id}")
-
-        within("#top_customer-#{@customer_1.id}") do
-          expect(page).to have_content(6566)
-          # And I see the total revenue generated next to each merchant name
-        end
       end
+    end
 
+    it 'will show the revenue generated next to each merchant' do
+      visit "/admin/merchants"
+
+      within("#top_merchant-#{@merchant_5.id}") do
+        expect(page).to have_content("$13,000.00")
+        expect(page).to_not have_content("$7,200.00")#Sheena Yeaston revenue
+        # And I see the total revenue generated next to each merchant name
+      end
     end
   end
 
