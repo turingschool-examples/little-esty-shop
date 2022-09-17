@@ -136,13 +136,5 @@ RSpec.describe 'admin dashboard' do
         end
       end
     end
-
-    describe 'US5' do
-      describe 'Incomplete Invoices section continued' do
-        it 'displays the date of creation next to each invoice and lists oldest to newest' do
-
-        end
-      end
-    end
   end
 end

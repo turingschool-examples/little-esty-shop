@@ -7,4 +7,9 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
+
+  def total_revenue
+    invoice_items.sum("unit_price * quantity")
+  end
+
 end
