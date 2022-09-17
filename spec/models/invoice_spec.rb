@@ -55,6 +55,7 @@ RSpec.describe Invoice, type: :model do
       let!(:whitneyinvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice1.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"packaged" )}
       let!(:whitneyinvoice2_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice2.id, item_id: silver_necklace.id, quantity: 31, unit_price: 270, status:"shipped" )}
       let!(:whitneyinvoice3_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice3.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
+     
      it 'can return the invoices where the merchant has at least one item on that invoice' do 
 
       expect(jewlery_city.find_relevant_invoices).to include(alaina_invoice1, alaina_invoice2, alaina_invoice3, whitney_invoice1, whitney_invoice2, whitney_invoice3)
