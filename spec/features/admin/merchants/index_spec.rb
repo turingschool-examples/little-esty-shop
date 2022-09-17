@@ -4,11 +4,11 @@ RSpec.describe "Admin Merchants" do
   describe "As an admin" do
     describe "I visit the admin merchants index (/admin/merchants)" do
       before :each do
-        @merchant_1 = Merchant.create!(name: "Johns Tools")
-        @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
-        @merchant_3 = Merchant.create!(name: "Pretty Plumbing", active_status: :disabled)
-        @merchant_4 = Merchant.create!(name: "Jenna's Jewlery")
-        @merchant_5 = Merchant.create!(name: "Sassy Soap", active_status: :disabled)
+        @merchant_1 = Merchant.create!(name: "Johns Tools", active_status: :enabled)
+        @merchant_2 = Merchant.create!(name: "Hannas Hammocks", active_status: :enabled)
+        @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
+        @merchant_4 = Merchant.create!(name: "Jenna's Jewlery", active_status: :enabled)
+        @merchant_5 = Merchant.create!(name: "Sassy Soap")
       end
   
       it 'can see the name of each merchant in the system' do
