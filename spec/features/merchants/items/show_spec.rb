@@ -47,13 +47,6 @@ RSpec.describe 'Merchant Item Show Page: ' do
 
         expect(page).to have_link("Update #{@item4.name}")
       end
-
-      it 'total revenue for item is displayed' do
-        visit merchant_item_path(@merch2.id, @item4.id)
-
-        expect(page).to have_content("Total Revenue")
-        expect(page).to have_content("Iteger of revenue")
-      end
     end
   end
 end

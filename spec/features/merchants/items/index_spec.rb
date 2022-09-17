@@ -172,6 +172,18 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
           expect(current_path).to eq(merchant_item_path(@merch1.id, "item id"))
         end
+
+        it 'total revenue for item is displayed' do
+          visit merchant_items_path(@merch1.id)
+
+          within("#top_items") do
+            expect(page).to have_link("revnue")
+            expect(page).to have_link("revnue")
+            expect(page).to have_link("revnue")
+            expect(page).to have_link("revnue")
+            expect(page).to have_link("revnue")
+          end
+        end
       end
     end
   end
