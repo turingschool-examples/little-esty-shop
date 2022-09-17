@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Merchant Index', type: :feature do
+RSpec.describe 'Admin Merchant Show', type: :feature do
   # let blocks
-  let!(:carly) { Merchant.create!(name: "Carly Simon's Candy Silo")}
+  let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
   let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
 
-  let!(:licorice) { carly.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200) }
-  let!(:peanut) { carly.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500) }
-  let!(:choco_waffle) { carly.items.create!(name: "Chocolate Waffles Florentine", description: "Cholately Waffles of Deliciousness", unit_price: 900) }
-  let!(:hummus) { carly.items.create!(name: "Hummus", description: "Creamy Hummus", unit_price: 1200) }
+  let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200) }
+  let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500) }
+  let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Cholately Waffles of Deliciousness", unit_price: 900) }
+  let!(:hummus) { carly_silo.items.create!(name: "Hummus", description: "Creamy Hummus", unit_price: 1200) }
 
   let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
   let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
@@ -87,29 +87,14 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
   let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"shipped" )}
   let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
   
-  describe 'As an admin, when I visit admin merchants index' do
+  describe 'As an admin, when I visit admin merchants show' do
     before(:each) do
-      visit admin_merchants_path
+      visit admin_merchants_path(carly)
     end
 
-    it 'shows the name of each merchant in the system' do 
-      merchants = Merchant.all
-      merchants.each do |merchant|
-        within "#merchant-#{merchant.id}" do
-          expect(page).to have_content(merchant.name)
-        end
-      end
-    end
-
-    it 'links to the show page for respective merchant' do
-      merchants = Merchant.all
-      merchants.each do |merchant|
-        within "#merchant-#{merchant.id}" do
-          expect(page).to have_link(merchant.name)
-          click_link(merchant.name)
-        end
-        expect(current_path).to be("admin/merchants/#{merchant.id}")
-        visit admin_merchants_path
+    it 'shows the name the right merchant' do 
+      within "#merchant-name" do
+        expect(page).to have_content(carly.name)
       end
     end
   end
