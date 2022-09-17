@@ -38,4 +38,29 @@ RSpec.describe 'Mechants Item Index' do
       end
     end
   end
+
+#   As a merchant,
+# When I click on the name of an item from the merchant items index page,
+# Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
+# And I see all of the item's attributes including:
+  describe 'user story 7' do
+    it 'When I click on the name of an item I am taken to that merchant item show page' do
+
+      visit "/merchants/#{@merchant_1.id}/items"
+
+      within("#merchant-items") do
+        click_on "#{@items_1[0].name}"
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@items_1[0].id}")
+      end
+
+      visit "/merchants/#{@merchant_2.id}/items"
+
+      within("#merchant-items") do
+        click_on "#{@items_2[6].name}"
+        expect(current_path).to eq("/merchants/#{@merchant_2.id}/items/#{@items_2[6].id}")
+      end
+    end
+  end
+
+    it 'I see all of the items attributes' 
 end
