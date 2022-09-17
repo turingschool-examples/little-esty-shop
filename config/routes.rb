@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch "/admin/merchants/:id", to: 'admin_merchants#update'
 
   get "/merchant/:id/items", to: 'items#index'
+  get "/merchant/:id/items/:id", to: 'items#show'
 
   # namespace :admin do
   #   resources :merchants
