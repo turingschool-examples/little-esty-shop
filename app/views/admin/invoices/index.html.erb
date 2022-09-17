@@ -1,1 +1,8 @@
+<%= render partial: 'admin/admin_navbar'%>
 <h1>Admin Invoices</h1>
+
+<ul>
+<% @invoices.each do |invoice| %>
+  <li>Invoice # <%= link_to "#{invoice.id}", admin_invoice_path(invoice) %></li>
+<% end %>
+</ul>

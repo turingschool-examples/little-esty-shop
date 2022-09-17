@@ -1,1 +1,32 @@
+<%= render partial: 'admin/admin_navbar'%>
 <h1>Invoice Show Page</h1>
+<div id="invoice-<%=@invoice.id%>">
+<h2>Invoice #<%= @invoice.id %>
+</div>
+<p>Status: </p>
+<%= form_with url: admin_invoice_path(@invoice), method: :patch, local: true do |form| %>
+  <%= form.label :status %>
+  <%= form.select :status, ['cancelled', 'in progress', 'completed'], selected: @invoice.status  %>
+  <%= form.submit "Update Invoice Status" %>
+<% end %>
+<p>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
+<p>Customer <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name %></p>
+<p>Total Revenue: $<%= @invoice.total_revenue.to_f/100 %></p>
+<h3>Items on this Invoice:</h3>
+
+<table style="width:50%">
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+     <% @invoice_items.each do |invoice_item| %>
+      <td><%= invoice_item.item.name %></td>
+      <td><%= invoice_item.quantity %></td>
+      <td><%= invoice_item.unit_price %></td>
+      <td><%= invoice_item.status %></td>
+  </tr>
+    <% end %>
+</table>

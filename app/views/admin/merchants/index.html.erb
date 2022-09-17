@@ -1,5 +1,24 @@
+<%= render partial: 'admin/admin_navbar'%>
 <h1>Admin Merchants</h1>
 
-<ul> <% @merchants.each do |merchant| %>
-  <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %> </li>
-<% end %> </ul>
+
+Enabled Merchants:
+
+<ul> <% @enabled_merchants.each do |merchant| %>
+  <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+    <%=button_to "Disable #{merchant.name}", admin_merchant_path(merchant), method: :patch, params: {id: merchant.id} %>
+  </li>
+<% end%>
+</ul>
+
+Disabled Merchants:
+
+<ul> <% @disabled_merchants.each do |merchant| %>
+  <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+    <%=button_to "Enable #{merchant.name}", admin_merchant_path(merchant), method: :patch, params: {id: merchant.id} %>
+  </li>
+<% end%>
+</ul>
+
+
+
