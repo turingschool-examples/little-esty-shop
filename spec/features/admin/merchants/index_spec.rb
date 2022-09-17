@@ -46,29 +46,21 @@ RSpec.describe 'Admin Merchants Index' do
 
     within "#merchant-#{merchant1.id}" do
       expect(page).to have_button("Disable")
-      expect(page).to_not have_button("Enable")
+      expect(page).to_not have_button("Enabled")
     end
 
     within "#merchant-#{merchant2.id}" do
       expect(page).to have_button("Disable")
-      expect(page).to_not have_button("Enable")
+      expect(page).to_not have_button("Enabled")
     end
 
     within "#merchant-#{merchant3.id}" do
       expect(page).to have_button("Disable")
-      expect(page).to_not have_button("Enable")
-
-      click_button("Disable")
-
-      expect(page).to have_button("Enable")
-      expect(page).to_not have_button("Disable")
-
+      expect(page).to_not have_button("Enabled")
     end
-
-
   end
 
-  xit 'has a link to create a new merchant' do
+  it 'has a link to create a new merchant' do
     merchant1 = Merchant.create!(name: "Bobbis Bees")
     merchant2 = Merchant.create!(name: "Darnelles Daysies")
     merchant3 = Merchant.create!(name: "Alans Art")
