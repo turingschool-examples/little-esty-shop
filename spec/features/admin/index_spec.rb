@@ -32,18 +32,21 @@ RSpec.describe 'admin dashboard' do
     @unsuc_transacts_7 = create_list(:transaction, 8, invoice: @inv_7, result: 1)
 
     @invoices = create_list(:invoice, 5)
+    @inv_8 = create(:invoice, created_at: Date.tomorrow)
         
     @inv_items_0_shipped = create_list(:invoice_item, 5, invoice: @invoices[0], status: 2)
    
-    @inv_items_1_shipped = create_list(:invoice_item, 5, invoice: @invoices[1], status: 2) #
+    @inv_items_1_shipped = create_list(:invoice_item, 5, invoice: @invoices[1], status: 2) 
     @inv_items_1_pending= create_list(:invoice_item, 2, invoice: @invoices[1], status: 0)
     @inv_items_1_packaged = create_list(:invoice_item, 2, invoice: @invoices[1], status: 1)
 
     @inv_items_2_shipped = create_list(:invoice_item, 5, invoice: @invoices[2], status: 2)
 
-    @inv_items_3_pending = create_list(:invoice_item, 5, invoice: @invoices[3], status: 0) #
+    @inv_items_3_pending = create_list(:invoice_item, 5, invoice: @invoices[3], status: 0) 
 
-    @inv_items_4_packaged = create_list(:invoice_item, 5, invoice: @invoices[4], status: 1) #
+    @inv_items_4_packaged = create_list(:invoice_item, 5, invoice: @invoices[4], status: 1)
+
+    @inv_item_8_pending = create(:invoice_item, invoice: @inv_8, status: 0)
     
     visit '/admin'
   end
@@ -95,12 +98,20 @@ RSpec.describe 'admin dashboard' do
       within("#incomplete_invoices") do
         expect(page).to have_content(@invoices[1].id)
         expect(page).to have_content(@invoices[3].id)
-
+        
         expect(page).to_not have_content(@invoices[0].id)
       end
     end
 
+    it 'includes the properly formatted date of all invoices that have unshipped invoice items' do
+      within("#incomplete_invoices") do
+        todays_date = @invoices[0].created_at.strftime("%A, %B %d, %Y")
+        tomorrow_date = @inv_8.created_at.strftime("%A, %B %d, %Y")
 
+        expect(page).to have_content(todays_date)
+        expect(page).to have_content(tomorrow_date)
+      end
+    end
 
   describe 'links'
     it 'has a link to the Admin Merchant Index' do

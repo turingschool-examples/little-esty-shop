@@ -4,7 +4,7 @@
 <h2> Top 5 Customers Overall </h2>
 
 <% @top_5_customers.each do |cust| %>
-  <li id ="cust_<%=cust.id%>" > <%= cust.first_name %> <%= cust.last_name %>, Successful Transactions: <%= cust.transac_count %> </li>
+  <li id ="cust_<%=cust.id%>" > <%= cust.first_name %> <%= cust.last_name %>, Purchases: <%= cust.transac_count %> </li>
 <% end %>
 
 </section>
@@ -13,6 +13,10 @@
 <section id = "incomplete_invoices" >
 <h2> Incomplete Invoices </h2>
 
+<% @incomplete_invoices.each do |inv| %>
+ <li id ="inc_inv_<%=inv.id%>" > Invoice ID: <%= inv.id %> Invoice Date: <%= inv.created_at.strftime("%A, %B %d, %Y") %> </li>
+
+<% end %>
 
 </section>
 
