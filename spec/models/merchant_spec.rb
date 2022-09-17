@@ -35,13 +35,13 @@ RSpec.describe Merchant, type: :model do
   let!(:leah) { Customer.create!(first_name: "Leah", last_name: "Anderson")}
   let!(:polina) { Customer.create!(first_name: "Polina", last_name: "Eisenberg")}
 
-  let!(:whitney_invoice1) { whitney.invoices.create!(status: "completed")}
+  let!(:whitney_invoice1) { whitney.invoices.create!(status: "completed", created_at: "2012-01-30 14:54:09" )}
   let!(:whitney_invoice2) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice3) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice4) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice5) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice6) { whitney.invoices.create!(status: "completed")}
-  let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed", created_at: "2020-01-30 14:54:09")}
   let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress")}
   let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed")}
@@ -50,7 +50,7 @@ RSpec.describe Merchant, type: :model do
   let!(:alaina_invoice7) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice8) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice9) { alaina.invoices.create!(status: "completed")}
-  let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed")}
+  let!(:eddie_invoice1) { eddie.invoices.create!(status: "completed", created_at: "2000-01-30 14:54:09")}
   let!(:eddie_invoice2) { eddie.invoices.create!(status: "completed")}
   let!(:eddie_invoice3) { eddie.invoices.create!(status: "completed")}
   let!(:ryan_invoice1) { ryan.invoices.create!(status: "completed")}
@@ -110,14 +110,8 @@ RSpec.describe Merchant, type: :model do
   let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"shipped" )}
   let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
 
-
-  describe 'class methods' do
-    # describe '#search' do
-    #   xit 'returns partial matches' do
-    #    #method goes here
-    #   end
-    # end
-
+    
+  describe 'instance methods' do
     describe '#enabled_items' do
       it 'returns an array of enabled items' do
         expect(carly_silo.enabled_items).to eq([licorice, peanut])
@@ -129,9 +123,7 @@ RSpec.describe Merchant, type: :model do
         expect(carly_silo.disabled_items).to eq([choco_waffle, hummus])
       end
     end
-  end
 
-  describe 'instance methods' do
     describe '#transactions_top_5' do
       it 'finds the top 5 customers with the most successful transactions with a particular merchant' do
 
@@ -139,18 +131,20 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-
-    describe '#ready_to_ship_items' do
+    describe '#ready_to_ship_items_ordered' do
       it 'finds all items that are ready to ship for a particular merchant' do
-       expect(jewlery_city.ready_to_ship_items.pluck(:name)).to eq(["Gold Earrings", "Silver Necklace", "Gold Studded Bracelet"])
-       expect(jewlery_city.ready_to_ship_items.pluck(:invoice_id)).to eq([alaina_invoice1.id, whitney_invoice1.id, eddie_invoice1.id])
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck(:name)).to eq(["Gold Studded Bracelet", "Silver Necklace", "Gold Earrings"])
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.id") ).to eq([eddie_invoice1.id, whitney_invoice1.id, alaina_invoice1.id])
+        expect(jewlery_city.ready_to_ship_items_ordered.pluck("invoices.created_at")).to eq(["2000-01-30 14:54:09.000000000 +0000", "2012-01-30 14:54:09.000000000 +0000","2020-01-30 14:54:09.000000000 +0000"])
       end
-     end
+    end
 
     describe '#top_5_items' do
       it 'an array of the top 5 items by revenue' do
         expect(jewlery_city.top_5_items).to eq([conch_shell, nose_ring, spiked_wallet_chain, banana_earrings, gold_earrings])
       end
     end
+
+
   end
 end

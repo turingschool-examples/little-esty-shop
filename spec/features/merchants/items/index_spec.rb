@@ -161,14 +161,13 @@ RSpec.describe 'Merchant Items Index' do
         end
 
         it 'also lists each top 5 item best day of sales' do
-          visit merchant_items_path(carly)
+          visit merchant_items_path(carly_silo)
 
           within("#top-item-#{grobles.id}") do
             expect(page).to have_content(
               "Top selling date for #{grobles.name} was #{grobles.best_sales_date}"
             )
           end
-          save_and_open_page
         end
       end
     end
