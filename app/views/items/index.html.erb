@@ -1,5 +1,7 @@
 <h2><%= @merchant.name %> </h2>
 
+<span id="enabled-items" >
+  <h3>Enabled Items</h3>
   <% @merchant.items.each do |item| %>
   <div id="item-<%= item.id %>">
     <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
@@ -10,3 +12,8 @@
       <% end %>
     </div>
   <% end %>
+</span>
+
+<span id="disabled-items">
+  <h3>Disabled Items</h3>
+</span>

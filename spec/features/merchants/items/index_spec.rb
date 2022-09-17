@@ -159,7 +159,7 @@ RSpec.describe 'Mechants Item Index' do
 # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
 # And I see that each Item is listed in the appropriate section
   describe 'user story 10' do
-    xit 'Then I see two sections, one for Enabled Items and one for Disabled Items' do
+    it 'Then I see two sections, one for Enabled Items and one for Disabled Items' do
 
       visit merchant_items_path(@merchant_1)
 
