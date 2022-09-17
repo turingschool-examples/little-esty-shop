@@ -63,10 +63,10 @@ RSpec.describe 'admin dashboard page' do
     before :each do
       @invoice1 = create(:invoice)
       create_list(:invoiceItem, 5, invoice_id: @invoice1.id, status: :shipped)
-      @invoice2 = create(:invoice)
+      @invoice2 = create(:invoice, created_at: Date.new(2019,7,18))
       create_list(:invoiceItem, 3, invoice_id: @invoice2.id, status: :pending)
       create_list(:invoiceItem, 3, invoice_id: @invoice2.id, status: :shipped)
-      @invoice3 = create(:invoice)
+      @invoice3 = create(:invoice, created_at: Date.new(2019,7,17))
       create_list(:invoiceItem, 5, invoice_id: @invoice3.id, status: :packaged)
     end
 
@@ -84,6 +84,11 @@ RSpec.describe 'admin dashboard page' do
       visit admin_path
       click_link @invoice3.id
       expect(current_path).to eq(admin_invoice_path(@invoice3))
+    end
+
+    it 'US 23 Order incomplete invoices by created_at date from oldest to newest' do
+      expect(all('.incomplete')[0].text).to eq("Invoice ##{invoice.id} - Wednesday, July 17, 2019")
+      expect(all('.incomplete')[1].text).to eq("Invoice ##{invoice.id} - Thursday, July 18, 2019")
     end
   end
 end

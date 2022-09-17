@@ -22,5 +22,6 @@ class Invoice < ApplicationRecord
     joins(:invoice_items)
       .where(invoice_items: { status: [0, 1] })
       .group(:id)
+      .order(:created_at)
   end
 end
