@@ -37,12 +37,12 @@ RSpec.describe "Admin Invoice Show Page" do
       it "I see all of the items on the invoice including: Item name, quantity ordered, price Item sold for, Item status" do
         visit admin_invoice_path(@invoice_1)
 
-        within("#invoice-items") do
+         within("#invoice-items") do
           @invoice_1.items.each do |item|
             expect(page).to have_content(item.name)
             expect(page).to have_content(item.quantity_purchased(@invoice_1.id))
-            expect(page).to have_content(item.number_to_currancy(price_sold(@invoice_1.id)))
-            expect(page).to have_content(item.shipping_status(@invoice_1.id))
+            expect(page).to have_content((item.price_sold(@invoice_1.id))/100)
+            expect(page).to have_content(item.shipping_status(@invoice_1.id).capitalize)
           end
         end
       end

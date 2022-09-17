@@ -8,3 +8,13 @@
   <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p> 
 </div>
 
+<div id="invoice-items">
+<h3>Items on Invoice:</h3>
+<% @invoice.items.each do |item| %>
+  <p>Item Name: <%= item.name %></p>
+  <p>Quantity Sold: <%= item.quantity_purchased(@invoice.id) %></p>
+  <p>Unit Price: <%= number_to_currency((item.price_sold(@invoice.id))/100) %></p> 
+  <p>Shipping Status: <%= item.shipping_status(@invoice.id).capitalize %></p> 
+<% end %>
+
+</div>
