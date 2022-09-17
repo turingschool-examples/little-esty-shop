@@ -24,10 +24,20 @@ RSpec.describe 'Merchant Index Show Page' do
   #this invoice contains an item belonging to this merchant, but no info should be should on invoice1 show page
   let!(:alainainvoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: alaina_invoice2.id, item_id: studded_bracelet.id, quantity: 40, unit_price: 1500, status:"shipped" )}
 
+  # As a merchant
+  # When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+  # Then I see information related to that invoice including:
+  
+  # Invoice id
+  # Invoice status
+  # Invoice created_at date in the format "Monday, July 18, 2019"
+  # Customer first and last name
+
+
+
 #   As a merchant
 # When I visit my merchant invoice show page
 # Then I see all of my items on the invoice including:
-
 # Item name
 # The quantity of the item ordered
 # The price the Item sold for
@@ -36,9 +46,20 @@ RSpec.describe 'Merchant Index Show Page' do
   
   describe 'when I visit a merchant invoice show page' do
 
+    describe 'I see information related to the invoice' do
+      it 'displays id number, status, date of creation, customer full name' do
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+
+        expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
+        expect(page).to have_content("Status: #{alaina_invoice1.status}")
+        expect(page).to have_content("Created at: #{alaina_invoice1.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Customer: #{alaina.name}")
+      end
+    end
+
     describe 'I see all of MY items on the invoice' do
 
-      it 'displays the name of each merchant item on the invoice'
+      it 'displays the name of each merchant item on the invoice' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
         expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
 
@@ -67,3 +88,4 @@ RSpec.describe 'Merchant Index Show Page' do
       end
     end
   end
+end
