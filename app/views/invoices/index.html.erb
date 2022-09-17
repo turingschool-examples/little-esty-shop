@@ -3,8 +3,8 @@
 <h3> My Invoices </h3>
 
   <% @invoices.each do |invoice| %>
-    <p> Invoice #<%= invoice.id %> </p>
-    <% end %>
+    <p><%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant, invoice), method: :get %></p>
+  <% end %>
 
 
 
