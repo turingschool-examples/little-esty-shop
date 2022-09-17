@@ -41,7 +41,7 @@ RSpec.describe Invoice, type: :model do
       it 'finds invoices that have invoice items that have not been shipped' do
         invoices = create_list(:invoice, 5)
 
-        inv_items_0s = create_list(:invoice_item, invoice: invoices[0], status: 2)
+        inv_items_0s = create_list(:invoice_item, 5, invoice: invoices[0], status: 2)
       
       end
     end

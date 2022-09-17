@@ -37,9 +37,12 @@ RSpec.describe InvoiceItem, type: :model do
         inv_items_pending = create_list(:invoice_item, 5, status: 0)
         inv_items_packaged = create_list(:invoice_item, 5, status: 1)
         inv_items_shipped = create_list(:invoice_item, 5, status: 2)
-
-        expect(InvoiceItem.unshipped_inv_items).to include(inv_items_pending)
-        expect(InvoiceItem.unshipped_inv_items).to include(inv_items_packaged)
+        all_inv_items = InvoiceItem.all
+        
+        all_inv_items.unshipped_invoice_items.each do |ii|
+          expect(ii.status).to_not eq("Shipped")
+        end
+        expect(InvoiceItem.unshipped_invoice_items.count).to eq(10)
       end
     end
   end
