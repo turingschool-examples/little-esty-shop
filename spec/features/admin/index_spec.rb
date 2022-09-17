@@ -30,6 +30,9 @@ RSpec.describe 'admin dashboard' do
     @inv_7 = create(:invoice, customer: @customers[7], status: 1)
     @transacts_7 = create_list(:transaction, 8, invoice: @inv_7, result: 0)
     @unsuc_transacts_7 = create_list(:transaction, 8, invoice: @inv_7, result: 1)
+
+    @cancelled_invoices = create_list(:invoice, 10, status: 2)
+    @in_progress_invoices = create_list(:invoice, 10, status: 0)
     
     visit '/admin'
   end
@@ -78,18 +81,15 @@ RSpec.describe 'admin dashboard' do
     end
 
     it 'includes the ids all invoices that have a status of 0/in progress' do
-      completed_invoices = create_list(:invoice, 10, status: 1)
-      cancelled_invoices = create_list(:invoice, 10, status: 2)
-      in_progress_invoices = create_list(:invoice, 10, status: 0)
       
       within("#incomplete_invoices") do
-        expect(page).to have_content(in_progress_invoices[0].id)
-        expect(page).to have_content(in_progress_invoices[3].id)
-        expect(page).to have_content(in_progress_invoices[6].id)
-        expect(page).to have_content(in_progress_invoices[9].id)
+        expect(page).to have_content(@in_progress_invoices[1].id)
+        expect(page).to have_content(@in_progress_invoices[3].id)
+        expect(page).to have_content(@in_progress_invoices[6].id)
+        expect(page).to have_content(@in_progress_invoices[9].id)
 
-        expect(page).to_not have_content(completed_invoices[5].id)
-        expect(page).to_not have_content(cancelled_invoices[2].id)
+        expect(page).to_not have_content(@inv_1.id)
+        expect(page).to_not have_content(@cancelled_invoices[2].id)
       end
     end
 
