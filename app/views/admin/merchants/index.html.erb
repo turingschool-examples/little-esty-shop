@@ -1,6 +1,6 @@
 <%= render partial: 'admin/header' %>
 
-
+<section id="enabled-merchants">
 <h3>Enabled Merchants</h3>
 
 <% @merchants.active.each do |merchant| %>
@@ -11,7 +11,9 @@
   </p>
   </div>
 <% end %>
+</section>
 
+<section id="disabled-merchants">
 <h3>Disabled Merchants</h3>
 
 <% @merchants.inactive.each do |merchant| %>
@@ -22,3 +24,4 @@
   </p>
 </div>
 <% end %>
+</section>
