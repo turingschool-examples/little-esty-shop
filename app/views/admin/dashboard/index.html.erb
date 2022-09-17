@@ -1,3 +1,9 @@
 <h1> Admin Dashboard </h1>
 <p><%= link_to "merchants", "/admin/merchants", method: :get%></p>
 <p><%= link_to "invoices", "/admin/invoices", method: :get%></p>
+
+<h3> Top 5 Customers </h3>
+<% @customers.each do |c| %>
+  <p><%= c.first_name + ' ' + c.last_name %>
+  <%= c.number_of_transactions %> Purchases </p>
+<% end %>
