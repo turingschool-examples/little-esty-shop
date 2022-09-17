@@ -82,7 +82,7 @@ RSpec.describe("the merchant dashboard") do
       transaction_13 = Transaction.create!(invoice_id: invoice_13.id, credit_card_number: Faker::Number.number(digits: 16), credit_card_expiration_date: '', result: 'failed' )
       transaction_14 = Transaction.create!(invoice_id: invoice_14.id, credit_card_number: Faker::Number.number(digits: 16), credit_card_expiration_date: '', result: 'failed' )
       transaction_14 = Transaction.create!(invoice_id: invoice_15.id, credit_card_number: Faker::Number.number(digits: 16), credit_card_expiration_date: '', result: 'success' )
-
+      
       visit("/merchants/#{merchant1.id}/dashboard")
       
       expect(page).to have_content('Favorite Customers')
@@ -102,7 +102,7 @@ RSpec.describe("the merchant dashboard") do
       within "#favorite_customer_#{Customer.all[4].id}" do
         expect(page).to have_content("#{Customer.all[4].first_name} #{Customer.all[4].last_name} - 2 purchases")
       end
-   
+
       within "#favorite_customer_#{Customer.all[3].id}" do
         expect(page).to have_content("#{Customer.all[3].first_name} #{Customer.all[3].last_name} - 2 purchases")
       end
