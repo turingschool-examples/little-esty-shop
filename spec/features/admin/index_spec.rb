@@ -22,7 +22,7 @@ RSpec.describe 'admin dashboard' do
     @invoice_3 = Invoice.create!(status: :completed, customer_id: @customer_3.id)
     @invoice_4 = Invoice.create!(status: :completed, customer_id: @customer_4.id)
     @invoice_5 = Invoice.create!(status: :completed, customer_id: @customer_5.id)
-    @invoice_6 = Invoice.create!(status: :in_progress, customer_id: @customer_6.id)
+    @invoice_6 = Invoice.create!(status: "in progress", customer_id: @customer_6.id)
 
     @transaction_1 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
     @transaction_2 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")

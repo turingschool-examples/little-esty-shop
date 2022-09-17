@@ -91,7 +91,6 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
     end
     it '#top_five_merchants' do
-      require 'pry' ; binding.pry
       expect(Merchant.top_five_merchants.first).to eq(@merchant_6)
       expect(Merchant.top_five_merchants[1]).to eq(@merchant_5)
       expect(Merchant.top_five_merchants[2]).to eq(@merchant_4)
