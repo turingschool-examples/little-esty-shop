@@ -40,9 +40,9 @@ RSpec.describe "Admin Invoice Show Page" do
         within("#invoice-items") do
           @invoice_1.items.each do |item|
             expect(page).to have_content(item.name)
-            expect(page).to have_content(item.invoice_items.find_by(@invoice_1.id).quantity)
-            expect(page).to have_content(item.invoice_items.find_by(@invoice_1.id).unit_price)
-            expect(page).to have_content(item.invoice_items.find_by(@invoice_1.id).status)
+            expect(page).to have_content(item.quantity_purchased(@invoice_1.id))
+            expect(page).to have_content(item.number_to_currancy(price_sold(@invoice_1.id)))
+            expect(page).to have_content(item.shipping_status(@invoice_1.id))
           end
         end
       end
