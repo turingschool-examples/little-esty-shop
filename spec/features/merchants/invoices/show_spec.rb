@@ -1,0 +1,69 @@
+require 'rails_helper'
+
+RSpec.describe 'Merchant Index Show Page' do
+
+  # test data collapsed here
+  let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
+  let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
+
+  let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
+  let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
+  let!(:studded_bracelet) { jewlery_city.items.create!(name: "Gold Studded Bracelet", description: "A bracet to make others jealous", unit_price: 2900) } #no one is buying the studded bracelet so it should not appear in the tests
+  let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
+
+  let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
+
+  let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress")}
+
+# alaina_invoice1 should have, from Jewelry, gold earrings and silver necklace, NOT studded bracelet. should also have licorice id, but that should not be shown for this merchant
+  let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+  let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+  let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+
+  #this invoice contains an item belonging to this merchant, but no info should be should on invoice1 show page
+  let!(:alainainvoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: alaina_invoice2.id, item_id: studded_bracelet.id, quantity: 40, unit_price: 1500, status:"shipped" )}
+
+#   As a merchant
+# When I visit my merchant invoice show page
+# Then I see all of my items on the invoice including:
+
+# Item name
+# The quantity of the item ordered
+# The price the Item sold for
+# The Invoice Item status
+# And I do not see any information related to Items for other merchants
+  
+  describe 'when I visit a merchant invoice show page' do
+
+    describe 'I see all of MY items on the invoice' do
+
+      it 'displays the name of each merchant item on the invoice'
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+        expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
+
+        within("#invoice_items") do
+          expect(page).to have_content(gold_earrings.name)
+          expect(page).to have_content(silver_necklace.name)
+          #checks we are not displaying items from a different invoice
+          expect(page).to_not have_content(studded_bracelet.name)
+          #checks we are not displaying items on this invoice from another merchant
+          expect(page).to_not have_content(licorice.name)
+        end
+      end
+
+      it 'displays the quantity, sale price, and status for each item' do
+        within("##{gold_earrings.name}") do
+          expect(page).to have_content("Quantity: #{alainainvoice1_itemgold_earrings.quantity}")
+          expect(page).to have_content("Sale Price: #{alainainvoice1_itemgold_earrings.unit_price}")
+          expect(page).to have_content("Status: #{alainainvoice1_itemgold_earrings.status}")
+        end
+
+        within("##{silver_necklace.name}") do
+          expect(page).to have_content("Quantity: #{alainainvoice1_itemsilver_necklace.quantity}")
+          expect(page).to have_content("Sale Price: #{alainainvoice1_itemsilver_necklace.unit_price}")
+          expect(page).to have_content("Status: #{alainainvoice1_itemsilver_necklace.status}")
+        end
+      end
+    end
+  end
