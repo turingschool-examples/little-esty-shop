@@ -6,8 +6,8 @@ describe 'the admin invoices show page' do
       customer_1 = create(:random_customer)
       customer_2 = create(:random_customer)
 
-      invoice_1 = create(:random_invoice, customer: Customer.all[0])
-      invoice_2 = create(:random_invoice, customer: Customer.all[1])
+      invoice_1 = create(:random_invoice, customer: customer_1)
+      invoice_2 = create(:random_invoice, customer: customer_2)
 
       visit admin_invoice_path(invoice_1)
       
@@ -27,9 +27,9 @@ describe 'the admin invoices show page' do
         customer_1 = create(:random_customer)
         customer_2 = create(:random_customer)
 
-        invoice_1 = create(:random_invoice, customer: Customer.all[0])
+        invoice_1 = create(:random_invoice, customer: customer_1)
         #customer_1 has 3 invoices
-        invoice_2 = create(:random_invoice, customer: Customer.all[1])
+        invoice_2 = create(:random_invoice, customer: customer_2)
 
         merchant_1 = create(:random_merchant)
         merchant_2 = create(:random_merchant)
@@ -67,7 +67,7 @@ describe 'the admin invoices show page' do
     describe 'I see the total revenue that will be generated from this invoice' do
       it 'displays total revenue generated for each invoice' do
         customer_1 = create(:random_customer)
-        invoice_1 = create(:random_invoice, customer: Customer.all[0])
+        invoice_1 = create(:random_invoice, customer: customer_1)
         merchant_1 = create(:random_merchant)
 
         item_1 = create(:random_item, merchant_id: merchant_1.id)
@@ -81,13 +81,35 @@ describe 'the admin invoices show page' do
         visit admin_invoice_path(invoice_1)
 
         expect(page).to have_content('Total Revenue: $302.99')
-        #I want invoice items price, the price the item sold at
+      end
+    end
+
+    describe 'the invoice status is a select field and the current status is selected' do
+      describe 'I can select a new status for the invoice and click a button to update invoice status' do
+        it 'lists the invoice status as a select field with current status selected' do
+          customer_1 = create(:random_customer)
+          invoice_1 = Invoice.create!(status: 'in progress', customer: customer_1)
+
+          visit admin_invoice_path(invoice_1)
+          
+          expect(page.has_field? 'status').to be true
+          expect(page).to have_content('in progress')
+        end
+
+        it 'can select a new status for the invoice' do
+          customer_1 = create(:random_customer)
+          invoice_1 = Invoice.create!(status: 'in progress', customer: customer_1)
+
+          visit admin_invoice_path(invoice_1)
+
+          select "cancelled", from: "Status"
+          click_on "Update Invoice Status"
+
+          expect(current_path).to eq(admin_invoice_path(invoice_1))
+
+          expect(page).to have_content('cancelled')
+        end
       end
     end
   end
 end
-# Admin Invoice Show Page: Total Revenue
-
-# As an admin
-# When I visit an admin invoice show page
-# Then I see the total revenue that will be generated from this invoice
