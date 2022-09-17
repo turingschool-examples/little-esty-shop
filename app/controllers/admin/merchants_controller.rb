@@ -23,9 +23,4 @@ class Admin::MerchantsController < ApplicationController
       redirect_to admin_merchants_path
     end
   end
-
-  def enabled_toggle
-    @merchant = Merchant.find(params[:id])
-    @merchant.enabled.toggle
-  end
 end
