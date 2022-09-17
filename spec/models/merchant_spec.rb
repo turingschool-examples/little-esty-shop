@@ -81,4 +81,28 @@ RSpec.describe Merchant, type: :model do
       expect(merchant_stephen.top_items).to eq([item_bike, item_ski, item_climbing_shoes, item_snowboard, item_rock])
     end
   end
+
+  describe 'merchant_invoice_finder' do
+    it 'returns invoice ids for invoices that are for at least one of the merchants items' do
+
+      steph_merchant = Merchant.create!(name: "Stephen's shop")
+      kev_merchant = Merchant.create!(name: "Kevin's shop")
+
+      customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+
+      item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+      item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+      item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: kev_merchant.id) 
+
+      invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+      invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+      invoice3 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+
+      invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
+      invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice2.id)
+      invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice3.id)
+
+      expect(steph_merchant.merchant_invoice_finder).to eq([invoice1, invoice2])
+    end
+  end
 end

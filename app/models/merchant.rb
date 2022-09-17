@@ -18,4 +18,8 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
+
+  def merchant_invoice_finder
+    Invoice.joins(:items).select(:id).where("items.merchant_id = #{self.id}").group(:id)
+  end
 end
