@@ -3,11 +3,6 @@ require 'rails_helper'
 RSpec.describe "Admin Merchant Create New" do
   describe "As an admin" do
     describe "When I visit the admin merchants index" do
-      before :each do
-          @merchant_1 = Merchant.create!(name: "Johns Tools")
-          @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
-      end
-
 
           #       Admin Merchant Create
 
@@ -34,14 +29,13 @@ RSpec.describe "Admin Merchant Create New" do
         visit new_admin_merchant_path
 
         fill_in "Name", with: "Billy Bobs Burgers"
-        click_button "Submit"
+        click_button "Create Merchant"
 
         expect(current_path).to eq(admin_merchants_path)
         within("#disabled-merchants") do
           expect(page).to have_content("Billy Bobs Burgers")
         end
       end
-      
     end
   end
 end
