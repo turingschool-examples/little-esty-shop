@@ -289,7 +289,7 @@ RSpec.describe 'Admin Merchants Index' do
       visit "/admin/merchants"
       # When I visit the admin merchants index
       within("#top_merchant-#{@merchant_5.id}") do
-        expect(page).to have_content("Top selling date for #{@merchant_5.name} was #{@merchant.best_day}")
+        expect(page).to have_content("Top selling date for #{@merchant_5.name} was #{@merchant_5.best_day.strftime("%-m/%d/%y")}")
         # Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant.
         # And I see a label “Top selling date for <merchant name> was <date with most sales>"
       end

@@ -22,6 +22,6 @@
   <ol><% @merchants.top_five_merchants.each do |merchant| %>
   <section id="top_merchant-<%= merchant.id %>">
     <li><p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> : <%= number_to_currency(merchant.revenue) %> in sales</p>
-      <p><%= "Top selling date for #{merchant.name} was " %></p></li>
+      <p><%= "Top selling date for #{merchant.name} was #{merchant.best_day.strftime("%-m/%d/%y")}" %></p></li>
     </section>
     <% end %></ol>
