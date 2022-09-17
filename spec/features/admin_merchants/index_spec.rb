@@ -33,19 +33,21 @@ RSpec.describe 'Admin Merchants Index' do
 
   describe 'US9' do
     it 'can disable merchants' do
+      yeasty = Merchant.create!(name: "The Yeasty Boys", status: :Enabled)
        # As an admin,
       # When I visit the admin merchants index
       visit "/admin/merchants"
       # Then next to each merchant name I see a button to disable or enable that merchant.
-      within("#enabled_merchant-#{@merchant_1.id}") do
+      within("#enabled_merchant-#{yeasty.id}") do
+
         expect(page).to have_button("Disable")
-        # click_button("Disable")
+
         click_button("Disable")
         # Then I am redirected back to the admin merchants index
         expect(current_path).to eq("/admin/merchants")
       end
 
-      within("#disabled_merchant-#{@merchant_1.id}") do
+      within("#disabled_merchant-#{yeasty.id}") do
         # And I see that the merchant's status has changed
         expect(page).to have_button("Enable")
       end
@@ -93,6 +95,19 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to have_content("Cake Me Home Tonight")
         expect(page).to_not have_content("Bake That")
       end
+    end
+  end
+
+  describe 'US11' do
+    it 'admin merchant create' do
+      # As an admin,
+      # When I visit the admin merchants index
+      visit "/admin/merchants"
+      # I see a link to create a new merchant.
+      click_link("New Merchant")
+      # When I click on the link,
+      # I am taken to a form that allows me to add merchant information.
+      expect(current_path).to eq("/admin/merchants/new")
     end
   end
 
