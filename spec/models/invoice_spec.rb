@@ -85,6 +85,30 @@ RSpec.describe Invoice, type: :model do
         expect(alaina_invoice1.merchant_items(jewlery_city)).to_not include(licorice)
       end
     end
+
+
+    describe '#calculate_invoice_revenue(merchant)' do
+      let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
+      let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
+
+      let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
+      let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
+      let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
+
+      let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
+
+      let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
+
+      let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+      let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+      let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+
+
+      it 'takes a merchant as an arg and returns the total amount of revenue that invoice generated for that merchant' do
+        expect(alaina_invoice1.calculate_invoice_revenue(jewlery_city).to_f.round(2)).to eq(26.3)
+      end
+    end
+
   end
 
 end
