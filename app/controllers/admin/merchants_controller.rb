@@ -17,7 +17,7 @@ class Admin::MerchantsController < ApplicationController
     @merchant.update(name: params[:name])
     @merchant.save
     redirect_to "/admin/merchants/#{@merchant.id}"
-    flash[:notice] = "You updated Merchant"
+    flash[:success] = "You updated Merchant"
   end
 
 end
