@@ -6,12 +6,12 @@
 <p>Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
 <h3>Customer <%= @invoice.customer.first_name%> <%=@invoice.customer.last_name %></h3>
 <h4>Items on this Invoice:</h4>
-<%# <style>
+<style>
 
 table, th, td {
   border:1px solid black;
 }
-</style> %>
+</style>
 
 <table style="width:50%">
   <tr>
@@ -21,15 +21,11 @@ table, th, td {
     <th>Status</th>
   </tr>
   <tr>
-    <% @items.each do |item| %>
      <% @invoice_items.each do |invoice_item| %>
-    
-      <td><%= item.name%></td>
+      <td><%= invoice_item.item.name %></td>
       <td><%= invoice_item.quantity %></td>
       <td><%= invoice_item.unit_price %></td>
       <td><%= invoice_item.status %></td>
-    </tr>
-      <% end %>
+  </tr>
     <% end %>
-    
 </table>
