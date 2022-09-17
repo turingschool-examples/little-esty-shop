@@ -24,3 +24,8 @@
   padding: 20px;
   border: 2px solid #fff;
 }  
+
+
+table, th, td {
+  border:1px solid black;
+}
