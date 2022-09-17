@@ -87,8 +87,9 @@ RSpec.describe 'admin dashboard page' do
     end
 
     it 'US 23 Order incomplete invoices by created_at date from oldest to newest' do
-      expect(all('.incomplete')[0].text).to eq("Invoice ##{invoice.id} - Wednesday, July 17, 2019")
-      expect(all('.incomplete')[1].text).to eq("Invoice ##{invoice.id} - Thursday, July 18, 2019")
+      visit admin_path
+      expect(all('.incomplete')[0].text).to eq("Invoice ##{@invoice3.id} - Wednesday, July 17, 2019")
+      expect(all('.incomplete')[1].text).to eq("Invoice ##{@invoice2.id} - Thursday, July 18, 2019")
     end
   end
 end
