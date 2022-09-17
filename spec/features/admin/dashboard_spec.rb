@@ -79,7 +79,7 @@ RSpec.describe 'admin dashboard page' do
 
     it 'Each invoice id links to the invoice admin show page' do
       visit admin_path
-      click_link @invoice2.id
+      click_link "#{@invoice2.id}"
       expect(current_path).to eq(admin_invoice_path(@invoice2))
       visit admin_path
       click_link @invoice3.id
