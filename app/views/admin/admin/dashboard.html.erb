@@ -10,3 +10,6 @@
 <% end %>
 </ol>
 <h2> Incomplete Invoices </h2>
+<% @incomplete.each do |invoice| %>
+  <p><%= link_to "Invoice #{invoice.id}", admin_invoice_path(invoice.id) %></p>
+<% end %>

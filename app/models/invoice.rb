@@ -21,7 +21,6 @@ class Invoice < ApplicationRecord
   def self.incomplete
     joins(:invoice_items)
       .where(invoice_items: { status: [0, 1] })
-      .select('invoices.*')
       .group(:id)
   end
 end
