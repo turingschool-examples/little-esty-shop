@@ -37,7 +37,7 @@
 <h3>Top Items</h3>
 <ol>
   <% @top_five.each do |item| %>
-    <div id="item_<%= item.id %>">
+    <div id="rev_item_<%= item.id %>">
       <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></li>
     </div>
   <% end %>
