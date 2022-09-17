@@ -10,8 +10,9 @@ class Merchant < ApplicationRecord
   end
 
   def top_items
+    id = self.id
     Item.joins(invoices: :transactions)
-    .where("result = 0")
+    .where(["transactions.result = ? and items.merchant_id = ?", 0, id])
     .select(:name, :id, "sum(invoice_items.unit_price * invoice_items.quantity) as revenue")
     .group(:id)
     .order(revenue: :desc)

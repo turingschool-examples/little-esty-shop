@@ -58,6 +58,7 @@ RSpec.describe Merchant, type: :model do
       invoice5 = customer.invoices.create!(status: 1)
       invoice6 = customer.invoices.create!(status: 1)
       invoice7 = customer.invoices.create!(status: 1)
+      invoice8 = customer.invoices.create!(status: 1)
 
       transaction1 = invoice1.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
       transaction2 = invoice2.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
@@ -66,6 +67,7 @@ RSpec.describe Merchant, type: :model do
       transaction5 = invoice5.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
       transaction6 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
       transaction7 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 1)
+      transaction8 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
       
       invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_ski.id, quantity: 1000, unit_price: 10)
       invoice_item2 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_bike.id, quantity: 900, unit_price: 10)
@@ -73,8 +75,10 @@ RSpec.describe Merchant, type: :model do
       invoice_item4 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item_snowboard.id, quantity: 700, unit_price: 10)
       invoice_item5 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item_rock.id, quantity: 600, unit_price: 10)
       invoice_item6 = InvoiceItem.create!(invoice_id: invoice6.id, item_id: item_lamp.id, quantity: 500, unit_price: 10)
+      invoice_item7 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_bike.id, quantity: 5000, unit_price: 10)
+      invoice_item8 = InvoiceItem.create!(invoice_id: invoice8.id, item_id: item_lamp.id, quantity: 90000, unit_price: 10)
 
-      expect(merchant_stephen.top_items).to eq([item_ski, item_bike, item_climbing_shoes, item_snowboard, item_rock])
+      expect(merchant_stephen.top_items).to eq([item_bike, item_ski, item_climbing_shoes, item_snowboard, item_rock])
     end
   end
 end

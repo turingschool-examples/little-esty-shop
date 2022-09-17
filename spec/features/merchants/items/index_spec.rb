@@ -159,6 +159,7 @@ RSpec.describe 'Merchant Items Index Page' do
             invoice5 = customer.invoices.create!(status: 1)
             invoice6 = customer.invoices.create!(status: 1)
             invoice7 = customer.invoices.create!(status: 1)
+            invoice8 = customer.invoices.create!(status: 1)
 
             transaction1 = invoice1.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
             transaction2 = invoice2.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
@@ -167,6 +168,7 @@ RSpec.describe 'Merchant Items Index Page' do
             transaction5 = invoice5.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
             transaction6 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
             transaction7 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 1)
+            transaction8 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
             
             invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_ski.id, quantity: 1000, unit_price: 10)
             invoice_item2 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_bike.id, quantity: 900, unit_price: 10)
@@ -174,6 +176,7 @@ RSpec.describe 'Merchant Items Index Page' do
             invoice_item4 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item_snowboard.id, quantity: 700, unit_price: 10)
             invoice_item5 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item_rock.id, quantity: 600, unit_price: 10)
             invoice_item6 = InvoiceItem.create!(invoice_id: invoice6.id, item_id: item_lamp.id, quantity: 500, unit_price: 10)
+            invoice_item6 = InvoiceItem.create!(invoice_id: invoice8.id, item_id: item_lamp.id, quantity: 2000, unit_price: 10)
 
             visit merchant_items_path(merchant_stephen)
 
@@ -184,6 +187,7 @@ RSpec.describe 'Merchant Items Index Page' do
             expect(item_bike.name).to appear_before(item_climbing_shoes.name)
             expect(item_climbing_shoes.name).to appear_before(item_snowboard.name)
             expect(item_snowboard.name).to appear_before(item_rock.name)
+            expect(page).to_not have_content(item_lamp.name)
             end
 
             within("#top_items_id_#{item_ski.id}") do
@@ -254,11 +258,11 @@ RSpec.describe 'Merchant Items Index Page' do
           visit merchant_items_path(merchant_stephen)
         
           within("#top_items_id_#{item_ski.id}") do
-          expect(page).to have_content("Top selling date for #{item_ski.name} was #{item_ski.item_best_day}")
+          expect(page).to have_content("Top selling date for #{item_ski.name} was 03/27/12")
           end
 
           within("#top_items_id_#{item_bike.id}") do
-          expect(page).to have_content("Top selling date for #{item_bike.name} was #{item_bike.item_best_day}")
+          expect(page).to have_content("Top selling date for #{item_bike.name} was 03/20/12")
           end
 
         end
