@@ -1,4 +1,18 @@
 <h1>Invoice #<%= @invoice.id %></h1>
+<div id="invoice_info">
   <p>Status: <%= @invoice.status %></p>
   <p>Created at: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
   <p>Customer: <%= @invoice.customer.name %></p>
+</div>
+
+<h3>Invoice Items</h3>
+<ul id="invoice_items">
+  <% @invoice.invoice_items.each do |item| %>
+    <li id="item_<%= item.id %>">
+      <%= item.item.name %>
+      <p>Quantity: <%= item.quantity %></p>
+      <p>Sale Price: <%= item.unit_price %></p>
+      <p>Status: <%= item.status %></p>
+    </li>
+  <% end %>
+</ul>
