@@ -6,3 +6,6 @@
 <% end %>
 
 <h2> Top 5 customers </h2>
+<% @top_customers.each do |customer| %>
+<p><%= customer.first_name %> <%= customer.last_name %> <%= customer.success_count %> </p>
+<% end %>

@@ -79,7 +79,6 @@ RSpec.describe 'merchant dashboard' do
 
     it "shows number of succesful transaction they have conducted" do
       visit "/merchants/:merchant_id/dashboard"
-      save_and_open_page
       expect("Meat Loaf").to appear_before("Shannon Dougherty")
       expect("Shannon Dougherty").to appear_before("Puff Daddy")
       expect("Puff Daddy").to appear_before("Walter Wheat")
