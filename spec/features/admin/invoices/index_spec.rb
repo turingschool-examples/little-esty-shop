@@ -13,7 +13,6 @@ RSpec.describe 'admin invoice index' do
     
     it 'shows all invoices' do
         visit admin_invoices_path
-        save_and_open_page
         expect(page).to have_content(invoice1.id)
         expect(page).to have_content(invoice2.id)
         expect(page).to have_content(invoice3.id)
