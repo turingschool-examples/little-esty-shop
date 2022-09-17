@@ -39,6 +39,7 @@ RSpec.describe 'admin invoice show' do
     describe 'invoice items' do
         it 'shows all invoice items' do
             visit admin_invoice_path(alaina_invoice1)
+            save_and_open_page
             expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
             expect(page).to have_content(alainainvoice1_itemsilver_necklace.item.name)
             expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.item.name)
@@ -46,11 +47,11 @@ RSpec.describe 'admin invoice show' do
 
         it 'shows all item info' do
             visit admin_invoice_path(alaina_invoice1)
-
             expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
             expect(page).to have_content("Quantity: #{alainainvoice1_itemgold_earrings.quantity}")
             expect(page).to have_content("Sale Price: #{alainainvoice1_itemgold_earrings.unit_price}")
             expect(page).to have_content("Status: #{alainainvoice1_itemgold_earrings.status}")
+            expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.unit_price)
         end
     end
 end
