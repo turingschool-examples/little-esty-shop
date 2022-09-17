@@ -58,6 +58,7 @@ RSpec.describe Invoice, type: :model do
      it 'can return the invoices where the merchant has at least one item on that invoice' do 
 
       expect(jewlery_city.find_relevant_invoices).to include(alaina_invoice1, alaina_invoice2, alaina_invoice3, whitney_invoice1, whitney_invoice2, whitney_invoice3)
+      expect(jewlery_city.find_relevant_invoices).to_not include(alaina_invoice4)
      end
     end
   end
