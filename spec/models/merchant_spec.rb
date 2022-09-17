@@ -67,8 +67,12 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'has items_not_shipped method' do
-      
       expect(@pretty_plumbing.items_not_shipped_sorted_by_date).to eq([@invoice_4, @invoice_6, @invoice_7, @invoice_5])
+    end
+
+    it '#invoices_distinct_by_merchant' do
+      #Test Refactor Needed
+      expect(@merchant_2.invoices_distinct_by_merchant).to eq([])
     end
   end
 end

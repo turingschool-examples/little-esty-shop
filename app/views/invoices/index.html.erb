@@ -1,0 +1,7 @@
+<h2><%= "#{@merchant.name}" %> Invoice Index</h2>
+
+<div id="merchant-invoices">
+  <% @merchant.invoices_distinct_by_merchant.each do |invoice| %>
+    <p>Invoice Id: <%= link_to "#{invoice.id}", merchant_invoice_path(@merchant, invoice) %></p>
+  <% end %>
+</div>
