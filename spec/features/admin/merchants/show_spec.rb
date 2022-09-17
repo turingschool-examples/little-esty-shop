@@ -93,7 +93,6 @@ RSpec.describe 'Admin Merchant Show', type: :feature do
     end
 
     it 'shows the name the right merchant' do
-      save_and_open_page
       within "#merchant-name" do
         expect(page).to have_content(carly.name)
       end
