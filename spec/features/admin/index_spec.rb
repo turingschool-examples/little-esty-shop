@@ -168,6 +168,7 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
                 expect(page).to_not have_content("Invoice ##{invoice2.id}")
 
                 click_link "#{invoice1.id}"
+
                 expect(current_path).to eq("/admin/invoices/#{invoice1.id}")
             end
         end

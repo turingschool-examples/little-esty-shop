@@ -1,5 +1,11 @@
 <h1>Invoice Show Page</h1>
 
+<h2>Invoice #<%= @invoice.id %></h2>
+
+<p>Status: <%= @invoice.status %></p>
+<p>Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>Customer: <%= @invoice.customer.name %></p>
+
 <h3>Invoice Items</h3>
 <ul id="invoice_items">
   <% @invoice.merchant_items(@merchant).each do |item| %>
