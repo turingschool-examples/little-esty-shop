@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Mechants Item Index' do
+RSpec.describe 'Merchants Item Index' do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
@@ -171,6 +171,61 @@ RSpec.describe 'Mechants Item Index' do
         expect(page).to have_content("Disabled Items")
       end
 
+    end
+
+    it 'I see that each Item is listed in the appropriate section' do
+
+      visit merchant_items_path(@merchant_1)
+
+      within("#enabled-items") do
+        within("#item-#{@items_1[0].id}") do
+          expect(page).to have_content("#{@items_1[0].name}")
+          expect(page).to have_button("Disable")
+        end
+
+        within("#item-#{@items_1[1].id}") do
+          expect(page).to have_content("#{@items_1[1].name}")
+          expect(page).to have_button("Disable")
+        end
+      end
+
+      within("#disabled-items") do
+        within("#item-#{@items_3[0].id}") do
+          expect(page).to have_content("#{@items_3[0].name}")
+          expect(page).to have_button("Enable")
+        end
+
+        within("#item-#{@items_3[1].id}") do
+          expect(page).to have_content("#{@items_3[1].name}")
+          expect(page).to have_button("Enable")
+        end
+      end
+
+      visit merchant_items_path(@merchant_2)
+
+      within("#enabled-items") do
+        within("#item-#{@items_2[0].id}") do
+          expect(page).to have_content("#{@items_2[0].name}")
+          expect(page).to have_button("Disable")
+        end
+
+        within("#item-#{@items_2[1].id}") do
+          expect(page).to have_content("#{@items_2[1].name}")
+          expect(page).to have_button("Disable")
+        end
+      end
+
+      within("#disabled-items") do
+        within("#item-#{@items_4[0].id}") do
+          expect(page).to have_content("#{@items_4[0].name}")
+          expect(page).to have_button("Enable")
+        end
+
+        within("#item-#{@items_4[1].id}") do
+          expect(page).to have_content("#{@items_4[1].name}")
+          expect(page).to have_button("Enable")
+        end
+      end
     end
   end
 end
