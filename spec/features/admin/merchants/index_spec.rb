@@ -109,9 +109,8 @@ RSpec.describe "Admin Merchants" do
             expect(page).to have_button("Enable")
           end
         end
-        save_and_open_page
       end
-
+      
     end
   end
 end
