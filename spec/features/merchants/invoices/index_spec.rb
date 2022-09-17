@@ -37,13 +37,16 @@ RSpec.describe "merchant's invoices index", type: :feature do
       it "Then I see all of the invoices that include at least one of my merchant's items And for each invoice I see its id
       And each id links to the merchant invoice show page" do
         visit merchant_invoices_path(jewlery_city)
-        expect(page).to_not have_content(alaina_invoice4.id)
-        expect(page).to have_content(alaina_invoice1.id)
-        expect(page).to have_content(alaina_invoice2.id)
-        expect(page).to have_content(alaina_invoice3.id)
-        expect(page).to have_content(whitney_invoice1.id)
-        expect(page).to have_content(whitney_invoice2.id)
-        expect(page).to have_content(whitney_invoice3.id)
+        within('#relevant_invoices') do 
+          expect(page).to_not have_content(alaina_invoice4.id)
+          expect(page).to have_content(alaina_invoice1.id)
+          expect(page).to have_content(alaina_invoice2.id)
+          expect(page).to have_content(alaina_invoice3.id)
+          expect(page).to have_content(whitney_invoice1.id)
+          expect(page).to have_content(whitney_invoice2.id)
+          expect(page).to have_content(whitney_invoice3.id)
+        end
+
       end
 
     end
