@@ -34,4 +34,8 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+  def find_relevant_invoices
+    Invoice.joins(:items).where(invoice_items: {item_id: self.items.pluck(:id)}).distinct
+  end
+
 end
