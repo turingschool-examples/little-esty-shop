@@ -18,7 +18,10 @@ RSpec.describe 'Merchant Index Show Page' do
 
 # alaina_invoice1 should have, from Jewelry, gold earrings and silver necklace, NOT studded bracelet. should also have licorice id, but that should not be shown for this merchant
   let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
-  let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+# how can this be?
+  let!(:alainainvoice9_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 6, unit_price: 1111, status:"shipped" )}
+  
+  let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 7, unit_price: 1500, status:"packaged" )}
   let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
 
   #this invoice contains an item belonging to this merchant, but no info should be should on invoice1 show page
@@ -38,13 +41,11 @@ RSpec.describe 'Merchant Index Show Page' do
 
     describe 'I see all of MY items on the invoice' do
 
-      it 'displays the name of each merchant item on the invoice'
+      it 'displays the name of each merchant item on the invoice' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
-        expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
-
         within("#invoice_items") do
-          expect(page).to have_content(gold_earrings.name)
           expect(page).to have_content(silver_necklace.name)
+          expect(page).to have_content(gold_earrings.name)
           #checks we are not displaying items from a different invoice
           expect(page).to_not have_content(studded_bracelet.name)
           #checks we are not displaying items on this invoice from another merchant
@@ -53,13 +54,15 @@ RSpec.describe 'Merchant Index Show Page' do
       end
 
       it 'displays the quantity, sale price, and status for each item' do
-        within("##{gold_earrings.name}") do
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+        save_and_open_page
+        within("#item_#{gold_earrings.id}") do
           expect(page).to have_content("Quantity: #{alainainvoice1_itemgold_earrings.quantity}")
           expect(page).to have_content("Sale Price: #{alainainvoice1_itemgold_earrings.unit_price}")
           expect(page).to have_content("Status: #{alainainvoice1_itemgold_earrings.status}")
         end
 
-        within("##{silver_necklace.name}") do
+        within("#item_#{silver_necklace.id}") do
           expect(page).to have_content("Quantity: #{alainainvoice1_itemsilver_necklace.quantity}")
           expect(page).to have_content("Sale Price: #{alainainvoice1_itemsilver_necklace.unit_price}")
           expect(page).to have_content("Status: #{alainainvoice1_itemsilver_necklace.status}")
@@ -67,3 +70,4 @@ RSpec.describe 'Merchant Index Show Page' do
       end
     end
   end
+end
