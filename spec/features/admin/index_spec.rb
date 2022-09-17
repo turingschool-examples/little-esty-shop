@@ -32,7 +32,7 @@ RSpec.describe 'Admin Dashboard Page', type: :feature do
     end
 
     describe 'Top Customers' do
-
+        # let blocks
         let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
         let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
       
