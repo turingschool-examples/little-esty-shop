@@ -18,34 +18,18 @@ RSpec.describe 'Merchant Index Show Page' do
 
 # alaina_invoice1 should have, from Jewelry, gold earrings and silver necklace, NOT studded bracelet. should also have licorice id, but that should not be shown for this merchant
   let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+  let!(:alainainvoice9_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 6, unit_price: 1111, status:"shipped" )}
+
+  let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 7, unit_price: 1500, status:"packaged" )}
+
   let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+
   let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
 
   #this invoice contains an item belonging to this merchant, but no info should be should on invoice1 show page
   let!(:alainainvoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: alaina_invoice2.id, item_id: studded_bracelet.id, quantity: 40, unit_price: 1500, status:"shipped" )}
-
-  # As a merchant
-  # When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-  # Then I see information related to that invoice including:
-  
-  # Invoice id
-  # Invoice status
-  # Invoice created_at date in the format "Monday, July 18, 2019"
-  # Customer first and last name
-
-
-
-#   As a merchant
-# When I visit my merchant invoice show page
-# Then I see all of my items on the invoice including:
-# Item name
-# The quantity of the item ordered
-# The price the Item sold for
-# The Invoice Item status
-# And I do not see any information related to Items for other merchants
   
   describe 'when I visit a merchant invoice show page' do
-
     describe 'I see information related to the invoice' do
       it 'displays id number, status, date of creation, customer full name' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
@@ -61,6 +45,9 @@ RSpec.describe 'Merchant Index Show Page' do
 
       it 'displays the name of each merchant item on the invoice' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+        within("#invoice_items") do
+          expect(page).to have_content(silver_necklace.name)
+          expect(page).to have_content(gold_earrings.name)
         expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
 
         within("#invoice_items") do
@@ -74,13 +61,15 @@ RSpec.describe 'Merchant Index Show Page' do
       end
 
       it 'displays the quantity, sale price, and status for each item' do
-        within("##{gold_earrings.name}") do
-          expect(page).to have_content("Quantity: #{alainainvoice1_itemgold_earrings.quantity}")
-          expect(page).to have_content("Sale Price: #{alainainvoice1_itemgold_earrings.unit_price}")
-          expect(page).to have_content("Status: #{alainainvoice1_itemgold_earrings.status}")
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+
+        within("#item_#{gold_earrings.id}") do
+          expect(page).to have_content("Quantity: #{alainainvoice9_itemgold_earrings.quantity}")
+          expect(page).to have_content("Sale Price: #{alainainvoice9_itemgold_earrings.unit_price}")
+          expect(page).to have_content("Status: #{alainainvoice9_itemgold_earrings.status}")
         end
 
-        within("##{silver_necklace.name}") do
+        within("#item_#{silver_necklace.id}") do
           expect(page).to have_content("Quantity: #{alainainvoice1_itemsilver_necklace.quantity}")
           expect(page).to have_content("Sale Price: #{alainainvoice1_itemsilver_necklace.unit_price}")
           expect(page).to have_content("Status: #{alainainvoice1_itemsilver_necklace.status}")
@@ -89,3 +78,4 @@ RSpec.describe 'Merchant Index Show Page' do
     end
   end
 end
+

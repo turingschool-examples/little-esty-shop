@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
   let!(:gordy_inv4) { gordy.invoices.create!(status: "completed", created_at: "2012-05-25 14:54:09", updated_at: "2012-05-25 14:54:09") }
   let!(:transaction4) { gordy_inv4.transactions.create!(credit_card_number: "1935292921010120202", result: "success")}
   let!(:item_inv1) { InvoiceItem.create!}
-  
+
   let!(:item_inv1) { InvoiceItem.create!(invoice_id: gordy_inv1.id, item_id: rocker.id, quantity: 4, unit_price: 1300, status:"packaged" )}
   let!(:item_inv2) { InvoiceItem.create!(invoice_id: gordy_inv2.id, item_id: rocker.id, quantity: 4, unit_price: 1400, status:"packaged" )}
   let!(:item_inv3) { InvoiceItem.create!(invoice_id: gordy_inv3.id, item_id: rocker.id, quantity: 10, unit_price: 1600, status:"packaged" )}
@@ -48,6 +48,12 @@ RSpec.describe Item, type: :model do
      it 'description of method' do
       #expect statement here
      end
+    end
+
+    describe '#invoice_item(invoice)' do
+      it 'returns an InvoiceItem object given an invoice' do
+        expect(rocker.invoice_item(gordy_inv1)).to eq(item_inv1)
+      end
     end
 
     describe '#best_sales_date' do

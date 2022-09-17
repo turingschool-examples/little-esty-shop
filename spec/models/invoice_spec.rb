@@ -55,12 +55,35 @@ RSpec.describe Invoice, type: :model do
       let!(:whitneyinvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice1.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"packaged" )}
       let!(:whitneyinvoice2_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice2.id, item_id: silver_necklace.id, quantity: 31, unit_price: 270, status:"shipped" )}
       let!(:whitneyinvoice3_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice3.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
-     
+
      it 'can return the invoices where the merchant has at least one item on that invoice' do 
 
       expect(jewlery_city.find_relevant_invoices).to include(alaina_invoice1, alaina_invoice2, alaina_invoice3, whitney_invoice1, whitney_invoice2, whitney_invoice3)
       expect(jewlery_city.find_relevant_invoices).to_not include(alaina_invoice4)
      end
+    end
+
+    describe '#merchant_items' do
+      let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
+      let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
+
+      let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
+      let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 220000) }
+      let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
+
+      let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
+
+      let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
+
+      let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+      let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+      let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
+
+
+      it 'takes a merchant as an arg and returns an array of items from that merchant which appear on the invoice' do
+        expect(alaina_invoice1.merchant_items).to include(gold_earrings, silver_necklace)
+        expect(alaina_invoice1.merchant_items).to_not include(licorice)
+      end
     end
   end
 
