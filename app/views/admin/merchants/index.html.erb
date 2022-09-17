@@ -1,4 +1,14 @@
 <%= render partial: 'admin/header' %>
+
 <% @merchants.each do |merchant| %>
-<p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></p>
+<div id="merchant-<%= merchant.id %>" >
+  <p>
+  <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+  <% if merchant.active_status == "enabled" %>
+    <%= button_to "Disable", admin_merchant_path(merchant.id) , method: :patch, params: {active_status: :disable}%>
+  <% else %>
+    <%= button_to "Enable", admin_merchant_path(merchant.id) , method: :patch, params: {active_status: :enabled}%>
+  <% end %>
+  </p>
+</div>
 <% end %>

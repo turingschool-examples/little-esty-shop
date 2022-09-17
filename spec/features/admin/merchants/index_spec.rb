@@ -6,9 +6,9 @@ RSpec.describe "Admin Merchants" do
       before :each do
         @merchant_1 = Merchant.create!(name: "Johns Tools")
         @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
-        @merchant_3 = Merchant.create!(name: "Pretty Plumbing" active_status:"disabled")
+        @merchant_3 = Merchant.create!(name: "Pretty Plumbing", active_status: :disabled)
         @merchant_4 = Merchant.create!(name: "Jenna's Jewlery")
-        @merchant_5 = Merchant.create!(name: "Sassy Soap", active_status:"disabled")
+        @merchant_5 = Merchant.create!(name: "Sassy Soap", active_status: :disabled)
       end
   
       it 'can see the name of each merchant in the system' do
@@ -28,13 +28,16 @@ RSpec.describe "Admin Merchants" do
 
       it "Next to each merchant name I see a button to disable or enable that merchant." do
         visit admin_merchants_path
+        save_and_open_page
 
         within("#merchant-#{@merchant_1.id}") do
           expect(page).to have_button("Disable")
         end
+
         within("#merchant-#{@merchant_2.id}") do
           expect(page).to have_button("Disable")
         end
+
         within("#merchant-#{@merchant_3.id}") do
           expect(page).to have_button("Enable")
         end
