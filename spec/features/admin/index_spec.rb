@@ -181,21 +181,21 @@ RSpec.describe 'the admin dashboard' do
           invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 12, unit_price: 1365, status: 'packaged')
 
           visit admin_index_path
-          
-          expect('Monday, September 12, 2022').to appear_before('Thursday, September 15, 2022')
-          expect('Thursday, September 15, 2022').to appear_before('Friday, September 16, 2022')
-          expect('Thursday, September 15, 2022').to_not appear_before('Monday, September 12, 2022')
+
+          expect(invoice_5.created_at.strftime('%A, %B %d, %Y')).to appear_before(invoice_2.created_at.strftime('%A, %B %d, %Y'))
+          expect(invoice_2.created_at.strftime('%A, %B %d, %Y')).to appear_before(invoice_4.created_at.strftime('%A, %B %d, %Y'))
+          expect(invoice_4.created_at.strftime('%A, %B %d, %Y')).to_not appear_before(invoice_5.created_at.strftime('%A, %B %d, %Y'))
           
           within "#invoice-#{invoice_2.id}" do
-            expect(page).to have_content('Thursday, September 15, 2022')
+            expect(page).to have_content(invoice_2.created_at.strftime('%A, %B %d, %Y'))
           end
 
           within "#invoice-#{invoice_4.id}" do
-            expect(page).to have_content('Friday, September 16, 2022')
+            expect(page).to have_content(invoice_4.created_at.strftime('%A, %B %d, %Y'))
           end
 
           within "#invoice-#{invoice_5.id}" do
-            expect(page).to have_content('Monday, September 12, 2022')
+            expect(page).to have_content(invoice_5.created_at.strftime('%A, %B %d, %Y'))
           end
         end
       end
