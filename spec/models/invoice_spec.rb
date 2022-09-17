@@ -31,5 +31,17 @@ RSpec.describe Invoice, type: :model do
                                     status: :shipped)
       expect(invoice.total_revenue).to eq(42000)
     end
+
+    it '#incomplete' do
+      @invoice1 = create(:invoice)
+      create_list(:invoiceItem, 5, invoice_id: @invoice1.id, status: :shipped)
+      @invoice2 = create(:invoice)
+      create_list(:invoiceItem, 3, invoice_id: @invoice2.id, status: :pending)
+      create_list(:invoiceItem, 3, invoice_id: @invoice2.id, status: :shipped)
+      @invoice3 = create(:invoice)
+      create_list(:invoiceItem, 5, invoice_id: @invoice3.id, status: :packaged)
+
+      expect(Invoice.incomplete).to eq([@invoice2, @invoice3])
+    end
   end
 end

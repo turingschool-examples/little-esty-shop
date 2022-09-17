@@ -17,4 +17,11 @@ class Invoice < ApplicationRecord
     end
     revenue
   end
+
+  def self.incomplete
+    joins(:invoice_items)
+      .where(invoice_items: { status: [0, 1] })
+      .select('invoices.*')
+      .group(:id)
+  end
 end
