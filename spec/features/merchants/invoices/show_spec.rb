@@ -48,6 +48,7 @@ RSpec.describe 'Merchant Index Show Page' do
         within("#invoice_items") do
           expect(page).to have_content(silver_necklace.name)
           expect(page).to have_content(gold_earrings.name)
+        end
         expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
 
         within("#invoice_items") do
