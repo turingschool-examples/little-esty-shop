@@ -3,5 +3,6 @@
   <p> <%= @item.name %></p>
   <p> <%= @item.description %></p>
   <p> <%= @item.unit_price %></p>
-
 </div>
+
+<%= link_to "Update #{@item.name}", edit_merchant_item_path(@merchant, @item) %>

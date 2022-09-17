@@ -6,7 +6,6 @@ RSpec.describe 'Mechants Item Index' do
     @merchant_2 = create(:merchant)
     @items_1 = create_list(:item, 10, merchant: @merchant_1)
     @items_2 = create_list(:item, 10, merchant: @merchant_2)
-
   end
 
   # When I visit my merchant items index page ("merchants/merchant_id/items")
