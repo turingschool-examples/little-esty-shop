@@ -19,5 +19,5 @@
 </ul>
 
 <div id="total_invoice_revenue">
-<p>Total Revenue From This Invoice: $<%= @invoice.calculate_invoice_revenue.to_f.round(2) %></p>
+<p>Total Revenue From This Invoice: $<%= (@invoice.calculate_invoice_revenue / 100.to_f).round(2)%></p>
 </div>
