@@ -81,7 +81,6 @@ RSpec.describe 'Merchant Index Show Page' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
 
         within("#total_invoice_revenue") do
-          save_and_open_page
           expect(page).to have_content("Total Revenue From This Invoice: $#{(alaina_invoice1.calculate_invoice_revenue / 100.to_f).round(2)}")
         end
       end

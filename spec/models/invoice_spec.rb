@@ -103,7 +103,6 @@ RSpec.describe Invoice, type: :model do
       let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
       let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
 
-
       it 'takes a merchant as an arg and returns the total amount of revenue that invoice generated for that merchant' do
         expect(alaina_invoice1.calculate_invoice_revenue).to eq(15600)
       end
