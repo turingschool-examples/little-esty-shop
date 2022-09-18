@@ -53,13 +53,34 @@ RSpec.describe 'Merchant Dashboard Index' do
     transaction_5 = create(:transaction, invoice: invoice_5, result: :success)
 
     visit merchant_dashboard_index_path(@merchant.id)
-    
+
+    top_five_1 = @merchant.top_five_customers[0]
+    top_five_2 = @merchant.top_five_customers[1]
+    top_five_3 = @merchant.top_five_customers[2]
+    top_five_4 = @merchant.top_five_customers[3]
+    top_five_5 = @merchant.top_five_customers[4]
+
     within("div#favorite_customers") do
-      expect(page).to have_content("#{@merchant.top_five_customers[0].first_name} #{@merchant.top_five_customers[0].last_name}")
-      expect(page).to have_content("#{@merchant.top_five_customers[1].first_name} #{@merchant.top_five_customers[1].last_name}")
-      expect(page).to have_content("#{@merchant.top_five_customers[2].first_name} #{@merchant.top_five_customers[2].last_name}")
-      expect(page).to have_content("#{@merchant.top_five_customers[3].first_name} #{@merchant.top_five_customers[3].last_name}")
-      expect(page).to have_content("#{@merchant.top_five_customers[4].first_name} #{@merchant.top_five_customers[4].last_name}")
+      within("li#top_five_cust_#{top_five_1.id}") do
+        expect(page).to have_content("#{top_five_1.first_name} #{top_five_1.last_name}")
+        expect(page).to have_content("Successful Transactions: #{top_five_1.transaction_count}")
+      end
+      within("li#top_five_cust_#{top_five_2.id}") do
+        expect(page).to have_content("#{top_five_2.first_name} #{top_five_2.last_name}")
+        expect(page).to have_content("Successful Transactions: #{top_five_2.transaction_count}")
+      end
+      within("li#top_five_cust_#{top_five_3.id}") do
+        expect(page).to have_content("#{top_five_3.first_name} #{top_five_3.last_name}")
+        expect(page).to have_content("Successful Transactions: #{top_five_3.transaction_count}")
+      end
+      within("li#top_five_cust_#{top_five_4.id}") do
+        expect(page).to have_content("#{top_five_4.first_name} #{top_five_4.last_name}")
+        expect(page).to have_content("Successful Transactions: #{top_five_4.transaction_count}")
+      end
+      within("li#top_five_cust_#{top_five_5.id}") do
+        expect(page).to have_content("#{top_five_5.first_name} #{top_five_5.last_name}")
+        expect(page).to have_content("Successful Transactions: #{top_five_5.transaction_count}")
+      end
     end
   end
 end

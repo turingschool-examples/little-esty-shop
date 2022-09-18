@@ -8,7 +8,8 @@
     <ol class="favorite_customer_list">
       <% @top_five_customers.each do |customer| %>
         <li class="top_five_customer" id="top_five_cust_<%= customer.id %>">
-          <%= customer.first_name %> <%= customer.last_name %>
+          <%= customer.first_name %> <%= customer.last_name %><br>
+          Successful Transactions: <%= customer.transaction_count %>
         </li>
       <% end %>
     </ol>
