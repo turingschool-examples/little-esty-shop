@@ -11,8 +11,4 @@ class Customer < ApplicationRecord
   def self.top_customers
     Customer.select("customers.*", 'count(transactions)').joins(invoices: :transactions).where('transactions.result' => 1).order('count desc').group(:id).limit(5)
   end
-
-  def self.top_five_customers_admin
-    joins(:transactions).where('transactions.result = 1').group(:last_name, :first_name).order(count: :desc).limit(5).count
-  end
 end
