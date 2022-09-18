@@ -4,10 +4,11 @@ RSpec.describe 'Merchants Item Index' do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
-    @items_1 = create_list(:item, 10, merchant: @merchant_1)
-    @items_2 = create_list(:item, 10, merchant: @merchant_2)
-    @items_3 = create_list(:item, 2, merchant: @merchant_1, active_status: :disabled)
-    @items_4 = create_list(:item, 2, merchant: @merchant_2, active_status: :disabled)
+    
+    @items_1 = create_list(:item, 10, merchant: @merchant_1, active_status: :enabled)
+    @items_2 = create_list(:item, 10, merchant: @merchant_2, active_status: :enabled)
+    @items_3 = create_list(:item, 2, merchant: @merchant_1)
+    @items_4 = create_list(:item, 2, merchant: @merchant_2)
   end
 
   # When I visit my merchant items index page ("merchants/merchant_id/items")

@@ -9,8 +9,8 @@ RSpec.describe Item, type: :model do
 
   before :each do
     # @merchant_1 = create(:merchant)
-    @items_1 = create_list(:item, 3)
-    @items_2 = create_list(:item, 3, active_status: :disabled)
+    @items_1 = create_list(:item, 3, active_status: :enabled)
+    @items_2 = create_list(:item, 3)
   end
 
   describe "Class Methods" do
@@ -50,4 +50,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
