@@ -47,6 +47,43 @@ RSpec.describe "Admin Invoice Show Page" do
         end
       end
 
+      # Admin Invoice Show Page: Update Invoice Status
+
+# As an admin
+
+# I see the invoice status is a select field
+# And I see that the invoice's current status is selected
+
+# When I click this select field,
+# Then I can select a new status for the Invoice,
+# And next to the select field I see a button to "Update Invoice Status"
+
+# When I click this button
+# I am taken back to the admin invoice show page
+# And I see that my Invoice's status has now been updated
+
+      it "I see the invoice status is a select field And I see that the invoice's current status is selected" do
+        visit admin_invoice_path(@invoice_1)
+        # select 'Option', from: 'Select box'
+        expect(page).to have_select('Invoice Status', selected: "#{@invoice_1.status}", with_options: ["in progress", :completed, :cancelled])
+
+      end
+
+      it "When I click this select field, Then I can select a new status for the Invoice And next to the select field I see a button to 'Update Invoice Status'" do
+        visit admin_invoice_path(@invoice_1)
+        select 'In Progress', from: 'Invoice Status'
+        expect(page).to have_button("Update Invoice Status")
+      end
+
+      it "When I click 'Update Invoice Status' button I am taken back to the admin invoice show page And I see that my Invoice's status has now been updated" do
+        visit admin_invoice_path(@invoice_1)
+        select 'In Progress', from: 'Invoice Status'
+        click_button "Update Invoice Status"
+        expect(current_path).to eq(admin_invoice_path(@invoice_1))
+        expect(page).to have_content("In Progress")
+      end
+
+
     end
   end
 end
