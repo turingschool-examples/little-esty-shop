@@ -2,3 +2,14 @@
 
 <p><%= link_to "Merchants", admin_merchants_path %>
 <%= link_to "Invoices", admin_invoices_path %></p>
+
+<h2> Top Customers </h2>
+<ol>
+<% @top_five_cust.each do |customer| %>
+  <li class="customer"><%= customer.name %> - <%= customer.transaction_count %> purchases</li>
+<% end %>
+</ol>
+<h2> Incomplete Invoices </h2>
+<% @incomplete.each do |invoice| %>
+  <p class="incomplete"><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice.id) %> - <%= invoice.created_at.strftime("%A, %B %e, %Y")%></p>
+<% end %>
