@@ -8,7 +8,6 @@ RSpec.describe 'Merchants Item Index' do
     @items_2 = create_list(:item, 10, merchant: @merchant_2)
     @items_3 = create_list(:item, 2, merchant: @merchant_1, active_status: :disabled)
     @items_4 = create_list(:item, 2, merchant: @merchant_2, active_status: :disabled)
-
   end
 
   # When I visit my merchant items index page ("merchants/merchant_id/items")
@@ -18,7 +17,6 @@ RSpec.describe 'Merchants Item Index' do
     it 'I see a list of the names of all of my items' do
 
       visit merchant_items_path(@merchant_1)
-
 
       within("#item-#{@items_1[0].id}") do
         expect(page).to have_content("#{@items_1[0].name}")
@@ -32,7 +30,6 @@ RSpec.describe 'Merchants Item Index' do
 
     visit merchant_items_path(@merchant_2)
 
-
       within("#item-#{@items_2[0].id}") do
         expect(page).to have_content("#{@items_2[0].name}")
         expect(page).to_not have_content("#{@items_1[0].name}")
@@ -45,13 +42,12 @@ RSpec.describe 'Merchants Item Index' do
     end
   end
 
-
-#   As a merchant,
-# When I click on the name of an item from the merchant items index page,
-# Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
-# And I see all of the item's attributes including:
+  # As a merchant,
+  # When I click on the name of an item from the merchant items index page,
+  # Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
+  # And I see all of the item's attributes including:
   describe 'user story 7' do
-    it 'When I click on the name of an item I am taken to that merchant item show page' do
+    it 'When I click on the name of an item I am taken to that merchants item show page' do
 
       visit "/merchants/#{@merchant_1.id}/items"
 
@@ -85,7 +81,6 @@ RSpec.describe 'Merchants Item Index' do
       end
     end
   end
-
 
   # As a merchant
   # When I visit my items index page
@@ -134,7 +129,6 @@ RSpec.describe 'Merchants Item Index' do
         expect(current_path).to eq(merchant_items_path(@merchant_1))
     end
 
-
     it "I see the items status has changed" do
 
       visit merchant_items_path(@merchant_1)
@@ -154,10 +148,11 @@ RSpec.describe 'Merchants Item Index' do
       end
     end
   end
-#   As a merchant,
-# When I visit my merchant items index page
-# Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
-# And I see that each Item is listed in the appropriate section
+
+  # As a merchant,
+  # When I visit my merchant items index page
+  # Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
+  # And I see that each Item is listed in the appropriate section
   describe 'user story 10' do
     it 'Then I see two sections, one for Enabled Items and one for Disabled Items' do
 

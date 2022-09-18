@@ -22,14 +22,14 @@ RSpec.describe Item, type: :model do
       expect(Item.inactive).to eq([@items_2[0], @items_2[1], @items_2[2]])
     end
   end
-  
+
   describe 'instance methods' do
     before :each do
       @item_1 = create(:item)
       @item_2 = create(:item)
-      
+
       @invoice_1 = create(:invoice)
-      
+
       @invoice_item_1 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id)
       @invoice_item_2 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_2.id)
     end
