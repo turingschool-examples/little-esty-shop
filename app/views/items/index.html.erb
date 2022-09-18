@@ -2,6 +2,6 @@
 
 <ol>
     <% @merchant.items.each do |item| %>
-       <li><%= item.name %></li>
+       <li><%= link_to item.name ,"/merchants/#{@merchant.id}/items/#{item.id}" %></li>
     <% end %>
 </ol>
