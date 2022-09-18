@@ -21,18 +21,18 @@ RSpec.describe Item, type: :model do
 
     @invoice1 = create(:invoice, status: :completed)
     @invoice2 = create(:invoice, status: :completed)
-    @invoice3 = create(:invoice, status: :completed)
+    @invoice3 = create(:invoice, status: :completed, created_at: "Sun, 28 Aug 2022")
     @invoice4 = create(:invoice, status: :completed)
     @invoice5 = create(:invoice, status: :completed)
 
-    @inv_item1 = create(:invoice_item, invoice: @invoice1, item: @item3, quantity: 10, unit_price: 100, status: :packaged, created_at: "Sun, 28 Aug 2022")
+    @inv_item1 = create(:invoice_item, invoice: @invoice1, item: @item3, quantity: 10, unit_price: 100, status: :packaged)
     @inv_item2 = create(:invoice_item, invoice: @invoice2, item: @item4, quantity: 11, unit_price: 100, status: :packaged)
     @inv_item3 = create(:invoice_item, invoice: @invoice3, item: @item5, quantity: 12, unit_price: 100, status: :packaged)
     @inv_item4 = create(:invoice_item, invoice: @invoice4, item: @item6, quantity: 13, unit_price: 100, status: :packaged)
     @inv_item5 = create(:invoice_item, invoice: @invoice5, item: @item7, quantity: 14, unit_price: 100, status: :packaged)
     @inv_item6 = create(:invoice_item, invoice: @invoice1, item: @item8, quantity: 15, unit_price: 100, status: :packaged)
     @inv_item7 = create(:invoice_item, invoice: @invoice2, item: @item9, quantity: 16, unit_price: 100, status: :packaged)
-    @inv_item8 = create(:invoice_item, invoice: @invoice3, item: @item3, quantity: 10, unit_price: 100, status: :packaged)
+    @inv_item8 = create(:invoice_item, invoice: @invoice3, item: @item3, quantity: 10, unit_price: 200, status: :packaged)
     @inv_item9 = create(:invoice_item, invoice: @invoice4, item: @item4, quantity: 11, unit_price: 100, status: :packaged)
     @inv_item10 = create(:invoice_item, invoice: @invoice5, item: @item5, quantity: 12, unit_price: 100, status: :packaged)
 
@@ -49,8 +49,9 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'instance methods' do
-    it '.top_five_date' do
-      expect(@item3.top_five_date).to eq(@inv_item8.invoice.created_at)
+    it '.top_revenue_date' do
+      # binding.pry
+      expect(@item3.top_revenue_date).to eq(@invoice3.created_at)
     end
   end
 end
