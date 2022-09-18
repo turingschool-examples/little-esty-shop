@@ -3,6 +3,7 @@ class MerchantItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items
+    @top_five = @merchant.top_five_revenue
   end
 
   def show
@@ -34,7 +35,7 @@ class MerchantItemsController < ApplicationController
   end
 
   def create
-    params[:unit_price] = (params[:unit_price].to_f*100).to_i
+    params[:unit_price] = (params[:unit_price].to_f * 100).to_i
     Item.create!(item_params)
     redirect_to merchant_items_path(params[:merchant_id])
   end

@@ -32,3 +32,16 @@
   <% end %>
 </ul>
 </section>
+
+<section id="top_items">
+<h3>Top Items by Revenue</h3>
+<ol>
+  <% @top_five.each do |item| %>
+    <div id="rev_item_<%= item.id %>">
+      <li><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %> 
+          <%rev = item.item_revenue %>
+          <%= price_convert(rev) %>
+      </li>
+    </div>
+  <% end %>
+</ol>
