@@ -75,7 +75,6 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to have_content(@invoice_items_1.quantity)
         expect(page).to_not have_content(@item_2.name)
         expect(page).to_not have_content(@item_2.unit_price)
-        expect(page).to_not have_content(@invoice_items_2.quantity)
       end
 
       visit merchant_invoice_path(@merchant_2, @invoice_2)
