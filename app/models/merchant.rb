@@ -26,5 +26,7 @@ class Merchant < ApplicationRecord
         item.price_sold(invoice.id) * item.quantity_purchased(invoice.id)
       end  
     end 
+    # Possible AR method for above code:
+    # invoice.joins(:transactions).where(transactions: { result: :success }).count
   end  
 end
