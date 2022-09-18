@@ -10,9 +10,8 @@ class Merchant < ApplicationRecord
 
 
   def ready_to_ship
-    items.select("items.*, invoice_items.status as not_shipped").joins(:invoice_items).where.not("invoice_items.status = ?", 2)
+    items.select("items.*, invoice_items.status as not_shipped, invoices.created_at as created_at").joins( invoices: :invoice_items).where.not("invoice_items.status = ?", 2)
   end
-
   def self.top_5_revenue
    select('merchants.name, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:invoice_items).group(:id).order('revenue desc').limit(5)
   end

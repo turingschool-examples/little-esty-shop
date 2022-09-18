@@ -3,4 +3,8 @@ class ItemsController < ApplicationController
     @items = Item.all
     @merchant = Merchant.find(params[:id])
   end
+
+  def show
+    @item = Item.find(params[:id])
+  end
 end
