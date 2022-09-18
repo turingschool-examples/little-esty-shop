@@ -15,9 +15,7 @@ RSpec.describe "Admin Invoice Show Page" do
         @invoice_4 = create(:invoice)
 
         @items_1.each { |item| create(:invoice_items, invoice_id: @invoice_1.id, item_id: item.id) }
-        # @items_2.each { |item|  @invoice_2.items << item }
-        # @items_3.each { |item|  @invoice_3.items << item }
-        # @items_4.each { |item|  @invoice_4.items << item }
+        @items_2.each { |item| create(:invoice_items, invoice_id: @invoice_2.id, item_id: item.id) }
       end
 
       it 'I see information related to that invoice including: id, status, created_at date (format "Monday, July 18, 2019") and Customer First+Last name' do
@@ -43,6 +41,8 @@ RSpec.describe "Admin Invoice Show Page" do
             expect(page).to have_content(item.quantity_purchased(@invoice_1.id))
             expect(page).to have_content((item.price_sold(@invoice_1.id))/100)
             expect(page).to have_content(item.shipping_status(@invoice_1.id).capitalize)
+
+            expect(page).to_not have_content(@invoice_2.items.any?{|item| item.name})
           end
         end
       end
