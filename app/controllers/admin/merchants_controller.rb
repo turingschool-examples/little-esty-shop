@@ -7,6 +7,21 @@ class Admin::MerchantsController < ApplicationController
     @top_5_merchants = Merchant.top_5_revenue
   end
 
+  def new
+  end
+
+  def create
+    merchant = Merchant.new(merchant_params)
+
+    if merchant.save
+      redirect_to admin_merchants_path
+      flash[:alert] = "Creation successful"
+    else
+      redirect_to new_admin_merchant_path
+      flash[:alert] = "Error: #{error_message(shelter.errors)}"
+    end
+  end
+
   def show
     @merchant = Merchant.find(params[:id])
   end
@@ -25,4 +40,9 @@ class Admin::MerchantsController < ApplicationController
       redirect_to admin_merchants_path
     end
   end
+
+  def merchant_params
+    params.permit(:id, :name)
+  end
+
 end
