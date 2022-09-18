@@ -1,9 +1,8 @@
-<h1>Invoice for: <%= @invoice.merchant.name %> </h1>
+<h1>Invoice <%= @invoice.id %> Information </h1>
 
 <ul>
-    <% @merchant.invoices.distinct.each do |invoice| %>
-        <li>Invoice: <%= invoice.id %></li>
-        <li>Status: <%= invoice.status %></li>
-        <li>Created: <%= invoice.created_at %></li>
-    <% end %>
+    <li>Invoice: <%= @invoice.id %></li>
+    <li>Status: <%= @invoice.status %></li>
+    <li>Created: <%= @invoice.created_at %></li>
+
 </ul>
