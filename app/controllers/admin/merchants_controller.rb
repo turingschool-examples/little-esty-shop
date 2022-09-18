@@ -14,10 +14,20 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
-    @merchant.update(name: params[:name])
-    @merchant.save
-    redirect_to "/admin/merchants/#{@merchant.id}"
-    flash[:success] = "You updated Merchant"
+    if params[:button] == 'disabled'
+      @merchant.update(status: 'Disabled')
+      @merchant.save
+      redirect_to "/admin/merchants"
+    elsif params[:button] == 'enabled'
+      @merchant.update(status: 'Enabled')
+      @merchant.save
+      redirect_to "/admin/merchants/"
+    elsif params[:button] == nil
+      @merchant.update(name: params[:name])
+      @merchant.save
+      redirect_to "/admin/merchants/#{@merchant.id}"
+      flash[:success] = "You updated Merchant"
+    end
   end
 
 end

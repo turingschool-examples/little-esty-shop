@@ -4,7 +4,16 @@
   <div class="merchant_<%=merchant.id%>">
 
     <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-    <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %></p>
+
+<%= "#{merchant.status}" %>
+
+    <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %>
+    <% if merchant.status == 'Enabled' %>
+      <%= button_to "Disable", "/admin/merchants/#{merchant.id}/update?button=disabled", local: true, method: :patch %>
+    <% else %>
+      <%= button_to "Enable", "/admin/merchants/#{merchant.id}/update?button=enabled", local: true, method: :patch %>
+    <% end %>
+  </p>
 
   </div>
 <% end %>

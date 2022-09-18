@@ -7,14 +7,14 @@ RSpec.describe 'admin merchant index page' do
     @merchant2 = Merchant.create(name: "BFranklin")
   end
 
-  it 'can display names of all merchants' do
+  xit 'can display names of all merchants' do
     visit '/admin/merchants'
 
     expect(page).to have_content("Robespierre")
     expect(page).to have_content("BFranklin")
   end
 
-  it 'can click on merchant name and be redirected to that merchants show page' do
+  xit 'can click on merchant name and be redirected to that merchants show page' do
     visit '/admin/merchants'
       click_on 'Robespierre'
 
@@ -22,56 +22,60 @@ RSpec.describe 'admin merchant index page' do
   end
 
   it 'can disable a merchant' do
-  visit '/admin/merchants'
+    visit '/admin/merchants'
 
-  within(".merchant_#{@merchant2.id}") do
-    click_on 'Disable'
+    within(".merchant_#{@merchant2.id}") do
+      click_on 'Disable'
+    end
+
+    expect(current_path).to eq("/admin/merchants")
+
+    expect(page).to have_button("Enable")
+
   end
 
-  expect(current_path).to eq("/admin/merchants")
+  it 'can enable a merchant' do
+    visit '/admin/merchants'
 
-  expect(@merchant2.status).to eq("Disabled")
-end
+    within(".merchant_#{@merchant2.id}") do
+      click_on 'Disable'
+    end
 
-xit 'can enable ' do
-  visit '/admin/merchants'
+    within(".merchant_#{@merchant2.id}") do
+      click_on 'Enable'
+    end
 
-  within(".merchant_#{@merchant2.id}") do
-    click_on 'Disable'
+    within(".merchant_#{@merchant2.id}") do
+      expect(page).to have_button("Disable")
+    end
   end
 
-  within(".merchant_#{@merchant2.id}") do
-    click_on 'Enable'
+  xit 'can move them to the appropraite section of the page after disabling' do
+    visit '/admin/merchants'
+
+    within(".merchant_#{@merchant2.id}") do
+      click_on 'Disable'
+    end
+    expect(current_path).to eq("/admin/merchants")
+
+    within(".merchants_disabled") do
+      expect(page).to have_content("#{@merchant2.name}")
+    end
   end
 
-  expect(@merchant2.status).to have_content("Enabled}")
-end
+  xit 'can move them to the appropraite section of the page after enabling' do
+    visit '/admin/merchants'
 
-xit 'can move them to the appropraite section of the page after disabling' do
-  visit '/admin/merchants'
+    within(".merchant_#{@merchant2.id}") do
+      click_on 'Disable'
+    end
 
-  within(".merchant_#{@merchant2.id}") do
-    click_on 'Disable'
-  end
-  expect(current_path).to eq("/admin/merchants")
+    within(".merchant_#{@merchant2.id}") do
+      click_on 'Enable'
+    end
 
-  within(".merchants_disabled") do
-    expect(page).to have_content("#{@merchant2.name}")
-  end
-end
-
-xit 'can move them to the appropraite section of the page after enabling' do
-  visit '/admin/merchants'
-
-  within(".merchant_#{@merchant2.id}") do
-    click_on 'Disable'
-  end
-
-  within(".merchant_#{@merchant2.id}") do
-    click_on 'Enable'
-  end
-
-  within(".merchants_enabled") do
-    expect(page).to have_content("#{@merchant2.name}")
+    within(".merchants_enabled") do
+      expect(page).to have_content("#{@merchant2.name}")
+    end
   end
 end
