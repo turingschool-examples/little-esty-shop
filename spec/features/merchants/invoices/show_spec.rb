@@ -38,5 +38,58 @@ RSpec.describe "the merchant invoices show"  do
             visit "/merchants/#{merchant1.id}/invoices/#{invoice_1.id}"
             expect(page).to have_content("Customer: #{customer1.first_name} #{customer1.last_name}")
         end
+
+        describe 'I can see the item information within that invoice' do
+            it 'can display the item name' do
+                merchant1 = Merchant.create!(name: "Bob")
+                merchant2 = Merchant.create!(name: "Mark")
+                customer1 = Customer.create!(first_name: "Jolene", last_name: "Jones")
+                invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
+                item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
+                item2 = merchant1.items.create!(name: "item2", description: "this is item2 description", unit_price: 2)
+                item3 = merchant1.items.create!(name: "item3", description: "this is item3 description", unit_price: 3)
+                item4 = merchant2.items.create!(name: "item4", description: "this is item4 description", unit_price: 3)
+
+                visit "/merchants/#{merchant1.id}/invoices/#{invoice_1.id}"
+                expect(page).to have_content("#{item1.name}")
+                expect(page).to have_content("#{item2.name}")
+                expect(page).to have_content("#{item3.name}")
+                expect(page).to_not have_content("#{item4.name}")
+            end
+
+            it 'can display the price that item sold for' do
+                merchant1 = Merchant.create!(name: "Bob")
+                merchant2 = Merchant.create!(name: "Mark")
+                customer1 = Customer.create!(first_name: "Jolene", last_name: "Jones")
+                invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
+                item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
+                item2 = merchant1.items.create!(name: "item2", description: "this is item2 description", unit_price: 2)
+                item3 = merchant1.items.create!(name: "item3", description: "this is item3 description", unit_price: 3)
+                item4 = merchant2.items.create!(name: "item4", description: "this is item4 description", unit_price: 3)
+
+                visit "/merchants/#{merchant1.id}/invoices/#{invoice_1.id}"
+                expect(page).to have_content("#{item1.unit_price}")
+                expect(page).to have_content("#{item2.unit_price}")
+                expect(page).to have_content("#{item3.unit_price}")
+                expect(page).to_not have_content("#{item4.unit_price}")
+            end
+
+            it 'can display the invoice item status' do
+                merchant1 = Merchant.create!(name: "Bob")
+                merchant2 = Merchant.create!(name: "Mark")
+                customer1 = Customer.create!(first_name: "Jolene", last_name: "Jones")
+                invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
+                item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
+                item2 = merchant1.items.create!(name: "item2", description: "this is item2 description", unit_price: 2)
+                item3 = merchant1.items.create!(name: "item3", description: "this is item3 description", unit_price: 3)
+                item4 = merchant2.items.create!(name: "item4", description: "this is item4 description", unit_price: 3)
+
+                visit "/merchants/#{merchant1.id}/invoices/#{invoice_1.id}"
+                expect(page).to have_content("#{item1.status}")
+                expect(page).to have_content("#{item2.status}")
+                expect(page).to have_content("#{item3.status}")
+                expect(page).to_not have_content("#{item4.status}")
+            end
+        end
     end
 end
