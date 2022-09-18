@@ -42,6 +42,7 @@
           <%rev = item.item_revenue %>
           <%= price_convert(rev) %>
       </li>
+          <p>Top selling date for <%= item.name %> was <%= item.top_five_date.strftime("%A, %B %-d, %Y") %></p>
     </div>
   <% end %>
 </ol>

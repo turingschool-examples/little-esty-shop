@@ -155,10 +155,10 @@ RSpec.describe Merchant, type: :model do
 
           invoice_24.items << item_2
           invoice_25.items << item_2
-          
+
           transaction_25 = create(:transaction, invoice: invoice_24, result: :success)
           transaction_26 = create(:transaction, invoice: invoice_25, result: :success)
-          
+
           expect(@merchant_1.top_five_customers).to eq([@customer_4, @customer_6, @customer_5, @customer_7, @customer_8])
         end
       end

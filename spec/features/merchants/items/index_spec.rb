@@ -16,9 +16,9 @@ RSpec.describe 'Merchant Items Index Page: ' do
     @item8 = create(:item, merchant: @merch2, unit_price: 500)
     @item9 = create(:item, merchant: @merch2, unit_price: 500)
 
-    @invoice1 = create(:invoice, status: :completed)
-    @invoice2 = create(:invoice, status: :completed)
-    @invoice3 = create(:invoice, status: :completed)
+    @invoice1 = create(:invoice, status: :completed, created_at: "Sun, 28 Aug 2022")
+    @invoice2 = create(:invoice, status: :completed, created_at: "Mon, 29 Aug 2022")
+    @invoice3 = create(:invoice, status: :completed, created_at: "Tues, 30 Aug 2022")
     @invoice4 = create(:invoice, status: :completed)
     @invoice5 = create(:invoice, status: :completed)
 
@@ -42,7 +42,6 @@ RSpec.describe 'Merchant Items Index Page: ' do
     @tranaction7 = create(:transaction, invoice_id: @invoice2.id, result: :failed)
     @tranaction8 = create(:transaction, invoice_id: @invoice3.id, result: :failed)
     @tranaction9 = create(:transaction, invoice_id: @invoice4.id, result: :failed)
-    @tranaction10 = create(:transaction, invoice_id: @invoice5.id, result: :failed)
   end
 
   describe 'As a Merchant' do
@@ -249,23 +248,23 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
           within("#top_items") do
             within("#rev_item_#{@item3.id}") do
-              expect(page).to have_content("date")
+              expect(page).to have_content("#{@invoice3.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item8.id}") do
-              expect(page).to have_content("date")
+              expect(page).to have_content("#{@invoice1.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item5.id}") do
-              expect(page).to have_content("date")
+              expect(page).to have_content("#{@invoice5.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item7.id}") do
-              expect(page).to have_content("date")
+              expect(page).to have_content("#{@invoice5.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item6.id}") do
-              expect(page).to have_content("date")
+              expect(page).to have_content("#{@invoice4.created_at.strftime("%A, %B %-d, %Y")}")
             end
           end
         end
@@ -275,23 +274,23 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
           within("#top_items") do
             within("#rev_item_#{@item3.id}") do
-              expect(page).to have_content("Top selling date for was ")
+              expect(page).to have_content("Top selling date for #{@item3.name} was #{@invoice3.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item8.id}") do
-              expect(page).to have_content("Top selling date for was ")
+              expect(page).to have_content("Top selling date for #{@item8.name} was #{@invoice1.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item5.id}") do
-              expect(page).to have_content("Top selling date for was ")
+              expect(page).to have_content("Top selling date for #{@item5.name} was #{@invoice5.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item7.id}") do
-              expect(page).to have_content("Top selling date for was ")
+              expect(page).to have_content("Top selling date for #{@item7.name} was #{@invoice5.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item6.id}") do
-              expect(page).to have_content("$13.00")
+              expect(page).to have_content("Top selling date for #{@item6.name} was #{@invoice4.created_at.strftime("%A, %B %-d, %Y")}")
             end
           end
         end
