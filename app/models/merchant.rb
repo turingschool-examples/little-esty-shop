@@ -20,17 +20,11 @@ class Merchant < ApplicationRecord
     invoices.group(:id).distinct
   end
 
-  # def total_revenue
-  #   require "pry"; binding.pry
-  #   items.sum { |item| item.invoices.sum { |invoice| item.price_sold(invoice.id)}}
-  # end
-
   def total_revenue
     items.sum do |item|
-      item.invoice_successful_trans.sum do |invoice| 
-        item.price_sold(invoice.id) 
+      item.invoices.invoice_successful_trans.sum do |invoice| 
+        item.price_sold(invoice.id) * item.quantity_purchased(invoice.id)
       end  
-    end
-
+    end 
   end  
 end

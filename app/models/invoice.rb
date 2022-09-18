@@ -10,10 +10,14 @@ class Invoice < ApplicationRecord
     joins(:invoice_items).where.not(invoice_items: {status: 2})
   end
 
-  def self.successful_transactions#_count
+  def self.successful_transactions_count
     sum do |invoice| 
       invoice.transactions.where(result: 0).count
     end
+  end
+
+  def self.invoice_successful_trans 
+    joins(:transactions).where(transactions: {result: :success}).distinct
   end
 
   def self.sort_by_date
