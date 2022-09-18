@@ -2,6 +2,9 @@ class Admin::MerchantsController < ApplicationController
 
   def index
     @merchants = Merchant.all
+    @merchants_enabled = Merchant.enabled_merchants
+    @merchants_disabled = Merchant.disabled_merchants
+    # require "pry"; binding.pry
   end
 
   def show
@@ -29,5 +32,7 @@ class Admin::MerchantsController < ApplicationController
       flash[:success] = "You updated Merchant"
     end
   end
+
+  
 
 end

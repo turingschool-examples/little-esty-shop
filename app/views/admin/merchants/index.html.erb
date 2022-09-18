@@ -1,19 +1,41 @@
 <h1>Merchants</h1>
+<div class="merchants_enabled">
+  <h2> Enabled Merchants </h2>
+  <% if @merchants_enabled %>
+    <% @merchants_enabled.each do |merchant| %>
+      <div class="merchant_<%=merchant.id%>">
 
-<% @merchants.each do |merchant| %>
-  <div class="merchant_<%=merchant.id%>">
+        <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
 
-    <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-
-<%= "#{merchant.status}" %>
-
-    <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %>
-    <% if merchant.status == 'Enabled' %>
-      <%= button_to "Disable", "/admin/merchants/#{merchant.id}/update?button=disabled", local: true, method: :patch %>
-    <% else %>
-      <%= button_to "Enable", "/admin/merchants/#{merchant.id}/update?button=enabled", local: true, method: :patch %>
+        <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %>
+        <% if merchant.status == 'Enabled' %>
+          <%= button_to "Disable", "/admin/merchants/#{merchant.id}/update?button=disabled", local: true, method: :patch %>
+        <% else %>
+          <%= button_to "Enable", "/admin/merchants/#{merchant.id}/update?button=enabled", local: true, method: :patch %>
+        <% end %>
+        </p>
+      </div>
     <% end %>
-  </p>
+  <% end %>
+</div>
 
-  </div>
-<% end %>
+
+<div class="merchants_disabled">
+  <h2> Disabled Merchants </h2>
+    <% if @merchants_disabled %>
+      <% @merchants_disabled.each do |merchant| %>
+        <div class="merchant_<%=merchant.id%>">
+
+          <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+
+          <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %>
+          <% if merchant.status == 'Enabled' %>
+            <%= button_to "Disable", "/admin/merchants/#{merchant.id}/update?button=disabled", local: true, method: :patch %>
+          <% else %>
+            <%= button_to "Enable", "/admin/merchants/#{merchant.id}/update?button=enabled", local: true, method: :patch %>
+          <% end %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+</div>
