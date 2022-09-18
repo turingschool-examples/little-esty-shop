@@ -103,7 +103,7 @@ RSpec.describe 'admin merchant index page' do
 
     click_button 'Add Merchant'
 
-    expect(current_path).to eq('admin/merchants/new')
+    expect(current_path).to eq('/admin/merchants/new')
   end
 
 end

@@ -1,4 +1,7 @@
 <h1>Merchants</h1>
+
+<%= button_to "Add Merchant", "/admin/merchants/new", local: true, method: :get %>
+
 <div class="merchants_enabled">
   <h2> Enabled Merchants </h2>
   <% if @merchants_enabled %>
