@@ -101,7 +101,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
   # I am taken back to the merchant invoice show page
   # And I see that my Item's status has now been updated
 
-  describe 'When I visit my merchant invoice show page' do
+  describe 'User Story 18 When I visit my merchant invoice show page' do
     it 'I see that each invoice item status is a select field' do
       visit  merchant_invoice_path(@merchant_1, @invoice_1)
 
@@ -118,20 +118,26 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     it 'When I click this select field, select a new status, click button I am taken back to merchant invoice show page' do
       visit  merchant_invoice_path(@merchant_1, @invoice_1)
-
+      
       select "Shipped", from: "invoice[status]"
 
       click_button "Update Item Status"
-
+      
       expect(current_path).to eq( merchant_invoice_path(@merchant_1, @invoice_1))
+      within "#invoice-items-info" do
+        expect(page).to have_content("Shipped")
+      end
 
       visit  merchant_invoice_path(@merchant_2, @invoice_2)
-
-      select "Shipped", from: "invoice[status]"
+      
+      select "Packaged", from: "invoice[status]"
 
       click_button "Update Item Status"
-
+      
       expect(current_path).to eq( merchant_invoice_path(@merchant_2, @invoice_2))
+      within "#invoice-items-info" do
+        expect(page).to have_content("Packaged")
+      end
     end
   end
 end

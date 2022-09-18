@@ -1,18 +1,25 @@
 <h2>Invoice Id: <%= @invoice.id %> Show Page </h2>
 
 <div id="invoice-info">
-  <p><%= @invoice.id %></p>
-  <p><%= @invoice.status %></p>
-  <p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-  <p><%= @invoice.customer.first_name %></p>
-  <p><%= @invoice.customer.last_name %></p>
+  <p>Invoice Id: <%= @invoice.id %></p>
+  <p>Invoice Status: <%= @invoice.status %></p>
+  <p>Invoice Created: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+  <p>Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+</div>
 
 <div id="invoice-items-info">
   <% @invoice.items.each do |item| %>
-    <p><%= item.name %></p>
-    <p><%= item.unit_price %></p>
-    <p><%= item.quantity_purchased(@invoice.id) %></p>
-    <p><%= item.shipping_status(@invoice.id) %></p>
+    <p>Item Name: <%= item.name %></p>
+    <p>Item Price: <%= item.unit_price %></p>
+    <p>Item Quantity: <%= item.quantity_purchased(@invoice.id) %></p>
+    <p>Item Shipping Status: <%= item.shipping_status(@invoice.id) %>  </p>
+    <%= form_with model: [@merchant, @invoice], local: true do |form| %>
+      <%= form.label :item_id %>
+      <%= form.hidden_field :item_id, value: "#{item.id}" %>
+      <%= form.label :status, "Invoice Item Status: " %>
+      <%= form.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]], selected: "#{item.shipping_status(@invoice.id)}" %>
+      <%= form.submit "Update Item Status" %>
+    <% end %>
   <% end %>
 </div>
 
