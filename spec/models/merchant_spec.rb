@@ -217,15 +217,16 @@ RSpec.describe Merchant, type: :model do
   describe '.inv_items_ready_to_ship' do
     it 'returns a list of invoice items that are not yet shipped' do
       merchant = create(:merchant)
-      items = create_list(:item, 5, merchant: merchant)
-      invoice = create(:invoice)
-      inv_item_1 = create(:invoice_item, item: items[0], invoice: invoice, status: :packaged)
-      inv_item_2 = create(:invoice_item, item: items[4], invoice: invoice, status: :pending)
-      inv_item_3 = create(:invoice_item, item: items[3], invoice: invoice, status: :shipped)
-      inv_item_4 = create(:invoice_item, item: items[1], invoice: invoice, status: :packaged)
-      inv_item_5 = create(:invoice_item, item: items[2], invoice: invoice, status: :shipped)
-      
-      expect(merchant.inv_items_ready_to_ship).to match_array([inv_item_1, inv_item_2, inv_item_4])
+      items = create_list(:item, 6, merchant: merchant)
+      invoices = create_list(:invoice, 2)
+      inv_item_1 = create(:invoice_item, item: items[0], invoice: invoices[0], status: :packaged)
+      inv_item_2 = create(:invoice_item, item: items[4], invoice: invoices[0], status: :pending)
+      inv_item_3 = create(:invoice_item, item: items[3], invoice: invoices[0], status: :shipped)
+      inv_item_4 = create(:invoice_item, item: items[1], invoice: invoices[0], status: :packaged)
+      inv_item_5 = create(:invoice_item, item: items[2], invoice: invoices[0], status: :shipped)
+      inv_item_5 = create(:invoice_item, item: items[5], invoice: invoices[1], status: :pending)
+
+      expect(merchant.inv_items_ready_to_ship).to match_array([inv_item_1, inv_item_2, inv_item_4, inv_item_5])
     end
   end
 end
