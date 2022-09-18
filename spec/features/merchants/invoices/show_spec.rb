@@ -44,9 +44,10 @@ RSpec.describe 'Merchant Invoice Show Page', type: :feature do
       expect(page).to have_content("#{price_convert(@inv_item_2.unit_price)}")
       expect(page).to have_content(@inv_item_2.status.titleize)
     end
-
-    expect(page).to_not have_content(@item_3.name)
-    expect(page).to_not have_content(@inv_item_3.quantity)
+    within("table#merchant_invoice_items") do
+      expect(page).to_not have_content(@item_3.name)
+      expect(page).to_not have_content(@inv_item_3.quantity)
+    end
   end
 
   it 'each invoice item has status dropdown with update button' do
