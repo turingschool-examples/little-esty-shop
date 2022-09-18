@@ -25,8 +25,8 @@ RSpec.describe "the merchant invoices show"  do
             merchant1 = Merchant.create!(name: "Bob")
             customer1 = Customer.create!(first_name: "Jolene", last_name: "Jones")
             invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
-
             visit "/merchants/#{merchant1.id}/invoices/#{invoice_1.id}"
+            save_and_open_page
             expect(page).to have_content("Created: Sunday, September 18, 2022")
         end
 
