@@ -3,7 +3,12 @@
 
 <div id="invoice-details-<%= @invoice.id %>">
   <p>Invoice #<%= @invoice.id %></p>
-  <p>Status: <%= @invoice.status %> </p>
+  <p><%= form_with model: [:admin, @invoice], local: true do |form| %>
+    <%= form.label :status, "Invoice Status:"%>
+    <%= form.select :status, [["In Progress", "in progress"],["Completed", :completed],["Cancelled", :cancelled]], selected: "#{@invoice.status}" %>
+    <%= form.submit "Update Invoice" %>
+  <% end %></p>
+    
   <p>Created On: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
   <p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p> 
 </div>
