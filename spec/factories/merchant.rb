@@ -27,4 +27,11 @@ FactoryBot.define do
     association :invoice, factory: :invoice
     association :item, factory: :item
   end
+
+  factory :transaction, class: Transaction do
+    credit_card_number {Faker::Number.number(digits: 16)}
+    credit_card_expiration_date {""}
+    result {Faker::Number.within(range: 0..1)}
+    association :invoice, factory: :invoice
+    end
 end

@@ -85,4 +85,27 @@ RSpec.describe 'Merchant Invoice Index' do
       end
     end
   end
+
+  # As a merchant
+  # When I visit my items index page
+  # Then I see the names of the top 5 most popular items ranked by total revenue generated
+  # And I see that each item name links to my merchant item show page for that item
+  # And I see the total revenue generated next to each item name
+
+  # Notes on Revenue Calculation:
+
+  # Only invoices with at least one successful transaction should count towards revenue
+  # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+  # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+
+  describe 'User Story 12 - When I visit my items index page' do
+    it 'Then I see the names of the top 5 most popular items ranked by total revenue generated' do
+      
+    end
+
+    it 'And I see that each item name links to my merchant item show page for that item'
+
+    it 'And I see the total revenue generated next to each item name'
+
+  end
 end
