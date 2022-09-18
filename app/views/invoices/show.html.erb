@@ -1,4 +1,4 @@
-<h1>Invoice for: <%= @merchant.name %> </h1>
+<h1>Invoice for: <%= @invoice.merchant.name %> </h1>
 
 <ul>
     <% @merchant.invoices.distinct.each do |invoice| %>
