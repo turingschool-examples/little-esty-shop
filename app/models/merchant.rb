@@ -15,4 +15,8 @@ class Merchant < ApplicationRecord
   def self.inactive
     where(active_status: :disabled)
   end
+
+  def invoices_distinct_by_merchant
+    invoices.group(:id).distinct
+  end
 end
