@@ -126,6 +126,11 @@ RSpec.describe Merchant, type: :model do
         end
         it 'returns the top 5 customers by successful transactions with the merchant' do
           expect(@merchant_1.top_five_customers).to eq([@customer_4, @customer_6, @customer_5, @customer_7, @customer_8])
+          expect(@merchant_1.top_five_customers[0].transaction_count).to eq(6)
+          expect(@merchant_1.top_five_customers[1].transaction_count).to eq(5)
+          expect(@merchant_1.top_five_customers[2].transaction_count).to eq(4)
+          expect(@merchant_1.top_five_customers[3].transaction_count).to eq(3)
+          expect(@merchant_1.top_five_customers[4].transaction_count).to eq(2)
         end
 
         it 'doesnt count failed trasnactions' do
