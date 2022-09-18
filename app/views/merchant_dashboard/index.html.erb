@@ -1,1 +1,17 @@
 <%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
+<div id="dashboard_body">
+  <div class="dashboard_column" id="items_ready">
+    <h2 class="subtitle">Items Ready to Ship</h2>
+  </div>
+  <div class="dashboard_column" id="favorite_customers">
+    <h2 class="subtitle">Favorite Customers</h2>
+    <ol class="favorite_customer_list">
+      <% @top_five_customers.each do |customer| %>
+        <li class="top_five_customer" id="top_five_cust_<%= customer.id %>">
+          <%= customer.first_name %> <%= customer.last_name %><br>
+          Successful Transactions: <%= customer.transaction_count %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>
