@@ -48,4 +48,10 @@ RSpec.describe 'Merchant Items Index' do
         end
       expect(current_path).to eq("/merchant/#{@merchant_2.id}/items")
     end
+
+    it 'has link to create a new item' do
+        visit "/merchant/#{@merchant_2.id}/items"
+        click_link "New Item"
+        expect(current_path).to eq("/merchant/#{@merchant_2.id}/items/new")
+    end
 end
