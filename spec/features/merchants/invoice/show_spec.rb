@@ -33,4 +33,49 @@ RSpec.describe 'Merchant Invoice Show Page' do
       end
     end
   end
+
+  describe 'Merchant Invoice Show Page: Invoice Item Information' do
+    describe 'When I visit my merchant invoice show page' do
+      it 'Then I see all of my items on  invoice including: item name, qty of the item ordered, price item sold for, the Invoice Item status' do
+
+        steph_merchant = Merchant.create!(name: "Stephen's shop")
+        kev_merchant = Merchant.create!(name: "Kevin's shop")
+
+        customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+
+        item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+        item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+        item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: kev_merchant.id) 
+
+        invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+        invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+        invoice3 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+
+        invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "packaged", item_id: item1.id, invoice_id: invoice1.id)
+        invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
+        invoice_item3 = InvoiceItem.create!(quantity:90, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice3.id)
+
+        visit merchant_invoice_path(steph_merchant, invoice1)
+
+        within"#item_#{item1.id}" do
+          expect(page).to have_content(item1.name)
+          expect(page).to have_content(invoice_item1.quantity)
+          expect(page).to have_content(invoice_item1.unit_price)
+          expect(page).to have_content(invoice_item1.status)
+        end
+
+        within"#item_#{item2.id}" do
+          expect(page).to have_content(item2.name)
+          expect(page).to have_content(invoice_item2.quantity)
+          expect(page).to have_content(invoice_item2.unit_price)
+          expect(page).to have_content(invoice_item2.status)
+        end
+
+        expect(page).to_not have_content(item3.name)
+        expect(page).to_not have_content(invoice_item3.quantity)
+        expect(page).to_not have_content(invoice_item3.unit_price)
+        expect(page).to_not have_content(invoice_item3.status)   
+      end
+    end
+  end
 end

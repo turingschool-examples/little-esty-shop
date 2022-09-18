@@ -9,3 +9,16 @@
   <%= @invoice.customer.first_name %>
   <%= @invoice.customer.last_name %>
 
+<h3> Items on this Invoice: </h3>
+  <% @invoice.items.each do |item| %>
+  <div id= "item_<%= item.id %>">
+    <p> Item Name: <%= item.name%></p>
+    <ul>
+    <% item.invoice_items.each do |invoice_item| %>
+      <li><p> Quantity: <%= invoice_item.quantity %></p></li>
+      <li><p> Unit Price: <%= invoice_item.unit_price %></p></li>
+      <li><p> Status: <%= invoice_item.status %></p></li>
+    <% end %> 
+    </ul>
+  </div>
+<% end %>
