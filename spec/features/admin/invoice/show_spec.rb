@@ -26,7 +26,7 @@ RSpec.describe 'admin invoice show page' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
       expect(page).to have_content("Admin Invoice Show Page For ID: #{@invoice_1.id}")
-      expect(page).to have_content("Invoice status: completed")
+      expect(page).to have_select('status', selected: "completed")
       expect(page).to have_content("Invoice created at: Friday, September, 16, 2022")
     end
   end
@@ -53,6 +53,19 @@ RSpec.describe 'admin invoice show page' do
       visit "/admin/invoices/#{@invoice_1.id}"
 
       expect(page).to have_content("Total Revenue: $7240")
+    end
+  end
+
+  describe 'US18' do
+    it 'allows admins to update the status of an invoice' do
+      visit "/admin/invoices/#{@invoice_1.id}"
+
+      expect(page).to have_select('status', selected: "completed")
+
+      select('cancelled', from: 'status')
+      click_on 'Update Invoice Status'
+
+      expect(page).to have_select('status', selected: "cancelled")
     end
   end
 end
