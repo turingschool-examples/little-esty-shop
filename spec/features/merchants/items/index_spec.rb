@@ -248,7 +248,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
           within("#top_items") do
             within("#rev_item_#{@item3.id}") do
-              expect(page).to have_content("#{@invoice3.created_at.strftime("%A, %B %-d, %Y")}")
+              expect(page).to have_content("#{@invoice1.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item8.id}") do
@@ -274,7 +274,7 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
           within("#top_items") do
             within("#rev_item_#{@item3.id}") do
-              expect(page).to have_content("Top selling date for #{@item3.name} was #{@invoice3.created_at.strftime("%A, %B %-d, %Y")}")
+              expect(page).to have_content("Top selling date for #{@item3.name} was #{@invoice1.created_at.strftime("%A, %B %-d, %Y")}")
             end
 
             within("#rev_item_#{@item8.id}") do
