@@ -49,7 +49,6 @@ RSpec.describe("Merchant Items Show Page") do
         fill_in("name",         with: "Awesome")
         click_on("Submit")
         expect(current_path).to(eq(("/merchants/#{merchant1.id}/items/#{item1.id}")))
-        save_and_open_page
         expect(page).to(have_content("Awesome has been successfully updated"))
       end
     end
