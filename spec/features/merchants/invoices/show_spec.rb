@@ -5,14 +5,14 @@ RSpec.describe 'Merchant Invoice Show Page' do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
 
-    @items_1 = create_list(:item, 5, merchant: @merchant_1)
-    @items_2 = create_list(:item, 5, merchant: @merchant_2)
+    @item_1 = create(:item, merchant: @merchant_1)
+    @item_2 = create(:item, merchant: @merchant_2)
 
     @invoice_1 = create(:invoice)
     @invoice_2 = create(:invoice)
 
-    @items_1.each { |item|  @invoice_1.items << item }
-    @items_2.each { |item|  @invoice_2.items << item }
+    @invoice_items_1 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id)
+    @invoice_items_2 = create(:invoice_items, invoice_id: @invoice_2.id, item_id: @item_2.id)
   end
 
   # As a merchant
@@ -36,7 +36,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to have_content(@invoice_1.customer.last_name )
         expect(page).to_not have_content(@invoice_2.id)
         expect(page).to_not have_content(@invoice_2.customer.first_name)
-        expect(page).to_not have_content(@invoice_2.customer.last_name )
+        expect(page).to_not have_content(@invoice_2.customer.last_name)
       end
 
       visit merchant_invoice_path(@merchant_2, @invoice_2)
@@ -52,9 +52,43 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to_not have_content(@invoice_1.customer.last_name )
       end
     end
+  end
 
-    it '' do
-      
+  # As a merchant
+  # When I visit my merchant invoice show page
+  # Then I see all of my items on the invoice including:
+
+  # Item name
+  # The quantity of the item ordered
+  # The price the Item sold for
+  # The Invoice Item status
+  # And I do not see any information related to Items for other merchants
+
+  describe 'User Story 16 - When I visit my merchant invoice show page' do
+    it 'Then I see all of my items on the invoice' do
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+      within("#invoice-items-info") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_1.unit_price)
+        expect(page).to have_content(@invoice_items_1.status)
+        expect(page).to have_content(@invoice_items_1.quantity)
+        expect(page).to_not have_content(@item_2.name)
+        expect(page).to_not have_content(@item_2.unit_price)
+        expect(page).to_not have_content(@invoice_items_2.quantity)
+      end
+
+      visit merchant_invoice_path(@merchant_2, @invoice_2)
+
+      within("#invoice-items-info") do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_2.unit_price)
+        expect(page).to have_content(@invoice_items_2.status)
+        expect(page).to have_content(@invoice_items_2.quantity)
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to_not have_content(@item_1.unit_price)
+        expect(page).to_not have_content(@invoice_items_1.quantity)
+      end
     end
   end
 end
