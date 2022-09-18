@@ -81,8 +81,8 @@ RSpec.describe Invoice, type: :model do
 
 
       it 'takes a merchant as an arg and returns an array of items from that merchant which appear on the invoice' do
-        expect(alaina_invoice1.merchant_items).to include(gold_earrings, silver_necklace)
-        expect(alaina_invoice1.merchant_items).to_not include(licorice)
+        expect(alaina_invoice1.merchant_items(jewlery_city)).to include(gold_earrings, silver_necklace)
+        expect(alaina_invoice1.merchant_items(jewlery_city)).to_not include(licorice)
       end
     end
   end
