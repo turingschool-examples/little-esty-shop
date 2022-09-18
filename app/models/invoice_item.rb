@@ -10,4 +10,8 @@ class InvoiceItem < ApplicationRecord
     sum("invoice_items.unit_price * invoice_items.quantity")
   end
 
+  def item_name
+    item.name
+  end
+
 end

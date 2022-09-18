@@ -83,4 +83,30 @@ RSpec.describe 'Merchant Dashboard Index' do
       end
     end
   end
+
+  it 'lists invoice items ready to ship with a link to the invoice show page' do
+    merchant = create(:merchant)
+    items = create_list(:item, 6, merchant: merchant)
+    invoices = create_list(:invoice, 2)
+    inv_item_1 = create(:invoice_item, item: items[0], invoice: invoices[0], status: :packaged)
+    inv_item_2 = create(:invoice_item, item: items[4], invoice: invoices[0], status: :pending)
+    inv_item_3 = create(:invoice_item, item: items[3], invoice: invoices[0], status: :shipped)
+    inv_item_4 = create(:invoice_item, item: items[1], invoice: invoices[0], status: :packaged)
+    inv_item_5 = create(:invoice_item, item: items[2], invoice: invoices[0], status: :shipped)
+    inv_item_5 = create(:invoice_item, item: items[5], invoice: invoices[1], status: :pending)
+
+    expect(page).to have_content("Items Ready to Ship")
+    
+    merchant.inv_items_ready_to_ship.each do |inv_item|
+      visit(merchant_dashboard_index_path(merchant.id))
+      within ("li#item_ready_#{inv_item.id}")  do
+        expect(page).to have_content("#{inv_item.item_name} - Invoice ##{inv_item.invoice_id}")
+        expect(page).to have_link("#{inv_item.invoice_id}")
+
+        click_link("#{inv_item.invoice_id}")
+
+        expect(current_path).to eq(merchant_invoice_path(merchant.id, inv_item.invoice_id))
+      end
+    end
+  end
 end
