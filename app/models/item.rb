@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
-  enum active_status: { enabled: 0, disabled: 1 }
+  enum active_status: { disabled: 0, enabled: 1  }
 
   def self.active
     where(active_status: :enabled)
@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   def self.inactive
     where(active_status: :disabled)
   end
-  
+
   def quantity_purchased(invoice_id)
     invoice_items.find_by(invoice_id: invoice_id).quantity
   end
@@ -23,5 +23,5 @@ class Item < ApplicationRecord
   def shipping_status(invoice_id)
     invoice_items.find_by(invoice_id: invoice_id).status
   end
-  
+
 end

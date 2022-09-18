@@ -28,7 +28,7 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe 'Instance Methods' do
+  describe 'Instance Methods' do 
     before :each do
       @merchant = create(:merchant)
       @merchant_13 = create(:merchant)
@@ -52,55 +52,41 @@ RSpec.describe Merchant, type: :model do
       @transaction_14 = create_list(:transaction, 5, invoice: @invoice_12, result: :failed)
 
       @transaction_15 = create_list(:transaction, 10, invoice: @invoice_13, result: :failed)
+      
+      @merchant1 = create(:merchant)
 
+      @item_1 = create(:item, merchant: @merchant1)
+      @item_2 = create(:item, merchant: @merchant1)
 
-      @merchant_1 = Merchant.create!(name: "Johns Tools") 
-      @merchant_2 = Merchant.create!(name: "Hannas Hammocks") 
-      @pretty_plumbing = Merchant.create!(name: "Pretty Plumbing") 
-      @sink = @pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.") 
-      @rug = @pretty_plumbing.items.create!(name: "Hall Rug", description: "It's a rug.") 
-      @chair = @pretty_plumbing.items.create!(name: "Great Chair", description: "It's an okay chair.") 
-      @lamp = @pretty_plumbing.items.create!(name: "Table Lamp", description: "Lamp for tables.") 
-      @toilet = @pretty_plumbing.items.create!(name: "XL-Toilet", description: "Big Toilet.") 
+      @invoice_1 = create(:invoice, created_at: "10-10-1999")
+      @invoice_2 = create(:invoice, created_at: "10-10-1975")
+      @invoice_3 = create(:invoice, created_at: "10-10-1934")
+      @invoice_4 = create(:invoice, created_at: "10-10-2021")
+      @invoice_5 = create(:invoice, created_at: "10-10-1955")
+      @invoice_6 = create(:invoice, created_at: "10-10-1992")
 
-      @customer_1 = Customer.create!(first_name: "Larry", last_name: "Smith")
-      @customer_2 = Customer.create!(first_name: "Susan", last_name: "Field")
-      @customer_3 = Customer.create!(first_name: "Barry", last_name: "Roger")
-      @customer_4 = Customer.create!(first_name: "Mary", last_name: "Flower")
-      @customer_5 = Customer.create!(first_name: "Tim", last_name: "Colin")
-      @customer_6 = Customer.create!(first_name: "Harry", last_name: "Dodd") 
-      @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann") 
-      @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone") 
+      create(:invoice_items, invoice: @invoice_1, item: @item_1, status: :shipped)
+      create(:invoice_items, invoice: @invoice_2, item: @item_1, status: :shipped)
+      create(:invoice_items, invoice: @invoice_3, item: @item_1, status: :shipped)
+      create(:invoice_items, invoice: @invoice_4, item: @item_1, status: :pending)
+      create(:invoice_items, invoice: @invoice_5, item: @item_1, status: :pending)
+      create(:invoice_items, invoice: @invoice_6, item: @item_1, status: :pending)
 
-      @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
-      @invoice_2 = @customer_2.invoices.create!(status: :completed, created_at: "09-10-2022")
-      @invoice_3 = @customer_3.invoices.create!(status: :completed, created_at: "10-08-2022")
-      @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-06-2022")
-      @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-10-2022")
-      @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
-      @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "10-09-2022")
-      @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "10-11-2022")
-
-      @invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped) 
-      @invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped) 
-      @invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :shipped) 
-      @invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :pending) 
-      @invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending) 
-
-      @invoice_item_6 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_6.id}", status: :pending) 
-      @invoice_item_7 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_7.id}", status: :packaged) 
-      @invoice_item_8 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_8.id}", status: :shipped) 
-      @invoice_item_9 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_1.id}", status: :shipped) 
-      @invoice_item_10 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_2.id}", status: :shipped) 
+      create(:invoice_items, invoice: @invoice_1, item: @item_2, status: :shipped)
+      create(:invoice_items, invoice: @invoice_2, item: @item_2, status: :shipped)
+      create(:invoice_items, invoice: @invoice_3, item: @item_2, status: :shipped)
+      create(:invoice_items, invoice: @invoice_4, item: @item_2, status: :shipped)
+      create(:invoice_items, invoice: @invoice_5, item: @item_2, status: :shipped)
+      create(:invoice_items, invoice: @invoice_6, item: @item_2, status: :shipped)
     end
 
     it 'has items_not_shipped method' do
-      expect(@pretty_plumbing.items_not_shipped_sorted_by_date).to eq([@invoice_4, @invoice_6, @invoice_7, @invoice_5])
+      expect(@merchant1.items_not_shipped_sorted_by_date).to eq([@invoice_5, @invoice_6, @invoice_4])
+      expect(@merchant2.items_not_shipped_sorted_by_date).to eq([@invoice_3, @invoice_2, @invoice_1])
     end
 
     it '#invoices_distinct_by_merchant' do
-      #Test Refactor Needed
-      expect(@merchant_2.invoices_distinct_by_merchant).to eq([])
+      expect(@merchant1.invoices_distinct_by_merchant).to eq([@invoice_1, @invoice_2, @invoice_3,@invoice_4, @invoice_5, @invoice_6])
     end
 
     it 'total_revenue' do
