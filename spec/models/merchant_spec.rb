@@ -24,25 +24,34 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'order_by_revenue' do
-      
+      #in process based off of total_revenue
     end
   end
 
   describe 'Instance Methods' do
     before :each do
       @merchant = create(:merchant)
+      @merchant_13 = create(:merchant)
 
       @items_11 = create_list(:item, 10, merchant: @merchant)
       @items_12 = create_list(:item, 10, merchant: @merchant)
+      @items_13 = create_list(:item, 10, merchant: @merchant_13)
 
       @invoice_11 = create(:invoice)
       @invoice_12 = create(:invoice)
+      @invoice_13 = create(:invoice)
 
-      @items_11.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 500) }
-      @items_12.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100) }
+      @items_11.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 500, quantity: 10) }
+      @items_12.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) }
 
-      @transaction_11 = create_list(:transaction, 10, invoice: @invoice_11)
-      @transaction_12 = create_list(:transaction, 10, invoice: @invoice_12)
+      @items_13.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 200, quantity: 5) }
+
+      @transaction_11 = create_list(:transaction, 5, invoice: @invoice_11, result: :success)
+      @transaction_12 = create_list(:transaction, 5, invoice: @invoice_11, result: :failed)
+      @transaction_13 = create_list(:transaction, 5, invoice: @invoice_12, result: :success)
+      @transaction_14 = create_list(:transaction, 5, invoice: @invoice_12, result: :failed)
+
+      @transaction_15 = create_list(:transaction, 10, invoice: @invoice_13, result: :failed)
 
 
       @merchant_1 = Merchant.create!(name: "Johns Tools") 
@@ -95,7 +104,8 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'total_revenue' do
-      expect(@merchant.total_revenue).to eq(6000)
+      expect(@merchant.total_revenue).to eq(55000)
+      expect(@merchant_13.total_revenue).to eq(0)
     end
   end
 end
