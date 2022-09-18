@@ -1,7 +1,7 @@
 require "rails_helper"
 
 
-RSpec.describe "the merchant items index"  do
+RSpec.describe "the merchant invoices index"  do
     it "I see the name of my merchants index page"  do
         merchant1 = Merchant.create!(name: "Bob")
 
