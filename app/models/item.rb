@@ -11,6 +11,12 @@ class Item < ApplicationRecord
   def self.inactive
     where(active_status: :disabled)
   end
+
+  def invoice_successful_trans 
+    invoices.select do |invoice|
+      invoice.transactions.where(result: 0)
+    end
+  end
   
   def quantity_purchased(invoice_id)
     invoice_items.find_by(invoice_id: invoice_id).quantity

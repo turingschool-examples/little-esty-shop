@@ -22,10 +22,29 @@ RSpec.describe Merchant, type: :model do
     it "#inactive" do
       expect(Merchant.inactive).to eq([@merchant_3, @merchant_5, @merchant_6])      
     end
+
+    it 'order_by_revenue' do
+      
+    end
   end
 
   describe 'Instance Methods' do
     before :each do
+      @merchant = create(:merchant)
+
+      @items_11 = create_list(:item, 10, merchant: @merchant)
+      @items_12 = create_list(:item, 10, merchant: @merchant)
+
+      @invoice_11 = create(:invoice)
+      @invoice_12 = create(:invoice)
+
+      @items_11.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 500) }
+      @items_12.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100) }
+
+      @transaction_11 = create_list(:transaction, 10, invoice: @invoice_11)
+      @transaction_12 = create_list(:transaction, 10, invoice: @invoice_12)
+
+
       @merchant_1 = Merchant.create!(name: "Johns Tools") 
       @merchant_2 = Merchant.create!(name: "Hannas Hammocks") 
       @pretty_plumbing = Merchant.create!(name: "Pretty Plumbing") 
@@ -73,6 +92,10 @@ RSpec.describe Merchant, type: :model do
     it '#invoices_distinct_by_merchant' do
       #Test Refactor Needed
       expect(@merchant_2.invoices_distinct_by_merchant).to eq([])
+    end
+
+    it 'total_revenue' do
+      expect(@merchant.total_revenue).to eq(6000)
     end
   end
 end

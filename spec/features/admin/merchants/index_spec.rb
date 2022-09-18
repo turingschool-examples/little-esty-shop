@@ -4,11 +4,11 @@ RSpec.describe "Admin Merchants" do
   describe "As an admin" do
     describe "I visit the admin merchants index (/admin/merchants)" do
       before :each do
-        @merchant_1 = Merchant.create!(name: "Johns Tools", active_status: :enabled)
-        @merchant_2 = Merchant.create!(name: "Hannas Hammocks", active_status: :enabled)
-        @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
-        @merchant_4 = Merchant.create!(name: "Jenna's Jewlery", active_status: :enabled)
-        @merchant_5 = Merchant.create!(name: "Sassy Soap")
+        @merchant_1 = create(:merchant, active_status: :enabled)
+        @merchant_2 = create(:merchant, active_status: :enabled)
+        @merchant_3 = create(:merchant)
+        @merchant_4 = create(:merchant, active_status: :enabled)
+        @merchant_5 = create(:merchant)
       end
   
       it 'can see the name of each merchant in the system' do
@@ -124,6 +124,12 @@ RSpec.describe "Admin Merchants" do
     # Only invoices with at least one successful transaction should count towards revenue -- #if successfull == counts *(.any?)
     # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items -- invoice items.sum
     # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price) -- invoice item unit price * quantity 
+
+        # @merchant_1 = create(:merchant, active_status: :enabled)
+        # @merchant_2 = create(:merchant, active_status: :enabled)
+        # @merchant_3 = create(:merchant)
+        # @merchant_4 = create(:merchant, active_status: :enabled)
+        # @merchant_5 = create(:merchant)
 
       it 'shows the names of the top 5 merchants by total revenue generated and shows the revenue' do
         visit admin_merchants_path

@@ -10,7 +10,7 @@ class Invoice < ApplicationRecord
     joins(:invoice_items).where.not(invoice_items: {status: 2})
   end
 
-  def self.successful_transactions
+  def self.successful_transactions#_count
     sum do |invoice| 
       invoice.transactions.where(result: 0).count
     end
