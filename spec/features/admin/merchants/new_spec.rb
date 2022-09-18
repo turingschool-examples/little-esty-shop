@@ -14,5 +14,11 @@ RSpec.describe 'As an admin, when I visit the new merchant page' do
     click_button "Submit"
     expect(current_path).to eq admin_merchants_path
     expect(page).to have_content "CocoChanelsCrispyCroutons"
+
+    click_button "Create New Merchant"
+    fill_in "Name", with: "NAHHHHH"
+    click_button "Submit"
+    expect(current_path).to eq admin_merchants_path
+    expect(page).to have_content "NAHHHHH"
   end
 end

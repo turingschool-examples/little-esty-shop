@@ -11,14 +11,13 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.new(merchant_params)
-
+    merchant = Merchant.new(name: params[:name], enabled: false)
     if merchant.save
       redirect_to admin_merchants_path
       flash[:alert] = "Creation successful"
     else
       redirect_to new_admin_merchant_path
-      flash[:alert] = "Error: #{error_message(shelter.errors)}"
+      flash[:alert] = "Error: Parameter Missing"
     end
   end
 
@@ -40,9 +39,4 @@ class Admin::MerchantsController < ApplicationController
       redirect_to admin_merchants_path
     end
   end
-
-  def merchant_params
-    params.permit(:id, :name)
-  end
-
 end

@@ -82,6 +82,6 @@ namespace(:csv_load) do
   end
 
   desc("This task loads all csv files to the seed file")
-  task all: [:pk_reset, :customers, :merchants, :invoices, :items, :invoice_items, :transactions, :pk_reset] do
+  task all: [:customers, :merchants, :invoices, :items, :invoice_items, :transactions, :pk_reset] do
   end
 end
