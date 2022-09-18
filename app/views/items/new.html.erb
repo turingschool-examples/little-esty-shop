@@ -1,0 +1,11 @@
+<%= form_with model: [@merchant, @item], local: true do |form| %>
+  <p><%= form.label :merchant_id %>
+  <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %></p>
+  <p><%= form.label :name %>
+  <%= form.text_area :name %></p>
+  <p><%= form.label :description %>
+  <%= form.text_area :description %></p>
+  <p><%= form.label :unit_price %>
+  <%= form.text_area :unit_price %></p>
+  <%= form.submit %>
+<% end %>

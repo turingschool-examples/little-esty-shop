@@ -1,5 +1,5 @@
 <h2><%= @merchant.name %> </h2>
-
+<%= button_to "Create New Item", new_merchant_item_path(@merchant) , method: :get %>
 <span id="enabled-items" >
   <h3>Enabled Items</h3>
   <% @merchant.items.active.each do |item| %>
