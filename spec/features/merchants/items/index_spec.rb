@@ -242,6 +242,60 @@ RSpec.describe 'Merchant Items Index Page: ' do
           end
         end
       end
+
+      describe 'next to each of the 5 most popular items' do
+        it 'I see the date with the most sales for each item' do
+          visit merchant_items_path(@merch2.id)
+
+          within("#top_items") do
+            within("#rev_item_#{@item3.id}") do
+              expect(page).to have_content("date")
+            end
+
+            within("#rev_item_#{@item8.id}") do
+              expect(page).to have_content("date")
+            end
+
+            within("#rev_item_#{@item5.id}") do
+              expect(page).to have_content("date")
+            end
+
+            within("#rev_item_#{@item7.id}") do
+              expect(page).to have_content("date")
+            end
+
+            within("#rev_item_#{@item6.id}") do
+              expect(page).to have_content("date")
+            end
+          end
+        end
+
+        it "I see a label 'Top selling date for was '" do
+          visit merchant_items_path(@merch2.id)
+
+          within("#top_items") do
+            within("#rev_item_#{@item3.id}") do
+              expect(page).to have_content("Top selling date for was ")
+            end
+
+            within("#rev_item_#{@item8.id}") do
+              expect(page).to have_content("Top selling date for was ")
+            end
+
+            within("#rev_item_#{@item5.id}") do
+              expect(page).to have_content("Top selling date for was ")
+            end
+
+            within("#rev_item_#{@item7.id}") do
+              expect(page).to have_content("Top selling date for was ")
+            end
+
+            within("#rev_item_#{@item6.id}") do
+              expect(page).to have_content("$13.00")
+            end
+          end
+        end
+      end
     end
   end
 end

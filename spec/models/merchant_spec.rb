@@ -5,11 +5,6 @@ RSpec.describe Merchant, type: :model do
     it {should have_many(:items)}
   end
 
-  before(:each) do
-    @merchant_1 = create(:merchant)
-    @item_1 = create(:item, merchant: @merchant_1)
-    @item_2 = create(:item, merchant: @merchant_1)
-
     describe 'instance variables' do
 
       before(:each) do
@@ -141,23 +136,23 @@ RSpec.describe Merchant, type: :model do
         it 'doesnt count failed trasnactions' do
           invoice_24 = create(:invoice, customer: @customer_6)
           invoice_25 = create(:invoice, customer: @customer_6)
-          
+
           invoice_24.items << @item_1
           invoice_25.items << @item_1
-          
+
           transaction_25 = create(:transaction, invoice: invoice_24, result: :failed)
           transaction_26 = create(:transaction, invoice: invoice_25, result: :failed)
-          
+
           expect(@merchant_1.top_five_customers).to eq([@customer_4, @customer_6, @customer_5, @customer_7, @customer_8])
         end
-        
+
         it 'doesnt count other merchant transactions' do
           merchant_2 = create(:merchant)
           item_2 = create(:item, merchant: merchant_2)
-          
+
           invoice_24 = create(:invoice, customer: @customer_6)
           invoice_25 = create(:invoice, customer: @customer_6)
-          
+
           invoice_24.items << item_2
           invoice_25.items << item_2
           
@@ -168,7 +163,6 @@ RSpec.describe Merchant, type: :model do
         end
       end
     end
-  end
 
   describe 'test instance variables for .top_five_revenue' do
     before(:each) do
