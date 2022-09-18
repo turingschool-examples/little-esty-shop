@@ -45,6 +45,7 @@ RSpec.describe 'Admin Merchants Index' do
         expect(page).to have_button("Disable")
 
         click_button("Disable")
+        expect(yeasty.reload.status).to eq("Disabled")
         # Then I am redirected back to the admin merchants index
         expect(current_path).to eq("/admin/merchants")
       end
@@ -63,6 +64,8 @@ RSpec.describe 'Admin Merchants Index' do
       within("#disabled_merchant-#{yeasty.id}") do
         expect(page).to have_button("Enable")
         click_button("Enable")
+
+        expect(yeasty.reload.status).to eq("Enabled")
         expect(current_path).to eq("/admin/merchants")
       end
 
