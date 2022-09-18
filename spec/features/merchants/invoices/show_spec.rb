@@ -6,15 +6,10 @@ RSpec.describe 'Merchant Invoice Show Page' do
     @merchant_2 = create(:merchant)
 
     @item_1 = create(:item, merchant: @merchant_1)
-    @item_2 = create(:item, merchant: @merchant_1)
-    @item_3 = create(:item, merchant: @merchant_2)
-    @item_4 = create(:item, merchant: @merchant_2)
+    @item_2 = create(:item, merchant: @merchant_2)
 
     @invoice_1 = create(:invoice)
     @invoice_2 = create(:invoice)
-
-    @invoice_1.items << @item_1 
-    @invoice_2.items << @item_2
 
     @invoice_items_1 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id)
     @invoice_items_2 = create(:invoice_items, invoice_id: @invoice_2.id, item_id: @item_2.id)
@@ -41,7 +36,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to have_content(@invoice_1.customer.last_name )
         expect(page).to_not have_content(@invoice_2.id)
         expect(page).to_not have_content(@invoice_2.customer.first_name)
-        expect(page).to_not have_content(@invoice_2.customer.last_name )
+        expect(page).to_not have_content(@invoice_2.customer.last_name)
       end
 
       visit merchant_invoice_path(@merchant_2, @invoice_2)
@@ -76,11 +71,11 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within("#invoice-items-info") do
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@item_1.unit_price)
-        binding.pry
-        expect(page).to have_content(@invoice_item_1.status)
-        # expect(page).to_not have_content(@item_2.name)
-        # expect(page).to_not have_content(@item_2.price_sold(@invoice_2))
-        # expect(page).to_not have_content(@invoice_item_2.status)
+        expect(page).to have_content(@invoice_items_1.status)
+        expect(page).to have_content(@invoice_items_1.quantity)
+        expect(page).to_not have_content(@item_2.name)
+        expect(page).to_not have_content(@item_2.unit_price)
+        expect(page).to_not have_content(@invoice_items_2.quantity)
       end
 
       visit merchant_invoice_path(@merchant_2, @invoice_2)
@@ -88,10 +83,11 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within("#invoice-items-info") do
         expect(page).to have_content(@item_2.name)
         expect(page).to have_content(@item_2.unit_price)
-        expect(page).to have_content(@invoice_item_2.status)
-        # expect(page).to_not have_content(@item_1.name)
-        # expect(page).to_not have_content(@item_2.price_sold(@invoice_1))
-        # expect(page).to_not have_content(@invoice_item_1.status)
+        expect(page).to have_content(@invoice_items_2.status)
+        expect(page).to have_content(@invoice_items_2.quantity)
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to_not have_content(@item_1.unit_price)
+        expect(page).to_not have_content(@invoice_items_1.quantity)
       end
     end
   end

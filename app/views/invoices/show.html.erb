@@ -13,6 +13,6 @@
     <p><%= item.name %></p>
     <p><%= item.unit_price %></p>
     <p><%= item.quantity_purchased(@invoice.id) %></p>
-    <p><%= @invoice.status %></p>
+    <p><%= item.shipping_status(@invoice.id) %></p>
   <% end %>
 </div>
