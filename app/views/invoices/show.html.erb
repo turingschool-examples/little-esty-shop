@@ -6,7 +6,6 @@
   <p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
   <p><%= @invoice.customer.first_name %></p>
   <p><%= @invoice.customer.last_name %></p>
-</div>
 
 <div id="invoice-items-info">
   <% @invoice.items.each do |item| %>
@@ -16,3 +15,4 @@
     <p><%= item.shipping_status(@invoice.id) %></p>
   <% end %>
 </div>
+
