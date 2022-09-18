@@ -14,4 +14,8 @@ class InvoiceItem < ApplicationRecord
     item.name
   end
 
+  def invoice_date
+    invoice.create_at
+  end
+
 end

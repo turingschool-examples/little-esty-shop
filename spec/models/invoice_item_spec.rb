@@ -30,6 +30,12 @@ RSpec.describe InvoiceItem, type: :model do
 
         expect(invoice_item.item_name).to eq(invoice_item.item.name)
       end
+
+      it 'returns the date thats its invoice was created' do
+        invoice_item = create(:invoice_item)
+
+        expect(invoice_item.invoice_date).to eq(invoice_item.invoice.created_at)
+      end
     end
   end
 
