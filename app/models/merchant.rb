@@ -1,10 +1,15 @@
 class Merchant < ApplicationRecord
 
   has_many :items
+  has_many :invoice_items, through: :items
   has_many :invoices, through: :items
 
   def distinct_invoices
     invoices.distinct
+  end
+
+  def inv_items_ready_to_ship
+    invoice_items.where(status: [:pending, :packaged])
   end
 
   def top_five_customers

@@ -2,13 +2,20 @@
 <div id="dashboard_body">
   <div class="dashboard_column" id="items_ready">
     <h2 class="subtitle">Items Ready to Ship</h2>
+    <ul id="items_ready_list">
+      <% @invoice_items_ready_to_ship.each do |invoice_item| %>
+        <li class="item_ready" id="item_ready_<%= invoice_item.id %>">
+          <%= invoice_item.item_name %> - Invoice #<%= link_to invoice_item.invoice_id, merchant_invoice_path(@merchant.id, invoice_item.invoice_id) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <div class="dashboard_column" id="favorite_customers">
     <h2 class="subtitle">Favorite Customers</h2>
     <ol class="favorite_customer_list">
       <% @top_five_customers.each do |customer| %>
         <li class="top_five_customer" id="top_five_cust_<%= customer.id %>">
-          <%= customer.first_name %> <%= customer.last_name %><br>
+          <strong><%= customer.first_name %> <%= customer.last_name %></strong><br>
           Successful Transactions: <%= customer.transaction_count %>
         </li>
       <% end %>

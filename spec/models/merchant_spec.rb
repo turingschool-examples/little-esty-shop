@@ -44,7 +44,7 @@ RSpec.describe Merchant, type: :model do
         @customer_6 = create(:customer)
         @customer_7 = create(:customer)
         @customer_8 = create(:customer)
-
+        
         @invoice_1 = create(:invoice, customer: @customer_1)
         @invoice_2 = create(:invoice, customer: @customer_2)
         @invoice_3 = create(:invoice, customer: @customer_3)
