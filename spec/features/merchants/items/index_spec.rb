@@ -5,7 +5,7 @@ RSpec.describe 'Merchant Items Index' do
         @merchant_1 = Merchant.create!(name: "Bread Pitt")
         @merchant_2 = Merchant.create!(name: "Carrie Breadshaw")
 
-        @item_1 = Item.create!(name: "Rye", description: "Great for Reubens", unit_price: 10, merchant_id: @merchant_2.id)
+        @item_1 = Item.create!(name: "Rye", description: "Great for Reubens", unit_price: 10, merchant_id: @merchant_2.id, status: :Enabled)
         @item_2 = Item.create!(name: "Challah", description: "So delicious", unit_price: 10, merchant_id: @merchant_2.id)
         @item_3 = Item.create!(name: "Wonder Bread", description: "Basic", unit_price: 3, merchant_id: @merchant_1.id)
     end
@@ -31,18 +31,19 @@ RSpec.describe 'Merchant Items Index' do
     end
 
     it "has a button that can enable/disable items" do
+        item_4 = Item.create!(name: "Rye", description: "Great for Reubens", unit_price: 10, merchant_id: @merchant_2.id, status: :Enabled)
         visit "/merchant/#{@merchant_2.id}/items"
 
-        within("item-#{@item_1.id}") do
+        within("#enabled_item-#{item_4.id}") do
           expect(page).to have_button("Disable")
-          click_button "Disable"
-          expect(@item_1.status).to eq("Disabled")
+          click_button("Disable")
 
-          expect(page).to have_button("Enable")
-          click_button "Enable"
-          expect(@item_1.status).to eq("Enabled")
+        #   expect(page).to have_button("Enable")
+        #   click_button "Enable"
+        #   expect(@item_1.status).to eq("Enabled")
         end
         
         expect(current_path).to eq("/merchant/#{@merchant_2.id}/items")
+        expect(item_4.status).to eq("Disabled")
       end
 end
