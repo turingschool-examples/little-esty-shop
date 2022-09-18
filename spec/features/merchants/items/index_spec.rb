@@ -1,15 +1,48 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index Page: ' do
-  before :each do
+
+  before(:each) do
     @merch1 = create(:merchant)
     @item1 = create(:item, merchant: @merch1, unit_price: 5700)
     @item2 = create(:item, merchant: @merch1)
 
     @merch2 = create(:merchant)
-    @item3 = create(:item, merchant: @merch2)
-    @item4 = create(:item, merchant: @merch2)
-    @item5 = create(:item, merchant: @merch2)
+    @item3 = create(:item, merchant: @merch2, unit_price: 500)
+    @item4 = create(:item, merchant: @merch2, unit_price: 500)
+    @item5 = create(:item, merchant: @merch2, unit_price: 500)
+    @item6 = create(:item, merchant: @merch2, unit_price: 500)
+    @item7 = create(:item, merchant: @merch2, unit_price: 500)
+    @item8 = create(:item, merchant: @merch2, unit_price: 500)
+    @item9 = create(:item, merchant: @merch2, unit_price: 500)
+
+    @invoice1 = create(:invoice, status: :completed)
+    @invoice2 = create(:invoice, status: :completed)
+    @invoice3 = create(:invoice, status: :completed)
+    @invoice4 = create(:invoice, status: :completed)
+    @invoice5 = create(:invoice, status: :completed)
+
+    @inv_item1 = create(:invoice_item, invoice: @invoice1, item: @item3, quantity: 10, unit_price: 100, status: :packaged)
+    @inv_item2 = create(:invoice_item, invoice: @invoice2, item: @item4, quantity: 11, unit_price: 100, status: :packaged)
+    @inv_item3 = create(:invoice_item, invoice: @invoice3, item: @item5, quantity: 12, unit_price: 100, status: :packaged)
+    @inv_item4 = create(:invoice_item, invoice: @invoice4, item: @item6, quantity: 13, unit_price: 100, status: :packaged)
+    @inv_item5 = create(:invoice_item, invoice: @invoice5, item: @item7, quantity: 14, unit_price: 100, status: :packaged)
+    @inv_item6 = create(:invoice_item, invoice: @invoice1, item: @item8, quantity: 15, unit_price: 100, status: :packaged)
+    @inv_item7 = create(:invoice_item, invoice: @invoice2, item: @item9, quantity: 16, unit_price: 100, status: :packaged)
+    @inv_item8 = create(:invoice_item, invoice: @invoice3, item: @item3, quantity: 10, unit_price: 100, status: :packaged)
+    @inv_item9 = create(:invoice_item, invoice: @invoice4, item: @item4, quantity: 11, unit_price: 100, status: :packaged)
+    @inv_item10 = create(:invoice_item, invoice: @invoice5, item: @item5, quantity: 12, unit_price: 100, status: :packaged)
+
+    @tranaction1 = create(:transaction, invoice_id: @invoice1.id, result: :success)
+    @tranaction2 = create(:transaction, invoice_id: @invoice2.id, result: :failed)
+    @tranaction3 = create(:transaction, invoice_id: @invoice3.id, result: :success)
+    @tranaction4 = create(:transaction, invoice_id: @invoice4.id, result: :success)
+    @tranaction5 = create(:transaction, invoice_id: @invoice5.id, result: :success)
+    @tranaction6 = create(:transaction, invoice_id: @invoice1.id, result: :success)
+    @tranaction7 = create(:transaction, invoice_id: @invoice2.id, result: :failed)
+    @tranaction8 = create(:transaction, invoice_id: @invoice3.id, result: :failed)
+    @tranaction9 = create(:transaction, invoice_id: @invoice4.id, result: :failed)
+    @tranaction10 = create(:transaction, invoice_id: @invoice5.id, result: :failed)
   end
 
   describe 'As a Merchant' do
@@ -133,8 +166,80 @@ RSpec.describe 'Merchant Items Index Page: ' do
 
       describe 'there is a link to create a new item' do
         it 'the link exists on the page' do
-        visit merchant_items_path(@merch1.id)
-        expect(page).to have_link("New Item")
+          visit merchant_items_path(@merch1.id)
+          expect(page).to have_link("New Item")
+        end
+      end
+
+      describe 'there are names of the top 5 most popular items ranked by revenue' do
+        it 'has a section for top 5' do
+          visit merchant_items_path(@merch1.id)
+
+          expect(page).to have_content("Top Items")
+        end
+
+        it 'has links to item show page' do
+          visit merchant_items_path(@merch2.id)
+
+          within("#top_items") do
+            within("#rev_item_#{@item3.id}") do
+              expect(page).to have_link(@item3.name)
+            end
+            expect(page).to_not have_link(@item4.name)
+            expect(page).to have_link(@item5.name)
+            expect(page).to have_link(@item6.name)
+            expect(page).to have_link(@item7.name)
+            expect(page).to have_link(@item8.name)
+            expect(page).to_not have_link(@item9.name)
+          end
+        end
+
+        it 'links are ordered by top revenue' do
+
+          visit merchant_items_path(@merch2.id)
+
+          within("#top_items") do
+            expect(@item3.name).to appear_before(@item8.name)
+            expect(@item8.name).to appear_before(@item5.name)
+            expect(@item5.name).to appear_before(@item7.name)
+            expect(@item7.name).to appear_before(@item6.name)
+          end
+        end 
+
+        it 'when link is clicked, taken to show page' do
+          visit merchant_items_path(@merch2.id)
+
+          within("#top_items") do
+            click_link @item8.name
+          end
+
+          expect(current_path).to eq(merchant_item_path(@merch2.id, @item8.id))
+        end
+
+        it 'total revenue for item is displayed' do
+          visit merchant_items_path(@merch2.id)
+
+          within("#top_items") do
+            within("#rev_item_#{@item3.id}") do
+              expect(page).to have_content("$30.00")
+            end
+
+            within("#rev_item_#{@item8.id}") do
+              expect(page).to have_content("$30.00")
+            end
+
+            within("#rev_item_#{@item5.id}") do
+              expect(page).to have_content("$24.00")
+            end
+
+            within("#rev_item_#{@item7.id}") do
+              expect(page).to have_content("$14.00")
+            end
+
+            within("#rev_item_#{@item6.id}") do
+              expect(page).to have_content("$13.00")
+            end
+          end
         end
       end
     end

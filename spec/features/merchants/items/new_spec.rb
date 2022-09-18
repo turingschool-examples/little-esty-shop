@@ -54,7 +54,7 @@ RSpec.describe 'Merchant New Item page' do
         click_button 'Submit'
 
         expect(current_path).to eq(merchant_items_path(@merch1.id))
-        
+
         within("#enabled") do
           expect(page).to have_link(@item2.name)
           expect(page).to_not have_link('Gadget')
