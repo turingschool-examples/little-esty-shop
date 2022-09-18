@@ -210,6 +210,7 @@ RSpec.describe Merchant, type: :model do
       expect(@merch2.top_five_revenue).to eq([@item3, @item8, @item5, @item7, @item6])
     end
   end
+
 describe 'to see if it helps' do
     it '.top_five_merchants' do
      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
@@ -280,18 +281,30 @@ describe 'to see if it helps' do
    end
 
   describe '.inv_items_ready_to_ship' do
-    it 'returns a list of invoice items that are not yet shipped' do
-      merchant = create(:merchant)
-      items = create_list(:item, 6, merchant: merchant)
-      invoices = create_list(:invoice, 2)
-      inv_item_1 = create(:invoice_item, item: items[0], invoice: invoices[0], status: :packaged)
-      inv_item_2 = create(:invoice_item, item: items[4], invoice: invoices[0], status: :pending)
-      inv_item_3 = create(:invoice_item, item: items[3], invoice: invoices[0], status: :shipped)
-      inv_item_4 = create(:invoice_item, item: items[1], invoice: invoices[0], status: :packaged)
-      inv_item_5 = create(:invoice_item, item: items[2], invoice: invoices[0], status: :shipped)
-      inv_item_5 = create(:invoice_item, item: items[5], invoice: invoices[1], status: :pending)
 
-      expect(merchant.inv_items_ready_to_ship).to match_array([inv_item_1, inv_item_2, inv_item_4, inv_item_5])
+    before :each do
+      @merchant = create(:merchant)
+      @items = create_list(:item, 6, merchant: @merchant)
+
+      @invoice_1 = create(:invoice, created_at: '2012-03-25 09:54:09 UTC')
+      @invoice_2 = create(:invoice, created_at: '2012-03-26 09:54:09 UTC')
+      @invoice_3 = create(:invoice, created_at: '2012-03-27 09:54:09 UTC')
+      @invoice_4 = create(:invoice, created_at: '2012-03-28 09:54:09 UTC')
+      
+      @inv_item_1 = create(:invoice_item, item: @items[0], invoice: @invoice_3, status: :packaged)
+      @inv_item_2 = create(:invoice_item, item: @items[4], invoice: @invoice_4, status: :pending)
+      @inv_item_3 = create(:invoice_item, item: @items[3], invoice: @invoice_1, status: :shipped)
+      @inv_item_4 = create(:invoice_item, item: @items[1], invoice: @invoice_1, status: :packaged)
+      @inv_item_5 = create(:invoice_item, item: @items[2], invoice: @invoice_1, status: :shipped)
+      @inv_item_5 = create(:invoice_item, item: @items[5], invoice: @invoice_2, status: :pending)
+    end
+
+    it 'returns a list of invoice items that are not yet shipped' do
+      expect(@merchant.inv_items_ready_to_ship).to match_array([@inv_item_1, @inv_item_2, @inv_item_4, @inv_item_5])
+    end
+
+    it 'lists them oldest to newest' do
+      expect(@merchant.inv_items_ready_to_ship).to eq([@inv_item_4, @inv_item_5, @inv_item_1, @inv_item_2])
     end
   end
 end

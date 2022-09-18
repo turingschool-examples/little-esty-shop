@@ -9,7 +9,10 @@ class Merchant < ApplicationRecord
   end
 
   def inv_items_ready_to_ship
-    invoice_items.where(status: [:pending, :packaged])
+    invoice_items
+      .joins(:invoice)
+      .where(status: [:pending, :packaged])
+      .order('invoices.created_at asc')
   end
 
   def top_five_customers
