@@ -229,11 +229,12 @@ RSpec.describe Merchant, type: :model do
       expect(@merch2.top_five_revenue).to match_array([@item5, @item7, @item3, @item6, @item8])
       expect(@merch2.top_five_revenue).to eq([@item3, @item8, @item5, @item7, @item6])
     end
-  describe 'to see if it helps' do
+  end
+describe 'to see if it helps' do
     it '.top_five_merchants' do
      merchant_1 = Merchant.create!(name: 'Spongebob The Merchant')
-     merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
      merchant_3 = Merchant.create!(name: 'Patrick The Starfish')
+     merchant_2 = Merchant.create!(name: 'Sandy The Squirrel Merchant')
      merchant_4 = Merchant.create!(name: 'Mr. Krabs The Boss')
      merchant_5 = Merchant.create!(name: 'Barnacle Boy The Sidekick')
      merchant_6 = Merchant.create!(name: 'Mermaid Man The Hero')
@@ -290,15 +291,12 @@ RSpec.describe Merchant, type: :model do
      invoice_item_13 = InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
      invoice_item_13 = InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
      invoice_item_13 = InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_8.id, quantity: 4, unit_price: 1, status: 2)
-     actual = Merchant.top_five_merchants.map do |result|
-       result.name
-     end
+
      expect(Merchant.top_five_merchants.first).to eq(merchant_1)
-     expect(Merchant.top_five_merchants[1]).to eq(merchant_3)
-     expect(Merchant.top_five_merchants[2]).to eq(merchant_2)
+     expect(Merchant.top_five_merchants[1]).to eq(merchant_2)
+     expect(Merchant.top_five_merchants[2]).to eq(merchant_3)
      expect(Merchant.top_five_merchants[3]).to eq(merchant_5)
      expect(Merchant.top_five_merchants.last).to eq(merchant_4)
    end
    end
  end
-end

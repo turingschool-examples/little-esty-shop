@@ -20,9 +20,16 @@
     <% if merchant.status == false %>
       <div id="merchant-<%= merchant.id %>">
       <p><li><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-             <%= button_t o "Enable", admin_merchant_path( merchant.id), method: :patch, params:[status: true]%>
+             <%= button_to "Enable", admin_merchant_path( merchant.id), method: :patch, params:[status: true]%>
       </li></p>
       </div>
-    <% end %>
+      <% end %>
     <% end  %>
 </ul>
+<h1>Top 5 Merchants by Revenue</h1>
+<div id="Top-Five-Merchants-by-Revenue">
+
+  <% @merchants.top_five_merchants.each do |merchant| %>
+  <p><%= link_to "#{merchant.name}", admin_merchant_path( merchant.id) %> - $<%=merchant.total_revenue%> </p>
+  <% end  %>
+</div>
