@@ -9,11 +9,13 @@ RSpec.describe 'Merchant Item Create' do
         @item_2 = Item.create!(name: "Challah", description: "So delicious", unit_price: 10, merchant_id: @merchant_2.id)
         @item_3 = Item.create!(name: "Wonder Bread", description: "Basic", unit_price: 3, merchant_id: @merchant_1.id)
     end
-    
+
     it 'can create new items' do
       visit "/merchant/#{@merchant_2.id}/items/new"
 
       fill_in "Name", with: "Cinnamon Roll"
+      fill_in "Description", with: "Everyone's favorite breakfast treat"
+      fill_in "Unit price", with: "6"
       click_button "Submit"
 
       expect(current_path).to eq("/merchant/#{@merchant_2.id}/items")
