@@ -84,5 +84,10 @@ RSpec.describe 'merchant dashboard' do
       expect("Puff Daddy").to appear_before("Walter Wheat")
       expect("Walter Wheat").to appear_before("David Dowie")
     end
+
+    it "see section for items ready to ship" do
+      visit "/merchants/:merchant_id/dashboard"
+      expect(page).to have_content("Items Ready to Ship")
+    end
   end
 end
