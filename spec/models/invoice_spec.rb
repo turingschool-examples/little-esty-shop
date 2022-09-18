@@ -105,7 +105,7 @@ RSpec.describe Invoice, type: :model do
 
 
       it 'takes a merchant as an arg and returns the total amount of revenue that invoice generated for that merchant' do
-        expect(alaina_invoice1.calculate_invoice_revenue(jewlery_city).to_f.round(2)).to eq(26.3)
+        expect(alaina_invoice1.calculate_invoice_revenue).to eq(15600)
       end
     end
 

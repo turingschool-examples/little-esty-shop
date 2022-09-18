@@ -14,16 +14,8 @@ class Invoice < ApplicationRecord
     self.items.where(items: { merchant_id: merchant.id } ).distinct
   end
 
-  def calculate_invoice_revenue(merchant)
-    self.invoice_items.sum("unit_price * quantity")
+  def calculate_invoice_revenue
+    self.invoice_items.sum("quantity*unit_price")
   end
 end
 
-
-
-# Item.joins(invoices: :transactions)
-# .group(:id, :name)
-# .where( transactions: {result: 1}, merchant_id: self.id)
-# .select(:name, :id, "sum(invoice_items.unit_price*quantity) as revenue")
-# .order(revenue: :desc)
-# .limit(5)

@@ -82,7 +82,7 @@ RSpec.describe 'Merchant Index Show Page' do
 
         within("#total_invoice_revenue") do
           save_and_open_page
-          expect(page).to have_content("Total Revenue From This Invoice: $#{(alaina_invoice1.calculate_invoice_revenue).to_f.round(2)}")
+          expect(page).to have_content("Total Revenue From This Invoice: $#{(alaina_invoice1.calculate_invoice_revenue).to_f.round(15600)}")
         end
 
       end
