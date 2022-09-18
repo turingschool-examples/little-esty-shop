@@ -121,9 +121,14 @@ RSpec.describe "Admin Merchants" do
 
     # Notes on Revenue Calculation:
 
-    # Only invoices with at least one successful transaction should count towards revenue -- #if successfull == counts *(.any?)
-    # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items -- invoice items.sum
-    # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price) -- invoice item unit price * quantity 
+    #Completed this Step - 
+      # Only invoices with at least one successful transaction should count towards revenue -- #if successfull == counts *(.any?)
+
+    #Completed this Step -
+      # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items -- invoice items.sum
+
+    #
+      # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price) -- invoice item unit price * quantity 
 
         # @merchant_1 = create(:merchant, active_status: :enabled)
         # @merchant_2 = create(:merchant, active_status: :enabled)
