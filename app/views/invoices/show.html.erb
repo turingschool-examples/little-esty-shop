@@ -13,7 +13,12 @@
       <%= item.name %>
       <p>Quantity: <%= item.invoice_item(@invoice).quantity %></p>
       <p>Sale Price: <%= item.invoice_item(@invoice).unit_price %></p>
-      <p>Status: <%= item.invoice_item(@invoice).status %></p>
+      <%= form_with url: merchant_invoice_item_path(@merchant, item.invoice_item(@invoice)), method: :patch do |f| %>
+        <%= f.label :status, "Status" %>
+        <%= f.select :status, options_for_select([:pending, :packaged, :shipped], selected: item.invoice_item(@invoice).status) %>
+        <%= f.hidden_field :invoice_id, value: @invoice.id %>
+        <%= f.submit "Update Item Status"  %>
+      <% end %>
     </li>
   <% end %>
 </ul>

@@ -18,7 +18,7 @@ RSpec.describe 'Merchant Index Show Page' do
 
 # alaina_invoice1 should have, from Jewelry, gold earrings and silver necklace, NOT studded bracelet. should also have licorice id, but that should not be shown for this merchant
   let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
-  let!(:alainainvoice9_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 6, unit_price: 1111, status:"shipped" )}
+  let!(:alainainvoice9_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 6, unit_price: 1111, status:"packaged" )}
 
   let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 7, unit_price: 1500, status:"packaged" )}
 
@@ -63,17 +63,35 @@ RSpec.describe 'Merchant Index Show Page' do
 
       it 'displays the quantity, sale price, and status for each item' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
-
+        save_and_open_page
         within("#item_#{gold_earrings.id}") do
           expect(page).to have_content("Quantity: #{alainainvoice9_itemgold_earrings.quantity}")
           expect(page).to have_content("Sale Price: #{alainainvoice9_itemgold_earrings.unit_price}")
-          expect(page).to have_content("Status: #{alainainvoice9_itemgold_earrings.status}")
+          expect(page).to have_field("Status", with: alainainvoice9_itemgold_earrings.status)
         end
 
         within("#item_#{silver_necklace.id}") do
           expect(page).to have_content("Quantity: #{alainainvoice1_itemsilver_necklace.quantity}")
           expect(page).to have_content("Sale Price: #{alainainvoice1_itemsilver_necklace.unit_price}")
-          expect(page).to have_content("Status: #{alainainvoice1_itemsilver_necklace.status}")
+          expect(page).to have_field("Status", with: alainainvoice1_itemsilver_necklace.status)
+        end
+      end
+      
+      describe 'when I change an items status and click the submit button' do
+        it 'takes me back to the merchant invoice show page and shows the updated status' do
+          visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+
+          within("#item_#{gold_earrings.id}") do
+            expect(page).to have_field("Status", with: "packaged")
+            select "shipped", from: :status
+            click_on "Update Item Status"
+          end
+
+          expect(current_path).to eq merchant_invoice_path(jewlery_city, alaina_invoice1)
+
+          within("#item_#{gold_earrings.id}") do
+            expect(page).to have_field("Status", with: "shipped")
+          end
         end
       end
     end
