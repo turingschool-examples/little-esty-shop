@@ -50,8 +50,8 @@ RSpec.describe Item, type: :model do
       invoice_item5 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item_snowboard.id, quantity: 700, unit_price: 10)
       invoice_item6 = InvoiceItem.create!(invoice_id: invoice6.id, item_id: item_snowboard.id, quantity: 600, unit_price: 10)
 
-      expect(item_ski.item_best_day).to eq("03/27/12")
-      expect(item_bike.item_best_day).to eq("04/27/13")
+      expect(item_ski.item_best_day).to eq(invoice1.created_at)
+      expect(item_bike.item_best_day).to eq(invoice3.created_at)
     end
   end
 

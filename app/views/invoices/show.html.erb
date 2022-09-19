@@ -4,7 +4,7 @@
 
 <p> Status: <%= @invoice.status %></p>
 <p> Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-
+<p> Total Revenue: <%= @invoice.total_revenue %>
 <h3> Customer: </h3>
   <%= @invoice.customer.first_name %>
   <%= @invoice.customer.last_name %>
@@ -17,7 +17,13 @@
     <% item.invoice_items.each do |invoice_item| %>
       <li><p> Quantity: <%= invoice_item.quantity %></p></li>
       <li><p> Unit Price: <%= invoice_item.unit_price %></p></li>
-      <li><p> Status: <%= invoice_item.status %></p></li>
+
+      <li><%= form_with model: @invoice_item, url: admin_invoice_path(@invoice), local: true  do |form| %>
+        <%= form.label :status %>
+        <%= form.select :status, [["Pending", "pending"], ["Packaged", "packaged"], ["Shipped", "shipped"]], :selected => invoice_item.status %> 
+        <%= form.submit "Update Item Status"%>
+      <% end %>
+
     <% end %> 
     </ul>
   </div>
