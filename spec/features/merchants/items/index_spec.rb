@@ -224,4 +224,96 @@ RSpec.describe 'Merchants Item Index' do
       end
     end
   end
+
+  # As a merchant
+  # When I visit my items index page
+  # Then I see the names of the top 5 most popular items ranked by total revenue generated
+  # And I see that each item name links to my merchant item show page for that item
+  # And I see the total revenue generated next to each item name
+
+  # Notes on Revenue Calculation:
+
+  # Only invoices with at least one successful transaction should count towards revenue
+  # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+  # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+
+  describe 'User Story 12 - When I visit my items index page' do
+    before :each do
+      @merchant_1 = create(:merchant)
+    
+      @item_1 = create(:item, name: "item_1", merchant: @merchant_1, active_status: :enabled)
+      @item_2 = create(:item, name: "item_2", merchant: @merchant_1)
+      @item_3 = create(:item, name: "item_3", merchant: @merchant_1)
+      @item_4 = create(:item, name: "item_4", merchant: @merchant_1, active_status: :enabled)
+      @item_5 = create(:item, name: "item_5", merchant: @merchant_1, active_status: :enabled)
+      @item_6 = create(:item, name: "item_6", merchant: @merchant_1)
+      @item_7 = create(:item, name: "item_7", merchant: @merchant_1, active_status: :enabled)
+      @item_8 = create(:item, name: "item_8", merchant: @merchant_1)
+      @item_9 = create(:item, name: "item_9", merchant: @merchant_1, active_status: :enabled)
+      @item_10 = create(:item, name: "item_10", merchant: @merchant_1)
+  
+      @invoice_1 = create(:invoice)
+      @invoice_2 = create(:invoice)
+      @invoice_3 = create(:invoice)
+      @invoice_4 = create(:invoice)
+  
+      create(:invoice_items, invoice: @invoice_1, item: @item_10, unit_price: 1000, quantity: 10)
+      create(:invoice_items, invoice: @invoice_1, item: @item_5, unit_price: 900, quantity: 9)
+      create(:invoice_items, invoice: @invoice_1, item: @item_3, unit_price: 800, quantity: 8)
+      create(:invoice_items, invoice: @invoice_2, item: @item_7, unit_price: 700, quantity: 7)
+      create(:invoice_items, invoice: @invoice_2, item: @item_6, unit_price: 600, quantity: 6)
+      create(:invoice_items, invoice: @invoice_3, item: @item_2, unit_price: 500, quantity: 5)
+      create(:invoice_items, invoice: @invoice_3, item: @item_4, unit_price: 400, quantity: 4)
+      create(:invoice_items, invoice: @invoice_4, item: @item_8, unit_price: 300, quantity: 3)
+      create(:invoice_items, invoice: @invoice_4, item: @item_9, unit_price: 200, quantity: 2)
+      create(:invoice_items, invoice: @invoice_4, item: @item_1, unit_price: 100, quantity: 1)
+      
+      create_list(:transaction, 5, invoice: @invoice_1, result: :success)
+      create_list(:transaction, 5, invoice: @invoice_1, result: :failed)
+      create_list(:transaction, 5, invoice: @invoice_2, result: :failed)
+      create_list(:transaction, 5, invoice: @invoice_2, result: :success)
+      create_list(:transaction, 5, invoice: @invoice_3, result: :failed)
+      create_list(:transaction, 5, invoice: @invoice_3, result: :failed)
+      create_list(:transaction, 5, invoice: @invoice_4, result: :success)
+      create_list(:transaction, 5, invoice: @invoice_4, result: :success)
+    end
+    it 'Then I see the names of the top 5 most popular items ranked by total revenue generated' do
+      visit merchant_items_path(@merchant_1)
+      
+      within "#5-best-items" do
+        expect(@item_10.name).to appear_before( @item_5.name)
+        expect(@item_5.name).to appear_before( @item_3.name)
+        expect(@item_3.name).to appear_before( @item_7.name)
+        expect(@item_7.name).to appear_before( @item_6.name)
+        expect(@item_5.name).to_not appear_before( @item_10.name)
+        expect(@item_3.name).to_not appear_before( @item_5.name)
+        expect(@item_7.name).to_not appear_before( @item_3.name)
+        expect(@item_6.name).to_not appear_before( @item_7.name)
+      end
+    end
+
+    it 'And I see that each item name links to my merchant item show page for that item' do
+      visit merchant_items_path(@merchant_1)
+
+      within "#5-best-items" do
+        find_link({text: "#{@item_10.name}", href: merchant_item_path(@merchant_1, @item_10)}).visible?
+        find_link({text: "#{@item_5.name}", href: merchant_item_path(@merchant_1, @item_5)}).visible?
+        find_link({text: "#{@item_3.name}", href: merchant_item_path(@merchant_1, @item_3)}).visible?
+        find_link({text: "#{@item_7.name}", href: merchant_item_path(@merchant_1, @item_7)}).visible?
+        find_link({text: "#{@item_6.name}", href: merchant_item_path(@merchant_1, @item_6)}).visible?
+      end
+    end
+
+    it 'And I see the total revenue generated next to each item name' do
+      visit merchant_items_path(@merchant_1)
+      save_and_open_page
+      within "#5-best-items" do
+        expect(page).to have_content(10000)
+        expect(page).to have_content(8100)
+        expect(page).to have_content(6400)
+        expect(page).to have_content(4900)
+        expect(page).to have_content(3600)
+      end
+    end
+  end
 end

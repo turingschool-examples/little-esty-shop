@@ -24,4 +24,12 @@ class Item < ApplicationRecord
     invoice_items.find_by(invoice_id: invoice_id).status
   end
 
+  def self.top_5_order_by_revenue
+    joins(invoice_items:[invoice:[:transactions]]).group(:id).where(transactions: { result: 0 }).select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').order('total_revenue desc').limit(5)
+  end
+
+  def revenue
+    invoice_items.sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
 end
