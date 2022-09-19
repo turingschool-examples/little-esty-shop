@@ -97,7 +97,6 @@ RSpec.describe 'Merchant Items Index' do
         it 'will show the top 5 merchants by revenue' do
           visit "/merchant/#{@merchant_1.id}/items"
           expect(page).to have_content("Top Five Items")
-          save_and_open_page
           within '.top_items' do
                 expect("Sourdough").to appear_before("Brioche")
                 expect("Brioche").to appear_before("Baguette")

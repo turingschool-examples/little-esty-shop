@@ -24,6 +24,7 @@
         <% @items.top_five_items.each do |item| %>
           <section id="top_item-<%= item.id %>">
             <li><p><%= link_to "#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}" %> : <%= number_to_currency(item.revenue) %> in sales</p>
+            <p><%= "Top selling date for #{item.name} was #{item.best_day.strftime("%-m/%d/%y")}" %></p>
             </li>
           </section>
         <% end %>
