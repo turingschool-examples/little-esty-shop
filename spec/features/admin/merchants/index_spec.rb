@@ -231,7 +231,6 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
       let!(:alainainvoice1_itemskooter) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: skooter.id, quantity: 4, unit_price: 12000, status:"packaged" )}
       let!(:alainainvoice1_itemrider) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: rider.id, quantity: 4, unit_price: 220000, status:"packaged" )}
 
-      
       it 'I see the names of the top 5 merchants by total revenue generated' do
         within '#top_5_merchants' do
           expect(jewlery_city.name).to appear_before(bmv.name)

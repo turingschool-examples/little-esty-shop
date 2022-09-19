@@ -13,6 +13,8 @@ RSpec.describe Merchant, type: :model do
   let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
   let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
   let!(:hummus_sculpt) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
+  let!(:bmv) { Merchant.create!(name: "Bavarian Motor Velocycles")}
+  let!(:tersela) { Merchant.create!(name: "Tersela")}
 
   let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
   let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500, enabled: true) }
@@ -28,6 +30,16 @@ RSpec.describe Merchant, type: :model do
   let!(:banana_earrings) { jewlery_city.items.create!(name: "Banana Earrings", description: "A fruit salad for your earlobes", unit_price: 2399) }
   let!(:nose_ring) { jewlery_city.items.create!(name: "Platinum Nose Ring", description: "They'll never know it's platinum!", unit_price: 4299) }
   let!(:spiked_wallet_chain) { jewlery_city.items.create!(name: "Spiked Wallet Chain", description: "Keep it close, keep it safe", unit_price: 1599) }
+
+  let!(:boxer) { doghats.items.create!(name: "Boxer Bowler", description: "Now with convienent earholes", unit_price: 16000, enabled: true) }
+  
+  let!(:trombone) { hummus_sculpt.items.create!(name: "Tahini Trombone", description: "Dont buy this", unit_price: 5000, enabled: true) }
+  let!(:pita) { hummus_sculpt.items.create!(name: "Picked Pita", description: "Yummy", unit_price: 700, enabled: true) }
+  
+  let!(:skooter) { bmv.items.create!(name: "Hollenskooter", description: "Some stuff", unit_price: 12000, enabled: true) }
+  let!(:rider) { bmv.items.create!(name: "Hosenpfloofer", description: "Some stuff", unit_price: 220000, enabled: true) }
+  
+  let!(:cyber_bus) { tersela.items.create!(name: "Cyberbus", description: "It may be electric, but it still only holds one person!", unit_price: 8900000, enabled: true) }
 
   let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
   let!(:whitney) { Customer.create!(first_name: "Whitney", last_name: "Gains")}
@@ -97,6 +109,13 @@ RSpec.describe Merchant, type: :model do
   let!(:alainainvoice8_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice8.id, item_id: nose_ring.id, quantity: 2881, unit_price: 4599, status:"shipped" )}
   let!(:alainainvoice5_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice9.id, item_id: spiked_wallet_chain.id, quantity: 827, unit_price: 3499, status:"shipped" )}
 
+  let!(:alainainvoice1_itempeanut) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: peanut.id, quantity: 1, unit_price: 1500, status:"packaged" )}
+  let!(:alainainvoice1_itemboxer) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: boxer.id, quantity: 4, unit_price: 16000, status:"packaged" )}
+  let!(:alainainvoice1_itemtrombone) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: trombone.id, quantity: 4, unit_price: 5000, status:"packaged" )}
+  let!(:alainainvoice1_itempita) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: pita.id, quantity: 4, unit_price: 700, status:"packaged" )}
+  let!(:alainainvoice1_itemskooter) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: skooter.id, quantity: 4, unit_price: 12000, status:"packaged" )}
+  let!(:alainainvoice1_itemrider) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: rider.id, quantity: 4, unit_price: 220000, status:"packaged" )}
+  
   let!(:whitneyinvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice1.id, item_id: silver_necklace.id, quantity: 3, unit_price: 270, status:"packaged" )}
   let!(:whitneyinvoice2_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice2.id, item_id: silver_necklace.id, quantity: 31, unit_price: 270, status:"shipped" )}
   let!(:whitneyinvoice3_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice3.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
@@ -121,9 +140,24 @@ RSpec.describe Merchant, type: :model do
 
     describe '#disabled_merchants' do
       it 'returns a list of disabled merchants' do
-        expect(Merchant.disabled_merchants).to eq([carly_silo, jewlery_city])
+        expect(Merchant.disabled_merchants).to eq([carly_silo, jewlery_city, bmv, tersela])
       end
-    end    
+    end  
+    
+    describe '#merchants_top_5' do
+      it 'returns a list of 5 merchants with the top total revenue ordered descending' do
+        expect(Merchant.merchants_top_5).to eq([jewlery_city, bmv, doghats, hummus_sculpt, carly_silo])
+      end
+
+      it 'calculates each top merchants total revenue' do
+        expected_revs = [33988082, 928000, 64000, 22800, 1500]
+        Merchant.merchants_top_5.each_with_index do |merchant, index|
+          expect(merchant.revenue).to eq(expected_revs[index])
+        end
+      end
+    end
+
+
   end
   
   describe 'instance methods' do
