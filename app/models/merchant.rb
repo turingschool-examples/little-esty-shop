@@ -20,14 +20,6 @@ class Merchant < ApplicationRecord
     invoices.group(:id).distinct
   end
 
-  def total_revenue
-    items.sum do |item|
-      item.invoices.invoice_successful_trans.sum do |invoice| 
-        item.price_sold(invoice.id) * item.quantity_purchased(invoice.id)
-      end  
-    end 
-  end  
-
   def self.top_5_order_by_revenue
     joins(invoice_items:[invoice:[:transactions]]).group(:id).where(transactions: { result: 0 }).select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').order('total_revenue desc').limit(5)
   end
