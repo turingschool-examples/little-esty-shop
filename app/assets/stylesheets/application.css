@@ -75,6 +75,17 @@ body {
   justify-content: center;
 }
 
+#index_body{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.index_column{
+  align-self: flex-start;
+  width: calc(50% - 30px);
+}
+
 .flash_message {
   background-color: lightgray;
   padding: 10px;
