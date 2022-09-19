@@ -92,7 +92,7 @@ RSpec.describe Item, type: :model do
     end
 
     it "#item-revenue" do
-      expect(@item_10.revenue).to eq(10000)
+      expect(@item_10.revenue).to eq(50000)
     end
   end
 end
