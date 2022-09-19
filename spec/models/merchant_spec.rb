@@ -11,6 +11,8 @@ RSpec.describe Merchant, type: :model do
 
   let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
   let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
+  let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
+  let!(:hummus_sculpt) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
 
   let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
   let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500, enabled: true) }
@@ -110,7 +112,20 @@ RSpec.describe Merchant, type: :model do
   let!(:polina_invoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:"shipped" )}
   let!(:polina_invoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:"shipped" )}
 
-    
+  describe 'class methods' do
+    describe '#enabled_merchants' do
+      it 'returns a list of enabled merchants' do
+        expect(Merchant.enabled_merchants).to eq([doghats, hummus_sculpt])
+      end
+    end
+
+    describe '#disabled_merchants' do
+      it 'returns a list of disabled merchants' do
+        expect(Merchant.disabled_merchants).to eq([carly_silo, jewlery_city])
+      end
+    end    
+  end
+  
   describe 'instance methods' do
     describe '#enabled_items' do
       it 'returns an array of enabled items' do

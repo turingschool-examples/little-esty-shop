@@ -143,12 +143,12 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
 
       describe 'status grouping' do
         let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
-        let!(:hummus) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
+        let!(:hummus_sculpt) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
 
         it 'groups merchants by enabled status' do 
           within('#enabled_merchants') do
             expect(page).to have_content(doghats.name)
-            expect(page).to have_content(hummus.name)
+            expect(page).to have_content(hummus_sculpt.name)
 
             expect(page).to_not have_content(carly.name)
             expect(page).to_not have_content(jewlery_city.name)
@@ -156,7 +156,7 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
 
           within('#disabled_merchants') do
             expect(page).to_not have_content(doghats.name)
-            expect(page).to_not have_content(hummus.name)
+            expect(page).to_not have_content(hummus_sculpt.name)
 
             expect(page).to have_content(carly.name)
             expect(page).to have_content(jewlery_city.name)
