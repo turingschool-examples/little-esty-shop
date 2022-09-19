@@ -9,6 +9,20 @@ class ItemsController < ApplicationController
     @merchant = @item.merchant
   end
 
+  def new
+  end
+
+  def create
+    item = Item.new(item_params)
+
+    if item.save
+      redirect_to("/merchants/#{item_params[:item_id]}/items")
+    else
+      redirect_to("/merhcants/#{item_params[:item_id]}/items/new}")
+      flash[:alert] = "Error: SOMETHING WENT WRONG "
+    end
+  end
+
   def edit
     @item = Item.find(params[:id])
   end
