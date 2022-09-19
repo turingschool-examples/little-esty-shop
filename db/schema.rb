@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_234501) do
     t.string "name"
     t.string "description"
     t.integer "unit_price"
+    t.boolean "enabled", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.bigint "merchant_id"
