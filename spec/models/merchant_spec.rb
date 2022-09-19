@@ -182,7 +182,6 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant_1.best_day).to eq("2020-06-30 16:00:00.000000000 +0000")
     end
 
-
     it "top 5 customers" do
       expect(Customer.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
     end
