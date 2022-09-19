@@ -9,7 +9,7 @@
   <p>
     <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
     <%= button_to "Disable", admin_merchant_path(merchant.id) , method: :patch, params: {merchant: {active_status: :disabled}}%>
-  </p>
+  </p>``
   </div>
 <% end %>
 </span>

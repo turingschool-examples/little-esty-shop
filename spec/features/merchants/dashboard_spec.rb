@@ -2,97 +2,77 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Dashboard' do
   before :each do
-    @merchant_1 = Merchant.create!(name: "Johns Tools")
-    @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
-    @pretty_plumbing = Merchant.create!(name: "Pretty Plumbing")
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
+    @pretty_plumbing = create(:merchant)
 
-    @sink = @pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.")
-    @rug = @pretty_plumbing.items.create!(name: "Hall Rug", description: "It's a rug.")
-    @chair = @pretty_plumbing.items.create!(name: "Great Chair", description: "It's an okay chair.")
-    @lamp = @pretty_plumbing.items.create!(name: "Table Lamp", description: "Lamp for tables.")
-    @toilet = @pretty_plumbing.items.create!(name: "XL-Toilet", description: "Big Toilet.")
+    @items_1 = create_list(:item, 6, merchant: @pretty_plumbing)
+    @items_2 = create_list(:item, 6, merchant: @merchant_2)
 
-    @customer_1 = Customer.create!(first_name: "Larry", last_name: "Smith")
-    @customer_2 = Customer.create!(first_name: "Susan", last_name: "Field")
-    @customer_3 = Customer.create!(first_name: "Barry", last_name: "Roger")
-    @customer_4 = Customer.create!(first_name: "Mary", last_name: "Flower")
-    @customer_5 = Customer.create!(first_name: "Tim", last_name: "Colin")
-    @customer_6 = Customer.create!(first_name: "Harry", last_name: "Dodd")
-    @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann")
-    @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone")
+    @customers_1 = create_list(:customer, 10)
+    @customers_2 = create_list(:customer, 10)
 
-    @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
-    @invoice_2 = @customer_2.invoices.create!(status: :completed, created_at: "09-10-2022")
-    @invoice_3 = @customer_3.invoices.create!(status: :completed, created_at: "10-08-2022")
-    @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-06-2022")
-    @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-10-2022")
-    @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
-    @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "10-09-2022")
-    @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "10-11-2022")
+    @invoice_1 = create(:invoice, customer: @customers_1[0], created_at: "08-10-2022")
+    @invoice_2 = create(:invoice, customer: @customers_1[1], created_at: "09-10-2022")
+    @invoice_3 = create(:invoice, customer: @customers_1[2], created_at: "10-08-2022")
+    @invoice_4 = create(:invoice, customer: @customers_1[3], created_at: "10-06-2022")
+    @invoice_5 = create(:invoice, customer: @customers_1[4], created_at: "10-10-2022")
+    @invoice_6 = create(:invoice, customer: @customers_1[5], created_at: "01-07-2022")
+    @invoice_7 = create(:invoice, customer: @customers_1[6], created_at: "10-09-2022")
+    @invoice_8 = create(:invoice, customer: @customers_1[7], created_at: "10-11-2022")
 
-    # customer_1 transactions
-    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_2 = @invoice_1.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_3 = @invoice_1.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_4 = @invoice_1.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_5 = @invoice_1.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_6 = @invoice_1.transactions.create!(credit_card_number: "5562017483947471", credit_card_expiration_date: "", result: :success)
-    @transaction_7 = @invoice_1.transactions.create!(credit_card_number: "5478972046869861", credit_card_expiration_date: "", result: :success)
-    @transaction_8 = @invoice_1.transactions.create!(credit_card_number: "4333324752400785", credit_card_expiration_date: "", result: :success)
+    @invoice_9 = create(:invoice, customer: @customers_2[0], created_at: "08-10-2020")
+    @invoice_10 = create(:invoice, customer: @customers_2[1], created_at: "09-10-2021")
+    @invoice_11 = create(:invoice, customer: @customers_2[2], created_at: "10-08-2010")
+    @invoice_12 = create(:invoice, customer: @customers_2[3], created_at: "10-06-2001")
+    @invoice_13 = create(:invoice, customer: @customers_2[4], created_at: "10-10-2021")
+    @invoice_14 = create(:invoice, customer: @customers_2[5], created_at: "01-07-2002")
+    @invoice_15 = create(:invoice, customer: @customers_2[6], created_at: "26-09-2015")
+    @invoice_16 = create(:invoice, customer: @customers_2[7], created_at: "10-12-2022")
 
-    # customer_2 transactions
-    @transaction_9 = @invoice_2.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_10 = @invoice_2.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_11 = @invoice_2.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_12 = @invoice_2.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_13 = @invoice_2.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_14 = @invoice_2.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_15 = @invoice_2.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success)
-    @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success)
+    # customers_1[0] transactions
+    @transactions_1 = create_list(:transaction, 3, invoice: @invoice_1, result: :failed)
+    @transactions_2 = create_list(:transaction, 5, invoice: @invoice_1, result: :success)
+    # customers_1[1] transactions
+    @transactions_3 = create_list(:transaction, 1, invoice: @invoice_2, result: :failed)
+    @transactions_4 = create_list(:transaction, 7, invoice: @invoice_2, result: :success)
+    # customers_1[2] transactions
+    @transactions_5 = create_list(:transaction, 2, invoice: @invoice_3, result: :failed)
+    @transactions_6 = create_list(:transaction, 6, invoice: @invoice_3, result: :success)
+    # customers_1[3] transactions
+    @transactions_7 = create_list(:transaction, 8, invoice: @invoice_4, result: :success)
+    # customers_1[4] transactions
+    @transactions_8 = create_list(:transaction, 4, invoice: @invoice_5, result: :failed)
+    # customers_1[5] transactions
+    @transactions_9 = create_list(:transaction, 2, invoice: @invoice_6, result: :failed)
+    @transactions_10 = create_list(:transaction, 2, invoice: @invoice_6, result: :success)
+    # customers_1[6] transactions
+    @transactions_11 = create_list(:transaction, 3, invoice: @invoice_7, result: :failed)
+    @transactions_12 = create_list(:transaction, 1, invoice: @invoice_7, result: :success)
+    # customers_1[7] transactions
+    @transactions_13 = create_list(:transaction, 4, invoice: @invoice_8, result: :success)
 
-    # customer_3 transactions
-    @transaction_17 = @invoice_3.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_18 = @invoice_3.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_19 = @invoice_3.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_20 = @invoice_3.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_21 = @invoice_3.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_22 = @invoice_3.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_23 = @invoice_3.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :failed)
-    @transaction_24 = @invoice_3.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :failed)
-
-    # customer_4 transactions
-    @transaction_25 = @invoice_4.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_26 = @invoice_4.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_27 = @invoice_4.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_28 = @invoice_4.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_29 = @invoice_4.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_30 = @invoice_4.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_31 = @invoice_4.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success)
-    @transaction_32 = @invoice_4.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success)
-
-    # customer_5 transactions
-    @transaction_33 = @invoice_5.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_34 = @invoice_5.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_35 = @invoice_5.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_36 = @invoice_5.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :failed)
-
-    # customer_6 transactions
-    @transaction_37 = @invoice_6.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_38 = @invoice_6.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_39 = @invoice_6.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_40 = @invoice_6.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :failed)
-
-    # customer_7 transactions
-    @transaction_41 = @invoice_7.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_42 = @invoice_7.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_43 = @invoice_7.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_44 = @invoice_7.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :failed)
-
-    # customer_8 transactions
-    @transaction_45 = @invoice_8.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_46 = @invoice_8.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_47 = @invoice_8.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_48 = @invoice_8.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
+    # customers_2[0] transactions
+    @transactions_14 = create_list(:transaction, 3, invoice: @invoice_9, result: :failed)
+    @transactions_15 = create_list(:transaction, 5, invoice: @invoice_9, result: :success)
+    # customers_2[1] transactions
+    @transactions_16 = create_list(:transaction, 1, invoice: @invoice_10, result: :failed)
+    @transactions_17 = create_list(:transaction, 7, invoice: @invoice_10, result: :success)
+    # customers_2[2] transactions
+    @transactions_18 = create_list(:transaction, 2, invoice: @invoice_11, result: :failed)
+    @transactions_19 = create_list(:transaction, 6, invoice: @invoice_11, result: :success)
+    # customers_2[3] transactions
+    @transactions_20 = create_list(:transaction, 8, invoice: @invoice_12, result: :success)
+    # customers_2[4] transactions
+    @transactions_21 = create_list(:transaction, 4, invoice: @invoice_13, result: :failed)
+    # customers_2[5] transactions
+    @transactions_22 = create_list(:transaction, 2, invoice: @invoice_14, result: :failed)
+    @transactions_23 = create_list(:transaction, 2, invoice: @invoice_14, result: :success)
+    # customers_2[6] transactions
+    @transactions_24 = create_list(:transaction, 3, invoice: @invoice_15, result: :failed)
+    @transactions_25 = create_list(:transaction, 1, invoice: @invoice_15, result: :success)
+    # customers_2[7] transactions
+    @transactions_26 = create_list(:transaction, 4, invoice: @invoice_16, result: :success)
   end
 
   describe 'as a merchant' do
@@ -101,7 +81,6 @@ RSpec.describe 'Merchant Dashboard' do
         # As a merchant,
         # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
         # Then I see the name of my merchant
-
       it 'then I see the name of the merchant' do
 
         visit merchant_dashboard_path(@merchant_1)
@@ -122,7 +101,6 @@ RSpec.describe 'Merchant Dashboard' do
       # When I visit my merchant dashboard
       # Then I see link to my merchant items index (/merchants/merchant_id/items)
       # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
-
       it 'Then I see link to my merchant items index (/merchants/merchant_id/items)' do
         visit merchant_dashboard_path(@merchant_1)
 
@@ -146,68 +124,120 @@ RSpec.describe 'Merchant Dashboard' do
 
     describe 'User Story 3' do
       before :each do
-        @sink.invoices << @invoice_1
-        @sink.invoices << @invoice_2
-        @sink.invoices << @invoice_3
-        @sink.invoices << @invoice_4
-        @sink.invoices << @invoice_5
-        @sink.invoices << @invoice_6
-        @sink.invoices << @invoice_7
-        @sink.invoices << @invoice_8
+        @items_1[0].invoices << @invoice_1
+        @items_1[0].invoices << @invoice_2
+        @items_1[0].invoices << @invoice_3
+        @items_1[0].invoices << @invoice_4
+        @items_1[0].invoices << @invoice_5
+        @items_1[0].invoices << @invoice_6
+        @items_1[0].invoices << @invoice_7
+        @items_1[0].invoices << @invoice_8
+
+        @items_2[1].invoices << @invoice_9
+        @items_2[1].invoices << @invoice_10
+        @items_2[1].invoices << @invoice_11
+        @items_2[1].invoices << @invoice_12
+        @items_2[1].invoices << @invoice_13
+        @items_2[1].invoices << @invoice_14
+        @items_2[1].invoices << @invoice_15
+        @items_2[1].invoices << @invoice_16
       end
+
       # As a merchant,
       # When I visit my merchant dashboard
       # Then I see the names of the top 5 customers
       # who have conducted the largest number of successful transactions with my merchant
       # And next to each customer name I see the number of successful transactions they have
       # conducted with my merchant
-
       it 'Then I see the names of the top 5 customers that have conducted transactions with merchant' do
 
         visit merchant_dashboard_path(@pretty_plumbing)
 
         within("#top-5-customers") do
-          expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
-          expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
-          expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")
-          expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name}")
-          expect(page).to have_content("#{@customer_8.first_name} #{@customer_8.last_name}")
+          expect(page).to have_content("#{@customers_1[3].first_name} #{@customers_1[3].last_name}")
+          expect(page).to have_content("#{@customers_1[1].first_name} #{@customers_1[1].last_name}")
+          expect(page).to have_content("#{@customers_1[2].first_name} #{@customers_1[2].last_name}")
+          expect(page).to have_content("#{@customers_1[0].first_name} #{@customers_1[0].last_name}")
+          expect(page).to have_content("#{@customers_1[7].first_name} #{@customers_1[7].last_name}")
         end
 
-        expect(page).to_not have_content("#{@customer_5.first_name} #{@customer_5.last_name}")
-        expect(page).to_not have_content("#{@customer_6.first_name} #{@customer_6.last_name}")
-        expect(page).to_not have_content("#{@customer_7.first_name} #{@customer_7.last_name}")
+        expect(page).to_not have_content("#{@customers_1[4].first_name} #{@customers_1[4].last_name}")
+        expect(page).to_not have_content("#{@customers_1[5].first_name} #{@customers_1[5].last_name}")
+        expect(page).to_not have_content("#{@customers_1[6].first_name} #{@customers_1[6].last_name}")
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        within("#top-5-customers") do
+          expect(page).to have_content("#{@customers_2[3].first_name} #{@customers_2[3].last_name}")
+          expect(page).to have_content("#{@customers_2[1].first_name} #{@customers_2[1].last_name}")
+          expect(page).to have_content("#{@customers_2[2].first_name} #{@customers_2[2].last_name}")
+          expect(page).to have_content("#{@customers_2[0].first_name} #{@customers_2[0].last_name}")
+          expect(page).to have_content("#{@customers_2[7].first_name} #{@customers_2[7].last_name}")
+        end
+
+        expect(page).to_not have_content("#{@customers_2[4].first_name} #{@customers_2[4].last_name}")
+        expect(page).to_not have_content("#{@customers_2[5].first_name} #{@customers_2[5].last_name}")
+        expect(page).to_not have_content("#{@customers_2[6].first_name} #{@customers_2[6].last_name}")
       end
+
 
       it 'And next to each customer name I see the number of successful transactions they have with merchant' do
 
         visit merchant_dashboard_path(@pretty_plumbing)
 
         within("#top-5-customers") do
-          within("##{@customer_4.id}") do
-            expect(page).to have_content("#{@customer_4.invoices.successful_transactions_count}")
-            expect(page).to_not have_content("#{@customer_3.invoices.successful_transactions_count}")
+          within("##{@customers_1[3].id}") do
+            expect(page).to have_content("#{@customers_1[3].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_1[2].invoices.successful_transactions}")
           end
-          within("##{@customer_2.id}") do
-            expect(page).to have_content("#{@customer_2.invoices.successful_transactions_count}")
-            expect(page).to_not have_content("#{@customer_3.invoices.successful_transactions_count}")
+          within("##{@customers_1[1].id}") do
+            expect(page).to have_content("#{@customers_1[1].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_1[2].invoices.successful_transactions}")
           end
-          within("##{@customer_3.id}") do
-            expect(page).to have_content("#{@customer_3.invoices.successful_transactions_count}")
-            expect(page).to_not have_content("#{@customer_1.invoices.successful_transactions_count}")
+          within("##{@customers_1[2].id}") do
+            expect(page).to have_content("#{@customers_1[2].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_1[0].invoices.successful_transactions}")
           end
-          within("##{@customer_1.id}") do
-            expect(page).to have_content("#{@customer_1.invoices.successful_transactions_count}")
-            expect(page).to_not have_content("#{@customer_8.invoices.successful_transactions_count}")
+          within("##{@customers_1[0].id}") do
+            expect(page).to have_content("#{@customers_1[0].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_1[7].invoices.successful_transactions}")
           end
-          within("##{@customer_8.id}") do
-            expect(page).to have_content("#{@customer_8.invoices.successful_transactions_count}")
-            expect(page).to_not have_content("#{@customer_4.invoices.successful_transactions_count}")
+          within("##{@customers_1[7].id}") do
+            expect(page).to have_content("#{@customers_1[7].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_1[3].invoices.successful_transactions}")
           end
 
-          expect(page).to_not have_content("#{@customer_5.invoices.successful_transactions_count}")
-          expect(page).to_not have_content("#{@customer_6.invoices.successful_transactions_count}")
-          expect(page).to_not have_content("#{@customer_7.invoices.successful_transactions_count}")
+          expect(page).to_not have_content("#{@customers_1[4].invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customers_1[5].invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customers_1[6].invoices.successful_transactions}")
+        end
+        visit merchant_dashboard_path(@merchant_2)
+
+        within("#top-5-customers") do
+          within("##{@customers_2[3].id}") do
+            expect(page).to have_content("#{@customers_2[3].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_2[2].invoices.successful_transactions}")
+          end
+          within("##{@customers_2[1].id}") do
+            expect(page).to have_content("#{@customers_2[1].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_2[2].invoices.successful_transactions}")
+          end
+          within("##{@customers_2[2].id}") do
+            expect(page).to have_content("#{@customers_2[2].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_2[0].invoices.successful_transactions}")
+          end
+          within("##{@customers_2[0].id}") do
+            expect(page).to have_content("#{@customers_2[0].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_2[7].invoices.successful_transactions}")
+          end
+          within("##{@customers_2[7].id}") do
+            expect(page).to have_content("#{@customers_2[7].invoices.successful_transactions}")
+            expect(page).to_not have_content("#{@customers_2[3].invoices.successful_transactions}")
+          end
+
+          expect(page).to_not have_content("#{@customers_2[4].invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customers_2[5].invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customers_2[6].invoices.successful_transactions}")
         end
       end
     end
@@ -219,85 +249,151 @@ RSpec.describe 'Merchant Dashboard' do
     # have been ordered and have not yet been shipped,
     # And next to each Item I see the id of the invoice that ordered my item
     # And each invoice id is a link to my merchant's invoice show page
-
     describe 'User Story 4' do
       it 'Then I see a section for Items Ready to Ship' do
 
         visit merchant_dashboard_path(@pretty_plumbing)
 
         expect(page).to have_content("Items Ready to Ship:")
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        expect(page).to have_content("Items Ready to Ship:")
       end
 
       it 'In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped' do
+        create(:invoice_items, invoice: @invoice_1, item: @items_1[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_2, item: @items_1[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_3, item: @items_1[2], status: :shipped)
+        create(:invoice_items, invoice: @invoice_4, item: @items_1[3], status: :pending)
+        create(:invoice_items, invoice: @invoice_5, item: @items_1[4], status: :pending)
+        create(:invoice_items, invoice: @invoice_6, item: @items_1[0], status: :pending)
+        create(:invoice_items, invoice: @invoice_7, item: @items_1[1], status: :packaged)
+        create(:invoice_items, invoice: @invoice_8, item: @items_1[2], status: :shipped)
+        create(:invoice_items, invoice: @invoice_1, item: @items_1[3], status: :shipped)
+        create(:invoice_items, invoice: @invoice_2, item: @items_1[4], status: :shipped)
 
-        @invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        @invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        @invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :shipped)
-        @invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :pending)
-        @invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
-
-        @invoice_item_6 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_6.id}", status: :pending)
-        @invoice_item_7 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_7.id}", status: :packaged)
-        @invoice_item_8 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_8.id}", status: :shipped)
-        @invoice_item_9 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        @invoice_item_10 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
+        create(:invoice_items, invoice: @invoice_9, item: @items_2[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_10, item: @items_2[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_11, item: @items_2[2], status: :shipped)
+        create(:invoice_items, invoice: @invoice_12, item: @items_2[3], status: :pending)
+        create(:invoice_items, invoice: @invoice_13, item: @items_2[4], status: :pending)
+        create(:invoice_items, invoice: @invoice_14, item: @items_2[0], status: :pending)
+        create(:invoice_items, invoice: @invoice_15, item: @items_2[1], status: :packaged)
+        create(:invoice_items, invoice: @invoice_16, item: @items_2[2], status: :shipped)
+        create(:invoice_items, invoice: @invoice_9, item: @items_2[3], status: :shipped)
+        create(:invoice_items, invoice: @invoice_10, item: @items_2[4], status: :shipped)
 
         visit merchant_dashboard_path(@pretty_plumbing)
-      
-        expect(page).to have_content(@lamp.name)
-        expect(page).to have_content(@toilet.name)
-        expect(page).to have_content(@sink.name)
-        expect(page).to have_content(@rug.name)
-        expect(page).to_not have_content(@chair.name)
+
+        expect(page).to have_content(@items_1[3].name)
+        expect(page).to have_content(@items_1[4].name)
+        expect(page).to have_content(@items_1[0].name)
+        expect(page).to have_content(@items_1[1].name)
+        expect(page).to_not have_content(@items_1[2].name)
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        expect(page).to have_content(@items_2[3].name)
+        expect(page).to have_content(@items_2[4].name)
+        expect(page).to have_content(@items_2[0].name)
+        expect(page).to have_content(@items_2[1].name)
+        expect(page).to_not have_content(@items_2[2].name)
       end
 
       it 'And next to each Item I see the id of the invoice that ordered my item' do
-        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
-        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
-        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
+        create(:invoice_items, invoice: @invoice_1, item: @items_1[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_2, item: @items_1[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_3, item: @items_1[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_4, item: @items_1[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_5, item: @items_1[4], status: :pending)
+
+        create(:invoice_items, invoice: @invoice_9, item: @items_2[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_10, item: @items_2[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_11, item: @items_2[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_12, item: @items_2[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_13, item: @items_2[4], status: :pending)
 
         visit merchant_dashboard_path(@pretty_plumbing)
 
-        within("##{@chair.id}") do
+        within("##{@items_1[2].id}") do
           expect(page).to have_content("#{@invoice_3.id}")
           expect(page).to_not have_content("#{@invoice_1.id}")
           expect(page).to_not have_content("#{@invoice_5.id}")
         end
 
-        within("##{@lamp.id}") do
+        within("##{@items_1[3].id}") do
           expect(page).to have_content("#{@invoice_4.id}")
           expect(page).to_not have_content("#{@invoice_2.id}")
           expect(page).to_not have_content("#{@invoice_3.id}")
         end
 
-        within("##{@toilet.id}") do
+        within("##{@items_1[4].id}") do
           expect(page).to have_content("#{@invoice_5.id}")
           expect(page).to_not have_content("#{@invoice_2.id}")
           expect(page).to_not have_content("#{@invoice_3.id}")
         end
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        within("##{@items_2[2].id}") do
+          expect(page).to have_content("#{@invoice_11.id}")
+          expect(page).to_not have_content("#{@invoice_9.id}")
+          expect(page).to_not have_content("#{@invoice_13.id}")
+        end
+
+        within("##{@items_2[3].id}") do
+          expect(page).to have_content("#{@invoice_12.id}")
+          expect(page).to_not have_content("#{@invoice_10.id}")
+          expect(page).to_not have_content("#{@invoice_11.id}")
+        end
+
+        within("##{@items_2[4].id}") do
+          expect(page).to have_content("#{@invoice_13.id}")
+          expect(page).to_not have_content("#{@invoice_10.id}")
+          expect(page).to_not have_content("#{@invoice_11.id}")
+        end
       end
 
       it 'And each invoice id is a link to my merchants invoice show page' do
-        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
-        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
-        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
+        create(:invoice_items, invoice: @invoice_1, item: @items_1[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_2, item: @items_1[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_3, item: @items_1[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_4, item: @items_1[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_5, item: @items_1[4], status: :pending)
+
+        create(:invoice_items, invoice: @invoice_9, item: @items_2[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_10, item: @items_2[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_11, item: @items_2[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_12, item: @items_2[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_13, item: @items_2[4], status: :pending)
 
         visit merchant_dashboard_path(@pretty_plumbing)
 
-        within("##{@chair.id}") do
+        within("##{@items_1[2].id}") do
           find_link({text: "#{@invoice_3.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_3.id}"}).visible?
         end
 
-        within("##{@lamp.id}") do
+        within("##{@items_1[3].id}") do
           find_link({text: "#{@invoice_4.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_4.id}"}).visible?
         end
 
-        within("##{@toilet.id}") do
+        within("##{@items_1[4].id}") do
           find_link({text: "#{@invoice_5.id}", href: "/merchants/#{@pretty_plumbing.id}/invoices/#{@invoice_5.id}"}).visible?
+        end
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        within("##{@items_2[2].id}") do
+          find_link({text: "#{@invoice_11.id}", href: "/merchants/#{@merchant_2.id}/invoices/#{@invoice_11.id}"}).visible?
+        end
+
+        within("##{@items_2[3].id}") do
+          find_link({text: "#{@invoice_12.id}", href: "/merchants/#{@merchant_2.id}/invoices/#{@invoice_12.id}"}).visible?
+        end
+
+        within("##{@items_2[4].id}") do
+          find_link({text: "#{@invoice_13.id}", href: "/merchants/#{@merchant_2.id}/invoices/#{@invoice_13.id}"}).visible?
         end
       end
     end
@@ -308,44 +404,70 @@ RSpec.describe 'Merchant Dashboard' do
     # Next to each Item name I see the date that the invoice was created
     # And I see the date formatted like "Monday, July 18, 2019"
     # And I see that the list is ordered from oldest to newest
-
     describe 'User Story 5' do
 
       it 'Next to each Item name I see the date that the invoice was created' do
+        create(:invoice_items, invoice: @invoice_1, item: @items_1[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_2, item: @items_1[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_3, item: @items_1[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_4, item: @items_1[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_5, item: @items_1[4], status: :pending)
 
-        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
-        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
-        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
+        create(:invoice_items, invoice: @invoice_9, item: @items_2[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_10, item: @items_2[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_11, item: @items_2[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_12, item: @items_2[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_13, item: @items_2[4], status: :pending)
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
-        within("##{@chair.id}") do
+        within("##{@items_1[2].id}") do
           expect(page).to have_content("Wednesday, August 10, 2022")
           expect(page).to_not have_content("Thursday, November 5, 1882")
         end
 
-        within("##{@lamp.id}") do
+        within("##{@items_1[3].id}") do
           expect(page).to have_content("Friday, June 10, 2022")
           expect(page).to_not have_content("Wednesday, August 10, 2022")
         end
 
-        within("##{@toilet.id}") do
+        within("##{@items_1[4].id}") do
           expect(page).to have_content("Monday, October 10, 2022")
+          expect(page).to_not have_content("Friday, June 10, 2022")
+        end
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        within("##{@items_2[2].id}") do
+          expect(page).to have_content("Tuesday, August 10, 2010")
+          expect(page).to_not have_content("Thursday, November 5, 1882")
+        end
+
+        within("##{@items_2[3].id}") do
+          expect(page).to have_content("Sunday, June 10, 2001")
+          expect(page).to_not have_content("Wednesday, August 10, 2022")
+        end
+
+        within("##{@items_2[4].id}") do
+          expect(page).to have_content("Sunday, October 10, 2021")
           expect(page).to_not have_content("Friday, June 10, 2022")
         end
       end
 
       it 'And I see that the list is ordered from oldest to newest' do
+        create(:invoice_items, invoice: @invoice_1, item: @items_1[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_2, item: @items_1[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_3, item: @items_1[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_4, item: @items_1[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_5, item: @items_1[4], status: :pending)
 
-        invoice_item_1 = InvoiceItem.create!(item_id: "#{@sink.id}", invoice_id: "#{@invoice_1.id}", status: :shipped)
-        invoice_item_2 = InvoiceItem.create!(item_id: "#{@rug.id}", invoice_id: "#{@invoice_2.id}", status: :shipped)
-        invoice_item_3 = InvoiceItem.create!(item_id: "#{@chair.id}", invoice_id: "#{@invoice_3.id}", status: :packaged)
-        invoice_item_4 = InvoiceItem.create!(item_id: "#{@lamp.id}", invoice_id: "#{@invoice_4.id}", status: :packaged)
-        invoice_item_5 = InvoiceItem.create!(item_id: "#{@toilet.id}", invoice_id: "#{@invoice_5.id}", status: :pending)
+        create(:invoice_items, invoice: @invoice_9, item: @items_2[0], status: :shipped)
+        create(:invoice_items, invoice: @invoice_10, item: @items_2[1], status: :shipped)
+        create(:invoice_items, invoice: @invoice_11, item: @items_2[2], status: :packaged)
+        create(:invoice_items, invoice: @invoice_12, item: @items_2[3], status: :packaged)
+        create(:invoice_items, invoice: @invoice_13, item: @items_2[4], status: :pending)
 
-        visit "/merchants/#{@pretty_plumbing.id}/dashboard"
+        visit merchant_dashboard_path(@pretty_plumbing)
 
         within("#items-not-shipped") do
           expect("Friday, June 10, 2022").to appear_before("Wednesday, August 10, 2022")
@@ -353,6 +475,15 @@ RSpec.describe 'Merchant Dashboard' do
           expect("Wednesday, August 10, 2022").to appear_before("Monday, October 10, 2022")
           expect("Monday, October 10, 2022").to_not appear_before("Friday, June 10, 2022")
         end
+
+        visit merchant_dashboard_path(@merchant_2)
+
+        within("#items-not-shipped") do
+          expect("Sunday, June 10, 2001").to appear_before("Tuesday, August 10, 2010")
+          expect("Sunday, June 10, 2001").to appear_before("Sunday, October 10, 2021")
+          expect("Tuesday, August 10, 2010").to appear_before("Sunday, October 10, 2021")
+          expect("Sunday, October 10, 2021").to_not appear_before("Sunday, June 10, 2001")
+        end 
       end
     end
   end

@@ -1,4 +1,11 @@
 <h2><%= @merchant.name %> </h2>
+
+<h3>Top 5 Sellers</h3>
+<div id="5-best-items">
+  <% @merchant.items.top_5_order_by_revenue.each do |item| %>
+    <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> - Revenue: <%= item.revenue %></p>
+  <% end %>
+</div>
 <%= button_to "Create New Item", new_merchant_item_path(@merchant) , method: :get %>
 <span id="enabled-items" >
   <h3>Enabled Items</h3>
