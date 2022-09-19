@@ -27,6 +27,5 @@ class Invoice < ApplicationRecord
     .select('invoices.created_at, invoices.id, count(invoices.id) as sales')
     .order('sales desc, created_at')
     .first
-    .created_at
   end
 end

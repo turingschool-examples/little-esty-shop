@@ -127,10 +127,10 @@ RSpec.describe "Admin Merchants" do
           @item_5 = create(:item, merchant: @merchant_5)
           @item_6 = create(:item, merchant: @merchant_6)
 
-          @invoice_2 = create(:invoice)
-          @invoice_1 = create(:invoice)
-          @invoice_3 = create(:invoice)
-          @invoice_4 = create(:invoice)
+          @invoice_2 = create(:invoice, status: :completed, created_at: "08-10-2022")
+          @invoice_1 = create(:invoice, status: :completed, created_at: "01-07-2022")
+          @invoice_3 = create(:invoice, status: :completed, created_at: "15-08-2022")
+          @invoice_4 = create(:invoice, status: :completed, created_at: "23-12-2022")
 
           @invoice_items_1 = create(:invoice_items, invoice: @invoice_1, item: @item_1, unit_price: 600, quantity: 1) #600 - fails
           @invoice_items_2 = create(:invoice_items, invoice: @invoice_2, item: @item_2, unit_price: 400, quantity: 1) #400
@@ -202,6 +202,22 @@ RSpec.describe "Admin Merchants" do
             end
           end
         end
+
+        it 'Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant with the label “Top selling date for was ".' do
+          visit admin_merchants_path
+          within("#top-5-merchants") do
+            within("#merchant-#{@merchant_5.id}") do
+              expect(page).to have_content("Top selling date for #{@merchant_5.name} was #{@merchant_5.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+              expect(page).to_not have_content("Top selling date for #{@merchant_6.name} was #{@merchant_6.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+            end
+            visit admin_merchants_path
+            within("#merchant-#{@merchant_2.id}") do
+              expect(page).to have_content("Top selling date for #{@merchant_2.name} was #{@merchant_2.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+              expect(page).to_not have_content("Top selling date for #{@merchant_6.name} was #{@merchant_6.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+            end
+          end
+        end
+
       end
     end
   end
