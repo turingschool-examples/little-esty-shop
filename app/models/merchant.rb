@@ -3,6 +3,7 @@ class Merchant < ApplicationRecord
   
   def not_shipped
     items.select("items.*, invoice_items.status as not_shipped").joins(:invoice_items).where.not("invoice_items.status = ?", 2)
+  end 
     
   def enabled_items
     items.where(enabled: true)
@@ -21,4 +22,13 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
-end
+
+  def top_five_cust_by_transaction
+    items.joins( invoices: [:transactions, :customer])
+    .where("transactions.result = 0")
+    .select("customers.*, count(transactions.id) as transaction_count")
+    .group("customers.id")
+    .order(transaction_count: :desc)
+    .limit(5)
+  end
+end 
