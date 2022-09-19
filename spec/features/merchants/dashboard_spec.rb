@@ -46,10 +46,65 @@ RSpec.describe 'Merchant_Dashboard' do
       describe 'Merchant Dashboard Statistic- Favorite customers' do
         it 'As merchant in dashboard, I see names of top 5 customers who have largests number of 
             transaction with merchant' do
+           steph_merchant = Merchant.create!(name: "Stephen's shop")
 
+            customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+            customer2 = Customer.create!(first_name: "Donald", last_name: "Trump")
+            customer3 = Customer.create!(first_name: "George", last_name: "Washington")
+            customer4 = Customer.create!(first_name: "Bill", last_name: "Clinton")
+            customer5 = Customer.create!(first_name: "Barack", last_name: "Obama")
             
-           
 
+            item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+            item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+            item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: steph_merchant.id) 
+
+            invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+            invoice2 = Invoice.create!(status: "completed", customer_id: customer2.id, created_at: "2022-08-27 10:00:00 UTC" )
+            invoice3 = Invoice.create!(status: "completed", customer_id: customer3.id, created_at: "2022-08-27 10:00:00 UTC" )
+            invoice4 = Invoice.create!(status: "completed", customer_id: customer4.id, created_at: "2022-08-27 10:00:00 UTC" )
+            invoice5 = Invoice.create!(status: "completed", customer_id: customer5.id, created_at: "2022-08-27 10:00:00 UTC" )
+            
+            invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1000, status: "shipped", item_id: item1.id, invoice_id: invoice1.id)
+            invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 1000, status: "shipped", item_id: item1.id, invoice_id: invoice2.id)
+            invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 1000, status: "shipped", item_id: item1.id, invoice_id: invoice3.id)
+            invoice_item4 = InvoiceItem.create!(quantity:100, unit_price: 1000, status: "shipped", item_id: item1.id, invoice_id: invoice4.id)
+            invoice_item5 = InvoiceItem.create!(quantity:100, unit_price: 1000, status: "shipped", item_id: item1.id, invoice_id: invoice5.id)
+
+            transaction1 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+            transaction2 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+            transaction3 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+            transaction4 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+            transaction5 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+            transaction6 = Transaction.create!(result: 'success', invoice_id: invoice1.id)
+
+            transaction7 = Transaction.create!(result: 'success', invoice_id: invoice2.id)
+            transaction8 = Transaction.create!(result: 'success', invoice_id: invoice2.id)
+            transaction9 = Transaction.create!(result: 'success', invoice_id: invoice2.id)
+
+            transaction10 = Transaction.create!(result: 'success', invoice_id: invoice3.id)
+            transaction11 = Transaction.create!(result: 'success', invoice_id: invoice3.id)
+
+            transaction12 = Transaction.create!(result: 'success', invoice_id: invoice4.id)
+            transaction13 = Transaction.create!(result: 'success', invoice_id: invoice4.id)
+            transaction14 = Transaction.create!(result: 'success', invoice_id: invoice4.id)
+            transaction15 = Transaction.create!(result: 'success', invoice_id: invoice4.id)
+
+            transaction16 = Transaction.create!(result: 'success', invoice_id: invoice5.id)
+            transaction17 = Transaction.create!(result: 'success', invoice_id: invoice5.id)
+            transaction18 = Transaction.create!(result: 'success', invoice_id: invoice5.id)
+            transaction19 = Transaction.create!(result: 'success', invoice_id: invoice5.id)
+            transaction20 = Transaction.create!(result: 'success', invoice_id: invoice5.id)
+
+            visit "/merchants/#{steph_merchant.id}/dashboard"
+            expect(page).to have_content("Top 5 Customers")
+
+            within('#top_5_customers') do 
+            expect(customer1.first_name).to appear_before(customer5.first_name)
+            expect(customer5.first_name).to appear_before(customer4.first_name)
+            expect(customer4.first_name).to appear_before(customer2.first_name)
+            expect(customer2.first_name).to appear_before(customer3.first_name)
+            expect(customer3.first_name).to_not appear_before(customer1.first_name)
         end
       end
     end
@@ -64,74 +119,74 @@ RSpec.describe 'Merchant_Dashboard' do
     # And each invoice id is a link to my merchant's invoice show page
     describe 'US 4 and 5' do 
       describe 'Merchant Dashboard Items Ready to Ship' do 
-      it 'When I visit my merchant dashboard, I see section for "Items Ready to Ship" ' do 
-        steph_merchant = Merchant.create!(name: "Stephen's shop")
+        it 'When I visit my merchant dashboard, I see section for "Items Ready to Ship" ' do 
+          steph_merchant = Merchant.create!(name: "Stephen's shop")
 
-        customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+          customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
 
-        item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
-        item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+          item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+          item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
 
-        invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
 
-        visit "/merchants/#{steph_merchant.id}/dashboard"
+          visit "/merchants/#{steph_merchant.id}/dashboard"
 
-        expect(page).to have_content("Items Ready to Ship")
+          expect(page).to have_content("Items Ready to Ship")
 
-      end
+        end
 
-      it 'In "Items Ready to Ship", I see a list of names of all items that have been ordered and not yet shipped' do 
-        steph_merchant = Merchant.create!(name: "Stephen's shop")
+        it 'In "Items Ready to Ship", I see a list of names of all items that have been ordered and not yet shipped' do 
+          steph_merchant = Merchant.create!(name: "Stephen's shop")
 
-        customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+          customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
 
-        item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
-        item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
-        item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: steph_merchant.id) 
+          item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+          item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+          item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: steph_merchant.id) 
 
-        invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-        invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-        
-        invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
-        invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
-        invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice2.id)
+          invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          
+          invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
+          invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
+          invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice2.id)
 
-        visit "/merchants/#{steph_merchant.id}/dashboard"
-        
-        expect(page).to have_content("#{item1.name}")
-        expect(page).to have_content("#{item2.name}")
-        expect(page).to have_content("#{item3.name}")
+          visit "/merchants/#{steph_merchant.id}/dashboard"
+          
+          expect(page).to have_content("#{item1.name}")
+          expect(page).to have_content("#{item2.name}")
+          expect(page).to have_content("#{item3.name}")
 
-        
-      end
+          
+        end
 
-      it 'Next to each item I see the ID(thats a link) of the invoice that ordered the item' do 
-        steph_merchant = Merchant.create!(name: "Stephen's shop")
+        it 'Next to each item I see the ID(thats a link) of the invoice that ordered the item' do 
+          steph_merchant = Merchant.create!(name: "Stephen's shop")
 
-        customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+          customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
 
-        item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
-        item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
-        item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: steph_merchant.id) 
+          item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+          item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+          item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: steph_merchant.id) 
 
-        invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-        invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-        invoice3 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-        
-        invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
-        invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
-        invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice2.id)
-        invoice_item4 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "packaged", item_id: item1.id, invoice_id: invoice3.id)
+          invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          invoice3 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          
+          invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
+          invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
+          invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice2.id)
+          invoice_item4 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "packaged", item_id: item1.id, invoice_id: invoice3.id)
 
-        visit "/merchants/#{steph_merchant.id}/dashboard"
-        save_and_open_page
-        expect(page).to have_link("#{invoice1.id}") 
-        click_link("#{invoice.id}")
-        expect(current_path).to eq("/merchants/#{steph_merchant.id}/invoices/#{invoice1.id}")
+          visit "/merchants/#{steph_merchant.id}/dashboard"
+          save_and_open_page
+          expect(page).to have_link("#{invoice1.id}") 
+          click_link("#{invoice.id}")
+          expect(current_path).to eq("/merchants/#{steph_merchant.id}/invoices/#{invoice1.id}")
 
 
-      end
-
+        end
+      end 
     end
   end
 end

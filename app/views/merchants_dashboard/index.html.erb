@@ -3,10 +3,15 @@
 <%= link_to "#{@merchant.name}'s Item index", "/merchants/merchant_id/items" %>
 <%= link_to "#{@merchant.name}'s Invoice index", "/merchants/merchant_id/invoices" %>
 
+
+<h2>Top 5 Customers by Total Number of Succesful Transactions:</h2>
+
+
+
 <h3>Items Ready to Ship</h3>
 <%@merchant.not_shipped.each do |item| %>
-<%binding.pry%>
+
 <div id=“item<%= item.id %>“>
-   <li><%= item.name %> || invoice # #<#id of invoice that is a link>
+   <li><%= item.name %> || invoice:
    </div>
 <%end %>
