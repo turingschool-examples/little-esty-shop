@@ -59,6 +59,10 @@ RSpec.describe Item, type: :model do
     it '#top_5_order_by_revenue' do
       expect(Item.top_5_order_by_revenue).to eq([@item_10, @item_5, @item_3, @item_7, @item_6])
     end
+
+    it '#total_revenue_of_all_items' do
+      expect(Item.total_revenue_of_all_items).to eq(179000)
+    end
   end
 
   describe 'instance methods' do
