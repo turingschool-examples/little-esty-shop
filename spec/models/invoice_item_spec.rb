@@ -42,5 +42,6 @@ RSpec.describe InvoiceItem, type: :model do
     it 'displays the incomplete invoices in ascending order' do
       expect(InvoiceItem.incomplete_invoices.first).to eq(@invoice_1)
     end
+
   end
 end
