@@ -187,57 +187,57 @@ RSpec.describe 'Merchant Dashboard' do
 
         within("#top-5-customers") do
           within("##{@customers_1[3].id}") do
-            expect(page).to have_content("#{@customers_1[3].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_1[2].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_1[3].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_1[2].invoices.successful_transactions_count}")
           end
           within("##{@customers_1[1].id}") do
-            expect(page).to have_content("#{@customers_1[1].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_1[2].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_1[1].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_1[2].invoices.successful_transactions_count}")
           end
           within("##{@customers_1[2].id}") do
-            expect(page).to have_content("#{@customers_1[2].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_1[0].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_1[2].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_1[0].invoices.successful_transactions_count}")
           end
           within("##{@customers_1[0].id}") do
-            expect(page).to have_content("#{@customers_1[0].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_1[7].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_1[0].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_1[7].invoices.successful_transactions_count}")
           end
           within("##{@customers_1[7].id}") do
-            expect(page).to have_content("#{@customers_1[7].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_1[3].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_1[7].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_1[3].invoices.successful_transactions_count}")
           end
 
-          expect(page).to_not have_content("#{@customers_1[4].invoices.successful_transactions}")
-          expect(page).to_not have_content("#{@customers_1[5].invoices.successful_transactions}")
-          expect(page).to_not have_content("#{@customers_1[6].invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customers_1[4].invoices.successful_transactions_count}")
+          expect(page).to_not have_content("#{@customers_1[5].invoices.successful_transactions_count}")
+          expect(page).to_not have_content("#{@customers_1[6].invoices.successful_transactions_count}")
         end
         visit merchant_dashboard_path(@merchant_2)
 
         within("#top-5-customers") do
           within("##{@customers_2[3].id}") do
-            expect(page).to have_content("#{@customers_2[3].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_2[2].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_2[3].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_2[2].invoices.successful_transactions_count}")
           end
           within("##{@customers_2[1].id}") do
-            expect(page).to have_content("#{@customers_2[1].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_2[2].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_2[1].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_2[2].invoices.successful_transactions_count}")
           end
           within("##{@customers_2[2].id}") do
-            expect(page).to have_content("#{@customers_2[2].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_2[0].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_2[2].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_2[0].invoices.successful_transactions_count}")
           end
           within("##{@customers_2[0].id}") do
-            expect(page).to have_content("#{@customers_2[0].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_2[7].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_2[0].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_2[7].invoices.successful_transactions_count}")
           end
           within("##{@customers_2[7].id}") do
-            expect(page).to have_content("#{@customers_2[7].invoices.successful_transactions}")
-            expect(page).to_not have_content("#{@customers_2[3].invoices.successful_transactions}")
+            expect(page).to have_content("#{@customers_2[7].invoices.successful_transactions_count}")
+            expect(page).to_not have_content("#{@customers_2[3].invoices.successful_transactions_count}")
           end
 
-          expect(page).to_not have_content("#{@customers_2[4].invoices.successful_transactions}")
-          expect(page).to_not have_content("#{@customers_2[5].invoices.successful_transactions}")
-          expect(page).to_not have_content("#{@customers_2[6].invoices.successful_transactions}")
+          expect(page).to_not have_content("#{@customers_2[4].invoices.successful_transactions_count}")
+          expect(page).to_not have_content("#{@customers_2[5].invoices.successful_transactions_count}")
+          expect(page).to_not have_content("#{@customers_2[6].invoices.successful_transactions_count}")
         end
       end
     end

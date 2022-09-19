@@ -16,10 +16,6 @@ class Invoice < ApplicationRecord
     end
   end
 
-  def self.invoice_successful_trans 
-    joins(:transactions).where(transactions: {result: :success}).distinct
-  end
-
   def self.sort_by_date
     order(:created_at)
   end
