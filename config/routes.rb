@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     resources(:invoices,     only: [:index, :show])
   end
 
-  # get("/merchants/:id/dashboard",   to: "merchants_dashboard#index")
-  get("/merchants/:id/dashboard",   to: "merchants#show")
-  get("/merchants/:id/items",   to: "items#index")
-  get("/merchants/:id/invoices",   to: "invoices#index")
+  resources :merchants, only: [:show] do
+    get '/dashboard', to: 'merchants#show'
+    resources :invoices, only: [:index ,:show]
+    resources :items, only: [:index, :update, :edit]
+  end
 end
