@@ -1,6 +1,5 @@
 require "rails_helper"
 
-
 RSpec.describe "the merchant invoices index"  do
     it "I see the name of my merchants index page"  do
         merchant1 = Merchant.create!(name: "Bob")
@@ -47,3 +46,4 @@ RSpec.describe "the merchant invoices index"  do
         expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice_1.id}")
     end
 end
+
