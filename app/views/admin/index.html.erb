@@ -12,7 +12,7 @@
     <tr><th><h3>Top Customers</h3></th></tr>
     <tr><td> </td></tr>
     <%@top_5_customers.each_with_index do |customer, index = 1|%>
-    <tr><td id='transactions-<%="#{customer.id}"%>'> <%= "#{index}. #{customer.name} - #{customer.num_succesful_transactions} purchases" %> </td></tr>
+    <tr><td id='transactions-<%="#{customer.id}"%>'> <%= "#{index+1}. #{customer.name} - #{customer.num_succesful_transactions} purchases" %> </td></tr>
     <%end%>
   </table>
 </div>
