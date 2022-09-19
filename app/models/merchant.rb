@@ -28,11 +28,7 @@ class Merchant < ApplicationRecord
     end 
   end  
 
-  def order_by_revenue
-    require "pry"; binding.pry
-    # Merchant.joins(:invoice_items).group(:id).sum("invoice_items.quantity * invoice_items.unit_price")
-    # invoice_items.join(transactions).group.(item_id).sum(quantity* unit_sold).where(transactions: { result: :success })
-    # Possible AR method for above code:
-    # invoice.joins(:transactions).where(transactions: { result: :success }).count
+  def self.top_5_order_by_revenue
+    joins(invoice_items:[invoice:[:transactions]]).group(:id).where(transactions: { result: 0 }).select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').order('total_revenue desc').limit(5)
   end
 end

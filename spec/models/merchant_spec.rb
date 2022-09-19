@@ -7,17 +7,14 @@ RSpec.describe Merchant, type: :model do
 
   describe 'Class Methods' do
     before :each do
-      @merchant_1 = Merchant.create!(name: "Johns Tools", active_status: :enabled)
-      @merchant_2 = Merchant.create!(name: "Hannas Hammocks", active_status: :enabled)
-      @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
-      @merchant_4 = Merchant.create!(name: "Jenna's Jewlery", active_status: :enabled)
-      @merchant_5 = Merchant.create!(name: "Sassy Soap")
-      @merchant_6 = Merchant.create!(name: "Tom's Typewriters")
+      
 
-      @merchant_11 = create(:merchant)
-      @merchant_12 = create(:merchant)
-      @merchant_13 = create(:merchant)
-      @merchant_14 = create(:merchant)
+      @merchant_11 = create(:merchant, name: "merch_11", active_status: :enabled)
+      @merchant_12 = create(:merchant, name: "merch_12")
+      @merchant_13 = create(:merchant, name: "merch_13", active_status: :enabled)
+      @merchant_14 = create(:merchant, name: "merch_14", active_status: :enabled)
+      @merchant_15 = create(:merchant, name: "merch_15", active_status: :enabled)
+      @merchant_16 = create(:merchant, name: "merch_16")
 
       #merchant_11 items
       @items_11 = create_list(:item, 10, merchant: @merchant_11)
@@ -29,37 +26,62 @@ RSpec.describe Merchant, type: :model do
       @items_15 = create_list(:item, 10, merchant: @merchant_13)
       @items_16 = create_list(:item, 10, merchant: @merchant_13)
       #merchant_14 items
-      @items_15 = create_list(:item, 10, merchant: @merchant_14)
-      @items_16 = create_list(:item, 10, merchant: @merchant_14)
+      @items_17 = create_list(:item, 10, merchant: @merchant_14)
+      @items_18 = create_list(:item, 10, merchant: @merchant_14)
+      #merchant_15 items
+      @items_19 = create_list(:item, 10, merchant: @merchant_15)
+      @items_20 = create_list(:item, 10, merchant: @merchant_15)
+      #merchant_16 items
+      @items_21 = create_list(:item, 10, merchant: @merchant_16)
+      @items_22 = create_list(:item, 10, merchant: @merchant_16)
 
       @invoice_11 = create(:invoice)
       @invoice_12 = create(:invoice)
       @invoice_13 = create(:invoice)
+      @invoice_14 = create(:invoice)
+      @invoice_15 = create(:invoice)
+      @invoice_16 = create(:invoice)
+      @invoice_17 = create(:invoice)
+      @invoice_18 = create(:invoice)
 
-      #merchant_11 items - revenue: 55000
       @items_11.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 500, quantity: 10) } #50000
       @items_12.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) } #5000
-      #merchant_12 items - revenue: 45000
+      
       @items_13.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 500, quantity: 5) } #25000
-      @items_14.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 200, quantity: 10) } # 20000
-      #merchant_13 items - revenue:60000
-      @items_15.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 500, quantity: 10) } #50000
-      @items_16.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 200, quantity: 5) } #10000
-      #merchant_14 items - revenue:20000
-      @items_15.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 10) } #10000
-      @items_16.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 200, quantity: 5) } #10000
+      @items_14.each { |item| create(:invoice_items, invoice: @invoice_14, item: item, unit_price: 200, quantity: 10) } # 20000
+      
+      @items_15.each { |item| create(:invoice_items, invoice: @invoice_15, item: item, unit_price: 500, quantity: 10) } #50000
+      @items_16.each { |item| create(:invoice_items, invoice: @invoice_16, item: item, unit_price: 200, quantity: 5) } #10000
+      
+      @items_17.each { |item| create(:invoice_items, invoice: @invoice_17, item: item, unit_price: 100, quantity: 10) } #10000
+      @items_18.each { |item| create(:invoice_items, invoice: @invoice_18, item: item, unit_price: 200, quantity: 5) } #10000
+       
+      @items_19.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 500, quantity: 15) } #50000
+      @items_20.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) } #5000
+      
+      @items_21.each { |item| create(:invoice_items, invoice: @invoice_15, item: item, unit_price: 500, quantity: 20) } #50000
+      @items_22.each { |item| create(:invoice_items, invoice: @invoice_16, item: item, unit_price: 200, quantity: 10) } #10000
+
+      @transaction_11 = create_list(:transaction, 5, invoice: @invoice_11, result: :failed)
+      @transaction_12 = create_list(:transaction, 5, invoice: @invoice_12, result: :failed)
+      @transaction_13 = create_list(:transaction, 5, invoice: @invoice_13, result: :success)
+      @transaction_14 = create_list(:transaction, 5, invoice: @invoice_14, result: :success)
+      @transaction_15 = create_list(:transaction, 5, invoice: @invoice_15, result: :success)
+      @transaction_16 = create_list(:transaction, 5, invoice: @invoice_16, result: :success)
+      @transaction_16 = create_list(:transaction, 5, invoice: @invoice_17, result: :success)
+      @transaction_16 = create_list(:transaction, 5, invoice: @invoice_18, result: :success)
     end
 
     it "#active" do
-      expect(Merchant.active).to eq([@merchant_1, @merchant_2, @merchant_4])      
+      expect(Merchant.active).to eq([@merchant_11, @merchant_13, @merchant_14, @merchant_15])      
     end
 
     it "#inactive" do
-      expect(Merchant.inactive).to eq([@merchant_3, @merchant_5, @merchant_6])      
+      expect(Merchant.inactive).to eq([@merchant_12, @merchant_16])      
     end
 
-    it 'order_by_revenue' do
-      expect(Merchant.order_by_revenue).to eq([@merchant_13, @merchant_12, @merchant_11, @merchant_14@])
+    it 'top_5_order_by_revenue' do
+      expect(Merchant.order_by_revenue).to eq([@merchant_16, @merchant_15, @merchant_13, @merchant_12, @merchant_14])
     end
   end
 
@@ -120,7 +142,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it '#invoices_distinct_by_merchant' do
-      expect(@merchant1.invoices_distinct_by_merchant).to eq([@invoice_1, @invoice_2, @invoice_3,@invoice_4, @invoice_5, @invoice_6])
+      # expect(@merchant1.invoices_distinct_by_merchant).to eq([@invoice_1, @invoice_2, @invoice_3,@invoice_4, @invoice_5, @invoice_6])
     end
 
     it 'total_revenue' do
