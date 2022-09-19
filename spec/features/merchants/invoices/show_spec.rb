@@ -63,7 +63,6 @@ RSpec.describe 'Merchant Index Show Page' do
 
       it 'displays the quantity, sale price, and status for each item' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
-        save_and_open_page
         within("#item_#{gold_earrings.id}") do
           expect(page).to have_content("Quantity: #{alainainvoice9_itemgold_earrings.quantity}")
           expect(page).to have_content("Sale Price: #{alainainvoice9_itemgold_earrings.unit_price}")
