@@ -1,36 +1,28 @@
 # Little Esty Shop
 
-## Background and Description
+## The Team
+## [Astrid Hecht](https://github.com/Astrid-Hecht) [A.J. Krumholz](https://github.com/ajkrumholz)[Alaina Kneiling](https://github.com/Alaina-Noel) [Jake Kim](https://github.com/LlamaBack)
+## The Project
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+## The Project
+<img src="./doc/schema.jpg" alt="The schema of the project"/>
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
-- Continuous Integration / Continuous Deployment is not allowed
-- Any gems added to the project must be approved by an instructor
-
-## Setup
+## [See our app on the web. No setup necessary](https://afternoon-wave-94167.herokuapp.com/admin)
+## How to fork & clone & see the code:
 
 This project requires Ruby 2.7.4.
 
 * Fork this repository
 * Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
+* From the command line:
+    * run `bundle`
+    * run `rails db:{drop,create,migrate,seed}`
+    * run `rails csv_load:all`
+    * run `rails s`
+* Open a browser & go to localhost/3000 t se
+
 
 ## Phases
 
