@@ -125,11 +125,6 @@ RSpec.describe "the merchant invoices show"  do
         end
 
         describe 'I can see the total revenue' do
-            # Merchant Invoice Show Page: Total Revenue
-
-            # As a merchant
-            # When I visit my merchant invoice show page
-            # Then I see the total revenue that will be generated from all of my items on the invoice
             it 'from all merchant items within this invoice' do
                 merchant1 = Merchant.create!(name: "Bob")
                 merchant2 = Merchant.create!(name: "Mark")
