@@ -151,22 +151,24 @@ RSpec.describe "Admin Merchants" do
         
         it 'I see the names of the top 5 merchants by total revenue generated' do
           visit admin_merchants_path
-          #orderly based off of top revenue
-          expect(@merchant_5.name).to appear_before(@merchant_2.name)
-          expect(@merchant_5.name).to appear_before(@merchant_3.name)
-          expect(@merchant_5.name).to appear_before(@merchant_4.name)
-          expect(@merchant_5.name).to appear_before(@merchant_6.name)
+          save_and_open_page
+          within("#top-5-merchants") do
+            expect(@merchant_5.name).to appear_before(@merchant_2.name)
+            expect(@merchant_5.name).to appear_before(@merchant_3.name)
+            expect(@merchant_5.name).to appear_before(@merchant_4.name)
+            expect(@merchant_5.name).to appear_before(@merchant_6.name)
 
-          expect(@merchant_3.name).to appear_before(@merchant_4.name)
-          expect(@merchant_3.name).to appear_before(@merchant_6.name)
-          expect(@merchant_3.name).to appear_before(@merchant_2.name)
+            expect(@merchant_3.name).to appear_before(@merchant_4.name)
+            expect(@merchant_3.name).to appear_before(@merchant_6.name)
+            expect(@merchant_3.name).to appear_before(@merchant_2.name)
 
-          expect(@merchant_4.name).to appear_before(@merchant_6.name)
-          expect(@merchant_4.name).to appear_before(@merchant_2.name)
+            expect(@merchant_4.name).to appear_before(@merchant_6.name)
+            expect(@merchant_4.name).to appear_before(@merchant_2.name)
 
-          expect(@merchant_6.name).to appear_before(@merchant_2.name)
+            expect(@merchant_6.name).to appear_before(@merchant_2.name)
 
-          expect(page).to_not have_content(merchant_5.name)
+            expect(page).to_not have_content(merchant_5.name)
+          end
         end
 
         it 'I see that each merchant name links to the admin merchant show page for that merchant' do
