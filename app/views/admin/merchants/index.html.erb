@@ -34,3 +34,14 @@
     <%end%>
   </table>
 </div>
+
+<div id='top_5_merchants'>
+  <table id='top_merchants'>
+    <tr><th><h3>Top 5 Merchants by Revenue</h3></th></tr>
+    <% @top_merchants.each do |merchant| %>
+    <tr><td id='top-merchant-<%= merchant.id %>'> 
+      <%= link_to merchant.name, admin_merchant_path(merchant) %> - $<%= (merchant.revenue/100.to_f).round(2) %> in revenue
+    </td></tr>
+    <%end%>
+  </table>
+</div>

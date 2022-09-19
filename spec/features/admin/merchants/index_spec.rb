@@ -150,7 +150,9 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
       describe 'status grouping' do
         let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
         let!(:hummus_sculpt) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
+        
         before(:each) {refresh}
+
         it 'groups merchants by enabled status' do 
           within('#enabled_merchants') do
             expect(page).to have_content(doghats.name)
@@ -203,6 +205,63 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
               within('#enabled_merchants') do
                 expect(page).to have_content(merchant.name)
               end
+            end
+          end
+        end
+      end
+    end
+
+    describe 'Top 5 merchants by revenue section:' do
+      let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
+      let!(:hummus_sculpt) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
+      let!(:bmv) { Merchant.create!(name: "Bavarian Motor Velocycles")}
+      let!(:tersela) { Merchant.create!(name: "Tersela")}
+
+      let!(:boxer) { doghats.items.create!(name: "Boxer Bowler", description: "Now with convienent earholes", unit_price: 16000, enabled: true) }
+      let!(:trombone) { hummus_sculpt.items.create!(name: "Tahini Trombone", description: "Dont buy this", unit_price: 5000, enabled: true) }
+      let!(:pita) { hummus_sculpt.items.create!(name: "Picked Pita", description: "Yummy", unit_price: 700, enabled: true) }
+      let!(:skooter) { bmv.items.create!(name: "Hollenskooter", description: "Some stuff", unit_price: 12000, enabled: true) }
+      let!(:rider) { bmv.items.create!(name: "Hosenpfloofer", description: "Some stuff", unit_price: 220000, enabled: true) }
+      let!(:cyber_bus) { tersela.items.create!(name: "Cyberbus", description: "It may be electric, but it still only holds one person!", unit_price: 8900000, enabled: true) }
+
+      let!(:alainainvoice1_itempeanut) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: peanut.id, quantity: 1, unit_price: 1500, status:"packaged" )}
+      let!(:alainainvoice1_itemboxer) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: boxer.id, quantity: 4, unit_price: 16000, status:"packaged" )}
+      let!(:alainainvoice1_itemtrombone) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: trombone.id, quantity: 4, unit_price: 5000, status:"packaged" )}
+      let!(:alainainvoice1_itempita) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: pita.id, quantity: 4, unit_price: 700, status:"packaged" )}
+      let!(:alainainvoice1_itemskooter) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: skooter.id, quantity: 4, unit_price: 12000, status:"packaged" )}
+      let!(:alainainvoice1_itemrider) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: rider.id, quantity: 4, unit_price: 220000, status:"packaged" )}
+
+      before(:each) {refresh}
+
+      it 'I see the names of the top 5 merchants by total revenue generated' do
+        within '#top_5_merchants' do
+          expect(jewlery_city.name).to appear_before(bmv.name)
+          expect(bmv.name).to appear_before(doghats.name)
+          expect(doghats.name).to appear_before(hummus_sculpt.name)
+          expect(hummus_sculpt.name).to appear_before(carly.name)
+        end
+      end
+
+      it 'and each name links to the merchant show page' do
+        top_merch = Merchant.merchants_top_5
+        within '#top_5_merchants' do
+          top_merch.each do |merch|
+            within "#top-merchant-#{merch.id}" do
+              expect(page).to have_link(merch.name)
+              click_link(merch.name)
+            end
+            expect(current_path).to eq(admin_merchant_path(merch))
+            visit admin_merchants_path
+          end
+        end
+      end
+
+      it 'and I see the total revenue generated next to each merchant name' do
+        within '#top_5_merchants' do
+          top_merch = Merchant.merchants_top_5
+          top_merch.each do |merch|
+            within "#top-merchant-#{merch.id}" do
+              expect(page).to have_content("#{merch.name} - $#{(merch.revenue/100.to_f).round(2)} in revenue")
             end
           end
         end
