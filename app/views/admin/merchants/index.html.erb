@@ -1,6 +1,19 @@
 <%= render partial: 'admin/header' %>
 <%= button_to "Create New Merchant", new_admin_merchant_path , method: :get %>
-<span id="enabled-merchants" style="float:left; padding:10px 60px 60px 60px;">
+
+
+<span id="top-5-merchants" style="padding:10px 60px 60px 60px;">
+<h3>Top Merchants </h3>
+<ol>
+
+<% @merchants.top_5_order_by_revenue.each do |merchant| %>
+  <li id= merchant-<%= merchant.id %>><%=link_to "#{merchant.name}", admin_merchant_path(merchant) %> - <%= number_to_currency((merchant.total_revenue/100)) %> in sales</li>
+<% end %>
+
+</ol>
+</span>
+
+<span id="enabled-merchants">
 <h3>Enabled Merchants</h3>
 
 <% @merchants.active.each do |merchant| %>
@@ -13,7 +26,7 @@
 <% end %>
 </span>
 
-<span id="disabled-merchants" style="float:left; padding:10px 60px 60px 60px;">
+<span id="disabled-merchants">
 <h3>Disabled Merchants</h3>
 
 <% @merchants.inactive.each do |merchant| %>

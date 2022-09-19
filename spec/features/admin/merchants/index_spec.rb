@@ -4,11 +4,11 @@ RSpec.describe "Admin Merchants" do
   describe "As an admin" do
     describe "I visit the admin merchants index (/admin/merchants)" do
       before :each do
-        @merchant_1 = Merchant.create!(name: "Johns Tools", active_status: :enabled)
-        @merchant_2 = Merchant.create!(name: "Hannas Hammocks", active_status: :enabled)
-        @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
-        @merchant_4 = Merchant.create!(name: "Jenna's Jewlery", active_status: :enabled)
-        @merchant_5 = Merchant.create!(name: "Sassy Soap")
+        @merchant_1 = create(:merchant, active_status: :enabled)
+        @merchant_2 = create(:merchant, active_status: :enabled)
+        @merchant_3 = create(:merchant)
+        @merchant_4 = create(:merchant, active_status: :enabled)
+        @merchant_5 = create(:merchant)
       end
   
       it 'can see the name of each merchant in the system' do
@@ -111,6 +111,98 @@ RSpec.describe "Admin Merchants" do
         end
       end
 
+      describe "Top 5 Merchants by Revenue" do
+        before :each do
+          @merchant_1 = create(:merchant, name: "Merchant_1")
+          @merchant_2 = create(:merchant, name: "Merchant_2")
+          @merchant_3 = create(:merchant, name: "Merchant_3")
+          @merchant_4 = create(:merchant, name: "Merchant_4")
+          @merchant_5 = create(:merchant, name: "Merchant_5")
+          @merchant_6 = create(:merchant, name: "Merchant_6")
+
+          @item_1 = create(:item, merchant: @merchant_1)
+          @item_2 = create(:item, merchant: @merchant_2)
+          @item_3 = create(:item, merchant: @merchant_3)
+          @item_4 = create(:item, merchant: @merchant_4)
+          @item_5 = create(:item, merchant: @merchant_5)
+          @item_6 = create(:item, merchant: @merchant_6)
+
+          @invoice_2 = create(:invoice)
+          @invoice_1 = create(:invoice)
+          @invoice_3 = create(:invoice)
+          @invoice_4 = create(:invoice)
+
+          @invoice_items_1 = create(:invoice_items, invoice: @invoice_1, item: @item_1, unit_price: 600, quantity: 1) #600 - fails
+          @invoice_items_2 = create(:invoice_items, invoice: @invoice_2, item: @item_2, unit_price: 400, quantity: 1) #400
+          @invoice_items_3 = create(:invoice_items, invoice: @invoice_2, item: @item_3, unit_price: 400, quantity: 2) #800
+          @invoice_items_4 = create(:invoice_items, invoice: @invoice_3, item: @item_4, unit_price: 300, quantity: 4) #1200
+          @invoice_items_5 = create(:invoice_items, invoice: @invoice_3, item: @item_5, unit_price: 200, quantity: 10) #2000
+          @invoice_items_6 = create(:invoice_items, invoice: @invoice_4, item: @item_6, unit_price: 100, quantity: 5) #500
+
+          @transaction_1 = create(:transaction, invoice: @invoice_1, result: :failed)
+          @transaction_2 = create(:transaction, invoice: @invoice_1, result: :failed)
+          @transaction_3 = create(:transaction, invoice: @invoice_2, result: :success)
+          @transaction_4 = create(:transaction, invoice: @invoice_2, result: :success)
+          @transaction_5 = create(:transaction, invoice: @invoice_3, result: :failed)
+          @transaction_6 = create(:transaction, invoice: @invoice_3, result: :success)
+          @transaction_7 = create(:transaction, invoice: @invoice_4, result: :success)
+          @transaction_8 = create(:transaction, invoice: @invoice_4, result: :success)
+        end
+        
+        it 'I see the names of the top 5 merchants by total revenue generated' do
+          visit admin_merchants_path
+          
+          within("#top-5-merchants") do
+            expect(@merchant_5.name).to appear_before(@merchant_2.name)
+            expect(@merchant_5.name).to appear_before(@merchant_3.name)
+            expect(@merchant_5.name).to appear_before(@merchant_4.name)
+            expect(@merchant_5.name).to appear_before(@merchant_6.name)
+
+            expect(@merchant_3.name).to appear_before(@merchant_4.name)
+            expect(@merchant_3.name).to appear_before(@merchant_6.name)
+            expect(@merchant_3.name).to appear_before(@merchant_2.name)
+
+            expect(@merchant_4.name).to appear_before(@merchant_6.name)
+            expect(@merchant_4.name).to appear_before(@merchant_2.name)
+
+            expect(@merchant_6.name).to appear_before(@merchant_2.name)
+
+            expect(page).to_not have_content(@merchant_1.name)
+          end
+        end
+
+        it 'I see that each merchant name links to the admin merchant show page for that merchant' do
+          visit admin_merchants_path
+
+          within("#top-5-merchants") do
+            within("#merchant-#{@merchant_5.id}") do
+              click_link "#{@merchant_5.name}"
+              expect(current_path).to eq(admin_merchant_path(@merchant_5))
+            end
+            visit admin_merchants_path
+            within("#merchant-#{@merchant_2.id}") do
+              click_link "#{@merchant_2.name}"
+              expect(current_path).to eq(admin_merchant_path(@merchant_2))
+            end
+          end
+        end
+        
+        it 'I see the total revenue generated next to each merchant name' do
+          visit admin_merchants_path
+
+          within("#top-5-merchants") do
+            within("#merchant-#{@merchant_5.id}") do
+              expect(page).to have_content((@merchant_5.items.total_revenue_of_all_items/100))
+              expect(page).to_not have_content((@merchant_4.items.total_revenue_of_all_items/100))
+            end
+            visit admin_merchants_path
+            within("#merchant-#{@merchant_2.id}") do
+              expect(page).to have_content((@merchant_2.items.total_revenue_of_all_items/100))
+              expect(page).to_not have_content((@merchant_3.items.total_revenue_of_all_items/100))
+            end
+          end
+        end
+      end
     end
   end
 end

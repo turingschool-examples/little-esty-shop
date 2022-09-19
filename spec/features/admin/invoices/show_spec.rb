@@ -15,9 +15,7 @@ RSpec.describe "Admin Invoice Show Page" do
         @invoice_4 = create(:invoice)
 
         @items_1.each { |item| create(:invoice_items, invoice_id: @invoice_1.id, item_id: item.id) }
-        # @items_2.each { |item|  @invoice_2.items << item }
-        # @items_3.each { |item|  @invoice_3.items << item }
-        # @items_4.each { |item|  @invoice_4.items << item }
+        @items_2.each { |item| create(:invoice_items, invoice_id: @invoice_2.id, item_id: item.id) }
       end
 
       it 'I see information related to that invoice including: id, status, created_at date (format "Monday, July 18, 2019") and Customer First+Last name' do
@@ -43,24 +41,11 @@ RSpec.describe "Admin Invoice Show Page" do
             expect(page).to have_content(item.quantity_purchased(@invoice_1.id))
             expect(page).to have_content((item.price_sold(@invoice_1.id))/100)
             expect(page).to have_content(item.shipping_status(@invoice_1.id).capitalize)
+
+            expect(page).to_not have_content(@invoice_2.items.any?{|item| item.name})
           end
         end
       end
-
-      # Admin Invoice Show Page: Update Invoice Status
-
-# As an admin
-
-# I see the invoice status is a select field
-# And I see that the invoice's current status is selected
-
-# When I click this select field,
-# Then I can select a new status for the Invoice,
-# And next to the select field I see a button to "Update Invoice Status"
-
-# When I click this button
-# I am taken back to the admin invoice show page
-# And I see that my Invoice's status has now been updated
 
       it "I see the invoice status is a select field And I see that the invoice's current status is selected" do
         visit admin_invoice_path(@invoice_1)

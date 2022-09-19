@@ -19,4 +19,8 @@ class Merchant < ApplicationRecord
   def invoices_distinct_by_merchant
     invoices.group(:id).distinct
   end
+
+  def self.top_5_order_by_revenue
+    joins(invoice_items:[invoice:[:transactions]]).group(:id).where(transactions: { result: 0 }).select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').order('total_revenue desc').limit(5)
+  end
 end
