@@ -1,32 +1,39 @@
-# Little Esty Shop
+<div align="center">
 
-## The Team
-## [Astrid Hecht](https://github.com/Astrid-Hecht) [A.J. Krumholz](https://github.com/ajkrumholz)[Alaina Kneiling](https://github.com/Alaina-Noel) [Jake Kim](https://github.com/LlamaBack)
-## The Project
+# Little Esty Shop 
+ 
+## [Take me to the site!](https://afternoon-wave-94167.herokuapp.com/admin)
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+<div style="color: lightblue">
 
-## The Project
+### "Little Esty Shop" is a group project that required us to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+</div>
+
 <img src="./doc/schema.jpg" alt="The schema of the project"/>
 
-## [See our app on the web. No setup necessary](https://afternoon-wave-94167.herokuapp.com/admin)
+##  ⚫ [Astrid Hecht](https://github.com/Astrid-Hecht) ⚫ [A.J. Krumholz](https://github.com/ajkrumholz) ⚫ [Alaina Kneiling](https://github.com/Alaina-Noel) ⚫ [Jake Kim](https://github.com/LlamaBack) ⚫
+
+<div style="color: white">
+
 ## How to fork & clone & see the code:
+|How to see the code on your local machine |
+|---|
+|Fork this repository|
+|Clone your fork|
+|From the command line:  |
+| run `bundle` |
+| run `rails db:{drop,create,migrate,seed}` |
+| run `rails csv_load:all`  |
+| run `rails s`|
+|This project requires Ruby 2.7.4. |
+|---|
 
-This project requires Ruby 2.7.4.
-
-* Fork this repository
-* Clone your fork
-* From the command line:
-    * run `bundle`
-    * run `rails db:{drop,create,migrate,seed}`
-    * run `rails csv_load:all`
-    * run `rails s`
-* Open a browser & go to localhost/3000 t se
+</div>
 
 
-## Phases
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+
+
+
+
+
