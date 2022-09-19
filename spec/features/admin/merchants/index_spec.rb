@@ -112,5 +112,33 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
         visit admin_merchants_path
       end
     end
+
+    describe 'enable/disable' do
+      it 'next to each merchant name I see a button to disable or enable that merchant.' do
+        merchants = Merchant.all
+        merchants.each do |merchant|
+          within "#merchant-#{merchant.id}" do
+            status_button = page.find('.status_button')
+            expect(page).to have_button(status_button)
+            expect(status_button).to have_content("Disabled").or have_content("Enabled")
+            expect(status_button).to have_content("Disabled") unless merchant.enabled
+            expect(status_button).to have_content("Enabled") if merchant.enabled
+          end
+        end
+      end
+
+      it 'When I click this button Then I am redirected back to the admin merchants index And I see that the merchants status has changed' do
+        merchants = Merchant.all
+        merchants.each do |merchant|
+          within "#merchant-#{merchant.id}" do
+            status_button = page.find('.status_button')
+            expect(status_button).to have_content("Disabled")
+            click_button
+            expect(current_path).to eq(admin_merchants_path)
+            expect(status_button).to have_content("enabled")
+          end
+        end
+      end
+    end
   end
 end
