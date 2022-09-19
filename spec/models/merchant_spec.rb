@@ -41,11 +41,11 @@ RSpec.describe Merchant, type: :model do
       merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
       merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
 
-      item_ski = merchant_stephen.items.create!(name: "Ski", description: "fast skis", unit_price: 10) 
+      item_ski = merchant_stephen.items.create!(name: "Ski", description: "fast skis", unit_price: 10)
       item_bike = merchant_stephen.items.create!(name: "Bike", description: "danger bike", unit_price: 10)
-      item_climbing_shoes = merchant_stephen.items.create!(name: "Climbing Shoes", description: "fun shoes", unit_price: 10) 
-      item_snowboard = merchant_stephen.items.create!(name: "Snowboard", description: "slow board", unit_price: 10) 
-      item_rock = merchant_stephen.items.create!(name: "Rock", description: "a good rock", unit_price: 10) 
+      item_climbing_shoes = merchant_stephen.items.create!(name: "Climbing Shoes", description: "fun shoes", unit_price: 10)
+      item_snowboard = merchant_stephen.items.create!(name: "Snowboard", description: "slow board", unit_price: 10)
+      item_rock = merchant_stephen.items.create!(name: "Rock", description: "a good rock", unit_price: 10)
 
       item_toothpaste = merchant_stephen.items.create!(name: "Toothpaste", description: "The worst toothpaste you can find", unit_price: 10 )
       item_bowling_shoes = merchant_stephen.items.create!(name: "Bowling Shoes", description: "not fun shoes", unit_price: 10)
@@ -68,7 +68,7 @@ RSpec.describe Merchant, type: :model do
       transaction6 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
       transaction7 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 1)
       transaction8 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
-      
+
       invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_ski.id, quantity: 1000, unit_price: 10)
       invoice_item2 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_bike.id, quantity: 900, unit_price: 10)
       invoice_item3 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item_climbing_shoes.id, quantity: 800, unit_price: 10)
@@ -81,6 +81,7 @@ RSpec.describe Merchant, type: :model do
       expect(merchant_stephen.top_items).to eq([item_bike, item_ski, item_climbing_shoes, item_snowboard, item_rock])
     end
   end
+
 
   describe 'merchant_invoice_finder' do
     it 'returns invoice ids for invoices that are for at least one of the merchants items' do
@@ -104,5 +105,80 @@ RSpec.describe Merchant, type: :model do
 
       expect(steph_merchant.merchant_invoice_finder).to eq([invoice1, invoice2])
     end
+  end
+
+  it 'can find enabled merchants' do
+    merchant1 = Merchant.create(name: 'John', status: 'Enabled')
+    merchant2 = Merchant.create(name: 'Jill', status: 'Enabled')
+    merchant3 = Merchant.create(name: 'Beth', status: 'Disabled')
+    merchant4 = Merchant.create(name: 'Kieth', status: 'Disabled')
+    expect(Merchant.enabled_merchants).to eq([merchant1, merchant2])
+  end
+
+  it 'can find disabled_merchants' do
+    merchant1 = Merchant.create(name: 'John', status: 'Enabled')
+    merchant2 = Merchant.create(name: 'Jill', status: 'Enabled')
+    merchant3 = Merchant.create(name: 'Beth', status: 'Disabled')
+    merchant4 = Merchant.create(name: 'Kieth', status: 'Disabled')
+    expect(Merchant.disabled_merchants).to eq([merchant3, merchant4])
+  end
+
+  it 'can list the top five merchants' do
+    merchant1 = create(:merchant, status: 'Enabled')
+    merchant2 = create(:merchant, status: 'Enabled')
+    merchant3 = create(:merchant, status: 'Enabled')
+    merchant4 = create(:merchant, status: 'Enabled')
+    merchant5 = create(:merchant, status: 'Enabled')
+    merchant6 = create(:merchant, status: 'Enabled')
+    merchant7 = create(:merchant, status: 'Enabled')
+
+    item1 = create(:item, merchant_id: merchant1.id)
+    item2 = create(:item, merchant_id: merchant2.id)
+    item3 = create(:item, merchant_id: merchant3.id)
+    item4 = create(:item, merchant_id: merchant4.id)
+    item5 = create(:item, merchant_id: merchant5.id)
+    item6 = create(:item, merchant_id: merchant6.id)
+    item7 = create(:item, merchant_id: merchant7.id)
+
+    invoice1 = create(:invoice)
+    invoice2 = create(:invoice)
+    invoice3 = create(:invoice)
+    invoice4 = create(:invoice)
+    invoice5 = create(:invoice)
+    invoice6 = create(:invoice)
+    invoice7 = create(:invoice)
+
+    transaction1 = create(:transaction, result: 'success', invoice_id: invoice1.id)
+    transaction2 = create(:transaction, result: 'success', invoice_id: invoice2.id)
+    transaction3 = create(:transaction, result: 'success', invoice_id: invoice3.id)
+    transaction4 = create(:transaction, result: 'success', invoice_id: invoice4.id)
+    transaction5 = create(:transaction, result: 'success', invoice_id: invoice5.id)
+    transaction6 = create(:transaction, result: 'success', invoice_id: invoice6.id)
+    transaction7 = create(:transaction, result: 'failed', invoice_id: invoice7.id)
+
+    invoice_item1 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 1, item_id: item1.id, invoice_id: invoice1.id)
+    invoice_item2 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 2, item_id: item2.id, invoice_id: invoice2.id)
+    invoice_item3 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 3, item_id: item3.id, invoice_id: invoice3.id)
+    invoice_item4 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 4, item_id: item4.id, invoice_id: invoice4.id)
+    invoice_item5 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 5, item_id: item5.id, invoice_id: invoice5.id)
+    invoice_item6 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 6, item_id: item6.id, invoice_id: invoice6.id)
+    invoice_item7 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 7, item_id: item7.id, invoice_id: invoice7.id)
+
+
+    expect(Merchant.top_5_merchants).to eq([merchant6, merchant5, merchant4, merchant3, merchant2])
+  end
+
+  it 'can return date with highest sales' do
+
+    @merchant6 = create(:merchant, status: 'Enabled')
+    @item6 = create(:item, merchant_id: @merchant6.id)
+    @invoice6 = create(:invoice, created_at: Date.new(2022,3,15))
+    @invoice8 = create(:invoice, created_at: Date.new(2022,9,17))
+    @transaction6 = create(:transaction, result: 'success', invoice_id: @invoice6.id)
+    @transaction8 = create(:transaction, result: 'success', invoice_id: @invoice8.id)
+    @invoice_item6 = create_list(:invoiceItem, 3, quantity: 3, unit_price: 6, item_id: @item6.id, invoice_id: @invoice6.id)
+    @invoice_item8 = create_list(:invoiceItem, 3, quantity: 2, unit_price: 2, item_id: @item6.id, invoice_id: @invoice8.id)
+
+    expect(@merchant6.highest_sales_date).to eq(Date.new(2022,3,15))
   end
 end

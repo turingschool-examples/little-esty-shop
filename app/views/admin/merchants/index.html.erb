@@ -1,10 +1,52 @@
 <h1>Merchants</h1>
 
-<% @merchants.each do |merchant| %>
-  <div class="merchant_<%=merchant.id%>">
+<h2> Most Popular Merchants </h2>
+<% @top5.each do |merchant|%>
+  <p class="top-five"; id="top_5_id_<%=merchant.id%>">
 
-    <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
-    <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %></p>
-
-  </div>
+    <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Total Revenue: <%=  number_to_currency(merchant.revenue.to_f/100) %>
+    "Top selling date for <%= merchant.name %> was <%= merchant.highest_sales_date.strftime("%m/%d/%y") %>"</p>
 <% end %>
+
+<%= button_to "Add Merchant", "/admin/merchants/new", local: true, method: :get %>
+
+<div class="merchants_enabled">
+  <h2> Enabled Merchants </h2>
+  <% if @merchants_enabled %>
+    <% @merchants_enabled.each do |merchant| %>
+      <div class="merchant_<%=merchant.id%>">
+
+        <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+
+        <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %>
+        <% if merchant.status == 'Enabled' %>
+          <%= button_to "Disable", "/admin/merchants/#{merchant.id}/update?button=disabled", local: true, method: :patch %>
+        <% else %>
+          <%= button_to "Enable", "/admin/merchants/#{merchant.id}/update?button=enabled", local: true, method: :patch %>
+        <% end %>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+<div class="merchants_disabled">
+  <h2> Disabled Merchants </h2>
+    <% if @merchants_disabled %>
+      <% @merchants_disabled.each do |merchant| %>
+        <div class="merchant_<%=merchant.id%>">
+
+          <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+
+          <%= link_to "Edit", "/admin/merchants/#{merchant.id}/edit", local: true, method: :get %>
+          <% if merchant.status == 'Enabled' %>
+            <%= button_to "Disable", "/admin/merchants/#{merchant.id}/update?button=disabled", local: true, method: :patch %>
+          <% else %>
+            <%= button_to "Enable", "/admin/merchants/#{merchant.id}/update?button=enabled", local: true, method: :patch %>
+          <% end %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+</div>

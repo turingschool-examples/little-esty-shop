@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Merchant Items Index Page' do
   describe 'User Story 6 - Merchant Items Index Page' do
     describe 'When I visit my merchant items index page ("merchants/merchant_id/items")' do
-      it 'I see a list of the names of all of my items, and dont see items for other merchants' do
+      xit 'I see a list of the names of all of my items, and dont see items for other merchants' do
 
         merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
         merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
