@@ -9,7 +9,7 @@ RSpec.describe Item, type: :model do
 
   before :each do
     @merchant_1 = create(:merchant)
-    
+
     @item_1 = create(:item, name: "item_1", merchant: @merchant_1, active_status: :enabled)
     @item_2 = create(:item, name: "item_2", merchant: @merchant_1)
     @item_3 = create(:item, name: "item_3", merchant: @merchant_1)
@@ -36,7 +36,7 @@ RSpec.describe Item, type: :model do
     create(:invoice_items, invoice: @invoice_4, item: @item_8, unit_price: 300, quantity: 3)
     create(:invoice_items, invoice: @invoice_4, item: @item_9, unit_price: 200, quantity: 2)
     create(:invoice_items, invoice: @invoice_4, item: @item_1, unit_price: 100, quantity: 1)
-    
+
     create_list(:transaction, 5, invoice: @invoice_1, result: :success)
     create_list(:transaction, 5, invoice: @invoice_1, result: :failed)
     create_list(:transaction, 5, invoice: @invoice_2, result: :failed)
