@@ -142,10 +142,8 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
       end
 
       describe 'status grouping' do
-        before (:each) do
-          doghats = Merchant.create!(name: "Hats for Dogs", enabled: true)
-          hummus = Merchant.create!(name: "Hummus Sculptures", enabled: true)
-        end
+        let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
+        let!(:hummus) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
 
         it 'groups merchants by enabled status' do 
           within('#enabled_merchants') do
