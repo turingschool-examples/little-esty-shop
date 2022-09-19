@@ -3,6 +3,7 @@
   <p>Status: <%= @invoice.status %></p>
   <p>Created at: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
   <p>Customer: <%= @invoice.customer.name %></p>
+  <p>Total Revenue: <%= @invoice.total_revenue %></p>
 </div>
 
 <h3>Invoice Items</h3>
