@@ -94,11 +94,11 @@ RSpec.describe Item, type: :model do
           @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
         end
         it '#top_five_items' do
-          expect(Item.top_five_items.first).to eq(@item_6)
-          expect(Item.top_five_items[1]).to eq(@item_5)
-          expect(Item.top_five_items[2]).to eq(@item_4)
-          expect(Item.top_five_items[3]).to eq(@item_3)
-          expect(Item.top_five_items[4]).to eq(@item_1)
+          expect(Item.top_five_items.first).to eq(@item_1)
+          expect(Item.top_five_items[1]).to eq(@item_2)
+          expect(Item.top_five_items[2]).to eq(@item_3)
+          expect(Item.top_five_items[3]).to eq(@item_4)
+          expect(Item.top_five_items[4]).to eq(@item_5)
         end
     end
 

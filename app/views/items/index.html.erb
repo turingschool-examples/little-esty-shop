@@ -16,4 +16,16 @@
             <h3><strong><%= link_to "#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}" %></h5></strong>
             <%= button_to "Enable", "/merchant/#{@merchant.id}/items/#{item.id}", method: :patch, params: {status: "Enabled"} %></p>
         <% end %></section>
-    <% end  %></div>
+    <% end  %>
+</div>
+
+    <div class="top_items"><h2>Top Five Items</h2>
+      <ol>
+        <% @items.top_five_items.each do |item| %>
+          <section id="top_item-<%= item.id %>">
+            <li><p><%= link_to "#{item.name}", "/merchant/#{@merchant.id}/items/#{item.id}" %> : <%= number_to_currency(item.revenue) %> in sales</p>
+            </li>
+          </section>
+        <% end %>
+      </ol>
+    </div>
