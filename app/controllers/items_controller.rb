@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
-  def update
+  def update  
     merchant = Merchant.find(params[:merchant_id])
     if params[:active_status] == "disabled"
       item_status = Item.find(params[:id])
@@ -44,8 +44,7 @@ class ItemsController < ApplicationController
     redirect_to(merchant_items_path(@merchant))
   end
 
-
-private
+  private
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :active_status)
   end
