@@ -196,7 +196,7 @@ RSpec.describe Merchant, type: :model do
 
     describe '#best_sales_date' do
       it 'returns the date where given merchant had most sales' do
-        expect(jewlery_city.best_sales_date).to eq("April 25, 2020")
+        expect(jewlery_city.best_sales_date).to eq("May 25, 2020")
       end
     end
   end

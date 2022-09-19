@@ -21,6 +21,19 @@ class Merchant < ApplicationRecord
             .order(revenue: :desc).limit(5)
   end
 
+  def best_sales_date
+    Merchant.joins(:items)
+            .where('merchant_id = ?', self.id)
+            .merge(Item.joins(:invoices)
+                       .merge(Invoice.joins(:transactions)
+                                     .where(transactions: { result: 1 } )))
+            .select('invoices.created_at', "invoice_items.unit_price*quantity as revenue")
+            .order("revenue desc", "invoices.created_at desc")
+            .first
+            .created_at
+            .strftime("%B %d, %Y")
+  end
+
   def transactions_top_5
     Customer.joins(invoices: :transactions)
             .where(transactions: { result: 1 })
