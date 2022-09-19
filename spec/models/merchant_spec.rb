@@ -159,6 +159,5 @@ RSpec.describe Merchant, type: :model do
         expect(jewlery_city.top_5_items).to eq([conch_shell, nose_ring, spiked_wallet_chain, banana_earrings, gold_earrings])
       end
     end
-
   end
 end
