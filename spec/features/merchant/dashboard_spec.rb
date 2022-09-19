@@ -115,7 +115,6 @@ RSpec.describe 'merchant dashboard' do
 
     it "shows invoice created date from oldest to newest" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-      save_and_open_page
       expect(page).to have_content("Created at: #{@merchant_1.created_at.strftime("%A, %B, %d, %Y")}")
     end
   end
