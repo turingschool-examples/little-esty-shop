@@ -305,7 +305,15 @@ RSpec.describe 'Merchants Item Index' do
     end
 
     it 'And I see the total revenue generated next to each item name' do
-
+      visit merchant_items_path(@merchant_1)
+      save_and_open_page
+      within "#5-best-items" do
+        expect(page).to have_content(10000)
+        expect(page).to have_content(8100)
+        expect(page).to have_content(6400)
+        expect(page).to have_content(4900)
+        expect(page).to have_content(3600)
+      end
     end
   end
 end
