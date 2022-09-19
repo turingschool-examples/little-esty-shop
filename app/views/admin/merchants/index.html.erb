@@ -25,7 +25,7 @@ Disabled Merchants:
 
 Top 5 Merchants:
 <ul> <% @top_5_merchants.each do |merchant| %>
- <li> Merchant: <%= merchant.name %> -------- Total Revenue: $<%= number_with_precision(merchant.revenue, :precision => 2, :delimiter => ',') %>
+ <li> Merchant: <%= merchant.name %> -------- Total Revenue: $<%= number_with_precision(merchant.revenue, :precision => 2, :delimiter => ',') %> ---- Top Day for merchant: <%= merchant.top_day %>
   </li>
 <% end %>
 </ul>

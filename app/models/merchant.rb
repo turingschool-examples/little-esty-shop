@@ -13,6 +13,15 @@ class Merchant < ApplicationRecord
     items.select("items.*, invoice_items.status as not_shipped").joins(:invoice_items).where.not("invoice_items.status = ?", 2)
   end
 
+  def top_day
+    invoices.select('invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .group('invoices.created_at')
+    .order('revenue desc')
+    .first
+    .created_at
+  end
+
+
   def self.top_5_revenue
    select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:invoice_items).group(:id).order('revenue desc').limit(5)
   end
