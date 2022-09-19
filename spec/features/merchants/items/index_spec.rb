@@ -97,7 +97,6 @@ RSpec.describe 'Merchant Items Index' do
         it 'will show the top 5 merchants by revenue' do
           visit "/merchant/#{@merchant_1.id}/items"
           expect(page).to have_content("Top Five Items")
-          save_and_open_page
           within '.top_items' do
                 expect("Sourdough").to appear_before("Brioche")
                 expect("Brioche").to appear_before("Baguette")
@@ -109,6 +108,13 @@ RSpec.describe 'Merchant Items Index' do
     
             within("#top_item-#{@item_1.id}") do
               expect(page).to have_content("$3,400.00")
+            end
+        end
+
+        it 'shows the top selling date of the top items' do
+            visit "/merchant/#{@merchant_1.id}/items"
+            within("#top_item-#{@item_1.id}") do
+              expect(page).to have_content("Top selling date for #{@item_1.name} was #{@item_1.best_day.strftime("%-m/%d/%y")}")
             end
         end
     end
