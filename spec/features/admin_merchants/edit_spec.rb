@@ -23,7 +23,7 @@ RSpec.describe 'Admin Merchants Edit page' do
       expect(page).to have_content("Carrie Loves Breadshaw")
 
       # And I see a flash message stating that the information has been successfully updated.
-      # expect(page).to have_content("Update to Carrie Loves Breadshaw was successful!")
+      expect(page).to have_content("Update to Carrie Loves Breadshaw was successful!")
     end
 
 

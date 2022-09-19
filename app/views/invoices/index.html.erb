@@ -1,0 +1,6 @@
+<h1>Invoices Index</h1>
+<div id="invoiceID">
+  <% @invoices.each do |invoice| %>
+  <li><%= link_to "Invoice ID: #{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li>
+  <% end %>
+</div>

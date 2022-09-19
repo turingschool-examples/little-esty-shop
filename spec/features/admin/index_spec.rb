@@ -17,40 +17,40 @@ RSpec.describe 'admin dashboard' do
     @customer_5 = Customer.create!(first_name: "David", last_name: "Dowie")
     @customer_6 = Customer.create!(first_name: "Clint", last_name: "Yeastwood")
 
-    @invoice_1 = Invoice.create!(status: 2, customer_id: @customer_1.id)
-    @invoice_2 = Invoice.create!(status: 2, customer_id: @customer_2.id)
-    @invoice_3 = Invoice.create!(status: 2, customer_id: @customer_3.id)
-    @invoice_4 = Invoice.create!(status: 2, customer_id: @customer_4.id)
-    @invoice_5 = Invoice.create!(status: 2, customer_id: @customer_5.id)
-    @invoice_6 = Invoice.create!(status: 0, customer_id: @customer_6.id)
+    @invoice_1 = Invoice.create!(status: :completed, customer_id: @customer_1.id)
+    @invoice_2 = Invoice.create!(status: :completed, customer_id: @customer_2.id)
+    @invoice_3 = Invoice.create!(status: :completed, customer_id: @customer_3.id)
+    @invoice_4 = Invoice.create!(status: :completed, customer_id: @customer_4.id)
+    @invoice_5 = Invoice.create!(status: :completed, customer_id: @customer_5.id)
+    @invoice_6 = Invoice.create!(status: "in progress", customer_id: @customer_6.id)
 
-    @transaction_1 = Transaction.create!(result: 0, invoice_id: @invoice_1.id, credit_card_number: "255448968")
-    @transaction_2 = Transaction.create!(result: 0, invoice_id: @invoice_1.id, credit_card_number: "255448968")
-    @transaction_3 = Transaction.create!(result: 0, invoice_id: @invoice_1.id, credit_card_number: "255448968")
-    @transaction_4 = Transaction.create!(result: 0, invoice_id: @invoice_1.id, credit_card_number: "255448968")
-    @transaction_5 = Transaction.create!(result: 0, invoice_id: @invoice_1.id, credit_card_number: "255448968")
-    @transaction_6 = Transaction.create!(result: 0, invoice_id: @invoice_1.id, credit_card_number: "255448968")
+    @transaction_1 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
+    @transaction_2 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
+    @transaction_3 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
+    @transaction_4 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
+    @transaction_5 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
+    @transaction_6 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
 
-    @transaction_7 = Transaction.create!(result: 0, invoice_id: @invoice_2.id, credit_card_number: "355646888")
-    @transaction_8 = Transaction.create!(result: 0, invoice_id: @invoice_2.id, credit_card_number: "355646888")
-    @transaction_9 = Transaction.create!(result: 0, invoice_id: @invoice_2.id, credit_card_number: "355646888")
-    @transaction_10 = Transaction.create!(result: 0, invoice_id: @invoice_2.id, credit_card_number: "355646888")
-    @transaction_11 = Transaction.create!(result: 0, invoice_id: @invoice_2.id, credit_card_number: "355646888")
+    @transaction_7 = Transaction.create!(result: :success, invoice_id: @invoice_2.id, credit_card_number: "355646888")
+    @transaction_8 = Transaction.create!(result: :success, invoice_id: @invoice_2.id, credit_card_number: "355646888")
+    @transaction_9 = Transaction.create!(result: :success, invoice_id: @invoice_2.id, credit_card_number: "355646888")
+    @transaction_10 = Transaction.create!(result: :success, invoice_id: @invoice_2.id, credit_card_number: "355646888")
+    @transaction_11 = Transaction.create!(result: :success, invoice_id: @invoice_2.id, credit_card_number: "355646888")
 
-    @transaction_12 = Transaction.create!(result: 0, invoice_id: @invoice_3.id, credit_card_number: "888889999")
-    @transaction_13 = Transaction.create!(result: 0, invoice_id: @invoice_3.id, credit_card_number: "888889999")
-    @transaction_14 = Transaction.create!(result: 0, invoice_id: @invoice_3.id, credit_card_number: "888889999")
-    @transaction_15 = Transaction.create!(result: 0, invoice_id: @invoice_3.id, credit_card_number: "888889999")
+    @transaction_12 = Transaction.create!(result: :success, invoice_id: @invoice_3.id, credit_card_number: "888889999")
+    @transaction_13 = Transaction.create!(result: :success, invoice_id: @invoice_3.id, credit_card_number: "888889999")
+    @transaction_14 = Transaction.create!(result: :success, invoice_id: @invoice_3.id, credit_card_number: "888889999")
+    @transaction_15 = Transaction.create!(result: :success, invoice_id: @invoice_3.id, credit_card_number: "888889999")
 
-    @transaction_16 = Transaction.create!(result: 0, invoice_id: @invoice_4.id, credit_card_number: "123456789")
-    @transaction_17 = Transaction.create!(result: 0, invoice_id: @invoice_4.id, credit_card_number: "123456789")
-    @transaction_18 = Transaction.create!(result: 0, invoice_id: @invoice_4.id, credit_card_number: "123456789")
+    @transaction_16 = Transaction.create!(result: :success, invoice_id: @invoice_4.id, credit_card_number: "123456789")
+    @transaction_17 = Transaction.create!(result: :success, invoice_id: @invoice_4.id, credit_card_number: "123456789")
+    @transaction_18 = Transaction.create!(result: :success, invoice_id: @invoice_4.id, credit_card_number: "123456789")
 
-    @transaction_19 = Transaction.create!(result: 0, invoice_id: @invoice_5.id, credit_card_number: "987654321")
-    @transaction_20 = Transaction.create!(result: 0, invoice_id: @invoice_5.id, credit_card_number: "987654321")
+    @transaction_19 = Transaction.create!(result: :success, invoice_id: @invoice_5.id, credit_card_number: "987654321")
+    @transaction_20 = Transaction.create!(result: :success, invoice_id: @invoice_5.id, credit_card_number: "987654321")
 
-    @transaction_21 = Transaction.create!(result: 0, invoice_id: @invoice_6.id, credit_card_number: "654498711")
-    @transaction_22 = Transaction.create!(result: 1, invoice_id: @invoice_6.id, credit_card_number: "654498711")
+    @transaction_21 = Transaction.create!(result: :success, invoice_id: @invoice_6.id, credit_card_number: "654498711")
+    @transaction_22 = Transaction.create!(result: :failed, invoice_id: @invoice_6.id, credit_card_number: "654498711")
 
     @invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 850, status: 2, item_id: @item_1.id, invoice_id: @invoice_1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1300, status: 2, item_id: @item_2.id, invoice_id: @invoice_2.id)
@@ -133,14 +133,6 @@ RSpec.describe 'admin dashboard' do
           visit "/admin"
           click_link("Invoice ID number: #{@invoice_7.id}")
           expect(current_path).to eq("/admin/invoices/#{@invoice_7.id}")
-        end
-      end
-    end
-
-    describe 'US5' do
-      describe 'Incomplete Invoices section continued' do
-        it 'displays the date of creation next to each invoice and lists oldest to newest' do
-
         end
       end
     end

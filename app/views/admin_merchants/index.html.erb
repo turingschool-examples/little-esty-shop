@@ -1,4 +1,27 @@
 <h1>Admin Merchants Index</h1>
+<%= link_to "New Merchant", "/admin/merchants/new" %>
+<div class="enabled"><h2>Enabled Merchants</h2>
 <% @merchants.each do |merchant| %>
-  <p><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></strong></p>
-<% end %>
+<section id="enabled_merchant-<%= merchant.id %>">
+  <p><% if merchant.status == "Enabled" %>
+    <h3><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h5></strong>
+    <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Disabled"} %></p>
+    <% end %></section>
+  <% end  %></div>
+
+<div class="disabled"><h2>Disabled Merchants</h2>
+  <% @merchants.each do |merchant| %>
+  <section id="disabled_merchant-<%= merchant.id %>">
+    <p><% if merchant.status == "Disabled"%>
+      <h3><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h5></strong>
+      <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Enabled"} %></p>
+      <% end %></section>
+    <% end  %></div>
+
+<div class="top_merchants"><h2>Top Merchants</h2>
+  <ol><% @merchants.top_five_merchants.each do |merchant| %>
+  <section id="top_merchant-<%= merchant.id %>">
+    <li><p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %> : <%= number_to_currency(merchant.revenue) %> in sales</p>
+      <p><%= "Top selling date for #{merchant.name} was #{merchant.best_day.strftime("%-m/%d/%y")}" %></p></li>
+    </section>
+    <% end %></ol>
