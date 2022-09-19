@@ -21,14 +21,14 @@ RSpec.describe "the merchant invoices show"  do
             expect(page).to have_content("Status: #{invoice_1.status}")
         end
 
-        xit 'can display the date format for its creation date' do
+        it 'can display the date format for its creation date' do
             merchant1 = Merchant.create!(name: "Bob")
             customer1 = Customer.create!(first_name: "Jolene", last_name: "Jones")
             invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
             
             visit merchant_invoice_path(merchant1, invoice_1)
             
-            expect(page).to have_content("Created: Sunday, September 18, 2022")
+            expect(page).to have_content("Created: #{invoice_1.created_at.strftime("%A,%B %d, %Y")}")
         end
 
         it 'can display the customers first and last name' do
