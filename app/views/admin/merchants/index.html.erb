@@ -7,18 +7,29 @@
     </nav>
 </header>
 
-<h2>Merchants</h2>
-  <table id='merchant-index'>
-    <tr><th><h3>Merchant Index</h3></th></tr>
-    <% @merchants.each do |merchant| %>
-    <% merchant.enabled ? status = "Disable" : status = "Enable" %>
+<h2>Merchants Index</h2>
+<div id='merchant-index'>
+  <table id='enabled_merchants'>
+    <tr><th><h3>Enabled Merchants</h3></th></tr>
+    <% @enabled_merchants.each do |merchant| %>
     <tr><td id='merchant-<%= merchant.id %>'> 
       <%= link_to merchant.name, admin_merchant_path(merchant) %> 
-      <%if merchant.enabled == false %>
-      <%= button_to status, admin_merchant_path(merchant), method: :patch, params: { enabled: true }, :class => 'status_button' %>
-      <%elsif merchant.enabled == true %>
-      <%= button_to status, admin_merchant_path(merchant), method: :patch, params: { enabled: false }, :class => 'status_button' %>
-      <%end%>
+      <%= button_to "Disable", admin_merchant_path(merchant), method: :patch, params: { enabled: false }, :class => 'status_button' %>
     </td></tr>
     <%end%>
   </table>
+
+  <br>
+  
+  <br>
+
+  <table id='disabled_merchants'>
+    <tr><th><h3>Disabled Merchants</h3></th></tr>
+    <% @disabled_merchants.each do |merchant| %>
+    <tr><td id='merchant-<%= merchant.id %>'> 
+      <%= link_to merchant.name, admin_merchant_path(merchant) %> 
+      <%= button_to "Enabled", admin_merchant_path(merchant), method: :patch, params: { enabled: true }, :class => 'status_button' %>
+    </td></tr>
+    <%end%>
+  </table>
+</div>
