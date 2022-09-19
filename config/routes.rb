@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get "/merchant/:id/items/:id", to: 'items#show'
   get "/merchant/:id/items/:id/edit", to: 'items#edit'
   patch "/merchant/:id/items/:id", to: 'items#update'
+
+  get "/merchants/:id/invoices", to: 'invoices#index'
   
   # namespace :admin do
   #   resources :merchants
