@@ -107,7 +107,7 @@ RSpec.describe 'merchant dashboard' do
       expect(page).to have_content(@invoice_item_8.id)
     end
 
-    xit "invoice id has links to merchant's invoice show page" do
+    it "invoice id has links to merchant's invoice show page" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
       expect(page).to have_link(@invoice_item_7.id)
       expect(page).to have_link(@invoice_item_8.id)

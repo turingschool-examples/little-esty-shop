@@ -10,4 +10,6 @@ class Merchant < ApplicationRecord
   def item_not_shipped
     invoice_items.where("status = 0 OR status = 1")
   end
+
+
 end
