@@ -14,25 +14,25 @@ RSpec.describe Invoice, type: :model do
     @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
     @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
 
-    @customer_1 = Customer.create!(first_name: "Larry", last_name: "Smith") 
-    @customer_2 = Customer.create!(first_name: "Susan", last_name: "Field") 
-    @customer_3 = Customer.create!(first_name: "Barry", last_name: "Roger") 
-    @customer_4 = Customer.create!(first_name: "Mary", last_name: "Flower") 
-    @customer_5 = Customer.create!(first_name: "Tim", last_name: "Colin") 
-    @customer_6 = Customer.create!(first_name: "Harry", last_name: "Dodd") 
+    @customer_1 = Customer.create!(first_name: "Larry", last_name: "Smith")
+    @customer_2 = Customer.create!(first_name: "Susan", last_name: "Field")
+    @customer_3 = Customer.create!(first_name: "Barry", last_name: "Roger")
+    @customer_4 = Customer.create!(first_name: "Mary", last_name: "Flower")
+    @customer_5 = Customer.create!(first_name: "Tim", last_name: "Colin")
+    @customer_6 = Customer.create!(first_name: "Harry", last_name: "Dodd")
     @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann")
-    @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone") 
+    @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone")
 
     @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
-    @invoice_2 = @customer_2.invoices.create!(status: :completed, created_at: "09-10-2022")
-    @invoice_3 = @customer_3.invoices.create!(status: :completed, created_at: "10-08-2022")
-    @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-06-2022")
-    @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-10-2022")
+    @invoice_2 = @customer_2.invoices.create!(status: :cancelled, created_at: "08-10-2022")
+    @invoice_3 = @customer_3.invoices.create!(status: :cancelled, created_at: "10-08-2022")
+    @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-08-2022")
+    @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-08-2022")
     @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
-    @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "10-09-2022")
-    @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "10-11-2022")
+    @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "01-07-2022")
+    @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "01-07-2022")
 
-    @item_1 = @merchant_1.items.create!(name: "Mega Tool Box", description: "Huge Toolbox with lots of options") 
+    @item_1 = @merchant_1.items.create!(name: "Mega Tool Box", description: "Huge Toolbox with lots of options")
     @item_2 = @merchant_2.items.create!(name: "Blue Hammock", description: "Large blue hammock for all your outdoor adventures")
     @item_3 = @merchant_3.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.")
 
@@ -54,13 +54,13 @@ RSpec.describe Invoice, type: :model do
 
     # customer_2 transactions
     @transaction_9 = @invoice_2.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_10 = @invoice_2.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success) 
-    @transaction_11 = @invoice_2.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success) 
-    @transaction_12 = @invoice_2.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success) 
-    @transaction_13 = @invoice_2.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success) 
-    @transaction_14 = @invoice_2.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success) 
-    @transaction_15 = @invoice_2.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success) 
-    @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success) 
+    @transaction_10 = @invoice_2.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
+    @transaction_11 = @invoice_2.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
+    @transaction_12 = @invoice_2.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
+    @transaction_13 = @invoice_2.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
+    @transaction_14 = @invoice_2.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
+    @transaction_15 = @invoice_2.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success)
+    @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success)
   end
 
   describe "class methods" do
@@ -74,7 +74,12 @@ RSpec.describe Invoice, type: :model do
     end
 
     it "#sort_by_date" do
-      expect(Invoice.sort_by_date).to eq([@invoice_4, @invoice_6, @invoice_3, @invoice_7, @invoice_1, @invoice_2, @invoice_5, @invoice_8])
+      expect(Invoice.sort_by_date).to eq([@invoice_8, @invoice_7, @invoice_6, @invoice_5, @invoice_3, @invoice_4, @invoice_1, @invoice_2])
+    end
+
+    it "#best_day" do
+
+      expect(Invoice.best_day).to eq(@invoice_8.created_at)
     end
   end
 end
