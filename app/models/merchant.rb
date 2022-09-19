@@ -4,28 +4,38 @@ class Merchant < ApplicationRecord
   validates :enabled, inclusion: [true, false]
 
   def self.enabled_merchants
-    all.where('enabled = ?', true)
+    where('enabled = ?', true)
   end
 
   def self.disabled_merchants
-    all.where('enabled = ?', false)
+    where('enabled = ?', false)
+  end
+
+  def self.merchants_top_5
+    Merchant.joins(:items)
+            .merge(Item.joins(:invoices)
+                       .merge(Invoice.joins(:transactions)
+                                     .where(transactions: { result: 1 })))
+            .group(:id, :name)
+            .select(:name, :id, 'sum(invoice_items.unit_price*quantity) as revenue')
+            .order(revenue: :desc).limit(5)
   end
 
   def transactions_top_5
-      Customer.joins(invoices: :transactions)
-      .where( transactions: {result: 1})
-      .group(:id)
-      .order("transactions.count desc")
-      .limit(5)
+    Customer.joins(invoices: :transactions)
+            .where(transactions: { result: 1 })
+            .group(:id)
+            .order("transactions.count desc")
+            .limit(5)
   end
 
   def ready_to_ship_items_ordered
     Invoice.select("items.*, invoices.created_at as creation_time, invoices.id as invoice_id")
-    .joins(:items)
-    .where.not(invoice_items: {status: 2})
-    .order(:created_at)
+           .joins(:items)
+           .where.not(invoice_items: { status: 2 })
+           .order(:created_at)
   end
-  
+
   def enabled_items
     items.where(enabled: true)
   end
@@ -36,11 +46,11 @@ class Merchant < ApplicationRecord
 
   def top_5_items
     Item.joins(invoices: :transactions)
-      .group(:id, :name)
-      .where( transactions: {result: 1}, merchant_id: self.id)
-      .select(:name, :id, "sum(invoice_items.unit_price*quantity) as revenue")
-      .order(revenue: :desc)
-      .limit(5)
+        .group(:id, :name)
+        .where( transactions: {result: 1}, merchant_id: self.id)
+        .select(:name, :id, "sum(invoice_items.unit_price*quantity) as revenue")
+        .order(revenue: :desc)
+        .limit(5)
   end
 
   def find_relevant_invoices
