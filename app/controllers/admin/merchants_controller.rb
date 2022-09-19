@@ -4,7 +4,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
     @merchants_enabled = Merchant.enabled_merchants
     @merchants_disabled = Merchant.disabled_merchants
-    # require "pry"; binding.pry
+    @top5 = Merchant.top_5_merchants
   end
 
   def show
@@ -40,5 +40,5 @@ class Admin::MerchantsController < ApplicationController
     Merchant.create(name: params[:name])
     redirect_to '/admin/merchants'
   end
-  
+
 end
