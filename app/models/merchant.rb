@@ -19,6 +19,10 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def merchant_invoice_finder
+    Invoice.joins(:items).select(:id).where("items.merchant_id = #{self.id}").group(:id)
+  end
+
   def self.enabled_merchants
     Merchant.all.select{|merchant| merchant.status == 'Enabled'}
   end
@@ -38,7 +42,6 @@ class Merchant < ApplicationRecord
   end
 
   def highest_sales_date
-
     items.joins(invoices: :transactions)
     .select("date_trunc('day', invoices.created_at) as day_created, sum(invoice_items.unit_price * invoice_items.quantity) as highest_profits")
     .group(:day_created)
