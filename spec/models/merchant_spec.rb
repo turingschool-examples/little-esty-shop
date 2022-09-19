@@ -171,12 +171,12 @@ RSpec.describe Merchant, type: :model do
       @transaction_21 = Transaction.create!(result: :success, invoice_id: @invoice_6.id, credit_card_number: "654498711")
       @transaction_22 = Transaction.create!(result: :success, invoice_id: @invoice_6.id, credit_card_number: "654498711")
 
-      @invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 850, status: 2, item_id: @item_1.id, invoice_id: @invoice_1.id)
+      @invoice_item_1 = InvoiceItem.create!(quantity: 4, unit_price: 850, status: 0, item_id: @item_1.id, invoice_id: @invoice_1.id)
       @invoice_item_2 = InvoiceItem.create!(quantity: 2, unit_price: 1300, status: 2, item_id: @item_2.id, invoice_id: @invoice_2.id)
       @invoice_item_3 = InvoiceItem.create!(quantity: 3, unit_price: 999, status: 2, item_id: @item_3.id, invoice_id: @invoice_3.id)
       @invoice_item_4 = InvoiceItem.create!(quantity: 2, unit_price: 1200, status: 2, item_id: @item_4.id, invoice_id: @invoice_4.id)
       @invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 500, status: 2, item_id: @item_5.id, invoice_id: @invoice_5.id)
-      @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
+      @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 1, item_id: @item_5.id, invoice_id: @invoice_6.id)
     end
     it '#best_day' do
       expect(@merchant_1.best_day).to eq("2020-06-30 16:00:00.000000000 +0000")
@@ -187,7 +187,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "items not been shipped" do
-      expect(@merchant_1.item_not_shipped.pluck(:name)).to eq([@item_5.name, @item_1.name])
+      expect(@merchant_1.items_not_shipped.pluck(:name)).to eq([@item_5.name])
     end
   end
 
