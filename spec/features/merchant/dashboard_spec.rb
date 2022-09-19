@@ -94,13 +94,19 @@ RSpec.describe 'merchant dashboard' do
 
     it "shows list of items that have been ordered and not shipped" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-      # within("#UnshippedItems") do
-      save_and_open_page
       expect(page).to have_content("Items Ready to Ship")
       expect(page).to have_content(@item_5.name)
       expect(page).to have_content(@item_1.name)
       expect(page).to_not have_content("Item name: #{@item_2.name}")
-      # end
     end
+
+    it "shows invoice id next to each item name" do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+      expect(page).to have_content("Items Ready to Ship")
+      expect(page).to have_content(@invoice_item_7.id)
+      expect(page).to have_content(@invoice_item_8.id)
+    end
+
+
   end
 end

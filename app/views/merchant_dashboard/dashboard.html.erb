@@ -10,9 +10,8 @@
 <p><%= customer.first_name %> <%= customer.last_name %> transaction: <%= customer.success_count %> </p>
 <% end %>
 
-<!-- <div id="UnshippedItems"> -->
+
 <h3> Items Ready to Ship </h3>
 <% @merchant.item_not_shipped.each do |merchant_invoice_item| %>
-<p><%= merchant_invoice_item.item.name %></p>
+<p>Item name: <%= merchant_invoice_item.item.name %> Invoice_id: <%= link_to "#{merchant_invoice_item.id}" %></p>
 <% end %>
-<!-- </div> -->
