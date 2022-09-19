@@ -34,22 +34,22 @@ RSpec.describe 'admin invoice show' do
         expect(page).to have_content("Created at: #{alaina_invoice1.created_at.strftime("%A, %B %d, %Y")}")
         expect(page).to have_content("Customer: #{alaina.name}")
         expect(page).to_not have_content("Invoice ##{alaina_invoice2.id}")
+        expect(page).to have_content("Total Revenue: #{alaina_invoice1.total_revenue}")
     end
 
     describe 'invoice items' do
         it 'shows all invoice items' do
             visit admin_invoice_path(alaina_invoice1)
-            within "#invoice_info" do
+            within "#invoice_items" do
                 expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
                 expect(page).to have_content(alainainvoice1_itemsilver_necklace.item.name)
                 expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.item.name)
-
-                # expect(page).to have_content("Total Revenue: #{alaina_invoice1.total_revnue}")
             end
         end
 
         it 'shows all item info' do
             visit admin_invoice_path(alaina_invoice1)
+            save_and_open_page
             expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
             expect(page).to have_content("Quantity: #{alainainvoice1_itemgold_earrings.quantity}")
             expect(page).to have_content("Sale Price: #{alainainvoice1_itemgold_earrings.unit_price}")
