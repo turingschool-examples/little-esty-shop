@@ -26,7 +26,13 @@ class Merchant < ApplicationRecord
         item.price_sold(invoice.id) * item.quantity_purchased(invoice.id)
       end  
     end 
+  end  
+
+  def order_by_revenue
+    require "pry"; binding.pry
+    # Merchant.joins(:invoice_items).group(:id).sum("invoice_items.quantity * invoice_items.unit_price")
+    # invoice_items.join(transactions).group.(item_id).sum(quantity* unit_sold).where(transactions: { result: :success })
     # Possible AR method for above code:
     # invoice.joins(:transactions).where(transactions: { result: :success }).count
-  end  
+  end
 end

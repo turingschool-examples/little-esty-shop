@@ -13,6 +13,41 @@ RSpec.describe Merchant, type: :model do
       @merchant_4 = Merchant.create!(name: "Jenna's Jewlery", active_status: :enabled)
       @merchant_5 = Merchant.create!(name: "Sassy Soap")
       @merchant_6 = Merchant.create!(name: "Tom's Typewriters")
+
+      @merchant_11 = create(:merchant)
+      @merchant_12 = create(:merchant)
+      @merchant_13 = create(:merchant)
+      @merchant_14 = create(:merchant)
+
+      #merchant_11 items
+      @items_11 = create_list(:item, 10, merchant: @merchant_11)
+      @items_12 = create_list(:item, 10, merchant: @merchant_11)
+      #merchant_12 items
+      @items_13 = create_list(:item, 10, merchant: @merchant_12)
+      @items_14 = create_list(:item, 10, merchant: @merchant_12)
+      #merchant_13 items
+      @items_15 = create_list(:item, 10, merchant: @merchant_13)
+      @items_16 = create_list(:item, 10, merchant: @merchant_13)
+      #merchant_14 items
+      @items_15 = create_list(:item, 10, merchant: @merchant_14)
+      @items_16 = create_list(:item, 10, merchant: @merchant_14)
+
+      @invoice_11 = create(:invoice)
+      @invoice_12 = create(:invoice)
+      @invoice_13 = create(:invoice)
+
+      #merchant_11 items - revenue: 55000
+      @items_11.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 500, quantity: 10) } #50000
+      @items_12.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) } #5000
+      #merchant_12 items - revenue: 45000
+      @items_13.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 500, quantity: 5) } #25000
+      @items_14.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 200, quantity: 10) } # 20000
+      #merchant_13 items - revenue:60000
+      @items_15.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 500, quantity: 10) } #50000
+      @items_16.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 200, quantity: 5) } #10000
+      #merchant_14 items - revenue:20000
+      @items_15.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 10) } #10000
+      @items_16.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 200, quantity: 5) } #10000
     end
 
     it "#active" do
@@ -24,7 +59,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'order_by_revenue' do
-      #in process based off of total_revenue
+      expect(Merchant.order_by_revenue).to eq([@merchant_13, @merchant_12, @merchant_11, @merchant_14@])
     end
   end
 
@@ -52,7 +87,7 @@ RSpec.describe Merchant, type: :model do
       @transaction_14 = create_list(:transaction, 5, invoice: @invoice_12, result: :failed)
 
       @transaction_15 = create_list(:transaction, 10, invoice: @invoice_13, result: :failed)
-      
+
       @merchant1 = create(:merchant)
 
       @item_1 = create(:item, merchant: @merchant1)
