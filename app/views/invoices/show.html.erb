@@ -9,3 +9,12 @@
 
 
 <h3>Invoice Item Information<h3>
+
+<% @invoice_items.each do |invoice_item|%>
+<ul>
+    <li>Item Name: <%= invoice_item.item.name %></li>
+    <li>Item Quantity: <%= invoice_item.quantity %></li>
+    <li>Item Sold For: $<%= invoice_item.unit_price %></li>
+    <li>Item Status: <%= invoice_item.status %></li>
+</ul>
+<% end %>
