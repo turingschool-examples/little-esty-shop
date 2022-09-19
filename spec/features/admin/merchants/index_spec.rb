@@ -266,7 +266,7 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
           end
         end
       end
-
+      
       it 'and I there I see the merchants best day of sales' do
         within '#top_5_merchants' do
           top_merch = Merchant.merchants_top_5
