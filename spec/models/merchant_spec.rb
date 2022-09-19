@@ -90,6 +90,7 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 500, status: 2, item_id: @item_5.id, invoice_id: @invoice_5.id)
       @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
     end
+
     it '#top_five_merchants' do
       expect(Merchant.top_five_merchants.first).to eq(@merchant_6)
       expect(Merchant.top_five_merchants[1]).to eq(@merchant_5)
@@ -97,6 +98,7 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.top_five_merchants[3]).to eq(@merchant_3)
       expect(Merchant.top_five_merchants[4]).to eq(@merchant_1)
     end
+
   end
 
   describe 'instance methods' do
@@ -134,12 +136,12 @@ RSpec.describe Merchant, type: :model do
       @customer_5 = Customer.create!(first_name: "David", last_name: "Dowie")
       @customer_6 = Customer.create!(first_name: "Clint", last_name: "Yeastwood")
 
-      @invoice_1 = Invoice.create!(status: :completed, customer_id: @customer_1.id)
-      @invoice_2 = Invoice.create!(status: :completed, customer_id: @customer_2.id)
-      @invoice_3 = Invoice.create!(status: :completed, customer_id: @customer_3.id)
-      @invoice_4 = Invoice.create!(status: :completed, customer_id: @customer_4.id)
-      @invoice_5 = Invoice.create!(status: :completed, customer_id: @customer_5.id)
-      @invoice_6 = Invoice.create!(status: :completed, customer_id: @customer_6.id)
+      @invoice_1 = Invoice.create!(status: :completed, customer_id: @customer_1.id, created_at: "Sat, 30 Jan 2020 16:00:00 UTC +00:00")
+      @invoice_2 = Invoice.create!(status: :completed, customer_id: @customer_2.id, created_at: "Sat, 30 Feb 2020 16:00:00 UTC +00:00")
+      @invoice_3 = Invoice.create!(status: :completed, customer_id: @customer_3.id, created_at: "Sat, 30 Mar 2020 16:00:00 UTC +00:00")
+      @invoice_4 = Invoice.create!(status: :completed, customer_id: @customer_4.id, created_at: "Sat, 30 May 2020 16:00:00 UTC +00:00")
+      @invoice_5 = Invoice.create!(status: :completed, customer_id: @customer_5.id, created_at: "Sat, 30 Jun 2020 16:00:00 UTC +00:00")
+      @invoice_6 = Invoice.create!(status: :completed, customer_id: @customer_6.id, created_at: "Sat, 30 Jul 2020 16:00:00 UTC +00:00")
 
       @transaction_1 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
       @transaction_2 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
@@ -177,11 +179,9 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 444, status: 2, item_id: @item_5.id, invoice_id: @invoice_6.id)
     end
     it '#best_day' do
-      expect(@merchant_1.best_day).to eq("2021-12-30 16:28:44.000000000 +0000")
+      expect(@merchant_1.best_day).to eq("2020-06-30 16:00:00.000000000 +0000")
     end
-  end
 
-end
 
     it "top 5 customers" do
       expect(Customer.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
@@ -191,4 +191,5 @@ end
       expect(@merchant_1.item_not_shipped.pluck(:name)).to eq([@item_5.name, @item_1.name])
     end
   end
+
 end
