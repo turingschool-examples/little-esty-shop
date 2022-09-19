@@ -47,21 +47,6 @@ RSpec.describe "Admin Invoice Show Page" do
         end
       end
 
-      # Admin Invoice Show Page: Update Invoice Status
-
-# As an admin
-
-# I see the invoice status is a select field
-# And I see that the invoice's current status is selected
-
-# When I click this select field,
-# Then I can select a new status for the Invoice,
-# And next to the select field I see a button to "Update Invoice Status"
-
-# When I click this button
-# I am taken back to the admin invoice show page
-# And I see that my Invoice's status has now been updated
-
       it "I see the invoice status is a select field And I see that the invoice's current status is selected" do
         visit admin_invoice_path(@invoice_1)
         expect(page).to have_select("Invoice Status:", selected: "#{@invoice_1.status.titleize}")
