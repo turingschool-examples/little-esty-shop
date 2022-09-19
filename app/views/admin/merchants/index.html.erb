@@ -41,6 +41,7 @@
     <% @top_merchants.each do |merchant| %>
     <tr><td id='top-merchant-<%= merchant.id %>'> 
       <%= link_to merchant.name, admin_merchant_path(merchant) %> - $<%= (merchant.revenue/100.to_f).round(2) %> in revenue
+      <%= "Top sales date for #{merchant.name} was #{merchant.best_sales_date}" %>
     </td></tr>
     <%end%>
   </table>
