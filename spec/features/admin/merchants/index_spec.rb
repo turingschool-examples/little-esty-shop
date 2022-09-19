@@ -113,6 +113,12 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
       end
     end
 
+    it 'has a link to create a new merchant' do
+      expect(page).to have_link("Create New Merchant")
+      click_link "Create New Merchant"
+      expect(current_path).to eq(new_admin_merchant_path)
+    end
+
     describe 'enable/disable' do
       it 'next to each merchant name I see a button to disable or enable that merchant.' do
         merchants = Merchant.all
