@@ -266,6 +266,17 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
           end
         end
       end
+      
+      it 'and I there I see the merchants best day of sales' do
+        within '#top_5_merchants' do
+          top_merch = Merchant.merchants_top_5
+          top_merch.each do |merch|
+            within("#top-merchant-#{merch.id}") do
+              expect(page).to have_content("Top sales date for #{merch.name} was #{merch.best_sales_date}")
+            end
+          end
+        end
+      end
     end
   end
 end

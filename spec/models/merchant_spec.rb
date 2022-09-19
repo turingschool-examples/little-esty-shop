@@ -56,11 +56,11 @@ RSpec.describe Merchant, type: :model do
   let!(:whitney_invoice5) { whitney.invoices.create!(status: "completed")}
   let!(:whitney_invoice6) { whitney.invoices.create!(status: "completed")}
   let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed", created_at: "2020-01-30 14:54:09")}
-  let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress")}
-  let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed")}
-  let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed")}
-  let!(:alaina_invoice5) { alaina.invoices.create!(status: "completed")}
-  let!(:alaina_invoice6) { alaina.invoices.create!(status: "completed")}
+  let!(:alaina_invoice2) { alaina.invoices.create!(status: "in_progress", created_at: "2020-05-25 14:54:09")}
+  let!(:alaina_invoice3) { alaina.invoices.create!(status: "completed", created_at: "2020-05-25 14:54:09")}
+  let!(:alaina_invoice4) { alaina.invoices.create!(status: "completed", created_at: "2020-08-15 14:54:09")}
+  let!(:alaina_invoice5) { alaina.invoices.create!(status: "completed", created_at: "2020-05-25 14:54:09")}
+  let!(:alaina_invoice6) { alaina.invoices.create!(status: "completed", created_at: "2020-05-25 14:54:09")}
   let!(:alaina_invoice7) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice8) { alaina.invoices.create!(status: "completed")}
   let!(:alaina_invoice9) { alaina.invoices.create!(status: "completed")}
@@ -191,6 +191,12 @@ RSpec.describe Merchant, type: :model do
     describe '#top_5_items' do
       it 'an array of the top 5 items by revenue' do
         expect(jewlery_city.top_5_items).to eq([conch_shell, nose_ring, spiked_wallet_chain, banana_earrings, gold_earrings])
+      end
+    end
+
+    describe '#best_sales_date' do
+      it 'returns the date where given merchant had most sales' do
+        expect(jewlery_city.best_sales_date).to eq("May 25, 2020")
       end
     end
   end
