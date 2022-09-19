@@ -127,10 +127,10 @@ RSpec.describe "Admin Merchants" do
           @item_5 = create(:item, merchant: @merchant_5)
           @item_6 = create(:item, merchant: @merchant_6)
 
-          @invoice_2 = create(:invoice)
-          @invoice_1 = create(:invoice)
-          @invoice_3 = create(:invoice)
-          @invoice_4 = create(:invoice)
+          @invoice_2 = create(:invoice, status: :completed, created_at: "08-10-2022")
+          @invoice_1 = create(:invoice, status: :completed, created_at: "01-07-2022")
+          @invoice_3 = create(:invoice, status: :completed, created_at: "15-08-2022")
+          @invoice_4 = create(:invoice, status: :completed, created_at: "23-12-2022")
 
           @invoice_items_1 = create(:invoice_items, invoice: @invoice_1, item: @item_1, unit_price: 600, quantity: 1) #600 - fails
           @invoice_items_2 = create(:invoice_items, invoice: @invoice_2, item: @item_2, unit_price: 400, quantity: 1) #400
