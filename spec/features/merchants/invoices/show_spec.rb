@@ -76,7 +76,17 @@ RSpec.describe 'Merchant Index Show Page' do
           expect(page).to have_content("Status: #{alainainvoice1_itemsilver_necklace.status}")
         end
       end
+
+      it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+
+        within("#total_invoice_revenue") do
+          expect(page).to have_content("Total Revenue From This Invoice: $#{(alaina_invoice1.calculate_invoice_revenue / 100.to_f).round(2)}")
+        end
+      end
+
     end
   end
 end
+
 
