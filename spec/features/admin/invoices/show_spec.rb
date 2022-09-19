@@ -30,7 +30,7 @@ RSpec.describe 'admin invoice show' do
     it 'shows all invoice info' do
         visit admin_invoice_path(alaina_invoice1)
         expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
-        expect(page).to have_content("Status: #{alaina_invoice1.status}")
+        expect(page).to have_content("#{alaina_invoice1.status}")
         expect(page).to have_content("Created at: #{alaina_invoice1.created_at.strftime("%A, %B %d, %Y")}")
         expect(page).to have_content("Customer: #{alaina.name}")
         expect(page).to_not have_content("Invoice ##{alaina_invoice2.id}")
@@ -54,6 +54,18 @@ RSpec.describe 'admin invoice show' do
             expect(page).to have_content("Sale Price: #{alainainvoice1_itemgold_earrings.unit_price}")
             expect(page).to have_content("Status: #{alainainvoice1_itemgold_earrings.status}")
             expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.unit_price)
+        end
+    end
+
+    it 'invoice status is a select field and can be updated' do
+        visit admin_invoice_path(alaina_invoice1)
+
+        expect(alaina_invoice1.status).to eq('completed')
+        within("#invoice_info") do
+            select "in_progress", from: "invoice_status"
+            click_button('Update Invoice')
+            alaina_invoice1.reload
+            expect(alaina_invoice1.status).to eq('in_progress')
         end
     end
 end
