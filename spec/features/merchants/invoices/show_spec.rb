@@ -25,7 +25,7 @@ RSpec.describe 'Merchant Invoice Show' do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
       expect(page).to have_content("Invoice ID: #{@invoice_1.id}")
-      expect(page).to have_select('status', selected: "completed")
+      expect(page).to have_content("completed")
       expect(page).to have_content("Invoice created at: Friday, September, 16, 2022")
       expect(page).to have_content("Meat Loaf")
     end
