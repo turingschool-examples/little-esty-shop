@@ -4,7 +4,7 @@
 <% @merchants.each do |merchant| %>
 <section id="enabled_merchant-<%= merchant.id %>">
   <p><% if merchant.status == "Enabled" %>
-    <h3><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h5></strong>
+    <h3><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3></strong>
     <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Disabled"} %></p>
     <% end %></section>
   <% end  %></div>
@@ -13,7 +13,7 @@
   <% @merchants.each do |merchant| %>
   <section id="disabled_merchant-<%= merchant.id %>">
     <p><% if merchant.status == "Disabled"%>
-      <h3><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h5></strong>
+      <h3><strong><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></h3></strong>
       <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Enabled"} %></p>
       <% end %></section>
     <% end  %></div>
@@ -25,3 +25,4 @@
       <p><%= "Top selling date for #{merchant.name} was #{merchant.best_day.strftime("%-m/%d/%y")}" %></p></li>
     </section>
     <% end %></ol>
+</div>
