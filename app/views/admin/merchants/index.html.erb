@@ -4,8 +4,8 @@
 <% @top5.each do |merchant|%>
   <p class="top-five"; id="top_5_id_<%=merchant.id%>">
 
-    <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> <%= number_to_currency(merchant.revenue.to_f/100) %>
-    “Top selling date for <%= merchant.name %> was <%= merchant.highest_sales_date %>"</p>
+    <%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %> Total Revenue: <%=  number_to_currency(merchant.revenue.to_f/100) %>
+    "Top selling date for <%= merchant.name %> was <%= merchant.highest_sales_date.strftime("%m/%d/%y") %>"</p>
 <% end %>
 
 <%= button_to "Add Merchant", "/admin/merchants/new", local: true, method: :get %>

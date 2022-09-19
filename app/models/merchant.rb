@@ -35,11 +35,16 @@ class Merchant < ApplicationRecord
     .group(:id)
     .order(revenue: :desc)
     .limit(5)
-    #get quantity and unit_price from invoice_item, status from transaction,
   end
 
   def highest_sales_date
-    items.select(:created_at, "invoice_items.unit_price * invoice_items.quantity as revenue").order("revenue desc").first.created_at
 
+    items.joins(invoices: :transactions)
+    .select("date_trunc('day', invoices.created_at) as day_created, sum(invoice_items.unit_price * invoice_items.quantity) as highest_profits")
+    .group(:day_created)
+    .order(highest_profits: :desc)
+    .limit(1)
+    .first
+    .day_created
   end
 end
