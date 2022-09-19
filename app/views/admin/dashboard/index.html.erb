@@ -3,7 +3,7 @@
 <p><%= link_to "invoices", "/admin/invoices", method: :get%></p>
 
 <h3> Top 5 Customers </h3>
-<% @customers.each do |c| %>
+<% @top_customers.each do |c| %>
   <p><%= c.first_name + ' ' + c.last_name %>
-  <%= c.number_of_transactions %> Purchases </p>
+  <%= c.transaction_count %> Purchases </p>
 <% end %>

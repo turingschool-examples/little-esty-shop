@@ -1,7 +1,7 @@
 class Admin::DashboardController < ApplicationController
 
   def index
-    @customers = Customer.top_customers
+    @top_customers = Customer.top_customers
   end
 
 
