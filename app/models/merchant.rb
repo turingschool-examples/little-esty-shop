@@ -11,6 +11,7 @@ class Merchant < ApplicationRecord
 
   def items_not_shipped
     invoice_items.where.not(status: 2)
+    .order("invoice_items.created_at asc")
   end
 
   def self.top_five_merchants

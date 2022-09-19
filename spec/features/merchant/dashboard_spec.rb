@@ -109,6 +109,7 @@ RSpec.describe 'merchant dashboard' do
 
     it "invoice id has links to merchant's invoice show page" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
+      save_and_open_page
       expect(page).to have_link("#{@invoice_item_7.id}")
       expect(page).to have_link("#{@invoice_item_8.id}")
     end
