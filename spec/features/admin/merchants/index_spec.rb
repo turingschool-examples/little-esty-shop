@@ -115,7 +115,7 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
 
     it 'has a link to create a new merchant' do
       expect(page).to have_link("Create New Merchant")
-      click_link "Create New Mechant"
+      click_link "Create New Merchant"
       expect(current_path).to eq(new_admin_merchant_path)
     end
 
