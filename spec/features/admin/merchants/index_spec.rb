@@ -202,6 +202,22 @@ RSpec.describe "Admin Merchants" do
             end
           end
         end
+
+        it 'Then next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant with the label “Top selling date for was ".' do
+          visit admin_merchants_path
+          within("#top-5-merchants") do
+            within("#merchant-#{@merchant_5.id}") do
+              expect(page).to have_content("Top selling date for #{@merchant_5.name} was #{@merchant_5.best_day.strftime("%A, %B %d, %Y")}")
+              expect(page).to_not have_content("Top selling date for #{@merchant_6.name} was #{@merchant_6.best_day.strftime("%A, %B %d, %Y")}")
+            end
+            visit admin_merchants_path
+            within("#merchant-#{@merchant_2.id}") do
+              expect(page).to have_content("Top selling date for #{@merchant_2.name} was #{@merchant_2.best_day.strftime("%A, %B %d, %Y")}")
+              expect(page).to_not have_content("Top selling date for #{@merchant_6.name} was #{@merchant_6.best_day.strftime("%A, %B %d, %Y")}")
+            end
+          end
+        end
+
       end
     end
   end
