@@ -112,5 +112,10 @@ RSpec.describe 'merchant dashboard' do
       expect(page).to have_link("#{@invoice_item_7.id}")
       expect(page).to have_link("#{@invoice_item_8.id}")
     end
+
+    it "shows invoice created date from oldest to newest" do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+      expect(page).to have_content("Created at: #{@merchant_1.created_at.strftime("%A, %B, %d, %Y")}")
+    end
   end
 end
