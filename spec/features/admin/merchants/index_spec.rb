@@ -231,6 +231,8 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
       let!(:alainainvoice1_itemskooter) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: skooter.id, quantity: 4, unit_price: 12000, status:"packaged" )}
       let!(:alainainvoice1_itemrider) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: rider.id, quantity: 4, unit_price: 220000, status:"packaged" )}
 
+      before(:each) {refresh}
+
       it 'I see the names of the top 5 merchants by total revenue generated' do
         within '#top_5_merchants' do
           expect(jewlery_city.name).to appear_before(bmv.name)
@@ -241,12 +243,15 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
       end
 
       it 'and each name links to the merchant show page' do
+        top_merch = Merchant.merchants_top_5
         within '#top_5_merchants' do
-          top_merch = Merchant.merchants_top_5
           top_merch.each do |merch|
-            expect(page).to have_link merch.name
-            click_link merch.name
+            within "#top-merchant-#{merch.id}" do
+              expect(page).to have_link(merch.name)
+              click_link(merch.name)
+            end
             expect(current_path).to eq(admin_merchant_path(merch))
+            visit admin_merchants_path
           end
         end
       end
@@ -255,7 +260,9 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
         within '#top_5_merchants' do
           top_merch = Merchant.merchants_top_5
           top_merch.each do |merch|
-            expect(page).to have_content("#{merch.name} - $#{(merch.revenue/100.to_f).round(2)} in revenue")
+            within "#top-merchant-#{merch.id}" do
+              expect(page).to have_content("#{merch.name} - $#{(merch.revenue/100.to_f).round(2)} in revenue")
+            end
           end
         end
       end
