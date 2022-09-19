@@ -3,6 +3,14 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
   validates :enabled, inclusion: [true, false]
 
+  def self.enabled_merchants
+    all.where('enabled = ?', true)
+  end
+
+  def self.disabled_merchants
+    all.where('enabled = ?', false)
+  end
+
   def transactions_top_5
       Customer.joins(invoices: :transactions)
       .where( transactions: {result: 1})

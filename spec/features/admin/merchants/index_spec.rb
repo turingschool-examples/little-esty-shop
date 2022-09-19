@@ -140,6 +140,67 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
           end
         end
       end
+
+      describe 'status grouping' do
+        let!(:doghats) { Merchant.create!(name: "Hats for Dogs", enabled: true) }
+        let!(:hummus_sculpt) { Merchant.create!(name: "Hummus Sculptures", enabled: true) }
+        before(:each) {refresh}
+        it 'groups merchants by enabled status' do 
+          within('#enabled_merchants') do
+            expect(page).to have_content(doghats.name)
+            expect(page).to have_content(hummus_sculpt.name)
+
+            expect(page).to_not have_content(carly.name)
+            expect(page).to_not have_content(jewlery_city.name)
+          end
+
+          within('#disabled_merchants') do
+            expect(page).to_not have_content(doghats.name)
+            expect(page).to_not have_content(hummus_sculpt.name)
+
+            expect(page).to have_content(carly.name)
+            expect(page).to have_content(jewlery_city.name)
+          end
+        end
+
+        describe 'for each enabled merchant' do
+          it 'has a button to disable and regroup merchant' do
+            en_merchants = Merchant.where('enabled = ?', true)
+            en_merchants.each do |merchant|
+              within('#enabled_merchants') do
+                expect(page).to have_content(merchant.name)
+              end
+
+              within "#merchant-#{merchant.id}" do
+                click_button "Disable"
+              end
+
+              within('#disabled_merchants') do
+                expect(page).to have_content(merchant.name)
+              end
+            end
+          end
+        end
+
+        describe 'for each disabled merchant' do
+          it 'has a button to enable and regroup merchant' do
+            dis_merchants = Merchant.where('enabled = ?', false)
+            dis_merchants.each do |merchant|
+              within('#disabled_merchants') do
+                expect(page).to have_content(merchant.name)
+              end
+
+              within "#merchant-#{merchant.id}" do
+                click_button "Enable"
+              end
+
+              within('#enabled_merchants') do
+                expect(page).to have_content(merchant.name)
+              end
+            end
+          end
+        end
+      end
     end
   end
 end
