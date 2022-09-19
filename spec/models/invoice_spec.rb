@@ -81,12 +81,13 @@ RSpec.describe Invoice, type: :model do
 
 
       it 'takes a merchant as an arg and returns an array of items from that merchant which appear on the invoice' do
-        expect(alaina_invoice1.merchant_items).to include(gold_earrings, silver_necklace)
-        expect(alaina_invoice1.merchant_items).to_not include(licorice)
+        expect(alaina_invoice1.merchant_items(jewlery_city)).to include(gold_earrings, silver_necklace)
+        expect(alaina_invoice1.merchant_items(jewlery_city)).to_not include(licorice)
       end
     end
 
-    describe '#total_revenue' do
+
+    describe '#calculate_invoice_revenue(merchant)' do
       let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
       let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}
 
@@ -101,11 +102,12 @@ RSpec.describe Invoice, type: :model do
       let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 4, unit_price: 1300, status:"packaged" )}
       let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 4, unit_price: 1300, status:"packaged" )}
       let!(:alainainvoice1_itemglicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 4, unit_price: 1300, status:"packaged" )}
-      
-      it 'adds all the revenue of items on invoice' do
-        expect(alaina_invoice1.total_revenue).to eq(15600)
+
+      it 'takes a merchant as an arg and returns the total amount of revenue that invoice generated for that merchant' do
+        expect(alaina_invoice1.calculate_invoice_revenue).to eq(15600)
       end
     end
+
   end
 
 end
