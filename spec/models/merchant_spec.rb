@@ -134,12 +134,12 @@ RSpec.describe Merchant, type: :model do
       @customer_5 = Customer.create!(first_name: "David", last_name: "Dowie")
       @customer_6 = Customer.create!(first_name: "Clint", last_name: "Yeastwood")
 
-      @invoice_1 = Invoice.create!(status: :completed, customer_id: @customer_1.id, created_at: "Fri, 30 Aug 2021 12:28:44 UTC +00:00")
-      @invoice_2 = Invoice.create!(status: :completed, customer_id: @customer_2.id, created_at: "Fri, 30 Sep 2021 13:28:44 UTC +00:00")
-      @invoice_3 = Invoice.create!(status: :completed, customer_id: @customer_3.id, created_at: "Fri, 30 Oct 2021 14:28:44 UTC +00:00")
-      @invoice_4 = Invoice.create!(status: :completed, customer_id: @customer_4.id, created_at: "Fri, 30 Nov 2021 15:28:44 UTC +00:00")
-      @invoice_5 = Invoice.create!(status: :completed, customer_id: @customer_5.id, created_at: "Fri, 30 Dec 2021 16:28:44 UTC +00:00")
-      @invoice_6 = Invoice.create!(status: :completed, customer_id: @customer_6.id, created_at: "Fri, 30 Jun 2021 17:28:44 UTC +00:00")
+      @invoice_1 = Invoice.create!(status: :completed, customer_id: @customer_1.id)
+      @invoice_2 = Invoice.create!(status: :completed, customer_id: @customer_2.id)
+      @invoice_3 = Invoice.create!(status: :completed, customer_id: @customer_3.id)
+      @invoice_4 = Invoice.create!(status: :completed, customer_id: @customer_4.id)
+      @invoice_5 = Invoice.create!(status: :completed, customer_id: @customer_5.id)
+      @invoice_6 = Invoice.create!(status: :completed, customer_id: @customer_6.id)
 
       @transaction_1 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
       @transaction_2 = Transaction.create!(result: :success, invoice_id: @invoice_1.id, credit_card_number: "255448968")
@@ -183,3 +183,12 @@ RSpec.describe Merchant, type: :model do
 
 end
 
+    it "top 5 customers" do
+      expect(Customer.top_five_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
+    end
+
+    it "items not been shipped" do
+      expect(@merchant_1.item_not_shipped.pluck(:name)).to eq([@item_5.name, @item_1.name])
+    end
+  end
+end

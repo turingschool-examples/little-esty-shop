@@ -8,6 +8,11 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
+
+  def item_not_shipped
+    invoice_items.where("status = 0 OR status = 1")
+  end
+
   def self.top_five_merchants
     self.joins(:transactions)
     .where(invoices: {status: 2}, transactions: {result: 'success'})
@@ -24,4 +29,5 @@ class Merchant < ApplicationRecord
     .first
     .created_at
   end
+
 end

@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   #   resources :merchants
   #   resources :invoices
   # end
+
+  get "/merchants/:merchant_id/dashboard", to: 'merchant_dashboard#dashboard'
 end
