@@ -9,8 +9,16 @@
 
 <h2>Merchants</h2>
   <table id='merchant-index'>
-    <tr><th><h3>Name</h3></th></tr>
+    <tr><th><h3>Merchant Index</h3></th></tr>
     <% @merchants.each do |merchant| %>
-    <tr><td id='merchant-<%= merchant.id %>'> <%= link_to merchant.name, admin_merchant_path(merchant) %> </td></tr>
+    <% merchant.enabled ? status = "Disable" : status = "Enable" %>
+    <tr><td id='merchant-<%= merchant.id %>'> 
+      <%= link_to merchant.name, admin_merchant_path(merchant) %> 
+      <%if merchant.enabled == false %>
+      <%= button_to status, admin_merchant_path(merchant), method: :patch, params: { enabled: true }, :class => 'status_button' %>
+      <%elsif merchant.enabled == true %>
+      <%= button_to status, admin_merchant_path(merchant), method: :patch, params: { enabled: false }, :class => 'status_button' %>
+      <%end%>
+    </td></tr>
     <%end%>
   </table>

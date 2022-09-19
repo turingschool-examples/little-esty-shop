@@ -7,7 +7,6 @@ RSpec.describe Merchant, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:enabled) }
   end
 
   let!(:carly_silo) { Merchant.create!(name: "Carly Simon's Candy Silo")}

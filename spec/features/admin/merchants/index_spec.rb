@@ -118,11 +118,10 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
         merchants = Merchant.all
         merchants.each do |merchant|
           within "#merchant-#{merchant.id}" do
-            status_button = page.find('.status_button')
-            expect(page).to have_button(status_button)
-            expect(status_button).to have_content("Disabled").or have_content("Enabled")
-            expect(status_button).to have_content("Disabled") unless merchant.enabled
-            expect(status_button).to have_content("Enabled") if merchant.enabled
+            expect(page).to have_button
+            expect(page).to have_button("Enable").or have_button("Disable")
+            expect(page).to have_button("Enable") unless merchant.enabled
+            expect(page).to have_button("Disable") if merchant.enabled
           end
         end
       end
@@ -131,11 +130,13 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
         merchants = Merchant.all
         merchants.each do |merchant|
           within "#merchant-#{merchant.id}" do
-            status_button = page.find('.status_button')
-            expect(status_button).to have_content("Disabled")
-            click_button
+            expect(page).to have_button("Enable")
+            click_button "Enable"
             expect(current_path).to eq(admin_merchants_path)
-            expect(status_button).to have_content("enabled")
+            expect(page).to have_button("Disable")
+            click_button "Disable"
+            expect(current_path).to eq(admin_merchants_path)
+            expect(page).to have_button("Enable")
           end
         end
       end
