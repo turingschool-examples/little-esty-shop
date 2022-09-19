@@ -12,6 +12,6 @@
 
 
 <h3> Items Ready to Ship </h3>
-<% @merchant.item_not_shipped.each do |merchant_invoice_item| %>
+<% @merchant.items_not_shipped.each do |merchant_invoice_item| %>
 <p>Item name: <%= merchant_invoice_item.item.name %> Invoice_id: <%= link_to "#{merchant_invoice_item.id}" %> </p>
 <% end %>

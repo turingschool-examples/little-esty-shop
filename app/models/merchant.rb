@@ -9,8 +9,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
 
-  def item_not_shipped
-    invoice_items.where("status = 0 OR status = 1")
+  def items_not_shipped
+    invoice_items.where.not(status: 2)
   end
 
   def self.top_five_merchants
