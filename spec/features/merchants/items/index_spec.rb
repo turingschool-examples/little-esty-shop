@@ -20,7 +20,6 @@ RSpec.describe "the merchant items index"  do
 
         visit "/merchants/#{merchant1.id}/items"
 
-        within()
         expect(page).to have_content("item1")
         expect(page).to have_content("item2")
         expect(page).to have_content("item3")
