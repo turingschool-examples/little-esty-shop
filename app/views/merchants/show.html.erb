@@ -6,19 +6,18 @@
 <p><%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices"%></p>
 
 <h3>Items Ready to Ship</h3>
-<%@merchant.ready_to_ship.each do |item| %>
-<div id="item<%=item.id%>">
-   <li><%= item.name %> || invoice # <%= form_with url: "/merchants/placeholder", method: :get do |form| %><%= form.label :query, "Invoice id:" %>
-
-<% end %>
-   </div>
+<% @merchant.ready_to_ship.each do |item| %>
+  <% item.invoices.each do|invoice| %>
+<div id="item-<%=item.id%>">
+  <p><%= item.name %> || invoice# <%=link_to "#{invoice.id}","/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> created at <%= invoice.created_at.strftime("%A,%B %d, %Y") %></p>
+</div>
+  <%end %>
 <%end %>
 
 <h3>Favorite Customers</h3>
 <% @merchant.favorite_customers.each do |favorite_customer| %>
-   <div id="favorite_customer_<%= favorite_customer.id %>">
       <li><%= favorite_customer.first_name %> <%= favorite_customer.last_name %> - <%= favorite_customer.transaction_count %> purchases</li>
-   </div>
 <% end %>
 
-<%= @merchant.top_5_items %>
+
+

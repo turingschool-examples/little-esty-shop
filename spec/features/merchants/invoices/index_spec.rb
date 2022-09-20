@@ -1,7 +1,6 @@
 require "rails_helper"
 
-
-RSpec.describe "the merchant items index"  do
+RSpec.describe "the merchant invoices index"  do
     it "I see the name of my merchants index page"  do
         merchant1 = Merchant.create!(name: "Bob")
 
@@ -35,7 +34,6 @@ RSpec.describe "the merchant items index"  do
         invoice_item6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice_6.id, unit_price: item6.unit_price, quantity: 3, status: 0)
 
         visit "/merchants/#{merchant1.id}/invoices"
-
         expect(page).to have_content("Invoice: #{invoice_1.id}")
         expect(page).to have_content("Invoice: #{invoice_2.id}")
         expect(page).to have_content("Invoice: #{invoice_3.id}")
@@ -43,5 +41,9 @@ RSpec.describe "the merchant items index"  do
         expect(page).to_not have_content("Invoice: #{invoice_4.id}")
         expect(page).to_not have_content("Invoice: #{invoice_5.id}")
         expect(page).to_not have_content("Invoice: #{invoice_6.id}")
+
+        click_link "#{invoice_1.id}"
+        expect(current_path).to eq("/merchants/#{merchant1.id}/invoices/#{invoice_1.id}")
     end
 end
+
