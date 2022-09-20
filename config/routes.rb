@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   get "/merchants/:id/invoices", to: 'invoices#index'
   get "/merchants/:id/invoices/:id", to: 'invoices#show'
-  
+
   # namespace :admin do
   #   resources :merchants
   #   resources :invoices
