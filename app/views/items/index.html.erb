@@ -8,9 +8,8 @@
 <ul><h2>Top 5 most popular items: </h2>
 
 <% @merchant.top_5_items.each do |item|%>
-<div id="<%=item.id%>">
-<li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></li> 
-<li>$<%= item.revenue/100.00 %> in sales</li>
+<div id="item-<%=item.id%>">
+<li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> -  $<%= item.revenue/100.00 %> in sales</li>
 </div>
 <% end %>
 </ul>

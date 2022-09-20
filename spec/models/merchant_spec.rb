@@ -158,11 +158,10 @@ RSpec.describe(Merchant, type: :model) do
         let!(:transaction_2) {Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
         let!(:transaction_3) {Transaction.create!(invoice_id: invoice_2.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
         let!(:transaction_4) {Transaction.create!(invoice_id: invoice_2.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
-        let!(:transaction_5) {Transaction.create!(invoice_id: invoice_3.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
+        let!(:transaction_5) {Transaction.create!(invoice_id: invoice_3.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
         let!(:transaction_6) {Transaction.create!(invoice_id: invoice_3.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
         let!(:transaction_7) {Transaction.create!(invoice_id: invoice_4.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
         let!(:transaction_8) {Transaction.create!(invoice_id: invoice_5.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
-        let!(:transaction_8) {Transaction.create!(invoice_id: invoice_6.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
   
         let!(:invoice_item_1) { InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 3, unit_price: 2000, status: 'shipped') } #6000
         let!(:invoice_item_2) { InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 3, unit_price: 2000, status: 'packaged') }#6000
@@ -170,41 +169,21 @@ RSpec.describe(Merchant, type: :model) do
         let!(:invoice_item_4) { InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_2.id, quantity: 3, unit_price: 400, status: 'pending') }#1200
         let!(:invoice_item_5) { InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 500, status: 'pending') }#1500
         let!(:invoice_item_6) { InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_3.id, quantity: 3, unit_price: 600, status: 'pending') }#1800
-        let!(:invoice_item_7) { InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_6.id, quantity: 3, unit_price: 700, status: 'pending') }#2100
+        let!(:invoice_item_7) { InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_3.id, quantity: 3, unit_price: 700, status: 'pending') }#2100
         let!(:invoice_item_8) { InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 800, status: 'pending') }#2400
         let!(:invoice_item_9) { InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 900, status: 'pending') }#2700
         let!(:invoice_item_10) { InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending') }#3000
 
         it 'returns the 5 most popular items for a merchant by total revenue' do
-           expect(merchant_1.top_5_items).to eq([item_9.id, item_8.id, item_7.id, item_6.id, item_5.id])
-          #  item_7, item_6, item_9, item_8, item_5
-          #    4200,  3600,    2700,   2400,   1500
-          #should be
-          #    2100,   1800,   2700,   2400,   1500
+          expect(merchant_1.top_5_items).to eq([item_9, item_8, item_7, item_6, item_5])
         end
 
         it 'returns the total revenue generated for each item' do
-          # expect(merchant_1.top_5_items.first.revenue).to eq(2100)
-          #item_7 revenue is 4200
-          # expect(merchant_1.top_5_items[2].revenue).to eq(2700)
-          expect(merchant_1.top_5_items[3].revenue).to eq(2400)
-
+          expect(merchant_1.top_5_items[0].revenue).to eq(2700)
+          expect(merchant_1.top_5_items[2].revenue).to eq(2100)
+          expect(merchant_1.top_5_items[3].revenue).to eq(1800)
         end
       end
     end
   end
 end
-
-# Merchant Items Index: 5 most popular items
-
-# As a merchant
-# When I visit my items index page
-# Then I see the names of the top 5 most popular items ranked by total revenue generated
-# And I see that each item name links to my merchant item show page for that item
-# And I see the total revenue generated next to each item name
-
-# Notes on Revenue Calculation:
-
-# Only invoices with at least one successful transaction should count towards revenue
-# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
