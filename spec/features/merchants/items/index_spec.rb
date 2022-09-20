@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Merchant Items Index Page' do
   describe 'User Story 6 - Merchant Items Index Page' do
     describe 'When I visit my merchant items index page ("merchants/merchant_id/items")' do
-      xit 'I see a list of the names of all of my items, and dont see items for other merchants' do
+      it 'I see a list of the names of all of my items, and dont see items for other merchants' do
 
         merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
         merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
@@ -84,7 +84,7 @@ RSpec.describe 'Merchant Items Index Page' do
             within("#item_#{item_toothpaste.id}") do
             click_button("Enable")
             end
-            
+
             within("#enabled_items") do
             expect(page).to have_content(item_toothpaste.name)
             end
@@ -114,7 +114,7 @@ RSpec.describe 'Merchant Items Index Page' do
               click_link("Create a New Item")
 
               expect(current_path).to eq(new_merchant_item_path(merchant_stephen))
-              
+
               fill_in "Name", with: "Sword"
               fill_in "Description", with: "A big sword"
               fill_in "Unit price", with: "1000"
@@ -144,11 +144,11 @@ RSpec.describe 'Merchant Items Index Page' do
             merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
             merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
 
-            item_ski = merchant_stephen.items.create!(name: "Ski", description: "fast skis", unit_price: 10) 
+            item_ski = merchant_stephen.items.create!(name: "Ski", description: "fast skis", unit_price: 10)
             item_bike = merchant_stephen.items.create!(name: "Bike", description: "danger bike", unit_price: 10)
-            item_climbing_shoes = merchant_stephen.items.create!(name: "Climbing Shoes", description: "fun shoes", unit_price: 10) 
-            item_snowboard = merchant_stephen.items.create!(name: "Snowboard", description: "slow board", unit_price: 10) 
-            item_rock = merchant_stephen.items.create!(name: "Rock", description: "a good rock", unit_price: 10) 
+            item_climbing_shoes = merchant_stephen.items.create!(name: "Climbing Shoes", description: "fun shoes", unit_price: 10)
+            item_snowboard = merchant_stephen.items.create!(name: "Snowboard", description: "slow board", unit_price: 10)
+            item_rock = merchant_stephen.items.create!(name: "Rock", description: "a good rock", unit_price: 10)
 
             item_toothpaste = merchant_stephen.items.create!(name: "Toothpaste", description: "The worst toothpaste you can find", unit_price: 10 )
             item_bowling_shoes = merchant_stephen.items.create!(name: "Bowling Shoes", description: "not fun shoes", unit_price: 10)
@@ -171,7 +171,7 @@ RSpec.describe 'Merchant Items Index Page' do
             transaction6 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
             transaction7 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 1)
             transaction8 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
-            
+
             invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_ski.id, quantity: 1000, unit_price: 10)
             invoice_item2 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_bike.id, quantity: 900, unit_price: 10)
             invoice_item3 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item_climbing_shoes.id, quantity: 800, unit_price: 10)
@@ -221,11 +221,11 @@ RSpec.describe 'Merchant Items Index Page' do
           merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
           merchant_roger = Merchant.create!(name: "Roger's Fancy Store")
 
-          item_ski = merchant_stephen.items.create!(name: "Ski", description: "fast skis", unit_price: 10) 
+          item_ski = merchant_stephen.items.create!(name: "Ski", description: "fast skis", unit_price: 10)
           item_bike = merchant_stephen.items.create!(name: "Bike", description: "danger bike", unit_price: 10)
-          item_climbing_shoes = merchant_stephen.items.create!(name: "Climbing Shoes", description: "fun shoes", unit_price: 10) 
-          item_snowboard = merchant_stephen.items.create!(name: "Snowboard", description: "slow board", unit_price: 10) 
-          item_rock = merchant_stephen.items.create!(name: "Rock", description: "a good rock", unit_price: 10) 
+          item_climbing_shoes = merchant_stephen.items.create!(name: "Climbing Shoes", description: "fun shoes", unit_price: 10)
+          item_snowboard = merchant_stephen.items.create!(name: "Snowboard", description: "slow board", unit_price: 10)
+          item_rock = merchant_stephen.items.create!(name: "Rock", description: "a good rock", unit_price: 10)
 
           item_toothpaste = merchant_stephen.items.create!(name: "Toothpaste", description: "The worst toothpaste you can find", unit_price: 10 )
           item_bowling_shoes = merchant_stephen.items.create!(name: "Bowling Shoes", description: "not fun shoes", unit_price: 10)
@@ -247,7 +247,7 @@ RSpec.describe 'Merchant Items Index Page' do
           transaction5 = invoice5.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
           transaction6 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 0)
           transaction7 = invoice6.transactions.create!(credit_card_number: 654241894642, credit_card_expiration_date: 0225, result: 1)
-          
+
           invoice_item1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item_ski.id, quantity: 1000, unit_price: 10)
           invoice_item2 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item_ski.id, quantity: 950, unit_price: 10)
 
@@ -258,7 +258,7 @@ RSpec.describe 'Merchant Items Index Page' do
           invoice_item6 = InvoiceItem.create!(invoice_id: invoice5.id, item_id: item_snowboard.id, quantity: 600, unit_price: 10)
 
           visit merchant_items_path(merchant_stephen)
-        
+
           within("#top_items_id_#{item_ski.id}") do
           expect(page).to have_content("Top selling date for #{item_ski.name} was 03/27/12")
           end
