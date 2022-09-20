@@ -2,6 +2,6 @@
 <h2 class="subtitle">My Invoices</h2>
 <ul class="invoice_links">
   <% @invoices.each do |invoice| %>
-    <li id="invoice_<%= invoice.id %>">Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></li>
+    <li class="index_invoice" id="invoice_<%= invoice.id %>">Invoice #<%= link_to invoice.id, merchant_invoice_path(@merchant.id, invoice.id) %></li>
   <% end %>
 </ul>

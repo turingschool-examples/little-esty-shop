@@ -1,5 +1,5 @@
 <%= render partial: '/merchants/merchants-nav', locals: {merchant: @merchant} %>
 <h2 class="subtitle"><%= @item.name %></h2>
 <h3>Description: </h3> <%= @item.description %>
-<h3>Current Selling Price:  $<%= @selling_price %></h3>
+<h3>Current Selling Price: <%= price_convert(@item.unit_price) %></h3>
 <%= link_to "Update #{@item.name}", edit_merchant_item_path(@merchant.id, @item.id) %>

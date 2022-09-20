@@ -14,8 +14,16 @@
  *= require_self
  */
 
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 #page_title {
+  color: black;
   text-align: center;
+  font-weight: 900;
+  font-size: 3rem;
+  text-shadow: 1px 1px 0px gray, 2px 2px 0px darkgray, 5px 5px 3px lightgray;
 }
 
 #merchants_nav {
@@ -67,10 +75,22 @@
   justify-content: center;
 }
 
+#index_body{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.index_column{
+  align-self: flex-start;
+  width: calc(50% - 30px);
+}
+
 .flash_message {
   background-color: lightgray;
-  padding: 5px;
+  padding: 10px;
   border: 1px solid lightcoral;
+  border-radius: 20px;
 }
 
 .invoice_links {
@@ -82,15 +102,46 @@
 }
 
 .nav_button {
-  padding: 5px;
-  border: 1px solid black;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid transparent;
   margin-left: 2px;
+  transition: all 0.5s;
+}
+
+.nav_button:hover {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid lightgray;
+  margin-left: 2px;
+  background-color: lightgray;
+}
+
+.list_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.item_link {
+  padding-right: 15px;
+}
+
+a:visited {
+  color: blue;
+}
+
+#merchants_nav a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .selected_nav_button {
-  padding: 5px;
+  padding: 10px;
+  border-radius: 20px;
   margin-left: 2px;
-  border: 2px solid black;
+  background-color: lightgray;
+  border: 1px solid lightgray;
+  box-shadow: 4px 4px 10px darkgray;
 }
 
 .subtitle {
@@ -102,6 +153,38 @@
 .inv_info {
   padding: 10px;
 }
+
+#dashboard_body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dashboard_column {
+  align-self: flex-start;
+  width: calc((100% - 24px) / 2);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.index_invoice {
+  padding: 5px;
+  font-size: 18px;
+}
+
+.top_five_customer {
+  font-size: 22px;
+  padding: 5px;
+}
+
+#items_ready_list {
+  list-style: none;
+}
+
+.item_ready {
+  margin: 5px;
+}
+
 
 
 

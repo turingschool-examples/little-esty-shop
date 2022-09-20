@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Item Show Page: ' do
-  before :each do
+  before(:each) do
     @merch1 = create(:merchant)
     @item1 = create(:item, merchant: @merch1, unit_price: 5700)
     @item2 = create(:item, merchant: @merch1)
@@ -10,6 +10,12 @@ RSpec.describe 'Merchant Item Show Page: ' do
     @item3 = create(:item, merchant: @merch2)
     @item4 = create(:item, merchant: @merch2)
     @item5 = create(:item, merchant: @merch2)
+    
+    @invoice1 = create(:invoice, status: :in_progress)
+    @inv_item1 = create(:invoice_item, invoice: @invoice1, item: @item1, status: :packaged)
+    @inv_item2 = create(:invoice_item, invoice: @invoice1, item: @item2, status: :packaged)
+    @inv_item3 = create(:invoice_item, invoice: @invoice1, item: @item3)
+
   end
 
   describe 'As a merchant' do
