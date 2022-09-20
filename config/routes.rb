@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :items
     resources :invoices, only: %i[index show update]
   end
+  
 
   namespace :admin do
     get '/', to: 'admin#dashboard'
