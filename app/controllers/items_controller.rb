@@ -10,15 +10,17 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
-    item = Item.new(item_params)
+    @merchant = Merchant.find(params[:merchant_id])
+    item = Item.new(    name: params[:name],     description: params[:description],     unit_price: params[:unit_price],     merchant_id: params[:merchant_id])
 
     if item.save
-      redirect_to("/merchants/#{item_params[:item_id]}/items")
+      redirect_to(merchant_items_path(@merchant))
     else
-      redirect_to("/merhcants/#{item_params[:item_id]}/items/new}")
+      redirect_to(new_merchant_items_path(@merchant))
       flash[:alert] = "Error: SOMETHING WENT WRONG "
     end
   end
