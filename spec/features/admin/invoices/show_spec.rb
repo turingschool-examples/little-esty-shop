@@ -16,6 +16,10 @@ RSpec.describe "Admin Invoice Show Page" do
 
         @items_1.each { |item| create(:invoice_items, invoice_id: @invoice_1.id, item_id: item.id) }
         @items_2.each { |item| create(:invoice_items, invoice_id: @invoice_2.id, item_id: item.id) }
+
+        @transaction_1 = create(:transaction, invoice: @invoice_1, result: :success)
+        @transaction_2 = create(:transaction, invoice: @invoice_1, result: :failed)
+        @transaction_3 = create(:transaction, invoice: @invoice_2, result: :success)
       end
 
       it 'I see information related to that invoice including: id, status, created_at date (format "Monday, July 18, 2019") and Customer First+Last name' do
@@ -39,7 +43,7 @@ RSpec.describe "Admin Invoice Show Page" do
           @invoice_1.items.each do |item|
             expect(page).to have_content(item.name)
             expect(page).to have_content(item.quantity_purchased(@invoice_1.id))
-            expect(page).to have_content((item.price_sold(@invoice_1.id))/100)
+            expect(page).to have_content((item.price_sold(@invoice_1.id))/100.00)
             expect(page).to have_content(item.shipping_status(@invoice_1.id).capitalize)
 
             expect(page).to_not have_content(@invoice_2.items.any?{|item| item.name})
@@ -67,6 +71,11 @@ RSpec.describe "Admin Invoice Show Page" do
         expect(page).to have_content("In Progress")
       end
 
+      it "Then I see the total revenue that will be generated from this invoice" do
+        visit admin_invoice_path(@invoice_1)
+        save_and_open_page
+        expect(page).to have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
+      end
 
     end
   end
