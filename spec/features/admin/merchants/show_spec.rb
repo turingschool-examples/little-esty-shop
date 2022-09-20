@@ -66,7 +66,5 @@ RSpec.describe 'As an admin, when I visit an admin merchant show page' do
       expect(page).to have_content("Adam")
       expect(page).to_not have_content("Klein, Rempel and Jones")
     end
-
-
   end
 end

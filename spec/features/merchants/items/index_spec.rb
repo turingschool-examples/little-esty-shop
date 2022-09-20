@@ -3,8 +3,6 @@ require "rails_helper"
 
 RSpec.describe "the merchant items index"  do
 
-
-
     it "I see the name of my merchant"  do
         merchant1 = Merchant.create!(name: "Bob")
 
@@ -12,7 +10,7 @@ RSpec.describe "the merchant items index"  do
         expect(page).to have_content("#{merchant1.name} Items")
     end
 
-    it "I see all the items associated with that merchant" do
+    it "I see all the items associated with that merchant, divided into enabled and disabled items" do
         merchant1 = Merchant.create!(name: "Bob")
         merchant2 = Merchant.create!(name: "Jolene")
         item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
@@ -22,6 +20,7 @@ RSpec.describe "the merchant items index"  do
 
         visit "/merchants/#{merchant1.id}/items"
 
+        within()
         expect(page).to have_content("item1")
         expect(page).to have_content("item2")
         expect(page).to have_content("item3")
@@ -49,10 +48,10 @@ RSpec.describe "the merchant items index"  do
         it "when I click that button, I am redirected to the merchant item index page" do
             #add within block here
             click_button("Disable #{@item1.name}")
-            expect(current_path).to eq merchant_items_path
+            expect(current_path).to eq merchant_items_path(@merchant1)
         end
 
-        xit "and I see that the status of the item has changed" do
+        it "and I see that the status of the item has changed" do
             click_button("Disable #{@item2.name}")
             expect(page).to have_button("Enable #{@item2.name}")
         end
