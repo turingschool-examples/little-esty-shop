@@ -14,5 +14,12 @@
         <h3><b><%= notice %></b></h3>
       <% end %>
     <%= yield %>
+    <footer style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ccc;">
+  &copy; Little Esty Shop
+  <br />
+  <ul><% @contributors.each do |contributor| %>
+    <li><%= contributor.login %></li>
+  <% end %></ul>
+</footer>
   </body>
 </html>
