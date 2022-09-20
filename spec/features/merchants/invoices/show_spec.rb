@@ -32,6 +32,7 @@ RSpec.describe 'Merchant Invoice Show' do
 
     it "shows all my items on the invoice including item name, quantity ordered, price item sold for, and invoice item status" do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+      expect(page).to have_content("Items on invoice:")
       expect(page).to have_content("Item name: ")
       expect(page).to have_content("Quantity: ")
       expect(page).to have_content("Sold at: ")
