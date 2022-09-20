@@ -8,7 +8,7 @@ Enabled Merchants:
 
 <ul> <% @enabled_merchants.each do |merchant| %>
   <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
-    <%=button_to "Disable #{merchant.name}", admin_merchant_path(merchant), method: :patch, params: {id: merchant.id} %>
+    <%=button_to "Disable #{merchant.name}", admin_merchant_path(@merchant), method: :patch, params: {enabled: false} %>
   </li>
 <% end%>
 </ul>
@@ -21,8 +21,3 @@ Disabled Merchants:
   </li>
 <% end%>
 </ul>
-
-
-
-
-

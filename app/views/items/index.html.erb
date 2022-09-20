@@ -1,5 +1,8 @@
-<h1><%= @merchant.name %> Items</h1>
-
+<h1><%= @merchant.name %>
+  Items</h1>
+  
+  
+ <%= link_to "Create New Item",new_merchant_item_path%>
 
 Enabled Items:
 <ol>
@@ -10,6 +13,8 @@ Enabled Items:
 
 Disabled Items:
 <ol>
+
+
     <% @disabled_items.each do |item| %>
        <li><%= item.name %> <%= button_to "Enable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
     <% end %>
@@ -25,3 +30,4 @@ Disabled Items:
 <% end %>
 </ul>
 
+>>>>>>> main

@@ -33,6 +33,19 @@ RSpec.describe("the merchant items index") do
     expect(current_path).to(eq("/merchants/#{merchant1.id}/items/#{item1.id}"))
   end
 
+
+  it("i can see a link to create a new item") do
+    merchant1 = Merchant.create!(    name: "Bob")
+    merchant2 = Merchant.create!(    name: "Jolene")
+    item1 = merchant1.items.create!(    name: "item1",     description: "this is item1 description",     unit_price: 1)
+    item2 = merchant1.items.create!(    name: "item2",     description: "this is item2 description",     unit_price: 2)
+    item3 = merchant1.items.create!(    name: "item3",     description: "this is item3 description",     unit_price: 3)
+    item4 = merchant2.items.create!(    name: "item3",     description: "this is item4 description",     unit_price: 3)
+    visit("/merchants/#{merchant1.id}/items")
+    click_on("Create New Item")
+    expect(current_path).to(eq("/merchants/#{merchant1.id}/items/new"))
+   end
+
   describe 'I see the names of the top 5 most popular items ranked by total revenue generated' do
     let!(:merchant_1) {create(:random_merchant)}
     let!(:merchant_2) {create(:random_merchant)}
