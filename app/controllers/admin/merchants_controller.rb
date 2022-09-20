@@ -3,6 +3,8 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
     @enabled_merchants = Merchant.where(params[:enabled] = 'true')
     @disabled_merchants = Merchant.where('enabled = false', params[:enabled])
+
+    @top_5_merchants = Merchant.top_5_revenue
   end
 
   def show
