@@ -330,11 +330,11 @@ RSpec.describe 'Merchants Item Index' do
 
         within "#5-best-items" do
 
-          expect(page).to have_content((@item_10.revenue) / 100)
-          expect(page).to have_content((@item_5.revenue) / 100)
-          expect(page).to have_content((@item_3.revenue) / 100)
-          expect(page).to have_content((@item_7.revenue) / 100)
-          expect(page).to have_content((@item_6.revenue) / 100)
+          expect(page).to have_content((@item_10.revenue / 100.00).to_s(:delimited))
+          expect(page).to have_content((@item_5.revenue / 100.00).to_s(:delimited))
+          expect(page).to have_content((@item_3.revenue / 100.00).to_s(:delimited))
+          expect(page).to have_content((@item_7.revenue / 100.00).to_s(:delimited))
+          expect(page).to have_content((@item_6.revenue / 100.00).to_s(:delimited))
         end
       end
     end
