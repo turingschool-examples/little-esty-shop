@@ -1,4 +1,8 @@
-<h1>Item Edit Page</h1>
+<% content_for :heading do%>
+<%= @merchant.name %>'s shop
+<%end%>
+
+Edit Item
 
 <%= form_with url: merchant_item_path, method: :patch do |f| %>
   <%= f.label :name, "Name" %>

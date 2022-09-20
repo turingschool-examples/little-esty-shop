@@ -1,21 +1,4 @@
-<header>
-    <h1>Admin Dashboard</h1>
-    <nav>
-    <%= link_to 'Dashboard', '/admin'%>
-    <%= link_to 'Merchants', '/admin/merchants'%>
-    <%= link_to 'Invoices', '/admin/invoices'%>
-    </nav>
-</header>
 
-<div id='top-customers'>
-  <table>
-    <tr><th><h3>Top Customers</h3></th></tr>
-    <tr><td> </td></tr>
-    <%@top_5_customers.each_with_index do |customer, index = 1|%>
-    <tr><td id='transactions-<%="#{customer.id}"%>'> <%= "#{index+1}. #{customer.name} - #{customer.num_succesful_transactions} purchases" %> </td></tr>
-    <%end%>
-  </table>
-</div>
 
 <div id="incomplete_invoices">
     <h2>Incomplete Invoices</h2>
@@ -23,3 +6,14 @@
     <p><%= link_to "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}", "/admin/invoices/#{invoice.id}" %></p>
   <% end %>
 </div>
+
+<% content_for :aside do%>
+  <div id='top-customers' class='aside'>
+    <table>
+      <tr><th><h3>Top Customers</h3></th></tr>
+      <%@top_5_customers.each_with_index do |customer, index = 1|%>
+      <tr><td id='transactions-<%="#{customer.id}"%>'> <%= "#{index+1}. #{customer.name} - #{customer.num_succesful_transactions} purchases" %> </td></tr>
+      <%end%>
+    </table>
+  </div>
+<%end%>

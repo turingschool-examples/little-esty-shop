@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
-  before_action :set_merchant, only: [:index, :create]
+  before_action :set_merchant
 
   def index
   
