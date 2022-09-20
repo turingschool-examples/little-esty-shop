@@ -28,3 +28,6 @@ coverage
 
 # Ignore simplecov
 coverage
+
+# ignore secret config file
+config/application.yml
