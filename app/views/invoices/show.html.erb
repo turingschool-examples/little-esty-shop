@@ -15,15 +15,19 @@
     <p> Item Name: <%= item.name%></p>
     <ul>
     <% item.invoice_items.each do |invoice_item| %>
+      <div id= "invoice_item_<%= invoice_item.id %>">
       <li><p> Quantity: <%= invoice_item.quantity %></p></li>
       <li><p> Unit Price: <%= invoice_item.unit_price %></p></li>
 
-      <li><%= form_with model: @invoice_item, url: admin_invoice_path(@invoice), local: true  do |form| %>
+      <li><%= form_with url: invoice_item_path(invoice_item), method: :patch, local: true do |form| %>
+        <%= form.hidden_field :invoice_item_id, value: "#{invoice_item.id}" %>
+        <%= form.hidden_field :invoice_id, value: "#{@invoice.id}" %>
+        <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
         <%= form.label :status %>
         <%= form.select :status, [["Pending", "pending"], ["Packaged", "packaged"], ["Shipped", "shipped"]], :selected => invoice_item.status %> 
-        <%= form.submit "Update Item Status"%>
+        <%= form.submit "Update Item Status" %>
       <% end %>
-
+      </div>
     <% end %> 
     </ul>
   </div>

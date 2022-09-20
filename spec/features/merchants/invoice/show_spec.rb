@@ -61,7 +61,6 @@ RSpec.describe 'Merchant Invoice Show Page' do
           expect(page).to have_content(item1.name)
           expect(page).to have_content(invoice_item1.quantity)
           expect(page).to have_content(invoice_item1.unit_price)
-          save_and_open_page
           expect(page).to have_content("Packaged")
         end
 
@@ -106,7 +105,48 @@ RSpec.describe 'Merchant Invoice Show Page' do
     end
   end
 
-#   describe 'When I visit my merchant invoice show page' do
-#     describe 'I see that each invoice item status is a select field' do
-#       describe 'And I see that the invoice items current status is selected' do
+  describe 'When I visit my merchant invoice show page' do
+    describe 'I see that each invoice item status is a select field' do
+      describe 'And I see that the invoice items current status is selected' do
+        it 'When I select new status and click submit button, redirected to merchant invoice show, and item status is updated' do
+          
+          steph_merchant = Merchant.create!(name: "Stephen's shop")
+          kev_merchant = Merchant.create!(name: "Kevin's shop")
+          
+          customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+          
+          item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: steph_merchant.id) 
+          item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: steph_merchant.id) 
+          item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: kev_merchant.id) 
+          
+          invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          invoice3 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+          
+          invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "packaged", item_id: item1.id, invoice_id: invoice1.id)
+          invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
+          invoice_item3 = InvoiceItem.create!(quantity:90, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice3.id)
+
+          visit merchant_invoice_path(steph_merchant, invoice1)
+
+          within("#invoice_item_#{invoice_item1.id}") do
+            select "Shipped", from: "status"
+            click_button "Update Item Status"
+            
+            expect(current_path).to eq(merchant_invoice_path(steph_merchant, invoice1))
+            expect(invoice_item1.reload.status).to eq("shipped")
+          end
+
+          within("#invoice_item_#{invoice_item2.id}") do
+            select "Shipped", from: "status"
+            click_button "Update Item Status"
+            
+            expect(current_path).to eq(merchant_invoice_path(steph_merchant, invoice1))
+            expect(invoice_item2.reload.status).to eq("shipped")
+          end
+
+        end
+      end
+    end
+  end
 end
