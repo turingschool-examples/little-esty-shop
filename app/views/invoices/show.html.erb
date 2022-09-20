@@ -23,8 +23,8 @@
   <% @invoice.merchant_items(@merchant).each do |item| %>
     <tr  id="item_<%= item.id %>">
     <td><%= item.name %></td>
-      <td>Quantity: <%= item.invoice_item(@invoice).quantity %></td>
-      <td>Sale Price: <%= item.invoice_item(@invoice).unit_price %></td>
+      <td><%= item.invoice_item(@invoice).quantity %></td>
+      <td>$<%= (item.invoice_item(@invoice).unit_price / 100.to_f).round(2) %></td>
       <td>
         <%= form_with url: merchant_invoice_item_path(@merchant, item.invoice_item(@invoice)), method: :patch do |f| %>
           <%= f.label :status, "Status" %>
