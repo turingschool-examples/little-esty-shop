@@ -208,7 +208,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
       within "#invoice-revenue" do
         expect(page).to have_content(invoice_4.items.total_revenue_of_all_items)
-      end˚∑
+      end
     end
   end
 end
