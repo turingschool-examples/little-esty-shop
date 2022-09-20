@@ -20,5 +20,4 @@ Rails.application.routes.draw do
   end
   
   get("/merchants/:id/items/:id",   to: "items#show")
-
 end

@@ -55,18 +55,16 @@ RSpec.describe 'As an admin, when I visit an admin merchant show page' do
 
     it "when I fill out the form and click submit, I am redirected to the admin merchant show page" do
       fill_in "name", with: "Noah"
-      click_button "Save"
+      click_button "Submit"
       expect(current_path).to eq(admin_merchant_path(merchant_1))
     end
 
     it "and I see that my merchant's name has been updated" do
       fill_in "name", with: "Adam"
-      click_button "Save"
+      click_button "Submit"
 
       expect(page).to have_content("Adam")
       expect(page).to_not have_content("Klein, Rempel and Jones")
     end
-
-
   end
 end

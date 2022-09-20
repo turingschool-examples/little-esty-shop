@@ -23,13 +23,14 @@ class Merchant < ApplicationRecord
    .limit(5)
   end
 
-  def top_day
-    invoices.select('invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-    .group('invoices.created_at')
-    .order('revenue desc')
-    .first
-    .created_at
-  end
+  # def top_day
+  #   invoices.select('date_trunc('day', invoices.created_at) as date, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+  #   .where('transaction.result = success')
+  #   .group('date')
+  #   .order('revenue desc')
+  #   .first
+  #   .created_at
+  # end
 
   def favorite_customers
     items.select("customers.*, count(transactions.result) as transaction_count")
@@ -39,6 +40,10 @@ class Merchant < ApplicationRecord
     .order('transaction_count desc')
     .limit(5)
   end
+
+
+  def self.top_5_revenue
+    select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:transactions).where(transactions: {result: 1}).group(:id).order('revenue desc').limit(5)
 
   def self.total_revenue
     select('invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue').where('invoice_items.status = 2').joins(items:[:invoice_items, :invoices]).group('invoices.id')
@@ -52,5 +57,9 @@ class Merchant < ApplicationRecord
     .group('items.id')
     .order('revenue desc')
     .limit(5)
+  end
+
+  def top_5_items
+    items.select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:transactions, :invoice_items).group(:id).limit(5)
   end
 end

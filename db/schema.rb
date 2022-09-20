@@ -15,6 +15,9 @@ ActiveRecord::Schema.define(version: 2022_09_14_234501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  m.items.select('items.*, sum(invoice_items.quantity * invoice_items.unit_price)').joins(:transactions, :invoice_items).where(result: "success".group(:id)
+  .order('sum')
+
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -46,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_234501) do
     t.string "name"
     t.string "description"
     t.integer "unit_price"
+    t.boolean "enabled", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.bigint "merchant_id"
