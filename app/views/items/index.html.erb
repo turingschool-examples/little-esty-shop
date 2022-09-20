@@ -4,8 +4,8 @@
 <ol>
   <% @merchant.items.each do |item| %>
     <li><%= link_to item.name ,"/merchants/#{@merchant.id}/items/#{item.id}" %></li>
-
+            
   <% end %>
   ****<%= link_to "Create New Item",new_merchant_item_path%>
-   new_merchant_item GET   /merchants/:merchant_id/items/new(.:format)
+
 </ol>

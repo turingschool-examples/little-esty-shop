@@ -8,7 +8,7 @@ RSpec.describe("Creates new item") do
     expect(page).to(have_content("Create new item"))
     expect(find("form")).to(have_content("Name"))
     expect(find("form")).to(have_content("Description"))
-    expect(find("form")).to(have_content("Price"))
+    expect(find("form")).to(have_content("Unit price"))
   end
 end
 
@@ -19,7 +19,7 @@ describe("the item create") do
       visit("/merchants/#{merchant1.id}/items/new")
       fill_in("Name",       with: "5gum")
       fill_in("Description",       with: "BubbleGum")
-      fill_in(:unit_price,       with: 1)
+      fill_in("Unit price",       with: 1)
       click_button("Submit")
       expect(page).to(have_current_path("/merchants/#{merchant1.id}/items"))
       expect(page).to(have_content("5gum"))
