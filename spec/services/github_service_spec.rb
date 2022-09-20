@@ -100,6 +100,8 @@ RSpec.describe 'github service' do
 
         allow(GitHubService).to receive(:request).with("collaborators").and_return(response_body)
         expect(GitHubService.request('collaborators')).to eq(response_body)
+        allow(GitHubService).to receive(:request).with("collaborators", true).and_return(response_body)
+        expect(GitHubService.request('collaborators')).to eq(response_body)
       end
     end
   end

@@ -6,12 +6,10 @@ class ApplicationController < ActionController::Base
   private
 
   def user_names
-    # @user_names = GitHubFacade.user_names
-    @user_names = ["alaina", "aj", "jake", "astrid"]
+    @user_names = GitHubFacade.user_names
   end
 
   def get_pr_total
-    # @pr_total = GitHubFacade.get_pr_total
-    @pr_total = 74
+    @pr_total = GitHubFacade.get_pr_total
   end
 end
