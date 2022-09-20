@@ -117,7 +117,7 @@ RSpec.describe 'Merchant_Dashboard' do
     # And each invoice id is a link to my merchant's invoice show page  
   describe 'US 4 and 5' do 
     describe 'Merchant Dashboard Items Ready to Ship' do 
-      it 'When I visit my merchant dashboard, I see section for "Items Ready to Ship"' do 
+      xit 'When I visit my merchant dashboard, I see section for "Items Ready to Ship"' do 
         steph_merchant = Merchant.create!(name: "Stephen's shop")
 
         customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
@@ -156,7 +156,7 @@ RSpec.describe 'Merchant_Dashboard' do
         expect(page).to have_content("#{item3.name}")
       end
 
-      it 'Next to each item I see the ID(thats a link) of the invoice that ordered the item' do 
+      xit 'Next to each item I see the ID(thats a link) of the invoice that ordered the item' do 
         steph_merchant = Merchant.create!(name: "Stephen's shop")
 
         customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")

@@ -4,4 +4,6 @@ class MerchantsDashboardController < ApplicationController
     @merchant = Merchant.find(params[:id])
     
   end
+
+
 end

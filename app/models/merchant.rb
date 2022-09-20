@@ -2,9 +2,10 @@ class Merchant < ApplicationRecord
   has_many :items
   
   def not_shipped
-    items.select("items.*, invoice_items.status as not_shipped").joins(:invoice_items).where.not("invoice_items.status = ?", 2)
+    items.select("items.*, invoice_items.invoice_id as invoice_id")
+    .joins(:invoice_items).where.not("invoice_items.status = ?", 2)
   end 
-    
+  
 
   def enabled_items
     items.where(enabled: true)
@@ -31,8 +32,7 @@ class Merchant < ApplicationRecord
     .group("customers.id")
     .order(transaction_count: :desc)
     .limit(5)
-  end
-end 
+  end 
   def merchant_invoice_finder
     Invoice.joins(:items).select(:id).where("items.merchant_id = #{self.id}").group(:id)
   end

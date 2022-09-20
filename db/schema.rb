@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2022_09_15_230831) do
 
   create_table "merchants", force: :cascade do |t|
     t.string "name"
-    t.string "status", default: "Enabled", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

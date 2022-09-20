@@ -8,25 +8,26 @@ RSpec.describe Merchant, type: :model do
 
   describe 'Class Methods' do   
     describe '.not_shipped' do 
-        it 'sorts by status when not shipped' do
-          stephen = Merchant.create!(name: "Stephen's shop")
+      it 'sorts by status when not shipped' do
+        stephen = Merchant.create!(name: "Stephen's shop")
 
-          customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
+        customer1 = Customer.create!(first_name: "Abdul", last_name: "Redd")
 
-          item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: stephen.id) 
-          item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: stephen.id) 
-          item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: stephen.id) 
+        item1 = Item.create!(name: "Climbing Chalk", description: "Purest powder on the market", unit_price: 1500, merchant_id: stephen.id) 
+        item2 = Item.create!(name: "Colorado Air", description: "Air in a can", unit_price: 2500, merchant_id: stephen.id) 
+        item3 = Item.create!(name: "Boulder", description: "It's a literal rock", unit_price: 3500, merchant_id: stephen.id) 
 
-          invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-          invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
-          
-          invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
-          invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
-          invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "shipped", item_id: item3.id, invoice_id: invoice2.id)
+        invoice1 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+        invoice2 = Invoice.create!(status: "completed", customer_id: customer1.id, created_at: "2022-08-27 10:00:00 UTC" )
+        
+        invoice_item1 = InvoiceItem.create!(quantity:100, unit_price: 1500, status: "pending", item_id: item1.id, invoice_id: invoice1.id)
+        invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice1.id)
+        invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "shipped", item_id: item3.id, invoice_id: invoice2.id)
 
-          expect(stephen.not_shipped).to eq([item1,item2])
-        end 
-      end
+        expect(stephen.not_shipped).to eq([item1,item2])
+      end 
+    end
+  end 
   describe 'enabled_items' do
     it 'returns items where enabled attribute equals true' do
       merchant_stephen = Merchant.create!(name: "Stephen's Shady Store")
@@ -202,5 +203,17 @@ RSpec.describe Merchant, type: :model do
     @invoice_item8 = create_list(:invoiceItem, 3, quantity: 2, unit_price: 2, item_id: @item6.id, invoice_id: @invoice8.id)
 
     expect(@merchant6.highest_sales_date).to eq(Date.new(2022,3,15))
+  end
+
+
+  it "can returns a merchant's items that are not shipped" do 
+    merchant = create(:merchant)
+    x = create_list(:item, 5, enabled = true, merchant_id = merchant.id)
+    y = create_list(:item, 5, enabled = false, merchant_id = merchant.id)
+    create(:item)
+    require 'pry';binding.pry
+
+
+    
   end
 end
