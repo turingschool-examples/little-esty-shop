@@ -136,7 +136,7 @@ RSpec.describe("the merchant items index") do
       describe "I see a label 'top selling date for __ was" do
         it 'displays the date with the most sales for each most popular item' do
           visit merchant_items_path(merchant_1)
-          save_and_open_page
+          
           expect(page).to have_content("Top day for #{item_9.name} was 9/1/16")
         end
       end
