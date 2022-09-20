@@ -28,4 +28,8 @@ class Invoice < ApplicationRecord
     .order('sales desc, created_at')
     .first
   end
+
+    def total_revenue_of_invoice
+      items.total_revenue_of_all_items
+    end
 end
