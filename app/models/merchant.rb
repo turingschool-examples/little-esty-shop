@@ -5,6 +5,7 @@ class Merchant < ApplicationRecord
     items.select("items.*, invoice_items.status as not_shipped").joins(:invoice_items).where.not("invoice_items.status = ?", 2)
   end 
     
+
   def enabled_items
     items.where(enabled: true)
   end
@@ -32,3 +33,35 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 end 
+  def merchant_invoice_finder
+    Invoice.joins(:items).select(:id).where("items.merchant_id = #{self.id}").group(:id)
+  end
+
+  def self.enabled_merchants
+    Merchant.all.select{|merchant| merchant.status == 'Enabled'}
+  end
+
+  def self.disabled_merchants
+    Merchant.all.select{|merchant| merchant.status == 'Disabled'}
+  end
+
+  def self.top_5_merchants
+
+    Merchant.joins(items: {invoices: :transactions})
+    .where("transactions.result = 0")
+    .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue")
+    .group(:id)
+    .order(revenue: :desc)
+    .limit(5)
+  end
+
+  def highest_sales_date
+    items.joins(invoices: :transactions)
+    .select("date_trunc('day', invoices.created_at) as day_created, sum(invoice_items.unit_price * invoice_items.quantity) as highest_profits")
+    .group(:day_created)
+    .order(highest_profits: :desc)
+    .limit(1)
+    .first
+    .day_created
+  end
+end

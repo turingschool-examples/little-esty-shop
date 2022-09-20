@@ -42,7 +42,6 @@ RSpec.describe Invoice, type: :model do
       create_list(:invoiceItem, 5, invoice_id: @invoice3.id, status: :packaged)
 
       expect(Invoice.incomplete).to eq([@invoice3, @invoice2])
-
     end
   end
 end

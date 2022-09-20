@@ -10,12 +10,16 @@ Rails.application.routes.draw do
 
   resources :merchants do
     resources :items
+    resources :invoices, only: %i[index show update]
   end
 
   namespace :admin do
     get '/', to: 'admin#dashboard'
-   resources :invoices, only: %i[index show update]
-   resources :merchants, only: [:index, :show, :edit, :update]
+
+    resources :invoices, only: %i[index show update]
+    resources :merchants, only: [:index, :show, :edit, :update, :new, :create ]
+
+   patch '/merchants/:id/update', to: 'merchants#update'
  end
 
   get '/merchants/:id/dashboard', to: 'merchants_dashboard#index'

@@ -1,1 +1,11 @@
 <h1> All Invoices </h1>
+<h2><%= @merchant.name %></h2>
+
+<h3> My Invoices </h3>
+
+  <% @invoices.each do |invoice| %>
+    <p><%= link_to "Invoice ##{invoice.id}", merchant_invoice_path(@merchant, invoice), method: :get %></p>
+  <% end %>
+
+
+
