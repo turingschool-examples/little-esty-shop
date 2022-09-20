@@ -10,6 +10,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <footer>
+      <% @github.repo_name %>
+      <% @github.users.each do user %>
+        <%= user.name %> commits: <%= user.commits%>
+      <% end %>
+      Merged PR's: <% @github.pr_count%>
+    </footer>
   </body>
 </html>
