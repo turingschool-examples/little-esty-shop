@@ -192,13 +192,13 @@ RSpec.describe "Admin Merchants" do
 
           within("#top-5-merchants") do
             within("#merchant-#{@merchant_5.id}") do
-              expect(page).to have_content((@merchant_5.items.total_revenue_of_all_items/100))
-              expect(page).to_not have_content((@merchant_4.items.total_revenue_of_all_items/100))
+              expect(page).to have_content((@merchant_5.items.total_revenue_of_all_items/100.00).to_s(:delimited))
+              expect(page).to_not have_content((@merchant_4.items.total_revenue_of_all_items/100.00).to_s(:delimited))
             end
             visit admin_merchants_path
             within("#merchant-#{@merchant_2.id}") do
-              expect(page).to have_content((@merchant_2.items.total_revenue_of_all_items/100))
-              expect(page).to_not have_content((@merchant_3.items.total_revenue_of_all_items/100))
+              expect(page).to have_content((@merchant_2.items.total_revenue_of_all_items/100.00).to_s(:delimited))
+              expect(page).to_not have_content((@merchant_3.items.total_revenue_of_all_items/100.00).to_s(:delimited))
             end
           end
         end
