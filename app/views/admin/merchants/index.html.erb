@@ -2,6 +2,8 @@
 <h1>Admin Merchants</h1>
 
 
+<%= button_to "Create New Merchant", new_admin_merchant_path, method: :get, local: true %>
+
 Enabled Merchants:
 
 <ul> <% @enabled_merchants.each do |merchant| %>
