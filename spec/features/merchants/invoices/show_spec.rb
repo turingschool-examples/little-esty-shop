@@ -13,6 +13,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     @invoice_items_1 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id, status: "pending")
     @invoice_items_2 = create(:invoice_items, invoice_id: @invoice_2.id, item_id: @item_2.id, status: "pending")
+
   end
 
   # As a merchant
@@ -137,6 +138,76 @@ RSpec.describe 'Merchant Invoice Show Page' do
       expect(current_path).to eq( merchant_invoice_path(@merchant_2, @invoice_2))
       within "#invoice-items-info" do
         expect(page).to have_content("Packaged")
+      end
+    end
+  end
+
+  # As a merchant
+  # When I visit my merchant invoice show page
+  # Then I see the total revenue that will be generated from all of my items on the invoice
+
+  describe 'User Story 17 - When I visit my merchant invoice show page' do
+    it 'Then I see the total revenue that will be generated from all of my items on the invoice' do
+      merchant_1 = create(:merchant)
+
+      item_1 = create(:item, name: "item_1", merchant: merchant_1, active_status: :enabled)
+      item_2 = create(:item, name: "item_2", merchant: merchant_1)
+      item_3 = create(:item, name: "item_3", merchant: merchant_1)
+      item_4 = create(:item, name: "item_4", merchant: merchant_1, active_status: :enabled)
+      item_5 = create(:item, name: "item_5", merchant: merchant_1, active_status: :enabled)
+      item_6 = create(:item, name: "item_6", merchant: merchant_1)
+      item_7 = create(:item, name: "item_7", merchant: merchant_1, active_status: :enabled)
+      item_8 = create(:item, name: "item_8", merchant: merchant_1)
+      item_9 = create(:item, name: "item_9", merchant: merchant_1, active_status: :enabled)
+      item_10 = create(:item, name: "item_10", merchant: merchant_1)
+
+      invoice_1 = create(:invoice)
+      invoice_2 = create(:invoice)
+      invoice_3 = create(:invoice)
+      invoice_4 = create(:invoice)
+  
+      create(:invoice_items, invoice: invoice_1, item: item_10, unit_price: 1000, quantity: 10)
+      create(:invoice_items, invoice: invoice_1, item: item_5, unit_price: 900, quantity: 9)
+      create(:invoice_items, invoice: invoice_1, item: item_3, unit_price: 800, quantity: 8)
+      create(:invoice_items, invoice: invoice_2, item: item_7, unit_price: 700, quantity: 7)
+      create(:invoice_items, invoice: invoice_2, item: item_6, unit_price: 600, quantity: 6)
+      create(:invoice_items, invoice: invoice_3, item: item_2, unit_price: 500, quantity: 5)
+      create(:invoice_items, invoice: invoice_3, item: item_4, unit_price: 400, quantity: 4)
+      create(:invoice_items, invoice: invoice_4, item: item_8, unit_price: 300, quantity: 3)
+      create(:invoice_items, invoice: invoice_4, item: item_9, unit_price: 200, quantity: 2)
+      create(:invoice_items, invoice: invoice_4, item: item_1, unit_price: 100, quantity: 1)
+  
+      create_list(:transaction, 5, invoice: invoice_1, result: :success)
+      create_list(:transaction, 5, invoice: invoice_1, result: :failed)
+      create_list(:transaction, 5, invoice: invoice_2, result: :failed)
+      create_list(:transaction, 5, invoice: invoice_2, result: :success)
+      create_list(:transaction, 5, invoice: invoice_3, result: :failed)
+      create_list(:transaction, 5, invoice: invoice_3, result: :failed)
+      create_list(:transaction, 5, invoice: invoice_4, result: :success)
+      create_list(:transaction, 5, invoice: invoice_4, result: :success)
+
+      visit merchant_invoice_path(merchant_1, invoice_1)
+
+      within "#invoice-revenue" do
+        expect(page).to have_content(invoice_1.items.total_revenue_of_all_items)
+      end
+
+      visit merchant_invoice_path(merchant_1, invoice_2)
+
+      within "#invoice-revenue" do
+        expect(page).to have_content(invoice_2.items.total_revenue_of_all_items)
+      end
+
+      visit merchant_invoice_path(merchant_1, invoice_3)
+
+      within "#invoice-revenue" do
+        expect(page).to have_content(invoice_3.items.total_revenue_of_all_items)
+      end
+
+      visit merchant_invoice_path(merchant_1, invoice_4)
+
+      within "#invoice-revenue" do
+        expect(page).to have_content(invoice_4.items.total_revenue_of_all_items)
       end
     end
   end
