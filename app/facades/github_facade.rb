@@ -12,6 +12,6 @@ class GitHubFacade
   def self.get_pr_total
     response = GitHubService.request("pulls")
     parsed = JSON.parse(response.body)
-    # parsed[0]["number"]
+    parsed[0]["number"]
   end
 end
