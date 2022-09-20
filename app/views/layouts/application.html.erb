@@ -2,15 +2,43 @@
 <html>
   <head>
     <title>LittleEtsyShop</title>
+    <link href="../../assets/stylesheets/minimal-table.css" rel="stylesheet" type="text/css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<%if request.original_url.include?("/admin") %>
+  <header>
+    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'>Admin Dashboard</span>
+    <nav id='navbox'>
+      <%= link_to 'Invoices', '/admin/invoices', :class => "navigation div_2 #{current_class?('/admin/invoices')}" %>
+      <%= link_to 'Merchants', '/admin/merchants', :class => "navigation div_2 #{current_class?('/admin/merchants')}"%>
+      <%= link_to 'Dashboard', '/admin', :class => "navigation divider #{current_class?('/admin')}"%>
+    </nav>
+  </header>
+  <%else%>
+  <% page_id = request.original_url.scan(/merchants\/\d/).join.gsub('merchants/', '')%>
+  <header>
+    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'><%= yield :heading %></span>
+    <nav id='navbox'>
+      <%= link_to 'Invoices', "/merchants/#{page_id}/invoices", :class => "navigation div_2 #{current_class?("/merchants/#{page_id}/invoices")}" %>
+      <%= link_to 'My Items', "/merchants/#{page_id}/items", :class => "navigation div_2 #{current_class?("/merchants/#{page_id}/items")}"%>
+      <%= link_to 'Dashboard', "/merchants/#{page_id}/dashboard", :class => "navigation divider #{current_class?("/merchants/#{page_id}/dashboard")}"%>
+    </nav>
+  </header>
+<%end%>
 
   <body>
-    <%= yield %>
+    <article>
+      <%= yield %>
+    </article>
+    <aside>
+      <article>
+          <%= yield :aside %>
+      </article>
+    </aside>
   </body>
 
   <footer>

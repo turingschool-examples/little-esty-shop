@@ -1,16 +1,7 @@
-<header>
-    <h1>Admin Dashboard</h1>
-    <nav>
-    <%= link_to 'Dashboard', '/admin'%>
-    <%= link_to 'Merchants', '/admin/merchants'%>
-    <%= link_to 'Invoices', '/admin/invoices'%>
-    </nav>
-</header>
 
-<h2>Merchants Index</h2>
 <%= link_to 'Create New Merchant', new_admin_merchant_path %>
 <div id='merchant-index'>
-  <table id='enabled_merchants'>
+  <table id='enabled_merchants' style='width:43vw'>
     <tr><th><h3>Enabled Merchants</h3></th></tr>
     <% @enabled_merchants.each do |merchant| %>
     <tr><td id='merchant-<%= merchant.id %>'> 
@@ -24,25 +15,27 @@
   
   <br>
 
-  <table id='disabled_merchants'>
+  <table id='disabled_merchants' style='width:43vw; margin-bottom: 50px;'>
     <tr><th><h3>Disabled Merchants</h3></th></tr>
     <% @disabled_merchants.each do |merchant| %>
     <tr><td id='merchant-<%= merchant.id %>'> 
       <%= link_to merchant.name, admin_merchant_path(merchant) %> 
-      <%= button_to "Enabled", admin_merchant_path(merchant), method: :patch, params: { enabled: true }, :class => 'status_button' %>
+      <%= button_to "Enable", admin_merchant_path(merchant), method: :patch, params: { enabled: true }, :class => 'status_button' %>
     </td></tr>
     <%end%>
   </table>
 </div>
 
-<div id='top_5_merchants'>
-  <table id='top_merchants'>
+<% content_for :aside do%>
+<div id='top_5_merchants' >
+  <table id='top_merchants' >
     <tr><th><h3>Top 5 Merchants by Revenue</h3></th></tr>
-    <% @top_merchants.each do |merchant| %>
+    <% @top_merchants.each_with_index do |merchant, index| %>
     <tr><td id='top-merchant-<%= merchant.id %>'> 
-      <%= link_to merchant.name, admin_merchant_path(merchant) %> - $<%= (merchant.revenue/100.to_f).round(2) %> in revenue
+      <%=index + 1%>. <%=  link_to merchant.name, admin_merchant_path(merchant) %> - $<%= (merchant.revenue/100.to_f).round(2) %> in revenue
       <%= "Top sales date for #{merchant.name} was #{merchant.best_sales_date}" %>
     </td></tr>
     <%end%>
   </table>
 </div>
+<%end%>

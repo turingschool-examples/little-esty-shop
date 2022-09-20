@@ -1,6 +1,9 @@
-<h1>Merchant Items Index</h1>
+<% content_for :heading do%>
+<%= @merchant.name %>'s shop
+<%end%>
 
-<h2><%= @merchant.name %></h2>
+<h1>My Items</h1>
+<%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
 <h3>Enabled Items</h3>
 <ul id="enabled_items">
   <% @merchant.enabled_items.each do |item| %>
@@ -19,6 +22,8 @@
     </li>
   <% end %>
 </ul>
+
+<% content_for :aside do%>
 <h3>Top 5 Items By Revenue</h3>
 <ol id="top-five">
   <% @merchant.top_5_items.each do |item| %>
@@ -29,4 +34,4 @@
     </li>
   <% end %>
 </ol>
-<%= link_to "Create New Item", new_merchant_item_path(@merchant) %>
+<%end%>

@@ -1,0 +1,39 @@
+<% content_for :heading do%>
+<%= @merchant.name %>'s shop
+<%end%>
+
+<h2>Invoice #<%= @invoice.id %></h2>
+
+<p>Status: <%= @invoice.status %></p>
+<p>Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<div id="total_invoice_revenue">
+<p>Total Revenue From This Invoice: $<%= (@invoice.calculate_invoice_revenue / 100.to_f).round(2)%></p>
+</div>
+<h3>Customer:</h3>
+<p style='margin-left:20px'><%= @invoice.customer.name %></p>
+
+<h3>Itemson this Invoice </h3>
+<table id="invoice_items">
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.merchant_items(@merchant).each do |item| %>
+    <tr  id="item_<%= item.id %>">
+    <td><%= item.name %></td>
+      <td><%= item.invoice_item(@invoice).quantity %></td>
+      <td>$<%= (item.invoice_item(@invoice).unit_price / 100.to_f).round(2) %></td>
+      <td>
+        <%= form_with url: merchant_invoice_item_path(@merchant, item.invoice_item(@invoice)), method: :patch do |f| %>
+          <%= f.label :status, "Status" %>
+          <%= f.select :status, options_for_select([:pending, :packaged, :shipped], selected: item.invoice_item(@invoice).status) %>
+          <%= f.hidden_field :invoice_id, value: @invoice.id %>
+          <%= f.submit "Update Item Status"  %>
+      </td>
+      <% end %>
+    </li>
+  <% end %>
+</table>
+

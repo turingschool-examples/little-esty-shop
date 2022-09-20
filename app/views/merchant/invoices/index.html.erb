@@ -1,0 +1,10 @@
+<% content_for :heading do%>
+<%= @merchant.name %>'s shop
+<%end%>
+
+<h2>My Invoices</h2>
+<div id="relevant_invoices">
+<% @merchant.find_relevant_invoices.each do |invoice| %>
+<p>Invoice #<%= link_to "#{invoice.id}", merchant_invoice_path(@merchant, invoice)%></p>
+<% end %>
+</div>
