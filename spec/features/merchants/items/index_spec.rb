@@ -4,7 +4,7 @@ RSpec.describe 'Merchants Item Index' do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
-    
+
     @items_1 = create_list(:item, 10, merchant: @merchant_1, active_status: :enabled)
     @items_2 = create_list(:item, 10, merchant: @merchant_2, active_status: :enabled)
     @items_3 = create_list(:item, 2, merchant: @merchant_1)
@@ -225,22 +225,10 @@ RSpec.describe 'Merchants Item Index' do
     end
   end
 
-  # As a merchant
-  # When I visit my items index page
-  # Then I see the names of the top 5 most popular items ranked by total revenue generated
-  # And I see that each item name links to my merchant item show page for that item
-  # And I see the total revenue generated next to each item name
-
-  # Notes on Revenue Calculation:
-
-  # Only invoices with at least one successful transaction should count towards revenue
-  # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-  # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-
-  describe 'User Story 12 - When I visit my items index page' do
+  describe 'data for 12/13' do
     before :each do
       @merchant_1 = create(:merchant)
-    
+
       @item_1 = create(:item, name: "item_1", merchant: @merchant_1, active_status: :enabled)
       @item_2 = create(:item, name: "item_2", merchant: @merchant_1)
       @item_3 = create(:item, name: "item_3", merchant: @merchant_1)
@@ -251,12 +239,19 @@ RSpec.describe 'Merchants Item Index' do
       @item_8 = create(:item, name: "item_8", merchant: @merchant_1)
       @item_9 = create(:item, name: "item_9", merchant: @merchant_1, active_status: :enabled)
       @item_10 = create(:item, name: "item_10", merchant: @merchant_1)
-  
-      @invoice_1 = create(:invoice)
-      @invoice_2 = create(:invoice)
-      @invoice_3 = create(:invoice)
-      @invoice_4 = create(:invoice)
-  
+
+      @item_11 = create(:item, merchant: @merchant_1)
+      @item_12 = create(:item, merchant: @merchant_1)
+
+      @invoice_1 = create(:invoice, status: :completed, created_at: "08-10-2022")
+      @invoice_2 = create(:invoice, status: :cancelled, created_at: "08-10-2022")
+      @invoice_3 = create(:invoice, status: :cancelled, created_at: "10-08-2022")
+      @invoice_4 = create(:invoice, status: :cancelled, created_at: "10-08-2022")
+      @invoice_5 = create(:invoice, status: :cancelled, created_at: "10-08-2022")
+      @invoice_6 = create(:invoice, status: :completed, created_at: "01-07-2022")
+      @invoice_7 = create(:invoice, status: :completed, created_at: "01-07-2022")
+      @invoice_8 = create(:invoice, status: :completed, created_at: "01-07-2022")
+
       create(:invoice_items, invoice: @invoice_1, item: @item_10, unit_price: 1000, quantity: 10)
       create(:invoice_items, invoice: @invoice_1, item: @item_5, unit_price: 900, quantity: 9)
       create(:invoice_items, invoice: @invoice_1, item: @item_3, unit_price: 800, quantity: 8)
@@ -267,7 +262,21 @@ RSpec.describe 'Merchants Item Index' do
       create(:invoice_items, invoice: @invoice_4, item: @item_8, unit_price: 300, quantity: 3)
       create(:invoice_items, invoice: @invoice_4, item: @item_9, unit_price: 200, quantity: 2)
       create(:invoice_items, invoice: @invoice_4, item: @item_1, unit_price: 100, quantity: 1)
-      
+
+
+      create(:invoice_items, invoice: @invoice_5, item: @item_10)
+      create(:invoice_items, invoice: @invoice_5, item: @item_10)
+      create(:invoice_items, invoice: @invoice_5, item: @item_5)
+      create(:invoice_items, invoice: @invoice_6, item: @item_5)
+      create(:invoice_items, invoice: @invoice_6, item: @item_6)
+      create(:invoice_items, invoice: @invoice_6, item: @item_3)
+      create(:invoice_items, invoice: @invoice_7, item: @item_3)
+      create(:invoice_items, invoice: @invoice_5, item: @item_3)
+      create(:invoice_items, invoice: @invoice_5, item: @item_5)
+      create(:invoice_items, invoice: @invoice_6, item: @item_6)
+      create(:invoice_items, invoice: @invoice_7, item: @item_6)
+      create(:invoice_items, invoice: @invoice_8, item: @item_7)
+
       create_list(:transaction, 5, invoice: @invoice_1, result: :success)
       create_list(:transaction, 5, invoice: @invoice_1, result: :failed)
       create_list(:transaction, 5, invoice: @invoice_2, result: :failed)
@@ -277,43 +286,76 @@ RSpec.describe 'Merchants Item Index' do
       create_list(:transaction, 5, invoice: @invoice_4, result: :success)
       create_list(:transaction, 5, invoice: @invoice_4, result: :success)
     end
-    it 'Then I see the names of the top 5 most popular items ranked by total revenue generated' do
-      visit merchant_items_path(@merchant_1)
-      
-      within "#5-best-items" do
-        expect(@item_10.name).to appear_before( @item_5.name)
-        expect(@item_5.name).to appear_before( @item_3.name)
-        expect(@item_3.name).to appear_before( @item_7.name)
-        expect(@item_7.name).to appear_before( @item_6.name)
-        expect(@item_5.name).to_not appear_before( @item_10.name)
-        expect(@item_3.name).to_not appear_before( @item_5.name)
-        expect(@item_7.name).to_not appear_before( @item_3.name)
-        expect(@item_6.name).to_not appear_before( @item_7.name)
+    # As a merchant
+    # When I visit my items index page
+    # Then I see the names of the top 5 most popular items ranked by total revenue generated
+    # And I see that each item name links to my merchant item show page for that item
+    # And I see the total revenue generated next to each item name
+
+    # Notes on Revenue Calculation:
+
+    # Only invoices with at least one successful transaction should count towards revenue
+    # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
+    # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+    describe 'User Story 12 - When I visit my items index page' do
+      it 'Then I see the names of the top 5 most popular items ranked by total revenue generated' do
+        visit merchant_items_path(@merchant_1)
+
+        within "#5-best-items" do
+          expect(@item_10.name).to appear_before( @item_5.name)
+          expect(@item_5.name).to appear_before( @item_3.name)
+          expect(@item_3.name).to appear_before( @item_7.name)
+          expect(@item_7.name).to appear_before( @item_6.name)
+          expect(@item_5.name).to_not appear_before( @item_10.name)
+          expect(@item_3.name).to_not appear_before( @item_5.name)
+          expect(@item_7.name).to_not appear_before( @item_3.name)
+          expect(@item_6.name).to_not appear_before( @item_7.name)
+        end
+      end
+
+      it 'And I see that each item name links to my merchant item show page for that item' do
+        visit merchant_items_path(@merchant_1)
+
+        within "#5-best-items" do
+          find_link({text: "#{@item_10.name}", href: merchant_item_path(@merchant_1, @item_10)}).visible?
+          find_link({text: "#{@item_5.name}", href: merchant_item_path(@merchant_1, @item_5)}).visible?
+          find_link({text: "#{@item_3.name}", href: merchant_item_path(@merchant_1, @item_3)}).visible?
+          find_link({text: "#{@item_7.name}", href: merchant_item_path(@merchant_1, @item_7)}).visible?
+          find_link({text: "#{@item_6.name}", href: merchant_item_path(@merchant_1, @item_6)}).visible?
+        end
+      end
+
+      it 'And I see the total revenue generated next to each item name' do
+        visit merchant_items_path(@merchant_1)
+
+        within "#5-best-items" do
+
+          expect(page).to have_content((@item_10.revenue) / 100)
+          expect(page).to have_content((@item_5.revenue) / 100)
+          expect(page).to have_content((@item_3.revenue) / 100)
+          expect(page).to have_content((@item_7.revenue) / 100)
+          expect(page).to have_content((@item_6.revenue) / 100)
+        end
       end
     end
+  #   When I visit the items index page
+  # Then next to each of the 5 most popular items I see the date with the most sales for each item.
+  # And I see a label “Top selling date for <item name> was <date with most sales>"
 
-    it 'And I see that each item name links to my merchant item show page for that item' do
-      visit merchant_items_path(@merchant_1)
+  # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+  #   describe 'User Story 13 - When I visit my items index page' do
+    describe "user story 13" do
+      it 'next to each of the 5 most popular items I see the date with the most sales for each item' do
+        visit merchant_items_path(@merchant_1)
+        
+        within("#5-best-items") do
+          expect(page).to have_content("Top selling date for #{@item_10.name} was #{@item_10.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+          expect(page).to have_content("Top selling date for #{@item_5.name} was #{@item_5.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+          expect(page).to have_content("Top selling date for #{@item_3.name} was #{@item_3.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+          expect(page).to have_content("Top selling date for #{@item_6.name} was #{@item_6.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
+          expect(page).to have_content("Top selling date for #{@item_7.name} was #{@item_7.invoices.best_day.created_at.strftime("%A, %B %d, %Y")}")
 
-      within "#5-best-items" do
-        find_link({text: "#{@item_10.name}", href: merchant_item_path(@merchant_1, @item_10)}).visible?
-        find_link({text: "#{@item_5.name}", href: merchant_item_path(@merchant_1, @item_5)}).visible?
-        find_link({text: "#{@item_3.name}", href: merchant_item_path(@merchant_1, @item_3)}).visible?
-        find_link({text: "#{@item_7.name}", href: merchant_item_path(@merchant_1, @item_7)}).visible?
-        find_link({text: "#{@item_6.name}", href: merchant_item_path(@merchant_1, @item_6)}).visible?
-      end
-    end
-
-    it 'And I see the total revenue generated next to each item name' do
-      visit merchant_items_path(@merchant_1)
-    
-      within "#5-best-items" do
-      
-        expect(page).to have_content((@item_10.revenue) / 100)
-        expect(page).to have_content((@item_5.revenue) / 100)
-        expect(page).to have_content((@item_3.revenue) / 100)
-        expect(page).to have_content((@item_7.revenue) / 100)
-        expect(page).to have_content((@item_6.revenue) / 100)
+        end
       end
     end
   end
