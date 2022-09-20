@@ -2,39 +2,22 @@
 
 ## Background and Description
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. Merchant features grant a merchant who is selling their products the ability to access invoices, enable and disable items, create new items, update item information, and view other relevant information regarding products they are selling. Admin features grant an admin the ability to update merchants, enable/disable merchants, create merchants, and view other relevant information regarding merchants on the site.
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+## [Visit our Little Esty Shop here](https://thawing-bayou-51893.herokuapp.com/)
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
-- Continuous Integration / Continuous Deployment is not allowed
-- Any gems added to the project must be approved by an instructor
+![little-esty-diagram](https://user-images.githubusercontent.com/99758586/191274385-06448af5-b114-4c5b-8e17-bfb8cf5efabb.png)
+
 
 ## Setup
-
-This project requires Ruby 2.7.4.
-
+* This project requires Ruby 2.7.4
 * Fork this repository
 * Clone your fork
-* From the command line, install gems and set up your DB:
+* From the command line, run:
     * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
-
-## Phases
-
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+    * `rails db:{drop,create,migrate}`
+    * `rails csv_load:all`
+    * `rails s`
+    
+### Contributors to this project include:
+[Kaelin Sleevi](https://github.com/KaelinSleevi), [Noah van Ekdom](https://github.com/noahvanekdom), [Alex Mora](https://github.com/AlexMR-93), [Sid Mann](https://github.com/sjmann2)

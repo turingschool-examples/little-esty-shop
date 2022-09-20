@@ -32,51 +32,74 @@ RSpec.describe 'As an admin, when I visit the admin merchant index' do
   let!(:invoice_item_4) { InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, quantity: 30, unit_price: 1335, status: 'pending') }
 
   describe "page" do
+    before(:each) do
+      visit admin_merchants_path
+    end
 
     it 'directs to the admin merchant index page' do
-      visit admin_merchants_path
       expect(current_path).to eq("/admin/merchants")
     end
 
     it 'displays the name of each merchant in the system' do
-      visit admin_merchants_path
       expect(page).to have_content(merchant_1.name)
       expect(page).to have_content(merchant_2.name)
       expect(page).to have_content(merchant_3.name)
     end
 
     it 'has links to the show page for each merchant' do
-      visit admin_merchants_path
-
       expect(page).to have_link(merchant_1.name)
       expect(page).to have_link(merchant_2.name)
       expect(page).to have_link(merchant_3.name)
     end
+  end
 
-    describe "next to each merchant, I see a button to enable/disable that merchant" do
-      it 'has a button that says enable if the merchant is disabled, and vice versa' do
-        visit admin_merchants_path
-        expect(page).to have_button("Disable #{merchant_1.name}")
-        expect(merchant_1.enabled).to eq true
-        click_button("Disable #{merchant_2.name}")
-        expect(page).to have_button("Enable #{merchant_2.name}")
-      end
+  describe ":Creating New Merchant:" do
+    it 'has a link to create a new merchant' do
+      visit admin_merchants_path
 
-      it 'redirects me to the merchant index page' do
-        visit admin_merchants_path
-        expect(page).to have_button("Disable #{merchant_1.name}")
-        expect(merchant_1.enabled).to eq true
-        click_button("Disable #{merchant_2.name}")
-        expect(page).to have_button("Enable #{merchant_2.name}")
+      expect(page).to have_button("Create New Merchant")
+    end
 
-        expect(current_path).to eq(admin_merchants_path)
-      end
+    it 'when I click the button, I am taken to a form with the attributes for a new merchant' do
+      visit admin_merchants_path
+      click_button("Create New Merchant")
 
-      it 'the button changes the status of an enabled merchant to disabled' do
-        visit admin_merchants_path
-        click_button("Disable #{merchant_1.name}")
-        expect(page).to have_button("Enable #{merchant_1.name}")
-      end
+      expect(current_path).to eq new_admin_merchant_path
+      expect(page).to have_field(:name)
+    end
+  end
+
+  describe ":Enable/disable merchant:" do
+    it 'has a button that says enable if the merchant is disabled, and vice versa' do
+      visit admin_merchants_path
+      expect(page).to have_button("Disable #{merchant_1.name}")
+      expect(merchant_1.enabled).to eq true
+      click_button("Disable #{merchant_2.name}")
+      expect(page).to have_button("Enable #{merchant_2.name}")
+    end
+
+    it 'redirects me to the merchant index page' do
+      visit admin_merchants_path
+      expect(page).to have_button("Disable #{merchant_1.name}")
+      expect(merchant_1.enabled).to eq true
+      click_button("Disable #{merchant_2.name}")
+      expect(page).to have_button("Enable #{merchant_2.name}")
+
+      expect(current_path).to eq(admin_merchants_path)
+    end
+
+    it 'the button changes the status of an enabled merchant to disabled' do
+      visit admin_merchants_path
+      click_button("Disable #{merchant_1.name}")
+      expect(page).to have_button("Enable #{merchant_1.name}")
+    end
+  end
+
+  describe ":top 5 merchant display:" do
+    xit "displays the 5 merchants with the highest total revenue" do
+      #within(block) expect(page).to have_content(merchant1 name, revenue)
+      #within(block) expect(page).to have_content(merchant1 name, revenue)
+      #within(block) expect(page).to have_content(merchant1 name, revenue)
     end
   end
 end

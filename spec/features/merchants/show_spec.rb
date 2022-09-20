@@ -54,7 +54,6 @@ RSpec.describe("the merchant dashboard") do
       expect(page).to(have_content("#{item2.name}"))
       expect(page).to(have_content("#{item3.name}"))
     end
-  
 
     describe("4.And next to each Item I see the id of the invoice that ordered my item") do
       it("And each invoice id is a link to my merchant's invoice show page") do
