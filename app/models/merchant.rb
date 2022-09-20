@@ -23,6 +23,14 @@ class Merchant < ApplicationRecord
    .limit(5)
   end
 
+  def top_day
+    invoices.select('invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .group('invoices.created_at')
+    .order('revenue desc')
+    .first
+    .created_at
+  end
+
   def favorite_customers
     Customer
     .select("customers.*, count(transactions) as transaction_count")
