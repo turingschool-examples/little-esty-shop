@@ -23,6 +23,8 @@ Rails.application.routes.draw do
    patch '/merchants/:id/update', to: 'merchants#update'
  end
 
-  get '/merchants/:id/dashboard', to: 'merchants#dashboard'
+  get '/merchants/:id/dashboard', to: 'merchants_dashboard#index'
+  get '/merchants/:id/items', to: 'merchant#items_index'
+  
 
 end

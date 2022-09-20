@@ -13,6 +13,8 @@ RSpec.describe 'Merchant Items Index Page' do
 
         item_lamp = merchant_roger.items.create!(name: "Item Lamp", description: "You bet, it's a lamp", unit_price: 4000 )
 
+
+        #visit "/merchants/#{merchant_stephen.id}/items"
         visit merchant_items_path(merchant_stephen)
 
         expect(page).to have_content("Merchant Items Index Page")

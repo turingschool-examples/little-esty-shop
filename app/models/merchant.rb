@@ -1,5 +1,14 @@
 class Merchant < ApplicationRecord
   has_many :items
+  
+  def not_shipped
+    items.select("items.*, invoices.created_at as inv_created,invoice_items.invoice_id as invoice_id")
+         .joins(:invoices)
+         .where
+         .not("invoice_items.status = ?", 2)
+         .order(inv_created: :asc)
+  end
+  
 
   def enabled_items
     items.where(enabled: true)
@@ -19,6 +28,14 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def top_five_cust_by_transaction
+    items.joins( invoices: [:transactions, :customer])
+    .where("transactions.result = 0")
+    .select("customers.*, count(transactions.id) as transaction_count")
+    .group("customers.id")
+    .order(transaction_count: :desc)
+    .limit(5)
+  end 
   def merchant_invoice_finder
     Invoice.joins(:items).select(:id).where("items.merchant_id = #{self.id}").group(:id)
   end
