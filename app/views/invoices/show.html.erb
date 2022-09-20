@@ -3,7 +3,12 @@
 
 <ul>
     <li>Invoice: <%= @invoice.id %></li>
-    <li>Status: <%= @invoice.status %></li>
+    <li>Invoice Status: </li>
+        <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |form| %>
+        <%= form.label :status %>
+        <%= form.select :status, ['cancelled', 'in progress', 'completed'], selected: @invoice.status  %>
+        <%= form.submit "Update Invoice Status" %>
+    <% end %>
     <li>Created: <%= "#{@invoice.created_at.strftime("%A,%B %d, %Y")}" %></li>
     <li>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></li>
 </ul>
