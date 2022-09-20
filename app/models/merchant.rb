@@ -2,9 +2,12 @@ class Merchant < ApplicationRecord
   has_many :items
   
   def not_shipped
-    items.select("items.*, invoice_items.invoice_id as invoice_id")
-    .joins(:invoice_items).where.not("invoice_items.status = ?", 2)
-  end 
+    items.select("items.*, invoices.created_at as inv_created,invoice_items.invoice_id as invoice_id")
+         .joins(:invoices)
+         .where
+         .not("invoice_items.status = ?", 2)
+         .order(inv_created: :asc)
+  end
   
 
   def enabled_items

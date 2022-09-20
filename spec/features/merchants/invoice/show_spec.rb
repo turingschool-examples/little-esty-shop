@@ -61,7 +61,6 @@ RSpec.describe 'Merchant Invoice Show Page' do
           expect(page).to have_content(item1.name)
           expect(page).to have_content(invoice_item1.quantity)
           expect(page).to have_content(invoice_item1.unit_price)
-          save_and_open_page
           expect(page).to have_content("Packaged")
         end
 

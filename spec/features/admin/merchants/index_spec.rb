@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'admin merchant index page' do
 
   before :each do
-    @merchant1 = Merchant.create(name: "Robespierre", status: 'Disabled')
-    @merchant2 = Merchant.create(name: "BFranklin")
+    @merchant1 = Merchant.create!(name: "Robespierre", status: 'Disabled')
+    @merchant2 = Merchant.create!(name: "BFranklin", status: 'Enabled')
   end
 
   it 'can display names of all merchants' do

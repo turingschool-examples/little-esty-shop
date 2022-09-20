@@ -208,12 +208,18 @@ RSpec.describe Merchant, type: :model do
 
   it "can returns a merchant's items that are not shipped" do 
     merchant = create(:merchant)
-    x = create_list(:item, 5, enabled = true, merchant_id = merchant.id)
-    y = create_list(:item, 5, enabled = false, merchant_id = merchant.id)
-    create(:item)
-    require 'pry';binding.pry
+    item_list = create_list(:item, 10, merchant_id: merchant.id)
+    item_list.each { |item| create(:invoiceItem, item_id: item.id) }
+    test_arr = merchant.not_shipped.map { |item| item.invoice_items.first.status }
+    expect(test_arr.include?('shipped')).to be(false)
+  end
 
+  it 'Invoices should be in order of date created from oldest to newest' do
+    merchant = create(:merchant)
+    item_list = create_list(:item, 10, merchant_id: merchant.id)
+    item_list.each { |item| create(:invoiceItem, item_id: item.id) }
+    test_arr = merchant.not_shipped.map { |item| item.inv_created }
 
-    
+    expect(test_arr).to eq(test_arr.sort)
   end
 end
