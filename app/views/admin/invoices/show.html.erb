@@ -6,18 +6,20 @@
     <% end %>
 
   <p>Created at: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-  <p>Customer: <%= @invoice.customer.name %></p>
   <p>Total Revenue: <%= @invoice.calculate_invoice_revenue %></p>
+  <h4 style='font-size:150%'>Customer:<h4> 
+  <p style='font-weight:normal; margin-top:-20px; margin-left:20px; margin-bottom:50px'><%= @invoice.customer.name %></p>
 </div>
 
 <h3>Invoice Items</h3>
-<ul id="invoice_items">
+<table id="invoice_items" class='table_full'>
+  <tr><h4><th>Item Name</th><th>Quantity</th><th>Unit Price</th><th>Status</th></h4></tr>
   <% @invoice.invoice_items.each do |item| %>
-    <li id="item_<%= item.id %>">
-      <%= item.item.name %>
-      <p>Quantity: <%= item.quantity %></p>
-      <p>Sale Price: <%= item.unit_price %></p>
-      <p>Status: <%= item.status %></p>
-    </li>
+    <tr id="item_<%= item.id %>">
+      <td id="name_<%= item.id %>"><%= item.item.name %></td>
+      <td id="quant_<%= item.id %>"><%= item.quantity %></td>
+      <td id="unit_price_<%= item.id %>"><%= item.unit_price %></td>
+      <td id="status_<%= item.id %>"><%= item.status %></td>
+    </tr>
   <% end %>
-</ul>
+</table>

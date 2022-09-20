@@ -1,8 +1,10 @@
-<h1>Merchant Item Show Page</h1>
+<% content_for :heading do%>
+<%= @merchant.name %>'s shop
+<%end%>
 
 <p><%= flash.notice %></p>
 
 <h2><%= @item.name %></h2>
 <p>Description: <%= @item.description %></p>
-<p>Current Price: <%= @item.unit_price %></p>
+<p>Current Price: $<%= (@item.unit_price / 100.to_f).round(2) %></p>
 <p><%= link_to "Update", edit_merchant_item_path(@item.merchant, @item) %></p>

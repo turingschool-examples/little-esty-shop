@@ -13,3 +13,109 @@
  *= require_tree .
  *= require_self
  */
+
+ 
+ body {
+  padding: 0px;
+  margin: 0px;
+  min-width: 770px;
+  overflow-x: scroll;
+ }
+ 
+ header {
+  overflow: auto;
+  background-image: linear-gradient(white,rgb(240, 238, 235));
+  background-size: cover;
+  color: rgb(216, 134, 41);
+  font-size: 100%;
+  width: 100%;
+  max-height: 62px;
+}
+
+article {
+  position: absolute;
+  margin: 15px;
+}
+
+aside {
+  width:50vw; 
+  position: absolute;
+  right: 0px;
+  margin-top: 18px;
+  margin-right: 20px;
+}
+
+#title {
+  color: rgb(227, 137, 33);
+  float: left;
+  padding-left:10px; 
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+}
+#b {
+  font-style: oblique;
+}
+
+a {
+  color: grey;
+  text-decoration: none;
+  
+}
+a:visited {
+  color: grey;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(216, 134, 41);
+  text-decoration: none;
+}
+
+ .navigation {
+  float: right;
+  /* width: 100px; */
+  font-size: 100%;
+  padding-bottom: 6px;
+  padding-top: 18px;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 250px;
+}
+
+.nav-active {
+  background-image: linear-gradient(rgba(255, 255, 255, 0),rgba(128, 128, 128, 0.142));
+  border-color: black;
+}
+
+.divider {
+  border-width: 1px;
+  border-style: solid;
+  border-top: 0px;
+  border-image: 
+    linear-gradient(
+      to top, 
+      rgb(138, 138, 138) 1%, 
+      rgba(0, 0, 0, 0) 
+    ) 1 100%
+}
+
+.div_2 {
+  border-width: 1px;
+  border-left-width: 0px;
+  border-style: solid;
+  border-top: 0px;
+  border-image: 
+    linear-gradient(
+      to top, 
+      rgb(138, 138, 138) 1%, 
+      rgba(0, 0, 0, 0) 
+    ) 1 100%
+}
+
+.table_full {
+  width: 90vw;
+  margin-bottom: 50px;
+}
+
+.create_form {
+  width: 200px;
+}

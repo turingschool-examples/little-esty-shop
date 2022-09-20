@@ -1,23 +1,26 @@
-<h1>Merchant Dashboard</h1>
+<% content_for :heading do%>
+<%= @merchant.name %>'s shop
+<%end%>
 
-<p><%= @merchant.name %></p>
-  <%= link_to "#{@merchant.name}'s Items", merchant_items_path(@merchant) %>
-  <%= link_to "#{@merchant.name}'s Invoices", merchant_invoices_path(@merchant) %>
-
-  <h3>Top 5 Customers<h3>
+<%content_for :aside do%>
+<h3>Top 5 Customers</h3>
 <div id='top_5_customers'>
 <% i = 1 %>
-<p><% @merchant.transactions_top_5.each do |customer| %></p>
-<p><%= i%>.<%= customer.first_name %> <%= customer.last_name %> <%= customer.num_succesful_transactions %> purchases</p>
-<% i += 1 %>
+<p><% @merchant.transactions_top_5.each_with_index do |customer, i| %></p>
+<p><%= i + 1 %>.<%= customer.first_name %> <%= customer.last_name %> - <%= customer.num_succesful_transactions %> purchases</p>
 <% end %>
 </div>
-
-
-  <h3>Items Ready to Ship</h3>
-<div id='ready_to_ship'>
-<p><% @merchant.ready_to_ship_items_ordered.each do |item| %></p>
-<p><%= item.name + " - Invoice " %> <%= link_to "##{item.invoice_id}", merchant_invoice_path(@merchant, item.invoice_id)%><%= item.creation_time.strftime("%A, %B %d, %Y")%></p>
 <% end %>
+
+
+<div id='ready_to_ship' style='max-width: 40vw; margin-top:37px'>
+  <h3>Items Ready to Ship</h3>
+  <% @merchant.ready_to_ship_items_ordered.each do |item| %>
+    <p style='font-size: 85%; color: grey; margin-left: 20px'>
+      <%= item.name.gsub('Item','') + " - Invoice " %> 
+      <%= link_to "##{item.invoice_id}", merchant_invoice_path(@merchant, item.invoice_id)%>
+      <%= item.creation_time.strftime("%A, %B %d, %Y")%>
+    </p>
+  <% end %>
 </div>
 
