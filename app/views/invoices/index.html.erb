@@ -2,6 +2,6 @@
 
 <ol>
     <% @merchant.invoices.distinct.each do |invoice| %>
-        <li>Invoice: <%= invoice.id %></li>
+        <li>Invoice: <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}"%></li>
     <% end %>
 </ol>
