@@ -18,7 +18,7 @@ RSpec.describe "the merchant invoices show"  do
             invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
 
             visit merchant_invoice_path(merchant1, invoice_1)
-            expect(page).to have_content("Status: #{invoice_1.status}")
+            expect(page).to have_content("Invoice Status:")
         end
 
         it 'can display the date format for its creation date' do
@@ -162,7 +162,7 @@ RSpec.describe "the merchant invoices show"  do
                     visit merchant_invoice_path(merchant1, invoice_1)
 
                     expect(page).to have_content("Invoice Status:")
-                    expect(page).to have_content("Update Invoice Status")
+                    expect(page.has_field? 'status').to eq(true)
                     expect(page).to have_content("cancelled")
                 end
             end
