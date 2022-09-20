@@ -21,3 +21,10 @@ Disabled Merchants:
   </li>
 <% end%>
 </ul>
+
+<h2> Top 5 Merchants by Revenue</h2>
+
+<ul> <% Merchant.top_5_revenue.each do |merchant| %>
+  <li><p> Name: <%= merchant.name %> </p><p> Best Day: <%= merchant.top_day %></p> </li>
+  <% end %>
+</ul>

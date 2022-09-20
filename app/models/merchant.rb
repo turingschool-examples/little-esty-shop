@@ -24,14 +24,15 @@ class Merchant < ApplicationRecord
    .limit(5)
   end
 
-  # def top_day
-  #   invoices.select('date_trunc('day', invoices.created_at) as date, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-  #   .where('transaction.result = success')
-  #   .group('date')
-  #   .order('revenue desc')
-  #   .first
-  #   .created_at
-  # end
+  def top_day
+    invoices.joins(:transactions)
+    .where('transactions.result = 1')
+    .select('DATE(invoices.created_at) as creation, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .group('creation')
+    .order('revenue desc, creation desc')
+    .first
+    .creation
+  end
 
   def favorite_customers
     items.select("customers.*, count(transactions.result) as transaction_count")
