@@ -7,6 +7,20 @@ class Admin::MerchantsController < ApplicationController
     @top_5_merchants = Merchant.top_5_revenue
   end
 
+  def new
+  end
+
+  def create
+    merchant = Merchant.new(name: params[:name], enabled: false)
+    if merchant.save
+      redirect_to admin_merchants_path
+      flash[:alert] = "Creation successful"
+    else
+      redirect_to new_admin_merchant_path
+      flash[:alert] = "Error: Parameter Missing"
+    end
+  end
+
   def show
     @merchant = Merchant.find(params[:id])
   end
