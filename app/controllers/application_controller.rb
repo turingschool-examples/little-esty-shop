@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_names
-    require 'pry' ; binding.pry
+    # require 'pry' ; binding.pry
     @user_names = GitHubFacade.user_names
   end
 

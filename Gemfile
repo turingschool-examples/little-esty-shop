@@ -47,6 +47,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'webmock'
   gem 'httparty'
+  gem 'figaro'
 end
 
 group :development do
