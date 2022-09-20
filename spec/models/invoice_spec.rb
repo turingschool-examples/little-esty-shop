@@ -52,7 +52,6 @@ RSpec.describe Invoice, type: :model do
     @transaction_7 = @invoice_1.transactions.create!(credit_card_number: "5478972046869861", credit_card_expiration_date: "", result: :success)
     @transaction_8 = @invoice_1.transactions.create!(credit_card_number: "4333324752400785", credit_card_expiration_date: "", result: :success)
 
-    # customer_2 transactions
     @transaction_9 = @invoice_2.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
     @transaction_10 = @invoice_2.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
     @transaction_11 = @invoice_2.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
@@ -79,6 +78,12 @@ RSpec.describe Invoice, type: :model do
 
     it "#best_day" do
       expect(Invoice.best_day.created_at).to eq(@invoice_8.created_at)
+    end
+  end
+
+  describe "class methods" do 
+    it "#total_revenue_of_invoice" do
+      expect(@invoice_1.total_revenue_of_invoice).to be (50000)
     end
   end
 end
