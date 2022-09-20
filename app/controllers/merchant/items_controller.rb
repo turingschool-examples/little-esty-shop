@@ -1,6 +1,5 @@
-class ItemsController < ApplicationController
+class Merchant::ItemsController < Merchant::BaseController
   before_action :set_item, only: [:show, :edit, :update]
-  before_action :set_merchant
 
   def index
   
@@ -43,9 +42,5 @@ class ItemsController < ApplicationController
 
     def set_item
       @item = Item.find(params[:id])
-    end
-
-    def set_merchant
-      @merchant = Merchant.find(params[:merchant_id])
     end
 end

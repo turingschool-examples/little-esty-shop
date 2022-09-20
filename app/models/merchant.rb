@@ -45,6 +45,7 @@ class Merchant < ApplicationRecord
   def ready_to_ship_items_ordered
     Invoice.select("items.*, invoices.created_at as creation_time, invoices.id as invoice_id")
            .joins(:items)
+           .where(items: { merchant_id: self.id})
            .where.not(invoice_items: { status: 2 })
            .order(:created_at)
   end
