@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LittleEtsyShop</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>LittleEtsyShop</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-      <% flash.each do |type, notice| %>
-        <h3><b><%= notice %></b></h3>
-      <% end %>
-    <%= yield %>
-    <footer style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ccc;">
+<body>
+<% flash.each do |type, notice| %>
+  <h3><b><%= notice %></b></h3>
+<% end %>
+<%= yield %>
+<footer style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ccc;">
   &copy; Little Esty Shop
-  <br />
-  <ul><% @contributors.each do |contributor| %>
-    <li><%= contributor.login %></li>
-  <% end %></ul>
+  <br/>
+  <%= @repo[:repo_name] %>
+  <ul>
+    <% @contributors.each do |contributor| %>
+      <li><%= contributor.login %></li>
+    <% end %></ul>
 </footer>
-  </body>
+</body>
 </html>
