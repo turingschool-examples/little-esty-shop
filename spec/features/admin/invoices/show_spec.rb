@@ -73,8 +73,18 @@ RSpec.describe "Admin Invoice Show Page" do
 
       it "Then I see the total revenue that will be generated from this invoice" do
         visit admin_invoice_path(@invoice_1)
-        save_and_open_page
-        expect(page).to have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
+        
+        within("#invoice-details-#{@invoice_1.id}") do
+          expect(page).to have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
+          expect(page).to_not have_content((@invoice_2.total_revenue_of_invoice/100.00).to_s(:delimited))
+        end
+
+        visit admin_invoice_path(@invoice_2)
+
+        within("#invoice-details-#{@invoice_2.id}") do
+          expect(page).to have_content((@invoice_2.total_revenue_of_invoice/100.00).to_s(:delimited))
+          expect(page).to_not have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
+        end
       end
 
     end
