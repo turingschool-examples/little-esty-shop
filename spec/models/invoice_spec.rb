@@ -78,7 +78,6 @@ RSpec.describe Invoice, type: :model do
     end
 
     it "#best_day" do
-
       expect(Invoice.best_day.created_at).to eq(@invoice_8.created_at)
     end
   end

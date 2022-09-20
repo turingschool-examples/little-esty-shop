@@ -1,5 +1,9 @@
 <h2>Invoice Id: <%= @invoice.id %> Show Page </h2>
 
+<div id="invoice-revenue">
+  <p><%= @invoice.items.total_revenue_of_all_items %></p>
+</div>
+
 <div id="invoice-info">
   <p>Invoice Id: <%= @invoice.id %></p>
   <p>Invoice Status: <%= @invoice.status %></p>
