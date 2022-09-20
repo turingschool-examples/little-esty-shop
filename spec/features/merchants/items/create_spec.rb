@@ -14,7 +14,7 @@ end
 
 describe("the item create") do
   context("given valid data") do
-    it("creates the items and redirects to the merchant items index page") do
+    it("creates the items and redirects to the merchant items index page/has disabled") do
       merchant1 = Merchant.create!(      name: "Bob")
       visit("/merchants/#{merchant1.id}/items/new")
       fill_in("Name",       with: "5gum")
@@ -23,6 +23,8 @@ describe("the item create") do
       click_button("Submit")
       expect(page).to(have_current_path("/merchants/#{merchant1.id}/items"))
       expect(page).to(have_content("5gum"))
+      newly_created_item = Item.find_by(:name)
+      expect(newly_created_item.enabled).to(eq(false))
     end
   end
 end
