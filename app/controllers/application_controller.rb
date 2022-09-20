@@ -1,7 +1,7 @@
 require_relative '../facades/github_facade'
 
 class ApplicationController < ActionController::Base
-  before_action :get_pr_total
+  before_action :get_pr_total, :user_names
   
   private
 
