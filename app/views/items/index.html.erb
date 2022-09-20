@@ -5,3 +5,12 @@
        <li><%= link_to item.name ,"/merchants/#{@merchant.id}/items/#{item.id}" %></li>
     <% end %>
 </ol>
+<ul><h2>Top 5 most popular items: </h2>
+
+<% @merchant.top_5_items.each do |item|%>
+<div id="item-<%=item.id%>">
+<li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> -  $<%= item.revenue/100.00 %> in sales</li>
+<li>Top day for <%= item.name %> was <%= item.best_day.strftime('%-m/%-d/%y') %></li>
+</div>
+<% end %>
+</ul>

@@ -21,7 +21,7 @@ RSpec.describe(Merchant, type: :model) do
     #http://www.chrisrolle.com/en/blog/boolean-attribute-validation
   end
 
-  describe("model method") do
+  describe("instance methods") do
     it("ready to ship ") do
       merchant1 = Merchant.create!(      name: "Bob")
       customer1 = Customer.create!(      first_name: "cx first name",       last_name: "cx last name")
@@ -87,6 +87,66 @@ RSpec.describe(Merchant, type: :model) do
 
 
       expect(Merchant.top_5_revenue).to eq []
+    end
+
+    describe 'instance methods' do
+      describe 'top_5_items' do
+        let!(:merchant_1) {create(:random_merchant)}
+        let!(:merchant_2) {create(:random_merchant)}
+  
+        let!(:item_1) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_2) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_3) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_4) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_5) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_6) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_7) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_8) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_9) {create(:random_item, merchant_id: merchant_1.id)}
+        let!(:item_10) {create(:random_item, merchant_id: merchant_2.id)}
+  
+        let!(:customer_1) {create(:random_customer)}
+        let!(:customer_2) {create(:random_customer)}
+        let!(:customer_3) {create(:random_customer)}
+        let!(:customer_4) {create(:random_customer)}
+      
+        let!(:invoice_1) {Invoice.create!(customer_id: customer_1.id, status: 'completed')}
+        let!(:invoice_2) {Invoice.create!(customer_id: customer_2.id, status: 'completed')}
+        let!(:invoice_3) {Invoice.create!(customer_id: customer_3.id, status: 'cancelled')}
+        let!(:invoice_4) {Invoice.create!(customer_id: customer_4.id, status: 'completed')}
+        let!(:invoice_5) {Invoice.create!(customer_id: customer_4.id, status: 'completed')}
+        let!(:invoice_6) {Invoice.create!(customer_id: customer_4.id, status: 'completed')}
+  
+        let!(:transaction_1) {Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
+        let!(:transaction_2) {Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
+        let!(:transaction_3) {Transaction.create!(invoice_id: invoice_2.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
+        let!(:transaction_4) {Transaction.create!(invoice_id: invoice_2.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
+        let!(:transaction_5) {Transaction.create!(invoice_id: invoice_3.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
+        let!(:transaction_6) {Transaction.create!(invoice_id: invoice_3.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
+        let!(:transaction_7) {Transaction.create!(invoice_id: invoice_4.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
+        let!(:transaction_8) {Transaction.create!(invoice_id: invoice_5.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'success')}
+  
+        let!(:invoice_item_1) { InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, quantity: 3, unit_price: 2000, status: 'shipped') } #6000
+        let!(:invoice_item_2) { InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_1.id, quantity: 3, unit_price: 2000, status: 'packaged') }#6000
+        let!(:invoice_item_3) { InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_2.id, quantity: 3, unit_price: 300, status: 'shipped') }#900
+        let!(:invoice_item_4) { InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_2.id, quantity: 3, unit_price: 400, status: 'pending') }#1200
+        let!(:invoice_item_5) { InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 500, status: 'pending') }#1500
+        let!(:invoice_item_6) { InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_3.id, quantity: 3, unit_price: 600, status: 'pending') }#1800
+        let!(:invoice_item_7) { InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_3.id, quantity: 3, unit_price: 700, status: 'pending') }#2100
+        let!(:invoice_item_8) { InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 800, status: 'pending') }#2400
+        let!(:invoice_item_9) { InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 900, status: 'pending') }#2700
+        let!(:invoice_item_10) { InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending') }#3000
+
+        it 'returns the 5 most popular items for a merchant by total revenue' do
+          expect(merchant_1.top_5_items).to eq([item_9, item_8, item_7, item_6, item_5])
+        end
+
+        it 'returns the total revenue generated for each item' do
+          expect(merchant_1.top_5_items[0].revenue).to eq(2700)
+          expect(merchant_1.top_5_items[2].revenue).to eq(2100)
+          expect(merchant_1.top_5_items[3].revenue).to eq(1800)
+        end
+      end
     end
   end
 end
