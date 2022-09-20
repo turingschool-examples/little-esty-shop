@@ -1,12 +1,11 @@
 require_relative '../facades/github_facade'
 
 class ApplicationController < ActionController::Base
-  # before_action :get_pr_total, :user_names
+  before_action :get_pr_total, :user_names
   
   private
 
   def user_names
-    # require 'pry' ; binding.pry
     @user_names = GitHubFacade.user_names
   end
 
