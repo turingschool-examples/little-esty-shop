@@ -14,12 +14,14 @@
   </body>
 
   <footer>
-    <p>Contributors</p>
-      <ul>
-        <% @user_names.each do |name| %>
-          <li><%= name %></li>
-        <% end %>
-      </ul>
-      <p> Our total pull requests: <%= @pr_total %> </p>
+    <div id="api_data">
+      <p>Contributors</p>
+        <ul>
+          <% @user_names.each do |name| %>
+            <li><%= name %></li>
+          <% end %>
+        </ul>
+        <p> Our total pull requests: <%= @pr_total %></p>
+    </div>
   </footer>
 </html>
