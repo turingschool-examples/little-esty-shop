@@ -4,14 +4,14 @@
 Enabled Items:
 <ol>
     <% @enabled_items.each do |item| %>
-       <li><%= item.name %> <%= button_to "Disable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
+       <li><%=link_to "#{item.name}", merchant_item_path(@merchant, item) %> <%= button_to "Disable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
     <% end %>
 </ol>
 
 Disabled Items:
 <ol>
     <% @disabled_items.each do |item| %>
-       <li><%= item.name %> <%= button_to "Enable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
+       <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <%= button_to "Enable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
     <% end %>
 </ol>
 

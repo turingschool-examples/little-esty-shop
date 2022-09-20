@@ -10,9 +10,10 @@ class Merchant < ApplicationRecord
 
   def ready_to_ship
     items
-    .select("items.*, invoice_items.status as not_shipped, invoices.created_at as created_at")
+    .select("items.*, invoice_items.status as not_shipped, invoices.created_at")
     .joins( invoices: :invoice_items)
     .where.not("invoice_items.status = ?", 2)
+    .order('invoices.created_at desc')
   end
 
   def self.top_5_revenue
@@ -44,6 +45,7 @@ class Merchant < ApplicationRecord
 
   def self.top_5_revenue
     select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:transactions).where(transactions: {result: 1}).group(:id).order('revenue desc').limit(5)
+  end
 
   def self.total_revenue
     select('invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue').where('invoice_items.status = 2').joins(items:[:invoice_items, :invoices]).group('invoices.id')
@@ -57,9 +59,5 @@ class Merchant < ApplicationRecord
     .group('items.id')
     .order('revenue desc')
     .limit(5)
-  end
-
-  def top_5_items
-    items.select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue').joins(:transactions, :invoice_items).group(:id).limit(5)
   end
 end

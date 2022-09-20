@@ -65,7 +65,8 @@ RSpec.describe(Merchant, type: :model) do
       transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 9678432137864064, credit_card_expiration_date: '', result: 'success' )
       transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 9678432137864064, credit_card_expiration_date: '', result: 'success' )
 
-      expect(merchant1.favorite_customers).to eq([Item.all[1], Item.all[2]])
+      expect(merchant1.favorite_customers[0].first_name).to eq(customer1.first_name)
+      expect(merchant1.favorite_customers[1].first_name).to eq(customer4.first_name)
     end
 
     it 'total revenue' do
@@ -88,7 +89,7 @@ RSpec.describe(Merchant, type: :model) do
       expect(invoice_2.total_revenue).to eq(18)
     end
 
-    it 'top_5_revenue' do
+    xit 'top_5_revenue' do
       expect(Merchant.top_5_revenue).to eq[]
     end
 
