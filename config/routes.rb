@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get("/dashboard",     to: "merchants#show")
     resources(:invoices,     only: [:index, :show])
     resources(:items,     only: [:index, :show, :new, :create, :edit, :update])
+    resources(:invoices,     only: [:index, :show, :update])
+    resources(:items,     only: [:index, :show, :new, :edit, :create, :update])
   end
 
   get("/merchants/:id/items/:id",   to: "items#show")
