@@ -32,13 +32,16 @@ class Merchant < ApplicationRecord
   end
 
   def favorite_customers
-    Customer
-    .select("customers.*, count(transactions) as transaction_count")
-    .joins(invoices: :transactions)
+    items.select("customers.*, count(transactions.result) as transaction_count")
+    .joins(invoices:[:transactions, :customer])
     .where(transactions: {result: 1})
-    .group(:id)
-    .order(transaction_count: :desc)
+    .group('customers.id')
+    .order('transaction_count desc')
     .limit(5)
+  end
+
+  def self.total_revenue
+    select('invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue').where('invoice_items.status = 2').joins(items:[:invoice_items, :invoices]).group('invoices.id')
   end
 
   def top_5_items
