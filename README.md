@@ -1,3 +1,10 @@
+<img width="905" alt="Screen Shot 2022-09-21 at 12 19 30 PM" src="https://user-images.githubusercontent.com/102133027/191582461-2c6b9f28-c5ac-4c02-bdab-4c482738d25e.png">
+
+
+
+
+
+
 # Little Esty Shop
 
 ## Background and Description
