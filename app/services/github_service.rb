@@ -8,4 +8,5 @@ class GithubService
   def self.pull_requests
     HTTParty.get("https://api.github.com/repos/Rileybmcc/little-esty-shop/pulls?state=closed")
   end
+
 end
