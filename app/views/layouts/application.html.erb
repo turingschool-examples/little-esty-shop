@@ -18,5 +18,9 @@
     <% end %>
     <%= yield %>
   </body>
-  <footer>Repo Name: <%= RepoSearch.all_repos.name %></footer>
+  <footer>
+  <% require 'pry'; binding.pry %>
+  <p>Repo Name: <%= RepoSearch.all_repos.name %> </p>
+  <p>Total Merged Pull Requests: <%= RepoSearch.total_merged_pulls.total_count %> </p>
+  </footer>
 </html>
