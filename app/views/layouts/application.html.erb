@@ -23,7 +23,7 @@
   <p>Total Merged Pull Requests: <%= RepoSearch.total_merged_pulls.total_count %> </p>
   <p>Contributors:</p>
   <% RepoSearch.users.each do |user|  %>
-    <p><%= user.login if user.login != "BrianZanti" %> </p>
+    <p><%= user.login if user.login != "BrianZanti" %> has <%= user.commits %> # of commits</p>
   <% end %>
   </footer>
 </html>
