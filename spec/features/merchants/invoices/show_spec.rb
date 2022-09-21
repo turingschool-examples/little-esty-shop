@@ -187,7 +187,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       create_list(:transaction, 5, invoice: invoice_4, result: :success)
 
       visit merchant_invoice_path(merchant_1, invoice_1)
-
+      save_and_open_page
       within "#invoice-revenue" do
         expect(page).to have_content(invoice_1.items.total_revenue_of_all_items)
       end
