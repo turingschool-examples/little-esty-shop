@@ -40,8 +40,13 @@ class ItemsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    @item = @merchant.items.create!(item_params)
-    redirect_to(merchant_items_path(@merchant))
+    @item = @merchant.items.new(item_params)
+    if @item.save
+      redirect_to(merchant_items_path(@merchant))
+    else
+      flash.alert = @item.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   private
