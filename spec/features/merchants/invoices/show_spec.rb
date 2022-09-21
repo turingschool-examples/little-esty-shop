@@ -41,6 +41,7 @@ RSpec.describe 'Merchant Invoice Show' do
 
     it "total revenue that will be generated from all of items on invoice" do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
       expect(page).to have_content("Total Revenue: 3400")
     end
 
@@ -53,6 +54,6 @@ RSpec.describe 'Merchant Invoice Show' do
             click_on 'Update Item Status'
 
             expect(page).to have_select('status', selected: "shipped")
-
+    
     end
 end
