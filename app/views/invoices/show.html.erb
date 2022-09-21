@@ -2,3 +2,11 @@
 <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 <p>Invoice status: <%= @invoice.status %></p>
 <p>Invoice created at: <%= @invoice.created_at.strftime("%A, %B, %d, %Y") %></p>
+
+<h2> Items on invoice: </h2>
+<% @invoice.invoice_items.each do |invoice_item| %>
+<p>Item name: <%= invoice_item.item.name %></p>
+<p>Quantity: <%= invoice_item.quantity %></p>
+<p>Sold at: <%= invoice_item.unit_price %></p>
+<p>Status: <%= invoice_item.status %></p>
+<% end %>
