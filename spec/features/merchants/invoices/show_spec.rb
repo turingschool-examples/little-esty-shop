@@ -52,7 +52,7 @@ RSpec.describe 'Merchant Invoice Show' do
             select('shipped', from: 'status')
             click_on 'Update Item Status'
 
-            expect(page).to have_select('status', selected: "pending")
+            expect(page).to have_select('status', selected: "shipped")
 
     end
 end
