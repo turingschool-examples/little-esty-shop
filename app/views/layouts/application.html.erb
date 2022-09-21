@@ -53,6 +53,11 @@
             <li><%= name %></li>
           <% end %>
         </ul>
+        <ul>
+          <% @user_commits.each do |user,num_commits| %>
+            <li><%= user %> has <%= num_commits %> commits</li>
+          <% end %>
+        </ul>
         <p> Our total pull requests: <%= @pr_total %></p>
     </div>
       </article>
