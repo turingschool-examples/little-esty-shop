@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   
-  resources :merchants, except: [:show], module: 'merchant' do
+  resources :merchants, except: [:show, :index], module: 'merchant' do
     resources :invoices, only: [:index, :show]
     resources :items, except: [:destroy]
     resources :invoice_items, only: [:update]
