@@ -107,7 +107,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
         invoice_item3 = InvoiceItem.create!(quantity:90, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice3.id)
 
         visit merchant_invoice_path(steph_merchant, invoice1)
-        expect(page).to have_content(invoice1.total_revenue)
+        expect(page).to have_content("$4,000.00")
       end
     end
   end

@@ -5,7 +5,7 @@
 
 <p> Status: <%= @invoice.status %></p>
 <p> Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-<p> Total Revenue: <%= @invoice.total_revenue %>
+<p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %>
 <h3> Customer: </h3>
   <%= @invoice.customer.first_name %>
   <%= @invoice.customer.last_name %>
@@ -18,7 +18,7 @@
     <% item.invoice_items.each do |invoice_item| %>
       <div id= "invoice_item_<%= invoice_item.id %>">
       <li><p> Quantity: <%= invoice_item.quantity %></p></li>
-      <li><p> Unit Price: <%= invoice_item.unit_price %></p></li>
+      <li><p> Unit Price: <%= number_to_currency(invoice_item.unit_price/100) %></p></li>
 
       <li><%= form_with url: invoice_item_path(invoice_item), method: :patch, local: true do |form| %>
         <%= form.hidden_field :invoice_item_id, value: "#{invoice_item.id}" %>
