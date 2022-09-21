@@ -9,6 +9,12 @@ class GitHubFacade
   #   end
   # end
 
+  def self.user_names
+    response = GitHubService.request("collaborators", true)
+    parsed = JSON.parse(response.body)
+    parsed.map { |user| user['login'] }.sort
+  end
+
 
   def self.all_repos
     data = GitHubService.get_repos
