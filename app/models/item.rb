@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   validates_presence_of :name, :description, :unit_price
   validates :unit_price, numericality: true
-  
+
   belongs_to :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
@@ -28,15 +28,24 @@ class Item < ApplicationRecord
   end
 
   def self.top_5_order_by_revenue
-    joins(invoice_items:[invoice:[:transactions]]).group(:id).where(transactions: { result: 0 }).select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue').order('total_revenue desc').limit(5)
+    joins(invoice_items:[invoice:[:transactions]])
+    .group(:id)
+    .where(transactions: { result: 0 })
+    .select('items.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
+    .order('total_revenue desc')
+    .limit(5)
   end
 
   def revenue
-    invoice_items.joins(invoice:[:transactions]).where(transactions: { result: 0 }).sum('invoice_items.quantity * invoice_items.unit_price')
+    invoice_items.joins(invoice:[:transactions])
+    .where(transactions: { result: 0 })
+    .sum('invoice_items.quantity * invoice_items.unit_price')
   end
 
   def self.total_revenue_of_all_items
-    joins(invoice_items:[invoice:[:transactions]]).where(transactions: { result: 0 }).sum('(invoice_items.unit_price * invoice_items.quantity)')
+    joins(invoice_items:[invoice:[:transactions]])
+    .where(transactions: { result: 0 })
+    .sum('(invoice_items.unit_price * invoice_items.quantity)')
   end
 
 end
