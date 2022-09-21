@@ -17,7 +17,7 @@ RSpec.describe 'Merchant Items Show Page' do
 
     it 'where I see all of the items attributes' do
       visit merchant_item_path(carly, licorice)
-      
+
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(licorice.description)
       expect(page).to have_content("$12.0")
@@ -35,18 +35,3 @@ RSpec.describe 'Merchant Items Show Page' do
     end
   end
 end
-
-  
-
-
-
-
-
-# As a merchant,
-# When I click on the name of an item from the merchant items index page,
-# Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
-# And I see all of the item's attributes including:
-
-# - Name
-# - Description
-# - Current Selling Price
