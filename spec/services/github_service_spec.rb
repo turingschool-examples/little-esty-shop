@@ -24,4 +24,12 @@ RSpec.describe GithubService do
     expect(repos[0]).to be_an(Hash)
     expect(repos[0]).to have_key(:login)
   end
+
+  it 'number of commits' do
+    allow(GithubService).to receive(:get_contributors).and_return([{contributions: 96}])
+    repos = GithubService.get_contributors
+    expect(repos).to be_an(Array)
+    expect(repos[0]).to be_an(Hash)
+    expect(repos[0]).to have_key(:contributions)
+  end
 end
