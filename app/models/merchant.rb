@@ -10,10 +10,10 @@ class Merchant < ApplicationRecord
 
   def ready_to_ship
     items
-    .select("items.*, invoice_items.status as not_shipped, invoices.created_at")
-    .joins( invoices: :invoice_items)
+    .select("items.*, invoice_items.status, invoices.created_at")
+    .joins( :invoices )
     .where.not("invoice_items.status = ?", 2)
-    .order('invoices.created_at desc')
+    .order('invoices.created_at')
   end
 
   def self.top_5_revenue

@@ -11,7 +11,10 @@ class Invoice < ApplicationRecord
   validates_numericality_of :customer_id
 
   def self.incomplete_invoices
-    joins(:invoice_items).distinct.where("invoice_items.status != ?", 2).order(:created_at)
+    joins(:invoice_items)
+    .distinct
+    .where.not("invoice_items.status = ?", 2)
+    .order(:created_at)
   end
 
   def total_revenue

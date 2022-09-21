@@ -24,11 +24,33 @@ RSpec.describe(Merchant, type: :model) do
   describe("instance methods") do
     it("ready to ship ") do
       merchant1 = Merchant.create!(      name: "Bob")
+      merchant2 = Merchant.create!(      name: "Sally")
+
       customer1 = Customer.create!(      first_name: "cx first name",       last_name: "cx last name")
+
       invoice1 = customer1.invoices.create!(      status: 1,       created_at: "2012-03-25 09:53:09")
-      item1 = merchant1.items.create!(      name: "item1",       description: "this is item1 description",       unit_price: 1)
-      invoice_item1 = InvoiceItem.create!(      item_id: item1.id,       invoice_id: invoice1.id,       unit_price: item1.unit_price,       quantity: 2,       status: 0)
-      expect(merchant1.ready_to_ship).to(eq([item1]))
+      invoice2 = customer1.invoices.create!(      status: 1,       created_at: "2012-03-26 09:53:09")
+      invoice3 = customer1.invoices.create!(      status: 1,       created_at: "2012-03-27 09:53:09")
+      invoice4 = customer1.invoices.create!(      status: 1,       created_at: "2012-03-28 09:53:09")
+      invoice5 = customer1.invoices.create!(      status: 1,       created_at: "2012-03-29 09:53:09")
+      invoice6 = customer1.invoices.create!(      status: 1,       created_at: "2012-03-29 09:53:09")
+
+      item1 = create(:random_item, merchant_id: merchant1.id)
+      item2 = create(:random_item, merchant_id: merchant1.id)
+      item3 = create(:random_item, merchant_id: merchant1.id)
+      item4 = create(:random_item, merchant_id: merchant1.id)
+      item5 = create(:random_item, merchant_id: merchant1.id)
+      item6 = create(:random_item, merchant_id: merchant1.id)
+
+      invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, unit_price: item1.unit_price, quantity: 2, status: 0)
+      invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice2.id, unit_price: item1.unit_price, quantity: 2, status: 1)
+      invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice3.id, unit_price: item1.unit_price, quantity: 2, status: 0)
+      invoice_item4 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice4.id, unit_price: item1.unit_price, quantity: 2, status: 1)
+      invoice_item5 = InvoiceItem.create!(item_id: item5.id, invoice_id: invoice5.id, unit_price: item1.unit_price, quantity: 2, status: 0)
+      invoice_item6 = InvoiceItem.create!(item_id: item6.id, invoice_id: invoice6.id, unit_price: item1.unit_price, quantity: 2, status: 2)
+
+      expect(merchant1.ready_to_ship).to(eq([item1, item2, item3, item4, item5]))
+      expect(merchant2.ready_to_ship).to eq([])
     end
 
     it 'favorite_customers' do
