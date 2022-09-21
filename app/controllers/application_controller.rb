@@ -13,7 +13,12 @@ class ApplicationController < ActionController::Base
     @repo_name = GitHubFacade.repo_name
   end
 
+
   def get_pr
     @repo_pr_number = GitHubFacade.pull_requests
   end
+
+  # def commits
+  #   @commits = GitHubFacade.all_commits
+  # end
 end

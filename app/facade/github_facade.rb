@@ -31,6 +31,16 @@ class GitHubFacade
     nil
   end
 
+  # def self.all_commits
+  #   data = GitHubService.get_commits
+  #   data[0][:commit][:author][:name]
+  #   authors_commits = Hash.new{ |author, commit_num| author[commit_num] = 0}
+  #   data.each do |commit|
+  #     commit = data[:commit]
+  #     author = data[:commit][:author][:name]
+  #   end
+  # end
+
   def self.pull_requests
     pr_data = GitHubService.get_pull_requests
 
