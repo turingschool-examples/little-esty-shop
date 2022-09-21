@@ -1,4 +1,4 @@
-require './app/facade/github'
+require './app/facade/github_facade'
 
 class ApplicationController < ActionController::Base
   before_action :repo_name

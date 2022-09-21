@@ -51,6 +51,7 @@ group(:development, :test) do
   gem("launchy")
   gem("faker")
   gem("factory_bot_rails")
+  gem 'dotenv-rails'
 end
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

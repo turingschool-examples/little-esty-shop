@@ -1,4 +1,5 @@
-require './app/service/github'
+require './app/service/github_service'
+require './app/poros/github_repo'
 
 class GitHubFacade
   # def self.repo_name
