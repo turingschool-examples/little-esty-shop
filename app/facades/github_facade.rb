@@ -3,13 +3,16 @@ require 'json'
 
 class GithubFacade
   def self.commits
-    response = GithubService.commits
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    users = [‘gjcarew’, ‘KevinT001’, ‘stephenfabian’, ‘Rileybmcc’]
+    parsed = users.map do |user|
+      response = GithubService.commits(user)
+      JSON.parse(response.body, symbolize_names: true)
+    end.flatten
     commits_arr = parsed.map do |commit|
       commit[:committer][:login]
     end
     commits = commits_arr.tally
-    commits.delete('web-flow')
+    commits.delete(‘web-flow’)
     commits
   end
 
