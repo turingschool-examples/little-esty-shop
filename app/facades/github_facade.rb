@@ -13,5 +13,12 @@ class GithubFacade
     commits
   end
 
-  
+  def self.pull_requests
+    response = GithubService.pull_requests
+    parsed = JSON.parse(response.body)
+    pr_count = parsed.count do |pr|
+      pr['merged_at'] != nil
+    end
+    pr_count
+  end
 end

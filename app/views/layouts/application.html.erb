@@ -18,6 +18,8 @@
         <% @commits.each do |user| %>
         <li> Username: <%= user[0]%> || Commits: <%= user[1] %> </li>
         <% end %>
+        <li> Total number of merged Pull Requests: <%= @prs %></li>
+          
       </ul>
     </footer>
   </body>
