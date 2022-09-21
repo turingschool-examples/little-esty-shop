@@ -8,5 +8,11 @@ RSpec.describe GitHubFacade do
         expect(GitHubFacade.user_names).to eq(%w[ajkrumholz AlainaKneiling AstridHecht LlamaBack])
       end
     end
+
+    describe '::repo_name' do
+      xit 'returns the origin repo name as s string' do
+        expect(GitHubFacade.repo_names).to eq('little-esty-shop')
+      end
+    end
   end
 end

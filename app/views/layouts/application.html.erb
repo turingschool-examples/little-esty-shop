@@ -15,19 +15,11 @@
     <nav id='navbox'>
       <%= link_to 'Invoices', '/admin/invoices', :class => "navigation div_2 #{current_class?('/admin/invoices')}" %>
       <%= link_to 'Merchants', '/admin/merchants', :class => "navigation div_2 #{current_class?('/admin/merchants')}"%>
-      <%= link_to 'Dashboard', '/admin', :class => "navigation divider #{current_class?('/admin')}"%>
+      <%= link_to 'Dashboard', '/admin', :class => "navigation divider #{current_class?('/admin') }"%>
     </nav>
   </header>
-  <%elsif !request.original_url.include?('admin'||'merchant') %>
-  <header>
-    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'>Welcome</span>
-    <nav id='navbox'>
-      <%= link_to 'Merchants Portal', '/merchants/1/dashboard', :class => "navigation div_2 #{current_class?('/admin/merchants')}"%>
-      <%= link_to 'Admin Portal', '/admin', :class => "navigation divider #{current_class?('/admin')}"%>
-    </nav>
-  </header>
-  <%else%>
-  <% page_id = request.original_url.scan(/merchants\/\d/).join.gsub('merchants/', '')%>
+  <%elsif request.original_url.include?('/merchants') %>
+  <% page_id = request.original_url.scan(/merchants\/\d+/).join.gsub('merchants/', '')%>
   <header>
     <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'><%= yield :heading %></span>
     <nav id='navbox'>
@@ -36,29 +28,46 @@
       <%= link_to 'Dashboard', "/merchants/#{page_id}/dashboard", :class => "navigation divider #{current_class?("/merchants/#{page_id}/dashboard")}"%>
     </nav>
   </header>
-  
+  <%else%>
+  <header>
+    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'>Welcome</span>
+    <nav id='navbox'>
+      <%= link_to 'Merchants Portal', '/merchants/1/dashboard', :class => "navigation div_2"%>
+      <%= link_to 'Admin Portal', '/admin', :class => "navigation divider"%>
+    </nav>
+  </header>
 <%end%>
 
   <body>
     <article>
       <%= yield %>
+      <div style='color:white'>.
+      <br>
+      .
+      <br>
+      .
+      <br>
+      .
+      <br>
+      </div>
     </article>
     <aside>
       <article>
           <%= yield :aside %>
-              <div id="api_data">
-      <p>Contributors</p>
-        <ul>
-          <% @user_names.each do |name| %>
-            <li><%= name %></li>
-          <% end %>
-        </ul>
-        <p> Our total pull requests: <%= @pr_total %></p>
-    </div>
       </article>
     </aside>
   </body>
 
+
   <footer>
+    <div id="api_data">
+        Repo name: <%= @repo_name %> | Our total pull requests: <%= @pr_total %> 
+      <p>
+        Contributors: <br>
+          | <% @user_names.each do |name| %>
+            <%= name %> |
+          <% end %>
+      </p>
+    </div>
   </footer>
 </html>

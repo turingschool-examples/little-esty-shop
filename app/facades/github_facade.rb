@@ -14,5 +14,10 @@ class GitHubFacade
     parsed = JSON.parse(response.body)
     parsed[0]["number"]
   end
-end 
 
+  def self.repo_name
+    response = GitHubService.request("", false)
+    parsed = JSON.parse(response.body)
+    parsed[0]["name"]
+  end
+end 
