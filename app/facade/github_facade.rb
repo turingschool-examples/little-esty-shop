@@ -31,6 +31,16 @@ class GitHubFacade
     end
     nil
   end
+
+  # def self.all_commits
+  #   data = GitHubService.get_commits
+  #   data[0][:commit][:author][:name]
+  #   authors_commits = Hash.new{ |author, commit_num| author[commit_num] = 0}
+  #   data.each do |commit|
+  #     commit = data[:commit]
+  #     author = data[:commit][:author][:name]
+  #   end
+  # end
 end
 
 
