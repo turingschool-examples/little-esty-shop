@@ -30,7 +30,7 @@ class GitHubFacade
   end
 
   def self.repo_name
-    response = GitHubService.request("pulls", false)
+    response = GitHubService.request("pulls?state=closed", false)
     parsed = JSON.parse(response.body)
     parsed[0]["head"]["repo"]["name"]
   end

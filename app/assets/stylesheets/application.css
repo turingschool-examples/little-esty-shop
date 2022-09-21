@@ -13,7 +13,10 @@
  *= require_tree .
  *= require_self
  */
-
+html {
+  padding: 0px;
+  margin: 0px;
+}
 
  body {
   padding: 0px;
@@ -56,7 +59,6 @@ footer {
   color: whitesmoke;
   background-color: rgb(54, 54, 54);
   text-align: center;
-  
 }
 
 #title {
@@ -69,7 +71,15 @@ footer {
 #b {
   font-style: oblique;
 }
-
+#title a {
+  color: rgb(227, 137, 33);
+  text-decoration: none;
+  
+}
+#title a:visited {
+  color: rgb(227, 137, 33);
+  text-decoration: none;
+}
 a {
   color: grey;
   text-decoration: none;

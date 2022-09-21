@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LittleEtsyShop</title>
+    <title>LittleEstyShop</title>
     <link href="../../assets/stylesheets/minimal-table.css" rel="stylesheet" type="text/css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +11,7 @@
   </head>
 <%if request.original_url.include?("/admin") %>
   <header>
-    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'>Admin Dashboard</span>
+    <h1 style='margin-right:20px' id='title'><%= link_to 'Esty', '/'%></h1> <br> <span style='position: absolute; top: 38px'>Admin Dashboard</span>
     <nav id='navbox'>
       <%= link_to 'Invoices', '/admin/invoices', :class => "navigation div_2 #{current_class?('/admin/invoices')}" %>
       <%= link_to 'Merchants', '/admin/merchants', :class => "navigation div_2 #{current_class?('/admin/merchants')}"%>
@@ -21,7 +21,7 @@
   <%elsif request.original_url.include?('/merchants') %>
   <% page_id = request.original_url.scan(/merchants\/\d+/).join.gsub('merchants/', '')%>
   <header>
-    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'><%= yield :heading %></span>
+    <h1 style='margin-right:20px' id='title'><%= link_to 'Esty', '/'%></h1> <br> <span style='position: absolute; top: 38px'><%= yield :heading %></span>
     <nav id='navbox'>
       <%= link_to 'Invoices', "/merchants/#{page_id}/invoices", :class => "navigation div_2 #{current_class?("/merchants/#{page_id}/invoices")}" %>
       <%= link_to 'My Items', "/merchants/#{page_id}/items", :class => "navigation div_2 #{current_class?("/merchants/#{page_id}/items")}"%>
@@ -30,7 +30,7 @@
   </header>
   <%else%>
   <header>
-    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'>Welcome</span>
+    <h1 style='margin-right:20px' id='title'><%= link_to 'Esty', '/'%></h1> <br> <span style='position: absolute; top: 38px'>Welcome</span>
     <nav id='navbox'>
       <%= link_to 'Merchants Portal', '/merchants/1/dashboard', :class => "navigation div_2"%>
       <%= link_to 'Admin Portal', '/admin', :class => "navigation divider"%>
