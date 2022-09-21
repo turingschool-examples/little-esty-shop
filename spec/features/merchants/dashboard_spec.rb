@@ -84,7 +84,7 @@ RSpec.describe 'Merchant Dashboard' do
       it 'then I see the name of the merchant' do
 
         visit merchant_dashboard_path(@merchant_1)
-
+        save_and_open_page
         expect(page).to have_content(@merchant_1.name)
         expect(page).to_not have_content(@merchant_2.name)
 
@@ -483,7 +483,7 @@ RSpec.describe 'Merchant Dashboard' do
           expect("Sunday, June 10, 2001").to appear_before("Sunday, October 10, 2021")
           expect("Tuesday, August 10, 2010").to appear_before("Sunday, October 10, 2021")
           expect("Sunday, October 10, 2021").to_not appear_before("Sunday, June 10, 2001")
-        end 
+        end
       end
     end
   end
