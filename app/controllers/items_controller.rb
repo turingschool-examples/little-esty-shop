@@ -35,7 +35,6 @@ class ItemsController < ApplicationController
       redirect_to(merchant_items_path(@merchant))
     else
       redirect_to(new_merchant_item_path(@merchant))
-      flash[:alert] = "Error: SOMETHING WENT WRONG "
     end
   end
 
