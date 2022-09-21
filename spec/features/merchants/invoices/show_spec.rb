@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Invoice Show Page' do 
+RSpec.describe 'Merchant Invoice Show Page' do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
@@ -25,7 +25,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
   # Invoice created_at date in the format "Monday, July 18, 2019"
   # Customer first and last name
 
-  describe 'User Story 15 - When I visit my merchants invoice show page' do 
+  describe 'User Story 15 - When I visit my merchants invoice show page' do
     it 'Then I see information related to that invoice' do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
 
@@ -119,22 +119,22 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     it 'When I click this select field, select a new status, click button I am taken back to merchant invoice show page' do
       visit  merchant_invoice_path(@merchant_1, @invoice_1)
-      
+
       select "Shipped", from: "invoice[status]"
 
       click_button "Update Item Status"
-      
+
       expect(current_path).to eq( merchant_invoice_path(@merchant_1, @invoice_1))
       within "#invoice-items-info" do
         expect(page).to have_content("Shipped")
       end
 
       visit  merchant_invoice_path(@merchant_2, @invoice_2)
-      
+
       select "Packaged", from: "invoice[status]"
 
       click_button "Update Item Status"
-      
+
       expect(current_path).to eq( merchant_invoice_path(@merchant_2, @invoice_2))
       within "#invoice-items-info" do
         expect(page).to have_content("Packaged")
@@ -165,7 +165,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       invoice_2 = create(:invoice)
       invoice_3 = create(:invoice)
       invoice_4 = create(:invoice)
-  
+
       create(:invoice_items, invoice: invoice_1, item: item_10, unit_price: 1000, quantity: 10)
       create(:invoice_items, invoice: invoice_1, item: item_5, unit_price: 900, quantity: 9)
       create(:invoice_items, invoice: invoice_1, item: item_3, unit_price: 800, quantity: 8)
@@ -176,7 +176,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       create(:invoice_items, invoice: invoice_4, item: item_8, unit_price: 300, quantity: 3)
       create(:invoice_items, invoice: invoice_4, item: item_9, unit_price: 200, quantity: 2)
       create(:invoice_items, invoice: invoice_4, item: item_1, unit_price: 100, quantity: 1)
-  
+
       create_list(:transaction, 5, invoice: invoice_1, result: :success)
       create_list(:transaction, 5, invoice: invoice_1, result: :failed)
       create_list(:transaction, 5, invoice: invoice_2, result: :failed)
