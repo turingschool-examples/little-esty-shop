@@ -10,7 +10,11 @@
 <div id="merchant-<%= merchant.id %>" >
 
   <li><%=link_to "#{merchant.name}", admin_merchant_path(merchant) %> - <%= number_to_currency((merchant.total_revenue/100.00)) %> in sales</li>
-  <p> Top selling date for <%= merchant.name %> was <%= merchant.invoices.best_day.created_at.strftime("%A, %B %d, %Y") %> </p>
+
+  <% if merchant.invoices.best_day != nil %>
+    <p> Top selling date for <%= merchant.name %> was <%= merchant.invoices.best_day.created_at.strftime("%A, %B %d, %Y") %> </p>
+  <% end %> 
+
 </div>
 <% end %>
 
