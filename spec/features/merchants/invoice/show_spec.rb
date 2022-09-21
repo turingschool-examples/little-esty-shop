@@ -67,14 +67,14 @@ RSpec.describe 'Merchant Invoice Show Page' do
         within"#item_#{item1.id}" do
           expect(page).to have_content(item1.name)
           expect(page).to have_content(invoice_item1.quantity)
-          expect(page).to have_content(invoice_item1.unit_price)
+          expect(page).to have_content("$15.00")
           expect(page).to have_content("Packaged")
         end
 
         within"#item_#{item2.id}" do
           expect(page).to have_content(item2.name)
           expect(page).to have_content(invoice_item2.quantity)
-          expect(page).to have_content(invoice_item2.unit_price)
+          expect(page).to have_content("$25.00")
           expect(page).to have_content("Packaged")
         end
 
