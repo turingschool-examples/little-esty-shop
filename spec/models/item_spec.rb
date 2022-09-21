@@ -59,7 +59,7 @@ RSpec.describe(Item, type: :model) do
         expect(item_2.best_day).to eq(Time.new(2017, 9, 1).to_date)
       end
 
-      it 'returns if an item has no invoices' do
+      it "returns 'this item has no sales' if an item has no invoices" do
         expect(item_3.best_day).to eq('This item has no sales')
       end
     end

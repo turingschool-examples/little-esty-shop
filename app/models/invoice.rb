@@ -12,11 +12,13 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     joins(:invoice_items)
     .distinct
-    .where.not("invoice_items.status = ?", 2)
+    .where
+    .not("invoice_items.status = ?", 2)
     .order(:created_at)
   end
 
   def total_revenue
-    invoice_items.sum("invoice_items.quantity * invoice_items.unit_price")
+    invoice_items
+    .sum("invoice_items.quantity * invoice_items.unit_price")
   end
 end
