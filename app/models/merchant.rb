@@ -19,7 +19,7 @@ class Merchant < ApplicationRecord
   end
 
   def invoices_distinct_by_merchant
-    invoices.group(:id).distinct
+    invoices.group(:id).distinct.sort
   end
 
   def self.top_5_order_by_revenue
