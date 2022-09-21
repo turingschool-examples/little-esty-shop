@@ -90,7 +90,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       it 'Then I see the name of my merchant' do
 
         visit "/merchants/#{carly_silo.id}/dashboard"
-        save_and_open_page
+
         expect(page).to have_content("Carly Simon's Candy Silo")
         expect(page).to_not have_content("Bavarian Motor Velocycles")
       end
