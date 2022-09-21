@@ -19,7 +19,8 @@ class GitHubFacade
   end
 
   def self.user_commits
-    response = GitHubService.request("commits", true)
+    response = GitHubService.request("commits", false)
+
     parsed = JSON.parse(response.body)
     hash = Hash.new(0)
     parsed.each do |commit|
