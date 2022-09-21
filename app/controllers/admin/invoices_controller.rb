@@ -9,7 +9,13 @@ class Admin::InvoicesController < ApplicationController
 
   def update
     invoice = Invoice.find(params[:id])
-    invoice.update(invoice_params)
+
+    if invoice.update(invoice_params)
+      flash.notice = "Invoice ##{invoice.id} was successfully updated"
+    else
+      flash.alert = @merchant.errors.full_messages.to_sentence 
+    end
+
     redirect_to admin_invoice_path(invoice)
   end
 

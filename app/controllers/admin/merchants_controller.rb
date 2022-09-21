@@ -18,6 +18,7 @@ class Admin::MerchantsController < ApplicationController
       flash.notice = "Merchant was successfully updated!" 
       redirect_to(admin_merchant_path(merchant))
     else
+      flash.errors.full_messages.to_sentence
       redirect_to(admin_merchants_path)      
     end
     
@@ -28,8 +29,15 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.create!(merchant_params)
-    redirect_to(admin_merchants_path)
+    @merchant = Merchant.new(merchant_params)
+    if @merchant.save 
+      flash.notice = "#{@merchant.name} was successfully added!"
+      redirect_to(admin_merchants_path)
+    else
+      flash.alert = @merchant.errors.full_messages.to_sentence
+      render :new
+    end
+    
   end
 
   private 
