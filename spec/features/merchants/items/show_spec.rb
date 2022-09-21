@@ -17,10 +17,10 @@ RSpec.describe 'Merchant Items Show Page' do
 
     it 'where I see all of the items attributes' do
       visit merchant_item_path(carly, licorice)
-
+      
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(licorice.description)
-      expect(page).to have_content(licorice.unit_price)
+      expect(page).to have_content("$12.0")
       expect(page).to_not have_content(peanut.name)
     end
   end
