@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+  describe 'validations' do
+    it { should define_enum_for(:status).with_values(["in progress", :completed, :cancelled]) }
+  end
 
   describe 'relationships' do
     it { should belong_to(:customer) }
@@ -10,62 +13,50 @@ RSpec.describe Invoice, type: :model do
   end
 
   before :each do
-    @merchant_1 = Merchant.create!(name: "Johns Tools")
-    @merchant_2 = Merchant.create!(name: "Hannas Hammocks")
-    @merchant_3 = Merchant.create!(name: "Pretty Plumbing")
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
+    @merchant_3 = create(:merchant)
 
-    @customer_1 = Customer.create!(first_name: "Larry", last_name: "Smith")
-    @customer_2 = Customer.create!(first_name: "Susan", last_name: "Field")
-    @customer_3 = Customer.create!(first_name: "Barry", last_name: "Roger")
-    @customer_4 = Customer.create!(first_name: "Mary", last_name: "Flower")
-    @customer_5 = Customer.create!(first_name: "Tim", last_name: "Colin")
-    @customer_6 = Customer.create!(first_name: "Harry", last_name: "Dodd")
-    @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann")
-    @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone")
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+    @customer_3 = create(:customer)
+    @customer_4 = create(:customer)
+    @customer_5 = create(:customer)
+    @customer_6 = create(:customer)
+    @customer_7 = create(:customer)
+    @customer_8 = create(:customer)
 
-    @invoice_1 = @customer_1.invoices.create!(status: :completed, created_at: "08-10-2022")
-    @invoice_2 = @customer_2.invoices.create!(status: :cancelled, created_at: "08-10-2022")
-    @invoice_3 = @customer_3.invoices.create!(status: :cancelled, created_at: "10-08-2022")
-    @invoice_4 = @customer_4.invoices.create!(status: :completed, created_at: "10-08-2022")
-    @invoice_5 = @customer_5.invoices.create!(status: :completed, created_at: "10-08-2022")
-    @invoice_6 = @customer_6.invoices.create!(status: :completed, created_at: "01-07-2022")
-    @invoice_7 = @customer_7.invoices.create!(status: :completed, created_at: "01-07-2022")
-    @invoice_8 = @customer_8.invoices.create!(status: :completed, created_at: "01-07-2022")
+    @invoice_1 = create(:invoice, status: :completed, created_at: "08-10-2022", customer: @customer_1)
+    @invoice_3 = create(:invoice, status: :cancelled, created_at: "10-08-2022", customer: @customer_3)
+    @invoice_4 = create(:invoice, status: :completed, created_at: "10-08-2022", customer: @customer_4)
+    @invoice_2 = create(:invoice, status: :cancelled, created_at: "08-10-2022", customer: @customer_2)
+    @invoice_5 = create(:invoice, status: :completed, created_at: "10-08-2022", customer: @customer_5)
+    @invoice_6 = create(:invoice, status: :completed, created_at: "01-07-2022", customer: @customer_6)
+    @invoice_7 = create(:invoice, status: :completed, created_at: "01-07-2022", customer: @customer_7)
+    @invoice_8 = create(:invoice, status: :completed, created_at: "01-07-2022", customer: @customer_8)
 
-    @item_1 = @merchant_1.items.create!(name: "Mega Tool Box", description: "Huge Toolbox with lots of options")
-    @item_2 = @merchant_2.items.create!(name: "Blue Hammock", description: "Large blue hammock for all your outdoor adventures")
-    @item_3 = @merchant_3.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.")
+    @item_1 = create(:item, merchant: @merchant_1)
+    @item_2 = create(:item, merchant: @merchant_2)
+    @item_3 = create(:item, merchant: @merchant_3)
 
-    @invoice_item1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 5, unit_price: 2000, status: :packaged)
-    @invoice_item2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: 1000, status: :pending)
-    @invoice_item3 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice_3.id, quantity: 4, unit_price: 1000, status: :shipped)
-    @invoice_item4 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_4.id, quantity: 2, unit_price: 2500, status: :pending)
-    @invoice_item5 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_5.id, quantity: 3, unit_price: 2500, status: :shipped)
-    @invoice_item6 = InvoiceItem.create!(item_id: @item_3.id, invoice_id: @invoice_5.id, quantity: 3, unit_price: 2500, status: :packaged)
+    @invoice_item1 = create(:invoice_items, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 5, unit_price: 2000, status: :packaged)
+    @invoice_item2 = create(:invoice_items, item_id: @item_2.id, invoice_id: @invoice_2.id, quantity: 1, unit_price: 1000, status: :pending)
+    @invoice_item3 = create(:invoice_items, item_id: @item_2.id, invoice_id: @invoice_3.id, quantity: 4, unit_price: 1000, status: :shipped)
+    @invoice_item4 = create(:invoice_items, item_id: @item_3.id, invoice_id: @invoice_4.id, quantity: 2, unit_price: 2500, status: :pending)
+    @invoice_item5 = create(:invoice_items, item_id: @item_3.id, invoice_id: @invoice_5.id, quantity: 3, unit_price: 2500, status: :shipped)
+    @invoice_item6 = create(:invoice_items, item_id: @item_3.id, invoice_id: @invoice_5.id, quantity: 3, unit_price: 2500, status: :packaged)
 
-    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_2 = @invoice_1.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_3 = @invoice_1.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_4 = @invoice_1.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_5 = @invoice_1.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_6 = @invoice_1.transactions.create!(credit_card_number: "5562017483947471", credit_card_expiration_date: "", result: :success)
-    @transaction_7 = @invoice_1.transactions.create!(credit_card_number: "5478972046869861", credit_card_expiration_date: "", result: :success)
-    @transaction_8 = @invoice_1.transactions.create!(credit_card_number: "4333324752400785", credit_card_expiration_date: "", result: :success)
+    @transactions_1 = create_list(:transaction, 3, result: :failed, invoice: @invoice_1)
+    @transactions_2 = create_list(:transaction, 5, result: :success, invoice: @invoice_1)
 
-    @transaction_9 = @invoice_2.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_10 = @invoice_2.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_11 = @invoice_2.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_12 = @invoice_2.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_13 = @invoice_2.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_14 = @invoice_2.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_15 = @invoice_2.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success)
-    @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success)
+    @transactions_3 = create_list(:transaction, 1, result: :failed, invoice: @invoice_2)
+    @transactions_4 = create_list(:transaction, 7, result: :success, invoice: @invoice_2)
   end
 
   describe "class methods" do
 
     it '#unshipped_invoices' do
-      expect(Invoice.unshipped_invoices).to eq([@invoice_1, @invoice_2, @invoice_4, @invoice_5])
+      expect(Invoice.unshipped_invoices).to include(@invoice_1, @invoice_2, @invoice_4, @invoice_5)
     end
 
     it '#successful_transactions_count' do
