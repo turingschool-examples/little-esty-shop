@@ -2,10 +2,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/', to: 'welcome#index'
 
-  namespace :admin do
+  namespace :admin, only: [:index] do
     get '/', to: 'dashboard#index'
-    resources :merchants
-    resources :invoices
+    resources :merchants, only: [:edit, :index, :new, :show, :create]
+    patch '/merchants/:id', to: 'merchants#update'
+
+    resources :invoices, only: [:index, :show]
+    patch '/invoices/:id', to: 'invoices#update'
   end
 
   resources :merchants, only: [:show] do
