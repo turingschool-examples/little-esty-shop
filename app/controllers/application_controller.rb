@@ -4,5 +4,6 @@ class ApplicationController < ActionController::Base
   def fetch_github_service
     @contributors = GitHubFacade.contributors
     @repo = GitHubFacade.repo
+    @pulls = GitHubFacade.pulls
   end
 end
