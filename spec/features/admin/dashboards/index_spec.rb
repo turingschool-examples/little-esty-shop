@@ -18,13 +18,13 @@ RSpec.describe "Admin Dashboard" do
         @customer_8 = create(:customer)
     
         @invoice_1 = create(:invoice, status: :completed, created_at: "08-10-2022", customer: @customer_1)
-        @invoice_2 = create(:invoice, status: :completed, created_at: "09-10-2022", customer: @customer_1)
-        @invoice_3 = create(:invoice, status: :completed, created_at: "10-08-2022", customer: @customer_1)
-        @invoice_4 = create(:invoice, status: :completed, created_at: "10-06-2022", customer: @customer_1)
-        @invoice_5 = create(:invoice, status: :completed, created_at: "10-10-2022", customer: @customer_1)
-        @invoice_6 = create(:invoice, status: :completed, created_at: "01-07-2022", customer: @customer_1)
-        @invoice_7 = create(:invoice, status: :completed, created_at: "10-09-2022", customer: @customer_1)
-        @invoice_8 = create(:invoice, status: :completed, created_at: "10-11-2022", customer: @customer_1)
+        @invoice_2 = create(:invoice, status: :completed, created_at: "09-10-2022", customer: @customer_2)
+        @invoice_3 = create(:invoice, status: :completed, created_at: "10-08-2022", customer: @customer_3)
+        @invoice_4 = create(:invoice, status: :completed, created_at: "10-06-2022", customer: @customer_4)
+        @invoice_5 = create(:invoice, status: :completed, created_at: "10-10-2022", customer: @customer_5)
+        @invoice_6 = create(:invoice, status: :completed, created_at: "01-07-2022", customer: @customer_6)
+        @invoice_7 = create(:invoice, status: :completed, created_at: "10-09-2022", customer: @customer_7)
+        @invoice_8 = create(:invoice, status: :completed, created_at: "10-11-2022", customer: @customer_8)
 
         # customer_1 transactions
         @transactions_1 = create_list(:transaction, 3, result: :failed, invoice: @invoice_1)
@@ -99,7 +99,7 @@ RSpec.describe "Admin Dashboard" do
         it "I see the names of the top 5 customers who have conducted the largest number of successful transactions" do
           visit admin_path
 
-          within("#top-5-customers") do
+            within("#top-5-customers") do
             expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name}")
             expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name}")
             expect(page).to have_content("#{@customer_3.first_name} #{@customer_3.last_name}")

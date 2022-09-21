@@ -52,7 +52,7 @@ RSpec.describe Invoice, type: :model do
   describe "class methods" do
 
     it '#unshipped_invoices' do
-      expect(Invoice.unshipped_invoices).to eq([@invoice_1, @invoice_2, @invoice_4, @invoice_5])
+      expect(Invoice.unshipped_invoices).to include(@invoice_1, @invoice_2, @invoice_4, @invoice_5)
     end
 
     it '#successful_transactions_count' do
