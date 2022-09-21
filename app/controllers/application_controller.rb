@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   def repo_name
     @repo_name = GitHubFacade.repo_name
   end
+
+  # def commits
+  #   @commits = GitHubFacade.all_commits
+  # end
 end
