@@ -29,6 +29,6 @@ RSpec.describe GithubFacade do
     allow(GithubService).to receive(:commits).and_return(service_response)
     allow(service_response).to receive(:body).and_return(response_body)
     allow(JSON).to receive(:parse).and_return(parsed)
-    expect(GithubFacade.commits).to eq({"gjcarew" => 3, "stephenfabian" => 1})
+    expect(GithubFacade.commits).to eq({"gjcarew" => 12, "stephenfabian" => 4})
   end
 end
