@@ -12,5 +12,12 @@ class GitHubFacade
     response = GitHubService.request("pulls", false)
     parsed = JSON.parse(response.body)
     parsed[0]["number"]
+    binding.pry
+
+  end
+
+  def self.user_commits
+    response = GitHubService.request("commits", true)
+
   end
 end 
