@@ -1,5 +1,4 @@
 require 'httparty'
-require 'github_facade'
 
 class GitHubService
   def self.request(path, auth_required = false)
