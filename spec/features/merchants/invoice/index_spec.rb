@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Invoice Index Page' do
+  before :each do
+    names_array = {'gjcarew' => 22, 'stephenfabian' => 25, 'Rileybmcc' => 22, 'KevinT001' => 11}
+    allow(GithubFacade).to receive(:commits).and_return(names_array)
+  end
   describe 'User Story 14 - Merchant Invoice Index Page' do
 
     it 'When I visit page, I see all of the invoice id that include at least one of my merchants items' do 
