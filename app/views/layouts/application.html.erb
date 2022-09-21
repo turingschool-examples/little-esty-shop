@@ -10,12 +10,15 @@
   </head>
 
   <body>
+    <%=yield%>
     <footer>
-      <% @github.repo_name %>
-      <% @github.users.each do user %>
-        <%= user.name %> commits: <%= user.commits%>
-      <% end %>
-      Merged PR's: <% @github.pr_count%>
+      <p> Repository name: little-esty-shop</p>
+      <p>Contributors: </p>
+      <ul>
+        <% @commits.each do |user| %>
+        <li> Username: <%= user[0]%> || Commits: <%= user[1] %> </li>
+        <% end %>
+      </ul>
     </footer>
   </body>
 </html>
