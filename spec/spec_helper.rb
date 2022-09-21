@@ -14,6 +14,7 @@
 require 'simplecov'
 SimpleCov.start do
   add_filter "spec/rails_helper.rb"
+  add_filter "app/controllers/merchants_controller.rb"
 end
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
