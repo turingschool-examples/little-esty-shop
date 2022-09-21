@@ -95,36 +95,51 @@ RSpec.describe(Merchant, type: :model) do
 
         expect(merchant1.favorite_customers[0].first_name).to eq(customer1.first_name)
         expect(merchant1.favorite_customers[1].first_name).to eq(customer2.first_name)
-        expect(merchant2.favorite_customers).to eq([])
       end
     end
     
     describe 'total_revenue' do
       it 'returns the total revenue generated from all items on an invoice' do
-        merchant1 = create(:random_merchant)
-        merchant2 = create(:random_merchant)
+        merchant1 = Merchant.create!(name: "Bob")
+        merchant2 = Merchant.create!(name: "Mark")
+        merchant3 = Merchant.create!(name: "Noah")
 
-        customer1 = create(:random_customer)
-        customer2 = create(:random_customer)
-        customer3 = create(:random_customer)
+        customer1 = Customer.create!(first_name: "Jolene", last_name: "Jones")
+        customer2 = Customer.create!(first_name: "Jake", last_name: "Jones")
+        customer3 = Customer.create!(first_name: "Sally", last_name: "Sue")
+        customer4 = Customer.create!(first_name: "Zach", last_name: "Green")
+        customer5 = Customer.create!(first_name: "Benedict", last_name: "Cumberbatch")
+        customer6 = Customer.create!(first_name: "Marky", last_name: "Mark")
+        customer7 = Customer.create!(first_name: "Scarlett", last_name: "JoJo")
 
-        invoice_1 = customer1.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
-        invoice_2 = customer2.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
-        invoice_3 = customer3.invoices.create!(status: 1, created_at: "2021-09-14 09:00:01")
+        invoice1 = customer1.invoices.create!(status: 1, created_at: "Thurdsday, July 18, 2019 ")
+        invoice2 = customer2.invoices.create!(status: 1, created_at: "Wednesday, July 17, 2019 ")
+        invoice3 = customer3.invoices.create!(status: 1, created_at: "Wednesday, July 17, 2019 ")
+        invoice4 = customer4.invoices.create!(status: 1, created_at: "Wednesday, July 17, 2019 ")
+        invoice5 = customer5.invoices.create!(status: 1, created_at: "Wednesday, July 17, 2019 ")
+        invoice6 = customer6.invoices.create!(status: 1, created_at: "Wednesday, July 17, 2019 ")
+        invoice7 = customer7.invoices.create!(status: 1, created_at: "Wednesday, July 17, 2019 ")
 
-        item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
         item2 = merchant1.items.create!(name: "item2", description: "this is item2 description", unit_price: 2)
+        item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
         item3 = merchant1.items.create!(name: "item3", description: "this is item3 description", unit_price: 3)
         item4 = merchant2.items.create!(name: "item4", description: "this is item4 description", unit_price: 3)
 
-        invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice_1.id, unit_price: item1.unit_price, quantity: 1, status: 0)
-        invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice_1.id, unit_price: item2.unit_price, quantity: 3, status: 0)
-        invoice_item3 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice_1.id, unit_price: item3.unit_price, quantity: 2, status: 0)
-        invoice_item3 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice_2.id, unit_price: item4.unit_price, quantity: 6, status: 0)
-
-        expect(invoice_1.total_revenue).to eq(13)
-        expect(invoice_2.total_revenue).to eq(18)
-        expect(invoice_3.total_revenue).to eq(0)
+        invoice_item1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, unit_price: item1.unit_price, quantity: 1, status: 2)
+        invoice_item2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, unit_price: item2.unit_price, quantity: 2, status: 2)
+        invoice_item3 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice4.id, unit_price: item3.unit_price, quantity: 3, status: 0)
+        invoice_item4 = InvoiceItem.create!(item_id: item3.id, invoice_id: invoice2.id, unit_price: item1.unit_price, quantity: 3, status: 2)
+        invoice_item5 = InvoiceItem.create!(item_id: item4.id, invoice_id: invoice3.id, unit_price: item2.unit_price, quantity: 3, status: 2)
+        
+        transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: 1234567891023456, credit_card_expiration_date: '', result: 'success' )
+        transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: 9678432137864064, credit_card_expiration_date: '', result: 'success' )
+        transaction3 = Transaction.create!(invoice_id: invoice3.id, credit_card_number: 9678432137864064, credit_card_expiration_date: '', result: 'success' )
+        transaction4 = Transaction.create!(invoice_id: invoice4.id, credit_card_number: 9678432137864064, credit_card_expiration_date: '', result: 'success' )
+        transaction5 = Transaction.create!(invoice_id: invoice5.id, credit_card_number: 9678432137864064, credit_card_expiration_date: '', result: 'success' )
+      
+        expect(merchant1.total_revenue).to eq(8)
+        expect(merchant2.total_revenue).to eq(6)
+        expect(merchant3.total_revenue).to eq(0)
       end
     end
 
