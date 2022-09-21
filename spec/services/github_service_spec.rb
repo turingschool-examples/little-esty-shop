@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'github_service'
 require 'webmock/rspec'
 
 RSpec.describe 'github service' do
