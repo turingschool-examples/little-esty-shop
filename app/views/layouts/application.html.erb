@@ -68,6 +68,9 @@
             <%= name %> |
           <% end %>
       </p>
+          | <% @user_commits.each do |user,num_commits| %>
+             <%= user %> has <%= num_commits %> commits |
+          <% end %>
     </div>
   </footer>
 </html>

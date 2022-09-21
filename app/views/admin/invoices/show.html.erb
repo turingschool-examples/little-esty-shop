@@ -6,7 +6,7 @@
     <% end %>
 
   <p>Created at: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-  <p>Total Revenue: <%= @invoice.calculate_invoice_revenue %></p>
+  <p>Total Revenue: $<%= (@invoice.calculate_invoice_revenue/100.to_f).round(2) %></p>
   <h4 style='font-size:150%'>Customer:<h4> 
   <p style='font-weight:normal; margin-top:-20px; margin-left:20px; margin-bottom:50px'><%= @invoice.customer.name %></p>
 </div>
@@ -18,7 +18,7 @@
     <tr id="item_<%= item.id %>">
       <td id="name_<%= item.id %>"><%= item.item.name %></td>
       <td id="quant_<%= item.id %>"><%= item.quantity %></td>
-      <td id="unit_price_<%= item.id %>"><%= item.unit_price %></td>
+      <td id="unit_price_<%= item.id %>"><%= (item.unit_price/100.to_f).round(2) %></td>
       <td id="status_<%= item.id %>"><%= item.status %></td>
     </tr>
   <% end %>
