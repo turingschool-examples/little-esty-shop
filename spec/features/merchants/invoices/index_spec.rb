@@ -38,7 +38,7 @@ RSpec.describe 'Merchant Invoice Index' do
   describe 'User Story 14 - visit my merchants invoices index (/merchants/merchant_id/invoices)'do
     it 'Then I see all of the invoices that include at least one of my merchants items' do
       visit merchant_invoices_path(@merchant_1)
-
+      
       within "#merchant-invoices" do
         expect(page).to have_content(@invoice_1.id)
         expect(page).to have_content(@invoice_2.id)

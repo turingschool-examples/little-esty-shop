@@ -48,6 +48,7 @@ group :development, :test do
   gem 'orderly', '~> 0.1.1'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'dotenv-rails'
 
 end
 
