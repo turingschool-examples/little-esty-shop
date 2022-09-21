@@ -4,7 +4,9 @@
 <div id="5-best-items">
   <% @merchant.items.top_5_order_by_revenue.each do |item| %>
     <p><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> - Revenue: <%= number_to_currency((item.total_revenue/100))%></p>
-    <p>Top selling date for <%= item.name %> was <%= item.invoices.best_day.created_at.strftime("%A, %B %d, %Y")%></p>
+    <% if item.invoices.best_day != nil %>
+        <p>Top selling date for <%= item.name %> was <%= item.invoices.best_day.created_at.strftime("%A, %B %d, %Y")%></p>
+    <% end %> 
   <% end %>
 </div>
 <%= button_to "Create New Item", new_merchant_item_path(@merchant) , method: :get %>
