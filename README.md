@@ -1,6 +1,6 @@
 # Little Esty Shop
-DB diagram below:
-https://app.dbdesigner.net/designer/schema/555577
+
+![Screen Shot 2022-09-12 at 2 58 46 PM](https://user-images.githubusercontent.com/106449394/191616672-dbdc4551-017e-43ce-9072-e44a4389928b.png)
 
 ## Background and Description
 
