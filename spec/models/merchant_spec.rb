@@ -126,7 +126,7 @@ RSpec.describe Merchant, type: :model do
       invoice_item2 = InvoiceItem.create!(quantity:100, unit_price: 2500, status: "packaged", item_id: item2.id, invoice_id: invoice2.id)
       invoice_item3 = InvoiceItem.create!(quantity:100, unit_price: 3500, status: "pending", item_id: item3.id, invoice_id: invoice3.id)
 
-      expect(steph_merchant.merchant_invoice_finder).to eq([invoice1, invoice2])
+      expect(steph_merchant.merchant_invoice_finder).to eq([invoice2, invoice1].sort)
     end
   end
 
