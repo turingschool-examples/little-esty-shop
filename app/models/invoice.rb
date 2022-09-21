@@ -1,5 +1,4 @@
 class Invoice < ApplicationRecord
-  included OrderableByTimestamp
   enum   status: {cancelled: 0, "in progress" => 1, completed: 2}
 
   has_many :transactions
