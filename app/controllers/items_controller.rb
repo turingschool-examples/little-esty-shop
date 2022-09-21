@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
     else 
       @item.update(item_params)
       @merchant = @item.merchant
-      redirect_to("/merchants/#{@merchant.id}/items/#{@item.id}", notice: "#{@item.name} has been successfully updated")
+      redirect_to("/merchants/#{@merchant.id}/items/#{@item.id}", alert: "#{@item.name} has been successfully updated")
     end
   end
 

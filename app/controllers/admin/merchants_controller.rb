@@ -33,7 +33,7 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
     if params[:name]
       @merchant.update(name: params[:name])
-      redirect_to admin_merchant_path
+      redirect_to admin_merchant_path, alert: "#{@merchant.name} has been successfully updated"
     else
       @merchant.toggle(:enabled).save
       redirect_to admin_merchants_path

@@ -32,12 +32,14 @@ RSpec.describe 'As an admin, when I visit an admin merchant show page' do
 
     it "has the name of merchant that corresponds to the id, and no other merchants" do
       visit admin_merchant_path(merchant_1)
+
       expect(page).to have_content(merchant_1.name)
       expect(page).to_not have_content(merchant_2.name)
     end
 
     it "has a link to update the merchants information" do
       visit admin_merchant_path(merchant_1)
+
       expect(page).to have_link("Update Merchant")
     end
   end
@@ -59,12 +61,13 @@ RSpec.describe 'As an admin, when I visit an admin merchant show page' do
       expect(current_path).to eq(admin_merchant_path(merchant_1))
     end
 
-    it "and I see that my merchant's name has been updated" do
+    it "and I see that my merchant's name has been updated and I see a message confirming the update" do
       fill_in "name", with: "Adam"
       click_button "Submit"
 
       expect(page).to have_content("Adam")
       expect(page).to_not have_content("Klein, Rempel and Jones")
+      expect(page).to have_content("Adam has been successfully updated")
     end
   end
 end
