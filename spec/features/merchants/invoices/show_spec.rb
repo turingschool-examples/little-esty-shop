@@ -33,14 +33,27 @@ RSpec.describe 'Merchant Invoice Show' do
     it "shows all my items on the invoice including item name, quantity ordered, price item sold for, and invoice item status" do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
       expect(page).to have_content("Items on invoice:")
-      expect(page).to have_content("Item name: ")
-      expect(page).to have_content("Quantity: ")
-      expect(page).to have_content("Sold at: ")
-      expect(page).to have_content("Status: ")
+      expect(page).to have_content("Item name: Sourdough")
+      expect(page).to have_content("Quantity: 4")
+      expect(page).to have_content("Sold at: 850")
+      expect(page).to have_content("Status: pending")
     end
 
     it "total revenue that will be generated from all of items on invoice" do
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
-      expect(page).to have_content("Total Revenue: ")
+
+      expect(page).to have_content("Total Revenue: 3400")
+    end
+
+    it "updates item status" do
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+
+            expect(page).to have_select('status', selected: "pending")
+
+            select('shipped', from: 'status')
+            click_on 'Update Item Status'
+
+            expect(page).to have_select('status', selected: "shipped")
+    
     end
 end
