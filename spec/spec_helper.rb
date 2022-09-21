@@ -23,7 +23,7 @@ RSpec.configure do |config|
   # assertions if you prefer.
   config.before(:each) do
     allow(GitHubFacade).to receive(:user_names).and_return(%w[Alaina-Noel Astrid-Hecht LlamaBack ajkrumholz])
-    allow(GitHubFacade).to receive(:get_pr_total).and_return(96)
+    allow(GitHubFacade).to receive(:get_pr_total).and_return(119)
     allow(GitHubFacade).to receive(:repo_name).and_return('little-esty-shop')
     allow(GitHubFacade).to receive(:user_commits).and_return({"LlamaBack"=>4, "Alaina-Noel"=>13, "ajkrumholz"=>10, "Astrid-Hecht"=>3})
   end

@@ -20,5 +20,11 @@ RSpec.describe GitHubFacade do
         expect(GitHubFacade.user_commits).to eq({"LlamaBack"=>4, "Alaina-Noel"=>13, "ajkrumholz"=>10, "Astrid-Hecht"=>3})
       end
     end
+
+    describe '::get_pr_total' do
+      it 'returns the total number of closed prs' do
+        expect(GitHubFacade.get_pr_total).to eq(119)
+      end
+    end
   end
 end
