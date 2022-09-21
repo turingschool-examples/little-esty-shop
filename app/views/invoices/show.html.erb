@@ -1,4 +1,10 @@
 <h1>Invoice ID: <%= @invoice.id %></h1>
+<%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch do |f| %>
+  <%= f.label "Item status" %>
+  <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: @invoice_item.status %>
+  <%= f.submit 'Update Item Status' %>
+<% end %>
+
 <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 <p>Invoice status: <%= @invoice.status %></p>
 <p>Invoice created at: <%= @invoice.created_at.strftime("%A, %B, %d, %Y") %></p>
