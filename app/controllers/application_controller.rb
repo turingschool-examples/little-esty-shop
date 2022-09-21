@@ -1,7 +1,8 @@
 require_relative '../facades/github_facade'
 
 class ApplicationController < ActionController::Base
-  before_action :get_pr_total, :user_names, :user_commits
+  before_action :get_pr_total, :user_names, :repo_name, :user_commits
+
   
   private
 
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   def get_pr_total
     @pr_total = GitHubFacade.get_pr_total
+  end
+
+  def repo_name
+    @repo_name = GitHubFacade.repo_name
   end
 
   def user_commits
