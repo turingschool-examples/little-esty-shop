@@ -32,6 +32,10 @@ RSpec.describe "merchant's invoices index", type: :feature do
       let!(:whitneyinvoice2_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice2.id, item_id: silver_necklace.id, quantity: 31, unit_price: 270, status:"shipped" )}
       let!(:whitneyinvoice3_itemsilver_necklace) { InvoiceItem.create!(invoice_id: whitney_invoice3.id, item_id: silver_necklace.id, quantity: 1, unit_price: 270, status:"shipped" )}
       
+      before :each do
+        allow(GitHubFacade).to receive(:user_names).and_return(%w[AlainaKneiling AstridHecht LlamaBack ajkrumholz])
+        allow(GitHubFacade).to receive(:get_pr_total).and_return(96)
+      end
 
 
       it "Then I see all of the invoices that include at least one of my merchant's items And for each invoice I see its id And each id links to the merchant invoice show page" do

@@ -1,5 +1,4 @@
 require 'json'
-require 'github_service'
 
 class GitHubFacade
 
@@ -14,4 +13,4 @@ class GitHubFacade
     parsed = JSON.parse(response.body)
     parsed[0]["number"]
   end
-end
+end 
