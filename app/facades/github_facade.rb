@@ -1,4 +1,5 @@
 require 'json'
+require 'github_service'
 
 class GitHubFacade
 
@@ -9,8 +10,9 @@ class GitHubFacade
   end
   
   def self.get_pr_total
-    response = GitHubService.request("pulls", false)
+    response = GitHubService.request("pulls?state=closed", false)
     parsed = JSON.parse(response.body)
     parsed[0]["number"]
   end
 end 
+
