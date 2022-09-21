@@ -27,8 +27,8 @@ RSpec.describe(Item, type: :model) do
 
       let!(:item_1) {create(:random_item, merchant_id: merchant_1.id)}
       let!(:item_2) {create(:random_item, merchant_id: merchant_1.id)}
+      let!(:item_3) {create(:random_item, merchant_id: merchant_1.id)}
       
-
       let!(:customer_1) {create(:random_customer)}
       let!(:customer_2) {create(:random_customer)}
       let!(:customer_3) {create(:random_customer)}
@@ -57,6 +57,10 @@ RSpec.describe(Item, type: :model) do
       it 'returns the date for each items highest grossing day' do
         expect(item_1.best_day).to eq(Time.new(2022, 9, 1).to_date)
         expect(item_2.best_day).to eq(Time.new(2017, 9, 1).to_date)
+      end
+
+      it 'returns if an item has no invoices' do
+        expect(item_3.best_day).to eq('This item has no sales')
       end
     end
   end
