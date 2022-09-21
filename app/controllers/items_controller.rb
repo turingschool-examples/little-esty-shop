@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @items = @merchant.items.distinct
-    @enabled_items = @items.where(params[:enabled] = 'true')
+    @enabled_items = @items.where('enabled = true', params[:enabled])
     @disabled_items = @items.where('enabled = false', params[:enabled])
   end
 
@@ -46,6 +46,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:name, :description, :unit_price, :merchant_id)
+    params.permit(:name, :description, :unit_price, :enabled, :merchant_id)
   end
 end

@@ -28,13 +28,17 @@ RSpec.describe("the merchant items index") do
   it("when I click on an item, I am redirected to that items show page") do
     merchant1 = Merchant.create!(    name: "Bob")
     merchant2 = Merchant.create!(    name: "Jolene")
+
     item1 = merchant1.items.create!(    name: "item1",     description: "this is item1 description",     unit_price: 1)
     item2 = merchant1.items.create!(    name: "item2",     description: "this is item2 description",     unit_price: 2)
     item3 = merchant1.items.create!(    name: "item3",     description: "this is item3 description",     unit_price: 3)
-    item4 = merchant2.items.create!(    name: "item3",     description: "this is item4 description",     unit_price: 3)
-    visit("/merchants/#{merchant1.id}/items")
+    item4 = merchant2.items.create!(    name: "item4",     description: "this is item4 description",     unit_price: 3)
 
-    click_on("#{item1.name}")
+    visit(merchant_items_path(merchant1))
+
+    within "#disabled-items-#{item1.id}" do
+      click_on("#{item1.name}")
+    end
 
     expect(current_path).to(eq(merchant_item_path(merchant1, item1)))
   end
@@ -48,7 +52,9 @@ RSpec.describe("the merchant items index") do
     item3 = merchant1.items.create!(    name: "item3",     description: "this is item3 description",     unit_price: 3)
     item4 = merchant2.items.create!(    name: "item3",     description: "this is item4 description",     unit_price: 3)
     visit("/merchants/#{merchant1.id}/items")
+
     click_on("Create New Item")
+
     expect(current_path).to(eq("/merchants/#{merchant1.id}/items/new"))
    end
 
@@ -151,49 +157,60 @@ RSpec.describe("the merchant items index") do
     end
 
     it "I see all the items associated with that merchant, divided into enabled and disabled items" do
-        merchant1 = Merchant.create!(name: "Bob")
-        merchant2 = Merchant.create!(name: "Jolene")
-        item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
-        item2 = merchant1.items.create!(name: "item2", description: "this is item2 description", unit_price: 2)
-        item3 = merchant1.items.create!(name: "item3", description: "this is item3 description", unit_price: 3)
-        item4 = merchant2.items.create!(name: "item3", description: "this is item4 description", unit_price: 3)
+      merchant1 = Merchant.create!(name: "Bob")
+      merchant2 = Merchant.create!(name: "Jolene")
+      item1 = merchant1.items.create!(name: "item1", description: "this is item1 description", unit_price: 1)
+      item2 = merchant1.items.create!(name: "item2", description: "this is item2 description", unit_price: 2)
+      item3 = merchant1.items.create!(name: "item3", description: "this is item3 description", unit_price: 3)
+      item4 = merchant2.items.create!(name: "item3", description: "this is item4 description", unit_price: 3)
 
-        visit "/merchants/#{merchant1.id}/items"
+      visit "/merchants/#{merchant1.id}/items"
 
-        expect(page).to have_content("item1")
-        expect(page).to have_content("item2")
-        expect(page).to have_content("item3")
-        expect(page).to_not have_content("item4")
-    end
+      expect(page).to have_content("item1")
+      expect(page).to have_content("item2")
+      expect(page).to have_content("item3")
+      expect(page).to_not have_content("item4")
+  end
 
     describe "enable/disable items" do
-        before(:each) do
+      before(:each) do
+        @merchant1 = Merchant.create!(name: "Bob")
+        @merchant2 = Merchant.create!(name: "Jolene")
+        @item1 = @merchant1.items.create!(name: "Crows", description: "this is item1 description", unit_price: 1)
+        @item2 = @merchant1.items.create!(name: "Bees", description: "this is item2 description", unit_price: 2)
+        @item3 = @merchant1.items.create!(name: "Swamp Monsters", description: "this is item3 description", unit_price: 3)
+        @item4 = @merchant2.items.create!(name: "Diamonds", description: "this is item4 description", unit_price: 3)
 
-            @merchant1 = Merchant.create!(name: "Bob")
-            @merchant2 = Merchant.create!(name: "Jolene")
-            @item1 = @merchant1.items.create!(name: "Crows", description: "this is item1 description", unit_price: 1)
-            @item2 = @merchant1.items.create!(name: "Bees", description: "this is item2 description", unit_price: 2)
-            @item3 = @merchant1.items.create!(name: "Swamp Monsters", description: "this is item3 description", unit_price: 3)
-            @item4 = @merchant2.items.create!(name: "Diamonds", description: "this is item4 description", unit_price: 3)
+        visit merchant_items_path(@merchant1)
+      end
 
-            visit merchant_items_path(@merchant1)
+      it "has a button next to each item to change the enabled status of the item" do
+        within "#disabled-items-#{@item1.id}" do
+          expect(page).to have_button("Enable #{@item1.name}")
+        end
+      end
+
+      it "when I click that button, I am redirected to the merchant item index page" do
+        within "#disabled-items-#{@item1.id}" do
+          click_button("Enable #{@item1.name}")
         end
 
-        it "has a button next to each item to change the enabled status of the item" do
-            #add within block here
-            expect(page).to have_button("Disable #{@item1.name}")
+        expect(current_path).to eq merchant_items_path(@merchant1)
+
+        within "#enabled-items-#{@item1.id}" do
+          expect(page).to have_button("Disable #{@item1.name}")
+        end
+      end
+
+      it "and I see that the status of the item has changed" do
+        within "#disabled-items-#{@item2.id}" do
+          click_button("Enable #{@item2.name}")
         end
 
-        it "when I click that button, I am redirected to the merchant item index page" do
-            #add within block here
-            click_button("Disable #{@item1.name}")
-            expect(current_path).to eq merchant_items_path(@merchant1)
+        within "#enabled-items-#{@item2.id}" do
+          expect(page).to have_button("Disable #{@item2.name}")
         end
-
-        it "and I see that the status of the item has changed" do
-            click_button("Disable #{@item2.name}")
-            expect(page).to have_button("Enable #{@item2.name}")
-        end
+      end
     end
     
     describe 'Next to each of the 5 most popular items I see the date with the most sales for each item' do

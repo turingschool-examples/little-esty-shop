@@ -1,24 +1,27 @@
-<h1><%= @merchant.name %>
-  Items</h1>
+<h1><%= @merchant.name %> Items</h1>
   
-  
- <%= link_to "Create New Item",new_merchant_item_path%>
+ <%= link_to "Create New Item", new_merchant_item_path %>
 
 Enabled Items:
+
 <ol>
     <% @enabled_items.each do |item| %>
+    <div id="enabled-items-<%=item.id%>">
        <li><%=link_to "#{item.name}", merchant_item_path(@merchant, item) %> <%= button_to "Disable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
     <% end %>
+    </div>
 </ol>
 
 Disabled Items:
+
 <ol>
-
-
     <% @disabled_items.each do |item| %>
+    <div id="disabled-items-<%=item.id%>">
        <li><%= link_to "#{item.name}", merchant_item_path(@merchant, item) %> <%= button_to "Enable #{item.name}", merchant_item_path(@merchant, item), method: :patch, params: {id: @merchant.id} %></li>
     <% end %>
+    </div>
 </ol>
+  
 
 <ul><h2>Top 5 most popular items: </h2>
 
@@ -30,4 +33,3 @@ Disabled Items:
 <% end %>
 </ul>
 
->>>>>>> main
