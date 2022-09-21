@@ -37,12 +37,7 @@
     <aside>
       <article>
           <%= yield :aside %>
-      </article>
-    </aside>
-  </body>
-
-  <footer>
-    <div id="api_data">
+              <div id="api_data">
       <p>Contributors</p>
         <ul>
           <% @user_names.each do |name| %>
@@ -51,5 +46,10 @@
         </ul>
         <p> Our total pull requests: <%= @pr_total %></p>
     </div>
+      </article>
+    </aside>
+  </body>
+
+  <footer>
   </footer>
 </html>
