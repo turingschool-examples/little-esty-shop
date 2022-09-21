@@ -1,8 +1,8 @@
 require 'httparty'
 
 class GithubService
-  def self.commits
-    HTTParty.get("https://api.github.com/repos/Rileybmcc/little-esty-shop/commits?per_page=100")
+  def self.commits(user)
+    HTTParty.get(“https://api.github.com/repos/Rileybmcc/little-esty-shop/commits?author=#{user}&per_page=100”)
   end
 
   def self.pull_requests
