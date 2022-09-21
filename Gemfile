@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :production, :development, :test do
   gem 'httparty'
+  gem 'figaro'
 end
 
 group :development, :test do
@@ -50,7 +51,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'httparty'
-  gem 'figaro'
 end
 
 group :development do
