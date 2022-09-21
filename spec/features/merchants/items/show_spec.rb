@@ -4,6 +4,9 @@ RSpec.describe 'Merchant Items Show Page Feature' do
   before :each do
     names_array = {'gjcarew' => 22, 'stephenfabian' => 25, 'Rileybmcc' => 22, 'KevinT001' => 11}
     allow(GithubFacade).to receive(:commits).and_return(names_array)
+
+    pull_requests_count = 3
+    allow(GithubFacade).to receive(:pull_requests).and_return(pull_requests_count)
   end
   describe 'User Story 7 - Merchant Items Show Page' do
     describe 'When I click on the name of an item from the merchant items index page' do

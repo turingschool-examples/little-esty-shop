@@ -4,6 +4,9 @@ RSpec.describe 'admin dashboard page' do
   before :each do
     names_array = {'gjcarew' => 22, 'stephenfabian' => 25, 'Rileybmcc' => 22, 'KevinT001' => 11}
     allow(GithubFacade).to receive(:commits).and_return(names_array)
+
+    pull_requests_count = 3
+    allow(GithubFacade).to receive(:pull_requests).and_return(pull_requests_count)
   end
 
   it 'can visit /admin' do
