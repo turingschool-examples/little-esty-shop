@@ -19,12 +19,15 @@
     <%= yield %>
   </body>
 <footer>
-  <p><%= @repo_name %></p>
+  <p>Repository name:<%= @repo_name %></p>
+
   <p>Contributors</p>
   <ul>
     <% @user_names.each do |name| %>
     <li><%= name %></li>
     <% end %>
   </ul>
+  <p>Pull request amount:<%=@repo_pr_number%></p>
+
 </footer>
 </html>
