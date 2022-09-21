@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    item = Item.new(    name: params[:name],     description: params[:description],     unit_price: params[:unit_price],     merchant_id: params[:merchant_id])
+    item = Item.new(    name: params[:name],     description: params[:description],     unit_price: params[:unit_price],     merchant_id: params[:merchant_id], enabled: true)
 
     if item.save
       redirect_to(merchant_items_path(@merchant))
