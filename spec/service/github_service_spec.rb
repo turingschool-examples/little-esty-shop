@@ -21,4 +21,10 @@ RSpec.describe GitHubService do
       expect(repos[0]).to be_a(Hash)
       expect(repos[0]).to have_key(:name)
   end
+
+  it 'can get user data' do
+    # allow(GitHubService).to receive(:request).and_return([{name: "Noah"}])
+    names = GitHubService.request("/collaborators")
+    expect(names).to eq [{:login=>"noahvanekdom"}]
+  end
 end

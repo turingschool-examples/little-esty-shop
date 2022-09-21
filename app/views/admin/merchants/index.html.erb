@@ -4,7 +4,8 @@
 
 <%= button_to "Create New Merchant", new_admin_merchant_path, method: :get, local: true %>
 
-Enabled Merchants:
+
+<div id="Enabled Merchants"> Enabled Merchants:
 
 <ul> <% @enabled_merchants.each do |merchant| %>
   <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
@@ -12,19 +13,20 @@ Enabled Merchants:
   </li>
 <% end%>
 </ul>
+</div>
 
-Disabled Merchants:
+<div id="Disabled Merchants"> Disabled Merchants:
+  <ul> <% @disabled_merchants.each do |merchant| %>
+    <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+      <%=button_to "Enable #{merchant.name}", admin_merchant_path(merchant), method: :patch, params: {id: merchant.id} %>
+    </li>
+  <% end%>
+  </ul>
+</div>
 
-<ul> <% @disabled_merchants.each do |merchant| %>
-  <li> <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
-    <%=button_to "Enable #{merchant.name}", admin_merchant_path(merchant), method: :patch, params: {id: merchant.id} %>
-  </li>
-<% end%>
-</ul>
-
-<h2> Top 5 Merchants by Revenue</h2>
-
-<ul> <% Merchant.top_5_revenue.each do |merchant| %>
-  <li><p> Name: <%= merchant.name %> </p><p> Best Day: <%= merchant.top_day %></p> </li>
-  <% end %>
-</ul>
+<div id="Top 5 Merchants"><h2> Top 5 Merchants by Revenue</h2>
+  <ul> <% Merchant.top_5_revenue.each do |merchant| %>
+    <li><p> Name: <%= merchant.name %> </p><p> Best Day: <%= merchant.top_day %></p> </li>
+    <% end %>
+  </ul>
+</div>
