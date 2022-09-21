@@ -9,6 +9,7 @@ class Invoice < ApplicationRecord
   def self.unshipped_invoices
     joins(:invoice_items)
     .where.not(invoice_items: {status: 2})
+    .distinct
   end
 
   def self.successful_transactions_count
