@@ -13,8 +13,6 @@ RSpec.describe "Admin Merchants" do
   
       it 'can see the name of each merchant in the system' do
         visit admin_merchants_path
-        
-        save_and_open_page
 
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_2.name)
