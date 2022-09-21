@@ -18,7 +18,7 @@ class Admin::MerchantsController < ApplicationController
       flash.notice = "Merchant was successfully updated!" 
       redirect_to(admin_merchant_path(merchant))
     else
-      flash.errors.full_messages.to_sentence
+      flash.alert = merchant.errors.full_messages.to_sentence
       redirect_to(admin_merchants_path)      
     end
     
