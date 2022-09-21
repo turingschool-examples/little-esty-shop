@@ -159,6 +159,7 @@ RSpec.describe(Merchant, type: :model) do
             it "returns the 5 merchants with the highest total revenue" do
               expect(Merchant.top_5_revenue[0].name).to eq merchant_1.name
               expect(Merchant.top_5_revenue[1].name).to eq merchant_2.name
+              expect(Merchant.top_5_revenue).to eq [merchant_1, merchant_2]
             end
           end
         end

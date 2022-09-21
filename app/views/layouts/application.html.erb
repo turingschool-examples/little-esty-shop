@@ -20,5 +20,11 @@
   </body>
 <footer>
   <p><%= @repo_name %></p>
+  <p>Contributors</p>
+  <ul>
+    <% @user_names.each do |name| %>
+    <li><%= name %></li>
+    <% end %>
+  </ul>
 </footer>
 </html>
