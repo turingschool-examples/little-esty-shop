@@ -124,23 +124,23 @@ RSpec.describe 'Merchant Dashboard' do
 
     describe 'User Story 3' do
       before :each do
-        @items_1[0].invoices << @invoice_1
-        @items_1[0].invoices << @invoice_2
-        @items_1[0].invoices << @invoice_3
-        @items_1[0].invoices << @invoice_4
-        @items_1[0].invoices << @invoice_5
-        @items_1[0].invoices << @invoice_6
-        @items_1[0].invoices << @invoice_7
-        @items_1[0].invoices << @invoice_8
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_1)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_2)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_3)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_4)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_5)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_6)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_7)
+        create(:invoice_items, item: @items_1[0], invoice: @invoice_8)
 
-        @items_2[1].invoices << @invoice_9
-        @items_2[1].invoices << @invoice_10
-        @items_2[1].invoices << @invoice_11
-        @items_2[1].invoices << @invoice_12
-        @items_2[1].invoices << @invoice_13
-        @items_2[1].invoices << @invoice_14
-        @items_2[1].invoices << @invoice_15
-        @items_2[1].invoices << @invoice_16
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_9)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_10)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_11)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_12)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_13)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_14)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_15)
+        create(:invoice_items, item: @items_2[0], invoice: @invoice_16)
       end
 
       # As a merchant,
