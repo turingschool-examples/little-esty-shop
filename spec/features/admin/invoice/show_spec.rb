@@ -39,7 +39,7 @@ RSpec.describe 'admin invoice show page' do
       expect(page).to_not have_content("Item name: Baguette")
 
       expect(page).to have_content("Quantity ordered: 4")
-      expect(page).to have_content("Price sold for: 850")
+      expect(page).to have_content("Price sold for: $850.00")
       expect(page).to have_content("Invoice Item status: pending")
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe 'admin invoice show page' do
 
       visit "/admin/invoices/#{@invoice_1.id}"
 
-      expect(page).to have_content("Total Revenue: $7240")
+      expect(page).to have_content("Total Revenue: $7,240.00")
     end
   end
 
