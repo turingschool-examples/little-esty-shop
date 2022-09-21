@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   
-  resources :merchants, except: [:show], module: 'merchant' do
+  resources :merchants, only: [:show], module: 'merchant' do
     resources :invoices, only: [:index, :show]
-    resources :items, except: [:delete]
+    resources :items, except: [:destroy]
     resources :invoice_items, only: [:update]
   end
   
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
-    resources :merchants
+    resources :merchants, except: [:destroy]
     resources :invoices, only: [:index, :show, :update]
   end
 end
