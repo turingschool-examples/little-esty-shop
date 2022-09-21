@@ -4,15 +4,6 @@ require 'webmock/rspec'
 RSpec.describe 'github service' do
   describe 'class methods' do
     describe '::request' do
-      xit 'returns data from the github api' do
-        #don't unskip this! It will fail! I promise!
-        reponse_body = GitHubService.request('collaborators')
-
-        expect(response_body).to be_an(Array)
-        expect(response_body[0]).to be_an(Hash)
-        expect(response_body[0]["login"]).to eq("LlamaBack")
-      end
-
       it 'returns a request from a specified endpoint in the github api' do
         response_body = [
           {"login"=>"LlamaBack",
