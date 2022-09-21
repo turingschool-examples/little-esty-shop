@@ -16,7 +16,7 @@ class GitHubService
 
   def self.request(path, auth_required = false)
     return [{login: 'noahvanekdom'}] if Rails.env == 'test'
-    HTTParty.get("https://api.github.com/repos/sjmann2/little-esty-shop/#{path}", headers: {authorization: "Bearer "+ENV['UNAMETOKEN']})
+    response = HTTParty.get("https://api.github.com/repos/sjmann2/little-esty-shop/#{path}", headers: {authorization: "Bearer "+ENV['UNAMETOKEN']})
     JSON.parse(response.body, symbolize_names: true)
   end
 end
