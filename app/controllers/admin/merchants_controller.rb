@@ -1,7 +1,7 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
-    @enabled_merchants = Merchant.where(params[:enabled] = 'true')
+    @enabled_merchants = Merchant.where('enabled = true', params[:enabled])
     @disabled_merchants = Merchant.where('enabled = false', params[:enabled])
 
     @top_5_merchants = Merchant.top_5_revenue

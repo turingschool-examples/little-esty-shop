@@ -130,6 +130,11 @@ RSpec.describe(Merchant, type: :model) do
     describe 'top_5_items' do
       let!(:merchant_1) {create(:random_merchant)}
       let!(:merchant_2) {create(:random_merchant)}
+      let!(:merchant_3) {create(:random_merchant)}
+      let!(:merchant_4) {create(:random_merchant)}
+      let!(:merchant_5) {create(:random_merchant)}
+      let!(:merchant_6) {create(:random_merchant)}
+      let!(:merchant_7) {create(:random_merchant)}
 
       let!(:item_1) {create(:random_item, merchant_id: merchant_1.id)}
       let!(:item_2) {create(:random_item, merchant_id: merchant_1.id)}
@@ -141,6 +146,14 @@ RSpec.describe(Merchant, type: :model) do
       let!(:item_8) {create(:random_item, merchant_id: merchant_1.id)}
       let!(:item_9) {create(:random_item, merchant_id: merchant_1.id)}
       let!(:item_10) {create(:random_item, merchant_id: merchant_2.id)}
+      #for top 5 merchants only
+      let!(:item_11) {create(:random_item, merchant_id: merchant_3.id)}
+      let!(:item_12) {create(:random_item, merchant_id: merchant_3.id)}
+      let!(:item_13) {create(:random_item, merchant_id: merchant_4.id)}
+      let!(:item_14) {create(:random_item, merchant_id: merchant_5.id)}
+      let!(:item_15) {create(:random_item, merchant_id: merchant_6.id)}
+      let!(:item_16) {create(:random_item, merchant_id: merchant_2.id)}
+      let!(:item_17) {create(:random_item, merchant_id: merchant_7.id)}
 
       let!(:customer_1) {create(:random_customer)}
       let!(:customer_2) {create(:random_customer)}
@@ -153,6 +166,12 @@ RSpec.describe(Merchant, type: :model) do
       let!(:invoice_4) {Invoice.create!(customer_id: customer_4.id, created_at: Time.new(2019, 3, 3, 12, 11, 9), status: 'completed')}
       let!(:invoice_5) {Invoice.create!(customer_id: customer_4.id, created_at: Time.new(2018, 2, 3, 12, 11, 9), status: 'completed')}
       let!(:invoice_6) {Invoice.create!(customer_id: customer_4.id, created_at: Time.new(2016, 9, 3, 9, 11, 9), status: 'completed')}
+      #for top5merchants only
+      let!(:invoice_7) {Invoice.create!(customer_id: customer_3.id, created_at: Time.new(2016, 9, 3, 9, 11, 9), status: 'completed')}
+      let!(:invoice_8) {Invoice.create!(customer_id: customer_3.id, created_at: Time.new(2016, 9, 3, 9, 11, 9), status: 'completed')}
+      let!(:invoice_9) {Invoice.create!(customer_id: customer_3.id, created_at: Time.new(2016, 9, 3, 9, 11, 9), status: 'completed')}
+      let!(:invoice_10) {Invoice.create!(customer_id: customer_3.id, created_at: Time.new(2016, 9, 3, 9, 11, 9), status: 'completed')}
+
 
       let!(:transaction_1) {Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
       let!(:transaction_2) {Transaction.create!(invoice_id: invoice_1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: '', result: 'failed')}
@@ -170,36 +189,42 @@ RSpec.describe(Merchant, type: :model) do
       let!(:invoice_item_5) { InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 500, status: 'pending', created_at: Time.new(2021, 9, 1, 10, 11, 9)) }#1500
       let!(:invoice_item_6) { InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_3.id, quantity: 3, unit_price: 600, status: 'pending', created_at: Time.new(2020, 9, 1, 11, 11, 9)) }#1800
       let!(:invoice_item_7) { InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_3.id, quantity: 3, unit_price: 700, status: 'pending', created_at: Time.new(2010, 9, 9, 19, 11, 9)) }#2100
-      let!(:invoice_item_8) { InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 800, status: 'pending', created_at: Time.new(2011, 9, 1, 14, 11, 9)) }#2400
-      let!(:invoice_item_9) { InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 900, status: 'pending', created_at: Time.new(2013, 9, 4, 12, 11, 9)) }#2700
-      let!(:invoice_item_10) { InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_8) { InvoiceItem.create!(item_id: item_8.id, invoice_id: invoice_4.id, quantity: 3, unit_price: 800, status: 'shipped', created_at: Time.new(2011, 9, 1, 14, 11, 9)) }#2400
+      let!(:invoice_item_9) { InvoiceItem.create!(item_id: item_9.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 900, status: 'shipped', created_at: Time.new(2013, 9, 4, 12, 11, 9)) }#2700
+      let!(:invoice_item_10) { InvoiceItem.create!(item_id: item_10.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'shipped', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_11) { InvoiceItem.create!(item_id: item_11.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_12) { InvoiceItem.create!(item_id: item_12.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_13) { InvoiceItem.create!(item_id: item_13.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_14) { InvoiceItem.create!(item_id: item_14.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_15) { InvoiceItem.create!(item_id: item_15.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_16) { InvoiceItem.create!(item_id: item_16.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
+      let!(:invoice_item_17) { InvoiceItem.create!(item_id: item_17.id, invoice_id: invoice_5.id, quantity: 3, unit_price: 1000, status: 'pending', created_at: Time.new(2020, 9, 3, 12, 11, 9)) }#3000
 
-      it 'returns the 5 most popular items for a merchant by total revenue' do
-        expect(merchant_1.top_5_items).to eq([item_9, item_8, item_7, item_6, item_5])
-      end
+    it 'returns the 5 most popular items for a merchant by total revenue' do
+      expect(merchant_1.top_5_items).to eq([item_9, item_8, item_7, item_6, item_5])
+    end
 
-      it 'returns the total revenue generated for each item' do
-        expect(merchant_1.top_5_items[0].revenue).to eq(2700)
-        expect(merchant_1.top_5_items[2].revenue).to eq(2100)
-        expect(merchant_1.top_5_items[3].revenue).to eq(1800)
-      end
+    it 'returns the total revenue generated for each item' do
+      expect(merchant_1.top_5_items[0].revenue).to eq(2700)
+      expect(merchant_1.top_5_items[2].revenue).to eq(2100)
+      expect(merchant_1.top_5_items[3].revenue).to eq(1800)
+    end
 
-      describe "best_day" do
-        it "returns the best day of sales for a given merchant" do
-          expect(merchant_1.top_day).to eq (Time.new(2019, 03, 03)).to_date
-          expect(merchant_2.top_day).to eq (Time.new(2018, 02, 03)).to_date
-        end
-      end
-
-      describe "class methods" do
-        describe "#top_5_revenue" do
-          it "returns the 5 merchants with the highest total revenue" do
-            expect(Merchant.top_5_revenue[0].name).to eq merchant_1.name
-            expect(Merchant.top_5_revenue[1].name).to eq merchant_2.name
-            expect(Merchant.top_5_revenue).to eq [merchant_1, merchant_2]
-          end
-        end
+    describe "best_day" do
+      it "returns the best day of sales for a given merchant" do
+        expect(merchant_1.top_day).to eq (Time.new(2019, 03, 03)).to_date
+        expect(merchant_2.top_day).to eq (Time.new(2018, 02, 03)).to_date
       end
     end
-  end
+
+    describe "#top_5_revenue" do
+      it "returns the 5 merchants with the highest total revenue" do
+        expect(Merchant.top_5_revenue[0].name).to eq merchant_1.name
+        expect(Merchant.top_5_revenue[1].name).to eq merchant_2.name
+        expect(Merchant.top_5_revenue).to eq [merchant_1, merchant_2, merchant_3, merchant_4, merchant_5]
+      end
+    end
+   end
+ end
 end
+
