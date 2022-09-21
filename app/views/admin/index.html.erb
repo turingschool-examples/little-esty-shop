@@ -19,10 +19,10 @@
   <% @top_customers.each do |customer| %>
   <div class="float child">
     <div id="customer-<%=customer.id%>">
-    <ul>
-      <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.count %> purchases</li>
+      <ul>
+        <li><%= customer.first_name %> <%= customer.last_name %> - <%= customer.count %> purchases</li>
+      </ul>
     </div>
-    </ul>
     <% end %>
   </div>
-</div>
+

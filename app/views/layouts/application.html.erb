@@ -13,8 +13,12 @@
     <% if notice %>
     <% flash.each do |type, msg| %>
     <%= msg %>
+  <% end %>
 <% end %>
-<% end %>
+
     <%= yield %>
   </body>
+<footer>
+  <p><%= @repo_name %></p>
+</footer>
 </html>
