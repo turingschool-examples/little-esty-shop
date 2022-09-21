@@ -29,13 +29,12 @@ RSpec.describe 'admin invoice show' do
 
     it 'shows all invoice info' do
         visit admin_invoice_path(alaina_invoice1)
-                
         expect(page).to have_content("##{alaina_invoice1.id}")
         expect(page).to have_content("#{alaina_invoice1.status}")
         expect(page).to have_content("Created at: #{alaina_invoice1.created_at.strftime("%A, %B %d, %Y")}")
         expect(page).to have_content("#{alaina.name}")
         expect(page).to_not have_content("#{alaina_invoice2.id}")
-        expect(page).to have_content("#{alaina_invoice1.calculate_invoice_revenue}")
+        expect(page).to have_content("#{(alaina_invoice1.calculate_invoice_revenue/100.to_f).round(2)}")
     end
 
     describe 'invoice items' do
@@ -52,9 +51,9 @@ RSpec.describe 'admin invoice show' do
             visit admin_invoice_path(alaina_invoice1)
             expect(page).to have_content(alainainvoice1_itemgold_earrings.item.name)
             expect(page).to have_content("#{alainainvoice1_itemgold_earrings.quantity}")
-            expect(page).to have_content("#{alainainvoice1_itemgold_earrings.unit_price}")
+            expect(page).to have_content("#{(alainainvoice1_itemgold_earrings.unit_price/ 100.to_f).round(2)}")
             expect(page).to have_content("#{alainainvoice1_itemgold_earrings.status}")
-            expect(page).to_not have_content(alainainvoice2_itemstudded_bracelet.unit_price)
+            expect(page).to_not have_content((alainainvoice2_itemstudded_bracelet.unit_price/ 100.to_f).round(2))
         end
     end
 
