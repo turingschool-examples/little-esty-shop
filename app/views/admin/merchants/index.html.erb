@@ -32,7 +32,7 @@
     <tr><th><h3>Top 5 Merchants by Revenue</h3></th></tr>
     <% @top_merchants.each_with_index do |merchant, index| %>
     <tr><td id='top-merchant-<%= merchant.id %>'> 
-      <%=index + 1%>. <%=  link_to merchant.name, admin_merchant_path(merchant) %> - $<%= (merchant.revenue/100.to_f).round(2) %> in revenue
+      <%=index + 1%>. <%=  link_to merchant.name, admin_merchant_path(merchant) %> - $<%= '%.2f' % (merchant.revenue) %> in revenue
       <%= "Top sales date for #{merchant.name} was #{merchant.best_sales_date}" %>
     </td></tr>
     <%end%>
