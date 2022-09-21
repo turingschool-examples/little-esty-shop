@@ -16,7 +16,6 @@ class GitHubFacade
     response = GitHubService.request("pulls?state=closed", false)
     parsed = JSON.parse(response.body)
     parsed[0]["number"]
-
   end
 
   def self.user_commits
@@ -26,6 +25,7 @@ class GitHubFacade
     parsed.each do |commit|
       hash[commit["author"]["login"]] += 1
     end
+    return hash
   end
 end 
 
