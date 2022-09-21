@@ -37,7 +37,7 @@ RSpec.describe 'Merchant Index Show Page' do
         expect(page).to have_content("Invoice ##{alaina_invoice1.id}")
         expect(page).to have_content("Status: #{alaina_invoice1.status}")
         expect(page).to have_content("Created at: #{alaina_invoice1.created_at.strftime("%A, %B %d, %Y")}")
-        expect(page).to have_content("Customer: #{alaina.name}")
+        expect(page).to have_content("#{alaina.name}")
       end
     end
 
@@ -64,14 +64,14 @@ RSpec.describe 'Merchant Index Show Page' do
       it 'displays the quantity, sale price, and status for each item' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
         within("#item_#{gold_earrings.id}") do
-          expect(page).to have_content("Quantity: #{alainainvoice9_itemgold_earrings.quantity}")
-          expect(page).to have_content("Sale Price: #{alainainvoice9_itemgold_earrings.unit_price}")
+          expect(page).to have_content("#{alainainvoice9_itemgold_earrings.quantity}")
+          expect(page).to have_content("#{((alainainvoice9_itemgold_earrings.unit_price)/100.to_f).round(2)}")
           expect(page).to have_field("Status", with: alainainvoice9_itemgold_earrings.status)
         end
 
         within("#item_#{silver_necklace.id}") do
-          expect(page).to have_content("Quantity: #{alainainvoice1_itemsilver_necklace.quantity}")
-          expect(page).to have_content("Sale Price: #{alainainvoice1_itemsilver_necklace.unit_price}")
+          expect(page).to have_content("#{alainainvoice1_itemsilver_necklace.quantity}")
+          expect(page).to have_content("#{((alainainvoice1_itemsilver_necklace.unit_price)/100.to_f).round(2)}")
           expect(page).to have_field("Status", with: alainainvoice1_itemsilver_necklace.status)
         end
       end

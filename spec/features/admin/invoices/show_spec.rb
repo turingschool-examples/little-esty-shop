@@ -29,8 +29,7 @@ RSpec.describe 'admin invoice show' do
 
     it 'shows all invoice info' do
         visit admin_invoice_path(alaina_invoice1)
-        save_and_open_page
-        
+                
         expect(page).to have_content("##{alaina_invoice1.id}")
         expect(page).to have_content("#{alaina_invoice1.status}")
         expect(page).to have_content("Created at: #{alaina_invoice1.created_at.strftime("%A, %B %d, %Y")}")
