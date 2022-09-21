@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
     else 
       @item.update(item_params)
       @merchant = @item.merchant
-      redirect_to("/merchants/#{@merchant.id}/items/#{@item.id}", notice: "#{@item.name} has been successfully updated")
+      redirect_to("/merchants/#{@merchant.id}/items/#{@item.id}", alert: "#{@item.name} has been successfully updated")
     end
   end
 
@@ -35,7 +35,6 @@ class ItemsController < ApplicationController
       redirect_to(merchant_items_path(@merchant))
     else
       redirect_to(new_merchant_item_path(@merchant))
-      flash[:alert] = "Error: SOMETHING WENT WRONG "
     end
   end
 

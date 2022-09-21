@@ -98,6 +98,7 @@ RSpec.describe(Merchant, type: :model) do
         expect(merchant2.favorite_customers).to eq([])
       end
     end
+    
     describe 'total_revenue' do
       it 'returns the total revenue generated from all items on an invoice' do
         merchant1 = create(:random_merchant)

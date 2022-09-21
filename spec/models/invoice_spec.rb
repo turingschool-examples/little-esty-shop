@@ -27,7 +27,7 @@ RSpec.describe(Invoice, type: :model) do
 
   describe 'class methods' do
     describe 'incomplete_invoices' do
-      it 'returns invoice id for all invoices that have items that have not been shipped' do
+      it 'returns invoices for all items that have not been shipped' do
         5.times do
           create(:random_customer)
         end
@@ -53,7 +53,7 @@ RSpec.describe(Invoice, type: :model) do
         invoice_item_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, quantity: 30, unit_price: 1335, status: 'pending')
         invoice_item_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, quantity: 12, unit_price: 1365, status: 'packaged')
 
-        expect(Invoice.incomplete_invoices).to eq([invoice_2, invoice_4, invoice_5 ])
+        expect(Invoice.incomplete_invoices).to eq([invoice_2, invoice_4, invoice_5])
       end
     end
   end

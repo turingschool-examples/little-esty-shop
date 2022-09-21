@@ -1,0 +1,5 @@
+<%= form_with url: path, method: method, local: true do |form| %>
+  <%= form.label label %>
+  <%= form.select label, options, selected: selected  %>
+  <%= form.submit submit %>
+<% end %>
