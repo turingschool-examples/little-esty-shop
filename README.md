@@ -1,4 +1,13 @@
+<img width="880" alt="Screen Shot 2022-09-21 at 1 24 13 PM" src="https://user-images.githubusercontent.com/102133027/191592811-8d89d231-457a-4eee-a74c-9ccbb70612f1.png">
+
+
 # Little Esty Shop
+
+In this project our group created a program that allows us to operate a digital store with may merchants and items.  When a customer buys something, an invoice is created which links to both a transaction and invoice_items.  The transaction handles the monetary information; the credit card number and expiration date. The invoice_items contain the quantity and  item id which links the invoice_item to the item table.  Finally the merchant can access each of their items and through the item they can see the invoice_item to see quantity.    
+
+Using our application you can make changes to a merchant such as adding new items, and enabling or disabling items.  Accessing our application as an admin allows more access to data and other features including enabling or disabling merchants and merchants revenues.
+
+On every page there is a footer that displays our repository name, contributors GitHub usernames and a count of each contributors commits.
 
 ## Background and Description
 
