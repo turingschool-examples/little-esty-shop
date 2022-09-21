@@ -12,13 +12,13 @@ RSpec.describe 'admin merchant index page' do
     @merchant1 = Merchant.create(name: "Robespierre the Second")
   end
 
-  it 'can redirect to edit page from admin index' do
+  it 'can redirect to edit page from admin merchant show' do
     # require "pry"; binding.pry
-    visit '/admin/merchants'
+    visit admin_merchant_path(@merchant1.id)
+    save_and_open_page
+    expect(page).to have_content("#{@merchant1.name}")
 
-    within(".merchant_#{@merchant1.id}") do
-      click_on 'Edit'
-    end
+    click_on 'Edit'
 
     expect(current_path).to eq("/admin/merchants/#{@merchant1.id}/edit")
   end
