@@ -14,12 +14,15 @@
  *= require_self
  */
 
+ html {
  
+ }
  body {
   padding: 0px;
   margin: 0px;
   min-width: 770px;
   overflow-x: scroll;
+  height: 110%;
  }
  
  header {
@@ -43,6 +46,19 @@ aside {
   right: 0px;
   margin-top: 18px;
   margin-right: 20px;
+}
+
+footer {
+  width: 100vw;
+  height: 9vh;
+  padding-top: 1.75vh;
+  position: fixed;
+  bottom: 0px;
+  font-size: 10px;
+  color: whitesmoke;
+  background-color: rgb(54, 54, 54);
+  text-align: center;
+  
 }
 
 #title {

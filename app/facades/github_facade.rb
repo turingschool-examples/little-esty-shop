@@ -16,6 +16,7 @@ class GitHubFacade
     response = GitHubService.request("pulls?state=closed", false)
     parsed = JSON.parse(response.body)
     parsed[0]["number"]
+
   end
 
   def self.user_commits
@@ -27,5 +28,10 @@ class GitHubFacade
     end
     return hash
   end
-end 
 
+  def self.repo_name
+    response = GitHubService.request("pulls", false)
+    parsed = JSON.parse(response.body)
+    parsed[0]["head"]["repo"]["name"]
+  end
+end 
