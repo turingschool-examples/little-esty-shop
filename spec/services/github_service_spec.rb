@@ -16,4 +16,12 @@ RSpec.describe GithubService do
     expect(repos[0]).to be_an(Hash)
     expect(repos[0]).to have_key(:total_count)
   end
+
+  it 'contributors' do
+    allow(GithubService).to receive(:get_contributors).and_return([{login: "BrianZanti"}])
+    repos = GithubService.get_contributors
+    expect(repos).to be_an(Array)
+    expect(repos[0]).to be_an(Hash)
+    expect(repos[0]).to have_key(:login)
+  end
 end
