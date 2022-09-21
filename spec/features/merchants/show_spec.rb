@@ -101,9 +101,9 @@ RSpec.describe("the merchant dashboard") do
             expect(page).to(have_content("created at #{invoice2.created_at.strftime("%A,%B %d, %Y")}"))
           end
           
-          expect(item3.name).to(appear_before(item2.name))
-          expect(item2.name).to(appear_before(item1.name))
-          expect(item1.name).to_not appear_before(item3.name)
+          expect(item1.name).to(appear_before(item2.name))
+          expect(item2.name).to(appear_before(item3.name))
+          expect(item3.name).to_not appear_before(item1.name)
         end
       end
     end
