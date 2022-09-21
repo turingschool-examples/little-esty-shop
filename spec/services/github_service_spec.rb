@@ -8,4 +8,12 @@ RSpec.describe GithubService do
     expect(repos[0]).to be_an(Hash)
     expect(repos[0]).to have_key(:name)
   end
+
+  it 'can get total merged pull requests made for repo' do
+    allow(GithubService).to receive(:get_total_pulls).and_return([{total_count: 2 }])
+    repos = GithubService.get_total_pulls
+    expect(repos).to be_an(Array)
+    expect(repos[0]).to be_an(Hash)
+    expect(repos[0]).to have_key(:total_count)
+  end
 end
