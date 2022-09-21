@@ -117,5 +117,10 @@ RSpec.describe 'merchant dashboard' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
       expect(page).to have_content("Created at: #{@merchant_1.created_at.strftime("%A, %B, %d, %Y")}")
     end
+
+    it "shows name of specific merchant" do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+      expect(page).to have_content("Merchant name: #{@merchant_1.name}")
+    end
   end
 end
