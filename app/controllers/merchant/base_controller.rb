@@ -1,5 +1,5 @@
 class Merchant::BaseController < ApplicationController
-  before_action :set_merchant, only: [:index, :show, :create, :update]
+  before_action :set_merchant, only: [:index, :show, :create, :update, :edit]
 
 private
   def set_merchant
