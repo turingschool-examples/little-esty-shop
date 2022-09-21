@@ -113,11 +113,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
-<<<<<<< HEAD
-      racc (~> 1.4)
-    nokogiri (1.13.8-arm64-darwin)
-=======
->>>>>>> 4537c0f27d9ed08cb2ceeea6d8f5f09800080a72
       racc (~> 1.4)
     orderly (0.1.1)
       capybara (>= 1.1)
@@ -240,10 +235,6 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
-<<<<<<< HEAD
-  arm64-darwin-21
-=======
->>>>>>> 4537c0f27d9ed08cb2ceeea6d8f5f09800080a72
   ruby
 
 DEPENDENCIES
