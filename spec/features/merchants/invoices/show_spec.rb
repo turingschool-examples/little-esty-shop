@@ -98,7 +98,7 @@ RSpec.describe 'Merchant Index Show Page' do
         visit merchant_invoice_path(jewlery_city, alaina_invoice1)
 
         within("#total_invoice_revenue") do
-          expect(page).to have_content("Total Revenue From This Invoice: $#{'%.2f' % alaina_invoice1.calculate_invoice_revenue}")
+          expect(page).to have_content("Total Revenue From This Invoice: $#{sprintf("%.2f",alaina_invoice1.calculate_invoice_revenue/100.to_f)}")
         end
       end
 
