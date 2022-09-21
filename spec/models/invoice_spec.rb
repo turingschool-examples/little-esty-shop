@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+  describe 'validations' do
+    it { should define_enum_for(:status).with_values(["in progress", :completed, :cancelled]) }
+  end
+
   describe 'relationships' do
     it { should belong_to(:customer) }
     it { should have_many(:transactions) }
