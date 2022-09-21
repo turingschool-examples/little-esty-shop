@@ -20,7 +20,7 @@ RSpec.describe(GitHubService) do
   end
 
   it("can get Pullrequest ") do
-    allow(GitHubService).to(receive(:get_uri).and_return([{name: "little-esty-shop", full_name: "sjmann2/little-esty-shop"}]))
+    allow(GitHubService).to(receive(:get_uri).and_return([number: 37]))
     repos = GitHubService.get_pr("https://api.github.com/repos/sjmann2/little-esty-shop/pulls?state=all")
     expect(repos).to(be_an(Array))
     expect(repos[0]).to(be_a(Hash))

@@ -1,7 +1,7 @@
 require "./app/facade/github_facade"
 
 class ApplicationController < ActionController::Base
-  before_action :user_names, :repo_name
+  before_action :user_names, :repo_name, :get_pr
 
   private
 

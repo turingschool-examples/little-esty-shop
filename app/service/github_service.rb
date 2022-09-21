@@ -7,7 +7,7 @@ class GitHubService
   end
 
   def self.get_pull_requests
-    get_pr("https://api.github.com/users/sjmann2/repos/little-esty-shop/pulls")
+    get_pr("https://api.github.com/repos/sjmann2/little-esty-shop/pulls?state=all")
   end
 
   def self.get_uri(uri)
@@ -21,13 +21,13 @@ class GitHubService
   def self.request(path, auth_required = false)
 
     return [{login: "noahvanekdom"}] if Rails.env == "test"
-    HTTParty.get("https://api.github.com/repos/sjmann2/little-esty-shop/#{path}",     headers: {authorization: "Bearer " + ENV["UNAMETOKEN"]})
-    response = JSON.parse(response.body,     symbolize_names: true)
+    response = HTTParty.get("https://api.github.com/repos/sjmann2/little-esty-shop/#{path}",     headers: {authorization: "Bearer " + ENV["UNAMETOKEN"]})
+    JSON.parse(response.body,     symbolize_names: true)
   end
 
-  def self.get_pr
+  def self.get_pr(uri)
     return [{number: 37}] if Rails.env == "test"
-    HTTParty.get("https://api.github.com/repos/sjmann2/little-esty-shop/pulls?state=all")
-    response = JSON.parse(response.body,     symbolize_names: true)
+    response = HTTParty.get(uri)
+    JSON.parse(response.body,     symbolize_names: true)
   end
 end
