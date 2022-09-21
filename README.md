@@ -1,14 +1,23 @@
 # Little Esty Shop
+DB diagram below:
+https://app.dbdesigner.net/designer/schema/555577
 
 ## Background and Description
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a group project that builds a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
+- All functionality of merchants is the same for items within the app
+- admin and merchants utilize a dashboard with links to index of merchants and invoices
+- Within the respective admin or merchant page, a new merchant can be create
+- Within the respective admin or merchant page, you can update an existing merchant
+- You can enable and disable merchant status and have the merchant sorted into the appropriate status category 
+- Access to a specific merchant or admin/invoice show page will display itemized info
+- Top merchants/customers are displayed along with their total revenue as well as their best day of sales
+
+## Goals
+- Designing a normalized database schema and defining model relationships
 - Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+- Consumed a public API while utilizing POROs as a way to apply OOP principles to organize code
 
 ## Requirements
 - must use Rails 5.2.x
