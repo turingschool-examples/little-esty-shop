@@ -135,11 +135,11 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         expect(page).to have_content("Top 5 Customers")
         
         within('#top_5_customers') do 
-          expect(page).to have_content("1.#{whitney.first_name} #{whitney.last_name} #{whitney.num_succesful_transactions} purchases")
-          expect(page).to have_content("2.#{alaina.first_name} #{alaina.last_name} #{alaina.num_succesful_transactions} purchases")
-          expect(page).to have_content("3.#{eddie.first_name} #{eddie.last_name} #{eddie.num_succesful_transactions} purchases")
-          expect(page).to have_content("4.#{polina.first_name} #{polina.last_name} #{polina.num_succesful_transactions} purchases")
-          expect(page).to have_content("5.#{ryan.first_name} #{ryan.last_name} #{ryan.num_succesful_transactions} purchases")
+          expect(page).to have_content("1.#{whitney.first_name} #{whitney.last_name} - #{whitney.num_succesful_transactions} purchases")
+          expect(page).to have_content("2.#{alaina.first_name} #{alaina.last_name} - #{alaina.num_succesful_transactions} purchases")
+          expect(page).to have_content("3.#{eddie.first_name} #{eddie.last_name} - #{eddie.num_succesful_transactions} purchases")
+          expect(page).to have_content("4.#{polina.first_name} #{polina.last_name} - #{polina.num_succesful_transactions} purchases")
+          expect(page).to have_content("5.#{ryan.first_name} #{ryan.last_name} - #{ryan.num_succesful_transactions} purchases")
         end
       end
 

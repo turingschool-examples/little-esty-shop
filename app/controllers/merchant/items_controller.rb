@@ -10,7 +10,7 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def new
-
+    
   end
 
   def create
