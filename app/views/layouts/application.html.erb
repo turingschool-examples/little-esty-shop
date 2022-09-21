@@ -18,6 +18,14 @@
       <%= link_to 'Dashboard', '/admin', :class => "navigation divider #{current_class?('/admin')}"%>
     </nav>
   </header>
+  <%elsif !request.original_url.include?('admin'||'merchant') %>
+  <header>
+    <h1 style='margin-right:20px' id='title'>Esty</h1> <br> <span style='position: absolute; top: 38px'>Welcome</span>
+    <nav id='navbox'>
+      <%= link_to 'Merchants Portal', '/merchants/1/dashboard', :class => "navigation div_2 #{current_class?('/admin/merchants')}"%>
+      <%= link_to 'Admin Portal', '/admin', :class => "navigation divider #{current_class?('/admin')}"%>
+    </nav>
+  </header>
   <%else%>
   <% page_id = request.original_url.scan(/merchants\/\d/).join.gsub('merchants/', '')%>
   <header>
@@ -28,6 +36,7 @@
       <%= link_to 'Dashboard', "/merchants/#{page_id}/dashboard", :class => "navigation divider #{current_class?("/merchants/#{page_id}/dashboard")}"%>
     </nav>
   </header>
+  
 <%end%>
 
   <body>
@@ -37,12 +46,7 @@
     <aside>
       <article>
           <%= yield :aside %>
-      </article>
-    </aside>
-  </body>
-
-  <footer>
-    <div id="api_data">
+              <div id="api_data">
       <p>Contributors</p>
         <ul>
           <% @user_names.each do |name| %>
@@ -51,5 +55,10 @@
         </ul>
         <p> Our total pull requests: <%= @pr_total %></p>
     </div>
+      </article>
+    </aside>
+  </body>
+
+  <footer>
   </footer>
 </html>

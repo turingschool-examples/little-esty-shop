@@ -21,7 +21,7 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def edit
-
+    
   end
 
   def update
