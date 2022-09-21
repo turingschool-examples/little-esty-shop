@@ -30,12 +30,11 @@ class ItemsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    item = Item.new(    name: params[:name],     description: params[:description],     unit_price: params[:unit_price],     merchant_id: params[:merchant_id], enabled: true)
-
+    item = Item.new(item_params)
     if item.save
       redirect_to(merchant_items_path(@merchant))
     else
-      redirect_to(new_merchant_items_path(@merchant))
+      redirect_to(new_merchant_item_path(@merchant))
       flash[:alert] = "Error: SOMETHING WENT WRONG "
     end
   end
@@ -47,6 +46,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:name, :description, :unit_price)
+    params.permit(:name, :description, :unit_price, :merchant_id)
   end
 end
