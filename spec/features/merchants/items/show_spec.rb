@@ -20,7 +20,7 @@ RSpec.describe 'Merchant Items Show Page' do
 
       expect(page).to have_content(licorice.name)
       expect(page).to have_content(licorice.description)
-      expect(page).to have_content("$12.0")
+      expect(page).to have_content("$12.00")
       expect(page).to_not have_content(peanut.name)
     end
   end
