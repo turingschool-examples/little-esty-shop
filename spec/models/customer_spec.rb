@@ -10,82 +10,91 @@ RSpec.describe Customer, type: :model do
   end
 
   before :each do
-    @pretty_plumbing = Merchant.create!(name: "Pretty Plumbing")
-    @sink = @pretty_plumbing.items.create!(name: "Super Sink", description: "Super Sink with Superpowers.")
+    @merchant_1 = create(:merchant)
+    @item = create(:item, merchant: @merchant_1)
 
-    @customer_1 = Customer.create!(first_name: "Larry", last_name: "Smith")
-    @customer_2 = Customer.create!(first_name: "Susan", last_name: "Field")
-    @customer_3 = Customer.create!(first_name: "Barry", last_name: "Roger")
-    @customer_4 = Customer.create!(first_name: "Mary", last_name: "Flower")
-    @customer_5 = Customer.create!(first_name: "Tim", last_name: "Colin")
-    @customer_6 = Customer.create!(first_name: "Harry", last_name: "Dodd")
-    @customer_7 = Customer.create!(first_name: "Molly", last_name: "McMann")
-    @customer_8 = Customer.create!(first_name: "Gary", last_name: "Jone")
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+    @customer_3 = create(:customer)
+    @customer_4 = create(:customer)
+    @customer_5 = create(:customer)
+    @customer_6 = create(:customer)
+    @customer_7 = create(:customer)
+    @customer_8 = create(:customer)
 
-    @invoice_1 = @customer_1.invoices.create!(status: :completed)
-    @invoice_2 = @customer_2.invoices.create!(status: :completed)
-    @invoice_3 = @customer_3.invoices.create!(status: :completed)
-    @invoice_4 = @customer_4.invoices.create!(status: :completed)
-    @invoice_5 = @customer_5.invoices.create!(status: :completed)
-    @invoice_6 = @customer_6.invoices.create!(status: :completed)
-    @invoice_7 = @customer_7.invoices.create!(status: :completed)
-    @invoice_8 = @customer_8.invoices.create!(status: :completed)
+    @invoice_1 = create(:invoice, status: :completed, customer: @customer_1)
+    @invoice_2 = create(:invoice, status: :completed, customer: @customer_2)
+    @invoice_3 = create(:invoice, status: :completed, customer: @customer_3)
+    @invoice_4 = create(:invoice, status: :completed, customer: @customer_4)
+    @invoice_5 = create(:invoice, status: :completed, customer: @customer_5)
+    @invoice_6 = create(:invoice, status: :completed, customer: @customer_6)
+    @invoice_7 = create(:invoice, status: :completed, customer: @customer_7)
+    @invoice_8 = create(:invoice, status: :completed, customer: @customer_8)
     # customer_1 transactions
-    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_2 = @invoice_1.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_3 = @invoice_1.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_4 = @invoice_1.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_5 = @invoice_1.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_6 = @invoice_1.transactions.create!(credit_card_number: "5562017483947471", credit_card_expiration_date: "", result: :success)
-    @transaction_7 = @invoice_1.transactions.create!(credit_card_number: "5478972046869861", credit_card_expiration_date: "", result: :success)
-    @transaction_8 = @invoice_1.transactions.create!(credit_card_number: "4333324752400785", credit_card_expiration_date: "", result: :success)
+    @transaction_1 = create(:transaction, result: :failed, invoice: @invoice_1)
+    @transaction_2 = create(:transaction, result: :failed, invoice: @invoice_1)
+    @transaction_3 = create(:transaction, result: :failed, invoice: @invoice_1)
+    @transaction_4 = create(:transaction, result: :success, invoice: @invoice_1)
+    @transaction_5 = create(:transaction, result: :success, invoice: @invoice_1)
+    @transaction_6 = create(:transaction, result: :success, invoice: @invoice_1)
+    @transaction_7 = create(:transaction, result: :success, invoice: @invoice_1)
+    @transaction_8 = create(:transaction, result: :success, invoice: @invoice_1)
     # customer_2 transactions
-    @transaction_9 = @invoice_2.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_10 = @invoice_2.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_11 = @invoice_2.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_12 = @invoice_2.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_13 = @invoice_2.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_14 = @invoice_2.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_15 = @invoice_2.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success)
-    @transaction_16 = @invoice_2.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success)
+    @transaction_9 = create(:transaction, result: :failed, invoice: @invoice_2)
+    @transaction_10 = create(:transaction, result: :success, invoice: @invoice_2)
+    @transaction_11 = create(:transaction, result: :success, invoice: @invoice_2)
+    @transaction_12 = create(:transaction, result: :success, invoice: @invoice_2)
+    @transaction_13 = create(:transaction, result: :success, invoice: @invoice_2)
+    @transaction_14 = create(:transaction, result: :success, invoice: @invoice_2)
+    @transaction_15 = create(:transaction, result: :success, invoice: @invoice_2)
+    @transaction_16 = create(:transaction, result: :success, invoice: @invoice_2)
     # customer_3 transactions
-    @transaction_17 = @invoice_3.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_18 = @invoice_3.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_19 = @invoice_3.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_20 = @invoice_3.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_21 = @invoice_3.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_22 = @invoice_3.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_23 = @invoice_3.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :failed)
-    @transaction_24 = @invoice_3.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :failed)
+    @transaction_17 = create(:transaction, result: :success, invoice: @invoice_3)
+    @transaction_18 = create(:transaction, result: :success, invoice: @invoice_3)
+    @transaction_19 = create(:transaction, result: :success, invoice: @invoice_3)
+    @transaction_20 = create(:transaction, result: :success, invoice: @invoice_3)
+    @transaction_21 = create(:transaction, result: :success, invoice: @invoice_3)
+    @transaction_22 = create(:transaction, result: :success, invoice: @invoice_3)
+    @transaction_23 = create(:transaction, result: :failed, invoice: @invoice_3)
+    @transaction_24 = create(:transaction, result: :failed, invoice: @invoice_3)
     # customer_4 transactions
-    @transaction_25 = @invoice_4.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_26 = @invoice_4.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_27 = @invoice_4.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_28 = @invoice_4.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
-    @transaction_29 = @invoice_4.transactions.create!(credit_card_number: "6965074599341776", credit_card_expiration_date: "", result: :success)
-    @transaction_30 = @invoice_4.transactions.create!(credit_card_number: "9626688955535156", credit_card_expiration_date: "", result: :success)
-    @transaction_31 = @invoice_4.transactions.create!(credit_card_number: "0672614265387781", credit_card_expiration_date: "", result: :success)
-    @transaction_32 = @invoice_4.transactions.create!(credit_card_number: "3141635535272083", credit_card_expiration_date: "", result: :success)
+    @transaction_25 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_26 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_27 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_28 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_29 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_30 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_31 = create(:transaction, result: :success, invoice: @invoice_4)
+    @transaction_32 = create(:transaction, result: :success, invoice: @invoice_4)
     # customer_5 transactions
-    @transaction_33 = @invoice_5.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :failed)
-    @transaction_34 = @invoice_5.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_35 = @invoice_5.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_36 = @invoice_5.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :failed)
+    @transaction_33 = create(:transaction, result: :failed, invoice: @invoice_5)
+    @transaction_34 = create(:transaction, result: :failed, invoice: @invoice_5)
+    @transaction_35 = create(:transaction, result: :failed, invoice: @invoice_5)
+    @transaction_36 = create(:transaction, result: :failed, invoice: @invoice_5)
     # customer_6 transactions
-    @transaction_37 = @invoice_6.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_38 = @invoice_6.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_39 = @invoice_6.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_40 = @invoice_6.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :failed)
+    @transaction_37 = create(:transaction, result: :success, invoice: @invoice_6)
+    @transaction_38 = create(:transaction, result: :success, invoice: @invoice_6)
+    @transaction_39 = create(:transaction, result: :success, invoice: @invoice_6)
+    @transaction_40 = create(:transaction, result: :failed, invoice: @invoice_6)
     # customer_7 transactions
-    @transaction_41 = @invoice_7.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_42 = @invoice_7.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :failed)
-    @transaction_43 = @invoice_7.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :failed)
-    @transaction_44 = @invoice_7.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :failed)
+    @transaction_41 = create(:transaction, result: :failed, invoice: @invoice_7)
+    @transaction_42 = create(:transaction, result: :success, invoice: @invoice_7)
+    @transaction_43 = create(:transaction, result: :success, invoice: @invoice_7)
+    @transaction_44 = create(:transaction, result: :success, invoice: @invoice_7)
     # customer_8 transactions
-    @transaction_45 = @invoice_8.transactions.create!(credit_card_number: "0657559737742582", credit_card_expiration_date: "", result: :success)
-    @transaction_46 = @invoice_8.transactions.create!(credit_card_number: "4597070635635151", credit_card_expiration_date: "", result: :success)
-    @transaction_47 = @invoice_8.transactions.create!(credit_card_number: "2020066659240113", credit_card_expiration_date: "", result: :success)
-    @transaction_48 = @invoice_8.transactions.create!(credit_card_number: "8860016236091988", credit_card_expiration_date: "", result: :success)
+    @transaction_45 = create(:transaction, result: :success, invoice: @invoice_8)
+    @transaction_46 = create(:transaction, result: :success, invoice: @invoice_8)
+    @transaction_47 = create(:transaction, result: :success, invoice: @invoice_8)
+    @transaction_48 = create(:transaction, result: :success, invoice: @invoice_8)
+
+    create(:invoice_items, item: @item, invoice: @invoice_1)
+    create(:invoice_items, item: @item, invoice: @invoice_2)
+    create(:invoice_items, item: @item, invoice: @invoice_3)
+    create(:invoice_items, item: @item, invoice: @invoice_4)
+    create(:invoice_items, item: @item, invoice: @invoice_5)
+    create(:invoice_items, item: @item, invoice: @invoice_6)
+    create(:invoice_items, item: @item, invoice: @invoice_7)
+    create(:invoice_items, item: @item, invoice: @invoice_8)
   end
 
   describe 'class methods' do
@@ -94,17 +103,7 @@ RSpec.describe Customer, type: :model do
     end
 
     it 'the top_5_cust_by_merch method' do
-
-      @sink.invoices << @invoice_1
-      @sink.invoices << @invoice_2
-      @sink.invoices << @invoice_3
-      @sink.invoices << @invoice_4
-      @sink.invoices << @invoice_5
-      @sink.invoices << @invoice_6
-      @sink.invoices << @invoice_7
-      @sink.invoices << @invoice_8
-
-      expect(Customer.top_5_cust_by_merch(@pretty_plumbing.id)).to eq([@customer_4, @customer_2, @customer_3, @customer_1, @customer_8])
+      expect(Customer.top_5_cust_by_merch(@merchant_1.id)).to eq([@customer_4, @customer_2, @customer_3, @customer_1, @customer_8])
     end
   end
 end
