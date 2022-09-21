@@ -156,7 +156,7 @@ RSpec.describe 'Merchant Items Index' do
           end
 
           within("#top-item-#{grobles.id}") do
-            expect(page).to have_content("Total Revenue: 28500")
+            expect(page).to have_content("Total Revenue: $285.00")
           end
         end
 

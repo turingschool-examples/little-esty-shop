@@ -18,7 +18,7 @@
     <tr id="item_<%= item.id %>">
       <td id="name_<%= item.id %>"><%= item.item.name %></td>
       <td id="quant_<%= item.id %>"><%= item.quantity %></td>
-      <td id="unit_price_<%= item.id %>"><%= (item.unit_price/100.to_f).round(2) %></td>
+      <td id="unit_price_<%= item.id %>"><%= price_round(item.unit_price) %></td>
       <td id="status_<%= item.id %>"><%= item.status %></td>
     </tr>
   <% end %>

@@ -11,7 +11,7 @@ RSpec.describe 'Merchant Item Update' do
 
       expect(page).to have_field('Name', with: peanut.name)
       expect(page).to have_field('Description', with: peanut.description)
-      expect(page).to have_field('Current Price', with: peanut.unit_price)
+      expect(page).to have_field('Current Price $', with: sprintf("%.2f", peanut.unit_price/100.to_f))
     end
 
     describe 'when I update the information' do
