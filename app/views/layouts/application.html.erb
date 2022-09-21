@@ -22,6 +22,8 @@
     <% @contributors.each do |contributor| %>
       <li>user <%= contributor.login %>, total commits: <%= contributor.contributions %></li>
     <% end %></ul>
+  <strong>Total Pull Requests: <%= @pulls.first.number %> </strong>
+
 </footer>
 </body>
 </html>

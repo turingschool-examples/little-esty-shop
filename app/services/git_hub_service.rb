@@ -15,4 +15,9 @@ class GitHubService
   def self.repo_name
     get_uri("#{GITHUB_URL}/repos/RyanChrisSmith/little-esty-shop")
   end
+
+  def self.pull_request
+    get_uri("#{GITHUB_URL}/repos/RyanChrisSmith/little-esty-shop/pulls?state=closed")
+  end
+
 end

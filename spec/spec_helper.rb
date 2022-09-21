@@ -105,5 +105,9 @@ RSpec.configure do |config|
     github_api_contributors_response = File.read(Rails.root.join('spec', 'fixtures', 'contributors.json'))
     stub_request(:get, "https://api.github.com/repos/RyanChrisSmith/little-esty-shop/contributors").
       to_return(body: github_api_contributors_response)
+
+    github_api_pull_request_response = File.read(Rails.root.join('spec', 'fixtures', 'pull_request.json'))
+    stub_request(:get, "https://api.github.com/repos/RyanChrisSmith/little-esty-shop/pulls?state=closed").
+      to_return(body: github_api_pull_request_response)
   end
 end
