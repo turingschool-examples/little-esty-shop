@@ -64,13 +64,10 @@
         Repo name: <%= @repo_name %> | Our total pull requests: <%= @pr_total %> 
       <p>
         Contributors: <br>
-          | <% @user_names.each do |name| %>
-            <%= name %> |
+           <% @user_names.each do |name| %>
+          : <span stlye='font-weight: bold;'><%= name %>:</span> <%= @user_commits[name]%> commits :
           <% end %>
       </p>
-          | <% @user_commits.each do |user,num_commits| %>
-             <%= user %> has <%= num_commits %> commits |
-          <% end %>
     </div>
   </footer>
 </html>
