@@ -20,14 +20,14 @@ RSpec.describe 'Merchant Invoice Index' do
     @invoice_3 = create(:invoice)
     @invoice_4 = create(:invoice)
 
-    @items_1.each { |item|  @invoice_1.items << item }
-    @items_2.each { |item|  @invoice_2.items << item }
-    @items_3.each { |item|  @invoice_3.items << item }
-    @items_4.each { |item|  @invoice_4.items << item }
-    @items_5.each { |item|  @invoice_1.items << item }
-    @items_6.each { |item|  @invoice_2.items << item }
-    @items_7.each { |item|  @invoice_3.items << item }
-    @items_8.each { |item|  @invoice_4.items << item }
+    @items_1.each { |item| create(:invoice_items, item: item, invoice: @invoice_1) }
+    @items_2.each { |item| create(:invoice_items, item: item, invoice: @invoice_2) }
+    @items_3.each { |item| create(:invoice_items, item: item, invoice: @invoice_3) }
+    @items_4.each { |item| create(:invoice_items, item: item, invoice: @invoice_4) }
+    @items_5.each { |item| create(:invoice_items, item: item, invoice: @invoice_1) }
+    @items_6.each { |item| create(:invoice_items, item: item, invoice: @invoice_2) }
+    @items_7.each { |item| create(:invoice_items, item: item, invoice: @invoice_3) }
+    @items_8.each { |item| create(:invoice_items, item: item, invoice: @invoice_4) }
   end
   # As a merchant,
   # When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
