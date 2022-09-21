@@ -3,8 +3,6 @@ require 'spec_helper'
 require './app/facades/github_facade'
 require './app/services/github_service'
 
-
-
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production

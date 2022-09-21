@@ -1,5 +1,5 @@
 require 'json'
-require 'github_service'
+require './app/services/github_service'
 
 class GitHubFacade
 
