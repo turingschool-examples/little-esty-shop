@@ -6,7 +6,7 @@
     <% end %>
 
   <p>Created at: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-  <p>Total Revenue: <%= @invoice.calculate_invoice_revenue %></p>
+  <p>Total Revenue: $<%= (@invoice.calculate_invoice_revenue/100.to_f).round(2) %></p>
   <h4 style='font-size:150%'>Customer:<h4> 
   <p style='font-weight:normal; margin-top:-20px; margin-left:20px; margin-bottom:50px'><%= @invoice.customer.name %></p>
 </div>
