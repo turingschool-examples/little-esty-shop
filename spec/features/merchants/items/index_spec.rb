@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index Page' do
+  before :each do
+    names_array = {'gjcarew' => 22, 'stephenfabian' => 25, 'Rileybmcc' => 22, 'KevinT001' => 11}
+    allow(GithubFacade).to receive(:commits).and_return(names_array)
+  end
   describe 'User Story 6 - Merchant Items Index Page' do
     describe 'When I visit my merchant items index page ("merchants/merchant_id/items")' do
       it 'I see a list of the names of all of my items, and dont see items for other merchants' do

@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Invoice Show Page' do
+  before :each do
+    names_array = {'gjcarew' => 22, 'stephenfabian' => 25, 'Rileybmcc' => 22, 'KevinT001' => 11}
+    allow(GithubFacade).to receive(:commits).and_return(names_array)
+  end
   describe 'When I visit my merchants invoice show page(/merchants/merchant_id/invoices/invoice_id)' do
     describe 'Then I see information related to that invoice' do 
       it 'Invoice id, status, created_at date(Monday, July 18, 2019), Customer first/last name' do

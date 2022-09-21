@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Invoices Index Page' do
+  before :each do
+    names_array = {'gjcarew' => 22, 'stephenfabian' => 25, 'Rileybmcc' => 22, 'KevinT001' => 11}
+    allow(GithubFacade).to receive(:commits).and_return(names_array)
+  end
   describe 'When I visit the admin Invoices index' do
     before :each do
       customer = Customer.create!(first_name: 'Jeff', last_name: 'Bridges')
