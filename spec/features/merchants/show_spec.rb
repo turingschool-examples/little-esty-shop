@@ -240,11 +240,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
 
       end
-
-
-# Where I see all of my bulk discounts including their
-# percentage discount and quantity thresholds
-# And each bulk discount listed includes a link to its show page
     end
   end
 end
