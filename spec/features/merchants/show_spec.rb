@@ -228,6 +228,21 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
           expect(alaina_invoice2.created_at.strftime("%A, %B %d, %Y")).to appear_before(alaina_invoice3.created_at.strftime("%A, %B %d, %Y"))
         end
       end
+
+
+      it 'Then I see a link to view all my discounts, When I click this link, Then I am taken to my bulk discounts index page' do
+
+        visit "/merchants/#{carly_silo.id}/dashboard"
+
+        expect(page).to have_link("View My Discounts")
+        click_link("View My Discounts")
+        expect(current_path).to be(bulk_discounts_path)
+      end
+
+
+# Where I see all of my bulk discounts including their
+# percentage discount and quantity thresholds
+# And each bulk discount listed includes a link to its show page
     end
   end
 end
