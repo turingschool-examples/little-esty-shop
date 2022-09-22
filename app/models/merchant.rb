@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+  has_many :bulk_discounts
   validates :name, presence: true
   validates :enabled, inclusion: [true, false]
 
