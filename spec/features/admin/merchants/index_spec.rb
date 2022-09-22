@@ -261,7 +261,7 @@ RSpec.describe 'Admin Merchant Index', type: :feature do
           top_merch = Merchant.merchants_top_5
           top_merch.each do |merch|
             within "#top-merchant-#{merch.id}" do
-              expect(page).to have_content("#{merch.name} - $#{'%.2f' % (merch.revenue)} in revenue")
+              expect(page).to have_content("#{merch.name} - $#{sprintf('%.2f',merch.revenue/100.to_f)} in revenue")
             end
           end
         end
