@@ -48,13 +48,14 @@ RSpec.describe 'bulk discount index page', type: :feature do
 
       it 'When I fill in the form with valid data & I am redirected back to the bulk discount index &  I see my new bulk discount listed' do
 
-        visit "/merchants/#{carly_silo.id}/bulk_discounts"
+        visit new_merchant_bulk_discount_path(carly_silo)
 
-        select "%42", from: :percentage_discount
+        select('%42', from: :percentage_discount)
         fill_in('Quantity', with: 22)
         click_on "Save"
 
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
+
         expect(page).to have_content("%42")
         expect(page).to have_content(22)
       end
