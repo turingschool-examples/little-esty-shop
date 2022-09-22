@@ -40,9 +40,10 @@ RSpec.describe 'bulk discount index page', type: :feature do
         visit "/merchants/#{carly_silo.id}/bulk_discounts"
         expect(page).to have_link("Create a New Discount")
         click_link("Create a New Discount")
-        expect(current_path).to be("/merchants/#{carly_silo.id}/bulk_discounts/new")
-        expect(page).to have_content("Percentage Discount:")
-        expect(page).to have_content("Quantity of Items:")
+        expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts/new")
+        save_and_open_page
+        expect(page).to have_content("Percentage discount")
+        expect(page).to have_content("Quantity")
       end
 
       xit 'Then I see a link to create a new discount' do
@@ -58,7 +59,6 @@ RSpec.describe 'bulk discount index page', type: :feature do
         end     
 
       end
-
 
 
     end
