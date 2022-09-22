@@ -7,6 +7,7 @@ RSpec.describe Merchant, type: :model do
   end
   describe 'relationships' do
     it { should have_many(:items) }
+    it { should have_many(:discounts) }
   end
 
   describe 'Class Methods' do
@@ -48,19 +49,19 @@ RSpec.describe Merchant, type: :model do
 
       @items_11.each { |item| create(:invoice_items, invoice: @invoice_11, item: item, unit_price: 500, quantity: 10) } #50000
       @items_12.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) } #5000
-      
+
       @items_13.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 500, quantity: 5) } #25000
       @items_14.each { |item| create(:invoice_items, invoice: @invoice_14, item: item, unit_price: 200, quantity: 10) } # 20000
-      
+
       @items_15.each { |item| create(:invoice_items, invoice: @invoice_15, item: item, unit_price: 500, quantity: 10) } #50000
       @items_16.each { |item| create(:invoice_items, invoice: @invoice_16, item: item, unit_price: 200, quantity: 5) } #10000
-      
+
       @items_17.each { |item| create(:invoice_items, invoice: @invoice_17, item: item, unit_price: 100, quantity: 10) } #10000
       @items_18.each { |item| create(:invoice_items, invoice: @invoice_18, item: item, unit_price: 200, quantity: 5) } #10000
-       
+
       @items_19.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 500, quantity: 15) } #50000
       @items_20.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) } #5000
-      
+
       @items_21.each { |item| create(:invoice_items, invoice: @invoice_15, item: item, unit_price: 500, quantity: 20) } #50000
       @items_22.each { |item| create(:invoice_items, invoice: @invoice_16, item: item, unit_price: 200, quantity: 10) } #10000
 
@@ -75,11 +76,11 @@ RSpec.describe Merchant, type: :model do
     end
 
     it "#active" do
-      expect(Merchant.active).to eq([@merchant_11, @merchant_13, @merchant_14, @merchant_15])      
+      expect(Merchant.active).to eq([@merchant_11, @merchant_13, @merchant_14, @merchant_15])
     end
 
     it "#inactive" do
-      expect(Merchant.inactive).to eq([@merchant_12, @merchant_16])      
+      expect(Merchant.inactive).to eq([@merchant_12, @merchant_16])
     end
 
     it 'top_5_order_by_revenue' do
@@ -87,7 +88,7 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe 'Instance Methods' do 
+  describe 'Instance Methods' do
     before :each do
       @merchant = create(:merchant)
       @merchant_13 = create(:merchant)

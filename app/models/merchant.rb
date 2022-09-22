@@ -2,6 +2,7 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
 
   has_many :items
+  has_many :discounts
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   enum active_status: { disabled: 0, enabled: 1 }
