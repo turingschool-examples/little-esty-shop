@@ -1,8 +1,10 @@
 <%= form_with model: @bulk_discount, class: "bulk_discount_form" do |f| %>
-  <%= f.label :percentage_discount %>
-  <%= f.text_field :percentage_discount %>
+  <%= f.label :percentage_discount, "Percent Off" %>
+  <%= f.select :percentage_discount, (1..99).to_a.map{|n| ["%#{n}", n]} %>
 
-  <%= f.label :quantity %>
+  <%= f.hidden_field :merchant_id, value: @merchant.id %>
+
+  <%= f.label :quantity, "Quantity" %>
   <%= f.text_field :quantity %>
 
   <%= f.submit %>
