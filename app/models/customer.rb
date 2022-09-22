@@ -6,12 +6,12 @@ class Customer < ApplicationRecord
   # Class Methods
   def self.top_5_customers
     Customer.joins(invoices: :transactions).where( transactions: {result: 1})
-            .group(:id).order("transactions.count desc").limit(5)
+            .group(:id).order('transactions.count DESC').limit(5)
   end
-  
+
   # Instance Methods
   def num_succesful_transactions
-    invoices.joins(:transactions).count
+    invoices.joins(:transactions).where(transactions: { result: 1 }).count
   end
 
   def name
