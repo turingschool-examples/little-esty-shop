@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # make helper method for url detection in view
 
   def current_class?(test_path)
     if test_path == ('/admin')

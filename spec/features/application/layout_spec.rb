@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'application layout' do
   describe 'header content' do
-
     let!(:jewlery) { Merchant.create!(name: "Jewlery City Merchant")}
     let!(:gold_earrings) { jewlery.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
     let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
@@ -23,7 +22,7 @@ RSpec.describe 'application layout' do
         end
       end
     end
-    
+
     it 'has nav buttons on every page' do
       paths.each do |path|
         visit path
@@ -32,7 +31,6 @@ RSpec.describe 'application layout' do
           within '#navbox' do
             expect(page).to have_all_of_selectors(:css, '.navigation', '.divider' )
             expect(page).to have_all_of_selectors(:css, '.navigation', '.div_2' )
-          
           end
         end
       end
@@ -43,7 +41,7 @@ RSpec.describe 'application layout' do
         visit path
         within 'header' do
           within '#navbox' do
-            expect(page).to have_selector(:css, '.nav-active')
+            expect(page).to have_selector(:css, '.nav-active', count: 1)
           end
         end
       end

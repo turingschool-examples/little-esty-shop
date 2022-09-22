@@ -61,6 +61,8 @@ RSpec.describe Item, type: :model do
         expect(rocker.best_sales_date).to eq("June 28, 2012")
         expect(rocker.best_sales_date).to_not eq("May 25, 2012")
       end
+
+      # add sad path tests
     end
   end
 
