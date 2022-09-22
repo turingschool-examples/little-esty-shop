@@ -35,6 +35,32 @@ RSpec.describe 'bulk discount index page', type: :feature do
         expect(current_path).to eq(merchant_bulk_discount_path(carly_silo, carlys_discount1.id))
       end
 
+      it 'Then I see a link to create a new discount & When I click this link I am taken to a new page where I see a form to add a new bulk discount' do
+
+        visit "/merchants/#{carly_silo.id}/bulk_discounts"
+        expect(page).to have_link("Create a New Discount")
+        click_link("Create a New Discount")
+        expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts/new")
+        
+        expect(page).to have_content("Percent Off")
+        expect(page).to have_content("Quantity")
+      end
+
+      it 'When I fill in the form with valid data & I am redirected back to the bulk discount index &  I see my new bulk discount listed' do
+
+        visit new_merchant_bulk_discount_path(carly_silo)
+
+        select('%42', from: :percentage_discount)
+        fill_in('Quantity', with: 22)
+        click_on "Save"
+
+        expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
+
+        expect(page).to have_content("%42")
+        expect(page).to have_content(22)
+      end
+
+
     end
   end
 end

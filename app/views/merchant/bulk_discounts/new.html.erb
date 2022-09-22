@@ -1,0 +1,11 @@
+<%= form_with url: merchant_bulk_discounts_path(@merchant), method: :post, local: true  do |f| %>
+  <%= f.label :percentage_discount, "Percent Off" %>
+  <%= f.select :percentage_discount, (1..99).to_a.map{|n| ["%#{n}", n]} %>
+
+  <%= f.hidden_field :merchant_id, value: @merchant.id %>
+
+  <%= f.label :quantity, "Quantity" %>
+  <%= f.text_field :quantity %>
+
+  <%= f.submit %>
+<% end %>
