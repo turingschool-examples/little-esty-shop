@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
-  
   resources :merchants, only: [:show], module: 'merchant' do
     resources :invoices, only: [:index, :show]
     resources :items, except: [:destroy]
     resources :invoice_items, only: [:update]
+    resources :bulk_discounts, only: [:index, :show]
   end
   
   get '/merchants/:merchant_id/dashboard', to: 'merchants#show'
@@ -17,4 +17,5 @@ Rails.application.routes.draw do
     resources :merchants, except: [:destroy]
     resources :invoices, only: [:index, :show, :update]
   end
+
 end
