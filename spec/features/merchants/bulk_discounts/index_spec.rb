@@ -12,20 +12,24 @@ RSpec.describe 'bulk discount index page', type: :feature do
 
       it 'I see all of my bulk discounts including their percentage discount and quantity thresholds' do
 
-        visit "/merchants/#{carly_silo.id}/dashboard"
+        visit "/merchants/#{carly_silo.id}/bulk_discounts"
 
-        expect(page).to have_content("Discount ##{carlys_discount1.id}")
-        expect(page).to have_content("Percentage Off: #{carlys_discount1.percentage_discount}")
-        expect(page).to have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
+        within("#discount_#{carlys_discount1.id}") do 
+          expect(page).to have_content("Discount ##{carlys_discount1.id}")
+          expect(page).to have_content("Percentage Off: %#{carlys_discount1.percentage_discount}")
+          expect(page).to have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
+          expect(page).to_not have_content("Quantity of Items: #{carlys_discount2.quantity_threshold}")
+
+        end
       end
 
-      it 'And each bulk discount listed includes a link to its show page' do
+      xit 'And each bulk discount listed includes a link to its show page' do
 
-        visit "/merchants/#{carly_silo.id}/dashboard"
+        visit "/merchants/#{carly_silo.id}/bulk_discounts"
         
         expect(page).to have_link('View this Discount')
         click_link('View this Discount')
-        expect(current_path).to eq(path_fill_in)
+        expect(current_path).to eq(merchant_bulk_discount_path(@merchant, discount.id))
       end
 
     end
