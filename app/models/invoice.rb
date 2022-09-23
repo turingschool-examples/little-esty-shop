@@ -5,6 +5,8 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
+  has_many :bulk_discounts, through: :merchants
 
   def self.incomplete_invoices
     where("status = 2").order(:created_at)
@@ -16,5 +18,13 @@ class Invoice < ApplicationRecord
 
   def calculate_invoice_revenue
     self.invoice_items.sum("quantity*unit_price")
+  end
+
+  def calculate_discounted_invoice_revenue
+    require 'pry' ; binding.pry
+  end
+
+  def find_revelant_discounts
+    require 'pry' ; binding.pry
   end
 end
