@@ -19,6 +19,11 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
 
     redirect_to(merchant_bulk_discounts_path(@merchant))
   end
+
+  def destroy
+      BulkDiscount.find(params[:id]).destroy
+      redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts"
+  end
   
 
 end

@@ -69,7 +69,7 @@ RSpec.describe 'bulk discount index page', type: :feature do
         expect(page).to have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
 
         within("#discount_#{carlys_discount1.id}") do 
-        expect(page).to have_content("Delete")
+        expect(page).to have_button("Delete")
         click_on("Delete")
         end
 
