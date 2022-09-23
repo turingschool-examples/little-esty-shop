@@ -25,5 +25,9 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
       redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts"
   end
   
+  def edit
+    @discount = BulkDiscount.find(params[:id])
+    # require 'pry' ; binding.pry
+  end
 
 end

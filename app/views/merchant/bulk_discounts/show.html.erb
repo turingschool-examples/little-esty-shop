@@ -1,5 +1,5 @@
 <h1>Show Page</h1>
 <p> Discount Percentage: %<%= @discount.percentage_discount %> </p>
 <p> Quantity: <%= @discount.quantity_threshold %> </p>
-
+<p><%= link_to "Edit", edit_merchant_bulk_discount_path(@merchant, @discount) %></p>
 
