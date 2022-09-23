@@ -12,11 +12,12 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
 
       it "Then I see the bulk discount's quantity threshold and percentage discount" do
 
-        visit merchant_bulk_discount_path(carly_silo)
-        expect(page).to have_content("#{carlys_discount1.percentage_discount}")
-        expect(page).to have_content("#{carlys_discount1.quantity_threshold}")
-        expect(page).to_not have_content("#{carlys_discount2.percentage_discount}")
-        expect(page).to_not have_content("#{carlys_discount2.quantity_threshold}")
+        visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
+        expect(page).to have_content("Discount Percentage: %#{carlys_discount1.percentage_discount}")
+        expect(page).to have_content("Quantity: #{carlys_discount1.quantity_threshold}")
+        expect(page).to_not have_content("Discount Percentage: %#{carlys_discount2.percentage_discount}")
+        expect(page).to_not have_content("Quantity: #{carlys_discount2.quantity_threshold}")
       end
 
     end
