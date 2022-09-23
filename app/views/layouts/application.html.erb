@@ -14,16 +14,6 @@
   <h3><b><%= notice %></b></h3>
 <% end %>
 <%= yield %>
-<footer style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ccc;">
-  &copy; Little Esty Shop
-  <br/>
-  <%= @repo[:repo_name] %>
-  <ul>
-    <% @contributors.each do |contributor| %>
-      <li>user <%= contributor.login %>, total commits: <%= contributor.contributions %></li>
-    <% end %></ul>
-  <strong>Total Pull Requests: <%= @pulls.first.number %> </strong>
-
 </footer>
 </body>
 </html>

@@ -25,10 +25,13 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/invoices/:id", to: 'invoices#show'
   patch "/merchants/:merchant_id/invoices/:id", to: 'invoices#update'
 
-  # namespace :admin do
-  #   resources :merchants
-  #   resources :invoices
-  # end
+  resources :merchant, only: [:show] do
+    resources :dashboard, only: [:index]
+    resources :items, except: [:destroy]
+    resources :item_status, only: [:update]
+    resources :invoices, only: [:index, :show, :update]
+    resources :bulk_discounts
+  end
 
   get "/merchants/:id/dashboard", to: 'merchant_dashboard#dashboard'
 end
