@@ -21,11 +21,7 @@ class Invoice < ApplicationRecord
   end
 
   def calculate_discounted_invoice_revenue
-    invoice_items.joins(:bulk_discounts).where("invoice_items.quantity >= bulk_discounts.quantity_threshold").select("invoice_items.id, max(invoice_items.quantity * invoice_it
-     ems.unit_price * (1 - (bulk_discounts.percentage_discount * .01))) as remaining_revenue").group("invoi
-     ce_items.id")
-
-
+    invoice_items.joins(:bulk_discounts).where("invoice_items.quantity >= bulk_discounts.quantity_threshold").select("invoice_items.id, max(invoice_items.quantity * invoice_items.unit_price * (1 - (bulk_discounts.percentage_discount * .01))) as remaining_revenue").group("invoice_items.id").sum(&:remaining_revenue).to_i
   end
 
 end

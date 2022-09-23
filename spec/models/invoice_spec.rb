@@ -128,8 +128,8 @@ RSpec.describe Invoice, type: :model do
 
 
       it 'can calculate the discounted invoice revenue when a bulk discount is applied' do
-        expect(alaina_invoice1.calculate_invoice_revenue).to eq(183600) #will need to change this calculation as well
-        expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(33333)
+        expect(alaina_invoice1.calculate_invoice_revenue).to eq(183600) 
+        expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(28080)
       end
     end
 
@@ -137,19 +137,19 @@ RSpec.describe Invoice, type: :model do
 
 end
 
-jewlery_city =  Merchant.create!(name: "Jewlery City Merchant")
-carly_silo = Merchant.create!(name: "Carly Simon's Candy Silo")
+# jewlery_city =  Merchant.create!(name: "Jewlery City Merchant")
+# carly_silo = Merchant.create!(name: "Carly Simon's Candy Silo")
 
-jcity_discount1 = jewlery_city.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)
-jcity_discount2 = jewlery_city.bulk_discounts.create!(percentage_discount: 30, quantity_threshold: 15)
+# jcity_discount1 = jewlery_city.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)
+# jcity_discount2 = jewlery_city.bulk_discounts.create!(percentage_discount: 30, quantity_threshold: 15)
 
-gold_earrings = jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) 
-silver_necklace = jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 22000) 
-licorice = carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) 
+# gold_earrings = jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) 
+# silver_necklace = jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 22000) 
+# licorice = carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) 
 
-alaina = Customer.create!(first_name: "Alaina", last_name: "Kneiling")
-alaina_invoice1 = alaina.invoices.create!(status: "completed")
+# alaina = Customer.create!(first_name: "Alaina", last_name: "Kneiling")
+# alaina_invoice1 = alaina.invoices.create!(status: "completed")
 
-alainainvoice  status:"packaged" )
-alainainvoice1_itemsilver_necklace = InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 15, unit_price: 1300, status:"packaged" )
-alainainvoice1_itemlicorice = InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 15, unit_price: 9900, status:"packaged" )
+# alainainvoice = status:"packaged" )
+# alainainvoice1_itemsilver_necklace = InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 15, unit_price: 1300, status:"packaged" )
+# alainainvoice1_itemlicorice = InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 15, unit_price: 9900, status:"packaged" )

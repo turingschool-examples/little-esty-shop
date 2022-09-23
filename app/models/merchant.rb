@@ -3,10 +3,10 @@ class Merchant < ApplicationRecord
   has_many :bulk_discounts
   validates :name, presence: true
   validates :enabled, inclusion: [true, false]
-  has_many :invoice_items, through: :items
-  has_many :invoices, through: :invoice_items
-  has_many :transactions, through: :invoices
-  has_many :customers, through: :invoices
+  # has_many :invoice_items, through: :items
+  # has_many :invoices, through: :invoice_items
+  # has_many :transactions, through: :invoices
+  # has_many :customers, through: :invoices
 
   def self.enabled_merchants
     where('enabled = ?', true)
