@@ -19,6 +19,13 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
     redirect_to merchant_bulk_discounts_path(@merchant)
   end
 
+  def destroy
+    @discount = BulkDiscount.find(params[:id])
+    @discount.destroy
+    flash.notice = "Discount deleted"
+    redirect_to merchant_bulk_discounts_path(@merchant)
+  end
+
   private
 
   def bulk_discount_params

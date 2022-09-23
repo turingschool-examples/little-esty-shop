@@ -8,6 +8,7 @@
       <h3>
       <%= link_to "#{discount.discount_percent}% off #{discount.quantity_threshold} or more items!", merchant_bulk_discount_path(@merchant, discount) %>
       </h3>
+      <p><%= link_to "Delete #{discount.discount_percent}% Discount", merchant_bulk_discount_path(@merchant, discount), method: :delete %></p>
     </li>
   </ul>
 <% end %>
