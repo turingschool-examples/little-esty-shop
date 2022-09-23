@@ -40,7 +40,7 @@ RSpec.describe 'merchant bulk items index' do
     visit merchant_bulk_discounts_path(merchant_1)
   end
 
-  it 'displays all of my bulk discounts' do
+  it 'displays all of my bulk discounts with their info' do
 
     expect(page).to have_content(merchant_1.name)
 
@@ -59,5 +59,19 @@ RSpec.describe 'merchant bulk items index' do
     expect(page).to_not have_content(merchant_2.name)
     expect(page).to_not have_css("#discount-#{disc_30m2.id}")
     expect(page).to_not have_css("#discount-#{disc_25m2.id}")
+  end
+
+  describe 'when I click on a particular discount' do
+    it 'links to that discount show page' do
+      click_link "#{disc_15m1.discount_percent}% off #{disc_15m1.quantity_threshold} or more items!"
+
+      expect(page).to have_current_path(merchant_bulk_discount_path(merchant_1, disc_15m1))
+
+      expect(page).to have_content("#{disc_15m1.discount_percent}% Discount")
+      expect(page).to have_content("On orders of #{disc_15m1.quantity_threshold} or more items")
+
+      expect(page).to_not have_content("#{disc_20m1.discount_percent}% Discount")
+      expect(page).to_not have_content("On orders of #{disc_20m1.quantity_threshold} or more items")
+    end
   end
 end
