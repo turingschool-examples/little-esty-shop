@@ -20,6 +20,42 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
         expect(page).to_not have_content("Quantity: #{carlys_discount2.quantity_threshold}")
       end
 
+      it "Then I see a link to edit the bulk discount & when I click this link, then I am taken to a new page with a form to edit the discount" do
+
+        visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
+        expect(page).to have_link("Edit")
+        click_link("Edit")
+        expect(current_path).to eq("edit path")
+        expect(page).to have_content("Quantity")
+        expect(page).to have_content("Percent Off")
+      end
+
+      it "And I see that the discounts current attributes are pre-poluated in the form" do
+       
+        visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
+        expect(page).to have_field("Quantity", with: "#{carlys_discount1.quantity_threshold}")
+        expect(page).to have_field("Percent Off", with: "#{carlys_discount1.percentage_discount}")
+
+      end
+
+      it "When I change any/all of the information and click submit hen I am redirected to the bulk discount's show page & I see that the discount's attributes have been updated" do
+        
+        visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
+        select('%99', from: :percentage_discount)
+        fill_in('Quantity', with: 99)
+        click_on "Save"
+
+        expect(current_path).to eq(merchant_bulk_discount_path(carly_silo, carlys_discount1))
+
+        expect(page).to have_content("%99")
+        expect(page).to have_content(99)
+      end
+
+
+
     end
   end
 end
