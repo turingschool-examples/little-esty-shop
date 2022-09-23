@@ -74,4 +74,14 @@ RSpec.describe 'merchant bulk items index' do
       expect(page).to_not have_content("On orders of #{disc_20m1.quantity_threshold} or more items")
     end
   end
+
+  describe 'link to create a new discount' do
+    it 'links to a page allowing us to create a new discount' do
+      expect(page).to have_link "Create a new discount"
+
+      click_link "Create a new discount"
+
+      expect(current_path).to eq(new_merchant_bulk_discount_path(merchant_1))
+    end
+  end
 end

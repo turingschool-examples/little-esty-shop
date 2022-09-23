@@ -7,4 +7,8 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
   def show
     @discount = BulkDiscount.find(params[:id])
   end
+
+  def new
+
+  end
 end
