@@ -7,6 +7,7 @@ class InvoiceItem < ApplicationRecord
   has_many :merchants, through: :item
   has_many :transactions, through: :invoice
   has_many :customers, through: :invoice
+  has_many :bulk_discounts, through: :item
 
   def self.incomplete_invoices
     inv_ids = InvoiceItem.where("status = 0 OR status = 1").pluck(:invoice_id)
