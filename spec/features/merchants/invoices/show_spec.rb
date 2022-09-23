@@ -102,8 +102,18 @@ RSpec.describe 'Merchant Index Show Page' do
         end
       end
 
+      it 'Then I see two total revenue for my merchant from this invoice one with the discount and one without the discount' do
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+
+        within("#total_invoice_revenue") do
+          expect(page).to have_content("Total Revenue From This Invoice: $#{sprintf("%.2f",alaina_invoice1.calculate_invoice_revenue/100.to_f)}")
+          expect(page).to have_content("Total Revenue From This Invoice Discount Applied: $#{sprintf("%.2f",alaina_invoice1.calculate_discounted_invoice_revenue/100.to_f)}")
+        end
+      end
+
+
+
     end
   end
 end
-
 
