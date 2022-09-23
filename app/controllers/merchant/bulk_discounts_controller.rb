@@ -11,13 +11,11 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
 
   def new
 #merchant is being set in the base controller
-
   end
 
   def create
     #merchant is being set in the base controller
-    require 'pry' ; binding.pry
-    @bulk_discount = @merchant.bulk_discounts.create!(percentage_discount: params["percentage_discount"], quantity_threshold: params["quantity"], merchant_id: params["merchant_id"])
+    @bulk_discount = @merchant.bulk_discounts.create!(percentage_discount: params["percentage_discount"], quantity_threshold: params["quantity"])
 
     redirect_to(merchant_bulk_discounts_path(@merchant))
   end

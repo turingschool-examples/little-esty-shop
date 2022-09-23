@@ -60,6 +60,24 @@ RSpec.describe 'bulk discount index page', type: :feature do
         expect(page).to have_content(22)
       end
 
+      it 'Then next to each bulk discount I see a link to delete it, when I click this link, I am redirected back to the bulk discounts index page, & I no longer see the discount listed' do
+
+        visit "/merchants/#{carly_silo.id}/bulk_discounts"
+
+        expect(page).to have_content("Discount ##{carlys_discount1.id}")
+        expect(page).to have_content("Percentage Off: %#{carlys_discount1.percentage_discount}")
+        expect(page).to have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
+
+        within("#discount_#{carlys_discount1.id}") do 
+        expect(page).to have_content("Delete")
+        click_on("Delete")
+        end
+
+        expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
+        expect(page).to_not have_content("Discount ##{carlys_discount1.id}")
+        expect(page).to_not have_content("Percentage Off: %#{carlys_discount1.percentage_discount}")
+        expect(page).to_not have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
+      end
 
     end
   end
