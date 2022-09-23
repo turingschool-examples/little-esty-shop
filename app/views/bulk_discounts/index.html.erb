@@ -1,4 +1,6 @@
 <h1> <%= @merchant.name %>'s Bulk Discounts </h1>
+<br>
+<%= link_to 'Create New Discount', new_merchant_bulk_discount_path(@merchant) %>
 
 <ul><p>All discounts for <%= @merchant.name %>:</p>
 <br>
