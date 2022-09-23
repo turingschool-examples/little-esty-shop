@@ -74,6 +74,8 @@ GEM
     docile (1.4.0)
     erubi (1.11.0)
     execjs (2.8.1)
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -241,6 +243,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   capybara
   coffee-rails (~> 4.2)
+  faker
   figaro
   httparty
   jbuilder (~> 2.5)

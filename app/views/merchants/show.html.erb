@@ -5,6 +5,7 @@
 <p><%= @merchant.name %></p>
 <p><%= link_to "#{@merchant.name}'s Items", merchant_items_path(@merchant) %></p>
 <p><%= link_to "#{@merchant.name}'s Invoices", merchant_invoices_path(@merchant) %></p>
+<p><%= link_to "Merchant's Bulk Discounts", merchant_bulk_discounts_path(@merchant) %></p>
 
 <%content_for :aside do%>
 <h3>Top 5 Customers</h3>
