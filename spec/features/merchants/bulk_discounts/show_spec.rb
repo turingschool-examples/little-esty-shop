@@ -31,10 +31,10 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
         expect(page).to have_content("Percent Off")
       end
 
-      xit "And I see that the discounts current attributes are pre-poluated in the form" do
+      it "And I see that the discounts current attributes are pre-poluated in the form" do
        
-        visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
-        # edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
+        visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
         expect(page).to have_field("Quantity", with: "#{carlys_discount1.quantity_threshold}")
         expect(page).to have_field("Percent Off", with: "#{carlys_discount1.percentage_discount}")
 
