@@ -34,4 +34,10 @@ FactoryBot.define do
     result {Faker::Number.within(range: 0..1)}
     association :invoice, factory: :invoice
     end
+
+  factory :discount, class: Discount do
+    item_threshold {Faker::Number.within(range: 5..30)}
+    bulk_discount  {Faker::Number.within(range: 0.10..0.75)}
+    association :merchant, factory: :merchant
+  end
 end
