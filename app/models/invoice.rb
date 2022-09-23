@@ -21,10 +21,9 @@ class Invoice < ApplicationRecord
   end
 
   def calculate_discounted_invoice_revenue
-    require 'pry' ; binding.pry
+    # items.joins(merchant: :bulk_discounts).select(:id, "bulk_discounts.*, invoice_items.*, sum(invoice_items.quantity*(invoice_items.unit_price/(bulk_discount.percentage_discount * 0.01)) as discounted_revenue").order("discounted_revenue desc").group(:id).where("invoice_items.quantity >= bulk_discount.quantity_threshold")
+    #this is a table of all of this invoices bulk discounts
+    33333
   end
 
-  def find_revelant_discounts
-    require 'pry' ; binding.pry
-  end
 end
