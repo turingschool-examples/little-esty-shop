@@ -236,7 +236,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
 
         expect(page).to have_link("#{carly_silo.name}'s Discounts")
         click_link("#{carly_silo.name}'s Discounts")
-        save_and_open_page
+
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
 
       end
