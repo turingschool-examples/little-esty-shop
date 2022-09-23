@@ -1,4 +1,4 @@
-class Merchant::BaseController < ApplicationController
+  class Merchant::BaseController < ApplicationController
   before_action :set_merchant, only: [:index, :show, :create, :update, :edit, :new]
 
 private
