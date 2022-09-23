@@ -84,7 +84,7 @@ RSpec.describe 'Merchant Dashboard' do
       it 'then I see the name of the merchant' do
 
         visit merchant_dashboard_path(@merchant_1)
-        
+
         expect(page).to have_content(@merchant_1.name)
         expect(page).to_not have_content(@merchant_2.name)
 
@@ -485,6 +485,22 @@ RSpec.describe 'Merchant Dashboard' do
           expect("Sunday, October 10, 2021").to_not appear_before("Sunday, June 10, 2001")
         end
       end
+    end
+  end
+
+  # As a merchant
+  # When I visit my merchant dashboard
+  # Then I see a link to view all my discounts
+  # When I click this link
+  # Then I am taken to my bulk discounts index page
+  # Where I see all of my bulk discounts including their
+  # percentage discount and quantity thresholds
+  # And each bulk discount listed includes a link to its show page
+  describe 'user story 1 solo' do
+    it 'I see a link to view all my discounts' do
+      visit merchant_dashboard_path(@merchant_1)
+
+      find_link({text: "Discounts Index", href: "/merchants/#{@merchant_1.id}/discounts"}).visible?
     end
   end
 end
