@@ -26,8 +26,15 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
   end
   
   def edit
-    @discount = BulkDiscount.find(params[:id])
-    # require 'pry' ; binding.pry
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = @merchant.bulk_discounts.find(params[:id])
+  end
+
+  def update
+    @discount = @merchant.bulk_discounts.find(params[:id])
+    @discount.update!(percentage_discount: params[:percentage_discount], quantity_threshold: params[:quantity])
+
+    redirect_to merchant_bulk_discount_path(@merchant, @discount)
   end
 
 end

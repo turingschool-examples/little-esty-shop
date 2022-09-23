@@ -40,9 +40,9 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
 
       end
 
-      xit "When I change any/all of the information and click submit hen I am redirected to the bulk discount's show page & I see that the discount's attributes have been updated" do
+      it "When I change any/all of the information and click submit, I am redirected to the bulk discount's show page & I see that the discount's attributes have been updated" do
         
-        visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
+        visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
 
         select('%99', from: :percentage_discount)
         fill_in('Quantity', with: 99)
