@@ -33,6 +33,7 @@ RSpec.describe InvoiceItem, type: :model do
     it { should have_many(:merchants).through(:item) }
     it { should have_many(:transactions).through(:invoice) }
     it { should have_many(:customers).through(:invoice) }
+    it { should have_many(:bulk_discounts).through(:item) }
   end
 
   describe 'Incomplete Invoices' do

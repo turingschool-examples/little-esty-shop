@@ -80,13 +80,13 @@ RSpec.describe 'Dashboard index' do
     end
       it '' do 
         # When I visit my merchant dashboard
-        visit "/merchant/#{@merchant_1.id}/dashboard"
+        visit merchant_dashboard_index_path(@merchant_1)
         # Then I see a link to view all my discounts
         expect(page).to have_content("All Discounts")
         # When I click this link
         click_link("All Discounts")
         # Then I am taken to my bulk discounts index page
-        expect(current_path).to eq("/merchant/#{@merchant_1.id}/bulk_discounts")
+        expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
         # Rest of this story in bulk discounts index spec
     end 
   end
