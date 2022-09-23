@@ -528,5 +528,15 @@ RSpec.describe 'Merchant Dashboard' do
         expect(page).to_not have_content(@discounts[4].item_threshold)
       end
     end
+
+    it 'And each bulk discount listed includes a link to its show page' do
+      visit merchant_discounts_path(@pretty_plumbing)
+      
+      within("#discount-#{@discounts[0].id}") do
+        find_link({text: "Discount #{@discounts[0].id}", href: merchant_discount_path(@pretty_plumbing, @discounts[0].id)}).visible?
+        click_on "Discount #{@discounts[0].id}"
+        expect(current_path).to eq(merchant_discount_path(@pretty_plumbing, @discounts[0].id))
+      end
+    end
   end
 end
