@@ -7,6 +7,7 @@ RSpec.describe 'Merchant Discount Dashboard' do
     @pretty_plumbing = create(:merchant)
 
     @discounts = create_list(:discount, 5, merchant: @pretty_plumbing)
+    @discounts_1 = create_list(:discount, 5, merchant: @merchant_1)
 
   end
   # As a merchant
@@ -37,14 +38,14 @@ RSpec.describe 'Merchant Discount Dashboard' do
       within("#discount-#{@discounts[0].id}") do
         expect(page).to have_content(@discounts[0].bulk_discount.round(2))
         expect(page).to have_content(@discounts[0].item_threshold)
-        expect(page).to_not have_content(@discounts[1].bulk_discount.round(2))
-        expect(page).to_not have_content(@discounts[2].item_threshold)
+        expect(page).to_not have_content(@discounts[1].id)
+        expect(page).to_not have_content(@discounts[2].id)
       end
       within("#discount-#{@discounts[1].id}") do
         expect(page).to have_content(@discounts[1].bulk_discount.round(2))
         expect(page).to have_content(@discounts[1].item_threshold)
-        expect(page).to_not have_content(@discounts[0].bulk_discount.round(2))
-        expect(page).to_not have_content(@discounts[4].item_threshold)
+        expect(page).to_not have_content(@discounts[0].id)
+        expect(page).to_not have_content(@discounts[4].id)
       end
     end
 
@@ -56,6 +57,26 @@ RSpec.describe 'Merchant Discount Dashboard' do
         click_on "Discount #{@discounts[0].id}"
         expect(current_path).to eq(merchant_discount_path(@pretty_plumbing, @discounts[0].id))
       end
+    end
+  end
+#   As a merchant
+# When I visit my bulk discounts index
+# Then next to each bulk discount I see a link to delete it
+# When I click this link
+# Then I am redirected back to the bulk discounts index page
+# And I no longer see the discount listed
+  describe 'user story 3-solo' do
+    it 'I see a link to delete discount and click it and I no longer see the discount' do
+      visit merchant_discounts_path(@merchant_1)
+
+      within("#discount-#{@discounts_1[1].id}") do
+        expect(page).to have_content(@discounts_1[1].bulk_discount.round(2))
+        expect(page).to have_content(@discounts_1[1].item_threshold)
+      end
+      click_button "Delete #{@discounts_1[1].id}"
+      expect(current_path).to eq(merchant_discounts_path(@merchant_1))
+
+      expect(page).to_not have_content(@discounts_1[1].id)
     end
   end
 end

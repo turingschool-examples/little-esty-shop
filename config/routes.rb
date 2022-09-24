@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index ,:show, :update]
     resources :items, only: [:new, :index, :show, :edit, :update, :create]
     patch '/items', to: 'items#update'
-    resources :discounts, only: [:new, :index, :show, :create]
+    resources :discounts, only: [:new, :index, :show, :create, :destroy]
   end
 
 end

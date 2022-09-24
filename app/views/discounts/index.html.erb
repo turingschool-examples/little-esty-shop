@@ -7,5 +7,6 @@
     <p><%= link_to "Discount #{discount.id}", merchant_discount_path(@merchant, discount) %></p>
     <p>discount: <%= discount.bulk_discount.round(2)%>% off</p>
     <p>item threshold: <%= discount.item_threshold %></p>
+    <p><%= button_to "Delete #{discount.id}", merchant_discount_path(@merchant, discount) , method: :delete %></p>
   </div>
 <% end %>

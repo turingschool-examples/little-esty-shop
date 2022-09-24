@@ -22,7 +22,13 @@ class DiscountsController < ApplicationController
     else
       flash.alert = @discount.errors.full_messages.to_sentence
       render :new
-    end 
+    end
+  end
+
+  def destroy
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = Discount.find(params[:id]).destroy
+    redirect_to(merchant_discounts_path(@merchant))
   end
 
   private
