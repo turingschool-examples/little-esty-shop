@@ -127,12 +127,19 @@ RSpec.describe Invoice, type: :model do
       let!(:alainainvoice1_itemlicorice) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: licorice.id, quantity: 15, unit_price: 9900, status:"packaged" )}
 
 
-      it 'can calculate the discounted invoice revenue when a bulk discount is applied' do
+      it 'can calculate the invoice revenue not particular to any merchant' do
         expect(alaina_invoice1.calculate_invoice_revenue).to eq(183600)
-        expect(alaina_invoice1.calculate_revenue_for_merchant).to eq(35100)
+      end
 
+      it 'can calculate the invoice revenue for the merchant from this invoice' do
+        expect(alaina_invoice1.calculate_revenue_for(jewlery_city)).to eq(35100)
+        expect(alaina_invoice1.calculate_revenue_for(carly_silo)).to eq(148500)
+      end
+
+      xit 'can calculate the invoice revenue for the merchant from this invoice' do
         # expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(174630)
       end
+      
     end
 
   end
