@@ -128,8 +128,10 @@ RSpec.describe Invoice, type: :model do
 
 
       it 'can calculate the discounted invoice revenue when a bulk discount is applied' do
-        expect(alaina_invoice1.calculate_invoice_revenue).to eq(183600) 
-        expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(28080)
+        expect(alaina_invoice1.calculate_invoice_revenue).to eq(183600)
+        expect(alaina_invoice1.calculate_revenue_for_merchant).to eq(35100)
+
+        # expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(174630)
       end
     end
 
