@@ -2,6 +2,7 @@ require 'github_service'
 require 'json'
 
 class GithubFacade
+
   def self.commits
     users = ["gjcarew", "KevinT001", "stephenfabian", "Rileybmcc"]
     parsed = users.map do |user|
