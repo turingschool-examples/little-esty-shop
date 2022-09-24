@@ -114,4 +114,41 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
       end
     end
   end
+
+  # As a merchant
+  # When I visit my bulk discounts index
+  # Then I see a link to create a new discount
+  # When I click this link
+  # Then I am taken to a new page where I see a form to add a new bulk discount
+  # When I fill in the form with valid data
+  # Then I am redirected back to the bulk discount index
+  # And I see my new bulk discount listed
+  
+  describe 'User Story 2 - When I visit my bulk discounts index' do 
+    it ' Then I see a link to create a new discount' do
+      visit merchant_bulk_discounts_path(@merchant_1)
+
+      within "#create-bulk-discount" do
+        find_link({text: "Create New Buck Discount for #{@merchant_1.name}", href: new_merchant_bulk_discount_path(@merchant_1)}).visible?
+      end
+
+      visit merchant_bulk_discounts_path(@merchant_2)
+
+      within "#create-bulk-discount" do
+      find_link({text: "Create New Buck Discount for #{@merchant_2.name}", href: new_merchant_bulk_discount_path(@merchant_2)}).visible?
+      end
+    end
+
+    it 'When I click this link Then I am taken to a new page where I see a form to add a new bulk discount' do
+      
+    end
+
+    it 'When I fill in the form with valid data Then I am redirected back to the bulk discount index' do
+      
+    end
+
+    it 'And I see my new bulk discount listed' do
+
+    end
+  end
 end
