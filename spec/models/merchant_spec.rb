@@ -57,7 +57,7 @@ RSpec.describe Merchant, type: :model do
       
       @items_17.each { |item| create(:invoice_items, invoice: @invoice_17, item: item, unit_price: 100, quantity: 10) } #10000
       @items_18.each { |item| create(:invoice_items, invoice: @invoice_18, item: item, unit_price: 200, quantity: 5) } #10000
-       
+      
       @items_19.each { |item| create(:invoice_items, invoice: @invoice_13, item: item, unit_price: 500, quantity: 15) } #50000
       @items_20.each { |item| create(:invoice_items, invoice: @invoice_12, item: item, unit_price: 100, quantity: 5) } #5000
       

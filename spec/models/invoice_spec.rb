@@ -67,8 +67,18 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.sort_by_date).to eq([@invoice_8, @invoice_7, @invoice_6, @invoice_5, @invoice_3, @invoice_4, @invoice_1, @invoice_2])
     end
 
-    it "#best_day" do
-      expect(Invoice.best_day.created_at).to eq(@invoice_8.created_at)
+    describe '#best_day' do
+      it "Return invoice date with most number of sales" do
+        expect(Invoice.best_day.created_at).to eq(@invoice_8.created_at)
+      end
+
+      it 'If duplicate dates, returns most recent date' do
+        # expectation here
+      end
+
+      it 'Only returns invoices with status: completed' do
+        # expectation here
+      end
     end
   end
 
