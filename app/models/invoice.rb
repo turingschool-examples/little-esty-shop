@@ -1,4 +1,4 @@
-class Invoice < ApplicationRecord
+  class Invoice < ApplicationRecord
   belongs_to :customer
   has_many :transactions
   has_many :invoice_items
@@ -30,7 +30,7 @@ class Invoice < ApplicationRecord
     .first
   end
 
-    def total_revenue_of_invoice
-      items.total_revenue_of_all_items
-    end
+  def total_revenue_of_invoice
+    items.total_revenue_of_all_items
+  end
 end
