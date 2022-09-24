@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Discount Dashboard' do
+RSpec.describe 'Merchant Discounts Index' do
   before :each do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
@@ -77,6 +77,17 @@ RSpec.describe 'Merchant Discount Dashboard' do
       expect(current_path).to eq(merchant_discounts_path(@merchant_1))
 
       expect(page).to_not have_content(@discounts_1[1].id)
+
+      visit merchant_discounts_path(@pretty_plumbing)
+
+      within("#discount-#{@discounts[2].id}") do
+        expect(page).to have_content(@discounts[2].bulk_discount.round(2))
+        expect(page).to have_content(@discounts[2].item_threshold)
+      end
+      click_button "Delete #{@discounts[2].id}"
+      expect(current_path).to eq(merchant_discounts_path(@pretty_plumbing))
+
+      expect(page).to_not have_content(@discounts[2].id)
     end
   end
 end

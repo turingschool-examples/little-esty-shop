@@ -1,0 +1,6 @@
+<h3><%= @merchant.name %></h3>
+<div id="discount-<%= @discount.id %>">
+  <p>"id: <%= @discount.id %></p>
+  <p>discount: <%= @discount.bulk_discount.round(2)*100%>% off</p>
+  <p>item threshold: <%= @discount.item_threshold %></p>
+</div>
