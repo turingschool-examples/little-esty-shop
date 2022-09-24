@@ -1,6 +1,10 @@
 <h1>Dashboard</h1>
 <%= @merchant.name %>
 
+<div id="bulk-discount-index">
+  <%= link_to "Bulk Discount Index", merchant_bulk_discounts_path(@merchant) %>
+</div>
+
 <%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %>
 <br>
 <%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
@@ -21,3 +25,4 @@
     <% end %>
   <% end %>
 </div>
+

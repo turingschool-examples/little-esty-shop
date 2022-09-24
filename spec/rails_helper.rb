@@ -35,13 +35,13 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  config.before :each do
-    allow(GithubService).to receive(:get_repos).and_return([{name: "Crimson Sky"}])
-    allow(GithubService).to receive(:get_total_pulls).and_return([{total_count: 2 }])
-    allow(GithubService).to receive(:get_contributors).and_return([{login: "BrianZanti"}])
-    allow(GithubService).to receive(:get_contributors).and_return([{contributions: 96}])
-  end
-  kconfig.include FactoryBot::Syntax::Methods
+  # config.before :each do
+  #   allow(GithubService).to receive(:get_repos).and_return([{name: "Crimson Sky"}])
+  #   allow(GithubService).to receive(:get_total_pulls).and_return([{total_count: 2 }])
+  #   allow(GithubService).to receive(:get_contributors).and_return([{login: "BrianZanti"}])
+  #   allow(GithubService).to receive(:get_contributors).and_return([{contributions: 96}])
+  # end
+  config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
