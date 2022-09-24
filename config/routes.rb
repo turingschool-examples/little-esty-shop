@@ -13,10 +13,9 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:show] do
     get '/dashboard', to: 'merchants#show'
-    resources :bulk_discounts, only: [:index]
+    resources :bulk_discounts, only: [:index, :show]
     resources :invoices, only: [:index ,:show, :update]
     resources :items, only: [:new, :index, :show, :edit, :update, :create]
     patch '/items', to: 'items#update'
   end
-
 end
