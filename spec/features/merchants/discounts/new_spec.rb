@@ -25,5 +25,16 @@ RSpec.describe 'bulk discounts index' do
       click_button "Create a New Discount"
       expect(current_path).to eq(new_merchant_discount_path(@pretty_plumbing))
     end
+
+    it 'I fill out the form I click Submit I see the discount I just created in the discounts index' do
+
+      visit new_merchant_discount_path(@pretty_plumbing)
+
+      fill_in "discount[bulk_discount]", with: 0.50
+      fill_in "discount[item_threshold]", with: 10
+      click_on "Create Discount"
+
+      expect(current_path).to eq(merchant_discounts_path(@pretty_plumbing))
+    end
   end
 end
