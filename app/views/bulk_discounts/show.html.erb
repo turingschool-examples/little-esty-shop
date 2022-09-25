@@ -2,3 +2,5 @@
 
 <p>"Discount: <%= @discount.discount %>%"</p>
 <p>"Minimum Threshold: <%= @discount.threshold %> items"</p>
+
+<%= button_to 'Edit this Offer', edit_merchant_bulk_discount_path(@merchant.id, @discount.id), method: :get %>

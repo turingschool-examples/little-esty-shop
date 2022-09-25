@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :items
     resources :invoices, only: %i[index show update]
-    resources :bulk_discounts, only: %i[index show update new destroy create]
+    resources :bulk_discounts, only: %i[index show edit update new destroy create]
   end
 
 
