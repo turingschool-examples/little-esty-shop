@@ -128,6 +128,53 @@ RSpec.describe 'bulk discount show page' do
       click_on 'Edit Bulk Discount'
 
       expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1, @bulk_discount_1))
+
+      within "#bulk-discount-info" do
+        expect(page).to have_content("Discount: 0.75")
+        expect(page).to have_content("Threshold: 200")
+      end
+
+      visit edit_merchant_bulk_discount_path(@merchant_1, @bulk_discount_2)
+
+      fill_in 'bulk_discount[discount]', with: 0.05
+      fill_in 'bulk_discount[threshold]', with: 12
+
+      click_on 'Edit Bulk Discount'
+
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1, @bulk_discount_2))
+
+      within "#bulk-discount-info" do
+        expect(page).to have_content("Discount: 0.05")
+        expect(page).to have_content("Threshold: 12")
+      end
+
+      visit edit_merchant_bulk_discount_path(@merchant_2, @bulk_discount_4)
+
+      fill_in 'bulk_discount[discount]', with: 0.33
+      fill_in 'bulk_discount[threshold]', with: 33
+
+      click_on 'Edit Bulk Discount'
+
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant_2, @bulk_discount_4))
+
+      within "#bulk-discount-info" do
+        expect(page).to have_content("Discount: 0.33")
+        expect(page).to have_content("Threshold: 33")
+      end
+
+      visit edit_merchant_bulk_discount_path(@merchant_2, @bulk_discount_5)
+
+      fill_in 'bulk_discount[discount]', with: 0.1
+      fill_in 'bulk_discount[threshold]', with: 5
+
+      click_on 'Edit Bulk Discount'
+
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant_2, @bulk_discount_5))
+
+      within "#bulk-discount-info" do
+        expect(page).to have_content("Discount: 0.1")
+        expect(page).to have_content("Threshold: 5")
+      end
     end
   end
 end
