@@ -100,7 +100,7 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
       end
 
       visit merchant_bulk_discounts_path(@merchant_2)
-      save_and_open_page
+
       within "#bulk-discount-#{@bulk_discount_4.id}" do
         find_link({text: "Show Page for Bulk Discount ID #{@bulk_discount_4.id}", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_4)}).visible?
       end
@@ -128,27 +128,57 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
     it ' Then I see a link to create a new discount' do
       visit merchant_bulk_discounts_path(@merchant_1)
 
-      within "#create-bulk-discount" do
+      within "#link-create-bulk-discount" do
         find_link({text: "Create New Buck Discount for #{@merchant_1.name}", href: new_merchant_bulk_discount_path(@merchant_1)}).visible?
       end
 
       visit merchant_bulk_discounts_path(@merchant_2)
 
-      within "#create-bulk-discount" do
-      find_link({text: "Create New Buck Discount for #{@merchant_2.name}", href: new_merchant_bulk_discount_path(@merchant_2)}).visible?
+      within "#link-create-bulk-discount" do
+        find_link({text: "Create New Buck Discount for #{@merchant_2.name}", href: new_merchant_bulk_discount_path(@merchant_2)}).visible?
       end
     end
 
     it 'When I click this link Then I am taken to a new page where I see a form to add a new bulk discount' do
-      
+      visit merchant_bulk_discounts_path(@merchant_1)
+
+      click_on "Create New Buck Discount for #{@merchant_1.name}"
+
+      expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant_1))
+
+      visit merchant_bulk_discounts_path(@merchant_2)
+
+      click_on "Create New Buck Discount for #{@merchant_2.name}"
+
+      expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant_2))
     end
 
-    it 'When I fill in the form with valid data Then I am redirected back to the bulk discount index' do
+    it 'When I fill in the form with valid data Then I am redirected back to the bulk discount index and I see new bulk discount' do
+      visit new_merchant_bulk_discount_path(@merchant_1)
       
-    end
+      within "#create-bulk-discount" do
+        fill_in 'bulk_discount[discount]', with: 0.5
+        fill_in 'bulk_discount[threshold]', with: 30
+        click_on "Create New Discount"
+      end
 
-    it 'And I see my new bulk discount listed' do
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
 
+      expect(page).to have_content("Discount: 0.5")
+      expect(page).to have_content("Threshold: 30")
+
+      visit new_merchant_bulk_discount_path(@merchant_2)
+
+      within "#create-bulk-discount" do
+        fill_in 'bulk_discount[discount]', with: 0.15
+        fill_in 'bulk_discount[threshold]', with: 100
+        click_on "Create New Discount"
+      end
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_2))
+
+      expect(page).to have_content("Discount: 0.15")
+      expect(page).to have_content("Threshold: 100")
     end
   end
 end
