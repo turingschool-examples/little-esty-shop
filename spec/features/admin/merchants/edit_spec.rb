@@ -8,7 +8,7 @@ RSpec.describe "Admin Merchant Edit Page" do
     end
 
     describe "I visit a merchant's admin show page" do
-      
+
       it "I see a link to update the merchant's information" do
         visit admin_merchant_path(@merchant_1)
         expect(page).to have_link("Update")
@@ -28,8 +28,8 @@ RSpec.describe "Admin Merchant Edit Page" do
       end
 
       describe "Admin merchant Update page" do
-      
-        it "I see a form filled in with the existing merchant attribute information" do 
+
+        it "I see a form filled in with the existing merchant attribute information" do
           visit edit_admin_merchant_path(@merchant_1)
           expect(page).to have_field("Name", {with: "#{@merchant_1.name}"})
           expect(page).to_not have_field("Name", {with: "#{@merchant_2.name}"})
@@ -47,7 +47,7 @@ RSpec.describe "Admin Merchant Edit Page" do
           expect(current_path).to eq(admin_merchant_path(@merchant_1))
           expect(page).to have_content("Billy John Tools")
           expect(page).to_not have_content("Johns Tools")
-          expect(page).to have_content ("Merchant was successfully updated!")
+          expect(page).to have_content("Merchant was successfully updated!")
         end
       end
     end

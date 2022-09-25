@@ -38,10 +38,28 @@ RSpec.describe 'Merchant Discount Edit Page' do
      end
    end
 
-   it 'I see that the discounts current attributes are pre-poluated in the form' do
+   it 'I see that the discounts current attributes are pre-populated in the form' do
      visit edit_merchant_discount_path(@pretty_plumbing, @discounts[4])
      expect(page).to have_content(@discounts[4].bulk_discount.round(2))
      expect(page).to have_content(@discounts[4].item_threshold)
+
+     visit edit_merchant_discount_path(@merchant_1, @discounts_1[2])
+     expect(page).to have_content(@discounts_1[2].bulk_discount.round(2))
+     expect(page).to have_content(@discounts_1[2].item_threshold)
    end
+
+   it 'I change any/all of the information and click submit
+   Then I am redirected to the bulk discounts show page
+   And I see that the discounts attributes have been updated' do
+
+    visit edit_merchant_discount_path(@pretty_plumbing, @discounts[4])
+
+    fill_in "Item threshold",	with: 15
+    click_button"Update Discount"
+
+    expect(current_path).to eq(merchant_discount_path(@pretty_plumbing, @discounts[4]))
+    expect(page).to have_content(15)
+    expect(page).to_not have_content(20)
+  end
  end
 end
