@@ -25,6 +25,11 @@ class DiscountsController < ApplicationController
     end
   end
 
+  def edit
+    @discount = Discount.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
   def destroy
     @merchant = Merchant.find(params[:merchant_id])
     @discount = Discount.find(params[:id]).destroy

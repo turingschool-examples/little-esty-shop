@@ -22,7 +22,7 @@ RSpec.describe 'Merchant Discount Show' do
         expect(page).to have_content(@discounts_1[2].item_threshold)
         expect(page).to have_content((@discounts_1[2].bulk_discount.round(2))*100)
         expect(page).to_not have_content(@discounts_1[0].id)
-      end 
+      end
 
       visit merchant_discount_path(@pretty_plumbing, @discounts[2])
 

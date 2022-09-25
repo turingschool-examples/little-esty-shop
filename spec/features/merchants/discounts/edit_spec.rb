@@ -1,0 +1,41 @@
+require 'rails_helper'
+
+RSpec.describe 'Merchant Discount Edit Page' do
+  before :each do
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
+    @pretty_plumbing = create(:merchant)
+
+    @discounts = create_list(:discount, 5, merchant: @pretty_plumbing)
+    @discounts_1 = create_list(:discount, 5, merchant: @merchant_1)
+
+  end
+
+#   As a merchant
+# When I visit my bulk discount show page
+# Then I see a link to edit the bulk discount
+# When I click this link
+# Then I am taken to a new page with a form to edit the discount
+# And I see that the discounts current attributes are pre-poluated in the form
+# When I change any/all of the information and click submit
+# Then I am redirected to the bulk discount's show page
+# And I see that the discount's attributes have been updated
+  describe 'user story 5-solo' do
+     it 'When I click the edit discount link I am taken to a new page with a form to edit' do
+       visit merchant_discount_path(@merchant_1, @discounts_1[2])
+
+       within("#discount-#{@discounts_1[2].id}") do
+         click_link "Edit Discount"
+       end
+
+       expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discounts_1[2]))
+
+       visit merchant_discount_path(@pretty_plumbing, @discounts[4])
+
+       within("#discount-#{@discounts[4].id}") do
+         click_link "Edit Discount"
+       expect(current_path).to eq(edit_merchant_discount_path(@pretty_plumbing, @discounts[4]))
+     end
+   end
+ end
+end 
