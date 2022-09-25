@@ -1,0 +1,14 @@
+<h1> Bulk Discounts Available </h1>
+
+
+
+<% @discounts.each do |offer| %>
+<h3> <%= offer.discount %>% </h3>
+<p>
+<ul>
+  <li>"Minimum Threshold: <%= offer.threshold %> items"</li>
+  <li>"Discount: <%= offer.discount %>%"</li>
+  <li> <%= link_to 'View this Offer', merchant_bulk_discount_path(id: "#{offer.id}") %></li>
+  <ul>
+  </p>
+<% end %>

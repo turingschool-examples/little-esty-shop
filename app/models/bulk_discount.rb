@@ -1,4 +1,4 @@
-class InvoiceItem < ApplicationRecord
+class BulkDiscount < ApplicationRecord
   belongs_to :merchant
 
 

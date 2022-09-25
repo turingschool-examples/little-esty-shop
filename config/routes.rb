@@ -8,10 +8,11 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
   resources :merchants do
     resources :items
     resources :invoices, only: %i[index show update]
-    resources :bulk_discounts
+    resources :bulk_discounts, only: %i[index show update new destroy create]
   end
 
 

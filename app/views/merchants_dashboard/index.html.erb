@@ -2,7 +2,7 @@
 
 <%= link_to "#{@merchant.name}'s Item index", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "#{@merchant.name}'s Invoice index", "/merchants/#{@merchant.id}/invoices" %>
-
+<%= button_to "View all Discounts",  "/merchants/#{@merchant.id}/bulk_discounts", method: "get" %>
 
 <h2>Top 5 Customers by Total Number of Succesful Transactions:</h2>
  <% @merchant.top_five_cust_by_transaction.each do |customer| %>
