@@ -7,8 +7,8 @@
 <p>Status: <%= @invoice.status %></p>
 <p>Created at: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <div id="total_invoice_revenue">
-<p>Total Revenue From This Invoice: <%= price_round(@invoice.calculate_invoice_revenue)%></p>
-<p>Total Revenue From This Invoice Discount Applied: <%= price_round(@invoice.calculate_discounted_invoice_revenue)%></p>
+<p>Total Revenue From This Invoice: <%= price_round(@invoice.calculate_revenue_for(@merchant))%></p>
+<p>Total Revenue From This Invoice Discount Applied: <%= price_round(@invoice.calculate_discounted_invoice_revenue(@merchant))%></p>
 </div>
 <h3>Customer:</h3>
 <p style='margin-left:20px'><%= @invoice.customer.name %></p>
