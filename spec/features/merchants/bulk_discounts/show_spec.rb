@@ -65,22 +65,69 @@ RSpec.describe 'bulk discount show page' do
       end
     end
 
-    it 'When I click this link Then I am taken to a new page with a form to edit the discount' do
+    it 'When I click this link Then I am taken to a new page with a form to edit the discount with pre-populated values' do
       visit merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)
 
       click_on "Edit Bulk Discount ID #{@bulk_discount_1.id}"
 
       expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant_1, @bulk_discount_1))
-      save_and_open_page
-      expect(page).to have_content(bulk_discount[edit])
-    end
-
-    it 'And I see that the discounts current attributes are pre-poluated in the form' do
       
+      within "#edit-bulk-discount" do
+        expect(page).to have_field('bulk_discount[discount]', with: "#{@bulk_discount_1.discount}")
+        expect(page).to have_field('bulk_discount[threshold]', with: "#{@bulk_discount_1.threshold}")
+        expect(page).to_not have_field('bulk_discount[discount]', with: "#{@bulk_discount_4.discount}")
+        expect(page).to_not have_field('bulk_discount[threshold]', with: "#{@bulk_discount_4.threshold}")
+      end
+
+      visit merchant_bulk_discount_path(@merchant_1, @bulk_discount_3)
+
+      click_on "Edit Bulk Discount ID #{@bulk_discount_3.id}"
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant_1, @bulk_discount_3))
+      
+      within "#edit-bulk-discount" do
+        expect(page).to have_field('bulk_discount[discount]', with: "#{@bulk_discount_3.discount}")
+        expect(page).to have_field('bulk_discount[threshold]', with: "#{@bulk_discount_3.threshold}")
+        expect(page).to_not have_field('bulk_discount[discount]', with: "#{@bulk_discount_6.discount}")
+        expect(page).to_not have_field('bulk_discount[threshold]', with: "#{@bulk_discount_6.threshold}")
+      end
+
+      visit merchant_bulk_discount_path(@merchant_2, @bulk_discount_4)
+
+      click_on "Edit Bulk Discount ID #{@bulk_discount_4.id}"
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant_2, @bulk_discount_4))
+
+      within "#edit-bulk-discount" do
+      expect(page).to have_field('bulk_discount[discount]', with: "#{@bulk_discount_4.discount}")
+      expect(page).to have_field('bulk_discount[threshold]', with: "#{@bulk_discount_4.threshold}")
+      expect(page).to_not have_field('bulk_discount[discount]', with: "#{@bulk_discount_1.discount}")
+      expect(page).to_not have_field('bulk_discount[threshold]', with: "#{@bulk_discount_1.threshold}")
+      end
+
+      visit merchant_bulk_discount_path(@merchant_2, @bulk_discount_6)
+
+      click_on "Edit Bulk Discount ID #{@bulk_discount_6.id}"
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant_2, @bulk_discount_6))
+
+      within "#edit-bulk-discount" do
+      expect(page).to have_field('bulk_discount[discount]', with: "#{@bulk_discount_6.discount}")
+      expect(page).to have_field('bulk_discount[threshold]', with: "#{@bulk_discount_6.threshold}")
+      expect(page).to_not have_field('bulk_discount[discount]', with: "#{@bulk_discount_3.discount}")
+      expect(page).to_not have_field('bulk_discount[threshold]', with: "#{@bulk_discount_3.threshold}")
+      end
     end
 
     it 'when I make an edit, I am redirected back to the show page and see the updated attributes' do
-      
+      visit edit_merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)
+
+      fill_in 'bulk_discount[discount]', with: 0.75
+      fill_in 'bulk_discount[threshold]', with: 200
+
+      click_on 'Edit Bulk Discount'
+
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1, @bulk_discount_1))
     end
   end
 end
