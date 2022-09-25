@@ -37,5 +37,11 @@ RSpec.describe 'Merchant Discount Edit Page' do
        expect(current_path).to eq(edit_merchant_discount_path(@pretty_plumbing, @discounts[4]))
      end
    end
+
+   it 'I see that the discounts current attributes are pre-poluated in the form' do
+     visit edit_merchant_discount_path(@pretty_plumbing, @discounts[4])
+     expect(page).to have_content(@discounts[4].bulk_discount.round(2))
+     expect(page).to have_content(@discounts[4].item_threshold)
+   end
  end
-end 
+end
