@@ -21,15 +21,11 @@ class Invoice < ApplicationRecord
   end
 
   def calculate_revenue_for(merchant)
-    merchant_id = merchant.id
-    invoice_items.joins(:bulk_discounts).where('items.merchant_id = ?', merchant_id).distinct.sum('invoice_items.unit_price * invoice_items.quantity')
+    merchant.invoice_items.sum('invoice_items.unit_price * invoice_items.quantity')
   end
 
-  def calculate_discounted_invoice_revenue
-    invoice_items.joins(:bulk_discounts).where("invoice_items.quantity >= bulk_discounts.quantity_threshold").select("invoice_items.id, max(invoice_items.quantity * invoice_items.unit_price * (1 - (bulk_discounts.percentage_discount * .01))) as remaining_revenue").group("invoice_items.id").sum(&:remaining_revenue).to_i 
-
-    #TODO account for is it looking at one merchant?
-    #TODO ignore discounts for other merchants
+  def calculate_discounted_invoice_revenue(merchant)
+    merchant.invoice_items.joins(:bulk_discounts).select("invoice_items.id, (invoice_items.quantity * invoice_items.unit_price) * min(1 - (bulk_discounts.percentage_discount * .01)) as remaining_revenue").where("invoice_items.quantity >= bulk_discounts.quantity_threshold").group("invoice_items.id").sum(&:remaining_revenue).to_i 
   end
 
 end
