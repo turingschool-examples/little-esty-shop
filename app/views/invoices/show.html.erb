@@ -2,6 +2,7 @@
 
 <div id="invoice-revenue">
   <p><%= @invoice.items.total_revenue_of_all_items %></p>
+  <p><%= @invoice.merchant_revenue(@merchant) %></p>
 </div>
 
 <div id="invoice-info">
@@ -26,4 +27,3 @@
     <% end %>
   <% end %>
 </div>
-

@@ -5,6 +5,9 @@ RSpec.describe 'Merchant Invoice Show Page' do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
 
+    @discounts = create_list(:discount, 5, merchant: @merchant_1)
+    @discounts_1 = create_list(:discount, 5, merchant: @merchant_2)
+
     @item_1 = create(:item, merchant: @merchant_1)
     @item_2 = create(:item, merchant: @merchant_2)
 
@@ -187,7 +190,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
       create_list(:transaction, 5, invoice: invoice_4, result: :success)
 
       visit merchant_invoice_path(merchant_1, invoice_1)
-      
+
       within "#invoice-revenue" do
         expect(page).to have_content(invoice_1.items.total_revenue_of_all_items)
       end
@@ -208,6 +211,21 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
       within "#invoice-revenue" do
         expect(page).to have_content(invoice_4.items.total_revenue_of_all_items)
+      end
+    end
+  end
+  # As a merchant
+  # When I visit my merchant invoice show page
+  # Then I see the total revenue for my merchant from this invoice (not including discounts)
+  # And I see the total discounted revenue for my merchant from this invoice
+  # which includes bulk discounts in the calculation
+  describe 'user story 6-solo' do
+    it 'I see the total revenue for my merchant from this invoice (not including discounts)' do
+
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
+
+      within "#invoice-revenue" do
+        expect(page).to have_content(@invoice_1.merchant_revenue(@merchant_1.id))
       end
     end
   end

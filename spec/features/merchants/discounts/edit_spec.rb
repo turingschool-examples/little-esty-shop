@@ -10,7 +10,6 @@ RSpec.describe 'Merchant Discount Edit Page' do
     @discounts_1 = create_list(:discount, 5, merchant: @merchant_1)
 
   end
-
 #   As a merchant
 # When I visit my bulk discount show page
 # Then I see a link to edit the bulk discount

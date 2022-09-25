@@ -10,6 +10,8 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:transactions) }
     it { should have_many(:invoice_items) }
     it { should have_many(:items).through(:invoice_items) }
+    it { should have_many(:merchants).through(:items) }
+    it { should have_many(:discounts).through(:merchants) }
   end
 
   before :each do
@@ -72,9 +74,15 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  describe "class methods" do 
+  describe "instance methods" do
     it "#total_revenue_of_invoice" do
-      expect(@invoice_1.total_revenue_of_invoice).to be (50000)
+      expect(@invoice_1.total_revenue_of_invoice).to be(50000)
+    end
+
+    describe 'calculates total invoices revenue by merchant' do
+      it "#merchant_revenue" do
+        expect(@invoice_5.merchant_revenue(@merchant_3)).to be(15000)
+      end
     end
   end
 end

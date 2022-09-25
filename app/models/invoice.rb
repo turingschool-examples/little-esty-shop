@@ -3,6 +3,8 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
+  has_many :discounts, through: :merchants
 
   enum status: { "in progress": 0, completed: 1, cancelled: 2 }
 
@@ -30,7 +32,13 @@ class Invoice < ApplicationRecord
     .first
   end
 
-    def total_revenue_of_invoice
-      items.total_revenue_of_all_items
-    end
+  def total_revenue_of_invoice
+    items.total_revenue_of_all_items
+  end
+
+  def merchant_revenue(merchant_id)
+    invoice_items.joins(:item)
+                 .where(items: { merchant_id: merchant_id })
+                 .sum('invoice_items.unit_price * invoice_items.quantity')
+  end
 end
