@@ -129,13 +129,13 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
       visit merchant_bulk_discounts_path(@merchant_1)
 
       within "#link-create-bulk-discount" do
-        find_link({text: "Create New Buck Discount for #{@merchant_1.name}", href: new_merchant_bulk_discount_path(@merchant_1)}).visible?
+        find_link({text: "Create New Bulk Discount for #{@merchant_1.name}", href: new_merchant_bulk_discount_path(@merchant_1)}).visible?
       end
 
       visit merchant_bulk_discounts_path(@merchant_2)
 
       within "#link-create-bulk-discount" do
-        find_link({text: "Create New Buck Discount for #{@merchant_2.name}", href: new_merchant_bulk_discount_path(@merchant_2)}).visible?
+        find_link({text: "Create New Bulk Discount for #{@merchant_2.name}", href: new_merchant_bulk_discount_path(@merchant_2)}).visible?
       end
     end
 
@@ -179,6 +179,49 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
 
       expect(page).to have_content("Discount: 0.15")
       expect(page).to have_content("Threshold: 100")
+    end
+  end
+
+  # As a merchant
+  # When I visit my bulk discounts index
+  # Then next to each bulk discount I see a link to delete it
+  # When I click this link
+  # Then I am redirected back to the bulk discounts index page
+  # And I no longer see the discount listed
+
+  describe 'User Story 3 - When I visit my bulk discounts index' do
+    it 'Then next to each bulk discount I see a link to delete it' do
+      visit merchant_bulk_discounts_path(@merchant_1)
+
+      within "#bulk-discount-#{@bulk_discount_1.id}" do
+        find_link({text: "Delete Bulk Discount ID #{@bulk_discount_1.id}", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)}).visible?
+      end
+
+      within "#bulk-discount-#{@bulk_discount_2.id}" do
+        find_link({text: "Delete Bulk Discount ID #{@bulk_discount_2.id}", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_2)}).visible?
+      end
+
+      within "#bulk-discount-#{@bulk_discount_3.id}" do
+        find_link({text: "Delete Bulk Discount ID #{@bulk_discount_3.id}", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_3)}).visible?
+      end
+
+      visit merchant_bulk_discounts_path(@merchant_2)
+
+      within "#bulk-discount-#{@bulk_discount_4.id}" do
+        find_link({text: "Delete Bulk Discount ID #{@bulk_discount_4.id}", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_4)}).visible?
+      end
+
+      within "#bulk-discount-#{@bulk_discount_5.id}" do
+        find_link({text: "Delete Bulk Discount ID #{@bulk_discount_5.id}", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_5)}).visible?
+      end
+
+      within "#bulk-discount-#{@bulk_discount_6.id}" do
+        find_link({text: "Delete Bulk Discount ID #{@bulk_discount_6.id}", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_6)}).visible?
+      end
+    end
+
+    it 'When I click this link Then I am redirected to the bulk discounts index pageAnd I no longer see the discount listed' do
+      
     end
   end
 end
