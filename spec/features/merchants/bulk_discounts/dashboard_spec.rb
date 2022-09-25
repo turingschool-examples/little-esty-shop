@@ -142,13 +142,13 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
     it 'When I click this link Then I am taken to a new page where I see a form to add a new bulk discount' do
       visit merchant_bulk_discounts_path(@merchant_1)
 
-      click_on "Create New Buck Discount for #{@merchant_1.name}"
+      click_on "Create New Bulk Discount for #{@merchant_1.name}"
 
       expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant_1))
 
       visit merchant_bulk_discounts_path(@merchant_2)
 
-      click_on "Create New Buck Discount for #{@merchant_2.name}"
+      click_on "Create New Bulk Discount for #{@merchant_2.name}"
 
       expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant_2))
     end
