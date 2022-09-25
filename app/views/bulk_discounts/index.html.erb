@@ -9,6 +9,7 @@
   <li>"Minimum Threshold: <%= offer.threshold %> items"</li>
   <li>"Discount: <%= offer.discount %>%"</li>
   <li> <%= link_to 'View this Offer', merchant_bulk_discount_path(id: "#{offer.id}") %></li>
+  <li> <%= link_to 'Remove this Discount', merchant_bulk_discount_path(id: "#{offer.id}"), method: :delete %></li>
   <ul>
   </p>
 <% end %>
