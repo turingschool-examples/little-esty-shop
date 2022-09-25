@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant bulk discount show ' do
+RSpec.describe 'merchant bulk discount create' do
   before :each do
     @merchant1 = Merchant.create!(name: "Robespierre", status: 'Enabled')
     @merchant2 = Merchant.create!(name: "Tom", status: 'Enabled')
