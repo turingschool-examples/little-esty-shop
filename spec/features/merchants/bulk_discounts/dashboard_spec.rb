@@ -54,16 +54,22 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
       within "#bulk-discount-#{@bulk_discount_1.id}" do
         expect(page).to have_content(@bulk_discount_1.discount)
         expect(page).to have_content(@bulk_discount_1.threshold)
+        expect(page).to_not have_content(@bulk_discount_4.discount)
+        expect(page).to_not have_content(@bulk_discount_4.threshold)
       end
 
       within "#bulk-discount-#{@bulk_discount_2.id}" do
         expect(page).to have_content(@bulk_discount_2.discount)
         expect(page).to have_content(@bulk_discount_2.threshold)
+        expect(page).to_not have_content(@bulk_discount_5.discount)
+        expect(page).to_not have_content(@bulk_discount_5.threshold)
       end
 
       within "#bulk-discount-#{@bulk_discount_3.id}" do
         expect(page).to have_content(@bulk_discount_3.discount)
         expect(page).to have_content(@bulk_discount_3.threshold)
+        expect(page).to_not have_content(@bulk_discount_4.discount)
+        expect(page).to_not have_content(@bulk_discount_4.threshold)
       end
 
       visit merchant_bulk_discounts_path(@merchant_2)
@@ -71,16 +77,22 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
       within "#bulk-discount-#{@bulk_discount_4.id}" do
         expect(page).to have_content(@bulk_discount_4.discount)
         expect(page).to have_content(@bulk_discount_4.threshold)
+        expect(page).to_not have_content(@bulk_discount_3.discount)
+        expect(page).to_not have_content(@bulk_discount_3.threshold)
       end
 
       within "#bulk-discount-#{@bulk_discount_5.id}" do
         expect(page).to have_content(@bulk_discount_5.discount)
         expect(page).to have_content(@bulk_discount_5.threshold)
+        expect(page).to_not have_content(@bulk_discount_2.discount)
+        expect(page).to_not have_content(@bulk_discount_2.threshold)
       end
 
       within "#bulk-discount-#{@bulk_discount_6.id}" do
         expect(page).to have_content(@bulk_discount_6.discount)
         expect(page).to have_content(@bulk_discount_6.threshold)
+        expect(page).to_not have_content(@bulk_discount_1.discount)
+        expect(page).to_not have_content(@bulk_discount_1.threshold)
       end
     end
 
@@ -221,7 +233,27 @@ RSpec.describe 'Merchant Dashboard - Bulk Discounts' do
     end
 
     it 'When I click this link Then I am redirected to the bulk discounts index pageAnd I no longer see the discount listed' do
-      
+      visit merchant_bulk_discounts_path(@merchant_1)
+
+      within "#bulk-discount-#{@bulk_discount_1.id}" do
+        click_on "Delete Bulk Discount ID #{@bulk_discount_1.id}"
+      end
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
+
+      expect(page).to_not have_content(@bulk_discount_1.discount)
+      expect(page).to_not have_content(@bulk_discount_1.threshold)
+  
+      visit merchant_bulk_discounts_path(@merchant_2)
+
+      within "#bulk-discount-#{@bulk_discount_4.id}" do
+        click_on "Delete Bulk Discount ID #{@bulk_discount_4.id}"
+      end
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_2))
+
+      expect(page).to_not have_content(@bulk_discount_4.discount)
+      expect(page).to_not have_content(@bulk_discount_4.threshold)
     end
   end
 end
