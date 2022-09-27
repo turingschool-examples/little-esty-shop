@@ -49,4 +49,8 @@
     .group(:id)
     .sum(&:discount)
   end
+
+  def revenue_with_discount(merch_id)
+    total_revenue_merchant(merch_id) - discount_amount_merchant(merch_id)
+  end
 end
