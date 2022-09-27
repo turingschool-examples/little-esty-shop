@@ -2,8 +2,8 @@
 
 <div id="invoice-revenue">
   <p>Total Revenue of all Items: <%= @invoice.items.total_revenue_of_all_items %></p>
-  <p>Total Revenue of all Invoices<%= @invoice.merchant_revenue(@merchant) %></p>
-  <p>Total Revenue with Bulk Discounts Applied <%= @invoice.merchant_discounted_revenue(@merchant) %></p>
+  <p>Total Revenue of all Invoices: <%= @invoice.merchant_revenue(@merchant) %></p>
+  <p>Total Revenue with Bulk Discounts Applied: <%= @invoice.merchant_discounted_revenue(@merchant) %></p>
 </div>
 
 <div id="invoice-info">
@@ -14,16 +14,21 @@
 </div>
 
 <div id="invoice-items-info">
-  <% @invoice.items.each do |item| %>
-    <p>Item Name: <%= item.name %></p>
-    <p>Item Price: <%= item.unit_price %></p>
-    <p>Item Quantity: <%= item.quantity_purchased(@invoice.id) %></p>
-    <p>Item Shipping Status: <%= item.shipping_status(@invoice.id) %>  </p>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <p>Item Name: <%= invoice_item.item.name %></p>
+    <p>Item Price: <%= invoice_item.unit_price %></p>
+    <p>Item Quantity: <%= invoice_item.item.quantity_purchased(@invoice.id) %></p>
+    <p>Item Shipping Status: <%= invoice_item.item.shipping_status(@invoice.id) %>  </p>
+      <% if invoice_item.discounts_applied != nil %>
+        <p><%= link_to "Bulk Discount for #{invoice_item.item.name}", merchant_discount_path(@merchant, invoice_item.discounts_applied) %></p>
+      <% else %>
+        <p>Bulk Discounts N/A</p>
+      <% end %>
     <%= form_with model: [@merchant, @invoice], local: true do |form| %>
       <%= form.label :item_id %>
-      <%= form.hidden_field :item_id, value: "#{item.id}" %>
+      <%= form.hidden_field :item_id, value: "#{invoice_item.item.id}" %>
       <%= form.label :status, "Invoice Item Status: " %>
-      <%= form.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]], selected: "#{item.shipping_status(@invoice.id)}" %>
+      <%= form.select :status, [["Pending", :pending], ["Packaged", :packaged], ["Shipped", :shipped]], selected: "#{invoice_item.item.shipping_status(@invoice.id)}" %>
       <%= form.submit "Update Item Status" %>
     <% end %>
   <% end %>

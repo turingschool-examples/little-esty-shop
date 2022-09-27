@@ -74,7 +74,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
       within("#invoice-items-info") do
         expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_1.unit_price)
+        expect(page).to have_content(@invoice_items_1.unit_price)
         expect(page).to have_content(@invoice_items_1.status)
         expect(page).to have_content(@invoice_items_1.quantity)
         expect(page).to_not have_content(@item_2.name)
@@ -85,7 +85,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
       within("#invoice-items-info") do
         expect(page).to have_content(@item_2.name)
-        expect(page).to have_content(@item_2.unit_price)
+        expect(page).to have_content(@invoice_items_2.unit_price)
         expect(page).to have_content(@invoice_items_2.status)
         expect(page).to have_content(@invoice_items_2.quantity)
         expect(page).to_not have_content(@item_1.name)
@@ -248,6 +248,56 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within "#invoice-revenue" do
         expect(page).to have_content(@invoice_2.merchant_discounted_revenue(@merchant_2))
       end
+    end
+  end
+  # As a merchant
+  # When I visit my merchant invoice show page
+  # Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
+  describe 'user story 7-solo' do
+    it 'I see a link to the show page for the bulk discount that was applied' do
+      merchant_1 = create(:merchant)
+
+      item_1 = create(:item, merchant: merchant_1)
+      item_2 = create(:item, merchant: merchant_1)
+      item_3 = create(:item, merchant: merchant_1)
+      item_4 = create(:item, merchant: merchant_1)
+      item_5 = create(:item, merchant: merchant_1)
+      item_6 = create(:item, merchant: merchant_1)
+
+      invoice_1 = create(:invoice)
+      invoice_2 = create(:invoice)
+
+      invoice_item_1 = create(:invoice_items, item_id: item_1.id, invoice_id: invoice_1.id, quantity: 8, unit_price: 200)
+      invoice_item_2 = create(:invoice_items, item_id: item_2.id, invoice_id: invoice_1.id, quantity: 20, unit_price: 100)
+      invoice_item_3 = create(:invoice_items, item_id: item_3.id, invoice_id: invoice_1.id, quantity: 100, unit_price: 50)
+      invoice_item_4 = create(:invoice_items, item_id: item_4.id, invoice_id: invoice_2.id, quantity: 15, unit_price: 2000)
+      invoice_item_5 = create(:invoice_items, item_id: item_5.id, invoice_id: invoice_2.id, quantity: 2, unit_price: 1000)
+      invoice_item_6 = create(:invoice_items, item_id: item_6.id, invoice_id: invoice_2.id, quantity: 150, unit_price: 500)
+
+      discount_1 = create(:discount, bulk_discount: 0.10, item_threshold: 10, merchant: merchant_1)
+      discount_2 = create(:discount, bulk_discount: 0.25, item_threshold: 100, merchant: merchant_1)
+
+      visit merchant_invoice_path(merchant_1, invoice_1)
+
+      within "#invoice-items-info" do
+        expect(page).to_not have_link("Bulk Discount for #{item_1.name}")
+        expect(page).to have_link("Bulk Discount for #{item_2.name}")
+        expect(page).to have_link("Bulk Discount for #{item_3.name}")
+      end
+
+      click_link("Bulk Discount for #{item_3.name}")
+      expect(current_path).to eq(merchant_discount_path(merchant_1, discount_2))
+
+      visit merchant_invoice_path(merchant_1, invoice_2)
+
+      within "#invoice-items-info" do
+        expect(page).to_not have_link("Bulk Discount for #{item_5.name}")
+        expect(page).to have_link("Bulk Discount for #{item_6.name}")
+        expect(page).to have_link("Bulk Discount for #{item_4.name}")
+      end
+
+      click_link("Bulk Discount for #{item_4.name}")
+      expect(current_path).to eq(merchant_discount_path(merchant_1, discount_1))
     end
   end
 end
