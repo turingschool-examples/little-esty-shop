@@ -36,15 +36,23 @@ class Invoice < ApplicationRecord
     items.total_revenue_of_all_items
   end
 
+  def total_discounted_revenue
+    invoice_items.sum do |item|
+      item.discount_price
+    end 
+  end
+
   def merchant_revenue(merchant)
     invoice_items.joins(:item)
-                 .where(items: { merchant_id: merchant.id })
-                 .sum('invoice_items.unit_price * invoice_items.quantity')
+    .where(items: { merchant_id: merchant.id })
+    .sum('invoice_items.unit_price * invoice_items.quantity')
   end
 
   def merchant_discounted_revenue(merchant)
     invoice_items.joins(:item)
-                 .where(items: { merchant_id: merchant.id })
-                 .sum { |d| d.discount_price }
+    .where(items: { merchant_id: merchant.id })
+    .sum do |item|
+       item.discount_price
+     end
   end
 end

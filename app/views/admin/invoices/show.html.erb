@@ -8,10 +8,11 @@
     <%= form.select :status, [["In Progress", "in progress"],["Completed", :completed],["Cancelled", :cancelled]], selected: "#{@invoice.status}" %>
     <%= form.submit "Update Invoice" %>
   <% end %></p>
-    
+
   <p>Created On: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-  <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p> 
+  <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
   <p>Total Invoice Revenue: <%= number_to_currency((@invoice.total_revenue_of_invoice/100.00)) %></p>
+  <p>Total Discounted Revenue: <%= @invoice.total_discounted_revenue %></p>
 </div>
 
 <div id="invoice-items">
@@ -19,8 +20,8 @@
 <% @invoice.items.each do |item| %>
   <p>Item Name: <%= item.name %></p>
   <p>Quantity Sold: <%= item.quantity_purchased(@invoice.id) %></p>
-  <p>Unit Price: <%= number_to_currency((item.price_sold(@invoice.id))/100.00) %></p> 
-  <p>Shipping Status: <%= item.shipping_status(@invoice.id).capitalize %></p> 
+  <p>Unit Price: <%= number_to_currency((item.price_sold(@invoice.id))/100.00) %></p>
+  <p>Shipping Status: <%= item.shipping_status(@invoice.id).capitalize %></p>
 <% end %>
 
 </div>

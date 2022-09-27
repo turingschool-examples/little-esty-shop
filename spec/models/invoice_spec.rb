@@ -112,5 +112,30 @@ RSpec.describe Invoice, type: :model do
 
       end
     end
+    describe 'calculates total discounted revenue per invoice' do
+      it '#total_discounted_revenue' do
+
+        merchant_1 = create(:merchant)
+        item_1 = create(:item, merchant: merchant_1)
+        item_2 = create(:item, merchant: merchant_1)
+        item_3 = create(:item, merchant: merchant_1)
+        invoice_1 = create(:invoice)
+        invoice_2 = create(:invoice)
+        invoice_3 = create(:invoice)
+        invoice_4 = create(:invoice)
+
+        invoice_item1 = create(:invoice_items, item_id: item_1.id, invoice_id: invoice_1.id, quantity: 8, unit_price: 200)
+        invoice_item2 = create(:invoice_items, item_id: item_2.id, invoice_id: invoice_2.id, quantity: 10, unit_price: 100)
+        invoice_item3 = create(:invoice_items, item_id: item_3.id, invoice_id: invoice_3.id, quantity: 100, unit_price: 50)
+
+        discount_1 = create(:discount, bulk_discount: 0.10, item_threshold: 10, merchant: merchant_1)
+        discount_2 = create(:discount, bulk_discount: 0.25, item_threshold: 100, merchant: merchant_1)
+
+        expect(invoice_1.total_discounted_revenue).to eq(1600)
+        expect(invoice_2.total_discounted_revenue).to eq(900)
+        expect(invoice_3.total_discounted_revenue).to eq(3750)
+        expect(invoice_4.total_discounted_revenue).to eq(0)
+      end 
+    end
   end
 end

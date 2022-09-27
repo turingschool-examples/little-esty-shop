@@ -8,7 +8,7 @@ RSpec.describe "Admin Invoice Show Page" do
         @items_2 = create_list(:item, 10)
         @items_3 = create_list(:item, 10)
         @items_4 = create_list(:item, 10)
-      
+
         @invoice_1 = create(:invoice)
         @invoice_2 = create(:invoice)
         @invoice_3 = create(:invoice)
@@ -31,7 +31,7 @@ RSpec.describe "Admin Invoice Show Page" do
           expect(page).to have_content("Created On: #{@invoice_1.created_at.strftime("%A, %B %d, %Y")}")
           expect(page).to have_content("#{@invoice_1.customer.first_name} #{@invoice_1.customer.last_name}")
         end
-        
+
         expect(page).to_not have_content("Invoice ##{@invoice_3.id}")
         expect(page).to_not have_content("#{@invoice_3.customer.first_name} #{@invoice_3.customer.last_name}")
       end
@@ -73,7 +73,7 @@ RSpec.describe "Admin Invoice Show Page" do
 
       it "Then I see the total revenue that will be generated from this invoice" do
         visit admin_invoice_path(@invoice_1)
-        
+
         within("#invoice-details-#{@invoice_1.id}") do
           expect(page).to have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
           expect(page).to_not have_content((@invoice_2.total_revenue_of_invoice/100.00).to_s(:delimited))
@@ -86,7 +86,59 @@ RSpec.describe "Admin Invoice Show Page" do
           expect(page).to_not have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
         end
       end
+#       As an admin
+# When I visit an admin invoice show page
+# Then I see the total revenue from this invoice (not including discounts)
+# And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
+      describe 'user story 8-solo' do
+        it 'I see the total revenue from this invoice (not including discounts)' do
 
+          visit admin_invoice_path(@invoice_2)
+
+          within("#invoice-details-#{@invoice_2.id}") do
+            expect(page).to have_content((@invoice_2.total_revenue_of_invoice/100.00).to_s(:delimited))
+            expect(page).to_not have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))
+          end
+        end
+
+        it 'I see the total discounted revenue from this invoice which includes bulk discounts' do
+          merchant_1 = create(:merchant)
+
+          item_1 = create(:item, merchant: merchant_1)
+          item_2 = create(:item, merchant: merchant_1)
+          item_3 = create(:item, merchant: merchant_1)
+          item_4 = create(:item, merchant: merchant_1)
+          item_5 = create(:item, merchant: merchant_1)
+          item_6 = create(:item, merchant: merchant_1)
+
+          invoice_1 = create(:invoice)
+          invoice_2 = create(:invoice)
+
+          invoice_item_1 = create(:invoice_items, item_id: item_1.id, invoice_id: invoice_1.id, quantity: 8, unit_price: 200)
+          invoice_item_2 = create(:invoice_items, item_id: item_2.id, invoice_id: invoice_1.id, quantity: 20, unit_price: 100)
+          invoice_item_3 = create(:invoice_items, item_id: item_3.id, invoice_id: invoice_1.id, quantity: 100, unit_price: 50)
+          invoice_item_4 = create(:invoice_items, item_id: item_4.id, invoice_id: invoice_2.id, quantity: 15, unit_price: 2000)
+          invoice_item_5 = create(:invoice_items, item_id: item_5.id, invoice_id: invoice_2.id, quantity: 2, unit_price: 1000)
+          invoice_item_6 = create(:invoice_items, item_id: item_6.id, invoice_id: invoice_2.id, quantity: 150, unit_price: 500)
+
+          discount_1 = create(:discount, bulk_discount: 0.10, item_threshold: 10, merchant: merchant_1)
+          discount_2 = create(:discount, bulk_discount: 0.25, item_threshold: 100, merchant: merchant_1)
+
+          visit admin_invoice_path(invoice_1)
+
+          within("#invoice-details-#{invoice_1.id}") do
+            expect(page).to have_content(invoice_1.total_discounted_revenue)
+            expect(page).to_not have_content(invoice_2.total_discounted_revenue)
+          end
+
+          visit admin_invoice_path(invoice_2)
+
+          within("#invoice-details-#{invoice_2.id}") do
+            expect(page).to have_content(invoice_2.total_discounted_revenue)
+            expect(page).to_not have_content(invoice_1.total_discounted_revenue)
+          end
+        end
+      end
     end
   end
 end
