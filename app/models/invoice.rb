@@ -36,14 +36,17 @@
     items.total_revenue_of_all_items
   end
 
-  def discount_revenue
-    items.joins(merchant:[:bulk_discounts])
-    .where('invoice_items.quantity >= bulk_discounts.threshold')
-    .sum('(invoice_items.unit_price - (invoice_items.unit_price * bulk_discounts.discount)) * invoice_items.quantity')
-    # items.joins(merchant:[:bulk_discounts])
-    # .where('invoice_items.quantity >= bulk_discounts.discount')
-    # .select('merchants.id, max((invoice_items.unit_price - (invoice_items.unit_price * bulk_discounts.discount)) * invoice_items.quantity) as d_revenue')
-    # .group('merchants.id')
-    # .sum(&:d_revenue)
+  def total_revenue_merchant(merch_id)
+    items.joins(:invoice_items)
+    .where('items.merchant_id = ?', merch_id)
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
+  def discount_amount_merchant(merch_id)
+    invoice_items.joins(:bulk_discounts)
+    .where('invoice_items.quantity >= bulk_discounts.threshold AND bulk_discounts.merchant_id = ?', merch_id)
+    .select('invoice_items.*, max((invoice_items.quantity * invoice_items.unit_price) * bulk_discounts.discount) as discount')
+    .group(:id)
+    .sum(&:discount)
   end
 end
