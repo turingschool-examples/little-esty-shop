@@ -135,7 +135,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
           visit merchant_invoice_path(steph_merchant, invoice1)
 
-          within("#invoice_item_#{invoice_item1.id}") do
+          within("#item_#{item1.id}") do
             select "Shipped", from: "status"
             click_button "Update Item Status"
 
@@ -143,7 +143,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
             expect(invoice_item1.reload.status).to eq("shipped")
           end
 
-          within("#invoice_item_#{invoice_item2.id}") do
+          within("#item_#{item2.id}") do
             select "Shipped", from: "status"
             click_button "Update Item Status"
 

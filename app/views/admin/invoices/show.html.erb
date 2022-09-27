@@ -8,6 +8,8 @@
 <p> Created on: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %>
 <p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %> </p>
 
+<p> Discounted Revenue: <%= number_to_currency(@invoice.discounted_revenue/100) %> </p>
+
 <h4> Customer: </h4>
 <p><%= @invoice.customer_name %></p>
 <h4> Items on this invoice: </h4>
