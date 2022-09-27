@@ -10,6 +10,8 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:transactions) }
     it { should have_many(:invoice_items) }
     it { should have_many(:items).through(:invoice_items) }
+    it { should have_many(:merchants).through(:items) }
+    it { should have_many(:bulk_discounts).through(:merchants) }
   end
 
   before :each do
@@ -82,9 +84,45 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  describe "class methods" do 
+  describe "instance methods" do 
     it "#total_revenue_of_invoice" do
       expect(@invoice_1.total_revenue_of_invoice).to be (50000)
+    end
+
+    describe '#discount_revenue' do
+      before :each do
+        @merchant_1 = create(:merchant)
+        @merchant_2 = create(:merchant)
+
+        @item_1 = create(:item, merchant: @merchant_1)
+        @item_2 = create(:item, merchant: @merchant_1)
+        @item_3 = create(:item, merchant: @merchant_1)
+
+        @item_4 = create(:item, merchant: @merchant_2)
+        @item_5 = create(:item, merchant: @merchant_2)
+        @item_6 = create(:item, merchant: @merchant_2)
+
+        @invoice_1 = create(:invoice)
+        @invoice_2 = create(:invoice)
+
+        create(:transaction, invoice: @invoice_1, result: :success)
+
+        @bulk_discount_1 = create(:bulk_discount, merchant: @merchant_1, discount: 0.25, threshold: 10)
+        @bulk_discount_2 = create(:bulk_discount, merchant: @merchant_2, discount: 0.10, threshold: 5)
+
+        create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id, unit_price: 100, quantity: 10)
+        create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_2.id, unit_price: 200, quantity: 20)
+        create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_3.id, unit_price: 150, quantity: 5)
+
+        create(:invoice_items, invoice_id: @invoice_2.id, item_id: @item_4.id, unit_price: 100, quantity: 10)
+        create(:invoice_items, invoice_id: @invoice_2.id, item_id: @item_5.id, unit_price: 200, quantity: 20)
+        create(:invoice_items, invoice_id: @invoice_2.id, item_id: @item_6.id, unit_price: 150, quantity: 5)
+      end
+
+      it 'discounts revenue for invoice' do
+        expect(@invoice_1.discount_revenue).to eq(3750)
+        expect(@invoice_2.discount_revenue).to eq(5175)
+      end
     end
   end
 end

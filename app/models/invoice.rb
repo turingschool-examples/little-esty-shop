@@ -3,6 +3,8 @@
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
+  has_many :merchants, through: :items
+  has_many :bulk_discounts, through: :merchants
 
   enum status: { "in progress": 0, completed: 1, cancelled: 2 }
 
@@ -32,5 +34,16 @@
 
   def total_revenue_of_invoice
     items.total_revenue_of_all_items
+  end
+
+  def discount_revenue
+    items.joins(merchant:[:bulk_discounts])
+    .where('invoice_items.quantity >= bulk_discounts.threshold')
+    .sum('(invoice_items.unit_price - (invoice_items.unit_price * bulk_discounts.discount)) * invoice_items.quantity')
+    # items.joins(merchant:[:bulk_discounts])
+    # .where('invoice_items.quantity >= bulk_discounts.discount')
+    # .select('merchants.id, max((invoice_items.unit_price - (invoice_items.unit_price * bulk_discounts.discount)) * invoice_items.quantity) as d_revenue')
+    # .group('merchants.id')
+    # .sum(&:d_revenue)
   end
 end
