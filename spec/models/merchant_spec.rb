@@ -150,41 +150,4 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant1.invoices_distinct_by_merchant).to eq([@invoice_1, @invoice_2, @invoice_3,@invoice_4, @invoice_5, @invoice_6])
     end
   end
-
-  describe '#discount_revenue' do
-    before :each do
-      @merchant_1 = create(:merchant)
-      @merchant_2 = create(:merchant)
-      
-      @item_1 = create(:item, merchant: @merchant_1)
-      @item_2 = create(:item, merchant: @merchant_1)
-      @item_3 = create(:item, merchant: @merchant_1)
-  
-      @item_4 = create(:item, merchant: @merchant_2)
-      @item_5 = create(:item, merchant: @merchant_2)
-      @item_6 = create(:item, merchant: @merchant_2)
-  
-      @invoice_1 = create(:invoice)
-  
-      create(:transaction, invoice: @invoice_1, result: :success)
-    
-      @bulk_discount_1 = create(:bulk_discount, merchant: @merchant_1, discount: 0.25, threshold: 10)
-      @bulk_discount_1 = create(:bulk_discount, merchant: @merchant_1, discount: 0.10, threshold: 20)
-  
-      @invoice_items_1 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id, unit_price: 100, quantity: 10) # 1000
-      @invoice_items_2 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_2.id, unit_price: 200, quantity: 20) # 4000
-      @invoice_items_3 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_3.id, unit_price: 150, quantity: 5) # 750
-
-      # 5750 total
-  
-      @invoice_items_3 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_3.id, unit_price: 50, quantity: 10) # 500
-      @invoice_items_4 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_4.id, unit_price: 75, quantity: 20) # 1500
-      @invoice_items_5 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_5.id, unit_price: 100, quantity: 25) # 2500
-
-      # 4500 total 
-    end
-    it 'shows discounted revenue for merchant' do
-      expect(@merchant_1.discount_revenue).to eq([])
-    end
-  end
 end
