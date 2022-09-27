@@ -53,6 +53,9 @@ RSpec.describe Invoice, type: :model do
 
     @transactions_3 = create_list(:transaction, 1, result: :failed, invoice: @invoice_2)
     @transactions_4 = create_list(:transaction, 7, result: :success, invoice: @invoice_2)
+
+    @discount_1 = create(:discount, bulk_discount: 0.10, item_threshold: 8, merchant: @merchant_1)
+    @discount_2 = create(:discount, bulk_discount: 0.25, item_threshold: 20, merchant: @merchant_1)
   end
 
   describe "class methods" do
@@ -82,6 +85,31 @@ RSpec.describe Invoice, type: :model do
     describe 'calculates total invoices revenue by merchant' do
       it "#merchant_revenue" do
         expect(@invoice_5.merchant_revenue(@merchant_3)).to be(15000)
+      end
+    end
+
+    describe 'calculates total discounted invoices revenue by merchant' do
+      it '#merchant_discounted_revenue' do
+
+        merchant_1 = create(:merchant)
+        item_1 = create(:item, merchant: merchant_1)
+        item_2 = create(:item, merchant: merchant_1)
+        item_3 = create(:item, merchant: merchant_1)
+        invoice_1 = create(:invoice)
+        invoice_2 = create(:invoice)
+        invoice_3 = create(:invoice)
+
+        invoice_item1 = create(:invoice_items, item_id: item_1.id, invoice_id: invoice_1.id, quantity: 8, unit_price: 200)
+        invoice_item2 = create(:invoice_items, item_id: item_2.id, invoice_id: invoice_2.id, quantity: 10, unit_price: 100)
+        invoice_item3 = create(:invoice_items, item_id: item_3.id, invoice_id: invoice_3.id, quantity: 100, unit_price: 50)
+
+        discount_1 = create(:discount, bulk_discount: 0.10, item_threshold: 10, merchant: merchant_1)
+        discount_2 = create(:discount, bulk_discount: 0.25, item_threshold: 100, merchant: merchant_1)
+
+        expect(invoice_1.merchant_discounted_revenue(merchant_1)).to eq(1600)
+        expect(invoice_2.merchant_discounted_revenue(merchant_1)).to eq(900)
+        expect(invoice_3.merchant_discounted_revenue(merchant_1)).to eq(3750)
+
       end
     end
   end

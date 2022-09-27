@@ -65,7 +65,8 @@ RSpec.describe InvoiceItem, type: :model do
 
         expect(@item_invoice_1.discount_price).to eq(9000)
         expect(@item_invoice_2.discount_price).to eq(16875)
-      end 
+        expect(@item_invoice_3.discount_price).to eq(5760)
+      end
     end
   end
 end
