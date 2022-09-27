@@ -147,15 +147,18 @@ Merchant Invoice Show Page: Total Revenue and Discounted Revenue
 
 As a merchant
 When I visit my merchant invoice show page
-Then I see the total revenue for my merchant from this invoice (not including discounts)
-And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
+Then I see the total revenue for my merchant from this invoice (not including
+ discounts)
+And I see the total discounted revenue for my merchant from this invoice
+which includes bulk discounts in the calculation
 ```
 ```
 Merchant Invoice Show Page: Link to applied discounts
 
 As a merchant
 When I visit my merchant invoice show page
-Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
+Next to each invoice item I see a link to the show page for the bulk discount
+that was applied (if any)
 ```
 ```
 Admin Invoice Show Page: Total Revenue and Discounted Revenue

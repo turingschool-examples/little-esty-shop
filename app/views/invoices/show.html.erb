@@ -5,7 +5,9 @@
 
 <p> Status: <%= @invoice.status %></p>
 <p> Created on: <%= @invoice.created_at.strftime('%A, %B %d, %Y') %></p>
-<p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %>
+<p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %></p>
+<p> Discounted Revenue: <%= number_to_currency(@invoice.discounted_revenue/100) %></p>
+
 <h3> Customer: </h3>
   <%= @invoice.customer.first_name %>
   <%= @invoice.customer.last_name %>
@@ -20,16 +22,18 @@
       <li><p> Quantity: <%= invoice_item.quantity %></p></li>
       <li><p> Unit Price: <%= number_to_currency(invoice_item.unit_price/100) %></p></li>
 
+      <li><p><%= button_to "View Discount Applied", merchant_bulk_discount_path(merchant_id: @merchant.id, id: invoice_item.discount_applied), method: :get %></p></li>
+
       <li><%= form_with url: invoice_item_path(invoice_item), method: :patch, local: true do |form| %>
         <%= form.hidden_field :invoice_item_id, value: "#{invoice_item.id}" %>
         <%= form.hidden_field :invoice_id, value: "#{@invoice.id}" %>
         <%= form.hidden_field :merchant_id, value: "#{@merchant.id}" %>
         <%= form.label :status %>
-        <%= form.select :status, [["Pending", "pending"], ["Packaged", "packaged"], ["Shipped", "shipped"]], :selected => invoice_item.status %> 
+        <%= form.select :status, [["Pending", "pending"], ["Packaged", "packaged"], ["Shipped", "shipped"]], :selected => invoice_item.status %>
         <%= form.submit "Update Item Status" %>
       <% end %>
       </div>
-    <% end %> 
+    <% end %>
     </ul>
   </div>
 <% end %>

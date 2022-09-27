@@ -1,12 +1,13 @@
 <h3> Invoice #<%= @invoice.id %> </h3>
 <%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true  do |form| %>
   <%= form.label :status %>
-  <%= form.select :status, [["In progress", "in progress"], ["Completed", "completed"], ["Cancelled", "cancelled"]] %> 
+  <%= form.select :status, [["In progress", "in progress"], ["Completed", "completed"], ["Cancelled", "cancelled"]] %>
   <%= form.submit "Update Invoice Status"%>
 <% end %>
 
 <p> Created on: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %>
 <p> Total Revenue: <%= number_to_currency(@invoice.total_revenue/100) %> </p>
+
 <h4> Customer: </h4>
 <p><%= @invoice.customer_name %></p>
 <h4> Items on this invoice: </h4>
