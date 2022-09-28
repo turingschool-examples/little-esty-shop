@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/', to: 'merchants#new'
+    get '/', to: 'merchants#index'
 
     resources :invoices, only: %i[index show update]
     resources :merchants, only: [:index, :show, :edit, :update, :new, :create ]
