@@ -26,7 +26,7 @@ RSpec.describe 'merchant bulk discount create' do
 
     visit admin_invoice_path(invoice1.id)
 
-    expect(page).to have_content('Discounted Revenue: $240.00')
+    expect(page).to have_content('Total Revenue: $240.00')
     expect(page).to have_content('Discounted Revenue: $216.00')
   end
 

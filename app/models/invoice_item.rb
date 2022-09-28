@@ -8,17 +8,21 @@ class InvoiceItem < ApplicationRecord
     item.name
   end
 
+  def ultimate_applicable_discount
+    @ultimate_applicable_discount ||= item.merchant.bulk_discounts.select(:discount, :id).where("threshold <= #{self.quantity}").order(discount: :desc).first
+  end
+
   def best_valid_discount
-    if item.merchant.bulk_discounts.select(:discount).where("threshold <= #{self.quantity}").order(discount: :desc).first != nil
-      item.merchant.bulk_discounts.select(:discount).where("threshold <= #{self.quantity}").order(discount: :desc).first.discount
+    if ultimate_applicable_discount
+      ultimate_applicable_discount.discount
     else
       0
     end
   end
 
   def discount_applied
-    if item.merchant.bulk_discounts.select(:discount).where("threshold <= #{self.quantity}").order(discount: :desc).first != nil
-      item.merchant.bulk_discounts.select(:discount, :id).where("threshold <= #{self.quantity}").order(discount: :desc).first.id
+    if ultimate_applicable_discount
+      ultimate_applicable_discount.id
     else
       0
     end

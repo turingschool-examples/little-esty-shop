@@ -1,3 +1,7 @@
+<% @holidays.each do |hday| %>
+  <> <%= hday[0] %>: <%= hday[1] %> <>
+<% end %>
+
 <h1> Bulk Discounts Available </h1>
 
 <%= link_to 'Create New Discount', new_merchant_bulk_discount_path %>

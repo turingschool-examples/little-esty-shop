@@ -25,4 +25,5 @@ class GithubFacade
     end
     pr_count
   end
+
 end
