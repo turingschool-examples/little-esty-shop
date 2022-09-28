@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :invoices
   resources :customers
 
+  get: '/' to: '/items/index'
 
   resources :merchants do
     resources :items
