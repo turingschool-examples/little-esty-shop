@@ -70,7 +70,27 @@ RSpec.describe InvoiceItem, type: :model do
       expect(invoice_item1.discount_applied).to eq(discount1.id)
     end
 
-  end
+    it 'can return a 0 discount if none apply' do
+      merchant1 = Merchant.create!(name: "Robespierre", status: 'Enabled')
+      customer1 = Customer.create(first_name: 'Jack', last_name: 'Black')
+      invoice1 = Invoice.create(status: "completed", customer_id: customer1.id)
+      item1 = Item.create(name: 'Fountian Pen', description: 'The fanciest of pens', unit_price: 10, merchant_id: merchant1.id)
+      invoice_item1 = InvoiceItem.create(invoice_id: invoice1.id, item_id: item1.id, quantity: 20, unit_price: 1000, status: 'shipped')
 
+      expect(invoice_item1.best_valid_discount).to eq(0)
+    end
+
+
+    it 'returns discount 0 if no discount was applied' do
+      merchant1 = Merchant.create!(name: "Robespierre", status: 'Enabled')
+      customer1 = Customer.create(first_name: 'Jack', last_name: 'Black')
+      invoice1 = Invoice.create(status: "completed", customer_id: customer1.id)
+      item1 = Item.create(name: 'Fountian Pen', description: 'The fanciest of pens', unit_price: 10, merchant_id: merchant1.id)
+      invoice_item1 = InvoiceItem.create(invoice_id: invoice1.id, item_id: item1.id, quantity: 20, unit_price: 1000, status: 'shipped')
+
+      expect(invoice_item1.discount_applied).to eq(0)
+    end
+
+  end
 
 end

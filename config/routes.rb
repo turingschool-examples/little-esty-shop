@@ -6,15 +6,12 @@ Rails.application.routes.draw do
   resources :invoices
   resources :customers
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 
   resources :merchants do
     resources :items
     resources :invoices, only: %i[index show update]
     resources :bulk_discounts, only: %i[index show edit update new destroy create]
   end
-
 
   namespace :admin do
     get '/', to: 'admin#dashboard'
@@ -27,6 +24,5 @@ Rails.application.routes.draw do
 
   get '/merchants/:id/dashboard', to: 'merchants_dashboard#index'
   get '/merchants/:id/items', to: 'merchant#items_index'
-
 
 end

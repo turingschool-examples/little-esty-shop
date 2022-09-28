@@ -23,7 +23,6 @@ RSpec.describe 'merchant bulk discount create' do
     click_on "View Discount Applied"
 
     expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@discount1.id}")
-    # @merchant.id,
   end
 
 end

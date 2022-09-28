@@ -19,5 +19,4 @@ RSpec.describe 'admin merchant new page' do
     expect(page).to have_content("Costa Coffee")
   end
 
-
 end

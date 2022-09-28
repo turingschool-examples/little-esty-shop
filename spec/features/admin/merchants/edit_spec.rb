@@ -13,7 +13,7 @@ RSpec.describe 'admin merchant index page' do
   end
 
   it 'can redirect to edit page from admin merchant show' do
-    # require "pry"; binding.pry
+
     visit admin_merchant_path(@merchant1.id)
 
     expect(page).to have_content("#{@merchant1.name}")
