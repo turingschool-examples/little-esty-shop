@@ -103,5 +103,25 @@ RSpec.describe Item, type: :model do
     it "#item-revenue" do
       expect(@item_10.revenue).to eq(50000)
     end
+
+    describe 'applied_discount' do
+      it 'returns highest percent applied discount to item' do
+        merchant_1 = create(:merchant)
+
+        item_1 = create(:item, merchant: merchant_1)
+        item_2 = create(:item, merchant: merchant_1)
+
+        invoice_1 = create(:invoice)
+
+        create(:invoice_items, invoice_id: invoice_1.id, item_id: item_1.id, unit_price: 100, quantity: 10) # 1000
+        create(:invoice_items, invoice_id: invoice_1.id, item_id: item_2.id, unit_price: 200, quantity: 20) # 4000
+
+        bulk_discount_1 = create(:bulk_discount, merchant: merchant_1, discount: 0.25, threshold: 5)
+        bulk_discount_2 = create(:bulk_discount, merchant: merchant_1, discount: 0.50, threshold: 15)
+
+        expect(item_1.applied_discount(item_1.id)).to eq(bulk_discount_1)
+        expect(item_2.applied_discount(item_2.id)).to eq(bulk_discount_2)
+      end
+    end
   end
 end

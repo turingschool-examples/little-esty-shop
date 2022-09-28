@@ -68,20 +68,20 @@ RSpec.describe 'merchant invoice show page bulk discounts' do
 
   describe 'User Story 7 - When I visit my merchant invoice show page' do
     it 'Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)' do
-      # visit merchant_invoice_path(@merchant_1, @invoice_1)
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
+      save_and_open_page
+      within "#invoice-items-info" do
+        find_link({text: "#{@item_1.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)}).visible?
+        find_link({text: "#{@item_2.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)}).visible?
+      end
 
-      # within "#invoice-items-info" do
-      #   find_link({text: "#{@item_1.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)}).visible?
-      #   find_link({text: "#{@item_2.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_1, @bulk_discount_1)}).visible?
-      # end
+      visit merchant_invoice_path(@merchant_2, @invoice_1)
 
-      # visit merchant_invoice_path(@merchant_2, @invoice_2)
-
-      # within "#invoice-items-info" do
-      #   find_link({text: "#{@item_4.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_2)}).visible?
-      #   find_link({text: "#{@item_5.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_2)}).visible?
-      #   find_link({text: "#{@item_6.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_2)}).visible?
-      # end
+      within "#invoice-items-info" do
+        find_link({text: "#{@item_4.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_2)}).visible?
+        find_link({text: "#{@item_5.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_2)}).visible?
+        find_link({text: "#{@item_6.name} Bulk Discount Page", href: merchant_bulk_discount_path(@merchant_2, @bulk_discount_2)}).visible?
+      end
     end
   end
 end
