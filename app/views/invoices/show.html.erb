@@ -26,6 +26,7 @@
     <p>Item Price: <%= item.unit_price %></p>
     <p>Item Quantity: <%= item.quantity_purchased(@invoice.id) %></p>
     <p>Item Shipping Status: <%= item.shipping_status(@invoice.id) %>  </p>
+
     <%= form_with model: [@merchant, @invoice], local: true do |form| %>
       <%= form.label :item_id %>
       <%= form.hidden_field :item_id, value: "#{item.id}" %>
@@ -34,7 +35,10 @@
       <%= form.submit "Update Item Status" %>
     <% end %>
     <br>
-    <%= link_to "#{item.name} Bulk Discount Page", merchant_bulk_discount_path(@merchant, item.applied_discount(item.id)) %>
+    <% if item.applied_discount(item.id) != nil %>
+      <%= link_to "#{item.name} Bulk Discount Page", merchant_bulk_discount_path(@merchant, item.applied_discount(item.id)) %>
+    <% end %>
+    
   <% end %>
 </div>
 
