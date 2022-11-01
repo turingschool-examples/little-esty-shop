@@ -8,9 +8,8 @@ Rails.application.routes.draw do
     resources :items, except: [:update]
   end
 
-  #The 'as:' should allow these routes to be called the same way as the resource versions
-  #These handrolled routes should work exactly the same as the resources:
-  patch '/merchants/:id', to: 'merchants#update', as: 'merchant'
-  patch '/merchants/:merchant_id/items/:id', to: 'items#update', as: 'merchant_item'
+  #These handrolled routes must be accessed by their full URI, but otherwise work the same as their resource versions
+  patch '/merchants/:id', to: 'merchants#update'
+  patch '/merchants/:merchant_id/items/:id', to: 'items#update'
 end
 

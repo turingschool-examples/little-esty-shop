@@ -7,7 +7,7 @@ RSpec.feature "Merchant Items Show Page", type: :feature do
       @item = @merchant.items.create!(name: "Wooden Necklace", description: "A necklace with wood beads.", unit_price: 1000)
     end
     it 'shows all of the attributes of the item' do
-      visit "/merchants/#{@merchant.id}/items/#{@item.id}"
+      visit merchant_item_path(@merchant, @item)
 
       expect(page).to have_content("Item: Wooden Necklace")
       expect(page).to have_content("Description: A necklace with wood beads.")
