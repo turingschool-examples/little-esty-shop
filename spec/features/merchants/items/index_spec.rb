@@ -43,8 +43,7 @@ RSpec.describe "On the Merchant's Items index page" do
       expect(page).to have_content("Practical Magic Shop")
       expect(page).to have_content("Dashboard")
       expect(page).to have_content("My Items")
-      expect(page).to have_content("Invoices")
-      expect(page).to have_content("My Items")
+      expect(page).to have_content("My Invoices")
     end 
   end
 end
