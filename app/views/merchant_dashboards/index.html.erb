@@ -12,8 +12,8 @@
 <div id="top-customers-merchant-<%= @merchant.id %>">
   <%= "#{@merchant.name}'s Top 5 Customers:" %>
   <ul>
-    <% @merchant_customers.each do |customer| %>
-      <li><%= "#{customer.last_name}, #{customer.first_name}: #{customer.transactions_with(@merchant_transaction_id_array)} Transactions" %></li>
+    <% @merchant_top_five.each do |customer| %>
+      <li><%= "#{customer.last_name}, #{customer.first_name}: #{customer.num_transactions} Transactions" %></li>
     <% end %>
   </ul>
 </div>

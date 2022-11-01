@@ -91,7 +91,6 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
 
       it 'a list of the merchants top five customers with an item counter next to each one' do
         within "#top-customers-merchant-#{@merchant_1.id}" do
-          save_and_open_page
           expect(page).to have_content("#{@customer_1.last_name}, #{@customer_1.first_name}: 3 Transactions")
           expect(page).to have_content("#{@customer_2.last_name}, #{@customer_2.first_name}: 2 Transactions")
           expect(page).to have_content("#{@customer_3.last_name}, #{@customer_3.first_name}: 2 Transactions")
