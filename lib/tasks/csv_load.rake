@@ -63,6 +63,16 @@ namespace :csv_load do
     puts "......"
   end
 
+  task delete_all: :environment do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+    Transaction.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
+    puts "Destroying the evidence"
+  end
+
   task all: [:customers, :merchants, :items, :invoices, :invoice_items, :transactions]
 
 end
