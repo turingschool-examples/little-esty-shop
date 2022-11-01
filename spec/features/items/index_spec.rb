@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'items index page' do
+RSpec.describe 'items index page', type: :feature do
   let!(:nomi) {Merchant.create!(name: "Naomi LLC")}
   let!(:tyty) {Merchant.create!(name: "TyTy's Grub")}
 
@@ -11,7 +11,7 @@ RSpec.describe 'items index page' do
   
   describe 'items#index' do
     it 'shows a list of names of all merchants items' do
-      visit "/merchants/#{nomi.id}/items"
+      visit merchant_items_path(nomi)
 
       expect(page).to have_content(nomi.name)
 
@@ -22,6 +22,16 @@ RSpec.describe 'items index page' do
 
         expect(page).to_not have_content(oil.name)
       end
+    end
+
+    it 'takes you to item show page when you click on the link on the item name' do
+      visit merchant_items_path(nomi)
+
+      within ("#my-items") do
+        click_link lamp.name
+      end
+
+      expect(current_path).to eq(merchant_item_path(nomi, lamp))
     end
   end
 end
