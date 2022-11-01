@@ -1,10 +1,3 @@
-# Merchant Items Index Page
-
-# As a merchant,
-# When I visit my merchant items index page ("merchants/merchant_id/items")
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
-#use items#index with if arguement 
 require 'rails_helper'
 
 RSpec.describe 'merchant items index page' do 
