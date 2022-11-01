@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :merchants, only: [:index] do
-    resources :items, only: [:index, :show, :edit, :new, :create]
+    resources :items, except: [:update]
   end
 
   patch '/merchants/:merchant_id/items', to: 'items#status_update'
