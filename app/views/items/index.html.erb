@@ -1,7 +1,23 @@
 <h2><%= @merchant.name %> </h2>
 
 <div id="my-items">
-  <% @merchant.items.each do |item| %>
-    <p><a href=<%= merchant_item_path(@merchant, item) %>><%= item.name %></a></p>
+  <h4>Enabled Items</h4>
+  <div id="enabled" style="text-indent:40px">
+  <% @merchant.items.where(status: 'enabled').each do |item| %>
+    <div id="item-<%= item.id %>">
+      <p><a href=<%= merchant_item_path(@merchant, item) %>><%= item.name %></a>
+      <%= button_to 'Disable', "/merchants/#{@merchant.id}/items", :params => {disable: item.id}, method: :patch %></p>
+    </div>
   <% end %>
+  </div>
+
+  <h4>Disabled Items</h4>
+  <div id="disabled" style="text-indent:40px">
+  <% @merchant.items.where(status: 'disabled').each do |item| %>
+    <div id="item-<%= item.id %>">
+      <p><a href=<%= merchant_item_path(@merchant, item) %>><%= item.name %></a>
+      <%= button_to 'Enable', "/merchants/#{@merchant.id}/items", :params => {enable: item.id}, method: :patch %></p>
+    </div>
+  <% end %>
+  </div>
 </div>

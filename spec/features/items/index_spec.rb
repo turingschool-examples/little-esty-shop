@@ -34,12 +34,42 @@ RSpec.describe 'items index page', type: :feature do
       expect(current_path).to eq(merchant_item_path(nomi, lamp))
     end
 
-    it 'has disable/enable buttons near each item' do
+    it 'changes the item to be enabled after clicking Enable' do
       visit merchant_items_path(nomi)
+    
+      within("#item-#{lamp.id}") do
+        click_button 'Enable'
+      end
 
-      expect(lamp.status).to eq(:disabled)
+      expect(current_path).to eq(merchant_items_path(nomi))
+ 
+      within("#enabled") do
+        expect(page).to have_content(lamp.name)
+      end
 
+      within("#disabled") do
+        expect(page).to_not have_content(lamp.name)
+      end
+    end
 
+    it 'changes the item to be disabled after clicking Disable' do
+      lamp.enable_status
+      
+      visit merchant_items_path(nomi)
+    
+      within("#item-#{lamp.id}") do
+        click_button 'Disable'
+      end
+
+      expect(current_path).to eq(merchant_items_path(nomi))
+ 
+      within("#enabled") do
+        expect(page).to_not have_content(lamp.name)
+      end
+
+      within("#disabled") do
+        expect(page).to have_content(lamp.name)
+      end
     end
   end
 end
