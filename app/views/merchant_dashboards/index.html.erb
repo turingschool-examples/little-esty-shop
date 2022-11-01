@@ -1,0 +1,9 @@
+<h1>Merchant Dashboard</h1>
+
+<div id="attributes-merchant-<%= @merchant.id %>">
+  <%= @merchant.name %>
+</div>
+<div id="links-merchant-<%= @merchant.id %>">
+  <%= link_to "#{@merchant.name} Items", "/merchants/#{@merchant.id}/items"%>
+  <%= link_to "#{@merchant.name} Invoices", "/merchants/#{@merchant.id}/invoices"%>
+</div>
