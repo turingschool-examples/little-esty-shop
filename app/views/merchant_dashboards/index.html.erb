@@ -3,7 +3,18 @@
 <div id="attributes-merchant-<%= @merchant.id %>">
   <%= @merchant.name %>
 </div>
+
 <div id="links-merchant-<%= @merchant.id %>">
   <%= link_to "#{@merchant.name} Items", "/merchants/#{@merchant.id}/items"%>
   <%= link_to "#{@merchant.name} Invoices", "/merchants/#{@merchant.id}/invoices"%>
+</div>
+
+<div id="top-customers-merchant-<%= @merchant.id %>">
+  Your Top 5 Customers:
+
+</div>
+
+<div id="items-to-ship-merchant-<%= @merchant.id %>">
+  Items Ready to Ship:
+
 </div>
