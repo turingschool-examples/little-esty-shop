@@ -5,13 +5,17 @@
 </div>
 
 <div id="links-merchant-<%= @merchant.id %>">
-  <%= link_to "#{@merchant.name} Items", "/merchants/#{@merchant.id}/items"%>
-  <%= link_to "#{@merchant.name} Invoices", "/merchants/#{@merchant.id}/invoices"%>
+  <%= link_to "#{@merchant.name}'s Items", "/merchants/#{@merchant.id}/items"%>
+  <%= link_to "#{@merchant.name}'s Invoices", "/merchants/#{@merchant.id}/invoices"%>
 </div>
 
 <div id="top-customers-merchant-<%= @merchant.id %>">
-  Your Top 5 Customers:
-
+  <%= "#{@merchant.name}'s Top 5 Customers:" %>
+  <ul>
+    <% @merchant_customers.each do |customer| %>
+      <li><%= "#{customer.last_name}, #{customer.first_name}: #{customer.transactions_with(@merchant_transaction_id_array)} Transactions" %></li>
+    <% end %>
+  </ul>
 </div>
 
 <div id="items-to-ship-merchant-<%= @merchant.id %>">

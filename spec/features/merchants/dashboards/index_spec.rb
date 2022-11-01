@@ -8,41 +8,59 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
 # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
     before(:each) do
       @merchant_1 = Merchant.create!(name: "Dave")
+      @merchant_2 = Merchant.create!(name: "Kevin")
 
-      # @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 1)
-      # @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 1)
-      # @merchant_1_item_3 = @merchant_1.items.create!(name: "Pen", description: "Writing implement", unit_price: 1)
-      # @merchant_1_item_4 = @merchant_1.items.create!(name: "Fountain Pen", description: "Writing implement", unit_price: 1)
-      # @merchant_1_item_5 = @merchant_1.items.create!(name: "Stationery", description: "Writing implement", unit_price: 1)
+      @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 1)
+      @merchant_2_item_1 = @merchant_2.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 2)
 
       @customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
       @customer_2 = Customer.create!(first_name: "Milly", last_name: "Smith")
       @customer_3 = Customer.create!(first_name: "David", last_name: "Hill")
       @customer_4 = Customer.create!(first_name: "Sarah", last_name: "Miller")
       @customer_5 = Customer.create!(first_name: "Patrick", last_name: "Baker")
-      @customer_6 = Customer.create!(first_name: "Rebecca", last_name: "Jones")
+      @customer_6 = Customer.create!(first_name: "Rebecca", last_name: "Simpson")
 
       #invoice status: 0 cancelled, 1 completed, 2 in progress
       @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1)
+      @customer_1_invoice_2 = @customer_1.invoices.create!(status: 1)
+
       @customer_2_invoice_1 = @customer_2.invoices.create!(status: 1)
       @customer_3_invoice_1 = @customer_3.invoices.create!(status: 1)
       @customer_4_invoice_1 = @customer_4.invoices.create!(status: 1)
       @customer_5_invoice_1 = @customer_5.invoices.create!(status: 1)
+
       @customer_6_invoice_1 = @customer_6.invoices.create!(status: 1)
       @customer_6_invoice_2 = @customer_6.invoices.create!(status: 0)
+
+      InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1)
+      InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_2_item_1)
+
+      InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1)
+      InvoiceItem.create!(invoice: @customer_3_invoice_1, item: @merchant_1_item_1)
+      InvoiceItem.create!(invoice: @customer_4_invoice_1, item: @merchant_1_item_1)
+      InvoiceItem.create!(invoice: @customer_5_invoice_1, item: @merchant_1_item_1)
+
+      InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_1_item_1)
+      InvoiceItem.create!(invoice: @customer_6_invoice_2, item: @merchant_1_item_1)
 
       #transaction result: success or failed
       @customer_1_transaction_1 = @customer_1_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_1_transaction_2 = @customer_1_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_1_transaction_3 = @customer_1_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
+      @customer_1_transaction_4 = @customer_1_invoice_2.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
+
       @customer_2_transaction_1 = @customer_2_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_2_transaction_2 = @customer_2_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
+
       @customer_3_transaction_1 = @customer_3_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_3_transaction_2 = @customer_3_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
+
       @customer_4_transaction_1 = @customer_4_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_4_transaction_2 = @customer_4_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
+
       @customer_5_transaction_1 = @customer_5_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_5_transaction_2 = @customer_5_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
+
       @customer_6_transaction_1 = @customer_6_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_6_transaction_2 = @customer_6_invoice_2.transactions.create!(credit_card_number: 1234123412341234, result: 'failed')
 
@@ -57,22 +75,23 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
 
       it 'a link to merchant items index /merchants/:merchant_id/items' do
         within "#links-merchant-#{@merchant_1.id}" do
-          expect(page).to have_link("#{@merchant_1.name} Items")
-          click_link("#{@merchant_1.name} Items")
+          expect(page).to have_link("#{@merchant_1.name}'s Items")
+          click_link("#{@merchant_1.name}'s Items")
           expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
         end
       end
 
       it 'a link to merchant invoices index /merchants/:merchant_id/invoices' do
         within "#links-merchant-#{@merchant_1.id}" do
-          expect(page).to have_link("#{@merchant_1.name} Items")
-          click_link("#{@merchant_1.name} Invoices")
+          expect(page).to have_link("#{@merchant_1.name}'s Invoices")
+          click_link("#{@merchant_1.name}'s Invoices")
           expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
         end
       end
 
       it 'a list of the merchants top five customers with an item counter next to each one' do
         within "#top-customers-merchant-#{@merchant_1.id}" do
+          save_and_open_page
           expect(page).to have_content("#{@customer_1.last_name}, #{@customer_1.first_name}: 3 Transactions")
           expect(page).to have_content("#{@customer_2.last_name}, #{@customer_2.first_name}: 2 Transactions")
           expect(page).to have_content("#{@customer_3.last_name}, #{@customer_3.first_name}: 2 Transactions")
@@ -84,8 +103,3 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
     end
   end
 end
-@customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
-      @customer_2 = Customer.create!(first_name: "Milly", last_name: "Smith")
-      @customer_3 = Customer.create!(first_name: "David", last_name: "Hill")
-      @customer_4 = Customer.create!(first_name: "Sarah", last_name: "Miller")
-      @customer_5 = Customer.create!(first_name: "Patrick", last_name: "Baker")
