@@ -33,5 +33,13 @@ RSpec.describe 'items index page', type: :feature do
 
       expect(current_path).to eq(merchant_item_path(nomi, lamp))
     end
+
+    it 'has disable/enable buttons near each item' do
+      visit merchant_items_path(nomi)
+
+      expect(lamp.status).to eq(:disabled)
+
+
+    end
   end
 end
