@@ -28,6 +28,25 @@ RSpec.describe 'merchant items index page', type: :feature do
         expect(page).to_not have_content("Item: Board Wax | Price: $7")
         expect(page).to_not have_content("Description: Hang ten!")
       end
+
+      it '- next to each item name I see a button to disable or enable that item.
+      when I click this button, I am redirected back to the items index and I see 
+      that the items status has changed' do
+        crystal_moon = Merchant.create!(name: "Crystal Moon Designs")
+        surf_designs = Merchant.create!(name: "Surf & Co. Designs")
+
+        dream_catcher = crystal_moon.items.create!(name: "Midnight Dream Catcher", description: "Catch the magic of your dreams!", unit_price: 25)
+        rose_quartz = crystal_moon.items.create!(name: "Rose Quartz Pendant", description: "Manifest the love of your life!", unit_price: 37)
+        tarot_deck = crystal_moon.items.create!(name: "Witchy Tarot Deck", description: "Unveil your true path!", unit_price: 22)
+        wax = surf_designs.items.create!(name: "Board Wax", description: "Hang ten!", unit_price: 7)
+        rash_guard = surf_designs.items.create!(name: "Radical Rash Guard", description: "Stay totally groovy and rash free!", unit_price: 50)
+        zinc = surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
+
+        visit "/merchants/#{surf_designs.id}/items"
+        save_and_open_page
+
+        
+      end
     end
   end
 end
