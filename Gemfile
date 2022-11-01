@@ -56,3 +56,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "bootstrap", "~> 5.2"
+
+gem "shoulda-matchers", "~> 5.2", :groups => [:development, :test]
