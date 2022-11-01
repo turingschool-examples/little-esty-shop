@@ -15,7 +15,7 @@ RSpec.describe Item, type: :model do
     describe '.price_in_dollars' do
       it 'should convert price cent values into equivalent dollar values' do
         expect(@item.price_in_dollars).to eq(10)
-        expect(@item.price_in_dollars).to be_a(float)
+        expect(@item.price_in_dollars).to be_a(Float)
       end
     end
   end
