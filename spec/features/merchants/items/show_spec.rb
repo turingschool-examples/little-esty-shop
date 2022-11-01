@@ -20,12 +20,12 @@ RSpec.describe "On the Merchant's Items show page" do
       visit "/merchants/#{merchant.id}/items/#{book.id}" 
       
       expect(page).to have_content("Book of the dead")
-      expect(page).to have_content("Description: book of necromancy spells")
-      expect(page).to have_content("Current Selling Price: $4")
+      expect(page).to have_content("Description: book of necromamcy spells")
+      expect(page).to have_content("Current Price: $4.00")
 
       expect(page).to_not have_content("Candle of life")
       expect(page).to_not have_content("Description: candle that gifts everlasting life")
-      expect(page).to_not have_content("Current Selling Price: $15")
+      expect(page).to_not have_content("Current Price: $15.00")
     end
   end
 

@@ -1,0 +1,7 @@
+<%= render partial: "shared/header", locals: { subtitle: @merchant.name } %>
+<h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid"><%= @item.name %></h3>
+
+<p>Description: <%= @item.description %></p>
+<br>
+<p>Current Price: <%= "$#{@item.unit_price}.00" %></p>
+<br>
