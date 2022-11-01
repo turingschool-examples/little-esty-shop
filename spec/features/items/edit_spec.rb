@@ -8,11 +8,6 @@ RSpec.describe 'item edit page', type: :feature do
   let!(:orion) {nomi.items.create!(name: "Orion Flag", description: "A flag of Okinawa's most popular beer", unit_price: 850)}
   
   describe 'items#edit' do
-    xit 'has a form filled with existing item attribute info' do
-      visit edit_merchant_item_path(nomi, lamp)
-
-    end
-
     it 'redirects me back to show page where I see a flash message that the update was done successfully' do
       visit edit_merchant_item_path(nomi, lamp)
     
@@ -27,8 +22,16 @@ RSpec.describe 'item edit page', type: :feature do
       expect(page).to have_content("Successfully Updated #{lamp.name}")
     end
 
-    xit 'flashes an error message when trying to update with invalid info' do
+    it 'flashes an error message when trying to update with invalid info' do
+      visit edit_merchant_item_path(nomi, lamp)
+    
+      fill_in :name, with:  " "
 
+      click_button 'Update Item'
+
+      expect(current_path).to eq(edit_merchant_item_path(nomi, lamp))
+
+      expect(page).to have_content("Name can't be blank")
     end
   end
 end
