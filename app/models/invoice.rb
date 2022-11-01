@@ -5,5 +5,4 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
 
   enum status: [ :"in progress", :cancelled, :completed ]
-
 end
