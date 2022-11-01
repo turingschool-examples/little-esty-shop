@@ -18,5 +18,13 @@ RSpec.describe 'item show page', type: :feature do
         expect(page).to have_content("Current Price: $#{lamp.current_price}")
       end
     end
+
+    it 'has a link to update the item' do
+      visit merchant_item_path(nomi, lamp)
+     
+      click_link 'Update Item'
+
+      expect(current_path).to eq(edit_merchant_item_path(nomi, lamp))
+    end
   end
 end
