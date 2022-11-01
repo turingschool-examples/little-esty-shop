@@ -35,5 +35,15 @@ RSpec.describe Item, type: :model do
         expect(lamp.status).to eq('enabled')
       end
     end
+
+    describe '#disable_status' do
+      it 'enables the status for the item' do
+        lamp.enable_status
+        expect(lamp.status).to eq('enabled')
+
+        lamp.disable_status
+        expect(lamp.status).to eq('disabled')
+      end
+    end
   end
 end

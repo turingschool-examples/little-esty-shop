@@ -15,4 +15,8 @@ class Item < ApplicationRecord
   def enable_status
     update_attribute :status, 0
   end
+
+  def disable_status
+    update_attribute :status, 1
+  end
 end
