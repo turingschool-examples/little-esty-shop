@@ -7,4 +7,12 @@ namespace :csv_load do
       Customer.create!(first_name: row[:first_name], last_name: row[:last_name], created_at: row[:created_at], updated_at: row[:updated_at])
     end
   end
+
+  task merchants: :environment do 
+    csv = CSV.read './db/data/merchants.csv', headers: true, header_converters: :symbol
+    csv.each do |row|
+      Merchant.create!(name: row[:name], created_at: row[:created_at], updated_at: row[:updated_at])
+    end
+  end
+  
 end
