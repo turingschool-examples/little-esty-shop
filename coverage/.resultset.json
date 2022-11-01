@@ -293,6 +293,26 @@
           null
         ]
       },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/spec/models/invoice_spec.rb": {
         "lines": [
           1,
@@ -310,8 +330,66 @@
           1,
           null
         ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/s.lee/turing/mod2_1/projects/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1667261651
+    "timestamp": 1667263116
   }
 }
