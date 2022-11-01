@@ -14,7 +14,7 @@ RSpec.describe 'merchant items index page', type: :feature do
         rash_guard = surf_designs.items.create!(name: "Radical Rash Guard", description: "Stay totally groovy and rash free!", unit_price: 50)
         zinc = surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
 
-        visit "/merchants/#{crystal_moon.id}/items"
+        visit merchant_items_path(crystal_moon)
         # save_and_open_page
 
         expect(page).to have_content("Welcome To Crystal Moon Designs")
