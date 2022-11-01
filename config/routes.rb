@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # get '/merchants/:merchant_id/items/:item_id', to: 'items#show'
   # get 'merchants/:id/items', to: 'merchant_items#index'
+  get 'merchants/:id/dashboard', to: 'merchants#show'
 
   resources :merchants, except: [:update] do
     resources :items, except: [:update]
