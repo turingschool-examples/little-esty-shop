@@ -6,6 +6,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    
+    @item_price = @item.unit_price
   end
 end

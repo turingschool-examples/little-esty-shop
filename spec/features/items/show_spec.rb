@@ -11,7 +11,7 @@ RSpec.feature "Merchant Items Show Page", type: :feature do
 
       expect(page).to have_content("Item: Wooden Necklace")
       expect(page).to have_content("Description: A necklace with wood beads.")
-      expect(page).to have_content("Current price: 1000")
+      expect(page).to have_content("Current price: $10.00")
     end
   end
 end
