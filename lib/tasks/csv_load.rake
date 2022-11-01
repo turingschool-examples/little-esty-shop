@@ -1,6 +1,7 @@
 require 'csv'
 
 namespace :csv_load do
+
   task customers: :environment do 
     csv = CSV.open './db/data/customers.csv', headers: true, header_converters: :symbol
     csv.each do |row|
@@ -9,9 +10,7 @@ namespace :csv_load do
   end
 
   task transactions: :environment do 
-    
     csv = CSV.open './db/data/transactions.csv', headers: true, header_converters: :symbol
-    
     csv.each do |row|
       row[:result] == 'success' ? result = 0 : result = 1
       Transaction.create!(
@@ -20,8 +19,20 @@ namespace :csv_load do
         cc_expiration: row[:cc_expiration], 
         result: result, 
         created_at: row[:created_at], 
-        updated_at: row[:updated_at])
-        
+        updated_at: row[:updated_at]
+      ) 
+    end
+  end
+
+  task invoices: :environment do 
+    csv = CSV.open './db/data/invoices.csv', headers: true, header_converters: :symbol
+    csv.each do |row|
+      Invoice.create!(
+        customer_id: row[:customer_id],
+        status: row[:status],
+        created_at: row[:created_at],
+        updated_at: row[:updated_at]
+      )
     end
   end
 end
