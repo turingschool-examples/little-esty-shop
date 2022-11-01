@@ -38,6 +38,7 @@ RSpec.describe 'merchant items index page', type: :feature do
         click_link "Midnight Dream Catcher"
 
         expect(page).to have_current_path(merchant_item_path(@crystal_moon, @dream_catcher))
+        expect(page).to have_content("Item: Midnight Dream Catcher")
       end
     end
   end
