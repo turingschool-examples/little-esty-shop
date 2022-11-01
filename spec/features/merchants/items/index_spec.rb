@@ -17,7 +17,8 @@ RSpec.describe "On the Merchant's Items index page" do
       other_merchant.items.create!(name: "Pickled cabbage", description: "a packet of pickled cabbage", unit_price: 1)
 
       visit "/merchants/#{merchant.id}/items"
-
+      save_and_open_page 
+      
       within "#item-#{book.id}" do 
         expect(page).to have_content("Book of the dead")
       end
@@ -45,5 +46,6 @@ RSpec.describe "On the Merchant's Items index page" do
       expect(page).to have_content("My Items")
       expect(page).to have_content("Invoices")
       expect(page).to have_content("My Items")
+    end 
   end
 end
