@@ -6,10 +6,14 @@ Rails.application.routes.draw do
 
   resources :merchants, except: [:update] do
     resources :items, except: [:update]
-  end
+    get 'merchants/:id/dashboard', to: 'merchants#show'
+end
 
   #These handrolled routes must be accessed by their full URI, but otherwise work the same as their resource versions
   patch '/merchants/:id', to: 'merchants#update'
   patch '/merchants/:merchant_id/items/:id', to: 'items#update'
+
+  
+  get 'merchants/:id/dashboard', to: 'merchants#show'
 end
 

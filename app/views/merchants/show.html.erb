@@ -1,0 +1,6 @@
+<h1> <%= @merchant.name %> </h1>
+
+<h2> Favorite Customers: </h2>
+<% @favorite_customers.each do |customer, count|%>
+  <p> <%= "Name: #{customer}, Number of Transactions: #{count}" %> </p>
+<% end %>
