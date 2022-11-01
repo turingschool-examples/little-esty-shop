@@ -18,15 +18,11 @@ RSpec.describe 'merchant items index page', type: :feature do
         # save_and_open_page
 
         expect(page).to have_content("Welcome To Crystal Moon Designs")
-        expect(page).to have_content("Item: Midnight Dream Catcher | Price: $25")
-        expect(page).to have_content("Description: Catch the magic of your dreams!")
-        expect(page).to have_content("Item: Rose Quartz Pendant | Price: $37")
-        expect(page).to have_content("Description: Manifest the love of your life!")
-        expect(page).to have_content("Item: Witchy Tarot Deck | Price: $22")
-        expect(page).to have_content("Description: Unveil your true path!")
+        expect(page).to have_content("Midnight Dream Catcher")
+        expect(page).to have_content("Rose Quartz Pendant")
+        expect(page).to have_content("Witchy Tarot Deck")
         expect(page).to_not have_content("Welcome To Surf & Co. Designs")
-        expect(page).to_not have_content("Item: Board Wax | Price: $7")
-        expect(page).to_not have_content("Description: Hang ten!")
+        expect(page).to_not have_content("Board Wax")
       end
 
       it '- next to each item name I see a button to disable or enable that item.
@@ -45,7 +41,19 @@ RSpec.describe 'merchant items index page', type: :feature do
         visit "/merchants/#{surf_designs.id}/items"
         save_and_open_page
 
+        expect(page).to have_button("Disable Board Wax")
+        expect(page).to have_content("available for purchase")
+
+        click_button "Disable Board Wax"
+        expect(current_path).to eq("/merchants/#{surf_designs.id}/items")
         
+        expect(page).to have_content("not available for purchase")
+        expect(page).to have_button("Enable Board Wax")
+        
+        click_button "Enable Board Wax"
+        expect(current_path).to eq("/merchants/#{surf_designs.id}/items")
+
+        expect(page).to have_content("available for purchase")
       end
     end
   end
