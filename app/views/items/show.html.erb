@@ -5,3 +5,4 @@
 <br>
 <p>Current Price: <%= "$#{@item.unit_price}.00" %></p>
 <br>
+<%= link_to "Update Item", edit_merchant_item_path(@merchant, @item) %>

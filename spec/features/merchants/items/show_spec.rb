@@ -34,11 +34,11 @@ RSpec.describe "On the Merchant's Items show page" do
 
       visit "/merchants/#{merchant.id}/items/#{book.id}"
 
-      expect(page).to have_link("Update Item", href: edit_merchant_item_path)
+      expect(page).to have_link("Update Item", href: edit_merchant_item_path(merchant, book))
 
       click_on("Update Item")
 
-      expect(current_path).to eq(edit_merchant_item_path)
+      expect(current_path).to eq(edit_merchant_item_path(merchant, book))
     end
   end
 

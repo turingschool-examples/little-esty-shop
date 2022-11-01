@@ -7,7 +7,6 @@ RSpec.describe 'admin merchants index page' do
 
       visit "/admin/merchants"
       
-      save_and_open_page
       expect(page).to have_content(merchant1.name)
     end
   end 
