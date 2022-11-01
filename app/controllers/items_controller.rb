@@ -23,7 +23,6 @@ class ItemsController < ApplicationController
     else
       flash[:alert] = item.errors.full_messages.to_sentence
       redirect_to edit_merchant_item_path(merchant, item)
-  
     end
   end
 
