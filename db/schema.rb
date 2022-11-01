@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_223313) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.string "descrition"
+    t.string "description"
     t.integer "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_223313) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "credit_card_number"
+    t.bigint "credit_card_number"
     t.integer "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
