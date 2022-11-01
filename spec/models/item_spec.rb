@@ -26,5 +26,14 @@ RSpec.describe Item, type: :model do
         expect(stickers.current_price).to eq(5.99)
       end 
     end
+
+    describe '#enable_status' do
+      it 'enables the status for the item' do
+        expect(lamp.status).to eq('disabled')
+
+        lamp.enable_status
+        expect(lamp.status).to eq('enabled')
+      end
+    end
   end
 end

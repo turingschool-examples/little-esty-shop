@@ -11,4 +11,8 @@ class Item < ApplicationRecord
   def current_price
     unit_price / 100.0
   end
+
+  def enable_status
+    update_attribute :status, 0
+  end
 end
