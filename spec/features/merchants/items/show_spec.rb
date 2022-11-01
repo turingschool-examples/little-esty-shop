@@ -9,7 +9,7 @@ RSpec.describe "On the Merchant's Items show page" do
   # - Description
   # - Current Selling Price
   describe "When I visit merchants/:merchant_id/items/:item_id" do 
-    it "displays a list of the names of all my items and I do not see items for any other merchant" do 
+    it "displays the name, description, and current selling price of the item" do 
       merchant = Merchant.create!(name: "Practical Magic Shop")
       book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
       candle = merchant.items.create!(name: "Candle of life", description: "candle that gifts everlasting life", unit_price: 15)
@@ -26,6 +26,19 @@ RSpec.describe "On the Merchant's Items show page" do
       expect(page).to_not have_content("Candle of life")
       expect(page).to_not have_content("Description: candle that gifts everlasting life")
       expect(page).to_not have_content("Current Price: $15.00")
+    end
+
+    it "displays a link to update the item information, when clicked I am taken to a page to edit the item" do 
+      merchant = Merchant.create!(name: "Practical Magic Shop")
+      book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
+
+      visit "/merchants/#{merchant.id}/items/#{book.id}"
+
+      expect(page).to have_link("Update Item", href: edit_merchant_item_path)
+
+      click_on("Update Item")
+
+      expect(current_path).to eq(edit_merchant_item_path)
     end
   end
 
