@@ -16,8 +16,7 @@ RSpec.describe "On the Merchant's Items index page" do
       other_merchant.items.create!(name: "Fried pickles", description: "a packet of fried pickles", unit_price: 2)
       other_merchant.items.create!(name: "Pickled cabbage", description: "a packet of pickled cabbage", unit_price: 1)
 
-      visit "/merchants/#{merchant.id}/items"
-      save_and_open_page 
+      visit "/merchants/#{merchant.id}/items" 
       
       within "#item-#{book.id}" do 
         expect(page).to have_content("Book of the dead")

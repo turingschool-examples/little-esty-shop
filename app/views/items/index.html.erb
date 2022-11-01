@@ -21,12 +21,19 @@
 <div class="row">
   <div class="column">
     <h2>Enabled Items</h2>
-    <p>Some text..</p>
+    <% @enabled_items.each do |item| %>
+      <div id="item-<%= item.id %>">
+        <p><%= item.name %></p>
+      </div>
+    <% end %>
     <h2>Disabled Items</h2>
+    <% @disabled_items.each do |item| %>
+      <p><%= item.name %></p>
+    <% end %>
   </div>
   <div class="column">
     <h2>Top Items</h2>
-    <p>Some text..</p>
+    <p>Items will go here</p>
   </div>
 </div>
 </body>
