@@ -1,6 +1,10 @@
 <h2><%= @merchant.name %> </h2>
 
 <div id="my-items">
+  <h3><center>My Items</center></h3>
+
+  <%= link_to 'New Item', "/merchants/#{@merchant.id}/items/new", method: :get %>
+
   <h4>Enabled Items</h4>
   <div id="enabled" style="text-indent:40px">
   <% @merchant.items.where(status: 'enabled').each do |item| %>
