@@ -70,5 +70,6 @@ RSpec.describe "Merchant Invoice Show" do
 
       expect(page).to have_content("Total Revenue: 15000")
       expect(page).to_not have_content("Total Revenue: 432000")
+    end
   end
 end
