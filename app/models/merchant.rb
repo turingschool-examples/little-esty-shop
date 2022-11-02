@@ -10,6 +10,6 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-    invoice_items.where("status = 1")
+    invoice_items.where("invoice_items.status = 1")
   end
 end

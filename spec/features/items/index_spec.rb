@@ -18,7 +18,6 @@ RSpec.describe 'merchant items index page', type: :feature do
       it '- I see a list of the names of all of my items, and I do not see items for any other merchant' do
        
         visit merchant_items_path(@crystal_moon)
-        # save_and_open_page
 
         expect(page).to have_content("Welcome To Crystal Moon Designs")
         expect(page).to have_content("Midnight Dream Catcher")
@@ -43,7 +42,6 @@ RSpec.describe 'merchant items index page', type: :feature do
       when I click this button, I am redirected back to the items index and I see 
       that the items status has changed' do
         visit merchant_items_path(@surf_designs)
-        # save_and_open_page
 
         expect(page).to have_button("Disable Board Wax")
         expect(page).to have_content("available for purchase")
@@ -117,18 +115,23 @@ RSpec.describe 'merchant items index page', type: :feature do
           expect(page).to_not have_content("Midnight Dream Catcher")
           expect(page).to_not have_content("Witchy Tarot Deck")
         end
-        # expect("Midnight Dream Catcher").to appear_before("Rose Quartz Pendant")
-        # expect("Witchy Tarot Deck").to appear_before("Rose Quartz Pendant")
-        
-        # click_button "Disable Midnight Dream Catcher"
+      end
 
-        # expect("Witchy Tarot Deck").to appear_before("Midnight Dream Catcher")
-        # expect("Witchy Tarot Deck").to appear_before("Rose Quartz Pendant")
+      it '- I see a link to create a new item' do
+        visit merchant_items_path(@surf_designs)
 
-        # click_button "Enable Midnight Dream Catcher"
-        
-        # expect("Midnight Dream Catcher").to appear_before("Rose Quartz Pendant")
-        # expect("Witchy Tarot Deck").to appear_before("Rose Quartz Pendant")
+        expect(page).to have_link("Create New Item", href: "/merchants/#{@surf_designs.id}/items/new")
+      end
+
+      xit '- When I click the link, I am taken to a form that 
+      allows me to add item information. when I fill out the form
+      I click (submit). then I am taken back to the items index page.' do
+
+      end
+
+      xit '- I see the item I just created displayed in the list of items, and
+      I see that my item was created with a default status of disabled.' do
+
       end
     end
   end

@@ -1,5 +1,7 @@
 <h1>Welcome To <%= @merchant.name %></h1>
 
+<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+
 <div id="enabled">
 <h2>--- Enabled Items ---</h2>
   <% @merchant_items.each do |item| %>

@@ -21,4 +21,8 @@ class ItemsController < ApplicationController
     # item.save
     redirect_to "/merchants/#{item.merchant.id}/items"
   end
+
+  def new
+    require 'pry'; binding.pry
+  end
 end
