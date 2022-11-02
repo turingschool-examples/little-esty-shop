@@ -6,7 +6,7 @@
     Status: available for purchase<br>
     </p>
     <%= button_to "Disable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
-  <% else item.status == 'disabled' %>
+  <% elsif item.status == 'disabled' %>
     <p>
     <b><%= item.name %></b><br>
     Status: not available for purchase<br>
