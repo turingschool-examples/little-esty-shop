@@ -37,7 +37,7 @@ RSpec.describe "On the Merchant's Items index page" do
     # When I click this button
     # Then I am redirected back to the items index
     # And I see that the items status has changed
-    it "displays a button to disable/enable each item shown, when clicked i'm redirected to the index and the items status is changed" do 
+    it "displays disable/enable buttons for each item, when clicked, reloads index and the items status is changed" do 
       visit "merchants/#{@merchant.id}/items"
       within "#enabled" do 
         within "#item-#{@book.id}" do 
@@ -66,6 +66,20 @@ RSpec.describe "On the Merchant's Items index page" do
       within "#disabled" do 
         within "#item-#{@potion.id}" do 
           expect(page).to have_button("Enable")
+          click_button("Enable")
+        end
+      end
+
+      expect(current_path).to eq(merchant_items_path(@merchant))
+      within "#enabled" do 
+        within "#item-#{@book.id}" do 
+          expect(page).to have_button("Disable")
+        end
+        within "#item-#{@candle.id}" do 
+          expect(page).to have_button("Disable")
+        end
+        within "#item-#{@potion.id}" do 
+          expect(page).to have_button("Disable")
         end
       end
     end
