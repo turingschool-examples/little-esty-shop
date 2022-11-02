@@ -1,1 +1,12 @@
 <h1>Admin Dashboard</h1>
+<p><a href="/admin/merchants">Admin Merchants</a><p>
+<p><a href="/admin/invoices">Admin Invoices</a><p>
+
+<ul id="admin">
+  <p>Top 5 Customers: <%= @supermarket.name %>:</p>
+    <% @supermarket.unique_customers.each do |customer| %>
+  <li>
+   <%= customer.name %>>
+  </li>
+<% end %>
+</ul>
