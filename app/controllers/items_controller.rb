@@ -6,14 +6,8 @@ class ItemsController < ApplicationController
     end
   end
   
-  def show 
-
-    if params[:item_id]
-
-    @merchant = Merchant.find(params[:merchant_id])
-    end 
-
-
+  def show
+    @item = Item.find(params[:id])
   end
   def update 
     @merchant = Merchant.find(params[:merchant_id])
@@ -21,7 +15,6 @@ class ItemsController < ApplicationController
     @item.update(status: params[:status])
     @item.save 
     redirect_to "/merchants/#{@merchant.id}/items"
-  
 
   end
 
