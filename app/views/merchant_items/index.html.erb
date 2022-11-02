@@ -1,4 +1,16 @@
 <h1>Welcome To <%= @merchant.name %></h1>
 <% @merchant_items.each do |item| %>
-  <p><%= item.name %></p>
+  <% if item.status == 'enabled' %>
+    <p>
+    <b><%= item.name %></b><br>
+    Status: available for purchase<br>
+    </p>
+    <%= button_to "Disable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
+  <% else item.status == 'disabled' %>
+    <p>
+    <b><%= item.name %></b><br>
+    Status: not available for purchase<br>
+    </p>
+    <%= button_to "Enable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
+  <% end %>
 <% end %>

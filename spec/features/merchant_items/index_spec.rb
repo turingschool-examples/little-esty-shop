@@ -47,13 +47,13 @@ RSpec.describe 'merchant items index page', type: :feature do
         click_button "Disable Board Wax"
         expect(current_path).to eq("/merchants/#{surf_designs.id}/items")
         
-        expect(page).to have_content("not available for purchase")
+        expect(page).to have_content("Status: not available for purchase")
         expect(page).to have_button("Enable Board Wax")
         
         click_button "Enable Board Wax"
         expect(current_path).to eq("/merchants/#{surf_designs.id}/items")
 
-        expect(page).to have_content("available for purchase")
+        expect(page).to have_content("Status: available for purchase")
       end
     end
   end
