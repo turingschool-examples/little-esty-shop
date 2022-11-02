@@ -1,27 +1,27 @@
 <h1>Welcome To <%= @merchant.name %></h1>
-<% @merchant_items.each do |item| %>
-  <p> Item: <%=link_to item.name, merchant_item_path(@merchant, item)%></p>
-  ------------------------------------------<br>
-<% end %>
 
+<div id="enabled">
 <h2>--- Enabled Items ---</h2>
   <% @merchant_items.each do |item| %>
     <% if item.status == 'enabled' %>
       <p>
-      <b><%= item.name %></b><br>
+      <b><%=link_to item.name, merchant_item_path(@merchant, item)%><b><br>
       Status: available for purchase<br>
       </p>
       <%= button_to "Disable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?button=true", method: :patch %><br>
     <% end %>
   <% end %>
+</div>
 
+<div id="disabled">
 <h2>--- Disabled Items ---</h2>
   <% @merchant_items.each do |item| %>
     <% if item.status == 'disabled' %>
       <p>
-      <b><%= item.name %></b><br>
+      <b><%=link_to item.name, merchant_item_path(@merchant, item)%><b><br>
       Status: not available for purchase<br>
       </p>
       <%= button_to "Enable #{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}?button=true", method: :patch %><br>
     <% end %>
   <% end %>
+</div>
