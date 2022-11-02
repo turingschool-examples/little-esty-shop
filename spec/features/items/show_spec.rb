@@ -19,15 +19,14 @@ RSpec.describe 'merchant items show page' do
       @trex = @whb.items.create!(name: "T-Rex", description: "Skull of a Dinosaur", unit_price: 100000)
     end
 
-
     describe "When I click on the name of an item from the merchant items index page" do
       describe "Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)" do 
         it "displays all of the item's attributes including: Name, Description, Current Selling Price" do
 
-          view ("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
-
+          visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
+            # save_and_open_page
           expect(page).to have_content("#{@dk.name}")
-
+          expect(page).to have_content("#{@funnypowder.name}")
         end
       end
     end

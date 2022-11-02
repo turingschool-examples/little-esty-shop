@@ -5,4 +5,12 @@ class ItemsController < ApplicationController
       @merchant.items 
     end
   end
+
+  def show
+    # require 'pry';binding.pry
+    @merchant = Merchant.find(params[:merchant_id])
+    if params[:merchant_id]
+      @merchant.items 
+    end
+  end
 end
