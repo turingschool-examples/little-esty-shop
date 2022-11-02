@@ -100,7 +100,7 @@ RSpec.describe 'the Merchant dashboard' do
       within '#items_ready_to_ship' do 
         expect(page).to have_content("#{@item1.name} - Invoice ##{@invoice3.id}")
         expect(page).to have_content("#{@item2.name} - Invoice ##{@invoice2.id}")
-
+        save_and_open_page
         within "#invoice-#{@invoice3.id}" do 
           click_link "#{@invoice3.id}"
 
