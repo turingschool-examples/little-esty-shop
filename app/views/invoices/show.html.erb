@@ -12,6 +12,8 @@
 <p><h4>Invoice Items Ordered: </h4></p>
 <% @invoice.items.each do |item| %>
   <p><strong>Name: </strong><%= item.name %></p>
+
+  <form_with url:>
   <% item.invoice_items.each do |invoice_item| %>
   <p><strong>Unit Price: </strong><%= invoice_item.unit_price %></p>
   <p><strong>Quantity: </strong><%= invoice_item.quantity %></p>
