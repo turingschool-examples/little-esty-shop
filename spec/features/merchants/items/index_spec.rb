@@ -37,33 +37,15 @@ RSpec.describe "On the Merchant's Items index page" do
     # When I click this button
     # Then I am redirected back to the items index
     # And I see that the items status has changed
-    it "displays disable/enable buttons for each item, when clicked, reloads index and the items status is changed" do 
+    it "displays items grouped by status and disable/enable buttons for each item, when clicked, reloads index and the items status is changed" do 
       visit "merchants/#{@merchant.id}/items"
-      within "#enabled" do 
-        within "#item-#{@book.id}" do 
-          expect(page).to have_button("Disable")
-        end
-        within "#item-#{@candle.id}" do 
-          expect(page).to have_button("Disable")
-        end
-        within "#item-#{@potion.id}" do 
-          expect(page).to have_button("Disable")
-          click_button("Disable")
-        end
-      end
-
-      expect(current_path).to eq(merchant_items_path(@merchant))
-
-      within "#enabled" do 
-        within "#item-#{@book.id}" do 
-          expect(page).to have_button("Disable")
-        end
-        within "#item-#{@candle.id}" do 
-          expect(page).to have_button("Disable")
-        end
-      end
-
       within "#disabled" do 
+        within "#item-#{@book.id}" do 
+          expect(page).to have_button("Enable")
+        end
+        within "#item-#{@candle.id}" do 
+          expect(page).to have_button("Enable")
+        end
         within "#item-#{@potion.id}" do 
           expect(page).to have_button("Enable")
           click_button("Enable")
@@ -71,17 +53,48 @@ RSpec.describe "On the Merchant's Items index page" do
       end
 
       expect(current_path).to eq(merchant_items_path(@merchant))
-      within "#enabled" do 
+
+      within "#disabled" do 
         within "#item-#{@book.id}" do 
-          expect(page).to have_button("Disable")
+          expect(page).to have_button("Enable")
         end
         within "#item-#{@candle.id}" do 
-          expect(page).to have_button("Disable")
-        end
-        within "#item-#{@potion.id}" do 
-          expect(page).to have_button("Disable")
+          expect(page).to have_button("Enable")
         end
       end
+
+      within "#enabled" do 
+        within "#item-#{@potion.id}" do 
+          expect(page).to have_button("Disable")
+          click_button("Disable")
+        end
+      end
+
+      expect(current_path).to eq(merchant_items_path(@merchant))
+      within "#disabled" do 
+        within "#item-#{@book.id}" do 
+          expect(page).to have_button("Enable")
+        end
+        within "#item-#{@candle.id}" do 
+          expect(page).to have_button("Enable")
+        end
+        within "#item-#{@potion.id}" do 
+          expect(page).to have_button("Enable")
+        end
+      end
+    end
+
+    # I see a link to create a new item.
+    # When I click on the link,
+    # I am taken to a form that allows me to add item information.
+    it "has a link to 'New Item' which takes me to a form to create a new item" do 
+      visit "/merchants/#{@merchant.id}/items" 
+
+      expect(page).to have_link("New Item", href: new_merchant_item_path(@merchant))
+      
+      click_on("New Item")
+
+      expect(current_path).to eq(new_merchant_item_path(@merchant))
     end
   end
 
