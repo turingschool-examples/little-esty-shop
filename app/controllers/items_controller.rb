@@ -34,10 +34,10 @@ class ItemsController < ApplicationController
    
     if params[:enable]
       item = Item.find(params[:enable])
-      item.enable_status
+      item.update_attribute :status, 0
     else
       item = Item.find(params[:disable])
-      item.disable_status
+      item.update_attribute :status, 1
     end
 
     redirect_to merchant_items_path(merchant)

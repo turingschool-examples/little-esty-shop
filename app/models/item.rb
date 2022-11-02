@@ -12,11 +12,15 @@ class Item < ApplicationRecord
     unit_price / 100.0
   end
 
-  def enable_status
-    update_attribute :status, 0
-  end
-
-  def disable_status
-    update_attribute :status, 1
+  def self.top_5_items
+    select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+      .from('transactions')
+      .joins("INNER JOIN invoices on invoices.id = transactions.invoice_id")
+      .joins("INNER JOIN invoice_items on invoice_items.invoice_id = invoices.id")
+      .joins("INNER JOIN items on items.id = invoice_items.item_id")
+      .where('result = ?', 'success')
+      .group('items.id')
+      .order('revenue DESC')
+      .limit(5)
   end
 end
