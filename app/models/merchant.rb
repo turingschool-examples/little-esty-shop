@@ -13,7 +13,11 @@ class Merchant < ApplicationRecord
     Customer.select('customers.*, count(transactions.*) as num_transactions').joins(invoices: [:transactions, :items]).where("transactions.result = 0").where("items.merchant_id = ?", self.id).order('num_transactions desc').group(:id).limit(5)
   end
 
-  def group_by_enabled
+  def enabled_items
     items.select("name").where("status = 'Enabled'").pluck(:name)
+  end
+
+  def disabled_items
+    items.select("name").where("status = 'Disabled'").pluck(:name)
   end
 end
