@@ -51,6 +51,15 @@ RSpec.describe "On the Merchant's Items index page" do
       within "#item-#{@potion.id}" do 
         expect(page).to have_content("Love potion")
       end
+      within "#item-#{@scroll.id}" do 
+        expect(page).to have_content("Scroll of healing")
+      end
+      within "#item-#{@bone.id}" do 
+        expect(page).to have_content("Bird bones")
+      end
+      within "#item-#{@wand.id}" do 
+        expect(page).to have_content("Willow birch wand")
+      end
 
       expect(page).to_not have_content("Fried pickles")
       expect(page).to_not have_content("Pickled cabbage")
@@ -63,8 +72,10 @@ RSpec.describe "On the Merchant's Items index page" do
       expect(page).to have_link("Candle of life", href: merchant_item_path(@merchant, @candle))
       expect(page).to have_link("Love potion", href: merchant_item_path(@merchant, @potion))
 
-      click_on("Book of the dead")
-      
+      within "#item-#{@book.id}" do 
+        click_on("Book of the dead")
+      end
+
       expect(current_path).to eq(merchant_item_path(@merchant, @book))
     end
 
@@ -135,14 +146,20 @@ RSpec.describe "On the Merchant's Items index page" do
     # Then I see the names of the top 5 most popular items ranked by total revenue generated
     # And I see that each item name links to my merchant item show page for that item
     # And I see the total revenue generated next to each item name
-    xit "displays the names of the top 5 most popular items ranked by total revenue generated. Each name links to the item's show page" do 
+    it "displays the names of the top 5 most popular items ranked by total revenue generated. Each name links to the item's show page" do 
       visit "merchants/#{@merchant.id}/items"
 
       within "#top-items" do 
-        expect("Candle of life: $30 in sales").to appear_before("Love potion: $20 in sales")
-        expect("Love potion: $20 in sales").to appear_before("Scroll of healing: $18 in sales")
-        expect("Scroll of healing: $18 in sales").to appear_before("Book of the dead: $8 in sales")
-        expect("Book of the dead: $8 in sales").to appear_before("Bird bones: $2 in sales")
+        expect("Candle of life: $30.00").to appear_before("Love potion: $20.00 in sales", only_text: true)
+        expect("Love potion: $20.00 in sales").to appear_before("Scroll of healing: $18.00 in sales", only_text: true)
+        expect("Scroll of healing: $18.00 in sales").to appear_before("Book of the dead: $8.00 in sales", only_text: true)
+        expect("Book of the dead: $8.00 in sales").to appear_before("Bird bones: $2.00 in sales", only_text: true)
+        
+        expect(page).to have_link("Candle of life", href: merchant_item_path(@merchant, @candle))
+        expect(page).to have_link("Love potion", href: merchant_item_path(@merchant, @potion))
+        expect(page).to have_link("Scroll of healing", href: merchant_item_path(@merchant, @scroll))
+        expect(page).to have_link("Book of the dead", href: merchant_item_path(@merchant, @book))
+        expect(page).to have_link("Bird bones", href: merchant_item_path(@merchant, @bone))
       end
     end
   end
