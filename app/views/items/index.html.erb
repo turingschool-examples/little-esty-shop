@@ -27,7 +27,7 @@
         <% @enabled_items.each do |item| %>
           <div id="item-<%= item.id %>">
             <p style="display:inline-block">
-              <%= item.name %> 
+              <%= link_to item.name, merchant_item_path(@merchant, item) %> 
               <%= button_to "Disable", merchant_item_path(@merchant, item), form: {style: 'display:inline-block;padding-left:1em'}, method: :patch, params: {status: "disabled"} %>
             </p>
           </div>
@@ -38,7 +38,7 @@
         <% @disabled_items.each do |item| %>
           <div id="item-<%= item.id %>">
             <p style="display:inline-block">
-              <%= item.name %>
+              <%= link_to item.name, merchant_item_path(@merchant, item) %>
               <%= button_to "Enable", merchant_item_path(@merchant, item), form: {style: 'display:inline-block;padding-left:1em'}, method: :patch, params: {status: "enabled"} %>
             </p>
           </div>

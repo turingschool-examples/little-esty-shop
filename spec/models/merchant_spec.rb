@@ -35,5 +35,46 @@ RSpec.describe Merchant, type: :model do
         expect(merchant.disabled_items).to eq([book, candle, coffee])
       end
     end
+
+    describe "#top_five_items" do 
+      it "returns a collection of items, including their total revenue, of the top five items for that merchant" do 
+        merchant = Merchant.create!(name: "Practical Magic Shop")
+
+        book = merchant.items.create!(name: "Book of the dead", description: "book of necromancy spells", unit_price: 4)
+        candle = merchant.items.create!(name: "Candle of life", description: "candle that gifts everlasting life", unit_price: 15)
+        potion = merchant.items.create!(name: "Love potion", description: "One serving size of true love potion", unit_price: 10)
+        scroll = merchant.items.create!(name: "Scroll of healing", description: "A scroll which when read aloud, heals your wounds.", unit_price: 9)
+        bone = merchant.items.create!(name: "Bird bones", description: "Complete (not intact) skeleton of crow. For use as spell components.", unit_price: 2)
+        wand = merchant.items.create!(name: "Willow birch wand", description: "Newly made 12-inch willow birch wand.", unit_price: 3)
+        the_sixth_item = merchant.items.create(name: "Sixth", description: "Another item", unit_price: 1)
+    
+        customer = Customer.create!(first_name: "Gandalf", last_name: "Thegrey")
+    
+        invoice_1 = customer.invoices.create!(status: 1)
+        invoice_2 = customer.invoices.create!(status: 1)
+        invoice_3 = customer.invoices.create!(status: 1)
+    
+        InvoiceItem.create!(invoice: invoice_1, item: book, quantity: 2, unit_price: 4, status: 2)
+        InvoiceItem.create!(invoice: invoice_1, item: the_sixth_item, quantity: 1, unit_price: 1, status: 2)
+        InvoiceItem.create!(invoice: invoice_1, item: candle, quantity: 2, unit_price: 15, status: 2)
+        InvoiceItem.create!(invoice: invoice_2, item: potion, quantity: 2, unit_price: 10, status: 2)
+        InvoiceItem.create!(invoice: invoice_2, item: scroll, quantity: 2, unit_price: 9, status: 2)
+        InvoiceItem.create!(invoice: invoice_2, item: bone, quantity: 1, unit_price: 2, status: 2)
+        InvoiceItem.create!(invoice: invoice_3, item: wand, quantity: 1, unit_price: 3, status: 0)
+        InvoiceItem.create!(invoice: invoice_3, item: scroll, quantity: 6, unit_price: 9, status: 0)
+    
+        invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
+        invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
+        invoice_2.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
+        invoice_3.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
+
+        expect(merchant.top_five_items).to eq([candle, potion, scroll, book, bone])
+        expect(merchant.top_five_items[0].total_revenue).to eq(30)
+        expect(merchant.top_five_items[1].total_revenue).to eq(20)
+        expect(merchant.top_five_items[2].total_revenue).to eq(18)
+        expect(merchant.top_five_items[3].total_revenue).to eq(8)
+        expect(merchant.top_five_items[4].total_revenue).to eq(2)
+      end
+    end
   end
 end
