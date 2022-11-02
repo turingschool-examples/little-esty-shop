@@ -8,7 +8,7 @@ RSpec.describe "On the Merchant's Items index page" do
   describe "When I visit merchants/:merchant_id/items" do 
     it "displays a list of the names of all my items and I do not see items for any other merchant" do 
       merchant = Merchant.create!(name: "Practical Magic Shop")
-      book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
+      book = merchant.items.create!(name: "Book of the dead", description: "book of necromancy spells", unit_price: 4)
       candle = merchant.items.create!(name: "Candle of life", description: "candle that gifts everlasting life", unit_price: 15)
       potion = merchant.items.create!(name: "Love potion", description: "One serving size of true love potion", unit_price: 10)
 
