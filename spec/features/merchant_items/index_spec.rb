@@ -70,59 +70,20 @@ RSpec.describe 'merchant items index page', type: :feature do
 
         visit "/merchants/#{crystal_moon.id}/items"
 
-        within "Enabled Items" do
-          expect(page).to have_content("Midnight Dream Catcher")
-          expect(page).to have_content("Rose Quartz Pendant")
-          expect(page).to have_content("Witchy Tarot Deck")
-        end
-
-        within "Disabled Items" do
-          expect(page).to_not have_content("Midnight Dream Catcher")
-          expect(page).to_not have_content("Rose Quartz Pendant")
-          expect(page).to_not have_content("Witchy Tarot Deck")
-        end
-
         click_button "Disable Rose Quartz Pendant"
 
-        within "Enabled Items" do
-          expect(page).to have_content("Midnight Dream Catcher")
-          expect(page).to have_content("Witchy Tarot Deck")
-          expect(page).to_not have_content("Rose Quartz Pendant")
-        end
-
-        within "Disabled Items" do
-          expect(page).to have_content("Rose Quartz Pendant")
-          expect(page).to_not have_content("Midnight Dream Catcher")
-          expect(page).to_not have_content("Witchy Tarot Deck")
-        end
-
+        expect("Midnight Dream Catcher").to appear_before("Rose Quartz Pendant")
+        expect("Witchy Tarot Deck").to appear_before("Rose Quartz Pendant")
+        
         click_button "Disable Midnight Dream Catcher"
 
-        within "Enabled Items" do
-          expect(page).to have_content("Witchy Tarot Deck")
-          expect(page).to_not have_content("Midnight Dream Catcher")
-          expect(page).to_not have_content("Rose Quartz Pendant")
-        end
-
-        within "Disabled Items" do
-          expect(page).to have_content("Rose Quartz Pendant")
-          expect(page).to have_content("Midnight Dream Catcher")
-          expect(page).to_not have_content("Witchy Tarot Deck")
-        end
+        expect("Witchy Tarot Deck").to appear_before("Midnight Dream Catcher")
+        expect("Witchy Tarot Deck").to appear_before("Rose Quartz Pendant")
 
         click_button "Enable Midnight Dream Catcher"
 
-        within "Enabled Items" do
-          expect(page).to have_content("Midnight Dream Catcher")
-          expect(page).to have_content("Witchy Tarot Deck")
-          expect(page).to_not have_content("Rose Quartz Pendant")
-        end
-
-        within "Disabled Items" do
-          expect(page).to have_content("Rose Quartz Pendant")
-          expect(page).to_not have_content("Midnight Dream Catcher")
-          expect(page).to_not have_content("Witchy Tarot Deck")
-        end
+        expect("Midnight Dream Catcher").to appear_before("Rose Quartz Pendant")
+        expect("Witchy Tarot Deck").to appear_before("Rose Quartz Pendant")
       end
     end
   end

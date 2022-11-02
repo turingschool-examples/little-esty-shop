@@ -1,6 +1,6 @@
 <h1>Welcome To <%= @merchant.name %></h1>
 
-<section id= "Enabled Items">
+<h2>--- Enabled Items ---</h2>
   <% @merchant_items.each do |item| %>
     <% if item.status == 'enabled' %>
       <p>
@@ -10,9 +10,9 @@
       <%= button_to "Disable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
     <% end %>
   <% end %>
-</section>
 
-<section id= "Disabled Items">
+
+<h2>--- Disabled Items ---</h2>
   <% @merchant_items.each do |item| %>
     <% if item.status == 'disabled' %>
       <p>
@@ -22,4 +22,3 @@
       <%= button_to "Enable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
     <% end %>
   <% end %>
-</section>
