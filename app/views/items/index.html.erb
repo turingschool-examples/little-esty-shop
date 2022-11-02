@@ -49,7 +49,9 @@
       <div id="top-items">
         <h2>Top Items</h2>
         <% @top_items.each do |item| %>
-          <p><%= link_to item.name, merchant_item_path(@merchant, item) %>: $<%= item.total_revenue %>.00 in sales</p>
+          <div id="item-<%= item.id %>">
+            <p><%= link_to item.name, merchant_item_path(@merchant, item) %>: $<%= item.total_revenue %>.00 in sales</p>
+          </div>
         <% end %>
       </div>
     </div>

@@ -34,6 +34,7 @@ RSpec.describe "On the Merchant's Items index page" do
     @other_merchant.items.create!(name: "Fried pickles", description: "a packet of fried pickles", unit_price: 2)
     @other_merchant.items.create!(name: "Pickled cabbage", description: "a packet of pickled cabbage", unit_price: 1)
   end
+
   # As a merchant,
   # When I visit my merchant items index page ("merchants/merchant_id/items")
   # I see a list of the names of all of my items
@@ -85,6 +86,7 @@ RSpec.describe "On the Merchant's Items index page" do
     # And I see that the items status has changed
     it "displays items grouped by status and disable/enable buttons for each item, when clicked, reloads index and the items status is changed" do 
       visit "merchants/#{@merchant.id}/items"
+      
       within "#disabled" do 
         within "#item-#{@book.id}" do 
           expect(page).to have_button("Enable")
@@ -154,7 +156,7 @@ RSpec.describe "On the Merchant's Items index page" do
         expect("Love potion: $20.00 in sales").to appear_before("Scroll of healing: $18.00 in sales", only_text: true)
         expect("Scroll of healing: $18.00 in sales").to appear_before("Book of the dead: $8.00 in sales", only_text: true)
         expect("Book of the dead: $8.00 in sales").to appear_before("Bird bones: $2.00 in sales", only_text: true)
-        
+
         expect(page).to have_link("Candle of life", href: merchant_item_path(@merchant, @candle))
         expect(page).to have_link("Love potion", href: merchant_item_path(@merchant, @potion))
         expect(page).to have_link("Scroll of healing", href: merchant_item_path(@merchant, @scroll))
