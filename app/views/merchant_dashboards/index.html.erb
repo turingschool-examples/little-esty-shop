@@ -20,5 +20,9 @@
 
 <div id="items-to-ship-merchant-<%= @merchant.id %>">
   Items Ready to Ship:
-
+  <ul>
+    <% @item_invoices.each do |item_invoice| %>
+      <li><%= "#{item_invoice.item_name}: " %> <%= link_to "Invoice # #{item_invoice.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item_invoice.invoice_id}" %> <%= item_invoice.invoice_date %></li>
+    <% end %>
+  </ul>
 </div>
