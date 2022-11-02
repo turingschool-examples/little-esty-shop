@@ -1,6 +1,5 @@
 require "rails_helper"
 
-
 RSpec.describe("admin merchants index page") do
   before(:each) do
     @merchant1 = Merchant.create!(    name: "Tokyos Tractors")
