@@ -55,6 +55,75 @@ RSpec.describe 'merchant items index page', type: :feature do
 
         expect(page).to have_content("Status: available for purchase")
       end
+
+      it '- I see two sections, one for enabled items, and one for disabled items.
+      I see that each item it listed in the appropriate section' do
+        crystal_moon = Merchant.create!(name: "Crystal Moon Designs")
+        surf_designs = Merchant.create!(name: "Surf & Co. Designs")
+
+        dream_catcher = crystal_moon.items.create!(name: "Midnight Dream Catcher", description: "Catch the magic of your dreams!", unit_price: 25)
+        rose_quartz = crystal_moon.items.create!(name: "Rose Quartz Pendant", description: "Manifest the love of your life!", unit_price: 37)
+        tarot_deck = crystal_moon.items.create!(name: "Witchy Tarot Deck", description: "Unveil your true path!", unit_price: 22)
+        wax = surf_designs.items.create!(name: "Board Wax", description: "Hang ten!", unit_price: 7)
+        rash_guard = surf_designs.items.create!(name: "Radical Rash Guard", description: "Stay totally groovy and rash free!", unit_price: 50)
+        zinc = surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
+
+        visit "/merchants/#{crystal_moon.id}/items"
+
+        within "Enabled Items" do
+          expect(page).to have_content("Midnight Dream Catcher")
+          expect(page).to have_content("Rose Quartz Pendant")
+          expect(page).to have_content("Witchy Tarot Deck")
+        end
+
+        within "Disabled Items" do
+          expect(page).to_not have_content("Midnight Dream Catcher")
+          expect(page).to_not have_content("Rose Quartz Pendant")
+          expect(page).to_not have_content("Witchy Tarot Deck")
+        end
+
+        click_button "Disable Rose Quartz Pendant"
+
+        within "Enabled Items" do
+          expect(page).to have_content("Midnight Dream Catcher")
+          expect(page).to have_content("Witchy Tarot Deck")
+          expect(page).to_not have_content("Rose Quartz Pendant")
+        end
+
+        within "Disabled Items" do
+          expect(page).to have_content("Rose Quartz Pendant")
+          expect(page).to_not have_content("Midnight Dream Catcher")
+          expect(page).to_not have_content("Witchy Tarot Deck")
+        end
+
+        click_button "Disable Midnight Dream Catcher"
+
+        within "Enabled Items" do
+          expect(page).to have_content("Witchy Tarot Deck")
+          expect(page).to_not have_content("Midnight Dream Catcher")
+          expect(page).to_not have_content("Rose Quartz Pendant")
+        end
+
+        within "Disabled Items" do
+          expect(page).to have_content("Rose Quartz Pendant")
+          expect(page).to have_content("Midnight Dream Catcher")
+          expect(page).to_not have_content("Witchy Tarot Deck")
+        end
+
+        click_button "Enable Midnight Dream Catcher"
+
+        within "Enabled Items" do
+          expect(page).to have_content("Midnight Dream Catcher")
+          expect(page).to have_content("Witchy Tarot Deck")
+          expect(page).to_not have_content("Rose Quartz Pendant")
+        end
+
+        within "Disabled Items" do
+          expect(page).to have_content("Rose Quartz Pendant")
+          expect(page).to_not have_content("Midnight Dream Catcher")
+          expect(page).to_not have_content("Witchy Tarot Deck")
+        end
+      end
     end
   end
 end

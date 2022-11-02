@@ -1,16 +1,25 @@
 <h1>Welcome To <%= @merchant.name %></h1>
-<% @merchant_items.each do |item| %>
-  <% if item.status == 'enabled' %>
-    <p>
-    <b><%= item.name %></b><br>
-    Status: available for purchase<br>
-    </p>
-    <%= button_to "Disable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
-  <% elsif item.status == 'disabled' %>
-    <p>
-    <b><%= item.name %></b><br>
-    Status: not available for purchase<br>
-    </p>
-    <%= button_to "Enable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
+
+<section id= "Enabled Items">
+  <% @merchant_items.each do |item| %>
+    <% if item.status == 'enabled' %>
+      <p>
+      <b><%= item.name %></b><br>
+      Status: available for purchase<br>
+      </p>
+      <%= button_to "Disable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
+    <% end %>
   <% end %>
-<% end %>
+</section>
+
+<section id= "Disabled Items">
+  <% @merchant_items.each do |item| %>
+    <% if item.status == 'disabled' %>
+      <p>
+      <b><%= item.name %></b><br>
+      Status: not available for purchase<br>
+      </p>
+      <%= button_to "Enable #{item.name}", "/items/#{item.id}?button=true", method: :patch %><br>
+    <% end %>
+  <% end %>
+</section>
