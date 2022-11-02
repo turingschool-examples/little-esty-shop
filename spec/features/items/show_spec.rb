@@ -21,13 +21,19 @@ RSpec.describe 'merchant items show page' do
 
     describe "When I click on the name of an item from the merchant items index page" do
       describe "Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)" do 
-        it "displays all of the item's attributes including: Name, Description, Current Selling Price" do
-
+        
+        it "show page is specific to a item in the url" do
           visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
+          
           expect(page).to_not have_content("#{@whb.name}")
           expect(page).to_not have_content("#{@klein_rempel.name}")
+          expect(page).to_not have_content("#{@ufo.name}")
           expect(page).to_not have_content("#{@watch.name}")
           expect(page).to_not have_content("#{@bike.description}")
+        end
+
+        it "displays all of the item's attributes including: Name, Description, Current Selling Price" do
+          visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
           
           expect(page).to have_content("#{@dk.name}")
           
