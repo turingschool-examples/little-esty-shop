@@ -16,5 +16,18 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content("Another")
       expect(page).to_not have_content("Other")
     end
+
+    it 'next to each item is a button to disable/ enable item which takes user back to items index with items status changed' do 
+      visit merchant_items_path(@klein_rempel)
+      expect(page).to_not have_content("Enabled")
+      click_button "Enable"
+      expect(page).to have_content("Enabled")
+      expect(page).to_not have_content("Disabled")
+      click_button "Disable"
+      expect(page).to have_content("Disabled")
+      expect(page).to_not have_content("Enabled")
+
+
+    end
   end
 end
