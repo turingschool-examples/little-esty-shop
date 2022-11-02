@@ -73,7 +73,7 @@ RSpec.describe 'Admin#index' do
      expect(page).to have_content("William")
      expect(page).to have_content("Bryan")
      expect(page).to have_content("James")
-     #binding.pry
+     
     #  @customer = Customer.joins(invoices: [:transactions]).group(:id).where("transactions.result=0").select("customers.*, count(transactions) as success_count").order("success_count desc") 
 
     end
