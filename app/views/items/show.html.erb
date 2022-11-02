@@ -1,8 +1,12 @@
 
-<h2><center><%= @merchant.name %></center></h2>
+
+<h1><center><%= @merchant.name %></center></h1>
+<hr>
 
  <% @merchant.items.each do |item| %>
-  <ul><b>Item: <%= item.name %></b></ul>
-  <ul>Description: <%= item.description %></ul>
-  <ul>Price: <%= item.unit_price %></ul>
-  <% end %>
+  <div id="merchant-items-<%=item.id%>">
+    <ul><b>Item: <%= item.name %></b></ul>
+    <ul>Description: <%= item.description %></ul>
+    <ul>Price: <%= item.unit_price %></ul>
+  </div>
+<% end %>

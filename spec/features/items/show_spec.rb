@@ -6,6 +6,7 @@ RSpec.describe 'merchant items show page' do
       @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
       @whb = Merchant.create!(name: "WHB")
       @dk = Merchant.create!(name: "Dickinson-Klein")
+      
       @watch = @klein_rempel.items.create!(name: "Watch", description: "Tells time on your wrist", unit_price: 300)
       @radio = @klein_rempel.items.create!(name: "Radio", description: "Broadcasts radio stations", unit_price: 150)
       @speaker = @klein_rempel.items.create!(name: "Speakers", description: "Listen to your music LOUD", unit_price: 250)
@@ -24,9 +25,21 @@ RSpec.describe 'merchant items show page' do
         it "displays all of the item's attributes including: Name, Description, Current Selling Price" do
 
           visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
-            # save_and_open_page
+          expect(page).to_not have_content("#{@whb.name}")
+          expect(page).to_not have_content("#{@klein_rempel.name}")
+          expect(page).to_not have_content("#{@watch.name}")
+          expect(page).to_not have_content("#{@bike.description}")
+          
           expect(page).to have_content("#{@dk.name}")
-          expect(page).to have_content("#{@funnypowder.name}")
+          
+          within("#merchant-items-#{@tent.id}") do
+          expect(page).to have_content("#{@tent.name}")
+          expect(page).to have_content("#{@tent.description}")
+          expect(page).to have_content("#{@tent.unit_price}")
+          expect(page).to_not have_content("#{@dk.name}")
+          # save_and_open_page
+          # require 'pry';binding.pry
+          end
         end
       end
     end
