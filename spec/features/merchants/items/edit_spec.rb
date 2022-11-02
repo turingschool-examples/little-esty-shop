@@ -27,7 +27,6 @@ RSpec.describe "the merchant items edit page" do
       click_button("Submit")
 
       expect(current_path).to eq(merchant_item_path(merchant, book))
-      save_and_open_page
       expect(page).to have_content("Dead Spells Book")
       expect(page).to have_content("Description: This is a hundred year old tome full of necromancy spells. Very rare.")
       expect(page).to have_content("Current Price: $4.00")
