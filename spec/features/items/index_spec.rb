@@ -71,5 +71,13 @@ RSpec.describe 'items index page', type: :feature do
         expect(page).to have_content(lamp.name)
       end
     end
+
+    it 'has a link to create a new item' do
+      visit merchant_items_path(nomi)
+
+      click_link 'New Item'
+
+      expect(current_path).to eq(new_merchant_item_path(nomi))
+    end
   end
 end
