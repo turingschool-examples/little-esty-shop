@@ -5,6 +5,7 @@
 <p><strong>Customer Name: </strong> <%= @invoice.customer.first_name%> <%= @invoice.customer.last_name %></p>
 <p><strong>Invoice Status: </strong><%= @invoice.status %></p>
 <p><strong>Created at: </strong><%= @invoice.created_at.strftime('%A, %B %d, %Y')%> </p>
+<p><strong>Total Revenue: </strong><%= @invoice.total_revenue %></p>
 <br>
 <br>
 
@@ -15,8 +16,11 @@
   <p><strong>Unit Price: </strong><%= invoice_item.unit_price %></p>
   <p><strong>Quantity: </strong><%= invoice_item.quantity %></p>
   <p><strong>Status: </strong><%= invoice_item.status %></p>
+  <br>
+  <br>
   <% end %>
 <% end %>
+<br>
 
 
 

@@ -19,48 +19,72 @@ RSpec.describe Merchant do
     @customer6 = Customer.create!(first_name: 'Margarita', last_name: 'Mary')
 
     @invoice1 = @customer1.invoices.create!(status: 2)
-    @invoice2 = @customer1.invoices.create!(status: 2)
-    @invoice3 = @customer2.invoices.create!(status: 2)
-    @invoice4 = @customer3.invoices.create!(status: 2)
-    @invoice5 = @customer4.invoices.create!(status: 2)
-    @invoice6 = @customer5.invoices.create!(status: 2)
+    @invoice2 = @customer2.invoices.create!(status: 2)
+    @invoice3 = @customer3.invoices.create!(status: 2)
+    @invoice4 = @customer4.invoices.create!(status: 2)
+    @invoice5 = @customer5.invoices.create!(status: 2)
 
-    @item1.invoices << @invoice1 << @invoice2 << @invoice3 << @invoice4 << @invoice5 << @invoice6
+    @item1.invoices << @invoice1 << @invoice2 << @invoice3 << @invoice4 << @invoice5
 
-    @transaction1 = @invoice1.transactions.create!(result: 0)
-    @transaction2 = @invoice2.transactions.create!(result: 0)
-    @transaction3 = @invoice3.transactions.create!(result: 0)
-    @transaction4 = @invoice4.transactions.create!(result: 0)
-    @transaction5 = @invoice5.transactions.create!(result: 0)
-    @transaction6 = @invoice6.transactions.create!(result: 0)
-    
+    @invoice1.transactions.create!(result: 0)
+    @invoice1.transactions.create!(result: 0)
+    @invoice1.transactions.create!(result: 0)
+    @invoice2.transactions.create!(result: 0)
+    @invoice2.transactions.create!(result: 0)
+    @invoice3.transactions.create!(result: 0)
+    @invoice4.transactions.create!(result: 0)
+    @invoice5.transactions.create!(result: 0)
   end
 
   describe '#top_five_customers' do 
     it 'returns top five customers of merchant' do 
       expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5,])
 
-      invoice7 = @customer6.invoices.create!(status: 2)
-      invoice8 = @customer6.invoices.create!(status: 2)
+      invoice6 = @customer6.invoices.create!(status: 2)
 
-      invoice7.transactions.create!(result: 0)
-      invoice8.transactions.create!(result: 0)
+      invoice6.transactions.create!(result: 0)
+      invoice6.transactions.create!(result: 0)
+      invoice6.transactions.create!(result: 0)
+      invoice6.transactions.create!(result: 0)
 
-      @item1.invoices << invoice7 << invoice8
+      @item1.invoices << invoice6
 
-      expect(@merchant1.top_five_customers).to eq([@customer1, @customer6, @customer2, @customer3, @customer4,])
+      expect(@merchant1.top_five_customers).to eq([@customer6, @customer1, @customer2, @customer3, @customer4])
     end
 
     it 'doesnt count unsuccessful transactions' do
-      invoice7 = @customer6.invoices.create!(status: 2)
-      invoice8 = @customer6.invoices.create!(status: 2)
+      invoice6 = @customer6.invoices.create!(status: 2)
 
-      invoice7.transactions.create!(result: 1)
-      invoice8.transactions.create!(result: 1)
+      invoice6.transactions.create!(result: 1)
+      invoice6.transactions.create!(result: 1)
 
-      @item1.invoices << invoice7 << invoice8
+      @item1.invoices << invoice6
 
       expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5,])
     end
+  end
+
+  it 'doesnt count transactions for other merchants' do 
+    invoice6 = @customer6.invoices.create!(status: 2)
+
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+
+    expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+  end
+
+  it 'doesnt count transactions on users other invoices' do 
+    invoice6 = @customer2.invoices.create!(status: 2)
+
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+
+    expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
   end
 end
