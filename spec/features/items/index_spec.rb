@@ -53,7 +53,7 @@ RSpec.describe 'items index page', type: :feature do
     end
 
     it 'changes the item to be disabled after clicking Disable' do
-      lamp.enable_status
+      lamp.update_attribute :status, 0
       
       visit merchant_items_path(nomi)
     
