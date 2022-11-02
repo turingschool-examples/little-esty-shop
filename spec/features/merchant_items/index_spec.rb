@@ -39,7 +39,7 @@ RSpec.describe 'merchant items index page', type: :feature do
         zinc = surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
 
         visit "/merchants/#{surf_designs.id}/items"
-        save_and_open_page
+        # save_and_open_page
 
         expect(page).to have_button("Disable Board Wax")
         expect(page).to have_content("available for purchase")
