@@ -1,6 +1,6 @@
 require 'csv'
 
-hash = {'completed' => 0, 'cancelled' => 1, 'in progress' => 2}
+status_hash = {'completed' => 0, 'cancelled' => 1, 'in progress' => 2}
 
 namespace :csv_load do
   desc 'This task loads data for the invoices'
@@ -12,7 +12,7 @@ namespace :csv_load do
       t = Invoice.new
       t.id = row['id']
       t.customer_id = row['customer_id']
-      t.status = hash[row['status']]
+      t.status = status_hash[row['status']]
       t.created_at = row['created_at']
       t.updated_at = row['updated_at']
       t.save!

@@ -13,7 +13,6 @@ namespace :csv_load do
       t.name = row['name']
       t.description = row['description']
       t.unit_price = row['unit_price']
-      t.status = row['status']
       t.created_at = row['created_at']
       t.updated_at = row['updated_at']
       t.save
