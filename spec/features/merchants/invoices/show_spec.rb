@@ -17,9 +17,9 @@ RSpec.describe "Merchant Invoice Show" do
     @invoice2 = Invoice.create!(status: 1, customer_id: @customer1.id, created_at: "2022-11-01 11:00:00 UTC")
     @invoice3 = Invoice.create!(status: 1, customer_id: @customer3.id, created_at: "2022-11-01 11:00:00 UTC")
     
-    InvoiceItem.create!(quantity: 1, unit_price: 5000, status: "Pending", item_id: @item1.id, invoice_id: @invoice1.id)
-    InvoiceItem.create!(quantity: 1, unit_price: 5000, status: "Pending", item_id: @item2.id, invoice_id: @invoice1.id)
-    InvoiceItem.create!(quantity: 1, unit_price: 5000, status: "Pending", item_id: @item1.id, invoice_id: @invoice1.id)
+    @invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: 5000, status: 0, item_id: @item1.id, invoice_id: @invoice1.id)
+    @invoice_item2 =InvoiceItem.create!(quantity: 2, unit_price: 5000, status: 1, item_id: @item2.id, invoice_id: @invoice1.id)
+    @invoice_item3 = InvoiceItem.create!(quantity: 1, unit_price: 5000, status: 2, item_id: @item3.id, invoice_id: @invoice2.id)
 
   end
 
@@ -28,7 +28,7 @@ RSpec.describe "Merchant Invoice Show" do
       it 'I see info of (invoice id, invoice status, invoice created_at date in format (Monday, July 18, 2019), & customer first and last name' do 
 
         visit merchant_invoice_path(@merchant1, @invoice1)
-       
+     
         expect(page).to have_content(@invoice1.id)
         expect(page).to have_content(@invoice1.status)
         expect(page).to have_content(@invoice1.created_at.strftime('%A, %B %d, %Y'))
@@ -46,13 +46,13 @@ RSpec.describe "Merchant Invoice Show" do
       it 'Displays item name, the quantity of the item ordered, price the item sold for, invoice item status, and i do not see any info related to items for other merchants' do 
        
         visit merchant_invoice_path(@merchant1, @invoice1)
-
+        save_and_open_page
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item2.name)
-        expect(page).to have_content(@item2.unit_price)
-        expect(page).to have_content(@item1.unit_price)
-        expect(page).to have_content(@item1.quantity)
-        expect(page).to have_content(@item2.quantity)
+        expect(page).to have_content(@invoice_item1.unit_price)
+        expect(page).to have_content(@invoice_item2.unit_price)
+        expect(page).to have_content(@invoice_item1.quantity)
+        expect(page).to have_content(@invoice_item2.quantity)
         expect(page).to have_content(@item1.status)
         expect(page).to have_content(@item2.status)
         expect(page).to_not have_content(@item3.name)
