@@ -17,16 +17,17 @@ RSpec.describe "the merchant items edit page" do
       click_on("Update Item")
 
       expect(current_path).to eq(edit_merchant_item_path(merchant, book))
-      expect(page).to have_field("item_name", with: "Book of the dead")  
+      expect(page).to have_field("name", with: "Book of the dead")  
       expect(page).to have_field("description", with: "book of necromancy spells")  
       expect(page).to have_field("unit_price", with: "4")  
       expect(page).to have_button("Submit")
 
-      fill_in("item_name", with: "Dead Spells Book")
+      fill_in("name", with: "Dead Spells Book")
       fill_in("description", with: "This is a hundred year old tome full of necromancy spells. Very rare.")
       click_button("Submit")
 
       expect(current_path).to eq(merchant_item_path(merchant, book))
+      save_and_open_page
       expect(page).to have_content("Dead Spells Book")
       expect(page).to have_content("Description: This is a hundred year old tome full of necromancy spells. Very rare.")
       expect(page).to have_content("Current Price: $4.00")
