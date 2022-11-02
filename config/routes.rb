@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   patch '/merchants/:merchant_id/items/:id', to: 'items#update'
 
   get 'merchants/:id/dashboard', to: 'merchants#show'
+
+  patch 'items/:id', to: 'items#update'
 end
