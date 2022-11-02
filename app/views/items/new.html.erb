@@ -1,0 +1,11 @@
+<h1>New Item Details</h1>
+
+<%= form_with url: merchant_items_path(@merchant), method: :post, local: true do |f| %>
+  <%= f.label :name, "Item Name:" %><br>
+  <%= f.text_field :name %><br><br>
+  <%= f.label :description, "Description:" %><br>
+  <%= f.text_area :description %><br><br>
+  <%= f.label :unit_price, "Unit Price:" %><br>
+  <%= f.text_field :unit_price %><br><br>
+  <%= f.submit "Submit" %>
+<% end %>

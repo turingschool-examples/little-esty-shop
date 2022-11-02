@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/invoices", to: "merchant_invoices#index"
 
   resources :merchants, only: [:index] do 
-    resources :items, only: [:index, :show, :edit, :update]
+    resources :items, except: [:destroy]
   end
   
   get "/admin", to: "admin#index"
