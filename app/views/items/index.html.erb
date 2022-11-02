@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col border border-1 d-flex justify-content-between mt-5">
+    <div class="d-flex border border-1 flex-column justify-content-center">
+      <h2><%= @merchant.name %></h2>
+    </div>
+    <div>
+      <nav class="border border-1 d-flex">
+        <div class="m-3">
+        <%#feel free to update this with whatever you need%>
+          <%= link_to "Dashboard" %>
+        </div>
+        <div class="m-3">
+        <%#feel free to update this with whatever you need%>
+          <%= link_to "My Items" %>
+        </div>
+        <div class="m-3">
+        <%#feel free to update this with whatever you need%>
+          <%= link_to " My Invoices" %>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col border border-1 d-flex justify-content-center p-3 mt-5 bg-light">
+    My Items
+  </div>
+</div>
+<div class="row">
+  <div class="col border border-1">
+    left column
+
+    <% @merchant.items.each do |item| %>
+    <ul>
+      <li><%= item.name %></li>
+    </ul>
+    <% end %>
+
+  </div>
+  <div class="col border border-1">
+    right column
+  </div>
+</div>

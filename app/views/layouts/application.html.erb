@@ -4,12 +4,15 @@
     <title>LittleEtsyShop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
+  <body class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class='bg-secondary bg-gradient text-center p-2'>Little Esty Shop</h1>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
