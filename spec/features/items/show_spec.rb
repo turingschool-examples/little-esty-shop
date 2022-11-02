@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant items show page' do 
-  describe 'when i visit my merchant items index page' do 
     before :each do 
       @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
       @whb = Merchant.create!(name: "WHB")
@@ -32,18 +31,15 @@ RSpec.describe 'merchant items show page' do
           
           expect(page).to have_content("#{@dk.name}")
           
-          within("#merchant-items-#{@tent.id}") do
-          expect(page).to have_content("#{@tent.name}")
-          expect(page).to have_content("#{@tent.description}")
-          expect(page).to have_content("#{@tent.unit_price}")
-          expect(page).to_not have_content("#{@dk.name}")
+          within("#merchant-items-#{@funnypowder.id}") do
+            expect(page).to have_content("#{@funnypowder.name}")
+            expect(page).to have_content("#{@funnypowder.description}")
+            expect(page).to have_content("#{@funnypowder.unit_price}")
+            expect(page).to_not have_content("#{@dk.name}")
           # save_and_open_page
           # require 'pry';binding.pry
           end
         end
       end
     end
-
-
-  end
 end
