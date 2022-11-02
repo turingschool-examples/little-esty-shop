@@ -7,3 +7,6 @@
     <ul>Current_Selling_Price: <%= @item.unit_price %></ul>
   </div>
 
+  <div style="position:fixed; padding: 1em; top: 0; left: 0;">
+    <%= button_to "Update #{@item.name}", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit", method: :get %>
+  </div>
