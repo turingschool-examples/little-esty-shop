@@ -12,12 +12,38 @@ RSpec.describe Item, type: :model do
     it {should have_many(:invoices).through(:invoice_items)}
   end
 
+  describe 'validations' do
+    it {should validate_presence_of(:name)}
+    it {should validate_presence_of(:description)}
+    it {should validate_presence_of(:unit_price)}
+    it {should validate_numericality_of(:unit_price)}
+  end
+
   describe 'instance methods' do
     describe '#current_price' do
       it 'returns the current price of the item in dollars' do
         expect(lamp.current_price).to eq(20.0)
         expect(stickers.current_price).to eq(5.99)
       end 
+    end
+
+    describe '#enable_status' do
+      it 'enables the status for the item' do
+        expect(lamp.status).to eq('disabled')
+
+        lamp.enable_status
+        expect(lamp.status).to eq('enabled')
+      end
+    end
+
+    describe '#disable_status' do
+      it 'enables the status for the item' do
+        lamp.enable_status
+        expect(lamp.status).to eq('enabled')
+
+        lamp.disable_status
+        expect(lamp.status).to eq('disabled')
+      end
     end
   end
 end

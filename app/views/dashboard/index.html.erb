@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <style>
+<style>
 
-      .topnav-right {
-      float: right;
-    }
-  </style>
-  <header>
-      <h1><center> Little Esty Shop </center></h1>
-  </header>
+    .topnav-right {
+    float: right;
+  }
+</style>
+<header>
+    <h1><center> Little Esty Shop </center></h1>
+</header>
 
-  <nav class="topnav-right">
-    <p> <%= link_to "My Items", "/merchants/#{@merchant.id}/items" %> </p>
-    <p> <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %> </p>
-  </nav>
+<nav class="topnav-right">
+  <p> <%= link_to "My Items", "/merchants/#{@merchant.id}/items" %> </p>
+  <p> <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %> </p>
+</nav>
 <body>
-<%= @merchant.name %>
-
+  <%= @merchant.name %>
+  <div id="favorite_customers">
+   <h3> Favorite Customers </h3>
+  </div>
 </body>
 </html>

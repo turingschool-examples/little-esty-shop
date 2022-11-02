@@ -1,0 +1,3 @@
+<% @merchants.each do |merchant|  %>
+  <h3><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %></h3>
+<% end %>

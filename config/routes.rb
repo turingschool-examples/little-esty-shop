@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
   resources :merchants, only: [:index] do
-    resources :items, only: [:index, :show]
     resources :dashboard, only: [:index]
     resources :invoices, only: [:index]
+    resources :items, except: [:update]
   end
 
+  patch '/merchants/:merchant_id/items', to: 'items#status_update'
+
+  patch '/merchants/:merchant_id/items/:id', to: 'items#update'
+
   resources :admin, only: [:index]
+
+  namespace :admin do
+    resources :merchants
+  end
+
 end
