@@ -1,10 +1,16 @@
 <h1><center>Items for: <%=@merchant.name%></center></h1>
 
 <%@merchant.items.each do |item|%>
-  <div id="merchant-item-<%=item.id%>">
-    <p><%=item.name%>  <%=item.status%> 
-    <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Enabled", method: :patch %>
-    <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Disabled", method: :patch %>
-    </p>
+    <div id="item-disabled-<%=item.name%>">Enabled Items:
+    <%if item.status == "Enabled"%>
+      <%=item.name%>  <%=item.status%> 
+      <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Disabled", method: :patch %>
+    </div> 
+    <div id="item-enabled-<%=item.name%>">
+    <%elsif item.status == "Disabled"%>
+      <p>Disabled Items: <%=item.name%>  <%=item.status%> 
+      <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Enabled", method: :patch %>
+    <%end%>
+    
   </div>  
 <%end %>

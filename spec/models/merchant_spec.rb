@@ -87,4 +87,19 @@ RSpec.describe Merchant do
 
     expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
   end
+
+  describe '#group_by_status' do 
+    before :each do 
+      @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
+      @whb = Merchant.create!(name: "WHB")
+      @something= @klein_rempel.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
+      @another = @klein_rempel.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
+      @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
+    end
+
+    it 'can be grouped by status enabled or disabled' do 
+      expect(@klein_rempel.group_by_enabled).to eq([@something.name, @another.name])
+      expect(@klein_rempel.group_by_enabled).to_not eq([@other.name])
+    end
+  end
 end
