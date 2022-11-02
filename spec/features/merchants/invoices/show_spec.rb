@@ -19,7 +19,7 @@ RSpec.describe "Merchant Invoice Show" do
     
     @invoice_item1 = InvoiceItem.create!(quantity: 1, unit_price: 5000, status: 0, item_id: @item1.id, invoice_id: @invoice1.id)
     @invoice_item2 =InvoiceItem.create!(quantity: 2, unit_price: 5000, status: 1, item_id: @item2.id, invoice_id: @invoice1.id)
-    @invoice_item3 = InvoiceItem.create!(quantity: 1, unit_price: 5000, status: 2, item_id: @item3.id, invoice_id: @invoice2.id)
+    @invoice_item3 = InvoiceItem.create!(quantity: 54, unit_price: 8000, status: 2, item_id: @item3.id, invoice_id: @invoice2.id)
 
   end
 
@@ -46,18 +46,18 @@ RSpec.describe "Merchant Invoice Show" do
       it 'Displays item name, the quantity of the item ordered, price the item sold for, invoice item status, and i do not see any info related to items for other merchants' do 
        
         visit merchant_invoice_path(@merchant1, @invoice1)
-        save_and_open_page
+        
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item2.name)
         expect(page).to have_content(@invoice_item1.unit_price)
         expect(page).to have_content(@invoice_item2.unit_price)
         expect(page).to have_content(@invoice_item1.quantity)
         expect(page).to have_content(@invoice_item2.quantity)
-        expect(page).to have_content(@item1.status)
-        expect(page).to have_content(@item2.status)
+        expect(page).to have_content(@invoice_item1.status)
+        expect(page).to have_content(@invoice_item2.status)
         expect(page).to_not have_content(@item3.name)
-        expect(page).to_not have_content(@item3.unit_price)
-        expect(page).to_not have_content(@item3.quantity)
+        expect(page).to_not have_content(@invoice_item3.unit_price)
+        expect(page).to_not have_content(@invoice_item3.quantity)
 
       end
     end
