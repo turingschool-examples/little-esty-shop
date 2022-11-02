@@ -9,10 +9,16 @@ RSpec.describe 'Merchants' do
 
   describe 'Items' do
     describe '#index' do
-      it 'has some behaviour' do
+      it 'has links to each individual item' do
         visit "/merchants/#{@merchant.id}/items"
-        expect(page).to have_content(@item1.name)
-        expect(page).to have_content(@item2.name)
+        expect(page).to have_link(@item1.name)
+        expect(page).to have_link(@item2.name)
+      end
+
+      it 'links to each individual item show page' do
+        visit "/merchants/#{@merchant.id}/items"
+        click_link(@item1.name)
+        expect(current_path).to eq("/merchants/#{@merchant.id}/items/#{@item1.id}")
       end
     end
   end
