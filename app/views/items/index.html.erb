@@ -33,7 +33,7 @@
         <% @merchant.items.top_5_items.each do |item| %>
          <li><a href=<%= merchant_item_path(@merchant, item) %>>
          <%= item.name %></a> - $<%= item.revenue / 100 %> in sales</li>
-         <p>Top selling date for <%= item.name %> was </p><br><br>
+         <p>Top day for <%= item.name %> was <%= item.top_date %></p><br><br>
           <% end %> 
       </ol> 
   </div>

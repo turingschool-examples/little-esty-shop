@@ -14,7 +14,11 @@ class Item < ApplicationRecord
   end
 
   def top_date
-    binding.pry
+    invoices.joins(:invoice_items)
+      .select('invoices.created_at, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue')
+      .group('invoices.created_at')
+      .order('revenue DESC')
+      .first.created_at.strftime('%m/%d/%Y')
   end
 
   def self.top_5_items
