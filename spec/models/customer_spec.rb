@@ -64,7 +64,7 @@ RSpec.describe Customer, type: :model do
     @transaction_20 = @invoice_20.transactions.create!(credit_card_number: 4886443388914010, result: "success")
   end
 
-  describe "#top_five_customers" do
+  describe "#top_five" do
     it "should return a list of the top 5 customers who have had the most successful transactions" do
       expect(Customer.top_five).to eq([@customer_3, @customer_1, @customer_2, @customer_5, @customer_7])
     end
