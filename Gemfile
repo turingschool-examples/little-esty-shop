@@ -55,10 +55,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "bootstrap", "~> 5.2"
-
 gem "shoulda-matchers", "~> 5.2", :groups => [:development, :test]
 
 gem "capybara", "~> 3.37", :groups => [:development, :test]
 
 gem "pry-rails", "~> 0.3.9", :groups => [:development, :test]
+
+gem "bootstrap", "~> 5.2"
