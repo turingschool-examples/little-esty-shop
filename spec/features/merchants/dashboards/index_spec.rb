@@ -11,6 +11,8 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       @merchant_2 = Merchant.create!(name: "Kevin")
 
       @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 1)
+      @merchant_1_item_not_ordered = @merchant_1.items.create!(name: "Unordered Item", description: "...", unit_price: 2)
+      @merchant_1_item_3 = @merchant_1.items.create!(name: "Newest Item", description: "...", unit_price: 1)
       @merchant_2_item_1 = @merchant_2.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 2)
 
       @customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
@@ -32,18 +34,17 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       @customer_6_invoice_1 = @customer_6.invoices.create!(status: 1)
       @customer_6_invoice_2 = @customer_6.invoices.create!(status: 0)
 
-      InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1)
-      InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_2_item_1)
+      @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
+      InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_2_item_1, quantity: 1, unit_price: 4, status: 0)
 
-      InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1)
-      InvoiceItem.create!(invoice: @customer_3_invoice_1, item: @merchant_1_item_1)
-      InvoiceItem.create!(invoice: @customer_4_invoice_1, item: @merchant_1_item_1)
-      InvoiceItem.create!(invoice: @customer_5_invoice_1, item: @merchant_1_item_1)
+      InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
+      InvoiceItem.create!(invoice: @customer_3_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
+      InvoiceItem.create!(invoice: @customer_4_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
+      InvoiceItem.create!(invoice: @customer_5_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
 
-      InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_1_item_1)
-      InvoiceItem.create!(invoice: @customer_6_invoice_2, item: @merchant_1_item_1)
+      @invoice_item_2 = InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 0)
+      @invoice_item_3 = InvoiceItem.create!(invoice: @customer_6_invoice_2, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 1)
 
-      #transaction result: success or failed
       @customer_1_transaction_1 = @customer_1_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_1_transaction_2 = @customer_1_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_1_transaction_3 = @customer_1_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
@@ -97,6 +98,50 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
           expect(page).to have_content("#{@customer_4.last_name}, #{@customer_4.first_name}: 2 Transactions")
           expect(page).to have_content("#{@customer_5.last_name}, #{@customer_5.first_name}: 2 Transactions")
           expect(page).to_not have_content("#{@customer_6.last_name}, #{@customer_6.first_name}")
+        end
+      end
+
+      describe 'a section for items ready to ship' do
+        it 'listing all the names of items that have been "ordered" and NOT "shipped"' do
+          within "#items-to-ship-merchant-#{@merchant_1.id}" do
+            expect(page).to have_content(@merchant_1_item_1.name)
+            expect(page).to_not have_content(@merchant_1_item_not_ordered.name)
+            expect(page).to_not have_content(@merchant_2_item_1.name)
+          end
+        end
+
+        it 'next to each listed item is the id of the invoice that ordered it' do
+          within "#items-to-ship-merchant-#{@merchant_1.id}" do
+            expect(page).to have_content("#{@merchant_1_item_1.name}: Invoice # #{@customer_6_invoice_1.id}")
+            expect(page).to_not have_content("#{@merchant_1_item_1.name}: Invoice # #{@customer_1_invoice_1.id}")
+            expect(page).to_not have_content("#{@merchant_1_item_1.name}: Invoice # #{@customer_6_invoice_2.id}")
+          end
+        end
+
+        describe 'next to each listed item and invoice id is the date that the invoice was created it' do
+          it 'formatted as Weekday, Month DD, YYYY' do
+            within "#items-to-ship-merchant-#{@merchant_1.id}" do
+              expect(page).to have_content("Wednesday, 02 November 2022")
+            end
+          end
+        end
+
+        it 'listed from oldest to newest' do
+          within "#items-to-ship-merchant-#{@merchant_1.id}" do
+            customer_7 = Customer.create!(first_name: "Newest", last_name: "Customer")
+            customer_7_invoice_1 = customer_7.invoices.create!(status: 1)
+            InvoiceItem.create!(invoice: customer_7_invoice_1, item: @merchant_1_item_3, quantity: 1, unit_price: 4, status: 0)
+            visit "/merchants/#{@merchant_1.id}/dashboard"
+
+            expect(@merchant_1_item_1.name).to appear_before(@merchant_1_item_3.name, only_text: true)
+          end
+        end
+
+        xit 'each invoice_id is a link to invoice show page' do
+          within "#items-to-ship-merchant-#{@merchant_1.id}" do
+            click_link("Invoice # #{@customer_6_invoice_1.id}")
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@customer_6_invoice_1.id}")
+          end
         end
       end
     end
