@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   patch '/merchants/:merchant_id/items/:id', to: 'items#update'
 
   resources :admin, only: [:index]
+
+  namespace :admin do
+    resources :merchants
+  end
+
 end
