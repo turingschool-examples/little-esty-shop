@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col border border-1 d-flex justify-content-center p-3 mt-5 bg-light">
+    My Items
+  </div>
+</div>
+<div class="row">
+  <div class="col border border-1">
+    left column
+
+    <% @merchant.items.each do |item| %>
+    <ul>
+      <li><%= link_to item.name, merchant_item_path(merchant_id: @merchant.id, id: item.id) %></li>
+    </ul>
+    <% end %>
+
+  </div>
+  <div class="col border border-1">
+    right column
+  </div>
+</div>

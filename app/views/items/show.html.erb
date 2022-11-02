@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col d-flex justify-content-center border border-1 mt-5 p-3 bg-light">
+    <%= @item.name %>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col">
+    <p>Description:</p>
+  </div>
+  <div class="col">
+    <p><%= @item.description %></p>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col">
+    <p>Current price:</p>
+  </div>
+  <div class="col">
+    <p><%= @item.unit_price %></p>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col">
+    <p><%= button_to 'Update Item', merchants_path, method: :get %></p>
+  </div>
+  <div class="col">
+    <p></p>
+  </div>
+</div>
+
