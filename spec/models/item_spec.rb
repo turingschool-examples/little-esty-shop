@@ -57,6 +57,7 @@ RSpec.describe Item, type: :model do
     it {should belong_to(:merchant)}
     it {should have_many(:invoice_items)}
     it {should have_many(:invoices).through(:invoice_items)}
+    it {should have_many(:transactions).through(:invoices)}
   end
 
   describe 'validations' do
@@ -80,6 +81,12 @@ RSpec.describe Item, type: :model do
         expect(lamp.current_price).to eq(20.0)
         expect(stickers.current_price).to eq(5.99)
       end 
+    end
+
+    describe '#top_date' do
+      it 'returns the top selling date for the item' do
+        expect(lamp.top_date).to eq()
+      end
     end
   end
 end
