@@ -18,7 +18,7 @@
   <p><strong>Unit Price: </strong><%= invoice_item.unit_price %></p>
   <p><strong>Quantity: </strong><%= invoice_item.quantity %></p>
   <p><strong>Status: </strong><%= invoice_item.status %></p>
-  <%= form_with url:invoice_item_path, method: :patch, local: :true do |f| %>
+  <%= form_with url:invoice_item_path(invoice_item), method: :patch, local: true do |f| %>
     <%= f.label :pending, "pending" %>
     <%= f.radio_button :pending, "pending" %>
     <%= f.label :packaged, "packaged" %>

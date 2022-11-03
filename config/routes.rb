@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/', to: "application#welcome"
 
   resources :merchants do 
     resources :items 
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :invoices
   end
 
-  resources :invoice_item
+  resources :invoice_items
 
   #creates routes for merchants and merchant_items 
   get 'merchants/:id/dashboard', to: 'merchant_dashboards#show'

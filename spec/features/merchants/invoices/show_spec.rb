@@ -78,7 +78,8 @@ RSpec.describe "Merchant Invoice Show" do
       it 'I see that the invoice items current status is selected' do 
         visit merchant_invoice_path(@merchant1, @invoice1)
 
-        save_and_open_page
+        expect(page).to have_content(@invoice_item1.status)
+        expect(@invoice_item1.status).to eq("packaged")
       end
 
       it 'when I click this select field, I can select a new status for the item
