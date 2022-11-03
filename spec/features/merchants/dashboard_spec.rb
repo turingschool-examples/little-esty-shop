@@ -18,8 +18,8 @@ RSpec.describe 'the Merchant dashboard' do
 
     @invoice1 = @customer1.invoices.create!(status: 2)
     @invoice2 = @customer1.invoices.create!(status: 1)
-    @invoice3 = @customer2.invoices.create!(status: 1)
-    @invoice4 = @customer3.invoices.create!(status: 1)
+    @invoice3 = @customer2.invoices.create!(status: 1, created_at: DateTime.new(1991,3,13,4,5,6))
+    @invoice4 = @customer3.invoices.create!(status: 1, created_at: DateTime.new(2001,3,13,4,5,6))
     @invoice5 = @customer4.invoices.create!(status: 2)
     @invoice6 = @customer5.invoices.create!(status: 2)
 
@@ -74,16 +74,10 @@ RSpec.describe 'the Merchant dashboard' do
     end
   end
 
-  # Merchant Dashboard Items Ready to Ship
 
-  # As a merchant
-  # When I visit my merchant dashboard
-  # Then I see a section for "Items Ready to Ship"
-  # In that section I see a list of the names of all of my items that
-  # have been ordered and have not yet been shipped,
-  # And next to each Item I see the id of the invoice that ordered my item
-  # And each invoice id is a link to my merchant's invoice show page
-  describe 'incomplete invoices' do 
+
+  # items ready to ship - user stories 4/5
+  describe 'items ready to ship' do 
     it 'has a section for items ready to ship' do
       expect(page).to have_content('Items Ready to Ship')
     end
@@ -100,12 +94,25 @@ RSpec.describe 'the Merchant dashboard' do
       within '#items_ready_to_ship' do 
         expect(page).to have_content("#{@item1.name} - Invoice ##{@invoice3.id}")
         expect(page).to have_content("#{@item2.name} - Invoice ##{@invoice2.id}")
-        save_and_open_page
+        
         within "#invoice-#{@invoice3.id}" do 
           click_link "#{@invoice3.id}"
 
           expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice3.id}")
         end
+      end
+    end
+
+    it 'shows the date the invoice was created' do 
+      within "#invoice-#{@invoice3.id}" do 
+        expect(page).to have_content("Wednesday, March 13, 1991")
+      end
+    end
+
+    it 'orders invoices by least recent' do
+      within '#items_ready_to_ship' do
+        expect(@invoice3.id.to_s).to appear_before(@invoice4.id.to_s)
+        expect(@invoice4.id.to_s).to appear_before(@invoice2.id.to_s)
       end
     end
   end

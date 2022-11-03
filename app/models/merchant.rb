@@ -14,6 +14,6 @@ class Merchant < ApplicationRecord
   end
 
   def incomplete_invoices
-    invoices.where(status: 1).distinct
+    invoices.where(status: 1).distinct.order(:created_at)
   end
 end
