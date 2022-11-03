@@ -65,7 +65,7 @@ RSpec.describe Customer, type: :model do
   end
 
   describe "class methods" do
-    describe "#top_five_customers_for" do
+    describe ".top_five_customers_for" do
       it "returns an array of no more than five customer objects" do
         expect(Customer.top_five_customers_for(@merchant_1)).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       end
