@@ -14,7 +14,6 @@ RSpec.describe 'the admin merchants index page' do
     it 'lists the name of all merchants in the system' do 
       expect(page).to have_content(@klein_rempel.name)
       expect(page).to have_content(@whb.name)
-      save_and_open_page
     end
   end
 
