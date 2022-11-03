@@ -97,12 +97,12 @@ RSpec.describe 'merchant items index page' do
     end
     it 'lists top 5 most popular items ranked by total revenue' do 
       visit "/merchants/#{@merchant2.id}/items"
-      save_and_open_page
-
-      expect("Kevin Ta Action Figure").to appear_before("Folder")
-      expect(@item4.name).to appear_before(@item3.name)
-      expect(@item4.name).to appear_before(@item3.name)
-
+      # save_and_open_page
+      within('div#top_items') do 
+        expect("Kevin Ta Action Figure").to appear_before("Folder")
+        expect(@item4.name).to appear_before(@item3.name)
+        expect(@item4.name).to appear_before(@item3.name)
+      end
     end
     it 'each popular item shows total revenue and links to show page for item' do 
       visit "/merchants/#{@merchant2.id}/items"

@@ -30,11 +30,12 @@
     <%end%>
   </div>
 </div>
-
+<div id= "top_items">
 <h2>Top Items</h2>
 <%@merchant.most_popular_items.each do |item|%>
   <p><%=item.name %><%item.invoices.each do |invoice|%>- <%=item.revenue%> in sales</p>
   <%end%>
 <%end%>
+</div>
 
 
