@@ -71,7 +71,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe "#top_five_items" do
+    describe ".top_five_items" do
       it "returns a collection of items, including their total revenue, of the top five items for that merchant" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
 

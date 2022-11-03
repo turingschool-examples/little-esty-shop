@@ -70,19 +70,15 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       end
 
       it 'a link to merchant items index /merchants/:merchant_id/items' do
-        within "#links-merchant-#{@merchant_1.id}" do
-          expect(page).to have_link("#{@merchant_1.name}'s Items")
-          click_link("#{@merchant_1.name}'s Items")
-          expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
-        end
+        expect(page).to have_link("My Items")
+        click_link("My Items")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
       end
 
       it 'a link to merchant invoices index /merchants/:merchant_id/invoices' do
-        within "#links-merchant-#{@merchant_1.id}" do
-          expect(page).to have_link("#{@merchant_1.name}'s Invoices")
-          click_link("#{@merchant_1.name}'s Invoices")
-          expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
-        end
+        expect(page).to have_link("My Invoices")
+        click_link("My Invoices")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
       end
 
       it 'a list of the merchants top five customers with an item counter next to each one' do
@@ -127,7 +123,7 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
             customer_7_invoice_1 = customer_7.invoices.create!(status: 1)
             InvoiceItem.create!(invoice: customer_7_invoice_1, item: @merchant_1_item_3, quantity: 1, unit_price: 4, status: 0)
             visit "/merchants/#{@merchant_1.id}/dashboards"
-            save_and_open_page
+
             expect(@merchant_1_item_1.name).to appear_before(@merchant_1_item_3.name, only_text: true)
           end
         end

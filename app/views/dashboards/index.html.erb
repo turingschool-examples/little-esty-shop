@@ -18,11 +18,6 @@
 <body>
   <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
   <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Merchant Dashboard</h3>
-
-  <div id="links-merchant-<%= @merchant.id %>">
-    <%= link_to "#{@merchant.name}'s Items", "/merchants/#{@merchant.id}/items"%>
-    <%= link_to "#{@merchant.name}'s Invoices", "/merchants/#{@merchant.id}/invoices"%>
-  </div>
   <div class="row">
     <div class="column">
       <div id="items-to-ship-merchant-<%= @merchant.id %>">
