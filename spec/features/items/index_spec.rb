@@ -70,6 +70,9 @@ RSpec.describe 'merchant items index page' do
       within('div#disabled_items') do 
         expect(page).to have_content("Water Bottle")
       end
+      within('div#enabled_items') do 
+        expect(page).to_not have_content("Water Bottle")
+      end
     end
   end
 end
