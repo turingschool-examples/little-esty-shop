@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
 
-  validates :name, :description, :presence => true
+  validates :name, :description, :status, :presence => true
   validates :unit_price, presence: :true, numericality: :true
 
   enum status: [:enabled, :disabled]
