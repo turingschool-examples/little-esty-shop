@@ -8,4 +8,12 @@ class Invoice < ApplicationRecord
     invoice_ids = merchant.invoice_items.pluck("invoice_id")
     Invoice.where(id: invoice_ids)
   end
+
+  def customer_last
+    self.customer.last_name
+  end
+
+  def customer_first
+    self.customer.first_name
+  end
 end

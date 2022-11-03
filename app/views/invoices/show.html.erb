@@ -1,0 +1,31 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Merchant Invoice # <%= @invoice.id %></h3>
+  <div class="row">
+    <div class="column">
+      <div id="invoice-stats-<%= @invoice.id %>">
+          <p><%= "Invoice: # #{@invoice.id}" %></p>
+          <p><%= "Status: #{@invoice.status}" %></p>
+          <p><%= "Created at: #{@invoice.created_at.strftime("%A, %d %B %Y")}" %></p>
+          <p><%= "Customer: #{@invoice.customer_last}, #{@invoice.customer_first}" %></p>
+      </div>
+    </div>
+  </div>
+</body>
