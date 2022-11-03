@@ -12,4 +12,8 @@ class Merchant < ApplicationRecord
 
     Customer.select('customers.*, count(transactions.*) as num_transactions').joins(invoices: [:transactions, :items]).where("transactions.result = 0").where("items.merchant_id = ?", self.id).order('num_transactions desc').group(:id).limit(5)
   end
+
+  def incomplete_invoices
+    invoices.where(status: 1).distinct.order(:created_at)
+  end
 end
