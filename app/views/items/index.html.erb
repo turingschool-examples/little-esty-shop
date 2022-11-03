@@ -51,6 +51,7 @@
         <% @top_items.each do |item| %>
           <div id="item-<%= item.id %>">
             <p><%= link_to item.name, merchant_item_path(@merchant, item) %>: $<%= item.total_revenue %>.00 in sales</p>
+            <p>Top selling date for <%= item.name %> was <%= item.top_selling_date.strftime("%-m/%-d/%y") %></p>
           </div>
         <% end %>
       </div>

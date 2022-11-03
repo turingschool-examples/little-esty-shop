@@ -29,7 +29,6 @@ RSpec.describe "On the Merchant's Items index page" do
     InvoiceItem.create!(invoice: invoice_3, item: @wand, quantity: 1, unit_price: 3, status: 0)
     InvoiceItem.create!(invoice: invoice_3, item: @scroll, quantity: 6, unit_price: 9, status: 0)
 
-
     invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
     invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
     invoice_2.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
@@ -160,14 +159,11 @@ RSpec.describe "On the Merchant's Items index page" do
       end
     end
 
-    # Then next to each of the 5 most popular items I see the date with the most sales for each item.
-    # And I see a label “Top selling date for <item name> was <date with most sales>"
-    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
-    xit "displays the date with the most sales for each item with label 'Top selling date for <item> was <date>'" do
+    it "displays the date with the most sales for each item with label 'Top selling date for <item> was <date>'" do
       visit "merchants/#{@merchant.id}/items"
-
+  
       within "#top-items" do
-        expect(page).to have_content("Top selling date for Candle of life was 3/3/22")
+        expect(page).to have_content("Top selling date for Candle of life was 2/3/22")
         expect(page).to have_content("Top selling date for Love potion was 3/3/22")
         expect(page).to have_content("Top selling date for Scroll of healing was 3/3/22")
         expect(page).to have_content("Top selling date for Book of the dead was 2/3/22")
