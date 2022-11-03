@@ -29,7 +29,6 @@ RSpec.describe "On the Merchant's Items index page" do
     InvoiceItem.create!(invoice: invoice_3, item: @wand, quantity: 1, unit_price: 3, status: 0)
     InvoiceItem.create!(invoice: invoice_3, item: @scroll, quantity: 6, unit_price: 9, status: 0)
 
-
     invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
     invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
     invoice_2.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
