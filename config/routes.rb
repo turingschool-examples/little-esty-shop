@@ -15,4 +15,7 @@ Rails.application.routes.draw do
     resources :merchants
   end
 
+  get '/admin/invoices/:id', to: 'admin/invoices#show'
+  
+
 end
