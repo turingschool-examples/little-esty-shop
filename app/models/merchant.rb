@@ -16,4 +16,12 @@ class Merchant < ApplicationRecord
   def incomplete_invoices
     invoices.where(status: 1).distinct.order(:created_at)
   end
+
+  def enabled_items
+    items.where("status= ?", "Enabled")
+  end
+
+  def disabled_items
+    items.where("status= ?", "Disabled")
+  end
 end

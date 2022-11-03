@@ -114,4 +114,51 @@ RSpec.describe Merchant do
       end
     end
   end
+
+  it 'doesnt count transactions for other merchants' do 
+    invoice6 = @customer6.invoices.create!(status: 2)
+
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+
+    expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+  end
+
+  it 'doesnt count transactions on users other invoices' do 
+    invoice6 = @customer2.invoices.create!(status: 2)
+
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+
+    expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+  end
+
+  describe 'grouping by status' do 
+    before :each do 
+      @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
+      @whb = Merchant.create!(name: "WHB")
+      @something= @klein_rempel.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
+      @another = @klein_rempel.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
+      @water= @klein_rempel.items.create!(name: "Water", description: "like the ocean", unit_price: 80, status: "Disabled")
+      @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
+    end
+
+    it 'returns a list of merchant items that are enabled' do 
+      expect(@klein_rempel.enabled_items).to eq([@something, @another])
+      expect(@klein_rempel.enabled_items).to_not eq([@other])
+    end
+
+    it 'returns a list of merchant items that are disabled' do 
+      expect(@klein_rempel.disabled_items).to eq([@water])
+      expect(@klein_rempel.disabled_items).to_not eq([@another, @something])
+
+    end
+
+  end
 end
