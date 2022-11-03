@@ -95,11 +95,12 @@ RSpec.describe "Admin Dashboard (Index", type: :feature do
     have conducted" do
       visit "/admin"
 
-      within("#admin-dashboard") do
-        expect("Name: Luke Harison | Number of Successful Transactions: 2").to appear_before("Name: Angela Leizer | Number of Successful Transactions: 2")
-        expect("Name: Matt Sorry | Number of Successful Transactions: 3").to appear_before("Name: Fannie May | Number of Successful Transactions: 2")
-        expect("Name: Fannie May | Number of Successful Transactions: 2").to appear_before("Name: Simon Garfunkle | Number of Successful Transactions: 1")
-        expect("Name: Simon Garfunkle | Number of Successful Transactions: 1").to_not appear_before("Name: Matt Sorry | Number of Successful Transactions: 3")
-      end
+       within("#admin-dashboard") do
+        expect(page).to have_content("Name: #{@customer_1.first_name} #{@customer_1.last_name} | Number of Successful Transactions: #{@customer_1.transaction_ct("success")}")
+        expect(page).to have_content("Name: #{@customer_2.first_name} #{@customer_2.last_name} | Number of Successful Transactions: #{@customer_2.transaction_ct("success")}")
+        expect(page).to have_content("Name: #{@customer_3.first_name} #{@customer_3.last_name} | Number of Successful Transactions: #{@customer_3.transaction_ct("success")}")
+        expect(page).to have_content("Name: #{@customer_5.first_name} #{@customer_5.last_name} | Number of Successful Transactions: #{@customer_5.transaction_ct("success")}")
+        expect(page).to have_content("Name: #{@customer_7.first_name} #{@customer_7.last_name} | Number of Successful Transactions: #{@customer_7.transaction_ct("success")}")
+      end 
   end
 end
