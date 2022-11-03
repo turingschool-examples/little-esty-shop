@@ -40,5 +40,12 @@ RSpec.describe InvoiceItem, type: :model do
 
       expect(InvoiceItem.incomplete_invoices).to eq([@invoice_2.id, @invoice_3.id, @invoice_4.id, @invoice_5.id])
     end
+  
+  describe 'validations' do
+    it {should validate_presence_of(:quantity)}
+    it {should validate_numericality_of(:quantity)}
+    it {should validate_presence_of(:unit_price)}
+    it {should validate_numericality_of(:unit_price)}
+    it {should validate_presence_of(:status)}
   end
 end

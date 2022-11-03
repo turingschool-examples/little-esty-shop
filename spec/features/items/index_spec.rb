@@ -136,9 +136,19 @@ RSpec.describe 'items index page', type: :feature do
         expect(page).to have_content("#{stickers.name} - $6 in sales")
       end
 
-      expect(page).to have_content(lamp.name, count: 2)
-      expect(page).to have_content(orion.name, count: 2)
-      expect(page).to have_content(stickers.name, count: 2)
+      expect(page).to have_content(lamp.name, count: 3)
+      expect(page).to have_content(orion.name, count: 3)
+      expect(page).to have_content(stickers.name, count: 3)
+    end
+
+    it 'shows each items best sales day' do
+      visit merchant_items_path(nomi)
+
+      within("#right") do
+        expect(page).to have_content("Top day for #{lamp.name} was #{lamp.created_at.strftime('%m/%d/%Y')}")
+        expect(page).to have_content("Top day for #{orion.name} was #{orion.created_at.strftime('%m/%d/%Y')}")
+        expect(page).to have_content("Top day for #{stickers.name} was #{stickers.created_at.strftime('%m/%d/%Y')}")
+      end
     end
   end
 end
