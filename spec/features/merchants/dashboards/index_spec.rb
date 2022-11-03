@@ -19,7 +19,8 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       @customer_6 = Customer.create!(first_name: "Rebecca", last_name: "Simpson")
 
       #invoice status: 0 cancelled, 1 completed, 2 in progress
-      @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1)
+      datetime = DateTime.iso8601('2022-11-01', Date::ENGLAND)
+      @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1, created_at: datetime)
       @customer_1_invoice_2 = @customer_1.invoices.create!(status: 1)
 
       @customer_2_invoice_1 = @customer_2.invoices.create!(status: 1)
@@ -115,7 +116,6 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
         describe 'next to each listed item and invoice id is the date that the invoice was created it' do
           it 'formatted as Weekday, Month DD, YYYY' do
             within "#items-to-ship-merchant-#{@merchant_1.id}" do
-              allow(@invoice_item_1).to receive(:invoice_date).and_return(DateTime.iso8601('2022-11-01', Date::ENGLAND).strftime("%A, %d %B %Y"))
               expect(@invoice_item_1.invoice_date).to eq("Tuesday, 01 November 2022")
             end
           end
