@@ -17,6 +17,8 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.update!(item_params)
+    
+    flash.notice = "The Information Has Successfully Updated"
     redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}"
   end
 

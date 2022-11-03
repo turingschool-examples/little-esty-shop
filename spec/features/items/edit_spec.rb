@@ -60,6 +60,16 @@ RSpec.describe 'Merchant Item Update' do
         expect(page).to have_content("Prank your friends, prank your mom, BUT dont prank cops")
         expect(page).to_not have_content("#{@funnypowder.description}")
       end
+      
+      it "displays a flash message stating that the info has been successfully updated" do
+        visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
+        
+        fill_in('Item Description', with:"Prank your friends, prank your mom, BUT dont prank cops")
+        
+        click_button "Submit #{@funnypowder.name} Update"
+ 
+        expect(page).to have_content("The Information Has Successfully Updated")
+      end
     end
   end
 end

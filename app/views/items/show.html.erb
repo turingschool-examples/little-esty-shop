@@ -1,4 +1,10 @@
 <h1><center><%= @item.merchant.name %></center></h1>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
 <hr>
 
   <div id="merchant-items-<%=@item.id%>">

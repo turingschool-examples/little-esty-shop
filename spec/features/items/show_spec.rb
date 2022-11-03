@@ -30,6 +30,7 @@ RSpec.describe 'merchant items show page' do
       expect(page).to_not have_content("#{@watch.name}")
       expect(page).to_not have_content("#{@funnypowder.description}")
       expect(page).to_not have_content("#{@bike.description}")
+      expect(page).to_not have_content("The Information Has Successfully Updated")
     end
 
     it "displays all of the item's attributes including: Name, Description, Current Selling Price" do
