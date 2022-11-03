@@ -3,20 +3,12 @@ class InvoiceItemsController < ApplicationController
 
   def update
     @invoice_items = InvoiceItem.find(params[:id])
-    @merchant = Merchant.find(params[:id])
-    @invoice = Invoice.find(params[:id])
-    
-    # binding.pry
+    @merchant = @invoice_items.item.merchant
+    @invoice = Invoice.find(@invoice_items.invoice_id)
 
-    if params[:pending].present? && @invoice_items.status == "packaged"|| @invoice_items.status == "shipped"
-      @invoice_items.update(status: 0)
-      redirect_to "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
-    elsif params[:packaged].present? && @invoice_items.status == "pending" || @invoice_items.status == "shipped" 
-      @invoice_items.update(status: 1)
-      redirect_to "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
-    elsif params[:shipped].present? && @invoice_items.status == "pending" || @invoice_items.status == "packaged"
-      @invoice_items.update(status: 2)
-      redirect_to "/merchants/#{@merchant.id}/invoices/#{@invoice.id}"
+    if params[:status].present? 
+      @invoice_items.update(status: params[:status])
+      redirect_to merchant_invoice_path(@merchant.id, @invoice)
     end
   end
 end

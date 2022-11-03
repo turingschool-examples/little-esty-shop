@@ -83,9 +83,13 @@ RSpec.describe "Merchant Invoice Show" do
       end
 
       it 'when I click this select field, I can select a new status for the item
-          and next to the select field I see a button to (Update Item status)' do 
+          and next to the select field I see a button to (Update Item Status)' do 
         visit merchant_invoice_path(@merchant1, @invoice1)
 
+        choose 'shipped' 
+        click_button('Update Item Status')
+        expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1))
+        
       end
 
       it 'when I click the update item status button I am taken back to merchant invoice show page
