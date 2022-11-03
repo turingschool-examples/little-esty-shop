@@ -11,6 +11,7 @@
 
 <p><h4>Invoice Items Ordered: </h4></p>
 <% @invoice.invoice_items.each do |invoice_item| %>
+  <div id="invoice_item-<%= invoice_item.id %>">
   <p><strong>Name: </strong><%= invoice_item.item.name %></p>
 
   <p><strong>Unit Price: </strong><%= invoice_item.unit_price %></p>
@@ -28,6 +29,7 @@
   <br>
   <br>
   <% end %>
+  </div>
 <% end %>
 <br>
 

@@ -86,16 +86,19 @@ RSpec.describe "Merchant Invoice Show" do
           and next to the select field I see a button to (Update Item Status)' do 
         visit merchant_invoice_path(@merchant1, @invoice1)
 
-        choose 'shipped' 
-        click_button('Update Item Status')
-        expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1))
-        
+        expect(page).to have_button("Update Item Status")
+
       end
 
       it 'when I click the update item status button I am taken back to merchant invoice show page
           and status has been updated' do 
         visit merchant_invoice_path(@merchant1, @invoice1)
-
+        within "#invoice_item-#{@invoice1.id}" do
+        first(:radio_button, 'status').click 
+          expect(page).to have_button("Update Item Status")
+          click_button('Update Item Status')
+          expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1))
+        end 
       end
     end
   end
