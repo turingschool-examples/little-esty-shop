@@ -6,12 +6,14 @@
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </p>
 
-<h3>Favorite Customers:</h3>
-<ol>
-  <% @merchant.top_five_customers.each do |customer| %>
-    <li><%= "#{customer.name} - #{customer.transactions.count} purchases" %></li>
-  <% end %>
-</ol>
+<div id='top_customers'>
+  <h3>Favorite Customers:</h3>
+  <ol>
+    <% @merchant.top_five_customers.each do |customer| %>
+      <li><%= "#{customer.name} - #{customer.transactions.count} purchases" %></li>
+    <% end %>
+  </ol>
+</div>
 
 <section id="items_ready_to_ship">
   <h3>Items Ready to Ship:</h3>
