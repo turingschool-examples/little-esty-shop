@@ -45,5 +45,14 @@ RSpec.describe 'admin/invoices' do
   it 'shows all invoice ids in the system and links to a show page' do
     visit 'admin/invoices'
     save_and_open_page
+    expect(page).to have_content(@invoice_1.id)
+    expect(page).to have_content(@invoice_2.id)
+    expect(page).to have_content(@invoice_3.id)
+    expect(page).to have_content(@invoice_4.id)
+    expect(page).to have_content(@invoice_5.id)
+    expect(page).to have_content(@invoice_6.id)
+    expect(page).to have_content(@invoice_7.id)
+    expect(page).to have_content(@invoice_8.id)
+
   end
 end
