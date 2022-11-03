@@ -123,7 +123,8 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
         describe 'next to each listed item and invoice id is the date that the invoice was created it' do
           it 'formatted as Weekday, Month DD, YYYY' do
             within "#items-to-ship-merchant-#{@merchant_1.id}" do
-              expect(page).to have_content("Wednesday, 02 November 2022")
+              allow(@invoice_item_1).to receive(:invoice_date).and_return(DateTime.iso8601('2022-11-01', Date::ENGLAND).strftime("%A, %d %B %Y"))
+              expect(@invoice_item_1.invoice_date).to eq("Tuesday, 01 November 2022")
             end
           end
         end
