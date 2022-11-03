@@ -72,4 +72,26 @@ RSpec.describe "Merchant Invoice Show" do
       expect(page).to_not have_content("Total Revenue: 432000")
     end
   end
+
+  describe 'US-18: Update item status' do 
+    describe 'I see that each invoice item status is a select field' do 
+      it 'I see that the invoice items current status is selected' do 
+        visit merchant_invoice_path(@merchant1, @invoice1)
+
+        save_and_open_page
+      end
+
+      it 'when I click this select field, I can select a new status for the item
+          and next to the select field I see a button to (Update Item status)' do 
+        visit merchant_invoice_path(@merchant1, @invoice1)
+
+      end
+
+      it 'when I click the update item status button I am taken back to merchant invoice show page
+          and status has been updated' do 
+        visit merchant_invoice_path(@merchant1, @invoice1)
+
+      end
+    end
+  end
 end
