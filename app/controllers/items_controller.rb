@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
 
   def status_update
     merchant = Merchant.find(params[:merchant_id])
-   
+
     if params[:enable]
       item = Item.find(params[:enable])
       item.update_attribute :status, 0
