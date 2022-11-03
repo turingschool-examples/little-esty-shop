@@ -56,5 +56,20 @@ RSpec.describe 'merchant items index page' do
 
       end
     end
+
+    it 'a user can add a new item and default status is disabled' do 
+      visit merchant_items_path(@klein_rempel)
+      click_button "New Item"
+      expect(current_path).to eq("/merchants/#{@klein_rempel.id}/items/new")
+      expect(page).to have_content("Add an Item")
+      fill_in :name, with: "Water Bottle"
+      fill_in :description, with: "A necessary desk item"
+      fill_in :unit_price, with: 500
+      click_button "Submit"
+      expect(current_path).to eq("/merchants/#{@klein_rempel.id}/items")
+      within('div#disabled_items') do 
+        expect(page).to have_content("Water Bottle")
+      end
+    end
   end
 end
