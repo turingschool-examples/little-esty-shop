@@ -4,7 +4,7 @@
 
 <div id='top_customers'>
     <ol>
-    <% @merchant.customers.top_merchant_transactions.each do |customer| %>
+    <% @merchant.top_merchant_transactions.each do |customer| %>
         <li><%= customer.full_name %></li>
     <% end %>
     </ol>

@@ -8,13 +8,4 @@ class Customer < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
-  def self.top_merchant_transactions
-    joins(invoices: [:transactions])
-      .where('transactions.result=0')
-      .group(:id)
-      .select('customers.*, count(transactions) as count_success')
-      .order(count_success: :desc)
-      .limit(5)
-  end
 end
