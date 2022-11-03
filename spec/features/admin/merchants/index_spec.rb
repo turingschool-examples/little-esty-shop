@@ -1,5 +1,6 @@
 require "rails_helper"
 
+
 RSpec.describe("admin merchants index page") do
   before(:each) do
     @merchant1 = Merchant.create!(    name: "Tokyos Tractors")
@@ -24,11 +25,22 @@ RSpec.describe("admin merchants index page") do
       expect(page).to(have_content("Name:#{@merchant1.name}"))
     end
 
-    it("And I see the name of that merchant") do
+    it("25.And I see the name of that merchant") do
       visit(admin_merchants_path)
       click_link("#{@merchant1.name}")
       expect(current_path).to(eq(admin_merchant_path(@merchant1.id)))
       expect(page).to(have_content("Name:#{@merchant1.name}"))
     end
+  end
+
+  describe("27.I visit the admin merchants index") do
+    describe("27.Then next to each merchant name I see a button to disable or enable that merchant.") do
+      it("I click this button") do
+        visit(admin_merchants_path)
+      end
+    end
+  end
+
+  it("27.I am redirected back to the admin merchants index & I see that the merchant's status has changed") do
   end
 end
