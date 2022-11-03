@@ -34,12 +34,12 @@ RSpec.describe 'Merchant Item Update' do
         expect(page).to have_content("Item Unit Price")
       end
       
+      # ** need to test user input ** 
       # fill_in "Item Name", with:("#{@funnypowder.name}")
       # fill_in "Item Description", with:("#{@funnypowder.description}")
       # expect(page).to have_content("#{@funnypowder.name}")
       # expect(page).to have_content("#{@funnypowder.description}")
       # expect(page).to have_content("#{@funnypowder.unit_price}")
-
 
       it "redirects back to the item show page when user clicks 'Submit item:id Update' where I see the updated information" do
         visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
