@@ -117,16 +117,12 @@ RSpec.describe 'merchant items index page', type: :feature do
         end
       end
 
-      it '- I see a link to create a new item' do
+      it '- I see a link to create a new item.  when I click the link, I am directed to (/merchants/:id/items/new)' do
         visit merchant_items_path(@surf_designs)
 
-        expect(page).to have_link("Create New Item", href: "/merchants/#{@surf_designs.id}/items/new")
-      end
+        click_link 'Create New Item'
 
-      xit '- When I click the link, I am taken to a form that 
-      allows me to add item information. when I fill out the form
-      I click (submit). then I am taken back to the items index page.' do
-
+        expect(current_path).to eq("/merchants/#{@surf_designs.id}/items/new")
       end
 
       xit '- I see the item I just created displayed in the list of items, and
