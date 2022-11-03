@@ -7,9 +7,11 @@ class Merchant < ApplicationRecord
 
   def top_5_customers
     Customer.joins("INNER join invoices ON invoices.customer_id = customers.id").joins("INNER join transactions ON transactions.invoice_id = invoices.id").joins("INNER join invoice_items ON invoice_items.invoice_id = invoices.id").joins("INNER join items ON invoice_items.item_id = items.id").joins("INNER join merchants ON items.merchant_id = merchants.id").where("transactions.result = 1 and merchants.id = #{self.id}").group(:first_name).order('count_id desc').limit(5).count('id')
+    # Customer.joins(invoices: [:transactions, {items: :merchant}])
   end
 
   def items_ready_to_ship
-    invoice_items.where("status = 1")
+    invoice_items.where("invoice_items.status = 1").order('created_at asc')
+    # require "pry"; binding.pry
   end
 end

@@ -7,5 +7,5 @@
 <% end %>
 <h2> Items Ready to Ship: </h2>
 <% @packaged_invoice_items.each do |invoice_item| %>
-  <p>Name: <%= invoice_item.item.name %>, ID: <%= link_to "#{invoice_item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice_id}" %></p>
+  <p><%= invoice_item.item.name %> - Invoice # <%= link_to "#{invoice_item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice_id}" %> - <%= invoice_item[:created_at].strftime("%A, %B%e, %Y") %></p>
 <% end %>
