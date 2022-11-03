@@ -179,19 +179,13 @@ RSpec.describe Merchant do
   end
 
   describe 'rank 5 most popular items by total revenue' do 
-    # before :each do 
-    #   @louie = Merchant.create!(name: "Louie")
-    #   @whb = Merchant.create!(name: "WHB")
-    #   @something= @louie.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
-    #   @another = @louie.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
-    #   @water= @louie.items.create!(name: "Water", description: "like the ocean", unit_price: 80, status: "Disabled")
-    #   @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
-    #   InvoiceItem.create!(invoice: , item: )
-    # end
-
     it 'returns top 5 items ranked by total revenue generated' do 
-      # require 'pry'; binding.pry
       expect(@merchant2.most_popular_items).to eq([@item6, @item5, @item4, @item3, @item2])
+    end
+
+    it 'prints total revenue next to each item' do 
+      # require 'pry'; binding.pry
+      expect(@merchant2.item_revenue).to eq([60, 50, 40, 30, 20])
     end
   end
 end

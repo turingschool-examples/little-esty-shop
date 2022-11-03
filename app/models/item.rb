@@ -4,5 +4,7 @@ class Item < ApplicationRecord
   belongs_to :merchant 
   has_many :transactions, through: :invoices 
 
-
+  # def item_revenue
+  #   invoice_items.sum("quantity * unit_price")
+  # end
 end
