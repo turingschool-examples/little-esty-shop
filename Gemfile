@@ -65,3 +65,5 @@ gem "capybara", "~> 3.37", :groups => [:development, :test]
 gem "pry-rails", "~> 0.3.9", :groups => [:development, :test]
 
 gem "bootstrap", "~> 5.2"
+
+gem 'simplecov', require: false, group: :test
