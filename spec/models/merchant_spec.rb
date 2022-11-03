@@ -8,8 +8,17 @@ RSpec.describe Merchant do
 
   before(:each) do 
     @merchant1 = Merchant.create!(name: 'Lisa Frank Knockoffs')
+    @merchant2 = Merchant.create!(name: 'Fun Testing')
 
     @item1 = @merchant1.items.create!(name: 'Trapper Keeper', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 3000)
+    
+    @item2 = @merchant2.items.create!(name: 'Pencil', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 25)
+    @item3 = @merchant2.items.create!(name: 'Soggy Gummy Worm', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 1000)
+    @item4 = @merchant2.items.create!(name: 'Eraser', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 5000)
+    @item5 = @merchant2.items.create!(name: 'Folder', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 50)
+    @item6 = @merchant2.items.create!(name: 'Kevin Ta Action Figure', description: 'The coolest action figure around!', unit_price: 10000)
+    
+
 
     @customer1 = Customer.create!(first_name: 'Dandy', last_name: 'Dan')
     @customer2 = Customer.create!(first_name: 'Rockin', last_name: 'Rick')
@@ -23,6 +32,13 @@ RSpec.describe Merchant do
     @invoice3 = @customer3.invoices.create!(status: 1)
     @invoice4 = @customer4.invoices.create!(status: 1)
     @invoice5 = @customer5.invoices.create!(status: 1)
+    @invoice6 = @customer5.invoices.create!(status: 1)
+
+    InvoiceItem.create!(invoice: @invoice6, item: @item2, quantity: 1, unit_price: 20)
+    InvoiceItem.create!(invoice: @invoice6, item: @item3, quantity: 1, unit_price: 30)
+    InvoiceItem.create!(invoice: @invoice6, item: @item4, quantity: 1, unit_price: 40)
+    InvoiceItem.create!(invoice: @invoice6, item: @item5, quantity: 1, unit_price: 50)
+    InvoiceItem.create!(invoice: @invoice6, item: @item6, quantity: 1, unit_price: 60)
 
     @item1.invoices << @invoice1 << @invoice2 << @invoice3 << @invoice4 << @invoice5
 
@@ -34,6 +50,7 @@ RSpec.describe Merchant do
     @invoice3.transactions.create!(result: 0)
     @invoice4.transactions.create!(result: 0)
     @invoice5.transactions.create!(result: 0)
+    @invoice6.transactions.create!(result: 0)
   end
 
   describe 'instance methods' do 
@@ -162,17 +179,19 @@ RSpec.describe Merchant do
   end
 
   describe 'rank 5 most popular items by total revenue' do 
-    before :each do 
-      @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
-      @whb = Merchant.create!(name: "WHB")
-      @something= @klein_rempel.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
-      @another = @klein_rempel.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
-      @water= @klein_rempel.items.create!(name: "Water", description: "like the ocean", unit_price: 80, status: "Disabled")
-      @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
-    end
+    # before :each do 
+    #   @louie = Merchant.create!(name: "Louie")
+    #   @whb = Merchant.create!(name: "WHB")
+    #   @something= @louie.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
+    #   @another = @louie.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
+    #   @water= @louie.items.create!(name: "Water", description: "like the ocean", unit_price: 80, status: "Disabled")
+    #   @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
+    #   InvoiceItem.create!(invoice: , item: )
+    # end
 
     it 'returns top 5 items ranked by total revenue generated' do 
-      expect(@klein_rempel.most_popular_items).to eq([])
+      # require 'pry'; binding.pry
+      expect(@merchant2.most_popular_items).to eq([@item6, @item5, @item4, @item3, @item2])
     end
   end
 end
