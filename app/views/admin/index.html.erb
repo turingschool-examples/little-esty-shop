@@ -14,6 +14,7 @@
   display: table;
   clear: both;
 }
+</style>
 
 <body>
   <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Dashboard" } %>
@@ -30,8 +31,8 @@
         <% @five_best_customers.each do |customer| %>
           <center><p><%= "#{customer.first_name} #{customer.last_name}; #{customer.num_success_trans} purchases." %></p></center>
         <% end %>
+    </div>
   </div>
-</div>
 </body>
 
 

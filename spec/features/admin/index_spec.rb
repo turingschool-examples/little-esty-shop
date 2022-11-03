@@ -93,7 +93,11 @@ RSpec.describe 'admin index page' do
       expect(page).to have_content("Top 5 Customers")
       
       within "#top-5-customers" do
-        expect(page).to have_content(@customer1.first_name)
+        expect(@customer1.first_name).to appear_before(@customer2.first_name)
+        expect(@customer2.first_name).to appear_before(@customer3.first_name)
+        expect(@customer3.first_name).to appear_before(@customer4.first_name)
+        expect(@customer4.first_name).to appear_before(@customer5.first_name)
+        expect(@customer5.first_name).to_not appear_before(@customer4.first_name)
       end
     end
   end
