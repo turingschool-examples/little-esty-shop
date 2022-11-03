@@ -28,7 +28,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe "instance methods" do
-    describe ".enabled_items" do
+    describe "#enabled_items" do
       it "returns a collection of the enabled items for the merchant instance" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
         book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
@@ -43,7 +43,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe '.invoice_items_to_ship' do
+    describe '#invoice_items_to_ship' do
       describe 'returns an array of invoice_items' do
         it 'where invoice_item is "packaged" (0)' do
           expect(@merchant_1.invoice_items_to_ship).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
@@ -56,7 +56,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe ".disabled_items" do
+    describe "#disabled_items" do
       it "returns a collection of the disabled items for the merchant instance" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
         book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
@@ -71,8 +71,8 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe "#top_five_items" do 
-      it "returns a collection of items, including their total revenue, of the top five items for that merchant" do 
+    describe "#top_five_items" do
+      it "returns a collection of items, including their total revenue, of the top five items for that merchant" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
 
         book = merchant.items.create!(name: "Book of the dead", description: "book of necromancy spells", unit_price: 4)
@@ -82,13 +82,13 @@ RSpec.describe Merchant, type: :model do
         bone = merchant.items.create!(name: "Bird bones", description: "Complete (not intact) skeleton of crow. For use as spell components.", unit_price: 2)
         wand = merchant.items.create!(name: "Willow birch wand", description: "Newly made 12-inch willow birch wand.", unit_price: 3)
         the_sixth_item = merchant.items.create(name: "Sixth", description: "Another item", unit_price: 1)
-    
+
         customer = Customer.create!(first_name: "Gandalf", last_name: "Thegrey")
-    
+
         invoice_1 = customer.invoices.create!(status: 1)
         invoice_2 = customer.invoices.create!(status: 1)
         invoice_3 = customer.invoices.create!(status: 1)
-    
+
         InvoiceItem.create!(invoice: invoice_1, item: book, quantity: 2, unit_price: 4, status: 2)
         InvoiceItem.create!(invoice: invoice_1, item: the_sixth_item, quantity: 1, unit_price: 1, status: 2)
         InvoiceItem.create!(invoice: invoice_1, item: candle, quantity: 2, unit_price: 15, status: 2)
@@ -97,7 +97,7 @@ RSpec.describe Merchant, type: :model do
         InvoiceItem.create!(invoice: invoice_2, item: bone, quantity: 1, unit_price: 2, status: 2)
         InvoiceItem.create!(invoice: invoice_3, item: wand, quantity: 1, unit_price: 3, status: 0)
         InvoiceItem.create!(invoice: invoice_3, item: scroll, quantity: 6, unit_price: 9, status: 0)
-    
+
         invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
         invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
         invoice_2.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")

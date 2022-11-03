@@ -1,0 +1,39 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Merchant Dashboard</h3>
+  <div class="row">
+    <div class="column">
+      <div id="items-to-ship-merchant-<%= @merchant.id %>">
+        <h2>Items Ready to Ship:</h2>
+        <% @item_invoices.each do |item_invoice| %>
+          <p><%= "#{item_invoice.item_name}: " %> <%= link_to "Invoice # #{item_invoice.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item_invoice.invoice_id}" %> <%= item_invoice.invoice_date %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <div id="top-customers-merchant-<%= @merchant.id %>">
+        <h2><%= "#{@merchant.name}'s Top 5 Customers:" %></h2>
+        <% @merchant_top_five.each do |customer| %>
+          <p><%= "#{customer.last_name}, #{customer.first_name}: #{customer.num_transactions} Transactions" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

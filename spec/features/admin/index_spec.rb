@@ -80,14 +80,11 @@ RSpec.describe 'admin index page' do
       visit "/admin"
 
       expect(page).to have_link "Invoices"
-      save_and_open_page
     end
   end 
 
   describe 'admin top customers' do 
     it 'displays names of top 5 customers who conducted largest # of successful transactions with count listed' do 
-    
-      
       visit "/admin"
 
       expect(page).to have_content("Top 5 Customers")
@@ -103,12 +100,15 @@ RSpec.describe 'admin index page' do
   end
 
   describe 'incomplete invoices' do 
-    xit 'displays a list of ifs of all invoices that have items not yet shipped-id links to that invoices admin show page' do 
+    it 'displays a list of ifs of all invoices that have items not yet shipped-id links to that invoices admin show page' do 
       visit "/admin"
       
       within "#incomplete-invoices" do 
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content(@customer_6_invoice_2.id)
+        #save_and_open_page
+        click_link "Invoice #{@customer_6_invoice_2.id}"
+        expect(current_path).to eq("/admin/invoices/#{@customer_6_invoice_2.id}")
       end
     end
   end 
