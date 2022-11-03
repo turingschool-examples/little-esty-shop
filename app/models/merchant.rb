@@ -3,6 +3,13 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :items
   has_many :transactions, through: :invoices
 
+  def self.all_enabled
+    where(status: 'Enabled')
+  end
+
+  def self.all_disabled
+    where(status: 'Disabled')
+  end
 
   def top_five_customers
     # # successes = invoices.where(id: transactions.where(result: 'success').pluck(:invoice_id))

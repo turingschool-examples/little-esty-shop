@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2022_11_03_024356) do
     t.string "name"
     t.string "description"
     t.integer "unit_price"
+    t.string "status"
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_11_03_024356) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status"
+    t.string "status", default: "Disabled"
   end
 
   create_table "transactions", force: :cascade do |t|
