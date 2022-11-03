@@ -1,0 +1,15 @@
+<h4><center><%= @item.name %> Edit Page</center><h4>
+
+
+<%= form_with url: "/merchants/#{@item.merchant.id}/items/#{@item.id}", method: :patch, local: true do |f| %>
+<ul><%= f.label :name, "Item Name" %>
+  <%= f.text_field :name, value: @item.name %></ul>
+  
+  <ul><%= f.label :description, "Item Description" %>
+  <%= f.text_field :description, value: @item.description  %></ul>
+
+  <ul><%= f.label :unit_price, "Item Unit Price" %>
+  <%= f.text_field :unit_price, value: @item.unit_price%></ul>
+
+  <%= f.submit "Submit #{@item.name} Update" %>
+<% end %>

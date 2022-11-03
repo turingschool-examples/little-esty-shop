@@ -1,4 +1,46 @@
-<h2>Items for: <%=@merchant.name%></h2>
-<%@merchant.items.each do |item|%>
-  <p><%=item.name%></p>
-<%end %>
+<h1><center>Items for: <%=@merchant.name%></center></h1>
+
+<%=button_to "New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+
+<div class="row">
+  <style>
+    .column {
+    float: left;
+    width: 50%;
+    }
+  </style>
+
+  <div class="column", id="enable_disable"> 
+    <div id="enabled_items">
+      <h2>Enabled Items</h2>
+      <%@merchant.enabled_items.each do |item|%>
+        <section id="enabled-item-<%=item.name%>">
+          <%=item.name%>
+          <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Disabled", method: :patch %>
+        </section>
+      <%end%>
+    </div>
+
+    <div id="disabled_items">
+      <h2>Disabled Items</h2>
+      <%@merchant.disabled_items.each do |item|%>
+        <section id="disabled-item-<%=item.name%>">
+          <%=item.name%>
+          <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Enabled", method: :patch %>
+        </section>
+      <%end%>
+    </div>
+  </div>
+
+  <div class= "column", id= "top_items">
+    <h2>Top Items</h2>
+    <%@merchant.most_popular_items.each do |item|%>
+      <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
+      <%item.invoices.each do |invoice|%>- <%=item.revenue%> in sales</p>
+      <%end%>
+    <%end%>
+  </div>
+
+</div>
+
+

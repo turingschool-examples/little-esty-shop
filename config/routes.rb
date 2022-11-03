@@ -7,7 +7,13 @@ Rails.application.routes.draw do
     resources :invoices
   end
 
+
   resources :invoice_items
+
+  namespace :admin do 
+    resources :merchants
+  end
+
 
   #creates routes for merchants and merchant_items 
   get 'merchants/:id/dashboard', to: 'merchant_dashboards#show'
