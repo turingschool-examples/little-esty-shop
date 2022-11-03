@@ -1,4 +1,7 @@
 <h1><center>Items for: <%=@merchant.name%></center></h1>
+
+<%=button_to "New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+
 <div class="row">
   <style>
     .column {
