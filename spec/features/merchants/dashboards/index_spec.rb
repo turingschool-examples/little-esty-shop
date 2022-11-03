@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'date'
 
 RSpec.describe 'On the Merchant Dashboard Index Page' do
   describe 'When I visit /merchants/:merchant_id/dashboard' do
@@ -18,18 +19,21 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       @customer_5 = Customer.create!(first_name: "Patrick", last_name: "Baker")
       @customer_6 = Customer.create!(first_name: "Rebecca", last_name: "Simpson")
 
+      date = DateTime.new(2022,11,2,3,4,5)
       #invoice status: 0 cancelled, 1 completed, 2 in progress
+
       datetime = DateTime.iso8601('2022-11-01', Date::ENGLAND)
       @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1, created_at: datetime)
       @customer_1_invoice_2 = @customer_1.invoices.create!(status: 1)
 
-      @customer_2_invoice_1 = @customer_2.invoices.create!(status: 1)
-      @customer_3_invoice_1 = @customer_3.invoices.create!(status: 1)
-      @customer_4_invoice_1 = @customer_4.invoices.create!(status: 1)
-      @customer_5_invoice_1 = @customer_5.invoices.create!(status: 1)
 
-      @customer_6_invoice_1 = @customer_6.invoices.create!(status: 1)
-      @customer_6_invoice_2 = @customer_6.invoices.create!(status: 0)
+      @customer_2_invoice_1 = @customer_2.invoices.create!(status: 1, created_at: date)
+      @customer_3_invoice_1 = @customer_3.invoices.create!(status: 1, created_at: date)
+      @customer_4_invoice_1 = @customer_4.invoices.create!(status: 1, created_at: date)
+      @customer_5_invoice_1 = @customer_5.invoices.create!(status: 1, created_at: date)
+
+      @customer_6_invoice_1 = @customer_6.invoices.create!(status: 1, created_at: date)
+      @customer_6_invoice_2 = @customer_6.invoices.create!(status: 0, created_at: date)
 
       @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
       InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_2_item_1, quantity: 1, unit_price: 4, status: 0)
