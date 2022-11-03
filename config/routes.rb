@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   end
 
   patch '/merchants/:merchant_id/items', to: 'items#update'
-
   patch '/merchants/:merchant_id/items/:id', to: 'items#update'
 
   resources :admin, only: [:index]

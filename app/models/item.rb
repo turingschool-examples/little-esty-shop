@@ -23,10 +23,7 @@ class Item < ApplicationRecord
 
   def self.top_5_items
     select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
-      .from('transactions')
-      .joins("INNER JOIN invoices on invoices.id = transactions.invoice_id")
-      .joins("INNER JOIN invoice_items on invoice_items.invoice_id = invoices.id")
-      .joins("INNER JOIN items on items.id = invoice_items.item_id")
+      .joins(invoices: :transactions)
       .where('result = ?', 'success')
       .group('items.id')
       .order('revenue DESC')
