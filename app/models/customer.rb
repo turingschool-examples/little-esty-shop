@@ -11,6 +11,19 @@ class Customer < ApplicationRecord
         .order(num_transactions: :desc)
         .limit(5)
   end
+
+  def self.top_five_total_customers
+    self.select(:id, :first_name, :last_name, "count(transactions.*) AS num_transactions")
+        .joins(invoices: [:transactions, :items])
+        .where("transactions.result = 'success'")
+        .group(:id)
+        .order(num_transactions: :desc)
+        .limit(5)
+  end
+
+  def num_success_trans
+    invoices.joins(:transactions).where(transactions: { result: "success" }).count
+  end
 end
 
 # @merchant.customers.select(:id, :first_name, :last_name, "count(transactions.*) AS num_transactions").joins(invoices: [:transactions, :items]).where("transactions.result = 'success'").group(:id).order(num_transactions: :desc).limit(5)
