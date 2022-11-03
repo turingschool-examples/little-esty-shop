@@ -62,7 +62,7 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       @customer_6_transaction_1 = @customer_6_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_6_transaction_2 = @customer_6_invoice_2.transactions.create!(credit_card_number: 1234123412341234, result: 'failed')
 
-      visit "/merchants/#{@merchant_1.id}/dashboards"
+      visit "/merchants/#{@merchant_1.id}/dashboard"
     end
     describe 'Then I see' do
       it 'the name of the merchant' do
@@ -122,7 +122,7 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
             customer_7 = Customer.create!(first_name: "Newest", last_name: "Customer")
             customer_7_invoice_1 = customer_7.invoices.create!(status: 1)
             InvoiceItem.create!(invoice: customer_7_invoice_1, item: @merchant_1_item_3, quantity: 1, unit_price: 4, status: 0)
-            visit "/merchants/#{@merchant_1.id}/dashboards"
+            visit "/merchants/#{@merchant_1.id}/dashboard"
 
             expect(@merchant_1_item_1.name).to appear_before(@merchant_1_item_3.name, only_text: true)
           end
