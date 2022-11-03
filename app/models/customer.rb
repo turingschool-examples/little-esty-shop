@@ -3,3 +3,8 @@ class Customer < ApplicationRecord
 
   validates :first_name, :last_name, :presence => true
 end
+
+
+def self.top_five
+
+end
