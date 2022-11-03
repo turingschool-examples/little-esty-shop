@@ -68,5 +68,12 @@ RSpec.describe Customer, type: :model do
       expect(@customer7.full_name).to eq('Bruce Wayne')
 
     end
+
+    describe 'On admin dashboard we see top 5 customers' do
+      it 'displays top 5 customers' do
+        # binding.pry
+        expect(Customer.top_customers).to eq([@customer2, @customer1, @customer3, @customer5, @customer6])
+      end
+    end
   end
 end

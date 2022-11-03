@@ -62,20 +62,22 @@ RSpec.describe 'Admin#index' do
     @transaction_6 = Transaction.create!(credit_card_number: "5", result: 0, invoice_id: @invoice_6.id)
     @transaction_7 = Transaction.create!(credit_card_number: "5", result: 0, invoice_id: @invoice_7.id)
     @transaction_8 = Transaction.create!(credit_card_number: "5", result: 0, invoice_id: @invoice_8.id)
-    binding.pry
+    # binding.pry
 
   end
     it 'displays top 5 customers' do
      visit "/admin"
-     
-     expect(page).to have_content("Eli")
-     expect(page).to have_content("Darby")
-     expect(page).to have_content("William")
-     expect(page).to have_content("Bryan")
-     expect(page).to have_content("James")
-     
-    #  @customer = Customer.joins(invoices: [:transactions]).group(:id).where("transactions.result=0").select("customers.*, count(transactions) as success_count").order("success_count desc") 
+      # save_and_open_page
+     expect(page).to have_content("Eli Fuchsman: 1")
+     expect(page).to have_content("Darby Smith: 1")
+     expect(page).to have_content("William Lampke: 1")
+     expect(page).to have_content("Bryan Keener: 3")
+     expect(page).to have_content("James White: 2")
 
+     expect("Bryan Keener: 3").to appear_before("James White: 2")
+     expect("James White: 2").to appear_before("Eli Fuchsman: 1")
+     expect("Eli Fuchsman: 1").to appear_before("Darby Smith: 1")
+     expect("Darby Smith: 1").to appear_before("William Lampke: 1")
     end
   end
 end
