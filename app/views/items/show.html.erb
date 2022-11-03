@@ -8,5 +8,5 @@
   </div>
 
   <div style="position:fixed; padding: 1em; top: 0; left: 0;">
-    <%= button_to "Update #{@item.name}", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit", method: :get %>
+    <%= button_to "Update Item", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit", method: :get %>
   </div>

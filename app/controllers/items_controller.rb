@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    # require 'pry';binding.pry
   end
 
   def edit
@@ -17,7 +16,12 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
+    @item.update!(item_params)
     redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}"
+  end
+
+  private
+  def item_params
+    params.permit(:name,:description,:unit_price)
   end
 end

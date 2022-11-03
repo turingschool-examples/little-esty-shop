@@ -51,6 +51,9 @@ RSpec.describe 'merchant items show page' do
       expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
       
       click_button "Update #{@funnypowder.name}"
+      
+      expect(current_path).to_not eq("/merchants/#{@dk.id}/edit")
+      expect(current_path).to_not eq("/merchants/#{@dk.id}/items/#{@ufo.id}/edit")
       expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
     end
   end
