@@ -2,4 +2,8 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
   enum status: [:pending, :packaged, :shipped]
+
+  def self.incomplete_invoices
+    InvoiceItem.where.not(status:2).pluck(:invoice_id)
+  end
 end
