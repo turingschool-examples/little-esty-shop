@@ -41,8 +41,8 @@
 <div class="subtitle">
   <h2><%= subtitle %></h2>
   <ul>
-    <li><a href="#dashboard">Dashboard</a></li>
-    <li><a href=<%= merchant_items_path(@merchant)%>>My Items</a></li>
-    <li><a href=<%=  %>>My Invoices</a></li>
+    <li><a href=<%= merchant_dashboards_path(@merchant) %>>Dashboard</a></li>
+    <li><a href=<%= merchant_items_path(@merchant) %>>My Items</a></li>
+    <li><a href=<%= merchant_invoices_path(@merchant) %>>My Invoices</a></li>
   </ul>
 </div>
