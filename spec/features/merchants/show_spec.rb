@@ -90,7 +90,15 @@ RSpec.describe 'Merchants Dashboard Page' do
         end
       end
 
-      xit 'has the number of successful transactions with the merchant next to each customer' do
+      it 'has the number of successful transactions with the merchant next to each customer' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+        within('#top_customers') do
+          expect(page).to have_content("#{@customer2.full_name} - Successful transactions: 3")
+          expect(page).to have_content("#{@customer3.full_name} - Successful transactions: 2")
+          expect(page).to have_content("#{@customer1.full_name} - Successful transactions: 1")
+          expect(page).to have_content("#{@customer5.full_name} - Successful transactions: 1")
+          expect(page).to have_content("#{@customer6.full_name} - Successful transactions: 1")
+        end
       end
     end
   end

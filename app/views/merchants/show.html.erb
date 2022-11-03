@@ -1,11 +1,12 @@
-<%= @merchant.name %>
+<h2><%= @merchant.name %></h2>
 <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
 <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 
 <div id='top_customers'>
+<h3>Top Customers:</h3>
     <ol>
     <% @merchant.top_merchant_transactions.each do |customer| %>
-        <li><%= customer.full_name %></li>
+        <li><b><%= customer.full_name %></b> - Successful transactions: <%= customer.transactions_count %></li>
     <% end %>
     </ol>
 </div>
