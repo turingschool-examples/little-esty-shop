@@ -1,4 +1,5 @@
 require "rails_helper"
+require "date"
 
 RSpec.describe "On the Merchant's Items index page" do 
   before(:each) do 
@@ -12,9 +13,13 @@ RSpec.describe "On the Merchant's Items index page" do
 
     customer = Customer.create!(first_name: "Gandalf", last_name: "Thegrey")
 
-    invoice_1 = customer.invoices.create!(status: 1)
-    invoice_2 = customer.invoices.create!(status: 1)
-    invoice_3 = customer.invoices.create!(status: 1)
+    feb_third = DateTime.new(2022,2,3,4,5,6)
+    march_third = DateTime.new(2022,3,3,6,2,3)
+    april_first = DateTime.new(2022,4,1,8,9,6)
+
+    invoice_1 = customer.invoices.create!(status: 1, created_at: feb_third)
+    invoice_2 = customer.invoices.create!(status: 1, created_at: march_third)
+    invoice_3 = customer.invoices.create!(status: 1, created_at: april_first)
 
     InvoiceItem.create!(invoice: invoice_1, item: @book, quantity: 2, unit_price: 4, status: 2)
     InvoiceItem.create!(invoice: invoice_1, item: @candle, quantity: 2, unit_price: 15, status: 2)
@@ -35,55 +40,51 @@ RSpec.describe "On the Merchant's Items index page" do
     @other_merchant.items.create!(name: "Pickled cabbage", description: "a packet of pickled cabbage", unit_price: 1)
   end
 
-  # As a merchant,
-  # When I visit my merchant items index page ("merchants/merchant_id/items")
-  # I see a list of the names of all of my items
-  # And I do not see items for any other merchant
   describe "When I visit merchants/:merchant_id/items" do 
     it "displays a list of the names of all my items and I do not see items for any other merchant" do 
       visit "/merchants/#{@merchant.id}/items" 
-      
-      within "#item-#{@book.id}" do 
-        expect(page).to have_content("Book of the dead")
-      end
-      within "#item-#{@candle.id}" do 
-        expect(page).to have_content("Candle of life")
-      end
-      within "#item-#{@potion.id}" do 
-        expect(page).to have_content("Love potion")
-      end
-      within "#item-#{@scroll.id}" do 
-        expect(page).to have_content("Scroll of healing")
-      end
-      within "#item-#{@bone.id}" do 
-        expect(page).to have_content("Bird bones")
-      end
-      within "#item-#{@wand.id}" do 
-        expect(page).to have_content("Willow birch wand")
+
+      within "#disabled" do 
+        within "#item-#{@book.id}" do 
+          expect(page).to have_content("Book of the dead")
+        end
+        within "#item-#{@candle.id}" do 
+          expect(page).to have_content("Candle of life")
+        end
+        within "#item-#{@potion.id}" do 
+          expect(page).to have_content("Love potion")
+        end
+        within "#item-#{@scroll.id}" do 
+          expect(page).to have_content("Scroll of healing")
+        end
+        within "#item-#{@bone.id}" do 
+          expect(page).to have_content("Bird bones")
+        end
+        within "#item-#{@wand.id}" do 
+          expect(page).to have_content("Willow birch wand")
+        end
       end
 
       expect(page).to_not have_content("Fried pickles")
       expect(page).to_not have_content("Pickled cabbage")
     end
 
-    it "when I click on the name of an item from the index page, i am taken to the show page" do 
+    it "when I click on the name of an item from the index page, I am taken to the show page" do 
       visit merchant_items_path(@merchant)
 
       expect(page).to have_link("Book of the dead", href: merchant_item_path(@merchant, @book))
       expect(page).to have_link("Candle of life", href: merchant_item_path(@merchant, @candle))
       expect(page).to have_link("Love potion", href: merchant_item_path(@merchant, @potion))
 
-      within "#item-#{@book.id}" do 
-        click_on("Book of the dead")
+      within "#disabled" do 
+        within "#item-#{@book.id}" do 
+          click_on("Book of the dead")
+        end
       end
 
       expect(current_path).to eq(merchant_item_path(@merchant, @book))
     end
 
-    # Next to each item name I see a button to disable or enable that item.
-    # When I click this button
-    # Then I am redirected back to the items index
-    # And I see that the items status has changed
     it "displays items grouped by status and disable/enable buttons for each item, when clicked, reloads index and the items status is changed" do 
       visit "merchants/#{@merchant.id}/items"
       
@@ -132,9 +133,6 @@ RSpec.describe "On the Merchant's Items index page" do
       end
     end
 
-    # I see a link to create a new item.
-    # When I click on the link,
-    # I am taken to a form that allows me to add item information.
     it "has a link to 'New Item' which takes me to a form to create a new item" do 
       visit "/merchants/#{@merchant.id}/items" 
 
@@ -145,9 +143,6 @@ RSpec.describe "On the Merchant's Items index page" do
       expect(current_path).to eq(new_merchant_item_path(@merchant))
     end
 
-    # Then I see the names of the top 5 most popular items ranked by total revenue generated
-    # And I see that each item name links to my merchant item show page for that item
-    # And I see the total revenue generated next to each item name
     it "displays the names of the top 5 most popular items ranked by total revenue generated. Each name links to the item's show page" do 
       visit "merchants/#{@merchant.id}/items"
 
@@ -162,6 +157,21 @@ RSpec.describe "On the Merchant's Items index page" do
         expect(page).to have_link("Scroll of healing", href: merchant_item_path(@merchant, @scroll))
         expect(page).to have_link("Book of the dead", href: merchant_item_path(@merchant, @book))
         expect(page).to have_link("Bird bones", href: merchant_item_path(@merchant, @bone))
+      end
+    end
+
+    # Then next to each of the 5 most popular items I see the date with the most sales for each item.
+    # And I see a label “Top selling date for <item name> was <date with most sales>"
+    # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
+    it "displays the date with the most sales for each item with label 'Top selling date for <item> was <date>'" do 
+      visit "merchants/#{@merchant.id}/items"
+
+      within "#top-items" do 
+        expect(page).to have_content("Top selling date for Candle of life was 3/3/22")
+        expect(page).to have_content("Top selling date for Love potion was 3/3/22")
+        expect(page).to have_content("Top selling date for Scroll of healing was 3/3/22")
+        expect(page).to have_content("Top selling date for Book of the dead was 2/3/22")
+        expect(page).to have_content("Top selling date for Bird bones was 3/3/22")
       end
     end
   end
