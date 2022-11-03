@@ -5,7 +5,7 @@
   <h3>Enabled Merchants</h3>
   <% @merchants.all_enabled.each do |merchant| %>
     <section id="merchant-<%= merchant.id %>">
-      <p><strong><%= merchant.name %></strong> <%= merchant.status %>
+      <p><strong><%= link_to "#{@merchant.name}", admin_merchant_path(merchant) %></strong> <%= merchant.status %>
       <%= button_to "Disable", admin_merchant_path(merchant.id), method: :patch, params: { status: 'Disabled' } %>
       </p>
     </section>
