@@ -42,6 +42,9 @@ RSpec.describe 'merchant items show page' do
         expect(page).to have_content("#{@funnypowder.description}")
         expect(page).to have_content("#{@funnypowder.unit_price}")
         expect(page).to_not have_content("#{@dk.name}")
+
+        expect("#{@funnypowder.name}").to appear_before("#{@funnypowder.description}")
+        expect("#{@funnypowder.unit_price}").to_not appear_before("#{@funnypowder.description}")
       end
     end
 
@@ -50,11 +53,16 @@ RSpec.describe 'merchant items show page' do
 
       expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
       
-      click_button "Update #{@funnypowder.name}"
+      click_button "Update Item"
       
       expect(current_path).to_not eq("/merchants/#{@dk.id}/edit")
       expect(current_path).to_not eq("/merchants/#{@dk.id}/items/#{@ufo.id}/edit")
+            
+      expect(page).to_not have_content("#{@trex.name} Edit Page")
+      expect(page).to_not have_content("#{@whb.name} Edit Page")
+      
       expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
+      expect(page).to have_content("#{@funnypowder.name} Edit Page")
     end
   end
       

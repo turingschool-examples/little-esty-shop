@@ -22,30 +22,43 @@ RSpec.describe 'Merchant Item Update' do
   describe "the merchant's item's show page (/merchants/merchant_id/items/item_id) has a 'Update/item' button" do
     describe "when the button is clicked, the user is taken to a page to edit this item" do
       it "has a form filled in with the existing item attribute information" do
-
         visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
-        
         click_button "Update Item"
-        expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
-        
-        expect(page).to have_content("#{@funnypowder.name} Edit Page")
-        expect(page).to have_content("Item Name")
-        expect(page).to have_content("Item Description")
-        expect(page).to have_content("Item Unit Price")
-      end
       
-      # ** need to test user input ** 
-      # fill_in "Item Name", with:("#{@funnypowder.name}")
-      # fill_in "Item Description", with:("#{@funnypowder.description}")
-      # expect(page).to have_content("#{@funnypowder.name}")
-      # expect(page).to have_content("#{@funnypowder.description}")
-      # expect(page).to have_content("#{@funnypowder.unit_price}")
+        visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
+        expect(page).to_not have_field('Item Name', with:"#{@ufo.name}")
+        expect(page).to_not have_field('Item Description', with:"#{@bike.description}")
+        expect(page).to_not have_field('Item Unit Price', with:"#{@watch.unit_price}")
 
-      it "redirects back to the item show page when user clicks 'Submit item:id Update' where I see the updated information" do
+        expect(page).to have_field('Item Name', with:"#{@funnypowder.name}")
+        expect(page).to have_field('Item Description', with:"#{@funnypowder.description}")
+        expect(page).to have_field('Item Unit Price', with:"#{@funnypowder.unit_price}")
+
+        expect("#{@funnypowder.name}").to appear_before("#{@funnypowder.unit_price}")
+        expect("#{@funnypowder.unit_price}").to_not appear_before("#{@funnypowder.description}")
+      end
+
+      it "redirects back to the item show page when user clicks 'Submit item:id Update'" do
+        visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
+        expect(page).to_not have_content("#{@dk.name}")
+        
+        click_button "Submit #{@funnypowder.name} Update"
+
+        expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
+        expect(page).to have_content("#{@dk.name}")
+      end
+
+      it "user can update info in the form which is reflected in the item show page after user hits 'submit'" do
         visit ("/merchants/#{@dk.id}/items/#{@funnypowder.id}/edit")
 
+        fill_in('Item Description', with:"Prank your friends, prank your mom, BUT dont prank cops")
+        
         click_button "Submit #{@funnypowder.name} Update"
+        
         expect(current_path).to eq("/merchants/#{@dk.id}/items/#{@funnypowder.id}")
+        
+        expect(page).to have_content("Prank your friends, prank your mom, BUT dont prank cops")
+        expect(page).to_not have_content("#{@funnypowder.description}")
       end
     end
   end
