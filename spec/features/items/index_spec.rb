@@ -80,13 +80,13 @@ RSpec.describe 'items index page', type: :feature do
 
     it 'changes the item to be enabled after clicking Enable' do
       visit merchant_items_path(nomi)
-    
+
       within("#item-#{lamp.id}") do
         click_button 'Enable'
       end
 
       expect(current_path).to eq(merchant_items_path(nomi))
- 
+
       within("#enabled") do
         expect(page).to have_content(lamp.name)
       end
@@ -98,15 +98,15 @@ RSpec.describe 'items index page', type: :feature do
 
     it 'changes the item to be disabled after clicking Disable' do
       lamp.update_attribute :status, 0
-      
+
       visit merchant_items_path(nomi)
-    
+
       within("#item-#{lamp.id}") do
         click_button 'Disable'
       end
 
       expect(current_path).to eq(merchant_items_path(nomi))
- 
+
       within("#enabled") do
         expect(page).to_not have_content(lamp.name)
       end
@@ -126,11 +126,11 @@ RSpec.describe 'items index page', type: :feature do
 
     it 'shows the top 5 items and each item has a link to its show page' do
       visit merchant_items_path(nomi)
-      
+
       within("#right") do
         expect(lamp.name).to appear_before(orion.name)
         expect(orion.name).to appear_before(stickers.name)
-      
+
         expect(page).to have_content("#{lamp.name} - $149 in sales")
         expect(page).to have_content("#{orion.name} - $20 in sales")
         expect(page).to have_content("#{stickers.name} - $6 in sales")

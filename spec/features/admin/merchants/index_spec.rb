@@ -30,4 +30,27 @@ RSpec.describe "admin merchant index page" do
     expect(page).to_not have_content(@merchant_2.name)
   end
 
+  it "has button to enable" do
+    expect(page).to have_content("Disabled Merchants")
+  within "#disabled_merchant-#{@merchant_1.id}" do
+      click_on "Enable"
+      expect(@merchant_1.reload.status).to eq("enabled")
+      expect(current_path).to eq("/admin/merchants")
+    end
+  end
+
+  it "has button to disable" do
+    expect(page).to have_content("Enabled Merchants")
+    within "#disabled_merchant-#{@merchant_1.id}" do
+      click_on "Enable"
+      expect(@merchant_1.reload.status).to eq("enabled")
+      expect(current_path).to eq("/admin/merchants")
+    end
+
+  within "#enabled_merchant-#{@merchant_1.id}" do
+      click_on "Disable"
+      expect(@merchant_1.reload.status).to eq("disabled")
+      expect(current_path).to eq("/admin/merchants")
+    end
+  end
 end
