@@ -3,10 +3,6 @@ require 'date'
 
 RSpec.describe 'On the Merchant Dashboard Index Page' do
   describe 'When I visit /merchants/:merchant_id/dashboard' do
-# As a merchant,
-# When I visit my merchant dashboard
-# Then I see link to my merchant items index (/merchants/merchant_id/items)
-# And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
     before(:each) do
       @merchant_1 = Merchant.create!(name: "Dave")
       @merchant_2 = Merchant.create!(name: "Kevin")
@@ -25,8 +21,11 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
 
       date = DateTime.new(2022,11,2,3,4,5)
       #invoice status: 0 cancelled, 1 completed, 2 in progress
-      @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1, created_at: date)
-      @customer_1_invoice_2 = @customer_1.invoices.create!(status: 1, created_at: date)
+
+      datetime = DateTime.iso8601('2022-11-01', Date::ENGLAND)
+      @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1, created_at: datetime)
+      @customer_1_invoice_2 = @customer_1.invoices.create!(status: 1)
+
 
       @customer_2_invoice_1 = @customer_2.invoices.create!(status: 1, created_at: date)
       @customer_3_invoice_1 = @customer_3.invoices.create!(status: 1, created_at: date)
@@ -71,25 +70,19 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
     end
     describe 'Then I see' do
       it 'the name of the merchant' do
-        within "#attributes-merchant-#{@merchant_1.id}" do
-          expect(page).to have_content(@merchant_1.name)
-        end
+        expect(page).to have_content("#{@merchant_1.name}'s Shop")
       end
 
       it 'a link to merchant items index /merchants/:merchant_id/items' do
-        within "#links-merchant-#{@merchant_1.id}" do
-          expect(page).to have_link("#{@merchant_1.name}'s Items")
-          click_link("#{@merchant_1.name}'s Items")
-          expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
-        end
+        expect(page).to have_link("My Items")
+        click_link("My Items")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
       end
 
       it 'a link to merchant invoices index /merchants/:merchant_id/invoices' do
-        within "#links-merchant-#{@merchant_1.id}" do
-          expect(page).to have_link("#{@merchant_1.name}'s Invoices")
-          click_link("#{@merchant_1.name}'s Invoices")
-          expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
-        end
+        expect(page).to have_link("My Invoices")
+        click_link("My Invoices")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
       end
 
       it 'a list of the merchants top five customers with an item counter next to each one' do
@@ -123,7 +116,6 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
         describe 'next to each listed item and invoice id is the date that the invoice was created it' do
           it 'formatted as Weekday, Month DD, YYYY' do
             within "#items-to-ship-merchant-#{@merchant_1.id}" do
-              allow(@invoice_item_1).to receive(:invoice_date).and_return(DateTime.iso8601('2022-11-01', Date::ENGLAND).strftime("%A, %d %B %Y"))
               expect(@invoice_item_1.invoice_date).to eq("Tuesday, 01 November 2022")
             end
           end
