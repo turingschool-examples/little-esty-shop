@@ -111,9 +111,19 @@ RSpec.describe 'merchant items index page' do
     end
     it 'each popular item shows total revenue and links to show page for item' do 
       visit "/merchants/#{@merchant2.id}/items"
-      expect(page).to have_content("Folder- 50 in sales")
-      expect(page).to have_content("Pencil- 20 in sales")
-      expect(page).to_not have_content("Water Bottle- 10 in sales")
+      expect(page).to have_content("Folder - 50 in sales")
+      expect(page).to have_content("Pencil - 20 in sales")
+      expect(page).to_not have_content("Water Bottle - 10 in sales")
+    end
+
+    it 'each item on top 5 links to merchant item show page for that item' do 
+      visit "/merchants/#{@merchant2.id}/items"
+      click_link("Folder")
+      expect(current_path).to eq("/merchants/#{@merchant2.id}/items/#{@item5.id}")
+    end
+
+    it 'top selling date for each item was date with most sales' do 
+
     end
   end
 end
