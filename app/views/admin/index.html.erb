@@ -5,7 +5,7 @@
 
 <div><class = "adminIndex">
 <p> Incomplete Invoices </p>
-  <%@invoice_items.incomplete_invoices.each do |invoice|%>
-    <p>Invoice #<a href="/admin/:id"><%=link_to invoice%></a></p>
+  <%@invoice_items.each do |invoice|%>
+    <p>Invoice #<a href="/admin/:id"><%=link_to invoice.invoice_id%></a> - <%=invoice.created_at.strftime("%A, %B %d, %Y")%> </p>
   <%end%>
 </div>

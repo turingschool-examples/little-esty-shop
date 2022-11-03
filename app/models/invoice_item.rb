@@ -8,6 +8,6 @@ class InvoiceItem < ApplicationRecord
 
 
   def self.incomplete_invoices
-    InvoiceItem.where.not(status:2).distinct.order(:invoice_id).pluck(:invoice_id)
+    InvoiceItem.where.not(status:2).distinct.order(:created_at)
   end
 end
