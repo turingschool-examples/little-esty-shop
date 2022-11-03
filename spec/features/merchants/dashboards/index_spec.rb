@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'On the Merchant Dashboard Index Page' do
   describe 'When I visit /merchants/:merchant_id/dashboard' do
-# As a merchant,
-# When I visit my merchant dashboard
-# Then I see link to my merchant items index (/merchants/merchant_id/items)
-# And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
     before(:each) do
       @merchant_1 = Merchant.create!(name: "Dave")
       @merchant_2 = Merchant.create!(name: "Kevin")
@@ -65,13 +61,11 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
       @customer_6_transaction_1 = @customer_6_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')
       @customer_6_transaction_2 = @customer_6_invoice_2.transactions.create!(credit_card_number: 1234123412341234, result: 'failed')
 
-      visit "/merchants/#{@merchant_1.id}/dashboard"
+      visit "/merchants/#{@merchant_1.id}/dashboards"
     end
     describe 'Then I see' do
       it 'the name of the merchant' do
-        within "#attributes-merchant-#{@merchant_1.id}" do
-          expect(page).to have_content(@merchant_1.name)
-        end
+        expect(page).to have_content("#{@merchant_1.name}'s Shop")
       end
 
       it 'a link to merchant items index /merchants/:merchant_id/items' do
@@ -132,8 +126,8 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
             customer_7 = Customer.create!(first_name: "Newest", last_name: "Customer")
             customer_7_invoice_1 = customer_7.invoices.create!(status: 1)
             InvoiceItem.create!(invoice: customer_7_invoice_1, item: @merchant_1_item_3, quantity: 1, unit_price: 4, status: 0)
-            visit "/merchants/#{@merchant_1.id}/dashboard"
-
+            visit "/merchants/#{@merchant_1.id}/dashboards"
+            save_and_open_page
             expect(@merchant_1_item_1.name).to appear_before(@merchant_1_item_3.name, only_text: true)
           end
         end
