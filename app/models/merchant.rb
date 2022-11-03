@@ -6,4 +6,14 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   validates_presence_of :name
+
+  def top_merchant_transactions
+    Customer
+      .select('customers.*, count(transactions) as transactions_count')
+      .joins(invoices: [:transactions, { items: :merchant }])
+      .where("transactions.result = 0 AND merchants.id = #{id}")
+      .group('id')
+      .order(transactions_count: :desc)
+      .limit(5)
+  end
 end
