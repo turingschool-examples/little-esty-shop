@@ -7,7 +7,9 @@ RSpec.describe Merchant do
   end
 
   before(:each) do 
-    @merchant1 = Merchant.create!(name: 'Lisa Frank Knockoffs')
+    @merchant1 = Merchant.create!(name: 'Lisa Frank Knockoffs', status: 'Enabled')
+    @merchant2 = Merchant.create!(name: 'East India Trading Company', status: 'Disabled')
+    @merchant3 = Merchant.create!(name: 'Waffles, Inc', status: 'Disabled')
 
     @item1 = @merchant1.items.create!(name: 'Trapper Keeper', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 3000)
 
@@ -34,6 +36,19 @@ RSpec.describe Merchant do
     @invoice3.transactions.create!(result: 0)
     @invoice4.transactions.create!(result: 0)
     @invoice5.transactions.create!(result: 0)
+  end
+
+  describe 'class methods' do 
+    describe '#all_disabled' do 
+      it 'returns all disabled merchants' do 
+        expect(Merchant.all_disabled).to eq([@merchant2, @merchant3])
+      end
+    end
+    describe '#all_enabled' do
+      it 'returns all enabled merchants' do 
+        expect(Merchant.all_enabled).to eq([@merchant1])
+      end
+    end
   end
 
   describe 'instance methods' do 
