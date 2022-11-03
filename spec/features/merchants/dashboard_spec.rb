@@ -92,8 +92,8 @@ RSpec.describe 'the Merchant dashboard' do
 
     it 'shows id of the invoice that hasnt been shipped that links to the invoice show page' do 
       within '#items_ready_to_ship' do 
-        expect(page).to have_content("#{@item1.name} - Invoice ##{@invoice3.id}")
-        expect(page).to have_content("#{@item2.name} - Invoice ##{@invoice2.id}")
+        expect(page).to have_content("#{@item1.name} - Invoice # #{@invoice3.id}")
+        expect(page).to have_content("#{@item2.name} - Invoice # #{@invoice2.id}")
         
         within "#invoice-#{@invoice3.id}" do 
           click_link "#{@invoice3.id}"
