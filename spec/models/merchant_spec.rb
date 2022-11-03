@@ -86,9 +86,10 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '#items_ready_to_ship' do
-      it "returns all items that have been ordered, packaged and not yet shipped" do
+      it "returns all items that have been ordered, packaged and not yet shipped in order of creation" do
         expect(@crystal_moon.items_ready_to_ship.length).to eq(4)
         expect(@crystal_moon.items_ready_to_ship).to include(@pearl_invoice, @moon_rock_invoice, @lapis_lazuli_invoice, @topaz_invoice)
+        expect(@crystal_moon.items_ready_to_ship).to eq([@pearl_invoice, @moon_rock_invoice, @lapis_lazuli_invoice, @topaz_invoice])
       end
     end
 
