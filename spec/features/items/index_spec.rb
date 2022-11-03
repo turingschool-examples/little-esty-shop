@@ -85,6 +85,7 @@ RSpec.describe 'merchant items index page' do
       @item4 = @merchant2.items.create!(name: 'Eraser', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 5000)
       @item5 = @merchant2.items.create!(name: 'Folder', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 50)
       @item6 = @merchant2.items.create!(name: 'Kevin Ta Action Figure', description: 'The coolest action figure around!', unit_price: 10000)
+      @item7 = @merchant2.items.create!(name: 'Water Bottle', description: 'Drink water!', unit_price: 10)
       @customer5 = Customer.create!(first_name: 'Swell', last_name: 'Sally')
       @invoice6 = @customer5.invoices.create!(status: 1)
       InvoiceItem.create!(invoice: @invoice6, item: @item2, quantity: 1, unit_price: 20)
@@ -92,25 +93,27 @@ RSpec.describe 'merchant items index page' do
       InvoiceItem.create!(invoice: @invoice6, item: @item4, quantity: 1, unit_price: 40)
       InvoiceItem.create!(invoice: @invoice6, item: @item5, quantity: 1, unit_price: 50)
       InvoiceItem.create!(invoice: @invoice6, item: @item6, quantity: 1, unit_price: 60)
+      InvoiceItem.create!(invoice: @invoice6, item: @item7, quantity: 1, unit_price: 10)
+
       @invoice6.transactions.create!(result: 0)
 
     end
     it 'lists top 5 most popular items ranked by total revenue' do 
       visit "/merchants/#{@merchant2.id}/items"
-      # save_and_open_page
       within('div#top_items') do 
         expect("Kevin Ta Action Figure").to appear_before("Folder")
         expect(@item4.name).to appear_before(@item3.name)
         expect(@item4.name).to appear_before(@item3.name)
+        expect(@item4.name).to_not appear_before(@item5.name)
+        expect(page).to_not have_content(@item7.name)
+
       end
     end
     it 'each popular item shows total revenue and links to show page for item' do 
       visit "/merchants/#{@merchant2.id}/items"
       expect(page).to have_content("Folder- 50 in sales")
-      
-      
-      
-
+      expect(page).to have_content("Pencil- 20 in sales")
+      expect(page).to_not have_content("Water Bottle- 10 in sales")
     end
   end
 end
