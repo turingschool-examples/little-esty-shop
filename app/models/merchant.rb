@@ -14,12 +14,13 @@ class Merchant < ApplicationRecord
     #in test eq([array of them]) should work
   end
 
-  def items_ready_to_ship
-    invoice_items.where("invoice_items.status = 1")
-  end
-
   def top_5_items
     Item.joins([:merchant, {invoices: :transactions}]).where(merchants: {id: self.id}, transactions: {result: 1}, invoices: {status: 2}).group(:name).order(Arel.sql("sum(quantity * invoice_items.unit_price) desc")).limit(5).sum('invoice_items.quantity * invoice_items.unit_price')
+    # Customer.joins(invoices: [:transactions, {items: :merchant}])
+  end
+
+  def items_ready_to_ship
+    invoice_items.where("invoice_items.status = 1").order('created_at asc')
   end
 end
 
