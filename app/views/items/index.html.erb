@@ -29,10 +29,11 @@
 
   <div id="right" style="float:right;width:50%;">
     <h3>Top Items</h3>
-      <ol>
+        <ol>
         <% @merchant.items.top_5_items.each do |item| %>
          <li><a href=<%= merchant_item_path(@merchant, item) %>>
-         <%= item.name %></a> - $<%= item.revenue / 100 %> in sales</li><br><br>
+         <%= item.name %></a> - $<%= item.revenue / 100 %> in sales</li>
+         <p>Top day for <%= item.name %> was <%= item.top_date %></p><br><br>
           <% end %> 
       </ol> 
   </div>
