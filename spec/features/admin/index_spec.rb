@@ -69,16 +69,37 @@ RSpec.describe "Admin Dashboard (Index", type: :feature do
     expect(page).to have_link("Admin Invoices", href: "/admin/invoices")
   end
 
-  it "has a list of the top 5 customers who have conducted the largest unmber of successful
+  it "has a list of the top 5 customers who have conducted the largest number of successful
     transactions" do
       visit "/admin"
 
+      within("#admin-dashboard") do
+        expect(page).to have_content("Name: #{@customer_1.first_name} #{@customer_1.last_name}")
+        expect(page).to have_content("Name: #{@customer_2.first_name} #{@customer_2.last_name}")
+        expect(page).to have_content("Name: #{@customer_3.first_name} #{@customer_3.last_name}")
+        expect(page).to have_content("Name: #{@customer_5.first_name} #{@customer_5.last_name}")
+        expect(page).to have_content("Name: #{@customer_7.first_name} #{@customer_7.last_name}")
+      end 
+
+      within("#admin-dashboard") do
+        expect("#{@customer_3.first_name} #{@customer_3.last_name}").to appear_before("#{@customer_1.first_name} #{@customer_1.last_name}")
+        expect("#{@customer_1.first_name} #{@customer_1.last_name}").to appear_before("#{@customer_2.first_name} #{@customer_2.last_name}")
+        expect("#{@customer_5.first_name} #{@customer_5.last_name}").to appear_before("#{@customer_7.first_name} #{@customer_7.last_name}")
+        expect("#{@customer_7.first_name} #{@customer_7.last_name}").to_not appear_before("#{@customer_5.first_name} #{@customer_5.last_name}")
+        expect("#{@customer_2.first_name} #{@customer_2.last_name}").to_not appear_before("#{@customer_1.first_name} #{@customer_1.last_name}")
+        expect("#{@customer_5.first_name} #{@customer_5.last_name}").to_not appear_before("#{@customer_2.first_name} #{@customer_2.last_name}")
+      end 
   end
 
   it "next to each of the top 5 customers it has the number of successful transactions they
     have conducted" do
       visit "/admin"
 
+      within("#admin-dashboard") do
+        expect("Name: Luke Harison | Number of Successful Transactions: 2").to appear_before("Name: Angela Leizer | Number of Successful Transactions: 2")
+        expect("Name: Matt Sorry | Number of Successful Transactions: 3").to appear_before("Name: Fannie May | Number of Successful Transactions: 2")
+        expect("Name: Fannie May | Number of Successful Transactions: 2").to appear_before("Name: Simon Garfunkle | Number of Successful Transactions: 1")
+        expect("Name: Simon Garfunkle | Number of Successful Transactions: 1").to_not appear_before("Name: Matt Sorry | Number of Successful Transactions: 3")
+      end
   end
-
 end

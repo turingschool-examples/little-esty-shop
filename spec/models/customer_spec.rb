@@ -67,22 +67,19 @@ RSpec.describe Customer, type: :model do
   describe "#top_five_customers" do
     it "should return a list of the top 5 customers who have had the most successful transactions" do
       expect(Customer.top_five_customers).to eq([@customer_3, @customer_1, @customer_2, @customer_5, @customer_7])
-      
       expect(Customer.top_five_customers).to_not include(@customer_4)
       expect(Customer.top_five_customers).to_not include(@customer_6)
     end
   end
 
-  describe "#transactions_ct" do
+  describe "#transaction_ct" do
     it "should give a total count of transactions with the specified result for a customer" do
-      expect(@customer_1.transactions_ct("success")).to eq(2)
-      expect(@customer_1.transactions_ct("failed")).to eq(3)
-      expect(@customer_3.transactions_ct("success")).to eq(3)
-      expect(@customer_3.transactions_ct("failed")).to eq(1)
-      expect(@customer_2.transactions_ct("success")).to_not eq(3)
-      expect(@customer_7.transactions_ct("success")).to_not eq(0)
-
+      expect(@customer_1.transaction_ct("success")).to eq(2)
+      expect(@customer_1.transaction_ct("failed")).to eq(3)
+      expect(@customer_3.transaction_ct("success")).to eq(3)
+      expect(@customer_3.transaction_ct("failed")).to eq(1)
+      expect(@customer_2.transaction_ct("success")).to_not eq(3)
+      expect(@customer_7.transaction_ct("success")).to_not eq(0)
     end
   end
-
 end

@@ -2,11 +2,11 @@
 <p><a href="/admin/merchants">Admin Merchants</a><p>
 <p><a href="/admin/invoices">Admin Invoices</a><p>
 
-<ul id="admin">
+<ul id="admin-dashboard">
   <p>Top 5 Customers: </p>
-    <% @customer.top_five.each do |customer| %>
+    <% @customers.top_five_customers.each do |customer| %>
   <li>
-   Name: <%= customer.name %>, Number of Successful Transactions: <%= customer.sucessful_transactions %>
+   Name: <%= customer.first_name %> <%= customer.last_name %> | Number of Successful Transactions: <%= customer.transaction_ct("success") %>
   </li>
 <% end %>
 </ul>

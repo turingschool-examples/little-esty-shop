@@ -9,7 +9,7 @@ class Customer < ApplicationRecord
     Customer.select(:id, :first_name, :last_name, 'count(transactions.*) as number_transactions').joins(:transactions).where('transactions.result =?','success').group(:id).order('number_transactions desc').limit(5)
   end
 
-  def transactions_ct(result)
+  def transaction_ct(result)
     transactions.where(result: result).count
   end
 end
