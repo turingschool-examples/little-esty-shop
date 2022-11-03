@@ -18,10 +18,10 @@ class Merchant < ApplicationRecord
   end
 
   def enabled_items
-    items.where("status = 'Enabled'")
+    items.where("status= ?", "Enabled")
   end
 
   def disabled_items
-    items.where("status = 'Disabled'")
+    items.where("status= ?", "Disabled")
   end
 end

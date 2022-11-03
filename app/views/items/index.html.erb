@@ -6,6 +6,7 @@
     width: 50%;
     }
   </style>
+
   <div class="column" id="enabled_items">
     <h2>Enabled Items</h2>
     <%@merchant.enabled_items.each do |item|%>
@@ -15,6 +16,7 @@
       </section>
     <%end%>
   </div>
+
   <div class="column", id="disabled_items">
     <h2>Disabled Items</h2>
     <%@merchant.disabled_items.each do |item|%>
