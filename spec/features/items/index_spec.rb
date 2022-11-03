@@ -124,11 +124,6 @@ RSpec.describe 'merchant items index page', type: :feature do
 
         expect(current_path).to eq("/merchants/#{@surf_designs.id}/items/new")
       end
-
-      xit '- I see the item I just created displayed in the list of items, and
-      I see that my item was created with a default status of disabled.' do
-
-      end
     end
   end
 end
