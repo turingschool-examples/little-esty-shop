@@ -7,7 +7,9 @@ RSpec.describe Merchant do
   end
 
   before(:each) do 
-    @merchant1 = Merchant.create!(name: 'Lisa Frank Knockoffs')
+    @merchant1 = Merchant.create!(name: 'Lisa Frank Knockoffs', status: 'Enabled')
+    @merchant2 = Merchant.create!(name: 'East India Trading Company', status: 'Disabled')
+    @merchant3 = Merchant.create!(name: 'Waffles, Inc', status: 'Disabled')
 
     @item1 = @merchant1.items.create!(name: 'Trapper Keeper', description: 'Its a Lisa Frank Trapper Keeper', unit_price: 3000)
 
@@ -19,48 +21,159 @@ RSpec.describe Merchant do
     @customer6 = Customer.create!(first_name: 'Margarita', last_name: 'Mary')
 
     @invoice1 = @customer1.invoices.create!(status: 2)
-    @invoice2 = @customer1.invoices.create!(status: 2)
-    @invoice3 = @customer2.invoices.create!(status: 2)
-    @invoice4 = @customer3.invoices.create!(status: 2)
-    @invoice5 = @customer4.invoices.create!(status: 2)
-    @invoice6 = @customer5.invoices.create!(status: 2)
+    @invoice2 = @customer2.invoices.create!(status: 2)
+    @invoice3 = @customer3.invoices.create!(status: 1)
+    @invoice4 = @customer4.invoices.create!(status: 1)
+    @invoice5 = @customer5.invoices.create!(status: 1)
 
-    @item1.invoices << @invoice1 << @invoice2 << @invoice3 << @invoice4 << @invoice5 << @invoice6
+    @item1.invoices << @invoice1 << @invoice2 << @invoice3 << @invoice4 << @invoice5
 
-    @transaction1 = @invoice1.transactions.create!(result: 0)
-    @transaction2 = @invoice2.transactions.create!(result: 0)
-    @transaction3 = @invoice3.transactions.create!(result: 0)
-    @transaction4 = @invoice4.transactions.create!(result: 0)
-    @transaction5 = @invoice5.transactions.create!(result: 0)
-    @transaction6 = @invoice6.transactions.create!(result: 0)
-    
+    @invoice1.transactions.create!(result: 0)
+    @invoice1.transactions.create!(result: 0)
+    @invoice1.transactions.create!(result: 0)
+    @invoice2.transactions.create!(result: 0)
+    @invoice2.transactions.create!(result: 0)
+    @invoice3.transactions.create!(result: 0)
+    @invoice4.transactions.create!(result: 0)
+    @invoice5.transactions.create!(result: 0)
   end
 
-  describe '#top_five_customers' do 
-    it 'returns top five customers of merchant' do 
-      expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5,])
+  describe 'class methods' do 
+    describe '#all_disabled' do 
+      it 'returns all disabled merchants' do 
+        expect(Merchant.all_disabled).to eq([@merchant2, @merchant3])
+      end
+    end
+    describe '#all_enabled' do
+      it 'returns all enabled merchants' do 
+        expect(Merchant.all_enabled).to eq([@merchant1])
+      end
+    end
+  end
 
-      invoice7 = @customer6.invoices.create!(status: 2)
-      invoice8 = @customer6.invoices.create!(status: 2)
+  describe 'instance methods' do 
+    describe '#top_five_customers' do 
+      it 'returns top five customers of merchant' do 
+        expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5,])
 
-      invoice7.transactions.create!(result: 0)
-      invoice8.transactions.create!(result: 0)
+        invoice6 = @customer6.invoices.create!(status: 2)
 
-      @item1.invoices << invoice7 << invoice8
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
 
-      expect(@merchant1.top_five_customers).to eq([@customer1, @customer6, @customer2, @customer3, @customer4,])
+        @item1.invoices << invoice6
+
+        expect(@merchant1.top_five_customers).to eq([@customer6, @customer1, @customer2, @customer3, @customer4])
+      end
+
+      it 'doesnt count unsuccessful transactions' do
+        invoice6 = @customer6.invoices.create!(status: 2)
+
+        invoice6.transactions.create!(result: 1)
+        invoice6.transactions.create!(result: 1)
+
+        @item1.invoices << invoice6
+
+        expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5,])
+      end
+
+      it 'doesnt count transactions for other merchants' do 
+        invoice6 = @customer6.invoices.create!(status: 2)
+
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+
+        expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+      end
+
+      it 'doesnt count transactions on users other invoices' do 
+        invoice6 = @customer2.invoices.create!(status: 2)
+
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+        invoice6.transactions.create!(result: 0)
+
+        expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+      end
     end
 
-    it 'doesnt count unsuccessful transactions' do
-      invoice7 = @customer6.invoices.create!(status: 2)
-      invoice8 = @customer6.invoices.create!(status: 2)
+    describe '#incomplete_invoices' do 
+      it 'returns all invoices of merchant that are incomplete' do 
+        expect(@merchant1.incomplete_invoices).to eq([@invoice3, @invoice4, @invoice5])
 
-      invoice7.transactions.create!(result: 1)
-      invoice8.transactions.create!(result: 1)
+        invoice6 = @customer1.invoices.create!(status: 1)
+        @item1.invoices << invoice6
 
-      @item1.invoices << invoice7 << invoice8
+        expect(@merchant1.incomplete_invoices).to eq([@invoice3, @invoice4, @invoice5, invoice6])
+      end
 
-      expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5,])
+      it 'doesnt return invoices not associated with merchant' do 
+        @customer1.invoices.create!(status: 1)
+
+        expect(@merchant1.incomplete_invoices).to eq([@invoice3, @invoice4, @invoice5])
+      end
+
+      it 'works across multiple items' do 
+        item2 = @merchant1.items.create!(name: 'Fuzzy Pencil', description: 'Its a fuzzy pencil', unit_price: 500)
+        invoice6 = @customer1.invoices.create!(status: 1)
+        item2.invoices << invoice6
+
+        expect(@merchant1.incomplete_invoices).to eq([@invoice3, @invoice4, @invoice5, invoice6])
+      end
     end
+  end
+
+  it 'doesnt count transactions for other merchants' do 
+    invoice6 = @customer6.invoices.create!(status: 2)
+
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+
+    expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+  end
+
+  it 'doesnt count transactions on users other invoices' do 
+    invoice6 = @customer2.invoices.create!(status: 2)
+
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+    invoice6.transactions.create!(result: 0)
+
+    expect(@merchant1.top_five_customers).to eq([@customer1, @customer2, @customer3, @customer4, @customer5])
+  end
+
+  describe 'grouping by status' do 
+    before :each do 
+      @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
+      @whb = Merchant.create!(name: "WHB")
+      @something= @klein_rempel.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
+      @another = @klein_rempel.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
+      @water= @klein_rempel.items.create!(name: "Water", description: "like the ocean", unit_price: 80, status: "Disabled")
+      @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
+    end
+
+    it 'returns a list of merchant items that are enabled' do 
+      expect(@klein_rempel.enabled_items).to eq([@something, @another])
+      expect(@klein_rempel.enabled_items).to_not eq([@other])
+    end
+
+    it 'returns a list of merchant items that are disabled' do 
+      expect(@klein_rempel.disabled_items).to eq([@water])
+      expect(@klein_rempel.disabled_items).to_not eq([@another, @something])
+
+    end
+
   end
 end

@@ -5,3 +5,24 @@
   <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </p>
+
+<h3>Favorite Customers:</h3>
+<ol>
+  <% @merchant.top_five_customers.each do |customer| %>
+    <li><%= "#{customer.name} - #{customer.transactions.count} purchases" %></li>
+  <% end %>
+</ol>
+
+<section id="items_ready_to_ship">
+  <h3>Items Ready to Ship:</h3>
+  <% @merchant.incomplete_invoices.each do |invoice| %>
+    <section id="invoice-<%= invoice.id %>">
+      <% invoice.items.each do |item| %>
+        <p><%= "#{item.name} - Invoice #" %>
+        <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
+        <%= "- #{invoice.created_at.strftime("%A, %B %d, %Y")}" %>
+        </p>
+      <% end %>
+    </section>
+  <% end %>
+</section>

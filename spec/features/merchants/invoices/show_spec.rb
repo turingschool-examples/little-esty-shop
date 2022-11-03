@@ -62,4 +62,14 @@ RSpec.describe "Merchant Invoice Show" do
       end
     end
   end
+
+  describe 'US-17: Total Revenue for invoice' do 
+    it 'when I visit my merchant invoice show page, I see total revenue that will be generated from all items on the invoice' do 
+
+      visit merchant_invoice_path(@merchant1, @invoice1)
+
+      expect(page).to have_content("Total Revenue: 15000")
+      expect(page).to_not have_content("Total Revenue: 432000")
+    end
+  end
 end
