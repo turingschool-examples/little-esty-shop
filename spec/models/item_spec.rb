@@ -85,7 +85,7 @@ RSpec.describe Item, type: :model do
 
     describe '#top_date' do
       it 'returns the top selling date for the item' do
-        expect(lamp.top_date).to eq(Date.today.strftime('%m/%d/%Y'))
+        expect(lamp.top_date).to eq(lamp.created_at.strftime('%m/%d/%Y'))
       end
     end
   end

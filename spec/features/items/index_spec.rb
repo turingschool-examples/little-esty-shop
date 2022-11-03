@@ -145,9 +145,9 @@ RSpec.describe 'items index page', type: :feature do
       visit merchant_items_path(nomi)
 
       within("#right") do
-        expect(page).to have_content("Top day for #{lamp.name} was #{Date.today.strftime('%m/%d/%Y')}")
-        expect(page).to have_content("Top day for #{orion.name} was #{Date.today.strftime('%m/%d/%Y')}")
-        expect(page).to have_content("Top day for #{stickers.name} was #{Date.today.strftime('%m/%d/%Y')}")
+        expect(page).to have_content("Top day for #{lamp.name} was #{lamp.created_at.strftime('%m/%d/%Y')}")
+        expect(page).to have_content("Top day for #{orion.name} was #{orion.created_at.strftime('%m/%d/%Y')}")
+        expect(page).to have_content("Top day for #{stickers.name} was #{stickers.created_at.strftime('%m/%d/%Y')}")
       end
     end
   end
