@@ -1,4 +1,10 @@
 <h1><center><%= @item.merchant.name %></center></h1>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
 <hr>
 
   <div id="merchant-items-<%=@item.id%>">
@@ -7,3 +13,6 @@
     <ul>Current_Selling_Price: <%= @item.unit_price %></ul>
   </div>
 
+  <div style="position:fixed; padding: 1em; top: 0; left: 0;">
+    <%= button_to "Update Item", "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit", method: :get %>
+  </div>
