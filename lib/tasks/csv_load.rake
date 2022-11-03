@@ -7,6 +7,7 @@ namespace :csv_load do
     csv.each do |row|
       Customer.create!(id: row[:id], first_name: row[:first_name], last_name: row[:last_name], created_at: row[:created_at], updated_at: row[:updated_at])
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
   end
 
 
@@ -15,6 +16,7 @@ namespace :csv_load do
     csv.each do |row|
       Merchant.create!(id: row[:id], name: row[:name], created_at: row[:created_at], updated_at: row[:updated_at])
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
   end
   
   task transactions: :environment do 
@@ -31,6 +33,7 @@ namespace :csv_load do
         updated_at: row[:updated_at]
       ) 
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
   task invoices: :environment do 
@@ -44,6 +47,7 @@ namespace :csv_load do
         updated_at: row[:updated_at]
       )
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
   end
 
   task items: :environment do 
@@ -51,6 +55,7 @@ namespace :csv_load do
     csv.each do |row| 
       Item.create!(id: row[:id], name: row[:name], description: row[:description], unit_price: row[:unit_price], merchant_id: row[:merchant_id], created_at: row[:created_at], updated_at: row[:updated_at])
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
 
   task invoice_items: :environment do 
@@ -58,6 +63,7 @@ namespace :csv_load do
     csv.each do |row|
       InvoiceItem.create!(id: row[:id], item_id: row[:item_id], invoice_id: row[:invoice_id], quantity: row[:quantity], unit_price: row[:unit_price], status: row[:status], created_at: row[:created_at], updated_at: row[:updated_at])
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
   task all: :environment do 
@@ -68,6 +74,15 @@ namespace :csv_load do
     Rake::Task["csv_load:transactions"].invoke 
     Rake::Task["csv_load:invoice_items"].invoke 
 
+  end
+
+  task delete_all: :environment do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Merchant.destroy_all
+    Transaction.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
   end
 
 
