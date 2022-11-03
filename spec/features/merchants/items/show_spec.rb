@@ -11,7 +11,7 @@ RSpec.describe "On the Merchant's Items show page" do
   describe "When I visit merchants/:merchant_id/items/:item_id" do 
     it "displays the name, description, and current selling price of the item" do 
       merchant = Merchant.create!(name: "Practical Magic Shop")
-      book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
+      book = merchant.items.create!(name: "Book of the dead", description: "book of necromancy spells", unit_price: 4)
       candle = merchant.items.create!(name: "Candle of life", description: "candle that gifts everlasting life", unit_price: 15)
       
       other_merchant = Merchant.create!(name: "Joe's Pickle Bus")
@@ -20,7 +20,7 @@ RSpec.describe "On the Merchant's Items show page" do
       visit "/merchants/#{merchant.id}/items/#{book.id}" 
       
       expect(page).to have_content("Book of the dead")
-      expect(page).to have_content("Description: book of necromamcy spells")
+      expect(page).to have_content("Description: book of necromancy spells")
       expect(page).to have_content("Current Price: $4.00")
 
       expect(page).to_not have_content("Candle of life")
@@ -30,7 +30,7 @@ RSpec.describe "On the Merchant's Items show page" do
 
     it "displays a link to update the item information, when clicked I am taken to a page to edit the item" do 
       merchant = Merchant.create!(name: "Practical Magic Shop")
-      book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
+      book = merchant.items.create!(name: "Book of the dead", description: "book of necromancy spells", unit_price: 4)
 
       visit "/merchants/#{merchant.id}/items/#{book.id}"
 
@@ -45,7 +45,7 @@ RSpec.describe "On the Merchant's Items show page" do
   describe "Wireframe requirements for merchants items show page" do 
     it "has the little esty shop heading, nav bar, My Items header, and merchant's name" do
       merchant = Merchant.create!(name: "Practical Magic Shop")
-      book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
+      book = merchant.items.create!(name: "Book of the dead", description: "book of necromancy spells", unit_price: 4)
 
       visit "merchants/#{merchant.id}/items/#{book.id}"
 

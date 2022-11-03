@@ -6,7 +6,7 @@
 .column {
   float: left;
   width: 50%;
-  padding: 10px;
+  padding: 20px;
 }
 
 .row:after {
@@ -15,25 +15,45 @@
   clear: both;
 }
 </style>
+
 <body>
-<%= render partial: "shared/header", locals: { subtitle: @merchant.name } %>
-<h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">My Items</h3>
-<div class="row">
-  <div class="column">
-    <h2>Enabled Items</h2>
-    <% @enabled_items.each do |item| %>
-      <div id="item-<%= item.id %>">
-        <p><%= item.name %></p>
+  <%= render partial: "shared/header", locals: { subtitle: @merchant.name } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">My Items</h3>
+  <div class="row">
+    <div class="column">
+      <%= link_to "New Item", new_merchant_item_path(@merchant), style: "color:black" %>
+      <div id="enabled">
+        <h2>Enabled Items</h2>
+        <% @enabled_items.each do |item| %>
+          <div id="item-<%= item.id %>">
+            <p style="display:inline-block">
+              <%= link_to item.name, merchant_item_path(@merchant, item) %> 
+              <%= button_to "Disable", merchant_item_path(@merchant, item), form: {style: 'display:inline-block;padding-left:1em'}, method: :patch, params: {status: "disabled"} %>
+            </p>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-    <h2>Disabled Items</h2>
-    <% @disabled_items.each do |item| %>
-      <p><%= item.name %></p>
-    <% end %>
+      <div id="disabled">
+        <h2>Disabled Items</h2>
+        <% @disabled_items.each do |item| %>
+          <div id="item-<%= item.id %>">
+            <p style="display:inline-block">
+              <%= link_to item.name, merchant_item_path(@merchant, item) %>
+              <%= button_to "Enable", merchant_item_path(@merchant, item), form: {style: 'display:inline-block;padding-left:1em'}, method: :patch, params: {status: "enabled"} %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <div id="top-items">
+        <h2>Top Items</h2>
+        <% @top_items.each do |item| %>
+          <div id="item-<%= item.id %>">
+            <p><%= link_to item.name, merchant_item_path(@merchant, item) %>: $<%= item.total_revenue %>.00 in sales</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="column">
-    <h2>Top Items</h2>
-    <p>Items will go here</p>
-  </div>
-</div>
 </body>
