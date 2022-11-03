@@ -6,6 +6,6 @@
 <div><class = "adminIndex">
 <p> Incomplete Invoices </p>
   <%@invoice_items.incomplete_invoices.each do |invoice|%>
-    <p><a href="/admin/:id"><%=link_to invoice%></a></p>
+    <p>Invoice #<a href="/admin/:id"><%=link_to invoice%></a></p>
   <%end%>
 </div>
