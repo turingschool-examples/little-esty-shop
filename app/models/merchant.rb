@@ -24,4 +24,9 @@ class Merchant < ApplicationRecord
   def disabled_items
     items.where("status= ?", "Disabled")
   end
+  
+  def most_popular_items
+    
+  end
+
 end

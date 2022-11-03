@@ -159,6 +159,20 @@ RSpec.describe Merchant do
       expect(@klein_rempel.disabled_items).to_not eq([@another, @something])
 
     end
+  end
 
+  describe 'rank 5 most popular items by total revenue' do 
+    before :each do 
+      @klein_rempel = Merchant.create!(name: "Klein, Rempel and Jones")
+      @whb = Merchant.create!(name: "WHB")
+      @something= @klein_rempel.items.create!(name: "Something", description: "A thing that is something", unit_price: 300, status: "Enabled")
+      @another = @klein_rempel.items.create!(name: "Another", description: "One more something", unit_price: 150, status: "Enabled")
+      @water= @klein_rempel.items.create!(name: "Water", description: "like the ocean", unit_price: 80, status: "Disabled")
+      @other = @whb.items.create!(name: "Other", description: "One more something", unit_price: 150)
+    end
+
+    it 'returns top 5 items ranked by total revenue generated' do 
+      expect(@klein_rempel.most_popular_items).to eq([])
+    end
   end
 end

@@ -74,5 +74,15 @@ RSpec.describe 'merchant items index page' do
         expect(page).to_not have_content("Water Bottle")
       end
     end
+
+    it 'lists top 5 most popular items ranked by total revenue' do 
+      visit merchant_items_path(@klein_rempel)
+
+    end
+
+    it 'each popular item shows total revenue and links to show page for item' do 
+      visit merchant_items_path(@klein_rempel)
+
+    end
   end
 end
