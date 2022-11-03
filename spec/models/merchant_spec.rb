@@ -99,13 +99,13 @@ RSpec.describe Merchant do
     end
 
     it 'returns a list of merchant items that are enabled' do 
-      expect(@klein_rempel.enabled_items).to eq([@something.name, @another.name])
-      expect(@klein_rempel.enabled_items).to_not eq([@other.name])
+      expect(@klein_rempel.enabled_items).to eq([@something, @another])
+      expect(@klein_rempel.enabled_items).to_not eq([@other])
     end
 
     it 'returns a list of merchant items that are disabled' do 
-      expect(@klein_rempel.disabled_items).to eq([@water.name])
-      expect(@klein_rempel.disabled_items).to_not eq([@another.name, @something.name])
+      expect(@klein_rempel.disabled_items).to eq([@water])
+      expect(@klein_rempel.disabled_items).to_not eq([@another, @something])
 
     end
 

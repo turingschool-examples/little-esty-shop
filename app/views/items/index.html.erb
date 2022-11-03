@@ -1,16 +1,29 @@
 <h1><center>Items for: <%=@merchant.name%></center></h1>
-
-<%@merchant.items.each do |item|%>
-    <div id="item-disabled-<%=item.name%>">Enabled Items:
-    <%if item.status == "Enabled"%>
-      <%=item.name%>  <%=item.status%> 
-      <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Disabled", method: :patch %>
-    </div> 
-    <div id="item-enabled-<%=item.name%>">
-    <%elsif item.status == "Disabled"%>
-      <p>Disabled Items: <%=item.name%>  <%=item.status%> 
-      <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Enabled", method: :patch %>
+<div class="row">
+  <style>
+    .column {
+    float: left;
+    width: 50%;
+    }
+  </style>
+  <div class="column" id="enabled_items">
+    <h2>Enabled Items</h2>
+    <%@merchant.enabled_items.each do |item|%>
+      <section id="enabled-item-<%=item.name%>">
+        <%=item.name%>
+        <%=button_to "Disable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Disabled", method: :patch %>
+      </section>
     <%end%>
-    
-  </div>  
-<%end %>
+  </div>
+  <div class="column", id="disabled_items">
+    <h2>Disabled Items</h2>
+    <%@merchant.disabled_items.each do |item|%>
+      <section id="disabled-item-<%=item.name%>">
+        <%=item.name%>
+        <%=button_to "Enable", "/merchants/#{@merchant.id}/items/#{item.id}?status=Enabled", method: :patch %>
+      </section>
+    <%end%>
+  </div>
+</div>
+
+

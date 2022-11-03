@@ -14,10 +14,10 @@ class Merchant < ApplicationRecord
   end
 
   def enabled_items
-    items.select("name").where("status = 'Enabled'").pluck(:name)
+    items.where("status = 'Enabled'")
   end
 
   def disabled_items
-    items.select("name").where("status = 'Disabled'").pluck(:name)
+    items.where("status = 'Disabled'")
   end
 end
