@@ -28,7 +28,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe "instance methods" do
-    describe ".enabled_items" do
+    describe "#enabled_items" do
       it "returns a collection of the enabled items for the merchant instance" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
         book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
@@ -43,7 +43,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe '.invoice_items_to_ship' do
+    describe '#invoice_items_to_ship' do
       describe 'returns an array of invoice_items' do
         it 'where invoice_item is "packaged" (0)' do
           expect(@merchant_1.invoice_items_to_ship).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
@@ -56,7 +56,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe ".disabled_items" do
+    describe "#disabled_items" do
       it "returns a collection of the disabled items for the merchant instance" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
         book = merchant.items.create!(name: "Book of the dead", description: "book of necromamcy spells", unit_price: 4)
@@ -71,7 +71,7 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe ".top_five_items" do
+    describe "#top_five_items" do
       it "returns a collection of items, including their total revenue, of the top five items for that merchant" do
         merchant = Merchant.create!(name: "Practical Magic Shop")
 
