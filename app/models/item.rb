@@ -5,6 +5,9 @@ class Item < ApplicationRecord
   enum status: ["enabled", "disabled"]
 
   def top_selling_date
-    invoices.order("invoice_items.quantity desc, invoices.created_at").first.created_at
+    invoices.joins(:transactions).
+    where("transactions.result = 'success'").
+    order("invoice_items.quantity desc, invoices.created_at").
+    first.created_at
   end
 end
