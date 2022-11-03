@@ -177,7 +177,21 @@ RSpec.describe 'merchant items index page', type: :feature do
         end
       end
 
+      it "has a section for the top 5 items by revenue for the merchant" do
 
+        visit merchant_items_path(@crystal_moon)
+        save_and_open_page
+        expect(page).to have_content("Top 5 Items")
+        expect(page).to have_content("Moon Rock: 210")
+        expect(page).to have_content("Emerald: 170")
+        expect(page).to have_content("Ruby: 130")
+        expect(page).to have_content("Amethyst: 110")
+        expect(page).to have_content("Topaz: 110")
+        expect("Moon Rock: 210").to appear_before("Emerald: 170")
+        expect("Emerald: 170").to appear_before("Ruby: 130")
+        expect("Ruby: 130").to appear_before("Amethyst: 110")
+        expect("Amethyst: 110").to appear_before("Topaz: 110")
+      end
     end
   end
 end
