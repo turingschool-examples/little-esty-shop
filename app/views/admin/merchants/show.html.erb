@@ -1,3 +1,5 @@
 <h1><%=@merchant.name%> Show page</h1>
 
-<li>Name:<%=@merchant.name%> </li>
+  <li>Name:<%=@merchant.name%> </li>
+  <li><%= link_to "Update Merchants Info",edit_admin_merchant_path(@merchant.id) %></li>
+  <li><%= link_to "Back to All Merchants ",admin_merchants_path %></li>
