@@ -12,54 +12,61 @@ RSpec.describe Customer, type: :model do
     it { should validate_presence_of :first_name }
     it { should validate_presence_of :last_name }
   end
+
   before :each do
-    @customer_1 = Customer.create!(first_name: 'Eli', last_name: 'Fuchsman')
-    @customer_2 = Customer.create!(first_name: 'Bryan', last_name: 'Keener')
-    @customer_3 = Customer.create!(first_name: 'Darby', last_name: 'Smith')
-    @customer_4 = Customer.create!(first_name: 'James', last_name: 'White')
-    @customer_5 = Customer.create!(first_name: 'William', last_name: 'Lampke')
-    @customer_6 = Customer.create!(first_name: 'Abdul', last_name: 'Redd')
-
-    @merchant = Merchant.create!(name: 'Test')
-
-    @item_1 = Item.create!(name: 'item1', description: 'desc1', unit_price: 10, merchant_id: @merchant.id)
-
-    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
-    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
-    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: 1)
-    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1)
-    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
-    @invoice_6 = Invoice.create!(customer_id: @customer_2.id, status: 1)
-    @invoice_7 = Invoice.create!(customer_id: @customer_2.id, status: 1)
-    @invoice_8 = Invoice.create!(customer_id: @customer_4.id, status: 1)
-
-    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10,
-                                status: 1)
-    @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10,
-                                status: 1)
-    @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_1.id, quantity: 2, unit_price: 10,
-                                status: 1)
-    @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_1.id, quantity: 3, unit_price: 10,
-                                status: 1)
-    @ii_5 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_1.id, quantity: 1, unit_price: 10,
-                                status: 1)
-
-    @transaction_1 = Transaction.create!(credit_card_number: '1', result: 0, invoice_id: @invoice_1.id)
-    @transaction_2 = Transaction.create!(credit_card_number: '2', result: 0, invoice_id: @invoice_2.id)
-    @transaction_3 = Transaction.create!(credit_card_number: '3', result: 0, invoice_id: @invoice_3.id)
-    @transaction_4 = Transaction.create!(credit_card_number: '4', result: 0, invoice_id: @invoice_4.id)
-    @transaction_5 = Transaction.create!(credit_card_number: '5', result: 0, invoice_id: @invoice_5.id)
-    @transaction_6 = Transaction.create!(credit_card_number: '5', result: 0, invoice_id: @invoice_6.id)
-    @transaction_7 = Transaction.create!(credit_card_number: '5', result: 0, invoice_id: @invoice_7.id)
-    @transaction_8 = Transaction.create!(credit_card_number: '5', result: 0, invoice_id: @invoice_8.id)
+    @merchant1 = Merchant.create!(name: 'Marvel')
+    @merchant2 = Merchant.create!(name: 'D.C.')
+    @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker') # 1/1
+    @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent') # 3/0
+    @customer3 = Customer.create!(first_name: 'Louis', last_name: 'Lane') # 2/0
+    @customer4 = Customer.create!(first_name: 'Lex', last_name: 'Luther') # 0/0
+    @customer5 = Customer.create!(first_name: 'Frank', last_name: 'Castle') # 1/0
+    @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock') # 1/0
+    @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne') # 0/1
+    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # marvel
+    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
+    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
+    @invoice4 = Invoice.create!(status: 'canceled', customer_id: @customer4.id) # marvel
+    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
+    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
+    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id) # D.C.
+    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # D.C.
+    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
+    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
+    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
+    @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant1.id)
+    @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant2.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+    InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
+    InvoiceItem.create!(quantity: 6, unit_price: 600, status: 'pending', item_id: @item1.id, invoice_id: @invoice3.id)
+    InvoiceItem.create!(quantity: 12, unit_price: 1200, status: 'packaged', item_id: @item1.id, invoice_id: @invoice4.id)
+    InvoiceItem.create!(quantity: 8, unit_price: 800, status: 'packaged', item_id: @item1.id, invoice_id: @invoice5.id)
+    InvoiceItem.create!(quantity: 20, unit_price: 2000, status: 'packaged', item_id: @item1.id, invoice_id: @invoice6.id)
+    InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice9.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice10.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice11.id)
+    @transaction1 = Transaction.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice1.id)
+    @transaction2 = Transaction.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice1.id)
+    @transaction3 = Transaction.create!(credit_card_number: '4800749911485986', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice2.id)
+    @transaction4 = Transaction.create!(credit_card_number: '4923661117104166', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice3.id)
+    @transaction5 = Transaction.create!(credit_card_number: '4536896899874279', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice4.id)
+    @transaction6 = Transaction.create!(credit_card_number: '4536896899874280', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice4.id)
+    @transaction7 = Transaction.create!(credit_card_number: '4536896899874281', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice5.id)
+    @transaction8 = Transaction.create!(credit_card_number: '4536896899874286', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice6.id)
+    @transaction9 = Transaction.create!(credit_card_number: '4636896899874290', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice6.id)
+    @transaction10 = Transaction.create!(credit_card_number: '4636896899874291', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice7.id)
+    @transaction11 = Transaction.create!(credit_card_number: '4636896899874298', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice8.id)
+    @transaction12 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice9.id)
+    @transaction13 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice10.id)
+    @transaction14 = Transaction.create!(credit_card_number: '4636896899845752', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice11.id)
   end
-  describe 'class#methods' do
-    describe 'On admin dashboard we see top 5 customers' do
-      it 'displays top 5 customers' do
-       
 
-        expect(Customer.top_customers).to eq([@customer_2, @customer_4, @customer_1, @customer_3, @customer_5])
-      end
+  describe 'class methods' do
+    it 'can display the first and last name together' do
+      expect(@customer7.full_name).to eq('Bruce Wayne')
+
     end
   end
 end
