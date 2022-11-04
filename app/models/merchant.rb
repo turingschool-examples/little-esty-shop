@@ -34,5 +34,9 @@ class Merchant < ApplicationRecord
         .limit(5)
         .sum('quantity * invoice_items.unit_price')
   end
+
+  def top_5_items_best_day
+    
+  end
 end
 
