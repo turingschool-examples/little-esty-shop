@@ -8,4 +8,10 @@ class Invoice < ApplicationRecord
   validates_presence_of :status, :customer_id
 
   enum status: { 'in progress' => 0, completed: 1, canceled: 2 }
+
+  def self.incomplete_invoices
+    joins(:invoice_items)
+    .where('invoice_items.status=0 OR invoice_items.status=1')
+    .order(:created_at)
+  end
 end
