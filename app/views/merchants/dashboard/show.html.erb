@@ -2,7 +2,7 @@
 
 <h2><%= @merchant.name %></h2>
 <p>
-  <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+  <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %> | 
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </p>
 
@@ -10,7 +10,7 @@
   <h3>Favorite Customers:</h3>
   <ol>
     <% @merchant.top_five_customers.each do |customer| %>
-      <li><%= "#{customer.name} - #{customer.transactions.count} purchases" %></li>
+      <li><%= "#{customer.name} - #{customer.num_transactions} purchases" %></li>
     <% end %>
   </ol>
 </div>
