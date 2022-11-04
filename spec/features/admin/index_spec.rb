@@ -109,7 +109,7 @@ RSpec.describe 'admin index page' do
       within "#incomplete-invoices" do 
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content(@customer_6_invoice_2.id)
-        save_and_open_page
+        
         click_link "Invoice #{@customer_6_invoice_2.id}"
         expect(current_path).to eq("/admin/invoices/#{@customer_6_invoice_2.id}")
       end
