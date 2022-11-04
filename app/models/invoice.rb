@@ -17,4 +17,8 @@ class Invoice < ApplicationRecord
   def customer_first
     self.customer.first_name
   end
+
+  def total_revenue
+    self.items.sum(:unit_price)
+  end
 end

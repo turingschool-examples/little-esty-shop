@@ -28,6 +28,7 @@
           <h4><%= "Status: #{@invoice.status.capitalize}" %></h4>
           <h4><%= "Created on: #{@invoice.created_at.strftime("%A, %d %B %Y")}" %></h4>
           <h4><%= "Customer: #{@invoice.customer_last}, #{@invoice.customer_first}" %></h4>
+          <h4><%= "Total Revenue: $#{sprintf('%.2f', @invoice.total_revenue)}" %></h4>
       </div>
       <div id="customer-info-<%= @invoice.id %>">
           <h4> Customer: </h4>
@@ -43,12 +44,13 @@
               <th>Status</th>
             </tr>
             <% @items.each do |item| %>
-            <tr>
-              <th><%= item.name %></th>
-              <th><%= item.invoice_item_quantity %></th>
-              <th><%= item.price %></th>
-              <th><%= item.invoice_item_status %></th>
-            </tr>
+              <tr>
+                <th><%= item.name %></th>
+                <th><%= item.invoice_item_quantity(@invoice.id) %></th>
+                <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
+                <th><%= item.invoice_item_status(@invoice.id).capitalize %></th>
+              </tr>
+            <% end %>
           </table>
       </div>
     </div>
