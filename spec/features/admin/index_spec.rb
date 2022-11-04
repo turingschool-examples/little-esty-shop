@@ -38,14 +38,14 @@ RSpec.describe 'Admin#index' do
     
     @item_1 = Item.create!(name: "item1", description: "desc1", unit_price: 10, merchant_id: @merchant.id)
     
-    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
-    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
-    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: 1)
-    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1)
-    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1)
-    @invoice_6 = Invoice.create!(customer_id: @customer_2.id, status: 1)
-    @invoice_7 = Invoice.create!(customer_id: @customer_2.id, status: 1)
-    @invoice_8 = Invoice.create!(customer_id: @customer_4.id, status: 1)
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1, created_at: Time.parse("22.10.30"))
+    @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1, created_at: Time.parse("22.10.31"))
+    @invoice_3 = Invoice.create!(customer_id: @customer_3.id, status: 1, created_at: Time.parse("22.10.15"))
+    @invoice_4 = Invoice.create!(customer_id: @customer_4.id, status: 1, created_at: Time.parse("22.11.01"))
+    @invoice_5 = Invoice.create!(customer_id: @customer_5.id, status: 1, created_at: Time.parse("22.11.02"))
+    @invoice_6 = Invoice.create!(customer_id: @customer_2.id, status: 1, created_at: Time.parse("22.11.03"))
+    @invoice_7 = Invoice.create!(customer_id: @customer_2.id, status: 1, created_at: Time.parse("22.10.12"))
+    @invoice_8 = Invoice.create!(customer_id: @customer_4.id, status: 1, created_at: Time.parse("22.10.19"))
     
     @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 1)
     @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 2)
@@ -80,27 +80,36 @@ RSpec.describe 'Admin#index' do
     end
   end
 
-  describe 'admib dashboard incomplete invoices' do
+  describe 'admin dashboard incomplete invoices' do
     it 'has a section for incomplete invoices that contains ids of invoices for items that have not been shipped' do
       visit "/admin"
       
-      within("#invoice-#{@invoice_1.id}") do
-        expect(page).to have_link(@invoice_1.id)
+      within("#incomplete_invoices") do
+        expect(page).to have_link("#{@invoice_3.id}")
+        expect(page).to have_link("#{@invoice_1.id}")
+        expect(page).to have_link("#{@invoice_4.id}")
+        expect(page).to have_link("#{@invoice_5.id}")
+        expect(page).to_not have_link("#{@invoice_2.id}")
       end
+    end
+    
+    it 'orders invoices from oldest to newest by creation date' do
+      visit "/admin"
 
-      within("#invoice-#{@invoice_3.id}") do
-        expect(page).to have_link(@invoice_3.id)
+      within("#incomplete_invoices") do
+        expect("#{@invoice_3.id}").to appear_before("#{@invoice_1.id}")
+        expect("#{@invoice_1.id}").to appear_before("#{@invoice_4.id}")
+        expect("#{@invoice_4.id}").to appear_before("#{@invoice_5.id}")
       end
+    end
 
-      within("#invoice-#{@invoice_4.id}") do
-        expect(page).to have_link(@invoice_4.id)
-      end
+    it 'shows the creation date for incomplete invoices in a Day, Month Date, Year' do
+      visit "/admin"
 
-      within("#invoice-#{@invoice_5.id}") do
-        expect(page).to have_link(@invoice_5.id)
-      end
-
-      expect(page).to_not have_link(@invoice_2.id)
+      expect(page).to have_content("Saturday, October 15, 2022")
+      expect(page).to have_content("Sunday, October 30, 2022")
+      expect(page).to have_content("Tuesday, November 1, 2022")
+      expect(page).to have_content("Wednesday, November 2, 2022")
     end
   end
 end
