@@ -35,7 +35,16 @@ RSpec.describe "admin/merchants-show page" do
 # When I click this button
 # Then I am redirected back to the admin merchants index
 # And I see that the merchant's status has changed
-  
+   describe 'as an admin I see a button to update a merchants status' do 
+    it 'has a link to update the merchants info' do
+    visit "/admin/merchants"
+    
+    expect(current_path).to eq("/admin/merchants")
+    expect(page).to have_button("Enable Merchant")
+    expect(page).to have_button("Disable Merchant")
+    
+    end
+   end
 
 
 end
