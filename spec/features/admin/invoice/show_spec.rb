@@ -44,9 +44,24 @@ RSpec.describe 'admin/invoices/invoice.id' do
   end
   it 'shows related information to a specific invoice' do
     visit "/admin/invoices/#{@invoice_1.id}"
-    save_and_open_page
+    
     expect(page).to have_content("Id: #{@invoice_1.id}")
     expect(page).to have_content('Status: completed')
     expect(page).to have_content('Customer Name: Eli Fuchsman')
+  end
+#   When I visit an admin invoice show page
+# Then I see all of the items on the invoice including:
+# - Item name
+# - The quantity of the item ordered
+# - The price the Item sold for
+# - The Invoice Item status
+  it 'shows all items on the invoice including item name, quantity, price, status' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+    save_and_open_page
+    expect(page).to have_content('Invoice Items:')
+    expect(page).to have_content('Item Name: item1')
+    expect(page).to have_content('Unit Price: 10')
+    expect(page).to have_content('Quantity: 9')
+    expect(page).to have_content('Status: packaged')
   end
 end
