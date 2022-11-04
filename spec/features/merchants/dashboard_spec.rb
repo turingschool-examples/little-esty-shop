@@ -123,7 +123,6 @@ RSpec.describe 'the Merchant dashboard' do
       within '#items_ready_to_ship' do
         expect(@invoice3.id.to_s).to appear_before(@invoice4.id.to_s)
         expect(@invoice4.id.to_s).to appear_before(@invoice2.id.to_s)
-        save_and_open_page
       end
     end
   end
