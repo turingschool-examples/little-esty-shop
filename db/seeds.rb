@@ -7,3 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 nomi = Merchant.create!(name: "Naomi LLC")
+@merchant_1 = Merchant.create!(name: "Shawn LLC")
+@merchant_2 = Merchant.create!(name: "Naomi LLC")
+@merchant_3 = Merchant.create!(name: "Kristen LLC")
+@merchant_4 = Merchant.create!(name: "Yuji LLC")
+@merchant_5 = Merchant.create!(name: "Turing LLC")
