@@ -3,6 +3,6 @@
 <div><class = "adminInvoicesIndex">
 <p> Invoices Index</p>
   <%@invoices.each do |invoice|%>
-    <p><a href="/admin/invoices/:id"><%=link_to invoice.id%></a></p>
+    <p><a href=<%= admin_invoice_path(invoice)%>><%=invoice.id%></a></p>
   <%end%>
 </div>
