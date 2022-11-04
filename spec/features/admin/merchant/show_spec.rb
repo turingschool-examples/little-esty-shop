@@ -6,40 +6,36 @@ RSpec.describe "admin/merchants-show page" do
     @merchant_2 = Merchant.create!(name: "D.C.")
     @merchant_3 = Merchant.create!(name: "Darkhorse")
     @merchant_4 = Merchant.create!(name: "Image")
-    
-    visit "/admin/merchants/#{@merchant_1.id}"
-  end
-# US 26 As an admin,
-# When I visit a merchant's admin show page
-# Then I see a link to update the merchant's information.
-# When I click the link
-# Then I am taken to a page to edit this merchant
-# And I see a form filled in with the existing merchant attribute information
-# When I update the information in the form and I click ‘submit’
-# Then I am redirected back to the merchant's admin show page where I see the updated information
-# And I see a flash message stating that the information has been successfully updated.
-    describe 'on the merchants admin show page I see a link and am taken to a page to edit this merchant' do 
-      it "has a link to update merchant's info" do
-       click_link "Update Merchant"
-       expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
-    
-      end
     end
-      it "When the user updates the information in the form and click submit" do 
-        visit "/admin/merchants/#{@merchant_1.id}"
-        expect(page).to have_link("Update Merchant")
-        click_link "Update Merchant"
-        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
-        
 
-        visit "/admin/merchants/#{@merchant_1.id}/edit" 
-        expect(page).to have_content("Marvel")
-        fill_in "name", with: "Ms. Marvel"
-        click_button("Submit")
-        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
-        expect(page).to have_content("Successfully Updated: Ms Marvel")
-        expect(page).to have_content("MS. Marvel")
-      end
+    #US 25 As an admin,
+# When I click on the name of a merchant from the admin merchants index page,
+# Then I am taken to that merchant's admin show page (/admin/merchants/merchant_id)
+# And I see the name of that merchant   
+   describe 'when I click on the name of the merchant I am taken to the merchant shwo page' do 
+    it "each name links to an merchants' show page" do
+      visit "/admin/merchants"
+      expect(page).to have_link(@merchant_1.name)
+      expect(page).to have_link(@merchant_2.name)
+      expect(page).to have_link(@merchant_3.name)
+      expect(page).to have_link(@merchant_4.name)
+      
+      click_on "#{@merchant_1.name}"
+      expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+     
+      expect(page).to have_content(@merchant_1.name)
+      expect(page).to_not have_content(@merchant_2.name)
+    
+    end
+  end
+
+#US 27 As an admin,
+# When I visit the admin merchants index
+# Then next to each merchant name I see a button to disable or enable that merchant.
+# When I click this button
+# Then I am redirected back to the admin merchants index
+# And I see that the merchant's status has changed
+  
 
 
 end

@@ -1,7 +1,10 @@
 <h2>Admin Merchants Index</h2>
 
 <% @merchants.each do |merchant|  %>
+<%= merchant.name %>
   <h3><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %></h3>
+  
+
 <% end %> 
 
 
