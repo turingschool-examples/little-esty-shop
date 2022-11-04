@@ -6,6 +6,34 @@ RSpec.describe 'the admin merchants index page' do
     @whb = Merchant.create!(name: "WHB", status: "Enabled")
     @lisa_frank = Merchant.create!(name: 'Lisa Frank Knockoffs', status: 'Enabled')
     @burger = Merchant.create!(name: 'Burger King', status: 'Disabled')
+    @dogs = Merchant.create!(name: 'Dogs')
+    @whoopee_cushions = Merchant.create!(name: 'Whoopee Cushions')
+
+    @customer1 = Customer.create!(first_name: 'Sean', last_name: 'Sux')
+
+    @merch1item = @klein_rempel.items.create!(name: 'Item')
+    @merch2item = @whb.items.create!(name: 'Item')
+    @merch3item = @lisa_frank.items.create!(name: 'Item')
+    @merch4item = @burger.items.create!(name: 'Item')
+    @merch5item = @dogs.items.create!(name: 'Item')
+
+    @inv1 = @customer1.invoices.create!(status: 2)
+    @inv2 = @customer1.invoices.create!(status: 2)
+    @inv3 = @customer1.invoices.create!(status: 2)
+    @inv4 = @customer1.invoices.create!(status: 2)
+    @inv5 = @customer1.invoices.create!(status: 2)
+
+    InvoiceItem.create!(invoice: @inv1, item: @merch1item, quantity: 5, unit_price: 20000)
+    InvoiceItem.create!(invoice: @inv2, item: @merch2item, quantity: 5, unit_price: 10000)
+    InvoiceItem.create!(invoice: @inv3, item: @merch3item, quantity: 5, unit_price: 40000)
+    InvoiceItem.create!(invoice: @inv4, item: @merch4item, quantity: 5, unit_price: 50000)
+    InvoiceItem.create!(invoice: @inv5, item: @merch5item, quantity: 5, unit_price: 30000)
+
+    @inv1.transactions.create!(result: 0)
+    @inv2.transactions.create!(result: 0)
+    @inv3.transactions.create!(result: 0)
+    @inv4.transactions.create!(result: 0)
+    @inv5.transactions.create!(result: 0)
 
     visit admin_merchants_path
   end
@@ -66,7 +94,28 @@ RSpec.describe 'the admin merchants index page' do
 
   # Top 5 Merchants
   describe 'top 5 merchants by revenue' do 
-    it 'it shows the top 5 merchants by revenue'
+    it 'it shows the top 5 merchants by revenue' do 
+      within '#top_merchants' do 
+        expect(@burger.name).to appear_before(@lisa_frank.name)
+        expect(@lisa_frank.name).to appear_before(@dogs.name)
+        expect(@dogs.name).to appear_before(@klein_rempel.name)
+        expect(@klein_rempel.name).to appear_before(@whb.name)
+      end
+    end
+
+    it 'each merchant name links to the admin merchant show page' do 
+      within '#top_merchants' do 
+        click_link @lisa_frank.name
+
+        expect(current_path).to eq(admin_merchant_path(@lisa_frank))
+      end
+    end
+
+    it 'shows total revenue generated next to each merchant' do 
+      within '#top_merchants' do 
+        expect(page).to have_content("#{@lisa_frank.name} - Total Revenue: $2000")
+      end
+    end
   end
 
   # Top Merchant's Best Day

@@ -2,6 +2,7 @@
 <h2>Admin Dashboard</h2>
 
 <%= button_to 'Create New Merchant', new_admin_merchant_path, method: :get %>
+<hr>
 
 <div class="row">
   <style>
@@ -11,6 +12,7 @@
     }
   </style>
 
+  <!-- All Merchants Sorted By Enabled/ Disabled -->
   <div class="column", id="enable_disable"> 
     <section id='enabled'>
       <h3>Enabled Merchants</h3>
@@ -35,11 +37,12 @@
     </section>
   </div>
 
-   <!-- Put Top 5 Merchants By Revenue in this <div> -->
+   <!-- Top 5 Merchants By Revenue -->
   <div class='column', id='top_merchants'>
-    <h3>Top Merchant's Best Day</h3>
-    <section id='best_day'>
-
-    </section>
+    <h3>Top Merchants</h3>
+        <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
+          <p><%= link_to merchant.name, admin_merchant_path(merchant)  %> 
+          <%= " - Total Revenue: $#{merchant.total_revenue / 100}" %></p>
+        <% end %>
   </div>
 </div>

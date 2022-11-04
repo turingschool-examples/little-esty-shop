@@ -240,5 +240,10 @@ RSpec.describe Merchant do
     it 'returns list of top 5 merchants in order of revenue generated' do 
       expect(Merchant.top_five_merchants_by_revenue).to eq([@merch4, @merch3, @merch5, @merch1, @merch2])
     end
+
+    it 'can calculate total merchant revenue' do 
+      expect(@merch3.total_revenue).to eq(200000)
+      expect(@merch2.total_revenue).to eq(50000)
+    end
   end
 end
