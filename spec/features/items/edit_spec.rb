@@ -33,7 +33,7 @@ RSpec.feature "Merchant Items Edit Page", type: :feature do
       expect(page).not_to have_content('A necklace with wood beads.')
       expect(page).to have_content('Starry Woods')
       expect(page).to have_content('A necklace with a carved wooden pendant.')
-      expect(page).to have_content('Current price: 1000')
+      expect(page).to have_content('Current price: $10.00')
     end
     it 'displays a flash message stating the update is successful when the item is successfully updated' do
       visit edit_merchant_item_path(@merchant, @item)
