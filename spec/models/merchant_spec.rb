@@ -201,7 +201,11 @@ RSpec.describe Merchant do
   end
 
   describe 'top merchants' do 
-    before(:each) do 
+    before(:each) do
+      InvoiceItem.destroy_all
+      Item.destroy_all
+      Merchant.destroy_all
+
       @merch1 = Merchant.create!(name: 'Merchant1')
       @merch2 = Merchant.create!(name: 'Merchant2')
       @merch3 = Merchant.create!(name: 'Merchant3')
@@ -220,14 +224,21 @@ RSpec.describe Merchant do
       @inv4 = @customer1.invoices.create!(status: 2)
       @inv5 = @customer1.invoices.create!(status: 2)
 
-      InvoiceItem.create!(invoice: @inv1, item: @item2, quantity: 1, unit_price: 20)
-      InvoiceItem.create!(invoice: @inv2, item: @item2, quantity: 1, unit_price: 20)
-      InvoiceItem.create!(invoice: @inv3, item: @item2, quantity: 1, unit_price: 20)
-      InvoiceItem.create!(invoice: @inv4, item: @item2, quantity: 1, unit_price: 20)
-      InvoiceItem.create!(invoice: @inv5, item: @item2, quantity: 1, unit_price: 20)
-    end
-    it 'returns list of top 5 merchants in order of revenue generated' do 
+      InvoiceItem.create!(invoice: @inv1, item: @merch1item, quantity: 5, unit_price: 20000)
+      InvoiceItem.create!(invoice: @inv2, item: @merch2item, quantity: 5, unit_price: 10000)
+      InvoiceItem.create!(invoice: @inv3, item: @merch3item, quantity: 5, unit_price: 40000)
+      InvoiceItem.create!(invoice: @inv4, item: @merch4item, quantity: 5, unit_price: 50000)
+      InvoiceItem.create!(invoice: @inv5, item: @merch5item, quantity: 5, unit_price: 30000)
 
+      @inv1.transactions.create!(result: 0)
+      @inv2.transactions.create!(result: 0)
+      @inv3.transactions.create!(result: 0)
+      @inv4.transactions.create!(result: 0)
+      @inv5.transactions.create!(result: 0)
+    end
+
+    it 'returns list of top 5 merchants in order of revenue generated' do 
+      expect(Merchant.top_five_merchants_by_revenue).to eq([@merch4, @merch3, @merch5, @merch1, @merch2])
     end
   end
 end
