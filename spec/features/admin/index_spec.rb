@@ -66,7 +66,7 @@ RSpec.describe 'Admin#index' do
   describe 'On admin dashboard we see top 5 customers' do
     it 'displays top 5 customers' do
       visit '/admin'
-      # save_and_open_page
+
       expect(page).to have_content('Eli Fuchsman: 1')
       expect(page).to have_content('Darby Smith: 1')
       expect(page).to have_content('William Lampke: 1')
