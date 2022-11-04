@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'admin index page' do 
+RSpec.describe 'admin index page' do
    before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
@@ -22,21 +22,21 @@ RSpec.describe 'admin index page' do
     date3 = DateTime.new(2022,10,27,0,4,2)
     @customer_1_invoice_1 = @customer1.invoices.create!(status: 1)
     @customer_1_invoice_2 = @customer1.invoices.create!(status: 1)
-    @customer_1_invoice_3 = @customer1.invoices.create!(status: 0, created_at: date2)
+    @customer_1_invoice_3 = @customer1.invoices.create!(status: 2, created_at: date2)
     @customer_2_invoice_1 = @customer2.invoices.create!(status: 1)
-    @customer_2_invoice_2 = @customer2.invoices.create!(status: 0, created_at: date3)
+    @customer_2_invoice_2 = @customer2.invoices.create!(status: 2, created_at: date3)
     @customer_3_invoice_1 = @customer3.invoices.create!(status: 1)
     @customer_4_invoice_1 = @customer4.invoices.create!(status: 1)
     @customer_5_invoice_1 = @customer5.invoices.create!(status: 1)
     @customer_6_invoice_1 = @customer6.invoices.create!(status: 1)
-    @customer_6_invoice_2 = @customer6.invoices.create!(status: 0, created_at: date1)
+    @customer_6_invoice_2 = @customer6.invoices.create!(status: 2, created_at: date1)
 
     InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_2_item_1, quantity: 1, unit_price: 4, status: 0)
     InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 2)
     InvoiceItem.create!(invoice: @customer_3_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 2)
     InvoiceItem.create!(invoice: @customer_4_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 2)
     InvoiceItem.create!(invoice: @customer_5_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 2)
-    
+
     @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 2)
     @invoice_item_2 = InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 7, status: 0)
     @invoice_item_3 = InvoiceItem.create!(invoice: @customer_6_invoice_2, item: @merchant_1_item_1, quantity: 1, unit_price: 7, status: 1)
@@ -62,36 +62,37 @@ RSpec.describe 'admin index page' do
     @customer_6_transaction_2 = @customer_6_invoice_2.transactions.create!(credit_card_number: 789456123789, result: 'failed')
   end
 
-  describe 'admin header' do 
-    it 'displays admin header' do 
+  describe 'admin header' do
+    it 'displays admin header' do
       visit "/admin"
-      
+
       expect(page).to have_content("Admin Dashboard")
     end
-  end 
+  end
 
-  describe 'admin invoice link' do 
-    it 'displays links to admin invoices' do 
+  describe 'admin invoice link' do
+    it 'displays links to admin invoices' do
       visit "/admin"
 
       expect(page).to have_link "Merchants"
     end
   end
 
-  describe 'admin invoice link' do 
-    it 'displays links to admin invoices' do 
+  describe 'admin invoice link' do
+    it 'displays links to admin invoices' do
       visit "/admin"
 
       expect(page).to have_link "Invoices"
     end
-  end 
+  end
 
   describe 'admin top customers' do 
     it 'displays names of top 5 customers who conducted largest # of successful transactions with count listed' do 
+
       visit "/admin"
 
       expect(page).to have_content("Top 5 Customers")
-      
+
       within "#top-5-customers" do
         expect(@customer1.first_name).to appear_before(@customer2.first_name)
         expect(@customer2.first_name).to appear_before(@customer3.first_name)
@@ -105,8 +106,8 @@ RSpec.describe 'admin index page' do
   describe 'incomplete invoices' do 
     it 'displays a list of ifs of all invoices that have items not yet shipped-id links to that invoices admin show page' do 
       visit "/admin"
-      
-      within "#incomplete-invoices" do 
+
+      within "#incomplete-invoices" do
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content(@customer_6_invoice_2.id)
         
@@ -120,8 +121,8 @@ RSpec.describe 'admin index page' do
 
       within "#incomplete-invoices" do 
         expect(page).to have_content(@customer_6_invoice_2.id)
-        
       end
     end
-  end 
+  end
 end
+

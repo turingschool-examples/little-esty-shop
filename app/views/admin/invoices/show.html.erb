@@ -1,1 +1,11 @@
-<h2>Invoices Show Page</h2>
+
+<%= render partial: "admin_shared/header", locals: { subtitle: "Admin Dashboard" } %>
+
+<h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Invoice #<%= @invoice.id %></h3>
+
+<p>Status: <%= @invoice.status %></p>
+<p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<h4>Customer:</h4>
+<p style="padding-left:4em"><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
+
+

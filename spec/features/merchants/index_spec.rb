@@ -25,7 +25,7 @@ RSpec.describe("admin merchants index page") do
       expect(page).to(have_content("Name:#{@merchant1.name}"))
     end
 
-    it("And I see the name of that merchant") do
+    it("25.And I see the name of that merchant") do
       visit(admin_merchants_path)
       click_link("#{@merchant1.name}")
       expect(current_path).to(eq(admin_merchant_path(@merchant1.id)))

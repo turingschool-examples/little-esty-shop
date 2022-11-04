@@ -133,7 +133,7 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
           end
         end
 
-        xit 'each invoice_id is a link to invoice show page' do
+        it 'each invoice_id is a link to invoice show page' do
           within "#items-to-ship-merchant-#{@merchant_1.id}" do
             click_link("Invoice # #{@customer_6_invoice_1.id}")
             expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@customer_6_invoice_1.id}")

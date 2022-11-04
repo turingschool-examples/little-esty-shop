@@ -4,14 +4,14 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:index] do
     resources :items, except: [:destroy]
-    resources :invoices, only: [:index]
+    resources :invoices, only: [:index, :show]
     resources :dashboard, only: [:index]
   end
 
   get "/admin", to: "admin#index"
  
   namespace(:admin) do
-    resources :merchants 
+    resources :merchants, except: [:destroy]
     resources :invoices, only: [:show, :index]
   end
 end
