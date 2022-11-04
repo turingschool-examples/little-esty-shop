@@ -10,6 +10,6 @@ class Item < ApplicationRecord
 
 
   def most_recent_date
-    invoices.order(created_at: :desc).distinct.limit(1)
+    invoices.order(created_at: :desc).limit(1).pluck(:created_at)
   end
 end

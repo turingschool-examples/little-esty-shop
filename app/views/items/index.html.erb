@@ -36,8 +36,8 @@
     <h2>Top Items</h2>
     <%@merchant.most_popular_items.each do |item|%>
       <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
-      <%=item.revenue%> in sales</p><%=item.most_recent_date.pluck(:created_at)%>
-
+      <%=item.revenue%> in sales</p> 
+      Top Selling Date For <%=item.name%> was <%=item.most_recent_date[0].strftime("%A, %B %d, %Y")%>
     <%end%>
   </div>
 
