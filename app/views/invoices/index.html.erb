@@ -1,0 +1,30 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Merchant Invoices</h3>
+  <div class="row">
+    <div class="column">
+      <div id="invoices-merchant-<%= @merchant.id %>">
+        <% @invoices.each do |invoice| %>
+          <p><%= "Invoice # " %> <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
