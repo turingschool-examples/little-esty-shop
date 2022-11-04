@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'admin/invoices' do
+RSpec.describe 'admin/invoices/invoice.id' do
   before :each do
     @customer_1 = Customer.create!(first_name: 'Eli', last_name: 'Fuchsman')
     @customer_2 = Customer.create!(first_name: 'Bryan', last_name: 'Keener')
@@ -42,17 +42,11 @@ RSpec.describe 'admin/invoices' do
     @transaction_7 = Transaction.create!(credit_card_number: '5', result: 0, invoice_id: @invoice_7.id)
     @transaction_8 = Transaction.create!(credit_card_number: '5', result: 0, invoice_id: @invoice_8.id)
   end
-  it 'shows all invoice ids in the system and links to a show page' do
-    visit 'admin/invoices'
-
-    expect(page).to have_content(@invoice_1.id)
-    expect(page).to have_content(@invoice_2.id)
-    expect(page).to have_content(@invoice_3.id)
-    expect(page).to have_content(@invoice_4.id)
-    expect(page).to have_content(@invoice_5.id)
-    expect(page).to have_content(@invoice_6.id)
-    expect(page).to have_content(@invoice_7.id)
-    expect(page).to have_content(@invoice_8.id)
-
+  it 'shows related information to a specific invoice' do
+    visit "/admin/invoices/#{@invoice_1.id}"
+    save_and_open_page
+    expect(page).to have_content("Id: #{@invoice_1.id}")
+    expect(page).to have_content('Status: completed')
+    expect(page).to have_content('Customer Name: Eli Fuchsman')
   end
 end
