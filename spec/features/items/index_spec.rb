@@ -92,12 +92,12 @@ RSpec.describe 'merchant items index page' do
       @invoice8 = @customer5.invoices.create!(status: 2, created_at: "2010-7-02 08:00:00 UTC")
       @invoice6 = @customer5.invoices.create!(status: 2, created_at: "2020-2-02 08:00:00 UTC")
 
-      InvoiceItem.create!(invoice: @invoice6, item: @item2, quantity: 1, unit_price: 20, created_at: "2022-10-04 11:00:00 UTC")
-      InvoiceItem.create!(invoice: @invoice8, item: @item3, quantity: 1, unit_price: 30, created_at: "2022-11-02 11:00:00 UTC")
-      InvoiceItem.create!(invoice: @invoice7, item: @item4, quantity: 1, unit_price: 40, created_at: "2010-7-02 08:00:00 UTC")
-      InvoiceItem.create!(invoice: @invoice6, item: @item5, quantity: 1, unit_price: 50, created_at: "2016-8-05 08:00:00 UTC")
-      InvoiceItem.create!(invoice: @invoice8, item: @item6, quantity: 1, unit_price: 60, created_at: "2020-2-02 08:00:00 UTC")
-      InvoiceItem.create!(invoice: @invoice6, item: @item7, quantity: 1, unit_price: 10, created_at: "2021-4-10 08:00:00 UTC")
+      InvoiceItem.create!(invoice: @invoice6, item: @item2, quantity: 1, unit_price: 20)
+      InvoiceItem.create!(invoice: @invoice8, item: @item3, quantity: 1, unit_price: 30)
+      InvoiceItem.create!(invoice: @invoice7, item: @item4, quantity: 1, unit_price: 40)
+      InvoiceItem.create!(invoice: @invoice6, item: @item5, quantity: 1, unit_price: 50)
+      InvoiceItem.create!(invoice: @invoice8, item: @item6, quantity: 1, unit_price: 60)
+      InvoiceItem.create!(invoice: @invoice6, item: @item7, quantity: 1, unit_price: 10)
 
       @invoice6.transactions.create!(result: 0)
       @invoice7.transactions.create!(result: 0)
@@ -120,7 +120,6 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content("Folder: 50 in sales")
       expect(page).to have_content("Pencil: 20 in sales")
       expect(page).to_not have_content("Water Bottle - 10 in sales")
-      # save_and_open_page
     end
 
     it 'each item on top 5 links to merchant item show page for that item' do 
