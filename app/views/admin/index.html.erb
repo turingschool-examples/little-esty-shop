@@ -1,4 +1,45 @@
-<center><h2>Admin Dashboard</h2></center>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-<center><%= link_to "Admin Merchants Index", "/admin/merchants" %></center>
-<center><%= link_to "Admin Invoices Index", "/admin/invoices" %></center>
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<body>
+  <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Dashboard" } %>
+<div class="row"> 
+  <div class="column">
+    <div id="incomplete-invoices">
+      <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Incomplete Invoices</h3>
+      <% @incomplete_invoices.each do |invoice| %>
+        <center><%= link_to "Invoice #{invoice.id} -- #{invoice.created_at.strftime("%A, %B %d, %Y")}", "/admin/invoices/#{invoice.id}" %></center>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="column">
+    <div id="top-5-customers">
+      <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Top 5 Customers</h3>
+        <% @five_best_customers.each do |customer| %>
+          <center><p><%= "#{customer.first_name} #{customer.last_name}; #{customer.num_success_trans} purchases." %></p></center>
+        <% end %>
+    </div>
+  </div>
+</body>
+
+
+
+
+
+

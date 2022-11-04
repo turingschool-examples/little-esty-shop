@@ -65,13 +65,19 @@ RSpec.describe Customer, type: :model do
   end
 
   describe "class methods" do
-    describe "#top_five_customers_for" do
+    describe ".top_five_customers_for" do
       it "returns an array of no more than five customer objects" do
         expect(Customer.top_five_customers_for(@merchant_1)).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       end
-      it "ordered descending by number of successfull transactions" do
+      it "ordered descending by number of successful transactions" do
         5.times {@customer_6_invoice_1.transactions.create!(credit_card_number: 1234123412341234, result: 'success')}
         expect(Customer.top_five_customers_for(@merchant_1)).to eq([@customer_6, @customer_1, @customer_2, @customer_3, @customer_4])
+      end
+    end
+
+    describe '#top_five_total_customers' do 
+      it 'returns top 5 customers for all merchants based on successful transaction count' do 
+        expect(Customer.top_five_total_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       end
     end
   end

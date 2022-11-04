@@ -1,0 +1,58 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#p0 {
+  text-indent: 2em;
+}
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Invoice # <%= @invoice.id %></h3>
+  <div class="row">
+    <div class="column">
+      <div id="invoice-stats-<%= @invoice.id %>">
+          <h4><%= "Status: #{@invoice.status.capitalize}" %></h4>
+          <h4><%= "Created on: #{@invoice.created_at.strftime("%A, %d %B %Y")}" %></h4>
+          <h4><%= "Customer: #{@invoice.customer_last}, #{@invoice.customer_first}" %></h4>
+          <h4><%= "Total Revenue: $#{sprintf('%.2f', @invoice.total_revenue)}" %></h4>
+      </div>
+      <div id="customer-info-<%= @invoice.id %>">
+          <h4> Customer: </h4>
+          <p id="p0"><%= "#{@invoice.customer_first} #{@invoice.customer_last}" %></p>
+      </div>
+      <div id="item-info-<%= @invoice.id %>">
+          <h4> Items on Invoice: </h4>
+          <table>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+              <th>Status</th>
+            </tr>
+            <% @items.each do |item| %>
+              <tr>
+                <th><%= item.name %></th>
+                <th><%= item.invoice_item_quantity(@invoice.id) %></th>
+                <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
+                <th><%= item.invoice_item_status(@invoice.id).capitalize %></th>
+              </tr>
+            <% end %>
+          </table>
+      </div>
+    </div>
+  </div>
+</body>
