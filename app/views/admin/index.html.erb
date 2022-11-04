@@ -6,15 +6,17 @@
 <h2>Top Customers</h2>
 
 <% @customers.each do |customer|%>
-<p><%= customer.full_name %>: <%= customer.success_count %></p>
+<p><%= customer.full_name %>: <%= customer.success_count %> purchases</p>
 <% end %>
 
 <h2>Incomplete Invoices</h2>
 
-<% @incomplete_invoices.each do |invoice| %>
-  <section id="invoice-<%= invoice.id %>">
-    <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %></p>
-  </section>
-<% end %>
+<section id="incomplete_invoices">
+  <% @incomplete_invoices.each do |invoice| %>
+
+    <p>Invoice #<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
+    - <%= invoice.created_at.strftime("%A, %B %e, %Y") %></p>
+  <% end %>
+</section>
 
 
