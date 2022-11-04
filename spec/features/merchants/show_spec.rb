@@ -89,9 +89,6 @@ RSpec.describe 'Merchants Dashboard Page' do
           expect(page).to have_content(@customer6.full_name)
         end
       end
-
-      xit 'has the number of successful transactions with the merchant next to each customer' do
-      end
     end
   end
 end

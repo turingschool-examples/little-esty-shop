@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/dashboard', to: 'merchants#show'
 
   resources :merchants, only: [] do
-    resources :items, only: [:index, :show]
+    resources :items, only: [:index, :show, :edit]
     resources :invoices, only: [:index]
   end
+
+  patch "merchants/:merchant_id/items/:id", to: 'items#update'
 end
