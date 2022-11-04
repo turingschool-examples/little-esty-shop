@@ -24,8 +24,8 @@ RSpec.feature "Merchant Items Edit Page", type: :feature do
     it 'redirects to the item show page with the updated information when the form is filled and submitted' do
       visit edit_merchant_item_path(@merchant, @item)
 
-      fill_field 'Name:', with: 'Starry Woods'
-      fill_field 'Description:', with: 'A necklace with a carved wooden pendant.'
+      fill_in 'Name:', with: 'Starry Woods'
+      fill_in 'Description:', with: 'A necklace with a carved wooden pendant.'
       click_button 'Update'
 
       expect(page).to have_current_path(merchant_item_path(@merchant, @item))
@@ -38,8 +38,8 @@ RSpec.feature "Merchant Items Edit Page", type: :feature do
     it 'displays a flash message stating the update is successful when the item is successfully updated' do
       visit edit_merchant_item_path(@merchant, @item)
 
-      fill_field 'Name:', with: 'Starry Woods'
-      fill_field 'Description:', with: 'A necklace with a carved wooden pendant.'
+      fill_in 'Name:', with: 'Starry Woods'
+      fill_in 'Description:', with: 'A necklace with a carved wooden pendant.'
       click_button 'Update'
 
       expect(page).to have_current_path(merchant_item_path(@merchant, @item))
