@@ -103,14 +103,6 @@ RSpec.describe 'Merchants Dashboard Page' do
     end
 
     describe 'items ready to ship' do
-      # US5
-      # As a merchant
-      # When I visit my merchant dashboard
-      # In the section for "Items Ready to Ship",
-      # Next to each Item name I see the date that the invoice was created
-      # And I see the date formatted like "Monday, July 18, 2019"
-      # And I see that the list is ordered from oldest to newest
-
       it 'has a section with list of names of items that have not yet shipped with a link to their merchant invoice show page' do
         visit "/merchants/#{@merchant1.id}/dashboard"
 
@@ -132,6 +124,22 @@ RSpec.describe 'Merchants Dashboard Page' do
         click_on(@invoice1.id.to_s)
 
         expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      end
+
+      xit 'has the date of each item ready to ship from oldest to newest' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@invoice1.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice3.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice4.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice5.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice6.created_at.strftime('%A, %B %e, %Y'))
+          expect(@invoice1.id).to appear_before(@invoice3.id)
+          expect(@invoice3.id).to appear_before(@invoice4.id)
+          expect(@invoice4.id).to appear_before(@invoice5.id)
+          expect(@invoice5.id).to appear_before(@invoice6.id)
+        end
       end
     end
   end
