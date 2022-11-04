@@ -8,7 +8,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
       @merchant_2 = Merchant.create!(name: "Kevin")
 
       @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 1)
-      @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 1)
+      @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 2)
 
       @customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
       @customer_2 = Customer.create!(first_name: "Milly", last_name: "Smith")
