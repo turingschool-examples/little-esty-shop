@@ -200,7 +200,14 @@ RSpec.describe Merchant do
     end
 
     it 'returns most recent top selling date for an item' do 
-
+      @customer1.invoices.create!(status: 0)
+      @invoice4 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-04 11:00:00 UTC")
+      @invoice5 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-02 11:00:00 UTC")
+      @invoice6 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-02 08:00:00 UTC")
+  
+      @item6.invoices << @invoice4 << @invoice5 << @invoice6
+      # require 'pry'; binding.pry
+      expect(@merchant2.most_recent_date).to eq([@invoice4])
     end
   end
 end
