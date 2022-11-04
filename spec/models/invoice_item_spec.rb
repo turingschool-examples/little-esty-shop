@@ -5,6 +5,14 @@ require 'rails_helper'
       it {should belong_to(:invoice)}
       it {should belong_to(:item)}
     end
+    
+    describe 'validations' do
+      it {should validate_presence_of(:quantity)}
+      it {should validate_numericality_of(:quantity)}
+      it {should validate_presence_of(:unit_price)}
+      it {should validate_numericality_of(:unit_price)}
+      it {should validate_presence_of(:status)}
+    end
 
     describe 'model tests' do 
       it 'should show incomplete invoices' do 
@@ -40,13 +48,5 @@ require 'rails_helper'
 
         expect(InvoiceItem.incomplete_invoices).to eq([@invoice_items_2, @invoice_items_3, @invoice_items_4, @invoice_items_5])
       end
-    
-    describe 'validations' do
-      it {should validate_presence_of(:quantity)}
-      it {should validate_numericality_of(:quantity)}
-      it {should validate_presence_of(:unit_price)}
-      it {should validate_numericality_of(:unit_price)}
-      it {should validate_presence_of(:status)}
-    end
   end
 end
