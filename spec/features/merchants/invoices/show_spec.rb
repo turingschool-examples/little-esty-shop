@@ -26,7 +26,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
     end
     describe 'Then I see' do
       it 'invormation related to that invoice' do
-        save_and_open_page
+
         expect(page).to have_content("Invoice # #{@customer_1_invoice_1.id}")
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
           expect(page).to have_content(@customer_1_invoice_1.status.capitalize)
