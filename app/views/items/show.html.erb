@@ -1,4 +1,4 @@
 <p>Item: <%=@item.name%></p>
 <p>Description: <%=@item.description%></p>
-<p>Current price: $<%="#{@item_price}".insert(-3, '.')%></p>
+<p>Current price: $<%=sprintf("%.2f", @item_price.round(2))%></p>
 <%=link_to 'Update item', edit_merchant_item_path(@merchant, @item)%>
