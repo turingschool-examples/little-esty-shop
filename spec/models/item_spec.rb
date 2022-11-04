@@ -19,6 +19,12 @@ RSpec.describe Item do
 
     @item6.invoices << @invoice4 << @invoice5 << @invoice6
     expect(@item6.most_recent_date).to eq([@invoice4.created_at])
+    @invoice7 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-04 12:00:00 UTC")
+
+    @item6.invoices << @invoice4 << @invoice5 << @invoice6 << @invoice7
+    expect(@item6.most_recent_date).to eq([@invoice7.created_at])
+    expect(@item6.most_recent_date).to_not eq([@invoice4.created_at])
+
   end
 
 end
