@@ -14,6 +14,7 @@
   display: table;
   clear: both;
 }
+</style>
 
 <body>
   <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Dashboard" } %>
@@ -21,6 +22,9 @@
   <div class="column">
     <div id="incomplete-invoices">
       <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Incomplete Invoices</h3>
+      <% @incomplete_invoices.each do |invoice| %>
+        <center><%= link_to "Invoice #{invoice.id} -- #{invoice.created_at.strftime("%A, %B %d, %Y")}", "/admin/invoices/#{invoice.id}" %></center>
+      <% end %>
     </div>
   </div>
 
@@ -30,8 +34,8 @@
         <% @five_best_customers.each do |customer| %>
           <center><p><%= "#{customer.first_name} #{customer.last_name}; #{customer.num_success_trans} purchases." %></p></center>
         <% end %>
+    </div>
   </div>
-</div>
 </body>
 
 
