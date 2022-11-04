@@ -48,7 +48,13 @@
                 <th><%= item.name %></th>
                 <th><%= item.invoice_item_quantity(@invoice.id) %></th>
                 <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
-                <th><%= item.invoice_item_status(@invoice.id) %></th>
+                <th>
+                  <%= form_with model: item.invoice_item_by(@invoice.id), local: true do |form| %>
+                    <%= form.label :status %>
+                    <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_status(@invoice.id)}" %>
+                    <%= form.submit 'Update Item Status' %>
+                  <% end %>
+                </th>
               </tr>
             <% end %>
           </table>

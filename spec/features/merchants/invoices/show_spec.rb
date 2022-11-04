@@ -67,7 +67,23 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
 
       it 'total revenue for all items on invoice' do
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
+          save_and_open_page
           expect(page).to have_content(@merchant_1_item_1.unit_price + @merchant_1_item_2.unit_price)
+        end
+      end
+
+      describe 'a form to change the items status' do
+        it 'that has a select field that displays the items current status' do
+          within "#invoice-stats-#{@customer_1_invoice_1.id}" do
+            expect(find 'form').to have_content()
+          end
+        end
+        it 'that allows me to select a new status and update the item by pressing "Update Item Status"' do
+          fill_in '', with: ''
+          click_button "Update Item Status"
+
+          expect(current).to eq()
+          expect(page).to have_content()
         end
       end
     end
