@@ -1,0 +1,12 @@
+
+
+<%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+  <%= form.label :price %>
+  <%= form.number_field :price %>
+  <%= form.hidden_field :status, value: :disabled %>
+  <%= form.submit "Submit" %>
+<% end %>

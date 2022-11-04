@@ -177,6 +177,14 @@ RSpec.describe 'merchant items index page', type: :feature do
         end
       end
 
+      it '- I see a link to create a new item.  when I click the link, I am directed to (/merchants/:id/items/new)' do
+        visit merchant_items_path(@surf_designs)
+
+        click_link 'Create New Item'
+
+        expect(current_path).to eq("/merchants/#{@surf_designs.id}/items/new")
+      end
+
       it "has a section for the top 5 items by revenue for the merchant" do
 
         visit merchant_items_path(@crystal_moon)
