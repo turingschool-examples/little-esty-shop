@@ -40,6 +40,7 @@ RSpec.describe InvoiceItem, type: :model do
 
       expect(InvoiceItem.incomplete_invoices).to eq([@invoice_2.id, @invoice_3.id, @invoice_4.id, @invoice_5.id])
     end
+  end
   
   describe 'validations' do
     it {should validate_presence_of(:quantity)}
