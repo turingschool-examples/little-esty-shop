@@ -24,17 +24,17 @@ RSpec.describe 'Merchants Dashboard Page' do
     @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
     @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant2.id)
-    InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
-    InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
-    InvoiceItem.create!(quantity: 6, unit_price: 600, status: 'pending', item_id: @item1.id, invoice_id: @invoice3.id)
-    InvoiceItem.create!(quantity: 12, unit_price: 1200, status: 'packaged', item_id: @item1.id, invoice_id: @invoice4.id)
-    InvoiceItem.create!(quantity: 8, unit_price: 800, status: 'packaged', item_id: @item1.id, invoice_id: @invoice5.id)
-    InvoiceItem.create!(quantity: 20, unit_price: 2000, status: 'packaged', item_id: @item1.id, invoice_id: @invoice6.id)
-    InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice9.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice10.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice11.id)
+    @invoiceitem1 = InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+    @invoiceitem2 = InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
+    @invoiceitem3 = InvoiceItem.create!(quantity: 6, unit_price: 600, status: 'pending', item_id: @item1.id, invoice_id: @invoice3.id)
+    @invoiceitem4 = InvoiceItem.create!(quantity: 12, unit_price: 1200, status: 'packaged', item_id: @item1.id, invoice_id: @invoice4.id)
+    @invoiceitem5 = InvoiceItem.create!(quantity: 8, unit_price: 800, status: 'packaged', item_id: @item1.id, invoice_id: @invoice5.id)
+    @invoiceitem6 = InvoiceItem.create!(quantity: 20, unit_price: 2000, status: 'packaged', item_id: @item1.id, invoice_id: @invoice6.id)
+    @invoiceitem7 = InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
+    @invoiceitem8 = InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
+    @invoiceitem9 = InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice9.id)
+    @invoiceitem10 = InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice10.id)
+    @invoiceitem11 = InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice11.id)
     @transaction1 = Transaction.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice1.id)
     @transaction2 = Transaction.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice1.id)
     @transaction3 = Transaction.create!(credit_card_number: '4800749911485986', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice2.id)
@@ -99,6 +99,39 @@ RSpec.describe 'Merchants Dashboard Page' do
           expect(page).to have_content("#{@customer5.full_name} - Successful transactions: 1")
           expect(page).to have_content("#{@customer6.full_name} - Successful transactions: 1")
         end
+      end
+    end
+
+    describe 'items ready to ship' do
+      # US5
+      # As a merchant
+      # When I visit my merchant dashboard
+      # In the section for "Items Ready to Ship",
+      # Next to each Item name I see the date that the invoice was created
+      # And I see the date formatted like "Monday, July 18, 2019"
+      # And I see that the list is ordered from oldest to newest
+
+      it 'has a section with list of names of items that have not yet shipped with a link to their merchant invoice show page' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@item1.name)
+          expect(page).to have_content(@invoice1.id)
+          expect(page).to have_content(@invoice3.id)
+          expect(page).to have_content(@invoice4.id)
+          expect(page).to have_content(@invoice5.id)
+          expect(page).to have_content(@invoice6.id)
+          expect(page).to_not have_content(@invoice2.id)
+          expect(page).to have_link(@invoice1.id.to_s)
+          expect(page).to have_link(@invoice3.id.to_s)
+          expect(page).to have_link(@invoice4.id.to_s)
+          expect(page).to have_link(@invoice5.id.to_s)
+          expect(page).to have_link(@invoice6.id.to_s)
+        end
+
+        click_on(@invoice1.id.to_s)
+
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
       end
     end
   end
