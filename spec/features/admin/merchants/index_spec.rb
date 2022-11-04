@@ -15,6 +15,13 @@ RSpec.describe 'the admin merchants index page' do
       expect(page).to have_content(@klein_rempel.name)
       expect(page).to have_content(@whb.name)
     end
+
+    # link to Admin Merchant create
+    it 'has a link to create a new merchant' do 
+      click_button 'Create New Merchant'
+
+      expect(current_path).to eq(new_admin_merchant_path)
+    end
   end
 
   # Admin Merchant Enable/Disable
