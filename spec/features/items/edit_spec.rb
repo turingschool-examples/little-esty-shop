@@ -21,17 +21,5 @@ RSpec.describe 'item edit page', type: :feature do
 
       expect(page).to have_content("Successfully Updated #{lamp.name}")
     end
-
-    it 'flashes an error message when trying to update with invalid info' do
-      visit edit_merchant_item_path(nomi, lamp)
-
-      fill_in :name, with:  " "
-
-      click_button 'Update Item'
-
-      expect(current_path).to eq(edit_merchant_item_path(nomi, lamp))
-
-      expect(page).to have_content("Name can't be blank")
-    end
   end
 end
