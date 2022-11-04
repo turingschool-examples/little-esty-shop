@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
-  before(:each) do 
+  before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
 
@@ -26,7 +26,7 @@ RSpec.describe Invoice, type: :model do
     @customer_5_invoice_1 = @customer5.invoices.create!(status: 1)
 
     @customer_6_invoice_1 = @customer6.invoices.create!(status: 1)
-    @customer_6_invoice_2 = @customer6.invoices.create!(status: 0) 
+    @customer_6_invoice_2 = @customer6.invoices.create!(status: 2)
   end
 
   describe "Relationships" do
@@ -36,9 +36,9 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:items).through(:invoice_items) }
   end
 
-  describe 'class methods' do 
-    describe '#incomplete_invoices' do 
-      it 'returns the invoices that are still in progress' do 
+  describe 'class methods' do
+    describe '#incomplete_invoices' do
+      it 'returns the invoices that are still in progress' do
         expect(Invoice.incomplete_invoices).to eq([@customer_6_invoice_2])
       end
     end

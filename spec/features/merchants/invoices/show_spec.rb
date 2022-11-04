@@ -29,7 +29,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
 
         expect(page).to have_content("Invoice # #{@customer_1_invoice_1.id}")
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
-          expect(page).to have_content(@customer_1_invoice_1.status.capitalize)
+          expect(page).to have_content(@customer_1_invoice_1.status)
           expect(page).to have_content(@customer_1_invoice_1.created_at.strftime("%A, %d %B %Y"))
         end
         within "#customer-info-#{@customer_1_invoice_1.id}" do
@@ -47,12 +47,12 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           expect(page).to have_content(@merchant_1_item_1.name)
           expect(page).to have_content(@invoice_item_1.quantity)
           expect(page).to have_content(@merchant_1_item_1.unit_price)
-          expect(page).to have_content(@invoice_item_1.status.capitalize)
+          expect(page).to have_content(@invoice_item_1.status)
 
           expect(page).to have_content(@merchant_1_item_2.name)
           expect(page).to have_content(@invoice_item_2.quantity)
           expect(page).to have_content(@merchant_1_item_2.unit_price)
-          expect(page).to have_content(@invoice_item_2.status.capitalize)
+          expect(page).to have_content(@invoice_item_2.status)
         end
       end
 
@@ -61,7 +61,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           expect(page).to_not have_content(@merchant_2_item_1.name)
           expect(page).to_not have_content(@invoice_item_3.quantity)
           expect(page).to_not have_content(@merchant_2_item_1.unit_price)
-          expect(page).to_not have_content(@invoice_item_3.status.capitalize)
+          expect(page).to_not have_content(@invoice_item_3.status)
         end
       end
 
