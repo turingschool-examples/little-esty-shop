@@ -124,6 +124,17 @@ RSpec.describe 'merchant items index page' do
 
     it 'top selling date for each item was date with most sales' do 
       visit "/merchants/#{@merchant2.id}/items"
+      @merchant2 = Merchant.create!(name: 'East India Trading Company', status: 'Disabled')
+      @item6 = @merchant2.items.create!(name: 'Kevin Ta Action Figure', description: 'The coolest action figure around!', unit_price: 10000)
+      @customer1 = Customer.create!(first_name: 'Dandy', last_name: 'Dan')
+
+      @customer1.invoices.create!(status: 0)
+      @invoice4 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-04 11:00:00 UTC")
+      @invoice5 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-02 11:00:00 UTC")
+      @invoice6 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-02 08:00:00 UTC")
+  
+      @item6.invoices << @invoice4 << @invoice5 << @invoice6
+      expect(page).to have_content(@invoice4.created_at.strftime('%A, %B %d, %Y'))
     end
   end
 end

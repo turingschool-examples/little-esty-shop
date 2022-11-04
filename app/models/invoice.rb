@@ -10,10 +10,5 @@ class Invoice < ApplicationRecord
   def total_revenue #for an invoice 
     invoice_items.sum("quantity * unit_price")
   end
-
-  def self.order_by_creation_date
-    Invoice.order('created_at DESC').limit(1) 
-  end
-
   
 end
