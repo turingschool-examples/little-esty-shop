@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     #creates routes for merchants and merchant_items 
     resources :invoices
   end
-
+  
 
   resources :invoice_items
 
