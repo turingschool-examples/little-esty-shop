@@ -199,8 +199,8 @@ RSpec.describe Merchant do
       expect(@merchant2.most_popular_items).to eq([@item6, @item5, @item4, @item3, @item2])
     end
 
-    it 'has has date with most sales for each of the 5 items' do 
-      
+    it 'returns most recent top selling date for an item' do 
+
     end
   end
 end

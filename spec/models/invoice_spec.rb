@@ -37,4 +37,13 @@ RSpec.describe Invoice do
     expect(@invoice2.total_revenue).to eq(20000.00) 
 
   end
+
+  it 'find most recent creation date on an invoice' do 
+    @invoice4 = Invoice.create!(status: 1, customer_id: @customer2.id, created_at: "2022-11-04 11:00:00 UTC")
+    @invoice5 = Invoice.create!(status: 1, customer_id: @customer1.id, created_at: "2022-11-02 11:00:00 UTC")
+    @invoice5 = Invoice.create!(status: 1, customer_id: @customer1.id, created_at: "2022-11-02 08:00:00 UTC")
+
+    # require 'pry'; binding.pry
+    expect(Invoice.order_by_creation_date).to eq([@invoice4])
+  end
 end
