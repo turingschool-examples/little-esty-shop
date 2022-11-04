@@ -17,33 +17,9 @@ class ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    if params[:commit] == 'Update'
-      if item.update(item_params)
-        flash[:notice] = 'Item updated successfully!'
-        redirect_to merchant_item_path(item.merchant, item)
-      else
-        flash.now[:alert] = item.errors.full_messages
-        render :edit
-      end
-    end
-    if params[:button] == 'true' 
-      if item.status == 'enabled'
-      # item.status = 'disabled'
-      item.update!(status: 'disabled')
-      else
-      # item.status = 'enabled'
-      item.update!(status: 'enabled')
-      end
-      redirect_to "/merchants/#{item.merchant.id}/items"
-    end
-    # item.save
-    
-  end
-
-  private 
-  def item_params
-  params.permit(:name, :description, :unit_price)
+    @item = Item.find(params[:id])
+    edit_form_submission
+    enable_disable_toggle
   end
 
   def new
@@ -57,7 +33,31 @@ class ItemsController < ApplicationController
     redirect_to "/merchants/#{@merchant.id}/items"
   end
 
+  def edit_form_submission
+    if params[:commit] == 'Update'
+      if @item.update(item_params)
+        flash[:notice] = 'Item updated successfully!'
+        redirect_to merchant_item_path(@item.merchant, @item)
+      else
+        flash.now[:alert] = @item.errors.full_messages
+        render :edit
+      end
+    end
+  end
+
+  def enable_disable_toggle
+    if params[:button] == 'true' 
+      if @item.status == 'enabled'
+        @item.update!(status: 'disabled')
+      else
+        @item.update!(status: 'enabled')
+      end
+      redirect_to "/merchants/#{@item.merchant.id}/items"
+    end
+  end
+
   private
+
   def item_params
     params.permit(:name, :description, :unit_price, :status)
   end
