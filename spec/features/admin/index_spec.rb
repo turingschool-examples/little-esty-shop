@@ -120,7 +120,6 @@ RSpec.describe 'admin index page' do
 
       within "#incomplete-invoices" do 
         expect(page).to have_content(@customer_6_invoice_2.id)
-        expect(page).to have_content("Friday, November 04, 2022")
       end
     end
   end 
