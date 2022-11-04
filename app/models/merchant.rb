@@ -32,7 +32,7 @@ class Merchant < ApplicationRecord
         .group(:id, :name)
         .order(Arel.sql("sum(quantity * invoice_items.unit_price) desc"))
         .limit(5)
-        .sum('invoice_items.quantity * invoice_items.unit_price')
+        .sum('quantity * invoice_items.unit_price')
   end
 end
 
