@@ -134,7 +134,9 @@ RSpec.describe 'merchant items index page' do
       @invoice6 = Invoice.create!(status: 0, customer_id: @customer1.id, created_at: "2022-11-02 08:00:00 UTC")
   
       @item6.invoices << @invoice4 << @invoice5 << @invoice6
-      expect(page).to have_content(@invoice4.created_at.strftime('%A, %B %d, %Y'))
+      # require 'pry'; binding.pry
+      expect(page).to have_content("Friday, November 04, 2022")
+      
     end
   end
 end

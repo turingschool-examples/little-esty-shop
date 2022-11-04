@@ -35,10 +35,9 @@
   <div class= "column", id= "top_items">
     <h2>Top Items</h2>
     <%@merchant.most_popular_items.each do |item|%>
-      <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %> - <%=item.revenue%> in sales</p>
-      <%item.invoices.each do |invoice| %>
-        <%=invoice.created_at.strftime('%A, %B %d, %Y')%><%=@merchant.most_recent_date%>
-      <%end%>
+      <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
+      <%=item.revenue%> in sales</p><%=item.most_recent_date.pluck(:created_at)%>
+
     <%end%>
   </div>
 

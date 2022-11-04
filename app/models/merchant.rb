@@ -37,9 +37,9 @@ class Merchant < ApplicationRecord
     Item.select('sum(invoice_items.quantity* invoice_items.unit_price) as revenue').joins(:invoice_items, :transactions).where("transactions.result = 0").where("items.merchant_id = ?", self.id).group(:id)
   end
 
-  def most_recent_date
-    invoices.where(status: 0).distinct.order(created_at: :desc).limit(1)
-  end
+  # def most_recent_date
+  #   invoices.where(status: 0).order(created_at: :desc).distinct
+  # end
 
 
 end
