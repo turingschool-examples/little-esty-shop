@@ -12,11 +12,6 @@ class Merchant < ApplicationRecord
   end
 
   def top_five_customers
-    # # successes = invoices.where(id: transactions.where(result: 'success').pluck(:invoice_id))
-    # x = successes.group(:customer_id).count
-    # x = x.sort_by { |k,v| 0 - v }.map { |a| a[0] }
-    # Customer.find(x)[0..4]
-
     Customer.select('customers.*, count(transactions.*) as num_transactions').joins(invoices: [:transactions, :items]).where("transactions.result = 0").where("items.merchant_id = ?", self.id).order('num_transactions desc').group(:id).limit(5)
   end
 
@@ -42,5 +37,4 @@ class Merchant < ApplicationRecord
     Item.select('sum(invoice_items.quantity* invoice_items.unit_price) as revenue').joins(:invoice_items, :transactions).where("transactions.result = 0").where("items.merchant_id = ?", self.id).group(:id)
 
   end
-
 end
