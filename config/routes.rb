@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   end
 
   get "/admin", to: "admin#index"
-
+ 
   namespace(:admin) do
-    resources :merchants, only: [:edit, :index, :show]
+    resources :merchants, except: [:destroy]
+    resources :invoices, only: [:show, :index]
   end
 end
