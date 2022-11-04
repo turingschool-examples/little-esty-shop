@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-  enum status: ["in progress", "completed", "cancelled"]
+  enum status: ["Cancelled", "Completed", "In Progress"]
 
   belongs_to :customer
   
