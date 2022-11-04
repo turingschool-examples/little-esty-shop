@@ -19,7 +19,7 @@ RSpec.feature "Merchant Items Edit Page", type: :feature do
 
       expect(page).to have_field('Name:', with: 'Wooden Necklace')
       expect(page).to have_field('Description:', with: 'A necklace with wood beads.')
-      expect(page).to have_field('Current price:', with: 1000)
+      expect(page).to have_field('Price:', with: 1000)
     end
     it 'redirects to the item show page with the updated information when the form is filled and submitted' do
       visit edit_merchant_item_path(@merchant, @item)

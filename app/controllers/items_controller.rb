@@ -9,6 +9,11 @@ class ItemsController < ApplicationController
     @item_price = @item.unit_price
   end 
 
+  def edit 
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
+  end
+
   def update
     item = Item.find(params[:id])
     if params[:button] == 'true' && item.status == 'enabled'
