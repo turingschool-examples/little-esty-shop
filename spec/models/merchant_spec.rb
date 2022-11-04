@@ -95,7 +95,7 @@ RSpec.describe Merchant, type: :model do
 
     describe '#top_5_items' do
       it "returns the 5 items with the highest total revenue generated" do
-        expect(@crystal_moon.top_5_items).to eq({"Moon Rock" => 210, "Emerald" => 170, "Ruby" => 130, "Amethyst" => 110, "Topaz" => 110})
+        expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock"] => 210, [@emerald.id, "Emerald"] => 170, [@ruby.id, "Ruby"] => 130, [@amethyst.id, "Amethyst"] => 110, [@topaz.id, "Topaz"] => 110})
       end
     end
   end
