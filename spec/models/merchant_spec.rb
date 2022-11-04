@@ -198,5 +198,9 @@ RSpec.describe Merchant do
     it 'returns top 5 items ranked by total revenue generated' do 
       expect(@merchant2.most_popular_items).to eq([@item6, @item5, @item4, @item3, @item2])
     end
+
+    it 'has has date with most sales for each of the 5 items' do 
+      
+    end
   end
 end

@@ -37,6 +37,7 @@
     <%@merchant.most_popular_items.each do |item|%>
       <p><%=link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
       <%item.invoices.each do |invoice|%>- <%=item.revenue%> in sales</p>
+      <%=invoice.created_at.strftime('%A, %B %d, %Y')%>
       <%end%>
     <%end%>
   </div>

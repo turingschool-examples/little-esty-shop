@@ -123,7 +123,8 @@ RSpec.describe 'merchant items index page' do
     end
 
     it 'top selling date for each item was date with most sales' do 
-
+      visit "/merchants/#{@merchant2.id}/items"
+      save_and_open_page
     end
   end
 end
