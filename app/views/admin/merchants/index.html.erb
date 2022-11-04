@@ -1,8 +1,48 @@
-<h2>Admin Merchants Index</h2>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 
-
-  <% @merchants.each do |merchant| %>
-
-    <li><%= link_to "#{merchant.name}",admin_merchant_path(merchant.id) %></li>
-  <% end %>
+<body>
+  <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Merchants Index Page" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">My Items</h3>
+  <div class="row">
+    <div class="column">
+      <div id="Enabled">
+        <h2>Enabled Merchants</h2>
+        <% @enabled_merchants.each do |merchant| %>
+          <div id="merchant-<%=merchant.id%>">
+            <p style="display:inline-block">
+              <%= link_to "#{merchant.name}",admin_merchant_path(merchant.id) %>
+              <%= button_to "Disable",admin_merchant_path(merchant.id),form: {style: 'display:inline-block;padding-left:1em'}, method: :patch, params: {status: "disabled"}  %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      <div id="Disabled">
+        <h2>Disabled Merchants</h2>
+        <% @disabled_merchants.each do |merchant| %>
+          <div id="merchant-<%=merchant.id%>">
+            <p style="display:inline-block">
+              <%= link_to "#{merchant.name}",admin_merchant_path(merchant.id) %>
+              <%= button_to "Enable",admin_merchant_path(merchant.id),form: {style: 'display:inline-block;padding-left:1em'}, method: :patch, params: {status: "enabled"}  %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
