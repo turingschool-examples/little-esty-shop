@@ -63,4 +63,13 @@ RSpec.describe 'the admin merchants index page' do
       end
     end
   end
+
+  # Top 5 Merchants
+  describe 'top 5 merchants by revenue' do 
+    it 'it shows the top 5 merchants by revenue'
+  end
+
+  # Top Merchant's Best Day
+  describe 'top merchants best day' do 
+  end
 end

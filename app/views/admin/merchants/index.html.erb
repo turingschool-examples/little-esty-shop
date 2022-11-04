@@ -3,24 +3,43 @@
 
 <%= button_to 'Create New Merchant', new_admin_merchant_path, method: :get %>
 
-<section id='enabled'>
-  <h3>Enabled Merchants</h3>
-  <% @merchants.all_enabled.each do |merchant| %>
-    <section id="merchant-<%= merchant.id %>">
-      <p><strong><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></strong> <%= merchant.status %>
-      <%= button_to "Disable", admin_merchant_path(merchant.id), method: :patch, params: { status: 'Disabled' } %>
-      </p>
-    </section>
-  <% end %>
-</section>
+<div class="row">
+  <style>
+    .column {
+    float: left;
+    width: 50%;
+    }
+  </style>
 
-<section id='disabled'>
-  <h3>Disabled Merchants</h3>
-  <% @merchants.all_disabled.each do |merchant| %>
-    <section id="merchant-<%= merchant.id %>">
-      <p><strong><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></strong> <%= merchant.status %>
-      <%= button_to "Enable", admin_merchant_path(merchant.id), method: :patch, params: { status: 'Enabled' }  %>
-      </p>
+  <div class="column", id="enable_disable"> 
+    <section id='enabled'>
+      <h3>Enabled Merchants</h3>
+      <% @merchants.all_enabled.each do |merchant| %>
+        <section id="merchant-<%= merchant.id %>">
+          <p><strong><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></strong> <%= merchant.status %>
+          <%= button_to "Disable", admin_merchant_path(merchant.id), method: :patch, params: { status: 'Disabled' } %>
+          </p>
+        </section>
+      <% end %>
     </section>
-  <% end %>
-</section>
+
+    <section id='disabled'>
+      <h3>Disabled Merchants</h3>
+      <% @merchants.all_disabled.each do |merchant| %>
+        <section id="merchant-<%= merchant.id %>">
+          <p><strong><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></strong> <%= merchant.status %>
+          <%= button_to "Enable", admin_merchant_path(merchant.id), method: :patch, params: { status: 'Enabled' }  %>
+          </p>
+        </section>
+      <% end %>
+    </section>
+  </div>
+
+   <!-- Put Top 5 Merchants By Revenue in this <div> -->
+  <div class='column', id='top_merchants'>
+    <h3>Top Merchant's Best Day</h3>
+    <section id='best_day'>
+
+    </section>
+  </div>
+</div>
