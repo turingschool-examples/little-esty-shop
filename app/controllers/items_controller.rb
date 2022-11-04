@@ -7,4 +7,13 @@ class ItemsController < ApplicationController
       @items = Item.all
     end
   end
+
+  def show
+    if params[:merchant_id]
+      @merchant = Merchant.find(params[:merchant_id])
+      @item = @merchant.items.find(params[:id])
+    else
+      @item = Item.find(params[:id])
+    end
+  end
 end

@@ -15,7 +15,7 @@ RSpec.describe "Merchant Items Index Page" do
       it "I see a list of names of all of my items and do not see items for any other merchant" do
 
       visit "/merchants/#{@merchant1.id}/items"
-      # save_and_open_page
+      #  save_and_open_page
 
       expect(page).to have_content("#{@merchant1.name} Inventory")
 
