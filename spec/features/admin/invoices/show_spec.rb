@@ -48,5 +48,10 @@ RSpec.describe 'Admin Invoice Show Page' do
       expect(page).to have_content("Status: pending")
       expect(page).to_not have_content("Item: UFO Board")
     end
+
+    it 'i see total revenue that will be generated from this invoice' do 
+      visit admin_invoice_path(@invoice1)
+      expect(page).to have_content("Total Revenue: 15000")
+    end
   end
 end
