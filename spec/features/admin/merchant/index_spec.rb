@@ -19,7 +19,7 @@ RSpec.describe "admin/merchants index page" do
       expect(page).to have_content(@merchant_2.name)
       expect(page).to have_content(@merchant_3.name)
       expect(page).to have_content(@merchant_4.name)
-      
+     
     end
    end
 

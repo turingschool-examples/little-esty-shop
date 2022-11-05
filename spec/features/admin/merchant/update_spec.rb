@@ -16,8 +16,7 @@ RSpec.describe "admin/merchants-show page" do
        
         click_link "Update Merchant"
         expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
-        
-        #visit "/admin/merchants/#{@merchant_1.id}/edit" 
+
   
         #within("#merchant-#{@merchant_1.id}") do
         fill_in :name, with: "Ms. Marvel"
@@ -26,6 +25,13 @@ RSpec.describe "admin/merchants-show page" do
         expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
         expect(page).to have_content("Successfully Updated: Ms. Marvel")
         expect(page).to have_content("Ms. Marvel")
-        #save_and_open_page
+        save_and_open_page
     end
 end
+
+
+# <% flash.each do |type, msg|%>
+#    <div>
+#     <%=msg%>
+#    </div>
+#   <% end %>

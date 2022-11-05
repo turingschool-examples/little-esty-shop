@@ -40,6 +40,7 @@ RSpec.describe "admin/merchants-show page" do
     visit "/admin/merchants"
     
     expect(current_path).to eq("/admin/merchants")
+    save_and_open_page
     expect(page).to have_button("Enable Merchant")
     expect(page).to have_button("Disable Merchant")
     
