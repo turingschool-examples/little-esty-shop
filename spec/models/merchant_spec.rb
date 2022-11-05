@@ -26,7 +26,7 @@ RSpec.describe Merchant, type: :model do
     @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # marvel
     @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
     @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
-    @invoice4 = Invoice.create!(status: 'canceled', customer_id: @customer4.id) # marvel
+    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id) # marvel
     @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
     @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
     @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id) # D.C.
