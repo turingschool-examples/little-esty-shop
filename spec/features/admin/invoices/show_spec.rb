@@ -76,6 +76,7 @@ RSpec.describe 'Admin Invoice Show Page' do
 
         @invoice1.reload.status
         expect(@invoice1.status).to eq('cancelled')
+        expect(@invoice1.status).to_not eq('in progress')
       end
     end
   end

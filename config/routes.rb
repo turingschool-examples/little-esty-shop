@@ -12,8 +12,7 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     resources :merchants
-    resources :invoices, only: [:show, :update]  
-  
+    resources :invoices 
   end
   # patch 'admin/invoices/:id', to: 'admin/invoices#update'
 
