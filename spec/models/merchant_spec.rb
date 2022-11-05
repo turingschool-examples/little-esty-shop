@@ -199,4 +199,51 @@ RSpec.describe Merchant do
       expect(@merchant2.most_popular_items).to eq([@item6, @item5, @item4, @item3, @item2])
     end
   end
+
+  describe 'top merchants' do 
+    before(:each) do
+      InvoiceItem.destroy_all
+      Item.destroy_all
+      Merchant.destroy_all
+
+      @merch1 = Merchant.create!(name: 'Merchant1')
+      @merch2 = Merchant.create!(name: 'Merchant2')
+      @merch3 = Merchant.create!(name: 'Merchant3')
+      @merch4 = Merchant.create!(name: 'Merchant4')
+      @merch5 = Merchant.create!(name: 'Merchant5')
+
+      @merch1item = @merch1.items.create!(name: 'Item')
+      @merch2item = @merch2.items.create!(name: 'Item')
+      @merch3item = @merch3.items.create!(name: 'Item')
+      @merch4item = @merch4.items.create!(name: 'Item')
+      @merch5item = @merch5.items.create!(name: 'Item')
+
+      @inv1 = @customer1.invoices.create!(status: 2)
+      @inv2 = @customer1.invoices.create!(status: 2)
+      @inv3 = @customer1.invoices.create!(status: 2)
+      @inv4 = @customer1.invoices.create!(status: 2)
+      @inv5 = @customer1.invoices.create!(status: 2)
+
+      InvoiceItem.create!(invoice: @inv1, item: @merch1item, quantity: 5, unit_price: 20000)
+      InvoiceItem.create!(invoice: @inv2, item: @merch2item, quantity: 5, unit_price: 10000)
+      InvoiceItem.create!(invoice: @inv3, item: @merch3item, quantity: 5, unit_price: 40000)
+      InvoiceItem.create!(invoice: @inv4, item: @merch4item, quantity: 5, unit_price: 50000)
+      InvoiceItem.create!(invoice: @inv5, item: @merch5item, quantity: 5, unit_price: 30000)
+
+      @inv1.transactions.create!(result: 0)
+      @inv2.transactions.create!(result: 0)
+      @inv3.transactions.create!(result: 0)
+      @inv4.transactions.create!(result: 0)
+      @inv5.transactions.create!(result: 0)
+    end
+
+    it 'returns list of top 5 merchants in order of revenue generated' do 
+      expect(Merchant.top_five_merchants_by_revenue).to eq([@merch4, @merch3, @merch5, @merch1, @merch2])
+    end
+
+    it 'can calculate total merchant revenue' do 
+      expect(@merch3.total_revenue).to eq(200000)
+      expect(@merch2.total_revenue).to eq(50000)
+    end
+  end
 end
