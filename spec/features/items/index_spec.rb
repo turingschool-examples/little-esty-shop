@@ -87,15 +87,21 @@ RSpec.describe 'merchant items index page' do
       @item6 = @merchant2.items.create!(name: 'Kevin Ta Action Figure', description: 'The coolest action figure around!', unit_price: 10000)
       @item7 = @merchant2.items.create!(name: 'Water Bottle', description: 'Drink water!', unit_price: 10)
       @customer5 = Customer.create!(first_name: 'Swell', last_name: 'Sally')
-      @invoice6 = @customer5.invoices.create!(status: 1)
+      @invoice6 = @customer5.invoices.create!(status: 2, created_at: "2020-10-04 11:00:00 UTC")
+      @invoice7 = @customer5.invoices.create!(status: 2, created_at: "2022-11-02 11:00:00 UTC")
+      @invoice8 = @customer5.invoices.create!(status: 2, created_at: "2010-7-02 08:00:00 UTC")
+      @invoice6 = @customer5.invoices.create!(status: 2, created_at: "2020-2-02 08:00:00 UTC")
+
       InvoiceItem.create!(invoice: @invoice6, item: @item2, quantity: 1, unit_price: 20)
-      InvoiceItem.create!(invoice: @invoice6, item: @item3, quantity: 1, unit_price: 30)
-      InvoiceItem.create!(invoice: @invoice6, item: @item4, quantity: 1, unit_price: 40)
+      InvoiceItem.create!(invoice: @invoice8, item: @item3, quantity: 1, unit_price: 30)
+      InvoiceItem.create!(invoice: @invoice7, item: @item4, quantity: 1, unit_price: 40)
       InvoiceItem.create!(invoice: @invoice6, item: @item5, quantity: 1, unit_price: 50)
-      InvoiceItem.create!(invoice: @invoice6, item: @item6, quantity: 1, unit_price: 60)
+      InvoiceItem.create!(invoice: @invoice8, item: @item6, quantity: 1, unit_price: 60)
       InvoiceItem.create!(invoice: @invoice6, item: @item7, quantity: 1, unit_price: 10)
 
       @invoice6.transactions.create!(result: 0)
+      @invoice7.transactions.create!(result: 0)
+      @invoice8.transactions.create!(result: 0)
 
     end
     it 'lists top 5 most popular items ranked by total revenue' do 
@@ -111,8 +117,8 @@ RSpec.describe 'merchant items index page' do
     end
     it 'each popular item shows total revenue and links to show page for item' do 
       visit "/merchants/#{@merchant2.id}/items"
-      expect(page).to have_content("Folder - 50 in sales")
-      expect(page).to have_content("Pencil - 20 in sales")
+      expect(page).to have_content("Folder: 50 in sales")
+      expect(page).to have_content("Pencil: 20 in sales")
       expect(page).to_not have_content("Water Bottle - 10 in sales")
     end
 
@@ -121,9 +127,14 @@ RSpec.describe 'merchant items index page' do
       click_link("Folder")
       expect(current_path).to eq("/merchants/#{@merchant2.id}/items/#{@item5.id}")
     end
+   
 
     it 'top selling date for each item was date with most sales' do 
-
+      visit "/merchants/#{@merchant2.id}/items"
+      
+      expect(page).to have_content("Top Selling Date For Kevin Ta Action Figure was Friday, July 02, 2010")
+      expect(page).to have_content("Top Selling Date For Folder was Sunday, February 02, 2020")
+      expect(page).to have_content("Top Selling Date For Eraser was Wednesday, November 02, 2022")
     end
   end
 end
