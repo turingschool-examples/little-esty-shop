@@ -1,18 +1,20 @@
 <div id= 'admin-invoice-status-<%=@invoice.id%>'>
 <p>Invoice ID: <%= @invoice.id%></p>
 <p>Invoice Status: <%= @invoice.status%></p>
-  <%=form_with url: admin_invoice_path(@invoice), method: :patch, local: true do |f| %>
+  <%=form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
     <%= f.label :status, "cancelled" %>  
     <%= f.radio_button :status, "cancelled", :checked => @invoice.status == "cancelled" %>
     <%= f.label :status, "in progress"%>  
     <%= f.radio_button :status, "in progress", :checked => @invoice.status == "in progress" %>
-    <%= f.label :status, "in progress" %>  
+    <%= f.label :status, "completed" %>  
     <%= f.radio_button :status, "completed", :checked => @invoice.status == "completed" %>
     <%= f.submit "Update Invoice Status" %>
   <%end%>
 </div>  
 <p>Invoice Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y")%></p>
 <p>Invoice's Customer Name: <%= @invoice.customer.name %></p>
+
+
 <%@invoice.items.each do |item|%>
   <p>Item: <%=item.name%></p>
   <p>Quantity: <%item.invoice_items.each do |invoice_item| %>

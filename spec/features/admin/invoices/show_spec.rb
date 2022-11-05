@@ -68,9 +68,14 @@ RSpec.describe 'Admin Invoice Show Page' do
       visit admin_invoice_path(@invoice1)
       within "#admin-invoice-status-#{@invoice1.id}" do 
         expect(page).to have_checked_field(checked: 'in progress')
-        first(:radio_button, 'status').click
+        expect(@invoice1.status).to eq('in progress')
+
+        first(:radio_button, 'status').click 
         click_button("Update Invoice Status")
         expect(page).to have_checked_field(checked: 'cancelled')
+
+        @invoice1.reload.status
+        expect(@invoice1.status).to eq('cancelled')
       end
     end
   end
