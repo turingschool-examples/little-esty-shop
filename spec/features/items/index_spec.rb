@@ -131,7 +131,7 @@ RSpec.describe 'merchant items index page' do
 
     it 'top selling date for each item was date with most sales' do 
       visit "/merchants/#{@merchant2.id}/items"
-
+      
       expect(page).to have_content("Top Selling Date For Kevin Ta Action Figure was Friday, July 02, 2010")
       expect(page).to have_content("Top Selling Date For Folder was Sunday, February 02, 2020")
       expect(page).to have_content("Top Selling Date For Eraser was Wednesday, November 02, 2022")
