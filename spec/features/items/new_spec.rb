@@ -59,6 +59,18 @@ RSpec.describe "Merchant Item New Page" do
           end
         end
       end
+
+      describe "Sad path testing :(" do
+        it "returns an error if content is missing from the form and redirects back to new page again" do
+          visit "/merchants/#{@merchant1.id}/items/new"
+
+          click_button("Create Item")
+
+          expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+          expect(page).to have_content("Required content missing or unit price is invalid")
+          # save_and_open_page
+        end
+      end
     end
   end
 end

@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
       redirect_to "/merchants/#{@merchant.id}/items"
     else
       flash[:error] = "Required content missing or unit price is invalid"
-      render.new
+      redirect_to "/merchants/#{@merchant.id}/items/new"
     end
   end
 

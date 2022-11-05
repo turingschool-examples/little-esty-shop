@@ -1,5 +1,5 @@
 <div id= "create_item">
-  <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
+  <%= form_with model: @item, url: merchant_items_path(@merchant), local: true do |form| %>
 
     <%= form.label "Name:" %>
     <%= form.text_field :name %>
