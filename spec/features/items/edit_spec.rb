@@ -33,16 +33,16 @@ RSpec.describe "Merchant Items Edit Page" do
           # save_and_open_page
 
         within("#edit_form") do
-        expect(page).to have_content("Name:")
-        expect(page).to have_field(:item_name)
+          expect(page).to have_content("Name:")
+          expect(page).to have_field(:item_name)
 
-        expect(page).to have_content("Description:")
-        expect(page).to have_field(:item_description)
+          expect(page).to have_content("Description:")
+          expect(page).to have_field(:item_description)
 
-        expect(page).to have_content("Current selling price:")
-        expect(page).to have_field(:item_unit_price)
+          expect(page).to have_content("Current selling price:")
+          expect(page).to have_field(:item_unit_price)
 
-        expect(page).to have_button("Update Information")
+          expect(page).to have_button("Update Information")
         end
       end
 
