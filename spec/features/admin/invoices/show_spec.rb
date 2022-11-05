@@ -25,7 +25,13 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   describe 'as an admin when i visit admin invoice show page' do 
     it 'i see invoice id, status, crated at date, and customer first and last name' do 
-      
+      visit admin_invoice_path(@invoice1)
+      # require 'pry'; binding.pry
+      expect(page).to have_content("Invoice ID: #{@invoice1.id}")
+      expect(page).to have_content("Invoice Status: in progress")
+      expect(page).to have_content("Invoice Created on: Tuesday, November 01, 2022")
+      expect(page).to have_content("Invoice's Customer Name: Sergio Azcona")
+
     end
   end
 end
