@@ -47,12 +47,10 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           expect(page).to have_content(@merchant_1_item_1.name)
           expect(page).to have_content(@invoice_item_1.quantity)
           expect(page).to have_content(@merchant_1_item_1.unit_price)
-          expect(page).to have_content(@invoice_item_1.status)
 
           expect(page).to have_content(@merchant_1_item_2.name)
           expect(page).to have_content(@invoice_item_2.quantity)
           expect(page).to have_content(@merchant_1_item_2.unit_price)
-          expect(page).to have_content(@invoice_item_2.status)
         end
       end
 
@@ -61,7 +59,6 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           expect(page).to_not have_content(@merchant_2_item_1.name)
           expect(page).to_not have_content(@invoice_item_3.quantity)
           expect(page).to_not have_content(@merchant_2_item_1.unit_price)
-          expect(page).to_not have_content(@invoice_item_3.status)
         end
       end
 
@@ -82,7 +79,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           fill_in '', with: ''
           click_button "Update Item Status"
 
-          expect(current).to eq()
+          expect(current_path).to eq()
           expect(page).to have_content()
         end
       end
