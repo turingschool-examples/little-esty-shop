@@ -38,8 +38,15 @@ RSpec.describe 'Admin Invoice Show Page' do
 
     it 'i see all of items on invoice and item name, quantity, price, and invoice item status' do 
       visit admin_invoice_path(@invoice1)
-      expect(page).to have_content("Item: #{@item1.name}")
-
+      expect(page).to have_content("Item: Funny Brick of Powder")
+      expect(page).to have_content("Quantity: 1")
+      expect(page).to have_content("Price: 5000")
+      expect(page).to have_content("Status: packaged")
+      expect(page).to have_content("Item: T-Rex")
+      expect(page).to have_content("Quantity: 2")
+      expect(page).to have_content("Price: 5000")
+      expect(page).to have_content("Status: pending")
+      expect(page).to_not have_content("Item: UFO Board")
     end
   end
 end
