@@ -1,15 +1,22 @@
 <h2>Admin Merchants Index</h2>
 
-<% @merchants.each do |merchant|  %>
-<%= merchant.name %>
-  <h3>Edit-Merchant:<%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %></h3>
-<div> 
-<h3> Enabled Merchants:  </h3>
 
-<h3> Disabled Merchants </h3>
+
+<div id="enabled_merchants"> 
+  <h3> Enabled Merchants  </h3>
+
+  <% @merchants.each do |merchant|  %>
+    <div id="merchant-<%= merchant.id %>">
+      <p><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %></p>
+    </div>
+  <% end %> 
+  
+</div>
+
+<div id="disabled_merchants">
+  <h3> Disabled Merchants </h3>
 
 </div>
-<% end %> 
 
 
 
