@@ -89,6 +89,58 @@ RSpec.describe 'Merchants Dashboard Page' do
           expect(page).to have_content(@customer6.full_name)
         end
       end
+
+      it 'has the number of successful transactions with the merchant next to each customer' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+        within('#top_customers') do
+          expect(page).to have_content("#{@customer2.full_name} - Successful transactions: 3")
+          expect(page).to have_content("#{@customer3.full_name} - Successful transactions: 2")
+          expect(page).to have_content("#{@customer1.full_name} - Successful transactions: 1")
+          expect(page).to have_content("#{@customer5.full_name} - Successful transactions: 1")
+          expect(page).to have_content("#{@customer6.full_name} - Successful transactions: 1")
+        end
+      end
+    end
+
+    describe 'items ready to ship' do
+      it 'has a section with list of names of items that have not yet shipped with a link to their merchant invoice show page' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@item1.name)
+          expect(page).to have_content(@invoice1.id)
+          expect(page).to have_content(@invoice3.id)
+          expect(page).to have_content(@invoice4.id)
+          expect(page).to have_content(@invoice5.id)
+          expect(page).to have_content(@invoice6.id)
+          expect(page).to_not have_content(@invoice2.id)
+          expect(page).to have_link(@invoice1.id.to_s)
+          expect(page).to have_link(@invoice3.id.to_s)
+          expect(page).to have_link(@invoice4.id.to_s)
+          expect(page).to have_link(@invoice5.id.to_s)
+          expect(page).to have_link(@invoice6.id.to_s)
+        end
+
+        click_on(@invoice1.id.to_s)
+
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      end
+
+      it 'has the date of each item ready to ship from oldest to newest' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+        # save_and_open_page
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice3.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice4.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice5.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice6.created_at.strftime('%A, %B%e, %Y'))
+          expect("#{@invoice1.id}").to appear_before("#{@invoice3.id}")
+          expect("#{@invoice3.id}").to appear_before("#{@invoice4.id}")
+          expect("#{@invoice4.id}").to appear_before("#{@invoice5.id}")
+          expect("#{@invoice5.id}").to appear_before("#{@invoice6.id}")
+        end
+      end
     end
   end
 end
