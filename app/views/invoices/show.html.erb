@@ -18,6 +18,16 @@
 #p0 {
   text-indent: 2em;
 }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
 </style>
 <body>
   <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
@@ -50,7 +60,6 @@
                 <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
                 <th>
                   <%= form_with model: item.invoice_item_by(@invoice.id), local: true do |form| %>
-                    <%= form.label :status %>
                     <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_status(@invoice.id)}" %>
                     <%= form.submit 'Update Item Status' %>
                   <% end %>
