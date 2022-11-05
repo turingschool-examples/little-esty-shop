@@ -35,6 +35,6 @@ class Merchant < ApplicationRecord
     # Item.select('items.*, sum(invoice_items.quantity* invoice_items.unit_price) as revenue').joins(:invoice_items, :transactions).where("transactions.result = 0").where("items.merchant_id = ?", self.id)
     # Item.select('items.*, sum(invoice_items.quantity* invoice_items.unit_price) as revenue').joins(:invoice_items, :transactions).where('transactions.result = 0').group(:id)
     Item.select('sum(invoice_items.quantity* invoice_items.unit_price) as revenue').joins(:invoice_items, :transactions).where("transactions.result = 0").where("items.merchant_id = ?", self.id).group(:id)
-
   end
+
 end
