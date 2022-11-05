@@ -37,7 +37,6 @@ tr:nth-child(even) {
       <div id="invoice-stats-<%= @invoice.id %>">
           <h4><%= "Status: #{@invoice.status}" %></h4>
           <h4><%= "Created on: #{@invoice.created_at.strftime("%A, %d %B %Y")}" %></h4>
-          <h4><%= "Customer: #{@invoice.customer_last}, #{@invoice.customer_first}" %></h4>
           <h4><%= "Total Revenue: $#{sprintf('%.2f', @invoice.total_revenue(@merchant))}" %></h4>
       </div>
       <div id="customer-info-<%= @invoice.id %>">
