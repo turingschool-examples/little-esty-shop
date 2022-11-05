@@ -34,6 +34,24 @@ class ItemsController < ApplicationController
     end
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = @merchant.items.new(name: params[:name],
+    description: params[:description],
+  unit_price: params[:unit_price])
+
+    if @item.save
+      redirect_to "/merchants/#{@merchant.id}/items"
+    else
+      flash[:error] = "Required content missing or unit price is invalid"
+      render.new
+    end
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :description, :unit_price)

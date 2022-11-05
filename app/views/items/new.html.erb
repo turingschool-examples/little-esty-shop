@@ -1,7 +1,5 @@
-<h4><%="Edit #{@item.name}" %></h4>
-<br>
-<div id="edit_form">
-  <%= form_with model: @item, url: merchant_item_path(@merchant, @item), local: true do |form| %>
+<div id= "create_item">
+  <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
 
     <%= form.label "Name:" %>
     <%= form.text_field :name %>
@@ -9,7 +7,7 @@
     <%= form.text_field :description %>
     <%= form.label "Current Selling Price:"%>
     <%= form.number_field :unit_price %>
-    <%= form.submit "Update Information" %>
+    <%= form.submit "Create Item" %>
 
   <% end %>
- </div>
+</div>
