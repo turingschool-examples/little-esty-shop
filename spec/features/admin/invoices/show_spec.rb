@@ -31,6 +31,14 @@ RSpec.describe 'Admin Invoice Show Page' do
       expect(page).to have_content("Invoice Status: in progress")
       expect(page).to have_content("Invoice Created on: Tuesday, November 01, 2022")
       expect(page).to have_content("Invoice's Customer Name: Sergio Azcona")
+      expect(page).to_not have_content("Invoice ID: #{@invoice2.id}")
+      expect(page).to_not have_content("Invoice Customer Name: Emily Port")
+
+    end
+
+    it 'i see all of items on invoice and item name, quantity, price, and invoice item status' do 
+      visit admin_invoice_path(@invoice1)
+      expect(page).to have_content("Item: #{@item1.name}")
 
     end
   end
