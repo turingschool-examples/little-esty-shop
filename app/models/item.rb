@@ -6,4 +6,6 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description, :unit_price, :merchant_id
   validates_numericality_of :unit_price, :greater_than => 0
+
+  enum status: {enabled: 0, disabled: 1}
 end
