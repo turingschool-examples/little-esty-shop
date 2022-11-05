@@ -4,11 +4,13 @@ RSpec.describe Invoice, type: :model do
   before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
+    @merchant3 = Merchant.create!(name: "Mikie")
 
     @merchant_1_item_1 = @merchant1.items.create!(name: "Straw", description: "For Drinking", unit_price: 2)
     @merchant_1_item_not_ordered = @merchant1.items.create!(name: "Unordered Item", description: "...", unit_price: 2)
     @merchant_1_item_2 = @merchant1.items.create!(name: "Plant", description: "Fresh Air", unit_price: 1)
-    @merchant_2_item_1 = @merchant2.items.create!(name: "Vespa", description: "Transportation", unit_price: 2)
+    @merchant_2_item_1 = @merchant2.items.create!(name: "Vespa", description: "Transportation", unit_price: 6)
+    @merchant_3_item_1 = @merchant3.items.create!(name: "Bike", description: "Transportation", unit_price: 5)
 
     @customer1 = Customer.create!(first_name: "Bobby", last_name: "Valentino")
     @customer2 = Customer.create!(first_name: "Ja", last_name: "Rule")
@@ -27,6 +29,15 @@ RSpec.describe Invoice, type: :model do
 
     @customer_6_invoice_1 = @customer6.invoices.create!(status: 1)
     @customer_6_invoice_2 = @customer6.invoices.create!(status: 2)
+
+    InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1)
+    InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_1_item_1)
+    InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_2_item_1)
+    InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_2_item_1)
+    InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_2_item_1)
+    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_2_item_1)
+    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_2_item_1)
+    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_3_item_1)
   end
 
   describe "Relationships" do
@@ -40,6 +51,29 @@ RSpec.describe Invoice, type: :model do
     describe '#incomplete_invoices' do
       it 'returns the invoices that are still in progress' do
         expect(Invoice.incomplete_invoices).to eq([@customer_6_invoice_2])
+      end
+    end
+
+    describe "#invoices_for" do
+      it 'selects all invoices assoicated with that merchant' do
+        expect(Invoice.invoices_for(@merchant1).to_a).to eq([@customer_1_invoice_1, @customer_1_invoice_2])
+      end
+    end
+  end
+  describe "model methods" do
+    describe '.customer_last' do
+      it 'returns the invoiced customers last name' do
+        expect(@customer_1_invoice_1.customer_last).to eq("Valentino")
+      end
+    end
+    describe '.customer_first'do
+      it 'returns the invoiced customers first name' do
+        expect(@customer_1_invoice_1.customer_first).to eq("Bobby")
+      end
+    end
+    describe '.total_revenue' do
+      it 'returns the sum of all items unit cost on that invoice' do
+        expect(@customer_6_invoice_1.total_revenue(@merchant2)).to eq(12)
       end
     end
   end
