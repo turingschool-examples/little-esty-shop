@@ -45,5 +45,14 @@ RSpec.feature "Merchant Items Edit Page", type: :feature do
       expect(page).to have_current_path(merchant_item_path(@merchant, @item))
       expect(page).to have_content('Item updated successfully!')
     end
+    it 'rerenders the page with a flash message when the item is not successfully updated' do
+      visit edit_merchant_item_path(@merchant, @item)
+
+      fill_in 'Name:', with: 'This is an very long string that exceeds fifty characters in length'
+      click_button 'Update'
+
+      expect(page).to have_current_path(edit_merchant_item_path(@merchant, @item))
+      expect(page).to have_content('Error:')
+    end
   end
 end
