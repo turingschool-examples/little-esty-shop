@@ -67,5 +67,71 @@ RSpec.describe "admin/merchants index page" do
         expect(page).to_not have_button("Disable")
       end
     end
+
+    it 'can disable a merchant by clicking disable button' do
+      visit "/admin/merchants"
+      
+      within("#merchant-#{@merchant_1.id}") do 
+        expect(page).to have_content(@merchant_1.name)
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+
+        click_button "Disable"
+        expect(current_path).to eq("/admin/merchants")
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
+      end
+
+      within("#merchant-#{@merchant_2.id}") do 
+        expect(page).to have_content(@merchant_2.name)
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
+      end
+
+      within("#merchant-#{@merchant_3.id}") do 
+        expect(page).to have_content(@merchant_3.name)
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-#{@merchant_4.id}") do 
+        expect(page).to have_content(@merchant_4.name)
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
+      end
+    end
+
+    it 'can enable a merchant by clicking enable button' do
+      visit "/admin/merchants"
+      
+      within("#merchant-#{@merchant_1.id}") do 
+        expect(page).to have_content(@merchant_1.name)
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-#{@merchant_2.id}") do 
+        expect(page).to have_content(@merchant_2.name)
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
+
+        click_button "Enable"
+        expect(current_path).to eq("/admin/merchants")
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-#{@merchant_3.id}") do 
+        expect(page).to have_content(@merchant_3.name)
+        expect(page).to_not have_button("Enable")
+        expect(page).to have_button("Disable")
+      end
+
+      within("#merchant-#{@merchant_4.id}") do 
+        expect(page).to have_content(@merchant_4.name)
+        expect(page).to have_button("Enable")
+        expect(page).to_not have_button("Disable")
+      end
+    end
   end
 end
