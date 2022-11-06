@@ -18,7 +18,7 @@ RSpec.describe 'new merchant item', type: :feature do
         expect(page).to have_selector(:css, "form")
         expect(page).to have_field(:name)
         expect(page).to have_field(:description)
-        expect(page).to have_field(:price)
+        expect(page).to have_field(:unit_price)
       end
 
       it '- when I fill out the form, I click (submit). then I am directed back to the items index page, where I see
