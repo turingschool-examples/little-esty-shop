@@ -7,7 +7,7 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name
 
-  enum status: {disabled: 0, enabled: 1}
+  enum status: { disabled: 0, enabled: 1 }
 
   def top_merchant_transactions
     Customer
@@ -38,10 +38,10 @@ class Merchant < ApplicationRecord
   end
 
   def self.enabled_merchants
-    self.where('status = 1')
+    where('status = 1')
   end
 
   def self.disabled_merchants
-    self.where('status = 0')
+    where('status = 0')
   end
 end

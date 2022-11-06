@@ -14,7 +14,7 @@ RSpec.describe 'Merchant Items Index Page' do
     @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
     @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
     @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
-    @invoice4 = Invoice.create!(status: 'canceled', customer_id: @customer4.id)
+    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id)
     @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id)
     @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id)
     @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
