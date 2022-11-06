@@ -1,12 +1,6 @@
-# As a merchant,
-# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
-# Then I see all of the invoices that include at least one of my merchant's items
-# And for each invoice I see its id
-# And each id links to the merchant invoice show page
 require 'rails_helper'
 
-RSpec.describe "Merchant Invoices Index page" do
-
+RSpec.describe 'Merchant Invoices Index page' do
   before :each do
     @merchant1 = Merchant.create!(name: 'Marvel')
     @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker')
@@ -20,30 +14,27 @@ RSpec.describe "Merchant Invoices Index page" do
     InvoiceItem.create(quantity: 15, unit_price: 1500, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
   end
 
-  describe "As a merchant" do
+  describe 'As a merchant' do
     describe "When I visit my merchant's invoices index (/merchants/merchant_id/invoices)" do
       it "Then I see all of the invoices that include at least one of my merchant's items" do
         visit "/merchants/#{@merchant1.id}/invoices"
-        # save_and_open_page
 
-        expect(page).to have_content("Invoices:")
-        # binding.pry
+        expect(page).to have_content('Invoices:')
         expect(@merchant1.invoices.count).to eq(1)
       end
 
-      it " And for each invoice I see its id" do
-      visit "/merchants/#{@merchant1.id}/invoices"
-
-      within("#invoice_ids") do
-        expect(page).to have_content("Invoice: #{@invoice1.id}")
-      end
-
-      end
-
-      it "And each id links to the merchant invoice show page" do
+      it ' And for each invoice I see its id' do
         visit "/merchants/#{@merchant1.id}/invoices"
-        # save_and_open_page
-        within("#invoice_ids") do
+
+        within('#invoice_ids') do
+          expect(page).to have_content("Invoice: #{@invoice1.id}")
+        end
+      end
+
+      it 'And each id links to the merchant invoice show page' do
+        visit "/merchants/#{@merchant1.id}/invoices"
+
+        within('#invoice_ids') do
           expect(page).to have_link("#{@invoice1.id}")
 
           click_link("#{@invoice1.id}")

@@ -14,7 +14,7 @@ RSpec.describe 'Merchant Items Edit Page' do
     describe 'When I visit the merchant show page of an item' do
       it 'I see a link to update the item information.' do
         visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
-        
+
         expect(page).to have_link('Edit Information')
       end
     end
