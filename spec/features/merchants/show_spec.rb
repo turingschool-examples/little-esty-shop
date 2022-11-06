@@ -4,24 +4,24 @@ RSpec.describe 'Merchants Dashboard Page' do
   before :each do
     @merchant1 = Merchant.create!(name: 'Marvel')
     @merchant2 = Merchant.create!(name: 'D.C.')
-    @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker') # 1/1
-    @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent') # 3/0
-    @customer3 = Customer.create!(first_name: 'Louis', last_name: 'Lane') # 2/0
-    @customer4 = Customer.create!(first_name: 'Lex', last_name: 'Luther') # 0/0
-    @customer5 = Customer.create!(first_name: 'Frank', last_name: 'Castle') # 1/0
-    @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock') # 1/0
-    @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne') # 0/1
-    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # marvel
-    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
-    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id) # marvel
-    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
-    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
-    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id) # D.C.
-    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # D.C.
-    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
+    @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker')
+    @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent')
+    @customer3 = Customer.create!(first_name: 'Louis', last_name: 'Lane')
+    @customer4 = Customer.create!(first_name: 'Lex', last_name: 'Luther')
+    @customer5 = Customer.create!(first_name: 'Frank', last_name: 'Castle')
+    @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock')
+    @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne')
+    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
+    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
+    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id)
+    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id)
+    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id)
+    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
+    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
     @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant2.id)
     InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
@@ -90,7 +90,56 @@ RSpec.describe 'Merchants Dashboard Page' do
         end
       end
 
-      xit 'has the number of successful transactions with the merchant next to each customer' do
+      it 'has the number of successful transactions with the merchant next to each customer' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+        within('#top_customers') do
+          expect(page).to have_content("#{@customer2.full_name} - Successful transactions: 3")
+          expect(page).to have_content("#{@customer3.full_name} - Successful transactions: 2")
+          expect(page).to have_content("#{@customer1.full_name} - Successful transactions: 1")
+          expect(page).to have_content("#{@customer5.full_name} - Successful transactions: 1")
+          expect(page).to have_content("#{@customer6.full_name} - Successful transactions: 1")
+        end
+      end
+    end
+
+    describe 'items ready to ship' do
+      it 'has a section with list of names of items that have not yet shipped with a link to their merchant invoice show page' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@item1.name)
+          expect(page).to have_content(@invoice1.id)
+          expect(page).to have_content(@invoice3.id)
+          expect(page).to have_content(@invoice4.id)
+          expect(page).to have_content(@invoice5.id)
+          expect(page).to have_content(@invoice6.id)
+          expect(page).to_not have_content(@invoice2.id)
+          expect(page).to have_link(@invoice1.id.to_s)
+          expect(page).to have_link(@invoice3.id.to_s)
+          expect(page).to have_link(@invoice4.id.to_s)
+          expect(page).to have_link(@invoice5.id.to_s)
+          expect(page).to have_link(@invoice6.id.to_s)
+        end
+
+        click_on(@invoice1.id.to_s)
+
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      end
+
+      it 'has the date of each item ready to ship from oldest to newest' do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice3.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice4.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice5.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice6.created_at.strftime('%A, %B%e, %Y'))
+          expect("#{@invoice1.id}").to appear_before("#{@invoice3.id}")
+          expect("#{@invoice3.id}").to appear_before("#{@invoice4.id}")
+          expect("#{@invoice4.id}").to appear_before("#{@invoice5.id}")
+          expect("#{@invoice5.id}").to appear_before("#{@invoice6.id}")
+        end
       end
     end
   end

@@ -66,12 +66,10 @@ RSpec.describe Customer, type: :model do
   describe 'class methods' do
     it 'can display the first and last name together' do
       expect(@customer7.full_name).to eq('Bruce Wayne')
-
     end
 
     describe 'On admin dashboard we see top 5 customers' do
       it 'displays top 5 customers' do
-        # binding.pry
         expect(Customer.top_customers).to eq([@customer2, @customer1, @customer3, @customer5, @customer6])
       end
     end
