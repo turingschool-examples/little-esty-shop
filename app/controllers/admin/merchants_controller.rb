@@ -13,17 +13,24 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
-    if params[:name] && params[:name].gsub(' ', '') == ""
-     flash[:notice] = "Empty name not permitted. Please input valid name"
-     redirect_to "/admin/merchants/#{@merchant_1.id}/edit"
+    if params[:enabled]
+      merchant.update(status: 1)
+      redirect_to "/admin/merchants"
+    elsif params[:disabled]
+      merchant.update(status: 0)
+      redirect_to "/admin/merchants"
+    elsif params[:name].empty?
+      redirect_to "/admin/merchants/#{merchant.id}/edit"
+      flash[:alert] = "Empty name not permitted. Please input valid name"
     else
-     redirect_to "/admin/merchants/#{merchant.id}"
-     flash[:notice] = "Successfully Updated: #{merchant.name}"
+      merchant.update(merchant_params)
+      redirect_to "/admin/merchants/#{merchant.id}"
+      flash[:notice] = "Successfully Updated: #{merchant.name}"
     end
   end
-private
+
+  private
   def merchant_params
-    params.permit(:id, :name)
+    params.permit(:id, :name, :status)
   end
 end
