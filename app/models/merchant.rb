@@ -26,4 +26,12 @@ class Merchant < ApplicationRecord
       .where('invoice_items.status = 0 OR invoice_items.status = 1')
       .order(:created_at)
   end
+
+  def self.enabled_merchants
+    self.where('status = 1')
+  end
+
+  def self.disabled_merchants
+    self.where('status = 0')
+  end
 end
