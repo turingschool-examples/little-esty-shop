@@ -8,9 +8,9 @@ RSpec.describe Item, type: :model do
     it { should have_many(:invoices).through(:invoice_items) }
   end
 
-  describe "instance methods" do 
-    describe "#top_selling_date" do 
-      it "returns the DateTime object of the created_at for the invoice with the most sales of that item" do 
+  describe "instance methods" do
+    describe "#top_selling_date" do
+      it "returns the DateTime object of the created_at for the invoice with the most sales of that item" do
         merchant = Merchant.create!(name: "The Candle Shop")
         item = merchant.items.create!(name: "Pine Scented Candle", description: "beeswax candle", unit_price: 4)
         customer = Customer.create!(first_name: "Lee", last_name: "Saville")
