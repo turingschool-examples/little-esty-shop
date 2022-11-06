@@ -44,28 +44,30 @@ tr:nth-child(even) {
           <p id="p0"><%= "#{@invoice.customer_first} #{@invoice.customer_last}" %></p>
       </div>
       <div id="item-info-<%= @invoice.id %>">
-          <h4> Items on Invoice: </h4>
-          <table>
+        <h4> Items on Invoice: </h4>
+        <table>
+          <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Status</th>
+          </tr>
+          <% @items.each do |item| %>
             <tr>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Unit Price</th>
-              <th>Status</th>
+              <th><%= item.name %></th>
+              <th><%= item.invoice_item_quantity(@invoice.id) %></th>
+              <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
+              <th>
+                <%= form_with model: item.invoice_item_by(@invoice.id), id: "form-#{item.id}", local: true do |form| %>
+                  <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_status(@invoice.id)}" %>
+                  <%= form.hidden_field :invoice_id, value: @invoice.id %>
+                  <%= form.hidden_field :merchant_id, value: @merchant.id %>
+                  <%= form.submit 'Update Item Status' %>
+                <% end %>
+              </th>
             </tr>
-            <% @items.each do |item| %>
-              <tr>
-                <th><%= item.name %></th>
-                <th><%= item.invoice_item_quantity(@invoice.id) %></th>
-                <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
-                <th>
-                  <%= form_with model: item.invoice_item_by(@invoice.id), local: true do |form| %>
-                    <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_status(@invoice.id)}" %>
-                    <%= form.submit 'Update Item Status' %>
-                  <% end %>
-                </th>
-              </tr>
-            <% end %>
-          </table>
+          <% end %>
+        </table>
       </div>
     </div>
   </div>

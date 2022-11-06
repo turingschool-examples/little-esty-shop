@@ -64,23 +64,29 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
 
       it 'total revenue for all items on invoice' do
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
-          save_and_open_page
+
           expect(page).to have_content(@merchant_1_item_1.unit_price + @merchant_1_item_2.unit_price)
         end
       end
 
       describe 'a form to change the items status' do
         it 'that has a select field that displays the items current status' do
-          within "#invoice-stats-#{@customer_1_invoice_1.id}" do
-            expect(find 'form').to have_content()
+          within "#form-#{@merchant_1_item_1.id}" do
+            expect(page).to have_select(selected: "packaged")
+          end
+          within "#form-#{@merchant_1_item_2.id}" do
+            expect(page).to have_select(selected: "pending")
           end
         end
-        it 'that allows me to select a new status and update the item by pressing "Update Item Status"' do
-          fill_in '', with: ''
-          click_button "Update Item Status"
 
-          expect(current_path).to eq()
-          expect(page).to have_content()
+        it 'that allows me to select a new status and update the item by pressing "Update Item Status"' do
+          within "#form-#{@merchant_1_item_1.id}" do
+            select 'pending', from: 'invoice_item_status'
+            click_button "Update Item Status"
+
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}")
+            expect(page).to have_select(selected: "pending")
+          end
         end
       end
     end
