@@ -17,6 +17,7 @@
 
 
 <body>
+
   <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Merchants Index Page" } %>
   <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">My Items</h3>
   <div class="row">
@@ -42,6 +43,9 @@
             </p>
           </div>
         <% end %>
+        <div id>
+          <%=link_to "Create New Merchant", new_admin_merchant_path %>
+        </div>
       </div>
     </div>
   </div>
