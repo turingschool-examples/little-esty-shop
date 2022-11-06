@@ -93,14 +93,8 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    # describe '#top_5_items' do
-    #   it "returns the 5 items with the highest total revenue generated" do
-    #     expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock"] => 210, [@emerald.id, "Emerald"] => 170, [@ruby.id, "Ruby"] => 130, [@amethyst.id, "Amethyst"] => 110, [@topaz.id, "Topaz"] => 110})
-    #   end
-    # end
-
-    describe '#top_5_items_best_day' do
-      it '- returns the date with the most sales for each of the top 5 items' do
+    describe '#top_5_items' do
+      it '- returns the 5 items with the highest total revenue generated and the date with the most sales for each of the top 5 items' do
         expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock", @invoice_2.created_at] => 210, [@emerald.id, "Emerald", @invoice_6.created_at] => 170, [@ruby.id, "Ruby", @invoice_7.created_at] => 130, [@amethyst.id, "Amethyst", @invoice_5.created_at] => 110, [@topaz.id, "Topaz", @invoice_4.created_at] => 110})
       end
     end
