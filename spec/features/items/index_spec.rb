@@ -29,6 +29,65 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_content(@item3.name)
         end
       end
+
+      it "Next to each item name I see a button to disable or enable that item." do
+        visit "/merchants/#{@merchant1.id}/items"
+        # save_and_open_page
+        within("#item-#{@item1.id}") do
+          expect(page).to have_button("Enable")
+        end
+
+        within("#item-#{@item3.id}") do
+          expect(page).to have_button("Enable")
+        end
+
+      end
+
+      it "Redirects back to the merchant items index and updates status based on which button is clicked" do
+        visit "/merchants/#{@merchant1.id}/items"
+
+        within("#item-#{@item1.id}") do
+          expect(page).to have_content("Status: disabled")
+        end
+
+        within("#item-#{@item3.id}") do
+          expect(page).to have_content("Status: disabled")
+          click_button("Enable")
+        end
+
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+
+        within("#item-#{@item3.id}") do
+          expect(page).to have_content("Status: enabled")
+          expect(page).to have_button("Disable")
+          expect(page).to_not have_content("Status: disabled")
+        end
+
+        within("#item-#{@item1.id}") do
+          expect(page).to_not have_content("Status: enabled")
+        end
+      end
+
+      it "Splits enabled and disabled items" do
+        item4 = Item.create!(name: 'Test2', description: 'test', unit_price: 25, status: 1, merchant_id: @merchant1.id)
+
+        visit "/merchants/#{@merchant1.id}/items"
+        #  save_and_open_page
+
+        within("#enabled") do
+          expect(page).to have_content("Enabled Items")
+          expect(page).to have_link("#{item4.name}")
+          expect(page).to_not have_link("#{@item1.name}")
+          expect(page).to have_link("#{@item3.name}")
+        end
+
+        within("#disabled") do
+          expect(page).to have_content("Disabled Items")
+          expect(page).to have_link("#{@item1.name}")
+          expect(page).to have_link("#{@item3.name}")
+          expect(page).to_not have_link("#{item4.name}")
+        end
+      end
     end
   end
 end
