@@ -19,6 +19,10 @@ RSpec.describe Invoice, type: :model do
 
     @customer_1_invoice_1 = @customer1.invoices.create!(status: 1)
     @customer_1_invoice_2 = @customer1.invoices.create!(status: 1)
+    
+    InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 1)
+    InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 4, unit_price: 6, status: 1)
+
 
     @customer_2_invoice_1 = @customer2.invoices.create!(status: 1)
     @customer_3_invoice_1 = @customer3.invoices.create!(status: 1)
@@ -40,6 +44,12 @@ RSpec.describe Invoice, type: :model do
     describe '#incomplete_invoices' do
       it 'returns the invoices that are still in progress' do
         expect(Invoice.incomplete_invoices).to eq([@customer_6_invoice_2])
+      end
+    end
+
+    describe '#invoice_revenue' do 
+      it 'returns total revenue for specific invoices' do 
+        expect(@customer_1_invoice_1.invoice_revenue).to eq(27)
       end
     end
   end
