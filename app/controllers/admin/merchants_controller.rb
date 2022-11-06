@@ -29,6 +29,21 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def new
+    @merchant = Merchant.new
+  end
+
+  def create
+    merchant = Merchant.new(merchant_params)
+    # require 'pry'; binding.pry
+    if merchant.save
+      redirect_to "/admin/merchants"
+    else
+      redirect_to "/admin/merchants/new"
+      flash[:alert] = "ERROR: Please enter a valid name."
+    end
+  end
+
   private
   def merchant_params
     params.permit(:id, :name, :status)
