@@ -76,4 +76,20 @@ RSpec.describe("admin merchants index page") do
       end
     end
   end
+
+  describe("29.I see a link to create a new merchant") do
+    describe("When I click on the link,I am taken to a form that allows me to add merchant information") do
+      describe("When I click on the link,I am taken to a form that allows me to add merchant information") do
+        it("29.And I see the merchant I just created displayed And I see my merchant was created with a default status of disabled.") do
+          visit(admin_merchants_path)
+          expect(page).to(have_link("Create New Merchant"))
+          click_link("Create New Merchant")
+          expect(current_path).to(eq(new_admin_merchant_path))
+          fill_in(:name,           with: "Billy Bobs Banging Banjos")
+          click_button("Create New Merchant")
+          expect(current_path).to(eq(admin_merchants_path))
+        end
+      end
+    end
+  end
 end
