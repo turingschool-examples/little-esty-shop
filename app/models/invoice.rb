@@ -7,6 +7,9 @@ class Invoice < ApplicationRecord
   validates_presence_of :status, :customer_id
 
   enum status: { 'in progress' => 0, completed: 1, cancelled: 2 }
+  def total_revenue
+    invoice_items.sum("unit_price * quantity")
+  end
 
   def self.incomplete_invoices
     joins(:invoice_items)
