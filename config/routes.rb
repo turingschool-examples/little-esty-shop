@@ -2,12 +2,8 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :admin do 
-    resources :merchants #, only: [:index, :show, :edit, :patch] 
+    resources :merchants, only: [:index, :show, :edit, :update] 
   end
-
-   get "/admin", to: "admin#index"
-  # get "/admin/merchants", to: "admin/merchants#show"
-  # get "/admin/merchants/:id", to: "admin/merchants#index"
 
   # admin
   get '/admin', to: 'admin#index'
