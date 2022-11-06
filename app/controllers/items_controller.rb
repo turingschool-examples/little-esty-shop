@@ -39,8 +39,8 @@ class ItemsController < ApplicationController
         flash[:notice] = 'Item updated successfully!'
         redirect_to merchant_item_path(@item.merchant, @item)
       else
-        flash.now[:alert] = @item.errors.full_messages
-        render :edit
+        flash[:alert] = "Error: #{@item.errors.full_messages}"
+        redirect_to edit_merchant_item_path(@item.merchant, @item)
       end
     end
   end
