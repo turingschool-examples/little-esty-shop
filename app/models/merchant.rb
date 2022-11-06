@@ -35,8 +35,9 @@ class Merchant < ApplicationRecord
         .sum('quantity * invoice_items.unit_price')
   end
 
-  def top_5_items_best_day
-    
-  end
+  # def top_5_items_best_day
+  #   require 'pry'; binding.pry
+  #   self.top_5_items
+  # end
 end
 
