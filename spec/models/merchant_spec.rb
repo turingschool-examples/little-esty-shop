@@ -42,7 +42,7 @@ RSpec.describe(Merchant, type: :model) do
     describe '#invoice_items_to_ship' do
       describe 'returns an array of invoice_items' do
         it 'where invoice_item is "packaged" (0)' do
-          expect(@merchant_1.invoice_items_to_ship).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
+          expect(@merchant_1.invoice_items_to_ship.to_a).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
         end
 
         it "ordered by invoice created_at, NOT invoice_item created_at" do
@@ -102,7 +102,7 @@ RSpec.describe(Merchant, type: :model) do
         invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
         invoice_2.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
         invoice_3.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
-        
+
         expect(merchant.top_five_items).to(eq([candle, potion, scroll, book, bone]))
         expect(merchant.top_five_items[0].total_revenue).to(eq(30))
         expect(merchant.top_five_items[1].total_revenue).to(eq(20))
@@ -112,7 +112,7 @@ RSpec.describe(Merchant, type: :model) do
       end
     end
   end
-  
+
   describe "class methods" do
     describe ".disabled" do
       it " makes Merchant disabled" do
