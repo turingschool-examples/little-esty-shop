@@ -23,4 +23,19 @@ RSpec.describe "admin/merchants-show page" do
     expect(page).to have_content("Successfully Updated: Ms. Marvel")
     expect(page).to have_content("Ms. Marvel")
   end
+
+  it 'returns an error message when the name field is empty' do
+    visit "/admin/merchants/#{@merchant_1.id}"
+    
+    expect(page).to have_link("Update Merchant")
+    click_link "Update Merchant"
+    
+    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
+
+    fill_in :name, with: ""
+    click_button("Submit")
+
+    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
+    expect(page).to have_content("Empty name not permitted. Please input valid name")
+  end
 end
