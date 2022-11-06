@@ -7,7 +7,7 @@ class Invoice < ApplicationRecord
 
   validates_presence_of :status, :customer_id
 
-  enum status: { 'in progress' => 0, completed: 1, canceled: 2 }
+  enum status: { 'in progress' => 0, completed: 1, cancelled: 2 }
 
   def self.incomplete_invoices
     joins(:invoice_items)

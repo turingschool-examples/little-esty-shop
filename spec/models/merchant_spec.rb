@@ -14,8 +14,10 @@ RSpec.describe Merchant, type: :model do
   end
 
   before :each do
-    @merchant1 = Merchant.create!(name: 'Marvel')
-    @merchant2 = Merchant.create!(name: 'D.C.')
+    @merchant1 = Merchant.create!(name: 'Marvel', status: 'enabled')
+    @merchant2 = Merchant.create!(name: 'D.C.', status: 'disabled')
+    @merchant3 = Merchant.create!(name: 'Honey Bee', status: 'enabled')
+    @merchant4 = Merchant.create!(name: 'Dancing Dandelions', status: 'disabled')
     @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker') # 1/1
     @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent') # 3/0
     @customer3 = Customer.create!(first_name: 'Louis', last_name: 'Lane') # 2/0
@@ -26,7 +28,7 @@ RSpec.describe Merchant, type: :model do
     @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # marvel
     @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
     @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
-    @invoice4 = Invoice.create!(status: 'canceled', customer_id: @customer4.id) # marvel
+    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id) # marvel
     @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
     @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
     @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id) # D.C.
@@ -67,6 +69,20 @@ RSpec.describe Merchant, type: :model do
     it 'can return top 5 customers with most transactions' do
       expect(@merchant1.top_merchant_transactions).to eq([@customer2, @customer3, @customer1, @customer5, @customer6])
       expect(@merchant1.top_merchant_transactions.length).to eq(5)
+    end
+  end
+
+  describe 'class methods' do
+    describe '#enabled_merchants' do
+      it 'returns all merchants with a status of enabled' do
+        expect(Merchant.enabled_merchants).to eq([@merchant1, @merchant3])
+      end
+    end
+
+    describe '#disabled_merchants' do
+      it 'returns all merchants with a status of disabled' do
+        expect(Merchant.disabled_merchants).to eq([@merchant2, @merchant4])
+      end
     end
   end
 end
