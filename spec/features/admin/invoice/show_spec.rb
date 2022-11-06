@@ -9,7 +9,7 @@ RSpec.describe 'admin/invoices/invoice.id' do
     @item_1 = Item.create!(name: 'item1', description: 'desc1', unit_price: 10, merchant_id: @merchant.id)
     @item_2 = Item.create!(name: 'item2', description: 'desc2', unit_price: 12, merchant_id: @merchant.id)
 
-    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1, created_at: Time.parse('22.10.12'))
 
     @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 1)
     @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 11, unit_price: 12, status: 1)
@@ -20,9 +20,10 @@ RSpec.describe 'admin/invoices/invoice.id' do
   describe 'invoice show, has invoice info, invoice items info, and total revenue' do
     it 'shows related information to a specific invoice' do
       visit "/admin/invoices/#{@invoice_1.id}"
+
       expect(page).to have_content("Id: #{@invoice_1.id}")
       expect(page).to have_content('Status: completed')
-      expect(page).to have_content('Created at: Saturday, November 5, 2022')
+      expect(page).to have_content('Created at: Wednesday, October 12, 2022')
       expect(page).to have_content('Customer Name: Eli Fuchsman')
 
     end
