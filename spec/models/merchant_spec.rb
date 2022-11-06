@@ -101,7 +101,7 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create!(quantity: 100, unit_price: 50, status: 'shipped', item_id: @item6.id, invoice_id: @invoice15.id)
       InvoiceItem.create!(quantity: 1, unit_price: 1000000, status: 'shipped', item_id: @item7.id, invoice_id: @invoice16.id)
       InvoiceItem.create!(quantity: 5, unit_price: 15000, status: 'shipped', item_id: @item8.id, invoice_id: @invoice17.id)
-      InvoiceItem.create!(quantity: 5, unit_price: 15000, status: 'shipped', item_id: @item9.id, invoice_id: @invoice18.id)
+      InvoiceItem.create!(quantity: 1, unit_price: 10000000, status: 'shipped', item_id: @item9.id, invoice_id: @invoice18.id)
       @transaction15 = Transaction.create!(credit_card_number: '4801647818676137', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice12.id)
       @transaction16 = Transaction.create!(credit_card_number: '4801647818676138', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice13.id)
       @transaction17 = Transaction.create!(credit_card_number: '4801647818676139', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice14.id)
