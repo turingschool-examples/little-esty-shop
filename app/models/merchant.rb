@@ -27,6 +27,7 @@ class Merchant < ApplicationRecord
   end
 
   def top_5_items
+    require 'pry'; binding.pry
     Item.joins([:merchant, {invoices: :transactions}])
         .where(merchants: {id: self.id}, transactions: {result: 1}, invoices: {status: 2})
         .group(:id, :name, "invoices.created_at")
