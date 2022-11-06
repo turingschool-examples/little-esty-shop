@@ -27,7 +27,6 @@ class Merchant < ApplicationRecord
   end
 
   def top_5_items
-    require 'pry'; binding.pry
     Item.joins([:merchant, {invoices: :transactions}])
         .where(merchants: {id: self.id}, transactions: {result: 1}, invoices: {status: 2})
         .group(:id, :name, "invoices.created_at")
@@ -36,4 +35,12 @@ class Merchant < ApplicationRecord
         .sum('quantity * invoice_items.unit_price')
   end
 end
+
+# items
+#       .joins(invoices: [:transactions, :invoice_items])
+#       .where('transactions.result = 0')
+#       .select('items.*, invoices.created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
+#       .group(:id)
+#       .order(item_revenue: :desc)
+#       .limit(5)
 
