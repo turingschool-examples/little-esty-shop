@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Items Show Page" do
+RSpec.describe 'Merchant Items Show Page' do
   before :each do
     @merchant1 = Merchant.create!(name: 'Marvel')
     @merchant2 = Merchant.create!(name: 'D.C.')
@@ -10,8 +10,8 @@ RSpec.describe "Merchant Items Show Page" do
     @item3 = Item.create!(name: 'Test', description: 'test', unit_price: 25, merchant_id: @merchant1.id)
   end
 
-  describe "As a merchant," do
-    describe "When I click on the name of an item from the merchant items index page," do
+  describe 'As a merchant,' do
+    describe 'When I click on the name of an item from the merchant items index page,' do
       it "# Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)" do
         visit "/merchants/#{@merchant1.id}/items"
 
@@ -29,7 +29,6 @@ RSpec.describe "Merchant Items Show Page" do
       end
 
       it "And I see all of the item's attributes including: Name, Description, Current Selling Price" do
-
         visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
         # save_and_open_page
         expect(page).to have_content("Name: #{@item1.name}")
