@@ -23,9 +23,9 @@ RSpec.describe "Admin Invoice show page" do
   describe "As an admin, when I visit admin/invoices/:id" do 
     it "shows information related to that invoice including, id, status, created_at date, and Customer first and last name" do       
       visit admin_invoice_path(@invoice_1)
-      
+
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
-      expect(page).to have_content("Status: In Progress")
+      expect(page).to have_content("Status:")
       expect(page).to have_content("Created on: Thursday, February 03, 2022")
       expect(page).to have_content("Customer:")
       expect(page).to have_content("Gandalf Thegrey")
@@ -51,6 +51,24 @@ RSpec.describe "Admin Invoice show page" do
         expect(page).to have_content("15")
         expect(page).to have_content("shipped")
       end
+    end
+
+    it "displays the invoice status as a select field, with the current status selected" do 
+      visit admin_invoice_path(@invoice_1)
+
+      expect(page).to have_select("invoice_status")
+      expect(page).to have_select(selected: "In Progress")
+      expect(page).to have_button("Update Invoice Status")
+    end
+
+    it "when I click Update Invoice Status, the admin invoice show page reloads and see the status has been updated" do 
+      visit admin_invoice_path(@invoice_1)
+
+      select 'Completed', from: 'invoice_status'
+      click_button("Update Invoice Status")
+
+      expect(current_path).to eq(admin_invoice_path(@invoice_1))
+      expect(page).to have_select(selected: "Completed")
     end
   end
   

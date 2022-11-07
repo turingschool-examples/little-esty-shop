@@ -26,7 +26,12 @@ tr:nth-child(odd) {
 <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Invoice #<%= @invoice.id %></h3>
 
 <div class="main_text">
-  <h4>Status: <%= @invoice.status %></h4>
+  <h4>Status:</h4>
+  <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+    <%= form.select :invoice_status, ["Cancelled", "Completed", "In Progress"], selected: "#{@invoice.status}" %>
+    <%= form.submit 'Update Invoice Status' %>
+  <% end %>
+
   <h4>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></h4>
   <h4><b>Total Revenue:</b> $<%= @invoice.invoice_revenue %></h4>
 
