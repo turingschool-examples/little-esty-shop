@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
-    @item_price = @item.unit_price
+    @item_price = (@item.unit_price.to_f / 100)
   end 
 
   def edit 
@@ -39,8 +39,8 @@ class ItemsController < ApplicationController
         flash[:notice] = 'Item updated successfully!'
         redirect_to merchant_item_path(@item.merchant, @item)
       else
-        flash.now[:alert] = @item.errors.full_messages
-        render :edit
+        flash[:alert] = "Error: #{@item.errors.full_messages}"
+        redirect_to edit_merchant_item_path(@item.merchant, @item)
       end
     end
   end

@@ -24,6 +24,7 @@ RSpec.describe Merchant, type: :model do
       @wax = @surf_designs.items.create!(name: "Board Wax", description: "Hang ten!", unit_price: 7)
       @rash_guard = @surf_designs.items.create!(name: "Radical Rash Guard", description: "Stay totally groovy and rash free!", unit_price: 50)
       @zinc = @surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
+      @surf_board = @surf_designs.items.create!(name: "Surf Board", description: "Our original 12' board!", unit_price: 200)
 
       @paul = Customer.create!(first_name: "Paul", last_name: "Walker")
       @sam = Customer.create!(first_name: "Sam", last_name: "Gamgee")
@@ -47,6 +48,7 @@ RSpec.describe Merchant, type: :model do
       @invoice_13 = Invoice.create!(status: 2, customer_id: @sam.id)
       @invoice_14 = Invoice.create!(status: 2, customer_id: @eevee.id)
 
+
       @pearl_invoice = InvoiceItem.create!(item_id: @pearl.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 25, status: 1) #50
       @moon_rock_invoice = InvoiceItem.create!(item_id: @moon_rock.id, invoice_id: @invoice_2.id, quantity: 2, unit_price: 105, status: 1) #210
       @lapis_lazuli_invoice = InvoiceItem.create!(item_id: @lapis_lazuli.id, invoice_id: @invoice_3.id, quantity: 2, unit_price: 45, status: 1) #90
@@ -61,6 +63,7 @@ RSpec.describe Merchant, type: :model do
       @wax_invoice = InvoiceItem.create!(item_id: @wax.id, invoice_id: @invoice_12.id, quantity: 2, unit_price: 7, status: 2) #14
       @rash_guard_invoice = InvoiceItem.create!(item_id: @rash_guard.id, invoice_id: @invoice_13.id, quantity: 2, unit_price: 50, status: 2) #100
       @zinc_invoice = InvoiceItem.create!(item_id: @zinc.id, invoice_id: @invoice_14.id, quantity: 2, unit_price: 13, status: 1) #26
+      # @surf_board_invoice = InvoiceItem.create!(item_id: @surf_board.id, invoice_id: @invoice_6.id, quantity: 2, unit_price: 200, status: 1) #26
 
       @transaction_1 = Transaction.create!(result: 1, invoice_id: @invoice_1.id, credit_card_number: 0001)
       @transaction_2 = Transaction.create!(result: 1, invoice_id: @invoice_2.id, credit_card_number: 0002)
@@ -76,6 +79,7 @@ RSpec.describe Merchant, type: :model do
       @transaction_12 = Transaction.create!(result: 1, invoice_id: @invoice_12.id, credit_card_number: 0014)
       @transaction_13 = Transaction.create!(result: 1, invoice_id: @invoice_13.id, credit_card_number: 0015)
       @transaction_14 = Transaction.create!(result: 1, invoice_id: @invoice_14.id, credit_card_number: 0016)
+      # @transaction_15 = Transaction.create!(result: 1, invoice_id: @invoice_6.id, credit_card_number: 0016)
     end
 
     describe '#top_5_customers' do
@@ -94,8 +98,8 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '#top_5_items' do
-      it "returns the 5 items with the highest total revenue generated" do
-        expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock"] => 210, [@emerald.id, "Emerald"] => 170, [@ruby.id, "Ruby"] => 130, [@amethyst.id, "Amethyst"] => 110, [@topaz.id, "Topaz"] => 110})
+      it '- returns the 5 items with the highest total revenue generated and the date with the most sales for each of the top 5 items' do
+        expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock", @invoice_2.created_at] => 210, [@emerald.id, "Emerald", @invoice_6.created_at] => 170, [@ruby.id, "Ruby", @invoice_7.created_at] => 130, [@amethyst.id, "Amethyst", @invoice_5.created_at] => 110, [@topaz.id, "Topaz", @invoice_4.created_at] => 110})
       end
     end
   end

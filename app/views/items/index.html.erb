@@ -3,10 +3,11 @@
   <h2>--- Top 5 Items ---</h2>
     <% @merchant_top_items.each do |item, total_revenue|%>
       <p> <%= link_to item[1], merchant_item_path(@merchant, item[0])%>: <%= "#{total_revenue}"%> </p>
+      The top selling date for <%= item[1] %> was <%= item[2] %><br>
     <%end%>
 </div>
 
-<%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
+<p><%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new", method: :get %></p>
 
 <div id="enabled">
 <h2>--- Enabled Items ---</h2>
