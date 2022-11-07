@@ -29,10 +29,18 @@ class Merchant < ApplicationRecord
   def top_5_items
     Item.joins([:merchant, {invoices: :transactions}])
         .where(merchants: {id: self.id}, transactions: {result: 1}, invoices: {status: 2})
-        .group(:id, :name)
+        .group(:id, :name, "invoices.created_at")
         .order(Arel.sql("sum(quantity * invoice_items.unit_price) desc"))
         .limit(5)
         .sum('quantity * invoice_items.unit_price')
   end
 end
+
+# items
+#       .joins(invoices: [:transactions, :invoice_items])
+#       .where('transactions.result = 0')
+#       .select('items.*, invoices.created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
+#       .group(:id)
+#       .order(item_revenue: :desc)
+#       .limit(5)
 

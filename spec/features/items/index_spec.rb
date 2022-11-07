@@ -210,6 +210,19 @@ RSpec.describe 'merchant items index page', type: :feature do
 
         expect(current_path).to eql(merchant_item_path(@crystal_moon, @moon_rock))
       end
+
+      it 'has the date with the most sales for each of the top 5 most popular items' do
+        visit merchant_items_path(@crystal_moon)
+
+        within "#top_items" do
+          expect(page).to have_content("The top selling date for Moon Rock was #{@moon_rock_invoice.created_at}")
+          expect(page).to have_content("The top selling date for Emerald was #{@emerald_invoice.created_at}")
+          expect(page).to have_content("The top selling date for Ruby was #{@ruby_invoice.created_at}")
+          expect(page).to have_content("The top selling date for Amethyst was #{@amethyst_invoice.created_at}")
+          expect(page).to have_content("The top selling date for Topaz was #{@topaz_invoice.created_at}")
+        end
+
+      end
     end
   end
 end
