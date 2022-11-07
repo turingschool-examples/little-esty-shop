@@ -14,7 +14,7 @@ RSpec.describe 'Merchant Item New Page' do
     describe 'When I visit my items index page' do
       it 'I see a link to create a new item' do
         visit "/merchants/#{@merchant1.id}/items"
-        # save_and_open_page
+
         within('#new_item') do
           expect(page).to have_link('Create a New Item')
         end
@@ -66,7 +66,6 @@ RSpec.describe 'Merchant Item New Page' do
 
           expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
           expect(page).to have_content('Required content missing or unit price is invalid')
-          # save_and_open_page
         end
       end
     end

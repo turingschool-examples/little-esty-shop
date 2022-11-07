@@ -144,7 +144,6 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_content('Enabled Items')
           expect(page).to have_link("#{item4.name}")
           expect(page).to_not have_link("#{@item1.name}")
-          # expect(page).to have_link("#{@item3.name}") #this stopped working with the new before block and I'm not sure why
         end
 
         within('#disabled') do
