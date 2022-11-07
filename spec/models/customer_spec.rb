@@ -4,6 +4,7 @@ RSpec.describe Customer, type: :model do
   describe "Relationships" do
     it { should have_many(:invoices) }
   end
+
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Dave")
     @merchant_2 = Merchant.create!(name: "Kevin")

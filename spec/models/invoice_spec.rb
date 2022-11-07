@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+  describe "Relationships" do
+    it { should belong_to(:customer) }
+    it { should have_many(:transactions) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:items).through(:invoice_items) }
+  end
+
   before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
@@ -21,6 +28,10 @@ RSpec.describe Invoice, type: :model do
 
     @customer_1_invoice_1 = @customer1.invoices.create!(status: 1)
     @customer_1_invoice_2 = @customer1.invoices.create!(status: 1)
+    
+    InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 1)
+    InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 4, unit_price: 6, status: 1)
+
 
     @customer_2_invoice_1 = @customer2.invoices.create!(status: 1)
     @customer_3_invoice_1 = @customer3.invoices.create!(status: 1)
@@ -40,40 +51,40 @@ RSpec.describe Invoice, type: :model do
     InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_3_item_1)
   end
 
-  describe "Relationships" do
-    it { should belong_to(:customer) }
-    it { should have_many(:transactions) }
-    it { should have_many(:invoice_items) }
-    it { should have_many(:items).through(:invoice_items) }
-  end
-
   describe 'class methods' do
-    describe '#incomplete_invoices' do
+    describe '.incomplete_invoices' do
       it 'returns the invoices that are still in progress' do
         expect(Invoice.incomplete_invoices).to eq([@customer_6_invoice_2])
       end
     end
 
-    describe "#invoices_for" do
+    describe ".invoices_for" do
       it 'selects all invoices assoicated with that merchant' do
         expect(Invoice.invoices_for(@merchant1).to_a).to eq([@customer_1_invoice_1, @customer_1_invoice_2])
       end
     end
   end
-  describe "model methods" do
-    describe '.customer_last' do
+  
+  describe "instance methods" do
+    describe '#customer_last' do
       it 'returns the invoiced customers last name' do
         expect(@customer_1_invoice_1.customer_last).to eq("Valentino")
       end
     end
-    describe '.customer_first'do
+    
+    describe '#customer_first'do
       it 'returns the invoiced customers first name' do
         expect(@customer_1_invoice_1.customer_first).to eq("Bobby")
       end
     end
-    describe '.total_revenue' do
+    
+    describe '#total_revenue' do
       it 'returns the sum of all items unit cost on that invoice' do
         expect(@customer_6_invoice_1.total_revenue(@merchant2)).to eq(12)
+
+    describe '#invoice_revenue' do 
+      it 'returns total revenue for specific invoices' do 
+        expect(@customer_1_invoice_1.invoice_revenue).to eq(27)
       end
     end
   end
