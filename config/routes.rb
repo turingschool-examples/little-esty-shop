@@ -12,8 +12,9 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     resources :merchants
+    resources :invoices 
   end
-
+  # patch 'admin/invoices/:id', to: 'admin/invoices#update'
 
   #creates routes for merchants and merchant_items 
   get 'merchants/:id/dashboard', to: 'merchant_dashboards#show'
