@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
-    @item_price = @item.unit_price
+    @item_price = (@item.unit_price.to_f / 100)
   end 
 
   def edit 

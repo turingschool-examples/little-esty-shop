@@ -8,7 +8,6 @@ RSpec.feature "Merchant Items Show Page", type: :feature do
     end
     it 'shows all of the attributes of the item' do
       visit merchant_item_path(@merchant, @item)
-
       expect(page).to have_content("Item: Wooden Necklace")
       expect(page).to have_content("Description: A necklace with wood beads.")
       expect(page).to have_content("Current price: $10.00")
