@@ -15,17 +15,16 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-
-
   def update 
     @merchant = Merchant.find(params[:merchant_id]) 
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id]) 
     @item.update!(item_params)
-    #@item.update(status: params[:status])
-    #@item.save 
-    flash.notice = "The Information Has Successfully Updated"
-    # redirect_to "/merchants/#{@merchant.id}/items"
-    redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}"
+    if params[:status]
+      redirect_to "/merchants/#{@merchant.id}/items"
+    else 
+      flash.notice = "The Information Has Successfully Updated"
+      redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}"
+    end
   end
 
   def new 
