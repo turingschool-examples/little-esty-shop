@@ -18,6 +18,16 @@
 #p0 {
   text-indent: 2em;
 }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
 </style>
 <body>
   <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
@@ -27,31 +37,37 @@
       <div id="invoice-stats-<%= @invoice.id %>">
           <h4><%= "Status: #{@invoice.status}" %></h4>
           <h4><%= "Created on: #{@invoice.created_at.strftime("%A, %d %B %Y")}" %></h4>
-          <h4><%= "Customer: #{@invoice.customer_last}, #{@invoice.customer_first}" %></h4>
-          <h4><%= "Total Revenue: $#{sprintf('%.2f', @invoice.total_revenue)}" %></h4>
+          <h4><%= "Total Revenue: $#{sprintf('%.2f', @invoice.total_revenue(@merchant))}" %></h4>
       </div>
       <div id="customer-info-<%= @invoice.id %>">
           <h4> Customer: </h4>
           <p id="p0"><%= "#{@invoice.customer_first} #{@invoice.customer_last}" %></p>
       </div>
       <div id="item-info-<%= @invoice.id %>">
-          <h4> Items on Invoice: </h4>
-          <table>
+        <h4> Items on Invoice: </h4>
+        <table>
+          <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Status</th>
+          </tr>
+          <% @items.each do |item| %>
             <tr>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Unit Price</th>
-              <th>Status</th>
+              <th><%= item.name %></th>
+              <th><%= item.invoice_item_quantity(@invoice.id) %></th>
+              <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
+              <th>
+                <%= form_with model: item.invoice_item_by(@invoice.id), id: "form-#{item.id}", local: true do |form| %>
+                  <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_status(@invoice.id)}" %>
+                  <%= form.hidden_field :invoice_id, value: @invoice.id %>
+                  <%= form.hidden_field :merchant_id, value: @merchant.id %>
+                  <%= form.submit 'Update Item Status' %>
+                <% end %>
+              </th>
             </tr>
-            <% @items.each do |item| %>
-              <tr>
-                <th><%= item.name %></th>
-                <th><%= item.invoice_item_quantity(@invoice.id) %></th>
-                <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
-                <th><%= item.invoice_item_status(@invoice.id) %></th>
-              </tr>
-            <% end %>
-          </table>
+          <% end %>
+        </table>
       </div>
     </div>
   </div>
