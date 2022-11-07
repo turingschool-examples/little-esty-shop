@@ -37,6 +37,18 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+  def most_popular_items
+    items
+      .joins(invoice_items: :invoice)
+      .where('invoices.status = 1')
+      .select('items.*, SUM(invoice_items.quantity) AS total_sold')
+      .group(:id)
+      .order(total_sold: :desc)
+      .limit(5)
+  end
+
+  def top_selling_date; end
+
   def self.enabled_merchants
     where('status = 1')
   end
