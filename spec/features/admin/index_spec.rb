@@ -9,7 +9,13 @@ RSpec.describe 'Admin index page' do
     visit '/admin'
     expect(page).to have_link("Merchants")
     expect(page).to have_link("Invoices")
-    #Add to test after these pages have been created
-    # click_link "Merchants"
+
+    click_link "Merchants"
+    expect(page).to have_current_path(admin_merchants_path)
+
+    visit '/admin'
+
+    # click_link "Invoices"
+    # expect(page).to have_current_path(admin_invoices_path)
   end
 end
