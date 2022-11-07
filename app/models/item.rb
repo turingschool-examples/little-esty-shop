@@ -15,7 +15,11 @@ class Item < ApplicationRecord
     self.invoice_items.where(invoice_id: invoice_id).pluck(:quantity).first
   end
 
+  def invoice_item_by(invoice_id)
+    self.invoice_items.where(invoice_id: invoice_id).first
+  end
+
   def invoice_item_status(invoice_id)
-    self.invoice_items.where(invoice_id: invoice_id).pluck(:status).first
+    self.invoice_items.where(invoice_id: invoice_id).first.status
   end
 end
