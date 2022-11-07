@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'admin index page' do
-   before(:each) do
+  before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
 
@@ -20,6 +20,7 @@ RSpec.describe 'admin index page' do
     @date1 = DateTime.new(2022,12,27,0,4,2)
     @date2 = DateTime.new(2022,01,31,0,4,2)
     @date3 = DateTime.new(2022,10,27,0,4,2)
+
     @customer_1_invoice_1 = @customer1.invoices.create!(status: 1)
     @customer_1_invoice_2 = @customer1.invoices.create!(status: 1)
     @customer_1_invoice_3 = @customer1.invoices.create!(status: 2, created_at: @date2)
@@ -86,8 +87,8 @@ RSpec.describe 'admin index page' do
     end
   end
 
-  describe 'admin top customers' do 
-    it 'displays names of top 5 customers who conducted largest # of successful transactions with count listed' do 
+  describe 'admin top customers' do
+    it 'displays names of top 5 customers who conducted largest # of successful transactions with count listed' do
 
       visit "/admin"
 
@@ -110,15 +111,15 @@ RSpec.describe 'admin index page' do
       within "#incomplete-invoices" do
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content(@customer_6_invoice_2.id)
-        
+
         click_link "Invoice #{@customer_6_invoice_2.id}"
         expect(current_path).to eq("/admin/invoices/#{@customer_6_invoice_2.id}")
       end
     end
 
-    it 'shows the incomplete invoices ordered from oldest to newest' do 
+    it 'shows the incomplete invoices ordered from oldest to newest' do
       visit "/admin"
-     
+
       within "#incomplete-invoices" do 
         expect("Monday, January 31, 2022").to appear_before("Thursday, October 27, 2022", only_text: true)
         expect("Thursday, October 27, 2022").to appear_before("Tuesday, December 27, 2022", only_text: true)

@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+  describe "Relationships" do
+    it { should belong_to(:customer) }
+    it { should have_many(:transactions) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:items).through(:invoice_items) }
+  end
+
   before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
@@ -31,13 +38,6 @@ RSpec.describe Invoice, type: :model do
 
     @customer_6_invoice_1 = @customer6.invoices.create!(status: 1)
     @customer_6_invoice_2 = @customer6.invoices.create!(status: 2)
-  end
-
-  describe "Relationships" do
-    it { should belong_to(:customer) }
-    it { should have_many(:transactions) }
-    it { should have_many(:invoice_items) }
-    it { should have_many(:items).through(:invoice_items) }
   end
 
   describe 'class methods' do
