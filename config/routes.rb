@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   # got error: "No route matches [GET] "/admin; thus created this-
   get '/admin', to: 'admin/dashboards#index'
   
+  # patch 'admin/invoices/:id', to: 'admin/invoices#update'
+
+
   #creates routes for merchants and merchant_items 
   get 'merchants/:id/dashboard', to: 'merchant_dashboards#show'
   
-
 end

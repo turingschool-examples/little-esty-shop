@@ -25,7 +25,59 @@ RSpec.describe 'Admin Invoice Show Page' do
 
   describe 'as an admin when i visit admin invoice show page' do 
     it 'i see invoice id, status, crated at date, and customer first and last name' do 
-      
+      visit admin_invoice_path(@invoice1)
+      # require 'pry'; binding.pry
+      expect(page).to have_content("Invoice ID: #{@invoice1.id}")
+      expect(page).to have_content("Invoice Status: in progress")
+      expect(page).to have_content("Invoice Created on: Tuesday, November 01, 2022")
+      expect(page).to have_content("Invoice's Customer Name: Sergio Azcona")
+      expect(page).to_not have_content("Invoice ID: #{@invoice2.id}")
+      expect(page).to_not have_content("Invoice Customer Name: Emily Port")
+
+    end
+
+    it 'i see all of items on invoice and item name, quantity, price, and invoice item status' do 
+      visit admin_invoice_path(@invoice1)
+      expect(page).to have_content("Item: Funny Brick of Powder")
+      expect(page).to have_content("Quantity: 1")
+      expect(page).to have_content("Price: 5000")
+      expect(page).to have_content("Status: packaged")
+      expect(page).to have_content("Item: T-Rex")
+      expect(page).to have_content("Quantity: 2")
+      expect(page).to have_content("Price: 5000")
+      expect(page).to have_content("Status: pending")
+      expect(page).to_not have_content("Item: UFO Board")
+    end
+
+    it 'i see total revenue that will be generated from this invoice' do 
+      visit admin_invoice_path(@invoice1)
+      expect(page).to have_content("Total Revenue: 15000")
+    end
+
+    it 'invoice status as a select field with current status selected' do 
+      visit admin_invoice_path(@invoice1)
+      within "#admin-invoice-status-#{@invoice1.id}" do 
+        expect(page).to have_content("Invoice Status: in progress")
+        expect(page).to have_checked_field(checked: 'in progress')
+        expect(page).to have_button("Update Invoice Status")
+        expect(current_path).to eq(admin_invoice_path(@invoice1))
+      end
+    end
+
+    it 'when i click select field, i can select new status for invoice and taken back to show page with updated status' do 
+      visit admin_invoice_path(@invoice1)
+      within "#admin-invoice-status-#{@invoice1.id}" do 
+        expect(page).to have_checked_field(checked: 'in progress')
+        expect(@invoice1.status).to eq('in progress')
+
+        first(:radio_button, 'status').click 
+        click_button("Update Invoice Status")
+        expect(page).to have_checked_field(checked: 'cancelled')
+
+        @invoice1.reload.status
+        expect(@invoice1.status).to eq('cancelled')
+        expect(@invoice1.status).to_not eq('in progress')
+      end
     end
   end
 end
