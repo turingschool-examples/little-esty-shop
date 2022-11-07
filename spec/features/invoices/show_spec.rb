@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant invoices index page' do
+RSpec.describe 'merchant invoices show page' do
   describe 'as a merchant' do
-    describe 'when I visit my merchant invoices index page (/merchants/:id/invoices)' do
+    describe 'when I visit my merchant invoices show page (/merchants/:merchant_id/invoices/:id)' do
       before :each do
         @crystal_moon = Merchant.create!(name: "Crystal Moon Designs")
         @surf_designs = Merchant.create!(name: "Surf & Co. Designs")
@@ -77,21 +77,14 @@ RSpec.describe 'merchant invoices index page' do
         @transaction_14 = Transaction.create!(result: 1, invoice_id: @invoice_14.id, credit_card_number: 0016)
       end
 
-      it ' lists all of my invoices that have at least one of my items as links that direct to their show pages' do
+      it " displays the id, status, creation date(format: Monday, July 18, 2019), and the customer's first and last names " do
        
-        visit merchant_invoices_path(@surf_designs)
+        visit merchant_invoice_path(@surf_designs, @invoice_12)
         
-        expect(page).to have_content("Surf & Co. Designs Invoices")
-        expect(page).to have_link("Invoice: #{@invoice_6.id}")
-        expect(page).to have_link("Invoice: #{@invoice_12.id}")
-        expect(page).to have_link("Invoice: #{@invoice_13.id}")
-        expect(page).to have_link("Invoice: #{@invoice_14.id}")
-        expect(page).to_not have_link("Invoice: #{@invoice_1.id}")
-        expect(page).to_not have_link("Invoice: #{@invoice_11.id}")
-        
-        click_link "Invoice: #{@invoice_12.id}"
-
-        expect(current_path).to eq(merchant_invoices_path(@surf_designs, @invoice_12))
+        expect(page).to have_content("Invoice: #{@invoice_12.id}")
+        expect(page).to have_content("Status: #{@invoice_12.status}")
+        expect(page).to have_content("Created On: #{@invoice_12.created_at.strftime("%A, %B%e, %Y")}")
+        expect(page).to have_content("Customer: #{@invoice_12.customer.first_name} #{@invoice_12.customer.last_name}")
       end
     end
   end
