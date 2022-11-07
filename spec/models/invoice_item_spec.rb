@@ -105,5 +105,11 @@ RSpec.describe InvoiceItem, type: :model do
         expect(InvoiceItem.not_shipped.length).to eq(6)
       end
     end
+
+    describe '#self.sort_by_creation_date' do
+      it 'sorts an InvoiceItem active record relation by order of creation date' do
+        expect(InvoiceItem.not_shipped.sort_by_invoice_creation_date).to eq([@pearl_invoice, @moon_rock_invoice, @lapis_lazuli_invoice, @topaz_invoice, @surf_board_invoice, @zinc_invoice])
+      end
+    end
   end
 end

@@ -140,4 +140,23 @@ RSpec.describe 'Admin index page' do
     click_link "Invoice #{@pearl_invoice.invoice_id}"
     expect(current_path).to eql(admin_invoice_path(@pearl_invoice.invoice_id))
   end
+
+  it 'it displays next to each link - in order of creation - when each invoice was created' do
+    visit admin_index_path
+
+    expect(page).to have_content("Created On: #{@invoice_1.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_2.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_3.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_4.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_14.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_6.created_at.strftime("%A, %B%e, %Y")}")
+
+    expect("Invoice #{@pearl_invoice.invoice_id}").to appear_before("Invoice #{@moon_rock_invoice.invoice_id}")
+
+    expect("Invoice #{@moon_rock_invoice.invoice_id}").to appear_before("Invoice #{@lapis_lazuli_invoice.invoice_id}")
+
+    expect("Invoice #{@lapis_lazuli_invoice.invoice_id}").to appear_before("Invoice #{@topaz_invoice.invoice_id}")
+
+    expect("Invoice #{@surf_board_invoice.invoice_id}").to appear_before("Invoice #{@zinc_invoice.invoice_id}")
+  end
 end
