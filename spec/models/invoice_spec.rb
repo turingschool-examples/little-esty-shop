@@ -46,9 +46,11 @@ RSpec.describe Invoice, type: :model do
     InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_2_item_1)
     InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_2_item_1)
     InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_2_item_1)
-    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_2_item_1)
-    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_2_item_1)
-    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_3_item_1)
+    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_2_item_1, quantity: 1, unit_price: 10)
+    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_2_item_1, quantity: 1, unit_price: 10)
+    InvoiceItem.create!(invoice: @customer_6_invoice_1, item: @merchant_3_item_1, quantity: 2, unit_price: 15)
+
+    @customer_6_invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
   end
 
   describe 'class methods' do
@@ -65,7 +67,7 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
-    describe '#invoice_revenue' do
+    describe '.invoice_revenue' do
       it 'returns total revenue for specific invoices' do
         expect(@customer_1_invoice_1.invoice_revenue).to eq(27)
       end
@@ -86,8 +88,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe '#total_revenue' do
-      it 'returns the sum of all items unit cost on that invoice' do
-        expect(@customer_6_invoice_1.total_revenue(@merchant2)).to eq(12)
+      it 'returns the sum of all items (unit_cost * quantity) on that invoice, for that merchant' do
+        expect(@customer_6_invoice_1.total_revenue(@merchant2)).to eq(20)
       end
     end
 
