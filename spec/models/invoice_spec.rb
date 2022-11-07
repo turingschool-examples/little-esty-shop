@@ -52,13 +52,14 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'class methods' do
-    describe '#incomplete_invoices' do
+    describe '.incomplete_invoices' do
       it 'returns the invoices that are still in progress' do
         expect(Invoice.incomplete_invoices).to eq([@customer_6_invoice_2])
       end
     end
 
-    describe "#invoices_for" do
+
+    describe ".invoices_for" do
       it 'selects all invoices assoicated with that merchant' do
         expect(Invoice.invoices_for(@merchant1).to_a).to eq([@customer_1_invoice_1, @customer_1_invoice_2])
       end
@@ -71,22 +72,28 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  describe "model methods" do
-    describe '.customer_last' do
+  describe "instance methods" do
+    describe '#customer_last' do
       it 'returns the invoiced customers last name' do
         expect(@customer_1_invoice_1.customer_last).to eq("Valentino")
       end
     end
 
-    describe '.customer_first'do
+    describe '#customer_first'do
       it 'returns the invoiced customers first name' do
         expect(@customer_1_invoice_1.customer_first).to eq("Bobby")
       end
     end
 
-    describe '.total_revenue' do
+    describe '#total_revenue' do
       it 'returns the sum of all items unit cost on that invoice' do
         expect(@customer_6_invoice_1.total_revenue(@merchant2)).to eq(12)
+      end
+    end
+
+    describe '#invoice_revenue' do
+      it 'returns total revenue for specific invoices' do
+        expect(@customer_1_invoice_1.invoice_revenue).to eq(27)
       end
     end
   end
