@@ -1,14 +1,62 @@
+<style>
+.main_text {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+</style>
+
 
 <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Dashboard" } %>
 
 <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Invoice #<%= @invoice.id %></h3>
 
-<p>Status: <%= @invoice.status %></p>
-<p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-<h4>Customer:</h4>
-<p style="padding-left:4em"><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
+<div class="main_text">
+  <h4>Status:</h4>
+  <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+    <%= form.select :invoice_status, ["Cancelled", "Completed", "In Progress"], selected: "#{@invoice.status}" %>
+    <%= form.submit 'Update Invoice Status' %>
+  <% end %>
 
-<p><b>Total Revenue:</b> $<%= @invoice.invoice_revenue %></p>
+  <h4>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></h4>
+  <h4><b>Total Revenue:</b> $<%= @invoice.invoice_revenue %></h4>
 
+  <h4>Customer:</h4>
+  <p style="padding-left:4em"><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
+
+  <div id="items-details">
+    <h4>Items on this Invoice:</h4>
+    <table>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Status</th>
+      </tr>
+      <% @invoice.items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.invoice_items.sum(:quantity) %></td>
+          <td><%= item.unit_price %></td>
+          <td><%= item.invoice_items.first.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 
 

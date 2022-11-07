@@ -14,6 +14,6 @@ Rails.application.routes.draw do
 
   namespace(:admin) do
     resources :merchants, except: [:destroy]
-    resources :invoices, only: [:show, :index]
+    resources :invoices, only: [:show, :index, :update]
   end
 end
