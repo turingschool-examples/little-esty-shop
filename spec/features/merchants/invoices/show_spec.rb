@@ -49,12 +49,10 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           expect(page).to have_content(@merchant_1_item_1.name)
           expect(page).to have_content(@invoice_item_1.quantity)
           expect(page).to have_content(@merchant_1_item_1.unit_price)
-          expect(page).to have_content(@invoice_item_1.status)
 
           expect(page).to have_content(@merchant_1_item_2.name)
           expect(page).to have_content(@invoice_item_2.quantity)
           expect(page).to have_content(@merchant_1_item_2.unit_price)
-          expect(page).to have_content(@invoice_item_2.status)
         end
       end
 
@@ -63,21 +61,35 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           expect(page).to_not have_content(@merchant_2_item_1.name)
           expect(page).to_not have_content(@invoice_item_3.quantity)
           expect(page).to_not have_content(@merchant_2_item_1.unit_price)
-          expect(page).to_not have_content(@invoice_item_3.status)
         end
       end
 
       it 'total revenue for all items on invoice' do
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
+
           expect(page).to have_content(@merchant_1_item_1.unit_price + @merchant_1_item_2.unit_price)
         end
       end
 
       describe 'a form to change the items status' do
         it 'that has a select field that displays the items current status' do
-
+          within "#form-#{@merchant_1_item_1.id}" do
+            expect(page).to have_select(selected: "packaged")
+          end
+          within "#form-#{@merchant_1_item_2.id}" do
+            expect(page).to have_select(selected: "pending")
+          end
         end
-        it 'that allows me to select a new status and update the item by pressing "Update Item Status"'
+
+        it 'that allows me to select a new status and update the item by pressing "Update Item Status"' do
+          within "#form-#{@merchant_1_item_1.id}" do
+            select 'pending', from: 'invoice_item_status'
+            click_button "Update Item Status"
+
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}")
+            expect(page).to have_select(selected: "pending")
+          end
+        end
       end
     end
   end

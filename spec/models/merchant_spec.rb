@@ -41,7 +41,7 @@ RSpec.describe(Merchant, type: :model) do
     describe '#invoice_items_to_ship' do
       describe 'returns an array of invoice_items' do
         it 'where invoice_item is "packaged" (0)' do
-          expect(@merchant_1.invoice_items_to_ship).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
+          expect(@merchant_1.invoice_items_to_ship.to_a).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
         end
 
         it "ordered by invoice created_at, NOT invoice_item created_at" do

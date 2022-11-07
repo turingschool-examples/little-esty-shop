@@ -5,6 +5,10 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
   enum status: ["Cancelled", "Completed", "In Progress"]
 
+  def self.incomplete_invoices
+    where(status: "In Progress").order(:created_at)
+  end
+
   def self.invoices_for(merchant)
     invoice_ids = merchant.invoice_items.pluck("invoice_id")
     Invoice.where(id: invoice_ids)
@@ -18,15 +22,11 @@ class Invoice < ApplicationRecord
     self.customer.first_name
   end
 
-  def total_revenue
-    self.items.sum(:unit_price)
+  def total_revenue(merchant)
+    self.items.where(merchant_id: merchant).sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
-  def self.incomplete_invoices
-    where(status: "In Progress").order(:created_at)
-  end
-
-  def invoice_revenue 
+  def invoice_revenue
     self.invoice_items.sum("quantity * unit_price")
   end
 end
