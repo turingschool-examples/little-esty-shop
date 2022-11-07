@@ -1,5 +1,4 @@
 class Invoice < ApplicationRecord
-
   belongs_to :customer
   has_many :transactions
   has_many :invoice_items
@@ -25,6 +24,10 @@ class Invoice < ApplicationRecord
 
   def total_revenue(merchant)
     self.items.where(merchant_id: merchant).sum(:unit_price)
+  end
+
+  def invoice_revenue
+    self.invoice_items.sum("quantity * unit_price")
   end
 end
 

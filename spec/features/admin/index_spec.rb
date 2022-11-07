@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'admin index page' do
-   before(:each) do
+  before(:each) do
     @merchant1 = Merchant.create!(name: "Trey")
     @merchant2 = Merchant.create!(name: "Meredith")
 
@@ -17,19 +17,20 @@ RSpec.describe 'admin index page' do
     @customer5 = Customer.create!(first_name: "Curtis", last_name: "Jackson")
     @customer6 = Customer.create!(first_name: "Marshall", last_name: "Mathers")
     
-    date1 = DateTime.new(2022,12,27,0,4,2)
-    date2 = DateTime.new(2022,01,31,0,4,2)
-    date3 = DateTime.new(2022,10,27,0,4,2)
+    @date1 = DateTime.new(2022,12,27,0,4,2)
+    @date2 = DateTime.new(2022,01,31,0,4,2)
+    @date3 = DateTime.new(2022,10,27,0,4,2)
+
     @customer_1_invoice_1 = @customer1.invoices.create!(status: 1)
     @customer_1_invoice_2 = @customer1.invoices.create!(status: 1)
-    @customer_1_invoice_3 = @customer1.invoices.create!(status: 2, created_at: date2)
+    @customer_1_invoice_3 = @customer1.invoices.create!(status: 2, created_at: @date2)
     @customer_2_invoice_1 = @customer2.invoices.create!(status: 1)
-    @customer_2_invoice_2 = @customer2.invoices.create!(status: 2, created_at: date3)
+    @customer_2_invoice_2 = @customer2.invoices.create!(status: 2, created_at: @date3)
     @customer_3_invoice_1 = @customer3.invoices.create!(status: 1)
     @customer_4_invoice_1 = @customer4.invoices.create!(status: 1)
     @customer_5_invoice_1 = @customer5.invoices.create!(status: 1)
     @customer_6_invoice_1 = @customer6.invoices.create!(status: 1)
-    @customer_6_invoice_2 = @customer6.invoices.create!(status: 2, created_at: date1)
+    @customer_6_invoice_2 = @customer6.invoices.create!(status: 2, created_at: @date1)
 
     InvoiceItem.create!(invoice: @customer_1_invoice_2, item: @merchant_2_item_1, quantity: 1, unit_price: 4, status: 0)
     InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 2)
@@ -86,8 +87,8 @@ RSpec.describe 'admin index page' do
     end
   end
 
-  describe 'admin top customers' do 
-    it 'displays names of top 5 customers who conducted largest # of successful transactions with count listed' do 
+  describe 'admin top customers' do
+    it 'displays names of top 5 customers who conducted largest # of successful transactions with count listed' do
 
       visit "/admin"
 
@@ -104,23 +105,25 @@ RSpec.describe 'admin index page' do
   end
 
   describe 'incomplete invoices' do 
-    it 'displays a list of ifs of all invoices that have items not yet shipped-id links to that invoices admin show page' do 
+    it 'displays a list of ids of all invoices that have items not yet shipped-id links to that invoices admin show page' do 
       visit "/admin"
 
       within "#incomplete-invoices" do
         expect(page).to have_content("Incomplete Invoices")
         expect(page).to have_content(@customer_6_invoice_2.id)
-        
+
         click_link "Invoice #{@customer_6_invoice_2.id}"
         expect(current_path).to eq("/admin/invoices/#{@customer_6_invoice_2.id}")
       end
     end
 
-    it 'shows the incomplete invoices ordered from oldest to newest' do 
+    it 'shows the incomplete invoices ordered from oldest to newest' do
       visit "/admin"
 
       within "#incomplete-invoices" do 
-        expect(page).to have_content(@customer_6_invoice_2.id)
+        expect("Monday, January 31, 2022").to appear_before("Thursday, October 27, 2022", only_text: true)
+        expect("Thursday, October 27, 2022").to appear_before("Tuesday, December 27, 2022", only_text: true)
+        expect("Tuesday, December 27, 2022").to_not appear_before("Monday, January 31, 2022", only_text: true)
       end
     end
   end

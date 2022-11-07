@@ -4,6 +4,7 @@ RSpec.describe Customer, type: :model do
   describe "Relationships" do
     it { should have_many(:invoices) }
   end
+
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Dave")
     @merchant_2 = Merchant.create!(name: "Kevin")
@@ -81,6 +82,12 @@ RSpec.describe Customer, type: :model do
         it 'returns top 5 customers for all merchants based on successful transaction count' do
           expect(Customer.top_five_total_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
         end
+      end
+    end
+
+    describe '#top_five_total_customers' do
+      it 'returns top 5 customers for all merchants based on successful transaction count' do
+        expect(Customer.top_five_total_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
       end
     end
   end

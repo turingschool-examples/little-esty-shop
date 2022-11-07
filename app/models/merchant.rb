@@ -4,7 +4,7 @@ class Merchant < ApplicationRecord
   has_many :invoices,   through: :invoice_items
   has_many :customers,   through: :invoices
   has_many :transactions,   through: :invoices
-  enum   status: ["enabled", "disabled"]
+  enum status: ["enabled", "disabled"]
 
   def invoice_items_to_ship
     self.invoice_items.joins(:invoice).where(    status: 0).order("invoices.created_at")
