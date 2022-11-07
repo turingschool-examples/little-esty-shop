@@ -16,8 +16,8 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
     @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1)
     @customer_2_invoice_1 = @customer_2.invoices.create!(status: 2)
 
-    @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, status: 0)
-    @invoice_item_2 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 5, status: 1)
+    @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, status: 0, unit_price: 1)
+    @invoice_item_2 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 5, status: 1, unit_price: 3)
     @invoice_item_3 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_2_item_1, quantity: 8, status: 2)
     @invoice_item_4 = InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 9, status: 2)
 
@@ -67,7 +67,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
       it 'total revenue for all items on invoice' do
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
 
-          expect(page).to have_content(@merchant_1_item_1.unit_price + @merchant_1_item_2.unit_price)
+          expect(page).to have_content((@merchant_1_item_1.unit_price * @invoice_item_1.quantity) + (@merchant_1_item_2.unit_price * @invoice_item_2.quantity))
         end
       end
 
