@@ -1,6 +1,9 @@
 class Admin::InvoicesController < ApplicationController
 
 #placeholder created to complete Admin Dashboard index page
+  def index 
+    @invoices = Invoice.all
+  end
 
   def show 
   @invoice = Invoice.find(params[:id])
