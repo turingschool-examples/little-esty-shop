@@ -49,5 +49,12 @@ RSpec.describe 'admin/invoices/invoice.id' do
 
       expect(page).to have_content('Total Revenue of All Items: 222')
     end
+
+    it 'can update invoice status from a select field' do
+      visit "/admin/invoices/#{@invoice_1.id}"
+      choose(:status, option: 'in progress')
+      click_on 'Update Invoice Status'
+      expect(page).to have_content('Status: in progress')
+    end
   end
 end
