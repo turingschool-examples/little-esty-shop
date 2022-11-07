@@ -6,4 +6,8 @@ class Invoice < ApplicationRecord
   has_one :merchant, through: :items
 
   enum status: [ :"in progress", :cancelled, :completed ]
+
+  def invoice_item(item_id)
+    
+  end
 end

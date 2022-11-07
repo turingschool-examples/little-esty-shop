@@ -2,3 +2,12 @@
 <p>Status: <%=@invoice.status%></p>
 <p>Created On: <%=@invoice.created_at.strftime("%A, %B%e, %Y")%></p>
 <p>Customer: <%=@invoice.customer.first_name%> <%=@invoice.customer.last_name%></p>
+
+<% @invoice.items.each do |item| %>
+  <% if @merchant.id == item.merchant_id %>
+    <p>Item Name: <%= item.name %>
+  <% end %>
+  <% if @invoice.item.item_id == item.id %>
+    <p>Quantity: <% item.quantity %></p>
+  <% end %>
+<% end %>
