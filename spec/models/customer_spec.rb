@@ -81,6 +81,11 @@ RSpec.describe Customer, type: :model do
       describe '#top_five_total_customers' do
         it 'returns top 5 customers for all merchants based on successful transaction count' do
           expect(Customer.top_five_total_customers).to eq([@customer_1, @customer_2, @customer_3, @customer_4, @customer_5])
+          expect(Customer.top_five_total_customers.first.num_transactions).to eq(4)
+          expect(Customer.top_five_total_customers.second.num_transactions).to eq(2)
+          expect(Customer.top_five_total_customers.third.num_transactions).to eq(2)
+          expect(Customer.top_five_total_customers.fourth.num_transactions).to eq(2)
+          expect(Customer.top_five_total_customers.fifth.num_transactions).to eq(2)
         end
       end
     end
