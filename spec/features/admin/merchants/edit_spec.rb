@@ -1,4 +1,4 @@
-require 'rails_helper'[]
+require 'rails_helper'
 
 RSpec.describe 'Admin merchants Update' do 
   before :each do 
@@ -16,7 +16,7 @@ RSpec.describe 'Admin merchants Update' do
 
       expect(page).to have_link(@dogs.name)
       click_link(@dogs.name)
-      expect(current_path).to eq("/admins/merchants/#{@dogs.id}/edit"
+      expect(current_path).to eq("/admin/merchants/#{@dogs.id}/edit")
     end
 
     it 'I see a form filled in witht he existing merchant attribute info, when I update the info in the form and click submit
@@ -34,5 +34,4 @@ RSpec.describe 'Admin merchants Update' do
         expect(page).to have_content("Doggo Store")
     end
   end
-
 end
