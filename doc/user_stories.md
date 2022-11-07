@@ -158,7 +158,8 @@ Notes on Revenue Calculation:
 ```
 Merchant Items Index: Top Item's Best Day
 
-When I visit the items index page
+As a merchant
+When I visit my items index page
 Then next to each of the 5 most popular items I see the date with the most sales for each item.
 And I see a label “Top selling date for <item name> was <date with most sales>"
 
