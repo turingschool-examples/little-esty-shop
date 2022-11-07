@@ -32,7 +32,7 @@
     <div id="top-5-customers">
       <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Top 5 Customers</h3>
         <% @five_best_customers.each do |customer| %>
-          <center><p><%= "#{customer.first_name} #{customer.last_name}; #{customer.num_success_trans} purchases." %></p></center>
+          <center><p><%= "#{customer.first_name} #{customer.last_name}; #{customer.num_transactions} purchases." %></p></center>
         <% end %>
     </div>
   </div>
