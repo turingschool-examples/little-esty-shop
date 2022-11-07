@@ -7,7 +7,7 @@ class Merchant < ApplicationRecord
   enum status: ["enabled", "disabled"]
 
   def invoice_items_to_ship
-    self.invoice_items.joins(:invoice).where(    status: 0).order("invoices.created_at")
+    self.invoice_items.joins(:invoice).where(    status: 0).order("invoices.created_at, invoice_items.id")
   end
 
   def enabled_items
