@@ -160,7 +160,6 @@ RSpec.describe("On the Merchant's Items index page") do
       end
     end
 
-<<<<<<< HEAD
     it("displays the date with the most sales for each item with label 'Top selling date for <item> was <date>'") do
       visit("merchants/#{@merchant.id}/items")
 
@@ -170,17 +169,6 @@ RSpec.describe("On the Merchant's Items index page") do
         expect(page).to(have_content("Top selling date for Scroll of healing was 3/3/22"))
         expect(page).to(have_content("Top selling date for Book of the dead was 2/3/22"))
         expect(page).to(have_content("Top selling date for Bird bones was 3/3/22"))
-=======
-    it "displays the date with the most sales for each item with label 'Top selling date for <item> was <date>'" do
-      visit "merchants/#{@merchant.id}/items"
-
-      within "#top-items" do
-        expect(page).to have_content("Top selling date for Candle of life was 2/3/22")
-        expect(page).to have_content("Top selling date for Love potion was 3/3/22")
-        expect(page).to have_content("Top selling date for Scroll of healing was 3/3/22")
-        expect(page).to have_content("Top selling date for Book of the dead was 2/3/22")
-        expect(page).to have_content("Top selling date for Bird bones was 3/3/22")
->>>>>>> main
       end
     end
   end

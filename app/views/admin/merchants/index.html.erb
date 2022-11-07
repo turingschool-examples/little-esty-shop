@@ -16,6 +16,7 @@
 }
 
 
+</style>
 <body>
 
   <%= render partial: "admin_shared/header", locals: { subtitle: "Admin Merchants Index Page" } %>
@@ -46,6 +47,18 @@
         <div id>
           <%=link_to "Create New Merchant", new_admin_merchant_path %>
         </div>
+      </div>
+    </div>
+    <div class="column">
+      <div id="top-five-merchants">
+        <h2>Top Merchants</h2>
+          <%@merchants.top_five_merchants.each do|merchant|%>
+            <p>
+              <%=link_to"#{merchant.name}",admin_merchant_path(merchant)%>
+              <%="- $#{merchant.revenue}.00 in sales" %>
+            </p>
+            <%= "Top day for #{merchant.name} was #{merchant.top_day.strftime("%-m/%-d/%y")}" %>
+          <% end %>
       </div>
     </div>
   </div>

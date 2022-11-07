@@ -102,6 +102,24 @@ RSpec.describe(Merchant, type: :model) do
         expect(merchant.top_five_items[4].total_revenue).to(eq(2))
       end
     end
+
+    describe("#top_day") do
+      it("returns the DateTime for merchants top revenue day") do
+        merchant = Merchant.create!(        name: "Tokyos Tractors")
+        cx = Customer.create!(        first_name: "Tapanga",         last_name: "Toloza")
+        feb_third = DateTime.new(2022, 2, 3, 4, 5, 6)
+        march_third = DateTime.new(2022, 3, 3, 6, 2, 3)
+        april_first = DateTime.new(2022, 4, 1, 8, 9, 6)
+        item = merchant.items.create!(        name: "A",         description: "Alpha",         unit_price: 1)
+        invoice_1 = cx.invoices.create!(        status: 1,         created_at: feb_third)
+        invoice_2 = cx.invoices.create!(        status: 1,         created_at: march_third)
+        invoice_3 = cx.invoices.create!(        status: 1,         created_at: april_first)
+        InvoiceItem.create!(        invoice: invoice_1,         item: item,         quantity: 2,         unit_price: 1,         status: 2)
+        InvoiceItem.create!(        invoice: invoice_2,         item: item,         quantity: 4,         unit_price: 1,         status: 2)
+        InvoiceItem.create!(        invoice: invoice_3,         item: item,         quantity: 1,         unit_price: 1,         status: 2)
+        expect(merchant.top_day).to(eq(march_third))
+      end
+    end
   end
 
   describe("class method") do
