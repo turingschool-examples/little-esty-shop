@@ -46,11 +46,11 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_5_merchants
-    require 'pry'; binding.pry
-    joins(items: :invoice_items) #add more tables
+    # require 'pry'; binding.pry
+    joins(items: [{invoice_items: {invoices: :transactions}}])
     .where('transactions.result = 0 AND invoice.status = 1')
     .select('invoice_items.*, sum(invoice_items.quantity * invoice_items.unit_price as revenue')
-    .select('sum(revenue) ') # sum revenues specific to merchant
+    # .select('sum(revenue) ') # sum revenues specific to merchant
     .limit(5)
   end
 end
