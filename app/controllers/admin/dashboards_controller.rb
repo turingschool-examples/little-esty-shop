@@ -4,7 +4,5 @@ class Admin::DashboardsController < ApplicationController
   end
   
   def index
-    @merchants = Merchant.all
-    @invoices = Invoice.all
   end
 end
