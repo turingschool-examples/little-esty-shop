@@ -20,8 +20,8 @@ RSpec.describe Invoice, type: :model do
         emerald_invoice = InvoiceItem.create!(item_id: emerald.id, invoice_id: invoice_6.id, quantity: 2, unit_price: 85, status: 2)
         surf_board_invoice = InvoiceItem.create!(item_id: surf_board.id, invoice_id: invoice_6.id, quantity: 2, unit_price: 200, status: 1)
 
-        expect(invoice_6.invoice_item(emerald.id)).to eq(emerald_invoice.item_id)
-        expect(invoice_6.invoice_item(surf_board.id)).to eq(surf_board_invoice.item_id)
+        expect(invoice_6.invoice_item(emerald.id)).to eq(emerald_invoice)
+        expect(invoice_6.invoice_item(surf_board.id)).to eq(surf_board_invoice)
       end
     end
   end

@@ -8,6 +8,6 @@ class Invoice < ApplicationRecord
   enum status: [ :"in progress", :cancelled, :completed ]
 
   def invoice_item(item_id)
-    
+    invoice_items.find_by(item_id: item_id)
   end
 end
