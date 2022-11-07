@@ -44,9 +44,9 @@ RSpec.describe(Merchant, type: :model) do
           expect(@merchant_1.invoice_items_to_ship.to_a).to eq([@customer_1_invoice_1_item_1_pachaged, @customer_2_invoice_1_item_1_packaged])
         end
 
-        xit "ordered by invoice created_at, NOT invoice_item created_at" do
-          customer_2_invoice_1 = InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 0)
-          expect(@merchant_1.invoice_items_to_ship.to_a).to eq([@customer_1_invoice_1_item_1_pachaged, customer_2_invoice_1, @customer_2_invoice_1_item_1_packaged])
+        it "ordered by invoice created_at, NOT invoice_item created_at" do
+          customer_1_invoice_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 3, status: 0)
+          expect(@merchant_1.invoice_items_to_ship.to_a).to eq([@customer_1_invoice_1_item_1_pachaged, customer_1_invoice_1, @customer_2_invoice_1_item_1_packaged])
         end
       end
     end
