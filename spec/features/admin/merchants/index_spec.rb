@@ -29,19 +29,51 @@ RSpec.describe 'admin/merchants index page' do
     @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
     @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
 
-    @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant1.id)
-    @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant2.id)
+    @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant_1.id)
+    @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant_2.id)
+    @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant_2.id)
+    @item4 = Item.create!(name: 'Leotard', description: 'Costume', unit_price: 1850, merchant_id: @merchant_3.id)
+    @item5 = Item.create!(name: 'Cape', description: 'Fully Functional', unit_price: 900, merchant_id: @merchant_4.id)
+    @item6 = Item.create!(name: 'Black Makeup', description: 'Gallon Sized', unit_price: 50, merchant_id: @merchant_5.id)
+    @item7 = Item.create!(name: 'Batmobile', description: 'Only one left in stock', unit_price: 1000000, merchant_id: @merchant_5.id)
+    @item8 = Item.create!(name: 'Night-Vision Goggles', description: 'Required for night activities', unit_price: 15000, merchant_id: @merchant_6.id)
+    @item9 = Item.create!(name: 'Bat-Cave', description: 'Bats not included', unit_price: 10000000, merchant_id: @merchant_6.id)
+
     InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
     InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
     InvoiceItem.create!(quantity: 6, unit_price: 600, status: 'pending', item_id: @item1.id, invoice_id: @invoice3.id)
     InvoiceItem.create!(quantity: 12, unit_price: 1200, status: 'packaged', item_id: @item1.id, invoice_id: @invoice4.id)
     InvoiceItem.create!(quantity: 8, unit_price: 800, status: 'packaged', item_id: @item1.id, invoice_id: @invoice5.id)
     InvoiceItem.create!(quantity: 20, unit_price: 2000, status: 'packaged', item_id: @item1.id, invoice_id: @invoice6.id)
-    InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice9.id)
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice10.id)
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item1.id, invoice_id: @invoice11.id)
+
+    InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
+
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
+
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
+
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item5.id, invoice_id: @invoice11.id)
+
+    InvoiceItem.create!(quantity: 30, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice11.id)
+
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item7.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 1500, status: 'shipped', item_id: @item7.id, invoice_id: @invoice11.id)
+
+    InvoiceItem.create!(quantity: 10, unit_price: 100, status: 'shipped', item_id: @item8.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 100, status: 'shipped', item_id: @item8.id, invoice_id: @invoice11.id)
+    
+    InvoiceItem.create!(quantity: 11, unit_price: 1350, status: 'shipped', item_id: @item9.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 4, unit_price: 1350, status: 'shipped', item_id: @item9.id, invoice_id: @invoice11.id)
 
     @transaction1 = Transaction.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice1.id)
     @transaction2 = Transaction.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice1.id)
@@ -183,6 +215,23 @@ RSpec.describe 'admin/merchants index page' do
         expect(page).to have_button('Enable')
         expect(page).to_not have_button('Disable')
       end
+    end
+  end
+
+  describe 'top 5 merchants displayed on admin merchants index' do
+    it 'displays top 5 merchants with highest total revenue based on unit_price * quantity' do 
+      visit '/admin/merchants'
+      
+      expect(@merchant_2.name).to appear_before(@merchant_5.name)
+      expect(@merchant_5.name).to appear_before(@merchant_1.name)
+      expect(@merchant_1.name).to appear_before(@merchant_3.name)
+      expect(@merchant_3.name).to appear_before(@merchant_4.name)
+      
+      expect(page).to_not have_content(@merchant_6)
+    end
+
+    xit 'has links to the show page of each top merchant' do
+
     end
   end
 end
