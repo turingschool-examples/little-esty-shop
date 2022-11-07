@@ -90,7 +90,6 @@ RSpec.describe 'merchant invoices show page' do
       it 'displays all of my items on the invoice including: item name, quantity of the item ordered, the price 
       the item sold for, and the invoice item status. I do not see any info related to items for other merchants' do
         visit merchant_invoice_path(@crystal_moon, @invoice_6) # invoice_6 also has an item from surf_designs, so I am using this invoice strategically to test the edge case that merchant doesn't see items from other merchants
-        save_and_open_page
 
         expect(page).to have_content("Item Name: #{@emerald.name}")
         expect(page).to have_content("Quantity: #{@emerald_invoice.quantity}")
