@@ -7,7 +7,6 @@ RSpec.describe("Welcome Index Page") do
   describe 'When I visit /' do
     describe "Then I see" do
       it 'the project repo name' do
-        save_and_open_page
         expect(page).to have_content("little-esty-shop")
       end
     end
