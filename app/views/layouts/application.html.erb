@@ -14,8 +14,12 @@
   <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
-
-
+    <section>
+      <%= search = UsernameSearch.new %>
+      <%= search.username_information.each do |username| %>
+        <p><%=  name %></p>
+      <% end %>
+    </section>
     <%= yield %>
   </body>
 </html>
