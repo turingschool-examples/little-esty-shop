@@ -3,4 +3,8 @@ class Admin::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @customer = @invoice.customer
   end
+
+  def index
+    @invoices = Invoice.all
+  end
 end
