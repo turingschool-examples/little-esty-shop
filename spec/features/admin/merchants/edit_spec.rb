@@ -130,7 +130,7 @@ RSpec.feature "Admin Merchant Edit Page", type: :feature do
       fill_in 'Name:', with: 'This is an very long string that exceeds fifty characters in length'
       click_button 'Update'
 
-      expect(page).to have_current_path(edit_merchant_item_path(@merchant, @item))
+      expect(page).to have_current_path(edit_admin_merchant_path(@crystal_moon))
       expect(page).to have_content('Error:')
 
       visit admin_merchant_path(@crystal_moon)
