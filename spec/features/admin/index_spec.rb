@@ -113,15 +113,50 @@ RSpec.describe 'Admin index page' do
   it 'has a section that lists the top 5 customers by number of successful transactions' do
     visit admin_index_path
 
+    expect(page).to have_content("Top 5 Customers")
     expect(page).to have_content("Customer: Eevee Ketchup, Number of Successful Transactions: 5")
     expect(page).to have_content("Customer: Paul Walker, Number of Successful Transactions: 4")
     expect(page).to have_content("Customer: Frodo Baggins, Number of Successful Transactions: 3")
     expect(page).to have_content("Customer: Abbas Firnas, Number of Successful Transactions: 3")
     expect(page).to have_content("Customer: Sam Gamgee, Number of Successful Transactions: 3")
 
-    ("Customer: Eevee Ketchup, Number of Successful Transactions: 5").should appear_before("Customer: Paul Walker, Number of Successful Transactions: 4")
-    ("Customer: Paul Walker, Number of Successful Transactions: 4").should appear_before("Customer: Frodo Baggins, Number of Successful Transactions: 3")
-    ("Customer: Paul Walker, Number of Successful Transactions: 4").should appear_before("Customer: Abbas Firnas, Number of Successful Transactions: 3")
-    ("Customer: Paul Walker, Number of Successful Transactions: 4").should appear_before("Customer: Sam Gamgee, Number of Successful Transactions: 3")
+    expect("Customer: Eevee Ketchup, Number of Successful Transactions: 5").to appear_before("Customer: Paul Walker, Number of Successful Transactions: 4")
+    expect("Customer: Paul Walker, Number of Successful Transactions: 4").to appear_before("Customer: Frodo Baggins, Number of Successful Transactions: 3")
+    expect("Customer: Paul Walker, Number of Successful Transactions: 4").to appear_before("Customer: Abbas Firnas, Number of Successful Transactions: 3")
+    expect("Customer: Paul Walker, Number of Successful Transactions: 4").to appear_before("Customer: Sam Gamgee, Number of Successful Transactions: 3")
+  end
+
+  it 'has a section that lists, as links leading to their respective show pages, invoices that have items that have yet to be shipped' do
+    visit admin_index_path
+
+    expect(page).to have_content("Incomplete Invoices")
+    expect(page).to have_link("Invoice #{@pearl_invoice.invoice_id}")
+    expect(page).to have_link("Invoice #{@topaz_invoice.invoice_id}")
+    expect(page).to have_link("Invoice #{@moon_rock_invoice.invoice_id}")
+    expect(page).to have_link("Invoice #{@lapis_lazuli_invoice.invoice_id}")
+    expect(page).to have_link("Invoice #{@zinc_invoice.invoice_id}")
+    expect(page).to have_link("Invoice #{@surf_board_invoice.invoice_id}")
+
+    click_link "Invoice #{@pearl_invoice.invoice_id}"
+    expect(current_path).to eql(admin_invoice_path(@pearl_invoice.invoice_id))
+  end
+
+  it 'it displays next to each link - in order of creation - when each invoice was created' do
+    visit admin_index_path
+
+    expect(page).to have_content("Created On: #{@invoice_1.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_2.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_3.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_4.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_14.created_at.strftime("%A, %B%e, %Y")}")
+    expect(page).to have_content("Created On: #{@invoice_6.created_at.strftime("%A, %B%e, %Y")}")
+
+    expect("Invoice #{@pearl_invoice.invoice_id}").to appear_before("Invoice #{@moon_rock_invoice.invoice_id}")
+
+    expect("Invoice #{@moon_rock_invoice.invoice_id}").to appear_before("Invoice #{@lapis_lazuli_invoice.invoice_id}")
+
+    expect("Invoice #{@lapis_lazuli_invoice.invoice_id}").to appear_before("Invoice #{@topaz_invoice.invoice_id}")
+
+    expect("Invoice #{@surf_board_invoice.invoice_id}").to appear_before("Invoice #{@zinc_invoice.invoice_id}")
   end
 end

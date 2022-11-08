@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     resources :merchants, except: [:update]
   end
 
+  namespace :admin do
+    resources :invoices, except: [:update]
+  end
+
   resources :admin, only: [:index]
   # get '/admin', to: 'admin#index'
 
