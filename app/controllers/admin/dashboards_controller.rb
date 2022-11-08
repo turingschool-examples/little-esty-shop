@@ -4,5 +4,6 @@ class Admin::DashboardsController < ApplicationController
   end
   
   def index
+    @customers = Customer.top_five_customers
   end
 end
