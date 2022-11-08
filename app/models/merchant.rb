@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :invoice_items, through: :items
 
+  validates :name, presence: true, length: { maximum: 50 }
+  
   def top_5_customers
     Customer.joins("INNER join invoices ON invoices.customer_id = customers.id")
             .joins("INNER join transactions ON transactions.invoice_id = invoices.id")
