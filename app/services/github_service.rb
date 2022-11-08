@@ -6,7 +6,7 @@ class GithubService
   end
 
   def get_url(url)
-    response = HTTParty.get(url, headers: {"Authorization" => "Bearer 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"})
+    response = HTTParty.get(url, headers: {"Authorization" => "Bearer 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"})
     JSON.parse(response.body, symbolize_names: true)
   end
 end
