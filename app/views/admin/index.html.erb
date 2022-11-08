@@ -1,10 +1,3 @@
 <h1>Admin Dashboard</h1>
 <%= link_to "Merchants", "/admin/merchants" %>
 <%= link_to "Invoices", "/admin/invoices" %>
-
-<div id="top_customers">
-  <h2>--- Top 5 Customers ---</h2>
-    <% @top_customers.each do |customer, number_of_transactions|%>
-      <p> Customer: <%= customer[0] %> <%= customer[1] %>, Number of Successful Transactions: <%= number_of_transactions %></p>
-    <%end%>
-</div>

@@ -112,7 +112,7 @@ RSpec.describe 'Admin index page' do
 
   it 'has a section that lists the top 5 customers by number of successful transactions' do
     visit admin_index_path
-    
+
     expect(page).to have_content("Customer: Eevee Ketchup, Number of Successful Transactions: 5")
     expect(page).to have_content("Customer: Paul Walker, Number of Successful Transactions: 4")
     expect(page).to have_content("Customer: Frodo Baggins, Number of Successful Transactions: 3")

@@ -78,23 +78,33 @@ RSpec.describe 'merchant invoices show page' do
       end
 
       it " displays the id, status, creation date(format: Monday, July 18, 2019), and the customer's first and last names " do
-       
+
         visit merchant_invoice_path(@surf_designs, @invoice_12)
-        
+
         expect(page).to have_content("Invoice: #{@invoice_12.id}")
         expect(page).to have_content("Status: #{@invoice_12.status}")
         expect(page).to have_content("Created On: #{@invoice_12.created_at.strftime("%A, %B%e, %Y")}")
         expect(page).to have_content("Customer: #{@invoice_12.customer.first_name} #{@invoice_12.customer.last_name}")
       end
 
-      it 'displays all of my items on the invoice including: item name, quantity of the item ordered, the price 
+      it 'displays all of my items on the invoice including: item name, quantity of the item ordered, the price
       the item sold for, and the invoice item status. I do not see any info related to items for other merchants' do
         visit merchant_invoice_path(@crystal_moon, @invoice_6) # invoice_6 also has an item from surf_designs, so I am using this invoice strategically to test the edge case that merchant doesn't see items from other merchants
 
         expect(page).to have_content("Item Name: #{@emerald.name}")
         expect(page).to have_content("Quantity: #{@emerald_invoice.quantity}")
         expect(page).to have_content("Selling Price: $#{@emerald_invoice.unit_price} per unit")
-        expect(page).to have_content("Invoice Item Status: #{@emerald_invoice.status}")
+        expect(page).to have_select("status", selected: "Shipped")
+      end
+
+      it 'displays each invoice item status as a select field that can be updated' do
+        visit merchant_invoice_path(@crystal_moon, @invoice_6) # invoice_6 also has an item from surf_designs, so I am using this invoice strategically to test the edge case that merchant doesn't see items from other merchants
+        save_and_open_page
+        expect(page).to have_select("status", selected: "Shipped")
+        page.select "Packaged", from: "status"
+        click_button "Update Item Status"
+        # save_and_open_page
+        expect(page).to have_select("status", selected: "Packaged")
       end
     end
   end
