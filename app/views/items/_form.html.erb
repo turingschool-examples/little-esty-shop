@@ -1,0 +1,12 @@
+<%= form_with url: path, method: method, local: true do |f| %>
+<ul><%= f.label :name, "Item Name" %>
+  <%= f.text_field :name, value: name %></ul>
+  
+  <ul><%= f.label :description, "Item Description" %>
+  <%= f.text_field :description, value: description %></ul>
+
+  <ul><%= f.label :unit_price, "Item Unit Price" %>
+  <%= f.text_field :unit_price, value: unit_price %></ul>
+
+  <%= f.submit button_text %>
+<% end %>
