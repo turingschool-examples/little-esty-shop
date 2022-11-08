@@ -10,8 +10,10 @@ class InvoicesController < ApplicationController
 
   def show
     if params[:merchant_id]
-    @merchant = Merchant.find(params[:merchant_id])
-    @invoice = @merchant.invoices.find(params[:id])
+      @merchant = Merchant.find(params[:merchant_id])
+      @invoice = @merchant.invoices.find(params[:id])
+      @items = @invoice.items
+      # @item = @invoice_items.find(params[:id])
     else
       @invoice = Invoice.find(params[:id])
     end

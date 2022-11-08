@@ -26,6 +26,26 @@ RSpec.describe "Merchant Invoice Show Page" do
         expect(page).to have_content("Created: Thursday, July 18, 2019")
         expect(page).to have_content("Customer: #{@invoice1.customer.full_name}")
       end
+
+      it "Then I see all of my items on the invoice including: Item name, The quantity of the item ordered, The price the Item sold for, The Invoice Item status, And I do not see any information related to Items for other merchants" do
+        visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+        #  save_and_open_page
+
+        within("#item-#{@item2.id}") do
+          expect(page).to have_content("Name: #{@item2.name}")
+          expect(page).to have_content("Price: #{@item2.unit_price}")
+          expect(page).to have_content("Quantity: 15")
+          expect(page).to have_content("Status: packaged")
+        end
+
+        within("#item-#{@item1.id}") do
+          expect(page).to have_content("Name: #{@item1.name}")
+          expect(page).to have_content("Price: #{@item1.unit_price}")
+          expect(page).to have_content("Quantity: 5")
+          expect(page).to have_content("Status: packaged")
+        end
+
+      end
     end
   end
 end

@@ -2,3 +2,14 @@
 <p><b>Status: </b><%= @invoice.status %></p>
 <p><b>Created: </b><%= @invoice.created_at.strftime("%A, %B %e, %Y")  %></p>
 <p><b>Customer: </b><%= @invoice.customer.full_name %></p>
+
+<h2>Items: </h2>
+
+<% @items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <p><b>Name: </b><%= item.name %></p>
+    <p><b>Price: </b><%= "#{item.unit_price}¢" %>
+    <p>Quantity: </b><%= item.invoice_items.first.quantity %><p>
+    <p><b>Status: </b><%= item.invoice_items.first.status %></p>
+  </div>
+<% end %>
