@@ -43,6 +43,7 @@
         <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
           <p><%= link_to merchant.name, admin_merchant_path(merchant)  %> 
           <%= " - Total Revenue: $#{merchant.total_revenue / 100}" %></p>
+          <p><%= "Highest Sales Date: #{merchant.best_date_of_revenue}" %></p>
         <% end %>
   </div>
 </div>

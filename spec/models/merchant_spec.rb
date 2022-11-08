@@ -218,11 +218,11 @@ RSpec.describe Merchant do
       @merch4item = @merch4.items.create!(name: 'Item')
       @merch5item = @merch5.items.create!(name: 'Item')
 
-      @inv1 = @customer1.invoices.create!(status: 2)
-      @inv2 = @customer1.invoices.create!(status: 2)
-      @inv3 = @customer1.invoices.create!(status: 2)
-      @inv4 = @customer1.invoices.create!(status: 2)
-      @inv5 = @customer1.invoices.create!(status: 2)
+      @inv1 = @customer1.invoices.create!(status: 2, created_at: "2022-11-07 10:00:00 UTC")
+      @inv2 = @customer1.invoices.create!(status: 2, created_at: "2022-11-08 10:00:00 UTC")
+      @inv3 = @customer1.invoices.create!(status: 2, created_at: "2022-11-06 10:00:00 UTC")
+      @inv4 = @customer1.invoices.create!(status: 2, created_at: "2022-11-02 10:00:00 UTC")
+      @inv5 = @customer1.invoices.create!(status: 2, created_at: "2022-11-05 10:00:00 UTC")
 
       InvoiceItem.create!(invoice: @inv1, item: @merch1item, quantity: 5, unit_price: 20000)
       InvoiceItem.create!(invoice: @inv2, item: @merch2item, quantity: 5, unit_price: 10000)
@@ -244,6 +244,10 @@ RSpec.describe Merchant do
     it 'can calculate total merchant revenue' do 
       expect(@merch3.total_revenue).to eq(200000)
       expect(@merch2.total_revenue).to eq(50000)
+    end
+
+    it 'can return date of when a merchant made the most revenue' do 
+      expect(@merch1.best_date_of_revenue).to eq("2022-11-07 10:00:00 UTC")
     end
   end
 end

@@ -47,4 +47,13 @@ class Merchant < ApplicationRecord
 
   end
 
+  def best_date_of_revenue
+    
+    invoices.select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .group(:id)
+    .order(revenue: :desc)
+    .first 
+    .created_at
+  end
+
 end

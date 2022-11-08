@@ -17,7 +17,7 @@ RSpec.describe 'the admin merchants index page' do
     @merch4item = @burger.items.create!(name: 'Item')
     @merch5item = @dogs.items.create!(name: 'Item')
 
-    @inv1 = @customer1.invoices.create!(status: 2)
+    @inv1 = @customer1.invoices.create!(status: 2, created_at: Date.new(2022,11,07))
     @inv2 = @customer1.invoices.create!(status: 2)
     @inv3 = @customer1.invoices.create!(status: 2)
     @inv4 = @customer1.invoices.create!(status: 2)
@@ -120,5 +120,11 @@ RSpec.describe 'the admin merchants index page' do
 
   # Top Merchant's Best Day
   describe 'top merchants best day' do 
+
+    it 'next to each of the 5 merchants by revenue I see the date with the most revenue for each merchant. I see a label (Top selling date for was)' do 
+      within '#top_merchants' do
+        expect(page).to have_content("Highest Sales Date: 2022-11-07")
+      end 
+    end
   end
 end
