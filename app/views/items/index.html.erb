@@ -1,23 +1,12 @@
 <h1><%= "#{@merchant.name} Inventory" %></h1>
 
 <div id='top_by_revenue'>
-  <h3>Top 5 Items by Revenue:</h3>
+  <h3>Top 5 Most Popular Items by Revenue:</h3>
     <ol>
       <% @merchant.top_items_by_revenue.each do |item| %>
-          <li><b><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></b> - Total Revenue: <%= item.item_revenue %></li>
+          <li><b><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></b> <br> Total Revenue: <%= item.item_revenue %><br> Top selling date was: <%= item.top_item_selling_date %></li>
       <% end %>
     </ol>
-</div>
-
-<div id='most_popular'>
-  <h3>Most Popular Items:</h3>
-    <ul>
-      <% @merchant.most_popular_items.each do |item| %>
-        <li>
-          <p><b><%= item.name %></b> - Top selling date was: <%= item.top_item_selling_date %></p>
-        </li>
-      <% end %>
-    </ul>
 </div>
 
 <section id= "disabled">

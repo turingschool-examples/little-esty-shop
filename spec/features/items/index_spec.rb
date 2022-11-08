@@ -193,16 +193,16 @@ RSpec.describe 'Merchant Items Index Page' do
         visit "/merchants/#{@merchant1.id}/items"
         # save_and_open_page
 
-        within('#most_popular') do
-          expect(page).to have_content("Black Makeup - Top selling date was: #{@item6.top_item_selling_date}")
-          expect(page).to have_content("Leotard - Top selling date was: #{@item4.top_item_selling_date}")
-          expect(page).to have_content("Beanie Babies - Top selling date was: #{@item1.top_item_selling_date}")
-          expect(page).to have_content("Bat Mask - Top selling date was: #{@item3.top_item_selling_date}")
-          expect(page).to have_content("Cape - Top selling date was: #{@item5.top_item_selling_date}")
+        within('#top_by_revenue') do
+          expect(page).to have_content("Top selling date was: #{@item7.top_item_selling_date}")
+          expect(page).to have_content("Top selling date was: #{@item4.top_item_selling_date}")
+          expect(page).to have_content("Top selling date was: #{@item8.top_item_selling_date}")
+          expect(page).to have_content("Top selling date was: #{@item3.top_item_selling_date}")
+          expect(page).to have_content("Top selling date was: #{@item5.top_item_selling_date}")
 
-          expect("Black Makeup").to appear_before("Leotard")
-          expect("Leotard").to appear_before("Beanie Babies")
-          expect("Beanie Babies").to appear_before("Bat Mask")
+          expect("Batmobile").to appear_before("Leotard")
+          expect("Leotard").to appear_before("Night-Vision Goggles")
+          expect("Night-Vision Goggles").to appear_before("Bat Mask")
           expect("Bat Mask").to appear_before("Cape")
         end
       end
