@@ -29,16 +29,6 @@
 
 </div>
 
-<div id="top_merchants">
-  <h3>Top Merchants</h3>
-  <ol>
-  <% @merchants.top_5_merchants.each do |merchant| %>
-    <li><%= link_to "#{merchant.name}", "/merchants/#{merchant.id}" %> - $<%= merchant.revenue_dollars(merchant.revenue) %></li>
-    <p>Top selling date was <%= merchant.top_selling_date.strftime("%m/%d/%Y") %></p>
-  <% end %>
-  </ol>
-</div>
-
 
 
 
