@@ -1,27 +1,23 @@
 
 
-<div id="enabled">
-<h2>--- Enabled Merchants ---</h2>
+<div id="merchant-enabled">
+  <h2>--- Enabled Merchants ---</h2>
   <% @merchants.each do |merchant| %>
-  <div id="merchants-<%= merchant.id %>">  
     <% if merchant.status == 'enabled' %>
-      <p><b><%=link_to merchant.name, admin_merchant_path(merchant)%></b></p>
+      <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
       <p>This storefront is currently: OPEN</p>
       <%= button_to "Disable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
     <% end %>
   <% end %>
-  </div>
 </div>
-
-<div id="disabled">
-<h2>--- Disabled Merchants ---</h2>
+ 
+  <div id="merchant-disabled">
+  <h2>--- Disabled Merchants ---</h2>
   <% @merchants.each do |merchant| %>
-  <div id="merchants-<%= merchant.id %>">  
     <% if merchant.status == 'disabled' %>
-      <p><b><%=link_to merchant.name, admin_merchant_path(merchant)%></b></p>
+      <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
       <p>This storefront is currently: CLOSED</p>
       <%= button_to "Enable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
     <% end %>
   <% end %>
-  </div>
 </div>
