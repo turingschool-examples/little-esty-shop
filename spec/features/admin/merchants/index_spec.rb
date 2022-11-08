@@ -40,7 +40,59 @@ RSpec.feature "Admin Merchant Index", type: :feature do
     I see that each merchant is listed in the appropriate section' do
       visit admin_merchants_path
 
+      within "#enabled" do
+        expect(page).to have_content("#{@merchant_1.name}")
+        expect(page).to have_content("#{@merchant_2.name}")
+        expect(page).to have_content("#{@merchant_3.name}")
+      end
+      
+      within "#disabled" do
+        expect(page).to_not have_content("#{@merchant_1.name}")
+        expect(page).to_not have_content("#{@merchant_2.name}")
+        expect(page).to_not have_content("#{@merchant_3.name}")
+      end
 
+      click_button "Disable Crystal Moon Designs"
+
+      within "#enabled" do
+        expect(page).to_not have_content("#{@merchant_1.name}")
+        expect(page).to have_content("#{@merchant_2.name}")
+        expect(page).to have_content("#{@merchant_3.name}")
+      end
+      
+      within "#disabled" do
+        expect(page).to have_content("#{@merchant_1.name}")
+        expect(page).to_not have_content("#{@merchant_2.name}")
+        expect(page).to_not have_content("#{@merchant_3.name}")
+      end
+
+      click_button "Disable Outer Outfitters"
+
+      within "#enabled" do
+        expect(page).to_not have_content("#{@merchant_1.name}")
+        expect(page).to have_content("#{@merchant_2.name}")
+        expect(page).to_not have_content("#{@merchant_3.name}")
+      end
+    
+      within "#disabled" do
+        expect(page).to have_content("#{@merchant_1.name}")
+        expect(page).to_not have_content("#{@merchant_2.name}")
+        expect(page).to have_content("#{@merchant_3.name}")
+      end
+
+      click_button "Enable Crystal Moon Designs"
+
+      within "#enabled" do
+        expect(page).to have_content("#{@merchant_1.name}")
+        expect(page).to have_content("#{@merchant_2.name}")
+        expect(page).to_not have_content("#{@merchant_3.name}")
+      end
+    
+      within "#disabled" do
+        expect(page).to_not have_content("#{@merchant_1.name}")
+        expect(page).to_not have_content("#{@merchant_2.name}")
+        expect(page).to have_content("#{@merchant_3.name}")
+      end
     end
   end
 end
