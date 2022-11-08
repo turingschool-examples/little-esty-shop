@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :invoice_items, through: :items
 
-  # enum status: [ :disabled, :enabled ]
+  enum status: [ :disabled, :enabled ]
 
   def top_5_customers
     Customer.joins("INNER join invoices ON invoices.customer_id = customers.id")
