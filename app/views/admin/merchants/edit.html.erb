@@ -1,7 +1,10 @@
 <h1> Edit Merchant Info </h1>
 
-<%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f|  %>
-  <%=f.label :name, "Name" %>
-  <%= f.text_field :name, value: @merchant.name %>
-  <%= f.submit "Submit" %>
-<% end %>
+
+
+
+<%= render partial: 'form', locals: { 
+                                      path: admin_merchant_path,
+                                      method: :patch, 
+                                      name: @merchant.name, 
+                                      button_text: "Submit"} %>

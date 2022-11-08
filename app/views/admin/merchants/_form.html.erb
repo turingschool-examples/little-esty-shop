@@ -1,0 +1,5 @@
+<%= form_with url: path, method: method, local: true do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name, value: name %>
+  <%= f.submit 'Submit' %>
+<% end %>
