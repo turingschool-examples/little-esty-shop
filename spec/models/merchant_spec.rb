@@ -152,7 +152,7 @@ RSpec.describe Merchant, type: :model do
       @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id) # marvel
       @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
       @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
-      @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id) # D.C.
+      @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: Time.parse('21.12.25')) # D.C.
       @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # D.C.
       @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
       @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
@@ -226,6 +226,10 @@ RSpec.describe Merchant, type: :model do
 
     it 'returns the revenue in dollars, not cents' do
       expect(@merchant_2.revenue_dollars(340000)).to eq(3400)
+    end
+
+    it 'returns the top selling date for a merchant' do
+      expect(@merchant_2.top_selling_date).to eq("2021-12-25 05:00:00 UTC")
     end
   end
 end

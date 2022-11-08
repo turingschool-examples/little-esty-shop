@@ -17,17 +17,17 @@ RSpec.describe 'admin/merchants index page' do
     @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock') # 1/0
     @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne') # 0/1
 
-    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # marvel
-    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
-    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id) # marvel
-    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
-    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
-    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id) # D.C.
-    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # D.C.
-    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
+    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: Time.parse('21.01.28')) # marvel
+    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: Time.parse('22.08.22')) # marvel
+    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id, created_at: Time.parse('22.07.04')) # marvel
+    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id, created_at: Time.parse('21.09.14')) # marvel
+    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id, created_at: Time.parse('22.10.10')) # marvel
+    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id, created_at: Time.parse('22.10.15')) # marvel
+    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: Time.parse('21.12.25')) # D.C.
+    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: Time.parse('20.02.22')) # D.C.
+    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: Time.parse('22.06.12')) # marvel
+    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: Time.parse('22.03.14')) # marvel
+    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id, created_at: Time.parse('22.03.17')) # marvel
 
     @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant_1.id)
     @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant_2.id)
@@ -52,19 +52,19 @@ RSpec.describe 'admin/merchants index page' do
     InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
 
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice7.id)
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
 
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice6.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice6.id)
 
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item5.id, invoice_id: @invoice11.id)
 
-    InvoiceItem.create!(quantity: 30, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice11.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice11.id)
-    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice11.id)
+    InvoiceItem.create!(quantity: 30, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice8.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice8.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item6.id, invoice_id: @invoice8.id)
 
     InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item7.id, invoice_id: @invoice11.id)
     InvoiceItem.create!(quantity: 5, unit_price: 1500, status: 'shipped', item_id: @item7.id, invoice_id: @invoice11.id)
@@ -248,6 +248,18 @@ RSpec.describe 'admin/merchants index page' do
         expect(page).to have_link(@merchant_5.name)
         expect(page).to have_link(@merchant_6.name)
         expect(page).to_not have_link(@merchant_4.name)
+      end
+    end
+
+    it 'has the top selling date for each of the top 5 merchants' do
+      visit '/admin/merchants'
+
+      within("#top_merchants") do
+        expect(page).to have_content("Top selling date was 12/25/2021")
+        expect(page).to have_content("Top selling date was 10/15/2022")
+        expect(page).to have_content("Top selling date was 12/25/2021")
+        expect(page).to have_content("Top selling date was 10/15/2022")
+        expect(page).to have_content("Top selling date was 03/17/2022")
       end
     end
   end

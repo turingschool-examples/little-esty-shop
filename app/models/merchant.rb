@@ -57,4 +57,15 @@ class Merchant < ApplicationRecord
   def revenue_dollars(revenue)
     (revenue.to_f/100).round(2)
   end
+
+  def top_selling_date
+    invoices
+      .joins(:transactions)
+      .where('transactions.result = 0 AND invoices.status = 1')
+      .select('invoices.*, invoices.created_at AS invoice_date, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
+      .group(:id)
+      .order(item_revenue: :desc, invoice_date: :desc)
+      .first
+      .invoice_date  
+  end
 end
