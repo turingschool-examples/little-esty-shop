@@ -1,7 +1,8 @@
 <h1>Create New Merchant</h1>
 
-<%= form_with model: @merchant, method: :post, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit 'Submit' %>
-<% end %>
+
+<%= render partial: 'form', locals: { 
+                                      path: merchants_path,
+                                      method: :post, 
+                                      name: '', 
+                                      button_text: 'Submit'} %>
