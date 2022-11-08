@@ -4,15 +4,20 @@ RSpec.describe "Merchant Invoice Show Page" do
 
   before :each do
     @merchant1 = Merchant.create!(name: 'Marvel')
+    @merchant2 = Merchant.create!(name: 'Honey Bee', status: 'enabled')
+
     @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker')
 
     @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 100, merchant_id: @merchant1.id)
+    @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant2.id)
 
     @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: Time.parse('19.07.18'))
+    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: '2010-03-11 01:51:45')
 
-    InvoiceItem.create(quantity: 5, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
-    InvoiceItem.create(quantity: 15, unit_price: 100, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+    InvoiceItem.create!(quantity: 15, unit_price: 100, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
+    InvoiceItem.create!(quantity: 50, unit_price: 800, status: 'shipped', item_id: @item3.id, invoice_id: @invoice2.id)
   end
 
   describe "As a merchant" do
@@ -30,7 +35,6 @@ RSpec.describe "Merchant Invoice Show Page" do
       it "Then I see all of my items on the invoice including: Item name, The quantity of the item ordered, The price the Item sold for, The Invoice Item status, And I do not see any information related to Items for other merchants" do
         visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
         #  save_and_open_page
-
         within("#item-#{@item2.id}") do
           expect(page).to have_content("Name: #{@item2.name}")
           expect(page).to have_content("Price: #{@item2.unit_price}")
@@ -45,6 +49,7 @@ RSpec.describe "Merchant Invoice Show Page" do
           expect(page).to have_content("Status: packaged")
         end
 
+        expect(page).to_not have_content(@item3.name)
       end
     end
   end
