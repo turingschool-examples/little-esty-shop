@@ -181,13 +181,13 @@ RSpec.describe Merchant, type: :model do
       InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice7.id)
       InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice8.id)
 
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice11.id)
+      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice1.id)
+      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice1.id)
+      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item3.id, invoice_id: @invoice1.id)
 
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice11.id)
+      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice1.id)
+      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice1.id)
+      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item4.id, invoice_id: @invoice1.id)
 
       InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item5.id, invoice_id: @invoice11.id)
 
@@ -221,7 +221,11 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'returns the top 5 merchants by revenue' do
-      expect(Merchant.top_5_merchants).to eq([@merchant_2, @merchant_5, @merchant_1, @merchant_3, @merchant_4])
+      expect(Merchant.top_5_merchants).to eq([@merchant_2, @merchant_1, @merchant_5, @merchant_3, @merchant_6])
+    end
+
+    it 'returns the revenue in dollars, not cents' do
+      expect(@merchant_2.revenue_dollars(340000)).to eq(3400)
     end
   end
 end

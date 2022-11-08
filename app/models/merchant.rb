@@ -46,11 +46,15 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_5_merchants
-    # require 'pry'; binding.pry
-    joins(items: [{invoice_items: {invoices: :transactions}}])
-    .where('transactions.result = 0 AND invoice.status = 1')
-    .select('invoice_items.*, sum(invoice_items.quantity * invoice_items.unit_price as revenue')
-    # .select('sum(revenue) ') # sum revenues specific to merchant
+    joins(invoices: :transactions)
+    .group(:id)
+    .where('transactions.result = 0 AND invoices.status = 1')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .order(revenue: :desc)
     .limit(5)
+  end
+
+  def revenue_dollars(revenue)
+    (revenue.to_f/100).round(2)
   end
 end

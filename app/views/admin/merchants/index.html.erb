@@ -29,6 +29,13 @@
 
 </div>
 
+<div id="top_merchants">
+  <h3>Top Merchants</h3>
+  <% @merchants.top_5_merchants.each do |merchant| %>
+    <p><%= link_to "#{merchant.name}", "/merchants/#{merchant.id}" %> - $<%= merchant.revenue_dollars(merchant.revenue) %></p>
+  <% end %>
+</div>
+
 
 
 

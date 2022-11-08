@@ -106,12 +106,19 @@ RSpec.describe 'admin/merchants index page' do
     it "each name links to an merchants' show page" do
       visit '/admin/merchants'
 
-      expect(page).to have_link(@merchant_1.name)
-      expect(page).to have_link(@merchant_2.name)
-      expect(page).to have_link(@merchant_3.name)
-      expect(page).to have_link(@merchant_4.name)
+      within("#disabled_merchants") do
+        expect(page).to have_link(@merchant_2.name)
+        expect(page).to have_link(@merchant_4.name)
+      end
 
-      click_on "#{@merchant_1.name}"
+      within("#enabled_merchants") do
+        expect(page).to have_link(@merchant_1.name)
+        expect(page).to have_link(@merchant_3.name)
+        expect(page).to have_link(@merchant_5.name)
+        expect(page).to have_link(@merchant_6.name)
+        click_on "#{@merchant_1.name}"
+      end
+
       expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
     end
   end
@@ -222,16 +229,26 @@ RSpec.describe 'admin/merchants index page' do
     it 'displays top 5 merchants with highest total revenue based on unit_price * quantity' do 
       visit '/admin/merchants'
       
-      expect(@merchant_2.name).to appear_before(@merchant_5.name)
-      expect(@merchant_5.name).to appear_before(@merchant_1.name)
-      expect(@merchant_1.name).to appear_before(@merchant_3.name)
-      expect(@merchant_3.name).to appear_before(@merchant_4.name)
-      
-      expect(page).to_not have_content(@merchant_6)
+      within("#top_merchants") do
+        expect("#{@merchant_2.name}").to appear_before("#{@merchant_1.name}")
+        expect("#{@merchant_1.name}").to appear_before("#{@merchant_5.name}")
+        expect("#{@merchant_5.name}").to appear_before("#{@merchant_3.name}")
+        expect("#{@merchant_3.name}").to appear_before("#{@merchant_6.name}")
+        expect(page).to_not have_content(@merchant_4)
+      end
     end
 
-    xit 'has links to the show page of each top merchant' do
+    it 'has links to the show page of each top merchant' do
+      visit '/admin/merchants'
 
+      within("#top_merchants") do
+        expect(page).to have_link(@merchant_1.name)
+        expect(page).to have_link(@merchant_2.name)
+        expect(page).to have_link(@merchant_3.name)
+        expect(page).to have_link(@merchant_5.name)
+        expect(page).to have_link(@merchant_6.name)
+        expect(page).to_not have_link(@merchant_4.name)
+      end
     end
   end
 end
