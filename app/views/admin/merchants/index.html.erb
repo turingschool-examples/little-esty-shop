@@ -1,3 +1,23 @@
-<%@merchants.each do |merchant|%>
-<p><%=link_to "#{merchant.name}", admin_merchant_path(merchant)%></p>
-<%end%>
+
+
+<div id="merchant-enabled">
+  <h2>--- Enabled Merchants ---</h2>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == 'enabled' %>
+      <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
+      <p>This storefront is currently: OPEN</p>
+      <%= button_to "Disable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
+    <% end %>
+  <% end %>
+</div>
+ 
+  <div id="merchant-disabled">
+  <h2>--- Disabled Merchants ---</h2>
+  <% @merchants.each do |merchant| %>
+    <% if merchant.status == 'disabled' %>
+      <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
+      <p>This storefront is currently: CLOSED</p>
+      <%= button_to "Enable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
+    <% end %>
+  <% end %>
+</div>

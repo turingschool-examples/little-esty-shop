@@ -5,6 +5,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :invoice_items, through: :items
 
+  enum status: [ :disabled, :enabled ]
   validates :name, presence: true, length: { maximum: 50 }
   
   def top_5_customers
