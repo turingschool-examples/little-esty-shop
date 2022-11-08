@@ -25,7 +25,6 @@ RSpec.describe 'admin/invoices/invoice.id' do
       expect(page).to have_content('Status: completed')
       expect(page).to have_content('Created at: Wednesday, October 12, 2022')
       expect(page).to have_content('Customer Name: Eli Fuchsman')
-
     end
 
     it 'shows all items on the invoice including item name, quantity, price, status' do

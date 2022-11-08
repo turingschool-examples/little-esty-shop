@@ -11,24 +11,24 @@ RSpec.describe 'Merchant Items Index Page' do
     @customer5 = Customer.create!(first_name: 'Frank', last_name: 'Castle')
     @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock')
     @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne')
-    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
-    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
-    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
-    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id)
-    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id)
-    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id)
-    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
-    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
-    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
-    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
-    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
-    @invoice12 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
-    @invoice13 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
-    @invoice14 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
-    @invoice15 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
-    @invoice16 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
-    @invoice17 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
-    @invoice18 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+    @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: '2009-05-01 01:31:45')
+    @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: '2009-06-02 01:35:45')
+    @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id, created_at: '2009-07-03 01:22:45')
+    @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id, created_at: '2009-08-04 01:09:45')
+    @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id, created_at: '2009-09-05 01:08:45')
+    @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id, created_at: '2009-10-06 01:59:45')
+    @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2009-11-07 01:00:45')
+    @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: '2009-12-08 01:12:45')
+    @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: '2010-01-09 01:16:45')
+    @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: '2010-02-10 01:54:45')
+    @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id, created_at: '2010-03-11 01:48:45')
+    @invoice12 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-03-11 01:51:45')
+    @invoice13 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-04-12 01:39:45')
+    @invoice14 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: '2010-05-13 01:38:45')
+    @invoice15 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-06-14 01:24:45')
+    @invoice16 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-07-15 01:28:45')
+    @invoice17 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-08-16 01:31:45')
+    @invoice18 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-09-17 01:42:45')
     @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant2.id)
     @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant1.id)
@@ -144,7 +144,6 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_content('Enabled Items')
           expect(page).to have_link("#{item4.name}")
           expect(page).to_not have_link("#{@item1.name}")
-          # expect(page).to have_link("#{@item3.name}") #this stopped working with the new before block and I'm not sure why
         end
 
         within('#disabled') do
@@ -174,7 +173,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
       it 'has links to each merchant item show page and total revenue generated next to each item' do
         visit "/merchants/#{@merchant1.id}/items"
-
+        # save_and_open_page
         within('#top_by_revenue') do
           expect(page).to have_link("#{@item7.name}")
           expect(page).to have_link("#{@item4.name}")
@@ -187,6 +186,24 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_content(@merchant1.top_items_by_revenue[2].item_revenue)
           expect(page).to have_content(@merchant1.top_items_by_revenue[3].item_revenue)
           expect(page).to have_content(@merchant1.top_items_by_revenue[4].item_revenue)
+        end
+      end
+
+      it 'has the 5 most popular items with date of most sales for each item' do
+        visit "/merchants/#{@merchant1.id}/items"
+        # save_and_open_page
+
+        within('#most_popular') do
+          expect(page).to have_content("Black Makeup - Top selling date was: #{@item6.top_item_selling_date}")
+          expect(page).to have_content("Leotard - Top selling date was: #{@item4.top_item_selling_date}")
+          expect(page).to have_content("Beanie Babies - Top selling date was: #{@item1.top_item_selling_date}")
+          expect(page).to have_content("Bat Mask - Top selling date was: #{@item3.top_item_selling_date}")
+          expect(page).to have_content("Cape - Top selling date was: #{@item5.top_item_selling_date}")
+
+          expect("Black Makeup").to appear_before("Leotard")
+          expect("Leotard").to appear_before("Beanie Babies")
+          expect("Beanie Babies").to appear_before("Bat Mask")
+          expect("Bat Mask").to appear_before("Cape")
         end
       end
     end
