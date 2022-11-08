@@ -1,2 +1,5 @@
 <h1>HELLO WORLD</h1>
 <p><%= @repo_name.name %></p>
+<% @contributors.each do |contributor| %>
+  <p><%= contributor.name %></p>
+<% end %>

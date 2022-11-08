@@ -11,4 +11,10 @@ RSpec.describe("Welcome Index Page") do
       end
     end
   end
+
+  describe 'displays contributors names' do 
+    it 'will list contributor names' do 
+      expect(page).to have_content("ashuhleyt")
+    end
+  end
 end
