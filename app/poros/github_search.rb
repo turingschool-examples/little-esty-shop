@@ -1,5 +1,5 @@
-require './app/poros/repo'
-require './app/services/github_service'
+require "./app/poros/repo"
+require "./app/services/github_service"
 
 class GithubSearch
   def repo_information
@@ -15,5 +15,10 @@ class GithubSearch
     service.contributors.map do |data|
       Contributor.new(data)
     end
+  end
+
+  def num_pulls
+    data = service.pull_requests[0]
+    latest_pull = Pull.new(data)
   end
 end
