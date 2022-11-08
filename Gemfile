@@ -45,6 +45,7 @@ group :development, :test do
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'orderly'
+  gem 'httparty'
 end
 
 group :development do
@@ -55,6 +56,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
+  gem 'httparty'
 end
 
 
