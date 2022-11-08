@@ -8,4 +8,14 @@ class Item < ApplicationRecord
   validates_numericality_of :unit_price, greater_than: 0
 
   enum status: { disabled: 0, enabled: 1 }
+
+  def top_whatever
+    invoices
+     .joins(:invoice_items)
+     .where('invoices.status = 1')
+    #  
+    # invoices.created_at AS invoice_date, 
+     .select('invoices.*, SUM(invoice_items.quantity) AS total_sold')
+     .group('invoices.created_at')
+  end
 end

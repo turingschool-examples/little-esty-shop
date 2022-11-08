@@ -13,7 +13,7 @@
   <h3>Most Popular Items:</h3>
     <ul>
       <% @merchant.most_popular_items do |item| %>
-        <li><b><%= item.name %></b> - Top selling date was: <%= item.top_selling_date %>
+        <li><b><%= item.name %></b> - Top selling date was:
       <% end %>
     </ul>
 </div>

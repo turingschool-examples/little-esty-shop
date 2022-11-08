@@ -113,7 +113,7 @@ RSpec.describe Merchant, type: :model do
       expect(@merchant1.top_items_by_revenue).to eq([@item7, @item4, @item8, @item3, @item5])
     end
 
-    it 'can return the 5 most popular items with date of most sales for each item' do
+    it 'can return the items best day' do
       @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant1.id)
       @item4 = Item.create!(name: 'Leotard', description: 'Costume', unit_price: 1850, merchant_id: @merchant1.id)
       @item5 = Item.create!(name: 'Cape', description: 'Fully Functional', unit_price: 900, merchant_id: @merchant1.id)
@@ -143,7 +143,8 @@ RSpec.describe Merchant, type: :model do
       @transaction20 = Transaction.create!(credit_card_number: '4801647818676148', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice17.id)
       @transaction21 = Transaction.create!(credit_card_number: '4801647818676149', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice18.id)
 
-      expect(@merchant1.most_popular_items).to eq([@item6, @item4, @item1, @item3, @item5])
+      expect(@merchant1.top_selling_date).to eq('2010-07-15 01:28:45')
+      expect(@merchant2.top_selling_date).to eq('2010-09-17 01:42:45')
     end
   end
 
