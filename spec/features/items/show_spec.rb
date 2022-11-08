@@ -30,7 +30,7 @@ RSpec.describe 'Merchant Items Show Page' do
 
       it "And I see all of the item's attributes including: Name, Description, Current Selling Price" do
         visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
-        # save_and_open_page
+
         expect(page).to have_content("Name: #{@item1.name}")
         expect(page).to have_content("Description: #{@item1.description}")
         expect(page).to have_content("Current Selling Price: $#{@item1.unit_price}")

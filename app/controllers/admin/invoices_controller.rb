@@ -12,7 +12,9 @@ class Admin::InvoicesController < ApplicationController
     invoice.update(invoice_params)
     redirect_to "/admin/invoices/#{invoice.id}"
   end
+
   private
+
   def invoice_params
     params.permit(:id, :status, :customer_id)
   end

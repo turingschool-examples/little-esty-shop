@@ -9,6 +9,16 @@
     </ol>
 </div>
 
+<div id='most_popular'>
+  <h3>Most Popular Items:</h3>
+    <ul>
+      <% @merchant.most_popular_items.each do |item| %>
+        <li>
+          <p><b><%= item.name %></b> - Top selling date was: <%= item.top_item_selling_date %></p>
+        </li>
+      <% end %>
+    </ul>
+</div>
 
 <section id= "disabled">
   <h3>Disabled Items:</h3>
@@ -17,13 +27,13 @@
       <p>
         <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %> Status: <%= item.status %>
       </p>
+
       <p>
         <%= button_to "Enable", merchant_item_status_path(@merchant, item), method: :patch, params: {enabled: true, item_id: item.id } %>
       </p>
     </div>
   <% end %>
 </section>
-
 
 <section id= "enabled">
   <h3>Enabled Items:</h3>

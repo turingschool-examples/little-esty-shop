@@ -13,6 +13,7 @@ RSpec.describe Merchant, type: :model do
     it { should validate_presence_of :name }
   end
 
+
   describe 'tests' do
     before :each do
       @merchant1 = Merchant.create!(name: 'Marvel', status: 'enabled')
@@ -64,7 +65,7 @@ RSpec.describe Merchant, type: :model do
       @transaction12 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice9.id)
       @transaction13 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice10.id)
       @transaction14 = Transaction.create!(credit_card_number: '4636896899845752', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice11.id)
-    end
+    end 
 
     describe 'instance methods' do
       it 'can return top 5 customers with most transactions' do
@@ -80,6 +81,75 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant1.items_ready_to_ship[3].invoice_id).to eq(@invoice5.id)
         expect(@merchant1.items_ready_to_ship[4].invoice_id).to eq(@invoice6.id)
       end
+
+    it 'can return top 5 items by revenue' do
+      @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant1.id)
+      @item4 = Item.create!(name: 'Leotard', description: 'Costume', unit_price: 1850, merchant_id: @merchant1.id)
+      @item5 = Item.create!(name: 'Cape', description: 'Fully Functional', unit_price: 900, merchant_id: @merchant1.id)
+      @item6 = Item.create!(name: 'Black Makeup', description: 'Gallon Sized', unit_price: 50, merchant_id: @merchant1.id)
+      @item7 = Item.create!(name: 'Batmobile', description: 'Only one left in stock', unit_price: 1000000, merchant_id: @merchant1.id)
+      @item8 = Item.create!(name: 'Night-Vision Goggles', description: 'Required for night activities', unit_price: 15000, merchant_id: @merchant1.id)
+      @item9 = Item.create!(name: 'Bat-Cave', description: 'Bats not included', unit_price: 10000000, merchant_id: @merchant2.id)
+      @invoice12 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+      @invoice13 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+      @invoice14 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+      @invoice15 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+      @invoice16 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+      @invoice17 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+      @invoice18 = Invoice.create!(status: 'completed', customer_id: @customer7.id)
+      InvoiceItem.create!(quantity: 50, unit_price: 800, status: 'shipped', item_id: @item3.id, invoice_id: @invoice12.id)
+      InvoiceItem.create!(quantity: 100, unit_price: 1850, status: 'shipped', item_id: @item4.id, invoice_id: @invoice13.id)
+      InvoiceItem.create!(quantity: 20, unit_price: 900, status: 'shipped', item_id: @item5.id, invoice_id: @invoice14.id)
+      InvoiceItem.create!(quantity: 100, unit_price: 50, status: 'shipped', item_id: @item6.id, invoice_id: @invoice15.id)
+      InvoiceItem.create!(quantity: 1, unit_price: 1000000, status: 'shipped', item_id: @item7.id, invoice_id: @invoice16.id)
+      InvoiceItem.create!(quantity: 5, unit_price: 15000, status: 'shipped', item_id: @item8.id, invoice_id: @invoice17.id)
+      InvoiceItem.create!(quantity: 1, unit_price: 10000000, status: 'shipped', item_id: @item9.id, invoice_id: @invoice18.id)
+      @transaction15 = Transaction.create!(credit_card_number: '4801647818676137', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice12.id)
+      @transaction16 = Transaction.create!(credit_card_number: '4801647818676138', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice13.id)
+      @transaction17 = Transaction.create!(credit_card_number: '4801647818676139', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice14.id)
+      @transaction18 = Transaction.create!(credit_card_number: '4801647818676146', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice15.id)
+      @transaction19 = Transaction.create!(credit_card_number: '4801647818676147', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice16.id)
+      @transaction20 = Transaction.create!(credit_card_number: '4801647818676148', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice17.id)
+      @transaction21 = Transaction.create!(credit_card_number: '4801647818676149', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice18.id)
+
+      expect(@merchant1.top_items_by_revenue).to eq([@item7, @item4, @item8, @item3, @item5])
+    end
+
+    it 'can return the items best day' do
+      @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant1.id)
+      @item4 = Item.create!(name: 'Leotard', description: 'Costume', unit_price: 1850, merchant_id: @merchant1.id)
+      @item5 = Item.create!(name: 'Cape', description: 'Fully Functional', unit_price: 900, merchant_id: @merchant1.id)
+      @item6 = Item.create!(name: 'Black Makeup', description: 'Gallon Sized', unit_price: 50, merchant_id: @merchant1.id)
+      @item7 = Item.create!(name: 'Batmobile', description: 'Only one left in stock', unit_price: 1000000, merchant_id: @merchant1.id)
+      @item8 = Item.create!(name: 'Night-Vision Goggles', description: 'Required for night activities', unit_price: 15000, merchant_id: @merchant1.id)
+      @item9 = Item.create!(name: 'Bat-Cave', description: 'Bats not included', unit_price: 10000000, merchant_id: @merchant2.id)
+      @invoice12 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-03-11 01:51:45')
+      @invoice13 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-04-12 01:39:45')
+      @invoice14 = Invoice.create!(status: 'completed', customer_id: @customer2.id, created_at: '2010-05-13 01:38:45')
+      @invoice15 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-06-14 01:24:45')
+      @invoice16 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-07-15 01:28:45')
+      @invoice17 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-08-16 01:31:45')
+      @invoice18 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2010-09-17 01:42:45')
+      InvoiceItem.create!(quantity: 50, unit_price: 800, status: 'shipped', item_id: @item3.id, invoice_id: @invoice12.id)
+      InvoiceItem.create!(quantity: 100, unit_price: 1850, status: 'shipped', item_id: @item4.id, invoice_id: @invoice13.id)
+      InvoiceItem.create!(quantity: 20, unit_price: 900, status: 'shipped', item_id: @item5.id, invoice_id: @invoice14.id)
+      InvoiceItem.create!(quantity: 100, unit_price: 50, status: 'shipped', item_id: @item6.id, invoice_id: @invoice15.id)
+      InvoiceItem.create!(quantity: 1, unit_price: 1000000, status: 'shipped', item_id: @item7.id, invoice_id: @invoice16.id)
+      InvoiceItem.create!(quantity: 5, unit_price: 15000, status: 'shipped', item_id: @item8.id, invoice_id: @invoice17.id)
+      InvoiceItem.create!(quantity: 1, unit_price: 10000000, status: 'shipped', item_id: @item9.id, invoice_id: @invoice18.id)
+      @transaction15 = Transaction.create!(credit_card_number: '4801647818676137', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice12.id)
+      @transaction16 = Transaction.create!(credit_card_number: '4801647818676138', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice13.id)
+      @transaction17 = Transaction.create!(credit_card_number: '4801647818676139', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice14.id)
+      @transaction18 = Transaction.create!(credit_card_number: '4801647818676146', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice15.id)
+      @transaction19 = Transaction.create!(credit_card_number: '4801647818676147', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice16.id)
+      @transaction20 = Transaction.create!(credit_card_number: '4801647818676148', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice17.id)
+      @transaction21 = Transaction.create!(credit_card_number: '4801647818676149', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice18.id)
+
+      expect(@merchant1.top_selling_date).to eq('2010-07-15 01:28:45')
+      expect(@merchant2.top_selling_date).to eq('2010-09-17 01:42:45')
+    end
+  end
+
 
       it 'can return top 5 items by revenue' do
         @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant1.id)

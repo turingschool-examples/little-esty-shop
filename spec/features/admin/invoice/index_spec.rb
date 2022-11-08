@@ -53,6 +53,5 @@ RSpec.describe 'admin/invoices' do
     expect(page).to have_content(@invoice_6.id)
     expect(page).to have_content(@invoice_7.id)
     expect(page).to have_content(@invoice_8.id)
-
   end
 end
