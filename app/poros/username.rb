@@ -5,6 +5,6 @@ class Username
 
     def initialize(data)
 
-        @name = data[:name]
+        @name = data[:login]
     end
 end

@@ -15,9 +15,10 @@
       <p><%= message %></p>
     <% end %>
     <section>
-      <%= search = UsernameSearch.new %>
-      <%= search.username_information.each do |username| %>
-        <p><%=  name %></p>
+      <% search = UsernameSearch.new %>
+      <h3>Collaborators: </h3>
+      <% search.username_information.each do |username| %>
+        <p><%= username.name %></p>
       <% end %>
     </section>
     <%= yield %>
