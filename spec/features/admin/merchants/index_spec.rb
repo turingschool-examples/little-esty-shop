@@ -20,23 +20,26 @@ RSpec.feature "Admin Merchant Index", type: :feature do
     when I click this button, I am redirected back to the admin merchants index and
     I see that the merchants status has changed' do
       visit admin_merchants_path
+    save_and_open_page
 
-      expect(page).to have_button("Disable Crystal Moon Designs")
-      expect(page).to have_content("#{@merchant_1.name}'s storefront is currently: OPEN")
+      within "#merchants-#{@merchant_1.id}" do
+        expect(page).to have_button("Disable Crystal Moon Designs")
+        expect(page).to have_content("This storefront is currently: OPEN")
 
-      click_button "Disable Crystal Moon Designs"
-      expect(current_path).to eq(admin_merchants_path)
+        click_button "Disable Crystal Moon Designs"
+        expect(current_path).to eq(admin_merchants_path)
 
-      expect(page).to have_button("Enable Crystal Moon Designs")
-      expect(page).to have_content("#{@merchant_1.name}'s storefront is currently: CLOSED")
+        expect(page).to have_button("Enable Crystal Moon Designs")
+        expect(page).to have_content("This storefront is currently: CLOSED")
 
-      click_button "Enable Crystal Moon Designs"
-      expect(current_path).to eq(admin_merchants_path)
+        click_button "Enable Crystal Moon Designs"
+        expect(current_path).to eq(admin_merchants_path)
 
-      expect(page).to have_content("#{@merchant_1.name}'s storefront is currently: OPEN")
+        expect(page).to have_content("This storefront is currently: OPEN")
+      end
     end
 
-    xit 'has two sections, one for enabled merchants and one for disabled merchants.
+    it 'has two sections, one for enabled merchants and one for disabled merchants.
     I see that each merchant is listed in the appropriate section' do
       visit admin_merchants_path
 
