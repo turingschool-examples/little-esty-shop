@@ -1,14 +1,11 @@
-<%=form_with(url:"/merchants/#{@merchant.id}/items", method: :post, local: true) do |form| %>
-<header>Add an Item </header>
- 
- <%= form.label :name  %></td>
- <%= form.text_field :name %></td>
- 
- <%= form.label :description %>
- <%= form.text_field :description %>
- 
- <%= form.label :unit_price  %>
- <%= form.text_field :unit_price %>
- 
- <%=form.submit "Submit" %>
-<%end%>
+<h1>Add an Item</h1>
+
+<%= render partial: 'form', locals: {
+                                      path: "/merchants/#{@merchant.id}/items",
+                                      method: :post,
+                                      button_text: "Submit",
+                                      name: '',
+                                      description: '',
+                                      unit_price: '' } %>
+
+
