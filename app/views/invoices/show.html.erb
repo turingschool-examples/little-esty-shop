@@ -7,10 +7,16 @@
 <% @items.each do |item| %>
   <div id="item-<%= item.id %>">
     <p><b>Name: </b><%= item.name %></p>
-    <p><b>Price: </b><%= "#{item.unit_price}¢" %>
-    <p><b>Quantity: </b><%= item.invoice_items.first.quantity %><p>
-    <p><b>Status: </b><%= item.invoice_items.first.status %></p>
-  </div>
+    <p><b>Price: </b><%= "#{item.unit_price}¢" %></p>
+    <p><b>Quantity: </b><%= item.invoice_items.first.quantity %></p>
+    <p><b>Status: </b><%= item.invoice_items.first.status %><br> 
+    <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
+    <%= f.hidden_field :invoice_item_id, value: item.invoice_items.first.id %>
+    <%= f.label :status %><br>
+    <%= f.select :status, item.invoice_items.statuses.keys, :selected => item.invoice_items.first.status %>
+    <%= f.submit 'Update Item Status'%>
+<% end %></p>
+  </div> 
 <% end %>
 <br>
 

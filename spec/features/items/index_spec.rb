@@ -128,6 +128,8 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_content('Status: enabled')
           expect(page).to have_button('Disable')
           expect(page).to_not have_content('Status: disabled')
+          click_button('Disable')
+          expect(page).to have_content('Status: disabled')
         end
 
         within("#item-#{@item1.id}") do
@@ -200,10 +202,10 @@ RSpec.describe 'Merchant Items Index Page' do
           expect(page).to have_content("Top selling date was: #{@item3.top_item_selling_date}")
           expect(page).to have_content("Top selling date was: #{@item5.top_item_selling_date}")
 
-          expect("Batmobile").to appear_before("Leotard")
-          expect("Leotard").to appear_before("Night-Vision Goggles")
-          expect("Night-Vision Goggles").to appear_before("Bat Mask")
-          expect("Bat Mask").to appear_before("Cape")
+          expect('Batmobile').to appear_before('Leotard')
+          expect('Leotard').to appear_before('Night-Vision Goggles')
+          expect('Night-Vision Goggles').to appear_before('Bat Mask')
+          expect('Bat Mask').to appear_before('Cape')
         end
       end
     end

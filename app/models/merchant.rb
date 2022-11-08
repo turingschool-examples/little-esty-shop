@@ -27,7 +27,8 @@ class Merchant < ApplicationRecord
       .order(:created_at)
   end
 
-  def top_items_by_revenue #top 5 most popular items
+  # top 5 most popular items
+  def top_items_by_revenue
     items
       .joins(invoices: :transactions)
       .where('transactions.result = 0 AND invoices.status = 1')

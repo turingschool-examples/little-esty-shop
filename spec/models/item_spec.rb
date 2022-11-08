@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-
   before :each do
     @merchant1 = Merchant.create!(name: 'Marvel')
 
@@ -18,7 +17,6 @@ RSpec.describe Item, type: :model do
     InvoiceItem.create!(quantity: 5, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
     InvoiceItem.create!(quantity: 6, unit_price: 100, status: 'pending', item_id: @item1.id, invoice_id: @invoice3.id)
     InvoiceItem.create!(quantity: 20, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice6.id)
-
   end
 
   describe 'relationships' do
@@ -36,9 +34,9 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of :merchant_id }
   end
 
-  describe "Instance Methods" do
-    describe "#top_item_selling_date" do
-      it "returns the day an item sold the most quantity" do
+  describe 'Instance Methods' do
+    describe '#top_item_selling_date' do
+      it 'returns the day an item sold the most quantity' do
         expect(@item1.top_item_selling_date).to eq('2009-10-06 01:59:45')
       end
     end
