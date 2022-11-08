@@ -11,8 +11,8 @@ RSpec.describe "Merchant Invoice Show Page" do
 
     @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: Time.parse('19.07.18'))
 
-    InvoiceItem.create(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
-    InvoiceItem.create(quantity: 15, unit_price: 1500, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
+    InvoiceItem.create(quantity: 5, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+    InvoiceItem.create(quantity: 15, unit_price: 100, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
   end
 
   describe "As a merchant" do
