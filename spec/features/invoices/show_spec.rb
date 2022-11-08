@@ -99,11 +99,11 @@ RSpec.describe 'merchant invoices show page' do
 
       it 'displays each invoice item status as a select field that can be updated' do
         visit merchant_invoice_path(@crystal_moon, @invoice_6) # invoice_6 also has an item from surf_designs, so I am using this invoice strategically to test the edge case that merchant doesn't see items from other merchants
-        save_and_open_page
+
         expect(page).to have_select("status", selected: "Shipped")
         page.select "Packaged", from: "status"
+
         click_button "Update Item Status"
-        # save_and_open_page
         expect(page).to have_select("status", selected: "Packaged")
       end
     end
