@@ -22,6 +22,8 @@ RSpec.describe 'merchant invoices show page' do
         @rash_guard = @surf_designs.items.create!(name: "Radical Rash Guard", description: "Stay totally groovy and rash free!", unit_price: 50)
         @zinc = @surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
         @surf_board = @surf_designs.items.create!(name: "Surf Board", description: "Our original 12' board!", unit_price: 200)
+        @snorkel = @surf_designs.items.create!(name: "Snorkel", description: "Perfect for reef viewing!", unit_price: 400)
+
 
         @paul = Customer.create!(first_name: "Paul", last_name: "Walker")
         @sam = Customer.create!(first_name: "Sam", last_name: "Gamgee")
@@ -60,6 +62,7 @@ RSpec.describe 'merchant invoices show page' do
         @rash_guard_invoice = InvoiceItem.create!(item_id: @rash_guard.id, invoice_id: @invoice_13.id, quantity: 2, unit_price: 50, status: 2)
         @zinc_invoice = InvoiceItem.create!(item_id: @zinc.id, invoice_id: @invoice_14.id, quantity: 2, unit_price: 13, status: 1)
         @surf_board_invoice = InvoiceItem.create!(item_id: @surf_board.id, invoice_id: @invoice_6.id, quantity: 2, unit_price: 200, status: 1)
+        @snorkel_invoice = InvoiceItem.create!(item_id: @snorkel.id, invoice_id: @invoice_6.id, quantity: 3, unit_price: 400, status: 1)
 
         @transaction_1 = Transaction.create!(result: 1, invoice_id: @invoice_1.id, credit_card_number: 0001)
         @transaction_2 = Transaction.create!(result: 1, invoice_id: @invoice_2.id, credit_card_number: 0002)
@@ -90,7 +93,7 @@ RSpec.describe 'merchant invoices show page' do
       it 'displays all of my items on the invoice including: item name, quantity of the item ordered, the price
       the item sold for, and the invoice item status. I do not see any info related to items for other merchants' do
         visit merchant_invoice_path(@crystal_moon, @invoice_6) # invoice_6 also has an item from surf_designs, so I am using this invoice strategically to test the edge case that merchant doesn't see items from other merchants
-
+        
         expect(page).to have_content("Item Name: #{@emerald.name}")
         expect(page).to have_content("Quantity: #{@emerald_invoice.quantity}")
         expect(page).to have_content("Selling Price: $#{@emerald_invoice.unit_price} per unit")
@@ -105,6 +108,12 @@ RSpec.describe 'merchant invoices show page' do
 
         click_button "Update Item Status"
         expect(page).to have_select("status", selected: "Packaged")
+      end
+
+      it 'displays the total revenue generated from all of the merchant items on the invoice' do
+        visit merchant_invoice_path(@surf_designs, @invoice_6)
+
+        expect(page).to have_content("Total revenue for invoice #{@invoice_6.id}: $1600")
       end
     end
   end

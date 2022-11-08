@@ -7,7 +7,7 @@ class InvoicesController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:id])
-    # require 'pry'; binding.pry
+    @total_revenue = @invoice.total_revenue(@merchant.id)
   end
 
   def update
