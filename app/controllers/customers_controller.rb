@@ -1,5 +1,5 @@
-class CustomersController < ApplicationController 
-  def index 
-    
+class CustomersController < ApplicationController
+  def index
+
   end
 end
