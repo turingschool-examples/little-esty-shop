@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  before_action :get_repo_name
-  def get_repo_name
+  before_action :get_info
+  def get_info
     @repo_name = GithubSearch.new.repo_information
+    @contributors = GithubSearch.new.contributor_names
   end
 end

@@ -10,4 +10,10 @@ class GithubSearch
   def service
     GithubService.new
   end
+
+  def contributor_names
+    service.contributors.map do |data|
+      Contributor.new(data)
+    end
+  end
 end
