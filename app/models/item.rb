@@ -9,13 +9,13 @@ class Item < ApplicationRecord
 
   enum status: { disabled: 0, enabled: 1 }
 
-  def top_whatever
-    invoices
-     .joins(:invoice_items)
-     .where('invoices.status = 1')
-    #  
-    # invoices.created_at AS invoice_date, 
-     .select('invoices.*, SUM(invoice_items.quantity) AS total_sold')
-     .group('invoices.created_at')
+  def top_item_selling_date
+    invoices.joins(:invoice_items)
+    .where("invoice_items.status = 1 OR invoice_items.status = 2")
+    .select('invoices.created_at, SUM(invoice_items.quantity) AS top_quantity')
+    .group('invoices.created_at')
+    .order("top_quantity desc", "invoices.created_at desc")
+    .first
+    .created_at
   end
 end

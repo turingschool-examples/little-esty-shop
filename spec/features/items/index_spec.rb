@@ -173,7 +173,7 @@ RSpec.describe 'Merchant Items Index Page' do
 
       it 'has links to each merchant item show page and total revenue generated next to each item' do
         visit "/merchants/#{@merchant1.id}/items"
-
+        # save_and_open_page
         within('#top_by_revenue') do
           expect(page).to have_link("#{@item7.name}")
           expect(page).to have_link("#{@item4.name}")
@@ -189,8 +189,22 @@ RSpec.describe 'Merchant Items Index Page' do
         end
       end
 
-      xit 'has the 5 most popular items with date of most sales for each item' do
+      it 'has the 5 most popular items with date of most sales for each item' do
         visit "/merchants/#{@merchant1.id}/items"
+        # save_and_open_page
+
+        within('#most_popular') do
+          expect(page).to have_content("Black Makeup - Top selling date was: #{@item6.top_item_selling_date}")
+          expect(page).to have_content("Leotard - Top selling date was: #{@item4.top_item_selling_date}")
+          expect(page).to have_content("Beanie Babies - Top selling date was: #{@item1.top_item_selling_date}")
+          expect(page).to have_content("Bat Mask - Top selling date was: #{@item3.top_item_selling_date}")
+          expect(page).to have_content("Cape - Top selling date was: #{@item5.top_item_selling_date}")
+
+          expect("Black Makeup").to appear_before("Leotard")
+          expect("Leotard").to appear_before("Beanie Babies")
+          expect("Beanie Babies").to appear_before("Bat Mask")
+          expect("Bat Mask").to appear_before("Cape")
+        end
       end
     end
   end
