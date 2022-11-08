@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
+    <center><h1>LittleEtsyShop</h1></center>
     <%= yield %>
+    <br><br><br><br><br>
+    <footer>
+      <h3>Github Info</h3>
+      repo name: <%= @repo = RepoSearch.new.create_repo.name %>
+    </footer>
   </body>
 </html>
