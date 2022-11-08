@@ -10,9 +10,15 @@
     <p>Item Name: <%= item.name %></p>
     <p>Quantity: <%= @invoice.invoice_item(item.id).quantity %></p>
     <p>Selling Price: $<%= @invoice.invoice_item(item.id).unit_price %> per unit</p>
-    <p>Invoice Item Status: <%= @invoice.invoice_item(item.id).status %></p>
+    <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
+      <%= form.hidden_field :invoice_item_id, value: "#{@invoice.invoice_item(item.id).id}" %>
+      <%= form.label "Status: " %>
+      <%= form.select :status, options_for_select([["Pending", "pending"], ["Packaged", "packaged"], ["Shipped", "shipped"]], @invoice.invoice_item(item.id).status) %>
+      <%= form.submit "Update Item Status" %>
+    <% end %>
     ----------------------------------------
   <% end %>
 <% end %>
 
 <p>"Total revenue for invoice <%=@invoice.id%>: $<%=@total_revenue%></p>
+

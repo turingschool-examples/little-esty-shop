@@ -112,7 +112,7 @@ RSpec.describe 'Admin index page' do
 
   it 'has a section that lists the top 5 customers by number of successful transactions' do
     visit admin_index_path
-    
+
     expect(page).to have_content("Top 5 Customers")
     expect(page).to have_content("Customer: Eevee Ketchup, Number of Successful Transactions: 5")
     expect(page).to have_content("Customer: Paul Walker, Number of Successful Transactions: 4")
@@ -128,7 +128,7 @@ RSpec.describe 'Admin index page' do
 
   it 'has a section that lists, as links leading to their respective show pages, invoices that have items that have yet to be shipped' do
     visit admin_index_path
-    
+
     expect(page).to have_content("Incomplete Invoices")
     expect(page).to have_link("Invoice #{@pearl_invoice.invoice_id}")
     expect(page).to have_link("Invoice #{@topaz_invoice.invoice_id}")
