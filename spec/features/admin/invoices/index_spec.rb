@@ -127,7 +127,30 @@ RSpec.describe 'admin invoices index page (/admin/invoices)' do
       end
 
       xit '- each id links to the admin invoice show page' do
+        visit admin_invoices_path
 
+        expect(page).to have_link("Invoice ##{@invoice_1.id}", href: admin_invoice_path(@invoice_1))
+        expect(page).to have_link("Invoice ##{@invoice_2.id}", href: admin_invoice_path(@invoice_2))
+        expect(page).to have_link("Invoice ##{@invoice_3.id}", href: admin_invoice_path(@invoice_3))
+        expect(page).to have_link("Invoice ##{@invoice_4.id}", href: admin_invoice_path(@invoice_4))
+        expect(page).to have_link("Invoice ##{@invoice_5.id}", href: admin_invoice_path(@invoice_5))
+        expect(page).to have_link("Invoice ##{@invoice_6.id}", href: admin_invoice_path(@invoice_6))
+        expect(page).to have_link("Invoice ##{@invoice_7.id}", href: admin_invoice_path(@invoice_7))
+        expect(page).to have_link("Invoice ##{@invoice_8.id}", href: admin_invoice_path(@invoice_8))
+        expect(page).to have_link("Invoice ##{@invoice_9.id}", href: admin_invoice_path(@invoice_9))
+        expect(page).to have_link("Invoice ##{@invoice_10.id}", href: admin_invoice_path(@invoice_10))
+        expect(page).to have_link("Invoice ##{@invoice_11.id}", href: admin_invoice_path(@invoice_11))
+        expect(page).to have_link("Invoice ##{@invoice_12.id}", href: admin_invoice_path(@invoice_12))
+        expect(page).to have_link("Invoice ##{@invoice_13.id}", href: admin_invoice_path(@invoice_13))
+        expect(page).to have_link("Invoice ##{@invoice_14.id}", href: admin_invoice_path(@invoice_14))
+        expect(page).to have_link("Invoice ##{@invoice_15.id}", href: admin_invoice_path(@invoice_15))
+        expect(page).to have_link("Invoice ##{@invoice_16.id}", href: admin_invoice_path(@invoice_16))
+        expect(page).to have_link("Invoice ##{@invoice_17.id}", href: admin_invoice_path(@invoice_17))
+        expect(page).to have_link("Invoice ##{@invoice_18.id}", href: admin_invoice_path(@invoice_18))
+        expect(page).to have_link("Invoice ##{@invoice_19.id}", href: admin_invoice_path(@invoice_19))
+        expect(page).to have_link("Invoice ##{@invoice_20.id}", href: admin_invoice_path(@invoice_20))
+        expect(page).to have_link("Invoice ##{@invoice_21.id}", href: admin_invoice_path(@invoice_21))
+        expect(page).to have_link("Invoice ##{@invoice_22.id}", href: admin_invoice_path(@invoice_22))
       end
     end
 
