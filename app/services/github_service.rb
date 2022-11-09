@@ -1,6 +1,5 @@
 require 'httparty'
 
-
 class GithubService
   def users
     username_response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop/contributors")
