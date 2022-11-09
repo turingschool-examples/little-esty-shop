@@ -8,19 +8,22 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-   
+
   <body>
 
   <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
     <section>
-   
-      <h3>Collaborators: </h3>
+
+      <h3>Contributors: </h3>
       <% @usernames.each do |username| %>
         <p><%= username.name %></p>
       <% end %>
-      
+
+      <h3>Repository Name: </h3>
+        <p><%= @repo.repo_name %></p>
+
     </section>
     <%= yield %>
   </body>

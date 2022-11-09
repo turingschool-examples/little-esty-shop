@@ -1,8 +1,8 @@
-require 'pry'
+# class Repo
+#   attr_reader :repo_name
 
-class Repo 
-    def initialize(data)
-      @name = data[:repo]
-    end
+#   def initialize(data)
+#     @repo_name = data[:name]
+#   end
 
-end
+# end

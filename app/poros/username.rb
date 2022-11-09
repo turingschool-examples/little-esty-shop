@@ -1,10 +1,8 @@
-require 'pry'
-
 class Username
-  attr_reader :name
+  attr_reader :username
 
   def initialize(data)
-    binding.pry
-    @name = data[:login]
+    # binding.pry
+    @username = data[:login]
   end
 end
