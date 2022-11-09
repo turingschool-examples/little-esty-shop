@@ -3,19 +3,22 @@
   <head>
     <style>
       .footer {
+        float: bottom;
+        background-color: lightgray;
         padding: 3px;
+        display: flex;
       }
       .footer_l {
         float: left;
         background-color: lightgray;
-        width: 30%;
+        width: 28%;
         padding: 10px;
       }
       .footer_r {
         float: right;
         text-align: right;
         background-color: lightgray;
-        width: 70%;
+        width: 68%;
         padding: 10px;
       }
     </style>
@@ -34,7 +37,7 @@
     </div>
     <% end %>
     <%= yield %>
-    <footer class="footer">
+    <div class="footer">
       <div class="footer_l">
         <h4>Repo Name: <%= @repo_name.name %></h4>
         <h4>Number of Pull Requests: <%=@latest_pr.number%></h4>
