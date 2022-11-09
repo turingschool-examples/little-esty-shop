@@ -1,4 +1,4 @@
-<%=@merchant%> 
+<%=@merchant.name%> 
  
 <%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |f| %>
   <%= f.label :name %>
