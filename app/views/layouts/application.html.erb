@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .footer {
+        float: bottom;
+        background-color: lightgray;
+        padding: 3px;
+        display: flex;
+      }
+      .footer_l {
+        float: left;
+        background-color: lightgray;
+        width: 28%;
+        padding: 10px;
+      }
+      .footer_r {
+        float: right;
+        text-align: right;
+        background-color: lightgray;
+        width: 68%;
+        padding: 10px;
+      }
+    </style>
     <title>LittleEtsyShop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,11 +37,17 @@
     </div>
     <% end %>
     <%= yield %>
-    <h3>Repo Name: <%= @repo_name.name %></h3>
-    <h3>Number of Pull Requests: <%=@latest_pr.number%></h3>
-    <h3>Contributors With Number of Commits:</h3>
-    <% @contributors.each do |contributor| %>
-      <p><%= "#{contributor.name}: #{contributor.num_commits}" %></p>
-    <% end %>
+    <div class="footer">
+      <div class="footer_l">
+        <h4>Repo Name: <%= @repo_name.name %></h4>
+        <h4>Number of Pull Requests: <%=@latest_pr.number%></h4>
+      </div>
+      <div class="footer_r">
+        <h4>Contributors With Number of Commits:</h4>
+        <p><% @contributors.each do |contributor| %>
+          <%= "#{contributor.name}: #{contributor.num_commits}" %>
+        <% end %></p>
+      </div>
+    </footer>
   </body>
 </html>
