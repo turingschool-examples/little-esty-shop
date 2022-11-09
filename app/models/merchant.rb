@@ -39,9 +39,8 @@ class Merchant < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items
-    .joins(invoice: :transactions)
-    .where(transactions: {result: 1})
-    .sum('quantity * invoice_items.unit_price')
+    invoice_items.joins(invoice: :transactions)
+                 .where(transactions: {result: 1})
+                 .sum('quantity * invoice_items.unit_price')
   end
 end
