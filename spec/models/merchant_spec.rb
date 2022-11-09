@@ -107,5 +107,11 @@ RSpec.describe Merchant, type: :model do
         expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock", @invoice_2.created_at] => 210, [@emerald.id, "Emerald", @invoice_6.created_at] => 170, [@ruby.id, "Ruby", @invoice_7.created_at] => 130, [@amethyst.id, "Amethyst", @invoice_5.created_at] => 110, [@topaz.id, "Topaz", @invoice_4.created_at] => 110})
       end
     end
+
+    describe '.total_revenue' do
+      it 'returns the total revenue of the merchant' do
+        expect(@surf_designs.total_revenue).to eq((@wax_invoice.unit_price * @wax_invoice.quantity) + (@rash_guard_invoice.unit_price * @rash_guard_invoice.quantity) + (@zinc_invoice.unit_price * @zinc_invoice.quantity))
+      end
+    end
   end
 end
