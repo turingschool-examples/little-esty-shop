@@ -27,23 +27,14 @@ class Merchant < ApplicationRecord
       .order(:created_at)
   end
 
-  def top_items_by_revenue #top 5 most popular items
+  # top 5 most popular items
+  def top_items_by_revenue
     items
       .joins(invoices: :transactions)
       .where('transactions.result = 0 AND invoices.status = 1')
       .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
       .group(:id)
       .order(item_revenue: :desc)
-      .limit(5)
-  end
-
-  def most_popular_items
-    items
-      .joins(invoice_items: :invoice)
-      .where('invoices.status = 1')
-      .select('items.*, SUM(invoice_items.quantity) AS total_sold')
-      .group(:id)
-      .order(total_sold: :desc)
       .limit(5)
   end
 
@@ -64,5 +55,29 @@ class Merchant < ApplicationRecord
 
   def self.disabled_merchants
     where('status = 0')
+  end
+
+  def self.top_5_merchants
+    joins(invoices: :transactions)
+    .group(:id)
+    .where('transactions.result = 0 AND invoices.status = 1')
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .order(revenue: :desc)
+    .limit(5)
+  end
+
+  def revenue_dollars(revenue)
+    (revenue.to_f/100).round(2)
+  end
+
+  def top_selling_date
+    invoices
+      .joins(:transactions)
+      .where('transactions.result = 0 AND invoices.status = 1')
+      .select('invoices.*, invoices.created_at AS invoice_date, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
+      .group(:id)
+      .order(item_revenue: :desc, invoice_date: :desc)
+      .first
+      .invoice_date  
   end
 end
