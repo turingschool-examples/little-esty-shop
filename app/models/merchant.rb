@@ -37,4 +37,18 @@ class Merchant < ApplicationRecord
         .limit(5)
         .sum('quantity * invoice_items.unit_price')
   end
+
+  def self.top_5_by_revenue
+    joins(:transactions)
+    .where("result = ? AND invoices.status = ?", 1, 2)
+    .order(Arel.sql('sum(quantity * invoice_items.unit_price) desc'))
+    .group(:name, :id)
+    .sum('quantity * invoice_items.unit_price')
+  end
+
+  def total_revenue
+    invoice_items.joins(invoice: :transactions)
+                 .where("result = ? AND invoices.status = ?", 1, 2)
+                 .sum('quantity * invoice_items.unit_price')
+  end
 end
