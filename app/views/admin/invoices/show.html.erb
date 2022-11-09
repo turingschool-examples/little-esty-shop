@@ -3,3 +3,10 @@
 <p>Created on <%=@invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p>Customer: <%="#{@customer.first_name} #{@customer.last_name}"%></p>
 <p>Total Revenue: $<%= @total_revenue %></p>
+
+<div id="invoice_items">
+  <h2>--- Items ---</h2>
+    <% @invoice_items.each do |invoice_item|%>
+      <p> <%= invoice_item.item.name %> , Quantity: <%= invoice_item.quantity %>, Price: <%= invoice_item.unit_price %>, Status: <%= invoice_item.status %></p>
+    <%end%>
+</div>

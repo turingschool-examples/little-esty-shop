@@ -1,8 +1,6 @@
 <h1>Admin Dashboard</h1>
 <%= link_to "Merchants", "/admin/merchants" %>
 <%= link_to "Invoices", "/admin/invoices" %>
-<<<<<<< HEAD
-=======
 
 <div id="top_customers">
   <h2>--- Top 5 Customers ---</h2>
@@ -17,4 +15,4 @@
       <p> <%= link_to "Invoice #{invoice_item.invoice_id}", admin_invoice_path(invoice_item.invoice_id)%> , Created On: <%= invoice_item.invoice.created_at.strftime("%A, %B%e, %Y")%></p>
     <%end%>
 </div>
->>>>>>> c63705e08469b4ad57fec8a02c9a4a44be7e6c46
+

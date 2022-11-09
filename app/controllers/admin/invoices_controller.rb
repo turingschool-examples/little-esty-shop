@@ -3,6 +3,7 @@ class Admin::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @customer = @invoice.customer
     @total_revenue = @invoice.admin_total_revenue
+    @invoice_items = @invoice.invoice_items
   end
 
   def index
