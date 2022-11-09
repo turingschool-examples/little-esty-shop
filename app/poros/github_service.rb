@@ -19,7 +19,7 @@ class GitHubService
   end
 
   def commits_information
-    get_url("https://api.github.com/repos/eport01/little-esty-shop/commits")
+    get_url("https://api.github.com/repos/eport01/little-esty-shop/commits?per_page=100")
     # require 'pry'; binding.pry
   end
 

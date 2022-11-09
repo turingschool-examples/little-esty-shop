@@ -4,9 +4,10 @@ require './app/poros/github_service'
 class CommitSearch
   def self.create_commits
     user_logins = service.commits_information.map do |data|
-      require 'pry'; binding.pry
+      # require 'pry'; binding.pry
 
-      data[:commit][:author][:name]
+      data[:author][:login]
+      # require 'pry'; binding.pry
     end
     user_logins.tally 
     # x = service.commits_information.map do |data|
