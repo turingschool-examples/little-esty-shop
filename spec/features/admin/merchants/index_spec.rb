@@ -6,6 +6,9 @@ RSpec.describe "Admin Merchant Index", type: :feature do
       @crystal_moon = Merchant.create!(name: "Crystal Moon Designs")
       @surf_designs = Merchant.create!(name: "Surf & Co. Designs")
       @merchant_3 = Merchant.create!(name: 'Outer Outfitters')
+      @merchant_4 = Merchant.create!(name: 'The Toy Box')
+      @merchant_5 = Merchant.create!(name: 'Chiseled Features')
+      @merchant_6 = Merchant.create!(name: 'Quilting Corner')
 
       @pearl = @crystal_moon.items.create!(name: "Pearl", description: "Not a BlackPearl!", unit_price: 25)
       @moon_rock = @crystal_moon.items.create!(name: "Moon Rock", description: "Evolve Your Pokemon!", unit_price: 105)
@@ -23,6 +26,9 @@ RSpec.describe "Admin Merchant Index", type: :feature do
       @zinc = @surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
       @surf_board = @surf_designs.items.create!(name: "Surf Board", description: "Our original 12' board!", unit_price: 200)
       @snorkel = @surf_designs.items.create!(name: "Snorkel", description: "Perfect for reef viewing!", unit_price: 400)
+      @ball = @merchant_4.items.create!(name: "Ball", description: "Super bouncy", unit_price: 100)
+      @statuette = @merchant_5.items.create!(name: "Statuette", description: "Carved from marble", unit_price: 200)
+      @quilt = @merchant_6.items.create!(name: "Quilt", description: "Colorful and soft", unit_price: 300)
 
       @paul = Customer.create!(first_name: "Paul", last_name: "Walker")
       @sam = Customer.create!(first_name: "Sam", last_name: "Gamgee")
@@ -69,7 +75,9 @@ RSpec.describe "Admin Merchant Index", type: :feature do
       @rash_guard_invoice = InvoiceItem.create!(item_id: @rash_guard.id, invoice_id: @invoice_13.id, quantity: 2, unit_price: 50, status: 2)
       @zinc_invoice = InvoiceItem.create!(item_id: @zinc.id, invoice_id: @invoice_14.id, quantity: 2, unit_price: 13, status: 1)
       @surf_board_invoice = InvoiceItem.create!(item_id: @surf_board.id, invoice_id: @invoice_6.id, quantity: 2, unit_price: 200, status: 1)
-      @snorkel_invoice = InvoiceItem.create!(item_id: @snorkel.id, invoice_id: @invoice_6.id, quantity: 3, unit_price: 400, status: 1)
+      @ball_invoice = InvoiceItem.create!(item_id: @ball.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 100, status: 1)
+      @statuette_invoice = InvoiceItem.create!(item_id: @statuette.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 200, status: 1)
+      @quilt_invoice = InvoiceItem.create!(item_id: @quilt.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 300, status: 1)
 
       @transaction_1 = Transaction.create!(result: 1, invoice_id: @invoice_1.id, credit_card_number: 0001)
       @transaction_2 = Transaction.create!(result: 1, invoice_id: @invoice_2.id, credit_card_number: 0002)
@@ -186,8 +194,25 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to_not have_content("#{@surf_designs.name}")
       end
     end
-    it 'shows the top five merchants by total revenue' do
-      expect(page).to have_content("#{@merchant_3.name}")
+    it 'shows the top five merchants by total revenue with the revenue next to each name' do
+      visit admin_merchants_path
+
+      within '#top-5' do
+      expect(page).not_to have_content("#{@merchant_3.name}")
+      expect(page).to have_content("1.#{@surf_designs.name} | Total revenue: #{@surf_designs.total_revenue}")
+      expect(page).to have_content("2.#{crystal_moon.name} | Total revenue: #{@crystal_moon.total_revenue}")
+      expect(page).to have_content("5.#{@merchant_4.name} | Total revenue: #{@merchant_4.total_revenue}")
+      expect(page).to have_content("4.#{@merchant_5.name} | Total revenue: #{@merchant_5.total_revenue}")
+      expect(page).to have_content("3.#{@merchant_6.name} | Total revenue: #{@merchant_6.total_revenue}")
+      end
+    end
+    it 'links to the merchant show page when the merchant name is clicked in the top five section' do
+      visit admin_merchants_path
+
+      within '#top-5' do
+        click_link 'Crystal Moon Designs'
+        expect(page).to have_current_path(admin_merchant_path(@crystal_moon))
+      end
     end
   end
 end
