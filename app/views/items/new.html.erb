@@ -1,13 +1,3 @@
 <div id= "create_item">
-  <%= form_with model: @item, url: merchant_items_path(@merchant), local: true do |form| %>
-
-    <%= form.label "Name:" %>
-    <%= form.text_field :name %>
-    <%= form.label "Description:" %>
-    <%= form.text_field :description %>
-    <%= form.label "Current Selling Price:"%>
-    <%= form.number_field :unit_price %>
-    <%= form.submit "Create Item" %>
-
-  <% end %>
+  <%= render partial: 'form', locals: {path: merchant_items_path(@merchant), method: :post, button_text: 'Create Item'} %>
 </div>

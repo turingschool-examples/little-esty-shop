@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'admin/merchants index page' do
   before :each do
-    @merchant_1 = Merchant.create!(name: "Marvel", status: 'enabled')
-    @merchant_2 = Merchant.create!(name: "D.C.", status: 'disabled')
-    @merchant_3 = Merchant.create!(name: "Darkhorse", status: 'enabled')
-    @merchant_4 = Merchant.create!(name: "Image", status: 'disabled')
-    @merchant_5 = Merchant.create!(name: "Wonders", status: 'enabled')
-    @merchant_6 = Merchant.create!(name: "Disney", status: 'enabled')
+    @merchant_1 = Merchant.create!(name: 'Marvel', status: 'enabled')
+    @merchant_2 = Merchant.create!(name: 'D.C.', status: 'disabled')
+    @merchant_3 = Merchant.create!(name: 'Darkhorse', status: 'enabled')
+    @merchant_4 = Merchant.create!(name: 'Image', status: 'disabled')
+    @merchant_5 = Merchant.create!(name: 'Wonders', status: 'enabled')
+    @merchant_6 = Merchant.create!(name: 'Disney', status: 'enabled')
 
     @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker') # 1/1
     @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent') # 3/0
@@ -71,7 +71,7 @@ RSpec.describe 'admin/merchants index page' do
 
     InvoiceItem.create!(quantity: 10, unit_price: 100, status: 'shipped', item_id: @item8.id, invoice_id: @invoice11.id)
     InvoiceItem.create!(quantity: 15, unit_price: 100, status: 'shipped', item_id: @item8.id, invoice_id: @invoice11.id)
-    
+
     InvoiceItem.create!(quantity: 11, unit_price: 1350, status: 'shipped', item_id: @item9.id, invoice_id: @invoice11.id)
     InvoiceItem.create!(quantity: 4, unit_price: 1350, status: 'shipped', item_id: @item9.id, invoice_id: @invoice11.id)
 
@@ -90,9 +90,6 @@ RSpec.describe 'admin/merchants index page' do
     @transaction13 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice10.id)
     @transaction14 = Transaction.create!(credit_card_number: '4636896899845752', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice11.id)
   end
-  # US 24 As an admin,
-  # When I visit the admin merchants index (/admin/merchants)
-  # Then I see the name of each merchant in the system
   describe 'when i visit the merchant index I see a name for each merchant' do
     it 'shows the name of each merchant' do
       visit '/admin/merchants'
@@ -106,12 +103,12 @@ RSpec.describe 'admin/merchants index page' do
     it "each name links to an merchants' show page" do
       visit '/admin/merchants'
 
-      within("#disabled_merchants") do
+      within('#disabled_merchants') do
         expect(page).to have_link(@merchant_2.name)
         expect(page).to have_link(@merchant_4.name)
       end
 
-      within("#enabled_merchants") do
+      within('#enabled_merchants') do
         expect(page).to have_link(@merchant_1.name)
         expect(page).to have_link(@merchant_3.name)
         expect(page).to have_link(@merchant_5.name)
@@ -123,12 +120,6 @@ RSpec.describe 'admin/merchants index page' do
     end
   end
 
-  # US 27 As an admin,
-  # When I visit the admin merchants index
-  # Then next to each merchant name I see a button to disable or enable that merchant.
-  # When I click this button
-  # Then I am redirected back to the admin merchants index
-  # And I see that the merchant's status has changed
   describe 'as an admin I see a button to update a merchants status' do
     it 'has a buttons next to each merchant to enable or disable' do
       visit '/admin/merchants'
@@ -226,10 +217,10 @@ RSpec.describe 'admin/merchants index page' do
   end
 
   describe 'top 5 merchants displayed on admin merchants index' do
-    it 'displays top 5 merchants with highest total revenue based on unit_price * quantity' do 
+    it 'displays top 5 merchants with highest total revenue based on unit_price * quantity' do
       visit '/admin/merchants'
-      
-      within("#top_merchants") do
+
+      within('#top_merchants') do
         expect("#{@merchant_2.name}").to appear_before("#{@merchant_1.name}")
         expect("#{@merchant_1.name}").to appear_before("#{@merchant_5.name}")
         expect("#{@merchant_5.name}").to appear_before("#{@merchant_3.name}")
@@ -241,7 +232,7 @@ RSpec.describe 'admin/merchants index page' do
     it 'has links to the show page of each top merchant' do
       visit '/admin/merchants'
 
-      within("#top_merchants") do
+      within('#top_merchants') do
         expect(page).to have_link(@merchant_1.name)
         expect(page).to have_link(@merchant_2.name)
         expect(page).to have_link(@merchant_3.name)
@@ -254,12 +245,12 @@ RSpec.describe 'admin/merchants index page' do
     it 'has the top selling date for each of the top 5 merchants' do
       visit '/admin/merchants'
 
-      within("#top_merchants") do
-        expect(page).to have_content("Top selling date was 12/25/2021")
-        expect(page).to have_content("Top selling date was 10/15/2022")
-        expect(page).to have_content("Top selling date was 12/25/2021")
-        expect(page).to have_content("Top selling date was 10/15/2022")
-        expect(page).to have_content("Top selling date was 03/17/2022")
+      within('#top_merchants') do
+        expect(page).to have_content('Top selling date was 12/25/2021')
+        expect(page).to have_content('Top selling date was 10/15/2022')
+        expect(page).to have_content('Top selling date was 12/25/2021')
+        expect(page).to have_content('Top selling date was 10/15/2022')
+        expect(page).to have_content('Top selling date was 03/17/2022')
       end
     end
   end
