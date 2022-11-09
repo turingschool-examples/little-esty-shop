@@ -16,6 +16,12 @@ class Admin::MerchantsController < ApplicationController
     edit_form_submission
   end
 
+  def create
+    @merchant = Merchant.new(merchant_params)
+    @merchant.save
+    redirect_to admin_merchants_path
+  end
+
   def edit_form_submission
     if params[:commit] == 'Update'
       if @merchant.update(merchant_params)
@@ -31,6 +37,6 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 end

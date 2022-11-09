@@ -99,5 +99,11 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to_not have_content("#{@merchant_2.name}")
       end
     end
+
+    it 'has a link to create a new merchant' do
+      visit admin_merchants_path
+
+      expect(page).to have_link("Create New Merchant", href: new_merchant_path)
+    end
   end
 end
