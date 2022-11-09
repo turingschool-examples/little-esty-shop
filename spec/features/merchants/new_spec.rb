@@ -7,8 +7,7 @@ RSpec.describe 'create new merchant page', type: :feature do
         visit new_merchant_path
 
         expect(page).to have_selector(:css, "form")
-        expect(page).to have_field(:name, "New Merchant Name")
-        expect(page).to have_field(:status, visible: false)
+        expect(page).to have_field("New Merchant Name")
         expect(page).to have_button("Submit")
       end
 
@@ -16,7 +15,7 @@ RSpec.describe 'create new merchant page', type: :feature do
       the merchant I just created displayed on the admin merchants index page, and its default status is disabled' do
         visit new_merchant_path
 
-        fill_in "New Merchant Name", with: "Susan's Snappy Stitches"
+        fill_in "New Merchant Name:", with: "Susan's Snappy Stitches"
         click_button "Submit"
 
         expect(current_path).to eq(admin_merchants_path)
