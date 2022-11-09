@@ -2,3 +2,4 @@
 <p>Status: <%=@invoice.status%></p>
 <p>Created on <%=@invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p>Customer: <%="#{@customer.first_name} #{@customer.last_name}"%></p>
+<p>Total Revenue: $<%= @total_revenue %></p>

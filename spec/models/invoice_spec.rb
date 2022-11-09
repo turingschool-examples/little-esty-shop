@@ -100,7 +100,7 @@ RSpec.describe Invoice, type: :model do
       @transaction_21 = Transaction.create!(result: 0, invoice_id: @invoice_21.id, credit_card_number: 0016)
       @transaction_22 = Transaction.create!(result: 0, invoice_id: @invoice_17.id, credit_card_number: 0016)
     end
-    describe '#invoice_item(item_id)' do 
+    describe '#invoice_item(item_id)' do
       it 'gives us access to each invoice item' do
         expect(@invoice_6.invoice_item(@emerald.id)).to eq(@emerald_invoice)
         expect(@invoice_6.invoice_item(@surf_board.id)).to eq(@surf_board_invoice)
@@ -110,6 +110,12 @@ RSpec.describe Invoice, type: :model do
     describe '#total_revenue(merchant_id)' do
       it 'gives us the total revenue of all items on this invoice that belong to the given merchant' do
         expect(@invoice_6.total_revenue(@surf_designs.id)).to eq(1600)
+      end
+    end
+
+    describe '#admin_total_revenue' do
+      it 'gives us the total revenue of all items on this invoice that belong to all merchants' do
+        expect(@invoice_6.admin_total_revenue).to eq(1770)
       end
     end
   end

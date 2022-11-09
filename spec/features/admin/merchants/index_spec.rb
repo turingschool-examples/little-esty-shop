@@ -36,7 +36,7 @@ RSpec.describe "Admin Merchant Index", type: :feature do
 
         click_button "Enable Crystal Moon Designs"
       end
-        
+
       expect(current_path).to eq(admin_merchants_path)
       expect(page).to have_content("This storefront is currently: OPEN")
     end
@@ -50,7 +50,7 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to have_content("#{@merchant_2.name}")
         expect(page).to have_content("#{@merchant_3.name}")
       end
-      
+
       within "#merchant-disabled" do
         expect(page).to_not have_content("#{@merchant_1.name}")
         expect(page).to_not have_content("#{@merchant_2.name}")
@@ -64,7 +64,7 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to have_content("#{@merchant_3.name}")
         expect(page).to_not have_content("#{@merchant_1.name}")
       end
-      
+
       within "#merchant-disabled" do
         expect(page).to have_content("#{@merchant_1.name}")
         expect(page).to_not have_content("#{@merchant_2.name}")
@@ -78,7 +78,7 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to_not have_content("#{@merchant_1.name}")
         expect(page).to_not have_content("#{@merchant_3.name}")
       end
-    
+
       within "#merchant-disabled" do
         expect(page).to have_content("#{@merchant_1.name}")
         expect(page).to_not have_content("#{@merchant_2.name}")
@@ -92,7 +92,7 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to have_content("#{@merchant_2.name}")
         expect(page).to_not have_content("#{@merchant_3.name}")
       end
-    
+
       within "#merchant-disabled" do
         expect(page).to have_content("#{@merchant_3.name}")
         expect(page).to_not have_content("#{@merchant_1.name}")
