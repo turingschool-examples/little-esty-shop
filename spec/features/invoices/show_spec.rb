@@ -1,4 +1,4 @@
-require 'rails_helper'
+ require 'rails_helper'
 
 RSpec.describe 'merchant invoices show page' do
   describe 'as a merchant' do
