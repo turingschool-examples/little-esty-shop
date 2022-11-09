@@ -138,6 +138,7 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.top_5_by_revenue).to eq({[@surf_designs.name, @surf_designs.id] => @surf_designs.total_revenue, [@crystal_moon.name, @crystal_moon.id] => @crystal_moon.total_revenue, [@merchant_6.name, @merchant_6.id] => @merchant_6.total_revenue, [@merchant_5.name, @merchant_5.id] => @merchant_5.total_revenue, [@merchant_4.name, @merchant_4.id] => @merchant_4.total_revenue})
       end
     end
+    
     describe '.total_revenue' do #This method is used for making testing easier
       it 'returns the total revenue of the merchant' do
         expect(@surf_designs.total_revenue).to eq((@wax_invoice.unit_price * @wax_invoice.quantity) + (@rash_guard_invoice.unit_price * @rash_guard_invoice.quantity) + (@zinc_invoice.unit_price * @zinc_invoice.quantity) + (@surf_board_invoice.unit_price * @surf_board_invoice.quantity))

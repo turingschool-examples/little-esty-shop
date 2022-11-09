@@ -43,6 +43,7 @@ class Merchant < ApplicationRecord
     .where("result = ? AND invoices.status = ?", 1, 2)
     .order(Arel.sql('sum(quantity * invoice_items.unit_price) desc'))
     .group(:name, :id)
+    .limit(5)
     .sum('quantity * invoice_items.unit_price')
   end
 
