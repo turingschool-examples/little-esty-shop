@@ -1,7 +1,4 @@
 <h1>HELLO WORLD</h1>
-<p><%= @repo_name.name %></p>
-<% @contributors.each do |contributor| %>
-  <p><%= contributor.name %></p>
-<% end %>
+<%= link_to "Merchant #1's Dashboard", merchant_dashboard_index_path(1) %>
+<%= link_to "Admin Dashboard", "/admin" %>
 
-<p>Number of Pull Request:<%=@latest_pr.number%></p>

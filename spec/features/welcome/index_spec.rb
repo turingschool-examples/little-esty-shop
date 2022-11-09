@@ -11,18 +11,17 @@ RSpec.describe("Welcome Index Page") do
       it("the project repo name") do
         expect(page).to(have_content("little-esty-shop"))
       end
-    end
-  end
 
-  describe("displays contributors names") do
-    it("will list contributor names") do
-      expect(page).to(have_content("ashuhleyt"))
-    end
-  end
+      it("the contributor names and number of commits") do
+        expect(page).to(have_content("ashuhleyt: 13"))
+        # expect(page).to(have_content("josephhilby: 54"))
+        # expect(page).to(have_content("amikaross: 47"))
+        # expect(page).to(have_content("AlexMR-93: 21"))
+      end
 
-  describe("displays latest number of PRs") do
-    it("will displays latest number of PRs") do
-      expect(page).to(have_content(35))
+      it("the latest total number of PRs") do
+        expect(page).to(have_content("Number of Pull Requests: 37"))
+      end
     end
   end
 end

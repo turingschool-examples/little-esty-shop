@@ -6,7 +6,7 @@ class GithubService
   end
 
   def contributors
-    get_url("https://api.github.com/repos/josephhilby/little-esty-shop/contributors")
+    get_url("https://api.github.com/repos/josephhilby/little-esty-shop/stats/contributors")
   end
 
   def pull_requests
