@@ -199,11 +199,15 @@ RSpec.describe "Admin Merchant Index", type: :feature do
 
       within '#top-5' do
       expect(page).not_to have_content("#{@merchant_3.name}")
-      expect(page).to have_content("1.#{@surf_designs.name} | Total revenue: #{@surf_designs.total_revenue}")
-      expect(page).to have_content("2.#{crystal_moon.name} | Total revenue: #{@crystal_moon.total_revenue}")
-      expect(page).to have_content("5.#{@merchant_4.name} | Total revenue: #{@merchant_4.total_revenue}")
-      expect(page).to have_content("4.#{@merchant_5.name} | Total revenue: #{@merchant_5.total_revenue}")
-      expect(page).to have_content("3.#{@merchant_6.name} | Total revenue: #{@merchant_6.total_revenue}")
+      expect(page).to have_content("#{@surf_designs.name} | Total revenue: #{@surf_designs.total_revenue}")
+      expect(page).to have_content("#{@crystal_moon.name} | Total revenue: #{@crystal_moon.total_revenue}")
+      expect(page).to have_content("#{@merchant_4.name} | Total revenue: #{@merchant_4.total_revenue}")
+      expect(page).to have_content("#{@merchant_5.name} | Total revenue: #{@merchant_5.total_revenue}")
+      expect(page).to have_content("#{@merchant_6.name} | Total revenue: #{@merchant_6.total_revenue}")
+      expect(@crystal_moon.name).to appear_before("Surf") #Turns out orderly hates '&' symbols and won't let the test pass if the full name is used
+      expect("Surf").to appear_before(@merchant_6.name)
+      expect(@merchant_6.name).to appear_before(@merchant_5.name)
+      expect(@merchant_5.name).to appear_before(@merchant_4.name)
       end
     end
     it 'links to the merchant show page when the merchant name is clicked in the top five section' do
