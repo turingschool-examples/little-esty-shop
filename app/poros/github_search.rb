@@ -7,10 +7,6 @@ class GithubSearch
     Repo.new(data)
   end
 
-  def service
-    GithubService.new
-  end
-
   def contributor_names
     service.contributors.map do |data|
       Contributor.new(data)
@@ -19,6 +15,10 @@ class GithubSearch
 
   def num_pulls
     data = service.pull_requests[0]
-    latest_pull = Pull.new(data)
+    Pull.new(data)
+  end
+
+  def service
+    GithubService.new
   end
 end
