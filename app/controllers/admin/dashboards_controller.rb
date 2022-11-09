@@ -5,5 +5,6 @@ class Admin::DashboardsController < ApplicationController
   
   def index
     @customers = Customer.top_five_customers
+    @invoices = Invoice.unshipped_items
   end
 end
