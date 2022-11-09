@@ -13,7 +13,6 @@ RSpec.describe Merchant, type: :model do
     it { should validate_presence_of :name }
   end
 
-
   describe 'tests' do
     before :each do
       @merchant1 = Merchant.create!(name: 'Marvel', status: 'enabled')
@@ -199,12 +198,12 @@ RSpec.describe Merchant, type: :model do
 
   describe '#top_5_merchants' do
     before(:each) do
-      @merchant_1 = Merchant.create!(name: "Marvel", status: 'enabled')
-      @merchant_2 = Merchant.create!(name: "D.C.", status: 'disabled')
-      @merchant_3 = Merchant.create!(name: "Darkhorse", status: 'enabled')
-      @merchant_4 = Merchant.create!(name: "Image", status: 'disabled')
-      @merchant_5 = Merchant.create!(name: "Wonders", status: 'enabled')
-      @merchant_6 = Merchant.create!(name: "Disney", status: 'enabled')
+      @merchant_1 = Merchant.create!(name: 'Marvel', status: 'enabled')
+      @merchant_2 = Merchant.create!(name: 'D.C.', status: 'disabled')
+      @merchant_3 = Merchant.create!(name: 'Darkhorse', status: 'enabled')
+      @merchant_4 = Merchant.create!(name: 'Image', status: 'disabled')
+      @merchant_5 = Merchant.create!(name: 'Wonders', status: 'enabled')
+      @merchant_6 = Merchant.create!(name: 'Disney', status: 'enabled')
 
       @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker')
       @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent')
@@ -220,7 +219,7 @@ RSpec.describe Merchant, type: :model do
       @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id)
       @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id)
       @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id)
-      @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: "2021-12-25 05:00:00 UTC")
+      @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: '2021-12-25 05:00:00 UTC')
       @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
       @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
       @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
@@ -297,7 +296,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     it 'returns the top selling date for a merchant' do
-      expect(@merchant_2.top_selling_date).to eq("2021-12-25 05:00:00 UTC")
+      expect(@merchant_2.top_selling_date).to eq('2021-12-25 05:00:00 UTC')
     end
   end
 end
