@@ -14,7 +14,13 @@
     <div id="flash-messages">
       <%= msg %>
     </div>
-  <% end %>
+    <% end %>
     <%= yield %>
+    <h3>Repo Name: <%= @repo_name.name %></h3>
+    <h3>Number of Pull Requests: <%=@latest_pr.number%></h3>
+    <h3>Contributors With Number of Commits:</h3>
+    <% @contributors.each do |contributor| %>
+      <p><%= "#{contributor.name}: #{contributor.num_commits}" %></p>
+    <% end %>
   </body>
 </html>

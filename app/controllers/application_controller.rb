@@ -5,5 +5,9 @@ class ApplicationController < ActionController::Base
     @repo_name = GithubSearch.new.repo_information
     @contributors = GithubSearch.new.contributor_names
     @latest_pr = GithubSearch.new.num_pulls
+
+    # @repo_name = Repo.new("little-esty-shop")
+    # @contributors = [Contributor.new({total: 13, author: {login: "ashuhleyt"}})]
+    # @latest_pr = Pull.new({number: 37})
   end
 end
