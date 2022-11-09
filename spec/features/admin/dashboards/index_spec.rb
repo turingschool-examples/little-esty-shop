@@ -72,7 +72,7 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
     visit ("/admin")
   end
 
-  xdescribe "When admin visit the admin dashboard- basic setup and links" do
+  describe "When admin visit the admin dashboard- basic setup and links" do
     it "has a header indicating that I am on the admin dashboard" do
       expect(page).to have_content("Admin")
     end
@@ -90,7 +90,7 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
     end
   end
 
-  xdescribe "Admin Dashboard Statistics-Top Customers" do
+  describe "Admin Dashboard Statistics-Top Customers" do
     it "names the top 5 customers-i.e. customers with the largest number of successful transactions" do
       expect(page).to_not have_content(@john.name)
       expect(@billy.name).to_not appear_before(@emily.name)
@@ -109,40 +109,44 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
   end
 
   describe "Admin Dashboard Statistics-Invoices" do
-    describe "has a 'Incomplete Invoices' section displaying invoices's id for unshipped items" do 
-      xit "is orders them by created_on date - oldest to newest" do 
-        within("#incomplete-invoices") do                  
-          expect(page).to_not have_content(@invoice5.id)
-          expect(page).to_not have_content(@invoice12.id)
-          # expect(@invoice2.id).to appear_before(@invoice7.id)
-# save_and_open_page
-          expect(page).to have_content(@invoice2.id)
-          expect(page).to have_content(@invoice3.id)
-          expect(page).to have_content(@invoice4.id)
-          expect(page).to have_content(@invoice7.id)
-          expect(page).to have_content(@invoice9.id)
-          # expect(page).to have_content(@invoice12.id)
-          # expect(page).to have_content(@invoice14.id)
-        end
-      end      
+    it "has a 'Incomplete Invoices' section displaying invoices's id for unshipped items" do 
+      within("#incomplete-invoices") do                  
+        expect(page).to_not have_content(@invoice5.id)
+        expect(page).to_not have_content(@invoice12.id)
+        expect(page).to_not have_content(@invoice12.id)
+        expect(page).to_not have_content(@invoice14.id)
 
-      it "next to each invoices' ids is the created_on date (format: weekday, month day, year)" do
-        within("#incomplete-invoices") do   
-        
-          expect(page).to have_content(@invoice2.created_at.strftime('%A, %B %d, %Y'))
-          expect(@invoice3.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice2.created_at.strftime('%A, %B %d, %Y'))
-          expect(@invoice2.created_at).to appear_before(@invoice3.created_at)
-          expect(@invoice3.created_at).to appear_before(@invoice14.created_at)
-        end
+        expect(page).to have_content(@invoice2.id)
+        expect(page).to have_content(@invoice3.id)
+        expect(page).to have_content(@invoice4.id)
+        expect(page).to have_content(@invoice7.id)
+        expect(page).to have_content(@invoice9.id)
       end
+    end
 
-      it "each invoice id links to that invoice's admin show page" do
-        click_on "#{invoice2.id}"
-        expect(current_path).to_not eq("/admin/invoices")
-        expect(current_path).to_not eq("/admin/invoices/#{invoice1.id}")
-        expect(current_path).to_not eq("/admin/invoices/#{invoice3.id}")
+    it "each invoice id links to that invoice's admin show page" do
+      click_on "#{@invoice2.id}"
+      expect(current_path).to_not eq("/admin/invoices")
+      expect(current_path).to_not eq("/admin/invoices/#{@invoice1.id}")
+      expect(current_path).to_not eq("/admin/invoices/#{@invoice3.id}")
+      
+      expect(current_path).to eq("/admin/invoices/#{@invoice2.id}")
+    end
+
+    context "is orders them by created_on date - oldest to newest" do
+      it "next to each invoices' id is the created_on date (format: weekday, month day, year)" do
+        within("#incomplete-invoices") do   
+          expect(page).to have_content(@invoice10.created_at.strftime('%A, %B %d, %Y'))
+          expect(@invoice10.created_at.strftime('%A, %B %d, %Y')).to_not appear_before(@invoice1.created_at.strftime('%A, %B %d, %Y'))
+
+          expect(@invoice1.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice2.created_at.strftime('%A, %B %d, %Y'))
+          expect(@invoice2.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice3.created_at.strftime('%A, %B %d, %Y'))
+          expect(@invoice3.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice4.created_at.strftime('%A, %B %d, %Y'))
         
-        expect(current_path).to eq("/admin/invoices/#{invoice2.id}")
+          expect(@invoice4.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice7.created_at.strftime('%A, %B %d, %Y'))
+          expect(@invoice7.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice9.created_at.strftime('%A, %B %d, %Y'))
+          expect(@invoice9.created_at.strftime('%A, %B %d, %Y')).to appear_before(@invoice10.created_at.strftime('%A, %B %d, %Y'))  
+        end
       end
     end
   end

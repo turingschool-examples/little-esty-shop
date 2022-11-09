@@ -18,14 +18,8 @@
     <center><h1>LittleEtsyShop</h1></center>
     <%= yield %>
     <hr><br><br><br><br><br>
-    <footer>
-      <h3>Github Info</h3>
-      repo name: <%= @repo = RepoSearch.new.create_repo.name %>
-
-      <h4>Commits by User:</h4>
-        <% commit_info.each do |commit| %>
-          <p><%= "#{commit.author} - #{commit.num_commits}" %></p>
-        <% end %>
+    <footer> 
+      
     </footer>
   </body>
 </html>
