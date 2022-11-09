@@ -135,7 +135,7 @@ RSpec.describe Merchant, type: :model do
 
     describe '#top_5_by_revenue' do
       it 'returns the names and total revenues of the top 5 merchants by revenue in descending order' do
-        expect(Merchant.top_5_by_revenue).to eq({@surf_designs.name => @surf_designs.total_revenue, @crystal_moon.name => @crystal_moon.total_revenue, @merchant_6.name => @merchant_6.total_revenue, @merchant_5.name => @merchant_5.total_revenue, @merchant_4.name => @merchant_4.total_revenue})
+        expect(Merchant.top_5_by_revenue).to eq({[@surf_designs.name, @surf_designs.id] => @surf_designs.total_revenue, [@crystal_moon.name, @crystal_moon.id] => @crystal_moon.total_revenue, [@merchant_6.name, @merchant_6.id] => @merchant_6.total_revenue, [@merchant_5.name, @merchant_5.id] => @merchant_5.total_revenue, [@merchant_4.name, @merchant_4.id] => @merchant_4.total_revenue})
       end
     end
     describe '.total_revenue' do #This method is used for making testing easier
