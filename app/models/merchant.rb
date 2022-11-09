@@ -38,6 +38,13 @@ class Merchant < ApplicationRecord
         .sum('quantity * invoice_items.unit_price')
   end
 
+  def self.top_5_by_revenue
+    joins(:transactions)
+    .where(transactions: {result: 1})
+    .group(:name)
+    .sum('quantity * invoice_items.unit_price')
+  end
+
   def total_revenue
     invoice_items.joins(invoice: :transactions)
                  .where(transactions: {result: 1})
