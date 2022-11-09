@@ -1,5 +1,5 @@
 <p>ID: <%=@invoice.id%></p>
-<p>Status: <%=@invoice.status%></p>
+<p>Status: <%= select_tag(:status, options_for_select([["in progress", 0], ["cancelled", 1], ["completed", 2]], @invoice.status)) %></p>
 <p>Created on <%=@invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p>Customer: <%="#{@customer.first_name} #{@customer.last_name}"%></p>
 <p>Total Revenue: $<%= @total_revenue %></p>

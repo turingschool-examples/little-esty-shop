@@ -127,8 +127,9 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
 
     it 'the invoice status is a select field, and I see that the invoices current status is selected.
     when I click the select field, I can select a new status for the invoice.' do
-      visit admin_invoice_path(@invoice_15)
-
+      # visit admin_invoice_path(@invoice_15)
+      visit admin_invoice_path(@invoice_6)
+save_and_open_page
       expect(page).to have_select "Status",
         selected: "in progress"
         options ["cancelled", "completed"]
