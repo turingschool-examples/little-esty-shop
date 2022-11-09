@@ -4,4 +4,8 @@ class Admin::InvoicesController < ApplicationController
     @customer = @invoice.customer
     @total_revenue = @invoice.admin_total_revenue
   end
+
+  def index
+    @invoices = Invoice.all
+  end
 end
