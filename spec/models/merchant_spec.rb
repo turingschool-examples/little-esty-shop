@@ -65,7 +65,7 @@ RSpec.describe Merchant, type: :model do
       @transaction12 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice9.id)
       @transaction13 = Transaction.create!(credit_card_number: '4636896899878732', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice10.id)
       @transaction14 = Transaction.create!(credit_card_number: '4636896899845752', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice11.id)
-    end 
+    end
 
     describe 'instance methods' do
       it 'can return top 5 customers with most transactions' do
@@ -148,7 +148,7 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant1.top_selling_date).to eq('2010-07-15 01:28:45')
         expect(@merchant2.top_selling_date).to eq('2010-09-17 01:42:45')
       end
-  
+
       it 'can return top 5 items by revenue' do
         @item3 = Item.create!(name: 'Bat Mask', description: 'Identity Protection', unit_price: 800, merchant_id: @merchant1.id)
         @item4 = Item.create!(name: 'Leotard', description: 'Costume', unit_price: 1850, merchant_id: @merchant1.id)
@@ -195,7 +195,7 @@ RSpec.describe Merchant, type: :model do
         end
       end
     end
-  end 
+  end
 
   describe '#top_5_merchants' do
     before(:each) do
@@ -206,25 +206,25 @@ RSpec.describe Merchant, type: :model do
       @merchant_5 = Merchant.create!(name: "Wonders", status: 'enabled')
       @merchant_6 = Merchant.create!(name: "Disney", status: 'enabled')
 
-      @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker') # 1/1
-      @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent') # 3/0
-      @customer3 = Customer.create!(first_name: 'Louis', last_name: 'Lane') # 2/0
-      @customer4 = Customer.create!(first_name: 'Lex', last_name: 'Luther') # 0/0
-      @customer5 = Customer.create!(first_name: 'Frank', last_name: 'Castle') # 1/0
-      @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock') # 1/0
-      @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne') # 0/1
+      @customer1 = Customer.create!(first_name: 'Peter', last_name: 'Parker')
+      @customer2 = Customer.create!(first_name: 'Clark', last_name: 'Kent')
+      @customer3 = Customer.create!(first_name: 'Louis', last_name: 'Lane')
+      @customer4 = Customer.create!(first_name: 'Lex', last_name: 'Luther')
+      @customer5 = Customer.create!(first_name: 'Frank', last_name: 'Castle')
+      @customer6 = Customer.create!(first_name: 'Matt', last_name: 'Murdock')
+      @customer7 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne')
 
-      @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # marvel
-      @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-      @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
-      @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id) # marvel
-      @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id) # marvel
-      @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id) # marvel
-      @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: Time.parse('21.12.25')) # D.C.
-      @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id) # D.C.
-      @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-      @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id) # marvel
-      @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id) # marvel
+      @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
+      @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+      @invoice3 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
+      @invoice4 = Invoice.create!(status: 'cancelled', customer_id: @customer4.id)
+      @invoice5 = Invoice.create!(status: 'completed', customer_id: @customer5.id)
+      @invoice6 = Invoice.create!(status: 'completed', customer_id: @customer6.id)
+      @invoice7 = Invoice.create!(status: 'completed', customer_id: @customer7.id, created_at: "2021-12-25 05:00:00 UTC")
+      @invoice8 = Invoice.create!(status: 'completed', customer_id: @customer1.id)
+      @invoice9 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+      @invoice10 = Invoice.create!(status: 'completed', customer_id: @customer2.id)
+      @invoice11 = Invoice.create!(status: 'completed', customer_id: @customer3.id)
 
       @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant_1.id)
       @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant_2.id)
@@ -268,7 +268,7 @@ RSpec.describe Merchant, type: :model do
 
       InvoiceItem.create!(quantity: 10, unit_price: 100, status: 'shipped', item_id: @item8.id, invoice_id: @invoice11.id)
       InvoiceItem.create!(quantity: 15, unit_price: 100, status: 'shipped', item_id: @item8.id, invoice_id: @invoice11.id)
-      
+
       InvoiceItem.create!(quantity: 11, unit_price: 1350, status: 'shipped', item_id: @item9.id, invoice_id: @invoice11.id)
       InvoiceItem.create!(quantity: 4, unit_price: 1350, status: 'shipped', item_id: @item9.id, invoice_id: @invoice11.id)
 
