@@ -124,5 +124,31 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
       expect(page).to have_content(@snorkel_invoice.unit_price)
       expect(page).to have_content(@snorkel_invoice.status)
     end
+
+    it 'the invoice status is a select field, and I see that the invoices current status is selected.
+    when I click the select field, I can select a new status for the invoice.' do
+      visit admin_invoice_path(@invoice_15)
+
+      expect(page).to have_select "Status",
+        selected: "in progress"
+        options ["cancelled", "completed"]
+    end
+
+    it 'next to the select field, there is a button to update invoice status. 
+    when I click the button, I am taken back to the admin invoice show page and I 
+    see that my invoices status has been updated' do
+      visit admin_invoice_path(@invoice_15)
+
+      expect(page).to have_button("Update Invoice Status")
+      expect(@invoice_15.status).to eq("in progress")
+
+      select "cancelled", from: "Status"
+      click_button("Update Invoice Status")
+      redirect_to admin_invoice_path(@invoice_15)
+
+      expect(@invoice_15.status).to eq("cancelled")
+    end
   end
 end
+
+
