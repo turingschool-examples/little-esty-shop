@@ -1,21 +1,13 @@
 class ItemsController < ApplicationController
   def index
-    if params[:merchant_id]
-      @merchant = Merchant.find(params[:merchant_id])
-      @enabled_items = @merchant.items.where(status: 1)
-      @disabled_items = @merchant.items.where(status: 0)
-    else
-      @items = Item.all
-    end
+    @merchant = Merchant.find(params[:merchant_id])
+    @enabled_items = @merchant.items.where(status: 1)
+    @disabled_items = @merchant.items.where(status: 0)
   end
 
   def show
-    if params[:merchant_id]
-      @merchant = Merchant.find(params[:merchant_id])
-      @item = @merchant.items.find(params[:id])
-    else
-      @item = Item.find(params[:id])
-    end
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = @merchant.items.find(params[:id])
   end
 
   def edit

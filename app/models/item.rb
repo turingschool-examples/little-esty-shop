@@ -11,11 +11,11 @@ class Item < ApplicationRecord
 
   def top_item_selling_date
     invoices.joins(:invoice_items)
-    .where("invoice_items.status = 1 OR invoice_items.status = 2")
-    .select('invoices.created_at, SUM(invoice_items.quantity) AS top_quantity')
-    .group('invoices.created_at')
-    .order("top_quantity desc", "invoices.created_at desc")
-    .first
-    .created_at
+            .where('invoice_items.status = 1 OR invoice_items.status = 2')
+            .select('invoices.created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS top_revenue')
+            .group('invoices.created_at')
+            .order('top_revenue desc', 'invoices.created_at desc')
+            .first
+            .created_at
   end
 end
