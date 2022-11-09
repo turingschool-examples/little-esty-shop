@@ -1,6 +1,7 @@
 require 'httparty'
 
 class GithubService
+
   def users
     username_response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop/contributors")
     usernames_parsed_json = JSON.parse(username_response.body, symbolize_names: true)

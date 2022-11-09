@@ -1,15 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :get_repo, :get_users, :get_pr_count #only: %i[index show new edit]
-
-  def get_repo
+  before_action :get_all
+  def get_all
     @repo_name = GithubService.new.repo_name
-  end
-
-  def get_users
     @users = GithubService.new.users
-  end
-
-  def get_pr_count
     @pr_count = GithubService.new.pr_count
+
+    # @repo_name = "little-esty-shop"
+    # @users = [{name: "DarbySmith", commits: 35},{name: "bkeener7", commits: 35},{name: "efuchsman", commits: 35},{name: "WilliamLampke", commits: 35}, {name: "James-E-White", commits: 35}]
+    # @pr_count = "25"
   end
 end

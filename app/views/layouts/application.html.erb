@@ -18,7 +18,7 @@
 
       <h3>Contributors: </h3>
       <% @users.each do |user| %>
-        <p><%= user[:name] %> <%= user[:commits] %></p>
+        <p><%= user[:name] %> - Commits: <%= user[:commits] %></p>
       <% end %>
 
       <h3>Repository Name: </h3>
