@@ -2,24 +2,29 @@ require 'httparty'
 
 
 class GithubService
-  def usernames
-    get_url("/contributors")
+  def users
+    username_response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop/contributors")
+    usernames_parsed_json = JSON.parse(username_response.body, symbolize_names: true)
+
+    user_info = []
+    usernames_parsed_json.each do |user|
+      commit_response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop/commits?author=#{user[:login]}")
+      commit_parsed_json = JSON.parse(commit_response.body, symbolize_names: true)
+      user_info << { :name => user[:login], :commits => commit_parsed_json.count}
+    end
+
+    user_info
   end
 
-  def repo
-    get_url("")
+  def repo_name
+    response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop")
+    parsed_json = JSON.parse(response.body, symbolize_names: true)
+    parsed_json[:full_name]
   end
 
-  def prs
-    get_url("/pulls?state=all")
-  end
-
-  def commits(username)
-    get_url("/commits?author=#{username}")
-  end
-
-  def get_url(arg)
-    response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop#{arg}")
-    JSON.parse(response.body, symbolize_names: true)
+  def pr_count
+    response = HTTParty.get("https://api.github.com/repos/DarbySmith/little-esty-shop/pulls?state=all")
+    parsed_json = JSON.parse(response.body, symbolize_names: true)
+    parsed_json.count
   end
 end

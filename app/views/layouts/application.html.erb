@@ -17,13 +17,15 @@
     <section>
 
       <h3>Contributors: </h3>
-      <% @usernames.each do |username| %>
-        <p><%= username.name %></p>
+      <% @users.each do |user| %>
+        <p><%= user[:name] %> <%= user[:commits] %></p>
       <% end %>
 
       <h3>Repository Name: </h3>
-        <p><%= @repo.repo_name %></p>
+        <p><%= @repo_name %></p>
 
+      <h3>Total Pull Requests: </h3>
+        <p><%= @pr_count %></p>
     </section>
     <%= yield %>
   </body>
