@@ -1,6 +1,7 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
+    @top_5_by_revenue = Merchant.top_5_by_revenue
   end
 
   def show
@@ -14,6 +15,12 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     edit_form_submission
+  end
+
+  def create
+    @merchant = Merchant.new(merchant_params)
+    @merchant.save
+    redirect_to admin_merchants_path
   end
 
   def edit_form_submission
@@ -31,6 +38,6 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :status)
   end
 end

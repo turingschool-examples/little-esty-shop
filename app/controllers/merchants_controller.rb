@@ -10,6 +10,9 @@ class MerchantsController < ApplicationController
     enable_disable_toggle
   end
 
+  def new
+  end
+
   def enable_disable_toggle
     if params[:button] == 'true'
       if @merchant.status == 'enabled'

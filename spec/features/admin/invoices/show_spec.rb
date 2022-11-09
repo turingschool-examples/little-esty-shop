@@ -100,7 +100,7 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
       visit admin_invoice_path(@invoice_1)
       expect(page).to have_content("ID: #{@invoice_1.id}")
       expect(page).to have_content("Status: completed")
-      expect(page).to have_content("Created on Tuesday, November 8, 2022")
+      expect(page).to have_content("Created on Wednesday, November 9, 2022")
       expect(page).to have_content("Customer: Paul Walker")
     end
     it 'shows the total revenue that will be generated from the invoice' do
