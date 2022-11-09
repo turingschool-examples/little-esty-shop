@@ -21,20 +21,20 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
     @billy = Customer.create!(first_name: "Billy", last_name: "Smith") 
     @john = Customer.create!(first_name: "John", last_name: "Doe") 
 
-    @invoice1 = Invoice.create!(status: 1, customer_id: @sergio.id, created_at: "2022-11-01 11:00:00 UTC")
-    @invoice2 = Invoice.create!(status: 0, customer_id: @sean.id, created_at: "2022-11-02 11:00:00 UTC")
-    @invoice3 = Invoice.create!(status: 0, customer_id: @emily.id, created_at: "2022-11-03 11:00:00 UTC")
-    @invoice4 = Invoice.create!(status: 1, customer_id: @kevin.id, created_at: "2022-11-04 11:00:00 UTC")
-    @invoice5 = Invoice.create!(status: 2, customer_id: @emily.id, created_at: "2022-11-01 11:00:00 UTC")
-    @invoice6 = Invoice.create!(status: 2, customer_id: @sean.id, created_at: "2022-11-02 11:00:00 UTC")
-    @invoice7 = Invoice.create!(status: 1, customer_id: @emily.id, created_at: "2022-11-03 11:00:00 UTC")
-    @invoice8 = Invoice.create!(status: 2, customer_id: @kevin.id, created_at: "2022-11-04 11:00:00 UTC")
-    @invoice9 = Invoice.create!(status: 0, customer_id: @sean.id, created_at: "2022-11-02 11:00:00 UTC")
-    @invoice10 = Invoice.create!(status: 1, customer_id: @emily.id, created_at: "2022-11-03 11:00:00 UTC")
-    @invoice11 = Invoice.create!(status: 2, customer_id: @sergio.id, created_at: "2022-11-04 11:00:00 UTC")
-    @invoice12 = Invoice.create!(status: 2, customer_id: @kevin.id, created_at: "2022-11-02 11:00:00 UTC")
-    @invoice13 = Invoice.create!(status: 2, customer_id: @emily.id, created_at: "2022-11-03 11:00:00 UTC")
-    @invoice14 = Invoice.create!(status: 2, customer_id: @billy.id, created_at: "2022-11-04 11:00:00 UTC")
+    @invoice1 = Invoice.create!(status: 1, customer_id: @sergio.id, created_at: "2002-11-01 11:00:00 UTC")
+    @invoice2 = Invoice.create!(status: 0, customer_id: @sean.id, created_at: "2003-11-02 11:00:00 UTC")
+    @invoice3 = Invoice.create!(status: 0, customer_id: @emily.id, created_at: "2004-11-03 11:00:00 UTC")
+    @invoice4 = Invoice.create!(status: 1, customer_id: @kevin.id, created_at: "2005-11-04 11:00:00 UTC")
+    @invoice5 = Invoice.create!(status: 2, customer_id: @emily.id, created_at: "2006-11-01 11:00:00 UTC")
+    @invoice6 = Invoice.create!(status: 2, customer_id: @sean.id, created_at: "2007-11-02 11:00:00 UTC")
+    @invoice7 = Invoice.create!(status: 1, customer_id: @emily.id, created_at: "2008-11-03 11:00:00 UTC")
+    @invoice8 = Invoice.create!(status: 2, customer_id: @kevin.id, created_at: "2009-11-04 11:00:00 UTC")
+    @invoice9 = Invoice.create!(status: 0, customer_id: @sean.id, created_at: "2010-11-02 11:00:00 UTC")
+    @invoice10 = Invoice.create!(status: 1, customer_id: @emily.id, created_at: "2011-11-03 11:00:00 UTC")
+    @invoice11 = Invoice.create!(status: 2, customer_id: @sergio.id, created_at: "2012-11-04 11:00:00 UTC")
+    @invoice12 = Invoice.create!(status: 2, customer_id: @kevin.id, created_at: "2013-11-02 11:00:00 UTC")
+    @invoice13 = Invoice.create!(status: 2, customer_id: @emily.id, created_at: "2014-11-03 11:00:00 UTC")
+    @invoice14 = Invoice.create!(status: 2, customer_id: @billy.id, created_at: "2015-11-04 11:00:00 UTC")
 
     @transaction1 = @invoice1.transactions.create!(result: 0)
     @transaction2 = @invoice2.transactions.create!(result: 0)
@@ -72,7 +72,7 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
     visit ("/admin")
   end
 
-  describe "When admin visit the admin dashboard- basic setup and links" do
+  xdescribe "When admin visit the admin dashboard- basic setup and links" do
     it "has a header indicating that I am on the admin dashboard" do
       expect(page).to have_content("Admin")
     end
@@ -90,7 +90,7 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
     end
   end
 
-  describe "Admin Dashboard Statistics-Top Customers" do
+  xdescribe "Admin Dashboard Statistics-Top Customers" do
     it "names the top 5 customers-i.e. customers with the largest number of successful transactions" do
       expect(page).to_not have_content(@john.name)
       expect(@billy.name).to_not appear_before(@emily.name)
@@ -109,29 +109,41 @@ RSpec.describe 'Admin Dashboard Index Page(/admin)' do
   end
 
   describe "Admin Dashboard Statistics-Invoices" do
-    it "has a 'Incomplete Invoices' section that lists all invoices ids for invoices with unshipped items" do
-      # within("#incomplete-invoices-list") do        
-          save_and_open_page
-        expect(page).to_not have_content(@invoice5.id)
-        expect(page).to_not have_content(@invoice6.id)
-        expect(page).to_not have_content(@invoice8.id)
-        expect(page).to_not have_content(@invoice11.id)
-        expect(page).to_not have_content(@invoice12.id)
-        expect(page).to_not have_content(@invoice13.id)
-        expect(page).to_not have_content(@invoice14.id)
+    describe "has a 'Incomplete Invoices' section displaying invoices's id for unshipped items" do 
+      it "is orders them by created_on date - oldest to newest" do 
+        within("#incomplete-invoices--#{invoice.id}") do                  
+          expect(page).to_not have_content(@invoice5.id)
+          expect(page).to_not have_content(@invoice12.id)
+          expect(@invoice14.id).to_not appear_before(@invoice1.id)
 
-        expect(page).to_not have_content(@invoice2.id)
-        expect(page).to_not have_content(@invoice3.id)
-        expect(page).to_not have_content(@invoice9.id)
+          expect(@invoice1.id).to appear_before(@invoice2.id)
+          expect(@invoice2.id).to appear_before(@invoice3.id)
+          expect(@invoice3.id).to appear_before(@invoice4.id)
+          expect(@invoice4.id).to appear_before(@invoice7.id)
+          expect(@invoice7.id).to appear_before(@invoice9.id)
+          expect(@invoice9.id).to appear_before(@invoice10.id)
+          expect(@invoice10.id).to appear_before(@invoice14.id)
+        end
+      end      
 
-        expect(page).to have_content(@invoice1.id)
-        expect(page).to have_content(@invoice4.id)
-        expect(page).to have_content(@invoice7.id)
-        expect(page).to have_content(@invoice10.id)
+      it "next to each invoices' ids is the created_on date (format: weekday, month day, year)" do
+        within("#incomplete-invoices--#{invoice.id}") do   
+          expect(page).to have_content(@invoice2.created_at)
+          expect(@invoice3.created_at).to_not appear_before(@invoice2.created_at)
+          
+          expect(@invoice2.created_at).to appear_before(@invoice3.created_at)
+          expect(@invoice3.created_at).to appear_before(@invoice14.created_at)
+        end
+      end
 
-      # end
-
-      
+      it "each invoice id links to that invoice's admin show page" do
+        click_on "#{invoice2.id}"
+        expect(current_path).to_not eq("/admin/invoices")
+        expect(current_path).to_not eq("/admin/invoices/#{invoice1.id}")
+        expect(current_path).to_not eq("/admin/invoices/#{invoice3.id}")
+        
+        expect(current_path).to eq("/admin/invoices/#{invoice2.id}")
+      end
     end
   end
 end
