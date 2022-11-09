@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   # admin
+  get '/', to: 'welcome#index'
+  
   get '/admin', to: 'admin#index'
 
   namespace :admin do
