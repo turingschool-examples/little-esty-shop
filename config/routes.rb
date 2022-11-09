@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :invoices, except: [:update]
   end
 
+  patch '/admin/invoices/:id', to: 'admin/invoices#update'
+
   resources :admin, only: [:index]
   # get '/admin', to: 'admin#index'
 
