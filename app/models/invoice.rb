@@ -10,5 +10,8 @@ class Invoice < ApplicationRecord
   def total_revenue #for an invoice 
     invoice_items.sum("quantity * unit_price")
   end
-  
+
+  def self.unshipped_items
+    Invoice.select("invoices.*").joins(:invoice_items).where(status: [0,1]).group("invoices.id").order("created_at ASC") 
+  end
 end

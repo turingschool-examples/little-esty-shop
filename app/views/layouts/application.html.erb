@@ -18,6 +18,7 @@
     <center><h1>LittleEtsyShop</h1></center>
     <%= yield %>
     <hr><br><br><br><br><br>
+
     <footer>
       <h3>Github Info</h3>
       repo name: <%= @repo = RepoSearch.new.create_repo.name %>
@@ -31,6 +32,7 @@
         <% pr_info.each do |user, pr_num| %>
           <p><%= "#{user} - #{pr_num}" %></p>
         <% end %>
+
     </footer>
   </body>
 </html>
