@@ -11,11 +11,10 @@ class MerchantsController < ApplicationController
   end
 
   def new
-
   end
 
   def create
-    
+
   end
 
   def enable_disable_toggle
