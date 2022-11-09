@@ -23,8 +23,13 @@
       repo name: <%= @repo = RepoSearch.new.create_repo.name %>
 
       <h4>Commits by User:</h4>
-        <% commit_info.each do |commit| %>
-          <p><%= "#{commit.author} - #{commit.num_commits}" %></p>
+        <% commit_info.each do |user, commit_num| %>
+          <p><%= "#{user} - #{commit_num}" %></p>
+        <% end %>
+
+      <h4>Pull Requests by User:</h4>
+        <% pr_info.each do |user, pr_num| %>
+          <p><%= "#{user} - #{pr_num}" %></p>
         <% end %>
     </footer>
   </body>

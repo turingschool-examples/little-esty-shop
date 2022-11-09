@@ -3,6 +3,7 @@ class Commit
 
   def initialize(data)
     @num_commits = data[:total]
-    @author = data[:author][:login]
+    @author = data[:commit][:author][:name]
+
   end
 end

@@ -7,12 +7,20 @@ class GitHubService
   end
 
   def collaborators_information
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
     get_url('https://api.github.com/repos/eport01/little-esty-shop/collaborators')
   end
 
+
+  def pr_information 
+    # require 'pry'; binding.pry
+
+    get_url('https://api.github.com/repos/eport01/little-esty-shop/pulls?state=closed')
+  end
+
   def commits_information
-    get_url_no_auth("https://api.github.com/repos/eport01/little-esty-shop/stats/contributors")
+    get_url("https://api.github.com/repos/eport01/little-esty-shop/commits?per_page=100")
+    # require 'pry'; binding.pry
   end
 
   def get_url(url)
@@ -25,3 +33,6 @@ class GitHubService
     parsed = JSON.parse(response.body, symbolize_names: true)
   end
 end
+
+# x = GitHubService.new 
+# x.commits_information
