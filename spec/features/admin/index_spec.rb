@@ -143,7 +143,7 @@ RSpec.describe 'Admin index page' do
 
   it 'it displays next to each link - in order of creation - when each invoice was created' do
     visit admin_index_path
-
+    
     expect(page).to have_content("Created On: #{@invoice_1.created_at.strftime("%A, %B%e, %Y")}")
     expect(page).to have_content("Created On: #{@invoice_2.created_at.strftime("%A, %B%e, %Y")}")
     expect(page).to have_content("Created On: #{@invoice_3.created_at.strftime("%A, %B%e, %Y")}")

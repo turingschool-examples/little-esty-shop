@@ -128,12 +128,11 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
     it 'the invoice status is a select field, and I see that the invoices current status is selected.
     when I click the select field, I can select a new status for the invoice.' do
       visit admin_invoice_path(@invoice_6)
-# save_and_open_page
       expect(page).to have_select("Change Status", selected: "Completed")
     end
 
-    it 'next to the select field, there is a button to update invoice status. 
-    when I click the button, I am taken back to the admin invoice show page and I 
+    it 'next to the select field, there is a button to update invoice status.
+    when I click the button, I am taken back to the admin invoice show page and I
     see that my invoices status has been updated' do
       visit admin_invoice_path(@invoice_15)
 
@@ -142,11 +141,9 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
 
       page.select "Cancelled", from: "Change Status"
       click_button("Update Invoice Status")
-      
+
       expect(current_path).to eq(admin_invoice_path(@invoice_15))
       expect(@invoice_15.reload.status).to eq("cancelled")
     end
   end
 end
-
-
