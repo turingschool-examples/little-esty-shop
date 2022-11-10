@@ -11,7 +11,7 @@
   <% if @merchant.id == item.merchant_id %>
     <p>Item Name: <%= item.name %></p>
     <p>Quantity: <%= @invoice.invoice_item(item.id).quantity %></p>
-    <p>Selling Price: $<%= @invoice.invoice_item(item.id).unit_price %> per unit</p>
+    <p>Selling Price: $<%=sprintf("%.2f", @invoice.invoice_item(item.id).unit_price.round(2))%> per unit</p>
     <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |form| %>
       <%= form.hidden_field :invoice_item_id, value: "#{@invoice.invoice_item(item.id).id}" %>
       <%= form.label "Status: " %>
@@ -23,4 +23,3 @@
 <% end %>
 
 <p>"Total revenue for invoice <%=@invoice.id%>: $<%=@total_revenue%></p>
-
