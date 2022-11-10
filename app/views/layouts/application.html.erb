@@ -23,5 +23,8 @@
   </div>
   <%end%>
     <%= yield %>
+    <div id="footer">
+     <%= render partial: 'layouts/footer', locals: {name: @repository_name, group: @group_usernames, contributions: @contributor_commits, pull_requests: @pull_requests} %>
+    </div>
   </body>
 </html>

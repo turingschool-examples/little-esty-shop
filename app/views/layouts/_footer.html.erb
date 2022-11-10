@@ -1,0 +1,20 @@
+<div class="repo">
+  <h4> Repo: <%= name %></h4>
+</div>
+<div class="group">
+  <h4> Group Members: </h4>
+  <% group.each do |member| %>
+    <p> <%= member %> </p>
+  <% end %>
+</div>
+<div class="commits">
+  <h4> Commits by Group Member: </h4>
+  <% contributions.each do |member, commits| %>
+    <% if group.include?(member) %>
+    <p> Member: <%= member %>, Commits: <%= commits %> </p>
+    <% end %>
+  <% end %>
+</div>
+<div class="pull">
+  <h4> Number of Pull Requests: <%=pull_requests %></h4>
+</div>
