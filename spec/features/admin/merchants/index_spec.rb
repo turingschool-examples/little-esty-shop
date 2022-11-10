@@ -194,16 +194,17 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to_not have_content("#{@surf_designs.name}")
       end
     end
+    
     it 'shows the top five merchants by total revenue with the revenue next to each name' do
       visit admin_merchants_path
 
       within '#top-5' do
       expect(page).not_to have_content("#{@merchant_3.name}")
-      expect(page).to have_content("#{@surf_designs.name} | Total revenue: #{@surf_designs.total_revenue}")
-      expect(page).to have_content("#{@crystal_moon.name} | Total revenue: #{@crystal_moon.total_revenue}")
-      expect(page).to have_content("#{@merchant_4.name} | Total revenue: #{@merchant_4.total_revenue}")
-      expect(page).to have_content("#{@merchant_5.name} | Total revenue: #{@merchant_5.total_revenue}")
-      expect(page).to have_content("#{@merchant_6.name} | Total revenue: #{@merchant_6.total_revenue}")
+      expect(page).to have_content("#{@surf_designs.name} | Total revenue: $#{@surf_designs.total_revenue}")
+      expect(page).to have_content("#{@crystal_moon.name} | Total revenue: $#{@crystal_moon.total_revenue}")
+      expect(page).to have_content("#{@merchant_4.name} | Total revenue: $#{@merchant_4.total_revenue}")
+      expect(page).to have_content("#{@merchant_5.name} | Total revenue: $#{@merchant_5.total_revenue}")
+      expect(page).to have_content("#{@merchant_6.name} | Total revenue: $#{@merchant_6.total_revenue}")
       expect(@crystal_moon.name).to appear_before("Surf") #Turns out orderly hates '&' symbols and won't let the test pass if the full name is used
       expect("Surf").to appear_before(@merchant_6.name)
       expect(@merchant_6.name).to appear_before(@merchant_5.name)
@@ -221,8 +222,15 @@ RSpec.describe "Admin Merchant Index", type: :feature do
 
     it 'has a link to create a new merchant' do
       visit admin_merchants_path
-
       expect(page).to have_link("Create New Merchant", href: new_merchant_path)
+    end
+
+    it 'shows the date with most revenue for each of the top five merchants by total revenue' do
+      visit admin_merchants_path
+      within '#top-5' do
+        expect(page).to have_content("Top day for #{@surf_designs.name} was #{@invoice_6.created_at.strftime('%m/%d/%y')}")
+        expect(page).to have_content("Top day for #{@merchant_6.name} was #{@invoice_6.created_at.strftime('%m/%d/%y')}")
+      end
     end
   end
 end

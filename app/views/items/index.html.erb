@@ -3,9 +3,9 @@
 <h1>Welcome To <%= @merchant.name %></h1>
 <div id="top_items">
   <h2>--- Top 5 Items ---</h2>
-    <% @merchant_top_items.each do |item, total_revenue|%>
-      <p> <%= link_to item[1], merchant_item_path(@merchant, item[0])%>: <%= "#{total_revenue}"%> </p>
-      The top selling date for <%= item[1] %> was <%= item[2] %><br>
+    <% @merchant_top_items.each do |item|%>
+      <p> <%= link_to item.name, merchant_item_path(@merchant, item.id)%>: <%= "#{item.revenue}"%> </p>
+      The top selling date for <%= item.name %> was <%= item.top_selling_date %><br>
     <%end%>
 </div>
 
