@@ -194,6 +194,7 @@ RSpec.describe "Admin Merchant Index", type: :feature do
         expect(page).to_not have_content("#{@surf_designs.name}")
       end
     end
+    
     it 'shows the top five merchants by total revenue with the revenue next to each name' do
       visit admin_merchants_path
 

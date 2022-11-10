@@ -1,4 +1,5 @@
-
+<div class="scroll-box">
 <% @invoices.each do |invoice| %>
   <li><%= link_to "Invoice ##{invoice.id}", admin_invoice_path(invoice), method: :get %></li>
 <% end %>
+</div>
