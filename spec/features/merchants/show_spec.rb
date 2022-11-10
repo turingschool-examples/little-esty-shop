@@ -130,11 +130,11 @@ RSpec.describe 'Merchants Dashboard Page' do
         visit "/merchants/#{@merchant1.id}/dashboard"
 
         within('#items_ready_to_ship') do
-          expect(page).to have_content(@invoice1.created_at.strftime('%A, %B%e, %Y'))
-          expect(page).to have_content(@invoice3.created_at.strftime('%A, %B%e, %Y'))
-          expect(page).to have_content(@invoice4.created_at.strftime('%A, %B%e, %Y'))
-          expect(page).to have_content(@invoice5.created_at.strftime('%A, %B%e, %Y'))
-          expect(page).to have_content(@invoice6.created_at.strftime('%A, %B%e, %Y'))
+          expect(page).to have_content(@invoice1.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice3.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice4.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice5.created_at.strftime('%A, %B %e, %Y'))
+          expect(page).to have_content(@invoice6.created_at.strftime('%A, %B %e, %Y'))
           expect("#{@invoice1.id}").to appear_before("#{@invoice3.id}")
           expect("#{@invoice3.id}").to appear_before("#{@invoice4.id}")
           expect("#{@invoice4.id}").to appear_before("#{@invoice5.id}")
