@@ -21,9 +21,8 @@
     <% end %>
   </div>
 </div>
- 
+
 <h2>--- Disabled Merchants ---</h2>
-<div class="scroll-box">
   <div id="merchant-disabled">
     <% @merchants.each do |merchant| %>
       <% if merchant.status == 'disabled' %>
@@ -35,3 +34,12 @@
   </div>
 </div>
 
+<div id="top-5">
+<h2>Top 5 Merchants by Revenue</h2>
+<ol>
+<%@top_5_by_revenue.each do |merchant|%>
+  <li><%=link_to "#{merchant.name}", admin_merchant_path(merchant.id)%> | Total revenue: <%=merchant.revenue%></li>
+  <p>Top day for <%= merchant.name %> was <%= merchant.top_selling_date.strftime('%m/%d/%y') %></p>
+<%end%>
+</ol>
+<div>

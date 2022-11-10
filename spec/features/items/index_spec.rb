@@ -21,7 +21,7 @@ RSpec.describe 'merchant items index page', type: :feature do
         @wax = @surf_designs.items.create!(name: "Board Wax", description: "Hang ten!", unit_price: 7)
         @rash_guard = @surf_designs.items.create!(name: "Radical Rash Guard", description: "Stay totally groovy and rash free!", unit_price: 50)
         @zinc = @surf_designs.items.create!(name: "100% Zinc Face Protectant", description: "Our original organic formula!", unit_price: 13)
-        
+
 
         @paul = Customer.create!(first_name: "Paul", last_name: "Walker")
         @sam = Customer.create!(first_name: "Sam", last_name: "Gamgee")
@@ -77,7 +77,7 @@ RSpec.describe 'merchant items index page', type: :feature do
       end
 
       it '- lists the names of all of my items, and I do not see items for any other merchant' do
-       
+
         visit merchant_items_path(@crystal_moon)
 
         expect(page).to have_content("Welcome To Crystal Moon Designs")
@@ -100,7 +100,7 @@ RSpec.describe 'merchant items index page', type: :feature do
       end
 
       it '- next to each item name I see a button to disable or enable that item.
-      when I click this button, I am redirected back to the items index and I see 
+      when I click this button, I am redirected back to the items index and I see
       that the items status has changed' do
         visit merchant_items_path(@surf_designs)
 
@@ -109,10 +109,10 @@ RSpec.describe 'merchant items index page', type: :feature do
 
         click_button "Disable Board Wax"
         expect(current_path).to eq("/merchants/#{@surf_designs.id}/items")
-        
+
         expect(page).to have_content("Status: not available for purchase")
         expect(page).to have_button("Enable Board Wax")
-        
+
         click_button "Enable Board Wax"
         expect(current_path).to eq("/merchants/#{@surf_designs.id}/items")
 
@@ -189,7 +189,7 @@ RSpec.describe 'merchant items index page', type: :feature do
       it "has a section for the top 5 items by revenue for the merchant" do
 
         visit merchant_items_path(@crystal_moon)
-    
+        
         expect(page).to have_content("Top 5 Items")
         expect(page).to have_content("Moon Rock: 210")
         expect(page).to have_content("Emerald: 170")
@@ -222,7 +222,6 @@ RSpec.describe 'merchant items index page', type: :feature do
           expect(page).to have_content("The top selling date for Amethyst was #{@amethyst_invoice.created_at}")
           expect(page).to have_content("The top selling date for Topaz was #{@topaz_invoice.created_at}")
         end
-
       end
     end
   end

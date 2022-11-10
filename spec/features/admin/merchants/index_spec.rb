@@ -222,8 +222,15 @@ RSpec.describe "Admin Merchant Index", type: :feature do
 
     it 'has a link to create a new merchant' do
       visit admin_merchants_path
-
       expect(page).to have_link("Create New Merchant", href: new_merchant_path)
+    end
+
+    it 'shows the date with most revenue for each of the top five merchants by total revenue' do
+      visit admin_merchants_path
+      within '#top-5' do
+        expect(page).to have_content("Top day for #{@surf_designs.name} was #{@invoice_6.created_at.strftime('%m/%d/%y')}")
+        expect(page).to have_content("Top day for #{@merchant_6.name} was #{@invoice_6.created_at.strftime('%m/%d/%y')}")
+      end
     end
   end
 end

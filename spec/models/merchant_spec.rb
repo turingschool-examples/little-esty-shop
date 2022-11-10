@@ -45,6 +45,7 @@ RSpec.describe Merchant, type: :model do
       @hamada = Customer.create!(first_name: "Hamada", last_name: "Hilal")
       @frodo = Customer.create!(first_name: "Frodo", last_name: "Baggins")
       @eevee = Customer.create!(first_name: "Eevee", last_name: "Ketchup")
+      @dude = Customer.create!(first_name: "Dude", last_name: "Bruh")
 
       @invoice_1 = Invoice.create!(status: 2, customer_id: @paul.id)
       @invoice_2 = Invoice.create!(status: 2, customer_id: @paul.id)
@@ -68,6 +69,7 @@ RSpec.describe Merchant, type: :model do
       @invoice_20 = Invoice.create!(status: 2, customer_id: @frodo.id)
       @invoice_21 = Invoice.create!(status: 2, customer_id: @paul.id)
       @invoice_22 = Invoice.create!(status: 2, customer_id: @eevee.id)
+      @invoice_23 = Invoice.create!(status: 2, customer_id: @dude.id)
 
       @pearl_invoice = InvoiceItem.create!(item_id: @pearl.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 25, status: 1)
       @moon_rock_invoice = InvoiceItem.create!(item_id: @moon_rock.id, invoice_id: @invoice_2.id, quantity: 2, unit_price: 105, status: 1)
@@ -87,6 +89,7 @@ RSpec.describe Merchant, type: :model do
       @ball_invoice = InvoiceItem.create!(item_id: @ball.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 100, status: 1)
       @statuette_invoice = InvoiceItem.create!(item_id: @statuette.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 200, status: 1)
       @quilt_invoice = InvoiceItem.create!(item_id: @quilt.id, invoice_id: @invoice_6.id, quantity: 1, unit_price: 300, status: 1)
+      @moon_rock_invoice_2 = InvoiceItem.create!(item_id: @moon_rock.id, invoice_id: @invoice_23.id, quantity: 2, unit_price: 105, status: 1)
 
       @transaction_1 = Transaction.create!(result: 1, invoice_id: @invoice_1.id, credit_card_number: 0001)
       @transaction_2 = Transaction.create!(result: 1, invoice_id: @invoice_2.id, credit_card_number: 0002)
@@ -110,6 +113,7 @@ RSpec.describe Merchant, type: :model do
       @transaction_20 = Transaction.create!(result: 1, invoice_id: @invoice_20.id, credit_card_number: 0016)
       @transaction_21 = Transaction.create!(result: 0, invoice_id: @invoice_21.id, credit_card_number: 0016)
       @transaction_22 = Transaction.create!(result: 0, invoice_id: @invoice_17.id, credit_card_number: 0016)
+      @transaction_23 = Transaction.create!(result: 1, invoice_id: @invoice_23.id, credit_card_number: 0016)
     end
 
     describe '#top_5_customers' do
@@ -121,24 +125,35 @@ RSpec.describe Merchant, type: :model do
 
     describe '#items_ready_to_ship' do
       it "returns all items that have been ordered, packaged and not yet shipped in order of creation" do
-        expect(@crystal_moon.items_ready_to_ship.length).to eq(4)
-        expect(@crystal_moon.items_ready_to_ship).to include(@pearl_invoice, @moon_rock_invoice, @lapis_lazuli_invoice, @topaz_invoice)
-        expect(@crystal_moon.items_ready_to_ship).to eq([@pearl_invoice, @moon_rock_invoice, @lapis_lazuli_invoice, @topaz_invoice])
+        expect(@crystal_moon.items_ready_to_ship.length).to eq(5)
+        expect(@crystal_moon.items_ready_to_ship).to eq([@pearl_invoice, @moon_rock_invoice, @lapis_lazuli_invoice, @topaz_invoice, @moon_rock_invoice_2])
       end
     end
 
     describe '#top_5_items' do
       it '- returns the 5 items with the highest total revenue generated and the date with the most sales for each of the top 5 items' do
-        expect(@crystal_moon.top_5_items).to eq({[@moon_rock.id, "Moon Rock", @invoice_2.created_at] => 210, [@emerald.id, "Emerald", @invoice_6.created_at] => 170, [@ruby.id, "Ruby", @invoice_7.created_at] => 130, [@amethyst.id, "Amethyst", @invoice_5.created_at] => 110, [@topaz.id, "Topaz", @invoice_4.created_at] => 110})
+        expect(@crystal_moon.top_5_items.first.name).to eq(@moon_rock.name)
+        expect(@crystal_moon.top_5_items.first.revenue).to eq(420)
+        expect(@crystal_moon.top_5_items.last.name).to eq(@topaz.name)
+        expect(@crystal_moon.top_5_items.last.revenue).to eq(110)
+        expect(@crystal_moon.top_5_items.length).to eq(5)
       end
     end
 
     describe '#top_5_by_revenue' do
       it 'returns the names and total revenues of the top 5 merchants by revenue in descending order' do
-        expect(Merchant.top_5_by_revenue).to eq({[@surf_designs.name, @surf_designs.id] => @surf_designs.total_revenue, [@crystal_moon.name, @crystal_moon.id] => @crystal_moon.total_revenue, [@merchant_6.name, @merchant_6.id] => @merchant_6.total_revenue, [@merchant_5.name, @merchant_5.id] => @merchant_5.total_revenue, [@merchant_4.name, @merchant_4.id] => @merchant_4.total_revenue})
+        expect(Merchant.top_5_by_revenue.first.name).to eq(@crystal_moon.name)
+        expect(Merchant.top_5_by_revenue.last.name).to eq(@merchant_4.name)
+        expect(Merchant.top_5_by_revenue.length).to eq(5)
       end
     end
-    
+
+    describe '#top_selling_date' do
+      it 'returns the date with most revenue for that merchant' do
+        expect(@crystal_moon.top_selling_date.strftime('%m/%d/%y')).to eq(@pearl_invoice.updated_at.strftime('%m/%d/%y'))
+      end
+    end
+
     describe '.total_revenue' do #This method is used for making testing easier
       it 'returns the total revenue of the merchant' do
         expect(@surf_designs.total_revenue).to eq((@wax_invoice.unit_price * @wax_invoice.quantity) + (@rash_guard_invoice.unit_price * @rash_guard_invoice.quantity) + (@zinc_invoice.unit_price * @zinc_invoice.quantity) + (@surf_board_invoice.unit_price * @surf_board_invoice.quantity))
