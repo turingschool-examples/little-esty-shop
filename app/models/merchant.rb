@@ -7,7 +7,7 @@ class Merchant < ApplicationRecord
 
   enum status: [ :disabled, :enabled ]
   validates :name, presence: true, length: { maximum: 50 }
-  
+
   def top_5_customers
     Customer.joins("INNER join invoices ON invoices.customer_id = customers.id")
             .joins("INNER join transactions ON transactions.invoice_id = invoices.id")
@@ -20,7 +20,7 @@ class Merchant < ApplicationRecord
             .limit(5)
             .count('id')
 
-    #add last name in group and iterate through key in 
+    #add last name in group and iterate through key in
     # .joins(invoices: [:transactions, {items: :merchant}])
     #in test eq([array of them]) should work
   end
@@ -30,25 +30,38 @@ class Merchant < ApplicationRecord
   end
 
   def top_5_items
+    # require "pry"; binding.pry
+
     Item.joins([:merchant, {invoices: :transactions}])
         .where(merchants: {id: self.id}, transactions: {result: 1}, invoices: {status: 2})
-        .group(:id, :name, "invoices.created_at")
-        .order(Arel.sql("sum(quantity * invoice_items.unit_price) desc"))
+        .select('items.*, sum(quantity * invoice_items.unit_price) as revenue')
+        .group('items.id')
+        .order('revenue DESC')
         .limit(5)
-        .sum('quantity * invoice_items.unit_price')
   end
 
   def self.top_5_by_revenue
     joins(:transactions)
     .where("result = ? AND invoices.status = ?", 1, 2)
-    .order(Arel.sql('sum(quantity * invoice_items.unit_price) desc'))
-    .group(:name, :id)
-    .sum('quantity * invoice_items.unit_price')
+    .select('merchants.*, sum(quantity * invoice_items.unit_price) as revenue')
+    .group('merchants.id')
+    .order('revenue DESC')
+    .limit(5)
+  end
+
+  def top_selling_date
+    invoices
+    .where("invoices.status = ?", 2)
+    .select('invoices.*, sum(quantity * invoice_items.unit_price) as sum_id')
+    .group(:id)
+    .order('sum_id desc')
+    .first
+    .updated_at
   end
 
   def total_revenue
     invoice_items.joins(invoice: :transactions)
-                 .where("result = ? AND invoices.status = ?", 1, 2)
+    .where("result = ? AND invoices.status = ?", 1, 2)
                  .sum('quantity * invoice_items.unit_price')
   end
 end
