@@ -10,11 +10,11 @@
 
 <p>Created on <%=@invoice.created_at.strftime("%A, %B %e, %Y")%></p>
 <p>Customer: <%="#{@customer.first_name} #{@customer.last_name}"%></p>
-<p>Total Revenue: $<%= @total_revenue %></p>
+<p>Total Revenue: $<%= sprintf("%.2f", @total_revenue.round(2)) %></p>
 
 <div id="invoice_items">
   <h2>--- Items ---</h2>
     <% @invoice_items.each do |invoice_item|%>
-      <p> <%= invoice_item.item.name %> , Quantity: <%= invoice_item.quantity %>, Price: $<%=sprintf("%.2f", invoice_item.unit_price.round(2))%>, Status: <%= invoice_item.status %></p>
+      <p> <%= invoice_item.item.name %> , Quantity: <%= invoice_item.quantity %>, Price: $<%=sprintf("%.2f", (invoice_item.unit_price.to_f/100).round(2))%>, Status: <%= invoice_item.status %></p>
     <%end%>
 </div>

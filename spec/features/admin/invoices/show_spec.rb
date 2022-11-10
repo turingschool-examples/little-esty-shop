@@ -105,7 +105,7 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
     end
     it 'shows the total revenue that will be generated from the invoice' do
       visit admin_invoice_path(@invoice_6)
-      expect(page).to have_content("Total Revenue: $1770")
+      expect(page).to have_content("Total Revenue: $17.70")
     end
 
     it "shows the list of items on the invoice along with the items' ordered quantity, price it was sold for and invoice item status" do
@@ -113,15 +113,15 @@ RSpec.feature "Admin Invoice Show Page", type: :feature do
 
       expect(page).to have_content(@emerald.name)
       expect(page).to have_content(@emerald_invoice.quantity)
-      expect(page).to have_content(@emerald_invoice.unit_price)
+      expect(page).to have_content(@emerald_invoice.unit_price.to_f/100)
       expect(page).to have_content(@emerald_invoice.status)
       expect(page).to have_content(@surf_board.name)
       expect(page).to have_content(@surf_board_invoice.quantity)
-      expect(page).to have_content(@surf_board_invoice.unit_price)
+      expect(page).to have_content(@surf_board_invoice.unit_price.to_f/100)
       expect(page).to have_content(@surf_board_invoice.status)
       expect(page).to have_content(@snorkel.name)
       expect(page).to have_content(@snorkel_invoice.quantity)
-      expect(page).to have_content(@snorkel_invoice.unit_price)
+      expect(page).to have_content(@snorkel_invoice.unit_price.to_f/100)
       expect(page).to have_content(@snorkel_invoice.status)
     end
 

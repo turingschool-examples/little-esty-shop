@@ -9,7 +9,5 @@ class ApplicationController < ActionController::Base
     @group_usernames = repo_call.usernames
     @contributor_commits = repo_call.commits_by_contributors
     @pull_requests = repo_call.number_of_pull_requests
-    # @group_usernames = ["temporary"]
-    # @contributor_commits = ["temporary"]
   end
 end
