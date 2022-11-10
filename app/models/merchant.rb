@@ -61,7 +61,7 @@ class Merchant < ApplicationRecord
 
   def total_revenue
     invoice_items.joins(invoice: :transactions)
-    .where("result = ? AND invoices.status = ?", 1, 2)
+                 .where("result = ? AND invoices.status = ?", 1, 2)
                  .sum('quantity * invoice_items.unit_price')
   end
 end

@@ -1,25 +1,37 @@
 <%= link_to "Create New Merchant", new_merchant_path %>
 
-<div id="merchant-enabled">
-  <h2>--- Enabled Merchants ---</h2>
-  <% @merchants.each do |merchant| %>
-    <% if merchant.status == 'enabled' %>
-      <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
-      <p>This storefront is currently: OPEN</p>
-      <%= button_to "Disable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
+<div id="top-5">
+<h2>Top 5 Merchants by Revenue</h2>
+<ol>
+<%@top_5_by_revenue.each do |merchant, revenue|%>
+<li><%=link_to "#{merchant[0]}", admin_merchant_path(merchant[1])%> | Total revenue: $<%=revenue%></li>
+<%end%>
+</ol>
+<div>
+
+<h2>--- Enabled Merchants ---</h2>
+<div class="scroll-box">
+  <div id="merchant-enabled">
+    <% @merchants.each do |merchant| %>
+      <% if merchant.status == 'enabled' %>
+        <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
+        <p>This storefront is currently: OPEN</p>
+        <%= button_to "Disable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
+<h2>--- Disabled Merchants ---</h2>
   <div id="merchant-disabled">
-  <h2>--- Disabled Merchants ---</h2>
-  <% @merchants.each do |merchant| %>
-    <% if merchant.status == 'disabled' %>
-      <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
-      <p>This storefront is currently: CLOSED</p>
-      <%= button_to "Enable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
+    <% @merchants.each do |merchant| %>
+      <% if merchant.status == 'disabled' %>
+        <p><b><%= link_to merchant.name, admin_merchant_path(merchant) %></b></p>
+        <p>This storefront is currently: CLOSED</p>
+        <%= button_to "Enable #{merchant.name}", "/merchants/#{merchant.id}?button=true", method: :patch %><br>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
 <div id="top-5">
