@@ -1,3 +1,5 @@
+<%= render partial: "layouts/merchant_header", locals: {page_name: @merchant.name, merchant_id: @merchant.id}%>
+
 <p>Item: <%=@item.name%></p>
 <p>Description: <%=@item.description%></p>
 <p>Current price: $<%=sprintf("%.2f", @item_price.round(2))%></p>
