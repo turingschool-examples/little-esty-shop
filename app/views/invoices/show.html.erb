@@ -1,3 +1,5 @@
+<%= render partial: "layouts/merchant_header", locals: {page_name: @merchant.name, merchant_id: @merchant.id}%>
+
 <h3><%= @merchant.name %>: Information for Invoice #<%= @invoice.id %></h3>
 <p>Invoice: <%=@invoice.id%></p>
 <p>Status: <%=@invoice.status%></p>

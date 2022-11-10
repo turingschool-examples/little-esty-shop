@@ -1,4 +1,4 @@
-
+<%= render partial: "layouts/merchant_header", locals: {page_name: @merchant.name, merchant_id: @merchant.id}%>
 
 <%= form_with url: "/merchants/#{@merchant.id}/items", method: :post, local: true do |form| %>
   <%= form.label :name %>

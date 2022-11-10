@@ -1,6 +1,5 @@
-<h1> <%= @merchant.name %> </h1>
-<%= link_to "Merchant Items", "/merchants/#{@merchant.id}/items" %>
-<%= link_to "Merchant Invoices", "/merchants/#{@merchant.id}/invoices" %>
+<%= render partial: "layouts/merchant_header", locals: {page_name: @merchant.name, merchant_id: @merchant.id}%>
+
 <h2> Favorite Customers: </h2>
 <% @favorite_customers.each do |customer, count|%>
   <p> <%= "Name: #{customer}, Number of Transactions: #{count}" %> </p>
