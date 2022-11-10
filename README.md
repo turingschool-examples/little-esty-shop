@@ -21,7 +21,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/DarbySmith/little-esty-shop">
-    <img src="doc/little-esty-shop.jpg" alt="Logo" width="400" height="200">
+    <img src="https://user-images.githubusercontent.com/101418582/201154904-c31757eb-e363-41bf-9c54-35730b8e2885.jpg" alt="Logo" width="400" height="200">
   </a>
 
 <h1 align="center">Little Esty Shop</h1>
@@ -44,6 +44,8 @@
 
 <!-- Relationships -->
 ## Relationships
+
+<img src="https://user-images.githubusercontent.com/101418582/201155262-79d365b7-92e9-404d-a52f-b1480d2c096d.png" alt="Diagram">
 
 <!-- CONTACT -->
 ## Contact
