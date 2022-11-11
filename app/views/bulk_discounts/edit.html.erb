@@ -1,0 +1,3 @@
+<h1>Edit <%= @discount.id %></h1>
+
+<%= render partial: 'form', locals: {path: merchant_bulk_discount_path(@discount.merchant, @discount), method: :patch, button_text: "Update Discount"} %>
