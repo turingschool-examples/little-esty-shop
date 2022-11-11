@@ -1,0 +1,50 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#p0 {
+  text-indent: 2em;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Discounts</h3>
+  <div class="row">
+    <div class="column">
+      <div id='discounts-links-<%=@merchant.id%>'>
+        <p><%= link_to "New Discount", new_merchant_discount_path(@merchant.id) %></p>
+      </div>
+      <div id='discounts-list-<%=@merchant.id%>'>
+        <% @discounts.each do |discount| %>
+          <p>
+            <%= "Discount # " %> <%= link_to "#{discount.id}", merchant_discount_path(@merchant.id, discount.id) %><%= ": Item threshold # #{discount.quantity_threshold}, Amount Discounted #{discount.percentage_discount}%" %>
+            <%= link_to "Delete", merchant_discount_path(@merchant.id, discount.id), method: :delete %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

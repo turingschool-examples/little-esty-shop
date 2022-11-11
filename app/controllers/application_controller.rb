@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     # @latest_pr = GithubSearch.new.num_pulls
 
     @repo_name = Repo.new("little-esty-shop")
-    @contributors = [Contributor.new({total: 13, author: {login: "ashuhleyt"}}), Contributor.new({total: 13, author: {login: "ashuhleyt"}}), Contributor.new({total: 13, author: {login: "ashuhleyt"}}), Contributor.new({total: 13, author: {login: "ashuhleyt"}}) ]
+    @contributors = [Contributor.new({total: 54, author: {login: "josephhilby"}}), Contributor.new({total: 47, author: {login: "amikaross"}}), Contributor.new({total: 21, author: {login: "AlexMR-93"}}), Contributor.new({total: 13, author: {login: "ashuhleyt"}}) ]
     @latest_pr = Pull.new({number: 37})
   end
 end

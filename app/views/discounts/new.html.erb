@@ -1,0 +1,40 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#p0 {
+  text-indent: 2em;
+}
+
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">New Discount</h3>
+  <div class="row">
+    <div class="column">
+      <div id="discounts-form-<%= @merchant.id %>">
+        <%= form_with url: merchant_discounts_path(@merchant.id), method: :post, local: true do |form| %>
+          <%= form.hidden_field :merchant_id, value: @merchant.id %><br>
+          <%= form.label :quantity_threshold, "Item Threshold:" %><br>
+          <%= form.text_field :quantity_threshold %><br>
+          <%= form.label :percentage_discount, "Discount:" %><br>
+          <%= form.text_field :percentage_discount %><br>
+          <%= form.submit "Submit" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

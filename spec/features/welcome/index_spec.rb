@@ -14,9 +14,9 @@ RSpec.describe("Welcome Index Page") do
 
       it("the contributor names and number of commits") do
         expect(page).to(have_content("ashuhleyt: 13"))
-        # expect(page).to(have_content("josephhilby: 54"))
-        # expect(page).to(have_content("amikaross: 47"))
-        # expect(page).to(have_content("AlexMR-93: 21"))
+        expect(page).to(have_content("josephhilby: 54"))
+        expect(page).to(have_content("amikaross: 47"))
+        expect(page).to(have_content("AlexMR-93: 21"))
       end
 
       it("the latest total number of PRs") do

@@ -139,6 +139,15 @@ RSpec.describe 'On the Merchant Dashboard Index Page' do
           end
         end
       end
+
+      describe 'a link to view all discounts' do
+        it 'when I click this link, I am taken to the bulk discounts index page' do
+          within "#merchant-links" do
+            click_link("My Discounts")
+            expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
+          end
+        end
+      end
     end
   end
 end

@@ -1,0 +1,40 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#p0 {
+  text-indent: 2em;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+</style>
+<body>
+  <%= render partial: "shared/header", locals: { subtitle: "#{@merchant.name}'s Shop" } %>
+  <h3 style="text-align:center;background-color:whitesmoke;border-top-style:solid">Discount # <%= @discount.id %></h3>
+  <div class="row">
+    <div class="column">
+
+    </div>
+  </div>
+</body>
