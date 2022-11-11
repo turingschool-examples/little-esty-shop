@@ -1,6 +1,5 @@
 require "rails_helper"
 
-
 RSpec.describe("Discounts Index Page") do
   before(:each) do
     @merchant = create(:merchant)
