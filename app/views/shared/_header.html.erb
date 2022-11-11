@@ -38,11 +38,12 @@
 </style>
 
 <h1>Little Esty Shop</h1>
-<div class="subtitle">
+<div class="subtitle" id="merchant-links">
   <h2><%= subtitle %></h2>
   <ul>
     <li><%= link_to "Dashboard", merchant_dashboard_index_path(@merchant) %></li>
     <li><%= link_to "My Items", merchant_items_path(@merchant) %></li>
     <li><%= link_to "My Invoices", merchant_invoices_path(@merchant) %></li>
+    <li><%= link_to "My Discounts", merchant_discounts_path(@merchant) %></li>
   </ul>
 </div>
