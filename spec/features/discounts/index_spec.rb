@@ -53,6 +53,12 @@ RSpec.describe("Discounts Index Page") do
           expect(page).to_not have_content(@discount.percentage_discount)
         end
       end
+
+      describe 'A section for "Upcoming Holidays"' do
+        it 'lists the next three holidays and their dates' do
+          within
+        end
+      end
     end
   end
 end
