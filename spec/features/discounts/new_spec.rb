@@ -16,10 +16,25 @@ RSpec.describe("Discounts New Page") do
 
       describe 'When I fill out the form' do
         context 'given valid data' do
-          it 'I am taken to the discount index page and see the new discount listed'
+          it 'I am taken to the discount index page and see the new discount listed' do
+            within "#discounts-form-#{@merchant.id}" do
+              fill_in :quantity_threshold, with: 20
+              fill_in :percentage_discount, with: 50
+              click_button 'Submit'
+            end
+            expect(current_path).to eq(merchant_discounts_path(@merchant.id))
+            expect(page).to have_content("Item threshold # 20, Amount Discounted 50%")
+          end
         end
         context 'given invalid data' do
-          it 'I am taken to the discount new page and see a flash message'
+          it 'I am taken to the discount new page and see a flash message' do
+            within "#discounts-form-#{@merchant.id}" do
+              fill_in :percentage_discount, with: 50
+              click_button 'Submit'
+            end
+            expect(current_path).to eq(new_merchant_discount_path(@merchant.id))
+            expect(page).to have_content("Error: Quantity threshold can't be blank")
+          end
         end
       end
     end
