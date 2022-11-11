@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+  has_many :bulk_discounts
   has_many :invoice_items, through: :items
   has_many :invoices, -> { distinct }, through: :invoice_items
   has_many :customers, through: :invoices
