@@ -95,9 +95,12 @@ RSpec.describe 'bulk discounts index page of merchant' do
     @transaction14 = Transaction.create!(credit_card_number: '4636896899845752', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice11.id)
   end
 
-  it 'has a link to create a new discount' do
-    visit "/merchants/#{@merchant_1.id}/bulk_discounts/#{@discount_1.id}"
 
-    expect(page).to have_link("Create New Discount")
+
+  it 'shows the bulk discount percentage and quantity threshold' do
+    visit merchant_bulk_discount_path(@merchant_1, @discount_1)
+
+    expect(page).to have_content("Percent Discount: #{@discount_1.percentage}")
+    expect(page).to have_content("Quantity Threshold: #{@discount_1.quantity_threshold}")
   end
 end

@@ -96,7 +96,7 @@ RSpec.describe 'bulk discounts index page of merchant' do
   end
 
   it 'can create a new bulk discount' do
-    visit "/merchants/#{@merchant_1.id}/bulk_discounts/#{@discount_1.id}"
+    visit "/merchants/#{@merchant_1.id}/bulk_discounts"
 
     click_on "Create New Discount"
 
