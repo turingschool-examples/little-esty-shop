@@ -151,4 +151,10 @@ RSpec.describe 'bulk discounts index page of merchant' do
       expect(page).to_not have_button("Delete Discount: #{@discount_3.id}")
     end
   end
+
+  it 'has a link to create a new discount' do
+    visit "/merchants/#{@merchant_1.id}/bulk_discounts"
+
+    expect(page).to have_link("Create New Discount")
+  end
 end

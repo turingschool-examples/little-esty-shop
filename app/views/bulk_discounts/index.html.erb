@@ -1,5 +1,7 @@
 <h1><%= @merchant.name %>'s Discounts</h1>
 
+<%= link_to "Create New Discount", "/merchants/#{@merchant.id}/bulk_discounts/new" %>
+
 <div id="discounts">
   <ol>
   <% @merchant.bulk_discounts.each do |discount| %>
