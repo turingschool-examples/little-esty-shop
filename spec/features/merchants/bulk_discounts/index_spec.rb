@@ -127,4 +127,28 @@ RSpec.describe 'bulk discounts index page of merchant' do
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/bulk_discounts/#{@discount_1.id}")
     end
   end
+
+  it 'has a button to delete a discount for that merchant' do
+    visit merchant_bulk_discounts_path(@merchant_1)
+
+    within("#discounts") do
+      expect(page).to have_button("Delete Discount: #{@discount_1.id}")
+      expect(page).to have_button("Delete Discount: #{@discount_2.id}")
+      expect(page).to_not have_button("Delete Discount: #{@discount_3.id}")
+
+      click_on "Delete Discount: #{@discount_1.id}"
+    end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
+
+    within("#discounts") do
+      expect(page).to_not have_content("Percentage: #{@discount_1.percentage}")
+      expect(page).to_not have_content("Threshold: #{@discount_1.quantity_threshold}")  
+      expect(page).to_not have_button("Delete Discount: #{@discount_1.id}")
+      expect(page).to have_content("Percentage: #{@discount_2.percentage}")
+      expect(page).to have_content("Threshold: #{@discount_2.quantity_threshold}")
+      expect(page).to have_button("Delete Discount: #{@discount_2.id}")
+      expect(page).to_not have_button("Delete Discount: #{@discount_3.id}")
+    end
+  end
 end
