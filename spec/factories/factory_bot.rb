@@ -40,9 +40,9 @@ FactoryBot.define do
     association :invoice, factory: :invoice
   end
 
-  # factory :discount, class: Discount do
-  #   quantity_threshold { Faker::Number.within(5..100) }
-  #   percentage_discount { Faker::Number.within(1..100) }
-  #   association :merchant, factory: :merchant
-  # end
+  factory :discount, class: Discount do
+    quantity_threshold { Faker::Number.within(range: 5..100) }
+    percentage_discount { Faker::Number.within(range: 1..100) }
+    association :merchant, factory: :merchant
+  end
 end
