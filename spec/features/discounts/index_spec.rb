@@ -53,6 +53,12 @@ RSpec.describe("Discounts Index Page") do
           expect(page).to_not have_content(@discount.percentage_discount)
         end
       end
+
+      describe 'the next three public holidays for the US' do
+        it 'displays the name and date for the next 3 "Upcoming Holidays"' do
+          # allow(@holidays).to recieve(:next_three).and_return([{date: '2022-11-11', name: 'Veterans Day'}, {date: '2022-11-24', name: 'Thanksgiving Day'}, {date: '2022-12-26', name: 'Christmas Day'}])
+        end
+      end
     end
   end
 end
