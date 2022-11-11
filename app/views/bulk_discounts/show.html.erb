@@ -1,3 +1,4 @@
 <h1>Discount: <%= @discount.id %></h1>
 
-<%= link_to "Create New Discount", "/merchants/#{@discount.merchant.id}/bulk_discounts/new" %>
+<p>Percent Discount: <%= @discount.percentage %></p>
+<p>Quantity Threshold: <%= @discount.quantity_threshold %></p>
