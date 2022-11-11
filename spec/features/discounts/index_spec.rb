@@ -25,11 +25,20 @@ RSpec.describe("Discounts Index Page") do
       end
 
       it 'a link to create a "New Discount"' do
-
+        within "#discounts-links-#{@merchant.id}" do
+          expect(page).to have_link("New Discount")
+        end
       end
 
-      describe 'When I click "New Discount"'
-      it 'I am taken to a discounts new page'
+      describe 'When I click "New Discount"' do
+        it 'I am taken to a discounts new page' do
+          within "#discounts-links-#{@merchant.id}" do
+            click_link("New Discount")
+
+            expect(current_path).to eq(new_merchant_discount_path(@merchant.id))
+          end
+        end
+      end
     end
   end
 end
