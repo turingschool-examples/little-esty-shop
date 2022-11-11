@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe("Discounts Index Page") do
   before(:each) do
     @merchant = create(:merchant)
-    @discount = create(:discount, merchant: @merchant)
+    @discount = create(:discount, merchant: @merchant, quantity_threshold: 30, percentage_discount: 30)
     visit(merchant_discounts_path(@merchant))
   end
   describe 'When I visit /merchants/:merchant_id/discounts' do
@@ -36,6 +36,21 @@ RSpec.describe("Discounts Index Page") do
 
             expect(current_path).to eq(new_merchant_discount_path(@merchant.id))
           end
+        end
+      end
+
+      it 'a link to "Delete" a discount' do
+        within "#discounts-list-#{@merchant.id}" do
+          expect(page).to have_link("Delete")
+        end
+      end
+
+      describe 'When I click on "Delete"' do
+        it 'I am taken back to the Discounts Index Page and no longer see the deleted discount' do
+          click_link("Delete")
+          expect(current_path).to eq(merchant_discounts_path(@merchant))
+          expect(page).to_not have_content(@discount.quantity_threshold)
+          expect(page).to_not have_content(@discount.percentage_discount)
         end
       end
     end

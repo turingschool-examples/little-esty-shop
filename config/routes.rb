@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :items, except: [:destroy]
     resources :invoices, only: [:index, :show]
     resources :dashboard, only: [:index]
-    resources :discounts, only: [:index, :show, :new, :create]
+    resources :discounts, only: [:index, :show, :new, :create, :destroy]
   end
 
   get "/admin", to: "admin#index"

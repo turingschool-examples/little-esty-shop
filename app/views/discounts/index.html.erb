@@ -39,7 +39,10 @@ tr:nth-child(even) {
       </div>
       <div id='discounts-list-<%=@merchant.id%>'>
         <% @discounts.each do |discount| %>
-          <p><%= "Discount # " %> <%= link_to "#{discount.id}", merchant_discount_path(@merchant.id, discount.id) %><%= ": Item threshold # #{discount.quantity_threshold}, Amount Discounted #{discount.percentage_discount}%" %></p>
+          <p>
+            <%= "Discount # " %> <%= link_to "#{discount.id}", merchant_discount_path(@merchant.id, discount.id) %><%= ": Item threshold # #{discount.quantity_threshold}, Amount Discounted #{discount.percentage_discount}%" %>
+            <%= link_to "Delete", merchant_discount_path(@merchant.id, discount.id), method: :delete %>
+          </p>
         <% end %>
       </div>
     </div>
