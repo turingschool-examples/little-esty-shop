@@ -1,9 +1,17 @@
 require "rails_helper"
+require 'webmock/rspec'
 
 RSpec.describe("Discounts Index Page") do
   before(:each) do
     @merchant = create(:merchant)
     @discount = create(:discount, merchant: @merchant, quantity_threshold: 30, percentage_discount: 30)
+    holiday_response = [{date: '2022-11-11', name: 'Test Day'},
+                        {date: '2022-11-24', name: 'Thanksgiving Day'},
+                        {date: '2022-12-26', name: 'Christmas Day'}].to_json
+
+    stub_request(:get, "https://date.nager.at/api/v3/NextPublicHolidays/US")
+      .to_return(status: 200, body: holiday_response, headers: {})
+
     visit(merchant_discounts_path(@merchant))
   end
   describe 'When I visit /merchants/:merchant_id/discounts' do
@@ -54,9 +62,11 @@ RSpec.describe("Discounts Index Page") do
         end
       end
 
-      describe 'the next three public holidays for the US' do
+      describe 'A section for the next three public holidays for the US' do
         it 'displays the name and date for the next 3 "Upcoming Holidays"' do
-          # allow(@holidays).to recieve(:next_three).and_return([{date: '2022-11-11', name: 'Veterans Day'}, {date: '2022-11-24', name: 'Thanksgiving Day'}, {date: '2022-12-26', name: 'Christmas Day'}])
+          within "#next-holidays-#{@merchant.id}" do
+            expect(page).to have_content("Test Day: 2022-11-11\nThanksgiving Day: 2022-11-24\nChristmas Day: 2022-12-26")
+        end
         end
       end
     end
