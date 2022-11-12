@@ -37,12 +37,21 @@ tr:nth-child(even) {
       <div id='discounts-links-<%=@merchant.id%>'>
         <p><%= link_to "New Discount", new_merchant_discount_path(@merchant.id) %></p>
       </div>
+      <h2>Discounts:</h2>
       <div id='discounts-list-<%=@merchant.id%>'>
         <% @discounts.each do |discount| %>
           <p>
             <%= "Discount # " %> <%= link_to "#{discount.id}", merchant_discount_path(@merchant.id, discount.id) %><%= ": Item threshold # #{discount.quantity_threshold}, Amount Discounted #{discount.percentage_discount}%" %>
             <%= link_to "Delete", merchant_discount_path(@merchant.id, discount.id), method: :delete %>
           </p>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <h2>Upcoming Holidays:</h2>
+      <div id='next-holidays-<%=@merchant.id%>'>
+        <% @holidays.slice(0, 3).each do |holiday| %>
+          <p><%= "#{holiday.name}: #{holiday.date}" %></p>
         <% end %>
       </div>
     </div>
