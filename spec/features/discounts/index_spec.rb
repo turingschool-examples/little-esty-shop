@@ -5,12 +5,6 @@ RSpec.describe("Discounts Index Page") do
   before(:each) do
     @merchant = create(:merchant)
     @discount = create(:discount, merchant: @merchant, quantity_threshold: 30, percentage_discount: 30)
-    holiday_response = [{date: '2022-11-11', name: 'Test Day'},
-                        {date: '2022-11-24', name: 'Thanksgiving Day'},
-                        {date: '2022-12-26', name: 'Christmas Day'}].to_json
-
-    stub_request(:get, "https://date.nager.at/api/v3/NextPublicHolidays/US")
-      .to_return(status: 200, body: holiday_response, headers: {})
 
     visit(merchant_discounts_path(@merchant))
   end

@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'webmock/rspec'
 SimpleCov.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
@@ -33,6 +34,26 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.before(:each) do
+    repo_api = {name: "little-esty-shop"}.to_json
+    contributors_api = [{total: 54, author: {login: "josephhilby"}},
+                        {total: 47, author: {login: "amikaross"}},
+                        {total: 21, author: {login: "AlexMR-93"}},
+                        {total: 13, author: {login: "ashuhleyt"}}].to_json
+    pr_api = [{number: 37}].to_json
+    holiday_response = [{date: '2022-11-11', name: 'Test Day'},
+                        {date: '2022-11-24', name: 'Thanksgiving Day'},
+                        {date: '2022-12-26', name: 'Christmas Day'}].to_json
+
+    stub_request(:get, "https://api.github.com/repos/josephhilby/little-esty-shop")
+      .to_return(status: 200, body: repo_api, headers: {})
+    stub_request(:get, "https://api.github.com/repos/josephhilby/little-esty-shop/stats/contributors")
+      .to_return(status: 200, body: contributors_api, headers: {})
+    stub_request(:get, "https://api.github.com/repos/josephhilby/little-esty-shop/pulls?state=all")
+      .to_return(status: 200, body: pr_api, headers: {})
+    stub_request(:get, "https://date.nager.at/api/v3/NextPublicHolidays/US")
+      .to_return(status: 200, body: holiday_response, headers: {})
+  end
   config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
