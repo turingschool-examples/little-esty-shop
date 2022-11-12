@@ -50,22 +50,43 @@ tr:nth-child(even) {
             <th>Item Name</th>
             <th>Quantity</th>
             <th>Unit Price</th>
+            <th>Discounted Price</th>
+            <th>Discount Link</th>
             <th>Status</th>
           </tr>
+          <% discounted_revenue = 0 %>
           <% @items.each do |item| %>
             <tr>
               <th><%= item.name %></th>
               <th><%= item.invoice_item_quantity(@invoice.id) %></th>
               <th><%= "$" + sprintf('%.2f', item.unit_price) %></th>
               <th>
+                <% if @discounts != [] %>
+                  <%= "$" + sprintf('%.2f', item.discounted_price(@discounts, @invoice.id)) %><% discounted_revenue += item.discounted_price(@discounts, @invoice.id) * item.invoice_item_quantity(@invoice.id) %>
+                <% else %>
+                  <%= "$" + sprintf('%.2f', item.unit_price) %><% discounted_revenue += item.unit_price * item.invoice_item_quantity(@invoice.id) %>
+                <% end %>
+              </th>
+              <th>
+                <% item_discount = item.best_discount(@discounts, @invoice.id) %>
+                <% if item_discount != nil %>
+                  <%= link_to "Discount # #{item_discount.id}", merchant_discount_path(@merchant.id, item_discount.id) %>
+                <% else %>
+                  <%= "N/A" %>
+                <% end %>
+              </th>
+              <th>
                 <%= form_with model: item.invoice_item_by(@invoice.id), id: "form-#{item.id}", local: true do |form| %>
-                  <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_status(@invoice.id)}" %>
+                  <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_by(@invoice.id).status}" %>
                   <%= form.hidden_field :invoice_id, value: @invoice.id %>
                   <%= form.hidden_field :merchant_id, value: @merchant.id %>
                   <%= form.submit 'Update Item Status' %>
                 <% end %>
               </th>
             </tr>
+          <% end %>
+          <% if discounted_revenue != @invoice.total_revenue(@merchant) %>
+            <h4> Revenue After Discount: <%= "$" + sprintf('%.2f', discounted_revenue) %></h4>
           <% end %>
         </table>
       </div>

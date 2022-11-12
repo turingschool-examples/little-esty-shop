@@ -19,7 +19,16 @@ class Item < ApplicationRecord
     self.invoice_items.where(invoice_id: invoice_id).first
   end
 
-  def invoice_item_status(invoice_id)
-    self.invoice_items.where(invoice_id: invoice_id).first.status
+  def best_discount(discounts, invoice_id)
+    discounts.where("discounts.quantity_threshold <= ?", invoice_item_by(invoice_id).quantity).order(percentage_discount: :desc).first
+  end
+
+  def discounted_price(discounts, invoice_id)
+    if best_discount(discounts, invoice_id) != nil
+      discount_to_unit_price = (100 - best_discount(discounts, invoice_id).percentage_discount) / 100.0
+      invoice_item_by(invoice_id).unit_price * discount_to_unit_price
+    else
+      invoice_item_by(invoice_id).unit_price
+    end
   end
 end
