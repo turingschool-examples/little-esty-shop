@@ -56,11 +56,5 @@ RSpec.describe Item, type: :model do
         expect(@item.invoice_item_by(@invoice_1)).to eq(@invoice_item_1)
       end
     end
-
-    describe "#invoice_item_status" do
-      it 'selects an invoice_item status assoicated with that item through an invoice_id' do
-        expect(@item.invoice_item_status(@invoice_1)).to eq('packaged')
-      end
-    end
   end
 end
