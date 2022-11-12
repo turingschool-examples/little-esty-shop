@@ -6,9 +6,9 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
     @merchant_1 = Merchant.create!(name: "Dave")
     @merchant_2 = Merchant.create!(name: "Kevin")
 
-    @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 1)
-    @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 3)
-    @merchant_2_item_1 = @merchant_2.items.create!(name: "A Thing", description: "Will do the thing", unit_price: 2)
+    @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 10)
+    @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 30)
+    @merchant_2_item_1 = @merchant_2.items.create!(name: "A Thing", description: "Will do the thing", unit_price: 20)
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
     @customer_2 = Customer.create!(first_name: "Milly", last_name: "Smith")
@@ -16,10 +16,10 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
     @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1)
     @customer_2_invoice_1 = @customer_2.invoices.create!(status: 2)
 
-    @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, status: 0, unit_price: 1)
-    @invoice_item_2 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 5, status: 1, unit_price: 3)
-    @invoice_item_3 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_2_item_1, quantity: 8, status: 2)
-    @invoice_item_4 = InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 9, status: 2)
+    @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, status: 0, unit_price: 10)
+    @invoice_item_2 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 5, status: 1, unit_price: 30)
+    @invoice_item_3 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_2_item_1, quantity: 8, status: 2, unit_price: 20)
+    @invoice_item_4 = InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 9, status: 2, unit_price: 10)
 
     visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
   end
@@ -68,6 +68,28 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
 
           expect(page).to have_content((@merchant_1_item_1.unit_price * @invoice_item_1.quantity) + (@merchant_1_item_2.unit_price * @invoice_item_2.quantity))
+        end
+      end
+
+      describe 'revenue for all items on this invoice after discounts are applyed' do
+        it 'if discounts are applied, shows an invoice total revenue with applied discounts' do
+          expect(page).to_not have_content("Revenue After Discount:")
+        end
+
+        it 'discounts are applied to invoice_items individually, not the total collectivly' do
+          create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 50)
+          visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
+
+          expect(page).to have_content("Revenue After Discount: $85.00")
+        end
+
+        it 'if multiple discounts are avaliable to an invoice_item, only the highest amount discount is applied' do
+          create(:discount, merchant: @merchant_1, quantity_threshold: 4, percentage_discount: 50)
+          create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 10)
+          create(:discount, merchant: @merchant_2, quantity_threshold: 1, percentage_discount: 99)
+          visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
+          save_and_open_page
+          expect(page).to have_content("Revenue After Discount: $85.00")
         end
       end
 
