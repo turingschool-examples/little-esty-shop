@@ -142,5 +142,25 @@ RSpec.describe 'Merchants Dashboard Page' do
         end
       end
     end
+    describe 'discounts link' do
+      it 'has a link to discounts index'do
+        discount1 = Discount.create!(merchant_id: @merchant1.id, quantity_threshhold: 5, percentage: 0.2 )
+        discount2 = Discount.create!(merchant_id: @merchant1.id, quantity_threshhold: 10, percentage: 0.4)
+
+        visit "/merchants/#{@merchant1.id}/dashboard"
+        
+        expect(page).to have_link('Bulk Discounts')
+        click_on 'Bulk Discounts'
+        expect(page).to have_content('Discount Quantity Threshhold: 5')
+        expect(page).to have_content('Discount Percentage: 0.2')
+        expect(page).to have_content('Discount Quantity Threshhold: 10')
+        expect(page).to have_content('Discount Percentage: 0.4')
+        expect(page).to have_link("#{discount1.id}")
+        expect(page).to have_link("#{discount2.id}")
+
+
+        save_and_open_page
+      end
+    end
   end
 end
