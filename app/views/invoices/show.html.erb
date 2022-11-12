@@ -51,6 +51,7 @@ tr:nth-child(even) {
             <th>Quantity</th>
             <th>Unit Price</th>
             <th>Discounted Price</th>
+            <th>Discount Link</th>
             <th>Status</th>
           </tr>
           <% discounted_revenue = 0 %>
@@ -64,6 +65,14 @@ tr:nth-child(even) {
                   <%= "$" + sprintf('%.2f', item.discounted_price(@discounts, @invoice.id)) %><% discounted_revenue += item.discounted_price(@discounts, @invoice.id) * item.invoice_item_quantity(@invoice.id) %>
                 <% else %>
                   <%= "$" + sprintf('%.2f', item.unit_price) %><% discounted_revenue += item.unit_price * item.invoice_item_quantity(@invoice.id) %>
+                <% end %>
+              </th>
+              <th>
+                <% item_discount = item.best_discount(@discounts, @invoice.id) %>
+                <% if item_discount != nil %>
+                  <%= link_to "Discount # #{item_discount.id}", merchant_discount_path(@merchant.id, item_discount.id) %>
+                <% else %>
+                  <%= "N/A" %>
                 <% end %>
               </th>
               <th>
