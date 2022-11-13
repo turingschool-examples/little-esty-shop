@@ -94,8 +94,8 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
 
           it 'displays discounted price for each item on the invoice' do
             within "#item-info-#{@customer_1_invoice_1.id}" do
-              save_and_open_page
               expect(page).to have_content("$122.50")
+              expect(page).to have_content("$22.50")
             end
           end
 
