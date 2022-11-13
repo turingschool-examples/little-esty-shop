@@ -1,12 +1,14 @@
 
-class Admin::InvoicesController < ApplicationController 
-  def index 
+class Admin::InvoicesController < ApplicationController
+  def index
     @invoices = Invoice.all
   end
 
-  def show 
+  def show
     @invoice = Invoice.find(params[:id])
     @customer = @invoice.customer
+    @invoice_items = InvoiceItem.where(invoice_id: @invoice.id)
+    @discounts = Discount.all
   end
 
   def update

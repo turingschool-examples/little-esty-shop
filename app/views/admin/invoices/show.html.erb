@@ -32,7 +32,7 @@ tr:nth-child(even) {
   <% end %>
 
   <h4>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></h4>
-  <h4><b>Total Revenue:</b> $<%= @invoice.invoice_revenue %></h4>
+  <h4><b>Total Revenue:</b> $<%= sprintf('%.2f', @invoice.invoice_revenue) %></h4>
 
   <h4>Customer:</h4>
   <p style="padding-left:4em"><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
@@ -44,15 +44,37 @@ tr:nth-child(even) {
         <th>Item Name</th>
         <th>Quantity</th>
         <th>Unit Price</th>
+        <th>Discounted Price</th>
+        <th>Discount Link</th>
         <th>Status</th>
       </tr>
+      <% discounted_revenue = 0.0 %>
       <% @invoice.items.each do |item| %>
+      <% discounts = @discounts.avaliable_discounts(item) %>
         <tr>
           <td><%= item.name %></td>
           <td><%= item.invoice_items.sum(:quantity) %></td>
-          <td><%= item.unit_price %></td>
+          <td><%= "$" + sprintf('%.2f', item.unit_price) %></td>
+          <td>
+            <% if discounts != [] %>
+              <%= "$" + sprintf('%.2f', item.discounted_price(discounts, @invoice.id)) %><% discounted_revenue += item.discounted_price(discounts, @invoice.id) * item.invoice_item_quantity(@invoice.id) %>
+            <% else %>
+              <%= "N/A" %><% discounted_revenue += item.unit_price * item.invoice_item_quantity(@invoice.id) %>
+            <% end %>
+          </td>
+          <td>
+            <% item_discount = item.best_discount(discounts, @invoice.id) %>
+            <% if item_discount != nil %>
+              <%= link_to "Discount # #{item_discount.id}", merchant_discount_path(item_discount.merchant_id, item_discount.id) %>
+            <% else %>
+              <%= "N/A" %>
+            <% end %>
+          </td>
           <td><%= item.invoice_items.first.status %></td>
         </tr>
+      <% end %>
+      <% if discounted_revenue != @invoice.invoice_revenue %>
+        <h4> Revenue After Discount: <%= "$" + sprintf('%.2f', discounted_revenue) %></h4>
       <% end %>
     </table>
   </div>
