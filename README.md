@@ -40,7 +40,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-[https://shielded-sierra-27094.herokuapp.com/](https://shielded-sierra-27094.herokuapp.com/)
+[https://immense-ravine-07332.herokuapp.com/](https://immense-ravine-07332.herokuapp.com/)
 
 <!-- Phases -->
 ## Phases
