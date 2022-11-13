@@ -88,13 +88,14 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
 
         describe 'revenue for each item listed on the invoice' do
           before(:each) do
-            @discount = create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 50)
+            @discount = create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 25)
             visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
           end
 
           it 'displays discounted price for each item on the invoice' do
             within "#item-info-#{@customer_1_invoice_1.id}" do
-              expect(page).to have_content("$15.00")
+              expect(page).to have_content("$122.50")
+              expect(page).to have_content("$22.50")
             end
           end
 
