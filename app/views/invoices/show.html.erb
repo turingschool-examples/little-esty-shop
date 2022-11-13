@@ -54,7 +54,7 @@ tr:nth-child(even) {
             <th>Discount Link</th>
             <th>Status</th>
           </tr>
-          <% discounted_revenue = 0 %>
+          <% discounted_revenue = 0.0 %>
           <% @items.each do |item| %>
             <tr>
               <td><%= item.name %></td>
