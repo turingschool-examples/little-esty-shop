@@ -1,7 +1,11 @@
 <h1>Discounts for: <%= @merchant.name %></h1>
-<% @discounts.each do |discount| %>
+<% @merchant.discounts.each do |discount| %>
     <h3>Discount Link: <%= link_to "#{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></h3>
     <p>Discount Quantity Threshhold: <%= discount.quantity_threshhold %></p>
     <p>Discount Percentage: <%= discount.percentage %></p>
+    <%= form_with url: "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete do |form| %>
+        <%= form.submit "Delete #{discount.id}" %>
+    <% end %>
 
 <% end %>
+<h3><%= link_to "Create a new discount", "/merchants/#{@merchant.id}/discounts/new" %></h3>

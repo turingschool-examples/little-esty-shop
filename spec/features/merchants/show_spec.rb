@@ -157,10 +157,8 @@ RSpec.describe 'Merchants Dashboard Page' do
         expect(page).to have_content('Discount Percentage: 0.4')
         expect(page).to have_link("#{discount1.id}")
         expect(page).to have_link("#{discount2.id}")
-
-
-        save_and_open_page
       end
+      
     end
   end
 end
