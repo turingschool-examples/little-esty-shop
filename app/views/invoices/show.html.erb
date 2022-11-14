@@ -56,15 +56,18 @@ tr:nth-child(even) {
           </tr>
           <% discounted_revenue = 0.0 %>
           <% @items.each do |item| %>
+            <% invoice_item = item.invoice_item_by(@invoice.id) %>
+            <% price_discounted = item.discounted_price(@discounts, @invoice.id) %>
+            <% quantity = item.invoice_item_quantity(@invoice.id) %>
             <tr>
               <td><%= item.name %></td>
-              <td><%= item.invoice_item_quantity(@invoice.id) %></td>
-              <td><%= "$" + sprintf('%.2f', item.invoice_item_by(@invoice.id).unit_price) %></td>
+              <td><%= quantity %></td>
+              <td><%= "$" + sprintf('%.2f', invoice_item.unit_price) %></td>
               <td>
                 <% if @discounts != [] %>
-                  <%= "$" + sprintf('%.2f', item.discounted_price(@discounts, @invoice.id)) %><% discounted_revenue += item.discounted_price(@discounts, @invoice.id) * item.invoice_item_quantity(@invoice.id) %>
+                  <%= "$" + sprintf('%.2f', price_discounted) %><% discounted_revenue += price_discounted * quantity %>
                 <% else %>
-                  <%= "N/A" %><% discounted_revenue += item.unit_price * item.invoice_item_quantity(@invoice.id) %>
+                  <%= "N/A" %><% discounted_revenue += invoice_item.unit_price * quantity %>
                 <% end %>
               </td>
               <td>
@@ -76,8 +79,8 @@ tr:nth-child(even) {
                 <% end %>
               </td>
               <td>
-                <%= form_with model: item.invoice_item_by(@invoice.id), id: "form-#{item.id}", local: true do |form| %>
-                  <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{item.invoice_item_by(@invoice.id).status}" %>
+                <%= form_with model: invoice_item, id: "form-#{item.id}", local: true do |form| %>
+                  <%= form.select :status, ["packaged", "pending", "shipped"], value: "#{invoice_item.status}" %>
                   <%= form.hidden_field :invoice_id, value: @invoice.id %>
                   <%= form.hidden_field :merchant_id, value: @merchant.id %>
                   <%= form.submit 'Update Item Status' %>

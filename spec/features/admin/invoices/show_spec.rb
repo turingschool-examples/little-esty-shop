@@ -18,12 +18,12 @@ RSpec.describe "Admin Invoice show page" do
     @invoice_1_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, quantity: 1, unit_price: 4)
     @invoice_1_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, quantity: 2, unit_price: 15)
     @invoice_1_item_3 = create(:invoice_item, invoice: @invoice_2, item: @item_3)
+
+    visit admin_invoice_path(@invoice_1)
   end
 
   describe "As an admin, when I visit admin/invoices/:id" do
     it "shows information related to that invoice including, id, status, created_at date, and Customer first and last name" do
-      visit admin_invoice_path(@invoice_1)
-
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
       expect(page).to have_content("Status:")
       expect(page).to have_content("Created on: Thursday, February 03, 2022")
@@ -33,15 +33,13 @@ RSpec.describe "Admin Invoice show page" do
     end
 
     it "lists all the items on the invoice including: item name, quantity, price, and the Invoice Item status" do
-      visit admin_invoice_path(@invoice_1)
-
       within "#items-details" do
         expect(page).to have_content("Items on this Invoice:")
         expect(page).to have_content("Item Name")
         expect(page).to have_content("Quantity")
         expect(page).to have_content("Unit Price")
         expect(page).to have_content("Status")
-
+        save_and_open_page
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content(@invoice_1_item_1.quantity)
         expect(page).to have_content(@invoice_1_item_1.unit_price)
@@ -55,16 +53,12 @@ RSpec.describe "Admin Invoice show page" do
     end
 
     it "displays the invoice status as a select field, with the current status selected" do
-      visit admin_invoice_path(@invoice_1)
-
       expect(page).to have_select("invoice_status")
       expect(page).to have_select(selected: @invoice_1.status)
       expect(page).to have_button("Update Invoice Status")
     end
 
     it "when I click Update Invoice Status, the admin invoice show page reloads and see the status has been updated" do
-      visit admin_invoice_path(@invoice_1)
-
       select 'Completed', from: 'invoice_status'
       click_button("Update Invoice Status")
 
@@ -75,17 +69,11 @@ RSpec.describe "Admin Invoice show page" do
 
   describe 'As an admin, when I visit an admin invoice show page' do
     it 'I see the total revenue that will be generated from this invoice' do
-      visit admin_invoice_path(@invoice_1)
-
       expect(page).to have_content("Total Revenue: $#{(@invoice_1_item_1.unit_price * @invoice_1_item_1.quantity) + (@invoice_1_item_2.unit_price * @invoice_1_item_2.quantity)}")
     end
   end
 
   describe 'revenue for all items on this invoice after discounts are applyed' do
-    before(:each) do
-      visit admin_invoice_path(@invoice_1)
-    end
-
     it 'if discounts are applied, shows an invoice total revenue with applied discounts' do
       within "#items-details" do
         expect(page).to_not have_content("Revenue After Discount:")

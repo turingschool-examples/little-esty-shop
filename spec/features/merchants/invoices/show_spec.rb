@@ -3,11 +3,12 @@ require 'date'
 
 RSpec.describe 'On the Merchant Invoices Show Page' do
   before(:each) do
-    @merchant_1 = Merchant.create!(name: "Dave")
-    @merchant_2 = Merchant.create!(name: "Kevin")
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
 
-    @merchant_1_item_1 = @merchant_1.items.create!(name: "Pencil", description: "Writing implement", unit_price: 10)
+    @merchant_1_item_1 = create(:item, merchant: @merchant_1)
     @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 30)
+    @merchant_1_item_3 = @merchant_1.items.create!(name: "Not on Invoice", description: "thing", unit_price: 30)
     @merchant_2_item_1 = @merchant_2.items.create!(name: "A Thing", description: "Will do the thing", unit_price: 20)
 
     @customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
@@ -48,31 +49,32 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
         within "#item-info-#{@customer_1_invoice_1.id}" do
           expect(page).to have_content(@merchant_1_item_1.name)
           expect(page).to have_content(@invoice_item_1.quantity)
-          expect(page).to have_content(@merchant_1_item_1.unit_price)
+          expect(page).to have_content(@invoice_item_1.unit_price)
 
           expect(page).to have_content(@merchant_1_item_2.name)
           expect(page).to have_content(@invoice_item_2.quantity)
-          expect(page).to have_content(@merchant_1_item_2.unit_price)
+          expect(page).to have_content(@invoice_item_2.unit_price)
+
+          expect(page).to_not have_content(@merchant_1_item_3.name)
         end
       end
 
       it 'only items for this invoice and merchant' do
         within "#item-info-#{@customer_1_invoice_1.id}" do
           expect(page).to_not have_content(@merchant_2_item_1.name)
-          expect(page).to_not have_content(@invoice_item_3.quantity)
-          expect(page).to_not have_content(@merchant_2_item_1.unit_price)
         end
       end
 
       it 'total revenue for all items on invoice' do
         within "#invoice-stats-#{@customer_1_invoice_1.id}" do
-          expect(page).to have_content((@merchant_1_item_1.unit_price * @invoice_item_1.quantity) + (@merchant_1_item_2.unit_price * @invoice_item_2.quantity))
+          expect(page).to have_content((@invoice_item_1.unit_price * @invoice_item_1.quantity) + (@invoice_item_2.unit_price * @invoice_item_2.quantity))
         end
       end
 
       describe 'revenue for all items on this invoice after discounts are applyed' do
         it 'if discounts are applied, shows an invoice total revenue with applied discounts' do
           within "#item-info-#{@customer_1_invoice_1.id}" do
+            save_and_open_page
             expect(page).to_not have_content("Revenue After Discount:")
           end
         end

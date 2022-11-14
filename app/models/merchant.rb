@@ -38,4 +38,8 @@ class Merchant < ApplicationRecord
   def top_day
     invoices.select("invoices.*,sum(invoice_items.quantity * invoice_items.unit_price)as revenue").group(:id).order(    revenue: :desc).first.created_at
   end
+
+  def items_by_invoice(invoice)
+    self.items.joins(:invoices).where('invoice_items.invoice_id = ?', invoice.id)
+  end
 end
