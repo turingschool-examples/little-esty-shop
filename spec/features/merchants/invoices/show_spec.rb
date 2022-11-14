@@ -4,25 +4,24 @@ require 'date'
 RSpec.describe 'On the Merchant Invoices Show Page' do
   before(:each) do
     @merchant_1 = create(:merchant)
-    @merchant_2 = create(:merchant)
-
     @merchant_1_item_1 = create(:item, merchant: @merchant_1)
-    @merchant_1_item_2 = @merchant_1.items.create!(name: "Mechanical Pencil", description: "Writing implement", unit_price: 30)
-    @merchant_1_item_3 = @merchant_1.items.create!(name: "Not on Invoice", description: "thing", unit_price: 30)
-    @merchant_2_item_1 = @merchant_2.items.create!(name: "A Thing", description: "Will do the thing", unit_price: 20)
+    @merchant_1_item_2 = create(:item, merchant: @merchant_1)
+    @merchant_1_item_3 = create(:item, merchant: @merchant_1)
 
-    @customer_1 = Customer.create!(first_name: "Bob", last_name: "Jones")
-    @customer_2 = Customer.create!(first_name: "Milly", last_name: "Smith")
+    @merchant_2 = create(:merchant)
+    @merchant_2_item_1 = create(:item, merchant: @merchant_2)
 
-    @customer_1_invoice_1 = @customer_1.invoices.create!(status: 1)
-    @customer_2_invoice_1 = @customer_2.invoices.create!(status: 2)
+    @customer_1 = create(:customer)
+    @customer_1_invoice_1 = create(:invoice, customer: @customer_1)
+    @invoice_item_1 = create(:invoice_item, invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, status: 0, unit_price: 10)
+    @invoice_item_2 = create(:invoice_item, invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 5, status: 1, unit_price: 30)
+    @invoice_item_3 = create(:invoice_item, invoice: @customer_1_invoice_1, item: @merchant_2_item_1)
 
-    @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, status: 0, unit_price: 10)
-    @invoice_item_2 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_2, quantity: 5, status: 1, unit_price: 30)
-    @invoice_item_3 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_2_item_1, quantity: 8, status: 2, unit_price: 20)
-    @invoice_item_4 = InvoiceItem.create!(invoice: @customer_2_invoice_1, item: @merchant_1_item_1, quantity: 9, status: 2, unit_price: 10)
+    @customer_2 = create(:customer)
+    @customer_2_invoice_1 = create(:invoice, customer: @customer_2)
+    @invoice_item_4 = create(:invoice_item, invoice: @customer_2_invoice_1, item: @merchant_1_item_1)
 
-    visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
+    visit merchant_invoice_path(@merchant_1, @customer_1_invoice_1)
   end
 
   describe 'When I visit /merchants/:merchant_id/invoices/:invoice_id' do
@@ -74,14 +73,13 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
       describe 'revenue for all items on this invoice after discounts are applyed' do
         it 'if discounts are applied, shows an invoice total revenue with applied discounts' do
           within "#item-info-#{@customer_1_invoice_1.id}" do
-            save_and_open_page
             expect(page).to_not have_content("Revenue After Discount:")
           end
         end
 
         it 'discounts are applied to invoice_items individually, not the total collectivly' do
           create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 50)
-          visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
+          visit merchant_invoice_path(@merchant_1, @customer_1_invoice_1)
 
           within "#item-info-#{@customer_1_invoice_1.id}" do
             expect(page).to have_content("Revenue After Discount: $85.00")
@@ -91,7 +89,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
         describe 'revenue for each item listed on the invoice' do
           before(:each) do
             @discount = create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 25)
-            visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
+            visit merchant_invoice_path(@merchant_1, @customer_1_invoice_1)
           end
 
           it 'displays discounted price for each item on the invoice' do
@@ -119,7 +117,7 @@ RSpec.describe 'On the Merchant Invoices Show Page' do
           create(:discount, merchant: @merchant_1, quantity_threshold: 4, percentage_discount: 50)
           create(:discount, merchant: @merchant_1, quantity_threshold: 5, percentage_discount: 10)
           create(:discount, merchant: @merchant_2, quantity_threshold: 1, percentage_discount: 99)
-          visit "/merchants/#{@merchant_1.id}/invoices/#{@customer_1_invoice_1.id}"
+          visit merchant_invoice_path(@merchant_1, @customer_1_invoice_1)
 
           within "#item-info-#{@customer_1_invoice_1.id}" do
             expect(page).to have_content("Revenue After Discount: $85.00")
