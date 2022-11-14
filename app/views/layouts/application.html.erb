@@ -14,19 +14,7 @@
   <% flash.each do |type, message| %>
       <p><%= message %></p>
     <% end %>
-    <section>
 
-      <h3>Contributors: </h3>
-      <% @users.each do |user| %>
-        <p><%= user[:name] %> - Commits: <%= user[:commits] %></p>
-      <% end %>
-
-      <h3>Repository Name: </h3>
-        <p><%= @repo_name %></p>
-
-      <h3>Total Pull Requests: </h3>
-        <p><%= @pr_count %></p>
-    </section>
     <%= yield %>
   </body>
 </html>

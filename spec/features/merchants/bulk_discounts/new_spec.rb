@@ -110,7 +110,7 @@ RSpec.describe 'bulk discounts index page of merchant' do
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/bulk_discounts")
     
     within("#discounts") do
-      expect(page).to have_content("Percentage: 10%")
+      expect(page).to have_content("Percentage: 10.0%")
       expect(page).to have_content("Threshold: 3")
     end
   end
