@@ -55,7 +55,7 @@ tr:nth-child(even) {
             <th>Status</th>
           </tr>
           <% discounted_revenue = 0.0 %>
-          <% @items.each do |item| %>
+          <% @merchant.items_by_invoice(@invoice).each do |item| %>
             <% invoice_item = item.invoice_item_by(@invoice.id) %>
             <% price_discounted = item.discounted_price(@discounts, @invoice.id) %>
             <% quantity = item.invoice_item_quantity(@invoice.id) %>
@@ -73,7 +73,7 @@ tr:nth-child(even) {
               <td>
                 <% item_discount = item.best_discount(@discounts, @invoice.id) %>
                 <% if item_discount != nil %>
-                  <%= link_to "Discount # #{item_discount.id}", merchant_discount_path(@merchant.id, item_discount.id) %>
+                  <%= link_to "Discount # #{item_discount.id}", merchant_discount_path(@merchant, item_discount) %>
                 <% else %>
                   <%= "N/A" %>
                 <% end %>
