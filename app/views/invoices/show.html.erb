@@ -59,7 +59,7 @@ tr:nth-child(even) {
             <tr>
               <td><%= item.name %></td>
               <td><%= item.invoice_item_quantity(@invoice.id) %></td>
-              <td><%= "$" + sprintf('%.2f', item.unit_price) %></td>
+              <td><%= "$" + sprintf('%.2f', item.invoice_item_by(@invoice.id).unit_price) %></td>
               <td>
                 <% if @discounts != [] %>
                   <%= "$" + sprintf('%.2f', item.discounted_price(@discounts, @invoice.id)) %><% discounted_revenue += item.discounted_price(@discounts, @invoice.id) * item.invoice_item_quantity(@invoice.id) %>

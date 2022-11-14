@@ -1,6 +1,5 @@
 require "rails_helper"
 
-
 RSpec.describe("admin merchants index page") do
   before(:each) do
     feb_third = DateTime.new(2022, 2, 3, 4, 5, 6)
