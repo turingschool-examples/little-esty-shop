@@ -27,10 +27,9 @@ class Item < ApplicationRecord
   end
 
   def best_discount(discounts, invoice_id)
-    self.discounts
-        .where("discounts.quantity_threshold <= ?", invoice_item_by(invoice_id).quantity)
-        .order(percentage_discount: :desc)
-        .first
+    discounts.where("discounts.quantity_threshold <= ?", invoice_item_by(invoice_id).quantity)
+             .order(percentage_discount: :desc)
+             .first
   end
 
   def discounted_price(discounts, invoice_id)
