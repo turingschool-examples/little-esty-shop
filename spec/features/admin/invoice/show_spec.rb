@@ -31,7 +31,7 @@ RSpec.describe 'admin/invoices/invoice.id' do
 
   describe 'invoice show, has invoice info, invoice items info, and total revenue' do
     it 'shows related information to a specific invoice' do
-      visit "/admin/invoices/#{@invoice1.id}"
+      visit admin_invoice_path(@invoice1)
 
       expect(page).to have_content("Id: #{@invoice1.id}")
       expect(page).to have_content('Status: completed')
@@ -40,7 +40,7 @@ RSpec.describe 'admin/invoices/invoice.id' do
     end
 
     it 'shows all items on the invoice including item name, quantity, price, status' do
-      visit "/admin/invoices/#{@invoice1.id}"
+      visit admin_invoice_path(@invoice1)
       
       within("#item-#{@invoice_item_1.id}") do
         expect(page).to have_content('Item Name: Beanie Babies')
@@ -58,18 +58,24 @@ RSpec.describe 'admin/invoices/invoice.id' do
     end
 
     it 'has the total revenue that will be generated from this invoice' do
-      visit "/admin/invoices/#{@invoice1.id}"
+      visit admin_invoice_path(@invoice1)
 
       expect(page).to have_content('Total Revenue of All Items: 252500')
     end
 
     it 'can update invoice status from a select field' do
-      visit "/admin/invoices/#{@invoice1.id}"
+      visit admin_invoice_path(@invoice1)
       
       choose(:status, option: 'in progress')
       click_on 'Update Invoice Status'
       
       expect(page).to have_content('Status: in progress')
+    end
+
+   it 'has the discounted revenue generated from the invoice' do
+      visit admin_invoice_path(@invoice1)
+
+      expect(page).to have_content("Total Discounted Revenue: 227125")
     end
   end
 end
