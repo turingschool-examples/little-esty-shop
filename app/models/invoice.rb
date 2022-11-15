@@ -27,24 +27,25 @@ class Invoice < ApplicationRecord
       .order(:created_at)
   end
 
-  def revenue_with_discount(merchant)
-    items = invoice_items
+  def merchant_invoice_items_discount(merchant)
+    invoice_items
       .joins(item: {merchant: :bulk_discounts})
       .where("invoice_items.quantity >= bulk_discounts.quantity_threshold AND items.merchant_id = #{merchant.id}")
-    
-    discounts = merchant.ordered_discounts
-    
-    if items.empty? || discounts.empty?
-      return all_revenue
-    else
-      items.each do |item|
-        discounts.each do |discount|
-          if item.quantity >= discount.quantity_threshold
-            discount_revenue = (item.quantity * item.unit_price) - (item.quantity * item.unit_price * (discount.percentage / 100))
-            return discount_revenue
-          end
-        end
-      end
-    end
+      .sum('invoice_items.quantity * invoice_items.unit_price * (bulk_discounts.percentage / 100)')
+  end
+
+  def revenue_with_discount(merchant)
+    total_revenue(merchant) - merchant_invoice_items_discount(merchant)
+  end
+
+  def invoice_items_discount
+    invoice_items
+    .joins(item: {merchant: :bulk_discounts})
+    .where("invoice_items.quantity >= bulk_discounts.quantity_threshold")
+    .sum('invoice_items.quantity * invoice_items.unit_price * (bulk_discounts.percentage / 100)')
+  end
+
+  def all_merchants_discounts_revenue
+    all_revenue - invoice_items_discount
   end
 end

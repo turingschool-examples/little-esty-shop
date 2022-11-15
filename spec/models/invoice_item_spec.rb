@@ -48,5 +48,12 @@ RSpec.describe InvoiceItem, type: :model do
         expect(@invoice_item_1.find_discount).to eq(@discount_2)
       end
     end
+
+    describe '#has_discount?' do
+      it 'returns true if there is an applicable disount for the item' do
+        expect(@invoice_item_1.has_discount?).to eq(true)
+        expect(@invoice_item_2.has_discount?).to eq(false)
+      end
+    end
   end
 end

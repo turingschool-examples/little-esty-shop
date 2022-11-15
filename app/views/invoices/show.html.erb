@@ -11,7 +11,7 @@
     <p><b>Price: </b><%= invoice_item.unit_price %></p>
     <p><b>Quantity: </b><%= invoice_item.quantity %></p>
     <p><b>Status: </b><%= invoice_item.status %><br>
-    <% if @invoice.total_revenue(@merchant) != @invoice.revenue_with_discount(@merchant) %>
+    <% if invoice_item.has_discount? %>
       <p><%= link_to "Discount Applied", merchant_bulk_discount_path(@merchant, invoice_item.find_discount) %>
     <% end %>
     <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
