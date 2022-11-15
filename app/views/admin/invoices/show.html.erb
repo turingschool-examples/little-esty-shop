@@ -2,9 +2,8 @@
 <h2>Status: <%= @invoice.status %></h2>
 <h3>Created at: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></h3>
 <h4>Customer Name: <%= @invoice.customer.full_name %></h4>
-<%= form_with url: "/admin/invoices/#{@invoice.id}", method: "PATCH" do |form| %>
-    <%= form.label :status, 'Status:'%>
 
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: "PATCH" do |form| %>
     <%= form.radio_button :status, "in progress" %>
     <%= form.label :status, "In Progress" %>
     <%= form.radio_button :status, "completed" %>
@@ -12,7 +11,6 @@
     <%= form.radio_button :status, "cancelled" %>
     <%= form.label :status, "Cancelled" %>
     <%= form.submit 'Update Invoice Status' %>
-
 <% end %>
 <br>
 

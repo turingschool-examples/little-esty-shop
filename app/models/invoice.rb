@@ -35,7 +35,7 @@ class Invoice < ApplicationRecord
     discounts = merchant.ordered_discounts
     
     if items.empty? || discounts.empty?
-      return all_revenue
+      return total_revenue(merchant)
     else
       items.each do |item|
         discounts.each do |discount|
