@@ -100,9 +100,27 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '#merchant_invoice_items_discount' do
+      it 'returns the total value of discounts for an invoice items for a merchant' do
+        expect(@invoice1.merchant_invoice_items_discount(@merchant_1)).to eq(375.0)
+      end
+    end
+
     describe '#revenue_with_discount' do
-      it 'returns the revenue for an invoice with applied discounts' do
+      it 'returns the total revenue for a merchant with discounts applied' do
         expect(@invoice1.revenue_with_discount(@merchant_1)).to eq(2125.0)
+      end
+    end
+
+    describe '#invoice_items_discount' do
+      it 'returns the sum of discounts for all items on invoice' do
+        expect(@invoice1.invoice_items_discount).to eq(25375)
+      end
+    end
+    
+    describe '#all_merchants_discounts_revenue' do
+      it 'returns the discounted reveune with all merchants discounts' do
+        expect(@invoice1.all_merchants_discounts_revenue).to eq(227125)
       end
     end
   end
