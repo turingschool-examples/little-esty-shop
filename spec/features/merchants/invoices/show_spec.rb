@@ -140,5 +140,17 @@ RSpec.describe 'Merchant Invoice Show Page' do
         expect(page).to have_content("Total Invoice Revenue with Discounts: 2125.0")
       end
     end
+
+    it 'shows a link to show page for a bulk discount' do
+      visit merchant_invoice_path(@merchant_1, @invoice1)
+
+      within("#item-#{@item1.id}") do
+        expect(page).to have_link("Discount Applied")
+      end
+
+      within("#item-#{@item2.id}") do
+        expect(page).to have_link("Discount Applied")
+      end
+    end
   end
 end
