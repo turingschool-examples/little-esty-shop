@@ -157,4 +157,24 @@ RSpec.describe 'bulk discounts index page of merchant' do
 
     expect(page).to have_link("Create New Discount")
   end
+
+  let(:holiday_response) { HolidayService.holiday_name }
+  
+  it 'has the next 3 upcoming holidays' do
+    visit merchant_bulk_discounts_path(@merchant_1)
+
+    expect(page).to have_content("Thanksgiving Day")
+    expect(page).to have_content("Christmas Day")
+    expect(page).to have_content("New Year's Day")
+  end
+
+  let(:holiday_response) { HolidayService.holiday_date }
+
+  it 'has the next 3 upcoming holidays dates' do
+    visit merchant_bulk_discounts_path(@merchant_1)
+
+    expect(page).to have_content("2022-11-24")
+    expect(page).to have_content("2022-12-26")
+    expect(page).to have_content("2023-01-02")
+  end
 end
