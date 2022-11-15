@@ -15,9 +15,9 @@ RSpec.describe 'Merchant Invoice Show Page' do
       @invoice1 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: Time.parse('19.07.18'))
       @invoice2 = Invoice.create!(status: 'completed', customer_id: @customer1.id, created_at: '2010-03-11 01:51:45')
 
-      InvoiceItem.create!(quantity: 5, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
-      InvoiceItem.create!(quantity: 15, unit_price: 100, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
-      InvoiceItem.create!(quantity: 50, unit_price: 800, status: 'shipped', item_id: @item3.id, invoice_id: @invoice2.id)
+      @invoice_item_1 = InvoiceItem.create!(quantity: 5, unit_price: 100, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+      @invoice_item_2 = InvoiceItem.create!(quantity: 15, unit_price: 100, status: 'packaged', item_id: @item2.id, invoice_id: @invoice1.id)
+      @invoice_item_3 = InvoiceItem.create!(quantity: 50, unit_price: 800, status: 'shipped', item_id: @item3.id, invoice_id: @invoice2.id)
     end
 
     describe 'As a merchant' do
@@ -34,14 +34,14 @@ RSpec.describe 'Merchant Invoice Show Page' do
         it 'Then I see all of my items on the invoice including: Item name, The quantity of the item ordered, The price the Item sold for, The Invoice Item status, And I do not see any information related to Items for other merchants' do
           visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
 
-          within("#item-#{@item2.id}") do
+          within("#item-#{@invoice_item_2.id}") do
             expect(page).to have_content("Name: #{@item2.name}")
             expect(page).to have_content("Price: #{@item2.unit_price}")
             expect(page).to have_content('Quantity: 15')
             expect(page).to have_content('Status: packaged')
           end
 
-          within("#item-#{@item1.id}") do
+          within("#item-#{@invoice_item_1.id}") do
             expect(page).to have_content("Name: #{@item1.name}")
             expect(page).to have_content("Price: #{@item1.unit_price}")
             expect(page).to have_content('Quantity: 5')
@@ -62,7 +62,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
         it 'has a select field with current status that can be changed to update status' do
           visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
 
-          within("#item-#{@item1.id}") do
+          within("#item-#{@invoice_item_1.id}") do
             expect(page).to have_selector(:css, 'form')
             expect(find('form')).to have_content("#{@item1.invoice_items.first.status}")
             expect(@item1.invoice_items.first.status).to eq('packaged')
@@ -77,7 +77,7 @@ RSpec.describe 'Merchant Invoice Show Page' do
             expect(find('form')).to have_content('shipped')
           end
 
-          within("#item-#{@item2.id}") do
+          within("#item-#{@invoice_item_2.id}") do
             expect(page).to have_selector(:css, 'form')
             expect(find('form')).to have_content("#{@item2.invoice_items.first.status}")
             expect(@item2.invoice_items.first.status).to eq('packaged')
@@ -121,11 +121,11 @@ RSpec.describe 'Merchant Invoice Show Page' do
       @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant_1.id)
       @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant_2.id)
       
-      InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
-      InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
+      @invoice_item_1 = InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+      @invoice_item_2 = InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
       
-      InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice1.id)
-      InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice2.id)
+      @invoice_item_3 = InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice1.id)
+      @invoice_item_4 = InvoiceItem.create!(quantity: 15, unit_price: 1500, status: 'shipped', item_id: @item2.id, invoice_id: @invoice2.id)
       
       @transaction1 = Transaction.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: nil, result: 'failed', invoice_id: @invoice1.id)
       @transaction2 = Transaction.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: nil, result: 'success', invoice_id: @invoice1.id)
@@ -138,6 +138,18 @@ RSpec.describe 'Merchant Invoice Show Page' do
       within("#total_invoice_revenue") do
         expect(page).to have_content("Total Invoice Revenue: 2500")
         expect(page).to have_content("Total Invoice Revenue with Discounts: 2125.0")
+      end
+    end
+
+    it 'shows a link to show page for a bulk discount' do
+      visit merchant_invoice_path(@merchant_1, @invoice1)
+
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_link("Discount Applied")
+      end
+
+      within("#item-#{@invoice_item_3.id}") do
+        expect(page).to have_link("Discount Applied")
       end
     end
   end

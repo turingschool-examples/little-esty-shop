@@ -9,6 +9,7 @@ class Invoice < ApplicationRecord
 
   enum status: { 'in progress' => 0, completed: 1, cancelled: 2 }
 
+
   def all_revenue
     invoice_items.sum('unit_price * quantity')
   end
@@ -26,15 +27,24 @@ class Invoice < ApplicationRecord
       .order(:created_at)
   end
 
-  def decimal_discount
-    percentage.to_f / 100
-  end
-
   def revenue_with_discount(merchant)
-    invoice_items
+    items = invoice_items
       .joins(item: {merchant: :bulk_discounts})
       .where("invoice_items.quantity >= bulk_discounts.quantity_threshold AND items.merchant_id = #{merchant.id}")
-      # .group(:id)
-      .sum('(invoice_items.quantity * invoice_items.unit_price) - (invoice_items.quantity * invoice_items.unit_price * (bulk_discounts.percentage / 100))')
+    
+    discounts = merchant.ordered_discounts
+    
+    if items.empty? || discounts.empty?
+      return all_revenue
+    else
+      items.each do |item|
+        discounts.each do |discount|
+          if item.quantity >= discount.quantity_threshold
+            discount_revenue = (item.quantity * item.unit_price) - (item.quantity * item.unit_price * (discount.percentage / 100))
+            return discount_revenue
+          end
+        end
+      end
+    end
   end
 end

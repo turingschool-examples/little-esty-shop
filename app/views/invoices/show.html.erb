@@ -4,23 +4,28 @@
 <p><b>Customer: </b><%= @invoice.customer.full_name %></p>
 
 <h2>Items: </h2>
-<% @items.each do |item| %>
-  <div id="item-<%= item.id %>">
-    <p><b>Name: </b><%= item.name %></p>
-    <p><b>Price: </b><%= "#{item.unit_price}¢" %></p>
-    <p><b>Quantity: </b><%= item.invoice_items.first.quantity %></p>
-    <p><b>Status: </b><%= item.invoice_items.first.status %><br> 
+
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id="item-<%= invoice_item.id %>">
+    <p><b>Name: </b><%= invoice_item.item.name %></p>
+    <p><b>Price: </b><%= invoice_item.unit_price %></p>
+    <p><b>Quantity: </b><%= invoice_item.quantity %></p>
+    <p><b>Status: </b><%= invoice_item.status %><br>
+    <% if @invoice.total_revenue(@merchant) != @invoice.revenue_with_discount(@merchant) %>
+      <p><%= link_to "Discount Applied", merchant_bulk_discount_path(@merchant, invoice_item.find_discount) %>
+    <% end %>
     <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
-    <%= f.hidden_field :invoice_item_id, value: item.invoice_items.first.id %>
-    <%= f.label :status %><br>
-    <%= f.select :status, item.invoice_items.statuses.keys, :selected => item.invoice_items.first.status %>
-    <%= f.submit 'Update Item Status'%>
-<% end %></p>
+      <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
+      <%= f.label :status %><br>
+      <%= f.select :status, @invoice.invoice_items.statuses.keys, :selected => invoice_item.status %>
+      <%= f.submit 'Update Item Status'%>
+    <% end %></p>
+
   </div> 
-<% end %>
+  <% end %>
 <br>
 
 <div id="total_invoice_revenue">
   <p><b>Total Invoice Revenue: </b><%= @invoice.total_revenue(@merchant) %>
-  <p>Total Invoice Revenue with Discounts: <%= @invoice.revenue_with_discount(@merchant) %>
+  <p><b>Total Invoice Revenue with Discounts: </b><%= @invoice.revenue_with_discount(@merchant) %>
 </div>

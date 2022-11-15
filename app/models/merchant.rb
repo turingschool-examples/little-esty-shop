@@ -70,4 +70,8 @@ class Merchant < ApplicationRecord
   def revenue_dollars(revenue)
     (revenue.to_f / 100).round(2)
   end
+
+  def ordered_discounts
+    bulk_discounts.order(quantity_threshold: :desc)
+  end
 end
