@@ -53,7 +53,7 @@ RSpec.describe Invoice, type: :model do
     @customer_6_invoice_1.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "success")
   end
 
-  describe 'class methods' do
+  describe 'Class Methods' do
     describe '.incomplete_invoices' do
       it 'returns the invoices that are still in progress' do
         expect(Invoice.incomplete_invoices).to eq([@customer_6_invoice_2])
@@ -74,7 +74,7 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  describe "instance methods" do
+  describe "Instance Methods" do
     describe '#customer_last' do
       it 'returns the invoiced customers last name' do
         expect(@customer_1_invoice_1.customer_last).to eq("Valentino")
