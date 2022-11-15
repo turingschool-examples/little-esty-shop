@@ -31,7 +31,7 @@ RSpec.describe InvoiceItem, type: :model do
     @item1 = Item.create!(name: 'Beanie Babies', description: 'Investments', unit_price: 100, merchant_id: @merchant_1.id)
     @item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: @merchant_2.id)
     
-    @invoice_item_1 = InvoiceItem.create!(quantity: 5, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
+    @invoice_item_1 = InvoiceItem.create!(quantity: 50, unit_price: 500, status: 'packaged', item_id: @item1.id, invoice_id: @invoice1.id)
     @invoice_item_2 = InvoiceItem.create!(quantity: 1, unit_price: 100, status: 'shipped', item_id: @item1.id, invoice_id: @invoice2.id)
     
     @invoice_item_3 = InvoiceItem.create!(quantity: 50, unit_price: 5000, status: 'shipped', item_id: @item2.id, invoice_id: @invoice1.id)
@@ -45,7 +45,7 @@ RSpec.describe InvoiceItem, type: :model do
   describe 'instance methods' do
     describe '#find_discount' do
       it 'returns the bulk discount that applies to the invoice item' do
-        expect(@invoice_item_1.find_discount).to eq(@discount_1)
+        expect(@invoice_item_1.find_discount).to eq(@discount_2)
       end
     end
   end
