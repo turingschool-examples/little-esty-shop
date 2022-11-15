@@ -27,19 +27,16 @@ class Invoice < ApplicationRecord
       .order(:created_at)
   end
 
-  def decimal_discount
-    percentage.to_f / 100
-  end
-
   def revenue_with_discount(merchant)
     items = invoice_items
       .joins(item: {merchant: :bulk_discounts})
       .where("invoice_items.quantity >= bulk_discounts.quantity_threshold AND items.merchant_id = #{merchant.id}")
     
-    if items.empty?
+    discounts = merchant.ordered_discounts
+    
+    if items.empty? || discounts.empty?
       return all_revenue
     else
-      discounts = merchant.bulk_discounts.order(quantity_threshold: :desc)
       items.each do |item|
         discounts.each do |discount|
           if item.quantity >= discount.quantity_threshold

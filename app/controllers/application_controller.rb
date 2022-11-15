@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
     # @users = GithubService.new.users
     # @pr_count = GithubService.new.pr_count
 
-    @repo_name = 'little-esty-shop'
-    @users = [{ name: 'DarbySmith', commits: 35 }, { name: 'bkeener7', commits: 35 }, { name: 'efuchsman', commits: 35 }, { name: 'WilliamLampke', commits: 35 }, { name: 'James-E-White', commits: 35 }]
-    @pr_count = '25'
+    # @repo_name = 'little-esty-shop'
+    # @users = [{ name: 'DarbySmith', commits: 35 }, { name: 'bkeener7', commits: 35 }, { name: 'efuchsman', commits: 35 }, { name: 'WilliamLampke', commits: 35 }, { name: 'James-E-White', commits: 35 }]
+    # @pr_count = '25'
   end
 end
