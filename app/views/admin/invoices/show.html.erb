@@ -1,7 +1,7 @@
 <h1>Id: <%= @invoice.id %></h1>
-<h2>Status: <%= @invoice.status %></h2>
-<h3>Created at: <%= @invoice.created_at.strftime("%A, %B %e, %Y") %></h3>
-<h4>Customer Name: <%= @invoice.customer.full_name %></h4>
+<p><b>Status: </b><%= @invoice.status %></p>
+<p><b>Created at: </b><%= @invoice.created_at.strftime("%A, %B %e, %Y") %></p>
+<p><b>Customer Name: </b><%= @invoice.customer.full_name %></p>
 
 <%= form_with url: "/admin/invoices/#{@invoice.id}", method: "PATCH" do |form| %>
     <%= form.radio_button :status, "in progress" %>
@@ -17,12 +17,15 @@
 <h1>Invoice Items:</h1>
 <% @invoice.invoice_items.each do |invoice_item|%>
     <div id="item-<%= invoice_item.id %>">
-    <h2>Item Name: <%= invoice_item.item.name %></h2>
-    <h3>Unit Price: <%= invoice_item.unit_price %></h3>
-    <h4>Quantity: <%= invoice_item.quantity %></h4>
-    <h5>Status: <%= invoice_item.status %></h5>
+    <p><b>Item Name: </b><%= invoice_item.item.name %></p>
+    <p><b>Unit Price: </b><%= invoice_item.unit_price %></p>
+    <p><b>Quantity: </b><%= invoice_item.quantity %></p>
+    <p><b>Status: </b><%= invoice_item.status %></p>
+    <br>
     </div>
 <% end %>
+
 <br>
-<h2>Total Revenue of All Items: <%= @invoice.all_revenue %></h2>
-<h2>Total Discounted Revenue: <%= @invoice.all_merchants_discounts_revenue %></h2>
+
+<p><b>Total Revenue of All Items: </b><%= @invoice.all_revenue %></p>
+<p><b>Total Discounted Revenue: </b><%= @invoice.all_merchants_discounts_revenue %></p>
