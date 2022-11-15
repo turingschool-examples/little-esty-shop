@@ -48,3 +48,5 @@ class Invoice < ApplicationRecord
     end
   end
 end
+
+# .sum('(invoice_items.quantity * invoice_items.unit_price) - (invoice_items.quantity * invoice_items.unit_price * (bulk_discounts.percentage / 100))')

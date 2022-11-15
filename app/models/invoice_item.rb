@@ -11,8 +11,15 @@ class InvoiceItem < ApplicationRecord
   def find_discount
     bulk_discounts
       .joins(:invoice_items)
-      .where("invoice_items.quantity >= bulk_discounts.quantity_threshold")
+      .where("invoice_items.quantity >= bulk_discounts.quantity_threshold AND invoice_items.id = #{id}")
       .order(percentage: :desc)
       .first
+  end
+
+  def has_discount?
+    discounts = bulk_discounts
+      .joins(:invoice_items)
+      .where("invoice_items.quantity >= bulk_discounts.quantity_threshold AND invoice_items.id = #{id}")
+      !discounts.empty?
   end
 end
