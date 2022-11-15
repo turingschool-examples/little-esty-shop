@@ -51,15 +51,18 @@ tr:nth-child(even) {
       <% discounted_revenue = 0.0 %>
       <% @invoice.items.each do |item| %>
         <% discounts = @discounts.avaliable_discounts(item) %>
+        <% price = item.invoice_item_by(@invoice.id).unit_price %>
+        <% price_discounted = item.discounted_price(discounts, @invoice.id) %>
+        <% quantity = item.invoice_item_quantity(@invoice.id) %>
         <tr>
           <td><%= item.name %></td>
-          <td><%= item.invoice_item_quantity(@invoice.id) %></td>
-          <td><%= "$" + sprintf('%.2f', item.unit_price) %></td>
+          <td><%= quantity %></td>
+          <td><%= "$" + sprintf('%.2f', price) %></td>
           <td>
             <% if discounts != [] %>
-              <%= "$" + sprintf('%.2f', item.discounted_price(discounts, @invoice.id)) %><% discounted_revenue += item.discounted_price(discounts, @invoice.id) * item.invoice_item_quantity(@invoice.id) %>
+              <%= "$" + sprintf('%.2f', price_discounted) %><% discounted_revenue += price_discounted * quantity %>
             <% else %>
-              <%= "N/A" %><% discounted_revenue += item.unit_price * item.invoice_item_quantity(@invoice.id) %>
+              <%= "N/A" %><% discounted_revenue += price * quantity %>
             <% end %>
           </td>
           <td>

@@ -8,6 +8,8 @@ class InvoiceItem < ApplicationRecord
   end
 
   def invoice_date
-    Invoice.find(self.invoice_id).created_at.strftime("%A, %d %B %Y")
+    Invoice.find(self.invoice_id)
+           .created_at
+           .strftime("%A, %d %B %Y")
   end
 end

@@ -17,7 +17,7 @@ RSpec.describe InvoiceItem, type: :model do
     @invoice_item_1 = InvoiceItem.create!(invoice: @customer_1_invoice_1, item: @merchant_1_item_1, quantity: 1, unit_price: 4, status: 2)
   end
 
-  describe 'instance methods' do
+  describe 'Instance Methods' do
     describe '#item_name' do
       it 'returns item name by invoice_item' do
         expect(@invoice_item_1.item_name).to eq(@merchant_1_item_1.name)

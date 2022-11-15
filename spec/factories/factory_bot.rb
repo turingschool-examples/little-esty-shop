@@ -35,7 +35,7 @@ FactoryBot.define do
   factory :transaction, class: Transaction do
     result_hash = { 0 => 'success', 1 => 'failed' }
     credit_card_number { Faker::Bank.account_number }
-    cc_expiration_date { Faker::Date.between(from: '2030-01-01', to: '2040-12-31') }
+    credit_card_expiration_date { Faker::Date.between(from: '2030-01-01', to: '2040-12-31') }
     result { result_hash[Faker::Number.within(range: 0..1)] }
     association :invoice, factory: :invoice
   end

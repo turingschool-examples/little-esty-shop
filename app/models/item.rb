@@ -5,22 +5,31 @@ class Item < ApplicationRecord
   enum status: ["enabled", "disabled"]
 
   def top_selling_date
-    invoices.joins(:transactions).
-    where("transactions.result = 'success'").
-    order("invoice_items.quantity desc, invoices.created_at").
-    first.created_at
+    self.invoices
+        .joins(:transactions)
+        .where("transactions.result = 'success'")
+        .order("invoice_items.quantity desc, invoices.created_at")
+        .first
+        .created_at
   end
 
   def invoice_item_quantity(invoice_id)
-    self.invoice_items.where(invoice_id: invoice_id).pluck(:quantity).first
+    self.invoice_items
+        .where(invoice_id: invoice_id)
+        .pluck(:quantity)
+        .first
   end
 
   def invoice_item_by(invoice_id)
-    self.invoice_items.where(invoice_id: invoice_id).first
+    self.invoice_items
+        .where(invoice_id: invoice_id)
+        .first
   end
 
   def best_discount(discounts, invoice_id)
-    discounts.where("discounts.quantity_threshold <= ?", invoice_item_by(invoice_id).quantity).order(percentage_discount: :desc).first
+    discounts.where("discounts.quantity_threshold <= ?", invoice_item_by(invoice_id).quantity)
+             .order(percentage_discount: :desc)
+             .first
   end
 
   def discounted_price(discounts, invoice_id)

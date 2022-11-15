@@ -41,7 +41,7 @@ RSpec.describe Item, type: :model do
     @invoice_5.transactions.create!(credit_card_number: 123456789, credit_card_expiration_date: "07/2023", result: "failed")
   end
 
-  describe "instance methods" do
+  describe "Instance Methods" do
     describe "#top_selling_date" do
       it "returns the DateTime object of the created_at for the invoice with the most sales of that item" do
         expect(@item.top_selling_date).to eq(@feb_first)

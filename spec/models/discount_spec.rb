@@ -22,7 +22,7 @@ RSpec.describe Discount, type: :model do
     @discount_3 = create(:discount, merchant: @merchant_2)
   end
 
-  describe 'Class methods' do
+  describe 'Class Methods' do
     describe '.avaliable_discounts' do
       it 'filters an array of avaliable discounts for that item, by merchant' do
         discounts = Discount.all
