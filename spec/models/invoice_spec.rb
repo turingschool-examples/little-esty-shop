@@ -7,6 +7,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many :transactions }
     it { should have_many(:items).through(:invoice_items) }
     it { should have_many(:merchants).through(:items) }
+    it { should have_many(:discounts).through(:merchants) }
   end
 
   describe 'validations' do
@@ -92,6 +93,25 @@ RSpec.describe Invoice, type: :model do
         transaction_1 = Transaction.create!(credit_card_number: '1', result: 0, invoice_id: invoice_1.id)
         transaction_2 = Transaction.create!(credit_card_number: '1', result: 0, invoice_id: invoice_1.id)
         expect(invoice_1.total_revenue).to eq(180)
+      end
+    end
+    describe 'discounted' do
+      it 'can see the total revenue for my merchant from this invoice (not including discounts)' do
+        merchant1 = Merchant.create!(name: 'Marvel')
+        discount1 = Discount.create!(merchant_id: merchant1.id, quantity_threshhold: 5, percentage: 0.2)
+        discount2 = Discount.create!(merchant_id: merchant1.id, quantity_threshhold: 10, percentage: 0.4)
+        item1 = Item.create!(name: 'Kryptonium', description: 'Space Mineral', unit_price: 1000, merchant_id: merchant1.id)
+        item2 = Item.create!(name: 'Bat-A-Rangs', description: 'Weapons', unit_price: 500, merchant_id: merchant1.id)
+        customer1 = Customer.create!(first_name: 'Lex', last_name: 'Luthor')
+        customer2 = Customer.create!(first_name: 'Bruce', last_name: 'Wayne')
+        invoice1 = Invoice.create!(status: 'completed', customer_id: customer1.id)
+        invoice2 = Invoice.create!(status: 'completed', customer_id: customer2.id)
+        InvoiceItem.create!(quantity: 5, unit_price: 1000, status: 'shipped', item_id: item1.id, invoice_id: invoice1.id)
+        InvoiceItem.create!(quantity: 10, unit_price: 500, status: 'shipped', item_id: item2.id, invoice_id: invoice2.id)
+        transaction1 = Transaction.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: nil, result: 'success', invoice_id: invoice1.id)
+        transaction2 = Transaction.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: nil, result: 'success', invoice_id: invoice2.id)
+  
+        invoice1.discounted(merchant1)
       end
     end
   end

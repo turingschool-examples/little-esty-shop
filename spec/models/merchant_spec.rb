@@ -299,5 +299,8 @@ RSpec.describe Merchant, type: :model do
     it 'returns the top selling date for a merchant' do
       expect(@merchant_2.top_selling_date).to eq('2021-12-25 05:00:00 UTC')
     end
+
+
+
   end
 end

@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2022_11_11_225825) do
     t.bigint "merchant_id"
     t.integer "quantity_threshhold"
     t.float "percentage"
+    t.bigint "invoice_item_id"
+    t.index ["invoice_item_id"], name: "index_discounts_on_invoice_item_id"
   end
 
   create_table "invoice_items", force: :cascade do |t|
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 2022_11_11_225825) do
     t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
   end
 
+  add_foreign_key "discounts", "invoice_items"
   add_foreign_key "invoice_items", "invoices"
   add_foreign_key "invoice_items", "items"
   add_foreign_key "invoices", "customers"

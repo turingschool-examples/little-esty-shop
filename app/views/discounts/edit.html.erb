@@ -1,0 +1,8 @@
+<h3>Update a Field and click submit: </h3>
+<%= form_with url: "/merchants/#{@merchant.id}/discounts/#{@discount.id}", method: :patch do |form|%>
+    <%= form.label :quantity_threshhold, "Quantity Threshhold: " %>
+    <%= form.text_field :quantity_threshhold, :value => @discount.quantity_threshhold %>
+    <%= form.label :percentage, "Percentage: " %>
+    <%= form.text_field :percentage, :value => @discount.percentage %>
+    <%= form.submit "Submit" %>
+<% end %>
