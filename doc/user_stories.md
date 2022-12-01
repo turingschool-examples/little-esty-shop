@@ -18,7 +18,7 @@ These user stories will require you to build many pages. This repo includes wire
 ### Merchant Dashboard
 
 ```
-Merchant Dashboard
+1. Merchant Dashboard
 
 As a merchant,
 When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
@@ -26,7 +26,7 @@ Then I see the name of my merchant
 ```
 
 ```
-Merchant Dashboard Links
+2. Merchant Dashboard Links
 
 As a merchant,
 When I visit my merchant dashboard
@@ -35,7 +35,7 @@ And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
 ```
 
 ```
-Merchant Dashboard Statistics - Favorite Customers
+3. Merchant Dashboard Statistics - Favorite Customers
 
 As a merchant,
 When I visit my merchant dashboard
@@ -46,7 +46,7 @@ conducted with my merchant
 ```
 
 ```
-Merchant Dashboard Items Ready to Ship
+4. Merchant Dashboard Items Ready to Ship
 
 As a merchant
 When I visit my merchant dashboard
@@ -58,7 +58,7 @@ And each invoice id is a link to my merchant's invoice show page
 ```
 
 ```
-Merchant Dashboard Invoices sorted by least recent
+5. Merchant Dashboard Invoices sorted by least recent
 
 As a merchant
 When I visit my merchant dashboard
@@ -71,7 +71,7 @@ And I see that the list is ordered from oldest to newest
 ###  Merchant Items
 
 ```
-Merchant Items Index Page
+6. Merchant Items Index Page
 
 As a merchant,
 When I visit my merchant items index page ("merchants/merchant_id/items")
@@ -80,7 +80,7 @@ And I do not see items for any other merchant
 ```
 
 ```
-Merchant Items Show Page
+7. Merchant Items Show Page
 
 As a merchant,
 When I click on the name of an item from the merchant items index page,
@@ -93,7 +93,7 @@ And I see all of the item's attributes including:
 ```
 
 ```
-Merchant Item Update
+8. Merchant Item Update
 
 As a merchant,
 When I visit the merchant show page of an item
@@ -107,7 +107,7 @@ And I see a flash message stating that the information has been successfully upd
 ```
 
 ```
-Merchant Item Disable/Enable
+9. Merchant Item Disable/Enable
 
 As a merchant
 When I visit my items index page
@@ -118,7 +118,7 @@ And I see that the items status has changed
 ```
 
 ```
-Merchant Items Grouped by Status
+10. Merchant Items Grouped by Status
 
 As a merchant,
 When I visit my merchant items index page
@@ -127,7 +127,7 @@ And I see that each Item is listed in the appropriate section
 ```
 
 ```
-Merchant Item Create
+11. Merchant Item Create
 
 As a merchant
 When I visit my items index page
@@ -141,7 +141,7 @@ And I see my item was created with a default status of disabled.
 ```
 
 ```
-Merchant Items Index: 5 most popular items
+12. Merchant Items Index: 5 most popular items
 
 As a merchant
 When I visit my items index page
@@ -156,7 +156,7 @@ Notes on Revenue Calculation:
 ```
 
 ```
-Merchant Items Index: Top Item's Best Day
+13. Merchant Items Index: Top Item's Best Day
 
 As a merchant
 When I visit my items index page
@@ -171,7 +171,7 @@ Note: use the invoice date. If there are multiple days with equal number of sale
 When a customer purchases something from the shop, a new invoice will be created in the system. A Merchant needs to be able to fulfill orders for their items on invoices.
 
 ```
-Merchant Invoices Index
+14. Merchant Invoices Index
 
 As a merchant,
 When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
@@ -181,7 +181,7 @@ And each id links to the merchant invoice show page
 ```
 
 ```
-Merchant Invoice Show Page
+15. Merchant Invoice Show Page
 
 As a merchant
 When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
@@ -193,7 +193,7 @@ Then I see information related to that invoice including:
 ```
 
 ```
-Merchant Invoice Show Page: Invoice Item Information
+16. Merchant Invoice Show Page: Invoice Item Information
 
 As a merchant
 When I visit my merchant invoice show page
@@ -206,7 +206,7 @@ And I do not see any information related to Items for other merchants
 ```
 
 ```
-Merchant Invoice Show Page: Total Revenue
+17. Merchant Invoice Show Page: Total Revenue
 
 As a merchant
 When I visit my merchant invoice show page
@@ -214,7 +214,7 @@ Then I see the total revenue that will be generated from all of my items on the 
 ```
 
 ```
-Merchant Invoice Show Page: Update Item Status
+18. Merchant Invoice Show Page: Update Item Status
 
 As a merchant
 When I visit my merchant invoice show page
@@ -233,7 +233,7 @@ And I see that my Item's status has now been updated
 ### Admin Dashboard
 
 ```
-Admin Dashboard
+19. Admin Dashboard
 
 As an admin,
 When I visit the admin dashboard (/admin)
@@ -241,7 +241,7 @@ Then I see a header indicating that I am on the admin dashboard
 ```
 
 ```
-Admin Dashboard Links
+20. Admin Dashboard Links
 
 As an admin,
 When I visit the admin dashboard (/admin)
@@ -250,7 +250,7 @@ And I see a link to the admin invoices index (/admin/invoices)
 ```
 
 ```
-Admin Dashboard Statistics - Top Customers
+21. Admin Dashboard Statistics - Top Customers
 
 As an admin,
 When I visit the admin dashboard
@@ -261,7 +261,7 @@ conducted
 ```
 
 ```
-Admin Dashboard Incomplete Invoices
+22. Admin Dashboard Incomplete Invoices
 
 As an admin,
 When I visit the admin dashboard
@@ -272,7 +272,7 @@ And each invoice id links to that invoice's admin show page
 ```
 
 ```
-Admin Dashboard Invoices sorted by least recent
+23. Admin Dashboard Invoices sorted by least recent
 
 As an admin,
 When I visit the admin dashboard
@@ -285,7 +285,7 @@ And I see that the list is ordered from oldest to newest
 ### Admin Merchants
 
 ```
-Admin Merchants Index
+24. Admin Merchants Index
 
 As an admin,
 When I visit the admin merchants index (/admin/merchants)
@@ -293,7 +293,7 @@ Then I see the name of each merchant in the system
 ```
 
 ```
-Admin Merchant Show
+25. Admin Merchant Show
 
 As an admin,
 When I click on the name of a merchant from the admin merchants index page,
@@ -302,7 +302,7 @@ And I see the name of that merchant
 ```
 
 ```
-Admin Merchant Update
+26. Admin Merchant Update
 
 As an admin,
 When I visit a merchant's admin show page
@@ -316,7 +316,7 @@ And I see a flash message stating that the information has been successfully upd
 ```
 
 ```
-Admin Merchant Enable/Disable
+27. Admin Merchant Enable/Disable
 
 As an admin,
 When I visit the admin merchants index
@@ -327,7 +327,7 @@ And I see that the merchant's status has changed
 ```
 
 ```
-Admin Merchants Grouped by Status
+28. Admin Merchants Grouped by Status
 
 As an admin,
 When I visit the admin merchants index
@@ -336,7 +336,7 @@ And I see that each Merchant is listed in the appropriate section
 ```
 
 ```
-Admin Merchant Create
+29. Admin Merchant Create
 
 As an admin,
 When I visit the admin merchants index
@@ -350,7 +350,7 @@ And I see my merchant was created with a default status of disabled.
 ```
 
 ```
-Admin Merchants: Top 5 Merchants by Revenue
+30. Admin Merchants: Top 5 Merchants by Revenue
 
 As an admin,
 When I visit the admin merchants index
@@ -365,7 +365,7 @@ Notes on Revenue Calculation:
 ```
 
 ```
-Admin Merchants: Top Merchant's Best Day
+31. Admin Merchants: Top Merchant's Best Day
 
 As an admin,
 When I visit the admin merchants index
@@ -378,7 +378,7 @@ Note: use the invoice date. If there are multiple days with equal number of sale
 ### Admin Invoices
 
 ```
-Admin Invoices Index Page
+32. Admin Invoices Index Page
 
 As an admin,
 When I visit the admin Invoices index ("/admin/invoices")
@@ -387,7 +387,7 @@ Each id links to the admin invoice show page
 ```
 
 ```
-Admin Invoice Show Page
+33. Admin Invoice Show Page
 
 As an admin,
 When I visit an admin invoice show page
@@ -399,7 +399,7 @@ Then I see information related to that invoice including:
 ```
 
 ```
-Admin Invoice Show Page: Invoice Item Information
+34. Admin Invoice Show Page: Invoice Item Information
 
 As an admin
 When I visit an admin invoice show page
@@ -411,7 +411,7 @@ Then I see all of the items on the invoice including:
 ```
 
 ```
-Admin Invoice Show Page: Total Revenue
+35. Admin Invoice Show Page: Total Revenue
 
 As an admin
 When I visit an admin invoice show page
@@ -419,7 +419,7 @@ Then I see the total revenue that will be generated from this invoice
 ```
 
 ```
-Admin Invoice Show Page: Update Invoice Status
+36. Admin Invoice Show Page: Update Invoice Status
 
 As an admin     
 When I visit an admin invoice show page
