@@ -7,4 +7,10 @@ namespace :csv_load do
             Customer.create(row.to_h)
         end
     end
+
+    task :merchants => :environment do
+        CSV.foreach("db/data/merchants.csv", headers: true) do |row|
+            Merchant.create(row.to_h)
+        end
+    end
 end
