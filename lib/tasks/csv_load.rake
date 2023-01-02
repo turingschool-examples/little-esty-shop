@@ -1,7 +1,7 @@
 require 'csv'
 
 namespace :csv_load do
-  task all: [:merchants, :items, :customers, :invoices, :invoice_items, :transactions]
+  task all: [:merchants, :customers, :invoices, :items, :invoice_items, :transactions]
 
   task merchants: :environment do
     CSV.foreach('./db/data/merchants.csv', headers: true) do |row|
@@ -15,13 +15,6 @@ namespace :csv_load do
       Customer.create!(row.to_hash)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('customers')
-  end
-
-  task invoice_items: :environment  do
-    CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
-      InvoiceItem.create!(row.to_hash)
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
   end
 
   task invoices: :environment do
@@ -38,6 +31,13 @@ namespace :csv_load do
     ActiveRecord::Base.connection.reset_pk_sequence!('items')
   end
 
+  task invoice_items: :environment  do
+    CSV.foreach('./db/data/invoice_items.csv', headers: true) do |row|
+      InvoiceItem.create!(row.to_hash)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+  end
+  
   task transactions: :environment do
     CSV.foreach('./db/data/transactions.csv', headers: true) do |row|
       Transaction.create!(row.to_hash)
