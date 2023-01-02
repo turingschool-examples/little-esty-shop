@@ -1,12 +1,9 @@
 class CSVParser
-  def merchants
-    lists_hash = List.pluck(:name, :id).to_h
-    
-    items = []
-    CSV.foreach('link/to/file.csv', headers: true) do |row|
-      list_id = lists_hash[row[:name]]
-      items << { list_id: list_id, title: row[:title] }
+  def self.merchants
+    merchants = []
+    CSV.foreach('./db/data/merchants.csv', headers: true) do |row|
+      merchants << row.to_h
     end
-    Item.import(items)
+    Merchant.import(merchants)
   end
 end
