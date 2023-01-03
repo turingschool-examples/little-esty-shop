@@ -45,5 +45,4 @@ namespace :csv_load do
   end
 
   task all: %i[customers merchants items invoices invoice_items transactions]
-  end
 end
