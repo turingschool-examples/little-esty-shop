@@ -48,7 +48,7 @@ RSpec.describe 'Merchant Dashboard' do
   describe 'Story 1 - merchant dashboard Page' do
     it 'displays the name of name of my merchant' do
       visit merchants_merchantid_dashboard_path(@merchant_1)
-
+      
       expect(page).to have_content(@merchant_1.name)
     end
   end
