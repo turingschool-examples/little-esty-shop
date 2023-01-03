@@ -280,15 +280,12 @@
           null
         ]
       },
-      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
-          1,
           null,
           1,
-          null,
-          null,
           null
         ]
       },
@@ -296,20 +293,6 @@
         "lines": [
           1,
           1,
-          null
-        ]
-      },
-      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
           null
         ]
       },
@@ -326,6 +309,6 @@
         ]
       }
     },
-    "timestamp": 1672756042
+    "timestamp": 1672756119
   }
 }
