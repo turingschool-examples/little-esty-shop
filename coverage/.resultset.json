@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/spec/models/invoice_spec.rb": {
+      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/spec/models/customer_spec.rb": {
         "lines": [
           1,
           null,
@@ -369,9 +369,8 @@
           null
         ]
       },
-      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/app/models/invoice.rb": {
+      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
-          1,
           1,
           null,
           1,
@@ -389,8 +388,23 @@
           null
         ]
       },
-      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/app/models/customer.rb": {
+      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          null,
           1,
           null,
           null
@@ -411,13 +425,9 @@
           1,
           1,
           1,
-          null
-        ]
-      },
-      "/Users/kelsieporter/turing/mod_2/projects/little-esty-shop/app/models/transaction.rb": {
-        "lines": [
           1,
-          null,
+          1,
+          1,
           null
         ]
       },
@@ -425,10 +435,14 @@
         "lines": [
           1,
           1,
+          1,
+          1,
+          1,
+          1,
           null
         ]
       }
     },
-    "timestamp": 1672781148
+    "timestamp": 1672782841
   }
 }
