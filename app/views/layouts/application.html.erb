@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      h1 {
+        margin: 40px;
+        background-color: gray
+      }
+      .dash_header {
+        float: left;
+        margin: 20px
+      }
+      .dash_links {
+        float: right;
+        margin: 20px
+      }
+      body {
+        font-family: sans-serif;
+      }
+    </style>
     <title>LittleEtsyShop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +27,7 @@
   </head>
 
   <body>
+    <h1>Little Esty Shop</h1>
     <%= yield %>
   </body>
 </html>
