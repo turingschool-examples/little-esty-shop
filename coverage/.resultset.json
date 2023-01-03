@@ -1,12 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/spec/features/index_spec.rb": {
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/spec/features/admin/dashboard_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
+          1,
+          null,
           1,
           null,
           null
@@ -282,6 +284,9 @@
           1,
           null,
           1,
+          1,
+          null,
+          null,
           null
         ]
       },
@@ -291,12 +296,18 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/controllers/merchants_controller.rb": {
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/spec/features/index_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/controllers/admin/dashboard_controller.rb": {
         "lines": [
           1,
           1,
-          1,
-          null,
           null
         ]
       },
@@ -305,22 +316,8 @@
           1,
           null
         ]
-      },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1672696713
+    "timestamp": 1672771508
   }
 }
