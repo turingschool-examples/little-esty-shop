@@ -87,7 +87,7 @@ namespace :csv_load do
     CSV.foreach(file, headers: true) do |row|
       invoice_item_hash = row.to_hash
       invoice_item = InvoiceItem.where(id: invoice_item_hash[:id])
-
+      
       if invoice_item.count == 1
         invoice_item.first.update_attributes(invoice_item_hash)
       else
@@ -96,5 +96,14 @@ namespace :csv_load do
       ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
     end
   end
-  
+
+  desc "load csv files"
+  task all: :environment do 
+    Rake::Task["csv_load:customers"].execute
+    Rake::Task["csv_load:invoices"].execute
+    Rake::Task["csv_load:merchants"].execute
+    Rake::Task["csv_load:items"].execute
+    Rake::Task["csv_load:transactions"].execute
+    Rake::Task["csv_load:invoice_items"].execute
+  end
 end
