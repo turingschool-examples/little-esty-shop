@@ -40,15 +40,13 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
-<<<<<<< HEAD
-=======
+
   gem 'simplecov'
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'orderly'
   gem 'factory_bot_rails'
   gem 'faker'
->>>>>>> cfbcecb6f7d885e2aa17b662b217d33a8117611d
 end
 
 group :development do

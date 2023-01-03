@@ -39,7 +39,8 @@ namespace :csv_load do
     CSV.foreach(file, headers: true) do |row|
       invoice_hash = row.to_hash
       invoice = Invoice.where(id: invoice_hash[:id])
-
+      invoice_hash["status"] = invoice_hash["status"].gsub(" ", "_")
+        
       if invoice.count == 1
         invoice.first.update_attributes(invoice_hash)
       else
