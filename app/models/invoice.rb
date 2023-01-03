@@ -2,7 +2,7 @@ class Invoice < ApplicationRecord
   belongs_to :customer 
   has_many :transactions
   
-  validates :status, presence: true
+  validates_presence_of :status
 
   enum status: {cancelled: 0,
                 completed: 1,

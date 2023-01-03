@@ -270,6 +270,7 @@
         "lines": [
           1,
           null,
+          1,
           null
         ]
       },
@@ -279,8 +280,26 @@
           null
         ]
       },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/spec/models/customer_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
       "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
+          1,
           1,
           1,
           null,
@@ -294,8 +313,161 @@
           1,
           null
         ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/controllers/admin_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/bryanflanagan/turing_work/2mod/projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1672706662
+    "timestamp": 1672760256
   }
 }

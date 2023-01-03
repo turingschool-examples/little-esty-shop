@@ -4,4 +4,5 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
 
   validates_presence_of :name, :description, :unit_price
+  validates :unit_price, numericality: { only_integer: true }
 end
