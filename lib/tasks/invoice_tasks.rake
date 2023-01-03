@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :csv_load do
   desc 'load invoice csv into db'
-  task invoices:[:environment] do
+  task :invoices do
     
     file = 'db/data/invoices.csv'
     

@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :csv_load do
   desc 'loads merchant CSV into db'
-  task merchants:[:environment] do
+  task :merchants do
 
     file = 'db/data/merchants.csv'
 

@@ -1,4 +1,4 @@
 namespace :csv_load do
   desc 'calls all listed csv rake tasks'
-  task all:[:customers, :merchants, :invoices]
+  task all:[:environment, :customers, :merchants, :invoices, :items]
 end
