@@ -1,7 +1,6 @@
 require 'csv'
 
 namespace :csv_load do
-
   desc "import csv files"
   task all: [:merchants, :customers, :items, :invoices, :invoice_items, :transactions]
   
@@ -45,11 +44,5 @@ namespace :csv_load do
       Transaction.create(row.to_h)
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
-  end
-  
-  task reset_keys: :environment do
-    ActiveRecord::Base.connection.tables.each do |t|
-      ActiveRecord::Base.connection.reset_pk_sequence!(t)
-    end
   end
 end
