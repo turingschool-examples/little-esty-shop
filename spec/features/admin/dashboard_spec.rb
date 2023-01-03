@@ -24,7 +24,7 @@ RSpec.describe 'admin dashboard' do
       expect("Ramona").to appear_before("Parker")
       expect("Parker").to appear_before("Leanne")  
     end
-save_and_open_page
+
     within '#customer_12' do
       expect(page).to have_content(9)
     end
