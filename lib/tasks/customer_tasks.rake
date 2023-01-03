@@ -3,7 +3,6 @@ require 'csv'
 namespace :csv_load do
   desc 'loads customer CSV into db'
 	task :customers do
-
     # Specify file name/location
     file = 'db/data/customers.csv'
      
