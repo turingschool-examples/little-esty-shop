@@ -25,4 +25,10 @@ namespace :csv_load do
           Item.create(row.to_h)
       end
     end
+    
+    task :transactions => :environment do
+      CSV.foreach("db/data/transactions.csv", headers: true) do |row|
+          Transaction.create(row.to_h)
+      end
+    end
 end
