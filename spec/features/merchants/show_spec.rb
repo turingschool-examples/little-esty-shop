@@ -39,7 +39,7 @@ RSpec.describe 'merchant show' do
     # Then I see the name of my merchant
     it 'shows the name of the merchant' do
       visit "merchants/#{@merchant1.id}/dashboards"
-
+      save_and_open_page
       expect(page).to have_content(@merchant1.name)
     end
   end
