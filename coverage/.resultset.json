@@ -1,12 +1,13 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/spec/models/merchants_spec.rb": {
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/spec/models/invoice_items_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
+          2,
           2,
           null,
           null
@@ -365,10 +366,13 @@
           null
         ]
       },
-      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/app/models/merchant.rb": {
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/app/models/invoice_item.rb": {
         "lines": [
           1,
+          1,
           null,
+          1,
+          1,
           null
         ]
       },
@@ -378,8 +382,53 @@
           1,
           null
         ]
+      },
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/spec/models/items_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/spec/models/merchants_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/leobanos/turing_work/2mod/projects/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1672780129
+    "timestamp": 1672780668
   }
 }
