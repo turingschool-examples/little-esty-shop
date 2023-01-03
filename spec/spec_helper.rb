@@ -65,6 +65,16 @@ RSpec.configure do |config|
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
+  config.after :suite do
+    Merchant.destroy_all
+    Item.destroy_all
+    Customer.destroy_all
+    Invoice.destroy_all
+    InvoiceItem.destroy_all
+    Transaction.destroy_all
+  end
+
+
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.
   config.mock_with :rspec do |mocks|
