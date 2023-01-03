@@ -20,4 +20,9 @@ RSpec.describe "The Merchant Dashboard" do
     expect(page).to have_link("Merchant Items", href: "/merchants/#{merchant.id}/items")
     expect(page).to have_link("Merchant Invoices", href: "/merchants/#{merchant.id}/invoices")
   end
+
+  it 'contains a list of the top five customers based on successful transactions' do
+    Rake::Task['csv_load:all'].invoke
+
+  end
 end

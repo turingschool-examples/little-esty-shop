@@ -7,23 +7,29 @@
           null,
           null,
           1,
-          null,
-          1,
-          1,
           1,
           null,
-          1,
+          0,
+          0,
+          0,
           null,
-          1,
+          0,
+          null,
+          0,
           null,
           null,
-          1,
-          1,
+          0,
+          0,
           null,
-          1,
+          0,
           null,
-          1,
-          1,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
           null,
           null
         ]
@@ -307,41 +313,8 @@
           1,
           null
         ]
-      },
-      "/Users/ryancanton/Documents/Turing/2_mod/group_projects/little-esty-shop/app/models/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/ryancanton/Documents/Turing/2_mod/group_projects/little-esty-shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/ryancanton/Documents/Turing/2_mod/group_projects/little-esty-shop/app/controllers/merchants_controller.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/ryancanton/Documents/Turing/2_mod/group_projects/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1672771390
+    "timestamp": 1672771935
   }
 }
