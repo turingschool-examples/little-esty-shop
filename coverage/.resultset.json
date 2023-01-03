@@ -312,6 +312,70 @@
           null
         ]
       },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/customer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/controllers/admin/dashboard_controller.rb": {
         "lines": [
           1,
@@ -326,6 +390,6 @@
         ]
       }
     },
-    "timestamp": 1672776078
+    "timestamp": 1672779090
   }
 }

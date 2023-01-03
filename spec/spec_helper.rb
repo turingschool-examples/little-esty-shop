@@ -13,6 +13,7 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'csv'
 require 'simplecov'
 SimpleCov.start do
   add_filter 'spec/rails_helper.rb'
@@ -30,6 +31,38 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.before :suite do
+    CSV.foreach('./spec/data/merchants_test.csv', headers: true) do |row|
+      Merchant.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+
+    CSV.foreach('./spec/data/items_test.csv', headers: true) do |row|
+      Item.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+
+    CSV.foreach('./spec/data/customers_test.csv', headers: true) do |row|
+      Customer.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
+
+    CSV.foreach('./spec/data/invoices_test.csv', headers: true) do |row|
+      Invoice.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
+
+    CSV.foreach('./spec/data/invoice_items_test.csv', headers: true) do |row|
+      InvoiceItem.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+
+    CSV.foreach('./spec/data/transactions_test.csv', headers: true) do |row|
+      Transaction.create!(row.to_h)
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
