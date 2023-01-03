@@ -7,7 +7,9 @@
           null,
           1,
           1,
-          1,
+          2,
+          2,
+          2,
           null,
           1,
           null,
@@ -22,7 +24,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/environment.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -31,7 +33,7 @@
           1
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/application.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -54,7 +56,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/boot.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -62,7 +64,7 @@
           1
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/environments/test.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -112,7 +114,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -124,7 +126,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/assets.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -142,7 +144,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/backtrace_silencers.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -153,7 +155,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/content_security_policy.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -182,7 +184,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/cookies_serializer.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -191,7 +193,7 @@
           1
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -199,7 +201,7 @@
           1
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/inflections.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -219,7 +221,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/mime_types.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -227,7 +229,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
         "lines": [
           null,
           null,
@@ -269,7 +271,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/initializers/wrap_parameters.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -287,7 +289,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/config/routes.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -298,7 +300,7 @@
           null
         ]
       },
-      "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/helpers/application_helper.rb": {
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
@@ -354,6 +356,26 @@
           1,
           1,
           1,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/spec/models/invoice_item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
           null,
           null
         ]
@@ -378,6 +400,66 @@
       },
       "/Users/samuelcox/turing_work/mod2/little-esty-shop/app/controllers/admin/dashboard_controller.rb": {
         "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/mikecummins/turing_work/2mod/group_project/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
           1,
           1,
           null
