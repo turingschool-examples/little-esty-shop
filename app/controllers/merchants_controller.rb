@@ -1,5 +1,8 @@
 class MerchantsController < ApplicationController
   def index
-    binding.pry
+  end
+
+  def show
+    @merchant = Merchant.find(params[:id])
   end
 end

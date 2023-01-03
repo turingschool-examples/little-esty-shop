@@ -14,7 +14,7 @@
           null,
           1,
           null,
-          0,
+          1,
           null,
           null
         ]
@@ -289,6 +289,7 @@
           1,
           null,
           1,
+          1,
           null
         ]
       },
@@ -312,8 +313,26 @@
           1,
           null
         ]
+      },
+      "/Users/ryancanton/Documents/Turing/2_mod/group_projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/ryancanton/Documents/Turing/2_mod/group_projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1672770297
+    "timestamp": 1672771021
   }
 }
