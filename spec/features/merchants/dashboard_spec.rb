@@ -22,7 +22,7 @@ RSpec.describe "The Merchant Dashboard" do
   end
 
   it 'contains a list of the top five customers based on successful transactions' do
-    Rake::Task['csv_load:all'].invoke
+    
 
   end
 end
