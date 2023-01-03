@@ -17,12 +17,13 @@ RSpec.describe "The Merchant Dashboard" do
 
     visit "/merchants/#{merchant.id}/dashboard"
 
-    expect(page).to have_link("Merchant Items", href: "/merchants/#{merchant.id}/items")
-    expect(page).to have_link("Merchant Invoices", href: "/merchants/#{merchant.id}/invoices")
+    expect(page).to have_link("My Items", href: "/merchants/#{merchant.id}/items")
+    expect(page).to have_link("My Invoices", href: "/merchants/#{merchant.id}/invoices")
   end
 
   it 'contains a list of the top five customers based on successful transactions' do
-    
+    visit "/merchants/1/dashboard"
+    expect(page).to have_content("Gibberish")
 
   end
 end
