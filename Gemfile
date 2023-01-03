@@ -47,6 +47,7 @@ group :development, :test do
   gem 'orderly'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'pry-rails' #returns data in organized and color coded
 end
 
 group :development do
