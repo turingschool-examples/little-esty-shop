@@ -5,6 +5,18 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
+
+*.rbc
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+/public/system
+/coverage/*
+/coverage/index.html
+/spec/tmp
+
 /.bundle
 
 # Ignore all logfiles and tempfiles.
