@@ -39,8 +39,26 @@ RSpec.describe 'merchant show' do
     # Then I see the name of my merchant
     it 'shows the name of the merchant' do
       visit "merchants/#{@merchant1.id}/dashboards"
-      save_and_open_page
       expect(page).to have_content(@merchant1.name)
+    end
+  end
+
+  describe 'story 2' do
+#     As a merchant,
+# When I visit my merchant dashboard
+# Then I see link to my merchant items index (/merchants/merchant_id/items)
+# And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
+    it "has a link to the merchant items index" do
+      visit "merchants/#{@merchant1.id}/dashboards"
+      
+      expect(page).to have_link("#{@merchant1.name} items")
+    end
+    
+    it "has a link to the merchant invoices index" do
+      visit "merchants/#{@merchant1.id}/dashboards"
+      
+      expect(page).to have_link("#{@merchant1.name} invoices")
+      
     end
   end
 end
