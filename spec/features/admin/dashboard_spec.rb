@@ -29,4 +29,22 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_content(9)
     end
   end
+
+  it 'Displays incomplete invoices sorted by oldest first' do
+    visit admin_path
+
+    within '#incomplete_invoices' do
+      expect('Invoice #10').to appear_before('Invoice #76')
+      expect('Invoice #76').to appear_before('Invoice #18')
+      expect('Invoice #18').to appear_before('Invoice #9')
+    end
+  end
+
+  it 'Displays dates for incomplete invoices' do
+    visit admin_path
+
+    within '#incomplete_invoices' do
+      expect(page).to have_content('Tuesday, March 6, 2012')
+    end
+  end
 end

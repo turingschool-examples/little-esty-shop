@@ -6,5 +6,13 @@ RSpec.describe Invoice do
     it {should have_many :invoice_items}
     it {should have_many :transactions}
     it {should have_many(:items).through(:invoice_items)}
-    end 
+  end
+
+  describe 'Class Methods' do
+    it 'returns the invoices with not shipped items in order by oldest' do
+      expect(Invoice.incomplete_invoices).to be_a ActiveRecord::Relation
+      expect(Invoice.incomplete_invoices.count).to eq 70
+      expect(Invoice.incomplete_invoices.first).to eq(Invoice.find(10))
+    end
+  end
 end
