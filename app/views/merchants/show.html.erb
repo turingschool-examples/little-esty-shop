@@ -1,5 +1,8 @@
 <h2><%= @merchant.name %></h2>
 
+<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
+<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+
 <h3>Favorite Customers</h3>
 <ol>
   <% @top_customers.each do |customer| %>
@@ -7,5 +10,4 @@
   <% end %>
 </ol>
 
-<%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
-<%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+<h3>Items Ready to Ship</h3>

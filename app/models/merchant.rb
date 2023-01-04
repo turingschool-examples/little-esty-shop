@@ -6,10 +6,14 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
 
   def top_five_customers
-    list = Customer.select("customers.*, count(distinct transactions) as transaction_count")
+    Customer.select("customers.*, count(distinct transactions) as transaction_count")
             .left_joins(:transactions, :items).group(:id)
             .where('transactions.result = ?', 'success')
             .where('items.merchant_id = ?', self.id)
             .order("transaction_count desc").limit(5)
+  end
+
+  def ready_to_ship_items
+    items.select("items.*, invoice_id, status").joins(:invoice_items).where("invoice_items.status = ?", "1")
   end
 end

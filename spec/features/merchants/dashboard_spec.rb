@@ -23,6 +23,13 @@ RSpec.describe "The Merchant Dashboard" do
     # save_and_open_page
     expect(page).to have_content("Favorite Customers\nIlene Pfannerstill - 9 Purchases Ramona Reynolds - 8 Purchases Joey Ondricka - 7 Purchases Mariah Toy - 3 Purchases Logan Kris - 3 Purchases")
   end
+
+  it 'has a list of items ready to ship' do
+    visit "/merchants/2/dashboard"
+
+    expect(page).to have_content("Items Ready to Ship")
+    expect(page).to have_content("gibberish")
+  end
   # As a merchant
   # When I visit my merchant dashboard
   # Then I see a section for "Items Ready to Ship"
