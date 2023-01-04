@@ -32,10 +32,6 @@ RSpec.describe 'merchant invoice index' do
     @invoice_4.items << @item_7
   end
 
-#   As a merchant,
-# When I visit my merchant's invoices index (/merchants/merchant_id/invoices)
-# Then I see all of the invoices that include at least one of my merchant's items
-# And for each invoice I see its id
 # And each id links to the merchant invoice show page
 
   describe '/merchants/merchant_id/invoices' do
@@ -47,12 +43,14 @@ RSpec.describe 'merchant invoice index' do
       expect(page).to_not have_content(@invoice_1.id)
     end
 
-    xit 'shows ids that link to the merchant invoice show page' do
+    it 'shows ids that link to the merchant invoice show page' do
       visit merchant_invoices_path(@merchant_2)
       
-      expect(page).to have_link("#{@invoice_2.id}")
-      click_link "#{@invoice_2.id}"
-      expect(page).to have_current_path("/merchant/#{@merchant_2}/invoices/#{@invoice_2.id}") 
+      expect(page).to have_link("Invoice #{@invoice_2.id}")
+      click_link "Invoice #{@invoice_2.id}"
+      expect(page).to have_current_path("/merchants/#{@merchant_2.id}/invoices/#{@invoice_2.id}") 
+      expect(page).to have_content("Invoice #{@invoice_2.id}")
+      expect(page).to_not have_content("Invoice #{@invoice_3.id}")
     end
   end
 end

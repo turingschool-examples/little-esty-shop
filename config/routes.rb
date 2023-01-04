@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   resources :merchants, only: [:index, :show] do
-    resources :invoices, only: [:index]
+    resources :invoices, only: [:index, :show]
   end
   resources :invoices, only: [:index]
 end
