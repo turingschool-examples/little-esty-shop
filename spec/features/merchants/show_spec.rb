@@ -122,15 +122,15 @@ RSpec.describe "merchant dashboard" do
         expect(page).to have_content(@invoice_3.id)
         expect(page).to have_content(@invoice_7.id)
         expect(page).to have_content(@invoice_9.id)
-        expect(page).to have_link(@invoice_1.id)
-        expect(page).to have_link(@invoice_3.id)
-        expect(page).to have_link(@invoice_7.id)
-        expect(page).to have_link(@invoice_9.id)
+        expect(page).to have_link(@invoice_1.id.to_s)
+        expect(page).to have_link(@invoice_3.id.to_s)
+        expect(page).to have_link(@invoice_7.id.to_s)
+        expect(page).to have_link(@invoice_9.id.to_s)
 
         expect(page).to_not have_content(@invoice_2.id)
         expect(page).to_not have_content(@invoice_4.id)
-        expect(page).to_not have_link(@invoice_2.id)
-        expect(page).to_not have_link(@invoice_4.id)
+        expect(page).to_not have_link(@invoice_2.id.to_s)
+        expect(page).to_not have_link(@invoice_4.id.to_s)
 
         # click_link (@invoice_2.id)
 
