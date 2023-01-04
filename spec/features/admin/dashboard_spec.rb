@@ -216,6 +216,12 @@ RSpec.describe 'admin dashboard' do
       expect(page).to_not have_content(@invoice19.id)
     end
 
+    within "#incomplete_invoices" do
+      expect(page).to have_link "#{@invoice2.id}", href: "/admin/invoices/#{@invoice2.id}"
+      expect(page).to have_link "#{@invoice6.id}", href: "/admin/invoices/#{@invoice6.id}"
+      expect(page).to have_link "#{@invoice20.id}", href: "/admin/invoices/#{@invoice20.id}"
+    end
+
   end
 
 end
