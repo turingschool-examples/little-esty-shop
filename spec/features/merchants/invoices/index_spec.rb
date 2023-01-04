@@ -41,7 +41,7 @@ RSpec.describe 'merchants invoices index page' do
     visit merchant_invoices_path(@merchant1)
 
     expect(page).to have_link @invoice1.id, href: invoice_path(@invoice1)
-    expect(page).to have_link @invoice2.id, href: merchant_invoice_path(@invoice2)
-    expect(page).to have_no_link @invoice3.id, href: merchant_invoice_path(@invoice3)
+    expect(page).to have_link @invoice2.id, href: invoice_path(@invoice2)
+    expect(page).to have_no_link @invoice3.id, href: invoice_path(@invoice3)
   end
 end
