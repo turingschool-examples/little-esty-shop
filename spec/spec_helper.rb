@@ -34,6 +34,13 @@ RSpec.configure do |config|
   end
 
   config.before :suite do
+
+      Merchant.destroy_all
+      Item.destroy_all
+      Customer.destroy_all
+      Invoice.destroy_all
+      InvoiceItem.destroy_all
+      Transaction.destroy_all
     CSV.foreach('./spec/data/merchants_test.csv', headers: true) do |row|
       Merchant.create!(row.to_h)
     end
@@ -65,14 +72,7 @@ RSpec.configure do |config|
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
   end
 
-  config.after :suite do
-    Merchant.destroy_all
-    Item.destroy_all
-    Customer.destroy_all
-    Invoice.destroy_all
-    InvoiceItem.destroy_all
-    Transaction.destroy_all
-  end
+  
 
 
   # rspec-mocks config goes here. You can use an alternate test double

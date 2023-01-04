@@ -3,6 +3,8 @@
   <head>
     <style>
       h1 {
+        text-align: center;
+        padding: 10px;
         margin: 40px;
         background-color: gray
       }
@@ -10,9 +12,14 @@
         float: left;
         margin: 20px
       }
-      .dash_links {
+      nav {
         float: right;
         margin: 20px
+      }
+
+      #top_customers {
+        float: right;
+        margin: 10px
       }
       body {
         font-family: sans-serif;
@@ -28,6 +35,11 @@
 
   <body>
     <h1>Little Esty Shop</h1>
+ <nav>
+  <%= link_to 'Merchants', '/admin/merchants' %>
+  <%= link_to 'Invoices', '/admin/invoices' %>
+  <%= link_to 'Dashboard', '/admin' %>
+ </nav>
     <%= yield %>
   </body>
 </html>
