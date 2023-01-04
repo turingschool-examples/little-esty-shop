@@ -13,7 +13,7 @@ RSpec.describe 'Merchant Dashboard' do
 
   describe 'User story 1' do
     it 'can show the merchant name' do
-      visit "/merchants/#{@merchant_1.id}/dashboard"
+      visit merchant_path(@merchant_1)
       
       expect(page).to have_content(@merchant_1.name)
     end
