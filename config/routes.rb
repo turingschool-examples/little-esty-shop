@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   end
   
   resources :admin, only: [:index]
+
+  namespace :admin do
+    resources :merchants, only: [:index]
+    resources :invoices, only: [:index]
+  end
   
   get '/merchants/:merchant_id/dashboard', to: 'merchants#show'
 end

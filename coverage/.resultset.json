@@ -278,6 +278,11 @@
           1,
           null,
           1,
+          1,
+          1,
+          null,
+          null,
+          1,
           null
         ]
       },
@@ -326,7 +331,7 @@
           1,
           null,
           1,
-          2,
+          0,
           null,
           null,
           null,
@@ -350,7 +355,7 @@
           1,
           null,
           1,
-          2,
+          0,
           null,
           null
         ]
@@ -388,12 +393,11 @@
           null
         ]
       },
-      "/Users/christian/turing/2mod/little-esty-shop/app/controllers/admin_controller.rb": {
+      "/Users/christian/turing/2mod/little-esty-shop/app/controllers/admin/invoices_controller.rb": {
         "lines": [
           1,
           1,
-          2,
-          2,
+          1,
           null,
           null
         ]
@@ -405,6 +409,6 @@
         ]
       }
     },
-    "timestamp": 1672872549
+    "timestamp": 1672875899
   }
 }
