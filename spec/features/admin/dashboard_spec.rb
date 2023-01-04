@@ -19,7 +19,6 @@ RSpec.describe 'admin dashboard' do
     visit admin_path
 
     within '#top_customers' do
-      binding.pry
       expect("Ilene").to appear_before("Katrina")
       expect("Katrina").to appear_before("Ramona")
       expect("Ramona").to appear_before("Parker")
