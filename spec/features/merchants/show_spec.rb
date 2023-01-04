@@ -110,17 +110,11 @@ RSpec.describe "merchant dashboard" do
       expect(page).to have_content("#{@customer_7.first_name} - Successful Transactions: 1")
     end
   end
-# As a merchant
-# When I visit my merchant dashboard
-# Then I see a section for "Items Ready to Ship"
-# In that section I see a list of the names of all of my items that
-# have been ordered and have not yet been shipped,
-# And next to each Item I see the id of the invoice that ordered my item
-# And each invoice id is a link to my merchant's invoice show page
+
   describe "items ready to ship" do
-    it 'has a list of items that have not yet been shipped' do
+    it 'has a list of items that have not yet been shipped with the invoice id as a link' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-save_and_open_page
+
       within('#items_ready_to_ship') do
         expect(page).to have_content("Items ready to ship")
         expect(page).to have_content(@item_1.name)
@@ -128,25 +122,20 @@ save_and_open_page
         expect(page).to have_content(@invoice_3.id)
         expect(page).to have_content(@invoice_7.id)
         expect(page).to have_content(@invoice_9.id)
+        expect(page).to have_link(@invoice_1.id)
+        expect(page).to have_link(@invoice_3.id)
+        expect(page).to have_link(@invoice_7.id)
+        expect(page).to have_link(@invoice_9.id)
+
         expect(page).to_not have_content(@invoice_2.id)
         expect(page).to_not have_content(@invoice_4.id)
+        expect(page).to_not have_link(@invoice_2.id)
+        expect(page).to_not have_link(@invoice_4.id)
+
+        # click_link (@invoice_2.id)
+
+        # expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}")
       end
-
-      # it 'has the id as a link' do
-      #   visit "/merchants/#{@merchant_1.id}/dashboard"
-
-      #   within('#items_ready_to_ship') do
-      #     expect(page).to have_link(@invoice_1.id)
-      #     expect(page).to have_link(@invoice_3.id)
-      #     expect(page).to have_link(@invoice_7.id)
-      #     expect(page).to have_link(@invoice_9.id)
-      #     expect(page).to_not have_link(@invoice_2.id)
-      #     expect(page).to_not have_link(@invoice_4.id)
-      #   end
-      #   click_link (@invoice_2.id)
-
-      #   expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}")
-      # end
     end
   end
 end
