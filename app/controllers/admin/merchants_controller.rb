@@ -21,6 +21,10 @@ class Admin::MerchantsController < ApplicationController
     flash[:notice] = "Merchant name has been changed"
   end
 
+  def new
+
+  end
+
   private
 
   def merchant_params
