@@ -4,7 +4,12 @@
   <h5>Top Customers: </h5>
 
   <% @top_customers.each do |customer| %>
-    <p id="customer_<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> <%= customer.transactions_count %></p>
+    <p id="customer_<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - <%= customer.transactions_count %> purchases</p>
 
   <% end %>
-  </div>
+</div>
+<div id='incomplete_invoices'>
+  <% @incomplete_invoices.each do |invoice| %>
+    Invoice #<%= invoice.id %> - <%= invoice.updated_at.strftime('%A, %B %-d, %Y') %><br>
+  <% end %>
+</div>
