@@ -7,5 +7,10 @@
 <%= link_to "Invoices", admin_invoices_path %>
 
 <section id="top_customers">
-  
+<h3>Top 5 Customers</h3>
+<% @top_5_customers.each do |customer| %>
+  <ol>
+    <li><%="#{customer.first_name} #{customer.last_name}"%></li>
+  </ol>
+<% end%>
 </section>

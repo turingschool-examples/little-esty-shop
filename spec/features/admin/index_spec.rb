@@ -125,7 +125,7 @@ RSpec.describe "Admin Dashboard(Index)" do
 
       it 'see a link to the admin invoices index' do
         visit '/admin'
-
+        
         expect(page).to have_link("Invoices")
       end
     end
@@ -143,7 +143,8 @@ RSpec.describe "Admin Dashboard(Index)" do
           expect(page).to_not have_content("Leanna")
         end
         
-        binding.pry
+        save_and_open_page
+        # binding.pry
       end
     end
   end
