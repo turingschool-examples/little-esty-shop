@@ -20,7 +20,6 @@ class Invoice < ApplicationRecord
     .where.not(invoice_items: {status: "shipped"})
     .pluck(:id)
   end
-end
 
   def invoice_item(item)
     self.invoice_items.find_by(item_id: item)
