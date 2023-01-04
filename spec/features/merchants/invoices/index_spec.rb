@@ -27,6 +27,7 @@ RSpec.describe 'merchants invoices index page' do
     @ii2 = InvoiceItem.create!(quantity: 5, unit_price: @item2.unit_price, item_id: @item2.id, invoice_id: @invoice2.id)
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
+
   it 'lists all invoices with 1 or more of the merchants items' do
     visit merchant_invoices_path(@merchant1)
 
@@ -35,5 +36,12 @@ RSpec.describe 'merchants invoices index page' do
     expect(page).to have_no_content(@invoice3.id)
     expect(page).to have_no_content(@invoice4.id)
   end
-  it 'displays each invoice id as a link to the merchant invoice show page'
+
+  it 'displays each invoice id as a link to the merchant invoice show page' do
+    visit merchant_invoices_path(@merchant1)
+
+    expect(page).to have_link @invoice1.id, href: merchant_invoices_show_path(@invoice1)
+    expect(page).to have_link @invoice2.id, href: merchant_invoices_show_path(@invoice2)
+    expect(page).to have_no_link @invoice3.id, href: merchant_invoices_show_path(@invoice3)
+  end
 end
