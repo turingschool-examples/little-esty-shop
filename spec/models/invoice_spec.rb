@@ -170,7 +170,8 @@ RSpec.describe Invoice, type: :model do
 
   it 'can find all invoice IDs that have unshipped items on them' do
     expect(Invoice.find_unshipped).to eq([@invoice2.id, @invoice3.id, @invoice4.id, @invoice6.id, @invoice7.id, @invoice13.id, @invoice14.id, @invoice17.id, @invoice18.id, @invoice20.id])
-
+  end
+  
   describe 'instance methods' do
     before(:each) do
       @customer_1 = create(:customer)
