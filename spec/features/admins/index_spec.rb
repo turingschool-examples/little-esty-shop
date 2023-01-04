@@ -88,6 +88,19 @@ RSpec.describe 'admins dashboard' do
       expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
       expect(page).to_not have_content(@customer_6.first_name)
     end
+  end
 
+  it 'shows incomplete invoices' do
+    visit admin_index_path
+
+    within("#incomplete_invoices") do
+      expect(page).to have_content("Invoice ##{@invoice_1.id}")
+      expect(page).to have_content("Invoice ##{@invoice_3.id}")
+      expect(page).to_not have_content("Invoice ##{@invoice_2.id}")
+
+      click_link "#{@invoice_1.id}"
+
+      expect(current_path).to eq("/admin/invoices/#{@invoice_1.id}")
+    end
   end
 end
