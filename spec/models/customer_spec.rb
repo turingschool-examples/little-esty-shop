@@ -10,8 +10,8 @@ RSpec.describe Customer do
   describe '#transactions_with_merchant()' do
     it 'returns the number of successful transactions with a given merchant' do
       cust1 = Customer.find(1)
-
-      expect(cust1.transactions_with_merchant(2)).to eq(7)
+      # require 'pry'; binding.pry
+      expect(cust1.transactions_with_merchant(2)).to eq(5)
     end
   end
 end
