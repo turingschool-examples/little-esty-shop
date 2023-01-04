@@ -32,18 +32,9 @@ RSpec.describe 'merchant invoice show' do
     @invoice_4.items << @item_7
   end
 
-# As a merchant
-# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-
-# Invoice id
-# Invoice status
-# Invoice created_at date in the format "Monday, July 18, 2019"
-# Customer first and last name
-
   describe '/merchants/merchant_id/invoices/invoice_id' do
     it 'shows all information related to that invoice including invoice id, invoice status, invoice creation date, customer name' do
-      visit merchant_invoice_path(@invoice_2)
-      save_and_open_page
+      visit merchant_invoice_path(@merchant_2, @invoice_2)
 
       expect(page).to have_content(@invoice_2.id)
       expect(page).to have_content(@invoice_2.status)
@@ -51,7 +42,7 @@ RSpec.describe 'merchant invoice show' do
       expect(page).to have_content(@invoice_2.customer.first_name)
       expect(page).to have_content(@invoice_2.customer.last_name)
       expect(page).to_not have_content(@invoice_1.id)
-
+     
     end
   end
 end

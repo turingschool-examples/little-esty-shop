@@ -47,8 +47,9 @@ RSpec.describe 'merchant invoice index' do
       expect(page).to have_link("Invoice #{@invoice_2.id}")
       click_link "Invoice #{@invoice_2.id}"
       expect(page).to have_current_path("/merchants/#{@merchant_2.id}/invoices/#{@invoice_2.id}") 
-      expect(page).to have_content("Invoice #{@invoice_2.id}")
-      expect(page).to_not have_content("Invoice #{@invoice_3.id}")
+      save_and_open_page
+      expect(page).to have_content("Invoice #: #{@invoice_2.id}")
+      expect(page).to_not have_content("Invoice #: #{@invoice_3.id}")
     end
   end
 end
