@@ -6,5 +6,6 @@
 <h3>Top 5 Customers by Successful Transactions:</h3>
 <% @top_5_customers.each.with_index(1) do |customer, i| %>
   <%= "#{i}. #{customer.first_name} #{customer.last_name}" %>
+  <%= "Successful Transactions: #{customer.successful_transactions}" %><br>
 <% end%>
 </div>

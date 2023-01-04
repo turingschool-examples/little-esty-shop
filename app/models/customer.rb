@@ -11,4 +11,8 @@ class Customer < ApplicationRecord
         .order("count(transactions.id) desc")
         .limit(5)
   end
+
+  def successful_transactions
+    transactions.success.count
+  end
 end
