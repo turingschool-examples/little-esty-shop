@@ -6,8 +6,10 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
 
   def top_five_customers
-    Customer.left_joins(:transactions, :items).group(:id).where('transactions.result = ?', 'success')
+    list = Customer.select("customers.*, count(distinct transactions) as transaction_count")
+            .left_joins(:transactions, :items).group(:id)
+            .where('transactions.result = ?', 'success')
             .where('items.merchant_id = ?', self.id)
-            .order(Arel.sql('COUNT(transactions.id) DESC')).limit(5)
+            .order("transaction_count desc").limit(5)
   end
 end
