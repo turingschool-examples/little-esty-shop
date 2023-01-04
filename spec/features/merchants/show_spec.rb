@@ -109,7 +109,7 @@ RSpec.describe 'Merchant Dashboard' do
   describe 'User Story 3' do
     it 'displays the top 5 customers (successful transactions)' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-      within("section#studio-#{@studio_1.id}") do
+      # within("section#studio-#{@studio_1.id}") do
       within("section#customer-#{@customer_2.id}") do
         expect(page).to have_content(@customer_2.first_name)
       end
