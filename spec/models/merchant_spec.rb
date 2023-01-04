@@ -75,5 +75,11 @@ RSpec.describe Merchant, type: :model do
     it 'can return top 5 customers with most transactions' do
         expect(@merchant_1.top_five_customers).to eq([@customer_2, @customer_1, @customer_3, @customer_4, @customer_7])
         expect(@merchant_1.top_five_customers.length).to eq(5)
-      end
+    end
+  
+  describe 'items_ready_to_ship' do
+    it 'will list all the items ready to ship' do
+      expect(@merchant_1.items_ready_to_ship).to eq([@invoice_1.id, @invoice_3.id, @invoice_7.id, @invoice_9.id])
+    end
+  end
 end

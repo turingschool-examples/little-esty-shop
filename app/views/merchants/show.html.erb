@@ -11,3 +11,9 @@
     <% end %>
     </ol>
 </div>
+<div id="items_ready_to_ship">
+  <h3>Items ready to ship</h3>
+  <% @merchant.items_ready_to_ship.each do |item| %>
+  <p><%= item.name  %> <%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %></p>
+  <% end %>
+</div>
