@@ -37,9 +37,11 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_7 = @customer_3.invoices.create!(status: 'in progress')
     @invoice_8 = @customer_3.invoices.create!(status: 'cancelled')
     @invoice_9 = @customer_3.invoices.create!(status: 'completed')
-    @invoice_10 = @customer_3.invoices.create!(status: 'completed')
-    @invoice_11 = @customer_3.invoices.create!(status: 'in progress')
+    @invoice_10 = @customer_6.invoices.create!(status: 'completed')
+    @invoice_11 = @customer_5.invoices.create!(status: 'in progress')
     @invoice_12 = @customer_4.invoices.create!(status: 'completed')
+    @invoice_13 = @customer_4.invoices.create!(status: 'completed')
+    @invoice_14 = @customer_5.invoices.create!(status: 'completed')
 
     InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 5, unit_price: 13635, status: 'packaged')
     InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 9, unit_price: 23324, status: 'pending')
@@ -62,6 +64,8 @@ RSpec.describe 'Merchant Dashboard' do
     @transaction_10 = @invoice_10.transactions.create!(credit_card_number: '4923661117104166', credit_card_expiration_date: '08/22/20', result: 'success')
     @transaction_11 = @invoice_11.transactions.create!(credit_card_number: '4923661117104166', credit_card_expiration_date: '08/22/20', result: 'success')
     @transaction_12 = @invoice_12.transactions.create!(credit_card_number: '4017503416578382', credit_card_expiration_date: '08/22/20', result: 'success')
+    @transaction_13 = @invoice_13.transactions.create!(credit_card_number: '9856503416578382', credit_card_expiration_date: '08/25/20', result: 'success')
+    @transaction_14 = @invoice_14.transactions.create!(credit_card_number: '6565503416578382', credit_card_expiration_date: '08/29/20', result: 'success')
 
 
   end
@@ -105,10 +109,28 @@ RSpec.describe 'Merchant Dashboard' do
   describe 'User Story 3' do
     it 'displays the top 5 customers (successful transactions)' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-
-      within("#customer-#{@customer_1.id)}") do
-      expect(page).to have_content("#{@customer_X.name}")
+      within("section#studio-#{@studio_1.id}") do
+      within("section#customer-#{@customer_2.id}") do
+        expect(page).to have_content(@customer_2.first_name)
       end
+
+      # within("#customer-#{@customer_3.id}") do
+      #   expect(page).to have_content(@customer_3.first_name)
+      # end
+
+      # within("#customer-#{@customer_4.id}") do
+      #   expect(page).to have_content(@customer_4.first_name)
+      # end
+
+      # within("#customer-#{@customer_5.id}") do
+      #   expect(page).to have_content(@customer_5.first_name)
+      # end
+
+      # within("#customer-#{@customer_6.id}") do
+      #   expect(page).to have_content(@customer_6.first_name)
+      # end
+
+      # expect(page).to_not have_content(@customer_1.first_name)
     end
     it 'displays the number of successful transactions of each customer'
   end
