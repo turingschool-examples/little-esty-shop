@@ -14,7 +14,7 @@ RSpec.describe 'the admin invoices index' do
     @invoice_5 = create(:invoice, customer: @customer_5)
   end
 
-  describe 'basics' do
+  describe 'As an admin, When I visit the admin invoice index page' do
     it 'shows links to all invoices in the db' do
       visit admin_invoices_path
 
@@ -23,6 +23,10 @@ RSpec.describe 'the admin invoices index' do
       expect(page).to have_link(@invoice_3.id)
       expect(page).to have_link(@invoice_4.id)
       expect(page).to have_link(@invoice_5.id)
+
+      click_on(@invoice_1.id)
+
+      expect(current_path).to eq(admin_invoice_path(@invoice_1))
     end
   end
 end

@@ -14,4 +14,7 @@ class Invoice < ApplicationRecord
     self.created_at.to_formatted_s(:admin_invoice_date)
   end
 
+  def invoice_item(item)
+    self.invoice_items.find_by(item_id: item)
+  end
 end
