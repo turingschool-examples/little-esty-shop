@@ -12,4 +12,7 @@
 
 <div id="incomplete_invoices">
 <h3> Incomplete Invoices: </h3>
-<% @
+<% @incomplete_invoices.each do |invoice| %>
+  <p><%= link_to "Invoice ##{invoice.id}" %></p>
+<% end %>
+</div>
