@@ -1,3 +1,3 @@
 <p><% @merchant.invoices.each do |invoice| %></p>
-  <p>Invoice id: <%= invoice.id %></p>
+  <p>Invoice id: <%= link_to invoice.id.to_s, invoice %></p>
 <% end %>
