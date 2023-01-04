@@ -19,6 +19,9 @@ RSpec.describe Customer, type: :model do
   it 'has a method to find the top 5 customers by successful invoices' do
     result = [Customer.third, Customer.fifth, Customer.second, Customer.fourth, Customer.last]
     expect(Customer.top_5_transactions).to eq(result)
+  end
 
+  it 'has a method to find the number of successful transactions for a customer' do
+    expect(Customer.third.successful_transactions).to eq(5)
   end
 end
