@@ -35,4 +35,16 @@ RSpec.describe 'Admin Merchants index' do
 
     click_button 'Enable'
   end
+
+  xit 'Displays merchants by enabled true/false' do
+    visit admin_merchants_path
+
+    within "#enabled_merchants" do
+      expect(page).to have_content(Merchant.first.name)
+    end
+
+    click_button 'Disable'
+
+
+  end
 end

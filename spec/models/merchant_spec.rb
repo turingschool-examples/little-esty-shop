@@ -30,4 +30,18 @@ RSpec.describe Merchant do
       expect(merchants_ready_items.length).to eq(16)
     end
   end
+
+  describe '#group by enabled' do
+    it 'Groups merchants by enabled true' do
+      expect(Merchant.group_by_enabled).to eq([Merchant.find(1), Merchant.find(2), Merchant.find(3), Merchant.find(4), Merchant.find(5), Merchant.find(6), Merchant.find(7), Merchant.find(8), Merchant.find(9), Merchant.find(10)])
+    end
+
+    it 'Groups merchant by enabled false' do
+
+      Merchant.find(1).update!(enabled: false)
+      expect(Merchant.group_by_not_enabled).to eq([Merchant.find(1)])
+      Merchant.find(1).update!(enabled: true)
+      expect(Merchant.group_by_not_enabled).to eq([])
+    end
+  end
 end
