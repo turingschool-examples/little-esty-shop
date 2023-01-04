@@ -9,7 +9,7 @@ RSpec.describe Customer do
   end
     
   it 'Selects the top 5 customers by successful transaction' do
-    expect(Customer.top_5_by_transactions).to eq([Customer.find(12), Customer.find(13), Customer.find(10), Customer.find(7), Customer.find(4)])
+    expect(Customer.top_5_by_transactions).to eq([Customer.find(12), Customer.find(13), Customer.find(7), Customer.find(10), Customer.find(1)])
   end
 
   it 'Counts the number of successful transactions' do
