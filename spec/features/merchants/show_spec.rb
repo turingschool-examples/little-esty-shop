@@ -91,7 +91,6 @@ RSpec.describe "merchant dashboard" do
     visit "/merchants/#{@merchant_1.id}/dashboard"
     
     within("#top_customers") do
-      save_and_open_page
       expect(@customer_2.first_name).to appear_before(@customer_1.first_name)
       expect(@customer_1.first_name).to appear_before(@customer_3.first_name)
       expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
