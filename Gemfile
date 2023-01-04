@@ -48,7 +48,6 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'pry-rails' #returns data in organized and color coded
-  gem 'launchy'
 end
 
 group :development do

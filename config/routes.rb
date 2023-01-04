@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     resources :items, only: :index
     resources :invoices, only: [:index, :show]
   end
+
   resources :invoices, only: [:index]
+  
   namespace :admin do
     resources :invoices, only: [:index, :show]
     resources :merchants, only: [:index]
