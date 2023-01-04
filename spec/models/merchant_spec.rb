@@ -39,10 +39,10 @@ RSpec.describe Merchant, type: :model do
     @invoice_4.items << @item_5
     @invoice_4.items << @item_7
   end
-  
+
   describe 'merchant invoices' do
     it 'returns merchant invoice ids' do
-      expect(@merchant_2.all_invoices).to eq([@invoice_2.id, @invoice_3.id, @invoice_4.id])
+      expect(@merchant_2.all_invoice_ids).to eq([@invoice_2.id, @invoice_3.id, @invoice_4.id])
     end
   end
 end
