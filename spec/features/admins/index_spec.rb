@@ -89,6 +89,5 @@ RSpec.describe 'admins dashboard' do
       expect(page).to_not have_content(@customer_6.first_name)
     end
 
-    save_and_open_page
   end
 end
