@@ -1,0 +1,10 @@
+<h1>Invoices</h1>
+<h2>Admin</h2>
+
+<% if @invoices.any? %>
+  <% @invoices.each do |invoice| %>
+    <ul>
+      <li><%= link_to invoice.id, admin_invoice_path(invoice.id) %></li>
+    </ul>
+  <% end %>
+<% end %>
