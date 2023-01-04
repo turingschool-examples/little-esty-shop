@@ -221,7 +221,38 @@ RSpec.describe 'admin dashboard' do
       expect(page).to have_link "#{@invoice6.id}", href: "/admin/invoices/#{@invoice6.id}"
       expect(page).to have_link "#{@invoice20.id}", href: "/admin/invoices/#{@invoice20.id}"
     end
+  end
 
+  it 'sorts the invoices by their created_at date, oldest to newest, and displays that date in DAYOFWEEK, MONTH DATE, YEAR format' do
+    @invoice2.update!(created_at: Date.parse("22-11-2022"))
+    @invoice3.update!(created_at: Date.parse("23-11-2022"))
+    @invoice4.update!(created_at: Date.parse("24-11-2022"))
+    @invoice6.update!(created_at: Date.parse("1-11-2022"))
+    @invoice7.update!(created_at: Date.parse("2-11-2022"))
+    @invoice13.update!(created_at: Date.parse("3-11-2022"))
+    @invoice14.update!(created_at: Date.parse("4-11-2022"))
+    @invoice17.update!(created_at: Date.parse("5-11-2022"))
+    @invoice18.update!(created_at: Date.parse("1-1-2023"))
+
+    visit admin_index_path
+
+    within "#incomplete_invoices" do
+      expect("#{@invoice6.id}").to appear_before("#{@invoice7.id}")
+      expect("#{@invoice7.id}").to appear_before("#{@invoice13.id}")
+      expect("#{@invoice13.id}").to appear_before("#{@invoice14.id}")
+      expect("#{@invoice14.id}").to appear_before("#{@invoice17.id}")
+      expect("#{@invoice17.id}").to appear_before("#{@invoice2.id}")
+      expect("#{@invoice2.id}").to appear_before("#{@invoice3.id}")
+      expect("#{@invoice3.id}").to appear_before("#{@invoice4.id}")
+      expect("#{@invoice4.id}").to appear_before("#{@invoice18.id}")
+      expect("#{@invoice18.id}").to appear_before("#{@invoice20.id}")
+    end
+
+    within "#incomplete_invoices" do
+      expect(page).to have_content("#{@invoice6.id} Created: Tuesday, November 1, 2022")
+      expect(page).to have_content("#{@invoice14.id} Created: Friday, November 4, 2022")
+      expect(page).to have_content("#{@invoice18.id} Created: Sunday, January 1, 2023")
+    end
   end
 
 end
