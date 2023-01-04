@@ -43,13 +43,28 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_item_9 = create(:invoice_item, item: @item_3, invoice: @invoice_4 )
     @invoice_item_10 = create(:invoice_item, item: @item_6, invoice: @invoice_5 )
     @invoice_item_11 = create(:invoice_item, item: @item_7, invoice: @invoice_5 )
+    
+    visit merchants_merchantid_dashboard_path(@merchant_1)
   end
 
   describe 'Story 1 - merchant dashboard Page' do
-    it 'displays the name of name of my merchant' do
-      visit merchants_merchantid_dashboard_path(@merchant_1)
-      
+    it 'displays the name of name of my merchant' do  
       expect(page).to have_content(@merchant_1.name)
     end
+  end
+
+  describe 'Story 2 - Page has links to items and invoices index' do
+    it 'sends user to the appropriate URI when they click the links' do
+     
+      click_link ("See #{@merchant_1.name}'s Items")
+      
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+
+      visit merchants_merchantid_dashboard_path(@merchant_1)
+      click_link ("See #{@merchant_1.name}'s Invoices")
+      
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
+    end
+
   end
 end

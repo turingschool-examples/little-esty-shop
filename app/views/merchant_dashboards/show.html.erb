@@ -1,1 +1,6 @@
 <center><h1><%= @merchant.name %></h1></center>
+
+<div style="position:fixed; padding: 1em; bottom: 0; right: 0;">
+  <p><%= link_to "See #{@merchant.name}'s Items", merchant_items_path(@merchant)%></p>
+  <p><%= link_to "See #{@merchant.name}'s Invoices", merchant_invoices_path(@merchant)%></p>
+</div>
