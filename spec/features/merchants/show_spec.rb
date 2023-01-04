@@ -38,10 +38,9 @@ RSpec.describe 'Merchant Dashboard' do
     @invoice_8 = @customer_3.invoices.create!(status: 'cancelled')
     @invoice_9 = @customer_3.invoices.create!(status: 'completed')
     @invoice_10 = @customer_3.invoices.create!(status: 'completed')
-    @invoice_13 = @customer_3.invoices.create!(status: 'in progress')
+    @invoice_11 = @customer_3.invoices.create!(status: 'in progress')
     @invoice_12 = @customer_4.invoices.create!(status: 'completed')
 
-    #do i have to calculate the actual unit_price?
     InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 5, unit_price: 13635, status: 'packaged')
     InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 9, unit_price: 23324, status: 'pending')
     InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_2.id, quantity: 12, unit_price: 34873, status: 'packaged')
@@ -51,16 +50,19 @@ RSpec.describe 'Merchant Dashboard' do
     InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_7.id, quantity: 10, unit_price: 66747, status: 'shipped')
     InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_8.id, quantity: 9, unit_price: 76941, status: 'packaged')
 
-    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '04/22/20', result: 'success')
+    @transaction_1 = @invoice_1.transactions.create!(credit_card_number: '4654405418249632', credit_card_expiration_date: '04/22/20', result: 'failed')
     @transaction_2 = @invoice_2.transactions.create!(credit_card_number: '4580251236515201', credit_card_expiration_date: '03/22/20', result: 'failed')
     @transaction_3 = @invoice_3.transactions.create!(credit_card_number: '4354495077693036', credit_card_expiration_date: '09/22/20', result: 'success')
     @transaction_4 = @invoice_4.transactions.create!(credit_card_number: '4515551623735607', credit_card_expiration_date: '08/22/20', result: 'success')
-    @transaction_5 = @invoice_5.transactions.create!(credit_card_number: '4844518708741275', credit_card_expiration_date: '10/22/20', result: 'success')
-    @transaction_6 = @invoice_6.transactions.create!(credit_card_number: '4203696133194408', credit_card_expiration_date: '02/22/20', result: 'failed')
-    @transaction_7 = @invoice_7.transactions.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: '01/22/20', result: 'failed')
-    @transaction_8 = @invoice_8.transactions.create!(credit_card_number: '4540842003561938', credit_card_expiration_date: '09/22/20', result: 'success')
-    @transaction_9 = @invoice_9.transactions.create!(credit_card_number: '4140149827486249', credit_card_expiration_date: '10/22/20', result: 'failed')
+    @transaction_5 = @invoice_5.transactions.create!(credit_card_number: '4844518708741275', credit_card_expiration_date: '10/22/20', result: 'failed')
+    @transaction_6 = @invoice_6.transactions.create!(credit_card_number: '4203696133194408', credit_card_expiration_date: '02/22/20', result: 'sucesss')
+    @transaction_7 = @invoice_7.transactions.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: '01/22/20', result: 'sucess')
+    @transaction_8 = @invoice_8.transactions.create!(credit_card_number: '4540842003561938', credit_card_expiration_date: '09/22/20', result: 'failed')
+    @transaction_9 = @invoice_9.transactions.create!(credit_card_number: '4140149827486249', credit_card_expiration_date: '10/22/20', result: 'success')
     @transaction_10 = @invoice_10.transactions.create!(credit_card_number: '4923661117104166', credit_card_expiration_date: '08/22/20', result: 'success')
+    @transaction_11 = @invoice_11.transactions.create!(credit_card_number: '4923661117104166', credit_card_expiration_date: '08/22/20', result: 'success')
+    @transaction_12 = @invoice_12.transactions.create!(credit_card_number: '4017503416578382', credit_card_expiration_date: '08/22/20', result: 'success')
+
 
   end
   
@@ -104,6 +106,9 @@ RSpec.describe 'Merchant Dashboard' do
     it 'displays the top 5 customers (successful transactions)' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
+      within("#customer-#{@customer_1.id)}") do
+      expect(page).to have_content("#{@customer_X.name}")
+      end
     end
     it 'displays the number of successful transactions of each customer'
   end
