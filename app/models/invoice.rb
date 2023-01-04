@@ -18,7 +18,10 @@ class Invoice < ApplicationRecord
   def self.find_unshipped
     self.joins(:invoice_items)
     .where.not(invoice_items: {status: "shipped"})
-    .pluck(:id)
+  end
+
+  def self.sort_by_created_date
+    order(:created_at)
   end
 
   def invoice_item(item)

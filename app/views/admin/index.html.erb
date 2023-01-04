@@ -12,7 +12,7 @@
 
 <div id="incomplete_invoices">
 <h3>Incomplete Invoice IDs:</h3>
-<% @incomplete_ids.each do |id| %>
-  <%= link_to "#{id}", admin_invoice_path(id) %>
+<% @incomplete_invoices.each do |invoice| %>
+  <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> Created: <%= invoice.created_at.strftime('%A, %B %-d, %Y')%><br>
 <% end %>
 

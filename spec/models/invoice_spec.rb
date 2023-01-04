@@ -169,7 +169,30 @@ RSpec.describe Invoice, type: :model do
   end
 
   it 'can find all invoice IDs that have unshipped items on them' do
-    expect(Invoice.find_unshipped).to eq([@invoice2.id, @invoice3.id, @invoice4.id, @invoice6.id, @invoice7.id, @invoice13.id, @invoice14.id, @invoice17.id, @invoice18.id, @invoice20.id])
+    expect(Invoice.find_unshipped).to eq([@invoice2, @invoice3, @invoice4, @invoice6, @invoice7, @invoice13, @invoice14, @invoice17, @invoice18, @invoice20])
+  end
+
+  it 'can sort invoices from last created first' do
+    @invoice2.update!(created_at: Date.parse("22-11-2022"))
+    @invoice3.update!(created_at: Date.parse("23-11-2022"))
+    @invoice4.update!(created_at: Date.parse("24-11-2022"))
+    @invoice6.update!(created_at: Date.parse("1-11-2022"))
+    @invoice7.update!(created_at: Date.parse("2-11-2022"))
+    @invoice13.update!(created_at: Date.parse("3-11-2022"))
+    @invoice14.update!(created_at: Date.parse("4-11-2022"))
+    @invoice17.update!(created_at: Date.parse("5-11-2022"))
+    @invoice18.update!(created_at: Date.parse("1-1-2023"))
+
+    expect(Invoice.find_unshipped.sort_by_created_date).to match_array([Invoice.find(@invoice6.id),
+                                                               Invoice.find(@invoice7.id), 
+                                                               Invoice.find(@invoice13.id),
+                                                               Invoice.find(@invoice14.id),
+                                                               Invoice.find(@invoice17.id), 
+                                                               Invoice.find(@invoice2.id), 
+                                                               Invoice.find(@invoice3.id), 
+                                                               Invoice.find(@invoice4.id), 
+                                                               Invoice.find(@invoice18.id),
+                                                               Invoice.find(@invoice20.id)])
   end
   
   describe 'instance methods' do
