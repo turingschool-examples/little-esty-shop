@@ -14,6 +14,10 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items
-    items.select("items.*, invoice_id, status").joins(:invoice_items).where("invoice_items.status = ?", "1")
+    items.select("distinct items.*, invoices.created_at as invoice_created_at, invoice_items.invoice_id, invoice_items.status")
+         .joins(:invoice_items, :invoices)
+         .where("invoice_items.status = ?", "1")
+         .where("invoice_items.invoice_id = invoices.id")
+         .order("invoices.created_at")
   end
 end
