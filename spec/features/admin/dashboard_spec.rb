@@ -22,6 +22,7 @@ RSpec.describe 'admin dashboard' do
     expect(current_path).to eq("/admin/invoices")
   end
 
+
   it 'has top customer statistics visible' do
     visit admin_index_path
    
@@ -44,8 +45,5 @@ RSpec.describe 'admin dashboard' do
 
 
   end
-
-
-
 
 end

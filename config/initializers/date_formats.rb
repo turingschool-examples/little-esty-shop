@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:admin_invoice_date] = "%A, %B %d, %Y"
