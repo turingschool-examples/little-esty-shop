@@ -1,4 +1,5 @@
 <h3>All Merchants: </h3>
+<% render partial: 'admin/shared/nav' %>
 
 <% @merchants.each do |merchant| %>
   <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %></p>
