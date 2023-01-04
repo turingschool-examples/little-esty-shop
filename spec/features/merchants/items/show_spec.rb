@@ -41,11 +41,20 @@ RSpec.describe "Merchant items show page" do
 # - Name
 # - Description
 # - Current Selling Price
-    it 'can click on the names of items' do
+    it 'can click on the names of items and take me to the merchant show page' do
       visit merchant_item_index_path(@merchant1)
       click_on('Chips')
+
+      expect(page).to have_current_path("/merchant/#{@merchant1.id}/item/#{@item1.id}")
     end
-    it 'takes me to the merchant show page and I see all of its attributes'
+    it 'I see all of its attributes' do
+      # visit merchant_item_path(@merhcant1, @item1)
+      visit "/merchant/#{@merchant1.id}/item/#{@item1.id}"
+
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item1.description)
+      expect(page).to have_content(@item1.unit_price)
+    end
   end
 
 end
