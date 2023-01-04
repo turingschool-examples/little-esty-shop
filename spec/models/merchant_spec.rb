@@ -16,4 +16,18 @@ RSpec.describe Merchant do
       expect(top5[4].transaction_count).to eq(3)
     end
   end
+
+  describe '#ready_to_ship_items' do
+    it 'returns the items that are ordered but not shipped for the given merchant' do
+      merchants_ready_items = Merchant.find(1).ready_to_ship_items
+
+      merchants_ready_items.each do |item|
+        expect(item).to be_a Item
+        expect(item.merchant_id).to eq(1)
+        expect(item.status).to eq(1)
+      end   
+      
+      expect(merchants_ready_items.length).to eq(16)
+    end
+  end
 end
