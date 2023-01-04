@@ -2,8 +2,9 @@ class Invoice < ApplicationRecord
   belongs_to :customer 
   has_many :transactions
   has_many :invoice_items
+
   has_many :items, through: :invoice_items
-  
+
   validates_presence_of :status
 
   enum status: {cancelled: 0,
@@ -14,7 +15,15 @@ class Invoice < ApplicationRecord
     self.created_at.to_formatted_s(:admin_invoice_date)
   end
 
+  def self.find_unshipped
+    self.joins(:invoice_items)
+    .where.not(invoice_items: {status: "shipped"})
+    .pluck(:id)
+  end
+end
+
   def invoice_item(item)
     self.invoice_items.find_by(item_id: item)
   end
 end
+

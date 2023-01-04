@@ -10,3 +10,9 @@
 <% end%>
 </div>
 
+<div id="incomplete_invoices">
+<h3>Incomplete Invoice IDs:</h3>
+<% @incomplete_ids.each do |id| %>
+  <%= link_to "#{id}", admin_invoice_path(id) %>
+<% end %>
+
