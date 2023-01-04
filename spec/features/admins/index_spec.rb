@@ -78,7 +78,6 @@ RSpec.describe 'admins dashboard' do
   end
 
   it 'contains the top 5 customers' do
-
     visit admin_index_path
 
     within("#top_customers") do
@@ -89,5 +88,7 @@ RSpec.describe 'admins dashboard' do
       expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
       expect(page).to_not have_content(@customer_6.first_name)
     end
+
+    save_and_open_page
   end
 end
