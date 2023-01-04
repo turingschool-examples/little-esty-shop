@@ -1,6 +1,7 @@
 class Invoice < ApplicationRecord
   belongs_to :customer 
   has_many :transactions
+  has_many :invoice_items
   
   validates_presence_of :status
 
@@ -10,6 +11,12 @@ class Invoice < ApplicationRecord
 
   def format_date_long
     self.created_at.to_formatted_s(:admin_invoice_date)
+  end
+
+  def self.find_unshipped
+    self.joins(:invoice_items)
+    .where.not(invoice_items: {status: "shipped"})
+    .pluck(:id)
   end
 
 end
