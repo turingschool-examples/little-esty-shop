@@ -195,7 +195,7 @@ RSpec.describe 'admin dashboard' do
     end
   end
 
-  xit 'has a list of invoices which have items that have not shipped' do
+  it 'has a list of invoices which have items that have not shipped' do
     result = Invoice.joins(:invoice_items).where.not(invoice_items: {status: "shipped"}).pluck(:id)
     
     visit admin_index_path
