@@ -1,5 +1,5 @@
-<h1>All Merchants: </h1>
+<h3>All Merchants: </h3>
 
-<%= @merchants.each do |merchant| %>
-  <p><%= merchant.name %></p>
+<% @merchants.each do |merchant| %>
+  <p><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></p>
 <% end%>
