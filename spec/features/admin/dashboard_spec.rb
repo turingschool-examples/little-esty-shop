@@ -20,9 +20,9 @@ RSpec.describe 'admin dashboard' do
 
     within '#top_customers' do
       expect("Ilene").to appear_before("Katrina")
-      expect("Katrina").to appear_before("Ramona")
-      expect("Ramona").to appear_before("Parker")
-      expect("Parker").to appear_before("Leanne")
+      expect("Katrina").to appear_before("Parker")
+      expect("Parker").to appear_before("Ramona")
+      expect("Ramona").to appear_before("Joey")
     end
 
     within '#customer_12' do
