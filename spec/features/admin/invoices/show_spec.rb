@@ -28,6 +28,8 @@ RSpec.describe 'the admin show page' do
     @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1)
     @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_1)
     @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_1)
+    @invoice_item_5 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
+    @invoice_item_6 = create(:invoice_item, item: @item_3, invoice: @invoice_2)
   end
 
   describe 'As an admin, When I visit an admin invoice show page' do
@@ -49,6 +51,16 @@ RSpec.describe 'the admin show page' do
       expect(page).to have_content(@invoice_item_1.quantity)
       expect(page).to have_content(@invoice_item_1.unit_price)
       expect(page).to have_content(@invoice_item_1.status)
+    end
+
+    it 'shows the total revenue that will be generated from this invoice' do
+      visit admin_invoice_path(@invoice_1)
+
+      expect(page).to have_content("Total Revenue Possible: #{@invoice_1.total_revenue}")
+
+      visit admin_invoice_path(@invoice_1)
+
+      expect(page).to have_content("Total Revenue: #{@invoice_2.total_revenue}")
     end
   end
 end

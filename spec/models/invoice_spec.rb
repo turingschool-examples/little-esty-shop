@@ -176,9 +176,15 @@ RSpec.describe Invoice, type: :model do
     before(:each) do
       @customer_1 = create(:customer)
       @invoice_1 = create(:invoice, customer: @customer_1)
+      @invoice_2 = create(:invoice, customer: @customer_1)
       @merchant_1 = create(:merchant)
       @item_1 = create(:item, merchant: @merchant_1)
+      @item_2 = create(:item, merchant: @merchant_1)
+      @item_3 = create(:item, merchant: @merchant_1)
       @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
+      @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_2, unit_price: 15000)
+      @invoice_item_3 = create(:invoice_item, item: @item_2, invoice: @invoice_2, unit_price: 4700)
+      @invoice_item_4 = create(:invoice_item, item: @item_3, invoice: @invoice_2, unit_price: 12005)
     end
 
     describe '#format_date_long' do
@@ -197,5 +203,12 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '#total_revenue' do
+      it 'returns the total cost (InvoiceItems: unit_price) of all items on invoice' do
+        expected = [@invoice_item_2.unit_price, @invoice_item_3.unit_price, @invoice_item_4.unit_price].sum
+
+        expect(@invoice_1.total_revenue).to eq(0)
+      end
+    end
   end
 end
