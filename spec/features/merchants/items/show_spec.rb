@@ -57,4 +57,27 @@ RSpec.describe "Merchant items show page" do
     end
   end
 
+  describe "story 8" do 
+#     As a merchant,
+# When I visit the merchant show page of an item
+# I see a link to update the item information.
+# When I click the link
+# Then I am taken to a page to edit this item
+# And I see a form filled in with the existing item attribute information
+# When I update the information in the form and I click ‘submit’
+# Then I am redirected back to the item show page where I see the updated information
+# And I see a flash message stating that the information has been successfully updated.
+    it "has a link to update information page" do 
+      visit "/merchant/#{@merchant1.id}/item/#{@item1.id}"
+
+      expect(page).to have_link("Update Item")
+      click_on("Update Item")
+
+      expect(page).to have_current_path("/items/#{@item1.id}/edit")
+    end
+    it "has a form with existing item attributes" 
+    it "can click sumbmit and update the information and go back to the item show page"
+    it "displays a flash message stating the information has been succesfully updated"
+  end
+
 end
