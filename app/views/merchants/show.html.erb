@@ -8,7 +8,8 @@
 <h3><strong>Top 5 Customers</strong></h3>
 
 <p><% @merchant.top_customers.each do |customer| %></p>
-<section id=<%= "customer-#{customer.id}" %>>
-  <p><%= customer.first_name %></p>
-</section>
+<div id="customer_<%= customer.id %>">
+  <p><%= customer.first_name %>
+  <%= customer.last_name %></p>
+</div>
 <% end %>
