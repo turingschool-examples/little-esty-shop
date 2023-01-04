@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :invoices, only: [:index]
   end
+  resources :invoices, only: [:index]
 end

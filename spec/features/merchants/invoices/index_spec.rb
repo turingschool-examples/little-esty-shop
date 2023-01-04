@@ -17,13 +17,21 @@ RSpec.describe 'merchant invoice index' do
     @item_9 = create(:item, merchant: @merchant_3)
     @item_10 = create(:item, merchant: @merchant_3)
 
-    @invoice_1 = create(:invoice, item: @item_1)
-    @invoice_2 = create(:invoice, item: @item_2)
-    @invoice_3 = create(:invoice, item: @item_3)
-    @invoice_4 = create(:invoice, item: @item_4)
-    @invoice_5 = create(:invoice, item: @item_5)
-    @invoice_6 = create(:invoice, item: @item_6)
-    @invoice_7 = create(:invoice, item: @item_7)
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+
+    @invoice_1 = create(:invoice, customer: @customer_1)
+    @invoice_1.items << @item_1
+    @invoice_2 = create(:invoice, customer: @customer_1)
+    @invoice_2.items << @item_2
+    @invoice_3 = create(:invoice, customer: @customer_1)
+    @invoice_3.items << @item_3
+    @invoice_3 = create(:invoice, customer: @customer_1)
+    @invoice_3.items << @item_4
+    @invoice_4 = create(:invoice, customer: @customer_2)
+    @invoice_4.items << @item_5
+    @invoice_4 = create(:invoice, customer: @customer_2)
+    @invoice_4.items << @item_7
   end
 
 #   As a merchant,
@@ -34,8 +42,11 @@ RSpec.describe 'merchant invoice index' do
 
   describe '/merchants/merchant_id/invoices' do
     it 'shows all invoices that include at least one of my merchant items' do
-      visit merchant_invoices_path(@merchant_1)
-      save_and_open_page
+      visit merchant_invoices_path(@merchant_2)
+    
+      expect(page).to have_content(@invoice_2.id)
+      expect(page).to have_content(@invoice_3.id)
+      expect(page).to_not have_content(@invoice_1.id)
     end
   end
 end
