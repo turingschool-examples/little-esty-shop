@@ -1,18 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
-  describe 'relationships' do
-    it { should have_many :items }
-    it { should have_many(:invoice_items).through(:items) }
-    it { should have_many(:invoices).through(:invoice_items) }
-    it { should have_many(:customers).through(:invoices) }
-    it { should have_many(:transactions).through(:invoices) }
-  end
-
-  describe 'validations' do
-    it { should validate_presence_of :name }
-  end
-
+RSpec.describe "merchant dashboard" do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -71,9 +59,55 @@ RSpec.describe Merchant, type: :model do
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
 
-  describe '#top_five_customers'
-    it 'can return top 5 customers with most transactions' do
-        expect(@merchant_1.top_five_customers).to eq([@customer_2, @customer_1, @customer_3, @customer_4, @customer_7])
-        expect(@merchant_1.top_five_customers.length).to eq(5)
-      end
+  it 'will show the name of the merchant' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/dashboard")
+    expect(page).to have_content(@merchant_1.name)
+    expect(page).to_not have_content(@merchant_2.name)
+  end
+
+  it 'will have a link to the merchant item index' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    expect(page).to have_link("My Items")
+
+    click_link "My Items"
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items")
+  end
+
+  it 'will have a link to my merchant invoices index' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    expect(page).to have_link("My Invoices")
+
+    click_link "My Invoices"
+
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices")
+  end
+
+  it 'will list the top 5 customers for this merchant' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+    
+    within("#top_customers") do
+      expect(@customer_2.first_name).to appear_before(@customer_1.first_name)
+      expect(@customer_1.first_name).to appear_before(@customer_3.first_name)
+      expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
+      expect(@customer_4.first_name).to appear_before(@customer_7.first_name)
+      expect(@customer_7.first_name).to_not appear_before(@customer_2.first_name)
+      expect(page).to_not have_content(@customer_6.first_name) 
+    end
+  end
+
+  it 'has the number of successful transactions with the merchant next to each customer' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+    within('#top_customers') do
+      expect(page).to have_content("#{@customer_2.first_name} - Successful Transactions: 9")
+      expect(page).to have_content("#{@customer_1.first_name} - Successful Transactions: 4")
+      expect(page).to have_content("#{@customer_3.first_name} - Successful Transactions: 2")
+      expect(page).to have_content("#{@customer_4.first_name} - Successful Transactions: 1")
+      expect(page).to have_content("#{@customer_7.first_name} - Successful Transactions: 1")
+    end
+  end
 end
