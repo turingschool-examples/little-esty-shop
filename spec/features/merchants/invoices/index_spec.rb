@@ -28,7 +28,7 @@ RSpec.describe 'merchants invoices index page' do
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
   it 'lists all invoices with 1 or more of the merchants items' do
-    visit merchant_invoice_path(@merchant1)
+    visit merchant_invoices_path(@merchant1)
 
     expect(page).to have_content(@invoice1.id)
     expect(page).to have_content(@invoice2.id)
