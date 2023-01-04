@@ -11,20 +11,21 @@ RSpec.describe "merchant dashboard" do
     @customer_4 = Customer.create!(first_name: "Randy", last_name: "Pepperoni")
     @customer_5 = Customer.create!(first_name: "Mark", last_name: "Bologna")
     @customer_6 = Customer.create!(first_name: "Anthony", last_name: "Tall")
+    @customer_7 = Customer.create!(first_name: "Donald", last_name: "Duck")
 
     @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
     @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id)
     @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id)
     @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id)
     @invoice_5 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_7 = Invoice.create!(status: 1, customer_id: @customer_1.id)
-    @invoice_8 = Invoice.create!(status: 1, customer_id: @customer_2.id)
+    @invoice_6 = Invoice.create!(status: 1, customer_id: @customer_6.id)
+    @invoice_7 = Invoice.create!(status: 1, customer_id: @customer_7.id)
+    @invoice_8 = Invoice.create!(status: 1, customer_id: @customer_1.id)
     @invoice_9 = Invoice.create!(status: 1, customer_id: @customer_2.id)
-    @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_3.id)
-    @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_5.id)
-    @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_6.id)
-    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_6.id)
+    @invoice_10 = Invoice.create!(status: 1, customer_id: @customer_2.id)
+    @invoice_11 = Invoice.create!(status: 1, customer_id: @customer_3.id)
+    @invoice_12 = Invoice.create!(status: 1, customer_id: @customer_4.id)
+    @invoice_13 = Invoice.create!(status: 1, customer_id: @customer_5.id)
 
     @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
     @item_2 = Item.create!(name: "Pogs", description: "Old school", unit_price: 500, merchant_id: @merchant_2.id)
@@ -35,6 +36,13 @@ RSpec.describe "merchant dashboard" do
     InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_4.id)
     InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_5.id)
     InvoiceItem.create!(quantity: 5, unit_price: 2500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_6.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_7.id)
+    InvoiceItem.create!(quantity: 1, unit_price: 800, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_8.id)
+    InvoiceItem.create!(quantity: 2, unit_price: 1600, status: "pending", item_id: @item_1.id, invoice_id: @invoice_9.id)
+    InvoiceItem.create!(quantity: 10, unit_price: 8000, status: "shipped", item_id: @item_1.id, invoice_id: @invoice_10.id)
+    InvoiceItem.create!(quantity: 1, unit_price: 500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_11.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 2500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_12.id)
+    InvoiceItem.create!(quantity: 5, unit_price: 2500, status: "shipped", item_id: @item_2.id, invoice_id: @invoice_13.id)
     
     @transaction_1 = Transaction.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_1.id)
     @transaction_2 = Transaction.create!(credit_card_number: "4654405418249635", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_2.id)
@@ -46,7 +54,7 @@ RSpec.describe "merchant dashboard" do
     @transaction_8 = Transaction.create!(credit_card_number: "4653405418249635", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_8.id)
     @transaction_9 = Transaction.create!(credit_card_number: "4654405418249636", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_9.id)
     @transaction_10 = Transaction.create!(credit_card_number: "4654435418249637", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_10.id)
-    @transaction_11 = Transaction.create!(credit_card_number: "4654405418259638", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_11.id)
+    @transaction_11 = Transaction.create!(credit_card_number: "4654405418259638", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_11.id)
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
@@ -81,14 +89,25 @@ RSpec.describe "merchant dashboard" do
 
   it 'will list the top 5 customers for this merchant' do
     visit "/merchants/#{@merchant_1.id}/dashboard"
-
+    
     within("#top_customers") do
-      expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
-      expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
+      expect(@customer_2.first_name).to appear_before(@customer_1.first_name)
+      expect(@customer_1.first_name).to appear_before(@customer_3.first_name)
       expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
-      expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
-      expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
-      expect(page).to_not have_content(@customer_6.first_name)
+      expect(@customer_4.first_name).to appear_before(@customer_7.first_name)
+      expect(@customer_7.first_name).to_not appear_before(@customer_2.first_name)
+      expect(page).to_not have_content(@customer_6.first_name) 
+    end
+  end
+
+  it 'has the number of successful transactions with the merchant next to each customer' do
+    visit "/merchants/#{@merchant_1.id}/dashboard"
+    within('#top_customers') do
+      expect(page).to have_content("#{@customer_2.first_name} - Successful Transactions: 9")
+      expect(page).to have_content("#{@customer_1.first_name} - Successful Transactions: 4")
+      expect(page).to have_content("#{@customer_3.first_name} - Successful Transactions: 2")
+      expect(page).to have_content("#{@customer_4.first_name} - Successful Transactions: 1")
+      expect(page).to have_content("#{@customer_7.first_name} - Successful Transactions: 1")
     end
   end
 end
