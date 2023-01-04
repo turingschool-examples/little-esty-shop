@@ -25,16 +25,9 @@ RSpec.describe "The Merchant Dashboard" do
   end
 
   it 'has a list of items ready to ship' do
-    visit "/merchants/2/dashboard"
+    visit "/merchants/1/dashboard"
 
     expect(page).to have_content("Items Ready to Ship")
-    expect(page).to have_content("gibberish")
+    expect(page).to have_content("Item Qui Esse - Invoice #1 Item Ea Voluptatum - Invoice #1 Item Nemo Facere - Invoice #1 Item Provident At - Invoice #1 Item Quidem Suscipit - Invoice #2 Item Rerum Est - Invoice #3 Item Autem Minima - Invoice #38 Item Ea Voluptatum - Invoice #38 Item Et Cumque - Invoice #40 Item Voluptatem Sint - Invoice #40 Item Ea Voluptatum - Invoice #75 Item Nemo Facere - Invoice #75 Item Expedita Aliquam - Invoice #75 Item Expedita Fuga - Invoice #75 Item Quo Magnam - Invoice #75 Item Quidem Suscipit - Invoice #76")
   end
-  # As a merchant
-  # When I visit my merchant dashboard
-  # Then I see a section for "Items Ready to Ship"
-  # In that section I see a list of the names of all of my items that
-  # have been ordered and have not yet been shipped,
-  # And next to each Item I see the id of the invoice that ordered my item
-  # And each invoice id is a link to my merchant's invoice show page
 end
