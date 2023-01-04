@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant invoice index' do
+RSpec.describe 'merchant invoice show' do
   before(:each) do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
@@ -32,23 +32,26 @@ RSpec.describe 'merchant invoice index' do
     @invoice_4.items << @item_7
   end
 
-  describe '/merchants/merchant_id/invoices' do
-    it 'shows all invoices that include at least one of my merchant items and their id' do
-      visit merchant_invoices_path(@merchant_2)
+# As a merchant
+# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+
+# Invoice id
+# Invoice status
+# Invoice created_at date in the format "Monday, July 18, 2019"
+# Customer first and last name
+
+  describe '/merchants/merchant_id/invoices/invoice_id' do
+    it 'shows all information related to that invoice including invoice id, invoice status, invoice creation date, customer name' do
+      visit merchant_invoice_path(@invoice_2)
+      save_and_open_page
 
       expect(page).to have_content(@invoice_2.id)
-      expect(page).to have_content(@invoice_3.id)
+      expect(page).to have_content(@invoice_2.status)
+      expect(page).to have_content(@invoice_2.created_at.to_formatted_s(:admin_invoice_date))
+      expect(page).to have_content(@invoice_2.customer.first_name)
+      expect(page).to have_content(@invoice_2.customer.last_name)
       expect(page).to_not have_content(@invoice_1.id)
-    end
 
-    it 'shows ids that link to the merchant invoice show page' do
-      visit merchant_invoices_path(@merchant_2)
-      
-      expect(page).to have_link("Invoice #{@invoice_2.id}")
-      click_link "Invoice #{@invoice_2.id}"
-      expect(page).to have_current_path("/merchants/#{@merchant_2.id}/invoices/#{@invoice_2.id}") 
-      expect(page).to have_content("Invoice #{@invoice_2.id}")
-      expect(page).to_not have_content("Invoice #{@invoice_3.id}")
     end
   end
 end
