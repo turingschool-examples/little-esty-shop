@@ -287,6 +287,33 @@
           null
         ]
       },
+      "/Users/christian/turing/2mod/little-esty-shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/christian/turing/2mod/little-esty-shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/christian/turing/2mod/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
@@ -309,13 +336,6 @@
           null
         ]
       },
-      "/Users/christian/turing/2mod/little-esty-shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
       "/Users/christian/turing/2mod/little-esty-shop/app/models/customer.rb": {
         "lines": [
           1,
@@ -326,28 +346,13 @@
           1,
           null,
           1,
-          1,
+          0,
           null,
           null,
           null,
           null,
           null,
           null,
-          null
-        ]
-      },
-      "/Users/christian/turing/2mod/little-esty-shop/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
           null
         ]
       },
@@ -383,23 +388,8 @@
           1,
           null
         ]
-      },
-      "/Users/christian/turing/2mod/little-esty-shop/app/controllers/admin_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/christian/turing/2mod/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1672871125
+    "timestamp": 1672872129
   }
 }
