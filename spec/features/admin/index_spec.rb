@@ -142,9 +142,24 @@ RSpec.describe "Admin Dashboard(Index)" do
           expect("Joey").to_not appear_before("Heber")
           expect(page).to_not have_content("Leanna")
         end
-        
-        save_and_open_page
-        # binding.pry
+      end
+
+      # Heber Kuhn - 6 purchases
+      # Cecelia Osinski - 5 purchases
+      # Mariah Toy - 4 purchases
+      # Sylvester Nader - 3 purchases
+      # Joey Ondricka - 2 purchases
+
+      it 'displays the number of successful transactions for each of the top 5 customers' do 
+        visit '/admin'
+
+        within('#top_customers') do 
+          expect(page).to have_content('Heber Kuhn - 6 purchases')
+          expect(page).to have_content('Cecelia Osinski - 5 purchases')
+          expect(page).to have_content('Mariah Toy - 4 purchases')
+          expect(page).to have_content('Sylvester Nader - 3 purchases')
+          expect(page).to have_content('Joey Ondricka - 2 purchases')
+        end
       end
     end
   end
