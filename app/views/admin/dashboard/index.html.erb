@@ -10,6 +10,6 @@
 </div>
 <div id='incomplete_invoices'>
   <% @incomplete_invoices.each do |invoice| %>
-    Invoice #<%= invoice.id %> - <%= invoice.updated_at.strftime('%A, %B %-d, %Y') %><br>
+    <%= link_to "Invoice ##{invoice.id}", "admin/invoices/#{invoice.id}" %> - <%= invoice.updated_at.strftime('%A, %B %-d, %Y') %><br>
   <% end %>
 </div>
