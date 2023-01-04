@@ -1,14 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Merchant, type: :model do
-  describe 'relationships' do
-    it {should have_many(:items)}
-    it {should have_many(:invoice_items).through(:items)}
-  end
-
-  describe 'validations' do
-    it {should validate_presence_of(:name)}
-  end
+RSpec.describe 'merchant invoice index' do
   before(:each) do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
@@ -40,9 +32,25 @@ RSpec.describe Merchant, type: :model do
     @invoice_4.items << @item_7
   end
 
-  describe 'merchant invoices' do
-    it 'returns merchant invoice ids' do
-      expect(@merchant_2.all_invoice_ids).to eq([@invoice_2.id, @invoice_3.id, @invoice_4.id])
+# And each id links to the merchant invoice show page
+
+  describe '/merchants/merchant_id/invoices' do
+    it 'shows all invoices that include at least one of my merchant items and their id' do
+      visit merchant_invoices_path(@merchant_2)
+
+      expect(page).to have_content(@invoice_2.id)
+      expect(page).to have_content(@invoice_3.id)
+      expect(page).to_not have_content(@invoice_1.id)
+    end
+
+    it 'shows ids that link to the merchant invoice show page' do
+      visit merchant_invoices_path(@merchant_2)
+      
+      expect(page).to have_link("Invoice #{@invoice_2.id}")
+      click_link "Invoice #{@invoice_2.id}"
+      expect(page).to have_current_path("/merchants/#{@merchant_2.id}/invoices/#{@invoice_2.id}") 
+      expect(page).to have_content("Invoice #{@invoice_2.id}")
+      expect(page).to_not have_content("Invoice #{@invoice_3.id}")
     end
   end
 end

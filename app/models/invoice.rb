@@ -2,7 +2,9 @@ class Invoice < ApplicationRecord
   belongs_to :customer 
   has_many :transactions
   has_many :invoice_items
-  
+
+  has_many :items, through: :invoice_items
+
   validates_presence_of :status
 
   enum status: {cancelled: 0,
@@ -18,5 +20,10 @@ class Invoice < ApplicationRecord
     .where.not(invoice_items: {status: "shipped"})
     .pluck(:id)
   end
-
 end
+
+  def invoice_item(item)
+    self.invoice_items.find_by(item_id: item)
+  end
+end
+

@@ -40,7 +40,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
-
   gem 'simplecov'
   gem 'capybara'
   gem 'shoulda-matchers'
@@ -49,6 +48,7 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'pry-rails' #returns data in organized and color coded
+  gem 'launchy'
 end
 
 group :development do
