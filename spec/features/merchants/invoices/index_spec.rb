@@ -41,12 +41,20 @@ RSpec.describe 'merchant invoice index' do
 # And each id links to the merchant invoice show page
 
   describe '/merchants/merchant_id/invoices' do
-    it 'shows all invoices that include at least one of my merchant items' do
+    it 'shows all invoices that include at least one of my merchant items and their id' do
       visit merchant_invoices_path(@merchant_2)
     
       expect(page).to have_content(@invoice_2.id)
       expect(page).to have_content(@invoice_3.id)
       expect(page).to_not have_content(@invoice_1.id)
+    end
+
+    xit 'shows ids that link to the merchant invoice show page' do
+      visit merchant_invoices_path(@merchant_2)
+
+      expect(page).to have_link("#{@invoice_2.id}")
+      click_link "#{@invoice_2.id}"
+      expect(page).to have_current_path("/merchant/#{@merchant_2}/invoices/#{@invoice_2.id}") 
     end
   end
 end
