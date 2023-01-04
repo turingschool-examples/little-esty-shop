@@ -135,7 +135,7 @@ Merchant.delete_all
 @invoice_item22 = InvoiceItem.create!(item_id: @item22.id, invoice_id: @invoice22.id, quantity: 10, unit_price: @item1.unit_price, status: "shipped")
 @invoice_item23 = InvoiceItem.create!(item_id: @item23.id, invoice_id: @invoice23.id, quantity: 5, unit_price: @item1.unit_price, status: "shipped")
 
-@transaction1 = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "success")
+@transaction1 = Transaction.create!(invoice_id: @invoice1.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
 @transaction2 = Transaction.create!(invoice_id: @invoice2.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
 @transaction3 = Transaction.create!(invoice_id: @invoice3.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
 @transaction4 = Transaction.create!(invoice_id: @invoice4.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
@@ -161,5 +161,5 @@ Merchant.delete_all
 @transaction24 = Transaction.create!(invoice_id: @invoice24.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "success")
 @transaction25 = Transaction.create!(invoice_id: @invoice25.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
 @transaction26 = Transaction.create!(invoice_id: @invoice26.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
-@transaction27 = Transaction.create!(invoice_id: @invoice27.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "success")
+@transaction27 = Transaction.create!(invoice_id: @invoice27.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")
 @transaction28 = Transaction.create!(invoice_id: @invoice28.id, credit_card_number: 4654405418249632, credit_card_expiration_date: "", result: "failed")

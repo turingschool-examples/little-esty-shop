@@ -34,6 +34,13 @@ RSpec.describe 'admin dashboard' do
       expect("4. #{Customer.fourth.first_name} #{Customer.fourth.last_name}").to appear_before("5. #{Customer.last.first_name} #{Customer.last.last_name}")
     end
 
+    within "#top_5_customers" do
+      expect(page).to have_content("1. #{Customer.third.first_name} #{Customer.third.last_name} Successful Transactions: 5")
+      expect(page).to have_content("2. #{Customer.fifth.first_name} #{Customer.fifth.last_name} Successful Transactions: 4")
+      expect(page).to have_content("3. #{Customer.second.first_name} #{Customer.second.last_name} Successful Transactions: 3")
+      expect(page).to have_content("4. #{Customer.fourth.first_name} #{Customer.fourth.last_name} Successful Transactions: 2")
+      expect(page).to have_content("5. #{Customer.last.first_name} #{Customer.last.last_name} Successful Transactions: 1")
+    end
 
 
   end
