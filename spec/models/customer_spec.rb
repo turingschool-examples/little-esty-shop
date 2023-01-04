@@ -14,6 +14,5 @@ RSpec.describe Customer do
 
   it 'Counts the number of successful transactions' do
     expect(Customer.find(12).transactions_count).to eq(9)
-
   end
 end
