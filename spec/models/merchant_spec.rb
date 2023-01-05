@@ -7,7 +7,7 @@ RSpec.describe Merchant do
   end
 
   describe 'instance methods' do
-    it '#packaged_items' do
+    it '#pending_invoices' do
       merchant = Merchant.create!(name: 'Rays Hand Made Jewlery')
       item1 = Item.create!(name: 'Chips', description: 'Ring', unit_price: 20, merchant_id: merchant.id)
       item2 = Item.create!(name: 'darrel', description: 'Bracelet', unit_price: 40, merchant_id: merchant.id)
@@ -21,7 +21,7 @@ RSpec.describe Merchant do
                                  invoice_id: invoice.id)
       ii3 = InvoiceItem.create!(quantity: 5, unit_price: item3.unit_price, item_id: item3.id,
                                  invoice_id: invoice.id)
-      expect(merchant.pending_invoices.first.id).to eq(invoice.id)
+      expect(merchant.pending_invoices).to eq([invoice])
     end
   end
 end
