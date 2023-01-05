@@ -13,4 +13,4 @@
   <p>Unit Price: $<%= @invoice.invoice_item(item).unit_price.to_f.round(2) %></p>
   <p>Status: <%= @invoice.invoice_item(item).status %></p>
 <% end %>
-<p>Total Revenue: $<%= @invoice.total_revenue.to_f.round(2) %></p>
+<p>Total Revenue: $<%= @invoice.total_revenue.to_f.round(2)%></p>

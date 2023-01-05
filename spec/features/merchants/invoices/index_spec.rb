@@ -30,6 +30,8 @@ RSpec.describe 'merchant invoice index' do
     @invoice_4 = create(:invoice, customer: @customer_2)
     @invoice_4.items << @item_5
     @invoice_4.items << @item_7
+
+    @invoice_item_1 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
   end
 
   describe '/merchants/merchant_id/invoices' do
@@ -42,6 +44,7 @@ RSpec.describe 'merchant invoice index' do
     end
 
     it 'shows ids that link to the merchant invoice show page' do
+
       visit merchant_invoices_path(@merchant_2)
       
       expect(page).to have_link("Invoice #{@invoice_2.id}")
