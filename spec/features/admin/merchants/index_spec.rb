@@ -78,13 +78,20 @@ RSpec.describe 'Admin Merchants index' do
   it 'Shows the top 5 merchants by revenue' do
     visit admin_merchants_path
 
-    save_and_open_page
-
     within("#top_by_revenue") do
       expect('Osinski, Pollich and Koelpin').to appear_before('Klein, Rempel and Jones')
       expect('Klein, Rempel and Jones').to appear_before('Bernhard-Johns')
       expect('Bernhard-Johns').to appear_before('Willms and Sons')
       expect('Willms and Sons').to appear_before('Cummings-Thiel')
+    end
+  end
+
+  it 'Shows the revenue for each of the top 5 merchants' do
+    visit admin_merchants_path
+
+    within('#top_by_revenue') do
+      expect(page).to have_content('Osinski, Pollich and Koelpin - $18,159,238.96')
+      expect(page).to have_content('Cummings-Thiel - $1,909,594.32')
     end
   end
 end

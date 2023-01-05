@@ -30,7 +30,7 @@
 <h5>Top Merchants:</h5>
 <ol>
 <% Merchant.top_5_by_revenue.each do |merchant| %>
-  <li><%= merchant.name %></li>
+  <li><%= merchant.name %> - <%= number_to_currency(merchant.total_revenue/100.0) %></li>
 <% end %>
 </ol>
 </div>

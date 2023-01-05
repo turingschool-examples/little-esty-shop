@@ -34,13 +34,12 @@ RSpec.configure do |config|
   end
 
   config.before :suite do
-
-      Merchant.destroy_all
-      Item.destroy_all
-      Customer.destroy_all
-      Invoice.destroy_all
-      InvoiceItem.destroy_all
-      Transaction.destroy_all
+    Merchant.destroy_all
+    Item.destroy_all
+    Customer.destroy_all
+    Invoice.destroy_all
+    InvoiceItem.destroy_all
+    Transaction.destroy_all
     CSV.foreach('./spec/data/merchants_test.csv', headers: true) do |row|
       Merchant.create!(row.to_h)
     end
