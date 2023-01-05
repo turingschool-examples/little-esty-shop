@@ -176,7 +176,6 @@ RSpec.describe "Admin Dashboard(Index)" do
         visit '/admin'
 
         within('#incomplete_invoices') do
-          save_and_open_page
           expect(page).to have_link("Invoice ##{@invoice_2.id}", :href => "/admin/invoices/#{@invoice_2.id}")
           expect(page).to have_link("Invoice ##{@invoice_3.id}", :href => "/admin/invoices/#{@invoice_3.id}")
         end
