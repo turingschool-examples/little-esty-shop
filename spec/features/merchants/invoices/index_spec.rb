@@ -23,13 +23,13 @@ RSpec.describe 'merchant invoice index' do
     @invoice_1 = create(:invoice, customer: @customer_1)
     @invoice_1.items << @item_1
     @invoice_2 = create(:invoice, customer: @customer_1)
-    @invoice_2.items << @item_2
     @invoice_3 = create(:invoice, customer: @customer_1)
     @invoice_3.items << @item_3
     @invoice_3.items << @item_4
     @invoice_4 = create(:invoice, customer: @customer_2)
     @invoice_4.items << @item_5
     @invoice_4.items << @item_7
+    @invoice_item_1 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
   end
 
   describe '/merchants/merchant_id/invoices' do
