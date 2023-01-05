@@ -7,5 +7,9 @@ module Admin
     def show
       @merchant = Merchant.find(params[:id])
     end
+
+    def edit 
+      
+    end
   end
 end

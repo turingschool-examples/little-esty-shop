@@ -107,12 +107,14 @@ RSpec.describe "Admin/Merchant/show" do
     describe 'user story 26' do 
       it 'displays a link to update the merchant information' do 
         visit "/admin/merchants/#{@merchant_1.id}"
-
         expect(page).to have_link("Update Merchant", :href => "/admin/merchants/#{@merchant_1.id}/edit")
-
       end
 
-      
+      it 'redirects user to the merchant edit page' do 
+        visit "/admin/merchants/#{@merchant_1.id}"
+        click_link "Update Merchant"
+        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
+      end
     end
   end
 end
