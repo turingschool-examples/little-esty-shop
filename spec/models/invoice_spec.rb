@@ -42,19 +42,19 @@ RSpec.describe Invoice, type: :model do
       @invoice_2 = @customer_1.invoices.create!(status: 'in progress')
 
       @invoice_3 = @customer_2.invoices.create!(status: 'in progress')
-      @invoice_4 = @customer_2.invoices.create!(status: 'in progress')
+      @invoice_4 = @customer_2.invoices.create!(status: 'completed')
 
       @invoice_5 = @customer_3.invoices.create!(status: 'cancelled')
-      @invoice_6 = @customer_3.invoices.create!(status: 'in progress')
+      @invoice_6 = @customer_3.invoices.create!(status: 'completed')
 
-      @invoice_7 = @customer_4.invoices.create!(status: 'in progress')
+      @invoice_7 = @customer_4.invoices.create!(status: 'completed')
       @invoice_8 = @customer_4.invoices.create!(status: 'cancelled')
 
       @invoice_9 = @customer_5.invoices.create!(status: 'completed')
       @invoice_10 = @customer_5.invoices.create!(status: 'completed')
 
-      @invoice_11 = @customer_6.invoices.create!(status: 'in progress')
-      @invoice_12 = @customer_6.invoices.create!(status: 'in progress')
+      @invoice_11 = @customer_6.invoices.create!(status: 'completed')
+      @invoice_12 = @customer_6.invoices.create!(status: 'completed')
   
       #do i have to calculate the actual unit_price?
       InvoiceItem.create!(invoice_id: @invoice_1.id,  item_id: @item_1.id, quantity: 5, unit_price: 13635, status: 'shipped')
