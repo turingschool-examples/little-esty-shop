@@ -1,4 +1,7 @@
-<h2><%= @merchant.name %> Items </h2>
+<h2><%= @merchant.name %></h2>
+<h3>My Items</h3>
+
+<%= link_to("New Item", new_merchant_item_path(@merchant))%>
 
 <div id="enabled">
 <h3>Enabled Items</h3>
@@ -23,7 +26,3 @@
   <% end %>
   </ul>
 </div>
-
-  
-
-

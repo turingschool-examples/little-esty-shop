@@ -16,6 +16,16 @@ module Merchants
       @item = Item.find(params[:id])
     end
 
+    def new
+      @merchant = Merchant.find(params[:merchant_id])
+    end
+
+    def create
+      merchant = Merchant.find(params[:merchant_id])
+      merchant.items.create(item_params)
+      redirect_to merchant_items_path(merchant)
+    end
+
     def update
       merchant = Merchant.find(params[:merchant_id])
       item = Item.find(params[:id])

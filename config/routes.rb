@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [] do
     scope module: "merchants" do
-      resources :items, only: [:index, :show, :edit, :update]
+      resources :items, except: :destroy
     end
   end
 
