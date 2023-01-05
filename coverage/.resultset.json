@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/environment.rb": {
+      "/Users/christian/turing/2mod/little-esty-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/application.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -33,7 +33,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/boot.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -41,7 +41,7 @@
           1
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/environments/test.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -91,7 +91,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -103,7 +103,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/assets.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -121,7 +121,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -132,7 +132,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/content_security_policy.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -161,7 +161,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -170,7 +170,7 @@
           1
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -178,7 +178,7 @@
           1
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/inflections.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -198,7 +198,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/mime_types.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -206,7 +206,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/new_framework_defaults_5_2.rb": {
         "lines": [
           null,
           null,
@@ -248,7 +248,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -266,7 +266,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/config/routes.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -275,212 +275,31 @@
           1,
           null,
           null,
-          1,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/helpers/application_helper.rb": {
-        "lines": [
           1,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/features/invoices/show_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/features/merchants/show_spec.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/helpers/application_helper.rb": {
         "lines": [
           1,
-          null,
-          1,
-          1,
-          7,
-          7,
-          null,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          null,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          null,
-          7,
-          7,
-          null,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          null,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/models/customer_spec.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/spec/models/customer_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          2,
-          2,
-          2,
-          2,
+          1,
           null,
           null,
           1,
-          2,
-          2,
-          null,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/customer.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/customer.rb": {
         "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
           1,
           null,
           1,
@@ -494,47 +313,41 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/application_record.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/spec/models/invoice_item_spec.rb": {
         "lines": [
           1,
           null,
           1,
-          1,
-          2,
-          2,
-          null,
           null,
           1,
-          2,
-          2,
-          2,
-          2,
-          2,
+          0,
+          null,
+          null,
+          null,
           null,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/invoice_item.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/invoice_item.rb": {
         "lines": [
           1,
           1,
           1,
           null,
-          1,
           null,
-          1,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/models/invoice_spec.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/spec/models/invoice_spec.rb": {
         "lines": [
+          1,
           1,
           null,
           1,
@@ -553,7 +366,7 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/invoice.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/invoice.rb": {
         "lines": [
           1,
           1,
@@ -563,33 +376,24 @@
           1,
           null,
           1,
+          5,
+          null,
           null,
           1,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/models/item_spec.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/spec/models/item_spec.rb": {
         "lines": [
           1,
           null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
           null,
           null,
-          1,
-          2,
-          2,
-          2,
-          2,
           null,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/item.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/item.rb": {
         "lines": [
           1,
           1,
@@ -601,193 +405,149 @@
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/models/merchant_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          8,
-          8,
-          null,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          null,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          null,
-          8,
-          8,
-          null,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          null,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          8,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          9,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          8,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/models/transaction_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/models/transaction.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/admin_controller.rb": {
-        "lines": [
-          1,
-          1,
-          6,
-          null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/spec/models/merchant_spec.rb": {
         "lines": [
           1,
           null,
           1,
           null,
+          1,
+          null,
+          1,
+          7,
+          7,
+          null,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          null,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          null,
+          7,
+          7,
+          null,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          null,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
           7,
           null,
           null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/items_controller.rb": {
-        "lines": [
           1,
-          null,
+          1,
           1,
           1,
           null,
           null
         ]
       },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/invoices_controller.rb": {
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/merchant.rb": {
         "lines": [
           1,
-          null,
+          1,
+          1,
           1,
           1,
           null,
+          1,
+          10,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/controllers/merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          4,
+          4,
+          null,
+          null
+        ]
+      },
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/controllers/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/alastair/Documents/turing/m2/projects/little-esty-shop/app/controllers/invoices_controller.rb": {
+        "lines": [
+          1,
           null,
           1,
           1,
@@ -796,6 +556,6 @@
         ]
       }
     },
-    "timestamp": 1672878689
+    "timestamp": 1672844486
   }
 }
