@@ -12,7 +12,7 @@ RSpec.describe Invoice, type: :model do
     @customer_5 = Customer.create!(first_name: "Mark", last_name: "Bologna")
     @customer_6 = Customer.create!(first_name: "Anthony", last_name: "Tall")
 
-    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
+    @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: Time.now - 3.days)
     @invoice_2 = Invoice.create!(status: 1, customer_id: @customer_2.id)
     @invoice_3 = Invoice.create!(status: 1, customer_id: @customer_3.id)
     @invoice_4 = Invoice.create!(status: 1, customer_id: @customer_4.id)
@@ -66,9 +66,13 @@ RSpec.describe Invoice, type: :model do
 
   describe 'class methods' do
     describe '#incomplete_invoices' do
-      it 'returns a list of the ids of all invoices of items that have not been shipped' do
-        expect(Invoice.incomplete_invoices).to eq([@invoice_1, @invoice_3])
-        expect(Invoice.incomplete_invoices.length).to eq(2)
+      it 'returns a list of the ids of all invoices of items that have not been shipped ordered by the created_at date' do
+        invoice_14 = Invoice.create!(status: 1, customer_id: @customer_1.id, created_at: Time.now - 4.days)
+        InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: invoice_14.id)
+        transaction_14 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: invoice_14.id)
+
+        expect(Invoice.incomplete_invoices).to eq([invoice_14, @invoice_1, @invoice_3])
+        expect(Invoice.incomplete_invoices.length).to eq(3)
       end
     end
   end
