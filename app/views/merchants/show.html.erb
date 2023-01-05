@@ -9,7 +9,7 @@
 
 <p><% @merchant.customers.merchant_top_customers.each do |customer| %></p>
 <div id="customer_<%= customer.id %>">
-  <p><%= customer.first_name %>
-  <%= customer.last_name %></p>
+  <p><%= customer.first_name %> <%= customer.last_name %> -
+  <%= customer.successful_transaction_count %> purchases </p>
 </div>
 <% end %>

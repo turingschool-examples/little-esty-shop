@@ -12,4 +12,9 @@ class Customer < ApplicationRecord
       .order(num_transactions: :desc)
       .limit(5)
   end
+
+  def successful_transaction_count
+    transactions.where(result: :success).count
+    # require 'pry'; binding.pry
+  end
 end

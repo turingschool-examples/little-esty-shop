@@ -156,6 +156,33 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to_not have_content(@customer_1.last_name)
     end
 
-    it 'displays the number of successful transactions of each customer'
+    it 'displays the number of successful transactions of each customer' do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      within("#customer_#{@customer_2.id}") do
+        expect(page).to have_content(@customer_2.first_name)
+        expect(page).to have_content("3 purchases")
+      end
+
+      within("#customer_#{@customer_3.id}") do
+        expect(page).to have_content(@customer_3.first_name)
+        expect(page).to have_content(@customer_3.last_name)
+      end
+
+      within("#customer_#{@customer_4.id}") do
+        expect(page).to have_content(@customer_4.first_name)
+        expect(page).to have_content(@customer_4.last_name)
+      end
+
+      within("#customer_#{@customer_5.id}") do
+        expect(page).to have_content(@customer_5.first_name)
+        expect(page).to have_content(@customer_5.last_name)
+      end
+
+      within("#customer_#{@customer_6.id}") do
+        expect(page).to have_content(@customer_6.first_name)
+        expect(page).to have_content(@customer_6.last_name)
+      end
+    end
   end
 end
