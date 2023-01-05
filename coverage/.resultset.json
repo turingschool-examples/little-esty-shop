@@ -287,6 +287,78 @@
           null
         ]
       },
+      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/features/items/index_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/spec/features/merchants/show_spec.rb": {
         "lines": [
           1,
@@ -739,6 +811,16 @@
           null
         ]
       },
+      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/items_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
       "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/merchants_controller.rb": {
         "lines": [
           1,
@@ -747,16 +829,6 @@
           null,
           6,
           6,
-          null,
-          null
-        ]
-      },
-      "/Users/anthonytallent/mod_2/class_projects/little-esty-shop/app/controllers/items_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
           null,
           null
         ]
@@ -772,6 +844,6 @@
         ]
       }
     },
-    "timestamp": 1672871559
+    "timestamp": 1672900980
   }
 }
