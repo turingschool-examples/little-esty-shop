@@ -14,7 +14,7 @@ class Customer < ApplicationRecord
   end
 
   def successful_transaction_count
-    transactions.where(result: :success).count
     # require 'pry'; binding.pry
+    transactions.where(result: :success).count
   end
 end

@@ -78,8 +78,8 @@ RSpec.describe Customer, type: :model do
       @transaction_3 = @invoice_3.transactions.create!(credit_card_number: '4354495077693036', credit_card_expiration_date: '09/22/20', result: 'success')
       @transaction_4 = @invoice_4.transactions.create!(credit_card_number: '4515551623735607', credit_card_expiration_date: '08/22/20', result: 'success')
       @transaction_5 = @invoice_5.transactions.create!(credit_card_number: '4844518708741275', credit_card_expiration_date: '10/22/20', result: 'failed')
-      @transaction_6 = @invoice_6.transactions.create!(credit_card_number: '4203696133194408', credit_card_expiration_date: '02/22/20', result: 'sucesss')
-      @transaction_7 = @invoice_7.transactions.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: '01/22/20', result: 'sucess')
+      @transaction_6 = @invoice_6.transactions.create!(credit_card_number: '4203696133194408', credit_card_expiration_date: '02/22/20', result: 'success')
+      @transaction_7 = @invoice_7.transactions.create!(credit_card_number: '4801647818676136', credit_card_expiration_date: '01/22/20', result: 'success')
       @transaction_8 = @invoice_8.transactions.create!(credit_card_number: '4540842003561938', credit_card_expiration_date: '09/22/20', result: 'failed')
       @transaction_9 = @invoice_9.transactions.create!(credit_card_number: '4140149827486249', credit_card_expiration_date: '10/22/20', result: 'success')
       @transaction_10 = @invoice_10.transactions.create!(credit_card_number: '4923661117104166', credit_card_expiration_date: '08/22/20', result: 'success')
@@ -105,13 +105,13 @@ RSpec.describe Customer, type: :model do
     describe 'instance methods' do
       describe '#top_transaction_count' do
         it 'displays the transaction count of the top 5 customers' do
+          expect(@customer_3.successful_transaction_count).to eq(6)
           expect(@customer_2.successful_transaction_count).to eq(3)
           expect(@customer_2.successful_transaction_count).to_not eq(4)
           expect(@customer_4.successful_transaction_count).to eq(5)
           expect(@customer_5.successful_transaction_count).to eq(2)
           expect(@customer_6.successful_transaction_count).to eq(1)
           expect(@customer_1.successful_transaction_count).to_not eq(2)
-          # expect(@customer_3.successful_transaction_count).to eq(6)
         end
       end
     end
