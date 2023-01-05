@@ -24,6 +24,7 @@ RSpec.describe 'merchants items index' do
       click_button "Disable"
     end
 
+    item = Item.find(10)
     expect(current_path).to eq(merchant_items_path(1))
 
     within "div#item-#{item.id}" do
@@ -31,7 +32,7 @@ RSpec.describe 'merchants items index' do
       click_button "Enable"
     end
 
-
+    item = Item.find(10)
     expect(current_path).to eq(merchant_items_path(1))
 
     within "div#item-#{item.id}" do
