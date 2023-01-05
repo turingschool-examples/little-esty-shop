@@ -12,6 +12,10 @@ module Admin
       @merchant = current_merchant
     end
 
+    def update 
+      redirect_to "/admin/merchants/#{current_merchant.id}"
+    end
+
     def current_merchant 
       Merchant.find(params[:id])
     end
