@@ -1,0 +1,11 @@
+<%= form_with url: "merchant/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, :value => @item.name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, :value => @item.name %>
+
+  <%= f.label :unit_price %>
+  <%= f.text_field :name, :value => @item.name%>
+<% end %>
