@@ -16,4 +16,12 @@ class Merchant < ApplicationRecord
   def ready_to_ship_items
     items.select("items.*, invoice_id, status").joins(:invoice_items).where("invoice_items.status = ?", "1")
   end
+
+  def self.group_by_enabled
+    Merchant.where(enabled: true) 
+  end
+
+  def self.group_by_not_enabled
+    Merchant.where(enabled: false)
+  end
 end

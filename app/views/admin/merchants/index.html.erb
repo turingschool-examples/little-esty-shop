@@ -2,14 +2,26 @@
 <%= render partial: 'admin/shared/nav' %>
 <%= button_to 'Create a new merchant', new_admin_merchant_path, method: :get %>
 
+<h5>Enabled Merchants: </h5>
+<div id='enabled_merchants'>
 <% @merchants.each do |merchant| %>
-  <div id="merchant_<%= merchant.id %>">
-  <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
-
-  <% if merchant.enabled? %>
-    <%= button_to 'Disable', admin_merchant_path(merchant.id), method: :patch, params: { enabled: false } %>
-  <% else %>
-    <%= button_to 'Enable', admin_merchant_path(merchant.id), method: :patch, params: { enabled: true } %></p>
+  <% if merchant.enabled %>
+    <div id="merchant_<%= merchant.id %>">
+    <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+    <%= button_to 'Disable', admin_merchant_path(merchant.id), method: :patch, params: { enabled: false } %></p>
+    </div>
   <% end %>
-  </div>
 <% end %>
+</div>
+
+<h5>Disabled Merchants: </h5>
+<div id='disabled_merchants'>
+<% @merchants.each do |merchant| %>
+  <% unless merchant.enabled %>
+    <div id="merchant_<%= merchant.id %>">
+    <p><%= link_to "#{merchant.name}", admin_merchant_path(merchant.id) %>
+    <%= button_to 'Enable', admin_merchant_path(merchant.id), method: :patch, params: { enabled: true } %></p>
+    </div>
+  <% end %>
+<% end %>
+</div>

@@ -42,4 +42,36 @@ RSpec.describe 'Admin Merchants index' do
     click_button('Create a new merchant')
     expect(current_path).to eq(new_admin_merchant_path)
   end
+  
+  it 'Displays merchants by enabled true/false' do
+    visit admin_merchants_path
+
+    within "#enabled_merchants" do
+      expect(page).to have_content(Merchant.first.name)
+    end
+    
+    within "#disabled_merchants" do
+      expect(page).to_not have_content(Merchant.first.name)
+    end
+
+    within "#merchant_#{Merchant.first.id}" do
+      click_button 'Disable'
+    end
+    
+    within "#disabled_merchants" do
+      expect(page).to have_content(Merchant.first.name)
+    end
+
+    within "#enabled_merchants" do
+      expect(page).to_not have_content(Merchant.first.name)
+    end
+    
+    within "#merchant_#{Merchant.first.id}" do
+      click_button 'Enable'
+    end
+
+    within "#enabled_merchants" do
+      expect(page).to have_content(Merchant.first.name)
+    end
+  end
 end

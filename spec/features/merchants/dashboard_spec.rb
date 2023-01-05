@@ -20,7 +20,7 @@ RSpec.describe "The Merchant Dashboard" do
 
   it 'contains a list of the top five customers based on successful transactions' do
     visit "/merchants/2/dashboard"
-    # save_and_open_page
+
     expect(page).to have_content("Favorite Customers\nIlene Pfannerstill - 9 Purchases Ramona Reynolds - 8 Purchases Joey Ondricka - 7 Purchases Mariah Toy - 3 Purchases Logan Kris - 3 Purchases")
   end
 
