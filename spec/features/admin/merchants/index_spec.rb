@@ -94,4 +94,12 @@ RSpec.describe 'Admin Merchants index' do
       expect(page).to have_content('Cummings-Thiel - $1,909,594.32')
     end
   end
+
+  it 'Shows each top 5 merchants best day' do
+    visit admin_merchants_path
+
+    within('#top_by_revenue') do
+      expect(page).to have_content('The top selling date for Osinski, Pollich and Koelpin was 3/13/2012')
+    end
+  end
 end
