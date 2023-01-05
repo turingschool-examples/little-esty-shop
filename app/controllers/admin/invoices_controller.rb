@@ -7,4 +7,8 @@ class Admin::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
   end
 
+  def update
+    @invoice = Invoice.find(params[:id])
+    binding.pry
+  end
 end
