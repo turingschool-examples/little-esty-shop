@@ -8,6 +8,7 @@ RSpec.describe 'merchants items index' do
     expect(page).to have_content(merchant.name)
     merchant.items.each do |item|
       expect(page).to have_content(item.name)
+      expect(page).to have_link(item.name, href: "/merchants/1/items/#{item.id}")
     end
     (16..174).to_a.each do |num|
       expect(page).to_not have_content(Item.find(num).name)

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # get '/merchants/:id/items', to: 'merchants_items#index'
   resources :merchants, only: [] do
     scope module: "merchants" do
-      resources :items, only: :index
+      resources :items, only: [:index, :show]
     end
   end
 
