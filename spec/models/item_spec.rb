@@ -83,8 +83,8 @@ RSpec.describe Item, type: :model do
     describe '#unshipped_items' do
       it 'returns a collection of unshipped items' do 
         # require 'pry'; binding.pry
-        expect(Item.unshipped_items.sort).to eq([@item_2.name, @item_3.name, @item_1.name])
-        expect(Item.unshipped_items).to_not eq([@item_4.name])
+        expect(Item.unshipped_items.sort).to eq([@item_1, @item_2, @item_3])
+        expect(Item.unshipped_items).to_not eq([@item_4])
       end
     end
   end

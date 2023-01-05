@@ -16,7 +16,7 @@ d<h1><center>Little Esty Shop</h1></center>
 
 <h3><strong>Items Ready to Ship</strong></h3>
 
-<p><%= @merchant.unshipped_items.each do |item| %></p>
+<p><%= @merchant.items.unshipped_items.each do |item| %></p>
 <div id="unshipped_item_<%= item.id %>">
   <p><%= item.name %></p>
 </div>

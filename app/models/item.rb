@@ -6,9 +6,9 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices, dependent: :destroy
 
   def self.unshipped_items
-  #  require 'pry'; binding.pry
+    Item.joins(:invoice_items).where('invoice_items.status!=2').group(:id)
+      #  require 'pry'; binding.pry
       # invoice_items.where.not(status: :shipped)
-  
-      Item.joins(:invoice_items).where('invoice_items.status!=2').distinct.pluck(:name)
+      # Item.joins(:invoice_items).select(:id).where('invoice_items.status!=2').distinct.pluck(:name)
   end
 end
