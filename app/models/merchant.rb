@@ -17,10 +17,8 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_to_ship
-    # items.joins(:invoice_items).where.not(status: 2)
     invoice_items.joins(:invoice)
     .where.not(status: 2)
     .order("invoices.created_at")
-    # .pluck(:invoice_id)
   end
 end
