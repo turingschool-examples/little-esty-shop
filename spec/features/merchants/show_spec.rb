@@ -194,4 +194,30 @@ RSpec.describe 'Merchant Dashboard' do
       expect(@customer_2.first_name).to appear_before(@customer_5.full_name)
     end
   end
+  # As a merchant
+  # When I visit my merchant dashboard
+  # Then I see a section for "Items Ready to Ship"
+  # In that section I see a list of the names of all of my items that
+  # have been ordered and have not yet been shipped,
+  # And next to each Item I see the id of the invoice that ordered my item
+  # And each invoice id is a link to my merchant's invoice show page
+  describe 'User Story 4' do 
+    it 'displays a section called Items Ready to Ship and shows a list of item names that have not yet shipped' do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      expect(page).to have_content("Items Ready to Ship") 
+      within("#unshipped_item_#{@item_1.id}") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to_not have_content(@item_2.name)
+      end
+      within("#unshipped_item_#{@item_2.id}") do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to_not have_content(@item_1.name)
+      end
+    end
+    xit 'next to each unshipped item, it has the invoice id of that item as a link to the merchants invoice show page' do 
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+    end
+  end
 end

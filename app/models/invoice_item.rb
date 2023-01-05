@@ -3,4 +3,9 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item
   belongs_to :invoice
+
+  def self.unshipped_items
+    require 'pry'; binding.pry
+    invoice_items.where.not(status: :shipped)
+  end
 end

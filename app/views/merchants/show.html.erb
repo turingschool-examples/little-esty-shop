@@ -1,4 +1,4 @@
-<h1><center>Little Esty Shop</h1></center>
+d<h1><center>Little Esty Shop</h1></center>
 
 <h2><%= @merchant.name %></h2>
 
@@ -13,3 +13,12 @@
   <%= customer.successful_transaction_count %> purchases </p>
 </div>
 <% end %>
+
+<h3><strong>Items Ready to Ship</strong></h3>
+
+<p><%= @merchant.unshipped_items.each do |item| %></p>
+<div id="unshipped_item_<%= item.id %>">
+  <p><%= item.name %></p>
+</div>
+<% end %>
+
