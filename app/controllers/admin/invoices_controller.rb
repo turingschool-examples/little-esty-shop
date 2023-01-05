@@ -9,6 +9,8 @@ class Admin::InvoicesController < ApplicationController
 
   def update
     @invoice = Invoice.find(params[:id])
-    binding.pry
+    @invoice.update(status: params[:status])
+    
+    redirect_to admin_invoice_path(@invoice)
   end
 end

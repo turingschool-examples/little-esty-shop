@@ -2,10 +2,11 @@
 <p>Status: <%= @invoice.status %></p>
 <p>Created At: <%= @invoice.format_date_long %></p>
 <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %>
-<p>
-  Status: <%= select(:invoice, :status, [[:cancelled, 0], [:completed, 1], [:in_progress, 2]]) %>
-  <%= button_to "Update Invoice Status", admin_invoice_path(@invoice), method: :patch %>
-</p>
+<%= form_with(url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true) do |f| %>
+  <%= f.label :status %>
+  <%= f.select :status, options_for_select([[:cancelled, "cancelled"], [:completed, "completed"], [:in_progress, "in_progress"]], @invoice.status) %>
+  <%= f.submit "Update Invoice Status" %>
+<% end %>
 <% @invoice.items.each do |item| %>
   <p><%= item.name %></p>
   <p>Quantity: <%= @invoice.invoice_item(item).quantity %></p>
@@ -13,4 +14,3 @@
   <p>Status: <%= @invoice.invoice_item(item).status %></p>
 <% end %>
 <p>Total Revenue: $<%= @invoice.total_revenue.to_f.round(2) %></p>
-
