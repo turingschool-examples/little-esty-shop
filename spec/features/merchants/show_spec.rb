@@ -138,6 +138,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to_not have_content(@customer_1.first_name)
       expect(page).to_not have_content(@customer_1.last_name)
     end
+    
     it 'displays the number of successful transactions of each customer'
   end
 end
