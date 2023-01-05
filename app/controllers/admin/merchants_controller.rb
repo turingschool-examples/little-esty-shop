@@ -13,6 +13,8 @@ module Admin
     end
 
     def update 
+      current_merchant.update(name: params[:name])
+      current_merchant.save
       redirect_to "/admin/merchants/#{current_merchant.id}"
     end
 

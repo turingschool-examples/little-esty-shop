@@ -121,6 +121,15 @@ RSpec.describe "Admin/Merchant/show" do
         click_button "Edit Merchant"
         expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
       end
+
+      it 'updates the merchants name upon submission' do 
+        visit "/admin/merchants/#{@merchant_1.id}/edit"
+        expect(page).to have_field("name", with: @merchant_1.name)
+        fill_in "name", with: "Jeff"
+        click_button "Edit Merchant"
+        expect(page).to have_content("Jeff")
+        expect(page).to_not have_content("Schroeder-Jerde")
+      end
     end
   end
 end
