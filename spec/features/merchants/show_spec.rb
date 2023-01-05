@@ -212,5 +212,9 @@ RSpec.describe 'merchant show' do
 
       expect(current_path).to eq(invoice_path(invoice1))
     end
+
+    it 'lists invoice creation date next to each item'
+    it 'formats date as Weekday, Month DD, YYYY'
+    it 'orders list from oldest invoice creation to newest'
   end
 end
