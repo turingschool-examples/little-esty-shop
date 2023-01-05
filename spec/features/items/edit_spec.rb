@@ -29,13 +29,13 @@ RSpec.describe 'Merchant Items Edit Page' do
 
     within('#edit_form') do
       expect(page).to have_content('Name:')
-      expect(page).to have_field(:item_name)
+      expect(page).to have_field(:name)
 
       expect(page).to have_content('Description:')
-      expect(page).to have_field(:item_description)
+      expect(page).to have_field(:description)
 
       expect(page).to have_content('Current price:')
-      expect(page).to have_field(:item_unit_price)
+      expect(page).to have_field(:unit_price)
 
       expect(page).to have_button('Submit')
     end
@@ -44,7 +44,7 @@ RSpec.describe 'Merchant Items Edit Page' do
   it 'I am redirected back to the item show page where I see the updated information and I see a flash message.' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit"
 
-    fill_in(:item_description, with: "90's Trading cards")
+    fill_in(:description, with: "90's Trading cards")
 
     click_button('Submit')
 
@@ -53,9 +53,9 @@ RSpec.describe 'Merchant Items Edit Page' do
     expect(page).to have_content('Item updated')
   end
 
-  xit 'returns an error if content is incorrect' do
+  it 'returns an error if content is incorrect' do
     visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit"
-    # fill_in(:item_description, with: '')
+    fill_in(:description, with: '')
     click_button('Submit')
     
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit")

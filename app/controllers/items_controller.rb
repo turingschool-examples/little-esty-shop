@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:id])
+    @item = @merchant.items.find(params[:id])
   end
 
   def edit
@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:merchant_id])
     @item = @merchant.items.find(params[:id])
+    
     if @item.update(item_params)
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
       flash[:message] = 'Item updated'
@@ -29,6 +30,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:id, :name, :description, :unit_price, :status, :created_at, :updated_at, :merchant_id)
+    params.permit(:name, :description, :unit_price)
   end
 end
