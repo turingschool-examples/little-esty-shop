@@ -51,7 +51,7 @@ RSpec.describe 'merchant invoice show' do
       expect(page).to have_content(@invoice_3.id)
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@invoice_item_3.quantity)
-      expect(page).to have_content(@invoice_item_3.unit_price)
+      expect(page).to have_content((@invoice_item_3.unit_price / 100.00).round(2))
       expect(page).to_not have_content(@item_1.name)
     end
   end
