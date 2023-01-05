@@ -153,6 +153,5 @@ RSpec.describe "merchant dashboard" do
           expect(page).to have_content(@date_1.strftime("%A, %B %-d, %Y"))
         end
       end
-    
   end
 end
