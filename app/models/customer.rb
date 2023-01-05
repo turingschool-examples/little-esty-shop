@@ -14,7 +14,10 @@ class Customer < ApplicationRecord
   end
 
   def successful_transaction_count
-    # require 'pry'; binding.pry
     transactions.where(result: :success).count
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

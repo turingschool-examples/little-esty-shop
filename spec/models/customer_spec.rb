@@ -114,6 +114,15 @@ RSpec.describe Customer, type: :model do
           expect(@customer_1.successful_transaction_count).to_not eq(2)
         end
       end
+
+      describe '#full_name' do
+        it 'displays the customers first and last name as one string' do
+
+          expect(@customer_1.full_name).to eq("Joey Ondricka")
+          expect(@customer_2.full_name).to eq("Cecelia Osinski")
+          expect(@customer_3.full_name).to eq("Mariah Toy")
+        end
+      end
     end
   end
 end
