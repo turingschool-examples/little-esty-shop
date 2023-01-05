@@ -133,13 +133,6 @@ RSpec.describe 'merchant show' do
     end
   end
 
-  #   As a merchant
-  # When I visit my merchant dashboard
-  # Then I see a section for "Items Ready to Ship"
-  # In that section I see a list of the names of all of my items that
-  # have been ordered and have not yet been shipped,
-  # And next to each Item I see the id of the invoice that ordered my item
-  # And each invoice id is a link to my merchant's invoice show page
   describe 'Items Ready to Ship Section' do
     it 'has section titled Items Ready to Ship' do
       merchant1 = Merchant.create!(name: 'Rays Hand Made Jewlery')
@@ -232,9 +225,33 @@ RSpec.describe 'merchant show' do
       visit merchant_dashboards_path(merchant1.id)
 
       within("#invoice#{invoice1.id}-item#{item1.id}") do
-        expect(page).to have_content(invoice1.created_at.strftime("%A, %B%e, %Y"))
+        expect(page).to have_content(invoice1.created_at.strftime('%A, %B%e, %Y'))
       end
     end
-    it 'orders list from oldest invoice creation to newest'
+    
+    it 'orders list from oldest invoice creation to newest' do
+      merchant1 = Merchant.create!(name: 'Rays Hand Made Jewlery')
+
+      item1 = Item.create!(name: 'Chips', description: 'Ring', unit_price: 20, merchant_id: merchant1.id)
+      # item2 = Item.create!(name: 'darrel', description: 'Bracelet', unit_price: 40, merchant_id: merchant1.id)
+      # item3 = Item.create!(name: 'don', description: 'Necklace', unit_price: 30, merchant_id: merchant1.id)
+
+      customer1 = Customer.create!(first_name: 'Kyle', last_name: 'Ledin')
+      invoice1 = Invoice.create!(status: 1, customer_id: customer1.id)
+      invoice2 = Invoice.create!(status: 1, customer_id: customer1.id)
+      invoice3 = Invoice.create!(status: 1, customer_id: customer1.id)
+      ii1 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice1.id)
+      ii2 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice2.id)
+      ii3 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice3.id)
+      # ii2 = InvoiceItem.create!(quantity: 5, unit_price: item2.unit_price, item_id: item2.id,
+                                # invoice_id: invoice1.id)
+      # ii3 = InvoiceItem.create!(quantity: 5, unit_price: item3.unit_price, item_id: item3.id,
+                                # invoice_id: invoice1.id)
+
+      visit merchant_dashboards_path(merchant1.id)
+
+      expect(invoice1.id).to appear_before(invoice2.id)
+    end
   end
 end
+
