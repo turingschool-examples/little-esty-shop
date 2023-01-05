@@ -45,10 +45,4 @@ RSpec.describe "The Merchant Dashboard" do
       expect(Item.find(3).name).to appear_before(Item.find(4).name)
     end
   end
-# As a merchant
-# When I visit my merchant dashboard
-# In the section for "Items Ready to Ship",
-# Next to each Item name I see the date that the invoice was created
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
 end
