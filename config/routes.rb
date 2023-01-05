@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   get '/admin', to: 'admin/dashboard#index'
 
   namespace :admin do
-    resources :merchants, except: [:destroy, :create, :new]
+    resources :merchants, except: :destroy
   end
 end
