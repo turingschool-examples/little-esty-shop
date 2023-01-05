@@ -113,5 +113,24 @@ RSpec.describe "Admin/Merchant/Index" do
         expect(page).to have_content("#{@merchant_3.name}")
       end
     end
+
+    describe 'User Story 25' do
+      it "click on the name of a merchant from the admin merchants index page, user is taken to the merchant's admin show page (/admin/merchants/merchant_id)
+      user sees the name of that merchant" do
+        visit "admin/merchants"
+
+        click_link "#{@merchant_1.name}"
+        expect(page).to have_content("#{@merchant_1.name}")
+        expect(page).to_not have_content("#{@merchant_2.name}")
+        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+
+        click_link "Merchants"
+        
+        click_link "#{@merchant_2.name}"
+        expect(page).to have_content("#{@merchant_2.name}")
+        expect(page).to_not have_content("#{@merchant_3.name}")
+        expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}")
+      end
+    end
   end
 end

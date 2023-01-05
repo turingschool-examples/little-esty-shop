@@ -6,8 +6,4 @@
 <%= link_to "Merchants", admin_merchants_path %>
 <%= link_to "Invoices", admin_invoices_path %><br/>
 
-<br/><section id="Merchants">
-  <% @merchants.each do |merchant| %>
-    <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><br/>
-  <% end %>
-</section>
+<h3><center><%= @merchant.name %><center></h3>
