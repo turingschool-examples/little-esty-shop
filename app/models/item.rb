@@ -5,7 +5,10 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices, dependent: :destroy
   has_many :transactions, through: :invoices, dependent: :destroy
 
-  # def unshipped_items
-  #   require 'pry'; binding.pry
-  # end
+  def self.unshipped_items
+  #  require 'pry'; binding.pry
+      # invoice_items.where.not(status: :shipped)
+  
+      Item.joins(:invoice_items).where('invoice_items.status!=0').select(:name)
+  end
 end
