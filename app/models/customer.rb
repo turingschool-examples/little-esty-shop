@@ -8,7 +8,7 @@ class Customer < ApplicationRecord
     self.joins(:transactions)
         .group("customers.id")
         .where(transactions: { result: "success" } )
-        .order(Arel.sql(("count(transactions.id) desc")))
+        .order(Arel.sql("count(transactions.id) desc"))
         .limit(5)
   end
 

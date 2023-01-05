@@ -15,4 +15,4 @@
 <% @incomplete_invoices.each do |invoice| %>
   <%= link_to "#{invoice.id}", admin_invoice_path(invoice.id) %> Created: <%= invoice.created_at.strftime('%A, %B %-d, %Y')%><br>
 <% end %>
-
+</div>
