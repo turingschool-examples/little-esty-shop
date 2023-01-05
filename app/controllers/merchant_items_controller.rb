@@ -20,6 +20,6 @@ class MerchantItemsController < ApplicationController
     
     redirect_to "/merchant/#{@merchant.id}/item/#{@item.id}"
   
-    flash[:alert] = "Succesfully updated"
+    flash[:alert] = "Successfully updated"
   end
 end
