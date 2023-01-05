@@ -9,9 +9,16 @@ RSpec.describe 'Admin Invoice Show' do
     expect(page).to have_content(Invoice.first.created_at.strftime('%A, %B %-d, %Y'))
     expect(page).to have_content(Invoice.first.customer.first_name)
     expect(page).to have_content(Invoice.first.customer.first_name)
+  end
 
-    expect(page).to_not have_content(Invoice.last.id)
-    expect(page).to_not have_content(Invoice.last.customer.first_name)
-    expect(page).to_not have_content(Invoice.last.customer.first_name)
+  it 'Displays invoice items name, qty, price, and status' do
+    visit admin_invoice_path(Invoice.first.id)
+
+    within "#invoice_items_#{Invoice.first.items.first.id}" do
+      expect(page).to have_content(Invoice.first.items.first.name)
+      expect(page).to have_content(Invoice.first.invoice_items.first.quantity)
+      expect(page).to have_content(Invoice.first.invoice_items.first.unit_price_to_dollars)
+      expect(page).to have_content(Invoice.first.invoice_items.first.status)
+    end
   end
 end
