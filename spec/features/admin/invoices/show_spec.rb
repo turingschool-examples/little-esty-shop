@@ -9,7 +9,7 @@ RSpec.describe 'Admin Invoice Show' do
     expect(page).to have_content(Invoice.first.created_at.strftime('%A, %B %-d, %Y'))
     expect(page).to have_content(Invoice.first.customer.first_name)
     expect(page).to have_content(Invoice.first.customer.first_name)
-save_and_open_page
+
     expect(page).to_not have_content(Invoice.last.id)
     expect(page).to_not have_content(Invoice.last.customer.first_name)
     expect(page).to_not have_content(Invoice.last.customer.first_name)
