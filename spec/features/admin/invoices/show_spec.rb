@@ -11,8 +11,8 @@ RSpec.describe 'the admin show page' do
     @invoice_1 = create(:invoice, customer: @customer_1)
     @invoice_2 = create(:invoice, customer: @customer_1)
     @invoice_3 = create(:invoice, customer: @customer_2)
-    @invoice_4 = create(:invoice, customer: @customer_5)
-    @invoice_5 = create(:invoice, customer: @customer_5)
+    @invoice_4 = create(:invoice, customer: @customer_5, status: 2)
+    @invoice_5 = create(:invoice, customer: @customer_5, status: 2)
 
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
@@ -61,6 +61,18 @@ RSpec.describe 'the admin show page' do
       visit admin_invoice_path(@invoice_2)
 
       expect(page).to have_content("Total Revenue: $#{@invoice_2.total_revenue.to_f.round(2)}")
+    end
+
+    it 'shows the invoice status is a select field and shows the current status is selected' do
+      visit admin_invoice_path(@invoice_4)
+      
+      expect(page).to have_select("status", selected: "in_progress")
+
+      select("completed", from: "status")
+      click_on("Update Invoice Status")
+
+      expect(current_path).to eq("/admin/invoices/#{@invoice_4.id}")
+      expect(page).to have_select("status", selected: "completed")
     end
   end
 end
