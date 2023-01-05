@@ -10,7 +10,7 @@
 <% @invoice.items.each do |item| %>
   <p><%= item.name %></p>
   <p>Quantity: <%= @invoice.invoice_item(item).quantity %></p>
-  <p>Unit Price: $<%= @invoice.invoice_item(item).unit_price.to_f.round(2) %></p>
+  <p>Unit Price: $<%= (@invoice.invoice_item(item).unit_price / 100.00).round(2) %></p>
   <p>Status: <%= @invoice.invoice_item(item).status %></p>
 <% end %>
 <p>Total Revenue: $<%= @invoice.total_revenue.to_f.round(2) %></p>
