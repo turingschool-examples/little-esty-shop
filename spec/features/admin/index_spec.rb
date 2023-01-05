@@ -30,21 +30,17 @@ RSpec.describe "Admin Dashboard(Index)" do
 
     @invoice_1 = @customer_1.invoices.create!(status: 'completed')
     @invoice_2 = @customer_1.invoices.create!(status: 'in progress')
-
     @invoice_3 = @customer_2.invoices.create!(status: 'in progress')
-    @invoice_4 = @customer_2.invoices.create!(status: 'in progress')
 
+    @invoice_4 = @customer_2.invoices.create!(status: 'cancelled')
     @invoice_5 = @customer_3.invoices.create!(status: 'cancelled')
-    @invoice_6 = @customer_3.invoices.create!(status: 'in progress')
-
-    @invoice_7 = @customer_4.invoices.create!(status: 'in progress')
+    @invoice_6 = @customer_3.invoices.create!(status: 'cancelled')
+    @invoice_7 = @customer_4.invoices.create!(status: 'cancelled')
     @invoice_8 = @customer_4.invoices.create!(status: 'cancelled')
-
-    @invoice_9 = @customer_5.invoices.create!(status: 'completed')
-    @invoice_10 = @customer_5.invoices.create!(status: 'completed')
-
-    @invoice_11 = @customer_6.invoices.create!(status: 'in progress')
-    @invoice_12 = @customer_6.invoices.create!(status: 'in progress')
+    @invoice_9 = @customer_5.invoices.create!(status: 'cancelled')
+    @invoice_10 = @customer_5.invoices.create!(status: 'cancelled')
+    @invoice_11 = @customer_6.invoices.create!(status: 'cancelled')
+    @invoice_12 = @customer_6.invoices.create!(status: 'cancelled')
 
     #do i have to calculate the actual unit_price?
     InvoiceItem.create!(invoice_id: @invoice_1.id,  item_id: @item_1.id, quantity: 5, unit_price: 13635, status: 'shipped')
@@ -169,12 +165,20 @@ RSpec.describe "Admin Dashboard(Index)" do
       it 'displays a section containing a list of incomplete invoices' do 
         visit '/admin'
 
-        save_and_open_page
-
         within('#incomplete_invoices') do 
           expect(page).to have_content("Invoice ##{@invoice_2.id}")
           expect(page).to have_content("Invoice ##{@invoice_3.id}")
           expect(page).to_not have_content("Invoice ##{@invoice_1.id}")
+        end
+      end
+
+      it 'displays a list of incomplete invoices which act as links to their invoices show page' do 
+        visit '/admin'
+
+        within('#incomplete_invoices') do
+          save_and_open_page
+          expect(page).to have_link("Invoice ##{@invoice_2.id}", :href => "/admin/invoices/#{@invoice_2.id}")
+          expect(page).to have_link("Invoice ##{@invoice_3.id}", :href => "/admin/invoices/#{@invoice_3.id}")
         end
       end
     end
