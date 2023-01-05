@@ -7,6 +7,8 @@
 <br>
 <p>Item Name: <%= item.name %> </p>
 <p>Item Quantity: <%= @invoice.invoice_item(item).quantity %> </p>
-<p>Item Price: <%= @invoice.invoice_item(item).unit_price %> </p>
+<p>Item Price: $<%= @invoice.invoice_item(item).unit_price.to_f.round(2) %> </p>
 <p>Item Status: <%= @invoice.invoice_item(item).status %> </p>
 <% end %>
+<br>
+<h2> Invoice Total: $<%= @invoice.total_revenue.to_f.round(2) %></h2>

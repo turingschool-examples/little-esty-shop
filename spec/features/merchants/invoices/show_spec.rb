@@ -51,8 +51,15 @@ RSpec.describe 'merchant invoice show' do
       expect(page).to have_content(@invoice_3.id)
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@invoice_item_3.quantity)
-      expect(page).to have_content(@invoice_item_3.unit_price)
+      expect(page).to have_content(@invoice_item_3.unit_price.to_f.round(2))
       expect(page).to_not have_content(@item_1.name)
+    end
+
+    it 'shows total revenue for all items on invoice' do
+      visit merchant_invoice_path(@merchant_2, @invoice_3)
+
+      save_and_open_page
+      expect(page).to have_content("Invoice Total: $#{@invoice_3}.total_revenue.to_f.round(2)")
     end
   end
 end
