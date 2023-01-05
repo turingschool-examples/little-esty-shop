@@ -21,7 +21,7 @@ RSpec.describe Merchant do
                                  invoice_id: invoice.id)
       ii3 = InvoiceItem.create!(quantity: 5, unit_price: item3.unit_price, item_id: item3.id,
                                  invoice_id: invoice.id)
-      expect(merchant.packaged_items).to eq([item1, item2, item3])
+      expect(merchant.pending_invoices.first.id).to eq(invoice.id)
     end
   end
 end
