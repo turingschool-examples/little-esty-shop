@@ -30,4 +30,10 @@ RSpec.describe Merchant do
       expect(merchants_ready_items.length).to eq(16)
     end
   end
+
+  describe '#top_5_by_revenue' do
+    it 'returns the top 5 merchants by revenue' do
+      expect(Merchant.top_5_by_revenue).to eq([Merchant.find(8), Merchant.find(2), Merchant.find(7), Merchant.find(3), Merchant.find(4)])
+    end
+  end
 end

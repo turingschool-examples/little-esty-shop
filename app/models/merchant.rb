@@ -3,6 +3,7 @@ class Merchant < ApplicationRecord
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
+  has_many :transactions, through: :invoices
   validates_presence_of :name
 
   def top_five_customers
@@ -15,5 +16,14 @@ class Merchant < ApplicationRecord
 
   def ready_to_ship_items
     items.select("items.*, invoice_id, status").joins(:invoice_items).where("invoice_items.status = ?", "1")
+  end
+
+  def self.top_5_by_revenue
+    Merchant.left_joins(:transactions)
+            .select('merchants.*, sum(invoice_items.unit_price) * sum(invoice_items.quantity) as total_revenue')
+            .where('transactions.result = ?', 'success')
+            .group(:id)
+            .distinct
+            .order('total_revenue DESC').limit(5)
   end
 end
