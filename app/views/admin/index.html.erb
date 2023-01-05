@@ -1,1 +1,7 @@
 <%= render 'header' %>
+<section id='top-cust'>
+  <h2>Top Customers</h2>
+  <% @top_customers.each do |customer| %>
+    <p><%= "#{customer.first_name} #{customer.last_name} - #{customer.purchases} purchases" %></p>
+  <% end %>
+</section>

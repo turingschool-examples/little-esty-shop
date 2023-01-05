@@ -1,4 +1,4 @@
-class Merchant < ApplicationRecord 
+class Merchant < ApplicationRecord
   has_many :items
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
@@ -13,22 +13,13 @@ class Merchant < ApplicationRecord
     .select('first_name, last_name, count(customers) AS transactions_count')
     .order(transactions_count: :desc)
     .limit(5)
-    
-    # .select('count(customers) AS transactions_count')
-    # .group('customers {:id}') 
-    # .order(transactions_count: :desc)
+  end
+
+  def pending_invoices
+    Invoice
+    .joins(:merchants)
+    .where("merchants.id = #{id}")
+    .where('invoices.status = 1')
+    .distinct
   end
 end
-
-#helper method to turn 
-
-# customers names, where Transaction
-
-
-# Customer
-# .joins(invoices: [:transactions, { items: :merchant }])
-# .where("transactions.result = 0 AND merchants.id = #{id}")
-# .select('customers.*, count(transactions) AS transactions_count')
-# .group('id')
-# .order(transactions_count: :desc)
-# .limit(5)

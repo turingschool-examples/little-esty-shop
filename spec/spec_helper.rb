@@ -37,6 +37,16 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # cleans database between specs
+  config.before(:suite) do 
+    Transaction.destroy_all
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Invoice.destroy_all
+    Customer.destroy_all
+    Merchant.destroy_all
+  end
+
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
   # compatibility in RSpec 3). It causes shared context metadata to be
