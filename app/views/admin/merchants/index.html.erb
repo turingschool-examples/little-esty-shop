@@ -1,0 +1,10 @@
+<h1>Merchants</h1>
+<h2>Admin</h2>
+
+<% if @merchants.any? %>
+  <% @merchants.each do |merchant| %>
+    <ul>
+      <li><%= link_to merchant.id, admin_merchant_path(merchant.id) %></li>
+    </ul>
+  <% end %>
+<% end %>
