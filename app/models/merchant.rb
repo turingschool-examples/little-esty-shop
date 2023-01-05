@@ -1,10 +1,13 @@
 class Merchant < ApplicationRecord
   has_many :items
   has_many :invoice_items, through: :items
+  has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
+  has_many :customers, through: :invoices
 
   validates_presence_of :name
 
   def all_invoice_ids
-    self.invoice_items.pluck(:invoice_id).uniq
+    self.invoice_items.distinct.pluck(:invoice_id) #uniq is a ruby method
   end
 end
