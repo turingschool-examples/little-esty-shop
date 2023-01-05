@@ -232,10 +232,9 @@ RSpec.describe 'merchant show' do
       visit merchant_dashboards_path(merchant1.id)
 
       within("#invoice#{invoice1.id}-item#{item1.id}") do
-        expect(page).to have_content(invoice1.created_at)
+        expect(page).to have_content(invoice1.created_at.strftime("%A, %B%e, %Y"))
       end
     end
-    it 'formats date as Weekday, Month DD, YYYY'
     it 'orders list from oldest invoice creation to newest'
   end
 end
