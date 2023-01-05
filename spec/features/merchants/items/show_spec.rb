@@ -77,7 +77,7 @@ RSpec.describe "Merchant items show page" do
     end
     it "has a form with existing item attributes" do
       visit "/merchant/#{@merchant1.id}/item/#{@item1.id}/edit"
-      save_and_open_page
+      
       expect(find('form')).to have_content('Name')
       expect(find('form')).to have_content('Description')
       expect(find('form')).to have_content('Unit price')
@@ -99,7 +99,16 @@ RSpec.describe "Merchant items show page" do
       expect(page).to have_content("2 rings")
     end
 
-    it "displays a flash message stating the information has been succesfully updated"
+    it "displays a flash message stating the information has been succesfully updated" do
+      visit "/merchant/#{@merchant1.id}/item/#{@item1.id}/edit"
+
+      fill_in 'Name', with: "Joe"
+      fill_in 'Description', with: "2 rings"
+      fill_in 'Unit price', with: 40
+      click_button 'Save'
+
+      expect(page).to have_content("Succesfully updated") #comeback and refeactor if time
+    end
   end
 
 end

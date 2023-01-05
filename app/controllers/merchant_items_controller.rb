@@ -17,7 +17,9 @@ class MerchantItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     # binding.pry
     @item.update(name: params[:name], description: params[:description], unit_price: params[:unit_price])
-
+    
     redirect_to "/merchant/#{@merchant.id}/item/#{@item.id}"
+  
+    flash[:alert] = "Succesfully updated"
   end
 end
