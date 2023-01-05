@@ -229,9 +229,9 @@ RSpec.describe Invoice, type: :model do
 
     describe '#total_revenue' do
       it 'returns the total cost (InvoiceItems: unit_price) of all items on invoice' do
-        expected = [@invoice_item_2.unit_price, @invoice_item_3.unit_price, @invoice_item_4.unit_price].sum
+        expected = [(@invoice_item_2.unit_price * @invoice_item_2.quantity), (@invoice_item_3.unit_price * @invoice_item_3.quantity), (@invoice_item_4.unit_price * @invoice_item_4.quantity)].sum
 
-        expect(@invoice_2.total_revenue).to eq(expected)
+        expect(@invoice_2.total_revenue).to eq(expected / 100.00)
       end
     end
   end

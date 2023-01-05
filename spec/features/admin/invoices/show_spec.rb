@@ -49,18 +49,18 @@ RSpec.describe 'the admin show page' do
       expect(page).to have_content(@invoice_1.id)
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@invoice_item_1.quantity)
-      expect(page).to have_content((@invoice_item_1.unit_price / 100.00).round(2))
+      expect(page).to have_content((@invoice_item_1.unit_price / 100.00))
       expect(page).to have_content(@invoice_item_1.status)
     end
 
     it 'shows the total revenue that will be generated from this invoice' do
       visit admin_invoice_path(@invoice_1)
 
-      expect(page).to have_content("Total Revenue: $#{(@invoice_1.total_revenue / 100.00).round(2)}")
+      expect(page).to have_content("Total Revenue: $#{(@invoice_1.total_revenue / 100.00)}")
 
       visit admin_invoice_path(@invoice_2)
 
-      expect(page).to have_content("Total Revenue: $#{(@invoice_2.total_revenue / 100.00).round(2)}")
+      expect(page).to have_content("Total Revenue: $#{@invoice_2.total_revenue}")
     end
 
     it 'shows the invoice status is a select field and shows the current status is selected' do
