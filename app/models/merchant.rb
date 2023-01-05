@@ -6,13 +6,29 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def self.top5(id)
-    binding.pry
     Customer
     .joins(:merchants, :transactions)
     .where("transactions.result = 0 AND merchants.id = #{id}")
-    .select('customers.*, count(transactions) as success_count')
-    .order(success_count: :desc)
+    .group(:id)
+    .select('first_name, last_name, count(customers) AS transactions_count')
+    .order(transactions_count: :desc)
+    .limit(5)
+    
+    # .select('count(customers) AS transactions_count')
+    # .group('customers {:id}') 
+    # .order(transactions_count: :desc)
   end
 end
 
+#helper method to turn 
+
 # customers names, where Transaction
+
+
+# Customer
+# .joins(invoices: [:transactions, { items: :merchant }])
+# .where("transactions.result = 0 AND merchants.id = #{id}")
+# .select('customers.*, count(transactions) AS transactions_count')
+# .group('id')
+# .order(transactions_count: :desc)
+# .limit(5)
