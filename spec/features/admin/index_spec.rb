@@ -142,12 +142,6 @@ RSpec.describe "Admin Dashboard(Index)" do
         end
       end
 
-      # Heber Kuhn - 6 purchases
-      # Cecelia Osinski - 5 purchases
-      # Mariah Toy - 4 purchases
-      # Sylvester Nader - 3 purchases
-      # Joey Ondricka - 2 purchases
-
       it 'displays the number of successful transactions for each of the top 5 customers' do 
         visit '/admin'
 
@@ -178,6 +172,19 @@ RSpec.describe "Admin Dashboard(Index)" do
         within('#incomplete_invoices') do
           expect(page).to have_link("Invoice ##{@invoice_2.id}", :href => "/admin/invoices/#{@invoice_2.id}")
           expect(page).to have_link("Invoice ##{@invoice_3.id}", :href => "/admin/invoices/#{@invoice_3.id}")
+        end
+      end
+    end
+
+    describe 'user story 23' do
+      describe 'in section incomplete invoices' do
+        it 'next to each invoice id there is the date the invoice was created, formatted like Monday, July 18, 2019' do
+          visit '/admin'
+
+          within('#incomplete_invoices') do
+            expect(page).to have_content("Invoice ##{@invoice_2.id} - #{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
+            expect(page).to have_content("Invoice ##{@invoice_2.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
+          end
         end
       end
     end

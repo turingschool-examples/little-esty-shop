@@ -19,7 +19,7 @@
 <h3>Incomplete Invoices</h3>
 <ul>
   <% @incomplete_invoices.each do |invoice| %>
-    <li><%=link_to "Invoice ##{invoice.id}", "/admin/invoices/#{invoice.id}"%></li>
+    <li><%=link_to "Invoice ##{invoice.id} - #{invoice.created_at.strftime("%A, %B %d, %Y")}", "/admin/invoices/#{invoice.id}"%></li>
   <% end %>
 </ul>
 </section>
