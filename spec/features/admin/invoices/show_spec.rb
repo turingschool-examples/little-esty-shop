@@ -66,7 +66,13 @@ RSpec.describe 'the admin show page' do
     it 'shows the invoice status is a select field and shows the current status is selected' do
       visit admin_invoice_path(@invoice_4)
       
-      expect(page).to have_select("invoice_status", selected: "in_progress")
+      expect(page).to have_select("status", selected: "in_progress")
+
+      select("completed", from: "status")
+      click_on("Update Invoice Status")
+
+      expect(current_path).to eq("/admin/invoices/#{@invoice_4.id}")
+      expect(page).to have_select("status", selected: "completed")
     end
   end
 end
