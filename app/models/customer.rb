@@ -18,20 +18,17 @@ class Customer < ApplicationRecord
   def successful_transactions_count
     transactions.success.count
   end
-
-  def merchant_successful_transactions
-    self.transactions.success
-  end
   
   def self.top_customers
-    # require 'pry';binding.pry
-    # self.merchant_successful_transactions
-
     self.joins(:merchants, :transactions)
             .where(transactions: { result: "success" } )
             .group(:id)
             .order(Arel.sql("count(transactions.id) desc"))
             .limit(5)
+  end
+
+  def complete_name
+    "#{first_name} #{last_name}"
   end
 
 end

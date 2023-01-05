@@ -40,7 +40,7 @@ RSpec.describe Customer, type: :model do
       @merchant_4 = create(:merchant, name: "testing merchant")
 
       @item_1 = create(:item, merchant: @merchant_1)
-      @item_2 = create(:item, merchant: @merchant_2)
+      @item_2 = create(:item, merchant: @merchant_1)
       @item_3 = create(:item, merchant: @merchant_2)
       @item_4 = create(:item, merchant: @merchant_2)
       @item_5 = create(:item, merchant: @merchant_2)
@@ -51,26 +51,25 @@ RSpec.describe Customer, type: :model do
       @item_10 = create(:item, merchant: @merchant_3)
       @item_11 = create(:item, name: "testing item", merchant: @merchant_4)
 
-      @customer_1 = create(:customer)
-      @customer_2 = create(:customer)
-      @customer_3 = create(:customer)
-      @customer_4 = create(:customer)
-      @customer_5 = create(:customer)
-      @customer_6 = create(:customer)
-      @customer_7 = create(:customer)
-      @customer_8 = create(:customer)
-      @customer_9 = create(:customer, first_name: "testing customer")
+      @customer_1 = create(:customer, first_name: "test customer 1", last_name: "doe")
+      @customer_2 = create(:customer, first_name: "test customer 2")
+      @customer_3 = create(:customer, first_name: "test customer 3")
+      @customer_4 = create(:customer, first_name: "test customer 4")
+      @customer_5 = create(:customer, first_name: "test customer 5")
+      @customer_6 = create(:customer, first_name: "test customer 6")
+      @customer_7 = create(:customer, first_name: "test customer 7")
+      @customer_8 = create(:customer, first_name: "test customer 8")
+      @customer_9 = create(:customer, first_name: "test customer 9")
 
       @invoice_1 = create(:invoice, customer: @customer_1)
       @invoice_1.items << @item_1
-      @invoice_2 = create(:invoice, customer: @customer_1)
+      @invoice_2 = create(:invoice, customer: @customer_7)
       @invoice_2.items << @item_2
-      @invoice_3 = create(:invoice, customer: @customer_1)
+      @invoice_3 = create(:invoice, customer: @customer_8)
       @invoice_3.items << [@item_3, @item_4]
       @invoice_4 = create(:invoice, customer: @customer_2)
       @invoice_4.items << [@item_5, @item_7]
-      
-      @invoice_5 = create(:invoice, customer: @customer_3)
+      @invoice_5 = create(:invoice, customer: @customer_7)
       @invoice_5.items << [@item_2, @item_3, @item_6, @item_8]
       @invoice_6 = create(:invoice, customer: @customer_3)
       @invoice_6.items << [@item_2, @item_2, @item_4, @item_6]
@@ -78,10 +77,9 @@ RSpec.describe Customer, type: :model do
       @invoice_7.items << [@item_1, @item_1, @item_10]
       @invoice_8 = create(:invoice, customer: @customer_5)
       @invoice_8.items << [@item_5, @item_7, @item_10]
-      
-      @invoice_9= create(:invoice, customer: @customer_6)
+      @invoice_9= create(:invoice, customer: @customer_4)
       @invoice_9.items << [@item_4, @item_7, @item_10]
-      @invoice_10 = create(:invoice, customer: @customer_7)
+      @invoice_10 = create(:invoice, customer: @customer_1)
       @invoice_10.items << [@item_3, @item_4, @item_5, @item_6]
       @invoice_11 = create(:invoice, customer: @customer_7)
       @invoice_11.items << [@item_1, @item_10]
@@ -89,8 +87,12 @@ RSpec.describe Customer, type: :model do
       @invoice_12.items << [@item_2, @item_3, @item_4, @item_5, @item_5, @item_6, @item_6]
       @invoice_13 = create(:invoice, status: "completed", customer: @customer_9)
       @invoice_13.items << [@item_11]
-      @invoice_14 = create(:invoice, status: "completed", customer: @customer_8)
+      @invoice_14 = create(:invoice, status: "completed", customer: @customer_1)
       @invoice_14.items << [@item_11, @item_11]
+      @invoice_15 = create(:invoice, customer: @customer_8)
+      @invoice_15.items << [@item_1]
+      @invoice_16 = create(:invoice, customer: @customer_7)
+      @invoice_16.items << [@item_1]
 
       @transaction_1 = create(:transaction, invoice: @invoice_1, result: "success")
       @transaction_2 = create(:transaction, invoice: @invoice_2, result: "success")
@@ -103,24 +105,24 @@ RSpec.describe Customer, type: :model do
       @transaction_9 = create(:transaction, invoice: @invoice_9, result: "failed")
       @transaction_10 = create(:transaction, invoice: @invoice_10, result: "success")
       @transaction_11 = create(:transaction, invoice: @invoice_11, result: "success")
-      @transaction_12 = create(:transaction, invoice: @invoice_5, result: "success")
-      @transaction_13 = create(:transaction, invoice: @invoice_9, result: "success")
-      @transaction_14 = create(:transaction, invoice: @invoice_12, result: "failed")
-      @transaction_15 = create(:transaction, invoice: @invoice_13, result: "success")
-      @transaction_16 = create(:transaction, invoice: @invoice_14, result: "success")
-    
-    
-    
+      @transaction_12 = create(:transaction, invoice: @invoice_12, result: "success")
+      @transaction_13 = create(:transaction, invoice: @invoice_13, result: "success")
+      @transaction_14 = create(:transaction, invoice: @invoice_14, result: "success")
+      @transaction_15 = create(:transaction, invoice: @invoice_15, result: "success")
+      @transaction_16 = create(:transaction, invoice: @invoice_16, result: "success")
+      @transaction_17 = create(:transaction, invoice: @invoice_5, result: "success")
+      @transaction_18 = create(:transaction, invoice: @invoice_9, result: "success")
     end
     
-    it 'returns the 5 customers with most successful transactions for a merchant' do
-    #  require 'pry';binding.pry
-      # expect(@merchant_2.top_customers).to include(@customer_1, @customer_3, @customer_8, @customer_7, @customer_5)
-      expect(Customer.top_customers).to include(@customer_1, @customer_3, @customer_8, @customer_7, @customer_5)
-      # expect(@merchant_3.top_customers).to_not include(@customer_8)
+    it "returns the customer' first and last names as a singular, complete name" do
+      expect(@customer_1.complete_name).to eq("test customer 1 doe")
+    end
 
-      # expect(@merchant_3.top_customers).to eq(@customer_2,@customer_3,@customer_5,@customer_6,@customer_7)
+    it 'returns the 5 customers with most successful transactions for a merchant' do
+      # require 'pry';binding.pry
+      expect(Customer.top_customers.length).to eq(5)
+      expect(Customer.top_customers).to eq([@customer_7, @customer_8, @customer_1, @customer_4, @customer_3])
     end
-end
+  end
 
 end

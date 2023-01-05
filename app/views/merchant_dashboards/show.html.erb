@@ -4,3 +4,9 @@
   <p><%= link_to "See #{@merchant.name}'s Items", merchant_items_path(@merchant)%></p>
   <p><%= link_to "See #{@merchant.name}'s Invoices", merchant_invoices_path(@merchant)%></p>
 </div>
+
+<ul>
+<% @vip_customsers.each do |customer| %>
+  <li><h5 style="color: MAROON"> Customer Name: <%= customer.complete_name %> &nbsp - &nbsp
+  Transaction Count: <%= customer.successful_transactions_count %></h5></li>
+<% end %>
