@@ -5,11 +5,15 @@ module Admin
     end
 
     def show
-      @merchant = Merchant.find(params[:id])
+      @merchant = current_merchant
     end
 
     def edit 
-      
+      @merchant = current_merchant
+    end
+
+    def current_merchant 
+      Merchant.find(params[:id])
     end
   end
 end
