@@ -200,6 +200,7 @@ RSpec.describe Invoice, type: :model do
       @customer_1 = create(:customer)
       @invoice_1 = create(:invoice, customer: @customer_1)
       @invoice_2 = create(:invoice, customer: @customer_1)
+      @invoice_3 = create(:invoice, customer: @customer_1, created_at: "2023-01-04 16:29:30 +0000".to_datetime)
       @merchant_1 = create(:merchant)
       @item_1 = create(:item, merchant: @merchant_1)
       @item_2 = create(:item, merchant: @merchant_1)
@@ -212,9 +213,9 @@ RSpec.describe Invoice, type: :model do
 
     describe '#format_date_long' do
       it 'returns the date in specified story format Wednesday, January 04, 2023' do
-        expected = "Wednesday, January 04, 2023"
+        expected = "Wednesday, January 04, 2023"        
         
-        expect("2023-01-04 16:29:30 +0000".to_datetime.to_formatted_s(:admin_invoice_date)).to eq(expected)
+        expect(@invoice_3.format_date_long).to eq(expected)
       end
     end
 
