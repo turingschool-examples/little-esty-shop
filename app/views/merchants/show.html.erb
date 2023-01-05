@@ -2,9 +2,8 @@
 <%= link_to "#{@merchant.name} items", "/merchants/merchant_id/items" %>
 <%= link_to "#{@merchant.name} invoices", "/merchants/merchant_id/invoices" %>
 <section id='packaged'><h2>Items Ready to Ship</h2></section>
-<% @merchant.invoices.each do |invoice| %>
+<% @merchant.pending_invoices.each do |invoice| %>
   <% invoice.items.each do |item| %>
-    <%binding.pry%>
+    <%= item.name %>
   <% end %>
 <% end %>
-<% binding.pry %>
