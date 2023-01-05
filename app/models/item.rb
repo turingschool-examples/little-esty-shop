@@ -5,4 +5,6 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
 
   validates_presence_of :name, :description, :unit_price, :merchant_id
+
+  enum status: { disabled: 0, enabled: 1}
 end

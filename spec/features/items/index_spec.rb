@@ -58,6 +58,7 @@ RSpec.describe "item index page" do
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
+
   it 'has a list of all a specific merchants items' do
     visit "/merchants/#{@merchant_1.id}/items"
     
@@ -67,6 +68,26 @@ RSpec.describe "item index page" do
 
     @merchant_2.items.each do |item|
       expect(page).to_not have_content(item.name)
+    end
+  end
+
+  it 'has a button to disable or enable that item' do
+    visit "/merchants/#{@merchant_1.id}/items"
+    
+    within("#all_items") do
+      expect(page).to have_button 'Enable'
+    end
+
+    within("#all_items") do
+      expect(page).to_not have_button 'Disable'
+    end
+  end
+
+  it 'displays its current status' do
+    visit "/merchants/#{@merchant_1.id}/items"
+
+    within("#all_items") do
+      expect(page).to have_content(@item_1.status)
     end
   end
 end
