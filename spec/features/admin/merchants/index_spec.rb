@@ -21,8 +21,6 @@ RSpec.describe 'the admin merchants index' do
 
       click_on(@merchant_1.name)
 
-      save_and_open_page
-
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
     end
   end
