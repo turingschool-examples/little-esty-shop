@@ -77,13 +77,28 @@ RSpec.describe "Merchant items show page" do
     end
     it "has a form with existing item attributes" do
       visit "/merchant/#{@merchant1.id}/item/#{@item1.id}/edit"
-
+      save_and_open_page
       expect(find('form')).to have_content('Name')
       expect(find('form')).to have_content('Description')
       expect(find('form')).to have_content('Unit price')
+      expect(page).to have_field('Name', with: 'Chips')
+      expect(page).to have_field('Description', with: 'Ring')
+      expect(page).to have_field('Unit price', with: '20')
 
     end
-    it "can click sumbmit and update the information and go back to the item show page"
+    it "can click sumbmit and update the information and go back to the item show page" do
+      visit "/merchant/#{@merchant1.id}/item/#{@item1.id}/edit"
+
+      fill_in 'Name', with: "Joe"
+      fill_in 'Description', with: "2 rings"
+      fill_in 'Unit price', with: 40
+      click_button 'Save'
+      
+      expect(page).to have_current_path("/merchant/#{@merchant1.id}/item/#{@item1.id}")
+      expect(page).to have_content("Joe")
+      expect(page).to have_content("2 rings")
+    end
+
     it "displays a flash message stating the information has been succesfully updated"
   end
 

@@ -11,4 +11,13 @@ class MerchantItemsController < ApplicationController
     @item = Item.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
   end
+
+  def update
+    @item = Item.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
+    # binding.pry
+    @item.update(name: params[:name], description: params[:description], unit_price: params[:unit_price])
+
+    redirect_to "/merchant/#{@merchant.id}/item/#{@item.id}"
+  end
 end
