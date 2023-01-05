@@ -64,5 +64,9 @@ RSpec.describe "item index page" do
     @merchant_1.items.each do |item|
       expect(page).to have_content(item.name)
     end
+
+    @merchant_2.items.each do |item|
+      expect(page).to_not have_content(item.name)
+    end
   end
 end
