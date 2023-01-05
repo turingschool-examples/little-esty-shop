@@ -29,13 +29,13 @@ RSpec.describe "Admin Dashboard(Index)" do
     @customer_10 = Customer.create!(first_name: 'Ramona', last_name: 'Reynolds')
 
     @invoice_1 = @customer_1.invoices.create!(status: 'completed')
-    @invoice_2 = @customer_1.invoices.create!(status: 'in progress')
-    @invoice_3 = @customer_2.invoices.create!(status: 'in progress')
+    @invoice_2 = @customer_1.invoices.create!(status: 'in progress', created_at: Time.new(2021))
+    @invoice_3 = @customer_2.invoices.create!(status: 'in progress', created_at: Time.new(2022))
 
     @invoice_4 = @customer_2.invoices.create!(status: 'cancelled')
     @invoice_5 = @customer_3.invoices.create!(status: 'cancelled')
     @invoice_6 = @customer_3.invoices.create!(status: 'cancelled')
-    @invoice_7 = @customer_4.invoices.create!(status: 'cancelled')
+    @invoice_7 = @customer_4.invoices.create!(status: 'in progress', created_at: Time.new(1995))
     @invoice_8 = @customer_4.invoices.create!(status: 'cancelled')
     @invoice_9 = @customer_5.invoices.create!(status: 'cancelled')
     @invoice_10 = @customer_5.invoices.create!(status: 'cancelled')
@@ -183,7 +183,17 @@ RSpec.describe "Admin Dashboard(Index)" do
 
           within('#incomplete_invoices') do
             expect(page).to have_content("Invoice ##{@invoice_2.id} - #{@invoice_2.created_at.strftime("%A, %B %d, %Y")}")
-            expect(page).to have_content("Invoice ##{@invoice_2.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
+            expect(page).to have_content("Invoice ##{@invoice_3.id} - #{@invoice_3.created_at.strftime("%A, %B %d, %Y")}")
+          end
+        end
+
+        it 'the list of incomplete invoices is ordered by created date oldest to newest' do
+          visit '/admin'
+
+          within('#incomplete_invoices') do
+            expect("Invoice ##{@invoice_7.id}").to appear_before("Invoice ##{@invoice_2.id}")
+            expect("Invoice ##{@invoice_2.id}").to appear_before("Invoice ##{@invoice_3.id}")
+            expect("Invoice ##{@invoice_2.id}").to_not appear_before("Invoice ##{@invoice_7.id}")
           end
         end
       end
