@@ -30,4 +30,12 @@ class Merchant < ApplicationRecord
             .distinct
             .order('total_revenue DESC').limit(5)
   end
+
+  def get_enabled_items
+    items.where(enabled: true)
+  end
+
+  def get_disabled_items
+    items.where(enabled: false)
+  end
 end
