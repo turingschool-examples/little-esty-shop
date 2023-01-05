@@ -39,4 +39,40 @@ RSpec.describe 'merchants items index' do
       expect(page).to have_button("Disable")
     end
   end
+
+  it 'contains sepeartes sections for disabled and enabled items' do
+    visit merchant_items_path(1)
+    i = 1
+    merch_items = []
+    15.times do 
+      merch_items << Item.find(i)
+      i += 1
+    end
+
+    within "div#enabled" do
+      merch_items.each do |item|
+        expect(page).to have_content(item.name)
+      end
+    end
+
+    within "div#item-1" do
+      click_button "Disable"
+    end
+    within "div#item-2" do
+      click_button "Disable"
+    end
+    within "div#item-3" do
+      click_button "Disable"
+    end
+    within "div#item-4" do
+      click_button "Disable"
+    end
+
+    within "div#disabled" do
+      expect(page).to have_content(Item.find(1).name)
+      expect(page).to have_content(Item.find(2).name)
+      expect(page).to have_content(Item.find(3).name)
+      expect(page).to have_content(Item.find(4).name)
+    end
+  end
 end
