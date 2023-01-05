@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
 <html>
   <head>
     <title>LittleEstyShop</title>
