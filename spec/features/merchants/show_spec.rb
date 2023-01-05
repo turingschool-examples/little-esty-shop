@@ -110,4 +110,49 @@ RSpec.describe "merchant dashboard" do
       expect(page).to have_content("#{@customer_7.first_name} - Successful Transactions: 1")
     end
   end
+
+  describe "items ready to ship" do
+    it 'has a list of items that have not yet been shipped with the invoice id as a link' do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      within('#items_ready_to_ship') do
+        expect(page).to have_content("Items ready to ship")
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@invoice_1.id)
+        expect(page).to have_content(@invoice_3.id)
+        expect(page).to have_content(@invoice_7.id)
+        expect(page).to have_content(@invoice_9.id)
+        expect(page).to have_link(@invoice_1.id.to_s)
+        expect(page).to have_link(@invoice_3.id.to_s)
+        expect(page).to have_link(@invoice_7.id.to_s)
+        expect(page).to have_link(@invoice_9.id.to_s)
+
+        expect(page).to_not have_content(@invoice_2.id)
+        expect(page).to_not have_content(@invoice_4.id)
+        expect(page).to_not have_link(@invoice_2.id.to_s)
+        expect(page).to_not have_link(@invoice_4.id.to_s)
+
+        click_link (@invoice_1.id.to_s)
+
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+      end
+    end
+
+      it 'has the date formatted for each invoice' do
+        @merchant_1 = Merchant.create!(name: "Billy the Guy")
+        @customer_1 = Customer.create!(first_name: "Steve", last_name: "Martin")
+        @invoice_1 = Invoice.create!(status: 1, customer_id: @customer_1.id)
+        @item_1 = Item.create!(name: "Pokemon Cards", description: "Investments", unit_price: 800, merchant_id: @merchant_1.id)
+        InvoiceItem.create!(quantity: 5, unit_price: 4000, status: "packaged", item_id: @item_1.id, invoice_id: @invoice_1.id)
+        @transaction_1 = Transaction.create!(credit_card_number: "4654405418249633", credit_card_expiration_date: nil, result: "success", invoice_id: @invoice_1.id)
+        @date_1 = @invoice_1.created_at
+
+        visit "/merchants/#{@merchant_1.id}/dashboard"
+
+        within('#items_ready_to_ship') do
+          expect(page).to have_content(@date_1.strftime("%A, %B %-d, %Y"))
+        end
+      end
+    
+  end
 end

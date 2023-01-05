@@ -15,4 +15,10 @@ class Merchant < ApplicationRecord
       .group('customers.id')
       .limit(5)
   end
+
+  def items_ready_to_ship
+    invoice_items.joins(:invoice)
+    .where.not(status: 2)
+    .order("invoices.created_at")
+  end
 end
