@@ -79,11 +79,11 @@ RSpec.describe Item, type: :model do
       InvoiceItem.create!(invoice_id: @invoice_22.id, item_id: @item_3.id, quantity: 9, unit_price: 76941, status: 'pending')
       InvoiceItem.create!(invoice_id: @invoice_23.id, item_id: @item_4.id, quantity: 9, unit_price: 76941, status: 'shipped')
     end
-    
+
     describe '#unshipped_items' do
       it 'returns a collection of unshipped items' do 
-        expect(Item.unshipped_items).to eq([@item_1, @item_2, @item_3])
-        expect(Item.unshipped_items).to_not eq([@item_4])
+        expect(Item.unshipped_items).to eq([@item_1.name, @item_2.name, @item_3.name])
+        expect(Item.unshipped_items).to_not eq([@item_4.name])
       end
     end
   end

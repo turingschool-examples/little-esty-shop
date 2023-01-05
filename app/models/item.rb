@@ -9,6 +9,6 @@ class Item < ApplicationRecord
   #  require 'pry'; binding.pry
       # invoice_items.where.not(status: :shipped)
   
-      Item.joins(:invoice_items).where('invoice_items.status!=0').select(:name)
+      Item.joins(:invoice_items).where('invoice_items.status!=0').pluck(:name)
   end
 end
