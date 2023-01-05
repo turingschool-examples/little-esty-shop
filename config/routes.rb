@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   get '/merchants', to: 'merchants#index'
   get '/merchants/:id/dashboard', to: 'merchants#show'
 
+  # get '/merchants/:id/items', to: 'merchants_items#index'
+  resources :merchants, only: [] do
+    scope module: "merchants" do
+      resources :items, only: [:index, :show, :edit, :update]
+    end
+  end
+
   get '/admin', to: 'admin/dashboard#index'
 
   namespace :admin do

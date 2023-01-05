@@ -50,6 +50,11 @@
 
   <body>
     <h1>Little Esty Shop</h1>
+
+    <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
+    
     <%= yield %>
   </body>
 </html>

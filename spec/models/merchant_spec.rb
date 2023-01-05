@@ -29,6 +29,16 @@ RSpec.describe Merchant do
       
       expect(merchants_ready_items.length).to eq(16)
     end
+
+    it 'returns the items in order of oldest to newest' do
+      merchants_ready_items = Merchant.find(1).ready_to_ship_items
+      first_item = merchants_ready_items.first
+      second_item = merchants_ready_items.second
+      last_item = merchants_ready_items.last
+
+      expect(first_item.invoice_created_at < second_item.invoice_created_at).to eq true
+      expect(second_item.invoice_created_at < last_item.invoice_created_at).to eq true
+    end
   end
 
   describe '#top_5_by_revenue' do
