@@ -2,5 +2,5 @@
 <%= render partial: 'admin/shared/nav' %>
 
 <h5>Invoice Status: <%= @invoice.status %></h5>
-<h5>Invoice Created: <%= @invoice.created_at %></h5>
+<h5>Invoice Created: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %></h5>
 <h5>Customer Name: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></h5>
