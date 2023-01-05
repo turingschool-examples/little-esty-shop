@@ -28,10 +28,10 @@ RSpec.describe "Admin Dashboard(Index)" do
     @customer_9 = Customer.create!(first_name: 'Dejon', last_name: 'Fadel')
     @customer_10 = Customer.create!(first_name: 'Ramona', last_name: 'Reynolds')
 
-    @invoice_1 = @customer_1.invoices.create!(status: 'cancelled')
-    @invoice_2 = @customer_1.invoices.create!(status: 'cancelled')
+    @invoice_1 = @customer_1.invoices.create!(status: 'completed')
+    @invoice_2 = @customer_1.invoices.create!(status: 'in progress')
 
-    @invoice_3 = @customer_2.invoices.create!(status: 'completed')
+    @invoice_3 = @customer_2.invoices.create!(status: 'in progress')
     @invoice_4 = @customer_2.invoices.create!(status: 'in progress')
 
     @invoice_5 = @customer_3.invoices.create!(status: 'cancelled')
@@ -44,15 +44,17 @@ RSpec.describe "Admin Dashboard(Index)" do
     @invoice_10 = @customer_5.invoices.create!(status: 'completed')
 
     @invoice_11 = @customer_6.invoices.create!(status: 'in progress')
-    @invoice_12 = @customer_6.invoices.create!(status: 'completed')
+    @invoice_12 = @customer_6.invoices.create!(status: 'in progress')
 
     #do i have to calculate the actual unit_price?
-    InvoiceItem.create!(invoice_id: @invoice_1.id,  item_id: @item_1.id, quantity: 5, unit_price: 13635, status: 'packaged')
-    InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 9, unit_price: 23324, status: 'pending')
+    InvoiceItem.create!(invoice_id: @invoice_1.id,  item_id: @item_1.id, quantity: 5, unit_price: 13635, status: 'shipped')
+    InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 9, unit_price: 23324, status: 'shipped')
+
     InvoiceItem.create!(invoice_id: @invoice_2.id,  item_id: @item_2.id, quantity: 12, unit_price: 34873, status: 'packaged')
     InvoiceItem.create!(invoice_id: @invoice_2.id,  item_id: @item_4.id, quantity: 8, unit_price: 2196, status: 'pending')
     InvoiceItem.create!(invoice_id: @invoice_2.id,  item_id: @item_5.id, quantity: 3, unit_price: 79140, status: 'packaged')
     InvoiceItem.create!(invoice_id: @invoice_2.id,  item_id: @item_1.id, quantity: 9, unit_price: 52100, status: 'shipped')
+
     InvoiceItem.create!(invoice_id: @invoice_3.id,  item_id: @item_7.id, quantity: 10, unit_price: 66747, status: 'shipped')
     InvoiceItem.create!(invoice_id: @invoice_3.id,  item_id: @item_8.id, quantity: 9, unit_price: 76941, status: 'packaged')
 
@@ -159,6 +161,20 @@ RSpec.describe "Admin Dashboard(Index)" do
           expect(page).to have_content('Mariah Toy - 4 purchases')
           expect(page).to have_content('Sylvester Nader - 3 purchases')
           expect(page).to have_content('Joey Ondricka - 2 purchases')
+        end
+      end
+    end
+
+    describe 'user story 22' do 
+      it 'displays a section containing a list of incomplete invoices' do 
+        visit '/admin'
+
+        save_and_open_page
+
+        within('#incomplete_invoices') do 
+          expect(page).to have_content("Invoice ##{@invoice_2.id}")
+          expect(page).to have_content("Invoice ##{@invoice_3.id}")
+          expect(page).to_not have_content("Invoice ##{@invoice_1.id}")
         end
       end
     end

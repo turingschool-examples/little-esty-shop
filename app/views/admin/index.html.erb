@@ -11,6 +11,15 @@
 <ol>
   <% @top_5_customers.each do |customer| %>
     <li><%="#{customer.first_name} #{customer.last_name} - #{customer.count_result} purchases"%></li>
-  <% end%>
+  <% end %>
 </ol>
+</section>
+
+<section id="incomplete_invoices">
+<h3>Incomplete Invoices</h3>
+<ul>
+  <% @incomplete_invoices.each do |invoice| %>
+    <li>Invoice #<%=invoice.id%></li>
+  <% end %>
+</ul>
 </section>
