@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'admins dashboard' do
+RSpec.describe 'admin invoices index' do
   before :each do
     @merchant_1 = Merchant.create!(name: "Billy the Guy")
     @merchant_2 = Merchant.create!(name: "Different Guy")
@@ -51,56 +51,12 @@ RSpec.describe 'admins dashboard' do
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
 
-  it 'shows header indicating that I am on the admin dashboard' do
-    visit admin_index_path
+  it 'contains all the invoice IDs in the system' do
+    visit admin_invoices_path
 
-    expect(page).to have_content("Welcome to the Admin Dashboard")
-  end
-
-  it 'contains links to the admin merchants index' do
-    visit admin_index_path
-
-    expect(page).to have_link('Merchants')
-
-    click_link 'Merchants'
-
-    expect(current_path).to eq(admin_merchants_path)
-  end
-
-  it 'contains links to the admin invoices index' do
-    visit admin_index_path
-    
-    expect(page).to have_link('Invoices')
-
-    click_link 'Invoices'
-
-    expect(current_path).to eq(admin_invoices_path)
-  end
-
-  it 'contains the top 5 customers' do
-    visit admin_index_path
-
-    within("#top_customers") do
-      expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
-      expect(@customer_2.first_name).to appear_before(@customer_3.first_name)
-      expect(@customer_3.first_name).to appear_before(@customer_4.first_name)
-      expect(@customer_4.first_name).to appear_before(@customer_5.first_name)
-      expect(@customer_1.first_name).to appear_before(@customer_2.first_name)
-      expect(page).to_not have_content(@customer_6.first_name)
-    end
-  end
-
-  it 'shows incomplete invoices' do
-    visit admin_index_path
-
-    within("#incomplete_invoices") do
-      expect(page).to have_content("Invoice ##{@invoice_1.id}")
-      expect(page).to have_content("Invoice ##{@invoice_3.id}")
-      expect(page).to_not have_content("Invoice ##{@invoice_2.id}")
-
-      click_link "Invoice ##{@invoice_1.id}"
-
-      expect(current_path).to eq(admin_invoice_path(@invoice_1))
-    end
+    expect(page).to have_link("Invoice ##{@invoice_1.id}")
+    expect(page).to have_link("Invoice ##{@invoice_13.id}")
+    click_link("Invoice ##{@invoice_1.id}")
+    # expect(current_path).to eq(admin_invoice_path)
   end
 end
