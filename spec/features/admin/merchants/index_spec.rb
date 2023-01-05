@@ -74,4 +74,17 @@ RSpec.describe 'Admin Merchants index' do
       expect(page).to have_content(Merchant.first.name)
     end
   end
+
+  it 'Shows the top 5 merchants by revenue' do
+    visit admin_merchants_path
+
+    save_and_open_page
+
+    within("#top_by_revenue") do
+      expect('Osinski, Pollich and Koelpin').to appear_before('Klein, Rempel and Jones')
+      expect('Klein, Rempel and Jones').to appear_before('Bernhard-Johns')
+      expect('Bernhard-Johns').to appear_before('Willms and Sons')
+      expect('Willms and Sons').to appear_before('Cummings-Thiel')
+    end
+  end
 end

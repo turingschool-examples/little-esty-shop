@@ -2,8 +2,8 @@
 <%= render partial: 'admin/shared/nav' %>
 <%= button_to 'Create a new merchant', new_admin_merchant_path, method: :get %>
 
-<h5>Enabled Merchants: </h5>
 <div id='enabled_merchants'>
+<h5>Enabled Merchants: </h5>
 <% @merchants.each do |merchant| %>
   <% if merchant.enabled %>
     <div id="merchant_<%= merchant.id %>">
@@ -14,8 +14,8 @@
 <% end %>
 </div>
 
-<h5>Disabled Merchants: </h5>
 <div id='disabled_merchants'>
+<h5>Disabled Merchants: </h5>
 <% @merchants.each do |merchant| %>
   <% unless merchant.enabled %>
     <div id="merchant_<%= merchant.id %>">
@@ -24,4 +24,13 @@
     </div>
   <% end %>
 <% end %>
+</div>
+
+<div id='top_by_revenue'>
+<h5>Top Merchants:</h5>
+<ol>
+<% Merchant.top_5_by_revenue.each do |merchant| %>
+  <li><%= merchant.name %></li>
+<% end %>
+</ol>
 </div>
