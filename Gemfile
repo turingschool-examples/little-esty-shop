@@ -47,6 +47,7 @@ group :development, :test do
   gem 'orderly'
   gem 'pry-nav'
   gem 'table_print'
+  gem 'factory_bot_rails'
 end
 
 group :development do
