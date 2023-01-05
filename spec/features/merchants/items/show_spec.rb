@@ -5,10 +5,15 @@ RSpec.describe 'merchants item show page' do
     # require 'pry'; binding.pry
     visit '/merchants/1/items/10'
 
-    save_and_open_page
     item = Item.find(10)
     expect(page).to have_content(item.name)
     expect(page).to have_content("Description: #{item.description}")
     expect(page).to have_content("Current Price: $#{item.unit_price.to_f/100}")
+  end
+
+  it 'has a link to update the item' do
+    visit '/merchants/1/items/10'
+
+    expect(page).to have_link('Update Item', href: '/merchants/1/items/10/edit')
   end
 end
