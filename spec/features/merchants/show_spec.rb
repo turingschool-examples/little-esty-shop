@@ -204,9 +204,11 @@ RSpec.describe 'merchant show' do
                                 invoice_id: invoice1.id)
       ii3 = InvoiceItem.create!(quantity: 5, unit_price: item3.unit_price, item_id: item3.id,
                                 invoice_id: invoice1.id)
-                                
+
       visit merchant_dashboards_path(merchant1.id)
-      click_on invoice1.id.to_s
+      within("#invoice#{invoice1.id}-item#{item1.id}") do
+        click_on invoice1.id.to_s
+      end
 
       expect(current_path).to eq(invoice_path(invoice1))
     end

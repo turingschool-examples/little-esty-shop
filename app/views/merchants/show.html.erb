@@ -4,6 +4,8 @@
 <section id='packaged'><h2>Items Ready to Ship</h2></section>
 <% @merchant.pending_invoices.each do |invoice| %>
   <% invoice.items.each do |item| %>
-    <%= item.name %> <%= invoice.id %>
+  <section id='invoice<%=invoice.id%>-item<%=item.id%>'>
+    <%= item.name %> <%= link_to invoice.id, invoice_path(invoice) %>
+    </section>
   <% end %>
 <% end %>
