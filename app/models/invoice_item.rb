@@ -5,6 +5,6 @@ class InvoiceItem < ApplicationRecord
   validates_numericality_of :quantity, :unit_price
 
   def unit_price_to_dollars
-    unit_price.to_f / 100
+    number_to_currency(unit_price.to_f / 100)
   end
 end

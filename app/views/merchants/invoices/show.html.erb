@@ -3,3 +3,11 @@
 Invoice Status: <%= @invoice.status %>
 This invoice was created at: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %>
 The customer that created this invoice is: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %>
+
+<h4>Items on this invoice:</h4><br>
+<% @invoice.invoice_items.each do |invoice_item| %>
+  <h5><%= invoice_item.item.name %></h5>
+  Quantity: <%= invoice_item.quantity %>
+  Selling Price: <%= invoice_item.unit_price_to_dollars %>
+  Status: <%= invoice_item.status %>
+<% end %>
