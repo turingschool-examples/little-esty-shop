@@ -30,4 +30,19 @@ RSpec.describe Item do
       expect(Item.dollars_to_unit_price("99.99")).to eq(9999)
     end
   end
+
+  describe '#switch_enabled_field' do
+    it 'changes an items enabled field from true to false or vice versa' do
+      item = Item.find(10)
+      expect(item.enabled).to eq(true)
+
+      item.switch_enabled_field
+
+      expect(item.enabled).to eq(false)
+
+      item.switch_enabled_field
+      
+      expect(item.enabled).to eq(true)
+    end
+  end
 end
