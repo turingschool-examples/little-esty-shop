@@ -2,5 +2,5 @@
 
 <div id="items">
 <% @items.each do |item| %>
-  <%= item.name %><br>
+  <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %><br>
 <% end %>

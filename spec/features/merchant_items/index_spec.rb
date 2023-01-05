@@ -173,7 +173,20 @@ RSpec.describe 'merchant items index page' do
       expect(page).to_not have_content(@item23.name)
       expect(page).to_not have_content(@item31.name)
     end
+  end
 
+  it 'has links for each item that links to the merchants items show page' do
+    visit merchant_items_path(@merchant3.id)
+
+    within "#items" do
+      expect(page).to have_link "#{@item24.name}", href: "/merchants/#{@merchant3.id}/items/#{@item24.id}"
+      expect(page).to have_link "#{@item30.name}", href: "/merchants/#{@merchant3.id}/items/#{@item30.id}"
+    end
+
+    click_link "#{@item24.name}"
+    expect(page).to have_content(@item24.name)
+    expect(page).to have_content(@item24.description)
+    expect(page).to have_content(@item24.unit_price)
   end
 
 
