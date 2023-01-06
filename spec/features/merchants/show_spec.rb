@@ -206,26 +206,72 @@ RSpec.describe 'Merchant Dashboard' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
       expect(page).to have_content("Items Ready to Ship") 
+
       within("#unshipped_item_invoice_#{@invoice_4.id}") do
         expect(page).to have_link("Invoice ID #{@invoice_4.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}")
         expect(page).to have_content(@item_1.name)
         expect(page).to_not have_content(@item_2.name)
       end
+
       within("#unshipped_item_invoice_#{@invoice_18.id}") do
         expect(page).to have_link("Invoice ID #{@invoice_18.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_18.id}")
         expect(page).to have_content(@item_2.name)
         expect(page).to_not have_content(@item_1.name)
       end
+
       within("#unshipped_item_invoice_#{@invoice_19.id}") do
         expect(page).to have_link("Invoice ID #{@invoice_19.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_19.id}")
         expect(page).to have_content(@item_2.name)
         expect(page).to_not have_content(@item_1.name)
       end
+
       within("#unshipped_item_invoice_#{@invoice_21.id}") do
         expect(page).to have_link("Invoice ID #{@invoice_21.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_21.id}")
         expect(page).to have_content(@item_2.name)
         expect(page).to_not have_content(@item_1.name)
       end
+    end
+  end
+
+  # As a merchant
+  # When I visit my merchant dashboard
+  # In the section for "Items Ready to Ship",
+  # Next to each Item name I see the date that the invoice was created
+  # And I see the date formatted like "Monday, July 18, 2019"
+  # And I see that the list is ordered from oldest to newest
+  describe 'user story 5' do 
+    it 'displays the date that the invoice was created ordered oldest to newest' do
+      @invoice_4.update!(created_at: "2012-03-25 09:54:09 UTC")
+      @invoice_18.update!(created_at: "2013-04-05 09:54:09 UTC")
+      @invoice_19.update!(created_at: "2014-09-13 09:54:09 UTC")
+      @invoice_21.update!(created_at: "2015-11-22 09:54:09 UTC")
+
+      invoice_4_created_at = @invoice_4.created_at.strftime("%A, %B %d, %Y")
+      invoice_18_created_at = @invoice_18.created_at.strftime("%A, %B %d, %Y")
+      invoice_19_created_at = @invoice_19.created_at.strftime("%A, %B %d, %Y")
+      invoice_21_created_at = @invoice_21.created_at.strftime("%A, %B %d, %Y")
+      
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      within("#unshipped_item_invoice_#{@invoice_4.id}") do
+        expect(page).to have_content(invoice_4_created_at)
+      end
+
+      within("#unshipped_item_invoice_#{@invoice_18.id}") do
+        expect(page).to have_content(invoice_18_created_at)
+      end
+
+      within("#unshipped_item_invoice_#{@invoice_19.id}") do
+        expect(page).to have_content(invoice_19_created_at)
+      end
+
+      within("#unshipped_item_invoice_#{@invoice_21.id}") do
+        expect(page).to have_content(invoice_21_created_at)
+      end
+
+      expect(invoice_4_created_at).to appear_before(invoice_18_created_at)
+      expect(invoice_18_created_at).to appear_before(invoice_19_created_at)
+      expect(invoice_19_created_at).to appear_before(invoice_21_created_at)
     end
   end
 end
