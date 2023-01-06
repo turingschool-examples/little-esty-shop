@@ -28,14 +28,18 @@ RSpec.describe 'the admin merchants index' do
       it 'Then redirects back to the admin merchants index showing that the merchant\'s status has changed' do
         visit admin_merchants_path
 
-        within ("#admin-merchants-#{@merchant.id}") do
+        within ("#admin-merchants-#{@merchant_1.id}") do
+          expect(page).to have_content("Status: #{@merchant_1.status}")
+          expect(page).to have_content("Status: enabled")
           expect(page).to have_button("Disable/Enable")
+          click_on("Disable/Enable")
         end
 
         expect(current_path).to eq('/admin/merchants')
 
-        within ("#admin-merchants-#{@merchant.id}") do
-          expect(page).to have_button("Disable/Enable")
+        within ("#admin-merchants-#{@merchant_1.id}") do
+          expect(page).to have_content("Status: #{@merchant_1.status}")
+          expect(page).to have_content("Status: disabled")
         end
       end
     end
