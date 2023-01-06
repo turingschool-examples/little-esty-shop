@@ -1,5 +1,7 @@
 <h1>Admin Merchants Index</h1>
 
+<%= link_to "Create New Merchant", new_admin_merchant_path %>
+
 <% @merchants.each do |merchant| %>
   <% if merchant.status == "disabled" %>
     <div id="disabled">
