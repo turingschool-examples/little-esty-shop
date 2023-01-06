@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   def self.top5(id)
     Customer
     .joins(:merchants, :transactions)
-    .where("transactions.result = 0 AND merchants.id = #{id}")
+    .where("transactions.result = 1 AND merchants.id = #{id}")
     .group(:id)
     .select('first_name, last_name, count(customers) AS transactions_count')
     .order(transactions_count: :desc)
