@@ -212,6 +212,20 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content(@item26.status)
       expect(page).to have_button("Disable/Enable")
     end
+  end
+
+  it 'changes the status of an item when the toggle button is pressed' do
+    visit merchant_items_path(@merchant3.id)
+
+    within "#item_id-#{@item24.id}" do
+      click_button("Disable/Enable")
+    end
+
+    expect(current_path).to eq(merchant_items_path(@merchant3.id))
+    within "#item_id-#{@item24.id}" do
+      expect(page).to have_content("Status: Disabled")
+      expect(page).to_not have_content("Enabled")
+    end
 
   end
 end
