@@ -35,4 +35,10 @@ RSpec.describe 'Merchants Invoice Show' do
       expect(page).to_not have_content(item.name)
     end
   end
+
+  it 'Shows the total revenue for the specific invoice' do
+    visit merchant_invoice_path(Merchant.find(8), Invoice.find(31))
+
+    expect(page).to have_content('Total invoice revenue: $28,499.29')
+  end
 end

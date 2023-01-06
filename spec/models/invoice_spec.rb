@@ -15,4 +15,10 @@ RSpec.describe Invoice do
       expect(Invoice.incomplete_invoices.first).to eq(Invoice.find(10))
     end
   end
+
+  describe 'Instance Methods' do
+    it 'returns the total revenue for a specific invoice' do
+      expect(Invoice.find(31).total_invoice_revenue).to eq('$28,499.29')
+    end
+  end
 end
