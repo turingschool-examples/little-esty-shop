@@ -58,13 +58,18 @@ RSpec.describe "merchant's item show page" do
     @transaction_12 = Transaction.create!(credit_card_number: "4654405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_12.id)
     @transaction_13 = Transaction.create!(credit_card_number: "4554405418249699", credit_card_expiration_date: nil, result: "failed", invoice_id: @invoice_13.id)
   end
-
-  it 'lists all attributes for that item' do
+  it 'lists all attributes for that item after I click link on index page' do
     visit "/merchants/#{@merchant_1.id}/items"
 
-    click_link "#{@item_1.name}"
-
+    within("#disabled") do
+      click_link "#{@item_1.name}"
+    end
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+  end
+
+  it 'lists all attributes for that item' do
+    visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
+
     expect(page).to have_content(@item_1.name)
     expect(page).to have_content(@item_1.description)
     expect(page).to have_content(@item_1.unit_price)
