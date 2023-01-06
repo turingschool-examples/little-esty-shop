@@ -270,24 +270,23 @@ RSpec.describe 'merchant show' do
       merchant1 = Merchant.create!(name: 'Rays Hand Made Jewlery')
 
       item1 = Item.create!(name: 'Chips', description: 'Ring', unit_price: 20, merchant_id: merchant1.id)
-      # item2 = Item.create!(name: 'darrel', description: 'Bracelet', unit_price: 40, merchant_id: merchant1.id)
-      # item3 = Item.create!(name: 'don', description: 'Necklace', unit_price: 30, merchant_id: merchant1.id)
+      item2 = Item.create!(name: 'darrel', description: 'Bracelet', unit_price: 40, merchant_id: merchant1.id)
+      item3 = Item.create!(name: 'don', description: 'Necklace', unit_price: 30, merchant_id: merchant1.id)
 
       customer1 = Customer.create!(first_name: 'Kyle', last_name: 'Ledin')
-      invoice1 = Invoice.create!(status: 1, customer_id: customer1.id)
-      invoice2 = Invoice.create!(status: 1, customer_id: customer1.id)
-      invoice3 = Invoice.create!(status: 1, customer_id: customer1.id)
-      ii1 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice1.id)
-      ii2 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice2.id)
-      ii3 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id, invoice_id: invoice3.id)
-      # ii2 = InvoiceItem.create!(quantity: 5, unit_price: item2.unit_price, item_id: item2.id,
-                                # invoice_id: invoice1.id)
-      # ii3 = InvoiceItem.create!(quantity: 5, unit_price: item3.unit_price, item_id: item3.id,
-                                # invoice_id: invoice1.id)
+      invoice1 = Invoice.create!(status: 1, customer_id: customer1.id, created_at: Time.now)
+      invoice2 = Invoice.create!(status: 1, customer_id: customer1.id, created_at: Time.now-5.days)
+      invoice3 = Invoice.create!(status: 1, customer_id: customer1.id, created_at: Time.now-6.days)
+      ii1 = InvoiceItem.create!(quantity: 5, unit_price: item1.unit_price, item_id: item1.id,
+                                invoice_id: invoice1.id)
+      ii2 = InvoiceItem.create!(quantity: 5, unit_price: item2.unit_price, item_id: item2.id,
+                                invoice_id: invoice2.id)
+      ii3 = InvoiceItem.create!(quantity: 5, unit_price: item3.unit_price, item_id: item3.id,
+                                invoice_id: invoice3.id)
 
       visit merchant_dashboards_path(merchant1.id)
 
-      expect(invoice1.id.to_s).to appear_before(invoice2.id.to_s)
+      expect(invoice3.id.to_s).to appear_before(invoice2.id.to_s)
     end
   end
 end
