@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
   has_many :items, through: :invoices
 
   def self.successful_transactions
-    joins(:transactions).where("transactions.result = 'success'")
+    joins(:transactions).where("transactions.result = 1")
   end
 
   def self.order_by_purchases

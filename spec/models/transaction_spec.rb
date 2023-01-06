@@ -32,13 +32,7 @@ RSpec.describe Transaction do
 
     @ii4 = InvoiceItem.create!(quantity: 5, unit_price: @item4.unit_price, item_id: @item4.id, invoice_id: @invoice4.id)
   end
-  describe 'do' do
-    it 'do' do
 
-      binding.pry
-    end
-
-  end
   describe "Relationships" do
     it {should belong_to :invoice}
     it {should have_many(:merchants).through(:invoice)}

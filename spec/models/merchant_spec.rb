@@ -39,7 +39,6 @@ RSpec.describe Merchant do
     it {should have_many(:invoices).through(:invoice_items)}
     it {should have_many(:customers).through(:invoices)}
     it {should have_many(:transactions).through(:invoices)}
-
   end
   
   describe "#top5" do
@@ -69,8 +68,6 @@ RSpec.describe Merchant do
       transaction8 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice8.id)
       ii8 = InvoiceItem.create!(quantity: 5, unit_price: item8.unit_price, item_id: item8.id, invoice_id: invoice8.id)    
       
-  
-      
       item9 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice9 = Invoice.create!(status: 1, customer_id: customer3.id)
       transaction9 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice9.id)
@@ -86,8 +83,6 @@ RSpec.describe Merchant do
       transaction11 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice11.id)
       ii11 = InvoiceItem.create!(quantity: 5, unit_price: item11.unit_price, item_id: item11.id, invoice_id: invoice11.id)
       
-  
-  
       item12 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice12 = Invoice.create!(status: 1, customer_id: customer4.id)
       transaction12 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice12.id)
@@ -123,12 +118,10 @@ RSpec.describe Merchant do
       transaction18 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice18.id)
       ii18 = InvoiceItem.create!(quantity: 5, unit_price: item18.unit_price, item_id: item18.id, invoice_id: invoice18.id)
       
-  
       item19 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice19 = Invoice.create!(status: 1, customer_id: @customer1.id)
       transaction19 = Transaction.create!(credit_card_number: '121987654', credit_card_expiration_date: '02/07', invoice_id: invoice19.id)
       ii19 = InvoiceItem.create!(quantity: 5, unit_price: item19.unit_price, item_id: item19.id, invoice_id: invoice19.id)
-  
   
       item20 = Item.create!(name: 'fak121212e', description: 'T121212ing', unit_price: 30, merchant_id: @merchant1.id)
       invoice20 = Invoice.create!(status: 1, customer_id: customer3.id)
@@ -141,6 +134,7 @@ RSpec.describe Merchant do
       expect(Merchant.top5(@merchant1.id).fourth.transactions_count).to eq(9)
       expect(Merchant.top5(@merchant1.id).fifth.transactions_count).to eq(4)
     end
+  end
 
   describe 'instance methods' do
     describe '#pending_invoices' do
