@@ -9,8 +9,9 @@ RSpec.describe Merchant, type: :model do
   describe 'validations' do
     it {should validate_presence_of(:name)}
   end
+
   before(:each) do
-    @merchant_1 = create(:merchant)
+    @merchant_1 = create(:merchant, status: "enabled")
     @merchant_2 = create(:merchant)
     @merchant_3 = create(:merchant)
 
@@ -43,6 +44,20 @@ RSpec.describe Merchant, type: :model do
   describe 'merchant invoices' do
     it 'returns merchant invoice ids' do
       expect(@merchant_2.all_invoice_ids).to eq([@invoice_2.id, @invoice_3.id, @invoice_4.id])
+    end
+  end
+
+  describe '#toggle_status' do
+    it 'changes merchant status to disabled if currently enabled and the inverse' do
+      expect(@merchant_1.status).to eq("enabled")
+
+      @merchant_1.toggle_status
+
+      expect(@merchant_1.status).to eq("disabled")
+
+      @merchant_1.toggle_status
+
+      expect(@merchant_1.status).to eq("enabled")
     end
   end
 end

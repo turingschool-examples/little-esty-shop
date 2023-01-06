@@ -11,6 +11,6 @@ class Merchant < ApplicationRecord
   end
 
   def toggle_status
-    self.status == "enabled" ? self.status = "disabled" : self.status = "enabled"
+    self.status == "enabled" ? self.disabled! : self.enabled!
   end
 end
