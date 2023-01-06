@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'admin merchants index' do
   before :each do
-    @merchant_1 = Merchant.create!(name: "Billy the Guy")
+    @merchant_1 = Merchant.create!(name: "Billy the Guy", status: "enabled")
     @merchant_2 = Merchant.create!(name: "Different Guy")
 
     @customer_1 = Customer.create!(first_name: "Steve", last_name: "Martin")
@@ -76,7 +76,7 @@ RSpec.describe 'admin merchants index' do
   it 'contains a button next to each merchants name to enable or disable that merchant' do
     visit admin_merchants_path
 
-    within("#merchant_#{@merchant_1.id}") do
+    within("#merchant_#{@merchant_2.id}") do
       expect(page).to have_content("Status: disabled")
       expect(page).to have_button 'Enable'
       expect(page).to_not have_button 'Disable'
@@ -90,6 +90,22 @@ RSpec.describe 'admin merchants index' do
       expect(page).to have_content("Status: enabled")
       expect(page).to_not have_button 'Enable'
       expect(page).to have_button 'Disable'
+    end
+  end
+
+  it 'groups merchants by their status' do
+    visit admin_merchants_path
+
+    within("#disabled") do
+      expect(page).to have_content('Disabled Merchants')
+      expect(page).to have_content(@merchant_2.name)
+      expect(page).to_not have_content(@merchant_1.name)
+    end
+
+    within("#enabled") do
+      expect(page).to have_content('Enabled Merchants')
+      expect(page).to have_content(@merchant_1.name)
+      expect(page).to_not have_content(@merchant_2.name)
     end
   end
 end
