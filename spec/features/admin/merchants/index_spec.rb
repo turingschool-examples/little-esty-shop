@@ -7,6 +7,11 @@ RSpec.describe 'the admin merchants index' do
     @merchant_3 = create(:merchant)
     @merchant_4 = create(:merchant)
     @merchant_5 = create(:merchant)
+    @merchant_6 = create(:merchant, status: 1)
+    @merchant_7 = create(:merchant, status: 1)
+    @merchant_8 = create(:merchant, status: 1)
+    @merchant_9 = create(:merchant, status: 1)
+    @merchant_10 = create(:merchant, status: 1)
   end
 
   describe 'As an admin, When I visit the admin merchants index page' do
@@ -40,6 +45,26 @@ RSpec.describe 'the admin merchants index' do
         within ("#admin-merchants-#{@merchant_1.id}") do
           expect(page).to have_content("Status: disabled")
         end
+      end
+    end
+
+    it 'shows merchants seperated by status' do
+      visit admin_merchants_path
+
+      within ("#admin-merchants-enabled") do
+        expect(page).to have_content("Status: #{@merchant_1.status}")
+        expect(page).to have_content("Status: #{@merchant_2.status}")
+        expect(page).to have_content("Status: #{@merchant_3.status}")
+        expect(page).to have_content("Status: #{@merchant_4.status}")
+        expect(page).to have_content("Status: #{@merchant_5.status}")
+      end
+
+      within ("#admin-merchants-disabled") do
+        expect(page).to have_content("Status: #{@merchant_6.status}")
+        expect(page).to have_content("Status: #{@merchant_7.status}")
+        expect(page).to have_content("Status: #{@merchant_8.status}")
+        expect(page).to have_content("Status: #{@merchant_9.status}")
+        expect(page).to have_content("Status: #{@merchant_10.status}")
       end
     end
   end
