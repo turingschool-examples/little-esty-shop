@@ -1,3 +1,8 @@
+<html>
+<body> 
+<h3><font color=red><%= flash[:notice] %></h3><font color=black>
+</body>
+</html>
 <h1>Invoice #: <%= @invoice.id %></h1>
 <p>Status: <%= @invoice.status %></p>
 <p>Created At: <%= @invoice.format_date_long %></p>
@@ -5,11 +10,17 @@
 
 <% @invoice.items.each do |item| %>
 <br>
-
+<div id="item-<%= item.id %>">
 <p>Item Name: <%= item.name %> </p>
 <p>Item Price: $<%= (@invoice.invoice_item(item).unit_price / 100.00) %> </p>
 <p>Item Quantity: <%= @invoice.invoice_item(item).quantity %> </p>
-<p>Item Status: <%= @invoice.invoice_item(item).status %> </p>
+<p>Item Status: </p>
+<%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+  <%= f.label :status %>
+  <%= f.select :status, options_for_select([[:packaged, "packaged"], [:pending, "pending"], [:shipped, "shipped"]], @invoice.invoice_item(item).status) %>
+  <%= f.submit "Update Item Status" %>
+  <% end %>
+  </div>
 <% end %>
 <br>
 <h2>Invoice Total: $<%= @invoice.total_revenue%></h2>

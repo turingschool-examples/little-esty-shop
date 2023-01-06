@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show', as: "merchants_merchantid_dashboard"
+  patch '/merchants/:merchant_id/invoices/:invoice_id', to: "invoices#update"
 
   resources :merchants, only: [:index, :show] do
     resources :items, :controller => :merchants_items, only: [:index, :show, :update, :edit]

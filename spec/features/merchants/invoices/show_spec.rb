@@ -27,8 +27,8 @@ RSpec.describe 'merchant invoice show' do
 
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1)
     @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_2)
-    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3)
-    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_3) 
+    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_3, status: 0)
+    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_3, status: 1) 
     @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_4)
     @invoice_item_6 = create(:invoice_item, item: @item_7, invoice: @invoice_4)
   end
@@ -64,6 +64,21 @@ RSpec.describe 'merchant invoice show' do
 
       expect(page).to have_content("Invoice Total: $#{@invoice_1.total_revenue}")
       expect(page).to_not have_content("Invoice Total: $#{@invoice_3.total_revenue}")
+    end
+
+    it 'shows each invoice items status is a select field and item current status is selected' do
+ 
+      visit merchant_invoice_path(@merchant_2, @invoice_3)
+      within "#item-#{@item_3.id}" do
+        expect(page).to have_select("status", selected: "packaged")
+        expect(page).to_not have_select("status", selected: "pending")
+        
+        select("shipped", from: "status")
+        click_on "Update Item Status"
+      end
+      
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}/invoices/#{@invoice_3.id}")
+      expect(page).to have_select("status", selected: "shipped")
     end
   end
 end
