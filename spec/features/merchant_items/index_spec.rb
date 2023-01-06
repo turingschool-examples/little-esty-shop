@@ -194,4 +194,38 @@ RSpec.describe 'merchant items index page' do
 
     expect(page).to have_link "Update Item", href: "/merchants/#{@merchant1.id}/items/#{@item1.id}/edit"
   end
+
+  it 'displays each items status enabled/disabled next to the item and has a button to change status' do
+    visit merchant_items_path(@merchant3.id)
+
+    within "#item_id-#{@item24.id}" do
+      expect(page).to have_content(@item24.status)
+      expect(page).to have_button("Disable/Enable")
+    end
+      
+    within "#item_id-#{@item26.id}" do
+      expect(page).to have_content(@item26.status)
+      expect(page).to have_button("Disable/Enable")
+    end
+
+    within "#item_id-#{@item30.id}" do
+      expect(page).to have_content(@item26.status)
+      expect(page).to have_button("Disable/Enable")
+    end
+  end
+
+  it 'changes the status of an item when the toggle button is pressed' do
+    visit merchant_items_path(@merchant3.id)
+
+    within "#item_id-#{@item24.id}" do
+      click_button("Disable/Enable")
+    end
+
+    expect(current_path).to eq(merchant_items_path(@merchant3.id))
+    within "#item_id-#{@item24.id}" do
+      expect(page).to have_content("Status: Disabled")
+      expect(page).to_not have_content("Enabled")
+    end
+
+  end
 end
