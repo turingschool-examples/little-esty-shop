@@ -1,8 +1,8 @@
 <%@merchant.items.each do |item|%>
   <p><%= link_to item.name, merchant_item_path(@merchant, item) %>
   <% if item.status = 0 %>
-    <%= button_to  "Enable", merchant_item_index_path(@merchant), method: :patch, params: { :status => true } %>
+    <%= button_to  "Enable", merchant_item_index_path(@merchant), method: :patch, params: { :status => 1 } %>
   <% else %>
-    <%= button_to  "Disable", merchant_item_index_path(@merchant), method: :patch, params: { :status => true } %>
+    <%= button_to  "Disable", merchant_item_index_path(@merchant), method: :patch, params: { :status => 0 } %>
   <% end %><p>
 <% end %>

@@ -60,17 +60,16 @@ RSpec.describe 'merchant items index page' do
       terry = Merchant.create!(name: "Terry Peeples")
       
       pen = mariah.items.create!(name: "pen", description: "writes stuff", unit_price: 33)
-      marker = mariah.items.create!(name: "marker", description: "writes stuff", unit_price: 23)
-      pencil = mariah.items.create!(name: "pencil", description: "writes stuff", unit_price: 13)
+      # marker = mariah.items.create!(name: "marker", description: "writes stuff", unit_price: 23)
+      # pencil = mariah.items.create!(name: "pencil", description: "writes stuff", unit_price: 13)
       
       socks = terry.items.create!(name: "socks", description: "keeps feet warm", unit_price: 8)
       shoes = terry.items.create!(name: "shoes", description: "provides arch support", unit_price: 68)
       
       visit merchant_item_index_path(mariah)
       click_button 'Enable'
-      
+
       expect(page).to have_current_path(merchant_item_index_path(mariah))
-      expect()
     end
     it 'changes the items status'
   end
