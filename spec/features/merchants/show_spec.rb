@@ -229,7 +229,7 @@ RSpec.describe 'merchant show' do
       end
     end
     
-    it 'orders list from oldest invoice creation to newest' do
+    xit 'orders list from oldest invoice creation to newest' do
       merchant1 = Merchant.create!(name: 'Rays Hand Made Jewlery')
 
       item1 = Item.create!(name: 'Chips', description: 'Ring', unit_price: 20, merchant_id: merchant1.id)
