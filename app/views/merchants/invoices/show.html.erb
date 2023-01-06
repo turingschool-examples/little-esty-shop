@@ -1,8 +1,9 @@
 <h3>Merchant: <%= @merchant.name %></h3>
 <h4>Invoice ID: <%= @invoice.id %></h4>
-Invoice Status: <%= @invoice.status %>
-This invoice was created at: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %>
-The customer that created this invoice is: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %>
+Invoice Status: <%= @invoice.status %><br>
+This invoice was created at: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %><br>
+The customer that created this invoice is: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br>
+Total invoice revenue: <%= @invoice.total_invoice_revenue %><br>
 
 <h4>Items on this invoice:</h4><br>
 <% @invoice.invoice_items.each do |invoice_item| %>

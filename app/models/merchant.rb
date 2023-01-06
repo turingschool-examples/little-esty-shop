@@ -24,7 +24,7 @@ class Merchant < ApplicationRecord
 
   def self.top_5_by_revenue
     Merchant.joins(:transactions)
-            .select('merchants.*, sum(invoice_items.unit_price) * sum(invoice_items.quantity) as total_revenue')
+            .select('merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) as total_revenue')
             .where('transactions.result = ?', 'success')
             .group(:id)
             .distinct

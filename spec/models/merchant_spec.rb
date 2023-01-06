@@ -77,7 +77,7 @@ RSpec.describe Merchant do
 
   describe '#revenue_in_dollars' do
     it 'returns the total revenue for a given merchant in dollars' do
-      expect(Merchant.top_5_by_revenue.first.revenue_in_dollars).to eq('$18,159,238.96')
+      expect(Merchant.top_5_by_revenue.first.revenue_in_dollars).to eq('$227,757.77')
     end
   end
 end

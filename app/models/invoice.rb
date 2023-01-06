@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     Invoice.left_joins(:invoice_items).where.not('invoice_items.status = ?', 2).distinct.order(:updated_at)
   end
+
+  def total_invoice_revenue
+    number_to_currency(invoice_items.sum('invoice_items.quantity * invoice_items.unit_price')/100.0)
+  end
 end
