@@ -25,26 +25,14 @@ RSpec.describe 'Merchant Items Index page' do
   describe 'User story 6' do
     it 'displays a list of all merchant items for that particular merchant' do
       visit merchant_items_path(@merchant_1.id)
-      
-      within("#item_#{@item_1.id}") do
         expect(page).to have_content(@item_1.name)
-        expect(page).to_not have_content(@item_2.name)
-      end
-      
-      within("#item_#{@item_2.id}") do
         expect(page).to have_content(@item_2.name)
-        expect(page).to_not have_content(@item_4.name)
-      end
-
-      within("#item_#{@item_3.id}") do
         expect(page).to have_content(@item_3.name)
-        expect(page).to_not have_content(@item_8.name)
-      end
-
-      within("#item_#{@item_4.id}") do
         expect(page).to have_content(@item_4.name)
-        expect(page).to_not have_content(@item_1.name)
-      end
+        expect(page).to have_content(@item_5.name)
+        expect(page).to_not have_content(@item_6.name)
+        expect(page).to_not have_content(@item_7.name)
+        expect(page).to_not have_content(@item_8.name)
     end
   end
   
@@ -61,22 +49,14 @@ RSpec.describe 'Merchant Items Index page' do
   describe 'User story 7 (part 1)' do
     it 'displays the item name as a link which links to the items show page' do
       visit merchant_items_path(@merchant_1.id)
+
+      expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+      expect(page).to have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
+      expect(page).to_not have_link("#{@item_8.name}", :href => "/merchants/#{@merchant_2.id}/items/#{@item_8.id}")
+       
+      click_link("#{@item_1.name}")
       
-      within("#item_#{@item_1.id}") do
-        expect(page).to have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
-        expect(page).to_not have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
-        
-        click_link("#{@item_1.name}")
-        
-        expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
-      end
-      
-      visit merchant_items_path(@merchant_1.id)
-      
-      within("#item_#{@item_2.id}") do
-        expect(page).to have_link("#{@item_2.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_2.id}")
-        expect(page).to_not have_link("#{@item_1.name}", :href => "/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
-      end
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
     end
   end
   
@@ -89,11 +69,45 @@ RSpec.describe 'Merchant Items Index page' do
   describe 'User story 9' do
     xit 'has a button to disable or enable this item' do
       visit merchant_items_path(@merchant_1.id)
+      # visit "merchants/#{@merchant_1.id}/items"
 
-      expect(page).to have_button('Enable')
-      expect(page).to have_button('Disable')
+      within("#enabled_item_#{@item_1.id}") do
+        expect(page).to have_content('Enabled Items')
+        expect(page).to have_button('Disable')
+        expect(page).to_not have_button('Enable')
+      end
+      
+      within("#enabled_item_#{@item_2.id}") do
+        expect(page).to have_content('Enabled Items')
+        expect(page).to have_button('Disable')
+      end
+      
+      within("#disabled_item_#{@item_3.id}") do
+        expect(page).to have_content('Disabled Items')
+        expect(page).to have_button('Enable')
+        expect(page).to_not have_content('Enable Items')
+        expect(page).to have_button('Disable')
+      end
+      
+      within("#enabled_item_#{@item_4.id}") do
+        expect(page).to have_content('Disabled Items')
+        expect(page).to have_button('Enable')
+      end
     end
 
-    it 'click the button and be redirected to the items index page, where the items status is changed'
+    xit 'click the button and be redirected to the items index page, where the items status is changed' do
+      visit merchant_items_path(@merchant_1.id)
+
+      within("#enabled_item_#{@item_1.id}") do
+        expect(page).to have_content('Enabled Items')
+        expect(page).to have_button('Disable')
+        
+        click_button('Disable')
+        redirect_to(merchant_items_path(@merchant_1.id))
+        expect(page).to have_content('Disabled Items')
+        expect(page).to have_button('Enable')
+      end
+    end
+
   end
 end
