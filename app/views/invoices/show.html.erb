@@ -3,7 +3,7 @@
 <p>Created At: <%= @invoice.format_date_long %></p>
 <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
 
-<% @invoice.items.each do |item| %>
+<div><% @invoice.items.each do |item| %>
 <br>
 
 <p>Item Name: <%= item.name %> </p>
@@ -11,5 +11,6 @@
 <p>Item Quantity: <%= @invoice.invoice_item(item).quantity %> </p>
 <p>Item Status: <%= @invoice.invoice_item(item).status %> </p>
 <% end %>
+</div>
 <br>
 <h2>Invoice Total: $<%= @invoice.total_revenue%></h2>
