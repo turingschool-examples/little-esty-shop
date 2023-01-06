@@ -165,6 +165,22 @@ RSpec.describe 'merchant items edit page' do
     expect(page).to have_field :unit_price, with: @item1.unit_price
   end
 
+  it 'correctly updates the database when submitted and redirects back to the show page with a flash message' do
+    visit edit_merchant_item_path(@merchant1.id, @item1.id)
+
+    fill_in :name, with: "test item name"
+    fill_in :description, with: "test item description"
+    fill_in :unit_price, with: 29392
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")
+    expect(page).to have_content("Item Updated Successfully")
+    expect(page).to have_content("test item name")
+    expect(page).to have_content("test item description")
+    expect(page).to have_content(29392)
+
+  end
+
 
 
 end
