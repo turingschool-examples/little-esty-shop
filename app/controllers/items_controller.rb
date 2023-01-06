@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(params[:id])
+    @item = @merchant.items.find(params[:id])
   end
 
   def edit
@@ -25,10 +25,19 @@ class ItemsController < ApplicationController
       flash[:error] = 'Update invalid'
     end
   end
+  #   if params[:enabled].present?
+  #     @item.update(item_params)
+  #     redirect_to merchant_items_path(@item.merchant)
+  #   else
+  #     @item.update(item_params)
+  #     flash.notice = "ITEM UPDATED"
+  #     redirect_to merchant_item_path(@item.merchant, @item)
+  #   end
+  # end
 
   private
 
   def item_params
-    params.permit(:id, :name, :description, :unit_price, :status, :created_at, :updated_at, :merchant_id)
+    params.permit(:name, :description, :unit_price, :status)
   end
 end

@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   end
   
   get '/merchants/:merchant_id/dashboard', to: 'merchants#show'
-
+  patch '/merchants/:merchant_id/items', to: 'items#update'
 end
