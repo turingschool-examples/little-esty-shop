@@ -22,4 +22,19 @@ class Merchant < ApplicationRecord
     .where('invoices.status = 1')
     .distinct
   end
+
+  def self.total_revenue(invoice_id)
+    Invoice 
+    .joins(:invoice_items)
+    .where("invoice_items.invoice_id = #{invoice_id}")
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+    
+    
+    # .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue')
+    # .select('(invoice_items.quantity * invoice_items.unit_price)')
+    # .group(:id)
+    
+
+    #invoiceitems: quantity unit_price
+  end
 end

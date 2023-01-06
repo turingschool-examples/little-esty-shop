@@ -361,5 +361,6 @@ RSpec.describe 'merchant show' do
     expect(page).to_not have_content("Name: Sixth Guy, Transactions: 1")
     end
   end
+  
 end
 
