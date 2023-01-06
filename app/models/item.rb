@@ -15,4 +15,12 @@ class Item < ApplicationRecord
       self.disabled!
     end
   end
+
+  def self.enabled_items
+    where(status: "enabled")
+  end
+
+  def self.disabled_items
+    where(status: "disabled")
+  end
 end
