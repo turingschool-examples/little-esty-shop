@@ -6,10 +6,10 @@ RSpec.describe 'Admin Merchant Edit' do
     visit admin_merchant_path(Merchant.all.first)
     click_on('Edit this merchant')
     
-    expect(page).to have_field('name', with: Merchant.all.first.name)
+    expect(page).to have_field('merchant[name]', with: Merchant.all.first.name)
 
-    fill_in('name', with: "Jimbob's Carpentry")
-    click_button('Submit')
+    fill_in('merchant[name]', with: "Jimbob's Carpentry")
+    click_button('Update Merchant')
 
     expect(current_path).to eq(admin_merchant_path(Merchant.all.first))
     expect(page).to have_content("Jimbob's Carpentry")

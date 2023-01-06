@@ -16,12 +16,14 @@ class Admin::MerchantsController < ApplicationController
 
     merchant.update!(merchant_params)
 
-    return redirect_to admin_merchants_path if params[:enabled]
+    return redirect_to admin_merchants_path if params[:merchant][:enabled]
     redirect_to admin_merchant_path(merchant)
     flash[:notice] = "Merchant name has been changed"
   end
 
-  def new;end
+  def new
+    @merchant = Merchant.new
+  end
 
   def create
     Merchant.create!(merchant_params)
@@ -32,6 +34,6 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name, :enabled)
+    params.require(:merchant).permit(:name, :enabled)
   end
 end
