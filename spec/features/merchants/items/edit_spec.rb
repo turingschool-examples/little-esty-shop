@@ -18,6 +18,16 @@ RSpec.describe 'Merchant Items Edit page' do
     @item_10 = @merchant_2.items.create!(name: 'Quidem Suscipit', description: 'Reiciendis sed aperiam culpa animi laudantium', unit_price: 34018)
   end
 
+  # As a merchant,
+  # When I visit the merchant show page of an item
+  # I see a link to update the item information.
+  # When I click the link
+  # Then I am taken to a page to edit this item
+  # And I see a form filled in with the existing item attribute information
+  # When I update the information in the form and I click ‘submit’
+  # Then I am redirected back to the item show page where I see the updated information
+  # And I see a flash message stating that the information has been successfully updated.
+
   describe 'User story 8' do
     it 'has a link to update the item information' do
       visit merchant_item_path(@merchant_1.id, @item_1.id)
@@ -39,7 +49,7 @@ RSpec.describe 'Merchant Items Edit page' do
       expect(page).to have_button("Update")
     end
 
-    it "can fill out a form, click 'update', and redirect to the item show page" do
+    it "can fill out a form, click 'update', and redirect to the item show page, where I see a flash message" do
       # visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}/edit"
       visit edit_merchant_item_path(@merchant_1.id, @item_1.id)
 
@@ -53,6 +63,7 @@ RSpec.describe 'Merchant Items Edit page' do
       click_button('Update')
 
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
+      expect(page).to have_content("Item information has been successfully updated")
       expect(page).to have_content('Updated description of Qui Esse version 2')
       expect(page).to have_content('Qui Esse version 2')
     end
