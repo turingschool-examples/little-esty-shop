@@ -1,6 +1,28 @@
-<h2><%= @merchant.name %> Items </h2>
-<ul>
-  <% @items.each do |item| %>
-    <li><%= link_to item.name, merchant_item_path(@merchant, item) %><%= item.id %></li>
+<h2><%= @merchant.name %></h2>
+<h3>My Items</h3>
+
+<%= link_to("New Item", new_merchant_item_path(@merchant))%>
+
+<div id="enabled">
+<h3>Enabled Items</h3>
+  <ul>
+  <% @merchant.get_enabled_items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <li><%= link_to item.name, merchant_item_path(@merchant, item) %> <%= item.id %></li>
+    <%= button_to("Disable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enabled: false})%>
+    </div>
   <% end %>
-</ul>
+  </ul>
+</div>
+
+<div id="disabled">
+<h3>Disabled Items</h3>
+  <ul>
+  <% @merchant.get_disabled_items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <li><%= link_to item.name, merchant_item_path(@merchant, item) %> <%= item.id %></li>
+      <%= button_to("Enable", "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enabled: true})%>
+    </div>
+  <% end %>
+  </ul>
+</div>
