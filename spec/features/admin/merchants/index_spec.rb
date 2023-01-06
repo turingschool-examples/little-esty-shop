@@ -35,10 +35,9 @@ RSpec.describe 'the admin merchants index' do
           click_on("Disable/Enable")
         end
 
-        expect(current_path).to eq('/admin/merchants')
-
+        expect(current_path).to eq("/admin/merchants")
+        
         within ("#admin-merchants-#{@merchant_1.id}") do
-          expect(page).to have_content("Status: #{@merchant_1.status}")
           expect(page).to have_content("Status: disabled")
         end
       end
