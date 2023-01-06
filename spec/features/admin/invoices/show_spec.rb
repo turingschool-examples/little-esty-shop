@@ -61,8 +61,6 @@ RSpec.describe 'the admin show page' do
       visit admin_invoice_path(@invoice_2)
 
       expect(page).to have_content("Total Revenue: $#{@invoice_2.total_revenue}")
-
-      save_and_open_page
     end
 
     it 'shows the invoice status is a select field and shows the current status is selected' do

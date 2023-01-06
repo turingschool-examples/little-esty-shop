@@ -4,7 +4,9 @@
 <% if @merchants.any? %>
   <% @merchants.each do |merchant| %>
     <ul>
-      <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %></li>
+      <div id=<%= "admin-merchants-#{merchant.id}" %> >
+        <li><%= link_to merchant.name, admin_merchant_path(merchant.id) %></li>
+      </div>
     </ul>
   <% end %>
 <% end %>
