@@ -1,18 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant items index page' do
-  # before :each do
-  #   mariah = Merchant.create!(name: "Mariah Ahmed")
-  #   terry = Merchant.create!(name: "Terry Peeples")
-
-  #   pen = mariah.items.create!(name: "pen", description: "writes stuff", unit_price: 33)
-  #   marker = mariah.items.create!(name: "marker", description: "writes stuff", unit_price: 23)
-  #   pencil = mariah.items.create!(name: "pencil", description: "writes stuff", unit_price: 13)
-
-  #   socks = terry.items.create!(name: "socks", description: "keeps feet warm", unit_price: 8)
-  #   shoes = terry.items.create!(name: "shoes", description: "provides arch support", unit_price: 68)
-    
-  # end
   
   it 'lists all items for a merchant' do
     mariah = Merchant.create!(name: "Mariah Ahmed")
@@ -69,8 +57,30 @@ RSpec.describe 'merchant items index page' do
       visit merchant_item_index_path(mariah)
       click_button 'Enable'
 
-      expect(page).to have_current_path(merchant_item_index_path(mariah))
+      expect(page).to have_current_path("/merchant/#{mariah.id}/item/#{pen.id}")
     end
-    it 'changes the items status'
+    it 'changes the items status' do
+      mariah = Merchant.create!(name: "Mariah Ahmed")
+      terry = Merchant.create!(name: "Terry Peeples")
+    
+      pen = mariah.items.create!(name: "pen", description: "writes stuff", unit_price: 33)
+      marker = mariah.items.create!(name: "marker", description: "writes stuff", unit_price: 23)
+      pencil = mariah.items.create!(name: "pencil", description: "writes stuff", unit_price: 13)
+    
+      socks = terry.items.create!(name: "socks", description: "keeps feet warm", unit_price: 8)
+      shoes = terry.items.create!(name: "shoes", description: "provides arch support", unit_price: 68)
+    
+      visit merchant_item_index_path(mariah)
+
+      expect(pen.status).to eq(0)
+
+      within("#item-#{pen.id}") do 
+      click_button 'Enable'
+      end
+      
+      pen.reload
+
+      expect(pen.status).to eq(1)
+    end
   end
 end
