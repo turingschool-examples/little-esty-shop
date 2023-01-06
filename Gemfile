@@ -46,6 +46,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'orderly'
   gem 'pry-nav'
+  gem 'table_print'
+  gem 'factory_bot_rails'
 end
 
 group :development do
