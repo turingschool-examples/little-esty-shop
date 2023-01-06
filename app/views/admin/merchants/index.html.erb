@@ -2,12 +2,18 @@
 
 <h2>Admin Dashboard</h2>
 
+
 <%= link_to "Dashboard", admin_index_path %>
 <%= link_to "Merchants", admin_merchants_path %>
-<%= link_to "Invoices", admin_invoices_path %><br/>
+<%= link_to "Invoices", admin_invoices_path %><br><br>
 
-<br/><section id="Merchants">
-  <% @merchants.each do |merchant| %>
-    <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %><br/>
-  <% end %>
-</section>
+
+<% @merchants.each do |merchant| %>
+  <a name="<%merchant.name%>"> <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></a>
+  <div> Status: <%= merchant.status %> </div>
+  <% if merchant.status == "disabled"  %> 
+    <%= button_to "enable", "merchants/#{merchant.id}?status=enabled", method: :patch, id: merchant.id %>
+  <% else %>
+    <%= button_to "disable", "merchants/#{merchant.id}?status=disabled", method: :patch, id: merchant.id %>
+  <% end %><br>
+<% end %>

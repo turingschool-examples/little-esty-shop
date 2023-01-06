@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "Admin/Merchant/Index" do
   describe 'visiting admin merchant index' do
     before :each do
-      @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde')
-      @merchant_2 = Merchant.create!(name: 'Rempel and Jones')
-      @merchant_3 = Merchant.create!(name: 'Willms and Sons')
+      @merchant_1 = Merchant.create!(name: 'Schroeder-Jerde', status: :disabled)
+      @merchant_2 = Merchant.create!(name: 'Rempel and Jones', status: :enabled)
+      @merchant_3 = Merchant.create!(name: 'Willms and Sons', status: :disabled)
 
       @item_1 = @merchant_1.items.create!(name: 'Qui Esse', description: 'Nihil autem sit odio inventore deleniti', unit_price: 75107)
       @item_2 = @merchant_1.items.create!(name: 'Autem Minima', description: 'Cumque consequuntur ad', unit_price: 67076)
@@ -133,12 +133,22 @@ RSpec.describe "Admin/Merchant/Index" do
       end
     end
 
-    # describe 'user story 27' do 
-    #   it 'displays enable and disable buttons next to each merchant' do 
-    #     visit '/admin/merchants'
-    #     save_and_open_page
-    #     #expect(page).to have_button("enable")
-    #   end
-    # end
+    describe 'user story 27' do 
+      it 'displays enable and disable buttons next to each merchant' do 
+        visit '/admin/merchants'
+        expect(page).to have_button("enable", id: @merchant_1.id)
+        expect(page).to have_button("disable", id: @merchant_2.id)
+        expect(page).to have_button("enable", id: @merchant_3.id)
+      end
+
+      it 'updates the status of a merchant upon pressing the enable or disable button, then refreshes the screen' do 
+        visit '/admin/merchants'
+        expect(page).to have_button("enable", id: @merchant_1.id)
+        expect(@merchant_1.status).to eq('disabled')
+        click_button(id: @merchant_1.id)
+        @merchant_1.reload
+        expect(@merchant_1.status).to eq('enabled')
+      end
+    end
   end
 end

@@ -1,26 +1,41 @@
 module Admin
   class MerchantsController < ApplicationController
     def index
-      @merchants = Merchant.all
+      @merchants = Merchant.all.order(:id)
     end
 
     def show
-      @merchant = current_merchant
+      @merchant = Merchant.find(params[:id])
     end
 
     def edit 
-      @merchant = current_merchant
+      @merchant = Merchant.find(params[:id])
     end
 
     def update 
-      current_merchant.update(name: params[:name])
-      current_merchant.save 
-      redirect_to "/admin/merchants/#{current_merchant.id}"
-      flash[:alert] = "Merchant information successfully updated."
+      current_merchant = Merchant.find(params[:id])
+
+      if params[:status].present? && 
+        current_merchant.update(merchant_params)
+
+        # not sure the .save is required here 
+        current_merchant.save 
+
+        redirect_back fallback_location: "admin/merchants#{current_merchant.name}"
+      else 
+        current_merchant.update(merchant_params)
+
+        # not sure the .save is required here
+        current_merchant.save
+
+        redirect_to "/admin/merchants/#{current_merchant.id}"
+        flash[:alert] = "Merchant information successfully updated."
+      end
     end
 
-    def current_merchant 
-      Merchant.find(params[:id])
+private 
+    def merchant_params
+      params.permit(:status, :name)
     end
   end
 end
