@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get '/merchants/:id/dashboard', to: 'merchants/dashboard#show'
+  get '/merchants/:id/dashboard', to: 'merchants/dashboard#show', as: 'merchant_dashboard'
 
   resources :merchants, only: [] do
     scope module: "merchants" do
-      resources :items, only: [:index, :show, :edit, :update]
+      resources :items, except: :destroy
       resources :invoices, only: [:index, :show]
     end
   end

@@ -47,6 +47,28 @@ RSpec.describe Merchant do
     end
   end
 
+  describe '#get_enabled_items' do
+    it 'returns all of a merchants enabled items' do
+      merchant = Merchant.find(1)
+      expect(merchant.get_enabled_items).to eq(merchant.items)
+      expect(merchant.get_enabled_items.length).to eq(15)
+      Item.find(1).update(enabled: false)
+      expect(merchant.get_enabled_items.length).to eq(14)
+    end
+  end
+
+  describe '#get_disabled_items' do
+    it 'returns all of a merchants disabled items' do
+      merchant = Merchant.find(1)
+      expect(merchant.get_disabled_items.length).to eq(0)
+      item_1 = merchant.items.create!(name: "bob", description: "very good at things", unit_price: 9999, enabled: false)
+      item_2 = merchant.items.create!(name: "bob2", description: "very better at things", unit_price: 99999, enabled: false)
+      item_3 = merchant.items.create!(name: "bob3", description: "very best at things", unit_price: 99999, enabled: false)
+      item_4 = merchant.items.create!(name: "bob4", description: "very okay at things", unit_price: 999, enabled: false)
+      expect(merchant.get_disabled_items).to eq([item_1, item_2, item_3, item_4])
+    end
+  end
+  
   describe '#best_day_by_revenue' do
     it 'returns the best day by revenue for a given merchant' do
       expect(Merchant.find(8).best_day_by_revenue).to eq('3/13/2012')
