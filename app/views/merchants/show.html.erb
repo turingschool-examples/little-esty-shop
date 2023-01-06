@@ -16,10 +16,11 @@
 
 <h3><strong>Items Ready to Ship</strong></h3>
 
-<p><% @merchant.unshipped_items.each do |item| %></p>
+<p><% @merchant.unshipped_items.order(:invoice_created_at).each do |item| %></p>
 <div id="unshipped_item_invoice_<%= item.invoice_id %>">
   <p>
-    <%= item.name %>
+    <strong><%= item.name %></strong>  |
+    <%= item.invoice_created_at.strftime("%A, %B %d, %Y") %>  |
     <%= link_to "Invoice ID #{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>
   </p>
 </div>
