@@ -1,4 +1,4 @@
-d<h1><center>Little Esty Shop</h1></center>
+<h1><center>Little Esty Shop</h1></center>
 
 <h2><%= @merchant.name %></h2>
 
@@ -16,9 +16,12 @@ d<h1><center>Little Esty Shop</h1></center>
 
 <h3><strong>Items Ready to Ship</strong></h3>
 
-<p><%= @merchant.items.unshipped_items.each do |item| %></p>
-<div id="unshipped_item_<%= item.id %>">
-  <p><%= item.name %></p>
+<p><% @merchant.unshipped_items.each do |item| %></p>
+<div id="unshipped_item_invoice_<%= item.invoice_id %>">
+  <p>
+    <%= item.name %>
+    <%= link_to "Invoice ID #{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>
+  </p>
 </div>
 <% end %>
 

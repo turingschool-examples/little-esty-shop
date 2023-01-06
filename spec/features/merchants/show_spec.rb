@@ -206,18 +206,26 @@ RSpec.describe 'Merchant Dashboard' do
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
       expect(page).to have_content("Items Ready to Ship") 
-      within("#unshipped_item_#{@item_1.id}") do
+      within("#unshipped_item_invoice_#{@invoice_4.id}") do
+        expect(page).to have_link("Invoice ID #{@invoice_4.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_4.id}")
         expect(page).to have_content(@item_1.name)
         expect(page).to_not have_content(@item_2.name)
       end
-      within("#unshipped_item_#{@item_2.id}") do
+      within("#unshipped_item_invoice_#{@invoice_18.id}") do
+        expect(page).to have_link("Invoice ID #{@invoice_18.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_18.id}")
         expect(page).to have_content(@item_2.name)
         expect(page).to_not have_content(@item_1.name)
       end
-    end
-    xit 'next to each unshipped item, it has the invoice id of that item as a link to the merchants invoice show page' do 
-      visit "/merchants/#{@merchant_1.id}/dashboard"
-
+      within("#unshipped_item_invoice_#{@invoice_19.id}") do
+        expect(page).to have_link("Invoice ID #{@invoice_19.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_19.id}")
+        expect(page).to have_content(@item_2.name)
+        expect(page).to_not have_content(@item_1.name)
+      end
+      within("#unshipped_item_invoice_#{@invoice_21.id}") do
+        expect(page).to have_link("Invoice ID #{@invoice_21.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_21.id}")
+        expect(page).to have_content(@item_2.name)
+        expect(page).to_not have_content(@item_1.name)
+      end
     end
   end
 end
