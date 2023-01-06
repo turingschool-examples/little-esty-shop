@@ -29,13 +29,11 @@ RSpec.describe 'the admin merchants index' do
           click_on('Edit Merchant')
           expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
 
-          save_and_open_page
-          fill_in('merchant_name', with: 'Jeremy')
+          fill_in('merchant_name', with: 'Jeremy Spevack')
           click_on('Update Merchant')
           expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
-          expect(page).to have_content(@merchant_1.name)
           expect(page).to have_content('Jeremy')
-          expect(Admin::MerchantsController).to set_flash.now[:notice].to(/Merchant Updated/)
+          expect(page).to have_content('Merchant successfully updated')
         end
       end
     end

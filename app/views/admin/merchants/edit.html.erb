@@ -1,0 +1,7 @@
+<h1>Merchant: <%= @merchant.name %></h1>
+
+<%= form_with model: @merchant, url: admin_merchant_path, locals: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
